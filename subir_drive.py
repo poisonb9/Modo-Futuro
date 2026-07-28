@@ -13,6 +13,7 @@ token.json do YouTube.
 """
 import argparse
 import json
+import os
 import sys
 from datetime import date
 from pathlib import Path
@@ -28,10 +29,21 @@ REGISTRO = config.RAIZ / "estado" / "enviados_drive.json"
 
 
 def _servico():
+    from googleapiclient.discovery import build
+
+    # No GitHub Actions (ou qualquer ambiente sem tela pra login manual),
+    # usa Service Account via variável de ambiente — nada de OAuth
+    # interativo. Local continua exatamente como sempre foi (abaixo).
+    sa_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+    if sa_json:
+        from google.oauth2 import service_account
+        info = json.loads(sa_json)
+        cred = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
+        return build("drive", "v3", credentials=cred)
+
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
-    from googleapiclient.discovery import build
 
     cred = None
     if TOKEN.exists():

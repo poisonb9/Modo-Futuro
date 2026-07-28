@@ -1,0 +1,54 @@
+name: Cortar vídeo e subir pro Drive
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Link do YouTube do vídeo a cortar"
+        required: true
+      qtd:
+        description: "Quantidade de clipes"
+        required: false
+        default: "8"
+      idioma:
+        description: "Idioma da fala (pt, en, es...)"
+        required: false
+        default: "pt"
+      pasta_drive:
+        description: "ID da pasta pai do Drive (com as subpastas 7/8/9)"
+        required: true
+
+jobs:
+  cortar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - run: pip install -r requirements.txt
+
+      - name: Cortar
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_API_KEY_2: ${{ secrets.GROQ_API_KEY_2 }}
+        run: >
+          python -X utf8 main.py
+          --url "${{ inputs.url }}"
+          --qtd "${{ inputs.qtd }}"
+          --idioma "${{ inputs.idioma }}"
+
+      - name: Subir pro Drive
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}"

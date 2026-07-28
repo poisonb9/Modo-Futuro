@@ -8,6 +8,7 @@ token*.json.bak
 *.pkl
 trabalho/
 saida/
+lista_videos.txt
 PARA_POSTAR/
 estado/
 teste/*.mp4

@@ -62,9 +62,13 @@ def enviar(arquivo: Path, pasta_pai_id: str) -> str:
     media = MediaFileUpload(str(arquivo), resumable=True)
     arq = servico.files().create(body=meta, media_body=media, fields="id").execute()
     file_id = arq["id"]
-    # Permissão de leitura pra "qualquer um com o link" — o Service Account
-    # do GitHub Actions também consegue via API mesmo sem isso (tem acesso
-    # direto pela pasta compartilhada), mas isso facilita debug manual.
+    # A Service Account do GitHub Actions não herda acesso automaticamente
+    # a arquivos subidos por login OAuth pessoal, mesmo dentro de pasta
+    # compartilhada (erro 404 "File not found" na prática, 28/07/2026) —
+    # abre leitura pra "qualquer um com o link". Não é sensível, é só
+    # vídeo-fonte bruto, não credencial.
+    servico.permissions().create(
+        fileId=file_id, body={"type": "anyone", "role": "reader"}).execute()
     print(f"Enviado: {arquivo.name}")
     print(f"DRIVE_FILE_ID={file_id}")
     return file_id

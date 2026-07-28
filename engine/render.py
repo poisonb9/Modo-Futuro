@@ -40,6 +40,14 @@ def cortar(fonte: Path, inicio: float, fim: float, destino: Path) -> Path:
     return destino
 
 
+# Normalização de volume, alvo do TikTok (~-14 LUFS). Cada podcast-fonte
+# chega num volume diferente; sem isso um clipe sai abafado no feed e o
+# seguinte sai estourado. É filtro nativo do ffmpeg — aritmética de ganho,
+# nada de modelo — e entra na mesma passada que já roda pro vídeo.
+# TP=-1.5 deixa margem de pico pra recodificação do TikTok não clipar.
+AUDIO_LOUDNORM = "loudnorm=I=-14:TP=-1.5:LRA=11"
+
+
 def _render(bruto: Path, filtro_video: str, ass: Path | None,
             destino: Path, audio_dublado: Path | None = None) -> Path:
     cadeia = filtro_video
@@ -53,6 +61,7 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
             "ffmpeg", "-y", "-i", str(bruto), "-i", str(audio_dublado),
             "-vf", cadeia, *_encoder(),
             "-map", "0:v:0", "-map", "1:a:0",
+            "-af", AUDIO_LOUDNORM,
             "-c:a", "aac", "-b:a", "192k", "-shortest",
             "-pix_fmt", "yuv420p", "-movflags", "+faststart",
             str(destino),
@@ -62,6 +71,7 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
     midia.roda([
         "ffmpeg", "-y", "-i", str(bruto),
         "-vf", cadeia, *_encoder(),
+        "-af", AUDIO_LOUDNORM,
         "-c:a", "aac", "-b:a", "192k",
         "-pix_fmt", "yuv420p", "-movflags", "+faststart",
         str(destino),

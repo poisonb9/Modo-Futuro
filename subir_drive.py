@@ -1,6 +1,7 @@
-"""Sobe os clipes prontos pro Google Drive, organizados por nota nas
-subpastas 7/8/9, com a legenda num .txt ao lado (pro iPhone: baixa o vídeo
-+ abre o txt e cola no TikTok).
+"""Sobe os clipes prontos pro Google Drive, todos numa pasta por dia
+(ex: '28-07'), com a legenda num .txt ao lado (pro iPhone: baixa o vídeo
++ abre o txt e cola no TikTok). A nota fica no nome do arquivo
+(nota91_...), então dá pra ordenar por nome e ver as melhores primeiro.
 
 Existe como alternativa ao rascunho via API quando a fila do TikTok trava
 (ver sabedoria/SABEDORIA_TIKTOK.md, "REGRA DE OURO").
@@ -101,29 +102,9 @@ def fila_pendente_drive() -> list[tuple[float, Path]]:
     return achados
 
 
-def _pasta_por_nota(nota: float) -> str:
-    if nota >= 90:
-        return "9"
-    if nota >= 80:
-        return "8"
-    return "7"
-
-
-def _achar_subpasta(servico, pai_id: str, nome: str) -> str:
-    q = (f"'{pai_id}' in parents and name = '{nome}' "
-         "and mimeType = 'application/vnd.google-apps.folder' and trashed = false")
-    r = servico.files().list(q=q, fields="files(id, name)").execute()
-    arquivos = r.get("files", [])
-    if not arquivos:
-        sys.exit(f"Não achei a subpasta '{nome}' dentro da pasta {pai_id}. "
-                  f"Confira se ela existe e se a conta do Google usada no login "
-                  f"tem acesso.")
-    return arquivos[0]["id"]
-
-
 def _achar_ou_criar_subpasta(servico, pai_id: str, nome: str) -> str:
-    """Igual a _achar_subpasta, mas cria a pasta se não existir — usado pra
-    pasta do dia (ex: '26-07') dentro de cada pasta de nota."""
+    """Acha a subpasta pelo nome; cria se não existir — usado pra pasta do
+    dia (ex: '26-07') dentro da pasta pai."""
     q = (f"'{pai_id}' in parents and name = '{nome}' "
          "and mimeType = 'application/vnd.google-apps.folder' and trashed = false")
     r = servico.files().list(q=q, fields="files(id, name)").execute()
@@ -150,14 +131,15 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True):
 
     print(f"{len(fila)} clipe(s) pra subir.\n")
     servico = _servico()
-    pastas_nota = {n: _achar_subpasta(servico, pasta_pai_id, n) for n in ("7", "8", "9")}
+    # Tudo do dia vai pra uma pasta só. A classificação continua existindo,
+    # mas no NOME do arquivo (nota91_...), não em subpasta 7/8/9 — assim a
+    # pasta do dia mostra a colheita inteira de uma vez, já ordenável por nota.
     hoje = date.today().strftime("%d-%m")
-    pastas_dia = {n: _achar_ou_criar_subpasta(servico, pastas_nota[n], hoje) for n in ("7", "8", "9")}
+    pasta_dia = _achar_ou_criar_subpasta(servico, pasta_pai_id, hoje)
 
     enviados = 0
     for nota, clipe in fila:
         video = clipe / "short_9x16.mp4"
-        alvo = _pasta_por_nota(nota)
         legenda = legenda_do_clipe(clipe)
 
         txt = clipe / "_legenda_drive.txt"
@@ -165,16 +147,16 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True):
 
         nome_video = f"nota{int(nota)}_{clipe.name}.mp4"
         nome_txt = f"nota{int(nota)}_{clipe.name}.txt"
-        print(f"  [pasta {alvo}/{hoje}] nota {nota:.0f}  {clipe.name}")
+        print(f"  [pasta {hoje}] nota {nota:.0f}  {clipe.name}")
         try:
-            _upload_renomeado(servico, pastas_dia[alvo], video, nome_video, "video/mp4")
-            _upload_renomeado(servico, pastas_dia[alvo], txt, nome_txt, "text/plain")
+            _upload_renomeado(servico, pasta_dia, video, nome_video, "video/mp4")
+            _upload_renomeado(servico, pasta_dia, txt, nome_txt, "text/plain")
         finally:
             txt.unlink(missing_ok=True)
 
         _marcar(_chave(clipe))
         if avisar_telegram:
-            telegram.enviar(f"[Drive · pasta {alvo}/{hoje}] {legenda}")
+            telegram.enviar(f"[Drive · pasta {hoje}] {legenda}")
         enviados += 1
 
     print(f"\n{enviados} clipe(s) enviado(s) pro Drive"
@@ -191,7 +173,7 @@ def _upload_renomeado(servico, pasta_id: str, caminho: Path, nome: str, mimetype
 def main():
     p = argparse.ArgumentParser(description="Sobe os clipes prontos pro Google Drive, por nota")
     p.add_argument("--pasta-id", required=True,
-                   help="ID da pasta pai do Drive (a que tem as subpastas 7/8/9)")
+                   help="ID da pasta pai do Drive (onde nasce a pasta do dia)")
     p.add_argument("--sem-telegram", action="store_true",
                    help="não manda as legendas pro Telegram")
     a = p.parse_args()

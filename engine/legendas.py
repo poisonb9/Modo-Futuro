@@ -23,10 +23,16 @@ def escrever(palavras: list[dict], destino: Path, largura: int, altura: int) -> 
     # antes e com margem lateral generosa — texto fica num bloco central,
     # nunca encosta na borda mesmo em frase mais longa.
     corpo = max(22, int(altura * 0.038))
-    # LEGENDA_MARGEM_V_FRAC: override pontual (não mexe no padrão de
-    # 0.18) pra vídeo específico com algo cobrindo a legenda na posição
-    # normal (ex: caixa branca de UI no vídeo fonte).
-    frac_v = float(os.environ.get("LEGENDA_MARGEM_V_FRAC", "0.18"))
+    # LEGENDA_MARGEM_V_FRAC: override pontual pra vídeo específico com algo
+    # cobrindo a legenda na posição normal (ex: caixa branca de UI na fonte).
+    #
+    # Padrão subiu de 0.18 para 0.30 em 28/07/2026: a 18% da base a legenda
+    # cai justamente na faixa que a UI do TikTok ocupa — nome do perfil,
+    # curtir, comentar, compartilhar. O corpus recomenda o texto
+    # ligeiramente acima do centro (PLAYBOOK §5). Legenda escondida atrás
+    # de botão não é lida, e legenda é uma das 3 camadas de edição que
+    # sustentam o RPM.
+    frac_v = float(os.environ.get("LEGENDA_MARGEM_V_FRAC", "0.30"))
     margem_v = int(altura * frac_v)   # sobe o texto: no Shorts a UI cobre a base
     margem_lat = int(largura * 0.12)
     contorno = max(2, corpo // 14)

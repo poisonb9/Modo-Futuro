@@ -79,23 +79,33 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
     return destino
 
 
-_KB_ZOOM_TOTAL = 0.06   # 1.00 -> 1.06 ao longo do clipe inteiro — sutil, não "efeito TikTok"
+# Punch-in cíclico. Antes era um Ken Burns monotônico de 1.00→1.06 ao longo
+# do clipe inteiro — o PLAYBOOK §5 classifica isso como "sutil demais" e pede
+# variação de enquadramento a cada 5-8s, porque essa camada de edição é o que
+# separa corte transformado de republicação (e sustenta o RPM).
+#
+# A oscilação é COSSENOIDAL de propósito: zoom que sobe e reinicia de golpe
+# produziria o mesmo salto visível que o crop em degrau produzia (corrigido
+# em enquadrar.py no mesmo dia). Cosseno não tem descontinuidade — o quadro
+# respira, sem tranco em ponto nenhum do ciclo.
+_PUNCH_AMPLITUDE = 0.10   # 1.00 -> 1.10 no pico do ciclo
+_PUNCH_PERIODO_S = 6.5    # dentro da faixa de 5-8s que o corpus recomenda
 
 
 def _ken_burns(bruto: Path, largura: int, altura: int) -> str:
-    """Zoom lento e contínuo (Ken Burns). Além de disfarçar trecho parado,
-    é edição de verdade em cima do material — importa pra não cair em
-    'conteúdo reaproveitado sem transformação' quando o corte é de vídeo
-    de terceiros.
+    """Punch-in cíclico suave. Além de disfarçar trecho parado, é edição de
+    verdade em cima do material — importa pra não cair em 'conteúdo
+    reaproveitado sem transformação' quando o corte é de vídeo de terceiros.
 
     Usa o fps NATIVO da fonte (nunca força 30) — forçar conversão de frame
     rate no zoompan foi o que causou legenda dessincronizando do áudio.
     """
-    dur = max(0.5, midia.duracao(bruto))
     fps = midia.fps(bruto)
-    frames = dur * fps
-    incremento = _KB_ZOOM_TOTAL / frames
-    return (f",zoompan=z='min(zoom+{incremento:.8f},{1 + _KB_ZOOM_TOTAL})':d=1:"
+    ciclo = max(1.0, _PUNCH_PERIODO_S) * fps          # frames por ciclo
+    meia = _PUNCH_AMPLITUDE / 2
+    # (1-cos)/2 varia 0..1 sem quina; 'on' é o número do frame de saída.
+    z = f"1+{meia:.4f}*(1-cos(2*PI*on/{ciclo:.3f}))"
+    return (f",zoompan=z='{z}':d=1:"
             f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={largura}x{altura}:fps={fps:.3f}")
 
 

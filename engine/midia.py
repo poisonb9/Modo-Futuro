@@ -256,7 +256,7 @@ def congelamento_s(fonte: Path, inicio: float, fim: float) -> float:
     r = subprocess.run(
         ["ffmpeg", "-ss", f"{inicio:.3f}", "-i", str(fonte),
          "-t", f"{fim - inicio:.3f}",
-         "-vf", "freezedetect=n=-45dB:d=0.5", "-an", "-f", "null", "-"],
+         "-vf", "freezedetect=n=-60dB:d=0.5", "-an", "-f", "null", "-"],
         capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     saida = r.stderr or ""
@@ -291,7 +291,7 @@ def pular_congelamento_inicial(fonte: Path, inicio: float, fim: float,
     r = subprocess.run(
         ["ffmpeg", "-ss", f"{inicio:.3f}", "-i", str(fonte),
          "-t", f"{min(max_ajuste + 1.0, fim - inicio):.3f}",
-         "-vf", "freezedetect=n=-45dB:d=0.15", "-an", "-f", "null", "-"],
+         "-vf", "freezedetect=n=-60dB:d=0.15", "-an", "-f", "null", "-"],
         capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     saida = r.stderr or ""
@@ -327,7 +327,7 @@ def pular_congelamento_final(fonte: Path, inicio: float, fim: float,
     r = subprocess.run(
         ["ffmpeg", "-ss", f"{fim - janela:.3f}", "-i", str(fonte),
          "-t", f"{janela:.3f}",
-         "-vf", "freezedetect=n=-45dB:d=0.15", "-an", "-f", "null", "-"],
+         "-vf", "freezedetect=n=-60dB:d=0.15", "-an", "-f", "null", "-"],
         capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     saida = r.stderr or ""

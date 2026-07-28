@@ -22,14 +22,53 @@ def _suavizar(pontos: list[float], alfa: float) -> list[float]:
     return list(reversed(volta))
 
 
+MODELO_URL = ("https://storage.googleapis.com/mediapipe-models/face_detector/"
+              "blaze_face_short_range/float16/1/blaze_face_short_range.tflite")
+MODELO = config.RAIZ / "modelos" / "blaze_face_short_range.tflite"
+
+
+def _garantir_modelo():
+    """O MediaPipe Tasks não embute o modelo: precisa do .tflite em disco.
+    São ~230 KB, então baixar na primeira vez sai barato e o arquivo fica
+    em cache — no runner do Actions isso acontece uma vez por execução."""
+    if MODELO.exists() and MODELO.stat().st_size > 0:
+        return True
+    try:
+        import urllib.request
+        MODELO.parent.mkdir(parents=True, exist_ok=True)
+        urllib.request.urlretrieve(MODELO_URL, MODELO)
+        return MODELO.stat().st_size > 0
+    except Exception as e:
+        print(f"   [!] não consegui baixar o modelo de rosto ({e})")
+        return False
+
+
 def trajetoria(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     """Devolve [(tempo, x_centro)] normalizado 0..1. Vazio = usa o centro."""
+    # mp.solutions saiu no MediaPipe 1.0 — o caminho atual é o Tasks API.
+    # Diferenças que importam aqui: o modelo vem de arquivo, e a bounding box
+    # volta em PIXELS (a antiga vinha normalizada 0..1).
     try:
-        import cv2, mediapipe as mp
-        det = mp.solutions.face_detection.FaceDetection(
-            model_selection=1, min_detection_confidence=0.5)
-    except (ImportError, AttributeError):
-        print("   [!] face tracking indisponível (API do mediapipe mudou) — crop fixo no centro")
+        import cv2
+        import mediapipe as mp
+        from mediapipe.tasks import python as mp_python
+        from mediapipe.tasks.python import vision
+    except ImportError as e:
+        print(f"   [!] face tracking indisponível ({e}) — crop fixo no centro")
+        return []
+
+    if not _garantir_modelo():
+        print("   [!] face tracking sem modelo — crop fixo no centro")
+        return []
+
+    try:
+        det = vision.FaceDetector.create_from_options(vision.FaceDetectorOptions(
+            base_options=mp_python.BaseOptions(model_asset_path=str(MODELO)),
+            running_mode=vision.RunningMode.VIDEO,
+            min_detection_confidence=0.5,
+        ))
+    except Exception as e:
+        print(f"   [!] face tracking indisponível ({e}) — crop fixo no centro")
         return []
 
     cap = cv2.VideoCapture(str(clipe))
@@ -46,13 +85,17 @@ def trajetoria(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
             if not ok:
                 break
             if idx % salto == 0:
-                res = det.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                imagem = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
+                # detect_for_video exige timestamp crescente em ms
+                res = det.detect_for_video(imagem, int(idx / fps * 1000))
                 if res.detections:
                     # com várias faces, segue a maior (quem está em primeiro plano)
-                    d = max(res.detections,
-                            key=lambda x: x.location_data.relative_bounding_box.width)
-                    bb = d.location_data.relative_bounding_box
-                    xs.append(min(1.0, max(0.0, bb.xmin + bb.width / 2)))
+                    d = max(res.detections, key=lambda x: x.bounding_box.width)
+                    bb = d.bounding_box
+                    largura_frame = frame.shape[1] or 1
+                    centro = (bb.origin_x + bb.width / 2) / largura_frame
+                    xs.append(min(1.0, max(0.0, centro)))
                     tempos.append(idx / fps)
             idx += 1
     finally:

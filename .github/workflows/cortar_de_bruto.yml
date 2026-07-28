@@ -1,0 +1,92 @@
+name: Cortar (a partir de vídeo já baixado no Drive)
+
+on:
+  workflow_dispatch:
+    inputs:
+      drive_file_id:
+        description: "ID do arquivo bruto no Drive (pasta 'brutos')"
+        required: true
+      nome_arquivo:
+        description: "Nome do arquivo (extensão importa, ex: fonte.mp4)"
+        required: false
+        default: "fonte.mp4"
+      qtd:
+        description: "Quantidade de clipes"
+        required: false
+        default: "8"
+      idioma:
+        description: "Idioma da fala (pt, en, es...)"
+        required: false
+        default: "pt"
+      pasta_drive:
+        description: "ID da pasta pai do Drive (com as subpastas 7/8/9)"
+        required: true
+
+jobs:
+  cortar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - run: pip install -r requirements.txt
+
+      - name: Baixar vídeo bruto do Drive
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: python -X utf8 baixar_bruto_drive.py --file-id "${{ inputs.drive_file_id }}" --destino "${{ inputs.nome_arquivo }}"
+
+      - name: Cortar (sem download — já está em disco)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_KEY_4: ${{ secrets.GEMINI4 }}
+          GEMINI_API_KEY_5: ${{ secrets.GEMINI5 }}
+          GEMINI_API_KEY_6: ${{ secrets.GEMINI6 }}
+          GEMINI_API_KEY_7: ${{ secrets.GEMINI7 }}
+          GEMINI_API_KEY_9: ${{ secrets.GEMINI9 }}
+          GEMINI_API_KEY_10: ${{ secrets.GEMINI10 }}
+          GEMINI_API_KEY_11: ${{ secrets.GEMINI11 }}
+          GEMINI_API_KEY_12: ${{ secrets.GEMINI12 }}
+          GEMINI_API_KEY_13: ${{ secrets.GEMINI13 }}
+          GEMINI_API_KEY_14: ${{ secrets.GEMINI14 }}
+          GEMINI_API_KEY_15: ${{ secrets.GEMINI15 }}
+          GROQ_API_KEY: ${{ secrets.GROQ1 }}
+          GROQ_API_KEY_2: ${{ secrets.GROQ2 }}
+          GROQ_API_KEY_3: ${{ secrets.GROQ3 }}
+          GROQ_API_KEY_4: ${{ secrets.GROQ4 }}
+          GROQ_API_KEY_5: ${{ secrets.GROQ5 }}
+          GROQ_API_KEY_6: ${{ secrets.GROQ6 }}
+          GROQ_API_KEY_7: ${{ secrets.GROQ7 }}
+          GROQ_API_KEY_8: ${{ secrets.GROQ8 }}
+        run: >
+          python -X utf8 main.py
+          --arquivo "${{ inputs.nome_arquivo }}"
+          --qtd "${{ inputs.qtd }}"
+          --idioma "${{ inputs.idioma }}"
+
+      - name: Subir clipes prontos pro Drive
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}"
+
+      - name: Avisar no Telegram
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            TEXTO="✅ Corte (fluxo híbrido) terminou — já está no Drive."
+          else
+            TEXTO="⚠️ Corte (fluxo híbrido) falhou — confira: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode text="$TEXTO"

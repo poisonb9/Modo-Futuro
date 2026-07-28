@@ -58,6 +58,17 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     dur = midia.duracao(fonte)
     print(f"\n[1/5] fonte: {fonte.name}  ({dur/60:.1f} min)")
 
+    # Gemini recusa vídeo com muitos frames: "Please use fewer than 10800
+    # images" (descoberto 28/07/2026, vídeo de 247min e outro de 134min
+    # falharam com 400). Sem saber a taxa de amostragem exata, 90min é
+    # limite seguro observado — acima disso cai pra só-áudio, sem imagem,
+    # sem limite de frame (perde "ver a cena", mas processa qualquer duração).
+    LIMITE_VIDEO_MIN = 90
+    if usar_video and dur / 60 > LIMITE_VIDEO_MIN:
+        print(f"      [!] vídeo passa de {LIMITE_VIDEO_MIN}min — Gemini rejeita "
+              f"por excesso de frames, caindo pra modo só-áudio")
+        usar_video = False
+
     # ---- áudio: só é necessário se o Gemini for analisar sem a imagem
     print("[2/5] extraindo áudio 16kHz mono...")
     status.etapa(nome_fonte, "extraindo_audio")

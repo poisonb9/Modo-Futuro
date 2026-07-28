@@ -63,6 +63,10 @@ def baixar(url: str, destino: Path) -> Path:
         "yt-dlp",
         "-f", "bv*[height<=480]+ba/b[height<=480]/b",
         "--merge-output-format", "mp4",
+        # cliente Android costuma escapar do bloqueio "sign in to confirm
+        # you're not a bot" que IPs de datacenter (GitHub Actions) levam
+        # do YouTube — não muda nada pra quem roda local.
+        "--extractor-args", "youtube:player_client=android",
         "-o", str(alvo),
         url,
     ], silencioso=False)

@@ -33,6 +33,9 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Instalar fallback pro Invidious — tentativa gratuita 2
+        run: pip install -U yt-dlp-invidious
+
       - name: Instalar provedor de PO Token (bgutil) — tentativa gratuita
         continue-on-error: true
         run: |

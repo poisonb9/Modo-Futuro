@@ -33,6 +33,25 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Instalar provedor de PO Token (bgutil) — tentativa gratuita
+        continue-on-error: true
+        run: |
+          pip install -U bgutil-ytdlp-pot-provider
+          git clone --single-branch --branch 1.3.1 https://github.com/Brainicism/bgutil-ytdlp-pot-provider.git "$RUNNER_TEMP/bgutil"
+          cd "$RUNNER_TEMP/bgutil/server"
+          npm ci
+          npx tsc
+          echo "YTDLP_POT_SERVER=$RUNNER_TEMP/bgutil/server" >> "$GITHUB_ENV"
+
+      - name: Gravar cookies do YouTube (secret -> arquivo, só pra essa execução)
+        env:
+          YTDLP_COOKIES: ${{ secrets.YTDLP_COOKIES }}
+        run: |
+          if [ -n "$YTDLP_COOKIES" ]; then
+            printf '%s' "$YTDLP_COOKIES" > "$RUNNER_TEMP/cookies.txt"
+            echo "YTDLP_COOKIES_FILE=$RUNNER_TEMP/cookies.txt" >> "$GITHUB_ENV"
+          fi
+
       - name: Cortar
         env:
           # nomes dos secrets ficaram diferentes do padrão do código

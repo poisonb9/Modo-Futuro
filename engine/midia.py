@@ -1,5 +1,5 @@
 """Tudo que fala com ffmpeg/ffprobe/yt-dlp. Nada sai da máquina aqui."""
-import json, re, shutil, subprocess
+import json, os, re, shutil, subprocess
 from pathlib import Path
 
 import config
@@ -59,7 +59,7 @@ def baixar(url: str, destino: Path) -> Path:
     for antigo in destino.glob("fonte.*"):
         antigo.unlink()
     alvo = destino / "fonte.%(ext)s"
-    roda([
+    cmd = [
         "yt-dlp",
         "-f", "bv*[height<=480]+ba/b[height<=480]/b",
         "--merge-output-format", "mp4",
@@ -67,9 +67,22 @@ def baixar(url: str, destino: Path) -> Path:
         # you're not a bot" que IPs de datacenter (GitHub Actions) levam
         # do YouTube — não muda nada pra quem roda local.
         "--extractor-args", "youtube:player_client=android",
-        "-o", str(alvo),
-        url,
-    ], silencioso=False)
+    ]
+    # em IP de datacenter (GitHub Actions) o Android client sozinho não
+    # basta — passa cookies de uma sessão logada de verdade. Local não usa
+    # isso (variável não fica setada).
+    cookies = os.getenv("YTDLP_COOKIES_FILE")
+    if cookies and Path(cookies).exists():
+        cmd += ["--cookies", cookies]
+    # provedor de PO Token (bgutil) — gratuito, só ativa se o servidor
+    # local do provider estiver de pé (setado só no workflow do GitHub
+    # Actions; local não usa isso).
+    pot_server = os.getenv("YTDLP_POT_SERVER")
+    if pot_server:
+        cmd += ["--extractor-args",
+                f"youtubepot-bgutilscript:server_home={pot_server}"]
+    cmd += ["-o", str(alvo), url]
+    roda(cmd, silencioso=False)
     achados = list(destino.glob("fonte.*"))
     if not achados:
         raise RuntimeError("yt-dlp não produziu arquivo")

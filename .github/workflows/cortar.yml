@@ -52,3 +52,15 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}"
+
+      - name: Avisar no Telegram (roda sempre, mesmo se algo falhar acima)
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            TEXTO="✅ Corte terminou: ${{ inputs.url }} — já está no Drive."
+          else
+            TEXTO="⚠️ Corte falhou: ${{ inputs.url }} — confira o log em ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode text="$TEXTO"

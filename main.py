@@ -1,0 +1,318 @@
+"""Motor de cortes — Nitro 5.
+
+    python main.py --url "https://youtube.com/watch?v=..."
+    python main.py --arquivo "C:\\videos\\live.mp4" --qtd 15
+    python main.py --url "..." --so-audio        # mais barato, não vê a imagem
+
+Divisão de trabalho:
+    Gemini  -> escolhe os momentos e escreve título/descrição/tags
+    Groq    -> legenda palavra a palavra (só nos clipes, nunca no vídeo cheio)
+    ffmpeg  -> corta, enquadra no rosto, queima legenda, renderiza (NVENC)
+"""
+import argparse, json, shutil, sys, time, unicodedata
+from datetime import datetime
+from pathlib import Path
+
+import config
+from engine import midia, selecao, transcricao, legendas, render, traducao, dublagem, status
+
+# console do Windows costuma abrir em cp1252, que não tem caractere "→"
+# usado nos prints de progresso — força UTF-8 pra não derrubar o processo
+# no meio de um render por causa de log.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8")
+
+
+def _limpar(nome: str) -> str:
+    for c in '<>:"/\\|?*':
+        nome = nome.replace(c, "")
+    return nome.strip()[:60] or "clipe"
+
+
+def _hashtag(tag: str) -> str:
+    """Transforma uma tag em hashtag válida.
+
+    Hashtag NÃO pode ter espaço: "#Elon Musk" é lido como "#Elon" + texto
+    solto "Musk" — a segunda palavra vira lixo na legenda. Acento também é
+    ruim pra descoberta (quem busca digita sem), então normaliza pra ASCII.
+    """
+    sem_acento = (unicodedata.normalize("NFKD", tag)
+                  .encode("ascii", "ignore").decode("ascii"))
+    return "#" + "".join(ch for ch in sem_acento if ch.isalnum())
+
+
+def _legenda(c: dict) -> str:
+    """Legenda pronta pra colar: título, descrição e hashtags válidas."""
+    tags = " ".join(_hashtag(t) for t in (c.get("tags") or []) if t)
+    return f"{c.get('titulo','')}\n\n{c.get('descricao','')}\n\n{tags}".strip()
+
+
+def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
+              so_vertical: bool, traduzir: bool = True, dublar: bool = False,
+              url_origem: str = "", recorte: tuple[float, float] | None = None) -> Path:
+    t0 = time.time()
+    config.TRABALHO.mkdir(parents=True, exist_ok=True)
+    nome_fonte = fonte.name
+
+    dur = midia.duracao(fonte)
+    print(f"\n[1/5] fonte: {fonte.name}  ({dur/60:.1f} min)")
+
+    # ---- áudio: só é necessário se o Gemini for analisar sem a imagem
+    print("[2/5] extraindo áudio 16kHz mono...")
+    status.etapa(nome_fonte, "extraindo_audio")
+    audio = midia.extrair_audio(fonte, config.TRABALHO / "audio.flac")
+    print(f"      {midia.mb(audio):.1f} MB")
+
+    if recorte:
+        # Modo manual: o usuário já sabe qual trecho quer (ex: refazer um
+        # corte que performou bem). Não há seleção a fazer, e a checagem de
+        # congelamento é DE PROPÓSITO pulada — a escolha é explícita dele,
+        # e nesse vídeo o filtro descartava justamente o trecho bom.
+        ini_r, fim_r = recorte
+        fim_r = min(fim_r, dur)
+        if fim_r <= ini_r:
+            sys.exit(f"--recorte inválido: {ini_r}-{fim_r}")
+        print(f"[3/5] recorte manual {ini_r:.1f}s→{fim_r:.1f}s "
+              f"(pula seleção do Gemini e a checagem de congelamento)")
+        status.etapa(nome_fonte, "gemini_metadados")
+        trecho = render.cortar(fonte, ini_r, fim_r,
+                               config.TRABALHO / "recorte_meta.mp4")
+        meta = selecao.metadados(trecho, usar_video)
+        meta["inicio_s"], meta["fim_s"] = round(ini_r, 2), round(fim_r, 2)
+        meta["duracao_s"] = round(fim_r - ini_r, 2)
+        clipes = [meta]
+        print(f"      \"{str(meta.get('titulo',''))[:60]}\"")
+    else:
+        # ---- Gemini vê o material INTEIRO de uma vez (aguenta 9,5h)
+        alvo = fonte if usar_video else audio
+        print(f"[3/5] Gemini analisando {'vídeo (com imagem)' if usar_video else 'áudio'}"
+              f" — {midia.mb(alvo):.0f} MB, sem chunking...")
+        status.etapa(nome_fonte, "gemini_selecionando")
+        clipes = selecao.escolher(alvo, dur, usar_video, qtd)
+        if not clipes:
+            print("nenhum momento aprovado na validação.")
+            if url_origem:
+                status.marcar_item(url_origem, "erro", erro="nenhum momento aprovado")
+            sys.exit(1)
+        print(f"      {len(clipes)} momentos escolhidos")
+
+        # o Gemini escolhe pelo áudio/fala — não percebe se a câmera do
+        # entrevistado travou (comum em gravação remota). Descarta aqui antes
+        # de gastar Groq/render com um clipe de imagem parada.
+        status.etapa(nome_fonte, "checando_congelamento")
+        bons = []
+        for c in clipes:
+            cong = midia.congelamento_s(fonte, c["inicio_s"], c["fim_s"])
+            if cong > config.CONGELAMENTO_MAX_S:
+                print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": "
+                      f"bloco de {cong:.1f}s com imagem travada")
+                continue
+            bons.append(c)
+        clipes = bons
+        if not clipes:
+            print("todos os momentos tinham câmera travada — nenhum clipe sobrou.")
+            if url_origem:
+                status.marcar_item(url_origem, "erro", erro="só sobrou clipe com câmera travada")
+            sys.exit(1)
+
+    destino = config.SAIDA / datetime.now().strftime("%Y-%m-%d_%H%M") / _limpar(fonte.stem)
+    destino.mkdir(parents=True, exist_ok=True)
+
+    resumo = []
+    for i, c in enumerate(clipes, 1):
+        ini, fim = c["inicio_s"], c["fim_s"]
+        if not recorte:   # no modo manual o usuário mandou os tempos exatos
+            nova_ini = midia.pular_congelamento_inicial(fonte, ini, fim)
+            if nova_ini > ini:
+                print(f"      início ajustado {ini:.1f}s→{nova_ini:.1f}s "
+                      f"(pulando frame travado na abertura do clipe)")
+                ini = nova_ini
+                c["inicio_s"] = ini
+            novo_fim = midia.pular_congelamento_final(fonte, ini, fim)
+            if novo_fim < fim:
+                print(f"      fim ajustado {fim:.1f}s→{novo_fim:.1f}s "
+                      f"(pulando frame travado no fechamento do clipe)")
+                fim = novo_fim
+                c["fim_s"] = fim
+        pasta = destino / f"{i:02d}_nota{int(c.get('nota', 0))}_{_limpar(c.get('titulo', ''))}"
+        pasta.mkdir(parents=True, exist_ok=True)
+        print(f"\n[4/5] clipe {i}/{len(clipes)}  {ini:.1f}s→{fim:.1f}s  "
+              f"nota {c.get('nota')}  \"{str(c.get('gancho',''))[:50]}\"")
+
+        status.etapa(nome_fonte, "cortando", c.get("titulo", ""), i, len(clipes))
+        bruto = render.cortar(fonte, ini, fim, config.TRABALHO / f"bruto_{i:02d}.mp4")
+
+        # ---- decupagem: tira as pausas mortas (retenção + originalidade)
+        # Não roda com --dublar: a trilha dublada é gerada pra duração do
+        # recorte original e dessincronizaria.
+        dur_final = fim - ini
+        if config.CORTAR_SILENCIOS and not dublar:
+            enxuto = midia.cortar_silencios(
+                bruto, config.TRABALHO / f"bruto_{i:02d}_enxuto.mp4")
+            if enxuto != bruto:
+                nova_dur = midia.duracao(enxuto)
+                if nova_dur < config.DUR_MIN:
+                    # encurtar até aqui derrubaria o clipe abaixo do mínimo
+                    # que garante monetização — melhor manter as pausas.
+                    print(f"      [!] decupagem descartada: deixaria o clipe "
+                          f"em {nova_dur:.1f}s (< DUR_MIN {config.DUR_MIN}s)")
+                else:
+                    bruto, dur_final = enxuto, nova_dur
+
+        # legenda: só este pedacinho vai pra Groq (~1 MB, longe dos 25 MB).
+        # Extrai do PRÓPRIO clipe (não fatia o áudio da fonte) — depois da
+        # decupagem os tempos não batem mais com o original.
+        peda = midia.extrair_audio(bruto, config.TRABALHO / f"clip_{i:02d}.flac")
+        print(f"      Groq transcrevendo ({midia.mb(peda):.1f} MB)...")
+        status.etapa(nome_fonte, "transcrevendo", c.get("titulo", ""), i, len(clipes))
+        ps = transcricao.palavras(peda, idioma)
+
+        # guardrail de ritmo [PAPER]: acima de ~200 palavras/min a
+        # compreensão cai (Weinstein-Shr & Griffiths). A decupagem não
+        # acelera a fala, mas aumenta a densidade — vale medir e avisar.
+        if ps and dur_final > 0:
+            wpm = len(ps) / (dur_final / 60)
+            if wpm > 200:
+                print(f"      [!] ritmo alto: {wpm:.0f} palavras/min "
+                      f"(acima de 200 a compreensão cai)")
+
+        # dublado implica legenda traduzida também (áudio e texto combinando)
+        precisa_traduzir = (traduzir or dublar) and idioma != "pt" and ps
+        audio_dublado = None
+        if precisa_traduzir:
+            print("      traduzindo pra pt-BR...")
+            status.etapa(nome_fonte, "traduzindo", c.get("titulo", ""), i, len(clipes))
+            segmentos = traducao.traduzir_segmentos(ps)
+            ps = traducao.segmentos_para_palavras(segmentos)
+            if dublar:
+                print("      dublando (edge-tts)...")
+                status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
+                audio_dublado = dublagem.gerar_trilha(
+                    segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
+
+        lv, av = config.VERTICAL
+        ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av)
+        print("      renderizando 9:16 com face tracking...")
+        status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
+        render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado)
+
+        if not so_vertical:
+            lh, ah = config.HORIZONTAL
+            ass_h = legendas.escrever(ps, config.TRABALHO / f"h_{i:02d}.ass", lh, ah)
+            print("      renderizando 16:9 tela cheia...")
+            status.etapa(nome_fonte, "renderizando_horizontal", c.get("titulo", ""), i, len(clipes))
+            render.horizontal(bruto, ass_h, pasta / "fullscreen_16x9.mp4", audio_dublado)
+
+        render.capa(bruto, pasta / "capa.jpg")
+
+        meta = {k: c.get(k) for k in
+                ("titulo", "descricao", "tags", "gancho", "porque",
+                 "nota", "inicio_s", "fim_s", "duracao_s",
+                 "tipo_conteudo", "emocao_dominante", "dinamica",
+                 "marcador_viral", "arquetipo", "forca_gancho",
+                 "compartilhabilidade", "independencia",
+                 "intensidade_emocional", "valor_social")}
+        meta["fonte"] = fonte.name
+        # duracao_s vinha do recorte na fonte; depois da decupagem o clipe
+        # é mais curto. O que vale pra regra dos 60s é a duração FINAL.
+        meta["duracao_recorte_s"] = round(fim - ini, 2)
+        meta["duracao_s"] = round(dur_final, 2)
+        meta["decupado"] = bool(dur_final < (fim - ini) - 0.01)
+        # Guarda a URL AQUI, não só no _origem.json do lote — post.json é o
+        # arquivo que sobrevive em qualquer cópia/organização do clipe
+        # (Drive, Desktop, etc). Perder a URL de origem já aconteceu (vídeo
+        # do Geoffrey Hinton, 26/07/2026) porque _origem.json não é sempre
+        # escrito. Redundância aqui evita repetir.
+        meta["url_origem"] = url_origem or ""
+        (pasta / "post.json").write_text(
+            json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+        (pasta / "post.txt").write_text(_legenda(c), encoding="utf-8")
+        resumo.append(meta)
+
+    (destino / "_resumo.json").write_text(
+        json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Legendas de todos os clipes num arquivo só. O rascunho do TikTok NÃO
+    # carrega legenda (a API de inbox só aceita o arquivo de vídeo), então o
+    # usuário digita/cola na mão no celular — juntar tudo aqui evita abrir
+    # pasta por pasta.
+    (destino / "LEGENDAS.txt").write_text(
+        "\n\n".join(
+            f"{'='*60}\n[{i:02d}] nota {m.get('nota')}  "
+            f"({m.get('duracao_s')}s)\n{'='*60}\n{_legenda(m)}"
+            for i, m in enumerate(resumo, 1)
+        ),
+        encoding="utf-8")
+    if url_origem:
+        (destino / "_origem.json").write_text(
+            json.dumps({"url": url_origem}, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    print(f"\n[5/5] pronto em {(time.time()-t0)/60:.1f} min → {destino}")
+    if url_origem:
+        status.marcar_item(url_origem, "concluido", pasta=str(destino),
+                           concluido_em=time.time())
+    status.ocioso()
+    return destino
+
+
+def main():
+    p = argparse.ArgumentParser(description="Vídeo longo -> Shorts prontos")
+    g = p.add_mutually_exclusive_group(required=True)
+    g.add_argument("--url", help="link do YouTube/etc")
+    g.add_argument("--arquivo", help="vídeo já no disco")
+    p.add_argument("--qtd", type=int, default=config.QTD_CLIPES)
+    p.add_argument("--so-audio", action="store_true",
+                   help="Gemini analisa só o áudio: mais barato, mas não vê a cena")
+    p.add_argument("--com-horizontal", action="store_true",
+                   help="também renderiza o 16:9 tela cheia. Padrão é só o 9:16: "
+                        "o destino agora é TikTok, que é vertical-first — "
+                        "horizontal lá tem desempenho ruim e o render dobrava o tempo")
+    p.add_argument("--idioma", default="pt", help="idioma da fala (pt, en, es...)")
+    p.add_argument("--sem-traducao", action="store_true",
+                   help="mantém a legenda no idioma original (--idioma), sem traduzir pra pt-BR")
+    p.add_argument("--dublar", action="store_true",
+                   help="troca o áudio original por voz pt-BR (edge-tts) + legenda traduzida")
+    p.add_argument("--recorte", metavar="INICIO-FIM",
+                   help="corta um trecho exato em segundos (ex: 113.4-162.9) em vez de "
+                        "deixar o Gemini escolher. Pula a checagem de congelamento — "
+                        "use pra refazer um corte que você já sabe que funciona")
+    p.add_argument("--manter-temp", action="store_true")
+    a = p.parse_args()
+
+    recorte = None
+    if a.recorte:
+        try:
+            ini_s, fim_s = (float(x) for x in a.recorte.split("-", 1))
+        except ValueError:
+            p.error("--recorte precisa ser INICIO-FIM em segundos, ex: 113.4-162.9")
+        recorte = (ini_s, fim_s)
+
+    for b in ("ffmpeg", "ffprobe"):
+        if not shutil.which(b):
+            sys.exit(f"'{b}' não encontrado no PATH. Rode: .\\setup_nitro5.ps1")
+
+    if a.url:
+        if not shutil.which("yt-dlp"):
+            sys.exit("yt-dlp não encontrado. Rode: .\\setup_nitro5.ps1")
+        print("baixando...")
+        status.etapa(a.url, "baixando")
+        status.marcar_item(a.url, "processando", iniciado_em=time.time())
+        fonte = midia.baixar(a.url, config.TRABALHO / "download")
+    else:
+        fonte = Path(a.arquivo)
+        if not fonte.exists():
+            sys.exit(f"não encontrei: {fonte}")
+
+    try:
+        processar(fonte, a.qtd, not a.so_audio, a.idioma, not a.com_horizontal,
+                  traduzir=not a.sem_traducao, dublar=a.dublar,
+                  url_origem=a.url or "", recorte=recorte)
+    finally:
+        if not a.manter_temp and config.TRABALHO.exists():
+            shutil.rmtree(config.TRABALHO, ignore_errors=True)
+        status.ocioso()
+
+
+if __name__ == "__main__":
+    main()

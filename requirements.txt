@@ -1,0 +1,17 @@
+# --- núcleo (obrigatório) ---
+requests>=2.32
+python-dotenv>=1.0
+yt-dlp>=2025.1.1
+
+# --- face tracking p/ crop 9:16 (roda em CPU, GPU opcional) ---
+mediapipe>=0.10.35
+opencv-python>=4.10
+
+# --- publicação no YouTube (publicar.py) ---
+google-api-python-client>=2.140
+google-auth-oauthlib>=1.2
+
+# --- SOMENTE se for rodar Whisper offline na 1650 (modo --local-whisper) ---
+# Instale à parte, não vem por padrão:
+#   pip install faster-whisper
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124

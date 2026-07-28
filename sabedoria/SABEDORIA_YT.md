@@ -1,0 +1,943 @@
+# Sabedoria — vídeos do YouTube (destilado)
+
+> 14 vídeos · 87 entradas destiladas · engine: Nemotron.
+> Fonte: legendas `.vtt` em `ia mind\sabedoria-yt`. Gerado por `merge_yt.py` (offline).
+> Derivado: a legenda é a fonte; em caso de dúvida, ela vence.
+
+## Índice
+
+1. [20250730 - Como Criar um Canal Dark no YouTube com IA (Curso COMPLETO de 1 Hora) [6FZcGfrL](#1) — 17 entradas
+2. [20250909 - 🚨5 MENTIRAS Sobre CANAL DARK que TODO MUNDO ACREDITA! (e a minha estratégia!) [](#2) — 5 entradas
+3. [20250929 - como Ganhei 5k⧸mês só copiando Video dos outros KKKK [jJjwHFdLObw]](#3) — 5 entradas
+4. [20251007 - COMO CRIAR UM CANAL DARK SIMPLES E PRONTO PARA MONETIZAR [ontZDYc1GBY]](#4) — 8 entradas
+5. [20251024 - Como Criar um Canal Dark Simples que Monetiza Rápido e Ganhar Dinheiro com YouT](#5) — 8 entradas
+6. [20251025 - Como FAZER SHORTS DARKS PRA GRINGA (+10 MIL POR MÊS) PASSO A PASSO! [bfFNe6fit1](#6) — 3 entradas
+7. [20251130 - Por Que Seus Shorts Travam em 1.000 Views (e como destravar o algoritmo) [XgrFW](#7) — 7 entradas
+8. [20251207 - Como Criar um CANAL DARK de FUTEBOL no YouTube... (+R$7.305,00⧸mês) - COPA DO M](#8) — 4 entradas
+9. [20260107 - Como fazer Shorts que SEMPRE Viralizam (com provas) [iPqnzsbBuJ4]](#9) — 3 entradas
+10. [20260122 - Como Criar um Canal no YouTube do jeito certo em 2026 (Passo a Passo) [TT99FAbc](#10) — 3 entradas
+11. [20260301 - Como Eu Fiz R$53.380,32 com um Canal de Shorts do Zero (Aula Prática) [Ny17CcmY](#11) — 3 entradas
+12. [20260502 - O ALGORITMO DO YOUTUBE MUDOU E CANAIS PEQUENOS VÃO EXPLODIR [Se fizerem isso] [](#12) — 6 entradas
+13. [20260527 - COMO CRIAR UM CANAL NO YOUTUBE SEM MOSTRAR O ROSTO E FATURAR COM ELE [passo a p](#13) — 8 entradas
+14. [20260709 - Como Clonei com IA um Canal Dark de Música Milionário ｜ Curso Completo [2j8cdiz](#14) — 7 entradas
+
+---
+
+## 1. 20250730 - Como Criar um Canal Dark no YouTube com IA (Curso COMPLETO de 1 Hora) [6FZcGfrL
+
+`legendas_video_6FZcGfrLmBw`
+
+**O autor descreve sua jornada de universitário sem recursos até criar canais do YouTube 100% automatizados com IA, faturando mais de R$ 10.000 por mês. Ele apresenta um curso de uma hora dividido em 13 partes, abordando desde a escolha de tópicos até a monetização, focando em um nicho recente que explodiu no YouTube, e oferece um documento gratuito com os prompts utilizados.**
+
+- O autor era um universitário quebrado, sem dinheiro, com apenas um celular velho ao começar a explorar IA no YouTube.
+- Ele criou canais do zero usando apenas ferramentas gratuitas e sem aparecer, resultando em canais 100% automatizados que faturam mais de R$ 10.000 por mês.
+- O curso completo de uma hora está dividido em 13 partes, abrangendo desde a busca de tópicos até a monetização do canal.
+- O nicho escolhido para o curso é um que recentemente explodiu no YouTube, com canais recebendo milhões de visualizações e faturando milhares de dólares.
+- O autor disponibiliza um documento gratuito com todos os prompts que serão utilizados no vídeo.
+
+> Criei canais do zero, usei apenas ferramentas gratuitas e evitei aparecer em todos eles. O resultado: canais 100% automatizados, faturando mais de R$ 10.000 por mês e crescendo constantemente.
+
+**O autor detalha o processo de criação de um canal do YouTube, começando pela análise da concorrência no nicho de história, incluindo faturamento e fontes de renda dos canais estudados. Em seguida, explica como usar IA para gerar tópicos virais, roteiros personalizados, narração realista, avatar animado, imagens profissionais e sua animação, antes de passar para a edição.**
+
+- O autor analisou canais de sucesso no nicho de história para entender suas estratégias, faturamento e fontes de renda, como receita de anúncios, marketing de afiliados e comunidades.
+- Ele descobriu uma nova forma de criar tópicos virais usando inteligência artificial.
+- IA será utilizada para gerar um roteiro personalizado para o vídeo.
+- A narração será criada com IA para ser ultra realista e combinada com o tópico do vídeo.
+- IA será usada para gerar um avatar animado, criar imagens profissionais e animá-las corretamente.
+
+> Eu passei as últimas semanas estudando sucesso desses canais e desenvolvi um plano de três etapas que irei te explicar passo a passo.
+
+**O autor orienta a criação e personalização de um canal do YouTube, incluindo a escolha estratégica do nome com auxílio de IA (via chat EPT), configuração de descrição otimizada para SEO (CEO), seleção de foto de perfil gerada por IA e definição de palavras-chave para melhorar a descoberta no algoritmo. Ele destaca que esse processo diferencia criadores profissionais de amadores e prepara o canal para o primeiro vídeo.**
+
+- O nome do canal deve ser estratégico, fácil de pronunciar e refletir o tipo de conteúdo produzido.
+- IA (chat EPT) é usada para gerar 10 ideias de nomes de canal com base no nicho e concorrentes, evitando nomes genéricos ou difíceis de lembrar.
+- A descrição do canal deve ter entre 100 a 150 palavras, ser envolvente e otimizada para CEO (otimização para mecanismos de busca).
+- Palavras-chave são obtidas via IA (chat EPT) e adicionadas nas configurações do canal no YouTube para ajudar o algoritmo a entregar o conteúdo ao público certo.
+- Foto de perfil é gerada por IA (Imagen FX, Leonardo AI ou Mid Journey) a partir de um prompt detalhado derivado da descrição do canal.
+
+> Nome estratégico, imagem profissional, palavras-chaves bem escolhidas e uma descrição adaptada pro algoritmo.
+
+**O autor analisa três canais de sucesso no nicho de história no YouTube como inspiração: Vozes do Passado (1M+ inscritos, 88M+ visualizações), Fogo do Aprendizado (milhares de dólares/mês com anúncios e comunidade paga) e Documentários de História (vídeos longos com IA, faturando milhares de dólares apenas com anúncios). Ele destaca que o tópico é responsável por 90% do sucesso do vídeo e que um bom tópico pode viralizar mesmo com baixa qualidade de produção.**
+
+- Vozes do Passado tem mais de 1 milhão de inscritos e mais de 88 milhões de visualizações, criando documentários longos com imagens, textos e narração, sem personagens ou animação de imagens.
+- Fogo do Aprendizado ganha alguns milhares de dólares por mês apenas com receita de anúncios e possui uma comunidade paga de criadores interessados em vídeos semelhantes.
+- Documentários de História usa imagens e narração geradas por IA, tem vídeos de até 3 horas e faturam milhares de dólares apenas com receita de anúncios, segundo estimativa da Social Blade.
+- O tópico é responsável por 90% do sucesso de um vídeo no YouTube.
+- Um vídeo com ótimo tópico pode viralizar mesmo com qualidade e edição ruins, se o assunto for interessante para o público.
+
+> O tópico é literalmente responsável por 90% do sucesso do seu vídeo.
+
+**Para gerar ideias de vídeos virais no nicho de história, use um prompt no chat IA que, baseado nos tópicos de alto desempenho de um canal de referência, sugira 10 novas ideias; depois, para criar o roteiro, combine o tópico escolhido com a transcrição (até o minuto 10) de um vídeo viral do mesmo canal como referência de estilo, estrutura e gatilhos, instruindo a IA a produzir um script em três partes (introdução, desenvolvimento, conclusão) sem números.**
+
+- O nicho de história é considerado perene, estando sempre em alta independentemente de tendências. Vídeos de melhor desempenho de canais de referência no nicho de história (ex.: sobre Egito, Estados Unidos) recebem no mínimo 1 milhão de visualizações cada. Um prompt no chat IA pode gerar 10 ideias de vídeos virais baseado nos tópicos de alto desempenho de um canal de referência. Para outro nicho, basta substituir os tópicos do prompt pelos virais do canal de referência desse novo nicho. O roteiro do vídeo pode ser gerado pela IA usando como referência a transcrição (até o minuto 10) de um vídeo viral do canal de referência, com instrução para remover números e dividir em introdução, desenvolvimento e conclusão.
+
+> Cada vídeo relacionado a esse tópico recebe no mínimo 1 milhão de visualizações
+
+**Para criar a narração do vídeo, use o Google AI Studio com voz realista e gratuita, removendo títulos e subtítulos do script para fluidez; personalize o estilo da voz (ex.: sotaque carioca ou tom de homem idoso japonês) para diferenciar o canal, teste de dois a três estilos antes de escolher, e elimine pausas estranhas na narração usando cortes no Capcut para melhorar o ritmo e engajamento, exceto em vídeos longos (3h+) onde o ritmo natural é lento.**
+
+- O Google AI Studio oferece vozes realistas e é 100% gratuito para geração de narração. Antes de narração, exclua todos os títulos e subtítulos do script para evitar pausas e garantir fluidez. A funcionalidade de estilo no Google AI Studio permite definir como o narrador de IA deve se comportar (ex.: sotaque carioca brasileiro ou tom de homem idoso japonês). Para corrigir pausas estranhas na narração gerada por IA, use o Capcut: importe a narração, faça dois cortes (início e fim) em cada momento morto e aproxime os clipes. Remover pausas mortas resulta em ritmo mais rápido e maior engajamento, prática comum entre grandes criadores de vídeos com vozes de IA. Vídeos históricos com 3 horas de duração (como os do canal de referência) não necessitam desse corte de pausas, pois têm ritmo naturalmente mais lento.
+
+> Essa literalmente é a melhor funcionalidade dessa ferramenta
+
+**Criar um avatar animado único (usando Imagem FX para design e DID para animação) diferencia o canal sem rosto, aumenta retenção e engajamento ao conectar o público com um personagem visual consistente, especialmente importante em nichos como história onde nenhum concorrente usa esse método, e deve ser feito com as ferramentas disponíveis inicialmente, atualizando conforme o canal cresce.**
+
+- Nenhum canal de referência no nicho de história analisado usa avatar animado, o que representa uma oportunidade de vantagem competitiva. Um avatar animado ajuda a construir uma marca verdadeira e facilita a venda de produtos futuros por meio do reconhecimento visual do público. Para o vídeo sobre a história do Japão, deve-se usar um personagem japonês mais velho com expressão neutra ou serena, alinhado ao tom sério do tema. O personagem deve ser criado no Imagem FX (com dimensão 16x9) e animado no DID, fazendo upload do roteiro e da narração de alta qualidade já gerada. É recomendado iniciar o canal com as ferramentas disponíveis (como plano gratuito ou light do DID) e atualizar conforme o crescimento, já que muitos canais de alto faturamento começaram assim.
+
+> Esta é apenas uma orientação no geral
+
+**Para ilustrar o vídeo com o avatar, gere prompts de cena a partir do roteiro usando um modelo no chat IA, depois transforme cada prompt em imagem no Imagem FX (dimensão 16x9); mantenha estilo visual coeso em todas as imagens para identidade do vídeo, e evite monotonia adicionando movimento ou variação nas cenas, já que imagens estáticas sozinhas tornam o vídeo enjoativo.**
+
+- Um prompt preparado no documento pode gerar prompts de cena para ilustrar perfeitamente cada parte do roteiro, independentemente do tópico. Para gerar os prompts, copie a parte do roteiro desejada (ex.: introdução) no chat IA e solicite a geração de descrições de cena. Após gerar todos os prompts, use o Imagem FX para transformá-los em imagens reais, selecionando dimensão 16x9 antes de gerar cada uma. Todas as imagens geradas devem seguir o mesmo estilo visual para criar identidade coesa ao longo do vídeo. Imagens estáticas sozinhas podem tornar o vídeo monótono e enjoativo, reduzindo a estimulação do espectador.
+
+> Repare também que todas as imagens seguem o mesmo estilo visual
+
+**O apresentador recomenda o Cling como a melhor ferramenta para gerar animações a partir de imagens, destacando sua facilidade de uso e a oferta de mais de 300 créditos iniciais via link no documento. Ele explica o processo de uso: selecionar o modelo Clingi 2.1, usar a integração com o DeepSeek para gerar prompts de animação avançados e acessar movimentos de câmera prontos. Também menciona que, para vídeos longos (ex: 3 horas), assinar um plano profissional vale a pena por velocidade e acesso a ferramentas profissionais.**
+
+- O Cling é considerado a melhor ferramenta de imagem para vídeo no mercado após teste de pelo menos cinco alternativas. O Cling oferece mais de 300 créditos iniciais gratuitos ao acessar pelo link no documento. O modelo recomendado no Cling é o Clingi 2.1 para melhores resultados em imagem para vídeo. O Cling AI integrou o DeepSeek para gerar prompts de animação detalhados e avançados. O DeepSeek no Cling fornece movimentos de câmera prontos, como zoom in e zoom out. Para vídeos de 3 horas, assinar um plano pro no Cling vale a pena por velocidade e acesso a ferramentas profissionais.
+
+> sem sombra de dúvidas a melhor de todas é o cling
+
+**O apresentador aconselha o uso de músicas livres de copyright para evitar desmonetização ou remoção de vídeos pelo YouTube, recomendando o Epidemic Sound por sua qualidade profissional e variedade de gêneros, ou alternativamente o PixBay como opção gratuita. Ele detalha o processo de busca, download e organização das faixas, enfatizando a importância de não repetir músicas e renomear os arquivos conforme a ordem de aparição no vídeo para manter a qualidade da experiência do espectador.**
+
+- Usar música protegida por direitos autorais no YouTube pode resultar em desmonetização ou remoção do vídeo. O Epidemic Sound oferece músicas profissionais, faixas cinematográficas e grande variedade de gêneros, incluindo exclusivas. O PixBay é uma alternativa gratuita para buscar músicas livres de copyright. Ao buscar no Epidemic Sound ou PixBay, usar a palavra-chave do tópico seguida por 'background music' (ex: Samurai Background Music). Recomenda-se salvar os arquivos em uma pasta separada e renomeá-los conforme a ordem de aparição no vídeo. Não repetir nenhuma música ao longo do vídeo preserva a qualidade e a experiência do espectador.
+
+> Se você utilizar qualquer música em seu vídeo protegido por direitos autorais, o YouTube irá simplesmente desmonetizar o seu conteúdo ou até mesmo remover o seu vídeo do ar.
+
+**O apresentador detalha o processo de edição no Capcut, incluindo ajuste de velocidade, uso de câmera lenta suave para fluidez, aplicação de transições suaves (como esmaecimento preto ou desfocar) entre clipes, adição de efeito de zoom contínuo via keyframes de escala, uso de filtros de ruído (barulho dois ou escuro) para tom retrô, correção de cor básica com vinheta em 20 e nitidez entre 10 a 20, e geração automática de legendas (com revisão recomendada para membros pró).**
+
+- No Capcut, selecionar a opção 'câmera lenta suave' deixa o vídeo mais fluido e lento sem perder qualidade. Transições recomendadas no Capcut: esmaecimento preto, combinar ou desfocar, evitando efeitos com tela girando. Velocidade de transição ideal entre 0,5 a 1 segundo no Capcut. Efeito de zoom contínuo é feito adicionando keyframes de escala no início e no final de cada clipe. Filtros de ruído recomendados: barulho dois ou barulho escuro para tom retrô em vídeos documentários. Correção de cor: vinheta definida em 20 e nitidez entre 10 a 20. Legendas podem ser geradas automaticamente no Capcut, mas requerem revisão para garantir correção.
+
+> Algo muito importante para não deixarmos a nossa imagem travando é selecionar a opção câmera lenta suave do Capcut.
+
+**O apresentador conclui a edição recomendando exportar o vídeo em 4K a 60 fps para melhor qualidade, seguido pela criação de thumbnail baseada em padrões virais comprovados, como os usados pelos canais do Mr. Beach e Daniel Dallen, em vez de tentar designs totalmente novos. Ele enfatiza que replicar estruturas de thumbnail já bem-sucedidas aumenta a chance de cliques, observando que o Mr. Beach obteve centenas de milhões de visualizações com um certo tipo de thumbnail, levando outros canais a copiar o mesmo padrão com resultados semelhantes.**
+
+- Exportar o vídeo em 4K e 60 fps no Capcut obtém a melhor qualidade possível. Thumbnails eficazes devem copiar padrões já comprovados em vídeos virais, não reinventar o design. O canal do Mr. Beach obteve centenas de milhões de visualizações em um único vídeo com um certo tipo de thumbnail. Outros canais começaram a usar a mesma estrutura de thumbnail do Mr. Beach e também receberam milhões de visualizações. Observar o que criadores admirados (como Daniel Dallen) fazem é uma estratégia confiável para boas ideias de thumbnail.
+
+> As chances de você fracassar tentando criar um design de thumbnail completamente novo que nunca foi feito anteriormente são muito altas.
+
+**O criador demonstra como fazer thumbnails no Canva para um vídeo sobre a história do Japão, usando três versões para teste A/B do YouTube. Ele adiciona imagens geradas por IA, ajusta fontes (Rubik), cores de alto contraste (branco, vermelho), aplica efeitos como neon e cria um efeito 3D sobrepondo camadas. O processo inclui duplicar elementos, remover fundo e posicionar textos para destaque visual.**
+
+- O criador usa o Canva para criar thumbnails, pois é gratuito e adequado para iniciantes.
+- Ele cria três thumbnails para um único vídeo para usar no teste A/B do YouTube.
+- A fonte Rubik é escolhida para o tema principal do vídeo (história do Japão).
+- Cores de alto contraste como branco, vermelho, amarelo e preto são recomendadas para chamar atenção.
+- O efeito 3D é criado duplicando a imagem do samurai, removendo o fundo e posicionando camadas atrás do texto.
+- O efeito neon é aplicado aos textos para destacar ainda mais a thumbnail.
+- A cor vermelha é usada para o texto POV para combinar com a imagem do samurai.
+
+> Ireia utilizar a fonte Rubik, pois achei que combina perfeitamente com esse estilo que estou gerando.
+
+**O criador finaliza a segunda thumbnail ajustando texto, removendo imperfeições do fundo com o pincel e criando novamente o efeito 3D. Para a terceira thumbnail, copia o texto da segunda, muda a cor para branco e adiciona uma forma vermelha para destaque. Após concluir as três thumbnails, recomenda salvar como PNG (evitando >2 MB) e explica a importância do teste A/B do YouTube para identificar qual thumbnail gera mais cliques.**
+
+- A segunda thumbnail tem o texto 'história do Japão' movido para cima e posicionado atrás da imagem principal para efeito 3D.
+- Imperfeições na remoção de fundo são corrigidas com o pincel remover no Canva.
+- A terceira thumbnail usa texto branco e uma forma vermelha para destacar o tópico principal do vídeo.
+- As thumbnails devem ser salvas como PNG para melhor qualidade e evitar arquivos acima de 2 MB, pois o YouTube pode recusar ou comprimir demais.
+- O teste A/B do YouTube revela qual thumbnail atrai mais cliques, sendo valioso para otimização.
+
+> Recomendo você salvar como PNG para melhor qualidade. Evite thumbnails acima de 2 MB.
+
+**O vídeo explica como otimizar o upload no YouTube: usar chat GPT para gerar títulos e descrições, adicionar vídeos a playlists para aumentar o tempo de exibição, gerar tags com um prompt específico para melhorar o alcance, definir categoria como educacional e realizar o teste A/B das thumbnails. Também orienta a definir visibilidade como público e repetir o processo com consistência, priorizando qualidade sobre quantidade.**
+
+- Títulos e descrições podem ser gerados usando chat GPT com prompts pré-preparados.
+- Adicionar vídeos a playlists facilita que o público encontre conteúdos relacionados e aumenta o tempo de exibição.
+- Tags são geradas via prompt no documento para melhorar o CEO (SEO) do vídeo no YouTube.
+- A categoria do vídeo deve ser definida como educacional.
+- O teste A/B das thumbnails é feito no YouTube enviando as três versões criadas no Canva para comparar desempenho.
+- A tela final pode ser configurada para 'melhor para o espectador' quando não há outros vídeos no canal.
+- O vídeo deve ser marcado como público na aba de visibilidade antes do upload.
+
+> Esse pequeno truque faz mais diferença do que parece.
+
+**O criador recomenda manter pelo menos um vídeo por semana, priorizando qualidade sobre quantidade para melhores resultados a longo prazo. Explica as quatro formas principais de monetização no YouTube: receita de anúncios (RPM entre R$4 e R$20, maior em nichos como finanças ou audiências dos EUA), marketing de afiliados (comissão de 10% a 80%), comunidades privadas (pagamento mensal por acesso exclusivo) e outros métodos não detalhados. Destaca que a receita de anúncios tende a ser a menor fonte de renda se o canal for bem gerido.**
+
+- A recomendação é publicar pelo menos um vídeo por semana, mas mais é melhor se a qualidade for mantida.
+- Qualidade deve ser priorizada sobre quantidade para resultados melhores a longo prazo.
+- O RPM (receita por 1000 visualizações) varia entre R$4 e R$20, podendo ultrapassar R$100 em nichos como finanças ou com audiência dos EUA.
+- Para monetizar com anúncios, são necessários 1000 inscritos e 4000 horas de exibição.
+- O marketing de afiliados envolve promover produtos com links de afiliado, recebendo comissão de 10% a 80% do valor da venda.
+- Credibilidade é essencial no marketing de afiliados: recomendar apenas produtos que se usa e confia.
+- Comunidades privadas são grupos exclusivos onde seguidores pagam mensalmente por acesso a conteúdo especial.
+
+> O importante é priorizar a qualidade ao invés da quantidade.
+
+**O vídeo descreve estratégias para monetizar um canal do YouTube sem mostrar o rosto, destacando produtos digitais como a forma mais lucrativa, como cursos, ebooks e templates. Também menciona a criação de comunidades pagas e o lançamento de um laboratório de monetização que promete faturar acima de R$ 7.000 mensais usando IA.**
+
+- Produtos digitais são a forma mais lucrativa de monetizar uma audiência no YouTube.
+- Produtos digitais podem ser criados uma vez e vendidos infinitamente.
+- Exemplos de produtos digitais incluem templates de edição, cursos e ebooks.
+- Um canal de história pode oferecer um curso sobre um evento histórico específico como produto digital.
+- Observar os comentários dos vídeos ajuda a descobrir o que o público realmente quer.
+- O autor lançou um laboratório de monetização, um sistema digital para copiar e colar, que promete faturar mais de R$ 7.000 por mês usando apenas inteligências artificiais.
+- O preço do laboratório de monetização é simbólico comparado aos resultados obtidos pelos alunos.
+
+> a forma mais lucrativa de monetizar a sua audiência, provavelmente é através de produtos digitais
+
+---
+
+## 2. 20250909 - 🚨5 MENTIRAS Sobre CANAL DARK que TODO MUNDO ACREDITA! (e a minha estratégia!) [
+
+`video_kZS5QZVB0qA`
+
+**O autor critica a ilusão de que se pode ficar rico rapidamente no YouTube com canais dark usando IA, afirmando que seu próprio canal levou anos para ter resultados, com primeiros vídeos gerando apenas poucos centavos. Ele usa seu histórico desde 2013 como exemplo, mostrando que o sucesso no YouTube exige tempo e persistência, e alerta contra falsas promessas de gurus que ignoram suas próprias lutas iniciais.**
+
+- O autor afirma que começou seu canal em 2013 e só começou a ter resultados de visualização em 2016.
+- Ele menciona que seus primeiros vídeos geravam apenas 30, 50 ou 100 visualizações, e muitos foram privados.
+- Um de seus primeiros vídeos (sobre FIFA) gerou apenas 12 centavos de reais.
+- Um vídeo de 2016 (FIFA 16) gerou 25.000 visualizações e R$ 1 de AdSense.
+- O autor afirma que, antigamente, a monetização no YouTube era pior do que é hoje.
+- Ele critica gurus que prometem renda rápida (como R$ 8.000 por dia) e afirma que isso gera frustração em quem não consegue resultados imediatos.
+- Ele aconselha a focar inicialmente em ganhar R$ 1.000 a R$ 2.000 por mês para construir previsibilidade e renda normal.
+
+> Esse meu vídeo de FIFA que eu fiz aqui quando eu comecei meu canal deu simplesmente 12 centavos, tá? De reais.
+
+**O autor descreve sua trajetória difícil no YouTube, com anos de baixo retorno financeiro apesar da persistência, e critica a cultura de gurus que prometem ganhos irreais e instantâneos, causando frustração em criadores que não atingem tais metas. Ele rejeita a ideia de automação total e sucesso fácil, afirmando que não sugere que se possa ganhar R$ 8.000 por dia, e defende começar com metas modestas como R$ 1.000–2.000 por mês para construir uma renda previsível e normal ao longo do tempo.**
+
+- O autor afirma que, em 2016, um vídeo do FIFA 16 gerou 25.000 visualizações e apenas R$ 1 de AdSense.
+- Ele diz que, antigamente, o YouTube era pior do que é hoje em termos de monetização e funcionamento.
+- O autor critica gurus que prometem R$ 8.000 por dia, afirmando que isso ilude pessoas normais e gera frustração quando elas ganham apenas poucos centavos.
+- Ele afirma que, na realidade, pouquíssimas pessoas conseguem tais resultados e que é errado vender a ideia de que qualquer pessoa pode alcançá-los facilmente.
+- O autor recomenda focar inicialmente em ganhar R$ 1.000 a R$ 2.000 por mês para construir previsibilidade e, depois, buscar crescimento constante.
+- Ele afirma que nunca sugeriu que as pessoas possam ganhar R$ 8.000 por dia ou que tudo será automático.
+
+> Você entra no Instagram, eu tô mostrando uma realidade, né, do que aconteceu comigo na minha vida. E aí você entra no Instagram e tá lá o Guru Dark te mostrando isso aqui, ó. O cara simplesmente tá mandando ver R$ 8.000 por dia aqui, né, cara?
+
+**O autor discute como vídeos que prometem ganhos fáceis com canais dark usando IA criam falsas ilusões sobre o trabalho necessário no YouTube, enfatizando que sucesso exige dedicação, inteligência psicológica e uso consciente de ferramentas, já que menos de 1% das pessoas aplicam o conteúdo aprendido. Ele alerta sobre o risco de desmonetização por conteúdo reutilizado, citando atualizações recentes do YouTube que tornam as políticas mais rígidas contra materiais não originais, e menciona o caso do canal 'Inteligência Quiz' como exemplo de desmonetização por falta de originalidade.**
+
+- Vídeos que prometem ganhos fáceis com canais dark usando IA criam falsas ilusões sobre o trabalho necessário no YouTube.
+- Sucesso no YouTube exige dedicação diária, inteligência psicológica e uso consciente de ferramentas de IA.
+- Menos de 1% das pessoas que assistem aulas aplicam o conteúdo aprendido.
+- O YouTube atualizou sua política para ser mais rígido contra conteúdo reutilizado ou não original, aumentando o risco de desmonetização.
+- Canais podem ser desmonetizados se o conteúdo for considerado reutilizado, mesmo que editado, como no caso do canal 'Inteligência Quiz'.
+- Para contestar uma desmonetização por conteúdo reutilizado, é necessário enviar um vídeo provando a originalidade do conteúdo.
+
+> Menos de 1% das pessoas. E outro problema que você pode ter, cara, seu canal pode ser desmonetizado, né?
+
+**O autor alerta contra a ilusão de gerenciar múltiplos canais dark no automático, argumentando que isso leva à falha e recomenda começar com no máximo dois canais que se complementem em conteúdo, usando exemplos como canais de times rivais de futebol para manter produção consistente quando um tema estiver em baixa. Ele também menciona seu próprio curso pago e materiais gratuitos disponíveis em seu canal e descreve a quarta armadilha como a tendência crescente do YouTube de restringir canais de conteúdo não original ou repetitivo.**
+
+- Manter 10 canais dark no automático é uma ilusão que leva à falha; não é possível ganhar sem esforço.
+- A estratégia recomendada é criar inicialmente no máximo dois canais que se complementem em conteúdo.
+- Canais complementares permitem alternar foco quando um tema está em baixa, garantindo sempre assunto para postar (ex: canais de Barcelona e Real Madrid).
+- O autor usa essa estratégia em seus próprios canais de futebol, aproveitando hype de jogadores quando um time está em crise.
+- Seu canal oferece vídeos gratuitos e um curso pago sobre criação de vídeos, miniaturas e estratégias para canais dark.
+- A quarta armadilha discutida é a crescente restrição do YouTube contra canais de conteúdo não original ou repetitivo.
+
+> Você tem que criar dois canais inicialmente e tenta expandir para três no máximo. Inicialmente, no máximo, dois.
+
+**O autor alerta que postar vídeos genéricos de futebol usando apenas lances de IA ou conteúdo não original (como prints do Social Blade) leva a strikes rápidos por direitos autorais e desmonetização, enfatizando que crescer no YouTube requer estratégia, paciência e consistência, não ganhos rápidos. Ele aconselha contra a imitação de criadores estabelecidos como Peter Joda (provavelmente se referindo a MrBeast) sem reconhecer suas equipes e recursos, e reforça que, embora futebol seja um bom nicho, vídeos focados apenas em lances de jogo são problemáticos e devem ser evitados.**
+
+- Vídeos que usam apenas lances de futebol gerados por IA ou conteúdo não original (ex: prints do Social Blade) levam a strikes rápidos por direitos autorais e desmonetização.
+- Crescer no YouTube exige estratégia, paciência e consistência, não ganhos rápidos como R$ 8.000 no mês seguinte.
+- Não se deve imitar criadores estabelecidos (ex: Peter Joda/MrBeast) sem reconhecer suas equipes e recursos por trás do sucesso.
+- Futebol é um bom nicho, mas vídeos focados exclusivamente em lances de jogo são arriscados e devem ser evitados.
+- O autor recomenda fazer vídeos de futebol que acrescentem valor, não apenas repostar lances.
+
+> Não posta vídeo que aparece lance de futebol, cara. Pelo amor de Deus.
+
+---
+
+## 3. 20250929 - como Ganhei 5k⧸mês só copiando Video dos outros KKKK [jJjwHFdLObw]
+
+`video_jJjwHFdLObw`
+
+**O autor descreve uma estratégia para ganhar dinheiro copiando vídeos alheios, envolvendo três passos: selecionar 2-3 vídeos de um tema, transcrevê-los via YouTube, e usar o Chat GPT para resumir os roteiros em tópicos (não para reescrever). Essa abordagem permite criar conteúdo melhor ao combinar as melhores partes de múltiplas fontes, aumentando views, frequência de postagem e potencial de monetização. Ele menciona ter aumentado sua frequência de um vídeo por mês para um por semana usando esse método.**
+
+- A estratégia envolve três passos: pegar 2-3 vídeos de um tema, transcrevê-los via YouTube, e usar o Chat GPT para resumir o conteúdo em tópicos (não para reescrever com outras palavras).
+- Usar o Chat GPT para resumir vídeos em tópicos permite extrair as partes mais relevantes de cada fonte, resultando em conteúdo com melhores informações.
+- Essa estratégia aumenta a facilidade de criação de conteúdo, permitindo aumentar a frequência de postagem (de um vídeo por mês para um por semana no caso do autor).
+- O autor afirma que essa abordagem pode levar a mais views, crescimento do canal, monetização e ganhos financeiros significativos.
+- A psicologia da atenção é citada como técnica principal que o autor usa para viver 100% da internet, e ele oferece uma aula gratuita sobre ela via WhatsApp.
+
+> O terceiro passo é pedir para ele resumir o vídeo em tópicos e tu vai criar o vídeo a partir disso, entende?
+
+**O autor apresenta uma fórmula para estimar o potencial de crescimento do canal: chance de viralização multiplicada pela quantidade de vídeos postados. Ele compartilha resultados de testes com sua estratégia: o primeiro vídeo gerou 13.000 views, 237 inscritos, R$ 139 de AdSense e R$ 207 de afiliado (total R$ 350). O segundo vídeo, afetado por um erro de cópia excessiva (usar uma analogia original sem adaptação), teve 12.000 views, R$ 118 de AdSense, 256 inscritos e R$ 301 de vendas de produto LOL ticket (total R$ 419), o que ele considera um fracasso relativo ao potencial do título, mas ainda lucrativo.**
+
+- A fórmula para estimar o potencial do canal é: chance de viralização × quantidade de vídeos postados.
+- Fatores como qualidade do conteúdo e abordar tópicos em alta aumentam a porcentagem de chance de viralização.
+- O primeiro vídeo testado gerou 13.000 visualizações, 237 inscritos, R$ 139 de AdSense e R$ 207 de renda de afiliado (curso de inglês), totalizando R$ 350.
+- O segundo vídeo, prejudicado por copiar uma analogia original de outro canal (gerando problemas de confiança com a audiência), obteve 12.000 views, R$ 118 de AdSense, 256 inscritos e R$ 301 de vendas de produto LOL ticket, totalizando R$ 419.
+- O autor considera o segundo vídeo um fracasso relativo ao seu alto potencial de título, apesar do resultado financeiro ser melhor que o primeiro vídeo.
+
+> O vídeo teve 13.000 visualizações, me trouxe 237 inscritos e deu R$ 139 de adicência. Além disso, eu divulguei um curso de inglês como afiliado nesse vídeo aí e ele me rendeu mais uns R$ 207.
+
+**O autor introduz a 'arqueologia criativa' como uma estratégia aprimorada para modelar vídeos virais, indo além da cópia superficial. Ele explica que vídeos que explodem têm três camadas: fachada (thumbnail, título, edição), estrutura (ganchos, narrativa, loops de curiosidade) e motor invisível (sentimento ou força escondida que prende o público). A psicologia da atenção é aplicada principalmente na análise da estrutura. Ele afirma que replicar apenas a superfície falha porque ignora as camadas mais profundas responsáveis pelo verdadeiro engajamento.**
+
+- A arqueologia criativa envolve analisar três camadas de um vídeo: fachada (superfície), estrutura (esqueleto narrativo) e motor invisível (força escondida que prende o público).
+- A fachada inclui thumbnail, título, duração e cortes rápidos, mas não explica por que um vídeo explodiu.
+- A estrutura do vídeo envolve elementos como hul inesperado, perguntas provocativas, apelo de clickbait, uso de histórias, promessas, loops de curiosidade e preparação antes da entrega.
+- A psicologia da atenção é útil para identificar e replicar a estrutura invisível dos vídeos que prendem a atenção.
+- O motor invisível refere-se ao sentimento ou força profunda por trás de um vídeo que o prende, sendo o ponto mais profundo a ser replicado.
+
+> E a próxima camada, depois de você ver esses pontos, é a camada três, que é o ponto mais profundo do vídeo, né? Que eu gosto de chamar de motor invisível, porque todo vídeo que prende você tem uma força escondida por trás dele.
+
+**O autor explica que vídeos virais dependem de emoções fortes como ambição e medo, e que copiar conteúdo requer reconstruir o sentido original, não apenas o formato. Ele compartilha resultados de um vídeo que gerou R$ 2.838 por meio de AdSense, vendas de infoprodutos e mentoria, e afirma que aplicou essa estratégia em todos os vídeos de agosto, alcançando quase R$ 6.000 em vendas de produtos além do AdSense.**
+
+- O autor afirma que os dois sentimentos mais fortes para gerar engajamento são ambição e medo.
+- Ele define 'arqueólogo criativo' como alguém que reconstrói o sentido original por trás de um vídeo viral, não apenas copia sua forma.
+- No primeiro vídeo com a nova estratégia, ele obteve 20.000 visualizações, 645 novos inscritos e R$ 138 de AdSense.
+- Esse mesmo vídeo gerou 13 vendas de infoproduto, rendendo aproximadamente R$ 500, e vendas de mentoria que acrescentaram em média R$ 200.
+- O resultado total desse vídeo foi R$ 2.838.
+- Em agosto, ele aplicou a estratégia de arqueologia criativa e psicologia da atenção em todos os seus vídeos.
+- A soma das vendas de seus produtos (cursos, mentoria, consultoria, incluindo como afiliado) naquele mês foi de quase R$ 6.000.
+- O autor menciona que começou a usar planilhas financeiras recentemente devido à necessidade de organizar vendas de múltiplos produtos.
+
+> ser um arqueólogo criativo é isso. Você não pode parar na superfície, você tem que reconstruir a lógica por trás do conteúdo.
+
+**O autor afirma que ganhou mais de R$ 5.000 no mês apenas copiando vídeos de outros, mesmo com alguns vídeos de baixo desempenho, devido às vendas de seus produtos e à consistência do canal. Ele oferece uma mentoria de 6 meses para ajudar outros a crescer e monetizar seus canais, e destaca que depender apenas do AdSense gera ansiedade devido à variação do RPM, por isso criou uma playlist gratuita ensinando criação de conteúdo e monetização mesmo com audiência pequena.**
+
+- O autor afirma ter ganhado mais de R$ 5.000 no mês copiando vídeos de outros.
+- Ele menciona que, mesmo com alguns vídeos de baixa visualização, teve uma quantidade legal de visualizações no geral e vendeu bastante de seus produtos.
+- O autor está lançando uma mentoria nova de 6 meses para crescer o canal e monetizar a audiência.
+- Ele afirma que o AdSense varia muito, com RPM alto ou baixo, e que depender somente dele deixa o criador ansioso 100% do tempo.
+- Ele criou uma playlist gratuita que ensina a criar conteúdo e monetizar a audiência, mesmo que ela seja pequena.
+
+> depender somente do AdSense, é algo que te deixa ansioso 100% do tempo.
+
+---
+
+## 4. 20251007 - COMO CRIAR UM CANAL DARK SIMPLES E PRONTO PARA MONETIZAR [ontZDYc1GBY]
+
+`legendas_video_ontZDYc1GBY`
+
+**O trecho apresenta canais dark de conteúdo infantil gerados por IA que faturam centenas de milhares a milhões de dólares mensais sem mostrar rostos, menciona um plano para criar um canal dark de música infantil usando IA profissional para monetização, e inclui metas de engajamento como 15.000 likes e incentivo à inscrição no canal.**
+
+- Canais dark de música infantil feitos com IA podem faturar de meio milhão a 8 milhões de dólares por mês sem mostrar rosto. Um canal novo de músicas infantis gerado por IA já fez mais de 5.000, equivalente a mais de R$ 26.000. O nicho de música infantil é considerado uma grande oportunidade por ter demanda constante. O plano é criar um canal dark de música infantil usando IA profissional para monetização. A meta de likes para o vídeo é 15.000. O incentivo é deixar like e se inscrever para continuar recebendo conteúdo útil.
+
+> mais de 5.000, o que é equivalente a mais de R$ 26.000
+
+**O trecho discute nichos lucrativos para canais dark, destacando oração e música infantil como os melhores, com exemplos de canais que faturam centenas de milhares a milhões mensais via IA, e explica a necessidade de usar uma IA profissional (como em vídeo) para garantir monetização, evitando IAs genéricas que não geram receita.**
+
+- O nicho de oração é viável para canais dark, exemplificado pelo canal 'Caminhos para Prosperidade' com 236.000 inscritos e ganhos diários via orações geradas por IA. O nicho de música infantil é considerado altamente lucrativo devido à demanda constante, com exemplos como Cogomelon ganhando entre 528.000 e 8 milhões de dólares mensais segundo o Social Blade. É necessário usar uma IA profissional (não genérica) para monetização no YouTube, pois IAs muito genéricas não permitem ganhar receita. A IA escolhida para o canal é 'em vídeo', descrita como profissional e já utilizada com sucesso no canal para criar canais dark.
+
+> o nicho de música infantil para mim é um dos que mais tem oportunidade aqui
+
+**O trecho mostra o passo a passo para usar a IA 'em vídeo' (InVideo) para criar um vídeo infantil de 3 minutos em português sobre higiene, incluindo a elaboração de um prompt no ChatGPT, configuração de duração, mídia ultra e exportação para YouTube, destacando que a IA é norte-americana, funciona globalmente e é usada por profissionais para gerar conteúdo de qualidade.**
+
+- O prompt foi criado no ChatGPT para gerar um vídeo infantil em português sobre higiene com duração de 3 minutos usando a IA 'em vídeo'. A IA 'em vídeo' (InVideo) é descrita como profissional, norte-americana, forte nos EUA e Europa, e usada por criadores de conteúdo profissional. As configurações incluem duração de 3 minutos, plataforma YouTube e mídia ultra (com nano banano e imagens de alta qualidade). O processo envolve copiar o prompt do ChatGPT, colar em 'em vídeo', clicar em 'procede' e depois em 'create my vídeo' para iniciar a geração.
+
+> em vídeo, ela é muito boa
+
+**O apresentador demonstra o uso de uma ferramenta de IA do Google (nano banano) para gerar imagens e vídeos surreais, comenta sobre a qualidade do conteúdo produzido e menciona uma ideia de negócio envolvendo músicas infantis com nomes de crianças populares para aumentar o engajamento.**
+
+- A ferramenta utilizada é o nano banano, descrita como a nova inteligência artificial do Google. Ela gera imagens surreais, vídeos e outros conteúdos. O apresentador teve a ideia de criar músicas infantis com nomes de crianças populares (como Mateu, Noa, Enzo, Valentina, Helena) para aumentar o uso pelas mães. Ele menciona que verificar os nomes mais comuns de crianças em 2025 via chat de PT poderia apoiar essa ideia. O conteúdo gerado pela IA foi considerado de alta qualidade e surpreendeu a equipe.
+
+> Ela cria imagens surreais, vídeos e tudo mais.
+
+**O vídeo mostra como editar legendas e mídia gerada por IA usando comandos simples, incluindo a alteração de estilo, idioma e adição de voz pessoal. A plataforma permite exportar vídeos em 1080p sem marca d'água e o conteúdo é considerado único e passível de monetização, especialmente por ser original e adaptável para canais internacionais.**
+
+- É possível editar vídeos gerados por IA usando comandos como 'Give me a comand to edit vídeo' ou especificando ações como mudar legendas para estilo mais brilhante e infantil. A voz do criador pode ser adicionada às músicas através das configurações da plataforma. Os vídeos podem ser exportados em 1080p sem marca d'água ou branding. O conteúdo é considerado único e monetizável porque a IA cria a música original e permite personalização. O mesmo vídeo pode ser reutilizado em canais internacionais (gringos) para expandir o alcance.
+
+> Você pode colocar tua voz, turma, aqui nas músicas.
+
+**A plataforma permite editar mídia gerada por IA por meio de comandos, incluindo upload de imagens pessoais, uso de mídia estocada (Stoke Media) ou geração nova de clipes com base em prompts. Cada cena pode ser editada individualmente, e após as alterações, o vídeo pode ser salvo e exportado em alta definição (1080p) sem marca d'água para uso puro.**
+
+- Existem três opções para editar mídia: upload de imagem do próprio computador, uso de Stoke Media (mídia pronta e estocada) ou geração nova via IA (generative media). A geração de nova mídia pode ser feita com prompts como 'deixe ele com alguns animais e brincando', resultando em clipes específicos (não o vídeo inteiro). Após edição, as alterações podem ser salvas com 'save changes' e o vídeo exportado em 1080p sem marca d'água ou branding. O preview do vídeo pode ser visualizado antes do download completo usando a opção de download seguido de 'continue'.
+
+> Eu posso simplesmente pedir para ela gerar para mim.
+
+**Após edição e geração de mídia por IA, o vídeo é salvo, renderizado e exportado em 1080p sem marca d'água ou branding para uso puro. O conteúdo final é considerado de alta qualidade, superando expectativas, e pronto para ser enviado ao YouTube como vídeo infantil, com opções de thumbnail automática ou personalizada e inclusão em playlists.**
+
+- O vídeo pode ser salvo após edição usando a opção 'save changes', o que aciona a mudança de mídia (Change media). A exportação é feita em 1080p (HD) sem marca d'água ('waiter marks') e sem branding ('brand'). O YouTube pode gerar automaticamente thumbnails a partir do vídeo enviado. O conteúdo final é descrito como excelente e além das expectativas, motivando o criador a compartilhar o próximo passo: criar um canal do YouTube (Dark) e enviar o vídeo lá.
+
+> Vamos clicar aqui em download, tá? Eu vou deixar aqui, ó, no waiter marks, que é não marca d'água, sem marca d'águas, tá?
+
+**O vídeo ensina como criar um canal infantil no YouTube usando música e personagens fictícios (Mateu, Na, Helena e Miguel) como 'anjinhos do céu', com o primeiro vídeo já publicado e incentivando os espectadores a comentar seus próprios projetos de canal.**
+
+- O criador publicou um primeiro vídeo com música infantil e personagens fictícios (Mateu, Na, Helena e Miguel) descritos como 'anjinhos do céu'.
+- O vídeo foi deixado público para aparecer às pessoas e começar a entregar visualizações.
+- O criador incentiva os espectadores a comentarem sobre o nicho, plano de início e progresso de seus próprios canais.
+- O vídeo menciona que Thiago vai usar sua própria voz para criar conteúdo e acredita que o negócio vai 'estourar'.
+- O criador oferece links na descrição e comentário fixado para ferramentas utilizadas e três aulas gratuitas da 'Pro na Venda'.
+
+> mano Mateu, Na, Helena e Miguel, todos eles são anjinhos do céu
+
+---
+
+## 5. 20251024 - Como Criar um Canal Dark Simples que Monetiza Rápido e Ganhar Dinheiro com YouT
+
+`legendas_video_p08Z_q9NibE`
+
+**O vídeo promete ensinar como criar um canal dark no YouTube usando IA gratuita, com potencial de ganhar R$ 1.000 a R$ 10.000 por mês, e oferece materiais exclusivos via WhatsApp e convite para uma Black Friday com todos os treinamentos da escola.**
+
+- O vídeo afirma que um canal dark pode ser criado com poucos cliques e pouco tempo diário usando inteligências artificiais gratuitas.
+- O canal pode gerar R$ 1.000 por mês, segundo a afirmação do apresentador.
+- O material dos prompts para IA está disponível exclusivamente mediante contato no WhatsApp do apresentador.
+- Uma Black Friday está marcada para 5 de novembro, oferecendo todos os treinamentos e especializações da escola com desconto significativo.
+- O apresentador afirma que não há barreira de entrada financeira, apenas investimento de tempo.
+
+> isso daqui é zero barreira de entrada. você só vai ter que investir o seu tempo
+
+**O vídeo apresenta um canal dark que usa a imagem de Napoleon Hill como gatilho de reputação para atrair visualizações, com um vídeo alcançando 1,3 milhão de views em 4 meses, e ensina como replicar o método usando IA e prompts, sem violação de direitos autorais ao usar figuras públicas.**
+
+- O canal dark apresentado foi criado há 4 meses e seu primeiro vídeo já teve 36.000 visualizações.
+- Um vídeo do canal alcançou 1,3 milhão de visualizações.
+- O método envolve usar a imagem de figuras públicas conhecidas (como Napoleon Hill) como gatilho de reputação para atrair visualizações.
+- O uso de imagens de figuras públicas não viola direitos autorais, pois não se trata de reproduzir conteúdo de livros ou materiais protegidos.
+- O apresentador ensina como usar prompts de IA para modelar o canal, analisar roteiros virais e gerar títulos originais.
+
+> não, cara, essa essas pessoas aqui elas são pessoas públicas, não tem direito autoral
+
+**O vídeo detalha o uso de prompts de IA para analisar um canal dark bem-sucedido, extrair seu roteiro viral e gerar títulos originais, enfatizando que o método foca em modelagem (não cópia) para evitar problemas com as políticas do YouTube e replicar resultados semelhantes.**
+
+- O primeiro prompt é usado para modelar o canal analisando suas informações no chat GPT de forma gratuita.
+- O segundo prompt analisa o roteiro do vídeo mais viral do canal (1,3 milhão de visualizações) para identificar elementos como hook, clímax emocional e resolução.
+- O terceiro prompt gera 10 títulos originais com base na análise do roteiro viral, para uso nos primeiros vídeos do novo canal.
+- O processo de modelagem é distinto de cópia e visa preservar os princípios que fizeram o canal de referência ter sucesso.
+- O apresentador afirma que todo o trabalho de análise e geração de títulos pode ser feito em uma única etapa após os prompts serem executados.
+
+> modelar não é copiar
+
+**O vídeo explica como usar um prompt para gerar um roteiro de 2.000 palavras para um vídeo de 18 minutos, incluindo hooks estratégicos, e depois converter o texto em legenda SRT usando uma ferramenta específica, incentivando os espectadores a comentarem sua localização para receberem o material.**
+
+- O prompt gera um roteiro detalhado de 2.000 palavras para um vídeo de 18 minutos.
+- O roteiro já inclui hooks estratégicos e é afiado para gerar o melhor conteúdo.
+- O usuário pode alterar o tema do prompt para escolher outro tópico gerado anteriormente.
+- Após gerar o roteiro, o usuário deve copiá-lo e colá-lo em um conversor de texto para SRT.
+- O conversor de texto para SRT permite baixar a legenda com um nome personalizado para evitar perda do arquivo.
+
+> ele vai gerar um roteiro detalhado para mim com 2.000 palavras
+
+**O vídeo mostra como importar a legenda SRT gerada no Capcut, usar o conversor de texto para gerar áudio com uma voz específica, e baixar vídeos e imagens gratuitos de bancos como Pixabay e Pexels para usar como fundo, incluindo dicas para ajustar imagens em preto e branco.**
+
+- Após gerar a legenda SRT, ela é importada no Capcut na opção de legendas locais.
+- O conversor de texto e para SRT libera a opção de escolher uma voz para gerar o áudio do vídeo.
+- O usuário pode baixar vídeos e imagens gratuitos de bancos como Pixabay, Pexels ou outros sites encontrados no Google.
+- Para obter imagens em preto e branco, o usuário pode buscar por 'preto e branco' no Google e ajustar se necessário.
+- Se não houver material em preto e branco disponível, o usuário pode ajustar no programa de edição, como no Capcut.
+
+> ele já gerou a legenda para mim
+
+**O vídeo detalha o processo de edição no Capcut: importar imagem sem fundo, adicionar vídeos de fundo, posicionar a imagem principal, ajustar configurações como saturação e contraste para deixar o vídeo em preto e branco, e duplicar áudio para manter o volume consistente até o final.**
+
+- A imagem usada deve ser sem fundo, obtida após remoção via site como remove.bg.
+- Os vídeos de fundo são importados e preenchem a tela até o final do vídeo.
+- A imagem principal (do Napoleon R.) é colocada em cima dos vídeos e arrastada até o final.
+- Para deixar o vídeo em preto e branco, o usuário pode ajustar saturação, contraste, brilho e exposição nos ajustes do Capcut.
+- O áudio pode ser duplicado no Capcut para evitar a necessidade de adicionar outro áudio até o final do vídeo.
+
+> eu posso mexer nos ajustes para poder deixar aí o meu vídeo em preto e branco
+
+**O vídeo conclui com dicas finais de edição: ajustar o posicionamento e tamanho da imagem, editar ajustes como contraste e brilho, adicionar música de fundo do Pixabay ou YouTube Studio, duplicar áudio para manter volume, e gerar legenda automática no Capcut para exportar um vídeo profissional.**
+
+- A imagem pode ser reposicionada e redimensionada no Capcut para ficar mais próxima e bem ajustada.
+- Ajustes de contraste, brilho e outros podem ser aplicados tanto na imagem quanto no vídeo para refinar a aparência.
+- Música de fundo pode ser baixada do Pixabay ou YouTube Studio, com recomendação para usar o YouTube Studio para evitar problemas de direitos autorais.
+- Se a música não durar até o final, o usuário pode copiar e colar (Ctrl+C, Ctrl+V) para estendê-la.
+- No Capcut pago, é possível gerar legenda automática no idioma do vídeo para exportar um vídeo extremamente profissional.
+
+> você já percebeu que o silêncio tem um poder que ninguém entende?
+
+**O palestrante desafia o público a publicar pelo menos dois vídeos por semana por 30 dias para obter resultados, incluindo possível monetização e ganhos de até R$ 10.000 ou mais, citando exemplos de alunos que já faturam mais de R$ 40.000 por mês. Ele pede que quem aceitar o desafio comente 'desafio' ou 'eu topo desafio' para confirmação.**
+
+- Publicar pelo menos dois vídeos por semana por 30 dias pode levar aos primeiros resultados e possível monetização do canal.
+- Um canal desse tipo pode fazer até mais de R$ 10.000, segundo o palestrante.
+- Alunos do palestrante já estão faturando mais de R$ 40.000 por mês com esse modelo.
+- O palestrante pede que quem aceitar o desafio comente 'desafio' ou 'eu topo desafio' nos comentários.
+
+> se você publicar dois vídeos por semana, 30, 40 dias, você vai começar a ter os seus primeiros resultados e pode ser até mesmo que você já monetize o seu canal e comece a fazer dinheiro
+
+---
+
+## 6. 20251025 - Como FAZER SHORTS DARKS PRA GRINGA (+10 MIL POR MÊS) PASSO A PASSO! [bfFNe6fit1
+
+`legendas_video_bfFNe6fit1E`
+
+**O autor conseguiu ganhar mais de R$ 10.000 em outubro de 2025 criando shorts em inglês sem aparecer, direcionados ao público internacional (gringa), que pagam melhor devido ao alcance global do inglês. O RPM (receita por 1.000 visualizações) para shorts no Brasil é em média 15 centavos, enquanto na gringa varia entre 70 e 80 centavos por 1.000 views — quase quatro vezes mais. O primeiro passo para criar esses shorts é usar o Chat GPT para estruturar o roteiro, seguido por geração de imagens via ferramentas como PLEN, áudio com Clip Champ e edição no Capcut.**
+
+- Em outubro de 2025, o autor ganhou mais de R$ 10.000 criando shorts em inglês sem aparecer.
+- Shorts direcionados ao público internacional (gringa) têm RPM entre 70 e 80 centavos por 1.000 visualizações.
+- Shorts no Brasil têm RPM médio de 15 centavos por 1.000 visualizações.
+- O pagamento na gringa é quase quatro vezes maior que no Brasil para shorts.
+- O inglês é uma língua universal, o que amplia o alcance dos vídeos além de falantes nativos ou americanos.
+- O primeiro passo para criar shorts é usar o Chat GPT para montar a estrutura do vídeo.
+- O gerador de imagens PLEN é recomendado para criar as imagens dos shorts.
+- O áudio é gerado com Clip Champ, usando voz em texto do Chat GPT.
+- A edição é feita no Capcut, que é considerado fácil e completo, com opções de acesso pago a baixo custo.
+
+> O pagamento é bem melhor, fica em torno de 70 a 80 centavos por 1000 views, ou seja, quase quatro vezes mais.
+
+**Para criar shorts, após gerar imagens com o Chat GPT e PLEN, o áudio é produzido usando Clip Champ, convertendo texto em fala com vozes como Alan ou Alécio, e aumentando ligeiramente a velocidade para deixar o vídeo mais dinâmico. A edição é feita no Capcut, onde o áudio é importado, espaços silenciosos são removidos com Ctrl+B, e as imagens são sincronizadas com o áudio ajustando sua duração. É essencial que as imagens façam sentido com o áudio para manter a coerência do vídeo.**
+
+- O áudio dos shorts é gerado no Clip Champ usando texto em inglês do Chat GPT.
+- Vozes como Alan e Alécio funcionaram bem para o autor no Clip Champ.
+- Aumentar ligeiramente a velocidade do áudio deixa o vídeo mais dinâmico e prende a atenção.
+- No Capcut, espaços silenciosos no áudio são removidos usando o atalho Ctrl+B.
+- As imagens devem ser ajustadas em duração para sincronizar com o áudio.
+- Cada imagem deve fazer sentido com o áudio correspondente no vídeo.
+
+> Aumenta um pouquinho a velocidade do áudio. Isso deixa o vídeo mais dinâmico e prende mais atenção, sabe?
+
+**O vídeo ensina como criar shorts em inglês para o público gringo usando tradução automática do chat, animações em cada imagem e legendas automáticas em inglês, com o desafio de fazer o primeiro short naquela semana e um convite para assistir outro vídeo sobre postagem correta de shorts.**
+
+- Use o chat para traduzir o texto do inglês para o português e orientar a edição. Após a edição, adicione uma animação em cada imagem para prender a atenção. Use legendas automáticas em inglês selecionando o idioma inglês em texto > legendas automáticas. Adicione um modelo recomendado nas legendas. O desafio é fazer o primeiro short para o público gringo ainda naquela semana. Há outro vídeo na tela que ensina a postar shorts do jeito certo para corrigir problemas.
+
+> faz o seu primeiro short pra gringa
+
+---
+
+## 7. 20251130 - Por Que Seus Shorts Travam em 1.000 Views (e como destravar o algoritmo) [XgrFW
+
+`video_XgrFWGSuQAU`
+
+**O autor explica que o algoritmo do YouTube Shorts funciona em etapas invisíveis chamada de 'bolhas', sendo a primeira uma bolha de teste inicial com 300 a 2.000 pessoas selecionadas. Nesse estágio, o algoritmo mede o hook hate (percentual de pessoas que não deslizam o vídeo nos primeiros 2 segundos) e a retenção (se pelo menos 80% do vídeo foi assistido) para decidir se o conteúdo será divulgado para um público maior.**
+
+- A primeira bolha do algoritmo entrega o vídeo para 300 a 2.000 pessoas bem selecionadas. O hook hate mede quantas dessas pessoas não deslizam o vídeo nos primeiros 2 segundos. A retenção é medida verificando se as pessoas assistiram pelo menos 80% do vídeo. Se o desempenho for ruim nessa bolha, o YouTube não divulga o vídeo para mais pessoas.
+
+> Nos primeiros 30 minutos até 3 horas que seu vídeo foi postado, por exemplo, você fez um vídeo no shorts, aí passou ali entre 30 minutos e até 3 horas, ele vai ser entregue dentro da bolha um, que é uma entrega para mais ou menos 300 a 2.000 pessoas bem selecionadas que tenham a ver com o seu canal.
+
+**O algoritmo do YouTube avalia o desempenho inicial dos Shorts nas primeiras 3 horas, considerando retenção, reassistidas, engajamento (curtidas, compartilhamentos, cliques no perfil) e saídas (swipe down). Se o resultado for bom, o vídeo avança para a 'bolha dois' e é divulgado para públicos semelhantes; se ruim, o vídeo morre precocemente, geralmente entre 200 e 900 views. O criador utiliza um agente de IA treinado com um PDF vazado do Mr. Beast para gerar roteiros otimizados para retenção nos primeiros segundos.**
+
+- O algoritmo analisa retenção, reassistidas, engajamento (curtidas, compartilhamentos, cliques no perfil) e saídas (swipe down) nas primeiras 3 horas de um Short.
+- Se o desempenho inicial for bom, o vídeo avança para a 'bolha dois' e é divulgado para públicos semelhantes aos primeiros 300-2000 espectadores.
+- Se o desempenho inicial for ruim, o vídeo morre o vídeo morre recuperação e geralmente passa a 900 views.
+- O criador usa um agente de IA treinado com um PDF vazado do Mr. Beast para gerar roteiros otimizados para Shorts.
+- O agente de IA adapta o roteiro com base em se o vídeo é Short ou longo e se será narrado por IA.
+
+> Se o resultado for bom, aí você vai pr uma bolha dois, ou seja, você ele começa a divulgar o seu vídeo para pessoas parecidas com essas 300 a 2000 pessoas da bolha um.
+
+**O agente de IA do criador gera roteiros para Shorts, começando com perguntas sobre formato (Short ou longo) e narração por IA, visando prender a atenção nos primeiros 2-4 segundos com base nas estratégias do Mr. Beast. O roteiro inclui prompts para geração de voz (Eleven Labs) e imagens para edição. O algoritmo avança o vídeo por 'bolhas' de audiência crescente (de 10.000 a 200.000+ pessoas) com base em engajamento, retenção em públicos frios e consistência, exigindo temas abrangentes para escalar além de nichos restritos.**
+
+- O agente de IA gera roteiros para Shorts após perguntar se o vídeo é Short ou longo e se será narrado por IA.
+- O roteiro é projetado para prender a atenção nos primeiros 2, 3 ou 4 segundos, baseado nas estratégias do Mr. Beast.
+- O agente fornece prompts para Eleven Labs (voz) e ferramentas de geração de imagem para edição de vídeo.
+- O algoritmo avança o vídeo por 'bolhas' (ex: 10.000 → 30.000 → 50.000 pessoas) com base em engajamento e retenção, incluindo testes em públicos frios.
+- Para escalar além de 200.000 views (bolha três), o vídeo precisa ter tema abrangente, pois temas muito específicos (ex: caminhoneiros com caminhão de seis rodas) limitam o alcance.
+
+> Ele começa me perguntando se meu vídeo é shorts ou longo, porque ele adapta o roteiro com shorts ou longo, né?
+
+**Se o Short tiver bom desempenho nas bolhas anteriores, ele pode avançar para a bolha quatro (escala global), alcançando de 200.000 a 10 milhões de visualizações, começando por países similares ao Brasil e expandindo globalmente, desde que a retenção seja estável em todos os públicos. O criador oferece um minicurso que inclui acesso gratuito ao seu agente de IA treinado com o PDF vazado do Mr. Beast, focado em otimização de SEO (keywords) para viralização, disponibilizado via link na descrição do vídeo.**
+
+- Bolha quatro representa escala global, com alcance de 200.000 a 10 milhões de visualizações, começando por países similares ao Brasil e expandindo para outros com base no desempenho.
+- A retenção precisa ser muito estável em todos os países para o vídeo avançar na bolha quatro, exigindo que o conteúdo seja compreensível globalmente.
+- O criador oferece um minicurso que inclui acesso gratuito ao seu agente de IA treinado com o PDF vazado do Mr. Beast.
+- O agente de IA é focado em otimização de SEO (melhores keywords) para aumentar a descoberta e viralização dos vídeos.
+- O minicurso e o agente são disponibilizados gratuitamente aos inscritos do canal, com link na descrição do vídeo.
+
+> Quando chega no feed global é porque bate pelo menos ali 10 milhões de visualizações.
+
+**O criador descreve três cenários de explosão de Shorts: explosão instantânea (curva vertical, ex: 30 milhões de views, impulsionada por hook absurdo e >85% de retenção), explosão tardia (curva em S, ex: 15 milhões de views, impulsionada por engajamento tardio e comentários) e explosão por relacionamento (crescimento do canal por cliques no perfil). Ele destaca quatro métricas invisíveis: VTR (acima de 65% ideal), HCR (acima de 70% ideal, com exemplo de 120% nos primeiros 2 segundos), e enfatiza que retenção e hook são críticos para o sucesso no algoritmo.**
+
+- Explosão instantânea ocorre com hook absurdo nos primeiros 3-4 segundos e retenção acima de 85%, levando a crescimento rápido (ex: 30 milhões de views, 4.000 de receita, 161.000 inscritos).
+- Explosão tardia segue curva em S, começando com baixo desempenho, mas crescendo após engajamento tardio, comentários e reteste (ex: 15 milhões de views, 133.000 inscritos).
+- Explosão por relacionamento acontece quando muitos clicam no perfil, impulsionando crescimento do canal após os cenários A e B.
+- VTR (View Through Rate) ideal é acima de 65%, medindo a porcentagem de telespectadores que assistiram até o final.
+- HCR (Hook Conversation Rate) ideal é acima de 70%, medindo retenção nos primeiros 2 segundos, com exemplo citado de 120%.
+
+> O ideal seria acima de 65%, que foi eu mostrei para vocês aqui, ó, que o pessoal ficou a mais de 65% aqui.
+
+**Para que um Short do YouTube escale e escape do travamento em 1.000 views, é preciso otimizar métricas como RPR (rewatch percentage) entre 15-25%, CTR do perfil acima de 3% e taxa de inscrição entre 1-2%. Além disso, o vídeo deve começar com um choque visual nos primeiros 0.2 segundos, evitar explicações iniciais, manter ritmo acelerado, usar repetições visuais para criar padrão e finalizar abruptamente para gerar desejo de replay. Erros como tela preta no final, silêncio no início, logos, fala lenta, legendas ruins ou visual muito normal impedem o desempenho.**
+
+- RPR (rewatch percentage) ideal está entre 15 e 25%
+- CTR do perfil deve ficar acima de 3%, ideal entre 3 e 8%
+- Taxa de inscrição desejável é entre 1 e 2% das visualizações
+- Os primeiros 0.2 segundos do Short devem conter um choque visual para prender atenção
+- A mente humana decide se vai assistir o vídeo nos primeiros 0.3 segundos
+- Não se deve explicar o nome ou contexto no início; ir direto ao tema
+- Finalizar o vídeo abruptamente, sem despedidas, gera sensação de 'quero mais'
+- Edição deve ser rápida ou o discurso acelerado se não houver edição
+- Repetições visuais e padrões ajudam a criar fãs do estilo do canal
+- Tela preta no final impede o Short de explodir
+- Silêncio nos primeiros segundos impede o desempenho
+- Começar com logo não é recomendado
+- Falar devagar demais prejudica o Short
+- Legendas ruins ou visual muito normal reduzem o engajamento
+
+> o vídeo com mais visualizações dentro dos seus shorts, você usa ele como referência para replicar e fazer parecido
+
+**O criador afirma que os dados compartilhados sobre métricas de Shorts vêm diretamente do YouTube e são reais, incentivando os espectadores a curtirem o vídeo para atingir a meta de 2.000 likes, o que indicaria aprovação e levaria à produção de mais conteúdos densos. Ele reforça que o sucesso depende do mindset — 'tudo está no mindset, é só querer' — e promove seu minicurso 'Fábrica de Conteúdo Viral com Inteligência Artificial para o YouTube', além de um agente de IA chamado 'Chat EPT' treinado com um PDF vazado do Sr. (provavelmente MrBeast).**
+
+- Os dados sobre métricas de Shorts apresentados são do próprio YouTube e são reais
+- A meta de likes para o vídeo é 2.000
+- Se o vídeo atingir 2.000 likes, o criador produzirá mais vídeos densos semelhantes
+- O criador afirma que 'tudo está no mindset, é só querer' para ganhar dinheiro
+- O minicurso promovido se chama 'Fábrica de Conteúdo Viral com Inteligência Artificial para o YouTube'
+- O agente de IA promovido chama-se 'Chat EPT' e foi treinado com um PDF vazado do Mr. (provavelmente MrBeast)
+
+> Lembra de deixar o seu like. A meta desse vídeo é 2000 likes.
+
+---
+
+## 8. 20251207 - Como Criar um CANAL DARK de FUTEBOL no YouTube... (+R$7.305,00⧸mês) - COPA DO M
+
+`legendas_video_ExXRblkfjAU`
+
+**O vídeo ensina como criar um canal dark de futebol no YouTube usando IA para gerar roteiros, Eleven Labs para narração e imagens/vídeos de torcida para evitar problemas de direitos autorais. O autor compartilha que seu canal do São Paulo já rendeu mais de R$ 20.000 em três meses e considera o formato escalável e lucrativo.**
+
+- O canal dark de futebol do autor já rendeu mais de R$ 20.000 em pouco mais de 3 meses.
+- O formato de canal dark de futebol é focado em notícias de um time específico.
+- O autor usa o Google para pesquisar notícias recentes do time escolhido (ex: Corinthians).
+- O Chat GPT é utilizado para transformar notícias em roteiros de vídeo para vídeos.
+- O Eleven Labs para gerar a narração do vídeo.
+- A ferramenta Eleven Labs é usada para gerar a voz do vídeo.
+- Vídeos de fundo devem ser apenas de torcida para evitar reivindicações de direitos autorais.
+- Trechos de vídeo de fundo devem ter entre 5 a 10 segundos.
+- Imagens de jogadores podem ser salvas e usadas como conteúdo de fundo no vídeo.
+
+> eu mostrei esse meu canal dark aqui para vocês, que foi um canal dark que já botou muito dinheiro no meu bolso
+
+**O vídeo detalha o processo de edição no Capcut para um canal dark de futebol, incluindo a remoção de silêncios, uso de animações em imagens e inserção de vídeos curtos de gols (5-10 segundos) gravados pela torcida para evitar problemas de direitos autorais. Também aborda a captação e uso de imagens de jogadores como conteúdo de fundo.**
+
+- Cortar os silêncios do vídeo é importante para evitar que ele fique lento e difícil de viralizar.
+- Vídeos de fundo devem ter entre 5 a 10 segundos para evitar perda de monetização por direitos autorais.
+- Imagens de jogadores podem ser usadas como conteúdo de fundo no vídeo.
+- Animações aplicadas às imagens deixam o vídeo mais dinâmico e aumentam as chances de viralização.
+- As melhores animações no Capcut são do Capcut Pro, mas há opções gratuitas disponíveis.
+
+> Não pode colocar esses trechos aqui do YouTube muito grande, senão teu canal tem perigo de perder a monetização
+
+**O vídeo mostra a edição final no Capcut, incluindo a importação de mídia, remoção de silêncios, inserção de narração do Eleven Labs, uso de vídeos de gols da torcida (5-10 segundos), imagens de jogadores e aplicação de animações para deixar o conteúdo mais dinâmico. Destaca a importância de evitar trechos longos de transmissões oficiais para não perder a monetização.**
+
+- A edição no Capcut começa com a importação de imagens e vídeos gravados pela torcida.
+- Remover silêncios é uma estratégia de viralização que torna o vídeo menos lento.
+- Vídeos de fundo devem ser curtos (5 a 10 segundos) e gravados pela torcida para evitar problemas de direitos autorais.
+- Imagens de jogadores são usadas como conteúdo de fundo e podem ser redimensionadas e animadas.
+- Aplicar animações em todas as imagens deixa o vídeo mais dinâmico e aumenta o potencial de viralização.
+
+> Vamos cortar aqui todos esses pequenos espaços em silêncio
+
+**O apresentador oferece acesso gratuito ao Capcut Pro, videoaulas e um grupo de networking com mais de 4.000 criadores. Ele demonstra como editar um vídeo sobre desfalques do Corinthians (Rodrigo Garro e Yuri Alberto fora por lesão) adicionando animações em imagens, logo do time e música de fundo do Pixa Bay. Um vídeo com 107.000 visualizações rendeu quase R$ 200, com RPM de quase R$ 11, e ele promove o treinamento 'Destravando Iceberg' para monetização no YouTube e TikTok sem aparecer.**
+
+- Rodrigo Garro sofreu um estiramento muscular no solear na região da panturrilha. Yuri Alberto está lidando com um edema no púbis e uma sobrecarga na musculatura adutora. Ambos estão no departamento médico e fora dos jogos. Um vídeo com 107.000 visualizações rendeu quase R$ 200. O RPM desse vídeo foi quase R$ 11. O Capcut Pro custa mais de R$ 60 por mês. O treinamento 'Destravando Iceberg' oferece acesso vitalício por menos de R$ 50. O grupo de networking tem mais de 4.000 criadores de conteúdo.
+
+> O Garro sofreu um estiramento muscular no solear ali na região da panturrilha. Já o Yuri Alberto tá lidando com um edema no púbis [música] e também uma sobrecarga na musculatura adutora.
+
+---
+
+## 9. 20260107 - Como fazer Shorts que SEMPRE Viralizam (com provas) [iPqnzsbBuJ4]
+
+`video_iPqnzsbBuJ4`
+
+**O palestrante explica que o algoritmo do YouTube Shorts não é aleatório e prioriza conteúdo que prende a atenção e mantém alta retenção, tornando a viralização quase garantida quando esses critérios são atendidos. Ele enfatiza que o primeiro passo para criar shorts virais é definir um tópico intrigante, que depende de entender a audiência e analisar canais de referência, pois vídeos fora do tópico do público levam a queda de views, enquanto voltar ao tópico certo aumenta drasticamente o engajamento.**
+
+- O algoritmo do YouTube Shorts não é aleatório e não depende de sorte; seu objetivo é mostrar o melhor e mais envolvente conteúdo.
+- Shorts que prendem a atenção e mantêm alta retenção têm quase garantia de viralização.
+- Um tópico intrigante é a base de qualquer shorts viral e é o primeiro passo essencial para o sucesso.
+- Entender a audiência e analisar canais de referência é necessário para definir um tópico que ressoe com o público.
+- Vídeos fora do tópico do público-alvo causam queda drástica de views, enquanto voltar ao tópico certo aumenta drasticamente as views.
+
+> Um tópico intrigante é a base de literalmente qualquer shorts viral.
+
+**O palestrante destaca que estrutura e edição são fundamentais para criar shorts que gerem views diariamente, introduzindo o sistema GPC (Gancho, Progresso, Clímax) como método para alcançar isso. O gancho (primeiros 5 segundos) deve prender a atenção e gerar dúvidas, o progresso deve cumprir a promessa do gancho de forma coerente, e o clímax deve entregar exatamente o que foi prometido, usando o exemplo de um vídeo com mais de 92 milhões de views sobre uma guerra de bolas de neve no deserto para ilustrar como cada elemento contribui para o engajamento e retenção.**
+
+- Estrutura e edição são essenciais para criar conteúdos que gerem views todos os dias.
+- O sistema GPC (Gancho, Progresso, Clímax) é um método simples para criar shorts com potencial de viralização.
+- O gancho são os primeiros 5 segundos do vídeo e deve introduzir o tópico enquanto deixa o espectador cheio de dúvidas.
+- O progresso no vídeo deve cumprir exatamente a expectativa criada no gancho, mostrando a jornada prometida.
+- O clímax é o momento em que o tópico é cumprido e o espectador recebe exatamente o que veio buscar, encerrando o vídeo perfeitamente.
+
+> O gancho são os primeiros 5 segundos do seu vídeo e essa é disparada uma das partes mais importantes para você prestar atenção.
+
+**O autor afirma que shorts bem-sucedidos têm edição dinâmica, tópico bem definido e narrativa que prende a atenção. Ele destaca que a frequência de postagem não é crucial, mas o horário sim, variando por canal. Para encontrar o melhor horário, recomenda analisar o gráfico de atividade do público no YouTube Studio, identificando quando o público está mais ativo (indicado por cor roxa mais forte).**
+
+- Shorts bem-sucedidos possuem edição dinâmica, tópico bem definido e narrativa que prende a atenção até o último segundo.
+- A frequência de postagem de shorts não é o fator determinante para o sucesso; o horário de postagem é mais importante.
+- O melhor horário para postar shorts varia de canal para canal e deve ser identificado pelo gráfico de atividade do público no YouTube Studio.
+- No YouTube Studio, o horário de maior atividade do público é indicado pela intensidade da cor roxa no gráfico de público.
+- Postar shorts no horário em que o público está mais ativo aumenta a chance de bom desempenho.
+
+> Esse horário muda de canal para canal. No meu caso, por volta das 6 horas, era o melhor horário para apostar, porque era quando o meu público estava mais ativo no YouTube.
+
+---
+
+## 10. 20260122 - Como Criar um Canal no YouTube do jeito certo em 2026 (Passo a Passo) [TT99FAbc
+
+`legendas_video_TT99FAbcxME`
+
+**O primeiro passo para criar um canal no YouTube é criar uma conta no Google, optando por 'conta para trabalho ou empresa' durante o cadastro. Em seguida, criar o canal no YouTube, escolher um nome e um identificador único (arroba), com dica de usar uma arroba simples e fácil de lembrar. Depois, definir uma foto de perfil redonda que será a marca do canal e acessar o YouTube Studio para continuar a configuração.**
+
+- Criar uma conta no Google é o primeiro passo, recomendando a opção 'conta para trabalho ou empresa'.
+- Após criar a conta, o próximo passo é criar um canal no YouTube escolhendo nome e arroba (identificador único).
+- A arroba deve ser simples, fácil de digitar e de lembrar, evitando nomes complicados ou semelhantes a outros canais.
+- Definir uma foto de perfil no formato redondo, que virará a marca do canal.
+- Acessar o YouTube Studio pela foto de perfil para continuar as configurações do canal.
+
+> Primeiramente entra no site do YouTube e aqui em cima, no canto direito, clica em fazer login, que vai abrir essa aba.
+
+**Para configurar um canal no YouTube corretamente, é necessário verificar a conta via telefone, documento ou vídeo para desbloquear recursos como thumbnails e vídeos longos. Em seguida, ajustar moderação de comentários para pelo menos básico, declarar se o conteúdo é ou não infantil (marcando como não se não for), ativar clipes e manter duas caixinhas padrão marcadas para melhorar alcance e qualidade. Por fim, personalizar o canal com cuidado: mudar nome e arroba no máximo duas vezes, usar e-mail empresarial para contato e evitar alterações frequentes que possam afetar o algoritmo.**
+
+- Verificar a conta no YouTube é necessário para desbloquear funções como thumbnails, vídeos acima de 15 minutos, lives e shorts.
+- A moderação de comentários deve estar em pelo menos modo básico ou rigorosa para evitar engajamento negativo.
+- É obrigatório declarar se os vídeos são feitos para público infantil; marcar como não se não forem, pois erros podem levar a banimento.
+- A opção de clipes deve ficar ativada para ajudar na divulgação dos vídeos.
+- Duas caixinhas padrão marcadas nas configurações avançadas não devem ser desmarcadas, pois melhoram qualidade e alcance.
+- O nome e o arroba do canal podem ser alterados, mas no máximo duas vezes; mudar frequentemente pode bugar o algoritmo.
+- Se o canal já tem inscritos, não se deve alterar o nome ou arroba.
+- O e-mail de contato no YouTube deve ser um e-mail empresarial dedicado, não o pessoal, pois é público e usado por marcas para patrocínio.
+
+> Deixa no mínimo em básico ou rigorosa. Isso afasta gente mal intencionada e evita que estraguem o engajamento dos seus vídeos.
+
+**A descrição do canal deve ser clara, com até 80 palavras, incluindo palavras-chave do nicho para ajudar o YouTube a entender o conteúdo. O banner deve ser simples e comunicativo, evitando modismos excessivos. A biblioteca de áudio do YouTube oferece músicas livres de direitos autorais, essenciais para deixar os vídeos mais dinâmicos. Para monetização, vídeos longos exigem 3.000 horas de visualização em 1 ano, enquanto shorts requerem 3 milhões de views em 90 dias. É recomendado ativar notificações para quando os requisitos de monetização forem atingidos.**
+
+- A descrição do canal deve ter no máximo 80 palavras e incluir palavras-chave do nicho.
+- O banner deve ser simples e comunicar claramente o tema do canal.
+- A biblioteca de áudio do YouTube fornece músicas sem direitos autorais para uso em vídeos.
+- Para monetizar vídeos longos, são necessárias 3.000 horas de visualização em 1 ano.
+- Para monetizar shorts, são necessárias 3 milhões de visualizações em 90 dias.
+- Ativar a opção de receber notificações quando o requisito de monetização for atingido é recomendado.
+
+> Seus vídeos precisam de músicas para ficarem mais dinâmicos.
+
+---
+
+## 11. 20260301 - Como Eu Fiz R$53.380,32 com um Canal de Shorts do Zero (Aula Prática) [Ny17CcmY
+
+`video_Ny17CcmYq6o`
+
+**O autor descreve como criou um canal de YouTube Shorts focado em cortes de podcasts, gerando mais de R$ 50.000 em menos de 8 meses. Ele explica o processo de escolha de nicho, busca por podcasts com conteúdo não reivindicado, identificação de trechos virais com base em momentos de alto engajamento e edição original para evitar problemas com o algoritmo de reutilização de conteúdo.**
+
+- O canal foi iniciado em 27 de janeiro de 2026. A primeira receita foi obtida em 16 de fevereiro de 2026. O canal foi monetizado em 21 dias. O método envolve pesquisar nichos como ciência, finanças ou policial e identificar podcasts com trechos de alto engajamento. Os cortes devem ser editados originalmente para evitar serem classificados como conteúdo reutilizado pelo YouTube.
+
+> Comecei esse canal aqui em janeiro, comecei no dia 27 de janeiro, foi o primeiro post que eu fiz aqui nesse canal. E agora em fevereiro, no dia 16, eu consegui a primeira receita com esse canal.
+
+**O autor detalha o processo de edição de cortes de podcasts no Capcut para criar Shorts originais, incluindo remoção de silêncios, ajuste de formato para 9:16, aplicação de filtros, legendas posicionadas perto do rosto, adição de música e elementos visuais como imagens ou zoom manual para evitar detecção de conteúdo reutilizado pelo algoritmo do YouTube.**
+
+- O corte é editado no Capcut com remoção de silêncios usando as teclas S e Q. O formato é alterado para 9:16 (Shorts). A escala de vídeo é definida em 316. Legendas são posicionadas com valor como -300 para ficar perto do rosto. Música e filtros são adicionados para tornar o conteúdo original. Elementos como imagens ou vídeos relacionados ao tema são sobrepostos na linha do tempo.
+
+> Vou remover todos esses silêncios que tem aqui no corte. Eu venho aqui, aperto S e Q e vou removendo todos esses silêncios aqui.
+
+**O autor explica como enriquecer cortes de podcasts no Capcut com máscaras, espelhamento de imagem, legendas personalizadas, música, filtros e elementos visuais adicionais (como imagens ou vídeos relacionados ao tema) para garantir que o conteúdo seja considerado original pelo algoritmo do YouTube e evitar problemas de reutilização, permitindo monetização mesmo em plataformas como TikTok e Facebook.**
+
+- Máscara circular é aplicada e arrastada para cima para destacar o rosto. Legendas são geradas e posicionadas com valor como -300 para ficar perto do rosto. Música é adicionada com volume reduzido. Filtros e elementos visuais (imagens, vídeos) são sobrepostos na linha do tempo. Zoom ou movimento de câmera pode ser feito manualmente com quadrochave. Esses elementos tornam o vídeo diferente de outros cortes e evitam detecção como conteúdo reutilizado.
+
+> E aqui nessa setinha aqui para cima, eu arrasto para cima. Eu vou aumentar aqui um pouco o tamanho.
+
+---
+
+## 12. 20260502 - O ALGORITMO DO YOUTUBE MUDOU E CANAIS PEQUENOS VÃO EXPLODIR [Se fizerem isso] [
+
+`legendas_video_QiVq6Ogjpec`
+
+**O YouTube mudou seu algoritmo em 2026, favorecendo canais pequenos que ativam os sinais corretos. O processo de distribuição ocorre em fases de teste: primeiro para inscritos e fiéis, depois para públicos semelhantes, e finalmente para amplo alcance se o vídeo passar nos testes de cliques, retenção e interação. O apresentador lançou o treinamento 'Fórmula YouTube 2026' com estratégias atualizadas para crescer na plataforma.**
+
+- Em 2026, canais pequenos estão aparecendo na home de milhões de pessoas como nunca antes. O YouTube testa novos vídeos em fases: primeiro mostra para inscritos e espectadores fiéis. Se o vídeo performa bem (cliques, tempo de visualização, interação), o teste expande para públicos que assistem conteúdo semelhante. Se continuar performando bem, avança para uma terceira fase com alcance maior. O efeito bola de neve começa quando o vídeo passa nos testes, disparando visualizações e inscritos. O apresentador lançou o treinamento 'Fórmula YouTube 2026' com novas estratégias, pesquisas e experimentos.
+
+> Primeiro ele mostra o teu vídeo pros seus inscritos e pros seus espectadores mais fiéis. Normal, essa é a primeira fase do teste, ok?
+
+**Mais de 98% dos vídeos no YouTube nunca passam da terceira fase de teste do algoritmo, ficando travados na segunda fase. O apresentador explica seis sinais que impulsionam o algoritmo, começando com a 'onda de momento': quando um vídeo performa acima da média do canal, o YouTube dá prioridade temporária aos próximos uploads, testando-os com mais generosidade. Aproveitar essa onda postando rapidamente vídeos relacionados (mesmo tema ou subtemas) cria um ciclo virtuoso de crescimento.**
+
+- Mais de 98% dos vídeos no YouTube nunca passam da terceira fase. A maioria morre na segunda fase, impedindo alcance maior. O primeiro sinal é a 'onda de momento': quando um vídeo performa acima da média do canal (mais views, retenção, engajamento), o YouTube dá prioridade temporária ao canal. Isso faz com que o próximo upload seja testado com mais generosidade, alcançando mais gente logo de cara. Se o segundo vídeo também performar bem, a onda de momento cresce, criando um ciclo virtuoso. O inverso também pode ocorrer: vídeos ruins reduzem o alcance gradualmente. Não aproveitar a onda positiva (parar por semanas) faz com que a oportunidade seja perdida quando ela passa.
+
+> Mais de 98% dos vídeos no YouTube nunca passam da terceira fase. A maioria morre ali, você nunca alcançar um público maior, entende? você não consegue ter mais resultado porque você fica ali na segunda fase.
+
+**O YouTube agora conecta todos os formatos (vídeos longos, shorts, posts da comunidade), criando um circuito interno de tráfego onde interações em um formato impulsionam o alcance em outros. O terceiro sinal importante é o encadeamento de sessão: o YouTube tenta prever o próximo vídeo que o espectador vai assistir e cria sequências lógicas de consumo. O objetivo do criador é fazer seu vídeo entrar nessa cadeia recomendada, usando a 'técnica da sequência' para estar na sequência de outros vídeos relevantes.**
+
+- O YouTube conecta todos os formatos: se alguém assiste um short teu, o algoritmo recomenda seus vídeos longos; se vota numa enquete da comunidade, associa essa pessoa ao teu canal e recomenda seus vídeos. Isso cria um 'circuito interno de tráfego'. O terceiro sinal é o encadeamento de sessão: o YouTube analisa o comportamento do espectador para prever qual vídeo aquela pessoa vai querer assistir em seguida, criando uma sequência lógica de consumo. O objetivo do criador é fazer seu vídeo entrar nessa cadeia de vídeos recomendados (técnica da sequência). Cada interação em formatos menores (shorts, posts comunitários, enquetes) alimenta o algoritmo e direciona mais pessoas pro conteúdo principal.
+
+> Se uma pessoa assiste um short teu, o algoritmo entende que ela tem interesse no teu conteúdo e começa a recomendar os teus vídeos longos para ela também, para essa pessoa também.
+
+**O algoritmo do YouTube sugere vídeos de canais pequenos ao lado de canais grandes quando o conteúdo é uma continuação natural do que o usuário acabou de assistir. Criadores podem identificar quais canais sua audiência assiste via YouTube Studio > Analytics > Público e alinhar seus próximos vídeos como continuação desse conteúdo. Postar com timing estratégico — especialmente 30 a 60 minutos antes do horário de pico da audiência — aumenta as chances de o algoritmo testar e expandir o alcance do vídeo, já que as primeiras duas horas são críticas para o desempenho inicial.**
+
+- O algoritmo do YouTube testa vídeos de canais pequenos como continuação natural de vídeos de canais grandes do mesmo nicho.
+- Se o usuário clica e assiste, o algoritmo passa a parear com mais frequência os vídeos do canal pequeno com os do canal grande.
+- Criadores podem verificar quais canais sua audiência assiste em YouTube Studio > Analytics > Público, nas sessões abaixo.
+- Alinhar o próximo vídeo como continuação natural do conteúdo que a audiência consome aumenta as chances de aparecer nas recomendações.
+- Postar entre 30 e 60 minutos antes do horário de pico da audiência maximiza o engajamento inicial e os sinais que o algoritmo usa para decidir o alcance.
+- As primeiras duas horas após a publicação são as mais críticas para o algoritmo decidir se vai expandir o alcance do vídeo.
+
+> Se o teu conteúdo faz sentido como continuação natural daquele que a pessoa acabou de ver, o algoritmo vai testar o teu vídeo ali.
+
+**YouTube agora agrupa criadores por assunto para recomendar vídeos, então manter autoridade temática em um pilar central aumenta as chances de ser recomendado para o público certo. Além disso, o algoritmo passou a medir a satisfação real do espectador por meio de pesquisas diretas, comportamento pós-vídeo (se o usuário continua assistindo ou sai) e sentimento dos comentários, priorizando conteúdo que resolve problemas e gera feedback positivo sobre material polêmico ou de baixo valor.**
+
+- YouTube agrupa criadores por assunto para determinar a quem recomendar os vídeos.
+- Canais com foco em um tema central são vistos como referência e recomendados automaticamente para quem assiste conteúdo semelhante.
+- Para construir autoridade temática, escolher um pilar de conteúdo e abordá-lo de vários ângulos com vídeos consistentes ao longo do tempo.
+- O YouTube mede a satisfação do espectador de três formas: pesquisas diretas, comportamento pós-vídeo (continuidade na plataforma) e sentimento dos comentários.
+- Comentários positivos, construtivos e de agradecimento impulsionam a distribuição; comentários negativos, mesmo com alta interação, fazem o algoritmo frear o alcance.
+- Conteúdo que ajuda, ensina, resolve problemas e deixa o espectador satisfeito é favorecido; conteúdo polêmico de propósito agora prejudica o desempenho.
+
+> O YouTube passou a medir a satisfação real e ele faz isso de três formas.
+
+**A combinação de sinais — timing estratégico, autoridade temática, satisfação do espectador, aproveitamento de tendências e posicionamento na sequência de canais grandes — permite que canais pequenos cresçam de forma sustentável em 2026, já que o YouTube prioriza agora a satisfação por vídeo sobre o watch time acumulado, igualando as oportunidades entre canais de diferentes tamanhos. O treinamento Fórmula YouTube 2026 foi lançado como recurso atualizado para aplicar essas estratégias.**
+
+- Usar shorts e comunidades para redirecionar audiência, alinhar vídeos na sequência de sessão de criadores grandes e postar no timing certo aumenta as chances de crescimento.
+- Construir autoridade temática em um pilar central e entregar satisfação real por vídeo permite que canais pequenos (ex: 1.000 inscritos) competam com canais grandes (ex: 1 milhão de inscritos).
+- O YouTube agora valoriza a satisfação por vídeo sobre o watch time acumulado, tornando a competição mais justa para canais pequenos.
+- A plataforma está ativamente empurrando canais pequenos para diversificar as recomendações e descobrir novos criadores.
+- O treinamento Fórmula YouTube 2026 foi criado para ensinar as estratégias modernas de crescimento em 2026 e está disponível com preço de lançamento.
+
+> Um canal com 1000 inscritos que entrega satisfação real pode competir de igual para igual com um canal de 1 milhão.
+
+---
+
+## 13. 20260527 - COMO CRIAR UM CANAL NO YOUTUBE SEM MOSTRAR O ROSTO E FATURAR COM ELE [passo a p
+
+`video_eSKfVtplQDk`
+
+**Canais do YouTube sem mostrar o rosto podem faturar significativamente, com exemplos como o Kudsgessag (23+ milhões de inscritos) e Bright sideide (44 milhões de inscritos). Em 2026, com ferramentas de IA acessíveis, qualquer pessoa pode criar esse tipo de canal com baixo custo. O YouTube tem mais de 2,5 bilhões de usuários ativos mensais e quase 70 milhões de criadores, mas apenas 3 milhões são monetizados. Canais sem rosto representam mais de 40% dos 1.000 maiores canais da plataforma, indicando que não é um nicho marginal. O Creator Economy Global vale mais de 250 bilhões de dólares em 2026, e no Brasil o YouTube contribui com mais de R$ 6 bilhões para o PIB e sustenta mais de R$ 2.000 empregos. O passo mais importante é escolher o nicho certo, pois a maioria dos fracassos em canais sem rosto ocorre por escolha de nicho com CPM baixo ou alta concorrência.**
+
+- Kudsgessag tem mais de 23 milhões de inscritos
+- Bright sideide tem 44 milhões de inscritos
+- Low F Girl fatura entre 20 e 45.000 por mês com música de fundo e animação na tela
+- Em 2026, qualquer pessoa pode criar um canal sem rosto gastando quase nada graças às ferramentas de IA disponíveis
+- O YouTube tem mais de 2,5 bilhões de usuários ativos por mês
+- Há quase 70 milhões de criadores na plataforma YouTube
+- Apenas 3 milhões dos 70 milhões de criadores estão monetizados
+- Canais sem rosto representam mais de 40% dos 1.000 maiores canais do YouTube
+- O YouTube já pagou mais de 70 bilhões de dólares aos criadores desde o lançamento da monetização
+- O Creator Economy Global vale mais de 250 bilhões de dólares em 2026
+- No Brasil, o YouTube contribui com mais de R$ 6 bilhões para o PIB
+- O YouTube sustenta mais de R$ 2.000 empregos no Brasil
+- Escolher o nicho certo é o passo mais importante para criar um canal sem rosto
+- A maioria dos fracassos em canais sem rosto ocorre por escolha de nicho com CPM baixo ou alta concorrência
+
+> O YouTube tem mais de 2,5 bilhões de usuários ativos por mês.
+
+**Escolher um nicho lucrativo não basta; é necessário que ele tenha alta demanda, seja compatível com formato sem rosto (narração, imagens, edição) e ofereça oportunidades de monetização além do AdSense, como afiliados e patrocínios. A estratégia de 'nichar dentro do nicho' é recomendada — por exemplo, focar em 'investimentos para iniciantes' ou 'ferramentas de IA para pequenos negócios' — pois aumenta a especificidade e ajuda o algoritmo a recomendar o conteúdo ao público certo. O criador compartilha que seus canais de curiosidade (como vida na neve, fundo do mar, criaturas pré-históricas) funcionam bem, especialmente em conteúdo em inglês ou espanhol. Para a identidade do canal sem rosto, é essencial ter nome, logo, banner e paleta de cores que comuniquem o valor entregue, evitando nomes pessoais para facilitar futura venda e manter a vantagem do anonimato.**
+
+- O nicho deve combinar três coisas: demanda alta, formato compatível com canal sem rosto e monetização além do AdSense
+- Formato compatível com canal sem rosto significa que funciona com narração, imagens e edição, sem necessidade de câmera
+- Monetização além do AdSense inclui produtos, afiliados e patrocínio no nicho
+- A dica é 'nichar dentro do nicho' — evitar canais genéricos e focar em subnichos específicos
+- Exemplos de nichos específicos: investimentos para iniciantes, ferramentas de IA para pequenos negócios
+- Quanto mais específico o nicho, mais fácil é crescer porque o algoritmo entende exatamente para quem recomendar
+- O criador tem sucesso com canais de curiosidade, como 'como é viver na neve', 'fundo do mar', 'criaturas abissis', 'pré-histórias' e 'homem das cavernas'
+- Conteúdo de curiosidade em inglês ou espanhol funciona especialmente bem
+- A identidade do canal sem rosto inclui nome, logo, banner e paleta de cores
+- O nome do canal não deve ser pessoal para não eliminar a vantagem do anonimato e facilitar futura venda
+- O nome deve comunicar o que o canal entrega (ex.: profissional para finanças)
+- A logo pode ser um ícone simples feito no Canva (grátis)
+- O banner precisa ter a promessa do canal
+
+> A dica que eu vou te dar, presta atenção, é você nichar dentro do nicho.
+
+**O processo de criação de um canal no YouTube sem mostrar o rosto pode ser concluído em menos de uma hora para a identidade visual, e a produção de conteúdo pode levar de duas a quatro horas usando ferramentas de IA como Maá, Chat GPT, Cloud ou Tubonx para roteiros. A narração pode ser feita com vozes naturais de ferramentas como Level Apps, e a edição pode ser realizada com Capcut ou The Script, usando geradores de vídeo de IA em vez de imagens de bancos gratuitos, especialmente para conteúdo ficcional.**
+
+- A identidade visual do canal (banner/capa) pode ser criada em menos de uma hora.
+- A produção de conteúdo (vídeo) leva de duas a quatro horas usando ferramentas de IA disponíveis em 2026.
+- Ferramentas como Maá, Chat GPT, Cloud ou Tubonx podem ser usadas para criar o roteiro do vídeo.
+- A narração pode ser feita com vozes extremamente naturais em português, inglês ou outros idiomas usando ferramentas como Level Apps.
+- A edição pode ser feita com Capcut (grátis) ou The Script, que permite editar vídeo como texto.
+- A pessoa usa 100% geradores de vídeo de IA (não imagens de bancos gratuitos) para montar o vídeo final, especialmente para narrativas ficcionais.
+
+> Em 2026, com as ferramentas de A disponíveis, uma pessoa sozinha consegue produzir um vídeo de qualidade profissional em duas a 4 horas.
+
+**A galera prioriza a história e a imersão em vez de erros de continuidade nos vídeos, como confundir uma pá com um machado na neve, e não comenta mais tais falhas. A narração pode ser combinada com música feita no Suno ou gratuita do YouTube, e legendas automáticas são essenciais para engajamento. A plataforma Tubion oferece geração de áudio com vozes naturais, criação de roteiros, detecção de temas em alta e cortes inteligentes para shorts e vídeos verticais, incluindo enquadramento automático para formato 9:16, algo que o Opus Clip não faz.**
+
+- O público não se importa com erros de continuidade nos vídeos, como confundir uma pá com um machado na neve, desde que a história seja envolvente.
+- Legendas automáticas são essenciais para o engajamento no YouTube em 2026.
+- A plataforma Tubion oferece geração de áudio com vozes super naturais, criação de roteiros, detecção de vídeos outliers para identificar temas bombantes e ferramenta de cortes inteligente para shorts ou vídeos verticais.
+- O Tubion faz enquadramento inteligente para formato vertical (9:16), algo que o Opus Clip não realiza.
+- A música pode ser criada com o Suno ou usada gratuitamente do YouTube.
+
+> Tuonic faz, cara. Então, achei sensacional. Ou seja, ele pega um vídeo horizontal e reenquadra automaticamente pro 916, né? Focando só no que importa.
+
+**Canais sem texto na capa têm maior CTR, conforme pesquisa de janeiro com 50.000 canais, e a capa deve comunicar uma emoção relacionada ao vídeo através de personagens, animais ou ações. A descrição deve ter palavras-chave nos primeiros 200 caracteres, e a retenção é tão importante quanto o CTR, exigindo ganchos a cada 30 ou 60 segundos no roteiro para manter o espectador preso, com o pagamento principal (payoff) entregue no final. Para monetização, o YouTube exige 1.000 inscritos e 4.000 horas de exibição ou 10 milhões de visualizações de shorts em 90 dias, com RPM variando de 3 a 20, podendo ultrapassar 20 em nichos como finanças.**
+
+- Pesquisa de janeiro com 50.000 canais mostrou que canais sem texto na capa têm maior CTR do que o normal.
+- A capa deve comunicar uma emoção relacionada ao vídeo, usando personagens, animais ou ações, já que o criador não aparece.
+- A descrição do vídeo deve ter as palavras-chave certas nos primeiros 200 caracteres.
+- A retenção é tão importante quanto o CTR, e o roteiro precisa de ganchos a cada 30 ou 60 segundos para manter o espectador preso.
+- O YouTube exige 1.000 inscritos e 4.000 horas de exibição nos últimos 12 meses ou 10 milhões de visualizações de shorts em 90 dias para monetização.
+- O RPM (receita por 1000 visualizações) varia de 3 a 20, podendo ultrapassar 20 em nichos como finanças.
+
+> Fizeram uma pesquisa agora em janeiro desse ano com 50.000 canais e provaram que canais sem texto na capa, se não me falha a memória, tquses, mais CTR do que o normal.
+
+**Canais bem executados podem faturar entre 500 e 5.000 por mês nos primeiros 12 a 18 meses, com alguns chegando a $8.000 mensais, e a diversificação de receitas (Afiliados, patrocínios, produtos digitais, YouTube Shop) é recomendada para escalar. O modelo sem rosto permite criar múltiplos canais simultaneamente, com criadores gerenciando mais de 20 canais e faturando acima de $10.000 mensais no total, usando sistemas de IA e automação para evitar aumento proporcional de trabalho, incluindo versão em diferentes idiomas para ganhar AdSense de vários países.**
+
+- Canais bem executados chegam a faturar entre 500 e 5.000 por mês nos primeiros 12 a 18 meses.
+- Um canal pode faturar $8.000 por mês, enquanto outros faturam entre $3.000 e $5.000.
+- Canais menores com 1.000 a 10.000 inscritos podem faturar em média $1.000 por mês quando combinam AdSense com afiliados.
+- Criadores podem gerenciar mais de 20 canais simultaneamente, faturando acima de $10.000 por mês no total.
+- O processo de produção com IA e automação permite escalar sem trabalhar cinco vezes mais, delegando tarefas e focando em estratégia.
+- Um canal pode ser versionado em diferentes idiomas para gerar AdSense de países diferentes.
+
+> Se um canal te gera $.000 por mês, cinco canais te geram 10.000. É isso.
+
+**O palestrante afirma que a maioria das pessoas desiste de criar um canal no YouTube sem mostrar o rosto nos primeiros três meses devido à falta de método, não por ineficácia do modelo. Ele apresenta o treinamento Fórmula YouTube 2026 como um método completo e atualizado para construir um canal como negócio, com ou sem rosto, incluindo módulo para canais dark, e enfatiza que o sucesso depende de seguir um método comprovado, já que 40% dos maiores canais do YouTube não mostram rosto.**
+
+- A maioria das pessoas que tenta criar um canal sem rosto desiste nos primeiros três meses.
+- A desistência ocorre por falta de método, não porque o modelo não funciona.
+- O treinamento Fórmula YouTube 2026 é apresentado como o mais completo e atualizado para construir um canal no YouTube como negócio, com ou sem rosto.
+- O treinamento inclui um módulo completo para canais dark (sem rosto).
+- 40% dos maiores canais do YouTube não mostram rosto ou têm ninguém apresentando.
+- As ferramentas tornam a produção acessível para qualquer pessoa com computador e internet.
+- Quem começar agora estará dois passos à frente de quem começar daqui a seis meses devido ao aumento da competição.
+
+> 40% dos maiores canais do YouTube não tem rosto, tem ninguém apresentando.
+
+---
+
+## 14. 20260709 - Como Clonei com IA um Canal Dark de Música Milionário ｜ Curso Completo [2j8cdiz
+
+`video_2j8cdizicWY`
+
+**O palestrante apresenta exemplos de canais dark de música com alto desempenho usando uma estratégia específica, rejeitando as estimativas baixas do Social Blade e afirmando que o RPM real do nicho é de R$ 100. Ele explica que a receita pode ser calculada multiplicando RPM pelo número de visualizações, exemplificando que 10.000 views geram R$ 1.000, e detalha os três pilares do sucesso: subversão de propriedade intelectual, consumo passivo e autoclonagem visual nas thumbnails.**
+
+- Um canal com 14.000 inscritos publicou apenas 53 vídeos.
+- Outro canal gerou mais de 278.000 visualizações em 7 dias com apenas 15 vídeos.
+- Um terceiro canal gera mais de 700.000 visualizações por semana usando a mesma estratégia ensinada.
+- Um canal com 33.000 inscritos (fechado há dois meses) já tem mais de 3 milhões de visualizações.
+- O Social Blade estima ganhos de R$ 600/mês para esses canais, mas o palestrante afirma que isso está errado.
+- O RPM real do nicho de música lounge de jazz é de R$ 100, não R$ 10 ou R$ 20.
+- A receita é calculada multiplicando RPM pelo número de visualizações: 10.000 views = R$ 1.000, 100.000 views = R$ 10.000.
+- Os três pilares do sucesso são: subversão de propriedade intelectual, consumo passivo e autoclonagem visual.
+
+> O nicho de música lounge de jazz e esse estilo tem um RPM médio de R$ 100 e não R$ 10 ou R$ 20.
+
+**O palestrante oferece um passo a passo gratuito para criar um canal dark de música usando IA, incluindo edição, imagem, música, thumbnail e prompts, sem custo. Ele explica que não vende o conteúdo porque acredita em entregar valor primeiro, e disponibiliza todos os prompts gratuitamente mediante comentário de uma palavra-chave na tela para acesso via Telegram. O processo envolve cinco passos: escolha do personagem, geração de músicas no Sulno, animação, capa do vídeo e edição final.**
+
+- O vídeo entrega o passo a passo completo para criar um canal dark de música com IA, incluindo edição, imagem, música, thumbnail, animação e prompts.
+- Todo o conteúdo é gratuito e não há custo para acessar o material apresentado.
+- O palestrante disponibiliza todos os prompts usados no vídeo de graça, acessíveis ao comentar a palavra-chave mostrada na tela nos comentários para liberação via Telegram.
+- O processo é dividido em cinco passos: (1) escolher o personagem e identidade visual, (2) gerar músicas instrumentais no Sulno, (3) animar as cenas, (4) montar a capa do vídeo, (5) edição final e exportação.
+- A primeira e mais importante decisão é a escolha do personagem, que deve ser um personagem conhecido recontextualizado em versão adulta e melancólica para evitar resultado genérico.
+
+> Passo um, escolher o personagem, criar toda a identidade visual e gerar os títulos do canal. Passo dois, gerar as músicas instrumentais no Sulno. Passo três, animar as cenas. Passo quatro, montar a capa do vídeo. Passo cinco, edição final e exportação.
+
+**O palestrante explica o uso de dois prompts específicos para gerar imagens consistentes e evitando bloqueios por direitos autorais: o primeiro para conceituar o personagem e o segundo para gerar prompts de imagem sem referências a nomes ou marcas, convertendo-os em descrições físicas puras. Ele enfatiza que todas as imagens devem ser geradas no mesmo chat (como Nano Banana) para manter consistente, pois trocar de chat quebra a referência visual e resulta em imagens inconsistentes. O refinamento dentro do mesmo chat aumenta a similaridade entre as gerações.**
+
+- O Prompt 1 pergunta qual universo o usuário prefere (desenhos animados, jogos, filmes ou séries nostálgicos) e gera cinco conceitos com paleta de cor, iluminação e prompt de imagem.
+- Geradores de imagem como Jimni ou DALL·E bloqueiam prompts com nomes de personagens registrados, independentemente do que vem depois.
+- O Prompt 2 recebe o conceito com nome e devolve prompts de imagem sem nenhuma referência ao nome, franquia ou marca, convertendo automaticamente em descrição física pura.
+- É crítico gerar todas as cinco imagens dentro do mesmo chat para manter consistência visual; trocar de chat resulta em traços, iluminação e estilo diferentes.
+- Quanto mais imagens são geradas no mesmo chat, mais parecidas elas ficam devido ao refinamento contínuo do contexto.
+
+> Não importa o que vem a depois do nome, se ele aparecer não tem como gerar.
+
+**O palestrante alerta que copiar personagens ou elementos visuais de concorrentes leva ao fracasso, pois o sucesso depende da originalidade dentro do método ensinado. Ele explica que o método fornece as ferramentas, mas o criador deve aplicar sua identidade única ao escolher um personagem inédito, combinação visual exclusiva e atmosfera original. Os títulos do canal devem unir busca e conexão emocional usando o prompt 4, e a descrição do personagem (do passo 1) deve ser inserida para gerar 10 títulos validados. Para monetização no YouTube via AdSense, é necessário o plano pago do Suno (R$ 40/mês), pois o gratuito não oferece direitos comerciais e pode resultar em bloqueio de receita ou remoção de vídeo; o gratuito serve apenas para testes.**
+
+- Copiar o personagem do concorrente é o caminho mais rápido pro fracasso do teu canal.
+- O método fornece as ferramentas, mas o criador deve usar sua originalidade para escolher um personagem inédito, combinação visual exclusiva e atmosfera única.
+- Os títulos do canal devem aparecer na busca e gerar conexão emocional imediata na mesma frase, usando o prompt 4.
+- A descrição do personagem gerada no passo 1 (com conceito, paleta de cor e ambiente) deve ser colada para gerar os 10 títulos validados do canal.
+- O plano gratuito do Suno não oferece direitos comerciais; para monetização no YouTube via AdSense, é necessário o plano pago por volta de R$ 40/mês.
+- Publicar músicas do plano gratuito do Suno em um canal monetizado pode levar ao bloqueio de receita ou remoção do vídeo pelo YouTube.
+- O plano gratuito do Suno deve ser usado apenas para testar e validar o estilo das músicas antes de assinar o plano pago para gerar faixas finais com direitos comerciais.
+- Os prompts para gerar músicas são criados usando o prompt 3 no chat EPT ou PSIC, e podem ser repetidos para obter diversos prompts para usar no Suno.
+
+> Não adianta pegar o gato Tom para criar o teu canal porque tu viu que funciona. Não adianta. Não adianta pegar a Pantera cor-de-osa, porque ela aparece em outros canais. Copiar o personagem do concorrente é o caminho mais rápido pro fracasso do teu canal.
+
+**Para gerar músicas no Suno, é necessário ativar o modo instrumental sem vocal, pois o vocal distrai o espectador e reduz o tempo de reprodução nesse nicho. As faixas devem ter duração de 3 a 4 minutos cada para compor vídeos longos, e a função de extensão do Suno pode alongar mantendo o estilo. O algoritmo do YouTube recompensa músicas que retêm a atenção por longos períodos, como 1h30. Na criação da thumbnail no Canva, o fundo deve ser uma cor sólida e assinatura do canal (ex.: vermelho vivo), com o personagem posicionado fora do centro e fundo removido da imagem gerada. O texto da thumbnail deve ser minimalista ou chamativo, usando palavras já validadas do prompt de títulos, e fontes como Business, Lash Cip, Silence ou Lone funcionam bem.**
+
+- No Suno, ative o modo instrumental sem vocal nenhum, pois o vocal chama atenção, tira o espectador do estado de foco e reduz drasticamente o tempo de reprodução nesse nicho.
+- Cada faixa musical deve ter duração de pelo menos 3 a 4 minutos para compor um vídeo de uma hora.
+- A função de extensão do Suno permite alongar faixas geradas, mantendo o mesmo estilo e continuidade.
+- O algoritmo do YouTube recompensa músicas que retêm alguém por 1 hora e meia, como o som descrito que acompanha um relatório numa madrugada de terça.
+- No Canva, crie um projeto de 1280 por 720 pixels (padrão YouTube) com fundo de cor sólida que será a assinatura do seu canal.
+- Ao usar a imagem gerada pelo Nano Banana na thumbnail, remova o fundo para posicionar o personagem sobre a cor sólida do canal.
+- O personagem na thumbnail deve ficar um pouco de lado, não no centro.
+- O texto da thumbnail deve ser minimalista ou chamativo (1-2 palavras), usando palavras já validadas do prompt de títulos, com fontes como Business, Lash Cip, Silence ou Lone.
+- Sites gratuitos para remoção de fundo de imagem são recomendados como alternativa ao Canva.
+
+> Clica aqui, depois aqui, ativa o modo instrumental sem vocal nenhum, porque o vocal chama atenção, tira o espectador do estado de foco e isso reduz drasticamente o tempo de reprodução nesse nicho.
+
+**O vídeo final deve ter no mínimo uma hora, ser relaxante do começo ao fim e sem interrupções bruscas, com cenas animadas em loop para evitar que o espectador perceba repetições ou fique enjoado. O áudio das cenas geradas pelo Google Flow deve ser removido (volume zero) pois vem com som indesejado. As transições de áudio entre faixas devem ser ajustadas manualmente arrastando as ondas até o ponto natural de término, ou copiando os atributos de uma faixa já ajustada para aplicar em outras, evitando trabalho manual. A marca d'água deve ser adicionada ao vídeo inteiro, posicionada para cobrir o logo do Google Flow, e pode ser um sticker pessoal com o nome do canal escrito embaixo.**
+
+- O vídeo final deve ter duração mínima de uma hora, ser relaxante do começo ao fim e sem interrupções bruscas.
+- As cenas devem ficar em loop ao longo do vídeo, alternando entre elas para evitar que o espectador perceba repetições ou fique enjoado.
+- O áudio das cenas geradas pelo Google Flow deve ser removido (volume zero) porque vem com som de fundo indesejado.
+- Para ajustar transições de áudio de forma natural, arraste manualmente as ondas até onde a música termina naturalmente, ou copie os atributos de uma faixa já ajustada e cole em outras para aplicar o mesmo volume.
+- A marca d'água deve ser adicionada ao vídeo inteiro para tampar o logo do Google Flow, posicionando-a sobre o logo e escrevendo o nome do canal embaixo.
+- A marca d'água deve ser aplicada em todo o clipe, não apenas em uma parte, selecionando os elementos e arrastando-os para duração total.
+
+> Então tu vai selecionar todas as cenas, vai vir aqui em volume e deixa tudo no zero.
+
+**O resultado final inclui um personagem com visual consistente e identidade única, músicas instrumentais com direitos comerciais, cenas animadas em loop, thumbnail no padrão dos canais dominantes e potencial de receita. O autor enfatiza que produzir o vídeo é a parte fácil; o verdadeiro diferencial é a consistência de publicação e testes, não a perfeição inicial. Publicar um vídeo por semana, mesmo que imperfeito, leva à recomendação pelo algoritmo após 10-20 vídeos consistentes, como observado nos canais analisados. Ele incentiva compartilhar o conhecimento e participar da comunidade via Telegram, Instagram ou lives ao vivo para suporte e análise de canais.**
+
+- O resultado inclui personagem com visual consistente e identidade única, músicas instrumentais com direito comercial, cenas animadas em loop, thumbnail no padrão dos canais dominantes e potencial de receita do sucesso.
+- Produzir o vídeo é a parte mais fácil, separando o criador de 95% dos espectadores que não saem do lugar; o verdadeiro diferencial é a consistência de publicação e testes/adaptação.
+- O algoritmo do YouTube é um motor de frequência; não se precisa de qualidade perfeita no começo, mas de regularidade: publicar um vídeo por semana, mesmo que imperfeito.
+- Canais que chegam consistentemente aos 10, 15, 20 vídeos começam a ser recomendados pelo algoritmo, como observado nos canais analisados para trazer a estratégia.
+- O autor oferece acesso gratuito aos prompts do vídeo via Telegram mediante comentário da palavra-chave, incentiva compartilhamento e disponibiliza links para comunidade, lives ao vivo, análise de canais e direct no Instagram.
+
+> Produzir o vídeo é a parte mais fácil, que vai separar você de 95% das pessoas que vai assistir o vídeo e não vão sair do lugar. É a consistência de publicação e de testes e adaptação.

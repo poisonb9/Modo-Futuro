@@ -1,0 +1,364 @@
+"""O cérebro: Gemini escolhe os momentos e já escreve os metadados do post.
+
+Aguenta 9,5h de áudio por prompt, então o vídeo inteiro vai de uma vez —
+sem chunking, sem offset pra corrigir.
+"""
+import json, re, time
+from pathlib import Path
+import requests
+
+import config
+from . import keys
+
+PROMPT = """Você é editor de cortes virais. Analise este {tipo} INTEIRO e escolha
+os {n} melhores momentos para YouTube Shorts.
+
+ESTRUTURA GPC (Gancho-Progresso-Clímax) — o trecho escolhido precisa ter as
+três partes dentro dele, não só o gancho:
+1. GANCHO (primeiros ~2s do corte): frase de impacto que já entrega tensão
+   ou dúvida. Nunca comece explicando contexto ("hoje eu vou falar sobre...",
+   "então like é o seguinte...") — corte DEPOIS dessa introdução, direto no
+   ponto.
+2. PROGRESSO: a fala cumpre o que o gancho prometeu, sem enrolação.
+3. CLÍMAX: a ideia se resolve dentro do próprio corte — vira redondo sozinho,
+   sem precisar do resto do vídeo pra fazer sentido. Termine logo após o pico
+   (frase mais forte), de forma abrupta — NUNCA inclua despedida, agradecimento,
+   "se inscreva", resumo do que foi dito ou qualquer fala de encerramento
+   depois do pico: isso quebra a retenção e "trava" o Short no algoritmo.
+
+CRITÉRIOS (nesta ordem de peso):
+1. Gancho nos 2 primeiros segundos — precisa prender antes do usuário deslizar.
+2. Ideia COMPLETA (GPC inteiro, ver acima).
+3. Carga emocional: surpresa, contradição, revelação, opinião forte, humor.
+4. Corte em pausa natural da fala — nunca no meio de uma palavra ou frase.
+
+REGRAS DURAS:
+- Duração entre {dmin} e {dmax} segundos. Nunca fora disso.
+- O mínimo de {dmin}s é INEGOCIÁVEL: o TikTok só paga por vídeo acima de
+  60 segundos. Um trecho ótimo de 50s não serve — ou você abre o recorte
+  pra pegar o contexto em volta e passar de {dmin}s, ou descarta o trecho.
+- Ponto ideal: 70-95s. Só passe de 95s (até o limite de {dmax}) quando o
+  arco da história PRECISA do contexto todo pra fazer sentido — não estique
+  por preguiça de cortar.
+- Preencher com enrolação pra alcançar {dmin}s é PIOR que descartar:
+  enrolação derruba a retenção, e retenção é o que governa a DISTRIBUIÇÃO
+  do vídeo pelo algoritmo. Um clipe elegível que ninguém assiste não vale
+  nada.
+- Os trechos NÃO podem se sobrepor.
+- Prefira começar logo antes da frase de impacto, não muito antes.
+
+IDIOMA DO TEXTO (título, descrição, tags, porque): SEMPRE em português do
+Brasil, MESMO QUE a fala original do vídeo esteja em outro idioma (ex:
+inglês). Só o "gancho" pode citar a frase original quando fizer sentido.
+
+TÍTULO: seja bem chamativo — gera curiosidade, usa números/contraste/
+tensão quando possível, sem ser genérico. Pense em título que faz alguém
+parar de rolar o feed. Máximo 80 caracteres, sem hashtag.
+
+DESCRIÇÃO: coloque a palavra-chave mais importante do assunto já nos
+primeiros caracteres (não enrole com frase de efeito antes dela) — é o que
+o YouTube lê primeiro pra indexar o vídeo na busca.
+
+CLASSIFICAÇÃO POR TAGS (pra permitir comparar e filtrar candidatos entre
+vídeos diferentes, não só pela nota geral) — escolha 1 de cada dimensão,
+a que melhor descreve o corte:
+
+tipo_conteudo: revelacao | debate | historia-pessoal | previsao | alerta |
+  explicacao | controversia | comparacao | noticia-quente | humor |
+  conselho-de-vida | demonstracao-tecnica
+
+emocao_dominante: surpresa | indignacao | medo | admiracao | humor | tensao |
+  orgulho | ceticismo | esperanca | choque
+
+dinamica: confronto | entrevista-tensa | refutacao | confissao | provocacao |
+  vulnerabilidade | autoridade-desafiada | monologo-direto
+
+marcador_viral: frase-de-efeito | virada-inesperada | numero-chocante |
+  previsao-ousada | contradicao | tabu-quebrado | meme-potencial |
+  estatistica-absurda | valor-pratico
+
+arquetipo: bastidor-revelado | previsao-que-assusta | especialista-alerta |
+  duelo-de-ideias | confissao-inesperada | dado-chocante | mito-derrubado |
+  vitoria-contra-tudo
+
+SUBNOTAS (0-10 cada, além da "nota" geral 0-100):
+- forca_gancho: quão forte é o gancho nos 2 primeiros segundos
+- compartilhabilidade: alguém mandaria isso pra um amigo?
+- independencia: faz sentido sozinho, sem precisar do resto do vídeo?
+- intensidade_emocional: quão forte é a carga emocional
+- valor_social: o quanto compartilhar isto diz algo BOM sobre quem
+  compartilha — "olha que interessante eu sou por saber disso", "isso
+  representa o que eu penso". Compartilhar é ato de identidade, não só
+  reação ao conteúdo: pesquisa mostra que a decisão de transmitir integra
+  consequências esperadas pra própria imagem social. Nota alta = a pessoa
+  ganha status/identidade ao repassar. Nota baixa = interessante de ver,
+  mas ninguém se define por aquilo.
+
+PESO ENTRE AS DIMENSÕES (evidência de pesquisa, não palpite):
+- Emoção de ALTA ATIVAÇÃO (surpresa, indignação, admiração, medo) prevê
+  compartilhamento melhor do que utilidade prática. Entre dois candidatos
+  parecidos, prefira o de carga emocional forte ao de "dica útil".
+- SURPRESA concentra atenção mais que alegria — trate `surpresa` e
+  `virada-inesperada` como sinal premium.
+- Tristeza / baixa ativação REDUZ compartilhamento. Desconfie de trecho
+  comovente-mas-parado.
+- `valor-pratico` continua válido, mas como contribuinte, não como o
+  critério dominante.
+
+Responda SOMENTE com JSON válido, sem markdown, neste formato:
+{{"clipes":[{{
+  "inicio_s": <float, segundos desde o começo>,
+  "fim_s": <float>,
+  "nota": <0-100, potencial viral>,
+  "gancho": "<a frase exata que prende, curta>",
+  "porque": "<1 frase em pt-BR: por que viraliza>",
+  "titulo": "<título chamativo em pt-BR, max 80 chars, sem hashtag>",
+  "descricao": "<2-3 frases em pt-BR para a descrição do YouTube>",
+  "tags": ["<5 a 8 tags em pt-BR, sem #>"],
+  "tipo_conteudo": "<uma das opções acima>",
+  "emocao_dominante": "<uma das opções acima>",
+  "dinamica": "<uma das opções acima>",
+  "marcador_viral": "<uma das opções acima>",
+  "arquetipo": "<uma das opções acima>",
+  "forca_gancho": <0-10>,
+  "compartilhabilidade": <0-10>,
+  "independencia": <0-10>,
+  "intensidade_emocional": <0-10>,
+  "valor_social": <0-10>
+}}]}}
+
+Ordene do maior para o menor "nota". Use segundos absolutos com 1 decimal."""
+
+
+def _subir_arquivo(caminho: Path, mime: str, chave: str) -> str:
+    """Upload resumable para a File API do Gemini."""
+    tam = caminho.stat().st_size
+    r = requests.post(
+        f"{config.GEMINI_UPLOAD_URL}?key={chave}",
+        headers={
+            "X-Goog-Upload-Protocol": "resumable",
+            "X-Goog-Upload-Command": "start",
+            "X-Goog-Upload-Header-Content-Length": str(tam),
+            "X-Goog-Upload-Header-Content-Type": mime,
+            "Content-Type": "application/json",
+        },
+        json={"file": {"display_name": caminho.name}},
+        timeout=60,
+    )
+    r.raise_for_status()
+    url = r.headers.get("X-Goog-Upload-URL")
+    if not url:
+        raise RuntimeError("Gemini não devolveu URL de upload")
+
+    with open(caminho, "rb") as fh:
+        r2 = requests.post(
+            url,
+            headers={
+                "Content-Length": str(tam),
+                "X-Goog-Upload-Offset": "0",
+                "X-Goog-Upload-Command": "upload, finalize",
+            },
+            data=fh,
+            timeout=1800,
+        )
+    r2.raise_for_status()
+    info = r2.json()["file"]
+
+    # o arquivo fica PROCESSING até o Gemini indexar; áudio longo demora
+    nome, uri = info["name"], info["uri"]
+    for _ in range(180):
+        s = requests.get(f"{config.GEMINI_URL}/{nome}?key={chave}", timeout=30).json()
+        estado = s.get("state")
+        if estado == "ACTIVE":
+            return uri
+        if estado == "FAILED":
+            raise RuntimeError("Gemini falhou ao processar o arquivo")
+        time.sleep(3)
+    raise RuntimeError("timeout esperando o Gemini processar")
+
+
+def _extrair_json(txt: str) -> dict:
+    txt = re.sub(r"^```(?:json)?|```$", "", txt.strip(), flags=re.M).strip()
+    try:
+        return json.loads(txt)
+    except json.JSONDecodeError:
+        m = re.search(r"\{.*\}", txt, re.S)
+        if not m:
+            raise RuntimeError(f"Gemini não devolveu JSON:\n{txt[:500]}")
+        return json.loads(m.group(0))
+
+
+def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str) -> str:
+    """Faz a chamada ao Gemini com DUAS camadas de tolerância a falha.
+
+    1. Rodízio de chaves dentro do mesmo modelo.
+    2. **Cascata de modelos**: o tier gratuito é de 20 requisições por dia
+       POR MODELO, então quando todas as chaves esgotam no modelo principal
+       ainda há cota cheia no próximo da lista. Sem isso, um dia de trabalho
+       de lote deixava o motor parado até a virada (aconteceu em 27/07/2026).
+
+    O upload do arquivo é refeito a cada chave porque a Files API é por
+    projeto — o `file_uri` só vale para a chave que subiu.
+    """
+    rot = keys.gemini()
+    modelos = [config.GEMINI_MODELO] + list(
+        getattr(config, "GEMINI_MODELOS_RESERVA", []))
+    ultimo_erro = None
+
+    for i_mod, modelo in enumerate(modelos):
+        if i_mod:
+            print(f"   [!] caindo para o modelo reserva: {modelo}")
+        sem_cota: set[str] = set()
+
+        for tentativa in range(len(rot) * 2):
+            if len(sem_cota) >= len(rot):
+                break                      # esgotou este modelo, vai pro próximo
+            chave = rot.proxima()
+            if chave in sem_cota:
+                continue
+            try:
+                uri = _subir_arquivo(caminho, mime, chave)
+                r = requests.post(
+                    f"{config.GEMINI_URL}/models/{modelo}:generateContent?key={chave}",
+                    json=monta_corpo(uri), timeout=900,
+                )
+                if r.status_code in (429, 403):
+                    sem_cota.add(chave)
+                    continue
+                if r.status_code in (500, 502, 503, 504):
+                    # sobrecarga do modelo, não é problema da chave
+                    print(f"   [!] {modelo} {r.status_code} (sobrecarga), repetindo...")
+                    time.sleep(5)
+                    continue
+                r.raise_for_status()
+                return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+            except requests.HTTPError as e:
+                ultimo_erro = e
+                cod = e.response.status_code if e.response is not None else None
+                if cod in (429, 403):
+                    sem_cota.add(chave)
+                    continue
+                if cod in (500, 502, 503, 504):
+                    time.sleep(5)
+                    continue
+                raise
+            except Exception as e:                       # noqa: BLE001
+                ultimo_erro = e
+                print(f"   [!] tentativa {tentativa+1} ({oquefaz}) falhou: {e}")
+                time.sleep(2)
+
+    raise RuntimeError(
+        f"Gemini falhou em {oquefaz}: todas as chaves esgotadas em "
+        f"{modelos}. Último erro: {ultimo_erro}")
+
+
+def escolher(caminho: Path, dur_total: float, usar_video: bool,
+             qtd: int = config.QTD_CLIPES) -> list[dict]:
+    """Devolve os melhores momentos, já com título/descrição/tags.
+
+    usar_video=True manda o vídeo (o Gemini VÊ a cena — pega reação, expressão,
+    corte visual). Custa mais tokens, escolhe melhor.
+    usar_video=False manda só o áudio: bem mais barato.
+    """
+    mime = "video/mp4" if usar_video else "audio/flac"
+    tipo = "vídeo" if usar_video else "áudio"
+    prompt = PROMPT.format(tipo=tipo, n=qtd,
+                           dmin=config.DUR_MIN, dmax=config.DUR_MAX)
+
+    def corpo(uri):
+        return {"contents": [{"parts": [
+            {"file_data": {"mime_type": mime, "file_uri": uri}},
+            {"text": prompt},
+        ]}], "generationConfig": {"temperature": 0.7,
+                                  "response_mime_type": "application/json"}}
+
+    txt = _pedir(caminho, mime, corpo, "escolha de clipes")
+    dados = _extrair_json(txt)
+    clipes = dados if isinstance(dados, list) else dados.get("clipes", [])
+    return _validar(clipes, dur_total)
+
+
+PROMPT_METADADOS = """Este é um corte de vídeo JÁ PRONTO para YouTube Shorts/TikTok.
+Não escolha momentos, não sugira recortes — só escreva os metadados do post.
+
+IDIOMA: tudo em português do Brasil, MESMO QUE a fala esteja em outro idioma.
+
+TÍTULO: bem chamativo — gera curiosidade, usa números/contraste/tensão,
+nunca genérico. Máximo 80 caracteres, sem hashtag.
+
+DESCRIÇÃO: a palavra-chave mais importante do assunto nos primeiros
+caracteres (sem frase de efeito antes dela) — é o que a plataforma indexa
+primeiro. 2-3 frases.
+
+Classifique também (mesma taxonomia usada na seleção normal — escolha 1 de
+cada, a que melhor descreve o corte):
+tipo_conteudo: revelacao | debate | historia-pessoal | previsao | alerta |
+  explicacao | controversia | comparacao | noticia-quente | humor |
+  conselho-de-vida | demonstracao-tecnica
+emocao_dominante: surpresa | indignacao | medo | admiracao | humor | tensao |
+  orgulho | ceticismo | esperanca | choque
+dinamica: confronto | entrevista-tensa | refutacao | confissao | provocacao |
+  vulnerabilidade | autoridade-desafiada | monologo-direto
+marcador_viral: frase-de-efeito | virada-inesperada | numero-chocante |
+  previsao-ousada | contradicao | tabu-quebrado | meme-potencial |
+  estatistica-absurda | valor-pratico
+arquetipo: bastidor-revelado | previsao-que-assusta | especialista-alerta |
+  duelo-de-ideias | confissao-inesperada | dado-chocante | mito-derrubado |
+  vitoria-contra-tudo
+
+Responda SOMENTE com JSON válido, sem markdown:
+{"titulo": "<max 80 chars, pt-BR, sem hashtag>",
+ "descricao": "<2-3 frases em pt-BR>",
+ "tags": ["<5 a 8 tags em pt-BR, sem #>"],
+ "gancho": "<a frase mais forte do corte, curta>",
+ "porque": "<1 frase em pt-BR: por que esse corte funciona>",
+ "nota": <0-100, potencial viral>,
+ "tipo_conteudo": "<uma das opções acima>",
+ "emocao_dominante": "<uma das opções acima>",
+ "dinamica": "<uma das opções acima>",
+ "marcador_viral": "<uma das opções acima>",
+ "arquetipo": "<uma das opções acima>",
+ "forca_gancho": <0-10>,
+ "compartilhabilidade": <0-10>,
+ "independencia": <0-10>,
+ "intensidade_emocional": <0-10>,
+ "valor_social": <0-10>}"""
+
+
+def metadados(caminho: Path, usar_video: bool = True) -> dict:
+    """Gera título/descrição/tags para um corte JÁ definido (modo --recorte),
+    em que o usuário escolheu o trecho na mão e não há seleção a fazer."""
+    mime = "video/mp4" if usar_video else "audio/flac"
+
+    def corpo(uri):
+        return {"contents": [{"parts": [
+            {"file_data": {"mime_type": mime, "file_uri": uri}},
+            {"text": PROMPT_METADADOS},
+        ]}], "generationConfig": {"temperature": 0.7,
+                                  "response_mime_type": "application/json"}}
+
+    return _extrair_json(_pedir(caminho, mime, corpo, "metadados"))
+
+
+def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
+    """O modelo às vezes devolve tempo fora do vídeo ou duração absurda.
+    Corrige o que dá, descarta o resto — melhor perder um clipe que
+    renderizar lixo."""
+    bons, ocupados = [], []
+    for c in sorted(clipes, key=lambda x: -float(x.get("nota", 0))):
+        try:
+            ini = max(0.0, float(c["inicio_s"]) - config.MARGEM)
+            fim = min(dur_total, float(c["fim_s"]) + config.MARGEM)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if fim - ini < config.DUR_MIN:
+            continue
+        if fim - ini > config.DUR_MAX:
+            fim = ini + config.DUR_MAX
+        if any(ini < f and fim > i for i, f in ocupados):   # sobreposição
+            continue
+        ocupados.append((ini, fim))
+        c["inicio_s"], c["fim_s"] = round(ini, 2), round(fim, 2)
+        c["duracao_s"] = round(fim - ini, 2)
+        bons.append(c)
+    return bons

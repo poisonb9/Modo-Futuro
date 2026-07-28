@@ -31,20 +31,35 @@ REGISTRO = config.RAIZ / "estado" / "enviados_drive.json"
 
 def _servico():
     from googleapiclient.discovery import build
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from google_auth_oauthlib.flow import InstalledAppFlow
 
-    # No GitHub Actions (ou qualquer ambiente sem tela pra login manual),
-    # usa Service Account via variável de ambiente — nada de OAuth
-    # interativo. Local continua exatamente como sempre foi (abaixo).
+    # OAuth por variável de ambiente — é ESTE o caminho pro GitHub Actions.
+    #
+    # Service Account NÃO serve pra subir arquivo: o Drive responde
+    # "Service Accounts do not have storage quota" (403), porque SA não tem
+    # armazenamento próprio. Ela cria pasta (pasta não ocupa espaço) e
+    # BAIXA normalmente, mas nunca grava conteúdo. As saídas que o Google
+    # sugere — Shared Drive e OAuth delegation — exigem Workspace pago, e
+    # a conta do projeto é Gmail comum. Medido em 28/07/2026, run #8.
+    #
+    # Por isso o token OAuth (que carrega a cota da conta pessoal) vem
+    # ANTES da SA aqui. O refresh_token renova sozinho, sem tela.
+    oauth_json = os.getenv("GOOGLE_OAUTH_TOKEN_JSON")
+    if oauth_json:
+        cred = Credentials.from_authorized_user_info(json.loads(oauth_json), SCOPES)
+        if not cred.valid and cred.expired and cred.refresh_token:
+            cred.refresh(Request())
+        return build("drive", "v3", credentials=cred)
+
+    # Service Account continua servindo pra LEITURA (baixar_bruto_drive.py).
     sa_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
     if sa_json:
         from google.oauth2 import service_account
         info = json.loads(sa_json)
         cred = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
         return build("drive", "v3", credentials=cred)
-
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from google_auth_oauthlib.flow import InstalledAppFlow
 
     cred = None
     if TOKEN.exists():

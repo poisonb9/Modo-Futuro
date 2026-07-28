@@ -136,12 +136,28 @@ def filtro_vertical(largura: int, altura: int,
                 break
             limiar = int(limiar * 1.5) + 1
 
-        # Cada x vale DA sua marca EM DIANTE, então o limite de cada if() é o
-        # tempo do degrau SEGUINTE. Monta de trás pra frente.
-        expr = f"{degraus[-1][1]}"
-        for i in range(len(degraus) - 2, -1, -1):
-            corte = degraus[i + 1][0]
-            expr = f"if(lt(t,{corte:.2f}),{degraus[i][1]},{expr})"
+        # INTERPOLA entre os degraus em vez de saltar de um pro outro.
+        #
+        # Antes isto era uma função degrau — if(lt(t,corte), x1, x2) — e o
+        # recorte ficava imóvel e PULAVA no instante do corte, no mínimo
+        # `limiar` pixels de um frame pro outro. Era o "microtravadas" que o
+        # usuário viu nos clipes de 28/07: o _suavizar() acima produzia uma
+        # curva suave e a quantização a destruía logo em seguida.
+        #
+        # Agora cada trecho vira uma rampa linear entre (t_i, x_i) e
+        # (t_i+1, x_i+1), então o movimento é contínuo. A expressão fica mais
+        # longa, mas o teto de MAX_DEGRAUS continua segurando o tamanho.
+        if len(degraus) == 1:
+            expr = f"{degraus[0][1]}"
+        else:
+            # Depois do último degrau o valor congela — não há pra onde ir.
+            expr = f"{degraus[-1][1]}"
+            for i in range(len(degraus) - 2, -1, -1):
+                t0, x0 = degraus[i]
+                t1, x1 = degraus[i + 1]
+                dt = max(1e-3, t1 - t0)          # nunca divide por zero
+                rampa = f"({x0}+({x1 - x0})*(t-{t0:.2f})/{dt:.3f})"
+                expr = f"if(lt(t,{t1:.2f}),{rampa},{expr})"
 
     lv, av = config.VERTICAL
     return f"crop={alvo_l}:{altura}:'{expr}':0,scale={lv}:{av}"

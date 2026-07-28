@@ -230,6 +230,11 @@ def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str) -> str:
                     print(f"   [!] {modelo} {r.status_code} (sobrecarga), repetindo...")
                     time.sleep(5)
                     continue
+                if r.status_code == 400:
+                    # diagnóstico: 400 apareceu em vídeos grandes (28/07/2026,
+                    # 274MB+) sem saber a causa exata — imprime o corpo real
+                    # em vez de só deixar o raise_for_status() genérico.
+                    print(f"   [!] {modelo} 400: {r.text[:1000]}")
                 r.raise_for_status()
                 return r.json()["candidates"][0]["content"]["parts"][0]["text"]
             except requests.HTTPError as e:

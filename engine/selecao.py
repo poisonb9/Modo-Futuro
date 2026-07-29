@@ -105,6 +105,11 @@ PESO ENTRE AS DIMENSÕES (evidência de pesquisa, não palpite):
 - `valor-pratico` continua válido, mas como contribuinte, não como o
   critério dominante.
 
+NUNCA use aspas duplas (") DENTRO de nenhum valor de texto do JSON — nem no
+"gancho", nem no "titulo", nem na "descricao". Se precisar citar uma fala,
+use aspas simples ('assim') ou nenhuma. Aspas duplas não escapadas quebram o
+JSON no meio e a resposta inteira é perdida.
+
 Responda SOMENTE com JSON válido, sem markdown, neste formato:
 {{"clipes":[{{
   "inicio_s": <float, segundos desde o começo>,
@@ -178,17 +183,36 @@ def _subir_arquivo(caminho: Path, mime: str, chave: str) -> str:
 
 
 def _extrair_json(txt: str) -> dict:
+    """Lê o JSON da resposta, tolerando cerca de markdown.
+
+    Quando falha, imprime o trecho EM VOLTA do erro — não o começo do texto.
+    Em 29/07/2026 três runs (#30, #36, #51) morreram aqui com
+    `Expecting ',' delimiter` em posições bem diferentes (char 963, 1114,
+    6693), e o log só mostrava a mensagem seca: não dava pra saber o que o
+    modelo tinha escrito de errado.
+
+    Suspeita principal: o prompt pede `"gancho": "<a frase exata que
+    prende>"` — citação literal da fala. Aspas dentro dessa frase, sem
+    escape, quebram o JSON no meio de um campo de texto, que é exatamente o
+    sintoma. Imprimir o entorno confirma ou derruba isso na próxima vez.
+    """
     txt = re.sub(r"^```(?:json)?|```$", "", txt.strip(), flags=re.M).strip()
     try:
         return json.loads(txt)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as e:
         m = re.search(r"\{.*\}", txt, re.S)
-        if not m:
-            raise RuntimeError(f"Gemini não devolveu JSON:\n{txt[:500]}")
-        return json.loads(m.group(0))
+        if m:
+            try:
+                return json.loads(m.group(0))
+            except json.JSONDecodeError as e2:
+                e = e2
+        ini = max(0, e.pos - 220)
+        print(f"   [!] JSON inválido na posição {e.pos}: {e.msg}")
+        print(f"   [!] trecho: ...{txt[ini:e.pos + 220]}...")
+        raise
 
 
-def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str) -> str:
+def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str, valida=None) -> str:
     """Faz a chamada ao Gemini com DUAS camadas de tolerância a falha.
 
     1. Rodízio de chaves dentro do mesmo modelo.
@@ -245,7 +269,21 @@ def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str) -> str:
                     # em vez de só deixar o raise_for_status() genérico.
                     print(f"   [!] {modelo} 400: {r.text[:1000]}")
                 r.raise_for_status()
-                return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+                saida = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+                if valida is not None:
+                    # JSON malformado é RETENTÁVEL: com temperature 0.7 o
+                    # modelo às vezes escorrega no formato, e antes isso
+                    # matava o corte inteiro mesmo havendo 14 chaves livres
+                    # (runs #30, #36, #51 em 29/07/2026). Outra tentativa
+                    # costuma sair bem — é falha de amostragem, não de chave.
+                    try:
+                        valida(saida)
+                    except Exception as err:
+                        print(f"   [!] resposta inválida ({type(err).__name__}), "
+                              f"tentando de novo...")
+                        ultimo_erro = err
+                        continue
+                return saida
             except requests.HTTPError as e:
                 ultimo_erro = e
                 cod = e.response.status_code if e.response is not None else None
@@ -291,7 +329,7 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 
-    txt = _pedir(caminho, mime, corpo, "escolha de clipes")
+    txt = _pedir(caminho, mime, corpo, "escolha de clipes", valida=_extrair_json)
     dados = _extrair_json(txt)
     clipes = dados if isinstance(dados, list) else dados.get("clipes", [])
     return _validar(clipes, dur_total)
@@ -356,7 +394,8 @@ def metadados(caminho: Path, usar_video: bool = True) -> dict:
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 
-    return _extrair_json(_pedir(caminho, mime, corpo, "metadados"))
+    return _extrair_json(_pedir(caminho, mime, corpo, "metadados",
+                                valida=_extrair_json))
 
 
 def _num(c: dict, campo: str, padrao: float = 0.0) -> float:

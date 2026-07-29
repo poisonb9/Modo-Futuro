@@ -48,6 +48,18 @@ INTERVALO_S = 300
 # cinco mudanças de qualidade — fonte 1080p, tracking em rampa, legenda a
 # 30%, punch-in cíclico e volume -14 LUFS.
 QTD_CLIPES = "8"
+
+# Quantos cortes disparar por varredura. O resto espera a próxima passada
+# (10 min), então uma leva de 15 vídeos entra aos poucos em vez de toda de
+# uma vez.
+#
+# Por que existe: em 29/07 o vigia disparou ~15 runs juntos e cinco
+# morreram com "Drive storage quota exceeded" DEPOIS de cortar. A primeira
+# tentativa de conserto foi um `concurrency` group no workflow — e foi pior:
+# o GitHub só guarda UM run pendente por grupo e CANCELA os demais, então
+# sete runs sumiram sem rodar. Limitar aqui, na origem, não perde nada:
+# o que não coube fica no Drive e entra na próxima passada.
+MAX_POR_PASSADA = 2
 IDIOMA = "pt"
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]
@@ -92,7 +104,28 @@ def _filhos(drive, pasta_id: str) -> list[dict]:
             return itens
 
 
-def videos_em_raw(drive, profundidade_max: int = 3) -> list[dict]:
+def videos_todas_contas() -> list[dict]:
+    """Vídeos novos nas pastas RAW de TODAS as contas configuradas.
+
+    Cada item leva o nome da conta onde está. O vídeo é processado inteiro
+    na conta onde o bruto vive — bruto e clipes na mesma conta — então essa
+    informação viaja até o workflow. Ver contas_drive.py.
+    """
+    import contas_drive
+    achados = []
+    for c in contas_drive.CONTAS:
+        try:
+            drive = contas_drive.servico(c)
+        except Exception as e:
+            print(f"[!] conta '{c['nome']}' inacessível: {str(e)[:90]}")
+            continue
+        for v in videos_em_raw(drive, raiz=c["raw"]):
+            v["conta"] = c["nome"]
+            achados.append(v)
+    return achados
+
+
+def videos_em_raw(drive, profundidade_max: int = 3, raiz: str = PASTA_RAW) -> list[dict]:
     """Vídeos na RAW, **inclusive dentro de subpastas**.
 
     Antes só olhava os filhos diretos e pulava pasta. Em 28/07/2026 o Bryan
@@ -106,7 +139,7 @@ def videos_em_raw(drive, profundidade_max: int = 3) -> list[dict]:
     """
     achados: list[dict] = []
     vistos: set[str] = set()
-    fila = [(PASTA_RAW, "")]          # (id da pasta, caminho legível)
+    fila = [(raiz, "")]               # (id da pasta, caminho legível)
 
     for _ in range(profundidade_max):
         if not fila:
@@ -160,7 +193,17 @@ def marcar(file_id: str, dados: dict):
 
 # ----------------------------------------------------------------- github
 
-def disparar(file_id: str, nome: str):
+def _a_postar(conta: str) -> str:
+    """A POSTAR da conta indicada. O vídeo inteiro fica numa conta só, então
+    os clipes não podem cair no A POSTAR de outra."""
+    try:
+        import contas_drive
+        return contas_drive.conta_por_nome(conta)["a_postar"]
+    except Exception:
+        return PASTA_DRIVE
+
+
+def disparar(file_id: str, nome: str, conta: str = "principal"):
     if not GITHUB_TOKEN:
         raise RuntimeError(
             "Falta GITHUB_TOKEN no .env — sem ele não dá pra disparar o corte. "
@@ -172,7 +215,8 @@ def disparar(file_id: str, nome: str):
                  "Accept": "application/vnd.github+json"},
         json={"ref": "main", "inputs": {
             "drive_file_id": file_id, "nome_arquivo": nome,
-            "qtd": QTD_CLIPES, "idioma": IDIOMA, "pasta_drive": PASTA_DRIVE,
+            "qtd": QTD_CLIPES, "idioma": IDIOMA,
+            "pasta_drive": _a_postar(conta), "conta": conta,
         }},
         timeout=30,
     )
@@ -184,21 +228,24 @@ def disparar(file_id: str, nome: str):
 
 def uma_passada(drive) -> int:
     reg = ler_registro()
-    novos = [v for v in videos_em_raw(drive) if v["id"] not in reg]
+    novos = [v for v in videos_todas_contas() if v["id"] not in reg]
     if not novos:
         return 0
-    print(f"{len(novos)} vídeo(s) novo(s) em RAW:")
+    espera = max(0, len(novos) - MAX_POR_PASSADA)
+    novos = novos[:MAX_POR_PASSADA]
+    print(f"{len(novos)} vídeo(s) novo(s) em RAW"
+          + (f" (+{espera} na próxima passada)" if espera else "") + ":")
     for v in novos:
         tam = int(v.get("size", 0)) / 2**30
-        print(f"  - {v.get('caminho', '')}{v['name']} ({tam:.2f} GB)")
+        print(f"  - [{v.get('conta','?')}] {v.get('caminho','')}{v['name']} ({tam:.2f} GB)")
         try:
-            liberar_leitura(drive, v["id"])
-            disparar(v["id"], v["name"])
+            disparar(v["id"], v["name"], v.get("conta", "principal"))
         except Exception as e:
             # Não marca: na próxima passada ele tenta de novo.
             print(f"   [!] falhou, fica pra próxima passada: {e}")
             continue
         marcar(v["id"], {"nome": v["name"], "tamanho": v.get("size"),
+                         "conta": v.get("conta", "principal"),
                          "quando": time.strftime("%Y-%m-%d %H:%M:%S")})
         print("   corte disparado na nuvem.")
     return len(novos)
@@ -215,11 +262,11 @@ def main():
 
     if a.listar:
         reg = ler_registro()
-        vids = videos_em_raw(drive)
+        vids = videos_todas_contas()
         print(f"RAW tem {len(vids)} vídeo(s):")
         for v in vids:
             marca = "já processado" if v["id"] in reg else "NOVO"
-            print(f"  [{marca}] {v['name']}")
+            print(f"  [{marca}] [{v.get('conta','?')}] {v['name']}")
         return
 
     if a.uma_vez:

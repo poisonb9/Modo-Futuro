@@ -251,12 +251,68 @@ def uma_passada(drive) -> int:
     return len(novos)
 
 
+def auditar() -> list[dict]:
+    """Vídeos que o vigia deu como despachados mas que NUNCA foram cortados.
+
+    Existe porque o vigia marca no momento do DISPARO, não da conclusão —
+    qualquer coisa que dê errado depois deixa o vídeo em limbo silencioso:
+    ocupa espaço na RAW, consta como processado, e nunca virou clipe.
+
+    Aconteceu de verdade em 29/07/2026: um `concurrency` group no workflow
+    cancelou sete runs enfileirados (o GitHub guarda só UM pendente por
+    grupo), e mais quatro morreram por cota ou erro do Gemini. Os onze
+    ficaram invisíveis até alguém cruzar as duas listas na mão.
+
+    O cruzamento é com `estado/videos_trabalhados.json`, que registra o que
+    de fato saiu cortado — e pega qualquer causa, não só cancelamento.
+    """
+    import re
+    reg = ler_registro()
+    trabalhados = RAIZ / "estado" / "videos_trabalhados.json"
+    if not trabalhados.exists():
+        print("[!] videos_trabalhados.json não existe — rode registro_videos.py --sincronizar")
+        return []
+    feitos = {k for k, v in json.loads(trabalhados.read_text(encoding="utf-8")).items()
+              if v.get("cortado")}
+
+    pendentes = []
+    for v in videos_todas_contas():
+        m = re.search(r"\[([A-Za-z0-9_-]{11})\]", v["name"])
+        yt = m.group(1) if m else ""
+        if v["id"] in reg and yt not in feitos and not reg[v["id"]].get("obs"):
+            v["yt"] = yt
+            pendentes.append(v)
+    return pendentes
+
+
 def main():
     p = argparse.ArgumentParser(description="Vigia a pasta RAW do Drive")
     p.add_argument("--uma-vez", action="store_true", help="checa uma vez e sai")
     p.add_argument("--listar", action="store_true", help="só mostra o estado atual")
+    p.add_argument("--auditar", action="store_true",
+                   help="acha vídeo marcado como despachado que nunca virou clipe")
+    p.add_argument("--devolver", action="store_true",
+                   help="com --auditar: desmarca os achados pra entrarem na fila")
     p.add_argument("--intervalo", type=int, default=INTERVALO_S)
     a = p.parse_args()
+
+    if a.auditar:
+        pend = auditar()
+        if not pend:
+            print("Nada em limbo — tudo que foi despachado virou clipe.")
+            return
+        print(f"{len(pend)} vídeo(s) despachado(s) mas NUNCA cortado(s):")
+        for v in pend:
+            print(f"  [{v.get('conta','?')}] {v['name'][:62]}")
+        if not a.devolver:
+            print("\nPra devolver à fila: --auditar --devolver")
+            return
+        reg = ler_registro()
+        for v in pend:
+            reg.pop(v["id"], None)
+        REGISTRO.write_text(json.dumps(reg, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"\n{len(pend)} devolvido(s) — entram {MAX_POR_PASSADA} por varredura.")
+        return
 
     drive = servico()
 

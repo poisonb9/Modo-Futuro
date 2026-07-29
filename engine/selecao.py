@@ -222,7 +222,16 @@ def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str) -> str:
                     f"{config.GEMINI_URL}/models/{modelo}:generateContent?key={chave}",
                     json=monta_corpo(uri), timeout=900,
                 )
-                if r.status_code in (429, 403):
+                if r.status_code in (401, 429, 403):
+                    # 401 não é cota, é chave inválida ou revogada — mas o
+                    # tratamento é o mesmo: descarta e segue pra próxima.
+                    # Antes o 401 caía no raise e derrubava o corte inteiro
+                    # por causa de UMA chave ruim entre catorze (runs #46 e
+                    # #48, 29/07/2026). As 8 chaves do .env local estão boas,
+                    # então a defeituosa é uma que só existe como secret do
+                    # GitHub, e secret não dá pra ler pra descobrir qual.
+                    if r.status_code == 401:
+                        print(f"   [!] chave Gemini rejeitada (401), pulando")
                     sem_cota.add(chave)
                     continue
                 if r.status_code in (500, 502, 503, 504):
@@ -240,7 +249,12 @@ def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str) -> str:
             except requests.HTTPError as e:
                 ultimo_erro = e
                 cod = e.response.status_code if e.response is not None else None
-                if cod in (429, 403):
+                if cod in (401, 429, 403):
+                    # Mesmo motivo do bloco acima. O 401 costuma vir do
+                    # _subir_arquivo(), que roda ANTES do generateContent —
+                    # por isso precisa ser tratado aqui também.
+                    if cod == 401:
+                        print(f"   [!] chave Gemini rejeitada (401) no upload, pulando")
                     sem_cota.add(chave)
                     continue
                 if cod in (500, 502, 503, 504):

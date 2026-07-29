@@ -345,12 +345,32 @@ def metadados(caminho: Path, usar_video: bool = True) -> dict:
     return _extrair_json(_pedir(caminho, mime, corpo, "metadados"))
 
 
+def _num(c: dict, campo: str, padrao: float = 0.0) -> float:
+    try:
+        return float(c.get(campo, padrao))
+    except (TypeError, ValueError):
+        return padrao
+
+
 def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
     """O modelo às vezes devolve tempo fora do vídeo ou duração absurda.
     Corrige o que dá, descarta o resto — melhor perder um clipe que
-    renderizar lixo."""
+    renderizar lixo.
+
+    Também aplica o piso de gancho (config.GANCHO_MIN). O modelo já devolve
+    `forca_gancho` 0-10 por clipe, e até 29/07/2026 esse número era gravado
+    no post.json e **nunca usado** — nem pra ordenar, nem pra filtrar.
+    Descartar gancho fraco importa porque o ECR (assistir além de ~5s) é o
+    que prevê sustentação de atenção, e watch time é o sinal dominante da
+    promoção (PLAYBOOK §22, N=50 papers).
+    """
     bons, ocupados = [], []
-    for c in sorted(clipes, key=lambda x: -float(x.get("nota", 0))):
+    fracos = []
+    for c in sorted(clipes, key=lambda x: -_num(x, "nota")):
+        gancho = _num(c, "forca_gancho", 10.0)   # ausente = não penaliza
+        if gancho < config.GANCHO_MIN:
+            fracos.append((c.get("titulo") or c.get("gancho") or "?", gancho))
+            continue
         try:
             ini = max(0.0, float(c["inicio_s"]) - config.MARGEM)
             fim = min(dur_total, float(c["fim_s"]) + config.MARGEM)
@@ -366,4 +386,15 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
         c["inicio_s"], c["fim_s"] = round(ini, 2), round(fim, 2)
         c["duracao_s"] = round(fim - ini, 2)
         bons.append(c)
+
+    for titulo, g in fracos:
+        print(f"      [!] descartado gancho {g:.0f}/10 "
+              f"(piso {config.GANCHO_MIN}): \"{str(titulo)[:44]}\"")
+    # Só entra na média quem TEM o campo: contar clipe sem nota de gancho
+    # como zero puxaria a média pra baixo e daria um número falso no log.
+    com_nota = [_num(c, "forca_gancho") for c in bons if "forca_gancho" in c]
+    if com_nota:
+        print(f"      gancho médio dos aprovados: "
+              f"{sum(com_nota)/len(com_nota):.1f}/10 "
+              f"({len(com_nota)} de {len(bons)} com nota)")
     return bons

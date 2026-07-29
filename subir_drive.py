@@ -29,11 +29,20 @@ TOKEN = config.RAIZ / "token_drive.json"
 REGISTRO = config.RAIZ / "estado" / "enviados_drive.json"
 
 
-def _servico():
+def _servico(conta: str = "principal"):
     from googleapiclient.discovery import build
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
+
+    # Conta escolhida por quem disparou o corte: o vídeo inteiro vive numa
+    # conta só, então os clipes vão pro A POSTAR da mesma conta onde o bruto
+    # estava. Ver contas_drive.py.
+    try:
+        import contas_drive
+        return contas_drive.servico(contas_drive.conta_por_nome(conta))
+    except Exception as e:
+        print(f"[aviso] seleção de conta indisponível ({e}); usando fallback.")
 
     # OAuth por variável de ambiente — é ESTE o caminho pro GitHub Actions.
     #
@@ -138,14 +147,14 @@ def _upload(servico, pasta_id: str, caminho: Path, mimetype: str):
     servico.files().create(body=meta, media_body=media, fields="id").execute()
 
 
-def subir(pasta_pai_id: str, avisar_telegram: bool = True):
+def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "principal"):
     fila = fila_pendente_drive()
     if not fila:
         print("Nada pendente pra subir no Drive.")
         return
 
     print(f"{len(fila)} clipe(s) pra subir.\n")
-    servico = _servico()
+    servico = _servico(conta)
     # Tudo do dia vai pra uma pasta só. A classificação continua existindo,
     # mas no NOME do arquivo (nota91_...), não em subpasta 7/8/9 — assim a
     # pasta do dia mostra a colheita inteira de uma vez, já ordenável por nota.
@@ -189,10 +198,12 @@ def main():
     p = argparse.ArgumentParser(description="Sobe os clipes prontos pro Google Drive, por nota")
     p.add_argument("--pasta-id", required=True,
                    help="ID da pasta pai do Drive (onde nasce a pasta do dia)")
+    p.add_argument("--conta", default="principal",
+                   help="conta do Drive a usar (ver contas_drive.py)")
     p.add_argument("--sem-telegram", action="store_true",
                    help="não manda as legendas pro Telegram")
     a = p.parse_args()
-    subir(a.pasta_id, avisar_telegram=not a.sem_telegram)
+    subir(a.pasta_id, avisar_telegram=not a.sem_telegram, conta=a.conta)
 
 
 if __name__ == "__main__":

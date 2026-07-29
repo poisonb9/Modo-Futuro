@@ -21,12 +21,18 @@ import os
 import sys
 
 
-def _servico():
+def _servico(conta: str = "principal"):
     from googleapiclient.discovery import build
 
     # Mesma precedência do subir_drive.py: OAuth primeiro (tem a cota da
     # conta), Service Account como reserva. Pra apagar, qualquer um dos dois
     # serve — o que a SA não consegue é ESCREVER conteúdo.
+    try:
+        import contas_drive
+        return contas_drive.servico(contas_drive.conta_por_nome(conta))
+    except Exception as e:
+        print(f"[aviso] seleção de conta indisponível ({e}); usando fallback.")
+
     oauth = os.getenv("GOOGLE_OAUTH_TOKEN_JSON")
     if oauth:
         from google.auth.transport.requests import Request
@@ -46,8 +52,8 @@ def _servico():
     return build("drive", "v3", credentials=cred)
 
 
-def limpar(file_id: str):
-    servico = _servico()
+def limpar(file_id: str, conta: str = "principal"):
+    servico = _servico(conta)
     try:
         info = servico.files().get(fileId=file_id, fields="name,size").execute()
     except Exception as e:
@@ -68,8 +74,9 @@ def limpar(file_id: str):
 def main():
     p = argparse.ArgumentParser(description="Manda o bruto pra lixeira do Drive")
     p.add_argument("--file-id", required=True)
+    p.add_argument("--conta", default="principal")
     a = p.parse_args()
-    limpar(a.file_id)
+    limpar(a.file_id, a.conta)
 
 
 if __name__ == "__main__":

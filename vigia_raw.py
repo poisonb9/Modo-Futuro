@@ -43,13 +43,11 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 INTERVALO_S = 300
 
-# ⚠️ TEMPORÁRIO — rodada de prova de qualidade, 28/07/2026.
-# Está em "1" de propósito: o primeiro vídeo processado depois das cinco
-# mudanças de qualidade (fonte 1080p, tracking em rampa, legenda a 30%,
-# punch-in cíclico, volume -14 LUFS) serve pra julgar o resultado com um
-# clipe só, em vez de gastar cota gerando 8 de algo que talvez precise
-# ajustar. **Voltar para "8" assim que o Bryan aprovar o teste.**
-QTD_CLIPES = "1"
+# Voltou pra 8 em 29/07/2026, depois que o Bryan aprovou a rodada de prova
+# ("rodou liso, legenda boa, tudo certo"). Ficou em "1" durante o teste das
+# cinco mudanças de qualidade — fonte 1080p, tracking em rampa, legenda a
+# 30%, punch-in cíclico e volume -14 LUFS.
+QTD_CLIPES = "8"
 IDIOMA = "pt"
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]

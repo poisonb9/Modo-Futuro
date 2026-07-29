@@ -22,6 +22,20 @@ on:
         description: "ID da pasta pai do Drive (com as subpastas 7/8/9)"
         required: true
 
+# Serializa os cortes: um de cada vez, na ordem em que foram disparados.
+#
+# Em 29/07/2026 o vigia disparou ~15 runs de uma vez e cinco falharam com
+# "The user's Drive storage quota has been exceeded" — todos DEPOIS de
+# cortar com sucesso, perdendo o trabalho na ultima etapa. A causa nao foi
+# o tamanho do Drive (15 GB), foi varios runs escrevendo nele ao mesmo
+# tempo enquanto os brutos de todos ocupavam espaco simultaneamente.
+#
+# cancel-in-progress: false porque cancelar um corte no meio joga fora
+# minutos ja gastos de Gemini e Groq — melhor enfileirar e esperar.
+concurrency:
+  group: cortar-de-bruto
+  cancel-in-progress: false
+
 jobs:
   cortar:
     runs-on: ubuntu-latest

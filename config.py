@@ -78,6 +78,20 @@ SILENCIO_FOLGA_S = 0.10      # deixa nas pontas pra fala não soar cortada
 MARGEM = 0.4                     # respiro antes/depois do corte (s)
 CONGELAMENTO_MAX_S = 4.5         # bloco contínuo travado acima disso descarta o candidato
 
+# Piso de gancho (0-10). O Gemini já devolve `forca_gancho` por clipe, mas
+# até 29/07/2026 esse número era gravado no post.json e nunca usado.
+#
+# Por que filtrar: o ECR — proporção que assiste além de ~5s — é o que prevê
+# sustentação de atenção, e watch time é o sinal dominante da decisão de
+# promover (sabedoria/PLAYBOOK_TIKTOK.md §22, N=50 papers). Clipe que abre
+# fraco perde na janela que mais pesa.
+#
+# ⚠️ 6.0 é GUARDA-CORPO, não número calibrado. Ninguém mediu ainda se
+# forca_gancho prevê desempenho real — isso só se sabe com o loop do
+# desempenho.py rodando. Escolhido conservador de propósito: derruba o que é
+# claramente fraco sem esvaziar o lote. Ajustar quando houver dado.
+GANCHO_MIN = 6.0
+
 # ---------------------------------------------------------------- descoberta (YouTube Data API v3)
 # Objetivo: achar vídeos com potencial de hype/monetização, sem nicho fixo.
 YOUTUBE_URL = "https://www.googleapis.com/youtube/v3"

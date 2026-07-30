@@ -111,24 +111,39 @@ def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str
     if not texto or not fonte:
         return ""
     pasta_tmp.mkdir(parents=True, exist_ok=True)
-    arq = pasta_tmp / "titulo.txt"
-    # newline="\n" é OBRIGATÓRIO: no Windows o modo texto do Python converte
-    # \n em \r\n, e o drawtext trata o \r como conteúdo — o primeiro teste
-    # saiu com um vão enorme entre as linhas por causa disso. Na nuvem
-    # (ubuntu) o defeito não apareceria, o que o tornaria ainda mais chato.
-    arq.write_text(_quebrar(texto), encoding="utf-8", newline="\n")
-    return (
-        f",drawtext=fontfile='{_escapar(Path(fonte))}'"
-        f":textfile='{_escapar(arq)}'"
-        f":fontcolor=white:fontsize={round(altura * 0.034)}"
-        f":line_spacing={round(altura * 0.006)}"
-        f":box=1:boxcolor=black@0.5:boxborderw={round(altura * 0.010)}"
-        f":x=(w-text_w)/2:y={round(altura * 0.07)}"
-        # 7% do topo: abaixo da barra de status do celular e ACIMA do rosto —
-        # o crop segue a face, que fica perto do centro. A 14% a caixa caía
-        # em cima dela (visto no teste de 30/07).
-        f":enable='lt(t,{TITULO_SEGUNDOS})'"
-    )
+
+    linhas = _quebrar(texto).split("\n")
+    corpo = round(altura * 0.036)
+    passo = round(corpo * 1.22)                  # entrelinha justa
+    topo = round(altura * 0.075)                 # abaixo da barra de status
+    filtros = []
+    for i, linha in enumerate(linhas):
+        # Um drawtext POR LINHA. Com textfile de várias linhas o bloco todo é
+        # centrado, mas cada linha fica alinhada à ESQUERDA dentro dele — é o
+        # degrau torto do primeiro teste. Uma chamada por linha deixa usar
+        # x=(w-text_w)/2 em cada uma, que é centralização de verdade.
+        #
+        # newline="\n" é OBRIGATÓRIO: no Windows o modo texto do Python
+        # converte \n em \r\n e o drawtext trata o \r como conteúdo (foi o vão
+        # gigante entre linhas no primeiro teste). No ubuntu da nuvem o
+        # defeito não apareceria, o que o tornaria ainda mais difícil de achar.
+        arq = pasta_tmp / f"titulo_{i}.txt"
+        arq.write_text(linha, encoding="utf-8", newline="\n")
+        filtros.append(
+            f",drawtext=fontfile='{_escapar(Path(fonte))}'"
+            f":textfile='{_escapar(arq)}'"
+            f":fontcolor=white:fontsize={corpo}"
+            # Sem caixa. Contorno preto grosso + sombra deslocada dão leitura
+            # sobre qualquer fundo sem tapar a imagem. A caixa preta atrás
+            # tinha cara de legenda automática, não de gancho.
+            f":borderw={max(2, round(corpo * 0.10))}:bordercolor=black"
+            f":shadowcolor=black@0.55"
+            f":shadowx={max(1, round(corpo * 0.045))}"
+            f":shadowy={max(1, round(corpo * 0.06))}"
+            f":x=(w-text_w)/2:y={topo + i * passo}"
+            f":enable='lt(t,{TITULO_SEGUNDOS})'"
+        )
+    return "".join(filtros)
 
 
 def _render(bruto: Path, filtro_video: str, ass: Path | None,

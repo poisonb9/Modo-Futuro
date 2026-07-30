@@ -10,6 +10,7 @@ Reaproveita a mesma autenticação (client_secrets.json / token_drive.json)
 já usada pelo subir_drive.py.
 """
 import argparse
+import datetime
 import sys
 from pathlib import Path
 
@@ -20,11 +21,19 @@ CLIENT_SECRETS = config.RAIZ / "client_secrets.json"
 TOKEN = config.RAIZ / "token_drive.json"
 
 
-def _servico():
+def _servico(conta: str = "principal"):
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
     from googleapiclient.discovery import build
+
+    # A conta vem de quem chamou (o processar_lista escolhe pela folga de
+    # espaço). Antes daqui só existia o token_drive.json, ou seja: a conta
+    # principal, sempre — e quando ela enchia o upload morria com 403, com o
+    # trabalho de Gemini e Groq já pago. Ver contas_drive.py.
+    if conta and conta != "principal":
+        import contas_drive
+        return contas_drive.servico(contas_drive.conta_por_nome(conta))
 
     cred = None
     if TOKEN.exists():
@@ -53,12 +62,17 @@ def _achar_ou_criar_subpasta(servico, pai_id: str, nome: str) -> str:
     return nova["id"]
 
 
-def enviar(arquivo: Path, pasta_pai_id: str) -> str:
+def enviar(arquivo: Path, pasta_pai_id: str, apagar_local: bool = False,
+           conta: str = "principal") -> str:
     from googleapiclient.http import MediaFileUpload
 
-    servico = _servico()
+    servico = _servico(conta)
     pasta_brutos = _achar_ou_criar_subpasta(servico, pasta_pai_id, "brutos")
-    meta = {"name": arquivo.name, "parents": [pasta_brutos]}
+    # Um nível a mais por data: brutos/AAAA-MM-DD agrupa tudo que entrou no
+    # dia, senão a pasta brutos vira um monte só depois de algumas semanas.
+    hoje = datetime.date.today().isoformat()
+    pasta_dia = _achar_ou_criar_subpasta(servico, pasta_brutos, hoje)
+    meta = {"name": arquivo.name, "parents": [pasta_dia]}
     media = MediaFileUpload(str(arquivo), resumable=True)
     arq = servico.files().create(body=meta, media_body=media, fields="id").execute()
     file_id = arq["id"]
@@ -78,8 +92,10 @@ def main():
     p = argparse.ArgumentParser(description="Sobe vídeo bruto pro Drive (fluxo híbrido)")
     p.add_argument("--arquivo", required=True, help="caminho do vídeo baixado")
     p.add_argument("--pasta-id", required=True, help="ID da pasta pai do Drive")
+    p.add_argument("--conta", default="principal",
+                   help="conta do Drive a usar (principal | reserva)")
     a = p.parse_args()
-    enviar(Path(a.arquivo), a.pasta_id)
+    enviar(Path(a.arquivo), a.pasta_id, conta=a.conta)
 
 
 if __name__ == "__main__":

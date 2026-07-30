@@ -19,3 +19,11 @@ teste/comparacao_modelos.json
 painel_err.log
 painel_out.log
 __pycache__/
+
+# OAuth client secret (installed) — NAO pode ir pro repo
+credentials.json
+
+# temporarios e material pesado de teste
+tmpfreeze/
+teste_elon.mp4
+modelos/

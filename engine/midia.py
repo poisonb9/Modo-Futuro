@@ -256,6 +256,11 @@ def congelamento_s(fonte: Path, inicio: float, fim: float) -> float:
     r = subprocess.run(
         ["ffmpeg", "-ss", f"{inicio:.3f}", "-i", str(fonte),
          "-t", f"{fim - inicio:.3f}",
+         # n=-60dB é o padrão do ffmpeg. Estava em -45dB, e nessa tolerância
+         # o filtro não distinguia NADA: medido em 28/07/2026, trecho de fala
+         # normal e frame genuinamente congelado davam os mesmos 8,3s. A -60dB
+         # o normal cai pra 0,9s e o congelamento real continua em 8,3s —
+         # afrouxar não custou sensibilidade, só tirou o falso positivo.
          "-vf", "freezedetect=n=-60dB:d=0.5", "-an", "-f", "null", "-"],
         capture_output=True, text=True, encoding="utf-8", errors="replace",
     )

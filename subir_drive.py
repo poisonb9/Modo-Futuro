@@ -1,7 +1,9 @@
 """Sobe os clipes prontos pro Google Drive, todos numa pasta por dia
 (ex: '28-07'), com a legenda num .txt ao lado (pro iPhone: baixa o vídeo
-+ abre o txt e cola no TikTok). A nota fica no nome do arquivo
-(nota91_...), então dá pra ordenar por nome e ver as melhores primeiro.
++ abre o txt e cola no TikTok). O nome começa por um número sequencial e
+depois a nota (003_nota91_...), então dá pra ordenar por nome, ver as
+melhores primeiro e achar um clipe pelo número numa lista longa —
+ver numeracao.py.
 
 Existe como alternativa ao rascunho via API quando a fila do TikTok trava
 (ver sabedoria/SABEDORIA_TIKTOK.md, "REGRA DE OURO").
@@ -20,6 +22,7 @@ from datetime import date
 from pathlib import Path
 
 import config
+import numeracao
 from engine import telegram
 from publicar_tiktok import legenda_do_clipe
 
@@ -155,32 +158,52 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
 
     print(f"{len(fila)} clipe(s) pra subir.\n")
     servico = _servico(conta)
-    # Tudo do dia vai pra uma pasta só. A classificação continua existindo,
-    # mas no NOME do arquivo (nota91_...), não em subpasta 7/8/9 — assim a
-    # pasta do dia mostra a colheita inteira de uma vez, já ordenável por nota.
+    # A pasta do dia se divide em `parte 01`, `parte 02`... com 15 clipes cada
+    # (numeracao.POR_PASTA). Antes tudo do dia caía numa pasta só, e em 29/07
+    # isso deu 138 clipes — rolagem longa no celular pra achar qualquer um.
+    # A classificação continua no NOME (003_nota91_...), e o número é do DIA:
+    # não reinicia a cada parte.
     hoje = date.today().strftime("%d-%m")
     pasta_dia = _achar_ou_criar_subpasta(servico, pasta_pai_id, hoje)
 
+    # A numeração continua de onde o lote anterior do dia parou — a pasta do
+    # dia recebe vários runs, e reiniciar em 001 criaria dois clipes com o
+    # mesmo apelido. Ver numeracao.py.
+    numero = numeracao.maior_numero_na_pasta(servico, pasta_dia)
+
+    # As subpastas `parte NN` são criadas sob demanda e ficam em cache aqui:
+    # sem isso seria uma consulta ao Drive por clipe só pra achar a mesma
+    # pasta de novo.
+    partes: dict[str, str] = {}
+
     enviados = 0
     for nota, clipe in fila:
+        numero += 1
+        parte = numeracao.nome_da_parte(numero)
+        if parte not in partes:
+            partes[parte] = _achar_ou_criar_subpasta(servico, pasta_dia, parte)
+        destino = partes[parte]
         video = clipe / "short_9x16.mp4"
         legenda = legenda_do_clipe(clipe)
 
         txt = clipe / "_legenda_drive.txt"
         txt.write_text(legenda, encoding="utf-8")
 
-        nome_video = f"nota{int(nota)}_{clipe.name}.mp4"
-        nome_txt = f"nota{int(nota)}_{clipe.name}.txt"
-        print(f"  [pasta {hoje}] nota {nota:.0f}  {clipe.name}")
+        base = numeracao.com_numero(f"nota{int(nota)}_{clipe.name}", numero)
+        nome_video = f"{base}.mp4"
+        nome_txt = f"{base}.txt"
+        print(f"  [{hoje}/{parte}] {numeracao.formatar(numero)}  "
+              f"nota {nota:.0f}  {clipe.name}")
         try:
-            _upload_renomeado(servico, pasta_dia, video, nome_video, "video/mp4")
-            _upload_renomeado(servico, pasta_dia, txt, nome_txt, "text/plain")
+            _upload_renomeado(servico, destino, video, nome_video, "video/mp4")
+            _upload_renomeado(servico, destino, txt, nome_txt, "text/plain")
         finally:
             txt.unlink(missing_ok=True)
 
         _marcar(_chave(clipe))
         if avisar_telegram:
-            telegram.enviar(f"[Drive · pasta {hoje}] {legenda}")
+            telegram.enviar(f"[Drive · {hoje}/{parte} · "
+                            f"{numeracao.formatar(numero)}] {legenda}")
         enviados += 1
 
     print(f"\n{enviados} clipe(s) enviado(s) pro Drive"

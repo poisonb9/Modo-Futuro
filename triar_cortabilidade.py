@@ -42,8 +42,35 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 import config                       # noqa: E402
 from engine import nemotron         # noqa: E402
 
-DESCOBRIDOR = Path(__file__).resolve().parent.parent / "descobridor-de-virais" / "descobridor-de-virais"
-CSVS = ["fila_de_aprovacao.csv", "viral_geral.csv", "oportunidades_podcast.csv"]
+def _achar_descobridor() -> Path:
+    """Procura a pasta do descobridor subindo a árvore, em vez de contar
+    níveis fixos.
+
+    O caminho antigo repetia o nome da pasta
+    (`..\\descobridor-de-virais\\descobridor-de-virais`), herdado do layout
+    aninhado da máquina anterior. No layout atual ele não existe, e o efeito
+    era silencioso do pior jeito: `candidatos()` não achava CSV nenhum e a
+    triagem dizia "nada a triar" — parecendo trabalho concluído. É o mesmo
+    defeito que o `config.py` do descobridor já documenta na direção oposta.
+    """
+    aqui = Path(__file__).resolve().parent
+    for base in [aqui, *aqui.parents][:5]:
+        for cand in (base / "descobridor-de-virais", base.parent / "descobridor-de-virais"):
+            if cand.is_dir() and any(cand.glob("*.csv")):
+                return cand
+    return aqui.parent / "descobridor-de-virais"
+
+
+DESCOBRIDOR = _achar_descobridor()
+
+# Os CSVs fixos dos radares antigos, MAIS todo `radar_*.csv` — o
+# `radar_assunto.py` cria um arquivo por assunto (`radar_limiar_humano.csv`,
+# `radar_robos_ia.csv`...), e uma lista fixa nunca os incluiria. Sem isto a
+# triagem ignorava exatamente as listas dirigidas, que são as que o Bryan
+# manda rodar.
+CSVS = sorted({"fila_de_aprovacao.csv", "viral_geral.csv",
+               "oportunidades_podcast.csv",
+               *(p.name for p in DESCOBRIDOR.glob("radar_*.csv"))})
 CACHE = config.ESTADO / "cortabilidade.json" if hasattr(config, "ESTADO") \
     else Path(__file__).resolve().parent / "estado" / "cortabilidade.json"
 
@@ -87,6 +114,15 @@ def baixar_legenda(url: str, tentativas: int = 3) -> tuple[str, str] | tuple[Non
                     # rate limit de IP do YouTube: espera crescente
                     time.sleep(20 * (t + 1))
                     continue
+                if "not a bot" in erro or "Sign in to confirm" in erro:
+                    # Bloqueio de IP de datacenter — o MESMO que impede o
+                    # download de vídeo na VPS. Medido em 30/07/2026: numa
+                    # tanda de 154, 101 caíram aqui e eram rotulados
+                    # "sem_legenda", como se o vídeo não tivesse legenda.
+                    # São coisas opostas: sem_legenda é veredito final, isto
+                    # é falha NOSSA e o vídeo continua candidato — basta
+                    # triar da máquina do Bryan, que tem IP residencial.
+                    return None, "bloqueado_ip"
                 break        # não tem esse idioma, tenta o próximo
     return None, "sem_legenda"
 
@@ -177,10 +213,17 @@ def gravar_csv(caminho: Path, linhas, campos):
         w.writerows(linhas)
 
 
-def candidatos():
-    """Linhas com URL, ainda não cortadas e ainda sem nota de cortabilidade."""
+def candidatos(so_csv: str | None = None):
+    """Linhas com URL, ainda não cortadas e ainda sem nota de cortabilidade.
+
+    `so_csv` restringe a um arquivo (ex: 'radar_limiar_humano.csv'). Sem ele a
+    fila junta todos os radares — mais de mil linhas — e triar "os 20
+    primeiros" pegaria os do radar mais antigo, não os da lista recém-rodada.
+    """
     out = []
     for nome in CSVS:
+        if so_csv and nome != so_csv:
+            continue
         caminho = DESCOBRIDOR / nome
         if not caminho.exists():
             continue
@@ -258,6 +301,8 @@ def main():
     p.add_argument("--url", help="tria uma URL avulsa, sem mexer nos CSVs")
     p.add_argument("--titulo", default="(avulso)", help="título, com --url")
     p.add_argument("--workers", type=int, default=3)
+    p.add_argument("--csv", help="tria só este CSV do descobridor "
+                                 "(ex: radar_limiar_humano.csv)")
     a = p.parse_args()
 
     cache = cache_ler()
@@ -270,7 +315,7 @@ def main():
             cache_gravar(cache)
         return
 
-    fila = candidatos()
+    fila = candidatos(a.csv)
     if not fila:
         print("Nada pra triar. Rode os radares do descobridor primeiro.")
         return
@@ -284,10 +329,17 @@ def main():
     alvos = fila[:a.top]
     print(f"triando {len(alvos)} de {len(fila)} candidatos (só legenda, sem download)\n")
 
+    # O resultado fica CASADO com o candidato desde já. Antes o `None` de uma
+    # falha era filtrado da lista e o `zip` seguinte deslocava tudo: a nota de
+    # um vídeo era gravada na linha de outro. Com um alvo só nunca aparecia;
+    # com 154 e a rede falhando no meio, aparece.
     with ThreadPoolExecutor(max_workers=a.workers) as ex:
-        resultados = [r for r in ex.map(lambda c: triar_um(c, cache), alvos) if r]
+        pares = list(zip(alvos, ex.map(lambda c: triar_um(c, cache), alvos)))
 
-    for c, r in zip(alvos, resultados):
+    resultados = [r for _, r in pares if r]
+    for c, r in pares:
+        if not r:
+            continue
         cache[c["url"]] = r
         anotar(c["csv"], c["i"], r)
     cache_gravar(cache)

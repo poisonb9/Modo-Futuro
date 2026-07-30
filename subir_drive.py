@@ -171,6 +171,16 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
     # mesmo apelido. Ver numeracao.py.
     numero = numeracao.maior_numero_na_pasta(servico, pasta_dia)
 
+    # Medido em 30/07: DOIS runs do GitHub Actions cortaram em paralelo, cada
+    # um contou o maior número antes de o outro subir, e os dois começaram no
+    # 013 — dois clipes com o mesmo apelido, 3 segundos de diferença. Contar
+    # uma vez por run não basta quando há mais de um run.
+    #
+    # Por isso a contagem é refeita a cada clipe (abaixo), o que estreita a
+    # janela de colisão de "a duração do run" para "a duração de um upload".
+    # Não elimina: a rede de segurança é o renumerar_a_postar.py, que
+    # reordena a pasta inteira e é idempotente.
+
     # As subpastas `parte NN` são criadas sob demanda e ficam em cache aqui:
     # sem isso seria uma consulta ao Drive por clipe só pra achar a mesma
     # pasta de novo.
@@ -178,7 +188,8 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
 
     enviados = 0
     for nota, clipe in fila:
-        numero += 1
+        numero = max(numero + 1,
+                     numeracao.maior_numero_na_pasta(servico, pasta_dia) + 1)
         parte = numeracao.nome_da_parte(numero)
         if parte not in partes:
             partes[parte] = _achar_ou_criar_subpasta(servico, pasta_dia, parte)

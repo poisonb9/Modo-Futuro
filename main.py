@@ -206,7 +206,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av)
         print("      renderizando 9:16 com face tracking...")
         status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
-        render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado)
+        # O título vai NA TELA nos primeiros segundos, não só na descrição.
+        # O Gemini já devolvia esse campo e ele só era usado como legenda do
+        # post — a informação existia e estava sendo jogada fora justamente
+        # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
+        render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
+                        titulo=c.get("titulo", ""))
 
         if not so_vertical:
             lh, ah = config.HORIZONTAL

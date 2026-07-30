@@ -48,6 +48,89 @@ def cortar(fonte: Path, inicio: float, fim: float, destino: Path) -> Path:
 AUDIO_LOUDNORM = "loudnorm=I=-14:TP=-1.5:LRA=11"
 
 
+# ------------------------------------------------------------ título na tela
+#
+# Pedido do Bryan em 30/07/2026, depois do diagnóstico do canal.
+#
+# Por que existe: o clipe tinha legenda karaokê e MAIS NADA no primeiro meio
+# segundo — a legenda aparece palavra a palavra conforme a fala, então quem
+# rola o feed não tem o que ler pra decidir parar. Sete fontes independentes
+# do corpus `destravar-tiktok` apontam o título em texto na abertura como a
+# alavanca nº 1 pra fazer o dedo parar: o cérebro lê mais rápido do que ouve,
+# e a decisão de assistir acontece antes do gancho falado terminar.
+#
+# É título de TÓPICO, não legenda: diz do que o vídeo trata em uma linha.
+
+TITULO_SEGUNDOS = 3.5      # tempo na tela; o gancho falado cobre o resto
+TITULO_LINHA_MAX = 24      # caracteres por linha, calibrado pra 1080 de largura
+TITULO_MAX_LINHAS = 3      # acima disso vira parágrafo e ninguém lê
+
+# A ordem importa: o corte roda no ubuntu do GitHub Actions, não no Windows.
+# Apontar direto pra C:/Windows/Fonts derrubaria o render na nuvem — que é
+# onde ele roda de verdade.
+_FONTES = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",       # ubuntu
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+    "C:/Windows/Fonts/arialbd.ttf",                                # windows
+    "C:/Windows/Fonts/seguibl.ttf",
+]
+
+
+def _fonte_titulo() -> str | None:
+    for f in _FONTES:
+        if Path(f).exists():
+            return f
+    return None
+
+
+def _quebrar(texto: str, largura: int = TITULO_LINHA_MAX) -> str:
+    linhas, atual = [], ""
+    for palavra in (texto or "").split():
+        if len(atual) + len(palavra) + 1 <= largura:
+            atual = f"{atual} {palavra}".strip()
+        else:
+            linhas.append(atual)
+            atual = palavra
+        if len(linhas) == TITULO_MAX_LINHAS:
+            break
+    if atual and len(linhas) < TITULO_MAX_LINHAS:
+        linhas.append(atual)
+    return "\n".join(linhas)
+
+
+def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str:
+    """Filtro drawtext com o título nos primeiros segundos, ou '' se não der.
+
+    O texto vai por ARQUIVO (`textfile`), não inline: título real tem aspas,
+    dois-pontos, vírgula e acento, e todos são metacaracteres do drawtext —
+    escapar na mão é a receita para um render que quebra num título e passa
+    em outro.
+    """
+    texto = (texto or "").strip()
+    fonte = _fonte_titulo()
+    if not texto or not fonte:
+        return ""
+    pasta_tmp.mkdir(parents=True, exist_ok=True)
+    arq = pasta_tmp / "titulo.txt"
+    # newline="\n" é OBRIGATÓRIO: no Windows o modo texto do Python converte
+    # \n em \r\n, e o drawtext trata o \r como conteúdo — o primeiro teste
+    # saiu com um vão enorme entre as linhas por causa disso. Na nuvem
+    # (ubuntu) o defeito não apareceria, o que o tornaria ainda mais chato.
+    arq.write_text(_quebrar(texto), encoding="utf-8", newline="\n")
+    return (
+        f",drawtext=fontfile='{_escapar(Path(fonte))}'"
+        f":textfile='{_escapar(arq)}'"
+        f":fontcolor=white:fontsize={round(altura * 0.034)}"
+        f":line_spacing={round(altura * 0.006)}"
+        f":box=1:boxcolor=black@0.5:boxborderw={round(altura * 0.010)}"
+        f":x=(w-text_w)/2:y={round(altura * 0.07)}"
+        # 7% do topo: abaixo da barra de status do celular e ACIMA do rosto —
+        # o crop segue a face, que fica perto do centro. A 14% a caixa caía
+        # em cima dela (visto no teste de 30/07).
+        f":enable='lt(t,{TITULO_SEGUNDOS})'"
+    )
+
+
 def _render(bruto: Path, filtro_video: str, ass: Path | None,
             destino: Path, audio_dublado: Path | None = None) -> Path:
     cadeia = filtro_video
@@ -110,12 +193,19 @@ def _ken_burns(bruto: Path, largura: int, altura: int) -> str:
 
 
 def vertical(bruto: Path, ass: Path | None, destino: Path,
-             audio_dublado: Path | None = None) -> Path:
-    """9:16 para Shorts, com o quadro seguindo o rosto."""
+             audio_dublado: Path | None = None, titulo: str = "") -> Path:
+    """9:16 para Shorts, com o quadro seguindo o rosto.
+
+    `titulo` desenha o texto de abertura (ver filtro_titulo). Vem DEPOIS do
+    punch-in de propósito: o zoompan reescala o quadro, e um drawtext antes
+    dele seria ampliado e cortado junto.
+    """
     l, a = midia.dimensoes(bruto)
     caminho = enquadrar.trajetoria(bruto, l, a)
     lv, av = config.VERTICAL
-    filtro = enquadrar.filtro_vertical(l, a, caminho) + _ken_burns(bruto, lv, av)
+    filtro = (enquadrar.filtro_vertical(l, a, caminho)
+              + _ken_burns(bruto, lv, av)
+              + filtro_titulo(titulo, lv, av, destino.parent))
     return _render(bruto, filtro, ass, destino, audio_dublado)
 
 

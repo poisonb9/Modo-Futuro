@@ -184,9 +184,15 @@ def escolher_conta() -> dict:
 
 
 def subir_bruto(arquivo: Path, conta: dict) -> str:
+    # Destino: a pasta RAW da conta — a MESMA que o vigia_raw varre a cada 10
+    # minutos na VPS. Até 30/07 isto subia pra `raiz/brutos`, que ninguém
+    # vigia: os brutos subiam, o corte não disparava, e sem GITHUB_TOKEN no
+    # notebook o vídeo ficava parado sem ninguém perceber. Mandando pra RAW,
+    # quem dispara é o vigia, que já tem o token — o notebook não precisa de
+    # credencial nenhuma do GitHub.
     saida = _roda([sys.executable, "-X", "utf8", "enviar_bruto_drive.py",
-                   "--arquivo", str(arquivo), "--pasta-id", conta["raiz"],
-                   "--conta", conta["nome"]])
+                   "--arquivo", str(arquivo), "--pasta-id", conta["raw"],
+                   "--conta", conta["nome"], "--subpasta", ""])
     for linha in saida.splitlines():
         if linha.startswith("DRIVE_FILE_ID="):
             return linha.split("=", 1)[1].strip()
@@ -196,8 +202,11 @@ def subir_bruto(arquivo: Path, conta: dict) -> str:
 def disparar_corte(file_id: str, nome_arquivo: str, idioma: str = "pt",
                    conta: dict | None = None):
     if not GITHUB_TOKEN:
-        log("   [!] Falta GITHUB_TOKEN no .env — não disparei o corte automaticamente."
-            " Rode manualmente no GitHub Actions (workflow cortar_de_bruto.yml).")
+        # Não é problema: o bruto foi pra RAW, e o vigia_raw da VPS varre essa
+        # pasta a cada 10 minutos e dispara o corte com o token DELE. Este
+        # aviso existia como erro e assustava à toa.
+        log("   bruto na RAW — o vigia da VPS dispara o corte em até 10 min "
+            "(2 por passada, pra não brigar por cota).")
         return
     r = requests.post(
         f"https://api.github.com/repos/{REPO}/actions/workflows/cortar_de_bruto.yml/dispatches",

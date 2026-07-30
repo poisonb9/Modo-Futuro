@@ -51,23 +51,36 @@ def _servico(conta: str = "principal"):
 
 
 def _achar_ou_criar_subpasta(servico, pai_id: str, nome: str) -> str:
-    q = (f"'{pai_id}' in parents and name = '{nome}' "
-         "and mimeType = 'application/vnd.google-apps.folder' and trashed = false")
-    r = servico.files().list(q=q, fields="files(id, name)").execute()
-    arquivos = r.get("files", [])
-    if arquivos:
-        return arquivos[0]["id"]
+    def procurar():
+        q = (f"'{pai_id}' in parents and name = '{nome}' and "
+             "mimeType = 'application/vnd.google-apps.folder' and trashed = false")
+        return servico.files().list(
+            q=q, fields="files(id, name, createdTime)",
+            orderBy="createdTime").execute().get("files", [])
+
+    achados = procurar()
+    if achados:
+        return achados[0]["id"]
     meta = {"name": nome, "mimeType": "application/vnd.google-apps.folder", "parents": [pai_id]}
-    nova = servico.files().create(body=meta, fields="id").execute()
-    return nova["id"]
+    novo = servico.files().create(body=meta, fields="id").execute()["id"]
+    # O Drive deixa criar duas pastas com o MESMO nome, e o processar_lista
+    # roda dois downloads em paralelo: em 30/07 os dois criaram sua própria
+    # `2026-07-30` e os brutos ficaram espalhados em duas pastas iguais.
+    # Depois de criar, procura de novo e fica com a MAIS ANTIGA — as duas
+    # threads convergem para a mesma.
+    achados = procurar()
+    return achados[0]["id"] if achados else novo
 
 
 def enviar(arquivo: Path, pasta_pai_id: str, apagar_local: bool = False,
-           conta: str = "principal") -> str:
+           conta: str = "principal", subpasta: str = "brutos") -> str:
     from googleapiclient.http import MediaFileUpload
 
     servico = _servico(conta)
-    pasta_brutos = _achar_ou_criar_subpasta(servico, pasta_pai_id, "brutos")
+    # `subpasta` vazia = grava direto no pai. É o que o processar_lista usa ao
+    # mandar pra RAW, que já tem o nível de data e é o que o vigia varre.
+    pasta_brutos = (_achar_ou_criar_subpasta(servico, pasta_pai_id, subpasta)
+                    if subpasta else pasta_pai_id)
     # Um nível a mais por data: brutos/AAAA-MM-DD agrupa tudo que entrou no
     # dia, senão a pasta brutos vira um monte só depois de algumas semanas.
     hoje = datetime.date.today().isoformat()
@@ -94,8 +107,10 @@ def main():
     p.add_argument("--pasta-id", required=True, help="ID da pasta pai do Drive")
     p.add_argument("--conta", default="principal",
                    help="conta do Drive a usar (principal | reserva)")
+    p.add_argument("--subpasta", default="brutos",
+                   help="subpasta a criar dentro do destino; vazio grava direto")
     a = p.parse_args()
-    enviar(Path(a.arquivo), a.pasta_id, conta=a.conta)
+    enviar(Path(a.arquivo), a.pasta_id, conta=a.conta, subpasta=a.subpasta)
 
 
 if __name__ == "__main__":

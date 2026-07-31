@@ -112,18 +112,29 @@ def _fonte_titulo() -> str | None:
 
 
 def _quebrar(texto: str, largura: int = TITULO_LINHA_MAX) -> str:
+    """Quebra em até TITULO_MAX_LINHAS linhas de até `largura` caracteres.
+
+    Bug corrigido em 31/07/2026: ao fechar a última linha permitida, o laço
+    saía com `break` e a palavra que tinha acabado de virar `atual` nunca
+    era gravada — o título perdia a última palavra sempre que ela caía
+    bem no ponto de quebra da linha final (ex: "...dominar a" sem
+    "humanidade"). Agora a última linha permitida absorve o resto do
+    título inteiro, mesmo passando de `largura` — preferível a apagar
+    parte do título. Título já vem limitado a 80 caracteres pelo prompt do
+    Gemini, então essa última linha nunca cresce sem controle.
+    """
     linhas, atual = [], ""
     for palavra in (texto or "").split():
-        if len(atual) + len(palavra) + 1 <= largura:
+        cabe = len(atual) + len(palavra) + 1 <= largura
+        ultima_linha = len(linhas) == TITULO_MAX_LINHAS - 1
+        if cabe or ultima_linha:
             atual = f"{atual} {palavra}".strip()
         else:
             linhas.append(atual)
             atual = palavra
-        if len(linhas) == TITULO_MAX_LINHAS:
-            break
-    if atual and len(linhas) < TITULO_MAX_LINHAS:
+    if atual:
         linhas.append(atual)
-    return "\n".join(linhas)
+    return "\n".join(linhas[:TITULO_MAX_LINHAS])
 
 
 def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str:

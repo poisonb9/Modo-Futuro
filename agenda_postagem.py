@@ -77,8 +77,44 @@ def agenda(inicio: dt.date, dias: int, slots: int = len(ANCORAS),
     return linhas
 
 
+def semanal(jitter: int = JITTER_MIN, slots: int = len(ANCORAS)) -> list[dict]:
+    """Um horário diferente por DIA DA SEMANA, para configurar UMA VEZ.
+
+    Existe por causa de como as ferramentas funcionam. Publer e Buffer têm
+    "time slots" por dia da semana: você configura os horários uma vez, joga
+    os vídeos na fila, e a ferramenta agenda sozinha no próximo slot livre —
+    sem escolher horário vídeo a vídeo.
+
+    Só que o slot é FIXO. Para ter minuto variado sem pagar pelo agendamento
+    em massa, a variação passa a ser semanal em vez de diária: 28 horários
+    distintos (7 dias × 4), configurados uma vez, repetindo toda semana.
+
+    É menos aleatório que sortear por dia — mas some a assinatura de "11:30
+    cravado, todo dia", que é o que interessa, e não exige manutenção.
+    """
+    nomes = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
+    linhas = []
+    for i, nome in enumerate(nomes):
+        rnd = random.Random(f"modofuturo-semana-{nome}")
+        for h, m, apelido in ANCORAS[:slots]:
+            minuto = m + rnd.randint(-jitter, jitter)
+            hora = h
+            if minuto < 0:
+                hora, minuto = hora - 1, minuto + 60
+            elif minuto > 59:
+                hora, minuto = hora + 1, minuto - 60
+            linhas.append({"dia_semana": nome, "hora": f"{hora:02d}:{minuto:02d}",
+                           "faixa": apelido})
+    return linhas
+
+
 def main():
     p = argparse.ArgumentParser(description="Agenda de postagem com minutos sorteados")
+    p.add_argument("--semanal", action="store_true",
+                   help="tabela por dia da semana, para configurar os time "
+                        "slots do Publer/Buffer uma vez só")
+    p.add_argument("--publer", action="store_true",
+                   help="CSV no formato do Publer (data AAAA/MM/DD, hora HH:MM)")
     p.add_argument("--dias", type=int, default=14)
     p.add_argument("--slots", type=int, default=len(ANCORAS),
                    help=f"quantos posts por dia (máx {len(ANCORAS)})")
@@ -89,7 +125,21 @@ def main():
     a = p.parse_args()
 
     inicio = dt.date.fromisoformat(a.inicio) if a.inicio else dt.date.today()
-    linhas = agenda(inicio, a.dias, min(a.slots, len(ANCORAS)), a.jitter)
+    nslots = min(a.slots, len(ANCORAS))
+
+    if a.semanal:
+        print("Time slots por dia da semana — configure UMA VEZ no Publer/Buffer\n")
+        atual = None
+        for l in semanal(a.jitter, nslots):
+            if l["dia_semana"] != atual:
+                atual = l["dia_semana"]
+                print(f"\n  {atual:<9}", end=" ")
+            print(f"{l['hora']}", end="  ")
+        print("\n\n  Depois é só jogar os vídeos na fila: a ferramenta encaixa")
+        print("  cada um no próximo slot livre, sem você escolher horário.")
+        return
+
+    linhas = agenda(inicio, a.dias, nslots, a.jitter)
 
     print(f"Agenda — {a.dias} dia(s), {min(a.slots, len(ANCORAS))} post(s) por dia, "
           f"minuto sorteado ±{a.jitter} (horário de Brasília)\n")
@@ -104,10 +154,21 @@ def main():
 
     if a.csv:
         with open(a.csv, "w", encoding="utf-8", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=["data", "dia_semana", "hora", "faixa"])
-            w.writeheader()
-            w.writerows(linhas)
-        print(f"→ {a.csv} ({len(linhas)} horários)")
+            if a.publer:
+                # Formato que o Publer lê no import em massa: data AAAA/MM/DD e
+                # hora HH:MM em 24h, uma linha por post. As colunas de texto e
+                # mídia ficam vazias — você preenche com a legenda do .txt de
+                # cada clipe e o arquivo do vídeo.
+                w = csv.writer(f)
+                w.writerow(["Date", "Time", "Text", "Media URL"])
+                for l in linhas:
+                    w.writerow([l["data"].replace("-", "/"), l["hora"], "", ""])
+            else:
+                w = csv.DictWriter(f, fieldnames=["data", "dia_semana", "hora", "faixa"])
+                w.writeheader()
+                w.writerows(linhas)
+        print(f"→ {a.csv} ({len(linhas)} horários"
+              f"{', formato Publer' if a.publer else ''})")
 
 
 if __name__ == "__main__":

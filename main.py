@@ -14,7 +14,8 @@ from datetime import datetime
 from pathlib import Path
 
 import config
-from engine import midia, selecao, transcricao, legendas, render, traducao, dublagem, status
+from engine import (midia, selecao, transcricao, legendas, render, traducao,
+                    dublagem, status, ancoragem)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -134,6 +135,13 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     for i, c in enumerate(clipes, 1):
         ini, fim = c["inicio_s"], c["fim_s"]
         if not recorte:   # no modo manual o usuário mandou os tempos exatos
+            # ANTES do congelamento: recua o início até o começo da frase.
+            # Medido em 30/07 nos insights reais — os clipes abriam no meio da
+            # frase ("A GENTE PROVAVELMENTE...") e metade da audiência saía
+            # em 0:02. Ver engine/ancoragem.py.
+            ini = ancoragem.ancorar(fonte, ini, fim, idioma)
+            c["inicio_s"] = ini
+
             nova_ini = midia.pular_congelamento_inicial(fonte, ini, fim)
             if nova_ini > ini:
                 print(f"      início ajustado {ini:.1f}s→{nova_ini:.1f}s "

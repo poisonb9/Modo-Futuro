@@ -62,17 +62,31 @@ AUDIO_LOUDNORM = "loudnorm=I=-14:TP=-1.5:LRA=11"
 # É título de TÓPICO, não legenda: diz do que o vídeo trata em uma linha.
 
 TITULO_SEGUNDOS = 3.5      # tempo na tela; o gancho falado cobre o resto
-TITULO_LINHA_MAX = 24      # caracteres por linha, calibrado pra 1080 de largura
+TITULO_LINHA_MAX = 21      # caracteres por linha (Anton é condensada, cabe mais)
 TITULO_MAX_LINHAS = 3      # acima disso vira parágrafo e ninguém lê
 
-# A ordem importa: o corte roda no ubuntu do GitHub Actions, não no Windows.
-# Apontar direto pra C:/Windows/Fonts derrubaria o render na nuvem — que é
-# onde ele roda de verdade.
+# A fonte VIAJA COM O REPOSITÓRIO. Arial e DejaVu são tipos de interface: dão
+# exatamente a "cara de gerado automaticamente" que o Bryan reclamou em
+# 30/07. Anton é display condensada — é o tipo que os canais de corte usam em
+# gancho, e é o que separa "vídeo feito" de "vídeo cuspido por script".
+#
+# Depender da fonte da máquina também é frágil: o corte roda no ubuntu do
+# GitHub Actions, e cada runner tem um conjunto diferente. Com a fonte no
+# repo, o resultado é idêntico aqui e na nuvem. Anton é OFL, pode redistribuir.
+FONTES_DIR = Path(__file__).resolve().parent / "fontes"
+
 _FONTES = [
+    # Inter Black — escolhida pelo Bryan em 31/07. É a MESMA que a legenda
+    # karaokê pede (legendas.py, Style: K), então o vídeo inteiro fica com
+    # uma tipografia só; e é a alternativa aberta desenhada para se parecer
+    # com a San Francisco da Apple, que ele pediu mas é licenciada e não
+    # pode ser redistribuída.
+    str(FONTES_DIR / "Inter-Black.ttf"),
+    str(FONTES_DIR / "Anton-Regular.ttf"),
+    # Reservas, se alguém rodar sem a pasta fontes/
     "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",       # ubuntu
     "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
     "C:/Windows/Fonts/arialbd.ttf",                                # windows
-    "C:/Windows/Fonts/seguibl.ttf",
 ]
 
 
@@ -114,7 +128,10 @@ def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str
 
     linhas = _quebrar(texto).split("\n")
     corpo = round(altura * 0.036)
-    passo = round(corpo * 1.22)                  # entrelinha justa
+    # Entrelinha generosa. A 1,22 as linhas encostavam umas nas outras — com
+    # acento maiúsculo (JÁ, É) o acento da linha de baixo quase tocava a
+    # perna da de cima, e era parte do que dava cara de automático.
+    passo = round(corpo * 1.42)
     topo = round(altura * 0.075)                 # abaixo da barra de status
     filtros = []
     for i, linha in enumerate(linhas):
@@ -132,6 +149,11 @@ def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str
         filtros.append(
             f",drawtext=fontfile='{_escapar(Path(fonte))}'"
             f":textfile='{_escapar(arq)}'"
+            # expansion=none: sem isso o drawtext trata % e {} como variável a
+            # expandir. Título real do canal tem porcentagem ("50% DOS EMPREGOS
+            # SERÃO ELIMINADOS PELA IA") e o ffmpeg reclama "Stray %" e come o
+            # texto. Achado em 31/07 testando a legenda de um clipe publicado.
+            f":expansion=none"
             f":fontcolor=white:fontsize={corpo}"
             # Sem caixa. Contorno preto grosso + sombra deslocada dão leitura
             # sobre qualquer fundo sem tapar a imagem. A caixa preta atrás
@@ -150,7 +172,12 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
             destino: Path, audio_dublado: Path | None = None) -> Path:
     cadeia = filtro_video
     if ass is not None:
-        cadeia += f",subtitles='{_escapar(ass)}'"
+        # fontsdir aponta pra pasta de fontes do repositório. O .ass pede
+        # "Inter Black" pelo NOME (legendas.py), e o ubuntu do GitHub Actions
+        # não tem Inter instalada — o libass caía calado numa fonte qualquer.
+        # A legenda dos vídeos até 30/07 provavelmente não era Inter.
+        cadeia += (f",subtitles='{_escapar(ass)}'"
+                   f":fontsdir='{_escapar(FONTES_DIR)}'")
 
     if audio_dublado is not None:
         # troca a trilha original pela dublada — vídeo vem do bruto (input 0),

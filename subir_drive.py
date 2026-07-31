@@ -163,7 +163,9 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
     # isso deu 138 clipes — rolagem longa no celular pra achar qualquer um.
     # A classificação continua no NOME (003_nota91_...), e o número é do DIA:
     # não reinicia a cada parte.
-    hoje = date.today().strftime("%d-%m")
+    # O nome carrega a versão do motor (`31-07 v2`) — assim dá pra ver de
+    # olho, no Drive, o que saiu do motor novo. Ver numeracao.MARCA_MOTOR.
+    hoje = numeracao.nome_do_dia(date.today().strftime("%d-%m"))
     pasta_dia = _achar_ou_criar_subpasta(servico, pasta_pai_id, hoje)
 
     # A numeração continua de onde o lote anterior do dia parou — a pasta do

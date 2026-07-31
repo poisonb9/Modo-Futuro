@@ -21,7 +21,21 @@ def _encoder() -> list[str]:
 
 def _escapar(p: Path) -> str:
     """ffmpeg trata ':' e '\\' como sintaxe dentro de filtro. No Windows o
-    caminho C:\\... quebra o filtro subtitles= se não for escapado."""
+    caminho C:\\... quebra o filtro subtitles= se não for escapado.
+
+    A APÓSTROFO também: o valor vai entre aspas simples no filtro, então um
+    caminho com `'` fecha a string no meio e o ffmpeg devolve "Error
+    initializing a simple filtergraph" — sem dizer qual filtro nem por quê.
+    Derrubou o run #63 em 31/07: a pasta do clipe herda o nome do vídeo, e o
+    vídeo era "Figure's First Full HQ Tour". Os outros dois runs do mesmo
+    lote passaram porque o nome deles era só o ID do YouTube.
+    """
+    # APÓSTROFO não tem escape que funcione aqui. Tentei as duas formas
+    # conhecidas em 31/07: \' o ffmpeg ignora e o filtro quebra ("No such
+    # filter"); o truque de shell 'a'\''b' faz o parser aceitar mas entregar
+    # um caminho corrompido ("Cannot read file"). A saída é não deixar
+    # apóstrofo chegar aqui — ver filtro_titulo e vertical(), que gravam em
+    # config.TRABALHO em vez da pasta do clipe (que herda o nome do vídeo).
     return str(p).replace("\\", "/").replace(":", r"\:")
 
 
@@ -123,6 +137,13 @@ def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str
     texto = (texto or "").strip()
     fonte = _fonte_titulo()
     if not texto or not fonte:
+        return ""
+    if "'" in str(pasta_tmp) or "'" in str(fonte):
+        # Sem escape possível (ver _escapar). Melhor entregar o clipe SEM
+        # título do que derrubar o corte inteiro: foi o que aconteceu no run
+        # #63, que morreu depois de já ter baixado 1,4 GB e cortado.
+        print("      [título] pulei: apóstrofo no caminho "
+              f"({str(pasta_tmp)[-40:]})")
         return ""
     pasta_tmp.mkdir(parents=True, exist_ok=True)
 
@@ -245,9 +266,13 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     l, a = midia.dimensoes(bruto)
     caminho = enquadrar.trajetoria(bruto, l, a)
     lv, av = config.VERTICAL
+    # O texto do título vai pra pasta de TRABALHO, não pra pasta do clipe: a
+    # pasta do clipe herda o nome do vídeo-fonte, e nome de vídeo tem
+    # apóstrofo, dois-pontos e o que mais o YouTube deixar. Caminho previsível
+    # aqui é o que evita a próxima quebra de filtro (ver _escapar).
     filtro = (enquadrar.filtro_vertical(l, a, caminho)
               + _ken_burns(bruto, lv, av)
-              + filtro_titulo(titulo, lv, av, destino.parent))
+              + filtro_titulo(titulo, lv, av, config.TRABALHO / "titulo"))
     return _render(bruto, filtro, ass, destino, audio_dublado)
 
 

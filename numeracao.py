@@ -41,6 +41,29 @@ NUMERO_DIGITOS = 3
 # está. Reiniciar por parte criaria treze clipes chamados 001.
 POR_PASTA = 30
 
+# Marca da versão do MOTOR no nome da pasta do dia: `31-07 v2`.
+#
+# Pedida pelo Bryan em 31/07/2026 para separar, de olho, o que saiu do motor
+# novo do que saiu do antigo — os dois vão conviver no Drive enquanto os
+# clipes velhos não forem refeitos.
+#
+# É código de versão, e não "NOVO", porque "novo" envelhece: daqui a duas
+# mudanças ninguém sabe mais qual novo era qual. O que cada versão significa
+# fica registrado aqui:
+#
+#   (sem marca) até 30/07 — sem título na tela, corte podendo cair no meio
+#                da frase, fonte da legenda resolvida por sorte no runner
+#   v2          31/07 — título em texto nos 3,5s iniciais, início ancorado no
+#                começo da frase, Inter Black vindo do repositório
+#
+# Vazio desliga a marca e a pasta volta a ser só `31-07`.
+MARCA_MOTOR = "v2"
+
+
+def nome_do_dia(dia: str) -> str:
+    """'31-07' -> '31-07 v2'. É o nome da pasta do dia dentro de A POSTAR."""
+    return f"{dia} {MARCA_MOTOR}".strip() if MARCA_MOTOR else dia
+
 # 'parte' com dois dígitos pelo mesmo motivo do número: com 138 clipes são 10
 # partes, e em ordem alfabética 'parte 10' cairia entre 'parte 1' e 'parte 2'.
 _PARTE = re.compile(r"^parte (\d+)$")

@@ -32,7 +32,18 @@ TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/"
 INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/"
 INBOX_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/inbox/video/init/"
 STATUS_URL = "https://open.tiktokapis.com/v2/post/publish/status/fetch/"
-ESCOPOS = "user.info.basic,video.publish,video.upload"
+# `video.list` (Display API) entrou em 31/07/2026: é ele que devolve
+# view_count, like_count, comment_count e share_count por vídeo — os quatro
+# números que o desempenho.py espera e que até agora vinham de CSV exportado
+# à mão. Ver metricas_tiktok.py.
+#
+# ⚠️ Escopo NÃO se acrescenta a token existente. Depois que o app for
+# aprovado com o Display API, é obrigatório refazer o OAuth do zero:
+#     ren token_tiktok.json token_tiktok.json.bak
+#     python publicar_tiktok.py --autorizar
+# Sem isso o token velho continua sem `video.list` e o metricas_tiktok.py
+# devolve `scope_not_authorized` (401).
+ESCOPOS = "user.info.basic,video.publish,video.upload,video.list"
 
 
 def _hashtag(tag: str) -> str:

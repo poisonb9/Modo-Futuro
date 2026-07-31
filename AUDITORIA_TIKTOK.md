@@ -99,6 +99,29 @@ Abra o TikTok no celular (ou web) e mostre o vídeo publicado no perfil, **com
 a legenda e as hashtags preenchidas**. Fecha o ciclo: o revisor viu entrar e
 viu sair.
 
+### Cena 6 — Display API / `video.list` (3:00–3:30)  ← NOVA em 31/07/2026
+
+No terminal:
+```
+python metricas_tiktok.py
+```
+Mostre a tabela aparecendo: uma linha por vídeo publicado, com **views,
+curtidas, comentários e compartilhamentos**. Depois rode:
+```
+python metricas_tiktok.py --gravar
+```
+e mostre o `estado/desempenho.json` sendo escrito, ou rode
+`python desempenho.py` para exibir o relatório.
+
+**Esta cena é obrigatória se o `video.list` estiver no formulário.** O
+revisor exige ver todos os escopos funcionando; escopo pedido sem
+demonstração é o motivo de recusa mais comum da tabela lá embaixo.
+
+⚠️ Ordem importa: grave esta cena **depois** da autorização (Cena 2), e a
+tela de consentimento precisa mostrar o `video.list` entre os escopos.
+
+---
+
 > Se quiser demonstrar também o `video.upload` (rascunho), rode
 > `python publicar_tiktok.py --pasta "..."` sem `--direto` e mostre o vídeo
 > chegando na Caixa de entrada. Só faça se houver vaga — hoje as ~5 estão
@@ -137,15 +160,25 @@ the app uses the Content Posting API to upload a pre-rendered MP4 (a short
 vertical clip with burned-in captions) directly to that same authorized
 account, with the caption and hashtags set programmatically (video.publish).
 
+The Display API (video.list) reads back the operator's own published videos
+to retrieve view, like, comment and share counts. These numbers are written
+to a local file and used to decide which clips to produce next. No metrics
+from any other account are requested, stored or displayed.
+
 Flow shown in the demo: (1) operator runs the local script, which prints the
 authorization URL and opens it; (2) operator logs in and approves the scopes;
 (3) the app exchanges the code for an access token; (4) the app calls
 post/publish/video/init to obtain an upload URL; (5) the app PUTs the video
-bytes; (6) the app polls post/publish/status/fetch until the post completes.
+bytes; (6) the app polls post/publish/status/fetch until the post completes;
+(7) the app calls video/list to read back the metrics of its own posts.
 
 No other TikTok accounts are involved, no data is shared with third parties,
 and the operator reviews every clip before it is published.
 ```
+
+> Acima de 1000 caracteres? Corte o parágrafo do passo a passo (o vídeo já
+> mostra o fluxo) e mantenha os três parágrafos de escopo — é o que o
+> revisor procura.
 
 ---
 
@@ -158,8 +191,31 @@ comuns e como corrigir:
 |---|---|
 | demo não mostra o fluxo completo | regravar incluindo a tela de consentimento e o resultado no app |
 | escopo pedido sem demonstração | remover o escopo não usado, ou demonstrá-lo |
-| URL de Termos/Privacidade não abre | tornar o artifact público (menu Compartilhar) |
+| URL de Termos/Privacidade não abre | hospedar o `site_times_report/` (ver abaixo) |
 | descrição não corresponde ao app | alinhar descrição com o que o vídeo mostra |
+| **ícone não bate com a marca** | **mesmo ícone no app, no logo do site E no favicon** |
+
+### Recusa real de 31/07/2026
+
+> *"Icon does not match brand. The app icon submitted in the Basic Info does
+> not match the icon displayed on the website. Please ensure the same icon is
+> used consistently across both the TikTok, the website and Browser tab
+> (favicon), then resubmit for review."*
+
+O app chama-se **Times Report**, mas o site e estes termos falavam em "Flux
+Clips", com outro logo. Não era só o ícone: **a marca inteira não batia**.
+
+E o site era um artifact do claude.ai, que **não pode ter favicon próprio** —
+o favicon dele é um emoji. Por construção, o item reprovaria de novo.
+
+**Corrigido:** `ATUALIZADA/site_times_report/` tem a página com o nome, o logo
+e o favicon saindo do MESMO arquivo (`Downloads/times-report.png`), e as
+âncoras `#terms` e `#privacy` preservadas. **Falta hospedar** (GitHub Pages) e
+trocar as três URLs no app.
+
+⚠️ **Este arquivo ainda diz "Flux Clips" em outros pontos, e o
+`TERMOS_PARA_COLAR.txt` também.** Se reaproveitar aqueles textos como estão, o
+problema de marca volta. Use o `site_times_report/index.html` como fonte.
 
 Reenviar é normal e ilimitado. Enquanto isso, o fluxo de rascunho + transfer
 manual continua funcionando igual.

@@ -1,4 +1,5 @@
 """Corte e render final. Aqui a GTX 1650 trabalha (NVENC)."""
+from functools import lru_cache
 from pathlib import Path
 
 import config
@@ -76,8 +77,15 @@ AUDIO_LOUDNORM = "loudnorm=I=-14:TP=-1.5:LRA=11"
 # É título de TÓPICO, não legenda: diz do que o vídeo trata em uma linha.
 
 TITULO_SEGUNDOS = 3.5      # tempo na tela; o gancho falado cobre o resto
-TITULO_LINHA_MAX = 21      # caracteres por linha (Anton é condensada, cabe mais)
 TITULO_MAX_LINHAS = 3      # acima disso vira parágrafo e ninguém lê
+# Fração da largura do vídeo que o título pode ocupar. 0,88 deixa 6% de
+# respiro de cada lado — sem isso a letra encosta na borda e fica com cara de
+# print cortado, mesmo quando tecnicamente cabe.
+TITULO_MARGEM = 0.88
+# Piso do encolhimento, em fração do corpo ideal. Abaixo disso o título fica
+# pequeno demais para ser lido em 3,5 s de tela, e é melhor a linha ficar
+# comprida do que ilegível.
+TITULO_CORPO_MIN = 0.55
 
 # A fonte VIAJA COM O REPOSITÓRIO. Arial e DejaVu são tipos de interface: dão
 # exatamente a "cara de gerado automaticamente" que o Bryan reclamou em
@@ -111,30 +119,78 @@ def _fonte_titulo() -> str | None:
     return None
 
 
-def _quebrar(texto: str, largura: int = TITULO_LINHA_MAX) -> str:
-    """Quebra em até TITULO_MAX_LINHAS linhas de até `largura` caracteres.
+@lru_cache(maxsize=128)
+def _largura_px(texto: str, fonte: str, corpo: int) -> float:
+    """Largura RENDERIZADA do texto, em pixels, na fonte e no corpo dados.
+
+    Sem Pillow cai numa estimativa por caractere — pior, mas nunca derruba o
+    render. O fator 0,52 é a razão média largura/corpo das duas fontes usadas
+    (ambas condensadas); serve de rede, não de medida.
+    """
+    try:
+        from PIL import ImageFont
+        return ImageFont.truetype(fonte, corpo).getlength(texto)
+    except Exception:
+        return len(texto) * corpo * 0.52
+
+
+def _quebrar(texto: str, fonte: str, corpo: int, max_px: float) -> list[str]:
+    """Quebra em até TITULO_MAX_LINHAS linhas que caibam em `max_px` PIXELS.
 
     Bug corrigido em 31/07/2026: ao fechar a última linha permitida, o laço
     saía com `break` e a palavra que tinha acabado de virar `atual` nunca
-    era gravada — o título perdia a última palavra sempre que ela caía
-    bem no ponto de quebra da linha final (ex: "...dominar a" sem
-    "humanidade"). Agora a última linha permitida absorve o resto do
-    título inteiro, mesmo passando de `largura` — preferível a apagar
-    parte do título. Título já vem limitado a 80 caracteres pelo prompt do
-    Gemini, então essa última linha nunca cresce sem controle.
+    era gravada — o título perdia a última palavra (ex: "...dominar a" sem
+    "humanidade"). A última linha passou a absorver o resto do título.
+
+    Bug corrigido em 01/08/2026: a quebra era por CONTAGEM DE CARACTERE
+    (TITULO_LINHA_MAX=21), e caractere não tem largura fixa — "W" e "í" não
+    ocupam o mesmo espaço. Linha dentro do limite de caracteres estourava os
+    1080 px, e o drawtext não recorta nem encolhe: desenha centralizado e o
+    que passa da borda some. Os títulos saíam cortados nas DUAS pontas
+    ("Revolucionar a Medicina e a Vida" virava "evolucionar a Medicina e a
+    Vid"). Agora a medida é a largura real na fonte, e quem garante que a
+    última linha (a que absorve o resto) cabe é o encolhimento em
+    `_ajustar_titulo`.
     """
-    linhas, atual = [], ""
+    linhas: list[str] = []
+    atual = ""
     for palavra in (texto or "").split():
-        cabe = len(atual) + len(palavra) + 1 <= largura
+        candidata = f"{atual} {palavra}".strip()
         ultima_linha = len(linhas) == TITULO_MAX_LINHAS - 1
-        if cabe or ultima_linha:
-            atual = f"{atual} {palavra}".strip()
+        # `not atual`: palavra sozinha mais larga que a linha inteira entra
+        # assim mesmo — senão o laço nunca a coloca em lugar nenhum. Quem
+        # resolve esse caso é o encolhimento da fonte.
+        if not atual or ultima_linha or _largura_px(candidata, fonte, corpo) <= max_px:
+            atual = candidata
         else:
             linhas.append(atual)
             atual = palavra
     if atual:
         linhas.append(atual)
-    return "\n".join(linhas[:TITULO_MAX_LINHAS])
+    return linhas[:TITULO_MAX_LINHAS]
+
+
+def _ajustar_titulo(texto: str, fonte: str, largura: int,
+                    corpo_ideal: int) -> tuple[list[str], int]:
+    """Maior corpo de fonte em que o título inteiro cabe na largura do vídeo.
+
+    Encolher a fonte é o que resolve de vez: com quebra por pixel mas corpo
+    fixo, um título longo continuaria estourando na última linha (que absorve
+    o resto por desenho, para não perder palavra). Aqui o corpo cede antes da
+    palavra sumir.
+    """
+    max_px = largura * TITULO_MARGEM
+    minimo = max(12, round(corpo_ideal * TITULO_CORPO_MIN))
+    corpo = corpo_ideal
+    while True:
+        linhas = _quebrar(texto, fonte, corpo, max_px)
+        maior = max((_largura_px(l, fonte, corpo) for l in linhas), default=0.0)
+        if maior <= max_px or corpo <= minimo:
+            return linhas, corpo
+        # Passo proporcional ao excesso: em vez de 1 px por volta, pula direto
+        # para o corpo que faria a linha mais larga caber. Converge em 1-2
+        # voltas mesmo num título que estoura muito.
+        corpo = max(minimo, min(corpo - 1, int(corpo * max_px / maior)))
 
 
 def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str:
@@ -158,8 +214,8 @@ def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str
         return ""
     pasta_tmp.mkdir(parents=True, exist_ok=True)
 
-    linhas = _quebrar(texto).split("\n")
-    corpo = round(altura * 0.036)
+    linhas, corpo = _ajustar_titulo(texto, fonte, largura,
+                                    round(altura * 0.036))
     # Entrelinha generosa. A 1,22 as linhas encostavam umas nas outras — com
     # acento maiúsculo (JÁ, É) o acento da linha de baixo quase tocava a
     # perna da de cima, e era parte do que dava cara de automático.

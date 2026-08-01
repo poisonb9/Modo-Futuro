@@ -2,6 +2,10 @@
 requests>=2.32
 python-dotenv>=1.0
 yt-dlp>=2025.1.1
+# Mede a largura REAL do titulo na fonte, para ele nao estourar a borda do
+# video (render._largura_px). Sem Pillow o render ainda roda, mas cai numa
+# estimativa por caractere — que foi exatamente a causa do defeito de 01/08.
+Pillow>=10.0
 
 # --- face tracking p/ crop 9:16 (roda em CPU, GPU opcional) ---
 mediapipe>=0.10.35

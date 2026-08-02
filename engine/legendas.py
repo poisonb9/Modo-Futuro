@@ -1,10 +1,24 @@
-"""Gera .ass com efeito karaokê (palavra acende conforme é falada)."""
+"""Gera .ass com efeito karaokê (palavra acende conforme é falada) e
+destaque de palavra por grupo (ver engine/destaque.py).
+"""
+import itertools
 import os
 from pathlib import Path
 
+from . import destaque as _destaque
+
 MAX_LINHA = 3          # palavras por tela — Shorts pede pouco texto e grande
-DESTAQUE = "&H0000E5FF"  # amarelo/laranja (BGR no formato ASS)
 BASE = "&H00FFFFFF"      # branco
+
+# Paleta do destaque de palavra — girada por grupo, na ordem abaixo.
+# Valores em BGR (formato de override do ASS, "&HBBGGRR&"), sem rosa: pedido
+# do Bryan em 02/08/2026 foi mapear a referência (rosa/vermelho/azul) para
+# azul/verde/vermelho, mantendo vermelho como vermelho.
+_AZUL = "&HFF9900&"       # RGB(0,153,255)
+_VERDE = "&H76E600&"      # RGB(0,230,118)
+_VERMELHO = "&H303BFF&"   # RGB(255,59,48)
+PALETA = (_AZUL, _VERDE, _VERMELHO)
+_RESET = "&HFFFFFF&"      # branco, pra voltar depois da palavra destacada
 
 
 def _t(seg: float) -> str:
@@ -46,23 +60,32 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: K,Inter Black,{corpo},{BASE},{DESTAQUE},&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,{contorno},2,2,{margem_lat},{margem_lat},{margem_v},1
+Style: K,Inter Black,{corpo},{BASE},{BASE},&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,{contorno},2,2,{margem_lat},{margem_lat},{margem_v},1
 
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 """
 
+    grupos = [palavras[i:i + MAX_LINHA] for i in range(0, len(palavras), MAX_LINHA)]
+    destaques = _destaque.marcar(grupos)
+    cores = itertools.cycle(PALETA)
+
     linhas = []
-    for i in range(0, len(palavras), MAX_LINHA):
-        grupo = palavras[i:i + MAX_LINHA]
+    for grupo, idx_destaque in zip(grupos, destaques):
         ini, fim = grupo[0]["inicio"], grupo[-1]["fim"]
         if fim <= ini:
             fim = ini + 0.4
+        cor = next(cores) if idx_destaque is not None else None
+        partes = []
         # \k usa centésimos de segundo
-        texto = "".join(
-            f"{{\\k{max(1, int((p['fim'] - p['inicio']) * 100))}}}{p['palavra'].upper()} "
-            for p in grupo
-        ).strip()
+        for j, p in enumerate(grupo):
+            dur = max(1, int((p["fim"] - p["inicio"]) * 100))
+            palavra = p["palavra"].upper()
+            if j == idx_destaque:
+                partes.append(f"{{\\k{dur}\\c{cor}}}{palavra} {{\\c{_RESET}}}")
+            else:
+                partes.append(f"{{\\k{dur}}}{palavra} ")
+        texto = "".join(partes).strip()
         linhas.append(f"Dialogue: 0,{_t(ini)},{_t(fim)},K,,0,0,0,,{texto}")
 
     destino.parent.mkdir(parents=True, exist_ok=True)

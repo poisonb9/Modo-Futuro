@@ -14,9 +14,6 @@ https://www.youtube.com/watch?v=-sB12gk9ESA
 # 8 clipe(s) em 29-07 · Rise of the Humanoids  Inside China s Robot Awakening
 https://www.youtube.com/watch?v=7I-KWkV0JUM
 
-# 8 clipe(s) em 29-07 · Inside the Mind of Noland Arbaugh Neuralink's First Patient
-https://www.youtube.com/watch?v=YrGCYiJBk-E
-
 # 7 clipe(s) em 29-07 · The Rise Of Robots   CNBC Marathon
 https://www.youtube.com/watch?v=I1w6xzBN7mA
 
@@ -44,9 +41,6 @@ https://www.youtube.com/watch?v=wL0-Pu_8F0U
 # 4 clipe(s) em 29-07 · Why Humanoids Are the Future of Manufacturing   Boston Dynamics We
 https://www.youtube.com/watch?v=laexcnaTrDM
 
-# 3 clipe(s) em 29-07 · The Crazy History of the First Humanoid Robot
-https://www.youtube.com/watch?v=IailkUfSUdo
-
 # 2 clipe(s) em 29-07 · Neuralink Overview, Fall 2025
 https://www.youtube.com/watch?v=QJdgHXyJh7M
 
@@ -55,14 +49,6 @@ https://www.youtube.com/watch?v=Txt3Wodav1o
 
 # 1 clipe(s) em 29-07 · World s #1 Brain Surgeon  The Truth About Protecting Your Brain Af
 https://www.youtube.com/watch?v=YlokzKnRqmg
-
-# --- acrescentado em 01/08/2026 ---
-# Fonte do clipe 017_nota92 ("INCRIVEL: Mulher Paralisada Volta a Andar"),
-# que saiu com o titulo truncado pelo bug do _quebrar() (corrigido em 012fdcd).
-# Medido no log do run 30655172635: bruto era kpocurpdx4.mp4, Drive id
-# 1rWdTy8XCK5I_0JR5vZ6DcTlJMTchQTmF — ja NAO existe em nenhuma das duas
-# contas (nem na RAW nem na lixeira), por isso precisa rebaixar.
-https://www.youtube.com/watch?v=KpOcUrPdx-4
 
 # --- os que renderam ZERO clipe: nao vale refazer sem investigar ---
 # Inside OpenAI's Stargate Megafactory with Sam Altman   The Circuit

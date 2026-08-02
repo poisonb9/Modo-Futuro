@@ -28,7 +28,7 @@ for _stream in (sys.stdout, sys.stderr):
 def _limpar(nome: str) -> str:
     for c in '<>:"/\\|?*':
         nome = nome.replace(c, "")
-    return nome.strip()[:60] or "clipe"
+    return nome.strip()[:60].rstrip() or "clipe"
 
 
 def _hashtag(tag: str) -> str:

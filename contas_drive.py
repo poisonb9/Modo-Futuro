@@ -46,6 +46,15 @@ CONTAS = [
         "a_postar": "1aM22tjWvoWLTv9v1PrICUzk0_763xcUK",
         "secret": "GOOGLE_OAUTH_TOKEN_JSON_2",
     },
+    {
+        "nome": "labzirkonart",
+        "token": "token_drive_3.json",
+        "email": "zirkonartlaboratorio@gmail.com",
+        "raiz": "15_jJUWfjvPdmrdaju5Me2b67OO7_jZpA",
+        "raw": "1yt0JvJMeqiRkyDF9IS4vl2QOV-Wtt0yd",
+        "a_postar": "1QoJwIYvZ-gOYvaxBXOY7xjX4JTJkWa_Z",
+        "secret": "GOOGLE_OAUTH_TOKEN_JSON_3",
+    },
 ]
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]

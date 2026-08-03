@@ -87,36 +87,10 @@ TITULO_MARGEM = 0.88
 # comprida do que ilegível.
 TITULO_CORPO_MIN = 0.55
 
-# A fonte VIAJA COM O REPOSITÓRIO. Arial e DejaVu são tipos de interface: dão
-# exatamente a "cara de gerado automaticamente" que o Bryan reclamou em
-# 30/07. Anton é display condensada — é o tipo que os canais de corte usam em
-# gancho, e é o que separa "vídeo feito" de "vídeo cuspido por script".
-#
-# Depender da fonte da máquina também é frágil: o corte roda no ubuntu do
-# GitHub Actions, e cada runner tem um conjunto diferente. Com a fonte no
-# repo, o resultado é idêntico aqui e na nuvem. Anton é OFL, pode redistribuir.
+# A fonte VIAJA COM O REPOSITÓRIO — não depender da fonte da máquina: o corte
+# roda no ubuntu do GitHub Actions, e cada runner tem um conjunto diferente.
+# Com a fonte no repo, o resultado é idêntico aqui e na nuvem.
 FONTES_DIR = Path(__file__).resolve().parent / "fontes"
-
-_FONTES = [
-    # Inter Black — escolhida pelo Bryan em 31/07. É a MESMA que a legenda
-    # karaokê pede (legendas.py, Style: K), então o vídeo inteiro fica com
-    # uma tipografia só; e é a alternativa aberta desenhada para se parecer
-    # com a San Francisco da Apple, que ele pediu mas é licenciada e não
-    # pode ser redistribuída.
-    str(FONTES_DIR / "Inter-Black.ttf"),
-    str(FONTES_DIR / "Anton-Regular.ttf"),
-    # Reservas, se alguém rodar sem a pasta fontes/
-    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",       # ubuntu
-    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
-    "C:/Windows/Fonts/arialbd.ttf",                                # windows
-]
-
-
-def _fonte_titulo() -> str | None:
-    for f in _FONTES:
-        if Path(f).exists():
-            return f
-    return None
 
 
 @lru_cache(maxsize=128)
@@ -193,71 +167,74 @@ def _ajustar_titulo(texto: str, fonte: str, largura: int,
         corpo = max(minimo, min(corpo - 1, int(corpo * max_px / maior)))
 
 
-def filtro_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> str:
-    """Filtro drawtext com o título nos primeiros segundos, ou '' se não der.
+# Card de título em caixa branca arredondada por linha, estilo visto numa
+# referência (Erica Bruno, TikTok, 02/08/2026) — pedido do Bryan pra
+# substituir o drawtext (texto branco + contorno preto) de vez.
+#
+# drawtext não tem canto arredondado nativo, então o card inteiro é
+# pré-renderizado como PNG com PIL (que já é dependência, via _largura_px) e
+# sobreposto ao vídeo com o filtro `overlay` do ffmpeg — não dá pra fazer via
+# `-vf` só, precisa de um 2º input (a imagem) e `-filter_complex`.
+FONTE_TITULO_CAIXA = str(FONTES_DIR / "Poppins-Bold.ttf")
 
-    O texto vai por ARQUIVO (`textfile`), não inline: título real tem aspas,
-    dois-pontos, vírgula e acento, e todos são metacaracteres do drawtext —
-    escapar na mão é a receita para um render que quebra num título e passa
-    em outro.
-    """
+TITULO_PAD_X_FRAC = 0.38   # respiro horizontal dentro da caixa, fração do corpo
+TITULO_PAD_Y_FRAC = 0.30
+TITULO_RAIO_FRAC = 0.32    # raio do canto arredondado, fração da altura da caixa
+TITULO_GAP_FRAC = 0.16     # respiro vertical entre uma caixa e a próxima
+
+
+def imagem_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> Path | None:
+    """Gera o PNG do card de título (transparente, com as caixas brancas
+    arredondadas já desenhadas) ou None se não houver título ou fonte."""
+    from PIL import Image, ImageDraw, ImageFont
+    from . import destaque as _destaque
+
     texto = (texto or "").strip()
-    fonte = _fonte_titulo()
-    if not texto or not fonte:
-        return ""
-    if "'" in str(pasta_tmp) or "'" in str(fonte):
-        # Sem escape possível (ver _escapar). Melhor entregar o clipe SEM
-        # título do que derrubar o corte inteiro: foi o que aconteceu no run
-        # #63, que morreu depois de já ter baixado 1,4 GB e cortado.
-        print("      [título] pulei: apóstrofo no caminho "
-              f"({str(pasta_tmp)[-40:]})")
-        return ""
-    pasta_tmp.mkdir(parents=True, exist_ok=True)
+    if not texto or not Path(FONTE_TITULO_CAIXA).exists():
+        return None
 
-    linhas, corpo = _ajustar_titulo(texto, fonte, largura,
-                                    round(altura * 0.036))
-    # Entrelinha generosa. A 1,22 as linhas encostavam umas nas outras — com
-    # acento maiúsculo (JÁ, É) o acento da linha de baixo quase tocava a
-    # perna da de cima, e era parte do que dava cara de automático.
-    passo = round(corpo * 1.42)
-    topo = round(altura * 0.075)                 # abaixo da barra de status
-    filtros = []
-    for i, linha in enumerate(linhas):
-        # Um drawtext POR LINHA. Com textfile de várias linhas o bloco todo é
-        # centrado, mas cada linha fica alinhada à ESQUERDA dentro dele — é o
-        # degrau torto do primeiro teste. Uma chamada por linha deixa usar
-        # x=(w-text_w)/2 em cada uma, que é centralização de verdade.
-        #
-        # newline="\n" é OBRIGATÓRIO: no Windows o modo texto do Python
-        # converte \n em \r\n e o drawtext trata o \r como conteúdo (foi o vão
-        # gigante entre linhas no primeiro teste). No ubuntu da nuvem o
-        # defeito não apareceria, o que o tornaria ainda mais difícil de achar.
-        arq = pasta_tmp / f"titulo_{i}.txt"
-        arq.write_text(linha, encoding="utf-8", newline="\n")
-        filtros.append(
-            f",drawtext=fontfile='{_escapar(Path(fonte))}'"
-            f":textfile='{_escapar(arq)}'"
-            # expansion=none: sem isso o drawtext trata % e {} como variável a
-            # expandir. Título real do canal tem porcentagem ("50% DOS EMPREGOS
-            # SERÃO ELIMINADOS PELA IA") e o ffmpeg reclama "Stray %" e come o
-            # texto. Achado em 31/07 testando a legenda de um clipe publicado.
-            f":expansion=none"
-            f":fontcolor=white:fontsize={corpo}"
-            # Sem caixa. Contorno preto grosso + sombra deslocada dão leitura
-            # sobre qualquer fundo sem tapar a imagem. A caixa preta atrás
-            # tinha cara de legenda automática, não de gancho.
-            f":borderw={max(2, round(corpo * 0.10))}:bordercolor=black"
-            f":shadowcolor=black@0.55"
-            f":shadowx={max(1, round(corpo * 0.045))}"
-            f":shadowy={max(1, round(corpo * 0.06))}"
-            f":x=(w-text_w)/2:y={topo + i * passo}"
-            f":enable='lt(t,{TITULO_SEGUNDOS})'"
-        )
-    return "".join(filtros)
+    texto = _destaque.marcar_titulo(texto)
+
+    corpo_ideal = round(altura * 0.040)
+    linhas, corpo = _ajustar_titulo(texto, FONTE_TITULO_CAIXA, largura, corpo_ideal)
+    if not linhas:
+        return None
+
+    fonte = ImageFont.truetype(FONTE_TITULO_CAIXA, corpo)
+    pad_x = round(corpo * TITULO_PAD_X_FRAC)
+    pad_y = round(corpo * TITULO_PAD_Y_FRAC)
+    gap = round(corpo * TITULO_GAP_FRAC)
+
+    medidas = []
+    for linha in linhas:
+        bbox = fonte.getbbox(linha)          # (x0, y0, x1, y1) — y0 pode ser negativo
+        w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        medidas.append((linha, bbox, w, h))
+
+    altura_total = sum(h + 2 * pad_y for _, _, _, h in medidas) + gap * (len(medidas) - 1)
+    img = Image.new("RGBA", (largura, altura_total), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    y = 0.0
+    for linha, bbox, w, h in medidas:
+        box_w, box_h = w + 2 * pad_x, h + 2 * pad_y
+        x0 = (largura - box_w) / 2
+        raio = round(box_h * TITULO_RAIO_FRAC)
+        draw.rounded_rectangle([x0, y, x0 + box_w, y + box_h],
+                               radius=raio, fill=(255, 255, 255, 255))
+        draw.text((x0 + pad_x - bbox[0], y + pad_y - bbox[1]), linha,
+                   font=fonte, fill=(0, 0, 0, 255))
+        y += box_h + gap
+
+    pasta_tmp.mkdir(parents=True, exist_ok=True)
+    caminho = pasta_tmp / "titulo_caixa.png"
+    img.save(caminho)
+    return caminho
 
 
 def _render(bruto: Path, filtro_video: str, ass: Path | None,
-            destino: Path, audio_dublado: Path | None = None) -> Path:
+            destino: Path, audio_dublado: Path | None = None,
+            img_titulo: Path | None = None, topo_titulo: int = 0) -> Path:
     cadeia = filtro_video
     if ass is not None:
         # fontsdir aponta pra pasta de fontes do repositório. O .ass pede
@@ -266,6 +243,48 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
         # A legenda dos vídeos até 30/07 provavelmente não era Inter.
         cadeia += (f",subtitles='{_escapar(ass)}'"
                    f":fontsdir='{_escapar(FONTES_DIR)}'")
+
+    if img_titulo is not None:
+        # O card de título agora é PNG (ver imagem_titulo) sobreposto com
+        # `overlay` — drawtext dava pra fazer só com -vf, overlay precisa de
+        # um input a mais e -filter_complex. -loop 1 deixa a imagem estática
+        # "infinita" — e MEDIDO em 02/08/2026: sem -shortest o processo não
+        # termina sozinho quando o vídeo principal acaba (testei sem, o
+        # ffmpeg ficou rodando e o arquivo de saída passou de 800 MB pra um
+        # clipe de 84s). -shortest é obrigatório aqui, com ou sem dublagem.
+        if audio_dublado is not None:
+            filtro = (f"[0:v]{cadeia}[base];"
+                      f"[base][2:v]overlay=0:{topo_titulo}:"
+                      f"enable='lt(t,{TITULO_SEGUNDOS})'[v]")
+            midia.roda([
+                "ffmpeg", "-y",
+                "-i", str(bruto), "-i", str(audio_dublado),
+                "-loop", "1", "-i", str(img_titulo),
+                "-filter_complex", filtro,
+                "-map", "[v]", "-map", "1:a:0",
+                *_encoder(),
+                "-af", AUDIO_LOUDNORM,
+                "-c:a", "aac", "-b:a", "192k", "-shortest",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+                str(destino),
+            ])
+        else:
+            filtro = (f"[0:v]{cadeia}[base];"
+                      f"[base][1:v]overlay=0:{topo_titulo}:"
+                      f"enable='lt(t,{TITULO_SEGUNDOS})'[v]")
+            midia.roda([
+                "ffmpeg", "-y",
+                "-i", str(bruto),
+                "-loop", "1", "-i", str(img_titulo),
+                "-filter_complex", filtro,
+                "-map", "[v]", "-map", "0:a:0",
+                *_encoder(),
+                "-af", AUDIO_LOUDNORM,
+                "-c:a", "aac", "-b:a", "192k", "-shortest",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+                str(destino),
+            ])
+        return destino
 
     if audio_dublado is not None:
         # troca a trilha original pela dublada — vídeo vem do bruto (input 0),
@@ -326,21 +345,23 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
              audio_dublado: Path | None = None, titulo: str = "") -> Path:
     """9:16 para Shorts, com o quadro seguindo o rosto.
 
-    `titulo` desenha o texto de abertura (ver filtro_titulo). Vem DEPOIS do
-    punch-in de propósito: o zoompan reescala o quadro, e um drawtext antes
-    dele seria ampliado e cortado junto.
+    `titulo` desenha o card de abertura (ver imagem_titulo) — caixa branca
+    arredondada por linha, sobreposta com `overlay` depois do punch-in de
+    propósito: o zoompan reescala o quadro, e a caixa entraria ampliada e
+    cortada se viesse antes dele.
     """
     l, a = midia.dimensoes(bruto)
     caminho = enquadrar.trajetoria(bruto, l, a)
     lv, av = config.VERTICAL
-    # O texto do título vai pra pasta de TRABALHO, não pra pasta do clipe: a
+    filtro = enquadrar.filtro_vertical(l, a, caminho) + _ken_burns(bruto, lv, av)
+    # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a
     # pasta do clipe herda o nome do vídeo-fonte, e nome de vídeo tem
     # apóstrofo, dois-pontos e o que mais o YouTube deixar. Caminho previsível
     # aqui é o que evita a próxima quebra de filtro (ver _escapar).
-    filtro = (enquadrar.filtro_vertical(l, a, caminho)
-              + _ken_burns(bruto, lv, av)
-              + filtro_titulo(titulo, lv, av, config.TRABALHO / "titulo"))
-    return _render(bruto, filtro, ass, destino, audio_dublado)
+    img_titulo = imagem_titulo(titulo, lv, av, config.TRABALHO / "titulo")
+    topo = round(av * 0.075)                 # abaixo da barra de status
+    return _render(bruto, filtro, ass, destino, audio_dublado,
+                    img_titulo=img_titulo, topo_titulo=topo)
 
 
 def horizontal(bruto: Path, ass: Path | None, destino: Path,

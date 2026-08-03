@@ -90,7 +90,7 @@ def _agrupar(palavras: list[dict], tamanho_janela_s: float) -> list[list[dict]]:
     return grupos
 
 
-def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 8.0) -> list[dict]:
+def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0) -> list[dict]:
     """Recebe [{palavra, inicio, fim}] no idioma original e devolve trechos
     traduzidos em texto corrido: [{inicio, fim, texto}]. Usado pra dublagem
     (TTS fala o texto inteiro do trecho, não palavra por palavra)."""
@@ -118,7 +118,7 @@ def segmentos_para_palavras(segmentos: list[dict]) -> list[dict]:
     return resultado
 
 
-def traduzir_palavras(palavras: list[dict], tamanho_janela_s: float = 8.0) -> list[dict]:
+def traduzir_palavras(palavras: list[dict], tamanho_janela_s: float = 4.0) -> list[dict]:
     """Recebe [{palavra, inicio, fim}] no idioma original e devolve a mesma
     estrutura traduzida pra pt-BR, com timing reencaixado.
 

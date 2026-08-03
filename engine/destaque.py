@@ -18,13 +18,19 @@ import config
 from . import keys
 
 PROMPT = """Você edita legendas de vídeos virais de TikTok em português do Brasil.
-Abaixo está uma lista numerada de trechos curtos de legenda (cada um até 3
-palavras), na ordem em que aparecem no vídeo. Para CADA trecho, escolha a
-palavra de MAIOR IMPACTO editorial pra destacar com cor — o tipo de palavra
-que uma editora profissional destacaria pra prender atenção (verbo de ação
-forte, pronome direto tipo "você", superlativo, palavra de urgência ou
-revelação). Nem todo trecho precisa ter destaque: se nenhuma palavra se
-destacar claramente, responda -1 pra esse trecho.
+
+Primeiro, a fala COMPLETA do clipe, pra você entender o contexto e o que
+realmente importa em cada parte (o que é revelação, o que é só conectivo):
+"{contexto}"
+
+Agora, a mesma fala quebrada em trechos curtos de legenda (cada um até 3
+palavras), numerados na ordem em que aparecem no vídeo. Para CADA trecho,
+escolha a palavra de MAIOR IMPACTO editorial pra destacar com cor — o tipo
+de palavra que uma editora profissional destacaria pra prender atenção
+(verbo de ação forte, pronome direto tipo "você", superlativo, palavra de
+urgência ou revelação), julgando pelo peso da palavra DENTRO DA FRASE
+COMPLETA acima, não isolada. Nem todo trecho precisa ter destaque: se
+nenhuma palavra se destacar claramente, responda -1 pra esse trecho.
 
 Responda SOMENTE um array JSON de inteiros, um por trecho, na mesma ordem,
 com o ÍNDICE (começando em 0) da palavra escolhida dentro do trecho, ou -1.
@@ -50,6 +56,7 @@ def marcar(grupos: list[list[dict]]) -> list[int | None]:
         f"{i}: " + " ".join(p["palavra"] for p in g)
         for i, g in enumerate(grupos)
     )
+    contexto = " ".join(p["palavra"] for g in grupos for p in g)
 
     rot = keys.gemini()
     for _ in range(len(rot) * 2):
@@ -58,7 +65,7 @@ def marcar(grupos: list[list[dict]]) -> list[int | None]:
             r = requests.post(
                 f"{config.GEMINI_URL}/models/{config.GEMINI_MODELO}:generateContent?key={chave}",
                 json={
-                    "contents": [{"parts": [{"text": PROMPT.format(trechos=trechos)}]}],
+                    "contents": [{"parts": [{"text": PROMPT.format(contexto=contexto, trechos=trechos)}]}],
                     "generationConfig": {"temperature": 0.4},
                 },
                 timeout=60,

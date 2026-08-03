@@ -61,6 +61,11 @@ QTD_CLIPES = "8"
 # o que não coube fica no Drive e entra na próxima passada.
 MAX_POR_PASSADA = 2
 IDIOMA = "pt"
+# 1 = padrão do canal (Inter Black). 2 = réplica da referência Erica Bruno
+# (Poppins Bold, corpo variável) — ver engine/legendas.py. Trocar aqui muda
+# TODO disparo desta máquina; pra escolher por vídeo, disparar manual pelo
+# GitHub Actions com o input estilo_legenda.
+ESTILO_LEGENDA = "1"
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 EXTS = {".mp4", ".mkv", ".mov", ".webm", ".m4v"}
@@ -203,7 +208,8 @@ def _a_postar(conta: str) -> str:
         return PASTA_DRIVE
 
 
-def disparar(file_id: str, nome: str, conta: str = "principal"):
+def disparar(file_id: str, nome: str, conta: str = "principal",
+             estilo_legenda: str = ESTILO_LEGENDA):
     if not GITHUB_TOKEN:
         raise RuntimeError(
             "Falta GITHUB_TOKEN no .env — sem ele não dá pra disparar o corte. "
@@ -216,6 +222,7 @@ def disparar(file_id: str, nome: str, conta: str = "principal"):
         json={"ref": "main", "inputs": {
             "drive_file_id": file_id, "nome_arquivo": nome,
             "qtd": QTD_CLIPES, "idioma": IDIOMA,
+            "estilo_legenda": estilo_legenda,
             "pasta_drive": _a_postar(conta), "conta": conta,
         }},
         timeout=30,

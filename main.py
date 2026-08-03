@@ -51,7 +51,8 @@ def _legenda(c: dict) -> str:
 
 def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
               so_vertical: bool, traduzir: bool = True, dublar: bool = False,
-              url_origem: str = "", recorte: tuple[float, float] | None = None) -> Path:
+              url_origem: str = "", recorte: tuple[float, float] | None = None,
+              estilo_legenda: int = 1) -> Path:
     t0 = time.time()
     config.TRABALHO.mkdir(parents=True, exist_ok=True)
     nome_fonte = fonte.name
@@ -211,7 +212,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
 
         lv, av = config.VERTICAL
-        ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av)
+        ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
+                                   estilo=estilo_legenda)
         print("      renderizando 9:16 com face tracking...")
         status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
         # O título vai NA TELA nos primeiros segundos, não só na descrição.
@@ -223,7 +225,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
 
         if not so_vertical:
             lh, ah = config.HORIZONTAL
-            ass_h = legendas.escrever(ps, config.TRABALHO / f"h_{i:02d}.ass", lh, ah)
+            ass_h = legendas.escrever(ps, config.TRABALHO / f"h_{i:02d}.ass", lh, ah,
+                                       estilo=estilo_legenda)
             print("      renderizando 16:9 tela cheia...")
             status.etapa(nome_fonte, "renderizando_horizontal", c.get("titulo", ""), i, len(clipes))
             render.horizontal(bruto, ass_h, pasta / "fullscreen_16x9.mp4", audio_dublado)
@@ -302,6 +305,10 @@ def main():
                         "deixar o Gemini escolher. Pula a checagem de congelamento — "
                         "use pra refazer um corte que você já sabe que funciona")
     p.add_argument("--manter-temp", action="store_true")
+    p.add_argument("--estilo-legenda", type=int, choices=(1, 2), default=1,
+                   help="1 = padrão do canal (Inter Black, corpo fixo). "
+                        "2 = réplica da referência Erica Bruno (Poppins Bold, "
+                        "corpo variável — ver engine/legendas.py)")
     a = p.parse_args()
 
     recorte = None
@@ -331,7 +338,8 @@ def main():
     try:
         processar(fonte, a.qtd, not a.so_audio, a.idioma, not a.com_horizontal,
                   traduzir=not a.sem_traducao, dublar=a.dublar,
-                  url_origem=a.url or "", recorte=recorte)
+                  url_origem=a.url or "", recorte=recorte,
+                  estilo_legenda=a.estilo_legenda)
     finally:
         if not a.manter_temp and config.TRABALHO.exists():
             shutil.rmtree(config.TRABALHO, ignore_errors=True)

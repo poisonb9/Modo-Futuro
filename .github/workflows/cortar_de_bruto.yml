@@ -18,6 +18,10 @@ on:
         description: "Idioma da fala (pt, en, es...)"
         required: false
         default: "pt"
+      estilo_legenda:
+        description: "1 = padrão do canal, 2 = réplica da referência (Poppins, corpo variável)"
+        required: false
+        default: "1"
       pasta_drive:
         description: "ID da pasta pai do Drive (onde nasce a pasta do dia)"
         required: true
@@ -78,6 +82,7 @@ jobs:
           --arquivo "${{ inputs.nome_arquivo }}"
           --qtd "${{ inputs.qtd }}"
           --idioma "${{ inputs.idioma }}"
+          --estilo-legenda "${{ inputs.estilo_legenda }}"
 
       - name: Subir clipes prontos pro Drive
         env:

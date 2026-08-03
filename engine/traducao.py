@@ -52,6 +52,13 @@ def _traduzir_texto(texto: str) -> str:
             if e.response is not None and e.response.status_code in (429, 403):
                 rot.queimar(chave)
                 continue
+            # 503 é sobrecarga TRANSITÓRIA do servidor (mesmo padrão do
+            # nemotron.py), não chave sem cota — tentar de novo resolve,
+            # crashar o run inteiro por isso jogaria fora um clipe já
+            # transcrito (medido: run 30860861087, clipe nota 96 perdido).
+            if e.response is not None and e.response.status_code == 503:
+                time.sleep(2)
+                continue
             raise
         except Exception as e:
             ultimo_erro = e

@@ -11,10 +11,10 @@ class Rotador:
     def __init__(self, prefixo: str):
         chaves = []
         if v := os.getenv(prefixo):
-            chaves.append(v)
+            chaves.append(v.strip())
         for i in range(2, 21):
             if v := os.getenv(f"{prefixo}_{i}"):
-                chaves.append(v)
+                chaves.append(v.strip())
         if not chaves:
             raise RuntimeError(
                 f"Nenhuma chave {prefixo} encontrada. Copie .env.sample para .env."

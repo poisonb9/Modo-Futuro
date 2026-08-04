@@ -42,6 +42,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # O runner padrão do Actions vem com só ~14GB livres, e SDKs pré-
+      # instalados que este job nunca usa (Android, .NET, GHC) já ocupam
+      # boa parte disso. Com --dublar (torch + chatterbox-tts + pesos do
+      # modelo, ~2GB) o disco estourava ANTES do primeiro clipe terminar
+      # ("No space left on device" ainda baixando o modelo, medido em
+      # 04/08/2026, run 30908188487, só 14 MB livres). Isso libera
+      # tipicamente 20-30GB.
+      - name: Liberar espaço em disco
+        if: ${{ inputs.dublar == 'true' }}
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android \
+            /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL || true
+          df -h /
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

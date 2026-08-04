@@ -27,6 +27,13 @@ import re
 import sys
 from pathlib import Path
 
+# console do Windows costuma abrir em cp1252, que não tem caractere "→"
+# usado no print de resumo — força UTF-8 pra não derrubar o processo depois
+# de já ter salvo o registro (visto em 04/08/2026, --sincronizar).
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8")
+
 RAIZ = Path(__file__).resolve().parent
 REGISTRO = RAIZ / "estado" / "videos_trabalhados.json"
 REPO = "poisonb9/Modo-Futuro"

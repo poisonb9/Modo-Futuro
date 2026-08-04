@@ -37,6 +37,7 @@ jobs:
         run: |
           echo "inicio_install=$(date +%s)" >> "$GITHUB_ENV"
           pip install chatterbox-tts
+          pip install --force-reinstall resemble-perth
           echo "fim_install=$(date +%s)" >> "$GITHUB_ENV"
 
       - name: Gerar audio clonado - pt-BR (medindo tempo)

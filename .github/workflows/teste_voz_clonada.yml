@@ -26,7 +26,9 @@ jobs:
       - name: Baixar amostra de voz do Drive (nao fica no repo)
         env:
           GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
-        run: python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/bryan_amostra.m4a" --conta "reserva"
+        run: |
+          mkdir -p vozes
+          python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/bryan_amostra.m4a" --conta "reserva"
 
       - name: Converter amostra de voz pra wav
         run: mkdir -p vozes && ffmpeg -y -i vozes/bryan_amostra.m4a -ar 24000 -ac 1 vozes/bryan_amostra.wav

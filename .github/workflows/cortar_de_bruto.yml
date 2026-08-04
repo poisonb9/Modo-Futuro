@@ -29,10 +29,16 @@ on:
         description: "Conta do Drive onde o bruto esta (principal | reserva)"
         required: false
         default: "principal"
+      dublar:
+        description: "Dublar com a voz clonada do Bryan (Chatterbox)"
+        required: false
+        default: "true"
 
 jobs:
   cortar:
     runs-on: ubuntu-latest
+    env:
+      HF_HOME: ${{ github.workspace }}/.cache/huggingface
     steps:
       - uses: actions/checkout@v4
 
@@ -44,6 +50,32 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - run: pip install -r requirements.txt
+
+      # Cacheia os pesos do modelo de voz clonada (~2GB) entre runs — sem
+      # isso, todo run de dublagem baixa tudo de novo do zero (medido em
+      # 04/08/2026: só o download já passa de 1min, fora o resto).
+      - name: Cache do modelo de voz clonada (Chatterbox)
+        if: ${{ inputs.dublar == 'true' }}
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.cache/huggingface
+          key: chatterbox-hf-cache-v1
+
+      - name: Instalar dependencias da voz clonada (Chatterbox)
+        if: ${{ inputs.dublar == 'true' }}
+        run: |
+          pip install --upgrade "setuptools>=70"
+          pip install chatterbox-tts
+          pip install --force-reinstall --no-deps resemble-perth
+
+      - name: Baixar amostra de voz do Bryan do Drive
+        if: ${{ inputs.dublar == 'true' }}
+        env:
+          GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
+        run: |
+          mkdir -p vozes
+          python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/bryan_amostra.m4a" --conta "reserva"
+          ffmpeg -y -i vozes/bryan_amostra.m4a -ar 24000 -ac 1 vozes/bryan_amostra.wav
 
       - name: Baixar vídeo bruto do Drive
         env:
@@ -83,6 +115,7 @@ jobs:
           --qtd "${{ inputs.qtd }}"
           --idioma "${{ inputs.idioma }}"
           --estilo-legenda "${{ inputs.estilo_legenda }}"
+          ${{ inputs.dublar == 'true' && '--dublar' || '' }}
 
       - name: Subir clipes prontos pro Drive
         env:

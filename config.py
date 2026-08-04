@@ -84,6 +84,12 @@ CONGELAMENTO_MAX_S = 4.5         # bloco contínuo travado acima disso descarta 
 ESTABILIZAR = True
 GRADE_CINEMATICO = True
 
+# ------------------------------------------------- voz clonada (04/08/2026)
+# Chatterbox Multilingual, self-hosted, MIT, grátis — clona a voz do Bryan
+# a partir de uma amostra. Só entra em ação com --dublar. Ver engine/voz_clonada.py.
+VOZ_CLONADA_ATIVA = True
+VOZ_CLONADA_AMOSTRA = RAIZ / "vozes" / "bryan_amostra.wav"
+
 # Piso de gancho (0-10). O Gemini já devolve `forca_gancho` por clipe, mas
 # até 29/07/2026 esse número era gravado no post.json e nunca usado.
 #

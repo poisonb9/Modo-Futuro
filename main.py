@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao,
-                    dublagem, status, ancoragem, pos_producao)
+                    dublagem, status, ancoragem, pos_producao, voz_clonada)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -211,10 +211,17 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             segmentos = traducao.traduzir_segmentos(ps)
             ps = traducao.segmentos_para_palavras(segmentos)
             if dublar:
-                print("      dublando (edge-tts)...")
-                status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
-                audio_dublado = dublagem.gerar_trilha(
-                    segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
+                if config.VOZ_CLONADA_ATIVA:
+                    print("      dublando (voz clonada, Chatterbox)...")
+                    status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
+                    audio_dublado = voz_clonada.gerar_trilha(
+                        segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
+                        amostra_voz=config.VOZ_CLONADA_AMOSTRA)
+                else:
+                    print("      dublando (edge-tts)...")
+                    status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
+                    audio_dublado = dublagem.gerar_trilha(
+                        segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
 
         lv, av = config.VERTICAL
         ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,

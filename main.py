@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao,
-                    dublagem, status, ancoragem)
+                    dublagem, status, ancoragem, pos_producao)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -179,6 +179,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                           f"em {nova_dur:.1f}s (< DUR_MIN {config.DUR_MIN}s)")
                 else:
                     bruto, dur_final = enxuto, nova_dur
+
+        if config.ESTABILIZAR:
+            print("      estabilizando (vidstab)...")
+            bruto = pos_producao.estabilizar(
+                bruto, config.TRABALHO / f"bruto_{i:02d}_estavel.mp4")
 
         # legenda: só este pedacinho vai pra Groq (~1 MB, longe dos 25 MB).
         # Extrai do PRÓPRIO clipe (não fatia o áudio da fonte) — depois da

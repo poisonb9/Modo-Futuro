@@ -41,41 +41,36 @@ jobs:
           pip install --force-reinstall --no-deps resemble-perth
           echo "fim_install=$(date +%s)" >> "$GITHUB_ENV"
 
-      - name: Gerar audio clonado - pt-BR (medindo tempo)
+      - name: Gerar audios clonados - pt-BR e inglês (medindo tempo)
         env:
           TEXTO_PT: ${{ inputs.texto }}
         run: |
-          echo "inicio_gerar_pt=$(date +%s)" >> "$GITHUB_ENV"
+          echo "inicio_carregar=$(date +%s)" >> "$GITHUB_ENV"
           python -X utf8 -c "
-          import os, torchaudio as ta
+          import os, time, torchaudio as ta
           import perth
           class _SemMarcaDagua:
               def __init__(self, *a, **k): pass
               def apply_watermark(self, wav, sample_rate=None): return wav
           perth.PerthImplicitWatermarker = _SemMarcaDagua
-          from chatterbox.tts import ChatterboxTTS
-          model = ChatterboxTTS.from_pretrained(device='cpu')
+          from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+
+          t0 = time.time()
+          model = ChatterboxMultilingualTTS.from_pretrained(device='cpu')
+          t1 = time.time()
+          print(f'CARREGAR_MODELO_S={t1-t0:.1f}')
+
           wav = model.generate(os.environ['TEXTO_PT'], audio_prompt_path='vozes/bryan_amostra.wav', language_id='pt')
           ta.save('vozes/teste_saida_pt.wav', wav, model.sr)
-          "
-          echo "fim_gerar_pt=$(date +%s)" >> "$GITHUB_ENV"
+          t2 = time.time()
+          print(f'GERAR_PT_S={t2-t1:.1f}')
 
-      - name: Gerar audio clonado - inglês (medindo tempo)
-        run: |
-          echo "inicio_gerar_en=$(date +%s)" >> "$GITHUB_ENV"
-          python -X utf8 -c "
-          import torchaudio as ta
-          import perth
-          class _SemMarcaDagua:
-              def __init__(self, *a, **k): pass
-              def apply_watermark(self, wav, sample_rate=None): return wav
-          perth.PerthImplicitWatermarker = _SemMarcaDagua
-          from chatterbox.tts import ChatterboxTTS
-          model = ChatterboxTTS.from_pretrained(device='cpu')
           wav = model.generate('Every piece of fruit is a drop of sweetness from nature', audio_prompt_path='vozes/bryan_amostra.wav', language_id='en')
           ta.save('vozes/teste_saida_en.wav', wav, model.sr)
+          t3 = time.time()
+          print(f'GERAR_EN_S={t3-t2:.1f}')
           "
-          echo "fim_gerar_en=$(date +%s)" >> "$GITHUB_ENV"
+          echo "fim_gerar=$(date +%s)" >> "$GITHUB_ENV"
 
       - name: Relatorio de tempo
         run: |

@@ -78,6 +78,12 @@ SILENCIO_FOLGA_S = 0.10      # deixa nas pontas pra fala não soar cortada
 MARGEM = 0.4                     # respiro antes/depois do corte (s)
 CONGELAMENTO_MAX_S = 4.5         # bloco contínuo travado acima disso descarta o candidato
 
+# ------------------------------------------------- pós-produção (03/08/2026)
+# Estabilização (vidstab) e grade de cor cinematográfica — só ffmpeg nativo,
+# sem GPU, sem asset externo. Ver engine/pos_producao.py.
+ESTABILIZAR = True
+GRADE_CINEMATICO = True
+
 # Piso de gancho (0-10). O Gemini já devolve `forca_gancho` por clipe, mas
 # até 29/07/2026 esse número era gravado no post.json e nunca usado.
 #

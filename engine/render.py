@@ -3,7 +3,7 @@ from functools import lru_cache
 from pathlib import Path
 
 import config
-from . import midia, enquadrar
+from . import midia, enquadrar, pos_producao
 
 _NVENC = None
 
@@ -354,6 +354,8 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     caminho = enquadrar.trajetoria(bruto, l, a)
     lv, av = config.VERTICAL
     filtro = enquadrar.filtro_vertical(l, a, caminho) + _ken_burns(bruto, lv, av)
+    if config.GRADE_CINEMATICO:
+        filtro += pos_producao.FILTRO_COR_CINEMATICO
     # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a
     # pasta do clipe herda o nome do vídeo-fonte, e nome de vídeo tem
     # apóstrofo, dois-pontos e o que mais o YouTube deixar. Caminho previsível
@@ -370,6 +372,8 @@ def horizontal(bruto: Path, ass: Path | None, destino: Path,
     lh, ah = config.HORIZONTAL
     filtro = (f"scale={lh}:{ah}:force_original_aspect_ratio=decrease,"
               f"pad={lh}:{ah}:(ow-iw)/2:(oh-ih)/2:black") + _ken_burns(bruto, lh, ah)
+    if config.GRADE_CINEMATICO:
+        filtro += pos_producao.FILTRO_COR_CINEMATICO
     return _render(bruto, filtro, ass, destino, audio_dublado)
 
 

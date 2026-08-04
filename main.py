@@ -52,7 +52,7 @@ def _legenda(c: dict) -> str:
 def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
               so_vertical: bool, traduzir: bool = True, dublar: bool = False,
               url_origem: str = "", recorte: tuple[float, float] | None = None,
-              estilo_legenda: int = 1) -> Path:
+              estilo_legenda: int = 1, manter_temp: bool = False) -> Path:
     t0 = time.time()
     config.TRABALHO.mkdir(parents=True, exist_ok=True)
     nome_fonte = fonte.name
@@ -269,6 +269,21 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         (pasta / "post.txt").write_text(_legenda(c), encoding="utf-8")
         resumo.append(meta)
 
+        # Limpa os intermediários DESTE clipe assim que ele termina — sem
+        # isso, tudo (bruto, versão enxuta, estabilizada, áudio, faixa
+        # dublada) fica acumulando em disco até o fim do lote inteiro, e um
+        # runner do GitHub Actions (só ~14GB livres) estoura "No space left
+        # on device" no meio de um vídeo com --dublar e vários clipes
+        # (medido em 04/08/2026, run 30899785124, quebrou no clipe 2 de 10).
+        if not manter_temp:
+            for padrao in (f"bruto_{i:02d}*.mp4", f"clip_{i:02d}.flac",
+                          f"v_{i:02d}.ass", f"h_{i:02d}.ass"):
+                for f in config.TRABALHO.glob(padrao):
+                    f.unlink(missing_ok=True)
+            dub_dir = config.TRABALHO / f"dub_{i:02d}"
+            if dub_dir.is_dir():
+                shutil.rmtree(dub_dir, ignore_errors=True)
+
     (destino / "_resumo.json").write_text(
         json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -351,7 +366,7 @@ def main():
         processar(fonte, a.qtd, not a.so_audio, a.idioma, not a.com_horizontal,
                   traduzir=not a.sem_traducao, dublar=a.dublar,
                   url_origem=a.url or "", recorte=recorte,
-                  estilo_legenda=a.estilo_legenda)
+                  estilo_legenda=a.estilo_legenda, manter_temp=a.manter_temp)
     finally:
         if not a.manter_temp and config.TRABALHO.exists():
             shutil.rmtree(config.TRABALHO, ignore_errors=True)

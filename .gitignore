@@ -10,7 +10,11 @@ trabalho/
 saida/
 lista_videos.txt
 PARA_POSTAR/
-estado/
+estado/*
+# exceção: mestre de vídeos-fonte já baixados/cortados — precisa sobreviver
+# a troca de máquina (já aconteceu uma vez com este projeto), então vai pro
+# git em vez de ficar só local como o resto de estado/
+!estado/videos_trabalhados.json
 teste/*.mp4
 teste/*.mp3
 teste/*.log
@@ -27,3 +31,4 @@ credentials.json
 tmpfreeze/
 teste_elon.mp4
 modelos/
+github_token.txt

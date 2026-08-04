@@ -48,6 +48,11 @@ jobs:
           echo "inicio_gerar_pt=$(date +%s)" >> "$GITHUB_ENV"
           python -X utf8 -c "
           import os, torchaudio as ta
+          import perth
+          class _SemMarcaDagua:
+              def __init__(self, *a, **k): pass
+              def apply_watermark(self, wav, sample_rate=None): return wav
+          perth.PerthImplicitWatermarker = _SemMarcaDagua
           from chatterbox.tts import ChatterboxTTS
           model = ChatterboxTTS.from_pretrained(device='cpu')
           wav = model.generate(os.environ['TEXTO_PT'], audio_prompt_path='vozes/bryan_amostra.wav', language_id='pt')
@@ -60,6 +65,11 @@ jobs:
           echo "inicio_gerar_en=$(date +%s)" >> "$GITHUB_ENV"
           python -X utf8 -c "
           import torchaudio as ta
+          import perth
+          class _SemMarcaDagua:
+              def __init__(self, *a, **k): pass
+              def apply_watermark(self, wav, sample_rate=None): return wav
+          perth.PerthImplicitWatermarker = _SemMarcaDagua
           from chatterbox.tts import ChatterboxTTS
           model = ChatterboxTTS.from_pretrained(device='cpu')
           wav = model.generate('Every piece of fruit is a drop of sweetness from nature', audio_prompt_path='vozes/bryan_amostra.wav', language_id='en')

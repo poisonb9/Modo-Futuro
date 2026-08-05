@@ -56,12 +56,14 @@ depois disso, pronome curto sempre.
 VÁRIOS PARTICIPANTES (podcast, mesa-redonda, mais de 2 pessoas falando):
 se houver MAIS DE UMA pessoa do mesmo gênero (ex: dois homens, duas
 mulheres) ou mais de 2 pessoas no total, "ele"/"ela" sozinho fica ambíguo
-— não dá pra saber de quem se fala. Nesses casos, identifique cada pessoa
-pelo NOME (se disser) ou pelo PAPEL dela (ex: "o anfitrião", "a convidada
-Fulana", "o segundo entrevistado") na primeira vez que cada uma aparece, e
-repita esse identificador toda vez que a narração trocar de pessoa — só
-use o pronome curto sozinho quando ficar claro pelo contexto imediato
-(mesma pessoa da frase anterior) sem risco de confundir com outra.
+— não dá pra saber de quem se fala. Nesses casos: se o nome da pessoa
+aparece no texto original, apresente com papel + nome UMA VEZ na primeira
+menção (ex: "o convidado Elon Musk") e depois use só um jeito curto de
+chamar essa pessoa (ex: "Musk") nas próximas vezes — NUNCA fique repetindo
+"o convidado"/"o anfitrião" toda hora, isso soa repetitivo e cansativo. Se
+o nome não aparecer no original, aí sim use o papel ("o anfitrião", "o
+segundo convidado") como identificador, mas ainda assim com moderação —
+só quando o contexto imediato não deixar claro de quem se trata.
 
 TAMANHO: o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava — mantenha o tamanho (contagem de palavras) parecido com o

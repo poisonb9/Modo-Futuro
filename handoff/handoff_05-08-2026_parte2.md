@@ -3,9 +3,11 @@
 > Continuação de `handoff_05-08-2026.md` (parte 1, sessão da madrugada).
 > Onde houver conflito, **este manda**. Sessão: fechou o teste de ponta-a-
 > ponta da voz clonada que a parte 1 tinha deixado pendente, e depois de
-> 5 iterações guiadas pelo Bryan ouvindo cada resultado, chegou no que ele
-> aprovou como **padrão universal de corte daqui em diante**: dublagem +
-> narração + legenda sincronizada + estilo 2.
+> 8 iterações guiadas pelo Bryan ouvindo cada resultado, chegou no que ele
+> confirmou como **NOSSO NOVO PADRÃO** de corte daqui em diante: dublagem
+> + narração + legenda sincronizada + estilo 2 + cadência natural + fix
+> de abreviações. Citação literal do Bryan no fim da sessão: "Ficou bom
+> demais o último vídeo!!!!!!! Esse vai ser o nosso novo padrão!!!"
 
 ---
 
@@ -202,6 +204,52 @@ primeiro vídeo da leva 032/038).
 
 ---
 
+# PARTE H — 3 rodadas finais de ajuste fino, DEPOIS confirmado como padrão
+
+Depois da aprovação inicial (Parte C.4/C.5), o Bryan pediu mais testes no
+mesmo clipe 002 e achou mais 3 problemas, cada um corrigido e revalidado:
+
+1. **Áudio lento/arrastado quando a narração sobra tempo.** Antes, quando
+   a fala gerada era mais curta que o clipe, o código sempre DESACELERAVA
+   o áudio pra esticar até preencher o tempo todo (mesmo com folga
+   pequena — medido: fator 0.86x soou "lento"). Corrigido: agora, se a
+   narração é mais curta, o resto vira SILÊNCIO no final (ritmo natural
+   intacto); só acelera (até 1.6x) quando a narração é mais longa que o
+   clipe. Commit `d5c2631`.
+2. **"Dr. Yao" virava pausa longa + ruído de respiração.** O divisor de
+   frases (`_dividir_frases`) cortava em QUALQUER ". ", sem saber que
+   "Dr." é abreviação — isolava "Yao" como uma síntese de TTS separada e
+   curtíssima, e o Chatterbox reagia mal a isso (ruído de respiração).
+   Corrigido: lista de abreviações comuns (Dr, Sr, Sra, Prof, etc.)
+   protegida antes do corte. Commit `550f429`.
+3. **Texto da narração ficando mais longo que o original** (por causa da
+   instrução de gênero pedindo repetir "a convidada" toda hora) forçava
+   acelerar demais e soar corrido. Corrigido: usa o papel só na primeira
+   menção pra estabelecer o gênero, pronome curto depois, e pede
+   explicitamente pra manter o tamanho do texto parecido com o original.
+   Commit `435eeea` — junto, ganhou um print de diagnóstico
+   (`X frase(s), narração Ys pro clipe de Zs...`) que mostra na hora se
+   sobrou silêncio ou se acelerou e quanto, sem precisar adivinhar pela
+   duração do run.
+
+**Depois dessas 3 correções, testado de novo no mesmo clipe 002: Bryan —
+"Ficou bom demais o último vídeo!!!!!!! Esse vai ser o nosso novo
+padrão!!!"**
+
+## Pendência mínima, não bloqueante
+
+Bryan notou UMA palavra errada na narração: **"manusar" em vez de
+"manusear"** (verbo não existe em português, o certo é "manusear"). Não
+sei ainda se foi o Gemini que escreveu errado na reescrita da narração ou
+se é um erro de pronúncia do Chatterbox lendo "manusear" errado — não
+investiguei porque é uma ocorrência única e o resultado geral já foi
+aprovado como padrão. Se acontecer de novo (palavra estranha/inventada),
+vale checar o texto REAL que foi pro TTS (não fica salvo em lugar nenhum
+hoje, só o áudio final) — pode ser necessário logar o texto de cada frase
+antes de sintetizar, pra conseguir diagnosticar.
+
+---
+
 # PARTE G — Sem mudança (herdado da parte 1, ainda válido)
 
 - **Shadowban**: TikTok Studio não mostra violação formal. Causa do corte
@@ -239,10 +287,17 @@ sem necessidade real:
 - Síntese de voz é FRASE POR FRASE (não janela de tempo, não tudo numa
   tacada só — as duas alternativas foram testadas e reprovadas)
 - Legenda segue o timing REAL do áudio dublado, não o do vídeo fonte
-- Gênero da pessoa descrita: a narração tem que pegar pistas de gênero
-  do texto original e manter consistente (achado LOGO DEPOIS da
-  aprovação, commit e3dfed3, AINDA NÃO TESTADO de ponta a ponta — vale
-  conferir no primeiro vídeo real que rodar)
+- Gênero da pessoa descrita: a narração pega pistas de gênero do texto
+  original e mantém consistente (pronome curto, não repete o papel toda
+  hora — isso inflava o texto e acelerava demais)
+- Narração mais curta que o clipe = silêncio no final, NUNCA desacelera
+  a fala pra esticar (mais longa = acelera até 1.6x)
+- Abreviações (Dr., Sr., Sra., Prof. etc) protegidas do corte de frase —
+  sem isso davam pausa longa + ruído de respiração no meio do nome
+CONFIRMADO PELO BRYAN no fim da sessão, depois de 8 iterações: "Ficou bom
+demais o último vídeo!!!!!!! Esse vai ser o nosso novo padrão!!!" Única
+pendência não bloqueante: ele notou "manusar" em vez de "manusear" (uma
+palavra, ocorrência única, não investigado — ver Parte H).
 Tudo isso já está no código (engine/traducao.py, engine/voz_clonada.py,
 main.py) — roda sozinho sempre que --dublar é usado com --idioma certo.
 

@@ -73,30 +73,30 @@ def _ajustar_duracao(audio: Path, alvo_s: float, destino: Path) -> Path:
 
 def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
                   amostra_voz: Path, idioma: str = IDIOMA_PADRAO) -> Path | None:
-    """Mesma interface de dublagem.gerar_trilha, mas com a voz clonada."""
-    from . import dublagem  # reaproveita _mixar, sem duplicar
+    """Mesma interface de dublagem.gerar_trilha, mas com a voz clonada.
 
+    Gera a narração inteira numa ÚNICA chamada de TTS (não um trechinho por
+    janela de ~4s) e só ajusta a duração total no fim. Sintetizar em pedaços
+    picados (como fazia antes, um `_falar` por segmento + `_mixar`) dava uma
+    pequena pausa de início/fim em CADA pedaço — e como o corte de texto por
+    janela não respeita pontuação, essas pausas caíam no meio da frase em
+    vez de nas vírgulas, dessincronizando do ritmo da legenda (medido com o
+    Bryan em 05/08/2026). Uma síntese só deixa o Chatterbox decidir a
+    prosódio/pausas pela pontuação real do texto."""
     if not segmentos:
         return None
     if not amostra_voz.exists():
         raise RuntimeError(f"amostra de voz não encontrada: {amostra_voz}")
 
-    trabalho.mkdir(parents=True, exist_ok=True)
-    partes = []
-    for i, seg in enumerate(segmentos):
-        texto = seg["texto"].strip()
-        if not texto:
-            continue
-        bruto = trabalho / f"voz_{i:03d}.wav"
-        _falar(texto, bruto, amostra_voz, idioma)
-        janela = max(0.3, seg["fim"] - seg["inicio"])
-        ajustado = trabalho / f"voz_{i:03d}_ok.wav"
-        _ajustar_duracao(bruto, janela, ajustado)
-        partes.append((seg["inicio"], ajustado))
-
-    if not partes:
+    texto_completo = " ".join(
+        seg["texto"].strip() for seg in segmentos if seg["texto"].strip())
+    if not texto_completo:
         return None
 
+    trabalho.mkdir(parents=True, exist_ok=True)
+    bruto = trabalho / "voz_bruta.wav"
+    _falar(texto_completo, bruto, amostra_voz, idioma)
+
     destino = trabalho / "trilha_dublada_clonada.wav"
-    dublagem._mixar(partes, duracao_total, destino)
+    _ajustar_duracao(bruto, duracao_total, destino)
     return destino

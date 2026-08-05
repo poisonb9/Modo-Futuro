@@ -61,12 +61,30 @@ def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str) -> Path:
 
 
 def _ajustar_duracao(audio: Path, alvo_s: float, destino: Path) -> Path:
+    """Encaixa o áudio no tamanho do clipe (`render.vertical` usa
+    `-shortest`, então o áudio TEM que ter pelo menos a duração do vídeo,
+    senão o vídeo final sai cortado).
+
+    Narração mais CURTA que o clipe: preenche o resto com SILÊNCIO no
+    final, sem mexer no ritmo da fala — esticar/desacelerar (como fazia
+    antes, sempre) deixava a voz arrastada mesmo quando a diferença era
+    pequena (Bryan reportou "ficou lenta" com um fator de só 0.86x, ou
+    seja, eu tava desacelerando a fala em 14% à toa). Narração mais LONGA
+    que o clipe: acelera (até 1.6x, acima disso fica robótico/irreconhecível
+    — já tinha esse teto antes)."""
     dur = midia.duracao(audio)
     if dur <= 0:
         shutil.copy(audio, destino)
         return destino
-    fator = dur / max(0.1, alvo_s)
-    fator = max(0.7, min(1.6, fator))
+
+    if dur <= alvo_s:
+        falta = alvo_s - dur
+        midia.roda(["ffmpeg", "-y", "-i", str(audio),
+                    "-af", f"apad=pad_dur={falta:.3f}",
+                    "-ar", "44100", str(destino)])
+        return destino
+
+    fator = min(1.6, dur / max(0.1, alvo_s))
     midia.roda(["ffmpeg", "-y", "-i", str(audio),
                 "-filter:a", f"atempo={fator:.3f}",
                 "-ar", "44100", str(destino)])
@@ -155,17 +173,30 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
 
     destino = trabalho / "trilha_dublada_clonada.wav"
     _ajustar_duracao(concatenado, duracao_total, destino)
-    dur_final = midia.duracao(destino)
-    escala = (dur_final / dur_concatenada) if dur_concatenada > 0 else 1.0
+    # narração mais curta que o clipe = preenchida com silêncio no final,
+    # SEM mexer no ritmo (ver _ajustar_duracao) — o timing de cada frase
+    # não muda. Só quando acelera (narração mais longa) é que o timing
+    # precisa ser comprimido na mesma proporção.
+    if dur_concatenada <= duracao_total:
+        escala = 1.0
+    else:
+        dur_final = midia.duracao(destino)
+        escala = (dur_final / dur_concatenada) if dur_concatenada > 0 else 1.0
 
-    # diagnóstico: se a narração saiu bem mais longa que o clipe, o atempo
-    # bate no teto (1.6x) e a fala sai corrida — medir aqui em vez de
-    # adivinhar pela duração do run (foi assim que achamos o problema em
+    # diagnóstico: narração mais curta = sobra silêncio no fim (ritmo
+    # natural, não desacelera mais); mais longa = acelera até 1.6x (acima
+    # disso ainda fica corrido). Medir aqui em vez de adivinhar pela
+    # duração do run (foi assim que achamos o problema de lentidão em
     # 05/08/2026, run 31037313597, sem esse print).
-    fator_atempo = dur_concatenada / max(0.1, duracao_total)
-    print(f"      {len(frases)} frase(s), narração bruta {dur_concatenada:.1f}s "
-          f"pro clipe de {duracao_total:.1f}s (fator {fator_atempo:.2f}x"
-          f"{' — NO TETO, vai soar corrido' if fator_atempo > 1.6 else ''})")
+    if dur_concatenada <= duracao_total:
+        print(f"      {len(frases)} frase(s), narração {dur_concatenada:.1f}s "
+              f"pro clipe de {duracao_total:.1f}s "
+              f"({duracao_total - dur_concatenada:.1f}s de silêncio no final, ritmo natural)")
+    else:
+        fator_atempo = min(1.6, dur_concatenada / max(0.1, duracao_total))
+        print(f"      {len(frases)} frase(s), narração {dur_concatenada:.1f}s "
+              f"pro clipe de {duracao_total:.1f}s (acelerando {fator_atempo:.2f}x"
+              f"{' — NO TETO, ainda vai soar corrido' if fator_atempo >= 1.6 else ''})")
 
     timing, t = [], 0.0
     for frase, dur in zip(frases, duracoes):

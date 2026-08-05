@@ -250,10 +250,34 @@ antes de sintetizar, pra conseguir diagnosticar.
 
 ---
 
+# PARTE I — Nova pista pro shadowban: rótulo de IA ausente
+
+Depois de postar o vídeo aprovado como padrão (Parte H), Bryan tentou
+promover ele (TikTok Promote, pago) e levou rejeição por "Violação das
+Diretrizes da comunidade" — categoria **integridade e autenticidade**
+(entre 4: saúde comportamental, tópicos delicados, integridade e
+autenticidade, bens regulamentados). Ele confirmou que **não sabia da
+opção "Conteúdo gerado por IA"** e nunca marcou isso ao postar.
+
+Isso muda a Parte G abaixo: rótulo de IA ausente é uma categoria
+SEPARADA de violação/strike formal (não aparece no painel de Compliance
+do TikTok Studio, que sempre mostrou tudo ✅) — vira agora a **hipótese
+principal** pro corte binário de alcance de 2/8, não mais "sem
+explicação". Ver memória `modofuturo-rotulo-ia-obrigatorio.md`.
+
+**Ação obrigatória a partir de agora**: marcar TODO vídeo com dublagem
+de voz clonada como "Conteúdo gerado por IA" ao publicar (opção em
+"Mais opções"/configurações de privacidade do post). Ainda não
+verificado se isso resolve a rejeição de Promoção nem se explica de
+fato o corte de 2/8 — só uma hipótese forte a testar.
+
+---
+
 # PARTE G — Sem mudança (herdado da parte 1, ainda válido)
 
 - **Shadowban**: TikTok Studio não mostra violação formal. Causa do corte
-  de alcance (2/8) ainda sem explicação confirmada.
+  de alcance (2/8) tem NOVA hipótese principal — ver Parte I (rótulo de
+  IA ausente), ainda não confirmada.
 - **Imagem IA de ponta a ponta** (`engine/imagem_ia.py`, Pollinations
   realista): ainda pendente, não testado nesta sessão.
 - **Cartoon**: descartado definitivamente, não retomar.
@@ -315,9 +339,13 @@ PENDENTE — vídeo com imagem IA de ponta a ponta: ainda não foi feito
 (engine/imagem_ia.py, Pollinations realista). Cartoon descartado
 definitivamente, não retomar.
 
-SHADOWBAN: TikTok Studio não mostra violação formal. Causa do corte de
-alcance (2/8) continua sem explicação — não é hipótese principal a menos
-que surja dado novo.
+SHADOWBAN: NOVA hipótese principal (Parte I) — vídeo postado sem o rótulo
+"Conteúdo gerado por IA" foi rejeitado pra Promoção paga por
+integridade/autenticidade, categoria que NÃO aparece como violação
+formal no TikTok Studio. Ação obrigatória a partir de agora: marcar
+TODO vídeo com voz clonada como "Conteúdo gerado por IA" ao postar.
+Ainda não confirmado se resolve o corte de alcance de 2/8, só uma
+hipótese forte — ver modofuturo-rotulo-ia-obrigatorio.md.
 
 INFRA: token do GitHub (com escrita) em clip_engine/github_token.txt,
 nunca pedir de novo. cortar.yml (fluxo direto de URL, sem bruto no

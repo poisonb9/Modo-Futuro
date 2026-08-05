@@ -158,6 +158,15 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     dur_final = midia.duracao(destino)
     escala = (dur_final / dur_concatenada) if dur_concatenada > 0 else 1.0
 
+    # diagnóstico: se a narração saiu bem mais longa que o clipe, o atempo
+    # bate no teto (1.6x) e a fala sai corrida — medir aqui em vez de
+    # adivinhar pela duração do run (foi assim que achamos o problema em
+    # 05/08/2026, run 31037313597, sem esse print).
+    fator_atempo = dur_concatenada / max(0.1, duracao_total)
+    print(f"      {len(frases)} frase(s), narração bruta {dur_concatenada:.1f}s "
+          f"pro clipe de {duracao_total:.1f}s (fator {fator_atempo:.2f}x"
+          f"{' — NO TETO, vai soar corrido' if fator_atempo > 1.6 else ''})")
+
     timing, t = [], 0.0
     for frase, dur in zip(frases, duracoes):
         timing.append({"frase": frase, "inicio": t * escala,

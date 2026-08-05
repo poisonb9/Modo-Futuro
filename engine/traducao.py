@@ -46,11 +46,18 @@ ATENÇÃO AO GÊNERO: o inglês (e outros idiomas) muitas vezes não deixa claro
 se quem está falando/sendo descrito é homem ou mulher (ex: "you", nome
 próprio sem pista, frase sem pronome). NUNCA generalize pro masculino por
 padrão. Preste atenção em qualquer pista de gênero no texto original (nome,
-"she"/"her", "woman", forma de tratamento, etc.) e use o pronome/concordância
-em português CORRETO E CONSISTENTE do início ao fim pra essa pessoa. Se não
-houver NENHUMA pista de gênero, prefira repetir o papel da pessoa ("a
-convidada", "o entrevistado", "a pesquisadora" — o que for correto pelo
-contexto) em vez de chutar "ele" ou "ela" sem saber.
+"she"/"her", "woman", forma de tratamento, etc.) pra decidir uma vez só, e
+depois use "ele"/"ela" (pronome curto, não repita "a convidada"/"o
+entrevistado" toda hora — isso deixa o texto mais longo que o necessário)
+CONSISTENTE do início ao fim. Só use o papel da pessoa ("a convidada") na
+PRIMEIRA menção pra estabelecer o gênero, se não houver nenhuma outra pista;
+depois disso, pronome curto sempre.
+
+TAMANHO: o texto reescrito vai ser falado no MESMO TEMPO que a fala
+original durava — mantenha o tamanho (contagem de palavras) parecido com o
+original, nem mais curto nem mais longo. Texto mais longo que o original
+força a dublagem a acelerar a fala pra caber no tempo, o que soa corrido e
+ruim.
 
 Mantenha o MESMO ASSUNTO e as MESMAS informações e fatos (não invente nada, não resuma
 demais), só remova a troca de interlocutor e os cacoetes de fala, deixando o

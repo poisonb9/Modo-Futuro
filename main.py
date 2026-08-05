@@ -208,7 +208,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         if precisa_traduzir:
             print("      traduzindo pra pt-BR...")
             status.etapa(nome_fonte, "traduzindo", c.get("titulo", ""), i, len(clipes))
-            segmentos = traducao.traduzir_segmentos(ps)
+            segmentos = traducao.traduzir_segmentos(ps, narrar=dublar)
             ps = traducao.segmentos_para_palavras(segmentos)
             if dublar:
                 if config.VOZ_CLONADA_ATIVA:

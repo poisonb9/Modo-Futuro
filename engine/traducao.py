@@ -24,8 +24,29 @@ sem comentário, sem markdown.
 Fala original:
 {texto}"""
 
+# Usado só quando --dublar: a fala original costuma ter mais de uma pessoa
+# (entrevistador perguntando, entrevistado respondendo) e cacoetes de fala
+# ("ok ok", repetição, gagueira). Traduzir isso literalmente faz a voz
+# clonada (uma pessoa só) "interpretar" os dois lados do diálogo, o que
+# soa estranho. Aqui a IA reescreve como narração contínua de UM narrador
+# só, mesmo assunto e mesmos fatos, sem o vaivém de interlocutor.
+PROMPT_NARRACAO = """A fala abaixo é a transcrição de um vídeo e pode ter mais de
+uma pessoa falando (por exemplo: entrevistador perguntando, entrevistado
+respondendo), além de cacoetes de fala como "ok ok", repetições e gagueira.
 
-def _traduzir_texto(texto: str) -> str:
+Reescreva isso em português do Brasil como uma NARRAÇÃO CONTÍNUA de um único
+narrador contando/explicando o assunto pro espectador — não é diálogo, é um
+só narrador falando o tempo todo. Mantenha o MESMO ASSUNTO e as MESMAS
+informações e fatos (não invente nada, não resuma demais), só remova a troca
+de interlocutor e os cacoetes de fala, deixando o texto linear e natural de
+se ouvir em voz alta. Responda SOMENTE com o texto reescrito, sem aspas, sem
+comentário, sem markdown.
+
+Fala original:
+{texto}"""
+
+
+def _traduzir_texto(texto: str, prompt: str = PROMPT) -> str:
     if not texto.strip():
         return texto
 
@@ -37,7 +58,7 @@ def _traduzir_texto(texto: str) -> str:
             r = requests.post(
                 f"{config.GEMINI_URL}/models/{config.GEMINI_MODELO}:generateContent?key={chave}",
                 json={
-                    "contents": [{"parts": [{"text": PROMPT.format(texto=texto)}]}],
+                    "contents": [{"parts": [{"text": prompt.format(texto=texto)}]}],
                     "generationConfig": {"temperature": 0.3},
                 },
                 timeout=60,
@@ -97,12 +118,56 @@ def _agrupar(palavras: list[dict], tamanho_janela_s: float) -> list[list[dict]]:
     return grupos
 
 
-def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0) -> list[dict]:
+def _distribuir_texto_em_janelas(texto: str, grupos: list[list[dict]]) -> list[dict]:
+    """Divide um texto reescrito (já não bate mais 1:1 com as janelas
+    originais, porque a reescrita muda o número de palavras) nas mesmas
+    janelas de tempo dos grupos, proporcional à duração de cada uma —
+    igual espírito do _redistribuir, mas em nível de texto corrido em vez
+    de palavra por palavra."""
+    texto = texto.strip()
+    inicio_total = grupos[0][0]["inicio"]
+    fim_total = grupos[-1][-1]["fim"]
+    duracao_total = max(0.1, fim_total - inicio_total)
+    n = len(texto)
+
+    resultado, pos, acumulado = [], 0, 0.0
+    for i, grupo in enumerate(grupos):
+        acumulado += grupo[-1]["fim"] - grupo[0]["inicio"]
+        if i == len(grupos) - 1:
+            corte = n
+        else:
+            corte = round(n * (acumulado / duracao_total))
+            while corte < n and not texto[corte].isspace():
+                corte += 1
+        resultado.append({
+            "inicio": grupo[0]["inicio"],
+            "fim": grupo[-1]["fim"],
+            "texto": texto[pos:corte].strip(),
+        })
+        pos = corte
+    return resultado
+
+
+def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
+                        narrar: bool = False) -> list[dict]:
     """Recebe [{palavra, inicio, fim}] no idioma original e devolve trechos
     traduzidos em texto corrido: [{inicio, fim, texto}]. Usado pra dublagem
-    (TTS fala o texto inteiro do trecho, não palavra por palavra)."""
+    (TTS fala o texto inteiro do trecho, não palavra por palavra).
+
+    narrar=True (usado com --dublar): em vez de traduzir cada janela de
+    ~4s isoladamente (o que preserva vaivém de diálogo e cacoetes de fala
+    da transcrição original), reescreve o trecho INTEIRO de uma vez como
+    narração de um narrador só, depois distribui esse texto nas mesmas
+    janelas de tempo. Ver PROMPT_NARRACAO."""
     if not palavras:
         return []
+
+    if narrar:
+        texto_completo = " ".join(p["palavra"] for p in palavras)
+        texto_narrado = _traduzir_texto(texto_completo, prompt=PROMPT_NARRACAO)
+        grupos = _agrupar(palavras, tamanho_janela_s)
+        return _distribuir_texto_em_janelas(texto_narrado, grupos)
+
     resultado = []
     for grupo in _agrupar(palavras, tamanho_janela_s):
         texto_original = " ".join(p["palavra"] for p in grupo)
@@ -125,7 +190,8 @@ def segmentos_para_palavras(segmentos: list[dict]) -> list[dict]:
     return resultado
 
 
-def traduzir_palavras(palavras: list[dict], tamanho_janela_s: float = 4.0) -> list[dict]:
+def traduzir_palavras(palavras: list[dict], tamanho_janela_s: float = 4.0,
+                       narrar: bool = False) -> list[dict]:
     """Recebe [{palavra, inicio, fim}] no idioma original e devolve a mesma
     estrutura traduzida pra pt-BR, com timing reencaixado.
 
@@ -135,5 +201,5 @@ def traduzir_palavras(palavras: list[dict], tamanho_janela_s: float = 4.0) -> li
     """
     if not palavras:
         return []
-    segmentos = traduzir_segmentos(palavras, tamanho_janela_s)
+    segmentos = traduzir_segmentos(palavras, tamanho_janela_s, narrar=narrar)
     return segmentos_para_palavras(segmentos)

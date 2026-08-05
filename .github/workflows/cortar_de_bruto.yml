@@ -33,6 +33,10 @@ on:
         description: "Dublar com a voz clonada do Bryan (Chatterbox)"
         required: false
         default: "true"
+      recorte:
+        description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini"
+        required: false
+        default: ""
 
 jobs:
   cortar:
@@ -130,6 +134,7 @@ jobs:
           --idioma "${{ inputs.idioma }}"
           --estilo-legenda "${{ inputs.estilo_legenda }}"
           ${{ inputs.dublar == 'true' && '--dublar' || '' }}
+          ${{ inputs.recorte != '' && format('--recorte {0}', inputs.recorte) || '' }}
 
       - name: Subir clipes prontos pro Drive
         env:

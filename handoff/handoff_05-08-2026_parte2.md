@@ -184,6 +184,24 @@ até chegar na boa. Pode limpar quando quiser, não é urgente.
 
 ---
 
+# PARTE G.1 — Ajuste de gênero na narração (achado logo depois da aprovação)
+
+No mesmo clipe de teste, a visitante era mulher mas a narração se referia
+a ela como "ele" o tempo todo. Causa: o inglês (fala original) muitas
+vezes não deixa o gênero explícito ("you", nome sem pista clara), e a IA
+generalizava pro masculino por padrão ao reescrever em português.
+
+**Fix**: `PROMPT_NARRACAO` (`engine/traducao.py`) agora pede
+explicitamente pra prestar atenção em qualquer pista de gênero no texto
+original (nome, "she"/"her", forma de tratamento) e manter o
+pronome/concordância CONSISTENTE do início ao fim; se não houver
+nenhuma pista, prefere repetir o papel da pessoa ("a convidada", "o
+entrevistado") em vez de chutar. Commit `e3dfed3`. **Ainda não testado
+de ponta a ponta** — validar no próximo redo real (não custa conferir no
+primeiro vídeo da leva 032/038).
+
+---
+
 # PARTE G — Sem mudança (herdado da parte 1, ainda válido)
 
 - **Shadowban**: TikTok Studio não mostra violação formal. Causa do corte
@@ -221,6 +239,10 @@ sem necessidade real:
 - Síntese de voz é FRASE POR FRASE (não janela de tempo, não tudo numa
   tacada só — as duas alternativas foram testadas e reprovadas)
 - Legenda segue o timing REAL do áudio dublado, não o do vídeo fonte
+- Gênero da pessoa descrita: a narração tem que pegar pistas de gênero
+  do texto original e manter consistente (achado LOGO DEPOIS da
+  aprovação, commit e3dfed3, AINDA NÃO TESTADO de ponta a ponta — vale
+  conferir no primeiro vídeo real que rodar)
 Tudo isso já está no código (engine/traducao.py, engine/voz_clonada.py,
 main.py) — roda sozinho sempre que --dublar é usado com --idioma certo.
 

@@ -53,6 +53,16 @@ CONSISTENTE do início ao fim. Só use o papel da pessoa ("a convidada") na
 PRIMEIRA menção pra estabelecer o gênero, se não houver nenhuma outra pista;
 depois disso, pronome curto sempre.
 
+VÁRIOS PARTICIPANTES (podcast, mesa-redonda, mais de 2 pessoas falando):
+se houver MAIS DE UMA pessoa do mesmo gênero (ex: dois homens, duas
+mulheres) ou mais de 2 pessoas no total, "ele"/"ela" sozinho fica ambíguo
+— não dá pra saber de quem se fala. Nesses casos, identifique cada pessoa
+pelo NOME (se disser) ou pelo PAPEL dela (ex: "o anfitrião", "a convidada
+Fulana", "o segundo entrevistado") na primeira vez que cada uma aparece, e
+repita esse identificador toda vez que a narração trocar de pessoa — só
+use o pronome curto sozinho quando ficar claro pelo contexto imediato
+(mesma pessoa da frase anterior) sem risco de confundir com outra.
+
 TAMANHO: o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava — mantenha o tamanho (contagem de palavras) parecido com o
 original, nem mais curto nem mais longo. Texto mais longo que o original

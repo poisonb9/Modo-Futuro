@@ -28,19 +28,23 @@ Fala original:
 # (entrevistador perguntando, entrevistado respondendo) e cacoetes de fala
 # ("ok ok", repetição, gagueira). Traduzir isso literalmente faz a voz
 # clonada (uma pessoa só) "interpretar" os dois lados do diálogo, o que
-# soa estranho. Aqui a IA reescreve como narração contínua de UM narrador
-# só, mesmo assunto e mesmos fatos, sem o vaivém de interlocutor.
+# soa estranho. Aqui a IA reescreve como um NARRADOR CONTANDO A HISTÓRIA
+# do que está acontecendo com base no que os personagens disseram — não
+# é dublagem das falas deles, é o narrador relatando os fatos.
 PROMPT_NARRACAO = """A fala abaixo é a transcrição de um vídeo e pode ter mais de
 uma pessoa falando (por exemplo: entrevistador perguntando, entrevistado
 respondendo), além de cacoetes de fala como "ok ok", repetições e gagueira.
 
-Reescreva isso em português do Brasil como uma NARRAÇÃO CONTÍNUA de um único
-narrador contando/explicando o assunto pro espectador — não é diálogo, é um
-só narrador falando o tempo todo. Mantenha o MESMO ASSUNTO e as MESMAS
-informações e fatos (não invente nada, não resuma demais), só remova a troca
-de interlocutor e os cacoetes de fala, deixando o texto linear e natural de
-se ouvir em voz alta. Responda SOMENTE com o texto reescrito, sem aspas, sem
-comentário, sem markdown.
+Reescreva isso em português do Brasil como se VOCÊ fosse um narrador contando
+a história do que está acontecendo, com base no que os personagens disseram
+— não é dublar/interpretar as falas deles, é você relatando os fatos e o que
+foi dito (ex: em vez de reproduzir a pergunta e a resposta como diálogo,
+narre o que aconteceu: "ela explicou que..." / "ele mostrou como..."). Um só
+narrador falando o tempo todo, nunca trocando de personagem. Mantenha o
+MESMO ASSUNTO e as MESMAS informações e fatos (não invente nada, não resuma
+demais), só remova a troca de interlocutor e os cacoetes de fala, deixando o
+texto linear e natural de se ouvir em voz alta. Responda SOMENTE com o texto
+reescrito, sem aspas, sem comentário, sem markdown.
 
 Fala original:
 {texto}"""

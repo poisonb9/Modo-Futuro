@@ -18,6 +18,7 @@ vazio antes do import, ao custo de o áudio sair sem o carimbo "gerado por
 IA" da Resemble (não achamos alternativa: 3 tentativas de consertar a causa
 raiz falharam, ver commits 61bc8b8/202e3f6/98bfa2a).
 """
+import re
 import shutil
 from pathlib import Path
 
@@ -25,6 +26,7 @@ from . import midia
 
 IDIOMA_PADRAO = "pt"
 _MODELO = None
+_PAUSA_ENTRE_FRASES_S = 0.15
 
 
 def _bypass_watermarker():
@@ -71,18 +73,55 @@ def _ajustar_duracao(audio: Path, alvo_s: float, destino: Path) -> Path:
     return destino
 
 
+def _dividir_frases(texto: str) -> list[str]:
+    """Divide pela pontuação de fim de frase (. ! ?), não por janela de
+    tempo arbitrária — cada pedaço vira uma chamada de TTS curta, que é o
+    regime em que o Chatterbox soa bem (ver módulo: ~154s pra 24 palavras;
+    um texto de 90s inteiro numa síntese só saiu arrastado e com dicção
+    ruim, medido com o Bryan em 05/08/2026)."""
+    partes = re.split(r"(?<=[.!?])\s+", texto.strip())
+    return [p.strip() for p in partes if p.strip()]
+
+
+def _concatenar_com_pausas(caminhos: list[Path], destino: Path,
+                            pausa_s: float = _PAUSA_ENTRE_FRASES_S) -> Path:
+    """Junta os áudios de cada frase em sequência, com uma pausa curta e
+    fixa entre elas (o silêncio natural de troca de frase de um narrador,
+    não o silêncio de início/fim que o TTS já bota em cada pedaço isolado)."""
+    if len(caminhos) == 1:
+        shutil.copy(caminhos[0], destino)
+        return destino
+
+    cmd = ["ffmpeg", "-y"]
+    for c in caminhos:
+        cmd += ["-i", str(c)]
+
+    n = len(caminhos)
+    filtros, rotulos = [], []
+    for i in range(n):
+        if i < n - 1:
+            filtros.append(f"[{i}:a]apad=pad_dur={pausa_s}[a{i}]")
+            rotulos.append(f"[a{i}]")
+        else:
+            rotulos.append(f"[{i}:a]")
+    filtro = ";".join(filtros) + ";" + "".join(rotulos) + f"concat=n={n}:v=0:a=1[out]"
+
+    cmd += ["-filter_complex", filtro, "-map", "[out]", "-ar", "44100", str(destino)]
+    midia.roda(cmd)
+    return destino
+
+
 def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
                   amostra_voz: Path, idioma: str = IDIOMA_PADRAO) -> Path | None:
     """Mesma interface de dublagem.gerar_trilha, mas com a voz clonada.
 
-    Gera a narração inteira numa ÚNICA chamada de TTS (não um trechinho por
-    janela de ~4s) e só ajusta a duração total no fim. Sintetizar em pedaços
-    picados (como fazia antes, um `_falar` por segmento + `_mixar`) dava uma
-    pequena pausa de início/fim em CADA pedaço — e como o corte de texto por
-    janela não respeita pontuação, essas pausas caíam no meio da frase em
-    vez de nas vírgulas, dessincronizando do ritmo da legenda (medido com o
-    Bryan em 05/08/2026). Uma síntese só deixa o Chatterbox decidir a
-    prosódio/pausas pela pontuação real do texto."""
+    Sintetiza FRASE POR FRASE (não um trechinho por janela de ~4s, que
+    cortava no meio da frase e dessincronizava as pausas da legenda; nem o
+    trecho inteiro numa síntese só, que saiu arrastado e com dicção ruim —
+    o Chatterbox não é feito pra 90s contínuos, ver `_dividir_frases`),
+    concatena com uma pausa curta fixa entre frases, e só então ajusta a
+    duração total do resultado pro tamanho do clipe (um único atempo suave
+    no final, não por pedaço)."""
     if not segmentos:
         return None
     if not amostra_voz.exists():
@@ -90,13 +129,20 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
 
     texto_completo = " ".join(
         seg["texto"].strip() for seg in segmentos if seg["texto"].strip())
-    if not texto_completo:
+    frases = _dividir_frases(texto_completo)
+    if not frases:
         return None
 
     trabalho.mkdir(parents=True, exist_ok=True)
-    bruto = trabalho / "voz_bruta.wav"
-    _falar(texto_completo, bruto, amostra_voz, idioma)
+    partes = []
+    for i, frase in enumerate(frases):
+        p = trabalho / f"voz_frase_{i:03d}.wav"
+        _falar(frase, p, amostra_voz, idioma)
+        partes.append(p)
+
+    concatenado = trabalho / "voz_concatenada.wav"
+    _concatenar_com_pausas(partes, concatenado)
 
     destino = trabalho / "trilha_dublada_clonada.wav"
-    _ajustar_duracao(bruto, duracao_total, destino)
+    _ajustar_duracao(concatenado, duracao_total, destino)
     return destino

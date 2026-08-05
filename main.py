@@ -9,7 +9,7 @@ Divisão de trabalho:
     Groq    -> legenda palavra a palavra (só nos clipes, nunca no vídeo cheio)
     ffmpeg  -> corta, enquadra no rosto, queima legenda, renderiza (NVENC)
 """
-import argparse, json, shutil, sys, time, unicodedata
+import argparse, json, re, shutil, sys, time, unicodedata
 from datetime import datetime
 from pathlib import Path
 
@@ -214,9 +214,22 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 if config.VOZ_CLONADA_ATIVA:
                     print("      dublando (voz clonada, Chatterbox)...")
                     status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
-                    audio_dublado = voz_clonada.gerar_trilha(
+                    audio_dublado, timing_dub = voz_clonada.gerar_trilha(
                         segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
                         amostra_voz=config.VOZ_CLONADA_AMOSTRA)
+                    # a legenda tem que seguir o timing REAL do áudio
+                    # dublado (pausas entre frases + atempo final mudam o
+                    # ritmo em relação ao vídeo fonte), não o timing de
+                    # `ps`/`segmentos` — senão ela "corre" na frente ou
+                    # atrás da voz (Bryan reportou em 05/08/2026).
+                    if timing_dub:
+                        palavras_dub = []
+                        for tm in timing_dub:
+                            novas = re.findall(r"\S+", tm["frase"])
+                            palavras_dub.extend(traducao.redistribuir_palavras(
+                                novas, tm["inicio"], tm["fim"]))
+                        if palavras_dub:
+                            ps = palavras_dub
                 else:
                     print("      dublando (edge-tts)...")
                     status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))

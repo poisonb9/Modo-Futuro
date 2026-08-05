@@ -112,7 +112,8 @@ def _concatenar_com_pausas(caminhos: list[Path], destino: Path,
 
 
 def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
-                  amostra_voz: Path, idioma: str = IDIOMA_PADRAO) -> Path | None:
+                  amostra_voz: Path, idioma: str = IDIOMA_PADRAO
+                  ) -> tuple[Path | None, list[dict]]:
     """Mesma interface de dublagem.gerar_trilha, mas com a voz clonada.
 
     Sintetiza FRASE POR FRASE (não um trechinho por janela de ~4s, que
@@ -121,9 +122,16 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     o Chatterbox não é feito pra 90s contínuos, ver `_dividir_frases`),
     concatena com uma pausa curta fixa entre frases, e só então ajusta a
     duração total do resultado pro tamanho do clipe (um único atempo suave
-    no final, não por pedaço)."""
+    no final, não por pedaço).
+
+    Devolve (caminho_do_audio, timing) — timing é [{frase, inicio, fim}]
+    no timeline REAL do áudio final (já contando a pausa entre frases e o
+    atempo aplicado no fim). O timing do texto original (baseado no vídeo
+    fonte) não bate mais com esse áudio — a legenda tem que usar ESSE
+    timing, não o dos `segmentos` de entrada (Bryan reportou legenda
+    "correndo" em 05/08/2026 quando ela ainda seguia o timing antigo)."""
     if not segmentos:
-        return None
+        return None, []
     if not amostra_voz.exists():
         raise RuntimeError(f"amostra de voz não encontrada: {amostra_voz}")
 
@@ -131,18 +139,29 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
         seg["texto"].strip() for seg in segmentos if seg["texto"].strip())
     frases = _dividir_frases(texto_completo)
     if not frases:
-        return None
+        return None, []
 
     trabalho.mkdir(parents=True, exist_ok=True)
-    partes = []
+    partes, duracoes = [], []
     for i, frase in enumerate(frases):
         p = trabalho / f"voz_frase_{i:03d}.wav"
         _falar(frase, p, amostra_voz, idioma)
         partes.append(p)
+        duracoes.append(midia.duracao(p))
 
     concatenado = trabalho / "voz_concatenada.wav"
     _concatenar_com_pausas(partes, concatenado)
+    dur_concatenada = midia.duracao(concatenado)
 
     destino = trabalho / "trilha_dublada_clonada.wav"
     _ajustar_duracao(concatenado, duracao_total, destino)
-    return destino
+    dur_final = midia.duracao(destino)
+    escala = (dur_final / dur_concatenada) if dur_concatenada > 0 else 1.0
+
+    timing, t = [], 0.0
+    for frase, dur in zip(frases, duracoes):
+        timing.append({"frase": frase, "inicio": t * escala,
+                        "fim": (t + dur) * escala})
+        t += dur + _PAUSA_ENTRE_FRASES_S
+
+    return destino, timing

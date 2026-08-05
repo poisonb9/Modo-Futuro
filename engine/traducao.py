@@ -91,9 +91,11 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT) -> str:
     raise RuntimeError(f"tradução falhou em todas as chaves: {ultimo_erro}")
 
 
-def _redistribuir(palavras_traduzidas: list[str], inicio: float, fim: float) -> list[dict]:
+def redistribuir_palavras(palavras_traduzidas: list[str], inicio: float, fim: float) -> list[dict]:
     """Espalha as palavras traduzidas dentro da janela [inicio, fim],
-    proporcional ao tamanho de cada palavra (palavra maior demora mais)."""
+    proporcional ao tamanho de cada palavra (palavra maior demora mais).
+    Pública porque `voz_clonada` reaproveita pra alinhar a legenda ao
+    timing REAL do áudio dublado (não ao timing do vídeo original)."""
     if not palavras_traduzidas:
         return []
     pesos = [max(1, len(p)) for p in palavras_traduzidas]
@@ -190,7 +192,7 @@ def segmentos_para_palavras(segmentos: list[dict]) -> list[dict]:
     resultado = []
     for seg in segmentos:
         novas_palavras = re.findall(r"\S+", seg["texto"])
-        resultado.extend(_redistribuir(novas_palavras, seg["inicio"], seg["fim"]))
+        resultado.extend(redistribuir_palavras(novas_palavras, seg["inicio"], seg["fim"]))
     return resultado
 
 

@@ -19,9 +19,9 @@ on:
         required: false
         default: "pt"
       estilo_legenda:
-        description: "1 = padrão do canal, 2 = réplica da referência (Poppins, corpo variável)"
+        description: "1 = padrão do canal, 2 = réplica da referência (Poppins, corpo variável) — 2 é o padrão universal desde 05/08/2026"
         required: false
-        default: "1"
+        default: "2"
       pasta_drive:
         description: "ID da pasta pai do Drive (onde nasce a pasta do dia)"
         required: true

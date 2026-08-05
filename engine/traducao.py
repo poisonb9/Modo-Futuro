@@ -40,8 +40,19 @@ a história do que está acontecendo, com base no que os personagens disseram
 — não é dublar/interpretar as falas deles, é você relatando os fatos e o que
 foi dito (ex: em vez de reproduzir a pergunta e a resposta como diálogo,
 narre o que aconteceu: "ela explicou que..." / "ele mostrou como..."). Um só
-narrador falando o tempo todo, nunca trocando de personagem. Mantenha o
-MESMO ASSUNTO e as MESMAS informações e fatos (não invente nada, não resuma
+narrador falando o tempo todo, nunca trocando de personagem.
+
+ATENÇÃO AO GÊNERO: o inglês (e outros idiomas) muitas vezes não deixa claro
+se quem está falando/sendo descrito é homem ou mulher (ex: "you", nome
+próprio sem pista, frase sem pronome). NUNCA generalize pro masculino por
+padrão. Preste atenção em qualquer pista de gênero no texto original (nome,
+"she"/"her", "woman", forma de tratamento, etc.) e use o pronome/concordância
+em português CORRETO E CONSISTENTE do início ao fim pra essa pessoa. Se não
+houver NENHUMA pista de gênero, prefira repetir o papel da pessoa ("a
+convidada", "o entrevistado", "a pesquisadora" — o que for correto pelo
+contexto) em vez de chutar "ele" ou "ela" sem saber.
+
+Mantenha o MESMO ASSUNTO e as MESMAS informações e fatos (não invente nada, não resuma
 demais), só remova a troca de interlocutor e os cacoetes de fala, deixando o
 texto linear e natural de se ouvir em voz alta. Responda SOMENTE com o texto
 reescrito, sem aspas, sem comentário, sem markdown.

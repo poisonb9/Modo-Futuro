@@ -91,14 +91,37 @@ def _ajustar_duracao(audio: Path, alvo_s: float, destino: Path) -> Path:
     return destino
 
 
+# Abreviações comuns em português — o "." delas NÃO é fim de frase.
+# Sem isso, "Dr. Yao" virava duas frases ("Dr." + "Yao..."), isolando
+# "Yao" como uma síntese de TTS separada e curtíssima — o Chatterbox
+# reagiu com uma pausa longa e um ruído de respiração ali (Bryan
+# reportou em 05/08/2026 ouvindo o clipe 002).
+_ABREVIACOES = {
+    "dr", "dra", "sr", "sra", "srta", "prof", "profa", "eng", "engo",
+    "gen", "cel", "cap", "pe", "irmã", "dom", "exmo", "exma",
+    "jr", "mr", "mrs", "ms", "st",
+}
+
+
 def _dividir_frases(texto: str) -> list[str]:
     """Divide pela pontuação de fim de frase (. ! ?), não por janela de
     tempo arbitrária — cada pedaço vira uma chamada de TTS curta, que é o
     regime em que o Chatterbox soa bem (ver módulo: ~154s pra 24 palavras;
     um texto de 90s inteiro numa síntese só saiu arrastado e com dicção
-    ruim, medido com o Bryan em 05/08/2026)."""
-    partes = re.split(r"(?<=[.!?])\s+", texto.strip())
-    return [p.strip() for p in partes if p.strip()]
+    ruim, medido com o Bryan em 05/08/2026).
+
+    Protege abreviações (Dr., Sr., etc.) antes de cortar — o "." delas não
+    marca fim de frase."""
+    texto = texto.strip()
+
+    def _proteger(m: re.Match) -> str:
+        return m.group(0)[:-1] + "\x00"
+
+    padrao_abrev = r"\b(?:" + "|".join(re.escape(a) for a in _ABREVIACOES) + r")\."
+    protegido = re.sub(padrao_abrev, _proteger, texto, flags=re.IGNORECASE)
+
+    partes = re.split(r"(?<=[.!?])\s+", protegido)
+    return [p.replace("\x00", ".").strip() for p in partes if p.strip()]
 
 
 def _concatenar_com_pausas(caminhos: list[Path], destino: Path,

@@ -52,7 +52,8 @@ def _legenda(c: dict) -> str:
 def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
               so_vertical: bool, traduzir: bool = True, dublar: bool = False,
               url_origem: str = "", recorte: tuple[float, float] | None = None,
-              estilo_legenda: int = 1, manter_temp: bool = False) -> Path:
+              estilo_legenda: int = 1, manter_temp: bool = False,
+              fala_literal: bool = False) -> Path:
     t0 = time.time()
     config.TRABALHO.mkdir(parents=True, exist_ok=True)
     nome_fonte = fonte.name
@@ -208,7 +209,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         if precisa_traduzir:
             print("      traduzindo pra pt-BR...")
             status.etapa(nome_fonte, "traduzindo", c.get("titulo", ""), i, len(clipes))
-            segmentos = traducao.traduzir_segmentos(ps, narrar=dublar)
+            segmentos = traducao.traduzir_segmentos(ps, narrar=dublar and not fala_literal)
             ps = traducao.segmentos_para_palavras(segmentos)
             if dublar:
                 if config.VOZ_CLONADA_ATIVA:
@@ -340,6 +341,12 @@ def main():
                    help="mantém a legenda no idioma original (--idioma), sem traduzir pra pt-BR")
     p.add_argument("--dublar", action="store_true",
                    help="troca o áudio original por voz pt-BR (edge-tts) + legenda traduzida")
+    p.add_argument("--fala-literal", action="store_true",
+                   help="só com --dublar: dubla o que a pessoa REALMENTE está falando "
+                        "(tradução literal), em vez do padrão do canal (narrador contando "
+                        "o contexto). Use pra entrevistas onde a fala em si é o valor "
+                        "editorial (declarações, posições) — não é o padrão, é exceção "
+                        "pontual por pedido.")
     p.add_argument("--recorte", metavar="INICIO-FIM",
                    help="corta um trecho exato em segundos (ex: 113.4-162.9) em vez de "
                         "deixar o Gemini escolher. Pula a checagem de congelamento — "
@@ -379,7 +386,8 @@ def main():
         processar(fonte, a.qtd, not a.so_audio, a.idioma, not a.com_horizontal,
                   traduzir=not a.sem_traducao, dublar=a.dublar,
                   url_origem=a.url or "", recorte=recorte,
-                  estilo_legenda=a.estilo_legenda, manter_temp=a.manter_temp)
+                  estilo_legenda=a.estilo_legenda, manter_temp=a.manter_temp,
+                  fala_literal=a.fala_literal)
     finally:
         if not a.manter_temp and config.TRABALHO.exists():
             shutil.rmtree(config.TRABALHO, ignore_errors=True)

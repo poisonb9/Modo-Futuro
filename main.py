@@ -370,6 +370,18 @@ def main():
         if not shutil.which(b):
             sys.exit(f"'{b}' não encontrado no PATH. Rode: .\\setup_nitro5.ps1")
 
+    # Cota do Gemini ANTES de gastar runner: a tradução só acontece no fim do
+    # pipeline, então uma cota zerada custava ~1h de processamento por vídeo
+    # antes de aparecer (runs #123-126 de 08/08/2026 morreram assim).
+    if not a.sem_traducao:
+        try:
+            traducao.checar_disponibilidade()
+        except Exception as e:
+            sys.exit(f"tradução indisponível: {e}\n"
+                     "Cota do Gemini provavelmente zerada — o run morreria só no fim, "
+                     "depois de baixar, narrar e renderizar. Espere o reset diário ou "
+                     "use --sem-traducao pra manter a legenda no idioma original.")
+
     if a.url:
         if not shutil.which("yt-dlp"):
             sys.exit("yt-dlp não encontrado. Rode: .\\setup_nitro5.ps1")

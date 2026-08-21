@@ -218,8 +218,9 @@ Esta seção é a alavanca de RPM. **Mínimo 3 destas camadas por clipe.**
 | # | Camada | Temos? | Nota |
 |---|---|---|---|
 | 1 | Legenda karaokê palavra-a-palavra | ✅ Inter Black | máx. ~3 palavras por vez `[CONSENSO 2]` |
-| 2 | Corte de silêncios/respiros | ❌ **fazer** | maior ganho de ritmo `[CONSENSO 3]` |
-| 3 | Zoom/punch-in dinâmico | ⚠️ Ken Burns 1.00→1.06 é sutil demais | variar enquadramento a cada 5-8s `[CONSENSO 2]` |
+| 2 | Corte de silêncios/respiros | ✅ `CORTAR_SILENCIOS` | maior ganho de ritmo `[CONSENSO 3]` — medido no run #9 (28/07): −6,4s em 83,8s, 22 pedaços |
+| 3 | Zoom/punch-in dinâmico | ✅ **desde 28/07**: cíclico 1.00→1.10 a cada 6,5s | variar enquadramento a cada 5-8s `[CONSENSO 2]` — antes era 1.00→1.06 monotônico, sutil demais |
+| 3b | Reenquadramento seguindo o rosto | ✅ **ressuscitado em 28/07** | estava morto desde a atualização do MediaPipe (`mp.solutions` removido na v1.0): todo clipe saía com crop fixo no centro e só um aviso discreto no log |
 | 4 | Transição com efeito sonoro | ❌ | citado como sinal de originalidade `[CONSENSO 2]` |
 | 5 | Elemento gráfico sincronizado com a fala | ❌ | ex.: ícone aparece na palavra dita `[FRACO]` |
 | 6 | Frase-título fixa no topo | ❌ | e ela deve ser **igual ao título do post** `[FRACO]` |
@@ -318,7 +319,9 @@ Várias fontes independentes, convergindo:
 - Isso é **ponto de partida**. Depois de ~2 semanas com histórico, trocar
   pelo painel do próprio perfil. `[CONSENSO 2]`
 
-**Nosso plano diário:** 3 posts — **~8h, ~15h, ~20h30**, temas diferentes.
+**Nosso plano diário:** 2–3 posts — **~8h, ~15h, ~20h30**, mesmo núcleo
+semântico, **ângulo e formato diferentes** entre eles (⚠️ dizia "temas
+diferentes"; corrigido em 28/07 pela revogação do §7.1/§17.4).
 
 ### 7.3 Legenda e hashtags
 - **3 a 5 hashtags**, todas **estritamente relevantes**. `[CONSENSO 3]`
@@ -438,7 +441,9 @@ Ordenado por retorno sobre esforço.
 - [ ] Guardião Criativo aprovou (se existir)
 - [ ] Som em alta vinculado
 - [ ] 3–5 hashtags relevantes
-- [ ] Tema diferente do post anterior do dia
+- [ ] Mesmo núcleo semântico, **ângulo/formato diferente** do post anterior
+      (⚠️ dizia "tema diferente" — contradizia a revogação do §7.1 e §17.4;
+      corrigido em 28/07. Variar o tema compete com o loop de reinjeção)
 - [ ] Horário ~8h / ~15h / ~20h30
 - [ ] Voltar em 1h para responder comentários
 
@@ -452,7 +457,9 @@ tudo barato). Rodar um lote e comparar retenção com os posts atuais.
 **Semana 2 — edição de verdade.** Item 3 (corte de silêncios) e 5
 (punch-in). Estes dois são o que move o RPM.
 
-**Semanas 3–4 — regime.** 3 posts/dia, temas variados, horários fixos,
+**Semanas 3–4 — regime.** 2–3 posts/dia (§7.1), **núcleo semântico único
+variando ângulo e formato** — não temas variados (⚠️ dizia "temas variados";
+contradizia a revogação do §7.1/§17.4, corrigido em 28/07). Horários fixos,
 responder comentários. **Não mudar o método por 30 dias** — sem isso não
 há como saber o que funcionou. `[CONSENSO 2]`
 
@@ -465,7 +472,7 @@ vídeo passou de 100k. Só então revisar este playbook.
 
 | # | Pergunta | Resposta |
 |---|---|---|
-| 1 | Janela de teste inicial do TikTok | **`[ABERTO]`** — o corpus não descreve tamanho da primeira entrega nem duração da janela. Só o proxy indireto: >200 views = saudável, 50–200 travado = marcada. |
+| 1 | Janela de teste inicial do TikTok | **Parcial — ver §22 (28/07).** Mecanismo resolvido: entrega inicial ~100 usuários, alocada por embedding do conteúdo (não por seguidores), com watch time como sinal dominante. **Números do TikTok seguem `[ABERTO]` e o relatório declara isso como GAP** — os limiares que existem (4.000 views em 2 dias) são do Kuaishou. |
 | 2 | Volume seguro por dia | **2–3/dia**, subindo devagar. `[CONSENSO 6]` Resolve a pendência do 3-5/dia. |
 | 3 | Horário de pico real (Brasil) | **20h–21h principal**; 8h, 11h, 15h, 18h secundários. `[CONSENSO 4]` Substitui o chute que estava no `PADRAO.md`. |
 | 4 | Métricas do painel e alvos | **Parcial.** Temos alvos (§9) mas **não** os nomes exatos das métricas no painel do TikTok. `[ABERTO]` |
@@ -1232,3 +1239,90 @@ com a evidência disponível, mas ainda não é teste direto.
 **Procedência:** continuação direta de §20, segunda pergunta no formato
 canônico. Consensus, 27/07/2026, N=17. PDF em
 `C:\Users\T3610\Downloads\Can_a_short-form_video_ending_combine_an_unresolve.pdf`.
+
+---
+
+## 22. Nona rodada Consensus `[PAPER]` — cold-start: alocação inicial e sinais de promoção, 28/07/2026
+
+Resolve a **pergunta 1 do §13**, que estava `[ABERTO]` e era chamada de
+prioridade 1 no `SABEDORIA_TIKTOK.md` ("governa tudo o resto"). Corpus:
+87,1M recuperados, 1,3K elegíveis, **50 incluídos**, 22 buscas.
+
+### 22.1 Tamanho da entrega inicial
+- **~100 usuários** na primeira exposição de um vídeo novo. `[PAPER]`
+  (Li et al. 2024, Snapchat) — evidência **moderada**, plataforma única.
+- No Kuaishou, "cold-start" é definido operacionalmente como vídeo com
+  **menos de 4.000 views nas primeiras 24h**; a métrica "Climbing 4k"
+  marca a transição de 0 para 4.000 views em **dois dias** como o ponto
+  em que sai da coorte inicial. `[PAPER]` (Chen et al. 2024)
+- **Para o TikTok, os números são GAP declarado.** O relatório é
+  explícito: não existe dado empírico publicado de limiar do TikTok, e
+  essa é "a lacuna mais marcante" do corpus. Usar os números do Kuaishou
+  como ordem de grandeza, **nunca como limiar nosso**.
+
+### 22.2 Quem recebe o vídeo numa conta nova — o achado que mais importa
+Conta **sem grafo social** não recebe audiência por seguidores: o sistema
+aloca por **embedding multimodal do próprio conteúdo** (visual, áudio e
+texto). `[PAPER]` — evidência **forte**, replicado em estudos
+independentes (Chen et al. 2024; Deldjoo et al. 2019; Chen et al. 2025).
+
+Consequência prática direta: **na Fase 1 é o vídeo que define quem o vê,
+não a conta.** Isso dá base científica ao núcleo semântico único do §17.4
+— embedding consistente entre posts ajuda o sistema a achar o público
+certo mais rápido. Também eleva a importância da legenda e das hashtags:
+elas são entrada de texto do embedding, não enfeite.
+
+O Kuaishou usa um "coverage mechanism" que garante exposição mínima a
+todo vídeo, independente de seguidores, justamente para corrigir o viés
+contra conta nova. `[PAPER]` (Chen et al. 2025)
+
+### 22.3 Hierarquia dos sinais
+| Sinal | Papel | Força |
+|---|---|---|
+| **Watch time** | sinal dominante da decisão de promover | `[PAPER]` **forte** |
+| NAWP (watch % normalizado por duração) | mais robusto que watch time cru | `[PAPER]` |
+| ECR (assistiu além de ~5s) | prevê sustentação de atenção | `[PAPER]` |
+| Likes, comentários, shares | secundários; mais esparsos e ruidosos | `[PAPER]` |
+| Skip | sinal **negativo**, informa supressão | `[PAPER]` |
+
+- Watch time pesa mais por ser o sinal **mais frequente e menos ruidoso**,
+  não por ser conceitualmente superior. `[PAPER]` (Xiao 2025)
+- Entre os explícitos, **share é o mais forte** — propaga para a rede de
+  outro usuário. `[PAPER]` (Dong et al. 2023)
+- **Limiar de 50% de watch time** define "assistido" em sistema de
+  produção — mas vem de plataforma de e-commerce com vídeo curto, **não
+  do TikTok nem do Kuaishou**. Generalização limitada, o próprio relatório
+  ressalva. `[PAPER]` (Dzhoha et al. 2025)
+
+### 22.4 O achado que contraria intuição
+Estudo de doação de dados de usuários reais de TikTok: **só 45% das views
+chegam ao fim**, e a atenção não cresce ao longo do vídeo — sugerindo que
+o algoritmo prioriza **tempo gasto e curtida acima de completude**.
+`[PAPER]` (Zannettou et al. 2023)
+
+Isso reforça a regra de duração >60s do §13.5: perseguir taxa de
+completude alta é otimizar a métrica errada. Métrica normalizada por
+duração (NAWP) alinha melhor com retenção real que completude simples.
+`[PAPER]` (Saket et al. 2023)
+
+### 22.5 O que muda no nosso método
+| # | Decisão | Onde | Base |
+|---|---|---|---|
+| 1 | Primeiros ~5s viram prioridade de edição — ECR mede exatamente isso | seleção/render | §22.3 |
+| 2 | Manter núcleo semântico estreito na Fase 1 | curadoria | §22.2, confirma §17.4 |
+| 3 | Legenda e hashtags são entrada do embedding — relevância estrita, sem carona | `publicar_tiktok.py` | §22.2 |
+| 4 | Não perseguir completude; perseguir tempo assistido | métrica de sucesso | §22.4 |
+| 5 | Não adotar 4.000 views como limiar nosso — é Kuaishou, não TikTok | `desempenho.py` | §22.1 |
+
+O item 1 dá base ao "choque visual nos primeiros 0.2-0.3s" que o
+`SABEDORIA_TIKTOK.md` §3 listava como **não implementado** — agora tem
+suporte de paper, não só de guru.
+
+**Maior lacuna reconhecida pelo relatório**: ausência quase total de dado
+empírico de limiar para TikTok e YouTube Shorts, apesar de dominarem o
+ecossistema. O Kuaishou é a plataforma melhor documentada, e é justamente
+a que não usamos. **Não promover número de Kuaishou a fato de TikTok.**
+
+**Procedência:** primeira pergunta do roteiro do `SABEDORIA_TIKTOK.md` §7,
+formato canônico (`bfv-consensus-question-pattern.md`). Consensus,
+28/07/2026, N=50. PDF em `sabedoria/raw/`.

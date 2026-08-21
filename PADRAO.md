@@ -168,9 +168,13 @@ Regras acordadas com o usuário pra não repetir:
 
 - **3-5 vídeos por dia** (escolha do usuário; foi avisado que em conta nova
   isso é a faixa de risco).
-- **Variar o tema** — não fazer bateria só de Elon Musk/IA. Isso é
+- ⚠️ **REVOGADO em 27/07, ver `sabedoria/PLAYBOOK_TIKTOK.md` §7.1 e §17.4.**
+  A regra atual é **núcleo semântico único e estreito**, variando ângulo e
+  formato — não o tema. Variar tema compete com o loop de reinjeção
+  algorítmica. O texto riscado abaixo fica só como histórico:
+- ~~**Variar o tema** — não fazer bateria só de Elon Musk/IA. Isso é
   requisito, não sugestão: mono-tema + volume foi exatamente o padrão
-  flagado.
+  flagado.~~
 - **Espaçar ao longo do dia**, em horários de maior audiência, não tudo de
   uma vez. Ponto de partida (Brasil): manhã 6-9h, almoço 12-14h, noite
   19-23h. Depois que a conta tiver histórico, trocar esse chute pelos dados

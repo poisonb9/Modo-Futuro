@@ -155,18 +155,33 @@ isso, e foi exatamente esse padrão (volume + mono-tema em conta nova) que
 derrubou o canal anterior. O erro de `spam_risk` acima é um sinal de que a
 plataforma é sensível a volume, mas **não é prova** sobre posts. Até ter
 fonte, as mitigações acordadas são:
-- variar o tema entre os posts (requisito, não sugestão);
-- espaçar ao longo do dia, não em rajada.
+- ~~variar o tema entre os posts (requisito, não sugestão);~~ **REVOGADO em
+  27/07/2026** pelo `PLAYBOOK_TIKTOK.md` §7.1 e §17.4: o Consensus mostrou
+  que variar tema **compete com o loop de reinjeção algorítmica**. Regra
+  atual: núcleo semântico único e estreito na Fase 1, variando **ângulo e
+  formato** dentro dele. Reforçado pela 9ª rodada (§22): em conta nova o
+  sistema aloca audiência pelo **embedding do conteúdo**, não por
+  seguidores — embedding consistente acha o público certo mais rápido;
+- espaçar ao longo do dia, não em rajada (isto continua valendo);
+- volume: **2–3/dia**, não 3–5 (§7.1, `[CONSENSO 6]`).
 
 ### `[YT→TT]` Consistência bate perfeição
 Fonte: `SABEDORIA_YT.md:939-940` — o algoritmo é "motor de frequência";
 canais começam a ser recomendados ao chegar consistentemente em 10-20
 vídeos. Não precisa de qualidade perfeita no começo, precisa de regularidade.
 
-### `[YT→TT]` Mono-tema limita escala
+### `[YT→TT]` Mono-tema limita escala — ⚠️ NÃO se aplica na Fase 1
 Fonte: `SABEDORIA_YT.md:504` — tema muito específico limita o alcance
 máximo; pra escalar além da bolha inicial o assunto precisa ser abrangente.
-Reforça a decisão de variar tema.
+~~Reforça a decisão de variar tema.~~
+
+**Corrigido em 28/07/2026.** Isto é hipótese transferida do YouTube
+(`[YT→TT]`), e foi **superada por evidência direta**: o `PLAYBOOK` §7.1/§17.4
+(Consensus) e §22 (N=50 papers) mostram que em conta nova o núcleo estreito
+é *vantagem*, não limite — a alocação é por embedding do conteúdo. O
+alargamento de tema é problema de **fase posterior**, quando a conta já tem
+histórico, não da largada. Exemplo de por que a regra do topo deste arquivo
+existe: não promover `[YT→TT]` a fato.
 
 ---
 

@@ -33,6 +33,10 @@ on:
         description: "Dublar com a voz clonada do Bryan (Chatterbox)"
         required: false
         default: "true"
+      fala_literal:
+        description: "So com dublar=true: dubla a fala REAL (traducao literal) em vez da narracao de contexto. Excecao pontual (entrevistas/declaracoes)"
+        required: false
+        default: "false"
       recorte:
         description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini"
         required: false
@@ -134,6 +138,7 @@ jobs:
           --idioma "${{ inputs.idioma }}"
           --estilo-legenda "${{ inputs.estilo_legenda }}"
           ${{ inputs.dublar == 'true' && '--dublar' || '' }}
+          ${{ inputs.fala_literal == 'true' && '--fala-literal' || '' }}
           ${{ inputs.recorte != '' && format('--recorte {0}', inputs.recorte) || '' }}
 
       - name: Subir clipes prontos pro Drive

@@ -121,6 +121,22 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT) -> str:
     raise RuntimeError(f"tradução falhou em todas as chaves: {ultimo_erro}")
 
 
+def checar_disponibilidade() -> None:
+    """Falha cedo se nenhuma chave do Gemini tiver cota.
+
+    A tradução roda no FIM do pipeline, depois de baixar, transcrever, narrar
+    e renderizar. Quando a cota estoura, o run morre com ~1h de runner já
+    gasta por vídeo — foi exatamente o que aconteceu nos runs #123-126 de
+    08/08/2026 (todas as chaves em 429, morreu em traduzir_segmentos).
+
+    O teste usa uma frase mínima pelo MESMO caminho de código que falharia
+    depois (mesma rotação de chaves, mesmo tratamento de 429/403), então um
+    verde aqui significa que aquele caminho funciona — não é um dublê mais
+    fácil que a produção.
+    """
+    _traduzir_texto("ok")
+
+
 def redistribuir_palavras(palavras_traduzidas: list[str], inicio: float, fim: float) -> list[dict]:
     """Espalha as palavras traduzidas dentro da janela [inicio, fim],
     proporcional ao tamanho de cada palavra (palavra maior demora mais).

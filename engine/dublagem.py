@@ -24,7 +24,10 @@ def _exige_edge_tts():
 
 async def _sintetizar(texto: str, destino: Path, voz: str):
     import edge_tts
-    comm = edge_tts.Communicate(texto, voice=voz)
+    from . import numeros
+    # Mesmo conserto do voz_clonada: o defeito e' dos dois caminhos de
+    # TTS, nao so' do que estava ativo em 22/08/2026.
+    comm = edge_tts.Communicate(numeros.por_extenso(texto), voice=voz)
     await comm.save(str(destino))
 
 

@@ -7,6 +7,11 @@ yt-dlp>=2025.1.1
 # estimativa por caractere — que foi exatamente a causa do defeito de 01/08.
 Pillow>=10.0
 
+# Numero em digito por extenso antes do TTS: sem isso o motor de voz
+# chuta a leitura de ano e porcentagem (Bryan ouviu "2030" errado em
+# 22/08/2026). Ver engine/numeros.py — se faltar, o texto passa cru.
+num2words>=0.5.13
+
 # --- face tracking p/ crop 9:16 (roda em CPU, GPU opcional) ---
 mediapipe>=0.10.35
 opencv-python>=4.10

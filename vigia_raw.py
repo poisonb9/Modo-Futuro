@@ -60,7 +60,17 @@ QTD_CLIPES = "8"
 # sete runs sumiram sem rodar. Limitar aqui, na origem, não perde nada:
 # o que não coube fica no Drive e entra na próxima passada.
 MAX_POR_PASSADA = 2
-IDIOMA = "pt"
+# Idioma da FALA do video fonte, nao o da legenda de saida. Era "pt" e
+# isso quebrava calado: `main.processar` tem
+#   precisa_traduzir = (traduzir or dublar) and idioma != "pt"
+# entao com "pt" num video em ingles o run nao traduz, nao narra e NAO
+# DUBLA — sai com o audio original. Medido no run #120 de 07/08/2026
+# (rise_of_humanoids, ingles, despachado pelo vigia): zero traducoes,
+# e mesmo assim o run terminou "success".
+# O acervo do nicho e esmagadoramente em ingles (ver o radar), entao "en"
+# e o padrao certo. Fonte em portugues precisa de disparo na mao com
+# idioma=pt — ai a traducao e a dublagem sao puladas de proposito.
+IDIOMA = "en"
 # 1 = padrão do canal (Inter Black). 2 = réplica da referência Erica Bruno
 # (Poppins Bold, corpo variável) — ver engine/legendas.py. Trocar aqui muda
 # TODO disparo desta máquina; pra escolher por vídeo, disparar manual pelo

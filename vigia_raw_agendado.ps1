@@ -22,6 +22,7 @@ if ((Test-Path $log) -and ((Get-Item $log).Length -gt 1MB)) {
 }
 
 $carimbo = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+$inicio  = Get-Date
 Set-Location $raiz
 
 # stderr junto do stdout: se o Python estourar, o traceback tem que cair no
@@ -31,8 +32,21 @@ $rc = $LASTEXITCODE
 
 # Só registra passagem silenciosa numa linha; quando houve trabalho ou erro,
 # grava a saída inteira. Senão o log vira parede de "nada novo".
-if ($rc -eq 0 -and $saida -match 'Nada novo') {
-    Add-Content -Path $log -Value "[$carimbo] nada novo" -Encoding utf8
+# O `-notmatch` do aviso e' essencial: quando uma conta do Drive nao abre,
+# o vigia_raw imprime `[!] conta ... inacessivel`, SEGUE EM FRENTE e ainda
+# termina com "Nada novo." e exit 0. Sem essa condicao, falha de conta e
+# passagem tranquila viravam a MESMA linha de log. Entre 08/08 e 22/08/2026
+# foram 1921 passagens silenciosas seguidas, e um bruto ficou 2h parado na
+# RAW sem ninguem saber.
+$houveAviso = $saida -match [regex]::Escape('[!]')
+if ($rc -eq 0 -and $saida -match 'Nada novo' -and -not $houveAviso) {
+    $seg = [int]((Get-Date) - $inicio).TotalSeconds
+    # acima de 60s a passagem deixa de ser rotina: registra o tempo
+    if ($seg -gt 60) {
+        Add-Content -Path $log -Value "[$carimbo] nada novo (LENTO: ${seg}s)" -Encoding utf8
+    } else {
+        Add-Content -Path $log -Value "[$carimbo] nada novo" -Encoding utf8
+    }
 } else {
     Add-Content -Path $log -Value "[$carimbo] (exit $rc)" -Encoding utf8
     Add-Content -Path $log -Value $saida.TrimEnd() -Encoding utf8

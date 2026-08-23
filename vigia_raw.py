@@ -59,7 +59,11 @@ QTD_CLIPES = "8"
 # o GitHub só guarda UM run pendente por grupo e CANCELA os demais, então
 # sete runs sumiram sem rodar. Limitar aqui, na origem, não perde nada:
 # o que não coube fica no Drive e entra na próxima passada.
-MAX_POR_PASSADA = 2
+# Era 2 e continuava rapido demais pra cota do Gemini: em 22/08/2026 dez
+# brutos na RAW viraram dez runs em ~40 min, e NOVE falharam com todas as
+# chaves esgotadas. Um por passada (10 min) da' 6 por hora no pior caso, e
+# na pratica bem menos, porque cada corte leva ~83 min com qtd=5.
+MAX_POR_PASSADA = 1
 # Idioma da FALA do video fonte, nao o da legenda de saida. Era "pt" e
 # isso quebrava calado: `main.processar` tem
 #   precisa_traduzir = (traduzir or dublar) and idioma != "pt"

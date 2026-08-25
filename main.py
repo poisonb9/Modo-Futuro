@@ -244,10 +244,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         # fala natural e' o que sustenta a retencao. Ver engine/suavizar.py.
         # Pedido do Bryan em 25/08/2026: "nao quero perder videos bons, temos
         # a oportunidade de modificar para evitar certas palavras".
-        ps = suavizar.palavras(ps)
-        c = dict(c)
-        c["titulo"] = suavizar.texto(c.get("titulo", ""))
-        c["descricao"] = suavizar.texto(c.get("descricao", ""))
+        if config.SUAVIZAR_TEXTO:
+            ps = suavizar.palavras(ps)
+            c = dict(c)
+            c["titulo"] = suavizar.texto(c.get("titulo", ""))
+            c["descricao"] = suavizar.texto(c.get("descricao", ""))
 
         lv, av = config.VERTICAL
         ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,

@@ -170,3 +170,17 @@ HORIZONTAL = (1920, 1080)        # 16:9 tela cheia
 # Suavização alta = movimento menos "nervoso".
 SUAVIZACAO = 0.88
 AMOSTRA_FPS = 4                  # quantos frames/s analisar p/ achar rosto
+
+# Trocar palavra sensivel por grafia adaptada na legenda (morte -> m0rte).
+# DESLIGADO em 25/08/2026, no mesmo dia em que foi escrito, depois que o Bryan
+# perguntou "tem certeza que isso vai confundir o algoritmo?" — e nao vai:
+#   - o §22 do PLAYBOOK (`[PAPER]`) diz que a entrega inicial e' alocada por
+#     EMBEDDING do conteudo; "m0rte" e "morte" caem no mesmo ponto do espaco
+#     vetorial. Troca de letra engana casador de string, nao modelo;
+#   - o AUDIO continua dizendo a palavra, e o TikTok transcreve audio — a
+#     protecao era contornada pelo proprio video;
+#   - "m0rte" na tela piora a leitura, e leitura e' retencao, que e' o unico
+#     gargalo que a gente MEDIU.
+# Dano certo contra ganho hipotetico. O modulo fica pronto caso apareca
+# evidencia de verdade. Ver engine/suavizar.py.
+SUAVIZAR_TEXTO = False

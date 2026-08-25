@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao,
-                    dublagem, status, ancoragem, pos_producao, voz_clonada)
+                    dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -236,6 +236,18 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
                     audio_dublado = dublagem.gerar_trilha(
                         segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
+
+        # Palavra sensivel vira grafia adaptada (morte -> m0rte) APENAS no texto
+        # escrito: legenda na tela, card de titulo e legenda do post. O audio
+        # da dublagem ja' foi gerado acima com a palavra ORIGINAL, e continua
+        # assim de proposito — o TTS leria "m0rte" como "m zero erre te e", e
+        # fala natural e' o que sustenta a retencao. Ver engine/suavizar.py.
+        # Pedido do Bryan em 25/08/2026: "nao quero perder videos bons, temos
+        # a oportunidade de modificar para evitar certas palavras".
+        ps = suavizar.palavras(ps)
+        c = dict(c)
+        c["titulo"] = suavizar.texto(c.get("titulo", ""))
+        c["descricao"] = suavizar.texto(c.get("descricao", ""))
 
         lv, av = config.VERTICAL
         ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,

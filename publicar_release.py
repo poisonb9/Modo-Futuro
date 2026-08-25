@@ -154,6 +154,33 @@ def clipes_prontos() -> list[tuple[float, Path]]:
     return achados
 
 
+def _publicar_manifesto(token: str, tag: str, mapa: dict) -> None:
+    """Sobe/atualiza `manifesto.json` como asset da release.
+
+    Junta o que ja' estava la' com o que acabou de sair, porque cada run so'
+    enxerga os proprios clipes.
+    """
+    rel = achar_ou_criar_release(token, tag)
+    antigo = {}
+    for a in rel.get("assets", []):
+        if a["name"] == "manifesto.json":
+            try:
+                antigo = requests.get(a["browser_download_url"], timeout=60).json()
+            except Exception:
+                antigo = {}
+            requests.delete(f"{API}/repos/{REPO}/releases/assets/{a['id']}",
+                            headers=_cabecalho(token), timeout=30)
+    antigo.update(mapa)
+    corpo = json.dumps(antigo, ensure_ascii=False, indent=2).encode("utf-8")
+    url = rel["upload_url"].split("{")[0]
+    r = requests.post(url, headers={**_cabecalho(token), "Content-Type": "application/json"},
+                      params={"name": "manifesto.json"}, data=corpo, timeout=120)
+    if r.status_code < 300:
+        print(f"manifesto.json atualizado ({len(antigo)} clipes)")
+    else:
+        print(f"  [!] manifesto falhou: {r.status_code}")
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description="Publica clipes numa Release do GitHub")
     p.add_argument("--tag", default=TAG_PADRAO)
@@ -180,6 +207,7 @@ def main() -> None:
 
     novos = {}
     for nota, clipe in fila:
+        pj = clipe / "post.json"
         chave = str(clipe.relative_to(config.SAIDA))
         if chave in ja:
             continue
@@ -194,13 +222,29 @@ def main() -> None:
         leg = clipe / "post.txt"
         if leg.exists():
             legenda = leg.read_text(encoding="utf-8").strip()
+        # `fonte` e `inicio_s` viajam junto porque a ORDEM DE POSTAGEM depende
+        # deles: clipes do mesmo video-fonte tem que sair na ordem em que
+        # aparecem no original (pedido do Bryan em 25/08/2026). Ordenar por
+        # nota faz o corte do desfecho ir ao ar antes do que monta o contexto.
+        try:
+            m = json.loads(pj.read_text(encoding="utf-8"))
+        except Exception:
+            m = {}
         novos[chave] = {"url": url, "nota": nota, "legenda": legenda,
+                        "fonte": m.get("fonte", ""),
+                        "inicio_s": m.get("inicio_s"),
+                        "titulo": m.get("titulo", ""),
                         "publicado_em": f"{date.today():%Y-%m-%d}"}
         print(f"  nota {nota:.0f}  {nome[:60]}")
         print(f"     {url}")
 
     ja.update(novos)
     _gravar(ja)
+    # O registro local NAO sobrevive: cada run do Actions comeca num runner
+    # limpo. Entao o manifesto vai pra propria release, que e' o unico lugar
+    # que persiste — e e' de la' que o agendador le' ordem e legenda.
+    if novos:
+        _publicar_manifesto(token, a.tag, ja)
     print(f"\n{len(novos)} clipe(s) publicado(s); {len(ja)} no total.")
     if a.saida:
         Path(a.saida).write_text(json.dumps(novos, indent=2, ensure_ascii=False),

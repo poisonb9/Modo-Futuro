@@ -229,8 +229,10 @@ Esta seção é a alavanca de RPM. **Mínimo 3 destas camadas por clipe.**
 **Posicionamento de legenda:** manter longe das bordas — a UI do TikTok
 (perfil, curtir, comentar, nome) cobre a **direita e a base**. O corpus
 recomenda legenda **ligeiramente acima do centro**. `[CONSENSO 2]`
-Hoje usamos `LEGENDA_MARGEM_V_FRAC = 0.18` (18% a partir da base), que é
-justamente a zona coberta. **Candidato a subir para ~0.30 como padrão.**
+~~Hoje usamos `LEGENDA_MARGEM_V_FRAC = 0.18`... candidato a subir~~ —
+**FEITO em 28/07/2026** (commit `a3381e4`): o padrão em `engine/legendas.py`
+é `0.30`. Este parágrafo ficou desatualizado e em 25/08/2026 me levou a
+recomendar ao Bryan uma mudança que já existia. Corrigido.
 
 **Export:** 1080p, 9:16, e o corpus cita 60fps `[FRACO]`. Nós já usamos o
 fps nativo da fonte, o que é mais seguro — manter.

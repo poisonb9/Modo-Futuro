@@ -181,6 +181,9 @@ TITULO_PAD_X_FRAC = 0.38   # respiro horizontal dentro da caixa, fração do cor
 TITULO_PAD_Y_FRAC = 0.30
 TITULO_RAIO_FRAC = 0.32    # raio do canto arredondado, fração da altura da caixa
 TITULO_GAP_FRAC = 0.16     # respiro vertical entre uma caixa e a próxima
+# Onde o card de título começa, em fração da altura. Sobe/desce o bloco
+# inteiro. Ver o comentário em `vertical()` pro porquê de 0.16.
+TITULO_TOPO_FRAC = 0.16
 
 
 def imagem_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> Path | None:
@@ -361,7 +364,19 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     # apóstrofo, dois-pontos e o que mais o YouTube deixar. Caminho previsível
     # aqui é o que evita a próxima quebra de filtro (ver _escapar).
     img_titulo = imagem_titulo(titulo, lv, av, config.TRABALHO / "titulo")
-    topo = round(av * 0.075)                 # abaixo da barra de status
+    # 0.075 -> 0.16 em 25/08/2026. A 7,5% o titulo comecava a 144 px do topo
+    # de 1920, e a MINIATURA DA GRADE do perfil do TikTok recorta a celula
+    # pra um formato mais quadrado que 9:16, cortando ~1/4 da altura pelo
+    # TOPO. Resultado medido nos prints do Bryan: titulo de 4 linhas perdia a
+    # primeira ("Exercito Cria Baratas" sumia de "CIBORGUES para zonas de
+    # guerra"), e ele reenquadrava na mao clipe a clipe. A capa custom nao
+    # resolve: a API do Buffer respondeu que rede social nenhuma aceita
+    # imagem de capa propria — so' da' pra escolher o FRAME, nao o recorte.
+    #
+    # 0.16 = 307 px, abaixo da linha de corte estimada (~240 px). Continua
+    # longe da legenda, que fica a 30% da base. ESTIMATIVA a validar no
+    # proximo lote: se ainda cortar, subir pra 0.20.
+    topo = round(av * TITULO_TOPO_FRAC)
     return _render(bruto, filtro, ass, destino, audio_dublado,
                     img_titulo=img_titulo, topo_titulo=topo)
 

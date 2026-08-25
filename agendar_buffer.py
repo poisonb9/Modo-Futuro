@@ -42,6 +42,8 @@ from pathlib import Path
 
 import requests
 
+from engine import buffer_cota as cota
+
 API_BUFFER = "https://api.buffer.com/"
 API_GITHUB = "https://api.github.com"
 REPO = os.environ.get("GITHUB_REPO", "poisonb9/Modo-Futuro")
@@ -55,6 +57,9 @@ REPO = os.environ.get("GITHUB_REPO", "poisonb9/Modo-Futuro")
 # antigo e fica aqui como histórico da decisão.
 LIMITE_FILA = 10
 RESERVA_MANUAL = 0
+# Teto de páginas por consulta de posts. Cada página é uma requisição, e o
+# histórico só cresce — sem teto, a consulta fica mais cara a cada semana.
+MAX_PAGINAS = 4
 
 RAIZ = Path(__file__).resolve().parent
 
@@ -81,6 +86,10 @@ def _token_github() -> str:
 
 
 def consultar(token: str, query: str, variaveis: dict | None = None) -> dict:
+    # Orçamento ANTES da rede: em 25/08/2026 a conta bateu no rate limit de 24h
+    # e a fila ficou intocável por um dia. Ver engine/buffer_cota.py.
+    cota.checar(1)
+    cota.registrar(1)
     r = requests.post(API_BUFFER,
                       headers={"Authorization": f"Bearer {token}",
                                "Content-Type": "application/json"},
@@ -104,8 +113,19 @@ def contexto_buffer(token: str) -> tuple[str, str, list[dict]]:
     if not tiktok:
         sys.exit("Nenhum canal TikTok conectado nesta conta do Buffer.")
 
-    agendados, cursor = [], None
+    # Cache primeiro: a fila muda no máximo 4x/dia (é a cadência de postagem),
+    # então reler a cada poucos minutos era desperdício puro.
+    guardado = cota.cache_valido()
+    if guardado is not None:
+        return org_id, guardado["canal"], guardado["posts"]
+
+    agendados, cursor, paginas = [], None, 0
     while True:
+        paginas += 1
+        if paginas > MAX_PAGINAS:
+            print(f"  [!] parei em {MAX_PAGINAS} páginas pra não gastar orçamento; "
+                  "a dedup usa o que veio (os mais recentes).")
+            break
         d = consultar(token, """
           query($i: PostsInput!, $a: String) { posts(input: $i, after: $a) {
             pageInfo { hasNextPage endCursor }
@@ -123,6 +143,7 @@ def contexto_buffer(token: str) -> tuple[str, str, list[dict]]:
         if not d["pageInfo"]["hasNextPage"]:
             break
         cursor = d["pageInfo"]["endCursor"]
+    cota.guardar_cache({"canal": tiktok[0]["id"], "posts": agendados})
     return org_id, tiktok[0]["id"], agendados
 
 

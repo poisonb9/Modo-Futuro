@@ -37,3 +37,4 @@ github_token.txt
 # nem público nem privado. Local-only, igual credentials/tokens.
 vozes/
 buffer_token.txt
+estado/buffer_cota.json

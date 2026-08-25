@@ -247,9 +247,26 @@ def main() -> None:
         print("manifesto vazio — nenhum clipe publicado em release ainda.")
         return
 
-    ja = {_chave_texto(x["text"]) for x in conhecidos}
-    fila = [(k, v) for k, v in ordenar(todos)
-            if _chave_texto(v.get("legenda") or v.get("titulo") or "") not in ja]
+    # Dois conjuntos diferentes de propósito:
+    #  - `ja_na_fila`: o que está agendado agora. NADA pode repetir isso.
+    #  - `ja_publicado`: o que o Buffer já enviou. Bloqueia clipe normal, mas
+    #    NÃO bloqueia republicação: quando o Bryan apaga um vídeo do TikTok
+    #    pra postar de novo pelo pipeline, o Buffer continua com o post antigo
+    #    como "sent" — e tratar isso como duplicata apagaria justamente o que
+    #    ele quer refazer. Aconteceu em 25/08 com "Exército Cria Baratas" e
+    #    "A VERDADEIRA CORRIDA DA IA": eu removi os dois da fila por engano.
+    ja_na_fila = {_chave_texto(x["text"]) for x in conhecidos
+                  if x.get("status") == "scheduled"}
+    ja_publicado = {_chave_texto(x["text"]) for x in conhecidos
+                    if x.get("status") == "sent"}
+
+    def cabe(v):
+        k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
+        if k in ja_na_fila:
+            return False
+        return v.get("republicacao") or k not in ja_publicado
+
+    fila = [(k, v) for k, v in ordenar(todos) if cabe(v)]
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")
 
     enviados = 0

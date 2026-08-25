@@ -36,6 +36,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from pathlib import Path
 
@@ -105,7 +106,13 @@ def contexto_buffer(token: str) -> tuple[str, str, list[dict]]:
             pageInfo { hasNextPage endCursor }
             edges { node { id status text dueAt } } } }""",
           {"i": {"organizationId": org_id,
-                 "filter": {"status": ["scheduled"],
+                 # "sent" JUNTO com "scheduled": a deduplicacao compara o texto
+                 # dos posts que o Buffer ja' conhece, e clipe PUBLICADO tambem
+                 # conta. Sem isso, um clipe que saiu de manha voltava pra fila
+                 # a' tarde — republicacao acidental, o oposto do que o Bryan
+                 # pediu. Aconteceu de verdade em 25/08/2026 com "A industria
+                 # que controla todas as outras industrias".
+                 "filter": {"status": ["scheduled", "sent"],
                             "channelIds": [tiktok[0]["id"]]}}, "a": cursor})["posts"]
         agendados += [e["node"] for e in d["edges"]]
         if not d["pageInfo"]["hasNextPage"]:
@@ -132,7 +139,12 @@ def manifesto(token_gh: str, tag: str | None = None) -> dict:
         for a in rel.get("assets", []):
             if a["name"] == "manifesto.json":
                 try:
-                    tudo.update(requests.get(a["browser_download_url"], timeout=60).json())
+                    # `?t=` derruba o cache do CDN do GitHub. MEDIDO em 25/08/2026: o asset
+                    # tinha 16 clipes no servidor e a URL sem parametro devolvia 11 — versao
+                    # antiga. Sem isto o agendador ignora silenciosamente todo lote novo.
+                    tudo.update(requests.get(
+                        a["browser_download_url"] + f"?t={int(time.time())}",
+                        timeout=60).json())
                 except Exception as e:
                     print(f"  [!] manifesto de {rel['tag_name']} ilegível: {str(e)[:70]}")
     return tudo
@@ -218,7 +230,10 @@ def main() -> None:
     a = p.parse_args()
 
     tb, tg = _token_buffer(), _token_github()
-    _, canal, agendados = contexto_buffer(tb)
+    _, canal, conhecidos = contexto_buffer(tb)
+    # `conhecidos` traz agendados E enviados (pra dedup). A CONTAGEM de vagas
+    # usa so' os agendados — enviado ja' liberou o slot.
+    agendados = [p for p in conhecidos if p.get("status") == "scheduled"]
     alvo = LIMITE_FILA - a.reserva
     vagas = alvo - len(agendados)
     print(f"fila: {len(agendados)}/{LIMITE_FILA} agendados, "
@@ -232,7 +247,7 @@ def main() -> None:
         print("manifesto vazio — nenhum clipe publicado em release ainda.")
         return
 
-    ja = {_chave_texto(x["text"]) for x in agendados}
+    ja = {_chave_texto(x["text"]) for x in conhecidos}
     fila = [(k, v) for k, v in ordenar(todos)
             if _chave_texto(v.get("legenda") or v.get("titulo") or "") not in ja]
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")

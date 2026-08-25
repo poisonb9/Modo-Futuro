@@ -29,6 +29,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from datetime import date
 from pathlib import Path
@@ -165,7 +166,11 @@ def _publicar_manifesto(token: str, tag: str, mapa: dict) -> None:
     for a in rel.get("assets", []):
         if a["name"] == "manifesto.json":
             try:
-                antigo = requests.get(a["browser_download_url"], timeout=60).json()
+                # ver a nota em agendar_buffer.manifesto: sem o ?t= o CDN
+                # devolve versao antiga e o merge PERDE clipes de outro run
+                antigo = requests.get(
+                    a["browser_download_url"] + f"?t={int(time.time())}",
+                    timeout=60).json()
             except Exception:
                 antigo = {}
             requests.delete(f"{API}/repos/{REPO}/releases/assets/{a['id']}",

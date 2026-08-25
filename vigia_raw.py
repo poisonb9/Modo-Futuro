@@ -245,12 +245,44 @@ def disparar(file_id: str, nome: str, conta: str = "principal",
         raise RuntimeError(f"disparo falhou: {r.status_code} {r.text[:300]}")
 
 
+def corte_em_andamento() -> bool:
+    """Ja' existe um corte rodando na nuvem?
+
+    Por que existe: `MAX_POR_PASSADA` limita quantos saem POR PASSADA, mas a
+    passada e' de 10 min e cada corte leva ~83 min com qtd=5. Sem esta
+    checagem o vigia enfileira ~6 por hora enquanto o pipeline consome menos
+    de 1 — foi exatamente assim que 10 brutos viraram 10 runs simultaneos em
+    22/08/2026 e NOVE falharam com as chaves do Gemini esgotadas.
+
+    Na duvida (erro de rede, API fora), devolve True: e' melhor atrasar um
+    corte 10 minutos do que torrar a cota do dia inteiro.
+    """
+    if not GITHUB_TOKEN:
+        return False
+    try:
+        r = requests.get(
+            f"https://api.github.com/repos/{REPO}/actions/workflows/{WORKFLOW}/runs",
+            headers={"Authorization": f"Bearer {GITHUB_TOKEN}",
+                     "Accept": "application/vnd.github+json"},
+            params={"per_page": 10}, timeout=30)
+        r.raise_for_status()
+        return any(x["status"] in ("queued", "in_progress", "waiting", "requested", "pending")
+                   for x in r.json().get("workflow_runs", []))
+    except Exception as e:
+        print(f"[!] nao consegui checar runs em andamento ({str(e)[:70]}); "
+              "seguro o disparo por esta passada")
+        return True
+
+
 # ------------------------------------------------------------------ ciclo
 
 def uma_passada(drive) -> int:
     reg = ler_registro()
     novos = [v for v in videos_todas_contas() if v["id"] not in reg]
     if not novos:
+        return 0
+    if corte_em_andamento():
+        print(f"{len(novos)} na fila, mas ja' ha' corte rodando — espero a proxima passada.")
         return 0
     espera = max(0, len(novos) - MAX_POR_PASSADA)
     novos = novos[:MAX_POR_PASSADA]

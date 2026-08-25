@@ -47,9 +47,14 @@ API_GITHUB = "https://api.github.com"
 REPO = os.environ.get("GITHUB_REPO", "poisonb9/Modo-Futuro")
 
 # Teto do plano gratuito, medido em 25/08/2026 (o app avisa "1 post left" com
-# 9 na fila). RESERVA fica de fora de propósito — ver regra 2.
+# 9 na fila).
+#
+# RESERVA passou de 1 pra 0 em 25/08, a pedido do Bryan: ele prefere a fila
+# sempre cheia. Se ele quiser encaixar algo na mão, apaga um post ou usa
+# --reserva 1 numa rodada. A regra 2 lá em cima descreve o comportamento
+# antigo e fica aqui como histórico da decisão.
 LIMITE_FILA = 10
-RESERVA_MANUAL = 1
+RESERVA_MANUAL = 0
 
 RAIZ = Path(__file__).resolve().parent
 

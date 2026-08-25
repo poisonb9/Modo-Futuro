@@ -42,7 +42,7 @@ foi dito (ex: em vez de reproduzir a pergunta e a resposta como diálogo,
 narre o que aconteceu: "ela explicou que..." / "ele mostrou como..."). Um só
 narrador falando o tempo todo, nunca trocando de personagem.
 
-ATENÇÃO AO GÊNERO: o inglês (e outros idiomas) muitas vezes não deixa claro
+{dica_genero}ATENÇÃO AO GÊNERO: o inglês (e outros idiomas) muitas vezes não deixa claro
 se quem está falando/sendo descrito é homem ou mulher (ex: "you", nome
 próprio sem pista, frase sem pronome). NUNCA generalize pro masculino por
 padrão. Preste atenção em qualquer pista de gênero no texto original (nome,
@@ -89,7 +89,31 @@ Fala original:
 {texto}"""
 
 
-def _traduzir_texto(texto: str, prompt: str = PROMPT) -> str:
+def dica_de_genero(genero: str | None) -> str:
+    """Frase que vai NO TOPO do prompt de narração, quando a seleção soube o
+    gênero de quem fala.
+
+    Existe porque o prompt sozinho manda inferir pelo TEXTO, e transcrição
+    muitas vezes não tem pista nenhuma — aí o modelo chuta. A seleção, ao
+    contrário, VÊ O VÍDEO. Em 25/08/2026 um clipe foi ao ar narrado como
+    "A ESPECIALISTA EXPLICOU" com um homem na tela.
+    """
+    g = (genero or "").strip().lower()
+    if g in ("masculino", "homem", "male"):
+        return ("⚠️ QUEM FALA NESTE TRECHO E HOMEM (confirmado pela imagem do "
+                "video). Use ele/dele e concordancia masculina do inicio ao "
+                "fim. Isto vence qualquer pista do texto.\n\n")
+    if g in ("feminino", "mulher", "female"):
+        return ("⚠️ QUEM FALA NESTE TRECHO E MULHER (confirmado pela imagem do "
+                "video). Use ela/dela e concordancia feminina do inicio ao "
+                "fim. Isto vence qualquer pista do texto.\n\n")
+    if g in ("varios", "vários", "multiplos", "múltiplos"):
+        return ("⚠️ HA MAIS DE UMA PESSOA FALANDO neste trecho (confirmado "
+                "pela imagem). Siga a regra de VARIOS PARTICIPANTES abaixo.\n\n")
+    return ""
+
+
+def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None) -> str:
     if not texto.strip():
         return texto
 
@@ -101,7 +125,13 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT) -> str:
             r = requests.post(
                 f"{config.GEMINI_URL}/models/{config.GEMINI_MODELO}:generateContent?key={chave}",
                 json={
-                    "contents": [{"parts": [{"text": prompt.format(texto=texto)}]}],
+                    # `dica_genero` só existe no PROMPT_NARRACAO; o PROMPT
+                    # comum não tem esse campo, então formatar com ele daria
+                    # KeyError. Preenche só quando o prompt pede.
+                    "contents": [{"parts": [{"text": (
+                        prompt.format(texto=texto, dica_genero=dica_de_genero(genero))
+                        if "{dica_genero}" in prompt else prompt.format(texto=texto)
+                    )}]}],
                     "generationConfig": {"temperature": 0.3},
                 },
                 timeout=60,
@@ -210,7 +240,8 @@ def _distribuir_texto_em_janelas(texto: str, grupos: list[list[dict]]) -> list[d
 
 
 def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
-                        narrar: bool = False) -> list[dict]:
+                        narrar: bool = False,
+                        genero_falante: str | None = None) -> list[dict]:
     """Recebe [{palavra, inicio, fim}] no idioma original e devolve trechos
     traduzidos em texto corrido: [{inicio, fim, texto}]. Usado pra dublagem
     (TTS fala o texto inteiro do trecho, não palavra por palavra).
@@ -225,7 +256,8 @@ def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
 
     if narrar:
         texto_completo = " ".join(p["palavra"] for p in palavras)
-        texto_narrado = _traduzir_texto(texto_completo, prompt=PROMPT_NARRACAO)
+        texto_narrado = _traduzir_texto(texto_completo, prompt=PROMPT_NARRACAO,
+                                        genero=genero_falante)
         grupos = _agrupar(palavras, tamanho_janela_s)
         return _distribuir_texto_em_janelas(texto_narrado, grupos)
 

@@ -124,6 +124,12 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
   "nota": <0-100, potencial viral>,
   "gancho": "<a frase exata que prende, curta>",
   "porque": "<1 frase em pt-BR: por que viraliza>",
+  "genero_falante": "<masculino | feminino | varios | indefinido — de quem
+     aparece falando NESTE trecho. Voce esta' vendo o video, entao decida pela
+     IMAGEM e pela voz, nao pelo texto. Isso alimenta a narracao: em 25/08/2026
+     um clipe saiu dizendo 'A ESPECIALISTA EXPLICOU' com um homem na tela.
+     'varios' se houver mais de uma pessoa falando; 'indefinido' so' se
+     realmente nao der pra saber>",
   "titulo": "<título chamativo em pt-BR, max 80 chars, sem hashtag>",
   "descricao": "<2-3 frases em pt-BR para a descrição do YouTube>",
   "tags": ["<5 a 8 tags em pt-BR, sem #>"],

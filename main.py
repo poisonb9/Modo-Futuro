@@ -209,7 +209,13 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         if precisa_traduzir:
             print("      traduzindo pra pt-BR...")
             status.etapa(nome_fonte, "traduzindo", c.get("titulo", ""), i, len(clipes))
-            segmentos = traducao.traduzir_segmentos(ps, narrar=dublar and not fala_literal)
+            # `genero_falante` vem da SELECAO, que ve' o video — o prompt de
+            # narracao sozinho so' consegue inferir pelo texto, e transcricao
+            # costuma nao ter pista. Em 25/08/2026 um clipe foi ao ar dizendo
+            # 'A ESPECIALISTA EXPLICOU' com um homem na tela.
+            segmentos = traducao.traduzir_segmentos(
+                ps, narrar=dublar and not fala_literal,
+                genero_falante=c.get("genero_falante"))
             ps = traducao.segmentos_para_palavras(segmentos)
             if dublar:
                 if config.VOZ_CLONADA_ATIVA:
@@ -276,6 +282,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 ("titulo", "descricao", "tags", "gancho", "porque",
                  "nota", "inicio_s", "fim_s", "duracao_s",
                  "tipo_conteudo", "emocao_dominante", "dinamica",
+                 "genero_falante",
                  "marcador_viral", "arquetipo", "forca_gancho",
                  "compartilhabilidade", "independencia",
                  "intensidade_emocional", "valor_social")}

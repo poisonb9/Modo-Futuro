@@ -282,7 +282,12 @@ def uma_passada(drive) -> int:
     if not novos:
         return 0
     if corte_em_andamento():
-        print(f"{len(novos)} na fila, mas ja' ha' corte rodando — espero a proxima passada.")
+        # O marcador [espera] existe pro wrapper agendado distinguir "fila
+        # parada de proposito" de "nao ha' nada novo". Sem ele a mensagem some:
+        # main() ainda imprime "Nada novo." depois deste return, e o wrapper
+        # casava so' essa string. Mesmo defeito que o [!] ja' tinha tido.
+        print(f"[espera] {len(novos)} na fila, mas ja' ha' corte rodando "
+              "— espero a proxima passada.")
         return 0
     espera = max(0, len(novos) - MAX_POR_PASSADA)
     novos = novos[:MAX_POR_PASSADA]

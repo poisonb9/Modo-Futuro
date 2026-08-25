@@ -39,7 +39,15 @@ $rc = $LASTEXITCODE
 # foram 1921 passagens silenciosas seguidas, e um bruto ficou 2h parado na
 # RAW sem ninguem saber.
 $houveAviso = $saida -match [regex]::Escape('[!]')
+$emEspera   = $saida -match [regex]::Escape('[espera]')
 if ($rc -eq 0 -and $saida -match 'Nada novo' -and -not $houveAviso) {
+    if ($emEspera) {
+        # fila parada de proposito (corte anterior ainda rodando) nao e' o
+        # mesmo que RAW vazia — o log tem que separar os dois estados
+        $qtd = ([regex]::Match($saida, '\[espera\]\s+(\d+)')).Groups[1].Value
+        Add-Content -Path $log -Value "[$carimbo] $qtd na fila, corte anterior ainda rodando" -Encoding utf8
+        exit $rc
+    }
     $seg = [int]((Get-Date) - $inicio).TotalSeconds
     # acima de 60s a passagem deixa de ser rotina: registra o tempo
     if ($seg -gt 60) {

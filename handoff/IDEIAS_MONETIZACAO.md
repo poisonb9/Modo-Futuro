@@ -127,3 +127,42 @@ O Bryan posta 2-3 por dia na mao e esta' funcionando (o canal foi de ~200 pra
 nao o gargalo medido** — que e' retencao e conversao em seguidor (10
 seguidores para 284 curtidas). Revisitar quando o volume manual virar o
 limite de verdade.
+
+---
+
+## 5. Onde o tempo do run realmente vai — MEDIDO em 25/08/2026
+
+Bryan achou os runs lentos e perguntou se disparar um por conta de Gemini
+aceleraria. **Nao aceleraria.** Medicao do run 32826317446 (qtd=5, 71,6 min):
+
+| etapa | tempo |
+|---|---|
+| escolha dos momentos (Gemini) | ~0 |
+| transcricao (Groq) | ~0 |
+| traducao/narracao (Gemini) | ~0 |
+| **dublagem, voz clonada (Chatterbox, CPU)** | **10-12 min POR CLIPE** |
+| renderizacao + upload + resto | poucos min |
+
+Cinco clipes = ~55 dos 64 min do passo `Cortar`. **O gargalo e' o TTS em CPU,
+nao a IA.** As 14 chaves de Gemini do workflow ja' sao um pool rotativo — nao
+existe "uma conta por run", qualquer run usa qualquer chave.
+
+### Por que NAO paralelizamos (decisao do Bryan, 25/08)
+
+A forma obvia — 1 clipe por run, N runs em paralelo via `--recorte` — **perde
+qualidade**: `--recorte` pula a checagem de congelamento DE PROPOSITO (o
+codigo diz isso explicitamente), porque foi feito pro caso em que o Bryan
+escolhe o trecho na mao. Usar isso pra orquestrar faria todo clipe nascer sem
+o filtro que descartou os tres brutos de palestra em agosto.
+
+Da' pra consertar (flag distinguindo "recorte do Gemini" de "recorte manual"),
+mas o ganho e' de relogio, nao do tempo dele: os 71 min rodam sozinhos na
+nuvem. E o motor ja' produz mais rapido do que ele posta (19 brutos na fila,
+~6 posts/dia). Alem disso paralelismo reabre a corrida de numeracao de 30/07,
+que gerou dois clipes com o mesmo numero.
+
+**Revisitar so' se a cadencia subir muito** (ex.: 12 posts/dia). Ai fazer COM
+a correcao do congelamento junto.
+
+**Dublar sempre**: Bryan confirmou em 25/08 que dubla TODOS os videos, e' o
+padrao do canal. Cortar `--dublar` pra ganhar tempo esta' fora de questao.

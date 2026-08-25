@@ -166,11 +166,17 @@ def ordenar(clipes: dict) -> list[tuple[str, dict]]:
 
     def chave(par):
         _, v = par
+        # Republicacao vai pro FIM da fila, sempre. Sao clipes que ja' foram ao
+        # ar uma vez (ou que foram tirados da fila por terem sido postados sem
+        # rotulo de IA) e voltam pelo pipeline. Sem isto eles entrariam na
+        # FRENTE, porque a ordenacao usa a data de publicacao na release e o
+        # lote deles e' mais antigo — o oposto do que o Bryan pediu em 25/08.
+        rep = 1 if v.get("republicacao") else 0
         fonte = v.get("fonte") or ""
         # inicio_s ausente (clipe antigo, de antes do manifesto) cai pro fim do
         # seu grupo em vez de quebrar a ordenação
         inicio = v.get("inicio_s")
-        return (primeira_aparicao.get(fonte, ""), fonte,
+        return (rep, primeira_aparicao.get(fonte, ""), fonte,
                 float("inf") if inicio is None else float(inicio))
 
     return sorted(itens, key=chave)

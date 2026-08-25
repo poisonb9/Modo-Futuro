@@ -45,6 +45,11 @@ on:
 jobs:
   cortar:
     runs-on: ubuntu-latest
+    # `contents: write` e' o minimo pro passo "Publicar clipes numa Release":
+    # sem declarar, o GITHUB_TOKEN herda o padrao do repo, que pode ser
+    # somente leitura, e a criacao da release volta 403.
+    permissions:
+      contents: write
     env:
       HF_HOME: ${{ github.workspace }}/.cache/huggingface
     steps:
@@ -154,6 +159,18 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}" --conta "${{ inputs.conta }}"
+
+      # Hospeda os clipes numa Release pra que agendador de rede social
+      # consiga puxar por URL publica — nem Buffer nem Zoho aceitam upload de
+      # arquivo pela API, e link do Drive aponta pra pagina HTML, nao pro
+      # arquivo. `continue-on-error`: publicar na Release e' conveniencia; se
+      # falhar, o clipe ja' esta' no Drive e o run nao pode ser reprovado por
+      # isso (nem impedir a limpeza do bruto logo abaixo).
+      - name: Publicar clipes numa Release (URL publica)
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -X utf8 publicar_release.py
 
       # So roda se TUDO acima deu certo: bruto de corte que falhou nao pode
       # sumir, senao perde-se a fonte junto com a tentativa.

@@ -172,6 +172,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -X utf8 publicar_release.py
 
+      # Enfileira no Buffer o que couber, respeitando o teto do plano gratuito
+      # (10 agendados por canal) e deixando 1 vaga livre pro Bryan. Roda a cada
+      # corte, que e' o momento em que ha' clipe novo — e como cada corte leva
+      # ~70 min e ele posta 6x/dia, a fila e' reabastecida na cadencia certa
+      # sem tarefa agendada separada.
+      # `continue-on-error`: agendar e' conveniencia; o clipe ja' esta' no
+      # Drive e na Release, e um erro do Buffer nao pode reprovar o corte.
+      - name: Enfileirar no Buffer
+        continue-on-error: true
+        env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -X utf8 agendar_buffer.py
+
       # So roda se TUDO acima deu certo: bruto de corte que falhou nao pode
       # sumir, senao perde-se a fonte junto com a tentativa.
       - name: Limpar bruto do Drive

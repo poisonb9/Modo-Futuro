@@ -36,3 +36,4 @@ github_token.txt
 # amostra biométrica da voz do Bryan (voz clonada) — nunca vai pro repo,
 # nem público nem privado. Local-only, igual credentials/tokens.
 vozes/
+buffer_token.txt

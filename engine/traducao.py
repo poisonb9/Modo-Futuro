@@ -71,6 +71,15 @@ original, nem mais curto nem mais longo. Texto mais longo que o original
 força a dublagem a acelerar a fala pra caber no tempo, o que soa corrido e
 ruim.
 
+LINGUAGEM MENOS CRUA: quando o assunto envolver violência, morte ou dano a
+pessoas, narre o FATO sem a palavra mais gráfica — prefira "o fim de milhares
+de pessoas" a "a morte de milhares", "eliminar" a "assassinar", "tirar vidas"
+a "matar". NÃO é censura nem eufemismo que esconde o que aconteceu: o fato
+tem que continuar claro e verdadeiro, com a mesma força. É escolha de
+vocabulário, do jeito que um documentário de TV narra tragédia sem ser
+gráfico. Se a palavra crua for indispensável pro sentido (uma citação
+direta, um termo técnico), use — não distorça o fato pra evitá-la.
+
 Mantenha o MESMO ASSUNTO e as MESMAS informações e fatos (não invente nada, não resuma
 demais), só remova a troca de interlocutor e os cacoetes de fala, deixando o
 texto linear e natural de se ouvir em voz alta. Responda SOMENTE com o texto

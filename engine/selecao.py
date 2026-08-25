@@ -105,6 +105,13 @@ PESO ENTRE AS DIMENSÕES (evidência de pesquisa, não palpite):
 - `valor-pratico` continua válido, mas como contribuinte, não como o
   critério dominante.
 
+LINGUAGEM MENOS CRUA no "titulo" e na "descricao": quando o assunto envolver
+violencia, morte ou dano a pessoas, diga o FATO sem a palavra mais grafica —
+"o fim de milhares de pessoas" em vez de "a morte de milhares", "eliminar" em
+vez de "assassinar". Nao e' censura: o fato continua claro e com a mesma
+forca, e' escolha de vocabulario (do jeito que documentario de TV narra
+tragedia). Se a palavra crua for indispensavel pro sentido, use.
+
 NUNCA use aspas duplas (") DENTRO de nenhum valor de texto do JSON — nem no
 "gancho", nem no "titulo", nem na "descricao". Se precisar citar uma fala,
 use aspas simples ('assim') ou nenhuma. Aspas duplas não escapadas quebram o

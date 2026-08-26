@@ -32,8 +32,10 @@ Uso:
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -43,6 +45,7 @@ from pathlib import Path
 import requests
 
 from engine import buffer_cota as cota
+from engine import rejeitados
 
 API_BUFFER = "https://api.buffer.com/"
 API_GITHUB = "https://api.github.com"
@@ -60,6 +63,12 @@ RESERVA_MANUAL = 0
 # Teto de páginas por consulta de posts. Cada página é uma requisição, e o
 # histórico só cresce — sem teto, a consulta fica mais cara a cada semana.
 MAX_PAGINAS = 4
+
+# Horários de postagem (São Paulo). O `addToQueue` usaria a agenda do canal no
+# Buffer, que não reflete isto — então o agendamento é explícito.
+SLOTS_SP = [(8, 15), (11, 33), (13, 7), (16, 27), (19, 3), (20, 50)]
+VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
+FUSO_SP_H = 3         # America/Sao_Paulo = UTC-3
 
 RAIZ = Path(__file__).resolve().parent
 
@@ -220,7 +229,40 @@ def ordenar(clipes: dict) -> list[tuple[str, dict]]:
     return sorted(itens, key=chave)
 
 
-def enfileirar(token: str, canal: str, clipe: dict, simular: bool) -> str:
+def proximos_horarios(agendados: list[dict], quantos: int) -> list[datetime.datetime]:
+    """Próximos slots livres da grade, em horário de São Paulo.
+
+    Pula slot já ocupado (compara pela HORA, não pelo minuto exato, porque o
+    minuto varia de propósito) e slot que já passou.
+    """
+    ocupados = set()
+    for p in agendados:
+        if not p.get("dueAt"):
+            continue
+        d = (datetime.datetime.fromisoformat(p["dueAt"].replace("Z", "+00:00"))
+             - datetime.timedelta(hours=FUSO_SP_H))
+        ocupados.add((d.date(), d.hour))
+    agora = (datetime.datetime.now(datetime.timezone.utc)
+             - datetime.timedelta(hours=FUSO_SP_H)).replace(tzinfo=None)
+    saida, dia = [], agora.date()
+    while len(saida) < quantos:
+        for h, m in SLOTS_SP:
+            if len(saida) >= quantos:
+                break
+            minuto = min(57, max(3, m + random.randint(-VARIACAO_MIN, VARIACAO_MIN)))
+            cand = datetime.datetime.combine(dia, datetime.time(h, minuto))
+            if cand <= agora + datetime.timedelta(minutes=20):
+                continue
+            if (dia, h) in ocupados:
+                continue
+            ocupados.add((dia, h))
+            saida.append(cand)
+        dia += datetime.timedelta(days=1)
+    return saida
+
+
+def enfileirar(token: str, canal: str, clipe: dict, simular: bool,
+               quando_sp: datetime.datetime | None = None) -> str:
     legenda = (clipe.get("legenda") or clipe.get("titulo") or "").strip()
     titulo = (clipe.get("titulo") or legenda.split("#")[0]).strip()[:90]
     if simular:
@@ -236,8 +278,10 @@ def enfileirar(token: str, canal: str, clipe: dict, simular: bool) -> str:
     d = consultar(token, m, {"input": {
         "channelId": canal,
         "text": legenda,
-        "mode": "addToQueue",          # o Buffer encaixa no próximo slot da agenda
+        "mode": "customScheduled" if quando_sp else "addToQueue",
         "schedulingType": "automatic",
+        **({"dueAt": (quando_sp + datetime.timedelta(hours=FUSO_SP_H))
+             .strftime("%Y-%m-%dT%H:%M:%S.000Z")} if quando_sp else {}),
         "assets": [{"video": {"url": clipe["url"]}}],
         "metadata": {"tiktok": {"isAiGenerated": True, "title": titulo}},
     }})["createPost"]
@@ -286,29 +330,38 @@ def main() -> None:
     ja_publicado = {_chave_texto(x["text"]) for x in conhecidos
                     if x.get("status") == "sent"}
 
+    rejeitados_ = rejeitados.chaves()
+
     def cabe(v):
         k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
         if k in ja_na_fila:
+            return False
+        # Apagado da fila pelo Bryan = decisão editorial, nunca reagendar.
+        # Apagar post agendado não deixa rastro no Buffer, então sem esta lista
+        # o clipe volta a parecer disponível — empurrei o mesmo três vezes em
+        # 26/08/2026. Ver engine/rejeitados.py.
+        if k in rejeitados_:
             return False
         return v.get("republicacao") or k not in ja_publicado
 
     fila = [(k, v) for k, v in ordenar(todos) if cabe(v)]
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")
 
+    horarios = proximos_horarios(agendados, max(0, vagas))
     enviados = 0
-    for chave, clipe in fila:
+    for (chave, clipe), quando in zip(fila, horarios):
         if enviados >= vagas:
             break
         titulo = (clipe.get("titulo") or "")[:56]
         try:
-            quando = enfileirar(tb, canal, clipe, a.simular)
+            quando_txt = enfileirar(tb, canal, clipe, a.simular, quando_sp=quando)
         except Exception as e:
             print(f"  [!] {titulo}: {str(e)[:140]}")
             continue
         ini = clipe.get("inicio_s")
         pos = f"{float(ini):.0f}s do fonte" if ini is not None else "posição ?"
         print(f"  nota {clipe.get('nota', 0):.0f}  {pos:>14}  {titulo}")
-        print(f"       -> {quando}")
+        print(f"       -> {quando_txt}")
         enviados += 1
 
     print(f"\n{enviados} clipe(s) {'simulado(s)' if a.simular else 'enfileirado(s)'}; "

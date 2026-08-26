@@ -18,6 +18,11 @@ _AZUL = "&HFF9900&"       # RGB(0,153,255)
 _VERDE = "&H76E600&"      # RGB(0,230,118)
 _VERMELHO = "&H303BFF&"   # RGB(255,59,48)
 PALETA = (_AZUL, _VERDE, _VERMELHO)
+
+# Cor por SENTIDO da palavra, não por rotação (pedido do Bryan em 26/08/2026).
+# Quem decide qual é qual é o Gemini, em engine/destaque.py — aqui só traduz o
+# nome pra cor do ASS.
+POR_NOME = {"vermelho": _VERMELHO, "azul": _AZUL, "verde": _VERDE}
 _RESET = "&HFFFFFF&"      # branco, pra voltar depois da palavra destacada
 
 # Estilo 1 = o que o canal já usava até 02/08/2026 (Inter Black, corpo fixo).
@@ -127,14 +132,13 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 
     grupos = [palavras[i:i + MAX_LINHA] for i in range(0, len(palavras), MAX_LINHA)]
     destaques = _destaque.marcar(grupos)
-    cores = itertools.cycle(PALETA)
 
     linhas = []
-    for grupo, idx_destaque in zip(grupos, destaques):
+    for grupo, (idx_destaque, nome_cor) in zip(grupos, destaques):
         ini, fim = grupo[0]["inicio"], grupo[-1]["fim"]
         if fim <= ini:
             fim = ini + 0.4
-        cor = next(cores) if idx_destaque is not None else None
+        cor = POR_NOME.get(nome_cor or "", _VERDE) if idx_destaque is not None else None
 
         # Estilo 2: o grupo inteiro cresce ou encolhe conforme tem ou não
         # destaque — é a dinâmica de "linha de cima às vezes maior" da

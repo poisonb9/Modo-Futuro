@@ -32,8 +32,20 @@ urgência ou revelação), julgando pelo peso da palavra DENTRO DA FRASE
 COMPLETA acima, não isolada. Nem todo trecho precisa ter destaque: se
 nenhuma palavra se destacar claramente, responda -1 pra esse trecho.
 
-Responda SOMENTE um array JSON de inteiros, um por trecho, na mesma ordem,
-com o ÍNDICE (começando em 0) da palavra escolhida dentro do trecho, ou -1.
+Escolha TAMBÉM a cor do destaque, pelo SENTIDO da palavra na frase:
+
+- "vermelho" — palavra forte, pesada, definitiva: risco, perda, ameaça,
+  número que impressiona, termo técnico que é a revelação do trecho.
+- "azul" — alerta e tensão no MEIO da explicação: o que preocupa, o que
+  ainda não se resolveu, a ressalva, o "mas".
+- "verde" — afirmação, conclusão, o que tranquiliza ou fecha o raciocínio:
+  a solução, o resultado, o que deu certo, informação neutra e factual.
+
+Na dúvida entre duas, escolha "verde" — é a cor neutra.
+
+Responda SOMENTE um array JSON, um item por trecho, na mesma ordem. Cada item
+é [indice, "cor"] com o ÍNDICE (começando em 0) da palavra dentro do trecho,
+ou -1 se nenhuma palavra merecer destaque. Exemplo: [[1,"vermelho"], -1, [0,"verde"]]
 Sem markdown, sem comentário, sem texto antes ou depois do array.
 
 Trechos:
@@ -81,8 +93,38 @@ def escolher_local(grupo: list[dict]) -> int | None:
     return melhor
 
 
-def marcar(grupos: list[list[dict]]) -> list[int | None]:
-    """Devolve, por grupo, o índice (0-based) da palavra destacada, ou None."""
+CORES_VALIDAS = ("vermelho", "azul", "verde")
+COR_PADRAO = "verde"      # neutra: é o que a escolha local usa
+
+
+def _ler_item(bruto) -> tuple[int | None, str | None]:
+    """Lê um item da resposta do modelo.
+
+    Aceita `[indice, "cor"]` (formato atual), `indice` puro (formato antigo,
+    caso o modelo esqueça a cor) e `-1`. Ser tolerante aqui é de propósito: a
+    alternativa é jogar fora o destaque do trecho por causa de formatação.
+    """
+    if isinstance(bruto, (list, tuple)) and bruto:
+        idx, cor = bruto[0], (bruto[1] if len(bruto) > 1 else COR_PADRAO)
+        cor = str(cor).strip().lower()
+        if cor not in CORES_VALIDAS:
+            cor = COR_PADRAO
+    else:
+        idx, cor = bruto, COR_PADRAO
+    try:
+        idx = int(idx)
+    except (TypeError, ValueError):
+        return None, None
+    return (idx, cor) if idx >= 0 else (None, None)
+
+
+def marcar(grupos: list[list[dict]]) -> list[tuple[int | None, str | None]]:
+    """Devolve, por grupo, (índice da palavra destacada, cor) ou (None, None).
+
+    A cor vem do SENTIDO da palavra (pedido do Bryan em 26/08/2026): vermelho
+    pra palavra forte/definitiva, azul pra alerta no meio da explicação, verde
+    pra afirmação e conclusão. Antes disso a paleta só rotacionava, sem
+    critério nenhum."""
     if not grupos:
         return []
 
@@ -122,17 +164,14 @@ def marcar(grupos: list[list[dict]]) -> list[int | None]:
                       "trechos; completando o resto localmente")
             saida_final = []
             for i, g in enumerate(grupos):
-                idx = arr[i] if i < len(arr) else None
-                try:
-                    idx = int(idx)
-                except (TypeError, ValueError):
-                    idx = -1
-                if 0 <= idx < len(g):
-                    saida_final.append(idx)
+                bruto = arr[i] if i < len(arr) else None
+                idx, cor = _ler_item(bruto)
+                if idx is not None and 0 <= idx < len(g):
+                    saida_final.append((idx, cor))
                 elif i < len(arr):
-                    saida_final.append(None)      # o modelo disse -1 de propósito
+                    saida_final.append((None, None))   # o modelo disse -1 de propósito
                 else:
-                    saida_final.append(escolher_local(g))
+                    saida_final.append((escolher_local(g), COR_PADRAO))
             return saida_final
         except requests.HTTPError as e:
             if e.response is not None and e.response.status_code in (429, 403):
@@ -146,7 +185,7 @@ def marcar(grupos: list[list[dict]]) -> list[int | None]:
 
     print("   [!] destaque falhou em todas as chaves — usando escolha local "
           "(legenda continua colorida, só sem curadoria do modelo)")
-    return [escolher_local(g) for g in grupos]
+    return [(escolher_local(g), COR_PADRAO) for g in grupos]
 
 
 PROMPT_TITULO = """Você edita títulos de abertura de vídeos virais de TikTok, no

@@ -329,6 +329,22 @@ def main() -> None:
                   if x.get("status") == "scheduled"}
     ja_publicado = {_chave_texto(x["text"]) for x in conhecidos
                     if x.get("status") == "sent"}
+    # A consulta acima para em MAX_PAGINAS pra nao gastar orcamento, entao ela
+    # e' CEGA pro que e' antigo — foi essa cegueira que republicou um clipe em
+    # 25/08/2026. `estado/publicados.json` guarda o historico completo em disco
+    # e nao custa requisicao. Import tardio de proposito: historico.py importa
+    # este modulo, e no topo isso seria circular.
+    try:
+        import historico
+        offline = set(historico._ler_publicados())
+        so_no_disco = offline - ja_publicado
+        ja_publicado |= offline
+        if so_no_disco:
+            print(f"dedup: +{len(so_no_disco)} texto(s) so' no registro offline "
+                  f"(alem dos {len(conhecidos)} que o Buffer devolveu)")
+    except Exception as e:
+        print(f"  [!] registro offline indisponivel ({str(e)[:80]}); "
+              "dedup usando so' o que o Buffer devolveu.")
 
     rejeitados_ = rejeitados.chaves()
 

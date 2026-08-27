@@ -66,7 +66,17 @@ MAX_PAGINAS = 4
 
 # Horários de postagem (São Paulo). O `addToQueue` usaria a agenda do canal no
 # Buffer, que não reflete isto — então o agendamento é explícito.
-SLOTS_SP = [(8, 15), (11, 33), (13, 7), (16, 27), (19, 3), (20, 50)]
+# Cortado de 6 pra 5 slots em 26/08/2026, decisao do Bryan. Motivo medido: os
+# dois melhores dias do canal tiveram 5 e 2 posts (medianas 726 e 434) e o dia
+# de 15 posts foi o pior de julho (115). O slot das 13:07 foi o escolhido pra
+# sair porque era o par mais apertado da grade (1h34 depois das 11:33), e em
+# 26/08 os dois posts do meio-dia foram os piores medidos do dia (22 e 11).
+SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 3), (20, 50)]
+# Teto DURO de posts por dia (SP), contando o que ja' foi enviado. A grade
+# sozinha nunca segurou o volume: 25/08 saiu com 8 posts e 26/08 com 11, ambos
+# acima dos 6 slots que existiam. Isso acontece porque um slot que ja' disparou
+# some de `scheduled`, e uma rodada seguinte do agendador enxerga o dia vazio.
+MAX_POR_DIA = 5
 VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
 FUSO_SP_H = 3         # America/Sao_Paulo = UTC-3
 
@@ -229,19 +239,37 @@ def ordenar(clipes: dict) -> list[tuple[str, dict]]:
     return sorted(itens, key=chave)
 
 
-def proximos_horarios(agendados: list[dict], quantos: int) -> list[datetime.datetime]:
+def proximos_horarios(agendados: list[dict], quantos: int,
+                      conhecidos: list[dict] | None = None
+                      ) -> list[datetime.datetime]:
     """Próximos slots livres da grade, em horário de São Paulo.
 
     Pula slot já ocupado (compara pela HORA, não pelo minuto exato, porque o
-    minuto varia de propósito) e slot que já passou.
+    minuto varia de propósito), slot que já passou, e dia que já bateu
+    `MAX_POR_DIA`.
+
+    `conhecidos` deve trazer agendados E enviados: a contagem por dia precisa
+    do que já foi ao ar, senão um post que disparou de manhã deixa de contar e
+    o dia estoura o teto. Sem isso, 26/08/2026 fechou com 11 posts.
     """
-    ocupados = set()
-    for p in agendados:
+    def _dia_hora(p):
         if not p.get("dueAt"):
-            continue
+            return None
         d = (datetime.datetime.fromisoformat(p["dueAt"].replace("Z", "+00:00"))
              - datetime.timedelta(hours=FUSO_SP_H))
-        ocupados.add((d.date(), d.hour))
+        return d.date(), d.hour
+
+    ocupados = set()
+    for p in agendados:
+        dh = _dia_hora(p)
+        if dh:
+            ocupados.add(dh)
+
+    por_dia: dict[datetime.date, int] = {}
+    for p in (conhecidos if conhecidos is not None else agendados):
+        dh = _dia_hora(p)
+        if dh:
+            por_dia[dh[0]] = por_dia.get(dh[0], 0) + 1
     agora = (datetime.datetime.now(datetime.timezone.utc)
              - datetime.timedelta(hours=FUSO_SP_H)).replace(tzinfo=None)
     saida, dia = [], agora.date()
@@ -255,7 +283,10 @@ def proximos_horarios(agendados: list[dict], quantos: int) -> list[datetime.date
                 continue
             if (dia, h) in ocupados:
                 continue
+            if por_dia.get(dia, 0) >= MAX_POR_DIA:
+                break
             ocupados.add((dia, h))
+            por_dia[dia] = por_dia.get(dia, 0) + 1
             saida.append(cand)
         dia += datetime.timedelta(days=1)
     return saida
@@ -363,7 +394,7 @@ def main() -> None:
     fila = [(k, v) for k, v in ordenar(todos) if cabe(v)]
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")
 
-    horarios = proximos_horarios(agendados, max(0, vagas))
+    horarios = proximos_horarios(agendados, max(0, vagas), conhecidos)
     enviados = 0
     for (chave, clipe), quando in zip(fila, horarios):
         if enviados >= vagas:

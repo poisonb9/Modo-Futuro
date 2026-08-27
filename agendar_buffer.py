@@ -45,7 +45,7 @@ from pathlib import Path
 import requests
 
 from engine import buffer_cota as cota
-from engine import rejeitados
+from engine import adiados, rejeitados
 
 API_BUFFER = "https://api.buffer.com/"
 API_GITHUB = "https://api.github.com"
@@ -229,11 +229,17 @@ def ordenar(clipes: dict) -> list[tuple[str, dict]]:
         # FRENTE, porque a ordenacao usa a data de publicacao na release e o
         # lote deles e' mais antigo — o oposto do que o Bryan pediu em 25/08.
         rep = 1 if v.get("republicacao") else 0
+        # Adiado vai atras de TODO mundo, republicacao inclusive. A chave sai
+        # da LEGENDA (titulo como reserva), igual ao `cabe()` — calcular pelo
+        # titulo nao bate, e foi assim que tres clipes que o Bryan tinha
+        # vetado entraram na fila em 27/08/2026. Ver engine/adiados.py.
+        adi = 1 if adiados.adiado(
+            _chave_texto(v.get("legenda") or v.get("titulo") or "")) else 0
         fonte = v.get("fonte") or ""
         # inicio_s ausente (clipe antigo, de antes do manifesto) cai pro fim do
         # seu grupo em vez de quebrar a ordenação
         inicio = v.get("inicio_s")
-        return (rep, primeira_aparicao.get(fonte, ""), fonte,
+        return (adi, rep, primeira_aparicao.get(fonte, ""), fonte,
                 float("inf") if inicio is None else float(inicio))
 
     return sorted(itens, key=chave)

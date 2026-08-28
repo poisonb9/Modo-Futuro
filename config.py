@@ -184,3 +184,13 @@ AMOSTRA_FPS = 4                  # quantos frames/s analisar p/ achar rosto
 # Dano certo contra ganho hipotetico. O modulo fica pronto caso apareca
 # evidencia de verdade. Ver engine/suavizar.py.
 SUAVIZAR_TEXTO = False
+
+# ------------------------------------------------- legenda premium
+# A descricao leva o CONTEXTO que nao coube nos 90s do corte: pano de
+# fundo, 3 fatos que ficaram de fora, e por que importa. Ver
+# engine/legenda_premium.py. Ideia do Bryan em 28/08/2026, depois de
+# ver a receita em texto funcionar no canal de comida.
+#
+# ATENCAO: os fatos vem do conhecimento do MODELO, nao da fala do video.
+# O prompt proibe inventar numero e data, mas vale conferir os primeiros.
+LEGENDA_PREMIUM = True

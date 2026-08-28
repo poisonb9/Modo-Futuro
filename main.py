@@ -46,7 +46,13 @@ def _hashtag(tag: str) -> str:
 def _legenda(c: dict) -> str:
     """Legenda pronta pra colar: título, descrição e hashtags válidas."""
     tags = " ".join(_hashtag(t) for t in (c.get("tags") or []) if t)
-    return f"{c.get('titulo','')}\n\n{c.get('descricao','')}\n\n{tags}".strip()
+    # A DESCRICAO PREMIUM entra entre a descricao curta e as hashtags: o
+    # contexto que nao coube nos 90s do corte. Ver engine/legenda_premium.py.
+    premium = (c.get("legenda_premium") or "").strip()
+    corpo = f"{c.get('titulo','')}" + chr(10)*2 + f"{c.get('descricao','')}"
+    if premium:
+        corpo += chr(10)*2 + premium
+    return (corpo + chr(10)*2 + tags).strip()
 
 
 def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
@@ -217,6 +223,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 ps, narrar=dublar and not fala_literal,
                 genero_falante=c.get("genero_falante"))
             ps = traducao.segmentos_para_palavras(segmentos)
+            if getattr(config, "LEGENDA_PREMIUM", False):
+                from engine import legenda_premium
+                c["legenda_premium"] = legenda_premium.gerar(segmentos)
+                if c["legenda_premium"]:
+                    print(f"      legenda premium: {len(c['legenda_premium'])} chars")
             if dublar:
                 if config.VOZ_CLONADA_ATIVA:
                     print("      dublando (voz clonada, Chatterbox)...")

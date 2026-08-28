@@ -39,15 +39,30 @@ monopolio:">
 
 → <outro>
 
-<1 ou 2 frases de fecho: o que isso decide, ou o que observar daqui pra frente.
-Sem titulo, sem icone, so' a frase.>
+→ <outro>
+
+→ <outro — QUATRO ou CINCO setas no total. Ha' folga de caracteres e o leitor
+   que chegou ate' aqui quer mais, nao menos.>
+
+<1 frase de fecho: o que isso decide, ou o que observar daqui pra frente.>
+
+<UM icone> <uma PERGUNTA curta pro leitor, ou um gancho de curiosidade sobre o
+que vem a seguir. Ex: "E se essa fabrica parar por uma semana?" / "O proximo
+gargalo talvez nem seja o chip — e sim a energia pra alimenta-lo.">
 
 REGRAS DE ACABAMENTO — o Bryan reprovou a versao anterior por parecer rascunho:
 - NUNCA use titulo de secao em caixa alta ("O CONTEXTO", "POR QUE IMPORTA").
   Parece wireframe, nao produto acabado.
 - NUNCA escreva que algo "nao coube no video" nem "ficou de fora". Isso sugere
   video incompleto. O texto e' aprofundamento, nao remendo.
-- UM icone so', no comeco do primeiro paragrafo. Mais que isso vira post de dica
+- DOIS icones no total: um abrindo o contexto, outro abrindo a pergunta final.
+  Nao use mais que isso — vira post de dica rapida e enfraquece a autoridade
+  num canal de industria.
+- A PERGUNTA FINAL nao pode ser retorica vazia ('o que voce acha?'). Tem que
+  nascer do assunto e deixar o leitor pensando, ou apontar pra proxima
+  pergunta do tema. Comentario e' dos sinais mais fortes do TikTok e hoje o
+  canal nao pede nenhum.
+- (regra antiga, mantida) icone so' nesses dois lugares. Mais que isso vira post de dica
   rapida e enfraquece a autoridade num canal de industria.
 - Linha em branco entre cada seta, pra respirar.
 - As DUAS PRIMEIRAS LINHAS sao as unicas que aparecem antes do "ver mais" do
@@ -68,8 +83,11 @@ REGRAS DURAS:
 - Maximo 1600 caracteres.
 - Portugues do Brasil, direto. Termo tecnico so' com explicacao de tres palavras.
 - Sem despedida, sem hashtag, sem "siga para mais".
-- Se a fala nao sustentar tres fatos honestos, escreva dois. Melhor menos e
-  verdadeiro.
+- QUANTIDADE: quatro ou cinco setas. Se voce nao tiver cinco fatos de que tem
+  certeza, escreva quatro. Se nao tiver quatro, escreva tres. NUNCA complete a
+  conta com fato vago ou inventado — melhor menos e verdadeiro.
+- Cada seta tem que trazer informacao NOVA. Cinco setas dizendo a mesma coisa
+  de cinco jeitos e' pior que tres bem escolhidas.
 
 Fala do corte:
 {texto}"""

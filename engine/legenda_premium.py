@@ -112,4 +112,13 @@ def gerar(segmentos: list[dict]) -> str:
     except Exception:
         return ""
     r = re.sub(r"^```.*?$|^```$", "", r, flags=re.M).strip()
-    return r[:1900]
+    # Corte no PARAGRAFO, nunca no meio. Cortar em 1900 cru decepou a pergunta
+    # final de uma legenda em 28/08/2026, e a pergunta e' justamente o que puxa
+    # comentario. Se estourar, some o paragrafo do MEIO, nao o fim.
+    TETO = 2000
+    if len(r) <= TETO:
+        return r
+    partes = r.split("\n\n")
+    while len(partes) > 3 and len("\n\n".join(partes)) > TETO:
+        del partes[len(partes) // 2]
+    return "\n\n".join(partes)[:TETO]

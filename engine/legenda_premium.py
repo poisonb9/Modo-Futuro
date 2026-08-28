@@ -24,37 +24,52 @@ import re
 PROMPT_PREMIUM = """Abaixo esta a fala de um corte de video curto, ja em
 portugues. O canal fala de tecnologia, chips, industria e geopolitica.
 
-Escreva a DESCRICAO do post. Formato EXATO:
+Escreva a DESCRICAO do post. Formato EXATO, sem titulo de secao nenhum:
 
-O CONTEXTO
-<2 a 3 frases: o pano de fundo que o corte nao teve tempo de explicar. Onde
-isso se encaixa numa historia maior.>
+<UM icone que combine com o assunto> <2 a 3 frases de contexto: o pano de fundo
+que da tamanho ao assunto. Escreva como texto corrido, nao como topico.>
 
-3 COISAS QUE NAO COUBERAM NO VIDEO
-- <fato concreto, de preferencia com numero ou data>
-- <outro>
-- <outro>
+<uma linha curta de transicao, terminada em dois pontos. Ex: "Para entender o
+tamanho disso:" / "Tres pontos que explicam a briga:" / "O que sustenta esse
+monopolio:">
 
-POR QUE ISSO IMPORTA
-<1 a 2 frases: o que muda na vida de quem esta assistindo, ou o que observar
-daqui pra frente.>
+→ <fato concreto, com numero ou data quando voce tiver certeza>
+
+→ <outro>
+
+→ <outro>
+
+<1 ou 2 frases de fecho: o que isso decide, ou o que observar daqui pra frente.
+Sem titulo, sem icone, so' a frase.>
+
+REGRAS DE ACABAMENTO — o Bryan reprovou a versao anterior por parecer rascunho:
+- NUNCA use titulo de secao em caixa alta ("O CONTEXTO", "POR QUE IMPORTA").
+  Parece wireframe, nao produto acabado.
+- NUNCA escreva que algo "nao coube no video" nem "ficou de fora". Isso sugere
+  video incompleto. O texto e' aprofundamento, nao remendo.
+- UM icone so', no comeco do primeiro paragrafo. Mais que isso vira post de dica
+  rapida e enfraquece a autoridade num canal de industria.
+- Linha em branco entre cada seta, pra respirar.
+- As DUAS PRIMEIRAS LINHAS sao as unicas que aparecem antes do "ver mais" do
+  TikTok. Elas tem que ser conteudo, nunca enfeite.
 
 REGRAS DURAS:
-- **NAO INVENTE FATO, NUMERO NEM DATA.** Se voce nao tem certeza de um dado,
-  escreva algo qualitativo em vez de numerico. Um numero errado num canal que
-  fala de industria e tecnologia destroi a autoridade inteira, e o leitor que
-  entende do assunto percebe na hora. Prefira "poucas empresas no mundo" a um
-  numero chutado.
-- Nao repita o que o video ja' disse. A pessoa acabou de assistir. Isto e' o que
-  ficou DE FORA.
+- SEJA ESPECIFICO. Fato sem numero, sem data e sem nome proprio nao acrescenta
+  nada: "a China investe bilhoes" e' vago, "o CHIPS Act reservou mais de 50
+  bilhoes de dolares" e' informacao. Nome de empresa, ano, cidade e cifra sao
+  o que fazem a descricao valer a leitura.
+- **MAS NAO INVENTE.** Se nao tiver certeza, escreva algo
+  qualitativo. Um numero errado num canal de industria destroi a autoridade
+  inteira, e quem entende percebe na hora. Prefira "poucas empresas no mundo" a
+  um numero chutado.
+- Nao repita o que o video ja' disse. A pessoa acabou de assistir.
 - Nada de hype vazio ("isso vai mudar tudo", "o futuro chegou"). Fato e
   consequencia.
 - Maximo 1600 caracteres.
-- Portugues do Brasil, direto, sem jargao desnecessario. Se usar termo tecnico,
-  explique em tres palavras.
-- Sem introducao, sem despedida, sem hashtag.
-- Se a fala for curta ou vaga demais pra sustentar tres fatos honestos, escreva
-  menos itens. Melhor duas linhas verdadeiras que tres com uma inventada.
+- Portugues do Brasil, direto. Termo tecnico so' com explicacao de tres palavras.
+- Sem despedida, sem hashtag, sem "siga para mais".
+- Se a fala nao sustentar tres fatos honestos, escreva dois. Melhor menos e
+  verdadeiro.
 
 Fala do corte:
 {texto}"""

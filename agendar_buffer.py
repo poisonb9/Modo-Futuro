@@ -202,7 +202,15 @@ def _chave_texto(t: str) -> str:
     devolve o texto com espaçamento diferente do que foi enviado, então
     comparação literal não serve.
     """
-    t = (t or "").split("#")[0]
+    # SO' A PRIMEIRA LINHA (o titulo). Antes a chave usava os 70 primeiros
+    # caracteres do texto inteiro — e isso quebrou em 28/08/2026, quando as
+    # legendas foram reescritas com a descricao premium: o titulo continuava
+    # igual, o corpo mudou, e a chave mudou junto. Os 8 posts reescritos
+    # ficaram INVISIVEIS pra dedup, e um deles foi reagendado em duplicata.
+    #
+    # O titulo e' o que identifica o clipe. A descricao e' editorial e muda —
+    # amarrar a identidade a ela e' amarrar no que nao e' estavel.
+    t = (t or "").split("\n")[0].split("#")[0]
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode("ascii")
     return re.sub(r"[^a-z0-9]+", "", t.lower())[:70]
 

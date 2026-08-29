@@ -120,16 +120,38 @@ def crescimento() -> None:
     ant, atu = instantes[-2], instantes[-1]
     print(f"{'titulo':50s} {'antes':>7s} {'agora':>7s} {'+/-':>7s}")
     pub = _ler_publicados()
-    linhas = []
+    linhas, sem_medicao = [], []
     for chave, v in pontos.items():
         a = next((x for x in v if x["quando"] == ant), None)
         b = next((x for x in v if x["quando"] == atu), None)
         if not a or not b:
             continue
-        linhas.append((b["views"] - a["views"], a["views"], b["views"],
-                       pub.get(chave, {}).get("titulo", chave)[:50]))
+        titulo = pub.get(chave, {}).get("titulo", chave)[:50]
+        # ZERO NAO MEDIDO NAO E' ZERO. O `confiavel` ja' era gravado na serie,
+        # mas esta tabela imprimia `views` cru — entao post que o Buffer nunca
+        # mediu aparecia como "0 views", identico a um fracasso real.
+        #
+        # Isso nao e' cosmetico: em 28 e 29/08/2026 o Bryan apagou um video e
+        # quase apagou outro por causa deste 0. O da ASML mostrava 0 aqui e
+        # 373 no print do TikTok, no mesmo instante.
+        #
+        # A sincronizacao do Buffer trava em LOTE: quando ela para, TODO post
+        # publicado depois herda o 0. Por isso os zeros vem em sequencia — e
+        # e' exatamente esse padrao que faz parecer contagio de alcance.
+        if not b.get("confiavel", True):
+            sem_medicao.append(titulo)
+            continue
+        linhas.append((b["views"] - a["views"], a["views"], b["views"], titulo))
     for d, a, b, t in sorted(linhas, reverse=True):
         print(f"{t:50s} {a:7.0f} {b:7.0f} {d:+7.0f}")
+
+    if sem_medicao:
+        print(f"\n{len(sem_medicao)} post(s) SEM MEDICAO — o Buffer nao atualizou "
+              f"a metrica depois da publicacao.")
+        print("Estes NAO estao com zero view: estao sem numero nenhum. Use o "
+              "print do TikTok pra saber o valor real.")
+        for t in sem_medicao:
+            print(f"   (sem medicao)  {t}")
 
 
 def main() -> None:

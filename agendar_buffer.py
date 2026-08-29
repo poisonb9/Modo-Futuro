@@ -71,12 +71,22 @@ MAX_PAGINAS = 4
 # de 15 posts foi o pior de julho (115). O slot das 13:07 foi o escolhido pra
 # sair porque era o par mais apertado da grade (1h34 depois das 11:33), e em
 # 26/08 os dois posts do meio-dia foram os piores medidos do dia (22 e 11).
-SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 3), (20, 50)]
+# 29/08/2026: 5 -> 4. Saiu o slot das 20:50, que era o par mais apertado da
+# grade (1h47 depois das 19:03) e o mais tarde do dia. Sobra 08:15, 11:33,
+# 16:27 e 19:03, com no minimo 2h36 entre posts.
+SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 3)]
 # Teto DURO de posts por dia (SP), contando o que ja' foi enviado. A grade
 # sozinha nunca segurou o volume: 25/08 saiu com 8 posts e 26/08 com 11, ambos
 # acima dos 6 slots que existiam. Isso acontece porque um slot que ja' disparou
 # some de `scheduled`, e uma rodada seguinte do agendador enxerga o dia vazio.
-MAX_POR_DIA = 5
+#
+# 29/08/2026: 5 -> 4, pedido do Bryan, pra ver se os posts com 0 view param.
+# ⚠️ RESSALVA REGISTRADA NA HORA: os zeros medidos ate' aqui NAO sao de alcance,
+# sao metrica velha do Buffer — todo post que mostrava 0 tinha `metricsUpdatedAt`
+# ANTERIOR ao proprio `sentAt`, e o print do TikTok mostrava 347 e 373 onde o
+# Buffer dizia 0. Cadencia nao deve mexer nisso. Se os zeros sumirem depois
+# desta mudanca, desconfie de coincidencia antes de creditar a cadencia.
+MAX_POR_DIA = 4
 VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
 FUSO_SP_H = 3         # America/Sao_Paulo = UTC-3
 

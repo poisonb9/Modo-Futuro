@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 import config
-from engine import (midia, selecao, transcricao, legendas, render, traducao,
+from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
@@ -199,6 +199,17 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         print(f"      Groq transcrevendo ({midia.mb(peda):.1f} MB)...")
         status.etapa(nome_fonte, "transcrevendo", c.get("titulo", ""), i, len(clipes))
         ps = transcricao.palavras(peda, idioma)
+
+        # GUARDA DE CLIPE MUDO. Antes de qualquer coisa cara (tradução,
+        # dublagem, render), confirma que existe fala. Em 29/08/2026 sete
+        # clipes de usinagem CNC — sem uma palavra falada — chegaram à fila,
+        # e o mais silencioso deles levou a MAIOR nota do lote (96). O
+        # `selecao.py` pontua gancho/progresso/clímax, que são conceitos de
+        # fala, mas nada verificava que havia fala. Ver engine/fala.py.
+        e_mudo, motivo = fala.mudo(ps, dur_final)
+        if e_mudo:
+            print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": {motivo}")
+            continue
 
         # guardrail de ritmo [PAPER]: acima de ~200 palavras/min a
         # compreensão cai (Weinstein-Shr & Griffiths). A decupagem não

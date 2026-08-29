@@ -72,9 +72,21 @@ MAX_PAGINAS = 4
 # sair porque era o par mais apertado da grade (1h34 depois das 11:33), e em
 # 26/08 os dois posts do meio-dia foram os piores medidos do dia (22 e 11).
 # 29/08/2026: 5 -> 4. Saiu o slot das 20:50, que era o par mais apertado da
-# grade (1h47 depois das 19:03) e o mais tarde do dia. Sobra 08:15, 11:33,
-# 16:27 e 19:03, com no minimo 2h36 entre posts.
-SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 3)]
+# grade (1h47 depois das 19:03) e o mais tarde do dia.
+#
+# E o 19:03 virou 19:30 no mesmo dia: o Bryan pediu **no minimo 3 horas** entre
+# posts, e o par 16:27-19:03 dava 2h36. Com a mudanca o menor intervalo da
+# grade passa a ser 3h03.
+#
+#   08:15  ->  11:33   3h18
+#   11:33  ->  16:27   4h54
+#   16:27  ->  19:30   3h03   (era 2h36)
+#
+# ⚠️ VARIACAO_MIN sorteia ±8 min em cada slot, entao o pior caso real e' 3h03
+# menos 16 = 2h47. Se os 3h forem regra dura e nao alvo, o jeito de garantir
+# e' aumentar a folga aqui, nao reduzir a variacao — ela existe pra nao
+# parecer robo.
+SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 30)]
 # Teto DURO de posts por dia (SP), contando o que ja' foi enviado. A grade
 # sozinha nunca segurou o volume: 25/08 saiu com 8 posts e 26/08 com 11, ambos
 # acima dos 6 slots que existiam. Isso acontece porque um slot que ja' disparou
@@ -88,6 +100,16 @@ SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 3)]
 # desta mudanca, desconfie de coincidencia antes de creditar a cadencia.
 MAX_POR_DIA = 4
 VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
+
+# Intervalo MINIMO entre dois posts do mesmo dia, em horas. Ordem do Bryan em
+# 29/08/2026. E' regra DURA, verificada depois do sorteio da variacao — nao um
+# alvo que a grade tenta cumprir.
+#
+# A diferenca importa: com a grade sozinha, o par 16:27-19:30 da' 3h03, mas a
+# variacao de ±8 em cada ponta pode virar 2h47. Foi o que aconteceu no
+# primeiro agendamento de 29/08 (16:32 -> 19:22 = 2h50). Confiar na folga da
+# grade e' confiar num sorteio.
+INTERVALO_MIN_H = 3.0
 FUSO_SP_H = 3         # America/Sao_Paulo = UTC-3
 
 RAIZ = Path(__file__).resolve().parent
@@ -130,8 +152,20 @@ def consultar(token: str, query: str, variaveis: dict | None = None) -> dict:
     return d["data"]
 
 
-def contexto_buffer(token: str) -> tuple[str, str, list[dict]]:
-    """Devolve (organizationId, channelId do TikTok, posts já agendados)."""
+def contexto_buffer(token: str, fresco: bool = False) -> tuple[str, str, list[dict]]:
+    """Devolve (organizationId, channelId do TikTok, posts já agendados).
+
+    `fresco=True` ignora o cache. QUEM VAI ESCREVER PRECISA DISSO.
+
+    Em 29/08/2026 o agendador rodou logo depois de eu apagar e recriar posts,
+    leu o cache de 15 minutos e nao enxergou o que ja' estava na fila —
+    agendou "Por que o 3D V-Cache esquentava tanto?" DUAS VEZES, 16:31 e
+    16:32. Duplicata e' a causa medida dos colapsos de alcance de 02/08 e
+    25/08, entao o cache barato custou exatamente o que ele deveria proteger.
+
+    Ler pode usar cache. Decidir o que agendar, nao: a dedup compara contra
+    esta lista, e uma lista velha e' uma dedup cega.
+    """
     org = consultar(token, "{ account { organizations { id } } }")
     org_id = org["account"]["organizations"][0]["id"]
 
@@ -144,7 +178,7 @@ def contexto_buffer(token: str) -> tuple[str, str, list[dict]]:
 
     # Cache primeiro: a fila muda no máximo 4x/dia (é a cadência de postagem),
     # então reler a cada poucos minutos era desperdício puro.
-    guardado = cota.cache_valido()
+    guardado = None if fresco else cota.cache_valido()
     if guardado is not None:
         return org_id, guardado["canal"], guardado["posts"]
 
@@ -284,10 +318,18 @@ def proximos_horarios(agendados: list[dict], quantos: int,
         return d.date(), d.hour
 
     ocupados = set()
+    # Os INSTANTES exatos do que ja' esta' agendado. O conjunto `ocupados` so'
+    # guarda (dia, hora) e nao serve pra medir intervalo — 16:32 e 19:22 sao
+    # horas diferentes e mesmo assim distam 2h50.
+    instantes: list[datetime.datetime] = []
     for p in agendados:
         dh = _dia_hora(p)
         if dh:
             ocupados.add(dh)
+        if p.get("dueAt"):
+            instantes.append(
+                (datetime.datetime.fromisoformat(p["dueAt"].replace("Z", "+00:00"))
+                 - datetime.timedelta(hours=FUSO_SP_H)).replace(tzinfo=None))
 
     por_dia: dict[datetime.date, int] = {}
     for p in (conhecidos if conhecidos is not None else agendados):
@@ -309,6 +351,22 @@ def proximos_horarios(agendados: list[dict], quantos: int,
                 continue
             if por_dia.get(dia, 0) >= MAX_POR_DIA:
                 break
+            # INTERVALO MINIMO, verificado DEPOIS da variacao. Compara com o
+            # que ja' esta' no Buffer e com o que esta' sendo montado agora —
+            # os dois grupos existem no mesmo dia e nenhum sozinho basta.
+            vizinhos = [x for x in instantes + saida if x.date() == dia]
+            perto = [x for x in vizinhos
+                     if abs((cand - x).total_seconds()) < INTERVALO_MIN_H * 3600]
+            if perto:
+                # Empurra pra frente do vizinho mais tardio, em vez de
+                # descartar o slot: descartar deixaria buraco no dia sem
+                # necessidade.
+                cand = max(perto) + datetime.timedelta(hours=INTERVALO_MIN_H)
+                if cand.date() != dia or cand.hour >= 23:
+                    continue          # nao cabe mais hoje, tenta amanha
+                if any(abs((cand - x).total_seconds()) < INTERVALO_MIN_H * 3600
+                       for x in vizinhos):
+                    continue
             ocupados.add((dia, h))
             por_dia[dia] = por_dia.get(dia, 0) + 1
             saida.append(cand)
@@ -355,7 +413,9 @@ def main() -> None:
     a = p.parse_args()
 
     tb, tg = _token_buffer(), _token_github()
-    _, canal, conhecidos = contexto_buffer(tb)
+    # fresco=True: vamos ESCREVER na fila, e a dedup compara contra esta
+    # lista. Ver o docstring de contexto_buffer.
+    _, canal, conhecidos = contexto_buffer(tb, fresco=True)
     # `conhecidos` traz agendados E enviados (pra dedup). A CONTAGEM de vagas
     # usa so' os agendados — enviado ja' liberou o slot.
     agendados = [p for p in conhecidos if p.get("status") == "scheduled"]

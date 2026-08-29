@@ -1,0 +1,85 @@
+# FILA — atualizada em 29/07/2026 pelos radares dirigidos
+# Rode no NOTEBOOK (IP residencial): python processar_lista.py
+#
+# Todos abaixo de 1h30, então o Gemini analisa COM IMAGEM.
+# Os comentados no fim ficaram de fora por duração — decisão visível, não
+# esquecimento.
+
+
+# ====================================================================
+# NEURALINK — núcleo já validado (os 2 clipes postados em 29/07 vieram daqui)
+# ====================================================================
+
+# 0h59 · 1,9M views · canal oficial da Neuralink
+https://www.youtube.com/watch?v=FASMejN_5gs
+
+# 0h21 · 0,4M views · canal oficial da Neuralink
+https://www.youtube.com/watch?v=QJdgHXyJh7M
+
+# 0h44 · 0,2M views · Noland Arbaugh, o primeiro paciente
+https://www.youtube.com/watch?v=YrGCYiJBk-E
+
+
+# ====================================================================
+# BOSTON DYNAMICS — assunto NOVO. Ver a ressalva no fim do arquivo antes
+# de misturar com os de cima na mesma janela de postagem.
+# ====================================================================
+
+# Canal oficial — fonte primária, pouco disputada por outros cortadores.
+# Views baixas, mas é o padrão que funcionou com a Neuralink e é o corte
+# mais seguro contra desmonetização (PLAYBOOK §6).
+
+# 0h52 · 0,12M views · Why Humanoids Are the Future of Manufacturing
+https://www.youtube.com/watch?v=laexcnaTrDM
+
+# 0h42 · 0,14M views · The Humanoid Mission in Manufacturing
+https://www.youtube.com/watch?v=SRZ9E48B6aM
+
+# 0h32 · 0,15M views · Form & Function of Enterprise Humanoid Design
+https://www.youtube.com/watch?v=wL0-Pu_8F0U
+
+# Jornalismo de negócios — densidade alta, boa produção.
+
+# 0h21 · 0,83M views · CNBC — How Boston Dynamics Is Building Its Robot Empire
+https://www.youtube.com/watch?v=SZRAGpo3wy0
+
+# 0h46 · 0,79M views · CNBC Marathon — The Rise Of Robots
+https://www.youtube.com/watch?v=I1w6xzBN7mA
+
+# 0h31 · 0,05M views · Lex Clips — CEO da Boston Dynamics explica o Atlas
+https://www.youtube.com/watch?v=Jb0Z_Si3aqo
+
+
+# --------------------------------------------------------------------
+# ⚠️ RESSALVA DE ESTRATÉGIA (PLAYBOOK §7.1 e §17.4)
+#
+# Neuralink e Boston Dynamics são assuntos VIZINHOS, não o mesmo núcleo
+# semântico. A regra vigente desde 27/07 é núcleo único e estreito na
+# Fase 1, variando ângulo e formato — não o tema. Variar tema compete com
+# o loop de reinjeção algorítmica.
+#
+# Em conta nova o sistema aloca audiência pelo EMBEDDING do conteúdo, não
+# por seguidores (§22, N=50 papers) — então alternar entre neurotecnologia
+# e robótica atrasa o sistema a achar o público certo.
+#
+# Decisão a tomar: ou o núcleo é "neurotecnologia" (e Boston Dynamics fica
+# para depois), ou é "robótica e IA aplicada ao corpo humano" (e a
+# Neuralink entra como um caso dentro dele). O segundo acomoda os dois.
+#
+# --------------------------------------------------------------------
+# FORA POR DURAÇÃO — acima de ~90 min o Gemini cai para modo SÓ-ÁUDIO:
+# continua escolhendo pela fala, mas não vê imagem, então não detecta
+# câmera parada, gesto, reação nem enquadramento ruim.
+# Para usar mesmo assim: descomente e rode com --incluir-longos.
+#
+# 1h27 · 6,10M views · Veritasium — The Real Reason Robots Shouldn't Look
+#   Like Humans. Cabe no limite por 3 min, MAS é o mais disputado por
+#   outros cortadores, e o §6 alerta que corte de material já muito
+#   cortado é o que a plataforma detecta.
+# https://www.youtube.com/watch?v=eLVAMG_3fLg
+#
+# 1h36 · 1,1M views · JRE #2167 com Noland Arbaugh, o primeiro paciente
+# https://www.youtube.com/watch?v=Bfo2xIeaOAE
+#
+# 2h48 · 0,8M views · Neuralink Show and Tell, Fall 2022 (canal oficial)
+# https://www.youtube.com/watch?v=YreDYmXTYi4

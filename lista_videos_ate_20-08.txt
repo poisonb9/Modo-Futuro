@@ -1,0 +1,135 @@
+# FILA — montada em 30/07/2026 a partir do radar_limiar_humano (5 anos)
+# Rode no NOTEBOOK (IP residencial): python processar_lista.py
+#
+# A fila anterior (Neuralink + Boston Dynamics, 29/07) está em
+# `lista_videos_ate_29-07.txt`. Os 9 vídeos dela já foram todos
+# trabalhados — conferido no registro, não no log.
+#
+# COMO ESTA LISTA FOI FEITA
+# 154 vídeos novos do radar → 51 triados por legenda (Nemotron) → 45 com
+# veredito "cortar" → 13 escolhidos aqui. Os outros 103 NÃO foram triados:
+# bateram no bloqueio de IP da VPS. Para triá-los aqui no notebook, veja a
+# pasta `triagem_notebook/`.
+#
+# O critério NÃO foi a nota de cortabilidade sozinha. A triagem mede se o
+# vídeo TEM arco de 65s — não se ele é do seu núcleo semântico (robôs, IA
+# e alta tecnologia). Nota alta fora do núcleo ficou de fora, e o motivo
+# de cada exclusão está no fim: decisão visível, não esquecimento.
+#
+# Todos abaixo de 90 min, então o Gemini analisa COM IMAGEM.
+#
+# ⚠️ ESTOQUE — leia antes de rodar tudo de uma vez.
+# Você tem 138 clipes em A POSTAR/29-07 e posta 2-3 por dia. Os 13 abaixo
+# somam 132 arcos de 65s; a 8 cortes por vídeo, são ~100 clipes novos.
+# Mais de um mês de fila, e conteúdo de IA envelhece rápido. Por isso a
+# lista vem em duas levas: rode a LEVA 1 agora e a 2 quando a fila baixar.
+# Para rodar só a leva 1, comente as URLs da leva 2 com '#'.
+
+
+# ====================================================================
+# LEVA 1 — IA como tema central (o núcleo, e o que mais rendeu em 29-07)
+# ====================================================================
+
+# [95] 28 arcos · 81min · 60 Minutes — Artificial Intelligence in 2025
+# O maior rendimento medido da lista inteira.
+https://www.youtube.com/watch?v=KpOcUrPdx-4
+
+# [95] 12 arcos · 87min · The Diary Of A CEO — quais empregos sobram até 2030
+https://www.youtube.com/watch?v=UclrVWafRAI
+
+# [90] 11 arcos · 51min · CBS — entrevista completa do "Godfather of AI"
+https://www.youtube.com/watch?v=qyH3NxFz3Aw
+
+# [92] 14 arcos · 35min · Species — cenário realista de uma guerra civil de IA
+https://www.youtube.com/watch?v=gwfCWDO4LbM
+
+# [85]  7 arcos · 53min · Google DeepMind — Shane Legg sobre a chegada da AGI
+https://www.youtube.com/watch?v=l3u_FAv33G0
+
+# [85]  8 arcos · 65min · Cleo Abram — CEO do DeepMind, o problema mais difícil
+https://www.youtube.com/watch?v=C0gErQtnNFE
+
+
+# ====================================================================
+# LEVA 2 — Elon Musk (pedido seu) e a guerra dos chips por trás de tudo
+# ====================================================================
+
+# [90] 14 arcos · 85min · The Economist — entrevista completa do Elon Musk
+https://www.youtube.com/watch?v=XuoqKYxDHVc
+
+# [92] 10 arcos · 47min · WELT — Elon Musk sobre natalidade e o futuro
+https://www.youtube.com/watch?v=2WX_mgnAFA0
+
+# [85]  6 arcos · 21min · ColdFusion — o homem por trás do ChatGPT (Sam Altman)
+https://www.youtube.com/watch?v=GKaVb3jc2No
+
+# [88] 10 arcos · 56min · CNBC — ASML, TSMC e Intel dominam o mercado de chips
+https://www.youtube.com/watch?v=2kJDTzFtUr4
+
+# [90]  8 arcos · 28min · Financial Times — a corrida pela supremacia dos chips
+https://www.youtube.com/watch?v=_TOCRjF9WuE
+
+# [85]  7 arcos · 30min · Behind Asia — o pesadelo de US$ 40 bi da TSMC no Arizona
+https://www.youtube.com/watch?v=cD1jyk3LhA8
+
+# [85]  7 arcos · 85min · Além da Ciência — JÁ EM PORTUGUÊS, sem tradução
+https://www.youtube.com/watch?v=ZZLHX7HZaHs
+
+
+# --------------------------------------------------------------------
+# ⚠️ SOBRE CANAL GRANDE (PLAYBOOK §6)
+# Cinco dos treze acima são de canal grande (60 Minutes, CBS, CNBC, FT,
+# The Economist). O §6 alerta que material já muito cortado é o que a
+# plataforma detecta. Entraram porque são ENTREVISTA e DOCUMENTÁRIO longos,
+# não vídeo viral curto — a densidade de fala é o que dá o arco de 65s, e
+# nenhum outro candidato do núcleo tinha isso. Se algum for desmonetizado
+# ou tiver alcance travado, é o primeiro lugar onde olhar.
+
+
+# ====================================================================
+# FORA DA LISTA — nota alta, mas com motivo para não entrar
+# ====================================================================
+#
+# Fora do núcleo semântico (saúde, nutrição, construção civil):
+# [95] How Not to Age — NutritionFacts           https://youtu.be/AOvV9m7feKo
+# [90] Supplements and Safety — FRONTLINE        https://youtu.be/G8LG0OY3Izs
+# [88] The Best Exercise For Longevity           https://youtu.be/8ef7FhmMcLU
+# [85] Mental health and resilience — DW         https://youtu.be/YdMCL9_UTE4
+# [85] More life, decoding aging — DW            https://youtu.be/y-5VLHcTDSQ
+# [85] World's Most Complex Construction — B1M   https://youtu.be/-2CnCrz38F4
+#
+# Material JÁ recortado — risco do §6 (é o que a plataforma detecta):
+# [90] *EMOTIONAL* Elon Musk Motivational Video  https://youtu.be/TOMcCNNdSl0
+#
+# Falso positivo do radar: o "Raptor Engine" aqui é motor de picape Ford,
+# não o motor de foguete da SpaceX:
+# [85] This PERFORMANCE Raptor Engine FAILED     https://youtu.be/Dr1-JE4Uj8o
+#
+# Imagem estática/animação — o detector de congelamento tende a rejeitar,
+# como rejeitou Karpathy e 3Blue1Brown. Solte só se quiser testar a tese:
+# [95] World's Most Important Machine (ASML)     https://youtu.be/MiUHjLxm3V0
+#
+# Bons e dentro do núcleo, segurados só pelo estoque — a próxima leva:
+# [95] Nuclear Fusion Breakthrough — 60 Minutes  https://youtu.be/7ZejZxjvFng
+# [92] AI e a cadeia de semicondutores — Bloomberg  https://youtu.be/VdcD6qX8Xrc
+# [92] China Will Never Beat Taiwan — Maxinomics https://youtu.be/UWBrzzd1_yg
+# [92] Por que motores de foguete não derretem   https://youtu.be/he_BL6Q5u1Y
+# [90] Editing Your DNA, com Jennifer Doudna     https://youtu.be/0OXaanDHENI
+# [90] The Race to Build a Perfect Chip          https://youtu.be/VsUF_CBJq50
+# [90] Evolution of SpaceX Rockets               https://youtu.be/_L5dXIFKWqM
+# [90] Unlimited Energy — BobbyBroccoli          https://youtu.be/jn92eWhGG14
+# [90] Successor to CRISPR — SciShow             https://youtu.be/_UimlaolxiA
+# [88] Inside Micron Taiwan — TaiwanPlus         https://youtu.be/WKHKy89QaV0
+# [85] Chip War, full documentary — TaiwanPlus   https://youtu.be/8mvWbKEpO9Q
+# [85] TSMC: The Hidden Giant — FD Finance       https://youtu.be/IamGUBh2y6M
+# [85] Elon Musk (Full) — Bill Maher             https://youtu.be/oO8w6XcXJUs
+# [85] Perdi meu dedo, fiz um novo — Nerdforge   https://youtu.be/ZVqa7j6jG0Q
+# [85] A New Way to Achieve Nuclear Fusion       https://youtu.be/_bDXXWQxK38
+# [85] Inside SpaceX's Mission — ABC             https://youtu.be/qInkR8P7q3M
+# [85] The Final Barrier to Infinite Energy      https://youtu.be/nAJN1CrJsVE
+# [85] Gene editing: should you be worried?      https://youtu.be/F7DpdOHRDR4
+# [85] Starship Has NEVER Returned Home          https://youtu.be/OoU0Zrrp2qg
+# [95] Jobs by 2030 — Tom Bilyeu                 https://youtu.be/sl6bq1iC56Y
+# [78] How SpaceX Reinvented The Rocket          https://youtu.be/7vE95eBX6M0
+# [75] The Genetic Arms Race — The Why Files     https://youtu.be/OvcCK-F6aKY
+# [70] Sam Altman — Tucker Carlson               https://youtu.be/5KmpT-BoVf4

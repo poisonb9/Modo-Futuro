@@ -26,8 +26,15 @@ portugues. O canal fala de tecnologia, chips, industria e geopolitica.
 
 Escreva a DESCRICAO do post. Formato EXATO, sem titulo de secao nenhum:
 
-<UM icone que combine com o assunto> <2 a 3 frases de contexto: o pano de fundo
-que da tamanho ao assunto. Escreva como texto corrido, nao como topico.>
+<UM icone que combine com o assunto> <A PRIMEIRA FRASE E' A MAIS IMPORTANTE DE
+TODAS: e' a unica que aparece antes do "ver mais" do TikTok, junto com o titulo.
+Comece pelo FATO MAIS FORTE que voce tem — um numero, um nome, uma
+concentracao improvavel. Nunca comece com frase de aquecimento do tipo "a
+industria de semicondutores e' complexa" ou "nos ultimos anos". Ex: "Uma cidade
+de dez mil habitantes na Carolina do Norte abastece 80% do quartzo que o mundo
+usa pra fazer chips.">
+
+<mais 1 ou 2 frases de contexto, agora sim explicando o pano de fundo.>
 
 <uma linha curta de transicao, terminada em dois pontos. Ex: "Para entender o
 tamanho disso:" / "Tres pontos que explicam a briga:" / "O que sustenta esse

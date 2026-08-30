@@ -180,6 +180,105 @@ def trajetoria(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     return list(zip(tempos, _suavizar(xs, config.SUAVIZACAO)))
 
 
+def trajetoria_movimento(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
+    """Onde a imagem MUDA mais — a mao, a faca, o liquido caindo.
+
+    POR QUE EXISTE (30/08/2026, pedido do Bryan pro Cozinha Importada)
+
+    O rastreio de rosto nao serve em video de receita: ou nao ha' rosto no
+    quadro (bancada, panela, close do prato), ou o rosto esta' la' mas NAO e' o
+    assunto — o assunto e' a mao que despeja. Sem rosto, `trajetoria` devolve
+    lista vazia e o crop trava no CENTRO FIXO pelo clipe inteiro. Se a acao
+    acontece na lateral, o quadro simplesmente nao esta' la'.
+
+    Isso nao e' falta de dinamismo, e' enquadramento errado. O dinamismo vem
+    de brinde quando o quadro passa a acompanhar a acao.
+
+    COMO ESCOLHE
+
+    Nao usa o centroide do movimento: com acao espalhada, o centroide cai no
+    meio e o resultado vira o centro fixo de novo, so' que mais caro. Em vez
+    disso procura a JANELA de largura do crop final que soma mais movimento —
+    responde direto "onde o recorte deveria estar", nao "onde e' o meio".
+
+    Sem modelo nenhum: e' diferenca entre frames em escala de cinza.
+    """
+    try:
+        import cv2
+    except ImportError as e:
+        print(f"   [!] rastreio de movimento indisponivel ({e})")
+        return []
+
+    cap = cv2.VideoCapture(str(clipe))
+    if not cap.isOpened():
+        return []
+    fps = cap.get(cv2.CAP_PROP_FPS) or 30
+    salto = max(1, int(round(fps / config.AMOSTRA_FPS)))
+    alvo_l = max(1, int(altura * 9 / 16))
+    if alvo_l >= largura:
+        cap.release()
+        return []
+
+    tempos, xs, anterior = [], [], None
+    idx = 0
+    try:
+        while True:
+            ok, frame = cap.read()
+            if not ok:
+                break
+            if idx % salto == 0:
+                # Reduz antes de comparar: o ruido de sensor domina a diferenca
+                # em resolucao cheia, e o que interessa e' movimento de objeto.
+                peq = cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY),
+                                 (320, 180), interpolation=cv2.INTER_AREA)
+                if anterior is not None:
+                    dif = cv2.absdiff(peq, anterior)
+                    perfil = dif.sum(axis=0).astype("float64")
+                    # Suaviza o perfil pra um respingo isolado nao mandar no
+                    # enquadramento do clipe inteiro.
+                    k = 9
+                    nucleo = np.ones(k) / k
+                    perfil = np.convolve(perfil, nucleo, mode="same")
+                    janela = max(1, int(alvo_l / largura * len(perfil)))
+                    if janela < len(perfil):
+                        soma = np.convolve(perfil, np.ones(janela), mode="valid")
+                        melhor = int(np.argmax(soma))
+                        centro = (melhor + janela / 2) / len(perfil)
+                        # Movimento perto de zero = cena parada. Repetir o
+                        # ultimo ponto evita o quadro passear atras de ruido.
+                        if soma.max() > perfil.mean() * janela * 1.15:
+                            xs.append(min(1.0, max(0.0, centro)))
+                        elif xs:
+                            xs.append(xs[-1])
+                        else:
+                            xs.append(0.5)
+                        tempos.append(idx / fps)
+                anterior = peq
+            idx += 1
+    finally:
+        cap.release()
+
+    if len(xs) < 3:
+        return []
+    print(f"      enquadramento por MOVIMENTO: {len(xs)} amostras")
+    return list(zip(tempos, _suavizar(xs, config.SUAVIZACAO)))
+
+
+def caminho_para(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
+    """Rosto primeiro; movimento quando nao ha' rosto e o canal pediu.
+
+    O movimento e' FALLBACK, nao substituto: onde ha' rosto, rosto ganha. Num
+    corte de entrevista o movimento maior costuma ser a mao gesticulando, e
+    seguir a mao em vez da cabeca seria pior que o centro fixo.
+    """
+    caminho = trajetoria(clipe, largura, altura)
+    if caminho:
+        return caminho
+    if getattr(config, "RASTREIO_MOVIMENTO", False):
+        return trajetoria_movimento(clipe, largura, altura)
+    return []
+
+
 def filtro_vertical(largura: int, altura: int,
                     caminho: list[tuple[float, float]]) -> str:
     """Monta o filtro ffmpeg do crop 9:16 seguindo o rosto."""

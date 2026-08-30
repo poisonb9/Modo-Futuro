@@ -388,7 +388,7 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     cortada se viesse antes dele.
     """
     l, a = midia.dimensoes(bruto)
-    caminho = enquadrar.trajetoria(bruto, l, a)
+    caminho = enquadrar.caminho_para(bruto, l, a)
     lv, av = config.VERTICAL
     filtro = enquadrar.filtro_vertical(l, a, caminho) + _ken_burns(bruto, lv, av)
     if config.GRADE_CINEMATICO:

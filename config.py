@@ -279,6 +279,14 @@ HORIZONTAL = (1920, 1080)        # 16:9 tela cheia
 SUAVIZACAO = 0.88
 AMOSTRA_FPS = 4                  # quantos frames/s analisar p/ achar rosto
 
+# Rastreio por MOVIMENTO quando nao ha' rosto no quadro. Desligado aqui: em
+# corte de entrevista o movimento maior costuma ser a mao gesticulando, e
+# seguir a mao em vez da cabeca seria pior que o centro fixo.
+#
+# Ligado no Cozinha Importada, onde nao ha' rosto pra seguir e o assunto E' a
+# mao que despeja. Ver engine/enquadrar.trajetoria_movimento.
+RASTREIO_MOVIMENTO = False
+
 # Trocar palavra sensivel por grafia adaptada na legenda (morte -> m0rte).
 # DESLIGADO em 25/08/2026, no mesmo dia em que foi escrito, depois que o Bryan
 # perguntou "tem certeza que isso vai confundir o algoritmo?" — e nao vai:

@@ -44,7 +44,7 @@ from pathlib import Path
 
 import requests
 
-from engine import buffer_cota as cota
+from engine import buffer_cota as cota, dedup
 from engine import adiados, rejeitados
 
 API_BUFFER = "https://api.buffer.com/"
@@ -500,7 +500,12 @@ def main() -> None:
 
     def cabe(v):
         k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
-        if k in ja_na_fila:
+        # Comparacao por PREFIXO, nao por igualdade: 88 dos 101 posts reais
+        # deste canal tem titulo e descricao na mesma linha, e a chave deles
+        # vira titulo+descricao — nunca casaria com a de um clipe novo, que
+        # e' so' o titulo. Foi assim que o #185 reagendou dois publicados.
+        # Ver engine/dedup.py.
+        if dedup.ja_visto(k, ja_na_fila):
             return False
         # Apagado da fila pelo Bryan = decisão editorial, nunca reagendar.
         # Apagar post agendado não deixa rastro no Buffer, então sem esta lista
@@ -508,7 +513,8 @@ def main() -> None:
         # 26/08/2026. Ver engine/rejeitados.py.
         if k in rejeitados_:
             return False
-        return v.get("republicacao") or k not in ja_publicado
+        return (v.get("republicacao")
+                or not dedup.ja_visto(k, ja_publicado))
 
     fila = [(k, v) for k, v in ordenar(todos) if cabe(v)]
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")

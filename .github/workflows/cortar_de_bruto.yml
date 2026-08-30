@@ -38,7 +38,7 @@ on:
         required: false
         default: "false"
       canal:
-        description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod. Decide o token do Buffer E o nome que a guarda confere antes de publicar."
+        description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod | atefalhar. Decide o token do Buffer E o nome que a guarda confere antes de publicar. O valor tem que bater com o NOME do canal no Buffer."
         required: false
         default: "modofuturo"
       voice_over:
@@ -203,7 +203,9 @@ jobs:
             && secrets.BUFFER_TOKEN_COZINHA
             || (inputs.canal == 'semanestesia.pod'
                 && secrets.BUFFER_TOKEN_SEMANESTESIA
-                || secrets.BUFFER_TOKEN) }}
+                || (inputs.canal == 'atefalhar'
+                    && secrets.BUFFER_TOKEN_ATEFALHAR
+                    || secrets.BUFFER_TOKEN)) }}
           # E a guarda confere o DESTINO REAL: o agendar_buffer aborta se o
           # token abrir um canal diferente deste. Pega secret trocado, secret
           # vazio e canal reconectado noutra conta — nao so' o caso de hoje.

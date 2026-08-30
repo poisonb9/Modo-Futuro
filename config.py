@@ -104,6 +104,37 @@ VOZ_CLONADA_AMOSTRA = RAIZ / "vozes" / "bryan_amostra.wav"
 # claramente fraco sem esvaziar o lote. Ajustar quando houver dado.
 GANCHO_MIN = 6.0
 
+# ---------------------------------------------------------------- voice-over
+# VOICE-OVER: o audio ORIGINAL continua audivel por baixo, abaixado, e a voz
+# dublada entra por cima. E' como documentario e' dublado ha' decadas.
+#
+# POR QUE EXISTE (decidido em 30/08/2026, pro canal Sem Anestesia)
+#
+# O modo padrao TROCA a trilha: o original some. Pra narracao de contexto isso
+# e' certo — quem fala e' o canal. Mas em corte de podcast a voz E' parte do
+# argumento: a intensidade do Goggins nao esta' no que ele diz, esta' em COMO
+# ele diz. Trocar por outra voz apaga metade do conteudo.
+#
+# E ha' um risco pior que perder intensidade: CONFUSAO DE AUTORIA. Se a voz do
+# Bryan fala as palavras do Huberman em primeira pessoa, o espectador entende
+# que o Bryan esta' afirmando aquilo. Em saude mental e neurociencia, e'
+# exatamente onde nao se quer ambiguidade.
+#
+# A alternativa obvia — legenda — tem custo MEDIDO: a retencao do @modofuturo
+# ficou em 14% e a audiencia saiu em 0:01, e o diagnostico foi "o corte abre
+# com cartao de texto sobre imagem parada; ler leva tempo". Legendar 60s de
+# ingles e' pedir leitura o tempo todo.
+#
+# Voice-over resolve os dois: ouve-se a voz real (autoridade preservada,
+# autoria obvia) e nao se le' (retencao preservada).
+VOICE_OVER = False               # ligado por canal; padrao continua trocando a trilha
+
+# Volume do audio ORIGINAL sob a narracao. 0.18 e' ~-15 dB: audivel o
+# suficiente pra reconhecer a voz e a emocao, baixo o suficiente pra nao
+# disputar com a dublagem. Abaixo de 0.10 o original vira ruido e o efeito de
+# autoridade se perde — que e' o unico motivo do modo existir.
+VOICE_OVER_VOL_ORIGINAL = 0.18
+
 # ---------------------------------------------------------------- descoberta (YouTube Data API v3)
 # Objetivo: achar vídeos com potencial de hype/monetização, sem nicho fixo.
 YOUTUBE_URL = "https://www.googleapis.com/youtube/v3"

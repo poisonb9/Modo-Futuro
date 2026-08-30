@@ -235,6 +235,23 @@ def imagem_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> Pat
     return caminho
 
 
+def _voice_over_ligado() -> bool:
+    return bool(getattr(config, "VOICE_OVER", False))
+
+
+def _cadeia_audio_vo() -> str:
+    """Filtro que mistura o ORIGINAL abaixado com a dublagem por cima.
+
+    O `loudnorm` entra AQUI, no fim da cadeia, e nao como `-af`: `-af` e
+    `-filter_complex` brigam pela mesma saida de audio, e o ffmpeg recusa.
+    Normalizar depois da mistura tambem e' o certo — normalizar as duas
+    trilhas antes faria a soma estourar.
+    """
+    vol = getattr(config, "VOICE_OVER_VOL_ORIGINAL", 0.18)
+    return (f"[0:a]volume={vol}[orig];"
+            f"[orig][1:a]amix=inputs=2:normalize=0,{AUDIO_LOUDNORM}[a]")
+
+
 def _render(bruto: Path, filtro_video: str, ass: Path | None,
             destino: Path, audio_dublado: Path | None = None,
             img_titulo: Path | None = None, topo_titulo: int = 0) -> Path:
@@ -259,14 +276,17 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
             filtro = (f"[0:v]{cadeia}[base];"
                       f"[base][2:v]overlay=0:{topo_titulo}:"
                       f"enable='lt(t,{TITULO_SEGUNDOS})'[v]")
+            vo = _voice_over_ligado()
+            if vo:
+                filtro += ";" + _cadeia_audio_vo()
             midia.roda([
                 "ffmpeg", "-y",
                 "-i", str(bruto), "-i", str(audio_dublado),
                 "-loop", "1", "-i", str(img_titulo),
                 "-filter_complex", filtro,
-                "-map", "[v]", "-map", "1:a:0",
+                "-map", "[v]", "-map", ("[a]" if vo else "1:a:0"),
                 *_encoder(),
-                "-af", AUDIO_LOUDNORM,
+                *([] if vo else ["-af", AUDIO_LOUDNORM]),
                 "-c:a", "aac", "-b:a", "192k", "-shortest",
                 "-pix_fmt", "yuv420p", "-movflags", "+faststart",
                 str(destino),
@@ -290,6 +310,20 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
         return destino
 
     if audio_dublado is not None:
+        if _voice_over_ligado():
+            # VOICE-OVER: o original fica audivel por baixo. Aqui o video sai
+            # por `-filter_complex` e nao por `-vf` — os dois nao convivem
+            # quando o audio tambem vem de filter_complex.
+            filtro = f"[0:v]{cadeia}[v];" + _cadeia_audio_vo()
+            midia.roda([
+                "ffmpeg", "-y", "-i", str(bruto), "-i", str(audio_dublado),
+                "-filter_complex", filtro, *_encoder(),
+                "-map", "[v]", "-map", "[a]",
+                "-c:a", "aac", "-b:a", "192k", "-shortest",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+                str(destino),
+            ])
+            return destino
         # troca a trilha original pela dublada — vídeo vem do bruto (input 0),
         # áudio vem do arquivo dublado (input 1)
         midia.roda([

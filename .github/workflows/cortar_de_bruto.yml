@@ -37,6 +37,10 @@ on:
         description: "Só com dublar=true: dubla o que a pessoa REALMENTE está falando (tradução literal), em vez do padrão de narração de contexto do canal. Use pra entrevistas onde a fala em si é o valor editorial (declarações, posições) — é exceção pontual, não o padrão."
         required: false
         default: "false"
+      voice_over:
+        description: "Mantem o audio ORIGINAL audivel por baixo da dublagem (documentario). Para o Sem Anestesia, onde a voz da pessoa E' parte do argumento. EXIGE fala_literal=true — com narracao de contexto as duas faixas se contradizem, e o motor recusa."
+        required: false
+        default: "false"
       recorte:
         description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini"
         required: false
@@ -136,6 +140,7 @@ jobs:
           GROQ_API_KEY_6: ${{ secrets.GROQ6 }}
           GROQ_API_KEY_7: ${{ secrets.GROQ7 }}
           GROQ_API_KEY_8: ${{ secrets.GROQ8 }}
+          VOICE_OVER: ${{ inputs.voice_over }}
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"

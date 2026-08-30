@@ -1,4 +1,5 @@
 """Configuração central do motor. Ajuste aqui, não espalhe constantes pelo código."""
+import os
 from pathlib import Path
 
 RAIZ = Path(__file__).parent
@@ -127,7 +128,13 @@ GANCHO_MIN = 6.0
 #
 # Voice-over resolve os dois: ouve-se a voz real (autoridade preservada,
 # autoria obvia) e nao se le' (retencao preservada).
-VOICE_OVER = False               # ligado por canal; padrao continua trocando a trilha
+# Ligado POR CANAL. O padrao continua trocando a trilha, entao o @modofuturo e
+# o Cozinha nao mudam de comportamento.
+#
+# Le' da variavel de ambiente porque o mesmo repositorio serve os tres canais e
+# o disparo e' por workflow: o canal e' escolhido na hora de rodar, nao no
+# arquivo. Editar a constante ligaria voice-over pros tres.
+VOICE_OVER = os.environ.get("VOICE_OVER", "").strip().lower() in ("1", "true", "sim")
 
 # Volume do audio ORIGINAL sob a narracao. 0.18 e' ~-15 dB: audivel o
 # suficiente pra reconhecer a voz e a emocao, baixo o suficiente pra nao

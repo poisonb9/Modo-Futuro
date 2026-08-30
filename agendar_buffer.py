@@ -511,7 +511,12 @@ def main() -> None:
         # Apagar post agendado não deixa rastro no Buffer, então sem esta lista
         # o clipe volta a parecer disponível — empurrei o mesmo três vezes em
         # 26/08/2026. Ver engine/rejeitados.py.
-        if k in rejeitados_:
+        # Por PREFIXO, pelo mesmo motivo da dedup: a chave guardada e' o
+        # titulo curto, e o texto publicado traz titulo+descricao na mesma
+        # linha. Medido contra os 101 posts reais — igualdade pega 9, prefixo
+        # pega 11, e os +2 sao rejeicoes de verdade ("666 MILHOES" e "chips
+        # 3D"). Os outros 90 nao casam: zero falso positivo.
+        if dedup.ja_visto(k, rejeitados_):
             return False
         return (v.get("republicacao")
                 or not dedup.ja_visto(k, ja_publicado))

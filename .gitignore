@@ -15,6 +15,11 @@ estado/*
 # a troca de máquina (já aconteceu uma vez com este projeto), então vai pro
 # git em vez de ficar só local como o resto de estado/
 !estado/videos_trabalhados.json
+# excecao 2: decisoes editoriais do Bryan ("nao quero esse video"). Sem isto
+# o runner do Actions nasce com a lista VAZIA e reagenda o que ele apagou —
+# foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,
+# so' titulos e motivos.
+!estado/rejeitados.json
 teste/*.mp4
 teste/*.mp3
 teste/*.log

@@ -5,6 +5,11 @@ falando de lado. Roda em CPU numa boa (MediaPipe é leve).
 """
 import config
 
+try:
+    import numpy as np
+except ImportError:      # so' o caminho com deteccao usa
+    np = None
+
 MAX_DEGRAUS = 60   # teto de mudanças de enquadramento por clipe
 
 
@@ -78,29 +83,97 @@ def trajetoria(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     salto = max(1, int(round(fps / config.AMOSTRA_FPS)))
 
     tempos, xs = [], []
-    idx = 0
+    idx, amostras, achou_1x, achou_2x = 0, 0, 0, 0
+    ultimo_x = None
     try:
         while True:
             ok, frame = cap.read()
             if not ok:
                 break
             if idx % salto == 0:
+                amostras += 1
+                largura_frame = frame.shape[1] or 1
                 rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                imagem = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
-                # detect_for_video exige timestamp crescente em ms
-                res = det.detect_for_video(imagem, int(idx / fps * 1000))
+                ts = int(idx / fps * 1000)
+                res = det.detect_for_video(
+                    mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb), ts)
+                deslocamento, escala = 0, 1.0
                 if res.detections:
-                    # com várias faces, segue a maior (quem está em primeiro plano)
-                    d = max(res.detections, key=lambda x: x.bounding_box.width)
-                    bb = d.bounding_box
-                    largura_frame = frame.shape[1] or 1
-                    centro = (bb.origin_x + bb.width / 2) / largura_frame
-                    xs.append(min(1.0, max(0.0, centro)))
+                    achou_1x += 1
+                else:
+                    # SEGUNDA PASSADA EM TILES. O modelo e' o
+                    # `blaze_face_short_range`: feito pra rosto PROXIMO. Em
+                    # plano aberto de entrevista o rosto ocupa poucos pixels e
+                    # ele nao ve' — e sem deteccao o crop cai pro centro fixo e
+                    # corta a pessoa fora do quadro. Foi o que o Bryan viu em
+                    # 30/08: um clipe abrindo numa sala vazia com o convidado
+                    # cortado na borda.
+                    #
+                    # ⚠️ AMPLIAR O FRAME NAO RESOLVE. Testei 2x, 3x e 4x e a
+                    # deteccao nao melhorou em nada: o BlazeFace redimensiona a
+                    # entrada pra um tamanho fixo, entao escalar o frame
+                    # inteiro e' inocuo. O que muda a proporcao do rosto e'
+                    # RECORTAR.
+                    #
+                    # MEDIDO com um rosto real colado em altura conhecida:
+                    #     frame inteiro -> so' detecta a partir de 300 px
+                    #     3 tiles       -> detecta ja' com 140 px
+                    # Mais que o dobro de sensibilidade, pelo custo de algumas
+                    # deteccoes extras SO' quando a primeira passada falhou.
+                    lt = int(largura_frame / 1.8)          # tile largo, com folga
+                    for i in range(5):                     # 5 janelas sobrepostas
+                        x0 = int(i * (largura_frame - lt) / 4)
+                        tile = np.ascontiguousarray(rgb[:, x0:x0 + lt])
+                        r2 = det.detect_for_video(
+                            mp.Image(image_format=mp.ImageFormat.SRGB, data=tile),
+                            ts + 1 + i)
+                        if r2.detections:
+                            res, deslocamento = r2, x0
+                            achou_2x += 1
+                            break
+
+                if res.detections:
+                    # CONTINUIDADE, nao "a maior". Seguir a maior face troca de
+                    # pessoa toda vez que alguem se inclina pra frente — o
+                    # quadro pula entre entrevistador e convidado sem que
+                    # ninguem tenha comecado a falar.
+                    #
+                    # Aqui a face escolhida e' a mais PROXIMA da anterior, com
+                    # o tamanho entrando so' como desempate. Trocar de pessoa
+                    # passa a exigir que a nova esteja bem maior, nao so' um
+                    # pouco.
+                    def _centro(d):
+                        # `deslocamento` devolve a coordenada do TILE pro frame
+                        # inteiro. Sem isso um rosto achado no tile da direita
+                        # seria lido como se estivesse na esquerda.
+                        bb = d.bounding_box
+                        x = bb.origin_x + bb.width / 2 + deslocamento
+                        return x / largura_frame
+
+                    if ultimo_x is None:
+                        d = max(res.detections, key=lambda x: x.bounding_box.width)
+                    else:
+                        maior = max(x.bounding_box.width for x in res.detections)
+                        d = min(res.detections,
+                                key=lambda x: (abs(_centro(x) - ultimo_x)
+                                               - 0.35 * x.bounding_box.width / maior))
+                    centro = min(1.0, max(0.0, _centro(d)))
+                    ultimo_x = centro
+                    xs.append(centro)
                     tempos.append(idx / fps)
             idx += 1
     finally:
         cap.release()
         det.close()
+
+    cobertura = (achou_1x + achou_2x) / amostras if amostras else 0.0
+    print(f"      enquadramento: rosto em {cobertura*100:.0f}% das amostras "
+          f"({achou_1x} direto, {achou_2x} so' na 2a passada ampliada)")
+    if cobertura < 0.30:
+        # Nao e' erro: pode ser B-roll legitimo. Mas e' o caso em que o
+        # enquadramento vale pouco, e sem dizer isso o defeito so' aparece
+        # depois de publicado.
+        print("      [!] pouco rosto no clipe — o crop vai ficar quase fixo")
 
     if len(xs) < 3:
         return []

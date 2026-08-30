@@ -114,11 +114,38 @@ CANAIS_MONITORADOS: list[str] = [
 ]
 
 # Termos pra busca aberta (descoberta de hype fora dos canais fixos).
+#
+# ESCOLHIDOS PELO QUE MEDIDAMENTE FUNCIONOU (30/08/2026). Os tres melhores
+# clipes da historia do canal vieram todos da mesma familia — fabrica, maquina
+# e contaminacao, contadas pelo lado FISICO e EXTREMO:
+#
+#     1826  As regras extremas para entrar na fabrica mais limpa
+#     1008  Como 1 poeira pode destruir 1 milhao de dolares
+#      726  A maquina de 400 milhoes de dolares que cria os chips
+#
+# E o que rendeu pouco foi analise e geopolitica, sempre:
+#
+#      300  Analise do TSMC (Lex Fridman)      — mediana da fonte
+#        0  Semiconductor is the next OIL      — mediana da fonte
+#
+# Entao os termos miram processo, maquina e numero absurdo. Nada de "chip war",
+# "tensions" ou "market" — e' exatamente o que nao performou.
 TERMOS_HYPE: list[str] = [
-    # "podcast viral",
+    "how computer chips are made",
+    "inside semiconductor fab",
+    "semiconductor cleanroom",
+    "EUV lithography machine",
+    "ASML machine",
+    "silicon wafer manufacturing",
+    "chip factory tour",
+    "nanometer chip technology",
 ]
 
-JANELA_DIAS = 7                  # só considera vídeos publicados nos últimos N dias
+# 7 -> 30 dias. A janela curta existe pra pegar HYPE, e faz sentido em
+# noticia. Mas os campeoes deste canal sao documentario tecnico, que nao
+# envelhece: o video da ASML que gerou o 1826 nao tinha nada de recente.
+# Com 7 dias a busca voltava quase vazia pra estes termos.
+JANELA_DIAS = 30                 # só considera vídeos publicados nos últimos N dias
 DESCOBERTA_DUR_MIN_S = 180       # ignora vídeo curto demais pra valer cortar (3 min)
 
 # peso de cada critério na nota final (soma não precisa ser 1, é só proporção)
@@ -131,9 +158,52 @@ FILA_QTD = 20                    # quantos vídeos a fila devolve por rodada
 # ---------------------------------------------------------------- descoberta: podcasts
 # Seção separada: episódios de podcast recentes, de canais que você AINDA não
 # cortou, numa faixa de views que costuma indicar "bombando mas ainda dá tempo".
+# Termos do 3o canal (Sem Anestesia, criado em 30/08/2026): cortes de fala
+# forte sobre comportamento, mente e vida.
+#
+# ⚠️ SO' FONTE ESTRANGEIRA — EUA e Europa. Ordem do Bryan em 30/08/2026.
+# O valor do canal e' trazer o que ninguem traduziu, a mesma tese do Cozinha
+# Importada (onde Ana Maria Braga saiu da lista por ja' estar em portugues,
+# sem nada a traduzir). Podcast brasileiro nao tem o que dublar, e cortar o
+# que o proprio dono ja' corta em portugues e' competir sem vantagem.
+#
+# A primeira rodada, em portugues, foi descartada inteira por isso.
 PODCAST_TERMOS_HYPE: list[str] = [
-    # "podcast completo", "podcast entrevista"
+    "hard truths about life podcast",
+    "psychologist explains podcast interview",
+    "life advice podcast episode",
+    "mental health podcast full episode",
+    "neuroscientist podcast interview",
+    "discipline and mindset podcast",
 ]
+
+# Buscar DENTRO destes e' mais confiavel que busca aberta: garante o idioma e
+# garante que e' episodio, nao recorte de terceiro.
+#
+# ⚠️ The Diary Of A CEO domina o nicho e por isso mesmo e' o canal MAIS
+# cortado do mundo — dezenas de canais brasileiros vivem de cortar esses
+# episodios. Huberman e Rich Roll sao menos saturados em portugues.
+PODCAST_CANAIS: list[str] = [
+    "@TheDiaryOfACEO",       # Steven Bartlett (Reino Unido)
+    "@hubermanlab",          # Andrew Huberman (EUA) — neurociencia aplicada
+    "@ChrisWillx",           # Modern Wisdom (Reino Unido)
+    "@MelRobbins",           # EUA
+    "@richroll",             # EUA
+    "@TheSchoolOfLifeTV",    # Reino Unido
+    "@lexfridman",           # EUA
+]
+
+# Canal de CORTES esta' fora, sempre. A primeira rodada trouxe "Cortes de
+# Mentalidade" e "Motivadores do Impacto" bem colocados — os dois cortam
+# episodio dos outros. Cortar corte alheio e' caminho curto pro strike e pro
+# conteudo repetido; o valor do canal e' ser a primeira mao.
+PODCAST_EXCLUIR_CANAL = ("cortes", "clips", "shorts", "highlights",
+                         "melhores momentos", "best of", "compilation")
+
+# ⚠️ Episodio de podcast passa de 90 min e o main.py cai pra modo SO'-AUDIO
+# (o Gemini recusa video com muitos frames). Funciona e sai mais barato, mas
+# ele escolhe os momentos sem ver a imagem. Pra podcast isso pesa pouco — o
+# valor esta' na fala — mas o comportamento muda e e' bom saber.
 JANELA_HORAS_PODCAST = 48        # só vídeos publicados nas últimas N horas
 VIEWS_MIN_PODCAST = 100_000
 VIEWS_MAX_PODCAST = 500_000

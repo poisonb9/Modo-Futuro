@@ -37,6 +37,10 @@ on:
         description: "Só com dublar=true: dubla o que a pessoa REALMENTE está falando (tradução literal), em vez do padrão de narração de contexto do canal. Use pra entrevistas onde a fala em si é o valor editorial (declarações, posições) — é exceção pontual, não o padrão."
         required: false
         default: "false"
+      canal:
+        description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod. Decide o token do Buffer E o nome que a guarda confere antes de publicar."
+        required: false
+        default: "modofuturo"
       voice_over:
         description: "Mantem o audio ORIGINAL audivel por baixo da dublagem (documentario). Para o Sem Anestesia, onde a voz da pessoa E' parte do argumento. EXIGE fala_literal=true — com narracao de contexto as duas faixas se contradizem, e o motor recusa."
         required: false
@@ -187,7 +191,18 @@ jobs:
       - name: Enfileirar no Buffer
         continue-on-error: true
         env:
-          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          # Token POR CANAL. Sem isto o corte de qualquer canal era enfileirado
+          # no @modofuturo — em 30/08/2026 um podcast do Sem Anestesia quase
+          # foi parar na fila do canal de chips.
+          BUFFER_TOKEN: ${{ inputs.canal == 'cozinha.importada'
+            && secrets.BUFFER_TOKEN_COZINHA
+            || (inputs.canal == 'semanestesia.pod'
+                && secrets.BUFFER_TOKEN_SEMANESTESIA
+                || secrets.BUFFER_TOKEN) }}
+          # E a guarda confere o DESTINO REAL: o agendar_buffer aborta se o
+          # token abrir um canal diferente deste. Pega secret trocado, secret
+          # vazio e canal reconectado noutra conta — nao so' o caso de hoje.
+          CANAL_ESPERADO: ${{ inputs.canal }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -X utf8 agendar_buffer.py
 

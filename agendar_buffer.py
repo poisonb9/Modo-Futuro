@@ -176,6 +176,41 @@ def contexto_buffer(token: str, fresco: bool = False) -> tuple[str, str, list[di
     if not tiktok:
         sys.exit("Nenhum canal TikTok conectado nesta conta do Buffer.")
 
+    # GUARDA DE CANAL. Confere que o token abriu a conta que se esperava.
+    #
+    # Em 30/08/2026 o workflow `cortar_de_bruto.yml` cortou um PODCAST pro Sem
+    # Anestesia e, no fim, chamou este script com o `secrets.BUFFER_TOKEN` —
+    # que e' o do @modofuturo. Os clipes de neurociencia iriam pra fila do
+    # canal de chips. So' nao foram porque eu enchi a fila ate' o teto do
+    # plano na mao, minutos antes.
+    #
+    # As guardas locais nao pegariam: `estado/buffer_cota.json` e
+    # `estado/rejeitados.json` estao no .gitignore, entao o runner nasce com
+    # os dois vazios.
+    #
+    # Por que comparar o NOME do canal e nao o secret: o defeito nao e' "o
+    # secret errado foi passado", e' "o token abriu um canal que nao e' o
+    # deste corte". Comparar o destino real pega qualquer origem do erro —
+    # secret trocado, secret renomeado, canal reconectado noutra conta.
+    #
+    # FALHA FECHADA de proposito: sem CANAL_ESPERADO nada muda (os disparos
+    # antigos seguem valendo), mas COM ele um destino errado aborta antes de
+    # publicar. Publicar no canal errado nao tem desfazer bonito: o post sai,
+    # o alcance conta, e apagar deixa o video em 0 pra sempre.
+    esperado = (os.environ.get("CANAL_ESPERADO") or "").strip().lower()
+    if esperado:
+        nomes = [(c.get("name") or "").strip().lower() for c in tiktok]
+        if esperado not in nomes:
+            sys.exit(
+                f"CANAL ERRADO — abortando antes de publicar.\n"
+                f"  esperado : {esperado}\n"
+                f"  conectado: {', '.join(nomes) or '(nenhum)'}\n"
+                f"  O BUFFER_TOKEN desta execucao abriu outra conta. Corrija o\n"
+                f"  secret do canal antes de rodar de novo.")
+        tiktok = [c for c in tiktok
+                  if (c.get("name") or "").strip().lower() == esperado]
+        print(f"canal confirmado: {tiktok[0].get('name')}")
+
     # Cache primeiro: a fila muda no máximo 4x/dia (é a cadência de postagem),
     # então reler a cada poucos minutos era desperdício puro.
     guardado = None if fresco else cota.cache_valido()

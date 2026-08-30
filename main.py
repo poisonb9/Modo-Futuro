@@ -61,6 +61,28 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
               estilo_legenda: int = 1, manter_temp: bool = False,
               fala_literal: bool = False) -> Path:
     t0 = time.time()
+
+    # VOICE-OVER EXIGE FALA LITERAL. As duas coisas so' funcionam juntas.
+    #
+    # No voice-over o audio original continua audivel por baixo. Se a dublagem
+    # por cima for a NARRACAO DE CONTEXTO (o padrao do canal), as duas faixas
+    # dizem coisas diferentes ao mesmo tempo — o convidado conta a historia
+    # dele enquanto o narrador explica outra coisa. Vira ruido.
+    #
+    # E' o mesmo defeito que faz o voice-over NAO servir pro Cozinha: la' a
+    # traducao muda os numeros de proposito ("350 degrees" -> "180°C"), entao
+    # sobrepor faria o espectador ouvir as duas medidas juntas.
+    #
+    # Guarda em vez de nota no README porque acoplamento que so' existe na
+    # documentacao volta a ser quebrado na proxima pressa.
+    if getattr(config, "VOICE_OVER", False) and dublar and not fala_literal:
+        sys.exit(
+            "VOICE_OVER esta' ligado mas fala_literal esta' desligado.\n"
+            "  No voice-over o audio original fica audivel por baixo, entao a\n"
+            "  dublagem TEM que dizer a mesma coisa que a pessoa esta' falando.\n"
+            "  Com narracao de contexto, as duas faixas se contradizem.\n"
+            "  Rode com --fala-literal, ou desligue config.VOICE_OVER.")
+
     config.TRABALHO.mkdir(parents=True, exist_ok=True)
     nome_fonte = fonte.name
 

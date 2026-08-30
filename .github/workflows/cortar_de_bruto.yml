@@ -45,6 +45,14 @@ on:
         description: "Mantem o audio ORIGINAL audivel por baixo da dublagem (documentario). Para o Sem Anestesia, onde a voz da pessoa E' parte do argumento. EXIGE fala_literal=true — com narracao de contexto as duas faixas se contradizem, e o motor recusa."
         required: false
         default: "false"
+      voz_canal:
+        description: "Voz da dublagem: (vazio) = voz clonada do Bryan | feminina | thalita | nome completo do edge-tts. EXIGE voz_clonada=false — o motor recusa a combinacao, porque a clonada venceria em silencio."
+        required: false
+        default: ""
+      voz_clonada:
+        description: "Voz clonada do Bryan (Chatterbox). Desligue para usar a voz de voz_canal."
+        required: false
+        default: "true"
       recorte:
         description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini"
         required: false
@@ -150,6 +158,8 @@ jobs:
           GROQ_API_KEY_7: ${{ secrets.GROQ7 }}
           GROQ_API_KEY_8: ${{ secrets.GROQ8 }}
           VOICE_OVER: ${{ inputs.voice_over }}
+          VOZ_CANAL: ${{ inputs.voz_canal }}
+          VOZ_CLONADA: ${{ inputs.voz_clonada }}
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"

@@ -85,10 +85,16 @@ CONGELAMENTO_MAX_S = 4.5         # bloco contínuo travado acima disso descarta 
 ESTABILIZAR = True
 GRADE_CINEMATICO = True
 
+from engine import voz  # noqa: E402  (o bloco de voz precisa dele)
+
 # ------------------------------------------------- voz clonada (04/08/2026)
 # Chatterbox Multilingual, self-hosted, MIT, grátis — clona a voz do Bryan
 # a partir de uma amostra. Só entra em ação com --dublar. Ver engine/voz_clonada.py.
-VOZ_CLONADA_ATIVA = True
+# Ligada por padrao — era um `True` fixo ate' 30/08/2026. Agora le o ambiente
+# porque o canal de MAQUIAGEM precisa de voz feminina, e a clonada vence sobre
+# qualquer outra escolha (o main.py so' cai no edge-tts quando esta e' falsa).
+# Sem VOZ_CLONADA no ambiente nada muda. Ver engine/voz.py.
+VOZ_CLONADA_ATIVA = voz.clonada_ativa()
 VOZ_CLONADA_AMOSTRA = RAIZ / "vozes" / "bryan_amostra.wav"
 
 # Piso de gancho (0-10). O Gemini já devolve `forca_gancho` por clipe, mas
@@ -310,3 +316,9 @@ SUAVIZAR_TEXTO = False
 # ATENCAO: os fatos vem do conhecimento do MODELO, nao da fala do video.
 # O prompt proibe inventar numero e data, mas vale conferir os primeiros.
 LEGENDA_PREMIUM = True
+
+
+# A combinacao contraditoria (VOZ_CANAL pedida + clonagem ligada) morre AQUI,
+# no import, antes de baixar bruto ou chamar Gemini. Perder 10 segundos e'
+# melhor que descobrir a voz errada num video ja' publicado.
+voz.conferir()

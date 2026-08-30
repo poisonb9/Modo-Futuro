@@ -11,9 +11,12 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from . import midia
+from . import midia, voz
 
-VOZ_PADRAO = "pt-BR-AntonioNeural"
+# Lida do ambiente (VOZ_CANAL), com o masculino de sempre como padrao. Era
+# uma constante fixa ate' 30/08/2026 — e' ela que o gerar_trilha usa quando
+# ninguem passa `voz`, que e' o caso do main.py. Ver voz.py.
+VOZ_PADRAO = voz.escolhida()
 _ATEMPO_MIN, _ATEMPO_MAX = 0.7, 1.6   # fora disso a voz fica robótica/irreconhecível
 
 

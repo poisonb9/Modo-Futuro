@@ -511,23 +511,43 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
     que prevê sustentação de atenção, e watch time é o sinal dominante da
     promoção (PLAYBOOK §22, N=50 papers).
     """
+    # ⚠️ TODO descarte tem de DIZER o motivo.
+    #
+    # Ate' 31/08/2026 so' o gancho fraco era registrado; os outros tres
+    # caminhos faziam `continue` calado. No run #194 o Gemini respondeu, o
+    # validador recusou TUDO, e o log so' disse "nenhum momento aprovado na
+    # validacao" — sem uma linha sobre o porque. Nao havia como saber se o
+    # problema era duracao, sobreposicao ou campo faltando.
+    #
+    # Recusa silenciosa e' o defeito que mais custou tempo neste projeto: ela
+    # nao levanta excecao, nao reprova teste, e some no meio de um log de mil
+    # linhas. O custo de imprimir uma linha por descarte e' zero.
     bons, ocupados = [], []
     fracos = []
+    recusados = []      # (motivo, titulo, detalhe)
     for c in sorted(clipes, key=lambda x: -_num(x, "nota")):
+        titulo = str(c.get("titulo") or c.get("gancho") or "?")[:44]
         gancho = _num(c, "forca_gancho", 10.0)   # ausente = não penaliza
         if gancho < config.GANCHO_MIN:
-            fracos.append((c.get("titulo") or c.get("gancho") or "?", gancho))
+            fracos.append((titulo, gancho))
             continue
         try:
             ini = max(0.0, float(c["inicio_s"]) - config.MARGEM)
             fim = min(dur_total, float(c["fim_s"]) + config.MARGEM)
-        except (KeyError, TypeError, ValueError):
+        except (KeyError, TypeError, ValueError) as e:
+            recusados.append(("tempo ilegivel", titulo,
+                              f"inicio_s={c.get('inicio_s')!r} "
+                              f"fim_s={c.get('fim_s')!r} ({type(e).__name__})"))
             continue
         if fim - ini < config.DUR_MIN:
+            recusados.append(("curto demais", titulo,
+                              f"{fim - ini:.1f}s < DUR_MIN {config.DUR_MIN}s"))
             continue
         if fim - ini > config.DUR_MAX:
             fim = ini + config.DUR_MAX
         if any(ini < f and fim > i for i, f in ocupados):   # sobreposição
+            recusados.append(("sobrepoe outro", titulo,
+                              f"{ini:.1f}-{fim:.1f}s"))
             continue
         ocupados.append((ini, fim))
         c["inicio_s"], c["fim_s"] = round(ini, 2), round(fim, 2)
@@ -537,6 +557,13 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
     for titulo, g in fracos:
         print(f"      [!] descartado gancho {g:.0f}/10 "
               f"(piso {config.GANCHO_MIN}): \"{str(titulo)[:44]}\"")
+    for motivo, titulo, detalhe in recusados:
+        print(f"      [!] descartado {motivo}: \"{titulo}\"  ({detalhe})")
+    if clipes and not bons:
+        # A linha que faltava no #194: quando NADA passa, dizer de quantos.
+        print(f"      [!] o modelo devolveu {len(clipes)} momento(s) e NENHUM "
+              f"passou: {len(fracos)} por gancho, {len(recusados)} pelos "
+              f"limites acima")
     # Só entra na média quem TEM o campo: contar clipe sem nota de gancho
     # como zero puxaria a média pra baixo e daria um número falso no log.
     com_nota = [_num(c, "forca_gancho") for c in bons if "forca_gancho" in c]

@@ -130,12 +130,20 @@ jobs:
         run: |
           mkdir -p vozes
           if [ "$AMOSTRA" = "bruna" ]; then
-            ID="1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0"; NOME="bruna_amostra"; EXT="wav"
+            ID="1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0"; NOME="bruna_amostra"
           else
-            ID="1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-"; NOME="bryan_amostra"; EXT="m4a"
+            ID="1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-"; NOME="bryan_amostra"
           fi
-          python -X utf8 baixar_bruto_drive.py --file-id "$ID" --destino "vozes/$NOME.$EXT" --conta "reserva"
-          ffmpeg -y -i "vozes/$NOME.$EXT" -ar 24000 -ac 1 "vozes/$NOME.wav"
+          # ⚠️ Baixa sempre com nome PROVISORIO. A primeira versao usava o nome
+          # final com a extensao de origem, e quebrou no run #192: a amostra da
+          # Bruna ja' e' .wav, entao o comando virou
+          #     ffmpeg -i vozes/bruna_amostra.wav ... vozes/bruna_amostra.wav
+          # e o ffmpeg recusa entrada igual a saida ("Output same as Input").
+          # Com o Bryan passava despercebido porque a origem dele e' .m4a.
+          # O provisorio faz os dois caminhos ficarem iguais.
+          python -X utf8 baixar_bruto_drive.py --file-id "$ID" --destino "vozes/_amostra_bruta" --conta "reserva"
+          ffmpeg -y -i "vozes/_amostra_bruta" -ar 24000 -ac 1 "vozes/$NOME.wav"
+          rm -f "vozes/_amostra_bruta"
           echo "amostra em uso: $NOME.wav"
           ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "vozes/$NOME.wav"
 

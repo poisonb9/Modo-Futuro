@@ -88,6 +88,34 @@ checar(lidos == {"bruna_amostra.wav", "bryan_amostra.wav"},
 checar({n + ".wav" for n in gravados} == lidos,
        "os dois conjuntos BATEM — nenhum nome grava sem ser lido")
 
+# --- 3b. o conversor nao pode ter entrada == saida -----------------------
+# ⚠️ ISTO NAO E' TEORICO: quebrou o run #192. A amostra da Bruna ja' e' .wav,
+# entao baixar com a extensao de ORIGEM e converter pro .wav final produzia
+#
+#     ffmpeg -i vozes/bruna_amostra.wav ... vozes/bruna_amostra.wav
+#
+# e o ffmpeg recusa ("Output same as Input - exiting"), exit 234. Com o Bryan
+# passava despercebido, porque a origem dele e' .m4a e os nomes diferiam.
+#
+# ⚠️ O bloco [3] acima comparava os NOMES e passou. Nomes batendo nao provam
+# que o COMANDO e' valido — sao perguntas diferentes, e so' a segunda pega
+# este defeito. Foi por isso que ele chegou na nuvem.
+print("")
+print("[3b] o ffmpeg da conversao tem entrada diferente da saida")
+import shlex  # noqa: E402
+
+linhas = [l.strip() for l in yml.splitlines() if l.strip().startswith("ffmpeg")]
+conv = [l for l in linhas if "-ar 24000" in l]
+checar(len(conv) == 1,
+       f"ha exatamente um ffmpeg de conversao de amostra (achei {len(conv)})")
+if conv:
+    partes = shlex.split(conv[0])
+    entrada = partes[partes.index("-i") + 1]
+    saida = partes[-1]
+    checar(entrada != saida, f"entrada {entrada} difere da saida {saida}")
+    checar("_amostra_bruta" in entrada,
+           "a entrada e' um nome provisorio, nao o nome final")
+
 # --- 4. a chave do disparo e o download concordam ------------------------
 print("\n[4] o valor 'bruna' no disparo leva ao arquivo da Bruna")
 checar('AMOSTRA" = "bruna"' in yml or '"$AMOSTRA" = "bruna"' in yml,

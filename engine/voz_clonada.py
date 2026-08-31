@@ -18,8 +18,10 @@ vazio antes do import, ao custo de o áudio sair sem o carimbo "gerado por
 IA" da Resemble (não achamos alternativa: 3 tentativas de consertar a causa
 raiz falharam, ver commits 61bc8b8/202e3f6/98bfa2a).
 """
+import datetime
 import re
 import shutil
+import time
 from pathlib import Path
 
 from . import midia
@@ -60,8 +62,21 @@ def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str) -> Path:
     # legenda na tela continua com o digito ("2030" le' melhor que "dois mil
     # e trinta" escrito), e o `timing` devolvido segue com o texto original.
     falado = numeros.por_extenso(texto)
-    wav = modelo.generate(falado, audio_prompt_path=str(amostra_voz), language_id=idioma)
+    # Os tres sub-passos sao marcados SEPARADAMENTE de proposito. Nos runs
+    # #188 e #189 (31/08/2026) o processo congelou logo apos o Chatterbox
+    # terminar a amostragem de uma frase — mas nao dava pra saber se parou
+    # dentro do `generate`, no `ta.save` ou ja' na proxima chamada. Sem
+    # separar, o log so' diria "parou em algum lugar de _falar".
+    t0 = time.monotonic()
+    print(f"        [tts] gerando ({len(falado)} chars)...", flush=True)
+    wav = modelo.generate(falado, audio_prompt_path=str(amostra_voz),
+                          language_id=idioma)
+    t1 = time.monotonic()
+    print(f"        [tts] gerado em {t1 - t0:.1f}s, gravando wav...",
+          flush=True)
     ta.save(str(destino), wav, modelo.sr)
+    print(f"        [tts] wav gravado em {time.monotonic() - t1:.1f}s",
+          flush=True)
     return destino
 
 
@@ -189,11 +204,28 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
 
     trabalho.mkdir(parents=True, exist_ok=True)
     partes, duracoes = [], []
+    # ⚠️ BATIMENTO POR FRASE — nao e' log decorativo, e' o instrumento.
+    #
+    # Os runs #188 e #189 queimaram 12h de runner e o log nao disse onde
+    # pararam: a unica saida era a barra de progresso interna do Chatterbox.
+    # Com hora absoluta em cada linha, o proximo travamento diz a frase, o
+    # sub-passo e o minuto — e o `flush=True` garante que a linha chegue ao
+    # log do Actions ANTES do congelamento, nao presa num buffer.
+    t_lote = time.monotonic()
+    print(f"      [voz] {len(frases)} frase(s) para sintetizar", flush=True)
     for i, frase in enumerate(frases):
         p = trabalho / f"voz_frase_{i:03d}.wav"
+        agora = datetime.datetime.now().strftime("%H:%M:%S")
+        print(f"      [voz] frase {i + 1}/{len(frases)} as {agora} "
+              f"(acumulado {time.monotonic() - t_lote:.0f}s)", flush=True)
         _falar(frase, p, amostra_voz, idioma)
         partes.append(p)
+        # ⚠️ Isto e' um ffprobe. Se o travamento for aqui, o TIMEOUT_SONDA do
+        # midia.py (120s) derruba com erro em 2 min em vez de 6h em silencio.
+        print("        [tts] medindo duracao (ffprobe)...", flush=True)
         duracoes.append(midia.duracao(p))
+    print(f"      [voz] as {len(frases)} frases prontas em "
+          f"{time.monotonic() - t_lote:.0f}s", flush=True)
 
     concatenado = trabalho / "voz_concatenada.wav"
     _concatenar_com_pausas(partes, concatenado)

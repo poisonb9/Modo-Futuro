@@ -3,17 +3,37 @@
 Aguenta 9,5h de áudio por prompt, então o vídeo inteiro vai de uma vez —
 sem chunking, sem offset pra corrigir.
 """
-import json, re, time
+import json, os, re, time
 from pathlib import Path
 import requests
 
 import config
 from . import keys
 
-PROMPT = """Você é editor de cortes virais. Analise este {tipo} INTEIRO e escolha
-os {n} melhores momentos para YouTube Shorts.
+# ─────────────────────────────────────────────────────────────────────────
+# O CRITERIO DE "MOMENTO COMPLETO" MUDA POR CANAL
+#
+# Ate 31/08/2026 havia um criterio so', e ele e' RETORICO: o corte fecha
+# quando a IDEIA se resolve. Serve pros quatro canais de fala — chips,
+# receita, comportamento, disciplina.
+#
+# ⚠️ NAO serve pro @truque.importado. Em maquiagem o que precisa fechar e' o
+# PROCEDIMENTO, nao o argumento. O criterio retorico manda literalmente o
+# contrario do que o canal precisa:
+#
+#     "Termine logo apos o pico (frase mais forte), de forma ABRUPTA"
+#
+# Terminar abrupto no meio de uma aplicacao e' exatamente o defeito que o
+# Bryan chamou de inadmissivel: comecar no meio de uma maquiagem, parar antes
+# de terminar, faltar parte. Num canal de fala isso e' tensao; num canal de
+# procedimento e' um video quebrado.
+#
+# Escolhido por `SELECAO_MODO` no disparo. Sem a variavel, NADA muda — o
+# texto do prompt fica byte a byte identico ao de antes, e ha' um teste que
+# garante isso.
+# ─────────────────────────────────────────────────────────────────────────
 
-ESTRUTURA GPC (Gancho-Progresso-Clímax) — o trecho escolhido precisa ter as
+CRITERIO_RETORICO = """ESTRUTURA GPC (Gancho-Progresso-Clímax) — o trecho escolhido precisa ter as
 três partes dentro dele, não só o gancho:
 1. GANCHO (primeiros ~2s do corte): frase de impacto que já entrega tensão
    ou dúvida. Nunca comece explicando contexto ("hoje eu vou falar sobre...",
@@ -31,6 +51,67 @@ CRITÉRIOS (nesta ordem de peso):
 2. Ideia COMPLETA (GPC inteiro, ver acima).
 3. Carga emocional: surpresa, contradição, revelação, opinião forte, humor.
 4. Corte em pausa natural da fala — nunca no meio de uma palavra ou frase.
+
+"""
+
+CRITERIO_PROCEDIMENTO = """UNIDADE COMPLETA DE PROCEDIMENTO — esta e a regra que manda em tudo aqui.
+
+O corte tem que ser um PASSO INTEIRO, do comeco ao fim. Nao um trecho
+interessante de um passo.
+
+1. COMECO LIMPO: o corte comeca no instante em que ela PEGA o produto ou
+   inicia a etapa. Nunca com o produto ja meio aplicado, nunca no meio de um
+   movimento, nunca no fim de uma etapa anterior.
+2. MEIO INTEIRO: toda a aplicacao daquela etapa cabe dentro do corte. Se ela
+   passa, espalha e corrige, os tres estao dentro. Nao pule parte.
+3. FIM RESOLVIDO: o corte termina com a etapa CONCLUIDA e visivel. O
+   resultado daquele passo aparece antes de acabar.
+
+INADMISSIVEL — descarte o trecho em vez de entregar assim:
+- comecar com a maquiagem ja pela metade
+- terminar antes de a etapa fechar
+- pegar o fim de uma etapa e o comeco da seguinte, sem nenhuma inteira
+- faltar um passo no meio (ela aplica, o corte pula, ja aparece pronto)
+
+⚠️ NAO termine de forma abrupta, e NAO corte no pico. Isso vale para canais
+de fala, nao aqui: em procedimento, o "pico" e o RESULTADO, e ele vem no fim.
+
+⚠️ Se nenhuma etapa inteira couber na duracao pedida, DESCARTE o video. E
+melhor devolver menos cortes do que devolver um passo pela metade. Nao
+estique nem comprima uma etapa pra caber.
+
+CRITERIOS (nesta ordem de peso):
+1. A etapa esta inteira (regra acima). Isto vem antes de qualquer coisa.
+2. Gancho nos 2 primeiros segundos — o que ela vai fazer fica claro de cara.
+3. Valor pratico: da pra repetir em casa depois de assistir.
+4. Corte em pausa natural da fala E em pausa do MOVIMENTO — as duas, nao so
+   a fala.
+"""
+
+
+def _criterio() -> str:
+    """Qual criterio de corte este disparo usa.
+
+    `SELECAO_MODO=procedimento` -> passo inteiro (maquiagem, e qualquer canal
+    de "como fazer" que venha depois).
+    Qualquer outra coisa, inclusive vazio -> o retorico de sempre.
+
+    Falha ABERTA de proposito: um valor desconhecido nao derruba o run, cai no
+    comportamento antigo. O contrario travaria os quatro canais que ja rodam
+    por causa de um typo no disparo do quinto.
+    """
+    modo = (os.environ.get("SELECAO_MODO") or "").strip().lower()
+    bloco = CRITERIO_PROCEDIMENTO if modo == "procedimento" else CRITERIO_RETORICO
+    # normaliza as pontas: o espacamento em volta e do TEMPLATE, nao do
+    # bloco. Sem isto, uma linha em branco a mais ou a menos em cada
+    # constante muda o prompt dos quatro canais que ja rodam.
+    return bloco.strip(chr(10))
+
+
+PROMPT = """Você é editor de cortes virais. Analise este {tipo} INTEIRO e escolha
+os {n} melhores momentos para YouTube Shorts.
+
+{criterio}
 
 REGRAS DURAS:
 - Duração entre {dmin} e {dmax} segundos. Nunca fora disso.
@@ -332,7 +413,7 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     """
     mime = "video/mp4" if usar_video else "audio/flac"
     tipo = "vídeo" if usar_video else "áudio"
-    prompt = PROMPT.format(tipo=tipo, n=qtd,
+    prompt = PROMPT.format(tipo=tipo, n=qtd, criterio=_criterio(),
                            dmin=config.DUR_MIN, dmax=config.DUR_MAX)
 
     def corpo(uri):

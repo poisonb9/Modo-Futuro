@@ -38,6 +38,7 @@ guarda de canal.
 | `voz_canal` | **`feminina`** | `pt-BR-FranciscaNeural` |
 | `voz_clonada` | **`false`** | ⚠️ obrigatorio junto com `voz_canal` |
 | `recorte` | use em fonte longa | teto de 6h do Actions |
+| `SELECAO_MODO` | **`procedimento`** | ⚠️ obrigatorio — ver abaixo |
 
 ### ⚠️ A voz e' a decisao que define este canal
 
@@ -48,6 +49,46 @@ erro que fez o Cozinha descartar fonte muda: a peca nao combina com o produto.
 falsa. Pedir voz feminina sem desligar a clonagem produziria um clipe com a
 voz do Bryan **em silencio** — por isso o motor RECUSA a combinacao no import
 do config, antes de baixar bruto. Ver `engine/voz.py`.
+
+### ⚠️ A REGRA QUE NAO TEM EXCECAO: o passo tem de estar INTEIRO
+
+Ordem do Bryan, 31/08/2026, sobre os cortes deste canal:
+
+> "Maquiagem no meio, ou deixar ela nao terminar a maquiagem, ou comecar no
+> meio de outra maquiagem, faltar partes — essas coisas sao inadmissiveis."
+
+**O motor fazia exatamente isso, e nao por acaso.** O unico criterio de corte
+que existia ate' entao e' RETORICO: o corte fecha quando a IDEIA se resolve.
+Ele manda, com todas as letras:
+
+    "Termine logo apos o pico (frase mais forte), de forma ABRUPTA"
+
+Num canal de fala isso e' tensao e segura a retencao. Num canal de
+PROCEDIMENTO e' um video quebrado. Nao era um ajuste fino — era o criterio
+mandando o oposto do que este canal precisa.
+
+Por isso `SELECAO_MODO=procedimento` e' **obrigatorio no disparo**. Ele troca
+o criterio por um que exige:
+
+| | |
+|---|---|
+| comeco limpo | comeca quando ela PEGA o produto, nunca com a aplicacao pela metade |
+| meio inteiro | passar, espalhar e corrigir estao os tres dentro do corte |
+| fim resolvido | termina com a etapa CONCLUIDA e visivel |
+
+E manda **DESCARTAR o video** se nenhuma etapa inteira couber na duracao —
+melhor devolver menos cortes do que um passo pela metade.
+
+⚠️ Sem a variavel, o disparo cai no criterio retorico e volta a cortar no
+meio. **Falha ABERTA de proposito**: valor desconhecido nao derruba o run,
+cai no antigo. O contrario travaria os quatro canais que ja' rodam por causa
+de um typo no disparo do quinto — mas significa que ESQUECER a variavel nao
+da' erro, da' corte ruim. Confira no disparo.
+
+`teste/teste_selecao_modo.py` prova que sem a variavel o prompt fica **byte a
+byte identico** ao de antes (comparado contra o git HEAD). Esse e' o caso
+negativo que protege os quatro canais no ar: mudanca de prompt nao levanta
+excecao e nao aparece em log — ela sai como corte pior, semanas depois.
 
 ### Por que narracao, e nao fala literal
 

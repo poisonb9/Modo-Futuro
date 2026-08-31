@@ -16,6 +16,27 @@ decidem se o corte e' possivel:
            equivalente em PT, ela ganha.
 
 Por isso a nota final aqui pondera hype PELO custo de produzir.
+
+RECALIBRADO EM 31/08/2026 — e uma das duas regras acima FOI REVOGADA.
+
+  FONTE EM PORTUGUES SAI, POR ORDEM DO BRYAN.  A rodada de 30/08 devolveu 6
+  fontes PT, e as quatro melhores notas da lista eram todas PT (Os Socios, Fe
+  Alves, Forte Como Um Leao). Ele olhou e disse: nao quero em portugues.
+
+  ⚠️ Isso ABRE MAO de um ganho medido: fonte PT pula traducao e dublagem —
+  83 min contra 255 no mesmo passo, e zero cota de Gemini. A troca e'
+  deliberada e e' editorial: o canal promete "podcasts de fora", e fonte
+  brasileira contradiz a promessa. Fica registrado que o custo subiu de
+  proposito, para ninguem "consertar" isso de volta sem saber.
+
+  O IDIOMA DA API MENTE.  Na rodada de 30/08 o item #6 era "Book Tuber Hindi"
+  — video inteiro em hindi, com `defaultAudioLanguage` dizendo `en`. Passou
+  batido. O idioma declarado nao serve como filtro; o que serve e' o ALFABETO
+  do titulo. Ver `_escrita_estranha`.
+
+  E FALTAVA FILTRO DE TEMA.  Entre os 38 vieram exercicio para gordura
+  visceral e entrevista sobre politica — hype alto, tema fora. Entra uma
+  lista de TEMA positiva, igual a' que o radar do @truque.importado ganhou.
 """
 from __future__ import annotations
 
@@ -58,25 +79,68 @@ def _chaves() -> list[str]:
 
 CHAVES = _chaves()
 
-# Buscas em ingles e em portugues, de proposito. A fonte PT sai muito mais
-# barata, entao ela precisa estar no mesmo funil, nao numa rodada separada.
-BUSCAS_EN = [
+# ⚠️ SO' EM INGLES desde 31/08/2026. As tres buscas em portugues foram
+# removidas por ordem do Bryan — ver o cabecalho. Entraram quatro termos EN
+# no lugar, pra repor o volume que elas traziam.
+BUSCAS = [
     "david goggins discipline podcast",
     "cameron hanes endurance podcast",
     "jocko willink discipline podcast",
     "andrew huberman exercise protocol",
     "bodybuilding mindset interview pain",
-]
-BUSCAS_PT = [
-    "podcast disciplina treino portugues",
-    "podcast musculacao mentalidade",
-    "cortes podcast treino disciplina",
+    "hard work mental toughness podcast clip",
+    "athlete pain tolerance interview",
+    "navy seal discipline routine interview",
+    "training through pain podcast",
 ]
 
 # Termos que denunciam material que o motor NAO consegue usar. Nao e' filtro
 # de gosto: e' o que ja' custou run.
 VETO = ["shorts", "compilation", "compilado", "satisfying", "music",
         "no talking", "asmr", "workout mix", "gym motivation music"]
+
+# ⚠️ FILTRO DE TEMA. O titulo (ou o canal) tem de conter uma destas. Sem ele,
+# a rodada de 30/08 trouxe "exercicio para queimar gordura visceral" e uma
+# entrevista sobre politica: hype alto, tema fora do canal.
+#
+# A lista e' LARGA de proposito. No radar do @truque.importado uma lista curta
+# demais derrubou tres videos bons em silencio — recusa silenciosa e' pior que
+# ruido, porque ninguem a percebe.
+TEMA = [
+    "disciplin", "discipline", "mental", "toughness", "tough", "mindset",
+    "grit", "willpower", "habit", "routine", "consistency",
+    "pain", "suffer", "endurance", "endure", "limit", "quit", "weak",
+    "train", "workout", "gym", "lift", "run", "athlete", "bodybuilding",
+    "goggins", "jocko", "hanes", "huberman", "navy seal", "marine",
+]
+
+# Vizinhos que a busca traz e o canal NAO cobre: dieta/nutricao e politica sao
+# outro assunto, ainda que apareçam nos mesmos podcasts.
+FORA_DO_TEMA = ["visceral fat", "burning fat", "diet plan", "what to eat",
+                "supplement", "politic", "election", "hegseth"]
+
+
+def _escrita_estranha(texto: str) -> bool:
+    """O titulo esta' em alfabeto que nao e' o latino?
+
+    POR QUE ISTO EXISTE, e por que nao basta olhar o idioma
+
+    Na rodada de 30/08 o item #6 era "Book Tuber Hindi": video inteiro em
+    hindi, e a API do YouTube declarou `defaultAudioLanguage: en`. O campo
+    MENTE, entao filtrar por ele nao pega nada.
+
+    O que nao mente e' o ALFABETO. Devanagari, arabe, cirilico, CJK e hangul
+    fora da faixa latina denunciam a fonte independentemente do que o
+    metadado diz.
+
+    Piso de 15%: titulo em ingles com um emoji ou um nome proprio acentuado
+    nao pode ser recusado por isso.
+    """
+    letras = [c for c in texto if c.isalpha()]
+    if not letras:
+        return False
+    fora = sum(1 for c in letras if ord(c) > 0x2E80 or 0x0370 <= ord(c) <= 0x1CFF)
+    return fora / len(letras) > 0.15
 
 
 def http(url):
@@ -149,8 +213,9 @@ def avaliar(v):
         custo = 0.35
     else:
         custo = 0.15          # podcast inteiro: so' com recorte
-    if pt:
-        custo *= 1.6          # medido: 83 min contra 2h01, e zero cota Gemini
+    # ⚠️ O bonus de 1.6x para fonte PT foi REMOVIDO em 31/08/2026: fonte em
+    # portugues nao entra mais neste canal. Ver o cabecalho — a troca e'
+    # editorial e custa tempo de corte, de proposito.
 
     nota = (min(views / 1000, 100) * 0.5 + min(vph, 100) * 0.3
             + min(eng * 10, 100) * 0.2) * custo
@@ -165,7 +230,7 @@ def avaliar(v):
 
 def main():
     vistos, brutos = set(), []
-    for termo in BUSCAS_EN + BUSCAS_PT:
+    for termo in BUSCAS:
         try:
             itens = buscar(termo)
         except Exception as e:
@@ -179,11 +244,26 @@ def main():
             brutos += detalhes(novos[j:j + 50])
 
     aval = []
+    # Contar POR MOTIVO, nao um total. Um filtro que come demais so' aparece
+    # se cada corte tiver o seu numero.
+    corte = {"veto": 0, "tema": 0, "escrita": 0, "portugues": 0}
     for v in brutos:
-        t = (v["snippet"]["title"] + " " + v["snippet"]["channelTitle"]).lower()
+        titulo = v["snippet"]["title"]
+        t = (titulo + " " + v["snippet"]["channelTitle"]).lower()
         if any(x in t for x in VETO):
+            corte["veto"] += 1
             continue
-        aval.append(avaliar(v))
+        if _escrita_estranha(titulo):
+            corte["escrita"] += 1
+            continue
+        if not any(x in t for x in TEMA) or any(x in t for x in FORA_DO_TEMA):
+            corte["tema"] += 1
+            continue
+        item = avaliar(v)
+        if item["pt"]:
+            corte["portugues"] += 1
+            continue
+        aval.append(item)
     aval.sort(key=lambda x: -x["nota"])
 
     # Salva ANTES de imprimir. Em 30/08 um emoji no titulo derrubou a saida no
@@ -195,7 +275,12 @@ def main():
     def seguro(t):
         return t.encode("ascii", "replace").decode("ascii")
 
-    print(f"\n{len(aval)} candidato(s) apos o veto\n")
+    print("")
+    print(f"{len(aval)} candidato(s)   |   cortados: "
+          f"{corte['veto']} veto, {corte['tema']} fora do tema, "
+          f"{corte['escrita']} alfabeto nao-latino, "
+          f"{corte['portugues']} em portugues")
+    print("")
     print(f"{'#':<3} {'nota':>5} {'min':>6} {'idio':>5} {'views':>9} "
           f"{'v/h':>7} {'eng%':>5}  titulo")
     print("-" * 108)
@@ -206,6 +291,12 @@ def main():
               f"{v['views_h']:>7} {v['eng']:>5}  [{cabe}] {seguro(v['titulo'])[:52]}")
     print(f"\n{len(aval)} salvos em radar_atefalhar.json")
     print("[OK ] cabe no teto de 6h    [REC] so' com --recorte")
+    print("")
+    print("⚠️ Fonte em portugues NAO entra neste canal (ordem de 31/08).")
+    print("   Isso custa tempo de corte de proposito: PT pularia traducao e")
+    print("   dublagem, 83 min contra 255. A troca e' editorial.")
+    print("⚠️ A busca usa videoDuration=medium, que ja' limita a 20 min. Se")
+    print("   'nenhum passa de 45 min', isso e' tautologia, nao seguranca.")
 
 
 if __name__ == "__main__":

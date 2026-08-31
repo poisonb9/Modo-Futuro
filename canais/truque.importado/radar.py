@@ -21,9 +21,21 @@ em vez de um `--canal` no radar do Ate Falhar.
   motivo, e a guarda de clipe mudo recusaria os cortes no fim do run, depois
   de gastar o runner inteiro.
 
-⚠️ NAO RODOU AINDA. Escrito em 31/08/2026, junto com o canal. As BUSCAS sao
-hipotese, nao medicao — os outros radares foram calibrados vendo o que
-voltava. Rode uma vez e ajuste os termos antes de confiar na ordem.
+CALIBRADO EM 31/08/2026, numa rodada de verdade. O que ela mostrou:
+
+  43 resultados, 1 vetado. O veto de fonte muda quase nao mordeu — porque as
+  buscas ja' puxam pro formato falado. Ele fica como rede de seguranca.
+
+  "foundation technique explained artist" trouxe DESENHO. As tres palavras
+  colidem com arte: "foundation", "technique" e "artist" descrevem retrato a
+  lapis tao bem quanto base de maquiagem. Vieram "Foundations for Better
+  Portrait Drawing" e "the right way to start learning how to draw". O termo
+  foi trocado, e entrou um filtro de TEMA para o que escapar.
+
+  "maquillaje tutorial explicado artista" devolveu ZERO. Foi trocado.
+
+  13 dos 42 eram em hindi (31%) — noiva indiana, HD makeup. E' "de fora", mas
+  e' outra estetica e outro publico. O radar MARCA e nao decide, igual ao PT.
 
 Roda com:  python canais/truque.importado/radar.py
 """
@@ -75,9 +87,11 @@ BUSCAS = [
     "professional makeup tutorial talking",
     "korean makeup tutorial english subtitles",
     "makeup artist reacts common mistake",
-    "foundation technique explained artist",
+    # ⚠️ NAO usar "foundation technique explained artist": as tres palavras
+    # colidem com desenho a lapis e a busca trouxe retrato, nao maquiagem.
+    "makeup foundation application technique",
     "eyeliner technique tutorial explained",
-    "maquillaje tutorial explicado artista",
+    "maquillaje profesional paso a paso tutorial",
     "makeup transformation artist explains",
 ]
 
@@ -93,6 +107,31 @@ VETO = [
     # sorteio/venda: o corte vira anuncio de terceiro
     "giveaway", "haul", "unboxing", "link in bio", "codigo de desconto",
 ]
+
+# ⚠️ FILTRO DE TEMA, medido. O titulo (ou o canal) tem de conter uma destas.
+# Sem ele passaram 5 de 42: dois videos de DESENHO, um de cabelo, um de unha e
+# uma entrevista de celebridade. Nenhum dos 5 era maquiagem — zero falso
+# positivo na remocao, conferido um a um.
+#
+# "make up" separado, "mua" e "eyeshadow" estao aqui porque a primeira versao
+# da lista derrubou tres videos de maquiagem de verdade por falta deles. Uma
+# lista curta demais e' pior que nenhuma: ela recusa em silencio.
+TEMA = [
+    "makeup", "make up", "make-up", "mua", "maquill", "maquiagem",
+    "beauty", "k-beauty", "cosmetic", "glam", "grwm", "bridal",
+    "foundation", "concealer", "primer", "highlighter", "contour",
+    "eyeliner", "eyeshadow", "lipstick", "blush", "skin",
+]
+
+# Vizinhos que a busca traz e o canal NAO cobre. Cabelo e unha sao beleza, mas
+# nao sao maquiagem; desenho e' colisao de vocabulario, nao vizinhanca.
+FORA_DO_TEMA = ["hair colour", "hair color", "nail ", "nails",
+                "how to draw", "drawing", "portrait draw"]
+
+# Idiomas cujo material e' "de fora" mas de OUTRA estetica e outro publico.
+# Na rodada de calibragem foram 13 de 42 (31%) — se nao for marcado, eles
+# dominam o topo sozinhos. Marcar, nao vetar: e' decisao editorial do Bryan.
+OUTRO_MERCADO = {"hi": "indiano", "ur": "indiano/paquistanes", "bn": "bengali"}
 
 # Fonte em portugues precisa de olho humano: e' dublagem/legendagem de
 # material estrangeiro (serve) ou criadora brasileira (nao serve)? O radar nao
@@ -198,10 +237,14 @@ def main():
             brutos += detalhes(novos[j:j + 50])
 
     aval, vetados = [], 0
+    fora_tema = 0
     for v in brutos:
         t = (v["snippet"]["title"] + " " + v["snippet"]["channelTitle"]).lower()
         if any(x in t for x in VETO):
             vetados += 1
+            continue
+        if not any(x in t for x in TEMA) or any(x in t for x in FORA_DO_TEMA):
+            fora_tema += 1
             continue
         aval.append(avaliar(v))
     aval.sort(key=lambda x: -x["nota"])
@@ -223,6 +266,9 @@ def main():
     for i, v in enumerate(aval[:20], 1):
         cabe = "OK " if v["dur_min"] <= 45 else "REC"
         olho = " <PT?>" if v["pt"] else ""
+        merc = OUTRO_MERCADO.get(v["idioma"][:2].lower())
+        if merc:
+            olho += f" <{merc}>"
         print(f"{i:<3} {v['nota']:>5} {v['dur_min']:>6} "
               f"{v['idioma'][:4]:>5} {v['views']:>9} "
               f"{v['views_h']:>7} {v['eng']:>5}  [{cabe}]{olho} "
@@ -230,6 +276,8 @@ def main():
     print(f"\n{len(aval)} salvos em radar_truque_importado.json")
     print("[OK ] cabe no teto de 6h    [REC] so' com --recorte")
     print("<PT?> fonte em portugues — CONFERIR se e' material estrangeiro")
+    print("<indiano> etc — 'de fora', mas outra estetica e outro publico;")
+    print("             foram 31% da rodada de calibragem. Decisao sua.")
     print("\n⚠️ A fonte tem de FALAR. O veto pega o titulo, nao o audio: se o")
     print("   video for mudo sem dizer no titulo, o clipe sai mudo e a guarda")
     print("   o recusa no fim do run, com o runner ja' gasto.")

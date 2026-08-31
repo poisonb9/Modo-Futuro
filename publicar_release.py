@@ -260,6 +260,12 @@ def main() -> None:
                         "inicio_s": m.get("inicio_s"),
                         "titulo": m.get("titulo", ""),
                         "canal": (os.environ.get("CANAL_ESPERADO") or "").strip().lower(),
+                        # De que genero e' quem fala no clipe, como o Gemini
+                        # viu. Vai pro manifesto porque e' o sinal que decidira'
+                        # a VOZ (a da Bruna pra fonte feminina) e ainda nao foi
+                        # medido: sem historico, ligar a troca de voz seria
+                        # apostar. Vazio nos clipes anteriores a 31/08/2026.
+                        "genero_falante": m.get("genero_falante", ""),
                         "publicado_em": f"{date.today():%Y-%m-%d}"}
         print(f"  nota {nota:.0f}  {nome[:60]}")
         print(f"     {url}")

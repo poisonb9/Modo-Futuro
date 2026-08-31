@@ -180,6 +180,7 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
 
     rot = keys.gemini()
     ultimo_erro = None
+    sem_cota = 0   # quantas chaves responderam 429/403
     for _ in range(len(rot) * 2):
         chave = rot.proxima()
         try:
@@ -200,6 +201,12 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
                 timeout=60,
             )
             if r.status_code in (429, 403):
+                # ⚠️ CONTE A COTA. Este `continue` nao mexia em `ultimo_erro`,
+                # e e' o caminho MAIS COMUM de falha. Quando as 20 chaves
+                # estavam sem cota (run #200, 31/08/2026), a excecao final
+                # dizia "traducao falhou em todas as chaves: None" — a
+                # mensagem apagava justamente a causa que ela deveria contar.
+                sem_cota += 1
                 rot.queimar(chave)
                 continue
             r.raise_for_status()
@@ -207,6 +214,7 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
         except requests.HTTPError as e:
             ultimo_erro = e
             if e.response is not None and e.response.status_code in (429, 403):
+                sem_cota += 1
                 rot.queimar(chave)
                 continue
             # 503 é sobrecarga TRANSITÓRIA do servidor (mesmo padrão do
@@ -220,7 +228,18 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
         except Exception as e:
             ultimo_erro = e
             time.sleep(1)
-    raise RuntimeError(f"tradução falhou em todas as chaves: {ultimo_erro}")
+    # Cota estourada nao e' defeito: e' esperar o reset do dia. Dizer isso na
+    # propria excecao evita a caca ao bug que nao existe.
+    if sem_cota and ultimo_erro is None:
+        raise RuntimeError(
+            f"tradução parou: as {sem_cota} chaves do Gemini estão SEM COTA. "
+            "Não é defeito — é esperar o reset (meia-noite no Pacífico). "
+            "Redisparar hoje só queima runner.")
+    # A contagem so' entra quando ha' o que contar: "(0 sem cota)" numa falha
+    # de rede aponta pro lado errado justamente na hora de diagnosticar.
+    conta = f" ({sem_cota} sem cota)" if sem_cota else ""
+    raise RuntimeError(
+        f"tradução falhou em todas as chaves{conta}: {ultimo_erro}")
 
 
 def checar_disponibilidade() -> None:

@@ -1,0 +1,89 @@
+{
+  "_leia": "Fila de cortes pendentes. O cortar_fila.yml consome daqui, no maximo 2 por vez. Estado de cada item: 'pendente' -> 'disparado' (com run_id e quando) -> some da fila quando o Bryan confirmar. Ordem = round-robin entre canais, pra nenhum canal ficar por ultimo.",
+  "teto_em_voo": 2,
+  "itens": [
+    {
+      "estado": "disparado",
+      "canal": "semanestesia.pod",
+      "qtd": "2",
+      "amostra_voz": "bryan",
+      "selecao_modo": "",
+      "drive_file_id": "1W6ByYx69ICMTHx5hdCnMNGTvy-FVK1Qw",
+      "nome": "The Only 13 Minutes You Need To Master Discipline",
+      "quando": "2026-08-31T21:09:22+00:00"
+    },
+    {
+      "estado": "disparado",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1QWuYC4MdTcJKlFXngVKR9e1r57rkyfAq",
+      "nome": "BUILD YOUR GLUTES IN 2025",
+      "quando": "2026-08-31T21:09:24+00:00"
+    },
+    {
+      "estado": "pendente",
+      "canal": "truque.importado",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "procedimento",
+      "drive_file_id": "1ODRqg83TSycFt-dijwLi67YqowL3i3eH",
+      "nome": "Chic Soft Glam Everyday Makeup"
+    },
+    {
+      "estado": "pendente",
+      "canal": "semanestesia.pod",
+      "qtd": "2",
+      "amostra_voz": "bryan",
+      "selecao_modo": "",
+      "drive_file_id": "1ggf0HrRksP_p0OrFhQiT5fLLdwKj8GIb",
+      "nome": "DJ Shipley Explains His Daily Routine"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1-SsIlp92g4WjVf3-0_CEc_z9pnqpG-Ab",
+      "nome": "First Day At Gym - Full Workout Plan For Beginners"
+    },
+    {
+      "estado": "pendente",
+      "canal": "truque.importado",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "procedimento",
+      "drive_file_id": "1FJATcWmPLd60CbDfHGyd8AZOrGZS67oF",
+      "nome": "Beginner Makeup on Textured skin - Lesson 1"
+    },
+    {
+      "estado": "pendente",
+      "canal": "semanestesia.pod",
+      "qtd": "2",
+      "amostra_voz": "bryan",
+      "selecao_modo": "",
+      "drive_file_id": "1w-Y7rHRklzy0h3CpHTQ2-7NVcNvlYuwa",
+      "nome": "Stop Being F cking Weak"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1IV7OQ8AdKXWW5_8s0N01XzsZEuM35CRc",
+      "nome": "MY GO TO GLUTE WORKOUT (ja rendeu 1 clipe no #202)"
+    },
+    {
+      "estado": "pendente",
+      "canal": "truque.importado",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "procedimento",
+      "drive_file_id": "1e9zlwb1WV7ISmHpEZd01Dr9f44kcqFTv",
+      "nome": "Bambi eyes makeup tutorial"
+    }
+  ]
+}

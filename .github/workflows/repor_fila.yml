@@ -1,0 +1,68 @@
+name: Repor fila (diario, 09:00 Sao Paulo)
+
+# Confere a fila dos canais e repoe a que estiver abaixo do piso.
+#
+# POR QUE AQUI E NAO NUM AGENTE DE NUVEM
+#
+# Pedido do Bryan em 31/08/2026: "olha uma vez por dia e cheque a fila e
+# reponha ela caso tenha videos bons confirmados para rodar".
+#
+# ⚠️ Um agente na nuvem da Anthropic NAO consegue ler o `CREDENCIAIS.md`, que
+# e' local e esta' fora de todo repositorio de proposito. Os tokens do Buffer
+# so' existem em dois lugares: no disco do Bryan e nos SECRETS deste
+# repositorio. O Actions e' o unico que ja' tem tudo — e roda de graca, porque
+# o repo e' publico.
+#
+# ⚠️ NAO CORTA VIDEO. So' agenda o que ja' existe no manifesto das releases.
+# Se nao houver clipe elegivel, avisa no Telegram e para. Disparar corte novo
+# custa runner e e' decisao do Bryan.
+
+on:
+  schedule:
+    # 12:00 UTC = 09:00 em Sao Paulo (UTC-3)
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      piso:
+        description: "Repoe o canal quando a fila estiver ABAIXO deste numero"
+        required: false
+        default: "5"
+      canais:
+        description: "Quais conferir, separados por virgula. Vazio = os que o Bryan liberou (hoje so' modofuturo)"
+        required: false
+        default: ""
+
+jobs:
+  repor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Conferir e repor
+        env:
+          PISO: ${{ inputs.piso || '5' }}
+          CANAIS: ${{ inputs.canais }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+        run: python -X utf8 repor_fila.py
+
+      - name: Avisar no Telegram
+        if: always()
+        env:
+          RELATO: ${{ env.RELATO }}
+        run: |
+          if [ -f relato_fila.txt ]; then T="$(cat relato_fila.txt)"
+          elif [ "${{ job.status }}" = "success" ]; then T="Fila conferida — nada a repor."
+          else T="Conferencia de fila FALHOU: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; fi
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data-urlencode text="$T"

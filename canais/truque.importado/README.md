@@ -10,15 +10,21 @@ que custou dois runs de 6h no Sem Anestesia.
 
 - [x] `@truque.importado` estava livre — **conta criada em 31/08/2026**
 - [x] radar de fontes (`radar.py` — escrito, **ainda nao rodou**)
-- [ ] criar a 5a conta do Buffer e conectar o canal
-- [ ] gravar o secret `BUFFER_TOKEN_TRUQUEIMPORTADO`
-- [ ] logo
+- [x] 5a conta do Buffer criada e canal conectado (31/08/2026)
+- [x] secret `BUFFER_TOKEN_TRUQUEIMPORTADO` gravado (HTTP 201)
+- [ ] publicar a bio
+- [ ] logo em SVG
+- [ ] pasta do Drive para brutos e cortes
 
-⚠️ **Enquanto o secret nao existir, NAO dispare corte para este canal.** O ramo
-no workflow ja' existe, mas sem o secret ele cai no `else`, que e' o token do
-@modofuturo. A guarda `CANAL_ESPERADO` aborta antes de publicar (falha
-fechada, o clipe nao vai pro canal errado) — mas o corte se perde no fim do
-run, com o runner inteiro ja' gasto.
+✅ **O canal esta' pronto pra receber corte.** O nome no Buffer e'
+`truque.importado`, identico ao valor de `canal` no disparo, entao a guarda
+`CANAL_ESPERADO` casa.
+
+⚠️ Na primeira tentativa a conta do Buffer existia mas com ZERO canais
+conectados, e o secret **nao** foi gravado — de proposito. Secret do Actions e'
+so' de ESCRITA: token errado gravado ali so' apareceria como run abortando la'
+na frente. Conferir o destino real antes de gravar e' o mesmo principio da
+guarda de canal.
 
 ## Receita de disparo
 

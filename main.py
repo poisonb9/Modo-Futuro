@@ -332,8 +332,19 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
 
         render.capa(bruto, pasta / "capa.jpg")
 
+        # ⚠️ `legenda_premium` TEM DE ESTAR NESTA LISTA. Ela e' uma copia por
+        # nomes: o que nao esta' aqui nao chega ao post.json, mesmo tendo sido
+        # gerado. E o post.json e' o que o `publicar_tiktok` le' pra escrever
+        # o .txt que vai pro Drive.
+        #
+        # Foi o que aconteceu ate' 31/08/2026: o log dizia "legenda premium:
+        # 1408 chars", o texto existia em `c`, o post.txt local saia completo
+        # — e o .txt do Drive saia com 0,3 KB, sem o bloco premium. Unificar
+        # as duas funcoes de legenda (commit af01799) nao resolveu, porque o
+        # defeito nao era a montagem: era o dado que nunca chegava.
         meta = {k: c.get(k) for k in
-                ("titulo", "descricao", "tags", "gancho", "porque",
+                ("titulo", "descricao", "tags", "legenda_premium",
+                 "gancho", "porque",
                  "nota", "inicio_s", "fim_s", "duracao_s",
                  "tipo_conteudo", "emocao_dominante", "dinamica",
                  "genero_falante", "falantes",

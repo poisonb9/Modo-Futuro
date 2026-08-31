@@ -150,6 +150,7 @@ jobs:
           GEMINI_API_KEY_5: ${{ secrets.GEMINI5 }}
           GEMINI_API_KEY_6: ${{ secrets.GEMINI6 }}
           GEMINI_API_KEY_7: ${{ secrets.GEMINI7 }}
+          GEMINI_API_KEY_8: ${{ secrets.GEMINI8 }}
           GEMINI_API_KEY_9: ${{ secrets.GEMINI9 }}
           GEMINI_API_KEY_10: ${{ secrets.GEMINI10 }}
           GEMINI_API_KEY_11: ${{ secrets.GEMINI11 }}
@@ -157,6 +158,11 @@ jobs:
           GEMINI_API_KEY_13: ${{ secrets.GEMINI13 }}
           GEMINI_API_KEY_14: ${{ secrets.GEMINI14 }}
           GEMINI_API_KEY_15: ${{ secrets.GEMINI15 }}
+          GEMINI_API_KEY_16: ${{ secrets.GEMINI16 }}
+          GEMINI_API_KEY_17: ${{ secrets.GEMINI17 }}
+          GEMINI_API_KEY_18: ${{ secrets.GEMINI18 }}
+          GEMINI_API_KEY_19: ${{ secrets.GEMINI19 }}
+          GEMINI_API_KEY_20: ${{ secrets.GEMINI_API_KEY_20 }}
           GROQ_API_KEY: ${{ secrets.GROQ1 }}
           GROQ_API_KEY_2: ${{ secrets.GROQ2 }}
           GROQ_API_KEY_3: ${{ secrets.GROQ3 }}

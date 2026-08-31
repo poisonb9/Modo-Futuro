@@ -198,6 +198,7 @@ jobs:
           GEMINI_API_KEY_17: ${{ secrets.GEMINI17 }}
           GEMINI_API_KEY_18: ${{ secrets.GEMINI18 }}
           GEMINI_API_KEY_19: ${{ secrets.GEMINI19 }}
+          GEMINI_API_KEY_20: ${{ secrets.GEMINI_API_KEY_20 }}
           GROQ_API_KEY: ${{ secrets.GROQ1 }}
           GROQ_API_KEY_2: ${{ secrets.GROQ2 }}
           GROQ_API_KEY_3: ${{ secrets.GROQ3 }}

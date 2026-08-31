@@ -235,10 +235,31 @@ def main() -> None:
             m = json.loads(pj.read_text(encoding="utf-8"))
         except Exception:
             m = {}
+        # ⚠️ `canal` E' O CAMPO QUE FALTAVA, e a falta custou caro.
+        #
+        # Em 31/08/2026 o run #191 produziu os 4 primeiros cortes do
+        # @truque.importado. O agendador entao leu o manifesto INTEIRO do
+        # repositorio — que ate' aqui nao dizia de que canal era cada clipe —
+        # e encheu as 10 vagas do canal de maquiagem com clipes de CHIPS do
+        # @modofuturo. O primeiro sairia 3h depois.
+        #
+        # A guarda `CANAL_ESPERADO` nao pegou, e nao tinha como: ela confere
+        # que o TOKEN abre o canal certo (o destino), nunca de quem sao os
+        # CLIPES (a origem). Guarda de destino e guarda de origem sao duas
+        # coisas, e so' existia uma.
+        #
+        # So' apareceu agora porque este foi o PRIMEIRO run de um canal
+        # nao-@modofuturo a terminar neste repositorio: os do @atefalhar e do
+        # @semanestesia.pod foram todos cancelados no teto de 6h, e a cozinha
+        # usa outro repo.
+        #
+        # Vazio = clipe antigo, de antes deste campo. O agendador trata vazio
+        # como @modofuturo, que e' de quem sao todos os 66 anteriores.
         novos[chave] = {"url": url, "nota": nota, "legenda": legenda,
                         "fonte": m.get("fonte", ""),
                         "inicio_s": m.get("inicio_s"),
                         "titulo": m.get("titulo", ""),
+                        "canal": (os.environ.get("CANAL_ESPERADO") or "").strip().lower(),
                         "publicado_em": f"{date.today():%Y-%m-%d}"}
         print(f"  nota {nota:.0f}  {nome[:60]}")
         print(f"     {url}")

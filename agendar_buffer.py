@@ -498,7 +498,28 @@ def main() -> None:
 
     rejeitados_ = rejeitados.chaves()
 
+    # ⚠️ GUARDA DE ORIGEM. A `CANAL_ESPERADO` confere o DESTINO (que o token
+    # abre o canal certo). Esta confere a ORIGEM (que o clipe e' deste canal).
+    #
+    # Sem ela, em 31/08/2026 o primeiro run do @truque.importado encheu a fila
+    # do canal de maquiagem com 10 clipes de chips: o manifesto e' unico pro
+    # repositorio e o agendador pegou os primeiros da ordenacao.
+    #
+    # Clipe sem `canal` e' anterior ao campo — todos os 66 de entao sao do
+    # @modofuturo, entao vazio conta como modofuturo. Assim os antigos seguem
+    # sendo agendados normalmente e nada para de funcionar.
+    canal_deste_run = (os.environ.get("CANAL_ESPERADO") or "").strip().lower()
+
+    def e_deste_canal(v) -> bool:
+        if not canal_deste_run:
+            return True          # sem a variavel, nada muda (falha ABERTA)
+        return (v.get("canal") or "modofuturo").strip().lower() == canal_deste_run
+
     def cabe(v):
+        # A origem vem PRIMEIRO: nem adianta olhar dedup de um clipe que nem
+        # e' deste canal.
+        if not e_deste_canal(v):
+            return False
         k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
         # Comparacao por PREFIXO, nao por igualdade: 88 dos 101 posts reais
         # deste canal tem titulo e descricao na mesma linha, e a chave deles

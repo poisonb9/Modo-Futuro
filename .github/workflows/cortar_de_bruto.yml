@@ -199,6 +199,11 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # De QUEM e' este clipe. O manifesto e' unico pro repositorio, e sem
+          # este campo o agendador nao tem como saber a origem — foi assim que
+          # o primeiro run do @truque.importado encheu a fila do canal de
+          # maquiagem com 10 clipes de chips, em 31/08/2026.
+          CANAL_ESPERADO: ${{ inputs.canal }}
         run: python -X utf8 publicar_release.py
 
       # Enfileira no Buffer o que couber, respeitando o teto do plano gratuito

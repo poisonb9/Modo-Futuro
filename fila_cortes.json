@@ -10,7 +10,9 @@
       "selecao_modo": "",
       "drive_file_id": "1W6ByYx69ICMTHx5hdCnMNGTvy-FVK1Qw",
       "nome": "The Only 13 Minutes You Need To Master Discipline",
-      "quando": "2026-08-31T21:09:22+00:00"
+      "quando": "2026-08-31T22:34:13+00:00",
+      "tentativas": 1,
+      "run_id": 33446814246
     },
     {
       "estado": "disparado",
@@ -20,7 +22,9 @@
       "selecao_modo": "",
       "drive_file_id": "1QWuYC4MdTcJKlFXngVKR9e1r57rkyfAq",
       "nome": "BUILD YOUR GLUTES IN 2025",
-      "quando": "2026-08-31T21:09:24+00:00"
+      "quando": "2026-08-31T22:34:17+00:00",
+      "tentativas": 1,
+      "run_id": 33446820783
     },
     {
       "estado": "pendente",

@@ -45,7 +45,13 @@ jobs:
       - name: Disparar ate' preencher o teto
         env:
           GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          # A sonda le' varias: uma chave so' nao decide nada (ver o
+          # cabecalho de `tem_cota` — foi assim que dois runs morreram).
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_KEY_4: ${{ secrets.GEMINI_API_KEY_4 }}
+          GEMINI_API_KEY_5: ${{ secrets.GEMINI_API_KEY_5 }}
           TETO: ${{ inputs.teto || '2' }}
         run: python -X utf8 cortar_fila.py
 

@@ -56,35 +56,116 @@ def em_voo() -> int:
 
 
 def tem_cota() -> tuple[bool, str]:
-    """Uma chave do Gemini responde? Sonda barata antes de gastar runner.
+    """Alguma chave do Gemini responde 200? So' o 200 libera o disparo.
 
-    ⚠️ 503 NAO E' COTA — e' sobrecarga passageira do servidor. Tratar os dois
-    como a mesma coisa faria o cron desistir a noite toda por um soluco de
-    30 segundos. Na medicao de 31/08 as duas coisas apareceram juntas: 6
-    chaves em 429 e 4 em 503.
+    ⚠️ UMA CHAVE SO' NAO DECIDE NADA. A primeira versao disto sondava a
+    `GEMINI_API_KEY` e liberava em qualquer coisa que nao fosse 429. Em
+    31/08/2026 essa chave respondeu 503 — sobrecarga, nao cota — a sonda
+    liberou, e os DOIS runs morreram na selecao com as 20 chaves esgotadas.
+    A leitura estava certa e a conclusao errada: 503 numa chave nao diz nada
+    sobre as outras dezenove.
+
+    ⚠️ E 429 CONTINUA SENDO DIFERENTE DE 503. Nao voltei a juntar os dois: a
+    mensagem final distingue "sem cota" (espere o reset) de "sobrecarregado"
+    (tente de novo daqui a pouco), porque sao esperas de tamanhos diferentes.
+    O que mudou e' que agora o SILENCIO tambem barra — sem um 200 na mao,
+    nao gasto runner.
     """
-    chave = (os.environ.get("GEMINI_API_KEY") or "").strip()
-    if not chave:
-        return True, "sem chave pra sondar — seguindo sem sonda"
-    req = urllib.request.Request(
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-3.6-flash:generateContent?key={chave}",
-        data=json.dumps({"contents": [{"parts": [{"text": "oi"}]}]}).encode(),
-        headers={"Content-Type": "application/json"})
-    try:
-        urllib.request.urlopen(req, timeout=20)
-        return True, "cota ok"
-    except urllib.error.HTTPError as e:
-        if e.code == 429:
-            return False, "chave sondada esta SEM COTA — nao vou queimar runner"
-        return True, f"sonda deu HTTP {e.code} (nao e' cota) — seguindo"
-    except Exception as e:
-        return True, f"sonda falhou ({str(e)[:40]}) — seguindo"
+    chaves = [v for v in (os.environ.get(n) for n in
+                          ("GEMINI_API_KEY", "GEMINI_API_KEY_2",
+                           "GEMINI_API_KEY_3", "GEMINI_API_KEY_4",
+                           "GEMINI_API_KEY_5")) if (v or "").strip()]
+    if not chaves:
+        return True, "nenhuma chave pra sondar — seguindo sem sonda"
+
+    placar = {"sem cota": 0, "sobrecarregado": 0, "mudo": 0}
+    for chave in chaves:
+        req = urllib.request.Request(
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            f"gemini-3.6-flash:generateContent?key={chave.strip()}",
+            data=json.dumps({"contents": [{"parts": [{"text": "oi"}]}]}).encode(),
+            headers={"Content-Type": "application/json"})
+        try:
+            urllib.request.urlopen(req, timeout=20)
+            return True, f"chave respondeu 200 ({len(chaves)} sondadas)"
+        except urllib.error.HTTPError as e:
+            placar["sem cota" if e.code == 429 else "sobrecarregado"] += 1
+        except Exception:
+            placar["mudo"] += 1
+
+    resumo = ", ".join(f"{v} {k}" for k, v in placar.items() if v)
+    return False, f"nenhuma das {len(chaves)} chaves respondeu 200 ({resumo})"
+
+
+def devolver_os_que_falharam(d: dict) -> list[str]:
+    """Item cujo run falhou volta pra `pendente`. Sem isto a fila DRENA.
+
+    ⚠️ ERA UM DEFEITO REAL, nao precaucao: o item era marcado `disparado` e
+    ficava assim pra sempre. Um run que morre por cota levava a fonte junto,
+    e ao fim da noite a fila estaria vazia com zero corte feito — o cron
+    tocando alegremente pra ninguem.
+
+    ⚠️ TEM TETO DE TENTATIVAS. Sem ele, uma fonte defeituosa (bruto corrompido,
+    id que sumiu do Drive) voltaria pra fila pra sempre, queimando dois runs a
+    cada meia hora, e a fila nunca andaria.
+    """
+    voltaram = []
+    for item in d["itens"]:
+        if item.get("estado") != "disparado" or not item.get("run_id"):
+            continue
+        try:
+            r = _gh(f"actions/runs/{item['run_id']}")
+        except Exception:
+            continue
+        if r.get("status") != "completed":
+            continue
+        if r.get("conclusion") == "success":
+            item["estado"] = "pronto"
+            continue
+        item["tentativas"] = int(item.get("tentativas") or 0) + 1
+        if item["tentativas"] >= 3:
+            item["estado"] = "desistido"
+            voltaram.append(f"  DESISTI de {item['nome'][:40]} (3 tentativas)")
+        else:
+            item["estado"] = "pendente"
+            item.pop("run_id", None)
+            voltaram.append(f"  volta pra fila: {item['nome'][:40]}"
+                            f" (tentativa {item['tentativas']})")
+    return voltaram
+
+
+def run_recem_criado() -> int | None:
+    """O id do run que acabamos de disparar.
+
+    A API de dispatch nao devolve o id. Como o workflow tem `concurrency` e
+    esta e' a unica coisa que dispara corte automaticamente, o run mais novo
+    e' o nosso. Se nao aparecer a tempo, devolve None e o item fica sem id —
+    o que so' custa nao poder devolve-lo pra fila depois.
+    """
+    import time
+    for _ in range(10):
+        time.sleep(3)
+        d = _gh(f"actions/workflows/{WF}/runs?per_page=1")
+        runs = d.get("workflow_runs") or []
+        if runs:
+            return runs[0]["id"]
+    return None
 
 
 def main() -> None:
     d = json.loads(FILA.read_text(encoding="utf-8"))
     teto = int(os.environ.get("TETO") or d.get("teto_em_voo") or 2)
+
+    # ⚠️ ANTES DE QUALQUER COISA: recolher os que falharam. Se isto rodasse
+    # depois do disparo, um item que falhou continuaria fora da conta e a
+    # fila andaria pra frente sem ele.
+    devolvidos = devolver_os_que_falharam(d)
+    for linha in devolvidos:
+        print(linha)
+    if devolvidos:
+        FILA.write_text(json.dumps(d, ensure_ascii=False, indent=2) + chr(10),
+                        encoding="utf-8")
+
     pendentes = [i for i in d["itens"] if i["estado"] == "pendente"]
 
     if not pendentes:
@@ -129,6 +210,9 @@ def main() -> None:
             {"ref": "main", "inputs": entradas})
         item["estado"] = "disparado"
         item["quando"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        rid = run_recem_criado()
+        if rid:
+            item["run_id"] = rid
         linhas.append(f"  {item['canal']:<18} {item['nome'][:46]}")
         print(f"disparado: {item['canal']} — {item['nome'][:50]}")
 

@@ -10,12 +10,12 @@
       "selecao_modo": "",
       "drive_file_id": "1W6ByYx69ICMTHx5hdCnMNGTvy-FVK1Qw",
       "nome": "The Only 13 Minutes You Need To Master Discipline",
-      "quando": "2026-08-31T22:34:13+00:00",
-      "tentativas": 1,
-      "run_id": 33446814246
+      "quando": "2026-08-31T23:54:04+00:00",
+      "tentativas": 2,
+      "run_id": 33452593847
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -27,13 +27,15 @@
       "run_id": 33446820783
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1ODRqg83TSycFt-dijwLi67YqowL3i3eH",
-      "nome": "Chic Soft Glam Everyday Makeup"
+      "nome": "Chic Soft Glam Everyday Makeup",
+      "quando": "2026-08-31T23:54:09+00:00",
+      "run_id": 33452599550
     },
     {
       "estado": "pendente",

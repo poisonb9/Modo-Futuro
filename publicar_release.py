@@ -37,6 +37,7 @@ from pathlib import Path
 import requests
 
 import config
+from engine import registro_clipes
 
 REPO = os.environ.get("GITHUB_REPO", "poisonb9/Modo-Futuro")
 API = "https://api.github.com"
@@ -218,6 +219,19 @@ def main() -> None:
             continue
         video = clipe / "short_9x16.mp4"
         nome = nome_de_asset(clipe, "short_9x16.mp4")
+
+        # ⚠️ O CLIPE E' REGISTRADO PELO SHA ANTES DE QUALQUER COISA. Este e' o
+        # ponto por onde TODO clipe sai do pipeline, entao e' aqui que ele
+        # entra no registro — se entrasse depois, existiria clipe fora dele.
+        #
+        # A identidade e' o conteudo, nao o nome. Em 31/08/2026 a fila da
+        # cozinha tinha 6 posts com 6 titulos apontando pro MESMO arquivo (um
+        # `short_9x16.mp4` que cada upload sobrescrevia). Registro por nome
+        # teria dito "6 videos"; o sha diz "1".
+        sha = registro_clipes.sha_do_arquivo(video)
+        if registro_clipes.ja_postado(sha):
+            print(f"  [pulado] {clipe.name[:50]} — ESTE VIDEO JA' FOI POSTADO")
+            continue
         try:
             url = enviar_asset(token, release, video, nome)
         except Exception as e:
@@ -255,7 +269,17 @@ def main() -> None:
         #
         # Vazio = clipe antigo, de antes deste campo. O agendador trata vazio
         # como @modofuturo, que e' de quem sao todos os 66 anteriores.
+        registro_clipes.registrar(sha, arquivo=nome,
+                                  titulo=str(m.get('titulo') or clipe.name),
+                                  canal=str(m.get('canal') or ''), url=url)
+
         novos[chave] = {"url": url, "nota": nota, "legenda": legenda,
+                        # ⚠️ O SHA VIAJA NO MANIFESTO pra que o agendador
+                        # possa recusar por CONTEUDO. Sem ele, a unica
+                        # defesa e' o titulo — e foi exatamente o titulo
+                        # que deixou 6 posts da cozinha apontarem pro
+                        # mesmo arquivo em 31/08/2026.
+                        "sha": sha,
                         "fonte": m.get("fonte", ""),
                         "inicio_s": m.get("inicio_s"),
                         "titulo": m.get("titulo", ""),

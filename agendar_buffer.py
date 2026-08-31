@@ -44,6 +44,8 @@ from pathlib import Path
 
 import requests
 
+from engine import registro_clipes
+
 from engine import buffer_cota as cota, dedup
 from engine import adiados, rejeitados
 
@@ -519,6 +521,19 @@ def main() -> None:
         # A origem vem PRIMEIRO: nem adianta olhar dedup de um clipe que nem
         # e' deste canal.
         if not e_deste_canal(v):
+            return False
+        # ⚠️ RECUSA POR CONTEUDO, ANTES DE QUALQUER COMPARACAO DE TEXTO.
+        #
+        # Todas as guardas abaixo comparam TEXTO, e texto foi o que falhou em
+        # 31/08/2026: a fila da cozinha tinha 6 posts com 6 titulos e 6
+        # legendas diferentes apontando pro MESMO arquivo. Nenhuma dedup de
+        # texto podia ver isso — os textos eram, de fato, todos diferentes.
+        #
+        # O sha vem do manifesto (posto la' pelo publicar_release, onde o
+        # arquivo esta' na mao). Clipe antigo nao tem sha: nesse caso esta
+        # guarda nao opina e as de texto seguem valendo.
+        sha = v.get("sha")
+        if sha and registro_clipes.ja_postado(sha):
             return False
         k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
         # Comparacao por PREFIXO, nao por igualdade: 88 dos 101 posts reais

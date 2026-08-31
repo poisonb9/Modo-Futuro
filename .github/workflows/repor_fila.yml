@@ -32,6 +32,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write
+
 jobs:
   repor:
     runs-on: ubuntu-latest
@@ -55,6 +58,27 @@ jobs:
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
         run: python -X utf8 repor_fila.py
+
+      - name: Conferir o que ja' foi ao ar (registro de clipes)
+        if: always()
+        env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+        run: python -X utf8 conferir_postados.py
+
+      - name: Guardar o registro
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet registro_clipes.json 2>/dev/null; then
+            git add registro_clipes.json && git commit -m "registro: postagens conferidas" && git push
+          else
+            echo "registro inalterado"
+          fi
 
       - name: Avisar no Telegram
         if: always()

@@ -517,6 +517,13 @@ def main() -> None:
             return True          # sem a variavel, nada muda (falha ABERTA)
         return (v.get("canal") or "modofuturo").strip().lower() == canal_deste_run
 
+    # ⚠️ RECUSA DE CANAL EM ESTREIA, ANTES DE OLHAR CLIPE NENHUM. Nao adianta
+    # filtrar clipe: o problema nao e' QUAL clipe vai, e' que NENHUM pode ir.
+    # Filtrar por clipe deixaria a porta aberta pro proximo.
+    if estreia.em_estreia(canal_deste_run):
+        print(f"NADA ENFILEIRADO: {estreia.motivo(canal_deste_run)}")
+        return
+
     def cabe(v):
         # A origem vem PRIMEIRO: nem adianta olhar dedup de um clipe que nem
         # e' deste canal.

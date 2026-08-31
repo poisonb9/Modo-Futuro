@@ -1,0 +1,103 @@
+name: Teste - PocketTTS x Chatterbox (A/B, so mede, nao toca em nada)
+
+# ⚠️ ESTE WORKFLOW NAO ENTRA NO PIPELINE. Ele nao corta video, nao sobe pro
+# Drive, nao publica Release e nao mexe no Buffer. So' sintetiza a MESMA frase
+# nos dois motores, com as DUAS amostras, e devolve os audios num artifact.
+#
+# POR QUE EXISTE
+#
+# O Chatterbox leva ~89 segundos por frase (medido no run #196: uma frase de
+# 105 chars levou 89,4s). E' o custo dominante do pipeline — um lote de 4
+# clipes levou 135 min, quase tudo em sintese. O PocketTTS promete ~6x tempo
+# real em 2 nucleos de CPU.
+#
+# ⚠️ MAS CLONAGEM E' POR MODELO. A mesma amostra soa DIFERENTE em cada motor:
+# nao e' "melhor" ou "pior", e' OUTRA VOZ. O Bryan aprovou a voz da Bruna como
+# ela sai do Chatterbox. Trocar de motor exige nova aprovacao, por ouvido.
+#
+# ⚠️ E A LICENCA DOS PESOS NAO FOI CONFIRMADA. O codigo do PocketTTS e' MIT; o
+# README nao diz sob que licenca estao os PESOS. Para canal monetizado isso
+# importa, e tem de ser lido antes de migrar. Este teste mede QUALIDADE e
+# TEMPO; nao resolve a licenca.
+#
+# Ordem do Bryan em 31/08/2026: "vamos testar isoladamente um video com a
+# minha voz e outro com a voz da Bruna, e se eu gostar vamos migrar".
+
+on:
+  workflow_dispatch:
+    inputs:
+      texto:
+        description: "Frase a sintetizar nos dois motores (deixe vazio para usar a frase padrao, que tem nome proprio e numero com unidade)"
+        required: false
+        default: ""
+      so_pocket:
+        description: "true = pula o Chatterbox (mais rapido, mas sem comparacao lado a lado)"
+        required: false
+        default: "false"
+
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      # As DUAS amostras, porque o teste e' com as duas vozes.
+      - name: Baixar as duas amostras de voz do Drive
+        env:
+          GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
+        run: |
+          pip install -q google-api-python-client google-auth google-auth-oauthlib
+          mkdir -p vozes
+          python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/_bryan" --conta "reserva"
+          ffmpeg -y -v error -i vozes/_bryan -ar 24000 -ac 1 vozes/bryan.wav
+          python -X utf8 baixar_bruto_drive.py --file-id "1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0" --destino "vozes/_bruna" --conta "reserva"
+          ffmpeg -y -v error -i vozes/_bruna -ar 24000 -ac 1 vozes/bruna.wav
+          rm -f vozes/_bryan vozes/_bruna
+          for f in vozes/bryan.wav vozes/bruna.wav; do
+            echo -n "$f: "
+            ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$f"
+          done
+
+      - name: Instalar PocketTTS (medindo tempo)
+        id: instalar_pocket
+        run: |
+          t0=$(date +%s)
+          pip install -q pocket-tts || pip install -q git+https://github.com/kyutai-labs/pocket-tts
+          echo "segundos=$(( $(date +%s) - t0 ))" >> "$GITHUB_OUTPUT"
+          python - <<'PY'
+          import importlib.util
+          print("pocket-tts importavel:", importlib.util.find_spec("pocket_tts") is not None)
+          PY
+
+      - name: Instalar Chatterbox (medindo tempo)
+        if: ${{ inputs.so_pocket != 'true' }}
+        id: instalar_chatter
+        run: |
+          t0=$(date +%s)
+          pip install -q chatterbox-tts
+          pip install -q --force-reinstall --no-deps resemble-perth
+          echo "segundos=$(( $(date +%s) - t0 ))" >> "$GITHUB_OUTPUT"
+
+      - name: Sintetizar nos dois motores, com as duas vozes
+        env:
+          TEXTO: ${{ inputs.texto }}
+          SO_POCKET: ${{ inputs.so_pocket }}
+        run: python -X utf8 teste/ab_pockettts.py
+
+      - name: Upload dos audios
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-pockettts
+          path: |
+            saida_ab/*.wav
+            saida_ab/*.mp3
+            saida_ab/RELATORIO.txt
+          if-no-files-found: warn
+          retention-days: 14

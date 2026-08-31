@@ -271,9 +271,13 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 if config.VOZ_CLONADA_ATIVA:
                     print("      dublando (voz clonada, Chatterbox)...")
                     status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
+                    # `falantes` vem da SELECAO, que VE o video — e' quem
+                    # sabe de quem e' cada trecho. Vazio ou ausente: uma voz
+                    # so', como sempre.
                     audio_dublado, timing_dub = voz_clonada.gerar_trilha(
                         segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
-                        amostra_voz=config.VOZ_CLONADA_AMOSTRA)
+                        amostra_voz=config.VOZ_CLONADA_AMOSTRA,
+                        falantes=c.get("falantes"))
                     # a legenda tem que seguir o timing REAL do áudio
                     # dublado (pausas entre frases + atempo final mudam o
                     # ritmo em relação ao vídeo fonte), não o timing de
@@ -332,7 +336,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 ("titulo", "descricao", "tags", "gancho", "porque",
                  "nota", "inicio_s", "fim_s", "duracao_s",
                  "tipo_conteudo", "emocao_dominante", "dinamica",
-                 "genero_falante",
+                 "genero_falante", "falantes",
                  "marcador_viral", "arquetipo", "forca_gancho",
                  "compartilhabilidade", "independencia",
                  "intensidade_emocional", "valor_social")}

@@ -153,6 +153,21 @@ jobs:
           rm -f "vozes/_amostra_bruta"
           echo "amostra em uso: $NOME.wav"
           ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "vozes/$NOME.wav"
+          # ⚠️ VOZ POR FALANTE: quando o corte tem homem E mulher, cada um
+          # ganha a sua voz. Pra isso as DUAS amostras tem de estar em disco,
+          # nao so' a do disparo. Baixa a que faltar.
+          #
+          # Falha ABERTA: se uma nao vier, o motor usa a do disparo pros dois
+          # falantes. Clipe com voz unica e' aceitavel; clipe sem voz, nao.
+          if [ ! -f vozes/bryan_amostra.wav ]; then
+            python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/_m" --conta "reserva" || true
+            [ -f vozes/_m ] && ffmpeg -y -i vozes/_m -ar 24000 -ac 1 vozes/bryan_amostra.wav && rm -f vozes/_m
+          fi
+          if [ ! -f vozes/bruna_amostra.wav ]; then
+            python -X utf8 baixar_bruto_drive.py --file-id "1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0" --destino "vozes/_f" --conta "reserva" || true
+            [ -f vozes/_f ] && ffmpeg -y -i vozes/_f -ar 24000 -ac 1 vozes/bruna_amostra.wav && rm -f vozes/_f
+          fi
+          ls -la vozes/
 
       - name: Baixar vídeo bruto do Drive
         env:
@@ -197,6 +212,10 @@ jobs:
           SELECAO_MODO: ${{ inputs.selecao_modo }}
           # Nome do arquivo em vozes/. Casa com o passo que baixou a amostra.
           AMOSTRA_VOZ: ${{ inputs.amostra_voz == 'bruna' && 'bruna_amostra.wav' || 'bryan_amostra.wav' }}
+          # De quem e' a voz de cada genero, quando o corte tem os dois.
+          # Lidas por `_amostra_do_genero`; sem elas, uma voz so'.
+          AMOSTRA_VOZ_MASCULINO: bryan_amostra.wav
+          AMOSTRA_VOZ_FEMININO: bruna_amostra.wav
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"

@@ -172,8 +172,69 @@ def _concatenar_com_pausas(caminhos: list[Path], destino: Path,
     return destino
 
 
+def _amostra_do_genero(genero: str | None, padrao: Path) -> Path:
+    """Qual arquivo de voz clonar para um falante deste genero.
+
+    ⚠️ Falha ABERTA: genero desconhecido, vazio, "varios" ou "indefinido" cai
+    na amostra padrao do disparo. Um clipe com voz unica e' aceitavel; um
+    clipe SEM voz porque o genero veio estranho, nao.
+
+    ⚠️ E se a amostra do genero nao existir no disco, tambem cai no padrao. As
+    amostras sao baixadas por um passo do workflow, e um canal pode disparar
+    com uma so'.
+    """
+    import os
+    g = (genero or "").strip().lower()
+    nome = os.environ.get(f"AMOSTRA_VOZ_{g.upper()}") if g else None
+    if not nome:
+        return padrao
+    caminho = padrao.parent / nome
+    return caminho if caminho.exists() else padrao
+
+
+def _blocos_por_falante(segmentos: list[dict], falantes: list[dict] | None
+                        ) -> list[tuple[str | None, list[dict]]]:
+    """Agrupa os segmentos em blocos contiguos do MESMO falante.
+
+    Devolve [(genero, [segmentos])], na ordem do tempo.
+
+    ⚠️ Agrupa em BLOCO, nao por frase. A sintese frase a frase existe porque o
+    Chatterbox soa mal em textos longos (ver `_dividir_frases`), mas a VOZ tem
+    de mudar so' quando a pessoa muda. Trocar de voz a cada frase seria o
+    "dinamismo" que o VOZ_MULTIPLA.md chama de ruido.
+
+    Sem `falantes`, devolve um bloco so' com genero None — que e' o
+    comportamento de sempre.
+    """
+    if not falantes:
+        return [(None, segmentos)]
+
+    def quem(seg) -> tuple[str | None, str | None]:
+        # o falante cujo intervalo mais cobre este segmento
+        meio = (float(seg.get("inicio", 0)) + float(seg.get("fim", 0))) / 2
+        for f in falantes:
+            try:
+                if float(f["inicio_s"]) <= meio <= float(f["fim_s"]):
+                    return f.get("quem"), f.get("genero")
+            except (KeyError, TypeError, ValueError):
+                continue
+        return None, None
+
+    blocos: list[tuple[str | None, list[dict]]] = []
+    atual_quem = object()
+    for seg in segmentos:
+        q, g = quem(seg)
+        if q != atual_quem:
+            blocos.append((g, [seg]))
+            atual_quem = q
+        else:
+            blocos[-1][1].append(seg)
+    return blocos
+
+
 def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
-                  amostra_voz: Path, idioma: str = IDIOMA_PADRAO
+                  amostra_voz: Path, idioma: str = IDIOMA_PADRAO,
+                  falantes: list[dict] | None = None
                   ) -> tuple[Path | None, list[dict]]:
     """Mesma interface de dublagem.gerar_trilha, mas com a voz clonada.
 
@@ -196,11 +257,25 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     if not amostra_voz.exists():
         raise RuntimeError(f"amostra de voz não encontrada: {amostra_voz}")
 
-    texto_completo = " ".join(
-        seg["texto"].strip() for seg in segmentos if seg["texto"].strip())
-    frases = _dividir_frases(texto_completo)
+    # Um bloco por falante, em ordem. Sem `falantes`, um bloco so' — e o
+    # comportamento fica identico ao de antes.
+    blocos = _blocos_por_falante(segmentos, falantes)
+    pares: list[tuple[str, Path]] = []      # (frase, amostra daquele falante)
+    for genero, segs in blocos:
+        texto = " ".join(s2["texto"].strip() for s2 in segs
+                         if s2.get("texto", "").strip())
+        if not texto:
+            continue
+        amostra = _amostra_do_genero(genero, amostra_voz)
+        for fr in _dividir_frases(texto):
+            pares.append((fr, amostra))
+    frases = [f for f, _ in pares]
     if not frases:
         return None, []
+    if len({str(a) for _, a in pares}) > 1:
+        print(f"      [voz] {len(blocos)} bloco(s) de falante, "
+              f"{len({str(a) for _, a in pares})} voz(es) diferentes",
+              flush=True)
 
     trabalho.mkdir(parents=True, exist_ok=True)
     partes, duracoes = [], []
@@ -218,7 +293,7 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
         agora = datetime.datetime.now().strftime("%H:%M:%S")
         print(f"      [voz] frase {i + 1}/{len(frases)} as {agora} "
               f"(acumulado {time.monotonic() - t_lote:.0f}s)", flush=True)
-        _falar(frase, p, amostra_voz, idioma)
+        _falar(frase, p, pares[i][1], idioma)
         partes.append(p)
         # ⚠️ Isto e' um ffprobe. Se o travamento for aqui, o TIMEOUT_SONDA do
         # midia.py (120s) derruba com erro em 2 min em vez de 6h em silencio.

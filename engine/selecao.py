@@ -211,6 +211,30 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
      um clipe saiu dizendo 'A ESPECIALISTA EXPLICOU' com um homem na tela.
      'varios' se houver mais de uma pessoa falando; 'indefinido' so' se
      realmente nao der pra saber>",
+  "falantes": [
+     {{"inicio_s": <float>, "fim_s": <float>, "quem": "<A|B|C>",
+      "genero": "<masculino|feminino>"}}
+  ],
+     // QUEM FALA EM CADA TRECHO deste corte, em ordem, cobrindo o corte
+     // inteiro. Serve pra dar UMA VOZ A CADA PESSOA na dublagem — entrevistador
+     // com uma voz, entrevistado com outra.
+     //
+     // Voce esta' vendo o video: decida pela IMAGEM (quem esta' com a boca
+     // se mexendo) e pela VOZ, nunca pelo texto da transcricao.
+     //
+     // "quem" e' so' um rotulo estavel dentro deste corte: a MESMA pessoa tem
+     // que receber a MESMA letra do inicio ao fim. Nao precisa ser o nome.
+     //
+     // Se houver UMA pessoa so' falando, devolva UM item cobrindo o corte
+     // inteiro. Isso e' o normal, nao uma falha.
+     //
+     // ⚠️ NAO invente troca de falante pra parecer dinamico. Uma pessoa
+     // narrando 90 segundos e' um item so'. Trocar de voz onde ninguem trocou
+     // soa como defeito, nao como dinamismo.
+     //
+     // ⚠️ Prefira BLOCOS: se a mesma pessoa fala tres frases seguidas, e' UM
+     // item, nao tres. Trecho menor que 3 segundos so' se for uma
+     // intervencao mesmo (uma pergunta curta no meio da resposta).
   "titulo": "<título chamativo em pt-BR, max 80 chars, sem hashtag>",
   "descricao": "<2-3 frases em pt-BR para a descrição do YouTube>",
   "tags": ["<5 a 8 tags em pt-BR, sem #>"],

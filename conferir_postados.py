@@ -24,6 +24,12 @@ justamente a repeticao que ela existe pra impedir.
 nao sabe o sha do arquivo. E' o melhor disponivel desse lado, e por isso o
 registro guarda o sha na ORIGEM (no publicar_release), onde o arquivo esta' na
 mao. Quando os dois discordam, o sha manda.
+
+⚠️ CADA MOTOR CONFERE OS SEUS CANAIS, E SO' OS SEUS. O registro vive dentro
+do repositorio, entao sao DOIS registros: um aqui e um no outro motor. Se
+este script olhasse os 5 canais, todo post do canal do outro motor viraria
+"orfao" — e orfao e' o sinal de que a lista esta' incompleta. Um sinal que
+acusa 100% no caso normal nao serve pra avisar de nada.
 """
 from __future__ import annotations
 
@@ -39,7 +45,7 @@ from engine import registro_clipes as reg
 API = "https://api.buffer.com/"
 CANAIS = {
     "modofuturo":            ("6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631", "BUFFER_TOKEN"),
-    "cozinha.internacional": ("6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15", "BUFFER_TOKEN_COZINHA"),
+    # cozinha.internacional fica com o motor dela (repo pipeline).
     "semanestesia.pod":      ("6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6", "BUFFER_TOKEN_SEMANESTESIA"),
     "atefalhar":             ("6a94a9f9ca5d8883aa924198", "6a94aaf5065799be46581e1d", "BUFFER_TOKEN_ATEFALHAR"),
     "truque.importado":      ("6a94c752e0b1602e8c5cf1ae", "6a94c8f3065799be465981f6", "BUFFER_TOKEN_TRUQUEIMPORTADO"),

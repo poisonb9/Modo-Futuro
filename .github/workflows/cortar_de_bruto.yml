@@ -38,7 +38,7 @@ on:
         required: false
         default: "false"
       canal:
-        description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod | atefalhar. Decide o token do Buffer E o nome que a guarda confere antes de publicar. O valor tem que bater com o NOME do canal no Buffer."
+        description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod | atefalhar | truque.importado. Decide o token do Buffer E o nome que a guarda confere antes de publicar. O valor tem que bater com o NOME do canal no Buffer."
         required: false
         default: "modofuturo"
       voice_over:
@@ -53,6 +53,10 @@ on:
         description: "Voz clonada do Bryan (Chatterbox). Desligue para usar a voz de voz_canal."
         required: false
         default: "true"
+      selecao_modo:
+        description: "Criterio de corte. (vazio) = retorico, o corte fecha quando a IDEIA se resolve — os canais de fala. 'procedimento' = o corte tem de ser um PASSO INTEIRO (comeco limpo, meio inteiro, fim resolvido) e descarta se nao couber. OBRIGATORIO no truque.importado: o criterio retorico manda terminar ABRUPTO, que em maquiagem e' o video quebrado."
+        required: false
+        default: ""
       recorte:
         description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini"
         required: false
@@ -160,6 +164,7 @@ jobs:
           VOICE_OVER: ${{ inputs.voice_over }}
           VOZ_CANAL: ${{ inputs.voz_canal }}
           VOZ_CLONADA: ${{ inputs.voz_clonada }}
+          SELECAO_MODO: ${{ inputs.selecao_modo }}
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"

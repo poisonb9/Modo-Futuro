@@ -17,6 +17,42 @@ on:
       pasta_drive:
         description: "ID da pasta pai do Drive (com as subpastas 7/8/9)"
         required: true
+      canal:
+        description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod | atefalhar | truque.importado. Decide o token do Buffer E o nome que a guarda confere antes de publicar."
+        required: false
+        default: "modofuturo"
+      dublar:
+        description: "Dublar em pt-BR"
+        required: false
+        default: "true"
+      fala_literal:
+        description: "Dubla a fala REAL da pessoa em vez da narracao de contexto. Ver cortar_de_bruto.yml."
+        required: false
+        default: "false"
+      voice_over:
+        description: "Mantem o audio original audivel por baixo. EXIGE fala_literal=true."
+        required: false
+        default: "false"
+      voz_clonada:
+        description: "Voz clonada (Chatterbox). Desligue para usar voz_canal."
+        required: false
+        default: "true"
+      amostra_voz:
+        description: "De quem e' a voz clonada: (vazio) = Bryan | bruna"
+        required: false
+        default: ""
+      voz_canal:
+        description: "Voz do edge-tts: (vazio) | feminina | thalita. EXIGE voz_clonada=false."
+        required: false
+        default: ""
+      selecao_modo:
+        description: "(vazio) = criterio retorico | procedimento = o corte tem de ser um PASSO INTEIRO"
+        required: false
+        default: ""
+      estilo_legenda:
+        description: "1 = padrao do canal, 2 = replica da referencia (padrao universal)"
+        required: false
+        default: "2"
 
 jobs:
   cortar:
@@ -62,6 +98,46 @@ jobs:
             echo "YTDLP_COOKIES_FILE=$RUNNER_TEMP/cookies.txt" >> "$GITHUB_ENV"
           fi
 
+      - name: Baixar amostra de voz do Drive
+        if: ${{ inputs.dublar == 'true' }}
+        env:
+          GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
+          AMOSTRA: ${{ inputs.amostra_voz }}
+        run: |
+          mkdir -p vozes
+          if [ "$AMOSTRA" = "bruna" ]; then
+            ID="1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0"; NOME="bruna_amostra"
+          else
+            ID="1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-"; NOME="bryan_amostra"
+          fi
+          # ⚠️ Baixa sempre com nome PROVISORIO. A primeira versao usava o nome
+          # final com a extensao de origem, e quebrou no run #192: a amostra da
+          # Bruna ja' e' .wav, entao o comando virou
+          #     ffmpeg -i vozes/bruna_amostra.wav ... vozes/bruna_amostra.wav
+          # e o ffmpeg recusa entrada igual a saida ("Output same as Input").
+          # Com o Bryan passava despercebido porque a origem dele e' .m4a.
+          # O provisorio faz os dois caminhos ficarem iguais.
+          python -X utf8 baixar_bruto_drive.py --file-id "$ID" --destino "vozes/_amostra_bruta" --conta "reserva"
+          ffmpeg -y -i "vozes/_amostra_bruta" -ar 24000 -ac 1 "vozes/$NOME.wav"
+          rm -f "vozes/_amostra_bruta"
+          echo "amostra em uso: $NOME.wav"
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "vozes/$NOME.wav"
+          # ⚠️ VOZ POR FALANTE: quando o corte tem homem E mulher, cada um
+          # ganha a sua voz. Pra isso as DUAS amostras tem de estar em disco,
+          # nao so' a do disparo. Baixa a que faltar.
+          #
+          # Falha ABERTA: se uma nao vier, o motor usa a do disparo pros dois
+          # falantes. Clipe com voz unica e' aceitavel; clipe sem voz, nao.
+          if [ ! -f vozes/bryan_amostra.wav ]; then
+            python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/_m" --conta "reserva" || true
+            [ -f vozes/_m ] && ffmpeg -y -i vozes/_m -ar 24000 -ac 1 vozes/bryan_amostra.wav && rm -f vozes/_m
+          fi
+          if [ ! -f vozes/bruna_amostra.wav ]; then
+            python -X utf8 baixar_bruto_drive.py --file-id "1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0" --destino "vozes/_f" --conta "reserva" || true
+            [ -f vozes/_f ] && ffmpeg -y -i vozes/_f -ar 24000 -ac 1 vozes/bruna_amostra.wav && rm -f vozes/_f
+          fi
+          ls -la vozes/
+
       - name: Cortar
         env:
           # nomes dos secrets ficaram diferentes do padrão do código
@@ -89,11 +165,24 @@ jobs:
           GROQ_API_KEY_6: ${{ secrets.GROQ6 }}
           GROQ_API_KEY_7: ${{ secrets.GROQ7 }}
           GROQ_API_KEY_8: ${{ secrets.GROQ8 }}
+          VOICE_OVER: ${{ inputs.voice_over }}
+          VOZ_CANAL: ${{ inputs.voz_canal }}
+          VOZ_CLONADA: ${{ inputs.voz_clonada }}
+          SELECAO_MODO: ${{ inputs.selecao_modo }}
+          # Nome do arquivo em vozes/. Casa com o passo que baixou a amostra.
+          AMOSTRA_VOZ: ${{ inputs.amostra_voz == 'bruna' && 'bruna_amostra.wav' || 'bryan_amostra.wav' }}
+          # De quem e' a voz de cada genero, quando o corte tem os dois.
+          # Lidas por `_amostra_do_genero`; sem elas, uma voz so'.
+          AMOSTRA_VOZ_MASCULINO: bryan_amostra.wav
+          AMOSTRA_VOZ_FEMININO: bruna_amostra.wav
         run: >
           python -X utf8 main.py
           --url "${{ inputs.url }}"
           --qtd "${{ inputs.qtd }}"
           --idioma "${{ inputs.idioma }}"
+          --estilo-legenda "${{ inputs.estilo_legenda }}"
+          ${{ inputs.dublar == 'true' && '--dublar' || '' }}
+          ${{ inputs.fala_literal == 'true' && '--fala-literal' || '' }}
 
       - name: Subir pro Drive
         env:
@@ -101,6 +190,36 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}"
+
+      # ⚠️ ATE' 31/08/2026 ESTE WORKFLOW PARAVA NO DRIVE. Sem canal, sem
+      # Release e sem Buffer: o clipe saia orfao — ninguem sabia de que canal
+      # era, e nao havia URL publica pra postar. Era o segundo caminho cego do
+      # projeto (o primeiro foi a cozinha, consertada no mesmo dia).
+      #
+      # `continue-on-error` nos dois: publicar e' conveniencia. O clipe ja'
+      # esta' no Drive, e um erro do Buffer nao pode reprovar o corte.
+      - name: Publicar clipes numa Release (URL publica)
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CANAL_ESPERADO: ${{ inputs.canal }}
+        run: python -X utf8 publicar_release.py
+
+      - name: Enfileirar no Buffer
+        continue-on-error: true
+        env:
+          BUFFER_TOKEN: ${{ inputs.canal == 'cozinha.importada'
+            && secrets.BUFFER_TOKEN_COZINHA
+            || (inputs.canal == 'semanestesia.pod'
+                && secrets.BUFFER_TOKEN_SEMANESTESIA
+                || (inputs.canal == 'atefalhar'
+                    && secrets.BUFFER_TOKEN_ATEFALHAR
+                    || (inputs.canal == 'truque.importado'
+                        && secrets.BUFFER_TOKEN_TRUQUEIMPORTADO
+                        || secrets.BUFFER_TOKEN))) }}
+          CANAL_ESPERADO: ${{ inputs.canal }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -X utf8 agendar_buffer.py
 
       - name: Avisar no Telegram (roda sempre, mesmo se algo falhar acima)
         if: always()

@@ -353,14 +353,21 @@ def publicar_pasta(pasta: Path, direto: bool, publico: bool, so_vertical: bool):
 
 
 def legenda_do_clipe(clipe: Path) -> str:
-    """Legenda pronta pra colar no app: título + hashtags válidas.
+    """A legenda do clipe, lida do post.json. Delega pra `engine.legenda_post`.
 
-    Hashtag não pode ter espaço nem acento — "#Elon Musk" viraria "#Elon"
-    mais o texto solto "Musk".
+    ⚠️ E' esta funcao que escreve o `.txt` que vai pro Drive ao lado do
+    video. Ate' 31/08/2026 ela montava so' titulo + hashtags, enquanto o post
+    do Buffer levava titulo + descricao + premium + hashtags. Os .txt do
+    @truque.importado sairam com 0,1 KB; os da cozinha tinham 5 a 12 KB.
+
+    ⚠️ NAO reimplemente a composicao aqui. A primeira tentativa de conserto
+    foi COPIAR a logica da outra funcao, e o teste pegou uma divergencia nova
+    (linha em branco a mais quando a descricao e' vazia). Copiar logica cria a
+    proxima divergencia.
     """
+    from engine import legenda_post
     meta = json.loads((clipe / "post.json").read_text(encoding="utf-8"))
-    tags = " ".join(_hashtag(t) for t in (meta.get("tags") or [])[:5] if t)
-    return f"{meta.get('titulo') or clipe.name} {tags}".strip()
+    return legenda_post.montar(meta, nome_padrao=clipe.name)
 
 
 def _enviar_um(access_token: str, c: Path, direto: bool, publico: bool,

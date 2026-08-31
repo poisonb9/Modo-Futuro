@@ -44,15 +44,15 @@ def _hashtag(tag: str) -> str:
 
 
 def _legenda(c: dict) -> str:
-    """Legenda pronta pra colar: título, descrição e hashtags válidas."""
-    tags = " ".join(_hashtag(t) for t in (c.get("tags") or []) if t)
-    # A DESCRICAO PREMIUM entra entre a descricao curta e as hashtags: o
-    # contexto que nao coube nos 90s do corte. Ver engine/legenda_premium.py.
-    premium = (c.get("legenda_premium") or "").strip()
-    corpo = f"{c.get('titulo','')}" + chr(10)*2 + f"{c.get('descricao','')}"
-    if premium:
-        corpo += chr(10)*2 + premium
-    return (corpo + chr(10)*2 + tags).strip()
+    """Legenda pronta pra colar. Delega pra `engine.legenda_post`.
+
+    ⚠️ NAO reimplemente aqui. Ate' 31/08/2026 esta funcao e a
+    `publicar_tiktok.legenda_do_clipe` montavam a legenda cada uma do seu
+    jeito, e discordavam: o post do Buffer saia completo e o .txt do Drive
+    saia so' com titulo e hashtags (0,1 KB contra 5-12 KB da cozinha).
+    """
+    from engine import legenda_post
+    return legenda_post.montar(c)
 
 
 def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,

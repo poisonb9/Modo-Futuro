@@ -51,7 +51,12 @@ VOZES = {
     "antonio": "pt-BR-AntonioNeural",
     "feminina": "pt-BR-FranciscaNeural",
     "francisca": "pt-BR-FranciscaNeural",
-    "thalita": "pt-BR-ThalitaNeural",
+    # ⚠️ O nome CERTO tem "Multilingual". Ate' 31/08/2026 esta linha dizia
+    # `pt-BR-ThalitaNeural`, que NAO EXISTE no catalogo do edge-tts — medido
+    # com `edge_tts.list_voices()`: so' ha' tres vozes pt-BR, e a Thalita e'
+    # `pt-BR-ThalitaMultilingualNeural`. Ninguem tinha pedido a Thalita ainda,
+    # entao a alternativa nunca foi exercida e o erro dormiu no mapa.
+    "thalita": "pt-BR-ThalitaMultilingualNeural",
 }
 
 PADRAO = "pt-BR-AntonioNeural"

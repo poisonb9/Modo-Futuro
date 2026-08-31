@@ -95,7 +95,17 @@ from engine import voz  # noqa: E402  (o bloco de voz precisa dele)
 # qualquer outra escolha (o main.py so' cai no edge-tts quando esta e' falsa).
 # Sem VOZ_CLONADA no ambiente nada muda. Ver engine/voz.py.
 VOZ_CLONADA_ATIVA = voz.clonada_ativa()
-VOZ_CLONADA_AMOSTRA = RAIZ / "vozes" / "bryan_amostra.wav"
+# Qual amostra clonar. Era FIXA na do Bryan ate' 31/08/2026 — o que travava
+# qualquer canal que precisasse de outra voz.
+#
+# ⚠️ O canal de maquiagem e' o caso: voz masculina ali contradiz o publico, e
+# a alternativa (edge-tts) so' tem tres vozes pt-BR e nenhuma agradou. A irma
+# do Bryan, Bruna Soares, gravou a amostra — autorizada por ela.
+#
+# `AMOSTRA_VOZ` e' o NOME do arquivo em `vozes/`, escolhido no disparo. Sem a
+# variavel nada muda: continua a do Bryan, como em todos os runs anteriores.
+_AMOSTRA = (os.environ.get("AMOSTRA_VOZ") or "bryan_amostra.wav").strip()
+VOZ_CLONADA_AMOSTRA = RAIZ / "vozes" / _AMOSTRA
 
 # Piso de gancho (0-10). O Gemini já devolve `forca_gancho` por clipe, mas
 # até 29/07/2026 esse número era gravado no post.json e nunca usado.

@@ -50,9 +50,13 @@ on:
         required: false
         default: ""
       voz_clonada:
-        description: "Voz clonada do Bryan (Chatterbox). Desligue para usar a voz de voz_canal."
+        description: "Voz clonada (Chatterbox). Desligue para usar a voz de voz_canal."
         required: false
         default: "true"
+      amostra_voz:
+        description: "De QUEM e' a voz clonada: (vazio) = Bryan | bruna = a irma do Bryan (canal de maquiagem). So' vale com voz_clonada=true."
+        required: false
+        default: ""
       selecao_modo:
         description: "Criterio de corte. (vazio) = retorico, o corte fecha quando a IDEIA se resolve — os canais de fala. 'procedimento' = o corte tem de ser um PASSO INTEIRO (comeco limpo, meio inteiro, fim resolvido) e descarta se nao couber. OBRIGATORIO no truque.importado: o criterio retorico manda terminar ABRUPTO, que em maquiagem e' o video quebrado."
         required: false
@@ -115,14 +119,25 @@ jobs:
           pip install chatterbox-tts
           pip install --force-reinstall --no-deps resemble-perth
 
-      - name: Baixar amostra de voz do Bryan do Drive
+      # A amostra que sera' CLONADA. Era fixa na do Bryan; agora vem do
+      # disparo. O `ffmpeg -ar 24000 -ac 1` e' o formato que o Chatterbox
+      # espera — a de referencia tem 24 kHz, mono, PCM 16 bits.
+      - name: Baixar amostra de voz do Drive
         if: ${{ inputs.dublar == 'true' }}
         env:
           GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
+          AMOSTRA: ${{ inputs.amostra_voz }}
         run: |
           mkdir -p vozes
-          python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/bryan_amostra.m4a" --conta "reserva"
-          ffmpeg -y -i vozes/bryan_amostra.m4a -ar 24000 -ac 1 vozes/bryan_amostra.wav
+          if [ "$AMOSTRA" = "bruna" ]; then
+            ID="1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0"; NOME="bruna_amostra"; EXT="wav"
+          else
+            ID="1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-"; NOME="bryan_amostra"; EXT="m4a"
+          fi
+          python -X utf8 baixar_bruto_drive.py --file-id "$ID" --destino "vozes/$NOME.$EXT" --conta "reserva"
+          ffmpeg -y -i "vozes/$NOME.$EXT" -ar 24000 -ac 1 "vozes/$NOME.wav"
+          echo "amostra em uso: $NOME.wav"
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "vozes/$NOME.wav"
 
       - name: Baixar vídeo bruto do Drive
         env:
@@ -165,6 +180,8 @@ jobs:
           VOZ_CANAL: ${{ inputs.voz_canal }}
           VOZ_CLONADA: ${{ inputs.voz_clonada }}
           SELECAO_MODO: ${{ inputs.selecao_modo }}
+          # Nome do arquivo em vozes/. Casa com o passo que baixou a amostra.
+          AMOSTRA_VOZ: ${{ inputs.amostra_voz == 'bruna' && 'bruna_amostra.wav' || 'bryan_amostra.wav' }}
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"

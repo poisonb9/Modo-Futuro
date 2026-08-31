@@ -83,7 +83,7 @@ def caso(nome, esperado_derruba, voz_esperada=None, clone_esperado=None, **env):
 # A combinacao que produziria a voz do Bryan num canal de maquiagem.
 caso("feminina pedida COM clonagem ligada", True, VOZ_CANAL="feminina")
 caso("nome completo do edge-tts, clonagem ligada", True,
-     VOZ_CANAL="pt-BR-ThalitaNeural")
+     VOZ_CANAL="pt-BR-ThalitaMultilingualNeural")
 
 # ---------------------------------------------------------------- NEGATIVOS
 # O disparo de sempre. Este e' o caso que protege os quatro canais que ja'
@@ -96,7 +96,7 @@ caso("feminina COM clonagem desligada", False,
      VOZ_CANAL="feminina", VOZ_CLONADA="0")
 
 caso("thalita por apelido, clonagem desligada", False,
-     voz_esperada="pt-BR-ThalitaNeural", clone_esperado=False,
+     voz_esperada="pt-BR-ThalitaMultilingualNeural", clone_esperado=False,
      VOZ_CANAL="thalita", VOZ_CLONADA="0")
 
 caso("nome completo do edge-tts, clonagem desligada", False,
@@ -132,7 +132,42 @@ if dub.VOZ_PADRAO != "pt-BR-AntonioNeural":
 else:
     print("  ok  [ segue ]  sem VOZ_CANAL, dublagem volta ao masculino")
 
+
+# ─────────────────────────────────────────────────────────────────────────
+# ⚠️ A GUARDA QUE FALTAVA — e por que este teste passou com o mapa errado.
+#
+# Ate' 31/08/2026 o mapa apontava `thalita` para `pt-BR-ThalitaNeural`, um
+# nome que NAO EXISTE no catalogo do edge-tts (so' ha' tres vozes pt-BR:
+# Antonio, Francisca e ThalitaMultilingual). O teste passava porque ele
+# comparava o mapa com uma constante escrita no proprio teste — os dois
+# concordavam, e os dois estavam errados.
+#
+# Comparar o codigo com uma copia da mesma suposicao nao verifica nada. O que
+# verifica e' perguntar ao edge-tts quais vozes existem de verdade.
+#
+# O catalogo vem da rede. Sem rede o teste AVISA e segue: falha de rede nao
+# pode reprovar uma suite que roda offline o tempo todo.
+print()
+print("[extra] as vozes do mapa existem no catalogo do edge-tts?")
+try:
+    import asyncio
+    import edge_tts
+    from engine import voz as vozmod
+
+    reais = {v["ShortName"] for v in asyncio.run(edge_tts.list_voices())}
+except Exception as e:
+    print(f"  aviso  catalogo indisponivel ({str(e)[:50]}) — checagem pulada")
+else:
+    for apelido, nome in sorted(vozmod.VOZES.items()):
+        if nome in reais:
+            print(f"  ok     {apelido:<12} -> {nome}")
+        else:
+            print(f"  FALHOU {apelido:<12} -> {nome} NAO EXISTE no edge-tts")
+            falhas += 1
+    ptbr = sorted(v for v in reais if v.startswith("pt-BR"))
+    print(f"  (o catalogo pt-BR tem {len(ptbr)}: {', '.join(ptbr)})")
+
 if falhas:
     print(chr(10) + f"{falhas} FALHA(S)")
     sys.exit(1)
-print(chr(10) + "10 casos — tudo verde")
+print(chr(10) + "tudo verde")

@@ -352,6 +352,17 @@ def publicar_pasta(pasta: Path, direto: bool, publico: bool, so_vertical: bool):
     print(f"\n{len(enviados)} enviados. Registro em _publicados_tiktok.json")
 
 
+def legenda_para_arquivo(clipe: Path) -> str:
+    """A legenda com espaco vazio no fim — pro .txt que fica ao lado do video.
+
+    ⚠️ NAO use isto pro post do Buffer nem pro Telegram: la' o texto e'
+    publicado, e linha em branco sobrando aparece. Ver `legenda_post`.
+    """
+    from engine import legenda_post
+    meta = json.loads((clipe / "post.json").read_text(encoding="utf-8"))
+    return legenda_post.para_arquivo(meta, nome_padrao=clipe.name)
+
+
 def legenda_do_clipe(clipe: Path) -> str:
     """A legenda do clipe, lida do post.json. Delega pra `engine.legenda_post`.
 

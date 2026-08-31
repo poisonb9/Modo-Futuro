@@ -24,7 +24,7 @@ from pathlib import Path
 import config
 import numeracao
 from engine import telegram
-from publicar_tiktok import legenda_do_clipe
+from publicar_tiktok import legenda_para_arquivo
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 CLIENT_SECRETS = config.RAIZ / "client_secrets.json"
@@ -197,7 +197,7 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
             partes[parte] = _achar_ou_criar_subpasta(servico, pasta_dia, parte)
         destino = partes[parte]
         video = clipe / "short_9x16.mp4"
-        legenda = legenda_do_clipe(clipe)
+        legenda = legenda_para_arquivo(clipe)
 
         txt = clipe / "_legenda_drive.txt"
         txt.write_text(legenda, encoding="utf-8")

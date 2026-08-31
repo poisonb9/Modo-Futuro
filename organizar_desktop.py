@@ -15,7 +15,7 @@ import shutil
 from pathlib import Path
 
 import config
-from publicar_tiktok import legenda_do_clipe
+from publicar_tiktok import legenda_para_arquivo
 
 PADRAO_DESTINO = Path.home() / "Desktop" / "Outputs TikTok"
 
@@ -69,7 +69,7 @@ def organizar(destino: Path):
             continue
 
         shutil.copy2(video, destino_video)
-        destino_txt.write_text(legenda_do_clipe(clipe), encoding="utf-8")
+        destino_txt.write_text(legenda_para_arquivo(clipe), encoding="utf-8")
         print(f"  [{alvo}/{dia}] {nome_base}")
         total += 1
 

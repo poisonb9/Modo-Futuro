@@ -66,3 +66,20 @@ def montar(meta: dict, nome_padrao: str = "") -> str:
     if tags:
         partes.append(tags)
     return "\n\n".join(p for p in partes if p).strip()
+
+
+# Quantas linhas em branco sobram no fim do .txt. Pedido do Bryan em
+# 31/08/2026: no celular, o seletor de texto agarra melhor quando ha' area
+# vazia depois da ultima linha — sem isso a selecao esbarra no fim do arquivo
+# e ele precisa mirar no ultimo caractere.
+LINHAS_VAZIAS_NO_FIM = 8
+
+
+def para_arquivo(meta: dict, nome_padrao: str = "") -> str:
+    """A mesma legenda, com espaco vazio no fim, pro .txt que o Bryan copia.
+
+    ⚠️ SO' PRA ARQUIVO. O `montar` continua sem sobra, porque o mesmo texto
+    vira o corpo do post no Buffer e a mensagem do Telegram — linhas em
+    branco no fim de um post publicado sao lixo visivel.
+    """
+    return montar(meta, nome_padrao) + chr(10) * LINHAS_VAZIAS_NO_FIM

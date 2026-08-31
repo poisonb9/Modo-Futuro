@@ -3,19 +3,22 @@
 Maquiagem de fora, em portugues. **Quinto canal**, nome decidido pelo Bryan em
 30/08/2026.
 
-## ⚠️ O CANAL AINDA NAO EXISTE
+## ESTADO
 
-Isto e' a receita escrita ANTES de criar, de proposito — foi a falta disso que
-custou dois runs de 6h no Sem Anestesia. Falta, em ordem:
+A receita foi escrita ANTES de criar a conta, de proposito — foi a falta disso
+que custou dois runs de 6h no Sem Anestesia.
 
-- [ ] conferir se `@truque.importado` esta' livre no TikTok
-- [ ] criar a conta no TikTok (o nome de exibicao **trava ~7 dias**)
+- [x] `@truque.importado` estava livre — **conta criada em 31/08/2026**
+- [x] radar de fontes (`radar.py` — escrito, **ainda nao rodou**)
 - [ ] criar a 5a conta do Buffer e conectar o canal
-- [ ] gravar o secret `BUFFER_TOKEN_TRUQUEIMPORTADO` (o ramo no workflow **ja'
-      existe**; sem o secret ele cai no `else`, que e' o token do @modofuturo,
-      e a guarda de canal aborta antes de publicar — falha fechada)
-- [ ] radar de fontes
+- [ ] gravar o secret `BUFFER_TOKEN_TRUQUEIMPORTADO`
 - [ ] logo
+
+⚠️ **Enquanto o secret nao existir, NAO dispare corte para este canal.** O ramo
+no workflow ja' existe, mas sem o secret ele cai no `else`, que e' o token do
+@modofuturo. A guarda `CANAL_ESPERADO` aborta antes de publicar (falha
+fechada, o clipe nao vai pro canal errado) — mas o corte se perde no fim do
+run, com o runner inteiro ja' gasto.
 
 ## Receita de disparo
 

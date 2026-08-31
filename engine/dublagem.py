@@ -21,8 +21,21 @@ _ATEMPO_MIN, _ATEMPO_MAX = 0.7, 1.6   # fora disso a voz fica robótica/irreconh
 
 
 def _exige_edge_tts():
-    if not shutil.which("edge-tts"):
-        raise RuntimeError("'edge-tts' não encontrado. Rode: pip install edge-tts")
+    """Confere a BIBLIOTECA, nao o executavel.
+
+    O guarda antigo usava `shutil.which("edge-tts")`, que procura o script de
+    linha de comando. Mas `_sintetizar` faz `import edge_tts` — a biblioteca.
+    Sao duas coisas diferentes: da' pra ter uma sem a outra (instalacao sem o
+    script no PATH, ou um `edge-tts` no PATH de outro ambiente).
+
+    Conferir o que NAO e' usado deixa o guarda contando a historia errada
+    justamente na hora em que alguem esta' lendo o log pra entender a falha.
+    """
+    import importlib.util
+    if importlib.util.find_spec("edge_tts") is None:
+        raise RuntimeError(
+            "'edge-tts' nao encontrado. Ele esta' no requirements.txt desde "
+            "31/08/2026; se o run e' antigo, rode: pip install edge-tts")
 
 
 async def _sintetizar(texto: str, destino: Path, voz: str):

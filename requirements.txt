@@ -16,6 +16,14 @@ num2words>=0.5.13
 mediapipe>=0.10.35
 opencv-python>=4.10
 
+# --- dublagem com voz do canal (engine/dublagem.py) ---
+# ⚠️ NAO e' opcional desde 30/08/2026. Ate' entao todo canal usava a voz
+# clonada (Chatterbox) e este pacote so' existia na maquina do Bryan. Quando
+# o @truque.importado estreou com voz feminina, o run #190 morreu em 14 min
+# com "'edge-tts' nao encontrado" — a nuvem NUNCA tinha tido como dublar por
+# esse caminho.
+edge-tts>=7.0
+
 # --- publicação no YouTube (publicar.py) ---
 google-api-python-client>=2.140
 google-auth-oauthlib>=1.2

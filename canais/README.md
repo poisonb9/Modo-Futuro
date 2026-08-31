@@ -19,8 +19,12 @@ de qualquer repo.
 | [Cozinha Internacional](cozinha.importada/) | `@cozinha.internacional` | receitas do mundo | narracao + conversao de medidas |
 | [Sem Anestesia](semanestesia.pod/) | `@semanestesia.pod` | comportamento e mente | fala literal + voice over |
 | [Ate Falhar](atefalhar/) | `@atefalhar` | disciplina, corpo e dor | fala literal + voice over |
+| [Truque Importado](truque.importado/) | `@truque.importado` | maquiagem | narracao + **voz feminina** |
 
-## A regra que vale pros quatro
+## A regra que vale pros cinco
+
+⚠️ O Truque Importado ainda NAO EXISTE — a receita esta' escrita antes de
+criar, de proposito. Ver o README dele.
 
 **O valor de `canal` tem que ser identico ao NOME do canal no Buffer.** A
 guarda em `agendar_buffer.py` compara os dois e aborta antes de publicar se
@@ -34,7 +38,7 @@ e apagar deixa o video em 0 pra sempre.
 `@cozinha.internacional` no TikTok, `cozinha.importada` no Buffer. **O valor
 segue o Buffer.**
 
-## Cadencia, igual nos quatro
+## Cadencia, igual nos quatro que existem
 
 4 posts/dia, **intervalo minimo de 3 horas**. Teto do plano do Buffer: **10
 posts agendados por canal** — e' limite de FILA, nao de total: a cada post
@@ -42,5 +46,5 @@ enviado, um slot volta.
 
 ## Rotulo de IA
 
-`metadata.tiktok.isAiGenerated = true` em **todo** post dos quatro. A interface
+`metadata.tiktok.isAiGenerated = true` em **todo** post de todos. A interface
 do Buffer nao expoe esse campo; so' a API expoe.

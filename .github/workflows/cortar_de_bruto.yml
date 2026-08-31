@@ -215,7 +215,9 @@ jobs:
                 && secrets.BUFFER_TOKEN_SEMANESTESIA
                 || (inputs.canal == 'atefalhar'
                     && secrets.BUFFER_TOKEN_ATEFALHAR
-                    || secrets.BUFFER_TOKEN)) }}
+                    || (inputs.canal == 'truque.importado'
+                        && secrets.BUFFER_TOKEN_TRUQUEIMPORTADO
+                        || secrets.BUFFER_TOKEN))) }}
           # E a guarda confere o DESTINO REAL: o agendar_buffer aborta se o
           # token abrir um canal diferente deste. Pega secret trocado, secret
           # vazio e canal reconectado noutra conta — nao so' o caso de hoje.

@@ -1,0 +1,811 @@
+{
+  "_leia": "Registro de clipes. Chave = sha256 do mp4.",
+  "clipes": {
+    "sem-hash:porquechips3dsaotaocarosdefabricarempilharcamadasdesilicioexigealinharconexoeseletricasmenoresque1micrometroentremultiplosblocosdeprocessamentoparacontornaroslimitesdafisicanoencolhimentodetransistoresaindustriapassouaconstruirchipsparacimaemvezdeapenasparaosladossoqueempilharcomponentestransformaamanufaturadesemicondutoresemumgargalodecalorrendimentoeprecisaomecanicaoqueinflacionaocustodessaarquiteturaoefeitomultiplicadordedefeitosseumaunicacamadadememoriativerumafalhainvisiveltodooblocoempilhadodeoitooudozecamadasprecisaserdescartadoacriacaodepontesverticaistsvsexigeperfurarosiliciocomplasmaepreencherosfurosmicroscopicoscomcobresemdeixarcavidadesdearadensidadetermicaseacumulanocentrodaestruturacriandopontosquentesnascamadasinferioresqueoarconvencionalnaoconsegueresfriaroprocessodesoldahibridaexigesalaslimpascomcontroledeparticulasextremamenteseveroondeumgraodepoeirainvisiveldestroiaconexaoeletricaocustodecapitaldasmaquinasdeencapsulamentoavancadofazcomquepouquissimasfundicoesnomundoconsigamproduziressatecnologiaemescalacomercialacapacidadedeempilharsiliciocomeficienciavirouoprincipaldivisordeaguasentreprocessadorescomunsechipsparainteligenciaartificialseogargalodaindustriadeixoudeserotamanhodotransistorevirouocaloracumuladoarefrigeracaoliquidavaisetornarobrigatoriaemtodososcomputadores": {
+      "arquivo": "",
+      "titulo": "Por que chips 3D são tão caros de fabricar? 🏭 Empilhar camadas de silício exige alinhar conexões elétricas menores que 1 micrômetro entre múltiplos blocos de processamento. Para contornar os limites da física no encolhimento de transístores, a indústria passou a construir chips para cima em vez de apenas para os lados. Só que empilhar componentes transforma a manufatura de semicondutores em um gargalo de calor, rendimento e precisão mecânica. O que inflaciona o custo dessa arquitetura: → O efeito multiplicador de defeitos: se uma única camada de memória tiver uma falha invisível, todo o bloco empilhado de oito ou doze camadas precisa ser descartado. → A criação de pontes verticais (TSVs) exige perfurar o silício com plasma e preencher os furos microscópicos com cobre sem deixar cavidades de ar. → A densidade térmica se acumula no centro da estrutura, criando pontos quentes nas camadas inferiores que o ar convencional não consegue resfriar. → O processo de solda híbrida exige salas limpas com controle de partículas extremamente severo, onde um grão de poeira invisível destrói a conexão elétrica. → O custo de capital das máquinas de encapsulamento avançado faz com que pouquíssimas fundições no mundo consigam produzir essa tecnologia em escala comercial. A capacidade de empilhar silício com eficiência virou o principal divisor de águas entre processadores comuns e chips para inteligência artificial. 🔬 Se o gargalo da indústria deixou de ser o tamanho do transístor e virou o calor acumulado, a refrigeração líquida vai se tornar obrigatória em todos os computadores?",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-29T13:40:56.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-29T13:40:56.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por que chips 3D são tão caros de fabricar? 🏭 Empilhar camadas de silí"
+        }
+      ]
+    },
+    "sem-hash:aanthropicestasuperandoaopenaiemeficienciadecapital": {
+      "arquivo": "",
+      "titulo": "A Anthropic esta superando a OpenAI em eficiencia de capital",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-30T22:32:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-30T22:32:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A Anthropic esta superando a OpenAI em eficiencia de capital"
+        }
+      ]
+    },
+    "sem-hash:osegredodoryzen9800x3dreveladoprocessadoresryzen9000x3dmudaramtotalmenteaarquiteturainternaentendacomoaamdcolocouocacheabaixodochipparaeliminaroaquecimentoryzen9800x3damdzen53dvcacheprocessadorestecnologiahardware": {
+      "arquivo": "",
+      "titulo": "O segredo do Ryzen 9800X3D revelado! Processadores Ryzen 9000X3D mudaram totalmente a arquitetura interna. Entenda como a AMD colocou o cache abaixo do chip para eliminar o aquecimento. #ryzen9800x3d #amdzen5 #3dvcache #processadores #tecnologia #hardware",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-29T22:37:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-29T22:37:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O segredo do Ryzen 9800X3D revelado! Processadores Ryzen 9000X3D mudar"
+        }
+      ]
+    },
+    "sem-hash:porqueo3dvcacheesquentavatantoaarquiteturadozen3ezen4usavaumsanduichedesiliciocom5camadasdiferentesentendacomoocalorficavapresonascamadasdeoxidoamdryzen3dvcachesuperaquecimentohardwarepcsilicioengenharia": {
+      "arquivo": "",
+      "titulo": "Por que o 3D V-Cache esquentava tanto? A arquitetura do Zen 3 e Zen 4 usava um sanduíche de silício com 5 camadas diferentes. Entenda como o calor ficava preso nas camadas de óxido. #amdryzen #3dvcache #superaquecimento #hardwarepc #silicio #engenharia",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-29T19:31:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-29T19:31:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por que o 3D V-Cache esquentava tanto? A arquitetura do Zen 3 e Zen 4 "
+        }
+      ]
+    },
+    "sem-hash:oqueacontecequandoaiasuperaoqihumano": {
+      "arquivo": "",
+      "titulo": "O que acontece quando a IA supera o QI humano?",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-31T22:37:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-31T22:37:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O que acontece quando a IA supera o QI humano?"
+        }
+      ]
+    },
+    "sem-hash:oplanorealdaspacexparacriardatacentersnoespaco": {
+      "arquivo": "",
+      "titulo": "O plano real da SpaceX para criar Data Centers no Espaco",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-31T19:24:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-31T19:24:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O plano real da SpaceX para criar Data Centers no Espaco"
+        }
+      ]
+    },
+    "sem-hash:comoumengenheiroaprendeufisicaquanticaeopticasozinho": {
+      "arquivo": "",
+      "titulo": "Como um engenheiro aprendeu física quântica e óptica sozinho!",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-31T14:41:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-31T14:41:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Como um engenheiro aprendeu física quântica e óptica sozinho!"
+        }
+      ]
+    },
+    "sem-hash:amegafabricadechipsdeelonmuskquequermudaromundo": {
+      "arquivo": "",
+      "titulo": "A megafabrica de chips de Elon Musk que quer mudar o mundo",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-31T11:17:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-31T11:17:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A megafabrica de chips de Elon Musk que quer mudar o mundo"
+        }
+      ]
+    },
+    "sem-hash:avantagemdecisivadoseuaqueninguempercebeunacorridadaia": {
+      "arquivo": "",
+      "titulo": "A vantagem decisiva dos EUA que ninguem percebeu na corrida da IA",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-30T19:32:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-30T19:32:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A vantagem decisiva dos EUA que ninguem percebeu na corrida da IA"
+        }
+      ]
+    },
+    "sem-hash:osegredoportrasdaexplosaonademandaglobalporgpusentendaoefeitodosnovosmodelosdeinteligenciaartificialnademandadechipsepodercomputacionaldeepseekgpunvidiacomputacaotecnologiainteligenciaartificial": {
+      "arquivo": "",
+      "titulo": "O segredo por tras da explosao na demanda global por GPUs Entenda o efeito dos novos modelos de inteligência artificial na demanda de chips e poder computacional. #DeepSeek #GPU #Nvidia #Computacao #Tecnologia #InteligenciaArtificial",
+      "canal": "modofuturo",
+      "url": "",
+      "criado_em": "2026-08-30T14:25:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-30T14:25:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O segredo por tras da explosao na demanda global por GPUs Entenda o ef"
+        }
+      ]
+    },
+    "sem-hash:semdisciplinavoceseraescravojockowillink": {
+      "arquivo": "",
+      "titulo": "Sem Disciplina Você Será Escravo | Jocko Willink",
+      "canal": "semanestesia.pod",
+      "url": "",
+      "criado_em": "2026-08-31T22:37:00.000Z",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-08-31T22:37:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Sem Disciplina Você Será Escravo | Jocko Willink"
+        }
+      ]
+    },
+    "sem-hash:2026082501nota85comoaasmlconstruiuomonopoliomaisvaliosodaterra": {
+      "arquivo": "2026-08-25_01_nota85_Como_a_ASML_construiu_o_monopolio_mais_valioso_da_Terra_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota85 Como a ASML construiu o monopolio mais valioso da Terra",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota85_Como_a_ASML_construiu_o_monopolio_mais_valioso_da_Terra_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:07+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082501nota92oburacofinanceirodeus35bilhoesdafabricadojapao": {
+      "arquivo": "2026-08-25_01_nota92_O_buraco_financeiro_de_US_35_bilhoes_da_fabrica_do_Japao_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota92 O buraco financeiro de US 35 bilhoes da fabrica do Japao",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota92_O_buraco_financeiro_de_US_35_bilhoes_da_fabrica_do_Japao_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:07+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082501nota93osegredogeopoliticoqueprotegetaiwandeguerras": {
+      "arquivo": "2026-08-25_01_nota93_O_segredo_geopolitico_que_protege_Taiwan_de_guerras_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota93 O segredo geopolitico que protege Taiwan de guerras",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota93_O_segredo_geopolitico_que_protege_Taiwan_de_guerras_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082501nota95aleidemoorerealmentemorreunvidiainteleibmresponde": {
+      "arquivo": "2026-08-25_01_nota95_A_Lei_de_Moore_REALMENTE_Morreu_Nvidia_Intel_e_IBM_Responde_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota95 A Lei de Moore REALMENTE Morreu Nvidia Intel e IBM Responde",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota95_A_Lei_de_Moore_REALMENTE_Morreu_Nvidia_Intel_e_IBM_Responde_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082501nota95comoumaempresadeprivadasdominaaproducaodechips": {
+      "arquivo": "2026-08-25_01_nota95_Como_uma_Empresa_de_Privadas_Domina_a_Producao_de_Chips_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota95 Como uma Empresa de Privadas Domina a Producao de Chips",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota95_Como_uma_Empresa_de_Privadas_Domina_a_Producao_de_Chips_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082501nota95omundodependeabsolutamentedestaunicaempresadechips": {
+      "arquivo": "2026-08-25_01_nota95_O_Mundo_Depende_Absolutamente_Desta_Unica_Empresa_de_Chips_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota95 O Mundo Depende Absolutamente Desta Unica Empresa de Chips",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota95_O_Mundo_Depende_Absolutamente_Desta_Unica_Empresa_de_Chips_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082501nota95osegredodoryzen9800x3drevelado": {
+      "arquivo": "2026-08-25_01_nota95_O_segredo_do_Ryzen_9800X3D_revelado_short_9x16.mp4",
+      "titulo": "2026 08 25 01 nota95 O segredo do Ryzen 9800X3D revelado",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota95_O_segredo_do_Ryzen_9800X3D_revelado_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082502nota88aindustriaquecontrolatodasasoutrasindustriasdomundo": {
+      "arquivo": "2026-08-25_02_nota88_A_industria_que_controla_todas_as_outras_industrias_do_mundo_short_9x16.mp4",
+      "titulo": "2026 08 25 02 nota88 A industria que controla todas as outras industrias do mundo",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_02_nota88_A_industria_que_controla_todas_as_outras_industrias_do_mundo_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082502nota90aguerrabrutaldoschipstsmcesamsungvsjapao": {
+      "arquivo": "2026-08-25_02_nota90_A_guerra_brutal_dos_chips_TSMC_e_Samsung_vs_Japao_short_9x16.mp4",
+      "titulo": "2026 08 25 02 nota90 A guerra brutal dos chips TSMC e Samsung vs Japao",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_02_nota90_A_guerra_brutal_dos_chips_TSMC_e_Samsung_vs_Japao_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082502nota92comoassancoesdoseuativeramumefeitoinesperadonaia": {
+      "arquivo": "2026-08-25_02_nota92_Como_as_Sancoes_dos_EUA_Tiveram_um_Efeito_Inesperado_na_IA_short_9x16.mp4",
+      "titulo": "2026 08 25 02 nota92 Como as Sancoes dos EUA Tiveram um Efeito Inesperado na IA",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_02_nota92_Como_as_Sancoes_dos_EUA_Tiveram_um_Efeito_Inesperado_na_IA_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082502nota92porqueo3dvcacheesquentavatanto": {
+      "arquivo": "2026-08-25_02_nota92_Por_que_o_3D_V-Cache_esquentava_tanto_short_9x16.mp4",
+      "titulo": "2026 08 25 02 nota92 Por que o 3D V Cache esquentava tanto",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_02_nota92_Por_que_o_3D_V-Cache_esquentava_tanto_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082502nota93666milhoesdetransistoresem1mm2onovochipdocapiroto": {
+      "arquivo": "2026-08-25_02_nota93_666_MILHOES_de_Transistores_em_1mm2_O_Novo_Chip_do_Capiroto_short_9x16.mp4",
+      "titulo": "2026 08 25 02 nota93 666 MILHOES de Transistores em 1mm2 O Novo Chip do Capiroto",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_02_nota93_666_MILHOES_de_Transistores_em_1mm2_O_Novo_Chip_do_Capiroto_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082502nota93osoftwaremaiscarodomundocusta500000porengenheiro": {
+      "arquivo": "2026-08-25_02_nota93_O_Software_Mais_Caro_do_Mundo_Custa_500.000_por_Engenheiro_short_9x16.mp4",
+      "titulo": "2026 08 25 02 nota93 O Software Mais Caro do Mundo Custa 500.000 por Engenheiro",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_02_nota93_O_Software_Mais_Caro_do_Mundo_Custa_500.000_por_Engenheiro_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082503nota83porquechips3dsaotaocarosdefabricar": {
+      "arquivo": "2026-08-25_03_nota83_Por_que_chips_3D_sao_tao_caros_de_fabricar_short_9x16.mp4",
+      "titulo": "2026 08 25 03 nota83 Por que chips 3D sao tao caros de fabricar",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota83_Por_que_chips_3D_sao_tao_caros_de_fabricar_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082503nota86ondeestaoosmentesportrasdoschipsdanvidiaeamd": {
+      "arquivo": "2026-08-25_03_nota86_Onde_estao_os_mentes_por_tras_dos_chips_da_Nvidia_e_AMD_short_9x16.mp4",
+      "titulo": "2026 08 25 03 nota86 Onde estao os mentes por tras dos chips da Nvidia e AMD",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota86_Onde_estao_os_mentes_por_tras_dos_chips_da_Nvidia_e_AMD_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082503nota88afabricadechipsquefazoopostodatsmc": {
+      "arquivo": "2026-08-25_03_nota88_A_fabrica_de_chips_que_faz_o_oposto_da_TSMC_short_9x16.mp4",
+      "titulo": "2026 08 25 03 nota88 A fabrica de chips que faz o oposto da TSMC",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota88_A_fabrica_de_chips_que_faz_o_oposto_da_TSMC_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082503nota89porqueumaguerraemtaiwanparariaomundointeiro": {
+      "arquivo": "2026-08-25_03_nota89_Por_Que_uma_Guerra_em_Taiwan_Pararia_o_Mundo_Inteiro_short_9x16.mp4",
+      "titulo": "2026 08 25 03 nota89 Por Que uma Guerra em Taiwan Pararia o Mundo Inteiro",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota89_Por_Que_uma_Guerra_em_Taiwan_Pararia_o_Mundo_Inteiro_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082503nota90aculturadetrabalhoextremaquetornoutaiwanliderdechi": {
+      "arquivo": "2026-08-25_03_nota90_A_Cultura_de_Trabalho_Extrema_Que_Tornou_Taiwan_Lider_de_Chi_short_9x16.mp4",
+      "titulo": "2026 08 25 03 nota90 A Cultura de Trabalho Extrema Que Tornou Taiwan Lider de Chi",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota90_A_Cultura_de_Trabalho_Extrema_Que_Tornou_Taiwan_Lider_de_Chi_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082503nota90osegredodoschipsdofuturoainovacaocfetrevelada": {
+      "arquivo": "2026-08-25_03_nota90_O_Segredo_dos_Chips_do_Futuro_A_Inovacao_CFET_Revelada_short_9x16.mp4",
+      "titulo": "2026 08 25 03 nota90 O Segredo dos Chips do Futuro A Inovacao CFET Revelada",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota90_O_Segredo_dos_Chips_do_Futuro_A_Inovacao_CFET_Revelada_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082504nota78usamosamesmatecnologiadechipsdesdeosanos60": {
+      "arquivo": "2026-08-25_04_nota78_Usamos_a_mesma_tecnologia_de_chips_desde_os_anos_60_short_9x16.mp4",
+      "titulo": "2026 08 25 04 nota78 Usamos a mesma tecnologia de chips desde os anos 60",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota78_Usamos_a_mesma_tecnologia_de_chips_desde_os_anos_60_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082504nota82aestrategiasecretaparaescapardomonopoliodachina": {
+      "arquivo": "2026-08-25_04_nota82_A_estrategia_secreta_para_escapar_do_monopolio_da_China_short_9x16.mp4",
+      "titulo": "2026 08 25 04 nota82 A estrategia secreta para escapar do monopolio da China",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota82_A_estrategia_secreta_para_escapar_do_monopolio_da_China_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082504nota86asolucaogenialdaibmparaconectartransistores3d": {
+      "arquivo": "2026-08-25_04_nota86_A_Solucao_Genial_da_IBM_para_Conectar_Transistores_3D_short_9x16.mp4",
+      "titulo": "2026 08 25 04 nota86 A Solucao Genial da IBM para Conectar Transistores 3D",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota86_A_Solucao_Genial_da_IBM_para_Conectar_Transistores_3D_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082504nota87asgigantesocultasquerealmentedominamomercadotech": {
+      "arquivo": "2026-08-25_04_nota87_As_Gigantes_Ocultas_que_Realmente_Dominam_o_Mercado_Tech_short_9x16.mp4",
+      "titulo": "2026 08 25 04 nota87 As Gigantes Ocultas que Realmente Dominam o Mercado Tech",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota87_As_Gigantes_Ocultas_que_Realmente_Dominam_o_Mercado_Tech_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082504nota88ocustobilionarioparaoseuadominaremaproducaodechips": {
+      "arquivo": "2026-08-25_04_nota88_O_Custo_Bilionario_para_os_EUA_Dominarem_a_Producao_de_Chips_short_9x16.mp4",
+      "titulo": "2026 08 25 04 nota88 O Custo Bilionario para os EUA Dominarem a Producao de Chips",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota88_O_Custo_Bilionario_para_os_EUA_Dominarem_a_Producao_de_Chips_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082505nota80oatrasode50anosnaindustriaeaviradahistorica": {
+      "arquivo": "2026-08-25_05_nota80_O_atraso_de_50_anos_na_industria_e_a_virada_historica_short_9x16.mp4",
+      "titulo": "2026 08 25 05 nota80 O atraso de 50 anos na industria e a virada historica",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_05_nota80_O_atraso_de_50_anos_na_industria_e_a_virada_historica_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082505nota851500grausoproblematermicoquequasedestruiuosprocess": {
+      "arquivo": "2026-08-25_05_nota85_1500_Graus_O_Problema_Termico_que_Quase_Destruiu_os_Process_short_9x16.mp4",
+      "titulo": "2026 08 25 05 nota85 1500 Graus O Problema Termico que Quase Destruiu os Process",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_05_nota85_1500_Graus_O_Problema_Termico_que_Quase_Destruiu_os_Process_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082505nota85omonopoliosilenciosodaareiadosprocessadores": {
+      "arquivo": "2026-08-25_05_nota85_O_Monopolio_Silencioso_da_Areia_dos_Processadores_short_9x16.mp4",
+      "titulo": "2026 08 25 05 nota85 O Monopolio Silencioso da Areia dos Processadores",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_05_nota85_O_Monopolio_Silencioso_da_Areia_dos_Processadores_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:08+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082505nota86euavschinaaguerrafriadossemicondutores": {
+      "arquivo": "2026-08-25_05_nota86_EUA_vs_China_A_Guerra_Fria_dos_Semicondutores_short_9x16.mp4",
+      "titulo": "2026 08 25 05 nota86 EUA vs China A Guerra Fria dos Semicondutores",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_05_nota86_EUA_vs_China_A_Guerra_Fria_dos_Semicondutores_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082506nota85porquefabricarseusproprioschipsficouimpossivel": {
+      "arquivo": "2026-08-25_06_nota85_Por_Que_Fabricar_Seus_Proprios_Chips_Ficou_Impossivel_short_9x16.mp4",
+      "titulo": "2026 08 25 06 nota85 Por Que Fabricar Seus Proprios Chips Ficou Impossivel",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_06_nota85_Por_Que_Fabricar_Seus_Proprios_Chips_Ficou_Impossivel_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082507nota83ahiperespecializacaoextremanafabricacaodemicrochips": {
+      "arquivo": "2026-08-25_07_nota83_A_Hiperespecializacao_Extrema_na_Fabricacao_de_Microchips_short_9x16.mp4",
+      "titulo": "2026 08 25 07 nota83 A Hiperespecializacao Extrema na Fabricacao de Microchips",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_07_nota83_A_Hiperespecializacao_Extrema_na_Fabricacao_de_Microchips_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082508nota82oefeitoreversodassancoestecnologicasnachina": {
+      "arquivo": "2026-08-25_08_nota82_O_Efeito_Reverso_das_Sancoes_Tecnologicas_na_China_short_9x16.mp4",
+      "titulo": "2026 08 25 08 nota82 O Efeito Reverso das Sancoes Tecnologicas na China",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_08_nota82_O_Efeito_Reverso_das_Sancoes_Tecnologicas_na_China_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082601nota85comoumengenheiroaprendeufisicaquanticaeopticasozinho": {
+      "arquivo": "2026-08-26_01_nota85_Como_um_engenheiro_aprendeu_fisica_quantica_e_optica_sozinho_short_9x16.mp4",
+      "titulo": "2026 08 26 01 nota85 Como um engenheiro aprendeu fisica quantica e optica sozinho",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_01_nota85_Como_um_engenheiro_aprendeu_fisica_quantica_e_optica_sozinho_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082601nota95osnanometrosdoschipssaoumamentiradomarketing": {
+      "arquivo": "2026-08-26_01_nota95_Os_nanometros_dos_chips_sao_uma_mentira_do_marketing_short_9x16.mp4",
+      "titulo": "2026 08 26 01 nota95 Os nanometros dos chips sao uma mentira do marketing",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_01_nota95_Os_nanometros_dos_chips_sao_uma_mentira_do_marketing_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082601nota97aanalogiabrutalsobreofuturodosprofissionaisnaerada": {
+      "arquivo": "2026-08-26_01_nota97_A_analogia_brutal_sobre_o_futuro_dos_profissionais_na_era_da_short_9x16.mp4",
+      "titulo": "2026 08 26 01 nota97 A analogia brutal sobre o futuro dos profissionais na era da",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_01_nota97_A_analogia_brutal_sobre_o_futuro_dos_profissionais_na_era_da_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082602nota88comoaalimentacaotraseiravairevolucionarosnovosproces": {
+      "arquivo": "2026-08-26_02_nota88_Como_a_alimentacao_traseira_vai_revolucionar_os_novos_proces_short_9x16.mp4",
+      "titulo": "2026 08 26 02 nota88 Como a alimentacao traseira vai revolucionar os novos proces",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_02_nota88_Como_a_alimentacao_traseira_vai_revolucionar_os_novos_proces_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082602nota96omaiorcrescimentodahistoriadocapitalismoaconteceuem": {
+      "arquivo": "2026-08-26_02_nota96_O_maior_crescimento_da_historia_do_capitalismo_aconteceu_em_short_9x16.mp4",
+      "titulo": "2026 08 26 02 nota96 O maior crescimento da historia do capitalismo aconteceu em",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_02_nota96_O_maior_crescimento_da_historia_do_capitalismo_aconteceu_em_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082603nota95aanthropicestasuperandoaopenaiemeficienciadecapital": {
+      "arquivo": "2026-08-26_03_nota95_A_Anthropic_esta_superando_a_OpenAI_em_eficiencia_de_capital_short_9x16.mp4",
+      "titulo": "2026 08 26 03 nota95 A Anthropic esta superando a OpenAI em eficiencia de capital",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_03_nota95_A_Anthropic_esta_superando_a_OpenAI_em_eficiencia_de_capital_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082604nota94osegredoportrasdaexplosaonademandaglobalporgpus": {
+      "arquivo": "2026-08-26_04_nota94_O_segredo_por_tras_da_explosao_na_demanda_global_por_GPUs_short_9x16.mp4",
+      "titulo": "2026 08 26 04 nota94 O segredo por tras da explosao na demanda global por GPUs",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_04_nota94_O_segredo_por_tras_da_explosao_na_demanda_global_por_GPUs_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082605nota93oplanorealdaspacexparacriardatacentersnoespaco": {
+      "arquivo": "2026-08-26_05_nota93_O_plano_real_da_SpaceX_para_criar_Data_Centers_no_Espaco_short_9x16.mp4",
+      "titulo": "2026 08 26 05 nota93 O plano real da SpaceX para criar Data Centers no Espaco",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_05_nota93_O_plano_real_da_SpaceX_para_criar_Data_Centers_no_Espaco_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082606nota92avantagemdecisivadoseuaqueninguempercebeunacorrida": {
+      "arquivo": "2026-08-26_06_nota92_A_vantagem_decisiva_dos_EUA_que_ninguem_percebeu_na_corrida_short_9x16.mp4",
+      "titulo": "2026 08 26 06 nota92 A vantagem decisiva dos EUA que ninguem percebeu na corrida",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_06_nota92_A_vantagem_decisiva_dos_EUA_que_ninguem_percebeu_na_corrida_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082607nota91amegafabricadechipsdeelonmuskquequermudaromundo": {
+      "arquivo": "2026-08-26_07_nota91_A_megafabrica_de_chips_de_Elon_Musk_que_quer_mudar_o_mundo_short_9x16.mp4",
+      "titulo": "2026 08 26 07 nota91 A megafabrica de chips de Elon Musk que quer mudar o mundo",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_07_nota91_A_megafabrica_de_chips_de_Elon_Musk_que_quer_mudar_o_mundo_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026082608nota90oqueacontecequandoaiasuperaoqihumano": {
+      "arquivo": "2026-08-26_08_nota90_O_que_acontece_quando_a_IA_supera_o_QI_humano_short_9x16.mp4",
+      "titulo": "2026 08 26 08 nota90 O que acontece quando a IA supera o QI humano",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_08_nota90_O_que_acontece_quando_a_IA_supera_o_QI_humano_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083001nota94pordentrodafabricamaissecretadechipsdomundo": {
+      "arquivo": "2026-08-30_01_nota94_Por_Dentro_da_Fabrica_Mais_Secreta_de_Chips_do_Mundo_short_9x16.mp4",
+      "titulo": "2026 08 30 01 nota94 Por Dentro da Fabrica Mais Secreta de Chips do Mundo",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_01_nota94_Por_Dentro_da_Fabrica_Mais_Secreta_de_Chips_do_Mundo_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083001nota95oerrodeus1trilhaoquequasedestruiuaintel": {
+      "arquivo": "2026-08-30_01_nota95_O_erro_de_US_1_trilhao_que_quase_destruiu_a_Intel_short_9x16.mp4",
+      "titulo": "2026 08 30 01 nota95 O erro de US 1 trilhao que quase destruiu a Intel",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_01_nota95_O_erro_de_US_1_trilhao_que_quase_destruiu_a_Intel_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083002nota90aapostabilionariaquemudouofuturodainteligenciaartif": {
+      "arquivo": "2026-08-30_02_nota90_A_Aposta_Bilionaria_que_Mudou_o_Futuro_da_Inteligencia_Artif_short_9x16.mp4",
+      "titulo": "2026 08 30 02 nota90 A Aposta Bilionaria que Mudou o Futuro da Inteligencia Artif",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_02_nota90_A_Aposta_Bilionaria_que_Mudou_o_Futuro_da_Inteligencia_Artif_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083002nota92oerromicroscopicoquecustaus500000nafabricadainte": {
+      "arquivo": "2026-08-30_02_nota92_O_erro_microscopico_que_custa_US_500.000_na_fabrica_da_Inte_short_9x16.mp4",
+      "titulo": "2026 08 30 02 nota92 O erro microscopico que custa US 500.000 na fabrica da Inte",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_02_nota92_O_erro_microscopico_que_custa_US_500.000_na_fabrica_da_Inte_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083003nota87oprecodoscelularesdisparoueaculpaedaia": {
+      "arquivo": "2026-08-30_03_nota87_O_Preco_dos_Celulares_Disparou_e_a_Culpa_E_da_IA_short_9x16.mp4",
+      "titulo": "2026 08 30 03 nota87 O Preco dos Celulares Disparou e a Culpa E da IA",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_03_nota87_O_Preco_dos_Celulares_Disparou_e_a_Culpa_E_da_IA_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083003nota88porqueomundodependedetaiwanparanaoparar": {
+      "arquivo": "2026-08-30_03_nota88_Por_que_o_mundo_depende_de_Taiwan_para_nao_parar_short_9x16.mp4",
+      "titulo": "2026 08 30 03 nota88 Por que o mundo depende de Taiwan para nao parar",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_03_nota88_Por_que_o_mundo_depende_de_Taiwan_para_nao_parar_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:09+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083004nota85porqueseuprocessadorsuperrapidoeinutilsemessechip": {
+      "arquivo": "2026-08-30_04_nota85_Por_Que_Seu_Processador_Superrapido_E_Inutil_Sem_Esse_Chip_short_9x16.mp4",
+      "titulo": "2026 08 30 04 nota85 Por Que Seu Processador Superrapido E Inutil Sem Esse Chip",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_04_nota85_Por_Que_Seu_Processador_Superrapido_E_Inutil_Sem_Esse_Chip_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083004nota86omacacaodeus1000paraentrarnafabricadaintel": {
+      "arquivo": "2026-08-30_04_nota86_O_macacao_de_US_1.000_para_entrar_na_fabrica_da_Intel_short_9x16.mp4",
+      "titulo": "2026 08 30 04 nota86 O macacao de US 1.000 para entrar na fabrica da Intel",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_04_nota86_O_macacao_de_US_1.000_para_entrar_na_fabrica_da_Intel_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083005nota82ofimdosilicioacorridapornovoselementosnaintel": {
+      "arquivo": "2026-08-30_05_nota82_O_fim_do_silicio_a_corrida_por_novos_elementos_na_Intel_short_9x16.mp4",
+      "titulo": "2026 08 30 05 nota82 O fim do silicio a corrida por novos elementos na Intel",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_05_nota82_O_fim_do_silicio_a_corrida_por_novos_elementos_na_Intel_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083005nota83porqueconstruirfabricasdechipsnoseuacustaodobro": {
+      "arquivo": "2026-08-30_05_nota83_Por_Que_Construir_Fabricas_de_Chips_nos_EUA_Custa_o_Dobro_short_9x16.mp4",
+      "titulo": "2026 08 30 05 nota83 Por Que Construir Fabricas de Chips nos EUA Custa o Dobro",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_05_nota83_Por_Que_Construir_Fabricas_de_Chips_nos_EUA_Custa_o_Dobro_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083006nota80amaquinaqueescutaosomdentrodosmicrochips": {
+      "arquivo": "2026-08-30_06_nota80_A_maquina_que_escuta_o_som_dentro_dos_microchips_short_9x16.mp4",
+      "titulo": "2026 08 30 06 nota80 A maquina que escuta o som dentro dos microchips",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_06_nota80_A_maquina_que_escuta_o_som_dentro_dos_microchips_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083101nota90aordemcertaparamontarseutreinodegluteos": {
+      "arquivo": "2026-08-31_01_nota90_A_Ordem_Certa_Para_Montar_Seu_Treino_de_Gluteos_short_9x16.mp4",
+      "titulo": "2026 08 31 01 nota90 A Ordem Certa Para Montar Seu Treino de Gluteos",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota90_A_Ordem_Certa_Para_Montar_Seu_Treino_de_Gluteos_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083101nota90ochecklistperfeitoparaescolherexerciciosdegluteo": {
+      "arquivo": "2026-08-31_01_nota90_O_CHECKLIST_PERFEITO_PARA_ESCOLHER_EXERCICIOS_DE_GLUTEO_short_9x16.mp4",
+      "titulo": "2026 08 31 01 nota90 O CHECKLIST PERFEITO PARA ESCOLHER EXERCICIOS DE GLUTEO",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota90_O_CHECKLIST_PERFEITO_PARA_ESCOLHER_EXERCICIOS_DE_GLUTEO_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083101nota92comofazerbaseecontornoemcremeperfeitosemmarcarape": {
+      "arquivo": "2026-08-31_01_nota92_Como_fazer_base_e_contorno_em_creme_perfeito_sem_marcar_a_pe_short_9x16.mp4",
+      "titulo": "2026 08 31 01 nota92 Como fazer base e contorno em creme perfeito sem marcar a pe",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota92_Como_fazer_base_e_contorno_em_creme_perfeito_sem_marcar_a_pe_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083101nota92tutorialpassoapassodecutcreaseimperdivel": {
+      "arquivo": "2026-08-31_01_nota92_TUTORIAL_PASSO_A_PASSO_DE_CUT_CREASE_IMPERDIVEL_short_9x16.mp4",
+      "titulo": "2026 08 31 01 nota92 TUTORIAL PASSO A PASSO DE CUT CREASE IMPERDIVEL",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota92_TUTORIAL_PASSO_A_PASSO_DE_CUT_CREASE_IMPERDIVEL_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083101nota93semdisciplinavoceseraescravojockowillink": {
+      "arquivo": "2026-08-31_01_nota93_Sem_Disciplina_Voce_Sera_Escravo_Jocko_Willink_short_9x16.mp4",
+      "titulo": "2026 08 31 01 nota93 Sem Disciplina Voce Sera Escravo Jocko Willink",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota93_Sem_Disciplina_Voce_Sera_Escravo_Jocko_Willink_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083102nota88tecnicadebakingecorretivoparailuminaroolhar": {
+      "arquivo": "2026-08-31_02_nota88_TECNICA_DE_BAKING_E_CORRETIVO_PARA_ILUMINAR_O_OLHAR_short_9x16.mp4",
+      "titulo": "2026 08 31 02 nota88 TECNICA DE BAKING E CORRETIVO PARA ILUMINAR O OLHAR",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_02_nota88_TECNICA_DE_BAKING_E_CORRETIVO_PARA_ILUMINAR_O_OLHAR_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083102nota88truquedecontornoempoparaesculpirorostoeonariz": {
+      "arquivo": "2026-08-31_02_nota88_Truque_de_contorno_em_po_para_esculpir_o_rosto_e_o_nariz_short_9x16.mp4",
+      "titulo": "2026 08 31 02 nota88 Truque de contorno em po para esculpir o rosto e o nariz",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_02_nota88_Truque_de_contorno_em_po_para_esculpir_o_rosto_e_o_nariz_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083103nota85comofazercontornoderostoenarizcombastao": {
+      "arquivo": "2026-08-31_03_nota85_COMO_FAZER_CONTORNO_DE_ROSTO_E_NARIZ_COM_BASTAO_short_9x16.mp4",
+      "titulo": "2026 08 31 03 nota85 COMO FAZER CONTORNO DE ROSTO E NARIZ COM BASTAO",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_03_nota85_COMO_FAZER_CONTORNO_DE_ROSTO_E_NARIZ_COM_BASTAO_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083103nota85comofazercutcreaseedelineadogatinhoperfeito": {
+      "arquivo": "2026-08-31_03_nota85_Como_fazer_cut_crease_e_delineado_gatinho_perfeito_short_9x16.mp4",
+      "titulo": "2026 08 31 03 nota85 Como fazer cut crease e delineado gatinho perfeito",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_03_nota85_Como_fazer_cut_crease_e_delineado_gatinho_perfeito_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083104nota80segredosparasobrancelhasperfeitasepeleprontinha": {
+      "arquivo": "2026-08-31_04_nota80_SEGREDOS_PARA_SOBRANCELHAS_PERFEITAS_E_PELE_PRONTINHA_short_9x16.mp4",
+      "titulo": "2026 08 31 04 nota80 SEGREDOS PARA SOBRANCELHAS PERFEITAS E PELE PRONTINHA",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_04_nota80_SEGREDOS_PARA_SOBRANCELHAS_PERFEITAS_E_PELE_PRONTINHA_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:2026083104nota81segredoparailuminareselararegiaodasolheiras": {
+      "arquivo": "2026-08-31_04_nota81_Segredo_para_iluminar_e_selar_a_regiao_das_olheiras_short_9x16.mp4",
+      "titulo": "2026 08 31 04 nota81 Segredo para iluminar e selar a regiao das olheiras",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_04_nota81_Segredo_para_iluminar_e_selar_a_regiao_das_olheiras_short_9x16.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:rep20260825007nota9301nota93exercitocriabaratasciborguesparazonasdeguerra": {
+      "arquivo": "rep_2026-08-25_007_nota93_01_nota93_Exercito_Cria_Baratas_Ciborgues_Para_Zonas_de_Guerra.mp4",
+      "titulo": "rep 2026 08 25 007 nota93 01 nota93 Exercito Cria Baratas Ciborgues Para Zonas de Guerra",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/rep_2026-08-25_007_nota93_01_nota93_Exercito_Cria_Baratas_Ciborgues_Para_Zonas_de_Guerra.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:rep20260825013nota9203nota92averdadeiracorridadaianaoeochatgpt": {
+      "arquivo": "rep_2026-08-25_013_nota92_03_nota92_A_VERDADEIRA_CORRIDA_DA_IA_NAO_E_O_CHATGPT_.mp4",
+      "titulo": "rep 2026 08 25 013 nota92 03 nota92 A VERDADEIRA CORRIDA DA IA NAO E O CHATGPT ",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/rep_2026-08-25_013_nota92_03_nota92_A_VERDADEIRA_CORRIDA_DA_IA_NAO_E_O_CHATGPT_.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:rep20260825014nota8604nota86oqueeagieporqueelamudaratudo": {
+      "arquivo": "rep_2026-08-25_014_nota86_04_nota86_O_QUE_E_AGI_E_POR_QUE_ELA_MUDARA_TUDO.mp4",
+      "titulo": "rep 2026 08 25 014 nota86 04 nota86 O QUE E AGI E POR QUE ELA MUDARA TUDO",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/rep_2026-08-25_014_nota86_04_nota86_O_QUE_E_AGI_E_POR_QUE_ELA_MUDARA_TUDO.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:rep20260825020nota8501nota85odiaemqueoprogramadorautomatizouopropriotrabalhoco": {
+      "arquivo": "rep_2026-08-25_020_nota85_01_nota85_O_dia_em_que_o_programador_automatizou_o_proprio_trabalho_co.mp4",
+      "titulo": "rep 2026 08 25 020 nota85 01 nota85 O dia em que o programador automatizou o proprio trabalho co",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/rep_2026-08-25_020_nota85_01_nota85_O_dia_em_que_o_programador_automatizou_o_proprio_trabalho_co.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:rep20260825023nota9103nota91osprogramadoresvaosersubstituidospelaiasamaltmanres": {
+      "arquivo": "rep_2026-08-25_023_nota91_03_nota91_Os_programadores_VAO_ser_substituidos_pela_IA_Sam_Altman_res.mp4",
+      "titulo": "rep 2026 08 25 023 nota91 03 nota91 Os programadores VAO ser substituidos pela IA Sam Altman res",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/rep_2026-08-25_023_nota91_03_nota91_Os_programadores_VAO_ser_substituidos_pela_IA_Sam_Altman_res.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    },
+    "sem-hash:rep20260825024nota8704nota87ainfraestruturaassustadoraportrasdossupercomputadores": {
+      "arquivo": "rep_2026-08-25_024_nota87_04_nota87_A_infraestrutura_ASSUSTADORA_por_tras_dos_supercomputadores.mp4",
+      "titulo": "rep 2026 08 25 024 nota87 04 nota87 A infraestrutura ASSUSTADORA por tras dos supercomputadores",
+      "canal": "",
+      "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/rep_2026-08-25_024_nota87_04_nota87_A_infraestrutura_ASSUSTADORA_por_tras_dos_supercomputadores.mp4",
+      "criado_em": "2026-08-31T23:15:10+00:00",
+      "sem_hash": true,
+      "postagens": []
+    }
+  }
+}

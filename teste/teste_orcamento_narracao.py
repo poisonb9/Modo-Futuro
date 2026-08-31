@@ -75,9 +75,13 @@ checar("PALAVRAS (sao" not in sem, "nenhum numero de palavras vaza pro prompt")
 checar("MESMO TEMPO que a fala" in sem, "a secao TAMANHO continua no prompt")
 
 # --- 2. o caso positivo: a conta ------------------------------------------
-print("\n[2] com duracao, o orcamento e' 150 ppm")
-checar(t.PALAVRAS_POR_MINUTO == 150, "o alvo e' 150 palavras/min")
-for dur, esperado in ((60, 150), (90, 225), (110, 275), (118.3, 295)):
+print("\n[2] com duracao, o orcamento e' 113 ppm")
+# ⚠️ 113 e' MEDIDO na sintese (run #17: 135, 103 e 102 ppm
+# reais, media 113). O 150 da primeira versao era ritmo de NARRADOR
+# HUMANO, numero editorial — por isso pedia 32% de texto a mais do
+# que cabia na janela.
+checar(t.PALAVRAS_POR_MINUTO == 113, "o alvo e' 113, o ritmo MEDIDO da sintese")
+for dur, esperado in ((60, 113), (90, 169), (110, 207), (118.3, 222)):
     txt = t.orcamento_de_palavras(dur)
     checar(f"{esperado} PALAVRAS" in txt,
            f"{dur}s -> {esperado} palavras")
@@ -85,9 +89,9 @@ for dur, esperado in ((60, 150), (90, 225), (110, 275), (118.3, 295)):
 print("\n[3] o caso REAL que motivou isto")
 # clipe de 118,3s cuja narracao durou 173,9s (1,47x de aceleracao)
 orc = t.orcamento_de_palavras(118.3)
-checar("295" in orc, "o clipe de 118,3s ganha orcamento de 295 palavras")
-# 173,9s de fala a 150 ppm sao ~435 palavras; 295 e' 32% menos
-checar(295 < 435, "o orcamento e' menor que o texto que estourou")
+checar("222" in orc, "o clipe de 118,3s ganha orcamento de 222 palavras")
+# 173,9s de fala a 150 ppm sao ~435 palavras; 222 e' quase metade
+checar(222 < 435, "o orcamento e' menor que o texto que estourou")
 
 # --- 4. encurtar NAO pode virar perder informacao -------------------------
 print("\n[4] o prompt protege o conteudo ao mandar encurtar")

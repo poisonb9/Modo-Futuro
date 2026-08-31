@@ -65,11 +65,17 @@ o nome não aparecer no original, aí sim use o papel ("o anfitrião", "o
 segundo convidado") como identificador, mas ainda assim com moderação —
 só quando o contexto imediato não deixar claro de quem se trata.
 
-TAMANHO: o texto reescrito vai ser falado no MESMO TEMPO que a fala
-original durava — mantenha o tamanho (contagem de palavras) parecido com o
-original, nem mais curto nem mais longo. Texto mais longo que o original
-força a dublagem a acelerar a fala pra caber no tempo, o que soa corrido e
-ruim.
+TAMANHO: {orcamento}o texto reescrito vai ser falado no MESMO TEMPO que a fala
+original durava. Texto mais longo força a dublagem a acelerar a fala pra
+caber no tempo, o que soa corrido e ruim.
+
+⚠️ COMO ENCURTAR SEM PERDER NADA: o que sai é REDUNDÂNCIA, nunca FATO.
+Corte primeiro: repetição da mesma ideia, conectivo longo ("sendo que",
+"é importante notar que"), adjetivo decorativo, e a repetição do papel da
+pessoa quando o pronome já basta. NUNCA corte: número, nome, marca, unidade,
+o passo de um procedimento, nem a conclusão. Se depois de tirar toda a
+redundância o texto ainda passar do limite, ENTREGUE ASSIM MESMO — um texto
+um pouco longo é melhor que um texto que perdeu informação.
 
 LINGUAGEM MENOS CRUA: quando o assunto envolver violência, morte ou dano a
 pessoas, narre o FATO sem a palavra mais gráfica — prefira "o fim de milhares
@@ -113,7 +119,39 @@ def dica_de_genero(genero: str | None) -> str:
     return ""
 
 
-def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None) -> str:
+# Ritmo alvo da narracao, em palavras por minuto.
+#
+# O motor ja' avisava "ritmo alto" acima de 200 ppm, e em 31/08/2026 TODAS as
+# medicoes reais ficaram entre 256 e 277 — ou seja, o aviso disparava sempre e
+# ninguem tinha como agir sobre ele: o texto ja' vinha longo do modelo e so'
+# restava ao `atempo` esmagar o audio (um clipe saiu acelerado 1,47x, perto do
+# teto de 1,6x que o codigo chama de "robotico").
+#
+# 150 ppm e' ritmo de narracao de documentario em portugues — confortavel, com
+# espaco pra respiro. Nao e' teto rigido: o prompt manda ENTREGAR ASSIM MESMO
+# se nao couber sem perder informacao. Perder fato e' pior que acelerar.
+PALAVRAS_POR_MINUTO = 150
+
+
+def orcamento_de_palavras(duracao_s: float | None) -> str:
+    """A frase que entra no prompt dizendo quantas palavras cabem.
+
+    Devolve string VAZIA quando nao ha' duracao — e ai' o prompt fica
+    identico ao de antes. Falha ABERTA de proposito: um clipe sem timing nao
+    pode ficar sem narracao por causa disto.
+    """
+    if not duracao_s or duracao_s <= 0:
+        return ""
+    limite = int(duracao_s / 60.0 * PALAVRAS_POR_MINUTO)
+    if limite < 10:
+        return ""
+    return (f"o texto tem que caber em cerca de {limite} PALAVRAS "
+            f"(sao {duracao_s:.0f} segundos de video, e narracao boa em "
+            f"portugues tem ~{PALAVRAS_POR_MINUTO} palavras por minuto). ")
+
+
+def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
+                    duracao_s: float | None = None) -> str:
     if not texto.strip():
         return texto
 
@@ -129,7 +167,9 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None)
                     # comum não tem esse campo, então formatar com ele daria
                     # KeyError. Preenche só quando o prompt pede.
                     "contents": [{"parts": [{"text": (
-                        prompt.format(texto=texto, dica_genero=dica_de_genero(genero))
+                        prompt.format(texto=texto,
+                                      dica_genero=dica_de_genero(genero),
+                                      orcamento=orcamento_de_palavras(duracao_s))
                         if "{dica_genero}" in prompt else prompt.format(texto=texto)
                     )}]}],
                     "generationConfig": {"temperature": 0.3},
@@ -256,8 +296,20 @@ def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
 
     if narrar:
         texto_completo = " ".join(p["palavra"] for p in palavras)
+        # A janela sai das PROPRIAS palavras — nao precisa mudar quem chama.
+        try:
+            dur = float(palavras[-1]["fim"]) - float(palavras[0]["inicio"])
+        except (KeyError, TypeError, ValueError, IndexError):
+            dur = None
         texto_narrado = _traduzir_texto(texto_completo, prompt=PROMPT_NARRACAO,
-                                        genero=genero_falante)
+                                        genero=genero_falante, duracao_s=dur)
+        if dur and dur > 0:
+            n = len(texto_narrado.split())
+            ppm = n / (dur / 60.0)
+            alvo = int(dur / 60.0 * PALAVRAS_POR_MINUTO)
+            marca = "" if ppm <= 200 else "  [!] acima de 200 ppm"
+            print(f"      narracao: {n} palavras em {dur:.0f}s = "
+                  f"{ppm:.0f} palavras/min (alvo {alvo}){marca}")
         grupos = _agrupar(palavras, tamanho_janela_s)
         return _distribuir_texto_em_janelas(texto_narrado, grupos)
 

@@ -1,0 +1,63 @@
+name: Fotografar desempenho (de hora em hora)
+
+# Guarda as views de todo post publicado, com a hora da leitura.
+#
+# ⚠️ SEM SERIE TEMPORAL A PERGUNTA DO BRYAN E' INVERIFICAVEL. Ele impulsionou
+# um post em 01/09/2026 e perguntou se o TikTok para de entregar depois disso,
+# "pra fazer a gente ficar comprando". Views ACUMULADAS nao dizem QUANDO
+# chegaram: nao distinguem "parou de entregar" de "nunca entregou". A
+# derivada, sim.
+#
+# ⚠️ E REGISTRA OS 5 CANAIS, nao so' o impulsionado — sem grupo de controle,
+# uma queda no @modofuturo poderia ser o impulsionamento ou poderia ser o
+# TikTok inteiro naquele dia.
+#
+# ⚠️ De hora em hora porque a metrica do Buffer ATRASA, e o atraso encolhe com
+# a idade do post (medido: 2,7h -> 49% do real; 22,6h -> 99%). Ler de hora em
+# hora nao conserta o atraso, mas registra a forma da curva.
+
+on:
+  schedule:
+    - cron: "5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desempenho
+  cancel-in-progress: false
+
+jobs:
+  fotografar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fotografar
+        env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+        run: python -X utf8 registrar_desempenho.py
+
+      - name: Guardar
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet desempenho.jsonl 2>/dev/null; then
+            git add desempenho.jsonl
+            git commit -m "desempenho: foto das views"
+            # ⚠️ O cron da fila commita no mesmo repo. Sem o rebase, duas
+            # escritas na mesma hora derrubam uma das duas.
+            git pull --rebase --autostash -q origin main || true
+            git push
+          else
+            echo "sem leitura nova"
+          fi

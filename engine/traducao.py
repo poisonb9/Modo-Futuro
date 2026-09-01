@@ -180,6 +180,7 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
 
     rot = keys.gemini()
     ultimo_erro = None
+    espera_n = 0   # quantos 503 seguidos (espera cresce)
     sem_cota = 0   # quantas chaves responderam 429/403
     for _ in range(len(rot) * 2):
         chave = rot.proxima()
@@ -222,7 +223,20 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
             # crashar o run inteiro por isso jogaria fora um clipe já
             # transcrito (medido: run 30860861087, clipe nota 96 perdido).
             if e.response is not None and e.response.status_code == 503:
-                time.sleep(2)
+                # ⚠️ ESPERA CRESCENTE, NAO FIXA. 503 e' o servidor do Gemini
+                # sobrecarregado, e a sobrecarga dura MINUTOS, nao segundos.
+                # Com 2s fixos o rodizio queimava as tentativas em ~1 minuto e
+                # o run morria — foi assim que o #24 da cozinha perdeu 91
+                # minutos de trabalho em 01/09/2026.
+                #
+                # ⚠️ E o teto de 30s importa: sem ele, uma sobrecarga longa
+                # prenderia o run ate' o limite de 6h do Actions, que e'
+                # trocar um prejuizo por um pior.
+                espera_503 = min(30, 2 * (2 ** min(espera_n, 4)))
+                espera_n += 1
+                print(f"   [!] Gemini sobrecarregado (503) — esperando "
+                      f"{espera_503}s", flush=True)
+                time.sleep(espera_503)
                 continue
             raise
         except Exception as e:

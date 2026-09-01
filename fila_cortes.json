@@ -72,15 +72,16 @@
       "run_id": 33540737953
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1w-Y7rHRklzy0h3CpHTQ2-7NVcNvlYuwa",
       "nome": "Stop Being F cking Weak",
-      "quando": "2026-09-01T19:57:38+00:00",
-      "tentativas": 0
+      "quando": "2026-09-01T21:29:53+00:00",
+      "tentativas": 0,
+      "run_id": 33561381596
     },
     {
       "estado": "sem_fonte",

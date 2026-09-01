@@ -61,15 +61,14 @@
       "run_id": 33505055138
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1FJATcWmPLd60CbDfHGyd8AZOrGZS67oF",
       "nome": "Beginner Makeup on Textured skin - Lesson 1",
-      "quando": "2026-09-01T16:12:22+00:00",
-      "run_id": 33530402881
+      "quando": "2026-09-01T16:12:22+00:00"
     },
     {
       "estado": "pendente",

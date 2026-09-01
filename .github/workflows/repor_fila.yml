@@ -80,6 +80,16 @@ jobs:
             echo "registro inalterado"
           fi
 
+      - name: Painel das filas
+        if: always()
+        env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+        run: python -X utf8 painel_filas.py | tee -a relato_fila.txt
+
       - name: Avisar no Telegram
         if: always()
         env:

@@ -24,7 +24,14 @@ falhas = []
 durante = datetime.date(2026, 9, 1)
 depois = datetime.date(2026, 9, 2)
 
-for canal in ("atefalhar", "truque.importado", "semanestesia.pod"):
+# ⚠️ Em 01/09/2026 o Bryan liberou o @truque.importado e o @semanestesia.pod
+# pro automatico. So' o @atefalhar continua na lista — e o teste tem de
+# confirmar que os liberados PASSAM, senao a liberacao nao valeu de nada.
+for canal in ("truque.importado", "semanestesia.pod"):
+    if estreia.em_estreia(canal, durante):
+        falhas.append(f"{canal} foi LIBERADO pelo Bryan e continua travado")
+
+for canal in ("atefalhar",):
     if not estreia.em_estreia(canal, durante):
         falhas.append(f"{canal} deveria estar travado em 01/09")
     # NEGATIVO 2 — o prazo acaba e o canal volta sozinho

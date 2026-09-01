@@ -23,9 +23,11 @@ import datetime
 # O @atefalhar e o @truque.importado estrearam em 31/08/2026; o
 # @semanestesia.pod tambem. Dois dias = 31/08 e 01/09.
 ESTREIA_ATE = {
+    # ⚠️ O Bryan LIBEROU o @truque.importado e o @semanestesia.pod em
+    # 01/09/2026: "vamos comecar a publicar automaticamente ja', eu decidi
+    # isso". Saem daqui — nao ficam com data no passado, pra ninguem ler a
+    # lista e achar que ainda estao em periodo de estreia.
     "atefalhar": datetime.date(2026, 9, 1),
-    "truque.importado": datetime.date(2026, 9, 1),
-    "semanestesia.pod": datetime.date(2026, 9, 1),
 }
 
 

@@ -36,6 +36,18 @@ API = "https://api.buffer.com/"
 # um canal em estreia faz o primeiro video sair sozinho — exatamente o que ele
 # pediu pra nao acontecer.
 LIBERADOS = {
+    "truque.importado": {
+        "env": "BUFFER_TOKEN_TRUQUEIMPORTADO",
+        "org": "6a94c752e0b1602e8c5cf1ae",
+        "canal": "6a94c8f3065799be465981f6",
+        "repoe": True,
+    },
+    "semanestesia.pod": {
+        "env": "BUFFER_TOKEN_SEMANESTESIA",
+        "org": "6a937e2ccae8f6fdedefa317",
+        "canal": "6a938ce8065799be46508cc6",
+        "repoe": True,
+    },
     "modofuturo": {
         "env": "BUFFER_TOKEN",
         "org": "6a6ca3c3aba3767824bf6234",
@@ -52,22 +64,10 @@ SO_RELATA = {
         "canal": "6a90de80ccaf649a672ebe15",
         "nota": "motor no repo pipeline",
     },
-    "semanestesia.pod": {
-        "env": "BUFFER_TOKEN_SEMANESTESIA",
-        "org": "6a937e2ccae8f6fdedefa317",
-        "canal": "6a938ce8065799be46508cc6",
-        "nota": "ESTREIA — o Bryan posta os 2 primeiros na mao",
-    },
     "atefalhar": {
         "env": "BUFFER_TOKEN_ATEFALHAR",
         "org": "6a94a9f9ca5d8883aa924198",
         "canal": "6a94aaf5065799be46581e1d",
-        "nota": "ESTREIA — o Bryan posta os 2 primeiros na mao",
-    },
-    "truque.importado": {
-        "env": "BUFFER_TOKEN_TRUQUEIMPORTADO",
-        "org": "6a94c752e0b1602e8c5cf1ae",
-        "canal": "6a94c8f3065799be465981f6",
         "nota": "ESTREIA — o Bryan posta os 2 primeiros na mao",
     },
 }

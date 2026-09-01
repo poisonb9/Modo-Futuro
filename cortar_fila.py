@@ -71,32 +71,86 @@ def tem_cota() -> tuple[bool, str]:
     O que mudou e' que agora o SILENCIO tambem barra — sem um 200 na mao,
     nao gasto runner.
     """
-    chaves = [v for v in (os.environ.get(n) for n in
-                          ("GEMINI_API_KEY", "GEMINI_API_KEY_2",
-                           "GEMINI_API_KEY_3", "GEMINI_API_KEY_4",
-                           "GEMINI_API_KEY_5")) if (v or "").strip()]
+    # ⚠️ TODAS AS CHAVES DO RODIZIO, nao uma amostra fixa.
+    #
+    # Ate' 01/09/2026 esta lista tinha cinco nomes escritos a mao — e os
+    # secrets do repo NAO se chamam assim (sao GEMINI4..GEMINI19 mais
+    # GEMINI_API_KEY_1/2/3/20). Na nuvem a sonda enxergava DUAS chaves de
+    # vinte e decidia o teto de corte com essa amostra.
+    #
+    # O intervalo e' o mesmo do `keys.Rotador`: prefixo puro e depois
+    # _2.._40. Ler o que o motor le' e' a unica forma de a sonda medir a
+    # mesma coisa que o corte vai usar.
+    nomes = ["GEMINI_API_KEY"] + [f"GEMINI_API_KEY_{i}" for i in range(2, 41)]
+    chaves = [v for v in (os.environ.get(n) for n in nomes) if (v or "").strip()]
     if not chaves:
         return True, "nenhuma chave pra sondar — seguindo sem sonda"
 
-    placar = {"ok": 0, "sem cota": 0, "sobrecarregado": 0, "mudo": 0}
-    for chave in chaves:
+    # ⚠️ EM PARALELO, E COM TIMEOUT CURTO. A primeira versao consultava as
+    # chaves uma a uma com 20s de espera cada: com 20 chaves, a sonda sozinha
+    # levava minutos e atrasava TODO disparo. Aqui o custo e' o da chave mais
+    # lenta, nao a soma.
+    #
+    # 8s basta: o que se pergunta e' se a chave responde, nao o conteudo. Uma
+    # chave que demora mais que isso nao serve pra decidir teto de corte.
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _sondar(chave: str) -> str:
         req = urllib.request.Request(
             "https://generativelanguage.googleapis.com/v1beta/models/"
             f"gemini-3.6-flash:generateContent?key={chave.strip()}",
             data=json.dumps({"contents": [{"parts": [{"text": "oi"}]}]}).encode(),
             headers={"Content-Type": "application/json"})
         try:
-            urllib.request.urlopen(req, timeout=20)
-            placar["ok"] += 1
+            urllib.request.urlopen(req, timeout=8)
+            return "ok"
         except urllib.error.HTTPError as e:
-            placar["sem cota" if e.code == 429 else "sobrecarregado"] += 1
+            return "sem cota" if e.code == 429 else "sobrecarregado"
         except Exception:
-            placar["mudo"] += 1
+            return "mudo"
+
+    placar = {"ok": 0, "sem cota": 0, "sobrecarregado": 0, "mudo": 0}
+    with ThreadPoolExecutor(max_workers=min(10, len(chaves))) as pool:
+        for r in pool.map(_sondar, chaves):
+            placar[r] += 1
 
     resumo = ", ".join(f"{v} {k}" for k, v in placar.items() if v)
     if placar["ok"]:
         return True, f"{placar['ok']} de {len(chaves)} chaves com cota ({resumo})"
     return False, f"nenhuma das {len(chaves)} chaves respondeu 200 ({resumo})"
+
+
+def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
+    """Quantos cortes deixar em voo, dado o que a sonda enxergou.
+
+    ⚠️ PERGUNTA DO BRYAN em 01/09/2026: "se colocarmos mais um pra cortar, de
+    3 em 3, sera' que da' problema?". A medicao diz que 3 nao consome MAIS
+    cota — consome mais RAPIDO. Os mesmos videos fazem as mesmas chamadas
+    (~3 a 6 por run: selecao, traducao por clipe, legenda premium).
+
+    O que muda e' o PREJUIZO quando a cota acaba. Um run que morre ja' pagou
+    corte, estabilizacao, transcricao e as vezes render — 40 a 100 minutos de
+    runner. Com 2 em voo perdem-se dois; com 3, tres. Foi o que aconteceu com
+    os 10 em paralelo de 31/08: nove morreram carregando trabalho ja' pago.
+
+    Ou seja: 3 e' melhor que 2 ENQUANTO ha' cota, e pior que 2 quando ela
+    aperta. Numero fixo obriga a escolher um dos dois cenarios — por isso o
+    teto segue a medida.
+
+    ⚠️ O TETO PEDIDO E' O MAXIMO, nunca o minimo. Cota folgada nao autoriza
+    passar do que o Bryan pediu; ela so' permite CHEGAR la'.
+    """
+    import re as _re
+    m = _re.match(r"(\d+) de (\d+) chaves com cota", motivo)
+    if not m:
+        return teto_pedido, "sem contagem de chaves — teto como pedido"
+    ok, total = int(m.group(1)), int(m.group(2))
+    fatia = ok / max(1, total)
+    if fatia >= 0.5:
+        return teto_pedido, f"cota folgada ({ok}/{total}) — teto {teto_pedido}"
+    if ok >= 2:
+        return min(2, teto_pedido), f"cota apertada ({ok}/{total}) — teto 2"
+    return 1, f"cota no fim ({ok}/{total}) — um de cada vez"
 
 
 def falhou_por_cota(run_id: int) -> bool | None:

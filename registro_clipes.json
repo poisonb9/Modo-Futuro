@@ -478,7 +478,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-26_01_nota95_Os_nanometros_dos_chips_sao_uma_mentira_do_marketing_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-01T14:36:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Os nanometros dos chips sao uma mentira do marketing?"
+        }
+      ]
     },
     "sem-hash:2026082601nota97aanalogiabrutalsobreofuturodosprofissionaisnaerada": {
       "arquivo": "2026-08-26_01_nota97_A_analogia_brutal_sobre_o_futuro_dos_profissionais_na_era_da_short_9x16.mp4",
@@ -673,6 +680,12 @@
           "quando": "2026-09-01T11:26:03+00:00",
           "canal": "atefalhar",
           "detalhe": "print do perfil, 01/09"
+        },
+        {
+          "origem": "buffer",
+          "quando": "2026-09-01T11:15:00.000Z",
+          "canal": "atefalhar",
+          "detalhe": "A Ordem Certa Para Montar Seu Treino de Glúteos"
         }
       ]
     },

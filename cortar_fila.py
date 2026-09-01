@@ -83,6 +83,24 @@ def tem_cota() -> tuple[bool, str]:
     # mesma coisa que o corte vai usar.
     nomes = ["GEMINI_API_KEY"] + [f"GEMINI_API_KEY_{i}" for i in range(2, 41)]
     chaves = [v for v in (os.environ.get(n) for n in nomes) if (v or "").strip()]
+
+    # ⚠️ AMOSTRA, NAO CENSO — E A RAZAO E' QUE A SONDA SE AUTO-SABOTAVA.
+    #
+    # MEDIDO em 01/09/2026: uma consulta direta as 14 chaves devolveu 10 em
+    # 200. A sonda do script, SEGUNDOS DEPOIS, devolveu "1 ok, 8 sem cota" —
+    # as mesmas chaves. Bater em todas duas vezes dentro do mesmo minuto
+    # estoura o limite POR MINUTO do Gemini, e o 429 resultante era lido como
+    # "cota diaria esgotada". A sonda causava o que media, e rebaixava o teto
+    # de corte por causa disso.
+    #
+    # Uma amostra aleatoria de 5 e' representativa o bastante pra decidir
+    # entre 3, 2 e 1, e nao chega perto do limite por minuto.
+    #
+    # ⚠️ ALEATORIA, nao "as cinco primeiras": chave fixa seria sempre a mesma
+    # a ser gasta, e a amostra deixaria de representar o rodizio inteiro.
+    import random
+    if len(chaves) > 5:
+        chaves = random.sample(chaves, 5)
     if not chaves:
         return True, "nenhuma chave pra sondar — seguindo sem sonda"
 

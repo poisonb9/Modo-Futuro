@@ -78,7 +78,7 @@ def tem_cota() -> tuple[bool, str]:
     if not chaves:
         return True, "nenhuma chave pra sondar — seguindo sem sonda"
 
-    placar = {"sem cota": 0, "sobrecarregado": 0, "mudo": 0}
+    placar = {"ok": 0, "sem cota": 0, "sobrecarregado": 0, "mudo": 0}
     for chave in chaves:
         req = urllib.request.Request(
             "https://generativelanguage.googleapis.com/v1beta/models/"
@@ -87,13 +87,15 @@ def tem_cota() -> tuple[bool, str]:
             headers={"Content-Type": "application/json"})
         try:
             urllib.request.urlopen(req, timeout=20)
-            return True, f"chave respondeu 200 ({len(chaves)} sondadas)"
+            placar["ok"] += 1
         except urllib.error.HTTPError as e:
             placar["sem cota" if e.code == 429 else "sobrecarregado"] += 1
         except Exception:
             placar["mudo"] += 1
 
     resumo = ", ".join(f"{v} {k}" for k, v in placar.items() if v)
+    if placar["ok"]:
+        return True, f"{placar['ok']} de {len(chaves)} chaves com cota ({resumo})"
     return False, f"nenhuma das {len(chaves)} chaves respondeu 200 ({resumo})"
 
 
@@ -126,6 +128,39 @@ def falhou_por_cota(run_id: int) -> bool | None:
         print(f"    [!] nao li o log do run {run_id} ({str(e)[:50]})")
         return None
     return "SEM COTA" in texto or "chaves do Gemini" in texto
+
+
+def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
+    """Quantos cortes deixar em voo, dado o que a sonda enxergou.
+
+    ⚠️ PERGUNTA DO BRYAN em 01/09/2026: "se colocarmos mais um pra cortar, de
+    3 em 3, sera' que da' problema?". A medicao diz que 3 nao consome MAIS
+    cota — consome mais RAPIDO. Os mesmos videos fazem as mesmas chamadas
+    (~3 a 6 por run: selecao, traducao por clipe, legenda premium).
+
+    O que muda e' o PREJUIZO quando a cota acaba. Um run que morre ja' pagou
+    corte, estabilizacao, transcricao e as vezes render — 40 a 100 minutos de
+    runner. Com 2 em voo perdem-se dois; com 3, tres. Foi o que aconteceu com
+    os 10 em paralelo de 31/08: nove morreram carregando trabalho ja' pago.
+
+    Ou seja: 3 e' melhor que 2 ENQUANTO ha' cota, e pior que 2 quando ela
+    aperta. Numero fixo obriga a escolher um dos dois cenarios — por isso o
+    teto segue a medida.
+
+    ⚠️ O TETO PEDIDO E' O MAXIMO, nunca o minimo. Cota folgada nao autoriza
+    passar do que o Bryan pediu; ela so' permite CHEGAR la'.
+    """
+    import re as _re
+    m = _re.match(r"(\d+) de (\d+) chaves com cota", motivo)
+    if not m:
+        return teto_pedido, "sem contagem de chaves — teto como pedido"
+    ok, total = int(m.group(1)), int(m.group(2))
+    fatia = ok / max(1, total)
+    if fatia >= 0.5:
+        return teto_pedido, f"cota folgada ({ok}/{total}) — teto {teto_pedido}"
+    if ok >= 2:
+        return min(2, teto_pedido), f"cota apertada ({ok}/{total}) — teto 2"
+    return 1, f"cota no fim ({ok}/{total}) — um de cada vez"
 
 
 def devolver_os_que_falharam(d: dict) -> list[str]:
@@ -227,6 +262,10 @@ def main() -> None:
 
     ok, motivo = tem_cota()
     print(f"sonda de cota: {motivo}")
+    if ok:
+        teto, porque = teto_pela_cota(motivo, teto)
+        vagas = max(0, teto - voando)
+        print(f"teto pela cota: {porque} -> {vagas} vaga(s)")
     if not ok:
         Path("relato_cortes.txt").write_text(
             f"Nao disparei: {motivo}. Restam {len(pendentes)} na fila.",

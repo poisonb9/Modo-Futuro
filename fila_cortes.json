@@ -1,6 +1,6 @@
 {
   "_leia": "Fila de cortes pendentes. O cortar_fila.yml consome daqui, no maximo 2 por vez. Estado de cada item: 'pendente' -> 'disparado' (com run_id e quando) -> some da fila quando o Bryan confirmar. Ordem = round-robin entre canais, pra nenhum canal ficar por ultimo.",
-  "teto_em_voo": 2,
+  "teto_em_voo": 3,
   "itens": [
     {
       "estado": "pronto",

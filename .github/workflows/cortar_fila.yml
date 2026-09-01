@@ -33,9 +33,9 @@ on:
   workflow_dispatch:
     inputs:
       teto:
-        description: "Quantos cortes podem estar em voo ao mesmo tempo"
+        description: "MAXIMO de cortes em voo. A sonda de cota pode BAIXAR (2, ou 1), nunca subir"
         required: false
-        default: "2"
+        default: "3"
 
 # ⚠️ Duas passadas ao mesmo tempo contariam as mesmas vagas e disparariam em
 # dobro — que e' o erro que este arquivo existe pra impedir.
@@ -67,7 +67,7 @@ jobs:
           GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
           GEMINI_API_KEY_4: ${{ secrets.GEMINI_API_KEY_4 }}
           GEMINI_API_KEY_5: ${{ secrets.GEMINI_API_KEY_5 }}
-          TETO: ${{ inputs.teto || '2' }}
+          TETO: ${{ inputs.teto || '3' }}
         run: python -X utf8 cortar_fila.py
 
       - name: Guardar o estado da fila

@@ -162,230 +162,268 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     destino.mkdir(parents=True, exist_ok=True)
 
     resumo = []
+    # ⚠️ CADA CLIPE E' ISOLADO. Sem isto, uma falha no clipe 2 leva junto
+    # o clipe 1 INTEIRO, ja' cortado, dublado e renderizado.
+    #
+    # MEDIDO no run #229 (01/09/2026): o clipe 1 teve as 35 frases
+    # sintetizadas — 1835 segundos, meia hora de TTS — e o run morreu ao
+    # traduzir o clipe 2 por cota do Gemini. Foram 70 minutos de runner
+    # embora com trabalho PRONTO dentro. O mesmo padrao apareceu nos
+    # #205 e #211, que ja' tinham clipe selecionado quando a cota caiu.
+    #
+    # ⚠️ E o run so' fracassa se NENHUM clipe vingar. Um clipe bom e um
+    # ruim tem de virar uma publicacao, nao zero.
+    falhas_de_clipe = []
     for i, c in enumerate(clipes, 1):
-        ini, fim = c["inicio_s"], c["fim_s"]
-        if not recorte:   # no modo manual o usuário mandou os tempos exatos
-            # ANTES do congelamento: recua o início até o começo da frase.
-            # Medido em 30/07 nos insights reais — os clipes abriam no meio da
-            # frase ("A GENTE PROVAVELMENTE...") e metade da audiência saía
-            # em 0:02. Ver engine/ancoragem.py.
-            ini = ancoragem.ancorar(fonte, ini, fim, idioma)
-            c["inicio_s"] = ini
-
-            nova_ini = midia.pular_congelamento_inicial(fonte, ini, fim)
-            if nova_ini > ini:
-                print(f"      início ajustado {ini:.1f}s→{nova_ini:.1f}s "
-                      f"(pulando frame travado na abertura do clipe)")
-                ini = nova_ini
+        try:
+            ini, fim = c["inicio_s"], c["fim_s"]
+            if not recorte:   # no modo manual o usuário mandou os tempos exatos
+                # ANTES do congelamento: recua o início até o começo da frase.
+                # Medido em 30/07 nos insights reais — os clipes abriam no meio da
+                # frase ("A GENTE PROVAVELMENTE...") e metade da audiência saía
+                # em 0:02. Ver engine/ancoragem.py.
+                ini = ancoragem.ancorar(fonte, ini, fim, idioma)
                 c["inicio_s"] = ini
-            novo_fim = midia.pular_congelamento_final(fonte, ini, fim)
-            if novo_fim < fim:
-                print(f"      fim ajustado {fim:.1f}s→{novo_fim:.1f}s "
-                      f"(pulando frame travado no fechamento do clipe)")
-                fim = novo_fim
-                c["fim_s"] = fim
-        pasta = destino / f"{i:02d}_nota{int(c.get('nota', 0))}_{_limpar(c.get('titulo', ''))}"
-        pasta.mkdir(parents=True, exist_ok=True)
-        # `genero_falante` no log: e' o sinal que vai decidir a VOZ do clipe
-        # (voz da Bruna pra fonte feminina), e ele nunca foi medido. Sem sair
-        # no log nao ha' como conferir depois se o Gemini acertou — o campo
-        # vive num post.json que morre com o runner.
-        _gen = c.get("genero_falante") or "(nao veio)"
-        print(f"\n[4/5] clipe {i}/{len(clipes)}  {ini:.1f}s→{fim:.1f}s  "
-              f"nota {c.get('nota')}  falante: {_gen}  "
-              f"\"{str(c.get('gancho',''))[:50]}\"")
 
-        status.etapa(nome_fonte, "cortando", c.get("titulo", ""), i, len(clipes))
-        bruto = render.cortar(fonte, ini, fim, config.TRABALHO / f"bruto_{i:02d}.mp4")
+                nova_ini = midia.pular_congelamento_inicial(fonte, ini, fim)
+                if nova_ini > ini:
+                    print(f"      início ajustado {ini:.1f}s→{nova_ini:.1f}s "
+                          f"(pulando frame travado na abertura do clipe)")
+                    ini = nova_ini
+                    c["inicio_s"] = ini
+                novo_fim = midia.pular_congelamento_final(fonte, ini, fim)
+                if novo_fim < fim:
+                    print(f"      fim ajustado {fim:.1f}s→{novo_fim:.1f}s "
+                          f"(pulando frame travado no fechamento do clipe)")
+                    fim = novo_fim
+                    c["fim_s"] = fim
+            pasta = destino / f"{i:02d}_nota{int(c.get('nota', 0))}_{_limpar(c.get('titulo', ''))}"
+            pasta.mkdir(parents=True, exist_ok=True)
+            # `genero_falante` no log: e' o sinal que vai decidir a VOZ do clipe
+            # (voz da Bruna pra fonte feminina), e ele nunca foi medido. Sem sair
+            # no log nao ha' como conferir depois se o Gemini acertou — o campo
+            # vive num post.json que morre com o runner.
+            _gen = c.get("genero_falante") or "(nao veio)"
+            print(f"\n[4/5] clipe {i}/{len(clipes)}  {ini:.1f}s→{fim:.1f}s  "
+                  f"nota {c.get('nota')}  falante: {_gen}  "
+                  f"\"{str(c.get('gancho',''))[:50]}\"")
 
-        # ---- decupagem: tira as pausas mortas (retenção + originalidade)
-        # Não roda com --dublar: a trilha dublada é gerada pra duração do
-        # recorte original e dessincronizaria.
-        dur_final = fim - ini
-        if config.CORTAR_SILENCIOS and not dublar:
-            enxuto = midia.cortar_silencios(
-                bruto, config.TRABALHO / f"bruto_{i:02d}_enxuto.mp4")
-            if enxuto != bruto:
-                nova_dur = midia.duracao(enxuto)
-                if nova_dur < config.DUR_MIN:
-                    # encurtar até aqui derrubaria o clipe abaixo do mínimo
-                    # que garante monetização — melhor manter as pausas.
-                    print(f"      [!] decupagem descartada: deixaria o clipe "
-                          f"em {nova_dur:.1f}s (< DUR_MIN {config.DUR_MIN}s)")
-                else:
-                    bruto, dur_final = enxuto, nova_dur
+            status.etapa(nome_fonte, "cortando", c.get("titulo", ""), i, len(clipes))
+            bruto = render.cortar(fonte, ini, fim, config.TRABALHO / f"bruto_{i:02d}.mp4")
 
-        if config.ESTABILIZAR:
-            print("      estabilizando (vidstab)...")
-            bruto = pos_producao.estabilizar(
-                bruto, config.TRABALHO / f"bruto_{i:02d}_estavel.mp4")
+            # ---- decupagem: tira as pausas mortas (retenção + originalidade)
+            # Não roda com --dublar: a trilha dublada é gerada pra duração do
+            # recorte original e dessincronizaria.
+            dur_final = fim - ini
+            if config.CORTAR_SILENCIOS and not dublar:
+                enxuto = midia.cortar_silencios(
+                    bruto, config.TRABALHO / f"bruto_{i:02d}_enxuto.mp4")
+                if enxuto != bruto:
+                    nova_dur = midia.duracao(enxuto)
+                    if nova_dur < config.DUR_MIN:
+                        # encurtar até aqui derrubaria o clipe abaixo do mínimo
+                        # que garante monetização — melhor manter as pausas.
+                        print(f"      [!] decupagem descartada: deixaria o clipe "
+                              f"em {nova_dur:.1f}s (< DUR_MIN {config.DUR_MIN}s)")
+                    else:
+                        bruto, dur_final = enxuto, nova_dur
 
-        # legenda: só este pedacinho vai pra Groq (~1 MB, longe dos 25 MB).
-        # Extrai do PRÓPRIO clipe (não fatia o áudio da fonte) — depois da
-        # decupagem os tempos não batem mais com o original.
-        peda = midia.extrair_audio(bruto, config.TRABALHO / f"clip_{i:02d}.flac")
-        print(f"      Groq transcrevendo ({midia.mb(peda):.1f} MB)...")
-        status.etapa(nome_fonte, "transcrevendo", c.get("titulo", ""), i, len(clipes))
-        ps = transcricao.palavras(peda, idioma)
+            if config.ESTABILIZAR:
+                print("      estabilizando (vidstab)...")
+                bruto = pos_producao.estabilizar(
+                    bruto, config.TRABALHO / f"bruto_{i:02d}_estavel.mp4")
 
-        # GUARDA DE CLIPE MUDO. Antes de qualquer coisa cara (tradução,
-        # dublagem, render), confirma que existe fala. Em 29/08/2026 sete
-        # clipes de usinagem CNC — sem uma palavra falada — chegaram à fila,
-        # e o mais silencioso deles levou a MAIOR nota do lote (96). O
-        # `selecao.py` pontua gancho/progresso/clímax, que são conceitos de
-        # fala, mas nada verificava que havia fala. Ver engine/fala.py.
-        e_mudo, motivo = fala.mudo(ps, dur_final)
-        if e_mudo:
-            print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": {motivo}")
+            # legenda: só este pedacinho vai pra Groq (~1 MB, longe dos 25 MB).
+            # Extrai do PRÓPRIO clipe (não fatia o áudio da fonte) — depois da
+            # decupagem os tempos não batem mais com o original.
+            peda = midia.extrair_audio(bruto, config.TRABALHO / f"clip_{i:02d}.flac")
+            print(f"      Groq transcrevendo ({midia.mb(peda):.1f} MB)...")
+            status.etapa(nome_fonte, "transcrevendo", c.get("titulo", ""), i, len(clipes))
+            ps = transcricao.palavras(peda, idioma)
+
+            # GUARDA DE CLIPE MUDO. Antes de qualquer coisa cara (tradução,
+            # dublagem, render), confirma que existe fala. Em 29/08/2026 sete
+            # clipes de usinagem CNC — sem uma palavra falada — chegaram à fila,
+            # e o mais silencioso deles levou a MAIOR nota do lote (96). O
+            # `selecao.py` pontua gancho/progresso/clímax, que são conceitos de
+            # fala, mas nada verificava que havia fala. Ver engine/fala.py.
+            e_mudo, motivo = fala.mudo(ps, dur_final)
+            if e_mudo:
+                print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": {motivo}")
+                continue
+
+            # guardrail de ritmo [PAPER]: acima de ~200 palavras/min a
+            # compreensão cai (Weinstein-Shr & Griffiths). A decupagem não
+            # acelera a fala, mas aumenta a densidade — vale medir e avisar.
+            if ps and dur_final > 0:
+                wpm = len(ps) / (dur_final / 60)
+                if wpm > 200:
+                    print(f"      [!] ritmo alto: {wpm:.0f} palavras/min "
+                          f"(acima de 200 a compreensão cai)")
+
+            # dublado implica legenda traduzida também (áudio e texto combinando)
+            precisa_traduzir = (traduzir or dublar) and idioma != "pt" and ps
+            audio_dublado = None
+            if precisa_traduzir:
+                print("      traduzindo pra pt-BR...")
+                status.etapa(nome_fonte, "traduzindo", c.get("titulo", ""), i, len(clipes))
+                # `genero_falante` vem da SELECAO, que ve' o video — o prompt de
+                # narracao sozinho so' consegue inferir pelo texto, e transcricao
+                # costuma nao ter pista. Em 25/08/2026 um clipe foi ao ar dizendo
+                # 'A ESPECIALISTA EXPLICOU' com um homem na tela.
+                segmentos = traducao.traduzir_segmentos(
+                    ps, narrar=dublar and not fala_literal,
+                    genero_falante=c.get("genero_falante"))
+                ps = traducao.segmentos_para_palavras(segmentos)
+                if getattr(config, "LEGENDA_PREMIUM", False):
+                    from engine import legenda_premium
+                    c["legenda_premium"] = legenda_premium.gerar(segmentos)
+                    if c["legenda_premium"]:
+                        print(f"      legenda premium: {len(c['legenda_premium'])} chars")
+                if dublar:
+                    if config.VOZ_CLONADA_ATIVA:
+                        print("      dublando (voz clonada, Chatterbox)...")
+                        status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
+                        # `falantes` vem da SELECAO, que VE o video — e' quem
+                        # sabe de quem e' cada trecho. Vazio ou ausente: uma voz
+                        # so', como sempre.
+                        audio_dublado, timing_dub = voz_clonada.gerar_trilha(
+                            segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
+                            amostra_voz=config.VOZ_CLONADA_AMOSTRA,
+                            falantes=c.get("falantes"),
+                            # ⚠️ A FONTE ORIGINAL vai junto pra medir a dinamica
+                            # (enfase, envelope e pausas). Sem ela a sintese sai
+                            # como antes — falha ABERTA, ver engine/dinamica.py.
+                            fonte=fonte)
+                        # a legenda tem que seguir o timing REAL do áudio
+                        # dublado (pausas entre frases + atempo final mudam o
+                        # ritmo em relação ao vídeo fonte), não o timing de
+                        # `ps`/`segmentos` — senão ela "corre" na frente ou
+                        # atrás da voz (Bryan reportou em 05/08/2026).
+                        if timing_dub:
+                            palavras_dub = []
+                            for tm in timing_dub:
+                                novas = re.findall(r"\S+", tm["frase"])
+                                palavras_dub.extend(traducao.redistribuir_palavras(
+                                    novas, tm["inicio"], tm["fim"]))
+                            if palavras_dub:
+                                ps = palavras_dub
+                    else:
+                        print("      dublando (edge-tts)...")
+                        status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
+                        audio_dublado = dublagem.gerar_trilha(
+                            segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
+
+            # Palavra sensivel vira grafia adaptada (morte -> m0rte) APENAS no texto
+            # escrito: legenda na tela, card de titulo e legenda do post. O audio
+            # da dublagem ja' foi gerado acima com a palavra ORIGINAL, e continua
+            # assim de proposito — o TTS leria "m0rte" como "m zero erre te e", e
+            # fala natural e' o que sustenta a retencao. Ver engine/suavizar.py.
+            # Pedido do Bryan em 25/08/2026: "nao quero perder videos bons, temos
+            # a oportunidade de modificar para evitar certas palavras".
+            if config.SUAVIZAR_TEXTO:
+                ps = suavizar.palavras(ps)
+                c = dict(c)
+                c["titulo"] = suavizar.texto(c.get("titulo", ""))
+                c["descricao"] = suavizar.texto(c.get("descricao", ""))
+
+            lv, av = config.VERTICAL
+            ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
+                                       estilo=estilo_legenda)
+            print("      renderizando 9:16 com face tracking...")
+            status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
+            # O título vai NA TELA nos primeiros segundos, não só na descrição.
+            # O Gemini já devolvia esse campo e ele só era usado como legenda do
+            # post — a informação existia e estava sendo jogada fora justamente
+            # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
+            render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
+                            titulo=c.get("titulo", ""))
+
+            if not so_vertical:
+                lh, ah = config.HORIZONTAL
+                ass_h = legendas.escrever(ps, config.TRABALHO / f"h_{i:02d}.ass", lh, ah,
+                                           estilo=estilo_legenda)
+                print("      renderizando 16:9 tela cheia...")
+                status.etapa(nome_fonte, "renderizando_horizontal", c.get("titulo", ""), i, len(clipes))
+                render.horizontal(bruto, ass_h, pasta / "fullscreen_16x9.mp4", audio_dublado)
+
+            render.capa(bruto, pasta / "capa.jpg")
+
+            # ⚠️ `legenda_premium` TEM DE ESTAR NESTA LISTA. Ela e' uma copia por
+            # nomes: o que nao esta' aqui nao chega ao post.json, mesmo tendo sido
+            # gerado. E o post.json e' o que o `publicar_tiktok` le' pra escrever
+            # o .txt que vai pro Drive.
+            #
+            # Foi o que aconteceu ate' 31/08/2026: o log dizia "legenda premium:
+            # 1408 chars", o texto existia em `c`, o post.txt local saia completo
+            # — e o .txt do Drive saia com 0,3 KB, sem o bloco premium. Unificar
+            # as duas funcoes de legenda (commit af01799) nao resolveu, porque o
+            # defeito nao era a montagem: era o dado que nunca chegava.
+            meta = {k: c.get(k) for k in
+                    ("titulo", "descricao", "tags", "legenda_premium",
+                     "gancho", "porque",
+                     "nota", "inicio_s", "fim_s", "duracao_s",
+                     "tipo_conteudo", "emocao_dominante", "dinamica",
+                     "genero_falante", "falantes",
+                     "marcador_viral", "arquetipo", "forca_gancho",
+                     "compartilhabilidade", "independencia",
+                     "intensidade_emocional", "valor_social")}
+            meta["fonte"] = fonte.name
+            # duracao_s vinha do recorte na fonte; depois da decupagem o clipe
+            # é mais curto. O que vale pra regra dos 60s é a duração FINAL.
+            meta["duracao_recorte_s"] = round(fim - ini, 2)
+            meta["duracao_s"] = round(dur_final, 2)
+            meta["decupado"] = bool(dur_final < (fim - ini) - 0.01)
+            # Guarda a URL AQUI, não só no _origem.json do lote — post.json é o
+            # arquivo que sobrevive em qualquer cópia/organização do clipe
+            # (Drive, Desktop, etc). Perder a URL de origem já aconteceu (vídeo
+            # do Geoffrey Hinton, 26/07/2026) porque _origem.json não é sempre
+            # escrito. Redundância aqui evita repetir.
+            meta["url_origem"] = url_origem or ""
+            (pasta / "post.json").write_text(
+                json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+            (pasta / "post.txt").write_text(_legenda(c), encoding="utf-8")
+            resumo.append(meta)
+
+            # Limpa os intermediários DESTE clipe assim que ele termina — sem
+            # isso, tudo (bruto, versão enxuta, estabilizada, áudio, faixa
+            # dublada) fica acumulando em disco até o fim do lote inteiro, e um
+            # runner do GitHub Actions (só ~14GB livres) estoura "No space left
+            # on device" no meio de um vídeo com --dublar e vários clipes
+            # (medido em 04/08/2026, run 30899785124, quebrou no clipe 2 de 10).
+            if not manter_temp:
+                for padrao in (f"bruto_{i:02d}*.mp4", f"clip_{i:02d}.flac",
+                              f"v_{i:02d}.ass", f"h_{i:02d}.ass"):
+                    for f in config.TRABALHO.glob(padrao):
+                        f.unlink(missing_ok=True)
+                dub_dir = config.TRABALHO / f"dub_{i:02d}"
+                if dub_dir.is_dir():
+                    shutil.rmtree(dub_dir, ignore_errors=True)
+
+        except Exception as e:
+            # ⚠️ NAO ENGOLE: o motivo vai pro log com o numero do clipe, e
+            # o run so' segue porque os OUTROS clipes ainda podem valer.
+            # Silenciar aqui esconderia justamente a falha que se quer ver.
+            falhas_de_clipe.append((i, str(e)[:160]))
+            print(f"   [!] clipe {i} perdido: {str(e)[:140]}", flush=True)
             continue
 
-        # guardrail de ritmo [PAPER]: acima de ~200 palavras/min a
-        # compreensão cai (Weinstein-Shr & Griffiths). A decupagem não
-        # acelera a fala, mas aumenta a densidade — vale medir e avisar.
-        if ps and dur_final > 0:
-            wpm = len(ps) / (dur_final / 60)
-            if wpm > 200:
-                print(f"      [!] ritmo alto: {wpm:.0f} palavras/min "
-                      f"(acima de 200 a compreensão cai)")
+    # ⚠️ NENHUM CLIPE = O RUN FRACASSA, e tem de fracassar mesmo. Isolar
+    # clipe existe pra salvar o que vingou, nao pra transformar um run vazio
+    # em sucesso — o passo seguinte publicaria uma release sem video e o
+    # agendador nao teria o que enfileirar, tudo em verde. Falha silenciosa e'
+    # exatamente o modo que esta maquinaria mais custou a extirpar.
+    if not resumo:
+        print("[x] NENHUM clipe sobreviveu — o run falha.")
+        for n, msg in falhas_de_clipe:
+            print(f"    clipe {n}: {msg}")
+        sys.exit(1)
 
-        # dublado implica legenda traduzida também (áudio e texto combinando)
-        precisa_traduzir = (traduzir or dublar) and idioma != "pt" and ps
-        audio_dublado = None
-        if precisa_traduzir:
-            print("      traduzindo pra pt-BR...")
-            status.etapa(nome_fonte, "traduzindo", c.get("titulo", ""), i, len(clipes))
-            # `genero_falante` vem da SELECAO, que ve' o video — o prompt de
-            # narracao sozinho so' consegue inferir pelo texto, e transcricao
-            # costuma nao ter pista. Em 25/08/2026 um clipe foi ao ar dizendo
-            # 'A ESPECIALISTA EXPLICOU' com um homem na tela.
-            segmentos = traducao.traduzir_segmentos(
-                ps, narrar=dublar and not fala_literal,
-                genero_falante=c.get("genero_falante"))
-            ps = traducao.segmentos_para_palavras(segmentos)
-            if getattr(config, "LEGENDA_PREMIUM", False):
-                from engine import legenda_premium
-                c["legenda_premium"] = legenda_premium.gerar(segmentos)
-                if c["legenda_premium"]:
-                    print(f"      legenda premium: {len(c['legenda_premium'])} chars")
-            if dublar:
-                if config.VOZ_CLONADA_ATIVA:
-                    print("      dublando (voz clonada, Chatterbox)...")
-                    status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
-                    # `falantes` vem da SELECAO, que VE o video — e' quem
-                    # sabe de quem e' cada trecho. Vazio ou ausente: uma voz
-                    # so', como sempre.
-                    audio_dublado, timing_dub = voz_clonada.gerar_trilha(
-                        segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
-                        amostra_voz=config.VOZ_CLONADA_AMOSTRA,
-                        falantes=c.get("falantes"),
-                        # ⚠️ A FONTE ORIGINAL vai junto pra medir a dinamica
-                        # (enfase, envelope e pausas). Sem ela a sintese sai
-                        # como antes — falha ABERTA, ver engine/dinamica.py.
-                        fonte=fonte)
-                    # a legenda tem que seguir o timing REAL do áudio
-                    # dublado (pausas entre frases + atempo final mudam o
-                    # ritmo em relação ao vídeo fonte), não o timing de
-                    # `ps`/`segmentos` — senão ela "corre" na frente ou
-                    # atrás da voz (Bryan reportou em 05/08/2026).
-                    if timing_dub:
-                        palavras_dub = []
-                        for tm in timing_dub:
-                            novas = re.findall(r"\S+", tm["frase"])
-                            palavras_dub.extend(traducao.redistribuir_palavras(
-                                novas, tm["inicio"], tm["fim"]))
-                        if palavras_dub:
-                            ps = palavras_dub
-                else:
-                    print("      dublando (edge-tts)...")
-                    status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
-                    audio_dublado = dublagem.gerar_trilha(
-                        segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
-
-        # Palavra sensivel vira grafia adaptada (morte -> m0rte) APENAS no texto
-        # escrito: legenda na tela, card de titulo e legenda do post. O audio
-        # da dublagem ja' foi gerado acima com a palavra ORIGINAL, e continua
-        # assim de proposito — o TTS leria "m0rte" como "m zero erre te e", e
-        # fala natural e' o que sustenta a retencao. Ver engine/suavizar.py.
-        # Pedido do Bryan em 25/08/2026: "nao quero perder videos bons, temos
-        # a oportunidade de modificar para evitar certas palavras".
-        if config.SUAVIZAR_TEXTO:
-            ps = suavizar.palavras(ps)
-            c = dict(c)
-            c["titulo"] = suavizar.texto(c.get("titulo", ""))
-            c["descricao"] = suavizar.texto(c.get("descricao", ""))
-
-        lv, av = config.VERTICAL
-        ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
-                                   estilo=estilo_legenda)
-        print("      renderizando 9:16 com face tracking...")
-        status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
-        # O título vai NA TELA nos primeiros segundos, não só na descrição.
-        # O Gemini já devolvia esse campo e ele só era usado como legenda do
-        # post — a informação existia e estava sendo jogada fora justamente
-        # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
-        render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
-                        titulo=c.get("titulo", ""))
-
-        if not so_vertical:
-            lh, ah = config.HORIZONTAL
-            ass_h = legendas.escrever(ps, config.TRABALHO / f"h_{i:02d}.ass", lh, ah,
-                                       estilo=estilo_legenda)
-            print("      renderizando 16:9 tela cheia...")
-            status.etapa(nome_fonte, "renderizando_horizontal", c.get("titulo", ""), i, len(clipes))
-            render.horizontal(bruto, ass_h, pasta / "fullscreen_16x9.mp4", audio_dublado)
-
-        render.capa(bruto, pasta / "capa.jpg")
-
-        # ⚠️ `legenda_premium` TEM DE ESTAR NESTA LISTA. Ela e' uma copia por
-        # nomes: o que nao esta' aqui nao chega ao post.json, mesmo tendo sido
-        # gerado. E o post.json e' o que o `publicar_tiktok` le' pra escrever
-        # o .txt que vai pro Drive.
-        #
-        # Foi o que aconteceu ate' 31/08/2026: o log dizia "legenda premium:
-        # 1408 chars", o texto existia em `c`, o post.txt local saia completo
-        # — e o .txt do Drive saia com 0,3 KB, sem o bloco premium. Unificar
-        # as duas funcoes de legenda (commit af01799) nao resolveu, porque o
-        # defeito nao era a montagem: era o dado que nunca chegava.
-        meta = {k: c.get(k) for k in
-                ("titulo", "descricao", "tags", "legenda_premium",
-                 "gancho", "porque",
-                 "nota", "inicio_s", "fim_s", "duracao_s",
-                 "tipo_conteudo", "emocao_dominante", "dinamica",
-                 "genero_falante", "falantes",
-                 "marcador_viral", "arquetipo", "forca_gancho",
-                 "compartilhabilidade", "independencia",
-                 "intensidade_emocional", "valor_social")}
-        meta["fonte"] = fonte.name
-        # duracao_s vinha do recorte na fonte; depois da decupagem o clipe
-        # é mais curto. O que vale pra regra dos 60s é a duração FINAL.
-        meta["duracao_recorte_s"] = round(fim - ini, 2)
-        meta["duracao_s"] = round(dur_final, 2)
-        meta["decupado"] = bool(dur_final < (fim - ini) - 0.01)
-        # Guarda a URL AQUI, não só no _origem.json do lote — post.json é o
-        # arquivo que sobrevive em qualquer cópia/organização do clipe
-        # (Drive, Desktop, etc). Perder a URL de origem já aconteceu (vídeo
-        # do Geoffrey Hinton, 26/07/2026) porque _origem.json não é sempre
-        # escrito. Redundância aqui evita repetir.
-        meta["url_origem"] = url_origem or ""
-        (pasta / "post.json").write_text(
-            json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
-        (pasta / "post.txt").write_text(_legenda(c), encoding="utf-8")
-        resumo.append(meta)
-
-        # Limpa os intermediários DESTE clipe assim que ele termina — sem
-        # isso, tudo (bruto, versão enxuta, estabilizada, áudio, faixa
-        # dublada) fica acumulando em disco até o fim do lote inteiro, e um
-        # runner do GitHub Actions (só ~14GB livres) estoura "No space left
-        # on device" no meio de um vídeo com --dublar e vários clipes
-        # (medido em 04/08/2026, run 30899785124, quebrou no clipe 2 de 10).
-        if not manter_temp:
-            for padrao in (f"bruto_{i:02d}*.mp4", f"clip_{i:02d}.flac",
-                          f"v_{i:02d}.ass", f"h_{i:02d}.ass"):
-                for f in config.TRABALHO.glob(padrao):
-                    f.unlink(missing_ok=True)
-            dub_dir = config.TRABALHO / f"dub_{i:02d}"
-            if dub_dir.is_dir():
-                shutil.rmtree(dub_dir, ignore_errors=True)
+    if falhas_de_clipe:
+        print(f"[!] {len(falhas_de_clipe)} clipe(s) perdido(s) de "
+              f"{len(clipes)}; seguindo com {len(resumo)}")
+        for n, msg in falhas_de_clipe:
+            print(f"    clipe {n}: {msg}")
 
     (destino / "_resumo.json").write_text(
         json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")

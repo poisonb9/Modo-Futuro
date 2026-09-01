@@ -11,6 +11,21 @@ name: Cortar a fila (2 por vez)
 # cutucando — que e' exatamente o que ele nao quer.
 
 on:
+  # ⚠️ O GATILHO PRINCIPAL E' O FIM DE UM CORTE, nao o relogio.
+  #
+  # MEDIDO em 01/09/2026: o `schedule` deste arquivo pedia `*/30` e disparou
+  # de fato as 00:41, 06:00 e 10:54 — intervalos de ~5 HORAS. O cron do
+  # Actions e' best-effort e sofre atraso pesado; `*/30` e' um pedido, nao uma
+  # garantia. Com o teto de 2 em voo, isso deixava vaga livre por horas e a
+  # fila mal andava.
+  #
+  # `workflow_run` dispara assim que um corte termina — que e' exatamente o
+  # instante em que uma vaga abre. O cron fica como REDE, pro caso de o evento
+  # se perder ou de a fila parar com tudo falhando por cota.
+  workflow_run:
+    workflows: ["Cortar (a partir de vídeo já baixado no Drive)"]
+    types: [completed]
+
   schedule:
     # De 30 em 30 min. Um corte leva ~25 min, entao a passada seguinte quase
     # sempre encontra vaga sem precisar esperar demais.

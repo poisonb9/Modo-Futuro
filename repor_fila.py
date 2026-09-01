@@ -36,6 +36,12 @@ API = "https://api.buffer.com/"
 # um canal em estreia faz o primeiro video sair sozinho — exatamente o que ele
 # pediu pra nao acontecer.
 LIBERADOS = {
+    "atefalhar": {
+        "env": "BUFFER_TOKEN_ATEFALHAR",
+        "org": "6a94a9f9ca5d8883aa924198",
+        "canal": "6a94aaf5065799be46581e1d",
+        "repoe": True,
+    },
     "truque.importado": {
         "env": "BUFFER_TOKEN_TRUQUEIMPORTADO",
         "org": "6a94c752e0b1602e8c5cf1ae",
@@ -63,12 +69,6 @@ SO_RELATA = {
         "org": "6a90dddb9bb05f07b058e9bc",
         "canal": "6a90de80ccaf649a672ebe15",
         "nota": "motor no repo pipeline",
-    },
-    "atefalhar": {
-        "env": "BUFFER_TOKEN_ATEFALHAR",
-        "org": "6a94a9f9ca5d8883aa924198",
-        "canal": "6a94aaf5065799be46581e1d",
-        "nota": "ESTREIA — o Bryan posta os 2 primeiros na mao",
     },
 }
 

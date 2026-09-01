@@ -61,25 +61,27 @@
       "run_id": 33505055138
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1FJATcWmPLd60CbDfHGyd8AZOrGZS67oF",
       "nome": "Beginner Makeup on Textured skin - Lesson 1",
-      "quando": "2026-09-01T16:12:22+00:00"
+      "quando": "2026-09-01T17:56:50+00:00",
+      "run_id": 33540737953
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1w-Y7rHRklzy0h3CpHTQ2-7NVcNvlYuwa",
       "nome": "Stop Being F cking Weak",
-      "quando": "2026-09-01T14:20:38+00:00",
-      "tentativas": 1
+      "quando": "2026-09-01T17:56:55+00:00",
+      "tentativas": 1,
+      "run_id": 33540744827
     },
     {
       "estado": "pendente",

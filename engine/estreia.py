@@ -22,12 +22,14 @@ import datetime
 # canal -> ultimo dia (inclusive) em que ele ainda esta' em estreia.
 # O @atefalhar e o @truque.importado estrearam em 31/08/2026; o
 # @semanestesia.pod tambem. Dois dias = 31/08 e 01/09.
-ESTREIA_ATE = {
-    # ⚠️ O Bryan LIBEROU o @truque.importado e o @semanestesia.pod em
-    # 01/09/2026: "vamos comecar a publicar automaticamente ja', eu decidi
-    # isso". Saem daqui — nao ficam com data no passado, pra ninguem ler a
-    # lista e achar que ainda estao em periodo de estreia.
-    "atefalhar": datetime.date(2026, 9, 1),
+ESTREIA_ATE: dict = {
+    # ⚠️ VAZIO desde 01/09/2026: o Bryan liberou os tres canais novos. O
+    # @atefalhar foi o ultimo, quando ele pediu "preencha todas as filas" — e
+    # o prazo de 2 dias que ele mesmo fixou vencia nesse mesmo dia.
+    #
+    # A tabela FICA, e o mecanismo tambem: canal novo entra aqui com data, e
+    # destrava sozinho. Apagar o modulo por estar vazio hoje obrigaria a
+    # reconstrui-lo no proximo canal.
 }
 
 

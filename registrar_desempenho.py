@@ -68,8 +68,48 @@ def _tokens() -> dict:
     return t
 
 
+def canal_vale_a_pena(canal: str, hora: int) -> bool:
+    """Este canal precisa ser lido AGORA, ou pode esperar?
+
+    ⚠️ O ORCAMENTO DA API E' REAL. Medido em 01/09/2026: cada canal e' uma
+    conta Buffer separada, com 250 requisicoes/24h (nosso teto: 200). A foto
+    de hora em hora sozinha consome 24 — 62% de todo o uso do canal.
+
+    A regra: enquanto o canal tem post COM MENOS DE 72h, le' de hora em hora,
+    porque e' ai' que a curva de entrega muda. Passado isso, as views ficam
+    praticamente paradas e uma leitura a cada 6 horas ja' registra o mesmo.
+
+    ⚠️ MAS NUNCA PARA DE LER. Se a regra fosse so' "pula canal velho", um
+    canal que publicasse de novo ficaria invisivel pra sempre — o arquivo
+    continuaria dizendo que o post mais novo tem 200 horas. Por isso o piso de
+    6 em 6 horas, que sempre reencontra o canal.
+    """
+    if hora % 6 == 0:
+        return True
+    if not ARQUIVO.exists():
+        return True
+    mais_novo = None
+    try:
+        for linha in io.open(ARQUIVO, encoding="utf-8"):
+            d = json.loads(linha)
+            if d.get("canal") != canal or not d.get("publicado_em"):
+                continue
+            q = d["publicado_em"]
+            if mais_novo is None or q > mais_novo:
+                mais_novo = q
+    except Exception:
+        return True
+    if mais_novo is None:
+        return True
+    idade = (datetime.now(timezone.utc)
+             - datetime.fromisoformat(mais_novo.replace("Z", "+00:00"))
+             ).total_seconds() / 3600
+    return idade < 72
+
+
 def main() -> None:
     tok = _tokens()
+    hora = datetime.now(timezone.utc).hour
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
     novas = 0
     with io.open(ARQUIVO, "a", encoding="utf-8", newline="\n") as f:
@@ -77,6 +117,9 @@ def main() -> None:
             t = tok.get(canal)
             if not t:
                 print(f"  {canal}: sem token")
+                continue
+            if not canal_vale_a_pena(canal, hora):
+                print(f"  {canal}: pulado (nada novo ha' 72h; le' de 6 em 6h)")
                 continue
             try:
                 req = urllib.request.Request(

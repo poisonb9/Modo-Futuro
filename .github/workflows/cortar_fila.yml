@@ -30,6 +30,19 @@ on:
     # De 30 em 30 min. Um corte leva ~25 min, entao a passada seguinte quase
     # sempre encontra vaga sem precisar esperar demais.
     - cron: "*/30 * * * *"
+    # ⚠️ LOGO DEPOIS DO RESET DA COTA. A cota do Gemini e' DIARIA e vira a
+    # meia-noite do Pacifico — 07:00 UTC, 04:00 em Sao Paulo (medido em
+    # 01/09/2026: `GenerateRequestsPerDayPerProjectPerModel-FreeTier`).
+    #
+    # Sem esta entrada, a retomada depende do `*/30`, que o Actions atrasa de
+    # verdade: as passadas reais de hoje foram as 00:41, 06:00 e 10:54 —
+    # intervalos de ~5 HORAS. A fila poderia ficar parada metade da manha com
+    # cota cheia esperando.
+    #
+    # E o gatilho por `workflow_run` nao ajuda aqui: ele depende de um corte
+    # TERMINAR, e com tudo parado por cota nao ha' corte nenhum pra terminar.
+    - cron: "10 7 * * *"
+    - cron: "40 7 * * *"
   workflow_dispatch:
     inputs:
       teto:

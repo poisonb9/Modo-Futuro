@@ -68,8 +68,13 @@
       "selecao_modo": "procedimento",
       "drive_file_id": "1FJATcWmPLd60CbDfHGyd8AZOrGZS67oF",
       "nome": "Beginner Makeup on Textured skin - Lesson 1",
+<<<<<<< Updated upstream
       "quando": "2026-09-01T13:01:10+00:00",
       "run_id": 33510916925
+=======
+      "quando": "2026-09-01T12:03:49+00:00",
+      "run_id": 33505665679
+>>>>>>> Stashed changes
     },
     {
       "estado": "disparado",
@@ -99,6 +104,78 @@
       "selecao_modo": "procedimento",
       "drive_file_id": "1e9zlwb1WV7ISmHpEZd01Dr9f44kcqFTv",
       "nome": "Bambi eyes makeup tutorial"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1q6H5SBCw4c9M9aOTNFpPHgGmoiFPQKBe",
+      "nome": "Stop Wasting Time in the Gym - Glute Growth Explained"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1TxXHXdmMwQA5QJDxbGNWvI1FmFXlY-50",
+      "nome": "The TRUTH About Glute Growth, Training & Nutrition"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1-8ttMZI1QgrbhKEGH-TLCKr9ITJvzh5F",
+      "nome": "Glute Growth Tips That ACTUALLY Work"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1fSQJ6S4ec2jE9wzs5JTmkBDvimirRrg2",
+      "nome": "MY NEW GLUTE AND LEG FOCUSED PROGRAM"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1hd_xi7_fLZlk2BpgUETPqQ5AS9q37Pvf",
+      "nome": "BUILD YOUR LEGS - Full leg workout & tips"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1iI1GipB8RcofW1yiOzJwWb9EUMU03lex",
+      "nome": "GLUTES & AB WORKOUT - Spend the day with me"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1ZWQb7frKrb4pKsuMEESXWgyGHr-Urw09",
+      "nome": "MY PLAN TO DOUBLE MY GLUTES IN 2026"
+    },
+    {
+      "estado": "pendente",
+      "canal": "atefalhar",
+      "qtd": "3",
+      "amostra_voz": "bruna",
+      "selecao_modo": "",
+      "drive_file_id": "1Ett4Qzxyz82O6yQc3QdLnwsExUqujHjL",
+      "nome": "GET BACK ON TRACK WITH YOUR GYM ROUTINE - Glutes & hammies"
     }
   ]
 }

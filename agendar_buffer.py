@@ -276,6 +276,12 @@ def manifesto(token_gh: str, tag: str | None = None) -> dict:
     return tudo
 
 
+def _primeira_linha(texto) -> str:
+    """A primeira linha de uma legenda — que e' onde mora o titulo."""
+    return str(texto or "").strip().split("
+")[0]
+
+
 def _chave_texto(t: str) -> str:
     """Normaliza pra comparar legenda de clipe com texto de post do Buffer.
 
@@ -541,6 +547,21 @@ def main() -> None:
         # guarda nao opina e as de texto seguem valendo.
         sha = v.get("sha")
         if sha and registro_clipes.ja_postado(sha):
+            return False
+        # ⚠️ E TAMBEM PELO TITULO, contra o REGISTRO — nao contra o Buffer.
+        #
+        # Esta e' a guarda que faltava em 01/09/2026. Ao abrir a fila dos
+        # canais novos, o agendador enfileirou QUATRO videos que ja' estavam
+        # no ar: o Bryan os tinha postado na mao, e postagem manual nao passa
+        # pelo Buffer. A dedup de texto compara contra o que o Buffer conhece,
+        # entao nao tinha como ver.
+        #
+        # O registro sabe, porque guarda as tres origens: buffer, mao e print.
+        # Clipe antigo sem sha e' justamente o caso desses quatro — por isso a
+        # consulta por titulo, e nao so' por conteudo.
+        chave_reg = registro_clipes.sha_por_titulo(
+            str(v.get("titulo") or "") or _primeira_linha(v.get("legenda")))
+        if chave_reg and registro_clipes.ja_postado(chave_reg):
             return False
         k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
         # Comparacao por PREFIXO, nao por igualdade: 88 dos 101 posts reais

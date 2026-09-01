@@ -290,6 +290,10 @@ def main() -> None:
                         # medido: sem historico, ligar a troca de voz seria
                         # apostar. Vazio nos clipes anteriores a 31/08/2026.
                         "genero_falante": m.get("genero_falante", ""),
+                        # ⚠️ Viajam pro manifesto porque quem decide segurar e'
+                        # o AGENDADOR, e ele so' le' o manifesto.
+                        "depende_de_anterior": bool(m.get("depende_de_anterior")),
+                        "o_que_falta": m.get("o_que_falta", ""),
                         "publicado_em": f"{date.today():%Y-%m-%d}"}
         print(f"  nota {nota:.0f}  {nome[:60]}")
         print(f"     {url}")

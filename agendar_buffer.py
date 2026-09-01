@@ -276,10 +276,21 @@ def manifesto(token_gh: str, tag: str | None = None) -> dict:
     return tudo
 
 
+def _serie_liberada() -> bool:
+    """O Bryan ja' liberou clipe que depende de episodio anterior?
+
+    ⚠️ FALHA FECHADA de proposito, ao contrario de quase tudo aqui: sem a
+    variavel, o clipe dependente NAO vai ao ar. Publicar o "dia 3" sozinho e'
+    um erro visivel pro espectador, e nao ha' como desfazer depois de
+    postado — diferente de um clipe que ficou esperando, que so' custa tempo.
+    """
+    return (os.environ.get("SERIE_LIBERADA") or "").strip().lower() in (
+        "1", "true", "sim")
+
+
 def _primeira_linha(texto) -> str:
     """A primeira linha de uma legenda — que e' onde mora o titulo."""
-    return str(texto or "").strip().split("
-")[0]
+    return str(texto or "").strip().split(chr(10))[0]
 
 
 def _chave_texto(t: str) -> str:
@@ -545,6 +556,17 @@ def main() -> None:
         # O sha vem do manifesto (posto la' pelo publicar_release, onde o
         # arquivo esta' na mao). Clipe antigo nao tem sha: nesse caso esta
         # guarda nao opina e as de texto seguem valendo.
+        # ⚠️ CLIPE QUE DEPENDE DE OUTRO FICA SEGURO ate' o Bryan liberar.
+        #
+        # O caso que originou isto: um corte de treino comeca dizendo que e' o
+        # "dia 3", e o canal nunca teve o dia 1 nem o 2. Publicar entrega ao
+        # espectador uma conversa que ele nao acompanhou.
+        #
+        # ⚠️ NAO E' DESCARTE. O clipe continua no manifesto e volta a caber
+        # assim que `SERIE_LIBERADA` disser o contrario — jogar fora material
+        # bom por causa de ordem seria trocar um problema por outro.
+        if v.get("depende_de_anterior") and not _serie_liberada():
+            return False
         sha = v.get("sha")
         if sha and registro_clipes.ja_postado(sha):
             return False

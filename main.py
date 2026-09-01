@@ -365,6 +365,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",
+                 # ⚠️ Sem estes dois na lista, a deteccao de serie morre aqui
+                 # e o agendador nunca sabe que o clipe depende de outro.
+                 "depende_de_anterior", "o_que_falta",
                      "marcador_viral", "arquetipo", "forca_gancho",
                      "compartilhabilidade", "independencia",
                      "intensidade_emocional", "valor_social")}

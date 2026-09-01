@@ -1,3 +1,18 @@
+# ⚠️ SERIE: O CLIPE QUE PRESSUPOE O QUE NINGUEM VIU.
+#
+# Pedido do Bryan em 01/09/2026, depois de olhar um corte de "afundo e
+# agachamento perfeito": a apresentadora comeca dizendo que e' o DIA 3 — e o
+# canal nunca teve o dia 1 nem o 2. Publicar assim entrega ao espectador uma
+# conversa que ele nao acompanhou.
+#
+# ⚠️ QUEM PODE VER ISSO E' SO' A SELECAO. Ela recebe o video inteiro, com
+# imagem e audio; o resto do motor so' ve' o recorte ja' escolhido. Detectar
+# depois, no texto traduzido, seria tarde: o corte ja' foi pago.
+#
+# ⚠️ E NA DUVIDA E' `false`. Segurar clipe bom a toa custa publicacao — o
+# canal fica sem post. O erro barato aqui e' deixar passar um dependente
+# ocasional; o caro e' travar a fila inteira por excesso de zelo.
+
 """O cérebro: Gemini escolhe os momentos e já escreve os metadados do post.
 
 Aguenta 9,5h de áudio por prompt, então o vídeo inteiro vai de uma vez —
@@ -205,6 +220,14 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
   "nota": <0-100, potencial viral>,
   "gancho": "<a frase exata que prende, curta>",
   "porque": "<1 frase em pt-BR: por que viraliza>",
+  "depende_de_anterior": <true|false — o trecho pressupoe um episodio que
+     NAO esta' neste video? Diz "dia 3", "parte 2", "como falei no ultimo
+     video", "continuando de ontem"? Voce esta' VENDO e OUVINDO o video:
+     decida pela fala, nao pelo titulo. Se o trecho se explica sozinho,
+     false. Na duvida, false — segurar clipe bom a toa custa publicacao>,
+  "o_que_falta": "<so' quando depende_de_anterior for true: em pt-BR, o que
+     o espectador precisaria ter visto. Ex: 'e o dia 3 de uma serie de
+     treino; faltam os dias 1 e 2'. Vazio quando nao depende>",
   "genero_falante": "<masculino | feminino | varios | indefinido — de quem
      aparece falando NESTE trecho. Voce esta' vendo o video, entao decida pela
      IMAGEM e pela voz, nao pelo texto. Isso alimenta a narracao: em 25/08/2026

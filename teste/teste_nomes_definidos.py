@@ -33,10 +33,23 @@ if r.returncode not in (0, 1):
     print(f"  [!] pyflakes indisponivel ({r.stderr.strip()[:60]}) — pulando")
     sys.exit(0)
 
-# ⚠️ SO' "undefined name". pyflakes tambem reclama de import nao usado e
-# estrela de import; isso e' estilo, nao defeito, e travar a suite por estilo
-# faria alguem desligar o teste inteiro.
-graves = [l for l in (r.stdout or "").splitlines() if "undefined name" in l]
+# ⚠️ ERRO DE SINTAXE ENTRA AQUI, e essa lacuna JA' CUSTOU. Em 01/09/2026 o
+# `agendar_buffer.py` foi pro ar com uma string quebrada em duas linhas — um
+# escape de nova linha que virou quebra DE VERDADE num heredoc. O
+# pyflakes VIU e disse "unterminated string literal", mas este teste so'
+# procurava "undefined name", entao passou VERDE. O agendador ficou
+# quebrado em producao por cinco commits.
+#
+# ⚠️ Um teste que procura UMA frase so' encontra UMA classe de defeito. O que
+# importa nao e' a frase — e' se o arquivo carrega.
+GRAVES = ("undefined name", "syntax", "unterminated", "invalid syntax",
+          "unexpected indent", "expected an indented block", "EOF ")
+# ⚠️ OS DOIS FLUXOS. Erro de sintaxe o pyflakes manda pro STDERR; nome
+# indefinido, pro STDOUT. Ler so' um deles foi exatamente o que deixou o
+# agendador quebrado passar verde.
+saida = (r.stdout or "") + chr(10) + (r.stderr or "")
+graves = [l for l in saida.splitlines()
+          if any(g.lower() in l.lower() for g in GRAVES)]
 if graves:
     for l in graves:
         print("  [x]", l.replace(str(RAIZ), "."))

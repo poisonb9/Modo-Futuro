@@ -24,7 +24,7 @@ import shutil
 import time
 from pathlib import Path
 
-from . import midia
+from . import dinamica, midia
 
 IDIOMA_PADRAO = "pt"
 _MODELO = None
@@ -54,7 +54,29 @@ def _carregar_modelo():
     return _MODELO
 
 
-def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str) -> Path:
+def _enfase_aceita(modelo, enfase: float | None) -> dict:
+    """`{"exaggeration": x}` se o modelo aceitar esse parametro; senao `{}`.
+
+    ⚠️ DESCOBERTO EM EXECUCAO, NAO SUPOSTO. O Chatterbox nao roda na maquina
+    do Bryan (nem cabe: a GPU e a CPU dela ja' vivem no limite), entao eu nao
+    tinha como inspecionar a assinatura antes de escrever isto. Passar um
+    parametro que a versao instalada nao conhece derrubaria TODA sintese com
+    TypeError — e derrubaria depois de o run ja' ter pago corte e transcricao.
+    Perguntar ao proprio modelo custa uma linha e nao pode errar.
+    """
+    if enfase is None:
+        return {}
+    try:
+        import inspect
+        if "exaggeration" in inspect.signature(modelo.generate).parameters:
+            return {"exaggeration": float(enfase)}
+    except Exception:
+        pass
+    return {}
+
+
+def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,
+           enfase: float | None = None) -> Path:
     import torchaudio as ta
     from . import numeros
     modelo = _carregar_modelo()
@@ -69,8 +91,9 @@ def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str) -> Path:
     # separar, o log so' diria "parou em algum lugar de _falar".
     t0 = time.monotonic()
     print(f"        [tts] gerando ({len(falado)} chars)...", flush=True)
+    extra = _enfase_aceita(modelo, enfase)
     wav = modelo.generate(falado, audio_prompt_path=str(amostra_voz),
-                          language_id=idioma)
+                          language_id=idioma, **extra)
     t1 = time.monotonic()
     print(f"        [tts] gerado em {t1 - t0:.1f}s, gravando wav...",
           flush=True)
@@ -123,6 +146,66 @@ _ABREVIACOES = {
 }
 
 
+# Limites da pausa copiada do original, em segundos.
+#
+# ⚠️ SEM TETO A DINAMICA VIRA BURACO. Podcast tem silencio de varios segundos;
+# copiar isso pro corte de 90s destroi a retencao — e retencao e' o gargalo
+# MEDIDO do @modofuturo (a audiencia sai em 0:02). O piso preserva a
+# respiracao entre frases que ja' existia antes desta mudanca.
+_PAUSA_MIN_S = 0.12
+_PAUSA_MAX_S = 0.60
+
+
+def _aplicar_ganho(caminho: Path, ganho: float) -> Path:
+    """Reescreve o wav com o volume multiplicado por `ganho`.
+
+    E' o item 2 do pedido: o envelope do original aplicado na dublagem — os
+    picos e as quedas, nao o volume medio.
+
+    ⚠️ FALHA ABERTA: se o ffmpeg reclamar, devolve o arquivo ORIGINAL e a
+    frase entra sem envelope. Perder a dinamica de uma frase e' pequeno;
+    perder a frase e' grande.
+    """
+    saida = caminho.with_name(caminho.stem + "_g.wav")
+    try:
+        midia.roda(["ffmpeg", "-y", "-v", "error", "-i", str(caminho),
+                    "-af", f"volume={ganho:.4f}", str(saida)])
+    except Exception as e:
+        print(f"        [!] ganho nao aplicado ({str(e)[:50]})", flush=True)
+        return caminho
+    return saida if saida.exists() else caminho
+
+
+def _janelas_das_frases(segmentos: list[dict],
+                        frases: list[str]) -> list[tuple[float, float]]:
+    """Onde cada frase sintetizada cai no VIDEO ORIGINAL.
+
+    ⚠️ E' APROXIMACAO, e precisa ser dita como tal. As frases da dublagem nao
+    correspondem uma a uma aos segmentos da transcricao — o texto e' traduzido
+    e reescrito, entao a contagem muda. Aqui o intervalo falado do original e'
+    dividido proporcionalmente ao TAMANHO de cada frase, que e' a melhor
+    correspondencia disponivel sem alinhamento forcado.
+
+    Consequencia honesta: a dinamica segue o CONTORNO do original (onde ele
+    sobe e onde cai), nao o instante exato de cada palavra.
+    """
+    validos = [s for s in segmentos
+               if s.get("inicio") is not None and s.get("fim") is not None]
+    if not validos or not frases:
+        return []
+    ini = float(min(s["inicio"] for s in validos))
+    fim = float(max(s["fim"] for s in validos))
+    if fim <= ini:
+        return []
+    total = sum(max(1, len(f)) for f in frases)
+    janelas, cursor = [], ini
+    for f in frases:
+        largura = (fim - ini) * (max(1, len(f)) / total)
+        janelas.append((cursor, min(fim, cursor + largura)))
+        cursor += largura
+    return janelas
+
+
 def _dividir_frases(texto: str) -> list[str]:
     """Divide pela pontuação de fim de frase (. ! ?), não por janela de
     tempo arbitrária — cada pedaço vira uma chamada de TTS curta, que é o
@@ -145,7 +228,8 @@ def _dividir_frases(texto: str) -> list[str]:
 
 
 def _concatenar_com_pausas(caminhos: list[Path], destino: Path,
-                            pausa_s: float = _PAUSA_ENTRE_FRASES_S) -> Path:
+                            pausa_s: float = _PAUSA_ENTRE_FRASES_S,
+                            pausas: list[float] | None = None) -> Path:
     """Junta os áudios de cada frase em sequência, com uma pausa curta e
     fixa entre elas (o silêncio natural de troca de frase de um narrador,
     não o silêncio de início/fim que o TTS já bota em cada pedaço isolado)."""
@@ -161,7 +245,17 @@ def _concatenar_com_pausas(caminhos: list[Path], destino: Path,
     filtros, rotulos = [], []
     for i in range(n):
         if i < n - 1:
-            filtros.append(f"[{i}:a]apad=pad_dur={pausa_s}[a{i}]")
+            # ⚠️ A PAUSA DO ORIGINAL, quando ha' medida. `pausas[i+1]` e' o
+            # silencio que existia ANTES da proxima fala — e' o que quebra o
+            # ritmo constante de emendar frase atras de frase.
+            #
+            # ⚠️ COM TETO. Uma pausa de 4s no meio do clipe mata a retencao,
+            # e o TikTok nao perdoa buraco. O piso mantem a respiracao minima
+            # que ja' existia; sem medida, cai no valor fixo de antes.
+            p_i = pausa_s
+            if pausas and i + 1 < len(pausas):
+                p_i = min(_PAUSA_MAX_S, max(_PAUSA_MIN_S, pausas[i + 1]))
+            filtros.append(f"[{i}:a]apad=pad_dur={p_i:.3f}[a{i}]")
             rotulos.append(f"[a{i}]")
         else:
             rotulos.append(f"[{i}:a]")
@@ -234,7 +328,8 @@ def _blocos_por_falante(segmentos: list[dict], falantes: list[dict] | None
 
 def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
                   amostra_voz: Path, idioma: str = IDIOMA_PADRAO,
-                  falantes: list[dict] | None = None
+                  falantes: list[dict] | None = None,
+                  fonte: Path | None = None
                   ) -> tuple[Path | None, list[dict]]:
     """Mesma interface de dublagem.gerar_trilha, mas com a voz clonada.
 
@@ -277,6 +372,36 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
               f"{len({str(a) for _, a in pares})} voz(es) diferentes",
               flush=True)
 
+    # ---- DINAMICA DO ORIGINAL (pedido do Bryan em 01/09/2026) ----------
+    #
+    # Tres aproximacoes, aplicadas em TODO video daqui pra frente: enfase por
+    # frase, envelope de volume e as pausas do original. Ver engine/dinamica.py
+    # — ⚠️ nao e' transferencia de entonacao, e o modulo explica por que nao da'.
+    #
+    # ⚠️ FALHA ABERTA. Sem a fonte, ou se a medicao nao der certo, tudo fica
+    # como era: enfase None (padrao do modelo), ganho 1.0, pausa fixa. Uma
+    # dublagem sem dinamica e' pior; uma dublagem que NAO SAI por causa de uma
+    # medicao e' muito pior.
+    enfases: list[float | None] = [None] * len(frases)
+    ganhos: list[float] = [1.0] * len(frases)
+    pausas: list[float] = []
+    if fonte is not None and Path(fonte).exists():
+        try:
+            janelas = _janelas_das_frases(segmentos, frases)
+            medidas = dinamica.medir_blocos(Path(fonte), janelas)
+            enfases = dinamica.enfase_por_bloco(medidas)
+            ganhos = dinamica.ganho_por_bloco(medidas)
+            pausas = dinamica.pausas_originais(janelas)
+            print(f"      [voz] dinamica do original: enfase "
+                  f"{min(enfases):.2f}-{max(enfases):.2f}, ganho "
+                  f"{min(ganhos):.2f}-{max(ganhos):.2f}x", flush=True)
+        except Exception as e:
+            print(f"      [!] dinamica indisponivel ({str(e)[:60]}) — "
+                  "sintetizando sem ela", flush=True)
+            enfases = [None] * len(frases)
+            ganhos = [1.0] * len(frases)
+            pausas = []
+
     trabalho.mkdir(parents=True, exist_ok=True)
     partes, duracoes = [], []
     # ⚠️ BATIMENTO POR FRASE — nao e' log decorativo, e' o instrumento.
@@ -293,7 +418,10 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
         agora = datetime.datetime.now().strftime("%H:%M:%S")
         print(f"      [voz] frase {i + 1}/{len(frases)} as {agora} "
               f"(acumulado {time.monotonic() - t_lote:.0f}s)", flush=True)
-        _falar(frase, p, pares[i][1], idioma)
+        _falar(frase, p, pares[i][1], idioma,
+               enfase=enfases[i] if i < len(enfases) else None)
+        if i < len(ganhos) and abs(ganhos[i] - 1.0) > 0.01:
+            p = _aplicar_ganho(p, ganhos[i])
         partes.append(p)
         # ⚠️ Isto e' um ffprobe. Se o travamento for aqui, o TIMEOUT_SONDA do
         # midia.py (120s) derruba com erro em 2 min em vez de 6h em silencio.
@@ -303,7 +431,7 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
           f"{time.monotonic() - t_lote:.0f}s", flush=True)
 
     concatenado = trabalho / "voz_concatenada.wav"
-    _concatenar_com_pausas(partes, concatenado)
+    _concatenar_com_pausas(partes, concatenado, pausas=pausas)
     dur_concatenada = midia.duracao(concatenado)
 
     destino = trabalho / "trilha_dublada_clonada.wav"

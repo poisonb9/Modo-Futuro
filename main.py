@@ -277,7 +277,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     audio_dublado, timing_dub = voz_clonada.gerar_trilha(
                         segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
                         amostra_voz=config.VOZ_CLONADA_AMOSTRA,
-                        falantes=c.get("falantes"))
+                        falantes=c.get("falantes"),
+                        # ⚠️ A FONTE ORIGINAL vai junto pra medir a dinamica
+                        # (enfase, envelope e pausas). Sem ela a sintese sai
+                        # como antes — falha ABERTA, ver engine/dinamica.py.
+                        fonte=fonte)
                     # a legenda tem que seguir o timing REAL do áudio
                     # dublado (pausas entre frases + atempo final mudam o
                     # ritmo em relação ao vídeo fonte), não o timing de

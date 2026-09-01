@@ -174,6 +174,12 @@
           "quando": "2026-08-31T22:37:00.000Z",
           "canal": "semanestesia.pod",
           "detalhe": "Sem Disciplina Você Será Escravo | Jocko Willink"
+        },
+        {
+          "origem": "print",
+          "quando": "2026-09-01T11:26:02+00:00",
+          "canal": "semanestesia.pod",
+          "detalhe": "print do perfil, 01/09"
         }
       ]
     },
@@ -661,7 +667,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota90_A_Ordem_Certa_Para_Montar_Seu_Treino_de_Gluteos_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "print",
+          "quando": "2026-09-01T11:26:03+00:00",
+          "canal": "atefalhar",
+          "detalhe": "print do perfil, 01/09"
+        }
+      ]
     },
     "sem-hash:2026083101nota90ochecklistperfeitoparaescolherexerciciosdegluteo": {
       "arquivo": "2026-08-31_01_nota90_O_CHECKLIST_PERFEITO_PARA_ESCOLHER_EXERCICIOS_DE_GLUTEO_short_9x16.mp4",
@@ -670,7 +683,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_01_nota90_O_CHECKLIST_PERFEITO_PARA_ESCOLHER_EXERCICIOS_DE_GLUTEO_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "print",
+          "quando": "2026-09-01T11:26:02+00:00",
+          "canal": "atefalhar",
+          "detalhe": "print do perfil, 01/09"
+        }
+      ]
     },
     "sem-hash:2026083101nota92comofazerbaseecontornoemcremeperfeitosemmarcarape": {
       "arquivo": "2026-08-31_01_nota92_Como_fazer_base_e_contorno_em_creme_perfeito_sem_marcar_a_pe_short_9x16.mp4",
@@ -715,7 +735,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_02_nota88_Truque_de_contorno_em_po_para_esculpir_o_rosto_e_o_nariz_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "print",
+          "quando": "2026-09-01T11:26:02+00:00",
+          "canal": "truque.importado",
+          "detalhe": "print do perfil, 01/09"
+        }
+      ]
     },
     "sem-hash:2026083103nota85comofazercontornoderostoenarizcombastao": {
       "arquivo": "2026-08-31_03_nota85_COMO_FAZER_CONTORNO_DE_ROSTO_E_NARIZ_COM_BASTAO_short_9x16.mp4",
@@ -806,6 +833,38 @@
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
       "postagens": []
+    },
+    "sem-hash:averdadedoidasobreomotivodoseufracasso": {
+      "arquivo": "",
+      "titulo": "A verdade doida sobre o motivo do seu fracasso",
+      "canal": "semanestesia.pod",
+      "url": "",
+      "criado_em": "2026-09-01T11:26:02+00:00",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "print",
+          "quando": "2026-09-01T11:26:02+00:00",
+          "canal": "semanestesia.pod",
+          "detalhe": "print do perfil, 01/09"
+        }
+      ]
+    },
+    "sem-hash:comofazerbaseecontornoemcremeperfeitosemmarcarapele": {
+      "arquivo": "",
+      "titulo": "Como fazer base e contorno em creme perfeito sem marcar a pele",
+      "canal": "truque.importado",
+      "url": "",
+      "criado_em": "2026-09-01T11:26:02+00:00",
+      "sem_hash": true,
+      "postagens": [
+        {
+          "origem": "print",
+          "quando": "2026-09-01T11:26:02+00:00",
+          "canal": "truque.importado",
+          "detalhe": "print do perfil, 01/09"
+        }
+      ]
     }
   }
 }

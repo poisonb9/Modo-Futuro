@@ -209,6 +209,63 @@ def _log_do_run(run_id: int) -> str | None:
         return None
 
 
+def horizonte_dos_canais() -> dict:
+    """Horas de fila que cada canal ainda tem no Buffer.
+
+    ⚠️ E' ISTO QUE DECIDE A ORDEM DOS CORTES, e antes nada decidia: a fila era
+    consumida na ordem em que eu escrevi os itens. Em 01/09/2026 isso deixou o
+    @truque.importado — com 42 HORAS de folga — ocupando vaga na frente do
+    @semanestesia.pod e do @atefalhar, que tinham DUAS.
+
+    Cortar pra quem ja' tem fila enquanto outro canal fica vazio e' gastar
+    runner no lugar errado. O Bryan: "temos que focar em cozinha, sem
+    anestesia e ate' falhar, estao com muito poucos cortes".
+
+    ⚠️ Canal sem leitura fica com horizonte DESCONHECIDO e vai pro fim, nao
+    pro comeco. Um token que falhou nao pode virar prioridade maxima por
+    acidente — seria o alarme falso decidindo o gasto.
+    """
+    horizonte = {}
+    agora = datetime.now(timezone.utc)
+    for canal, (org, ch, env) in CANAIS_BUFFER.items():
+        token = (os.environ.get(env) or "").strip()
+        if not token:
+            continue
+        try:
+            req = urllib.request.Request(
+                "https://api.buffer.com/",
+                data=json.dumps({"query": Q_FILA, "variables": {"i": {
+                    "organizationId": org,
+                    "filter": {"status": ["scheduled"],
+                               "channelIds": [ch]}}}}).encode(),
+                headers={"Authorization": f"Bearer {token}",
+                         "Content-Type": "application/json"})
+            d = json.load(urllib.request.urlopen(req, timeout=40))
+            ds = sorted(e["node"]["dueAt"]
+                        for e in d["data"]["posts"]["edges"])
+        except Exception:
+            continue
+        if not ds:
+            horizonte[canal] = 0.0
+            continue
+        fim = datetime.fromisoformat(ds[-1].replace("Z", "+00:00"))
+        horizonte[canal] = max(0.0, (fim - agora).total_seconds() / 3600)
+    return horizonte
+
+
+CANAIS_BUFFER = {
+    "modofuturo": ("6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631",
+                   "BUFFER_TOKEN"),
+    "semanestesia.pod": ("6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6",
+                         "BUFFER_TOKEN_SEMANESTESIA"),
+    "atefalhar": ("6a94a9f9ca5d8883aa924198", "6a94aaf5065799be46581e1d",
+                  "BUFFER_TOKEN_ATEFALHAR"),
+    "truque.importado": ("6a94c752e0b1602e8c5cf1ae", "6a94c8f3065799be465981f6",
+                         "BUFFER_TOKEN_TRUQUEIMPORTADO"),
+}
+Q_FILA = "query($i: PostsInput!){ posts(input:$i){ edges{ node{ dueAt } } } }"
+
+
 def falhou_por_cota(run_id: int) -> bool | None:
     """O run morreu por cota do Gemini? None quando nao deu pra saber.
 
@@ -404,6 +461,14 @@ def main() -> None:
         return
 
     linhas = []
+    # ⚠️ ORDENA POR NECESSIDADE, nao pela ordem em que os itens foram
+    # escritos. Canal sem leitura vai pro FIM (999), nunca pro comeco.
+    h = horizonte_dos_canais()
+    if h:
+        pendentes.sort(key=lambda i: h.get(i["canal"], 999.0))
+        print("  ordem por folga: " + ", ".join(
+            f"{c}={h[c]:.0f}h" for c in sorted(h, key=h.get)))
+
     for item in pendentes[:vagas]:
         entradas = {
             "drive_file_id": item["drive_file_id"],

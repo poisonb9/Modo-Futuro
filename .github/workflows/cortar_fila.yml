@@ -81,6 +81,15 @@ jobs:
           # A sonda enxergava 2 chaves de 20 e decidia o teto de corte
           # com essa amostra. O mapa abaixo e' copiado do workflow de
           # corte, que ja' estava certo — nao reescrito de memoria.
+          # ⚠️ Os tokens do Buffer entram aqui porque a ORDEM dos cortes
+          # depende de quanta fila cada canal ainda tem. Sem eles o script
+          # corta na ordem em que os itens foram escritos — foi assim que o
+          # @truque.importado, com 42h de folga, passou na frente de canais
+          # com 2h.
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}

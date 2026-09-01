@@ -84,7 +84,7 @@
       "run_id": 33552508552
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -92,7 +92,7 @@
       "drive_file_id": "1IV7OQ8AdKXWW5_8s0N01XzsZEuM35CRc",
       "nome": "MY GO TO GLUTE WORKOUT (ja rendeu 1 clipe no #202)",
       "quando": "2026-09-01T19:57:43+00:00",
-      "run_id": 33552515494
+      "tentativas": 1
     },
     {
       "estado": "pendente",

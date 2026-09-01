@@ -171,6 +171,44 @@ def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
     return 1, f"cota no fim ({ok}/{total}) — um de cada vez"
 
 
+def fonte_sumiu(run_id: int) -> bool:
+    """O run morreu porque o BRUTO nao existe mais no Drive?
+
+    ⚠️ ISTO NAO SE RESOLVE TENTANDO DE NOVO. O pipeline apaga o bruto depois
+    de um corte bem-sucedido, pra nao estourar a cota do Drive. Se o item da
+    fila ainda aponta pra esse id, toda tentativa vai dar 404 — e cada uma
+    custa um runner inteiro sendo provisionado.
+
+    MEDIDO em 01/09/2026: o run #235 morreu com
+    `HttpError 404 ... /files/1IV7OQ8AdKXWW5_8s0N01XzsZEuM35CRc` — o bruto do
+    "MY GO TO GLUTE WORKOUT", apagado depois que o #202 cortou com sucesso. O
+    Bryan chegou a subir o mesmo video de novo, mas com id NOVO; o item velho
+    ficou na fila apontando pro tumulo.
+    """
+    t = _log_do_run(run_id)
+    if t is None:
+        return False
+    return "HttpError 404" in t and "drive/v3/files" in t
+
+
+def _log_do_run(run_id: int) -> str | None:
+    """Texto do log, ou None quando nao da' pra ler."""
+    try:
+        import io as _io
+        import zipfile
+        req = urllib.request.Request(
+            f"https://api.github.com/repos/{REPO}/actions/runs/{run_id}/logs",
+            headers={"Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+                     "Accept": "application/vnd.github+json"})
+        with urllib.request.urlopen(req, timeout=90) as r:
+            z = zipfile.ZipFile(_io.BytesIO(r.read()))
+        return "".join(z.read(n).decode("utf-8", "replace")
+                       for n in z.namelist() if n.endswith(".txt"))
+    except Exception as e:
+        print(f"    [!] nao li o log do run {run_id} ({str(e)[:50]})")
+        return None
+
+
 def falhou_por_cota(run_id: int) -> bool | None:
     """O run morreu por cota do Gemini? None quando nao deu pra saber.
 
@@ -199,7 +237,20 @@ def falhou_por_cota(run_id: int) -> bool | None:
     except Exception as e:
         print(f"    [!] nao li o log do run {run_id} ({str(e)[:50]})")
         return None
-    return "SEM COTA" in texto or "chaves do Gemini" in texto
+    # ⚠️ A COTA ESTOURA EM DOIS PASSOS, COM MENSAGENS DIFERENTES, e a
+    # primeira versao so' conhecia uma delas:
+    #
+    #   traducao:  "as N chaves do Gemini estao SEM COTA"
+    #   selecao:   "Gemini falhou em escolha de clipes: todas as chaves
+    #               esgotadas em ['gemini-3.6-flash']"
+    #
+    # Resultado MEDIDO em 01/09/2026: o "Stop Being F cking Weak" falhou tres
+    # vezes por cota NA SELECAO, nenhuma foi reconhecida, e o cron DESISTIU de
+    # uma fonte perfeita. E' o mesmo defeito que ja' tinha me pegado hoje —
+    # detector que casa com UMA frase enxerga UMA classe.
+    MARCAS = ("SEM COTA", "chaves do Gemini", "todas as chaves esgotadas",
+              "sem quota")
+    return any(m in texto for m in MARCAS)
 
 
 def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
@@ -263,6 +314,14 @@ def devolver_os_que_falharam(d: dict) -> list[str]:
         # ⚠️ COTA NAO CONTA COMO TENTATIVA. Ver `falhou_por_cota`: o teto
         # existe pra fonte quebrada, nao pra espera de ambiente. Contar as
         # duas coisas junto ja' fez o cron desistir de uma fonte boa.
+        # ⚠️ FONTE APAGADA E' TERMINAL. Devolver pra fila faria o item bater
+        # em 404 pra sempre, dois runs a cada rodada, sem nunca cortar nada.
+        if fonte_sumiu(item["run_id"]):
+            item["estado"] = "sem_fonte"
+            item.pop("run_id", None)
+            voltaram.append(f"  SEM FONTE no Drive: {item['nome'][:40]} "
+                            f"(bruto apagado apos corte anterior)")
+            continue
         cota = falhou_por_cota(item["run_id"])
         item["estado"] = "pendente"
         item.pop("run_id", None)

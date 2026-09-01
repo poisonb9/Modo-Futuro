@@ -152,11 +152,20 @@ GANCHO_MIN = 6.0
 # arquivo. Editar a constante ligaria voice-over pros tres.
 VOICE_OVER = os.environ.get("VOICE_OVER", "").strip().lower() in ("1", "true", "sim")
 
-# Volume do audio ORIGINAL sob a narracao. 0.18 e' ~-15 dB: audivel o
-# suficiente pra reconhecer a voz e a emocao, baixo o suficiente pra nao
-# disputar com a dublagem. Abaixo de 0.10 o original vira ruido e o efeito de
-# autoridade se perde — que e' o unico motivo do modo existir.
-VOICE_OVER_VOL_ORIGINAL = 0.18
+# Volume do audio ORIGINAL sob a narracao.
+#
+# 0.12 e' ~-18,4 dB. Era 0.18 (~-15 dB) ate' 01/09/2026, quando o Bryan ouviu
+# o corte do "Master Discipline" e disse que a voz original ficou "um pouco
+# alta no volume". Sao ~3,4 dB a menos — mudanca audivel, longe do piso.
+#
+# ⚠️ NAO DESCA DE 0.10. Abaixo disso o original vira ruido e o efeito de
+# autoridade se perde, que e' o unico motivo do voice over existir. Se ainda
+# estiver alto, o proximo passo NAO e' baixar mais: e' `ducking` — abaixar o
+# original SO' enquanto a dublagem fala, e devolver o volume nas pausas.
+#
+# Da' pra ajustar por disparo com a variavel de ambiente, sem commit.
+VOICE_OVER_VOL_ORIGINAL = float(
+    os.environ.get("VOICE_OVER_VOL_ORIGINAL") or 0.12)
 
 # ---------------------------------------------------------------- descoberta (YouTube Data API v3)
 # Objetivo: achar vídeos com potencial de hype/monetização, sem nicho fixo.

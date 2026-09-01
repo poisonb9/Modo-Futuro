@@ -3,7 +3,7 @@
   "teto_em_voo": 2,
   "itens": [
     {
-      "estado": "desistido",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -11,8 +11,7 @@
       "drive_file_id": "1W6ByYx69ICMTHx5hdCnMNGTvy-FVK1Qw",
       "nome": "The Only 13 Minutes You Need To Master Discipline",
       "quando": "2026-08-31T23:54:04+00:00",
-      "tentativas": 3,
-      "run_id": 33452593847
+      "tentativas": 0
     },
     {
       "estado": "pronto",

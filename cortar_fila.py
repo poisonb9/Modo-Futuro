@@ -97,6 +97,37 @@ def tem_cota() -> tuple[bool, str]:
     return False, f"nenhuma das {len(chaves)} chaves respondeu 200 ({resumo})"
 
 
+def falhou_por_cota(run_id: int) -> bool | None:
+    """O run morreu por cota do Gemini? None quando nao deu pra saber.
+
+    ⚠️ ESTA FUNCAO EXISTE PORQUE O CONTADOR PUNIA A FONTE PELO AMBIENTE.
+    Em 01/09/2026 o cron DESISTIU de "The Only 13 Minutes You Need To Master
+    Discipline" depois de 3 tentativas — e as tres foram cota do Gemini, nao
+    defeito nenhum do video. A fonte estava perfeita e saiu da fila.
+
+    Teto de tentativas existe pra fonte quebrada (bruto corrompido, id que
+    sumiu do Drive). Cota e' espera, nao defeito: contar as duas coisas no
+    mesmo contador joga fora material bom.
+    """
+    try:
+        import io as _io
+        import zipfile
+        req = urllib.request.Request(
+            f"https://api.github.com/repos/{REPO}/actions/runs/{run_id}/logs",
+            headers={"Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+                     "Accept": "application/vnd.github+json"})
+        with urllib.request.urlopen(req, timeout=90) as r:
+            bruto = r.read()
+        z = zipfile.ZipFile(_io.BytesIO(bruto))
+        texto = "".join(
+            z.read(n).decode("utf-8", "replace")
+            for n in z.namelist() if n.endswith(".txt"))
+    except Exception as e:
+        print(f"    [!] nao li o log do run {run_id} ({str(e)[:50]})")
+        return None
+    return "SEM COTA" in texto or "chaves do Gemini" in texto
+
+
 def devolver_os_que_falharam(d: dict) -> list[str]:
     """Item cujo run falhou volta pra `pendente`. Sem isto a fila DRENA.
 
@@ -122,13 +153,25 @@ def devolver_os_que_falharam(d: dict) -> list[str]:
         if r.get("conclusion") == "success":
             item["estado"] = "pronto"
             continue
+        # ⚠️ COTA NAO CONTA COMO TENTATIVA. Ver `falhou_por_cota`: o teto
+        # existe pra fonte quebrada, nao pra espera de ambiente. Contar as
+        # duas coisas junto ja' fez o cron desistir de uma fonte boa.
+        cota = falhou_por_cota(item["run_id"])
+        item["estado"] = "pendente"
+        item.pop("run_id", None)
+        if cota:
+            voltaram.append(f"  volta pra fila: {item['nome'][:40]}"
+                            f" (COTA — nao conta como tentativa)")
+            continue
+        # ⚠️ `None` (nao deu pra ler o log) CONTA. Preferir nao contar deixaria
+        # uma fonte de fato quebrada girando pra sempre, dois runs a cada meia
+        # hora, e a fila nunca andaria.
         item["tentativas"] = int(item.get("tentativas") or 0) + 1
         if item["tentativas"] >= 3:
             item["estado"] = "desistido"
-            voltaram.append(f"  DESISTI de {item['nome'][:40]} (3 tentativas)")
+            voltaram.append(f"  DESISTI de {item['nome'][:40]} (3 tentativas"
+                            f" que NAO foram cota)")
         else:
-            item["estado"] = "pendente"
-            item.pop("run_id", None)
             voltaram.append(f"  volta pra fila: {item['nome'][:40]}"
                             f" (tentativa {item['tentativas']})")
     return voltaram

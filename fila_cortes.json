@@ -3,15 +3,16 @@
   "teto_em_voo": 2,
   "itens": [
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1W6ByYx69ICMTHx5hdCnMNGTvy-FVK1Qw",
       "nome": "The Only 13 Minutes You Need To Master Discipline",
-      "quando": "2026-08-31T23:54:04+00:00",
-      "tentativas": 0
+      "quando": "2026-09-01T05:51:43+00:00",
+      "tentativas": 0,
+      "run_id": 33475229874
     },
     {
       "estado": "pronto",
@@ -26,15 +27,16 @@
       "run_id": 33446820783
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1ODRqg83TSycFt-dijwLi67YqowL3i3eH",
       "nome": "Chic Soft Glam Everyday Makeup",
-      "quando": "2026-08-31T23:54:09+00:00",
-      "tentativas": 1
+      "quando": "2026-09-01T05:51:47+00:00",
+      "tentativas": 1,
+      "run_id": 33475234390
     },
     {
       "estado": "pendente",

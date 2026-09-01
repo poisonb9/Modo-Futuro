@@ -46,7 +46,7 @@ import requests
 
 from engine import registro_clipes
 
-from engine import buffer_cota as cota, dedup
+from engine import buffer_cota as cota, dedup, estreia
 from engine import adiados, rejeitados
 
 API_BUFFER = "https://api.buffer.com/"

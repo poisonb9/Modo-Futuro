@@ -53,6 +53,30 @@ def baixar(file_id: str, destino: str, conta: str = "principal"):
     from googleapiclient.http import MediaIoBaseDownload
 
     servico = _servico(conta)
+
+    # NOME ORIGINAL DO ARQUIVO NO DRIVE, guardado ao lado do video.
+    #
+    # O destino aqui e' sempre `fonte.mp4` — o nome que o Bryan deu ao subir
+    # se perde no download, e com ele a unica pista de QUAL video do YouTube
+    # isto e'. O `yt-dlp` batiza o arquivo com o titulo do video, entao o nome
+    # E' o titulo.
+    #
+    # Em 01/09/2026 o Bryan pediu os episodios anteriores de um corte que
+    # comecava no "dia 3". O clipe existia, o canal existia, e nao havia como
+    # saber que video era: cheguei nele por horario de run e nome de arquivo,
+    # o que e' inferencia minha, nao dado do sistema.
+    #
+    # Falha ABERTA: se a consulta do nome nao vier, o download segue. Perder a
+    # origem incomoda; perder o corte, nao.
+    try:
+        meta = servico.files().get(fileId=file_id, fields="name").execute()
+        from pathlib import Path as _P
+        _P(destino).with_suffix(".origem.txt").write_text(
+            meta.get("name", ""), encoding="utf-8")
+        print(f"  nome no Drive: {meta.get('name','')[:70]}")
+    except Exception as e:
+        print(f"  [aviso] nome do arquivo indisponivel ({str(e)[:50]})")
+
     req = servico.files().get_media(fileId=file_id)
     with open(destino, "wb") as f:
         downloader = MediaIoBaseDownload(f, req)

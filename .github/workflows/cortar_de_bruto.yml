@@ -199,6 +199,8 @@ jobs:
           GEMINI_API_KEY_18: ${{ secrets.GEMINI18 }}
           GEMINI_API_KEY_19: ${{ secrets.GEMINI19 }}
           GEMINI_API_KEY_20: ${{ secrets.GEMINI_API_KEY_20 }}
+          # chave 21, adicionada em 01/09/2026 (conta contato.arcadacad)
+          GEMINI_API_KEY_21: ${{ secrets.GEMINI21 }}
           GROQ_API_KEY: ${{ secrets.GROQ1 }}
           GROQ_API_KEY_2: ${{ secrets.GROQ2 }}
           GROQ_API_KEY_3: ${{ secrets.GROQ3 }}

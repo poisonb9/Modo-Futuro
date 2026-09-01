@@ -161,6 +161,32 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     destino = config.SAIDA / datetime.now().strftime("%Y-%m-%d_%H%M") / _limpar(fonte.stem)
     destino.mkdir(parents=True, exist_ok=True)
 
+    # ORIGEM DO BRUTO, quando ele nao veio de um download nosso.
+    #
+    # ⚠️ Sem isto o manifesto sai com `url_origem: ""` e ninguem consegue
+    # achar os episodios anteriores de uma serie — foi exatamente o que
+    # bloqueou o pedido do Bryan em 01/09/2026. O nome original do arquivo no
+    # Drive fica em `fonte.origem.txt`, escrito pelo baixar_bruto_drive.
+    #
+    # ⚠️ E' PALPITE, e vai marcado como tal: `url_origem_confianca`. Guardar
+    # um link com cara de certeza seria pior que nao guardar, porque ninguem
+    # confere origem depois.
+    origem_achada = {}
+    if not url_origem:
+        marca = fonte.with_suffix(".origem.txt")
+        if marca.exists():
+            try:
+                from engine import origem as _origem
+                origem_achada = _origem.descobrir(
+                    marca.read_text(encoding="utf-8").strip())
+                if origem_achada:
+                    url_origem = origem_achada["url"]
+                    print(f"   origem provavel ({origem_achada['confianca']}, "
+                          f"{origem_achada['semelhanca']}): "
+                          f"{origem_achada['canal']} — {origem_achada['url']}")
+            except Exception as e:
+                print(f"   [aviso] origem nao descoberta ({str(e)[:60]})")
+
     resumo = []
     # ⚠️ CADA CLIPE E' ISOLADO. Sem isto, uma falha no clipe 2 leva junto
     # o clipe 1 INTEIRO, ja' cortado, dublado e renderizado.
@@ -383,6 +409,10 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # do Geoffrey Hinton, 26/07/2026) porque _origem.json não é sempre
             # escrito. Redundância aqui evita repetir.
             meta["url_origem"] = url_origem or ""
+            # ⚠️ "descoberta" quer dizer PALPITE por nome de arquivo; sem esta
+            # marca, um link inferido se passaria por link registrado.
+            meta["url_origem_confianca"] = (
+                origem_achada.get("confianca", "") if origem_achada else "registrada")
             (pasta / "post.json").write_text(
                 json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
             (pasta / "post.txt").write_text(_legenda(c), encoding="utf-8")

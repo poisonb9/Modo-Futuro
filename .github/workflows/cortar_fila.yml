@@ -88,6 +88,8 @@ jobs:
           GEMINI_API_KEY_18: ${{ secrets.GEMINI18 }}
           GEMINI_API_KEY_19: ${{ secrets.GEMINI19 }}
           GEMINI_API_KEY_20: ${{ secrets.GEMINI_API_KEY_20 }}
+          # chave 21, adicionada em 01/09/2026 (conta contato.arcadacad)
+          GEMINI_API_KEY_21: ${{ secrets.GEMINI21 }}
         run: python -X utf8 cortar_fila.py
 
       - name: Guardar o estado da fila

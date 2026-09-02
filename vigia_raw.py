@@ -222,8 +222,45 @@ def _a_postar(conta: str) -> str:
         return PASTA_DRIVE
 
 
+# Pasta do RAW -> canal. A chave e' comparada em minusculas, sem acento.
+#
+# ⚠️ EXISTE PORQUE O VIGIA NAO MANDAVA CANAL NENHUM, medido em 02/09/2026.
+# O `disparar()` omitia o input, o workflow caia no default `modofuturo`, e
+# TUDO que vinha do RAW saia rotulado como conteudo de tecnologia. No
+# manifesto de agosto, 70 de 77 clipes ficaram sem canal — e o agendador le'
+# ausencia como modofuturo (`v.get("canal") or "modofuturo"`), entao havia
+# tutorial de maquiagem elegivel pra postar no canal de chips.
+MAPA_PASTA_CANAL = {
+    "sem anestesia": "semanestesia.pod",
+    "modo futuro": "modofuturo",
+    "truque importado": "truque.importado",
+    "ate falhar": "atefalhar",
+    "doces": "cozinha.internacional",
+    "cozinha": "cozinha.internacional",
+}
+
+
+def canal_da_pasta(caminho: str) -> str | None:
+    """O canal que a pasta do RAW indica — ou None quando nao da' pra saber.
+
+    ⚠️ DEVOLVE None EM VEZ DE CHUTAR. Foi o chute que criou o problema: pasta
+    generica ("Geral - 01 setembro") nao diz canal nenhum, e transformar isso
+    em `modofuturo` e' inventar dado. Sem canal, o vigia NAO dispara e diz
+    qual pasta precisa ser criada — organizar o Drive e' do Bryan, e custa um
+    arrastar de arquivo; postar no canal errado custa alcance.
+    """
+    import unicodedata
+    p = (caminho or "").strip().strip("/").lower()
+    p = "".join(c for c in unicodedata.normalize("NFD", p)
+                if unicodedata.category(c) != "Mn")
+    for pasta, canal in MAPA_PASTA_CANAL.items():
+        if pasta in p:
+            return canal
+    return None
+
+
 def disparar(file_id: str, nome: str, conta: str = "principal",
-             estilo_legenda: str = ESTILO_LEGENDA):
+             estilo_legenda: str = ESTILO_LEGENDA, canal: str | None = None):
     if not GITHUB_TOKEN:
         raise RuntimeError(
             "Falta GITHUB_TOKEN no .env — sem ele não dá pra disparar o corte. "
@@ -238,6 +275,9 @@ def disparar(file_id: str, nome: str, conta: str = "principal",
             "qtd": QTD_CLIPES, "idioma": IDIOMA,
             "estilo_legenda": estilo_legenda,
             "pasta_drive": _a_postar(conta), "conta": conta,
+            # ⚠️ SEM ESTA LINHA o workflow cai no default e o clipe nasce
+            # rotulado como modofuturo, seja ele biscoito ou maquiagem.
+            **({"canal": canal} if canal else {}),
         }},
         timeout=30,
     )
@@ -322,6 +362,23 @@ def uma_passada(drive) -> int:
         print(f"[espera] {len(novos)} na fila, mas ja' ha' corte rodando "
               "— espero a proxima passada.")
         return 0
+    # ⚠️ SEM CANAL, NAO DISPARA — e diz o que fazer.
+    #
+    # Antes de 02/09/2026 estes iam pro corte assim mesmo e nasciam rotulados
+    # como `modofuturo`, porque e' o default do workflow. Pular e' o
+    # comportamento certo: o custo e' arrastar o arquivo pra pasta do canal no
+    # Drive; o custo do chute e' biscoito no canal de chips.
+    sem_canal = [v for v in novos if not canal_da_pasta(v.get("caminho", ""))]
+    novos = [v for v in novos if canal_da_pasta(v.get("caminho", ""))]
+    if sem_canal:
+        pastas = sorted({(v.get("caminho") or "(raiz do RAW)") for v in sem_canal})
+        print(f"[!] {len(sem_canal)} video(s) SEM CANAL — nao disparados. "
+              f"Mova pra uma pasta de canal: {', '.join(sorted(set(MAPA_PASTA_CANAL.values())))}")
+        for p in pastas:
+            print(f"      pasta sem mapeamento: {p}")
+    if not novos:
+        return 0
+
     espera = max(0, len(novos) - MAX_POR_PASSADA)
     novos = novos[:MAX_POR_PASSADA]
     print(f"{len(novos)} vídeo(s) novo(s) em RAW"
@@ -330,7 +387,8 @@ def uma_passada(drive) -> int:
         tam = int(v.get("size", 0)) / 2**30
         print(f"  - [{v.get('conta','?')}] {v.get('caminho','')}{v['name']} ({tam:.2f} GB)")
         try:
-            disparar(v["id"], v["name"], v.get("conta", "principal"))
+            disparar(v["id"], v["name"], v.get("conta", "principal"),
+                     canal=canal_da_pasta(v.get("caminho", "")))
         except Exception as e:
             # Não marca: na próxima passada ele tenta de novo.
             print(f"   [!] falhou, fica pra próxima passada: {e}")

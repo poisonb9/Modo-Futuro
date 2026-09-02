@@ -552,10 +552,26 @@ def main() -> None:
     # trecho (era o melhor) e traduziu diferente. Nenhuma guarda pegou: o
     # hash muda porque o render e' novo, e a dedup por texto compara prefixo —
     # "ramen" e "lamen" diferem na PRIMEIRA letra.
+    # ⚠️ "PUBLICADO" TINHA DOIS SENTIDOS, E ESTA GUARDA USAVA O ERRADO.
+    #
+    # `publicado_em` e' carimbado pelo `publicar_release.py` quando o clipe
+    # entra na RELEASE do GitHub — nao quando vai ao ar no canal. Usar esse
+    # campo aqui fazia o clipe recem-publicado entrar no conjunto e, na linha
+    # seguinte, ser recusado por estar nele: cada clipe novo se auto-bloqueava.
+    #
+    # MEDIDO em 02/09/2026: dos 96 clipes do manifesto, 9 tinham `fonte_id`
+    # (o campo nasceu nesse dia) e os NOVE estavam auto-bloqueados — 100%.
+    # O agendador dizia "0 ainda nao agendado" com 10 vagas livres, e o
+    # @semanestesia.pod passou o dia vazio com o clipe dele pronto na release.
+    #
+    # A fonte certa e' o que o Buffer de fato ENVIOU (`ja_publicado`), que ja'
+    # e' montado acima e ainda soma o registro offline. A protecao contra
+    # repetir o mesmo trecho continua identica; o que muda e' parar de chamar
+    # de "postado" o que so' foi arquivado.
     trechos_vistos = set()
     for _k, _v in todos.items():
         _f, _i = _v.get("fonte_id"), _v.get("inicio_s")
-        if _f and _i is not None and _v.get("publicado_em"):
+        if _f and _i is not None and dedup.ja_visto(_k, ja_publicado):
             trechos_vistos.add((_f, round(float(_i), 1)))
 
     def trecho_ja_usado(v) -> bool:

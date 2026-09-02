@@ -57,7 +57,27 @@ VOZES = {
     # `pt-BR-ThalitaMultilingualNeural`. Ninguem tinha pedido a Thalita ainda,
     # entao a alternativa nunca foi exercida e o erro dormiu no mapa.
     "thalita": "pt-BR-ThalitaMultilingualNeural",
+    # ⚠️ APELIDO DO CANAL DE ACHADOS. O Bryan ouviu a demo em 02/09/2026 e
+    # aprovou esta voz: "gostei viu, essa voz tambem nao ta' ruim, pode deixar
+    # essa voz como candidata principal". A voz da Bruna (clonada) fica pra
+    # teste depois — nao substituir sem ele ouvir as duas.
+    "achados": "pt-BR-ThalitaMultilingualNeural",
 }
+
+# ⚠️ POR QUE O edge-tts PODE SER MELHOR QUE A VOZ CLONADA NO CANAL DE ACHADOS,
+# e nao e' so' gosto — e' MEDIDO em 02/09/2026:
+#
+#     edge-tts      2,0 s por frase
+#     Chatterbox   52,4 s por frase   (run #229: 35 frases em 1835s)
+#     26x mais rapido
+#
+# Num video de achados com 5 frases: 12 segundos contra 4,4 minutos. Sobre os
+# 117 clipes do acervo, 19 minutos contra 8,5 HORAS de runner.
+#
+# A voz clonada existe pra dar IDENTIDADE aos canais de fala — o espectador
+# reconhece o narrador. Num canal de produto, quem tem de ser reconhecido e' o
+# produto, e o custo de 26x deixa de se pagar.
+VOZ_ACHADOS = "pt-BR-ThalitaMultilingualNeural"
 
 PADRAO = "pt-BR-AntonioNeural"
 

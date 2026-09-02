@@ -591,6 +591,20 @@ def main() -> None:
         # e' deste canal.
         if not e_deste_canal(v):
             return False
+        # ⚠️ APOSENTADO — nunca mais vai ao ar, por decisao do dono.
+        #
+        # Decisao do Bryan em 02/09/2026 sobre os 6 clipes da "republicacao
+        # 22-08": "nao pode ser publicado de novo, pode deixar junto mas nao
+        # pode ser publicado". Ficam no manifesto, mantem o canal, e nao sao
+        # agendados nunca.
+        #
+        # ⚠️ PRECISA SER UM CAMPO PROPRIO, e nao `republicacao`. Aquele campo
+        # faz o CONTRARIO: `republicacao` LIBERA o clipe a passar por cima da
+        # checagem de "ja' publicado", porque existe pra quando o Bryan QUER
+        # repostar algo na mao. Os 6 estao marcados assim — ou seja, hoje eles
+        # sao os MAIS livres pra sair de novo, exatamente o oposto do pedido.
+        if v.get("nao_publicar"):
+            return False
         # ⚠️ QUARENTENA — clipe traduzido pela RESERVA nao se posta sozinho.
         #
         # Decisao do Bryan em 02/09/2026. A reserva (Nemotron) so' entra

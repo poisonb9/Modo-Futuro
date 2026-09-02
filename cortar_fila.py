@@ -109,8 +109,16 @@ def tem_cota() -> tuple[bool, str]:
     # levava minutos e atrasava TODO disparo. Aqui o custo e' o da chave mais
     # lenta, nao a soma.
     #
-    # 8s basta: o que se pergunta e' se a chave responde, nao o conteudo. Uma
-    # chave que demora mais que isso nao serve pra decidir teto de corte.
+    # ⚠️ ERA 8s, E 8s ESTAVA CONTANDO CHAVE LENTA COMO CHAVE SECA.
+    # MEDIDO em 02/09/2026: a sonda devolveu "2 de 5 chaves com cota (2 ok,
+    # 3 mudo)" e rebaixou o teto de 3 pra 2. Segundos depois, uma varredura
+    # das 15 chaves locais com 20s deu 13 em 200 — 87%, nao 40%. As tres
+    # "mudas" eram lentas, nao esgotadas.
+    #
+    # O custo aqui e' o da chave mais lenta, nao a soma (o pool e' paralelo),
+    # entao 20s atrasa a sonda em no maximo 12s a mais que antes. Rebaixar o
+    # teto de corte por latencia custa muito mais que isso.
+    TIMEOUT_SONDA_S = 20
     from concurrent.futures import ThreadPoolExecutor
 
     def _sondar(chave: str) -> str:
@@ -120,7 +128,7 @@ def tem_cota() -> tuple[bool, str]:
             data=json.dumps({"contents": [{"parts": [{"text": "oi"}]}]}).encode(),
             headers={"Content-Type": "application/json"})
         try:
-            urllib.request.urlopen(req, timeout=8)
+            urllib.request.urlopen(req, timeout=TIMEOUT_SONDA_S)
             return "ok"
         except urllib.error.HTTPError as e:
             return "sem cota" if e.code == 429 else "sobrecarregado"
@@ -133,8 +141,23 @@ def tem_cota() -> tuple[bool, str]:
             placar[r] += 1
 
     resumo = ", ".join(f"{v} {k}" for k, v in placar.items() if v)
+
+    # ⚠️ SILENCIO NAO E' EVIDENCIA DE COTA ESGOTADA — E' AUSENCIA DE
+    # EVIDENCIA, e por isso `mudo` sai do DENOMINADOR.
+    #
+    # Ate' 02/09/2026 o denominador era `len(chaves)`, entao "2 ok, 3 mudo"
+    # virava "2 de 5" = 40%, e `teto_pela_cota` rebaixava o teto de 3 pra 2.
+    # Mas as tres mudas nao disseram que estavam secas: nao disseram NADA.
+    # A fracao honesta e' entre as que RESPONDERAM — ali foi 2 de 2 = 100%.
+    #
+    # ⚠️ Isso NAO afrouxa a barra de gastar runner: quem decide se ha' cota
+    # continua sendo `placar["ok"]`, que exige 200 na mao. O que muda e' so'
+    # a fracao usada pro TETO. Zero ok continua barrando tudo, como antes.
+    responderam = placar["ok"] + placar["sem cota"] + placar["sobrecarregado"]
     if placar["ok"]:
-        return True, f"{placar['ok']} de {len(chaves)} chaves com cota ({resumo})"
+        # `responderam` e' >= 1 aqui: `ok` ja' e' >= 1 e entra na soma.
+        return True, (f"{placar['ok']} de {responderam} chaves com cota "
+                      f"({resumo})")
     return False, f"nenhuma das {len(chaves)} chaves respondeu 200 ({resumo})"
 
 
@@ -163,6 +186,22 @@ def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
     if not m:
         return teto_pedido, "sem contagem de chaves — teto como pedido"
     ok, total = int(m.group(1)), int(m.group(2))
+
+    # ⚠️ AMOSTRA FRACA NAO E' BOA NOTICIA — E' AMOSTRA FRACA.
+    #
+    # Tirar `mudo` do denominador (ver `tem_cota`) conserta contar lentidao
+    # como cota seca, mas abre um buraco se parar por aqui: com "1 ok, 4
+    # mudo" a fracao vira 1/1 = 100% e o teto sobe pra 3. UMA chave viva
+    # autorizando TRES cortes em voo e' pior que o defeito que se consertou.
+    #
+    # Com menos de 3 respostas nao ha' base pra estimar fracao nenhuma, entao
+    # o teto segue o que foi de fato MEDIDO — quantas chaves responderam 200
+    # — e nunca a fracao. Silencio nao vira otimismo nem pessimismo.
+    if total < 3:
+        return ((min(2, teto_pedido) if ok >= 2 else 1),
+                f"amostra fraca ({ok} de {total} responderam) — teto pelo "
+                f"medido, nao pela fracao")
+
     fatia = ok / max(1, total)
     if fatia >= 0.5:
         return teto_pedido, f"cota folgada ({ok}/{total}) — teto {teto_pedido}"
@@ -335,6 +374,22 @@ def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
     if not m:
         return teto_pedido, "sem contagem de chaves — teto como pedido"
     ok, total = int(m.group(1)), int(m.group(2))
+
+    # ⚠️ AMOSTRA FRACA NAO E' BOA NOTICIA — E' AMOSTRA FRACA.
+    #
+    # Tirar `mudo` do denominador (ver `tem_cota`) conserta contar lentidao
+    # como cota seca, mas abre um buraco se parar por aqui: com "1 ok, 4
+    # mudo" a fracao vira 1/1 = 100% e o teto sobe pra 3. UMA chave viva
+    # autorizando TRES cortes em voo e' pior que o defeito que se consertou.
+    #
+    # Com menos de 3 respostas nao ha' base pra estimar fracao nenhuma, entao
+    # o teto segue o que foi de fato MEDIDO — quantas chaves responderam 200
+    # — e nunca a fracao. Silencio nao vira otimismo nem pessimismo.
+    if total < 3:
+        return ((min(2, teto_pedido) if ok >= 2 else 1),
+                f"amostra fraca ({ok} de {total} responderam) — teto pelo "
+                f"medido, nao pela fracao")
+
     fatia = ok / max(1, total)
     if fatia >= 0.5:
         return teto_pedido, f"cota folgada ({ok}/{total}) — teto {teto_pedido}"

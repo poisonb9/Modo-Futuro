@@ -1,5 +1,14 @@
 # Motor de Cortes — Nitro 5
 
+> ⚠️ **ESTE ARQUIVO DESCREVE A TOPOLOGIA ANTIGA, de quando o corte rodava na
+> máquina local.** Hoje o corte roda **na nuvem**, em GitHub Actions — a
+> máquina local não tem capacidade e só hospeda o vigia do RAW.
+>
+> **Para entender o pipeline como ele funciona hoje, leia [PIPELINE.md](PIPELINE.md).**
+> Ele explica as duas entradas de corte, os gatilhos, a sonda de cota e onde
+> mora o estado. O que está abaixo vale como história do desenho, não como
+> mapa de operação.
+
 Vídeo longo entra, Shorts prontos pra postar saem. Gemini escolhe os momentos,
 Groq faz as legendas, ffmpeg monta tudo na sua GTX 1650.
 

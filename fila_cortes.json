@@ -105,24 +105,26 @@
       "nome": "Bambi eyes makeup tutorial"
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1q6H5SBCw4c9M9aOTNFpPHgGmoiFPQKBe",
       "nome": "Stop Wasting Time in the Gym - Glute Growth Explained",
-      "quando": "2026-09-02T11:05:17+00:00"
+      "quando": "2026-09-02T22:03:08+00:00",
+      "run_id": 33688389957
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1TxXHXdmMwQA5QJDxbGNWvI1FmFXlY-50",
       "nome": "The TRUTH About Glute Growth, Training & Nutrition",
-      "quando": "2026-09-02T11:28:58+00:00"
+      "quando": "2026-09-02T22:03:13+00:00",
+      "run_id": 33688396858
     },
     {
       "estado": "pendente",

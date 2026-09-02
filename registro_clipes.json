@@ -661,7 +661,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_05_nota82_O_fim_do_silicio_a_corrida_por_novos_elementos_na_Intel_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-02T19:34:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O fim do silício: a corrida por novos elementos na Intel"
+        }
+      ]
     },
     "sem-hash:2026083005nota83porqueconstruirfabricasdechipsnoseuacustaodobro": {
       "arquivo": "2026-08-30_05_nota83_Por_Que_Construir_Fabricas_de_Chips_nos_EUA_Custa_o_Dobro_short_9x16.mp4",
@@ -787,7 +794,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_03_nota85_Como_fazer_cut_crease_e_delineado_gatinho_perfeito_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-02T19:26:00.000Z",
+          "canal": "truque.importado",
+          "detalhe": "Como fazer cut crease e delineado gatinho perfeito"
+        }
+      ]
     },
     "sem-hash:2026083104nota80segredosparasobrancelhasperfeitasepeleprontinha": {
       "arquivo": "2026-08-31_04_nota80_SEGREDOS_PARA_SOBRANCELHAS_PERFEITAS_E_PELE_PRONTINHA_short_9x16.mp4",

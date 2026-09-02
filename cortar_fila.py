@@ -471,7 +471,13 @@ def devolver_os_que_falharam(d: dict) -> list[str]:
             voltaram.append(f"  SEM FONTE no Drive: {item['nome'][:40]} "
                             f"(bruto apagado apos corte anterior)")
             continue
-        cota = falhou_por_cota(item["run_id"])
+        # ⚠️ GUARDE O run_id ANTES DO `pop`. Todo diagnostico daqui pra baixo
+        # precisa dele pra ler o log, e o `pop` acontece no meio do caminho.
+        # Em 02/09/2026 eu acrescentei a checagem do modelo DEPOIS do `pop` e
+        # o orquestrador inteiro morreu com KeyError: 'run_id' — duas passadas
+        # perdidas, nada em voo, e a fila parada ate' alguem olhar.
+        rid = item["run_id"]
+        cota = falhou_por_cota(rid)
         item["estado"] = "pendente"
         item.pop("run_id", None)
         if cota:
@@ -480,7 +486,7 @@ def devolver_os_que_falharam(d: dict) -> list[str]:
             continue
         # ⚠️ RESPOSTA RUIM DO MODELO CONTA SEPARADO — ver falhou_por_selecao_vazia.
         # Fonte boa nao pode ser expulsa porque o Gemini alucinou o timestamp.
-        if falhou_por_selecao_vazia(item["run_id"]):
+        if falhou_por_selecao_vazia(rid):
             n = int(item.get("tentativas_modelo") or 0) + 1
             item["tentativas_modelo"] = n
             if n >= TETO_TENTATIVAS_MODELO:

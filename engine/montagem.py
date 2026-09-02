@@ -181,6 +181,31 @@ def montar(cenas: list[dict], destino: Path, trabalho: Path,
     if not partes:
         raise RuntimeError("nenhuma cena com imagem — nada a montar")
 
+    # ⚠️ A NARRACAO NUNCA PODE SER CORTADA. Medido no primeiro ensaio real:
+    # a fala tinha 26,3s, as cenas somavam 24,3s (o teto de 9s truncou duas
+    # delas) e o `-shortest` decepou os 2 segundos finais — justamente o
+    # fechamento, que e' a frase do link.
+    #
+    # O teto de 9s existe pra imagem parada nao cansar, e continua valendo pra
+    # decidir o tamanho de CADA cena. Mas quando o audio sobra, a ULTIMA cena
+    # estica pra cobrir: e' melhor uma imagem ficar mais tempo que a frase do
+    # link sumir. E' o mesmo principio que o modulo ja' declara — a cena
+    # obedece ao audio, nunca o contrario.
+    if audio and Path(audio).exists() and partes:
+        soma = sum(midia.duracao(p) or 0 for p in partes)
+        falta = (midia.duracao(Path(audio)) or 0) - soma
+        if falta > 0.15:
+            ult = partes[-1]
+            nova = trabalho / "cena_ultima_estendida.mp4"
+            midia.roda(["ffmpeg", "-y", "-v", "error", "-i", str(ult),
+                        "-filter_complex",
+                        f"[0:v]tpad=stop_mode=clone:stop_duration={falta:.3f}",
+                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                        "-pix_fmt", "yuv420p", "-an", str(nova)])
+            print(f"   ultima cena esticada +{falta:.1f}s pra caber a narracao",
+                  flush=True)
+            partes[-1] = nova
+
     lista = trabalho / "cenas.txt"
     lista.write_text(
         "\n".join(f"file '{p.as_posix()}'" for p in partes) + "\n",

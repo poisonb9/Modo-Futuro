@@ -45,7 +45,7 @@ def teste_negativo_uma_marca_so_nao_basta():
 def teste_contadores_sao_separados():
     """`tentativas` e `tentativas_modelo` nao podem ser o mesmo campo."""
     assert "tentativas_modelo" in FONTE
-    bloco = FONTE[FONTE.index("if falhou_por_selecao_vazia(item"):]
+    bloco = FONTE[FONTE.index("if falhou_por_selecao_vazia("):]
     bloco = bloco[:bloco.index("item[\"tentativas\"] =")]
     assert 'item["tentativas"] =' not in bloco, \
         "o ramo do modelo esta' mexendo no contador da FONTE"
@@ -71,8 +71,8 @@ def teste_negativo_cota_continua_com_prioridade():
     """Cota tem de ser checada ANTES da selecao vazia: um run que morreu por
     cota nem chegou a pedir momento ao modelo, e nao pode gastar nem uma
     tentativa, nem a do modelo."""
-    i_cota = FONTE.index("cota = falhou_por_cota(item")
-    i_modelo = FONTE.index("if falhou_por_selecao_vazia(item")
+    i_cota = FONTE.index("cota = falhou_por_cota(")
+    i_modelo = FONTE.index("if falhou_por_selecao_vazia(")
     assert i_cota < i_modelo, "a cota tem de ser avaliada primeiro"
 
 

@@ -47,8 +47,19 @@ else:
     # ⚠️ NEGATIVO: o 404 tem de ser checado ANTES da cota. Um run que morre
     # por fonte apagada nao pode voltar pra fila so' porque o log tambem
     # menciona cota em alguma linha de rotacao de chave.
-    iuso404 = fonte.find("fonte_sumiu(item[")
-    iusocota = fonte.find("falhou_por_cota(item[")
+    # ⚠️ CASA COM A CHAMADA, NAO COM O NOME DO ARGUMENTO. Ate' 02/09/2026
+    # isto procurava "fonte_sumiu(item[" — e reprovou quando o run_id passou
+    # a ser guardado numa variavel (`rid`) antes do `pop`, que foi um
+    # conserto, nao um defeito. Teste que casa com a grafia trava o refactor
+    # e nao protege a ordem, que e' o que importa aqui.
+    def _uso(nome: str) -> int:
+        i = fonte.find(f"def {nome}")
+        fim = fonte.find("\ndef ", i + 1)
+        # a primeira chamada FORA da propria definicao
+        return fonte.find(f"{nome}(", fim if fim > 0 else i)
+
+    iuso404 = _uso("fonte_sumiu")
+    iusocota = _uso("falhou_por_cota")
     if iuso404 < 0 or iusocota < 0:
         falhas.append("um dos classificadores nao e' usado")
     elif iuso404 > iusocota:

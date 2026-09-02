@@ -282,6 +282,9 @@ def main() -> None:
                         "sha": sha,
                         "fonte": m.get("fonte", ""),
                         "inicio_s": m.get("inicio_s"),
+                        # ⚠️ Viaja pro manifesto porque a guarda de trecho vive
+                        # no agendador, e ele so' le' o manifesto.
+                        "fonte_id": m.get("fonte_id", ""),
                         "titulo": m.get("titulo", ""),
                         "canal": (os.environ.get("CANAL_ESPERADO") or "").strip().lower(),
                         # De que genero e' quem fala no clipe, como o Gemini

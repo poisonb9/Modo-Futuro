@@ -11,10 +11,20 @@ corta video: ele agenda o que ja' foi cortado e publicado numa release. Se nao
 houver clipe elegivel, ele AVISA e para. Disparar corte custa runner e e'
 decisao do Bryan.
 
-⚠️ CANAIS EM ESTREIA FICAM DE FORA. O Bryan quer postar os DOIS primeiros
-videos de @truque.importado, @atefalhar e @semanestesia.pod na mao — ja' teve
-estreia automatica que flopou. Enquanto ele nao liberar, so' o @modofuturo e a
-cozinha entram aqui. Ver LIBERADOS.
+⚠️ CANAIS EM ESTREIA FICAM DE FORA — mas HOJE NAO HA' NENHUM. Quem manda
+nisso e' `engine/estreia.py`, cujo `ESTREIA_ATE` esta' VAZIO desde 01/09/2026:
+o Bryan liberou @truque.importado, @atefalhar e @semanestesia.pod, e
+reconfirmou em 02/09 ("liberado, pode postar assim que encher").
+
+O motivo da trava continua valendo pro PROXIMO canal novo: uma estreia
+automatica ja' flopou, e o Bryan posta os primeiros na mao por 2 dias. Canal
+novo entra no `ESTREIA_ATE` com data e destrava sozinho.
+
+⚠️ Este paragrafo dizia "so' o @modofuturo e a cozinha entram aqui" ate'
+02/09/2026 — e estava MENTINDO havia um dia, porque o `LIBERADOS` abaixo ja'
+tinha os quatro canais com `repoe: True`. Comentario que contradiz o codigo
+custa mais caro que comentario nenhum: manda a proxima sessao procurar uma
+trava que nao existe. Ver LIBERADOS.
 
 ⚠️ A COZINHA NAO E' DESTE REPOSITORIO. O motor dela vive em
 bryanaw2121-sketch/pipeline, com manifesto proprio. Este script confere a fila

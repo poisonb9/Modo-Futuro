@@ -276,9 +276,42 @@ def corte_em_andamento() -> bool:
 
 # ------------------------------------------------------------------ ciclo
 
+def ids_na_fila_de_cortes() -> set:
+    """drive_file_id que a fila curada ja' reivindicou.
+
+    ⚠️ SEM ISTO, O MESMO VIDEO SAI DUAS VEZES. Sao dois caminhos independentes
+    ate' o mesmo cortador: a fila (`fila_cortes.json` -> `cortar_fila.yml`) e
+    este vigia (pasta RAW -> `cortar_de_bruto.yml`). O vigia so' consultava
+    `raw_vistos.json`, entao fonte enfileirada a mao continuava "nova" pra ele.
+
+    Em 02/09/2026 tres fontes foram postas na fila pro @semanestesia.pod e
+    ficaram visiveis pros DOIS caminhos ao mesmo tempo. Duplicata nao e'
+    incomodo estetico: os dois colapsos de alcance medidos (02/08 e 25/08)
+    vieram de publicar o mesmo video duas vezes.
+
+    ⚠️ Os estados terminais NAO contam. `sem_fonte` e `desistido` sao itens
+    que a fila largou — se eles bloqueassem o vigia, uma fonte que a fila
+    desistiu ficaria refem dela pra sempre, sem ninguem pra cortar.
+    """
+    VIVOS = {"pendente", "disparado", "pronto"}
+    try:
+        d = json.loads((RAIZ / "fila_cortes.json").read_text(encoding="utf-8"))
+    except Exception as e:
+        # ⚠️ NA DUVIDA, NAO BLOQUEIA. Ficha ilegivel travando o vigia repetiria
+        # o defeito do 401: guarda que erra pro lado "seguro" desliga o
+        # caminho inteiro em silencio. Aqui o pior caso e' uma duplicata, que
+        # da' pra ver e desfazer; o outro pior caso e' nao cortar nada.
+        print(f"[!] nao li fila_cortes.json ({str(e)[:60]}) — sigo sem essa guarda")
+        return set()
+    return {i.get("drive_file_id") for i in d.get("itens", [])
+            if i.get("estado") in VIVOS and i.get("drive_file_id")}
+
+
 def uma_passada(drive) -> int:
     reg = ler_registro()
-    novos = [v for v in videos_todas_contas() if v["id"] not in reg]
+    na_fila = ids_na_fila_de_cortes()
+    novos = [v for v in videos_todas_contas()
+             if v["id"] not in reg and v["id"] not in na_fila]
     if not novos:
         return 0
     if corte_em_andamento():

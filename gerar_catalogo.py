@@ -20,6 +20,25 @@ Cada degrau a mais no caminho derruba conversao — esta pagina se justifica
 porque um link na bio precisa apontar pra algum lugar, e apontar pra UMA lista
 curada e' melhor que pra um marketplace inteiro.
 
+## ⚠️ CUMULATIVO, E ISSO NAO E' DETALHE
+
+Decidido com o Bryan em 02/09/2026. A bio do TikTok tem UM link, fixo; o
+catalogo muda a cada video novo. Quem visse um video na terca e clicasse na
+quinta encontraria os produtos de quinta — nao os que viu.
+
+Por isso a pagina ACUMULA: os achados ficam agrupados por data, os mais novos
+no topo, e quem chega de um video antigo rola e encontra. E' a unica forma que
+funciona com um link estatico.
+
+⚠️ E acumular tem um segundo ganho: pagina que cresce ganha busca do Google
+com o tempo — trafego que nao depende de feed nem de algoritmo. E' o unico
+ativo desta operacao que se valoriza sozinho.
+
+⚠️ COM TETO DE DIAS. Sem limite, a pagina cresceria pra sempre e o celular em
+rede ruim pararia de abrir — matando justamente o requisito que o formato tem.
+Item mais velho que o teto sai da PAGINA, nao do arquivo: o dado fica, so' nao
+e' desenhado.
+
 ## POR QUE HTML SOLTO, SEM FRAMEWORK
 
 Publico de TikTok e' celular em rede ruim. A pagina inteira e' um arquivo, sem
@@ -35,6 +54,7 @@ arquivo custa refazer a verificacao.
 """
 from __future__ import annotations
 
+import datetime
 import html
 import json
 from pathlib import Path
@@ -45,6 +65,11 @@ SAIDA = RAIZ / "achados_index.html"
 
 SELO = {"shopee": "Shopee", "mercadolivre": "Mercado Livre",
         "aliexpress": "AliExpress"}
+
+# Quantos dias de achados a pagina desenha. 90 dias sao ~13 semanas de
+# conteudo — o bastante pra quem chega de video antigo, longe do ponto em que
+# o peso da pagina incomoda no celular.
+DIAS_NA_PAGINA = 90
 
 CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
@@ -87,17 +112,48 @@ def cartao(i: dict) -> str:
             f'<span class="selo">{e(selo)}</span></div></div></a>')
 
 
+def _rotulo_data(iso: str) -> str:
+    """'2026-09-02' -> 'hoje' / 'ontem' / '02 de setembro'."""
+    MES = ("janeiro fevereiro março abril maio junho julho agosto setembro "
+           "outubro novembro dezembro").split()
+    try:
+        d = datetime.date.fromisoformat(iso[:10])
+    except Exception:
+        return iso or "sem data"
+    hoje = datetime.date.today()
+    dias = (hoje - d).days
+    if dias == 0:
+        return "hoje"
+    if dias == 1:
+        return "ontem"
+    return f"{d.day:02d} de {MES[d.month - 1]}"
+
+
 def montar(dados: dict) -> str:
-    itens = dados.get("itens") or []
+    itens = list(dados.get("itens") or [])
+    hoje = datetime.date.today()
+
+    # ⚠️ O TETO TIRA DA PAGINA, NAO DO ARQUIVO. Item velho continua no
+    # catalogo.json; so' deixa de ser desenhado, pra pagina nao pesar.
+    def recente(i):
+        try:
+            d = datetime.date.fromisoformat(str(i.get("data", ""))[:10])
+        except Exception:
+            return True          # sem data, mostra — perder achado e' pior
+        return (hoje - d).days <= DIAS_NA_PAGINA
+
+    itens = [i for i in itens if recente(i)]
+    # mais novos primeiro; sem data vai pro fim
+    itens.sort(key=lambda i: str(i.get("data") or ""), reverse=True)
+
     if itens:
-        # agrupa por canal, mantendo a ordem em que foram escritos
         grupos: dict[str, list] = {}
         for i in itens:
-            grupos.setdefault(str(i.get("canal") or "Achados"), []).append(i)
+            grupos.setdefault(str(i.get("data") or "")[:10], []).append(i)
         corpo = "".join(
-            f'<div class="grupo">{html.escape(g)}</div>'
+            f'<div class="grupo">{html.escape(_rotulo_data(dia))}</div>'
             + "".join(cartao(i) for i in lista)
-            for g, lista in grupos.items())
+            for dia, lista in grupos.items())
     else:
         # ⚠️ PAGINA VAZIA E' MELHOR QUE PAGINA COM PRODUTO INVENTADO. Alguem
         # clica, o produto nao existe, e a confianca vai junto — e confianca e'
@@ -113,7 +169,8 @@ def montar(dados: dict) -> str:
         'para o anúncio.">'
         f'<style>{CSS}</style></head><body>'
         '<header><h1>Achados</h1>'
-        '<div class="sub">Seleção curta. O link leva direto para o anúncio.</div>'
+        '<div class="sub">Os mais recentes primeiro. '
+        'O link leva direto para o anúncio.</div>'
         '</header>'
         f'<main>{corpo}</main>'
         '<footer>Os links podem gerar comissão para este perfil, sem custo '

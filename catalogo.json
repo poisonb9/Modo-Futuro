@@ -1,5 +1,5 @@
 {
-  "_leia": "Catalogo de achados. Cada item vira um cartao na pagina https://poisonb9.github.io/times-report/achados/ — que e' o destino do 'link na bio' dos canais e do canal do Telegram. NAO e' loja: nao pede cartao de ninguem, so' leva pro anuncio no marketplace, onde pagamento, frete e reputacao ja' estao resolvidos.",
+  "_leia": "Catalogo CUMULATIVO de achados. Cada item vira um cartao em https://poisonb9.github.io/times-report/achados/ — o destino do 'link na bio' e do canal do Telegram. ⚠️ A bio do TikTok tem UM link, fixo, e o catalogo muda a cada video: por isso a pagina ACUMULA por data, os mais novos no topo. Quem chega de um video antigo rola e encontra. NAO e' loja: nao pede cartao, so' leva pro anuncio no marketplace.",
   "_campos": {
     "titulo": "como a pessoa reconhece o produto, curto",
     "preco": "texto livre — 'R$ 39,90' ou 'a partir de R$ 25'",
@@ -7,8 +7,10 @@
     "link": "o link do anuncio (com codigo de afiliado quando houver)",
     "imagem": "URL da foto. Vazio = o cartao sai sem imagem, e nao quebra",
     "canal": "a qual dos 5 canais este item pertence — organiza a pagina",
-    "porque": "1 frase: o que ele resolve. E' o que vende, nao a ficha tecnica"
+    "porque": "1 frase: o que ele resolve. E' o que vende, nao a ficha tecnica",
+    "data": "AAAA-MM-DD do dia em que o achado foi publicado. E' por ela que a pagina agrupa. Sem data, o item aparece no fim e nunca e' descartado pelo teto."
   },
   "_pendente": "Bryan vai dizer quais sao os 3 primeiros itens. Ate' la' a lista fica vazia de proposito — pagina com produto inventado e' pior que pagina vazia: alguem clica, nao existe, e a confianca vai junto.",
-  "itens": []
+  "itens": [],
+  "_teto": "A pagina desenha os ultimos 90 dias (DIAS_NA_PAGINA). Item mais velho fica no arquivo, so' nao e' desenhado."
 }

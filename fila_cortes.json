@@ -72,7 +72,7 @@
       "run_id": 33540737953
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -81,7 +81,7 @@
       "nome": "Stop Being F cking Weak",
       "quando": "2026-09-02T11:28:53+00:00",
       "tentativas": 2,
-      "run_id": 33624810979
+      "tentativas_modelo": 1
     },
     {
       "estado": "sem_fonte",
@@ -104,26 +104,24 @@
       "nome": "Bambi eyes makeup tutorial"
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1q6H5SBCw4c9M9aOTNFpPHgGmoiFPQKBe",
       "nome": "Stop Wasting Time in the Gym - Glute Growth Explained",
-      "quando": "2026-09-02T11:05:17+00:00",
-      "run_id": 33622779969
+      "quando": "2026-09-02T11:05:17+00:00"
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1TxXHXdmMwQA5QJDxbGNWvI1FmFXlY-50",
       "nome": "The TRUTH About Glute Growth, Training & Nutrition",
-      "quando": "2026-09-02T11:28:58+00:00",
-      "run_id": 33624817592
+      "quando": "2026-09-02T11:28:58+00:00"
     },
     {
       "estado": "pendente",

@@ -620,7 +620,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_03_nota88_Por_que_o_mundo_depende_de_Taiwan_para_nao_parar_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-02T14:39:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por que o mundo depende de Taiwan para não parar?"
+        }
+      ]
     },
     "sem-hash:2026083004nota85porqueseuprocessadorsuperrapidoeinutilsemessechip": {
       "arquivo": "2026-08-30_04_nota85_Por_Que_Seu_Processador_Superrapido_E_Inutil_Sem_Esse_Chip_short_9x16.mp4",
@@ -638,7 +645,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_04_nota86_O_macacao_de_US_1.000_para_entrar_na_fabrica_da_Intel_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-01T22:36:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O macacão de US$ 1.000 para entrar na fábrica da Intel"
+        }
+      ]
     },
     "sem-hash:2026083005nota82ofimdosilicioacorridapornovoselementosnaintel": {
       "arquivo": "2026-08-30_05_nota82_O_fim_do_silicio_a_corrida_por_novos_elementos_na_Intel_short_9x16.mp4",
@@ -791,7 +805,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-31_04_nota81_Segredo_para_iluminar_e_selar_a_regiao_das_olheiras_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-01T22:26:00.000Z",
+          "canal": "truque.importado",
+          "detalhe": "Segredo para iluminar e selar a regiao das olheiras"
+        }
+      ]
     },
     "sem-hash:rep20260825007nota9301nota93exercitocriabaratasciborguesparazonasdeguerra": {
       "arquivo": "rep_2026-08-25_007_nota93_01_nota93_Exercito_Cria_Baratas_Ciborgues_Para_Zonas_de_Guerra.mp4",

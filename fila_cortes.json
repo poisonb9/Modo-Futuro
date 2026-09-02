@@ -79,9 +79,9 @@
       "selecao_modo": "",
       "drive_file_id": "1w-Y7rHRklzy0h3CpHTQ2-7NVcNvlYuwa",
       "nome": "Stop Being F cking Weak",
-      "quando": "2026-09-02T06:02:34+00:00",
+      "quando": "2026-09-02T11:05:12+00:00",
       "tentativas": 1,
-      "run_id": 33597145674
+      "run_id": 33622773012
     },
     {
       "estado": "sem_fonte",
@@ -111,19 +111,18 @@
       "selecao_modo": "",
       "drive_file_id": "1q6H5SBCw4c9M9aOTNFpPHgGmoiFPQKBe",
       "nome": "Stop Wasting Time in the Gym - Glute Growth Explained",
-      "quando": "2026-09-02T06:02:39+00:00",
-      "run_id": 33597151122
+      "quando": "2026-09-02T11:05:17+00:00",
+      "run_id": 33622779969
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1TxXHXdmMwQA5QJDxbGNWvI1FmFXlY-50",
       "nome": "The TRUTH About Glute Growth, Training & Nutrition",
-      "quando": "2026-09-02T06:02:44+00:00",
-      "run_id": 33597156433
+      "quando": "2026-09-02T06:02:44+00:00"
     },
     {
       "estado": "pendente",

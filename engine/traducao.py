@@ -95,6 +95,24 @@ Fala original:
 {texto}"""
 
 
+# ⚠️ Marcador de QUARENTENA. Fica True assim que a reserva (Nemotron) traduzir
+# qualquer coisa neste processo. O `main.py` zera antes de cada clipe e le'
+# depois, pra saber se AQUELE clipe precisa de quarentena — sem isso, um clipe
+# traduzido pelo Gemini herdaria a marca de outro e seria barrado a` toa.
+USOU_RESERVA = False
+
+
+def zerar_marca_de_reserva() -> None:
+    """Chamar ANTES de traduzir cada clipe."""
+    global USOU_RESERVA
+    USOU_RESERVA = False
+
+
+def traduzido_pela_reserva() -> bool:
+    """Este clipe passou pela reserva? Chamar DEPOIS de traduzir."""
+    return USOU_RESERVA
+
+
 def dica_de_genero(genero: str | None) -> str:
     """Frase que vai NO TOPO do prompt de narração, quando a seleção soube o
     gênero de quem fala.
@@ -242,6 +260,47 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
         except Exception as e:
             ultimo_erro = e
             time.sleep(1)
+    # ⚠️ ULTIMO RECURSO: NEMOTRON, E SO' PRA NAO PERDER O CLIPE.
+    #
+    # Decisao do Bryan em 02/09/2026, com a preocupacao dele junto: "meu medo
+    # e' usar o nemotron e as traducoes ficarem ruins... e se fizermos isso so'
+    # quando formos perder clipes... e nesses casos manda pro Drive e me
+    # sinaliza antes de entrar pra fila de postagem, quarentena pra avaliar".
+    #
+    # Entao esta reserva NAO e' uma alternativa barata que se usa por
+    # comodidade — ela so' entra quando o Gemini ja' se esgotou e a unica
+    # outra saida e' jogar fora um clipe JA' cortado, JA' transcrito e JA'
+    # renderizado. Em 02/09 quatro runs morreram assim, com o trabalho pronto.
+    #
+    # Medido antes de ligar, com o prompt real e um trecho de fala continua
+    # com cacoete: o Ultra devolveu registro coloquial equivalente ao do
+    # Gemini, em 3,0s contra 109,8s. O Super tambem traduziu bem, mas quebrou
+    # cada frase em uma linha — e a sintese e' frase a frase, entao a quebra
+    # muda o corte da narracao. Por isso: ULTRA, nao SUPER.
+    #
+    # ⚠️ O CLIPE SAI MARCADO. Quem traduziu vai pro post.json e a quarentena
+    # do agendador barra a postagem automatica. Traducao de reserva que
+    # entrasse calada na fila seria pior que perder o clipe: o canal publica
+    # sem ninguem ter lido.
+    if sem_cota:
+        try:
+            from . import nemotron
+            txt = nemotron.conversar(prompt.format(texto=texto)
+                                     if "{dica_genero}" not in prompt else
+                                     prompt.format(texto=texto,
+                                                   dica_genero=dica_de_genero(genero),
+                                                   orcamento=orcamento_de_palavras(duracao_s)),
+                                     modelo=nemotron.ULTRA)
+            if txt and txt.strip():
+                global USOU_RESERVA
+                USOU_RESERVA = True
+                print(f"   [reserva] Gemini sem cota — traduzido pelo Nemotron "
+                      f"Ultra. ⚠️ O clipe vai pra QUARENTENA, nao pra fila.",
+                      flush=True)
+                return txt.strip()
+        except Exception as e:
+            print(f"   [!] reserva Nemotron tambem falhou: {str(e)[:70]}")
+
     # Cota estourada nao e' defeito: e' esperar o reset do dia. Dizer isso na
     # propria excecao evita a caca ao bug que nao existe.
     if sem_cota and ultimo_erro is None:

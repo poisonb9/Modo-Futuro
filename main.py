@@ -297,9 +297,19 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # narracao sozinho so' consegue inferir pelo texto, e transcricao
                 # costuma nao ter pista. Em 25/08/2026 um clipe foi ao ar dizendo
                 # 'A ESPECIALISTA EXPLICOU' com um homem na tela.
+                # ⚠️ ZERA ANTES, LE' DEPOIS, POR CLIPE. A marca de reserva e'
+                # de processo: sem zerar aqui, o primeiro clipe que caisse no
+                # Nemotron contaminaria todos os seguintes, e clipe traduzido
+                # pelo Gemini iria pra quarentena a` toa.
+                traducao.zerar_marca_de_reserva()
                 segmentos = traducao.traduzir_segmentos(
                     ps, narrar=dublar and not fala_literal,
                     genero_falante=c.get("genero_falante"))
+                if traducao.traduzido_pela_reserva():
+                    c["traduzido_por"] = "nemotron-ultra"
+                    c["quarentena"] = True
+                    print("      ⚠️ QUARENTENA: traduzido pela reserva, "
+                          "nao entra na fila de postagem sem o Bryan aprovar")
                 ps = traducao.segmentos_para_palavras(segmentos)
                 if getattr(config, "LEGENDA_PREMIUM", False):
                     from engine import legenda_premium
@@ -388,6 +398,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             meta = {k: c.get(k) for k in
                     ("titulo", "descricao", "tags", "legenda_premium",
                      "gancho", "porque",
+                     # ⚠️ ESTES DOIS SAO A QUARENTENA. Fora desta lista, o
+                     # clipe traduzido pela reserva chega ao agendador sem
+                     # marca nenhuma e e' postado como qualquer outro — que
+                     # e' exatamente o que o Bryan pediu pra nao acontecer.
+                     "traduzido_por", "quarentena",
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",

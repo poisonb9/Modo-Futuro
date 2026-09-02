@@ -333,7 +333,17 @@ jobs:
       - name: Avisar no Telegram
         if: always()
         run: |
-          if [ "${{ job.status }}" = "success" ]; then
+          # ⚠️ QUARENTENA TEM DE APARECER AQUI, e nao no meio do log.
+          #
+          # Clipe traduzido pela reserva (Nemotron) NAO entra na fila de
+          # postagem — o agendador barra. Se o aviso nao disser isso, o Bryan
+          # vê "terminou, está no Drive", supõe que foi pra fila como sempre,
+          # e o clipe fica parado sem ninguém saber que espera avaliação dele.
+          # Silêncio aqui transforma uma quarentena em clipe esquecido.
+          QUARENTENA=$(grep -rl '"quarentena": true' saida/ 2>/dev/null | wc -l)
+          if [ "${{ job.status }}" = "success" ] && [ "$QUARENTENA" -gt 0 ]; then
+            TEXTO="🟡 Corte terminou, mas $QUARENTENA clipe(s) foram traduzidos pela RESERVA (Nemotron — o Gemini estava sem cota). Estão no Drive e NÃO entraram na fila de postagem: esperam você avaliar a tradução. Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          elif [ "${{ job.status }}" = "success" ]; then
             TEXTO="✅ Corte (fluxo híbrido) terminou — já está no Drive."
           else
             TEXTO="⚠️ Corte (fluxo híbrido) falhou — confira: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

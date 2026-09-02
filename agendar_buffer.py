@@ -575,6 +575,19 @@ def main() -> None:
         # e' deste canal.
         if not e_deste_canal(v):
             return False
+        # ⚠️ QUARENTENA — clipe traduzido pela RESERVA nao se posta sozinho.
+        #
+        # Decisao do Bryan em 02/09/2026. A reserva (Nemotron) so' entra
+        # quando o Gemini se esgotou e a alternativa e' PERDER um clipe ja'
+        # cortado, transcrito e renderizado. A traducao dela foi medida e
+        # ficou boa — mas "boa na amostra" nao e' "aprovada pra publicar", e
+        # quem decide isso e' ele, olhando.
+        #
+        # ⚠️ Barrar aqui, junto com as outras recusas por conteudo, e' de
+        # proposito: se a quarentena fosse checada mais tarde, um clipe podia
+        # passar por engano em algum caminho que nao chame esta funcao.
+        if v.get("quarentena") or (v.get("traduzido_por") or "").startswith("nemotron"):
+            return False
         # ⚠️ RECUSA POR CONTEUDO, ANTES DE QUALQUER COMPARACAO DE TEXTO.
         #
         # Todas as guardas abaixo comparam TEXTO, e texto foi o que falhou em

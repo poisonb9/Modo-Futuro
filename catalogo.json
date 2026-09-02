@@ -1,0 +1,14 @@
+{
+  "_leia": "Catalogo de achados. Cada item vira um cartao na pagina https://poisonb9.github.io/times-report/achados/ — que e' o destino do 'link na bio' dos canais e do canal do Telegram. NAO e' loja: nao pede cartao de ninguem, so' leva pro anuncio no marketplace, onde pagamento, frete e reputacao ja' estao resolvidos.",
+  "_campos": {
+    "titulo": "como a pessoa reconhece o produto, curto",
+    "preco": "texto livre — 'R$ 39,90' ou 'a partir de R$ 25'",
+    "onde": "shopee | mercadolivre | aliexpress — aparece como selo no cartao",
+    "link": "o link do anuncio (com codigo de afiliado quando houver)",
+    "imagem": "URL da foto. Vazio = o cartao sai sem imagem, e nao quebra",
+    "canal": "a qual dos 5 canais este item pertence — organiza a pagina",
+    "porque": "1 frase: o que ele resolve. E' o que vende, nao a ficha tecnica"
+  },
+  "_pendente": "Bryan vai dizer quais sao os 3 primeiros itens. Ate' la' a lista fica vazia de proposito — pagina com produto inventado e' pior que pagina vazia: alguem clica, nao existe, e a confianca vai junto.",
+  "itens": []
+}

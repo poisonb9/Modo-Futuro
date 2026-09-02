@@ -84,8 +84,14 @@ def teste_negativo_clipe_normal_PASSA():
 
 def teste_a_barreira_existe_no_agendador_de_verdade():
     assert "quarentena" in AGEND, "o agendador nao conhece a quarentena"
+    # ⚠️ A FUNCAO INTEIRA, nao uma janela de N caracteres. A versao antiga
+    # cortava em 1500 chars e reprovou em 02/09 quando um comentario novo
+    # (a marca `nao_publicar`) empurrou a checagem pra fora da janela —
+    # acusando defeito onde havia so' texto a mais. Teste que depende do
+    # tamanho do comentario quebra a cada comentario.
     i_cabe = AGEND.index("def cabe(v):")
-    trecho = AGEND[i_cabe:i_cabe + 1500]
+    fim = AGEND.index("fila = [(k, v)", i_cabe)
+    trecho = AGEND[i_cabe:fim]
     assert "quarentena" in trecho, "a checagem nao esta' dentro de cabe()"
 
 

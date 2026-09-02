@@ -586,6 +586,23 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
                               f"inicio_s={c.get('inicio_s')!r} "
                               f"fim_s={c.get('fim_s')!r} ({type(e).__name__})"))
             continue
+        # ⚠️ MOMENTO FORA DO VIDEO NAO E' "CURTO DEMAIS" — e' outra causa.
+        #
+        # MEDIDO no run 33622773012 (02/09/2026), fonte de 17,0 min: o modelo
+        # devolveu dois momentos comecando em ~1409s e ~1204s, DEPOIS do fim
+        # do video (1020s). O `min(dur_total, ...)` acima prende o fim em 1020
+        # enquanto o inicio fica la' na frente, a subtracao da' NEGATIVA, e o
+        # descarte saia como "curto demais: -389.7s < DUR_MIN 65s".
+        #
+        # Duracao negativa nao existe. A rejeicao estava certa; o rotulo
+        # mandava procurar defeito no tamanho do clipe, que estava intacto.
+        # Mesma classe do detector de uma frase so': uma mensagem cobrindo
+        # duas causas esconde a que importa.
+        if float(c["inicio_s"]) >= dur_total:
+            recusados.append(("fora do video", titulo,
+                              f"inicio {float(c['inicio_s']):.1f}s >= fim do "
+                              f"video {dur_total:.1f}s — o modelo alucinou o tempo"))
+            continue
         if fim - ini < config.DUR_MIN:
             recusados.append(("curto demais", titulo,
                               f"{fim - ini:.1f}s < DUR_MIN {config.DUR_MIN}s"))

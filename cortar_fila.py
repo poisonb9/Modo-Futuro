@@ -349,6 +349,43 @@ def falhou_por_cota(run_id: int) -> bool | None:
     return any(m in texto for m in MARCAS)
 
 
+# ⚠️ Quantas respostas ruins do MODELO uma fonte aguenta antes de sair.
+# Maior que o teto de 3 das falhas comuns, e ainda assim finito: se o Gemini
+# errar sempre nesta fonte, ela precisa sair em vez de girar pra sempre.
+TETO_TENTATIVAS_MODELO = 5
+
+
+def falhou_por_selecao_vazia(run_id: int) -> bool | None:
+    """O run morreu porque o MODELO devolveu momentos imprestaveis?
+
+    ⚠️ ISSO NAO E' FONTE QUEBRADA, E O CONTADOR ESTAVA TRATANDO COMO SE FOSSE.
+
+    MEDIDO no run 33622773012 (02/09/2026): a fonte "Stop Being F cking Weak"
+    tem 17,0 min e esta' perfeita, mas o Gemini devolveu dois momentos
+    comecando DEPOIS do fim do video (~1409s e ~1204s contra 1020s de
+    duracao). Nenhum passou, e o run morreu em 12 minutos.
+
+    O teto de 3 tentativas existe pra fonte QUEBRADA — bruto corrompido, id
+    que sumiu do Drive. Essas nao melhoram tentando de novo. Resposta ruim do
+    modelo melhora: e' amostragem, e a proxima chamada costuma vir sa'.
+    Contar as duas no mesmo lugar joga fora material bom — foi exatamente o
+    que ja' aconteceu com a cota, e o remedio e' o mesmo: contar separado.
+
+    ⚠️ MAS NAO E' PERDAO INFINITO. Ver TETO_TENTATIVAS_MODELO: fonte em que o
+    modelo erra sempre precisa sair, senao queima runner pra sempre.
+    """
+    texto = _log_do_run(run_id)
+    if texto is None:
+        return None
+    # ⚠️ DUAS MARCAS, NAO UMA. A primeira e' o veredito do main.py; a segunda
+    # e' o relatorio do validador. Um detector de uma frase so' ja' me pegou
+    # tres vezes neste mesmo pipeline — a linha do main pode mudar de texto
+    # sem que a do validador mude, e vice-versa.
+    MARCAS = ("nenhum momento aprovado",
+              "e NENHUM passou")
+    return any(m in texto for m in MARCAS)
+
+
 def teto_pela_cota(motivo: str, teto_pedido: int) -> tuple[int, str]:
     """Quantos cortes deixar em voo, dado o que a sonda enxergou.
 
@@ -440,6 +477,21 @@ def devolver_os_que_falharam(d: dict) -> list[str]:
         if cota:
             voltaram.append(f"  volta pra fila: {item['nome'][:40]}"
                             f" (COTA — nao conta como tentativa)")
+            continue
+        # ⚠️ RESPOSTA RUIM DO MODELO CONTA SEPARADO — ver falhou_por_selecao_vazia.
+        # Fonte boa nao pode ser expulsa porque o Gemini alucinou o timestamp.
+        if falhou_por_selecao_vazia(item["run_id"]):
+            n = int(item.get("tentativas_modelo") or 0) + 1
+            item["tentativas_modelo"] = n
+            if n >= TETO_TENTATIVAS_MODELO:
+                item["estado"] = "desistido"
+                voltaram.append(
+                    f"  DESISTI de {item['nome'][:40]} ({n} respostas "
+                    f"imprestaveis do modelo — nao e' defeito da fonte)")
+            else:
+                voltaram.append(
+                    f"  volta pra fila: {item['nome'][:40]} (modelo devolveu "
+                    f"momento invalido, {n}/{TETO_TENTATIVAS_MODELO})")
             continue
         # ⚠️ `None` (nao deu pra ler o log) CONTA. Preferir nao contar deixaria
         # uma fonte de fato quebrada girando pra sempre, dois runs a cada meia

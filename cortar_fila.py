@@ -584,6 +584,13 @@ def main() -> None:
             "qtd": item["qtd"],
             "idioma": "en",
             "conta": "reserva",
+            # ⚠️ ONDE O BRUTO ESTA' (`conta`) NAO E' ONDE O CLIPE VAI
+            # (`conta_saida`). Ficaram colados no mesmo parametro ate'
+            # 02/09/2026: a pasta 'A POSTAR' pertence a` principal e a reserva
+            # devolve 404 nela, entao subir com credencial da reserva nunca
+            # podia dar certo — e o passo de subir vem DEPOIS do corte, ja'
+            # com 40 a 100 min de runner pagos.
+            "conta_saida": "principal",
             "dublar": "true",
             "fala_literal": "true",
             "voice_over": "true",
@@ -591,6 +598,23 @@ def main() -> None:
             "amostra_voz": item["amostra_voz"],
             "selecao_modo": item["selecao_modo"],
         }
+        # ⚠️ RECORTE: A JANELA QUE FAZ PODCAST LONGO CABER NO TETO DE 6h.
+        #
+        # O Actions mata qualquer job em 6h. Os runs #183 (Tara Swart,
+        # 124,6 min) e #186 (Goggins, 157,6 min) morreram exatos em 6h00m sem
+        # fechar NEM O PRIMEIRO CLIPE. A saida ja' existia no workflow e no
+        # main.py — so' a fila nao sabia pedir, entao fonte longa ficava
+        # eternamente fora, ocupando disco sem virar clipe.
+        #
+        # Com janela, o mesmo bruto entra varias vezes com trechos
+        # diferentes: nao duplica arquivo, nao gasta disco (que e' o que
+        # falta), e o Gemini so' olha o pedaco pedido.
+        #
+        # ⚠️ Item SEM recorte segue exatamente como antes — a chave so' entra
+        # no dispatch quando existe, pra nao mudar o comportamento de nenhuma
+        # das fontes curtas que ja' funcionam.
+        if item.get("recorte"):
+            entradas["recorte"] = item["recorte"]
         _gh(f"actions/workflows/{WF}/dispatches",
             {"ref": "main", "inputs": entradas})
         item["estado"] = "disparado"

@@ -29,6 +29,10 @@ on:
         description: "Conta do Drive onde o bruto esta (principal | reserva)"
         required: false
         default: "principal"
+      conta_saida:
+        description: "Conta do Drive que RECEBE os clipes prontos (dona de 'A POSTAR')"
+        required: false
+        default: "principal"
       dublar:
         description: "Dublar com a voz clonada do Bryan (Chatterbox)"
         required: false
@@ -253,7 +257,22 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}" --conta "${{ inputs.conta }}"
+        # ⚠️ `conta_saida`, NAO `conta`. Sao coisas diferentes e estavam
+        # coladas no mesmo parametro:
+        #
+        #   conta        onde o BRUTO esta' (hoje: reserva/cryptozpin)
+        #   conta_saida  quem e' dono da pasta 'A POSTAR' (principal)
+        #
+        # MEDIDO em 02/09/2026: 'A POSTAR' = "2 - CLIPES PRONTOS" pertence a
+        # fatoseacontecimentoscontato@gmail.com, e a conta reserva devolve
+        # 404 nela — nao enxerga a pasta. Subir clipe com a credencial da
+        # reserva nunca podia dar certo; a reserva a 99,8% so' fez o erro
+        # aparecer mais cedo, e com cara de cota em vez de cara de permissao.
+        #
+        # ⚠️ E o prejuizo era o pior possivel: este passo vem DEPOIS do corte,
+        # entao o run ja' pagou 40 a 100 min de runner e morria com o clipe
+        # pronto na mao. O run 33622779969 perdeu 79,4 min assim.
+        run: python -X utf8 subir_drive.py --pasta-id "${{ inputs.pasta_drive }}" --conta "${{ inputs.conta_saida }}"
 
       # Hospeda os clipes numa Release pra que agendador de rede social
       # consiga puxar por URL publica — nem Buffer nem Zoho aceitam upload de

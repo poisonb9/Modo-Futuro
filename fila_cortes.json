@@ -230,8 +230,9 @@
       "drive_file_id": "1b7RzucIHXulG_32dIsizBR1C_Jx3LffE",
       "nome": "The AI Safety Expert These Are The Only 5 Jo [5-25min]",
       "recorte": "300-1500",
-      "quando": "2026-09-03T21:50:11+00:00",
-      "run_id": 33810057129
+      "quando": "2026-09-03T23:41:14+00:00",
+      "tentativas": 1,
+      "run_id": 33818662728
     },
     {
       "estado": "disparado",
@@ -242,8 +243,8 @@
       "drive_file_id": "1b7RzucIHXulG_32dIsizBR1C_Jx3LffE",
       "nome": "The AI Safety Expert These Are The Only 5 Jo [32-52min]",
       "recorte": "1952-3152",
-      "quando": "2026-09-03T22:27:33+00:00",
-      "run_id": 33813136389
+      "quando": "2026-09-03T23:41:19+00:00",
+      "run_id": 33818668012
     },
     {
       "estado": "disparado",
@@ -254,8 +255,9 @@
       "drive_file_id": "1b7RzucIHXulG_32dIsizBR1C_Jx3LffE",
       "nome": "The AI Safety Expert These Are The Only 5 Jo [60-80min]",
       "recorte": "3604-4804",
-      "quando": "2026-09-03T22:27:37+00:00",
-      "run_id": 33813142293
+      "quando": "2026-09-03T23:41:23+00:00",
+      "tentativas": 1,
+      "run_id": 33818673430
     },
     {
       "estado": "pendente",

@@ -129,14 +129,15 @@
       "run_id": 33688396858
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1-8ttMZI1QgrbhKEGH-TLCKr9ITJvzh5F",
       "nome": "Glute Growth Tips That ACTUALLY Work",
-      "quando": "2026-09-03T03:19:33+00:00"
+      "quando": "2026-09-03T18:29:33+00:00",
+      "run_id": 33790815034
     },
     {
       "estado": "pronto",
@@ -150,13 +151,15 @@
       "run_id": 33710954459
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1hd_xi7_fLZlk2BpgUETPqQ5AS9q37Pvf",
-      "nome": "BUILD YOUR LEGS - Full leg workout & tips"
+      "nome": "BUILD YOUR LEGS - Full leg workout & tips",
+      "quando": "2026-09-03T18:29:38+00:00",
+      "run_id": 33790822629
     },
     {
       "estado": "pendente",

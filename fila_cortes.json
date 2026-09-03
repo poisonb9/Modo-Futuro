@@ -105,7 +105,7 @@
       "nome": "Bambi eyes makeup tutorial"
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -116,7 +116,7 @@
       "run_id": 33688389957
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -181,22 +181,26 @@
       "nome": "GET BACK ON TRACK WITH YOUR GYM ROUTINE - Glutes & hammies"
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "3",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1Wpbl5j9QCovH3Lsel5L0AJZ12aPz2NZy",
-      "nome": "This Advice From Jocko Has Saved My Life More Times Than I Can Count"
+      "nome": "This Advice From Jocko Has Saved My Life More Times Than I Can Count",
+      "quando": "2026-09-03T00:24:13+00:00",
+      "run_id": 33699357596
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "3",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1pDy4oWLrm2liHavMBsgbPnn4LWIHBFD7",
-      "nome": "Want UNBEATABLE Mental Strength Watch This 10 Minute Morning Routine"
+      "nome": "Want UNBEATABLE Mental Strength Watch This 10 Minute Morning Routine",
+      "quando": "2026-09-03T00:24:18+00:00",
+      "run_id": 33699363580
     },
     {
       "estado": "pendente",

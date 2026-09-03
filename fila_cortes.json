@@ -96,14 +96,15 @@
       "tentativas": 1
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1e9zlwb1WV7ISmHpEZd01Dr9f44kcqFTv",
       "nome": "Bambi eyes makeup tutorial",
-      "quando": "2026-09-03T03:19:29+00:00"
+      "quando": "2026-09-03T06:24:10+00:00",
+      "run_id": 33723044910
     },
     {
       "estado": "pronto",
@@ -138,7 +139,7 @@
       "quando": "2026-09-03T03:19:33+00:00"
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -207,23 +208,27 @@
       "run_id": 33699363580
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "3",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1f59shLCLfk8fQs0GkfbFjucQNY1hX2cx",
-      "nome": "Become the Mentally TOUGHEST Version of Yourself"
+      "nome": "Become the Mentally TOUGHEST Version of Yourself",
+      "quando": "2026-09-03T06:24:14+00:00",
+      "run_id": 33723050622
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1b7RzucIHXulG_32dIsizBR1C_Jx3LffE",
       "nome": "The AI Safety Expert These Are The Only 5 Jo [5-25min]",
-      "recorte": "300-1500"
+      "recorte": "300-1500",
+      "quando": "2026-09-03T06:24:18+00:00",
+      "run_id": 33723056550
     },
     {
       "estado": "pendente",

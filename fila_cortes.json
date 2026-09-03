@@ -96,15 +96,14 @@
       "tentativas": 1
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1e9zlwb1WV7ISmHpEZd01Dr9f44kcqFTv",
       "nome": "Bambi eyes makeup tutorial",
-      "quando": "2026-09-03T03:19:29+00:00",
-      "run_id": 33710946590
+      "quando": "2026-09-03T03:19:29+00:00"
     },
     {
       "estado": "pronto",
@@ -129,15 +128,14 @@
       "run_id": 33688396858
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1-8ttMZI1QgrbhKEGH-TLCKr9ITJvzh5F",
       "nome": "Glute Growth Tips That ACTUALLY Work",
-      "quando": "2026-09-03T03:19:33+00:00",
-      "run_id": 33710950531
+      "quando": "2026-09-03T03:19:33+00:00"
     },
     {
       "estado": "disparado",

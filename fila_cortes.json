@@ -96,14 +96,15 @@
       "tentativas": 1
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1e9zlwb1WV7ISmHpEZd01Dr9f44kcqFTv",
       "nome": "Bambi eyes makeup tutorial",
-      "quando": "2026-09-03T06:24:10+00:00"
+      "quando": "2026-09-03T09:14:02+00:00",
+      "run_id": 33737700803
     },
     {
       "estado": "pronto",
@@ -207,14 +208,15 @@
       "run_id": 33699363580
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "3",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1f59shLCLfk8fQs0GkfbFjucQNY1hX2cx",
       "nome": "Become the Mentally TOUGHEST Version of Yourself",
-      "quando": "2026-09-03T06:24:14+00:00"
+      "quando": "2026-09-03T09:14:07+00:00",
+      "run_id": 33737707950
     },
     {
       "estado": "pendente",

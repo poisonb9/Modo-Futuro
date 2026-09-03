@@ -575,7 +575,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_01_nota94_Por_Dentro_da_Fabrica_Mais_Secreta_de_Chips_do_Mundo_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-03T14:36:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por Dentro da Fábrica Mais Secreta de Chips do Mundo"
+        }
+      ]
     },
     "sem-hash:2026083001nota95oerrodeus1trilhaoquequasedestruiuaintel": {
       "arquivo": "2026-08-30_01_nota95_O_erro_de_US_1_trilhao_que_quase_destruiu_a_Intel_short_9x16.mp4",
@@ -693,7 +700,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_06_nota80_A_maquina_que_escuta_o_som_dentro_dos_microchips_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-03T11:23:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A máquina que escuta o som dentro dos microchips"
+        }
+      ]
     },
     "sem-hash:2026083101nota90aordemcertaparamontarseutreinodegluteos": {
       "arquivo": "2026-08-31_01_nota90_A_Ordem_Certa_Para_Montar_Seu_Treino_de_Gluteos_short_9x16.mp4",

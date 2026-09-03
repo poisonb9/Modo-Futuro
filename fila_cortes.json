@@ -96,7 +96,7 @@
       "tentativas": 1
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",

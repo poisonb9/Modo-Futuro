@@ -129,7 +129,7 @@
       "run_id": 33688396858
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -151,7 +151,7 @@
       "run_id": 33710954459
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -222,7 +222,7 @@
       "run_id": 33737707950
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -230,7 +230,8 @@
       "drive_file_id": "1b7RzucIHXulG_32dIsizBR1C_Jx3LffE",
       "nome": "The AI Safety Expert These Are The Only 5 Jo [5-25min]",
       "recorte": "300-1500",
-      "quando": "2026-09-03T06:24:18+00:00"
+      "quando": "2026-09-03T21:50:11+00:00",
+      "run_id": 33810057129
     },
     {
       "estado": "pendente",

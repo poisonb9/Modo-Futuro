@@ -47,13 +47,43 @@ jobs:
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
         run: python -X utf8 registrar_desempenho.py
 
+      # ⚠️ A REDE OFFLINE CONTRA REPOSTAR ESTAVA CONGELADA HA' 5 DIAS.
+      #
+      # `estado/publicados.json` e' a segunda camada da protecao contra
+      # duplicata: a consulta ao Buffer para em 4 paginas pra poupar
+      # orcamento, e este arquivo cobre o que ficou pra tras. Foi criado
+      # depois que essa cegueira republicou um clipe em 25/08/2026.
+      #
+      # So' que quem o escreve e' o `historico.py`, uma ferramenta MANUAL —
+      # nenhum workflow o chamava. Ultima atualizacao: 29/08 11:02. Enquanto
+      # isso o volume de posts subia, ou seja, a rede ficava mais furada
+      # exatamente quando mais precisava existir. E nada denunciava: o
+      # arquivo estava la', com 87 entradas, parecendo em dia.
+      #
+      # ⚠️ `continue-on-error`: falha aqui NAO pode derrubar a foto de
+      # desempenho, que e' o trabalho principal deste workflow.
+      - name: Atualizar registro offline de publicados
+        continue-on-error: true
+        env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+        run: python -X utf8 historico.py
+
       - name: Guardar
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if ! git diff --quiet desempenho.jsonl 2>/dev/null; then
-            git add desempenho.jsonl
-            git commit -m "desempenho: foto das views"
+          # ⚠️ OS TRES ARQUIVOS, nao so' o desempenho.jsonl. O registro
+          # offline (`publicados.json`) e a serie de views sao escritos pelo
+          # passo anterior e vivem no runner: sem commit, morrem com ele e a
+          # rede antirrepetição continuaria congelada, agora com a aparencia
+          # de estar sendo atualizada de hora em hora — que e' pior.
+          ALVOS="desempenho.jsonl estado/publicados.json estado/serie_views.jsonl"
+          if ! git diff --quiet $ALVOS 2>/dev/null; then
+            git add $ALVOS
+            git commit -m "desempenho: foto das views + registro de publicados"
             # ⚠️ O cron da fila commita no mesmo repo. Sem o rebase, duas
             # escritas na mesma hora derrubam uma das duas.
             git pull --rebase --autostash -q origin main || true

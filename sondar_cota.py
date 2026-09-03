@@ -136,6 +136,59 @@ def sondar(todas_as_chaves: bool = False) -> dict:
     return foto
 
 
+JANELA_SECA_S = 3600     # quanto tempo de zero-vivas prova esgotamento diario
+MIN_MEDICOES_SECAS = 3   # e quantas medicoes, pra nao decidir por uma so'
+
+
+def secou_de_verdade(agora: dict | None = None) -> bool:
+    """A cota do DIA acabou mesmo — ou foi so' um instante ruim?
+
+    ⚠️ ESTA FUNCAO EXISTE PORQUE EU ERREI TRES VEZES NO MESMO DIA, medido em
+    02-03/09/2026. As tres com o mesmo formato: peguei UMA foto e dei
+    veredito de dia inteiro.
+
+        16:19  0/5 vivas   -> eu disse "cota seca"
+        16:39  3/5 vivas       (20 min depois)
+
+        00:03  0/5, cinco 429 -> eu disse "esgotada, SEM AMBIGUIDADE"
+        00:23  4/5 vivas       (20 min depois)
+
+    ⚠️ NEM O 429 PROVA ESGOTAMENTO DIARIO. O Gemini tem limite por MINUTO e
+    por DIA, e devolve 429 nos dois casos. Como a sonda sorteia 5 chaves de
+    um pool de 15 a 27, cinco 429 seguidos podem ser cinco chaves cansadas
+    naquele instante — foi exatamente o que aconteceu a` 00:03.
+
+    "Espere ate' amanha" e' o conselho mais caro que este script da': joga
+    fora meio dia de producao. So' vale com o que a SERIE mostra — zero vivas
+    de forma sustentada — e a serie ja' esta' gravada em disco desde o
+    primeiro dia. Faltava usa-la.
+    """
+    if not HISTORICO.exists():
+        return False
+    linhas = [l for l in HISTORICO.read_text(encoding="utf-8").splitlines() if l.strip()]
+    fotos = [json.loads(l) for l in linhas[-12:]]
+    if agora:
+        fotos.append(agora)
+    limite = datetime.now(timezone.utc).timestamp() - JANELA_SECA_S
+
+    def _e_recente(f: dict) -> bool:
+        # ⚠️ FOTO SEM CARIMBO NAO ENTRA, E NAO QUEBRA. Uma excecao aqui
+        # derrubaria o veredito inteiro — e o veredito roda dentro do monitor,
+        # que e' quem dispara o corte. Guarda que morre por dado faltando
+        # transforma um campo ausente em pipeline parado.
+        try:
+            return datetime.fromisoformat(f["quando"]).timestamp() >= limite
+        except Exception:
+            return False
+
+    recentes = [f for f in fotos if _e_recente(f)]
+    # ⚠️ POUCAS MEDICOES NAO PROVAM NADA. Com uma ou duas na janela, o certo
+    # e' dizer que nao sabe — nao chutar pro lado caro.
+    if len(recentes) < MIN_MEDICOES_SECAS:
+        return False
+    return all(f.get("vivas", 0) == 0 for f in recentes)
+
+
 def veredito(foto: dict) -> str:
     """O que a foto MANDA fazer — nao so' o que ela viu."""
     p = foto["placar"]
@@ -149,9 +202,16 @@ def veredito(foto: dict) -> str:
     # Ele so' vale quando nao ha' NENHUMA viva e o 429 domina.
     if foto["vivas"] >= 3:
         return "DA' PRA CORTAR — varias chaves respondendo"
+    # ⚠️ SO' A SERIE AUTORIZA MANDAR ESPERAR O DIA. Uma foto de zero vivas —
+    # ainda que com cinco 429 — pode ser instante ruim: em 03/09 as 00:03 esta
+    # exata leitura foi seguida de 4/5 vivas vinte minutos depois.
     if not foto["vivas"] and p.get("limite_nosso"):
-        return ("LIMITE NOSSO (429) e nenhuma viva — so' o reset diario "
-                "resolve, 07:00 UTC / 04:00 Sao Paulo")
+        if secou_de_verdade(foto):
+            return ("LIMITE NOSSO sustentado (zero vivas ha' mais de 1h) — "
+                    "agora sim e' o dia; reset 07:00 UTC / 04:00 Sao Paulo")
+        return ("429 AGORA, mas pode ser limite por MINUTO — o Gemini usa 429 "
+                "pros dois. Sem uma hora de zero vivas na serie, nao da' pra "
+                "dizer que o dia acabou: reveja em 20-30 min")
     if foto["vivas"] >= 1:
         return ("DA' PRA TENTAR UM — mas 1 resposta boa nao sustenta um corte "
                 "de ~2h; foi assim que o run de 142 min morreu")

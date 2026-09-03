@@ -30,9 +30,42 @@ def teste_o_caso_que_estava_errado():
 
 
 def teste_positivo_limite_real_manda_esperar():
-    """Sem nenhuma viva e com 429, ai' sim o reset e' a unica saida."""
-    v = sc.veredito(_foto(limite_nosso=4, muda=1))
+    """⚠️ CONTRATO MUDADO DE PROPOSITO em 03/09/2026, e o teste antigo estava
+    codificando o comportamento ERRADO.
+
+    Ele exigia que UMA foto de zero vivas + 429 mandasse esperar o reset. A
+    realidade desmentiu tres vezes no mesmo dia — 00:03 deu 0/5 com cinco 429
+    e 00:23 deu 4/5 vivas. O Gemini devolve 429 tanto pro limite por MINUTO
+    quanto pelo dia, e a sonda sorteia 5 chaves de um pool de ate' 27.
+
+    Agora "espere ate' amanha" exige a SERIE: uma hora de zero vivas. Sem
+    isso, o veredito manda revisar em 20-30 min — que e' o que a realidade
+    fez, todas as vezes.
+    """
+    import json
+    import pathlib
+    import tempfile
+    from datetime import datetime, timedelta, timezone
+
+    agora = datetime.now(timezone.utc)
+    serie = pathlib.Path(tempfile.mkdtemp()) / "cota.jsonl"
+    serie.write_text("\n".join(
+        json.dumps({"quando": (agora - timedelta(minutes=m)).isoformat(timespec="seconds"),
+                    "vivas": 0, "sondadas": 5, "placar": {"limite_nosso": 5}})
+        for m in (55, 35, 15, 2)), encoding="utf-8")
+
+    antigo = sc.HISTORICO
+    sc.HISTORICO = serie
+    try:
+        v = sc.veredito(_foto(limite_nosso=4, muda=1))
+    finally:
+        sc.HISTORICO = antigo
     assert "LIMITE NOSSO" in v and "reset" in v.lower(), v
+
+    # ⚠️ E o NEGATIVO do mesmo caso: a mesma foto, sem serie que sustente,
+    # NAO pode mandar esperar o dia.
+    v2 = sc.veredito(_foto(limite_nosso=4, muda=1))
+    assert "por MINUTO" in v2, v2
 
 
 def teste_negativo_sobrecarga_NAO_manda_esperar_o_reset():

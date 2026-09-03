@@ -51,7 +51,16 @@ def ja_publicado(chave: str) -> bool:
     return chave in _ler_publicados()
 
 
-def puxar(token: str, teto_paginas: int = 8) -> list[dict]:
+def puxar(token: str, teto_paginas: int = 8,
+          org: str = ORG, canal: str = CANAL) -> list[dict]:
+    """Posts ja' enviados de UM canal.
+
+    ⚠️ Recebe org/canal em vez de usar so' as constantes do topo. Ate'
+    03/09/2026 este registro cobria APENAS o @modofuturo — e ele e' a rede
+    offline contra REPOSTAR, a que existe justamente porque a consulta ao
+    Buffer para em poucas paginas. Os outros quatro canais nao tinham rede
+    nenhuma, e ninguem tinha como notar: o arquivo existia e parecia certo.
+    """
     saida, cursor, paginas = [], None, 0
     while paginas < teto_paginas:
         d = ab.consultar(token, """
@@ -59,8 +68,8 @@ def puxar(token: str, teto_paginas: int = 8) -> list[dict]:
             pageInfo { hasNextPage endCursor }
             edges { node { id text sentAt metricsUpdatedAt
                            metrics { name value } } } } }""",
-          {"i": {"organizationId": ORG,
-                 "filter": {"status": ["sent"], "channelIds": [CANAL]}},
+          {"i": {"organizationId": org,
+                 "filter": {"status": ["sent"], "channelIds": [canal]}},
            "a": cursor})["posts"]
         saida += [e["node"] for e in d["edges"] if e["node"].get("sentAt")]
         paginas += 1
@@ -162,9 +171,42 @@ def main() -> None:
     if a.crescimento:
         crescimento()
         return
-    posts = puxar(ab._token_buffer())
-    novos, n = gravar(posts)
-    print(f"{n} post(s) publicado(s) lidos; {novos} entraram novos no registro.")
+    # ⚠️ TODOS OS CANAIS, nao so' o @modofuturo.
+    #
+    # Ate' 03/09/2026 esta linha era `puxar(ab._token_buffer())`, que usa o
+    # token e o canal padrao — o registro offline cobria UM canal de cinco.
+    # Os outros quatro ficavam sem rede contra repostar, e o arquivo existia
+    # e parecia certo, entao nada denunciava a falta.
+    #
+    # A cozinha fica de fora de proposito: o motor dela e' outro repositorio,
+    # com manifesto proprio (ver o cabecalho do repor_fila.py).
+    import os
+    try:
+        from conferir_postados import CANAIS
+    except Exception:
+        CANAIS = {"modofuturo": (ORG, CANAL, "BUFFER_TOKEN")}
+
+    total_lidos = total_novos = 0
+    for nome, (org, canal, env) in CANAIS.items():
+        token = (os.environ.get(env) or "").strip()
+        if not token:
+            # ⚠️ AVISA. Canal sem token nao e' canal sem posts — e' canal que
+            # nao foi olhado. Pular calado repetiria o defeito que este
+            # conserto corrige.
+            print(f"  [!] {nome}: sem {env} no ambiente — NAO conferido")
+            continue
+        try:
+            posts = puxar(token, org=org, canal=canal)
+        except Exception as e:
+            print(f"  [!] {nome}: falhou ({str(e)[:60]}) — NAO conferido")
+            continue
+        novos, n = gravar(posts)
+        total_lidos += n
+        total_novos += novos
+        print(f"  {nome:20} {n:4} post(s) lidos, {novos} novo(s) no registro")
+
+    print(f"\n{total_lidos} post(s) publicado(s) lidos; {total_novos} entraram "
+          f"novos no registro.")
     print(f"registro: {len(_ler_publicados())} textos ja' publicados (dedup offline)")
     crescimento()
 

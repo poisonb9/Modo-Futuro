@@ -96,14 +96,15 @@
       "tentativas": 1
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "truque.importado",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "procedimento",
       "drive_file_id": "1e9zlwb1WV7ISmHpEZd01Dr9f44kcqFTv",
       "nome": "Bambi eyes makeup tutorial",
-      "quando": "2026-09-03T09:14:02+00:00"
+      "quando": "2026-09-03T12:37:48+00:00",
+      "run_id": 33756304509
     },
     {
       "estado": "pronto",

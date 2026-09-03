@@ -40,6 +40,20 @@
 # Acrescentar modulo aqui e' barato. Tirar exige dizer POR QUE diverge — se a
 # razao nao couber em uma linha, provavelmente e' deriva disfarcada.
 
+# ⚠️ escopo.py E' O MAIS IMPORTANTE DESTA LISTA, e nasceu de um estrago.
+#
+# Em 03/09/2026 oito receitas foram cortadas pelo motor do Modo-Futuro e
+# publicadas com Fahrenheit, xicara e polegada — porque conversao de medida e'
+# o diferencial do motor da COZINHA e nao existe no outro. Nenhuma guarda
+# pegou: o motor aceitou o trabalho e entregou o que nao sabe fazer.
+#
+# A regra que sai disso vale pra TODO motor, e por isso ele entra no nucleo:
+# motor recusa canal que nao e' dele, e a excecao tem de ser PEDIDA.
+#
+# ⚠️ A LISTA DE CANAIS NAO E' COMPARTILHADA — cada motor declara a sua, em
+# CANAIS_DO_MOTOR ou na variavel de ambiente de mesmo nome. O que se
+# compartilha e' a RECUSA, nao o conteudo dela.
+engine/escopo.py
 engine/midia.py
 engine/numeros.py
 engine/dedup.py

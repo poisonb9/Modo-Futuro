@@ -548,6 +548,23 @@ def main():
             p.error("--recorte precisa ser INICIO-FIM em segundos, ex: 113.4-162.9")
         recorte = (ini_s, fim_s)
 
+    # ⚠️ ESTE MOTOR SO' CORTA PRO QUE ELE FOI FEITO — e a checagem vem ANTES
+    # de tudo, de proposito.
+    #
+    # Em 03/09/2026 oito receitas foram cortadas aqui e publicadas com °F,
+    # xicara e polegada, porque conversao de medida e' o diferencial do motor
+    # da COZINHA e nao existe neste. Nenhuma guarda pegou: o motor aceitou o
+    # trabalho e entregou algo que nao sabe fazer. Quem notou foi o dono
+    # olhando o proprio canal.
+    #
+    # Recusar aqui custa um run de 3 segundos. Recusar depois do corte
+    # custaria 40 a 100 minutos de runner — e recusar nunca custa alcance.
+    from engine import escopo
+    try:
+        escopo.exigir_canal_do_motor(os.environ.get("CANAL_ESPERADO"))
+    except escopo.ForaDoEscopo as e:
+        sys.exit(f"[x] RECUSADO: {e}")
+
     for b in ("ffmpeg", "ffprobe"):
         if not shutil.which(b):
             sys.exit(f"'{b}' não encontrado no PATH. Rode: .\\setup_nitro5.ps1")

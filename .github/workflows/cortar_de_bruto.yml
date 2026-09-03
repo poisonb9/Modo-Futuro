@@ -29,6 +29,10 @@ on:
         description: "Conta do Drive onde o bruto esta (principal | reserva)"
         required: false
         default: "principal"
+      permitir_fora_do_escopo:
+        description: "EXCECAO: cortar para canal que NAO e deste motor (cuidado)"
+        required: false
+        default: "false"
       conta_saida:
         description: "Conta do Drive que RECEBE os clipes prontos (dona de 'A POSTAR')"
         required: false
@@ -304,6 +308,8 @@ jobs:
           # o primeiro run do @truque.importado encheu a fila do canal de
           # maquiagem com 10 clipes de chips, em 31/08/2026.
           CANAL_ESPERADO: ${{ inputs.canal }}
+          # ⚠️ A excecao ao escopo do motor. Vazio = NAO autoriza.
+          PERMITIR_FORA_DO_ESCOPO: ${{ inputs.permitir_fora_do_escopo }}
         run: python -X utf8 publicar_release.py
 
       # Enfileira no Buffer o que couber, respeitando o teto do plano gratuito
@@ -332,6 +338,8 @@ jobs:
           # token abrir um canal diferente deste. Pega secret trocado, secret
           # vazio e canal reconectado noutra conta — nao so' o caso de hoje.
           CANAL_ESPERADO: ${{ inputs.canal }}
+          # ⚠️ A excecao ao escopo do motor. Vazio = NAO autoriza.
+          PERMITIR_FORA_DO_ESCOPO: ${{ inputs.permitir_fora_do_escopo }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -X utf8 agendar_buffer.py
 

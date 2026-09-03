@@ -368,6 +368,28 @@ def uma_passada(drive) -> int:
     # como `modofuturo`, porque e' o default do workflow. Pular e' o
     # comportamento certo: o custo e' arrastar o arquivo pra pasta do canal no
     # Drive; o custo do chute e' biscoito no canal de chips.
+    # ⚠️ E CANAL DE OUTRO MOTOR TAMBEM NAO DISPARA.
+    #
+    # A pasta DOCES mapeia pra `cozinha.internacional`, que tem motor PROPRIO
+    # (bryanaw2121-sketch/pipeline) porque converte medidas — °F, xicara,
+    # polegada. Este motor nao converte nada disso. Em 03/09/2026 oito
+    # receitas sairam daqui com Fahrenheit para publico brasileiro.
+    #
+    # O `main.py` ja' recusa, mas recusar LA' custa um run inteiro de setup.
+    # Recusar aqui custa uma linha de log.
+    from engine import escopo
+    fora = [v for v in novos
+            if escopo.fora_do_escopo(canal_da_pasta(v.get("caminho", "")))]
+    if fora:
+        print(f"[!] {len(fora)} video(s) de canal que NAO e' deste motor — "
+              f"nao disparados. Este corta: "
+              f"{', '.join(sorted(escopo.canais_do_motor()))}")
+        for v in fora:
+            print(f"      [{canal_da_pasta(v.get('caminho','')) or '?'}] "
+                  f"{v['name'][:52]}")
+    novos = [v for v in novos
+             if not escopo.fora_do_escopo(canal_da_pasta(v.get("caminho", "")))]
+
     sem_canal = [v for v in novos if not canal_da_pasta(v.get("caminho", ""))]
     novos = [v for v in novos if canal_da_pasta(v.get("caminho", ""))]
     if sem_canal:

@@ -584,7 +584,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_01_nota95_O_erro_de_US_1_trilhao_que_quase_destruiu_a_Intel_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-02T22:34:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O erro de US$ 1 trilhão que quase destruiu a Intel"
+        }
+      ]
     },
     "sem-hash:2026083002nota90aapostabilionariaquemudouofuturodainteligenciaartif": {
       "arquivo": "2026-08-30_02_nota90_A_Aposta_Bilionaria_que_Mudou_o_Futuro_da_Inteligencia_Artif_short_9x16.mp4",

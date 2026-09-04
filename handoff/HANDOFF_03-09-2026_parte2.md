@@ -197,3 +197,72 @@ do Bryan:
 e NAO vale mais.** Rode `python painel_filas.py` antes de afirmar qualquer
 coisa sobre folga de canal. @semanestesia estava com a menor folga entre os
 canais deste motor (+21h) e e' exatamente o canal que parou de produzir.
+
+---
+
+# ADENDO 2 — 04/09 18:30 UTC. FEITO O (b), E O ESTOQUE ACABOU.
+
+## O QUE EU FIZ (commit 19ed9eb, na nuvem)
+
+Opcao (b), estancar. Os 12 itens de `recorte` ainda vivos (3 disparado +
+9 pendente) foram marcados:
+
+    "estado": "desistido"                         <- terminal, o motor honra
+    "pausado_por": "groq_25mb_recorte_1200s"      <- pra opcao (a) achar
+    "pausado_em": "2026-09-04"
+
+Escolhi `desistido` porque **ja' e' terminal no codigo**: `cortar_fila.py:548`
+so' despacha `pendente`, e nada revive `desistido`. **Zero mudanca de codigo,
+logo zero risco de regressao.** Suite 49/49 (timeout 90).
+
+Conferido item a item: 35 itens antes e depois, **nenhum campo perdido**, os
+19 `run_id` preservados, `teto_em_voo` intacto. Nuvem confirma:
+
+    16 pronto · 3 pendente · 15 desistido · 1 sem_fonte
+
+Os 3 pendentes que sobraram sao de @atefalhar, sem `recorte` — caminho sao.
+
+⚠️ **Pra reviver na opcao (a):** os exatos 12 sao os que tem `pausado_por ==
+"groq_25mb_recorte_1200s"`. Os outros 3 `desistido` NAO sao meus — o motor
+desistiu deles sozinho, pelo mesmo defeito, antes de eu chegar.
+
+## ⚠️ O ACHADO MAIOR: A FABRICA ESTA' SECA
+
+Medido as 18:30 com `painel_filas.py` — e comparar com a secao 1 (20h antes)
+e' o susto:
+
+                        03/09 22:26      04/09 18:30
+    @modofuturo              8 (+45h)         5 (+25h)
+    @truque.importado        9 (+48h)         6 (+28h)
+    @atefalhar               8 (+45h)         5 (+25h)
+    @semanestesia.pod        4 (+21h)         1 (+1h)   <- acaba em 1 HORA
+    @cozinha.internacional   3 (+16h)         0 VAZIA   <- ja' acabou
+    TOTAL                   32               17
+
+**Consumiu 15 posts e repos ZERO.** E o log do `repor_fila` de hoje diz porque:
+
+    148 clipe(s) no manifesto, 0 ainda nao agendado(s)
+    0 clipe(s) enfileirado(s); 0 esperando a proxima vaga
+
+⚠️ **Nao ha' estoque.** O catalogo inteiro ja' esta' agendado. A reposicao
+diaria nao tem de onde tirar, e ela nao corta (PIPELINE secao 5). Os 16
+`pronto` da fila de cortes tambem nao sao sobra — ja' foram agendados.
+
+⚠️ E o `PIPELINE.md` esta' DESATUALIZADO na secao 5: ele diz que truque,
+atefalhar e semanestesia ficam fora da reposicao por serem estreia. **Nao
+ficam mais** — `engine/estreia.py` tem `ESTREIA_ATE` vazio desde 01/09. Nao
+e' essa a causa da fila vazia; a causa e' que nao ha' clipe.
+
+## ENTAO AS TRES SAIDAS SAO, E TODAS SAO DECISAO DO BRYAN
+
+  1. **Video novo no RAW** em `MODO FUTURO` e `Truque Importado` — era o item 4
+     dos pendentes, e agora e' A TRAVA, nao um lembrete. Sem fonte nova, esses
+     dois canais nao tem como produzir NADA.
+  2. **A opcao (a)** — partir a janela de 20 min em clipes curtos antes do
+     Groq. E' o unico caminho que reacende o @semanestesia (15 janelas presas).
+  3. **O item 1 dos pendentes** (Write no repo `pipeline`, ou aplicar o patch)
+     — e' o unico caminho pro @cozinha, que ja' esta' VAZIO. Este motor nao
+     serve aquele canal, por desenho.
+
+⚠️ Estancar NAO produziu clipe nenhum. So' parou de queimar runner. A fila de
+posts continua drenando enquanto nenhuma das tres acima acontecer.

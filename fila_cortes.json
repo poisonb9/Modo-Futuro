@@ -259,24 +259,28 @@
       "tentativas": 3
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1cisSs5Ol4upslq1YiNl93uN25d5UV6h-",
       "nome": "vidssave.com Robert Greene_ How To Seduce An [5-25min]",
-      "recorte": "300-1500"
+      "recorte": "300-1500",
+      "quando": "2026-09-04T12:06:03+00:00",
+      "run_id": 33871085870
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1cisSs5Ol4upslq1YiNl93uN25d5UV6h-",
       "nome": "vidssave.com Robert Greene_ How To Seduce An [41-61min]",
-      "recorte": "2496-3696"
+      "recorte": "2496-3696",
+      "quando": "2026-09-04T12:06:08+00:00",
+      "run_id": 33871092459
     },
     {
       "estado": "pendente",

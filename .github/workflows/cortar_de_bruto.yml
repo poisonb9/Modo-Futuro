@@ -121,6 +121,46 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Sondar cota do Gemini ANTES de baixar
+        # ⚠️ A SELECAO NAO TEM RESERVA (engine/selecao.py), a traducao tem.
+        # Sem Gemini o run morre na escolha de clipes — mas so' DEPOIS de
+        # baixar o bruto e traduzir tudo. MEDIDO no run 33803772922: baixou
+        # 0,11 GB, traduziu, e morreu 110 segundos depois. Cada run desses
+        # gasta 40-100 min de runner com desfecho ja' conhecido.
+        #
+        # ⚠️ NAO muda o que se publica. Dar reserva a` selecao mudaria QUAIS
+        # clipes vao ao ar, e isso e' decisao do Bryan.
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_KEY_4: ${{ secrets.GEMINI4 }}
+          GEMINI_API_KEY_5: ${{ secrets.GEMINI5 }}
+          GEMINI_API_KEY_6: ${{ secrets.GEMINI6 }}
+          GEMINI_API_KEY_7: ${{ secrets.GEMINI7 }}
+          GEMINI_API_KEY_8: ${{ secrets.GEMINI8 }}
+          GEMINI_API_KEY_9: ${{ secrets.GEMINI9 }}
+          GEMINI_API_KEY_10: ${{ secrets.GEMINI10 }}
+          GEMINI_API_KEY_11: ${{ secrets.GEMINI11 }}
+          GEMINI_API_KEY_12: ${{ secrets.GEMINI12 }}
+          GEMINI_API_KEY_13: ${{ secrets.GEMINI13 }}
+          GEMINI_API_KEY_14: ${{ secrets.GEMINI14 }}
+          GEMINI_API_KEY_15: ${{ secrets.GEMINI15 }}
+          GEMINI_API_KEY_16: ${{ secrets.GEMINI16 }}
+          GEMINI_API_KEY_17: ${{ secrets.GEMINI17 }}
+          GEMINI_API_KEY_18: ${{ secrets.GEMINI18 }}
+          GEMINI_API_KEY_19: ${{ secrets.GEMINI19 }}
+          GEMINI_API_KEY_20: ${{ secrets.GEMINI_API_KEY_20 }}
+          GEMINI_API_KEY_21: ${{ secrets.GEMINI21 }}
+          GEMINI_API_KEY_22: ${{ secrets.GEMINI_API_KEY_22 }}
+          GEMINI_API_KEY_23: ${{ secrets.GEMINI_API_KEY_23 }}
+          GEMINI_API_KEY_24: ${{ secrets.GEMINI_API_KEY_24 }}
+          GEMINI_API_KEY_25: ${{ secrets.GEMINI_API_KEY_25 }}
+          GEMINI_API_KEY_26: ${{ secrets.GEMINI_API_KEY_26 }}
+          GEMINI_API_KEY_27: ${{ secrets.GEMINI_API_KEY_27 }}
+        run: python -X utf8 guarda_cota.py
+
+
       # Cacheia os pesos do modelo de voz clonada (~2GB) entre runs — sem
       # isso, todo run de dublagem baixa tudo de novo do zero (medido em
       # 04/08/2026: só o download já passa de 1min, fora o resto).

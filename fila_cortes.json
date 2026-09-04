@@ -162,7 +162,7 @@
       "run_id": 33790822629
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -170,7 +170,7 @@
       "drive_file_id": "1iI1GipB8RcofW1yiOzJwWb9EUMU03lex",
       "nome": "GLUTES & AB WORKOUT - Spend the day with me",
       "quando": "2026-09-04T20:37:44+00:00",
-      "run_id": 33917170050
+      "tentativas_modelo": 1
     },
     {
       "estado": "disparado",

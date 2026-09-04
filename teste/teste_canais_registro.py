@@ -98,6 +98,37 @@ def teste_os_ids_batem_com_o_registro():
                 f"{arquivo}: {nome} tem ids diferentes do registro")
 
 
+# ------------------------------------------------- a copia acabou
+
+def teste_as_tabelas_derivam_do_registro_e_nao_sao_literais():
+    """⚠️ Era a copia que deixava as tabelas divergirem. Se alguem voltar a
+    escrever id na mao, o teste de ids continua pegando divergencia — mas
+    este pega a COPIA, que e' a causa."""
+    import pathlib
+    raiz = pathlib.Path(__file__).resolve().parent.parent
+    for arq in ("painel_filas.py", "escolher_impulsionar.py",
+                "registrar_desempenho.py", "conferir_postados.py",
+                "repor_fila.py"):
+        fonte = (raiz / arq).read_text(encoding="utf-8")
+        assert "_cr." in fonte, f"{arq} nao usa o registro"
+        assert "6a6ca3c3aba3767824bf6234" not in fonte, (
+            f"{arq} ainda tem id de canal escrito na mao")
+
+
+def teste_negativo_o_arroba_do_credenciais_resolve_pro_nome_do_buffer():
+    """⚠️ REGRESSAO MEDIDA em 04/09/2026, no proprio dia do conserto.
+
+    O `CREDENCIAIS.md` indexa pelo @ DO TIKTOK (`@cozinha.internacional`) e as
+    tabelas usam o nome NO BUFFER (`cozinha.importada`). Enquanto os dois
+    textos eram iguais, casavam por acidente; ao separar os campos, o painel
+    passou a dizer "? sem token" pra cozinha. E' o teste que prova que o
+    apelido nao e' enfeite."""
+    assert cr.canonico("cozinha.internacional") == "cozinha.importada"
+    fonte = (RAIZ / "painel_filas.py").read_text(encoding="utf-8")
+    assert "_cr.canonico(m.group(1))" in fonte, (
+        "o painel voltou a indexar token pelo @ cru")
+
+
 if __name__ == "__main__":
     n = 0
     for nome, fn in sorted(globals().items()):

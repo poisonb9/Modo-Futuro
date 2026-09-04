@@ -48,18 +48,17 @@ import re
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from engine import canais_registro as _cr
 
 CRED = r"C:/Users/Administrator/Desktop/Tiktok/CREDENCIAIS.md"
 IDADE_MIN_H = 24        # abaixo disso a metrica do Buffer ainda esta' baixa
 IDADE_MAX_H = 24 * 7    # acima disso a entrega organica ja' acabou
 
-CANAIS = {
-    "modofuturo": ("6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631", "BUFFER_TOKEN"),
-    "cozinha.internacional": ("6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15", "BUFFER_TOKEN_COZINHA"),
-    "semanestesia.pod": ("6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6", "BUFFER_TOKEN_SEMANESTESIA"),
-    "atefalhar": ("6a94a9f9ca5d8883aa924198", "6a94aaf5065799be46581e1d", "BUFFER_TOKEN_ATEFALHAR"),
-    "truque.importado": ("6a94c752e0b1602e8c5cf1ae", "6a94c8f3065799be465981f6", "BUFFER_TOKEN_TRUQUEIMPORTADO"),
-}
+# ⚠️ Vem do registro desde 04/09/2026. Esta tabela estava copiada em
+# CINCO arquivos, e foi a copia que deixou a cozinha com dois nomes.
+# Canal novo se acrescenta em engine/canais_registro.py, e SO' la'.
+CANAIS = {n: (c.org, c.canal_id, c.env)
+          for n, c in _cr.CANAIS.items()}
 Q = """query($i: PostsInput!){ posts(input:$i){ edges{ node{ text sentAt
       metrics{ name value } } } } }"""
 

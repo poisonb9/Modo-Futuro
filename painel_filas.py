@@ -30,26 +30,21 @@ import json
 import os
 import re
 import urllib.request
+from engine import canais_registro as _cr
 
 API = "https://api.buffer.com/"
 META_HORAS = 50          # alvo do Bryan, ainda NAO aplicado automaticamente
 
-CANAIS = [
-    ("@modofuturo",            "6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631", "modofuturo"),
-    ("@truque.importado",      "6a94c752e0b1602e8c5cf1ae", "6a94c8f3065799be465981f6", "truque.importado"),
-    ("@cozinha.internacional", "6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15", "cozinha.internacional"),
-    ("@semanestesia.pod",      "6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6", "semanestesia.pod"),
-    ("@atefalhar",             "6a94a9f9ca5d8883aa924198", "6a94aaf5065799be46581e1d", "atefalhar"),
-]
+# ⚠️ Vem do registro desde 04/09/2026. Esta tabela estava copiada em
+# CINCO arquivos, e foi a copia que deixou a cozinha com dois nomes.
+# Canal novo se acrescenta em engine/canais_registro.py, e SO' la'.
+CANAIS = [(c.arroba, c.org, c.canal_id, n)
+          for n, c in _cr.CANAIS.items()]
 Q = "query($i: PostsInput!){ posts(input:$i){ edges{ node{ dueAt } } } }"
 
 # O token de cada canal: variavel de ambiente na nuvem, CREDENCIAIS.md no
 # disco do Bryan. ⚠️ O arquivo NAO vive em repositorio nenhum, de proposito.
-ENV = {"modofuturo": "BUFFER_TOKEN",
-       "cozinha.internacional": "BUFFER_TOKEN_COZINHA",
-       "semanestesia.pod": "BUFFER_TOKEN_SEMANESTESIA",
-       "atefalhar": "BUFFER_TOKEN_ATEFALHAR",
-       "truque.importado": "BUFFER_TOKEN_TRUQUEIMPORTADO"}
+ENV = {n: c.env for n, c in _cr.CANAIS.items()}
 CRED = r"C:/Users/Administrator/Desktop/Tiktok/CREDENCIAIS.md"
 
 
@@ -59,8 +54,13 @@ def _tokens() -> dict:
         return t
     for l in io.open(CRED, encoding="utf-8").read().splitlines():
         m = re.match(r"\|\s*@([\w.]+)\s*\|\s*`([^`]+)`\s*\|", l)
+        # ⚠️ O CREDENCIAIS.md indexa pelo @ DO TIKTOK; esta tabela usa o nome
+        # do canal NO BUFFER. Sao campos diferentes, e ate' 04/09/2026 eles
+        # casavam por acidente porque a cozinha usava o mesmo texto nos dois.
+        # Sem o `canonico`, o painel volta a dizer "? sem token" pra ela.
         if m and len(m.group(2)) > 30:
-            t.setdefault(m.group(1), m.group(2))
+            nome = _cr.canonico(m.group(1)) or m.group(1)
+            t.setdefault(nome, m.group(2))
     return t
 
 

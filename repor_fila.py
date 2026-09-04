@@ -39,48 +39,32 @@ import sys
 import urllib.request
 from pathlib import Path
 
+from engine import canais_registro as _cr
+
 RAIZ = Path(__file__).resolve().parent
 API = "https://api.buffer.com/"
 
 # ⚠️ So' entra aqui canal que o Bryan JA' LIBEROU pro automatico. Acrescentar
 # um canal em estreia faz o primeiro video sair sozinho — exatamente o que ele
 # pediu pra nao acontecer.
-LIBERADOS = {
-    "atefalhar": {
-        "env": "BUFFER_TOKEN_ATEFALHAR",
-        "org": "6a94a9f9ca5d8883aa924198",
-        "canal": "6a94aaf5065799be46581e1d",
-        "repoe": True,
-    },
-    "truque.importado": {
-        "env": "BUFFER_TOKEN_TRUQUEIMPORTADO",
-        "org": "6a94c752e0b1602e8c5cf1ae",
-        "canal": "6a94c8f3065799be465981f6",
-        "repoe": True,
-    },
-    "semanestesia.pod": {
-        "env": "BUFFER_TOKEN_SEMANESTESIA",
-        "org": "6a937e2ccae8f6fdedefa317",
-        "canal": "6a938ce8065799be46508cc6",
-        "repoe": True,
-    },
-    "modofuturo": {
-        "env": "BUFFER_TOKEN",
-        "org": "6a6ca3c3aba3767824bf6234",
-        "canal": "6a6cd9d54b2d03035f771631",
-        "repoe": True,
-    },
-}
+# ⚠️ Vem do registro desde 04/09/2026. Esta tabela estava copiada em CINCO
+# arquivos, e foi a copia que deixou a cozinha com dois nomes. Canal novo se
+# acrescenta em engine/canais_registro.py, e SO' la'.
+#
+# ⚠️ O QUE NAO VEM DO REGISTRO E' O `repoe`, de proposito: quem repoe sozinho
+# e' decisao editorial do Bryan, nao propriedade do canal. Acrescentar canal
+# ao registro NAO o autoriza a postar sozinho — foi ele que pediu pra nenhum
+# canal em estreia sair no automatico.
+def _do(nome: str, **extra) -> dict:
+    c = _cr.CANAIS[nome]
+    return {"env": c.env, "org": c.org, "canal": c.canal_id, **extra}
+
+
+LIBERADOS = {n: _do(n, repoe=True) for n in _cr.do_motor()}
 
 # Conferidos e relatados, mas NAO repostos por este repositorio.
-SO_RELATA = {
-    "cozinha.importada": {
-        "env": "BUFFER_TOKEN_COZINHA",
-        "org": "6a90dddb9bb05f07b058e9bc",
-        "canal": "6a90de80ccaf649a672ebe15",
-        "nota": "motor no repo pipeline",
-    },
-}
+SO_RELATA = {n: _do(n, nota="motor no repo pipeline")
+             for n, c in _cr.CANAIS.items() if not c.motor}
 
 Q = ("query($i: PostsInput!){ posts(input:$i){ edges{ node{ dueAt } } } }")
 

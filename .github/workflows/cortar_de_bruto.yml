@@ -70,7 +70,11 @@ on:
         required: false
         default: ""
       recorte:
-        description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini"
+        description: "Trecho exato em segundos INICIO-FIM (ex: 1409.7-1502.4), pula seleção do Gemini. O trecho JA' E' o clipe."
+        required: false
+        default: ""
+      janela:
+        description: "LIMITA a busca a esta faixa em segundos (ex: 300-1500); o Gemini escolhe DENTRO dela. E' o que faz podcast longo caber no teto de 6h. NAO e' o mesmo que recorte."
         required: false
         default: ""
 
@@ -263,6 +267,7 @@ jobs:
           ${{ inputs.dublar == 'true' && '--dublar' || '' }}
           ${{ inputs.fala_literal == 'true' && '--fala-literal' || '' }}
           ${{ inputs.recorte != '' && format('--recorte {0}', inputs.recorte) || '' }}
+          ${{ inputs.janela != '' && format('--janela {0}', inputs.janela) || '' }}
 
       - name: Subir clipes prontos pro Drive
         env:

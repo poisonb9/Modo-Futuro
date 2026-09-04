@@ -58,6 +58,7 @@ def _legenda(c: dict) -> str:
 def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
               so_vertical: bool, traduzir: bool = True, dublar: bool = False,
               url_origem: str = "", recorte: tuple[float, float] | None = None,
+              janela: tuple[float, float] | None = None,
               estilo_legenda: int = 1, manter_temp: bool = False,
               fala_literal: bool = False) -> Path:
     t0 = time.time()
@@ -106,7 +107,63 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     audio = midia.extrair_audio(fonte, config.TRABALHO / "audio.flac")
     print(f"      {midia.mb(audio):.1f} MB")
 
-    if recorte:
+    if janela:
+        # ⚠️ JANELA NAO E' RECORTE, E CONFUNDIR OS DOIS PAROU O @semanestesia.
+        #
+        # A `janela` existe pra fazer podcast longo caber no teto de 6h do
+        # Actions: o Gemini olha SO' o pedaco pedido, e o mesmo bruto entra
+        # varias vezes com trechos diferentes. Ela diz ONDE PROCURAR.
+        #
+        # O `--recorte` diz outra coisa: "o trecho E' o clipe, nao escolha
+        # nada". Ate' 04/09/2026 a fila mandava a janela pelo `--recorte`, e
+        # o motor tratava os 20 minutos inteiros como UM clipe. O FLAC saia
+        # com 36-39 MB, o teto do Groq e' 25 MB, e NENHUM clipe sobrevivia:
+        # 12 runs seguidos, ~11 horas de runner, zero clipe. Nao era
+        # intermitente — janela de 1200s nunca ia passar.
+        #
+        # Aqui a janela volta a ser o que ela e': um ESCOPO de busca. Corta o
+        # trecho, deixa o Gemini escolher dentro dele, e devolve os tempos pra
+        # linha do tempo do bruto ORIGINAL — tudo que vem depois trabalha com
+        # `fonte` e tempo absoluto, e nao precisa saber que houve janela.
+        ini_j, fim_j = janela
+        fim_j = min(fim_j, dur)
+        if fim_j <= ini_j:
+            sys.exit(f"--janela invalida: {ini_j}-{fim_j}")
+        print(f"[3/5] janela {ini_j:.1f}s→{fim_j:.1f}s "
+              f"({(fim_j - ini_j) / 60:.1f} min) — o Gemini escolhe DENTRO dela")
+        status.etapa(nome_fonte, "gemini_selecionando")
+        trecho = render.cortar(fonte, ini_j, fim_j,
+                               config.TRABALHO / "janela.mp4")
+        alvo = trecho
+        if not usar_video:
+            alvo = midia.extrair_audio(trecho, config.TRABALHO / "janela.flac")
+        clipes = selecao.escolher(alvo, fim_j - ini_j, usar_video, qtd)
+        if not clipes:
+            print("nenhum momento aprovado na janela.")
+            if url_origem:
+                status.marcar_item(url_origem, "erro",
+                                   erro="nenhum momento aprovado na janela")
+            sys.exit(1)
+        # ⚠️ DE VOLTA PRA LINHA DO TEMPO DO BRUTO. Sem isto o congelamento, a
+        # ancoragem e o corte final leriam o segundo 120 do BRUTO quando o
+        # Gemini falou do segundo 120 DA JANELA.
+        for c in clipes:
+            c["inicio_s"] = round(float(c["inicio_s"]) + ini_j, 2)
+            c["fim_s"] = round(float(c["fim_s"]) + ini_j, 2)
+        print(f"      {len(clipes)} momentos escolhidos dentro da janela")
+        bons = []
+        for c in clipes:
+            cong = midia.congelamento_s(fonte, c["inicio_s"], c["fim_s"])
+            if cong > config.CONGELAMENTO_MAX_S:
+                print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": "
+                      f"bloco de {cong:.1f}s com imagem travada")
+                continue
+            bons.append(c)
+        clipes = bons
+        if not clipes:
+            print("todos os momentos da janela tinham camera travada.")
+            sys.exit(1)
+    elif recorte:
         # Modo manual: o usuário já sabe qual trecho quer (ex: refazer um
         # corte que performou bem). Não há seleção a fazer, e a checagem de
         # congelamento é DE PROPÓSITO pulada — a escolha é explícita dele,
@@ -204,6 +261,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
         try:
             ini, fim = c["inicio_s"], c["fim_s"]
             if not recorte:   # no modo manual o usuário mandou os tempos exatos
+                                  # (a janela NAO e' manual: ancora normalmente)
                 # ANTES do congelamento: recua o início até o começo da frase.
                 # Medido em 30/07 nos insights reais — os clipes abriam no meio da
                 # frase ("A GENTE PROVAVELMENTE...") e metade da audiência saía
@@ -533,6 +591,11 @@ def main():
                    help="corta um trecho exato em segundos (ex: 113.4-162.9) em vez de "
                         "deixar o Gemini escolher. Pula a checagem de congelamento — "
                         "use pra refazer um corte que você já sabe que funciona")
+    p.add_argument("--janela", metavar="INICIO-FIM",
+                   help="LIMITA a busca a esta faixa em segundos (ex: 300-1500) e "
+                        "deixa o Gemini escolher DENTRO dela. E' o que faz podcast "
+                        "longo caber no teto de 6h do Actions. Nao confundir com "
+                        "--recorte, que diz que o trecho JA' E' o clipe.")
     p.add_argument("--manter-temp", action="store_true")
     p.add_argument("--estilo-legenda", type=int, choices=(1, 2), default=1,
                    help="1 = padrão do canal (Inter Black, corpo fixo). "
@@ -547,6 +610,17 @@ def main():
         except ValueError:
             p.error("--recorte precisa ser INICIO-FIM em segundos, ex: 113.4-162.9")
         recorte = (ini_s, fim_s)
+
+    janela = None
+    if a.janela:
+        try:
+            ini_j, fim_j = (float(x) for x in a.janela.split("-", 1))
+        except ValueError:
+            p.error("--janela precisa ser INICIO-FIM em segundos, ex: 300-1500")
+        janela = (ini_j, fim_j)
+    if janela and recorte:
+        p.error("--janela e --recorte se excluem: uma diz ONDE PROCURAR, "
+                "o outro diz que nao ha' o que procurar")
 
     # ⚠️ ESTE MOTOR SO' CORTA PRO QUE ELE FOI FEITO — e a checagem vem ANTES
     # de tudo, de proposito.
@@ -596,7 +670,7 @@ def main():
     try:
         processar(fonte, a.qtd, not a.so_audio, a.idioma, not a.com_horizontal,
                   traduzir=not a.sem_traducao, dublar=a.dublar,
-                  url_origem=a.url or "", recorte=recorte,
+                  url_origem=a.url or "", recorte=recorte, janela=janela,
                   estilo_legenda=a.estilo_legenda, manter_temp=a.manter_temp,
                   fala_literal=a.fala_literal)
     finally:

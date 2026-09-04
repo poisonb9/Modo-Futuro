@@ -619,8 +619,15 @@ def main() -> None:
         # ⚠️ Item SEM recorte segue exatamente como antes — a chave so' entra
         # no dispatch quando existe, pra nao mudar o comportamento de nenhuma
         # das fontes curtas que ja' funcionam.
+        # ⚠️ A JANELA VAI COMO `janela`, NAO COMO `recorte` — foi essa troca
+        # que parou o @semanestesia. O campo do item continua se chamando
+        # `recorte` (esta' gravado assim em 15 itens da fila), mas o que ele
+        # SEMPRE quis dizer e' "procure so' aqui dentro", e nao "o trecho e'
+        # o clipe". Mandado como `--recorte`, o motor tratava os 20 minutos
+        # como UM clipe: FLAC de 36-39 MB contra o teto de 25 MB do Groq, 12
+        # runs seguidos mortos, ~11h de runner, zero clipe.
         if item.get("recorte"):
-            entradas["recorte"] = item["recorte"]
+            entradas["janela"] = item["recorte"]
         _gh(f"actions/workflows/{WF}/dispatches",
             {"ref": "main", "inputs": entradas})
         item["estado"] = "disparado"

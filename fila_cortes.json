@@ -162,22 +162,26 @@
       "run_id": 33790822629
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1iI1GipB8RcofW1yiOzJwWb9EUMU03lex",
-      "nome": "GLUTES & AB WORKOUT - Spend the day with me"
+      "nome": "GLUTES & AB WORKOUT - Spend the day with me",
+      "quando": "2026-09-04T20:37:44+00:00",
+      "run_id": 33917170050
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1ZWQb7frKrb4pKsuMEESXWgyGHr-Urw09",
-      "nome": "MY PLAN TO DOUBLE MY GLUTES IN 2026"
+      "nome": "MY PLAN TO DOUBLE MY GLUTES IN 2026",
+      "quando": "2026-09-04T20:37:48+00:00",
+      "run_id": 33917176410
     },
     {
       "estado": "pendente",

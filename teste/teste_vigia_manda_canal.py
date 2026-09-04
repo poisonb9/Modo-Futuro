@@ -16,6 +16,8 @@ sys.path.insert(0, str(RAIZ))
 
 import vigia_raw as V
 
+from engine import canais_registro as cr
+
 FONTE = (RAIZ / "vigia_raw.py").read_text(encoding="utf-8")
 
 
@@ -23,7 +25,18 @@ def teste_positivo_pastas_conhecidas():
     assert V.canal_da_pasta("SEM ANESTESIA/") == "semanestesia.pod"
     assert V.canal_da_pasta("MODO FUTURO/") == "modofuturo"
     assert V.canal_da_pasta("Truque Importado/") == "truque.importado"
-    assert V.canal_da_pasta("DOCES/") == "cozinha.internacional"
+    # ⚠️ CORRIGIDO, NAO AFROUXADO, em 04/09/2026. Este teste exigia
+    # `cozinha.internacional`, que e' o @ do perfil no TikTok — e nao o nome
+    # do canal NO BUFFER, que e' `cozinha.importada` e e' o que a guarda
+    # CANAL_ESPERADO compara e o que os workflows usam pra escolher o token.
+    # Com o nome do @ aqui, o `inputs.canal` nao batia no workflow, caia no
+    # `else` e o token que saia era o do MODOFUTURO. O teste fixava o defeito.
+    #
+    # O que ele afere agora e' o que importa: a pasta resolve pro canal certo,
+    # e o apelido antigo continua resolvendo pro mesmo lugar.
+    assert V.canal_da_pasta("DOCES/") == "cozinha.importada"
+    assert cr.canonico(V.canal_da_pasta("DOCES/")) == "cozinha.importada"
+    assert cr.canonico("cozinha.internacional") == "cozinha.importada"
 
 
 def teste_acento_e_caixa_nao_atrapalham():

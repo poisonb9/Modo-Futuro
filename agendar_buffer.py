@@ -44,7 +44,7 @@ from pathlib import Path
 
 import requests
 
-from engine import registro_clipes
+from engine import canais_registro, registro_clipes
 
 from engine import buffer_cota as cota, dedup, estreia
 from engine import adiados, rejeitados
@@ -532,7 +532,20 @@ def main() -> None:
     def e_deste_canal(v) -> bool:
         if not canal_deste_run:
             return True          # sem a variavel, nada muda (falha ABERTA)
-        return (v.get("canal") or "modofuturo").strip().lower() == canal_deste_run
+        # ⚠️ AUSENCIA DE CANAL E' RECUSA, NAO PALPITE.
+        #
+        # Ate' 04/09/2026 esta linha caia no canal de tecnologia como
+        # PADRAO quando o campo vinha vazio: clipe sem canal no manifesto era
+        # tratado como conteudo de chips. Foi assim que oito clipes do Goggins
+        # ficaram elegiveis pro @modofuturo, e QUATRO foram agendados.
+        #
+        # MEDIDO no dia do conserto: os 161 clipes do manifesto TEM canal,
+        # entao isto nao muda nada hoje. Muda no dia em que entrar clipe de
+        # pipeline nova com o campo faltando — que e' exatamente o que a fase
+        # 2 traz. Recusar custa um clipe nao agendado; chutar custa um video
+        # no canal errado, e publicacao nao tem desfazer bonito.
+        c = canais_registro.canonico(v.get("canal"))
+        return bool(c) and c == canal_deste_run
 
     # ⚠️ RECUSA DE CANAL EM ESTREIA, ANTES DE OLHAR CLIPE NENHUM. Nao adianta
     # filtrar clipe: o problema nao e' QUAL clipe vai, e' que NENHUM pode ir.

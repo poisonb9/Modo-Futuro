@@ -235,8 +235,11 @@ MAPA_PASTA_CANAL = {
     "modo futuro": "modofuturo",
     "truque importado": "truque.importado",
     "ate falhar": "atefalhar",
-    "doces": "cozinha.internacional",
-    "cozinha": "cozinha.internacional",
+    # ⚠️ `cozinha.importada` e' o nome NO BUFFER, que e' o que a guarda
+    # CANAL_ESPERADO compara e o que os workflows usam pra escolher o
+    # token. O `@cozinha.internacional` e' o @ do TikTok — outro campo.
+    "doces": "cozinha.importada",
+    "cozinha": "cozinha.importada",
 }
 
 

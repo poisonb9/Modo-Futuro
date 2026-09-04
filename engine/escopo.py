@@ -33,14 +33,13 @@ from __future__ import annotations
 
 import os
 
+from engine import canais_registro
+
 # ⚠️ ESTE MOTOR (Modo-Futuro) NAO SERVE A COZINHA. Nao e' esquecimento: a
 # cozinha precisa de conversao de medidas, e isso nao existe aqui.
-CANAIS_DO_MOTOR = {
-    "modofuturo",
-    "semanestesia.pod",
-    "atefalhar",
-    "truque.importado",
-}
+# ⚠️ Vem do registro desde 04/09/2026: a lista morava aqui E em outros cinco
+# arquivos, e foi a copia que deixou a cozinha com dois nomes.
+CANAIS_DO_MOTOR = canais_registro.do_motor()
 
 # Variavel que autoriza a excecao, uma vez, para aquele disparo.
 ENV_EXCECAO = "PERMITIR_FORA_DO_ESCOPO"

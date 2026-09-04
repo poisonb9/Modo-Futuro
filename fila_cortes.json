@@ -234,7 +234,7 @@
       "tentativas": 3
     },
     {
-      "estado": "disparado",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -243,8 +243,7 @@
       "nome": "The AI Safety Expert These Are The Only 5 Jo [32-52min]",
       "recorte": "1952-3152",
       "quando": "2026-09-04T12:02:05+00:00",
-      "tentativas": 2,
-      "run_id": 33870751229
+      "tentativas": 3
     },
     {
       "estado": "desistido",
@@ -267,8 +266,9 @@
       "drive_file_id": "1cisSs5Ol4upslq1YiNl93uN25d5UV6h-",
       "nome": "vidssave.com Robert Greene_ How To Seduce An [5-25min]",
       "recorte": "300-1500",
-      "quando": "2026-09-04T12:06:03+00:00",
-      "run_id": 33871085870
+      "quando": "2026-09-04T16:30:37+00:00",
+      "tentativas": 1,
+      "run_id": 33895537956
     },
     {
       "estado": "disparado",
@@ -279,18 +279,21 @@
       "drive_file_id": "1cisSs5Ol4upslq1YiNl93uN25d5UV6h-",
       "nome": "vidssave.com Robert Greene_ How To Seduce An [41-61min]",
       "recorte": "2496-3696",
-      "quando": "2026-09-04T12:06:08+00:00",
-      "run_id": 33871092459
+      "quando": "2026-09-04T16:30:41+00:00",
+      "tentativas": 1,
+      "run_id": 33895545629
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1cisSs5Ol4upslq1YiNl93uN25d5UV6h-",
       "nome": "vidssave.com Robert Greene_ How To Seduce An [78-98min]",
-      "recorte": "4692-5892"
+      "recorte": "4692-5892",
+      "quando": "2026-09-04T16:30:46+00:00",
+      "run_id": 33895553257
     },
     {
       "estado": "pendente",

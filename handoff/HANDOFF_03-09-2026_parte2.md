@@ -124,3 +124,76 @@ ZERO fonte pendente — vivem do estoque de 16 prontas. Quando acabar, param.
   - O zip do log tem `0_cortar.txt` na raiz — filtrar o namelist por "Cortar"
     (maiusculo) devolve lista vazia.
   - Suite: `timeout 90` no laco, nunca 60 (herdado, nao remedido nesta sessao).
+
+---
+
+# ADENDO — 04/09/2026 18:15 UTC. ⚠️ LEIA ISTO PRIMEIRO.
+
+A maquina ficou ~20h fora entre a secao 1 e este adendo. **Tudo acima esta'
+velho.** E o que aconteceu nessas 20h contradiz a minha propria secao 2.
+
+## O QUE EU ESCREVI ERRADO ACIMA
+
+Escrevi "as falhas sao COTA, nao codigo". **Estava errado a partir das 23:41
+de 03/09.** As falhas de ontem de tarde eram cota, sim. As de hoje sao OUTRO
+defeito, e eu so' vi porque medi de novo em vez de herdar.
+
+⚠️ A prova de que nao e' cota: **o lote das 07:00:24 UTC foi disparado NO
+RESET da cota e falhou igual.**
+
+## O DEFEITO: JANELA DE `recorte` DE 20 MIN ESTOURA O LIMITE DO GROQ
+
+Do log (run 33895553257, e identico no 33846768614):
+
+    [3/5] recorte manual 4692.0s->5892.0s (pula selecao do Gemini)
+    [4/5] clipe 1/1 -> nota 92
+          Groq transcrevendo (36.8 MB)...
+       [!] clipe 1 perdido: clip_01.flac tem 36.8 MB, acima do limite de 25 MB
+    [x] NENHUM clipe sobreviveu -> o run falha.
+
+O caminho do `recorte` **pula a selecao do Gemini** e trata a janela INTEIRA
+como um clipe so'. Toda janela tem 1200s = 20 min, o FLAC sai com 36-39 MB, e
+o teto de upload do Groq e' 25 MB. **Nunca vai passar. Nao e' intermitente.**
+
+⚠️ **Isto e' regressao do conserto de ontem** — `d485c51 "a fila aprende
+recorte"`. O recurso entrou e nenhuma janela consegue transcrever.
+
+## O ALCANCE, MEDIDO NA NUVEM (nao estimado)
+
+    itens com `recorte`: 15 — TODOS de @semanestesia.pod
+      3 desistido (ja' queimaram 3 tentativas cada) · 3 disparado · 9 pendente
+      janelas vistas: 300-1500 · 1952-3152 · 3604-4804  (todas 1200s)
+
+    itens sem `recorte`: 20 — 16 pronto · 1 sem_fonte · 3 pendente (atefalhar)
+      ⚠️ estes estao SAOS. O defeito e' so' do caminho do recorte.
+
+    fila agora: 16 pronto · 12 pendente · 3 disparado · 3 desistido · 1 sem_fonte
+
+## O PRECO JA' PAGO, E O QUE AINDA VAI QUEIMAR
+
+**12 runs seguidos falharam** desde 03/09 23:41, em lotes de 3
+(23:41 · 07:00 · 12:02 · 16:30), cada um rodando 50-60 min antes de morrer.
+Isso e' **~11 horas de runner ja' gastas, com zero clipe produzido.**
+
+⚠️ **E nao parou.** Sobram 12 itens de recorte vivos x 3 tentativas =
+ate' **36 runs** e ~33h de runner, todos com desfecho conhecido: falha.
+A cada ~4h um lote novo dispara sozinho.
+
+## O QUE EU NAO FIZ, E POR QUE
+
+Nao consertei e nao mexi na fila. As duas saidas mudam coisa que e' decisao
+do Bryan:
+
+  (a) **partir a janela** em clipes curtos antes do Groq — resolve de vez, mas
+      muda O QUE SE PUBLICA no @semanestesia (hoje a janela e' o clipe);
+  (b) **so' estancar**: marcar os 12 itens de recorte como nao-pendente ate'
+      (a) existir. Nao muda publicacao, so' para de queimar runner.
+
+⚠️ Nao dispare corte na mao pra "testar" — o lote seguinte vem sozinho.
+
+## ESTADO DOS POSTS: NAO MEDIDO NESTE ADENDO
+
+⚠️ A secao 1 diz "32 posts, nenhum canal vazio" as 03/09 22:26. **Isso tem 20h
+e NAO vale mais.** Rode `python painel_filas.py` antes de afirmar qualquer
+coisa sobre folga de canal. @semanestesia estava com a menor folga entre os
+canais deste motor (+21h) e e' exatamente o canal que parou de produzir.

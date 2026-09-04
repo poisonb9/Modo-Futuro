@@ -258,7 +258,7 @@
       "tentativas": 3
     },
     {
-      "estado": "disparado",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -268,10 +268,12 @@
       "recorte": "300-1500",
       "quando": "2026-09-04T16:30:37+00:00",
       "tentativas": 1,
-      "run_id": 33895537956
+      "run_id": 33895537956,
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "disparado",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -281,10 +283,12 @@
       "recorte": "2496-3696",
       "quando": "2026-09-04T16:30:41+00:00",
       "tentativas": 1,
-      "run_id": 33895545629
+      "run_id": 33895545629,
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "disparado",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -293,97 +297,117 @@
       "nome": "vidssave.com Robert Greene_ How To Seduce An [78-98min]",
       "recorte": "4692-5892",
       "quando": "2026-09-04T16:30:46+00:00",
-      "run_id": 33895553257
+      "run_id": 33895553257,
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1c7OgONOSksjg5SFBa7ydiPM2VkWCqL12",
       "nome": "Leading Neuroscientist_ Stress Leaks Through [5-25min]",
-      "recorte": "300-1500"
+      "recorte": "300-1500",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1c7OgONOSksjg5SFBa7ydiPM2VkWCqL12",
       "nome": "Leading Neuroscientist_ Stress Leaks Through [44-64min]",
-      "recorte": "2692-3892"
+      "recorte": "2692-3892",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1c7OgONOSksjg5SFBa7ydiPM2VkWCqL12",
       "nome": "Leading Neuroscientist_ Stress Leaks Through [84-104min]",
-      "recorte": "5084-6284"
+      "recorte": "5084-6284",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "12u5L_Er3V3lei2YRaeWty9J_efKTzadc",
       "nome": "Vitamin D Expert The Fastest Way To Dementia [5-25min]",
-      "recorte": "300-1500"
+      "recorte": "300-1500",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "12u5L_Er3V3lei2YRaeWty9J_efKTzadc",
       "nome": "Vitamin D Expert The Fastest Way To Dementia [45-65min]",
-      "recorte": "2706-3906"
+      "recorte": "2706-3906",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "12u5L_Er3V3lei2YRaeWty9J_efKTzadc",
       "nome": "Vitamin D Expert The Fastest Way To Dementia [85-105min]",
-      "recorte": "5112-6312"
+      "recorte": "5112-6312",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1JfZBazc86gtvZritomilr2KL350L183n",
       "nome": "Change Your Brain Neuroscientist Dr. Andrew  [5-25min]",
-      "recorte": "300-1500"
+      "recorte": "300-1500",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1JfZBazc86gtvZritomilr2KL350L183n",
       "nome": "Change Your Brain Neuroscientist Dr. Andrew  [47-67min]",
-      "recorte": "2854-4054"
+      "recorte": "2854-4054",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     },
     {
-      "estado": "pendente",
+      "estado": "desistido",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1JfZBazc86gtvZritomilr2KL350L183n",
       "nome": "Change Your Brain Neuroscientist Dr. Andrew  [90-110min]",
-      "recorte": "5408-6608"
+      "recorte": "5408-6608",
+      "pausado_por": "groq_25mb_recorte_1200s",
+      "pausado_em": "2026-09-04"
     }
   ]
 }

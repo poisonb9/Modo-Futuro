@@ -262,7 +262,7 @@
       "tentativas": 3
     },
     {
-      "estado": "desistido",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -273,8 +273,9 @@
       "quando": "2026-09-04T16:30:37+00:00",
       "tentativas": 1,
       "run_id": 33895537956,
-      "pausado_por": "groq_25mb_recorte_1200s",
-      "pausado_em": "2026-09-04"
+      "pausado_em": "2026-09-04",
+      "reacendido_em": "2026-09-04",
+      "reacendido_por": "conserto_janela_868c0a0"
     },
     {
       "estado": "desistido",
@@ -306,7 +307,7 @@
       "pausado_em": "2026-09-04"
     },
     {
-      "estado": "desistido",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -314,8 +315,9 @@
       "drive_file_id": "1c7OgONOSksjg5SFBa7ydiPM2VkWCqL12",
       "nome": "Leading Neuroscientist_ Stress Leaks Through [5-25min]",
       "recorte": "300-1500",
-      "pausado_por": "groq_25mb_recorte_1200s",
-      "pausado_em": "2026-09-04"
+      "pausado_em": "2026-09-04",
+      "reacendido_em": "2026-09-04",
+      "reacendido_por": "conserto_janela_868c0a0"
     },
     {
       "estado": "desistido",

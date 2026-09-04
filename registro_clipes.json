@@ -352,7 +352,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_03_nota90_O_Segredo_dos_Chips_do_Futuro_A_Inovacao_CFET_Revelada_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:08+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-04T14:27:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O Segredo dos Chips do Futuro: A Inovacao CFET Revelada"
+        }
+      ]
     },
     "sem-hash:2026082504nota78usamosamesmatecnologiadechipsdesdeosanos60": {
       "arquivo": "2026-08-25_04_nota78_Usamos_a_mesma_tecnologia_de_chips_desde_os_anos_60_short_9x16.mp4",
@@ -650,7 +657,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_04_nota85_Por_Que_Seu_Processador_Superrapido_E_Inutil_Sem_Esse_Chip_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-03T22:36:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por Que Seu Processador Superrápido É Inútil Sem Esse Chip"
+        }
+      ]
     },
     "sem-hash:2026083004nota86omacacaodeus1000paraentrarnafabricadaintel": {
       "arquivo": "2026-08-30_04_nota86_O_macacao_de_US_1.000_para_entrar_na_fabrica_da_Intel_short_9x16.mp4",

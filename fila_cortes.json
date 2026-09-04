@@ -222,7 +222,7 @@
       "run_id": 33737707950
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -231,11 +231,10 @@
       "nome": "The AI Safety Expert These Are The Only 5 Jo [5-25min]",
       "recorte": "300-1500",
       "quando": "2026-09-03T23:41:14+00:00",
-      "tentativas": 1,
-      "run_id": 33818662728
+      "tentativas": 2
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -244,10 +243,10 @@
       "nome": "The AI Safety Expert These Are The Only 5 Jo [32-52min]",
       "recorte": "1952-3152",
       "quando": "2026-09-03T23:41:19+00:00",
-      "run_id": 33818668012
+      "tentativas": 1
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -256,8 +255,7 @@
       "nome": "The AI Safety Expert These Are The Only 5 Jo [60-80min]",
       "recorte": "3604-4804",
       "quando": "2026-09-03T23:41:23+00:00",
-      "tentativas": 1,
-      "run_id": 33818673430
+      "tentativas": 2
     },
     {
       "estado": "pendente",

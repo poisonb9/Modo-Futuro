@@ -297,7 +297,7 @@
       "reacendido_por": "conserto_janela_868c0a0"
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -357,7 +357,7 @@
       "run_id": 33950871386
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -367,10 +367,12 @@
       "recorte": "300-1500",
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
-      "reacendido_por": "conserto_janela_868c0a0"
+      "reacendido_por": "conserto_janela_868c0a0",
+      "quando": "2026-09-05T11:02:51+00:00",
+      "run_id": 33962265698
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -380,10 +382,12 @@
       "recorte": "2706-3906",
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
-      "reacendido_por": "conserto_janela_868c0a0"
+      "reacendido_por": "conserto_janela_868c0a0",
+      "quando": "2026-09-05T11:02:55+00:00",
+      "run_id": 33962268973
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -393,7 +397,9 @@
       "recorte": "5112-6312",
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
-      "reacendido_por": "conserto_janela_868c0a0"
+      "reacendido_por": "conserto_janela_868c0a0",
+      "quando": "2026-09-05T11:02:59+00:00",
+      "run_id": 33962271689
     },
     {
       "estado": "pendente",

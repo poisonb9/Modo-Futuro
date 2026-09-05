@@ -297,7 +297,7 @@
       "reacendido_por": "conserto_janela_868c0a0"
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -305,8 +305,8 @@
       "drive_file_id": "1cisSs5Ol4upslq1YiNl93uN25d5UV6h-",
       "nome": "vidssave.com Robert Greene_ How To Seduce An [78-98min]",
       "recorte": "4692-5892",
-      "quando": "2026-09-04T16:30:46+00:00",
-      "run_id": 33895553257,
+      "quando": "2026-09-05T06:49:23+00:00",
+      "run_id": 33950864267,
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
       "reacendido_por": "conserto_janela_868c0a0"
@@ -327,7 +327,7 @@
       "run_id": 33930000300
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -337,10 +337,12 @@
       "recorte": "2692-3892",
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
-      "reacendido_por": "conserto_janela_868c0a0"
+      "reacendido_por": "conserto_janela_868c0a0",
+      "quando": "2026-09-05T06:49:28+00:00",
+      "run_id": 33950867897
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -350,7 +352,9 @@
       "recorte": "5084-6284",
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
-      "reacendido_por": "conserto_janela_868c0a0"
+      "reacendido_por": "conserto_janela_868c0a0",
+      "quando": "2026-09-05T06:49:33+00:00",
+      "run_id": 33950871386
     },
     {
       "estado": "pendente",

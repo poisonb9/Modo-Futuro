@@ -162,15 +162,16 @@
       "run_id": 33790822629
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
       "selecao_modo": "",
       "drive_file_id": "1iI1GipB8RcofW1yiOzJwWb9EUMU03lex",
       "nome": "GLUTES & AB WORKOUT - Spend the day with me",
-      "quando": "2026-09-04T20:37:44+00:00",
-      "tentativas_modelo": 1
+      "quando": "2026-09-05T01:23:32+00:00",
+      "tentativas_modelo": 1,
+      "run_id": 33936016860
     },
     {
       "estado": "pronto",
@@ -262,7 +263,7 @@
       "tentativas": 3
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -307,7 +308,7 @@
       "pausado_em": "2026-09-04"
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",

@@ -431,7 +431,7 @@
       "run_id": 33970304806
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",
@@ -441,7 +441,9 @@
       "recorte": "5408-6608",
       "pausado_em": "2026-09-04",
       "reacendido_em": "2026-09-04",
-      "reacendido_por": "conserto_janela_868c0a0"
+      "reacendido_por": "conserto_janela_868c0a0",
+      "quando": "2026-09-05T18:27:37+00:00",
+      "run_id": 33984125621
     }
   ]
 }

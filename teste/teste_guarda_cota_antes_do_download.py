@@ -19,6 +19,7 @@ RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
 
 WF = (RAIZ / ".github/workflows/cortar_de_bruto.yml").read_text(encoding="utf-8")
+WF_YT = (RAIZ / ".github/workflows/cortar.yml").read_text(encoding="utf-8")
 
 import cortar_fila
 import guarda_cota
@@ -86,6 +87,31 @@ def teste_negativo_cota_ok_nao_aborta():
         assert guarda_cota.main() == 1, "nao abortou SEM cota"
     finally:
         cortar_fila.tem_cota = real
+
+
+# ------------------------------------------------- o OUTRO caminho de corte
+
+def teste_o_caminho_do_youtube_tambem_tem_a_guarda():
+    """⚠️ ESTE TESTE NASCEU DE UM BURACO MEU, medido em 05/09/2026.
+
+    Eu pus a guarda so' no `cortar_de_bruto.yml` e dei o conserto por
+    fechado. O `cortar.yml` — o caminho que baixa do YouTube — ficou sem
+    ela. Dois cortes do @truque.importado baixaram o video inteiro e so'
+    morreram na traducao, por cota: exatamente o gasto que a guarda existe
+    pra evitar.
+
+    Ha' DOIS caminhos ate' o motor. Guarda que cobre um so' nao e' guarda."""
+    assert "guarda_cota.py" in WF_YT, "o cortar.yml esta' sem a guarda de cota"
+    i_guarda = WF_YT.index("guarda_cota.py")
+    assert WF_YT.index("pip install -r requirements.txt") < i_guarda
+    # e antes do download: no cortar.yml quem baixa e' o proprio main.py
+    assert i_guarda < WF_YT.index("main.py"), "a guarda esta' depois do corte"
+
+
+def teste_a_guarda_do_youtube_recebe_as_chaves():
+    i = WF_YT.index("Sondar cota do Gemini")
+    bloco = WF_YT[i:WF_YT.index("guarda_cota.py", i)]
+    assert bloco.count("GEMINI") > 10, "a guarda do cortar.yml nao recebe o rodizio"
 
 
 if __name__ == "__main__":

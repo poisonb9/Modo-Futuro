@@ -146,9 +146,23 @@ canal caiu abaixo do piso e repoe **do que ja' existe em release**.
 ⚠️ `repor_fila` NAO corta. Se nao houver clipe elegivel ele AVISA e para —
 disparar corte custa runner e e' decisao do Bryan.
 
-⚠️ **Canais em estreia ficam de fora da reposicao automatica**:
-@truque.importado, @atefalhar e @semanestesia.pod. O Bryan quer postar os DOIS
-primeiros de cada um na mao — ja' teve estreia automatica que flopou.
+⚠️ **NAO HA' MAIS CANAL EM ESTREIA** (conferido em 04/09/2026). Ate' 01/09 o
+@truque.importado, o @atefalhar e o @semanestesia.pod ficavam de fora da
+reposicao automatica, porque o Bryan quer postar os DOIS primeiros de cada
+canal na mao — ja' teve estreia automatica que flopou. O prazo dos tres
+venceu, e `engine/estreia.py` esta' com `ESTREIA_ATE` VAZIO.
+
+⚠️ O MECANISMO CONTINUA, e a fase 2 vai precisar dele: canal novo entra em
+`ESTREIA_ATE` com data ANTES do primeiro corte, e destrava sozinho. Esta
+secao ficou tres dias dizendo o contrario do codigo — se voce for decidir
+alguma coisa por ela, confira o dicionario antes.
+
+⚠️ **E o piso engana.** O `repor_fila` so' olha o manifesto quando o canal
+esta' ABAIXO do piso (5). Com a fila exatamente NO piso ele nem conta, e
+imprime "0 ainda nao agendado" — que e' o valor de quem nao olhou, nao de quem
+contou zero. Em 04/09 isso virou "a fabrica esta' seca" num handoff; o canal
+tinha 27 clipes prontos. Pra saber estoque de verdade, rode o workflow
+`medir_estoque.yml`, que nao agenda nada.
 
 ⚠️ **A cozinha nao e' deste repositorio.** O motor dela vive em
 `bryanaw2121-sketch/pipeline`, com manifesto proprio. Daqui a gente so'

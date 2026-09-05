@@ -386,7 +386,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota86_A_Solucao_Genial_da_IBM_para_Conectar_Transistores_3D_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:08+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-04T22:31:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A Solucao Genial da IBM para Conectar Transistores 3D"
+        }
+      ]
     },
     "sem-hash:2026082504nota87asgigantesocultasquerealmentedominamomercadotech": {
       "arquivo": "2026-08-25_04_nota87_As_Gigantes_Ocultas_que_Realmente_Dominam_o_Mercado_Tech_short_9x16.mp4",
@@ -449,7 +456,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_06_nota85_Por_Que_Fabricar_Seus_Proprios_Chips_Ficou_Impossivel_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-05T11:21:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por Que Fabricar Seus Próprios Chips Ficou Impossível?"
+        }
+      ]
     },
     "sem-hash:2026082507nota83ahiperespecializacaoextremanafabricacaodemicrochips": {
       "arquivo": "2026-08-25_07_nota83_A_Hiperespecializacao_Extrema_na_Fabricacao_de_Microchips_short_9x16.mp4",

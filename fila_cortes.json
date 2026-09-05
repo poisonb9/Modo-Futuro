@@ -162,7 +162,7 @@
       "run_id": 33790822629
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -185,7 +185,7 @@
       "run_id": 33917176410
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "atefalhar",
       "qtd": "3",
       "amostra_voz": "bruna",
@@ -281,7 +281,7 @@
       "reacendido_por": "conserto_janela_868c0a0"
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "2",
       "amostra_voz": "bryan",

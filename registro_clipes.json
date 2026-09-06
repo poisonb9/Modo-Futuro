@@ -472,7 +472,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_07_nota83_A_Hiperespecializacao_Extrema_na_Fabricacao_de_Microchips_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-05T19:19:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A Hiperespecialização Extrema na Fabricação de Microchips"
+        }
+      ]
     },
     "sem-hash:2026082508nota82oefeitoreversodassancoestecnologicasnachina": {
       "arquivo": "2026-08-25_08_nota82_O_Efeito_Reverso_das_Sancoes_Tecnologicas_na_China_short_9x16.mp4",
@@ -646,7 +653,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_03_nota87_O_Preco_dos_Celulares_Disparou_e_a_Culpa_E_da_IA_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:09+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-05T22:30:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O Preço dos Celulares Disparou e a Culpa É da IA"
+        }
+      ]
     },
     "sem-hash:2026083003nota88porqueomundodependedetaiwanparanaoparar": {
       "arquivo": "2026-08-30_03_nota88_Por_que_o_mundo_depende_de_Taiwan_para_nao_parar_short_9x16.mp4",
@@ -719,7 +733,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-30_05_nota83_Por_Que_Construir_Fabricas_de_Chips_nos_EUA_Custa_o_Dobro_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:10+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-06T11:13:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "Por Que Construir Fábricas de Chips nos EUA Custa o Dobro?"
+        }
+      ]
     },
     "sem-hash:2026083006nota80amaquinaqueescutaosomdentrodosmicrochips": {
       "arquivo": "2026-08-30_06_nota80_A_maquina_que_escuta_o_som_dentro_dos_microchips_short_9x16.mp4",

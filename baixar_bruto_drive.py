@@ -69,11 +69,18 @@ def baixar(file_id: str, destino: str, conta: str = "principal"):
     # Falha ABERTA: se a consulta do nome nao vier, o download segue. Perder a
     # origem incomoda; perder o corte, nao.
     try:
-        meta = servico.files().get(fileId=file_id, fields="name").execute()
+        meta = servico.files().get(fileId=file_id,
+                                   fields="name,description").execute()
         from pathlib import Path as _P
         _P(destino).with_suffix(".origem.txt").write_text(
             meta.get("name", ""), encoding="utf-8")
         print(f"  nome no Drive: {meta.get('name','')[:70]}")
+        # ⚠️ A URL EXATA, quando o upload a mandou. E' isto que fecha a
+        # dedup: nome de video muda de idioma, id do YouTube nao.
+        desc = (meta.get("description") or "").strip()
+        if desc.startswith("http"):
+            _P(destino).with_suffix(".url.txt").write_text(desc, encoding="utf-8")
+            print(f"  origem EXATA: {desc[:70]}")
     except Exception as e:
         print(f"  [aviso] nome do arquivo indisponivel ({str(e)[:50]})")
 

@@ -229,6 +229,25 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     # um link com cara de certeza seria pior que nao guardar, porque ninguem
     # confere origem depois.
     origem_achada = {}
+    # ⚠️ A URL EXATA VEM PRIMEIRO, E NAO E' PALPITE.
+    #
+    # O `enviar_bruto_drive.py --url` grava a URL na `description` do arquivo
+    # no Drive, e o `baixar_bruto_drive.py` a devolve em `fonte.url.txt`.
+    # Quando ela existe, nao ha' o que descobrir.
+    #
+    # MEDIDO em 06/09/2026: `url_origem` era None em 175 de 175 clipes do
+    # manifesto — ninguem sabia de que video cada corte veio, e por isso a
+    # unica guarda contra cortar o mesmo bruto duas vezes era o sha256, que
+    # so' age DEPOIS do runner gasto. No mesmo dia o radar do @modofuturo
+    # sugeriu de novo um video que ja' estava no RAW: o titulo la' esta' em
+    # espanhol e o do radar em ingles, e comparar nome nunca casaria os dois.
+    if not url_origem:
+        exata = fonte.with_suffix(".url.txt")
+        if exata.exists():
+            url_origem = exata.read_text(encoding="utf-8").strip()
+            origem_achada = {"url": url_origem, "confianca": "exata",
+                             "semelhanca": "1.00", "canal": ""}
+            print(f"   origem EXATA (veio do upload): {url_origem}")
     if not url_origem:
         marca = fonte.with_suffix(".origem.txt")
         if marca.exists():

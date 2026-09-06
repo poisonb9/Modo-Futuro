@@ -73,7 +73,8 @@ def _achar_ou_criar_subpasta(servico, pai_id: str, nome: str) -> str:
 
 
 def enviar(arquivo: Path, pasta_pai_id: str, apagar_local: bool = False,
-           conta: str = "principal", subpasta: str = "brutos") -> str:
+           conta: str = "principal", subpasta: str = "brutos",
+           url: str = "") -> str:
     from googleapiclient.http import MediaFileUpload
 
     servico = _servico(conta)
@@ -85,7 +86,19 @@ def enviar(arquivo: Path, pasta_pai_id: str, apagar_local: bool = False,
     # dia, senão a pasta brutos vira um monte só depois de algumas semanas.
     hoje = datetime.date.today().isoformat()
     pasta_dia = _achar_ou_criar_subpasta(servico, pasta_brutos, hoje)
+    # ⚠️ A URL EXATA VIAJA NA `description` DO ARQUIVO.
+    #
+    # Ate' 06/09/2026 o manifesto tinha `url_origem: None` em 175 de 175
+    # clipes: ninguem sabia de que video do YouTube cada corte veio. O
+    # main.py ADIVINHAVA pelo nome do arquivo (`url_origem_confianca` marca
+    # o palpite), e adivinhar nao serve pra dedup — em 06/09 o radar do
+    # @modofuturo sugeriu de novo um video que ja' estava no RAW, porque o
+    # titulo la' esta' em espanhol e aqui em ingles.
+    #
+    # ⚠️ Falha ABERTA de proposito: sem `--url` o upload segue igual.
     meta = {"name": arquivo.name, "parents": [pasta_dia]}
+    if url:
+        meta["description"] = url
     media = MediaFileUpload(str(arquivo), resumable=True)
     arq = servico.files().create(body=meta, media_body=media, fields="id").execute()
     file_id = arq["id"]
@@ -107,10 +120,14 @@ def main():
     p.add_argument("--pasta-id", required=True, help="ID da pasta pai do Drive")
     p.add_argument("--conta", default="principal",
                    help="conta do Drive a usar (principal | reserva)")
+    p.add_argument("--url", default="",
+                   help="URL de origem (YouTube); viaja ate' o manifesto e e' o "
+                        "que permite conferir duplicata depois")
     p.add_argument("--subpasta", default="brutos",
                    help="subpasta a criar dentro do destino; vazio grava direto")
     a = p.parse_args()
-    enviar(Path(a.arquivo), a.pasta_id, conta=a.conta, subpasta=a.subpasta)
+    enviar(Path(a.arquivo), a.pasta_id, conta=a.conta, subpasta=a.subpasta,
+           url=a.url)
 
 
 if __name__ == "__main__":

@@ -235,7 +235,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_01_nota95_O_Mundo_Depende_Absolutamente_Desta_Unica_Empresa_de_Chips_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:08+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-07T14:34:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O Mundo Depende Absolutamente Desta Única Empresa de Chips"
+        }
+      ]
     },
     "sem-hash:2026082501nota95osegredodoryzen9800x3drevelado": {
       "arquivo": "2026-08-25_01_nota95_O_segredo_do_Ryzen_9800X3D_revelado_short_9x16.mp4",

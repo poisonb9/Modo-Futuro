@@ -532,6 +532,16 @@ def run_recem_criado() -> int | None:
 
 
 def main() -> None:
+    # ⚠️ O FREIO VEM ANTES DE TUDO, ate' de ler a fila. Ordem do Bryan em
+    # 07/09/2026: pausar os cortes pra liberar cota de Gemini pra outro
+    # projeto. Ver engine/freio.py — o mesmo arquivo pausa o vigia daqui e
+    # este consumidor na nuvem, porque o workflow faz checkout do repo.
+    from engine import freio
+    if freio.puxado():
+        print(freio.motivo())
+        Path("relato_cortes.txt").write_text(freio.motivo(), encoding="utf-8")
+        return
+
     d = json.loads(FILA.read_text(encoding="utf-8"))
     teto = int(os.environ.get("TETO") or d.get("teto_em_voo") or 2)
 

@@ -400,6 +400,19 @@ def uma_passada(drive) -> int:
             print(f"      [{canal_da_pasta(v.get('caminho','')) or '?'}] "
                   f"{v['name'][:52]}")
 
+    # ⚠️ FREIO DE MAO. Enquanto PAUSA_CORTES existir, nenhum bruto vira
+    # corte — mas a passada CONTINUA rodando: ela le' a RAW, marca o que
+    # viu e diz o que esta' esperando. E' de proposito. Parar o vigia
+    # inteiro deixaria o Bryan sem saber o que se acumulou durante a pausa.
+    from engine import freio
+    if freio.puxado():
+        print(f"[freio] {len(novos)} bruto(s) esperando; NAO despachei.")
+        print(f"    {freio.motivo().splitlines()[0]}")
+        for v in novos[:8]:
+            print(f"      [{canal_da_pasta(v.get('caminho','')) or '?'}] "
+                  f"{v['name'][:52]}")
+        return 0
+
     # ⚠️ A COZINHA DISPARA PRIMEIRO. Ordem do Bryan em 07/09/2026.
     #
     # Os dois motores disputam a COTA DO GEMINI, nao o runner: em 07/09 os

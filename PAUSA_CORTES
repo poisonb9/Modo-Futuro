@@ -1,0 +1,12 @@
+CORTES PAUSADOS
+
+quem:    Claude, a pedido do Bryan
+quando:  2026-09-07T21:08:28+00:00
+por que: Bryan precisa da cota do Gemini para outro projeto. Retomar quando ele pedir — ele avisou que vai pedir.
+
+Enquanto este arquivo existir:
+  - o vigia NAO despacha corte de bruto novo;
+  - o cortar_fila NAO consome a fila;
+  - baixar fonte e subir bruto pro Drive CONTINUAM liberados.
+
+Pra soltar o freio: apague este arquivo e commite.

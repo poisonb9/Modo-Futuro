@@ -406,9 +406,17 @@ def uma_passada(drive) -> int:
     # inteiro deixaria o Bryan sem saber o que se acumulou durante a pausa.
     from engine import freio
     if freio.puxado():
-        print(f"[freio] {len(novos)} bruto(s) esperando; NAO despachei.")
+        # ⚠️ CONTA SO' O QUE ESTE MOTOR CORTARIA. A primeira versao contava
+        # `novos` inteiro e dizia "9 esperando" com 6 deles sendo da cozinha,
+        # que este motor nunca cortaria nem sem freio. Numero inflado vira
+        # afirmacao errada quando alguem o repetir daqui a uma semana.
+        meus = [v for v in novos
+                if not escopo.fora_do_escopo(canal_da_pasta(v.get("caminho", "")))
+                and canal_da_pasta(v.get("caminho", ""))]
+        print(f"[freio] {len(meus)} bruto(s) DESTE motor esperando; NAO "
+              f"despachei ({len(novos) - len(meus)} sao de outro motor).")
         print(f"    {freio.motivo().splitlines()[0]}")
-        for v in novos[:8]:
+        for v in meus[:8]:
             print(f"      [{canal_da_pasta(v.get('caminho','')) or '?'}] "
                   f"{v['name'][:52]}")
         return 0

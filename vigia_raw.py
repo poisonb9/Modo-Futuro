@@ -27,8 +27,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from engine import tema
+
 RAIZ = Path(__file__).resolve().parent
 REGISTRO = RAIZ / "estado" / "raw_vistos.json"
+# Brutos ja' barrados pela guarda de tema, pra nao repetir o aviso.
+#
+# ⚠️ NAO E' REGISTRO DE VISTO. O bruto barrado continua NOVO — se o Bryan
+# arrastar o arquivo pra pasta certa, o vigia tem de disparar na passada
+# seguinte. Este arquivo guarda so' "ja' avisei sobre este", pra o vigia nao
+# tocar o Telegram a cada 30 min pelo mesmo motivo.
+AVISADOS = RAIZ / "estado" / "tema_avisados.json"
 CLIENT_SECRETS = RAIZ / "client_secrets.json"
 TOKEN = RAIZ / "token_drive.json"
 
@@ -401,6 +410,59 @@ def uma_passada(drive) -> int:
               f"Mova pra uma pasta de canal: {', '.join(sorted(set(MAPA_PASTA_CANAL.values())))}")
         for p in pastas:
             print(f"      pasta sem mapeamento: {p}")
+
+    # ⚠️ SEGUNDA OPINIAO SOBRE O CANAL — o TEMA contra a PASTA.
+    #
+    # Medido em 07/09/2026: o bruto do Yampolskiy ("The AI Safety Expert...")
+    # foi posto na pasta SEM ANESTESIA, e dali pra frente TODAS as guardas
+    # obedeceram esse rotulo. Sairam 8 clipes de IA no canal de comportamento.
+    # Ate' entao a pasta era o unico ponto de verdade sobre o canal, e ninguem
+    # no caminho tinha o direito de discordar dela.
+    #
+    # ⚠️ BARRA E AVISA, NUNCA REDIRECIONA. Ordem do Bryan no mesmo dia. O
+    # palpite do detector vai pra MENSAGEM, jamais pro `canal=` do disparo:
+    # trocar o canal na marra seria o mesmo chute com outro nome.
+    #
+    # ⚠️ E' de falha ABERTA: titulo que nao pontua em canal nenhum passa. O
+    # detector nao le' coreano nem mojibake, e 12 dos 15 brutos do
+    # @truque.importado sao coreanos. Ver engine/tema.py.
+    suspeitos = []
+    for v in novos:
+        c = canal_da_pasta(v.get("caminho", ""))
+        achado = tema.conflito(v["name"], c)
+        if achado:
+            suspeitos.append((v, c, achado))
+    if suspeitos:
+        ids = {v["id"] for v, _, _ in suspeitos}
+        novos = [v for v in novos if v["id"] not in ids]
+        print(f"[!] {len(suspeitos)} bruto(s) com TEMA que contradiz a pasta "
+              f"— nao disparados:")
+        try:
+            avisados = json.loads(AVISADOS.read_text(encoding="utf-8"))
+        except Exception:
+            avisados = {}
+        for v, c, achado in suspeitos:
+            msg = tema.aviso(v["name"], c, achado)
+            print("      " + msg.replace("\n", "\n      "))
+            # ⚠️ O AVISO TEM DE SAIR DO LOG. Quem le' o log e' quem ja' foi
+            # olhar — o defeito de 04/09 ficou dias no ar porque ninguem tinha
+            # motivo pra abrir o log. Quem descobriu foi o dono, vendo o
+            # proprio canal. De novo.
+            #
+            # A chave inclui a PASTA: se o arquivo mudar de pasta e ainda
+            # assim for barrado, o aviso volta a sair.
+            if avisados.get(v["id"]) == c:
+                continue
+            try:
+                from engine import telegram
+                if telegram.configurado():
+                    telegram.enviar(msg)
+                    avisados[v["id"]] = c
+            except Exception as e:
+                print(f"      [!] aviso nao saiu no Telegram: {str(e)[:70]}")
+        AVISADOS.write_text(json.dumps(avisados, ensure_ascii=False, indent=1),
+                            encoding="utf-8")
+
     if not novos:
         return 0
 

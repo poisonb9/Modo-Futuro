@@ -399,6 +399,33 @@ def uma_passada(drive) -> int:
         for v in fora:
             print(f"      [{canal_da_pasta(v.get('caminho','')) or '?'}] "
                   f"{v['name'][:52]}")
+
+    # ⚠️ A COZINHA DISPARA PRIMEIRO. Ordem do Bryan em 07/09/2026.
+    #
+    # Os dois motores disputam a COTA DO GEMINI, nao o runner: em 07/09 os
+    # dois esgotaram na mesma janela de minutos, e a cota que virou as 07:00
+    # UTC durou 8h. A cozinha estava em ZERO post agendado; os quatro canais
+    # deste motor, entre +44h e +55h de folga.
+    #
+    # Entao quando ha' bruto dela esperando, este motor segura a vez — COM
+    # TETO, porque bruto da cozinha fica na RAW pra sempre (ele nunca e'
+    # despachado daqui) e ceder sem prazo secaria os quatro canais.
+    # Ver engine/prioridade.py: a premissa do pool compartilhado esta'
+    # documentada como NAO PROVADA, e o teto limita o custo de ela estar
+    # errada.
+    #
+    # ⚠️ FORA do `if fora:` de proposito: `ceder` tambem LIMPA o registro de
+    # quem ja' saiu da RAW, e essa limpeza tem de rodar em toda passada.
+    from engine import prioridade
+    # ⚠️ Manda o `modifiedTime` do Drive junto: o relogio do teto e' o da
+    # CHEGADA do bruto, nao o da passada que o descobriu. Ver prioridade.marcar.
+    cede, motivo = prioridade.ceder(
+        [(v["id"], v.get("modifiedTime")) for v in fora
+         if (canal_da_pasta(v.get("caminho", "")) or "").startswith("cozinha")])
+    if motivo:
+        print(f"    {motivo}")
+    if cede:
+        return 0
     novos = [v for v in novos
              if not escopo.fora_do_escopo(canal_da_pasta(v.get("caminho", "")))]
 

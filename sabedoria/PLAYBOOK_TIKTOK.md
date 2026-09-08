@@ -1328,3 +1328,120 @@ a que não usamos. **Não promover número de Kuaishou a fato de TikTok.**
 **Procedência:** primeira pergunta do roteiro do `SABEDORIA_TIKTOK.md` §7,
 formato canônico (`bfv-consensus-question-pattern.md`). Consensus,
 28/07/2026, N=50. PDF em `sabedoria/raw/`.
+
+---
+
+## 23. O primeiro confronto com dado REAL de views — `[MEDIDO 08/09/2026]`
+
+Até aqui este playbook viveu de corpus e de métrica do Buffer. Em 08/09/2026
+o Bryan exportou o TikTok Studio das 5 contas: 60 dias de série diária e os
+15 melhores posts de cada canal, com **view real**. É a primeira vez que dá
+para conferir o corpus contra a nossa própria operação.
+
+⚠️ Três coisas que este playbook e o projeto davam como certas **caíram**.
+
+### 23.1 O "colapso de agosto" nunca foi punição. Foi a gente parando.
+
+O @modofuturo caiu de 957 views/dia para 30/dia entre 03/08 e 21/08, e o
+projeto atribuiu isso a duplicata, e depois a rótulo de IA. Cruzando views
+com a contagem de posts publicados:
+
+    03/08   2 posts      81 views
+    04/08   0 posts       3
+    07/08   0 posts       8
+    ...     0 posts    1 a 6      <- QUINZE DIAS SEGUIDOS SEM POSTAR
+    21/08   0 posts       3
+    22/08   5 posts    3795       <- o dia em que voltamos a postar
+
+Não houve queda de alcance. Houve **quinze dias sem publicar**, e a cauda
+dos posts antigos se apagando, que é o comportamento esperado. O "milagre de
+22/08" é o dia em que a operação voltou.
+
+⚠️ E o "colapso de 25/08", que estava registrado como o segundo caso: naquele
+dia foram **1843 views**, entre 780 e 2189 dos vizinhos. Nunca existiu.
+
+**Consequência para a §6 e para a crença de duplicata:** a tese "duplicata
+derruba o alcance" tinha DOIS casos medidos. Um era uma pausa e o outro não
+aconteceu. Ela volta a ser hipótese razoável — evitar duplicata continua
+certo, porque republicar sem alteração é `[CONSENSO 4]` — mas **não temos
+mais nenhuma medição própria a favor dela.**
+
+⚠️ E o rótulo de IA (`isAiGenerated`) não explica nada: entrou no código em
+25/08, e a recuperação começou em 22/08. Causa não vem depois do efeito.
+
+### 23.2 Volume: o corpus diz 2-3/dia; o nosso dado não confirma o teto
+
+§7.1 registra **2-3 posts/dia** `[CONSENSO 6]`, e trata 5+/dia como risco.
+Medindo os nossos 56 dias-canal:
+
+    0 posts no dia     657 views (mediana 534)
+    1-2 posts         1005
+    3-4 posts         1104
+    5+ posts          2039
+    correlação posts x views: +0,43
+
+E olhando post a post, o desempenho **não se dilui** em dia cheio: post
+publicado em dia de 10+ rendeu 1,31x a mediana do canal, contra 1,23x nos
+dias de 5 a 9.
+
+⚠️ **Isto NÃO desmente o corpus.** A amostra são os 15 MELHORES de cada canal
+— enviesada para vencedores — e a operação hoje espalha o volume por 5
+contas, o que dá ~3/dia por conta, dentro do consenso. O que o dado permite
+dizer é mais estreito: **no volume que a gente pratica, não há sinal de
+punição por volume.** O que derrubou o canal do YouTube foram 8-10 vídeos em
+POUCAS HORAS numa conta só — isso continua proibido.
+
+### 23.3 O que o dado CONFIRMA do corpus
+
+- **§4.2 "figura de autoridade no primeiro frame"** `[CONSENSO 3]`: confirmado
+  pela metade. No @semanestesia o melhor clipe (652) abre com rosto inteiro e
+  olhos visíveis; o pior (162) abre com um torso anônimo no escuro. Mas no
+  @atefalhar o melhor (608) **não tem pessoa nenhuma** — é o exercício sendo
+  feito — e o pior (97) é justamente uma pessoa falando para a câmera.
+
+  A síntese que serve para os dois: o que ganha não é "pessoa" nem "coisa",
+  é **algo legível e específico**. Rosto com olhos é legível. Movimento
+  acontecendo é legível. Torso escuro e gesticulação genérica não são.
+
+- **§4.2 "abrir em close-up"** `[FRACO]`: os quatro frames olhados apoiam.
+
+- **§6 "corte pego de outro cortador é detectado"** `[CONSENSO 2]`: os DOIS
+  piores clipes tinham legenda de outra plataforma queimada na imagem —
+  "N THE DESCRIPTIO" cortado no rodapé, "Y KEEP / SHIFTED" atravessado.
+  Nenhum dos dois melhores tinha. ⚠️ Não dá para provar que a fonte era o
+  corte de outra pessoa: os clipes antigos não têm `fonte_id` e a fonte não
+  está no `raw_vistos`. **A cadeia de procedência está quebrada, e consertá-la
+  é o que transformaria esta suspeita em medição.**
+
+### 23.4 O achado novo, que o corpus não tem
+
+Nos 75 posts com view real, o formato do título separa mais que o assunto:
+
+    título que ENSINA ("Como", "O segredo de", "Por que", pergunta)
+        1,07x a mediana do canal   (n=31)   curtida 2,62% por view
+    título que MOSTRA a coisa, a cena ou o resultado
+        1,48x                      (n=44)   curtida 3,53% por view
+
+Duas medidas independentes no mesmo sentido, repetindo em 4 dos 5 canais.
+Número no título rendeu +27%.
+
+⚠️ Não é o mesmo que "gancho forte", que o corpus já cobre. É mais estreito:
+**prometer explicação perde para mostrar a coisa** — e o prompt pedia só
+"título chamativo", que é exatamente o que produz o formato perdedor.
+
+### 23.5 O que continua sem resposta
+
+- **Retenção por segundo.** Sabemos que a audiência sai aos 0:02 (medido
+  28/08), mas não temos a curva por vídeo. Não veio nos exports. É o dado
+  mais valioso que falta, e §4.4 inteira depende dele.
+- **Guardião Criativo** (§6): a ferramenta oficial de originalidade do TikTok
+  continua sem ter sido validada no app. Se existir, ela responde sozinha a
+  suspeita de 23.3.
+- **Quanto da tela a nossa tarja de título ocupa** nos primeiros 2s: nos
+  frames olhados, 25-30% do topo. Nunca foi testado se ajuda ou atrapalha.
+
+**Procedência:** export do TikTok Studio das 5 contas, 08/09/2026, importado
+por `importar_overview_tiktok.py` e `importar_metricas_tiktok.py`. Série em
+`estado/overview_tiktok.json`; posts em `estado/views_manuais.json`. As duas
+calibragens feitas a partir daqui estão em `estado/calibragens.jsonl`, cada
+uma com a condição que a derruba.

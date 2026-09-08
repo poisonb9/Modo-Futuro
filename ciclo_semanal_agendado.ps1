@@ -43,8 +43,19 @@ $rc = $LASTEXITCODE
 $precisou = $saida -match '([1-9]\d*) canal\(is\) precisaram'
 $abortou  = $saida -match 'abortado'
 
+# ⚠️ NADA DE CARACTERE FORA DO ASCII DENTRO DE STRING NESTE ARQUIVO.
+#
+# MEDIDO em 08/09/2026: esta linha dizia "...do piso — nada a repor", com
+# travessao. O arquivo nao tem BOM, entao o Windows PowerShell 5.1 o le' como
+# cp1252 — e os bytes UTF-8 do travessao (E2 80 94) viram tres caracteres, o
+# ultimo dos quais e' ASPA DUPLA. A string fechava no meio, o bloco perdia a
+# chave, e o arquivo INTEIRO deixava de ser parseavel.
+#
+# A tarefa teria sido registrada com sucesso e morrido na primeira execucao,
+# sem log nenhum. Em comentario o mesmo caractere e' inofensivo (comentario vai
+# ate' o fim da linha) — por isso o wrapper do vigia convive com ele ha' meses.
 if ($rc -eq 0 -and -not $precisou -and -not $abortou) {
-    Add-Content -Path $log -Value "[$carimbo] todos acima do piso — nada a repor" -Encoding utf8
+    Add-Content -Path $log -Value "[$carimbo] todos acima do piso - nada a repor" -Encoding utf8
     exit 0
 }
 
@@ -55,17 +66,24 @@ Add-Content -Path $log -Value '' -Encoding utf8
 # Avisa no Telegram quando houve trabalho ou quando travou. Passagem em que
 # nada precisou ser feito NAO avisa: aviso diario que quase sempre diz "nada"
 # deixa de ser lido, e ai' o dia em que ele diz algo tambem nao e'.
+#
+# ⚠️ A MENSAGEM VAI POR ARQUIVO, e nao por here-string nem por stdin.
+#
+# A primeira versao deste bloco usava `python -c @"..."@ <<< $txt`. O `<<<` e'
+# here-string do BASH — em PowerShell nao existe, e o arquivo inteiro deixava
+# de ser parseavel. A tarefa teria sido registrada com sucesso e morrido na
+# primeira execucao, sem nunca ter rodado o ciclo, e o unico sinal seria a
+# ausencia de log. Achado por `Parser::ParseFile` antes da primeira rodada.
 $env:PYTHONIOENCODING = 'utf-8'
 try {
-    $txt = "Ciclo semanal ($carimbo)`n`n" + $saida.TrimEnd()
-    if ($txt.Length -gt 3500) { $txt = $txt.Substring(0, 3500) + "`n[...]" }
-    & $python -X utf8 -c @"
-import sys
-sys.path.insert(0, r'$raiz')
-from engine import telegram
-if telegram.configurado():
-    telegram.enviar(sys.stdin.read())
-"@ <<< $txt | Out-Null
+    $txt = "Ciclo semanal ($carimbo)" + [Environment]::NewLine + [Environment]::NewLine + $saida.TrimEnd()
+    if ($txt.Length -gt 3500) { $txt = $txt.Substring(0, 3500) + [Environment]::NewLine + '[...]' }
+    $msg = Join-Path $env:TEMP 'ciclo_semanal_aviso.txt'
+    Set-Content -Path $msg -Value $txt -Encoding utf8
+    $codigo = 'import io,sys; sys.path.insert(0, sys.argv[1]); from engine import telegram; ' +
+              'telegram.enviar(io.open(sys.argv[2], encoding="utf-8").read()) if telegram.configurado() else None'
+    & $python -X utf8 -c $codigo $raiz $msg | Out-Null
+    Remove-Item $msg -ErrorAction SilentlyContinue
 } catch {
     Add-Content -Path $log -Value "[$carimbo] [!] aviso nao saiu no Telegram: $_" -Encoding utf8
 }

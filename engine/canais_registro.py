@@ -59,9 +59,23 @@ CANAIS: dict[str, Canal] = {
         Canal("modofuturo", "@modofuturo",
               "6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631",
               "BUFFER_TOKEN"),
-        Canal("truque.importado", "@truque.importado",
+        # ⚠️ O @ MUDOU EM 08/09/2026: era `@truque.importado`, virou
+        # `@achadinho.make` (renomeado pelo Bryan, confirmado por ele).
+        #
+        # O `nome_buffer` NAO muda junto, e isso e' de proposito: ele e' o
+        # nome do canal DENTRO do Buffer, com o qual a guarda CANAL_ESPERADO
+        # compara e pelo qual os workflows escolhem o token. Trocar os dois
+        # ao mesmo tempo quebraria a publicacao inteira desse canal.
+        #
+        # Foi lendo os LINKS do export do TikTok que isso apareceu: os videos
+        # de maquiagem apontavam para tiktok.com/@achadinho.make. O nome do
+        # arquivo de export segue o @ atual, entao ele chega como
+        # `Content_achadinho.make.zip` — quem importar sem saber disso vai
+        # achar que e' um sexto canal, e que o truque sumiu.
+        Canal("truque.importado", "@achadinho.make",
               "6a94c752e0b1602e8c5cf1ae", "6a94c8f3065799be465981f6",
-              "BUFFER_TOKEN_TRUQUEIMPORTADO"),
+              "BUFFER_TOKEN_TRUQUEIMPORTADO",
+              apelidos=("truque.importado", "achadinho.make")),
         Canal("semanestesia.pod", "@semanestesia.pod",
               "6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6",
               "BUFFER_TOKEN_SEMANESTESIA"),

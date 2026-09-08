@@ -38,6 +38,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      # ⚠️ ACRESCENTADO EM 08/09/2026. Este workflow NUNCA instalou as
+      # dependencias: o `registrar_desempenho.py` so' usa a biblioteca padrao
+      # e passava, mas o `historico.py` importa `agendar_buffer`, que importa
+      # `requests` — e morria com ModuleNotFoundError em TODO run.
+      #
+      # Sozinho isso seria inofensivo (o passo dele e' continue-on-error). O
+      # estrago vinha do efeito colateral: ver o passo "Guardar".
+      - run: pip install -r requirements.txt
+
       - name: Fotografar
         env:
           BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
@@ -80,7 +89,31 @@ jobs:
           # passo anterior e vivem no runner: sem commit, morrem com ele e a
           # rede antirrepetição continuaria congelada, agora com a aparencia
           # de estar sendo atualizada de hora em hora — que e' pior.
-          ALVOS="desempenho.jsonl estado/publicados.json estado/serie_views.jsonl"
+          # ⚠️ SO' O QUE EXISTE ENTRA NO `git add`. MEDIDO em 08/09/2026, e
+          # este era o defeito que congelou a medicao do projeto por 5 DIAS.
+          #
+          # A cadeia: o `historico.py` morria por falta de `requests` (nao
+          # havia pip install neste workflow), entao `estado/publicados.json`
+          # NAO era criado; o `git add` recebia um caminho inexistente e
+          # abortava com "pathspec did not match any files", exit 128; e o
+          # `commit` e o `push` que vinham depois NUNCA rodavam.
+          #
+          # Resultado: a foto das views era tirada com sucesso a cada hora — o
+          # log dizia "+10 leituras em desempenho.jsonl" — e era JOGADA FORA
+          # junto com o runner. O `desempenho.jsonl` ficou parado em 03/09
+          # enquanto o workflow rodava de hora em hora parecendo funcionar.
+          #
+          # ⚠️ Um arquivo que falta nao pode levar embora os outros dois. Este
+          # e' o mesmo padrao que segurou a cozinha em zero por seis dias:
+          # um passo acessorio derrubando o que era produto.
+          ALVOS=""
+          for f in desempenho.jsonl estado/publicados.json estado/serie_views.jsonl; do
+            [ -e "$f" ] && ALVOS="$ALVOS $f"
+          done
+          if [ -z "$ALVOS" ]; then
+            echo "[!] nenhum dos arquivos de medicao existe — nada a guardar"
+            exit 0
+          fi
           if ! git diff --quiet $ALVOS 2>/dev/null; then
             git add $ALVOS
             git commit -m "desempenho: foto das views + registro de publicados"

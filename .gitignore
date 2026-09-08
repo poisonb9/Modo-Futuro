@@ -15,6 +15,27 @@ estado/*
 # a troca de máquina (já aconteceu uma vez com este projeto), então vai pro
 # git em vez de ficar só local como o resto de estado/
 !estado/videos_trabalhados.json
+# ⚠️ EXCECAO 1B, ACRESCENTADA EM 08/09/2026, E ELA CUSTOU UM POST DUPLICADO.
+#
+# `publicados.json` e' a rede antiduplicata: o historico COMPLETO do que ja'
+# foi ao ar, em disco. O `agendar_buffer` soma esse registro ao que o Buffer
+# devolve, porque a consulta ao Buffer para em MAX_PAGINAS=4 e e' CEGA pro
+# que e' antigo.
+#
+# So' que `estado/*` o mantinha fora do git. Entao ele existia AQUI e nunca
+# na NUVEM — e e' a nuvem que decide o que agendar. Todo run do Actions
+# imprimia "registro offline indisponivel; dedup usando so' o que o Buffer
+# devolveu" e ninguem lia essa linha.
+#
+# MEDIDO em 08/09/2026: "Como a ASML construiu o monopolio mais valioso da
+# Terra" foi publicado de novo, com o original ja' no ar com 565 views. O
+# `publicados.json` LOCAL tinha a chave
+# `comoaasmlconstruiuomonopoliomaisvaliosodaterra` desde 29/08 — a protecao
+# existia e simplesmente nao viajava ate' onde a decisao era tomada.
+#
+# ⚠️ Duplicata e' a causa MEDIDA dos dois colapsos de alcance do projeto
+# (02/08 e 25/08). Este arquivo tem de estar no git.
+!estado/publicados.json
 # excecao 2: decisoes editoriais do Bryan ("nao quero esse video"). Sem isto
 # o runner do Actions nasce com a lista VAZIA e reagenda o que ele apagou —
 # foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,

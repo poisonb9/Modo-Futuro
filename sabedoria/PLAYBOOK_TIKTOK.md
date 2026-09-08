@@ -280,11 +280,43 @@ O caminho que resta é o único que o corpus também endossa: **editar de
 verdade**. É a §5.
 
 ### Ferramenta oficial que devemos usar
-**Guardião Criativo** — IA do próprio TikTok que pré-verifica diretrizes e
-originalidade antes de publicar, **2 checagens grátis por dia** `[FRACO]`.
-Se existir mesmo, é o oráculo definitivo: para de ser adivinhação.
-**Ação: validar no app e, existindo, virar passo obrigatório do checklist
-para todo clipe novo de fonte nova.**
+
+⚠️ **CORRIGIDO EM 08/09/2026. "Guardião Criativo" NÃO EXISTE com esse nome.**
+Era `[FRACO]` e não sobreviveu à verificação — nem em português nem em
+inglês. O corpus de gurus inventou ou traduziu errado. Fica como lembrete de
+por que `[FRACO]` não vira ação sem conferir.
+
+**O que existe de verdade, e é melhor, são DUAS ferramentas oficiais, as duas
+dentro do TikTok Studio:**
+
+| ferramenta | o que faz | onde |
+|---|---|---|
+| **Content Check Lite** | pré-verifica, ANTES de postar, se o vídeo tende a ficar inelegível para a Para Você | TikTok Studio **no desktop** |
+| **Account Check** | mostra violações, restrições e avisos ativos que estejam limitando o alcance da conta | app → Perfil → TikTok Studio → **More Tools** → Account Check |
+
+⚠️ **E A POLÍTICA OFICIAL DE ORIGINALIDADE DO TIKTOK LISTA, COM TODAS AS
+LETRAS, O DEFEITO QUE ACHAMOS NOS NOSSOS DOIS PIORES CLIPES.** São três
+categorias de conteúdo não-original:
+
+  1. conteúdo largamente reaproveitado de outra fonte **sem edição criativa**;
+  2. conteúdo combinado de várias fontes com pouco ou nenhum valor adicional;
+  3. **conteúdo com marca d'água ou logo sobreposto de OUTRA PESSOA visível.**
+
+O item 3 é exatamente "N THE DESCRIPTIO" e "Y KEEP / SHIFTED" queimados nos
+clipes de 97 e 162 views (§23.3). E a consequência declarada pelo TikTok é
+**remoção da Para Você** — que é de onde vêm 98,7% do nosso tráfego.
+
+Isto deixa de ser suspeita estética e passa a ser política publicada da
+plataforma, batendo com a nossa própria medição.
+
+**Ação, nesta ordem:**
+1. rodar o **Account Check** nas 5 contas — responde de graça se alguma já
+   está restrita, e é o que a §23.3 não conseguiu provar por falta de
+   procedência;
+2. ligar o **Content Check Lite** no Studio do desktop antes de publicar
+   clipe de fonte nova;
+3. no motor, nunca abrir num frame com legenda ou marca alheia — já
+   implementado em 08/09 (`abertura_mostra` em `engine/selecao.py`).
 
 ---
 

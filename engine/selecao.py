@@ -258,7 +258,41 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
      // ⚠️ Prefira BLOCOS: se a mesma pessoa fala tres frases seguidas, e' UM
      // item, nao tres. Trecho menor que 3 segundos so' se for uma
      // intervencao mesmo (uma pergunta curta no meio da resposta).
-  "titulo": "<título chamativo em pt-BR, max 80 chars, sem hashtag>",
+  // ⚠️ TITULO: MOSTRE A COISA, NAO ENSINE A FAZER. MEDIDO em 08/09/2026,
+  // nos 75 melhores posts das 5 contas, com view REAL do TikTok Studio.
+  //
+  // Titulo que ENSINA — comeca com "Como", "O segredo de", "Por que", ou e'
+  // uma pergunta — rendeu 1,07x a mediana do canal.
+  // Titulo que MOSTRA uma coisa concreta rendeu 1,48x. Diferenca de +37%.
+  //
+  // E o engajamento andou junto: 3,53% de curtida por view contra 2,62%.
+  // Sao duas medidas independentes apontando pro mesmo lado — por isso vale
+  // mudar o prompt, e nao so' anotar a curiosidade.
+  //
+  // O padrao se repetiu em QUATRO dos cinco canais, com assuntos que nao tem
+  // nada a ver entre si:
+  //     cozinha        "Torrada com ovo cremoso de 7 minutos" (553)
+  //                    ganha de "Como fazer a massa de croissant" (175)
+  //     modofuturo     "As regras extremas da fabrica mais limpa" (2473)
+  //                    ganha de "Por que fabricar chips ficou impossivel" (556)
+  //     atefalhar      "Os 3 melhores exercicios para gluteos" (608)
+  //                    ganha de "O segredo da ordem dos exercicios" (141)
+  //     semanestesia   "Pare de se fazer de vitima" (652)
+  //                    ganha de "Perdido e sem rumo?" (175)
+  //
+  // ⚠️ NUMERO NO TITULO rendeu +27% (1,55x contra 1,22x). Numero concreto,
+  // do proprio trecho — nao invente.
+  //
+  // ⚠️ E NAO E' PROIBIDO comecar com "Como": "Como 1 poeira pode destruir 1
+  // milhao de dolares" foi o segundo maior de todos. O que perde nao e' a
+  // palavra, e' o titulo virar AULA em vez de mostrar a coisa. A pergunta a
+  // se fazer e': isto anuncia um FATO, uma CENA ou um RESULTADO? Ou promete
+  // uma explicacao?
+  //
+  // ⚠️ RESSALVA DE TAMANHO DE AMOSTRA: sao 75 posts, e alguns recortes tem
+  // menos de 10. A direcao e' consistente; a magnitude nao e' precisa. Se o
+  // export do mes que vem nao confirmar, este bloco e' o primeiro a revisar.
+  "titulo": "<pt-BR, max 80 chars, sem hashtag. MOSTRE a coisa, a cena ou o resultado concreto do trecho — de preferencia com um numero que ja' esteja na fala. NAO prometa explicacao: evite abrir com 'Como', 'Por que', 'O segredo de' ou pergunta, a menos que a frase seguinte entregue um fato concreto e verificavel do proprio trecho>",
   "descricao": "<2-3 frases em pt-BR para a descrição do YouTube>",
   "tags": ["<5 a 8 tags em pt-BR, sem #>"],
   "tipo_conteudo": "<uma das opções acima>",

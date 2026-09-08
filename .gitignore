@@ -52,6 +52,11 @@ estado/*
 # a UNICA copia que existe. Perder isto e' perder a memoria de desempenho do
 # projeto inteiro, e nao ha' de onde reconstruir.
 !estado/overview_tiktok.json
+# ⚠️ EXCECAO 1F: o diario de calibragens. Cada linha e uma mudanca feita por
+# causa de um numero, com o numero de ANTES e a condicao que a derruba. Sem
+# isto, daqui a um mes ninguem sabe quais posts sao anteriores a mudanca — e
+# a calibragem vira fe em vez de medicao.
+!estado/calibragens.jsonl
 # excecao 2: decisoes editoriais do Bryan ("nao quero esse video"). Sem isto
 # o runner do Actions nasce com a lista VAZIA e reagenda o que ele apagou —
 # foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,

@@ -115,6 +115,49 @@ def _da_curtida(canal: str):
     return postos, ""
 
 
+def _juntar_repetidos(postos: list[dict]) -> list[dict]:
+    """Um post so' entra uma vez, mesmo tendo entrado por duas fontes.
+
+    ⚠️ MEDIDO em 08/09/2026, e o efeito era o pior possivel: os "2 melhores"
+    do @modofuturo vieram
+
+        2473  As regras extremas para entrar na fabrica mais limpa
+        2473  As regras extremas para entrar na fabrica mais limpa
+
+    O MESMO post, duas vezes. Ele tinha entrado pela print (titulo curto, em
+    caixa alta) e pelo export do Studio (titulo + descricao colados). Sao
+    textos diferentes, entao o registro os tratou como dois posts.
+
+    Consequencia: o ciclo enviesaria a busca com UM sinal achando que tinha
+    dois — e o segundo melhor de verdade nunca seria considerado. Um ranking
+    que repete o primeiro colocado nao e' um ranking de dois.
+
+    A regra e' a mesma da dedup de publicacao: uma chave e' a outra quando
+    uma e' PREFIXO da outra. O titulo da print e' prefixo do titulo do
+    export, porque o export cola a descricao no fim.
+    """
+    vistos: list[dict] = []
+    for p in sorted(postos, key=lambda x: -int(x.get("views", 0) or 0)):
+        chave = _norm(p.get("titulo", ""))
+        if not chave:
+            continue
+        for v in vistos:
+            k = _norm(v["titulo"])
+            # piso de 20 pra "bolo" nao virar prefixo de meio canal
+            if len(chave) >= 20 and len(k) >= 20 and (
+                    chave.startswith(k) or k.startswith(chave)):
+                # fica o MAIOR numero e o titulo MAIS CURTO — o curto e' o
+                # titulo de verdade; o longo tem a descricao grudada.
+                v["views"] = max(int(v.get("views", 0) or 0),
+                                 int(p.get("views", 0) or 0))
+                if len(p.get("titulo", "")) < len(v["titulo"]):
+                    v["titulo"] = p["titulo"]
+                break
+        else:
+            vistos.append(dict(p))
+    return sorted(vistos, key=lambda x: -int(x.get("views", 0) or 0))
+
+
 def melhores(canal: str, n: int = 2):
     """Devolve (postos, fonte, aviso). `fonte` e' 'view_real' ou 'curtida'.
 
@@ -122,10 +165,10 @@ def melhores(canal: str, n: int = 2):
     """
     postos, por_que = _do_manual(canal)
     if postos:
-        return postos[:n], "view_real", ""
+        return _juntar_repetidos(postos)[:n], "view_real", ""
     postos, por_que2 = _da_curtida(canal)
     if postos:
-        return postos[:n], "curtida", (
+        return _juntar_repetidos(postos)[:n], "curtida", (
             f"⚠️ SEM view real ({por_que}); ranqueado por CURTIDA. "
             f"Curtida nao e' view — o ranking pode nao ser o mesmo.")
     return [], "nenhuma", f"{por_que}; e {por_que2}"

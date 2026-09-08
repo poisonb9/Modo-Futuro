@@ -40,6 +40,7 @@ import json
 import re
 import sys
 import unicodedata
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -123,8 +124,62 @@ def _numero(v) -> int | None:
     return int(limpo) if limpo.isdigit() else None
 
 
+def _ler_content_ancorado(texto: str) -> list[dict]:
+    """O export `Content.csv`, ancorado no LINK e nao na posicao da coluna.
+
+    ⚠️ O EXPORT DO TIKTOK VEM QUEBRADO, e isso foi MEDIDO em 08/09/2026. Numa
+    das 15 linhas do @achadinho.make a descricao continha virgulas e setas
+    fora de aspas, e as colunas DESLOCARAM: o campo "Total views" veio com a
+    URL do video dentro, e os numeros verdadeiros sobraram num campo extra:
+
+        'Total views': 'https://www.tiktok.com/@achadinho.make/video/76820...'
+        None:          "['5 de setembro', '34', '0', '0', '479']"
+
+    Ler por nome de coluna nesse arquivo devolve lixo em silencio — e como o
+    lixo e' uma string, `int()` estoura ou, pior, um numero errado passa.
+
+    A ancora que NAO desloca e' o link: ele e' o unico campo com formato
+    reconhecivel. Depois dele vem sempre, nesta ordem, post time, likes,
+    comments, shares e views. O titulo e' tudo que esta' entre a data e o
+    link, remontado.
+    """
+    linhas = list(csv.reader(io.StringIO(texto)))
+    if len(linhas) < 2:
+        return []
+    saida = []
+    for r in linhas[1:]:
+        i = next((k for k, c in enumerate(r)
+                  if str(c).startswith("https://www.tiktok.com/")), None)
+        if i is None or len(r) < i + 6:
+            continue
+        v = _numero(r[i + 5])
+        if v is None:
+            continue
+        saida.append({"titulo": " ".join(r[1:i]).strip(),
+                      "views": v, "data": r[0], "link": r[i]})
+    return saida
+
+
 def ler(caminho: Path) -> tuple[list[dict], str]:
     """Devolve (linhas, aviso). Cada linha e' {titulo, views, data}."""
+    # ⚠️ O Studio entrega ZIP. Abrir o zip aqui evita que cada canal vire um
+    # passo manual de descompactar — e passo manual em rotina mensal e' passo
+    # que um dia nao acontece.
+    if caminho.suffix.lower() == ".zip":
+        z = zipfile.ZipFile(caminho)
+        nomes = [n for n in z.namelist() if n.lower().endswith(".csv")]
+        if not nomes:
+            return [], "zip sem csv dentro"
+        texto = z.read(nomes[0]).decode("utf-8-sig", errors="replace")
+        if "Video link" in texto.splitlines()[0]:
+            linhas = _ler_content_ancorado(texto)
+            if linhas:
+                return linhas, (f"formato Content (ancorado no link), "
+                                f"{len(linhas)} post(s)")
+            return [], "Content.csv sem linha legivel"
+        return [], ("este zip nao e' o export por POST. O Overview (uma linha "
+                    "por DIA) se importa com importar_overview_tiktok.py")
+
     if caminho.suffix.lower() in (".xlsx", ".xls"):
         try:
             from openpyxl import load_workbook

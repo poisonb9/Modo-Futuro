@@ -120,6 +120,58 @@ def teste_view_so_sobe_no_registro():
     assert "max(int(anterior or 0), x[\"views\"])" in txt
 
 
+def teste_content_quebrado_do_tiktok_e_lido_pela_ANCORA():
+    """⚠️ MEDIDO em 08/09/2026: o export do TikTok vem QUEBRADO.
+
+    Numa das 15 linhas do @achadinho.make a descricao tinha virgulas e setas
+    fora de aspas, e as colunas deslocaram — o campo "Total views" veio com a
+    URL do video dentro, e os numeros verdadeiros sobraram num campo extra.
+
+    Ler por nome de coluna devolve lixo em silencio. A ancora que nao desloca
+    e' o LINK: depois dele vem sempre post time, likes, comments, shares,
+    views.
+    """
+    linha_boa = '"8 de setembro","Titulo normal","https://www.tiktok.com/@x/video/1","5 de setembro","10","0","0","479"'
+    linha_torta = ('"8 de setembro","Titulo com, virgula solta"," e mais texto",'
+                   '"https://www.tiktok.com/@x/video/2","5 de setembro","34","0","0","616"')
+    cabecalho = ('"Time","Video title","Video link","Post time","Total likes",'
+                 '"Total comments","Total shares","Total views"')
+    texto = "\n".join([cabecalho, linha_boa, linha_torta, ""])
+    linhas = imp._ler_content_ancorado(texto)
+    assert len(linhas) == 2, "a linha torta se perdeu"
+    por_view = {x["views"]: x for x in linhas}
+    assert 479 in por_view and 616 in por_view, "pegou o numero errado"
+    assert "virgula solta" in por_view[616]["titulo"], "perdeu parte do titulo"
+
+
+def teste_o_MESMO_post_por_duas_fontes_nao_vira_dois():
+    """⚠️ MEDIDO: os '2 melhores' do @modofuturo vieram 2473 e 2473 — o MESMO
+    post, uma vez pela print (titulo curto) e outra pelo export (titulo com a
+    descricao colada). O ciclo enviesaria a busca com um sinal achando que
+    tinha dois, e o segundo melhor de verdade nunca seria considerado."""
+    from engine import melhores
+    juntos = melhores._juntar_repetidos([
+        {"titulo": "As regras extremas para entrar na fabrica mais limpa", "views": 2473},
+        {"titulo": "As regras extremas para entrar na fabrica mais limpa do mundo Saiba como", "views": 2473},
+        {"titulo": "Como 1 POEIRA pode DESTRUIR 1 milhao de dolares", "views": 1009},
+    ])
+    assert len(juntos) == 2, f"deviam sobrar 2, sobraram {len(juntos)}"
+    # fica o titulo mais curto (o de verdade), com o maior numero
+    assert juntos[0]["views"] == 2473
+    assert juntos[0]["titulo"].endswith("limpa")
+
+
+def teste_titulos_CURTOS_e_diferentes_nao_sao_juntados():
+    """Senao a juncao viraria um bloqueio: dois posts curtos com comeco
+    parecido virariam um so', e o ranking perderia material de verdade."""
+    from engine import melhores
+    juntos = melhores._juntar_repetidos([
+        {"titulo": "Bolo de cenoura", "views": 100},
+        {"titulo": "Bolo de fuba", "views": 90},
+    ])
+    assert len(juntos) == 2
+
+
 if __name__ == "__main__":
     n = 0
     for nome, fn in sorted(globals().items()):

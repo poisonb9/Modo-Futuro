@@ -57,6 +57,18 @@ estado/*
 # isto, daqui a um mes ninguem sabe quais posts sao anteriores a mudanca — e
 # a calibragem vira fe em vez de medicao.
 !estado/calibragens.jsonl
+# ⚠️ EXCECAO 1G. A serie de views por post, escrita pelo registrar_desempenho.
+#
+# MEDIDO em 08/09/2026, DUAS VEZES no mesmo dia: o passo "Guardar" do
+# desempenho.yml morria em `git add`, e as leituras da hora eram jogadas fora.
+# De manha a causa era `publicados.json` nao existir; de tarde, ja' com aquilo
+# consertado, era ESTE arquivo ser ignorado — e `git add` de caminho ignorado
+# e' RECUSADO, nao ignorado em silencio.
+#
+# O mesmo passo, o mesmo `git add`, duas causas diferentes. Por isso os tres
+# arquivos de medicao vivem aqui em cima, explicitos: o que a maquina mede
+# todo dia nao pode depender de nao esbarrar no .gitignore.
+!estado/serie_views.jsonl
 # excecao 2: decisoes editoriais do Bryan ("nao quero esse video"). Sem isto
 # o runner do Actions nasce com a lista VAZIA e reagenda o que ele apagou —
 # foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,

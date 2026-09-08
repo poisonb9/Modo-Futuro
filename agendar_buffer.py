@@ -88,7 +88,43 @@ MAX_PAGINAS = 4
 # menos 16 = 2h47. Se os 3h forem regra dura e nao alvo, o jeito de garantir
 # e' aumentar a folga aqui, nao reduzir a variacao — ela existe pra nao
 # parecer robo.
-SLOTS_SP = [(8, 15), (11, 33), (16, 27), (19, 30)]
+# ⚠️ 08/09/2026: O SLOT DAS 11:33 SAI, E VAI PRA TARDE.
+#
+# Primeira medicao de horario com VIEW REAL do TikTok (o Buffer marca zero).
+# 60 posts, cada hora e' um slot da grade, entao a amostra e' limpa:
+#
+#     16:27   1,50x a mediana do canal   (n=11)   <- o melhor
+#     08:15   1,37x                      (n=14)
+#     19:30   1,27x                      (n=11)
+#     11:33   0,97x                      (n=12)   <- o unico ABAIXO da mediana
+#
+# E por faixa do dia: tarde (12-17) 1,45x, contra 1,22x de manha e 1,23x de
+# noite. O 11:33 e' o unico slot fora da faixa boa e o unico que perde.
+#
+# ⚠️ ISTO CONTRADIZ UMA DECISAO DE 26/08, E A CONTRADICAO E' DE PROPOSITO.
+# Naquele dia o slot das 13:07 foi removido porque "os dois posts do meio-dia
+# foram os piores medidos do dia (22 e 11)". Aqueles numeros vinham da view do
+# BUFFER, que hoje sabemos marcar zero em post de 6 e 7 dias — e eram DOIS
+# posts. A medicao nova tem 60, com numero real do TikTok. Onde as duas
+# discordam, vale a nova; mas fica escrito que discordam.
+#
+# 13:10 e nao 12:xx pra manter a regra dos 3h com folga, contando o sorteio
+# de +-8 min:
+#
+#   08:15  ->  13:10   4h55
+#   13:10  ->  16:27   3h17   (pior caso real 3h01)
+#   16:27  ->  19:45   3h18   (pior caso real 3h02)
+#
+# ⚠️ O 19:30 VIROU 19:45, E ISSO CONSERTA UMA VIOLACAO QUE JA' EXISTIA.
+# A grade antiga dava 3h03 entre 16:27 e 19:30 — 2h47 no pior caso com o
+# sorteio, abaixo dos 3h que o Bryan pediu como MINIMO. O proprio comentario
+# de 29/08 registrava isso como pendencia ("se os 3h forem regra dura, o
+# jeito e' aumentar a folga aqui") e ninguem aumentou. O teste novo
+# `teste_grade_de_horario.py` passou a reprovar, entao virou conserto.
+#
+# ⚠️ O 16:27 NAO SE MEXE. E' o melhor slot medido, e mudar o vencedor junto
+# com o perdedor tornaria impossivel saber qual mudanca produziu o efeito.
+SLOTS_SP = [(8, 15), (13, 10), (16, 27), (19, 45)]
 # Teto DURO de posts por dia (SP), contando o que ja' foi enviado. A grade
 # sozinha nunca segurou o volume: 25/08 saiu com 8 posts e 26/08 com 11, ambos
 # acima dos 6 slots que existiam. Isso acontece porque um slot que ja' disparou

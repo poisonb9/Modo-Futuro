@@ -41,6 +41,12 @@ estado/*
 # duplicata que a de TEXTO nao ve: mesmo trecho com outro titulo ("Ramen" vs
 # "Lamen", inicio 613,1s, vivos no @cozinha.internacional ate' 08/09/2026).
 !estado/trechos_usados.json
+# ⚠️ EXCECAO 1D: views REAIS lidas da print do perfil que o Bryan manda.
+# E' a metrica primaria do ciclo semanal, porque a view do Buffer nao serve
+# pra ranquear (MEDIDO em 08/09: 0 no Buffer contra 338, 359 e 142 no
+# TikTok, em posts de 6 e 7 dias). Sem isto no git, o ciclo cai na reserva
+# de curtida toda vez que rodar na nuvem.
+!estado/views_manuais.json
 # excecao 2: decisoes editoriais do Bryan ("nao quero esse video"). Sem isto
 # o runner do Actions nasce com a lista VAZIA e reagenda o que ele apagou —
 # foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,

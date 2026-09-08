@@ -143,6 +143,40 @@ REGRAS DURAS:
 - Os trechos NÃO podem se sobrepor.
 - Prefira começar logo antes da frase de impacto, não muito antes.
 
+⚠️ A IMAGEM DOS DOIS PRIMEIROS SEGUNDOS DECIDE, e ela pesa TANTO quanto a
+frase. MEDIDO em 08/09/2026: a audiência do projeto sai aos 0:02, e 98,7% do
+tráfego vem da Para Você — ou seja, quase todo espectador é alguém que nunca
+viu o canal e está decidindo pela imagem.
+
+Comparando o melhor e o pior clipe de dois canais, com o primeiro frame na
+mão:
+
+    @atefalhar  608 views: o EXERCÍCIO sendo feito — pernas na máquina, anilha
+                           de 20 kg, movimento acontecendo aos 0s E aos 2s
+                 97 views: uma pessoa GESTICULANDO para a câmera, falando
+                           sobre o exercício. Nenhum exercício na tela.
+
+    @semanestesia 652 views: rosto inteiro, olhos visíveis, expressão
+                  162 views: um torso sem rosto, escuro, desfocado
+
+⚠️ E OS DOIS PIORES TINHAM TEXTO DE OUTRA PLATAFORMA QUEIMADO NA IMAGEM:
+"N THE DESCRIPTIO" cortado no rodapé de um, "Y KEEP / SHIFTED" no outro.
+Legenda alheia em inglês, competindo com a nossa, gritando "isto foi
+repostado". Nenhum dos vencedores tinha.
+
+ENTÃO, ao escolher o início:
+- PREFIRA o instante em que a coisa está ACONTECENDO na tela (o exercício, a
+  máquina, a comida, a mão trabalhando) ao instante em que alguém apenas
+  FALA sobre ela;
+- quando só houver pessoa falando, prefira o enquadramento com ROSTO e OLHOS
+  visíveis a um plano de corpo, costas ou detalhe anônimo;
+- EVITE começar onde há legenda ou marca de outra plataforma queimada no
+  vídeo original, mesmo que a fala ali seja ótima — desloque alguns segundos;
+- registre o que viu em "abertura_mostra".
+
+⚠️ Isto NÃO substitui a força da frase: um trecho com imagem boa e fala fraca
+continua ruim. É desempate, não critério único.
+
 IDIOMA DO TEXTO (título, descrição, tags, porque): SEMPRE em português do
 Brasil, MESMO QUE a fala original do vídeo esteja em outro idioma (ex:
 inglês). Só o "gancho" pode citar a frase original quando fizer sentido.
@@ -220,6 +254,15 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
   "nota": <0-100, potencial viral>,
   "gancho": "<a frase exata que prende, curta>",
   "porque": "<1 frase em pt-BR: por que viraliza>",
+  "abertura_mostra": "<acao | pessoa_falando | texto_alheio | parado — o que
+     se VE na tela nos DOIS PRIMEIROS SEGUNDOS deste trecho. Voce esta'
+     vendo o video: responda pela IMAGEM, nao pela fala.
+       acao          = a coisa acontecendo (o exercicio sendo feito, a
+                       maquina funcionando, a comida sendo montada)
+       pessoa_falando= alguem falando SOBRE o assunto, sem o assunto na tela
+       texto_alheio  = ha' legenda ou marca de OUTRA plataforma queimada no
+                       video da fonte, aparecendo nesses 2 segundos
+       parado        = camera estatica sobre diagrama, slide ou imagem fixa>",
   "depende_de_anterior": <true|false — o trecho pressupoe um episodio que
      NAO esta' neste video? Diz "dia 3", "parte 2", "como falei no ultimo
      video", "continuando de ontem"? Voce esta' VENDO e OUVINDO o video:

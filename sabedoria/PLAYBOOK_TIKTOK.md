@@ -1522,7 +1522,49 @@ O único achado com força estatística até agora aponta pra lá — título qu
 MOSTRA rende +37% em view E +35% em curtida (§23.4). Curtida é o sinal mais
 próximo de "gostei" que a gente consegue medir hoje.
 
-### 23.7 O que continua sem resposta
+### 23.7 O que eu decidi NÃO mudar hoje, e por quê — `[MEDIDO 08/09/2026]`
+
+Depois de quatro calibragens no mesmo dia, apareceu uma armadilha que vale
+mais registrar do que a próxima mudança.
+
+**As mudanças de hoje são todas ATRIBUTO DE POST:**
+
+    título MOSTRA x ENSINA      cada post tem ou não tem
+    abertura mostra ação        cada post tem ou não tem
+    promessa vira ameaça        cada post tem ou não tem
+    slot de horário             cada post saiu num slot
+
+⚠️ **É por isso que elas são medíveis no mês que vem.** Dentro do próximo
+export dá para comparar posts que têm contra posts que não têm, no mesmo
+período, no mesmo canal — e o efeito é atribuível.
+
+**As duas mudanças que estavam na fila NÃO são atributo de post:**
+
+| candidata | onde | por que fica de fora |
+|---|---|---|
+| trocar estímulo a cada ~3s nos primeiros 12s (hoje o punch-in cíclico é de 6,5s, `render.py:_PUNCH_PERIODO_S`) | render | vale para TODO clipe novo, igual |
+| reduzir a tarja do título, que ocupa 25-30% do topo | legendas | idem |
+
+Ligadas agora, elas valeriam para **todos** os clipes novos ao mesmo tempo.
+Não haveria grupo de comparação dentro do mês — só daria para comparar mês
+contra mês, e o mês que vem já tem quatro mudanças e uma operação que dobrou
+de tamanho. **O efeito ficaria impossível de separar.**
+
+⚠️ E as duas vêm de `[CONSENSO 2]` do corpus, não de medição nossa. Misturar
+uma mudança não-medida e não-atribuível com quatro medidas e atribuíveis é o
+jeito mais rápido de perder as quatro.
+
+**Ficam na fila, nesta ordem, para depois do próximo export:**
+
+1. **Cadência do punch-in** (6,5s → ~3s nos primeiros 12s). Mudança de um
+   número. Deve entrar SOZINHA, num mês sem outra mudança global.
+2. **Tarja do título.** Idem — e antes dela, vale medir se a tarja atrapalha,
+   o que a curva de retenção por segundo responderia de graça (§23.8).
+
+⚠️ Nada disto é motivo para não mudar nada nunca. É motivo para mudar uma
+coisa global por vez, e só quando houver como saber se funcionou.
+
+### 23.8 O que continua sem resposta
 
 - **Retenção por segundo.** Sabemos que a audiência sai aos 0:02 (medido
   28/08), mas não temos a curva por vídeo. Não veio nos exports. É o dado

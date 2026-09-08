@@ -33,8 +33,18 @@ SELECAO = (RAIZ / "engine" / "selecao.py").read_text(encoding="utf-8")
 
 
 def _bloco_do_titulo() -> str:
+    """O comentario inteiro que precede o campo `titulo` no prompt.
+
+    ⚠️ NAO usa janela de N caracteres. A primeira versao pegava 2600 chars
+    antes da ancora, e quando a regra da AMEACA foi acrescentada (08/09) o
+    bloco cresceu e empurrou a medicao dos titulos pra fora da janela — o
+    teste passou a reprovar por um motivo que nao era defeito nenhum.
+    Janela fixa em cima de texto que cresce e' armadilha; o certo e' delimitar
+    pelo que comeca o bloco.
+    """
     i = SELECAO.index('"titulo": "<pt-BR')
-    return SELECAO[max(0, i - 2600):i + 500]
+    ini = SELECAO.rindex("// ⚠️ TITULO: MOSTRE A COISA", 0, i)
+    return SELECAO[ini:i + 500]
 
 
 def teste_o_prompt_manda_MOSTRAR():
@@ -82,6 +92,33 @@ def teste_o_numero_no_titulo_esta_pedido():
     assert "+27%" in bloco and "numero" in bloco.lower()
     # e pedido SEM inventar
     assert "nao invente" in bloco.lower()
+
+
+def teste_a_promessa_nao_pode_virar_AMEACA():
+    """⚠️ MEDIDO em 08/09: palavra de risco no texto rende 0,94x contra 1,36x
+    (-31%), e a curtida por mil views cai junto (27,0 contra 38,8, -30%).
+    Dois sinais no mesmo sentido, nos QUATRO canais com dado."""
+    bloco = _bloco_do_titulo()
+    assert "AMEACA" in bloco or "ameaca" in bloco
+    assert "-31%" in bloco and "-30%" in bloco
+
+
+def teste_a_contradicao_com_o_playbook_fica_registrada():
+    """O playbook diz que MEDO gera compartilhamento `[FRACO]`. Testei no
+    proprio termo dele e o share nao decidiu — 10 shares no lote inteiro. Quem
+    decidiu foram view e curtida. A contradicao e a ressalva ficam escritas."""
+    bloco = _bloco_do_titulo()
+    assert "PLAYBOOK" in bloco or "playbook" in bloco
+    assert "share" in bloco.lower() and "nao prova nada" in bloco
+
+
+def teste_NEGATIVO_nao_e_proibir_palavra():
+    """⚠️ "O erro microscopico que custa US$ 500.000" e' fato concreto e
+    legitimo. Se a regra virasse lista de palavras proibidas, ela mataria
+    material bom — o mesmo limite que ja' vale pro "Como"."""
+    bloco = _bloco_do_titulo()
+    assert "NAO E' PROIBIR PALAVRA" in bloco
+    assert "erro microscopico" in bloco
 
 
 if __name__ == "__main__":

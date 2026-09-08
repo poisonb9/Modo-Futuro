@@ -332,6 +332,28 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
   // se fazer e': isto anuncia um FATO, uma CENA ou um RESULTADO? Ou promete
   // uma explicacao?
   //
+  // ⚠️ E NAO ENQUADRE A PROMESSA COMO AMEACA. MEDIDO no mesmo lote:
+  //
+  //     com palavra de risco no texto ("nunca", "erro", "perigo", "mentira",
+  //     "impossivel", "assustador")   0,94x   (n=12)
+  //     sem                           1,36x   (n=57)      -31%
+  //
+  // E a curtida por mil views caiu junto: 27,0 contra 38,8, -30%. Dois sinais
+  // no mesmo sentido, e o efeito aparece nos QUATRO canais com dado, nao num
+  // so'.
+  //
+  // ⚠️ ISTO CONTRADIZ O PLAYBOOK, que registra "ambicao e MEDO sao os dois
+  // motores emocionais que mais geram compartilhamento" `[FRACO]`. Testei a
+  // afirmacao no proprio termo dela: posts com palavra de risco tiveram ZERO
+  // compartilhamentos em 4.817 views. Mas sao 10 shares no lote inteiro —
+  // 4.817 views esperariam ~2, e 0 contra 2 nao prova nada. O share NAO
+  // decide; quem decide sao a view e a curtida, e as duas dizem o mesmo.
+  //
+  // ⚠️ NAO E' PROIBIR PALAVRA. "O erro microscopico que custa US$ 500.000" e'
+  // um fato concreto e legitimo. O que perde e' a promessa VIRAR ameaca — o
+  // titulo existir pra assustar em vez de mostrar. Se a palavra descreve o
+  // fato, fica; se ela e' o gancho, troque pelo fato.
+  //
   // ⚠️ RESSALVA DE TAMANHO DE AMOSTRA: sao 75 posts, e alguns recortes tem
   // menos de 10. A direcao e' consistente; a magnitude nao e' precisa. Se o
   // export do mes que vem nao confirmar, este bloco e' o primeiro a revisar.

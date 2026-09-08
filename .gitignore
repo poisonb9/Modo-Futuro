@@ -47,6 +47,11 @@ estado/*
 # TikTok, em posts de 6 e 7 dias). Sem isto no git, o ciclo cai na reserva
 # de curtida toda vez que rodar na nuvem.
 !estado/views_manuais.json
+# ⚠️ EXCECAO 1E: serie DIARIA de views de cada conta, do Overview do TikTok
+# Studio. O historico do TikTok para em 60 DIAS — depois disso este arquivo e'
+# a UNICA copia que existe. Perder isto e' perder a memoria de desempenho do
+# projeto inteiro, e nao ha' de onde reconstruir.
+!estado/overview_tiktok.json
 # excecao 2: decisoes editoriais do Bryan ("nao quero esse video"). Sem isto
 # o runner do Actions nasce com a lista VAZIA e reagenda o que ele apagou —
 # foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,

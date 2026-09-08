@@ -46,7 +46,7 @@ import requests
 
 from engine import canais_registro, registro_clipes
 
-from engine import buffer_cota as cota, dedup, estreia
+from engine import buffer_cota as cota, dedup, estreia, trechos
 from engine import adiados, rejeitados
 
 API_BUFFER = "https://api.buffer.com/"
@@ -587,6 +587,23 @@ def main() -> None:
         if _f and _i is not None and dedup.ja_visto(_k, ja_publicado):
             trechos_vistos.add((_f, round(float(_i), 1)))
 
+    # ⚠️ E O REGISTRO DURAVEL, que nao depende de reconhecer texto.
+    #
+    # O laco acima chega no trecho PELO TEXTO — e o caso que esta guarda
+    # existe pra pegar e' justamente aquele em que o texto muda ("Ramen" vs
+    # "Lamen", mesmo inicio 613,1s). Se a dedup por texto nao reconhecer o
+    # primeiro, o par nunca entra no conjunto e o segundo passa. O Bryan viu
+    # esse par vivo no @cozinha.internacional em 08/09/2026.
+    #
+    # `engine/trechos.py` guarda (fonte, segundo) na HORA de enfileirar, que
+    # e' quando a informacao existe sem precisar ser deduzida. Ver o modulo.
+    for _m in trechos.marcas():
+        _f, _, _i = _m.rpartition("@")
+        try:
+            trechos_vistos.add((_f, round(float(_i), 1)))
+        except ValueError:
+            continue
+
     def trecho_ja_usado(v) -> bool:
         """Este trecho exato ja' virou clipe antes?
 
@@ -709,6 +726,13 @@ def main() -> None:
             print(f"  [!] {titulo}: {str(e)[:140]}")
             continue
         ini = clipe.get("inicio_s")
+        # ⚠️ ANOTA O TRECHO ASSIM QUE ELE ENTRA NA FILA, e so' quando entra de
+        # verdade (o `--simular` nao chega aqui com envio feito). Anotar antes
+        # marcaria como usado um trecho que o Buffer pode ter recusado.
+        if not a.simular:
+            trechos.anotar(clipe.get("fonte_id"), ini,
+                           titulo=clipe.get("titulo", ""),
+                           canal=canal_deste_run)
         pos = f"{float(ini):.0f}s do fonte" if ini is not None else "posição ?"
         print(f"  nota {clipe.get('nota', 0):.0f}  {pos:>14}  {titulo}")
         print(f"       -> {quando_txt}")

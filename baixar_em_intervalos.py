@@ -48,6 +48,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import registro_videos
+from engine import cadencia
 
 RAIZ = Path(__file__).resolve().parent
 DESTINO = RAIZ / "trabalho" / "brutos"
@@ -112,8 +113,22 @@ def alvos(a) -> list[dict]:
     return fora
 
 
-def baixar(url: str) -> tuple[bool, str]:
-    """Um download. Devolve (deu certo, mensagem)."""
+def baixar(url: str, canal: str = "") -> tuple[bool, str]:
+    """Um download. Devolve (deu certo, mensagem).
+
+    ⚠️ A CADENCIA E' COBRADA AQUI DENTRO, e nao em quem chama. Ordem do Bryan
+    em 08/09/2026: "os downloads nunca podem coincidir de nenhum canal".
+    Se a trava morasse no laco de `main()`, bastaria o `ciclo_semanal --todos`
+    disparar dois canais em sequencia — ou alguem baixar a mao enquanto a
+    tarefa agendada roda — pra ela ser contornada sem ninguem perceber. Aqui
+    e' o unico ponto por onde todo download passa. Ver engine/cadencia.py.
+    """
+    with cadencia.vez(canal=canal, motivo=url[-24:]):
+        return _baixar_agora(url)
+
+
+def _baixar_agora(url: str) -> tuple[bool, str]:
+    """O download em si. NAO chame direto — passe por `baixar`."""
     cmd = [
         "yt-dlp", "-f", FORMATO, "--merge-output-format", "mp4",
         "--no-warnings", "--no-progress",
@@ -168,7 +183,7 @@ def main() -> None:
             print("        SIMULADO (nada baixado)")
         else:
             t0 = time.time()
-            ok, msg = baixar(v["url"])
+            ok, msg = baixar(v["url"], canal=getattr(a, "canal", "") or "")
             dur = time.time() - t0
             if ok:
                 feito[v["url"]] = {"quando": datetime.now(timezone.utc).isoformat(),
@@ -207,10 +222,11 @@ def main() -> None:
                       "agora e' o pior que da' pra fazer.")
                 break
 
-        if i < len(fila) and not a.simular:
-            pausa = a.intervalo * (1 + random.uniform(-JITTER, JITTER))
-            print(f"        esperando {pausa:.0f}s")
-            time.sleep(pausa)
+        # ⚠️ NAO HA' MAIS SLEEP AQUI. A espera passou pra `engine/cadencia`,
+        # que a cobra ANTES de cada download e vale entre canais e entre
+        # processos. Dormir aqui tambem so' somaria espera em cima de espera,
+        # e daria a impressao falsa de que e' este laco que protege o IP.
+        pass
 
     print(f"\nBaixados nesta rodada em: {DESTINO}")
     print("⚠️ NADA foi subido pro Drive e NENHUM corte foi disparado.")

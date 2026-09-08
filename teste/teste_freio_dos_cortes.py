@@ -17,6 +17,7 @@ pausa parasse tambem o estoque, sair dela levaria dias em vez de minutos.
 """
 import pathlib
 import sys
+import tempfile
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
@@ -25,6 +26,24 @@ from engine import freio
 
 VIGIA = (RAIZ / "vigia_raw.py").read_text(encoding="utf-8")
 FILA = (RAIZ / "cortar_fila.py").read_text(encoding="utf-8")
+
+
+# ⚠️ O TESTE NAO PODE ENCOSTAR NO FREIO DE VERDADE.
+#
+# MEDIDO em 07/09/2026, e o defeito era GRAVE: a primeira versao deste
+# arquivo chamava `freio.ARQUIVO.unlink()` direto — e `freio.ARQUIVO` e' o
+# PAUSA_CORTES da raiz do repositorio. Rodar a suite APAGAVA o freio de
+# producao.
+#
+# Foi o que aconteceu: puxei o freio, rodei a suite logo depois, e a suite
+# o soltou. O remoto continuou pausado (o commit ja' tinha ido), mas AQUI o
+# vigia voltou a despachar — e cortou tres brutos do @atefalhar naquela
+# noite, gastando exatamente a cota que a pausa existia pra poupar.
+#
+# Teste que escreve em estado de producao nao e' teste: e' um comando
+# disfarcado, que roda toda vez que alguem confere a suite.
+_TMP = pathlib.Path(tempfile.mkdtemp()) / "PAUSA_CORTES_teste"
+freio.ARQUIVO = _TMP
 
 
 def _limpo():
@@ -91,9 +110,28 @@ def teste_NEGATIVO_baixar_e_subir_seguem_liberados():
 
 
 def teste_o_arquivo_fica_na_raiz_e_gritando():
-    """Freio escondido fica puxado por uma semana sem ninguem notar."""
-    assert freio.ARQUIVO.parent == RAIZ
-    assert freio.ARQUIVO.name.isupper()
+    """Freio escondido fica puxado por uma semana sem ninguem notar.
+
+    ⚠️ Confere o CAMINHO PADRAO do modulo, nao o `freio.ARQUIVO` desta
+    sessao — que este arquivo redirecionou pro temporario de proposito.
+    """
+    import importlib
+    padrao = importlib.reload(importlib.import_module("engine.freio")).ARQUIVO
+    assert padrao.parent == RAIZ
+    assert padrao.name.isupper()
+    # e devolve o desvio, senao os testes seguintes mexem no arquivo real
+    freio.ARQUIVO = _TMP
+
+
+def teste_a_suite_NAO_apaga_o_freio_de_producao():
+    """⚠️ O teste que existe por causa do estrago de 07/09.
+
+    Se `freio.ARQUIVO` apontar pra raiz durante a suite, rodar a suite
+    APAGA a pausa — e foi assim que tres cortes sairam numa noite em que a
+    cota devia estar sendo poupada.
+    """
+    assert freio.ARQUIVO != RAIZ / "PAUSA_CORTES"
+    assert "PAUSA_CORTES" not in str(RAIZ / "x") or freio.ARQUIVO.parent != RAIZ
 
 
 if __name__ == "__main__":

@@ -1461,7 +1461,68 @@ Número no título rendeu +27%.
 **prometer explicação perde para mostrar a coisa** — e o prompt pedia só
 "título chamativo", que é exatamente o que produz o formato perdedor.
 
-### 23.5 O que continua sem resposta
+### 23.5 As duas hipóteses de PUNIÇÃO morreram — `[MEDIDO 08/09/2026]`
+
+Durante meses o projeto tratou o desempenho baixo como se houvesse algo
+sendo feito CONTRA os canais: shadowban, punição por duplicata, punição por
+falta de rótulo de IA, restrição por conteúdo reciclado. Duas verificações
+independentes fecharam isso.
+
+**1. `Verificação de conta` (Account Check) nas CINCO contas: limpo.**
+
+    Nenhum problema pendente nem violações na sua conta ou nas suas
+    publicações
+
+E a verificação cobre item por item — Entrar, Publicações, Comentários,
+Perfil, Mensagens diretas, **Possibilidade de a conta ser descoberta**,
+Avisos e alertas. O item de descoberta é justamente o que estaria marcado
+num shadowban. **Nenhuma das 5 contas tem restrição de alcance.**
+
+⚠️ Ressalva do próprio TikTok, na tela: *"isso não inclui seu status na
+TikTok Shop, na Monetização de Criadores ou em outros recursos"*. Elegibilidade
+de monetização é outra coisa, e continua sem resposta.
+
+**2. Texto de outra plataforma queimado: hipótese ENFRAQUECIDA pela medição.**
+
+Classifiquei à mão o frame a 1,5s de 13 clipes, dos mais vistos aos menos
+vistos de 4 canais:
+
+    COM texto alheio   4 de 13   média 230 views
+    SEM texto alheio   9 de 13   média 452 views
+    entre os BAIXO: 3 de 7 têm     entre os ALTO: 1 de 6 tem
+
+A direção existe. Mas ⚠️ **há um contraexemplo forte: o clipe de 527 views do
+@semanestesia abre com "spoken by JOCKO WILLINK" em letras gigantes** — uma
+cartela em inglês da edição de outra pessoa, ocupando meio quadro. É o
+segundo melhor do canal.
+
+**Conclusão honesta:** com n=4 no grupo com texto e um contraexemplo entre os
+melhores, isto NÃO sustenta a tese de que o texto alheio é o que nos tira da
+Para Você. A regra no motor fica — evitar abrir nesses frames custa zero e
+está alinhada com a política oficial do TikTok (§6) — mas **parou de ser
+candidata a explicação do desempenho.**
+
+### 23.6 O que sobra, e é desconfortável
+
+Somando 23.1, 23.5 e a conta de seguidores:
+
+- não houve punição de plataforma (verificado nas 5 contas);
+- não houve colapso de alcance em agosto (foram 15 dias sem postar);
+- o rótulo de IA não explica nada (veio depois da recuperação);
+- a duplicata não tem nenhum caso medido a favor;
+- o texto alheio não se sustenta como causa.
+
+**Não há nada escondido nos tirando do ar.** O que há é 54.199 views virando
+78 seguidores — **0,144%**, ou 667 views por seguidor no melhor canal com
+volume. O conteúdo alcança e não converte.
+
+⚠️ Isso muda o tipo de trabalho que resta. Não é caça a penalidade, é ofício:
+o que faz alguém que nunca viu o canal decidir seguir depois de 2 segundos.
+O único achado com força estatística até agora aponta pra lá — título que
+MOSTRA rende +37% em view E +35% em curtida (§23.4). Curtida é o sinal mais
+próximo de "gostei" que a gente consegue medir hoje.
+
+### 23.7 O que continua sem resposta
 
 - **Retenção por segundo.** Sabemos que a audiência sai aos 0:02 (medido
   28/08), mas não temos a curva por vídeo. Não veio nos exports. É o dado

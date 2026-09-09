@@ -100,6 +100,31 @@ checar("Base tailandesa" in linha and "R$ 39,90" in linha
        and "https://loja/x" in linha, "nome, preco e link na linha")
 checar(linha.count("\n") == 1, "link em linha propria (o WhatsApp lincaria errado)")
 
+print(chr(10) + "7. o campo CHEGA no post.json — o cano inteiro, nao so' as pontas")
+# ⚠️ O DEFEITO QUE ESTE BLOCO GUARDA, achado em 09/09/2026 depois que a §2.6
+# (pagina da bio) foi escrita: `engine/produto.py` validava, o
+# `publicar_release` poe no manifesto — e o `main.py` NAO copiava o campo pro
+# post.json. O `meta` de la' e' uma copia POR NOMES: o que nao esta' na tupla
+# nao existe daquele ponto em diante, sem erro nenhum.
+#
+# Ja' tinha acontecido com a `legenda_premium` (ate' 31/08: o log dizia "1408
+# chars", o .txt do Drive saia com 0,3 KB). O produto era o campo seguinte a
+# cair na mesma armadilha, e ninguem veria antes de publicar.
+FONTE_MAIN = (RAIZ / "main.py").read_text(encoding="utf-8")
+FONTE_REL = (RAIZ / "publicar_release.py").read_text(encoding="utf-8")
+checar('"produto",' in FONTE_MAIN,
+       "main.py copia `produto` pro post.json")
+checar('m.get("produto")' in FONTE_REL,
+       "publicar_release le' o produto do post.json")
+# ⚠️ CASO NEGATIVO: a busca acima tem de ser capaz de ACUSAR. Se ela desse
+# verdadeiro pra qualquer nome, o teste passaria com o cano rompido.
+checar('"produto_que_nao_existe",' not in FONTE_MAIN,
+       "NEGATIVO: a busca nao aprova nome que nao esta' na lista")
+# e os dois campos que ja' custaram caro continuam la'
+for campo in ("legenda_premium", "quarentena", "depende_de_anterior"):
+    checar(f'"{campo}"' in FONTE_MAIN,
+           f"`{campo}` continua na copia (ja' custou uma vez)")
+
 if falhas:
     print(chr(10) + f"{falhas} FALHA(S)")
     sys.exit(1)

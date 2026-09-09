@@ -498,6 +498,14 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      # marca nenhuma e e' postado como qualquer outro — que
                      # e' exatamente o que o Bryan pediu pra nao acontecer.
                      "traduzido_por", "quarentena",
+                     # ⚠️ E ESTE E' O PRODUTO DE AFILIADO (FASE2 §2.2). Fora
+                     # da lista, ele morre AQUI: o `publicar_release` le'
+                     # `m.get("produto")` do post.json, o manifesto nunca
+                     # recebe o campo, e a pagina da bio (§2.6) fica sem o
+                     # que mostrar — com todo o resto do cano funcionando e
+                     # nenhum erro em lugar nenhum. E' a MESMA armadilha da
+                     # `legenda_premium` acima, com o campo seguinte.
+                     "produto",
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",

@@ -190,6 +190,63 @@ novos: clipe de afiliado sem `canal` no manifesto iria pro canal de chips.
 **Ele ja' estava consertado antes de eles existirem** — o agendador recusa em
 vez de chutar. E' o unico item desta secao que nao precisa de acao.
 
+### 2.6 A CONTRA-CAPA: a pagina do link na bio — pedido do Bryan, 09/09/2026
+
+Nas palavras dele: quando a pessoa entra no link da bio de CADA canal, cai
+numa pagina com varios links — um "pra mais conteudo como esse", um do grupo
+de achadinhos (com nome viral, nao literal), outros que a gente queira — e com
+DOIS produtos ali mesmo, pra ela ja' comprar. Os produtos sao os **ultimos
+filtrados e postados**, sempre atualizados.
+
+⚠️ E' a peca que fecha o funil da §2.5: hoje o canal aponta pro grupo e mais
+nada; a contra-capa e' o que transforma UM link de bio em varios destinos sem
+depender do TikTok.
+
+#### O que ja' existe e serve
+
+    engine/produto.py           formato do produto, validado, num lugar so'
+    publicar_release.py:305     poe o `produto` no manifesto quando ele existe
+    produto.linha_da_lista()    a linha pronta (nome, preco, link)
+    engine/canais_registro.py   fonte unica de canal — a pagina e' POR canal
+    o repo times-report          ja' tem GitHub Pages no ar desde 26/07
+
+#### ⚠️ O BLOQUEIO REAL, e ele nao e' a pagina
+
+**Nada escreve `produto` hoje.** Conferido em 09/09/2026: o unico ponto do
+codigo que toca o campo e' o `publicar_release.py`, e ele LE' de
+`m.get("produto")` — que nenhum clipe tem. O cano esta' pronto da ponta a
+ponta e nao ha' torneira: o radar de produto depende da aprovacao do
+AliExpress, "em analise" desde 02/09.
+
+**Consequencia pratica:** os LINKS podem subir ja'; o bloco de DOIS PRODUTOS
+so' tem o que mostrar depois do primeiro clipe de afiliado. A pagina tem de
+nascer sabendo disso — bloco de produto AUSENTE e' um estado normal dela, nao
+um erro. Mesmo raciocinio do campo no manifesto: ausente e' diferente de
+vazio.
+
+#### ⚠️ TRES DECISOES QUE SAO DO BRYAN, e uma delas fecha uma porta
+
+1. **Onde hospedar.** O repo do motor e' PUBLICO, e o `times-report` ja' tem
+   Pages funcionando — mas ele guarda o .txt de verificacao de dominio do
+   TikTok na raiz, e mexer ali e' proibido. Repo NOVO so' pra pagina e' o
+   caminho limpo.
+2. **Um convite de WhatsApp por canal, ou um so'.** A §2.5 ja' deixou isso
+   aberto; a contra-capa **obriga a decidir**, porque o botao do grupo vai
+   ficar em CADA pagina. Um convite por canal e' a medicao mais barata de
+   "qual canal traz gente" — e ⚠️ **depois de o link estar na bio nao ha'
+   como separar a origem**, so' recomecando a contagem.
+3. **Quem conta o clique.** Pagina estatica nao mede nada, e a API do TikTok
+   esta' fechada pra nos (recusada em definitivo, 22/08). Sem uma decisao
+   aqui, a pagina entrega mas nao informa.
+
+#### O que NAO fazer
+
+⛔ **Convite do WhatsApp dentro do repositorio do motor.** Ele e' publico, e
+os cinco convites moram fora dele de proposito
+(`BACKUP_SISTEMA\SEGREDOS_NAO_SUBIR\CONVITES_WHATSAPP.md`). Um convite numa
+pagina publica e' o proposito dele — mas commitado num repo publico ele fica
+no HISTORICO para sempre, e trocar o convite depois nao apaga o antigo.
+
 ---
 
 ## 3. O QUE JA' SERVE, SEM MUDANCA

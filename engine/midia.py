@@ -141,10 +141,20 @@ def baixar(url: str, destino: Path) -> Path:
         # o desafio resolvido o YouTube volta a pedir login, e o erro
         # aparece como bot-check: a terceira cara do MESMO defeito.
         #
-        # `deno,node` nesta ordem: usa o deno onde houver (foi com ele que
-        # se mediu em 09/09) e cai pro node onde nao houver, que e' o caso
-        # do runner. Conferido nos dois aqui, com -F: 40+ formatos.
-        "--js-runtimes", "deno,node",
+        # ⚠️ A FLAG SE REPETE, NAO ACEITA LISTA. Tentei "deno,node" numa
+        # flag so' e o run #12 (09/09) respondeu:
+        #
+        #   WARNING: Ignoring unsupported JavaScript runtime(s): deno,node.
+        #            Supported runtimes: deno, node, bun, quickjs.
+        #
+        # Ignorou os DOIS e caiu no bot-check de novo. O erro foi meu: testei
+        # `--js-runtimes node` sozinho aqui, funcionou, e presumi que a
+        # virgula tambem funcionaria — nunca conferi a forma que fui usar.
+        #
+        # Assim, repetida, esta' conferido com -F: sem "Ignoring unsupported"
+        # e 40+ formatos. Deno onde houver, node onde nao (o caso do runner).
+        "--js-runtimes", "deno",
+        "--js-runtimes", "node",
     ]
     # em IP de datacenter (GitHub Actions) o Android client sozinho não
     # basta — passa cookies de uma sessão logada de verdade. Local não usa

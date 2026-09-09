@@ -72,8 +72,14 @@ checar('"--remote-components", "ejs:github"' in fonte
 # ⚠️ O solver sozinho nao basta: o yt-dlp so' habilita `deno` por padrao, e
 # o runner do GitHub tem `node`. Sem esta linha o node fica parado la' e o
 # desafio falha — foi assim que o run #11 morreu com bot-check.
-checar('"--js-runtimes"' in fonte and "node" in fonte,
-       "--js-runtimes com node (o runner nao tem deno)")
+# ⚠️ REPETIDA, nao lista: "deno,node" numa flag so' faz o yt-dlp ignorar os
+# DOIS ("Ignoring unsupported JavaScript runtime(s)") e cair no bot-check.
+# Foi assim que o run #12 morreu.
+checar(fonte.count('"--js-runtimes"') == 2,
+       f'--js-runtimes aparece 2x, repetida (veio {fonte.count(chr(34)+"--js-runtimes"+chr(34))}x)')
+checar('"deno,node"' not in fonte and "'deno,node'" not in fonte,
+       "sem lista por virgula, que o yt-dlp ignora inteira")
+checar('"node"' in fonte, "node listado (o runner do GitHub nao tem deno)")
 
 print("\n2. ATENCAO: o cliente android NAO voltou")
 checar("player_client=android" not in fonte,

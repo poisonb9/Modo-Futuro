@@ -74,6 +74,21 @@ estado/*
 # foi o que pos o "666 MILHOES" na fila do dia 01/09. Nao ha' segredo aqui,
 # so' titulos e motivos.
 !estado/rejeitados.json
+
+# excecao 3, 09/09/2026: SEGUIDOR POR VIDEO — a unica metrica que mede o
+# objetivo do canal, e a unica que NAO vem no export do TikTok Studio.
+#
+# MEDIDO em 08-09/09/2026, 11 posts do @modofuturo lidos um a um na tela do
+# Studio: 7.775 views -> 32 seguidores. Vinte e oito deles vieram de UM post.
+# Tirando esse, 5.302 views renderam 4 seguidores (0,075%).
+#
+# ⚠️ NENHUMA metrica que o motor coleta previu isso. O post que mais prendeu
+# audiencia (17,97s de media, 8,6% completo) deu ZERO. No par publicado no
+# MESMO DIA, mesmo canal, o de retencao PIOR converteu 28x mais.
+#
+# Vai pro git porque nao se reconstroi: o historico do Studio apaga em 60
+# dias e este campo nao sai em export nenhum — cada linha custou um clique.
+!estado/seguidores_por_video.jsonl
 teste/*.mp4
 teste/*.mp3
 teste/*.log

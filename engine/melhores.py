@@ -42,6 +42,8 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
+from engine import seguidores  # noqa: E402
+
 RAIZ = Path(__file__).resolve().parent.parent
 MANUAL = RAIZ / "estado" / "views_manuais.json"
 DESEMPENHO = RAIZ / "desempenho.jsonl"
@@ -162,15 +164,24 @@ def melhores(canal: str, n: int = 2):
     """Devolve (postos, fonte, aviso). `fonte` e' 'view_real' ou 'curtida'.
 
     ⚠️ NUNCA devolve numero sem dizer de onde ele veio. Ver o cabecalho.
+
+    ⚠️ E DESDE 09/09/2026 o aviso tambem cobre o que a view NAO diz. Os 11
+    posts do @modofuturo medidos um a um no Studio mostraram que view nao
+    previu seguidor — os dois de 22/08 sao o caso limpo, mesmo dia e mesmo
+    canal, e o de retencao PIOR converteu 28x mais. O ranking continua sendo
+    por view (reordenar com n=11 e um outlier seria trocar sinal fraco por
+    outro pior), mas quem o le' passa a ser avisado. Ver `engine/seguidores`.
     """
     postos, por_que = _do_manual(canal)
     if postos:
-        return _juntar_repetidos(postos)[:n], "view_real", ""
+        postos, aviso = seguidores.anotar(_juntar_repetidos(postos)[:n], canal)
+        return postos, "view_real", aviso
     postos, por_que2 = _da_curtida(canal)
     if postos:
-        return _juntar_repetidos(postos)[:n], "curtida", (
-            f"⚠️ SEM view real ({por_que}); ranqueado por CURTIDA. "
-            f"Curtida nao e' view — o ranking pode nao ser o mesmo.")
+        postos, aviso_seg = seguidores.anotar(_juntar_repetidos(postos)[:n], canal)
+        aviso = (f"⚠️ SEM view real ({por_que}); ranqueado por CURTIDA. "
+                 f"Curtida nao e' view — o ranking pode nao ser o mesmo.")
+        return postos, "curtida", (aviso + " " + aviso_seg).strip()
     return [], "nenhuma", f"{por_que}; e {por_que2}"
 
 

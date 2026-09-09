@@ -1519,8 +1519,16 @@ volume. O conteúdo alcança e não converte.
 ⚠️ Isso muda o tipo de trabalho que resta. Não é caça a penalidade, é ofício:
 o que faz alguém que nunca viu o canal decidir seguir depois de 2 segundos.
 O único achado com força estatística até agora aponta pra lá — título que
-MOSTRA rende +37% em view E +35% em curtida (§23.4). Curtida é o sinal mais
-próximo de "gostei" que a gente consegue medir hoje.
+MOSTRA rende +37% em view E +35% em curtida (§23.4).
+
+⚠️ **CORRIGIDO EM 09/09/2026 — a frase que estava aqui dizia que "curtida é o
+sinal mais próximo de gostei que a gente consegue medir hoje", e isso foi
+medido e é falso.** Com o seguidor por vídeo na mão (§23.9), o recordista de
+curtida do lote (4,24%, "Por Que Seu Processador Superrápido") converteu
+ZERO. Curtida serve para ranquear engajamento; não serve como aproximação de
+conversão. E a própria conta dos 0,144% precisa da ressalva da §23.9: a maior
+parte dos posts **nem alcança**, então "alcança e não converte" descreve mal
+o que está acontecendo.
 
 ### 23.7 O que eu decidi NÃO mudar hoje, e por quê — `[MEDIDO 08/09/2026]`
 
@@ -1575,8 +1583,98 @@ coisa global por vez, e só quando houver como saber se funcionou.
 - **Quanto da tela a nossa tarja de título ocupa** nos primeiros 2s: nos
   frames olhados, 25-30% do topo. Nunca foi testado se ajuda ou atrapalha.
 
+### 23.9 Seguidor por vídeo: nada do que o motor mede prevê conversão — `[MEDIDO 09/09/2026]`
+
+O campo **"Novos seguidores"** existe na aba *Visão geral* de cada post no
+Studio, e **não sai em export nenhum** — nem no `Content.csv` (que traz só
+Time, Video title, Video link, Post time, likes, comments, shares, views) nem
+no `Overview.csv` (Date, Video Views, Profile Views, Likes, Comments, Shares).
+Só se lê na tela, um post por vez. O Bryan leu 11 posts do @modofuturo.
+
+| título | views | seg | seg/view | t.médio | completo | curt% |
+|---|---|---|---|---|---|---|
+| As regras extremas / fábrica | 2473 | **28** | 1,13% | 10,63s | 6,9% | 4,08% |
+| Como 1 poeira / 1 milhão | 1009 | 1 | 0,10% | 16,11s | 9,1% | 3,17% |
+| O erro microscópico / 500.000 | 568 | 0 | 0,00% | **17,97s** | **8,6%** | 1,58% |
+| Por Que Fabricar Seus Próprios Chips | 556 | 0 | 0,00% | 13,94s | 4,7% | 1,62% |
+| A máquina que escuta o som | 543 | 0 | 0,00% | 13,36s | 4,0% | 1,66% |
+| Por que o mundo depende de Taiwan | 538 | 0 | 0,00% | 15,05s | 7,1% | 3,16% |
+| A vantagem decisiva dos EUA | 519 | 2 | 0,39% | 12,64s | 1,5% | 1,93% |
+| Por Que Seu Processador Superrápido | 472 | 0 | 0,00% | 9,13s | 2,8% | **4,24%** |
+| A Anthropic superando a OpenAI | 449 | 0 | 0,00% | 5,80s | 0,4% | 1,56% |
+| O plano real da SpaceX | 339 | 0 | 0,00% | 5,53s | 0,8% | 1,77% |
+| O Segredo dos Chips / CFET | 309 | 1 | 0,32% | 7,20s | 1,8% | 1,62% |
+
+**7.775 views → 32 seguidores (0,412%). Tirando o primeiro: 5.302 views → 4
+seguidores (0,075%).**
+
+#### O par de 22/08 é um experimento controlado que a operação fez sem querer
+
+Mesmo canal, **mesmo dia**, mesma cadência, mesmo estado do algoritmo:
+
+    As regras extremas   2473 views  28 seg  10,63s  6,9% completo  4,08% curt
+    Como 1 poeira        1009 views   1 seg  16,11s  9,1% completo  3,17% curt
+
+O segundo prendeu **mais** a audiência e teve **mais** conclusão, e converteu
+**28 vezes menos**. Idade, volume e cadência estão controlados.
+
+#### As três hipóteses que morreram aqui
+
+1. **Patamar de alcance.** A hipótese era que conversão só começa acima de um
+   nível de reach, e os posts de ~500 views nunca chegavam lá. 1009 views deu
+   1 seguidor. Não há degrau entre 500 e 1000.
+2. **Retenção.** O campeão de tempo médio do lote (17,97s) e o de conclusão
+   (8,6%) são o mesmo post, e ele deu **zero**. Os posts COM seguidor têm
+   mediana de conclusão de 1,8%; os SEM seguidor, 4,0% — a direção é a
+   oposta da hipótese.
+3. **Curtida como aproximação de conversão.** 4,24% de curtida, zero
+   seguidor. Ver a correção na §23.6.
+
+#### ⚠️ A consequência para as quatro calibragens de 08/09
+
+Elas foram validadas contra **view e curtida** (§23.4). Este lote mostra que
+view e curtida **não levam a seguidor**. Isso não é motivo para desligá-las —
+continuam sendo os melhores sinais medidos que existem, e não há nada
+melhor para pôr no lugar. É motivo para parar de tratá-las como progresso
+rumo à conversão até o próximo export.
+
+#### O que mudou no motor, e o que deliberadamente NÃO mudou
+
+**Mudou:** `estado/seguidores_por_video.jsonl` guarda as 11 medições (fora do
+`.gitignore`, porque o histórico do Studio apaga em 60 dias e cada linha
+custou um clique); `engine/seguidores.py` anota `seguidores` no ranking do
+`melhores()` e **avisa** quando o primeiro por view não é o primeiro por
+seguidor; `teste/teste_seguidor_por_video.py` guarda o comportamento, com o
+caso negativo — o aviso tem de ficar **calado** quando os dois campeões
+coincidem, senão ele vira ruído.
+
+**Não mudou:** o ranking continua por view. Com n=11, sete zeros e um outlier
+carregando 28 dos 32 seguidores, reordenar por seguidor seria trocar um sinal
+fraco por um mais fraco. A decisão espera o próximo export.
+
+#### Dois achados laterais
+
+- **"A máquina que escuta" ganhou +179 views em UM dia**, seis dias depois de
+  publicada, e tem **60% de espectadores que retornaram**. View aos 7 dias
+  não é número final — a rotina mensal (§6 do handoff) mede na hora certa; a
+  do Buffer, não.
+- **Zero comentários nos onze posts**, em 7.775 views.
+
+#### O que ainda não dá para dizer
+
+Por que o post de 22/08 converteu. Nenhuma variável coletada o distingue.
+Faltam n e faltam variáveis — a mais provável de explicar é o **público a
+quem ele foi entregue**, que só a aba *Espectadores* mostra e que não foi
+lida post a post.
+
 **Procedência:** export do TikTok Studio das 5 contas, 08/09/2026, importado
 por `importar_overview_tiktok.py` e `importar_metricas_tiktok.py`. Série em
 `estado/overview_tiktok.json`; posts em `estado/views_manuais.json`. As duas
 calibragens feitas a partir daqui estão em `estado/calibragens.jsonl`, cada
 uma com a condição que a derruba.
+
+A §23.9 tem procedência diferente e mais frágil: **leitura a olho da tela do
+Studio**, 11 posts, 08-09/09/2026, transcrita para
+`estado/seguidores_por_video.jsonl`. Não passou por importador e não tem
+conferência automática — se algum número parecer estranho, ele se confere
+reabrindo o post no Studio, não recalculando.

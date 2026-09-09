@@ -360,7 +360,31 @@ def esperar_vez(rotulo: str = "", peso: str = "pesado") -> None:
     avisou = False
     try:
         while True:
-            cadeado = _pegar_cadeado(60)
+            # ⚠️ PORTA OCUPADA E' FILA, NAO RECUSA. Desde que o `vez()` passou a
+            # SEGURAR o cadeado durante o comando (09/09/2026), encontrar a
+            # porta fechada virou o caso NORMAL: significa que ha' um download
+            # em curso. Deixar o `NaoConsegui` do `_pegar_cadeado` subir aqui
+            # transformaria a fila numa recusa em 60s — o contrario da ordem
+            # do Bryan ("quem chega dentro do intervalo entra numa FILA em vez
+            # de ser recusado"), e cada chamador voltaria a inventar seu
+            # proprio retry, que foi o que queimou a VPS.
+            #
+            # Quem espera aqui NAO carimbou nada: o relogio e a contagem do
+            # dia so' avancam com o cadeado na mao, la' embaixo.
+            try:
+                cadeado = _pegar_cadeado(_TENTATIVA_CADEADO_S)
+            except NaoConsegui:
+                if time.time() >= limite:
+                    raise NaoConsegui(
+                        f"nao consegui a vez em {espera_max()}s: outra chamada "
+                        f"ao YouTube segurou a porta o tempo todo (peso={peso})")
+                if not avisou:
+                    extra = f" — {rotulo}" if rotulo else ""
+                    print(f"[sentinela] esperando: ha' uma chamada em curso"
+                          f"{extra}", flush=True)
+                    avisou = True
+                time.sleep(5)
+                continue
             try:
                 # ⚠️ Confere o freio DE NOVO com o cadeado na mao: quem estava
                 # na frente pode ter levado bot-check nesse meio-tempo. Sem
@@ -407,6 +431,12 @@ def esperar_vez(rotulo: str = "", peso: str = "pesado") -> None:
 
 
 _BATIDA_S = 60
+
+# Quanto o `esperar_vez` insiste em CADA tentativa de pegar o cadeado antes de
+# voltar pro laco de espera. ⚠️ Nao e' o teto da fila (esse e' o
+# `espera_max()`): e' so' o tamanho da tentativa. Existe como constante pra o
+# teste conseguir exercitar a porta ocupada sem segurar a suite por um minuto.
+_TENTATIVA_CADEADO_S = 60
 
 
 @contextlib.contextmanager

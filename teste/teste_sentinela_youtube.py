@@ -266,6 +266,62 @@ with s.vez("dois", peso="pesado"):
 checar(time.time() - t0 < 3, "porta livre: passa direto, sem fila fantasma")
 checar(not (d / "cadeado").exists(), "e a porta fica solta no fim")
 
+print(chr(10) + "11. porta ocupada e' FILA, nao recusa")
+# ⚠️ REGRESSAO QUE O PROPRIO `vez()` criou, achada no mesmo dia: com a porta
+# agora SEGURA durante o comando, encontrar o cadeado fechado virou o caso
+# normal. O `_pegar_cadeado(60)` de dentro do `esperar_vez` levanta
+# `NaoConsegui` em 60s — e isso transformaria a fila numa RECUSA sempre que
+# houvesse um download em curso. E' o contrario da ordem: quem chega cedo
+# espera, nunca leva erro. Recusar faz cada chamador inventar seu retry, que
+# foi o que queimou a VPS.
+# ⚠️ A tentativa de cadeado cai pra 1s SO' NESTE TESTE. Com os 60s de
+# producao, uma porta segurada por 3s nem chegaria a levantar `NaoConsegui` —
+# o teste passaria no codigo ANTIGO tambem, e nao provaria nada.
+s._TENTATIVA_CADEADO_S = 1
+d = limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=120)
+segurou = threading.Event()
+fim = threading.Event()
+resultado = []
+
+
+def _dono():
+    with s.vez("dono demorado", peso="pesado"):
+        segurou.set()
+        fim.wait(8)
+
+
+t = threading.Thread(target=_dono, daemon=True)
+t.start()
+segurou.wait(5)
+t0 = time.time()
+try:
+    # a porta fica ocupada por mais tempo que UMA tentativa de cadeado: no
+    # jeito antigo, isto levantava NaoConsegui em vez de enfileirar
+    def _libera():
+        time.sleep(4)          # > _TENTATIVA_CADEADO_S: a porta FICA ocupada
+        fim.set()
+    threading.Thread(target=_libera, daemon=True).start()
+    s.esperar_vez("chegou depois", peso="pesado")
+    checar(True, "esperou a porta abrir em vez de recusar")
+except s.NaoConsegui:
+    checar(False, "RECUSOU em vez de enfileirar — a fila virou erro")
+t.join(15)
+s._TENTATIVA_CADEADO_S = 60      # devolve o valor de producao
+
+print(chr(10) + "11b. NEGATIVO: a espera nao e' infinita")
+# Sem esta metade, "esperar sempre" travaria o processo pra sempre quando o
+# dono da porta nunca soltasse.
+d = limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=2)
+(d / "cadeado").write_text(f"999999 {time.time():.0f}", encoding="utf-8")
+t0 = time.time()
+try:
+    s.esperar_vez("porta trancada pra sempre", peso="pesado")
+    checar(False, "passou por cima de um cadeado vivo")
+except s.NaoConsegui:
+    checar(time.time() - t0 < 90, "desiste dentro do teto de espera")
+
 if falhas:
     print(chr(10) + f"{falhas} FALHA(S)")
     sys.exit(1)

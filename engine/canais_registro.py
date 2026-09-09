@@ -116,6 +116,34 @@ CANAIS: dict[str, Canal] = {
               "6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15",
               "BUFFER_TOKEN_COZINHA", motor=False,
               apelidos=("cozinha.internacional", "cozinha")),
+
+        # ⚠️⚠️ AS DUAS DE BAIXO EXISTEM NO TIKTOK E **NAO** NO BUFFER.
+        #
+        # Descobertas em 09/09/2026, na tela de "Mudar de conta": o app tem
+        # SETE contas e este registro tinha CINCO. Elas ficavam invisiveis pra
+        # maquina — sem guarda CANAL_ESPERADO, sem aparecer em relatorio, e um
+        # export chegando como `Content_fatura.chora.zip` pareceria canal novo
+        # do nada.
+        #
+        # Sao a FASE 2 (ver FASE2.md): canais de achadinho puro, com link de
+        # afiliado, pagina na bio e grupo de WhatsApp. Decisao do Bryan em
+        # 09/09: os dois canais Achadinho apontam para o grupo.
+        #
+        # ⚠️ `org`, `canal_id` e `env` estao VAZIOS DE PROPOSITO — elas nao
+        # existem no Buffer ainda, e nao ha' token. Preencher com valor
+        # inventado seria pior que nao ter: a publicacao sairia pelo token
+        # errado, em silencio, que e' o defeito que o cabecalho deste arquivo
+        # documenta. `motor=False` mantem as duas fora de tudo que publica.
+        #
+        # ⚠️ E ha' um teste guardando isto: `teste_canal_sem_buffer.py`. Quando
+        # elas ganharem token, o teste ACUSA — e' o lembrete de preencher os
+        # tres campos no mesmo commit.
+        Canal("achadinhos.instantaneos", "@achadinhos.instantaneos",
+              "", "", "", motor=False,
+              apelidos=("achadinhos.instantaneos", "instantaneos")),
+        Canal("fatura.chora", "@fatura.chora",
+              "", "", "", motor=False,
+              apelidos=("fatura.chora", "fatura")),
     ]
 }
 

@@ -118,6 +118,36 @@ inteira, e a unica coisa que este repositorio pode oferecer de imediato e' a
 LISTA (qual produto, qual link, qual clipe) — publicar no grupo e' outro
 problema.
 
+#### ⚠️ ATUALIZADO EM 09/09/2026 — os dois canais existem, e o grupo foi decidido
+
+**As duas contas ja' foram criadas no TikTok**, e este repositorio nao sabia:
+a tela "Mudar de conta" do app mostra SETE contas e o `canais_registro` tinha
+CINCO. As faltantes:
+
+    @achadinhos.instantaneos   0 posts · 0 seguidores · sem bio
+    @fatura.chora              (icone de carrinho)
+
+Agora estao registradas em `engine/canais_registro.py`, com `motor=False` e
+com os campos do Buffer **VAZIOS** — elas nao existem no Buffer e nao ha'
+token. `teste/teste_canal_sem_buffer.py` guarda isso: quando ganharem token,
+o teste acusa, e e' o lembrete de preencher os tres campos no mesmo commit.
+
+**Decisao do Bryan em 09/09:** os canais Achadinho apontam para o **grupo de
+WhatsApp**. Isso muda a ordem da §4 — o 2.5 deixa de ser "por ultimo porque
+nao bloqueia ninguem" e vira o **destino** do funil. Continua sem bloquear
+codigo (criar o grupo e' acao manual dele), mas o que este repo precisa
+entregar fica mais claro: **a LISTA**, no formato que o grupo le'.
+
+⚠️ E fica um risco novo, que so' existe porque os canais Achadinho agora sao
+DOIS (`make` e `chef`) mais os dois puros: se todos apontarem para o MESMO
+grupo, nao havera' como saber qual canal traz gente. **A medicao mais barata
+e' um link de convite por canal** — mesmo grupo, convites diferentes. Decidir
+isso ANTES de por o link na bio; depois, nao ha' como separar.
+
+⚠️ E o defeito da §1.1 (`or "modofuturo"`) sai da gaveta com estes dois
+registrados. Ele continua sem disparar hoje, mas o custo dele mudou: um clipe
+de afiliado sem `canal` no manifesto vai pro canal de chips.
+
 ---
 
 ## 3. O QUE JA' SERVE, SEM MUDANCA

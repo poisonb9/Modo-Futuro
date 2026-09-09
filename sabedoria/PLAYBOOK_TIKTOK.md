@@ -1676,6 +1676,31 @@ dos ~550 views, que são justamente os que decidiriam. A pista fica registrada
 como **não resolvida e não resolvível com a instrumentação atual** — não
 como pendência. Quem pegar isto: não gaste sessão tentando de novo.
 
+#### ✅ O ÚNICO CORTE QUE SEPARA LIMPO: título que PERGUNTA não converte
+
+    titulo PERGUNTA ("Por Que...", "?")   n=4    2153 views    0 seguidores   0 de 4
+    titulo AFIRMA (mostra a coisa)        n=14   9853 views   37 seguidores   7 de 14
+
+Os quatro títulos-pergunta do lote — as duas variações de Taiwan, "Por Que
+Fabricar Seus Próprios Chips", "Por Que Seu Processador Superrápido É Inútil"
+— somam **2.153 views e zero seguidores**.
+
+⚠️ **E os quatro foram publicados entre 28/08 e 05/09 — todos ANTES da
+calibragem de 08/09**, que já proíbe esse formato de título no prompt de
+seleção (`engine/selecao.py`: "NAO prometa explicacao: evite abrir com 'Como',
+'Por que', 'O segredo de' ou pergunta"). **O motor já parou de produzi-los.**
+
+Isto importa porque a calibragem 1 tinha sido medida contra **view e curtida**
+(1,48x contra 1,07x; curtida 3,53% contra 2,62%; n=75). Esta é a primeira vez
+que ela é confirmada contra **seguidor**, que é o objetivo — e por uma
+medição independente da que a originou.
+
+⚠️ **Ressalva de tamanho:** n=4 no grupo PERGUNTA. Sob a taxa base do lote
+(7 de 18 = 39%), tirar 0 de 4 acontece por acaso em ~14% das vezes. Sozinho
+não é significante. Vale porque **concorda** com a medição anterior, feita em
+75 posts e em outra métrica. Registrado em `estado/calibragens.jsonl` com a
+condição que o derruba.
+
 #### O que ainda não dá para dizer — e o que fazer com isso
 
 Por que o post de 22/08 converteu 28 vezes mais que os irmãos do MESMO DIA.

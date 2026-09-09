@@ -42,7 +42,8 @@ pedem a ela.** Esta sentinela e' a porta dessa maquina.
 ## AJUSTES (variaveis de ambiente)
 
     SENTINELA_YT_DIR        onde mora o estado (padrao: ~/.sentinela_youtube)
-    SENTINELA_YT_INTERVALO  segundos entre chamadas         (padrao: 900)
+    SENTINELA_YT_INTERVALO       segundos entre downloads de VIDEO (600)
+    SENTINELA_YT_INTERVALO_LEVE  entre legenda/metadado/listagem   (300)
     SENTINELA_YT_ESPERA_MAX teto de espera na fila          (padrao: 3600)
     SENTINELA_YT_TETO_DIA   chamadas por dia                (padrao: 12)
     SENTINELA_YT_FREIO_H    horas de freio apos bot-check   (padrao: 24)
@@ -97,8 +98,31 @@ def _num(nome: str, padrao: int) -> int:
         return padrao
 
 
-def intervalo() -> int:
-    return _num("SENTINELA_YT_INTERVALO", 900)
+# ⚠️ DUAS FAIXAS, UM CADEADO SO'. Ajustado em 09/09/2026 depois de o Bryan
+# apontar o obvio: "15 min nao e' muito? eu preciso baixar legendas as vezes".
+#
+# Estava errado tratar uma legenda como um video de 700 MB. Para o YouTube um
+# download de video e' uma sessao longa, com dezenas de requisicoes de
+# segmento; uma legenda ou um metadado e' UMA requisicao curta. O que
+# dispara o bot-check e' o padrao de requisicao, e os dois padroes sao
+# diferentes.
+#
+#   PESADO  video      600s (10 min)
+#   LEVE    legenda,   300s (5 min)  <- numero escolhido pelo Bryan
+#           metadado,
+#           listagem
+#
+# ⚠️ NENHUM DOS DOIS E' MEDIDO. Sao escolhas com folga: a operacao precisa de
+# 2-4 videos por dia, e o que queimou a VPS foi RAJADA, nao volume.
+#
+# ⚠️ E O CADEADO CONTINUA UM SO'. As faixas mudam a ESPERA, nunca a
+# simultaneidade: uma legenda nunca sai junto com um video. Duas faixas com
+# dois cadeados seriam duas portas, que e' exatamente o que a sentinela
+# existe pra impedir.
+def intervalo(peso: str = "pesado") -> int:
+    if peso == "leve":
+        return _num("SENTINELA_YT_INTERVALO_LEVE", 300)
+    return _num("SENTINELA_YT_INTERVALO", 600)
 
 
 def espera_max() -> int:
@@ -167,7 +191,7 @@ def _contagem() -> dict:
 def estado() -> dict:
     travado, por_que = freio_ativo()
     ult = float(_ler(_dir() / "ultima.json").get("quando", 0) or 0)
-    falta = max(0, intervalo() - (time.time() - ult)) if ult else 0
+    falta = max(0, intervalo("pesado") - (time.time() - ult)) if ult else 0
     return {
         "dir": str(_dir()),
         "freio": travado,
@@ -175,6 +199,7 @@ def estado() -> dict:
         "ultima": (datetime.fromtimestamp(ult, timezone.utc)
                    .isoformat(timespec="seconds") if ult else None),
         "faltam_s": int(falta),
+        "intervalo_leve_s": intervalo("leve"),
         "hoje": _contagem()["n"],
         "teto_dia": teto_dia(),
         "intervalo_s": intervalo(),
@@ -211,12 +236,42 @@ def _pegar_cadeado(limite_s: float) -> Path:
             time.sleep(2)
 
 
-def esperar_vez(rotulo: str = "") -> None:
+def _leve_esperando() -> bool:
+    """Ha' uma chamada LEVE na fila agora?
+
+    ⚠️ O marcador tem prazo. Se um processo leve morrer antes de passar, o
+    arquivo ficaria la' e todo video esperaria por um fantasma pra sempre.
+    """
+    d = _ler(_dir() / "pedido_leve.json")
+    return float(d.get("quando", 0) or 0) > time.time() - 120
+
+
+def _marcar_leve(ligado: bool) -> None:
+    if ligado:
+        _grav(_dir() / "pedido_leve.json",
+              {"quando": time.time(), "pid": os.getpid()})
+    else:
+        (_dir() / "pedido_leve.json").unlink(missing_ok=True)
+
+
+def esperar_vez(rotulo: str = "", peso: str = "pesado") -> None:
     """Segura aqui ate' ser a vez. Levanta se estiver travado.
 
     ⚠️ E' o coracao: quem chega dentro do intervalo NAO leva erro, ele DORME
     o que falta. Recusar faria cada chamador inventar seu proprio retry, e
     retry solto foi o que queimou a VPS.
+
+    ⚠️ QUEM DORME NAO SEGURA O CADEADO. Na primeira versao o processo pegava
+    a porta e so' entao dormia o intervalo — e uma legenda ficava presa atras
+    de um video por ate' 10 minutos, com a porta trancada a toa. Agora o
+    cadeado e' tomado so' pra OLHAR o relogio e pra CARIMBAR; o sono
+    acontece com a porta livre.
+
+    ⚠️ E A LEGENDA TEM PREFERENCIA. Ordem do Bryan em 09/09: "para download
+    de videos eu nao me importo, mas quando for legendas pode priorizar".
+    Um pedido LEVE deixa um marcador; enquanto ele existir, chamada PESADA
+    nao carimba, mesmo com o tempo dela cumprido. O video espera mais um
+    pouco; a legenda passa na frente.
     """
     travado, por_que = freio_ativo()
     if travado:
@@ -227,29 +282,56 @@ def esperar_vez(rotulo: str = "") -> None:
         raise Bloqueada(f"teto do dia atingido ({c['n']}/{teto_dia()}) — "
                         f"volta amanha, em UTC")
 
-    cadeado = _pegar_cadeado(espera_max())
+    if peso == "leve":
+        _marcar_leve(True)
+    limite = time.time() + espera_max()
+    avisou = False
     try:
-        # ⚠️ Confere o freio DE NOVO com o cadeado na mao: entre a primeira
-        # checagem e agora, quem estava na frente pode ter levado bot-check e
-        # puxado o freio. Sem isto a fila inteira desfila em cima do bloqueio.
-        travado, por_que = freio_ativo()
-        if travado:
-            raise Bloqueada(por_que)
+        while True:
+            cadeado = _pegar_cadeado(60)
+            try:
+                # ⚠️ Confere o freio DE NOVO com o cadeado na mao: quem estava
+                # na frente pode ter levado bot-check nesse meio-tempo. Sem
+                # isto a fila inteira desfila em cima do bloqueio.
+                travado, por_que = freio_ativo()
+                if travado:
+                    raise Bloqueada(por_que)
 
-        ult = float(_ler(_dir() / "ultima.json").get("quando", 0) or 0)
-        falta = intervalo() - (time.time() - ult) if ult else 0
-        if falta > 0:
-            extra = f" — {rotulo}" if rotulo else ""
-            print(f"[sentinela] a vez chega em {falta:.0f}s{extra}", flush=True)
-            time.sleep(falta)
+                ult = float(_ler(_dir() / "ultima.json").get("quando", 0) or 0)
+                # ⚠️ O relogio e' UM so' e vale pra todo mundo: o intervalo
+                # conta desde a ULTIMA chamada de QUALQUER peso. Se cada faixa
+                # tivesse seu relogio, uma legenda logo depois de um video
+                # pareceria espacada e nao estaria — a rajada que queimou a VPS.
+                falta = intervalo(peso) - (time.time() - ult) if ult else 0
+                cede = peso != "leve" and _leve_esperando()
 
-        _grav(_dir() / "ultima.json",
-              {"quando": time.time(), "rotulo": str(rotulo)[:200],
-               "pid": os.getpid()})
-        c["n"] += 1
-        _grav(_dir() / "contagem.json", c)
+                if falta <= 0 and not cede:
+                    c = _contagem()          # relê: outro pode ter passado
+                    if teto_dia() and c["n"] >= teto_dia():
+                        raise Bloqueada(
+                            f"teto do dia atingido ({c['n']}/{teto_dia()})")
+                    _grav(_dir() / "ultima.json",
+                          {"quando": time.time(), "rotulo": str(rotulo)[:200],
+                           "peso": peso, "pid": os.getpid()})
+                    c["n"] += 1
+                    _grav(_dir() / "contagem.json", c)
+                    return
+            finally:
+                cadeado.unlink(missing_ok=True)   # dorme com a porta LIVRE
+
+            if time.time() >= limite:
+                raise NaoConsegui(
+                    f"nao consegui a vez em {espera_max()}s (peso={peso})")
+            if not avisou:
+                motivo = ("cedendo a vez pra uma legenda" if cede
+                          else f"a vez chega em {max(0, falta):.0f}s")
+                extra = f" — {rotulo}" if rotulo else ""
+                print(f"[sentinela] {motivo}{extra}", flush=True)
+                avisou = True
+            time.sleep(min(max(1.0, falta if falta > 0 else 2.0), 5.0))
     finally:
-        cadeado.unlink(missing_ok=True)
+        if peso == "leve":
+            _marcar_leve(False)
 
 
 def e_bloqueio(texto: str) -> bool:
@@ -257,9 +339,23 @@ def e_bloqueio(texto: str) -> bool:
     return any(s in t for s in SINAIS_DE_BLOQUEIO)
 
 
-def rodar(cmd: list[str], rotulo: str = "") -> int:
+def peso_do_comando(cmd: list[str]) -> str:
+    """LEVE quando o comando so' consulta; PESADO quando puxa midia.
+
+    ⚠️ Na duvida, PESADO. Errar pra baixo custa 5 minutos de espera a mais;
+    errar pra cima e' tratar um download de video como consulta, que e' o
+    caminho de volta pro bot-check.
+    """
+    leves = ("--skip-download", "--write-sub", "--write-auto-sub",
+             "--list-subs", "--print", "--dump-json", "--get-", "-F",
+             "--list-formats", "--simulate", "-s")
+    return "leve" if any(a in leves or a.startswith("--get-")
+                         for a in cmd) else "pesado"
+
+
+def rodar(cmd: list[str], rotulo: str = "", peso: str | None = None) -> int:
     """Espera a vez, roda o comando, e PUXA O FREIO se vier bot-check."""
-    esperar_vez(rotulo or " ".join(cmd[:2]))
+    esperar_vez(rotulo or " ".join(cmd[:2]), peso or peso_do_comando(cmd))
     r = subprocess.run(cmd, capture_output=True, text=True,
                        encoding="utf-8", errors="replace")
     saida = (r.stdout or "") + (r.stderr or "")

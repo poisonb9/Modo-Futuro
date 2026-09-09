@@ -47,8 +47,9 @@ def checar(cond, recado):
         falhas += 1
 
 
-AJUSTES = ("SENTINELA_YT_INTERVALO", "SENTINELA_YT_ESPERA_MAX",
-           "SENTINELA_YT_TETO_DIA", "SENTINELA_YT_FREIO_H")
+AJUSTES = ("SENTINELA_YT_INTERVALO", "SENTINELA_YT_INTERVALO_LEVE",
+           "SENTINELA_YT_ESPERA_MAX", "SENTINELA_YT_TETO_DIA",
+           "SENTINELA_YT_FREIO_H")
 
 
 def limpo(**env):
@@ -146,12 +147,40 @@ checar(not s.e_bloqueio("ERROR: Video unavailable"),
 checar(not s.e_bloqueio("ERROR: The page needs to be reloaded"),
        "desafio de JS NAO e' bot-check — foi o defeito de 09/09")
 checar(not s.e_bloqueio(""), "texto vazio nao dispara")
+print(chr(10) + "8b. LEVE tem preferencia sobre PESADO")
+# ⚠️ Ordem do Bryan: 'para video eu nao me importo, mas legenda pode
+# priorizar". Enquanto houver pedido leve na fila, o pesado CEDE a vez.
+limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+      SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=3)
+s._marcar_leve(True)
+try:
+    s.esperar_vez("video com legenda na fila", peso="pesado")
+    checar(False, "o pesado passou por cima do pedido leve")
+except s.NaoConsegui:
+    checar(True, "o pesado CEDE enquanto ha' legenda esperando")
+s._marcar_leve(False)
+t = time.time()
+s.esperar_vez("sem legenda na fila", peso="pesado")
+checar(time.time() - t < 3, "sem pedido leve, o pesado passa normalmente")
+
+print(chr(10) + "8c. quem dorme NAO segura o cadeado")
+# ⚠️ Na primeira versao o processo pegava a porta e SO ENTAO dormia —
+# uma legenda ficava presa atras de um video por ate 10 min, a toa.
+d = limpo(SENTINELA_YT_INTERVALO=3600, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=2)
+s.esperar_vez("primeira", peso="leve")
+checar(not (d / "cadeado").exists(), "cadeado solto entre uma chamada e outra")
+
 
 print("\n8. o estado se le' sem quebrar, mesmo zerado")
 limpo()
 e = s.estado()
 checar(e["freio"] is False and e["hoje"] == 0, "estado novo: sem freio, zero hoje")
-checar(e["intervalo_s"] == 900, f"intervalo padrao 900s (veio {e['intervalo_s']})")
+# ⚠️ Duas faixas desde 09/09: video 600s, legenda/metadado 300s. O cadeado
+# continua UM so' — a faixa muda a espera, nunca a simultaneidade.
+checar(e["intervalo_s"] == 600, f"video: 600s (veio {e['intervalo_s']})")
+checar(e["intervalo_leve_s"] == 300,
+       f"leve: 300s (veio {e['intervalo_leve_s']})")
 checar(e["teto_dia"] == 12, f"teto padrao 12 (veio {e['teto_dia']})")
 
 if falhas:

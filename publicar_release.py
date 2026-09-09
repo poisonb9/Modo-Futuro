@@ -304,6 +304,18 @@ def main() -> None:
                         # que e' diferente de vazio. Ver engine/produto.py.
                         **({"produto": _prod} if (
                             _prod := produto.normalizar(m.get("produto"))) else {}),
+                        # ⚠️ A DURACAO E O APARO DA CAUDA VIAJAM PRA PODER
+                        # MEDIR. O manifesto e' o unico registro que persiste
+                        # (o runner nasce limpo a cada run) e e' por onde o
+                        # clipe e' reencontrado depois. Sem isto, o
+                        # `cauda_aparada_s` que o main.py grava morre no
+                        # post.json e a calibragem de 09/09 fica sem o corte
+                        # que ela promete — o mesmo defeito de copia por nomes
+                        # que acabou de comer o campo `produto`, uma etapa
+                        # adiante. 0 = clipe sem cauda; ausente = clipe
+                        # anterior ao campo.
+                        "duracao_s": m.get("duracao_s"),
+                        "cauda_aparada_s": m.get("cauda_aparada_s", 0),
                         "depende_de_anterior": bool(m.get("depende_de_anterior")),
                         "o_que_falta": m.get("o_que_falta", ""),
                         "publicado_em": f"{date.today():%Y-%m-%d}"}

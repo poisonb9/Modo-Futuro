@@ -84,6 +84,29 @@ if cauda.CAUDA_MAX_S <= cauda.CAUDA_MARGEM_S:
     falhas.append("CAUDA_MAX_S <= CAUDA_MARGEM_S: aparar deixaria uma cauda "
                   "que o proprio limiar consideraria grande")
 
+# --------------------------------------------- o campo CHEGA onde e' medido
+# ⚠️ A conta certa nao serve de nada se o numero nao viaja. Sao DUAS copias
+# por nomes em sequencia — `meta` no main.py e o item do manifesto no
+# publicar_release — e cada uma some com o que nao esta' nomeada nela, sem
+# erro nenhum. Foi assim que o campo `produto` morreu no meio do cano
+# (09/09/2026), e o `cauda_aparada_s` ia pelo mesmo caminho: gravado no
+# post.json e ausente do manifesto, que e' o unico registro que persiste.
+FONTE_MAIN = (Path(__file__).resolve().parent.parent / "main.py").read_text(
+    encoding="utf-8")
+FONTE_REL = (Path(__file__).resolve().parent.parent
+             / "publicar_release.py").read_text(encoding="utf-8")
+if 'meta["cauda_aparada_s"]' not in FONTE_MAIN:
+    falhas.append("o main.py nao grava cauda_aparada_s no post.json")
+if '"cauda_aparada_s"' not in FONTE_REL:
+    falhas.append("o manifesto nao carrega cauda_aparada_s — a calibragem "
+                  "promete um corte que nao existe no dado")
+if '"duracao_s"' not in FONTE_REL:
+    falhas.append("o manifesto nao carrega duracao_s — sem ela o aparo nao "
+                  "vira proporcao, e retencao se compara em proporcao")
+# NEGATIVO: a busca tem de saber acusar um nome que nao esta' la'
+if '"cauda_que_nao_existe"' in FONTE_REL:
+    falhas.append("caso negativo mal montado")
+
 if falhas:
     for f in falhas:
         print("  [x]", f)

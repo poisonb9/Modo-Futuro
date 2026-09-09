@@ -16,26 +16,36 @@ aqui, (3) o que ja' esta' pronto e serve. Cada item diz qual e'.
 ## 1. O QUE MUDA DE TAMANHO PORQUE A FASE 2 EXISTE
 
 Tres achados da revisao eram "latentes" enquanto os canais eram cinco e todos
-de video longo cortado. Com canal NOVO entrando, dois deles saem da gaveta.
+de video longo cortado. Com canal NOVO entrando, dois deles saiam da gaveta.
 
-### 1.1 ⚠️ O default `or "modofuturo"` vira risco ATIVO  (defeito atual)
+⚠️ **ATUALIZADO 09/09/2026: os tres estao fechados.** A secao fica porque ela
+conta POR QUE cada um precisava ser consertado antes do canal novo — e o canal
+novo chegou em 09/09. Nao ha' acao pendente aqui; se voce esta' procurando
+trabalho, va' pra §2.
 
-`agendar_buffer.py:535`
+### 1.1 O default `or "modofuturo"` — ✅ RESOLVIDO 04/09/2026
+
+**Era** `agendar_buffer.py`:
 
     (v.get("canal") or "modofuturo").strip().lower() == canal_deste_run
 
-Clipe sem `canal` no manifesto e' tratado como modofuturo. Medido em
-04/09/2026: os 161 clipes do manifesto TEM canal, entao hoje isto nao dispara.
+Clipe sem `canal` no manifesto era tratado como modofuturo — foi este default
+que mandou oito clipes de podcast pro canal de chips, e QUATRO chegaram a ser
+agendados.
 
-⚠️ Mas foi exatamente este default que mandou oito clipes de podcast pro canal
-de chips, e canal NOVO e' precisamente o caminho por onde entra clipe com
-campo faltando — codigo novo, pipeline nova, campo esquecido.
+**Hoje** o agendador resolve pelo registro e ausencia e' RECUSA:
 
-O conserto e' o que o `canal_da_pasta` do vigia ja' faz: devolver None e
-RECUSAR, em vez de chutar. Recusar custa um clipe nao agendado; chutar custa
-um produto de afiliado publicado no canal de tecnologia.
+    c = canais_registro.canonico(v.get("canal"))
+    return bool(c) and c == canal_deste_run
 
-### 1.2 ⚠️ Dois nomes para o mesmo canal  (defeito atual)
+`canonico` devolve None pra desconhecido, nunca um palpite.
+`teste/teste_canais_registro.py` guarda os dois lados: a linha literal
+`or "modofuturo"` nao pode voltar ao agendador (o defeito ERA uma grafia), e
+o caso negativo exige que canal desconhecido, vazio e None devolvam None —
+sem ele, um resolvedor que sempre devolve algo passaria e reproduziria o
+defeito.
+
+### 1.2 Dois nomes para o mesmo canal — ✅ RESOLVIDO 04/09/2026
 
 A cozinha se chama `cozinha.importada` em quatro lugares e
 `cozinha.internacional` em quatro outros. O nome real no Buffer e'
@@ -47,15 +57,26 @@ comparando com `cozinha.importada`; nao bate; cai no `else`; e o token que sai
 e' o do **modofuturo**. So' nao acontece porque o `engine/escopo.py` barra a
 cozinha antes — duas guardas independentes, e nenhuma sabe da outra.
 
-⚠️ Para a fase 2 isto e' um MOLDE de erro, nao um caso isolado: cada canal
-novo e' batizado em pelo menos seis arquivos, e nada confere que os seis
-concordam. Antes de criar os dois canais de achadinhos, o nome do canal
-precisa ter UMA fonte, e um teste que reprove divergencia.
+⚠️ Para a fase 2 isto era um MOLDE de erro, nao um caso isolado: cada canal
+novo era batizado em pelo menos seis arquivos, e nada conferia que os seis
+concordavam.
+
+**O conserto:** `engine/canais_registro.py` e' a fonte UNICA. O nome real do
+Buffer e' o canonico (`cozinha.importada`) e `cozinha.internacional` entrou
+como APELIDO, junto com o `@` do TikTok — os dois resolvem pro mesmo canal em
+vez de competir. `teste/teste_canais_registro.py` reprova divergencia: compara
+as tabelas que `conferir_postados`, `escolher_impulsionar`, `painel_filas`,
+`registrar_desempenho` e `repor_fila` publicam, e acusa quando duas discordam.
+
+⚠️ O que continua valendo da licao: canal novo se cadastra NUM lugar so'. Foi
+assim que os dois canais novos de 09/09 entraram (§2.5).
 
 ### 1.3 O mecanismo de estreia volta a valer  (ja' pronto, so' usar)
 
-`engine/estreia.py` esta' VAZIO desde 01/09 e o `PIPELINE.md` secao 5 ainda
-diz o contrario — a doc esta' velha, o codigo esta' certo.
+`engine/estreia.py` esta' com `ESTREIA_ATE` VAZIO desde 01/09 — os tres canais
+que estavam la' venceram o prazo. ⚠️ A `PIPELINE.md` §5 ficou tres dias
+dizendo o contrario e **ja' foi corrigida em 04/09**; a tabela vazia e' o
+estado certo, nao um esquecimento.
 
 O Bryan ja' pediu, para os canais anteriores, postar os DOIS primeiros videos
 na mao: houve estreia automatica que flopou. Os dois canais de achadinhos
@@ -111,16 +132,6 @@ que e' a unica coisa que este repo pode entregar ao grupo hoje (§2.5).
 
 ---
 
-
-
-O clipe hoje carrega titulo, descricao, tags, gancho, notas. Nao carrega
-produto, preco, nem link. A pagina da bio e o grupo do WhatsApp precisam
-LER isso de algum lugar, e esse lugar tem de ser o mesmo que a legenda usa —
-senao o video diz um preco e a pagina diz outro.
-
-⚠️ Decisao pendente: o produto vira campo do manifesto, ou vira um registro
-proprio ao lado dele? O manifesto ja' e' lido por seis scripts.
-
 ### 2.3 A fonte do video muda de natureza
 
 Os cinco canais atuais cortam video longo de terceiro. Achadinho e' video
@@ -174,9 +185,10 @@ grupo, nao havera' como saber qual canal traz gente. **A medicao mais barata
 e' um link de convite por canal** — mesmo grupo, convites diferentes. Decidir
 isso ANTES de por o link na bio; depois, nao ha' como separar.
 
-⚠️ E o defeito da §1.1 (`or "modofuturo"`) sai da gaveta com estes dois
-registrados. Ele continua sem disparar hoje, mas o custo dele mudou: um clipe
-de afiliado sem `canal` no manifesto vai pro canal de chips.
+⚠️ O defeito da §1.1 (`or "modofuturo"`) seria o risco destes dois canais
+novos: clipe de afiliado sem `canal` no manifesto iria pro canal de chips.
+**Ele ja' estava consertado antes de eles existirem** — o agendador recusa em
+vez de chutar. E' o unico item desta secao que nao precisa de acao.
 
 ---
 
@@ -199,10 +211,9 @@ de afiliado sem `canal` no manifesto vai pro canal de chips.
 
 ⚠️ Isto e' proposta. A ordem real e' do Bryan.
 
-  1. **1.1 e 1.2 primeiro** — sao os dois defeitos que canal novo transforma
-     em publicacao no canal errado. Consertar ANTES de existir canal novo
-     custa um dia; consertar depois custa um video de afiliado no canal de
-     chips.
+  1. ~~**1.1 e 1.2 primeiro**~~ — ✅ FEITOS em 04/09/2026, e a ordem se
+     provou certa: os dois canais novos apareceram em 09/09 e encontraram o
+     agendador ja' recusando ausencia de canal.
   2. **Os dois consertos ja' autorizados** (o `recorte` de 20 min e a sonda de
      cota antes do download) — o primeiro reacende 15 janelas do
      @semanestesia, o segundo para de queimar runner.

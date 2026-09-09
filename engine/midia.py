@@ -105,10 +105,30 @@ def baixar(url: str, destino: Path) -> Path:
         "yt-dlp",
         "-f", "bv*[height<=480]+ba/b[height<=480]/b",
         "--merge-output-format", "mp4",
-        # cliente Android costuma escapar do bloqueio "sign in to confirm
-        # you're not a bot" que IPs de datacenter (GitHub Actions) levam
-        # do YouTube — não muda nada pra quem roda local.
-        "--extractor-args", "youtube:player_client=android",
+        # ⚠️ O DESAFIO DE JAVASCRIPT DO YOUTUBE. Sem isto ele devolve a
+        # pagina e RETEM os streams — sobram so' os 4 storyboard.
+        #
+        # MEDIDO em 09/09/2026, contra o video real Jh9pFp1oM7E, so' com -F
+        # (listagem, sem baixar):
+        #
+        #   player_client=android + cookie          ->  0 formatos
+        #   player_client=android + cookie + ejs    ->  0 formatos
+        #   padrao + cookie, sem ejs                ->  so' storyboard
+        #   padrao + ejs, SEM cookie                -> 40+ formatos, ate' 4K
+        #
+        # Duas coisas estavam erradas ao mesmo tempo, e por isso o erro
+        # mudava de cara: "The page needs to be reloaded", "Requested format
+        # is not available" e "Sign in to confirm you're not a bot" eram o
+        # MESMO defeito visto de angulos diferentes.
+        #
+        # ⚠️ O `player_client=android` foi REMOVIDO. Ele existia pra escapar
+        # do bot-check em IP de datacenter, e hoje devolve zero formato em
+        # qualquer combinacao — o YouTube matou esse cliente. Forcar um
+        # cliente morto e' pior que nao forcar nenhum.
+        #
+        # ⚠️ Exige runtime de JavaScript na maquina (deno ou node). O runner
+        # do GitHub ja' tem node.
+        "--remote-components", "ejs:github",
     ]
     # em IP de datacenter (GitHub Actions) o Android client sozinho não
     # basta — passa cookies de uma sessão logada de verdade. Local não usa

@@ -89,6 +89,11 @@ estado/*
 # Vai pro git porque nao se reconstroi: o historico do Studio apaga em 60
 # dias e este campo nao sai em export nenhum — cada linha custou um clique.
 !estado/seguidores_por_video.jsonl
+
+# excecao 4, 09/09/2026: CONVERSAO POR CANAL. Curtida e seguidor de cada
+# perfil, lidos da tela. Mesmo motivo da excecao 3 — nao sai em export, so'
+# existe na tela do app, e nao se reconstroi depois.
+!estado/conversao_por_canal.jsonl
 teste/*.mp4
 teste/*.mp3
 teste/*.log

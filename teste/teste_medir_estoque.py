@@ -57,6 +57,53 @@ def teste_formatar_mostra_o_erro_em_vez_de_numero():
     assert " 0 " not in txt
 
 
+def teste_fila_cheia_NAO_e_erro():
+    """⚠️ "NAO PRECISOU" nao pode ser reportado como "NAO CONSEGUI".
+
+    Medido em 09/09/2026: o Bryan perguntou se todos os canais estavam com
+    cota e a ferramenta respondeu "[!] nao achei a linha de estoque na saida"
+    para o @atefalhar e o @truque.importado. Parecia defeito nos dois. Era o
+    MELHOR estado possivel: fila cheia, e o agendador retorna antes de contar
+    o manifesto.
+
+    E' o mesmo defeito que o wrapper do vigia ja' tinha registrado: as duas
+    frases sao iguais pra quem le' rapido e significam coisas opostas — uma e'
+    o sistema saudavel, a outra e' o sistema cego.
+    """
+    linha = {"canal": "atefalhar", "manifesto": None, "prontos": None,
+             "agendados": 10, "limite": 10, "vagas": 0, "cheia": True,
+             "erro": None}
+    # ⚠️ olha a LINHA DO CANAL, nao o texto inteiro: o rodape explica o que
+    # "fila CHEIA" quer dizer, e procurar no texto todo acharia a legenda.
+    linha_do_canal = [l for l in me.formatar([linha]).splitlines()
+                      if l.strip().startswith("atefalhar")][0]
+    assert "fila CHEIA" in linha_do_canal, "estado saudavel aparece como estado"
+    assert "[!]" not in linha_do_canal, "fila cheia nao sai marcada como erro"
+    assert "10/10" in linha_do_canal, "e diz quantos, senao e' palavra sem numero"
+
+
+def teste_NEGATIVO_saida_ilegivel_CONTINUA_sendo_erro():
+    """⚠️ A metade que impede o conserto de virar cegueira.
+
+    Se qualquer saida sem a linha de estoque passasse a ser "fila cheia", um
+    agendador que estourasse no meio seria reportado como saudavel — e' o
+    contrario do que este arquivo inteiro existe pra evitar.
+    """
+    linha = {"canal": "modofuturo", "manifesto": None, "prontos": None,
+             "agendados": None, "limite": None, "vagas": None, "cheia": False,
+             "erro": "nao achei a linha de estoque na saida"}
+    linha_do_canal = [l for l in me.formatar([linha]).splitlines()
+                      if l.strip().startswith("modofuturo")][0]
+    assert "[!]" in linha_do_canal
+    assert "fila CHEIA" not in linha_do_canal
+
+
+def teste_a_marca_de_cheia_vem_da_saida_do_agendador():
+    """A deteccao le' a frase que o agendador imprime, nao adivinha."""
+    assert "fila cheia" in SAIDA_FILA_CHEIA
+    assert "fila cheia" not in SAIDA_BOA
+
+
 if __name__ == "__main__":
     n = 0
     for nome, fn in sorted(globals().items()):

@@ -65,13 +65,30 @@ def medir(nome: str, cfg: dict) -> dict:
 
     est = LINHA_ESTOQUE.search(saida)
     fil = LINHA_FILA.search(saida)
+
+    # ⚠️ FILA CHEIA NAO E' ERRO — E' O MELHOR ESTADO QUE EXISTE.
+    #
+    # Medido em 09/09/2026, quando o Bryan perguntou "todos os canais estao com
+    # cota?": o @atefalhar e o @truque.importado voltaram
+    # "[!] nao achei a linha de estoque na saida", que le' como defeito. Nao
+    # era. O `agendar_buffer` imprime a linha do manifesto DEPOIS de decidir
+    # que ha' vaga; com a fila cheia ele diz "nada a fazer: fila cheia" e
+    # RETORNA antes. A linha nunca chega a existir.
+    #
+    # Reportar isso como falha e' o mesmo defeito que o wrapper do vigia ja'
+    # tinha registrado com todas as letras: "o log separa NAO PRECISOU de NAO
+    # CONSEGUIU. Sao a mesma linha pra quem le' rapido, e sao coisas opostas —
+    # o primeiro e' o sistema saudavel, o segundo e' o sistema cego."
+    cheia = "fila cheia" in saida
     return {
         "canal": nome,
         "manifesto": int(est.group(1)) if est else None,
         "prontos": int(est.group(2)) if est else None,
         "agendados": int(fil.group(1)) if fil else None,
+        "limite": int(fil.group(2)) if fil else None,
         "vagas": int(fil.group(3)) if fil else None,
-        "erro": None if est else "nao achei a linha de estoque na saida",
+        "cheia": cheia,
+        "erro": None if (est or cheia) else "nao achei a linha de estoque na saida",
     }
 
 
@@ -82,12 +99,22 @@ def formatar(linhas: list[dict]) -> str:
         if d.get("erro"):
             out.append(f"  {d['canal']:<24}  [!] {d['erro']}")
             continue
+        if d.get("cheia") and d.get("prontos") is None:
+            # ⚠️ Estado SAUDAVEL, dito como estado e nao como falha.
+            fila = (f"{d['agendados']}/{d['limite']}"
+                    if d.get("agendados") is not None else "cheia")
+            out.append(f"  {d['canal']:<24}{'--':>8}{0:>7}"
+                       f"{'--':>11}   fila CHEIA ({fila}) — nao precisou olhar "
+                       "o manifesto")
+            continue
         out.append(f"  {d['canal']:<24}{d['prontos']:>8}{d['vagas']:>7}"
                    f"{d['manifesto']:>11}")
     out.append("")
     out.append("prontos = clipe no manifesto que passou por TODAS as guardas "
                "e caberia na fila agora.")
     out.append("⚠️ Nada foi agendado: isto roda o agendador com --simular.")
+    out.append("⚠️ 'fila CHEIA' e' o MELHOR estado — o canal nem precisou olhar "
+               "o manifesto. Nao confundir com erro de medicao.")
     return "\n".join(out)
 
 

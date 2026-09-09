@@ -158,6 +158,10 @@ jobs:
           GEMINI_API_KEY_25: ${{ secrets.GEMINI_API_KEY_25 }}
           GEMINI_API_KEY_26: ${{ secrets.GEMINI_API_KEY_26 }}
           GEMINI_API_KEY_27: ${{ secrets.GEMINI_API_KEY_27 }}
+          GEMINI_API_KEY_28: ${{ secrets.GEMINI_API_KEY_28 }}
+          GEMINI_API_KEY_29: ${{ secrets.GEMINI_API_KEY_29 }}
+          GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
+          GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
         run: python -X utf8 guarda_cota.py
 
 
@@ -265,6 +269,10 @@ jobs:
           GEMINI_API_KEY_25: ${{ secrets.GEMINI_API_KEY_25 }}
           GEMINI_API_KEY_26: ${{ secrets.GEMINI_API_KEY_26 }}
           GEMINI_API_KEY_27: ${{ secrets.GEMINI_API_KEY_27 }}
+          GEMINI_API_KEY_28: ${{ secrets.GEMINI_API_KEY_28 }}
+          GEMINI_API_KEY_29: ${{ secrets.GEMINI_API_KEY_29 }}
+          GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
+          GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
           GROQ_API_KEY: ${{ secrets.GROQ1 }}
           GROQ_API_KEY_2: ${{ secrets.GROQ2 }}
           GROQ_API_KEY_3: ${{ secrets.GROQ3 }}

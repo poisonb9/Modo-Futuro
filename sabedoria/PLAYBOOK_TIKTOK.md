@@ -1666,16 +1666,34 @@ padrão se confirmar, público novo é **condição necessária e não suficient
 sem gente nova não há conversão possível, e com gente nova ela ainda pode não
 acontecer.
 
-⚠️ `n=4`. É pista, não achado. E a leitura tem viés embutido: os dois com
+⚠️ `n=4`, e **ela vai ficar em n=4.** A pista tem viés embutido: os dois com
 público novo alto são também os dois de maior alcance, então "novo" e "muito
-alcance" ainda estão colados. Separa-se lendo a aba num post de ~550 views
-com % de novos alto — se existir.
+alcance" estão colados e não se separam com esses quatro pontos.
 
-#### O que ainda não dá para dizer
+⚠️ **E NÃO HÁ COMO SEPARAR COM O STUDIO.** Medido em 09/09: a aba
+*Espectadores* não trouxe o quadro `Novos × Retornaram` nos posts da faixa
+dos ~550 views, que são justamente os que decidiriam. A pista fica registrada
+como **não resolvida e não resolvível com a instrumentação atual** — não
+como pendência. Quem pegar isto: não gaste sessão tentando de novo.
+
+#### O que ainda não dá para dizer — e o que fazer com isso
 
 Por que o post de 22/08 converteu 28 vezes mais que os irmãos do MESMO DIA.
 Nenhuma variável coletada o distingue — ele não é o melhor deles em retenção
-nem em curtida. A pista acima é a única que sobrou, e ela é fraca.
+nem em curtida, e a origem de tráfego é a mesma dos outros (98,7% Para Você).
+
+⚠️ **O Studio foi esgotado em 09/09.** As três abas de cada post foram lidas
+até o fim; não há mais campo para extrair. A próxima informação sobre este
+assunto só vem de:
+
+1. **mais posts**, medidos do mesmo jeito, no próximo export mensal — n=18 com
+   um outlier dominante é pouco, e o caminho é acumular, não reanalisar;
+2. **um teste deliberado**: publicar variando de propósito o que hoje está
+   colado (assunto fora do miolo de chips, por exemplo) e medir seguidor.
+
+⚠️ Reanalisar estes 18 números de novo **não produz nada**. O limite aqui é de
+dados, não de análise. Quem voltar a este bloco procurando um padrão que
+passou despercebido está gastando sessão à toa.
 
 **Procedência:** export do TikTok Studio das 5 contas, 08/09/2026, importado
 por `importar_overview_tiktok.py` e `importar_metricas_tiktok.py`. Série em

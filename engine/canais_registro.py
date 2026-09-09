@@ -85,6 +85,33 @@ CANAIS: dict[str, Canal] = {
         # ⚠️ motor=False: a cozinha precisa de conversao de medidas, que nao
         # existe neste repositorio. Quem a serve e' o `bryanaw2121-sketch/
         # pipeline`. Aqui a gente so' RELATA a fila dela.
+        #
+        # ⚠️⚠️ MUDANCA AGENDADA PARA 26/09/2026 — NAO APLICAR ANTES.
+        #
+        # Decisao do Bryan em 09/09/2026: o canal vira **@achadinho.chef**. O
+        # NOME DE EXIBICAO ele ja' pode trocar (e nao afeta nada aqui); o @
+        # tem carencia do TikTok e so' libera em 26/09.
+        #
+        # Quando o @ mudar, sao TRES lugares, e esquecer qualquer um quebra
+        # alguma coisa em silencio:
+        #
+        #   1. AQUI: `arroba` vira "@achadinho.chef", e "cozinha.internacional"
+        #      CONTINUA em apelidos (o nome antigo circula em arquivo velho).
+        #   2. O NOME DO ARQUIVO DE EXPORT muda junto: passa a chegar
+        #      `Content_achadinho.chef.zip`. Ja' enganou uma vez com o
+        #      truque->achadinho.make: quem importa sem saber acha que
+        #      apareceu um canal novo e que o antigo sumiu.
+        #   3. O OUTRO REPOSITORIO (`bryanaw2121-sketch/pipeline`), que e'
+        #      quem de fato serve este canal. Se o @ estiver escrito la',
+        #      muda nos dois — dois registros discordando e' exatamente o
+        #      defeito que o cabecalho deste arquivo documenta.
+        #
+        # ⚠️ E O `nome_buffer` NAO MUDA. Continua "cozinha.importada", pelo
+        # mesmo motivo do truque.importado logo acima: e' com ele que a guarda
+        # CANAL_ESPERADO compara e por ele que o workflow escolhe o token.
+        #
+        # ⚠️ Havera' DOIS canais "achadinho" (make e chef). E' de proposito,
+        # e' familia de marca. Nao e' duplicata, nao "conserte".
         Canal("cozinha.importada", "@cozinha.internacional",
               "6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15",
               "BUFFER_TOKEN_COZINHA", motor=False,

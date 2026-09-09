@@ -23,7 +23,13 @@ COMPARTILHADO por todos os que falam com o YouTube.
 
 ## O QUE ELA GARANTE
 
-    UMA de cada vez    cadeado exclusivo, criado com O_EXCL (atomico)
+    UMA de cada vez    o cadeado exclusivo (O_EXCL) fica NA MAO enquanto o
+                       comando roda — ver `vez()`. ⚠️ Ate' 09/09/2026 isto era
+                       falso: `esperar_vez()` soltava a porta ao voltar, e o
+                       que sobrava era so' o intervalo entre INICIOS. Um
+                       download de 40 min com intervalo de 10 tinha QUATRO
+                       chamadas encavaladas — a simultaneidade que a sentinela
+                       existe pra impedir, dentro da propria sentinela.
     INTERVALO          dorme o que falta desde a ultima chamada
     FILA, nao recusa   quem chega cedo espera a vez
     FALHA FECHADA      sem cadeado, nao passa. Nunca "vai assim mesmo"
@@ -46,7 +52,15 @@ pedem a ela.** Esta sentinela e' a porta dessa maquina.
     SENTINELA_YT_INTERVALO_LEVE  entre legenda/metadado/listagem   (300)
     SENTINELA_YT_ESPERA_MAX teto de espera na fila          (padrao: 3600)
     SENTINELA_YT_TETO_DIA   chamadas por dia                (padrao: 12)
-    SENTINELA_YT_FREIO_H    horas de freio apos bot-check   (padrao: 24)
+    SENTINELA_YT_FREIO_H    horas de freio, pena CHEIA      (padrao: 24)
+    SENTINELA_YT_FREIO_TAXA_LEVE_H  pena curta: 429 em chamada
+                            LEVE (legenda/metadado)         (padrao: 3)
+
+⚠️ DUAS SEVERIDADES, penas diferentes. `not a bot` e' suspeita no nivel da
+CONTA e leva a pena CHEIA sempre, em qualquer peso. 429 e' limite de taxa,
+transitorio — e so' quando vem de chamada LEVE leva a pena curta. 429 em
+VIDEO continua com 24h: sessao longa em rajada e' o padrao que vira
+bot-check. Vindo os dois sinais juntos, bot vence.
 
 ⚠️ O intervalo padrao de 15 min NAO e' medido — e' escolhido com folga. A
 conta: cada fonte vira ~8 clipes e a operacao publica ~11 posts/dia, entao o
@@ -56,10 +70,12 @@ volume.
 """
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 import subprocess
 import sys
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -390,6 +406,50 @@ def esperar_vez(rotulo: str = "", peso: str = "pesado") -> None:
             _marcar_leve(False)
 
 
+_BATIDA_S = 60
+
+
+@contextlib.contextmanager
+def vez(rotulo: str = "", peso: str = "pesado"):
+    """Espera a vez E SEGURA A PORTA enquanto o comando roda.
+
+    ⚠️ E' ISTO que cumpre a ordem "uma de cada vez". O `esperar_vez()` sozinho
+    so' espaca os INICIOS: ele solta o cadeado ao voltar, de proposito (quem
+    dorme nao pode trancar a porta), e um download longo continuava rodando
+    enquanto o proximo ja' era liberado. Com intervalo de 10 min e um podcast
+    de 40, davam QUATRO downloads simultaneos.
+
+        with sentinela.vez(f"baixar {url}"):
+            roda(cmd)
+
+    ⚠️ E O CADEADO BATE O PONTO. Quem segura reescreve o carimbo a cada
+    `_BATIDA_S`, senao a propria regra de recolhimento (cadeado parado ha' mais
+    de 600s e' abandonado) arrombaria a porta de um download de 40 minutos —
+    trocando um defeito por outro pior, porque ninguem veria.
+
+    Processo morto para de bater e o cadeado volta a ser recolhido como sempre.
+    """
+    esperar_vez(rotulo, peso)
+    cadeado = _pegar_cadeado(espera_max())
+    parar = threading.Event()
+
+    def _bater():
+        while not parar.wait(_BATIDA_S):
+            try:
+                cadeado.write_text(f"{os.getpid()} {time.time():.0f}",
+                                   encoding="utf-8")
+            except OSError:
+                return
+
+    batida = threading.Thread(target=_bater, daemon=True)
+    batida.start()
+    try:
+        yield
+    finally:
+        parar.set()
+        cadeado.unlink(missing_ok=True)
+
+
 def e_bloqueio(texto: str) -> bool:
     t = (texto or "").lower()
     return any(s in t for s in SINAIS_DE_BLOQUEIO)
@@ -410,10 +470,14 @@ def peso_do_comando(cmd: list[str]) -> str:
 
 
 def rodar(cmd: list[str], rotulo: str = "", peso: str | None = None) -> int:
-    """Espera a vez, roda o comando, e PUXA O FREIO se vier bot-check."""
-    esperar_vez(rotulo or " ".join(cmd[:2]), peso or peso_do_comando(cmd))
-    r = subprocess.run(cmd, capture_output=True, text=True,
-                       encoding="utf-8", errors="replace")
+    """Espera a vez, roda o comando, e PUXA O FREIO se vier bot-check.
+
+    ⚠️ Com `vez()`, nao `esperar_vez()`: a porta fica na mao ate' o comando
+    terminar. Ver o cabecalho de `vez`.
+    """
+    with vez(rotulo or " ".join(cmd[:2]), peso or peso_do_comando(cmd)):
+        r = subprocess.run(cmd, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
     saida = (r.stdout or "") + (r.stderr or "")
     if r.stdout:
         print(r.stdout, end="")

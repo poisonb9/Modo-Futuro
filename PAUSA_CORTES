@@ -1,0 +1,12 @@
+CORTES PAUSADOS
+
+quem:    Claude
+quando:  2026-09-09T17:23:07+00:00
+por que: cota do Gemini reservada para outro projeto do Bryan. Ordem de 09/09/2026: parar hoje, reabilitar os cortes em cadeia amanha 10/09 por volta do meio-dia, um de cada vez.
+
+Enquanto este arquivo existir:
+  - o vigia NAO despacha corte de bruto novo;
+  - o cortar_fila NAO consome a fila;
+  - baixar fonte e subir bruto pro Drive CONTINUAM liberados.
+
+Pra soltar o freio: apague este arquivo e commite.

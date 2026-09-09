@@ -225,6 +225,15 @@ SIMULTANEO, ISSO FOI UM ERRO GRAVISSIMO".**
 Um forno por vez. Se precisar de dois, **espacados por HORAS**, nunca
 encavalados. Vale para tudo que baixa do YouTube:
 
+⚠️ **QUEM APLICA A REGRA NO CODIGO** (medido em 09/09/2026, lendo os call
+sites um a um): `engine/sentinela_youtube.py`, e ela e' a porta de
+`engine/midia.baixar()`, do `processar_lista.py` e do
+`baixar_em_intervalos.py`. **Fora dela, por decisao pendente:**
+`triar_cortabilidade.py`, que baixa legenda em lote e em paralelo — o teto de
+12 chamadas/dia da sentinela inviabilizaria a triagem, e o numero e' decisao
+do Bryan. `teste/teste_uma_porta_pro_youtube.py` acusa qualquer arquivo novo
+que monte comando `yt-dlp` sem passar por ela.
+
     cortar.yml  ·  cortar_fila.yml (cron */30)  ·  cortar_de_bruto.yml
     repor_fila.yml (cron 12:00)   ·  a sonda LOCAL
 

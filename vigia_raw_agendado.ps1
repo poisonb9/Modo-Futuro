@@ -27,8 +27,23 @@ Set-Location $raiz
 
 # stderr junto do stdout: se o Python estourar, o traceback tem que cair no
 # log em vez de sumir.
+# ⚠️ `ErrorActionPreference` VOLTA A 'Continue' SO' NESTA CHAMADA, e nao e'
+# frescura: no Windows PowerShell 5.1, com 'Stop' ligado, QUALQUER linha que o
+# python escreva em stderr sob `2>&1` vira um ErrorRecord terminante
+# (NativeCommandError). O script morre AQUI — antes de escrever o log, antes do
+# aviso no Telegram — e o unico sinal e' o exit 1 na tela do Agendador.
+#
+# MEDIDO em 09/09/2026: a tarefa do ciclo rodou as 13:00, gravou o radar, e nao
+# deixou UMA linha de log. Reproduzido em duas linhas de PowerShell: um python
+# que escreve em stderr e sai 1 mata o wrapper antes do `Add-Content`.
+#
+# ⚠️ E' o contrario do que o comentario abaixo promete. Um traceback e'
+# EXATAMENTE o caso em que o log precisa existir — e era exatamente o caso em
+# que ele deixava de existir.
+$ErrorActionPreference = 'Continue'
 $saida = & $python -X utf8 vigia_raw.py --uma-vez 2>&1 | Out-String
 $rc = $LASTEXITCODE
+$ErrorActionPreference = 'Stop'
 
 # Só registra passagem silenciosa numa linha; quando houve trabalho ou erro,
 # grava a saída inteira. Senão o log vira parede de "nada novo".

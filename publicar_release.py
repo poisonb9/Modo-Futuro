@@ -37,7 +37,7 @@ from pathlib import Path
 import requests
 
 import config
-from engine import registro_clipes
+from engine import registro_clipes, produto
 
 REPO = os.environ.get("GITHUB_REPO", "poisonb9/Modo-Futuro")
 API = "https://api.github.com"
@@ -295,6 +295,15 @@ def main() -> None:
                         "genero_falante": m.get("genero_falante", ""),
                         # ⚠️ Viajam pro manifesto porque quem decide segurar e'
                         # o AGENDADOR, e ele so' le' o manifesto.
+                        # ⚠️ Viaja pro manifesto pelo mesmo motivo dos de
+                        # cima, e a §2.2 do FASE2 e' explicita: a pagina da
+                        # bio e o grupo do WhatsApp tem de ler o preco do
+                        # MESMO lugar que a legenda, senao o video diz um
+                        # preco e a pagina diz outro. AUSENTE nos cinco canais
+                        # de hoje — ausente quer dizer "nao e' de afiliado",
+                        # que e' diferente de vazio. Ver engine/produto.py.
+                        **({"produto": _prod} if (
+                            _prod := produto.normalizar(m.get("produto"))) else {}),
                         "depende_de_anterior": bool(m.get("depende_de_anterior")),
                         "o_que_falta": m.get("o_que_falta", ""),
                         "publicado_em": f"{date.today():%Y-%m-%d}"}

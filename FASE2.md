@@ -81,7 +81,37 @@ metadados e' outro, o formato aceito e' outro (Reels tem regra propria), e a
 guarda `CANAL_ESPERADO` compara nome de canal do Buffer sem olhar servico:
 **hoje um canal do Instagram com o mesmo nome passaria pela guarda.**
 
-### 2.2 Link de afiliado nao existe no manifesto
+### 2.2 Link de afiliado nao existe no manifesto  — ✅ RESOLVIDO 09/09/2026
+
+**DECISAO: vai no MANIFESTO, como campo aninhado `produto`.**
+
+O argumento contra era "o manifesto ja' e' lido por seis scripts". O que
+decidiu nao foi quantos leem, foi a frase abaixo, desta propria secao: o preco
+tem de sair do MESMO lugar que a legenda usa. A legenda e' montada a partir do
+manifesto; registro separado criaria duas fontes para o mesmo preco, e duas
+fontes divergem. E' o mesmo raciocinio que ja' pos `sha`, `fonte_id` e
+`depende_de_anterior` la' dentro.
+
+Aninhado num campo so' (`produto`) e AUSENTE nos cinco canais de hoje —
+ausente quer dizer "este clipe nao e' de afiliado", diferente de vazio. Os
+seis leitores atuais pegam chaves nomeadas; chave nova nao quebra nenhum.
+
+    engine/produto.py                    valida e normaliza, num lugar so'
+    publicar_release.py                  carrega pro manifesto
+    teste/teste_produto_no_manifesto.py  guarda, com caso negativo
+
+⚠️ PRECO E' TEXTO, com `preco_em`. Numero envelhece calado: o clipe diria
+"R$ 39,90" pra sempre enquanto a loja ja' mudou.
+
+⚠️ LINK SO' http(s), falha FECHADA. `javascript:` e `intent://` nao sao link
+torto — sao vetor de ataque numa pagina que a gente publica.
+
+E `produto.linha_da_lista()` devolve a linha pronta pro grupo do WhatsApp,
+que e' a unica coisa que este repo pode entregar ao grupo hoje (§2.5).
+
+---
+
+
 
 O clipe hoje carrega titulo, descricao, tags, gancho, notas. Nao carrega
 produto, preco, nem link. A pagina da bio e o grupo do WhatsApp precisam

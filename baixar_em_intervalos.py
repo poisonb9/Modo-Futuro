@@ -144,7 +144,6 @@ def _baixar_agora(url: str) -> tuple[bool, str]:
     sentinela e' a porta unica. O sono da sentinela acontece com o cadeado dela
     solto, entao esperar aqui nao tranca ninguem alem deste download.
     """
-    sentinela.esperar_vez(f"baixar {url[-24:]}", "pesado")
     cmd = [
         "yt-dlp", "-f", FORMATO, "--merge-output-format", "mp4",
         "--no-warnings", "--no-progress",
@@ -156,8 +155,11 @@ def _baixar_agora(url: str) -> tuple[bool, str]:
         # conseguir casar o bruto depois. Sem ele, todo arquivo e' acusado.
         "-o", str(DESTINO / "%(id)s__%(title).80s.%(ext)s"), url,
     ]
-    r = subprocess.run(cmd, capture_output=True, text=True,
-                       encoding="utf-8", errors="replace", timeout=3600)
+    # ⚠️ `vez()` mantem a porta fechada durante o download inteiro; o
+    # `esperar_vez` sozinho so' garantia o espacamento entre inicios.
+    with sentinela.vez(f"baixar {url[-24:]}", "pesado"):
+        r = subprocess.run(cmd, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=3600)
     if r.returncode != 0:
         bruto = (r.stderr or r.stdout or "").strip()
         # ⚠️ O FREIO E' PUXADO AQUI, no ponto que ve' o erro. Este script

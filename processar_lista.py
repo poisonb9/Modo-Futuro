@@ -128,9 +128,12 @@ def _yt(cmd: list[str], rotulo: str) -> str:
     chamador. Deixar o `insistindo()` decidir foi o desenho que queimou a VPS:
     retry depois de bot-check e' o que confirma o padrao de robo.
     """
-    sentinela.esperar_vez(rotulo, sentinela.peso_do_comando(cmd))
     try:
-        return _roda(cmd)
+        # ⚠️ `vez()` segura a porta ate' o comando acabar. Aqui isso importa
+        # em dobro: sao DUAS threads (SIMULTANEOS=2), e com o espacamento
+        # apenas de inicio elas voltariam a se encavalar num download longo.
+        with sentinela.vez(rotulo, sentinela.peso_do_comando(cmd)):
+            return _roda(cmd)
     except RuntimeError as e:
         if sentinela.e_bloqueio(str(e)):
             sentinela.puxar_freio(str(e)[:300])

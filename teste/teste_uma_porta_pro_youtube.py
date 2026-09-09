@@ -57,6 +57,12 @@ for arq in sorted(RAIZ.glob("*.py")) + sorted((RAIZ / "engine").glob("*.py")):
         continue
     if "sentinela" not in txt:
         falhas.append(f"{rel} monta comando yt-dlp e NAO conhece a sentinela")
+    elif "sentinela.vez(" not in txt:
+        # ⚠️ Conhecer nao basta. `esperar_vez()` sozinho so' espaca os
+        # INICIOS — ele solta a porta ao voltar, e o comando roda depois.
+        # Quem baixa tem de SEGURAR a porta, e isso e' o `vez()`.
+        falhas.append(f"{rel} usa a sentinela mas nao segura a porta "
+                      "(`sentinela.vez(`) enquanto o comando roda")
 
 # ⚠️ Os arquivos que a gente SABE que existem tem de continuar sendo vistos.
 # Um teste que deixa de enxergar passa calado — e foi assim que o repositorio

@@ -218,6 +218,54 @@ except s.NaoConsegui:
     checar(False, "nao recolheu cadeado abandonado — a operacao trava pra "
                   "sempre depois de um processo morrer")
 
+print(chr(10) + "10. UMA de cada vez: a porta fica na mao enquanto o comando roda")
+# ⚠️ O DEFEITO, achado em 09/09/2026 relendo a sentinela: `esperar_vez()`
+# SOLTA o cadeado ao voltar — de proposito, pra quem dorme nao trancar a porta.
+# So' que o comando roda DEPOIS disso. O que sobrava era espacamento entre
+# INICIOS: um download de 40 min com intervalo de 10 deixava QUATRO rodando
+# juntos, dentro da guarda que existe pra impedir exatamente isso.
+import threading  # noqa: E402
+
+d = limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=30)
+dentro = threading.Event()
+solta = threading.Event()
+juntos = []
+
+
+def _segundo():
+    dentro.wait(5)
+    t0 = time.time()
+    with s.vez("segundo", peso="pesado"):
+        # se a porta estivesse livre, este bloco comecaria com o primeiro
+        # AINDA dentro — que e' a simultaneidade proibida
+        juntos.append(solta.is_set())
+    return time.time() - t0
+
+
+t = threading.Thread(target=_segundo, daemon=True)
+t.start()
+with s.vez("primeiro", peso="pesado"):
+    dentro.set()
+    time.sleep(3)
+    solta.set()
+t.join(20)
+checar(juntos == [True],
+       f"o segundo so' entrou DEPOIS do primeiro sair (viu {juntos})")
+
+print(chr(10) + "10b. NEGATIVO: com a porta livre, o segundo NAO espera")
+# Sem esta metade, um `vez()` que travasse pra sempre passaria no teste de
+# cima e pararia a operacao inteira.
+d = limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=30)
+with s.vez("um", peso="pesado"):
+    pass
+t0 = time.time()
+with s.vez("dois", peso="pesado"):
+    pass
+checar(time.time() - t0 < 3, "porta livre: passa direto, sem fila fantasma")
+checar(not (d / "cadeado").exists(), "e a porta fica solta no fim")
+
 if falhas:
     print(chr(10) + f"{falhas} FALHA(S)")
     sys.exit(1)

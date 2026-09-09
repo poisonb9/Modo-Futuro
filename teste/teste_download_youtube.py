@@ -99,8 +99,14 @@ print(chr(10) + "4. o download passa pela SENTINELA, e ela puxa o freio sozinha"
 # ⚠️ Ordem do Bryan em 09/09: TODA chamada ao YouTube passa pela porta.
 # Sem estas linhas, um download solto no meio do codigo escapa da fila — e
 # foi RAJADA, nao volume, que queimou a VPS.
-checar("sentinela.esperar_vez(" in fonte,
-       "espera a vez ANTES de chamar o yt-dlp")
+# ⚠️ E TEM DE SER `vez()`, nao `esperar_vez()`. O segundo so' espaca os
+# INICIOS: ele solta a porta ao voltar e o yt-dlp roda depois, entao um
+# download de 40 min sob intervalo de 10 deixava quatro encavalados. Trocado
+# em 09/09/2026, medido com dois processos.
+checar("with sentinela.vez(" in fonte,
+       "segura a porta durante o yt-dlp inteiro (vez, nao esperar_vez)")
+checar("sentinela.esperar_vez(" not in fonte,
+       "NEGATIVO: nao voltou pro esperar_vez, que so' espaca os inicios")
 checar("sentinela.e_bloqueio(" in fonte and "sentinela.puxar_freio(" in fonte,
        "reconhece o bot-check e puxa o freio onde ve' o erro")
 checar("raise" in fonte, "RELEVANTA o erro — a sentinela nao engole a falha")

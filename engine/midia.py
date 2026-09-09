@@ -183,9 +183,14 @@ def baixar(url: str, destino: Path) -> Path:
     # protege maquina PERSISTENTE (a VPS, esta aqui). Nao e' defeito: e' o
     # limite de um estado em disco, e esta escrito pra ninguem achar que a
     # nuvem esta' coberta.
-    sentinela.esperar_vez(f"download {url[:60]}")
+    #
+    # ⚠️ `vez()` e nao `esperar_vez()`: a porta fica NA MAO ate' o yt-dlp
+    # terminar. Com `esperar_vez` sozinho a sentinela so' espacava os INICIOS,
+    # e um download de 40 min sob intervalo de 10 deixava quatro rodando
+    # juntos — a simultaneidade proibida, por dentro da guarda.
     try:
-        roda(cmd, silencioso=False)
+        with sentinela.vez(f"download {url[:60]}"):
+            roda(cmd, silencioso=False)
     except RuntimeError as e:
         # ⚠️ O freio e' puxado AQUI, no ponto que ve' o erro. Deixar cada
         # chamador decidir se tenta de novo foi o que queimou a VPS: retry

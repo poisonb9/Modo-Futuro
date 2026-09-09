@@ -304,6 +304,25 @@ def main() -> None:
                         # que e' diferente de vazio. Ver engine/produto.py.
                         **({"produto": _prod} if (
                             _prod := produto.normalizar(m.get("produto"))) else {}),
+                        # ⚠️⚠️ A QUARENTENA. Sem estes dois no manifesto, a
+                        # guarda do agendador (`cabe()`, na recusa por
+                        # conteudo) le' `v.get("quarentena")` e
+                        # `v.get("traduzido_por")` de um item que NUNCA os
+                        # teve: ela devolve falso sempre, e um clipe traduzido
+                        # pela reserva (Nemotron) e' agendado e publicado como
+                        # qualquer outro.
+                        #
+                        # E' o contrario direto da decisao do Bryan em
+                        # 02/09/2026: "boa na amostra" nao e' "aprovada pra
+                        # publicar", e quem decide e' ele, olhando. O
+                        # `main.py` marcava, o post.json guardava, e a marca
+                        # morria aqui — a guarda existia inteira, escrita e
+                        # comentada, sobre um campo que nao chegava.
+                        #
+                        # Medido em 09/09/2026 comparando as chaves que este
+                        # dicionario escreve com as que o agendador pede.
+                        "quarentena": bool(m.get("quarentena")),
+                        "traduzido_por": m.get("traduzido_por", ""),
                         # ⚠️ A DURACAO E O APARO DA CAUDA VIAJAM PRA PODER
                         # MEDIR. O manifesto e' o unico registro que persiste
                         # (o runner nasce limpo a cada run) e e' por onde o

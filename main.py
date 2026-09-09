@@ -16,7 +16,7 @@ from pathlib import Path
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
-                    cauda)
+                    cauda, gramatica)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -435,6 +435,24 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # fala natural e' o que sustenta a retencao. Ver engine/suavizar.py.
             # Pedido do Bryan em 25/08/2026: "nao quero perder videos bons, temos
             # a oportunidade de modificar para evitar certas palavras".
+            # ---- acento que o modelo comeu (09/09/2026)
+            # ⚠️ ANTES do suavizar e de qualquer render: o mesmo texto vira a
+            # TARJA do video, a legenda do post e o .txt do Drive. Consertar
+            # depois nao alcanca as tres.
+            #
+            # O caso: "contratar amigos e um ERRO" foi ao ar no
+            # @semanestesia.pod com o verbo sem acento. Nada aqui tira acento
+            # — o modelo gerou assim. Ver engine/gramatica.py: conserta so' o
+            # que nao tem segunda leitura e AVISA no resto.
+            c = dict(c)
+            for campo in ("titulo", "descricao"):
+                antes_g = c.get(campo) or ""
+                c[campo] = gramatica.corrigir(antes_g)
+                if c[campo] != antes_g:
+                    print(f"      acento no {campo}: \"{antes_g[:60]}\"")
+                for aviso in gramatica.suspeitas(c[campo]):
+                    print(f"      [!] gramatica duvidosa no {campo}: {aviso}")
+
             if config.SUAVIZAR_TEXTO:
                 ps = suavizar.palavras(ps)
                 c = dict(c)

@@ -115,15 +115,49 @@ jobs:
       - name: Instalar fallback pro Invidious — tentativa gratuita 2
         run: pip install -U yt-dlp-invidious
 
+      # ⚠️ AS DUAS METADES TEM DE SER A MESMA VERSAO. Ver BGUTIL_VERSAO.
+      #
+      # MEDIDO em 09/09/2026, run #9: o `pip install -U` (sem versao) subiu
+      # sozinho para 2.0.0 enquanto o clone continuava pinado em 1.3.1, e o
+      # yt-dlp RECUSOU rodar:
+      #
+      #   ERROR: [pot:bgutil] Plugin and script major versions are mismatched.
+      #          (plugin: 2.0.0, script: 1.3.1)
+      #
+      # Ninguem mexeu no nosso codigo — a versao do pip andou sozinha. Por
+      # isso a versao agora e' UMA variavel usada nos dois lugares: nao da'
+      # mais pra atualizar so' uma metade.
       - name: Instalar provedor de PO Token (bgutil) — tentativa gratuita
         continue-on-error: true
+        env:
+          BGUTIL_VERSAO: "1.3.1"
         run: |
-          pip install -U bgutil-ytdlp-pot-provider
-          git clone --single-branch --branch 1.3.1 https://github.com/Brainicism/bgutil-ytdlp-pot-provider.git "$RUNNER_TEMP/bgutil"
+          pip install "bgutil-ytdlp-pot-provider==$BGUTIL_VERSAO"
+          git clone --single-branch --branch "$BGUTIL_VERSAO" https://github.com/Brainicism/bgutil-ytdlp-pot-provider.git "$RUNNER_TEMP/bgutil"
           cd "$RUNNER_TEMP/bgutil/server"
           npm ci
           npx tsc
           echo "YTDLP_POT_SERVER=$RUNNER_TEMP/bgutil/server" >> "$GITHUB_ENV"
+
+      # ⚠️ O passo de cima e' `continue-on-error` de proposito (e' tentativa
+      # gratuita), e foi isso que escondeu o defeito por QUATRO DIAS: quando
+      # ele quebra, o run segue e morre la' na frente, no download, com
+      # "Sign in to confirm you're not a bot" — que aponta pro cookie, nao
+      # pra causa. Foi assim que o run #8 (05/09) foi lido errado.
+      #
+      # Este passo nao FALHA nada: so' diz em voz alta o que sobrou de pe'
+      # antes de gastar o download.
+      - name: Dizer com que armas o download vai sair
+        run: |
+          echo "PO Token (bgutil): ${YTDLP_POT_SERVER:-AUSENTE — o passo acima falhou}"
+          if [ -n "${{ secrets.YTDLP_COOKIES }}" ]; then
+            echo "cookie do YouTube: presente"
+          else
+            echo "cookie do YouTube: AUSENTE (secret YTDLP_COOKIES nao existe)"
+          fi
+          if [ -z "${YTDLP_POT_SERVER:-}" ] && [ -z "${{ secrets.YTDLP_COOKIES }}" ]; then
+            echo "::warning::sem PO Token E sem cookie — o YouTube vai barrar o download com bot-check"
+          fi
 
       - name: Gravar cookies do YouTube (secret -> arquivo, só pra essa execução)
         env:

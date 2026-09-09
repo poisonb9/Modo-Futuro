@@ -7,25 +7,28 @@ O `melhores.py` ranqueia por VIEW e entrega os 2 primeiros pro radar, que
 escolhe a fonte dos proximos videos. Ou seja: a view decide o que a maquina
 vai produzir na semana seguinte.
 
-MEDIDO em 08-09/09/2026, 11 posts do @modofuturo lidos um a um na tela do
+MEDIDO em 08-09/09/2026, 18 posts do @modofuturo lidos um a um na tela do
 Studio (o campo "Novos seguidores" NAO vem em export nenhum):
 
-    titulo                          views  seg  t.medio  completo
-    As regras extremas / fabrica     2473   28   10,63s     6,9%
-    Como 1 poeira / 1 milhao         1009    1   16,11s     9,1%
-    O erro microscopico / 500.000     568    0   17,97s     8,6%
-    A vantagem decisiva dos EUA       519    2   12,64s     1,5%
-    O Segredo dos Chips / CFET        309    1    7,20s     1,8%
-    (mais 6 posts, todos com ZERO)
+    12.006 views -> 37 seguidores (0,308%). Um post carrega 28 deles.
 
-Os dois primeiros foram publicados no MESMO DIA, no mesmo canal — mesma
-cadencia, mesmo estado do algoritmo. O de baixo prendeu a audiencia por MAIS
-tempo (16,11s contra 10,63s) e teve MAIS conclusao (9,1% contra 6,9%), e
-converteu 28 VEZES MENOS. Nao ha' aqui como culpar idade nem volume.
+⚠️ RETENCAO NAO PREVE SEGUIDOR. Os tres posts de 22/08 sao o caso limpo —
+mesmo canal, mesmo dia, cadencia e algoritmo controlados — e ordenados por
+retencao dao a ordem INVERSA de conversao:
 
-⚠️ CONCLUSAO, E ELA E' DESCONFORTAVEL: nenhuma metrica que o motor coleta
-previu seguidor. Nem view, nem retencao, nem conclusao, nem curtida — o
-recordista de curtida do lote (4,24%) deu ZERO seguidor.
+    A maquina de 400 milhoes    728 v  20,85s  7,8% completo  ->  1 seg
+    Como 1 poeira / 1 milhao   1009 v  16,11s  9,1% completo  ->  1 seg
+    As regras extremas         2473 v  10,63s  6,9% completo  -> 28 seg
+
+⚠️ E NAO HA' PATAMAR DE ALCANCE: 1009 views deu 1 seguidor, 309 views deu 1.
+A correlacao de +0,95 entre view e seguidor e' o outlier sozinho — tirando
+ele, cai para +0,18.
+
+O UNICO sinal que sobrevive e' a CURTIDA (+0,52 sem o outlier; mediana 3,17%
+nos que converteram contra 1,77% nos que nao). Dos 6 posts com curtida >= 3%,
+4 converteram; dos 12 abaixo, 3. E' fraco, e tem contraexemplo dos dois
+lados. E' o melhor que existe — e o motor JA' e' calibrado para curtida desde
+08/09, entao esta medicao confirma o rumo em vez de pedir regra nova.
 
 ## O QUE ESTE MODULO FAZ, E O QUE ELE DELIBERADAMENTE NAO FAZ
 

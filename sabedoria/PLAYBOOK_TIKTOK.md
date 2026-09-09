@@ -1521,14 +1521,11 @@ o que faz alguém que nunca viu o canal decidir seguir depois de 2 segundos.
 O único achado com força estatística até agora aponta pra lá — título que
 MOSTRA rende +37% em view E +35% em curtida (§23.4).
 
-⚠️ **CORRIGIDO EM 09/09/2026 — a frase que estava aqui dizia que "curtida é o
-sinal mais próximo de gostei que a gente consegue medir hoje", e isso foi
-medido e é falso.** Com o seguidor por vídeo na mão (§23.9), o recordista de
-curtida do lote (4,24%, "Por Que Seu Processador Superrápido") converteu
-ZERO. Curtida serve para ranquear engajamento; não serve como aproximação de
-conversão. E a própria conta dos 0,144% precisa da ressalva da §23.9: a maior
-parte dos posts **nem alcança**, então "alcança e não converte" descreve mal
-o que está acontecendo.
+⚠️ **CONFIRMADO em 09/09/2026, depois de um susto.** Com 11 posts medidos eu
+escrevi aqui que esta frase era falsa, porque o recordista de curtida do lote
+(4,24%) tinha convertido zero. Com 18 posts ela se sustenta e é o **único**
+sinal que se sustenta — ver §23.9. Um contraexemplo não derruba uma
+correlação, e tratá-lo assim foi erro meu, não medição.
 
 ### 23.7 O que eu decidi NÃO mudar hoje, e por quê — `[MEDIDO 08/09/2026]`
 
@@ -1583,89 +1580,82 @@ coisa global por vez, e só quando houver como saber se funcionou.
 - **Quanto da tela a nossa tarja de título ocupa** nos primeiros 2s: nos
   frames olhados, 25-30% do topo. Nunca foi testado se ajuda ou atrapalha.
 
-### 23.9 Seguidor por vídeo: nada do que o motor mede prevê conversão — `[MEDIDO 09/09/2026]`
+### 23.9 Seguidor por vídeo: só a curtida sobrevive — `[MEDIDO 09/09/2026]`
 
 O campo **"Novos seguidores"** existe na aba *Visão geral* de cada post no
-Studio, e **não sai em export nenhum** — nem no `Content.csv` (que traz só
-Time, Video title, Video link, Post time, likes, comments, shares, views) nem
-no `Overview.csv` (Date, Video Views, Profile Views, Likes, Comments, Shares).
-Só se lê na tela, um post por vez. O Bryan leu 11 posts do @modofuturo.
+Studio e **não sai em export nenhum** — nem no `Content.csv` nem no
+`Overview.csv`. Só se lê na tela, um post por vez. O Bryan leu **18 posts** do
+@modofuturo, em `estado/seguidores_por_video.jsonl`.
 
-| título | views | seg | seg/view | t.médio | completo | curt% |
-|---|---|---|---|---|---|---|
-| As regras extremas / fábrica | 2473 | **28** | 1,13% | 10,63s | 6,9% | 4,08% |
-| Como 1 poeira / 1 milhão | 1009 | 1 | 0,10% | 16,11s | 9,1% | 3,17% |
-| O erro microscópico / 500.000 | 568 | 0 | 0,00% | **17,97s** | **8,6%** | 1,58% |
-| Por Que Fabricar Seus Próprios Chips | 556 | 0 | 0,00% | 13,94s | 4,7% | 1,62% |
-| A máquina que escuta o som | 543 | 0 | 0,00% | 13,36s | 4,0% | 1,66% |
-| Por que o mundo depende de Taiwan | 538 | 0 | 0,00% | 15,05s | 7,1% | 3,16% |
-| A vantagem decisiva dos EUA | 519 | 2 | 0,39% | 12,64s | 1,5% | 1,93% |
-| Por Que Seu Processador Superrápido | 472 | 0 | 0,00% | 9,13s | 2,8% | **4,24%** |
-| A Anthropic superando a OpenAI | 449 | 0 | 0,00% | 5,80s | 0,4% | 1,56% |
-| O plano real da SpaceX | 339 | 0 | 0,00% | 5,53s | 0,8% | 1,77% |
-| O Segredo dos Chips / CFET | 309 | 1 | 0,32% | 7,20s | 1,8% | 1,62% |
+**12.006 views → 37 seguidores (0,308%).** Um post carrega 28 deles.
 
-**7.775 views → 32 seguidores (0,412%). Tirando o primeiro: 5.302 views → 4
-seguidores (0,075%).**
+#### O que correlaciona com seguidor
 
-#### O par de 22/08 é um experimento controlado que a operação fez sem querer
+| sinal | n=18 | sem o outlier de 2473 |
+|---|---|---|
+| **curtida %** | +0,35 | **+0,52** |
+| completo % | +0,22 | +0,17 |
+| tempo médio | −0,06 | +0,18 |
+| views | +0,95 | +0,18 |
 
-Mesmo canal, **mesmo dia**, mesma cadência, mesmo estado do algoritmo:
+⚠️ O +0,95 das views é o outlier sozinho: sem ele cai para +0,18. Um post de
+1009 views deu 1 seguidor e um de 309 deu 1 — **não há patamar de alcance.**
 
-    As regras extremas   2473 views  28 seg  10,63s  6,9% completo  4,08% curt
-    Como 1 poeira        1009 views   1 seg  16,11s  9,1% completo  3,17% curt
+**Retenção não prevê seguidor.** É o achado mais firme do bloco, e sobreviveu
+a dobrar o n. Os três posts de 22/08 (mesmo canal, mesmo dia, cadência e
+algoritmo controlados) ordenados por retenção dão a ordem INVERSA de
+conversão:
 
-O segundo prendeu **mais** a audiência e teve **mais** conclusão, e converteu
-**28 vezes menos**. Idade, volume e cadência estão controlados.
+    A maquina de 400 milhoes    728 v   20,85s  7,8% completo  ->  1 seg
+    Como 1 poeira / 1 milhao   1009 v   16,11s  9,1% completo  ->  1 seg
+    As regras extremas         2473 v   10,63s  6,9% completo  -> 28 seg
 
-#### As três hipóteses que morreram aqui
+#### A curtida é o único sinal que serve — e por pouco
 
-1. **Patamar de alcance.** A hipótese era que conversão só começa acima de um
-   nível de reach, e os posts de ~500 views nunca chegavam lá. 1009 views deu
-   1 seguidor. Não há degrau entre 500 e 1000.
-2. **Retenção.** O campeão de tempo médio do lote (17,97s) e o de conclusão
-   (8,6%) são o mesmo post, e ele deu **zero**. Os posts COM seguidor têm
-   mediana de conclusão de 1,8%; os SEM seguidor, 4,0% — a direção é a
-   oposta da hipótese.
-3. **Curtida como aproximação de conversão.** 4,24% de curtida, zero
-   seguidor. Ver a correção na §23.6.
+    mediana de curtida   COM seguidor 3,17%   SEM seguidor 1,77%
 
-#### ⚠️ A consequência para as quatro calibragens de 08/09
+    dos 6 posts com curtida >= 3%,  4 converteram  (67%)
+    dos 12 posts com curtida <  3%, 3 converteram  (25%)
 
-Elas foram validadas contra **view e curtida** (§23.4). Este lote mostra que
-view e curtida **não levam a seguidor**. Isso não é motivo para desligá-las —
-continuam sendo os melhores sinais medidos que existem, e não há nada
-melhor para pôr no lugar. É motivo para parar de tratá-las como progresso
-rumo à conversão até o próximo export.
+⚠️ **E ela tem contraexemplo dos dois lados**: 4,24% de curtida com zero
+seguidor, e 1,39% com seguidor. É um sinal fraco. É o melhor que existe.
+
+#### ⚠️ O ERRO QUE EU COMETI AQUI, E QUE FICA REGISTRADO
+
+Com 11 posts eu declarei a curtida falsificada, apoiado num único
+contraexemplo (o post de 4,24% que converteu zero), e vim corrigir a §23.6.
+Com 18 posts a curtida é o sinal mais forte que sobrou. **Um contraexemplo
+não derruba uma correlação** — derruba uma lei, e nunca houve lei aqui. A
+correção foi desfeita; o erro fica.
+
+#### O que isso quer dizer para as quatro calibragens de 08/09
+
+Elas foram validadas contra view e curtida. **A curtida se sustenta como
+aproximação de conversão; a view não** (sem o outlier, +0,18). Consequência
+prática: entre duas calibragens futuras, vale mais a que move CURTIDA do que
+a que move view. A calibragem 1 (título que MOSTRA) rendeu +35% em curtida —
+é a que continua mais bem apoiada.
 
 #### O que mudou no motor, e o que deliberadamente NÃO mudou
 
-**Mudou:** `estado/seguidores_por_video.jsonl` guarda as 11 medições (fora do
-`.gitignore`, porque o histórico do Studio apaga em 60 dias e cada linha
-custou um clique); `engine/seguidores.py` anota `seguidores` no ranking do
-`melhores()` e **avisa** quando o primeiro por view não é o primeiro por
-seguidor; `teste/teste_seguidor_por_video.py` guarda o comportamento, com o
-caso negativo — o aviso tem de ficar **calado** quando os dois campeões
-coincidem, senão ele vira ruído.
+**Mudou:** `estado/seguidores_por_video.jsonl` (18 medições, fora do
+`.gitignore` — o histórico do Studio apaga em 60 dias e cada linha custou um
+clique); `engine/seguidores.py` anota `seguidores` no ranking do `melhores()`
+e **avisa** quando o primeiro por view não é o primeiro por seguidor;
+`teste/teste_seguidor_por_video.py`, com o caso negativo — o aviso tem de
+ficar calado quando os dois campeões coincidem.
 
-**Não mudou:** o ranking continua por view. Com n=11, sete zeros e um outlier
-carregando 28 dos 32 seguidores, reordenar por seguidor seria trocar um sinal
-fraco por um mais fraco. A decisão espera o próximo export.
-
-#### Dois achados laterais
-
-- **"A máquina que escuta" ganhou +179 views em UM dia**, seis dias depois de
-  publicada, e tem **60% de espectadores que retornaram**. View aos 7 dias
-  não é número final — a rotina mensal (§6 do handoff) mede na hora certa; a
-  do Buffer, não.
-- **Zero comentários nos onze posts**, em 7.775 views.
+**Não mudou, e é decisão consciente:** nenhuma regra nova de seleção. O único
+sinal preditivo é a curtida, e o motor **já** é calibrado para ela desde
+08/09. Acrescentar regra a partir de n=18 com um outlier dominante seria
+inventar precisão que a medição não tem.
 
 #### O que ainda não dá para dizer
 
-Por que o post de 22/08 converteu. Nenhuma variável coletada o distingue.
-Faltam n e faltam variáveis — a mais provável de explicar é o **público a
-quem ele foi entregue**, que só a aba *Espectadores* mostra e que não foi
-lida post a post.
+Por que o post de 22/08 converteu 28 vezes mais que os irmãos do mesmo dia.
+Nenhuma variável coletada o distingue — ele nem sequer é o melhor deles em
+retenção ou em curtida. A hipótese que sobra é **a quem o TikTok o entregou**,
+que só a aba *Espectadores* mostra, post a post, e que não foi lida.
 
 **Procedência:** export do TikTok Studio das 5 contas, 08/09/2026, importado
 por `importar_overview_tiktok.py` e `importar_metricas_tiktok.py`. Série em
@@ -1674,7 +1664,7 @@ calibragens feitas a partir daqui estão em `estado/calibragens.jsonl`, cada
 uma com a condição que a derruba.
 
 A §23.9 tem procedência diferente e mais frágil: **leitura a olho da tela do
-Studio**, 11 posts, 08-09/09/2026, transcrita para
+Studio**, 18 posts, 08-09/09/2026, transcrita para
 `estado/seguidores_por_video.jsonl`. Não passou por importador e não tem
 conferência automática — se algum número parecer estranho, ele se confere
 reabrindo o post no Studio, não recalculando.

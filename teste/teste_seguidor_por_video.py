@@ -117,12 +117,15 @@ checar(seguidores.de("modofuturo",
 checar(seguidores.de("modofuturo", "As regras") is None,
        "titulo curto nao casa por prefixo (piso de 20)")
 
-print("\n5. o arquivo de verdade le' os 11 posts medidos")
+print("\n5. o arquivo de verdade le' os 18 posts medidos")
 seguidores.ARQUIVO = ORIGINAL
 reais = seguidores.registros("modofuturo")
-checar(len(reais) >= 11, f"{len(reais)} posts no estado (esperado 11+)")
-checar(sum(r["novos_seguidores"] for r in reais) == 32,
-       "somam os 32 seguidores medidos em 09/09")
+# ⚠️ Numeros EXATOS de proposito. Um piso (">= 11") so' pegaria corrupcao
+# que apaga tudo; nao pegaria a linha que some. Quando entrar medicao nova,
+# estes dois numeros sobem junto — e' o unico jeito de a suite notar perda.
+checar(len(reais) == 18, f"{len(reais)} posts no estado (esperado 18)")
+checar(sum(r["novos_seguidores"] for r in reais) == 37,
+       "somam os 37 seguidores medidos em 09/09")
 checar(seguidores.de("modofuturo",
                      "As regras extremas para entrar na fabrica mais limpa do mundo") == 28,
        "o post de 22/08 devolve os 28 seguidores")

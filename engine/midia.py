@@ -129,6 +129,22 @@ def baixar(url: str, destino: Path) -> Path:
         # ⚠️ Exige runtime de JavaScript na maquina (deno ou node). O runner
         # do GitHub ja' tem node.
         "--remote-components", "ejs:github",
+        # ⚠️ E O SOLVER PRECISA DE UM RUNTIME, QUE O yt-dlp NAO PROCURA
+        # SOZINHO. MEDIDO no run #11 (09/09), com o ejs ja' no lugar:
+        #
+        #   WARNING: No supported JavaScript runtime could be found.
+        #            Only deno is enabled by default
+        #   ERROR:   Sign in to confirm you're not a bot
+        #
+        # O runner do GitHub TEM node, mas o yt-dlp so' habilita `deno` por
+        # padrao — entao o node estava la', parado, e o desafio falhava. Sem
+        # o desafio resolvido o YouTube volta a pedir login, e o erro
+        # aparece como bot-check: a terceira cara do MESMO defeito.
+        #
+        # `deno,node` nesta ordem: usa o deno onde houver (foi com ele que
+        # se mediu em 09/09) e cai pro node onde nao houver, que e' o caso
+        # do runner. Conferido nos dois aqui, com -F: 40+ formatos.
+        "--js-runtimes", "deno,node",
     ]
     # em IP de datacenter (GitHub Actions) o Android client sozinho não
     # basta — passa cookies de uma sessão logada de verdade. Local não usa

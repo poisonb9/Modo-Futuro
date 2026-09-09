@@ -69,6 +69,11 @@ print("1. o solver do desafio de JavaScript esta' no comando")
 checar('"--remote-components", "ejs:github"' in fonte
        or "'--remote-components', 'ejs:github'" in fonte,
        "--remote-components ejs:github presente")
+# ⚠️ O solver sozinho nao basta: o yt-dlp so' habilita `deno` por padrao, e
+# o runner do GitHub tem `node`. Sem esta linha o node fica parado la' e o
+# desafio falha — foi assim que o run #11 morreu com bot-check.
+checar('"--js-runtimes"' in fonte and "node" in fonte,
+       "--js-runtimes com node (o runner nao tem deno)")
 
 print("\n2. ATENCAO: o cliente android NAO voltou")
 checar("player_client=android" not in fonte,

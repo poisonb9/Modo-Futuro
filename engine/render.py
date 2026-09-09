@@ -76,7 +76,23 @@ AUDIO_LOUDNORM = "loudnorm=I=-14:TP=-1.5:LRA=11"
 #
 # É título de TÓPICO, não legenda: diz do que o vídeo trata em uma linha.
 
-TITULO_SEGUNDOS = 3.5      # tempo na tela; o gancho falado cobre o resto
+# ⚠️ 3,5s -> 2,0s em 09/09/2026, POR ORDEM DO BRYAN. Atribuicao perdida de
+# proposito (segunda mudanca global do mesmo dia — ver o punch, la' embaixo).
+#
+# ⚠️ E ATENCAO A QUEM VIER DEPOIS: a §4 do HANDOFF_08-09 mandava mexer na
+# "tarja do titulo, engine/legendas.py, 0.30". ESSE NUMERO NAO E' A TARJA. E'
+# o LEGENDA_MARGEM_V_FRAC, a margem que SOBE a legenda desde a base, elevada
+# de 0,18 para 0,30 em 28/07 porque a 18% ela caia atras dos botoes do TikTok
+# e nao era lida. Baixa-lo esconde a legenda e desfaz um conserto medido — nao
+# encolhe tarja nenhuma. A tarja e' este card (`imagem_titulo`), e o parametro
+# que importa nao e' a altura dela, e' QUANTO TEMPO ela cobre o topo.
+#
+# MEDIDO em 08-09/09: a audiencia sai entre 0:01 e 0:02. A 3,5s o card cobria
+# a janela INTEIRA de decisao e so' sumia depois que a pessoa ja' tinha ido —
+# e o mentor §7 do SABEDORIA_YT ("nao explicar contexto no inicio, ir direto
+# ao tema") aponta pro mesmo lugar. A 2,0s ele ainda cobre a leitura do
+# titulo, mas devolve a tela antes do momento em que se decide ficar.
+TITULO_SEGUNDOS = 2.0      # tempo na tela; o gancho falado cobre o resto
 TITULO_MAX_LINHAS = 3      # acima disso vira parágrafo e ninguém lê
 # Fração da largura do vídeo que o título pode ocupar. 0,88 deixa 6% de
 # respiro de cada lado — sem isso a letra encosta na borda e fica com cara de
@@ -393,7 +409,21 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
 # em enquadrar.py no mesmo dia). Cosseno não tem descontinuidade — o quadro
 # respira, sem tranco em ponto nenhum do ciclo.
 _PUNCH_AMPLITUDE = 0.10   # 1.00 -> 1.10 no pico do ciclo
-_PUNCH_PERIODO_S = 6.5    # dentro da faixa de 5-8s que o corpus recomenda
+#
+# ⚠️ 6,5s -> 3,0s em 09/09/2026, POR ORDEM DO BRYAN, e a atribuicao foi
+# perdida de proposito (ele decidiu ciente disso).
+#
+# A faixa de 5-8s vem do corpus `[CONSENSO 2]`. O que a medicao propria de
+# 08-09/09 mostrou e' que a audiencia sai entre 0:01 e 0:02 — ou seja, ela vai
+# embora ANTES de completar um unico ciclo de 6,5s. Um punch cujo primeiro
+# movimento so' acontece depois que todo mundo ja' saiu nao e' edicao, e'
+# enfeite pra quem foi. Em 3,0s cabem dois ciclos na janela de decisao.
+#
+# ⚠️ ISTO NAO E' CALIBRAGEM MEDIDA. Nao ha' medicao nossa a favor, e vale para
+# TODO clipe novo ao mesmo tempo — nao ha' grupo de comparacao dentro do mes,
+# entao o efeito NAO sera' atribuivel no proximo export. Registrado assim, de
+# proposito, em estado/calibragens.jsonl.
+_PUNCH_PERIODO_S = 3.0
 
 
 def _ken_burns(bruto: Path, largura: int, altura: int) -> str:

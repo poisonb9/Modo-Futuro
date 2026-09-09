@@ -49,6 +49,7 @@ from pathlib import Path
 
 import registro_videos
 from engine import cadencia
+from engine import sentinela_youtube as sentinela
 
 RAIZ = Path(__file__).resolve().parent
 DESTINO = RAIZ / "trabalho" / "brutos"
@@ -128,7 +129,22 @@ def baixar(url: str, canal: str = "") -> tuple[bool, str]:
 
 
 def _baixar_agora(url: str) -> tuple[bool, str]:
-    """O download em si. NAO chame direto — passe por `baixar`."""
+    """O download em si. NAO chame direto — passe por `baixar`.
+
+    ⚠️ DUAS TRAVAS, E ATE' 09/09/2026 ELAS ERAM DUAS PORTAS. A `cadencia` guarda
+    o intervalo POR CANAL, com cadeado em `estado/cadencia_download.lock`; a
+    `sentinela` guarda o YouTube inteiro, com cadeado em `~/.sentinela_youtube`.
+    Sao arquivos diferentes: quem entrava por aqui nao era visto por quem
+    entrava pelo `midia.baixar()`, e os dois podiam falar com o YouTube ao
+    mesmo tempo — a REGRA ABSOLUTA da `PIPELINE.md` §8 violada por duas guardas
+    que nao se conheciam. E' o mesmo molde de erro que a `FASE2.md` §1.2 ja'
+    tinha registrado com o nome do canal.
+
+    Agora as duas sao encadeadas: a cadencia continua contando por canal, e a
+    sentinela e' a porta unica. O sono da sentinela acontece com o cadeado dela
+    solto, entao esperar aqui nao tranca ninguem alem deste download.
+    """
+    sentinela.esperar_vez(f"baixar {url[-24:]}", "pesado")
     cmd = [
         "yt-dlp", "-f", FORMATO, "--merge-output-format", "mp4",
         "--no-warnings", "--no-progress",
@@ -143,7 +159,15 @@ def _baixar_agora(url: str) -> tuple[bool, str]:
     r = subprocess.run(cmd, capture_output=True, text=True,
                        encoding="utf-8", errors="replace", timeout=3600)
     if r.returncode != 0:
-        erro = (r.stderr or r.stdout or "").strip().splitlines()
+        bruto = (r.stderr or r.stdout or "").strip()
+        # ⚠️ O FREIO E' PUXADO AQUI, no ponto que ve' o erro. Este script
+        # devolve (False, motivo) em vez de levantar, e o `main()` segue pro
+        # proximo da fila — sem isto, um bot-check viraria uma RAJADA de
+        # tentativas, que e' exatamente o que confirma o padrao de robo.
+        if sentinela.e_bloqueio(bruto):
+            sentinela.puxar_freio(bruto[:300])
+            return False, "BOT-CHECK: freio da sentinela puxado por 24h"
+        erro = bruto.splitlines()
         return False, (erro[-1][:150] if erro else f"exit {r.returncode}")
     return True, "ok"
 

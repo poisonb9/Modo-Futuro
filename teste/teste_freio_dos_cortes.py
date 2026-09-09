@@ -102,11 +102,21 @@ def teste_NEGATIVO_baixar_e_subir_seguem_liberados():
     Se ele parasse o download e o upload, sair da pausa levaria dias — teria
     de baixar tudo de novo. O ganho da pausa e' cota de Gemini, e nem baixar
     nem subir gastam uma gota dela.
+
+    ⚠️ E A BUSCA E' PELO FREIO CERTO, nao pela palavra. Em 09/09/2026 a
+    sentinela do YouTube ganhou um freio PROPRIO — o de bot-check, 24h, que
+    NADA tem a ver com este, que e' pausa de corte por cota de Gemini. Sao
+    dois mecanismos com o mesmo nome, e procurar a palavra solta acusava o
+    download por consultar o freio errado. O que nao pode vazar pra ca' e' o
+    `engine/freio.py`: `freio.puxado()`, `from engine import freio`.
     """
     baixar = (RAIZ / "baixar_em_intervalos.py").read_text(encoding="utf-8")
     subir = (RAIZ / "enviar_bruto_drive.py").read_text(encoding="utf-8")
-    assert "freio" not in baixar, "o freio vazou pro download"
-    assert "freio" not in subir, "o freio vazou pro upload"
+    for nome, fonte in (("download", baixar), ("upload", subir)):
+        assert "freio.puxado()" not in fonte, f"o freio de corte vazou pro {nome}"
+        assert "from engine import freio" not in fonte, (
+            f"o freio de corte vazou pro {nome}")
+        assert "engine.freio" not in fonte, f"o freio de corte vazou pro {nome}"
 
 
 def teste_o_arquivo_fica_na_raiz_e_gritando():

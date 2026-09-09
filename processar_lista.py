@@ -30,6 +30,8 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 
+from engine import sentinela_youtube as sentinela
+
 load_dotenv()
 
 RAIZ = Path(__file__).resolve().parent
@@ -45,6 +47,13 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 # Dois de cada vez: mais que isso satura CPU/RAM (o yt-dlp junta vídeo e
 # áudio com ffmpeg no fim de cada download, e é aí que pesa).
+#
+# ⚠️ ISTO NAO E' MAIS DOIS DOWNLOADS AO MESMO TEMPO. Ate' 09/09/2026 era: as
+# duas threads chamavam o yt-dlp direto, e duas conversas com o YouTube saiam
+# encavaladas — exatamente o padrao que o YouTube usa pra reconhecer robo, e
+# o que a REGRA ABSOLUTA da PIPELINE.md §8 proibe. Hoje toda chamada passa
+# por `_yt()`, e a sentinela serializa: as duas threads seguem valendo pro
+# upload no Drive e pro disparo do corte, que nao falam com o YouTube.
 SIMULTANEOS = 2
 
 # Radar: acima disso o vídeo é sinalizado e fica de fora por padrão.
@@ -106,14 +115,48 @@ def _roda(cmd: list[str]) -> str:
     return r.stdout
 
 
+def _yt(cmd: list[str], rotulo: str) -> str:
+    """Toda conversa com o YouTube deste script passa por aqui.
+
+    ⚠️ POR QUE ELE EXISTE. Este arquivo roda `SIMULTANEOS` videos em paralelo,
+    e ate' 09/09/2026 cada thread chamava o yt-dlp direto: DOIS downloads ao
+    mesmo tempo, que e' o que a REGRA ABSOLUTA da `PIPELINE.md` §8 proibe nas
+    palavras do Bryan. A sentinela poe um de cada vez, com intervalo, e quem
+    chega cedo dorme em vez de levar erro.
+
+    ⚠️ E o freio e' puxado AQUI, no ponto que ve' o bot-check — nao no
+    chamador. Deixar o `insistindo()` decidir foi o desenho que queimou a VPS:
+    retry depois de bot-check e' o que confirma o padrao de robo.
+    """
+    sentinela.esperar_vez(rotulo, sentinela.peso_do_comando(cmd))
+    try:
+        return _roda(cmd)
+    except RuntimeError as e:
+        if sentinela.e_bloqueio(str(e)):
+            sentinela.puxar_freio(str(e)[:300])
+            log(f"   [{rotulo}] [!] BOT-CHECK: freio da sentinela puxado. "
+                "NAO tente de novo — tentar e' o que confirma o padrao.")
+        raise
+
+
 def insistindo(rotulo: str, funcao):
     """Repete a função até dar certo, com espera crescente. Serve pra queda
     de internet: o yt-dlp retoma o arquivo de onde parou, então cada nova
-    tentativa continua o download em vez de recomeçar."""
+    tentativa continua o download em vez de recomeçar.
+
+    ⚠️ MAS NAO INSISTE EM BOT-CHECK. Queda de internet passa; bloqueio do
+    YouTube nao — e vinte tentativas com espera crescente e' literalmente o
+    comportamento que confirma o padrao de robo. Bloqueio sobe na primeira.
+    """
     for tentativa in range(1, TENTATIVAS + 1):
         try:
             return funcao()
+        except sentinela.Bloqueada:
+            raise
         except Exception as e:
+            if sentinela.e_bloqueio(str(e)):
+                log(f"   [{rotulo}] bloqueio do YouTube — NAO vou insistir.")
+                raise
             if tentativa == TENTATIVAS:
                 raise
             espera = min(2 ** tentativa, ESPERA_MAX_S)
@@ -126,8 +169,9 @@ def insistindo(rotulo: str, funcao):
 
 def sondar(url: str) -> dict:
     """Pega id, duração e título sem baixar nada."""
-    saida = _roda(["yt-dlp", "--skip-download", "--no-warnings",
-                   "--print", "%(id)s\t%(duration)s\t%(title)s", url])
+    saida = _yt(["yt-dlp", "--skip-download", "--no-warnings",
+                 "--print", "%(id)s\t%(duration)s\t%(title)s", url],
+                f"sondar {url[:50]}")
     vid, dur, titulo = saida.strip().splitlines()[0].split("\t", 2)
     return {"id": vid, "duracao": int(float(dur)) if dur != "NA" else 0,
             "titulo": titulo, "url": url}
@@ -147,7 +191,7 @@ def baixar(url: str, destino: Path):
     #
     # --continue (padrão) retoma o .part; os retries internos seguram quedas
     # curtas sem nem devolver erro pro insistindo() lá de fora.
-    _roda([
+    _yt([
         "yt-dlp", "-f",
         "bv*[height<=1080][vcodec^=avc1]+ba[acodec^=mp4a]/"
         "bv*[height<=1080]+ba/b[height<=1080]/b",
@@ -157,7 +201,7 @@ def baixar(url: str, destino: Path):
         "--fragment-retries", "infinite",
         "--retry-sleep", "exp=1:60",
         "-o", str(destino), url,
-    ])
+    ], f"baixar {url[:50]}")
 
 
 def escolher_conta() -> dict:

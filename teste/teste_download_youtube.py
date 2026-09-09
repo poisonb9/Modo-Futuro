@@ -95,7 +95,17 @@ for pedaco, oq in [('"yt-dlp"', "chama o yt-dlp"),
                    ("YTDLP_POT_SERVER", "ainda aceita PO Token se houver")]:
     checar(pedaco in fonte, oq)
 
-print("\n4. e o cookie e o PO Token continuam OPCIONAIS")
+print(chr(10) + "4. o download passa pela SENTINELA, e ela puxa o freio sozinha")
+# ⚠️ Ordem do Bryan em 09/09: TODA chamada ao YouTube passa pela porta.
+# Sem estas linhas, um download solto no meio do codigo escapa da fila — e
+# foi RAJADA, nao volume, que queimou a VPS.
+checar("sentinela.esperar_vez(" in fonte,
+       "espera a vez ANTES de chamar o yt-dlp")
+checar("sentinela.e_bloqueio(" in fonte and "sentinela.puxar_freio(" in fonte,
+       "reconhece o bot-check e puxa o freio onde ve' o erro")
+checar("raise" in fonte, "RELEVANTA o erro — a sentinela nao engole a falha")
+
+print("\n5. e o cookie e o PO Token continuam OPCIONAIS")
 # ⚠️ Medido em 09/09: sem cookie e sem PO Token, so' com o ejs, o download
 # lista 40+ formatos. Os dois viraram reforco, nao requisito — mas nenhum
 # dos dois pode ter virado obrigatorio no caminho.

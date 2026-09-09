@@ -3,6 +3,7 @@ import json, os, re, shutil, subprocess
 from pathlib import Path
 
 import config
+from engine import sentinela_youtube as sentinela
 
 
 NL = chr(10)
@@ -170,7 +171,30 @@ def baixar(url: str, destino: Path) -> Path:
         cmd += ["--extractor-args",
                 f"youtubepot-bgutilscript:server_home={pot_server}"]
     cmd += ["-o", str(alvo), url]
-    roda(cmd, silencioso=False)
+
+    # ⚠️ TODA chamada ao YouTube passa pela sentinela. Ordem do Bryan em
+    # 09/09/2026, depois de a VPS levar bot-check por rajada: uma de cada
+    # vez, sempre intervalada, e quem chega cedo ESPERA em vez de ser
+    # recusado. Ver `engine/sentinela_youtube.py`.
+    #
+    # ⚠️ HONESTIDADE SOBRE O ALCANCE: no runner do GitHub cada execucao
+    # nasce num disco limpo, entao a sentinela sempre ve "primeira chamada"
+    # e nao segura nada — e o freio tambem nao sobrevive entre runs. Ela
+    # protege maquina PERSISTENTE (a VPS, esta aqui). Nao e' defeito: e' o
+    # limite de um estado em disco, e esta escrito pra ninguem achar que a
+    # nuvem esta' coberta.
+    sentinela.esperar_vez(f"download {url[:60]}")
+    try:
+        roda(cmd, silencioso=False)
+    except RuntimeError as e:
+        # ⚠️ O freio e' puxado AQUI, no ponto que ve' o erro. Deixar cada
+        # chamador decidir se tenta de novo foi o que queimou a VPS: retry
+        # solto depois de bot-check e' o que confirma o padrao de robo.
+        if sentinela.e_bloqueio(str(e)):
+            sentinela.puxar_freio(str(e)[:300])
+            print("   [!] BOT-CHECK: freio da sentinela puxado. NAO tente de "
+                  "novo — tentar e' o que confirma o padrao de robo.")
+        raise
     achados = list(destino.glob("fonte.*"))
     if not achados:
         raise RuntimeError("yt-dlp não produziu arquivo")

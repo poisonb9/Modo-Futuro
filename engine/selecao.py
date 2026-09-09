@@ -357,7 +357,7 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
   // ⚠️ RESSALVA DE TAMANHO DE AMOSTRA: sao 75 posts, e alguns recortes tem
   // menos de 10. A direcao e' consistente; a magnitude nao e' precisa. Se o
   // export do mes que vem nao confirmar, este bloco e' o primeiro a revisar.
-  "titulo": "<pt-BR, max 80 chars, sem hashtag. MOSTRE a coisa, a cena ou o resultado concreto do trecho — de preferencia com um numero que ja' esteja na fala. NAO prometa explicacao: evite abrir com 'Como', 'Por que', 'O segredo de' ou pergunta, a menos que a frase seguinte entregue um fato concreto e verificavel do proprio trecho>",
+  "titulo": "<pt-BR com ACENTUACAO CORRETA, inclusive em CAIXA ALTA (⚠️ dois titulos foram ao ar em 09/09/2026 com o acento comido: 'amigos e um ERRO' sem o E-agudo do verbo, e 'IRMA MAIS VELHA' sem o til — caixa alta NAO dispensa acento), max 80 chars, sem hashtag. MOSTRE a coisa, a cena ou o resultado concreto do trecho — de preferencia com um numero que ja' esteja na fala. NAO prometa explicacao: evite abrir com 'Como', 'Por que', 'O segredo de' ou pergunta, a menos que a frase seguinte entregue um fato concreto e verificavel do proprio trecho>",
   "descricao": "<2-3 frases em pt-BR para a descrição do YouTube>",
   "tags": ["<5 a 8 tags em pt-BR, sem #>"],
   "tipo_conteudo": "<uma das opções acima>",

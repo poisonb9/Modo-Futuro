@@ -58,6 +58,24 @@ SEM_ACENTO_NAO_EXISTE = {
     "estrategia": "estratégia", "experiencia": "experiência",
     "consequencia": "consequência", "ciencia": "ciência",
     "inteligencia": "inteligência", "diferenca": "diferença",
+    # ⚠️ A FAMILIA DO TIL, acrescentada em 09/09/2026 depois do segundo caso
+    # no mesmo dia: "Sabae de IRMA MAIS VELHA" no @achadinho.make. O modelo
+    # perde o til com mais frequencia em CAIXA ALTA, e nenhuma destas existe
+    # sem ele.
+    "irma": "irmã", "irmas": "irmãs", "irmao": "irmão", "irmaos": "irmãos",
+    "mae": "mãe", "maes": "mães", "manha": "manhã", "amanha": "amanhã",
+    "coracao": "coração", "opiniao": "opinião", "reuniao": "reunião",
+    "versao": "versão", "missao": "missão", "visao": "visão",
+    "pressao": "pressão", "explicacao": "explicação",
+    "situacao": "situação", "condicao": "condição", "relacao": "relação",
+    "geracao": "geração", "criacao": "criação", "producao": "produção",
+    "reacao": "reação", "solucao": "solução", "intencao": "intenção",
+    "obsessao": "obsessão", "expressao": "expressão", "licao": "lição",
+    "traicao": "traição", "ambicao": "ambição", "aviao": "avião",
+    "orgao": "órgão", "orfao": "órfão", "cristao": "cristão",
+    "alemao": "alemão", "capitao": "capitão", "campeao": "campeão",
+    "campeoes": "campeões", "padrao": "padrão", "sertao": "sertão",
+    "reflexao": "reflexão", "obrigacao": "obrigação", "punicao": "punição",
 }
 
 # Palavras de JULGAMENTO: depois de "e um/uma", o "e" e' verbo, nunca
@@ -68,6 +86,14 @@ JULGAMENTO = {
     "cilada", "furada", "burrice", "perda", "veneno", "vício", "vicio",
     "luxo", "privilégio", "privilegio", "milagre", "absurdo",
 }
+
+# ⚠️ O PRECO DESTA LISTA, dito na cara: nome proprio estrangeiro que coincida
+# com uma delas vira palavra portuguesa. "Irma Vep" (o filme) sairia "Irmã
+# Vep". Aceito de propósito — em titulo pt-BR "irmã" aparece muitas ordens de
+# grandeza mais que o nome "Irma", e o caso que foi ao ar era o primeiro. Se
+# um canal passar a falar de alguem chamado Irma, tire a linha; o teste tem o
+# caso marcado.
+
 
 _PALAVRA = re.compile(r"[A-Za-zÀ-ÿ]+")
 _E_UM = re.compile(r"\b([Ee])\s+(um|uma)\s+([A-Za-zÀ-ÿ]+)")

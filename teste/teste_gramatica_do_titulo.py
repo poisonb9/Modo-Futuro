@@ -79,6 +79,19 @@ checar(g.suspeitas("Isso e um ERRO") == [],
 checar(g.suspeitas("Frase sem nada disso") == [],
        "NEGATIVO: frase limpa nao gera aviso")
 
+print(chr(10) + "5b. o SEGUNDO caso do mesmo dia: o til em caixa alta")
+# @achadinho.make, 09/09/2026: "chamar Sabae de IRMA MAIS VELHA".
+checar(g.corrigir("chamar Sabae de IRMA MAIS VELHA!")
+       == "chamar Sabae de IRMÃ MAIS VELHA!", "IRMA -> IRMÃ, caixa preservada")
+checar(g.corrigir("A MAE e o IRMAO") == "A MÃE e o IRMÃO",
+       "a familia do til inteira, em caixa alta")
+
+# ⚠️ O PRECO, marcado de proposito: nome proprio que coincida com a lista
+# vira palavra portuguesa. Se um canal passar a falar de alguem chamado
+# "Irma", e' esta linha que muda — e o motivo esta' escrito no modulo.
+checar(g.corrigir("Irma Vep") == "Irmã Vep",
+       "ACEITO: nome proprio homografo e' corrigido (ver a nota no modulo)")
+
 print("\n6. esta' LIGADO no motor")
 FONTE = (RAIZ / "main.py").read_text(encoding="utf-8")
 checar("gramatica.corrigir(" in FONTE, "o main.py corrige antes de renderizar")
@@ -87,6 +100,14 @@ checar("gramatica.suspeitas(" in FONTE, "e imprime o aviso do caso duvidoso")
 # (morte -> m0rte) e a busca por palavra nao acharia mais o que corrigir.
 checar(FONTE.index("gramatica.corrigir(") < FONTE.index("suavizar.palavras("),
        "corrige ANTES do suavizar, senao a palavra ja' mudou de forma")
+
+print(chr(10) + "7. e a CAUSA foi atacada no gerador, nao so' na saida")
+# ⚠️ A lista fechada nunca vai estar completa — ela conserta o que ja'
+# aconteceu. Quem impede o PROXIMO caso e' o prompt.
+PROMPT = (RAIZ / "engine" / "selecao.py").read_text(encoding="utf-8")
+checar("ACENTUACAO CORRETA" in PROMPT, "o prompt do titulo exige acentuacao")
+checar("CAIXA ALTA" in PROMPT,
+       "e diz que caixa alta NAO dispensa acento")
 
 if falhas:
     print(f"\n{len(falhas)} FALHA(S)")

@@ -76,6 +76,17 @@ CORTAR_SILENCIOS = True
 SILENCIO_LIMIAR_DB = -32     # abaixo disso é considerado silêncio
 SILENCIO_DUR_MIN_S = 0.35    # pausa menor que isso é respiração natural, fica
 SILENCIO_FOLGA_S = 0.10      # deixa nas pontas pra fala não soar cortada
+# ------------------------------------------------- cauda muda (09/09/2026)
+# Com dublagem, a trilha e' montada sobre silencio do tamanho do clipe: se a
+# ultima frase acaba antes do fim, o resto e' silencio de verdade. Ligado por
+# ordem do Bryan em 09/09/2026. Ver engine/cauda.py — inclusive por que o piso
+# de DUR_MIN manda mais que isto.
+#
+# ⚠️ MUDANCA GLOBAL: vale pra todo clipe dublado novo, nao e' atributo de post.
+# Desligar: CAUDA_MUDA_APARAR=0 no ambiente.
+CAUDA_MUDA_APARAR = os.environ.get(
+    "CAUDA_MUDA_APARAR", "1").strip().lower() not in ("0", "false", "nao")
+
 MARGEM = 0.4                     # respiro antes/depois do corte (s)
 CONGELAMENTO_MAX_S = 4.5         # bloco contínuo travado acima disso descarta o candidato
 

@@ -301,11 +301,18 @@ def _teto_segundos(bruto: Path) -> list[str]:
 
 def _render(bruto: Path, filtro_video: str, ass: Path | None,
             destino: Path, audio_dublado: Path | None = None,
-            img_titulo: Path | None = None, topo_titulo: int = 0) -> Path:
+            img_titulo: Path | None = None, topo_titulo: int = 0,
+            duracao_max: float | None = None) -> Path:
     # ⚠️ TETO ABSOLUTO DE DURACAO. Ver o cabecalho de `_teto_segundos`: o
     # `-shortest` sozinho nao segura quando ha' input com `-loop 1`, e a
     # renderizacao vira infinita. Custou os runs #188 e #189 inteiros.
-    teto = _teto_segundos(bruto)
+    #
+    # `duracao_max` e' a CAUDA MUDA aparada (engine/cauda.py) e SUBSTITUI o
+    # teto de seguranca, nunca soma com ele: e' sempre menor que a duracao do
+    # bruto, entao serve aos dois propositos de uma vez. Quando vem None, tudo
+    # fica exatamente como era.
+    teto = (["-t", f"{duracao_max:.3f}"] if duracao_max
+            else _teto_segundos(bruto))
     cadeia = filtro_video
     if ass is not None:
         # fontsdir aponta pra pasta de fontes do repositório. O .ass pede
@@ -393,6 +400,10 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
         "-vf", cadeia, *_encoder(),
         "-af", AUDIO_LOUDNORM,
         "-c:a", "aac", "-b:a", "192k",
+        # ⚠️ Este ramo nunca teve `-t`, e continua sem: sem `-loop 1` nao ha' o
+        # defeito que o teto de seguranca existe pra conter. O `-t` so' aparece
+        # aqui quando alguem PEDIU o aparo.
+        *(teto if duracao_max else []),
         "-pix_fmt", "yuv420p", "-movflags", "+faststart",
         str(destino),
     ])
@@ -444,7 +455,8 @@ def _ken_burns(bruto: Path, largura: int, altura: int) -> str:
 
 
 def vertical(bruto: Path, ass: Path | None, destino: Path,
-             audio_dublado: Path | None = None, titulo: str = "") -> Path:
+             audio_dublado: Path | None = None, titulo: str = "",
+             duracao_max: float | None = None) -> Path:
     """9:16 para Shorts, com o quadro seguindo o rosto.
 
     `titulo` desenha o card de abertura (ver imagem_titulo) — caixa branca
@@ -477,18 +489,21 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     # proximo lote: se ainda cortar, subir pra 0.20.
     topo = round(av * TITULO_TOPO_FRAC)
     return _render(bruto, filtro, ass, destino, audio_dublado,
-                    img_titulo=img_titulo, topo_titulo=topo)
+                    img_titulo=img_titulo, topo_titulo=topo,
+                    duracao_max=duracao_max)
 
 
 def horizontal(bruto: Path, ass: Path | None, destino: Path,
-               audio_dublado: Path | None = None) -> Path:
+               audio_dublado: Path | None = None,
+               duracao_max: float | None = None) -> Path:
     """16:9 tela cheia — o corte de 1 minuto que você queria também."""
     lh, ah = config.HORIZONTAL
     filtro = (f"scale={lh}:{ah}:force_original_aspect_ratio=decrease,"
               f"pad={lh}:{ah}:(ow-iw)/2:(oh-ih)/2:black") + _ken_burns(bruto, lh, ah)
     if config.GRADE_CINEMATICO:
         filtro += pos_producao.FILTRO_COR_CINEMATICO
-    return _render(bruto, filtro, ass, destino, audio_dublado)
+    return _render(bruto, filtro, ass, destino, audio_dublado,
+                    duracao_max=duracao_max)
 
 
 def capa(bruto: Path, destino: Path, em: float = 1.0) -> Path:

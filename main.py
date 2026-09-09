@@ -15,7 +15,8 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
-                    dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar)
+                    dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
+                    cauda)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -440,6 +441,22 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 c["titulo"] = suavizar.texto(c.get("titulo", ""))
                 c["descricao"] = suavizar.texto(c.get("descricao", ""))
 
+            # ---- cauda muda: a narracao acabou e o video seguia sem voz
+            # ⚠️ TEM DE FICAR DEPOIS do bloco de dublagem, e nao antes: no
+            # caminho da voz clonada o `ps` acima foi SUBSTITUIDO pelo timing
+            # real do audio dublado, e e' esse que diz onde a fala acaba de
+            # verdade. Calculado UMA vez e usado nos dois renders — se cada um
+            # fizesse a conta, o 9:16 e o 16:9 poderiam divergir.
+            dur_final_antes = dur_final
+            dur_max = None
+            if config.CAUDA_MUDA_APARAR:
+                dur_max = cauda.duracao_util(
+                    dur_final, ps, audio_dublado is not None, config.DUR_MIN)
+                if dur_max:
+                    print(f"      cauda muda: {dur_final - dur_max:.1f}s sem voz "
+                          f"no fim — clipe aparado pra {dur_max:.1f}s")
+                    dur_final = dur_max
+
             lv, av = config.VERTICAL
             ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
                                        estilo=estilo_legenda)
@@ -450,7 +467,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # post — a informação existia e estava sendo jogada fora justamente
             # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
             render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
-                            titulo=c.get("titulo", ""))
+                            titulo=c.get("titulo", ""), duracao_max=dur_max)
 
             if not so_vertical:
                 lh, ah = config.HORIZONTAL
@@ -458,7 +475,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                                            estilo=estilo_legenda)
                 print("      renderizando 16:9 tela cheia...")
                 status.etapa(nome_fonte, "renderizando_horizontal", c.get("titulo", ""), i, len(clipes))
-                render.horizontal(bruto, ass_h, pasta / "fullscreen_16x9.mp4", audio_dublado)
+                render.horizontal(bruto, ass_h, pasta / "fullscreen_16x9.mp4",
+                                  audio_dublado, duracao_max=dur_max)
 
             render.capa(bruto, pasta / "capa.jpg")
 
@@ -495,6 +513,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             meta["duracao_recorte_s"] = round(fim - ini, 2)
             meta["duracao_s"] = round(dur_final, 2)
             meta["decupado"] = bool(dur_final < (fim - ini) - 0.01)
+            # ⚠️ `duracao_s` ja' desconta o aparo (o `dur_final` foi reduzido
+            # acima). Este campo diz QUANTO foi aparado, e existe pra medicao:
+            # sem ele nao da' pra separar, no proximo export, o clipe que teve
+            # cauda do que nunca teve.
+            meta["cauda_aparada_s"] = round(dur_final_antes - dur_final, 2)
             # Guarda a URL AQUI, não só no _origem.json do lote — post.json é o
             # arquivo que sobrevive em qualquer cópia/organização do clipe
             # (Drive, Desktop, etc). Perder a URL de origem já aconteceu (vídeo

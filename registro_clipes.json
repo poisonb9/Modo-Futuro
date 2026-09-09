@@ -439,7 +439,14 @@
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-08-2026/2026-08-25_04_nota88_O_Custo_Bilionario_para_os_EUA_Dominarem_a_Producao_de_Chips_short_9x16.mp4",
       "criado_em": "2026-08-31T23:15:08+00:00",
       "sem_hash": true,
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-09T11:19:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "O Custo Bilionário para os EUA Dominarem a Produção de Chips"
+        }
+      ]
     },
     "sem-hash:2026082505nota80oatrasode50anosnaindustriaeaviradahistorica": {
       "arquivo": "2026-08-25_05_nota80_O_atraso_de_50_anos_na_industria_e_a_virada_historica_short_9x16.mp4",

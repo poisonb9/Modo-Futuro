@@ -1650,12 +1650,32 @@ sinal preditivo é a curtida, e o motor **já** é calibrado para ela desde
 08/09. Acrescentar regra a partir de n=18 com um outlier dominante seria
 inventar precisão que a medição não tem.
 
+#### A pista que sobrou: A QUEM o TikTok entregou — `[n=4, FRACO]`
+
+A aba *Espectadores* traz `Novos espectadores × Espectadores que retornaram`.
+Lida em 4 posts:
+
+    98% novos   2473 views   28 seguidores
+    97% novos   1009 views    1 seguidor
+    48% novos    568 views    0
+    40% novos    543 views    0
+
+⚠️ **Os dois abaixo de 50% de espectadores novos deram zero; os dois acima de
+95% converteram.** Mas 97% de novos rendeu UM seguidor — então, se este
+padrão se confirmar, público novo é **condição necessária e não suficiente**:
+sem gente nova não há conversão possível, e com gente nova ela ainda pode não
+acontecer.
+
+⚠️ `n=4`. É pista, não achado. E a leitura tem viés embutido: os dois com
+público novo alto são também os dois de maior alcance, então "novo" e "muito
+alcance" ainda estão colados. Separa-se lendo a aba num post de ~550 views
+com % de novos alto — se existir.
+
 #### O que ainda não dá para dizer
 
-Por que o post de 22/08 converteu 28 vezes mais que os irmãos do mesmo dia.
-Nenhuma variável coletada o distingue — ele nem sequer é o melhor deles em
-retenção ou em curtida. A hipótese que sobra é **a quem o TikTok o entregou**,
-que só a aba *Espectadores* mostra, post a post, e que não foi lida.
+Por que o post de 22/08 converteu 28 vezes mais que os irmãos do MESMO DIA.
+Nenhuma variável coletada o distingue — ele não é o melhor deles em retenção
+nem em curtida. A pista acima é a única que sobrou, e ela é fraca.
 
 **Procedência:** export do TikTok Studio das 5 contas, 08/09/2026, importado
 por `importar_overview_tiktok.py` e `importar_metricas_tiktok.py`. Série em

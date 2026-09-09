@@ -64,16 +64,28 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-# O que o YouTube devolve quando decidiu que somos robo.
-SINAIS_DE_BLOQUEIO = (
+# ⚠️ DUAS SEVERIDADES, penas diferentes. Ajustado em 09/09/2026 depois que um
+# 429 numa LEGENDA custou 24h de freio.
+#
+#   BOT   "not a bot" e' suspeita no nivel da CONTA. E' o que derrubou a VPS.
+#         Pena cheia SEMPRE, em qualquer peso. Nao se afrouxa.
+#   TAXA  429 e' limite de taxa: transitorio, costuma passar em horas.
+#
+# A pena curta vale so' pra TAXA em chamada LEVE (legenda, metadado, listagem).
+# Video em 429 continua com a pena cheia: sessao longa em rajada e' justamente
+# o padrao que vira bot-check.
+SINAIS_BOT = (
     "sign in to confirm you're not a bot",
     "sign in to confirm you’re not a bot",   # apostrofo tipografico
     "confirm you're not a bot",
     "confirm you’re not a bot",
     "this helps protect our community",
+)
+SINAIS_TAXA = (
     "http error 429",
     "too many requests",
 )
+SINAIS_DE_BLOQUEIO = SINAIS_BOT + SINAIS_TAXA
 
 
 class Bloqueada(RuntimeError):
@@ -137,6 +149,21 @@ def freio_h() -> int:
     return _num("SENTINELA_YT_FREIO_H", 24)
 
 
+def freio_taxa_leve_h() -> int:
+    """Pena para 429 em chamada LEVE. Curta de proposito."""
+    return _num("SENTINELA_YT_FREIO_TAXA_LEVE_H", 3)
+
+
+def severidade(texto: str) -> str | None:
+    """'bot', 'taxa' ou None. Bot vence: se os dois aparecem, e' bot."""
+    t = (texto or "").lower()
+    if any(x in t for x in SINAIS_BOT):
+        return "bot"
+    if any(x in t for x in SINAIS_TAXA):
+        return "taxa"
+    return None
+
+
 def _ler(arq: Path) -> dict:
     try:
         return json.loads(arq.read_text(encoding="utf-8"))
@@ -168,8 +195,18 @@ def freio_ativo() -> tuple[bool, str]:
     return False, ""
 
 
-def puxar_freio(motivo: str, horas: int | None = None) -> None:
-    h = freio_h() if horas is None else horas
+def puxar_freio(motivo: str, horas: int | None = None,
+                peso: str = "pesado") -> None:
+    """Puxa o freio. A pena sai da SEVERIDADE do motivo e do PESO da chamada.
+
+    ⚠️ `horas` explicito continua vencendo tudo — e' o que os ensaios usam.
+    """
+    if horas is None:
+        h = (freio_taxa_leve_h()
+             if severidade(motivo) == "taxa" and peso == "leve"
+             else freio_h())
+    else:
+        h = horas
     _grav(_dir() / "freio.json",
           {"ate": time.time() + h * 3600, "motivo": str(motivo)[:300],
            "quando": datetime.now(timezone.utc).isoformat(timespec="seconds")})
@@ -222,10 +259,29 @@ def _pegar_cadeado(limite_s: float) -> Path:
             os.close(fd)
             return alvo
         except FileExistsError:
+            # ⚠️ CADEADO SEM CONTEUDO E' NOVO, NAO ABANDONADO. O arquivo nasce
+            # VAZIO no `O_CREAT` e so' recebe o pid no `os.write` seguinte:
+            # entre as duas linhas existe um instante em que outro processo le'
+            # e nao acha carimbo nenhum.
+            #
+            # Com `nasceu = 0.0` esse instante virava "abandonado ha' 56 anos",
+            # o cadeado recem-criado era APAGADO, e os dois processos seguiam —
+            # DOIS downloads ao mesmo tempo, que e' exatamente o que esta
+            # funcao existe pra impedir. Janela de microssegundos em disco
+            # local; bem maior em disco de rede, que e' o caso que o `O_EXCL`
+            # foi escolhido pra atender.
+            #
+            # O `st_mtime` e' carimbado pelo proprio sistema na CRIACAO, entao
+            # ele responde mesmo quando o conteudo ainda nao chegou. Se nem
+            # ele der (arquivo sumiu no meio), a hora de AGORA e' o palpite
+            # seguro: trata como novo e espera, em vez de arrombar.
             try:
                 nasceu = float(alvo.read_text(encoding="utf-8").split()[1])
             except Exception:
-                nasceu = 0.0
+                try:
+                    nasceu = alvo.stat().st_mtime
+                except OSError:
+                    nasceu = time.time()
             if time.time() - nasceu > max(600, limite_s):
                 alvo.unlink(missing_ok=True)       # abandonado
                 continue
@@ -366,7 +422,7 @@ def rodar(cmd: list[str], rotulo: str = "", peso: str | None = None) -> int:
     if e_bloqueio(saida):
         motivo = next((l for l in saida.splitlines() if e_bloqueio(l)),
                       "bot-check")
-        puxar_freio(motivo)
+        puxar_freio(motivo, peso=peso or peso_do_comando(cmd))
         print(f"\n[sentinela] FREIO PUXADO por {freio_h()}h: {motivo[:120]}\n"
               f"[sentinela] nao tente de novo — tentar e' o que confirma o "
               f"padrao de robo.", file=sys.stderr)

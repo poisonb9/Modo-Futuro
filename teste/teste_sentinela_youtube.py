@@ -49,7 +49,7 @@ def checar(cond, recado):
 
 AJUSTES = ("SENTINELA_YT_INTERVALO", "SENTINELA_YT_INTERVALO_LEVE",
            "SENTINELA_YT_ESPERA_MAX", "SENTINELA_YT_TETO_DIA",
-           "SENTINELA_YT_FREIO_H")
+           "SENTINELA_YT_FREIO_H", "SENTINELA_YT_FREIO_TAXA_LEVE_H")
 
 
 def limpo(**env):
@@ -182,6 +182,41 @@ checar(e["intervalo_s"] == 600, f"video: 600s (veio {e['intervalo_s']})")
 checar(e["intervalo_leve_s"] == 300,
        f"leve: 300s (veio {e['intervalo_leve_s']})")
 checar(e["teto_dia"] == 12, f"teto padrao 12 (veio {e['teto_dia']})")
+
+print(chr(10) + "9. cadeado VAZIO e' novo, nao abandonado")
+# ⚠️ O DEFEITO, achado em 09/09/2026 relendo a propria sentinela: o arquivo
+# nasce vazio no `O_CREAT` e so' recebe o pid no `os.write` seguinte. Nesse
+# instante outro processo le' e nao acha carimbo. Com o fallback antigo
+# (`nasceu = 0.0`) isso virava "abandonado ha' 56 anos", o cadeado recem-criado
+# era APAGADO e os dois processos passavam — DOIS downloads ao mesmo tempo,
+# pela funcao que existe pra impedir exatamente isso.
+d = limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=1)
+cad = d / "cadeado"
+cad.write_text("", encoding="utf-8")          # o instante entre criar e escrever
+try:
+    s._pegar_cadeado(1)
+    checar(False, "arrombou um cadeado VAZIO — a corrida continua aberta")
+except s.NaoConsegui:
+    checar(True, "cadeado vazio e' tratado como NOVO: espera, nao arromba")
+checar(cad.exists(), "e o cadeado do outro processo continua la'")
+
+print(chr(10) + "9b. NEGATIVO: cadeado velho de verdade AINDA e' recolhido")
+# ⚠️ Sem esta metade, a correcao acima poderia ter travado a operacao pra
+# sempre — que e' pior que o defeito. Um processo morto nao pode deixar a
+# porta trancada.
+d = limpo(SENTINELA_YT_INTERVALO=0, SENTINELA_YT_INTERVALO_LEVE=0,
+          SENTINELA_YT_TETO_DIA=100, SENTINELA_YT_ESPERA_MAX=1)
+cad = d / "cadeado"
+cad.write_text("", encoding="utf-8")
+velho = time.time() - 7200                    # duas horas atras
+os.utime(cad, (velho, velho))
+try:
+    s._pegar_cadeado(1)
+    checar(True, "cadeado vazio e ANTIGO e' recolhido (processo morto)")
+except s.NaoConsegui:
+    checar(False, "nao recolheu cadeado abandonado — a operacao trava pra "
+                  "sempre depois de um processo morrer")
 
 if falhas:
     print(chr(10) + f"{falhas} FALHA(S)")

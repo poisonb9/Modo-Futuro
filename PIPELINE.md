@@ -217,6 +217,37 @@ projeto:
 
 ## 8. O QUE NAO FAZER SEM O BRYAN PEDIR
 
+### ⛔ REGRA ABSOLUTA — NUNCA DOIS DOWNLOADS AO MESMO TEMPO
+
+**Ordem do Bryan em 09/09/2026, nas palavras dele: "NUNCA NUNCA NUNCA
+SIMULTANEO, ISSO FOI UM ERRO GRAVISSIMO".**
+
+Um forno por vez. Se precisar de dois, **espacados por HORAS**, nunca
+encavalados. Vale para tudo que baixa do YouTube:
+
+    cortar.yml  ·  cortar_fila.yml (cron */30)  ·  cortar_de_bruto.yml
+    repor_fila.yml (cron 12:00)   ·  a sonda LOCAL
+
+⚠️ **O QUE ESTA' EM JOGO NAO E' COTA, E' A CONTA.** Download paralelo e' o
+padrao que o YouTube usa pra reconhecer robo. A punicao nao aparece como erro
+de cota — aparece como `Sign in to confirm you're not a bot`, e depois nao sai
+mais. **Nao ha' desfazer.** O canal do YouTube e as fontes sao o insumo da
+operacao inteira; sem eles nao ha' clipe em canal nenhum.
+
+**ANTES de qualquer disparo manual, medir o que esta' em voo:**
+
+    curl -s -H "Authorization: Bearer $TOKEN"       "https://api.github.com/repos/poisonb9/Modo-Futuro/actions/runs?status=in_progress"
+    (e o mesmo com status=queued)
+
+Zero nos dois, **e** nenhum `cortar_fila` prestes a virar a meia hora. Se
+houver qualquer coisa rodando: **esperar, nao enfileirar.**
+
+⚠️ **E NADA DE COOKIE DO YOUTUBE.** Decisao dele no mesmo dia. Por em segredo
+o cookie da sessao dele e' expor a conta pessoal a um runner publico — e o
+risco de estragar a conta e' exatamente o que esta regra existe pra evitar. O
+caminho e' o PO Token (bgutil) ou esperar. **Nunca cookie.**
+
+
   - disparar corte na mao (o `cortar_fila` encadeia sozinho);
   - usar fonte PT como padrao — ele decidiu que e' RESERVA PREMIUM, e a
     decisao esta' suspensa ate' ele ouvir o multi-voz;

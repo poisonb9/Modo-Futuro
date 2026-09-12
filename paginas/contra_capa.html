@@ -1,0 +1,483 @@
+<title>Contra-capa Modo Futuro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --tinta:       #141218;
+    --tinta-fraca: #5B5563;
+    --fundo:       #F7F6F8;
+    --superficie:  #FFFFFF;
+    --linha:       #E4E1E8;
+    --acento:      #1B5BFF;
+    --acento-leve: #E8EFFF;
+    --sombra:      #141218;
+    --aviso:       #8A6A00;
+    --aviso-fundo: #FFF6DA;
+    --raio: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --tinta:       #F2EFF4;
+      --tinta-fraca: #A7A0B2;
+      --fundo:       #121016;
+      --superficie:  #1D1A22;
+      --linha:       #322D3B;
+      --acento-leve: #241F33;
+      --aviso:       #FFD98A;
+      --aviso-fundo: #2A2212;
+    }
+  }
+  :root[data-theme="dark"] {
+    --tinta:       #F2EFF4;
+    --tinta-fraca: #A7A0B2;
+    --fundo:       #121016;
+    --superficie:  #1D1A22;
+    --linha:       #322D3B;
+    --acento-leve: #241F33;
+    --aviso:       #FFD98A;
+    --aviso-fundo: #2A2212;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--tinta);
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .envelope { max-width: 440px; margin: 0 auto; padding: 18px 18px 56px; }
+
+  /* ---------------- controle de previa: nao vai ao ar ---------------- */
+  .previa {
+    border: 1px dashed var(--linha);
+    border-radius: var(--raio);
+    padding: 12px;
+    margin-bottom: 28px;
+  }
+  .previa h2 {
+    margin: 0 0 3px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tinta-fraca);
+  }
+  .previa p { margin: 0 0 10px; font-size: 11.5px; line-height: 1.45; color: var(--tinta-fraca); }
+  .abas { display: flex; flex-wrap: wrap; gap: 6px; }
+  .aba {
+    font: 500 11.5px/1 "Poppins", sans-serif;
+    padding: 7px 10px; border-radius: 999px;
+    border: 1px solid var(--linha);
+    background: var(--superficie); color: var(--tinta-fraca);
+    cursor: pointer;
+  }
+  .aba[aria-pressed="true"] {
+    border-color: var(--acento); background: var(--acento-leve);
+    color: var(--acento); font-weight: 600;
+  }
+  .aba:focus-visible,
+  .botao:focus-visible,
+  .produto:focus-visible,
+  .interruptor:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+
+  /* ---------------- topo ---------------- */
+  .topo { display: flex; flex-direction: column; align-items: center; gap: 9px; text-align: center; }
+  .avatar {
+    width: 104px; height: 104px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--acento); color: #fff;
+    font-family: "Archivo Black", system-ui, sans-serif;
+    font-size: 33px; letter-spacing: -.02em;
+  }
+  h1 {
+    margin: 3px 0 0;
+    font-family: "Archivo Black", system-ui, sans-serif;
+    font-size: clamp(24px, 7vw, 30px); line-height: 1.1;
+    letter-spacing: -.01em; text-wrap: balance;
+  }
+  .arroba {
+    margin: 0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 13px; color: var(--tinta-fraca);
+  }
+  .promessa { margin: 4px 0 0; max-width: 32ch; font-size: 14.5px; color: var(--tinta-fraca); text-wrap: balance; }
+
+  /* ---------------- vantagens ---------------- */
+  .vantagens { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .vantagens li {
+    display: grid; grid-template-columns: 22px 1fr; gap: 9px; align-items: start;
+    font-size: 14px; font-weight: 500;
+  }
+  .marca { font-size: 16px; line-height: 1.35; }
+
+  /* ---------------- grupos de botoes ---------------- */
+  .grupo { margin-top: 30px; display: flex; flex-direction: column; gap: 11px; }
+  .guia { margin: 0; text-align: center; font-size: 13.5px; font-weight: 600; color: var(--tinta-fraca); text-wrap: balance; }
+
+  .botao {
+    display: grid; grid-template-columns: 44px 1fr 22px; gap: 10px; align-items: center;
+    padding: 12px;
+    background: var(--superficie); color: var(--tinta);
+    border: 1.5px solid var(--tinta); border-radius: var(--raio);
+    box-shadow: 4px 4px 0 var(--sombra);
+    text-decoration: none;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  a.botao:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--sombra); }
+  a.botao:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--sombra); }
+  .botao.desligado { opacity: .55; }
+  .selo { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font-size: 21px; background: var(--acento-leve); }
+  .rotulo { text-align: center; font-size: 14px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+  .seta { text-align: center; font-size: 16px; color: var(--tinta-fraca); }
+
+  /* ---------------- produtos ---------------- */
+  .produtos { margin-top: 34px; }
+  .cabeca { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .cabeca h2 { margin: 0; font-family: "Archivo Black", system-ui, sans-serif; font-size: 15px; }
+  .etiqueta {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--tinta-fraca); text-align: right;
+  }
+  .vitrine { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+  .produto {
+    display: flex; flex-direction: column;
+    background: var(--superficie); color: var(--tinta);
+    border: 1.5px solid var(--tinta); border-radius: var(--raio);
+    box-shadow: 4px 4px 0 var(--sombra);
+    overflow: hidden; text-decoration: none;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  a.produto:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--sombra); }
+  .foto { aspect-ratio: 1 / 1; display: grid; place-items: center; font-size: 40px; background: var(--acento-leve); border-bottom: 1.5px solid var(--tinta); }
+  .corpo { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+  .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .preco { font-family: "Archivo Black", system-ui, sans-serif; font-size: 17px; color: var(--acento); letter-spacing: -.01em; }
+  /* O carimbo existe porque preco e' TEXTO com data: numero sem data
+     envelhece calado e a pagina passa a mentir sozinha. */
+  .visto-em {
+    margin-top: auto;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9.5px; color: var(--tinta-fraca);
+    font-variant-numeric: tabular-nums;
+  }
+  .vazio {
+    border: 1.5px dashed var(--linha); border-radius: var(--raio);
+    padding: 18px 16px; text-align: center;
+    font-size: 13.5px; color: var(--tinta-fraca); text-wrap: balance;
+  }
+  .vazio strong { display: block; color: var(--tinta); margin-bottom: 4px; }
+
+  .marcador {
+    display: inline-block; margin-left: 6px; padding: 2px 6px; border-radius: 5px;
+    background: var(--aviso-fundo); color: var(--aviso);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  .interruptor {
+    margin-top: 12px; width: 100%; padding: 9px;
+    background: none; border: 1px dashed var(--linha); border-radius: 10px;
+    color: var(--tinta-fraca); cursor: pointer;
+    font: 500 11.5px/1.3 "Poppins", sans-serif;
+  }
+
+  .rodape {
+    margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--linha);
+    text-align: center; font-size: 11.5px; line-height: 1.6; color: var(--tinta-fraca);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="envelope">
+  <section class="previa">
+    <h2>prévia &middot; não vai ao ar</h2>
+    <p>A página é <strong>uma por canal</strong>. Troque aqui para ver cada uma. No ar, cada canal tem o seu endereço e esta caixa não existe.</p>
+    <div class="abas" id="abas"></div>
+  </section>
+
+  <header class="topo">
+    <div class="avatar" id="avatar"></div>
+    <h1 id="nome"></h1>
+    <p class="arroba" id="arroba"></p>
+    <p class="promessa" id="promessa"></p>
+  </header>
+
+  <ul class="vantagens" id="vantagens"></ul>
+
+  <main id="grupos"></main>
+
+  <section class="produtos">
+    <div class="cabeca">
+      <h2>O que apareceu nos vídeos</h2>
+      <span class="etiqueta" id="etiqueta"></span>
+    </div>
+    <div id="vitrine"></div>
+    <button class="interruptor" id="interruptor" type="button"></button>
+  </section>
+
+  <footer class="rodape" id="rodape"></footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Os dados sao embutidos DE PROPOSITO: a pagina funciona hoje, sem conta,
+  // sem credencial e sem banco. Quando o Supabase existir, e' esta mesma
+  // estrutura que a consulta devolve — o desenho nao muda.
+  //
+  // NENHUM CONVITE DE WHATSAPP DE VERDADE AQUI. O repositorio e' PUBLICO e
+  // commit fica no historico para sempre. Os convites moram em
+  // BACKUP_SISTEMA\SEGREDOS_NAO_SUBIR\CONVITES_WHATSAPP.md e entram pela
+  // tabela link_bio, escritos com a chave de servico.
+  var FALTA = "#falta-o-link";
+
+  var CANAIS = {
+    "achadinho.make": {
+      nome: "Achadinho Make",
+      arroba: "@achadinho.make",
+      inicial: "AM",
+      acento: "#E0157F",
+      promessa: "Maquiagem e beleza importada que chega por bem menos do que você imagina.",
+      vantagens: [
+        ["🔎", "Eu garimpo, olho a avaliação e só mostro o que presta"],
+        ["💸", "Preço de importado sem a cara de importado"],
+        ["📦", "Link direto, sem enrolação no meio do caminho"]
+      ],
+      grupos: [
+        {
+          guia: "Chegou por um vídeo e quer mais?",
+          botoes: [["🎬", "Mais achadinhos como esse", "https://www.tiktok.com/@achadinho.make"]]
+        },
+        {
+          guia: "É no grupo que o achadinho aparece PRIMEIRO 👇",
+          botoes: [["🔥", "Grupo dos Achadinhos — promoção antes de todo mundo", FALTA]]
+        },
+        {
+          guia: "Os outros cantos da casa:",
+          botoes: [
+            ["🍳", "Achadinho Chef — cozinha de fora, ingrediente daqui", "https://www.tiktok.com/@cozinha.internacional"],
+            ["⚡", "Achadinho Total — tudo que sobra de bom", FALTA]
+          ]
+        }
+      ],
+      produtos: [
+        { emoji: "💄", nome: "Batom líquido matte de longa duração", preco: "R$ 24,90", visto: "12/09", link: FALTA },
+        { emoji: "🧴", nome: "Sérum facial com vitamina C, 30 ml", preco: "R$ 39,90", visto: "12/09", link: FALTA }
+      ]
+    },
+
+    "modofuturo": {
+      nome: "Modo Futuro",
+      arroba: "@modofuturo",
+      inicial: "MF",
+      acento: "#1B5BFF",
+      promessa: "A tecnologia que você usa, por dentro. Sessenta segundos e você entende o que quase ninguém entende.",
+      vantagens: [
+        ["⚙️", "Chip, fábrica e IA explicados sem aula chata"],
+        ["⏱️", "Um minuto por assunto, e você sai sabendo"],
+        ["🧠", "O que a manchete não conta"]
+      ],
+      grupos: [
+        {
+          guia: "Chegou por um vídeo e quer mais?",
+          botoes: [["🎬", "Mais vídeos como esse", "https://www.tiktok.com/@modofuturo"]]
+        },
+        {
+          guia: "O que não cabe em sessenta segundos vai pra cá 👇",
+          botoes: [["📡", "Grupo do Modo Futuro", FALTA]]
+        }
+      ],
+      produtos: []
+    },
+
+    "semanestesia.pod": {
+      nome: "Sem Anestesia",
+      arroba: "@semanestesia.pod",
+      inicial: "SA",
+      acento: "#D92B2B",
+      promessa: "Disciplina, dinheiro e decisão difícil. Sem anestesia.",
+      vantagens: [
+        ["🥊", "O conselho que ninguém quer ouvir"],
+        ["⏱️", "Um minuto, direto ao osso"],
+        ["📈", "De quem já pagou caro pra aprender"]
+      ],
+      grupos: [
+        {
+          guia: "Chegou por um corte e quer o resto?",
+          botoes: [["🎬", "Mais cortes como esse", "https://www.tiktok.com/@semanestesia.pod"]]
+        }
+      ],
+      produtos: []
+    },
+
+    "atefalhar": {
+      nome: "Até Falhar",
+      arroba: "@atefalhar",
+      inicial: "AF",
+      acento: "#E36414",
+      promessa: "Treino, comida e o que a academia não te explica direito.",
+      vantagens: [
+        ["🏋️", "Sem fórmula mágica: só o que funciona"],
+        ["🥗", "Comida de verdade, conta que fecha"],
+        ["⏱️", "Um minuto por dúvida"]
+      ],
+      grupos: [
+        {
+          guia: "Chegou por um vídeo e quer mais?",
+          botoes: [["🎬", "Mais treinos como esse", "https://www.tiktok.com/@atefalhar"]]
+        }
+      ],
+      produtos: []
+    },
+
+    "cozinha.internacional": {
+      nome: "Achadinho Chef",
+      arroba: "@cozinha.internacional",
+      inicial: "AC",
+      acento: "#1F8A5F",
+      promessa: "Receita de fora que dá pra fazer aqui, com o que tem no mercado da esquina.",
+      vantagens: [
+        ["🍳", "Medida e temperatura convertidas, sem chute"],
+        ["🌍", "Receita de fora, ingrediente daqui"],
+        ["⏱️", "Um minuto e você já sabe fazer"]
+      ],
+      grupos: [
+        {
+          guia: "Chegou por uma receita e quer mais?",
+          botoes: [["🎬", "Mais receitas como essa", "https://www.tiktok.com/@cozinha.internacional"]]
+        },
+        {
+          guia: "As panelas e os achadinhos que eu uso 👇",
+          botoes: [["🥄", "Grupo do Achadinho Chef", FALTA]]
+        }
+      ],
+      produtos: []
+    }
+  };
+
+  var raiz = document.documentElement;
+  var atual = "achadinho.make";
+  var mostrandoProdutos = true;
+
+  function el(tag, classe, texto) {
+    var e = document.createElement(tag);
+    if (classe) e.className = classe;
+    if (texto !== undefined) e.textContent = texto;
+    return e;
+  }
+
+  // Link que ainda nao existe NAO vira <a> morto: vira cartao desligado e DIZ
+  // que falta. Link quebrado numa pagina publicada e' pior que ausencia.
+  function montarBotao(selo, rotulo, href) {
+    var falta = (href === FALTA);
+    var e = document.createElement(falta ? "div" : "a");
+    e.className = "botao" + (falta ? " desligado" : "");
+    if (!falta) { e.href = href; e.target = "_blank"; e.rel = "noopener"; }
+    e.appendChild(el("span", "selo", selo));
+    var r = el("span", "rotulo", rotulo);
+    if (falta) r.appendChild(el("span", "marcador", "falta o link"));
+    e.appendChild(r);
+    e.appendChild(el("span", "seta", falta ? "·" : "→"));
+    return e;
+  }
+
+  function montarProduto(p) {
+    var falta = (p.link === FALTA);
+    var e = document.createElement(falta ? "div" : "a");
+    e.className = "produto";
+    if (!falta) { e.href = p.link; e.target = "_blank"; e.rel = "noopener"; }
+    e.appendChild(el("div", "foto", p.emoji));
+    var corpo = el("div", "corpo");
+    corpo.appendChild(el("div", "nome", p.nome));
+    corpo.appendChild(el("div", "preco", p.preco));
+    // A data anda colada no preco. E' a regra do engine/produto.py na tela.
+    corpo.appendChild(el("div", "visto-em", "preço visto em " + p.visto));
+    e.appendChild(corpo);
+    return e;
+  }
+
+  function desenhar(chave) {
+    var c = CANAIS[chave];
+    raiz.style.setProperty("--acento", c.acento);
+
+    document.getElementById("avatar").textContent = c.inicial;
+    document.getElementById("nome").textContent = c.nome;
+    document.getElementById("arroba").textContent = c.arroba;
+    document.getElementById("promessa").textContent = c.promessa;
+
+    var lista = document.getElementById("vantagens");
+    lista.innerHTML = "";
+    c.vantagens.forEach(function (v) {
+      var li = document.createElement("li");
+      li.appendChild(el("span", "marca", v[0]));
+      li.appendChild(el("span", null, v[1]));
+      lista.appendChild(li);
+    });
+
+    var grupos = document.getElementById("grupos");
+    grupos.innerHTML = "";
+    c.grupos.forEach(function (g) {
+      var sec = el("section", "grupo");
+      sec.appendChild(el("p", "guia", g.guia));
+      g.botoes.forEach(function (b) { sec.appendChild(montarBotao(b[0], b[1], b[2])); });
+      grupos.appendChild(sec);
+    });
+
+    var vitrine = document.getElementById("vitrine");
+    var etiqueta = document.getElementById("etiqueta");
+    vitrine.innerHTML = "";
+
+    if (mostrandoProdutos && c.produtos.length > 0) {
+      vitrine.className = "vitrine";
+      etiqueta.textContent = "exemplo — ainda não é real";
+      c.produtos.slice(0, 2).forEach(function (p) { vitrine.appendChild(montarProduto(p)); });
+    } else {
+      // Este e' o estado de HOJE, e ele e' NORMAL, nao erro: nenhum clipe
+      // carrega produto ainda. A pagina foi desenhada sabendo disso.
+      vitrine.className = "";
+      etiqueta.textContent = "estado de hoje";
+      var v = el("div", "vazio");
+      v.appendChild(el("strong", null, "Ainda não tem produto aqui."));
+      v.appendChild(document.createTextNode(
+        "Os dois últimos que aparecerem nos vídeos entram sozinhos neste espaço."));
+      vitrine.appendChild(v);
+    }
+
+    document.getElementById("interruptor").textContent = mostrandoProdutos
+      ? "ver como fica sem produto (é o estado de hoje)"
+      : "ver com os dois produtos preenchidos";
+
+    document.getElementById("rodape").textContent =
+      c.arroba + " · conteúdo produzido com apoio de IA";
+
+    Array.prototype.forEach.call(document.querySelectorAll(".aba"), function (a) {
+      a.setAttribute("aria-pressed", String(a.dataset.canal === chave));
+    });
+  }
+
+  var abas = document.getElementById("abas");
+  Object.keys(CANAIS).forEach(function (chave) {
+    var b = el("button", "aba", CANAIS[chave].nome);
+    b.type = "button";
+    b.dataset.canal = chave;
+    b.addEventListener("click", function () { atual = chave; desenhar(atual); });
+    abas.appendChild(b);
+  });
+
+  document.getElementById("interruptor").addEventListener("click", function () {
+    mostrandoProdutos = !mostrandoProdutos;
+    desenhar(atual);
+  });
+
+  desenhar(atual);
+})();
+</script>

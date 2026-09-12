@@ -751,11 +751,14 @@
       a.setAttribute("aria-pressed", String(a.dataset.canal === chave));
     });
 
-    medir("visita", { canal: c.banco });
   }
 
+  // ⚠️ A CAIXA DE PREVIA NAO EXISTE NA VERSAO PUBLICADA — o publicador a
+  // remove. Sem esta guarda, `abas` viria nulo, o `appendChild` estouraria e
+  // a pagina INTEIRA ficaria em branco. Interface de trabalho que derruba a
+  // pagina do visitante quando some e' pior que nao ter interface.
   var abas = document.getElementById("abas");
-  Object.keys(CANAIS).forEach(function (chave) {
+  abas && Object.keys(CANAIS).forEach(function (chave) {
     var b = el("button", "aba", CANAIS[chave].nome);
     b.type = "button";
     b.dataset.canal = chave;
@@ -768,6 +771,25 @@
     desenhar(atual);
   });
 
+  // ⚠️ O CANAL VEM DA URL. Cada canal tem o seu endereco (`?c=c2`), que e' o
+  // que vai na bio dele. Sem isto, todos os sete links da bio abririam o
+  // mesmo canal — e a contagem por canal, que e' o ponto de tudo isto, nao
+  // diria nada.
+  var pedido = new URLSearchParams(location.search).get("c");
+  if (pedido) {
+    var achado = Object.keys(CANAIS).filter(function (k) {
+      return CANAIS[k].banco === pedido || k === pedido;
+    })[0];
+    if (achado) atual = achado;
+  }
+
   desenhar(atual);
+
+  // ⚠️ A VISITA E' CONTADA UMA VEZ, NO CARREGAMENTO — e nao dentro do
+  // `desenhar`, onde ela estava. MEDIDO em 12/09/2026, na primeira leitura do
+  // placar: o @achadinho.make aparecia com 4 visitas porque cada troca de aba
+  // contava outra. Numero inflado e' pior que numero ausente: o ausente a
+  // gente sabe que nao sabe.
+  medir("visita", { canal: CANAIS[atual].banco });
 })();
 </script>

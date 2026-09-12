@@ -70,6 +70,21 @@ def tirar_comentarios(html: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", "\n".join(linhas))
 
 
+def tirar_previa(html: str) -> str:
+    """Remove a caixa de previa — ela e' ferramenta nossa, nao pagina.
+
+    ⚠️ MEDIDO em 12/09/2026, olhando a pagina JA' PUBLICADA: a caixa estava no
+    ar. Ela diz, com todas as letras, "previa · nao vai ao ar" — e foi ao ar.
+    Junto vinham as abas de trocar de canal: quem chegasse pelo TikTok do
+    @achadinho.make via um quadro tracejado e botoes pros outros seis canais.
+
+    A primeira versao deste publicador tirava comentario e achava que bastava.
+    Comentario e' o que EXPLICA a ferramenta; a caixa e' a ferramenta.
+    """
+    return re.sub(r'\s*<section class="previa">.*?</section>', "", html,
+                  flags=re.S)
+
+
 def mascarar(html: str) -> str:
     """Troca os nomes internos por codigo, dentro das aspas."""
     for nome, codigo in CODIGOS.items():
@@ -94,6 +109,8 @@ def conferir(html: str) -> list[str]:
         "sb_secret_": "CHAVE DE SERVICO",
         "MEDIDO": "nota de medicao",
         "Bryan": "nome do dono",
+        "não vai ao ar": "a CAIXA DE PREVIA (ela foi ao ar em 12/09)",
+        'class="abas"': "as abas de trocar de canal",
     }
     achados = []
     for termo, porque in proibido.items():
@@ -140,7 +157,8 @@ def main() -> None:
     p.add_argument("--subir", action="store_true", help="empurra pro repo bio")
     a = p.parse_args()
 
-    html = mascarar(tirar_comentarios(ORIGEM.read_text(encoding="utf-8")))
+    html = mascarar(tirar_previa(
+        tirar_comentarios(ORIGEM.read_text(encoding="utf-8"))))
 
     sobrou = conferir(html)
     if sobrou:

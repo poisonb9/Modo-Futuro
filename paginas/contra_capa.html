@@ -555,8 +555,11 @@
   // A chave `anon` fica aqui porque e' PUBLICA por natureza — quem protege o
   // banco sao as politicas (supabase/02_politicas.sql), que so' deixam ela
   // LER o que esta' ativo e SOMAR visita e clique. Ler o placar, nao.
+  // Projeto `bryan-com`, org `bryan-commander`, criado em 12/09/2026.
+  // ⚠️ Enquanto `anon` estiver vazia o medidor continua DESLIGADO — ele exige
+  // as duas. URL sem chave nao envia nada, e e' assim que deve ser.
   var SUPABASE = {
-    url: "",      // https://xxxx.supabase.co
+    url: "https://lwtqfwkfcknzyyzmuymg.supabase.co",
     anon: ""      // a chave anon (publishable), nunca a service_role
   };
 

@@ -167,10 +167,25 @@ def main() -> None:
     (tmp / "index.html").write_text(html, encoding="utf-8")
     (DESTINO / "LEIA.md").exists() and (tmp / "LEIA.md").write_text(
         (DESTINO / "LEIA.md").read_text(encoding="utf-8"), encoding="utf-8")
+    # ⚠️ IDENTIDADE LOCAL, no clone. O `user.name` global desta maquina esta'
+    # VAZIO, e sem identidade o `git commit` falha — foi assim que a primeira
+    # tentativa morreu. Local, e nao global, pra nao mexer na configuracao da
+    # maquina por causa de um script.
+    subprocess.run(["git", "-C", str(tmp), "config", "user.name",
+                    "poisonb9"], check=True)
+    subprocess.run(["git", "-C", str(tmp), "config", "user.email",
+                    "poisonb9@users.noreply.github.com"], check=True)
+
     subprocess.run(["git", "-C", str(tmp), "add", "-A"], check=True)
-    subprocess.run(["git", "-C", str(tmp), "commit", "-m",
-                    "pagina de bio"], check=False)
-    subprocess.run(["git", "-C", str(tmp), "push"], check=True)
+    # ⚠️ `check=True` no commit. Estava `False`, e o commit falhou CALADO — o
+    # push seguinte reclamou de um branch sem commit nenhum, e a mensagem de
+    # erro apontava pro lugar errado. Passo que pode falhar tem de falhar alto.
+    r = subprocess.run(["git", "-C", str(tmp), "commit", "-m", "pagina de bio"],
+                       capture_output=True, text=True)
+    if r.returncode != 0 and "nothing to commit" not in (r.stdout + r.stderr):
+        raise SystemExit("commit falhou:\n" + r.stdout + r.stderr)
+    subprocess.run(["git", "-C", str(tmp), "push", "-u", "origin", "HEAD:main"],
+                   check=True)
     print(f"\nempurrado para {REPO}")
 
 

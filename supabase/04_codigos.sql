@@ -1,6 +1,6 @@
 -- ===================================================================
--- VERSAO 2  ·  12/09/2026 12:35  ·  se a sua primeira linha nao diz
--- VERSAO 2, voce esta' com o script ANTIGO no editor. Selecione tudo
+-- VERSAO 3  ·  12/09/2026 12:40  ·  se a sua primeira linha nao diz
+-- VERSAO 3, voce esta' com o script ANTIGO no editor. Selecione tudo
 -- (Ctrl+A), apague, e cole de novo.
 -- ===================================================================
 -- Contra-capa — o canal passa a ser identificado por CODIGO
@@ -91,9 +91,21 @@ alter table produto  add constraint produto_canal_fkey
 alter table link_bio add constraint link_bio_canal_fkey
   foreign key (canal) references canal(codigo) on delete cascade;
 
+-- ⚠️ AS VISOES SAO DERRUBADAS ANTES, e nao substituidas.
+--
+-- `create or replace view` NAO troca o nome nem a ordem das colunas de uma
+-- visao que ja' existe — devolve 42P16. A v_placar_por_canal nasceu com
+-- `nome_buffer` na primeira coluna e agora comeca com `codigo`, entao
+-- "replace" e' recusado. Derrubar e recriar e' o caminho, e nao custa nada:
+-- visao nao guarda dado, so' a receita de leitura.
+--
+-- (Foi o erro da VERSAO 2, em 12/09/2026 12:38.)
+drop view if exists v_placar_por_canal;
+drop view if exists v_canal_publico;
+
 -- O placar passa a cruzar por codigo. Continua mostrando o nome de exibicao,
 -- que e' o que a gente le' — mascarar e' pra fora, nao pra dentro.
-create or replace view v_placar_por_canal as
+create view v_placar_por_canal as
 select c.codigo,
        c.nome_buffer,
        c.nome_exibicao,
@@ -109,7 +121,7 @@ where c.ativo;
 -- ⚠️ A pagina publica NAO pode ler `nome_buffer`: e' justamente o que a
 -- mascara esconde. Esta visao e' o que a `anon` enxerga — codigo, nome de
 -- exibicao e o @, que ja' sao publicos.
-create or replace view v_canal_publico as
+create view v_canal_publico as
 select codigo, nome_exibicao, arroba, slug from canal where ativo;
 
 grant select on v_canal_publico to anon;

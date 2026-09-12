@@ -25,3 +25,12 @@ jobs:
           ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
           ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
         run: python -X utf8 teste/fumaca_aliexpress.py
+      - name: Descobrir o tracking_id
+        env:
+          ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+        # ⚠️ `continue-on-error`: nao achar tracking nao invalida o teste da
+        # API, que e' outra pergunta. Misturar os dois esconderia qual dos
+        # dois quebrou.
+        continue-on-error: true
+        run: python -X utf8 teste/fumaca_tracking.py

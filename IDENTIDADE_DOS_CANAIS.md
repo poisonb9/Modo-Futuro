@@ -15,7 +15,7 @@ contas do próprio aplicativo, que é a única fonte que não depende de memóri
 | `semanestesia.pod` | `@semanestesia.pod` | letra **A** cromada, corte vermelho | `#D92B2B` | firme |
 | `atefalhar` | `@atefalhar` | halter cromado sobre ouro | `#E36414` | firme |
 | `modofuturo` | `@modofuturo` | **MF** cromado sobre PRATA | `#1B5BFF` | firme |
-| `cozinha.importada` | `@cozinha.internacional` | chapéu de chef cromado | `#1F8A5F` | ⚠️ vira `@achadinho.chef` em 26/09 |
+| `cozinha.importada` | `@cozinha.internacional` | chapéu de chef cromado | `#1F8A5F` | ⚠️ vira **Achadinho Chef** (`@achadinho.chef`) em 26/09 |
 | `fatura.chora` | `@fatura.chora` | carrinho de compras cromado | `#C1841A` | ⚠️ **pode mudar** |
 | `achadinhos.instantaneos` | `@achadinhos.instantaneos` | lupa cromada sobre ouro | `#7A3FF2` | ⚠️ **pode mudar** |
 
@@ -44,10 +44,21 @@ arquivo solto — sem servidor, sem CDN e sem caminho relativo para quebrar. O
 PNG de 320px fica no repositório para o dia em que houver hospedagem de
 verdade; o WebP embutido é o que faz a página abrir em qualquer lugar hoje.
 
-⚠️ **Falta UM brasão: `cozinha.importada`** (chapéu de chef sobre ouro, visível
-na tela do TikTok). Enquanto não chegar, esse canal mostra o monograma sobre o
-acento — o círculo tem o mesmo tamanho, então a página não muda de forma
-quando a arte aparecer.
+✅ **Os sete brasões estão completos** desde 12/09/2026.
+
+⚠️ **TODOS levam máscara circular com alfa, e isso não é capricho.** Eles vêm
+num quadrado PRETO. Na primeira versão eu cortei 4% das bordas e confiei no
+`border-radius` do avatar para esconder o resto — não escondeu: sobrava um
+arco preto embaixo de cada um, porque o aro de cromo não encosta na borda por
+igual (no rodapé do desenho há mais preto que no topo). O Bryan viu na tela.
+
+O círculo é **medido**, não chutado: acha o que não é preto, pega a caixa, e o
+círculo sai do centro dela. Depois recua **1%** (≈5 px de 555) — só o fio de
+antisserrilhado onde o preto ainda encosta no cromo. Menos que isso e o fio
+volta; mais que isso come o aro.
+
+O script está em `paginas/avatares/` junto dos arquivos; para refazer, é ele
+que manda.
 
 ⚠️ **O `modofuturo` veio diferente dos outros, e por isso teve tratamento
 diferente.** Ele chegou como FOTO: a moeda apoiada num balcão de mármore, com

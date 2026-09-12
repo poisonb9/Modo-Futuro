@@ -93,6 +93,19 @@ AUDIO_LOUDNORM = "loudnorm=I=-14:TP=-1.5:LRA=11"
 # ao tema") aponta pro mesmo lugar. A 2,0s ele ainda cobre a leitura do
 # titulo, mas devolve a tela antes do momento em que se decide ficar.
 TITULO_SEGUNDOS = 2.0      # tempo na tela; o gancho falado cobre o resto
+
+# Quanto tempo a CHAMADA fica na tela, no fim do clipe.
+#
+# 2,5s e' o tempo de ler uma linha curta em voz baixa. Menos que isso vira
+# piscada; mais come retencao no ponto em que ela ja' esta' no fim.
+#
+# ⚠️ NAO E' MEDIDO. E' escolha, e o `cai_se` esta' no calibragens.jsonl.
+CHAMADA_SEGUNDOS = 2.5
+
+# Onde a chamada senta, em fracao da altura. Mais baixa que o card de titulo
+# (0,16) de proposito: no fim do clipe nao ha' legenda competindo, e o centro
+# da tela e' pra onde o olho ja' esta'.
+CHAMADA_TOPO_FRAC = 0.40
 TITULO_MAX_LINHAS = 3      # acima disso vira parágrafo e ninguém lê
 # Fração da largura do vídeo que o título pode ocupar. 0,88 deixa 6% de
 # respiro de cada lado — sem isso a letra encosta na borda e fica com cara de
@@ -302,7 +315,8 @@ def _teto_segundos(bruto: Path) -> list[str]:
 def _render(bruto: Path, filtro_video: str, ass: Path | None,
             destino: Path, audio_dublado: Path | None = None,
             img_titulo: Path | None = None, topo_titulo: int = 0,
-            duracao_max: float | None = None) -> Path:
+            duracao_max: float | None = None,
+            img_chamada: Path | None = None, topo_chamada: int = 0) -> Path:
     # ⚠️ TETO ABSOLUTO DE DURACAO. Ver o cabecalho de `_teto_segundos`: o
     # `-shortest` sozinho nao segura quando ha' input com `-loop 1`, e a
     # renderizacao vira infinita. Custou os runs #188 e #189 inteiros.
@@ -322,6 +336,23 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
         cadeia += (f",subtitles='{_escapar(ass)}'"
                    f":fontsdir='{_escapar(FONTES_DIR)}'")
 
+    # ⚠️ A CHAMADA E' O MESMO CARD DO TITULO, de proposito: mesma fonte, mesma
+    # caixa branca, mesmo desenho. Quem viu o comeco reconhece o fim como parte
+    # do mesmo video, em vez de ler como propaganda colada depois.
+    #
+    # Ela entra nos ULTIMOS `CHAMADA_SEGUNDOS` da duracao final — e nao num
+    # instante fixo, porque cada clipe tem a sua.
+    #
+    # ⚠️ Sem `duracao_max` nao ha' chamada: sem saber onde o clipe acaba, nao
+    # da' pra saber onde o fim comeca. Falha FECHADA — clipe sem chamada e'
+    # melhor que card aparecendo no meio da fala.
+    def _entra_chamada(entrada: str, idx: int) -> str:
+        inicio = max(0.0, (duracao_max or 0) - CHAMADA_SEGUNDOS)
+        return (f";[{entrada}][{idx}:v]overlay=0:{topo_chamada}:"
+                f"enable='gte(t,{inicio:.3f})'[v]")
+
+    tem_chamada = img_chamada is not None and duracao_max
+
     if img_titulo is not None:
         # O card de título agora é PNG (ver imagem_titulo) sobreposto com
         # `overlay` — drawtext dava pra fazer só com -vf, overlay precisa de
@@ -331,9 +362,14 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
         # ffmpeg ficou rodando e o arquivo de saída passou de 800 MB pra um
         # clipe de 84s). -shortest é obrigatório aqui, com ou sem dublagem.
         if audio_dublado is not None:
+            # entradas: 0 bruto · 1 audio dublado · 2 card do titulo
+            #           3 card da chamada, quando ha'
+            alvo_titulo = "v1" if tem_chamada else "v"
             filtro = (f"[0:v]{cadeia}[base];"
                       f"[base][2:v]overlay=0:{topo_titulo}:"
-                      f"enable='lt(t,{TITULO_SEGUNDOS})'[v]")
+                      f"enable='lt(t,{TITULO_SEGUNDOS})'[{alvo_titulo}]")
+            if tem_chamada:
+                filtro += _entra_chamada("v1", 3)
             vo = _voice_over_ligado()
             if vo:
                 filtro += ";" + _cadeia_audio_vo()
@@ -341,6 +377,7 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
                 "ffmpeg", "-y",
                 "-i", str(bruto), "-i", str(audio_dublado),
                 "-loop", "1", "-i", str(img_titulo),
+                *(["-loop", "1", "-i", str(img_chamada)] if tem_chamada else []),
                 "-filter_complex", filtro,
                 "-map", "[v]", "-map", ("[a]" if vo else "1:a:0"),
                 *_encoder(),
@@ -350,13 +387,18 @@ def _render(bruto: Path, filtro_video: str, ass: Path | None,
                 str(destino),
             ])
         else:
+            # entradas: 0 bruto · 1 card do titulo · 2 card da chamada
+            alvo_titulo = "v1" if tem_chamada else "v"
             filtro = (f"[0:v]{cadeia}[base];"
                       f"[base][1:v]overlay=0:{topo_titulo}:"
-                      f"enable='lt(t,{TITULO_SEGUNDOS})'[v]")
+                      f"enable='lt(t,{TITULO_SEGUNDOS})'[{alvo_titulo}]")
+            if tem_chamada:
+                filtro += _entra_chamada("v1", 2)
             midia.roda([
                 "ffmpeg", "-y",
                 "-i", str(bruto),
                 "-loop", "1", "-i", str(img_titulo),
+                *(["-loop", "1", "-i", str(img_chamada)] if tem_chamada else []),
                 "-filter_complex", filtro,
                 "-map", "[v]", "-map", "0:a:0",
                 *_encoder(),
@@ -456,7 +498,7 @@ def _ken_burns(bruto: Path, largura: int, altura: int) -> str:
 
 def vertical(bruto: Path, ass: Path | None, destino: Path,
              audio_dublado: Path | None = None, titulo: str = "",
-             duracao_max: float | None = None) -> Path:
+             duracao_max: float | None = None, chamada: str = "") -> Path:
     """9:16 para Shorts, com o quadro seguindo o rosto.
 
     `titulo` desenha o card de abertura (ver imagem_titulo) — caixa branca
@@ -488,9 +530,17 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     # longe da legenda, que fica a 30% da base. ESTIMATIVA a validar no
     # proximo lote: se ainda cortar, subir pra 0.20.
     topo = round(av * TITULO_TOPO_FRAC)
+
+    # ⚠️ A chamada usa o MESMO desenho do titulo (imagem_titulo): mesma fonte,
+    # mesma caixa branca. Quem viu o comeco reconhece o fim como parte do
+    # mesmo video em vez de ler como propaganda colada depois.
+    img_chamada = imagem_titulo(chamada, lv, av,
+                                config.TRABALHO / "chamada") if chamada else None
     return _render(bruto, filtro, ass, destino, audio_dublado,
                     img_titulo=img_titulo, topo_titulo=topo,
-                    duracao_max=duracao_max)
+                    duracao_max=duracao_max,
+                    img_chamada=img_chamada,
+                    topo_chamada=round(av * CHAMADA_TOPO_FRAC))
 
 
 def horizontal(bruto: Path, ass: Path | None, destino: Path,

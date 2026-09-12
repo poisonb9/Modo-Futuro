@@ -58,7 +58,11 @@ def montar(meta: dict, nome_padrao: str = "") -> str:
     nao pode sair com um buraco no meio da legenda.
     """
     partes = [str(meta.get("titulo") or nome_padrao or "").strip()]
-    for campo in ("descricao", "legenda_premium"):
+    # ⚠️ A CHAMADA ENTRA DEPOIS DO TEXTO E ANTES DAS HASHTAGS, e a ordem e' o
+    # ponto: hashtag e' rodape, ninguem le' o que vem depois dela. A chamada
+    # tem de ser a ultima COISA LIDA, nao a ultima linha do arquivo.
+    # Ver engine/chamada.py — canal sem destino nao ganha chamada nenhuma.
+    for campo in ("descricao", "legenda_premium", "chamada"):
         v = str(meta.get(campo) or "").strip()
         if v:
             partes.append(v)

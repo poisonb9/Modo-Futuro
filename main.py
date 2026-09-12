@@ -16,7 +16,7 @@ from pathlib import Path
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
-                    cauda, gramatica)
+                    cauda, gramatica, chamada as chamada_mod)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -475,6 +475,34 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                           f"no fim — clipe aparado pra {dur_max:.1f}s")
                     dur_final = dur_max
 
+            # ---- a chamada pro link da bio (12/09/2026)
+            #
+            # ⚠️ ELA RESOLVE A TENSAO QUE A CAUDA CRIOU HOJE. O aparo da cauda
+            # muda deixa o clipe terminando 0,6s depois da ultima palavra —
+            # nao sobrava tela pra um card no fim. A saida nao e' desfazer o
+            # aparo: e' devolver os segundos SO' QUANDO ELES TEM O QUE
+            # CARREGAR. O defeito era rodar sem voz E SEM NADA; cauda com
+            # chamada nao e' o mesmo defeito.
+            #
+            # ⚠️ E NUNCA ALEM DO QUE O BRUTO TEM. Esticar o `-t` alem da fonte
+            # nao estica nada (o `-shortest` corta no fim do video), entao o
+            # limite e' a duracao que o clipe tinha antes do aparo.
+            texto_chamada = chamada_mod.do_canal(
+                os.environ.get("CANAL_ESPERADO") or c.get("canal"))
+            if texto_chamada and dur_max:
+                dur_max = min(dur_final_antes, dur_max + render.CHAMADA_SEGUNDOS)
+                dur_final = dur_max
+                print(f"      chamada no fim: \"{texto_chamada[:52]}\" "
+                      f"(+{render.CHAMADA_SEGUNDOS:.1f}s de cauda com uso)")
+            elif texto_chamada:
+                # Sem aparo nao ha' de onde tirar os segundos, e o card sairia
+                # em cima da fala. A chamada fica so' na legenda.
+                print("      chamada: so' na legenda (o clipe nao tem cauda "
+                      "pra devolver)")
+                texto_chamada = ""
+            c["chamada"] = chamada_mod.do_canal(
+                os.environ.get("CANAL_ESPERADO") or c.get("canal"))
+
             lv, av = config.VERTICAL
             ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
                                        estilo=estilo_legenda)
@@ -485,7 +513,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # post — a informação existia e estava sendo jogada fora justamente
             # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
             render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
-                            titulo=c.get("titulo", ""), duracao_max=dur_max)
+                            titulo=c.get("titulo", ""), duracao_max=dur_max,
+                            chamada=texto_chamada)
 
             if not so_vertical:
                 lh, ah = config.HORIZONTAL
@@ -523,7 +552,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      # que mostrar — com todo o resto do cano funcionando e
                      # nenhum erro em lugar nenhum. E' a MESMA armadilha da
                      # `legenda_premium` acima, com o campo seguinte.
-                     "produto",
+                     "produto", "chamada",
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",

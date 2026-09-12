@@ -38,7 +38,13 @@ checar("keepalive: true" in PAGINA,
        "converteu e' justamente o que se perde")
 
 print("\n2. NEGATIVO — sem chave, a pagina roda como antes")
-checar(re.search(r'url:\s*""', PAGINA) is not None, "a chave nasce VAZIA")
+# ⚠️ O QUE IMPORTA E' A CHAVE, NAO A URL. A primeira versao deste teste exigia
+# `url: ""` e reprovou no dia em que a URL do projeto foi preenchida — mas URL
+# sem chave nao envia nada. Ele estava vigiando o campo errado: o invariante
+# e' "o medidor so' liga quando as DUAS existem", e quem garante isso e' a
+# guarda logo abaixo.
+checar(re.search(r'anon:\s*""', PAGINA) is not None,
+       "a CHAVE nasce vazia — a URL sozinha nao liga nada")
 checar("if (!SUPABASE.url || !SUPABASE.anon) return;" in PAGINA,
        "sem chave, `medir` volta na hora: zero requisicao")
 checar(".catch(function () {" in PAGINA,

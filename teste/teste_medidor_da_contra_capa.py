@@ -37,14 +37,22 @@ checar("keepalive: true" in PAGINA,
        "keepalive — o clique LEVA EMBORA a pessoa, e sem isso o clique que "
        "converteu e' justamente o que se perde")
 
-print("\n2. NEGATIVO — sem chave, a pagina roda como antes")
-# ⚠️ O QUE IMPORTA E' A CHAVE, NAO A URL. A primeira versao deste teste exigia
-# `url: ""` e reprovou no dia em que a URL do projeto foi preenchida — mas URL
-# sem chave nao envia nada. Ele estava vigiando o campo errado: o invariante
-# e' "o medidor so' liga quando as DUAS existem", e quem garante isso e' a
-# guarda logo abaixo.
-checar(re.search(r'anon:\s*""', PAGINA) is not None,
-       "a CHAVE nasce vazia — a URL sozinha nao liga nada")
+print("\n2. NEGATIVO — a chave que NUNCA pode estar aqui")
+# ⚠️ ESTE TESTE JA' MEDIU A COISA ERRADA DUAS VEZES. Primeiro exigiu
+# `url: ""`, e reprovou no dia em que a URL do projeto foi preenchida. Depois
+# exigiu `anon: ""`, e reprovou no dia em que a chave chegou — ou seja, as
+# duas versoes vigiavam "ainda nao foi configurado", que e' um ESTADO
+# passageiro, nao um invariante.
+#
+# O invariante de verdade e' o que nunca pode acontecer: a chave de SERVICO
+# aparecer na pagina. Ela ignora TODAS as politicas de RLS, e a pagina e'
+# publica — seria entregar o banco inteiro pra quem abrir o codigo-fonte.
+for proibida in ("service_role", "sb_secret_", "SUPABASE_SERVICE"):
+    checar(proibida not in PAGINA,
+           f"NEGATIVO: `{proibida}` nao aparece na pagina")
+checar(re.search(r'anon:\s*"(sb_publishable_|eyJ)', PAGINA) is not None
+       or re.search(r'anon:\s*""', PAGINA) is not None,
+       "a chave, quando existe, e' a PUBLICAVEL (ou esta' vazia)")
 checar("if (!SUPABASE.url || !SUPABASE.anon) return;" in PAGINA,
        "sem chave, `medir` volta na hora: zero requisicao")
 checar(".catch(function () {" in PAGINA,

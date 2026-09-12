@@ -396,6 +396,51 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -X utf8 agendar_buffer.py
 
+      # ⚠️ A GUARDA DE TRECHO SO' EXISTE SE VOLTAR PRO REPOSITORIO.
+      #
+      # `agendar_buffer` chama `trechos.anotar(fonte_id, segundo)` na hora de
+      # enfileirar — e' o unico guarda que pega o MESMO TRECHO cortado duas
+      # vezes. O sha nao pega (dois encodes do mesmo trecho dao hashes
+      # diferentes) e o texto nao pega (o Gemini reescreve titulo e descricao a
+      # cada corte). So' ele ve.
+      #
+      # O runner morre no fim do job. Sem este passo,
+      # `estado/trechos_usados.json` era escrito e JOGADO FORA, e todo run
+      # nascia com o arquivo como estava no ultimo commit feito a mao —
+      # 08/09/2026. Quatro dias de agendamento invisiveis pra propria guarda.
+      #
+      # MEDIDO em 12/09/2026: dois posts do MESMO trecho sairam no @modofuturo
+      # em 10/09, as 15:27 e as 16:18, e o Bryan teve de apagar um a mao.
+      #
+      # ⚠️ E' O MESMO DEFEITO que o `desempenho.yml` ja' documenta duas vezes
+      # neste repositorio: estado escrito na nuvem e perdido com o runner,
+      # enquanto o log dizia que tinha funcionado. Terceira ocorrencia.
+      - name: Guardar as guardas (trecho e registro)
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # ⚠️ Arquivo que falta nao leva os outros embora (mesma licao do
+          # desempenho.yml): monta a lista so' com o que existe.
+          ALVOS=""
+          for f in estado/trechos_usados.json registro_clipes.json; do
+            [ -e "$f" ] && ALVOS="$ALVOS $f"
+          done
+          if [ -z "$ALVOS" ]; then
+            echo "[!] nenhuma guarda escreveu nada — nada a guardar"
+            exit 0
+          fi
+          if ! git diff --quiet $ALVOS 2>/dev/null; then
+            git add $ALVOS
+            git commit -m "guardas: trecho enfileirado e registro de clipe"
+            # O cron da fila e a foto de desempenho escrevem no mesmo repo.
+            git pull --rebase --autostash -q origin main || true
+            git push
+          else
+            echo "guardas inalteradas"
+          fi
+
+
       # So roda se TUDO acima deu certo: bruto de corte que falhou nao pode
       # sumir, senao perde-se a fonte junto com a tentativa.
       - name: Limpar bruto do Drive

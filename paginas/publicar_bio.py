@@ -2,7 +2,23 @@
 """Gera a versao PUBLICA da contra-capa, mascarada, e sobe pro repo `bio`.
 
     python paginas/publicar_bio.py            gera em paginas/_publicado/
-    python paginas/publicar_bio.py --subir    gera e empurra pro repo bio
+    python paginas/publicar_bio.py --subir    gera, empurra E PUBLICA
+
+## 🚨 LEIA ISTO ANTES DE DIZER QUE ALGUMA COISA "ESTA' NO AR"
+
+⚠️ **EMPURRAR PRO `poisonb9/bio` NAO PUBLICA NADA.** Os projetos do Cloudflare
+Pages sao de **upload direto** (`"source": null` na API), e NAO estao ligados
+ao repositorio. O repo e' historico; quem serve o site e' o deploy.
+
+Medido em 12/09/2026 as 21:57: o `--subir` tinha empurrado o commit certo e eu
+anunciei "no ar". O site continuava com os botoes de WhatsApp, de um deploy
+das 21:14. O `git push` deu certo e o SITE ESTAVA VELHO — nada no push avisa.
+
+⭐ **A regra que sobrou disso: o unico jeito de saber e' BAIXAR A PAGINA DO
+AR e procurar a mudanca nela.** `curl https://<projeto>.pages.dev/` e conferir.
+Status de push, "Deployment complete" e commit verde nao sao prova; a prova e'
+o byte que o visitante recebe. Por isso o `--subir` agora publica e CONFERE, e
+estoura se o ar nao tiver a mudanca.
 
 ## POR QUE EXISTE
 
@@ -35,7 +51,23 @@ import argparse
 import re
 import subprocess
 import sys
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+# ⚠️ O .env NAO SE CARREGA SOZINHO num script solto. Sem isto o passo de
+# publicar reclamava de credencial que existe — e a tentacao seria
+# concluir que o token acabou.
+load_dotenv(Path(__file__).resolve().parent.parent / '.env')
+
+# ⚠️ E O .env TRAZ UM `GITHUB_TOKEN` JUNTO, que e' o PAT fine-grained e NAO
+# alcanca o repo `bio` — quem alcanca e' o `gh` logado nesta maquina. Com a
+# variavel presente o git obedece a ela e o push morre com 128, sem dizer
+# por que. Medido em 12/09/2026: sem a linha abaixo, o publicador para de
+# funcionar no dia em que alguem carregar o .env.
+os.environ.pop('GITHUB_TOKEN', None)
+os.environ.pop('GH_TOKEN', None)
 
 RAIZ = Path(__file__).resolve().parent.parent
 ORIGEM = RAIZ / "paginas" / "contra_capa.html"
@@ -168,6 +200,62 @@ def escrever_decodificador() -> Path:
     return alvo
 
 
+# ⚠️ OS PROJETOS QUE ESTAO NO AR. Nao e' a mesma lista de PORTAS: ha' projeto
+# reservado sem pagina (os cinco do Ate Falhar) e ha' projeto que existe mas
+# fica fora da bio (o `meulivro`, ate' a Kiwify). Publicar so' nestes.
+PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
+            "meulivro")
+
+
+def publicar_no_ar(html: str) -> None:
+    """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
+
+    ⚠️ ISTO E' O PASSO QUE FALTAVA, e a falta dele fez eu anunciar uma pagina
+    que nao existia. O `git push` do repo `bio` nao dispara deploy nenhum: os
+    projetos sao de upload direto. Ver o cabecalho do arquivo.
+    """
+    import shutil
+    import tempfile
+    tok = os.getenv("CF_API_TOKEN")
+    conta = os.getenv("CF_ACCOUNT_ID")
+    if not (tok and conta):
+        raise SystemExit("faltam CF_API_TOKEN / CF_ACCOUNT_ID no .env")
+    amb = dict(os.environ, CLOUDFLARE_API_TOKEN=tok,
+               CLOUDFLARE_ACCOUNT_ID=conta)
+    pasta = Path(tempfile.mkdtemp())
+    (pasta / "index.html").write_text(html, encoding="utf-8")
+    try:
+        for proj in PROJETOS:
+            subprocess.run(["npx", "--yes", "wrangler", "pages", "deploy",
+                            str(pasta), "--project-name", proj,
+                            "--commit-dirty=true"],
+                           env=amb, check=True, capture_output=True,
+                           shell=(os.name == "nt"))
+            print(f"  publicado: {proj}")
+    finally:
+        shutil.rmtree(pasta, ignore_errors=True)
+
+
+def conferir_no_ar(marca: str) -> list[str]:
+    """Baixa cada pagina DO AR e procura a marca. Devolve quem nao tem.
+
+    ⚠️ A PROVA E' O BYTE QUE O VISITANTE RECEBE. "Deployment complete" e commit
+    verde ja' mentiram juntos uma vez — em 12/09/2026, e foi assim que a
+    pagina com os botoes velhos ficou 40 minutos no ar sendo anunciada como
+    nova.
+    """
+    import requests
+    faltando = []
+    for proj in PROJETOS:
+        try:
+            r = requests.get(f"https://{proj}.pages.dev/", timeout=30)
+            if marca not in r.text:
+                faltando.append(proj)
+        except Exception as e:
+            faltando.append(f"{proj} (nao respondeu: {e})")
+    return faltando
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--subir", action="store_true", help="empurra pro repo bio")
@@ -234,7 +322,22 @@ def main() -> None:
         raise SystemExit("commit falhou:\n" + r.stdout + r.stderr)
     subprocess.run(["git", "-C", str(tmp), "push", "-u", "origin", "HEAD:main"],
                    check=True)
-    print(f"\nempurrado para {REPO}")
+    print(f"\nempurrado para {REPO} (historico — isto NAO publica)")
+
+    print("\npublicando no Cloudflare Pages:")
+    publicar_no_ar(html)
+
+    # ⚠️ A MARCA E' UMA COISA QUE SO' A VERSAO NOVA TEM. Conferir "existe
+    # pagina no ar" nao prova nada: a pagina velha tambem existe.
+    marca = "t.me/achadinhototal"
+    print(f"\nconferindo no ar (procurando {marca!r}):")
+    faltando = conferir_no_ar(marca)
+    if faltando:
+        raise SystemExit(
+            "NAO ESTA' NO AR em: " + ", ".join(faltando) +
+            "\nO push pode ter dado certo e o site continuar velho "
+            "— foi exatamente isso em 12/09/2026. Nao anuncie como publicado.")
+    print(f"  confirmado em {len(PROJETOS)} projeto(s)")
 
 
 if __name__ == "__main__":

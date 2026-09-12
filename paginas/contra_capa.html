@@ -317,6 +317,10 @@
   };
   var CANAIS = {
     "achadinho.make": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "truque.importado",
       nome: "Achadinho Make",
       arroba: "@achadinho.make",
       inicial: "AM",
@@ -351,6 +355,10 @@
     },
 
     "modofuturo": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "modofuturo",
       nome: "Modo Futuro",
       arroba: "@modofuturo",
       inicial: "MF",
@@ -375,6 +383,10 @@
     },
 
     "semanestesia.pod": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "semanestesia.pod",
       nome: "Sem Anestesia",
       arroba: "@semanestesia.pod",
       inicial: "SA",
@@ -413,6 +425,10 @@
     },
 
     "atefalhar": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "atefalhar",
       nome: "Até Falhar",
       arroba: "@atefalhar",
       inicial: "AF",
@@ -441,6 +457,10 @@
     // ultimos canais abertos ainda estao sujeitos a troca de nome. Se mudar,
     // mude tambem o `nome`, a `inicial` e o link do TikTok aqui.
     "fatura.chora": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "fatura.chora",
       nome: "Fatura Chora",
       arroba: "@fatura.chora",
       inicial: "FC",
@@ -465,6 +485,10 @@
     },
 
     "achadinhos.instantaneos": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "achadinhos.instantaneos",
       nome: "Achadinhos Instantâneos",
       arroba: "@achadinhos.instantaneos",
       inicial: "AI",
@@ -489,6 +513,10 @@
     },
 
     "cozinha.internacional": {
+      // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
+      // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
+      // Supabase, senao a chave estrangeira recusa e o clique se perde.
+      banco: "cozinha.importada",
       nome: "Achadinho Chef",
       arroba: "@cozinha.internacional",
       inicial: "AC",
@@ -512,6 +540,45 @@
       produtos: []
     }
   };
+
+  // ------------------------------------------------------------- o medidor
+  //
+  // ⚠️ POR QUE ELE EXISTE: a API do TikTok esta' fechada pra nos em definitivo
+  // (22/08/2026). Sem contar aqui, a operacao nunca sabe quantos dos que veem
+  // um video chegam ao grupo ou ao produto — e otimizar no escuro foi o que
+  // custou os meses ate' a medicao de 09/09.
+  //
+  // ⚠️ E ELE E' OPCIONAL DE PROPOSITO. Com `SUPABASE` vazio, a pagina funciona
+  // exatamente como hoje: nenhuma requisicao, nenhum erro, nenhum botao a
+  // menos. Medir nao pode ser condicao pra pagina abrir.
+  //
+  // A chave `anon` fica aqui porque e' PUBLICA por natureza — quem protege o
+  // banco sao as politicas (supabase/02_politicas.sql), que so' deixam ela
+  // LER o que esta' ativo e SOMAR visita e clique. Ler o placar, nao.
+  var SUPABASE = {
+    url: "",      // https://xxxx.supabase.co
+    anon: ""      // a chave anon (publishable), nunca a service_role
+  };
+
+  function medir(tabela, dados) {
+    if (!SUPABASE.url || !SUPABASE.anon) return;
+    try {
+      fetch(SUPABASE.url + "/rest/v1/" + tabela, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE.anon,
+          "Authorization": "Bearer " + SUPABASE.anon,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify(dados),
+        // ⚠️ keepalive: o clique LEVA EMBORA a pessoa. Sem isso o navegador
+        // cancela a requisicao ao trocar de pagina e o clique que mais
+        // importa — o que converteu — e' justamente o que nao e' contado.
+        keepalive: true
+      }).catch(function () { /* medir nunca derruba a pagina */ });
+    } catch (e) { /* idem */ }
+  }
 
   var raiz = document.documentElement;
   var atual = "achadinho.make";
@@ -557,6 +624,14 @@
     if (falta) r.appendChild(el("span", "marcador", "falta o link"));
     e.appendChild(r);
     e.appendChild(el("span", "seta", falta ? "·" : "→"));
+    // Conta o clique pelo ROTULO, nao pelo id: a semente do banco usa os
+    // mesmos rotulos, e assim a pagina nao precisa saber de id nenhum.
+    if (!falta) {
+      e.addEventListener("click", function () {
+        medir("clique", { canal: CANAIS[atual].banco,
+                          tipo: "link", rotulo: rotulo });
+      });
+    }
     return e;
   }
 
@@ -564,7 +639,13 @@
     var falta = (p.link === FALTA);
     var e = document.createElement(falta ? "div" : "a");
     e.className = "produto";
-    if (!falta) { e.href = p.link; e.target = "_blank"; e.rel = "noopener"; }
+    if (!falta) {
+      e.href = p.link; e.target = "_blank"; e.rel = "noopener";
+      e.addEventListener("click", function () {
+        medir("clique", { canal: CANAIS[atual].banco,
+                          tipo: "produto", rotulo: p.nome });
+      });
+    }
     var foto = el("div", "foto");
     if (p.imagem) {
       var img = document.createElement("img");
@@ -666,6 +747,8 @@
     Array.prototype.forEach.call(document.querySelectorAll(".aba"), function (a) {
       a.setAttribute("aria-pressed", String(a.dataset.canal === chave));
     });
+
+    medir("visita", { canal: c.banco });
   }
 
   var abas = document.getElementById("abas");

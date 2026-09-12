@@ -33,19 +33,34 @@ begin
   end if;
 end $$;
 
--- ⚠️ AS LINHAS QUE JA' EXISTEM SAO TRADUZIDAS ANTES DE A CHAVE MUDAR. Se a
--- chave estrangeira fosse trocada primeiro, as linhas de teste de 12/09
--- (`canal = 'modofuturo'`) quebrariam a migracao no meio — e migracao que
--- quebra no meio deixa o banco num estado que ninguem desenhou.
-update clique  c set canal = k.codigo from canal k where c.canal = k.nome_buffer;
-update visita  v set canal = k.codigo from canal k where v.canal = k.nome_buffer;
-update produto p set canal = k.codigo from canal k where p.canal = k.nome_buffer;
-update link_bio l set canal = k.codigo from canal k where l.canal = k.nome_buffer;
-
+-- ⚠️ A CHAVE SAI PRIMEIRO, DEPOIS AS LINHAS MUDAM. E' o contrario do que eu
+-- tinha escrito na primeira versao, e o contrario quebrou de verdade em
+-- 12/09/2026:
+--
+--   ERROR 23503: insert or update on table "clique" violates foreign key
+--   constraint "clique_canal_fkey". Key (canal)=(c4) is not present in
+--   table "canal".
+--
+-- O erro NAO foi na criacao da chave nova: foi no UPDATE. Com a chave antiga
+-- ainda valendo — a que aponta pra `nome_buffer` — trocar 'modofuturo' por
+-- 'c4' ja' viola na hora da escrita, porque 'c4' nao e' um nome_buffer.
+--
+-- ⚠️ E eu tinha escrito um comentario DEFENDENDO a ordem errada, com um
+-- argumento que parecia bom ("se a chave mudasse primeiro, as linhas de teste
+-- quebrariam a migracao"). Parecia e nao era: sem chave nenhuma, nao ha' o que
+-- violar. Argumento bem escrito nao vira verificacao.
+--
+-- Nada se perdeu porque o Supabase roda o script inteiro numa transacao: a
+-- primeira tentativa desfez tudo sozinha.
 alter table clique   drop constraint if exists clique_canal_fkey;
 alter table visita   drop constraint if exists visita_canal_fkey;
 alter table produto  drop constraint if exists produto_canal_fkey;
 alter table link_bio drop constraint if exists link_bio_canal_fkey;
+
+update clique  c set canal = k.codigo from canal k where c.canal = k.nome_buffer;
+update visita  v set canal = k.codigo from canal k where v.canal = k.nome_buffer;
+update produto p set canal = k.codigo from canal k where p.canal = k.nome_buffer;
+update link_bio l set canal = k.codigo from canal k where l.canal = k.nome_buffer;
 
 alter table clique   add constraint clique_canal_fkey
   foreign key (canal) references canal(codigo) on delete cascade;

@@ -1,3 +1,8 @@
+-- ===================================================================
+-- VERSAO 2  ·  12/09/2026 12:35  ·  se a sua primeira linha nao diz
+-- VERSAO 2, voce esta' com o script ANTIGO no editor. Selecione tudo
+-- (Ctrl+A), apague, e cole de novo.
+-- ===================================================================
 -- Contra-capa — o canal passa a ser identificado por CODIGO
 -- Rode DEPOIS do TUDO_EM_UM (ou dos tres primeiros). Roda uma vez.
 --
@@ -52,10 +57,25 @@ end $$;
 --
 -- Nada se perdeu porque o Supabase roda o script inteiro numa transacao: a
 -- primeira tentativa desfez tudo sozinha.
-alter table clique   drop constraint if exists clique_canal_fkey;
-alter table visita   drop constraint if exists visita_canal_fkey;
-alter table produto  drop constraint if exists produto_canal_fkey;
-alter table link_bio drop constraint if exists link_bio_canal_fkey;
+-- ⚠️ ACHA AS CHAVES EM VEZ DE CHUTAR O NOME DELAS. `drop constraint if
+-- exists <nome>` com o nome errado nao da' erro: nao faz nada, em silencio —
+-- e ai' o update seguinte falha com a chave antiga ainda de pe'. Esta busca
+-- pega TODA chave estrangeira que aponta pra tabela `canal`, com qualquer
+-- nome.
+do $$
+declare r record;
+begin
+  for r in
+    select con.conname, cl.relname
+    from pg_constraint con
+    join pg_class cl on cl.oid = con.conrelid
+    where con.contype = 'f'
+      and con.confrelid = 'canal'::regclass
+  loop
+    execute format('alter table %I drop constraint %I', r.relname, r.conname);
+    raise notice 'soltei %.%', r.relname, r.conname;
+  end loop;
+end $$;
 
 update clique  c set canal = k.codigo from canal k where c.canal = k.nome_buffer;
 update visita  v set canal = k.codigo from canal k where v.canal = k.nome_buffer;

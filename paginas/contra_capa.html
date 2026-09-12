@@ -263,6 +263,28 @@
   // tabela link_bio, escritos com a chave de servico.
   var FALTA = "#falta-o-link";
 
+  // Os convites da comunidade Achadinho. ⚠️ Estao AQUI por decisao do Bryan em
+  // 12/09/2026 — "pode guardar nos nossos arquivos de projeto, e' publico
+  // mesmo" — e ele tem razao no argumento: o convite vai na bio do TikTok,
+  // onde qualquer um le'. Esconde-lo do repositorio nao o tornava privado.
+  //
+  // ⚠️ O QUE ISSO CUSTA, pra ninguem se surpreender depois: o repositorio e'
+  // publico e commit fica no historico pra sempre. Se um grupo for invadido e
+  // o convite for redefinido no WhatsApp, o link ANTIGO continua legivel aqui
+  // — ele deixa de funcionar, mas nao some. Redefinir e' o conserto; apagar o
+  // commit nao e'.
+  //
+  // ⚠️ `fatura.chora` e `achadinhos.instantaneos` mandam pro MESMO grupo
+  // (Total). Enquanto for assim, nao da' pra saber qual dos dois trouxe a
+  // pessoa. Se a distincao importar, o WhatsApp permite dois convites pro
+  // mesmo grupo — e ai' a tabela de cliques separa sozinha.
+  var GRUPO = {
+    make:  "https://chat.whatsapp.com/KESO09AHGBD7UOPwxiMHpw?s=cl&p=i&mlu=4",
+    chef:  "https://chat.whatsapp.com/EH690bUwbt74FYrW3OEbxu?s=cl&p=i&mlu=4",
+    total: "https://chat.whatsapp.com/FKoIqqfqWbj0Kxe6wS3Zkx?s=cl&p=i&mlu=4",
+    dia:   "https://chat.whatsapp.com/HUTNqu6tYsB7DvURY9515Q?s=cl&p=i&mlu=4"
+  };
+
   // ⚠️ OS BRASOES VAO EMBUTIDOS (data URI, WebP de 160px, ~11 KB cada).
   // A pagina tem de funcionar como ARQUIVO SOLTO: sem servidor, sem CDN e
   // sem caminho relativo pra quebrar. O PNG de 320px fica em
@@ -295,13 +317,13 @@
         },
         {
           guia: "É no grupo que o achadinho aparece PRIMEIRO 👇",
-          botoes: [["🔥", "Grupo dos Achadinhos — promoção antes de todo mundo", FALTA]]
+          botoes: [["🔥", "Grupo dos Achadinhos — promoção antes de todo mundo", GRUPO.make]]
         },
         {
           guia: "Os outros cantos da casa:",
           botoes: [
             ["🍳", "Achadinho Chef — cozinha de fora, ingrediente daqui", "https://www.tiktok.com/@cozinha.internacional"],
-            ["⚡", "Achadinho Total — tudo que sobra de bom", FALTA]
+            ["⚡", "Achadinho Total — tudo que sobra de bom", GRUPO.total]
           ]
         }
       ],
@@ -401,7 +423,7 @@
         },
         {
           guia: "As promoções que valem mesmo a pena 👇",
-          botoes: [["⚡", "Achadinho Total — o grupo", FALTA]]
+          botoes: [["⚡", "Achadinho Total — o grupo", GRUPO.total]]
         }
       ],
       produtos: []
@@ -425,7 +447,7 @@
         },
         {
           guia: "É no grupo que aparece primeiro 👇",
-          botoes: [["⚡", "Achadinho Total — o grupo", FALTA]]
+          botoes: [["⚡", "Achadinho Total — o grupo", GRUPO.total]]
         }
       ],
       produtos: []
@@ -449,7 +471,7 @@
         },
         {
           guia: "As panelas e os achadinhos que eu uso 👇",
-          botoes: [["🥄", "Grupo do Achadinho Chef", FALTA]]
+          botoes: [["🥄", "Grupo do Achadinho Chef", GRUPO.chef]]
         }
       ],
       produtos: []

@@ -1,0 +1,48 @@
+# O garimpo: acha o produto que merece video.
+#
+# ⚠️ RODA NA NUVEM porque a maquina local NAO alcanca os gateways da API do
+# AliExpress (timeout no handshake TLS, medido em 12/09/2026).
+#
+# ⚠️ E ELE COMMITA O HISTORICO DE PRECO DE VOLTA. Runner e' efemero: sem o
+# commit, a serie de precos morre no fim do job — e a serie E' o ativo, e' o
+# que separa desconto de verdade do "de/por" inflado da loja. Este motor ja'
+# perdeu estado tres vezes por esquecer isso.
+name: Garimpo
+
+on:
+  workflow_dispatch:
+    inputs:
+      canal:
+        description: canal
+        required: true
+        default: achadinhos.instantaneos
+  schedule:
+    - cron: '0 11 * * *'
+
+jobs:
+  garimpar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests python-dotenv
+      - name: Garimpar
+        env:
+          ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+        run: |
+          for c in truque.importado cozinha.importada achadinhos.instantaneos fatura.chora atefalhar; do
+            echo "===== $c"
+            python -X utf8 -m engine.garimpo --canal "$c" --quantos 5 || true
+          done
+      - name: Guardar o historico de preco
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f estado/precos_vistos.jsonl
+          git diff --cached --quiet || git commit -m "garimpo: precos vistos"
+          git push

@@ -121,3 +121,9 @@ estado/buffer_cota.json
 # A pagina publicada e o clone do repo bio: gerados, nao versionados aqui.
 # O que vale e o modelo (paginas/contra_capa.html) e o publicar_bio.py.
 paginas/_publicado/
+
+# cache do wrangler (deploy da bio)
+.wrangler/
+
+# historico de preco do garimpo (append-only)
+estado/precos_vistos.jsonl

@@ -98,7 +98,8 @@ def achar_ou_criar_release(token: str, tag: str) -> dict:
     return r.json()
 
 
-def enviar_asset(token: str, release: dict, arquivo: Path, nome: str) -> str:
+def enviar_asset(token: str, release: dict, arquivo: Path, nome: str,
+                 tipo: str = "video/mp4") -> str:
     """Sobe o arquivo e devolve a URL pública. Se o nome já existe, reaproveita.
 
     Reaproveitar em vez de sobrescrever é de propósito: o mesmo clipe
@@ -111,7 +112,7 @@ def enviar_asset(token: str, release: dict, arquivo: Path, nome: str) -> str:
     url = release["upload_url"].split("{")[0]
     with arquivo.open("rb") as fh:
         r = requests.post(url, headers={**_cabecalho(token),
-                                        "Content-Type": "video/mp4"},
+                                        "Content-Type": tipo},
                           params={"name": nome}, data=fh, timeout=600)
     if r.status_code == 422:      # já existe (corrida entre dois runs)
         r2 = requests.get(release["url"], headers=_cabecalho(token), timeout=30)
@@ -237,6 +238,30 @@ def main() -> None:
         except Exception as e:
             print(f"  [!] {clipe.name}: {str(e)[:110]}")
             continue
+        # ⚠️ A CAPA VAI JUNTO, e ela e' o FRAME REAL do clipe (render.capa).
+        #
+        # Ate' 12/09/2026 ela era gerada, usada so' como miniatura do YouTube e
+        # morria no disco. A pagina da bio precisa de uma imagem por botao, e
+        # esta ja' existe, e' nossa, e mostra o video que a pessoa acabou de
+        # ver — nao ha' o que inventar nem o que gerar.
+        #
+        # Release publica aceita ate' 1.000 assets e nao cobra banda (ver o
+        # cabecalho deste arquivo), entao a capa nao custa nada.
+        #
+        # ⚠️ FALHA ABERTA, DE PROPOSITO: se a capa nao subir, o CLIPE segue. E'
+        # a licao ja' escrita no desempenho.yml — um passo acessorio nao pode
+        # derrubar o que e' produto.
+        capa_url = ""
+        capa = clipe / "capa.jpg"
+        if capa.exists():
+            try:
+                capa_url = enviar_asset(token, release, capa,
+                                        nome_de_asset(clipe, "capa.jpg"),
+                                        tipo="image/jpeg")
+            except Exception as e:
+                print(f"  [!] capa de {clipe.name[:40]} nao subiu "
+                      f"({str(e)[:70]}) — o clipe segue sem ela")
+
         legenda = ""
         leg = clipe / "post.txt"
         if leg.exists():
@@ -286,6 +311,9 @@ def main() -> None:
                         # no agendador, e ele so' le' o manifesto.
                         "fonte_id": m.get("fonte_id", ""),
                         "titulo": m.get("titulo", ""),
+                        # A pagina da bio le' isto. Vazio = clipe sem capa, que
+                        # e' estado normal (clipe anterior a 12/09/2026).
+                        "capa_url": capa_url,
                         "canal": (os.environ.get("CANAL_ESPERADO") or "").strip().lower(),
                         # De que genero e' quem fala no clipe, como o Gemini
                         # viu. Vai pro manifesto porque e' o sinal que decidira'

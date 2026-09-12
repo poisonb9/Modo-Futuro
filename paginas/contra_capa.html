@@ -131,7 +131,16 @@
   a.botao:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--sombra); }
   a.botao:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--sombra); }
   .botao.desligado { opacity: .55; }
-  .selo { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font-size: 21px; background: var(--acento-leve); }
+  .selo {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: grid; place-items: center; font-size: 21px;
+    background: var(--acento-leve);
+    overflow: hidden;
+  }
+  /* A miniatura real: o FRAME do clipe, que o motor ja' gera (render.capa) e
+     agora sobe pra release. Quando nao ha' capa, o mosaico do fundo aparece —
+     e' o mesmo desenho, sem buraco. */
+  .selo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .rotulo { text-align: center; font-size: 14px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
   .seta { text-align: center; font-size: 16px; color: var(--tinta-fraca); }
 
@@ -154,7 +163,16 @@
     transition: transform .12s ease, box-shadow .12s ease;
   }
   a.produto:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--sombra); }
-  .foto { aspect-ratio: 1 / 1; display: grid; place-items: center; font-size: 40px; background: var(--acento-leve); border-bottom: 1.5px solid var(--tinta); }
+  .foto {
+    aspect-ratio: 1 / 1; display: grid; place-items: center;
+    font-size: 40px; background: var(--acento-leve);
+    border-bottom: 1.5px solid var(--tinta);
+    overflow: hidden;
+  }
+  /* ⚠️ A foto do PRODUTO vem do vendedor, nunca gerada. Quem compra tem de
+     ver o que vai receber — imagem inventada de produto de afiliado e' o
+     caminho curto pra devolucao e pra reclamacao. */
+  .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .corpo { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
   .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
   .preco { font-family: "Archivo Black", system-ui, sans-serif; font-size: 17px; color: var(--acento); letter-spacing: -.01em; }
@@ -377,12 +395,33 @@
 
   // Link que ainda nao existe NAO vira <a> morto: vira cartao desligado e DIZ
   // que falta. Link quebrado numa pagina publicada e' pior que ausencia.
+  // A miniatura e' IMAGEM quando existe uma, e emoji quando nao existe. O
+  // motor ja' gera o frame de cada clipe (render.capa) e agora ele sobe pra
+  // release — entao a imagem que vai aqui e' a do proprio video, nao uma
+  // ilustracao.
+  function miniatura(selo) {
+    var caixa = el("span", "selo");
+    if (typeof selo === "string" && selo.indexOf("http") === 0) {
+      var img = document.createElement("img");
+      img.src = selo;
+      img.alt = "";
+      img.loading = "lazy";
+      // Se a imagem nao carregar, a caixa volta a ser o mosaico do acento em
+      // vez de virar um retangulo quebrado.
+      img.addEventListener("error", function () { img.remove(); });
+      caixa.appendChild(img);
+    } else {
+      caixa.textContent = selo;
+    }
+    return caixa;
+  }
+
   function montarBotao(selo, rotulo, href) {
     var falta = (href === FALTA);
     var e = document.createElement(falta ? "div" : "a");
     e.className = "botao" + (falta ? " desligado" : "");
     if (!falta) { e.href = href; e.target = "_blank"; e.rel = "noopener"; }
-    e.appendChild(el("span", "selo", selo));
+    e.appendChild(miniatura(selo));
     var r = el("span", "rotulo", rotulo);
     if (falta) r.appendChild(el("span", "marcador", "falta o link"));
     e.appendChild(r);
@@ -395,7 +434,21 @@
     var e = document.createElement(falta ? "div" : "a");
     e.className = "produto";
     if (!falta) { e.href = p.link; e.target = "_blank"; e.rel = "noopener"; }
-    e.appendChild(el("div", "foto", p.emoji));
+    var foto = el("div", "foto");
+    if (p.imagem) {
+      var img = document.createElement("img");
+      img.src = p.imagem;
+      img.alt = p.nome;
+      img.loading = "lazy";
+      img.addEventListener("error", function () {
+        img.remove();
+        foto.textContent = p.emoji;
+      });
+      foto.appendChild(img);
+    } else {
+      foto.textContent = p.emoji;
+    }
+    e.appendChild(foto);
     var corpo = el("div", "corpo");
     corpo.appendChild(el("div", "nome", p.nome));
     corpo.appendChild(el("div", "preco", p.preco));

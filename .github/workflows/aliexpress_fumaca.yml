@@ -1,0 +1,27 @@
+# Teste de fumaca da API do AliExpress.
+#
+# ⚠️ POR QUE NA NUVEM. Medido em 12/09/2026: a maquina local NAO alcanca
+# `api-sg.aliexpress.com` nem `gw.api.taobao.com` (timeout no handshake TLS),
+# embora o site normal do AliExpress responda. O runner alcanca.
+#
+# ⚠️ E ELE NAO IMPRIME A RESPOSTA INTEIRA. Resposta de API de afiliado carrega
+# link com o nosso tracking; log de Actions e' publico neste repositorio.
+name: AliExpress — teste de fumaca
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fumaca:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Chamar a API
+        env:
+          ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+        run: python -X utf8 teste/fumaca_aliexpress.py

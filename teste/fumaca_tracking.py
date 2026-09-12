@@ -18,6 +18,11 @@ from engine import aliexpress  # noqa: E402
 # Uma URL qualquer do AliExpress serve de cobaia: o que se testa e' o
 # tracking_id, nao o produto.
 ALVO = "https://pt.aliexpress.com/item/1005006568047850.html"
+# ⚠️ MEDIDO EM 12/09/2026: o valido e' o `default`, que ja' existia na
+# conta. Os outros cinco foram recusados com "402 TrackingId input
+# parameter error" — e e' bom que tenham sido: um teste que aceita
+# qualquer coisa nao prova nada. Os recusados FICAM na lista pra guarda
+# continuar tendo caso negativo.
 CANDIDATOS = ["default", "achadinho", "achadinhototal", "modofuturo",
               "bryan", "tiktok"]
 

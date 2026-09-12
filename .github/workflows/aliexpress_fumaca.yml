@@ -34,3 +34,9 @@ jobs:
         # dois quebrou.
         continue-on-error: true
         run: python -X utf8 teste/fumaca_tracking.py
+      - name: Campos do produto
+        env:
+          ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+        continue-on-error: true
+        run: python -X utf8 teste/fumaca_campos.py

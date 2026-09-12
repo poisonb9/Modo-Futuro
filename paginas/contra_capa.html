@@ -775,7 +775,12 @@
   // que vai na bio dele. Sem isto, todos os sete links da bio abririam o
   // mesmo canal — e a contagem por canal, que e' o ponto de tudo isto, nao
   // diria nada.
-  var pedido = new URLSearchParams(location.search).get("c");
+  // ⚠️ O CANAL VEM DO CAMINHO OU DA URL, nesta ordem. O caminho
+  // (`/bio/c1`) e' o endereco bonito, e e' o que vai na bio; o `?c=c1`
+  // continua valendo porque link ja' publicado nao pode quebrar quando a
+  // gente melhora o formato.
+  var doCaminho = (location.pathname.match(/\/(c[1-9])\/?$/) || [])[1];
+  var pedido = doCaminho || new URLSearchParams(location.search).get("c");
   if (pedido) {
     var achado = Object.keys(CANAIS).filter(function (k) {
       return CANAIS[k].banco === pedido || k === pedido;

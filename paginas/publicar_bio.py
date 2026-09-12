@@ -194,6 +194,20 @@ def main() -> None:
     subprocess.run(["git", "-C", str(tmp), "config", "user.email",
                     "poisonb9@users.noreply.github.com"], check=True)
 
+    # ⚠️ UMA PASTA POR CANAL, pro endereco ficar `/bio/c1` em vez de
+    # `/bio/?c=c1`. E' o mesmo arquivo copiado: o Pages serve arquivo, nao
+    # rota, entao "rota bonita" aqui e' literalmente uma pasta com um
+    # index.html dentro.
+    #
+    # Custa ~129 KB por canal. Nao vale inventar redirecionamento pra economizar
+    # isso: redirecionamento e' um salto a mais antes de a pagina aparecer, e
+    # quem vem do TikTok desiste no salto.
+    for codigo in sorted(set(CODIGOS.values())):
+        pasta = tmp / codigo
+        pasta.mkdir(exist_ok=True)
+        (pasta / "index.html").write_text(html, encoding="utf-8")
+    print(f"  {len(set(CODIGOS.values()))} pastas de canal (/c1 ... /c7)")
+
     subprocess.run(["git", "-C", str(tmp), "add", "-A"], check=True)
     # ⚠️ `check=True` no commit. Estava `False`, e o commit falhou CALADO — o
     # push seguinte reclamou de um branch sem commit nenhum, e a mensagem de

@@ -86,20 +86,25 @@ def postar_texto(p: dict, origem: str | None = None) -> str:
     regra da chamada no fim do clipe. Nao ha' razao pra um post obedecer logica
     diferente — e' a mesma pessoa decidindo se clica.
     """
-    linhas = [p["nome"]]
-    meio = [x for x in (p.get("preco"), p.get("loja")) if x]
-    if meio:
-        linhas.append(" · ".join(meio))
+    # ⚠️ O EMOJI E' ROTULO, NAO ENFEITE. Cada um marca um campo sempre no
+    # mesmo lugar, pra quem rola o feed no polegar achar o preco sem ler. Por
+    # isso sao POUCOS e FIXOS: emoji sorteado a cada post vira ruido, e ai' a
+    # pessoa volta a ter de ler tudo — que e' exatamente o que ele evita.
+    linhas = ["🏷️ " + p["nome"], ""]
+    if p.get("preco"):
+        linhas.append("💰 " + p["preco"])
+    if p.get("loja"):
+        linhas.append("🏪 " + p["loja"])
     if p.get("preco") and p.get("preco_em"):
         # ⚠️ A DATA DO PRECO VAI JUNTO. Preco de afiliado muda sozinho, e post
         # antigo com preco velho e' o jeito mais rapido de perder a confianca
         # de quem clicou. Dizer de quando e' o preco e' honesto e barato.
-        linhas.append(f"preço visto em {p['preco_em']}")
+        linhas.append(f"📅 preço visto em {p['preco_em']}")
     nome_origem = ORIGEM.get(origem or "", "")
     if nome_origem:
-        linhas.append(f"— do {nome_origem}")
-    linhas.append(p["link"])
-    return "\n".join(linhas)
+        linhas.append(f"📺 do {nome_origem}")
+    linhas += ["", "🔗 " + p["link"]]
+    return chr(10).join(linhas)
 
 
 def _ja_postados() -> dict:

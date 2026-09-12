@@ -60,3 +60,36 @@ Devolve, por canal: visitas, cliques, cliques em grupo e cliques em produto.
 ⚠️ E o número só começa a valer **depois** que a chamada no fim do clipe
 estiver rodando há alguns dias — antes disso ninguém está sendo convidado a
 chegar lá.
+
+---
+
+## Conferido no ar — 12/09/2026
+
+Rodado contra o projeto de verdade, com a chave pública, depois que o Bryan
+executou o SQL:
+
+```
+7 canais            ok
+13 botoes           ok   (7 conteudo, 5 grupo, 1 outro)
+livro invisivel     ok   (inativo, e a politica so' mostra ativo)
+POST clique         201  funciona
+POST visita         201  funciona
+canal inventado     409  o BANCO recusa pela chave estrangeira
+DELETE de canal     bloqueado
+PATCH de botao      bloqueado
+SELECT no placar    bloqueado (volta vazio)
+```
+
+⚠️ **O `204` do DELETE quase me enganou, e vale pra quem repetir isto.** No
+PostgREST, `204` quer dizer "requisição válida, zero linhas afetadas" — não
+"apagou". Parar no código de status teria me feito relatar o oposto do que
+aconteceu. **A prova é o efeito:** reler a tabela depois e ver que os 7 canais
+continuam lá e que nenhuma URL virou outra coisa.
+
+⚠️ **Duas linhas de teste ficaram** (um clique rotulado `TESTE DE LIGACAO
+12-09 (pode apagar)` e uma visita do `modofuturo`). A chave pública não apaga
+— e é assim que tem de ser. Saem pelo Table Editor quando alguém quiser.
+
+⚠️ **A contagem NÃO funciona na prévia do artifact.** Aquele ambiente bloqueia
+requisição para qualquer outro domínio, então o clique lá não conta. Ela só
+passa a valer quando a página estiver hospedada de verdade.

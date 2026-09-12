@@ -43,6 +43,22 @@ DESTINO = RAIZ / "paginas" / "_publicado"
 SEGREDOS = (RAIZ.parent.parent.parent / "BACKUP_SISTEMA" / "SEGREDOS_NAO_SUBIR")
 REPO = "poisonb9/bio"
 
+# ⚠️ CADA CANAL TEM SEU ENDERECO NO CLOUDFLARE PAGES, e o endereco e' o que
+# vai na bio. O nome do projeto e' a porta: a pagina le' `location.hostname`
+# e sabe qual canal e'.
+#
+# ⚠️ NOME TOMADO NAO DA' ERRO NA CLOUDFLARE — ela cria com um sufixo aleatorio
+# (`olivro` virou `olivro-oe0`). Medido em 12/09/2026 criando um nome sem
+# sentido, que saiu limpo: sufixo significa "e' de outra pessoa". Conferir o
+# `subdomain` da resposta e' a unica forma de saber.
+PORTAS = {
+    "oachadinho": "c1",        # Achadinho Make
+    "meulivro": "c2",          # Sem Anestesia — reservado, fora da bio ate' a Kiwify
+    "achadinhochef": "c5",
+    "pagomenos": "c6",         # Fatura Chora
+    "achadinhodehoje": "c7",
+}
+
 # nome interno -> codigo. So' entram os que NAO aparecem na tela.
 CODIGOS = {
     "truque.importado": "c1",

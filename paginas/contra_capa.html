@@ -779,8 +779,24 @@
   // (`/bio/c1`) e' o endereco bonito, e e' o que vai na bio; o `?c=c1`
   // continua valendo porque link ja' publicado nao pode quebrar quando a
   // gente melhora o formato.
+  // ⚠️ CADA CANAL TEM SEU PROPRIO ENDERECO, e e' o endereco que diz qual
+  // canal e'. `oachadinho.pages.dev` abre o Achadinho Make sem barra, sem
+  // codigo, sem nada depois — e' isso que vai na bio.
+  //
+  // O caminho (`/bio/c1`) e o `?c=` continuam valendo: link ja' publicado nao
+  // pode quebrar quando o formato melhora.
+  var PORTAS = {
+    "oachadinho": "c1",   // Achadinho Make
+    "meulivro": "c2",     // Sem Anestesia
+    "achadinhochef": "c5",
+    "pagomenos": "c6",    // Fatura Chora
+    "achadinhodehoje": "c7"
+  };
+  var doHost = PORTAS[location.hostname.split(".")[0]];
+
   var doCaminho = (location.pathname.match(/\/(c[1-9])\/?$/) || [])[1];
-  var pedido = doCaminho || new URLSearchParams(location.search).get("c");
+  var pedido = doHost || doCaminho ||
+              new URLSearchParams(location.search).get("c");
   if (pedido) {
     var achado = Object.keys(CANAIS).filter(function (k) {
       return CANAIS[k].banco === pedido || k === pedido;

@@ -12,6 +12,7 @@ tela onde um card de fim caberia. A saida nao foi desfazer o aparo: foi
 devolver os segundos SO' QUANDO ELES TEM O QUE CARREGAR. O defeito era rodar
 sem voz E SEM NADA — cauda com chamada nao e' o mesmo defeito.
 """
+import io
 import sys
 from pathlib import Path
 
@@ -46,11 +47,32 @@ for ruim in ("canal que nao existe", "", None, "modofuturo_2"):
     checar(chamada.do_canal(ruim) == "", f"{ruim!r} -> sem chamada")
 
 print("\n3. NEGATIVO — canal conhecido SEM destino tambem fica sem chamada")
-# O @modofuturo e o @atefalhar nao tem grupo nem produto hoje. Convidar pra
-# uma pagina que nao entrega gasta a unica frase que a pessoa leria ate' o fim.
-for sem in ("modofuturo", "atefalhar"):
+# O @modofuturo nao tem grupo nem produto hoje. Convidar pra uma pagina que
+# nao entrega gasta a unica frase que a pessoa leria ate' o fim.
+#
+# ⚠️ ERAM DOIS ATE' 12/09/2026. O @atefalhar saiu daqui no dia em que ganhou o
+# grupo, e a guarda tem de acompanhar a realidade, senao ela reprova o certo.
+# Mas o que ela protegia continua de pe' e agora se apoia num canal so'.
+for sem in ("modofuturo",):
     checar(chamada.do_canal(sem) == "",
            f"{sem} nao tem destino -> nao chama")
+
+# ⚠️ A GUARDA DE VERDADE NAO E' A LISTA, E' A REGRA. Enumerar canal a canal
+# envelhece a cada decisao do Bryan — foi o que acabou de acontecer. O que nao
+# envelhece: TODO canal com chamada tem de ter destino na contra-capa.
+#
+# E' esta assercao que pega o erro caro (prometer no clipe o que a pagina nao
+# entrega), e ela nao depende de eu lembrar de vir aqui editar a lista.
+import re
+_pagina = io.open("paginas/contra_capa.html", encoding="utf-8").read()
+_DESTINOS = ("https://chat.whatsapp.com", "kiwify", "CAPA_LIVRO", "GRUPO.")
+for _canal in chamada.CHAMADA:
+    _b = re.search(r'banco: "' + re.escape(_canal) + r'".*?(?=banco: "|\Z)',
+                   _pagina, re.S)
+    checar(_b is not None, _canal + ": existe na contra-capa")
+    if _b:
+        checar(any(d in _b.group(0) for d in _DESTINOS),
+               _canal + ": tem destino de verdade (grupo ou produto)")
 
 print("\n4. a chamada MOSTRA, nao pergunta")
 # ⭐ Playbook §23.9: titulo-PERGUNTA converteu 0 de 4; o que AFIRMA, 7 de 14.

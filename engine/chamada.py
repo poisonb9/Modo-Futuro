@@ -52,6 +52,17 @@ CHAMADA = {
         "As promoções que valem a pena estão no link da bio.",
     "achadinhos.instantaneos":
         "O achadinho de hoje está no link da bio.",
+    # ⚠️ ENTROU EM 12/09/2026, quando o canal ganhou destino. Ate' entao ele
+    # estava de fora junto com o @modofuturo, e estava certo assim: nao tinha
+    # grupo nem produto. Agora aponta pro Achadinho Total, como os outros.
+    #
+    # ⚠️ E ISSO CUSTA O GRUPO DE CONTROLE. Ele e o @modofuturo eram os dois
+    # canais SEM chamada, no mesmo mes e no mesmo motor — era com eles que a
+    # calibragem de 12/09 ia ser medida. Sobra um. Com um canal so' de
+    # controle, a comparacao fica mais fraca, e isso tem de estar escrito em
+    # vez de descoberto no proximo export.
+    "atefalhar":
+        "Os achadinhos de academia caem no grupo — link na bio.",
 }
 
 

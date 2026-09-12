@@ -291,12 +291,31 @@
   // (Total). Enquanto for assim, nao da' pra saber qual dos dois trouxe a
   // pessoa. Se a distincao importar, o WhatsApp permite dois convites pro
   // mesmo grupo — e ai' a tabela de cliques separa sozinha.
+  // ⚠️ ARQUIVO, NAO ESTA' MAIS NA PAGINA. Em 12/09/2026 o Bryan
+  // abandonou o WhatsApp: "aqui e' melhor temos mais controle".
+  //
+  // ⚠️ OS CONVITES FICAM GUARDADOS DE PROPOSITO. Os quatro grupos
+  // continuam existindo e com gente dentro; o que mudou e' que a
+  // pagina nao manda mais ninguem pra la'. Apagar o convite daqui
+  // nao esvazia o grupo — so' tira o unico jeito de voltar nele.
   var GRUPO = {
     make:  "https://chat.whatsapp.com/KESO09AHGBD7UOPwxiMHpw?s=cl&p=i&mlu=4",
     chef:  "https://chat.whatsapp.com/EH690bUwbt74FYrW3OEbxu?s=cl&p=i&mlu=4",
     total: "https://chat.whatsapp.com/FKoIqqfqWbj0Kxe6wS3Zkx?s=cl&p=i&mlu=4",
     dia:   "https://chat.whatsapp.com/HUTNqu6tYsB7DvURY9515Q?s=cl&p=i&mlu=4"
   };
+
+  // ⚠️ UM CANAL DE TELEGRAM PRA TODOS OS PRODUTOS, decisao do Bryan em
+  // 12/09/2026. O WhatsApp nao tem porta oficial pra grupo (a Cloud API e' 1:1
+  // com template aprovado); o Telegram tem broadcast de canal, gratis.
+  //
+  // ⚠️ CANAL != GRUPO, e por isso ele aparece num botao SEPARADO do WhatsApp.
+  // Aqui so' o admin escreve: e' vitrine, nao conversa. Juntar os dois num
+  // botao so' faria a pessoa entrar esperando papo e achar catalogo.
+  //
+  // ⚠️ E o nome se repete de proposito — o grupo de WhatsApp tambem se chama
+  // Achadinho Total. Os ROTULOS e' que separam, e tem de continuar separando.
+  var VITRINE = "https://t.me/achadinhototal";
 
   // ⚠️ OS BRASOES VAO EMBUTIDOS (data URI, WebP de 160px, ~11 KB cada).
   // A pagina tem de funcionar como ARQUIVO SOLTO: sem servidor, sem CDN e
@@ -337,14 +356,14 @@
           botoes: [["🎬", "Mais achadinhos como esse", "https://www.tiktok.com/@achadinho.make"]]
         },
         {
-          guia: "É no grupo que o achadinho aparece PRIMEIRO 👇",
-          botoes: [["🔥", "Grupo dos Achadinhos — promoção antes de todo mundo", GRUPO.make]]
+          guia: "É no canal que o achadinho aparece PRIMEIRO 👇",
+          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         },
         {
           guia: "Os outros cantos da casa:",
           botoes: [
             ["🍳", "Achadinho Chef — cozinha de fora, ingrediente daqui", "https://www.tiktok.com/@cozinha.internacional"],
-            ["⚡", "Achadinho Total — tudo que sobra de bom", GRUPO.total]
+            ["🏷️", "Achadinho Total — os produtos, com preço e link", VITRINE]
           ]
         }
       ],
@@ -453,8 +472,8 @@
           // veio. NAO apaga mais: a pagina conta o clique POR CANAL antes de
           // mandar. O problema que eu levantei em 09/09 foi resolvido pela
           // contagem, e nao por convite separado.
-          guia: "Os achadinhos de academia caem no grupo 👇",
-          botoes: [["🏋️", "Achadinho Total — o grupo", GRUPO.total]]
+          guia: "Os achadinhos de academia saem por lá 👇",
+          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       // ⚠️ O ATE FALHAR SEGUE O MODELO DO SEM ANESTESIA: o destino e' PRODUTO,
@@ -502,7 +521,7 @@
         },
         {
           guia: "As promoções que valem mesmo a pena 👇",
-          botoes: [["⚡", "Achadinho Total — o grupo", GRUPO.total]]
+          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       produtos: []
@@ -529,8 +548,8 @@
           botoes: [["🎬", "Mais achadinhos como esse", "https://www.tiktok.com/@achadinhos.instantaneos"]]
         },
         {
-          guia: "É no grupo que aparece primeiro 👇",
-          botoes: [["⚡", "Achadinho Total — o grupo", GRUPO.total]]
+          guia: "É lá que aparece primeiro 👇",
+          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       produtos: []
@@ -558,7 +577,7 @@
         },
         {
           guia: "As panelas e os achadinhos que eu uso 👇",
-          botoes: [["🥄", "Grupo do Achadinho Chef", GRUPO.chef]]
+          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       produtos: []

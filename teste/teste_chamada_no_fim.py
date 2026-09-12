@@ -65,7 +65,13 @@ for sem in ("modofuturo",):
 # entrega), e ela nao depende de eu lembrar de vir aqui editar a lista.
 import re
 _pagina = io.open("paginas/contra_capa.html", encoding="utf-8").read()
-_DESTINOS = ("https://chat.whatsapp.com", "kiwify", "CAPA_LIVRO", "GRUPO.")
+# ⚠️ O WHATSAPP SAIU EM 12/09/2026 ("vamos abandonar o WhatsApp aqui e'
+# melhor temos mais controle"). Deixo `chat.whatsapp.com` na lista de
+# proposito: se um convite voltar pra pagina um dia, ele CONTA como
+# destino de verdade — a guarda e' sobre a pessoa ter onde chegar, nao
+# sobre qual aplicativo esta' na moda.
+_DESTINOS = ("VITRINE", "https://t.me/", "https://chat.whatsapp.com",
+             "kiwify", "CAPA_LIVRO", "GRUPO.")
 for _canal in chamada.CHAMADA:
     _b = re.search(r'banco: "' + re.escape(_canal) + r'".*?(?=banco: "|\Z)',
                    _pagina, re.S)

@@ -62,7 +62,7 @@ CHAMADA = {
     # controle, a comparacao fica mais fraca, e isso tem de estar escrito em
     # vez de descoberto no proximo export.
     "atefalhar":
-        "Os achadinhos de academia caem no grupo — link na bio.",
+        "Os achadinhos de academia saem no canal — link na bio.",
 }
 
 

@@ -7,6 +7,25 @@ Marque com `[x]` o que for fazendo — este arquivo é o combinado.
 
 ---
 
+## 🔴 0. O RÓTULO DE IA — risco de CONTA, não de alcance
+
+⚠️ **Conferido em 13/09/2026: NADA no motor marca, verifica ou lembra do
+rótulo.** O único vestígio é um comentário em `agendar_buffer.py:369` dizendo
+que já houve clipe *"tirado da fila por ter sido postado sem rótulo de IA"*.
+
+Hoje quem marca é o Bryan, na mão, no app — e quem publica é o **Buffer**,
+que não marca.
+
+⚠️ **Todo clipe com voz clonada precisa do rótulo.** E a hipótese principal do
+corte de alcance de 02/08 foi justamente essa, descoberta por uma rejeição de
+Promoção por integridade/autenticidade.
+
+**O que decidir:** se o TikTok aceita o rótulo por API/Buffer, dá para
+automatizar. Se só houver na interface, o conserto é uma **lista de conferência
+no post** — o motor não pode marcar, mas pode LEMBRAR, e hoje nem isso faz.
+
+---
+
 ## 🔴 1. Perfil do Awin — É O ÚNICO QUE PIORA ENQUANTO ESPERA
 
 **Onde:** `ui.awin.com` → Conta → Perfil → Visão Geral
@@ -175,3 +194,25 @@ https://achadinhochef.pages.dev
 https://achadinhodehoje.pages.dev
 https://pagomenos.pages.dev
 ```
+
+---
+
+## 🟡 9. Higgsfield MCP — olhar, não contratar
+
+⚠️ **É pago por crédito**, então isto é "ver se vale", não "ligar".
+
+**O que existe:** o MCP foi registrado no projeto em **06/08/2026** e **nunca
+foi autenticado**. Está parado há mais de um ano.
+
+⭐ **O buraco que ele fecharia:** o garimpo acha o produto, mas **não temos
+vídeo DO produto**. Hoje o achadinho entra no Telegram e na página como texto
+e foto; os clipes são cortes de vídeo de terceiros. O Achadinho Make não tem
+imagem do sérum que recomenda.
+
+O fluxo está DEMONSTRADO no acervo dos Maestros (vídeo de 19/05/2026): foto +
+descrição do produto → vídeo UGC de 15s em 9x16 → publicar.
+
+⚠️ **Três coisas antes de contratar:**
+1. Não sei se o MCP ainda funciona — precisa de sessão nova para autenticar
+2. Custo **por vídeo**, diferente do corte, que é grátis
+3. Vídeo de IA com produto real **exige rótulo** — ver o item 0

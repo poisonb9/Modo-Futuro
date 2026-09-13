@@ -178,11 +178,38 @@ def guardar_preco(p: dict, quando: str | None = None,
     PRECOS.parent.mkdir(parents=True, exist_ok=True)
     linha = {"id": pid, "preco": preco, "loja": p.get("shop_name", ""),
              "quando": quando or f"{date.today():%Y-%m-%d}"}
+    # ⚠️ O NOME SO' NA PRIMEIRA VEZ, e ele TEM de estar la'. Ate' 13/09/2026 a
+    # serie guardava id, preco, loja e data — e nenhuma forma de saber O QUE
+    # era o produto. 698 produtos viraram numeros orfaos: o Bryan perguntou
+    # "temos medicao de PS5?" e nao havia como responder.
+    #
+    # ⭐ Repetir o nome em cada ponto seria desfazer a economia que acabou de
+    # entrar. Na primeira linha basta: o `id` liga o resto da serie a ela.
+    if ultimos is None or pid not in ultimos:
+        linha["nome"] = (p.get("product_title") or "")[:90]
+        linha["cat"] = p.get("second_level_category_name", "")
     with PRECOS.open("a", encoding="utf-8") as f:
         f.write(json.dumps(linha, ensure_ascii=False) + "\n")
     if ultimos is not None:
         ultimos[pid] = preco
     return True
+
+
+def nomes() -> dict[int, str]:
+    """product_id -> nome, lido da primeira linha de cada serie."""
+    n: dict[int, str] = {}
+    if not PRECOS.exists():
+        return n
+    for linha in PRECOS.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            d = json.loads(linha)
+        except ValueError:
+            continue
+        if d.get("nome") and d.get("id") and d["id"] not in n:
+            n[d["id"]] = d["nome"]
+    return n
 
 
 def ultimo_preco() -> dict[int, float]:
@@ -369,6 +396,71 @@ def varrer(por_termo: int = 20) -> tuple[int, int]:
     return vistos, gravados
 
 
+# ⚠️ A VIGIA E' OUTRA COISA DA VARREDURA, e confundir as duas esvazia as duas.
+#
+#   varredura  larga e anonima — guarda preco de MUITO produto, pra ter serie
+#   vigia      curta e nominal — acompanha PRODUTOS ESPECIFICOS todo dia
+#
+# ⭐ PEDIDO DO BRYAN EM 13/09/2026: "uma lista extremamente seleta pra
+# acompanharmos". O caso que ele deu foi PS5 — que NAO e' de nenhum canal
+# nosso, e e' justamente esse o ponto: o `/trends/MLB` do Mercado Livre
+# mostrou "controle ps5" entre o que o Brasil procura HOJE. Demanda existe
+# fora dos nossos nichos, e acompanhar preco dela custa quase nada.
+#
+# ⚠️ SELETA QUER DIZER CURTA. Se esta lista crescer pra cinquenta itens ela
+# vira varredura com outro nome, e perde o sentido: o valor dela e' poder
+# olhar a serie de CADA UM e entender a historia.
+VIGIA = [
+    "controle ps5",
+    "controle xbox",
+    "fone bluetooth tws",
+    "smartwatch amoled",
+    "power bank 20000mah",
+    "aspirador portatil",
+    "air fryer acessorio",
+    "projetor portatil",
+    "webcam full hd",
+    "ssd nvme",
+]
+
+
+def vigiar(por_termo: int = 8) -> list[dict]:
+    """Acompanha os itens da VIGIA e devolve o que MUDOU de preco.
+
+    ⚠️ Devolve so' as mudancas, nao a lista inteira. Uma vigia que imprime
+    tudo todo dia vira ruido, e ruido diario ninguem le'.
+    """
+    ultimos = ultimo_preco()
+    mudancas = []
+    for termo in VIGIA:
+        try:
+            r = aliexpress.chamar(
+                "aliexpress.affiliate.product.query", keywords=termo,
+                page_size=str(por_termo), target_currency="BRL",
+                target_language="PT", ship_to_country="BR",
+                tracking_id="default", sort="LAST_VOLUME_DESC")
+            res = r.get("aliexpress_affiliate_product_query_response", {}) \
+                   .get("resp_result", {})
+            if str(res.get("resp_code")) != "200":
+                continue
+            for p in (res.get("result", {}).get("products", {})
+                         .get("product", []) or []):
+                antes = ultimos.get(p.get("product_id"))
+                if guardar_preco(p, ultimos=ultimos) and antes is not None:
+                    agora = _num(p.get("target_sale_price"))
+                    mudancas.append({
+                        "termo": termo,
+                        "nome": (p.get("product_title") or "")[:70],
+                        "de": antes, "para": agora,
+                        "var": round((agora - antes) / antes * 100, 1),
+                    })
+        except Exception as e:
+            print(f"  [!] vigia {termo!r}: {type(e).__name__}")
+    # maior QUEDA primeiro — subida tambem importa, mas nao e' pauta
+    mudancas.sort(key=lambda m: m["var"])
+    return mudancas
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="o garimpo")
@@ -378,7 +470,15 @@ def main() -> None:
                    help="nao grava o historico de preco")
     a.add_argument("--varrer", action="store_true",
                    help="so' alimenta o historico, nao publica")
+    a.add_argument("--vigiar", action="store_true",
+                   help="acompanha a lista VIGIA e mostra o que mudou")
     o = a.parse_args()
+    if o.vigiar:
+        for m in vigiar():
+            seta = "caiu" if m["var"] < 0 else "subiu"
+            print(f"  {seta} {abs(m['var']):5.1f}%  "
+                  f"R$ {m['de']:.2f} -> R$ {m['para']:.2f}  {m['nome']}")
+        return
     if o.varrer:
         v, g = varrer()
         print(f"varredura: {v} produtos vistos, {g} precos novos")

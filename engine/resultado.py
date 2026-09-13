@@ -72,6 +72,12 @@ def anotar_publicado(produto: dict, canal: str, onde: str) -> None:
         # pra perguntar depois "desconto de quanto move o clique?".
         "queda": produto.get("_queda", 0),
         "vendas": produto.get("_vendas", 0),
+        # ⭐ O GANHO PREVISTO NO MOMENTO DA PUBLICACAO. Sem ele nao da' pra
+        # perguntar depois "o que a gente ACHOU que ia render bateu com o que
+        # rendeu?" — e essa e' a pergunta que transforma a escolha de produto
+        # de gosto em metodo.
+        "ganho_previsto": produto.get("_ganho", 0),
+        "comissao": produto.get("_comissao", 0),
         "fonte": produto.get("fonte", "aliexpress"),
         "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }

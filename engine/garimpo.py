@@ -322,6 +322,34 @@ def para_produto(p: dict, queda: float) -> dict:
     }
 
 
+def ganho_por_venda(preco: float, comissao_pct: float) -> float:
+    """Quanto entra no nosso bolso por unidade vendida.
+
+    ⚠️ ESTE NUMERO NAO EXISTIA NO MOTOR ATE' 13/09/2026, e e' o que o Bryan
+    pediu: "temos que lucrar muito". O garimpo ordenava por QUEDA e por
+    VOLUME — nunca por dinheiro.
+
+    ⭐ A conta que faltava: pincel a R$ 12,71 com 7% da' R$ 0,89 por venda;
+    Cicaplast a R$ 38,66 com 16% da' R$ 6,19. SETE VEZES pelo mesmo esforco de
+    video.
+    """
+    return round(preco * comissao_pct / 100, 2)
+
+
+def potencial(p: dict) -> dict:
+    """Acrescenta a conta de dinheiro a um produto ja' montado.
+
+    ⚠️ `_potencial` E' ORDEM DE GRANDEZA, NAO PREVISAO. Ele multiplica o ganho
+    pelo volume HISTORICO do produto — que e' o que o mercado inteiro comprou,
+    nao o que NOS vamos vender. Serve pra comparar dois produtos entre si;
+    nao serve pra prometer faturamento.
+    """
+    preco = _num(str(p.get("preco", "")).replace("R$", "").replace(",", "."))
+    com = float(p.get("_comissao") or 0)
+    g = ganho_por_venda(preco, com)
+    return dict(p, _ganho=g, _potencial=round(g * int(p.get("_vendas") or 0)))
+
+
 def garimpar(canal: str, quantos: int = 5,
              guardar: bool = True) -> tuple[list[dict], dict[str, int]]:
     """O garimpo de um canal. Devolve (escolhidos, por que os outros cairam)."""
@@ -350,10 +378,19 @@ def garimpar(canal: str, quantos: int = 5,
         queda, _ = desconto_honesto(p, h)
         saida.append(para_produto(p, queda))
 
-    # ⭐ ORDEM: queda de preco primeiro, depois VENDAS. Nota nao entra no
-    # criterio de ordenacao porque ja' foi corte — e nota alta com 3 vendas
-    # nao quer dizer nada.
-    saida.sort(key=lambda x: (x["_queda"], x["_vendas"]), reverse=True)
+    saida = [potencial(x) for x in saida]
+    # ⭐ ORDEM: queda de preco primeiro, e DINHEIRO em seguida.
+    #
+    # ⚠️ Ate' 13/09/2026 o desempate era por VOLUME, e volume nao paga conta:
+    # o produto mais vendido pode ser o que menos rende. Agora desempata pelo
+    # ganho por venda — mesmo esforco de video, retorno diferente.
+    #
+    # ⚠️ E O DINHEIRO NAO ASSUME O PRIMEIRO LUGAR, de proposito. Ordenar so'
+    # por ganho empurraria pro item caro, que converte pior — e conversao nos
+    # ainda NAO MEDIMOS. Quando o `engine/resultado.py` tiver venda de
+    # verdade, esta ordem vira pergunta respondida em vez de escolha.
+    saida.sort(key=lambda x: (x["_queda"], x["_ganho"], x["_vendas"]),
+               reverse=True)
     escolhidos = saida[:quantos]
     # ⚠️ ANOTA O QUE FOI ESCOLHIDO, e nao o que foi visto. Sem este registro a
     # serie de preco e os cliques do Supabase nunca se encontram — foi o
@@ -709,6 +746,12 @@ def main() -> None:
         print(f"    {x['preco']} · {x['loja']} · {x['_vendas']} vendidos · "
               f"nota {x['_nota']:.0f}% · comissao {x['_comissao']:.1f}%"
               + (f" · CAIU {x['_queda']:.0f}%" if x["_queda"] else ""))
+        # ⭐ O DINHEIRO SAI NA MESMA LINHA DE LEITURA. Numero que nao aparece
+        # nao e' considerado — e este e' o que o Bryan pediu pra nao perder
+        # de vista.
+        print(f"    ganho por venda: R$ {x.get('_ganho', 0):.2f}"
+              f"  ·  potencial (ganho x volume): R$ {x.get('_potencial', 0):,}"
+              .replace(",", "."))
 
 
 if __name__ == "__main__":

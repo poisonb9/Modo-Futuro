@@ -192,5 +192,37 @@ checar(4 not in [x["id"] for x in garimpo.escalada()],
 checar(4 in [c["id"] for c in garimpo.campeoes()],
        "mas ja' conta como campeao (nivel precisa de um ponto so')")
 
+print("")
+print("17. ⭐ O DINHEIRO ENTRA NA CONTA — e nao e' o volume que paga")
+# ⭐ Pedido do Bryan em 13/09: "temos que lucrar muito". Ate' entao o garimpo
+# ordenava por queda e VOLUME, e volume nao paga conta: o mais vendido pode
+# ser o que menos rende. Mesmo esforco de video, retorno diferente.
+checar(abs(garimpo.ganho_por_venda(38.66, 16.0) - 6.19) < 0.01,
+       "Cicaplast 16%: R$ 6,19 por venda")
+checar(abs(garimpo.ganho_por_venda(12.71, 7.0) - 0.89) < 0.01,
+       "pincel 7%: R$ 0,89 por venda — 7x menos pelo mesmo video")
+p = garimpo.potencial({"preco": "R$ 38,66", "_comissao": 16.0, "_vendas": 100000})
+checar(p["_ganho"] == 6.19 and p["_potencial"] == 619000,
+       "potencial = ganho x volume historico")
+
+print("")
+print("18. NEGATIVO — com comissao zero, o ganho e' zero (nao 'desconhecido')")
+# ⚠️ Produto sem comissao nao rende nada. Tratar como desconhecido faria ele
+# competir de igual pra igual com quem paga.
+z = garimpo.potencial({"preco": "R$ 99,00", "_comissao": 0, "_vendas": 50000})
+checar(z["_ganho"] == 0 and z["_potencial"] == 0, "sem comissao -> zero")
+
+print("")
+print("19. ⚠️ O DINHEIRO NAO E' O PRIMEIRO CRITERIO, e isso e' escolha")
+fonte = Path("engine/garimpo.py").read_text(encoding="utf-8")
+# ⚠️ Normaliza o espaco: o comentario quebra em duas linhas, e procurar a
+# frase inteira numa linha so' reprovaria um codigo CERTO. Guarda que casa
+# com a formatacao em vez do sentido e' guarda fragil.
+import re as _re  # noqa: E402
+plano = _re.sub(r"[\s#]+", " ", fonte)
+checar("conversao nos ainda NAO MEDIMOS" in plano,
+       "o codigo admite que a ordem e' escolha, nao medicao")
+fonte = Path("engine/garimpo.py").read_text(encoding="utf-8")
+
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
 sys.exit(1 if falhas else 0)

@@ -34,6 +34,10 @@ jobs:
         env:
           ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
           ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+          MELI_CLIENT_ID:        ${{ secrets.MELI_CLIENT_ID }}
+          MELI_CLIENT_SECRET:    ${{ secrets.MELI_CLIENT_SECRET }}
+          MELI_MATT_WORD:        ${{ secrets.MELI_MATT_WORD }}
+          MELI_MATT_TOOL:        ${{ secrets.MELI_MATT_TOOL }}
         run: |
           for c in truque.importado cozinha.importada achadinhos.instantaneos fatura.chora atefalhar; do
             echo "===== $c"

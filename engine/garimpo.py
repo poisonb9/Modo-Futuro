@@ -285,3 +285,39 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# ⚠️ O MERCADO LIVRE ENTRA COMO SEGUNDA FONTE, e nao como substituto. Os dois
+# fazem coisas diferentes, e misturar sem dizer isso faria o canal de
+# achadinho postar papel higienico:
+#
+#   AliExpress  o produto que vira video — barato, curioso, 30 mil vendidos
+#   Mercado Livre  ticket maior, comissao 16% (contra 7%) e entrega em DOIS
+#                  dias, nao tres semanas
+#
+# ⚠️ E O COOKIE DO ML E' DE 24 HORAS. Nao da' pra consertar aqui: se conserta
+# na chamada do clipe, que precisa gerar clique no MESMO dia.
+
+def do_mercado_livre(canal: str, quantos: int = 5) -> list[dict]:
+    """Os mais vendidos do ML deste canal, ja' filtrados pela faixa de preco.
+
+    ⚠️ REUSA O `serve()`? NAO — e de proposito. O ML nao devolve nota,
+    volume nem comissao no mesmo formato, e forcar o filtro do AliExpress aqui
+    reprovaria tudo por campo ausente. O corte que faz sentido nos dois e' a
+    FAIXA DE PRECO, que e' promessa do canal; o resto e' proprio de cada fonte.
+    """
+    from . import mercadolivre as ml
+    perfil = CANAIS.get(canal)
+    if not perfil:
+        return []
+    saida = []
+    for cat, _nome in ml.CATEGORIAS.get(canal, []):
+        for p in ml.mais_vendidos(cat, 12):
+            preco = _num(p["preco"].replace("R$", "").replace(",", ".").strip())
+            if not (perfil["min"] <= preco <= perfil["max"]):
+                continue
+            saida.append(dict(p, fonte="mercadolivre",
+                              preco_em=f"{date.today():%Y-%m-%d}",
+                              categoria=_nome, _vendas=0, _nota=0.0,
+                              _comissao=16.0, _queda=0.0))
+    return saida[:quantos]

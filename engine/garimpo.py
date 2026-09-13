@@ -36,35 +36,43 @@ from . import rende_video
 RAIZ = Path(__file__).resolve().parent.parent
 PRECOS = RAIZ / "estado" / "precos_vistos.jsonl"
 
-# canal interno -> o que procurar e em que faixa.
+# ⚠️ TERMO CURTO E GENERICO TRAZ O CATALOGO INTEIRO, e o AliExpress e' global:
+# "cortador" devolveu tesoura de poda e alicate de unha pro canal de COZINHA,
+# e "achadinhos casa" devolveu VAZIO (e' gorduroso de portugues brasileiro,
+# nao existe no catalogo deles).
 #
-# ⚠️ A FAIXA DE PRECO E' PARTE DA IDENTIDADE DO CANAL, nao um filtro tecnico.
-# O @achadinhos.instantaneos promete "de R$ 10 a R$ 50" na bio; produto de
-# R$ 300 ali quebra a promessa mesmo sendo um bom produto.
+# ⭐ A REGRA QUE SOBROU DA PRIMEIRA RODADA: termo com DUAS PALAVRAS, sendo uma
+# o objeto e a outra o contexto. "cortador" e' ambiguo; "cortador legumes" nao.
+# Termo de uma palavra so' quando ele ja' e' o objeto inteiro ("espatula").
+#
+# ⚠️ E NAO USAR GIRIA NOSSA. "achadinho", "garimpo", "promo" sao palavras da
+# nossa operacao, nao do catalogo. O vendedor chines nao escreve isso.
 CANAIS = {
     "truque.importado": {
-        "termos": ["maquiagem", "pincel maquiagem", "skincare", "batom",
-                   "organizador maquiagem"],
+        "termos": ["pincel maquiagem", "esponja maquiagem", "batom liquido",
+                   "serum facial", "organizador maquiagem", "cilios postico"],
         "min": 10.0, "max": 120.0,
     },
     "cozinha.importada": {
-        "termos": ["utensilio cozinha", "organizador cozinha", "cortador",
-                   "forma silicone", "descascador"],
+        # ⚠️ "cortador" sozinho trouxe tesoura de poda e alicate de unha.
+        "termos": ["cortador legumes", "organizador geladeira", "espatula",
+                   "forma silicone", "descascador legumes", "pote hermetico"],
         "min": 10.0, "max": 150.0,
     },
     "achadinhos.instantaneos": {
-        "termos": ["achadinhos casa", "organizador", "gadget util",
-                   "acessorio celular"],
+        # ⚠️ "achadinhos casa" devolveu VAZIO — e' giria nossa.
+        "termos": ["organizador gaveta", "suporte celular", "luminaria led",
+                   "organizador cabo", "gancho adesivo"],
         "min": 10.0, "max": 50.0,
     },
     "fatura.chora": {
-        "termos": ["eletronico promocao", "fone bluetooth", "smartwatch",
-                   "carregador"],
+        "termos": ["fone bluetooth", "smartwatch", "carregador rapido",
+                   "power bank", "caixa som bluetooth"],
         "min": 20.0, "max": 300.0,
     },
     "atefalhar": {
-        "termos": ["acessorio academia", "luva treino", "faixa elastica",
-                   "coqueteleira", "strap treino"],
+        "termos": ["luva academia", "faixa elastica treino", "coqueteleira",
+                   "strap treino", "corda pular"],
         "min": 15.0, "max": 200.0,
     },
 }

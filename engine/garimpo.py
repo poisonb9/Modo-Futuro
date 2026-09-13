@@ -31,6 +31,7 @@ from datetime import date
 from pathlib import Path
 
 from . import aliexpress
+from . import rende_video
 
 RAIZ = Path(__file__).resolve().parent.parent
 PRECOS = RAIZ / "estado" / "precos_vistos.jsonl"
@@ -315,6 +316,15 @@ def do_mercado_livre(canal: str, quantos: int = 5) -> list[dict]:
         for p in ml.mais_vendidos(cat, 12):
             preco = _num(p["preco"].replace("R$", "").replace(",", ".").strip())
             if not (perfil["min"] <= preco <= perfil["max"]):
+                continue
+            # ⚠️ O CORTE EDITORIAL SO' VALE PRO MERCADO LIVRE, e de
+            # proposito: no AliExpress vender muito e' sinal de qualidade
+            # (alguem descobriu e presta); no ML e' sinal de commodity (todo
+            # mundo ja' compra no automatico). O mesmo numero significa o
+            # contrario em cada fonte.
+            ok, porque = rende_video.rende(p["nome"])
+            if not ok:
+                print(f"  [editorial] fora: {p['nome'][:40]}… — {porque}")
                 continue
             saida.append(dict(p, fonte="mercadolivre",
                               preco_em=f"{date.today():%Y-%m-%d}",

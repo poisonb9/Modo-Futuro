@@ -15,21 +15,25 @@ def checar(ok, oq):
     if not ok:
         falhas.append(oq)
 
+print("1. ⭐ LIGADO EM TODOS — decisao do Bryan em 13/09/2026")
+# ⚠️ Nasceu vazio de proposito e foi o Bryan quem mandou ligar. Eu
+# desaconselhei tres vezes; o custo (nao ha' grupo de controle pra esta
+# mudanca) esta' escrito no cabecalho do modulo, nao so' na conversa.
+for c in ("modofuturo", "atefalhar", "truque.importado",
+          "semanestesia.pod", "achadinhos.instantaneos",
+          "cozinha.importada", "fatura.chora"):
+    checar(cascata.ligado(c), f"{c}: ligado")
+checar(not cascata.ligado("canal_que_nao_existe"),
+       "canal inexistente: nao (resolve pelo registro, nao pelo texto)")
+checar(cascata.ligado("@atefalhar"), "e o @ tambem resolve")
 
-print("1. ⭐ NASCE DESLIGADA — producao nao muda sem decisao do Bryan")
-checar(cascata.CANAIS_COM_CASCATA == set(), "o conjunto vem vazio")
-for c in ("atefalhar", "modofuturo", "truque.importado"):
-    checar(not cascata.ligado(c), f"{c}: desligado")
-
-print("\n2. ligar resolve pelo REGISTRO, nao pelo texto cru")
-# ⚠️ O mesmo canal chega escrito de tres jeitos. Comparar texto deixaria a
-# cascata ligada num e desligada noutro sem ninguem perceber.
-cascata.CANAIS_COM_CASCATA.add("atefalhar")
-for jeito in ("atefalhar", "@atefalhar"):
-    checar(cascata.ligado(jeito), f"{jeito!r} -> ligado")
-checar(not cascata.ligado("modofuturo"), "e o modofuturo segue desligado")
-checar(not cascata.ligado("canal_que_nao_existe"), "canal inexistente: nao")
-cascata.CANAIS_COM_CASCATA.clear()
+print("")
+print("2. ⭐ CANAL LIGADO SEM SELO E' PULADO, nao quebra nem usa o de outro")
+# ⚠️ O cozinha.importada esta' na lista e ainda nao tem arte. Ele tem de
+# entrar SOZINHO no dia em que o selo chegar — sem ninguem lembrar de
+# editar a lista, que e' onde esse tipo de coisa se perde.
+checar(cascata.selos_do_canal("cozinha.importada") is None,
+       "cozinha.importada: sem selo hoje")
 
 print("\n3. ⭐ NEGATIVO — sem o selo do canal, NAO usa o de outro")
 # ⚠️ O @ mora DENTRO da imagem. Cair no selo de outro canal mandaria a
@@ -73,10 +77,10 @@ for (x, y, d), h, w in zip(pos, lh, lw):
 
 print("")
 print("5. ⭐ ONDE FICA e DE ONDE VEM sao separados")
-for (x, y, d), (lado, _fr, entra) in zip(pos, cascata.ZONAS):
+for (x, y, d), (lado, _fr, entra, trav) in zip(pos, cascata.ZONAS):
     comeca = x + d
     checar(d != 0, f"{lado}/{entra}: tem deslocamento")
-    if entra != lado:
+    if entra != lado or trav:
         # ⚠️ Entrando pelo lado OPOSTO, tem de comecar FORA da tela. Com o
         # deslocamento fixo de 320 o selo brotava no meio do video.
         fora = comeca >= LARG if entra == "dir" else comeca + lw[0] <= 0
@@ -96,7 +100,7 @@ checar(abs((entradas[1] - entradas[0]) - cascata.ESCALONA_S) < 1e-6,
 print("\n7. NEGATIVO — as virgulas NAO levam barra invertida")
 # ⚠️ As expressoes vao entre aspas simples no overlay=x='...'. Barra invertida
 # em f-string gerada por heredoc foi o defeito que mais se repetiu hoje.
-checar("\," not in f, "nenhuma virgula escapada na cadeia")
+checar(chr(92) + "," not in f, "nenhuma virgula escapada na cadeia")
 checar("min(1,max(0," in f, "as expressoes estao inteiras")
 
 print("\n8. NEGATIVO — a animacao e' de POSICAO, nao de escala")

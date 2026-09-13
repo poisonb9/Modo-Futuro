@@ -115,10 +115,20 @@ UI_BASE_FRAC = 0.86
 # ⚠️ Quando o lado de entrada e' o OPOSTO de onde fica, o deslocamento nao e'
 # o `DESLOC_PX`: e' o quanto for preciso pra comecar FORA da tela. Usar 320
 # faria o selo brotar no meio do video em vez de entrar.
+# (lado onde FICA, fracao da altura, lado por onde ENTRA, comeca fora da tela?)
+#
+# ⚠️ TRES COISAS SEPARADAS, e eu vinha amarrando duas de cada vez. Primeiro
+# "onde fica" e "de onde vem" eram o mesmo campo; o Bryan pediu o SIGA
+# entrando pela direita e ficando a' esquerda e eu separei. Ai' ele pediu o
+# SIGA PARADO na direita — e o que sobrou amarrado era o TAMANHO da entrada:
+# entrar pelo mesmo lado dava um passo curto, e ele queria a chegada longa.
+#
+# ⭐ `travessia=True` faz o selo comecar FORA da tela, independente do lado.
+# Sem isso ele brota no meio do video.
 ZONAS = (
-    ("dir", 0.105, "dir"),
-    ("esq", 0.459, "esq"),
-    ("esq", 0.735, "dir"),
+    ("dir", 0.105, "dir", False),
+    ("esq", 0.459, "esq", False),
+    ("dir", 0.735, "dir", True),
 )
 
 
@@ -139,7 +149,7 @@ def colocar(larg: int, alt: int, larguras: list[int],
     topo_leg, base_leg = legendas.faixa_ocupada(alt)
     margem = int(larg * MARGEM_FRAC)
     saida = []
-    for (lado, frac, entra), lw, lh in zip(ZONAS, larguras, alturas):
+    for (lado, frac, entra, trav), lw, lh in zip(ZONAS, larguras, alturas):
         y = int(alt * frac)
         if not (y + lh < topo_leg or y > base_leg):
             print(f"      [!] a zona {frac} bate na legenda "
@@ -165,10 +175,12 @@ def colocar(larg: int, alt: int, larguras: list[int],
         # ⚠️ O DESLOCAMENTO E' CALCULADO, nao fixo. Se o selo entra pelo lado
         # oposto ao que fica, ele tem de comecar FORA da tela — senao brota no
         # meio do video. Do mesmo lado, um passo curto basta e fica sutil.
+        # ⚠️ Fora da tela quando atravessa OU quando entra pelo lado oposto;
+        # passo curto so' no caso sutil (mesmo lado, sem travessia).
         if entra == "dir":
-            desl = (larg - x) if lado == "esq" else DESLOC_PX
+            desl = (larg - x) if (trav or lado == "esq") else DESLOC_PX
         else:
-            desl = -(x + lw) if lado == "dir" else -DESLOC_PX
+            desl = -(x + lw) if (trav or lado == "dir") else -DESLOC_PX
         saida.append((x, y, desl))
     return saida
 
@@ -328,7 +340,34 @@ if __name__ == "__main__":
 #
 # ⚠️ E o grupo de controle ja' esta' menor: o @atefalhar saiu dele em 13/09
 # quando ganhou chamada. Sobrou o @modofuturo — NAO ligue nele.
-CANAIS_COM_CASCATA: set[str] = set()
+# ⚠️ LIGADO EM TODOS, por decisao do Bryan em 13/09/2026: "esse e' o nosso
+# novo padrao, pode estabelecer em todos os canais".
+#
+# ⚠️ EU DESACONSELHEI TRES VEZES, e a decisao e' dele. O que se perde esta'
+# escrito aqui pra nao virar descoberta daqui a um mes:
+#
+#   NAO HA' GRUPO DE CONTROLE PRA ESTA MUDANCA. Com os sete ligados, quando o
+#   numero de seguidor ou de curtida mexer, nao vai dar pra separar o efeito
+#   da cascata do efeito de tudo o mais que mudou em 13/09 — chamada no fim do
+#   clipe, contra-capa nova, canal de Telegram. E' o mesmo desenho que em
+#   09/09 juntou punch-in e card de titulo e deixou a pergunta sem resposta.
+#
+#   O QUE AINDA DA' PRA FAZER, se um dia a duvida incomodar: desligar em dois
+#   canais por duas semanas. Comparacao depois e' pior que antes, mas existe.
+#
+# ⭐ O `cozinha.importada` esta' na lista e NAO vai receber nada ate' o selo
+# dele existir — o `selos_do_canal` devolve None e a cascata e' pulada. Assim
+# ele entra sozinho no dia em que a arte chegar, sem ninguem lembrar de editar
+# esta linha.
+CANAIS_COM_CASCATA: set[str] = {
+    "modofuturo",
+    "semanestesia.pod",
+    "atefalhar",
+    "achadinhos.instantaneos",
+    "truque.importado",
+    "cozinha.importada",
+    "fatura.chora",
+}
 
 
 def ligado(canal: str) -> bool:

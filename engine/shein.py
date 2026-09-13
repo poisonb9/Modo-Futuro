@@ -3,6 +3,30 @@
 
     python -m engine.shein --termo batom --quantos 8
 
+## 🚨 ESTE MODULO NAO RODA SOZINHO — E NAO E' DEFEITO A CONSERTAR
+
+⚠️ MEDIDO EM 13/09/2026, duas vezes (nuvem e maquina local): o Playwright
+leva CAPTCHA da Shein em QUALQUER lugar.
+
+    br.shein.com/risk/challenge?captcha_type=909
+
+A primeira leitura de 648 produtos, que deu certo, foi num navegador REAL
+dirigido em sessao — nao neste modulo. Eu cheguei a afirmar que o IP
+residencial passava; estava ERRADO, e a correcao esta' aqui pra ninguem
+repetir o teste achando que e' rede.
+
+⭐ **A Shein detecta navegador automatizado, nao IP.** Passar por isso e' uma
+corrida contra o antibot deles, que muda quando quiserem — e a cada mudanca o
+garimpo quebra e se descobre pela lista vazia. Contornar CAPTCHA esta' fora de
+questao, e nao pelo custo.
+
+**O QUE FAZER EM VEZ DISSO:** a Shein e' fonte de CAMPANHA, nao de rotina. Uma
+sessao puxa 20 produtos, o Bryan converte os codigos em bloco, e viram 20
+posts. O AliExpress e o Mercado Livre e' que rodam sozinhos todo dia.
+
+O codigo fica porque a leitura do cartao (`ler_cartao`) e' util e testada, e
+porque o dia em que a Shein afrouxar o antibot ele volta a servir.
+
 ## ⚠️ POR QUE NAVEGADOR, E NAO REQUISICAO HTTP
 
 Medido em 13/09/2026, nesta ordem:

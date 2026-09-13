@@ -82,5 +82,36 @@ checar(garimpo.serve(caro, "fatura.chora") is None, "R$120 serve no fatura")
 checar(garimpo.serve(caro, "achadinhos.instantaneos") is not None,
        "R$120 NAO serve no instantaneos (a bio promete ate' R$50)")
 
+
+print("")
+print("8. ⭐ SO' GRAVA QUANDO O PRECO MUDA")
+# ⚠️ MEDIDO em 13/09: de 156 produtos vistos duas vezes, so' 9 mudaram. 94%
+# das repeticoes eram lixo — e o arquivo e' COMMITADO todo dia.
+garimpo.PRECOS.write_text("", encoding="utf-8")
+u = {}
+P9 = dict(BOM, product_id=99, target_sale_price="50.00")
+checar(garimpo.guardar_preco(P9, "2026-09-13", u), "1a vez: grava (nao ha' antes)")
+checar(not garimpo.guardar_preco(P9, "2026-09-14", u), "mesmo preco: NAO grava")
+checar(garimpo.guardar_preco(dict(P9, target_sale_price="44.90"),
+                             "2026-09-15", u), "preco mudou: grava")
+checar(not garimpo.guardar_preco(dict(P9, target_sale_price="44.90"),
+                                 "2026-09-16", u), "voltou a repetir: NAO grava")
+n = len([x for x in garimpo.PRECOS.read_text(encoding="utf-8").splitlines() if x.strip()])
+checar(n == 2, f"quatro visitas viraram duas linhas ({n})")
+
+print("")
+print("9. ⭐ E A SERIE CONTINUA CORRETA — a economia nao pode custar o dado")
+# ⚠️ O desconto usa o MAIOR ja' visto; se a economia apagasse pontos, a queda
+# sumiria. Aqui: viu por 50, caiu pra 44,90 -> 10,2%.
+h = garimpo.historico()
+q, porque = garimpo.desconto_honesto(dict(P9, target_sale_price="44.90"), h)
+checar(abs(q - 10.2) < 0.2, f"queda de 50 para 44,90 = {q:.1f}%")
+checar("50" in porque, "e cita o preco que NOS vimos")
+
+print("")
+print("10. NEGATIVO — ultimo_preco e' o ULTIMO, nao o menor")
+# ⚠️ Confundir os dois faria a serie parar de gravar quedas sucessivas.
+u2 = garimpo.ultimo_preco()
+checar(abs(u2[99] - 44.90) < 0.01, f"ultimo = 44,90 (nao o menor nem o maior)")
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
 sys.exit(1 if falhas else 0)

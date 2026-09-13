@@ -43,6 +43,11 @@ jobs:
             echo "===== $c"
             python -X utf8 -m engine.garimpo --canal "$c" --quantos 5 || true
           done
+          # ⚠️ A VARREDURA VEM DEPOIS DOS CANAIS, e nunca antes: ela e'
+          # bonus (so' alimenta o historico de preco) e nao pode consumir
+          # cota de API que o garimpo de verdade precisa.
+          echo "===== varredura (so historico)"
+          python -X utf8 -m engine.garimpo --varrer || true
       - name: Guardar o historico de preco
         run: |
           git config user.name  "github-actions[bot]"

@@ -155,20 +155,56 @@ def serve(p: dict, canal: str) -> str | None:
     return None
 
 
-def guardar_preco(p: dict, quando: str | None = None) -> None:
-    """Anota o preco visto hoje. Append-only.
+def guardar_preco(p: dict, quando: str | None = None,
+                  ultimos: dict[int, float] | None = None) -> bool:
+    """Anota o preco SO' SE ELE MUDOU. Devolve se gravou.
 
-    ⚠️ JSONL E APPEND, nunca reescrever: o historico E' o ativo. Um arquivo
-    que se reescreve perde a serie no primeiro erro, e a serie so' se
-    reconstroi esperando os dias de novo.
+    ⭐ UMA SERIE DE PRECO E' DEFINIDA PELOS PONTOS ONDE ELA MUDA. Gravar
+    "R$ 20,71 hoje, R$ 20,71 amanha, R$ 20,71 depois" nao acrescenta nada e
+    incha o arquivo — que e' COMMITADO todo dia pelo workflow.
+
+    ⚠️ MEDIDO em 13/09/2026, com 856 linhas: 156 produtos foram vistos mais de
+    uma vez e **apenas 9 mudaram de preco**. 94% das repeticoes eram lixo.
+
+    ⚠️ E A PRIMEIRA VEZ SEMPRE GRAVA, mesmo sem mudanca — sem o ponto inicial
+    nao ha' contra o que comparar.
     """
+    pid = p.get("product_id")
+    preco = _num(p.get("target_sale_price"))
+    if not (pid and preco):
+        return False
+    if ultimos is not None and abs(ultimos.get(pid, -1) - preco) < 0.005:
+        return False
     PRECOS.parent.mkdir(parents=True, exist_ok=True)
-    linha = {"id": p.get("product_id"),
-             "preco": _num(p.get("target_sale_price")),
-             "loja": p.get("shop_name", ""),
+    linha = {"id": pid, "preco": preco, "loja": p.get("shop_name", ""),
              "quando": quando or f"{date.today():%Y-%m-%d}"}
     with PRECOS.open("a", encoding="utf-8") as f:
         f.write(json.dumps(linha, ensure_ascii=False) + "\n")
+    if ultimos is not None:
+        ultimos[pid] = preco
+    return True
+
+
+def ultimo_preco() -> dict[int, float]:
+    """product_id -> o ultimo preco gravado. Serve pra saber o que mudou.
+
+    ⚠️ E' o ULTIMO, nao o menor. O `desconto_honesto` usa o MAIOR ja' visto;
+    esta funcao responde outra pergunta — "mudou desde a ultima vez?" — e
+    confundir as duas faria a serie parar de gravar quedas sucessivas.
+    """
+    u: dict[int, float] = {}
+    if not PRECOS.exists():
+        return u
+    for linha in PRECOS.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            d = json.loads(linha)
+        except ValueError:
+            continue
+        if d.get("id") and d.get("preco"):
+            u[d["id"]] = float(d["preco"])
+    return u
 
 
 def historico() -> dict[int, list[float]]:
@@ -245,6 +281,9 @@ def garimpar(canal: str, quantos: int = 5,
              guardar: bool = True) -> tuple[list[dict], dict[str, int]]:
     """O garimpo de um canal. Devolve (escolhidos, por que os outros cairam)."""
     crus = buscar(canal)
+    # ⚠️ LE' O ULTIMO PRECO UMA VEZ SO'. Ler por produto reabriria o arquivo
+    # centenas de vezes por rodada.
+    ultimos = ultimo_preco() if guardar else None
     motivos: dict[str, int] = {}
     passaram = []
     for p in crus:
@@ -252,7 +291,7 @@ def garimpar(canal: str, quantos: int = 5,
         # sobre o PRODUTO, nao sobre a nossa decisao de hoje — e um item que
         # nao serve hoje pode servir quando o preco cair.
         if guardar:
-            guardar_preco(p)
+            guardar_preco(p, ultimos=ultimos)
         motivo = serve(p, canal)
         if motivo:
             chave = motivo.split(" (")[0]
@@ -273,14 +312,77 @@ def garimpar(canal: str, quantos: int = 5,
     return saida[:quantos], motivos
 
 
+# ⚠️ A VARREDURA EXISTE SO' PRA ALIMENTAR O HISTORICO DE PRECO. Nenhum destes
+# termos vira post: sao categorias largas, escolhidas pra cobrir o que o
+# publico brasileiro compra, e nao pra render video.
+#
+# ⭐ POR QUE VALE A PENA: historico de preco NAO SE COLETA DEPOIS. Cada dia
+# que a gente nao guarda e' um dia perdido pra sempre. Um produto que hoje nao
+# serve a nenhum canal pode servir em novembro — e ai' a serie dele ja' vai
+# existir, em vez de comecar do zero.
+#
+# ⚠️ E FICOU BARATO SO' DEPOIS do `guardar_preco` passar a gravar apenas
+# mudanca: varrer 300 produtos por dia gerando 300 linhas por dia era inchar
+# o repositorio (o arquivo e' COMMITADO toda rodada). Gravando so' os pontos
+# de mudanca, a varredura custa quase nada.
+VARREDURA = [
+    "cozinha utensilio", "organizador casa", "banheiro acessorio",
+    "ferramenta manual", "pet acessorio", "bebe acessorio",
+    "carro acessorio", "jardim ferramenta", "escritorio papelaria",
+    "maquiagem kit", "cabelo acessorio", "unha decoracao",
+    "academia acessorio", "camping acessorio", "bicicleta acessorio",
+    "cabo usb", "suporte notebook", "teclado mouse",
+    "decoracao parede", "iluminacao led", "cama mesa banho",
+]
+
+
+def varrer(por_termo: int = 20) -> tuple[int, int]:
+    """Passa pelos termos largos so' pra guardar preco. (vistos, gravados).
+
+    ⚠️ NAO FILTRA E NAO PUBLICA NADA. Se um dia isto comecar a devolver
+    produto pro post, e' porque alguem confundiu as duas coisas — a varredura
+    e' memoria, o garimpo e' curadoria.
+    """
+    ultimos = ultimo_preco()
+    vistos = gravados = 0
+    for termo in VARREDURA:
+        try:
+            r = aliexpress.chamar(
+                "aliexpress.affiliate.product.query", keywords=termo,
+                page_size=str(por_termo), target_currency="BRL",
+                target_language="PT", ship_to_country="BR",
+                tracking_id="default", sort="LAST_VOLUME_DESC")
+            res = r.get("aliexpress_affiliate_product_query_response", {}) \
+                   .get("resp_result", {})
+            if str(res.get("resp_code")) != "200":
+                print(f"  [!] varredura {termo!r}: {res.get('resp_msg')}")
+                continue
+            for p in (res.get("result", {}).get("products", {})
+                         .get("product", []) or []):
+                vistos += 1
+                if guardar_preco(p, ultimos=ultimos):
+                    gravados += 1
+        except Exception as e:
+            # ⚠️ FALHA ABERTA: a varredura e' bonus. Derrubar a rodada do
+            # garimpo por causa dela seria perder o que importa pelo que sobra.
+            print(f"  [!] varredura {termo!r} estourou: {type(e).__name__}")
+    return vistos, gravados
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="o garimpo")
-    a.add_argument("--canal", required=True, choices=sorted(CANAIS))
+    a.add_argument("--canal", choices=sorted(CANAIS))
     a.add_argument("--quantos", type=int, default=5)
     a.add_argument("--ensaio", action="store_true",
                    help="nao grava o historico de preco")
+    a.add_argument("--varrer", action="store_true",
+                   help="so' alimenta o historico, nao publica")
     o = a.parse_args()
+    if o.varrer:
+        v, g = varrer()
+        print(f"varredura: {v} produtos vistos, {g} precos novos")
+        return
     achados, motivos = garimpar(o.canal, o.quantos, guardar=not o.ensaio)
     print(f"\nrecusados: " + ", ".join(f"{k} x{v}" for k, v in
                                        sorted(motivos.items(), key=lambda i: -i[1])))

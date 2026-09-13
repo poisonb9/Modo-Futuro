@@ -116,7 +116,19 @@ def buscar(termo: str, quantos: int = 10) -> list[dict]:
             # ⚠️ ESPERA O CARTAO, nao um tempo fixo. `sleep(5)` passa em rede
             # boa e falha calado em rede ruim — e falhar calado aqui devolve
             # lista vazia, que parece "nao achou nada".
-            pag.wait_for_selector("a[href*='-p-']", timeout=45000)
+            try:
+                pag.wait_for_selector("a[href*='-p-']", timeout=45000)
+            except Exception:
+                # ⚠️ NAO ENGOLIR O TIMEOUT. "Nao achou produto" e "fui
+                # barrado" sao coisas diferentes e a lista vazia parece a
+                # mesma coisa nas duas. Sem isto, uma tarde se perde achando
+                # que o seletor mudou quando o que houve foi bloqueio.
+                print(f"  [!] nao apareceu produto em {pag.url}")
+                print(f"      titulo: {pag.title()!r}")
+                txt = (pag.inner_text("body") or "")[:400].replace("
+", " | ")
+                print(f"      corpo: {txt}")
+                raise
             pag.wait_for_timeout(2500)
             cartoes = pag.query_selector_all(
                 "section [class*=product-card], div[class*=product-card]")

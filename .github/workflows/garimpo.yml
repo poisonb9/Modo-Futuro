@@ -39,10 +39,16 @@ jobs:
           MELI_MATT_WORD:        ${{ secrets.MELI_MATT_WORD }}
           MELI_MATT_TOOL:        ${{ secrets.MELI_MATT_TOOL }}
         run: |
+          # ⚠️ EM PARALELO, e nao em fila. Ate' 13/09/2026 os cinco canais
+          # rodavam em sequencia: se um travava numa chamada lenta, os
+          # outros quatro esperavam — e o Actions cobra minuto.
+          #
+          # ⚠️ `wait` no fim e' obrigatorio: sem ele o passo termina antes
+          # dos filhos e o commit do estado sai pela metade, sem erro.
           for c in truque.importado cozinha.importada achadinhos.instantaneos fatura.chora atefalhar; do
-            echo "===== $c"
-            python -X utf8 -m engine.garimpo --canal "$c" --quantos 5 || true
+            ( echo "===== $c"; python -X utf8 -m engine.garimpo --canal "$c" --quantos 5 2>&1 ) &
           done
+          wait
           # ⚠️ A VARREDURA VEM DEPOIS DOS CANAIS, e nunca antes: ela e'
           # bonus (so' alimenta o historico de preco) e nao pode consumir
           # cota de API que o garimpo de verdade precisa.

@@ -787,17 +787,18 @@ def do_mercado_livre(canal: str, quantos: int = 5) -> list[dict]:
             preco = _num(p["preco"].replace("R$", "").replace(",", ".").strip())
             if not (perfil["min"] <= preco <= perfil["max"]):
                 continue
-            # ⚠️ O CORTE EDITORIAL SO' VALE PRO MERCADO LIVRE, e de
-            # proposito: no AliExpress vender muito e' sinal de qualidade
-            # (alguem descobriu e presta); no ML e' sinal de commodity (todo
-            # mundo ja' compra no automatico). O mesmo numero significa o
-            # contrario em cada fonte.
-            ok, porque = rende_video.rende(p["nome"])
-            if not ok:
-                print(f"  [editorial] fora: {p['nome'][:40]}… — {porque}")
-                continue
             saida.append(dict(p, fonte="mercadolivre",
                               preco_em=f"{date.today():%Y-%m-%d}",
                               categoria=_nome, _vendas=0, _nota=0.0,
                               _comissao=16.0, _queda=0.0))
-    return saida[:quantos]
+    # ⭐ O CORTE EDITORIAL VEM AQUI, sobre a lista INTEIRA e de uma vez so'.
+    # Dentro do laco ele gastaria uma chamada de modelo POR PRODUTO — 12
+    # onde 1 basta, e a cota gratis e' o recurso escasso.
+    #
+    # ⚠️ E so' no Mercado Livre: no AliExpress vender muito e' sinal de
+    # qualidade; aqui e' sinal de commodity. O mesmo numero significa o
+    # contrario em cada fonte.
+    fica, cai = rende_video.peneirar_com_ia(saida)
+    for nome, porque in cai:
+        print(f"  [editorial] fora: {nome[:40]}… — {porque}")
+    return fica[:quantos]

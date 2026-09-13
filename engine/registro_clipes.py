@@ -50,6 +50,23 @@ from pathlib import Path
 ARQUIVO = Path(__file__).resolve().parent.parent / "registro_clipes.json"
 ORIGENS = ("buffer", "mao", "print")
 
+# ⚠️ POSTAR O MESMO CLIPE NO TIKTOK E NO INSTAGRAM NAO E' DUPLICATA — sao
+# plataformas diferentes, e a pessoa que ve' num nao ve' no outro. Postar duas
+# vezes NA MESMA plataforma E' duplicata, e ela derrubou o alcance duas vezes
+# (02/08 e 25/08).
+#
+# ⭐ A DIFERENCA E' A PLATAFORMA, e ate' 13/09/2026 o registro nao tinha esse
+# campo: `ja_postado` devolvia True se houvesse QUALQUER postagem. Com o
+# Instagram entrando, isso bloquearia toda publicacao simultanea — e o
+# sintoma seria "o Instagram nunca posta", sem erro nenhum.
+PLATAFORMAS = ("tiktok", "instagram")
+
+# ⚠️ POSTAGEM ANTIGA NAO TEM O CAMPO, e isso NAO e' desconhecido: tudo que foi
+# publicado ate' 13/09/2026 foi no TikTok, porque nao havia outra plataforma
+# ligada. Tratar como "tiktok" e' leitura do historico, nao chute — e esta'
+# escrito aqui pra ninguem "consertar" isso depois achando que e' um buraco.
+PLATAFORMA_PADRAO = "tiktok"
+
 
 def sha_do_arquivo(caminho: Path, blocos: int = 1 << 20) -> str:
     """sha256 do arquivo inteiro. E' a identidade do clipe."""
@@ -124,27 +141,74 @@ def registrar(sha: str, *, arquivo: str, titulo: str, canal: str,
 
 
 def marcar_postado(sha: str, *, origem: str, quando: str = "",
-                   canal: str = "", detalhe: str = "") -> None:
-    """Anota uma postagem. `origem` diz por onde saiu: buffer, mao ou print."""
+                   canal: str = "", detalhe: str = "",
+                   plataforma: str = PLATAFORMA_PADRAO) -> None:
+    """Anota uma postagem.
+
+    `origem` diz por onde saiu: buffer, mao ou print.
+    `plataforma` diz ONDE saiu: tiktok ou instagram. Ver PLATAFORMAS.
+    """
     if origem not in ORIGENS:
         raise ValueError(f"origem tem de ser uma de {ORIGENS}, veio {origem!r}")
+    # ⚠️ FALHA FECHADA numa plataforma desconhecida. Aceitar qualquer texto
+    # faria um erro de digitacao ("instagran") virar uma plataforma nova e
+    # silenciosa — e ai' a guarda pararia de proteger sem ninguem notar.
+    if plataforma not in PLATAFORMAS:
+        raise ValueError(
+            f"plataforma tem de ser uma de {PLATAFORMAS}, veio {plataforma!r}")
     d = _ler()
     e = d["clipes"].get(sha)
     if e is None:
         raise KeyError(f"sha nao registrado: {sha[:12]}")
     quando = quando or datetime.now(timezone.utc).isoformat(timespec="seconds")
+    # ⚠️ A PLATAFORMA ENTRA AQUI TAMBEM, e esquecer isso seria pior que o
+    # defeito original: publicacao SIMULTANEA sai no mesmo minuto e pela
+    # mesma origem nas duas plataformas. Sem a plataforma na comparacao, a
+    # segunda seria engolida como repetida — e o registro diria que o
+    # Instagram nunca postou, sem erro nenhum.
     if any(p["quando"] == quando and p["origem"] == origem
+           and p.get("plataforma", PLATAFORMA_PADRAO) == plataforma
            for p in e["postagens"]):
         return
     e["postagens"].append({"origem": origem, "quando": quando,
-                           "canal": canal or e["canal"], "detalhe": detalhe})
+                           "canal": canal or e["canal"], "detalhe": detalhe,
+                           "plataforma": plataforma})
     _gravar(d)
 
 
-def ja_postado(sha: str) -> bool:
-    """O unico teste que decide se pode reagendar."""
+def ja_postado(sha: str, plataforma: str | None = None) -> bool:
+    """Este clipe ja' foi postado? O unico teste que decide se pode reagendar.
+
+    `plataforma=None` mantem o sentido antigo — "saiu em ALGUM lugar". Todos
+    os chamadores de hoje (agendar_buffer, publicar_release) perguntam isso, e
+    pra eles nada muda: eles so' publicam no TikTok.
+
+    `plataforma="instagram"` pergunta outra coisa: "ja' saiu LA'?". E' o que
+    o simultaneo precisa — um clipe no TikTok pode e deve ir pro Instagram.
+
+    ⚠️ O PADRAO CONTINUA SENDO O ANTIGO DE PROPOSITO. Trocar o default faria
+    todo chamador existente mudar de comportamento sem ninguem pedir, e o
+    sintoma seria reagendamento de coisa ja' publicada — exatamente a
+    duplicata que esta guarda existe pra impedir.
+    """
     e = _ler()["clipes"].get(sha)
-    return bool(e and e["postagens"])
+    if not (e and e["postagens"]):
+        return False
+    if plataforma is None:
+        return True
+    if plataforma not in PLATAFORMAS:
+        raise ValueError(
+            f"plataforma tem de ser uma de {PLATAFORMAS}, veio {plataforma!r}")
+    return any(p.get("plataforma", PLATAFORMA_PADRAO) == plataforma
+               for p in e["postagens"])
+
+
+def plataformas_de(sha: str) -> set[str]:
+    """Onde este clipe ja' saiu. Serve pra decidir o que falta publicar."""
+    e = _ler()["clipes"].get(sha)
+    if not e:
+        return set()
+    return {p.get("plataforma", PLATAFORMA_PADRAO) for p in e["postagens"]}
 
 
 def sha_por_titulo(titulo: str) -> str | None:

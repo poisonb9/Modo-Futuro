@@ -45,7 +45,36 @@ r = seguir.aplicar(falso, "@x")
 checar(r == falso, "devolve o caminho original quando o ffprobe falha")
 checar(falso.read_bytes() == b"isto nao e um mp4", "e nao estraga o arquivo")
 
-print("\n5. os numeros estao onde dao pra calibrar")
+print("")
+print("5. ⭐ NEGATIVO — o render TERMINA (o -loop 1 nao pode ser infinito)")
+# ⚠️ MEDIDO EM 13/09/2026: sem `-t` na entrada da imagem, o ffmpeg escrevia
+# pra sempre — 10s de video viraram 125 MB em tres horas, ainda crescendo. E
+# o arquivo nao tinha indice final, entao nenhum player abria.
+import subprocess, time  # noqa: E402
+_d = Path(tempfile.mkdtemp())
+_base = _d / "base.mp4"
+subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi",
+                "-i", "color=c=black:size=240x426:duration=8:rate=12",
+                "-f", "lavfi", "-i", "sine=frequency=200:duration=8",
+                "-c:v", "libx264", "-preset", "ultrafast",
+                "-pix_fmt", "yuv420p", "-c:a", "aac", str(_base)],
+               check=True, capture_output=True)
+_t0 = time.time()
+_saida = seguir.aplicar(_base, "@x", "#FFFFFF", destino=_d / "saida.mp4")
+_gasto = time.time() - _t0
+checar(_saida != _base, f"gerou o video ({_gasto:.1f}s)")
+checar(_gasto < 120, "terminou em menos de 2 min (nao e' infinito)")
+# ⚠️ E O ARQUIVO TEM DE ABRIR. Tamanho nao prova nada: o mp4 de 125 MB
+# tambem "existia". Quem prova e' o ffprobe lendo a duracao.
+_r = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+                     "format=duration", "-of", "csv=p=0", str(_saida)],
+                    capture_output=True, text=True)
+checar(_r.returncode == 0 and bool(_r.stdout.strip()),
+       "o mp4 ABRE (tem indice final) — nao so' 'existe'")
+if _r.stdout.strip():
+    _dur = float(_r.stdout)
+    checar(7.5 < _dur < 9.0, f"duracao bate com a entrada ({_dur:.1f}s)")
+print("\n6. os numeros estao onde dao pra calibrar")
 checar(seguir.SEGUIR_EM_S >= 5.0, "nao pula antes de 5s (a pessoa decide ate' la')")
 checar(seguir.SOM_DB <= -20, "som bem abaixo da voz")
 checar(seguir.LARGURA_FRAC < 0.5, "selo ocupa menos de metade da largura")

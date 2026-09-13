@@ -141,6 +141,20 @@ def aplicar(video: Path, arroba: str, acento: str = "#FFFFFF",
              str(video)], check=True, capture_output=True, text=True)
         larg, alt = (int(x) for x in r.stdout.strip().split(",")[:2])
 
+        # ⚠️ A DURACAO TEM DE SER MEDIDA, e o `-loop 1` da imagem TEM DE SER
+        # LIMITADO por ela. MEDIDO em 13/09/2026: sem o `-t`, a entrada da
+        # imagem nunca chega ao fim e o ffmpeg escreve pra sempre — um clipe
+        # de 10s virou 125 MB em tres horas, ainda crescendo.
+        #
+        # ⭐ E o pior nao foi o arquivo: foi eu ter mandado esse mp4 pro
+        # Bryan olhando o TAMANHO em vez de conferir. Sem o indice final
+        # (moov atom), nenhum player abre — e eu disse que estava pronto.
+        rd = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "csv=p=0", str(video)],
+            check=True, capture_output=True, text=True)
+        dur = float(rd.stdout.strip())
+
         selo_w = int(larg * LARGURA_FRAC)
         selo = desenhar_selo(arroba, selo_w, acento)
         som = fazer_som()
@@ -165,15 +179,27 @@ def aplicar(video: Path, arroba: str, acento: str = "#FFFFFF",
             f"[0:a][pling]amix=inputs=2:duration=first:normalize=0[a]")
         subprocess.run(
             ["ffmpeg", "-y", "-v", "error", "-i", str(video),
-             "-loop", "1", "-i", str(selo), "-i", str(som),
+             # ⚠️ `-t` ANTES do `-i` da imagem: limita a ENTRADA, nao a
+             # saida. Depois do `-i` ele nao vale pra esse input.
+             "-loop", "1", "-t", f"{dur:.3f}", "-i", str(selo),
+             "-i", str(som),
              "-filter_complex", filtro, "-map", "[v]", "-map", "[a]",
              "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
              "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart",
+             # ⚠️ CINTO E SUSPENSORIO: o `-t` ja' resolve, mas
+             # `-shortest` garante que qualquer entrada infinita que
+             # apareca amanha nao derrube isto de novo.
+             "-shortest",
              str(saida)], check=True, capture_output=True)
         return saida
     except Exception as e:
+        msg = getattr(e, "stderr", b"") or b""
+        if isinstance(msg, bytes):
+            msg = msg.decode("utf-8", "replace")
         print(f"      [!] selo de seguir falhou ({type(e).__name__}) — "
               f"video segue sem ele")
+        if msg.strip():
+            print("          ffmpeg: " + msg.strip().splitlines()[-1][:200])
         return video
 
 

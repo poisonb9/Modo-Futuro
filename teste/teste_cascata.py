@@ -34,9 +34,17 @@ cascata.CANAIS_COM_CASCATA.clear()
 print("\n3. ⭐ NEGATIVO — sem o selo do canal, NAO usa o de outro")
 # ⚠️ O @ mora DENTRO da imagem. Cair no selo de outro canal mandaria a
 # audiencia pro perfil errado, e isso nao levanta erro nenhum.
-checar(cascata.selos_do_canal("atefalhar") is not None,
-       "atefalhar tem os tres selos")
-for sem in ("modofuturo", "fatura.chora", "achadinhos.instantaneos"):
+for tem in ("atefalhar", "modofuturo", "semanestesia.pod",
+            "achadinhos.instantaneos"):
+    checar(cascata.selos_do_canal(tem) is not None, f"{tem}: tem os tres selos")
+
+# ⭐ O SELO DIZ O NOME DO CANAL, NAO O @ — e isso resolve sozinho um problema
+# que eu tinha levantado: o @ MUDA entre plataformas (@modofuturo no TikTok e'
+# @modo_futuro_ no Instagram). Com o nome, o mesmo selo serve nas duas.
+# ⚠️ ESTA LISTA E' O QUE FALTA HOJE, e vai encolhendo conforme o Bryan gera
+# os selos. Quando esvaziar, o assert vira trivial — e ai' o que protege e' a
+# checagem de par completo logo acima.
+for sem in ("fatura.chora", "truque.importado", "cozinha.importada"):
     checar(cascata.selos_do_canal(sem) is None,
            f"{sem}: sem selo proprio -> None (nao cai no de outro)")
 

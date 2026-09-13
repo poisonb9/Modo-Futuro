@@ -171,3 +171,28 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(cab + "\n".join(linhas) + "\n", encoding="utf-8")
     return destino
+
+
+def faixa_ocupada(altura: int, linhas: int = 2) -> tuple[int, int]:
+    """(topo, base) em pixels da faixa que a legenda ocupa. FONTE UNICA.
+
+    ⚠️ ISTO EXISTE PORQUE EU COPIEI O NUMERO EM VEZ DE DERIVAR DELE. Em
+    13/09/2026 a cascata de CTA foi posicionada em 0,60 da altura — dentro da
+    legenda, que ocupa de ~0,605 a 0,70. O Bryan viu na tela: "está em cima da
+    legenda". Eu ja' tinha consertado a MESMA colisao horas antes, no selo
+    anterior, movendo um numero — consertei a instancia e nao a classe.
+
+    ⭐ A REGRA QUE SOBROU: quem desenha por cima do video PERGUNTA aqui onde a
+    legenda esta'. Ninguem mais escreve 0,30 nem 0,70 em lugar nenhum.
+
+    ⚠️ `linhas=2` e' orcamento, nao medida: a legenda quebra em uma ou duas
+    linhas conforme a frase, e reservar duas e' o lado seguro. Reservar uma
+    deixaria a colisao voltar em frase longa — e voltaria CALADA, porque nada
+    no render reclama de sobreposicao.
+    """
+    corpo = max(22, int(altura * 0.038))
+    frac_v = float(os.environ.get("LEGENDA_MARGEM_V_FRAC", "0.30"))
+    base = altura - int(altura * frac_v)
+    # entrelinha do ASS fica perto de 1,25 do corpo
+    topo = base - int(corpo * 1.25 * max(1, linhas))
+    return topo, base

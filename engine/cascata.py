@@ -56,10 +56,121 @@ SAI_S = 0.40
 FICA_S = 4.5            # tempo parado, depois que o ultimo entrou
 DESLOC_PX = 320         # de quanto vem da esquerda
 
-LARGURA_FRAC = 0.52     # largura do selo sobre a largura do video
+LARGURA_FRAC = 0.52     # largura base do selo sobre a largura do video
+
+# ⚠️ MULTIPLICADOR POR SELO, na ordem CURTA / COMENTE / SIGA. O SIGA e'
+# maior por pedido do Bryan em 13/09/2026 — e faz sentido: dos tres pedidos
+# ele e' o unico que carrega o NOME do canal, e e' o que a pessoa precisa
+# conseguir ler pra agir depois, fora do video.
+#
+# ⚠️ Mexer aqui muda a ALTURA tambem, e altura maior pode encostar na
+# legenda ou sair da tela. Nao confie no numero: o `colocar` confere e
+# recusa a cascata inteira se der encontro.
+ESCALA_POR_SELO = (1.00, 1.00, 1.18)
 MARGEM_FRAC = 0.055
-BASE_FRAC = 0.60        # topo do primeiro selo
 GAP_FRAC = 0.012        # respiro entre eles
+FOLGA_FRAC = 0.025      # respiro entre a pilha e a legenda
+
+# ⚠️ TETO: acima disto e' a zona do card de titulo. A pilha que nao couber
+# entre este teto e a legenda NAO entra — ver `posicionar`.
+TETO_FRAC = 0.18
+
+# ⚠️ A FAIXA DA PLATAFORMA, embaixo: nome do perfil, legenda do TikTok,
+# musica, e a barra de gestos do celular. Selo que entra aqui EXISTE e
+# ninguem ve'.
+#
+# ⚠️ ESTE LIMITE FALTAVA ATE' 13/09/2026. O `colocar` conferia legenda e
+# borda da tela, e deixou passar o SIGA aumentado terminando em 0,889 — eu
+# so' vi porque fui conferir a conta depois de mexer no tamanho. Guarda que
+# nao olha uma das bordas nao e' guarda, e' sorte.
+UI_BASE_FRAC = 0.86
+
+
+# ⚠️ AS TRES POSICOES, e elas vieram de um desenho do Bryan em 13/09/2026:
+# ele marcou de branco na tela onde queria cada selo. Eu medi as marcas
+# ancorando pela legenda (que sabemos estar em 0,70) e deram 0,056 / 0,459 /
+# 0,869 da altura.
+#
+# ⚠️ DUAS FORAM AJUSTADAS, e e' honesto dizer quais e por que:
+#
+#   0,056 -> 0,105   a marca ficava na borda de cima. O TikTok poe a barra de
+#                    "seguindo / para voce" ali, e o Instagram poe o cabecalho
+#                    do Reels. Selo encostado no topo fica atras dos dois.
+#
+#   0,869 -> 0,735   a marca caia DENTRO da faixa de interface de baixo (nome
+#                    do perfil, legenda da plataforma, musica). O selo
+#                    existiria e ninguem veria. 0,735 e' logo abaixo da nossa
+#                    legenda e acima dessa faixa.
+#
+# ⭐ O `lado` decide de onde o selo ENTRA: o da direita desliza de fora pela
+# direita, o da esquerda pela esquerda. Um selo da direita entrando pela
+# esquerda atravessaria a tela inteira e cobriria o rosto no caminho.
+# (lado onde FICA, fracao da altura, lado por onde ENTRA)
+#
+# ⚠️ ONDE FICA E DE ONDE VEM SAO COISAS SEPARADAS, e ate' 13/09/2026 eu tinha
+# amarrado as duas. O Bryan pediu o SIGA entrando da direita pra esquerda
+# mesmo ficando a' esquerda — e faz sentido: e' o ultimo e o maior, e
+# atravessar a tela da' a ele uma chegada que os outros nao tem.
+#
+# ⚠️ Quando o lado de entrada e' o OPOSTO de onde fica, o deslocamento nao e'
+# o `DESLOC_PX`: e' o quanto for preciso pra comecar FORA da tela. Usar 320
+# faria o selo brotar no meio do video em vez de entrar.
+ZONAS = (
+    ("dir", 0.105, "dir"),
+    ("esq", 0.459, "esq"),
+    ("esq", 0.735, "dir"),
+)
+
+
+def colocar(larg: int, alt: int, larguras: list[int],
+            alturas: list[int]) -> list[tuple[int, int, int]] | None:
+    """(x, y, deslocamento) de cada selo. O sinal diz de que lado ele entra.
+
+    ⚠️ CONFERE A LEGENDA EM VEZ DE CONFIAR NAS ZONAS. As frações de `ZONAS`
+    foram escolhidas livres da legenda HOJE — mas a legenda se move: o
+    `LEGENDA_MARGEM_V_FRAC` e' variavel de ambiente, e ja' foi usado pra
+    desviar de UI na fonte. Se alguem mexer nele, as zonas colidem CALADAS.
+
+    ⭐ Por isso a checagem pergunta a `legendas.faixa_ocupada` na hora, e
+    devolve None se der encontro. None = cascata nao entra, que e' melhor do
+    que entrar por cima do texto.
+    """
+    from . import legendas
+    topo_leg, base_leg = legendas.faixa_ocupada(alt)
+    margem = int(larg * MARGEM_FRAC)
+    saida = []
+    for (lado, frac, entra), lw, lh in zip(ZONAS, larguras, alturas):
+        y = int(alt * frac)
+        if not (y + lh < topo_leg or y > base_leg):
+            print(f"      [!] a zona {frac} bate na legenda "
+                  f"({topo_leg}-{base_leg}) — cascata NAO entra")
+            return None
+        # ⭐ SE PASSAR DA FAIXA DA PLATAFORMA, SOBE — nao desiste nem ignora.
+        # O selo cresce quando o `ESCALA_POR_SELO` muda, e exigir que o Bryan
+        # recalcule a fracao a cada ajuste de tamanho e' transformar um numero
+        # de gosto num numero de engenharia.
+        limite = int(alt * UI_BASE_FRAC)
+        if y + lh > limite:
+            y = limite - lh
+            # ⚠️ e ai' TEM DE CONFERIR A LEGENDA DE NOVO: subir pra escapar da
+            # interface pode jogar o selo em cima do texto.
+            if not (y + lh < topo_leg or y > base_leg):
+                print(f"      [!] a zona {frac} nao cabe entre a legenda e a "
+                      f"interface — cascata NAO entra")
+                return None
+        if y + lh > alt or y < 0:
+            print(f"      [!] a zona {frac} sai da tela — cascata NAO entra")
+            return None
+        x = (larg - lw - margem) if lado == "dir" else margem
+        # ⚠️ O DESLOCAMENTO E' CALCULADO, nao fixo. Se o selo entra pelo lado
+        # oposto ao que fica, ele tem de comecar FORA da tela — senao brota no
+        # meio do video. Do mesmo lado, um passo curto basta e fica sutil.
+        if entra == "dir":
+            desl = (larg - x) if lado == "esq" else DESLOC_PX
+        else:
+            desl = -(x + lw) if lado == "dir" else -DESLOC_PX
+        saida.append((x, y, desl))
+    return saida
 
 
 def selos_do_canal(canal: str) -> list[Path] | None:
@@ -95,30 +206,35 @@ def _preparar(png: Path, largura: int, pasta: Path) -> tuple[Path, int]:
     return saida, altura
 
 
-def montar_filtro(n: int, x: int, ys: list[int], fim_video: float) -> str:
-    """A cadeia de filtro dos `n` selos. Separada pra poder ser lida e testada.
+def montar_filtro(pos: list[tuple[int, int, int]], fim_video: float) -> str:
+    """A cadeia de filtro. `pos` = (x, y, deslocamento) de cada selo.
 
     ⚠️ AS EXPRESSOES VAO ENTRE ASPAS SIMPLES no `overlay=x='...'`. Assim as
-    virgulas de `min(a,b)` NAO precisam de barra invertida — e barra invertida
-    dentro de f-string de Python gerada por heredoc foi o defeito que mais se
-    repetiu nesta sessao.
+    virgulas de `min(a,b)` nao precisam de barra invertida — barra invertida
+    em f-string foi o defeito que mais se repetiu nesta sessao.
+
+    ⚠️ E A ANIMACAO E' NA POSICAO, NUNCA NA ESCALA. `x` negativo e' legitimo:
+    e' posicao, o selo so' fica fora da tela. Escala negativa derruba o ffmpeg
+    com `Invalid argument` -22 sem dizer qual argumento.
     """
     partes, entrada = [], "0:v"
+    n = len(pos)
     ultimo_entra = INICIO_S + ESCALONA_S * (n - 1)
     comeca_sair = ultimo_entra + ENTRA_S + FICA_S
-    for i in range(n):
+    for i, (x, y, desl) in enumerate(pos):
         t0 = INICIO_S + ESCALONA_S * i
         t1 = comeca_sair + ESCALONA_S * i
         alvo = f"v{i}" if i < n - 1 else "v"
-        # ease-out cubico na entrada e na saida
+        d = desl                     # de que lado ele vem, e pra onde volta
         p = f"min(1,max(0,(t-{t0:.3f})/{ENTRA_S}))"
         q = f"min(1,max(0,(t-{t1:.3f})/{SAI_S}))"
-        desl = (f"{x}-{DESLOC_PX}*pow(1-{p},3)-{DESLOC_PX}*pow({q},3)")
+        # ease-out cubico na entrada; o mesmo desenho, invertido, na saida
+        desl = f"{x}+{d}*pow(1-{p},3)+{d}*pow({q},3)"
         partes.append(
             f"[{i+1}:v]format=rgba,"
             f"fade=t=in:st={t0:.3f}:d={ENTRA_S}:alpha=1,"
             f"fade=t=out:st={t1:.3f}:d={SAI_S}:alpha=1[s{i}];"
-            f"[{entrada}][s{i}]overlay=x='{desl}':y={ys[i]}:"
+            f"[{entrada}][s{i}]overlay=x='{desl}':y={y}:"
             f"enable='between(t,{t0:.3f},{min(t1 + SAI_S, fim_video):.3f})'"
             f"[{alvo}]")
         entrada = alvo
@@ -152,25 +268,24 @@ def aplicar(video: Path, canal: str, destino: Path | None = None) -> Path:
         dur = float(rd.stdout.strip())
 
         pasta = Path(tempfile.mkdtemp())
-        prontos, ys, y = [], [], int(alt * BASE_FRAC)
-        for png in tres:
-            p, h = _preparar(png, int(larg * LARGURA_FRAC), pasta)
-            prontos.append(p)
-            ys.append(y)
-            y += h + int(alt * GAP_FRAC)
+        prontos, larguras, alturas = [], [], []
+        for png, mult in zip(tres, ESCALA_POR_SELO):
+            lw = int(larg * LARGURA_FRAC * mult)
+            pr, h = _preparar(png, lw, pasta)
+            prontos.append(pr)
+            larguras.append(lw)
+            alturas.append(h)
 
-        # ⚠️ CONFERE SE A PILHA CABE. Tres selos ocupam ~35% da altura; com
-        # BASE_FRAC alto o ultimo sai da tela — e sair da tela NAO levanta
-        # erro, o selo so' nao aparece e ninguem entende por que.
-        if y > alt:
-            print(f"      [!] a pilha passa da tela ({y} > {alt}) — "
-                  f"baixe BASE_FRAC ou LARGURA_FRAC")
+        # ⭐ CADA SELO NA SUA ZONA, e a colisao com a legenda e' CONFERIDA na
+        # hora — nao confiada nas fracoes escolhidas hoje.
+        pos = colocar(larg, alt, larguras, alturas)
+        if pos is None:
             return video
 
         entradas = []
         for p in prontos:
             entradas += ["-loop", "1", "-t", f"{dur:.3f}", "-i", str(p)]
-        filtro = montar_filtro(len(prontos), int(larg * MARGEM_FRAC), ys, dur)
+        filtro = montar_filtro(pos, dur)
         subprocess.run(
             ["ffmpeg", "-y", "-v", "error", "-i", str(video), *entradas,
              "-filter_complex", filtro, "-map", "[v]", "-map", "0:a?",

@@ -50,6 +50,10 @@ jobs:
           python -X utf8 -m engine.garimpo --varrer || true
           echo "===== vigia (itens que acompanhamos de perto)"
           python -X utf8 -m engine.garimpo --vigiar || true
+          # ⚠️ DEPOIS da varredura: os campeoes saem DOS DADOS que ela
+          # acabou de coletar. Rodar antes acompanharia a lista de ontem.
+          echo "===== campeoes (os que mais vendem, pelo ID)"
+          python -X utf8 -m engine.garimpo --campeoes || true
           echo "===== pedidos e placar"
           python -X utf8 -m engine.resultado --pedidos --placar || true
       - name: Guardar o historico de preco

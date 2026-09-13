@@ -488,6 +488,87 @@ def vigiar(por_termo: int = 8) -> list[dict]:
     return mudancas
 
 
+# ⚠️ QUANTAS VENDAS PRA ENTRAR NA LISTA DE CAMPEOES. 5 mil e' arbitrario hoje;
+# vira medido quando houver venda nossa pra comparar.
+CAMPEAO_VOLUME_MIN = 5000
+CAMPEOES_MAX = 60
+
+
+def campeoes(quantos: int = CAMPEOES_MAX) -> list[dict]:
+    """Os produtos que mais vendem DENTRE os que ja' vimos. Sai dos dados.
+
+    ⭐ A LISTA NAO E' CHUTADA, E' DERIVADA. Eu escolheria por intuicao e
+    erraria — a varredura ja' passou por milhares de produtos e sabe quais
+    vendem. Pedir a ela e' melhor do que eu adivinhar.
+
+    ⚠️ E E' POR PRODUTO, NAO POR PALAVRA. Medido em 13/09/2026: o
+    `productdetail.get` aceita varios ids de uma vez e devolve volume. Por
+    palavra, o "mais vendido de hoje" pode ser outro item amanha e a serie
+    troca de dono sem ninguem notar.
+    """
+    nom = nomes()
+    melhor: dict[int, dict] = {}
+    for d in _linhas():
+        pid, vol = d.get("id"), int(d.get("vol") or 0)
+        if not pid or vol < CAMPEAO_VOLUME_MIN:
+            continue
+        # o ponto mais recente manda: volume so' cresce, e o ultimo e' o maior
+        if pid not in melhor or vol >= melhor[pid]["vol"]:
+            melhor[pid] = {"id": pid, "vol": vol, "preco": d.get("preco"),
+                           "nome": nom.get(pid, ""), "quando": d.get("quando")}
+    ordenado = sorted(melhor.values(), key=lambda x: -x["vol"])
+    return ordenado[:quantos]
+
+
+def acompanhar_campeoes(por_vez: int = 20) -> int:
+    """Le' os campeoes pelo ID e grava o ponto novo. Devolve quantos mudaram.
+
+    ⚠️ EM LOTES de `por_vez`: o `productdetail.get` aceita varios ids de uma
+    vez, e pedir um por um gastaria 60 chamadas onde 3 bastam.
+    """
+    alvos = campeoes()
+    if not alvos:
+        return 0
+    ultimos = ultimo_preco()
+    mudaram = 0
+    for i in range(0, len(alvos), por_vez):
+        lote = alvos[i:i + por_vez]
+        ids = ",".join(str(x["id"]) for x in lote)
+        try:
+            r = aliexpress.chamar(
+                "aliexpress.affiliate.productdetail.get", product_ids=ids,
+                target_currency="BRL", target_language="PT",
+                ship_to_country="BR", tracking_id="default")
+            corpo = (r.get("aliexpress_affiliate_productdetail_get_response")
+                     or {}).get("resp_result", {})
+            if str(corpo.get("resp_code")) != "200":
+                print(f"  [!] campeoes lote {i//por_vez+1}: "
+                      f"{corpo.get('resp_code')} {corpo.get('resp_msg')}")
+                continue
+            for p in (corpo.get("result", {}).get("products", {})
+                         .get("product", []) or []):
+                if guardar_preco(p, ultimos=ultimos):
+                    mudaram += 1
+        except Exception as e:
+            # ⚠️ falha aberta: perder um lote nao pode derrubar a rodada
+            print(f"  [!] campeoes lote {i//por_vez+1}: {type(e).__name__}")
+    return mudaram
+
+
+def _linhas() -> list[dict]:
+    if not PRECOS.exists():
+        return []
+    saida = []
+    for linha in PRECOS.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            saida.append(json.loads(linha))
+        except ValueError:
+            continue
+    return saida
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="o garimpo")
@@ -499,7 +580,19 @@ def main() -> None:
                    help="so' alimenta o historico, nao publica")
     a.add_argument("--vigiar", action="store_true",
                    help="acompanha a lista VIGIA e mostra o que mudou")
+    a.add_argument("--campeoes", action="store_true",
+                   help="acompanha, pelo ID, os que mais vendem")
     o = a.parse_args()
+    if o.campeoes:
+        alvos = campeoes()
+        print(f"{len(alvos)} campeao(oes) acompanhados (>= "
+              f"{CAMPEAO_VOLUME_MIN} vendas):")
+        for x in alvos[:12]:
+            print(f"  {x['vol']:>7} vendas  R$ {x['preco']:>7.2f}  "
+                  f"{x['nome'][:52]}")
+        print("")
+        print(str(acompanhar_campeoes()) + " ponto(s) novo(s)")
+        return
     if o.vigiar:
         for m in vigiar():
             seta = "caiu" if m["var"] < 0 else "subiu"

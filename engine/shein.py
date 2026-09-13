@@ -125,9 +125,8 @@ def buscar(termo: str, quantos: int = 10) -> list[dict]:
                 # que o seletor mudou quando o que houve foi bloqueio.
                 print(f"  [!] nao apareceu produto em {pag.url}")
                 print(f"      titulo: {pag.title()!r}")
-                txt = (pag.inner_text("body") or "")[:400].replace("
-", " | ")
-                print(f"      corpo: {txt}")
+                txt = (pag.inner_text("body") or "")[:400]
+                print("      corpo: " + txt.replace(chr(10), " | "))
                 raise
             pag.wait_for_timeout(2500)
             cartoes = pag.query_selector_all(

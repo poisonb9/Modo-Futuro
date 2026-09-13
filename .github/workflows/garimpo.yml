@@ -72,6 +72,21 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl
+          # ⚠️ UM POR UM, E SO' SE EXISTIR. MEDIDO em 13/09/2026: eu pus os
+          # tres arquivos num `git add` so', e o `estado/pedidos.jsonl`
+          # ainda nao existia (nao ha' pedido nenhum). O git recusou a
+          # LISTA INTEIRA, o passo morreu com `set -e`, e o runner efemero
+          # levou embora os precos que a rodada tinha acabado de coletar.
+          #
+          # ⭐ Terceira vez que este motor perde estado por `git add` que
+          # falha. Arquivo que pode nao existir NUNCA entra numa lista com
+          # os outros.
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl; do
+            [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
+          done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"
+          # ⚠️ `git push` TEM DE FALHAR ALTO se nao subir. Empurrar sem
+          # conferir e' como dizer "esta' no ar" olhando o status do
+          # push — erro que ja' custou uma tarde nesta operacao.
           git push
+          echo "estado commitado: $(git rev-parse --short HEAD)"

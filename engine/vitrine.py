@@ -163,6 +163,15 @@ def postar(bruto: dict, origem: str | None = None,
     if not telegram.enviar(texto, destino):
         return None
     marcar(p["link"])
+    # ⚠️ SO' DEPOIS DE O TELEGRAM ACEITAR. Anotar antes registraria como
+    # publicado o que nao saiu — e o placar mentiria pro nosso lado, que e' o
+    # lado que ninguem confere.
+    try:
+        from . import resultado
+        resultado.anotar_publicado(dict(p, _id=p.get("id")), origem or "",
+                                   "telegram")
+    except Exception:
+        pass
     return texto
 
 

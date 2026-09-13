@@ -127,3 +127,6 @@ paginas/_publicado/
 
 # historico de preco do garimpo (append-only)
 estado/precos_vistos.jsonl
+
+estado/produtos_publicados.jsonl
+estado/pedidos.jsonl

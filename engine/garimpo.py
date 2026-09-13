@@ -354,7 +354,15 @@ def garimpar(canal: str, quantos: int = 5,
     # criterio de ordenacao porque ja' foi corte — e nota alta com 3 vendas
     # nao quer dizer nada.
     saida.sort(key=lambda x: (x["_queda"], x["_vendas"]), reverse=True)
-    return saida[:quantos], motivos
+    escolhidos = saida[:quantos]
+    # ⚠️ ANOTA O QUE FOI ESCOLHIDO, e nao o que foi visto. Sem este registro a
+    # serie de preco e os cliques do Supabase nunca se encontram — foi o
+    # buraco que ficou aberto ate' 13/09/2026.
+    if guardar:
+        from . import resultado
+        for x in escolhidos:
+            resultado.anotar_publicado(x, canal, "garimpo")
+    return escolhidos, motivos
 
 
 # ⚠️ A VARREDURA EXISTE SO' PRA ALIMENTAR O HISTORICO DE PRECO. Nenhum destes

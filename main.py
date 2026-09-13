@@ -15,6 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
+                    cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod)
 
@@ -515,6 +516,21 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
                             titulo=c.get("titulo", ""), duracao_max=dur_max,
                             chamada=texto_chamada)
+
+            # ⚠️ A CASCATA VEM DEPOIS DO RENDER, e nunca dentro dele. O
+            # `render.vertical` monta quatro arranjos de filter_complex
+            # diferentes; enfiar mais tres overlays la' mexeria nos quatro,
+            # e e' o lugar onde este motor mais quebra.
+            #
+            # ⚠️ E SO' NO 9:16. O 16:9 e' arquivo, nao post — selo de
+            # 'siga' num video que ninguem ve' e' ruido.
+            #
+            # ⚠️ CANAIS_COM_CASCATA nasce VAZIO: enquanto o Bryan nao
+            # escolher, isto nao faz nada. E a escolha e' experimento —
+            # ligar em todos de uma vez repete o erro de 09/09, quando
+            # punch-in e card entraram juntos e o numero nao disse qual foi.
+            if cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', canal):
+                print('      cascata de CTA aplicada')
 
             if not so_vertical:
                 lh, ah = config.HORIZONTAL

@@ -1,0 +1,69 @@
+# -*- coding: utf-8 -*-
+"""A cascata so' entra onde foi ligada, e nunca com o selo de outro canal."""
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from engine import cascata  # noqa: E402
+
+falhas = []
+
+
+def checar(ok, oq):
+    print(("  ok  " if ok else "  [x] ") + oq)
+    if not ok:
+        falhas.append(oq)
+
+
+print("1. ⭐ NASCE DESLIGADA — producao nao muda sem decisao do Bryan")
+checar(cascata.CANAIS_COM_CASCATA == set(), "o conjunto vem vazio")
+for c in ("atefalhar", "modofuturo", "truque.importado"):
+    checar(not cascata.ligado(c), f"{c}: desligado")
+
+print("\n2. ligar resolve pelo REGISTRO, nao pelo texto cru")
+# ⚠️ O mesmo canal chega escrito de tres jeitos. Comparar texto deixaria a
+# cascata ligada num e desligada noutro sem ninguem perceber.
+cascata.CANAIS_COM_CASCATA.add("atefalhar")
+for jeito in ("atefalhar", "@atefalhar"):
+    checar(cascata.ligado(jeito), f"{jeito!r} -> ligado")
+checar(not cascata.ligado("modofuturo"), "e o modofuturo segue desligado")
+checar(not cascata.ligado("canal_que_nao_existe"), "canal inexistente: nao")
+cascata.CANAIS_COM_CASCATA.clear()
+
+print("\n3. ⭐ NEGATIVO — sem o selo do canal, NAO usa o de outro")
+# ⚠️ O @ mora DENTRO da imagem. Cair no selo de outro canal mandaria a
+# audiencia pro perfil errado, e isso nao levanta erro nenhum.
+checar(cascata.selos_do_canal("atefalhar") is not None,
+       "atefalhar tem os tres selos")
+for sem in ("modofuturo", "fatura.chora", "achadinhos.instantaneos"):
+    checar(cascata.selos_do_canal(sem) is None,
+           f"{sem}: sem selo proprio -> None (nao cai no de outro)")
+
+print("\n4. o filtro escalona: cada selo entra depois do anterior")
+f = cascata.montar_filtro(3, 59, [1100, 1330, 1560], 12.0)
+import re  # noqa: E402
+entradas = [float(x) for x in re.findall(r"fade=t=in:st=([\d.]+)", f)]
+checar(len(entradas) == 3, f"tres fades de entrada ({len(entradas)})")
+checar(entradas == sorted(entradas) and len(set(entradas)) == 3,
+       f"em ordem e distintos: {entradas}")
+checar(abs((entradas[1] - entradas[0]) - cascata.ESCALONA_S) < 1e-6,
+       "o intervalo e' o ESCALONA_S")
+
+print("\n5. NEGATIVO — as virgulas NAO levam barra invertida")
+# ⚠️ As expressoes vao entre aspas simples no overlay=x='...'. Barra invertida
+# em f-string gerada por heredoc foi o defeito que mais se repetiu hoje.
+checar("\," not in f, "nenhuma virgula escapada na cadeia")
+checar("min(1,max(0," in f, "as expressoes estao inteiras")
+
+print("\n6. NEGATIVO — a animacao e' de POSICAO, nao de escala")
+# ⚠️ Escala negativa derruba o ffmpeg com Invalid argument -22; posicao
+# negativa so' poe o selo fora da tela. Foi a licao de 13/09.
+checar("scale=" not in f, "nao ha' filtro scale na cadeia")
+checar("overlay=x='" in f, "a animacao esta' no x do overlay")
+
+print("\n7. sem som — decisao do Bryan em 13/09")
+checar("amix" not in f and "adelay" not in f, "nenhum filtro de audio")
+
+print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
+sys.exit(1 if falhas else 0)

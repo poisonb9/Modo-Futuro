@@ -18,16 +18,24 @@ ate = date.today()
 de = ate - timedelta(days=30)
 fmt = "%Y-%m-%d %H:%M:%S"
 
-for metodo, extra in (
-    ("aliexpress.affiliate.order.list",
-     {"start_time": de.strftime(fmt), "end_time": ate.strftime(fmt),
-      "status": "", "page_no": "1", "page_size": "20",
-      "fields": "order_number,paid_amount,estimated_paid_commission"}),
+# ⚠️ Os dois endpoints EXISTEM — na 1a tentativa reclamaram de PARAMETRO, nao
+# de permissao ("pattern of input params is invalid" e "status is mandatory").
+# Entao o que falta e' acertar a forma, e vale tentar mais de uma.
+tentativas = [
     ("aliexpress.affiliate.order.listbyindex",
      {"start_time": de.strftime(fmt), "end_time": ate.strftime(fmt),
-      "page_size": "20"}),
-):
-    print(f"\n--- {metodo}")
+      "status": "Payment Completed", "page_size": "20"}),
+    ("aliexpress.affiliate.order.listbyindex",
+     {"start_time": de.strftime(fmt), "end_time": ate.strftime(fmt),
+      "status": "", "page_size": "20"}),
+    ("aliexpress.affiliate.order.list",
+     {"start_time": de.strftime(fmt), "end_time": ate.strftime(fmt),
+      "status": "Payment Completed", "page_no": "1", "page_size": "20",
+      "fields": "order_number"}),
+]
+for metodo, extra in tentativas:
+    print("")
+    print("--- " + metodo + "  status=" + repr(extra.get("status")))
     try:
         r = aliexpress.chamar(metodo, **extra)
     except Exception as e:
@@ -42,7 +50,6 @@ for metodo, extra in (
     print("  resp_code:", corpo.get("resp_code"), "|", corpo.get("resp_msg"))
     res = corpo.get("result") or {}
     print("  chaves do result:", sorted(res)[:8])
-    # so' a CONTAGEM, nunca os valores
     for k in ("total_record_count", "current_record_count"):
         if k in res:
             print(f"  {k}: {res[k]}")

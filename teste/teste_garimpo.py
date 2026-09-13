@@ -112,6 +112,43 @@ print("")
 print("10. NEGATIVO — ultimo_preco e' o ULTIMO, nao o menor")
 # ⚠️ Confundir os dois faria a serie parar de gravar quedas sucessivas.
 u2 = garimpo.ultimo_preco()
-checar(abs(u2[99] - 44.90) < 0.01, f"ultimo = 44,90 (nao o menor nem o maior)")
+checar(abs(u2[99][0] - 44.90) < 0.01, "ultimo preco = 44,90 (nao o menor)")
+
+print("")
+print("11. ⭐ VOLUME CONFIRMA PRECO — e por isso ele entra na serie")
+# ⭐ Dos mentores de trading do acervo: queda com volume SUBINDO e'
+# oportunidade; a mesma queda com volume CAINDO e' produto morrendo. Sem o
+# volume as duas ficam identicas na serie.
+garimpo.PRECOS.write_text("", encoding="utf-8")
+u3 = {}
+V = dict(BOM, product_id=77, target_sale_price="80.00", lastest_volume="1000")
+checar(garimpo.guardar_preco(V, "2026-09-13", u3), "1o ponto grava")
+import json as _j
+d0 = _j.loads(garimpo.PRECOS.read_text(encoding="utf-8").splitlines()[0])
+for campo in ("vol", "nota", "com", "desc_loja", "de_loja", "nome", "cat"):
+    checar(campo in d0, f"guarda {campo}")
+checar(d0["vol"] == 1000, "o volume e' o da API")
+
+print("")
+print("12. NEGATIVO — volume so' conta quando mexe DE VERDADE")
+# ⚠️ Preco anda em degraus; volume anda TODO DIA. Sem piso, o volume gravaria
+# uma linha por dia e desfaria a economia inteira.
+checar(not garimpo.guardar_preco(dict(V, lastest_volume="1050"),
+                                 "2026-09-14", u3),
+       "volume +5%: NAO grava (abaixo do piso de 10%)")
+checar(garimpo.guardar_preco(dict(V, lastest_volume="1200"),
+                             "2026-09-15", u3),
+       "volume +20%: grava, mesmo com o preco igual")
+n = len([x for x in garimpo.PRECOS.read_text(encoding="utf-8").splitlines() if x.strip()])
+checar(n == 2, f"tres visitas viraram duas linhas ({n})")
+
+print("")
+print("13. o nome so' na PRIMEIRA linha")
+# ⚠️ Repetir o nome em cada ponto desfaria a economia. O id liga o resto.
+d1 = _j.loads(garimpo.PRECOS.read_text(encoding="utf-8").splitlines()[1])
+checar("nome" not in d1, "a segunda linha nao repete o nome")
+checar(garimpo.nomes()[77] == BOM["product_title"][:90],
+       "e o nome e' lido da primeira linha")
+
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
 sys.exit(1 if falhas else 0)

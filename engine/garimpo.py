@@ -155,43 +155,61 @@ def serve(p: dict, canal: str) -> str | None:
     return None
 
 
+# ⚠️ QUANTO O VOLUME PRECISA MUDAR pra valer uma linha nova. Preco muda em
+# degraus; volume de vendas anda TODO DIA, e gravar cada passo devolveria o
+# desperdicio que a economia de 13/09 acabou de tirar.
+VOLUME_MUDOU_FRAC = 0.10
+
+
 def guardar_preco(p: dict, quando: str | None = None,
-                  ultimos: dict[int, float] | None = None) -> bool:
-    """Anota o preco SO' SE ELE MUDOU. Devolve se gravou.
+                  ultimos: dict[int, tuple[float, int]] | None = None) -> bool:
+    """Anota o ponto SO' SE mudou o preco ou o volume. Devolve se gravou.
 
-    ⭐ UMA SERIE DE PRECO E' DEFINIDA PELOS PONTOS ONDE ELA MUDA. Gravar
-    "R$ 20,71 hoje, R$ 20,71 amanha, R$ 20,71 depois" nao acrescenta nada e
-    incha o arquivo — que e' COMMITADO todo dia pelo workflow.
+    ⭐ PRECO SOZINHO NAO CONTA A HISTORIA — e isso vem dos mentores de trading
+    que o Bryan ja' tem no acervo: VOLUME CONFIRMA PRECO. Uma queda com volume
+    SUBINDO e' oportunidade; a mesma queda com volume CAINDO e' um produto
+    morrendo. Sao coisas opostas e, so' com preco, ficam iguais na serie.
 
-    ⚠️ MEDIDO em 13/09/2026, com 856 linhas: 156 produtos foram vistos mais de
-    uma vez e **apenas 9 mudaram de preco**. 94% das repeticoes eram lixo.
+    ⚠️ MEDIDO em 13/09/2026 com 856 linhas: 156 produtos vistos duas vezes,
+    apenas 9 mudaram de preco. Por isso a regra do ponto de mudanca — mas ela
+    tem de valer pros DOIS eixos, senao o volume nunca entra ou entra sempre.
 
-    ⚠️ E A PRIMEIRA VEZ SEMPRE GRAVA, mesmo sem mudanca — sem o ponto inicial
-    nao ha' contra o que comparar.
+    ⚠️ E O NOME SO' NA PRIMEIRA LINHA. Antes de hoje a serie nao guardava nome
+    nenhum: 698 produtos eram numeros orfaos, e a pergunta do Bryan ("temos
+    medicao de PS5?") nao tinha como ser respondida.
     """
     pid = p.get("product_id")
     preco = _num(p.get("target_sale_price"))
     if not (pid and preco):
         return False
-    if ultimos is not None and abs(ultimos.get(pid, -1) - preco) < 0.005:
-        return False
+    vol = int(_num(p.get("lastest_volume")))
+    antes = (ultimos or {}).get(pid)
+    if antes is not None:
+        p_antes, v_antes = antes
+        mudou_preco = abs(p_antes - preco) >= 0.005
+        mudou_vol = v_antes > 0 and abs(vol - v_antes) / v_antes >= VOLUME_MUDOU_FRAC
+        if not (mudou_preco or mudou_vol):
+            return False
     PRECOS.parent.mkdir(parents=True, exist_ok=True)
-    linha = {"id": pid, "preco": preco, "loja": p.get("shop_name", ""),
+    linha = {"id": pid, "preco": preco,
+             # ⭐ o par que da' sentido ao preco
+             "vol": vol,
+             "nota": _num(p.get("evaluate_rate")),
+             "com": _num(p.get("commission_rate")),
+             # ⚠️ O DESCONTO QUE A LOJA ALEGA, guardado PRA SER CONFERIDO —
+             # nao pra ser repetido. Com a nossa serie ao lado da alegacao
+             # dela, da' pra provar quando o "de/por" e' inflado.
+             "desc_loja": _num(p.get("discount")),
+             "de_loja": _num(p.get("target_original_price")),
+             "loja": p.get("shop_name", ""),
              "quando": quando or f"{date.today():%Y-%m-%d}"}
-    # ⚠️ O NOME SO' NA PRIMEIRA VEZ, e ele TEM de estar la'. Ate' 13/09/2026 a
-    # serie guardava id, preco, loja e data — e nenhuma forma de saber O QUE
-    # era o produto. 698 produtos viraram numeros orfaos: o Bryan perguntou
-    # "temos medicao de PS5?" e nao havia como responder.
-    #
-    # ⭐ Repetir o nome em cada ponto seria desfazer a economia que acabou de
-    # entrar. Na primeira linha basta: o `id` liga o resto da serie a ela.
-    if ultimos is None or pid not in ultimos:
+    if antes is None:
         linha["nome"] = (p.get("product_title") or "")[:90]
         linha["cat"] = p.get("second_level_category_name", "")
     with PRECOS.open("a", encoding="utf-8") as f:
         f.write(json.dumps(linha, ensure_ascii=False) + "\n")
     if ultimos is not None:
-        ultimos[pid] = preco
+        ultimos[pid] = (preco, vol)
     return True
 
 
@@ -212,14 +230,14 @@ def nomes() -> dict[int, str]:
     return n
 
 
-def ultimo_preco() -> dict[int, float]:
-    """product_id -> o ultimo preco gravado. Serve pra saber o que mudou.
+def ultimo_preco() -> dict[int, tuple[float, int]]:
+    """product_id -> (ultimo preco, ultimo volume). O que mudou desde ontem.
 
     ⚠️ E' o ULTIMO, nao o menor. O `desconto_honesto` usa o MAIOR ja' visto;
     esta funcao responde outra pergunta — "mudou desde a ultima vez?" — e
     confundir as duas faria a serie parar de gravar quedas sucessivas.
     """
-    u: dict[int, float] = {}
+    u: dict[int, tuple[float, int]] = {}
     if not PRECOS.exists():
         return u
     for linha in PRECOS.read_text(encoding="utf-8").splitlines():
@@ -230,7 +248,7 @@ def ultimo_preco() -> dict[int, float]:
         except ValueError:
             continue
         if d.get("id") and d.get("preco"):
-            u[d["id"]] = float(d["preco"])
+            u[d["id"]] = (float(d["preco"]), int(d.get("vol") or 0))
     return u
 
 
@@ -447,6 +465,7 @@ def vigiar(por_termo: int = 8) -> list[dict]:
                          .get("product", []) or []):
                 antes = ultimos.get(p.get("product_id"))
                 if guardar_preco(p, ultimos=ultimos) and antes is not None:
+                    antes = antes[0]
                     agora = _num(p.get("target_sale_price"))
                     mudancas.append({
                         "termo": termo,

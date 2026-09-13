@@ -150,5 +150,47 @@ checar("nome" not in d1, "a segunda linha nao repete o nome")
 checar(garimpo.nomes()[77] == BOM["product_title"][:90],
        "e o nome e' lido da primeira linha")
 
+print("")
+print("14. ⭐ ESCALADA E' TENDENCIA, e nao se confunde com NIVEL")
+# ⭐ Volume alto e' passado; volume acelerando e' futuro. O campeao saturado e
+# o produto decolando sao perguntas diferentes, e as listas PODEM nao se
+# cruzar. Confundir as duas faz a gente publicar sempre o mesmo item velho.
+garimpo.PRECOS.write_text("", encoding="utf-8")
+def _p(pid, vol, quando, preco="50.00", nome="Produto"):
+    garimpo.guardar_preco(
+        {"product_id": pid, "target_sale_price": preco, "lastest_volume": str(vol),
+         "product_title": nome, "shop_name": "X"}, quando, {})
+# gigante parado: muito volume, sem crescimento
+_p(1, 40000, "2026-09-10", nome="Gigante saturado")
+_p(1, 40200, "2026-09-15", nome="Gigante saturado")
+# pequeno decolando
+_p(2, 500, "2026-09-10", nome="Decolando")
+_p(2, 2000, "2026-09-15", nome="Decolando")
+esc = garimpo.escalada()
+ids = [x["id"] for x in esc]
+checar(2 in ids, "o que acelerou entra na escalada")
+checar(ids[0] == 2, "e vem em PRIMEIRO, na frente do gigante")
+camp = [c["id"] for c in garimpo.campeoes()]
+checar(1 in camp, "o gigante e' campeao (nivel)")
+checar(2 not in camp, "e o decolando NAO e' — as listas sao diferentes")
+
+print("")
+print("15. NEGATIVO — ruido pequeno nao vira tendencia")
+# ⚠️ Sem piso, um produto de 10 -> 30 vendas ganha da lista com +200% e nao
+# significa nada.
+_p(3, 10, "2026-09-10", nome="Ruido")
+_p(3, 30, "2026-09-15", nome="Ruido")
+checar(3 not in [x["id"] for x in garimpo.escalada()],
+       "10 -> 30 vendas (+200%) NAO entra: abaixo do piso")
+
+print("")
+print("16. NEGATIVO — sem dois pontos nao ha' tendencia")
+# ⚠️ Tendencia nao se inventa no primeiro dia.
+_p(4, 9000, "2026-09-15", nome="So um ponto")
+checar(4 not in [x["id"] for x in garimpo.escalada()],
+       "um ponto so' nao vira escalada")
+checar(4 in [c["id"] for c in garimpo.campeoes()],
+       "mas ja' conta como campeao (nivel precisa de um ponto so')")
+
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
 sys.exit(1 if falhas else 0)

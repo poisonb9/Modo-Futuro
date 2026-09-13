@@ -569,6 +569,85 @@ def _linhas() -> list[dict]:
     return saida
 
 
+# ⚠️ PISO DE VOLUME PRA ESCALADA. Sem ele, um produto que foi de 10 pra 30
+# vendas ganha da lista inteira com +200% — e nao significa nada. O piso
+# separa aceleracao de ruido.
+ESCALADA_VOLUME_MIN = 300
+
+
+def escalada(quantos: int = 20) -> list[dict]:
+    """Os produtos cujo volume esta' ACELERANDO. Tendencia, nao nivel.
+
+    ⭐ VOLUME ALTO E' PASSADO; VOLUME ACELERANDO E' FUTURO. O campeao com 26
+    mil vendas pode estar saturado. O que foi de 800 pra 2000 numa semana e' o
+    que esta' decolando — e e' esse que vira video antes de todo mundo.
+
+    ⚠️ E' O MESMO PRINCIPIO DE NIVEL x MOMENTUM dos mentores de trading do
+    acervo. Ninguem opera olhando so' o preco absoluto; olha-se a variacao. O
+    `campeoes()` responde "quem vende muito"; esta funcao responde "quem esta'
+    vendendo cada vez mais", e as duas listas PODEM NAO SE CRUZAR.
+
+    ⚠️ PRECISA DE PELO MENOS DOIS PONTOS por produto — entao ela nasce vazia e
+    so' ganha sentido depois de alguns dias de coleta. Isso nao e' defeito: e'
+    o custo de medir tendencia, que nao se inventa no primeiro dia.
+    """
+    from datetime import datetime as _dt
+    nom = nomes()
+    serie: dict[int, list[tuple[str, int, float]]] = {}
+    for d in _linhas():
+        pid, vol = d.get("id"), int(d.get("vol") or 0)
+        if pid and vol:
+            serie.setdefault(pid, []).append(
+                (d.get("quando", ""), vol, float(d.get("preco") or 0)))
+
+    saida = []
+    for pid, pontos in serie.items():
+        if len(pontos) < 2:
+            continue
+        pontos.sort()
+        (d0, v0, _), (d1, v1, p1) = pontos[0], pontos[-1]
+        if v1 < ESCALADA_VOLUME_MIN or v0 <= 0 or v1 <= v0:
+            continue
+        try:
+            dias = max(1, (_dt.fromisoformat(d1) - _dt.fromisoformat(d0)).days)
+        except ValueError:
+            dias = 1
+        saida.append({
+            "id": pid, "nome": nom.get(pid, ""),
+            "de": v0, "para": v1, "dias": dias,
+            "por_dia": round((v1 - v0) / dias),
+            # ⭐ o percentual AO DIA e' o que compara produto grande com
+            # pequeno; o absoluto sozinho so' devolve os gigantes de novo.
+            "pct_dia": round((v1 - v0) / v0 * 100 / dias, 1),
+            "preco": p1,
+        })
+    saida.sort(key=lambda x: -x["pct_dia"])
+    return saida[:quantos]
+
+
+def novos_no_topo(quantos: int = 15) -> list[dict]:
+    """Produtos que APARECERAM no historico ja' vendendo muito.
+
+    ⚠️ Complementa a escalada e nao se confunde com ela: a escalada precisa de
+    dois pontos; este pega o item que entrou HOJE ja' grande — e um produto
+    que surge do nada com 5 mil vendas e' tendencia tambem, so' que a gente
+    nao viu a subida.
+    """
+    nom = nomes()
+    primeiro: dict[int, dict] = {}
+    for d in _linhas():
+        pid = d.get("id")
+        if pid and pid not in primeiro:
+            primeiro[pid] = d
+    de_hoje = [d for d in primeiro.values()
+               if d.get("quando", "").startswith(f"{date.today():%Y-%m-%d}")
+               and int(d.get("vol") or 0) >= CAMPEAO_VOLUME_MIN]
+    de_hoje.sort(key=lambda d: -int(d.get("vol") or 0))
+    return [{"id": d["id"], "nome": nom.get(d["id"], ""),
+             "vol": int(d.get("vol") or 0), "preco": d.get("preco")}
+            for d in de_hoje[:quantos]]
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="o garimpo")
@@ -582,7 +661,25 @@ def main() -> None:
                    help="acompanha a lista VIGIA e mostra o que mudou")
     a.add_argument("--campeoes", action="store_true",
                    help="acompanha, pelo ID, os que mais vendem")
+    a.add_argument("--tendencia", action="store_true",
+                   help="quem esta' ACELERANDO, e quem apareceu ja' grande")
     o = a.parse_args()
+    if o.tendencia:
+        esc = escalada()
+        print(f"ESCALADA — {len(esc)} produto(s) acelerando:")
+        for x in esc[:12]:
+            print(f"  +{x['pct_dia']:>5.1f}%/dia  {x['de']} -> {x['para']} "
+                  f"em {x['dias']}d  R$ {x['preco']:.2f}  {x['nome'][:40]}")
+        if not esc:
+            print("  (vazio: precisa de 2+ pontos por produto, e a coleta"
+                  " de volume comecou em 13/09)")
+        nov = novos_no_topo()
+        print("")
+        print(f"APARECERAM HOJE JA' GRANDES — {len(nov)}:")
+        for x in nov[:10]:
+            print(f"  {x['vol']:>7} vendas  R$ {x['preco']:>7.2f}  "
+                  f"{x['nome'][:45]}")
+        return
     if o.campeoes:
         alvos = campeoes()
         print(f"{len(alvos)} campeao(oes) acompanhados (>= "

@@ -46,3 +46,9 @@ jobs:
           ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
         continue-on-error: true
         run: python -X utf8 teste/fumaca_pedidos.py
+      - name: Da' pra ler produto por id?
+        env:
+          ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+        continue-on-error: true
+        run: python -X utf8 teste/fumaca_detalhe.py

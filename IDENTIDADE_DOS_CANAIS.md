@@ -47,6 +47,18 @@ muda de nome nem quando o `@` muda — é a chave que atravessa as mudanças, e 
 por isso que o selo se chama `siga_fatura.chora.png` dizendo "PAGO MENOS" na
 arte. Mesma regra do `cozinha.importada`, que vira Achadinho Chef em 26/09.
 
+⚠️ **A TROCA DO `@` SÓ LIBERA EM ~13/10/2026.** O TikTok trava a mudança por
+30 dias, e o Bryan já usou a cota ao renomear o canal em 13/09. Até lá o perfil
+mostra **Pago menos** com `@fatura.chora` — e isso é normal, não é pendência
+esquecida.
+
+⚠️ São DUAS renomeações em fila e é fácil confundir uma com a outra:
+
+| canal | o quê | quando |
+|---|---|---|
+| `cozinha.importada` | vira **Achadinho Chef**, `@achadinho.chef` | 26/09/2026 |
+| `fatura.chora` | já é **Pago menos**; falta só o `@` | ~13/10/2026 |
+
 ⚠️ **QUANDO O `@` MUDAR**, o que precisa acompanhar:
 1. `engine/canais_registro.py` — o campo `arroba`
 2. `paginas/contra_capa.html` — o link do TikTok no bloco do canal

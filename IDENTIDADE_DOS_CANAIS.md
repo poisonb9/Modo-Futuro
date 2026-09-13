@@ -19,6 +19,37 @@ contas do próprio aplicativo, que é a única fonte que não depende de memóri
 | `fatura.chora` | `@fatura.chora` | carrinho de compras cromado | `#C1841A` | ⚠️ **pode mudar** |
 | `achadinhos.instantaneos` | `@achadinhos.instantaneos` | lupa cromada sobre ouro | `#7A3FF2` | ⚠️ **pode mudar** |
 
+## O @ NO INSTAGRAM — e ele NAO e' o mesmo do TikTok
+
+Registrado em 13/09/2026, de print dos perfis. O Bryan esta' abrindo as contas
+pra publicar nas duas plataformas todo dia.
+
+| canal (nome_buffer) | @ no TikTok | @ no Instagram |
+|---|---|---|
+| `modofuturo` | `@modofuturo` | `@modo_futuro_` ⚠️ com underscores |
+| `achadinhos.instantaneos` | `@achadinhos.instantaneos` | `@achadinhos.instantaneos` |
+| `semanestesia.pod` | `@semanestesia.pod` | `@semanestesia.pod` |
+| `truque.importado` | `@achadinho.make` | `@achadinho.make.total` ⚠️ **nome novo** |
+| `cozinha.importada` | `@cozinha.internacional` | — falta |
+| `fatura.chora` | `@fatura.chora` | — falta |
+| `atefalhar` | `@atefalhar` | — falta |
+
+⚠️ **DOIS @ DIFERENTES PRA MESMA CONTA, e essa e' a armadilha.** O
+`@modofuturo` do TikTok e' `@modo_futuro_` no Instagram; o `@achadinho.make`
+virou `@achadinho.make.total`. Qualquer lugar do motor que escreva o @ na tela
+(a contra-capa, a legenda, a chamada) precisa saber PARA QUAL PLATAFORMA esta'
+escrevendo — senao manda gente do Instagram pra um @ que nao existe la'.
+
+⭐ **O `nome_buffer` continua sendo a identidade.** E' ele que nao muda quando
+o @ muda — em nenhuma das duas plataformas. Mesma regra de sempre, agora com
+mais um motivo.
+
+⚠️ **E O `@achadinho.make.total` NAO E' SO' UM @ NOVO.** "make" + "total"
+junta o nome do canal de maquiagem com o nome do grupo/canal geral. Vale
+confirmar com o Bryan se a intencao e' unificar as duas coisas ou se foi so' o
+@ disponivel — a diferenca muda o que a bio promete.
+
+
 ⚠️ **Os dois últimos são os canais abertos mais recentemente, e o Bryan avisou
 em 12/09/2026 que o nome deles ainda está sujeito a alteração.** Antes de
 imprimir esses nomes em qualquer lugar que custe caro desfazer — arte, bio,

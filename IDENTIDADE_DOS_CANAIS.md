@@ -20,28 +20,38 @@ contas do próprio aplicativo, que é a única fonte que não depende de memóri
 | `achadinhos.instantaneos` | `@achadinhos.instantaneos` | lupa cromada sobre ouro | `#7A3FF2` | ⚠️ **pode mudar** |
 
 
-## ⚠️ O FATURA CHORA VAI VIRAR "PAGO/PAGUE MENOS"
+## O FATURA CHORA VIROU "PAGO MENOS" — RESOLVIDO EM 13/09/2026
 
-Decisão do Bryan em 13/09/2026: *"Pague menos é um canal que vai vir no lugar
-de Fatura Chora"*.
+Conferido na tela do perfil: o nome de exibição é **`Pago menos`**, e o `@`
+continua **`@fatura.chora`** até o Bryan conseguir trocar.
 
-⚠️ **E O NOME AINDA NÃO ESTÁ FECHADO.** Três grafias em circulação no mesmo
-dia:
+```
+Pago menos  ✓
+@fatura.chora
+🔎 Achadinho que deixa o coração quentinho.
+⚡ AS PROMOS QUE EU USO
+pagomenos.pages.dev
+```
 
-| onde | como está |
-|---|---|
-| o selo de CTA (arte, `engine/selos/siga_fatura.chora.png`) | **PAGO MENOS** |
-| a mensagem do Bryan | **Pague menos** |
-| o endereço da contra-capa | `pagomenos.pages.dev` |
+⚠️ **Houve uma hora do dia com TRÊS grafias em circulação** — a arte dizia
+`PAGO MENOS`, o Bryan escreveu `Pague menos`, e a página era `pagomenos`.
+Ficou registrado porque o selo de CTA é **imagem**: se a grafia tivesse ficado
+errada, o erro sairia em todo vídeo e só se corrigiria gerando a arte de novo.
+A arte estava certa; nada a refazer.
 
-⭐ **Isto tem de ser decidido antes de a cascata ir ao ar.** O selo é IMAGEM:
-não dá para corrigir por código, só gerando a arte de novo. Se o canal se
-chamar "Pague Menos" e o selo disser "Pago Menos", o erro vai em todo vídeo.
+⭐ **É o primeiro canal com o link da bio no ar** — `pagomenos.pages.dev` está
+escrito lá. Os outros seis ainda não têm.
 
-⚠️ **E o `nome_buffer` continua `fatura.chora`**, como sempre — ele não muda
-quando o canal muda de nome, e é por isso que o arquivo do selo se chama
-`siga_fatura.chora.png` mesmo dizendo outra coisa na arte. Mesma regra do
-`cozinha.importada`, que vira Achadinho Chef em 26/09 sem trocar de chave.
+⚠️ **E o `nome_buffer` continua `fatura.chora`.** Ele não muda quando o canal
+muda de nome nem quando o `@` muda — é a chave que atravessa as mudanças, e é
+por isso que o selo se chama `siga_fatura.chora.png` dizendo "PAGO MENOS" na
+arte. Mesma regra do `cozinha.importada`, que vira Achadinho Chef em 26/09.
+
+⚠️ **QUANDO O `@` MUDAR**, o que precisa acompanhar:
+1. `engine/canais_registro.py` — o campo `arroba`
+2. `paginas/contra_capa.html` — o link do TikTok no bloco do canal
+3. este arquivo
+O `nome_buffer`, o nome do selo e a chave do Supabase **não** mudam.
 
 ## O @ NO INSTAGRAM — e ele NAO e' o mesmo do TikTok
 

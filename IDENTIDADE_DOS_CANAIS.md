@@ -19,6 +19,30 @@ contas do próprio aplicativo, que é a única fonte que não depende de memóri
 | `fatura.chora` | `@fatura.chora` | carrinho de compras cromado | `#C1841A` | ⚠️ **pode mudar** |
 | `achadinhos.instantaneos` | `@achadinhos.instantaneos` | lupa cromada sobre ouro | `#7A3FF2` | ⚠️ **pode mudar** |
 
+
+## ⚠️ O FATURA CHORA VAI VIRAR "PAGO/PAGUE MENOS"
+
+Decisão do Bryan em 13/09/2026: *"Pague menos é um canal que vai vir no lugar
+de Fatura Chora"*.
+
+⚠️ **E O NOME AINDA NÃO ESTÁ FECHADO.** Três grafias em circulação no mesmo
+dia:
+
+| onde | como está |
+|---|---|
+| o selo de CTA (arte, `engine/selos/siga_fatura.chora.png`) | **PAGO MENOS** |
+| a mensagem do Bryan | **Pague menos** |
+| o endereço da contra-capa | `pagomenos.pages.dev` |
+
+⭐ **Isto tem de ser decidido antes de a cascata ir ao ar.** O selo é IMAGEM:
+não dá para corrigir por código, só gerando a arte de novo. Se o canal se
+chamar "Pague Menos" e o selo disser "Pago Menos", o erro vai em todo vídeo.
+
+⚠️ **E o `nome_buffer` continua `fatura.chora`**, como sempre — ele não muda
+quando o canal muda de nome, e é por isso que o arquivo do selo se chama
+`siga_fatura.chora.png` mesmo dizendo outra coisa na arte. Mesma regra do
+`cozinha.importada`, que vira Achadinho Chef em 26/09 sem trocar de chave.
+
 ## O @ NO INSTAGRAM — e ele NAO e' o mesmo do TikTok
 
 Registrado em 13/09/2026, de print dos perfis. O Bryan esta' abrindo as contas

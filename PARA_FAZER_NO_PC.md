@@ -38,10 +38,26 @@ plataforma; só não é a alavanca de alcance que a gente achou que fosse.
 
 **Onde:** `ui.awin.com` → Conta → Perfil → Visão Geral
 
-⚠️ **Por que agora:** as **29 candidaturas estão sendo avaliadas neste
-momento**, e o alerta *"Seu perfil está incompleto"* aparece na tela de quem
-decide. Preencher depois **não desfaz uma recusa**.
+⚠️ **MEDIDO EM 14/09/2026** (`python -m engine.awin`, não é estimativa):
 
+```
+JOINED      0
+PENDING    28
+REJECTED    1   <- 365Rider (Sportswear)
+SUSPENDED   0
+```
+
+⚠️ **A fila começou a ser julgada.** Ontem eram 29 pendentes e **zero**
+recusas; hoje a primeira recusa entrou. A API não diz o motivo — ligar a
+recusa ao perfil incompleto seria chute. O que é fato: as outras 28 estão
+sendo decididas **agora**, com o aviso *"Seu perfil está incompleto"* na tela
+de quem decide, e preencher depois **não desfaz uma recusa**.
+
+⭐ Dá pra reconferir a qualquer momento, sem abrir o painel:
+
+```bash
+python -m engine.awin
+```
 Cole na descrição:
 
 ```

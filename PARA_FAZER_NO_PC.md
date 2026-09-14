@@ -83,8 +83,10 @@ cupom e de search bidding. Dizer que você **não** faz isso remove a objeção
 antes de ela aparecer.
 
 **E no mesmo painel:**
-- `Perfil → Espaços Promocionais` — hoje só existe `oachadinho`. Adicione os
-  outros (lista no fim deste arquivo).
+- `Perfil → Espaços Promocionais` — hoje só existe `oachadinho`, e foi ele
+  que causou a recusa medida. **Os dez espaços estão prontos pra colar em
+  [`AWIN_ESPACOS.md`](AWIN_ESPACOS.md)**, com tipo, endereço e descrição.
+  ⚠️ A API não alcança isto (404 medido em 14/09) — é tela.
 - `Configurações → dados de pagamento` — ⚠️ sem isso a comissão **acumula e
   não sai**.
 

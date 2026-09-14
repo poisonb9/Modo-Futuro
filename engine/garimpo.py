@@ -36,6 +36,37 @@ from . import rende_video
 RAIZ = Path(__file__).resolve().parent.parent
 PRECOS = RAIZ / "estado" / "precos_vistos.jsonl"
 
+# ⚠️ O TRACKING_ID E' O QUE DIZ *QUAL CANAL* VENDEU — e hoje ha' UM so'.
+#
+# O `promotion_link` ja' vem carimbado com o tracking_id que a busca pediu
+# (ver `montar`), entao trocar o id AQUI e' o conserto inteiro da atribuicao
+# por canal: nao ha' segundo lugar pra mexer.
+#
+# ⚠️ FALHA FECHADA DO LADO QUE PAGA: canal sem id cai no `default`, que e' o
+# unico MEDIDO como valido (teste/fumaca_tracking.py, 12/09/2026). Inventar
+# o nome do id seria pior que nao ter: `link.generate` com id errado devolve
+# um link que ABRE A PAGINA NORMALMENTE e nao paga nada — a venda acontece e
+# ninguem ve' que ela se perdeu.
+#
+# ⭐ PRA LIGAR: criar os ids em portals.aliexpress.com -> Ad Center ->
+# Tracking ID, rodar `python teste/fumaca_tracking.py` com os nomes novos na
+# lista de CANDIDATOS, e so' depois escrever aqui o que ELE aprovou.
+TRACKING: dict[str, str] = {
+    # "truque.importado":        "achadinhomake",
+    # "cozinha.importada":       "achadinhochef",
+    # "achadinhos.instantaneos": "instantaneos",
+    # "fatura.chora":            "pagomenos",
+    # "atefalhar":               "atefalhar",
+    # "semanestesia.pod":        "semanestesia",
+    # "modofuturo":              "modofuturo",
+}
+TRACKING_PADRAO = "default"
+
+
+def tracking_de(canal: str) -> str:
+    """O tracking_id deste canal, ou o `default` enquanto ele nao existir."""
+    return TRACKING.get(canal) or TRACKING_PADRAO
+
 # ⚠️ TERMO CURTO E GENERICO TRAZ O CATALOGO INTEIRO, e o AliExpress e' global:
 # "cortador" devolveu tesoura de poda e alicate de unha pro canal de COZINHA,
 # e "achadinhos casa" devolveu VAZIO (e' gorduroso de portugues brasileiro,
@@ -110,7 +141,7 @@ def buscar(canal: str, por_termo: int = 20) -> list[dict]:
             "aliexpress.affiliate.product.query", keywords=termo,
             page_size=str(por_termo), target_currency="BRL",
             target_language="PT", ship_to_country="BR",
-            tracking_id="default", sort="LAST_VOLUME_DESC")
+            tracking_id=tracking_de(canal), sort="LAST_VOLUME_DESC")
         res = r.get("aliexpress_affiliate_product_query_response", {}) \
                .get("resp_result", {})
         if str(res.get("resp_code")) != "200":
@@ -441,6 +472,7 @@ def varrer(por_termo: int = 20) -> tuple[int, int]:
                 "aliexpress.affiliate.product.query", keywords=termo,
                 page_size=str(por_termo), target_currency="BRL",
                 target_language="PT", ship_to_country="BR",
+                # memoria de preco, nao vira link publicado: fica no padrao
                 tracking_id="default", sort="LAST_VOLUME_DESC")
             res = r.get("aliexpress_affiliate_product_query_response", {}) \
                    .get("resp_result", {})
@@ -501,6 +533,7 @@ def vigiar(por_termo: int = 8) -> list[dict]:
                 "aliexpress.affiliate.product.query", keywords=termo,
                 page_size=str(por_termo), target_currency="BRL",
                 target_language="PT", ship_to_country="BR",
+                # memoria de preco, nao vira link publicado: fica no padrao
                 tracking_id="default", sort="LAST_VOLUME_DESC")
             res = r.get("aliexpress_affiliate_product_query_response", {}) \
                    .get("resp_result", {})

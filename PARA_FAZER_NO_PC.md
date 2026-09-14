@@ -7,25 +7,33 @@ Marque com `[x]` o que for fazendo — este arquivo é o combinado.
 
 ---
 
-## 🔴 0. O RÓTULO DE IA — risco de CONTA, não de alcance
+## ✅ 0. O RÓTULO DE IA — JÁ ESTÁ MARCADO (conferido em 14/09/2026)
 
-⚠️ **Conferido em 13/09/2026: NADA no motor marca, verifica ou lembra do
-rótulo.** O único vestígio é um comentário em `agendar_buffer.py:369` dizendo
-que já houve clipe *"tirado da fila por ter sido postado sem rótulo de IA"*.
+⚠️ **Este item estava errado.** O grep de 13/09 procurou por `rotulo` e por
+isso não achou nada — o campo não se chama assim.
 
-Hoje quem marca é o Bryan, na mão, no app — e quem publica é o **Buffer**,
-que não marca.
+**O que foi medido agora:**
 
-⚠️ **Todo clipe com voz clonada precisa do rótulo.** E a hipótese principal do
-corte de alcance de 02/08 foi justamente essa, descoberta por uma rejeição de
-Promoção por integridade/autenticidade.
+- `agendar_buffer.py:489` manda `metadata.tiktok.isAiGenerated = True` em
+  **todo** post, sem condição nenhuma. Está no código desde 25/08/2026.
+- `enfileirar()` é a **única** função do motor que cria post — os outros seis
+  arquivos que falam com a API do Buffer só **leem**. Não há caminho por fora.
+- A regra 3 do cabeçalho do módulo já dizia isso; a interface do Buffer não
+  expõe o campo, mas a API expõe.
 
-**O que decidir:** se o TikTok aceita o rótulo por API/Buffer, dá para
-automatizar. Se só houver na interface, o conserto é uma **lista de conferência
-no post** — o motor não pode marcar, mas pode LEMBRAR, e hoje nem isso faz.
+⭐ Ou seja: **todo clipe que sai pelo motor já nasce rotulado.** O risco de
+conta por aqui não existe.
+
+**O que sobra, e é menor:** clipe postado **na mão**, fora do Buffer. Já
+aconteceu uma vez (`agendar_buffer.py:370` guarda o rastro: clipe tirado da
+fila por ter sido postado sem rótulo). Aí quem marca é você, no app.
+
+⚠️ E vale lembrar o que o handoff de 08/09 mediu: **o rótulo não explica o
+corte de alcance de 02/08.** Ele entrou no código e a recuperação não veio
+dele — a causa medida foi **duplicata**. Marcar continua sendo obrigação de
+plataforma; só não é a alavanca de alcance que a gente achou que fosse.
 
 ---
-
 ## 🔴 1. Perfil do Awin — É O ÚNICO QUE PIORA ENQUANTO ESPERA
 
 **Onde:** `ui.awin.com` → Conta → Perfil → Visão Geral
@@ -74,7 +82,18 @@ igual ao histórico de preço, não se coleta depois.
 ⭐ É o que decide **onde investir esforço**: se um canal vende 10x mais que
 outro, isso muda quantos clipes cada um recebe por semana.
 
-**Me mandar os nomes** — a troca do lado do motor é uma linha por canal.
+**Me mandar os nomes.** ✅ **O lado do motor já está pronto** (14/09): a
+tabela `TRACKING` em `engine/garimpo.py` espera os nomes **comentada**, e
+`buscar()` já pede `tracking_de(canal)`. Descomentar é tudo.
+
+⭐ E é **um lugar só**: o `promotion_link` já vem carimbado com o id que a
+busca pediu, então não há segundo ponto pra esquecer.
+
+⚠️ **Ficam comentados de propósito até existirem no Portals.** Id que não
+existe devolve link que **abre a página normalmente e não paga** — pior que
+não ter. Assim que criar, rode `python teste/fumaca_tracking.py` com os nomes
+novos: ele tenta um por um e só o válido passa. Guarda:
+`teste/teste_tracking_por_canal.py`.
 
 ---
 

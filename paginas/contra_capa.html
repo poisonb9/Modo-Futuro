@@ -19,6 +19,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
   :root {
+    /* o respiro lateral da pagina. Mora aqui porque a esteira sangra por ele
+       — dois numeros iguais escritos em dois lugares divergem um dia. */
+    --respiro: 18px;
     --tinta:       #141218;
     --tinta-fraca: #5B5563;
     --fundo:       #F7F6F8;
@@ -56,7 +59,13 @@
 
   * { box-sizing: border-box; }
 
+  /* ⚠️ TRAVA DE ARRASTO LATERAL. A pagina e' uma coluna: rolar pro lado nunca
+     e' intencional aqui, e um elemento largo demais em qualquer lugar da
+     pagina soltava ela inteira. `clip` (e nao `hidden`) porque `hidden` cria
+     um container de rolagem e quebraria o `scrollIntoView` do botao. */
+  html { overflow-x: clip; }
   body {
+    overflow-x: clip;
     margin: 0;
     background: var(--fundo);
     color: var(--tinta);
@@ -66,7 +75,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .envelope { max-width: 440px; margin: 0 auto; padding: 18px 18px 56px; }
+  .envelope { max-width: 440px; margin: 0 auto; padding: var(--respiro) var(--respiro) 56px; }
 
   /* ---------------- controle de previa: nao vai ao ar ---------------- */
   .previa {
@@ -188,7 +197,13 @@
   /* a esteira: prova VISUAL de sortimento. Empurra o olho pra baixo
      porque o movimento e' horizontal e o conteudo continua abaixo. */
   .esteira {
-    margin: 14px -20px 2px; overflow: hidden;
+    /* ⚠️ O SANGRAMENTO TEM DE BATER COM O PADDING DO ENVELOPE, que e' 18px.
+       Com -20px a esteira ficava 379px numa tela de 375 e a PAGINA INTEIRA
+       arrastava 2px pro lado — no iPhone, com o repique do Safari, isso
+       parece pagina solta. Medido em 14/09/2026 no aparelho do Bryan.
+
+       ⭐ E vem da mesma variavel do envelope, pra nao voltar a divergir. */
+    margin: 14px calc(var(--respiro) * -1) 2px; overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent,
       #000 8%, #000 92%, transparent);
     mask-image: linear-gradient(90deg, transparent,

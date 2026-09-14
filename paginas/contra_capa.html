@@ -130,7 +130,14 @@
     align-items: center; justify-content: center; gap: 3px;
     margin: 0 auto 14px; max-width: 30ch;
   }
+  .vivo { text-decoration: none; color: inherit; }
+  /* ⚠️ alvo de toque com folga: o dedo nao acerta uma linha de 14px */
+  .vivo[href] { padding: 6px 10px; border-radius: 12px; }
+  .vivo[href]:active { background: var(--tinta-mais-fraca, rgba(0,0,0,.05)); }
   .vivo .oque { font-size: 14.5px; line-height: 1.25; color: var(--tinta); }
+  .vivo .dica {
+    font-size: 11.5px; color: var(--fraco); letter-spacing: .04em;
+  }
   .vivo .cursor {
     display: inline-block; width: 2px; height: 1em; margin-left: 1px;
     background: var(--acento); vertical-align: -2px;
@@ -312,10 +319,15 @@
     <div class="heroi">
       <p class="marca" id="marca"></p>
       <h1 class="chamada" id="chamada"></h1>
-      <div class="vivo">
-        <p class="oque" id="vivo_nome"></p>
-        <p class="quanto" id="vivo_preco"></p>
-      </div>
+      <!-- ⚠️ E' UM LINK, e nao um paragrafo. Na primeira versao era texto
+           solto: o Bryan tentou tocar no produto do topo e nao aconteceu
+           nada. O que a pagina mostra em destaque tem que levar pra algum
+           lugar — senao ela ensina que tocar nela nao adianta. -->
+      <a class="vivo" id="vivo_link" rel="noopener" target="_blank">
+        <span class="oque" id="vivo_nome"></span>
+        <span class="quanto" id="vivo_preco"></span>
+        <span class="dica" id="vivo_dica"></span>
+      </a>
       <button class="rolar" id="rolar" type="button">
         <span id="rolar_texto"></span><span class="seta">&darr;</span>
       </button>
@@ -792,14 +804,19 @@
   var relogioVivo = null;
 
   function animarVitrine(itens) {
+    itensVivos = itens || [];
     var alvoNome = document.getElementById("vivo_nome");
     var alvoPreco = document.getElementById("vivo_preco");
+    var alvoDica = document.getElementById("vivo_dica");
+    var alvoLink = document.getElementById("vivo_link");
     if (relogioVivo) { clearTimeout(relogioVivo); relogioVivo = null; }
     // ⚠️ SEM PRODUTO A LINHA SOME INTEIRA. Um cursor piscando sozinho
     // promete que algo vai aparecer, e nada aparece.
     if (!itens || !itens.length) {
       alvoNome.textContent = "";
       alvoPreco.textContent = "";
+      alvoDica.textContent = "";
+      alvoLink.removeAttribute("href");
       return;
     }
     // ⚠️ NOME CURTO: o do AliExpress tem 90 caracteres de palavra-chave
@@ -809,7 +826,7 @@
     var lista = itens.map(function (p) {
       var n = (p.nome || "").split(",")[0].split(":")[0].trim();
       if (n.length > 44) { n = n.slice(0, 43).trim() + "…"; }
-      return { nome: n, preco: p.preco };
+      return { nome: n, preco: p.preco, link: p.link, cheio: p.nome };
     });
     var calmo = window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -818,6 +835,17 @@
     function proximo() {
       var p = lista[i % lista.length];
       i += 1;
+      // ⚠️ O HREF TROCA JUNTO COM O TEXTO, no mesmo instante. Se ele ficasse
+      // pra tras, o toque abriria o produto ANTERIOR — e a pessoa cairia
+      // numa pagina que nao e' a que ela viu.
+      vivoAtual = p;
+      if (p.link) {
+        alvoLink.setAttribute("href", p.link);
+        alvoDica.textContent = "toque para ver na loja →";
+      } else {
+        alvoLink.removeAttribute("href");
+        alvoDica.textContent = "";
+      }
       alvoPreco.textContent = "";
       if (calmo) {
         // ⭐ Acessibilidade nao e' versao pobre: quem pediu menos movimento
@@ -842,6 +870,40 @@
     }
     proximo();
   }
+
+  // ⚠️ O PRODUTO QUE ESTA' NA TELA, guardado fora: o clique precisa saber
+  // qual e', e a medicao precisa do nome.
+  var vivoAtual = null;
+  var retomarVivo = null;
+  // a lista da vez, pra retomar de onde parou sem recalcular nada
+  var itensVivos = [];
+
+  // ⚠️ O DEDO PARA O CARROSSEL. Sem isto o produto podia rodar entre o
+  // toque e o clique, e a pessoa abriria um item que nao escolheu — o
+  // tipo de defeito que parece propaganda enganosa, e nao bug.
+  (function () {
+    var alvo = document.getElementById("vivo_link");
+    ["pointerdown", "touchstart"].forEach(function (ev) {
+      alvo.addEventListener(ev, function () {
+        if (relogioVivo) { clearTimeout(relogioVivo); relogioVivo = null; }
+        // ⚠️ E VOLTA A ANDAR depois de 6s. Sem isto, um encostao ao rolar
+        // congelava a linha PRA SEMPRE — a pagina ficava parada num produto
+        // so' e perdia justamente o que faz ela prender.
+        if (retomarVivo) { clearTimeout(retomarVivo); }
+        retomarVivo = setTimeout(function () {
+          if (!relogioVivo) { animarVitrine(itensVivos); }
+        }, 6000);
+      }, { passive: true });
+    });
+    alvo.addEventListener("click", function () {
+      if (!vivoAtual || !vivoAtual.link) { return; }
+      // ⭐ `produto` e' tipo VALIDO no CHECK do banco: este clique e' um
+      // clique de produto como qualquer outro, e conta no mesmo lugar.
+      medir("clique", { canal: CANAIS[atual].banco, tipo: "produto",
+                        rotulo: vivoAtual.cheio || vivoAtual.nome });
+    });
+  })();
+
 
   // ⚠️ ESCAPA O NOME. Ele vem do titulo do vendedor, que e' texto de fora;
   // com `innerHTML` cru, um titulo com `<` quebraria a pagina.

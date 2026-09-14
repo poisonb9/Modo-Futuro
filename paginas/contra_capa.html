@@ -102,6 +102,59 @@
 
   /* ---------------- topo ---------------- */
   .topo { display: flex; flex-direction: column; align-items: center; gap: 9px; text-align: center; }
+  /* ⚠️ O TOPO E' O UNICO LUGAR QUE TODO MUNDO VE'.
+
+     MEDIDO nesta operacao: 98,7% do trafego vem da Para Voce e a
+     audiencia sai em 0:02. Quem chega na bio ja' gastou a paciencia dele
+     no video — o topo tem que entregar PRODUTO, nao apresentacao.
+
+     ⭐ Por isso a linha viva mostra um produto de verdade, com preco de
+     verdade, ANTES de qualquer rolagem. O que faz rolar e' curiosidade
+     especifica ('quanto custa o resto?'), nao enfeite. */
+  .heroi { text-align: center; padding: 4px 0 2px; }
+  .marca {
+    font: 700 12px/1 var(--fonte-mono, monospace);
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--fraco); margin: 10px 0 4px;
+  }
+  .chamada {
+    font-family: 'Archivo Black', system-ui, sans-serif;
+    font-size: clamp(27px, 8.4vw, 38px); line-height: 1.04;
+    letter-spacing: -.02em; margin: 6px 0 12px;
+  }
+  .chamada em { font-style: normal; color: var(--acento); }
+  /* a linha viva: altura FIXA, senao a pagina pula a cada troca de
+     produto — e pulo no topo e' o jeito mais rapido de perder o toque */
+  .vivo {
+    min-height: 62px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 3px;
+    margin: 0 auto 14px; max-width: 30ch;
+  }
+  .vivo .oque { font-size: 14.5px; line-height: 1.25; color: var(--tinta); }
+  .vivo .cursor {
+    display: inline-block; width: 2px; height: 1em; margin-left: 1px;
+    background: var(--acento); vertical-align: -2px;
+    animation: piscar 1.05s step-end infinite;
+  }
+  @keyframes piscar { 50% { opacity: 0; } }
+  .vivo .quanto {
+    font: 700 21px/1 var(--fonte-mono, monospace); color: var(--acento);
+  }
+  .rolar {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 0; cursor: pointer; font: 600 14.5px/1 inherit;
+    background: var(--tinta); color: var(--fundo);
+    padding: 13px 20px; border-radius: 999px; margin-bottom: 4px;
+  }
+  .rolar .seta { animation: descer 1.6s ease-in-out infinite; }
+  @keyframes descer { 0%,100% { transform: translateY(0); }
+                      50% { transform: translateY(3px); } }
+  .prova {
+    font-size: 12px; color: var(--fraco); margin: 10px 0 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vivo .cursor, .rolar .seta { animation: none; }
+  }
   .avatar {
     width: 104px; height: 104px; border-radius: 50%;
     display: grid; place-items: center;
@@ -256,8 +309,22 @@
 
   <header class="topo">
     <div class="avatar" id="avatar"></div>
-    <h1 id="nome"></h1>
-    <p class="arroba" id="arroba"></p>
+    <div class="heroi">
+      <p class="marca" id="marca"></p>
+      <h1 class="chamada" id="chamada"></h1>
+      <div class="vivo">
+        <p class="oque" id="vivo_nome"></p>
+        <p class="quanto" id="vivo_preco"></p>
+      </div>
+      <button class="rolar" id="rolar" type="button">
+        <span id="rolar_texto"></span><span class="seta">&darr;</span>
+      </button>
+      <p class="prova" id="prova"></p>
+    </div>
+    <!-- ⚠️ O NOME DO CANAL SAIU DO TOPO em 14/09/2026, a pedido do Bryan: a
+         pagina passou a ser UMA SO' pra operacao inteira, com a lupa no
+         lugar do brasao de canal. De onde a pessoa veio nao some — decide a
+         ORDEM das secoes la' embaixo, e aparece como contexto discreto. -->
     <p class="promessa" id="promessa"></p>
   </header>
 
@@ -267,7 +334,7 @@
 
   <section class="produtos">
     <div class="cabeca">
-      <h2>O que apareceu nos vídeos</h2>
+      <h2 id="titulo_vitrine">O que apareceu nos vídeos</h2>
       <span class="etiqueta" id="etiqueta"></span>
     </div>
     <div id="vitrine"></div>
@@ -718,6 +785,78 @@
     return e;
   }
 
+  // ⚠️ UM RELOGIO SO', guardado fora da funcao. Trocar de canal na previa
+  // chamava `animarVitrine` de novo, e os dois relogios escreviam no mesmo
+  // paragrafo — o texto saia embaralhado, letra de um produto no meio do
+  // outro.
+  var relogioVivo = null;
+
+  function animarVitrine(itens) {
+    var alvoNome = document.getElementById("vivo_nome");
+    var alvoPreco = document.getElementById("vivo_preco");
+    if (relogioVivo) { clearTimeout(relogioVivo); relogioVivo = null; }
+    // ⚠️ SEM PRODUTO A LINHA SOME INTEIRA. Um cursor piscando sozinho
+    // promete que algo vai aparecer, e nada aparece.
+    if (!itens || !itens.length) {
+      alvoNome.textContent = "";
+      alvoPreco.textContent = "";
+      return;
+    }
+    // ⚠️ NOME CURTO: o do AliExpress tem 90 caracteres de palavra-chave
+    // ("Adequado para Aplicacao de BB Cream Liqui"). Na linha viva isso
+    // vira parede de texto — corta na primeira virgula, que e' onde o
+    // vendedor chines para de nomear e comeca a listar.
+    var lista = itens.map(function (p) {
+      var n = (p.nome || "").split(",")[0].split(":")[0].trim();
+      if (n.length > 44) { n = n.slice(0, 43).trim() + "…"; }
+      return { nome: n, preco: p.preco };
+    });
+    var calmo = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var i = 0;
+
+    function proximo() {
+      var p = lista[i % lista.length];
+      i += 1;
+      alvoPreco.textContent = "";
+      if (calmo) {
+        // ⭐ Acessibilidade nao e' versao pobre: quem pediu menos movimento
+        // ve' o mesmo produto e o mesmo preco, so' sem a digitacao.
+        alvoNome.textContent = p.nome;
+        alvoPreco.textContent = p.preco;
+        relogioVivo = setTimeout(proximo, 3400);
+        return;
+      }
+      var n = 0;
+      (function digitar() {
+        n += 1;
+        alvoNome.innerHTML = escapar(p.nome.slice(0, n)) +
+          '<span class="cursor"></span>';
+        if (n < p.nome.length) {
+          relogioVivo = setTimeout(digitar, 26);
+          return;
+        }
+        alvoPreco.textContent = p.preco;
+        relogioVivo = setTimeout(proximo, 2500);
+      })();
+    }
+    proximo();
+  }
+
+  // ⚠️ ESCAPA O NOME. Ele vem do titulo do vendedor, que e' texto de fora;
+  // com `innerHTML` cru, um titulo com `<` quebraria a pagina.
+  function escapar(t) {
+    var d = document.createElement("div");
+    d.textContent = t;
+    return d.innerHTML;
+  }
+
+  document.getElementById("rolar").addEventListener("click", function () {
+    var alvo = document.querySelector(".produtos");
+    if (alvo) { alvo.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    medir("clique", { canal: CANAIS[atual].banco, tipo: "rolar",
+                      rotulo: "ver os de hoje" });
+  });
   function montarProduto(p) {
     var falta = (p.link === FALTA);
     var e = document.createElement(falta ? "div" : "a");
@@ -762,18 +901,25 @@
     // um canal novo nao tem arte.
     var av = document.getElementById("avatar");
     av.innerHTML = "";
-    if (BRASOES[chave]) {
+    // ⚠️ A LUPA E' DA CASA. O brasao do canal continua no arquivo (a arte
+    // existe e e' usada na cascata dos videos), mas o topo da pagina unica
+    // mostra a marca da operacao — decisao do Bryan em 14/09/2026.
+    var marcaDaCasa = BRASOES["achadinho.total"] || BRASOES[chave];
+    if (marcaDaCasa) {
       var brasao = document.createElement("img");
-      brasao.src = BRASOES[chave];
-      brasao.alt = c.nome;
+      brasao.src = marcaDaCasa;
+      brasao.alt = "Achadinho Total";
       av.appendChild(brasao);
       av.classList.add("com-brasao");
     } else {
       av.textContent = c.inicial;
       av.classList.remove("com-brasao");
     }
-    document.getElementById("nome").textContent = c.nome;
-    document.getElementById("arroba").textContent = c.arroba;
+    // ⚠️ A MARCA E' A DA CASA, nao a do canal: a pagina e' uma so'. O canal
+    // de origem vira contexto, e quem manda na ORDEM das secoes.
+    document.getElementById("marca").textContent = "Achadinho Total";
+    document.getElementById("chamada").innerHTML =
+      "Eu garimpo.<br>Você <em>paga menos</em>.";
     document.getElementById("promessa").textContent = c.promessa;
 
     var lista = document.getElementById("vantagens");
@@ -845,18 +991,24 @@
     //
     // ⚠️ NAO REPETE o que ja' esta' na vitrine de cima, e NAO mostra o
     // proprio canal como se fosse outro canto.
+    document.getElementById("titulo_vitrine").textContent =
+      "O que apareceu no " + c.nome;
+
+    // ⚠️ TODOS OS CANTOS DA CASA, cada um com o seu bloco.
+    //
+    // ⭐ A ORDEM E' O QUE A PAGINA UNICA GANHOU: o canal de onde a pessoa
+    // veio ja' esta' em cima (a vitrine propria); aqui embaixo vem o
+    // Achadinho Total — a vitrine geral — e depois os outros canais.
+    //
+    // ⚠️ RESERVA DO MAIS ESPECIFICO PRO MAIS GERAL. O Total CONTEM os
+    // produtos dos canais; se ele escolhesse primeiro, levaria todos e os
+    // blocos de canal ficariam com um cartao cada (medido: 5 cartoes onde
+    // deviam ser 12).
     var outros = document.getElementById("outros");
     outros.innerHTML = "";
     var jaVistos = {};
     lista_do_canal.forEach(function (p) { jaVistos[p.link] = 1; });
 
-    // ⚠️ O CHEF ESCOLHE ANTES, o Total mostra antes.
-    //
-    // O Total e' a vitrine GERAL — ele contem os produtos do Chef. Filtrando
-    // na ordem de exibicao, o Total levava os do Chef e sobrava UM cartao pro
-    // Chef (medido: 5 cartoes no total, em vez de 8). Entao a reserva corre
-    // do mais especifico pro mais geral, e a exibicao na ordem que o Bryan
-    // pediu.
     function pegar(lista, quantos) {
       var fora = [];
       (lista || []).forEach(function (p) {
@@ -866,22 +1018,52 @@
       });
       return fora;
     }
-    var doChef = atual === "cozinha.internacional" ? []
-      : pegar(PRODUTOS_REAIS["cozinha.internacional"], 4);
-    var doTotal = pegar(PRODUTOS_REAIS["_todos"], 4);
 
-    [["No Achadinho Total", doTotal],
-     ["No Achadinho Chef", doChef]].forEach(function (bloco) {
-      if (!bloco[1].length) { return; }
+    var blocos = [];
+    Object.keys(CANAIS).forEach(function (chave) {
+      if (chave === atual) { return; }
+      var itens = pegar(PRODUTOS_REAIS[chave], 4);
+      if (itens.length) { blocos.push([CANAIS[chave].nome, itens]); }
+    });
+    // o Total escolhe por ultimo e aparece primeiro
+    var doTotal = pegar(PRODUTOS_REAIS["_todos"], 4);
+    if (doTotal.length) { blocos.unshift(["Achadinho Total", doTotal]); }
+
+    blocos.forEach(function (bloco) {
       var sec = el("section", "produtos");
       var cab = el("div", "cabeca");
-      cab.appendChild(el("h2", null, bloco[0]));
+      cab.appendChild(el("h2", null, "No " + bloco[0]));
       sec.appendChild(cab);
       var g = el("div", "vitrine");
       bloco[1].forEach(function (p) { g.appendChild(montarProduto(p)); });
       sec.appendChild(g);
       outros.appendChild(sec);
     });
+
+    // ⚠️ O CONTADOR SAI DO QUE ESTA' NA TELA, nao de um numero escrito na
+    // mao. Numero de vitrine que nao bate com o que se ve' embaixo e' o
+    // tipo de mentira pequena que custa a confianca inteira.
+    var naTela = document.querySelectorAll(
+      "#vitrine .produto, #outros .produto").length;
+    var rolar = document.getElementById("rolar");
+    var prova = document.getElementById("prova");
+    if (naTela > 0) {
+      document.getElementById("rolar_texto").textContent =
+        "ver os " + naTela + " de hoje ";
+      rolar.hidden = false;
+      var quando = (lista_do_canal[0] || doTotal[0] || {}).visto || "";
+      prova.textContent = naTela + " achadinhos" +
+        (quando ? " · preços conferidos em " + quando : "") +
+        " · link direto pra loja";
+    } else {
+      rolar.hidden = true;
+      prova.textContent = "";
+    }
+
+    // ⚠️ A LINHA VIVA MOSTRA PRODUTO, nao slogan. Quem chega vem de video
+    // vertical e sai em dois segundos; o topo tem que entregar o que a
+    // pagina promete ANTES de pedir rolagem.
+    animarVitrine(lista_do_canal.concat(doTotal));
 
     document.getElementById("rodape").textContent =
       c.arroba + " · conteúdo produzido com apoio de IA";

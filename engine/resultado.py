@@ -79,6 +79,17 @@ def anotar_publicado(produto: dict, canal: str, onde: str) -> None:
         "ganho_previsto": produto.get("_ganho", 0),
         "comissao": produto.get("_comissao", 0),
         "fonte": produto.get("fonte", "aliexpress"),
+        # ⭐ O LINK E A IMAGEM FICAM. Ate' 14/09/2026 este registro guardava
+        # so' o que o placar precisava, e a vitrine do canal nao tinha de
+        # onde tirar o produto pra mostrar — as paginas ficaram com cartao de
+        # exemplo ("ainda nao e' real") enquanto 25 produtos ja' estavam
+        # escolhidos.
+        #
+        # ⚠️ E O LINK NAO SE RECUPERA DEPOIS: ele carrega o tracking do
+        # momento. Buscar o produto de novo amanha da' outro link, e o
+        # `promotion_link` de uma busca velha nao volta.
+        "link": produto.get("link", ""),
+        "imagem": produto.get("imagem", ""),
         "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     with PUBLICADOS.open("a", encoding="utf-8") as f:

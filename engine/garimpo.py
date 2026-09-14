@@ -345,6 +345,12 @@ def para_produto(p: dict, queda: float) -> dict:
         "categoria": p.get("second_level_category_name", ""),
         "imagem": p.get("product_main_image_url", ""),
         "video": p.get("product_video_url", ""),
+        # ⚠️ O ID VIAJA JUNTO. Sem ele o registro do que foi publicado sai
+        # com `id: null` — medido em 14/09/2026: 25 de 25 linhas assim. E o
+        # id e' a unica chave que liga o produto publicado a` serie de preco
+        # e ao pedido; sem ele nao da' pra perguntar "o que a gente publicou
+        # vendeu?".
+        "_id": p.get("product_id"),
         # medidas que NAO vao pro post, mas explicam a escolha
         "_vendas": int(_num(p.get("lastest_volume"))),
         "_nota": _num(p.get("evaluate_rate")),

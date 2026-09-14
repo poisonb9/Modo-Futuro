@@ -48,11 +48,25 @@ SUSPENDED   0
 ```
 
 ⚠️ **A fila começou a ser julgada.** Ontem eram 29 pendentes e **zero**
-recusas; hoje a primeira recusa entrou. A API não diz o motivo — ligar a
-recusa ao perfil incompleto seria chute. O que é fato: as outras 28 estão
-sendo decididas **agora**, com o aviso *"Seu perfil está incompleto"* na tela
-de quem decide, e preencher depois **não desfaz uma recusa**.
+recusas; hoje a primeira recusa entrou.
 
+⭐ **E o motivo veio no e-mail** (print do Bryan, 14/09) — não foi perfil
+incompleto:
+
+> **O site não complementa a marca do anunciante**
+
+⚠️ **Isso aponta pra outra coisa, e mais barata de consertar.** A 365Rider
+é *Sportswear*. O único Espaço Promocional cadastrado é `oachadinho`, que é
+de achadinhos e beleza. Quem avaliou abriu uma página que não conversa com a
+marca dele e recusou — com razão.
+
+⭐ Ou seja: **cadastrar os outros Espaços Promocionais deixou de ser item de
+arrumação e virou o conserto da causa medida.** Anunciante de esporte
+precisa ver a página do *Até Falhar*; o de beleza, a do *Truque Importado*.
+São 28 decisões ainda em aberto olhando pra página errada.
+
+⚠️ A API **não** entrega o motivo — só a relação (`pending`/`rejected`).
+O porquê só chega no e-mail do Awin.
 ⭐ Dá pra reconferir a qualquer momento, sem abrir o painel:
 
 ```bash

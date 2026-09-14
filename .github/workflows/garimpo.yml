@@ -38,6 +38,10 @@ jobs:
           MELI_CLIENT_SECRET:    ${{ secrets.MELI_CLIENT_SECRET }}
           MELI_MATT_WORD:        ${{ secrets.MELI_MATT_WORD }}
           MELI_MATT_TOOL:        ${{ secrets.MELI_MATT_TOOL }}
+          AWIN_TOKEN:            ${{ secrets.AWIN_TOKEN }}
+          AWIN_PUBLISHER_ID:     ${{ secrets.AWIN_PUBLISHER_ID }}
+          TELEGRAM_BOT_TOKEN:    ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:      ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           # ⚠️ EM PARALELO, e nao em fila. Ate' 13/09/2026 os cinco canais
           # rodavam em sequencia: se um travava numa chamada lenta, os
@@ -66,6 +70,15 @@ jobs:
           # cada vez mais). As duas listas podem nao se cruzar.
           echo "===== tendencia (quem esta acelerando)"
           python -X utf8 -m engine.garimpo --tendencia || true
+          # ⚠️ POR ULTIMO, e com `|| true`: e' AVISO, nao coleta. Se o Awin
+          # estiver fora do ar, ou se faltar o secret, a rodada do garimpo
+          # nao pode morrer por causa disso — o ativo aqui e' a serie de
+          # precos, e ela ja' foi coletada acima.
+          #
+          # ⚠️ NA ESTREIA ELE NAO AVISA NADA, de proposito: sem linha de
+          # base as 28 pendentes virariam 28 'novidades'.
+          echo "===== awin (avisa so se mudou)"
+          python -X utf8 -m engine.awin --vigiar || true
           echo "===== pedidos e placar"
           python -X utf8 -m engine.resultado --pedidos --placar || true
       - name: Guardar o historico de preco
@@ -81,7 +94,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

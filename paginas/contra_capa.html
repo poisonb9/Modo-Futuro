@@ -134,8 +134,15 @@
   .chamada em { font-style: normal; color: var(--acento); }
   /* a linha viva: altura FIXA, senao a pagina pula a cada troca de
      produto — e pulo no topo e' o jeito mais rapido de perder o toque */
+  /* ⚠️ ALTURA FIXA, e nao `min-height`. Com altura variavel, um nome de
+     DUAS linhas empurrava a pagina inteira pra baixo e o de UMA puxava de
+     volta, a cada 2,5 segundos: no iPhone do Bryan parecia a pagina
+     tremendo (14/09/2026).
+
+     ⭐ O nome tem SEMPRE duas linhas reservadas (`line-clamp: 2`), ocupadas
+     ou nao. O espaco e' pago uma vez, na carga, e nao se mexe mais. */
   .vivo {
-    min-height: 62px; display: flex; flex-direction: column;
+    height: 98px; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 3px;
     margin: 0 auto 14px; max-width: 30ch;
   }
@@ -143,7 +150,12 @@
   /* ⚠️ alvo de toque com folga: o dedo nao acerta uma linha de 14px */
   .vivo[href] { padding: 6px 10px; border-radius: 12px; }
   .vivo[href]:active { background: var(--tinta-mais-fraca, rgba(0,0,0,.05)); }
-  .vivo .oque { font-size: 14.5px; line-height: 1.25; color: var(--tinta); }
+  .vivo .oque {
+    font-size: 14.5px; line-height: 1.25; color: var(--tinta);
+    /* duas linhas SEMPRE: 2 x 1.25 x 14.5px */
+    height: 36px; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
   .vivo .dica {
     font-size: 11.5px; color: var(--fraco); letter-spacing: .04em;
   }
@@ -153,7 +165,10 @@
     animation: piscar 1.05s step-end infinite;
   }
   @keyframes piscar { 50% { opacity: 0; } }
+  /* ⚠️ o preco so' aparece quando o nome termina de ser digitado; sem altura
+     propria ele nascia do nada e empurrava a dica 21px pra baixo */
   .vivo .quanto {
+    height: 24px;
     font: 700 21px/1 var(--fonte-mono, monospace); color: var(--acento);
   }
   .rolar {
@@ -429,7 +444,13 @@
        nao aparece secao nenhuma, em vez de aparecer um titulo sozinho. -->
   <div id="outros"></div>
 
-  <footer class="rodape" id="rodape"></footer>
+  <!-- ⚠️ O RODAPE SAIU a pedido do Bryan (14/09/2026). Ele dizia o @ e
+       "conteudo produzido com apoio de IA".
+
+       ⚠️ ISSO NAO MEXE NO ROTULO DE IA DA PLATAFORMA: quem cumpre a regra
+       do TikTok e' o `isAiGenerated` que o agendar_buffer manda em TODO
+       post (agendar_buffer.py:489). O aviso daqui era cortesia, nao
+       obrigacao — a pagina nao publica video. -->
 </div>
 
 <script>
@@ -1274,8 +1295,6 @@
     // pagina promete ANTES de pedir rolagem.
     animarVitrine(lista_do_canal.concat(doTotal));
 
-    document.getElementById("rodape").textContent =
-      c.arroba + " · conteúdo produzido com apoio de IA";
 
     Array.prototype.forEach.call(document.querySelectorAll(".aba"), function (a) {
       a.setAttribute("aria-pressed", String(a.dataset.canal === chave));

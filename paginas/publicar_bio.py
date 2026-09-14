@@ -127,6 +127,13 @@ def _chave_da_pagina(nome_buffer: str) -> str:
     return c.arroba.lstrip("@") if c else nome_buffer
 
 
+def _nome_bonito(d: dict) -> str:
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
+    from engine import nome_produto
+    return nome_produto.nome_de(d)
+
+
 def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     """O que o garimpo escolheu, agrupado pela chave que a pagina usa.
 
@@ -166,7 +173,13 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             continue
         quando = (d.get("quando") or "")[:10]
         fila.append({
-            "nome": d["nome"],
+            # ⭐ O NOME ESCRITO PRA GENTE, nao pro buscador do AliExpress.
+            # Sem cache e sem modelo ainda ha' nome: o corte na primeira
+            # virgula, que e' onde o vendedor para de nomear e comeca a
+            # listar palavra-chave. Ver engine/nome_produto.py.
+            "nome": _nome_bonito(d),
+            # o titulo cru fica: e' o que a dedup e o registro conhecem
+            "nome_loja": d["nome"],
             "preco": d.get("preco", ""),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             "link": d["link"],
@@ -186,7 +199,13 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             continue
         quando = (d.get("quando") or "")[:10]
         geral.append({
-            "nome": d["nome"],
+            # ⭐ O NOME ESCRITO PRA GENTE, nao pro buscador do AliExpress.
+            # Sem cache e sem modelo ainda ha' nome: o corte na primeira
+            # virgula, que e' onde o vendedor para de nomear e comeca a
+            # listar palavra-chave. Ver engine/nome_produto.py.
+            "nome": _nome_bonito(d),
+            # o titulo cru fica: e' o que a dedup e o registro conhecem
+            "nome_loja": d["nome"],
             "preco": d.get("preco", ""),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             "link": d["link"],

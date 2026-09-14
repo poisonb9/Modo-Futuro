@@ -280,6 +280,22 @@
   // tabela link_bio, escritos com a chave de servico.
   var FALTA = "#falta-o-link";
 
+  // ⚠️ OS PRODUTOS DE VERDADE ENTRAM AQUI, NA PUBLICACAO.
+  //
+  // Esta linha e' substituida por `publicar_bio.py`, que le o que o garimpo
+  // escolheu (`estado/produtos_publicados.jsonl`) e escreve os produtos de
+  // cada canal aqui dentro, com link de afiliado e foto.
+  //
+  // ⭐ POR QUE ASSIM, e nao editando o `produtos:` de cada canal la embaixo:
+  // a fonte da verdade e' o garimpo, que roda todo dia. Manter o produto
+  // escrito na mao em dois lugares e garantir que um dos dois envelhece — e
+  // o que envelhece aqui e' PRECO.
+  //
+  // ⚠️ VAZIO E' O ESTADO VALIDO. Sem injecao a pagina cai nos exemplos de
+  // baixo, com a etiqueta dizendo que sao exemplo. Falha aberta pro lado que
+  // nao mente.
+  var PRODUTOS_REAIS = {};
+
   // Os convites da comunidade Achadinho. ⚠️ Estao AQUI por decisao do Bryan em
   // 12/09/2026 — "pode guardar nos nossos arquivos de projeto, e' publico
   // mesmo" — e ele tem razao no argumento: o convite vai na bio do TikTok,
@@ -765,14 +781,19 @@
     var etiqueta = document.getElementById("etiqueta");
     vitrine.innerHTML = "";
 
-    if (mostrandoProdutos && c.produtos.length > 0) {
-      var lista = c.produtos.slice(0, 2);
+    // ⚠️ O REAL GANHA DO EXEMPLO, sempre. `c.produtos` e' a lista escrita na
+    // mao; `PRODUTOS_REAIS[chave]` e' o que o garimpo escolheu de verdade.
+    var reais = PRODUTOS_REAIS[atual] || [];
+    var disponiveis = reais.length ? reais : c.produtos;
+    var real = reais.length > 0 || c.produtoReal;
+    if (mostrandoProdutos && disponiveis.length > 0) {
+      var lista = disponiveis.slice(0, 4);
       vitrine.className = lista.length === 1 ? "vitrine solo" : "vitrine";
       // O livro e' produto NOSSO e existe de verdade; os do achadinho ainda
       // sao exemplo. A etiqueta tem de dizer qual e' qual, senao a pagina
       // apresenta invencao com a mesma cara de coisa real.
-      etiqueta.textContent = c.produtoReal
-        ? "estreia — falta só o link de compra"
+      etiqueta.textContent = real
+        ? "o que apareceu nos vídeos"
         : "exemplo — ainda não é real";
       lista.forEach(function (p) { vitrine.appendChild(montarProduto(p)); });
     } else {

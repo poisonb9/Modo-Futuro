@@ -113,6 +113,80 @@ CODIGOS = {
 }
 
 
+# ⚠️ A CHAVE DA PAGINA E' O @ PUBLICO, nao o nome interno do canal. Sai do
+# proprio registro (`canais_registro`) em vez de uma lista nova aqui: duas
+# listas discordando e' exatamente o defeito que aquele modulo documenta.
+def _chave_da_pagina(nome_buffer: str) -> str:
+    from engine import canais_registro
+    c = canais_registro.CANAIS.get(nome_buffer)
+    return c.arroba.lstrip("@") if c else nome_buffer
+
+
+def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
+    """O que o garimpo escolheu, agrupado pela chave que a pagina usa.
+
+    ⚠️ SO' ENTRA PRODUTO COM LINK. Cartao sem link aparece desligado, e um
+    cartao desligado numa pagina que promete "preco e link" e' pior que
+    cartao nenhum: quem clica e' justamente quem confiou.
+
+    ⚠️ O MAIS NOVO PRIMEIRO, e no maximo `por_canal`. O que envelhece aqui e'
+    PRECO — produto de duas semanas atras mostra numero que ja' mudou.
+    """
+    import json
+    arq = RAIZ / "estado" / "produtos_publicados.jsonl"
+    if not arq.exists():
+        return {}
+    linhas = []
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            linhas.append(json.loads(linha))
+        except ValueError:
+            continue        # linha torta nao derruba a vitrine inteira
+    saida: dict[str, list[dict]] = {}
+    vistos: dict[str, set] = {}
+    for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
+        if not d.get("link") or not d.get("nome"):
+            continue
+        chave = _chave_da_pagina(d.get("canal") or "")
+        # ⚠️ DEDUP PELO ID: o mesmo produto sai pelo garimpo E pelo telegram,
+        # e apareceria duas vezes na mesma vitrine.
+        marca = d.get("id") or d.get("nome")
+        if marca in vistos.setdefault(chave, set()):
+            continue
+        vistos[chave].add(marca)
+        fila = saida.setdefault(chave, [])
+        if len(fila) >= por_canal:
+            continue
+        quando = (d.get("quando") or "")[:10]
+        fila.append({
+            "nome": d["nome"],
+            "preco": d.get("preco", ""),
+            "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
+            "link": d["link"],
+            "imagem": d.get("imagem", ""),
+        })
+    return saida
+
+
+def injetar_produtos(html: str, dados: dict | None = None) -> str:
+    """Troca o `PRODUTOS_REAIS = {}` da pagina pelo que o garimpo achou.
+
+    ⚠️ ESTOURA SE O MARCADOR NAO EXISTIR. Substituicao que nao acha o alvo e
+    segue em silencio publicaria a pagina de exemplo achando que publicou a
+    real — e a etiqueta ainda diria "exemplo", entao ninguem notaria.
+    """
+    import json
+    dados = produtos_reais() if dados is None else dados
+    alvo = "  var PRODUTOS_REAIS = {};"
+    if alvo not in html:
+        raise SystemExit(
+            "nao achei o marcador PRODUTOS_REAIS na pagina — "
+            "alguem mexeu no contra_capa.html")
+    corpo = json.dumps(dados, ensure_ascii=False, indent=2)
+    return html.replace(alvo, "  var PRODUTOS_REAIS = " + corpo + ";", 1)
+
 def tirar_comentarios(html: str) -> str:
     """Tira comentario de JS, de CSS e de HTML.
 
@@ -290,8 +364,13 @@ def main() -> None:
     p.add_argument("--subir", action="store_true", help="empurra pro repo bio")
     a = p.parse_args()
 
-    html = mascarar(tirar_previa(
-        tirar_comentarios(ORIGEM.read_text(encoding="utf-8"))))
+    # ⚠️ INJETAR ANTES DE MASCARAR: o `conferir()` roda depois e precisa ver
+    # o que vai pro ar de verdade, produtos inclusive.
+    html = mascarar(tirar_previa(injetar_produtos(
+        tirar_comentarios(ORIGEM.read_text(encoding="utf-8")))))
+    reais = produtos_reais()
+    print("produtos reais por canal: " + (", ".join(
+        f"{k}={len(v)}" for k, v in sorted(reais.items())) or "NENHUM"))
 
     # ⚠️ A pagina do anunciante passa pelo MESMO detector de vazamento. Ela
     # nao tem comentario de motor, mas tem nome de canal — e o detector ja'

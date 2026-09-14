@@ -529,7 +529,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # escolher, isto nao faz nada. E a escolha e' experimento —
             # ligar em todos de uma vez repete o erro de 09/09, quando
             # punch-in e card entraram juntos e o numero nao disse qual foi.
-            if cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', canal):
+            # ⚠️ `canal` NAO EXISTE NESTE ESCOPO — `processar()` nao recebe
+            # esse parametro. Era NameError em TODO clipe 9:16 desde o commit
+            # da cascata (e4d6c85), e com os sete canais ligados.
+            #
+            # ⭐ O canal se le' do mesmo jeito que duas linhas acima, na
+            # chamada: a variavel de ambiente primeiro, o clipe como reserva.
+            _canal_cascata = (os.environ.get("CANAL_ESPERADO")
+                              or c.get("canal") or "")
+            if cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
                 print('      cascata de CTA aplicada')
 
             if not so_vertical:

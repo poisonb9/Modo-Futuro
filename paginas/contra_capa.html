@@ -620,9 +620,16 @@
       // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
       // Supabase, senao a chave estrangeira recusa e o clique se perde.
       banco: "fatura.chora",
-      nome: "Fatura Chora",
+      // ⚠️ O NOME MUDOU, O @ AINDA NAO. O canal virou "Pago menos"; o @ do
+      // TikTok so' pode ser trocado na janela dele (trava de 30 dias) e
+      // continua @fatura.chora ate' la'.
+      //
+      // ⚠️ E o `banco` NAO acompanha: ele e' o nome_buffer, chave
+      // estrangeira no Supabase. Trocar aqui faria o clique ser recusado e
+      // sumir em silencio.
+      nome: "Pago menos",
       arroba: "@fatura.chora",
-      inicial: "FC",
+      inicial: "PM",
       acento: "#C1841A",
       promessa: "Onde o seu dinheiro escapa sem você ver — e o que dá pra fazer hoje.",
       vantagens: [

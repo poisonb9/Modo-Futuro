@@ -64,7 +64,8 @@ ENV_CANAL = "TELEGRAM_CANAL_VITRINE"
 ORIGEM = {
     "truque.importado": "Achadinho Make",
     "cozinha.importada": "Achadinho Chef",
-    "fatura.chora": "Fatura Chora",
+    # nome novo, @ antigo: a troca do @ tem janela propria (trava de 30 dias)
+    "fatura.chora": "Pago menos",
     "achadinhos.instantaneos": "Achadinhos Instantâneos",
     "atefalhar": "Até Falhar",
     "semanestesia.pod": "Sem Anestesia",

@@ -78,32 +78,73 @@ def tracking_de(canal: str) -> str:
 #
 # ⚠️ E NAO USAR GIRIA NOSSA. "achadinho", "garimpo", "promo" sao palavras da
 # nossa operacao, nao do catalogo. O vendedor chines nao escreve isso.
+# ⚠️ OS TERMOS FORAM TRIPLICADOS EM 14/09/2026, a pedido do Bryan: o
+# catalogo tinha 25 produtos e isso e' pouco pra uma vitrine — e pouco
+# demais pro upsell, que fica sem candidato pra sugerir.
+#
+# ⚠️ E AMPLIAR A BUSCA NAO E' BAIXAR O FILTRO. O `serve()` continua igual:
+# nota, volume, comissao, preco e imagem. Mais termos = mais CANDIDATOS
+# examinados; quem entra continua passando pelas mesmas seis portas.
+#
+# ⭐ Cada termo novo segue a regra que a primeira rodada ensinou: DUAS
+# palavras, uma o objeto e outra o contexto. Termo de uma palavra so'
+# quando ele ja' e' o objeto inteiro.
 CANAIS = {
     "truque.importado": {
         "termos": ["pincel maquiagem", "esponja maquiagem", "batom liquido",
-                   "serum facial", "organizador maquiagem", "cilios postico"],
+                   "serum facial", "organizador maquiagem", "cilios postico",
+                   "paleta sombra", "delineador caneta", "base liquida",
+                   "corretivo facial", "mascara cilios", "iluminador facial",
+                   "primer facial", "batom matte", "lapis sobrancelha",
+                   "kit pinceis", "espelho maquiagem", "necessaire maquiagem",
+                   "gloss labial", "rolo massagem facial"
+                   ],
         "min": 10.0, "max": 120.0,
     },
     "cozinha.importada": {
         # ⚠️ "cortador" sozinho trouxe tesoura de poda e alicate de unha.
         "termos": ["cortador legumes", "organizador geladeira", "espatula",
-                   "forma silicone", "descascador legumes", "pote hermetico"],
+                   "forma silicone", "descascador legumes", "pote hermetico",
+                   "ralador queijo", "abridor lata", "tabua corte",
+                   "escorredor macarrao", "porta tempero", "prensa alho",
+                   "batedor manual", "luva forno", "organizador panela",
+                   "saco silicone", "colher silicone", "peneira inox",
+                   "termometro cozinha", "dosador tempero"
+                   ],
         "min": 10.0, "max": 150.0,
     },
     "achadinhos.instantaneos": {
         # ⚠️ "achadinhos casa" devolveu VAZIO — e' giria nossa.
         "termos": ["organizador gaveta", "suporte celular", "luminaria led",
-                   "organizador cabo", "gancho adesivo"],
+                   "organizador cabo", "gancho adesivo",
+                   "organizador banheiro", "cabide roupa", "porta escova",
+                   "fita led", "organizador sapato", "prateleira adesiva",
+                   "porta chaves", "tapete antiderrapante", "dispenser sabonete",
+                   "cesto roupa", "rodo pia", "suporte notebook",
+                   "organizador maleta", "capa sofa"
+                   ],
         "min": 10.0, "max": 50.0,
     },
     "fatura.chora": {
         "termos": ["fone bluetooth", "smartwatch", "carregador rapido",
-                   "power bank", "caixa som bluetooth"],
+                   "power bank", "caixa som bluetooth",
+                   "fone ouvido", "mouse sem fio", "teclado bluetooth",
+                   "hub usb", "cabo tipo c", "ring light",
+                   "microfone lapela", "projetor portatil", "adaptador hdmi",
+                   "cartao memoria", "carregador veicular", "rastreador bluetooth",
+                   "balanca digital", "suporte monitor"
+                   ],
         "min": 20.0, "max": 300.0,
     },
     "atefalhar": {
         "termos": ["luva academia", "faixa elastica treino", "coqueteleira",
-                   "strap treino", "corda pular"],
+                   "strap treino", "corda pular",
+                   "halter ajustavel", "colchonete yoga", "rolo massagem",
+                   "garrafa academia", "tornozeleira peso", "elastico exercicio",
+                   "joelheira esportiva", "munhequeira treino", "bolsa academia",
+                   "roda abdominal", "luva levantamento", "cinto lombar",
+                   "massageador muscular", "barra fixa"
+                   ],
         "min": 15.0, "max": 200.0,
     },
 }
@@ -387,7 +428,7 @@ def potencial(p: dict) -> dict:
     return dict(p, _ganho=g, _potencial=round(g * int(p.get("_vendas") or 0)))
 
 
-def garimpar(canal: str, quantos: int = 5,
+def garimpar(canal: str, quantos: int = 8,
              guardar: bool = True) -> tuple[list[dict], dict[str, int]]:
     """O garimpo de um canal. Devolve (escolhidos, por que os outros cairam)."""
     crus = buscar(canal)
@@ -416,17 +457,23 @@ def garimpar(canal: str, quantos: int = 5,
         saida.append(para_produto(p, queda))
 
     saida = [potencial(x) for x in saida]
-    # ⭐ ORDEM: queda de preco primeiro, e DINHEIRO em seguida.
+    # ⭐ ORDEM: DINHEIRO PRIMEIRO. Decisao do Bryan em 14/09/2026.
     #
-    # ⚠️ Ate' 13/09/2026 o desempate era por VOLUME, e volume nao paga conta:
-    # o produto mais vendido pode ser o que menos rende. Agora desempata pelo
-    # ganho por venda — mesmo esforco de video, retorno diferente.
+    # ⚠️ E 'dinheiro' aqui NAO e' o preco, nem o ganho por unidade: e' o
+    # `_potencial` — ganho por venda VEZES o volume que o produto ja' tem na
+    # loja. Ordenar so' por ganho empurraria pro item caro, que rende mais
+    # por unidade e vende menos; ordenar so' por volume traz o campeao que
+    # paga R$ 0,89. O produto cruza os dois.
     #
-    # ⚠️ E O DINHEIRO NAO ASSUME O PRIMEIRO LUGAR, de proposito. Ordenar so'
-    # por ganho empurraria pro item caro, que converte pior — e conversao nos
-    # ainda NAO MEDIMOS. Quando o `engine/resultado.py` tiver venda de
-    # verdade, esta ordem vira pergunta respondida em vez de escolha.
-    saida.sort(key=lambda x: (x["_queda"], x["_ganho"], x["_vendas"]),
+    # ⭐ A CONTA QUE ISSO RESOLVE: pincel a R$ 12,71 com 7% da' R$ 0,89 por
+    # venda; Cicaplast a R$ 38,66 com 16% da' R$ 6,19. SETE VEZES pelo mesmo
+    # video — e ate' hoje a ordem punha os dois no mesmo balaio.
+    #
+    # ⚠️ O QUE ESTA ORDEM AINDA NAO SABE: conversao. `_potencial` usa o
+    # volume do MERCADO, nao o nosso. O dia em que `engine/resultado.py`
+    # tiver venda por canal, esta linha deixa de ser escolha e vira pergunta
+    # respondida — e a queda volta a ser desempate, nao palpite.
+    saida.sort(key=lambda x: (x["_potencial"], x["_queda"], x["_ganho"]),
                reverse=True)
     escolhidos = saida[:quantos]
     # ⚠️ ANOTA O QUE FOI ESCOLHIDO, e nao o que foi visto. Sem este registro a

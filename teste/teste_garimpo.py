@@ -213,15 +213,27 @@ z = garimpo.potencial({"preco": "R$ 99,00", "_comissao": 0, "_vendas": 50000})
 checar(z["_ganho"] == 0 and z["_potencial"] == 0, "sem comissao -> zero")
 
 print("")
-print("19. ⚠️ O DINHEIRO NAO E' O PRIMEIRO CRITERIO, e isso e' escolha")
+print("19. O DINHEIRO MANDA NA ORDEM — e o codigo diz o que ele NAO sabe")
+# ⚠️ ESTA GUARDA MUDOU EM 14/09/2026, junto com a decisao do Bryan: a ordem
+# passou a ser por dinheiro. O que ela protege NAO mudou — que a escolha
+# continue declarada como escolha, e nao disfarçada de medicao.
+#
+# ⚠️ E o dinheiro aqui e' `_potencial` (ganho x volume), nao o preco nem o
+# ganho sozinho: ordenar so' por ganho empurra pro item caro, que rende mais
+# por unidade e vende menos.
 fonte = Path("engine/garimpo.py").read_text(encoding="utf-8")
-# ⚠️ Normaliza o espaco: o comentario quebra em duas linhas, e procurar a
-# frase inteira numa linha so' reprovaria um codigo CERTO. Guarda que casa
-# com a formatacao em vez do sentido e' guarda fragil.
 import re as _re  # noqa: E402
 plano = _re.sub(r"[\s#]+", " ", fonte)
-checar("conversao nos ainda NAO MEDIMOS" in plano,
-       "o codigo admite que a ordem e' escolha, nao medicao")
+checar('key=lambda x: (x["_potencial"]' in fonte,
+       "ordena pelo potencial, que cruza ganho com demanda")
+# ⭐ O QUE NAO PODE SUMIR: a admissao de que nao medimos conversao. No dia em
+# que houver venda por canal, esta ordem deixa de ser palpite — e ate" la'"
+# o codigo tem de dizer que e' palpite.
+checar("volume do MERCADO, nao o nosso" in plano,
+       "o codigo admite que o volume nao e' nosso")
+checar("deixa de ser escolha e vira pergunta" in plano or
+       "vira pergunta respondida" in plano,
+       "e diz o que faria a ordem virar medicao")
 fonte = Path("engine/garimpo.py").read_text(encoding="utf-8")
 
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))

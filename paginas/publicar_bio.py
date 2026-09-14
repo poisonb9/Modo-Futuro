@@ -171,6 +171,11 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             "link": d["link"],
             "imagem": d.get("imagem", ""),
+            # ⭐ A QUEDA E' A PROVA QUE SO' NOS TEMOS: ela e' medida contra o
+            # preco que NOS vimos, nao contra o "de/por" do vendedor (que e'
+            # inflado — medido: R$ 31,48 "de R$ 122,22").
+            "queda": round(float(d.get("queda") or 0), 1),
+            "vendas": int(d.get("vendas") or 0),
         })
     # ⚠️ `_todos` E' O ACHADINHO TOTAL: a vitrine geral, o que saiu em
     # QUALQUER canal. A pagina usa isto pra mostrar os outros cantos da casa
@@ -186,6 +191,11 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             "link": d["link"],
             "imagem": d.get("imagem", ""),
+            # ⭐ A QUEDA E' A PROVA QUE SO' NOS TEMOS: ela e' medida contra o
+            # preco que NOS vimos, nao contra o "de/por" do vendedor (que e'
+            # inflado — medido: R$ 31,48 "de R$ 122,22").
+            "queda": round(float(d.get("queda") or 0), 1),
+            "vendas": int(d.get("vendas") or 0),
         })
         if len(geral) >= 12:
             break

@@ -167,6 +167,54 @@
   @keyframes piscar { 50% { opacity: 0; } }
   /* ⚠️ o preco so' aparece quando o nome termina de ser digitado; sem altura
      propria ele nascia do nada e empurrava a dica 21px pra baixo */
+  /* ⚠️ O IMPULSO DO PRECO.
+
+     O nome e' digitado letra a letra e o preco aparecia de uma vez, seco.
+     Aqui ele ENTRA: cresce um triquinho alem do tamanho e volta, com um
+     brilho que passa. E' o momento em que a pagina entrega o que promete,
+     e e' o unico lugar onde exagerar um pouco ajuda.
+
+     ⚠️ SEM DESLOCAR NADA: `transform` nao tira o elemento do fluxo, entao
+     a pagina nao volta a tremer (o defeito de 14/09). */
+  .vivo .quanto.entrando {
+    animation: impulso .52s cubic-bezier(.2,1.5,.3,1) both;
+  }
+  @keyframes impulso {
+    0%   { transform: scale(.72); opacity: 0; }
+    58%  { transform: scale(1.1);  opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  .vivo .caiu-aqui { animation: chegar .5s .18s backwards; }
+  @keyframes chegar {
+    0%   { transform: scale(.4) rotate(-14deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vivo .quanto.entrando, .vivo .caiu-aqui { animation: none; }
+  }
+
+  /* ⭐ O SELO DE ACHADO NOVO. Produto que entrou hoje nao tem serie pra
+     mostrar — e em vez de um cartao mais pobre que os outros, ele ganha o
+     unico atributo que so' ele tem: ser novidade. */
+  .novo {
+    position: absolute; top: 7px; right: 7px; z-index: 1;
+    background: #16a34a; color: #fff;
+    font: 700 10.5px/1 var(--fonte-mono, monospace);
+    padding: 5px 8px; border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+  .achado-hoje { color: #16a34a; }
+
+  .vivo .antes {
+    font-size: 12px; color: var(--fraco); margin-left: 8px;
+    font-weight: 400; text-decoration-thickness: 1px;
+  }
+  .vivo .caiu-aqui {
+    display: inline-block; margin-left: 8px; vertical-align: 2px;
+    background: var(--acento); color: #fff;
+    font: 700 11px/1 var(--fonte-mono, monospace);
+    padding: 4px 6px; border-radius: 999px;
+  }
   .vivo .quanto {
     height: 24px;
     font: 700 21px/1 var(--fonte-mono, monospace); color: var(--acento);
@@ -352,10 +400,65 @@
      caminho curto pra devolucao e pra reclamacao. */
   .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .corpo { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+  /* ⚠️ NOME INTEIRO: sem `line-clamp` e sem reticencias. O titulo cortado
+     escondia o que distingue um produto do outro ("Potes de Vidro
+     Hermeticos de…" — de quanto?). O cartao cresce, e a grade acompanha. */
   .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
   .preco { font-family: "Archivo Black", system-ui, sans-serif; font-size: 17px; color: var(--acento); letter-spacing: -.01em; }
+  .preco .antes {
+    font-family: var(--fonte-mono, monospace); font-size: 11.5px;
+    color: var(--fraco); margin-left: 7px; font-weight: 400;
+    text-decoration-thickness: 1px;
+  }
   /* O carimbo existe porque preco e' TEXTO com data: numero sem data
      envelhece calado e a pagina passa a mentir sozinha. */
+  .foto { position: relative; }
+  .caiu {
+    position: absolute; top: 7px; left: 7px; z-index: 1;
+    background: var(--acento); color: #fff;
+    font: 700 11px/1 var(--fonte-mono, monospace);
+    padding: 5px 7px; border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+  /* ⚠️ UMA LINHA, e um sinal de vida. O texto longo em duas linhas fazia o
+     rodape do cartao parecer sobra de espaco em vez de acabamento. */
+  /* ⚠️ O CORPO ESTICA E O RODAPE DESCE ATE' A BASE.
+
+     Nome de uma linha e nome de tres linhas deixavam folgas diferentes
+     entre o preco e a linha de acompanhamento, e a grade parecia
+     desalinhada mesmo com os cartoes do MESMO tamanho. Empurrando o
+     rodape pro fim, a linha de acompanhamento fica na mesma altura em
+     todos — sem mexer no tamanho do cartao, que o Bryan quis manter. */
+  .vitrine { align-items: stretch; }
+  .produto { height: 100%; }
+  .produto .corpo { display: flex; flex-direction: column; flex: 1 1 auto; }
+  .produto .preco { margin-top: auto; }
+  .acompanha {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--fonte-mono, monospace); font-size: 10.5px;
+    color: var(--fraco); letter-spacing: -.01em;
+    margin-top: 2px; white-space: nowrap;
+  }
+  .pulso {
+    width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px;
+    background: #16a34a; box-shadow: 0 0 0 0 rgba(22,163,74,.55);
+    animation: bater 2.4s ease-out infinite;
+  }
+  @keyframes bater {
+    70% { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .pulso { animation: none; } }
+
+  /* o selo de queda precisa ser legivel sobre QUALQUER foto: muitas vem com
+     texto do vendedor bem no canto (medido: a Lenovo escreve 'Services' ali) */
+  .foto::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 46px;
+    background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,0));
+    pointer-events: none; opacity: 0;
+  }
+  .produto.caiu-sim .foto::before { opacity: 1; }
+
   .visto-em {
     margin-top: auto;
     font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -565,7 +668,7 @@
         },
         {
           guia: "É no canal que o achadinho aparece PRIMEIRO 👇",
-          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
+          botoes: [["telegram", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         },
         {
           guia: "Os outros cantos da casa:",
@@ -681,7 +784,7 @@
           // mandar. O problema que eu levantei em 09/09 foi resolvido pela
           // contagem, e nao por convite separado.
           guia: "Os achadinhos de academia saem por lá 👇",
-          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
+          botoes: [["telegram", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       // ⚠️ O ATE FALHAR SEGUE O MODELO DO SEM ANESTESIA: o destino e' PRODUTO,
@@ -736,7 +839,7 @@
         },
         {
           guia: "As promoções que valem mesmo a pena 👇",
-          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
+          botoes: [["telegram", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       produtos: []
@@ -764,7 +867,7 @@
         },
         {
           guia: "É lá que aparece primeiro 👇",
-          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
+          botoes: [["telegram", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       produtos: []
@@ -792,7 +895,7 @@
         },
         {
           guia: "As panelas e os achadinhos que eu uso 👇",
-          botoes: [["🏷️", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
+          botoes: [["telegram", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
         }
       ],
       produtos: []
@@ -858,7 +961,46 @@
   // motor ja' gera o frame de cada clipe (render.capa) e agora ele sobe pra
   // release — entao a imagem que vai aqui e' a do proprio video, nao uma
   // ilustracao.
+  // O aviao do Telegram, desenhado aqui mesmo. ⚠️ SVG inline e nao arquivo:
+  // a pagina e' um HTML so', servido em cinco enderecos, e um <img> externo
+  // seria mais um pedido de rede antes de a pessoa ver o botao.
+  var SVG_TELEGRAM =
+    '<svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true">' +
+    '<circle cx="12" cy="12" r="12" fill="#2AABEE"/>' +
+    '<path fill="#fff" d="M5.6 11.9c3.6-1.6 6-2.6 7.2-3.1 3.4-1.4 4.1-1.7 4.6-1.7.1 0 .3 0 .5.1.1.1.2.2.2.4v.4c-.2 1.8-.9 6.2-1.3 8.2-.2.9-.5 1.2-.8 1.2-.7.1-1.2-.4-1.9-.8-1-.7-1.6-1.1-2.6-1.8-1.1-.8-.4-1.2.2-1.9.2-.2 3-2.7 3-2.9 0-.1 0-.1-.1-.1s-.1 0-.2.1c-.1 0-1.7 1.1-4.7 3.1-.4.3-.8.4-1.2.4-.4 0-1.2-.2-1.7-.4-.7-.2-1.2-.3-1.2-.7.1-.2.4-.4 1-.6z"/>' +
+    '</svg>';
+
+  // ⚠️ O SELO DO MAIS BARATO E' DESENHO, nao a foto do produto.
+  //
+  // A foto ali ficou feia: ela ja' aparece grande na vitrine, e reduzida a
+  // 21px vira borrao. ⭐ Uma etiqueta com a seta pra baixo diz 'preco que
+  // caiu' sem depender de qual produto e' hoje — e o dourado e' o mesmo da
+  // lupa da marca.
+  var SVG_ETIQUETA =
+    '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">' +
+    '<defs><linearGradient id="ouro" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="#F7D046"/>' +
+    '<stop offset=".55" stop-color="#E0A320"/>' +
+    '<stop offset="1" stop-color="#B8801A"/></linearGradient></defs>' +
+    '<path fill="url(#ouro)" d="M11.6 2.4 21 2c.6 0 1 .4 1 1l-.4 9.4c0 .5-.2.9-.5 1.2l-7.7 7.7c-.6.6-1.6.6-2.2 0l-8.5-8.5c-.6-.6-.6-1.6 0-2.2l7.7-7.7c.3-.3.7-.5 1.2-.5z"/>' +
+    '<circle cx="17" cy="7" r="1.9" fill="#fff" opacity=".92"/>' +
+    '<path fill="#fff" d="M9.4 8.6h1.9v6.2l2-2 1.3 1.3-3.6 3.6a.9.9 0 0 1-1.3 0l-3.6-3.6 1.3-1.3 2 2z"/>' +
+    '</svg>';
+
   function miniatura(selo) {
+    if (selo === "queda") {
+      var q = el("span", "selo");
+      q.innerHTML = SVG_ETIQUETA;
+      return q;
+    }
+    // ⚠️ O selo do Telegram e' o aviao de verdade. Uma etiqueta generica
+    // no botao que mais importa da pagina nao diz pra onde leva — e o
+    // Bryan reparou nisso antes de qualquer numero.
+    if (selo === "telegram") {
+      var c = el("span", "selo");
+      c.innerHTML = SVG_TELEGRAM;
+      return c;
+    }
     var caixa = el("span", "selo");
     if (typeof selo === "string" && selo.indexOf("http") === 0) {
       var img = document.createElement("img");
@@ -873,6 +1015,12 @@
       caixa.textContent = selo;
     }
     return caixa;
+  }
+
+  // "R$ 10,82" -> 10.82. Um lugar so': a pagina ja' fazia isso em linha,
+  // dentro do bloco de prova, e dois parsers do mesmo texto divergem.
+  function preco_num(t) {
+    return parseFloat(String(t).replace(/[^0-9,]/g, "").replace(",", ".")) || 0;
   }
 
   function montarBotao(selo, rotulo, href) {
@@ -925,7 +1073,8 @@
     var lista = itens.map(function (p) {
       var n = (p.nome || "").split(",")[0].split(":")[0].trim();
       if (n.length > 44) { n = n.slice(0, 43).trim() + "…"; }
-      return { nome: n, preco: p.preco, link: p.link, cheio: p.nome };
+      return { nome: n, preco: p.preco, link: p.link, cheio: p.nome,
+               antes: p.antes, queda: p.queda };
     });
     var calmo = window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -950,7 +1099,8 @@
         // ⭐ Acessibilidade nao e' versao pobre: quem pediu menos movimento
         // ve' o mesmo produto e o mesmo preco, so' sem a digitacao.
         alvoNome.textContent = p.nome;
-        alvoPreco.textContent = p.preco;
+        alvoPreco.innerHTML = escapar(p.preco) +
+          (p.antes ? '<s class="antes">' + escapar(p.antes) + '</s>' : "");
         relogioVivo = setTimeout(proximo, 3400);
         return;
       }
@@ -963,7 +1113,25 @@
           relogioVivo = setTimeout(digitar, 26);
           return;
         }
-        alvoPreco.textContent = p.preco;
+        // ⚠️ A PROVA VEM JUNTO DO PRECO, tambem aqui em cima.
+        //
+        // O numero sozinho nao da' motivo pra tocar: R$ 15,69 pode ser caro
+        // ou barato, quem le' nao sabe. Com o que ele ERA ao lado, o
+        // proprio preco vira o argumento — e e' o mesmo riscado do cartao,
+        // medido contra a NOSSA serie.
+        alvoPreco.innerHTML = escapar(p.preco) +
+          (p.antes
+            ? '<s class="antes">' + escapar(p.antes) + '</s>'
+            : "") +
+          ((p.queda || 0) >= 5
+            ? '<span class="caiu-aqui">↓ ' + Math.round(p.queda) + '%</span>'
+            : "");
+        // reinicia a animacao a cada produto: tirar e por a classe no mesmo
+        // quadro nao reinicia (o navegador nao ve' mudanca), por isso o
+        // `void offsetWidth` no meio — e' o jeito de forcar o reflow.
+        alvoPreco.classList.remove("entrando");
+        void alvoPreco.offsetWidth;
+        alvoPreco.classList.add("entrando");
         relogioVivo = setTimeout(proximo, 2500);
       })();
     }
@@ -1037,7 +1205,25 @@
                           tipo: "produto", rotulo: p.nome });
       });
     }
+    // ⚠️ O SELO DE QUEDA E' O UNICO NUMERO DA PAGINA QUE NINGUEM PODE
+    // COPIAR: ele e' medido contra o preco que NOS vimos, dia a dia. O
+    // "de/por" do vendedor e' inflado (medido: R$ 31,48 "de R$ 122,22").
+    //
+    // ⚠️ PISO DE 5%: abaixo disso e' oscilacao de cambio e de cupom do dia,
+    // nao queda. Anunciar 1% como desconto e' o comeco de virar megafone
+    // de desconto falso.
     var foto = el("div", "foto");
+    // ⚠️ NOVO E' QUEM NAO TEM SERIE: entrou hoje, nao ha' o que acompanhar
+    // ainda. E' a mesma condicao que deixava o rodape do cartao vazio.
+    var eNovo = !(p.pontos >= 2);
+    if (eNovo) {
+      e.classList.add("caiu-sim");   // o degrade ajuda a ler o selo
+      foto.appendChild(el("span", "novo", "achado novo"));
+    }
+    if ((p.queda || 0) >= 5) {
+      e.classList.add("caiu-sim");
+      foto.appendChild(el("span", "caiu", "caiu " + Math.round(p.queda) + "%"));
+    }
     if (p.imagem) {
       var img = document.createElement("img");
       img.src = p.imagem;
@@ -1054,9 +1240,58 @@
     e.appendChild(foto);
     var corpo = el("div", "corpo");
     corpo.appendChild(el("div", "nome", p.nome));
-    corpo.appendChild(el("div", "preco", p.preco));
+    // ⚠️ O PRECO VEM ACOMPANHADO DO QUE ELE ERA, quando nos vimos cair.
+    //
+    // ⭐ `p.antes` e' o MAIOR valor da NOSSA serie, nao o "de" do
+    // vendedor — que e' inflado (medido: R$ 31,48 "de R$ 122,22"). Por
+    // isso o riscado aqui e' verificavel e o da loja nao e'.
+    //
+    // ⚠️ SEM `antes` NAO HA' RISCADO. Um preco riscado inventado e' a
+    // mentira mais comum do varejo online, e a que destruiria a unica
+    // coisa que esta pagina tem de diferente.
+    var linha_preco = el("div", "preco");
+    linha_preco.appendChild(el("span", null, p.preco));
+    if (p.antes) {
+      linha_preco.appendChild(el("s", "antes", p.antes));
+    }
+    corpo.appendChild(linha_preco);
     // A data anda colada no preco. E' a regra do engine/produto.py na tela.
-    corpo.appendChild(el("div", "visto-em", "preço visto em " + p.visto));
+    // ⚠️ "PRECO ACOMPANHADO", e nao "preco visto".
+    //
+    // A diferenca nao e' de palavra, e' de fato: ha' 1.871 pontos gravados
+    // em `precos_vistos.jsonl`, e e' contra ESSA serie que a queda e'
+    // calculada. "Visto em" descrevia uma foto; "acompanhado desde"
+    // descreve o que a operacao realmente faz — e e' o que separa a gente
+    // de quem repete o "de/por" inflado da loja.
+    //
+    // ⚠️ E SO' DIZ ISSO SE FOR VERDADE: com menos de dois pontos na serie
+    // nao ha' acompanhamento nenhum, e o cartao volta a dizer o que viu.
+    // ⚠️ A CONTA VEM FEITA. "desde 13/09" obriga a pessoa a calcular; "ha'
+    // 2 dias" ja' diz. E em duas linhas o rodape ficava pobre — a frase
+    // curta cabe numa, e uma linha so' parece acabamento, nao sobra.
+    //
+    // ⭐ O PONTO PULSANDO diz o que nenhum texto diz no mesmo espaco: isto
+    // esta' VIVO, alguem olha esse preco todo dia.
+    // ⚠️ A MESMA CONDICAO DO SELO, e nao uma parecida. Ate' agora o selo
+    // usava `pontos` e o rodape usava `pontos && dias`; num produto sem
+    // `dias` o cartao saiu hibrido — rodape de novidade e nenhum selo.
+    if (!eNovo) {
+      var ac = el("div", "acompanha");
+      ac.appendChild(el("span", "pulso"));
+      var quanto = p.dias <= 0
+        ? "acompanhando desde hoje"
+        : (p.dias === 1 ? "acompanhando há 1 dia"
+                        : "acompanhando há " + p.dias + " dias");
+      ac.appendChild(el("span", null, quanto));
+      corpo.appendChild(ac);
+    } else {
+      // ⭐ Em vez de um rodape vazio (ou de 'preco visto em', que soa
+      // burocratico), o produto novo diz o que ele e'.
+      var novoRod = el("div", "acompanha achado-hoje");
+      novoRod.appendChild(el("span", "pulso"));
+      novoRod.appendChild(el("span", null, "achado agora — começando a acompanhar"));
+      corpo.appendChild(novoRod);
+    }
     e.appendChild(corpo);
     return e;
   }
@@ -1105,10 +1340,8 @@
       function real(v) {
         return "R$ " + v.toFixed(2).replace(".", ",");
       }
-      var precos = todos.map(function (p) {
-        return parseFloat(String(p.preco).replace(/[^0-9,]/g, "")
-          .replace(",", ".")) || 0;
-      }).filter(function (v) { return v > 0; });
+      var precos = todos.map(function (p) { return preco_num(p.preco); })
+        .filter(function (v) { return v > 0; });
       var vendas = todos.reduce(function (a, p) { return a + (p.vendas || 0); }, 0);
       var caiu = todos.filter(function (p) { return (p.queda || 0) >= 5; }).length;
 
@@ -1163,12 +1396,54 @@
 
     var grupos = document.getElementById("grupos");
     grupos.innerHTML = "";
-    c.grupos.forEach(function (g) {
+
+    // ⚠️ O TELEGRAM VEM ANTES DO TIKTOK, e isso nao e' estetica.
+    //
+    // Quem esta' nesta pagina VEIO do TikTok. O botao 'mais achadinhos
+    // como esse' devolve a pessoa exatamente pra onde ela ja' estava, e
+    // gasta o melhor lugar da pagina com isso. O Telegram e' audiencia
+    // NOSSA: nao depende do algoritmo de ninguem pra alcancar de novo.
+    //
+    // ⭐ Ordem pedida pelo Bryan em 14/09/2026.
+    var ordenados = c.grupos.slice().sort(function (a, b) {
+      var ta = JSON.stringify(a.botoes).indexOf(VITRINE) >= 0 ? 0 : 1;
+      var tb = JSON.stringify(b.botoes).indexOf(VITRINE) >= 0 ? 0 : 1;
+      return ta - tb;
+    });
+
+    ordenados.forEach(function (g) {
       var sec = el("section", "grupo");
       sec.appendChild(el("p", "guia", g.guia));
-      g.botoes.forEach(function (b) { sec.appendChild(montarBotao(b[0], b[1], b[2])); });
+      g.botoes.forEach(function (b) {
+        sec.appendChild(montarBotao(b[0], b[1], b[2]));
+      });
       grupos.appendChild(sec);
     });
+
+    // ⚠️ E ENTRE OS DOIS ENTRA UM BOTAO QUE LEVA A PRODUTO.
+    //
+    // O mais barato do dia e' a isca mais honesta que temos: e' um numero
+    // medido, muda sozinho todo dia, e leva direto pra loja — nao pra mais
+    // uma pagina nossa.
+    //
+    // ⚠️ SO' APARECE SE HOUVER PRODUTO. Um botao 'o mais barato de hoje'
+    // sem preco e' promessa vazia no lugar mais visivel da pagina.
+    var baratos = (PRODUTOS_REAIS["_todos"] || []).filter(function (p) {
+      return p.link && p.preco;
+    }).slice().sort(function (a, b) {
+      return preco_num(a.preco) - preco_num(b.preco);
+    });
+    if (baratos.length) {
+      var p0 = baratos[0];
+      var sec = el("section", "grupo");
+      sec.appendChild(el("p", "guia", "O mais barato que achei hoje"));
+      // ⚠️ O SELO E' A FOTO DO PRODUTO, e nao uma etiqueta generica. O botao
+      // fala de UM item; mostrar o item e' o unico icone que sempre tem a
+      // ver com o que esta' escrito ao lado.
+      sec.appendChild(montarBotao("queda", p0.nome + " — " + p0.preco,
+                                  p0.link));
+      grupos.insertBefore(sec, grupos.children[1] || null);
+    }
 
     var vitrine = document.getElementById("vitrine");
     var etiqueta = document.getElementById("etiqueta");
@@ -1249,8 +1524,17 @@
       return fora;
     }
 
+    // ⚠️ NA ORDEM DE VENDA, nao na ordem em que os canais foram escritos.
+    // `_ordem` vem calculada da publicacao (ver publicar_bio.produtos_reais):
+    // quem vende mais primeiro; sem venda nossa, quem tem mais chance —
+    // medida pelo volume que os produtos ja' tem na loja.
     var blocos = [];
-    Object.keys(CANAIS).forEach(function (chave) {
+    var ordem = (PRODUTOS_REAIS["_ordem"] || []).concat(
+      Object.keys(CANAIS).filter(function (k) {
+        return (PRODUTOS_REAIS["_ordem"] || []).indexOf(k) < 0;
+      }));
+    ordem.forEach(function (chave) {
+      if (!CANAIS[chave]) { return; }
       if (chave === atual) { return; }
       var itens = pegar(PRODUTOS_REAIS[chave], 4);
       if (itens.length) { blocos.push([CANAIS[chave].nome, itens]); }

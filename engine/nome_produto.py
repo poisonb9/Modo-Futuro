@@ -47,10 +47,19 @@ RAIZ = Path(__file__).resolve().parent.parent
 PUBLICADOS = RAIZ / "estado" / "produtos_publicados.jsonl"
 CACHE = RAIZ / "estado" / "nomes_curtos.json"
 
+NL_ = chr(10)
+
 # ⚠️ O MESMO MODELO DO CORTE EDITORIAL, e pelo mesmo motivo: ja' ha' medicao
 # dele, e reescrever titulo curto nao pede modelo grande. Ver
 # engine/rende_video.py, que documenta o rodizio das 14 chaves gratis.
+# ⚠️ DUAS VIAS, e nao uma. Modelo gratis nao e' contrato: em 13/09/2026 o
+# `llama-3.3-70b:free` saiu do plano no meio de uma sessao, e em 14/09 as 14
+# chaves do OpenRouter estavam esgotadas as 11h (o teto e' DIARIO por chave).
+#
+# ⭐ O Gemini vai PRIMEIRO: sao 28 chaves e a cota dele nao e' disputada com
+# o corte editorial, que ja' gasta o OpenRouter dentro do garimpo das 11h.
 MODELO = "nvidia/nemotron-3.5-lightning:free"
+MODELO_GEMINI = "gemini-3.6-flash"
 TEMPO_S = 30
 TENTATIVAS_MAX = 3
 POR_LOTE = 12
@@ -84,7 +93,7 @@ def _palavras(t: str) -> set[str]:
     return {p for p in re.findall(r"[a-zA-ZÀ-ÿ]{4,}", t.lower())}
 
 
-def cortar(titulo: str, limite: int = LIMITE) -> str:
+def cortar(titulo: str) -> str:
     """O nome de reserva: o titulo original, cortado onde ele para de nomear.
 
     ⚠️ A primeira virgula (ou dois-pontos) e' onde o vendedor chines termina o
@@ -92,8 +101,14 @@ def cortar(titulo: str, limite: int = LIMITE) -> str:
     na maioria dos casos, sem modelo nenhum.
     """
     n = (titulo or "").split(",")[0].split(":")[0].strip()
-    if len(n) > limite:
-        n = n[:limite - 1].rsplit(" ", 1)[0].strip() + "…"
+    # ⚠️ NAO TRUNCA COM RETICENCIAS. Ate' 14/09/2026 esta funcao cortava em
+    # 46 caracteres e punha "…", e o Bryan viu o resultado no cartao:
+    # "Potes de Vidro Hermeticos de…" — de quanto? A reticencia comia
+    # justamente o que distingue um produto do outro.
+    #
+    # ⭐ O corte na virgula ja' resolve o comprimento na maioria dos casos, e
+    # o cartao acomoda o resto em mais linhas. Quem decide quanto cabe e' o
+    # CSS, que sabe a largura da tela — nao esta funcao, que nao sabe.
     return n
 
 
@@ -123,6 +138,19 @@ def confere(original: str, novo: str) -> tuple[bool, str]:
     if novo.rstrip().endswith((",", "…", "-")):
         return False, "termina cortado"
     return True, ""
+
+
+def _ler_resposta(texto: str, titulos: list[str]) -> dict[int, str]:
+    """`<numero>|<nome>` — as duas vias respondem no mesmo formato."""
+    saida: dict[int, str] = {}
+    for linha in texto.splitlines():
+        partes = [x.strip() for x in linha.split("|")]
+        if len(partes) < 2 or not partes[0].rstrip(".").isdigit():
+            continue
+        i = int(partes[0].rstrip(".")) - 1
+        if 0 <= i < len(titulos):
+            saida[i] = partes[1]
+    return saida
 
 
 def _pedir(titulos: list[str], tentativa: int = 1) -> dict[int, str] | None:
@@ -156,15 +184,39 @@ def _pedir(titulos: list[str], tentativa: int = 1) -> dict[int, str] | None:
         print(f"  [!] modelo falhou ({type(e).__name__}) — usando o corte")
         return None
 
-    saida: dict[int, str] = {}
-    for linha in texto.splitlines():
-        partes = [x.strip() for x in linha.split("|")]
-        if len(partes) < 2 or not partes[0].rstrip(".").isdigit():
-            continue
-        i = int(partes[0].rstrip(".")) - 1
-        if 0 <= i < len(titulos):
-            saida[i] = partes[1]
-    return saida
+    return _ler_resposta(texto, titulos)
+
+
+def _pedir_gemini(titulos: list[str], tentativa: int = 1) -> dict[int, str] | None:
+    """A primeira via. None se nao deu — e ai' o OpenRouter tenta."""
+    import requests
+
+    from . import keys
+
+    rot = keys.gemini()
+    if not len(rot):
+        return None
+    lista = NL_.join(f"{i+1}. {t[:110]}" for i, t in enumerate(titulos))
+    chave = rot.proxima()
+    try:
+        r = requests.post(
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            f"{MODELO_GEMINI}:generateContent?key={chave.strip()}",
+            json={"contents": [{"parts": [{"text": PERGUNTA + lista}]}],
+                  "generationConfig": {"temperature": 0}},
+            timeout=TEMPO_S)
+        if r.status_code == 429:
+            # mesma licao do rodizio: uma chave seca nao seca as outras
+            rot.queimar(chave)
+            if tentativa >= min(TENTATIVAS_MAX, len(rot)):
+                return None
+            return _pedir_gemini(titulos, tentativa + 1)
+        r.raise_for_status()
+        texto = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+    except Exception as e:
+        print(f"  [!] gemini falhou ({type(e).__name__})")
+        return None
+    return _ler_resposta(texto, titulos)
 
 
 def humanizar(titulos: list[str]) -> dict[str, str]:
@@ -172,7 +224,10 @@ def humanizar(titulos: list[str]) -> dict[str, str]:
     bons: dict[str, str] = {}
     for i in range(0, len(titulos), POR_LOTE):
         lote = titulos[i:i + POR_LOTE]
-        resposta = _pedir(lote)
+        # ⚠️ GEMINI PRIMEIRO, OpenRouter como reserva. Se o primeiro devolve
+        # None (cota, rede, formato torto), o segundo tenta o MESMO lote — e
+        # se os dois falharem o produto fica com o corte, que sempre existe.
+        resposta = _pedir_gemini(lote) or _pedir(lote)
         if not resposta:
             continue
         for j, novo in resposta.items():

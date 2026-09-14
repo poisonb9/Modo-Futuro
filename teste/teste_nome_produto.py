@@ -57,9 +57,13 @@ print("5. a reserva e o corte do titulo, e ele e' honesto")
 curto = np.cortar(ORIGINAL)
 checar(curto == "Conjunto de Esponjas de Maquiagem de 7 Pecas",
        "corta na primeira virgula: " + curto)
-checar(len(np.cortar("Luvas de Levantamento de Peso com Suporte para Punho "
-                     "Respiraveis Antiderrapantes para Academia")) <= np.LIMITE,
-       "titulo sem virgula tambem cabe")
+# ⚠️ NEGATIVO NOVO (14/09): a reserva NAO pode truncar. Ela cortava em 46 e
+# punha reticencia, e o cartao mostrava "Potes de Vidro Hermeticos de…" — a
+# reticencia comia justamente o que distingue um produto do outro.
+longo = np.cortar("Luvas de Levantamento de Peso com Suporte para Punho "
+                  "Respiraveis Antiderrapantes para Academia")
+checar("…" not in longo, "titulo longo sai INTEIRO, sem reticencias")
+checar(longo.endswith("Academia"), "e termina onde o titulo termina")
 
 print("")
 print("6. NEGATIVO - sem cache, nome_de NAO estoura e NAO inventa")

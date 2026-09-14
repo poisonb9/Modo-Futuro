@@ -127,11 +127,77 @@ def _chave_da_pagina(nome_buffer: str) -> str:
     return c.arroba.lstrip("@") if c else nome_buffer
 
 
+def _serie_de_precos() -> dict:
+    """{id: (primeira data vista, quantos pontos)} — a nossa serie.
+
+    ⭐ ISTO E' O QUE TORNA A FRASE DO CARTAO VERDADEIRA. "Acompanhando desde
+    12/09" so' pode ser escrito porque ha' 1.871 pontos gravados em
+    `precos_vistos.jsonl` — se a serie nao existisse, a frase seria enfeite,
+    e enfeite sobre preco e' exatamente o que a gente nao faz.
+    """
+    import json
+    arq = RAIZ / "estado" / "precos_vistos.jsonl"
+    if not arq.exists():
+        return {}
+    serie: dict = {}
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            d = json.loads(linha)
+        except ValueError:
+            continue
+        i, q = d.get("id"), (d.get("quando") or "")[:10]
+        if not i or not q:
+            continue
+        v = 0.0
+        try:
+            v = float(d.get("preco") or 0)
+        except (TypeError, ValueError):
+            v = 0.0
+        antes, n, maior, ult = serie.get(i, (q, 0, 0.0, q))
+        serie[i] = (min(antes, q), n + 1, max(maior, v), max(ult, q))
+    return serie
+
+
 def _nome_bonito(d: dict) -> str:
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import nome_produto
     return nome_produto.nome_de(d)
+
+
+def _desde(serie: dict, d: dict) -> str:
+    """dd/mm da primeira vez que vimos o preco deste produto."""
+    q = serie.get(d.get("id"), ("", 0, 0.0, ""))[0]
+    return f"{q[8:10]}/{q[5:7]}" if len(q) == 10 else ""
+
+
+def _antes(serie: dict, d: dict) -> str:
+    """O maior preco que vimos, formatado — "" se nao houver queda real."""
+    maior = serie.get(d.get("id"), ("", 0, 0.0, ""))[2]
+    try:
+        hoje = float(str(d.get("preco", "")).replace("R$", "")
+                     .replace(".", "").replace(",", ".").strip() or 0)
+    except ValueError:
+        return ""
+    # ⚠️ 2% de piso: abaixo disso e' arredondamento e cambio, nao queda.
+    if not (maior and hoje) or maior <= hoje * 1.02:
+        return ""
+    return f"R$ {maior:.2f}".replace(".", ",")
+
+
+def _dias(serie: dict, d: dict) -> int:
+    """Ha' quantos dias este produto esta' na nossa serie."""
+    from datetime import date
+    q = serie.get(d.get("id"), ("", 0, 0.0, ""))[0]
+    if len(q) != 10:
+        return 0
+    try:
+        a, m, dd = int(q[:4]), int(q[5:7]), int(q[8:10])
+        return max(0, (date.today() - date(a, m, dd)).days)
+    except ValueError:
+        return 0
 
 
 def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
@@ -148,6 +214,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     arq = RAIZ / "estado" / "produtos_publicados.jsonl"
     if not arq.exists():
         return {}
+    serie = _serie_de_precos()
     linhas = []
     for linha in arq.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
@@ -189,13 +256,39 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # inflado — medido: R$ 31,48 "de R$ 122,22").
             "queda": round(float(d.get("queda") or 0), 1),
             "vendas": int(d.get("vendas") or 0),
+            # desde quando acompanhamos ESTE produto, e quantas vezes olhamos
+            "desde": _desde(serie, d),
+            "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
+            # ⭐ O PRECO ANTERIOR E' O QUE TORNA A QUEDA VERIFICAVEL: e' o
+            # maior valor que NOS vimos na serie, nao o "de" do vendedor.
+            # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.
+            "antes": _antes(serie, d),
+            # ha' quantos dias acompanhamos: "desde 13/09" faz a pessoa fazer
+            # a conta; "ha' 2 dias" ja' entrega a conta feita.
+            "dias": _dias(serie, d),
         })
     # ⚠️ `_todos` E' O ACHADINHO TOTAL: a vitrine geral, o que saiu em
     # QUALQUER canal. A pagina usa isto pra mostrar os outros cantos da casa
     # sem precisar saber quais canais existem.
     geral = []
+    # ⚠️ O ACHADINHO DE ONTEM NAO SE PERDE — se o preco AINDA VALE.
+    #
+    # ⭐ Pedido do Bryan em 14/09: "os itens mais baratos que achei hoje
+    # amanha nao podem ser perdidos se ainda valerem a pena a compra". Antes
+    # disto a vitrine so' mostrava a ultima rodada, e um achado bom sumia em
+    # 24h por nao ter sido republicado.
+    #
+    # ⚠️ E A TRAVA E' O PRECO RECONFERIDO, nao a data da publicacao. Produto
+    # velho com preco velho e' o jeito mais facil de a pagina passar a mentir
+    # sozinha: quem clica encontra outro numero na loja. So' fica quem o
+    # garimpo VIU de novo nas ultimas 48h (campeoes e varredura reconferem).
+    from datetime import date, timedelta
+    limite = (date.today() - timedelta(days=2)).isoformat()
     for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
         if not d.get("link") or not d.get("nome"):
+            continue
+        visto_em = serie.get(d.get("id"), ("", 0, 0.0, ""))[3]
+        if visto_em and visto_em < limite:
             continue
         quando = (d.get("quando") or "")[:10]
         geral.append({
@@ -215,11 +308,42 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # inflado — medido: R$ 31,48 "de R$ 122,22").
             "queda": round(float(d.get("queda") or 0), 1),
             "vendas": int(d.get("vendas") or 0),
+            # desde quando acompanhamos ESTE produto, e quantas vezes olhamos
+            "desde": _desde(serie, d),
+            "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
+            # ⭐ O PRECO ANTERIOR E' O QUE TORNA A QUEDA VERIFICAVEL: e' o
+            # maior valor que NOS vimos na serie, nao o "de" do vendedor.
+            # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.
+            "antes": _antes(serie, d),
+            "dias": _dias(serie, d),
         })
         if len(geral) >= 12:
             break
     if geral:
         saida["_todos"] = geral
+
+    # ⚠️ A ORDEM DOS CANAIS SAI DE VENDA, e nao do alfabeto.
+    #
+    # ⭐ Ordem do Bryan em 14/09/2026: quem vende mais aparece primeiro; sem
+    # venda, quem tem MAIS CHANCE de vender.
+    #
+    # ⚠️ E HOJE NAO HA' VENDA NOSSA: `order.listbyindex` devolve "the result
+    # is empty" (zero pedidos), e mesmo quando houver, ha' UM tracking_id pra
+    # operacao inteira — a venda nao diz de qual canal veio. Ver
+    # engine/resultado.py e o item 2 do PARA_FAZER.
+    #
+    # ⭐ Entao a chance de vender e' medida por PROXY: o volume de vendas que
+    # os produtos daquele canal ja' tem NA LOJA. E' o mercado dizendo o que
+    # sai, e e' medido — nao e' palpite sobre qual canal e' melhor.
+    #
+    # ⚠️ E o proxy TROCA SOZINHO pelo numero de verdade no dia em que houver
+    # venda por canal: e' so' `vendas_por_canal` existir.
+    forca = {}
+    for chave, itens in saida.items():
+        if chave.startswith("_"):
+            continue
+        forca[chave] = sum(p.get("vendas") or 0 for p in itens)
+    saida["_ordem"] = sorted(forca, key=lambda c: -forca[c])
     return saida
 
 

@@ -50,7 +50,12 @@ checar(d["achadinho.make"][0]["visto"] == "14/09", "a data vira dd/mm")
 print("")
 print("2. NEGATIVO - produto SEM link nao entra")
 escrever([dict(BASE, link=""), dict(BASE, id=2, link=None)])
-checar(pb.produtos_reais() == {}, "dois sem link -> vitrine vazia")
+# ⚠️ `_ordem` sempre existe (pode ser lista vazia); o que nao pode existir e
+# canal com produto sem link.
+d = pb.produtos_reais()
+checar([k for k in d if not k.startswith("_")] == [],
+       "dois sem link -> nenhum canal na vitrine")
+checar(d.get("_ordem") == [], "e a ordem sai vazia, nao com canal fantasma")
 
 print("")
 print("3. NEGATIVO - o mesmo produto nao aparece duas vezes")

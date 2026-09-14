@@ -83,10 +83,10 @@ cupom e de search bidding. Dizer que você **não** faz isso remove a objeção
 antes de ela aparecer.
 
 **E no mesmo painel:**
-- `Perfil → Espaços Promocionais` — hoje só existe `oachadinho`, e foi ele
-  que causou a recusa medida. **Os dez espaços estão prontos pra colar em
-  [`AWIN_ESPACOS.md`](AWIN_ESPACOS.md)**, com tipo, endereço e descrição.
-  ⚠️ A API não alcança isto (404 medido em 14/09) — é tela.
+- **A tela só aceita UM site** (conferido na print, 14/09): `Configurações →
+  Links de redes sociais` tem Site, Blog, Twitter e Facebook — só isso. Então
+  o conserto é o endereço mostrar a operação inteira, e não cadastrar mais
+  endereços. Ver [`AWIN_ESPACOS.md`](AWIN_ESPACOS.md).
 - `Configurações → dados de pagamento` — ⚠️ sem isso a comissão **acumula e
   não sai**.
 
@@ -233,7 +233,7 @@ E todo clipe novo sai com a cascata **CURTA · COMENTE · SIGA**.
 
 ```
 https://www.tiktok.com/@truque.importado
-https://www.tiktok.com/@cozinha.importada
+https://www.tiktok.com/@cozinha.internacional
 https://www.tiktok.com/@achadinhos.instantaneos
 https://www.tiktok.com/@fatura.chora
 https://www.tiktok.com/@atefalhar

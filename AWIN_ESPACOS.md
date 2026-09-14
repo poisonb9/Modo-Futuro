@@ -1,78 +1,81 @@
-# Awin — Espaços Promocionais, prontos para colar
+# Awin — o que o anunciante vê, e como caber tudo num endereço só
 
-`ui.awin.com` → **Conta → Perfil → Espaços Promocionais** → *Adicionar*.
-
-⚠️ **MEDIDO EM 14/09/2026:** a Publisher API **não** alcança isto. Os
-caminhos `/promotionalspaces`, `/websites` e `/profile` respondem **404** com
-o nosso token — ele só abre `programmes` e relatórios. Não há como eu
-cadastrar por você; é tela.
+⚠️ **CORRIGIDO EM 14/09/2026, depois da print do Bryan.** A primeira versão
+deste arquivo listava dez Espaços Promocionais pra cadastrar. **A tela não
+aceita dez.**
 
 ---
 
-## Por que isto virou prioridade
+## O que a tela realmente oferece
 
-A recusa da **365Rider** (14/09) veio com motivo no e-mail:
+`Configurações → Links de redes sociais` tem **quatro campos, e só**:
+
+```
+Site                 https://oachadinho.pages.dev
+URL do Blog          https://oachadinho.pages.dev
+Nome no Twitter      (vazio)
+Página do Facebook   (vazio)
+```
+
+Não há campo de TikTok, nem de Telegram, nem lugar pra um segundo site.
+
+⚠️ **E a API também não alcança** (medido): `/promotionalspaces`,
+`/websites` e `/profile` respondem **404** com o nosso token, que só abre
+`programmes` e relatórios.
+
+---
+
+## ⭐ Por isso a saída inverte
+
+Se o anunciante vê **um endereço**, a resposta não é cadastrar mais
+endereços — é **esse endereço mostrar a operação inteira**.
+
+Hoje ele abre `oachadinho.pages.dev`, que é a bio do **Truque Importado**:
+maquiagem e beleza. Foi exatamente a queixa da 365Rider (*Sportswear*):
 
 > **O site não complementa a marca do anunciante**
 
-Ela é *Sportswear*. O único espaço cadastrado é `oachadinho`, que é de
-achadinhos e beleza. **As outras 28 candidaturas estão sendo julgadas agora
-olhando para essa mesma página.**
+⚠️ E **não dá pra encher a bio do Truque Importado de links dos outros
+canais.** Ela tem outro trabalho: converter quem chegou de um vídeo de
+maquiagem. Duas plateias, dois objetivos — quem paga a conta de misturar é a
+conversão de quem veio do vídeo.
 
-⭐ A leitura: não é que o publisher seja fraco — é que o avaliador de esporte
-abriu uma vitrine de maquiagem. Cada anunciante precisa ver o canal que
-combina com ele.
+### A proposta: uma página só pra anunciante
 
----
+Um endereço novo (ex.: `quemsomos.pages.dev`), que o campo **Site** do Awin
+aponta, com:
 
-## Os espaços, um por um
+- os **cinco canais** e o que cada um cobre — beleza, cozinha, fitness,
+  achadinhos gerais, promoções — cada um com link pro TikTok
+- o **Telegram** e quantas pessoas recebem
+- a **cadência** (publico todo dia) e de onde vem o produto
+- a frase que remove a objeção: **não faço e-mail marketing, display nem
+  search**
 
-| espaço | tipo | endereço | para quais anunciantes |
-|---|---|---|---|
-| Truque Importado | Site | `oachadinho.pages.dev` | beleza, saúde |
-| Truque Importado (TikTok) | Rede social | `tiktok.com/@truque.importado` | beleza |
-| Achadinho Chef | Site | `achadinhochef.pages.dev` | cozinha, casa, eletro |
-| Achadinho Chef (TikTok) | Rede social | `tiktok.com/@cozinha.importada` | cozinha |
-| Achadinhos Instantâneos | Site | `achadinhodehoje.pages.dev` | loja de departamento |
-| Achadinhos Instantâneos (TikTok) | Rede social | `tiktok.com/@achadinhos.instantaneos` | geral |
-| Pago menos | Site | `pagomenos.pages.dev` | promoções, departamento |
-| Pago menos (TikTok) | Rede social | `tiktok.com/@fatura.chora` | promoções |
-| **Até Falhar** | Rede social | `tiktok.com/@atefalhar` | **esporte, fitness** |
-| Achadinho Total (Telegram) | Rede social | `t.me/achadinhototal` | geral |
+⭐ Aí o avaliador de esporte abre e vê o **Até Falhar** na tela, em vez de
+procurar batom. E as bios dos canais continuam fazendo o trabalho delas.
 
-⚠️ **O Até Falhar entra só como TikTok** — a página dele não existe (o
-endereço ainda não foi escolhido, item 7). E é **justamente a categoria da
-recusa**: enquanto não houver espaço de esporte, todo anunciante de
-Sportswear vai continuar abrindo a página de beleza.
-
-⚠️ **O Sem Anestesia fica de fora**, pelo mesmo motivo de sempre: o livro não
-está à venda e a página entrega um cartão desligado.
-
-⚠️ **Modo Futuro também fica de fora** — não tem destino hoje.
+⚠️ **O que eu não sei:** se o Awin reavalia sozinho uma candidatura
+pendente quando o perfil muda, ou se só vale pras próximas. As 28 em aberto
+é que estão em jogo — a 365Rider pode estar perdida.
 
 ---
 
-## A descrição, se ele pedir uma por espaço
+## Enquanto isso, o que cabe hoje na tela
 
-Troque só as duas palavras entre colchetes:
+Os dois campos vazios aceitam alguma coisa:
 
-```
-Canal de vídeo curto sobre [beleza] em português, para público brasileiro. Publico diariamente produtos que uso e mostro em vídeo, e cada produto vai para uma página própria com preço, loja e link. Divulgação por conteúdo e redes sociais — não faço e-mail marketing, display nem search.
-```
+| campo | o que pôr |
+|---|---|
+| Nome no Twitter | (não temos — deixar vazio) |
+| Página do Facebook | (não temos — deixar vazio) |
 
-⭐ A última frase é a mesma do perfil, e pelo mesmo motivo: anunciante já se
-queimou com afiliado de cupom e de search bidding. Dizer que você **não** faz
-isso remove a objeção antes de ela aparecer.
+⚠️ **Não invente perfil pra preencher campo.** Link que não abre é pior que
+campo vazio na tela de quem está decidindo.
 
 ---
 
-## ⚠️ Uma coisa que eu não sei
-
-Não sei se o Awin deixa **recandidatar** num programa recusado, nem se
-corrigir os espaços faz o avaliador olhar de novo sozinho. A 365Rider pode
-estar perdida. As 28 em aberto é que estão em jogo — por isso a pressa.
-
-⭐ Para reconferir o estado a qualquer momento, sem abrir o painel:
+⭐ Para reconferir o estado das candidaturas, sem abrir o painel:
 
 ```bash
 python -m engine.awin

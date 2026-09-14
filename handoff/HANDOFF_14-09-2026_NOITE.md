@@ -149,18 +149,50 @@ produto. Um sérum genérico bonito no lugar da foto real entrega outra coisa.
 **MEDIDO em 14/09:** apenas **1 de 40** produtos (2%) tem `product_video_url`.
 A ideia de usar o vídeo do vendedor morreu na medição.
 
+⚠️ E **vídeo do YouTube também não serve** — ver o item 3: para 83% do
+catálogo não há como verificar que é o mesmo produto.
+
 ⭐ **O caminho que sobra é o motor que já existe:** `main.py` monta 9:16 com
 legenda no timing do áudio, narração com voz clonada e a cascata CTA. Falta a
 matéria-prima visual — foto + movimento de câmera resolve, sem IA generativa e
 sem pagar nada.
 
-### 3. Radar de canais no YouTube (pedido, não feito)
+### 3. ⛔ VÍDEO DO YOUTUBE PARA O PRODUTO — **decidido: NÃO**
+
+O Bryan levantou a ideia e ele mesmo pôs o limite: *"não posso correr o
+risco de pôr vídeo do produto errado, é preferível nem ter"*.
+
+**MEDIDO em 14/09/2026, nos 66 produtos do catálogo:**
+
+```
+11 têm marca/modelo identificável   (Lenovo GM2, KZ EDX PRO, TP300...)
+55 são genéricos                    "Organizador de maquiagem giratório 360°"
+```
+
+⚠️ **Para 83% do catálogo a verificação é impossível.** "Organizador
+giratório 360°" existe em centenas de versões quase idênticas, de dezenas de
+lojistas. Um vídeo do YouTube mostraria *um* organizador, não **o** que a
+pessoa vai receber — e ela descobre quando abre a caixa.
+
+⚠️ **E o segundo problema é pior que o primeiro:** vídeo de terceiro em post
+comercial. O canal já tomou corte de alcance por integridade/autenticidade em
+02/08 e ainda está reconstruindo.
+
+⭐ **A alternativa é melhor, não é consolo.** A foto do anúncio é, por
+definição, do produto certo: vem do mesmo lojista, do mesmo link que a pessoa
+vai abrir. É o mesmo raciocínio do preço — *o desconto é NOSSO, medido contra
+o que nós vimos*. Aqui: **a imagem é a do produto que vai chegar**.
+
+⭐ E a mesma imagem tratada serve ao cartão **e** ao vídeo: um trabalho, dois
+lugares.
+
+### 4. Radar de canais no YouTube (pedido, não feito)
 
 O Bryan pediu para procurar canais que ensinem o que estamos fazendo — vitrine
 de afiliado, UGC, conversão. O acervo dos Maestros cobre **produção**; sobre
 **vender por canal próprio** ele tem 4 fichas e todas são sobre configurar bot.
 
-### 4. O que continua travando dinheiro (de sempre)
+### 5. O que continua travando dinheiro (de sempre)
 
 - **`tracking_id` por canal** — a tabela está pronta e comentada em
   `engine/garimpo.py`; falta criar os ids no Portals e rodar

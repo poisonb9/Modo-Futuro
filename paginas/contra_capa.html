@@ -854,8 +854,16 @@
   document.getElementById("rolar").addEventListener("click", function () {
     var alvo = document.querySelector(".produtos");
     if (alvo) { alvo.scrollIntoView({ behavior: "smooth", block: "start" }); }
-    medir("clique", { canal: CANAIS[atual].banco, tipo: "rolar",
-                      rotulo: "ver os de hoje" });
+    // ⚠️ ESTE CLIQUE NAO E' MEDIDO, e nao e' esquecimento.
+    //
+    // O banco tem `check (tipo in ('link','produto'))` no `clique`
+    // (supabase/01_esquema.sql:76). Um `tipo: 'rolar'` seria RECUSADO pelo
+    // Postgres e a pagina engole erro de medicao — daria uma metrica que
+    // nunca grava, que e' pior que metrica nenhuma: a gente olharia o zero e
+    // concluiria que ninguem rola.
+    //
+    // ⭐ Pra medir de verdade, o CHECK precisa aceitar 'rolar' primeiro. E' uma
+    // migracao de uma linha, e ela vem ANTES de o codigo mandar o evento.
   });
   function montarProduto(p) {
     var falta = (p.link === FALTA);

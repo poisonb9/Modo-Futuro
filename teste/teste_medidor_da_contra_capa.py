@@ -31,7 +31,29 @@ def checar(cond, recado):
 
 
 print("1. a pagina mede visita e clique")
-checar(PAGINA.count('medir("clique"') == 2, "clique de LINK e de PRODUTO")
+# ⚠️ NAO CONTA CHAMADA, CONFERE O TIPO CONTRA O BANCO.
+#
+# Contar dava falso alarme a cada botao novo e, pior, nao pegava o defeito
+# de verdade: em 14/09/2026 eu mandei `tipo: "rolar"` num clique, e o CHECK
+# do Postgres so' aceita 'link' e 'produto'. O insert seria RECUSADO e a
+# pagina engole erro de medicao — a metrica marcaria zero pra sempre e a
+# leitura seria "ninguem clica", nao "ninguem grava".
+import re  # noqa: E402
+
+ESQUEMA = (RAIZ / "supabase" / "01_esquema.sql").read_text(encoding="utf-8")
+# ⚠️ ANCORA NA TABELA `clique`. A primeira versao deste detector procurou o
+# CHECK no arquivo inteiro e pegou o da `link_bio`, que vem antes e aceita
+# outros valores — reprovou o codigo CERTO. Detector que nao diz de qual
+# tabela esta' falando nao esta' medindo nada.
+_tab = ESQUEMA[ESQUEMA.index("create table if not exists clique"):]
+_tab = _tab[:_tab.index(");")]
+m = re.search(r"tipo\s+text not null check \(tipo in \(([^)]*)\)\)", _tab)
+aceitos = set(re.findall(r"'([a-z]+)'", m.group(1))) if m else set()
+usados = set(re.findall(r'medir\("clique",\s*\{[^}]*?tipo:\s*"([a-z]+)"',
+                        PAGINA, re.S))
+checar(bool(usados), "a pagina mede clique")
+checar(usados <= aceitos,
+       f"todo tipo de clique cabe no CHECK do banco (usa {sorted(usados)}, aceita {sorted(aceitos)})")
 checar('medir("visita"' in PAGINA, "visita por canal aberto")
 checar("keepalive: true" in PAGINA,
        "keepalive — o clique LEVA EMBORA a pessoa, e sem isso o clique que "

@@ -117,6 +117,11 @@ CODIGOS = {
 # proprio registro (`canais_registro`) em vez de uma lista nova aqui: duas
 # listas discordando e' exatamente o defeito que aquele modulo documenta.
 def _chave_da_pagina(nome_buffer: str) -> str:
+    # ⚠️ A RAIZ ENTRA NO PATH AQUI. Este script vive em `paginas/` e e'
+    # chamado de la': sem isto o `import engine` so' funciona de dentro do
+    # teste, que ja' arrumou o path — e o defeito aparece SO' na publicacao.
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
     from engine import canais_registro
     c = canais_registro.CANAIS.get(nome_buffer)
     return c.arroba.lstrip("@") if c else nome_buffer

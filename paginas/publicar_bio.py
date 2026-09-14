@@ -230,6 +230,10 @@ def produtos_todos() -> list[dict]:
     if not arq.exists():
         return []
     serie = _serie_de_precos()
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
+    from engine import combina as _c
+    _combina = _c.ler_cache()
     limite = (date.today() - timedelta(days=2)).isoformat()
     vistos, saida = set(), []
     linhas = []
@@ -270,6 +274,11 @@ def produtos_todos() -> list[dict]:
             # chamando `canal` porque e' a chave que o upsell usa pra dizer
             # "vai bem com" — mas o que viaja e o que aparece e' a area.
             "canal": _area(d.get("canal") or ""),
+            # ⭐ QUEM COMBINA COM ESTE, julgado por modelo e guardado em
+            # cache (ver engine/combina.py). Vazio = a pagina cai na regra
+            # de palavras, que e' pior mas e' conhecida.
+            "id": str(d.get("id") or d.get("nome")),
+            "combina": _combina.get(str(d.get("id") or d.get("nome")), []),
         })
     return saida
 

@@ -506,6 +506,23 @@
     // ⭐ A medida e' de sobreposicao de palavras (Jaccard). Dois nomes que
     // dividem metade do vocabulario falam da mesma coisa; complemento divide
     // a AREA (que ja' esta' garantida) e pouco mais.
+    // ⭐ O JULGAMENTO DO MODELO VEM PRIMEIRO. Ele sabe que esponja combina
+    // com estojo e que pote combina com organizador — coisa que contagem de
+    // palavra nunca saberia. A regra de palavras fica como RESERVA, pro
+    // produto que ainda nao foi julgado.
+    var porId = {};
+    PRODUTOS.forEach(function (p) { porId[String(p.id)] = p; });
+    var escolhidos = (base.combina || []).map(function (id) {
+      return porId[String(id)];
+    }).filter(function (p) {
+      return p && p.link !== base.link && num(p.preco) > 0 &&
+             num(p.preco) <= teto;
+    });
+    if (escolhidos.length) {
+      mostrarJuntos(card, escolhidos.slice(0, 2));
+      return;
+    }
+
     var juntos = PRODUTOS.filter(function (p) {
       return p.link !== base.link && p.canal === base.canal &&
              num(p.preco) > 0 && num(p.preco) <= teto &&
@@ -519,6 +536,10 @@
     // ⚠️ SEM CANDIDATO, NAO INVENTA. Puxar de outro canal, ou produto mais
     // caro, seria encher a tela por encher — e a pessoa acabou de sair.
     if (!juntos.length) { return; }
+    mostrarJuntos(card, juntos);
+  }
+
+  function mostrarJuntos(card, juntos) {
     var antigo = document.getElementById("junto");
     if (antigo) { antigo.remove(); }
 

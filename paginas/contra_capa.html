@@ -570,6 +570,11 @@
   // tabela link_bio, escritos com a chave de servico.
   var FALTA = "#falta-o-link";
 
+  // ⚠️ A CASA DA OPERACAO. Ate' 14/09/2026 o botao "os produtos"
+  // mandava pro Telegram, igual ao de cima — dois botoes, um destino.
+  // Agora existe endereco proprio pro catalogo inteiro.
+  var CASA = "https://achadinhototal.pages.dev/";
+
   // ⚠️ OS PRODUTOS DE VERDADE ENTRAM AQUI, NA PUBLICACAO.
   //
   // Esta linha e' substituida por `publicar_bio.py`, que le o que o garimpo
@@ -674,7 +679,7 @@
           guia: "Os outros cantos da casa:",
           botoes: [
             ["🍳", "Achadinho Chef — cozinha de fora, ingrediente daqui", "https://www.tiktok.com/@cozinha.internacional"],
-            ["🏷️", "Achadinho Total — os produtos, com preço e link", VITRINE]
+            ["🏷️", "Achadinho Total — todos os produtos, com preço e link", CASA]
           ]
         }
       ],

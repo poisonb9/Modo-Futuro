@@ -582,6 +582,16 @@ def escrever_decodificador() -> Path:
 PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
             "meulivro")
 
+# ⚠️ O SITE MAE E' OUTRO TIPO DE PAGINA, e por isso nao entra em PROJETOS.
+#
+# Nos outros enderecos a RAIZ e' a bio de um canal e o catalogo mora em
+# `/todos`. Aqui e' o contrario: a raiz E' o catalogo, com a lupa e sem canal
+# nenhum na frente — e' a casa da operacao inteira.
+#
+# ⚠️ Criado em 14/09/2026 apagando o reservado `treinodefora` (0 deploys), a
+# pedido do Bryan: a conta bate o teto de 10 projetos.
+PROJETO_MAE = "achadinhototal"
+
 
 def publicar_no_ar(html: str, parceiros: str = "",
                    catalogo: str = "") -> None:
@@ -619,6 +629,24 @@ def publicar_no_ar(html: str, parceiros: str = "",
                            env=amb, check=True, capture_output=True,
                            shell=(os.name == "nt"))
             print(f"  publicado: {proj}")
+        # ⭐ O SITE MAE: mesma arte, outro papel. A raiz recebe o catalogo, e
+        # `/parceiros` vai junto porque e' o endereco que o Awin abre.
+        if catalogo:
+            casa = Path(tempfile.mkdtemp())
+            try:
+                (casa / "index.html").write_text(catalogo, encoding="utf-8")
+                if parceiros:
+                    (casa / "parceiros").mkdir()
+                    (casa / "parceiros" / "index.html").write_text(
+                        parceiros, encoding="utf-8")
+                subprocess.run(
+                    ["npx", "--yes", "wrangler", "pages", "deploy", str(casa),
+                     "--project-name", PROJETO_MAE, "--commit-dirty=true"],
+                    env=amb, check=True, capture_output=True,
+                    shell=(os.name == "nt"))
+                print(f"  publicado: {PROJETO_MAE} (site mae)")
+            finally:
+                shutil.rmtree(casa, ignore_errors=True)
     finally:
         shutil.rmtree(pasta, ignore_errors=True)
 
@@ -664,6 +692,16 @@ def conferir_no_ar(marca: str, marca_parceiros: str = "",
                 faltando.append(f"{proj}/parceiros")
         except Exception as e:
             faltando.append(f"{proj}/parceiros (nao respondeu: {e})")
+    # ⚠️ NO SITE MAE A MARCA DO CATALOGO TEM DE ESTAR NA RAIZ. Conferir so'
+    # os outros deixaria a casa da operacao fora da verificacao — e ela e' a
+    # unica que nao tem bio pra servir de reserva se o deploy falhar.
+    if marca_catalogo:
+        try:
+            r = requests.get(f"https://{PROJETO_MAE}.pages.dev/", timeout=30)
+            if marca_catalogo not in r.text:
+                faltando.append(PROJETO_MAE)
+        except Exception as e:
+            faltando.append(f"{PROJETO_MAE} (nao respondeu: {e})")
     return faltando
 
 

@@ -172,6 +172,25 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             "link": d["link"],
             "imagem": d.get("imagem", ""),
         })
+    # ⚠️ `_todos` E' O ACHADINHO TOTAL: a vitrine geral, o que saiu em
+    # QUALQUER canal. A pagina usa isto pra mostrar os outros cantos da casa
+    # sem precisar saber quais canais existem.
+    geral = []
+    for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
+        if not d.get("link") or not d.get("nome"):
+            continue
+        quando = (d.get("quando") or "")[:10]
+        geral.append({
+            "nome": d["nome"],
+            "preco": d.get("preco", ""),
+            "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
+            "link": d["link"],
+            "imagem": d.get("imagem", ""),
+        })
+        if len(geral) >= 12:
+            break
+    if geral:
+        saida["_todos"] = geral
     return saida
 
 

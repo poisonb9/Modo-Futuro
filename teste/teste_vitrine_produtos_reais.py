@@ -43,7 +43,8 @@ print("1. a chave e o @ PUBLICO, nao o nome interno")
 # ninguem ver erro nenhum.
 escrever([BASE])
 d = pb.produtos_reais()
-checar(list(d) == ["achadinho.make"], "truque.importado -> achadinho.make")
+checar("achadinho.make" in d, "truque.importado -> achadinho.make")
+checar("truque.importado" not in d, "e o nome interno nao vira chave")
 checar(d["achadinho.make"][0]["visto"] == "14/09", "a data vira dd/mm")
 
 print("")
@@ -67,7 +68,22 @@ checar(len(lista) == 4, "seis viram quatro")
 checar(lista[0]["nome"] == "P6", "o mais novo na frente")
 
 print("")
-print("5. NEGATIVO - marcador sumido ESTOURA, nao passa batido")
+print("5. o Achadinho Total e a vitrine GERAL")
+# ⚠️ `_todos` junta os canais todos, e e' o que a pagina usa pra mostrar os
+# outros cantos da casa. Sem ele cada pagina so' saberia do proprio canal.
+escrever([dict(BASE, id=1), dict(BASE, id=2, canal="atefalhar", nome="Luva")])
+d = pb.produtos_reais()
+checar(len(d["_todos"]) == 2, "_todos junta os dois canais")
+checar(len(d["achadinho.make"]) == 1 and len(d["atefalhar"]) == 1,
+       "e cada canal continua com o seu")
+
+print("")
+print("6. NEGATIVO - produto sem link fica fora do _todos tambem")
+escrever([dict(BASE, link="")])
+checar("_todos" not in pb.produtos_reais(), "vitrine geral vazia, nao chave vazia")
+
+print("")
+print("7. NEGATIVO - marcador sumido ESTOURA, nao passa batido")
 # ⚠️ Se a substituicao falhasse calada, a pagina de exemplo iria pro ar com a
 # etiqueta dizendo "exemplo" — e ninguem notaria que a real nunca subiu.
 try:
@@ -77,7 +93,7 @@ except SystemExit:
     checar(True, "html sem o marcador estoura")
 
 print("")
-print("6. e o marcador certo recebe os dados")
+print("8. e o marcador certo recebe os dados")
 saida = pb.injetar_produtos(
     "  var PRODUTOS_REAIS = {};", {"achadinho.make": [{"nome": "X"}]})
 checar('"achadinho.make"' in saida and '"X"' in saida, "os dados entram")

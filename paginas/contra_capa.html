@@ -1,3 +1,14 @@
+<meta charset="utf-8">
+<!-- ⚠️ SEM ESTA LINHA O IPHONE ABRE A PAGINA MINUSCULA.
+
+     Medido em 14/09/2026, na foto do Bryan: sem `viewport` o Safari
+     desenha a pagina como se a tela tivesse 980px e depois encolhe tudo
+     pra caber — texto de 14px vira texto de 5px, e so' da' pra ler dando
+     zoom. Vale pra QUALQUER visita, dentro ou fora do TikTok.
+
+     ⚠️ E a pagina inteira e' feita pra celular: quem chega vem de video
+     vertical. A bio era o unico lugar da operacao sem esta linha. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contra-capa Modo Futuro</title>
 <!-- Verificacao de propriedade do Awin (12/09/2026): eles pedem a palavra
      "Awin" no codigo-fonte pra confirmar que a pagina e' nossa. Meta tag,
@@ -262,6 +273,12 @@
     <div id="vitrine"></div>
     <button class="interruptor" id="interruptor" type="button"></button>
   </section>
+
+  <!-- ⚠️ OS OUTROS CANTOS DA CASA, com produto de verdade.
+       Ordem pedida pelo Bryan em 14/09/2026: Achadinho Total primeiro,
+       Achadinho Chef depois. Fica VAZIO quando nao ha' produto real — e
+       nao aparece secao nenhuma, em vez de aparecer um titulo sozinho. -->
+  <div id="outros"></div>
 
   <footer class="rodape" id="rodape"></footer>
 </div>
@@ -783,18 +800,21 @@
 
     // ⚠️ O REAL GANHA DO EXEMPLO, sempre. `c.produtos` e' a lista escrita na
     // mao; `PRODUTOS_REAIS[chave]` e' o que o garimpo escolheu de verdade.
+    var lista_do_canal = [];
     var reais = PRODUTOS_REAIS[atual] || [];
     var disponiveis = reais.length ? reais : c.produtos;
     var real = reais.length > 0 || c.produtoReal;
     if (mostrandoProdutos && disponiveis.length > 0) {
       var lista = disponiveis.slice(0, 4);
+      lista_do_canal = reais.length ? lista : [];
       vitrine.className = lista.length === 1 ? "vitrine solo" : "vitrine";
       // O livro e' produto NOSSO e existe de verdade; os do achadinho ainda
       // sao exemplo. A etiqueta tem de dizer qual e' qual, senao a pagina
       // apresenta invencao com a mesma cara de coisa real.
-      etiqueta.textContent = real
-        ? "o que apareceu nos vídeos"
-        : "exemplo — ainda não é real";
+      // ⚠️ VAZIA QUANDO E' REAL. Ela dizia o mesmo que o <h2> logo ao lado,
+      // e o iPhone do Bryan mostrou o titulo DUPLICADO na tela. A etiqueta
+      // so' existe pra avisar que o que esta' abaixo NAO e' real.
+      etiqueta.textContent = real ? "" : "exemplo — ainda não é real";
       lista.forEach(function (p) { vitrine.appendChild(montarProduto(p)); });
     } else {
       // Este e' o estado de HOJE, e ele e' NORMAL, nao erro: nenhum clipe
@@ -808,9 +828,60 @@
       vitrine.appendChild(v);
     }
 
-    document.getElementById("interruptor").textContent = mostrandoProdutos
+    // ⚠️ O INTERRUPTOR E' FERRAMENTA NOSSA, nao pagina. Com produto real no
+    // ar ele oferecia ao visitante 'ver como fica sem produto' — apareceu
+    // assim no iPhone do Bryan, embaixo de quatro produtos que existem.
+    var chave_int = document.getElementById("interruptor");
+    chave_int.hidden = reais.length > 0;
+    chave_int.textContent = mostrandoProdutos
       ? "ver como fica sem produto (é o estado de hoje)"
       : "ver com os dois produtos preenchidos";
+
+    // ⚠️ OS OUTROS CANTOS DA CASA, com produto de verdade.
+    //
+    // ⭐ Ordem pedida pelo Bryan: Achadinho Total primeiro, Chef depois. O
+    // Total e' a vitrine GERAL (o que saiu em qualquer canal); o Chef e' o
+    // canal de cozinha.
+    //
+    // ⚠️ NAO REPETE o que ja' esta' na vitrine de cima, e NAO mostra o
+    // proprio canal como se fosse outro canto.
+    var outros = document.getElementById("outros");
+    outros.innerHTML = "";
+    var jaVistos = {};
+    lista_do_canal.forEach(function (p) { jaVistos[p.link] = 1; });
+
+    // ⚠️ O CHEF ESCOLHE ANTES, o Total mostra antes.
+    //
+    // O Total e' a vitrine GERAL — ele contem os produtos do Chef. Filtrando
+    // na ordem de exibicao, o Total levava os do Chef e sobrava UM cartao pro
+    // Chef (medido: 5 cartoes no total, em vez de 8). Entao a reserva corre
+    // do mais especifico pro mais geral, e a exibicao na ordem que o Bryan
+    // pediu.
+    function pegar(lista, quantos) {
+      var fora = [];
+      (lista || []).forEach(function (p) {
+        if (fora.length >= quantos || jaVistos[p.link]) { return; }
+        jaVistos[p.link] = 1;
+        fora.push(p);
+      });
+      return fora;
+    }
+    var doChef = atual === "cozinha.internacional" ? []
+      : pegar(PRODUTOS_REAIS["cozinha.internacional"], 4);
+    var doTotal = pegar(PRODUTOS_REAIS["_todos"], 4);
+
+    [["No Achadinho Total", doTotal],
+     ["No Achadinho Chef", doChef]].forEach(function (bloco) {
+      if (!bloco[1].length) { return; }
+      var sec = el("section", "produtos");
+      var cab = el("div", "cabeca");
+      cab.appendChild(el("h2", null, bloco[0]));
+      sec.appendChild(cab);
+      var g = el("div", "vitrine");
+      bloco[1].forEach(function (p) { g.appendChild(montarProduto(p)); });
+      sec.appendChild(g);
+      outros.appendChild(sec);
+    });
 
     document.getElementById("rodape").textContent =
       c.arroba + " · conteúdo produzido com apoio de IA";

@@ -81,6 +81,10 @@ ORIGEM = RAIZ / "paginas" / "contra_capa.html"
 # poluir a bio do canal, que tem outro trabalho (converter quem veio do
 # video).
 PARCEIROS = RAIZ / "paginas" / "quem_somos.html"
+# ⚠️ O CATALOGO. Vai como rota `/todos` nos mesmos projetos (a conta bateu o
+# teto de 10), e e' a MESMA pagina que o site mae servira' na raiz quando
+# houver endereco pra ele.
+CATALOGO = RAIZ / "paginas" / "todos.html"
 DESTINO = RAIZ / "paginas" / "_publicado"
 SEGREDOS = (RAIZ.parent.parent.parent / "BACKUP_SISTEMA" / "SEGREDOS_NAO_SUBIR")
 REPO = "poisonb9/bio"
@@ -160,6 +164,42 @@ def _serie_de_precos() -> dict:
     return serie
 
 
+def montar_catalogo() -> str:
+    """O HTML do catalogo, com os produtos e o brasao ja' dentro."""
+    import json
+    if not CATALOGO.exists():
+        return ""
+    # ⚠️ O CATALOGO PASSA PELA MESMA LIMPEZA da bio: os comentarios daqui
+    # explicam a operacao (medicao, decisao, data de incidente) e nao tem por
+    # que viajar pro repositorio publico. Sem isto o detector reprova — e
+    # reprovou, na primeira tentativa.
+    html = mascarar(tirar_comentarios(CATALOGO.read_text(encoding="utf-8")))
+    dados = produtos_todos()
+    # ⚠️ ESTOURA SE O MARCADOR SUMIR. Substituicao que nao acha o alvo e segue
+    # publicaria um catalogo VAZIO com cara de pronto.
+    for alvo, valor in (("  var PRODUTOS = [];",
+                         "  var PRODUTOS = " + json.dumps(
+                             dados, ensure_ascii=False) + ";"),
+                        ('  var BRASAO = "";',
+                         '  var BRASAO = "' + _brasao_total() + '";')):
+        if alvo not in html:
+            raise SystemExit("catalogo: marcador sumiu -> " + alvo.strip())
+        html = html.replace(alvo, valor, 1)
+    print(f"catalogo: {len(dados)} produto(s)")
+    return html
+
+
+def _brasao_total() -> str:
+    """A lupa, em data URI. Vazio se a arte nao existir (a pagina aguenta)."""
+    arq = RAIZ / "paginas" / "avatares" / "_data_uris.txt"
+    if not arq.exists():
+        return ""
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        if linha.startswith("achadinho.total	"):
+            return linha.split("	", 1)[1]
+    return ""
+
+
 def _nome_bonito(d: dict) -> str:
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
@@ -171,6 +211,72 @@ def _desde(serie: dict, d: dict) -> str:
     """dd/mm da primeira vez que vimos o preco deste produto."""
     q = serie.get(d.get("id"), ("", 0, 0.0, ""))[0]
     return f"{q[8:10]}/{q[5:7]}" if len(q) == 10 else ""
+
+
+def produtos_todos() -> list[dict]:
+    """TODOS os produtos que ainda valem — o catalogo do site mae.
+
+    ⚠️ A DIFERENCA PRA `produtos_reais` NAO E' SO' O TAMANHO. Ali a regra e'
+    vitrine (4 por canal, os mais novos); aqui e' catalogo: tudo o que ainda
+    esta' de pe', com o canal junto pra dar pra filtrar.
+
+    ⚠️ E A MESMA TRAVA DE HONESTIDADE: so' entra quem teve o preco
+    reconferido nas ultimas 48h. Catalogo grande com preco velho e' pior que
+    catalogo pequeno — quem clica encontra outro numero na loja.
+    """
+    import json
+    from datetime import date, timedelta
+    arq = RAIZ / "estado" / "produtos_publicados.jsonl"
+    if not arq.exists():
+        return []
+    serie = _serie_de_precos()
+    limite = (date.today() - timedelta(days=2)).isoformat()
+    vistos, saida = set(), []
+    linhas = []
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            linhas.append(json.loads(linha))
+        except ValueError:
+            continue
+    for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
+        if not d.get("link") or not d.get("nome"):
+            continue
+        marca = d.get("id") or d.get("nome")
+        if marca in vistos:
+            continue
+        visto_em = serie.get(d.get("id"), ("", 0, 0.0, ""))[3]
+        if visto_em and visto_em < limite:
+            continue
+        vistos.add(marca)
+        quando = (d.get("quando") or "")[:10]
+        saida.append({
+            "nome": _nome_bonito(d),
+            "preco": d.get("preco", ""),
+            "link": d["link"],
+            "imagem": d.get("imagem", ""),
+            "queda": round(float(d.get("queda") or 0), 1),
+            "vendas": int(d.get("vendas") or 0),
+            "antes": _antes(serie, d),
+            "dias": _dias(serie, d),
+            "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
+            "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
+            # ⚠️ O NOME DE EXIBICAO, nao a chave. A chave e' nome interno
+            # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
+            # pra dentro do JSON da pagina publica — a guarda pegou.
+            # ⭐ E de quebra o filtro fica legivel: "Até Falhar", nao "@atefalhar".
+            "canal": _nome_do_canal(d.get("canal") or ""),
+        })
+    return saida
+
+
+def _nome_do_canal(nome_buffer: str) -> str:
+    """"truque.importado" -> "Achadinho Make". Sai do registro da vitrine."""
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
+    from engine import vitrine
+    return vitrine.ORIGEM.get(nome_buffer, nome_buffer)
 
 
 def _antes(serie: dict, d: dict) -> str:
@@ -416,14 +522,23 @@ def conferir(html: str) -> list[str]:
         "manifesto": "vocabulario interno",
         "service_role": "CHAVE DE SERVICO",
         "sb_secret_": "CHAVE DE SERVICO",
+        # ⚠️ Este entra na lista dos SENSIVEIS A CAIXA (ver abaixo): "medido"
+        # minusculo e' portugues comum — "o desconto e' medido contra o preco
+        # que nos vimos" e' TEXTO DE VITRINE, e reprovava.
         "MEDIDO": "nota de medicao",
         "Bryan": "nome do dono",
         "não vai ao ar": "a CAIXA DE PREVIA (ela foi ao ar em 12/09)",
         'class="abas"': "as abas de trocar de canal",
     }
+    # ⚠️ ESTES SO' CONTAM EM CAIXA ALTA. Sao marcas de comentario interno,
+    # nao palavras: em minusculo eles aparecem em portugues normal e a guarda
+    # reprovava pagina correta (medido em 14/09/2026, na estreia do catalogo).
+    SENSIVEL_A_CAIXA = ("MEDIDO",)
     achados = []
     for termo, porque in proibido.items():
-        if termo.lower() in html.lower():
+        achou = (termo in html if termo in SENSIVEL_A_CAIXA
+                 else termo.lower() in html.lower())
+        if achou:
             achados.append(f"{termo!r} ({porque})")
 
     # ⚠️ SO' OS NOMES QUE SAO DE VERDADE INTERNOS.
@@ -468,7 +583,8 @@ PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
             "meulivro")
 
 
-def publicar_no_ar(html: str, parceiros: str = "") -> None:
+def publicar_no_ar(html: str, parceiros: str = "",
+                   catalogo: str = "") -> None:
     """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
 
     ⚠️ ISTO E' O PASSO QUE FALTAVA, e a falta dele fez eu anunciar uma pagina
@@ -488,6 +604,9 @@ def publicar_no_ar(html: str, parceiros: str = "") -> None:
     # ⚠️ UPLOAD DIRETO SUBSTITUI O DIRETORIO INTEIRO. Se a rota nao for
     # junto neste mesmo deploy, o deploy seguinte a APAGA — sem erro, sem
     # aviso, e o link que esta no perfil do Awin vira 404.
+    if catalogo:
+        (pasta / "todos").mkdir()
+        (pasta / "todos" / "index.html").write_text(catalogo, encoding="utf-8")
     if parceiros:
         (pasta / "parceiros").mkdir()
         (pasta / "parceiros" / "index.html").write_text(
@@ -504,7 +623,8 @@ def publicar_no_ar(html: str, parceiros: str = "") -> None:
         shutil.rmtree(pasta, ignore_errors=True)
 
 
-def conferir_no_ar(marca: str, marca_parceiros: str = "") -> list[str]:
+def conferir_no_ar(marca: str, marca_parceiros: str = "",
+                   marca_catalogo: str = "") -> list[str]:
     """Baixa cada pagina DO AR e procura a marca. Devolve quem nao tem.
 
     ⚠️ A PROVA E' O BYTE QUE O VISITANTE RECEBE. "Deployment complete" e commit
@@ -521,6 +641,17 @@ def conferir_no_ar(marca: str, marca_parceiros: str = "") -> list[str]:
                 faltando.append(proj)
         except Exception as e:
             faltando.append(f"{proj} (nao respondeu: {e})")
+        # ⚠️ A ROTA /todos TAMBEM SE CONFERE. E 200 NAO E' PROVA: o Pages
+        # devolve a PAGINA RAIZ com status 200 quando o caminho nao existe.
+        # Medido em 14/09/2026: `/todos` respondia 200 servindo a bio, e o
+        # deploy nem tinha acontecido.
+        if marca_catalogo:
+            try:
+                r = requests.get(f"https://{proj}.pages.dev/todos", timeout=30)
+                if marca_catalogo not in r.text:
+                    faltando.append(f"{proj}/todos")
+            except Exception as e:
+                faltando.append(f"{proj}/todos (nao respondeu: {e})")
         if not marca_parceiros:
             continue
         # ⚠️ A ROTA SE CONFERE SOZINHA. A raiz estar nova nao prova que
@@ -552,9 +683,10 @@ def main() -> None:
     # ⚠️ A pagina do anunciante passa pelo MESMO detector de vazamento. Ela
     # nao tem comentario de motor, mas tem nome de canal — e o detector ja'
     # pegou o nome do dono no rodape na primeira versao dela.
+    catalogo = montar_catalogo()
     parceiros = (PARCEIROS.read_text(encoding="utf-8")
                  if PARCEIROS.exists() else "")
-    sobrou = conferir(html) + conferir(parceiros)
+    sobrou = conferir(html) + conferir(parceiros) + conferir(catalogo)
     if sobrou:
         print("NAO PUBLIQUEI. Sobrou coisa interna na versao publica:")
         for s in sobrou:
@@ -614,12 +746,29 @@ def main() -> None:
                        capture_output=True, text=True)
     if r.returncode != 0 and "nothing to commit" not in (r.stdout + r.stderr):
         raise SystemExit("commit falhou:\n" + r.stdout + r.stderr)
-    subprocess.run(["git", "-C", str(tmp), "push", "-u", "origin", "HEAD:main"],
-                   check=True)
-    print(f"\nempurrado para {REPO} (historico — isto NAO publica)")
+    # ⚠️ O HISTORICO NAO PODE SEGURAR O AR.
+    #
+    # Este push vai pro repo `bio`, que e' ARQUIVO: ele nao publica nada (os
+    # projetos do Pages sao de upload direto). Com `check=True` ele abortava a
+    # funcao ANTES do deploy — medido em 14/09/2026: o catalogo ficou fora do
+    # ar por causa de um push que nao tem nada a ver com publicar.
+    #
+    # ⭐ A ordem certa: primeiro o visitante, depois o arquivo. Falha aqui
+    # AVISA ALTO e segue.
+    empurrado = subprocess.run(
+        ["git", "-C", str(tmp), "push", "-u", "origin", "HEAD:main"],
+        capture_output=True, text=True)
+    if empurrado.returncode == 0:
+        print(f"\nempurrado para {REPO} (historico — isto NAO publica)")
+    else:
+        print(f"\n[!] O HISTORICO NAO SUBIU para {REPO} "
+              f"(git saiu {empurrado.returncode}). A publicacao continua: "
+              "isto nao afeta o que o visitante ve.")
+        for linha in (empurrado.stderr or "").strip().splitlines()[-3:]:
+            print("    " + linha)
 
     print("\npublicando no Cloudflare Pages:")
-    publicar_no_ar(html, parceiros)
+    publicar_no_ar(html, parceiros, catalogo)
 
     # ⚠️ A MARCA E' UMA COISA QUE SO' A VERSAO NOVA TEM. Conferir "existe
     # pagina no ar" nao prova nada: a pagina velha tambem existe.
@@ -627,9 +776,10 @@ def main() -> None:
     # anunciante. Procurar a marca da bio em `/parceiros` daria falso
     # negativo eterno (o Telegram aparece nas duas).
     marca_p = "search bidding" if parceiros else ""
+    marca_c = "Achados novos" if catalogo else ""
     marca = "t.me/achadinhototal"
     print(f"\nconferindo no ar (procurando {marca!r}):")
-    faltando = conferir_no_ar(marca, marca_p)
+    faltando = conferir_no_ar(marca, marca_p, marca_c)
     if faltando:
         raise SystemExit(
             "NAO ESTA' NO AR em: " + ", ".join(faltando) +

@@ -90,6 +90,13 @@ def anotar_publicado(produto: dict, canal: str, onde: str) -> None:
         # `promotion_link` de uma busca velha nao volta.
         "link": produto.get("link", ""),
         "imagem": produto.get("imagem", ""),
+        # ⭐ O VIDEO DO VENDEDOR, quando existe. O `product_video_url` ja'
+        # vinha montado em `para_produto` e era jogado fora aqui — e ele e' a
+        # unica materia-prima de video de produto que a gente tem DE GRACA.
+        #
+        # ⚠️ Sem este campo nao da' nem pra MEDIR quantos produtos tem video,
+        # que e' a pergunta que decide se vale pagar por video de IA.
+        "video": produto.get("video", ""),
         "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     with PUBLICADOS.open("a", encoding="utf-8") as f:

@@ -266,9 +266,37 @@ def produtos_todos() -> list[dict]:
             # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
             # pra dentro do JSON da pagina publica — a guarda pegou.
             # ⭐ E de quebra o filtro fica legivel: "Até Falhar", nao "@atefalhar".
-            "canal": _nome_do_canal(d.get("canal") or ""),
+            # ⚠️ AREA, e nao canal: ver AREA_DO_CANAL. O campo continua se
+            # chamando `canal` porque e' a chave que o upsell usa pra dizer
+            # "vai bem com" — mas o que viaja e o que aparece e' a area.
+            "canal": _area(d.get("canal") or ""),
         })
     return saida
+
+
+# ⚠️ O SITE MAE NAO FALA DE CANAL.
+#
+# Decisao do Bryan em 14/09/2026: quem abre a casa da operacao nao precisa
+# saber que existem cinco TikToks por tras. Isso e' estrutura NOSSA, e nao
+# informacao util pra quem esta' comprando — no melhor caso e' ruido, no pior
+# parece que estamos separando o que mostramos pra cada um.
+#
+# ⭐ O QUE SOBRA NO LUGAR E' MELHOR: a area do produto. "Beleza" e "Cozinha"
+# dizem ao comprador o que ele vai achar ali; "Achadinho Make" nao diz nada a
+# quem nunca viu o canal.
+AREA_DO_CANAL = {
+    "truque.importado": "Beleza",
+    "cozinha.importada": "Cozinha",
+    "atefalhar": "Fitness",
+    "achadinhos.instantaneos": "Casa",
+    "fatura.chora": "Eletrônicos",
+    "modofuturo": "Tecnologia",
+    "semanestesia.pod": "Livros",
+}
+
+
+def _area(nome_buffer: str) -> str:
+    return AREA_DO_CANAL.get(nome_buffer, "Achadinhos")
 
 
 def _nome_do_canal(nome_buffer: str) -> str:

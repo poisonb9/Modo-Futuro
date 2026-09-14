@@ -442,9 +442,42 @@
     // custa no maximo METADE do que ela acabou de olhar. Um complemento
     // mais caro que o principal nao e' complemento, e' outra decisao.
     a.addEventListener("click", function () {
+      // ⚠️ CARTAO DE DENTRO DA SUGESTAO NAO GERA OUTRA SUGESTAO.
+      //
+      // E nao e' so' pra evitar recursao: `sugerir` REMOVE o bloco antigo, e
+      // o cartao clicado esta' dentro dele. Tirar o proprio elemento do DOM
+      // no meio do clique CANCELA a navegacao — o cartao simplesmente nao
+      // abria (medido no iPhone do Bryan, 14/09/2026).
+      if (a.closest("#junto")) { return; }
       sugerir(a, p);
     });
     return a;
+  }
+
+  // ⚠️ AS PALAVRAS QUE NAO DIZEM NADA ficam de fora da conta. 'kit',
+  // 'conjunto' e 'para' aparecem em metade do catalogo e inflariam a
+  // semelhanca entre produtos que nao tem nada a ver.
+  var VAZIAS = ("kit conjunto jogo pacote unidades unidade para com sem "
+                + "peças pecas novo nova mini super multi").split(" ");
+
+  function palavras(t) {
+    return String(t || "").toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .split(/[^a-z0-9]+/)
+      .filter(function (w) { return w.length >= 4 && VAZIAS.indexOf(w) < 0; });
+  }
+
+  function parecidos(a, b) {
+    var A = palavras(a), B = palavras(b);
+    if (!A.length || !B.length) { return 0; }
+    var juntas = {}, comuns = 0;
+    A.forEach(function (w) { juntas[w] = 1; });
+    B.forEach(function (w) {
+      if (juntas[w] === 1) { comuns += 1; juntas[w] = 2; }
+      else { juntas[w] = juntas[w] || 1; }
+    });
+    var total = Object.keys(juntas).length;
+    return total ? comuns / total : 0;
   }
 
   function sugerir(card, base) {
@@ -463,9 +496,20 @@
     // 10,816 e o candidato de R$ 10,82 fica de fora por meio centavo — o
     // bloco sumia e parecia que nao havia complemento nenhum (medido no ar).
     var teto = Math.round(num(base.preco) * 80) / 100;
+    // ⚠️ COMPLEMENTO NAO E' SUBSTITUTO.
+    //
+    // A primeira versao sugeria 'Kit de maquiagem com potes e esponjas' pra
+    // quem abriu 'Conjunto de esponjas para maquiagem' — o MESMO produto com
+    // outro nome. Isso nao soma venda: faz a pessoa reconsiderar a que ela ja'
+    // tinha escolhido.
+    //
+    // ⭐ A medida e' de sobreposicao de palavras (Jaccard). Dois nomes que
+    // dividem metade do vocabulario falam da mesma coisa; complemento divide
+    // a AREA (que ja' esta' garantida) e pouco mais.
     var juntos = PRODUTOS.filter(function (p) {
       return p.link !== base.link && p.canal === base.canal &&
-             num(p.preco) > 0 && num(p.preco) <= teto;
+             num(p.preco) > 0 && num(p.preco) <= teto &&
+             parecidos(p.nome, base.nome) <= 0.25;
     }).sort(function (a, b) {
       // o mais barato entre os que mais cairam: barato chama o olho,
       // queda medida sustenta a escolha
@@ -482,7 +526,15 @@
     caixa.id = "junto";
     var titulo = el("h3");
     titulo.appendChild(el("span", "pulso"));
-    titulo.appendChild(el("span", null, "do mesmo canal, e mais barato que o que você abriu"));
+    // ⚠️ NAO SE FALA DE CANAL AQUI. Quem abre o site mae nao precisa saber
+    // que existem cinco TikToks por tras — isso e' estrutura nossa, nao
+    // informacao util pra quem esta' comprando.
+    //
+    // ⚠️ E NAO SE ANUNCIA "mais barato": dizer isso sugere que havia algo
+    // mais barato guardado. O criterio de escolha continua sendo preco (e
+    // isso e' bom), mas o texto fala de COMBINACAO, que e' o motivo real de
+    // mostrar.
+    titulo.appendChild(el("span", null, "vai bem com o que você abriu"));
     var x = el("button", "fechar", "fechar");
     x.type = "button";
     x.addEventListener("click", function (ev) {

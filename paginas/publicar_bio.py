@@ -71,6 +71,16 @@ os.environ.pop('GH_TOKEN', None)
 
 RAIZ = Path(__file__).resolve().parent.parent
 ORIGEM = RAIZ / "paginas" / "contra_capa.html"
+# ⚠️ A PAGINA DO ANUNCIANTE, e nao da bio. Ela vai como ROTA `/parceiros`
+# dentro dos MESMOS projetos, e nao num projeto novo: a conta bateu o teto
+# de 10 projetos no Cloudflare (medido em 14/09/2026, os 10 ocupados, 4
+# deles enderecos reservados do Ate Falhar).
+#
+# ⭐ E isto resolve o problema real: o Awin aceita UM endereco no perfil.
+# Apontar pra `/parceiros` faz o avaliador ver a operacao inteira sem
+# poluir a bio do canal, que tem outro trabalho (converter quem veio do
+# video).
+PARCEIROS = RAIZ / "paginas" / "quem_somos.html"
 DESTINO = RAIZ / "paginas" / "_publicado"
 SEGREDOS = (RAIZ.parent.parent.parent / "BACKUP_SISTEMA" / "SEGREDOS_NAO_SUBIR")
 REPO = "poisonb9/bio"
@@ -207,7 +217,7 @@ PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
             "meulivro")
 
 
-def publicar_no_ar(html: str) -> None:
+def publicar_no_ar(html: str, parceiros: str = "") -> None:
     """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
 
     ⚠️ ISTO E' O PASSO QUE FALTAVA, e a falta dele fez eu anunciar uma pagina
@@ -224,6 +234,13 @@ def publicar_no_ar(html: str) -> None:
                CLOUDFLARE_ACCOUNT_ID=conta)
     pasta = Path(tempfile.mkdtemp())
     (pasta / "index.html").write_text(html, encoding="utf-8")
+    # ⚠️ UPLOAD DIRETO SUBSTITUI O DIRETORIO INTEIRO. Se a rota nao for
+    # junto neste mesmo deploy, o deploy seguinte a APAGA — sem erro, sem
+    # aviso, e o link que esta no perfil do Awin vira 404.
+    if parceiros:
+        (pasta / "parceiros").mkdir()
+        (pasta / "parceiros" / "index.html").write_text(
+            parceiros, encoding="utf-8")
     try:
         for proj in PROJETOS:
             subprocess.run(["npx", "--yes", "wrangler", "pages", "deploy",
@@ -236,7 +253,7 @@ def publicar_no_ar(html: str) -> None:
         shutil.rmtree(pasta, ignore_errors=True)
 
 
-def conferir_no_ar(marca: str) -> list[str]:
+def conferir_no_ar(marca: str, marca_parceiros: str = "") -> list[str]:
     """Baixa cada pagina DO AR e procura a marca. Devolve quem nao tem.
 
     ⚠️ A PROVA E' O BYTE QUE O VISITANTE RECEBE. "Deployment complete" e commit
@@ -253,6 +270,18 @@ def conferir_no_ar(marca: str) -> list[str]:
                 faltando.append(proj)
         except Exception as e:
             faltando.append(f"{proj} (nao respondeu: {e})")
+        if not marca_parceiros:
+            continue
+        # ⚠️ A ROTA SE CONFERE SOZINHA. A raiz estar nova nao prova que
+        # `/parceiros` subiu: sao dois arquivos no mesmo deploy, e e' o
+        # segundo que esta' escrito no perfil do Awin.
+        try:
+            r = requests.get(f"https://{proj}.pages.dev/parceiros",
+                             timeout=30)
+            if marca_parceiros not in r.text:
+                faltando.append(f"{proj}/parceiros")
+        except Exception as e:
+            faltando.append(f"{proj}/parceiros (nao respondeu: {e})")
     return faltando
 
 
@@ -264,7 +293,12 @@ def main() -> None:
     html = mascarar(tirar_previa(
         tirar_comentarios(ORIGEM.read_text(encoding="utf-8"))))
 
-    sobrou = conferir(html)
+    # ⚠️ A pagina do anunciante passa pelo MESMO detector de vazamento. Ela
+    # nao tem comentario de motor, mas tem nome de canal — e o detector ja'
+    # pegou o nome do dono no rodape na primeira versao dela.
+    parceiros = (PARCEIROS.read_text(encoding="utf-8")
+                 if PARCEIROS.exists() else "")
+    sobrou = conferir(html) + conferir(parceiros)
     if sobrou:
         print("NAO PUBLIQUEI. Sobrou coisa interna na versao publica:")
         for s in sobrou:
@@ -311,6 +345,10 @@ def main() -> None:
         pasta.mkdir(exist_ok=True)
         (pasta / "index.html").write_text(html, encoding="utf-8")
     print(f"  {len(set(CODIGOS.values()))} pastas de canal (/c1 ... /c7)")
+    if parceiros:
+        (tmp / "parceiros").mkdir(exist_ok=True)
+        (tmp / "parceiros" / "index.html").write_text(
+            parceiros, encoding="utf-8")
 
     subprocess.run(["git", "-C", str(tmp), "add", "-A"], check=True)
     # ⚠️ `check=True` no commit. Estava `False`, e o commit falhou CALADO — o
@@ -325,13 +363,17 @@ def main() -> None:
     print(f"\nempurrado para {REPO} (historico — isto NAO publica)")
 
     print("\npublicando no Cloudflare Pages:")
-    publicar_no_ar(html)
+    publicar_no_ar(html, parceiros)
 
     # ⚠️ A MARCA E' UMA COISA QUE SO' A VERSAO NOVA TEM. Conferir "existe
     # pagina no ar" nao prova nada: a pagina velha tambem existe.
+    # ⚠️ MARCA PROPRIA pra rota: uma frase que SO' existe na pagina do
+    # anunciante. Procurar a marca da bio em `/parceiros` daria falso
+    # negativo eterno (o Telegram aparece nas duas).
+    marca_p = "search bidding" if parceiros else ""
     marca = "t.me/achadinhototal"
     print(f"\nconferindo no ar (procurando {marca!r}):")
-    faltando = conferir_no_ar(marca)
+    faltando = conferir_no_ar(marca, marca_p)
     if faltando:
         raise SystemExit(
             "NAO ESTA' NO AR em: " + ", ".join(faltando) +

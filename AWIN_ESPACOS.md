@@ -40,21 +40,40 @@ canais.** Ela tem outro trabalho: converter quem chegou de um vídeo de
 maquiagem. Duas plateias, dois objetivos — quem paga a conta de misturar é a
 conversão de quem veio do vídeo.
 
-### A proposta: uma página só pra anunciante
+### ✅ FEITO em 14/09 — a página existe e está no ar
 
-Um endereço novo (ex.: `quemsomos.pages.dev`), que o campo **Site** do Awin
-aponta, com:
+**Cole isto no campo `Site` (e no `URL do Blog`):**
 
-- os **cinco canais** e o que cada um cobre — beleza, cozinha, fitness,
-  achadinhos gerais, promoções — cada um com link pro TikTok
-- o **Telegram** e quantas pessoas recebem
-- a **cadência** (publico todo dia) e de onde vem o produto
-- a frase que remove a objeção: **não faço e-mail marketing, display nem
-  search**
+```
+https://oachadinho.pages.dev/parceiros
+```
 
-⭐ Aí o avaliador de esporte abre e vê o **Até Falhar** na tela, em vez de
-procurar batom. E as bios dos canais continuam fazendo o trabalho delas.
+Ela lista os **seis canais** com a categoria de cada um e o setor de
+anunciante que combina, como eu trabalho (garimpo diário, preço conferido
+contra histórico próprio), o Telegram, e a frase que remove a objeção.
 
+⚠️ **Não é um projeto novo:** a conta do Cloudflare bateu o teto de **10
+projetos** (medido em 14/09; 4 dos 10 são endereços reservados do Até
+Falhar). Então ela vai como **rota** dentro dos projetos que já existem —
+o mesmo endereço serve nos cinco:
+
+```
+oachadinho.pages.dev/parceiros       200
+achadinhochef.pages.dev/parceiros    200
+pagomenos.pages.dev/parceiros        200
+achadinhodehoje.pages.dev/parceiros  200
+meulivro.pages.dev/parceiros         200
+```
+
+⭐ **E ela sobrevive ao próximo deploy.** Upload direto substitui o
+diretório inteiro: se a rota não subisse no mesmo deploy da bio, o deploy
+seguinte a apagaria em silêncio e o link do perfil viraria 404. Por isso
+`publicar_bio.py` sobe as duas juntas e **confere a rota separadamente** —
+a raiz estar nova não prova que `/parceiros` subiu.
+
+⚠️ **O nome do dono saiu do rodapé**: o detector de vazamento do próprio
+`publicar_bio.py` reprovou a primeira versão. O anunciante já vê o nome na
+conta do Awin.
 ⚠️ **O que eu não sei:** se o Awin reavalia sozinho uma candidatura
 pendente quando o perfil muda, ou se só vale pras próximas. As 28 em aberto
 é que estão em jogo — a 365Rider pode estar perdida.

@@ -255,9 +255,17 @@
   .preco { font-family: "Archivo Black", system-ui, sans-serif;
            font-size: 17.5px; color: var(--tinta); letter-spacing: -.01em; }
   .de { font: 400 11.5px/1 var(--mono); color: var(--fraco); text-decoration: line-through; }
+  /* ⚠️ SEM `nowrap`. A linha 'acompanhando ha 1 dia' em fonte mono nao cabia
+     na largura do cartao e VAZAVA pra fora da borda arredondada — apareceu
+     assim no iPhone do Bryan (14/09/2026). Texto que sai do cartao faz a
+     pagina inteira parecer quebrada, mesmo com todo o resto certo. */
   .rodape-item {
-    display: flex; align-items: center; gap: 6px;
-    font: 500 10.5px/1 var(--mono); color: var(--fraco); white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
+    font: 500 10px/1.25 var(--mono); color: var(--fraco);
+    min-width: 0; overflow: hidden;
+  }
+  .rodape-item span:last-child {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .pulso {
     width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px;
@@ -310,7 +318,7 @@
          mostrar qualquer produto. A linha viva diz a mesma coisa em uma
          linha e com prova: nome e preco de um achadinho de verdade,
          digitando — o mesmo padrao que funcionou nas bios. -->
-    <a class="vivo" id="vivo" rel="noopener" target="_blank">
+    <a class="vivo" id="vivo" rel="noopener">
       <span class="vivo-nome" id="vivo_nome"></span>
       <span class="vivo-preco" id="vivo_preco"></span>
       <span class="vivo-dica" id="vivo_dica"></span>
@@ -390,8 +398,18 @@
     var a = document.createElement("a");
     a.className = "item";
     a.href = p.link;
-    a.target = "_blank";
     a.rel = "noopener";
+    // ⚠️ SEM `target=_blank`, E ISSO CONSERTA O DEFEITO MAIOR DA PAGINA.
+    //
+    // MEDIDO em 14/09/2026: no iPhone do Bryan nenhum link abria — nem o
+    // cartao, nem a linha do topo. O proprio navegador disse por que:
+    // "the page tried to open a new tab and the pane BLOCKED it". Abrir
+    // aba nova e' tratado como pop-up, e o bloqueador do Safari vem
+    // ligado de fabrica. O link funcionava; a ABA e' que nao abria.
+    //
+    // ⭐ E o upsell nao depende mais da aba de tras: ele aparece quando a
+    // pessoa VOLTA (ver `pageshow` no fim do arquivo), que e' o momento em
+    // que ela realmente esta' aqui de novo.
 
     var foto = el("div", "foto");
     if ((p.queda || 0) >= 5) {
@@ -423,9 +441,9 @@
     var rod = el("div", "rodape-item");
     rod.appendChild(el("span", "pulso"));
     rod.appendChild(el("span", null, p.pontos >= 2
-      ? (p.dias <= 0 ? "acompanhando desde hoje"
-         : (p.dias === 1 ? "acompanhando há 1 dia"
-            : "acompanhando há " + p.dias + " dias"))
+      ? (p.dias <= 0 ? "no radar desde hoje"
+         : (p.dias === 1 ? "no radar há 1 dia"
+            : "no radar há " + p.dias + " dias"))
       : "achado agora"));
     corpo.appendChild(rod);
 
@@ -448,8 +466,12 @@
       // o cartao clicado esta' dentro dele. Tirar o proprio elemento do DOM
       // no meio do clique CANCELA a navegacao — o cartao simplesmente nao
       // abria (medido no iPhone do Bryan, 14/09/2026).
+      // ⚠️ Guarda ANTES de sair: quando a pessoa voltar, a pagina recarrega
+      // do zero e a unica memoria que sobra e' esta.
+      try {
+        sessionStorage.setItem("ultimo", p.id || p.link);
+      } catch (e) { /* navegacao privada: sem upsell, e tudo bem */ }
       if (a.closest("#junto")) { return; }
-      sugerir(a, p);
     });
     return a;
   }
@@ -512,12 +534,22 @@
     // produto que ainda nao foi julgado.
     var porId = {};
     PRODUTOS.forEach(function (p) { porId[String(p.id)] = p; });
+    // ⚠️ QUANDO O MODELO JA' JULGOU, O TETO DE PRECO AFROUXA.
+    //
+    // Exigir 80% do valor E estar na lista julgada derrubava tudo: o
+    // complemento aprovado pelo Gemini quase sempre custa perto do
+    // principal, e o bloco simplesmente nao aparecia (medido em 14/09/2026
+    // — clique registrado, volta certa, e nenhuma sugestao).
+    //
+    // ⭐ O que fica de pe' e' 'mais barato que o que voce viu', que e' a
+    // promessa; os 80% continuam valendo pra regra de palavras, que nao tem
+    // julgamento nenhum pra se apoiar.
     var escolhidos = (base.combina || []).map(function (id) {
       return porId[String(id)];
     }).filter(function (p) {
       return p && p.link !== base.link && num(p.preco) > 0 &&
-             num(p.preco) <= teto;
-    });
+             num(p.preco) < num(base.preco);
+    }).sort(function (a, b) { return num(a.preco) - num(b.preco); });
     if (escolhidos.length) {
       mostrarJuntos(card, escolhidos.slice(0, 2));
       return;
@@ -555,7 +587,7 @@
     // mais barato guardado. O criterio de escolha continua sendo preco (e
     // isso e' bom), mas o texto fala de COMBINACAO, que e' o motivo real de
     // mostrar.
-    titulo.appendChild(el("span", null, "vai bem com o que você abriu"));
+    titulo.appendChild(el("span", null, "vai bem com o que você viu"));
     var x = el("button", "fechar", "fechar");
     x.type = "button";
     x.addEventListener("click", function (ev) {
@@ -750,7 +782,10 @@
       }, { passive: true });
     });
     alvo.addEventListener("click", function () {
-      if (vivoAtual) { sugerir(null, vivoAtual); }
+      if (!vivoAtual) { return; }
+      try {
+        sessionStorage.setItem("ultimo", vivoAtual.id || vivoAtual.link);
+      } catch (e) { /* sem sessao: segue sem upsell */ }
     });
   }
 
@@ -760,6 +795,29 @@
     img.alt = "Achadinho Total";
     document.getElementById("logo").appendChild(img);
   }
+  // ⚠️ O UPSELL ACONTECE NA VOLTA, e nao na saida.
+  //
+  // Antes ele contava com a nossa aba viva atras — e como a aba nova nem
+  // abria, ele nunca era visto no celular. Agora o gatilho e' a pessoa
+  // ESTAR aqui de novo: ela viu o produto na loja e voltou.
+  //
+  // ⚠️ `pageshow` e nao `load`: voltando pelo botao 'voltar' o Safari
+  // restaura a pagina do cache (bfcache) e `load` NAO dispara.
+  window.addEventListener("pageshow", function () {
+    var id;
+    try {
+      id = sessionStorage.getItem("ultimo");
+      sessionStorage.removeItem("ultimo");
+    } catch (e) { return; }
+    if (!id) { return; }
+    var base = PRODUTOS.filter(function (p) {
+      return String(p.id) === String(id) || p.link === id;
+    })[0];
+    if (!base) { return; }
+    // espera a grade existir antes de tentar encaixar o bloco
+    setTimeout(function () { sugerir(null, base); }, 60);
+  });
+
   animarVivo();
   montarProva();
   montarChips();

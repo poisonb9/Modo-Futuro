@@ -1,5 +1,13 @@
 # Para fazer assim que estiver no computador
 
+⚠️ **ATUALIZADO EM 14/09/2026 (noite).** O que mudou nesta sessão está em
+[`handoff/HANDOFF_14-09-2026_NOITE.md`](handoff/HANDOFF_14-09-2026_NOITE.md)
+— site mãe no ar, catálogo com 66 produtos, e o gargalo agora é **imagem e
+vídeo do produto**.
+
+⏰ **Lembrete agendado:** inscrição no Mercado Livre, hoje às 20:00, pelo
+Telegram (tarefa `Lembrete_MercadoLivre`).
+
 Escrito em 13/09/2026, a pedido do Bryan. **Ordem de cima para baixo: o que
 está em cima rende mais, ou piora se esperar.**
 

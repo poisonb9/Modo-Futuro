@@ -1,0 +1,90 @@
+# Reconfere na loja o preco de TODO o catalogo, de hora em hora.
+#
+# ⭐ POR QUE DA' PRA FAZER DE HORA EM HORA: o `productdetail.get` aceita LOTE.
+# Medido em 15/09/2026 — 50 ids em 3,2 s, catalogo inteiro (154) em 4 chamadas
+# e ~13 s. Sao ~96 chamadas por dia, contra as centenas que o `garimpo.yml` ja'
+# gasta sem nunca bater teto.
+#
+# ⚠️ O QUE ISSO CONSERTA, e era grave: os precos do site eram os do DIA DA
+# CAPTURA. Medido contra a API, em produtos que estavam no ar — R$ 20,11 na
+# pagina onde a loja cobrava R$ 9,35; R$ 142,10 onde cobrava R$ 107,89. 14 de
+# 14 diferentes, sempre pra cima.
+name: Precos
+
+on:
+  workflow_dispatch:
+  # ⚠️ MINUTOS ESPALHADOS, e nao um minuto fixo repetido — pedido do Bryan
+  # ("minutos aleatorios sempre"). O cron do GitHub NAO sorteia; o que da' pra
+  # fazer e' listar minutos diferentes em cada hora, que e' o que esta' aqui.
+  #
+  # ⛔ E NENHUM DELES E' O MINUTO CHEIO. Medido no garimpo.yml: com `0 11` ele
+  # atrasou 3h45, 5h43, e um dia nao rodou — o minuto cheio e' o mais disputado
+  # do GitHub. Aqui o atraso e' menos grave (o proximo ciclo vem em uma hora),
+  # mas nao ha' razao pra escolher o pior minuto de proposito.
+  schedule:
+    - cron: '7 0 * * *'
+    - cron: '23 1 * * *'
+    - cron: '41 2 * * *'
+    - cron: '14 3 * * *'
+    - cron: '52 4 * * *'
+    - cron: '36 5 * * *'
+    - cron: '9 6 * * *'
+    - cron: '28 7 * * *'
+    - cron: '47 8 * * *'
+    - cron: '18 9 * * *'
+    # ⚠️ 10h56 vem DEPOIS do garimpo (10h23), de proposito: ele acabou de
+    # gravar a serie do dia, e reconferir antes dele seria medir o de ontem.
+    - cron: '56 10 * * *'
+    - cron: '33 11 * * *'
+    # ⚠️ 12h06 vem ANTES do post da manha da vitrine (12h17), tambem de
+    # proposito: o cartaz do Telegram confere o preco por conta propria, mas
+    # chegar com o instantaneo fresco poupa a chamada e mantem os dois iguais.
+    - cron: '6 12 * * *'
+    - cron: '44 13 * * *'
+    - cron: '21 14 * * *'
+    - cron: '38 15 * * *'
+    - cron: '12 16 * * *'
+    - cron: '51 17 * * *'
+    - cron: '27 18 * * *'
+    - cron: '43 19 * * *'
+    - cron: '16 20 * * *'
+    - cron: '34 21 * * *'
+    - cron: '58 22 * * *'
+    - cron: '29 23 * * *'
+
+jobs:
+  reconferir:
+    runs-on: ubuntu-latest
+    # ⚠️ Uma por vez: duas rodadas escreveriam o mesmo arquivo e a segunda
+    # perderia o push. `cancel-in-progress: true` aqui (ao contrario da
+    # vitrine) porque reconferencia nao entrega nada pra ninguem — a rodada
+    # mais nova simplesmente vale mais que a velha.
+    concurrency:
+      group: precos
+      cancel-in-progress: true
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests python-dotenv
+      - name: Reconferir os precos
+        env:
+          ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+        run: python -X utf8 -m engine.precos --atualizar
+      - name: Guardar o instantaneo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          [ -f estado/precos_agora.json ] && git add -f estado/precos_agora.json \
+            || { echo "::error::o instantaneo nao foi gravado"; exit 1; }
+          git diff --cached --quiet && { echo "nenhum preco mudou"; exit 0; }
+          git commit -m "precos: instantaneo do catalogo"
+          # ⚠️ Rebase antes do push: garimpo, fila, desempenho e vitrine
+          # commitam neste mesmo repo.
+          git pull --rebase
+          git push
+          echo "instantaneo commitado: $(git rev-parse --short HEAD)"

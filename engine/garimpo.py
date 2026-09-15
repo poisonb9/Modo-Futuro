@@ -51,14 +51,26 @@ PRECOS = RAIZ / "estado" / "precos_vistos.jsonl"
 # ⭐ PRA LIGAR: criar os ids em portals.aliexpress.com -> Ad Center ->
 # Tracking ID, rodar `python teste/fumaca_tracking.py` com os nomes novos na
 # lista de CANDIDATOS, e so' depois escrever aqui o que ELE aprovou.
+# ⭐ LIGADO EM 15/09/2026. Os ids foram criados pelo Bryan em
+# portals.aliexpress.com -> Ad Center -> Tracking ID, e cada um destes foi
+# PROVADO por `teste/fumaca_tracking.py` antes de entrar aqui: o `link.generate`
+# gerou link com todos. Na mesma rodada, `achadinho`, `bryan` e `tiktok` — que
+# nao existem no painel — foram recusados com `402 TrackingId input parameter
+# error`, que e' o caso negativo sem o qual a prova nao valeria nada.
 TRACKING: dict[str, str] = {
-    # "truque.importado":        "achadinhomake",
-    # "cozinha.importada":       "achadinhochef",
-    # "achadinhos.instantaneos": "instantaneos",
-    # "fatura.chora":            "pagomenos",
-    # "atefalhar":               "atefalhar",
-    # "semanestesia.pod":        "semanestesia",
-    # "modofuturo":              "modofuturo",
+    "truque.importado":        "achadinhomake",
+    "cozinha.importada":       "achadinhochef",
+    "achadinhos.instantaneos": "instantaneos",
+    "fatura.chora":            "pagomenos",
+    "atefalhar":               "atefalhar",
+    "modofuturo":              "modofuturo",
+    # ⛔ `semanestesia.pod` FICA COMENTADO: este id NAO existe no painel. Os
+    # outros nove foram conferidos na tela (default, os cinco de canal,
+    # modofuturo, achadinhototal, achadinhosfuturo e achadinhosfuturo2) e este
+    # nao esta' entre eles. Escreve-lo aqui devolveria um link que ABRE A
+    # PAGINA e nao paga — pior do que cair no `default`, porque a venda
+    # aconteceria e ninguem veria que se perdeu.
+    # "semanestesia.pod":      "semanestesia",
 }
 TRACKING_PADRAO = "default"
 

@@ -23,8 +23,18 @@ ALVO = "https://pt.aliexpress.com/item/1005006568047850.html"
 # parameter error" — e e' bom que tenham sido: um teste que aceita
 # qualquer coisa nao prova nada. Os recusados FICAM na lista pra guarda
 # continuar tendo caso negativo.
-CANDIDATOS = ["default", "achadinho", "achadinhototal", "modofuturo",
-              "bryan", "tiktok"]
+# ⭐ OS CINCO DE CANAL FORAM CRIADOS NO PORTALS EM 15/09/2026, mais quatro de
+# reserva (o Bryan adiantou pra nao ter de voltar la'). Conferidos na tela:
+# default, achadinhomake, achadinhochef, instantaneos, pagomenos, atefalhar,
+# modofuturo, achadinhototal, achadinhosfuturo, achadinhosfuturo2.
+#
+# ⚠️ OS INVALIDOS FICAM NA LISTA DE PROPOSITO. Sem caso negativo este teste
+# nao prova nada: um `link.generate` que aceitasse qualquer string passaria
+# com nota dez. `achadinho`, `bryan` e `tiktok` NAO existem no painel e tem de
+# continuar sendo recusados.
+CANDIDATOS = ["default", "achadinhomake", "achadinhochef", "instantaneos",
+              "pagomenos", "atefalhar", "modofuturo", "achadinhototal",
+              "achadinho", "bryan", "tiktok"]
 
 print("testando tracking_id, um por um\n")
 achou = []

@@ -131,7 +131,12 @@ for oq, efeito in (("a rede cai", requests.exceptions.Timeout("estourou")),
     guardado = requests.get
     requests.get = _com_rede(efeito)
     try:
-        t = vitrine.postar(dict(P, link=f"https://exemplo.com/{len(oq)}"),
+        # ⚠️ TROCA A FOTO TAMBEM, e nao so' o link. Desde 15/09 a vitrine
+        # reconhece o produto pela identidade: trocar so' o link e' justamente
+        # o repost que ela passou a impedir, entao um dublê assim seria
+        # recusado — e o teste acusaria defeito onde ha' guarda funcionando.
+        t = vitrine.postar(dict(P, link=f"https://exemplo.com/{len(oq)}",
+                                imagem=f"https://ae01.alicdn.com/{len(oq)}.jpg"),
                            "truque.importado")
         checar(t is not None, f"{oq}: o post SAIU assim mesmo")
         checar(len(tg.textos) == 1 and len(tg.fotos) == 0,
@@ -146,7 +151,8 @@ vitrine.telegram = tg
 guardado = requests.get
 requests.get = _com_rede(FOTO)
 try:
-    t = vitrine.postar(dict(P, link="https://exemplo.com/recusada"),
+    t = vitrine.postar(dict(P, link="https://exemplo.com/recusada",
+                            imagem="https://ae01.alicdn.com/recusada.jpg"),
                        "truque.importado")
     checar(t is not None, "o post saiu")
     checar(len(tg.fotos) == 1 and len(tg.textos) == 1,
@@ -156,6 +162,35 @@ try:
     # onde ir. Pior que nao ter postado.
     checar(bool(tg.textos) and "https://exemplo.com/recusada" in tg.textos[0],
            "o texto de reserva leva o LINK - post sem link nao pode existir")
+finally:
+    requests.get = guardado
+    vitrine.telegram = real
+
+print("\n3c. MESMO produto com link novo NAO reposta")
+# ⛔ O DEFEITO MEDIDO em 15/09/2026: o catalogo tem 302 linhas com link e so'
+# 154 ids — o garimpo regenera o `promotion_link` a cada rodada, entao o mesmo
+# conjunto de esponjas aparece 27 vezes. Com a chave sendo so' o link, o canal
+# repostaria os 27. Duplicata e' a causa medida dos dois colapsos de alcance
+# do @modofuturo (02/08 e 25/08).
+tg, real = _TelegramFalso(), vitrine.telegram
+vitrine.telegram = tg
+guardado = requests.get
+requests.get = _com_rede(FOTO)
+try:
+    base = dict(P, link="https://exemplo.com/original",
+                imagem="https://ae01.alicdn.com/mesmo.jpg", id=987654)
+    checar(vitrine.postar(base, "truque.importado") is not None,
+           "a 1a vez posta")
+    # so' o link muda — mesma foto, mesmo id: e' o MESMO produto
+    de_novo = dict(base, link="https://exemplo.com/link-regerado")
+    checar(vitrine.postar(de_novo, "truque.importado") is None,
+           "a 2a vez, com link novo e mesmo produto, NAO posta")
+    # ⭐ prova de sensibilidade: produto de verdade diferente TEM de passar,
+    # senao a guarda estaria so' travando tudo
+    outro = dict(P, link="https://exemplo.com/outro-mesmo",
+                 imagem="https://ae01.alicdn.com/outro.jpg", id=112233)
+    checar(vitrine.postar(outro, "truque.importado") is not None,
+           "produto realmente diferente continua passando")
 finally:
     requests.get = guardado
     vitrine.telegram = real
@@ -210,6 +245,42 @@ checar(sem_serie["preco_antes"] == "", "sem queda, o campo sai VAZIO")
 print("\n7. legenda longa demais nao derruba o post")
 checar(telegram.LIMITE_LEGENDA < telegram.LIMITE_MSG,
        "o limite da legenda de foto e' menor que o da mensagem")
+
+print("\n8. o PRECO ANTIGO do canal e' o MESMO que a pagina mostra")
+# ⛔ A GUARDA MAIS CARA DESTA LISTA. Sao duas contas para o mesmo numero: a
+# pagina usa `publicar_bio._antes` sobre a serie consolidada, o canal usa
+# `garimpo.maior_visto` sobre `garimpo.historico()`. Se divergirem, o site
+# anuncia 18% e o canal anuncia outra coisa DO MESMO PRODUTO no mesmo dia — e
+# ninguem olha os dois lados ao mesmo tempo pra perceber.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "paginas"))
+import json as _json                          # noqa: E402
+
+try:
+    import publicar_bio as pb                 # noqa: E402
+
+    serie = pb._serie_de_precos()
+    cat = Path(__file__).resolve().parent.parent / "estado" / "produtos_publicados.jsonl"
+    regs = [_json.loads(l) for l in cat.read_text(encoding="utf-8").splitlines()
+            if l.strip()]
+    divergem, comparados, com_queda = [], 0, 0
+    for r in regs:
+        if not r.get("id"):
+            continue
+        comparados += 1
+        da_pagina = pb._antes(serie, r)
+        do_canal = vitrine.preco_antes_de(r)
+        if da_pagina:
+            com_queda += 1
+        if da_pagina != do_canal:
+            divergem.append((r.get("nome", "")[:30], da_pagina, do_canal))
+    # ⭐ PROVA DE SENSIBILIDADE: comparar zero produto — ou nenhum COM queda —
+    # daria "0 divergencias" e passaria sem ter medido nada.
+    checar(comparados > 100, f"comparou o catalogo de verdade ({comparados})")
+    checar(com_queda > 0, f"e ha' produto com queda pra comparar ({com_queda})")
+    checar(not divergem, "pagina e canal concordam no preco antigo"
+           + (f" - DIVERGEM: {divergem[:3]}" if divergem else ""))
+except ImportError as e:
+    checar(False, f"nao deu pra conferir contra a pagina: {e}")
 
 print("\n" + ("FALHOU: " + " | ".join(falhas) if falhas
               else "tudo verde — a vitrine posta cartaz e nao perde post"))

@@ -198,15 +198,62 @@ def ja_foi(link: str) -> bool:
     return link in _ja_postados()
 
 
-def marcar(link: str, quando: str | None = None) -> None:
-    """Guarda que este link ja' foi ao ar.
+def _chave_id(p: dict) -> str:
+    """A identidade do PRODUTO, quando ela existe. "" se nao da' pra saber."""
+    pid = str(p.get("id") or p.get("_id") or "").strip()
+    if pid and pid not in ("None", "0"):
+        return "id:" + pid
+    # ⚠️ Sem id, a foto e' a segunda melhor identidade — e' a mesma escolha do
+    # `engine/duplicata.py`, e pelo mesmo motivo: o NOME nao serve (medido la',
+    # "pinceis" x "esponjas" pontua 0,50 e sao produtos diferentes).
+    img = (p.get("imagem") or "").strip()
+    return "foto:" + img if img else ""
+
+
+def ja_foi_produto(p: dict) -> bool:
+    """Este PRODUTO ja' foi ao canal — pelo link OU pela identidade.
+
+    ⛔ O DEFEITO QUE ISTO IMPEDE, medido em 15/09/2026 sobre o catalogo:
+
+        302 linhas com link  ->  276 links unicos
+                                 154 ids unicos
+                                 152 fotos unicas
+
+    O mesmo produto aparece ate' 27 VEZES no registro, cada vez com um
+    `promotion_link` diferente — o garimpo regenera o link a cada rodada. Com a
+    chave sendo so' o link, o canal reposta o mesmo conjunto de esponjas 27
+    vezes e nada reclama.
+
+    ⚠️ E isso nao e' hipotese nem estetica: duplicata e' a causa MEDIDA dos
+    dois colapsos de alcance do @modofuturo (02/08 e 25/08). O link e' onde o
+    dinheiro entra; o id e' quem o produto E'.
+    """
+    d = _ja_postados()
+    if (p.get("link") or "").strip() in d:
+        return True
+    chave = _chave_id(p)
+    return bool(chave) and chave in d
+
+
+def marcar(link: str, quando: str | None = None,
+           produto: dict | None = None) -> None:
+    """Guarda que este link ja' foi ao ar — e, se der, QUAL produto era.
 
     ⚠️ A CHAVE E' O LINK, nao o nome. Dois posts do mesmo produto com o nome
     reescrito sao o mesmo produto pra quem le' o canal — e nome e' justamente
     o campo que a gente mexe.
+
+    ⭐ E DESDE 15/09/2026 A IDENTIDADE VAI JUNTO, numa chave `id:<pid>` no
+    mesmo arquivo. O formato continua `{chave: data}`, entao registro antigo
+    segue valendo e nada precisou ser migrado.
     """
     d = _ja_postados()
-    d[link] = quando or f"{date.today():%Y-%m-%d}"
+    quando = quando or f"{date.today():%Y-%m-%d}"
+    d[link] = quando
+    if produto:
+        chave = _chave_id(produto)
+        if chave:
+            d[chave] = quando
     JA_POSTADOS.parent.mkdir(parents=True, exist_ok=True)
     JA_POSTADOS.write_text(json.dumps(d, ensure_ascii=False, indent=2),
                            encoding="utf-8")
@@ -223,7 +270,7 @@ def postar(bruto: dict, origem: str | None = None,
     p = _produto.normalizar(bruto)
     if not p:
         return None
-    if ja_foi(p["link"]):
+    if ja_foi_produto(p):
         return None
     texto = postar_texto(p, origem)
     if ensaio:
@@ -251,7 +298,7 @@ def postar(bruto: dict, origem: str | None = None,
         entregue = telegram.enviar(texto, destino)
     if not entregue:
         return None
-    marcar(p["link"])
+    marcar(p["link"], produto=p)
     # ⚠️ SO' DEPOIS DE O TELEGRAM ACEITAR. Anotar antes registraria como
     # publicado o que nao saiu — e o placar mentiria pro nosso lado, que e' o
     # lado que ninguem confere.
@@ -262,6 +309,100 @@ def postar(bruto: dict, origem: str | None = None,
     except Exception:
         pass
     return texto
+
+
+CATALOGO = RAIZ / "estado" / "produtos_publicados.jsonl"
+
+
+def preco_antes_de(registro: dict) -> str:
+    """O maior preco que vimos deste produto, ou "" se ele nao caiu.
+
+    ⛔ ESTE NUMERO TEM DE SER O MESMO QUE A PAGINA MOSTRA, e nao "parecido".
+    A pagina calcula em `publicar_bio._antes`, sobre a serie consolidada; aqui
+    a conta sai de `garimpo.maior_visto`, sobre `garimpo.historico()` — que
+    consolida pela MESMA regra (o menor preco de cada dia).
+
+    ⚠️ Duas contas que deveriam concordar sao duas contas que podem divergir,
+    e divergir aqui significa o site anunciando 18% e o canal anunciando outra
+    coisa do mesmo produto, no mesmo dia. Por isso ha' guarda cruzando as duas
+    sobre o catalogo inteiro (`teste_vitrine_com_cartaz.py`), e nao so' fe'.
+    """
+    from . import garimpo
+    try:
+        pid = int(registro.get("id") or 0)
+    except (TypeError, ValueError):
+        return ""
+    if not pid:
+        return ""
+    maior = garimpo.maior_visto({"product_id": pid}, garimpo.historico())
+    hoje = _num(registro.get("preco", ""))
+    # ⚠️ 2% de piso, o mesmo da pagina: abaixo disso e' arredondamento e
+    # cambio, nao queda. Sem este piso o canal marcaria "-1%" onde o site nao
+    # marca nada.
+    if not (maior and hoje) or maior <= hoje * 1.02:
+        return ""
+    return f"R$ {maior:.2f}".replace(".", ",")
+
+
+def pendentes(limite: int | None = None) -> list[dict]:
+    """Os produtos do catalogo que ainda NAO foram ao canal, os melhores na
+    frente.
+
+    ⭐ A ORDEM E' A MESMA DO CATALOGO: `ganho x vendas`, a decisao do Bryan de
+    14/09/2026. Postar por data poria o pior produto na estreia do canal so'
+    por ele ter sido garimpado primeiro.
+
+    ⚠️ E A CHAVE E' O LINK, igual ao `ja_foi`. Produto que voltou ao catalogo
+    com o nome reescrito continua sendo o mesmo post pra quem le' o canal.
+    """
+    if not CATALOGO.exists():
+        return []
+    vistos: set[str] = set()
+    fila: list[tuple[float, dict]] = []
+    for linha in CATALOGO.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            r = json.loads(linha)
+        except ValueError:
+            continue
+        link = (r.get("link") or "").strip()
+        if not link or link in vistos:
+            continue
+        vistos.add(link)
+        # ⛔ E A IDENTIDADE TAMBEM SEGURA A FILA, nao so' o registro do que ja'
+        # saiu. Medido no catalogo: 302 linhas com link, 154 ids. Sem isto a
+        # fila entrega quatro "Carregador 120W" seguidos — mesmo produto,
+        # quatro `promotion_link` gerados em rodadas diferentes.
+        ident = _chave_id(r)
+        if ident:
+            if ident in vistos:
+                continue
+            vistos.add(ident)
+        if ja_foi_produto(r):
+            continue
+        bruto = dict(r, preco_antes=preco_antes_de(r))
+        try:
+            p = _produto.normalizar(bruto)
+        except _produto.ProdutoInvalido:
+            continue
+        if not p:
+            continue
+        # ⚠️ A ORIGEM VIAJA NUM CAMPO PRIVADO. O `normalizar` devolve um dicio
+        # fechado (e e' bom que seja), mas sem o canal o post perde a linha "do
+        # Achadinho Make" — que e' o que impede o feed de virar monte anonimo.
+        p["_canal"] = (r.get("canal") or "").strip()
+        # ⚠️ O id viaja junto pra `marcar` poder gravar a identidade, e nao so'
+        # o link. Sem ele o produto volta pra fila com outro link amanha.
+        p["_id"] = r.get("id")
+        # ⚠️ `ganho_previsto` e `vendas` ja' vem gravados pelo garimpo. Faltando
+        # um dos dois o produto vai pro fim da fila em vez de sumir: ele e'
+        # legitimo, so' nao da' pra ordenar.
+        peso = _num(r.get("ganho_previsto", 0)) * float(r.get("vendas") or 0)
+        fila.append((peso, p))
+    fila.sort(key=lambda x: x[0], reverse=True)
+    escolhidos = [p for _, p in fila]
+    return escolhidos[:limite] if limite else escolhidos
 
 
 def _do_manifesto(caminho: Path, ensaio: bool) -> int:
@@ -281,13 +422,53 @@ def _do_manifesto(caminho: Path, ensaio: bool) -> int:
     return n
 
 
+def do_catalogo(quantos: int, espaco: int = 90, ensaio: bool = False) -> int:
+    """Manda os `quantos` melhores produtos que ainda nao foram ao canal.
+
+    ⭐ O LOTE E' A DECISAO DO BRYAN DE 15/09/2026: tres de manha, tres a` tarde
+    e tres a` noite. O canal nao tem publico ainda, e o que se quer por ora nao
+    e' alcance — e' **nao parecer abandonado**. Constancia, nao volume.
+
+    ⚠️ E POR ISSO HA' ESPACO ENTRE UM POST E O OUTRO. Tres mensagens no mesmo
+    segundo sao uma rajada, e rajada e' o oposto de constancia: quem abre o
+    canal ve' tres posts do mesmo minuto e um vazio de seis horas. 90 segundos
+    e' barato (o processo fica vivo 3 minutos) e desmancha o bloco.
+    """
+    import time
+
+    fila = pendentes(quantos)
+    if not fila:
+        print("nada pendente — o catalogo inteiro ja' foi ao canal")
+        return 0
+    n = 0
+    for i, p in enumerate(fila):
+        t = postar(p, p.get("_canal"), ensaio=ensaio)
+        if t:
+            n += 1
+            print(("[ensaio] " if ensaio else "[postado] ") + t.splitlines()[0])
+        if espaco and not ensaio and i < len(fila) - 1:
+            time.sleep(espaco)
+    return n
+
+
 def main() -> None:
     a = argparse.ArgumentParser(description="a vitrine no Telegram")
     a.add_argument("--do-manifesto", metavar="ARQ",
                    default="estado/manifesto.json")
+    a.add_argument("--quantos", type=int, metavar="N",
+                   help="manda os N melhores do catalogo que ainda nao foram")
+    a.add_argument("--espaco", type=int, default=90, metavar="SEG",
+                   help="segundos entre um post e o proximo (padrao 90)")
     a.add_argument("--ensaio", action="store_true",
                    help="monta e mostra, nao posta")
     o = a.parse_args()
+    if o.quantos:
+        n = do_catalogo(o.quantos, o.espaco, o.ensaio)
+        faltam = len(pendentes())
+        print(f"\n{n} produto(s) " + ("montado(s)" if o.ensaio
+                                      else f"postado(s) em {canal() or '?'}")
+              + f" — faltam {faltam} no catalogo")
+        return
     arq = RAIZ / o.do_manifesto
     if not arq.exists():
         raise SystemExit(f"nao achei {arq}")

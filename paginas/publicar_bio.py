@@ -171,11 +171,36 @@ def _serie_de_precos() -> dict:
     ha' 3 dias" com quatro leituras num dia so' seria mentira pequena, do
     tipo que ninguem confere e que nao deveria existir.
     """
+    por_dia = _precos_por_dia()
+    serie: dict = {}
+    for i, dias in por_dia.items():
+        if not dias:
+            continue
+        chaves = sorted(dias)
+        serie[i] = (chaves[0], len(chaves), max(dias.values()), chaves[-1])
+    return serie
+
+
+def _precos_por_dia() -> dict:
+    """{id: {dia: MENOR preco daquele dia}} — a serie consolidada, crua.
+
+    ⭐ SEPARADA DE PROPOSITO: dois usos dependem dela e NAO podem divergir —
+    `_serie_de_precos`, que decide a queda publicada, e o grafico do cartao,
+    que a DESENHA. Se o desenho consolidasse por conta propria, ele poderia
+    mostrar uma linha que a queda nao confirma.
+
+    ⚠️ E isso nao e' hipotese: em 15/09/2026 foi exatamente a tentativa de
+    DESENHAR a serie que revelou que dez produtos anunciavam desconto
+    inexistente. Ferramenta de auditoria que le por um caminho proprio audita
+    a si mesma, nao o dado.
+
+    ⭐ A regra do MENOR do dia esta' explicada em `_serie_de_precos`, e mora
+    aqui agora: um `id` recebe precos de ANUNCIOS DIFERENTES no mesmo dia.
+    """
     import json
     arq = RAIZ / "estado" / "precos_vistos.jsonl"
     if not arq.exists():
         return {}
-    # {id: {dia: menor preco daquele dia}}
     por_dia: dict = {}
     for linha in arq.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
@@ -195,14 +220,7 @@ def _serie_de_precos() -> dict:
             continue
         dias = por_dia.setdefault(i, {})
         dias[q] = min(dias[q], v) if q in dias else v
-
-    serie: dict = {}
-    for i, dias in por_dia.items():
-        if not dias:
-            continue
-        chaves = sorted(dias)
-        serie[i] = (chaves[0], len(chaves), max(dias.values()), chaves[-1])
-    return serie
+    return por_dia
 
 
 def montar_catalogo() -> str:
@@ -271,6 +289,7 @@ def produtos_todos() -> list[dict]:
     if not arq.exists():
         return []
     serie = _serie_de_precos()
+    por_dia = _precos_por_dia()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -328,6 +347,9 @@ def produtos_todos() -> list[dict]:
             "antes": _antes(serie, d),
             "dias": _dias(serie, d),
             "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
+            # ⭐ A SERIE DESENHADA. Vazia ate' haver 3 dias — ver
+            # `_serie_curta`, que explica por que 2 pontos nao viram linha.
+            "serie": _serie_curta(por_dia, d),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             # ⚠️ O NOME DE EXIBICAO, nao a chave. A chave e' nome interno
             # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
@@ -387,6 +409,29 @@ def _nome_do_canal(nome_buffer: str) -> str:
         sys.path.insert(0, str(RAIZ))
     from engine import vitrine
     return vitrine.ORIGEM.get(nome_buffer, nome_buffer)
+
+
+def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
+    """Os pontos que o cartao DESENHA — [] quando nao ha' o que desenhar.
+
+    ⛔ MINIMO DE TRES DIAS, e o numero nao e' gosto. Com dois pontos o
+    desenho e' um SEGMENTO: ele sempre sobe ou sempre desce, com a mesma
+    inclinacao convincente, tendo o preco oscilado 0,5% ou 40%. Duas leituras
+    nao mostram tendencia nenhuma — e desenhar uma seria inventar com tinta o
+    que o texto se recusa a inventar com numero (ver `_queda_real`, que
+    devolve ZERO quando nao sabe).
+
+    ⚠️ Vem de `_precos_por_dia`, a MESMA leitura que decide a queda. Um dia
+    vira um ponto, e o ponto e' o MENOR preco do dia — se o desenho lesse o
+    arquivo cru, cada anuncio diferente do mesmo id viraria um pico, que e'
+    exatamente a mentira consertada em 15/09/2026.
+    """
+    dias = por_dia.get(d.get("id")) or {}
+    if len(dias) < minimo:
+        return []
+    # ⭐ "MM-DD" e nao a data inteira: o ano nao cabe no eixo e nao muda nada
+    # pra quem le. Sao ~14 bytes por ponto no JSON da pagina.
+    return [[k[5:], round(v, 2)] for k, v in sorted(dias.items())]
 
 
 def _queda_real(serie: dict, d: dict) -> float:
@@ -453,6 +498,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     if not arq.exists():
         return {}
     serie = _serie_de_precos()
+    por_dia = _precos_por_dia()
     linhas = []
     for linha in arq.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
@@ -497,6 +543,9 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # desde quando acompanhamos ESTE produto, e quantas vezes olhamos
             "desde": _desde(serie, d),
             "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
+            # ⭐ A SERIE DESENHADA. Vazia ate' haver 3 dias — ver
+            # `_serie_curta`, que explica por que 2 pontos nao viram linha.
+            "serie": _serie_curta(por_dia, d),
             # ⭐ O PRECO ANTERIOR E' O QUE TORNA A QUEDA VERIFICAVEL: e' o
             # maior valor que NOS vimos na serie, nao o "de" do vendedor.
             # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.
@@ -549,6 +598,9 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # desde quando acompanhamos ESTE produto, e quantas vezes olhamos
             "desde": _desde(serie, d),
             "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
+            # ⭐ A SERIE DESENHADA. Vazia ate' haver 3 dias — ver
+            # `_serie_curta`, que explica por que 2 pontos nao viram linha.
+            "serie": _serie_curta(por_dia, d),
             # ⭐ O PRECO ANTERIOR E' O QUE TORNA A QUEDA VERIFICAVEL: e' o
             # maior valor que NOS vimos na serie, nao o "de" do vendedor.
             # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.

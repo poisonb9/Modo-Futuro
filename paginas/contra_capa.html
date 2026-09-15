@@ -418,6 +418,17 @@
   }
   /* O carimbo existe porque preco e' TEXTO com data: numero sem data
      envelhece calado e a pagina passa a mentir sozinha. */
+  /* ⭐ O GRAFICO DA SERIE — a mesma conta do catalogo, na paleta da bio.
+     Acessorio: 22px, traco fino. O produto continua sendo o principal. */
+  .serie { display: block; width: 100%; height: 22px; margin-top: 2px; }
+  .serie .linha {
+    fill: none; stroke: var(--tinta-fraca); stroke-width: 1.4;
+    stroke-linejoin: round; stroke-linecap: round; opacity: .7;
+  }
+  .serie .agora { fill: var(--tinta-fraca); }
+  /* ⭐ Queda de 5% ou mais usa a cor do selo "caiu" — um dado, uma cor. */
+  .serie.baixou .linha { stroke: var(--acento); opacity: 1; }
+  .serie.baixou .agora { fill: var(--acento); }
   .foto { position: relative; }
   .caiu {
     position: absolute; top: 7px; left: 7px; z-index: 1;
@@ -979,6 +990,83 @@
   var atual = "achadinho.make";
   var mostrandoProdutos = true;
 
+  // ⭐ O GRAFICO DA SERIE — o desenho do preco que NOS vimos, dia a dia.
+  //
+  // ⚠️ A DECISAO QUE MAIS IMPORTA AQUI E' A ESCALA, e ela e' contra-intuitiva:
+  // o eixo NAO se ajusta ao minimo e maximo da serie. Sparkline auto-ajustada
+  // transforma oscilacao de 1,6% numa montanha — o Carregador 120W (36,59 ->
+  // 36,59 -> 37,19) sairia com a mesma cara dramatica da Lanterna, que caiu
+  // 12,2% de verdade. Seria a mentira de 15/09/2026 outra vez, trocando o
+  // numero inflado por tinta inflada.
+  //
+  // ⭐ Por isso o eixo tem PISO: ele cobre no minimo 10% do preco. Abaixo
+  // disso a linha sai quase reta, que e' a verdade — o preco nao fez nada.
+  // Quem tem queda real e' quem ocupa a altura toda.
+  var PISO_DO_EIXO = 0.10;
+
+  function grafico(p) {
+    var s = p.serie || [];
+    // ⛔ Menos de 3 pontos nao vira linha. Quem decide isso e' o publicador
+    // (`_serie_curta`), e aqui a guarda se repete: pagina antiga com dado
+    // novo, ou o contrario, nao pode desenhar segmento nenhum.
+    if (s.length < 3) { return null; }
+
+    var vals = s.map(function (x) { return x[1]; });
+    var menor = Math.min.apply(null, vals);
+    var maior = Math.max.apply(null, vals);
+    var faixa = Math.max(maior - menor, maior * PISO_DO_EIXO);
+    // centraliza a serie dentro da faixa minima
+    var meio = (maior + menor) / 2;
+    var topo = meio + faixa / 2;
+
+    var L = 100, A = 22, m = 2;
+    var pts = s.map(function (x, i) {
+      var px = s.length === 1 ? L / 2 : (i / (s.length - 1)) * L;
+      var py = m + (topo - x[1]) / faixa * (A - 2 * m);
+      return [px, py];
+    });
+
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + L + " " + A);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    // ⭐ Caiu de verdade = verde; o resto e' cinza. O limiar e' o MESMO 5%
+    // que o selo "caiu X%" usa — duas leituras diferentes do mesmo dado na
+    // mesma pagina e' como nasce "o grafico diz uma coisa e o selo, outra".
+    svg.setAttribute("class", "serie" + ((p.queda || 0) >= 5 ? " baixou" : ""));
+
+    var d = pts.map(function (q, i) {
+      return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1);
+    }).join(" ");
+    var linha = document.createElementNS(NS, "path");
+    linha.setAttribute("d", d);
+    linha.setAttribute("class", "linha");
+    // ⚠️ `preserveAspectRatio=none` estica o desenho e esticaria a espessura
+    // do traco junto; sem isto a linha fica grossa e borrada no cartao largo.
+    linha.setAttribute("vector-effect", "non-scaling-stroke");
+    svg.appendChild(linha);
+
+    var fim = document.createElementNS(NS, "circle");
+    fim.setAttribute("cx", pts[pts.length - 1][0].toFixed(1));
+    fim.setAttribute("cy", pts[pts.length - 1][1].toFixed(1));
+    fim.setAttribute("r", "2.2");
+    fim.setAttribute("class", "agora");
+    fim.setAttribute("vector-effect", "non-scaling-stroke");
+    svg.appendChild(fim);
+
+    // ⭐ O QUE O DESENHO ESCONDE, EM TEXTO. A linha mostra a forma; o titulo
+    // devolve os numeros exatos, que e' o que sustenta a promessa da pagina.
+    var t = document.createElementNS(NS, "title");
+    t.textContent = s.map(function (x) {
+      return x[0].split("-").reverse().join("/") + " R$ " +
+             x[1].toFixed(2).replace(".", ",");
+    }).join(" · ");
+    svg.appendChild(t);
+    return svg;
+  }
+
   function el(tag, classe, texto) {
     var e = document.createElement(tag);
     if (classe) e.className = classe;
@@ -1291,6 +1379,10 @@
       linha_preco.appendChild(el("s", "antes", p.antes));
     }
     corpo.appendChild(linha_preco);
+    // ⭐ O grafico entra DEPOIS do preco: ele explica o numero que acabou
+    // de ser lido. Volta `null` quando nao ha' 3 pontos — ver `grafico`.
+    var gr = grafico(p);
+    if (gr) { corpo.appendChild(gr); }
     // A data anda colada no preco. E' a regra do engine/produto.py na tela.
     // ⚠️ "PRECO ACOMPANHADO", e nao "preco visto".
     //

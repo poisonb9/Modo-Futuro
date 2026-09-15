@@ -123,6 +123,35 @@ Publisher de conteúdo focado em achadinhos e produtos do dia a dia. Opero cinco
 cupom e de search bidding. Dizer que você **não** faz isso remove a objeção
 antes de ela aparecer.
 
+🔴 **PARA HOJE A NOITE (15/09) — COLAR OS DOIS CAMPOS. AINDA NAO FOI FEITO.**
+
+⚠️ O handoff de 15/09 tem uma seção intitulada *"AWIN — passa a apontar para o
+SITE MÃE"*, que **parece relato de coisa feita**. Não é: o RETOMADA do mesmo
+fechamento diz *"decidido hoje; falta colar nos dois campos"*. Foi decidido
+QUAL endereço usar; ninguém colou.
+
+```
+Site           https://achadinhototal.pages.dev
+URL do Blog    https://achadinhototal.pages.dev/parceiros
+```
+
+⛔ **E isso ficou mais urgente:** há **20 pedidos pendentes** sendo julgados
+agora — 7 foram julgados em 29 horas. Cada avaliador abre o endereço que
+estiver no cadastro **no instante da avaliação**. Se ainda apontar para a bio
+de maquiagem, cada um deles vê uma página de beleza e recusa com razão — que
+foi exatamente a causa medida da recusa da 365Rider.
+
+⚠️ **E a API NÃO ajuda a conferir:** `/publishers`, `/publishers/{id}`,
+`/profile` e `/websites` respondem **404**. O perfil do publisher só se vê na
+tela. Não dá para provar por fora nem num sentido nem no outro.
+
+⭐ Enquanto estiver no painel, pegar TAMBÉM a **chave de datafeed** (`Conta →
+Credenciais de API`, parte de dados de produto / Create-a-Feed). É outra
+chave, diferente do `AWIN_TOKEN` que já temos — medido em 15/09: o token atual
+responde **500** em `productdata.awin.com/datafeed/list`. É ela que permite a
+seção de calçados se manter sozinha, com série de preço, em vez de curadoria
+manual.
+
 **E no mesmo painel:**
 - **A tela só aceita UM site** (conferido na print, 14/09): `Configurações →
   Links de redes sociais` tem Site, Blog, Twitter e Facebook — só isso. Então

@@ -78,7 +78,7 @@ def enviar_foto(imagem: bytes, legenda: str = "",
     ao ar. Quando nao cabe, a foto vai sem legenda e o texto vai logo atras,
     em mensagem propria: duas bolhas em vez de uma, bem melhor do que nada.
 
-    ⭐ E O `botao` EXISTE POR CAUSA DE UM NUMERO MEDIDO, em 16/09/2026: o link
+    ⭐ E O `botao` EXISTE POR CAUSA DE UM NUMERO MEDIDO, em 15/09/2026: o link
     de afiliado do AliExpress tem **1.065 caracteres** (mediana de 277 posts),
     entao 272 dos 277 estouravam a legenda SO' pelo link. Url de botao NAO
     conta pra legenda — com ele o post volta a caber numa bolha so', e de

@@ -379,7 +379,7 @@ def historico() -> dict[int, list[float]]:
 def maior_visto(p: dict, h: dict[int, list[float]]) -> float:
     """O maior preco que NOS vimos deste produto. 0.0 se nao ha' serie.
 
-    ⭐ EXTRAIDA DE `desconto_honesto` EM 16/09/2026, e pelo mesmo motivo que
+    ⭐ EXTRAIDA DE `desconto_honesto` EM 15/09/2026, e pelo mesmo motivo que
     `_precos_por_dia` foi extraida do `_serie_de_precos` no dia anterior: dois
     usos dependem deste numero e NAO podem divergir. A queda publicada sai
     dele, e o "de R$ X" riscado no cartaz do Telegram sai dele.

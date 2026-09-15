@@ -133,7 +133,7 @@ def _num(preco: str) -> float:
 def cartaz_de(p: dict, tempo: int = 25) -> bytes | None:
     """O cartaz 9x16 deste produto, em JPEG. None se nao deu pra montar.
 
-    ⭐ POR QUE O POST GANHOU IMAGEM. Ate' 16/09/2026 a vitrine postava texto
+    ⭐ POR QUE O POST GANHOU IMAGEM. Ate' 15/09/2026 a vitrine postava texto
     puro, e nao por decisao: o `produto.normalizar` descartava o campo
     `imagem`, que ja' viajava no manifesto e que a pagina e o catalogo liam ha'
     dias. O feed do Telegram rola no polegar — sete linhas de texto entre duas
@@ -165,7 +165,7 @@ def cartaz_de(p: dict, tempo: int = 25) -> bytes | None:
         from . import cartaz as _cartaz
 
         # ⚠️ O CDN DO ALIEXPRESS RECUSA REQUISICAO SEM `User-Agent`: responde
-        # 403, medido em 16/09/2026. Nao e' bloqueio da nossa conta.
+        # 403, medido em 15/09/2026. Nao e' bloqueio da nossa conta.
         r = requests.get(url, timeout=tempo,
                          headers={"User-Agent": "Mozilla/5.0"})
         r.raise_for_status()

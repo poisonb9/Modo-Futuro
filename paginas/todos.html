@@ -528,7 +528,15 @@
   // ⚠️ E isto NAO e' paginacao: os dados ja' estao todos no navegador, entao
   // filtrar e buscar continuam INSTANTANEOS. O que muda e' so' quantos
   // cartoes sao desenhados de uma vez.
-  var PASSO = 30;
+  // ⚠️ 90 E NAO 30, e o numero saiu de medicao. As fotos usam
+  // `loading="lazy"`, entao 90 cartoes no HTML NAO sao 90 downloads: cada
+  // foto (88 KB em media) so' baixa quando entra na tela. Quem para na
+  // quinta linha baixou cinco linhas.
+  //
+  // ⛔ E por que nao 120: 90 cartoes ja' sao 45 linhas no telefone. Alem
+  // disso ninguem percorre, e quem chega ao fim clica sem reclamar — os 30
+  // a mais so' engordam o DOM pra quase ninguem ver.
+  var PASSO = 90;
   var mostrando = PASSO;
   var atual = "todos";
   var canal = "";

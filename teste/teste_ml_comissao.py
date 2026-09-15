@@ -69,5 +69,35 @@ checar("404" in _fonte and "NAO VEM DA API" in _fonte,
        "o modulo registra que a comissao nao vem da API")
 checar("VALIDADE_COMISSAO_DIAS" in _fonte, "e o prazo e' uma constante nomeada")
 
+
+print("\n5. ETIQUETA POR CANAL NO matt_word")
+# ⚠️ Estes nomes foram CONFERIDOS na tela do painel em 15/09/2026, em
+# /afiliados/adminlabel. Se alguem trocar por um nome que nao existe la', o
+# link abre a pagina e NAO PAGA — e o post parece certo pra sempre.
+_u = "https://www.mercadolivre.com.br/p/MLB16084462"
+
+
+def _word(canal):
+    L = ml.com_afiliado(_u, canal)
+    return L.split("matt_word=")[1].split("&")[0] if "matt_word=" in L else ""
+
+
+checar(_word("truque.importado") == "achadinhomake", "truque.importado -> achadinhomake")
+checar(_word("fatura.chora") == "pagomenos", "fatura.chora -> pagomenos")
+checar(_word("atefalhar") == "atefalhar", "atefalhar -> atefalhar")
+# ⭐ Os mesmos nomes previstos pro tracking_id do AliExpress, de proposito: se
+# as duas plataformas divergirem, o relatorio por canal tem de ser traduzido
+# a mao pra sempre.
+_ali = Path("engine/garimpo.py").read_text(encoding="utf-8")
+checar(all(n in _ali for n in ("achadinhomake", "achadinhochef", "pagomenos")),
+       "os nomes batem com os previstos pro AliExpress")
+# ⛔ CASO NEGATIVO: canal desconhecido NAO pode inventar etiqueta. Aqui a
+# falha e' ABERTA de proposito (cai na etiqueta da conta): perde a separacao
+# por canal, mas NAO perde a comissao — o `matt_word` e' texto livre e a
+# conta ja' atribui com `bryanexpand`.
+checar(_word("canal.que.nao.existe") == "bryanexpand",
+       "canal desconhecido cai na etiqueta da conta, nao inventa uma")
+checar(_word("") == "bryanexpand", "sem canal, tambem cai na da conta")
+
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
 sys.exit(1 if falhas else 0)

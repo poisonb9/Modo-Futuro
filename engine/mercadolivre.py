@@ -187,8 +187,44 @@ def _get(caminho: str, **params) -> dict | list:
     return r.json()
 
 
-def com_afiliado(url: str) -> str:
+# ⭐ ETIQUETA POR CANAL — o `matt_word` E' o campo de rastreamento do ML.
+#
+# ⚠️ ESTES NOMES FORAM CONFERIDOS NA TELA em 15/09/2026, em
+# `/afiliados/adminlabel`. Nao sao os que eu sugeri: sao os que o ML GRAVOU.
+# Escrever aqui um nome que nao existe la' e' o modo de falha mais caro —
+# link que abre a pagina e nao paga, e o post parece certo pra sempre.
+#
+# ⭐ E sao de proposito os MESMOS nomes previstos pro tracking_id do
+# AliExpress (`engine/garimpo.py`). Se as duas plataformas divergirem, o
+# relatorio de venda por canal tem de ser traduzido na mao pra sempre.
+#
+# ⚠️ O painel tem etiquetas duplicadas (`faturachora` e `pagomenos`,
+# `cozinhaimportada` e `achadinhochef`...). Ficamos com a familia que bate com
+# o AliExpress; as outras existem e nao atrapalham, mas NAO devem ser usadas.
+ETIQUETAS: dict[str, str] = {
+    "truque.importado":        "achadinhomake",
+    "cozinha.importada":       "achadinhochef",
+    "achadinhos.instantaneos": "instantaneos",
+    "fatura.chora":            "pagomenos",
+    "atefalhar":               "atefalhar",
+}
+
+
+def etiqueta_de(canal: str) -> str:
+    """A etiqueta deste canal, ou a da conta enquanto ele nao tiver uma.
+
+    ⚠️ Falha ABERTA de proposito, ao contrario do AliExpress: aqui o
+    `matt_word` e' texto livre e a conta ja' atribui com `bryanexpand` — o
+    clique de 13/09 foi contado no painel com ele. Cair no padrao perde a
+    separacao por canal, mas NAO perde a comissao.
+    """
+    return ETIQUETAS.get(canal) or (os.getenv("MELI_MATT_WORD") or "")
+
+
+def com_afiliado(url: str, canal: str = "") -> str:
     """Pendura a nossa tag na URL do produto.
+
+    ⭐ `canal` escolhe a etiqueta (ver `ETIQUETAS`). Sem canal, usa a da conta.
 
     ⚠️ PRESERVA os parametros que ja' existem e NAO duplica a tag se ela ja'
     estiver la'. URL de produto do ML costuma vir com `?pdp_filters=...`, e
@@ -198,7 +234,7 @@ def com_afiliado(url: str) -> str:
     abre a pagina normalmente e nao paga nada, e um post assim parece certo
     pra sempre. Melhor nao postar do que postar sem atribuir.
     """
-    word = os.getenv("MELI_MATT_WORD")
+    word = etiqueta_de(canal)
     tool = os.getenv("MELI_MATT_TOOL")
     if not (word and tool and url):
         return ""
@@ -214,7 +250,7 @@ def tendencias(quantos: int = 20) -> list[str]:
     return [x.get("keyword", "") for x in _get("/trends/MLB")[:quantos]]
 
 
-def mais_vendidos(categoria: str, quantos: int = 12) -> list[dict]:
+def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[dict]:
     """Os mais vendidos da categoria, ja' com preco e link de afiliado.
 
     ⚠️ O `/highlights` devolve so' o ID e o tipo — ITEM ou PRODUCT, e os dois
@@ -252,7 +288,7 @@ def mais_vendidos(categoria: str, quantos: int = 12) -> list[dict]:
                 foto = p.get("thumbnail", "")
         except requests.HTTPError:
             continue
-        link = com_afiliado(url)
+        link = com_afiliado(url, canal)
         if not (nome and preco and link):
             continue
         # ⭐ A comissao VISTA no hub, se ainda estiver no prazo. Fora do prazo
@@ -295,7 +331,7 @@ def por_canal(canal: str, quantos: int = 12) -> list[dict]:
     saida, vistos = [], set()
     for mae, _nome in CATEGORIAS.get(canal, []):
         for cid, _cn in subcategorias_uteis(mae):
-            for p in mais_vendidos(cid, quantos):
+            for p in mais_vendidos(cid, quantos, canal):
                 if p["_id"] in vistos:
                     continue
                 vistos.add(p["_id"])

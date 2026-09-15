@@ -16,8 +16,28 @@ on:
         description: canal
         required: true
         default: achadinhos.instantaneos
+  # ⚠️ MINUTO QUEBRADO, e o motivo foi MEDIDO em 15/09/2026.
+  #
+  # Com `0 11` este workflow tinha, na historia inteira, DUAS execucoes
+  # agendadas — e as duas chegaram muito atrasadas:
+  #
+  #     13/09  disparou 14:45   (3h45 de atraso)
+  #     14/09  disparou 16:43   (5h43 de atraso)
+  #     15/09  NAO RODOU        (medido as 14:57 UTC)
+  #
+  # ⛔ E nao era a plataforma fora do ar: no mesmo 15/09 a fila rodou as
+  # 11:55 e o desempenho rodou de hora em hora. O minuto CHEIO e' o mais
+  # disputado do GitHub, e workflow de repo gratuito na hora de pico e'
+  # empurrado pra fila — ou descartado.
+  #
+  # ⚠️ O QUE ISSO CUSTA, e por isso nao e' detalhe de arrumacao: cada dia
+  # sem rodada e' um dia que NAO entra na serie de preco. A serie e' o unico
+  # ativo que separa a nossa queda do "de/por" inflado da loja, e dia
+  # perdido nao se coleta depois. Em 15/09 o catalogo tinha 28 produtos
+  # parados em DOIS dias de serie — um a menos do que o grafico do cartao
+  # exige pra desenhar.
   schedule:
-    - cron: '0 11 * * *'
+    - cron: '23 10 * * *'
 
 jobs:
   garimpar:

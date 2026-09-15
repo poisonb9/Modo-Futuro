@@ -5,8 +5,9 @@
 — site mãe no ar, catálogo com 66 produtos, e o gargalo agora é **imagem e
 vídeo do produto**.
 
-⏰ **Lembrete agendado:** inscrição no Mercado Livre, hoje às 20:00, pelo
-Telegram (tarefa `Lembrete_MercadoLivre`).
+⚠️ **O lembrete `Lembrete_MercadoLivre` pode ser desligado** (corrigido em
+15/09): ele cobrava a *inscrição*, que **já estava feita**. O que sobrou no
+item 3 é outra coisa — criar as **etiquetas por canal** no painel.
 
 Escrito em 13/09/2026, a pedido do Bryan. **Ordem de cima para baixo: o que
 está em cima rende mais, ou piora se esperar.**
@@ -137,23 +138,89 @@ novos: ele tenta um por um e só o válido passa. Guarda:
 
 ---
 
-## 🟠 3. Afiliados do Mercado Livre — 16% parados
+## ✅ 3. Mercado Livre — A INSCRIÇÃO JÁ ESTÁ FEITA (corrigido em 15/09/2026)
 
-**Onde:** `www.mercadolivre.com.br/l/afiliados-home` (logado como BRYANEXPAND)
+⚠️ **Este item estava errado.** Dizia "falta só a inscrição no programa". **A
+inscrição está feita**, o painel de afiliado existe e responde, como
+BRYANEXPAND.
 
-⚠️ Não é `/afiliados` — esse joga para o login sem explicar. O endereço certo
-é `/l/afiliados-home`.
+**MEDIDO em 15/09**, não suposto:
 
-⭐ **16% de comissão contra 7% do AliExpress**, pagamento na conta Mercado
-Pago que você já tem, entrega em **2 dias** em vez de 3 semanas. O app da API
-já funciona; falta só a inscrição no programa.
+```
+MELI_MATT_TOOL     87181766     id de ferramenta de afiliado, ja' no .env
+MELI_MATT_WORD     bryanexpand
+token da API       200
+/trends/MLB        200   bolsa feminina, ofertas, chuveiro, cadeira gamer...
+mais_vendidos()    devolve produto com preco e link JA' com a tag
+```
 
-⚠️ **O cookie é de 24h** — curto para o funil `vídeo → perfil → bio → loja`.
-A chamada do clipe precisa gerar clique **no mesmo dia**.
+⭐ **E a atribuição está PROVADA.** O painel mostra `Cliques 1 · Pedidos 0` nos
+últimos 7 dias — é o link que o Bryan abriu em 13/09, montado pelo nosso
+motor. O sistema **contou**. O modo de falha mais caro (link que abre a página
+e não atribui nada) está descartado por registro do próprio ML.
 
-⚠️ E existe **pagamento por visualização** (até R$ 30 mil) a partir de **10
-mil seguidores** no TikTok ou Instagram. O maior canal tem 58. É receita que
-não depende de ninguém comprar nada — e agora tem um número concreto de meta.
+### ⛔ O QUE O ML NÃO É — e a puxada provou
+
+`mais_vendidos("MLB1246")`, categoria **Beleza**, devolveu:
+
+```
+Papel Higienico Folha Tripla    R$ 16,00
+Papel Higienico Toque da Seda   R$ 13,89
+Protetor Solar FPS 70           R$ 67,97
+Perfume Cebolinha Jequiti       R$ 45,90
+```
+
+⛔ **Não é fonte de achadinho.** Os mais vendidos dele são a cesta de compras
+do país; ele NÃO substitui o AliExpress no garimpo. O que dá de único é (1)
+comissão alta em produto escolhido a dedo e (2) `trends/MLB`, que é **pauta**,
+não produto.
+
+### ⭐ A comissão é MELHOR do que este documento dizia
+
+Visto no hub em 15/09 — existe faixa de **GANHOS EXTRAS**:
+
+```
+Chinelo Kenner        26%    <- quase 4x o AliExpress
+Lavadora Lava Jato    16%
+Tenis Kappa           16%
+Creatina              12%
+```
+
+⚠️ Mas são produtos que **o ML escolheu mostrar**. O teto de 26% é real; a
+média no nosso público não foi medida.
+
+### 🔴 O QUE FALTA DE VERDADE — `Administrar etiquetas`
+
+No hub existe a ferramenta **`Administrar etiquetas`**. Ela é o equivalente do
+`tracking_id` por canal — **e resolve, pelo lado do ML, o único item
+irreversível da lista** (item 2): venda que entrar sem etiqueta fica sem canal
+para sempre.
+
+⭐ **O motor já está a um parâmetro de distância.** `com_afiliado()` monta
+`?matt_word=<word>&matt_tool=<tool>`, e o `matt_word` é o campo de
+rastreamento — hoje fixo em `bryanexpand`. Trocar por `achadinhomake`,
+`achadinhochef`, `instantaneos`, `pagomenos`, `atefalhar` separa a venda por
+canal.
+
+⚠️ **NÃO inventar o nome da etiqueta antes de criá-la no painel.** Mesma
+armadilha do AliExpress: id que não existe devolve link que abre a página e
+não paga — **pior que não ter**. Criar primeiro em `Administrar etiquetas`,
+depois usar exatamente os nomes criados.
+
+### ⛔ Campanhas de vídeos — FECHADO, exige 10 mil seguidores
+
+Conferido na tela em 15/09 (`/l/afiliados-videos-sem-redes`):
+
+> *"Para participar, você precisa ter 10 mil seguidores."*
+
+E cumprir o requisito **não garante**: depende de avaliação de perfil e
+conteúdo, e de vagas vigentes. O maior canal tem 58. É meta, não tarefa.
+
+### ⚠️ O cookie continua sendo a trava real
+
+**24 horas.** Curto para o funil `vídeo → perfil → bio → loja`: a venda de
+sábado sobre um clipe de quinta NÃO é nossa. Não se conserta no código — se
+conserta na chamada do clipe, que precisa gerar clique **no mesmo dia**.
 
 ---
 

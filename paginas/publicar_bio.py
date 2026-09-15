@@ -736,6 +736,22 @@ def _por_icone(destino) -> None:
         (destino / "icone.png").write_bytes(icone.read_bytes())
 
 
+def _carimbar(html: str) -> tuple[str, str]:
+    """Poe um carimbo do conteudo no HTML e devolve (html, carimbo).
+
+    ⭐ Entra como `<meta name="v">` logo apos o charset: e' a prova de que o
+    byte servido e' o byte que este deploy montou.
+    """
+    import hashlib
+    sha = hashlib.sha256(html.encode("utf-8")).hexdigest()[:12]
+    marca = 'name="v" content="' + sha + '"'
+    tag = "<meta " + marca + ">\n"
+    if "<meta charset" in html:
+        i = html.index("\n", html.index("<meta charset")) + 1
+        return html[:i] + tag + html[i:], marca
+    return tag + html, marca
+
+
 def publicar_no_ar(html: str, parceiros: str = "",
                    catalogo: str = "") -> None:
     """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
@@ -967,17 +983,27 @@ def main() -> None:
         for linha in (empurrado.stderr or "").strip().splitlines()[-3:]:
             print("    " + linha)
 
+    # ⛔ O CARIMBO VEM ANTES DO PUBLISH, e a ordem nao e' detalhe: carimbar
+    # depois publicaria um HTML SEM carimbo e conferiria por um carimbo que
+    # nao esta' no ar. A guarda reprovaria sempre, e a primeira reacao de
+    # quem visse isso seria desligar a guarda.
+    #
+    # ⚠️ E A MARCA E' DERIVADA DO CONTEUDO, nao escrita a' mao. Antes eram
+    # frases fixas ("Achados novos", "search bidding"): em 15/09/2026 eu
+    # troquei o rotulo do filtro pra minuscula e a guarda passou a gritar
+    # "NAO ESTA' NO AR" com a pagina nova publicada e CORRETA. Marca escrita
+    # a' mao envelhece sozinha — e guarda com alarme falso e' pior que guarda
+    # nenhuma: na vez em que ela acertar, ninguem vai acreditar.
+    #
+    # ⭐ O carimbo e' o sha do proprio HTML que sobe. Nao fica obsoleto, e
+    # prova mais do que a frase provava: nao que "alguma versao nova" subiu,
+    # e sim que subiu EXATAMENTE ESTA.
+    html, marca = _carimbar(html)
+    parceiros, marca_p = _carimbar(parceiros) if parceiros else ("", "")
+    catalogo, marca_c = _carimbar(catalogo) if catalogo else ("", "")
+
     print("\npublicando no Cloudflare Pages:")
     publicar_no_ar(html, parceiros, catalogo)
-
-    # ⚠️ A MARCA E' UMA COISA QUE SO' A VERSAO NOVA TEM. Conferir "existe
-    # pagina no ar" nao prova nada: a pagina velha tambem existe.
-    # ⚠️ MARCA PROPRIA pra rota: uma frase que SO' existe na pagina do
-    # anunciante. Procurar a marca da bio em `/parceiros` daria falso
-    # negativo eterno (o Telegram aparece nas duas).
-    marca_p = "search bidding" if parceiros else ""
-    marca_c = "Achados novos" if catalogo else ""
-    marca = "t.me/achadinhototal"
     print(f"\nconferindo no ar (procurando {marca!r}):")
     faltando = conferir_no_ar(marca, marca_p, marca_c)
     if faltando:

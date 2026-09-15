@@ -648,6 +648,13 @@ def publicar_no_ar(html: str, parceiros: str = "",
                CLOUDFLARE_ACCOUNT_ID=conta)
     pasta = Path(tempfile.mkdtemp())
     (pasta / "index.html").write_text(html, encoding="utf-8")
+    # ⚠️ O ICONE VAI EM TODO DEPLOY, pelo mesmo motivo das rotas abaixo:
+    # upload direto substitui o diretorio INTEIRO. Se ele nao subir junto,
+    # o deploy seguinte o apaga sem erro e sem aviso — e o atalho que a
+    # pessoa salvou na tela de inicio volta a ser uma letra "A" cinza.
+    _icone = Path(__file__).resolve().parent / "icone_achadinho_180.png"
+    if _icone.exists():
+        (pasta / "icone.png").write_bytes(_icone.read_bytes())
     # ⚠️ UPLOAD DIRETO SUBSTITUI O DIRETORIO INTEIRO. Se a rota nao for
     # junto neste mesmo deploy, o deploy seguinte a APAGA — sem erro, sem
     # aviso, e o link que esta no perfil do Awin vira 404.

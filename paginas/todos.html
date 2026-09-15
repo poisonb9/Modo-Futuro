@@ -1,6 +1,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Achadinho Total — tudo o que estou acompanhando</title>
+<!-- ⚠️ O NOME QUE O IPHONE SALVA NA TELA DE INICIO NAO E' O <title>.
+     Sem `apple-mobile-web-app-title` o iOS pega o <title> inteiro, corta
+     pelo COMECO e mostra "Total — tudo o que estou acompanha...". Foi o que
+     apareceu no telefone do Bryan em 15/09/2026. O atalho fica sem nome
+     reconhecivel justo na tela onde ele deveria ser reconhecido. -->
+<meta name="apple-mobile-web-app-title" content="Achadinho Total">
+<meta name="application-name" content="Achadinho Total">
+<!-- ⚠️ E SEM ISTO O ICONE VIRA UMA LETRA "A" CINZA: o iOS desenha a inicial
+     quando nao acha `apple-touch-icon`. O arquivo tem de existir no deploy —
+     ver `publicar_bio.py`, que copia o PNG junto com o index. -->
+<link rel="apple-touch-icon" href="/icone.png">
+<link rel="icon" href="/icone.png">
 <meta name="description" content="O catálogo do Achadinho Total: produto, preço acompanhado dia a dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
 <meta name="awin" content="publisher">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -259,13 +271,21 @@
      na largura do cartao e VAZAVA pra fora da borda arredondada — apareceu
      assim no iPhone do Bryan (14/09/2026). Texto que sai do cartao faz a
      pagina inteira parecer quebrada, mesmo com todo o resto certo. */
+  /* ⛔ O `overflow: hidden` NAO PODE FICAR NO CONTAINER. Ele corta o
+     `box-shadow` da animacao do pulso, e a bolinha verde aparece COMIDA do
+     lado esquerdo — visto no iPhone do Bryan em 15/09/2026, e causado pelo
+     proprio conserto do vazamento de texto.
+
+     ⭐ Quem corta e' o SPAN DO TEXTO, so' ele. O container fica com
+     `min-width: 0` (que nao corta nada, mas deixa o filho encolher no flex) e
+     um respiro a esquerda para o halo da animacao caber. */
   .rodape-item {
     display: flex; align-items: center; gap: 5px;
     font: 500 10px/1.25 var(--mono); color: var(--fraco);
-    min-width: 0; overflow: hidden;
+    min-width: 0; padding-left: 3px;
   }
   .rodape-item span:last-child {
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .pulso {
     width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px;

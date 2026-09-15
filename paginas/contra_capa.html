@@ -433,11 +433,31 @@
   .produto { height: 100%; }
   .produto .corpo { display: flex; flex-direction: column; flex: 1 1 auto; }
   .produto .preco { margin-top: auto; }
+  /* ⚠️ `nowrap` SOZINHO VAZA PRA FORA DO CARTAO. Sem `overflow: hidden` e
+     sem `min-width: 0`, o texto nao quebra E nao e' cortado: ele atravessa a
+     borda arredondada. Apareceu no iPhone do Bryan em 15/09/2026, com
+     "achado agora — começando a acompanhar".
+
+     ⛔ E o conserto JA' EXISTIA em `todos.html` desde 14/09 — foi aplicado no
+     catalogo e nao aqui. Defeito consertado num arquivo e nao no irmao volta
+     pela porta dos fundos; se mexer neste bloco, conferir os DOIS. */
+  /* ⛔ E O `overflow: hidden` NAO VAI NO CONTAINER. Ele corta o `box-shadow`
+     da animacao do pulso e a bolinha verde fica COMIDA do lado esquerdo —
+     defeito causado pelo proprio conserto do vazamento, visto no iPhone do
+     Bryan em 15/09/2026.
+
+     ⭐ Quem corta e' o SPAN DO TEXTO. O container so' precisa de
+     `min-width: 0` (deixa o filho encolher no flex, sem cortar nada) e de um
+     respiro a esquerda para o halo da animacao caber. */
   .acompanha {
     display: flex; align-items: center; gap: 6px;
     font-family: var(--fonte-mono, monospace); font-size: 10.5px;
     color: var(--fraco); letter-spacing: -.01em;
-    margin-top: 2px; white-space: nowrap;
+    margin-top: 2px;
+    min-width: 0; padding-left: 3px;
+  }
+  .acompanha span:last-child {
+    min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .pulso {
     width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px;
@@ -1299,7 +1319,11 @@
       // burocratico), o produto novo diz o que ele e'.
       var novoRod = el("div", "acompanha achado-hoje");
       novoRod.appendChild(el("span", "pulso"));
-      novoRod.appendChild(el("span", null, "achado agora — começando a acompanhar"));
+      // ⚠️ TEXTO CURTO DE PROPOSITO. O antigo ("achado agora — começando a
+      // acompanhar") nao cabia na largura do cartao no iPhone e vazava. O CSS
+      // agora corta com reticencias, mas reticencia e' conserto de emergencia:
+      // o certo e' a frase caber. O catalogo ja' usa esta forma curta.
+      novoRod.appendChild(el("span", null, "achado agora"));
       corpo.appendChild(novoRod);
     }
     e.appendChild(corpo);

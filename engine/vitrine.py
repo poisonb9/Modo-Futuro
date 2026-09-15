@@ -108,6 +108,66 @@ def postar_texto(p: dict, origem: str | None = None) -> str:
     return chr(10).join(linhas)
 
 
+def _num(preco: str) -> float:
+    """"R$ 13,52" -> 13.52. Zero no que nao der pra ler."""
+    try:
+        return float(str(preco).replace("R$", "").replace(".", "")
+                     .replace(",", ".").strip() or 0)
+    except ValueError:
+        return 0.0
+
+
+def cartaz_de(p: dict, tempo: int = 25) -> bytes | None:
+    """O cartaz 9x16 deste produto, em JPEG. None se nao deu pra montar.
+
+    ⭐ POR QUE O POST GANHOU IMAGEM. Ate' 16/09/2026 a vitrine postava texto
+    puro, e nao por decisao: o `produto.normalizar` descartava o campo
+    `imagem`, que ja' viajava no manifesto e que a pagina e o catalogo liam ha'
+    dias. O feed do Telegram rola no polegar — sete linhas de texto entre duas
+    outras sete linhas de texto nao param ninguem.
+
+    ⛔ E FALHA ABERTA, DE PROPOSITO — o contrario da regra de sempre. Foto que
+    nao baixa, CDN fora do ar, JPEG corrompido: tudo devolve None e o post sai
+    como saia antes. A imagem e' a MOLDURA; o produto, o preco e o link sao o
+    conteudo. Perder o post por causa da moldura seria trocar o principal pelo
+    acessorio — a mesma regra que derrubou a versao 2 do menu de filtros.
+
+    ⚠️ E O SELO DE QUEDA NAO E' DECIDIDO AQUI. Este modulo so' repassa o par de
+    precos que veio no manifesto; quem mede a queda e' `garimpo.maior_visto`,
+    sobre a serie consolidada. Se `preco_antes` vier vazio, o cartaz sai sem
+    selo — e' o que tem de acontecer.
+    """
+    url = (p.get("imagem") or "").strip()
+    if not url:
+        return None
+    preco = _num(p.get("preco", ""))
+    if not preco:
+        return None
+    try:
+        import io
+
+        import requests
+        from PIL import Image
+
+        from . import cartaz as _cartaz
+
+        # ⚠️ O CDN DO ALIEXPRESS RECUSA REQUISICAO SEM `User-Agent`: responde
+        # 403, medido em 16/09/2026. Nao e' bloqueio da nossa conta.
+        r = requests.get(url, timeout=tempo,
+                         headers={"User-Agent": "Mozilla/5.0"})
+        r.raise_for_status()
+        foto = Image.open(io.BytesIO(r.content))
+        img = _cartaz.montar(foto, p["nome"], preco,
+                             _num(p.get("preco_antes", "")) or None)
+        saco = io.BytesIO()
+        img.save(saco, format="JPEG", quality=88)
+        return saco.getvalue()
+    except Exception as e:
+        print(f"      [!] sem cartaz ({type(e).__name__}: {str(e)[:70]}); "
+              f"o post vai em texto")
+        return None
+
+
 def _ja_postados() -> dict:
     if not JA_POSTADOS.exists():
         return {}
@@ -161,7 +221,16 @@ def postar(bruto: dict, origem: str | None = None,
             f"Falta {ENV_CANAL} no .env. O canal ainda nao existe: quem cria "
             f"canal de Telegram e' uma PESSOA no app (bot nao cria), e depois "
             f"o bot tem de virar admin dele pra poder postar.")
-    if not telegram.enviar(texto, destino):
+    # ⚠️ UMA TENTATIVA SO', e nesta ordem: se o cartaz existe, ele vai COM a
+    # legenda numa mensagem so'. Mandar foto e depois texto daria duas bolhas
+    # e, pior, um caminho onde a foto sai e o texto nao — produto no feed sem
+    # preco e sem link.
+    foto = cartaz_de(p)
+    if foto is not None:
+        entregue = telegram.enviar_foto(foto, texto, destino)
+    else:
+        entregue = telegram.enviar(texto, destino)
+    if not entregue:
         return None
     marcar(p["link"])
     # ⚠️ SO' DEPOIS DE O TELEGRAM ACEITAR. Anotar antes registraria como

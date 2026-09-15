@@ -23,6 +23,8 @@ load_dotenv()
 
 API = "https://api.telegram.org/bot{token}/{metodo}"
 LIMITE_MSG = 4000          # o limite real é 4096, deixa folga
+# ⚠️ Legenda de FOTO é outro limite, quatro vezes menor (o real é 1024).
+LIMITE_LEGENDA = 1000
 
 
 def configurado() -> bool:
@@ -63,6 +65,44 @@ def enviar(texto: str, destino: str | None = None) -> bool:
     except Exception as e:
         print(f"      [!] Telegram falhou: {e}")
         return False
+
+
+def enviar_foto(imagem: bytes, legenda: str = "",
+                destino: str | None = None) -> bool:
+    """Manda uma FOTO com legenda. Devolve False (sem estourar) se nao deu.
+
+    ⚠️ A LEGENDA DA FOTO TEM OUTRO LIMITE, e e' quatro vezes menor: 1024
+    caracteres contra os 4096 da mensagem de texto. Nao e' detalhe — um post
+    que passa do limite volta `400 MEDIA_CAPTION_TOO_LONG` e o produto NAO vai
+    ao ar. Quando nao cabe, a foto vai sem legenda e o texto vai logo atras,
+    em mensagem propria: o post fica com duas bolhas em vez de uma, que e' bem
+    melhor do que nao existir.
+
+    ⚠️ E O `sendPhoto` NAO ACEITA JSON como o `chamar()` faz: arquivo vai por
+    multipart. Por isso este envio nao passa por la'.
+    """
+    destino = destino or chat_id()
+    if not configurado() or not destino:
+        return False
+    cabe = len(legenda) <= LIMITE_LEGENDA
+    try:
+        r = requests.post(
+            API.format(token=_token(), metodo="sendPhoto"),
+            data={"chat_id": destino, "caption": legenda if cabe else ""},
+            files={"photo": ("cartaz.jpg", imagem, "image/jpeg")},
+            timeout=60)
+        r.raise_for_status()
+        # ⚠️ 200 NAO PROVA NADA — a API do Telegram responde 200 com
+        # `{"ok": false}` no corpo. Ler o corpo, sempre.
+        if not r.json().get("ok"):
+            print(f"      [!] Telegram recusou a foto: {r.text[:200]}")
+            return False
+    except Exception as e:
+        print(f"      [!] Telegram falhou na foto: {e}")
+        return False
+    if not cabe and legenda:
+        return enviar(legenda, destino)
+    return True
 
 
 def _picar(texto: str) -> list[str]:

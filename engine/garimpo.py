@@ -376,6 +376,24 @@ def historico() -> dict[int, list[float]]:
     return {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
 
 
+def maior_visto(p: dict, h: dict[int, list[float]]) -> float:
+    """O maior preco que NOS vimos deste produto. 0.0 se nao ha' serie.
+
+    ⭐ EXTRAIDA DE `desconto_honesto` EM 16/09/2026, e pelo mesmo motivo que
+    `_precos_por_dia` foi extraida do `_serie_de_precos` no dia anterior: dois
+    usos dependem deste numero e NAO podem divergir. A queda publicada sai
+    dele, e o "de R$ X" riscado no cartaz do Telegram sai dele.
+
+    ⚠️ A ALTERNATIVA ERA RECONSTRUIR o preco antigo a partir do preco de hoje
+    e da queda (`antes = hoje / (1 - queda/100)`). E' algebricamente certo e
+    na pratica MENTE: a queda viaja arredondada em 1 casa, e a reconstrucao
+    devolveu R$ 16,51 onde o preco visto foi R$ 16,50. Um centavo que nunca
+    existiu, impresso numa imagem que nao se recalcula depois de salva.
+    """
+    antes = h.get(p.get("product_id"), [])
+    return max(antes) if antes else 0.0
+
+
 def desconto_honesto(p: dict, h: dict[int, list[float]]) -> tuple[float, str]:
     """Quanto caiu contra o que NOS vimos. (percentual, explicacao)
 
@@ -388,18 +406,17 @@ def desconto_honesto(p: dict, h: dict[int, list[float]]) -> tuple[float, str]:
     lado que nao mente. Nos primeiros dias quase tudo vai dar zero, e isso
     esta' certo — a serie ainda nao existe.
     """
-    antes = h.get(p.get("product_id"), [])
     hoje = _num(p.get("target_sale_price"))
-    if not antes or not hoje:
+    maior = maior_visto(p, h)
+    if not maior or not hoje:
         return 0.0, "sem histórico nosso ainda"
-    maior = max(antes)
     if hoje >= maior:
         return 0.0, f"não caiu (já vimos por R$ {maior:.2f})"
     queda = (maior - hoje) / maior * 100
     return queda, f"caiu de R$ {maior:.2f} — preço que nós vimos"
 
 
-def para_produto(p: dict, queda: float) -> dict:
+def para_produto(p: dict, queda: float, maior: float = 0.0) -> dict:
     """Traduz o produto da API pro formato que o resto do motor ja' fala.
 
     ⚠️ ESTE E' O PONTO DE COSTURA, e e' onde este motor mais erra: copia por
@@ -414,6 +431,12 @@ def para_produto(p: dict, queda: float) -> dict:
         # onde o link pode sair sem tracking (e link sem tracking nao paga).
         "link": p.get("promotion_link") or p.get("product_detail_url") or "",
         "preco": f"R$ {_num(p.get('target_sale_price')):.2f}".replace(".", ","),
+        # ⚠️ O PRECO ANTIGO SO' EXISTE SE A QUEDA EXISTIR, e e' o preco que NOS
+        # vimos (`maior_visto`), nunca o `original_price` inflado da loja. Sem
+        # queda o campo sai VAZIO — e vazio apaga o selo e o preco riscado no
+        # cartaz. Falha fechada: ninguem anuncia desconto sem os dois numeros.
+        "preco_antes": (f"R$ {maior:.2f}".replace(".", ",")
+                        if queda > 0 and maior > 0 else ""),
         "preco_em": f"{date.today():%Y-%m-%d}",
         "loja": p.get("shop_name", ""),
         "categoria": p.get("second_level_category_name", ""),
@@ -487,7 +510,7 @@ def garimpar(canal: str, quantos: int = 8,
     saida = []
     for p in passaram:
         queda, _ = desconto_honesto(p, h)
-        saida.append(para_produto(p, queda))
+        saida.append(para_produto(p, queda, maior_visto(p, h)))
 
     saida = [potencial(x) for x in saida]
     # ⭐ ORDEM: DINHEIRO PRIMEIRO. Decisao do Bryan em 14/09/2026.

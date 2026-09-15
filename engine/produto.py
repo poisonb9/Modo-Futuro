@@ -86,9 +86,23 @@ def normalizar(bruto: dict | None) -> dict | None:
         "link": link,
         # ⚠️ TEXTO, nao numero. Ver o cabecalho.
         "preco": preco,
+        # ⚠️ O PRECO ANTIGO, e so' quando ele foi MEDIDO. Quem o produz e'
+        # `garimpo.maior_visto` — o maior preco que NOS vimos, da serie
+        # consolidada. ⛔ Nunca preencher com o `original_price` da loja: ele
+        # e' inflado (medido: R$ 31,48 "de R$ 122,22"), e repetir isso e'
+        # anunciar desconto que nao existe. Vazio e' o certo na duvida: e'
+        # ele que apaga o selo e o preco riscado no cartaz do Telegram.
+        "preco_antes": (str(bruto.get("preco_antes", "")).strip()
+                        if preco else ""),
         # De quando e' essa foto do preco. So' existe se houver preco.
         "preco_em": (str(bruto.get("preco_em") or f"{date.today():%Y-%m-%d}")
                      if preco else ""),
+        # ⚠️ A FOTO DO ANUNCIO. Ela ja' viajava no manifesto (`garimpo` a poe
+        # em `imagem`, a pagina e o catalogo a leem) e este normalizador era o
+        # unico lugar que a DESCARTAVA — por isso a vitrine do Telegram postou
+        # texto puro desde que existe. O campo e' opcional: sem ele o post sai
+        # como sempre saiu.
+        "imagem": str(bruto.get("imagem", "")).strip(),
         "loja": str(bruto.get("loja", "")).strip(),
         # Pra pagina da bio agrupar sem ter de adivinhar pelo canal.
         "categoria": str(bruto.get("categoria", "")).strip(),

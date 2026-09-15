@@ -40,13 +40,45 @@ canais.** Ela tem outro trabalho: converter quem chegou de um vídeo de
 maquiagem. Duas plateias, dois objetivos — quem paga a conta de misturar é a
 conversão de quem veio do vídeo.
 
-### ✅ FEITO em 14/09 — a página existe e está no ar
+### ✅ ATUALIZADO em 15/09 — agora é o SITE MÃE, e os dois campos são usados
 
-**Cole isto no campo `Site` (e no `URL do Blog`):**
+⚠️ **A instrução de 14/09 mandava colar a MESMA coisa nos dois campos.** Era
+desperdício: a tela tem `Site` e `URL do Blog`, e eles podem apontar para
+coisas diferentes.
+
+**Cole assim:**
 
 ```
-https://oachadinho.pages.dev/parceiros
+Site           https://achadinhototal.pages.dev
+URL do Blog    https://achadinhototal.pages.dev/parceiros
 ```
+
+⭐ **Por que o site mãe, e não a bio.** Decisão do Bryan em 15/09, e ela
+ataca a causa MEDIDA da recusa. A 365Rider (Sportswear) recusou com *"o site
+não complementa a marca do anunciante"* — porque abriu `oachadinho`, que é a
+bio de um canal de **maquiagem**. O site mãe mostra **cinco áreas numa página
+só** (medido em 15/09: Beleza, Casa, Cozinha, Eletrônicos, Fitness), com
+preço e histórico. Anunciante de esporte abre e vê Fitness ali dentro.
+
+⭐ **E a ordem dos dois campos não é arbitrária.** A `/parceiros` é
+**discurso** — nós dizendo o que fazemos. O catálogo é **prova** — 62
+produtos reais com preço acompanhado dia a dia. Quem avalia parceria confia
+mais no que vê funcionando, então a prova vai no campo principal e a
+explicação fica a um clique.
+
+⚠️ **O site mãe NÃO fala de canal** (decisão do Bryan em 14/09, e está certa
+para quem compra). O anunciante só descobre que há cinco TikToks se abrir a
+`/parceiros` — que é exatamente por isso que ela continua no segundo campo,
+em vez de sumir.
+
+⚠️ **O que eu NÃO sei:** se o Awin reavalia as 28 pendentes quando o perfil
+muda, ou se isso só vale para as próximas. Trocar não custa nada e melhora as
+próximas de qualquer forma — mas a 365Rider pode estar perdida.
+
+⭐ A rota foi conferida pelo CONTEÚDO, não pelo status: `/parceiros` do site
+mãe tem a frase "search bidding", que só existe na página do anunciante.
+Conferir por `200` não provaria nada — o Cloudflare devolve a raiz quando o
+caminho não existe.
 
 Ela lista os **seis canais** com a categoria de cada um e o setor de
 anunciante que combina, como eu trabalho (garimpo diário, preço conferido

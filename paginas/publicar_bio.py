@@ -396,6 +396,16 @@ AREA_DO_CANAL = {
     "fatura.chora": "Eletrônicos",
     "modofuturo": "Tecnologia",
     "semanestesia.pod": "Livros",
+    # ⭐ PSEUDO-CANAIS DA VARREDURA — 15/09/2026. Eles existem so' pra dar
+    # AREA a produto que nenhum canal cobre: a varredura larga trouxe 26
+    # pecas de carro, jardim e ferramenta, e sem isto todas cairiam em
+    # "Achadinhos", que e' o balaio de quem nao tem casa.
+    #
+    # ⚠️ E nao ha' bio de carro nem de jardim: estes aparecem no catalogo do
+    # site mae e em vitrine nenhuma. Isso e' proposital, nao esquecimento.
+    "varredura.carro": "Carro",
+    "varredura.jardim": "Jardim",
+    "varredura.ferramentas": "Ferramentas",
 }
 
 

@@ -379,6 +379,18 @@
   /* ⭐ O GRAFICO DA SERIE. Acessorio: 22px de altura, traco fino, cor fraca.
      O produto continua sendo o principal — a regra que as quatro tentativas
      de menu de 15/09 deixaram. */
+  /* ⭐ TITULO DE BLOCO. Ocupa a linha inteira do grid (senao vira coluna) e
+     e' discreto de proposito: ele ORGANIZA, nao anuncia. */
+  .bloco-titulo {
+    grid-column: 1 / -1; margin: 6px 0 2px;
+    font: 700 13px/1.2 var(--mono); color: var(--fraco);
+    display: flex; align-items: baseline; gap: 7px;
+    text-transform: none; letter-spacing: .01em;
+  }
+  .bloco-titulo:not(:first-child) { margin-top: 20px; }
+  .bloco-conta {
+    font-weight: 500; color: var(--fraco); opacity: .7; font-size: 11px;
+  }
   .serie { display: block; width: 100%; height: 22px; margin-top: 7px; }
   .serie .linha {
     fill: none; stroke: var(--fraco); stroke-width: 1.4;
@@ -552,6 +564,12 @@
   var mostrando = PASSO;
   var atual = "todos";
   var canal = "";
+  // ⭐ QUINZE, e nao 90 como a lista corrida. Dentro da categoria os dois
+  // blocos disputam a mesma tela: 90 cartoes no de cima empurrariam o de
+  // baixo pra fora e ele deixaria de existir na pratica.
+  var PASSO_BLOCO = 15;
+  var mostrandoAlto = PASSO_BLOCO;
+  var mostrandoBaixo = PASSO_BLOCO;
 
   function num(t) {
     return parseFloat(String(t).replace(/[^0-9,]/g, "").replace(",", ".")) || 0;
@@ -642,6 +660,48 @@
   function normal(t) {
     return String(t || "").toLowerCase()
       .normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
+  // ⛔ O TETO DA VITRINE — decidido com o Bryan em 15/09/2026.
+  //
+  // ⚠️ SEM ISTO A PAGINA SE INVERTE SOZINHA, e nao por escolha de ninguem: a
+  // lista abre ordenada por `ganho x vendas`, e um tenis de marca rende ~R$ 37
+  // por venda contra ~R$ 2 de um achadinho. No dia em que o primeiro par
+  // entrar no catalogo, ele assume a frente e empurra todo achadinho pra
+  // baixo — a pagina viraria loja de tenis sem ninguem ter decidido isso.
+  //
+  // ⭐ E o numero serve a DOIS usos de proposito, pra nao existir um segundo
+  // limiar pra lembrar: ele tira o produto da lista principal, e e' ele que
+  // divide os dois blocos dentro da categoria.
+  //
+  // ⚠️ MEDIDO no catalogo de 15/09: mediana R$ 30,99, maior R$ 231,99. R$ 250
+  // pega todo tenis de marca (R$ 400 a R$ 700) e NAO esconde nenhum achadinho
+  // que ja' estava rodando. Um teto de R$ 150 tiraria da frente o Projetor de
+  // R$ 231,99, que tem queda medida e rende video — efeito colateral, nao
+  // objetivo.
+  var TETO_VITRINE = 250;
+
+  // ⛔ CATEGORIAS QUE SO' EXISTEM NO SEGMENTO, caras ou baratas.
+  //
+  // Calcado de R$ 180 nao choca ninguem, mas quebra o ritmo: um tenis no meio
+  // de organizadores de R$ 11 muda o que a pagina parece ser. A promessa do
+  // topo e' "eu garimpo, voce paga menos" — calcado de marca e' outro momento
+  // de compra, e mora atras do menu Categoria.
+  var SO_NO_SEGMENTO = ["Calçados"];
+
+  function caro(p) { return num(p.preco) > TETO_VITRINE; }
+  function soNoSegmento(p) {
+    return SO_NO_SEGMENTO.indexOf(p.canal) >= 0;
+  }
+
+  // ⭐ NAVEGAR E' PASSIVO, BUSCAR E' INTENCAO. Quem digitou "nike" ja' disse o
+  // que quer: esconder dele seria atrapalhar, nao proteger. O mesmo vale pra
+  // quem escolheu a categoria no menu. O recorte existe pra quem so' rola a
+  // pagina sem pedir nada.
+  function visivel(p) {
+    if (canal) { return true; }
+    if (normal(busca.value.trim())) { return true; }
+    return !caro(p) && !soNoSegmento(p);
   }
 
   function montar(p) {
@@ -863,13 +923,78 @@
     }
   }
 
+  // Um bloco titulado com a sua propria fila e o seu proprio "ver mais".
+  //
+  // ⚠️ A GRADE E' UM GRID CSS, e titulo e botao NAO sao cartoes: os dois
+  // levam `grid-column: 1/-1` pra ocupar a linha inteira. Sem isso o titulo
+  // vira uma coluna estreita ao lado do primeiro produto.
+  // ⭐ A CATEGORIA TEM ENDERECO. Sem isto havia UMA url pro catalogo inteiro
+  // e nao dava pra mandar ninguem direto pra uma prateleira — nem pela bio,
+  // nem pela descricao do video. Agora `/#calcados` abre ja' filtrado.
+  //
+  // ⛔ E O VALOR DA URL NUNCA E' ESCRITO NA PAGINA. Ele so' e' COMPARADO com
+  // as categorias que ja' existem nos produtos; o que nao casar e' ignorado e
+  // abre o catalogo normal. Endereco que vira texto na tela (`innerHTML`) e'
+  // porta de injecao — aqui ele nao chega nem perto do DOM.
+  //
+  // ⚠️ E isto nao esconde nada de ninguem: os produtos ja' estao todos no
+  // fonte da pagina. Tirar da lista principal e' decisao EDITORIAL, nao
+  // segredo — endereco "criptografado" nao protegeria nada e so' quebraria o
+  // link que a pessoa precisa ditar num video.
+  function daUrl() {
+    var h = "";
+    try {
+      h = normal(decodeURIComponent((location.hash || "").replace(/^#/, "")));
+    } catch (e) { return ""; }
+    if (!h) { return ""; }
+    var achado = "";
+    PRODUTOS.forEach(function (p) {
+      if (p.canal && normal(p.canal) === h) { achado = p.canal; }
+    });
+    return achado;
+  }
+
+  function guardarUrl() {
+    if (!history.replaceState) { return; }
+    try {
+      history.replaceState(null, "",
+        canal ? "#" + normal(canal) : location.pathname + location.search);
+    } catch (e) { /* endereco nao e' funcionalidade: falhar aqui nao quebra */ }
+  }
+
+  function bloco(titulo, itens, quanto, aoVerMais) {
+    if (!itens.length) { return; }
+    var h = el("h2", "bloco-titulo", titulo);
+    h.appendChild(el("span", "bloco-conta", String(itens.length)));
+    grade.appendChild(h);
+    var frag = document.createDocumentFragment();
+    itens.slice(0, quanto).forEach(function (p) {
+      frag.appendChild(montar(p));
+    });
+    grade.appendChild(frag);
+    if (itens.length > quanto) {
+      var falta = itens.length - quanto;
+      var mais = el("button", "ver-mais",
+        "ver mais " + Math.min(falta, PASSO_BLOCO) + " de " + falta);
+      mais.type = "button";
+      mais.addEventListener("click", aoVerMais);
+      grade.appendChild(mais);
+    }
+  }
+
   function desenhar() {
     var f = FILTROS.filter(function (x) { return x.id === atual; })[0];
     var termo = normal(busca.value.trim());
     var lista = PRODUTOS.filter(function (p) {
       if (!f.cabe(p)) { return false; }
       if (canal && p.canal !== canal) { return false; }
-      if (termo && normal(p.nome).indexOf(termo) < 0) { return false; }
+      // ⭐ A BUSCA CASA COM A CATEGORIA, e nao so' com o nome. Sem isto,
+      // digitar "calçados" devolvia VAZIO — os nomes sao "Tênis Nike Air
+      // Force 1", a palavra "calçado" nao aparece em nenhum deles. Quem
+      // digita o nome de uma prateleira espera a prateleira.
+      if (termo && normal(p.nome).indexOf(termo) < 0
+                && normal(p.canal || "").indexOf(termo) < 0) { return false; }
+      if (!visivel(p)) { return false; }
       return true;
     });
     if (f.ordem) { lista = lista.slice().sort(f.ordem); }
@@ -882,6 +1007,36 @@
       v.appendChild(document.createTextNode(
         "Tente outra palavra, ou volte pra Tudo."));
       grade.appendChild(v);
+    } else if (canal && lista.some(caro) && lista.some(function (p) {
+      return !caro(p);
+    })) {
+      // ⛔ DOIS BLOCOS, E SO' DENTRO DA CATEGORIA.
+      //
+      // ⭐ O corte e' o MESMO TETO que tira da vitrine — um numero, dois
+      // usos, nada de segundo limiar pra lembrar.
+      //
+      // ⚠️ E os titulos sao FACTUAIS de proposito. "Premium / Básico" foi
+      // recusado pelo Bryan em 15/09 com o argumento certo: "de marca" dizia
+      // o que a secao TEM, "básico" diria o que o produto E' — e diria isso
+      // pra 62 dos 63 itens do catalogo. Quem compra um organizador de R$ 11
+      // leria "voce esta' na prateleira basica". Preco nao ofende ninguem.
+      //
+      // ⚠️ E so' aparece quando os DOIS grupos existem. Categoria inteira
+      // barata mostraria um titulo "Ate' R$ 250" sobre a lista inteira e um
+      // bloco vazio embaixo — divisao que nao divide nada.
+      // ⭐ O BARATO VEM PRIMEIRO — decisao do Bryan em 15/09, e ela e'
+      // coerente com o topo da pagina: "Eu garimpo. Você paga menos." Abrir
+      // a categoria pelo caro contradiria a frase que a pessoa acabou de
+      // ler, mesmo dentro de uma prateleira de marca.
+      bloco("Até R$ " + TETO_VITRINE, lista.filter(function (p) {
+              return !caro(p);
+            }), mostrandoBaixo, function () {
+              mostrandoBaixo += PASSO_BLOCO; desenhar();
+            });
+      bloco("Acima de R$ " + TETO_VITRINE, lista.filter(caro),
+            mostrandoAlto, function () {
+              mostrandoAlto += PASSO_BLOCO; desenhar();
+            });
     } else {
       var pedaco = document.createDocumentFragment();
       lista.slice(0, mostrando).forEach(function (p) {
@@ -1000,8 +1155,11 @@
     var deEstado = FILTROS.map(function (f) {
       return {
         id: f.id, rotulo: f.rotulo,
+        // ⚠️ MESMO RECORTE DA GRADE. Contagem que conta o que a grade
+        // nao desenha e' a mentira mais facil de cometer aqui — a pessoa
+        // le' "tudo 63" e conta 57 cartoes.
         n: PRODUTOS.filter(function (p) {
-          return f.cabe(p) && (!canal || p.canal === canal);
+          return f.cabe(p) && (!canal || p.canal === canal) && visivel(p);
         }).length
       };
     });
@@ -1026,6 +1184,11 @@
       });
       caixa.appendChild(seletor("Categoria", deArea, canal, function (v) {
         canal = v;
+        // ⚠️ os dois blocos recomecam do zero a cada troca: herdar "ver
+        // mais" da categoria anterior abre a proxima ja' esticada.
+        mostrandoAlto = PASSO_BLOCO;
+        mostrandoBaixo = PASSO_BLOCO;
+        guardarUrl();
         montarChips();
         desenhar();
       }, canal !== ""));
@@ -1078,7 +1241,13 @@
 
     // ⭐ OS QUE MAIS CAIRAM PRIMEIRO: se so' da' tempo de ver um, que seja
     // o que melhor prova a promessa da pagina.
-    var lista = PRODUTOS.slice().sort(function (a, b) {
+    // ⛔ O TOPO E' A CARA DA PAGINA e obedece ao teto ANTES de ordenar.
+    // Ele pesca "os 8 que mais cairam" — e um tenis de marca com 30% de
+    // queda entraria sozinho, na primeira tela, que e' exatamente o que a
+    // regra existe pra evitar. Filtrar aqui, e nao so' na grade.
+    var lista = PRODUTOS.filter(function (p) {
+      return !caro(p) && !soNoSegmento(p);
+    }).sort(function (a, b) {
       return (b.queda || 0) - (a.queda || 0);
     }).slice(0, 8);
     if (!lista.length) { alvo.hidden = true; return; }
@@ -1177,10 +1346,26 @@
     setTimeout(function () { sugerir(null, base); }, 60);
   });
 
+  // ⚠️ ANTES de montar os controles: `visivel()` consulta `canal`, entao
+  // ler a url depois faria a primeira pintura sair com o recorte errado.
+  canal = daUrl();
+
   animarVivo();
   montarProva();
   montarChips();
   desenhar();
+
+  // ⭐ O BOTAO VOLTAR TAMBEM. Quem entrou por `/#calcados`, filtrou outra
+  // coisa e apertou voltar espera a prateleira de novo — nao o catalogo.
+  window.addEventListener("hashchange", function () {
+    var novo = daUrl();
+    if (novo === canal) { return; }
+    canal = novo;
+    mostrandoAlto = PASSO_BLOCO;
+    mostrandoBaixo = PASSO_BLOCO;
+    montarChips();
+    desenhar();
+  });
   // ⚠️ BUSCAR REINICIA A CONTAGEM. Sem isto, quem ja' tinha clicado em "ver
   // mais" e depois digita fica com um limite alto colado numa lista curta —
   // e o oposto tambem: acha 80 resultados e ve' 30 sem entender por que.

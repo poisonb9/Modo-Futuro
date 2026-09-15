@@ -41,8 +41,24 @@ def checar(ok, oq):
         falhas.append(oq)
 
 
-vitrine.JA_POSTADOS = Path(tempfile.mkdtemp()) / "vitrine_postados.json"
+_area = Path(tempfile.mkdtemp())
+vitrine.JA_POSTADOS = _area / "vitrine_postados.json"
 os.environ[vitrine.ENV_CANAL] = "@canal_de_mentira"
+
+# ⛔ O SEGUNDO REGISTRO TAMBEM TEM DE SER DE MENTIRA, e esquecer disto sujou o
+# estado de producao em 15/09/2026: o `vitrine.postar` chama
+# `resultado.anotar_publicado` no fim, e esse modulo escreve direto em
+# `estado/produtos_publicados.jsonl` — o arquivo que alimenta o catalogo do
+# site E a fila do canal. Oito rodadas deste teste enfiaram 41 linhas de duble
+# ("https://exemplo.com/...") no catalogo de verdade.
+#
+# ⚠️ E ele nao aparecia: o `postar` engole a excecao do registro de proposito
+# (post entregue nao pode falhar por causa do placar), entao nao havia nem erro
+# pra ver. Redirecionar UM registro e achar que o teste esta' isolado e' a
+# armadilha — sempre procurar o SEGUNDO lugar que escreve.
+from engine import resultado as _resultado    # noqa: E402
+
+_resultado.PUBLICADOS = _area / "produtos_publicados.jsonl"
 
 FOTO = io.BytesIO()
 Image.new("RGB", (800, 800), (180, 120, 90)).save(FOTO, format="JPEG")

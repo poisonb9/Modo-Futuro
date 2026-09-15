@@ -10,6 +10,12 @@
      vertical. A bio era o unico lugar da operacao sem esta linha. -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contra-capa Modo Futuro</title>
+<!-- ⚠️ SEM ISTO O ICONE DO ATALHO VIRA UMA LETRA CINZA: o iOS desenha a
+     inicial quando nao acha `apple-touch-icon`. O arquivo sobe junto no
+     deploy — ver `_por_icone()` em `publicar_bio.py`, que copia nas DUAS
+     pastas (bios e site mae). -->
+<link rel="apple-touch-icon" href="/icone.png">
+<link rel="icon" href="/icone.png">
 <!-- Verificacao de propriedade do Awin (12/09/2026): eles pedem a palavra
      "Awin" no codigo-fonte pra confirmar que a pagina e' nossa. Meta tag,
      e nao comentario, porque o publicador TIRA comentario. -->

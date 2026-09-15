@@ -640,6 +640,17 @@ PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
 PROJETO_MAE = "achadinhototal"
 
 
+def _por_icone(destino) -> None:
+    """Copia o icone pro diretorio que vai subir.
+
+    ⚠️ Existe como funcao justamente porque sao DOIS diretorios (bios e site
+    mae) e copiar em um so' e' o erro que aconteceu em 15/09/2026.
+    """
+    icone = Path(__file__).resolve().parent / "icone_achadinho_180.png"
+    if icone.exists():
+        (destino / "icone.png").write_bytes(icone.read_bytes())
+
+
 def publicar_no_ar(html: str, parceiros: str = "",
                    catalogo: str = "") -> None:
     """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
@@ -662,9 +673,16 @@ def publicar_no_ar(html: str, parceiros: str = "",
     # upload direto substitui o diretorio INTEIRO. Se ele nao subir junto,
     # o deploy seguinte o apaga sem erro e sem aviso — e o atalho que a
     # pessoa salvou na tela de inicio volta a ser uma letra "A" cinza.
-    _icone = Path(__file__).resolve().parent / "icone_achadinho_180.png"
-    if _icone.exists():
-        (pasta / "icone.png").write_bytes(_icone.read_bytes())
+    #
+    # ⛔ E TEM DE IR NAS DUAS PASTAS. Este deploy monta DOIS diretorios: um
+    # para os projetos de bio e outro (`casa`) para o site mae. Em 15/09/2026
+    # eu copiei so' no primeiro, e a tag `apple-touch-icon` esta' justamente
+    # no site mae: deu tag sem arquivo de um lado e arquivo sem tag do outro.
+    #
+    # ⚠️ E o sintoma ENGANA: `/icone.png` respondeu **200** — servindo a
+    # pagina HTML inteira, porque o Cloudflare devolve a raiz quando o
+    # caminho nao existe. Conferir por status daria "publicado".
+    _por_icone(pasta)
     # ⚠️ UPLOAD DIRETO SUBSTITUI O DIRETORIO INTEIRO. Se a rota nao for
     # junto neste mesmo deploy, o deploy seguinte a APAGA — sem erro, sem
     # aviso, e o link que esta no perfil do Awin vira 404.
@@ -689,6 +707,11 @@ def publicar_no_ar(html: str, parceiros: str = "",
             casa = Path(tempfile.mkdtemp())
             try:
                 (casa / "index.html").write_text(catalogo, encoding="utf-8")
+                # ⛔ O SITE MAE E' QUEM TEM A TAG `apple-touch-icon`. Sem esta
+                # linha, a tag aponta pra um arquivo que nao existe e o
+                # Cloudflare responde 200 servindo a pagina HTML no lugar do
+                # PNG — foi o que aconteceu em 15/09/2026.
+                _por_icone(casa)
                 if parceiros:
                     (casa / "parceiros").mkdir()
                     (casa / "parceiros" / "index.html").write_text(

@@ -207,31 +207,38 @@
     color: var(--tinta); font: 15px/1 Poppins, sans-serif;
   }
   .busca::placeholder { color: var(--fraco); }
-  /* ⛔ ANTES ERA UMA FILA SO' COM ROLAGEM HORIZONTAL, e ela escondia metade
-     das opcoes: pra achar "Fitness" a pessoa tinha que arrastar sem saber o
-     que havia adiante. Reclamacao do Bryan em 15/09/2026.
+  /* ⛔ DUAS TENTATIVAS ERRADAS ANTES DESTA, e vale saber por que:
+       1. fila unica com ROLAGEM HORIZONTAL — escondia metade das opcoes; pra
+          achar "Fitness" a pessoa arrastava sem saber o que havia adiante.
+       2. chips quebrando em LINHAS — tudo visivel, mas viraram CINCO linhas
+          e empurraram os produtos pra fora da tela. Pior que o problema
+          original: o filtro e' acessorio, o produto e' o principal.
 
-     ⭐ Agora QUEBRA EM LINHAS: tudo aparece de uma vez, sem gesto nenhum. Em
-     telefone estreito vira duas ou tres linhas curtas — e ler tres linhas e'
-     mais rapido que arrastar uma fila as cegas. */
-  .chips {
-    display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px;
+     ⭐ Dois seletores NATIVOS resolvem os dois de uma vez: ocupam UMA linha,
+     e ao tocar o iPhone abre a roda do sistema com todas as opcoes de uma
+     vez — sem rolar a pagina e sem empurrar nada. */
+  .filtros {
+    display: flex; gap: 7px; margin-top: 10px;
   }
-  /* ⭐ E OS DOIS GRUPOS SE SEPARAM. "Caiu de preço" e "Beleza" respondem a
-     perguntas diferentes (como esta' o preco x o que e' o produto) e estavam
-     embaralhados na mesma fila. Separados, a pessoa procura no grupo certo. */
-  .grupo-chips { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
-  .grupo-chips + .grupo-chips { margin-top: 8px; }
-  .rotulo-grupo {
-    font: 500 10px/1 var(--mono); color: var(--fraco);
-    text-transform: uppercase; letter-spacing: .08em;
-    width: 100%; margin: 0 0 1px;
+  .escolha {
+    flex: 1 1 0; min-width: 0;
+    appearance: none; -webkit-appearance: none;
+    border: 1px solid var(--linha); background: var(--caixa);
+    color: var(--tinta); border-radius: 999px;
+    padding: 9px 30px 9px 14px;
+    font: 600 13px/1 Poppins, sans-serif; cursor: pointer;
+    text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+    /* a setinha, desenhada em SVG pra nao depender de fonte de icone */
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A7A0B2' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center; background-size: 10px;
   }
-  /* a contagem dentro do chip: ajuda a escolher antes de clicar */
-  .chip .n {
-    font: 500 11px/1 var(--mono); opacity: .55; margin-left: 5px;
+  /* ⭐ ACESO quando ha' filtro: a pessoa precisa ver que a lista esta'
+     recortada, senao acha que o catalogo encolheu. */
+  .escolha[data-ativo="sim"] {
+    background-color: var(--tinta); color: var(--fundo); border-color: var(--tinta);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
   }
-  .chip[aria-pressed="true"] .n { opacity: .75; }
   .chip {
     flex: 0 0 auto; border: 1px solid var(--linha); background: var(--caixa);
     color: var(--fraco); border-radius: 999px; padding: 8px 14px;
@@ -377,7 +384,7 @@
     <input class="busca" id="busca" type="search"
            placeholder="procurar — ex.: organizador, luva, caixa de som"
            autocomplete="off" enterkeyhint="search">
-    <div class="chips" id="chips"></div>
+    <div class="filtros" id="chips"></div>
     <span class="contagem" id="contagem"></span>
   </div>
 
@@ -694,53 +701,54 @@
 
   function montarChips() {
     var caixa = document.getElementById("chips");
-    // ⛔ LIMPAR ANTES DE REMONTAR. Sem isto, cada clique ANEXA um conjunto
-    // novo de chips ao final e os antigos continuam na tela — com o
-    // `aria-pressed` velho. O filtro funcionava e a cor nao mudava: os
-    // botoes visiveis eram os de antes, e os novos (com o filtro aceso)
-    // ficavam empurrados pra fora, no scroll horizontal.
-    //
-    // ⚠️ Visto no iPhone do Bryan em 15/09/2026. O sintoma engana porque a
-    // LISTA muda: parece defeito de cor, e e' de acumulo de elemento.
+    // limpar antes de remontar: sem isto cada troca ANEXA controles novos e
+    // os antigos ficam na tela com o estado velho.
     caixa.innerHTML = "";
 
-    // ⭐ A CONTAGEM VAI DENTRO DO CHIP. Ela responde antes do clique o que a
-    // pessoa so' descobriria depois: se vale a pena entrar ali. Chip com "0"
-    // nem aparece — oferecer um filtro vazio e' fazer a pessoa gastar um
-    // toque pra ver "Nada aqui com esse filtro".
-    function chip(rotulo, quantos, aceso, aoClicar) {
-      var b = el("button", "chip", rotulo);
-      b.type = "button";
-      if (quantos != null) {
-        var n = el("span", "n", String(quantos));
-        b.appendChild(n);
-      }
-      b.setAttribute("aria-pressed", String(aceso));
-      b.addEventListener("click", aoClicar);
-      return b;
+    // DOIS SELETORES, UMA LINHA.
+    //
+    // Duas tentativas erradas antes desta, e vale saber por que:
+    //   1. fila de chips com ROLAGEM HORIZONTAL — escondia metade das
+    //      opcoes; pra achar "Fitness" a pessoa arrastava as cegas.
+    //   2. chips quebrando em LINHAS — tudo visivel, mas viraram CINCO
+    //      linhas e empurraram os produtos pra fora da tela.
+    //
+    // O seletor nativo resolve os dois: ocupa UMA linha e, ao tocar, o iOS
+    // abre a roda do sistema com todas as opcoes de uma vez. O filtro e'
+    // acessorio; o produto e' o principal e nao pode sair da primeira tela.
+    //
+    // A contagem vai DENTRO da opcao ("Beleza (13)"): responde antes da
+    // escolha o que a pessoa so' descobriria depois.
+    function seletor(opcoes, valorAtual, aoMudar, temFiltro) {
+      var s = document.createElement("select");
+      s.className = "escolha";
+      opcoes.forEach(function (o) {
+        var op = document.createElement("option");
+        op.value = o.id;
+        op.textContent = o.rotulo + (o.n != null ? "  (" + o.n + ")" : "");
+        if (o.id === valorAtual) { op.selected = true; }
+        s.appendChild(op);
+      });
+      // ACESO so' quando ha' filtro: sem isso a pessoa acha que o catalogo
+      // encolheu, em vez de entender que a lista esta' recortada.
+      s.setAttribute("data-ativo", temFiltro ? "sim" : "nao");
+      s.addEventListener("change", function () { aoMudar(s.value); });
+      return s;
     }
 
-    function grupo(rotulo) {
-      var g = el("div", "grupo-chips");
-      g.appendChild(el("p", "rotulo-grupo", rotulo));
-      caixa.appendChild(g);
-      return g;
-    }
-
-    // ⛔ OS DOIS GRUPOS SAO PERGUNTAS DIFERENTES e estavam na mesma fila:
-    // "Caiu de preço" fala do PRECO, "Beleza" fala do PRODUTO. Misturados,
-    // a pessoa varria a fila inteira sem saber em qual metade procurar.
-    var gEstado = grupo("como está o preço");
-    FILTROS.forEach(function (f) {
-      var quantos = PRODUTOS.filter(function (p) {
-        return f.cabe(p) && (!canal || p.canal === canal);
-      }).length;
-      gEstado.appendChild(chip(f.rotulo, quantos, f.id === atual, function () {
-        atual = f.id;
-        montarChips();
-        desenhar();
-      }));
+    var deEstado = FILTROS.map(function (f) {
+      return {
+        id: f.id, rotulo: f.rotulo,
+        n: PRODUTOS.filter(function (p) {
+          return f.cabe(p) && (!canal || p.canal === canal);
+        }).length
+      };
     });
+    caixa.appendChild(seletor(deEstado, atual, function (v) {
+      atual = v;
+      montarChips();
+      desenhar();
+    }, atual !== "todos"));
 
     var canais = {};
     PRODUTOS.forEach(function (p) {
@@ -750,21 +758,15 @@
       return canais[b] - canais[a];
     });
     if (areas.length) {
-      var gArea = grupo("o que é o produto");
-      // ⭐ "Todas" explicito: sem ele, a unica forma de DESFAZER o filtro de
-      // area era clicar de novo no mesmo chip — gesto que ninguem descobre.
-      gArea.appendChild(chip("Todas", PRODUTOS.length, canal === "", function () {
-        canal = "";
+      var deArea = [{ id: "", rotulo: "Todas as áreas", n: PRODUTOS.length }];
+      areas.forEach(function (c) {
+        deArea.push({ id: c, rotulo: c, n: canais[c] });
+      });
+      caixa.appendChild(seletor(deArea, canal, function (v) {
+        canal = v;
         montarChips();
         desenhar();
-      }));
-      areas.forEach(function (c) {
-        gArea.appendChild(chip(c, canais[c], canal === c, function () {
-          canal = (canal === c) ? "" : c;
-          montarChips();
-          desenhar();
-        }));
-      });
+      }, canal !== ""));
     }
   }
 

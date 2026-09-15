@@ -24,12 +24,32 @@ def checar(ok, oq):
         falhas.append(oq)
 
 
-def escrever(linhas):
+def escrever(linhas, com_serie=True):
+    """Monta um estado de mentira com o registro E a serie de precos.
+
+    ⚠️ A SERIE FAZ PARTE DO DUBLE DESDE 15/09/2026, e sem ela este teste
+    quebrou inteiro. A pagina passou a exigir que o preco tenha sido
+    reconferido nas ultimas 24h e a falhar FECHADA — produto sem leitura
+    nenhuma nao vai pro ar. Um registro sem serie nao e' "um caso simples":
+    e' um produto cujo preco ninguem confirmou, e o lugar dele e' fora da
+    pagina.
+    """
     d = Path(tempfile.mkdtemp())
     (d / "estado").mkdir()
     (d / "estado" / "produtos_publicados.jsonl").write_text(
         "".join(json.dumps(x, ensure_ascii=False) + chr(10) for x in linhas),
         encoding="utf-8")
+    if com_serie:
+        from datetime import date
+        hoje = date.today().isoformat()
+        (d / "estado" / "precos_vistos.jsonl").write_text(
+            "".join(json.dumps(
+                {"id": x.get("id"), "quando": hoje,
+                 "preco": str(x.get("preco", "0")).replace("R$", "")
+                          .replace(".", "").replace(",", ".").strip(),
+                 "loja": "loja de mentira"}) + chr(10)
+                for x in linhas if x.get("id")),
+            encoding="utf-8")
     pb.RAIZ = d
 
 
@@ -86,6 +106,21 @@ print("")
 print("6. NEGATIVO - produto sem link fica fora do _todos tambem")
 escrever([dict(BASE, link="")])
 checar("_todos" not in pb.produtos_reais(), "vitrine geral vazia, nao chave vazia")
+
+print("")
+print("6b. NEGATIVO - produto SEM preco reconferido nao vai pro ar")
+# ⛔ A trava de honestidade da pagina (24h) passou a falhar FECHADA em
+# 15/09/2026. Antes ela era `if visto_em and visto_em < limite`: quem NAO
+# tinha leitura nenhuma escapava, porque a guarda so' olhava data velha. Sem
+# este caso negativo, voltar ao comportamento antigo nao quebraria nada — e a
+# pagina publicaria preco que ninguem confirmou.
+escrever([dict(BASE, id=1)], com_serie=False)
+d = pb.produtos_reais()
+checar(not d.get("_todos"),
+       "sem serie de preco, o produto NAO entra na vitrine geral")
+escrever([dict(BASE, id=1)], com_serie=True)
+checar(len(pb.produtos_reais().get("_todos", [])) == 1,
+       "e com a serie ele volta — a guarda nao esta' so' travando tudo")
 
 print("")
 print("7. NEGATIVO - marcador sumido ESTOURA, nao passa batido")

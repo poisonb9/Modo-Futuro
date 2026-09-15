@@ -877,9 +877,23 @@ def _por_icone(destino) -> None:
     ⚠️ Existe como funcao justamente porque sao DOIS diretorios (bios e site
     mae) e copiar em um so' e' o erro que aconteceu em 15/09/2026.
     """
-    icone = Path(__file__).resolve().parent / "icone_achadinho_180.png"
-    if icone.exists():
-        (destino / "icone.png").write_bytes(icone.read_bytes())
+    aqui = Path(__file__).resolve().parent
+    # ⚠️ SAO DOIS ARQUIVOS DIFERENTES DE PROPOSITO, e trocar um pelo outro
+    # estraga um dos dois lugares:
+    #
+    #   icone.png        FAVICON da aba. Fundo TRANSPARENTE — a aba do
+    #                    navegador tem fundo proprio (claro ou escuro), e um
+    #                    quadrado escuro fixo vira uma mancha nela.
+    #   icone_app.png    APPLE-TOUCH-ICON, a tela de inicio do iPhone. Fundo
+    #                    OPACO, obrigatoriamente: o iOS NAO respeita alfa aqui
+    #                    — ele compoe o icone sobre PRETO. Um PNG transparente
+    #                    viraria uma lupa dourada flutuando num quadrado preto,
+    #                    que e' pior do que o fundo escuro que escolhemos.
+    for nome, arquivo in (("icone.png", "icone_achadinho_favicon.png"),
+                          ("icone_app.png", "icone_achadinho_180.png")):
+        origem = aqui / arquivo
+        if origem.exists():
+            (destino / nome).write_bytes(origem.read_bytes())
 
 
 def _carimbar(html: str) -> tuple[str, str]:

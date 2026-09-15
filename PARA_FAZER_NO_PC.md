@@ -45,6 +45,38 @@ plataforma; só não é a alavanca de alcance que a gente achou que fosse.
 ---
 ## 🔴 1. Perfil do Awin — É O ÚNICO QUE PIORA ENQUANTO ESPERA
 
+⚠️ **MEDIDO EM 15/09/2026** (`python -m engine.awin`), contra o instantâneo
+guardado de 14/09 — em **29 horas** a fila andou muito:
+
+```
+             14/09      15/09
+JOINED           0          1     ⭐ Nike BR (Sportswear)
+PENDING         28         20
+REJECTED         1          8
+```
+
+⭐ **A NIKE APROVOU.** É o primeiro anunciante da operação inteira, e é
+Sportswear — cai no **Até Falhar**. O motor já monta link de Awin
+(`engine/awin.py:66`, `link(destino, id_anunciante)`).
+
+⛔ **E a recusa do Carrefour é de OUTRA ESPÉCIE** (e-mail de 15/09):
+
+> **O anunciante não trabalha com afiliado pessoa física.**
+
+⚠️ Isso **não se conserta com página, perfil nem descrição** — é sobre ser
+PF. Compare com a da 365Rider (*"o site não complementa a marca"*), que era
+defeito nosso e já foi consertado. São duas causas diferentes, e das 8
+recusas só essas DUAS têm motivo conhecido.
+
+🔴 **O que decide dinheiro, e ainda não está respondido:** o MEI destrava 6
+anunciantes ou 1? Os outros 6 (adidas, Calvin Klein, Motorola, Authentic
+Feet, Allianz, Zee Now) têm motivo desconhecido — a API **não** entrega o
+porquê, só o e-mail. Encaminhar os e-mails de recusa responde isso antes de
+abrir CNPJ com amostra de um.
+
+⛔ **Não reenviar pedido para nenhum dos 8** antes de saber o motivo:
+reaplicar com o mesmo perfil recusado queima a relação.
+
 **Onde:** `ui.awin.com` → Conta → Perfil → Visão Geral
 
 ⚠️ **MEDIDO EM 14/09/2026** (`python -m engine.awin`, não é estimativa):
@@ -189,7 +221,29 @@ Creatina              12%
 ⚠️ Mas são produtos que **o ML escolheu mostrar**. O teto de 26% é real; a
 média no nosso público não foi medida.
 
-### 🔴 O QUE FALTA DE VERDADE — `Administrar etiquetas`
+### ✅ AS ETIQUETAS JÁ FORAM CRIADAS (conferido em 15/09/2026)
+
+Conferido na tela do painel contra `engine/mercadolivre.ETIQUETAS`: as
+**cinco** que o motor usa existem, mais a `bryanexpand` de "sem canal".
+
+```
+truque.importado          achadinhomake   ✅      fatura.chora   pagomenos   ✅
+cozinha.importada         achadinhochef   ✅      atefalhar      atefalhar   ✅
+achadinhos.instantaneos   instantaneos    ✅      (sem canal)  bryanexpand   ✅
+```
+
+O link sai `?matt_word=<canal>&matt_tool=87181766`. **Nada a fazer no
+código.**
+
+⚠️ **Sobraram 4 duplicatas que o motor NUNCA vai usar** —
+`achadinhosinstantaneos`, `cozinhaimportada`, `faturachora`,
+`truqueimportado`. São o mesmo canal com o outro estilo de nome, e vão ficar
+em ZERO para sempre. O risco não é técnico: é ler o relatório daqui a um mês,
+ver `faturachora: 0 vendas` e concluir que o canal não vende. ⭐ Apagar as 4
+no painel (nenhuma venda passou por elas). ⛔ **Não apagar `bryanexpand`** —
+foi ela que registrou o clique de 13/09.
+
+### O que era este item antes — `Administrar etiquetas`
 
 No hub existe a ferramenta **`Administrar etiquetas`**. Ela é o equivalente do
 `tracking_id` por canal — **e resolve, pelo lado do ML, o único item
@@ -224,7 +278,54 @@ conserta na chamada do clipe, que precisa gerar clique **no mesmo dia**.
 
 ---
 
-## 🟠 4. Shopee — dados de pagamento e fiscais
+## 🟠 4. Shopee — dados de pagamento ENVIADOS em 15/09/2026
+
+⭐ **O formulário foi enviado.** Ficou dias travado com o botão `Enviar`
+apagado, e a causa era um campo obrigatório **vazio escondido atrás do
+resumo**: o número da casa tinha sido digitado em **Complemento**, e o campo
+**Número** estava em branco. O resumo montava "Al dos Mandarins, 500 - ..."
+puxando do complemento, então a linha parecia certa e o formulário não.
+
+> ⭐ **A lição, que vale para além da Shopee:** o resumo de um formulário é
+> DERIVADO. Ele pode estar completo com um campo obrigatório vazio — e foi
+> exatamente o que aconteceu. Conferir o resumo não é conferir o formulário.
+
+⚠️ Regra da Shopee que derruba o cadastro DEPOIS do envio: nome completo e
+nome da mãe **sem acento e sem abreviação** (`Antonia`, não `Antônia`).
+
+🔴 **E APARECEU OUTRA EXIGÊNCIA, fora do painel de afiliados:** assim que os
+dados fiscais entraram, a tela passou a pedir *"ative sua conta Maree para
+receber a comissão"*. A **Maree é a carteira digital** onde a comissão de
+pessoa física cai — sem ela a comissão é calculada, aprovada e não tem para
+onde ir.
+
+```
+app Shopee -> ícone "Eu" -> Maree -> "Ativar agora"
+   código por WhatsApp · dados · PIN · biometria (opcional)
+   documento: CNH ou RG EMITIDO NOS ÚLTIMOS 10 ANOS
+   validação: até 3 dias úteis
+```
+
+⚠️ **Duas armadilhas:** (1) o documento precisa ser dos últimos 10 anos — RG
+antigo cai aqui, CNH costuma passar; (2) a Maree tem de ser ativada na MESMA
+conta Shopee do afiliado (`bryanarchives@gmail.com`, ID `18331841315`), senão
+a comissão vai para a carteira errada.
+
+⭐ Depois de ativa: pagamento automático **todo dia 10** na carteira, mínimo
+de **R$ 30** acumulados, e a saída para o banco é PIX pela Maree.
+
+⚠️ **Isto não estava em nenhum handoff** porque só aparece DEPOIS de enviar
+os dados fiscais. O item "Shopee" era um só e na verdade são três: dados
+fiscais, carteira Maree, e API.
+
+🔴 **O que continua aberto: a API.** O pedido foi um **chamado de suporte**
+("Quero ativar a API", ID de afiliado `18331841315`, conta
+`bryanarchives@gmail.com`), não um formulário de developer com aprovação
+automática — e está sem resposta há dias. Sem App ID + Secret não há
+`engine/shopee.py`: a palavra "shopee" aparece no repo em dois lugares e os
+dois são texto.
+
+### O que era este item antes
 
 **Onde:** `affiliate.shopee.com.br` → o banner vermelho no topo
 

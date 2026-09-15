@@ -64,7 +64,97 @@ CATEGORIAS = {
     "atefalhar":               [("MLB1276", "Esportes e Fitness")],
 }
 
+# ⛔ SUBCATEGORIAS QUE NUNCA ENTRAM — a causa do papel higienico.
+#
+# ⚠️ MEDIDO em 15/09/2026: puxar `MLB1246` (Beleza e Cuidado Pessoal) devolveu
+# "Papel Higienico Folha Tripla" e "Papel Higienico Toque da Seda" nos dois
+# primeiros lugares. Nao e' defeito do ML — e' que a categoria MAE tem 13
+# filhas, e `Higiene Pessoal` e `Farmacia` estao entre elas.
+#
+# ⭐ E o motivo de vetar e' o mesmo que ja' esta' escrito no topo deste modulo:
+# no ML, muito vendido significa COMMODITY. Ninguem assiste a um clipe sobre
+# papel higienico, por mais que ele venda.
+FORA = {
+    "MLB198312",   # Higiene Pessoal  <- o papel higienico mora aqui
+    "MLB431646",   # Farmacia
+    "MLB264751",   # Artigos para Cabeleireiros (profissional, nao achadinho)
+    "MLB264787",   # Barbearia (idem)
+}
+
+# Onde a comissao vista no hub fica anotada.
+#
+# ⚠️ ELA NAO VEM DA API. Medido em 15/09/2026: a ficha do produto nao tem
+# nenhum campo de comissao, e `/affiliate-program/commissions`,
+# `/affiliates/items`, `/users/me/affiliate` e `/marketplace/affiliate/items`
+# respondem 404. Os "GANHOS EXTRAS 26%" existem SO' na tela do hub.
+#
+# ⭐ Por isso a comissao e' ANOTADA A MAO, com a data em que foi vista — e
+# vale por prazo, igual ao preco. A pagina nunca afirma "este produto paga
+# 26%"; afirma "em 15/09 pagava 26%, conferido por nos". E' a mesma trava de
+# honestidade do preco reconferido em 48h, e pela mesma razao: o que envelhece
+# SAI SOZINHO, sem ninguem precisar decidir.
+VALIDADE_COMISSAO_DIAS = 14
+
 _cache: dict[str, tuple[str, float]] = {}
+
+
+def _arquivo_comissao():
+    from pathlib import Path as _P
+    return _P(__file__).resolve().parent.parent / "estado" / "comissao_ml.json"
+
+
+def comissoes() -> dict:
+    """{id_do_produto: {"pct": 26.0, "visto": "2026-09-15"}}"""
+    import json
+    arq = _arquivo_comissao()
+    if not arq.exists():
+        return {}
+    try:
+        return json.loads(arq.read_text(encoding="utf-8"))
+    except ValueError:
+        return {}
+
+
+def anotar_comissao(id_produto: str, pct: float, quando: str = "") -> None:
+    """Grava o que foi VISTO no hub. `quando` vazio = hoje."""
+    import json
+    from datetime import date
+    d = comissoes()
+    d[str(id_produto)] = {"pct": float(pct), "visto": quando or date.today().isoformat()}
+    arq = _arquivo_comissao()
+    arq.parent.mkdir(parents=True, exist_ok=True)
+    arq.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def comissao_valida(id_produto: str) -> dict | None:
+    """Devolve a comissao se ela ainda esta' dentro do prazo, senao None.
+
+    ⛔ Fora do prazo NAO e' "provavelmente ainda vale": e' desconhecido. O
+    produto sai do catalogo por isso — melhor sumir do que afirmar um numero
+    que ninguem conferiu.
+    """
+    from datetime import date, timedelta
+    reg = comissoes().get(str(id_produto))
+    if not reg:
+        return None
+    limite = (date.today() - timedelta(days=VALIDADE_COMISSAO_DIAS)).isoformat()
+    return reg if str(reg.get("visto", "")) >= limite else None
+
+
+def subcategorias_uteis(mae: str) -> list[tuple[str, str]]:
+    """Filhas da categoria, menos as vetadas em `FORA`.
+
+    ⚠️ Se a categoria nao tiver filhas, devolve ela mesma — assim quem chama
+    nao precisa saber se desceu ou nao.
+    """
+    try:
+        d = _get(f"/categories/{mae}")
+    except Exception:
+        return [(mae, mae)]
+    filhas = d.get("children_categories") or []
+    if not filhas:
+        return [(mae, d.get("name", mae))]
+    return [(c["id"], c["name"]) for c in filhas if c["id"] not in FORA]
 
 
 def token() -> str:
@@ -165,9 +255,49 @@ def mais_vendidos(categoria: str, quantos: int = 12) -> list[dict]:
         link = com_afiliado(url)
         if not (nome and preco and link):
             continue
+        # ⭐ A comissao VISTA no hub, se ainda estiver no prazo. Fora do prazo
+        # vem None, e `so_monetizados()` tira o produto do catalogo.
+        com = comissao_valida(iid)
         saida.append({
             "nome": nome, "link": link, "imagem": foto,
             "preco": f"R$ {float(preco):.2f}".replace(".", ","),
             "loja": "Mercado Livre", "_id": iid, "_tipo": tipo,
+            "comissao": (com or {}).get("pct"),
+            "comissao_vista_em": (com or {}).get("visto", ""),
         })
+    return saida
+
+
+def so_monetizados(produtos: list[dict]) -> list[dict]:
+    """Deixa passar apenas o que TEM comissao anotada e dentro do prazo.
+
+    ⭐ Ordem de decisao do Bryan em 15/09/2026: *"postar no site so' o que
+    monetizar pra nos do ML, e quando parar de monetizar some do site"*.
+
+    ⚠️ A regra automatica que ele imaginou NAO existe: a API nao devolve
+    comissao (medido — ficha sem campo, quatro rotas de afiliado em 404) e o
+    painel NAO exporta. Entao o sinal e' a anotacao a mao, e o que a substitui
+    e' o PRAZO — `VALIDADE_COMISSAO_DIAS`: sem reconferir, o produto sai
+    sozinho.
+
+    ⛔ Nao afrouxar isso para "manter o catalogo cheio". Catalogo grande com
+    comissao velha e' pior que catalogo pequeno — e' a mesma razao pela qual o
+    preco reconferido em 48h ja' derruba produto bom.
+    """
+    return [p for p in produtos if p.get("comissao")]
+
+
+def por_canal(canal: str, quantos: int = 12) -> list[dict]:
+    """Mais vendidos das SUBCATEGORIAS uteis do canal, sem as vetadas.
+
+    ⚠️ Puxar a categoria MAE e' o que trazia papel higienico — ver `FORA`.
+    """
+    saida, vistos = [], set()
+    for mae, _nome in CATEGORIAS.get(canal, []):
+        for cid, _cn in subcategorias_uteis(mae):
+            for p in mais_vendidos(cid, quantos):
+                if p["_id"] in vistos:
+                    continue
+                vistos.add(p["_id"])
+                saida.append(p)
     return saida

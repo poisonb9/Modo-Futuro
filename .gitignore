@@ -109,7 +109,14 @@ credentials.json
 # temporarios e material pesado de teste
 tmpfreeze/
 teste_elon.mp4
-modelos/
+# ⚠️ `modelos/` continua ignorado por ser material pesado, MAS o peso do
+# recorte e' EXCECAO: ordem do Bryan em 15/09/2026 — se a operacao mudar de
+# maquina, `engine/recorte.py` tem de continuar funcionando. Por isso o
+# arquivo viaja NO REPO (44,4 MB, abaixo do teto de 100 MB do GitHub).
+# ⛔ Tem de ser `modelos/*` e nao `modelos/`: com a barra o git nem entra no
+# diretorio e o `!` abaixo nunca seria lido.
+modelos/*
+!modelos/rmbg14_q8.onnx
 github_token.txt
 
 # amostra biométrica da voz do Bryan (voz clonada) — nunca vai pro repo,

@@ -63,12 +63,12 @@ class _Resposta:
 class _TelegramFalso:
     """Dubla o telegram e ANOTA por qual porta o post saiu."""
 
-    def __init__(self):
-        self.fotos, self.textos = [], []
+    def __init__(self, foto_vai=True):
+        self.fotos, self.textos, self.foto_vai = [], [], foto_vai
 
-    def enviar_foto(self, imagem, legenda="", destino=None):
-        self.fotos.append((imagem, legenda))
-        return True
+    def enviar_foto(self, imagem, legenda="", destino=None, botao=None):
+        self.fotos.append((imagem, legenda, botao))
+        return self.foto_vai
 
     def enviar(self, texto, destino=None):
         self.textos.append(texto)
@@ -111,8 +111,14 @@ try:
     if tg.fotos:
         img = Image.open(io.BytesIO(tg.fotos[0][0]))
         checar(img.size == (1080, 1920), "o cartaz entregue e' 9x16")
-        checar("13,52" in tg.fotos[0][1] and P["link"] in tg.fotos[0][1],
-               "a legenda leva preco e link - a foto nao substitui o texto")
+        legenda, botao = tg.fotos[0][1], tg.fotos[0][2]
+        checar("13,52" in legenda, "a legenda leva o preco")
+        checar(len(legenda) <= 1024,
+               f"a legenda cabe no limite do Telegram ({len(legenda)} chars)")
+        checar(botao is not None and botao[1] == P["link"],
+               "o LINK viaja no botao (1.065 chars nao cabem na legenda)")
+        checar(P["link"] not in legenda,
+               "e nao se repete na legenda — era o que estourava o limite")
 finally:
     requests.get = guardado
     vitrine.telegram = real
@@ -133,6 +139,26 @@ for oq, efeito in (("a rede cai", requests.exceptions.Timeout("estourou")),
     finally:
         requests.get = guardado
         vitrine.telegram = real
+
+print("\n3b. o Telegram RECUSA a foto - o post cai pro texto COM link")
+tg, real = _TelegramFalso(foto_vai=False), vitrine.telegram
+vitrine.telegram = tg
+guardado = requests.get
+requests.get = _com_rede(FOTO)
+try:
+    t = vitrine.postar(dict(P, link="https://exemplo.com/recusada"),
+                       "truque.importado")
+    checar(t is not None, "o post saiu")
+    checar(len(tg.fotos) == 1 and len(tg.textos) == 1,
+           "tentou a foto, e caiu pro texto")
+    # ⛔ O DEFEITO QUE ESTA GUARDA EXISTE PRA IMPEDIR: com o link no botao, um
+    # caminho que caisse pro texto SEM link poria o produto no feed sem para
+    # onde ir. Pior que nao ter postado.
+    checar(bool(tg.textos) and "https://exemplo.com/recusada" in tg.textos[0],
+           "o texto de reserva leva o LINK - post sem link nao pode existir")
+finally:
+    requests.get = guardado
+    vitrine.telegram = real
 
 print("\n4. sem foto no produto, nada muda (o caminho antigo continua)")
 checar(vitrine.cartaz_de({k: v for k, v in P.items() if k != "imagem"}) is None,

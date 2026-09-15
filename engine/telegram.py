@@ -68,15 +68,21 @@ def enviar(texto: str, destino: str | None = None) -> bool:
 
 
 def enviar_foto(imagem: bytes, legenda: str = "",
-                destino: str | None = None) -> bool:
+                destino: str | None = None,
+                botao: tuple[str, str] | None = None) -> bool:
     """Manda uma FOTO com legenda. Devolve False (sem estourar) se nao deu.
 
     ⚠️ A LEGENDA DA FOTO TEM OUTRO LIMITE, e e' quatro vezes menor: 1024
     caracteres contra os 4096 da mensagem de texto. Nao e' detalhe — um post
     que passa do limite volta `400 MEDIA_CAPTION_TOO_LONG` e o produto NAO vai
     ao ar. Quando nao cabe, a foto vai sem legenda e o texto vai logo atras,
-    em mensagem propria: o post fica com duas bolhas em vez de uma, que e' bem
-    melhor do que nao existir.
+    em mensagem propria: duas bolhas em vez de uma, bem melhor do que nada.
+
+    ⭐ E O `botao` EXISTE POR CAUSA DE UM NUMERO MEDIDO, em 16/09/2026: o link
+    de afiliado do AliExpress tem **1.065 caracteres** (mediana de 277 posts),
+    entao 272 dos 277 estouravam a legenda SO' pelo link. Url de botao NAO
+    conta pra legenda — com ele o post volta a caber numa bolha so', e de
+    quebra a pessoa toca num rotulo em vez de num paredao de caracteres.
 
     ⚠️ E O `sendPhoto` NAO ACEITA JSON como o `chamar()` faz: arquivo vai por
     multipart. Por isso este envio nao passa por la'.
@@ -85,10 +91,14 @@ def enviar_foto(imagem: bytes, legenda: str = "",
     if not configurado() or not destino:
         return False
     cabe = len(legenda) <= LIMITE_LEGENDA
+    campos = {"chat_id": destino, "caption": legenda if cabe else ""}
+    if botao:
+        campos["reply_markup"] = json.dumps(
+            {"inline_keyboard": [[{"text": botao[0], "url": botao[1]}]]})
     try:
         r = requests.post(
             API.format(token=_token(), metodo="sendPhoto"),
-            data={"chat_id": destino, "caption": legenda if cabe else ""},
+            data=campos,
             files={"photo": ("cartaz.jpg", imagem, "image/jpeg")},
             timeout=60)
         r.raise_for_status()

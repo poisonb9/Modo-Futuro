@@ -79,7 +79,11 @@ def canal() -> str | None:
     return v or None
 
 
-def postar_texto(p: dict, origem: str | None = None) -> str:
+ROTULO_BOTAO = "Ver na loja"
+
+
+def postar_texto(p: dict, origem: str | None = None,
+                 com_link: bool = True) -> str:
     """O post de um produto.
 
     ⚠️ MOSTRA o que e', nao pergunta se a pessoa quer. Mesma regra medida dos
@@ -104,7 +108,16 @@ def postar_texto(p: dict, origem: str | None = None) -> str:
     nome_origem = ORIGEM.get(origem or "", "")
     if nome_origem:
         linhas.append(f"📺 do {nome_origem}")
-    linhas += ["", "🔗 " + p["link"]]
+    # ⚠️ `com_link=False` E' SO' PRO POST COM BOTAO, e existe por medicao: o
+    # link de afiliado do AliExpress tem 1.065 caracteres (mediana de 277
+    # posts), e sozinho ele estourava a legenda da foto em 272 deles. Quando o
+    # link viaja no botao, repeti-lo aqui traria o estouro de volta.
+    #
+    # ⛔ O texto SEM link nunca pode sair sozinho. Post de produto sem link e'
+    # anuncio que nao vende — quem chama esta funcao com False tem de garantir
+    # o botao, e cair pro texto COM link se o botao nao for.
+    if com_link:
+        linhas += ["", "🔗 " + p["link"]]
     return chr(10).join(linhas)
 
 
@@ -221,14 +234,20 @@ def postar(bruto: dict, origem: str | None = None,
             f"Falta {ENV_CANAL} no .env. O canal ainda nao existe: quem cria "
             f"canal de Telegram e' uma PESSOA no app (bot nao cria), e depois "
             f"o bot tem de virar admin dele pra poder postar.")
-    # ⚠️ UMA TENTATIVA SO', e nesta ordem: se o cartaz existe, ele vai COM a
-    # legenda numa mensagem so'. Mandar foto e depois texto daria duas bolhas
-    # e, pior, um caminho onde a foto sai e o texto nao — produto no feed sem
-    # preco e sem link.
+    # ⚠️ O CARTAZ VAI COM A LEGENDA NUMA BOLHA SO', e o link vai no BOTAO.
+    # Repetir o link na legenda estouraria o limite de 1024 em 272 dos 277
+    # posts medidos — o link sozinho tem 1.065 caracteres.
+    #
+    # ⛔ E SE A FOTO NAO SAIR, CAI PRO TEXTO COM O LINK DENTRO. O caminho que
+    # nao pode existir e' o post ir ao ar sem link nenhum: produto no feed sem
+    # para onde ir e' pior do que produto que nao apareceu.
     foto = cartaz_de(p)
+    entregue = False
     if foto is not None:
-        entregue = telegram.enviar_foto(foto, texto, destino)
-    else:
+        entregue = telegram.enviar_foto(
+            foto, postar_texto(p, origem, com_link=False), destino,
+            botao=(ROTULO_BOTAO, p["link"]))
+    if not entregue:
         entregue = telegram.enviar(texto, destino)
     if not entregue:
         return None

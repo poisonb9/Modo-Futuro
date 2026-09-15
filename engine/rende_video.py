@@ -64,7 +64,22 @@ def rende(nome: str) -> tuple[bool, str]:
     if not t.strip():
         return False, "sem nome"
     for termo in REPOSICAO:
-        if termo in t:
+        # ⛔ ANCORADO NO INICIO DA PALAVRA. Antes era `termo in t`, substring
+        # solta, e isso apagava produto em SILENCIO. MEDIDO em 15/09/2026, em
+        # 111 candidatos: 7 de 8 cortes eram falsos, todos por "ração" —
+        #
+        #     "Caixa de som bluetooth, vibração"   -> vib(ração)
+        #     "Clipes de Liberação Rápida"         -> libe(ração)
+        #     "Luzes de tira led ... decoração"    -> deco(ração)
+        #
+        # ⚠️ A guarda ja' existia LOGO ABAIXO, na lista de marcas, com o
+        # comentario certo ("filtro que casa demais reprova o que deveria
+        # passar, e isso e' invisivel — o produto so' some"). Faltava aqui.
+        #
+        # ⭐ E so' no INICIO, nao nos dois lados: com `\btermo\b`, "fralda"
+        # deixaria de casar com "fraldas" e o filtro passaria a errar pro
+        # outro lado. Prefixo pega o plural e nao pega o meio de palavra.
+        if re.search(rf"\b{re.escape(termo)}", t):
             return False, f"reposição ({termo}) — não precisa de descoberta"
     for marca in JA_CONHECIDO:
         # ⚠️ `\b` de proposito: "neve" casaria dentro de "neveira" e de

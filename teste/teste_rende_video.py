@@ -84,5 +84,39 @@ checar("A LISTA CONTINUA RODANDO ANTES" in plano, "esta' escrito no codigo")
 checar("TENTATIVAS_MAX" in fonte, "ha' teto de chaves por rodada")
 checar(_rv.TEMPO_S <= 30, "e timeout curto: o corte e' bonus, nao pode segurar")
 
+print("")
+print("8. ⛔ A LISTA NAO PODE CASAR NO MEIO DA PALAVRA")
+# ⚠️ MEDIDO em 15/09/2026, em 111 candidatos reais: 7 dos 8 cortes eram
+# FALSOS, todos pelo mesmo termo — "ração" (de animal) casando dentro de
+# vibração, liberação, decoração e duração. O filtro era `termo in titulo`,
+# substring solta, e vinha apagando produto em SILENCIO desde sempre: o
+# cartao simplesmente nao aparecia, e ninguem tinha como notar.
+#
+# ⭐ A guarda ja' existia na lista de MARCAS logo abaixo, com o comentario
+# certo. Faltava na de reposicao — o mesmo defeito, no arquivo que o previa.
+for titulo in ("Caixa de som portátil bluetooth, vibração, áudio",
+               "Clipes de Liberação Rápida Premium",
+               "Luzes de tira led decoração tv",
+               "Lanterna EDC com liberação rápida",
+               "Carregador de longa duração",
+               "Suporte com iluminação para porta-malas"):
+    ok, porque = _rv.rende(titulo)
+    checar(ok, f"passa: {titulo[:44]}")
+
+# ⭐ E o caso POSITIVO, que e' quem prova que o filtro nao virou peneira
+# furada. Sem isto, apagar a funcao inteira passaria neste teste.
+for titulo, esperado in (("Papel higiênico folha tripla 20m", "papel higiênico"),
+                         ("Fraldas Pampers M com 40 unidades", "fralda"),
+                         ("Ração para gatos castrados 10kg", "ração"),
+                         ("Absorventes noturnos com abas", "absorvente"),
+                         ("Guardanapos de papel 50 folhas", "guardanapo")):
+    ok, porque = _rv.rende(titulo)
+    checar(not ok and esperado in porque,
+           f"corta: {titulo[:40]} ({esperado})")
+# ⚠️ PLURAL: ancorar nos DOIS lados (`\btermo\b`) faria "fralda" parar de
+# casar com "fraldas" e o filtro erraria pro outro lado. Por isso o prefixo.
+checar(not _rv.rende("Fraldas geriátricas tamanho G")[0],
+       "o plural continua sendo cortado (prefixo, nao \\b dos dois lados)")
+
 print("\n" + ("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde"))
 sys.exit(1 if falhas else 0)

@@ -246,6 +246,35 @@
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
   }
   .escolha[aria-expanded="true"] { border-color: var(--ouro); }
+  /* ⭐ O ROTULO FIXO e' quem da' o ar profissional: o menu se apresenta
+     ("Preço") antes de mostrar a escolha ("tudo"). Peso e cor diferentes,
+     senao vira uma frase so' e perde a hierarquia. */
+  .escolha .rotulo-fixo {
+    color: var(--fraco); font-weight: 500; margin-right: 5px;
+  }
+  .escolha .valor-escolhido { font-weight: 700; }
+  .escolha .n {
+    font: 500 11px/1 var(--mono); color: var(--fraco); margin-left: 6px;
+  }
+  .escolha[data-ativo="sim"] .rotulo-fixo,
+  .escolha[data-ativo="sim"] .n {
+    color: color-mix(in srgb, var(--fundo) 72%, transparent);
+  }
+  /* ⚠️ ICONE DESENHADO EM SVG, nao emoji: emoji muda de cara em cada
+     aparelho e num rodape de loja isso aparece como descuido. */
+  .escolha::before {
+    content: ""; display: inline-block; width: 13px; height: 13px;
+    vertical-align: -2px; margin-right: 7px;
+    background-repeat: no-repeat; background-position: center;
+    background-size: contain; opacity: .55;
+  }
+  .escolha[data-icone="preco"]::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2v12M11 5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'/%3E%3C/svg%3E");
+  }
+  .escolha[data-icone="categoria"]::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='5' height='5' rx='1'/%3E%3Crect x='9' y='2' width='5' height='5' rx='1'/%3E%3Crect x='2' y='9' width='5' height='5' rx='1'/%3E%3Crect x='9' y='9' width='5' height='5' rx='1'/%3E%3C/svg%3E");
+  }
+  .escolha[data-ativo="sim"]::before { filter: invert(1) brightness(2); opacity: .8; }
   .opcoes {
     position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;
     background: var(--caixa); border: 1px solid var(--linha);
@@ -766,16 +795,25 @@
     //
     // A contagem vai DENTRO da opcao ("Beleza (13)"): responde antes da
     // escolha o que a pessoa so' descobriria depois.
-    function seletor(opcoes, valorAtual, aoMudar, temFiltro) {
+    function seletor(titulo, opcoes, valorAtual, aoMudar, temFiltro) {
       var cx = el("div", "escolha-caixa");
       var sel = opcoes.filter(function (o) { return o.id === valorAtual; })[0]
                 || opcoes[0];
-      var rot = sel.rotulo + (sel.n != null ? "  (" + sel.n + ")" : "");
-      var b = el("button", "escolha", rot);
+      // ⭐ ROTULO FIXO + VALOR, e nao so' o valor. "Tudo (62)" sozinho nao
+      // diz sobre O QUE aquele menu decide; "Preço: tudo" diz. E' o padrao
+      // de loja seria — o menu se apresenta antes de mostrar a escolha.
+      var b = el("button", "escolha");
+      var fixo = el("span", "rotulo-fixo", titulo);
+      var val = el("span", "valor-escolhido", sel.rotulo);
+      b.appendChild(fixo);
+      b.appendChild(val);
+      if (sel.n != null) { b.appendChild(el("span", "n", String(sel.n))); }
       b.type = "button";
       b.setAttribute("aria-expanded", "false");
       b.setAttribute("aria-haspopup", "listbox");
       b.setAttribute("data-ativo", temFiltro ? "sim" : "nao");
+      b.setAttribute("data-icone",
+        titulo === "Preço" ? "preco" : "categoria");
 
       var painel = el("div", "opcoes");
       painel.setAttribute("role", "listbox");
@@ -819,7 +857,7 @@
         }).length
       };
     });
-    caixa.appendChild(seletor(deEstado, atual, function (v) {
+    caixa.appendChild(seletor("Preço", deEstado, atual, function (v) {
       atual = v;
       montarChips();
       desenhar();
@@ -833,11 +871,11 @@
       return canais[b] - canais[a];
     });
     if (areas.length) {
-      var deArea = [{ id: "", rotulo: "Todas as áreas", n: PRODUTOS.length }];
+      var deArea = [{ id: "", rotulo: "todas", n: PRODUTOS.length }];
       areas.forEach(function (c) {
         deArea.push({ id: c, rotulo: c, n: canais[c] });
       });
-      caixa.appendChild(seletor(deArea, canal, function (v) {
+      caixa.appendChild(seletor("Categoria", deArea, canal, function (v) {
         canal = v;
         montarChips();
         desenhar();

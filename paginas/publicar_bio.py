@@ -280,7 +280,17 @@ def produtos_todos() -> list[dict]:
             "id": str(d.get("id") or d.get("nome")),
             "combina": _combina.get(str(d.get("id") or d.get("nome")), []),
         })
-    return saida
+    # ⭐ O MESMO PRODUTO DE DOIS LOJISTAS VIRA UM CARTAO SO'.
+    #
+    # ⚠️ A dedupe acima e' por `id` do anuncio, e nunca teve como pegar isto:
+    # dois lojistas vendendo o mesmo Ralador tem ids diferentes. O Bryan viu
+    # dois cartoes iguais no iPhone em 15/09 — "isso nao pode acontecer".
+    #
+    # ⛔ E nao da' pra resolver pelo nome: medido, "pinceis x esponjas"
+    # (DIFERENTES) pontua mais alto que "Espelho x Espelho" (O MESMO). Ver
+    # `engine/duplicata.py` — quem decide e' a foto.
+    from engine import duplicata
+    return duplicata.sem_repetidos(saida)
 
 
 # ⚠️ O SITE MAE NAO FALA DE CANAL.

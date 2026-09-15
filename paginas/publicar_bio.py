@@ -138,12 +138,45 @@ def _serie_de_precos() -> dict:
     12/09" so' pode ser escrito porque ha' 1.871 pontos gravados em
     `precos_vistos.jsonl` — se a serie nao existisse, a frase seria enfeite,
     e enfeite sobre preco e' exatamente o que a gente nao faz.
+    ## ⛔ O DEFEITO QUE ESTA FUNCAO CONSERTOU, em 15/09/2026
+
+    ⚠️ Ela fazia `maior = max(maior, v)` sobre TODOS os pontos. Mas o mesmo
+    `id` recebe precos de ANUNCIOS DIFERENTES no mesmo dia — variante, kit
+    maior, outro vendedor. O "Conjunto de pinceis" tinha isto:
+
+        12/09  13,36
+        13/09  13,36
+        14/09  12,56  | 25,08  | 12,80  | 12,57   <- quatro no MESMO dia
+
+    O 25,08 entrava como "maior preco ja' visto" e a pagina anunciava
+    **queda de 49%** num produto que nao caiu. Medido em 8 dos 62 do
+    catalogo, e o espalhamento do dia batia quase 1:1 com a queda mostrada:
+
+        52% de espalhamento -> 51,9% de "queda"
+        50%                 -> 49,0%
+        46%                 -> 44,7%
+        34%                 -> 34,0%   (Fone Lenovo GM2 Pro)
+        32%                 -> 32,1%   (Carregador 120W)
+
+    ⛔ Os dois ultimos sao CAMPEOES que abrem a pagina. A vitrine anunciava
+    desconto que nao existia — exatamente o oposto do que ela promete
+    ("o desconto e' medido contra o preco que NOS vimos").
+
+    ⭐ O CONSERTO: cada DIA vira um valor so', e o valor e' o MENOR do dia.
+    Menor, e nao media, porque na duvida entre duas variantes a conservadora
+    e' a barata: ela puxa a "queda" pra baixo. Errar a favor do desconto e'
+    o erro que ninguem reclama e que destroi a credibilidade.
+
+    ⚠️ E `pontos` passa a contar DIAS distintos, nao linhas. "Acompanhando
+    ha' 3 dias" com quatro leituras num dia so' seria mentira pequena, do
+    tipo que ninguem confere e que nao deveria existir.
     """
     import json
     arq = RAIZ / "estado" / "precos_vistos.jsonl"
     if not arq.exists():
         return {}
-    serie: dict = {}
+    # {id: {dia: menor preco daquele dia}}
+    por_dia: dict = {}
     for linha in arq.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
             continue
@@ -154,13 +187,21 @@ def _serie_de_precos() -> dict:
         i, q = d.get("id"), (d.get("quando") or "")[:10]
         if not i or not q:
             continue
-        v = 0.0
         try:
             v = float(d.get("preco") or 0)
         except (TypeError, ValueError):
-            v = 0.0
-        antes, n, maior, ult = serie.get(i, (q, 0, 0.0, q))
-        serie[i] = (min(antes, q), n + 1, max(maior, v), max(ult, q))
+            continue
+        if v <= 0:
+            continue
+        dias = por_dia.setdefault(i, {})
+        dias[q] = min(dias[q], v) if q in dias else v
+
+    serie: dict = {}
+    for i, dias in por_dia.items():
+        if not dias:
+            continue
+        chaves = sorted(dias)
+        serie[i] = (chaves[0], len(chaves), max(dias.values()), chaves[-1])
     return serie
 
 
@@ -260,7 +301,19 @@ def produtos_todos() -> list[dict]:
             "preco": d.get("preco", ""),
             "link": d["link"],
             "imagem": d.get("imagem", ""),
-            "queda": round(float(d.get("queda") or 0), 1),
+            # ⛔ A QUEDA E' RECALCULADA AQUI, e nao lida do registro.
+            #
+            # ⚠️ O valor gravado em `produtos_publicados.jsonl` foi calculado
+            # com o historico ANTIGO, que somava varias leituras do MESMO dia
+            # — leituras de anuncios diferentes sob o mesmo id. Em 15/09/2026
+            # isso publicava "caiu 49%" num produto que nao caiu, em 8 dos 62
+            # do catalogo. `engine/garimpo.py` ja' foi consertado, mas o que
+            # ja' esta' gravado continuaria mentindo ate' o produto sair.
+            #
+            # ⭐ `_serie_de_precos()` ja' devolve o maior preco POR DIA
+            # consolidado, entao recalcular aqui conserta o que esta' no ar
+            # sem precisar reescrever o registro.
+            "queda": _queda_real(serie, d),
             "vendas": int(d.get("vendas") or 0),
             # ⭐ O QUE O PRODUTO RENDE POR VENDA. Cruzado com `vendas` no
             # navegador, vira a ordem do catalogo: primeiro o que tem mais
@@ -334,6 +387,28 @@ def _nome_do_canal(nome_buffer: str) -> str:
         sys.path.insert(0, str(RAIZ))
     from engine import vitrine
     return vitrine.ORIGEM.get(nome_buffer, nome_buffer)
+
+
+def _queda_real(serie: dict, d: dict) -> float:
+    """Quanto caiu contra o MAIOR PRECO POR DIA que nos vimos.
+
+    ⚠️ Zero quando nao ha' historico, e zero quando o preco de hoje e' maior
+    ou igual ao que ja' vimos. Nao e' "desconhecido": e' zero, e o cartao nao
+    fala de desconto nenhum. Falha fechada, do lado que nao mente.
+    """
+    reg = serie.get(d.get("id"))
+    if not reg:
+        return 0.0
+    maior = float(reg[2] or 0)
+    hoje = 0.0
+    try:
+        bruto = str(d.get("preco", "")).replace("R$", "").strip()
+        hoje = float(bruto.replace(".", "").replace(",", "."))
+    except ValueError:
+        return 0.0
+    if maior <= 0 or hoje <= 0 or hoje >= maior:
+        return 0.0
+    return round((maior - hoje) / maior * 100, 1)
 
 
 def _antes(serie: dict, d: dict) -> str:

@@ -325,10 +325,32 @@ def ultimo_preco() -> dict[int, tuple[float, int]]:
 
 
 def historico() -> dict[int, list[float]]:
-    """product_id -> precos que NOS ja' vimos."""
-    h: dict[int, list[float]] = {}
+    """product_id -> UM preco por DIA que nos ja' vimos (o menor do dia).
+
+    ## ⛔ POR QUE UM POR DIA, E POR QUE O MENOR
+
+    ⚠️ Antes esta funcao juntava TODOS os precos numa lista so'. Mas o mesmo
+    `id` recebe precos de ANUNCIOS DIFERENTES no mesmo dia — variante, kit
+    maior, outro vendedor. O "Conjunto de pinceis" tinha quatro leituras em
+    14/09: 12,56 · 25,08 · 12,80 · 12,57.
+
+    O 25,08 virava `max(antes)` e `desconto_honesto` anunciava **queda de
+    49%** num produto que nao caiu. Medido em 15/09/2026 nos 62 do catalogo:
+    8 produtos afetados, e o espalhamento do dia batia quase 1:1 com a queda
+    publicada (52%->51,9% · 50%->49,0% · 34%->34,0% · 32%->32,1%).
+
+    ⛔ Dois deles eram os CAMPEOES que abrem a pagina (Carregador 120W e Fone
+    Lenovo GM2 Pro). A vitrine anunciava desconto inexistente — o oposto do
+    que o modulo inteiro existe pra garantir.
+
+    ⭐ O MENOR do dia, e nao a media: entre duas variantes, a barata e' a
+    conservadora, porque puxa a queda pra BAIXO. Errar a favor do desconto e'
+    o erro que ninguem reclama e que destroi a credibilidade — e credibilidade
+    de preco e' o unico ativo que esta pagina tem.
+    """
+    por_dia: dict[int, dict[str, float]] = {}
     if not PRECOS.exists():
-        return h
+        return {}
     for linha in PRECOS.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
             continue
@@ -338,9 +360,20 @@ def historico() -> dict[int, list[float]]:
             # ⚠️ Linha torta nao derruba a serie inteira. JSONL existe
             # justamente pra isso: o estrago fica na linha.
             continue
-        if d.get("id") and d.get("preco"):
-            h.setdefault(d["id"], []).append(float(d["preco"]))
-    return h
+        if not (d.get("id") and d.get("preco")):
+            continue
+        dia = str(d.get("quando") or "")[:10]
+        if not dia:
+            continue
+        try:
+            v = float(d["preco"])
+        except (TypeError, ValueError):
+            continue
+        if v <= 0:
+            continue
+        dias = por_dia.setdefault(d["id"], {})
+        dias[dia] = min(dias[dia], v) if dia in dias else v
+    return {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
 
 
 def desconto_honesto(p: dict, h: dict[int, list[float]]) -> tuple[float, str]:

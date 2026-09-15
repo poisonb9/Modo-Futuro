@@ -1,0 +1,91 @@
+# A vitrine do Telegram: tres posts de manha, tres a` tarde, tres a` noite.
+#
+# ⭐ A CADENCIA E' DECISAO DO BRYAN, 15/09/2026. O canal acabou de nascer e nao
+# tem publico; o objetivo por ora nao e' alcance, e' NAO PARECER ABANDONADO.
+# Constancia, nao volume. Com 152 produtos na fila, 9 por dia dao ~17 dias.
+#
+# ⚠️ RODA NA NUVEM por escolha dele, e isso tem duas consequencias que este
+# arquivo precisa resolver:
+#
+#   1. O runner e' EFEMERO. Sem commitar `estado/vitrine_postados.json` de
+#      volta, a vitrine reposta do topo da fila a cada disparo, para sempre.
+#      ⛔ Isto JA' ACONTECEU neste projeto com outro arquivo: ver a excecao 1B
+#      do `.gitignore` — o `publicados.json` existia so' na maquina, a decisao
+#      era tomada na nuvem, e "Como a ASML construiu o monopolio" foi ao ar
+#      duas vezes em 08/09/2026. Por isso ha' agora a excecao 1B-BIS.
+#
+#   2. O CRON DO GITHUB ATRASA, e aqui o horario e' o produto. Medido no
+#      `garimpo.yml`: 3h45 de atraso em 13/09, 5h43 em 14/09, e nao rodou em
+#      15/09 — tudo com `cron: '0 11'`. O minuto cheio e' o mais disputado.
+#      Por isso os minutos abaixo sao quebrados. ⚠️ Mesmo assim, "manha" pode
+#      virar "meio-dia" num dia ruim: e' o preco conhecido de rodar na nuvem,
+#      e o remedio, se incomodar, e' mudar pra tarefa agendada local.
+name: Vitrine
+
+on:
+  workflow_dispatch:
+    inputs:
+      quantos:
+        description: quantos produtos postar
+        required: true
+        default: '3'
+  schedule:
+    # horario de Brasilia = UTC-3
+    - cron: '17 12 * * *'    # 09:17 BRT — manha
+    - cron: '23 18 * * *'    # 15:23 BRT — tarde
+    - cron: '13 23 * * *'    # 20:13 BRT — noite
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    # ⚠️ UMA RODADA POR VEZ. Duas rodadas simultaneas leriam o mesmo registro,
+    # escolheriam os mesmos produtos e postariam em dobro — e a segunda ainda
+    # perderia o push por conflito. `cancel-in-progress: false` porque post ja'
+    # entregue nao se desfaz: e' melhor a segunda esperar do que morrer no meio.
+    concurrency:
+      group: vitrine
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests python-dotenv pillow
+      - name: Postar no canal
+        env:
+          TELEGRAM_BOT_TOKEN:       ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CANAL_VITRINE:   ${{ secrets.TELEGRAM_CANAL_VITRINE }}
+        run: |
+          # ⛔ FALHA ALTO SE FALTAR O DESTINO. Sem esta conferencia o
+          # `canal()` devolve None, o `postar` levanta no meio do lote e o
+          # primeiro produto ja' teria saido — ou pior, com o secret vazio o
+          # job "passa" sem postar nada e ninguem percebe por dias.
+          test -n "$TELEGRAM_CANAL_VITRINE" || {
+            echo "::error::falta o secret TELEGRAM_CANAL_VITRINE (@ do canal)"
+            exit 1
+          }
+          python -X utf8 -m engine.vitrine --quantos "${{ inputs.quantos || 3 }}"
+      - name: Guardar o que ja' foi ao canal
+        # ⚠️ `always()`: se o lote morreu no terceiro post, os DOIS primeiros ja'
+        # estao no canal e precisam ficar registrados. Sem isto, o proximo
+        # disparo reposta os dois.
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # ⚠️ UM POR UM E SO' SE EXISTIR — a licao de 13/09/2026: `git add` de
+          # lista com um arquivo ausente recusa a LISTA INTEIRA, o passo morre
+          # com `set -e`, e o runner efemero leva o estado embora.
+          for f in estado/vitrine_postados.json estado/produtos_publicados.jsonl; do
+            [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
+          done
+          git diff --cached --quiet && { echo "nada mudou"; exit 0; }
+          git commit -m "vitrine: o que ja' foi ao canal"
+          # ⚠️ REBASE ANTES DO PUSH: o garimpo, a fila e o desempenho commitam
+          # neste mesmo repo. Sem isto o push perde a corrida e o registro do
+          # que foi postado se perde — com os posts ja' no ar.
+          git pull --rebase
+          git push
+          echo "registro commitado: $(git rev-parse --short HEAD)"

@@ -36,6 +36,15 @@ estado/*
 # ⚠️ Duplicata e' a causa MEDIDA dos dois colapsos de alcance do projeto
 # (02/08 e 25/08). Este arquivo tem de estar no git.
 !estado/publicados.json
+# ⚠️ EXCECAO 1B-BIS, 15/09/2026: o registro do que ja' foi ao CANAL do
+# Telegram. Mesma familia da 1B, e o Bryan decidiu em 15/09 que a cadencia
+# (3 de manha, 3 a` tarde, 3 a` noite) roda na NUVEM — entao a decisao passa a
+# ser tomada num runner efemero, que nasce sem memoria nenhuma.
+#
+# ⛔ Sem esta linha a vitrine reposta do TOPO DA FILA a cada disparo, tres
+# vezes por dia, para sempre. Nao e' hipotese: e' exatamente a 1B acontecendo
+# de novo, com outro arquivo.
+!estado/vitrine_postados.json
 # ⚠️ EXCECAO 1C: (fonte, segundo) de todo trecho ja' enfileirado. Mesma
 # razao do de cima — a memoria tem de sobreviver ao runner. Esta rede pega a
 # duplicata que a de TEXTO nao ve: mesmo trecho com outro titulo ("Ramen" vs

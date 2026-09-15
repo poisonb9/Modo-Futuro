@@ -162,6 +162,70 @@ class NomeLongoNaoVaza(unittest.TestCase):
         self.assertEqual(" ".join(linhas), "Fone Lenovo GM2 Pro")
 
 
+def _luminancia(rgb):
+    c = [v / 255 for v in rgb]
+    c = [(x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4)
+         for x in c]
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def _contraste(a, b):
+    la, lb = _luminancia(a), _luminancia(b)
+    return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
+
+
+class OBrilhoCobreAPecaSemApagarOTexto(unittest.TestCase):
+    """O brilho e o texto puxam para lados opostos, e alguem vai mexer nisso.
+
+    ⭐ POR QUE ESTA GUARDA EXISTE. O brilho foi ampliado em 15/09/2026 porque o
+    Bryan viu o post no Telegram e o topo e o rodape estavam chapados. A
+    correcao e' certa e tem um custo obvio: quanto mais claro o fundo, menos
+    contraste sobra pro nome e, principalmente, pro preco antigo RISCADO, que
+    e' cinza de proposito. Sem guarda, a proxima pessoa que achar o cartaz
+    "meio escuro" sobe a intensidade e apaga o preco sem perceber.
+    """
+
+    def setUp(self):
+        self.img = cartaz.montar(_foto(), "Organizador de maquiagem",
+                                 89.90, 129.90)
+        self.a = np.asarray(self.img.convert("RGB"), dtype=float)
+
+    def _cantos(self):
+        a, (h, w) = self.a, self.a.shape[:2]
+        return [a[y:y + 60, x:x + 60].mean()
+                for y, x in ((0, 0), (0, w - 60), (h - 60, 0), (h - 60, w - 60))]
+
+    def _fundo_da_faixa_do_texto(self):
+        h, w = self.a.shape[:2]
+        faixa = self.a[int(h * 0.70):int(h * 0.95), int(w * 0.15):int(w * 0.85)]
+        return tuple(int(v) for v in np.median(faixa.reshape(-1, 3), axis=0))
+
+    def test_os_cantos_nao_sao_chapados(self):
+        # ⭐ SENSIBILIDADE: a geometria ANTIGA (elipse so' atras do produto)
+        # media 13 e 23 nos cantos. O piso de 30 reprova aquela versao — nao e'
+        # um numero que qualquer desenho passa.
+        for v in self._cantos():
+            self.assertGreater(v, 30, f"canto chapado ({v:.1f})")
+
+    def test_o_brilho_nao_estoura(self):
+        for v in self._cantos():
+            self.assertLess(v, 110, f"canto claro demais ({v:.1f})")
+
+    def test_o_texto_continua_legivel_sobre_o_brilho(self):
+        fundo = self._fundo_da_faixa_do_texto()
+        for nome, cor in (("nome", cartaz.CLARO), ("preco", cartaz.OURO),
+                          ("preco riscado", cartaz.CINZA)):
+            razao = _contraste(cor, fundo)
+            # 4,5:1 e' o piso de texto normal do WCAG AA. O riscado e' o que
+            # chega mais perto (medido 4,98) — e' ele que esta guarda protege.
+            self.assertGreater(razao, 4.5,
+                               f"{nome} ficou com contraste {razao:.2f}:1")
+
+    def test_a_guarda_de_contraste_tem_sensibilidade(self):
+        """⭐ Contra um fundo claro de proposito, ela TEM de acusar."""
+        self.assertLess(_contraste(cartaz.CINZA, (200, 195, 205)), 4.5)
+
+
 class AFonteViajaNoRepo(unittest.TestCase):
     def test_a_fonte_existe(self):
         self.assertTrue(cartaz.FONTE.exists(),

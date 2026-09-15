@@ -159,12 +159,22 @@ def montar(foto: Image.Image, nome: str, preco: float,
     largura, altura = tamanho
     tela = _gradiente(largura, altura)
 
-    # brilho atras do produto: tira o cartao do fundo chapado
+    # ⭐ O BRILHO COBRE A PECA INTEIRA, e isso e' correcao de 15/09/2026, vinda
+    # de ver o post no Telegram de verdade. A primeira versao punha a elipse so'
+    # atras do produto ([0.05, 0.14, 0.95, 0.62]), entao o topo e o rodape
+    # saiam CHAPADOS — medido nos cantos do JPEG, 13 de 255 em cima e 23
+    # embaixo, contra 90 de media da peca. Na tela do celular isso le' como
+    # "faltou alguma coisa ali".
+    #
+    # ⚠️ A INTENSIDADE E' ESCOLHA DO BRYAN, entre tres medidas (cantos em 38,
+    # 47 e 59). Ficou a do meio. Nao subir mais: o nome do produto e o preco
+    # antigo riscado sao claros sobre fundo escuro, e na variante forte o
+    # riscado — que e' cinza de proposito — comeca a competir com o fundo.
     halo = Image.new("RGB", (largura, altura), (0, 0, 0))
     ImageDraw.Draw(halo).ellipse(
-        [largura * 0.05, altura * 0.14, largura * 0.95, altura * 0.62],
+        [-largura * 0.30, -altura * 0.12, largura * 1.30, altura * 1.12],
         fill=(70, 60, 95))
-    tela.paste(Image.blend(tela, halo.filter(ImageFilter.GaussianBlur(120)), 0.45))
+    tela.paste(Image.blend(tela, halo.filter(ImageFilter.GaussianBlur(200)), 0.55))
 
     # o produto, quadrado e no centro
     lado = int(largura * 0.82)

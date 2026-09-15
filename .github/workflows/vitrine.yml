@@ -57,6 +57,12 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN:       ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CANAL_VITRINE:   ${{ secrets.TELEGRAM_CANAL_VITRINE }}
+          # ⛔ SEM ESTAS DUAS O CANAL NAO POSTA NADA, e o job "passa": desde
+          # 15/09 o preco e' conferido na loja no instante do post, e produto
+          # sem preco confirmado e' PULADO (falha fechada). Sem credencial,
+          # todos sao pulados — sai um run verde com zero posts.
+          ALIEXPRESS_APP_KEY:       ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET:    ${{ secrets.ALIEXPRESS_APP_SECRET }}
         run: |
           # ⛔ FALHA ALTO SE FALTAR O DESTINO. Sem esta conferencia o
           # `canal()` devolve None, o `postar` levanta no meio do lote e o
@@ -66,7 +72,24 @@ jobs:
             echo "::error::falta o secret TELEGRAM_CANAL_VITRINE (@ do canal)"
             exit 1
           }
-          python -X utf8 -m engine.vitrine --quantos "${{ inputs.quantos || 3 }}"
+          python -X utf8 -m engine.vitrine --quantos "${{ inputs.quantos || 3 }}" \
+            | tee saida_vitrine.txt
+          # ⛔ RUN VERDE COM ZERO POST E' FALHA, e sem esta conferencia ele
+          # passa despercebido: se a credencial do AliExpress sumir, todo
+          # produto e' pulado por preco nao confirmado e o canal para —
+          # calado, tres vezes por dia. Mesma familia do "200 nao prova nada":
+          # o comando termina com exito e nao entregou nada.
+          #
+          # ⚠️ A UNICA ausencia legitima e' a fila ter acabado, e ai' o proprio
+          # comando diz "nada pendente".
+          if grep -q "nada pendente" saida_vitrine.txt; then
+            echo "fila vazia — nada a postar, e isso esta' certo"
+          elif grep -qE "^\[postado\]" saida_vitrine.txt; then
+            echo "postou: $(grep -c '^\[postado\]' saida_vitrine.txt)"
+          else
+            echo "::error::rodou sem postar nada e sem fila vazia — ver os [pulado] acima"
+            exit 1
+          fi
       - name: Guardar o que ja' foi ao canal
         # ⚠️ `always()`: se o lote morreu no terceiro post, os DOIS primeiros ja'
         # estao no canal e precisam ficar registrados. Sem isto, o proximo

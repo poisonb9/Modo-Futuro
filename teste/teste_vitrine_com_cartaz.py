@@ -262,6 +262,70 @@ print("\n7. legenda longa demais nao derruba o post")
 checar(telegram.LIMITE_LEGENDA < telegram.LIMITE_MSG,
        "o limite da legenda de foto e' menor que o da mensagem")
 
+print("\n7b. o PRECO E' CONFERIDO NA HORA, e falha FECHADA quando nao da'")
+# ⛔ Ordem do Bryan, 15/09/2026, e ela veio de medicao contra a API: em 9 de 9
+# produtos NO AR o preco publicado era mais alto que o de agora (R$ 20,11 onde
+# a loja cobrava R$ 9,35). O registro e' historico; o post nao pode ser.
+
+
+class _ApiFalsa:
+    def __init__(self, preco=None, estoura=None):
+        self.preco, self.estoura, self.pedidos = preco, estoura, []
+
+    def chamar(self, metodo, **kw):
+        self.pedidos.append(kw.get("product_ids"))
+        if self.estoura:
+            raise self.estoura
+        return {"aliexpress_affiliate_productdetail_get_response":
+                {"resp_result": {"result": {"products": {"product": [
+                    {"target_sale_price": self.preco,
+                     "target_original_price": "999.00"}]}}}}}
+
+
+import types                                   # noqa: E402
+
+import engine                                  # noqa: E402
+
+# ⚠️ TROCAR `sys.modules` NAO BASTA, e isto custou uma rodada: o
+# `atualizar_preco` faz `from . import aliexpress`, que le' o ATRIBUTO ja'
+# gravado no pacote `engine` — o dubl e em `sys.modules` e' ignorado e o teste
+# chama a API DE VERDADE. Ele passava "usando o preco de agora" porque o preco
+# de agora era real; as guardas de falha e' que denunciaram.
+_ali = types.ModuleType("engine.aliexpress_falso")
+_verdadeiro = engine.aliexpress
+engine.aliexpress = _ali
+BASE = dict(P, _id="1005009780622113")
+
+_ali.chamar = _ApiFalsa("18.21").chamar
+atual = vitrine.atualizar_preco(BASE)
+checar(atual["preco"] == "R$ 18,21", f"usa o preco de agora ({atual['preco']})")
+checar(atual["preco_em"] == __import__("datetime").date.today().strftime("%Y-%m-%d"),
+       "e carimba a data de HOJE, nao a da captura")
+checar(atual["preco"] != BASE["preco"],
+       "prova de sensibilidade: o preco REALMENTE mudou no caminho")
+
+# ⛔ o campo que nunca pode virar preco: o "original" inflado da loja
+checar("999" not in atual["preco"],
+       "o `target_original_price` NAO vira preco (era R$ 88,88 no Tapete)")
+
+for oq, api in (("a API cai", _ApiFalsa(estoura=RuntimeError("timeout"))),
+                ("o preco vem zerado", _ApiFalsa("0")),
+                ("o produto sumiu", _ApiFalsa(estoura=KeyError("products")))):
+    _ali.chamar = api.chamar
+    try:
+        vitrine.atualizar_preco(BASE)
+        checar(False, f"{oq}: DEIXOU passar com preco velho")
+    except vitrine.PrecoVelho:
+        checar(True, f"{oq}: levanta PrecoVelho e o produto nao vai ao ar")
+
+# produto sem id nao tem como ser confirmado
+try:
+    vitrine.atualizar_preco({k: v for k, v in BASE.items() if k != "_id"})
+    checar(False, "sem id: deixou passar")
+except vitrine.PrecoVelho:
+    checar(True, "sem id: levanta, em vez de postar preco nao confirmado")
+engine.aliexpress = _verdadeiro
+
 print("\n8. o PRECO ANTIGO do canal e' o MESMO que a pagina mostra")
 # ⛔ A GUARDA MAIS CARA DESTA LISTA. Sao duas contas para o mesmo numero: a
 # pagina usa `publicar_bio._antes` sobre a serie consolidada, o canal usa

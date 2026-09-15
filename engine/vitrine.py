@@ -344,6 +344,72 @@ def preco_antes_de(registro: dict) -> str:
     return f"R$ {maior:.2f}".replace(".", ",")
 
 
+class PrecoVelho(RuntimeError):
+    """O preco deste produto nao pode ser confirmado agora."""
+
+
+def atualizar_preco(p: dict) -> dict:
+    """Confere o preco na loja AGORA e devolve o produto com o preco de hoje.
+
+    ⛔ ORDEM DO BRYAN, 15/09/2026: "sempre vamos postar com os precos
+    atualizados do momento ou do dia". E ela veio de um defeito real, medido no
+    mesmo dia contra a API, sobre 9 produtos que estavam NO AR:
+
+        no ar R$ 20,11  ->  hoje R$  9,35        no ar R$  53,73  ->  R$  38,99
+        no ar R$ 15,95  ->  hoje R$  6,83        no ar R$ 142,10  ->  R$ 107,89
+        no ar R$ 65,87  ->  hoje R$ 51,99        no ar R$ 250,52  ->  R$ 218,99
+
+    NOVE DE NOVE, e sempre pra cima. A causa e' o desenho, nao um bug: o
+    `produtos_publicados.jsonl` e' um registro HISTORICO, append-only — o
+    `preco` gravado la' e' o do dia da captura, e a pagina e o canal liam esse
+    numero como se fosse o de hoje.
+
+    ⚠️ O ERRO ESTA' DO LADO "SEGURO" (anunciamos mais caro do que e'), e por
+    isso ninguem reclamaria — o comprador chega na loja e acha mais barato.
+    Mas ele apaga justamente o que este projeto vende: se o preco real caiu
+    mais do que o nosso, a queda que anunciamos esta' ERRADA PRA MENOS e o
+    achadinho de verdade passa despercebido.
+
+    ⛔ FALHA FECHADA: se a API nao responde, se o produto sumiu, ou se o preco
+    volta zerado, isto LEVANTA e o produto nao vai ao ar. Preco e' a unica
+    coisa do post que nao pode ser aproximada — post atrasado nao custa nada,
+    post com preco errado custa a confianca de quem clicou.
+    """
+    from . import aliexpress
+
+    pid = str(p.get("_id") or "").strip()
+    if not pid or pid in ("None", "0"):
+        raise PrecoVelho("produto sem id — nao da' pra confirmar o preco")
+    try:
+        r = aliexpress.chamar("aliexpress.affiliate.productdetail.get",
+                              product_ids=pid, target_currency="BRL",
+                              target_language="PT", country="BR")
+        d = (r["aliexpress_affiliate_productdetail_get_response"]["resp_result"]
+             ["result"]["products"]["product"][0])
+    except Exception as e:
+        raise PrecoVelho(f"{type(e).__name__}: {str(e)[:80]}") from e
+    try:
+        agora = float(d.get("target_sale_price") or 0)
+    except (TypeError, ValueError):
+        agora = 0.0
+    if agora <= 0:
+        raise PrecoVelho("a loja devolveu preco zerado")
+    # ⛔ O `target_original_price` NAO ENTRA AQUI, em hipotese nenhuma. Medido
+    # neste mesmo dia: ele e' ~2x o preco de venda em 7 dos 9 conferidos (e no
+    # Tapete era exatamente o R$ 88,88 que nos gravamos como se fosse preco).
+    # Quem decide o "de" e' a NOSSA serie, em `preco_antes_de`.
+    novo = dict(p)
+    novo["preco"] = f"R$ {agora:.2f}".replace(".", ",")
+    novo["preco_em"] = f"{date.today():%Y-%m-%d}"
+    # ⛔ E O "DE" TEM DE SER RECALCULADO CONTRA O PRECO NOVO. Sem esta linha o
+    # selo sairia com a conta do preco VELHO: o produto que caiu de R$ 31,90
+    # pra R$ 18,21 mostraria a queda de ontem, menor que a de hoje. Seria a
+    # queda falsa de 15/09 pelo avesso — errada pra menos, e do lado que nao
+    # incomoda ninguem, que e' justamente o que nunca se confere.
+    novo["preco_antes"] = preco_antes_de({"id": pid, "preco": novo["preco"]})
+    return novo
+
+
 def pendentes(limite: int | None = None) -> list[dict]:
     """Os produtos do catalogo que ainda NAO foram ao canal, os melhores na
     frente.
@@ -436,18 +502,34 @@ def do_catalogo(quantos: int, espaco: int = 90, ensaio: bool = False) -> int:
     """
     import time
 
-    fila = pendentes(quantos)
+    # ⚠️ A FILA VEM MAIOR QUE O LOTE, de proposito. Produto cujo preco nao se
+    # confirma e' PULADO, e sem folga um lote de tres viraria um lote de um num
+    # dia de API instavel — o oposto da constancia que a cadencia existe pra
+    # dar. Tres vezes e' folga barata: sao chamadas de ~2 s.
+    fila = pendentes(quantos * 3)
     if not fila:
         print("nada pendente — o catalogo inteiro ja' foi ao canal")
         return 0
-    n = 0
-    for i, p in enumerate(fila):
+    n = pulados = 0
+    for p in fila:
+        if n >= quantos:
+            break
+        try:
+            p = atualizar_preco(p)
+        except PrecoVelho as e:
+            pulados += 1
+            print(f"      [pulado] {p['nome'][:44]} — {e}")
+            continue
         t = postar(p, p.get("_canal"), ensaio=ensaio)
         if t:
             n += 1
             print(("[ensaio] " if ensaio else "[postado] ") + t.splitlines()[0])
-        if espaco and not ensaio and i < len(fila) - 1:
+            print(f"           preco conferido agora: {p['preco']}")
+        if espaco and not ensaio and n < quantos:
             time.sleep(espaco)
+    if pulados:
+        print(f"\n{pulados} pulado(s) por preco nao confirmado — e' falha "
+              f"fechada, nao defeito")
     return n
 
 

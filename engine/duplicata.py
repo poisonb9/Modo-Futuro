@@ -128,12 +128,26 @@ def sem_repetidos(produtos: list[dict]) -> list[dict]:
     cache = _cache()
     fim: list[dict] = []
     vetores: list[list | None] = []
+    # ⚠️ GRAVA NO MEIO DO CAMINHO, e nao so' no fim. MEDIDO em 15/09/2026:
+    # uma rodada de 124 produtos levou mais de 15 minutos, morreu num
+    # `timeout` perto do fim e perdeu os 122 vetores que ja' tinha buscado —
+    # trabalho de REDE, o mais caro que este modulo faz. Gravar a cada 10 faz
+    # a proxima tentativa recomecar de onde parou.
+    #
+    # ⭐ E nao e' so' contra timeout: vale pra queda de rede, Ctrl+C e runner
+    # efemero. O cache e' o unico lugar onde esse trabalho existe.
+    novos = 0
     for p in sorted(produtos, key=_preco):     # o mais barato chega primeiro
         img = p.get("imagem", "")
         # atalho 1: mesma foto, mesmo produto
         if any(img and img == q.get("imagem") for q in fim):
             continue
+        antes = len(cache)
         v = vetor_da_imagem(img, cache)
+        if len(cache) > antes:
+            novos += 1
+            if novos % 10 == 0:
+                _gravar(cache)
         if v is not None and any(
                 w is not None and _parecidos(v, w) >= LIMIAR for w in vetores):
             continue

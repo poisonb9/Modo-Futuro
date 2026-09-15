@@ -262,6 +262,16 @@ def produtos_todos() -> list[dict]:
             "imagem": d.get("imagem", ""),
             "queda": round(float(d.get("queda") or 0), 1),
             "vendas": int(d.get("vendas") or 0),
+            # ⭐ O QUE O PRODUTO RENDE POR VENDA. Cruzado com `vendas` no
+            # navegador, vira a ordem do catalogo: primeiro o que tem mais
+            # chance de virar dinheiro, nao o que entrou por ultimo.
+            #
+            # ⚠️ NAO E' CONVERSAO NOSSA. `vendas` e' o que o mercado inteiro
+            # comprou na loja, nao o que nos vendemos — nao vendemos nada
+            # ainda. Serve pra COMPARAR dois produtos; nao serve pra prometer
+            # faturamento. Vira medicao de verdade quando o `tracking_id` por
+            # canal existir e houver venda atribuida.
+            "ganho": round(float(d.get("ganho_previsto") or 0), 2),
             "antes": _antes(serie, d),
             "dias": _dias(serie, d),
             "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],

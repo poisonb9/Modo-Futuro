@@ -308,6 +308,15 @@
   .chip[aria-pressed="true"] {
     background: var(--tinta); color: var(--fundo); border-color: var(--tinta);
   }
+  /* ⭐ O "ver mais" ocupa a largura da grade: e' o fim da lista, nao mais um
+     cartao. Parecer cartao faria a pessoa tocar achando que e' produto. */
+  .ver-mais {
+    grid-column: 1 / -1; width: 100%;
+    border: 1px dashed var(--linha); background: none; cursor: pointer;
+    color: var(--fraco); border-radius: 14px; padding: 15px;
+    font: 600 13px/1 var(--mono); letter-spacing: -.01em;
+  }
+  .ver-mais:active { background: color-mix(in srgb, var(--tinta) 5%, transparent); }
   .contagem {
     font: 500 12px/1 var(--mono); color: var(--fraco);
     margin: 12px 0 0; display: block;
@@ -489,15 +498,38 @@
   // "mais barato" ordenam por coisas distintas e as duas listas podem nao se
   // cruzar — a mesma licao de campeoes x tendencia no garimpo.
   var FILTROS = [
-    { id: "todos",  rotulo: "Tudo",             cabe: function () { return true; } },
-    { id: "caiu",   rotulo: "Caiu de preço",    cabe: function (p) { return (p.queda || 0) >= 5; },
+    { id: "todos",  rotulo: "tudo",             cabe: function () { return true; },
+      // ⭐ A ORDEM DE ABERTURA E' A DECISAO MAIS CARA DA PAGINA.
+      // Antes era por DATA: o melhor produto podia estar em 40o lugar, e
+      // com centenas de pecas isso vira desperdicio puro. Agora abre
+      // pelo que tem mais chance de virar dinheiro.
+      //
+      // ⚠️ `ganho x vendas` NAO E' CONVERSAO NOSSA. `vendas` e' o que o
+      // mercado inteiro comprou na loja — nos nao vendemos nada ainda.
+      // Serve pra COMPARAR dois produtos, nao pra prometer faturamento.
+      // Vira medicao de verdade quando houver `tracking_id` por canal e
+      // venda atribuida.
+      ordem: function (a, b) {
+        return ((b.ganho || 0) * (b.vendas || 0))
+             - ((a.ganho || 0) * (a.vendas || 0));
+      } },
+    { id: "caiu",   rotulo: "caiu de preço",    cabe: function (p) { return (p.queda || 0) >= 5; },
       ordem: function (a, b) { return (b.queda || 0) - (a.queda || 0); } },
-    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2); } },
-    { id: "olho",   rotulo: "Sendo acompanhados", cabe: function (p) { return p.pontos >= 2; },
+    { id: "novo",   rotulo: "achados novos",    cabe: function (p) { return !(p.pontos >= 2); } },
+    { id: "olho",   rotulo: "sendo acompanhados", cabe: function (p) { return p.pontos >= 2; },
       ordem: function (a, b) { return (b.dias || 0) - (a.dias || 0); } },
-    { id: "barato", rotulo: "Mais baratos",     cabe: function () { return true; },
+    { id: "barato", rotulo: "mais baratos",     cabe: function () { return true; },
       ordem: function (a, b) { return num(a.preco) - num(b.preco); } }
   ];
+  // ⭐ QUANTOS APARECEM DE PRIMEIRA. O catalogo vai ter centenas de pecas e
+  // ninguem rola centenas — quem explora usa o filtro e a busca. O papel da
+  // abertura e' mostrar os CAMPEOES, nao o acervo inteiro.
+  //
+  // ⚠️ E isto NAO e' paginacao: os dados ja' estao todos no navegador, entao
+  // filtrar e buscar continuam INSTANTANEOS. O que muda e' so' quantos
+  // cartoes sao desenhados de uma vez.
+  var PASSO = 30;
+  var mostrando = PASSO;
   var atual = "todos";
   var canal = "";
 
@@ -751,8 +783,23 @@
       grade.appendChild(v);
     } else {
       var pedaco = document.createDocumentFragment();
-      lista.forEach(function (p) { pedaco.appendChild(montar(p)); });
+      lista.slice(0, mostrando).forEach(function (p) {
+        pedaco.appendChild(montar(p));
+      });
       grade.appendChild(pedaco);
+      // ⚠️ O BOTAO SO' APARECE SE HOUVER RESTO. Botao que nao faz nada ensina
+      // a pessoa a ignorar botao.
+      if (lista.length > mostrando) {
+        var falta = lista.length - mostrando;
+        var mais = el("button", "ver-mais",
+          "ver mais " + Math.min(falta, PASSO) + " de " + falta);
+        mais.type = "button";
+        mais.addEventListener("click", function () {
+          mostrando += PASSO;
+          desenhar();
+        });
+        grade.appendChild(mais);
+      }
     }
     // ⚠️ A CONTAGEM E' DA LISTA NA TELA, sempre. Numero de cabecalho que nao
     // bate com o que se ve' embaixo e' a mentira mais facil de cometer.
@@ -859,6 +906,7 @@
     });
     caixa.appendChild(seletor("Preço", deEstado, atual, function (v) {
       atual = v;
+      mostrando = PASSO;
       montarChips();
       desenhar();
     }, atual !== "todos"));
@@ -1032,6 +1080,12 @@
   montarProva();
   montarChips();
   desenhar();
-  busca.addEventListener("input", desenhar);
+  // ⚠️ BUSCAR REINICIA A CONTAGEM. Sem isto, quem ja' tinha clicado em "ver
+  // mais" e depois digita fica com um limite alto colado numa lista curta —
+  // e o oposto tambem: acha 80 resultados e ve' 30 sem entender por que.
+  busca.addEventListener("input", function () {
+    mostrando = PASSO;
+    desenhar();
+  });
 })();
 </script>

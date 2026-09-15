@@ -294,7 +294,14 @@ def produtos_todos() -> list[dict]:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
     _combina = _c.ler_cache()
-    limite = (date.today() - timedelta(days=2)).isoformat()
+    # ⚠️ 24 HORAS, e nao 48 — decisao do Bryan em 15/09/2026 ("48 e' muito").
+    #
+    # ⛔ E A TRAVA FALHA FECHADA AGORA. Ela era `if visto_em and visto_em <
+    # limite`, entao produto SEM leitura nenhuma na serie passava direto: a
+    # guarda so' barrava quem tinha data velha, e deixava entrar quem nao
+    # tinha data. "Preco reconferido nas ultimas 24h" tem de significar que a
+    # reconferencia EXISTE. Custo medido da mudanca: 158 -> 152 produtos.
+    limite = (date.today() - timedelta(days=1)).isoformat()
     vistos, saida = set(), []
     linhas = []
     for linha in arq.read_text(encoding="utf-8").splitlines():
@@ -311,13 +318,13 @@ def produtos_todos() -> list[dict]:
         if marca in vistos:
             continue
         visto_em = serie.get(d.get("id"), ("", 0, 0.0, ""))[3]
-        if visto_em and visto_em < limite:
+        if not visto_em or visto_em < limite:
             continue
         vistos.add(marca)
         quando = (d.get("quando") or "")[:10]
         saida.append({
             "nome": _nome_bonito(d),
-            "preco": d.get("preco", ""),
+            "preco": _preco_de_hoje(por_dia, d) or d.get("preco", ""),
             "link": d["link"],
             "imagem": d.get("imagem", ""),
             # ⛔ A QUEDA E' RECALCULADA AQUI, e nao lida do registro.
@@ -480,6 +487,46 @@ def _antes(serie: dict, d: dict) -> str:
     return f"R$ {maior:.2f}".replace(".", ",")
 
 
+def _preco_de_hoje(por_dia: dict, d: dict) -> str:
+    """O preco da ULTIMA leitura nossa, formatado. "" se nao houver serie.
+
+    ## ⛔ O DEFEITO QUE ESTA FUNCAO CONSERTA, medido em 15/09/2026
+
+    O `produtos_publicados.jsonl` e' um registro HISTORICO, append-only: o
+    campo `preco` de uma linha e' o preco do dia em que o produto foi
+    capturado. A pagina lia esse campo e o mostrava como se fosse o de hoje.
+
+    Conferido contra a API do AliExpress, sobre produtos que estavam NO AR:
+
+        na pagina R$  20,11   ultima leitura nossa R$   9,35   API 9.35
+        na pagina R$  65,87                        R$  51,99   API 51.99
+        na pagina R$ 142,10                        R$ 107,89   API 107.89
+        na pagina R$  88,88                        R$  22,69   API 22.73
+
+    14 de 14 diferentes, e sempre pra cima.
+
+    ⭐ E O MAIS IMPORTANTE: o preco CERTO ja' estava no nosso banco. O garimpo
+    reconfere todo dia e grava em `precos_vistos.jsonl`; a trava de 24h da
+    pagina consulta essa mesma serie e aprova com razao — e ai' a pagina
+    imprimia o numero velho da linha. O conserto nao custa uma chamada de API.
+
+    ⚠️ E ELE USA A MESMA `_precos_por_dia` do grafico e da queda, de proposito.
+    Tres numeros do mesmo cartao (preco, "de" riscado e linha do grafico) que
+    saissem de leituras diferentes poderiam se contradizer na mesma tela.
+
+    ⚠️ RESSALVA HONESTA: a serie consolida cada dia pelo MENOR preco visto, e
+    isso existe pra nao inflar a queda. Como preco EXIBIDO, o menor do dia e' o
+    lado arriscado — se duas variantes forem lidas sob o mesmo id, mostramos a
+    barata e o comprador pode achar mais caro. Nos 6 que deu pra cruzar, o
+    menor do dia era exatamente o `target_sale_price` da API. Quem elimina a
+    ressalva de vez e' a reconferencia de hora em hora.
+    """
+    dias = por_dia.get(d.get("id")) or {}
+    if not dias:
+        return ""
+    return f"R$ {dias[max(dias)]:.2f}".replace(".", ",")
+
+
 def _dias(serie: dict, d: dict) -> int:
     """Ha' quantos dias este produto esta' na nossa serie."""
     from datetime import date
@@ -541,7 +588,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             "nome": _nome_bonito(d),
             # o titulo cru fica: e' o que a dedup e o registro conhecem
             "nome_loja": d["nome"],
-            "preco": d.get("preco", ""),
+            "preco": _preco_de_hoje(por_dia, d) or d.get("preco", ""),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             "link": d["link"],
             "imagem": d.get("imagem", ""),
@@ -580,12 +627,19 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     # sozinha: quem clica encontra outro numero na loja. So' fica quem o
     # garimpo VIU de novo nas ultimas 48h (campeoes e varredura reconferem).
     from datetime import date, timedelta
-    limite = (date.today() - timedelta(days=2)).isoformat()
+    # ⚠️ 24 HORAS, e nao 48 — decisao do Bryan em 15/09/2026 ("48 e' muito").
+    #
+    # ⛔ E A TRAVA FALHA FECHADA AGORA. Ela era `if visto_em and visto_em <
+    # limite`, entao produto SEM leitura nenhuma na serie passava direto: a
+    # guarda so' barrava quem tinha data velha, e deixava entrar quem nao
+    # tinha data. "Preco reconferido nas ultimas 24h" tem de significar que a
+    # reconferencia EXISTE. Custo medido da mudanca: 158 -> 152 produtos.
+    limite = (date.today() - timedelta(days=1)).isoformat()
     for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
         if not d.get("link") or not d.get("nome"):
             continue
         visto_em = serie.get(d.get("id"), ("", 0, 0.0, ""))[3]
-        if visto_em and visto_em < limite:
+        if not visto_em or visto_em < limite:
             continue
         quando = (d.get("quando") or "")[:10]
         geral.append({
@@ -596,7 +650,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             "nome": _nome_bonito(d),
             # o titulo cru fica: e' o que a dedup e o registro conhecem
             "nome_loja": d["nome"],
-            "preco": d.get("preco", ""),
+            "preco": _preco_de_hoje(por_dia, d) or d.get("preco", ""),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             "link": d["link"],
             "imagem": d.get("imagem", ""),

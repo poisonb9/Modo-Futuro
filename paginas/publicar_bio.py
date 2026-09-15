@@ -521,10 +521,40 @@ def _preco_de_hoje(por_dia: dict, d: dict) -> str:
     menor do dia era exatamente o `target_sale_price` da API. Quem elimina a
     ressalva de vez e' a reconferencia de hora em hora.
     """
+    # ⭐ O INSTANTANEO VEM PRIMEIRO, quando existe. Ele e' a leitura MAIS
+    # RECENTE (`engine/precos.py`, de hora em hora); a serie e' consolidada
+    # pelo MENOR preco do dia, que esta' certo pra calcular queda e e' o lado
+    # arriscado pra preco exibido — o menor do dia pode ser uma promocao que
+    # acabou as 11h, e o visitante chegaria na loja e acharia mais caro.
+    agora = _precos_agora().get(str(d.get("id") or ""))
+    if agora and agora.get("preco"):
+        try:
+            return f"R$ {float(agora['preco']):.2f}".replace(".", ",")
+        except (TypeError, ValueError):
+            pass
     dias = por_dia.get(d.get("id")) or {}
     if not dias:
         return ""
     return f"R$ {dias[max(dias)]:.2f}".replace(".", ",")
+
+
+def _precos_agora() -> dict:
+    """O instantaneo de `engine/precos.py`, ou {} se nao houver.
+
+    ⚠️ LE' `RAIZ` NA HORA DA CHAMADA, e nao no import: os testes trocam
+    `publicar_bio.RAIZ` por uma pasta de mentira, e um caminho fixado no import
+    faria o teste ler o estado de PRODUCAO sem ninguem ver.
+    """
+    import json as _json
+    arq = RAIZ / "estado" / "precos_agora.json"
+    if not arq.exists():
+        return {}
+    try:
+        return _json.loads(arq.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        # falha aberta: sem instantaneo a pagina cai na serie do dia, que e' o
+        # comportamento anterior e continua honesto.
+        return {}
 
 
 def _dias(serie: dict, d: dict) -> int:

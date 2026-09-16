@@ -100,6 +100,83 @@ FORA_DOMINIOS = {"MLB-BOOKS", "MLB-EBOOKS", "MLB-MAGAZINES"}
 
 _cache: dict[str, tuple[str, float]] = {}
 
+# ⭐ COMISSAO-BASE DO PROGRAMA, por CATEGORIA-RAIZ (afiliado generalista).
+#
+# Decisao do Bryan em 16/09/2026: "vamos por a base de comissao que o site ja'
+# nos oferece" — em vez de exigir anotacao a mao (regra de 15/09) pra cada
+# produto. A anotacao do hub continua valendo como "ganhos extras", por cima.
+#
+# ⚠️ FONTE: documentacao de afiliados reproduzida em Hostinger (18/12/2025) e
+# Serasa; a tabela oficial fica no hub, atras de login (403 daqui). BATE COM A
+# MEDICAO: o "GANHOS 16%" visto na tela em 13/09 era um produto de Beleza.
+# `direta` = a pessoa comprou O produto divulgado; `indireta` = comprou outra
+# coisa dentro do cookie. O ganho previsto usa a DIRETA.
+#
+# ⚠️ Raiz que nao esta' aqui recebe 0 — nao um chute. E' o lado que nao mente.
+COMISSAO_BASE = {   # id da raiz: (direta, indireta)
+    "MLB1246": (16.0, 8.0),   # Beleza e Cuidado Pessoal
+    "MLB1430": (16.0, 8.0),   # Calçados, Roupas e Bolsas
+    "MLB1276": (16.0, 8.0),   # Esportes e Fitness
+    "MLB1574": (8.0, 4.0),    # Casa, Móveis e Decoração
+    "MLB263532": (8.0, 4.0),  # Ferramentas
+    "MLB1132": (8.0, 4.0),    # Brinquedos e Hobbies
+    "MLB1384": (8.0, 4.0),    # Bebês
+    "MLB3937": (8.0, 4.0),    # Joias e Relógios
+    "MLB3025": (8.0, 4.0),    # Livros, Revistas e Comics
+    "MLB1144": (8.0, 4.0),    # Games
+    "MLB5672": (8.0, 4.0),    # Acessórios para Veículos
+    "MLB1500": (8.0, 4.0),    # Construção
+    "MLB1000": (4.0, 2.0),    # Eletrônicos, Áudio e Vídeo
+    "MLB1051": (4.0, 2.0),    # Celulares e Telefones
+    "MLB1648": (4.0, 2.0),    # Informática
+    "MLB5726": (4.0, 2.0),    # Eletrodomésticos
+    "MLB1039": (4.0, 2.0),    # Câmeras e Acessórios
+    "MLB1403": (0.0, 0.0),    # Alimentos e Bebidas
+}
+
+_raizes: dict[str, str] | None = None
+
+
+def _arquivo_raizes():
+    from pathlib import Path as _P
+    return _P(__file__).resolve().parent.parent / "estado" / "ml_raizes.json"
+
+
+def raiz_da_categoria(category_id: str) -> str:
+    """Id da categoria-raiz de `category_id` (ex.: MLB73055 -> MLB5726).
+
+    ⚠️ Com cache em disco: sao ~30 mil categorias e a raiz nunca muda; sem
+    cache cada produto custaria uma chamada a mais pra sempre.
+    """
+    global _raizes
+    import json as _j
+    if _raizes is None:
+        arq = _arquivo_raizes()
+        try:
+            _raizes = _j.loads(arq.read_text(encoding="utf-8")) if arq.exists() else {}
+        except ValueError:
+            _raizes = {}
+    if not category_id:
+        return ""
+    if category_id in _raizes:
+        return _raizes[category_id]
+    try:
+        caminho = _get(f"/categories/{category_id}").get("path_from_root") or []
+    except requests.HTTPError:
+        return ""
+    raiz = caminho[0]["id"] if caminho else ""
+    if raiz:
+        _raizes[category_id] = raiz
+        arq = _arquivo_raizes()
+        arq.parent.mkdir(parents=True, exist_ok=True)
+        arq.write_text(_j.dumps(_raizes, ensure_ascii=False, indent=0), encoding="utf-8")
+    return raiz
+
+
+def comissao_base(category_id: str) -> float:
+    """A comissao DIRETA da raiz desta categoria, em %. 0 se desconhecida."""
+    return COMISSAO_BASE.get(raiz_da_categoria(category_id), (0.0, 0.0))[0]
+
 
 def _arquivo_comissao():
     from pathlib import Path as _P
@@ -484,6 +561,8 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
         if not (nome and link):
             continue
         com = comissao_valida(pid)
+        cat = vencedor.get("category_id") or ""
+        base = comissao_base(cat)
         brutos.append({
             "nome": nome, "link": link,
             "imagem": (r.get("pictures") or [{}])[0].get("url", ""),
@@ -492,8 +571,12 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
             "vendedores": len(itens),
             "frete_gratis": bool((vencedor.get("shipping") or {}).get("free_shipping")),
             "dominio": r.get("domain_id") or "",
+            "categoria_ml": cat,
             "loja": "Mercado Livre", "_id": pid, "_tipo": "PRODUCT",
-            "comissao": (com or {}).get("pct"),
+            # ⭐ a BASE do programa pela categoria-raiz; a anotacao do hub,
+            # quando existir e estiver no prazo, e' o "ganhos extras" por cima
+            "comissao_base": base,
+            "comissao": (com or {}).get("pct") or base,
             "comissao_vista_em": (com or {}).get("visto", ""),
         })
     # ⭐ O DOMINIO MAJORITARIO DA BUSCA E' O PRODUTO PEDIDO. "liquidificador"
@@ -561,7 +644,10 @@ def so_monetizados(produtos: list[dict]) -> list[dict]:
     comissao velha e' pior que catalogo pequeno — e' a mesma razao pela qual o
     preco reconferido em 48h ja' derruba produto bom.
     """
-    return [p for p in produtos if p.get("comissao")]
+    # ⭐ Desde 16/09/2026 a comissao-BASE do programa conta (decisao do
+    # Bryan). Fica de fora so' quem esta' em raiz que paga 0 (Alimentos) ou
+    # cuja raiz nao se conhece — 0 e' "nao sei", e "nao sei" nao publica.
+    return [p for p in produtos if float(p.get("comissao") or 0) > 0]
 
 
 def por_canal(canal: str, quantos: int = 12) -> list[dict]:

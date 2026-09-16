@@ -80,6 +80,13 @@ jobs:
           # ⚠️ A VARREDURA VEM DEPOIS DOS CANAIS, e nunca antes: ela e'
           # bonus (so' alimenta o historico de preco) e nao pode consumir
           # cota de API que o garimpo de verdade precisa.
+          # ⭐ O MERCADO LIVRE, desde 16/09/2026: busca dirigida com 3 termos
+          # do canal por dia (rodizio). SERIAL, nao em paralelo — o ML limita
+          # por aplicacao e 6 fios ja' tomaram 429. `|| true`: o ML fora do
+          # ar nao pode derrubar a rodada do AliExpress.
+          for c in truque.importado cozinha.importada achadinhos.instantaneos fatura.chora atefalhar; do
+            echo "===== ML $c"; python -X utf8 -m engine.garimpo --ml --canal "$c" --quantos 4 || true
+          done
           echo "===== varredura (so historico)"
           python -X utf8 -m engine.garimpo --varrer || true
           echo "===== vigia (itens que acompanhamos de perto)"
@@ -126,7 +133,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/ml_raizes.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

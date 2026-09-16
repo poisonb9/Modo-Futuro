@@ -8229,3 +8229,7 @@
 {"id": 1005006967291865, "preco": 14.92, "vol": 45647, "nota": 98.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 31.08, "loja": "Stone's Store", "quando": "2026-09-16"}
 {"id": 1005007170817720, "preco": 17.64, "vol": 44674, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 35.28, "loja": "Stone's Store", "quando": "2026-09-16"}
 {"id": 1005009806732630, "preco": 21.85, "vol": 48666, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 46.5, "loja": "Stone's Store", "quando": "2026-09-16"}
+{"id": "MLB26516932", "preco": 13.44, "vol": 0, "loja": "Mercado Livre", "quando": "2026-09-16"}
+{"id": "MLB24335576", "preco": 16.9, "vol": 0, "loja": "Mercado Livre", "quando": "2026-09-16"}
+{"id": "MLB27808523", "preco": 14.06, "vol": 0, "loja": "Mercado Livre", "quando": "2026-09-16"}
+{"id": "MLB30003226", "preco": 14.9, "vol": 0, "loja": "Mercado Livre", "quando": "2026-09-16"}

@@ -554,6 +554,44 @@ def garimpar(canal: str, quantos: int = 8,
     return escolhidos, motivos
 
 
+def termos_ml_de_hoje(canal: str, por_dia: int = 3) -> list[str]:
+    """Os termos do canal que o ML busca HOJE — rodizio pelo dia do ano.
+
+    ⚠️ 3 por dia e nao os 20: cada busca dirigida custa 15-30 s e o ML
+    limita por aplicacao (429 medido em 16/09). Em uma semana o canal
+    inteiro passa; o AliExpress continua com os 20 de uma vez porque la' a
+    busca e' uma chamada por termo.
+    """
+    termos = CANAIS.get(canal, {}).get("termos") or []
+    if not termos:
+        return []
+    i = (date.today().timetuple().tm_yday * por_dia) % len(termos)
+    return [termos[(i + k) % len(termos)] for k in range(min(por_dia, len(termos)))]
+
+
+def garimpar_ml(canal: str, quantos: int = 4, guardar: bool = True) -> list[dict]:
+    """O garimpo diario do ML: busca dirigida, registro e PRIMEIRO PONTO da serie.
+
+    ⭐ O ponto da serie vai junto com o registro, e nao so' na proxima hora
+    cheia: a pagina so' publica produto com leitura nas ultimas 24h — sem
+    isto o produto entraria no catalogo e ficaria invisivel ate' o
+    `precos.py` passar.
+    """
+    escolhidos = do_mercado_livre(canal, quantos, termos_ml_de_hoje(canal))
+    print(f"ML {canal}: {len(escolhidos)} escolhido(s) de {termos_ml_de_hoje(canal)}")
+    for x in escolhidos:
+        print(f"   R$ {x['preco_num']:>8.2f}  {x['_comissao']:>4.0f}%  "
+              f"{x['vendedores']:>2} vend  {x['nome'][:50]}")
+    if guardar and escolhidos:
+        from . import precos, resultado
+        for x in escolhidos:
+            resultado.anotar_publicado(x, canal, "garimpo-ml")
+        n = precos.anotar_serie({x["_id"]: x["preco_num"] for x in escolhidos},
+                                "Mercado Livre")
+        print(f"   registrados {len(escolhidos)}; serie +{n}")
+    return escolhidos
+
+
 # ⚠️ A VARREDURA EXISTE SO' PRA ALIMENTAR O HISTORICO DE PRECO. Nenhum destes
 # termos vira post: sao categorias largas, escolhidas pra cobrir o que o
 # publico brasileiro compra, e nao pra render video.
@@ -852,9 +890,17 @@ def main() -> None:
                    help="acompanha a lista VIGIA e mostra o que mudou")
     a.add_argument("--campeoes", action="store_true",
                    help="acompanha, pelo ID, os que mais vendem")
+    a.add_argument("--ml", action="store_true",
+                   help="garimpo do Mercado Livre pro --canal (busca dirigida, "
+                        "3 termos por dia em rodizio)")
     a.add_argument("--tendencia", action="store_true",
                    help="quem esta' ACELERANDO, e quem apareceu ja' grande")
     o = a.parse_args()
+    if o.ml:
+        if not o.canal:
+            raise SystemExit("--ml precisa de --canal")
+        garimpar_ml(o.canal, o.quantos, guardar=not o.ensaio)
+        return
     if o.tendencia:
         esc = escalada()
         print(f"ESCALADA — {len(esc)} produto(s) acelerando:")
@@ -923,36 +969,62 @@ if __name__ == "__main__":
 # ⚠️ E O COOKIE DO ML E' DE 24 HORAS. Nao da' pra consertar aqui: se conserta
 # na chamada do clipe, que precisa gerar clique no MESMO dia.
 
-def do_mercado_livre(canal: str, quantos: int = 5) -> list[dict]:
-    """Os mais vendidos do ML deste canal, ja' filtrados pela faixa de preco.
+def do_mercado_livre(canal: str, quantos: int = 5,
+                     termos: list[str] | None = None) -> list[dict]:
+    """Produtos do ML deste canal, pela BUSCA DIRIGIDA com os termos do canal.
 
-    ⚠️ REUSA O `serve()`? NAO — e de proposito. O ML nao devolve nota,
-    volume nem comissao no mesmo formato, e forcar o filtro do AliExpress aqui
-    reprovaria tudo por campo ausente. O corte que faz sentido nos dois e' a
-    FAIXA DE PRECO, que e' promessa do canal; o resto e' proprio de cada fonte.
+    ⛔ NAO E' MAIS `mais_vendidos`: os mais vendidos do ML sao papel higienico
+    e Elseve (medido 15/09). Desde 16/09/2026 a fonte e' `mercadolivre.buscar`
+    com os MESMOS termos que o garimpo do AliExpress ja' usa por canal —
+    produto real (2+ vendedores), menor anuncio, sem peca nem livro.
+
+    ⚠️ REUSA O `serve()`? NAO — e de proposito. O ML nao devolve nota nem
+    volume no formato do AliExpress. O corte comum e' a FAIXA DE PRECO do
+    canal; o resto e' proprio de cada fonte.
+
+    ⚠️ Custa ~15-30 s por termo (a busca pagina e expande por marca). Por
+    isso `termos` e' um recorte: o garimpo diario passa uns 3 por canal, e
+    o pedido sob demanda passa o termo pedido.
     """
     from . import mercadolivre as ml
     perfil = CANAIS.get(canal)
     if not perfil:
         return []
-    saida = []
-    for cat, _nome in ml.CATEGORIAS.get(canal, []):
-        for p in ml.mais_vendidos(cat, 12):
-            preco = _num(p["preco"].replace("R$", "").replace(",", ".").strip())
+    saida, vistos = [], set()
+    for termo in (termos or perfil["termos"][:3]):
+        try:
+            achados = ml.buscar(termo, quantos=6, canal=canal)
+        except Exception as e:                       # noqa: BLE001
+            print(f"  [!] ML {termo!r}: {type(e).__name__} {str(e)[:60]}")
+            continue
+        for p in achados:
+            if p["_id"] in vistos:
+                continue
+            preco = p["preco_num"]
             if not (perfil["min"] <= preco <= perfil["max"]):
                 continue
+            vistos.add(p["_id"])
+            com = float(p.get("comissao") or 0)
             saida.append(dict(p, fonte="mercadolivre",
                               preco_em=f"{date.today():%Y-%m-%d}",
-                              categoria=_nome, _vendas=0, _nota=0.0,
-                              _comissao=16.0, _queda=0.0))
+                              categoria=termo, _vendas=p["vendedores"], _nota=0.0,
+                              _comissao=com, _queda=0.0,
+                              _ganho=round(preco * com / 100, 2)))
+    saida = ml.so_monetizados(saida)
     # ⭐ O CORTE EDITORIAL VEM AQUI, sobre a lista INTEIRA e de uma vez so'.
-    # Dentro do laco ele gastaria uma chamada de modelo POR PRODUTO — 12
-    # onde 1 basta, e a cota gratis e' o recurso escasso.
-    #
-    # ⚠️ E so' no Mercado Livre: no AliExpress vender muito e' sinal de
-    # qualidade; aqui e' sinal de commodity. O mesmo numero significa o
-    # contrario em cada fonte.
     fica, cai = rende_video.peneirar_com_ia(saida)
     for nome, porque in cai:
         print(f"  [editorial] fora: {nome[:40]}… — {porque}")
-    return fica[:quantos]
+    # ⭐ INTERCALA POR TERMO: sem isto os 4 do dia sairiam todos do primeiro
+    # termo (medido 16/09: quatro peneiras). Um de cada, depois o segundo de
+    # cada — a leva do dia tem variedade e cada termo ainda entra pelo mais
+    # barato.
+    por_termo: dict[str, list[dict]] = {}
+    for x in fica:
+        por_termo.setdefault(x["categoria"], []).append(x)
+    rodizio: list[dict] = []
+    while len(rodizio) < quantos and any(por_termo.values()):
+        for fila in por_termo.values():
+            if fila and len(rodizio) < quantos:
+                rodizio.append(fila.pop(0))
+    return rodizio

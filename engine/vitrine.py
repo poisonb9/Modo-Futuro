@@ -83,19 +83,33 @@ ROTULO_BOTAO = "Ver na loja"
 
 
 def postar_texto(p: dict, origem: str | None = None,
-                 com_link: bool = True) -> str:
+                 com_link: bool = True, gancho: str = "") -> str:
     """O post de um produto.
 
     ⚠️ MOSTRA o que e', nao pergunta se a pessoa quer. Mesma regra medida dos
     titulos (§23.9: pergunta converteu 0 de 4; o que afirma, 7 de 14) e mesma
     regra da chamada no fim do clipe. Nao ha' razao pra um post obedecer logica
     diferente — e' a mesma pessoa decidindo se clica.
+
+    ⭐ A PRIMEIRA LINHA DEPENDE DE TER CARTAZ, e essa e' a decisao do Bryan de
+    16/09/2026. Com cartaz, o nome do produto JA' esta' na imagem, em corpo
+    grande — repeti-lo aqui gastava a linha mais alta do post pra dizer o que
+    a pessoa acabou de ler. No lugar dele vai o `gancho`: um fato medido sobre
+    o produto (ver `engine/gancho.py`).
+
+    ⛔ SEM CARTAZ, O NOME VOLTA. O post em texto puro e' a reserva de quando a
+    foto nao baixa, e la' nao ha' imagem nenhuma dizendo o que e' o produto —
+    um post que comeca em "Caiu 43%" e nunca diz 43% de QUE e' pior do que o
+    post repetitivo.
     """
     # ⚠️ O EMOJI E' ROTULO, NAO ENFEITE. Cada um marca um campo sempre no
     # mesmo lugar, pra quem rola o feed no polegar achar o preco sem ler. Por
     # isso sao POUCOS e FIXOS: emoji sorteado a cada post vira ruido, e ai' a
     # pessoa volta a ter de ler tudo — que e' exatamente o que ele evita.
-    linhas = ["🏷️ " + p["nome"], ""]
+    if gancho and not com_link:
+        linhas = ["✨ " + gancho, ""]
+    else:
+        linhas = ["🏷️ " + p["nome"], ""]
     if p.get("preco"):
         linhas.append("💰 " + p["preco"])
     if p.get("loja"):
@@ -179,6 +193,29 @@ def cartaz_de(p: dict, tempo: int = 25) -> bytes | None:
         print(f"      [!] sem cartaz ({type(e).__name__}: {str(e)[:70]}); "
               f"o post vai em texto")
         return None
+
+
+def _gancho_de(p: dict) -> str:
+    """O gancho deste produto, ou "" se nao deu.
+
+    ⛔ FALHA ABERTA, e de proposito: gancho e' melhora, nao conteudo. Modelo
+    fora do ar, cota seca, serie ilegivel — nada disso pode segurar um post
+    que ja' tem foto, preco e link. Sem gancho a primeira linha volta a ser o
+    nome, que e' o comportamento de ontem.
+    """
+    try:
+        from . import gancho as _g
+        from . import garimpo
+        try:
+            pid = int(p.get("_id") or p.get("id") or 0)
+        except (TypeError, ValueError):
+            pid = 0
+        serie = garimpo.historico().get(pid, []) if pid else []
+        return _g.de(p, serie)
+    except Exception as e:
+        print(f"      [!] sem gancho ({type(e).__name__}: {str(e)[:60]}); "
+              f"a legenda volta a abrir pelo nome")
+        return ""
 
 
 def _ja_postados() -> dict:
@@ -291,8 +328,12 @@ def postar(bruto: dict, origem: str | None = None,
     foto = cartaz_de(p)
     entregue = False
     if foto is not None:
+        # ⚠️ O GANCHO SO' SE PEDE QUANDO HA' CARTAZ. Ele custa uma chamada de
+        # modelo, e no caminho de texto puro ele nem seria usado — a primeira
+        # linha la' volta a ser o nome.
         entregue = telegram.enviar_foto(
-            foto, postar_texto(p, origem, com_link=False), destino,
+            foto, postar_texto(p, origem, com_link=False,
+                               gancho=_gancho_de(p)), destino,
             botao=(ROTULO_BOTAO, p["link"]))
     if not entregue:
         entregue = telegram.enviar(texto, destino)
@@ -467,8 +508,40 @@ def pendentes(limite: int | None = None) -> list[dict]:
         peso = _num(r.get("ganho_previsto", 0)) * float(r.get("vendas") or 0)
         fila.append((peso, p))
     fila.sort(key=lambda x: x[0], reverse=True)
-    escolhidos = [p for _, p in fila]
+    escolhidos = _intercalar([p for _, p in fila])
     return escolhidos[:limite] if limite else escolhidos
+
+
+def _intercalar(fila: list[dict]) -> list[dict]:
+    """Um de canal, um de varredura, um de canal — mantendo a ordem de cada.
+
+    ⭐ DECISAO DO BRYAN, 16/09/2026. Por `ganho x vendas` puro, os primeiros da
+    fila eram ferramenta, carro e jardim: produtos da VARREDURA, que rendem bem
+    e nao vem de canal nenhum. O canal abria com tres posts seguidos sem linha
+    de origem — "do Achadinho Make", "do Pago menos" — e e' justamente ela que
+    impede o feed de virar um monte anonimo de link.
+
+    ⚠️ E A FRONTEIRA NAO E' UM CAMPO NOVO: e' `ORIGEM`. Produto cujo canal esta'
+    la' tem como se apresentar; o resto, nao. Inventar uma flag `_varredura`
+    criaria uma segunda verdade que pode divergir daquela — e quem decide e' a
+    mesma tabela que escreve a linha no post.
+
+    ⛔ NADA E' DESCARTADO E NENHUMA ORDEM SE PERDE. Acabando um dos dois lados,
+    o outro segue inteiro na ordem em que estava: isto reordena a fila, nao a
+    filtra. A varredura nao vai pro fim (ela rende) nem lidera (ela nao se
+    apresenta) — ela alterna.
+    """
+    de_canal = [p for p in fila if ORIGEM.get(p.get("_canal") or "")]
+    de_varredura = [p for p in fila if not ORIGEM.get(p.get("_canal") or "")]
+    saida: list[dict] = []
+    # ⚠️ COMECA PELO CANAL. Empatado o resto, a primeira coisa que alguem ve'
+    # ao abrir o canal tem de ter origem.
+    for a, b in zip(de_canal, de_varredura):
+        saida.append(a)
+        saida.append(b)
+    n = min(len(de_canal), len(de_varredura))
+    saida += de_canal[n:] + de_varredura[n:]
+    return saida
 
 
 def _do_manifesto(caminho: Path, ensaio: bool) -> int:

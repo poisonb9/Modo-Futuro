@@ -222,3 +222,41 @@ do fio virava "sem vendedor" (consertado: só 404 é ausência).
 vai pra nuvem; (2) `--fechamento` ainda não entra no relato diário
 automático; (3) publicar no site o que `--atender` acha ainda é manual (o
 pedido sob demanda); (4) OpenRouter zerou as 50/dia em 3 contas hoje.
+
+---
+
+## 8. NOITE DE 16/09 — LOJA, MULTÔMETRO E PUBLICAÇÃO DIÁRIA
+
+**Decisões do Bryan (na ordem em que vieram):**
+- selo da loja: **fora da foto** (cobria legenda), **fora do rodapé** (cortava
+  "no radar"), **não acima do preço** (dividia o cartão; vermelho = negação).
+  Ficou: **cinza vazado no fim do nome, tinta na cor da loja** (ML = azul).
+- **multômetro = radar, não venda** — "mudar no futuro pega mal". Definição:
+  por produto, maior preço visto − menor visto (piso 2%), somando todo produto
+  que já passou pelo radar; **só sobe por construção**. Rótulo final:
+  **"de garimpo já entregue"**. Dentro da prova, uma linha (32 px), curva
+  suave + área, **sem bolinhas** (esticavam). Hoje R$ 2.543,16 / 877 itens.
+- "32" sem o "de 148" (quebrava linha); no celular os 3 seletores mostram
+  rótulo OU valor; cartão **não estica** pelo vizinho (`align-items: start`);
+  nome inteiro, sem reticências.
+
+**Mercado Livre na loja:** 3 produtos (cozinha) no ar; garimpo diário por
+busca dirigida (3 termos/dia, `--ml`), comissão-base por raiz (16/8/4/0),
+reconferência horária + série própria.
+
+**Descobertas ruins:** a humanização de nomes **não estava em workflow
+nenhum** (cache parado em 14/09, 36 títulos crus); e o workflow da nuvem
+**não tem chave de modelo** — Gemini/OpenRouter só existem no `.env` local.
+
+**Resposta:** tarefa local `AchadinhoTotal_Publicar_Diario` (S4U, **11:30
+UTC**, `publicar_diario_agendado.ps1`): git pull → nomes curtos → publica e
+confere → devolve cache. ⛔ S4U **não tem PATH do usuário**: o wrapper põe
+Node, Git (`cmd`, `mingw64\bin`, `usr\bin` pro `rm`) e **GitHub CLI** (`gh`)
+no PATH — três disparos falharam com `FileNotFoundError` até achar o `gh`.
+
+⛔ **Heredoc comeu escapes 3x hoje** (`\n`, `\b` no PATH, `\d` em regex).
+Regra reforçada: arquivo com escape vai por Write/Edit ou PowerShell.
+
+**Aberto:** "R$ 73,69 ~~R$ 73,69~~ ↓21%" no cartão do topo (antes = preço com
+selo de queda) — contradição na mesma tela, a conferir; símbolos oficiais das
+lojas (kit de afiliado) no lugar das siglas.

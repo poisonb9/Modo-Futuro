@@ -347,6 +347,7 @@ def produtos_externos() -> dict[str, dict]:
             "canal": cat,
             "id": pid,
             "combina": [],
+            "loja": cat,
         })
     for loja, n in sem_mapa.items():
         print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "
@@ -521,6 +522,12 @@ def produtos_todos() -> list[dict]:
             # de palavras, que e' pior mas e' conhecida.
             "id": str(d.get("id") or d.get("nome")),
             "combina": _combina.get(str(d.get("id") or d.get("nome")), []),
+            # ⭐ A LOJA E' CAMPO DO CARTAO desde 16/09/2026 — decisao do Bryan:
+            # selo de canto na cor da loja, so' a marca, sem escrever o nome;
+            # e um seletor "Loja" ao lado de "Categoria". E' o que torna
+            # honesto mostrar o MESMO produto duas vezes (Brasil rapido x
+            # AliExpress barato): o comprador escolhe o prazo, nao a gente.
+            "loja": LOJA_DA_FONTE.get(d.get("fonte") or "aliexpress", "AliExpress"),
         })
     # ⭐ O MESMO PRODUTO DE DOIS LOJISTAS VIRA UM CARTAO SO'.
     #
@@ -532,7 +539,29 @@ def produtos_todos() -> list[dict]:
     # (DIFERENTES) pontua mais alto que "Espelho x Espelho" (O MESMO). Ver
     # `engine/duplicata.py` — quem decide e' a foto.
     from engine import duplicata
-    return duplicata.sem_repetidos(saida)
+    # ⛔ A DEDUPE E' POR LOJA, nunca ENTRE lojas. O mesmo liquidificador no
+    # AliExpress e no Mercado Livre tem a MESMA foto — e e' pra aparecer nos
+    # dois cartoes (regra do Bryan, 16/09: "publica o melhor de cada canal,
+    # o cliente escolhe na hora"). Fundir os dois esconderia justamente a
+    # escolha que a pagina existe pra dar.
+    por_loja: dict[str, list[dict]] = {}
+    for x in saida:
+        por_loja.setdefault(x["loja"], []).append(x)
+    fim: list[dict] = []
+    for grupo in por_loja.values():
+        fim += duplicata.sem_repetidos(grupo)
+    # ordem original (a vitrine decide a ordem, nao a dedupe)
+    pos = {id(x): i for i, x in enumerate(saida)}
+    return sorted(fim, key=lambda x: pos[id(x)])
+
+
+# fonte no registro -> nome da loja no cartao (o que o seletor "Loja" mostra)
+LOJA_DA_FONTE = {
+    "aliexpress": "AliExpress",
+    "mercadolivre": "Mercado Livre",
+    "shopee": "Shopee",
+    "shein": "Shein",
+}
 
 
 # ⚠️ O SITE MAE NAO FALA DE CANAL.

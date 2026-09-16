@@ -85,13 +85,15 @@ try:
     p0 = prods[0] if prods else {}
     checar(p0.get("canal") == "Nike" and p0.get("id") == "awin:12",
            "canal 'Nike' e id prefixado 'awin:' (nao colide com o AliExpress)")
+    checar(p0.get("loja") == "Nike", "a loja da externa e' a propria categoria (selo Nike)")
     checar(p0.get("pontos") == 0 and p0.get("serie") == [] and p0.get("queda") == 0,
            "sem serie: 0 pontos, sem grafico, sem queda — cai em 'achados novos'")
     checar(ext["Nike"]["passo"] == 50 and ext["Nike"]["arquivo"] == "nike.json",
            "passo 50 e arquivo nike.json (pedido do Bryan)")
     chaves = set(p0)
     esperadas = {"nome", "preco", "link", "imagem", "queda", "vendas", "ganho",
-                 "antes", "dias", "pontos", "serie", "visto", "canal", "id", "combina"}
+                 "antes", "dias", "pontos", "serie", "visto", "canal", "id", "combina",
+                 "loja"}   # loja: campo do cartao desde 16/09 (selo + seletor)
     checar(chaves == esperadas, f"o cartao tem EXATAMENTE os campos do AliExpress (dif: {chaves ^ esperadas})")
 
     print()

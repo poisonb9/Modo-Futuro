@@ -40,8 +40,13 @@ checar('var SO_NO_SEGMENTO = ["Calçados"];' in HTML,
        "Calçados so' existe dentro do segmento (regra B)")
 # ⛔ o titulo do bloco tem de DERIVAR do teto. Se alguem trocar o teto pra 300
 # e o titulo continuar escrito "250", a pagina passa a mentir por conta.
-checar('"Até R$ " + TETO_VITRINE' in HTML and '"Acima de R$ " + TETO_VITRINE' in HTML,
-       "os titulos dos blocos derivam do teto, nao sao texto cravado")
+# ⚠️ Desde 16/09/2026 o teto e' do CONTEXTO: 250 na categoria, 150 dentro
+# da loja (`tetoAtual()`). O titulo continua derivando do numero, nunca
+# escrito a mao — e' isso que a guarda protege, nao o nome da variavel.
+checar('"Até R$ " + tetoAtual()' in HTML and '"Acima de R$ " + tetoAtual()' in HTML,
+       "os titulos dos blocos derivam do teto (tetoAtual), nao sao texto cravado")
+checar("var TETO_LOJA = 150;" in HTML and 'return (loja && !canal) ? TETO_LOJA : TETO_VITRINE;' in HTML,
+       "dentro da loja o corte e' 150; na categoria e na principal continua 250")
 # ⚠️ SO' O CODIGO, sem os comentarios — a primeira versao desta checagem
 # reprovou por causa de um "Ate' R$ 250" escrito DENTRO de um comentario que
 # explica a regra. Guarda com alarme falso e' pior que guarda nenhuma: na vez
@@ -65,8 +70,8 @@ print()
 print("3. NAVEGAR E' PASSIVO, BUSCAR E' INTENCAO")
 vis = re.search(r"function visivel\(p\) \{(.*?)\n  \}", HTML, re.S)
 corpo = vis.group(1) if vis else ""
-checar("if (canal) { return true; }" in corpo,
-       "escolher a categoria mostra tudo dela")
+checar("if (canal || loja) { return true; }" in corpo,
+       "escolher a categoria OU a loja mostra tudo dela")
 checar("busca.value" in corpo, "digitar na busca mostra tudo que casa")
 checar("return !caro(p) && !soNoSegmento(p);" in corpo,
        "e so' quem nao pediu nada ve' a lista recortada")

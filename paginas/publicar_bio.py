@@ -263,6 +263,10 @@ EXTERNAS = {
     "Leveros BR": ("Leveros", "leveros.json", 50),
     "Exypna": ("Exypna", "exypna.json", 50),
     "Radiale Pneus": ("Radiale Pneus", "radiale.json", 50),
+    # aprovados na noite de 16/09
+    "Kabum BR": ("Kabum", "kabum.json", 50),
+    "Lacoste BR": ("Lacoste", "lacoste.json", 50),
+    "Shark-Ninja BR": ("Shark Ninja", "sharkninja.json", 50),
 }
 # ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria

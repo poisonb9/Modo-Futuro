@@ -360,6 +360,71 @@ def produtos_externos() -> dict[str, dict]:
     return saida
 
 
+def economia(dados: list[dict], dias: int = 14) -> dict:
+    """Quanto a menos se paga HOJE comprando um de cada produto que caiu —
+    e a mesma soma, dia a dia, pra linha.
+
+    ⭐ Pedido do Bryan em 16/09/2026: "um grafico medindo o valor que ja' foi
+    economizado, somando o desconto de cada produto: custava 20, hoje custa
+    10, esses 10 e' o economizado — montar isso num montante".
+
+    ⚠️ E' ECONOMIA OFERECIDA, nao realizada: a operacao ainda nao tem venda
+    medida, entao o numero diz "comprando um de cada hoje", e o rotulo da
+    pagina diz isso. Inflar seria facil (somar o "de/por" da loja); por isso
+    a conta e' a MESMA do cartao: `antes` (maior dia visto por nos) menos o
+    preco de hoje, e so' quando `antes` existe (queda real >= 2%).
+
+    ⚠️ A linha e' calculada com a serie consolidada (`_precos_por_dia`), a
+    MESMA do grafico de cada cartao: pra cada dia D, soma de (maior preco
+    ate' D) - (ultimo preco ate' D), sobre os produtos que estao no ar HOJE.
+    So' produtos de hoje, de proposito: o que saiu do ar nao "economiza".
+    """
+    from datetime import date, timedelta
+    hoje_total, n = 0.0, 0
+    for d in dados:
+        if not d.get("antes"):
+            continue
+        try:
+            a = float(d["antes"].replace("R$", "").replace(".", "").replace(",", ".").strip())
+            h = float(str(d["preco"]).replace("R$", "").replace(".", "").replace(",", ".").strip())
+        except ValueError:
+            continue
+        if a > h:
+            hoje_total += a - h
+            n += 1
+    por_dia = _precos_por_dia()
+    ids = [d.get("id") for d in dados]
+    # ids da serie podem ser int (AliExpress) ou str (ML/awin); casa os dois
+    def _dias_de(i):
+        return por_dia.get(i) or (por_dia.get(int(i)) if str(i).isdigit() else None) or {}
+    serie = []
+    for k in range(dias - 1, -1, -1):
+        dia = (date.today() - timedelta(days=k)).isoformat()
+        total = 0.0
+        for i in ids:
+            ds = _dias_de(i)
+            ate = {q: v for q, v in ds.items() if q <= dia}
+            if not ate:
+                continue
+            ultimo = ate[max(ate)]
+            maior = max(ate.values())
+            if maior > ultimo * 1.02:
+                total += maior - ultimo
+        serie.append([dia[5:], round(total, 2)])
+    # ⚠️ corta os dias iniciais em que nada existia (linha comeca do primeiro
+    # dia com serie), senao o desenho abre com um zero artificial
+    while serie and serie[0][1] == 0 and len(serie) > 3:
+        serie.pop(0)
+    # ⛔ O ULTIMO PONTO E' O NUMERO DO CARTAO. A serie consolida o dia pelo
+    # MENOR preco visto; o cartao mostra a ULTIMA leitura (instantaneo de hora
+    # em hora). Medido em 16/09: R$ 344 pela serie x R$ 293 pelos cartoes.
+    # Dois totais do mesmo dado na mesma tela e' exatamente o que a pagina
+    # nao faz — o que o visitante soma nos cartoes tem de ser o fim da linha.
+    if serie and serie[-1][0] == date.today().isoformat()[5:]:
+        serie[-1][1] = round(hoje_total, 2)
+    return {"hoje": round(hoje_total, 2), "n": n, "serie": serie}
+
+
 def montar_catalogo() -> tuple[str, dict[str, str]]:
     """O HTML do catalogo com os produtos e o brasao dentro, e os arquivos
     das categorias externas ({nome do arquivo: JSON}) que sobem ao lado."""
@@ -382,9 +447,12 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
         for cat, b in externos.items()}
     # ⚠️ ESTOURA SE O MARCADOR SUMIR. Substituicao que nao acha o alvo e segue
     # publicaria um catalogo VAZIO com cara de pronto.
+    eco = economia(dados)
     for alvo, valor in (("  var PRODUTOS = [];",
                          "  var PRODUTOS = " + json.dumps(
                              dados, ensure_ascii=False) + ";"),
+                        ("  var ECONOMIA = {};",
+                         "  var ECONOMIA = " + json.dumps(eco) + ";"),
                         ("  var EXTERNOS = {};",
                          "  var EXTERNOS = " + json.dumps(
                              indice, ensure_ascii=False) + ";"),
@@ -393,6 +461,8 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
         if alvo not in html:
             raise SystemExit("catalogo: marcador sumiu -> " + alvo.strip())
         html = html.replace(alvo, valor, 1)
+    print(f"economia: R$ {eco['hoje']:.2f} a menos hoje em {eco['n']} produto(s), "
+          f"linha de {len(eco['serie'])} dia(s)")
     print(f"catalogo: {len(dados)} produto(s)"
           + (f" + externas: " + ", ".join(
               f"{c} {v['n']}" for c, v in indice.items()) if indice else ""))

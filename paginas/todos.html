@@ -193,6 +193,25 @@
     color: rgba(255,255,255,.62); margin-top: 6px;
   }
 
+  /* ⭐ O MONTANTE — entre a prova e a busca (pedido do Bryan, 16/09/2026).
+     Numero grande, rotulo honesto ("comprando um de cada, hoje") e a linha
+     do total dia a dia, no MESMO desenho da serie dos cartoes. */
+  .economia {
+    display: grid; grid-template-columns: minmax(0, 1fr) 42%; gap: 10px;
+    align-items: center; margin: 0 0 8px; padding: 12px 16px;
+    background: var(--painel); border-radius: 16px;
+  }
+  .economia .numero {
+    display: block; font: 700 22px/1.1 var(--mono); color: var(--verde);
+    letter-spacing: -.02em;
+  }
+  .economia .oque {
+    display: block; font-size: 10.5px; line-height: 1.35;
+    color: rgba(255,255,255,.62); margin-top: 5px;
+  }
+  .economia svg.serie { width: 100%; height: 34px; display: block; }
+  .economia .so-numero { grid-template-columns: 1fr; }
+
   /* ---------------- filtros ---------------- */
   .ferramentas {
     position: sticky; top: 0; z-index: 5;
@@ -384,10 +403,13 @@
      (inline), o texto e' a sigla ate' o simbolo oficial do kit entrar.
      ⚠️ FORA DA FOTO desde a mesma noite: na foto ele cobria a legenda do
      vendedor ("8BitDo OFFICIAL STORE") — o Bryan viu no celular. */
+  /* a linha inteira e' do selo (flex-basis 100%): ele fica sozinho acima
+     do preco, e o preco continua na linha dele */
+  .origem { flex: 0 0 100%; line-height: 1; margin-bottom: 1px; }
   .loja {
-    margin-left: auto; flex: 0 0 auto;
-    font: 800 9px/1 var(--mono); letter-spacing: .04em;
-    padding: 4px 6px; border-radius: 6px;
+    display: inline-block;
+    font: 800 8.5px/1 var(--mono); letter-spacing: .04em;
+    padding: 3px 5px; border-radius: 5px;
   }
   .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 11px 12px 12px; gap: 7px; }
   .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
@@ -439,9 +461,7 @@
     font: 500 10px/1.25 var(--mono); color: var(--fraco);
     min-width: 0; padding-left: 3px;
   }
-  /* a FRASE ("no radar ha' N dias") e' quem encurta; o selo da loja, que
-     vem depois dela, nunca */
-  .rodape-item span:not(.pulso):not(.loja) {
+  .rodape-item span:last-child {
     min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .pulso {
@@ -508,6 +528,7 @@
       <span class="vivo-dica" id="vivo_dica"></span>
     </a>
     <div class="prova" id="prova"></div>
+    <div class="economia" id="economia" hidden></div>
   </header>
 
   <div class="ferramentas">
@@ -549,6 +570,10 @@
   // Substituidos na publicacao (ver paginas/publicar_bio.py).
   var PRODUTOS = [];
   var BRASAO = "";
+  // ⭐ QUANTO A MENOS SE PAGA HOJE, somando os que cairam — e a linha por dia.
+  // {"hoje": 123.4, "n": 32, "serie": [["09-13", 80.2], ...]}. Publicador
+  // preenche; a conta e' a mesma do "de" riscado de cada cartao.
+  var ECONOMIA = {};
   // ⭐ CATEGORIAS QUE BAIXAM SO' QUANDO A PESSOA CLICA.
   //
   // {"Nike": {arquivo: "nike.json", n: 905, passo: 50}} — o publicador
@@ -828,6 +853,21 @@
     corpo.appendChild(el("div", "nome", p.nome));
 
     var lp = el("div", "linha-preco");
+    // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
+    // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
+    // vendedor), no rodape (cortava o "no radar") e a direita do preco.
+    // Aqui ele le como "de onde vem", colado ao nome, e o preco fica limpo.
+    if (p.loja) {
+      var cfg = LOJAS[p.loja] || { cor: "#6b6b76", texto: "#fff",
+                                   sigla: String(p.loja).slice(0, 2).toUpperCase() };
+      var origem = el("div", "origem");
+      var selo = el("span", "loja", cfg.sigla);
+      selo.style.background = cfg.cor;
+      selo.style.color = cfg.texto;
+      selo.title = p.loja;
+      origem.appendChild(selo);
+      lp.appendChild(origem);
+    }
     lp.appendChild(el("span", "preco", p.preco));
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
@@ -845,15 +885,6 @@
          : (p.dias === 1 ? "no radar há 1 dia"
             : "no radar há " + p.dias + " dias"))
       : "achado agora"));
-    if (p.loja) {
-      var cfg = LOJAS[p.loja] || { cor: "#6b6b76", texto: "#fff",
-                                   sigla: String(p.loja).slice(0, 2).toUpperCase() };
-      var selo = el("span", "loja", cfg.sigla);
-      selo.style.background = cfg.cor;
-      selo.style.color = cfg.texto;
-      selo.title = p.loja;
-      rod.appendChild(selo);
-    }
     corpo.appendChild(rod);
 
     a.appendChild(corpo);
@@ -1398,6 +1429,26 @@
     caixa.classList.toggle("tres", caixa.children.length >= 3);
   }
 
+  function montarEconomia() {
+    var caixa = document.getElementById("economia");
+    var e = ECONOMIA || {};
+    // ⚠️ SO' APARECE SE HOUVER O QUE MOSTRAR: "R$ 0,00 a menos" prova o
+    // contrario do que pretende.
+    if (!(e.hoje > 0) || !(e.n > 0)) { return; }
+    var lado = el("div");
+    lado.appendChild(el("strong", "numero",
+      "R$ " + e.hoje.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".")));
+    lado.appendChild(el("span", "oque",
+      "a menos hoje, comprando um de cada dos " + e.n +
+      " que caíram — contra o maior preço que eu mesmo vi"));
+    caixa.appendChild(lado);
+    // ⭐ A LINHA REUSA O DESENHO DO CARTAO: mesma regra dos 3 pontos, mesma
+    // cor de "caiu". Serie curta = so' o numero, sem grafico.
+    var g = grafico({ serie: e.serie || [], queda: 100 });
+    if (g) { caixa.appendChild(g); } else { caixa.classList.add("so-numero"); }
+    caixa.hidden = false;
+  }
+
   function montarProva() {
     var caixa = document.getElementById("prova");
     if (!PRODUTOS.length) { return; }
@@ -1558,6 +1609,7 @@
 
   animarVivo();
   montarProva();
+  montarEconomia();
   montarChips();
   desenhar();
 

@@ -675,7 +675,33 @@ def produtos_todos() -> list[dict]:
     pos = {id(x): i for i, x in enumerate(saida)}
     fim = sorted(fim, key=lambda x: pos[id(x)])
     marcar_fogo(fim)
+    marcar_vitrine_ml(fim)
     return fim
+
+
+def marcar_vitrine_ml(dados: list[dict]) -> dict | None:
+    """Poe `vitrine: True` no MELHOR produto do Mercado Livre — a pagina o
+    encaixa na 2a posicao do topo.
+
+    ⭐ Bryan, 16/09/2026: "coloque 1 dos melhores do ML junto com os do Ali
+    que estao no topo; a pagina principal e' nossa vitrine". Sem isto o ML
+    nunca chegaria ao topo: a ordem de abertura e' ganho x vendas, e no ML
+    `vendas` e' o numero de VENDEDORES (a API nao da' volume), sempre pequeno.
+
+    ⚠️ O melhor pela NOSSA regua, nao o mais barato: vendedores x ganho por
+    venda — quem tem mais gente vendendo e rende mais. Um por dia; se a
+    regua empatar, fica o mais barato.
+    """
+    ml = [p for p in dados if p.get("loja") == "Mercado Livre"
+          and float(str(p.get("preco", "0")).replace("R$", "").replace(".", "").replace(",", ".").strip() or 0) <= 250]
+    for p in dados:
+        p["vitrine"] = False
+    if not ml:
+        return None
+    ml.sort(key=lambda x: (-(int(x.get("vendas") or 0) * float(x.get("ganho") or 0)),
+                           float(str(x.get("preco", "0")).replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)))
+    ml[0]["vitrine"] = True
+    return ml[0]
 
 
 def _notas() -> dict[str, float]:
@@ -827,6 +853,37 @@ def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
     return [[k[5:], round(v, 2)] for k, v in sorted(dias.items())]
 
 
+_MEMO_HOJE: dict = {}
+
+
+def _preco_hoje_num(d: dict) -> float:
+    """O preco de HOJE do produto, em numero — o mesmo que o cartao exibe.
+
+    ⛔ O DEFEITO QUE ISTO CONSERTA (16/09/2026): `_antes` e `_queda_real`
+    liam `d["preco"]`, que no registro publicado e' o preco DO DIA DA
+    CAPTURA. O conserto de 15/09 trocou o preco EXIBIDO pela ultima leitura,
+    mas o "de" riscado e o selo "caiu" continuavam comparando o maior visto
+    com o preco velho — e davam VAZIO em produto que caiu de verdade. Medido
+    na Fita organizadora: serie 7,59 -> 7,00 (-7,8%), cartao sem "de" e sem
+    selo. "32 baixaram" estava subcontado por isso.
+
+    ⚠️ Memo por rodada: `_precos_por_dia` le' o arquivo inteiro, e isto e'
+    chamado por produto. A chave e' o mtime do arquivo, entao uma rodada
+    nova (ou o teste com RAIZ trocada) invalida sozinha.
+    """
+    arq = RAIZ / "estado" / "precos_vistos.jsonl"
+    chave = (str(arq), arq.stat().st_mtime if arq.exists() else 0)
+    if _MEMO_HOJE.get("chave") != chave:
+        _MEMO_HOJE.clear()
+        _MEMO_HOJE["chave"] = chave
+        _MEMO_HOJE["por_dia"] = _precos_por_dia()
+    txt = _preco_de_hoje(_MEMO_HOJE["por_dia"], d) or str(d.get("preco", ""))
+    try:
+        return float(txt.replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)
+    except ValueError:
+        return 0.0
+
+
 def _queda_real(serie: dict, d: dict) -> float:
     """Quanto caiu contra o MAIOR PRECO POR DIA que nos vimos.
 
@@ -838,12 +895,7 @@ def _queda_real(serie: dict, d: dict) -> float:
     if not reg:
         return 0.0
     maior = float(reg[2] or 0)
-    hoje = 0.0
-    try:
-        bruto = str(d.get("preco", "")).replace("R$", "").strip()
-        hoje = float(bruto.replace(".", "").replace(",", "."))
-    except ValueError:
-        return 0.0
+    hoje = _preco_hoje_num(d)
     if maior <= 0 or hoje <= 0 or hoje >= maior:
         return 0.0
     return round((maior - hoje) / maior * 100, 1)
@@ -852,11 +904,7 @@ def _queda_real(serie: dict, d: dict) -> float:
 def _antes(serie: dict, d: dict) -> str:
     """O maior preco que vimos, formatado — "" se nao houver queda real."""
     maior = serie.get(d.get("id"), ("", 0, 0.0, ""))[2]
-    try:
-        hoje = float(str(d.get("preco", "")).replace("R$", "")
-                     .replace(".", "").replace(",", ".").strip() or 0)
-    except ValueError:
-        return ""
+    hoje = _preco_hoje_num(d)
     # ⚠️ 2% de piso: abaixo disso e' arredondamento e cambio, nao queda.
     if not (maior and hoje) or maior <= hoje * 1.02:
         return ""

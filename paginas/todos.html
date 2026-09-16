@@ -220,9 +220,10 @@
   .economia .como { display: none; }
   .economia svg.serie { flex: 1 1 60px; min-width: 50px; height: 22px; display: block; overflow: visible; }
   .economia svg.serie .linha { stroke-width: 1.2px; }
-  .economia svg.serie .agora { r: 1.8; }
+  .economia .serie-wrap { flex: 1 1 60px; min-width: 50px; margin: 0; padding: 0; }
+  .economia .serie-wrap .agora { display: none; }
   .economia svg.serie .area { fill: var(--verde); opacity: .14; }
-  .economia svg.serie .agora { display: none; }   /* idem: esticava */
+
   .economia.so-numero { grid-template-columns: 1fr; }
   /* o fio vertical da prova nao se aplica a` faixa */
   .prova > .economia::before { display: none; }
@@ -420,13 +421,19 @@
   /* ⭐ a chama: canto inferior direito da foto, sem fundo, com sombra pra
      ler sobre qualquer imagem; NAO e' esticada (e' texto, nao SVG escalado) */
   .fogo {
-    position: absolute; right: 7px; bottom: 6px; z-index: 1;
-    font-size: 18px; line-height: 1;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));
+    position: absolute; right: 8px; top: 8px; z-index: 2;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(160deg, #ff7a1a, #e6321b);
+    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+    display: flex; align-items: center; justify-content: center;
   }
-  .prova-fogo {
-    font: 500 10px/1.2 var(--mono); color: var(--verde); margin-top: -3px;
+  .fogo svg { width: 15px; height: 15px; display: block; }
+  /* com fogo, o "novo" (que tambem mora a` direita) desce um degrau */
+  .fogo ~ .novo { top: 38px; }
+  .prova-social {
+    font: 500 10px/1.2 var(--mono); color: var(--fraco); margin-top: -3px;
   }
+  .prova-social.fogo { color: var(--verde); }
   /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
      da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
      simbolo apenas do ML, nao escreva Mercado Livre". A cor vem de LOJAS
@@ -475,15 +482,23 @@
   .bloco-conta {
     font-weight: 500; color: var(--fraco); opacity: .7; font-size: 11px;
   }
-  .serie { display: block; width: 100%; height: 22px; margin-top: 7px; }
+  /* o involucro reserva 4 px a` direita: o ponto fica em cima do fim da
+     linha e nunca e' cortado pela borda do cartao */
+  .serie-wrap { position: relative; margin-top: 7px; padding-right: 4px; }
+  .serie-wrap .agora {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--fraco); transform: translate(-50%, -50%);
+    /* a porcentagem e' do SVG, que termina 4 px antes do involucro */
+    margin-left: -2px;
+  }
+  .serie-wrap.baixou .agora { background: var(--verde); }
+  .serie { display: block; width: 100%; height: 22px; }
   .serie .linha {
     fill: none; stroke: var(--fraco); stroke-width: 1.4;
     stroke-linejoin: round; stroke-linecap: round; opacity: .75;
   }
-  .serie .agora { fill: var(--fraco); }
   /* ⭐ So' quem caiu 5% ou mais fica verde — o MESMO limiar do selo "caiu". */
   .serie.baixou .linha { stroke: var(--verde); opacity: 1; }
-  .serie.baixou .agora { fill: var(--verde); }
   .rodape-item {
     display: flex; align-items: center; gap: 5px;
     font: 500 10px/1.25 var(--mono); color: var(--fraco);
@@ -799,13 +814,16 @@
     linha.setAttribute("vector-effect", "non-scaling-stroke");
     svg.appendChild(linha);
 
-    var fim = document.createElementNS(NS, "circle");
-    fim.setAttribute("cx", pts[pts.length - 1][0].toFixed(1));
-    fim.setAttribute("cy", pts[pts.length - 1][1].toFixed(1));
-    fim.setAttribute("r", "2.2");
-    fim.setAttribute("class", "agora");
-    fim.setAttribute("vector-effect", "non-scaling-stroke");
-    svg.appendChild(fim);
+    // ⛔ O PONTO "AGORA" NAO E' MAIS UM <circle>: com preserveAspectRatio=none
+    // o SVG e' esticado e o circulo virava elipse, e na borda direita saia
+    // cortado (Bryan viu os dois em 16/09). Agora e' um <span> redondo de
+    // verdade, posicionado por porcentagem dentro do involucro — e o
+    // involucro tem folga a` direita pra ele nunca ser cortado.
+    var ult = pts[pts.length - 1];
+    var ponto = document.createElement("span");
+    ponto.className = "agora";
+    ponto.style.left = (ult[0] / L * 100).toFixed(1) + "%";
+    ponto.style.top = (ult[1] / A * 100).toFixed(1) + "%";
 
     // ⭐ O QUE O DESENHO ESCONDE, EM TEXTO. A linha mostra a forma; o titulo
     // devolve os numeros exatos, que e' o que sustenta a promessa da pagina.
@@ -815,7 +833,11 @@
              x[1].toFixed(2).replace(".", ",");
     }).join(" · ");
     svg.appendChild(t);
-    return svg;
+    var wrap = document.createElement("div");
+    wrap.className = "serie-wrap" + ((p.queda || 0) >= 5 ? " baixou" : "");
+    wrap.appendChild(svg);
+    wrap.appendChild(ponto);
+    return wrap;
   }
 
   function normal(t) {
@@ -897,9 +919,13 @@
     // rendimento; teto 6). Sem texto — o que ele significa esta' na linha
     // "98% positivas · 12 mil vendas" que so' o cartao com fogo ganha.
     if (p.fogo) {
-      var fogo = el("span", "fogo", "🔥");
+      // ⚠️ SELO pequeno e redondo no canto superior direito, chama em SVG
+      // (emoji renderiza diferente em cada aparelho e saiu grande e solto —
+      // Bryan, 16/09: "nao tem nada a ver com um botao no canto").
+      var fogo = el("span", "fogo");
+      fogo.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2c1 3.5 4 5 4 9a4 4 0 0 1-8 0c0-1 .3-2 .8-2.8C8 9.5 9 11 10 11c0-3 .5-6 2-9z"/></svg>';
       fogo.title = "escolhido: " + Math.round(p.nota) + "% de avaliações positivas, " +
-        (p.vendas || 0).toLocaleString("pt-BR") + " vendas, caiu " + Math.round(p.queda) + "%";
+        (p.vendas || 0).toLocaleString("pt-BR") + " vendas na loja, caiu " + Math.round(p.queda) + "%";
       foto.appendChild(fogo);
     }
     if (p.imagem) {
@@ -931,10 +957,17 @@
     }
     corpo.appendChild(nome);
 
-    if (p.fogo && p.nota) {
-      corpo.appendChild(el("div", "prova-fogo",
+    // ⭐ PROVA SOCIAL EM TODOS (Bryan, 16/09: "gostei, poderiamos adotar para
+    // todos"), DISCRETA: cinza, na fonte do rodape; verde so' com fogo. So'
+    // aparece com nota >= 90% e >= 100 vendas — vazio nao e' prova.
+    // "vendas na loja" = volume do PRODUTO somando vendedores (a pagina do
+    // AliExpress mostra "este vendedor: 2.000+" e o total separado).
+    if (p.nota >= 90 && (p.vendas || 0) >= 100) {
+      var ps = el("div", "prova-social" + (p.fogo ? " fogo" : ""),
         Math.round(p.nota) + "% positivas · " +
-        ((p.vendas || 0) >= 1000 ? Math.round(p.vendas / 1000) + " mil" : String(p.vendas || 0)) + " vendas"));
+        ((p.vendas || 0) >= 1000 ? Math.round(p.vendas / 1000) + " mil" : String(p.vendas || 0)) + " vendas");
+      ps.title = "avaliações positivas e vendas do produto na loja, somando todos os vendedores";
+      corpo.appendChild(ps);
     }
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
@@ -1256,6 +1289,20 @@
       lista = lista.slice().sort(function (a, b) {
         return num(a.preco) - num(b.preco);
       });
+    }
+    // ⭐ A VITRINE: na abertura (sem filtro, sem busca), o melhor do Mercado
+    // Livre vai pra 2a posicao, ao lado dos do Ali — decisao do Bryan em
+    // 16/09 ("a pagina principal e' nossa vitrine"). Quem marca e' o
+    // publicador (`marcar_vitrine_ml`); aqui so' se move UM cartao.
+    if (atual === "todos" && !canal && !loja && !termo) {
+      var iv = -1;
+      lista.some(function (p, i) { if (p.vitrine) { iv = i; return true; } return false; });
+      if (iv > 1) {
+        var v = lista[iv];
+        lista = lista.slice();
+        lista.splice(iv, 1);
+        lista.splice(1, 0, v);
+      }
     }
 
     grade.innerHTML = "";

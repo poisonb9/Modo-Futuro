@@ -436,21 +436,27 @@
   .fogo svg { width: 15px; height: 15px; display: block; }
   /* com fogo, o "novo" (que tambem mora a` direita) desce um degrau */
   .fogo ~ .novo { top: 38px; }
-  .promo {
-    display: flex; align-items: center; gap: 3px;
-    font: 700 11px/1 Poppins, sans-serif; color: #FF4747;
+  .sinais {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
     margin-top: auto; margin-bottom: -4px;
   }
+  .sinais + .linha-preco { margin-top: 6px; }
+  .promo {
+    display: inline-flex; align-items: center; gap: 3px;
+    font: 700 11px/1 Poppins, sans-serif; color: #FF4747;
+  }
   .promo svg { width: 13px; height: 13px; display: block; }
-  .promo + .linha-preco { margin-top: 6px; }
+  .nota {
+    display: inline-flex; align-items: center; gap: 3px; margin-left: auto;
+    font: 600 10.5px/1 var(--mono); color: var(--fraco);
+  }
+  .nota svg { width: 12px; height: 12px; display: block; opacity: .9; }
+  .nota.em-fogo { color: var(--verde); }
   .ja-esteve {
     font: 500 10px/1.2 var(--mono); color: var(--fraco); opacity: .8;
     margin-top: -4px;
   }
-  .prova-social {
-    font: 500 10px/1.2 var(--mono); color: var(--fraco); margin-top: -3px;
-  }
-  .prova-social.em-fogo { color: var(--verde); }
+
   /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
      da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
      simbolo apenas do ML, nao escreva Mercado Livre". A cor vem de LOJAS
@@ -984,29 +990,34 @@
     // aparece com nota >= 90% e >= 100 vendas — vazio nao e' prova.
     // "vendas na loja" = volume do PRODUTO somando vendedores (a pagina do
     // AliExpress mostra "este vendedor: 2.000+" e o total separado).
-    // ⛔ SEM O NUMERO DE VENDAS NA TELA (Bryan, 16/09): o nosso e' o total do
-    // produto pela API, a pagina da loja mostra "este vendedor: 10.000+" —
-    // o visitante nao consegue conferir, e numero maior que o da loja
-    // descredibiliza. A nota (% positivas) ele confere na hora. O volume
-    // continua por dentro: no fogo e no ranking.
-    if (p.nota >= 90) {
-      // ⛔ a classe do selo ("fogo") aqui fez a linha virar um botao laranja
-      // solto no topo da pagina (CSS absoluto do selo) — Bryan viu, 16/09
-      var ps = el("div", "prova-social" + (p.fogo ? " em-fogo" : ""),
-        Math.round(p.nota) + "% de avaliações positivas");
-      ps.title = "avaliações positivas do produto na loja";
-      corpo.appendChild(ps);
-    }
-    // ⭐ "PROMO · X% OFF" com a seta, no vermelho da AliExpress — pedido do
-    // Bryan em 16/09 a partir do print da propria loja. O X% e' a NOSSA
-    // queda (contra o maior que vimos), nunca o "-64%" que a loja anuncia
-    // contra um "de" inflado. So' em quem caiu >= 5% (o mesmo piso do selo).
-    if ((p.queda || 0) >= 5) {
-      var promo = el("div", "promo");
-      promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="#FF4747" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/><path fill="#FF4747" d="M2.5 11.2 4 9.8l2 2 4.5-4.5 1.4 1.4L6 14.6z" opacity="0"/></svg>' +
-        '<span>Promo · ' + Math.round(p.queda) + '% OFF</span>';
-      promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
-      corpo.appendChild(promo);
+    // ⭐ UMA LINHA DE SINAIS acima do preco: "Promo · X% OFF" com a seta a`
+    // esquerda (vermelho da AliExpress; X% = a NOSSA queda), e o polegar com
+    // a % de avaliacoes positivas a` direita — compacto, como a propria loja
+    // mostra ("people gave it a positive review"). Decisao do Bryan, 16/09.
+    //
+    // ⛔ SEM VENDAS (o visitante nao confere) e SEM ESTRELA: a API da' so' o
+    // % positivo; "98%" nao vira "4.9" por conta nenhuma honesta.
+    var temPromo = (p.queda || 0) >= 5;
+    var temNota = p.nota >= 90;
+    if (temPromo || temNota) {
+      var sinais = el("div", "sinais");
+      if (temPromo) {
+        var promo = el("span", "promo");
+        promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="#FF4747" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/></svg>' +
+          '<span>Promo · ' + Math.round(p.queda) + '% OFF</span>';
+        promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
+        sinais.appendChild(promo);
+      }
+      if (temNota) {
+        var nota = el("span", "nota" + (p.fogo ? " em-fogo" : ""));
+        // ⭐ estrela fina, de traco (nao o icone cheio): elegante, e nao
+        // promete "4.9" — o numero ao lado continua sendo o % positivo
+        nota.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>' +
+          '<span>' + Math.round(p.nota) + '%</span>';
+        nota.title = Math.round(p.nota) + "% de avaliações positivas na loja";
+        sinais.appendChild(nota);
+      }
+      corpo.appendChild(sinais);
     }
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —

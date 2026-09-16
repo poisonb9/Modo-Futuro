@@ -260,3 +260,27 @@ Regra reforçada: arquivo com escape vai por Write/Edit ou PowerShell.
 **Aberto:** "R$ 73,69 ~~R$ 73,69~~ ↓21%" no cartão do topo (antes = preço com
 selo de queda) — contradição na mesma tela, a conferir; símbolos oficiais das
 lojas (kit de afiliado) no lugar das siglas.
+
+## 9. FIM DA NOITE (16/09, ~19h30 BRT) — o que o celular do Bryan revelou
+
+- **Selo "Promo · X% OFF"** com seta, no vermelho da AliExpress (#FF4747); o
+  selo "Ali" ganhou o mesmo vermelho. X% = a nossa queda, nunca o da loja.
+- ⛔ **Vendas saíram da linha visível** ("98% positivas · 113 mil vendas"):
+  a loja mostra "este vendedor: 10.000+", o total fica cortado — número
+  maior que o da loja, que o visitante não confere, descredibiliza. Fica só
+  "% de avaliações positivas"; o volume segue por dentro (fogo, ranking).
+- ⛔ **Salto de variante = esgotado**: kit de 46 chaves R$ 34 → R$ 112,59 de
+  um dia pro outro; a loja mostrava "Esgotado". A API não expõe estoque; a
+  guarda `sem_salto_de_variante` (hoje > 1,8× menor visto) tira do site com
+  aviso nomeado. Hoje: 1 de 148.
+- **"de" riscado contra o preço de HOJE** (`_preco_hoje_num`): `_antes` e
+  `_queda_real` liam o preço do dia da captura. 32 "baixaram" era **26**.
+- **Sinais de preço** (`engine/sinais.py`): voltou_a_cair / novo_minimo /
+  ultima_chance → post no canal (2/dia, no garimpo da nuvem). Primeiros 2
+  posts saíram às ~19h (teclado AJAZZ, organizador). "subiu" só rebaixa
+  (fator 0,7) e ganha "já esteve a R$ x · dd/mm" no cartão.
+- **Fogo** (nota ≥ 95, queda ≥ 15, vendas ≥ 1.000, rende, teto 6): 2 hoje;
+  ficam na posição ~67 — abrir a página com eles é decisão pendente.
+- **Publicação diária local (11:30 UTC)**: trava no `npx wrangler` em S4U.
+  NÃO está pronta. Site publicado à mão durante o dia (17 endereços).
+- Aberto: "R$ 73,69 ~~R$ 73,69~~ ↓21%" no cartão do topo (não conferido).

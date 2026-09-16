@@ -675,9 +675,36 @@ def produtos_todos() -> list[dict]:
     # ordem original (a vitrine decide a ordem, nao a dedupe)
     pos = {id(x): i for i, x in enumerate(saida)}
     fim = sorted(fim, key=lambda x: pos[id(x)])
+    fim = sem_salto_de_variante(fim, por_dia)
     marcar_fogo(fim)
     marcar_vitrine_ml(fim)
     return fim
+
+
+# ⛔ SALTO DE VARIANTE = ESGOTADO. Medido em 16/09/2026 no kit de 46 chaves:
+# serie R$ 34,10 / 46,09 / 34,79 em 14/09 e R$ 112,59 em 15/09 — a variante
+# barata ESGOTOU, a API passou a devolver a cara, e o site vendia "o kit de
+# R$ 34" a R$ 112 com "no radar ha' 2 dias". O Bryan abriu a loja e viu
+# "Esgotado". A API de afiliado nao expoe estoque (37 campos, nenhum); o
+# salto e' o unico sinal, e ele e' claro: preco de hoje > 1,8x o menor visto
+# nao e' alta de preco, e' outro produto.
+SALTO_VARIANTE = 1.8
+
+
+def sem_salto_de_variante(dados: list[dict], por_dia: dict) -> list[dict]:
+    fica = []
+    for p in dados:
+        dias = por_dia.get(p.get("id")) or (por_dia.get(int(p["id"])) if str(p.get("id", "")).isdigit() else None) or {}
+        try:
+            hoje = float(str(p.get("preco", "")).replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)
+        except ValueError:
+            hoje = 0.0
+        if dias and hoje > SALTO_VARIANTE * min(dias.values()):
+            print(f"fora (salto de variante {hoje / min(dias.values()):.1f}x, provavel esgotado): "
+                  f"{p.get('nome', '')[:50]}")
+            continue
+        fica.append(p)
+    return fica
 
 
 def marcar_vitrine_ml(dados: list[dict]) -> dict | None:

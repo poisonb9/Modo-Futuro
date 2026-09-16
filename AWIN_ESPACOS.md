@@ -131,3 +131,120 @@ campo vazio na tela de quem está decidindo.
 ```bash
 python -m engine.awin
 ```
+
+---
+
+# A NIKE BR, MEDIDA (16/09/2026)
+
+É o **único** anunciante aprovado. `mid = 17652`, nosso `affid = 3089205`,
+`status Active`, `linkStatus online`, `deeplinkEnabled: true`.
+
+## ⭐ O link JÁ FUNCIONA com o token de hoje — não espera a chave de datafeed
+
+`engine.awin.link()` foi testado ponta a ponta contra uma página real da
+Nike. O `cread.php` devolveu **302** e pousou em:
+
+```
+nike.com.br/tenis-nike-air-force-1?aw_affid=3089205&awc=17652_...&utm_source=Zanox
+```
+
+⭐ `aw_affid=3089205` é **nós**, e o `awc=` é o carimbo de clique do Awin. O
+`403` que aparece no fim é a proteção antirrobô da Nike recusando um `requests`
+do Python — não é falha do link. Um navegador de verdade abre.
+
+## ⛔ O CASO NEGATIVO ACHOU ALGO PIOR QUE "NÃO PAGA"
+
+Rodei o mesmo link **sem** o nosso `awinaffid` esperando que ele não pagasse.
+Não é isso que acontece:
+
+```
+sem affid  ->  nike.com.br/...?aw_affid=13430&awc=17652_...
+```
+
+**O Awin preenche com o afiliado 13430**, que não somos nós. Link malformado
+não quebra e não deixa de pagar — ele paga **outra pessoa**, com a página
+abrindo normalmente e nada indicando o desvio. É a regra do `tracking_id` do
+AliExpress em outra roupa, e aqui ela é ainda mais silenciosa.
+
+## As comissões, e por que "14%" seria uma leitura errada
+
+22 grupos. O que vale para quase tudo é **7,50%**:
+
+```
+14,00%   5 grupos, TODOS presos a SKU específico (condição PRODUCT_SKU IN_LIST)
+         Dunk · P-6000 · Shox · Court Vision · Air Force 1
+ 7,50%   os outros 17, incluindo o grupo `Default` (sem condição nenhuma)
+         Calçados · Corrida · Treino · Futebol · Roupas · Infantil · Cupom · ...
+```
+
+⚠️ **Anunciar "Nike paga 14%" seria falso.** Os 14% dependem do SKU exato estar
+numa lista que não temos — e sem a chave de datafeed não há como saber quais
+SKUs são. O número que se pode usar para decidir é **7,50%**.
+
+## ⚠️ E "a que custo", antes de "quanto"
+
+```
+approvalPercentage   77,54%     <- 1 em cada 4 comissões não é aprovada
+validationDays          33
+averagePaymentTime      47 dias
+conversionRate        3,33%
+epc                   1,28      (a unidade do Awin aqui não foi confirmada)
+```
+
+**7,50% × 0,7754 = 5,82% efetivo** — *menos* que os 7% nominais do AliExpress.
+
+⭐ **Mas a comissão não é a variável que decide; o TICKET é.** Medido no nosso
+catálogo (304 produtos): mediana **R$ 38,79**, média R$ 56,87, maior R$ 253,52.
+
+```
+ganho por venda        AliExpress 7,00% da mediana R$ 38,79  =  R$  2,72
+                       Nike 7,50% de um tênis R$ 349         =  R$ 26,18
+                                              (x aprovação)  =  R$ 20,30
+                       Nike 7,50% de um tênis R$ 499         =  R$ 37,42
+                                              (x aprovação)  =  R$ 29,02
+```
+
+**Uma venda da Nike vale 7 a 11 vendas do catálogo de hoje.** Essa é a razão
+para usá-la, e ela sobrevive à aprovação de 77,5% com folga.
+
+⚠️ **O que ainda não sei, e não dá pra medir sem a chave:** se a Nike BR
+oferece feed de produto. Sem feed, dá para gerar link de qualquer página do
+site (`deeplinkEnabled: true`), mas não dá para garimpar preço e queda como se
+faz no AliExpress — e é o acompanhamento de preço que esta operação vende.
+
+---
+
+# COMO PEGAR A CHAVE DE DATAFEED
+
+⛔ **É outra chave.** Confirmado por medição em 16/09/2026 e pela documentação
+do Awin: *"The API key for product feeds is different from your Publisher API
+key."*
+
+```
+Toolbox  ->  Links & Tools  ->  Create-a-Feed
+```
+
+A chave aparece dentro da URL de download que a ferramenta monta:
+
+```
+https://productdata.awin.com/datafeed/list/apikey/<A CHAVE>
+```
+
+⚠️ **A chave vai no CAMINHO da URL, não no cabeçalho.** Medido, e os dois
+erros dizem coisas diferentes:
+
+```
+Authorization: Bearer <AWIN_TOKEN>      ->  403  "No API key supplied"
+/apikey/<AWIN_TOKEN>                    ->  500  "Sorry, we broke something"
+```
+
+⭐ O 500 é o que prova que a chave está errada, e não que o endpoint está
+quebrado: quando a chave não existe no formato certo, ele responde 403 dizendo
+isso. Com uma chave no lugar certo mas inválida, ele estoura.
+
+Guardar no `.env` como `AWIN_DATAFEED_KEY` — **não** sobrescrever o
+`AWIN_TOKEN`, que é o que faz o vigia de candidaturas funcionar.
+
+Fontes: [How to access a product data feed](https://success.awin.com/s/article/How-can-I-access-a-Product-Feed?language=en_US) ·
+[Downloading feeds using Create-a-Feed](https://developer.awin.com/docs/downloading-feeds-using-create-a-feed) ·
+[Product Feed List Download](https://help.awin.com/docs/product-feed-list-download)

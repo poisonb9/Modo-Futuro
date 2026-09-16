@@ -200,9 +200,12 @@
      fininha a` direita. "medido por mim" vai pro title. */
   /* ⚠️ o fio fica a MESMA distancia dos numeros de cima e do valor de
      baixo (14 px / 14 px) — antes o valor colava no fio (Bryan, 16/09) */
-  .economia {
+  /* ⚠️ `.prova > .economia`, e nao `.economia`: a regra `.prova > div`
+     (padding 0 4px) ganhava por especificidade e ZERAVA o respiro — o valor
+     ficou colado no fio (Bryan viu, 16/09). */
+  .prova > .economia {
     grid-column: 1 / -1; display: flex; gap: 10px; align-items: center;
-    margin-top: 14px; padding: 14px 4px 2px; text-align: left;
+    margin-top: 12px; padding: 13px 4px 3px; text-align: left;
     border-top: 1px solid rgba(255,255,255,.12);
   }
   .economia .lado { flex: 0 0 auto; }
@@ -1463,7 +1466,7 @@
     // "que o radar ja' encontrou" (longa) ficaram pra tras em 16/09.
     var lado = el("div", "lado");
     lado.appendChild(el("strong", "numero", reais(r.total)));
-    lado.appendChild(el("span", "oque", "garimpados em quedas de preço"));
+    lado.appendChild(el("span", "oque", "de garimpo já entregue"));
     caixa.appendChild(lado);
     caixa.title = "queda de preço encontrada pelo radar em " + r.produtos +
       " produtos, medida por mim contra o maior preço que eu mesmo vi — não o \"de/por\" da loja";

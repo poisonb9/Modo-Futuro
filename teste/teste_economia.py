@@ -84,7 +84,7 @@ f = re.search(r"function montarEconomia\(\) \{(.*?)" + chr(10) + r"  \}", HTML, 
 corpo = f.group(1) if f else ""
 checar("(ECONOMIA || {}).radar" in corpo and "grafico({ serie: r.serie" in corpo, "le' ECONOMIA.radar e desenha a serie dele")
 checar("if (!(r.total > 0)) { return; }" in corpo, "R$ 0 nao aparece")
-checar("garimpados em quedas de preço" in corpo and "queda de preço encontrada pelo radar" in corpo,
+checar("de garimpo já entregue" in corpo and "queda de preço encontrada pelo radar" in corpo,
        "rotulo curto na tela, e a definicao honesta no title")
 
 print()

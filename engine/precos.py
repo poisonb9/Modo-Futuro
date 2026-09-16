@@ -46,14 +46,21 @@ que e' o numero que o visitante vai encontrar se clicar agora.
     precos_agora.json     o INSTANTANEO, um valor por produto. De onde sai o
                           preco que a pagina mostra.
 
-## ⚠️ E O MERCADO LIVRE?
+## ⚠️ E O MERCADO LIVRE? — ENTROU EM 16/09/2026
 
-Nao ha' UM produto de Mercado Livre em jogo hoje — medido em 15/09/2026: 301
-linhas no catalogo, 301 com `fonte: aliexpress`, e `garimpo.do_mercado_livre()`
-existe e nunca foi chamada. Quando entrar, a regra vale igual e a porta e'
-outra (`/items/MLB...` devolve o preco atual). Este modulo so' sabe falar com o
-AliExpress, e e' melhor que ele nao finja saber: produto de outra fonte fica de
-fora do instantaneo e cai na trava de 24h da pagina, que e' o lado seguro.
+Ate' 15/09 nao havia UM produto do ML no catalogo (301 linhas, 301 AliExpress)
+e este modulo so' falava com o AliExpress. Decisao do Bryan em 16/09: o ML
+sobe pra loja, e a serie vem PRIMEIRO — sem reconferencia o produto entra
+hoje e a trava de 24h o derruba amanha.
+
+    AliExpress   productdetail.get em lotes de 50   -> instantaneo
+    ML           /products/{id}/items, 1 por produto -> instantaneo
+                 + UM PONTO POR DIA na serie (precos_vistos.jsonl)
+
+⚠️ A serie do ML e' escrita AQUI porque nao ha' garimpo diario do ML que a
+escreva (no AliExpress quem escreve e' o `garimpo.guardar_preco`). Um ponto
+por dia, so' se mudou — a mesma regra do AliExpress e do Awin. E' o que
+faz o `_serie_de_precos` da pagina enxergar o produto como vivo.
 """
 from __future__ import annotations
 
@@ -64,13 +71,14 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 CATALOGO = RAIZ / "estado" / "produtos_publicados.jsonl"
 AGORA = RAIZ / "estado" / "precos_agora.json"
+SERIE = RAIZ / "estado" / "precos_vistos.jsonl"
 
 # ⛔ MEDIDO, nao escolhido: acima disto a API devolve 50 e cala a boca.
 LOTE = 50
 
 
-def ids_do_catalogo() -> list[str]:
-    """Os ids distintos que o catalogo publica hoje, sem repetir."""
+def ids_do_catalogo(fonte: str = "aliexpress") -> list[str]:
+    """Os ids distintos que o catalogo publica hoje, desta fonte, sem repetir."""
     if not CATALOGO.exists():
         return []
     vistos: list[str] = []
@@ -82,8 +90,7 @@ def ids_do_catalogo() -> list[str]:
             r = json.loads(linha)
         except ValueError:
             continue
-        # ⚠️ So' AliExpress. Ver a nota do cabecalho sobre o Mercado Livre.
-        if (r.get("fonte") or "aliexpress") != "aliexpress":
+        if (r.get("fonte") or "aliexpress") != fonte:
             continue
         pid = str(r.get("id") or "").strip()
         if not pid or pid in ("None", "0") or pid in ja:
@@ -91,6 +98,50 @@ def ids_do_catalogo() -> list[str]:
         ja.add(pid)
         vistos.append(pid)
     return vistos
+
+
+def _ultimo_ponto(ids: set[str]) -> dict[str, tuple[str, float]]:
+    """{id: (ultimo dia, preco)} na serie, so' pros ids pedidos."""
+    saida: dict[str, tuple[str, float]] = {}
+    if not SERIE.exists():
+        return saida
+    for linha in SERIE.read_text(encoding="utf-8").splitlines():
+        try:
+            d = json.loads(linha)
+        except ValueError:
+            continue
+        i, q = str(d.get("id") or ""), (d.get("quando") or "")[:10]
+        if i not in ids or not q:
+            continue
+        try:
+            v = float(d.get("preco") or 0)
+        except (TypeError, ValueError):
+            continue
+        antes = saida.get(i)
+        if antes is None or q >= antes[0]:
+            saida[i] = (q, v)
+    return saida
+
+
+def anotar_serie(novos: dict[str, float], loja: str) -> int:
+    """Um ponto por produto por dia na serie, so' se o preco mudou. Devolve
+    quantos gravou. E' a regra do `garimpo.guardar_preco` e do
+    `awin.guardar_catalogo`, para quem nao tem garimpo diario proprio."""
+    from datetime import date
+    hoje = f"{date.today():%Y-%m-%d}"
+    ultimo = _ultimo_ponto(set(novos))
+    n = 0
+    SERIE.parent.mkdir(parents=True, exist_ok=True)
+    with SERIE.open("a", encoding="utf-8") as f:
+        for pid, v in novos.items():
+            antes = ultimo.get(pid)
+            if antes and abs(antes[1] - v) < 0.005:
+                continue
+            f.write(json.dumps({"id": pid, "preco": round(v, 2), "vol": 0,
+                                "loja": loja, "quando": hoje},
+                               ensure_ascii=False) + chr(10))
+            n += 1
+    return n
 
 
 def ler_instantaneo() -> dict:
@@ -161,11 +212,29 @@ def puxar(ids: list[str]) -> dict:
 def atualizar(ensaio: bool = False) -> dict:
     """Reconfere tudo e grava o instantaneo. Devolve o que mudou."""
     ids = ids_do_catalogo()
-    if not ids:
+    ids_ml = ids_do_catalogo("mercadolivre")
+    if not ids and not ids_ml:
         print("catalogo vazio — nada a reconferir")
         return {}
     antes = ler_instantaneo()
-    novos = puxar(ids)
+    novos = puxar(ids) if ids else {}
+    # ⭐ O MERCADO LIVRE, pela porta dele. Falha aqui NAO derruba o
+    # instantaneo do AliExpress: sao fontes independentes, e o que ja' foi
+    # reconferido acima e' informacao boa. O erro sobe DEPOIS de gravar.
+    erro_ml = None
+    novos_ml: dict[str, float] = {}
+    if ids_ml:
+        from . import mercadolivre
+        try:
+            novos_ml = mercadolivre.preco_atual(ids_ml)
+            print(f"ML: {len(ids_ml)} no catalogo | {len(novos_ml)} reconferidos | "
+                  f"{len(ids_ml) - len(novos_ml)} sem vendedor hoje")
+        except Exception as e:                       # noqa: BLE001
+            erro_ml = e
+            print(f"ML: reconferencia FALHOU ({type(e).__name__}) — "
+                  "leituras anteriores mantidas")
+    novos.update(novos_ml)
+    ids = ids + ids_ml
     quando = datetime.now(timezone.utc).isoformat(timespec="seconds")
     mudou = {}
     for pid, v in novos.items():
@@ -191,6 +260,11 @@ def atualizar(ensaio: bool = False) -> dict:
     AGORA.write_text(json.dumps(saida, ensure_ascii=False, indent=1),
                      encoding="utf-8")
     print(f"gravado: {AGORA.name} com {len(saida)} produtos")
+    if novos_ml:
+        n = anotar_serie(novos_ml, "Mercado Livre")
+        print(f"serie ML: +{n} ponto(s)")
+    if erro_ml is not None:
+        raise RuntimeError("reconferencia do ML falhou (AliExpress gravado)") from erro_ml
     return mudou
 
 

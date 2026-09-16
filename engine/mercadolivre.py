@@ -513,6 +513,38 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
     return reais[:quantos]
 
 
+def preco_atual(ids: list[str]) -> dict[str, float]:
+    """{id: MENOR preco anunciado agora}. Ficha sem vendedor fica de fora.
+
+    ⭐ E' a porta da reconferencia de hora em hora (`engine/precos.py`) para
+    produto do ML: a MESMA regra do AliExpress — o que nao respondeu fica
+    com a leitura anterior, o que respondeu vira instantaneo.
+
+    ⚠️ Uma chamada por produto (`/products/{id}/items`), em 4 fios com
+    espera no 429. 100 produtos = ~25 s. E o preco e' o MENOR anuncio, igual
+    a `buscar`: o comprador que clica ve' a lista de vendedores e escolhe o
+    mais barato; anunciar o buy box seria anunciar mais caro.
+
+    ⛔ 404 ("No winners found") = ficha sem vendedor HOJE: nao entra, e a
+    trava de 24h da pagina a derruba sozinha. Qualquer outro erro SOBE.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _um(pid):
+        try:
+            itens = _get(f"/products/{pid}/items").get("results") or []
+        except requests.HTTPError as e:
+            if e.response is not None and e.response.status_code == 404:
+                return pid, None
+            raise
+        precos = [float(i["price"]) for i in itens
+                  if i.get("price") and float(i["price"]) > 0]
+        return pid, (min(precos) if precos else None)
+
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        return {pid: v for pid, v in ex.map(_um, ids) if v is not None}
+
+
 def so_monetizados(produtos: list[dict]) -> list[dict]:
     """Deixa passar apenas o que TEM comissao anotada e dentro do prazo.
 

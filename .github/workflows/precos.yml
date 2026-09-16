@@ -74,6 +74,10 @@ jobs:
         env:
           ALIEXPRESS_APP_KEY:    ${{ secrets.ALIEXPRESS_APP_KEY }}
           ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+          # ⭐ desde 16/09/2026 o ML tambem e' reconferido (uma chamada por
+          # produto; 100 produtos = ~25 s). Sem os secrets ele so' avisa.
+          MELI_CLIENT_ID:        ${{ secrets.MELI_CLIENT_ID }}
+          MELI_CLIENT_SECRET:    ${{ secrets.MELI_CLIENT_SECRET }}
         run: python -X utf8 -m engine.precos --atualizar
       - name: Guardar o instantaneo
         run: |
@@ -81,6 +85,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           [ -f estado/precos_agora.json ] && git add -f estado/precos_agora.json \
             || { echo "::error::o instantaneo nao foi gravado"; exit 1; }
+          # ⚠️ a serie do ML e' escrita por este passo (nao ha' garimpo do ML)
+          [ -f estado/precos_vistos.jsonl ] && git add -f estado/precos_vistos.jsonl || true
           git diff --cached --quiet && { echo "nenhum preco mudou"; exit 0; }
           git commit -m "precos: instantaneo do catalogo"
           # ⚠️ Rebase antes do push: garimpo, fila, desempenho e vitrine

@@ -183,11 +183,24 @@ def token() -> str:
     return _cache["t"][0]
 
 
-def _get(caminho: str, **params) -> dict | list:
-    r = requests.get(API + caminho, params=params, timeout=TIMEOUT_S,
-                     headers={"Authorization": "Bearer " + token()})
-    r.raise_for_status()
-    return r.json()
+def _get(caminho: str, tentativas: int = 4, **params) -> dict | list:
+    """GET com espera no 429.
+
+    ⚠️ O ML LIMITA POR APLICACAO, e a busca dirigida dispara 6 chamadas em
+    paralelo: em 16/09/2026 a quarta medicao seguida tomou 429 no proprio
+    `/products/search`. 429 nao e' "nao tem" — e' "espera". Sem isto, dentro
+    dos fios ele virava "ficha sem vendedor" em silencio, que e' exatamente a
+    classe de defeito que apagou 49 precos em 15/09.
+    """
+    for i in range(tentativas):
+        r = requests.get(API + caminho, params=params, timeout=TIMEOUT_S,
+                         headers={"Authorization": "Bearer " + token()})
+        if r.status_code == 429 and i < tentativas - 1:
+            time.sleep(1.5 * (i + 1))
+            continue
+        r.raise_for_status()
+        return r.json()
+    raise RuntimeError("inalcancavel")
 
 
 # ⭐ ETIQUETA POR CANAL — o `matt_word` E' o campo de rastreamento do ML.
@@ -307,8 +320,95 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
     return saida
 
 
+PERGUNTA_EXPANSAO = (
+    "Alguem pediu este produto numa loja brasileira: \"{termo}\". "
+    "Escreva de 3 a 5 buscas curtas para o catalogo do Mercado Livre que "
+    "encontrem o produto de verdade (nao pecas, nao acessorios, nao livros), "
+    "cada uma com uma MARCA comum no Brasil e, se fizer sentido, uma "
+    "especificacao (potencia, litros, tamanho). Uma por linha, sem numerar, "
+    "sem comentario. Exemplo para 'liquidificador': liquidificador Mondial "
+    "550W / liquidificador Philips Walita / liquidificador Oster 1400W"
+)
+
+
+def expandir(termo: str) -> list[str]:
+    """Termo generico -> buscas com marca/especificacao. [] se nao deu.
+
+    ⭐ E' O CONSERTO DO UNICO CASO RUIM da busca dirigida (medido em
+    16/09/2026): "liquidificador" tem 150 fichas no catalogo e 2 com
+    vendedor; "liquidificador mondial" tem 8 em 20. A marca e' o que separa
+    ficha real de fantasma, e o modelo sabe quais marcas existem no Brasil.
+
+    ⚠️ Gemini primeiro, OpenRouter de reserva — o MESMO rodizio de chaves do
+    `nome_produto`, com as mesmas regras (429 queima a chave, nao a rodada).
+    Sem nenhum dos dois, devolve [] e a busca segue so' com o termo e as
+    marcas que as proprias fichas trazem — mais lenta, nao errada.
+
+    ⛔ O QUE SAI DO MODELO E' SUGESTAO DE BUSCA, nunca produto: cada linha
+    ainda passa pelo catalogo e pelos anuncios. Modelo nao inventa preco aqui
+    porque nao ha' onde inventar.
+    """
+    import requests as _rq
+    from . import keys, nome_produto as _np
+    pergunta = PERGUNTA_EXPANSAO.format(termo=termo.strip())
+
+    def _linhas(texto: str) -> list[str]:
+        saida = []
+        for ln in (texto or "").splitlines():
+            ln = ln.strip().lstrip("-*0123456789. ").strip()
+            if 3 <= len(ln) <= 80 and ln.lower() != termo.lower():
+                saida.append(ln)
+        return saida[:5]
+
+    rot = keys.gemini()
+    for _ in range(min(3, len(rot))):
+        chave = rot.proxima()
+        try:
+            r = _rq.post(
+                "https://generativelanguage.googleapis.com/v1beta/models/"
+                f"{_np.MODELO_GEMINI}:generateContent?key={chave.strip()}",
+                json={"contents": [{"parts": [{"text": pergunta}]}],
+                      "generationConfig": {"temperature": 0}},
+                timeout=_np.TEMPO_S)
+            # ⚠️ 403 "project has been denied access" e' chave MORTA, nao
+            # seca (medido 16/09/2026: 1 das 4 primeiras). Queima igual ao
+            # 429 — senao toda rodada tropeca nela de novo.
+            if r.status_code in (403, 429):
+                rot.queimar(chave)
+                continue
+            r.raise_for_status()
+            out = _linhas(r.json()["candidates"][0]["content"]["parts"][0]["text"])
+            if out:
+                return out
+        except Exception as e:                       # noqa: BLE001
+            print(f"  [!] gemini falhou ({type(e).__name__}) — proxima chave")
+            continue
+    rot = keys.openrouter()
+    for _ in range(min(3, len(rot))):
+        chave = rot.proxima()
+        try:
+            r = _rq.post("https://openrouter.ai/api/v1/chat/completions",
+                         headers={"Authorization": "Bearer " + chave,
+                                  "Content-Type": "application/json"},
+                         json={"model": _np.MODELO, "temperature": 0,
+                               "messages": [{"role": "user", "content": pergunta}]},
+                         timeout=_np.TEMPO_S)
+            if r.status_code in (402, 429):
+                rot.queimar(chave)
+                continue
+            r.raise_for_status()
+            out = _linhas(r.json()["choices"][0]["message"]["content"])
+            if out:
+                return out
+        except Exception as e:                       # noqa: BLE001
+            print(f"  [!] openrouter falhou ({type(e).__name__}) — proxima chave")
+            continue
+    return []
+
+
 def buscar(termo: str, quantos: int = 8, canal: str = "",
-           candidatos: int = 50, paginas: int = 3) -> list[dict]:
+           candidatos: int = 50, paginas: int = 3,
+           expandir_termo: bool = True) -> list[dict]:
     """Busca DIRIGIDA por produto — o caminho do pedido sob demanda.
 
     ⭐ E' ISTO que o ML tem de bom pra operacao (decisao do Bryan em 16/09/2026:
@@ -349,21 +449,47 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
     def _itens(r):
         try:
             return r, _get(f"/products/{r['id']}/items").get("results") or []
-        except requests.HTTPError:
-            return r, []
+        except requests.HTTPError as e:
+            # ⛔ SO' O 404 ("No winners found") significa ficha sem vendedor.
+            # Qualquer outro erro e' falta de INFORMACAO, nao ausencia de
+            # produto — e sobe, pra ninguem publicar "nao achei" por cima
+            # de um 429.
+            if e.response is not None and e.response.status_code == 404:
+                return r, []
+            raise
 
     # ⚠️ PAGINA ATE' ENCHER A COTA. Termo generico ("liquidificador") tem as
     # fichas reais (Mondial, Philips...) alem da primeira pagina de 50: com
     # uma pagina so' veio 1 produto. `paginas` e' o teto de tempo (~15 s cada).
     pares = []
+    vistos: set[str] = set()
+    # ⭐ PRIMEIRO AS BUSCAS EXPANDIDAS PELO MODELO (marca + especificacao):
+    # sao as que acertam. A paginacao do termo cru vem depois, so' se faltar.
+    if expandir_termo:
+        for sug in expandir(termo):
+            try:
+                d = _get("/products/search", status="active", site_id="MLB",
+                         q=sug, limit=20)
+            except requests.HTTPError:
+                continue
+            novas = [r for r in (d.get("results") or [])
+                     if r.get("id") and r["id"] not in vistos
+                     and (r.get("domain_id") or "") not in FORA_DOMINIOS]
+            vistos.update(r["id"] for r in novas)
+            with ThreadPoolExecutor(max_workers=4) as ex:
+                pares += list(ex.map(_itens, novas))
+        if sum(1 for _r, it in pares if len(it) >= 2) >= quantos:
+            paginas = 0
     for pg in range(paginas):
         d = _get("/products/search", status="active", site_id="MLB",
                  q=termo, limit=min(candidatos, 50), offset=pg * candidatos)
         fichas = [r for r in (d.get("results") or [])
-                  if r.get("id") and (r.get("domain_id") or "") not in FORA_DOMINIOS]
+                  if r.get("id") and r["id"] not in vistos
+                  and (r.get("domain_id") or "") not in FORA_DOMINIOS]
+        vistos.update(r["id"] for r in fichas)
         if not fichas:
             break
-        with ThreadPoolExecutor(max_workers=6) as ex:
+        with ThreadPoolExecutor(max_workers=4) as ex:
             pares += list(ex.map(_itens, fichas))
         if sum(1 for _r, it in pares if len(it) >= 2) >= quantos:
             break
@@ -380,7 +506,6 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
             for at in r.get("attributes") or []:
                 if at.get("id") == "BRAND" and at.get("value_name"):
                     marcas[at["value_name"]] += 1
-        vistos = {r["id"] for r, _it in pares}
         for marca, _n in marcas.most_common(3):
             d = _get("/products/search", status="active", site_id="MLB",
                      q=f"{termo} {marca}", limit=20)
@@ -388,7 +513,7 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
                      if r.get("id") and r["id"] not in vistos
                      and (r.get("domain_id") or "") not in FORA_DOMINIOS]
             vistos.update(r["id"] for r in novas)
-            with ThreadPoolExecutor(max_workers=6) as ex:
+            with ThreadPoolExecutor(max_workers=4) as ex:
                 pares += list(ex.map(_itens, novas))
 
     brutos = []

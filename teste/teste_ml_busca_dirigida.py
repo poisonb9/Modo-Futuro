@@ -63,7 +63,11 @@ class Dublê:
         raise AssertionError("caminho inesperado " + caminho)
 
 
-get_real = ml._get
+get_real, expandir_real = ml._get, ml.expandir
+# ⚠️ SEM REDE: a expansao por modelo e' dublada. Sem isto o teste chama o
+# Gemini de verdade e leva 60 s — e reprova porque as buscas extras entram
+# na contagem "uma busca so'".
+ml.expandir = lambda termo: []
 try:
     print("1. UMA PAGINA CHEIA: fantasma pula, livro sai, peca sai, menor preco vence")
     pg1 = [
@@ -128,8 +132,39 @@ try:
     d = Dublê({("xyz", 0): [ficha("F1", "Fantasma", "MLB-X")]}, {})
     ml._get = d
     checar(ml.buscar("xyz", quantos=3, paginas=1) == [], "fantasma em tudo => []")
+    print()
+    print("5. A EXPANSAO DO MODELO VEM ANTES do termo cru, e cada linha vira busca")
+    ml.expandir = lambda termo: ["liquidificador Mondial 550W", "liquidificador Oster"]
+    d = Dublê({("liquidificador Mondial 550W", 0): [ficha("E1", "Liquidificador Mondial 550W", "MLB-BLENDERS", "Mondial")],
+               ("liquidificador Oster", 0): [],
+               ("liquidificador", 0): [ficha("C1", "Cru", "MLB-BLENDERS")]},
+              {"E1": [anuncio(129.9), anuncio(119.9)], "C1": [anuncio(99.0), anuncio(98.0)]})
+    ml._get = d
+    r = ml.buscar("liquidificador", quantos=1, paginas=1)
+    qs = [c[1].get("q") for c in d.chamadas if c[0] == "/products/search"]
+    checar(qs[:2] == ["liquidificador Mondial 550W", "liquidificador Oster"],
+           f"as duas sugestoes viraram busca, primeiro ({qs})")
+    checar("liquidificador" not in qs, "cota cheia pela expansao => o termo cru nem e' buscado")
+    checar([x["_id"] for x in r] == ["E1"], "e o produto veio da sugestao")
+    ml.expandir = lambda termo: []
+
+    print()
+    print("6. ⛔ 429 NO /items NAO E' 'sem vendedor' — sobe")
+    class Dublê429(Dublê):
+        def __call__(self, caminho, **params):
+            if caminho.endswith("/items"):
+                rr = requests.Response(); rr.status_code = 429
+                raise requests.HTTPError("429", response=rr)
+            return super().__call__(caminho, **params)
+    ml._get = Dublê429({("x", 0): [ficha("A", "a", "MLB-X"), ficha("B", "b", "MLB-X")]}, {})
+    estourou = False
+    try:
+        ml.buscar("x", quantos=1, paginas=1)
+    except requests.HTTPError:
+        estourou = True
+    checar(estourou, "429 dentro do fio estoura a busca em vez de devolver []")
 finally:
-    ml._get = get_real
+    ml._get, ml.expandir = get_real, expandir_real
 
 print()
 print("tudo verde" if not falhas else f"{len(falhas)} FALHA(S)")

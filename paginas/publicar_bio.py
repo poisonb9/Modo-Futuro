@@ -629,6 +629,7 @@ def produtos_todos() -> list[dict]:
             # garimpo grava na serie e o registro publicado nao guarda. So'
             # aparece no cartao com fogo; e' um dos criterios dele.
             "nota": notas.get(str(d.get("id")), 0.0),
+            "ja_esteve": _ja_esteve(por_dia, d),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             # ⚠️ O NOME DE EXIBICAO, nao a chave. A chave e' nome interno
             # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
@@ -882,6 +883,33 @@ def _preco_hoje_num(d: dict) -> float:
         return float(txt.replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)
     except ValueError:
         return 0.0
+
+
+def _ja_esteve(por_dia: dict, d: dict) -> dict:
+    """{"preco": "R$ 6,79", "em": "14/09"} quando o produto SUBIU mas ainda
+    esta' abaixo do maior que vimos — senao {}.
+
+    ⭐ Bryan, 16/09/2026: "quando um item estiver subido mas ainda abaixo do
+    valor original, colocar de forma elegante 'ja' esteve a R$ x e a data'".
+    E' a informacao que a loja nunca da', e deixa a pessoa decidir esperar.
+
+    ⚠️ Tres condicoes, todas contra a NOSSA serie: hoje > menor visto (com o
+    piso de 2%, senao cambio vira "subiu"); hoje < maior visto (se ja' esta'
+    no maior, nao "ja' esteve" — simplesmente subiu tudo); e o menor nao e'
+    hoje. Quem esta' no minimo ganha o "de" riscado, nao esta linha.
+    """
+    dias = por_dia.get(d.get("id")) or {}
+    if len(dias) < 2:
+        return {}
+    hoje = _preco_hoje_num(d)
+    if hoje <= 0:
+        return {}
+    dia_min = min(dias, key=lambda q: dias[q])
+    menor, maior = dias[dia_min], max(dias.values())
+    if hoje > menor * 1.02 and hoje < maior:
+        return {"preco": f"R$ {menor:.2f}".replace(".", ","),
+                "em": f"{dia_min[8:10]}/{dia_min[5:7]}"}
+    return {}
 
 
 def _queda_real(serie: dict, d: dict) -> float:

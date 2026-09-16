@@ -63,6 +63,7 @@ jobs:
           AWIN_FEED_API_KEY:     ${{ secrets.AWIN_FEED_API_KEY }}
           TELEGRAM_BOT_TOKEN:    ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:      ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CANAL_VITRINE: ${{ secrets.TELEGRAM_CANAL_VITRINE }}
         run: |
           # ⚠️ EM PARALELO, e nao em fila. Ate' 13/09/2026 os cinco canais
           # rodavam em sequencia: se um travava numa chamada lenta, os
@@ -94,6 +95,11 @@ jobs:
           # rodizio Gemini -> OpenRouter -> ModelScope; sem cota, fica o corte.
           echo "===== nomes curtos"
           python -X utf8 -m engine.nome_produto || true
+          # ⭐ SINAIS DE PRECO (16/09/2026): "voltou a cair", "menor preco" e
+          # "ultima chance" viram post no canal — ate' 2 por rodada, uma vez
+          # por produto/sinal/dia. Ideia do Bryan: o que a serie diz HOJE.
+          echo "===== sinais de preco"
+          python -X utf8 -m engine.sinais --postar --quantos 2 || true
           echo "===== vigia (itens que acompanhamos de perto)"
           python -X utf8 -m engine.garimpo --vigiar || true
           # ⚠️ DEPOIS da varredura: os campeoes saem DOS DADOS que ela
@@ -138,7 +144,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/ml_raizes.json estado/nomes_curtos.json; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/ml_raizes.json estado/nomes_curtos.json estado/sinais_postados.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

@@ -430,6 +430,10 @@
   .fogo svg { width: 15px; height: 15px; display: block; }
   /* com fogo, o "novo" (que tambem mora a` direita) desce um degrau */
   .fogo ~ .novo { top: 38px; }
+  .ja-esteve {
+    font: 500 10px/1.2 var(--mono); color: var(--fraco); opacity: .8;
+    margin-top: -4px;
+  }
   .prova-social {
     font: 500 10px/1.2 var(--mono); color: var(--fraco); margin-top: -3px;
   }
@@ -648,9 +652,15 @@
       // Serve pra COMPARAR dois produtos, nao pra prometer faturamento.
       // Vira medicao de verdade quando houver `tracking_id` por canal e
       // venda atribuida.
+      // ⭐ QUEM SUBIU DE PRECO DESCE NO RANKING (Bryan, 16/09): `ja_esteve`
+      // so' existe em produto que subiu e ainda esta' abaixo do maior — o
+      // site nao empurra pra frente o que ficou mais caro. Fator 0,7: rebaixa
+      // sem esconder.
       ordem: function (a, b) {
-        return ((b.ganho || 0) * (b.vendas || 0))
-             - ((a.ganho || 0) * (a.vendas || 0));
+        var fa = a.ja_esteve && a.ja_esteve.preco ? 0.7 : 1;
+        var fb = b.ja_esteve && b.ja_esteve.preco ? 0.7 : 1;
+        return ((b.ganho || 0) * (b.vendas || 0) * fb)
+             - ((a.ganho || 0) * (a.vendas || 0) * fa);
       } },
     { id: "caiu",   rotulo: "caiu de preço",    cabe: function (p) { return (p.queda || 0) >= 5; },
       ordem: function (a, b) { return (b.queda || 0) - (a.queda || 0); } },
@@ -979,6 +989,14 @@
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }
     corpo.appendChild(lp);
+    // ⭐ "JA' ESTEVE A": produto que subiu mas ainda esta' abaixo do maior que
+    // vimos. Discreto, na fonte do rodape, com a data — deixa a pessoa
+    // decidir esperar. Quem esta' no minimo ganha o "de" riscado, nao isto.
+    if (p.ja_esteve && p.ja_esteve.preco) {
+      var je = el("div", "ja-esteve", "já esteve a " + p.ja_esteve.preco + " · " + p.ja_esteve.em);
+      je.title = "menor preço que eu mesmo vi para este produto, e quando";
+      corpo.appendChild(je);
+    }
     // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
     // numero que acabou de ser lido. Volta `null` quando nao ha' 3 pontos.
     var gr = grafico(p);

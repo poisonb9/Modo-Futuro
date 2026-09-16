@@ -73,6 +73,19 @@ try:
            f"nada nas 3 fontes, julgado => 'sem fonte' e marca os 2 ids ({e}, {marcados})")
     checar(bs.SEM_FONTE.exists() and '"termo": "macbook"' in bs.SEM_FONTE.read_text(encoding="utf-8"),
            "e entra no registro versionado buscas_sem_fonte.jsonl")
+
+    print()
+    print("4. A ROTINA DO DIA (17/09): fechamento + o que atendeu, num texto so'")
+    bs.fechamento = lambda dias=1: "BUSCAS NO SITE — ultimas 24h"
+    bs.procurar = lambda termo, canal="": (ACHADOS[1:2], [], True)
+    t = bs.rotina()
+    checar(t.startswith("BUSCAS NO SITE") and "PENDENTES ATENDIDAS HOJE" in t
+           and "'macbook' — com fonte" in t and ACHADOS[1]["link"] in t,
+           "fechamento em cima, atendidas embaixo, com link")
+    bs.pendentes = lambda dias=7: []
+    t = bs.rotina()
+    checar("nenhuma busca vazia pendente" in t and "PENDENTES" not in t,
+           "sem pendentes: diz que nao ha', nao inventa bloco")
 finally:
     modelo_texto.perguntar = perguntar_real
     try:

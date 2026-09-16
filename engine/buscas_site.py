@@ -238,17 +238,58 @@ def fechamento(dias: int = 1) -> str:
     return "\n".join(linhas)
 
 
+def _texto_atendidas(relato: list[dict], por_termo: int = 3) -> str:
+    """O que `atender` achou, em texto: um bloco por termo, os achados mais
+    baratos com link. E' a materia-prima do pedido sob demanda — publicar
+    continua sendo decisao do Bryan (regra A de 16/09)."""
+    linhas = []
+    for r in relato:
+        linhas.append(f"{r['vezes']}x {r['termo']!r} — {r['estado']}")
+        for x in r["achados"][:por_termo]:
+            linhas.append(f"   R$ {x['preco']:>8.2f}  {x['fonte']:13} {x['nome'][:52]}")
+            linhas.append(f"              {x['link']}")
+        for f in r["falhas"]:
+            linhas.append(f"   [!] {f}")
+    return chr(10).join(linhas)
+
+
+def rotina(dias: int = 7, canal: str = "") -> str:
+    """O bloco do dia, inteiro: atende as pendentes e fecha. Texto pronto.
+
+    ⭐ E' O QUE A PUBLICACAO DIARIA CHAMA (17/09/2026): ate' entao `--atender`
+    e `--fechamento` so' rodavam a mao, e "isso me fosse mostrado no
+    fechamento do dia" (Bryan, 16/09) dependia de alguem lembrar. Roda AQUI
+    (o PAT nao esta' nos secrets), e o texto vai pro Telegram do dono.
+    """
+    relato = atender(dias, canal)
+    partes = [fechamento(1)]
+    if relato:
+        partes.append("PENDENTES ATENDIDAS HOJE (publicar e' decisao sua)")
+        partes.append(_texto_atendidas(relato))
+    else:
+        partes.append("(nenhuma busca vazia pendente)")
+    return (chr(10) * 2).join(partes)
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="buscas do site: pendentes, atender, fechamento")
     a.add_argument("--pendentes", action="store_true", help="so' lista o que falta olhar")
     a.add_argument("--atender", action="store_true", help="procura fonte pra cada pendente")
     a.add_argument("--fechamento", action="store_true", help="o bloco do fim do dia")
+    a.add_argument("--rotina", action="store_true", help="atender + fechamento (a publicacao diaria)")
+    a.add_argument("--enviar", action="store_true", help="manda o bloco pro Telegram do dono")
     a.add_argument("--dias", type=int, default=7)
     a.add_argument("--canal", default="")
     o = a.parse_args()
-    if o.fechamento:
-        print(fechamento(max(1, min(o.dias, 30)) if o.dias != 7 else 1))
+    if o.rotina or o.fechamento:
+        texto = rotina(o.dias, o.canal) if o.rotina else fechamento(
+            max(1, min(o.dias, 30)) if o.dias != 7 else 1)
+        print(texto)
+        if o.enviar:
+            from . import telegram
+            ok = telegram.enviar(texto)
+            print("[telegram] " + ("enviado" if ok else "NAO enviado (sem token/chat?)"))
         return
     if o.atender:
         for r in atender(o.dias, o.canal):

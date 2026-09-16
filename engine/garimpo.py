@@ -586,8 +586,9 @@ def garimpar_ml(canal: str, quantos: int = 4, guardar: bool = True) -> list[dict
         from . import precos, resultado
         for x in escolhidos:
             resultado.anotar_publicado(x, canal, "garimpo-ml")
-        n = precos.anotar_serie({x["_id"]: x["preco_num"] for x in escolhidos},
-                                "Mercado Livre")
+        # ⭐ (preco, vendedores): o numero de vendedores e' o `vol` do ML
+        n = precos.anotar_serie({x["_id"]: (x["preco_num"], int(x.get("vendedores") or 0))
+                                 for x in escolhidos}, "Mercado Livre")
         print(f"   registrados {len(escolhidos)}; serie +{n}")
     return escolhidos
 

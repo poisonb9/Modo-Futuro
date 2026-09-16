@@ -474,6 +474,11 @@
     color: var(--fraco); border: 1px solid var(--linha);
     padding: 2px 4px; border-radius: 4px; opacity: .8;
   }
+  /* o simbolo oficial: mesma altura visual da sigla, sem caixa */
+  .loja-simbolo {
+    height: 14px; width: auto; vertical-align: -3px;
+    border: 0; padding: 0; border-radius: 3px; opacity: 1;
+  }
   .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 11px 12px 12px; gap: 7px; }
   .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
   .linha-preco { margin-top: auto; display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
@@ -640,6 +645,9 @@
   // Substituidos na publicacao (ver paginas/publicar_bio.py).
   var PRODUTOS = [];
   var BRASAO = "";
+  // ⭐ {loja: data URI} do simbolo OFICIAL (kit de afiliado); o publicador
+  // preenche a partir de paginas/simbolos_lojas/. Loja sem simbolo = sigla.
+  var SIMBOLOS = {};
   // ⭐ QUANTO A MENOS SE PAGA HOJE, somando os que cairam — e a linha por dia.
   // {"hoje": 123.4, "n": 32, "serie": [["09-13", 80.2], ...]}. Publicador
   // preenche; a conta e' a mesma do "de" riscado de cada cartao.
@@ -980,11 +988,21 @@
     // cor da loja fica so' no seletor "Loja", onde ela ajuda a escolher.
     if (p.loja) {
       var cfg = LOJAS[p.loja] || { sigla: String(p.loja).slice(0, 2).toUpperCase() };
-      var selo = el("span", "loja", cfg.sigla);
+      var selo;
+      if (SIMBOLOS[p.loja]) {
+        // ⭐ o simbolo OFICIAL do kit de afiliado, quando existe: 14 px, no
+        // fim do nome, sem borda — a marca fala por si (Bryan, 16/09)
+        selo = el("img", "loja loja-simbolo");
+        selo.src = SIMBOLOS[p.loja];
+        selo.alt = p.loja;
+        selo.loading = "lazy";
+      } else {
+        selo = el("span", "loja", cfg.sigla);
+        // ⭐ transparente, so' a tinta na cor da loja (Bryan, 16/09: "testar
+        // assim transparente e mudar so' a cor pela cor do Ali")
+        if (cfg.tinta) { selo.style.color = cfg.tinta; selo.style.borderColor = cfg.tinta; }
+      }
       selo.title = p.loja;
-      // ⭐ transparente, so' a tinta na cor da loja (Bryan, 16/09: "testar
-      // assim transparente e mudar so' a cor pela cor do Ali")
-      if (cfg.tinta) { selo.style.color = cfg.tinta; selo.style.borderColor = cfg.tinta; }
       nome.appendChild(document.createTextNode(" "));
       nome.appendChild(selo);
     }
@@ -1005,8 +1023,12 @@
     var temPromo = (p.queda || 0) >= 5;
     var temNota = p.nota >= 90;
     var temVendeu = !temPromo && p.vendeu && p.vendeu[0] >= 20;
-    var temConferido = !temPromo && !temVendeu && p.conferido;
-    if (temPromo || temNota || temVendeu || temConferido) {
+    // ⭐ MERCADO LIVRE: a API nao da' vendas, da' VENDEDORES — um anuncio
+    // por vendedor, numero que a pessoa confere na pagina da loja. Piso 2:
+    // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
+    var temVendedores = !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
+    var temConferido = !temPromo && !temVendeu && !temVendedores && p.conferido;
+    if (temPromo || temNota || temVendeu || temVendedores || temConferido) {
       var sinais = el("div", "sinais");
       // ⭐ sem Promo e sem vendas medidas, a ancora e' o que TODO produto tem:
       // "conferido hoje as 19:00". Medicao que falta nao desqualifica o
@@ -1025,6 +1047,19 @@
           " vendidos desde " + p.vendeu[1]);
         vend.title = "quanto o volume de vendas na loja cresceu desde que eu acompanho este produto";
         sinais.appendChild(vend);
+      }
+      // ⭐ "+2 vendedores desde 16/09" quando cresceu; "13 vendedores na
+      // loja" quando nao — nunca "vendidos", que no ML nao medimos.
+      if (temVendedores) {
+        var vs = p.vendedores;
+        var txt = vs[1] >= 1
+          ? "+" + vs[1] + (vs[1] === 1 ? " vendedor" : " vendedores") + " desde " + vs[2]
+          : vs[0] + " vendedores na loja";
+        var vd = el("span", "vendeu", txt);
+        vd.title = vs[1] >= 1
+          ? "quantos vendedores a mais anunciam este produto desde que eu acompanho"
+          : "quantos vendedores anunciam este produto no Mercado Livre agora";
+        sinais.appendChild(vd);
       }
       if (temPromo) {
         var promo = el("span", "promo");

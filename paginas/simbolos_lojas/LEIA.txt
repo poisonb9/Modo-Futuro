@@ -1,0 +1,4 @@
+Simbolos OFICIAIS das lojas (kit de afiliado), um arquivo por loja,
+nome = nome da loja no cartao: "Mercado Livre.png", "AliExpress.svg", "Nike.png".
+O publicador (paginas/publicar_bio.py, simbolos_lojas) transforma em data URI;
+loja sem arquivo continua com a sigla. Nao usar imagem baixada da internet.

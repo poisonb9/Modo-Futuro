@@ -503,7 +503,9 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                          "  var EXTERNOS = " + json.dumps(
                              indice, ensure_ascii=False) + ";"),
                         ('  var BRASAO = "";',
-                         '  var BRASAO = "' + _brasao_total() + '";')):
+                         '  var BRASAO = "' + _brasao_total() + '";'),
+                        ("  var SIMBOLOS = {};",
+                         "  var SIMBOLOS = " + json.dumps(simbolos_lojas()) + ";")):
         if alvo not in html:
             raise SystemExit("catalogo: marcador sumiu -> " + alvo.strip())
         html = html.replace(alvo, valor, 1)
@@ -513,6 +515,43 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
           + (f" + externas: " + ", ".join(
               f"{c} {v['n']}" for c, v in indice.items()) if indice else ""))
     return html, arquivos
+
+
+# ⭐ OS SIMBOLOS OFICIAIS DAS LOJAS (kit de afiliado), em data URI.
+#
+# Pedido do Bryan em 16/09/2026: o simbolo oficial no lugar da sigla ("Ali",
+# "ML"). O arquivo vem do KIT DE AFILIADO de cada programa — nao de imagem
+# baixada da internet — e o nome do arquivo e' o nome da loja como aparece
+# em `LOJA_DA_FONTE` / no campo `loja` do cartao: `Mercado Livre.png`,
+# `AliExpress.svg`, `Nike.png`. Loja sem arquivo continua com a sigla.
+#
+# ⚠️ PNG/WebP sao reduzidos a 32 px de altura antes de virar data URI: o
+# selo tem 14 px e a pagina inteira viaja em cada visita. SVG vai como esta'.
+SIMBOLOS_DIR = RAIZ / "paginas" / "simbolos_lojas"
+
+
+def simbolos_lojas() -> dict[str, str]:
+    """{loja: data URI} de tudo que houver em `paginas/simbolos_lojas/`."""
+    import base64
+    import io
+    if not SIMBOLOS_DIR.is_dir():
+        return {}
+    saida: dict[str, str] = {}
+    for arq in sorted(SIMBOLOS_DIR.iterdir()):
+        ext = arq.suffix.lower()
+        if ext == ".svg":
+            saida[arq.stem] = ("data:image/svg+xml;base64,"
+                               + base64.b64encode(arq.read_bytes()).decode("ascii"))
+        elif ext in (".png", ".webp", ".jpg", ".jpeg"):
+            from PIL import Image
+            im = Image.open(arq).convert("RGBA")
+            if im.height > 32:
+                im = im.resize((max(1, round(im.width * 32 / im.height)), 32), Image.LANCZOS)
+            buf = io.BytesIO()
+            im.save(buf, "WEBP", quality=90)
+            saida[arq.stem] = ("data:image/webp;base64,"
+                               + base64.b64encode(buf.getvalue()).decode("ascii"))
+    return saida
 
 
 def _brasao_total() -> str:
@@ -559,6 +598,7 @@ def produtos_todos() -> list[dict]:
     por_dia = _precos_por_dia()
     notas = _notas()
     vendas_desde = _vendas_desde()
+    vendedores = _vendedores()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -633,6 +673,8 @@ def produtos_todos() -> list[dict]:
             "ja_esteve": _ja_esteve(por_dia, d),
             # ⭐ [vendidos desde que acompanhamos, "dd/mm"] ou []
             "vendeu": list(vendas_desde.get(str(d.get("id")), ())),
+            # ⭐ so' ML: [vendedores hoje, a mais desde, "dd/mm"] ou []
+            "vendedores": vendedores.get(str(d.get("id")), []),
             # ⭐ quando o preco foi reconferido pela ultima vez ("hoje 19:00" ou
             # "15/09"): a ancora que TODO produto tem, quando nao ha' Promo
             # nem vendas medidas — a promessa da pagina dita em numero
@@ -766,7 +808,10 @@ def _vendas_desde() -> dict[str, tuple[int, str]]:
         except (TypeError, ValueError):
             continue
         q = (d.get("quando") or "")[:10]
-        if v <= 0 or not q:
+        # ⛔ NO MERCADO LIVRE `vol` E' VENDEDORES, nao vendas (17/09/2026):
+        # "+2 vendidos" com 2 vendedores novos seria mentira pequena. Ver
+        # `_vendedores`.
+        if v <= 0 or not q or d.get("loja") == "Mercado Livre":
             continue
         dias = vol.setdefault(str(d.get("id")), {})
         dias[q] = max(dias.get(q, 0), v)
@@ -778,6 +823,49 @@ def _vendas_desde() -> dict[str, tuple[int, str]]:
         ganho = dias[ordem[-1]] - dias[ordem[0]]
         if ganho > 0:
             saida[i] = (ganho, f"{ordem[0][8:10]}/{ordem[0][5:7]}")
+    return saida
+
+
+def _vendedores() -> dict[str, list]:
+    """{id: [vendedores hoje, quantos a mais desde o 1o dia, 'dd/mm']} — so'
+    Mercado Livre.
+
+    ⭐ A PROVA SOCIAL DO ML (17/09/2026). A API nao da' vendas; da' um anuncio
+    por vendedor, e esse numero a pessoa confere na pagina da loja. O cartao
+    escreve "+2 vendedores desde 16/09" quando cresceu, "13 vendedores na
+    loja" quando nao — nunca um "vendidos" que nao medimos.
+
+    ⚠️ O ultimo `vol` > 0 do ultimo dia e' o "hoje"; o primeiro dia com
+    `vol` > 0 e' a base. Pontos com vol 0 (a serie de 16/09, antes de a
+    reconferencia gravar vendedores) nao contam como base nem como hoje.
+    """
+    import json as _j
+    arq = RAIZ / "estado" / "precos_vistos.jsonl"
+    if not arq.exists():
+        return {}
+    vol: dict[str, dict[str, int]] = {}
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        try:
+            d = _j.loads(linha)
+        except ValueError:
+            continue
+        if d.get("loja") != "Mercado Livre":
+            continue
+        try:
+            v = int(d.get("vol") or 0)
+        except (TypeError, ValueError):
+            continue
+        q = (d.get("quando") or "")[:10]
+        if v <= 0 or not q:
+            continue
+        dias = vol.setdefault(str(d.get("id")), {})
+        dias[q] = max(dias.get(q, 0), v)
+    saida: dict[str, list] = {}
+    for i, dias in vol.items():
+        ordem = sorted(dias)
+        hoje, base = dias[ordem[-1]], dias[ordem[0]]
+        saida[i] = [hoje, max(0, hoje - base) if len(ordem) > 1 else 0,
+                    f"{ordem[0][8:10]}/{ordem[0][5:7]}"]
     return saida
 
 
@@ -1111,6 +1199,25 @@ def _dias(serie: dict, d: dict) -> int:
         return 0
 
 
+def _coerente(p: dict) -> dict:
+    """O trio preco / "de" riscado / queda tem de contar UMA historia.
+
+    ⛔ O DEFEITO (16/09/2026, cartao do topo da bio): "R$ 73,69 ~~R$ 73,69~~
+    ↓21%". `produtos_reais` lia `queda` do REGISTRO (calculada no dia da
+    captura, com o historico antigo) enquanto `antes` e `preco` vinham da
+    serie de hoje — tres numeros de tres momentos na mesma linha. Medido em
+    17/09: "Clipes liberacao rapida" saia com ↓7% e SEM "de" (a serie nao
+    via queda nenhuma). Agora `queda` e' `_queda_real`, como no catalogo, e
+    esta guarda tira o riscado quando ele e' igual ao preco exibido — a
+    contradicao que o Bryan viu na tela nunca mais sai, venha de onde vier.
+    """
+    if p.get("antes") and p.get("antes") == p.get("preco"):
+        p["antes"] = ""
+    if not p.get("antes"):
+        p["queda"] = 0.0
+    return p
+
+
 def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     """O que o garimpo escolheu, agrupado pela chave que a pagina usa.
 
@@ -1151,7 +1258,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
         if len(fila) >= por_canal:
             continue
         quando = (d.get("quando") or "")[:10]
-        fila.append({
+        fila.append(_coerente({
             # ⭐ O NOME ESCRITO PRA GENTE, nao pro buscador do AliExpress.
             # Sem cache e sem modelo ainda ha' nome: o corte na primeira
             # virgula, que e' onde o vendedor para de nomear e comeca a
@@ -1166,7 +1273,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # ⭐ A QUEDA E' A PROVA QUE SO' NOS TEMOS: ela e' medida contra o
             # preco que NOS vimos, nao contra o "de/por" do vendedor (que e'
             # inflado — medido: R$ 31,48 "de R$ 122,22").
-            "queda": round(float(d.get("queda") or 0), 1),
+            "queda": _queda_real(serie, d),
             "vendas": int(d.get("vendas") or 0),
             # desde quando acompanhamos ESTE produto, e quantas vezes olhamos
             "desde": _desde(serie, d),
@@ -1181,7 +1288,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # ha' quantos dias acompanhamos: "desde 13/09" faz a pessoa fazer
             # a conta; "ha' 2 dias" ja' entrega a conta feita.
             "dias": _dias(serie, d),
-        })
+        }))
     # ⚠️ `_todos` E' O ACHADINHO TOTAL: a vitrine geral, o que saiu em
     # QUALQUER canal. A pagina usa isto pra mostrar os outros cantos da casa
     # sem precisar saber quais canais existem.
@@ -1213,7 +1320,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
         if not visto_em or visto_em < limite:
             continue
         quando = (d.get("quando") or "")[:10]
-        geral.append({
+        geral.append(_coerente({
             # ⭐ O NOME ESCRITO PRA GENTE, nao pro buscador do AliExpress.
             # Sem cache e sem modelo ainda ha' nome: o corte na primeira
             # virgula, que e' onde o vendedor para de nomear e comeca a
@@ -1228,7 +1335,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # ⭐ A QUEDA E' A PROVA QUE SO' NOS TEMOS: ela e' medida contra o
             # preco que NOS vimos, nao contra o "de/por" do vendedor (que e'
             # inflado — medido: R$ 31,48 "de R$ 122,22").
-            "queda": round(float(d.get("queda") or 0), 1),
+            "queda": _queda_real(serie, d),
             "vendas": int(d.get("vendas") or 0),
             # desde quando acompanhamos ESTE produto, e quantas vezes olhamos
             "desde": _desde(serie, d),
@@ -1241,7 +1348,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.
             "antes": _antes(serie, d),
             "dias": _dias(serie, d),
-        })
+        }))
         if len(geral) >= 12:
             break
     if geral:

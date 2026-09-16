@@ -596,8 +596,15 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
     return reais[:quantos]
 
 
-def preco_atual(ids: list[str]) -> dict[str, float]:
-    """{id: MENOR preco anunciado agora}. Ficha sem vendedor fica de fora.
+def fichas_atual(ids: list[str]) -> dict[str, tuple[float, int]]:
+    """{id: (MENOR preco anunciado agora, QUANTOS vendedores anunciam)}.
+    Ficha sem vendedor fica de fora.
+
+    ⭐ O NUMERO DE VENDEDORES E' A PROVA SOCIAL DO ML (17/09/2026). A API
+    nao da' vendas; da' a lista de anuncios do produto, um por vendedor — e
+    esse numero a pessoa CONFERE na pagina da loja ("13 vendedores"). Entra
+    na serie como `vol`, e o cartao mostra "+N vendedores desde dd/mm"
+    quando cresceu, ou "N vendedores na loja" quando nao.
 
     ⭐ E' a porta da reconferencia de hora em hora (`engine/precos.py`) para
     produto do ML: a MESMA regra do AliExpress — o que nao respondeu fica
@@ -622,10 +629,15 @@ def preco_atual(ids: list[str]) -> dict[str, float]:
             raise
         precos = [float(i["price"]) for i in itens
                   if i.get("price") and float(i["price"]) > 0]
-        return pid, (min(precos) if precos else None)
+        return pid, ((min(precos), len(precos)) if precos else None)
 
     with ThreadPoolExecutor(max_workers=4) as ex:
         return {pid: v for pid, v in ex.map(_um, ids) if v is not None}
+
+
+def preco_atual(ids: list[str]) -> dict[str, float]:
+    """{id: MENOR preco anunciado agora} — a mesma chamada, so' o preco."""
+    return {pid: v[0] for pid, v in fichas_atual(ids).items()}
 
 
 def so_monetizados(produtos: list[dict]) -> list[dict]:

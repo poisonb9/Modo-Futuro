@@ -100,9 +100,9 @@ def ids_do_catalogo(fonte: str = "aliexpress") -> list[str]:
     return vistos
 
 
-def _ultimo_ponto(ids: set[str]) -> dict[str, tuple[str, float]]:
-    """{id: (ultimo dia, preco)} na serie, so' pros ids pedidos."""
-    saida: dict[str, tuple[str, float]] = {}
+def _ultimo_ponto(ids: set[str]) -> dict[str, tuple[str, float, int]]:
+    """{id: (ultimo dia, preco, vol)} na serie, so' pros ids pedidos."""
+    saida: dict[str, tuple[str, float, int]] = {}
     if not SERIE.exists():
         return saida
     for linha in SERIE.read_text(encoding="utf-8").splitlines():
@@ -117,16 +117,26 @@ def _ultimo_ponto(ids: set[str]) -> dict[str, tuple[str, float]]:
             v = float(d.get("preco") or 0)
         except (TypeError, ValueError):
             continue
+        try:
+            vol = int(d.get("vol") or 0)
+        except (TypeError, ValueError):
+            vol = 0
         antes = saida.get(i)
         if antes is None or q >= antes[0]:
-            saida[i] = (q, v)
+            saida[i] = (q, v, vol)
     return saida
 
 
-def anotar_serie(novos: dict[str, float], loja: str) -> int:
-    """Um ponto por produto por dia na serie, so' se o preco mudou. Devolve
-    quantos gravou. E' a regra do `garimpo.guardar_preco` e do
-    `awin.guardar_catalogo`, para quem nao tem garimpo diario proprio."""
+def anotar_serie(novos: dict, loja: str) -> int:
+    """Um ponto por produto por dia na serie, so' se o preco (ou o volume)
+    mudou. Devolve quantos gravou. E' a regra do `garimpo.guardar_preco` e
+    do `awin.guardar_catalogo`, para quem nao tem garimpo diario proprio.
+
+    ⭐ `novos` e' {id: preco} ou {id: (preco, vol)}. No Mercado Livre `vol`
+    e' o NUMERO DE VENDEDORES (17/09/2026) — a API nao da' vendas, e e' o
+    que o cartao usa como prova social. Vol que mudou tambem grava ponto:
+    "+2 vendedores desde 16/09" so' existe se a serie guardou os dois.
+    """
     from datetime import date
     hoje = f"{date.today():%Y-%m-%d}"
     ultimo = _ultimo_ponto(set(novos))
@@ -134,10 +144,11 @@ def anotar_serie(novos: dict[str, float], loja: str) -> int:
     SERIE.parent.mkdir(parents=True, exist_ok=True)
     with SERIE.open("a", encoding="utf-8") as f:
         for pid, v in novos.items():
+            preco, vol = (v if isinstance(v, (tuple, list)) else (v, 0))
             antes = ultimo.get(pid)
-            if antes and abs(antes[1] - v) < 0.005:
+            if antes and abs(antes[1] - preco) < 0.005 and int(antes[2]) == int(vol):
                 continue
-            f.write(json.dumps({"id": pid, "preco": round(v, 2), "vol": 0,
+            f.write(json.dumps({"id": pid, "preco": round(preco, 2), "vol": int(vol),
                                 "loja": loja, "quando": hoje},
                                ensure_ascii=False) + chr(10))
             n += 1
@@ -222,11 +233,14 @@ def atualizar(ensaio: bool = False) -> dict:
     # instantaneo do AliExpress: sao fontes independentes, e o que ja' foi
     # reconferido acima e' informacao boa. O erro sobe DEPOIS de gravar.
     erro_ml = None
+    fichas_ml: dict[str, tuple[float, int]] = {}
     novos_ml: dict[str, float] = {}
     if ids_ml:
         from . import mercadolivre
         try:
-            novos_ml = mercadolivre.preco_atual(ids_ml)
+            # ⭐ preco E vendedores numa chamada so' (17/09/2026)
+            fichas_ml = mercadolivre.fichas_atual(ids_ml)
+            novos_ml = {pid: v[0] for pid, v in fichas_ml.items()}
             print(f"ML: {len(ids_ml)} no catalogo | {len(novos_ml)} reconferidos | "
                   f"{len(ids_ml) - len(novos_ml)} sem vendedor hoje")
         except Exception as e:                       # noqa: BLE001
@@ -260,8 +274,8 @@ def atualizar(ensaio: bool = False) -> dict:
     AGORA.write_text(json.dumps(saida, ensure_ascii=False, indent=1),
                      encoding="utf-8")
     print(f"gravado: {AGORA.name} com {len(saida)} produtos")
-    if novos_ml:
-        n = anotar_serie(novos_ml, "Mercado Livre")
+    if fichas_ml:
+        n = anotar_serie(fichas_ml, "Mercado Livre")
         print(f"serie ML: +{n} ponto(s)")
     if erro_ml is not None:
         raise RuntimeError("reconferencia do ML falhou (AliExpress gravado)") from erro_ml

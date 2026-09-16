@@ -33,6 +33,11 @@ $saida += (& git pull --rebase -q 2>&1 | Out-String)
 $saida += (& git stash pop -q 2>&1 | Out-String)
 # 2. nomes curtos (Gemini -> OpenRouter -> ModelScope; sem cota, fica o corte)
 $saida += (& $python -X utf8 -m engine.nome_produto 2>&1 | Out-String)
+# 2b. buscas do site: atende as pendentes (3 fontes + juiz) e fecha o dia.
+#     ⚠️ AQUI, nao na nuvem: o SUPABASE_PAT so' existe neste .env. O bloco vai
+#     pro Telegram do dono (--enviar); publicar o que achou continua manual.
+#     `|| true` nao existe em PowerShell: o rc deste passo NAO derruba o site.
+$saida += (& $python -X utf8 -m engine.buscas_site --rotina --enviar 2>&1 | Out-String)
 # 3. publica e CONFERE no ar (estoura se nao subiu)
 $saida += (& $python -X utf8 paginas/publicar_bio.py --subir 2>&1 | Out-String)
 $rc = $LASTEXITCODE
@@ -47,5 +52,5 @@ $ErrorActionPreference = 'Stop'
 $ok = ($rc -eq 0) -and ($saida -match 'nenhum faltando')
 $linha = if ($ok) { "OK  publicado e conferido" } else { "FALHOU rc=$rc" }
 Add-Content -Path $log -Value "[$carimbo] $linha"
-Add-Content -Path $log -Value ($saida -split "`n" | Where-Object { $_ -match 'catalogo:|multometro:|nome\(s\) novo|endereco\(s\)|NAO |Error|Traceback|File "|line ' } | ForEach-Object { "    $_" })
+Add-Content -Path $log -Value ($saida -split "`n" | Where-Object { $_ -match 'catalogo:|multometro:|nome\(s\) novo|endereco\(s\)|NAO |Error|Traceback|File "|line |BUSCAS NO SITE|sem resultado|\[telegram\]' } | ForEach-Object { "    $_" })
 exit $rc

@@ -513,6 +513,18 @@
   // Substituidos na publicacao (ver paginas/publicar_bio.py).
   var PRODUTOS = [];
   var BRASAO = "";
+  // ⭐ CATEGORIAS QUE BAIXAM SO' QUANDO A PESSOA CLICA.
+  //
+  // {"Nike": {arquivo: "nike.json", n: 905, passo: 50}} — o publicador
+  // preenche. Decisao do Bryan em 16/09/2026: "nao quero o site lento".
+  // MEDIDO: a pagina pesa 258 KB; a Nike ate' R$ 150 sao 905 cartoes =
+  // 372 KB, quase dobra a pagina sozinha. Entao a categoria existe no menu
+  // desde a abertura (com a contagem certa), mas os cartoes so' chegam no
+  // primeiro clique — e entram em PRODUTOS como se sempre tivessem estado
+  // ali. Quem nunca clica nunca baixa.
+  var EXTERNOS = {};
+  var EXTERNO_CARREGADO = {};
+  function externa(nome) { return !!(nome && EXTERNOS[nome]); }
 
   var grade = document.getElementById("grade");
   var contagem = document.getElementById("contagem");
@@ -568,6 +580,19 @@
   // blocos disputam a mesma tela: 90 cartoes no de cima empurrariam o de
   // baixo pra fora e ele deixaria de existir na pratica.
   var PASSO_BLOCO = 15;
+  // ⭐ E A EXTERNA TEM PASSO PROPRIO (50 na Nike — pedido do Bryan em
+  // 16/09: "50 cards, depois os outros 50"). Vem do publicador, nao daqui.
+  function passoBloco() {
+    return (externa(canal) && EXTERNOS[canal].passo) || PASSO_BLOCO;
+  }
+  // ⚠️ E VALE PRA LISTA CORRIDA TAMBEM. A Nike inteira do instantaneo fica
+  // abaixo do teto, entao a categoria nao se divide em dois blocos — cai na
+  // lista corrida, que andaria de 90 em 90. MEDIDO no dublê em 16/09/2026:
+  // 90 cartoes + "ver mais 30", quando o pedido era 50. Um numero, dois
+  // caminhos.
+  function passoLista() {
+    return (externa(canal) && EXTERNOS[canal].passo) || PASSO;
+  }
   var mostrandoAlto = PASSO_BLOCO;
   var mostrandoBaixo = PASSO_BLOCO;
 
@@ -691,7 +716,10 @@
 
   function caro(p) { return num(p.preco) > TETO_VITRINE; }
   function soNoSegmento(p) {
-    return SO_NO_SEGMENTO.indexOf(p.canal) >= 0;
+    // ⚠️ TODA categoria externa e' so'-no-segmento, sem precisar ser
+    // listada: se ela fosse pro rolar principal, o "so' baixa ao clicar"
+    // deixaria de fazer sentido — a lista principal a pediria de cara.
+    return SO_NO_SEGMENTO.indexOf(p.canal) >= 0 || externa(p.canal);
   }
 
   // ⭐ NAVEGAR E' PASSIVO, BUSCAR E' INTENCAO. Quem digitou "nike" ja' disse o
@@ -951,6 +979,11 @@
     PRODUTOS.forEach(function (p) {
       if (p.canal && normal(p.canal) === h) { achado = p.canal; }
     });
+    // ⚠️ A EXTERNA AINDA NAO ESTA' EM PRODUTOS quando a pagina abre por
+    // `/#nike` — sem esta linha o endereco da categoria nao abriria nada.
+    Object.keys(EXTERNOS).forEach(function (c) {
+      if (normal(c) === h) { achado = c; }
+    });
     return achado;
   }
 
@@ -975,14 +1008,59 @@
     if (itens.length > quanto) {
       var falta = itens.length - quanto;
       var mais = el("button", "ver-mais",
-        "ver mais " + Math.min(falta, PASSO_BLOCO) + " de " + falta);
+        "ver mais " + Math.min(falta, passoBloco()) + " de " + falta);
       mais.type = "button";
       mais.addEventListener("click", aoVerMais);
       grade.appendChild(mais);
     }
   }
 
+  // ⭐ BAIXA A CATEGORIA EXTERNA UMA VEZ e devolve os cartoes pra PRODUTOS.
+  //
+  // ⚠️ FALHA COM AVISO, nao com grade vazia: "Nada aqui com esse filtro"
+  // sobre uma categoria que anuncia 905 no menu seria mentira da pagina.
+  // Se o arquivo nao vier, a grade diz que nao veio e oferece tentar de novo.
+  //
+  // ⚠️ E CONFERE QUE VEIO JSON: o Pages devolve a PAGINA RAIZ com 200 pra
+  // caminho inexistente (medido em 14/09/2026 no /todos). `r.json()` estoura
+  // em HTML, e isso cai no mesmo aviso — que e' o comportamento certo.
+  function carregarExterno(nome, depois) {
+    if (EXTERNO_CARREGADO[nome]) { depois(); return; }
+    if (EXTERNO_CARREGADO[nome] === false) { return; } // ja' em voo
+    EXTERNO_CARREGADO[nome] = false;
+    grade.innerHTML = "";
+    var esp = el("div", "vazio");
+    esp.appendChild(el("strong", null, "Buscando " + nome + "…"));
+    grade.appendChild(esp);
+    fetch(EXTERNOS[nome].arquivo, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) { throw new Error("http " + r.status); }
+      return r.json();
+    }).then(function (j) {
+      var lista = (j && j.produtos) || [];
+      if (!lista.length) { throw new Error("arquivo sem produtos"); }
+      lista.forEach(function (p) { PRODUTOS.push(p); });
+      EXTERNO_CARREGADO[nome] = true;
+      montarChips();
+      depois();
+    }).catch(function (e) {
+      delete EXTERNO_CARREGADO[nome];
+      grade.innerHTML = "";
+      var v = el("div", "vazio");
+      v.appendChild(el("strong", null, "Não consegui carregar " + nome + "."));
+      v.appendChild(document.createElement("br"));
+      var b = el("button", "ver-mais", "tentar de novo");
+      b.type = "button";
+      b.addEventListener("click", function () { desenhar(); });
+      v.appendChild(b);
+      grade.appendChild(v);
+    });
+  }
+
   function desenhar() {
+    if (externa(canal) && !EXTERNO_CARREGADO[canal]) {
+      carregarExterno(canal, desenhar);
+      return;
+    }
     var f = FILTROS.filter(function (x) { return x.id === atual; })[0];
     var termo = normal(busca.value.trim());
     var lista = PRODUTOS.filter(function (p) {
@@ -998,6 +1076,15 @@
       return true;
     });
     if (f.ordem) { lista = lista.slice().sort(f.ordem); }
+    // ⭐ A EXTERNA ABRE PELOS MAIS BARATOS — decisao do Bryan em 16/09/2026
+    // ("mais baratos primeiro comunica melhor com nosso publico"). O feed
+    // nao tem `vendas`, entao `ganho x vendas` e' zero pra todos e a ordem
+    // de "tudo" seria a do arquivo, que nao e' criterio nenhum.
+    if (externa(canal) && atual === "todos") {
+      lista = lista.slice().sort(function (a, b) {
+        return num(a.preco) - num(b.preco);
+      });
+    }
 
     grade.innerHTML = "";
     if (!lista.length) {
@@ -1031,11 +1118,11 @@
       bloco("Até R$ " + TETO_VITRINE, lista.filter(function (p) {
               return !caro(p);
             }), mostrandoBaixo, function () {
-              mostrandoBaixo += PASSO_BLOCO; desenhar();
+              mostrandoBaixo += passoBloco(); desenhar();
             });
       bloco("Acima de R$ " + TETO_VITRINE, lista.filter(caro),
             mostrandoAlto, function () {
-              mostrandoAlto += PASSO_BLOCO; desenhar();
+              mostrandoAlto += passoBloco(); desenhar();
             });
     } else {
       var pedaco = document.createDocumentFragment();
@@ -1048,10 +1135,10 @@
       if (lista.length > mostrando) {
         var falta = lista.length - mostrando;
         var mais = el("button", "ver-mais",
-          "ver mais " + Math.min(falta, PASSO) + " de " + falta);
+          "ver mais " + Math.min(falta, passoLista()) + " de " + falta);
         mais.type = "button";
         mais.addEventListener("click", function () {
-          mostrando += PASSO;
+          mostrando += passoLista();
           desenhar();
         });
         grade.appendChild(mais);
@@ -1165,7 +1252,7 @@
     });
     caixa.appendChild(seletor("Preço", deEstado, atual, function (v) {
       atual = v;
-      mostrando = PASSO;
+      mostrando = passoLista();
       montarChips();
       desenhar();
     }, atual !== "todos"));
@@ -1174,11 +1261,23 @@
     PRODUTOS.forEach(function (p) {
       if (p.canal) { canais[p.canal] = (canais[p.canal] || 0) + 1; }
     });
+    // ⚠️ A EXTERNA ENTRA NO MENU ANTES DE SER BAIXADA, com a contagem que o
+    // publicador mediu — e' o unico lugar onde a pessoa descobre que ela
+    // existe. Depois de baixada, a contagem passa a ser a real (de PRODUTOS),
+    // e as duas tem de bater; se nao baterem, o publicador e' quem errou.
+    Object.keys(EXTERNOS).forEach(function (c) {
+      if (!canais[c]) { canais[c] = EXTERNOS[c].n || 0; }
+    });
     var areas = Object.keys(canais).sort(function (a, b) {
       return canais[b] - canais[a];
     });
     if (areas.length) {
-      var deArea = [{ id: "", rotulo: "todas", n: PRODUTOS.length }];
+      // ⚠️ "todas" NAO CONTA A EXTERNA: ela nunca aparece no rolar de
+      // "todas", e o numero pularia de 142 pra 1.047 no clique que a baixou
+      // — sobre a mesma grade de 142.
+      var deArea = [{ id: "", rotulo: "todas", n: PRODUTOS.filter(function (p) {
+        return !externa(p.canal);
+      }).length }];
       areas.forEach(function (c) {
         deArea.push({ id: c, rotulo: c, n: canais[c] });
       });
@@ -1186,8 +1285,9 @@
         canal = v;
         // ⚠️ os dois blocos recomecam do zero a cada troca: herdar "ver
         // mais" da categoria anterior abre a proxima ja' esticada.
-        mostrandoAlto = PASSO_BLOCO;
-        mostrandoBaixo = PASSO_BLOCO;
+        mostrando = passoLista();
+        mostrandoAlto = passoBloco();
+        mostrandoBaixo = passoBloco();
         guardarUrl();
         montarChips();
         desenhar();
@@ -1349,6 +1449,9 @@
   // ⚠️ ANTES de montar os controles: `visivel()` consulta `canal`, entao
   // ler a url depois faria a primeira pintura sair com o recorte errado.
   canal = daUrl();
+  mostrando = passoLista();
+  mostrandoAlto = passoBloco();
+  mostrandoBaixo = passoBloco();
 
   animarVivo();
   montarProva();
@@ -1361,8 +1464,9 @@
     var novo = daUrl();
     if (novo === canal) { return; }
     canal = novo;
-    mostrandoAlto = PASSO_BLOCO;
-    mostrandoBaixo = PASSO_BLOCO;
+    mostrando = passoLista();
+    mostrandoAlto = passoBloco();
+    mostrandoBaixo = passoBloco();
     montarChips();
     desenhar();
   });
@@ -1370,7 +1474,7 @@
   // mais" e depois digita fica com um limite alto colado numa lista curta —
   // e o oposto tambem: acha 80 resultados e ve' 30 sem entender por que.
   busca.addEventListener("input", function () {
-    mostrando = PASSO;
+    mostrando = passoLista();
     desenhar();
   });
 })();

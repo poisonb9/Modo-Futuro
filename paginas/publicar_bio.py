@@ -223,29 +223,145 @@ def _precos_por_dia() -> dict:
     return por_dia
 
 
-def montar_catalogo() -> str:
-    """O HTML do catalogo, com os produtos e o brasao ja' dentro."""
+# ⭐ CATEGORIAS QUE NAO VIAJAM NA PAGINA — baixam quando a pessoa clica.
+#
+# Decisao do Bryan em 16/09/2026: "nao quero o site lento; se baixa so'
+# quando a pessoa clica ai' e' outra coisa, mas inicialmente eu quero tudo bem
+# fluido como ja' e'". MEDIDO no mesmo dia: a pagina pesa 258 KB (210 KB so'
+# de JSON, 1.517 B por cartao); a Nike ate' R$ 150 sao 905 cartoes de 421 B
+# = 372 KB — quase dobra a pagina sozinha. Entao a categoria vai num arquivo
+# ao lado (`nike.json`) e o HTML leva so' o nome, a contagem e o passo.
+#
+# ⚠️ `passo` e' quantos cartoes por "ver mais" DENTRO dessa categoria: 50,
+# e nao os 15 do `PASSO_BLOCO` — pedido do Bryan ("50 cards, mais baratos
+# primeiro, depois os outros 50 mais caros").
+EXTERNAS = {
+    # loja no feed -> (nome da categoria na tela, arquivo, passo)
+    "Nike BR": ("Nike", "nike.json", 50),
+}
+# ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
+# que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria
+# fora, com aviso — nao categoria com preco de ontem.
+EXTERNO_MAX_HORAS = 24
+
+
+def produtos_externos() -> dict[str, dict]:
+    """{categoria: {"arquivo", "passo", "produtos": [cartoes]}} — o que vai
+    em arquivo separado. {} quando nao ha' instantaneo valido.
+
+    ⭐ NAO TOCA NA REDE. Le' `estado/awin_catalogo.json`, gravado por
+    `python -m engine.awin --guardar` na nuvem. Publicar e' montar; coletar e'
+    outro passo, com outra credencial.
+
+    ⭐ O CARTAO E' O MESMO do AliExpress: `pontos`, `serie`, `queda`, `antes`
+    e `dias` saem da MESMA serie (`precos_vistos.jsonl`, id `awin:<id>`).
+    Produto que entrou hoje cai em "achados novos" (pontos < 2) e sem
+    grafico (< 3 dias) — a pagina ja' faz isso sozinha, e foi o padrao que o
+    Bryan fixou em 16/09: "A com o selo do C, sempre pode ser assim".
+
+    ⚠️ `vendas` = 0 e `ganho` = preco x 7,5% — o feed nao diz quantos a loja
+    vendeu. A ordem "mais baratos primeiro" e' feita pela PAGINA para
+    categoria externa (ver `todos.html`), nao por este campo.
+    """
+    import json
+    from datetime import datetime, timezone
+    arq = RAIZ / "estado" / "awin_catalogo.json"
+    if not arq.exists():
+        print("externos: sem estado/awin_catalogo.json — nenhuma categoria "
+              "externa vai ao ar")
+        return {}
+    try:
+        inst = json.loads(arq.read_text(encoding="utf-8"))
+        quando = datetime.fromisoformat(inst["quando"])
+    except (OSError, ValueError, KeyError, TypeError) as e:
+        print(f"externos: instantaneo ilegivel ({e}) — categoria fora")
+        return {}
+    if quando.tzinfo is None:
+        quando = quando.replace(tzinfo=timezone.utc)
+    idade_h = (datetime.now(timezone.utc) - quando).total_seconds() / 3600
+    if idade_h > EXTERNO_MAX_HORAS:
+        print(f"externos: instantaneo tem {idade_h:.0f}h (> {EXTERNO_MAX_HORAS}h)"
+              " — categoria FORA do ar ate' a proxima coleta")
+        return {}
+    serie = _serie_de_precos()
+    por_dia = _precos_por_dia()
+    saida: dict[str, dict] = {}
+    for p in inst.get("produtos") or []:
+        cfg = EXTERNAS.get(p.get("loja") or "")
+        if not cfg or not p.get("link") or not p.get("nome"):
+            continue
+        cat, arquivo, passo = cfg
+        try:
+            preco = float(p.get("preco") or 0)
+        except (TypeError, ValueError):
+            continue
+        if preco <= 0:
+            continue
+        pid = "awin:" + str(p.get("id"))
+        d = {"id": pid, "preco": f"R$ {preco:.2f}".replace(".", ",")}
+        saida.setdefault(cat, {"arquivo": arquivo, "passo": passo,
+                               "produtos": []})["produtos"].append({
+            "nome": p["nome"],
+            "preco": d["preco"],
+            "link": p["link"],
+            "imagem": p.get("imagem", ""),
+            "queda": _queda_real(serie, d),
+            "vendas": 0,
+            "ganho": round(preco * 0.075, 2),
+            "antes": _antes(serie, d),
+            "dias": _dias(serie, d),
+            "pontos": serie.get(pid, ("", 0, 0.0, ""))[1],
+            "serie": _serie_curta(por_dia, d),
+            "visto": f"{inst['quando'][8:10]}/{inst['quando'][5:7]}",
+            "canal": cat,
+            "id": pid,
+            "combina": [],
+        })
+    for cat, bloco in saida.items():
+        bloco["produtos"].sort(key=lambda x: float(
+            x["preco"].replace("R$", "").replace(",", ".")))
+        print(f"externos: {cat} {len(bloco['produtos'])} produto(s) "
+              f"-> {bloco['arquivo']}")
+    return saida
+
+
+def montar_catalogo() -> tuple[str, dict[str, str]]:
+    """O HTML do catalogo com os produtos e o brasao dentro, e os arquivos
+    das categorias externas ({nome do arquivo: JSON}) que sobem ao lado."""
     import json
     if not CATALOGO.exists():
-        return ""
+        return "", {}
     # ⚠️ O CATALOGO PASSA PELA MESMA LIMPEZA da bio: os comentarios daqui
     # explicam a operacao (medicao, decisao, data de incidente) e nao tem por
     # que viajar pro repositorio publico. Sem isto o detector reprova — e
     # reprovou, na primeira tentativa.
     html = mascarar(tirar_comentarios(CATALOGO.read_text(encoding="utf-8")))
     dados = produtos_todos()
+    externos = produtos_externos()
+    # ⚠️ O HTML LEVA SO' O INDICE das externas: nome, arquivo, quantos e o
+    # passo. Os cartoes ficam no arquivo ao lado.
+    indice = {cat: {"arquivo": b["arquivo"], "n": len(b["produtos"]),
+                    "passo": b["passo"]} for cat, b in externos.items()}
+    arquivos = {b["arquivo"]: json.dumps(
+        {"categoria": cat, "produtos": b["produtos"]}, ensure_ascii=False)
+        for cat, b in externos.items()}
     # ⚠️ ESTOURA SE O MARCADOR SUMIR. Substituicao que nao acha o alvo e segue
     # publicaria um catalogo VAZIO com cara de pronto.
     for alvo, valor in (("  var PRODUTOS = [];",
                          "  var PRODUTOS = " + json.dumps(
                              dados, ensure_ascii=False) + ";"),
+                        ("  var EXTERNOS = {};",
+                         "  var EXTERNOS = " + json.dumps(
+                             indice, ensure_ascii=False) + ";"),
                         ('  var BRASAO = "";',
                          '  var BRASAO = "' + _brasao_total() + '";')):
         if alvo not in html:
             raise SystemExit("catalogo: marcador sumiu -> " + alvo.strip())
         html = html.replace(alvo, valor, 1)
-    print(f"catalogo: {len(dados)} produto(s)")
-    return html
+    print(f"catalogo: {len(dados)} produto(s)"
+          + (f" + externas: " + ", ".join(
+              f"{c} {v['n']}" for c, v in indice.items()) if indice else ""))
+    return html, arquivos
 
 
 def _brasao_total() -> str:
@@ -913,7 +1029,8 @@ def _carimbar(html: str) -> tuple[str, str]:
 
 
 def publicar_no_ar(html: str, parceiros: str = "",
-                   catalogo: str = "") -> None:
+                   catalogo: str = "",
+                   externos: dict[str, str] | None = None) -> None:
     """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
 
     ⚠️ ISTO E' O PASSO QUE FALTAVA, e a falta dele fez eu anunciar uma pagina
@@ -950,6 +1067,14 @@ def publicar_no_ar(html: str, parceiros: str = "",
     if catalogo:
         (pasta / "todos").mkdir()
         (pasta / "todos" / "index.html").write_text(catalogo, encoding="utf-8")
+        # ⚠️ A CATEGORIA EXTERNA VAI AO LADO DO HTML QUE A PEDE. O fetch e'
+        # relativo ("nike.json"): nas bios o catalogo mora em `/todos/`,
+        # entao o arquivo tem de estar em `/todos/nike.json`; no site mae,
+        # na raiz. Pasta errada = 200 servindo HTML no lugar do JSON (o
+        # Pages devolve a raiz pra caminho inexistente) e a categoria abre
+        # vazia sem erro nenhum.
+        for nome, corpo in (externos or {}).items():
+            (pasta / "todos" / nome).write_text(corpo, encoding="utf-8")
     if parceiros:
         (pasta / "parceiros").mkdir()
         (pasta / "parceiros" / "index.html").write_text(
@@ -973,6 +1098,8 @@ def publicar_no_ar(html: str, parceiros: str = "",
                 # Cloudflare responde 200 servindo a pagina HTML no lugar do
                 # PNG — foi o que aconteceu em 15/09/2026.
                 _por_icone(casa)
+                for nome, corpo in (externos or {}).items():
+                    (casa / nome).write_text(corpo, encoding="utf-8")
                 if parceiros:
                     (casa / "parceiros").mkdir()
                     (casa / "parceiros" / "index.html").write_text(
@@ -990,7 +1117,9 @@ def publicar_no_ar(html: str, parceiros: str = "",
 
 
 def conferir_no_ar(marca: str, marca_parceiros: str = "",
-                   marca_catalogo: str = "") -> tuple[list[str], list[str]]:
+                   marca_catalogo: str = "",
+                   externos: dict[str, str] | None = None
+                   ) -> tuple[list[str], list[str]]:
     """Baixa cada pagina DO AR e procura a marca.
 
     Devolve `(faltando, conferidos)` — os dois POR NOME.
@@ -1057,7 +1186,24 @@ def conferir_no_ar(marca: str, marca_parceiros: str = "",
             _confere(f"{PROJETO_MAE}/parceiros",
                      f"https://{PROJETO_MAE}.pages.dev/parceiros",
                      marca_parceiros)
+        # ⚠️ A CATEGORIA EXTERNA SE CONFERE PELO PROPRIO CARIMBO. O que se
+        # procura e' `"carimbo": "<sha>"` dentro do JSON servido: se o Pages
+        # devolver a raiz (HTML, 200) no lugar do arquivo, a marca nao esta'
+        # la' e o endereco cai em `faltando` — com nome.
+        for nome, marca_e in (externos or {}).items():
+            _confere(f"{PROJETO_MAE}/{nome}",
+                     f"https://{PROJETO_MAE}.pages.dev/{nome}", marca_e)
     return faltando, conferidos
+
+
+def _carimbar_json(corpo: str) -> tuple[str, str]:
+    """Poe `"carimbo": "<sha12>"` no JSON e devolve (json, marca)."""
+    import hashlib
+    sha = hashlib.sha256(corpo.encode("utf-8")).hexdigest()[:12]
+    marca = '"carimbo": "' + sha + '"'
+    if not corpo.startswith("{"):
+        raise SystemExit("externo: o arquivo nao e' um objeto JSON")
+    return "{" + marca + ", " + corpo[1:], marca
 
 
 def main() -> None:
@@ -1076,10 +1222,14 @@ def main() -> None:
     # ⚠️ A pagina do anunciante passa pelo MESMO detector de vazamento. Ela
     # nao tem comentario de motor, mas tem nome de canal — e o detector ja'
     # pegou o nome do dono no rodape na primeira versao dela.
-    catalogo = montar_catalogo()
+    catalogo, externos = montar_catalogo()
     parceiros = (PARCEIROS.read_text(encoding="utf-8")
                  if PARCEIROS.exists() else "")
     sobrou = conferir(html) + conferir(parceiros) + conferir(catalogo)
+    # ⚠️ O JSON DA CATEGORIA EXTERNA PASSA PELO MESMO DETECTOR: ele leva
+    # nome, loja e link de cada produto, e e' tao publico quanto o HTML.
+    for corpo in externos.values():
+        sobrou += conferir(corpo)
     if sobrou:
         print("NAO PUBLIQUEI. Sobrou coisa interna na versao publica:")
         for s in sobrou:
@@ -1178,11 +1328,14 @@ def main() -> None:
     html, marca = _carimbar(html)
     parceiros, marca_p = _carimbar(parceiros) if parceiros else ("", "")
     catalogo, marca_c = _carimbar(catalogo) if catalogo else ("", "")
+    marcas_e: dict[str, str] = {}
+    for nome in list(externos):
+        externos[nome], marcas_e[nome] = _carimbar_json(externos[nome])
 
     print("\npublicando no Cloudflare Pages:")
-    publicar_no_ar(html, parceiros, catalogo)
+    publicar_no_ar(html, parceiros, catalogo, externos)
     print(f"\nconferindo no ar (procurando {marca!r}):")
-    faltando, conferidos = conferir_no_ar(marca, marca_p, marca_c)
+    faltando, conferidos = conferir_no_ar(marca, marca_p, marca_c, marcas_e)
     for nome in conferidos:
         print(f"  confirmado: {nome}")
     if faltando:

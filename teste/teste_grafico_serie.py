@@ -122,8 +122,12 @@ for nome in ("todos.html", "contra_capa.html"):
 print()
 print("5. O CAMPO CHEGA NOS TRES MONTADORES DE CARTAO")
 fonte = (RAIZ / "paginas" / "publicar_bio.py").read_text(encoding="utf-8")
-checar(fonte.count('"serie": _serie_curta(por_dia, d),') == 3,
-       "catalogo e as duas trilhas da bio carregam a serie")
+# ⚠️ QUATRO desde 16/09/2026: catalogo, as duas trilhas da bio e a categoria
+# EXTERNA (`produtos_externos`, a Nike). O quarto montador e' justamente o
+# caso que esta guarda existe pra pegar — cartao de outra origem que
+# esquecesse a serie nunca graduaria pra grafico, em silencio.
+checar(fonte.count('"serie": _serie_curta(por_dia, d),') == 4,
+       "catalogo, as duas trilhas da bio E a categoria externa carregam a serie")
 
 print()
 if falhas:

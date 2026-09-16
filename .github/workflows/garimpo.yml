@@ -60,6 +60,7 @@ jobs:
           MELI_MATT_TOOL:        ${{ secrets.MELI_MATT_TOOL }}
           AWIN_TOKEN:            ${{ secrets.AWIN_TOKEN }}
           AWIN_PUBLISHER_ID:     ${{ secrets.AWIN_PUBLISHER_ID }}
+          AWIN_FEED_API_KEY:     ${{ secrets.AWIN_FEED_API_KEY }}
           TELEGRAM_BOT_TOKEN:    ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:      ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
@@ -102,6 +103,14 @@ jobs:
           # base as 28 pendentes virariam 28 'novidades'.
           echo "===== awin (avisa so se mudou)"
           python -X utf8 -m engine.awin --vigiar || true
+          # ⭐ O CATALOGO DOS APROVADOS (a Nike), em instantaneo + serie.
+          # `|| true` pelo mesmo motivo do vigia: sem a chave do feed ou
+          # com o Awin fora do ar, o instantaneo anterior fica INTACTO
+          # (o comando recusa sobrescrever com lista vazia) e a pagina
+          # decide pela idade dele — categoria fora apos 24h, nunca com
+          # preco velho. Teto R$ 150: decisao do Bryan em 16/09/2026.
+          echo "===== awin (catalogo dos aprovados, ate R$ 150)"
+          python -X utf8 -m engine.awin --guardar --teto 150 || true
           echo "===== pedidos e placar"
           python -X utf8 -m engine.resultado --pedidos --placar || true
       - name: Guardar o historico de preco
@@ -117,7 +126,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

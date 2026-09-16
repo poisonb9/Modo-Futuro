@@ -36,6 +36,17 @@ RAIZ = Path(__file__).resolve().parent.parent
 # efemero nasce sem linha de base todo dia, e "mudou desde ontem" viraria
 # "mudou desde ha' cinco minutos" — ou seja, nunca avisaria nada.
 ESTADO = RAIZ / "estado" / "awin_programas.json"
+# ⭐ O INSTANTANEO DO CATALOGO AWIN — o que a pagina le'. Mesmo papel do
+# `precos_agora.json` do AliExpress: quem publica NAO baixa feed; le' isto.
+# Assim o publicador nao depende de rede nem da chave do feed, e a idade do
+# arquivo (`quando`) e' a trava de honestidade — ver `publicar_bio`.
+CATALOGO_ESTADO = RAIZ / "estado" / "awin_catalogo.json"
+# ⚠️ A MESMA SERIE do AliExpress, com o id prefixado `awin:`. E' dela que a
+# pagina tira `pontos`, grafico e queda — entao o produto do feed gradua
+# sozinho de "novo no catalogo" para grafico quando juntar 3 dias, sem a
+# pagina saber de onde ele veio. O prefixo evita colisao: os dois catalogos
+# usam ids numericos.
+PRECOS = RAIZ / "estado" / "precos_vistos.jsonl"
 
 API = "https://api.awin.com"
 # ⚠️ O `joined` e' o que importa: so' anunciante aprovado gera comissao.
@@ -292,6 +303,84 @@ def catalogo(teto: float = 0.0, piso: float = 0.0) -> list[dict]:
     return saida
 
 
+def _ultimo_ponto_por_id() -> dict[str, tuple[str, float]]:
+    """{id: (ultimo dia, ultimo preco)} so' dos ids `awin:` da serie."""
+    saida: dict[str, tuple[str, float]] = {}
+    if not PRECOS.exists():
+        return saida
+    for linha in PRECOS.read_text(encoding="utf-8").splitlines():
+        if '"awin:' not in linha:
+            continue
+        try:
+            d = json.loads(linha)
+        except ValueError:
+            continue
+        i, q = str(d.get("id") or ""), (d.get("quando") or "")[:10]
+        if not i.startswith("awin:") or not q:
+            continue
+        try:
+            v = float(d.get("preco") or 0)
+        except (TypeError, ValueError):
+            continue
+        antes = saida.get(i)
+        if antes is None or q >= antes[0]:
+            saida[i] = (q, v)
+    return saida
+
+
+def guardar_catalogo(teto: float = 0.0) -> dict:
+    """Baixa o catalogo, grava o INSTANTANEO e alimenta a SERIE. Devolve o
+    instantaneo.
+
+    ⭐ E' ESTE COMANDO que roda na nuvem (workflow do garimpo), e nao o
+    publicador: a chave do feed fica num lugar so', e a pagina nasce de um
+    arquivo versionado que qualquer um pode conferir.
+
+    ⚠️ A SERIE RECEBE UM PONTO POR PRODUTO POR DIA, e so' quando o preco
+    mudou desde o ultimo ponto — a mesma regra do `garimpo.guardar_preco`.
+    Sem isto, 900 linhas por dia iguais as de ontem so' engordariam o arquivo.
+    Na estreia entram todos (nao ha' ponto anterior), e isso e' o certo: e' o
+    dia 1 dos tres que o grafico exige.
+
+    ⛔ FALHA FECHADA: se `catalogo()` nao devolver produto nenhum, NAO
+    sobrescreve o instantaneo anterior. Um feed fora do ar viraria "a Nike
+    sumiu do site" em silencio — e o instantaneo velho, com `quando` de
+    ontem, e' recusado pelo publicador pela idade, que e' o aviso certo.
+    """
+    from datetime import date
+    prods = catalogo(teto=teto)
+    if not prods:
+        raise SystemExit("awin: catalogo vazio — instantaneo anterior mantido")
+    agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    inst = {"quando": agora, "teto": teto, "produtos": prods}
+    CATALOGO_ESTADO.parent.mkdir(parents=True, exist_ok=True)
+    CATALOGO_ESTADO.write_text(
+        json.dumps(inst, ensure_ascii=False), encoding="utf-8")
+
+    hoje = f"{date.today():%Y-%m-%d}"
+    ultimo = _ultimo_ponto_por_id()
+    novos = 0
+    with PRECOS.open("a", encoding="utf-8") as f:
+        for p in prods:
+            i = "awin:" + str(p["id"])
+            antes = ultimo.get(i)
+            if antes and abs(antes[1] - p["preco"]) < 0.005:
+                continue
+            linha = {"id": i, "preco": p["preco"], "vol": 0,
+                     "loja": p["loja"], "quando": hoje}
+            if antes is None:
+                linha["nome"] = p["nome"]
+            f.write(json.dumps(linha, ensure_ascii=False) + "\n")
+            novos += 1
+    lojas: dict[str, int] = {}
+    for p in prods:
+        lojas[p["loja"]] = lojas.get(p["loja"], 0) + 1
+    print(f"awin: instantaneo com {len(prods)} produtos ("
+          + ", ".join(f"{k} {v}" for k, v in lojas.items())
+          + f"); serie +{novos} ponto(s)")
+    return inst
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="estado das candidaturas no Awin")
@@ -305,10 +394,17 @@ def main() -> None:
                    help="preco maximo em reais (0 = sem corte)")
     a.add_argument("--piso", type=float, default=0.0,
                    help="preco minimo em reais (0 = sem corte)")
+    a.add_argument("--guardar", action="store_true",
+                   help="grava estado/awin_catalogo.json e alimenta a serie "
+                        "(e' o que roda na nuvem)")
     o = a.parse_args()
 
     if o.vigiar:
         vigiar()
+        return
+
+    if o.guardar:
+        guardar_catalogo(teto=o.teto)
         return
 
     if o.catalogo:

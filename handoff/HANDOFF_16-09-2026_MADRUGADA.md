@@ -117,12 +117,42 @@ o esclarecimento das 07:19 teria morrido com ela.
 
 ---
 
-## 5. O QUE CONTINUA ABERTO
+## 5. ⭐ A ÁREA NIKE FOI LIGADA NA SESSÃO SEGUINTE (16/09, 07:40–08:30 BRT)
 
-1. 🔴 `AWIN_FEED_API_KEY` regenerada no `.env` (a exposta não vale).
-2. 🔴 Ligar a área Nike (item 2) — mecanismo pronto, faltam `canal="Nike"`,
-   `SO_NO_SEGMENTO += "Nike"`, `origem: awin` no `produtos_todos()`, `PASSO_BLOCO`
-   50 para a Nike, e a Nike no `guardar_preco()` desde a 1ª rodada.
+```
+engine/awin.py          --guardar --teto 150  -> estado/awin_catalogo.json (instantâneo)
+                                              + precos_vistos.jsonl, id "awin:<id>" (série)
+paginas/publicar_bio.py produtos_externos()   lê o instantâneo (SEM rede), recusa > 24h
+                        montar_catalogo()     HTML leva só o ÍNDICE; cartões vão em nike.json
+                        publicar_no_ar        nike.json em /todos/ (bios) e na raiz (site mãe)
+                        conferir_no_ar        confere o JSON no ar pelo próprio carimbo
+paginas/todos.html      EXTERNOS              categoria no menu com contagem; fetch só no clique
+                                              passo 50 na lista corrida E nos blocos
+.github/workflows/garimpo.yml                 --guardar depois do --vigiar, `|| true`
+teste/teste_categoria_externa.py              8 seções, casos negativos teoremáticos
+```
+
+**Provado no navegador com dublê de 120 produtos:** abertura pede 0 bytes da
+Nike (só o índice no HTML); `/#nike` abre com **50 cartões + "ver mais 50 de
+70"**, mais baratos primeiro, selo "novo"; voltar a "todas" → grade sem Nike.
+
+⛔ **Defeito que o dublê expôs:** a Nike inteira (teto 150) fica abaixo de
+R$ 250, então a categoria NÃO se divide em dois blocos — cai na lista
+corrida, que andava de 90 em 90. O passo 50 tinha de valer nos dois caminhos.
+
+⛔ **Cache do navegador enganou a segunda medição** (mesma URL, HTML velho).
+Medir com `?v=N` ou reload forçado.
+
+### O que falta para a Nike aparecer NO AR (nesta ordem)
+
+1. 🔴 **Bryan:** regenerar a chave do feed no painel (a de hoje passou por
+   print) e colar como secret `AWIN_FEED_API_KEY` no GitHub **e** no `.env`.
+2. Rodar `python -m engine.awin --guardar --teto 150` (ou esperar o garimpo
+   das 10h23 UTC) → nasce `estado/awin_catalogo.json`.
+3. `python paginas/publicar_bio.py` → publica e confere `nike.json` no ar.
+
+⚠️ Sem o passo 1 nada muda no site — `EXTERNOS = {}` e a página sai idêntica
+à de hoje (medido na seção 5 da guarda).
 3. 🔴 Awin: 10 anunciantes BR nunca pedidos; Clovis Calçados (8.198 produtos).
    Encaminhar os 6 e-mails de recusa (PF × perfil).
 4. 🟠 ML por busca dirigida (item 3b) — ligado ao fluxo sob demanda.

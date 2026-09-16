@@ -196,25 +196,23 @@
   /* ⭐ O MULTOMETRO — DENTRO da prova, como quarta linha, fina. "Junta os
      dois paineis, grafico bem fininho, o valor tem que chamar atencao, nao
      quero card grande" (Bryan, 16/09/2026). */
+  /* COMPACTA (Bryan, 16/09): uma linha so' — valor, rotulo ao lado, linha
+     fininha a` direita. "medido por mim" vai pro title. */
   .economia {
-    grid-column: 1 / -1; display: grid;
-    grid-template-columns: minmax(0, 1fr) 38%; gap: 12px; align-items: center;
-    margin-top: 10px; padding-top: 12px; text-align: left;
+    grid-column: 1 / -1; display: flex; gap: 10px; align-items: center;
+    margin-top: 8px; padding-top: 8px; text-align: left;
     border-top: 1px solid rgba(255,255,255,.12);
   }
   .economia .numero {
-    display: block; font: 700 24px/1 var(--mono); color: var(--verde);
+    flex: 0 0 auto; font: 700 17px/1 var(--mono); color: var(--verde);
     letter-spacing: -.02em;
   }
   .economia .oque {
-    display: block; font-size: 10.5px; line-height: 1.3;
-    color: rgba(255,255,255,.62); margin-top: 4px;
+    flex: 0 1 auto; min-width: 0; font-size: 9.5px; line-height: 1.2;
+    color: rgba(255,255,255,.55);
   }
-  .economia .como {
-    display: block; font: 500 9.5px/1.3 var(--mono);
-    color: rgba(255,255,255,.4); margin-top: 3px;
-  }
-  .economia svg.serie { width: 100%; height: 22px; display: block; }
+  .economia .como { display: none; }
+  .economia svg.serie { flex: 1 1 60px; min-width: 50px; height: 14px; display: block; }
   .economia svg.serie .linha { stroke-width: 1px; }
   .economia svg.serie .agora { r: 1.6; }
   .economia.so-numero { grid-template-columns: 1fr; }
@@ -1454,15 +1452,12 @@
     var r = (ECONOMIA || {}).radar || {};
     // ⚠️ SO' APARECE SE HOUVER O QUE MOSTRAR: "R$ 0,00" prova o contrario.
     if (!(r.total > 0)) { return; }
-    var lado = el("div");
-    lado.appendChild(el("strong", "numero", reais(r.total)));
-    // ⭐ EM POUQUISSIMAS PALAVRAS (Bryan): a frase dele em cima, a definicao
-    // honesta em quatro palavras embaixo. O resto vai no title.
-    lado.appendChild(el("span", "oque", "economia no bolso dos clientes"));
-    lado.appendChild(el("span", "como", "medido por mim · " + r.produtos + " itens"));
-    lado.title = "queda de preço encontrada pelo radar em " + r.produtos +
-      " produtos, medida contra o maior preço que eu mesmo vi — não o \"de/por\" da loja";
-    caixa.appendChild(lado);
+    // ⭐ UMA LINHA SO' (Bryan, 16/09: "mais compactado"): valor, a frase
+    // dele, a linha. A definicao honesta vive no title da faixa inteira.
+    caixa.appendChild(el("strong", "numero", reais(r.total)));
+    caixa.appendChild(el("span", "oque", "economia no bolso dos clientes"));
+    caixa.title = "queda de preço encontrada pelo radar em " + r.produtos +
+      " produtos, medida por mim contra o maior preço que eu mesmo vi — não o \"de/por\" da loja";
     var linha = grafico({ serie: r.serie || [], queda: 100 });
     if (linha) { caixa.appendChild(linha); } else { caixa.classList.add("so-numero"); }
     caixa.hidden = false;
@@ -1479,7 +1474,9 @@
     // ⚠️ CADA NUMERO SO' APARECE SE EXISTIR. Prova social com zero prova o
     // contrario do que pretende.
     var linhas = [[String(PRODUTOS.length), "achadinhos de pé agora"]];
-    if (caiu) { linhas.push([caiu + " de " + PRODUTOS.length, "baixaram de preço"]); }
+    // ⚠️ SO' O NUMERO: "32 de 148" quebrava em duas linhas no celular e
+    // esticava o painel (Bryan, 16/09). O 148 ja' esta' na primeira caixa.
+    if (caiu) { linhas.push([String(caiu), "baixaram de preço"]); }
     if (vendas > 0) {
       linhas.push([vendas.toLocaleString("pt-BR"), "vendas destes na loja"]);
     } else if (precos.length) {

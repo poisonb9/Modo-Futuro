@@ -253,6 +253,16 @@ EXTERNAS = {
     "oBoticario BR": ("O Boticário", "boticario.json", 50),
     "Eudora BR": ("Eudora", "eudora.json", 50),
     "Avon BR": ("Avon", "avon.json", 50),
+    # ⭐ APROVADOS NA HORA em 16/09/2026 (joined foi de 1 pra 7 no mesmo dia
+    # do pedido). Cada loja e' categoria propria pela regra da Nike — loja de
+    # marca/ticket alto atras do menu. Nomes = API de programas; o
+    # `merchant_name` do feed so' se mede com a chave (aviso "sem mapa").
+    "Clovis Calçados BR": ("Clovis Calçados", "clovis.json", 50),
+    "Lauri Esporte": ("Lauri Esporte", "lauri.json", 50),
+    "Carraro BR": ("Carraro", "carraro.json", 50),
+    "Leveros BR": ("Leveros", "leveros.json", 50),
+    "Exypna": ("Exypna", "exypna.json", 50),
+    "Radiale Pneus": ("Radiale Pneus", "radiale.json", 50),
 }
 # ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria

@@ -157,3 +157,31 @@ Medir com `?v=N` ou reload forçado.
    Encaminhar os 6 e-mails de recusa (PF × perfil).
 4. 🟠 ML por busca dirigida (item 3b) — ligado ao fluxo sob demanda.
 5. Os itens 3–13 da PARTE4 continuam.
+
+---
+
+## 6. AWIN — A RODADA DE PEDIDOS DE 16/09 (manhã BRT)
+
+Bryan pediu ~45 programas com os blocos colados desta sessão (campo Site já
+em `achadinhototal`). Medido às 12h UTC:
+
+```
+joined    7   Nike · Carraro · Clovis Calçados · Exypna · Lauri Esporte · Leveros · Radiale Pneus
+pending  62   inclui Natura, Boticário, Eudora, Avon, MAC, JBL, Stanley, Kabum,
+              Centauro, adidas (re-pedido), Loja do Mecânico, Granado/Phebo,
+              9 de viagem (Decolar, CVC, Expedia, Azul, GOL, Zupper...)
+```
+
+⭐ **6 aprovaram no mesmo dia** — programa pequeno aprova sozinho. Todos os 7
+estão em `EXTERNAS` como categoria própria; **nenhum aparece no site até a
+`AWIN_FEED_API_KEY` entrar** (secret + `.env`). Loja cujo `merchant_name` do
+feed não bater com o mapa cai no aviso "loja SEM MAPA" do publicador.
+
+⚠️ **Viagem é outro motor** (promoção com validade, não produto com série);
+endpoint `promotions` deu 500 com o token atual. Não montar antes de aprovar.
+
+**Não estão no Awin BR:** Mercado Livre (programa próprio, já ativo), Growth,
+Integralmédica, Max Titanium, Sephora, Época, Tramontina.
+
+Decisão: **aguardar as 62 respostas**; próximo ataque é o **Mercado Livre**
+(busca dirigida por produto — o caminho do pedido sob demanda).

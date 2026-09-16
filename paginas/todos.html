@@ -198,18 +198,21 @@
      quero card grande" (Bryan, 16/09/2026). */
   /* COMPACTA (Bryan, 16/09): uma linha so' — valor, rotulo ao lado, linha
      fininha a` direita. "medido por mim" vai pro title. */
+  /* ⚠️ o fio fica a MESMA distancia dos numeros de cima e do valor de
+     baixo (14 px / 14 px) — antes o valor colava no fio (Bryan, 16/09) */
   .economia {
     grid-column: 1 / -1; display: flex; gap: 10px; align-items: center;
-    margin-top: 8px; padding-top: 8px; text-align: left;
+    margin-top: 14px; padding: 14px 4px 2px; text-align: left;
     border-top: 1px solid rgba(255,255,255,.12);
   }
+  .economia .lado { flex: 0 0 auto; }
   .economia .numero {
-    flex: 0 0 auto; font: 700 17px/1 var(--mono); color: var(--verde);
+    display: block; font: 700 17px/1 var(--mono); color: var(--verde);
     letter-spacing: -.02em;
   }
   .economia .oque {
-    flex: 0 1 auto; min-width: 0; font-size: 9.5px; line-height: 1.2;
-    color: rgba(255,255,255,.55);
+    display: block; font-size: 9.5px; line-height: 1.2; margin-top: 3px;
+    color: rgba(255,255,255,.55); white-space: nowrap;
   }
   .economia .como { display: none; }
   .economia svg.serie { flex: 1 1 60px; min-width: 50px; height: 14px; display: block; }
@@ -1454,8 +1457,14 @@
     if (!(r.total > 0)) { return; }
     // ⭐ UMA LINHA SO' (Bryan, 16/09: "mais compactado"): valor, a frase
     // dele, a linha. A definicao honesta vive no title da faixa inteira.
-    caixa.appendChild(el("strong", "numero", reais(r.total)));
-    caixa.appendChild(el("span", "oque", "economia no bolso dos clientes"));
+    // ⭐ A FRASE E' A VOZ DO SITE ("Eu garimpo"): o numero e' quanto o
+    // garimpo ja' achou de queda, e a linha e' esse garimpo crescendo. As
+    // versoes "economia no bolso dos clientes" (2 linhas, nao explicava) e
+    // "que o radar ja' encontrou" (longa) ficaram pra tras em 16/09.
+    var lado = el("div", "lado");
+    lado.appendChild(el("strong", "numero", reais(r.total)));
+    lado.appendChild(el("span", "oque", "garimpados em quedas de preço"));
+    caixa.appendChild(lado);
     caixa.title = "queda de preço encontrada pelo radar em " + r.produtos +
       " produtos, medida por mim contra o maior preço que eu mesmo vi — não o \"de/por\" da loja";
     var linha = grafico({ serie: r.serie || [], queda: 100 });

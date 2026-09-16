@@ -990,57 +990,74 @@ def publicar_no_ar(html: str, parceiros: str = "",
 
 
 def conferir_no_ar(marca: str, marca_parceiros: str = "",
-                   marca_catalogo: str = "") -> list[str]:
-    """Baixa cada pagina DO AR e procura a marca. Devolve quem nao tem.
+                   marca_catalogo: str = "") -> tuple[list[str], list[str]]:
+    """Baixa cada pagina DO AR e procura a marca.
+
+    Devolve `(faltando, conferidos)` — os dois POR NOME.
 
     ⚠️ A PROVA E' O BYTE QUE O VISITANTE RECEBE. "Deployment complete" e commit
     verde ja' mentiram juntos uma vez — em 12/09/2026, e foi assim que a
     pagina com os botoes velhos ficou 40 minutos no ar sendo anunciada como
     nova.
+
+    ⛔ E QUEM CONFIRMOU VOLTA NOMEADO, nao contado. Ate' 16/09/2026 o fim da
+    publicacao imprimia `confirmado em {len(PROJETOS)} projeto(s)`: um numero
+    FIXO, que nao vinha da verificacao e nao sabia o que ela tinha olhado. Ele
+    dizia 5 logo depois de `publicado:` ter impresso 6 linhas (as cinco bios
+    mais o site mae), e as rotas `/todos` e `/parceiros` — que sao o endereco
+    escrito no perfil do Awin — nao apareciam em canto nenhum.
+
+    ⭐ Guarda que conta sem nomear e' guarda que sera' ignorada: quando os dois
+    numeros divergem, quem le' nao tem como saber se sobrou um endereco ou se
+    faltou um, e a reacao barata e' parar de olhar. Agora a lista de
+    confirmados E' a lista do que foi baixado, e some quando nada foi.
     """
     import requests
-    faltando = []
-    for proj in PROJETOS:
+    faltando: list[str] = []
+    conferidos: list[str] = []
+
+    def _confere(rotulo: str, url: str, esperada: str) -> None:
+        """Baixa `url` e exige `esperada` no corpo. Registra o desfecho."""
         try:
-            r = requests.get(f"https://{proj}.pages.dev/", timeout=30)
-            if marca not in r.text:
-                faltando.append(proj)
+            r = requests.get(url, timeout=30)
+            if esperada in r.text:
+                conferidos.append(rotulo)
+            else:
+                faltando.append(rotulo)
         except Exception as e:
-            faltando.append(f"{proj} (nao respondeu: {e})")
+            faltando.append(f"{rotulo} (nao respondeu: {e})")
+
+    for proj in PROJETOS:
+        _confere(proj, f"https://{proj}.pages.dev/", marca)
         # ⚠️ A ROTA /todos TAMBEM SE CONFERE. E 200 NAO E' PROVA: o Pages
         # devolve a PAGINA RAIZ com status 200 quando o caminho nao existe.
         # Medido em 14/09/2026: `/todos` respondia 200 servindo a bio, e o
         # deploy nem tinha acontecido.
         if marca_catalogo:
-            try:
-                r = requests.get(f"https://{proj}.pages.dev/todos", timeout=30)
-                if marca_catalogo not in r.text:
-                    faltando.append(f"{proj}/todos")
-            except Exception as e:
-                faltando.append(f"{proj}/todos (nao respondeu: {e})")
+            _confere(f"{proj}/todos", f"https://{proj}.pages.dev/todos",
+                     marca_catalogo)
         if not marca_parceiros:
             continue
         # ⚠️ A ROTA SE CONFERE SOZINHA. A raiz estar nova nao prova que
         # `/parceiros` subiu: sao dois arquivos no mesmo deploy, e e' o
         # segundo que esta' escrito no perfil do Awin.
-        try:
-            r = requests.get(f"https://{proj}.pages.dev/parceiros",
-                             timeout=30)
-            if marca_parceiros not in r.text:
-                faltando.append(f"{proj}/parceiros")
-        except Exception as e:
-            faltando.append(f"{proj}/parceiros (nao respondeu: {e})")
+        _confere(f"{proj}/parceiros", f"https://{proj}.pages.dev/parceiros",
+                 marca_parceiros)
     # ⚠️ NO SITE MAE A MARCA DO CATALOGO TEM DE ESTAR NA RAIZ. Conferir so'
     # os outros deixaria a casa da operacao fora da verificacao — e ela e' a
     # unica que nao tem bio pra servir de reserva se o deploy falhar.
     if marca_catalogo:
-        try:
-            r = requests.get(f"https://{PROJETO_MAE}.pages.dev/", timeout=30)
-            if marca_catalogo not in r.text:
-                faltando.append(PROJETO_MAE)
-        except Exception as e:
-            faltando.append(f"{PROJETO_MAE} (nao respondeu: {e})")
-    return faltando
+        _confere(f"{PROJETO_MAE} (site mae)",
+                 f"https://{PROJETO_MAE}.pages.dev/", marca_catalogo)
+        if marca_parceiros:
+            # ⚠️ O SITE MAE TAMBEM SERVE `/parceiros`, e e' ELE que esta'
+            # escrito no perfil do Awin (`achadinhototal.pages.dev/parceiros`).
+            # O `publicar_no_ar` monta essa rota nas duas pastas desde
+            # 15/09/2026; a verificacao olhava so' a das bios.
+            _confere(f"{PROJETO_MAE}/parceiros",
+                     f"https://{PROJETO_MAE}.pages.dev/parceiros",
+                     marca_parceiros)
+    return faltando, conferidos
 
 
 def main() -> None:
@@ -1165,13 +1182,24 @@ def main() -> None:
     print("\npublicando no Cloudflare Pages:")
     publicar_no_ar(html, parceiros, catalogo)
     print(f"\nconferindo no ar (procurando {marca!r}):")
-    faltando = conferir_no_ar(marca, marca_p, marca_c)
+    faltando, conferidos = conferir_no_ar(marca, marca_p, marca_c)
+    for nome in conferidos:
+        print(f"  confirmado: {nome}")
     if faltando:
         raise SystemExit(
             "NAO ESTA' NO AR em: " + ", ".join(faltando) +
             "\nO push pode ter dado certo e o site continuar velho "
             "— foi exatamente isso em 12/09/2026. Nao anuncie como publicado.")
-    print(f"  confirmado em {len(PROJETOS)} projeto(s)")
+    # ⛔ E O NUMERO SAI DA VERIFICACAO, nunca de `len(PROJETOS)`. Contar a
+    # lista de projetos e chamar isso de "confirmado" e' afirmar sobre o pai o
+    # que so' se mediu no filho: os enderecos conferidos incluem as rotas
+    # `/todos` e `/parceiros`, e o site mae nao esta' em PROJETOS.
+    if not conferidos:
+        raise SystemExit(
+            "a verificacao nao baixou pagina nenhuma — sem endereco conferido "
+            "nao ha' o que confirmar. Isto nao e' sucesso.")
+    print(f"  {len(conferidos)} endereco(s) conferidos no ar, "
+          f"nenhum faltando")
 
 
 if __name__ == "__main__":

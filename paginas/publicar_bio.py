@@ -425,6 +425,47 @@ def economia(dados: list[dict], dias: int = 14) -> dict:
     return {"hoje": round(hoje_total, 2), "n": n, "serie": serie}
 
 
+def economia_radar(dias: int = 30) -> dict:
+    """O MULTOMETRO: quanto de queda o radar JA' ENCONTROU, somando todos os
+    produtos que passaram por ele — e a soma dia a dia, que SO' SOBE.
+
+    ⭐ Decisao do Bryan em 16/09/2026: "o volume vai ser o valor de economia
+    dos RADARES, nao de vendas — ainda nao temos volume de venda, e mudar o
+    multometro no futuro vai pegar mal". Ele fica assim desde o dia 1.
+
+    ⭐ A DEFINICAO QUE SO' SOBE: por produto, (maior preco que NOS vimos) -
+    (menor preco que NOS vimos). O maior so' cresce e o menor so' cai, entao
+    a diferenca nunca diminui — sem truque de acumulo. Produto que saiu do ar
+    continua contando: a queda foi encontrada e medida.
+
+    ⚠️ O QUE ELE E': queda encontrada pelo radar, contra a nossa propria
+    serie (a mesma do "de" riscado). O QUE NAO E': dinheiro que alguem pos no
+    bolso — isso pede venda, e o rotulo da pagina diz "que o radar ja'
+    encontrou", nao "economizado por voce". Piso de 2% por produto, igual ao
+    cartao: abaixo disso e' arredondamento e cambio, nao queda.
+    """
+    from datetime import date, timedelta
+    por_dia = _precos_por_dia()
+    serie = []
+    total_hoje, n_hoje = 0.0, 0
+    for k in range(dias - 1, -1, -1):
+        dia = (date.today() - timedelta(days=k)).isoformat()
+        total, n = 0.0, 0
+        for _i, ds in por_dia.items():
+            ate = [v for q, v in ds.items() if q <= dia]
+            if len(ate) < 2:
+                continue
+            maior, menor = max(ate), min(ate)
+            if maior > menor * 1.02:
+                total += maior - menor
+                n += 1
+        serie.append([dia[5:], round(total, 2)])
+        total_hoje, n_hoje = total, n
+    while serie and serie[0][1] == 0 and len(serie) > 3:
+        serie.pop(0)
+    return {"total": round(total_hoje, 2), "produtos": n_hoje, "serie": serie}
+
+
 def montar_catalogo() -> tuple[str, dict[str, str]]:
     """O HTML do catalogo com os produtos e o brasao dentro, e os arquivos
     das categorias externas ({nome do arquivo: JSON}) que sobem ao lado."""
@@ -448,6 +489,7 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     # ⚠️ ESTOURA SE O MARCADOR SUMIR. Substituicao que nao acha o alvo e segue
     # publicaria um catalogo VAZIO com cara de pronto.
     eco = economia(dados)
+    eco["radar"] = economia_radar()
     for alvo, valor in (("  var PRODUTOS = [];",
                          "  var PRODUTOS = " + json.dumps(
                              dados, ensure_ascii=False) + ";"),
@@ -461,8 +503,8 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
         if alvo not in html:
             raise SystemExit("catalogo: marcador sumiu -> " + alvo.strip())
         html = html.replace(alvo, valor, 1)
-    print(f"economia: R$ {eco['hoje']:.2f} a menos hoje em {eco['n']} produto(s), "
-          f"linha de {len(eco['serie'])} dia(s)")
+    print(f"multometro: R$ {eco['radar']['total']:.2f} de queda encontrada em "
+          f"{eco['radar']['produtos']} produto(s), linha de {len(eco['radar']['serie'])} dia(s)")
     print(f"catalogo: {len(dados)} produto(s)"
           + (f" + externas: " + ", ".join(
               f"{c} {v['n']}" for c, v in indice.items()) if indice else ""))

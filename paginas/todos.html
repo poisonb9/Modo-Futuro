@@ -193,24 +193,33 @@
     color: rgba(255,255,255,.62); margin-top: 6px;
   }
 
-  /* ⭐ O MONTANTE — entre a prova e a busca (pedido do Bryan, 16/09/2026).
-     Numero grande, rotulo honesto ("comprando um de cada, hoje") e a linha
-     do total dia a dia, no MESMO desenho da serie dos cartoes. */
+  /* ⭐ O MULTOMETRO — DENTRO da prova, como quarta linha, fina. "Junta os
+     dois paineis, grafico bem fininho, o valor tem que chamar atencao, nao
+     quero card grande" (Bryan, 16/09/2026). */
   .economia {
-    display: grid; grid-template-columns: minmax(0, 1fr) 42%; gap: 10px;
-    align-items: center; margin: 0 0 8px; padding: 12px 16px;
-    background: var(--painel); border-radius: 16px;
+    grid-column: 1 / -1; display: grid;
+    grid-template-columns: minmax(0, 1fr) 38%; gap: 12px; align-items: center;
+    margin-top: 10px; padding-top: 12px; text-align: left;
+    border-top: 1px solid rgba(255,255,255,.12);
   }
   .economia .numero {
-    display: block; font: 700 22px/1.1 var(--mono); color: var(--verde);
+    display: block; font: 700 24px/1 var(--mono); color: var(--verde);
     letter-spacing: -.02em;
   }
   .economia .oque {
-    display: block; font-size: 10.5px; line-height: 1.35;
-    color: rgba(255,255,255,.62); margin-top: 5px;
+    display: block; font-size: 10.5px; line-height: 1.3;
+    color: rgba(255,255,255,.62); margin-top: 4px;
   }
-  .economia svg.serie { width: 100%; height: 34px; display: block; }
-  .economia .so-numero { grid-template-columns: 1fr; }
+  .economia .como {
+    display: block; font: 500 9.5px/1.3 var(--mono);
+    color: rgba(255,255,255,.4); margin-top: 3px;
+  }
+  .economia svg.serie { width: 100%; height: 22px; display: block; }
+  .economia svg.serie .linha { stroke-width: 1px; }
+  .economia svg.serie .agora { r: 1.6; }
+  .economia.so-numero { grid-template-columns: 1fr; }
+  /* o fio vertical da prova nao se aplica a` faixa */
+  .prova > .economia::before { display: none; }
 
   /* ---------------- filtros ---------------- */
   .ferramentas {
@@ -403,13 +412,11 @@
      (inline), o texto e' a sigla ate' o simbolo oficial do kit entrar.
      ⚠️ FORA DA FOTO desde a mesma noite: na foto ele cobria a legenda do
      vendedor ("8BitDo OFFICIAL STORE") — o Bryan viu no celular. */
-  /* a linha inteira e' do selo (flex-basis 100%): ele fica sozinho acima
-     do preco, e o preco continua na linha dele */
-  .origem { flex: 0 0 100%; line-height: 1; margin-bottom: 1px; }
   .loja {
-    display: inline-block;
-    font: 800 8.5px/1 var(--mono); letter-spacing: .04em;
-    padding: 3px 5px; border-radius: 5px;
+    display: inline-block; vertical-align: 2px; white-space: nowrap;
+    font: 600 8px/1 var(--mono); letter-spacing: .05em;
+    color: var(--fraco); border: 1px solid var(--linha);
+    padding: 2px 4px; border-radius: 4px; opacity: .85;
   }
   .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 11px 12px 12px; gap: 7px; }
   .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
@@ -527,8 +534,7 @@
       <span class="vivo-preco" id="vivo_preco"></span>
       <span class="vivo-dica" id="vivo_dica"></span>
     </a>
-    <div class="prova" id="prova"></div>
-    <div class="economia" id="economia" hidden></div>
+    <div class="prova" id="prova"><div class="economia" id="economia" hidden></div></div>
   </header>
 
   <div class="ferramentas">
@@ -850,24 +856,26 @@
     a.appendChild(foto);
 
     var corpo = el("div", "corpo");
-    corpo.appendChild(el("div", "nome", p.nome));
+    var nome = el("div", "nome", p.nome);
+    // ⭐ O SELO DA LOJA: no FIM DO NOME, na mesma linha do texto, cinza
+    // vazado — sem cor, sem linha propria. Quarta casa dele em 16/09: na
+    // foto cobria legenda; no rodape cortava o radar; acima do preco
+    // "dividia o cartao, e o vermelho da' impressao de negacao" (Bryan). A
+    // cor da loja fica so' no seletor "Loja", onde ela ajuda a escolher.
+    if (p.loja) {
+      var cfg = LOJAS[p.loja] || { sigla: String(p.loja).slice(0, 2).toUpperCase() };
+      var selo = el("span", "loja", cfg.sigla);
+      selo.title = p.loja;
+      nome.appendChild(document.createTextNode(" "));
+      nome.appendChild(selo);
+    }
+    corpo.appendChild(nome);
 
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
     // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
     // vendedor), no rodape (cortava o "no radar") e a direita do preco.
     // Aqui ele le como "de onde vem", colado ao nome, e o preco fica limpo.
-    if (p.loja) {
-      var cfg = LOJAS[p.loja] || { cor: "#6b6b76", texto: "#fff",
-                                   sigla: String(p.loja).slice(0, 2).toUpperCase() };
-      var origem = el("div", "origem");
-      var selo = el("span", "loja", cfg.sigla);
-      selo.style.background = cfg.cor;
-      selo.style.color = cfg.texto;
-      selo.title = p.loja;
-      origem.appendChild(selo);
-      lp.appendChild(origem);
-    }
     lp.appendChild(el("span", "preco", p.preco));
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
@@ -1429,23 +1437,34 @@
     caixa.classList.toggle("tres", caixa.children.length >= 3);
   }
 
+  function reais(v) {
+    return "R$ " + v.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  // ⭐ O MULTOMETRO (Bryan, 16/09/2026): "como o multometro que calcula as
+  // multas de uma cidade, o nosso calcula a economia total que o site ja'
+  // gerou". Decisao dele: o volume e' o do RADAR (queda encontrada), nao de
+  // venda — "mudar o multometro no futuro vai pegar mal". Fica assim.
+  //
+  // ⭐ Por produto: maior preco visto - menor preco visto. So' sobe, por
+  // construcao (ver `economia_radar` no publicador). A linha e' o total dia a
+  // dia. O rotulo diz o que e': "que o radar ja' encontrou de queda".
   function montarEconomia() {
     var caixa = document.getElementById("economia");
-    var e = ECONOMIA || {};
-    // ⚠️ SO' APARECE SE HOUVER O QUE MOSTRAR: "R$ 0,00 a menos" prova o
-    // contrario do que pretende.
-    if (!(e.hoje > 0) || !(e.n > 0)) { return; }
+    var r = (ECONOMIA || {}).radar || {};
+    // ⚠️ SO' APARECE SE HOUVER O QUE MOSTRAR: "R$ 0,00" prova o contrario.
+    if (!(r.total > 0)) { return; }
     var lado = el("div");
-    lado.appendChild(el("strong", "numero",
-      "R$ " + e.hoje.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".")));
-    lado.appendChild(el("span", "oque",
-      "a menos hoje, comprando um de cada dos " + e.n +
-      " que caíram — contra o maior preço que eu mesmo vi"));
+    lado.appendChild(el("strong", "numero", reais(r.total)));
+    // ⭐ EM POUQUISSIMAS PALAVRAS (Bryan): a frase dele em cima, a definicao
+    // honesta em quatro palavras embaixo. O resto vai no title.
+    lado.appendChild(el("span", "oque", "economia no bolso dos clientes"));
+    lado.appendChild(el("span", "como", "medido por mim · " + r.produtos + " itens"));
+    lado.title = "queda de preço encontrada pelo radar em " + r.produtos +
+      " produtos, medida contra o maior preço que eu mesmo vi — não o \"de/por\" da loja";
     caixa.appendChild(lado);
-    // ⭐ A LINHA REUSA O DESENHO DO CARTAO: mesma regra dos 3 pontos, mesma
-    // cor de "caiu". Serie curta = so' o numero, sem grafico.
-    var g = grafico({ serie: e.serie || [], queda: 100 });
-    if (g) { caixa.appendChild(g); } else { caixa.classList.add("so-numero"); }
+    var linha = grafico({ serie: r.serie || [], queda: 100 });
+    if (linha) { caixa.appendChild(linha); } else { caixa.classList.add("so-numero"); }
     caixa.hidden = false;
   }
 
@@ -1467,11 +1486,14 @@
       linhas.push(["R$ " + Math.min.apply(null, precos).toFixed(2).replace(".", ","),
                    "o mais barato de hoje"]);
     }
+    // ⚠️ os tres numeros entram ANTES da faixa do multometro, que ja' esta'
+    // no HTML como ultima filha da prova
+    var faixa = document.getElementById("economia");
     linhas.forEach(function (par) {
       var d = el("div");
       d.appendChild(el("strong", "numero", par[0]));
       d.appendChild(el("span", "oque", par[1]));
-      caixa.appendChild(d);
+      caixa.insertBefore(d, faixa);
     });
   }
 

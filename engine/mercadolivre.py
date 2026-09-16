@@ -94,6 +94,9 @@ FORA = {
 # honestidade do preco reconferido em 48h, e pela mesma razao: o que envelhece
 # SAI SOZINHO, sem ninguem precisar decidir.
 VALIDADE_COMISSAO_DIAS = 14
+# ⛔ DOMINIOS QUE A BUSCA POR TEXTO TRAZ E NAO SAO O PRODUTO: "air fryer"
+# devolve o livro de receitas na frente da fritadeira (medido 16/09/2026).
+FORA_DOMINIOS = {"MLB-BOOKS", "MLB-EBOOKS", "MLB-MAGAZINES"}
 
 _cache: dict[str, tuple[str, float]] = {}
 
@@ -304,6 +307,134 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
     return saida
 
 
+def buscar(termo: str, quantos: int = 8, canal: str = "",
+           candidatos: int = 50, paginas: int = 3) -> list[dict]:
+    """Busca DIRIGIDA por produto — o caminho do pedido sob demanda.
+
+    ⭐ E' ISTO que o ML tem de bom pra operacao (decisao do Bryan em 16/09/2026:
+    "quando for um pedido assim e tiver em diversas lojas, publica o melhor de
+    cada canal"). Os mais vendidos dele sao sabao em po'; a busca por nome e'
+    onde ele vira loja brasileira com entrega rapida ao lado do AliExpress.
+
+    ⚠️ O `/sites/MLB/search` continua 403 (reconferido em 16/09/2026, com e
+    sem token). O que abre e' o `/products/search` — o CATALOGO, fichas sem
+    preco — e o preco vem de `/products/{id}/items`, um anuncio por vendedor.
+
+    ⛔ DUAS ARMADILHAS MEDIDAS em 16/09/2026:
+
+    1. Termo generico ("liquidificador") devolve FICHAS FANTASMA na frente:
+       50 fichas, ZERO com vendedor — cada `/items` responde 404 "No winners
+       found". Nao e' erro nosso nem token: e' catalogo sem anuncio. Por isso
+       o 404 aqui e' "pula", nao "estoura", e por isso `candidatos` > `quantos`.
+    2. O PRIMEIRO anuncio NAO E' O MAIS BARATO: `[72, 149.99]`, `[289, 127,
+       309]`. `mais_vendidos` le o primeiro (buy box); aqui o que vale e' o
+       MENOR — o pedido e' "melhor preco possivel".
+
+    3. O `/items` NAO TRAZ `sold_quantity` (medido: 22 campos, nenhum de
+       venda). O unico sinal de "produto real" e' QUANTOS VENDEDORES a ficha
+       tem: a Elgin tinha 18, o "liquidificador de R$ 500" tinha 1. Ficha de
+       1 vendedor so' entra se nao houver nada com 2 ou mais.
+    4. A busca por texto traz LIVRO ("Receitas na Air Fryer", MLB-BOOKS) na
+       frente de fritadeira. O `domain_id` da ficha e' quem separa.
+
+    ⚠️ Custo: ~0,8 s por ficha (UMA chamada — a foto ja' vem na busca), e o
+    ACERTO e' de 10-15% em qualquer corte (medido: 2/20 com `q`, 3/20 com
+    `q`+dominio, `domain_id` sozinho da' 400). Serial, 50 candidatos = 40 s
+    pra 5 produtos. As chamadas sao independentes, entao vao em PARALELO
+    (6 fios): 50 candidatos em ~8 s. E' o preco da velocidade que o pedido
+    exige; nao chamar em loop.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _itens(r):
+        try:
+            return r, _get(f"/products/{r['id']}/items").get("results") or []
+        except requests.HTTPError:
+            return r, []
+
+    # ⚠️ PAGINA ATE' ENCHER A COTA. Termo generico ("liquidificador") tem as
+    # fichas reais (Mondial, Philips...) alem da primeira pagina de 50: com
+    # uma pagina so' veio 1 produto. `paginas` e' o teto de tempo (~15 s cada).
+    pares = []
+    for pg in range(paginas):
+        d = _get("/products/search", status="active", site_id="MLB",
+                 q=termo, limit=min(candidatos, 50), offset=pg * candidatos)
+        fichas = [r for r in (d.get("results") or [])
+                  if r.get("id") and (r.get("domain_id") or "") not in FORA_DOMINIOS]
+        if not fichas:
+            break
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            pares += list(ex.map(_itens, fichas))
+        if sum(1 for _r, it in pares if len(it) >= 2) >= quantos:
+            break
+
+    # ⭐ SEGUNDA PASSADA POR MARCA. Termo generico e' pobre no catalogo
+    # ("liquidificador": 150 fichas, 2 com vendedor), mas termo + marca e'
+    # rico ("liquidificador mondial": 8 de 20). As marcas nao vem de lista
+    # nossa — vem do atributo BRAND das fichas que a propria busca devolveu,
+    # entao servem pra qualquer produto sem ninguem manter tabela.
+    if sum(1 for _r, it in pares if len(it) >= 2) < quantos:
+        from collections import Counter as _C
+        marcas = _C()
+        for r, _it in pares:
+            for at in r.get("attributes") or []:
+                if at.get("id") == "BRAND" and at.get("value_name"):
+                    marcas[at["value_name"]] += 1
+        vistos = {r["id"] for r, _it in pares}
+        for marca, _n in marcas.most_common(3):
+            d = _get("/products/search", status="active", site_id="MLB",
+                     q=f"{termo} {marca}", limit=20)
+            novas = [r for r in (d.get("results") or [])
+                     if r.get("id") and r["id"] not in vistos
+                     and (r.get("domain_id") or "") not in FORA_DOMINIOS]
+            vistos.update(r["id"] for r in novas)
+            with ThreadPoolExecutor(max_workers=6) as ex:
+                pares += list(ex.map(_itens, novas))
+
+    brutos = []
+    for r, itens in pares:
+        pid = r["id"]
+        precos = [float(i["price"]) for i in itens
+                  if i.get("price") and float(i["price"]) > 0]
+        if not precos:
+            continue
+        menor = min(precos)
+        vencedor = next((i for i in itens
+                         if float(i.get("price") or 0) == menor), itens[0])
+        nome = r.get("name")
+        link = com_afiliado(f"https://www.mercadolivre.com.br/p/{pid}", canal)
+        if not (nome and link):
+            continue
+        com = comissao_valida(pid)
+        brutos.append({
+            "nome": nome, "link": link,
+            "imagem": (r.get("pictures") or [{}])[0].get("url", ""),
+            "preco": f"R$ {menor:.2f}".replace(".", ","),
+            "preco_num": menor,
+            "vendedores": len(itens),
+            "frete_gratis": bool((vencedor.get("shipping") or {}).get("free_shipping")),
+            "dominio": r.get("domain_id") or "",
+            "loja": "Mercado Livre", "_id": pid, "_tipo": "PRODUCT",
+            "comissao": (com or {}).get("pct"),
+            "comissao_vista_em": (com or {}).get("visto", ""),
+        })
+    # ⭐ O DOMINIO MAJORITARIO DA BUSCA E' O PRODUTO PEDIDO. "liquidificador"
+    # devolve 109 fichas em MLB-BLENDERS e 6 em ..._DRIVE_COUPLINGS — e as
+    # pecas (acoplador a R$ 9,50, lamina) sao justamente as que tem vendedor
+    # e ficariam em primeiro por preco. Quem pediu liquidificador nao quer
+    # o arraste do copo. Ficha de dominio minoritario so' entra se o
+    # majoritario nao tiver produto real.
+    from collections import Counter
+    dominios = Counter(r.get("domain_id") or "" for r, _it in pares)
+    principal = dominios.most_common(1)[0][0] if dominios else ""
+    do_principal = [x for x in brutos if x["dominio"] == principal]
+    if do_principal:
+        brutos = do_principal
+    reais = [x for x in brutos if x["vendedores"] >= 2] or brutos
+    reais.sort(key=lambda x: x["preco_num"])
+    return reais[:quantos]
+
+
 def so_monetizados(produtos: list[dict]) -> list[dict]:
     """Deixa passar apenas o que TEM comissao anotada e dentro do prazo.
 
@@ -337,3 +468,29 @@ def por_canal(canal: str, quantos: int = 12) -> list[dict]:
                 vistos.add(p["_id"])
                 saida.append(p)
     return saida
+
+
+def main() -> None:
+    """`python -m engine.mercadolivre --buscar "air fryer 4 litros" --canal cozinha.importada`"""
+    import argparse
+    a = argparse.ArgumentParser(description="Mercado Livre: busca dirigida")
+    a.add_argument("--buscar", metavar="TERMO", help="o produto pedido")
+    a.add_argument("--canal", default="", help="etiqueta do canal no link")
+    a.add_argument("--quantos", type=int, default=5)
+    o = a.parse_args()
+    if not o.buscar:
+        a.print_help()
+        return
+    r = buscar(o.buscar, quantos=o.quantos, canal=o.canal)
+    if not r:
+        print("ml: nada com vendedor pra esse termo — tenta com a marca junto")
+        return
+    for x in r:
+        print(f"{x['preco']:>11}  {x['vendedores']:>2} vend  "
+              f"{'frete gratis' if x['frete_gratis'] else '            '}  "
+              f"{x['nome'][:56]}")
+        print(f"             {x['link']}")
+
+
+if __name__ == "__main__":
+    main()

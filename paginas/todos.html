@@ -440,6 +440,11 @@
     display: flex; align-items: center; justify-content: space-between; gap: 6px;
     margin-top: auto; margin-bottom: -4px;
   }
+  /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
+  .sinais > .nota:only-child { margin-left: 0; }
+  .vendeu {
+    font: 500 10px/1.2 var(--mono); color: var(--fraco); min-width: 0;
+  }
   .sinais + .linha-preco { margin-top: 6px; }
   .promo {
     display: inline-flex; align-items: center; gap: 3px;
@@ -999,8 +1004,19 @@
     // % positivo; "98%" nao vira "4.9" por conta nenhuma honesta.
     var temPromo = (p.queda || 0) >= 5;
     var temNota = p.nota >= 90;
-    if (temPromo || temNota) {
+    var temVendeu = !temPromo && p.vendeu && p.vendeu[0] >= 20;
+    if (temPromo || temNota || temVendeu) {
       var sinais = el("div", "sinais");
+      // ⭐ SEM PROMO, a ancora da esquerda e' "+792 vendidos desde 14/09":
+      // crescimento do volume da loja medido por NOS (piso 20, senao e'
+      // ruido). E' o numero de vendas "mais real" que o Bryan pediu de
+      // volta — nao briga com o "10.000+" da loja porque nao e' o total.
+      if (temVendeu) {
+        var vend = el("span", "vendeu", "+" + p.vendeu[0].toLocaleString("pt-BR") +
+          " vendidos desde " + p.vendeu[1]);
+        vend.title = "quanto o volume de vendas na loja cresceu desde que eu acompanho este produto";
+        sinais.appendChild(vend);
+      }
       if (temPromo) {
         var promo = el("span", "promo");
         promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="#FF4747" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/></svg>' +

@@ -558,6 +558,7 @@ def produtos_todos() -> list[dict]:
     serie = _serie_de_precos()
     por_dia = _precos_por_dia()
     notas = _notas()
+    vendas_desde = _vendas_desde()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -630,6 +631,8 @@ def produtos_todos() -> list[dict]:
             # aparece no cartao com fogo; e' um dos criterios dele.
             "nota": notas.get(str(d.get("id")), 0.0),
             "ja_esteve": _ja_esteve(por_dia, d),
+            # ⭐ [vendidos desde que acompanhamos, "dd/mm"] ou []
+            "vendeu": list(vendas_desde.get(str(d.get("id")), ())),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             # ⚠️ O NOME DE EXIBICAO, nao a chave. A chave e' nome interno
             # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
@@ -730,6 +733,48 @@ def marcar_vitrine_ml(dados: list[dict]) -> dict | None:
                            float(str(x.get("preco", "0")).replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)))
     ml[0]["vitrine"] = True
     return ml[0]
+
+
+def _vendas_desde() -> dict[str, tuple[int, str]]:
+    """{id: (vendidos desde o 1o dia da serie, 'dd/mm')} — crescimento do
+    volume da loja MEDIDO POR NOS, entre a primeira e a ultima leitura.
+
+    ⭐ Bryan, 16/09/2026: "teria como voltar alguma coisa das vendas que fosse
+    mais real?". O total da loja (113 mil) nao se confere na pagina dela
+    ("este vendedor: 10.000+"); o que a gente mediu — "+792 vendidos desde
+    14/09" — e' nosso, cresce todo dia e nao briga com numero nenhum.
+
+    ⚠️ CONSERVADOR por construcao: o garimpo so' grava o volume quando ele
+    anda >= 10% (VOLUME_MUDOU_FRAC), entao o crescimento e' "pelo menos".
+    """
+    import json as _j
+    arq = RAIZ / "estado" / "precos_vistos.jsonl"
+    vol: dict[str, dict[str, int]] = {}
+    if not arq.exists():
+        return {}
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        try:
+            d = _j.loads(linha)
+        except ValueError:
+            continue
+        try:
+            v = int(d.get("vol") or 0)
+        except (TypeError, ValueError):
+            continue
+        q = (d.get("quando") or "")[:10]
+        if v <= 0 or not q:
+            continue
+        dias = vol.setdefault(str(d.get("id")), {})
+        dias[q] = max(dias.get(q, 0), v)
+    saida: dict[str, tuple[int, str]] = {}
+    for i, dias in vol.items():
+        if len(dias) < 2:
+            continue
+        ordem = sorted(dias)
+        ganho = dias[ordem[-1]] - dias[ordem[0]]
+        if ganho > 0:
+            saida[i] = (ganho, f"{ordem[0][8:10]}/{ordem[0][5:7]}")
+    return saida
 
 
 def _notas() -> dict[str, float]:

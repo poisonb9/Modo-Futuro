@@ -220,6 +220,26 @@
   .filtros {
     display: flex; gap: 7px; margin-top: 10px;
   }
+  /* ⚠️ TRES SELETORES NO CELULAR (Preco, Categoria, Loja — desde 16/09/2026).
+     A 375 px os tres cortavam em "Preç… Cate… Loja…" (o Bryan viu). Com tres
+     caixas, o rotulo encolhe e a contagem some: "Preço tudo · Categoria
+     todas · Loja todas" cabe em 343 px; o numero continua dentro do painel.
+     Continua em UMA linha: painel em segunda linha ja' foi recusado por
+     empurrar os produtos pra fora da primeira tela. */
+  /* ⭐ NO CELULAR, ROTULO OU VALOR — nunca os dois: caixa sem filtro mostra
+     "Preço" / "Categoria" / "Loja"; caixa com filtro mostra so' o escolhido
+     ("Cozinha", "Mercado Livre"), ja' pintada de ativa. Medido: com os dois
+     e o icone, cada caixa tem 110 px e corta ate' com fonte 12 px. */
+  @media (max-width: 430px) {
+    .filtros.tres { gap: 5px; }
+    .filtros.tres .escolha { font-size: 12px; padding: 8px 20px 8px 10px;
+                             background-position: right 7px center; }
+    .filtros.tres .escolha::before { display: none; }
+    .filtros.tres .escolha .n { display: none; }
+    .filtros.tres .escolha[data-ativo="nao"] .valor-escolhido { display: none; }
+    .filtros.tres .escolha[data-ativo="nao"] .rotulo-fixo { color: var(--tinta); font-weight: 600; margin: 0; }
+    .filtros.tres .escolha[data-ativo="sim"] .rotulo-fixo { display: none; }
+  }
   /* ⭐ MENU PROPRIO, e nao o <select> nativo. O nativo resolvia o espaco mas
      trazia a roda do iOS, que e' a cara do sistema e nao da pagina.
 
@@ -273,6 +293,9 @@
   }
   .escolha[data-icone="categoria"]::before {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='5' height='5' rx='1'/%3E%3Crect x='9' y='2' width='5' height='5' rx='1'/%3E%3Crect x='2' y='9' width='5' height='5' rx='1'/%3E%3Crect x='9' y='9' width='5' height='5' rx='1'/%3E%3C/svg%3E");
+  }
+  .escolha[data-icone="loja"]::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M2 6l1.5-3h9L14 6M2 6h12M3 6v7h10V6M6 13V9h4v4'/%3E%3C/svg%3E");
   }
   .escolha[data-ativo="sim"]::before { filter: invert(1) brightness(2); opacity: .8; }
   .opcoes {
@@ -355,15 +378,16 @@
   .caiu { left: 8px; background: var(--ouro-claro); color: #17161d;
           box-shadow: 0 1px 5px rgba(0,0,0,.28); }
   .novo { right: 8px; background: var(--verde); }
-  /* ⭐ O SELO DA LOJA — canto de baixo, na cor da loja, so' a marca.
-     Decisao do Bryan em 16/09/2026: "amarelo e o simbolo apenas do ML, nao
-     escreva Mercado Livre". A cor vem de LOJAS (inline), o texto e' a sigla
-     ate' o simbolo oficial do kit de afiliado entrar no lugar. */
+  /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
+     da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
+     simbolo apenas do ML, nao escreva Mercado Livre". A cor vem de LOJAS
+     (inline), o texto e' a sigla ate' o simbolo oficial do kit entrar.
+     ⚠️ FORA DA FOTO desde a mesma noite: na foto ele cobria a legenda do
+     vendedor ("8BitDo OFFICIAL STORE") — o Bryan viu no celular. */
   .loja {
-    position: absolute; left: 8px; bottom: 8px; z-index: 1;
-    font: 800 10px/1 var(--mono); letter-spacing: .04em;
-    padding: 5px 7px; border-radius: 7px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    margin-left: auto; flex: 0 0 auto;
+    font: 800 9px/1 var(--mono); letter-spacing: .04em;
+    padding: 4px 6px; border-radius: 6px;
   }
   .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 11px 12px 12px; gap: 7px; }
   .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
@@ -415,7 +439,9 @@
     font: 500 10px/1.25 var(--mono); color: var(--fraco);
     min-width: 0; padding-left: 3px;
   }
-  .rodape-item span:last-child {
+  /* a FRASE ("no radar ha' N dias") e' quem encurta; o selo da loja, que
+     vem depois dela, nunca */
+  .rodape-item span:not(.pulso):not(.loja) {
     min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .pulso {
@@ -788,15 +814,6 @@
     if (!(p.pontos >= 2)) {
       foto.appendChild(el("span", "novo", "novo"));
     }
-    if (p.loja) {
-      var cfg = LOJAS[p.loja] || { cor: "#6b6b76", texto: "#fff",
-                                   sigla: String(p.loja).slice(0, 2).toUpperCase() };
-      var selo = el("span", "loja", cfg.sigla);
-      selo.style.background = cfg.cor;
-      selo.style.color = cfg.texto;
-      selo.title = p.loja;
-      foto.appendChild(selo);
-    }
     if (p.imagem) {
       var img = document.createElement("img");
       img.src = p.imagem;
@@ -828,6 +845,15 @@
          : (p.dias === 1 ? "no radar há 1 dia"
             : "no radar há " + p.dias + " dias"))
       : "achado agora"));
+    if (p.loja) {
+      var cfg = LOJAS[p.loja] || { cor: "#6b6b76", texto: "#fff",
+                                   sigla: String(p.loja).slice(0, 2).toUpperCase() };
+      var selo = el("span", "loja", cfg.sigla);
+      selo.style.background = cfg.cor;
+      selo.style.color = cfg.texto;
+      selo.title = p.loja;
+      rod.appendChild(selo);
+    }
     corpo.appendChild(rod);
 
     a.appendChild(corpo);
@@ -1212,6 +1238,7 @@
     // limpar antes de remontar: sem isto cada troca ANEXA controles novos e
     // os antigos ficam na tela com o estado velho.
     caixa.innerHTML = "";
+    caixa.classList.remove("tres");
 
     // DOIS SELETORES, UMA LINHA.
     //
@@ -1245,7 +1272,7 @@
       b.setAttribute("aria-haspopup", "listbox");
       b.setAttribute("data-ativo", temFiltro ? "sim" : "nao");
       b.setAttribute("data-icone",
-        titulo === "Preço" ? "preco" : "categoria");
+        titulo === "Preço" ? "preco" : (titulo === "Loja" ? "loja" : "categoria"));
 
       var painel = el("div", "opcoes");
       painel.setAttribute("role", "listbox");
@@ -1363,6 +1390,12 @@
         desenhar();
       }, loja !== ""));
     }
+    marcarTres();
+  }
+
+  function marcarTres() {
+    var caixa = document.getElementById("chips");
+    caixa.classList.toggle("tres", caixa.children.length >= 3);
   }
 
   function montarProva() {

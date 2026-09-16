@@ -1476,6 +1476,49 @@
   busca.addEventListener("input", function () {
     mostrando = passoLista();
     desenhar();
+    anotarBusca();
   });
+
+  // ⭐ O QUE AS PESSOAS PROCURAM E NAO ACHAM — ordem do Bryan em 16/09/2026:
+  // "meu amigo pesquisou macbook e nao tinha nada; eu queria que a gente
+  // soubesse e o proximo radar ja' viesse com o item". A pagina so' ANOTA
+  // (termo, quantos apareceram, categoria); quem procura fonte e' o motor.
+  //
+  // ⚠️ MESMO CONTRATO da bio: so' INSERT com a chave publica, que as
+  // politicas do banco deixam somar e nao deixam ler. Sem IP, sem
+  // identificador. E medir NUNCA derruba a pagina: sem rede, sem chave, o
+  // catalogo abre igual.
+  //
+  // ⚠️ SO' QUANDO A PESSOA PARA DE DIGITAR (900 ms), e uma vez por termo:
+  // registrar cada tecla gravaria "m", "ma", "mac"... e o motor sairia
+  // procurando fonte pra prefixo.
+  var SUPABASE = {
+    url: "https://lwtqfwkfcknzyyzmuymg.supabase.co",
+    anon: "sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy"
+  };
+  var buscaTimer = null;
+  var ultimaAnotada = "";
+  function anotarBusca() {
+    if (buscaTimer) { clearTimeout(buscaTimer); }
+    buscaTimer = setTimeout(function () {
+      var termo = busca.value.trim().slice(0, 80);
+      if (termo.length < 2 || termo === ultimaAnotada) { return; }
+      ultimaAnotada = termo;
+      var n = document.querySelectorAll("#grade .item").length;
+      if (!SUPABASE.url || !SUPABASE.anon) { return; }
+      try {
+        fetch(SUPABASE.url + "/rest/v1/busca", {
+          method: "POST",
+          headers: { "apikey": SUPABASE.anon,
+                     "Authorization": "Bearer " + SUPABASE.anon,
+                     "Content-Type": "application/json",
+                     "Prefer": "return=minimal" },
+          body: JSON.stringify({ termo: termo, resultados: n,
+                                 categoria: canal || null }),
+          keepalive: true
+        }).catch(function () { /* medir nunca derruba a pagina */ });
+      } catch (e) { /* idem */ }
+    }, 900);
+  }
 })();
 </script>

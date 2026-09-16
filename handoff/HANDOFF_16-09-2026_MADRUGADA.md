@@ -185,3 +185,40 @@ Integralmédica, Max Titanium, Sephora, Época, Tramontina.
 
 Decisão: **aguardar as 62 respostas**; próximo ataque é o **Mercado Livre**
 (busca dirigida por produto — o caminho do pedido sob demanda).
+
+---
+
+## 7. MERCADO LIVRE ATACADO + BUSCAS DO SITE (16/09, tarde BRT)
+
+**Decisões do Bryan:** pedido sob demanda no ML publica **sem** anotação de
+comissão (regra **A**); Gemini expande termo genérico; **anotar o que as
+pessoas buscam no site** e, sem fonte, mostrar no fechamento do dia.
+
+```
+engine/mercadolivre.py  buscar(termo)   /products/search + /items em paralelo (4 fios)
+                                        menor anuncio (1o NAO e' o mais barato)
+                                        dominio majoritario (peca fora), livro fora
+                                        2+ vendedores; expandir() via modelo
+                        _get            429 espera; 404 e' o UNICO "sem vendedor"
+engine/modelo_texto.py  perguntar()     rodizio Gemini->OpenRouter; 403 = chave morta
+engine/buscas_site.py   pendentes/atender/fechamento — le' Supabase (PAT), 3 fontes,
+                        JUIZ de pertinencia (acessorio nao e' o produto)
+supabase/07_busca.sql   tabela `busca`: so' INSERT p/ anon; motor marca `atendida`
+paginas/todos.html      anota {termo, resultados, categoria} 900ms apos parar de digitar
+```
+
+**Medido:** "macbook" (busca real de um amigo) → antes: capa de teclado como
+"atendido"; depois do juiz: **MacBook Air M1 R$ 6.000, Pro M3 R$ 14.000**,
+link com etiqueta do canal. "liquidificador" genérico → Mondial 550W R$ 70
+(9 vendedores). Site publicado às 17:10 UTC, carimbo `6d22c10ad05c`, 17
+endereços conferidos; busca "iphone 15" gravada no banco a partir do site real.
+
+⛔ **Erros meus:** truncamento (`[:80]`, `[:100]`) me fez afirmar "id cortado"
+e "5 links idênticos" — os dois falsos. Heredoc comeu `\n` outra vez (4ª).
+Martelei o ML com 6 fios em medições seguidas e tomei 429 — e o 429 dentro
+do fio virava "sem vendedor" (consertado: só 404 é ausência).
+
+**Falta:** (1) `--atender` roda AQUI (PAT não está nos secrets) — decidir se
+vai pra nuvem; (2) `--fechamento` ainda não entra no relato diário
+automático; (3) publicar no site o que `--atender` acha ainda é manual (o
+pedido sob demanda); (4) OpenRouter zerou as 50/dia em 3 contas hoje.

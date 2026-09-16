@@ -348,62 +348,15 @@ def expandir(termo: str) -> list[str]:
     ainda passa pelo catalogo e pelos anuncios. Modelo nao inventa preco aqui
     porque nao ha' onde inventar.
     """
-    import requests as _rq
-    from . import keys, nome_produto as _np
+    from . import modelo_texto
     pergunta = PERGUNTA_EXPANSAO.format(termo=termo.strip())
-
-    def _linhas(texto: str) -> list[str]:
-        saida = []
-        for ln in (texto or "").splitlines():
-            ln = ln.strip().lstrip("-*0123456789. ").strip()
-            if 3 <= len(ln) <= 80 and ln.lower() != termo.lower():
-                saida.append(ln)
-        return saida[:5]
-
-    rot = keys.gemini()
-    for _ in range(min(3, len(rot))):
-        chave = rot.proxima()
-        try:
-            r = _rq.post(
-                "https://generativelanguage.googleapis.com/v1beta/models/"
-                f"{_np.MODELO_GEMINI}:generateContent?key={chave.strip()}",
-                json={"contents": [{"parts": [{"text": pergunta}]}],
-                      "generationConfig": {"temperature": 0}},
-                timeout=_np.TEMPO_S)
-            # ⚠️ 403 "project has been denied access" e' chave MORTA, nao
-            # seca (medido 16/09/2026: 1 das 4 primeiras). Queima igual ao
-            # 429 — senao toda rodada tropeca nela de novo.
-            if r.status_code in (403, 429):
-                rot.queimar(chave)
-                continue
-            r.raise_for_status()
-            out = _linhas(r.json()["candidates"][0]["content"]["parts"][0]["text"])
-            if out:
-                return out
-        except Exception as e:                       # noqa: BLE001
-            print(f"  [!] gemini falhou ({type(e).__name__}) — proxima chave")
-            continue
-    rot = keys.openrouter()
-    for _ in range(min(3, len(rot))):
-        chave = rot.proxima()
-        try:
-            r = _rq.post("https://openrouter.ai/api/v1/chat/completions",
-                         headers={"Authorization": "Bearer " + chave,
-                                  "Content-Type": "application/json"},
-                         json={"model": _np.MODELO, "temperature": 0,
-                               "messages": [{"role": "user", "content": pergunta}]},
-                         timeout=_np.TEMPO_S)
-            if r.status_code in (402, 429):
-                rot.queimar(chave)
-                continue
-            r.raise_for_status()
-            out = _linhas(r.json()["choices"][0]["message"]["content"])
-            if out:
-                return out
-        except Exception as e:                       # noqa: BLE001
-            print(f"  [!] openrouter falhou ({type(e).__name__}) — proxima chave")
-            continue
-    return []
+    texto = modelo_texto.perguntar(pergunta)
+    saida = []
+    for ln in (texto or "").splitlines():
+        ln = ln.strip().lstrip("-*0123456789. ").strip()
+        if 3 <= len(ln) <= 80 and ln.lower() != termo.lower():
+            saida.append(ln)
+    return saida[:5]
 
 
 def buscar(termo: str, quantos: int = 8, canal: str = "",

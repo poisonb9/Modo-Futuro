@@ -151,6 +151,147 @@ def vigiar(avisar: bool = True) -> list[str]:
         print("awin: nada mudou.")
     return linhas
 
+# ─────────────────────────────────────────────────────────────────────────
+# CATALOGO — os produtos dos anunciantes aprovados
+# ─────────────────────────────────────────────────────────────────────────
+
+FEED_LISTA = "https://productdata.awin.com/datafeed/list/apikey/"
+
+
+def _chave_feed() -> str:
+    """A chave do FEED, que NAO e' o AWIN_TOKEN.
+
+    ⛔ SAO DUAS CREDENCIAIS DIFERENTES, e trocar uma pela outra da' erro que
+    parece "chave invalida" (medido em 16/09/2026):
+
+        AWIN_TOKEN           formato com hifens, sai de ui.awin.com/awin-api
+                             abre `programmes` e relatorios — NAO abre produto
+        AWIN_FEED_API_KEY    32 caracteres sem hifen, e' o pedaco que vive
+                             DENTRO da URL de download, entre /apikey/ e a
+                             proxima barra. Sai de Ferramentas -> Crie um
+                             Feed, na caixa de download do ultimo passo.
+
+    ⚠️ A URL de download E' a credencial: quem tiver o link baixa os nossos
+    feeds sem senha nenhuma. Nunca colar em chat, print ou commit.
+    """
+    k = os.getenv("AWIN_FEED_API_KEY")
+    if not k:
+        raise RuntimeError(
+            "falta AWIN_FEED_API_KEY no .env — e' a chave do FEED, diferente "
+            "do AWIN_TOKEN. Sai em Ferramentas -> Crie um Feed, dentro da URL "
+            "de download (entre /apikey/ e a barra seguinte)")
+    return k
+
+
+def feeds() -> list[dict]:
+    """Todos os feeds do catalogo Awin, com o nosso status em cada um.
+
+    ⭐ POR QUE LER A LISTA EM VEZ DE GUARDAR URL DE FEED: a URL que o painel
+    monta tem o filtro CONGELADO dentro dela (um `fid`, ou uma lista de
+    categorias). Anunciante novo tem `fid` novo, e a URL velha nunca saberia
+    dele — teriamos que voltar no painel a cada aprovacao. Esta lista traz o
+    `Membership Status` AO VIVO e a URL de download pronta de cada um, entao
+    aprovacao nova entra sozinha na proxima rodada.
+
+    ⚠️ O STATUS AQUI E' `active`, NAO `joined` (medido em 16/09/2026). A API
+    de `programmes` usa "joined"; este CSV usa "active". Filtrar por "joined"
+    devolve ZERO e parece que nao temos nenhum anunciante aprovado.
+    """
+    r = requests.get(FEED_LISTA + _chave_feed(), timeout=120)
+    r.raise_for_status()
+    import csv
+    import io
+    return list(csv.DictReader(io.StringIO(r.text)))
+
+
+def _preco(v) -> float:
+    try:
+        return float(str(v).strip())
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def catalogo(teto: float = 0.0, piso: float = 0.0) -> list[dict]:
+    """Os produtos de TODO anunciante aprovado, deduplicados.
+
+    `teto` e `piso` em reais; 0 desliga o corte.
+
+    ⚠️ DEDUPLICA POR `aw_product_id` PORQUE O MESMO ANUNCIANTE APARECE MAIS
+    DE UMA VEZ. Medido em 16/09/2026: a Nike BR tem DOIS feeds, o 44669 (29
+    colunas, 5.447 produtos) e o 93360 (35 colunas, 5.457). Os produtos se
+    sobrepoem — sem deduplicar, o mesmo tenis sai duas vezes na pagina.
+
+    ⭐ E FICA COM A LINHA MAIS COMPLETA, nao com a primeira. O 44669 nao
+    preenche `in_stock`; o 93360 preenche. Manter a primeira que chegasse
+    seria sorteio.
+
+    ⚠️ `in_stock` VEIO 1 EM 100% DOS 5.457 do 93360, o que e' improvavel num
+    catalogo de moda — provavelmente o campo e' fixo, nao medido. Entao ele
+    NAO e' usado como garantia de estoque aqui: quem decide isso e' a pagina
+    do produto no dia do clique.
+    """
+    linhas = [f for f in feeds()
+              if (f.get("Membership Status") or "").strip().lower() == "active"]
+    import csv
+    import gzip
+    import io as _io
+
+    vistos: dict[str, dict] = {}
+    for f in linhas:
+        try:
+            r = requests.get(f["URL"], timeout=300)
+            r.raise_for_status()
+            bruto = gzip.decompress(r.content).decode("utf-8", "replace")
+        except Exception as e:                      # noqa: BLE001
+            # ⚠️ Um feed que falha NAO derruba os outros: o catalogo do dia
+            # sai menor, e o aviso diz qual faltou. Melhor pagina com uma
+            # loja do que pagina nenhuma.
+            print(f"   awin: feed {f.get('Feed ID')} "
+                  f"({f.get('Advertiser Name')}) falhou — {str(e)[:80]}")
+            continue
+        for p in csv.DictReader(_io.StringIO(bruto)):
+            pid = (p.get("aw_product_id") or "").strip()
+            if not pid:
+                continue
+            anterior = vistos.get(pid)
+            if anterior and sum(1 for v in anterior.values() if v) >= \
+                    sum(1 for v in p.values() if v):
+                continue
+            vistos[pid] = p
+
+    saida = []
+    for p in vistos.values():
+        preco = _preco(p.get("search_price"))
+        if preco <= 0:
+            continue
+        if piso and preco < piso:
+            continue
+        if teto and preco > teto:
+            continue
+        saida.append({
+            "id": p.get("aw_product_id"),
+            "nome": (p.get("product_name") or "").strip(),
+            "preco": preco,
+            "imagem": (p.get("merchant_image_url")
+                       or p.get("aw_image_url") or "").strip(),
+            # ⛔ SEMPRE o aw_deep_link. O `merchant_deep_link` abre a mesma
+            # pagina e NAO paga — e' o jeito mais silencioso de perder
+            # comissao, porque para o leitor os dois sao identicos.
+            "link": (p.get("aw_deep_link") or "").strip(),
+            "loja": (p.get("merchant_name") or "").strip(),
+            "categoria": (p.get("merchant_category")
+                          or p.get("category_name") or "").strip(),
+            "marca": (p.get("brand_name") or "").strip(),
+            # ⭐ SEM historico de proposito. Produto de feed nasce sem serie
+            # de precos nossa; quem der "queda de X%" aqui estaria inventando.
+            # A pagina mostra o selo "novo no catalogo" ate' o
+            # `guardar_preco` juntar tres leituras — ver `_serie_curta`.
+            "origem": "awin",
+        })
+    saida.sort(key=lambda x: x["preco"])
+    return saida
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="estado das candidaturas no Awin")
@@ -158,10 +299,32 @@ def main() -> None:
                    help="mostra o link de afiliado dos aprovados")
     a.add_argument("--vigiar", action="store_true",
                    help="avisa so' o que MUDOU desde a ultima leitura")
+    a.add_argument("--catalogo", action="store_true",
+                   help="os produtos dos anunciantes aprovados")
+    a.add_argument("--teto", type=float, default=0.0,
+                   help="preco maximo em reais (0 = sem corte)")
+    a.add_argument("--piso", type=float, default=0.0,
+                   help="preco minimo em reais (0 = sem corte)")
     o = a.parse_args()
 
     if o.vigiar:
         vigiar()
+        return
+
+    if o.catalogo:
+        d = catalogo(teto=o.teto, piso=o.piso)
+        if not d:
+            print("awin: nenhum produto — ou nao ha' anunciante aprovado, "
+                  "ou o corte de preco nao deixou nada passar.")
+            return
+        lojas: dict[str, int] = {}
+        for x in d:
+            lojas[x["loja"]] = lojas.get(x["loja"], 0) + 1
+        print(f"awin: {len(d)} produtos  " + " | ".join(
+            f"{k} {v}" for k, v in sorted(lojas.items(), key=lambda y: -y[1])))
+        print(f"   preco: R$ {d[0]['preco']:.2f} a R$ {d[-1]['preco']:.2f}")
+        for x in d[:10]:
+            print(f"   R$ {x['preco']:>8.2f}  {x['nome'][:56]}")
         return
 
     for rel in RELACOES:

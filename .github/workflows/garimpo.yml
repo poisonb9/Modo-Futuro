@@ -89,6 +89,11 @@ jobs:
           done
           echo "===== varredura (so historico)"
           python -X utf8 -m engine.garimpo --varrer || true
+          # ⭐ NOMES CURTOS, todo dia. Ate' 16/09/2026 isto so' rodava a mao
+          # (cache parado em 14/09, 36 titulos crus na pagina). Modelo em
+          # rodizio Gemini -> OpenRouter -> ModelScope; sem cota, fica o corte.
+          echo "===== nomes curtos"
+          python -X utf8 -m engine.nome_produto || true
           echo "===== vigia (itens que acompanhamos de perto)"
           python -X utf8 -m engine.garimpo --vigiar || true
           # ⚠️ DEPOIS da varredura: os campeoes saem DOS DADOS que ela
@@ -133,7 +138,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/ml_raizes.json; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/ml_raizes.json estado/nomes_curtos.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

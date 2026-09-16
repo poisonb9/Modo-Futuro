@@ -125,16 +125,44 @@ def _pedir(base: str, candidatos: list[str], tentativa: int = 1) -> list[int] | 
         print(f"  [!] gemini falhou ({type(e).__name__} {codigo})")
         return None
 
+    return _ler_indices(texto, candidatos)
+
+
+def _ler_indices(texto: str, candidatos: list[str]) -> list[int]:
+    """Os indices que o modelo apontou. As duas vias respondem igual.
+
+    ⚠️ SO' NUMERO QUE EXISTE NA LISTA. O modelo as vezes devolve "1, 4, 9"
+    quando so' havia 6 candidatos — indice inventado viraria produto errado.
+    """
     if "nenhum" in texto.lower():
         return []
-    # ⚠️ SO' NUMERO QUE EXISTE NA LISTA. O modelo as vezes devolve "1, 4, 9"
-    # quando so' havia 6 candidatos — indice inventado viraria produto errado.
-    achados = []
+    achados: list[int] = []
     for n in re.findall(r"\d+", texto):
         i = int(n)
         if 1 <= i <= len(candidatos) and i not in achados:
             achados.append(i)
     return achados
+
+
+def _pedir_modelscope(base: str, candidatos: list[str]) -> list[int] | None:
+    """A segunda via. None se nao deu — e ai' a pagina cai na regra de palavras.
+
+    ⭐ ELA ENTROU EM 16/09/2026 porque este modulo tinha UMA perna so'. O
+    `nome_produto` ja' tinha duas; aqui, um dia de cota seca do Gemini deixava
+    o upsell inteiro sem julgamento — e sem julgamento a vitrine volta a
+    sugerir corda de pular pra quem comprou luva de boxe.
+
+    ⚠️ E A REGRA DE SEGURANCA E' A MESMA: indice que nao existe na lista nao
+    vira produto. A perna nova nao afrouxa nada, so' responde quando a de cima
+    nao respondeu.
+    """
+    from . import modelscope
+    lista = chr(10).join(f"{i+1}. {t[:90]}" for i, t in enumerate(candidatos))
+    texto = modelscope.perguntar(
+        PERGUNTA.format(base=base[:110], lista=lista))
+    if texto is None:
+        return None
+    return _ler_indices(texto, candidatos)
 
 
 def julgar(produtos: list[dict], so_faltantes: bool = True,
@@ -149,7 +177,14 @@ def julgar(produtos: list[dict], so_faltantes: bool = True,
                   if str(o.get("id") or o.get("nome")) != chave][:CANDIDATOS_MAX]
         if not outros:
             continue
-        indices = _pedir(p.get("nome") or "", [o.get("nome") or "" for o in outros])
+        nomes_outros = [o.get("nome") or "" for o in outros]
+        # ⚠️ A SEGUNDA VIA SO' ENTRA SE A PRIMEIRA DISSE "NAO SEI". Lista
+        # vazia do Gemini e' resposta ("nao combina com nada"), e perguntar de
+        # novo pra outro modelo ate' alguem dizer sim seria escolher a opiniao
+        # que me agrada — o oposto de julgar.
+        indices = _pedir(p.get("nome") or "", nomes_outros)
+        if indices is None:
+            indices = _pedir_modelscope(p.get("nome") or "", nomes_outros)
         if indices is None:
             print(f"  (sem resposta) {(p.get('nome') or '')[:44]}")
             continue

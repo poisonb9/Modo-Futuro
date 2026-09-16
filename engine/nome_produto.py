@@ -219,15 +219,45 @@ def _pedir_gemini(titulos: list[str], tentativa: int = 1) -> dict[int, str] | No
     return _ler_resposta(texto, titulos)
 
 
+def _pedir_modelscope(titulos: list[str]) -> dict[int, str] | None:
+    """A terceira via. None se nao deu — e ai' o produto fica com o corte.
+
+    ⚠️ ELA E' LENTA DE PROPOSITO, e por isso e' a ULTIMA: ~35 s de fila contra
+    os ~3 s das duas de cima. O custo e' de FILA e nao de item (medido: um
+    titulo sozinho gastou os mesmos 35 s que o lote de 12), entao aqui o lote
+    inteiro sai por uma espera so'.
+    """
+    from . import modelscope
+    lista = NL_.join(f"{i+1}. {t[:110]}" for i, t in enumerate(titulos))
+    texto = modelscope.perguntar(PERGUNTA + lista)
+    if texto is None:
+        return None
+    return _ler_resposta(texto, titulos)
+
+
 def humanizar(titulos: list[str]) -> dict[str, str]:
     """{titulo original: nome curto} — so' os que passaram na conferencia."""
     bons: dict[str, str] = {}
     for i in range(0, len(titulos), POR_LOTE):
         lote = titulos[i:i + POR_LOTE]
-        # ⚠️ GEMINI PRIMEIRO, OpenRouter como reserva. Se o primeiro devolve
-        # None (cota, rede, formato torto), o segundo tenta o MESMO lote — e
-        # se os dois falharem o produto fica com o corte, que sempre existe.
-        resposta = _pedir_gemini(lote) or _pedir(lote)
+        # ⚠️ GEMINI PRIMEIRO, OpenRouter em seguida, ModelScope por ultimo. Se
+        # uma devolve None (cota, rede, formato torto), a proxima tenta o MESMO
+        # lote — e se as tres falharem o produto fica com o corte, que sempre
+        # existe.
+        #
+        # ⭐ A TERCEIRA PERNA ENTROU EM 16/09/2026 porque duas nao bastam:
+        # modelo gratis nao e' contrato. Em 13/09 o `llama-3.3-70b:free` saiu
+        # do plano no meio da sessao; em 14/09 as 14 chaves do OpenRouter
+        # estavam secas as 11h; em 04/08 as 15 do Gemini secaram num dia so'.
+        # Duas pernas que caem no mesmo dia deixam o motor sem nenhuma.
+        #
+        # ⚠️ E A CONFERENCIA CONTINUA A MESMA pras tres. Medido no lote real
+        # de 12: o ModelScope devolveu 12 de 12 linhas e o `confere` aprovou
+        # 4 — as outras 8 passavam de 46 caracteres. Isso e' a guarda
+        # funcionando, nao a perna falhando: nenhuma das recusas era numero
+        # inventado, que e' o defeito caro.
+        resposta = (_pedir_gemini(lote) or _pedir(lote)
+                    or _pedir_modelscope(lote))
         if not resposta:
             continue
         for j, novo in resposta.items():

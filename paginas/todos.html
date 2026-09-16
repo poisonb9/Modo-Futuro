@@ -333,8 +333,12 @@
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M2 6l1.5-3h9L14 6M2 6h12M3 6v7h10V6M6 13V9h4v4'/%3E%3C/svg%3E");
   }
   .escolha[data-ativo="sim"]::before { filter: invert(1) brightness(2); opacity: .8; }
+  /* ⚠️ largura pelo CONTEUDO (min = a caixa): a 375 px o painel de 110 px
+     cortava o numero ("AliExpress 1|") e quebrava "caiu de preco" em tres
+     linhas (Bryan, 16/09). O ultimo seletor abre ancorado a` direita. */
   .opcoes {
-    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 40;
+    min-width: 100%; width: max-content; max-width: min(260px, calc(100vw - 32px));
     background: var(--caixa); border: 1px solid var(--linha);
     border-radius: 14px; padding: 5px; overflow: hidden;
     box-shadow: 0 14px 34px rgba(0,0,0,.16);
@@ -343,13 +347,15 @@
     display: flex; align-items: center; gap: 8px; width: 100%;
     border: 0; background: none; cursor: pointer; text-align: left;
     color: var(--tinta); border-radius: 10px; padding: 9px 11px;
-    font: 500 13.5px/1.2 Poppins, sans-serif;
+    font: 500 13.5px/1.2 Poppins, sans-serif; white-space: nowrap;
   }
+  .escolha-caixa:last-child .opcoes { left: auto; right: 0; }
   .opcao:active { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
   .opcao[aria-selected="true"] { font-weight: 700; }
   /* o numero fica a' direita, alinhado — vira coluna e da' pra comparar */
   .opcao .n {
-    margin-left: auto; font: 500 11.5px/1 var(--mono); color: var(--fraco);
+    margin-left: auto; padding-left: 10px; flex: 0 0 auto;
+    font: 500 11.5px/1 var(--mono); color: var(--fraco);
   }
   .opcao[aria-selected="true"]::before {
     content: ""; width: 5px; height: 5px; border-radius: 50%;
@@ -420,7 +426,7 @@
   .novo { right: 8px; background: var(--verde); }
   /* ⭐ a chama: canto inferior direito da foto, sem fundo, com sombra pra
      ler sobre qualquer imagem; NAO e' esticada (e' texto, nao SVG escalado) */
-  .fogo {
+  .foto > .fogo {
     position: absolute; right: 8px; top: 8px; z-index: 2;
     width: 24px; height: 24px; border-radius: 50%;
     background: linear-gradient(160deg, #ff7a1a, #e6321b);
@@ -444,7 +450,7 @@
   .prova-social {
     font: 500 10px/1.2 var(--mono); color: var(--fraco); margin-top: -3px;
   }
-  .prova-social.fogo { color: var(--verde); }
+  .prova-social.em-fogo { color: var(--verde); }
   /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
      da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
      simbolo apenas do ML, nao escreva Mercado Livre". A cor vem de LOJAS
@@ -648,7 +654,7 @@
   // "mais barato" ordenam por coisas distintas e as duas listas podem nao se
   // cruzar — a mesma licao de campeoes x tendencia no garimpo.
   var FILTROS = [
-    { id: "todos",  rotulo: "tudo",             cabe: function () { return true; },
+    { id: "todos",  rotulo: "Tudo",             cabe: function () { return true; },
       // ⭐ A ORDEM DE ABERTURA E' A DECISAO MAIS CARA DA PAGINA.
       // Antes era por DATA: o melhor produto podia estar em 40o lugar, e
       // com centenas de pecas isso vira desperdicio puro. Agora abre
@@ -669,12 +675,12 @@
         return ((b.ganho || 0) * (b.vendas || 0) * fb)
              - ((a.ganho || 0) * (a.vendas || 0) * fa);
       } },
-    { id: "caiu",   rotulo: "caiu de preço",    cabe: function (p) { return (p.queda || 0) >= 5; },
+    { id: "caiu",   rotulo: "Caiu de preço",    cabe: function (p) { return (p.queda || 0) >= 5; },
       ordem: function (a, b) { return (b.queda || 0) - (a.queda || 0); } },
-    { id: "novo",   rotulo: "achados novos",    cabe: function (p) { return !(p.pontos >= 2); } },
-    { id: "olho",   rotulo: "sendo acompanhados", cabe: function (p) { return p.pontos >= 2; },
+    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2); } },
+    { id: "olho",   rotulo: "Sendo acompanhados", cabe: function (p) { return p.pontos >= 2; },
       ordem: function (a, b) { return (b.dias || 0) - (a.dias || 0); } },
-    { id: "barato", rotulo: "mais baratos",     cabe: function () { return true; },
+    { id: "barato", rotulo: "Mais baratos",     cabe: function () { return true; },
       ordem: function (a, b) { return num(a.preco) - num(b.preco); } }
   ];
   // ⭐ QUANTOS APARECEM DE PRIMEIRA. O catalogo vai ter centenas de pecas e
@@ -984,7 +990,9 @@
     // descredibiliza. A nota (% positivas) ele confere na hora. O volume
     // continua por dentro: no fogo e no ranking.
     if (p.nota >= 90) {
-      var ps = el("div", "prova-social" + (p.fogo ? " fogo" : ""),
+      // ⛔ a classe do selo ("fogo") aqui fez a linha virar um botao laranja
+      // solto no topo da pagina (CSS absoluto do selo) — Bryan viu, 16/09
+      var ps = el("div", "prova-social" + (p.fogo ? " em-fogo" : ""),
         Math.round(p.nota) + "% de avaliações positivas");
       ps.title = "avaliações positivas do produto na loja";
       corpo.appendChild(ps);
@@ -1535,7 +1543,7 @@
       // ⚠️ "todas" NAO CONTA A EXTERNA: ela nunca aparece no rolar de
       // "todas", e o numero pularia de 142 pra 1.047 no clique que a baixou
       // — sobre a mesma grade de 142.
-      var deArea = [{ id: "", rotulo: "todas", n: PRODUTOS.filter(function (p) {
+      var deArea = [{ id: "", rotulo: "Todas", n: PRODUTOS.filter(function (p) {
         return !externa(p.canal);
       }).length }];
       areas.forEach(function (c) {
@@ -1569,7 +1577,7 @@
     });
     var nomesLoja = Object.keys(lojas).sort(function (a, b) { return lojas[b] - lojas[a]; });
     if (nomesLoja.length > 1 || loja) {
-      var deLoja = [{ id: "", rotulo: "todas", n: Object.keys(lojas).reduce(function (t, k) { return t + lojas[k]; }, 0) }];
+      var deLoja = [{ id: "", rotulo: "Todas", n: Object.keys(lojas).reduce(function (t, k) { return t + lojas[k]; }, 0) }];
       nomesLoja.forEach(function (l) { deLoja.push({ id: l, rotulo: l, n: lojas[l] }); });
       caixa.appendChild(seletor("Loja", deLoja, loja, function (v) {
         loja = v;

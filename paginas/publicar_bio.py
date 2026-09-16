@@ -238,6 +238,21 @@ def _precos_por_dia() -> dict:
 EXTERNAS = {
     # loja no feed -> (nome da categoria na tela, arquivo, passo)
     "Nike BR": ("Nike", "nike.json", 50),
+    # ⭐ BELEZA DE MARCA, UMA CATEGORIA POR MARCA — decisao do Bryan em
+    # 16/09/2026: "Eudora, Avon, O Boticario ficam em uma secao separada
+    # igual a Nike". Pedidas no Awin em 16/09; ate' aprovarem, o feed nao as
+    # traz e o mapa e' inerte. Mesmo raciocinio do Calçados: produto de
+    # marca no meio de organizador de R$ 11 muda o que a pagina parece ser.
+    #
+    # ⚠️ A CHAVE E' O `merchant_name` DO FEED, e ele so' se mede depois da
+    # aprovacao. Os tres nomes abaixo sao os da API de programas; se o CSV
+    # vier diferente ("O Boticário" sem "BR", por exemplo), a loja cai no
+    # aviso de "loja sem mapa" do `produtos_externos` — e' so' corrigir a
+    # chave. Nunca casar por "contem": "Avon" casaria "Avon Cosméticos
+    # Revendedora" de outro anunciante.
+    "oBoticario BR": ("O Boticário", "boticario.json", 50),
+    "Eudora BR": ("Eudora", "eudora.json", 50),
+    "Avon BR": ("Avon", "avon.json", 50),
 }
 # ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria
@@ -286,9 +301,15 @@ def produtos_externos() -> dict[str, dict]:
     serie = _serie_de_precos()
     por_dia = _precos_por_dia()
     saida: dict[str, dict] = {}
+    sem_mapa: dict[str, int] = {}
     for p in inst.get("produtos") or []:
         cfg = EXTERNAS.get(p.get("loja") or "")
-        if not cfg or not p.get("link") or not p.get("nome"):
+        if not cfg:
+            # ⚠️ LOJA APROVADA SEM CATEGORIA: nao entra e AVISA. Silencio aqui
+            # e' "a Eudora aprovou e nunca apareceu no site" sem ninguem saber.
+            sem_mapa[p.get("loja") or "?"] = sem_mapa.get(p.get("loja") or "?", 0) + 1
+            continue
+        if not p.get("link") or not p.get("nome"):
             continue
         cat, arquivo, passo = cfg
         try:
@@ -317,6 +338,9 @@ def produtos_externos() -> dict[str, dict]:
             "id": pid,
             "combina": [],
         })
+    for loja, n in sem_mapa.items():
+        print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "
+              "— aprovada no Awin mas fora do site ate' ganhar categoria")
     for cat, bloco in saida.items():
         bloco["produtos"].sort(key=lambda x: float(
             x["preco"].replace("R$", "").replace(",", ".")))

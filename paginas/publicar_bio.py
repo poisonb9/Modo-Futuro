@@ -557,6 +557,7 @@ def produtos_todos() -> list[dict]:
         return []
     serie = _serie_de_precos()
     por_dia = _precos_por_dia()
+    notas = _notas()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -624,6 +625,10 @@ def produtos_todos() -> list[dict]:
             # ⭐ A SERIE DESENHADA. Vazia ate' haver 3 dias — ver
             # `_serie_curta`, que explica por que 2 pontos nao viram linha.
             "serie": _serie_curta(por_dia, d),
+            # ⭐ % DE AVALIACOES POSITIVAS (evaluate_rate do AliExpress), que o
+            # garimpo grava na serie e o registro publicado nao guarda. So'
+            # aparece no cartao com fogo; e' um dos criterios dele.
+            "nota": notas.get(str(d.get("id")), 0.0),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             # ⚠️ O NOME DE EXIBICAO, nao a chave. A chave e' nome interno
             # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
@@ -668,7 +673,83 @@ def produtos_todos() -> list[dict]:
         fim += duplicata.sem_repetidos(grupo)
     # ordem original (a vitrine decide a ordem, nao a dedupe)
     pos = {id(x): i for i, x in enumerate(saida)}
-    return sorted(fim, key=lambda x: pos[id(x)])
+    fim = sorted(fim, key=lambda x: pos[id(x)])
+    marcar_fogo(fim)
+    return fim
+
+
+def _notas() -> dict[str, float]:
+    """{id: ultima nota (%) vista na serie}."""
+    import json as _j
+    arq = RAIZ / "estado" / "precos_vistos.jsonl"
+    saida: dict[str, float] = {}
+    if not arq.exists():
+        return saida
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        try:
+            d = _j.loads(linha)
+        except ValueError:
+            continue
+        try:
+            v = float(d.get("nota") or 0)
+        except (TypeError, ValueError):
+            continue
+        if v > 0:
+            saida[str(d.get("id"))] = v
+    return saida
+
+
+# ⭐ O FOGUINHO — Bryan, 16/09/2026: "produtos extremamente selecionados, bons
+# para o cliente e para nos, com chance grande de vender; leva em conta
+# principalmente satisfacao; velocidade de entrega tambem".
+#
+# ⚠️ REGUA MEDIDA ANTES DE LIGAR (catalogo de 16/09, 148 produtos): com
+# "vendas >= 3x mediana" passavam ZERO; com a regua abaixo passam 3 a 5.
+# Raro e' o que da' valor ao sinal — por isso o TETO.
+#
+# O que cada criterio responde:
+#   nota      >= 95%   bom pro cliente (evaluate_rate; a mediana e' 98%, o
+#                      garimpo ja' corta os ruins na entrada)
+#   queda     >= 15%   contra a NOSSA serie, nunca o de/por da loja
+#   vendas    >= 1000  gente comprou (unico "numero de pessoas" que a API da')
+#   rende     ganho >= R$ 3/venda OU comissao >= 10%   vale pra nos
+#   entrega            so' o ML expoe (Mercado Envios Full); conta a favor
+#                      como DESEMPATE, nao como exigencia — o AliExpress nao
+#                      tem prazo na API de afiliado (37 campos, nenhum)
+FOGO_NOTA_MIN = 95.0
+FOGO_QUEDA_MIN = 15.0
+FOGO_VENDAS_MIN = 1000
+FOGO_GANHO_MIN = 3.0
+FOGO_COMISSAO_MIN = 10.0
+FOGO_TETO = 6
+
+
+def marcar_fogo(dados: list[dict]) -> list[dict]:
+    """Poe `fogo: True` nos que passam na regua, ate' o teto. Devolve eles."""
+    import json as _j
+    comissao: dict[str, float] = {}
+    arq = RAIZ / "estado" / "produtos_publicados.jsonl"
+    if arq.exists():
+        for linha in arq.read_text(encoding="utf-8").splitlines():
+            try:
+                r = _j.loads(linha)
+                comissao[str(r.get("id"))] = float(r.get("comissao") or 0)
+            except (ValueError, TypeError):
+                continue
+    cand = []
+    for p in dados:
+        p["fogo"] = False
+        nota = float(p.get("nota") or 0)
+        ganho = float(p.get("ganho") or 0)
+        com = comissao.get(str(p.get("id")), 0.0)
+        if (nota >= FOGO_NOTA_MIN and float(p.get("queda") or 0) >= FOGO_QUEDA_MIN
+                and int(p.get("vendas") or 0) >= FOGO_VENDAS_MIN
+                and (ganho >= FOGO_GANHO_MIN or com >= FOGO_COMISSAO_MIN)):
+            cand.append(p)
+    cand.sort(key=lambda x: -(float(x.get("ganho") or 0) * int(x.get("vendas") or 0)))
+    for p in cand[:FOGO_TETO]:
+        p["fogo"] = True
+    return cand[:FOGO_TETO]
 
 
 # fonte no registro -> nome da loja no cartao (o que o seletor "Loja" mostra)

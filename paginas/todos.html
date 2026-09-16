@@ -417,6 +417,16 @@
   .caiu { left: 8px; background: var(--ouro-claro); color: #17161d;
           box-shadow: 0 1px 5px rgba(0,0,0,.28); }
   .novo { right: 8px; background: var(--verde); }
+  /* ⭐ a chama: canto inferior direito da foto, sem fundo, com sombra pra
+     ler sobre qualquer imagem; NAO e' esticada (e' texto, nao SVG escalado) */
+  .fogo {
+    position: absolute; right: 7px; bottom: 6px; z-index: 1;
+    font-size: 18px; line-height: 1;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));
+  }
+  .prova-fogo {
+    font: 500 10px/1.2 var(--mono); color: var(--verde); margin-top: -3px;
+  }
   /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
      da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
      simbolo apenas do ML, nao escreva Mercado Livre". A cor vem de LOJAS
@@ -882,6 +892,16 @@
     if (!(p.pontos >= 2)) {
       foto.appendChild(el("span", "novo", "novo"));
     }
+    // ⭐ O FOGUINHO: so' a chama, no canto de baixo da foto, nos poucos que
+    // passam na regua do publicador (`marcar_fogo`: nota, queda, vendas,
+    // rendimento; teto 6). Sem texto — o que ele significa esta' na linha
+    // "98% positivas · 12 mil vendas" que so' o cartao com fogo ganha.
+    if (p.fogo) {
+      var fogo = el("span", "fogo", "🔥");
+      fogo.title = "escolhido: " + Math.round(p.nota) + "% de avaliações positivas, " +
+        (p.vendas || 0).toLocaleString("pt-BR") + " vendas, caiu " + Math.round(p.queda) + "%";
+      foto.appendChild(fogo);
+    }
     if (p.imagem) {
       var img = document.createElement("img");
       img.src = p.imagem;
@@ -911,6 +931,11 @@
     }
     corpo.appendChild(nome);
 
+    if (p.fogo && p.nota) {
+      corpo.appendChild(el("div", "prova-fogo",
+        Math.round(p.nota) + "% positivas · " +
+        ((p.vendas || 0) >= 1000 ? Math.round(p.vendas / 1000) + " mil" : String(p.vendas || 0)) + " vendas"));
+    }
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
     // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de

@@ -94,7 +94,7 @@ try:
     esperadas = {"nome", "preco", "link", "imagem", "queda", "vendas", "ganho",
                  "antes", "dias", "pontos", "serie", "visto", "canal", "id", "combina",
                  "loja"}   # loja: campo do cartao desde 16/09 (selo + seletor)
-    chaves -= {"nota", "ja_esteve", "vendeu", "fogo", "vitrine"}   # so' o AliExpress tem
+    chaves -= {"nota", "ja_esteve", "vendeu", "fogo", "vitrine", "conferido"}   # so' o AliExpress tem
     checar(chaves == esperadas, f"o cartao tem EXATAMENTE os campos do AliExpress (dif: {chaves ^ esperadas})")
 
     print()

@@ -1005,8 +1005,17 @@
     var temPromo = (p.queda || 0) >= 5;
     var temNota = p.nota >= 90;
     var temVendeu = !temPromo && p.vendeu && p.vendeu[0] >= 20;
-    if (temPromo || temNota || temVendeu) {
+    var temConferido = !temPromo && !temVendeu && p.conferido;
+    if (temPromo || temNota || temVendeu || temConferido) {
       var sinais = el("div", "sinais");
+      // ⭐ sem Promo e sem vendas medidas, a ancora e' o que TODO produto tem:
+      // "conferido hoje as 19:00". Medicao que falta nao desqualifica o
+      // anuncio (Bryan, 16/09) — a regua da pagina e' o preco conferido.
+      if (temConferido) {
+        var conf = el("span", "vendeu", "preço conferido " + p.conferido);
+        conf.title = "última vez que eu reconferi o preço na loja";
+        sinais.appendChild(conf);
+      }
       // ⭐ SEM PROMO, a ancora da esquerda e' "+792 vendidos desde 14/09":
       // crescimento do volume da loja medido por NOS (piso 20, senao e'
       // ruido). E' o numero de vendas "mais real" que o Bryan pediu de

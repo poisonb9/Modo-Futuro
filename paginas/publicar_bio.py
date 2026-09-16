@@ -633,6 +633,10 @@ def produtos_todos() -> list[dict]:
             "ja_esteve": _ja_esteve(por_dia, d),
             # ⭐ [vendidos desde que acompanhamos, "dd/mm"] ou []
             "vendeu": list(vendas_desde.get(str(d.get("id")), ())),
+            # ⭐ quando o preco foi reconferido pela ultima vez ("hoje 19:00" ou
+            # "15/09"): a ancora que TODO produto tem, quando nao ha' Promo
+            # nem vendas medidas — a promessa da pagina dita em numero
+            "conferido": _conferido_em(d),
             "visto": f"{quando[8:10]}/{quando[5:7]}" if len(quando) == 10 else "",
             # ⚠️ O NOME DE EXIBICAO, nao a chave. A chave e' nome interno
             # (`atefalhar`, `fatura.chora`) e vazaria a estrutura da operacao
@@ -775,6 +779,19 @@ def _vendas_desde() -> dict[str, tuple[int, str]]:
         if ganho > 0:
             saida[i] = (ganho, f"{ordem[0][8:10]}/{ordem[0][5:7]}")
     return saida
+
+
+def _conferido_em(d: dict) -> str:
+    from datetime import datetime, timezone, timedelta
+    reg = _precos_agora().get(str(d.get("id") or ""))
+    q = (reg or {}).get("quando") or ""
+    try:
+        t = datetime.fromisoformat(q)
+    except ValueError:
+        return ""
+    t = t.astimezone(timezone(timedelta(hours=-3)))          # BRT
+    hoje = datetime.now(timezone(timedelta(hours=-3))).date()
+    return f"hoje às {t:%H:%M}" if t.date() == hoje else f"{t:%d/%m}"
 
 
 def _notas() -> dict[str, float]:
@@ -1336,10 +1353,18 @@ def conferir(html: str) -> list[str]:
     # nao palavras: em minusculo eles aparecem em portugues normal e a guarda
     # reprovava pagina correta (medido em 14/09/2026, na estreia do catalogo).
     SENSIVEL_A_CAIXA = ("MEDIDO",)
+    # ⚠️ O NOME DO DONO E' PALAVRA INTEIRA: "Camiseta Nike Kobe BRYANt" (feed
+    # da Nike, 16/09/2026) reprovava a publicacao inteira. "Bryan" dentro de
+    # outra palavra nao e' o dono.
+    import re as _re
+    PALAVRA_INTEIRA = ("Bryan",)
     achados = []
     for termo, porque in proibido.items():
-        achou = (termo in html if termo in SENSIVEL_A_CAIXA
-                 else termo.lower() in html.lower())
+        if termo in PALAVRA_INTEIRA:
+            achou = bool(_re.search(r"\b" + _re.escape(termo) + r"\b", html, _re.I))
+        else:
+            achou = (termo in html if termo in SENSIVEL_A_CAIXA
+                     else termo.lower() in html.lower())
         if achou:
             achados.append(f"{termo!r} ({porque})")
 

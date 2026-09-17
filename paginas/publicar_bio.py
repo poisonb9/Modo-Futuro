@@ -773,6 +773,10 @@ def produtos_todos() -> list[dict]:
     pos = {id(x): i for i, x in enumerate(saida)}
     fim = sorted(fim, key=lambda x: pos[id(x)])
     fim = sem_salto_de_variante(fim, por_dia)
+    # ⭐ SELO 1 (17/09/2026): o mesmo produto em OUTRA loja, lado a lado.
+    n_pares = duplicata.pares_entre_lojas(fim)
+    if n_pares:
+        print(f"pares entre lojas: {n_pares} cartao(oes) com irmao em outra loja")
     # ⭐ A NOTA DE VITRINE (17/09/2026, CRITERIOS_DA_VITRINE.md): uma regua
     # so' para a ordem, o fogo e a 2a posicao do ML. Escreve `vitrine_nota`
     # e `vitrine_fora` em cada cartao; fogo e ML leem a nota abaixo.

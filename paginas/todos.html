@@ -487,6 +487,8 @@
   .recorde svg { width: 13px; height: 13px; display: block; }
   .ja-esteve.espere strong { color: var(--tinta); font-weight: 700; letter-spacing: .02em; }
   .ja-esteve.loja-diz strong { color: var(--tinta); font-weight: 600; }
+  .ja-esteve.tambem-em a { color: var(--fraco); text-decoration: underline; }
+  .ja-esteve.tambem-em strong { color: var(--verde); font-weight: 700; }
   .nota {
     display: inline-flex; align-items: center; gap: 3px; margin-left: auto;
     font: 600 10.5px/1 var(--mono); color: var(--fraco);
@@ -1165,6 +1167,30 @@
       je.appendChild(document.createTextNode(" · já esteve a " + p.ja_esteve.preco + " " + quando));
       je.title = "subiu, mas já esteve mais barato — o menor preço que eu mesmo vi, e quando";
       corpo.appendChild(je);
+    }
+    // ⭐ SELO 1 (17/09/2026): o MESMO produto em outra loja, com a diferença.
+    // "no Mercado Livre R$ 49,90 · aqui R$ 12,00 mais barato" — ou o inverso,
+    // com link pro irmão: o cliente escolhe (prazo x preço), nós mostramos.
+    if (p.tambem_em && p.tambem_em.length) {
+      p.tambem_em.forEach(function (t) {
+        var te = el("div", "ja-esteve tambem-em");
+        var lk = document.createElement("a");
+        lk.href = t.link; lk.rel = "noopener sponsored";
+        lk.textContent = "no " + t.loja + " " + t.preco;
+        lk.addEventListener("click", function (ev) { ev.stopPropagation(); });
+        te.appendChild(lk);
+        var dif = Math.abs(t.dif || 0).toFixed(2).replace(".", ",");
+        if ((t.dif || 0) > 0.5) {
+          te.appendChild(document.createTextNode(" · "));
+          te.appendChild(el("strong", null, "aqui R$ " + dif + " mais barato"));
+        } else if ((t.dif || 0) < -0.5) {
+          te.appendChild(document.createTextNode(" · lá R$ " + dif + " mais barato"));
+        } else {
+          te.appendChild(document.createTextNode(" · mesmo preço"));
+        }
+        te.title = "o mesmo produto (mesma foto) anunciado em outra loja";
+        corpo.appendChild(te);
+      });
     }
     // ⭐ SELO "A LOJA DIZ" (17/09/2026): o "de" da loja ao lado do maior
     // preço que NÓS vimos. Só nas externas (o feed traz o "de"), só com

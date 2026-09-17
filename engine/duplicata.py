@@ -159,3 +159,46 @@ def sem_repetidos(produtos: list[dict]) -> list[dict]:
     # pagina, nao efeito colateral da dedupe.
     ficaram = {id(p) for p in fim}
     return [p for p in produtos if id(p) in ficaram]
+
+
+def pares_entre_lojas(produtos: list[dict]) -> int:
+    """Escreve `tambem_em` em cada cartao: o MESMO produto (pela foto, mesmo
+    limiar da dedupe) em OUTRA loja, com preco, link e diferenca.
+
+    ⭐ SELO 1 (Bryan, 17/09/2026): "R$ 12 mais barato que no Mercado Livre".
+    A dedupe e' POR loja de proposito (o cliente escolhe prazo x preco);
+    aqui e' o passo seguinte: os dois cartoes ficam, e cada um aponta pro
+    irmao. E' a pergunta que a pessoa responde abrindo tres abas — a gente
+    entrega pronta.
+
+    ⚠️ Usa os vetores ja' em cache (a dedupe acabou de calcular): nao chama
+    modelo por par. Foto identica (mesma URL) e' par sem modelo.
+    Devolve quantos cartoes ganharam `tambem_em`.
+    """
+    cache = _cache()
+    itens = []
+    for p in produtos:
+        p["tambem_em"] = []
+        img = p.get("imagem", "")
+        itens.append((p, img, vetor_da_imagem(img, cache) if img else None))
+    _gravar(cache)
+    n = 0
+    for i, (a, ia, va) in enumerate(itens):
+        for b, ib, vb in itens[i + 1:]:
+            if (a.get("loja") or "") == (b.get("loja") or ""):
+                continue
+            mesmo = bool(ia and ia == ib) or (
+                va is not None and vb is not None and _parecidos(va, vb) >= LIMIAR)
+            if not mesmo:
+                continue
+            pa, pb = _preco(a), _preco(b)
+            if pa == float("inf") or pb == float("inf"):
+                continue
+            a["tambem_em"].append({"loja": b.get("loja"), "preco": b.get("preco"),
+                                   "link": b.get("link"), "dif": round(pb - pa, 2)})
+            b["tambem_em"].append({"loja": a.get("loja"), "preco": a.get("preco"),
+                                   "link": a.get("link"), "dif": round(pa - pb, 2)})
+    for p, _, _ in itens:
+        if p["tambem_em"]:
+            n += 1
+    return n

@@ -800,6 +800,13 @@
   // O TETO_VITRINE continua mandando na pagina principal e na categoria.
   var TETO_LOJA = 150;
   function tetoAtual() { return (loja && !canal) ? TETO_LOJA : TETO_VITRINE; }
+  // ⭐ A DIVISAO DOS DOIS BLOCOS (loja E categoria) e' R$ 99,99 — decisao do
+  // Bryan em 17/09/2026: "0 a 99,99 e depois de 99,99 pra cima assusta menos".
+  // ⚠️ Nao e' o TETO_VITRINE (250): esse continua decidindo o que a pagina
+  // principal ESCONDE no rolar; este decide onde a prateleira PARTE.
+  var TETO_BLOCO = 99.99;
+  function caroBloco(p) { return num(p.preco) > TETO_BLOCO; }
+  function rotuloBloco(alto) { return alto ? "A partir de R$ 100" : "Até R$ 99,99"; }
   // ⭐ QUINZE, e nao 90 como a lista corrida. Dentro da categoria os dois
   // blocos disputam a mesma tela: 90 cartoes no de cima empurrariam o de
   // baixo pra fora e ele deixaria de existir na pratica.
@@ -1571,8 +1578,8 @@
       v.appendChild(document.createTextNode(
         "Tente outra palavra, ou volte pra Tudo."));
       grade.appendChild(v);
-    } else if ((canal || loja) && lista.some(caro) && lista.some(function (p) {
-      return !caro(p);
+    } else if ((canal || loja) && lista.some(caroBloco) && lista.some(function (p) {
+      return !caroBloco(p);
     })) {
       // ⛔ DOIS BLOCOS, E SO' DENTRO DA CATEGORIA.
       //
@@ -1592,12 +1599,12 @@
       // coerente com o topo da pagina: "Eu garimpo. Você paga menos." Abrir
       // a categoria pelo caro contradiria a frase que a pessoa acabou de
       // ler, mesmo dentro de uma prateleira de marca.
-      bloco("Até R$ " + tetoAtual(), lista.filter(function (p) {
-              return !caro(p);
+      bloco(rotuloBloco(false), lista.filter(function (p) {
+              return !caroBloco(p);
             }), mostrandoBaixo, function () {
               mostrandoBaixo += passoBloco(); desenhar();
             });
-      bloco("Acima de R$ " + tetoAtual(), lista.filter(caro),
+      bloco(rotuloBloco(true), lista.filter(caroBloco),
             mostrandoAlto, function () {
               mostrandoAlto += passoBloco(); desenhar();
             });

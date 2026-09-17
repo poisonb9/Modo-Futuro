@@ -167,7 +167,9 @@ def momento(p: dict) -> float:
     # momento: e' o oposto. A pagina ja' rebaixa por 0,7; aqui e' 0.
     if p.get("ja_esteve") and (p["ja_esteve"] or {}).get("preco"):
         parte_queda = 0.0
-    return min(1.0, 0.6 * parte_queda + 0.4 * cresc)
+    # ⭐ v2: termo em alta no ML (2+ palavras) contido no nome = demanda medida
+    alta = 0.3 if p.get("em_alta") else 0.0
+    return min(1.0, 0.6 * parte_queda + 0.4 * cresc + alta)
 
 
 def mostravel(p: dict) -> float:

@@ -93,6 +93,10 @@ jobs:
           # ⭐ NOMES CURTOS, todo dia. Ate' 16/09/2026 isto so' rodava a mao
           # (cache parado em 14/09, 36 titulos crus na pagina). Modelo em
           # rodizio Gemini -> OpenRouter -> ModelScope; sem cota, fica o corte.
+          # ⭐ TENDENCIAS DO ML por categoria (regua v2, 17/09/2026): demanda
+          # medida; entra no Momento e vira pauta. `|| true`: e' bonus.
+          echo "===== tendencias do ML"
+          python -X utf8 -m engine.tendencias_ml --guardar || true
           echo "===== nomes curtos"
           python -X utf8 -m engine.nome_produto || true
           # ⭐ SINAIS DE PRECO (16/09/2026): "voltou a cair", "menor preco" e
@@ -144,7 +148,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/awin_comissoes.json estado/ml_raizes.json estado/nomes_curtos.json estado/sinais_postados.json; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/awin_comissoes.json estado/ml_tendencias.json estado/ml_raizes.json estado/nomes_curtos.json estado/sinais_postados.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

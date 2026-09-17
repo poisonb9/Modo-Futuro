@@ -346,6 +346,8 @@ def produtos_externos() -> dict[str, dict]:
     serie = _serie_de_precos()
     por_dia = _precos_por_dia()
     saida: dict[str, dict] = {}
+    from engine import tendencias_ml as _tm
+    _termos_alta = _tm.termos()
     sem_mapa: dict[str, int] = {}
     for p in inst.get("produtos") or []:
         cfg = EXTERNAS.get(p.get("loja") or "")
@@ -389,6 +391,7 @@ def produtos_externos() -> dict[str, dict]:
             # quando a loja anuncia um "de" acima do MAIOR preco que NOS ja'
             # vimos em >= 3 dias. Vazio senao.
             "de_inflado": _de_inflado(por_dia, d, float(p.get("de_loja") or 0)),
+            "em_alta": _tm.em_alta(p["nome"], _termos_alta),
         })
     for loja, n in sem_mapa.items():
         print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "
@@ -658,6 +661,8 @@ def produtos_todos() -> list[dict]:
     vendas_desde = _vendas_desde()
     vendedores = _vendedores()
     agora = _precos_agora()
+    from engine import tendencias_ml as _tm
+    _termos_alta = _tm.termos()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -739,6 +744,8 @@ def produtos_todos() -> list[dict]:
             # ⭐ so' ML (regua v2): frete gratis e reputacao do vendedor, do
             # instantaneo horario. Ausentes = sem dado, nunca "ruim".
             "frete_gratis": bool((agora.get(str(d.get("id"))) or {}).get("frete_gratis", False)),
+            # ⭐ termo em alta no Mercado Livre contido no nome (regua v2) ou ""
+            "em_alta": _tm.em_alta(_nome_bonito(d), _termos_alta),
             "reputacao": (agora.get(str(d.get("id"))) or {}).get("reputacao") or {},
             # ⭐ quando o preco foi reconferido pela ultima vez ("hoje 19:00" ou
             # "15/09"): a ancora que TODO produto tem, quando nao ha' Promo

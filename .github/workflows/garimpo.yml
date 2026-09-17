@@ -144,7 +144,7 @@ jobs:
           # ⭐ Terceira vez que este motor perde estado por `git add` que
           # falha. Arquivo que pode nao existir NUNCA entra numa lista com
           # os outros.
-          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/ml_raizes.json estado/nomes_curtos.json estado/sinais_postados.json; do
+          for f in estado/precos_vistos.jsonl estado/produtos_publicados.jsonl estado/pedidos.jsonl estado/awin_programas.json estado/awin_catalogo.json estado/awin_comissoes.json estado/ml_raizes.json estado/nomes_curtos.json estado/sinais_postados.json; do
             [ -f "$f" ] && git add -f "$f" || echo "  (ainda nao existe: $f)"
           done
           git diff --cached --quiet || git commit -m "garimpo: precos vistos"

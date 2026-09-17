@@ -274,6 +274,13 @@ EXTERNAS = {
 EXTERNO_MAX_HORAS = 24
 
 
+def _comissao_awin(loja: str) -> float:
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
+    from engine import awin as _awin
+    return _awin.comissao_de(loja)
+
+
 def produtos_externos() -> dict[str, dict]:
     """{categoria: {"arquivo", "passo", "produtos": [cartoes]}} — o que vai
     em arquivo separado. {} quando nao ha' instantaneo valido.
@@ -342,7 +349,9 @@ def produtos_externos() -> dict[str, dict]:
             "imagem": p.get("imagem", ""),
             "queda": _queda_real(serie, d),
             "vendas": 0,
-            "ganho": round(preco * 0.075, 2),
+            # ⭐ pela comissao REAL da loja (awin.comissao_de) — ate' 17/09
+            # eram 7,5% pra todas, o numero da Nike; o Kabum paga 1,15%.
+            "ganho": round(preco * _comissao_awin(p.get("loja") or "") / 100, 2),
             "antes": _antes(serie, d),
             "dias": _dias(serie, d),
             "pontos": serie.get(pid, ("", 0, 0.0, ""))[1],

@@ -65,6 +65,71 @@ def _credencial() -> tuple[str, str]:
     return t, p
 
 
+# ⭐ A COMISSAO PADRAO DE CADA LOJA, MEDIDA NA API em 17/09/2026
+# (`commissiongroups`, grupo Default). Ate' entao o cartao das externas usava
+# 7,5% pra TODAS — o numero da Nike — e o Rende da regua lia um ganho
+# inventado: o Kabum paga 1,15% (0-2,3), a Lauri 11%. Esta tabela e' a
+# RESERVA; o valor vivo vem de `estado/awin_comissoes.json`, que
+# `guardar_catalogo` reescreve a cada rodada.
+COMISSAO_RESERVA = {
+    "Nike BR": 7.5, "Kabum BR": 1.15, "Carraro BR": 5.0, "Leveros BR": 3.0,
+    "Shark-Ninja BR": 8.0, "Clovis Calçados BR": 8.0, "Lacoste BR": 4.0,
+    "Lauri Esporte": 11.0, "Radiale Pneus": 5.0, "Exypna": 5.0,
+}
+COMISSOES_ESTADO = Path(__file__).resolve().parent.parent / "estado" / "awin_comissoes.json"
+
+
+def comissoes_da_api() -> dict[str, float]:
+    """{nome do anunciante: % do grupo Default} dos aprovados, pela API.
+    Sem grupo Default, a MENOR taxa percentual (o erro fica a nosso
+    desfavor, que e' o lado que ninguem reclama)."""
+    tok, pid = _credencial()
+    saida: dict[str, float] = {}
+    for a in programas("joined"):
+        r = requests.get(f"{API}/publishers/{pid}/commissiongroups",
+                         params={"advertiserId": a["id"]},
+                         headers={"Authorization": "Bearer " + tok}, timeout=30)
+        if r.status_code != 200:
+            continue
+        grupos = (r.json() or {}).get("commissionGroups") or []
+        pct = [float(g["percentage"]) for g in grupos
+               if g.get("type") == "percentage" and g.get("percentage") is not None]
+        padrao = [float(g["percentage"]) for g in grupos
+                  if (g.get("groupCode") or g.get("groupName") or "").lower() in ("default", "defaultgroup")
+                  and g.get("percentage") is not None]
+        if padrao:
+            saida[a["name"]] = padrao[0]
+        elif pct:
+            saida[a["name"]] = min(pct)
+    return saida
+
+
+def guardar_comissoes() -> dict[str, float]:
+    """Reescreve `estado/awin_comissoes.json`. Falha ABERTA: sem API, o
+    arquivo anterior (ou a reserva) continua valendo."""
+    try:
+        c = comissoes_da_api()
+    except Exception as e:                           # noqa: BLE001
+        print(f"awin: comissoes nao lidas ({type(e).__name__}) — reserva mantida")
+        return {}
+    if c:
+        COMISSOES_ESTADO.parent.mkdir(parents=True, exist_ok=True)
+        COMISSOES_ESTADO.write_text(json.dumps(c, ensure_ascii=False, indent=1), encoding="utf-8")
+    return c
+
+
+def comissao_de(loja: str) -> float:
+    """% de comissao da loja (nome do anunciante como vem no feed)."""
+    vivo: dict = {}
+    if COMISSOES_ESTADO.exists():
+        try:
+            vivo = json.loads(COMISSOES_ESTADO.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            vivo = {}
+    v = vivo.get(loja, COMISSAO_RESERVA.get(loja))
+    return float(v) if v is not None else 0.0
+
+
 def programas(relacao: str = "joined") -> list[dict]:
     tok, pid = _credencial()
     r = requests.get(f"{API}/publishers/{pid}/programmes",
@@ -372,6 +437,7 @@ def guardar_catalogo(teto: float = 0.0) -> dict:
     # na loja, temos que ter os dados de todos os produtos — informacao que
     # nao volta comprando precos". Medido no mesmo dia: 26.455 no feed,
     # 8.093 ate' R$ 150 — 18.362 ficavam sem historico nenhum.
+    guardar_comissoes()
     todos = catalogo(teto=0)
     prods = [p for p in todos if not teto or p["preco"] <= teto]
     if not prods:

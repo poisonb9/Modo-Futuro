@@ -86,6 +86,10 @@ try:
     checar(p0.get("canal") == "Nike" and p0.get("id") == "awin:12",
            "canal 'Nike' e id prefixado 'awin:' (nao colide com o AliExpress)")
     checar(p0.get("loja") == "Nike", "a loja da externa e' a propria categoria (selo Nike)")
+    # ⭐ 17/09: ganho pela comissao REAL da loja (Nike 7,5%), nao 7,5% pra todas
+    checar(p0.get("ganho") == round(59.98 * awin.comissao_de("Nike BR") / 100, 2)
+           and awin.comissao_de("Kabum BR") < 3 and awin.comissao_de("Loja Sem Mapa") == 0.0,
+           f"ganho = preco x comissao da loja ({p0.get('ganho')}); Kabum < 3%; desconhecida = 0")
     checar(p0.get("pontos") == 0 and p0.get("serie") == [] and p0.get("queda") == 0,
            "sem serie: 0 pontos, sem grafico, sem queda — cai em 'achados novos'")
     checar(ext["Nike"]["passo"] == 50 and ext["Nike"]["arquivo"] == "nike.json",

@@ -83,12 +83,12 @@ proposto. Nota 0–100; entra na vitrine quem passa o piso; a ordem é a nota.
 VITRINE = 35·Rende + 30·Confiança + 20·Momento + 15·Mostrável
 ```
 
-**Rende (35)** — o melhor pra nós.
+**Rende (35)** — o melhor pra nós. Acima de R$ 150 (faixa de impulso) vale ×0,7.
 `ganho_por_venda = preço × comissão`. Normalizado por loja (a régua do Kabum a 2 %
 não é a do Ali a 9 %). Fonte: Hormozi (margem, EPC), FBA (margem), meticsmedia
 (orgânico aceita margem menor → por isso é 35 e não 50).
 
-**Confiança (30)** — o melhor pro cliente.
+**Confiança (30)** — o melhor pro cliente. (Ali: 60 % nota + 40 % volume de vendas — medido em 17/09: sem o volume o topo virava "os mais caros".)
 Ali: `nota ≥ 95 %` = cheio; 90–95 = metade; < 90 = zero (meticsmedia: ≥ 90, ideal > 95).
 ML: `vendedores ≥ 5` = cheio; 2–4 = metade (piso 2 já é regra do `buscar`).
 Awin: **zero por enquanto** — o feed não traz avaliação. É o eixo que a Nike/Clovis

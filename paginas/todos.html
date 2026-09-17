@@ -724,7 +724,13 @@
       // so' existe em produto que subiu e ainda esta' abaixo do maior — o
       // site nao empurra pra frente o que ficou mais caro. Fator 0,7: rebaixa
       // sem esconder.
+      // ⭐ A ORDEM DE "TUDO" E' A NOTA DE VITRINE (17/09/2026, regua 35/30/20/15
+      // em engine/regua_vitrine.py); desempate pelo antigo ganho x vendas
+      // com o rebaixamento de quem subiu (x0,7). Sem nota (pagina velha),
+      // cai no antigo sozinho.
       ordem: function (a, b) {
+        var na = a.vitrine_nota || 0, nb = b.vitrine_nota || 0;
+        if (nb !== na) { return nb - na; }
         var fa = a.ja_esteve && a.ja_esteve.preco ? 0.7 : 1;
         var fb = b.ja_esteve && b.ja_esteve.preco ? 0.7 : 1;
         return ((b.ganho || 0) * (b.vendas || 0) * fb)
@@ -1449,8 +1455,13 @@
     // ("mais baratos primeiro comunica melhor com nosso publico"). O feed
     // nao tem `vendas`, entao `ganho x vendas` e' zero pra todos e a ordem
     // de "tudo" seria a do arquivo, que nao e' criterio nenhum.
+    // ⭐ desde 17/09/2026 a externa abre pela NOTA (Rende x Momento; a
+    // Confianca e' 0 nela ate' haver dado) e so' depois pelo mais barato.
+    // Antes abria pelo mais barato e a Clovis estreava com meia-calca.
     if (ext && atual === "todos") {
       lista = lista.slice().sort(function (a, b) {
+        var na = a.vitrine_nota || 0, nb = b.vitrine_nota || 0;
+        if (nb !== na) { return nb - na; }
         return num(a.preco) - num(b.preco);
       });
     }

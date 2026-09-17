@@ -361,6 +361,10 @@ def produtos_externos() -> dict[str, dict]:
             x["preco"].replace("R$", "").replace(",", ".")))
         print(f"externos: {cat} {len(bloco['produtos'])} produto(s) "
               f"-> {bloco['arquivo']}")
+    # ⭐ Nota de Vitrine tambem nas externas (Confianca = 0 ate' haver dado)
+    from engine import regua_vitrine
+    for b in saida.values():
+        regua_vitrine.pontuar(b["produtos"])
     return saida
 
 
@@ -730,6 +734,11 @@ def produtos_todos() -> list[dict]:
     pos = {id(x): i for i, x in enumerate(saida)}
     fim = sorted(fim, key=lambda x: pos[id(x)])
     fim = sem_salto_de_variante(fim, por_dia)
+    # ⭐ A NOTA DE VITRINE (17/09/2026, CRITERIOS_DA_VITRINE.md): uma regua
+    # so' para a ordem, o fogo e a 2a posicao do ML. Escreve `vitrine_nota`
+    # e `vitrine_fora` em cada cartao; fogo e ML leem a nota abaixo.
+    from engine import regua_vitrine
+    regua_vitrine.pontuar(fim)
     marcar_fogo(fim)
     marcar_vitrine_ml(fim)
     return fim
@@ -780,7 +789,11 @@ def marcar_vitrine_ml(dados: list[dict]) -> dict | None:
         p["vitrine"] = False
     if not ml:
         return None
-    ml.sort(key=lambda x: (-(int(x.get("vendas") or 0) * float(x.get("ganho") or 0)),
+    # ⭐ desde 17/09/2026: pela Nota de Vitrine; desempate pelo antigo
+    # vendedores x ganho, depois o mais barato. Quem esta' no piso nao entra.
+    ml = [p for p in ml if not p.get("vitrine_fora")] or ml
+    ml.sort(key=lambda x: (-float(x.get("vitrine_nota") or 0),
+                           -(int(x.get("vendas") or 0) * float(x.get("ganho") or 0)),
                            float(str(x.get("preco", "0")).replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)))
     ml[0]["vitrine"] = True
     return ml[0]
@@ -955,7 +968,11 @@ def marcar_fogo(dados: list[dict]) -> list[dict]:
                 and int(p.get("vendas") or 0) >= FOGO_VENDAS_MIN
                 and (ganho >= FOGO_GANHO_MIN or com >= FOGO_COMISSAO_MIN)):
             cand.append(p)
-    cand.sort(key=lambda x: -(float(x.get("ganho") or 0) * int(x.get("vendas") or 0)))
+    # ⭐ desde 17/09/2026 a ORDEM dos candidatos e' a Nota de Vitrine (uma
+    # regua so'); desempate pelo antigo ganho x vendas. Os pisos acima ficam.
+    cand = [p for p in cand if not p.get("vitrine_fora")]
+    cand.sort(key=lambda x: (-float(x.get("vitrine_nota") or 0),
+                             -(float(x.get("ganho") or 0) * int(x.get("vendas") or 0))))
     for p in cand[:FOGO_TETO]:
         p["fogo"] = True
     return cand[:FOGO_TETO]

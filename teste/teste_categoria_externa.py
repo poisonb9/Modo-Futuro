@@ -93,7 +93,7 @@ try:
     chaves = set(p0)
     esperadas = {"nome", "preco", "link", "imagem", "queda", "vendas", "ganho",
                  "antes", "dias", "pontos", "serie", "visto", "canal", "id", "combina",
-                 "loja"}   # loja: campo do cartao desde 16/09 (selo + seletor)
+                 "loja", "vitrine_nota", "vitrine_fora"}   # loja: selo + seletor (16/09); vitrine_*: a regua (17/09)
     chaves -= {"nota", "ja_esteve", "vendeu", "vendedores", "fogo", "vitrine", "conferido"}   # so' o AliExpress / ML tem
     checar(chaves == esperadas, f"o cartao tem EXATAMENTE os campos do AliExpress (dif: {chaves ^ esperadas})")
 

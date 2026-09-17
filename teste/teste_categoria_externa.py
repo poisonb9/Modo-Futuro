@@ -176,6 +176,19 @@ try:
         inst = json.loads(awin_estado.read_text(encoding="utf-8"))
         checar(len(inst["produtos"]) == 2 and inst["quando"] != "ANTES",
                "o instantaneo foi reescrito com os 2 produtos e data nova")
+
+        print()
+        print("8. ⭐ A SERIE RECEBE O FEED INTEIRO; O TETO VALE SO' PRO INSTANTANEO (17/09)")
+        awin.PRECOS.write_text("", encoding="utf-8")
+        caro = dict(NIKE[0]); caro["id"] = "999"; caro["preco"] = 899.0
+        awin.catalogo = lambda teto=0.0, piso=0.0: [dict(x) for x in NIKE[:2]] + [caro]
+        awin.guardar_catalogo(teto=150)
+        serie = [json.loads(l) for l in awin.PRECOS.read_text(encoding="utf-8").splitlines()]
+        inst = json.loads(awin_estado.read_text(encoding="utf-8"))
+        checar(len(serie) == 3 and any(x["id"] == "awin:999" for x in serie),
+               f"o de R$ 899 ENTRA na serie ({len(serie)} pontos)")
+        checar(len(inst["produtos"]) == 2 and all(p["preco"] <= 150 for p in inst["produtos"]),
+               "e fica FORA do instantaneo (o site continua ate' R$ 150)")
     finally:
         awin.catalogo, awin.CATALOGO_ESTADO, awin.PRECOS = cat_real, est_real, pre_real
 finally:

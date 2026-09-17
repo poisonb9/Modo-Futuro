@@ -348,7 +348,13 @@ def guardar_catalogo(teto: float = 0.0) -> dict:
     ontem, e' recusado pelo publicador pela idade, que e' o aviso certo.
     """
     from datetime import date
-    prods = catalogo(teto=teto)
+    # ⭐ A SERIE RECEBE O FEED INTEIRO; o teto vale so' pro INSTANTANEO (o
+    # que vai pro site). Ordem do Bryan em 17/09/2026: "mesmo que nao entre
+    # na loja, temos que ter os dados de todos os produtos — informacao que
+    # nao volta comprando precos". Medido no mesmo dia: 26.455 no feed,
+    # 8.093 ate' R$ 150 — 18.362 ficavam sem historico nenhum.
+    todos = catalogo(teto=0)
+    prods = [p for p in todos if not teto or p["preco"] <= teto]
     if not prods:
         raise SystemExit("awin: catalogo vazio — instantaneo anterior mantido")
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -361,7 +367,7 @@ def guardar_catalogo(teto: float = 0.0) -> dict:
     ultimo = _ultimo_ponto_por_id()
     novos = 0
     with PRECOS.open("a", encoding="utf-8") as f:
-        for p in prods:
+        for p in todos:
             i = "awin:" + str(p["id"])
             antes = ultimo.get(i)
             if antes and abs(antes[1] - p["preco"]) < 0.005:
@@ -377,7 +383,7 @@ def guardar_catalogo(teto: float = 0.0) -> dict:
         lojas[p["loja"]] = lojas.get(p["loja"], 0) + 1
     print(f"awin: instantaneo com {len(prods)} produtos ("
           + ", ".join(f"{k} {v}" for k, v in lojas.items())
-          + f"); serie +{novos} ponto(s)")
+          + f"); feed inteiro {len(todos)}; serie +{novos} ponto(s)")
     return inst
 
 

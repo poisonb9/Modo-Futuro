@@ -547,6 +547,9 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                          '  var BRASAO = "' + _brasao_total() + '";'),
                         ("  var SIMBOLOS = {};",
                          "  var SIMBOLOS = " + json.dumps(simbolos_lojas()) + ";"),
+                        # ⭐ selo 2: o @ do bot do "avise-me"; "" = sem botao
+                        ('  var BOT_ALERTA = "";',
+                         '  var BOT_ALERTA = "' + _bot_alerta() + '";'),
                         # ⚠️ elemento, nao comentario: os comentarios saem
                         # ANTES desta troca (tirar_comentarios)
                         ('  <section id="indice-estatico" aria-hidden="true"></section>',
@@ -574,6 +577,15 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
 # ⚠️ PNG/WebP sao reduzidos a 32 px de altura antes de virar data URI: o
 # selo tem 14 px e a pagina inteira viaja em cada visita. SVG vai como esta'.
 SIMBOLOS_DIR = RAIZ / "paginas" / "simbolos_lojas"
+
+
+def _bot_alerta() -> str:
+    """O @ do bot do "avise-me quando cair" (engine/alertas.py), ou "" —
+    e sem @ a pagina nao desenha o botao. Nunca inventa um @."""
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
+    from engine import alertas as _al
+    return _al.bot_username() or ""
 
 
 def simbolos_lojas() -> dict[str, str]:

@@ -488,6 +488,13 @@
   .ja-esteve.espere strong { color: var(--tinta); font-weight: 700; letter-spacing: .02em; }
   .ja-esteve.loja-diz strong { color: var(--tinta); font-weight: 600; }
   .ja-esteve.tambem-em a { color: var(--fraco); text-decoration: underline; }
+  .avise-me {
+    display: inline-block; align-self: flex-start;
+    font: 600 10px/1 var(--mono); color: var(--fraco);
+    border: 1px solid var(--linha); border-radius: 999px; padding: 4px 8px;
+    text-decoration: none; opacity: .9;
+  }
+  .avise-me:hover { color: var(--tinta); border-color: var(--tinta); }
   .ja-esteve.tambem-em strong { color: var(--verde); font-weight: 700; }
   .nota {
     display: inline-flex; align-items: center; gap: 3px; margin-left: auto;
@@ -694,6 +701,9 @@
   // ⭐ {loja: data URI} do simbolo OFICIAL (kit de afiliado); o publicador
   // preenche a partir de paginas/simbolos_lojas/. Loja sem simbolo = sigla.
   var SIMBOLOS = {};
+  // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
+  // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
+  var BOT_ALERTA = "";
   // ⭐ QUANTO A MENOS SE PAGA HOJE, somando os que cairam — e a linha por dia.
   // {"hoje": 123.4, "n": 32, "serie": [["09-13", 80.2], ...]}. Publicador
   // preenche; a conta e' a mesma do "de" riscado de cada cartao.
@@ -1202,6 +1212,19 @@
       di.appendChild(document.createTextNode(" em " + p.de_inflado.dias + " dias"));
       di.title = "o preço 'de' que a loja anuncia, e o maior preço que eu mesmo vi neste produto";
       corpo.appendChild(di);
+    }
+    // ⭐ SELO 2 "AVISE-ME QUANDO CAIR" (17/09/2026): abre o bot no Telegram
+    // com /start alerta_<id>; a nuvem colhe de hora em hora e avisa quando
+    // a série disparar. É o Keepa brasileiro. Sem BOT_ALERTA, sem botão.
+    if (BOT_ALERTA && p.id) {
+      var av = document.createElement("a");
+      av.className = "avise-me";
+      av.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id));
+      av.rel = "noopener";
+      av.textContent = "🔔 avise-me quando cair";
+      av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
+      av.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      corpo.appendChild(av);
     }
     // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
     // numero que acabou de ser lido. Volta `null` quando nao ha' 3 pontos.

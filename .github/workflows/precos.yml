@@ -79,6 +79,13 @@ jobs:
           MELI_CLIENT_ID:        ${{ secrets.MELI_CLIENT_ID }}
           MELI_CLIENT_SECRET:    ${{ secrets.MELI_CLIENT_SECRET }}
         run: python -X utf8 -m engine.precos --atualizar
+      # ⭐ SELO 2 "avise-me quando cair" (17/09/2026): colhe os /start do bot
+      # de alertas e avisa quem pediu, na mesma hora em que o preco e'
+      # reconferido. `|| true`: sem o secret, o passo so' avisa e segue.
+      - name: Alertas (avise-me quando cair)
+        env:
+          TELEGRAM_BOT_ALERTA: ${{ secrets.TELEGRAM_BOT_ALERTA }}
+        run: python -X utf8 -m engine.alertas --colher --avisar || true
       - name: Guardar o instantaneo
         run: |
           git config user.name  "github-actions[bot]"
@@ -87,6 +94,10 @@ jobs:
             || { echo "::error::o instantaneo nao foi gravado"; exit 1; }
           # ⚠️ a serie do ML e' escrita por este passo (nao ha' garimpo do ML)
           [ -f estado/precos_vistos.jsonl ] && git add -f estado/precos_vistos.jsonl || true
+          # ⭐ as inscricoes e os avisos do "avise-me" (um por um, so' se existir)
+          for f in estado/alertas.jsonl estado/alertas_enviados.json estado/alertas_offset.json; do
+            [ -f "$f" ] && git add -f "$f" || true
+          done
           git diff --cached --quiet && { echo "nenhum preco mudou"; exit 0; }
           git commit -m "precos: instantaneo do catalogo"
           # ⚠️ Rebase antes do push: garimpo, fila, desempenho e vitrine

@@ -287,6 +287,19 @@ def _preco(v) -> float:
         return 0.0
 
 
+def _de_loja(p: dict, preco: float) -> float:
+    """O preco "de" que a loja anuncia, so' quando e' MAIOR que o preco de
+    venda (senao e' ruido de feed). 0 quando nao ha'."""
+    for campo in ("product_price_old", "rrp_price"):
+        try:
+            v = float(str(p.get(campo) or "0").replace(",", "."))
+        except ValueError:
+            continue
+        if v > preco * 1.005:
+            return round(v, 2)
+    return 0.0
+
+
 def com_clickref(link: str, pid) -> str:
     """Pendura `clickref=site-<id do produto>` no link do Awin.
 
@@ -377,6 +390,11 @@ def catalogo(teto: float = 0.0, piso: float = 0.0) -> list[dict]:
             "categoria": (p.get("merchant_category")
                           or p.get("category_name") or "").strip(),
             "marca": (p.get("brand_name") or "").strip(),
+            # ⭐ O "DE" DA PROPRIA LOJA (product_price_old / rrp_price), como
+            # DADO — nunca como riscado no cartao. E' a materia-prima do selo
+            # "a loja diz de R$ 349; nos nunca vimos acima de R$ 249"
+            # (Bryan, 17/09/2026). A Nike preenche em 100% do feed.
+            "de_loja": _de_loja(p, preco),
             # ⭐ SEM historico de proposito. Produto de feed nasce sem serie
             # de precos nossa; quem der "queda de X%" aqui estaria inventando.
             # A pagina mostra o selo "novo no catalogo" ate' o
@@ -461,6 +479,8 @@ def guardar_catalogo(teto: float = 0.0) -> dict:
                      "loja": p["loja"], "quando": hoje}
             if antes is None:
                 linha["nome"] = p["nome"]
+            if p.get("de_loja"):
+                linha["de_loja"] = p["de_loja"]
             f.write(json.dumps(linha, ensure_ascii=False) + "\n")
             novos += 1
     lojas: dict[str, int] = {}

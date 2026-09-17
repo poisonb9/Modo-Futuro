@@ -486,6 +486,7 @@
   }
   .recorde svg { width: 13px; height: 13px; display: block; }
   .ja-esteve.espere strong { color: var(--tinta); font-weight: 700; letter-spacing: .02em; }
+  .ja-esteve.loja-diz strong { color: var(--tinta); font-weight: 600; }
   .nota {
     display: inline-flex; align-items: center; gap: 3px; margin-left: auto;
     font: 600 10.5px/1 var(--mono); color: var(--fraco);
@@ -1164,6 +1165,17 @@
       je.appendChild(document.createTextNode(" · já esteve a " + p.ja_esteve.preco + " " + quando));
       je.title = "subiu, mas já esteve mais barato — o menor preço que eu mesmo vi, e quando";
       corpo.appendChild(je);
+    }
+    // ⭐ SELO "A LOJA DIZ" (17/09/2026): o "de" da loja ao lado do maior
+    // preço que NÓS vimos. Só nas externas (o feed traz o "de"), só com
+    // >= 3 dias de série, e nunca como riscado — é medição, não desconto.
+    if (p.de_inflado && p.de_inflado.loja) {
+      var di = el("div", "ja-esteve loja-diz");
+      di.appendChild(document.createTextNode("a loja diz de " + p.de_inflado.loja + " · "));
+      di.appendChild(el("strong", null, "nunca vimos acima de " + p.de_inflado.nosso));
+      di.appendChild(document.createTextNode(" em " + p.de_inflado.dias + " dias"));
+      di.title = "o preço 'de' que a loja anuncia, e o maior preço que eu mesmo vi neste produto";
+      corpo.appendChild(di);
     }
     // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
     // numero que acabou de ser lido. Volta `null` quando nao ha' 3 pontos.

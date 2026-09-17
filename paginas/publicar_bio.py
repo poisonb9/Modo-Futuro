@@ -274,6 +274,30 @@ EXTERNAS = {
 EXTERNO_MAX_HORAS = 24
 
 
+# ⭐ SELO "A LOJA DIZ" (Bryan, 17/09/2026): a Nike preenche `product_price_old`
+# em 100% do feed. Se esse "de" e' maior que o MAIOR preco que a nossa serie
+# ja' viu, com >= DE_INFLADO_DIAS_MIN dias de radar, o cartao diz: "a loja diz
+# de R$ 349,99 · nunca vimos acima de R$ 249,99 em N dias". Ninguem faz isso
+# porque a loja e' o anunciante. ⚠️ Nao e' acusacao de fraude: e' a nossa
+# medicao ao lado do numero dela, e a pessoa decide.
+DE_INFLADO_DIAS_MIN = 3
+DE_INFLADO_FOLGA = 1.02
+
+
+def _de_inflado(por_dia: dict, d: dict, de_loja: float) -> dict:
+    if de_loja <= 0:
+        return {}
+    dias = por_dia.get(d.get("id")) or {}
+    if len(dias) < DE_INFLADO_DIAS_MIN:
+        return {}
+    maior = max(dias.values())
+    if maior <= 0 or de_loja <= maior * DE_INFLADO_FOLGA:
+        return {}
+    return {"loja": f"R$ {de_loja:.2f}".replace(".", ","),
+            "nosso": f"R$ {maior:.2f}".replace(".", ","),
+            "dias": len(dias)}
+
+
 def _comissao_awin(loja: str) -> float:
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
@@ -361,6 +385,10 @@ def produtos_externos() -> dict[str, dict]:
             "id": pid,
             "combina": [],
             "loja": cat,
+            # ⭐ SELO 3: {"loja": "R$ 349,99", "nosso": "R$ 249,99", "dias": N}
+            # quando a loja anuncia um "de" acima do MAIOR preco que NOS ja'
+            # vimos em >= 3 dias. Vazio senao.
+            "de_inflado": _de_inflado(por_dia, d, float(p.get("de_loja") or 0)),
         })
     for loja, n in sem_mapa.items():
         print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "

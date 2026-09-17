@@ -98,7 +98,8 @@ try:
     esperadas = {"nome", "preco", "link", "imagem", "queda", "vendas", "ganho",
                  "antes", "dias", "pontos", "serie", "visto", "canal", "id", "combina",
                  "loja", "vitrine_nota", "vitrine_fora"}   # loja: selo + seletor (16/09); vitrine_*: a regua (17/09)
-    chaves -= {"nota", "ja_esteve", "vendeu", "vendedores", "fogo", "vitrine", "conferido"}   # so' o AliExpress / ML tem
+    chaves -= {"nota", "ja_esteve", "vendeu", "vendedores", "fogo", "vitrine", "conferido", "recorde"}   # so' o AliExpress / ML tem
+    chaves -= {"de_inflado"}   # so' a externa tem (o feed traz o "de" da loja)
     checar(chaves == esperadas, f"o cartao tem EXATAMENTE os campos do AliExpress (dif: {chaves ^ esperadas})")
 
     print()

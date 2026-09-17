@@ -15,6 +15,34 @@
 <link rel="icon" href="/icone.png">
 <meta name="description" content="O catálogo do Achadinho Total: produto, preço acompanhado dia a dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
 <meta name="awin" content="publisher">
+<!-- ⭐ INDEXACAO (17/09/2026): o dominio proprio e' o endereco canonico.
+     A mesma pagina responde em achadinhototal.pages.dev; sem canonical o
+     Google indexaria as duas e dividiria o sinal. O publicador preenche
+     `DOMINIO`. -->
+<link rel="canonical" href="https://achadinhototal.com.br/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Achadinho Total">
+<meta property="og:title" content="Achadinho Total — preço acompanhado dia a dia">
+<meta property="og:description" content="Produto, preço conferido todo dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
+<meta property="og:url" content="https://achadinhototal.com.br/">
+<meta property="og:image" content="https://achadinhototal.com.br/icone_app.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<!-- ⭐ INDEXACAO (17/09/2026): o dominio proprio e' o endereco canonico.
+     A mesma pagina responde em achadinhototal.pages.dev; sem canonical o
+     Google indexaria as duas e dividiria o sinal. O publicador preenche
+     `DOMINIO`. -->
+<link rel="canonical" href="https://achadinhototal.com.br/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Achadinho Total">
+<meta property="og:title" content="Achadinho Total — preço acompanhado dia a dia">
+<meta property="og:description" content="Produto, preço conferido todo dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
+<meta property="og:url" content="https://achadinhototal.com.br/">
+<meta property="og:image" content="https://achadinhototal.com.br/icone_app.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -632,6 +660,14 @@
        link de afiliado — identificar publicidade e' exigencia de plataforma
        e do CDC, e um canal que ja' tomou corte de alcance por
        integridade/autenticidade em 02/08 nao tem margem pra testar isso. -->
+  <!-- ⭐ INDICE ESTATICO PRO CRAWLER (17/09/2026). A pagina inteira e'
+       montada por JS; o Google renderiza JS, mas com atraso e sem garantia
+       de ver cada cartao. Este bloco e' HTML puro com nome, preco e link
+       dos produtos do catalogo (so' AliExpress e ML — as lojas externas
+       ficam fora, "so' o ouro do ouro", Bryan 17/09). O script o REMOVE
+       assim que a grade real existe; o publicador preenche. -->
+  <section id="indice-estatico" aria-hidden="true"></section>
+
   <footer>
     <p class="marca-rodape">© 2026 Achadinho Total — todos os direitos reservados</p>
     <p class="aviso-rodape">Preços conferidos na data indicada em cada item · Contém links de afiliado</p>
@@ -1379,6 +1415,9 @@
   }
 
   function desenhar() {
+    // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)
+    var estatico = document.getElementById("indice-estatico");
+    if (estatico) { estatico.parentNode.removeChild(estatico); }
     if (externa(canal) && !EXTERNO_CARREGADO[canal]) {
       carregarExterno(canal, desenhar);
       return;
@@ -1476,7 +1515,7 @@
         mais.type = "button";
         mais.addEventListener("click", function () {
           mostrando += passoLista();
-          desenhar();
+  desenhar();
         });
         grade.appendChild(mais);
       }

@@ -505,7 +505,12 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                         ('  var BRASAO = "";',
                          '  var BRASAO = "' + _brasao_total() + '";'),
                         ("  var SIMBOLOS = {};",
-                         "  var SIMBOLOS = " + json.dumps(simbolos_lojas()) + ";")):
+                         "  var SIMBOLOS = " + json.dumps(simbolos_lojas()) + ";"),
+                        # ⚠️ elemento, nao comentario: os comentarios saem
+                        # ANTES desta troca (tirar_comentarios)
+                        ('  <section id="indice-estatico" aria-hidden="true"></section>',
+                         '  <section id="indice-estatico" aria-hidden="true">'
+                         + indice_estatico(dados) + '</section>')):
         if alvo not in html:
             raise SystemExit("catalogo: marcador sumiu -> " + alvo.strip())
         html = html.replace(alvo, valor, 1)
@@ -1526,6 +1531,51 @@ PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
 # pedido do Bryan: a conta bate o teto de 10 projetos.
 PROJETO_MAE = "achadinhototal"
 
+# ⭐ O DOMINIO PROPRIO (registro.br, 16/09/2026) — o endereco canonico do
+# site mae. `achadinhototal.pages.dev` continua respondendo (e' onde o
+# `conferir_no_ar` le' a marca), mas o Google deve indexar so' este.
+DOMINIO = "https://achadinhototal.com.br"
+
+
+def indice_estatico(dados: list[dict]) -> str:
+    """HTML puro com os produtos do catalogo, pro crawler. Um `<li>` por
+    produto: nome, preco de hoje e link (rel=sponsored nofollow — e' link
+    de afiliado, e o Google pede que se diga)."""
+    import html as _h
+    itens = []
+    for p in dados:
+        nome, preco, link = p.get("nome") or "", p.get("preco") or "", p.get("link") or ""
+        if not (nome and link):
+            continue
+        loja = p.get("loja") or ""
+        itens.append(f'<li><a href="{_h.escape(link, quote=True)}" rel="sponsored nofollow">'
+                     f'{_h.escape(nome)}</a> — {_h.escape(preco)}'
+                     + (f' · {_h.escape(loja)}' if loja else '') + '</li>')
+    return ("<h2>Todos os achadinhos</h2>" + chr(10) + "<ul>" + chr(10)
+            + chr(10).join(itens) + chr(10) + "</ul>")
+
+
+def robots_txt() -> str:
+    return ("User-agent: *" + chr(10) + "Allow: /" + chr(10) + chr(10)
+            + f"Sitemap: {DOMINIO}/sitemap.xml" + chr(10))
+
+
+def sitemap_xml(caminhos: list[str]) -> str:
+    from datetime import date
+    hoje = date.today().isoformat()
+    urls = "".join(f"  <url><loc>{DOMINIO}{c}</loc><lastmod>{hoje}</lastmod>"
+                   f"<changefreq>daily</changefreq></url>" + chr(10) for c in caminhos)
+    return ('<?xml version="1.0" encoding="UTF-8"?>' + chr(10)
+            + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + chr(10)
+            + urls + '</urlset>' + chr(10))
+
+
+# ⭐ www -> raiz (decisao do Bryan, 17/09). Arquivo `_redirects` do Pages.
+# ⚠️ O pages.dev NAO redireciona ainda: e' nele que `conferir_no_ar` le' a
+# marca, e o dominio so' passa a existir quando a zona ativar.
+REDIRECTS = "https://www.achadinhototal.com.br/* " + DOMINIO + "/:splat 301" + chr(10)
+
+
 
 def _por_icone(destino) -> None:
     """Copia o icone pro diretorio que vai subir.
@@ -1633,6 +1683,12 @@ def publicar_no_ar(html: str, parceiros: str = "",
             casa = Path(tempfile.mkdtemp())
             try:
                 (casa / "index.html").write_text(catalogo, encoding="utf-8")
+                # ⭐ indexacao (17/09/2026): robots, sitemap e www -> raiz
+                (casa / "robots.txt").write_text(robots_txt(), encoding="utf-8")
+                (casa / "sitemap.xml").write_text(
+                    sitemap_xml(["/"] + (["/parceiros"] if parceiros else [])),
+                    encoding="utf-8")
+                (casa / "_redirects").write_text(REDIRECTS, encoding="utf-8")
                 # ⛔ O SITE MAE E' QUEM TEM A TAG `apple-touch-icon`. Sem esta
                 # linha, a tag aponta pra um arquivo que nao existe e o
                 # Cloudflare responde 200 servindo a pagina HTML no lugar do

@@ -840,7 +840,64 @@ def produtos_todos() -> list[dict]:
     regua_vitrine.pontuar(fim)
     marcar_fogo(fim)
     marcar_vitrine_ml(fim)
+    marcar_topo(fim)
     return fim
+
+
+# ⭐ OS 10 PRIMEIROS DA VITRINE: 5 ate' R$ 99,90 + 5 livres, INTERCALADOS, o
+# barato abrindo ("Eu garimpo. Voce paga menos"). Decisao do Bryan, 17/09/2026,
+# depois dos mentores: ENP (R$ 8-50 tira o medo) x Hormozi (ganho por clique).
+# E' um TESTE DE 30 DIAS: os cliques por produto (clique_produto) decidem em
+# 17/10 se o teto vira regra ou se o misto fica.
+#
+# ⛔ BARATO SO' SE RENDER — "nao podemos postar so' porque e' barato e nao
+# lucrar" (Bryan). Piso: ganho por venda >= TOPO_GANHO_MIN (o mesmo do fogo).
+# O fone de R$ 41 com 67 mil vendas rende R$ 2,86: fica fora do topo.
+TOPO_BARATO = 99.90
+TOPO_GANHO_MIN = 3.0        # = FOGO_GANHO_MIN (definido abaixo); um piso so'
+TOPO_N = 10
+
+
+def marcar_topo(dados: list[dict]) -> list[dict]:
+    """Escreve `topo` (1..10) nos escolhidos; a pagina os poe na frente."""
+    for p in dados:
+        p.pop("topo", None)
+    vivos = [p for p in dados if not p.get("vitrine_fora")]
+    vivos.sort(key=lambda p: -float(p.get("vitrine_nota") or 0))
+    baratos = [p for p in vivos if _preco_hoje_num(p) <= TOPO_BARATO
+               and float(p.get("ganho") or 0) >= TOPO_GANHO_MIN]
+    livres = [p for p in vivos if p not in baratos]
+    # ⚠️ SEM NOME REPETIDO NO TOPO: duas "Balanca digital de cafe" (anuncios
+    # diferentes, fotos diferentes) ocupavam a 3a e a 9a posicao em 17/09.
+    # A chave e' o comeco do nome (4 palavras, sem acento).
+    import unicodedata as _u
+
+    def _raiz(p):
+        n = _u.normalize("NFKD", str(p.get("nome") or "")).encode("ascii", "ignore").decode().lower()
+        return " ".join(n.split()[:4])
+    vistos: set = set()
+
+    def _proximo(fila):
+        while fila:
+            c = fila.pop(0)
+            if _raiz(c) not in vistos:
+                vistos.add(_raiz(c))
+                return c
+        return None
+    saida: list[dict] = []
+    while len(saida) < TOPO_N and (baratos or livres):
+        c = _proximo(baratos)
+        if c:
+            saida.append(c)
+        if len(saida) < TOPO_N:
+            c = _proximo(livres)
+            if c:
+                saida.append(c)
+        if not baratos and not livres:
+            break
+    for i, p in enumerate(saida, 1):
+        p["topo"] = i
+    return saida
 
 
 # ⛔ SALTO DE VARIANTE = ESGOTADO. Medido em 16/09/2026 no kit de 46 chaves:

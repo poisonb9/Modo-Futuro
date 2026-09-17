@@ -1560,9 +1560,17 @@
     // 16/09 ("a pagina principal e' nossa vitrine"). Quem marca e' o
     // publicador (`marcar_vitrine_ml`); aqui so' se move UM cartao.
     if (atual === "todos" && !canal && !loja && !termo) {
+      // ⭐ OS 10 PRIMEIROS (17/09/2026): 5 ate' R$ 99,90 + 5 livres,
+      // intercalados, escolhidos pelo publicador (`marcar_topo`). Teste de
+      // 30 dias medido por clique. Sem `topo` (pagina velha), nada muda.
+      var comTopo = lista.filter(function (p) { return p.topo; });
+      if (comTopo.length) {
+        comTopo.sort(function (a, b) { return a.topo - b.topo; });
+        lista = comTopo.concat(lista.filter(function (p) { return !p.topo; }));
+      }
       var iv = -1;
       lista.some(function (p, i) { if (p.vitrine) { iv = i; return true; } return false; });
-      if (iv > 1) {
+      if (iv > 1 && !comTopo.length) {
         var v = lista[iv];
         lista = lista.slice();
         lista.splice(iv, 1);

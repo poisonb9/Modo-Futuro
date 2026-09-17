@@ -680,6 +680,13 @@
 <script>
 (function () {
   "use strict";
+  // ⭐ www -> raiz (17/09/2026). O `_redirects` do Pages nao aplicou a regra
+  // por hostname (medido: www respondia 200). Este e' o fallback ate' a
+  // Redirect Rule da zona existir; o canonical ja' aponta pro raiz.
+  if (location.hostname === "www.achadinhototal.com.br") {
+    location.replace("https://achadinhototal.com.br" + location.pathname + location.search + location.hash);
+    return;
+  }
 
   // Substituidos na publicacao (ver paginas/publicar_bio.py).
   var PRODUTOS = [];

@@ -990,6 +990,7 @@
   function montar(p) {
     var a = document.createElement("a");
     a.className = "item";
+    a.addEventListener("click", function () { anotarClique(p, "cartao"); });
     a.href = p.link;
     a.rel = "noopener";
     // ⚠️ SEM `target=_blank`, E ISSO CONSERTA O DEFEITO MAIOR DA PAGINA.
@@ -1180,7 +1181,7 @@
         var lk = document.createElement("a");
         lk.href = t.link; lk.rel = "noopener sponsored";
         lk.textContent = "no " + t.loja + " " + t.preco;
-        lk.addEventListener("click", function (ev) { ev.stopPropagation(); });
+        lk.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "irmao"); });
         te.appendChild(lk);
         var dif = Math.abs(t.dif || 0).toFixed(2).replace(".", ",");
         if ((t.dif || 0) > 0.5) {
@@ -1216,7 +1217,7 @@
       av.rel = "noopener";
       av.textContent = "🔔 avise-me quando cair";
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
-      av.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
       corpo.appendChild(av);
     }
     // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
@@ -1882,6 +1883,10 @@
 
   function animarVivo() {
     var alvo = document.getElementById("vivo");
+    if (!alvo.dataset.mede) {
+      alvo.dataset.mede = "1";
+      alvo.addEventListener("click", function () { anotarClique(vivoAtual, "topo"); });
+    }
     var aNome = document.getElementById("vivo_nome");
     var aPreco = document.getElementById("vivo_preco");
     var aDica = document.getElementById("vivo_dica");
@@ -2045,6 +2050,26 @@
     url: "https://lwtqfwkfcknzyyzmuymg.supabase.co",
     anon: "sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy"
   };
+  // ⭐ CLIQUE POR PRODUTO (regua v2, 17/09/2026): o EPC medido pra TODAS as
+  // lojas — Ali e ML so' contam por canal. Mesmo contrato da busca: id do
+  // produto, loja e onde clicou; nada de quem. `keepalive` porque a pagina
+  // esta' saindo pra loja; medir NUNCA segura o clique.
+  function anotarClique(p, origem) {
+    if (!p || !p.id || !SUPABASE.url || !SUPABASE.anon) { return; }
+    try {
+      fetch(SUPABASE.url + "/rest/v1/clique_produto", {
+        method: "POST",
+        headers: { "apikey": SUPABASE.anon,
+                   "Authorization": "Bearer " + SUPABASE.anon,
+                   "Content-Type": "application/json",
+                   "Prefer": "return=minimal" },
+        body: JSON.stringify({ produto: String(p.id).slice(0, 64),
+                               loja: String(p.loja || "").slice(0, 40),
+                               origem: origem }),
+        keepalive: true
+      }).catch(function () { /* medir nunca derruba a pagina */ });
+    } catch (e) { /* idem */ }
+  }
   var buscaTimer = null;
   var ultimaAnotada = "";
   function anotarBusca() {

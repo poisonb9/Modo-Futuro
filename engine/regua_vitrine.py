@@ -42,6 +42,7 @@ PESOS = {"rende": 35, "confianca": 30, "momento": 20, "mostravel": 15}
 PISO_NOTA_ALI = 90.0
 PISO_VENDEDORES_ML = 2
 COMMODITY_VENDEDORES = 30
+KILL_DIAS = 30
 
 LOJAS_COM_NOTA = ("AliExpress",)
 LOJAS_COM_VENDEDORES = ("Mercado Livre",)
@@ -232,6 +233,12 @@ def piso(p: dict) -> str:
         return "excluido: categoria " + (EXCLUIR_CATEGORIA.search(cat).group(0)).strip()
     if _preco(p) > FAIXAS[-1][0]:
         return f"acima de R$ {FAIXAS[-1][0]:.0f} (fica na serie)"
+    # ⭐ KILL DE 30 DIAS (ENP: "anuncio que nao vendeu em 30 dias, exclui").
+    # So' quando os cliques FORAM medidos nesta rodada (cliques_medidos) e o
+    # produto ja' tem 30 dias de vitrine: 0 cliques = fora. Sem medicao,
+    # nada muda — falta de dado nao e' castigo.
+    if p.get("cliques_medidos") and int(p.get("dias") or 0) >= KILL_DIAS             and int(p.get("cliques_30") or 0) == 0:
+        return f"{KILL_DIAS} dias na vitrine sem clique"
     if loja in LOJAS_COM_NOTA and p.get("nota") not in (None, "", 0, 0.0):
         if _f(p.get("nota")) < PISO_NOTA_ALI:
             return f"nota {_f(p.get('nota')):.0f}% < {PISO_NOTA_ALI:.0f}%"

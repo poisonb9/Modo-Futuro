@@ -75,6 +75,14 @@ total, eixos, motivo = rv.nota(sem_nota, rv.referencias([sem_nota]))
 checar(motivo == "", "Ali SEM nota nao e' piso (falta de dado nao e' nota baixa)")
 
 print()
+print("3b. KILL DE 30 DIAS SEM CLIQUE — so' com cliques MEDIDOS")
+base = {"loja": ALI, "nome": "x", "preco": "R$ 20,00", "dias": 31, "cliques_30": 0}
+checar(rv.piso(dict(base, cliques_medidos=True)) == "30 dias na vitrine sem clique", "31 dias, 0 cliques, medido = fora")
+checar(rv.piso(dict(base, cliques_medidos=False)) == "", "⛔ sem medicao = NADA muda")
+checar(rv.piso(dict(base, cliques_medidos=True, dias=29)) == "", "29 dias ainda nao")
+checar(rv.piso(dict(base, cliques_medidos=True, cliques_30=1)) == "", "1 clique salva")
+
+print()
 print("4. RENDE POR LOJA + FAIXA DE IMPULSO")
 dados = [{"loja": ALI, "ganho": 10.0, "preco": "R$ 50,00"},
          {"loja": ALI, "ganho": 1.0, "preco": "R$ 10,00"},

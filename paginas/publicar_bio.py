@@ -404,6 +404,7 @@ def produtos_externos() -> dict[str, dict]:
     # ⭐ Nota de Vitrine tambem nas externas (Confianca = 0 ate' haver dado)
     from engine import regua_vitrine
     for b in saida.values():
+        _marcar_cliques(b["produtos"])
         regua_vitrine.pontuar(b["produtos"])
     return saida
 
@@ -580,6 +581,36 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
 # ⚠️ PNG/WebP sao reduzidos a 32 px de altura antes de virar data URI: o
 # selo tem 14 px e a pagina inteira viaja em cada visita. SVG vai como esta'.
 SIMBOLOS_DIR = RAIZ / "paginas" / "simbolos_lojas"
+
+
+_CLIQUES: dict = {}
+
+
+def _cliques_30() -> dict:
+    """{produto_id: cliques nos ultimos 30 dias} do Supabase (PAT local).
+    ⚠️ FALHA ABERTA: sem PAT ou sem rede devolve {} e os cartoes saem sem
+    `cliques_medidos` — o kill de 30 dias nao dispara por falta de dado."""
+    if "d" in _CLIQUES:
+        return _CLIQUES["d"]
+    try:
+        if str(RAIZ) not in sys.path:
+            sys.path.insert(0, str(RAIZ))
+        from engine import cliques as _cl
+        d = {k: v["cliques"] for k, v in _cl.por_produto(30).items()}
+        _CLIQUES["d"] = d
+        _CLIQUES["ok"] = True
+    except Exception as e:                            # noqa: BLE001
+        print(f"cliques: nao lidos ({type(e).__name__}) — kill de 30 dias desligado nesta rodada")
+        _CLIQUES["d"] = {}
+        _CLIQUES["ok"] = False
+    return _CLIQUES["d"]
+
+
+def _marcar_cliques(cartoes: list[dict]) -> None:
+    d = _cliques_30()
+    for c in cartoes:
+        c["cliques_30"] = int(d.get(str(c.get("id")), 0))
+        c["cliques_medidos"] = bool(_CLIQUES.get("ok"))
 
 
 def _bot_alerta() -> str:
@@ -805,6 +836,7 @@ def produtos_todos() -> list[dict]:
     # so' para a ordem, o fogo e a 2a posicao do ML. Escreve `vitrine_nota`
     # e `vitrine_fora` em cada cartao; fogo e ML leem a nota abaixo.
     from engine import regua_vitrine
+    _marcar_cliques(fim)
     regua_vitrine.pontuar(fim)
     marcar_fogo(fim)
     marcar_vitrine_ml(fim)

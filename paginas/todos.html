@@ -1418,8 +1418,15 @@
     // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)
     var estatico = document.getElementById("indice-estatico");
     if (estatico) { estatico.parentNode.removeChild(estatico); }
-    if (externa(canal) && !EXTERNO_CARREGADO[canal]) {
-      carregarExterno(canal, desenhar);
+    // ⛔ O DEFEITO (17/09/2026, celular do Bryan): "Clovis Calçados 5983" no
+    // menu LOJA e "0 achadinhos" na grade. O download da externa so'
+    // disparava pelo menu CATEGORIA; pelo menu Loja a pagina filtrava por
+    // `loja` numa lista onde a Clovis ainda nao tinha sido baixada. O nome
+    // da loja externa E' o nome da categoria (ver EXTERNOS): qualquer um
+    // dos dois menus dispara o download.
+    var ext = externa(canal) ? canal : (externa(loja) ? loja : "");
+    if (ext && !EXTERNO_CARREGADO[ext]) {
+      carregarExterno(ext, desenhar);
       return;
     }
     var f = FILTROS.filter(function (x) { return x.id === atual; })[0];
@@ -1442,7 +1449,7 @@
     // ("mais baratos primeiro comunica melhor com nosso publico"). O feed
     // nao tem `vendas`, entao `ganho x vendas` e' zero pra todos e a ordem
     // de "tudo" seria a do arquivo, que nao e' criterio nenhum.
-    if (externa(canal) && atual === "todos") {
+    if (ext && atual === "todos") {
       lista = lista.slice().sort(function (a, b) {
         return num(a.preco) - num(b.preco);
       });

@@ -191,7 +191,7 @@ seg = re.search(r"function soNoSegmento\(p\) \{(.*?)\n  \}", CODIGO, re.S)
 checar(bool(seg) and "externa(p.canal)" in seg.group(1),
        "toda externa e' so'-no-segmento (nunca no rolar principal)")
 des = re.search(r"function desenhar\(\) \{(.*?)\n  \}", CODIGO, re.S)
-checar(bool(des) and "carregarExterno(canal, desenhar)" in des.group(1),
+checar(bool(des) and "carregarExterno(ext, desenhar)" in des.group(1),
        "desenhar() baixa a externa antes de desenhar")
 car = re.search(r"function carregarExterno\(nome, depois\) \{(.*?)\n  \}", CODIGO, re.S)
 corpo = car.group(1) if car else ""
@@ -202,8 +202,14 @@ url = re.search(r"function daUrl\(\) \{(.*?)\n  \}", CODIGO, re.S)
 checar(bool(url) and "Object.keys(EXTERNOS)" in url.group(1),
        "/#nike abre a categoria mesmo antes de ela estar em PRODUTOS")
 checar("EXTERNOS[canal].passo" in CODIGO, "o passo do 'ver mais' vem do indice (50 na Nike)")
-checar('externa(canal) && atual === "todos"' in CODIGO,
+checar('ext && atual === "todos"' in CODIGO,
        "a externa abre pelos mais baratos quando o filtro e' 'tudo'")
+
+print()
+print("⛔ PELO MENU LOJA TAMBEM BAIXA (17/09: 'Clovis 5983' no menu, 0 na grade)")
+checar('var ext = externa(canal) ? canal : (externa(loja) ? loja : "");' in CODIGO
+       and "if (ext && !EXTERNO_CARREGADO[ext])" in CODIGO,
+       "o download da externa dispara por `canal` OU por `loja`")
 
 print()
 print("tudo verde" if not falhas else f"{len(falhas)} FALHA(S)")

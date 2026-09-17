@@ -233,7 +233,7 @@ def atualizar(ensaio: bool = False) -> dict:
     # instantaneo do AliExpress: sao fontes independentes, e o que ja' foi
     # reconferido acima e' informacao boa. O erro sobe DEPOIS de gravar.
     erro_ml = None
-    fichas_ml: dict[str, tuple[float, int]] = {}
+    fichas_ml: dict[str, tuple] = {}
     novos_ml: dict[str, float] = {}
     if ids_ml:
         from . import mercadolivre
@@ -270,12 +270,22 @@ def atualizar(ensaio: bool = False) -> dict:
     saida = dict(antes)
     for pid, v in novos.items():
         saida[pid] = {"preco": round(v, 2), "quando": quando}
+    # ⭐ ML (regua v2, 17/09/2026): frete gratis e reputacao do vendedor do
+    # anuncio mais barato entram no instantaneo — a Confianca MEDIDA do ML.
+    if fichas_ml:
+        from . import mercadolivre as _ml
+        for pid, f in fichas_ml.items():
+            if len(f) >= 4:
+                rep = _ml.reputacao(f[3])
+                saida[pid]["frete_gratis"] = bool(f[2])
+                if rep:
+                    saida[pid]["reputacao"] = rep
     AGORA.parent.mkdir(parents=True, exist_ok=True)
     AGORA.write_text(json.dumps(saida, ensure_ascii=False, indent=1),
                      encoding="utf-8")
     print(f"gravado: {AGORA.name} com {len(saida)} produtos")
     if fichas_ml:
-        n = anotar_serie(fichas_ml, "Mercado Livre")
+        n = anotar_serie({pid: (f[0], f[1]) for pid, f in fichas_ml.items()}, "Mercado Livre")
         print(f"serie ML: +{n} ponto(s)")
     if erro_ml is not None:
         raise RuntimeError("reconferencia do ML falhou (AliExpress gravado)") from erro_ml

@@ -72,6 +72,20 @@ try:
            f"vendedores 9 -> 11 com o mesmo preco grava ponto (vol {serie[-1]['vol']})")
 
     print()
+    print("2b. (v2) FRETE E REPUTACAO DO VENDEDOR ENTRAM NO INSTANTANEO")
+    rep_real = mercadolivre.reputacao
+    mercadolivre.reputacao = lambda sid: {"nivel": 5, "power": "silver", "positivas": None} if sid == 77 else {}
+    mercadolivre.fichas_atual = lambda ids: {"MLB1": (189.9, 3, True, 77), "MLB2": (70.0, 11, False, 88)}
+    precos.atualizar()
+    agora = json.loads(precos.AGORA.read_text(encoding="utf-8"))
+    checar(agora["MLB1"].get("frete_gratis") is True and agora["MLB1"].get("reputacao", {}).get("nivel") == 5,
+           "MLB1: frete gratis + termometro 5 no instantaneo")
+    checar(agora["MLB2"].get("frete_gratis") is False and "reputacao" not in agora["MLB2"],
+           "MLB2: sem frete; vendedor sem reputacao = sem campo (nao e' 'ruim')")
+    checar(len(precos.SERIE.read_text(encoding="utf-8").splitlines()) == 4, "a serie nao muda por frete/reputacao")
+    mercadolivre.reputacao = rep_real
+
+    print()
     print("3. ⛔ ML FORA DO AR: AliExpress gravado, ML mantido, e estoura DEPOIS")
     precos.puxar = lambda ids: {"1005": 8.8}
     def _cai(ids):

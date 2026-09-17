@@ -98,8 +98,17 @@ checar(rv.momento(caiu_vendendo) == 1.0, "queda + volume subindo = 1 (o sinal ma
 
 print()
 print("6. ML: vendedores como confianca e crescimento como momento")
-checar(rv.confianca({"loja": ML, "vendedores": [13, 0, "16/09"]}) == 1.0, ">= 5 vendedores = cheia")
-checar(rv.confianca({"loja": ML, "vendedores": [3, 0, "16/09"]}) == 0.5, "2-4 = metade")
+# v2 (17/09): sem reputacao no instantaneo, 0,8 vendedores + 0,2 frete
+checar(abs(rv.confianca({"loja": ML, "vendedores": [13, 0, "16/09"]}) - 0.8) < 1e-9, ">= 5 vendedores, sem reputacao = 0,8")
+checar(abs(rv.confianca({"loja": ML, "vendedores": [13, 0, "16/09"], "frete_gratis": True}) - 1.0) < 1e-9, "+ frete gratis = 1,0")
+checar(abs(rv.confianca({"loja": ML, "vendedores": [3, 0, "16/09"]}) - 0.4) < 1e-9, "2-4 vendedores = 0,4")
+# com reputacao medida: 0,5 termometro + 0,3 vendedores + 0,2 frete
+checar(abs(rv.confianca({"loja": ML, "vendedores": [13, 0, "16/09"], "frete_gratis": True,
+                         "reputacao": {"nivel": 5}}) - 1.0) < 1e-9, "5_green + 13 vendedores + frete = 1,0")
+checar(abs(rv.confianca({"loja": ML, "vendedores": [13, 0, "16/09"], "reputacao": {"nivel": 3}}) - 0.3) < 1e-9,
+       "termometro 3 zera a parte dele: sobra 0,3 dos vendedores")
+checar(abs(rv.confianca({"loja": ML, "vendedores": [40, 0, "16/09"], "frete_gratis": True}) - 0.8) < 1e-9,
+       "⛔ curva B: > 30 vendedores = commodity, x0,8")
 checar(abs(rv.momento({"queda": 0.0, "vendedores": [13, 2, "16/09"]}) - 0.28) < 1e-9, "+2 vendedores = momento 0,4 x 0,7")
 
 print()

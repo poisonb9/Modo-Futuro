@@ -657,6 +657,7 @@ def produtos_todos() -> list[dict]:
     notas = _notas()
     vendas_desde = _vendas_desde()
     vendedores = _vendedores()
+    agora = _precos_agora()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -735,6 +736,10 @@ def produtos_todos() -> list[dict]:
             "vendeu": list(vendas_desde.get(str(d.get("id")), ())),
             # ⭐ so' ML: [vendedores hoje, a mais desde, "dd/mm"] ou []
             "vendedores": vendedores.get(str(d.get("id")), []),
+            # ⭐ so' ML (regua v2): frete gratis e reputacao do vendedor, do
+            # instantaneo horario. Ausentes = sem dado, nunca "ruim".
+            "frete_gratis": bool((agora.get(str(d.get("id"))) or {}).get("frete_gratis", False)),
+            "reputacao": (agora.get(str(d.get("id"))) or {}).get("reputacao") or {},
             # ⭐ quando o preco foi reconferido pela ultima vez ("hoje 19:00" ou
             # "15/09"): a ancora que TODO produto tem, quando nao ha' Promo
             # nem vendas medidas — a promessa da pagina dita em numero

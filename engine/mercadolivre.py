@@ -596,8 +596,8 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
     return reais[:quantos]
 
 
-def fichas_atual(ids: list[str]) -> dict[str, tuple[float, int]]:
-    """{id: (MENOR preco anunciado agora, QUANTOS vendedores anunciam)}.
+def fichas_atual(ids: list[str]) -> dict[str, tuple]:
+    """{id: (MENOR preco agora, QUANTOS vendedores, frete gratis?, seller_id)}.
     Ficha sem vendedor fica de fora.
 
     ⭐ O NUMERO DE VENDEDORES E' A PROVA SOCIAL DO ML (17/09/2026). A API
@@ -629,10 +629,48 @@ def fichas_atual(ids: list[str]) -> dict[str, tuple[float, int]]:
             raise
         precos = [float(i["price"]) for i in itens
                   if i.get("price") and float(i["price"]) > 0]
-        return pid, ((min(precos), len(precos)) if precos else None)
+        if not precos:
+            return pid, None
+        # ⭐ O anuncio MAIS BARATO manda: e' ele que a pessoa ve' primeiro.
+        # Dele saem frete gratis e o vendedor (regua v2, 17/09/2026).
+        barato = min((i for i in itens if i.get("price") and float(i["price"]) > 0),
+                     key=lambda i: float(i["price"]))
+        return pid, (min(precos), len(precos),
+                     bool((barato.get("shipping") or {}).get("free_shipping")),
+                     barato.get("seller_id"))
 
     with ThreadPoolExecutor(max_workers=4) as ex:
         return {pid: v for pid, v in ex.map(_um, ids) if v is not None}
+
+
+# ⭐ REPUTACAO DO VENDEDOR — o "termometro" (Ecommerce na Pratica; regua v2).
+# `level_id` vai de 1_red a 5_green; `power_seller_status` e' null, silver,
+# gold, platinum. Uma chamada por VENDEDOR (cache no processo), nao por
+# produto.
+_REP_CACHE: dict = {}
+
+
+def reputacao(seller_id) -> dict:
+    """{"nivel": 1..5 ou 0, "power": "silver"|..|"", "positivas": 0..1 ou None}"""
+    if seller_id in (None, ""):
+        return {}
+    if seller_id in _REP_CACHE:
+        return _REP_CACHE[seller_id]
+    try:
+        u = _get(f"/users/{seller_id}")
+    except Exception:                                 # noqa: BLE001
+        return {}
+    rep = u.get("seller_reputation") or {}
+    lvl = str(rep.get("level_id") or "")
+    try:
+        nivel = int(lvl.split("_")[0]) if lvl and lvl[0].isdigit() else 0
+    except ValueError:
+        nivel = 0
+    pos = ((rep.get("transactions") or {}).get("ratings") or {}).get("positive")
+    r = {"nivel": nivel, "power": rep.get("power_seller_status") or "",
+         "positivas": float(pos) if pos is not None else None}
+    _REP_CACHE[seller_id] = r
+    return r
 
 
 def preco_atual(ids: list[str]) -> dict[str, float]:

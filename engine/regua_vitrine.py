@@ -40,6 +40,7 @@ PESOS = {"rende": 35, "confianca": 30, "momento": 20, "mostravel": 15}
 # pisos: fora da vitrine (ordem por nota = 0), com o motivo nomeado
 PISO_NOTA_ALI = 90.0
 PISO_VENDEDORES_ML = 2
+COMMODITY_VENDEDORES = 30
 
 LOJAS_COM_NOTA = ("AliExpress",)
 LOJAS_COM_VENDEDORES = ("Mercado Livre",)
@@ -106,11 +107,24 @@ def confianca(p: dict) -> float:
     if loja in LOJAS_COM_VENDEDORES:
         v = p.get("vendedores") or []
         hoje = int(v[0]) if v else 0
-        if hoje >= 5:
-            return 1.0
-        if hoje >= PISO_VENDEDORES_ML:
-            return 0.5
-        return 0.0
+        parte_vend = 1.0 if hoje >= 5 else 0.5 if hoje >= PISO_VENDEDORES_ML else 0.0
+        # ⭐ v2 (17/09): o "termometro" do vendedor (Ecommerce na Pratica) e
+        # frete gratis, medidos na reconferencia horaria. Sem reputacao no
+        # instantaneo (pagina velha), a parte dela e' 0 — nao e' castigo, e'
+        # falta de dado; o peso volta pros vendedores.
+        rep = p.get("reputacao") or {}
+        nivel = int(rep.get("nivel") or 0)
+        parte_rep = 1.0 if nivel >= 5 else 0.6 if nivel == 4 else 0.0
+        parte_frete = 1.0 if p.get("frete_gratis") else 0.0
+        if rep:
+            conf = 0.5 * parte_rep + 0.3 * parte_vend + 0.2 * parte_frete
+        else:
+            conf = 0.8 * parte_vend + 0.2 * parte_frete
+        # ⚠️ CURVA B: > 30 vendedores e' commodity (guerra de preco, margem
+        # zero — ENP; e "muito vendido no ML nao rende video", memoria 14/09)
+        if hoje > COMMODITY_VENDEDORES:
+            conf *= 0.8
+        return conf
     # ⚠️ externa (Awin): sem review no feed, sem decreto. O que existe e' a
     # REPUTACAO DA LOJA no Reclame Aqui, lida a mao pelo Bryan (o site
     # bloqueia leitura automatica — medido 17/09: 403 e desafio anti-bot) e

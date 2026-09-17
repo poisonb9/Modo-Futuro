@@ -680,6 +680,8 @@ def produtos_todos() -> list[dict]:
             # aparece no cartao com fogo; e' um dos criterios dele.
             "nota": notas.get(str(d.get("id")), 0.0),
             "ja_esteve": _ja_esteve(por_dia, d),
+            # ⭐ {"dias": N} quando hoje e' o menor da serie com N >= 14 dias
+            "recorde": _recorde(por_dia, d),
             # ⭐ [vendidos desde que acompanhamos, "dd/mm"] ou []
             "vendeu": list(vendas_desde.get(str(d.get("id")), ())),
             # ⭐ so' ML: [vendedores hoje, a mais desde, "dd/mm"] ou []
@@ -1106,9 +1108,49 @@ def _ja_esteve(por_dia: dict, d: dict) -> dict:
     dia_min = min(dias, key=lambda q: dias[q])
     menor, maior = dias[dia_min], max(dias.values())
     if hoje > menor * 1.02 and hoje < maior:
+        from datetime import date as _date
+        try:
+            ha = max(0, (_date.today() - _date(int(dia_min[:4]), int(dia_min[5:7]),
+                                                int(dia_min[8:10]))).days)
+        except ValueError:
+            ha = 0
+        # ⭐ SELO "ESPERE" (Bryan, 17/09/2026): o cartao manda NAO comprar
+        # agora — "espere: ja' esteve a R$ 34 ha' 6 dias". Custa a venda de
+        # hoje e compra a credibilidade das outras (Hormozi: de', de', de').
         return {"preco": f"R$ {menor:.2f}".replace(".", ","),
-                "em": f"{dia_min[8:10]}/{dia_min[5:7]}"}
+                "em": f"{dia_min[8:10]}/{dia_min[5:7]}", "ha": ha}
     return {}
+
+
+# ⭐ SELO "RECORDE" (Bryan, 17/09/2026): o produto ADQUIRE o selo no momento
+# em que o preco de hoje e' o MENOR de toda a nossa serie, com pelo menos
+# RECORDE_DIAS_MIN dias de radar. Nao e' estatico: aparece no dia do recorde,
+# fica enquanto o preco segurar, some quando subir (ai' vira "espere").
+# Menos de 14 dias nao e' recorde — e' estreia.
+RECORDE_DIAS_MIN = 14
+
+
+def _recorde(por_dia: dict, d: dict) -> dict:
+    """{"dias": N} quando hoje e' o menor preco da serie com N >= 14 dias;
+    senao {}. Empate com o menor (ate' 0,5%) conta como recorde: o recorde
+    e' "nunca esteve mais barato", nao "esta' mais barato que nunca"."""
+    dias = por_dia.get(d.get("id")) or {}
+    if len(dias) < 2:
+        return {}
+    ordem = sorted(dias)
+    from datetime import date as _date
+    try:
+        primeiro = _date(int(ordem[0][:4]), int(ordem[0][5:7]), int(ordem[0][8:10]))
+    except ValueError:
+        return {}
+    n = (_date.today() - primeiro).days
+    if n < RECORDE_DIAS_MIN:
+        return {}
+    hoje = _preco_hoje_num(d)
+    menor = min(dias.values())
+    if hoje <= 0 or hoje > menor * 1.005:
+        return {}
+    return {"dias": n}
 
 
 def _queda_real(serie: dict, d: dict) -> float:

@@ -36,6 +36,7 @@ tmp = Path(tempfile.mkdtemp())
 orig = (alertas.INSCRICOES, alertas.ENVIADOS, alertas.OFFSET)
 env_tok = os.environ.pop(alertas.ENV_TOKEN, None)
 env_bot = os.environ.pop(alertas.ENV_BOT, None)
+env_res = os.environ.pop(alertas.ENV_TOKEN_RESERVA, None)
 try:
     alertas.INSCRICOES = tmp / "alertas.jsonl"
     alertas.ENVIADOS = tmp / "enviados.json"
@@ -85,6 +86,8 @@ finally:
         os.environ[alertas.ENV_TOKEN] = env_tok
     if env_bot:
         os.environ[alertas.ENV_BOT] = env_bot
+    if env_res:
+        os.environ[alertas.ENV_TOKEN_RESERVA] = env_res
 
 print()
 print("tudo verde" if not falhas else f"{len(falhas)} FALHA(S)")

@@ -25,8 +25,9 @@ chega em ate' 1h — o texto do /start no BotFather diz isso.
 
 ⛔ BOT PROPRIO, nunca o `bryan_fxv_fila_bot`: ligar getUpdates/webhook num
 bot que outro processo ja' escuta e' 409 e briga de poll. O token vem de
-`TELEGRAM_BOT_ALERTA` (.env local e secret do repo); sem ele, tudo aqui e'
-no-op com aviso — e o site nao mostra o botao.
+`TELEGRAM_BOT_ALERTA` ou, na falta, `TELEGRAM_BOT_TOKEN` (o bot da
+operacao — Bryan, 17/09); sem nenhum, tudo aqui e' no-op com aviso — e o
+site nao mostra o botao.
 
 ## O QUE DISPARA O AVISO
 
@@ -48,13 +49,22 @@ INSCRICOES = RAIZ / "estado" / "alertas.jsonl"
 ENVIADOS = RAIZ / "estado" / "alertas_enviados.json"
 OFFSET = RAIZ / "estado" / "alertas_offset.json"
 ENV_TOKEN = "TELEGRAM_BOT_ALERTA"
+ENV_TOKEN_RESERVA = "TELEGRAM_BOT_TOKEN"
 ENV_BOT = "TELEGRAM_BOT_ALERTA_USERNAME"
 API = "https://api.telegram.org/bot{token}/{metodo}"
 PREFIXO = "alerta_"
 
 
 def token() -> str | None:
-    return (os.getenv(ENV_TOKEN) or "").strip() or None
+    """TELEGRAM_BOT_ALERTA; sem ele, o bot da operacao (TELEGRAM_BOT_TOKEN)
+    — decisao do Bryan em 17/09/2026: "voce ja' tem o token".
+
+    ⚠️ Esse bot e' o mesmo do bot_telegram.py (/mais, /fila), que le' por
+    getUpdates quando alguem o roda A MAO. Dois leitores no mesmo bot dao
+    409 e um rouba as mensagens do outro: enquanto o "avise-me" colher na
+    nuvem, o bot_telegram.py nao pode ficar escutando ao mesmo tempo."""
+    return ((os.getenv(ENV_TOKEN) or "").strip()
+            or (os.getenv(ENV_TOKEN_RESERVA) or "").strip() or None)
 
 
 def bot_username() -> str | None:

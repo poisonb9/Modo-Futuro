@@ -110,7 +110,6 @@
 {"id": 1005007412668346, "preco": 10.15, "loja": "Chengen Trading Store", "quando": "2026-09-12"}
 {"id": 1005006904626337, "preco": 5.79, "loja": "Stone's Store", "quando": "2026-09-12"}
 {"id": 1005007170953734, "preco": 11.91, "loja": "Stone's Store", "quando": "2026-09-12"}
-{"id": 1005007792352441, "preco": 18.99, "loja": "Stone's Store", "quando": "2026-09-12"}
 {"id": 1005010043976640, "preco": 10.69, "loja": "Stone's Store", "quando": "2026-09-12"}
 {"id": 1005010184187117, "preco": 11.11, "loja": "Shop1105116667 Store", "quando": "2026-09-12"}
 {"id": 1005013002440874, "preco": 9.79, "loja": "Stone's Store", "quando": "2026-09-12"}
@@ -589,14 +588,11 @@
 {"id": 1005006860853919, "preco": 21.18, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005011692687614, "preco": 16.79, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005006995257180, "preco": 13.41, "loja": "Stone's Store", "quando": "2026-09-13"}
-{"id": 1005008248056658, "preco": 73.79, "loja": "Stone's Store", "quando": "2026-09-13"}
-{"id": 1005006904487716, "preco": 48.39, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005007170336837, "preco": 58.4, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005008271865519, "preco": 30.56, "loja": "neverdie Store", "quando": "2026-09-13"}
 {"id": 1005012172671913, "preco": 22.59, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005010044194126, "preco": 21.99, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005007011605676, "preco": 14.31, "loja": "Stone's Store", "quando": "2026-09-13"}
-{"id": 1005006723265180, "preco": 79.99, "loja": "The Waroom Store", "quando": "2026-09-13"}
 {"id": 1005010653319714, "preco": 106.79, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005006982718799, "preco": 18.22, "loja": "Stone's Store", "quando": "2026-09-13"}
 {"id": 1005009759780480, "preco": 44.59, "loja": "Nordicbox Organizers Store", "quando": "2026-09-13"}
@@ -3942,92 +3938,19 @@
 {"id": 1005012977927515, "preco": 11.97, "vol": 53860, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 23.93, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006967568156, "preco": 17.89, "vol": 52689, "nota": 98.0, "com": 7.0, "desc_loja": 57.0, "de_loja": 41.82, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009695992189, "preco": 20.19, "vol": 59850, "nota": 98.0, "com": 9.0, "desc_loja": 57.0, "de_loja": 47.14, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007010254856, "preco": 14.35, "vol": 50935, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 28.7, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012977891937, "preco": 5.46, "vol": 72012, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 10.92, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005011939971685, "preco": 9.42, "vol": 54029, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 18.84, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007345519285, "preco": 11.59, "vol": 53671, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 24.66, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007097094437, "preco": 6.89, "vol": 72073, "nota": 98.0, "com": 7.0, "desc_loja": 56.0, "de_loja": 16.02, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986686385, "preco": 7.99, "vol": 53447, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 15.98, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967335761, "preco": 6.89, "vol": 72111, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 13.78, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005008236561372, "preco": 4.79, "vol": 67768, "nota": 95.9, "com": 7.0, "desc_loja": 68.0, "de_loja": 15.11, "loja": "LAURYN MAGIC Store", "quando": "2026-09-14"}
-{"id": 1005006994762009, "preco": 4.07, "vol": 69166, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 9.04, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986632736, "preco": 4.9, "vol": 69166, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 9.79, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012978039292, "preco": 3.64, "vol": 68865, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 7.27, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009983850790, "preco": 4.05, "vol": 87101, "nota": 91.1, "com": 9.0, "desc_loja": 50.0, "de_loja": 8.1, "loja": "Shop1105129671 Store", "quando": "2026-09-14"}
 {"id": 1005007914556601, "preco": 13.79, "vol": 55441, "nota": 90.0, "com": 7.0, "desc_loja": 3.0, "de_loja": 14.23, "loja": "Sumars Store", "quando": "2026-09-14"}
 {"id": 1005008276897132, "preco": 32.85, "vol": 3097, "nota": 93.4, "com": 7.0, "desc_loja": 63.0, "de_loja": 88.88, "loja": "neverdie Store", "quando": "2026-09-14"}
 {"id": 1005010674986003, "preco": 20.46, "vol": 2362, "nota": 76.4, "com": 7.0, "desc_loja": 58.0, "de_loja": 49.45, "loja": "Shop1105136549 Store", "quando": "2026-09-14"}
-{"id": 1005012058103385, "preco": 37.19, "vol": 66927, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 74.38, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006966194747, "preco": 13.52, "vol": 52698, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 28.75, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012993923542, "preco": 18.35, "vol": 113402, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 36.7, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012977835884, "preco": 8.69, "vol": 89336, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 17.38, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986686256, "preco": 10.99, "vol": 149812, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 21.98, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012978001229, "preco": 8.89, "vol": 109509, "nota": 98.0, "com": 9.0, "desc_loja": 49.0, "de_loja": 17.7, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012172791507, "preco": 5.59, "vol": 64658, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 12.42, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010487399301, "preco": 8.46, "vol": 114051, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 16.92, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010567441252, "preco": 9.53, "vol": 61984, "nota": 95.3, "com": 9.0, "desc_loja": 54.0, "de_loja": 20.88, "loja": "Shop1104633993 Store", "quando": "2026-09-14"}
-{"id": 1005011955607714, "preco": 17.22, "vol": 59849, "nota": 79.1, "com": 9.0, "desc_loja": 61.0, "de_loja": 44.48, "loja": "TOP BRANDS Store", "quando": "2026-09-14"}
-{"id": 1005010225246671, "preco": 6.52, "vol": 90872, "nota": 90.2, "com": 9.0, "desc_loja": 59.0, "de_loja": 16.11, "loja": "Cohai Store", "quando": "2026-09-14"}
-{"id": 1005006967568156, "preco": 6.23, "vol": 52689, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 13.54, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005009695992189, "preco": 8.69, "vol": 59850, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 19.31, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006995294624, "preco": 25.89, "vol": 56901, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 58.84, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012977927515, "preco": 6.13, "vol": 53860, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 12.26, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006677984952, "preco": 40.99, "vol": 67276, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 91.09, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012619684031, "preco": 6.81, "vol": 52622, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 13.62, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006782788933, "preco": 19.14, "vol": 53016, "nota": 98.0, "com": 9.0, "desc_loja": 52.0, "de_loja": 39.87, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010285498450, "preco": 8.91, "vol": 89895, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 19.36, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986702402, "preco": 15.3, "vol": 52887, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 30.61, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005007611335096, "preco": 15.75, "vol": 7157, "nota": 92.0, "com": 7.0, "desc_loja": 70.0, "de_loja": 53.41, "loja": "SASA Makeup Store", "quando": "2026-09-14"}
 {"id": 1005010470892777, "preco": 14.36, "vol": 434, "nota": 91.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 31.91, "loja": "YOUYU Stationery Store", "quando": "2026-09-14", "nome": "Bolsa de Maquiagem Acolchoada com Laço, Necessaire Portátil para Batom, Fones de Ouvido e ", "cat": "Sacos para fins especiais"}
 {"id": 1005010341750060, "preco": 7.91, "vol": 10926, "nota": 96.3, "com": 7.0, "desc_loja": 50.0, "de_loja": 15.81, "loja": "Mhicool Store", "quando": "2026-09-14"}
 {"id": 1005013002600247, "preco": 34.79, "vol": 30660, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 69.58, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006994544782, "preco": 11.99, "vol": 52808, "nota": 98.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 24.98, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007345460326, "preco": 6.38, "vol": 61835, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 12.76, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005005570781785, "preco": 11.68, "vol": 50847, "nota": 96.2, "com": 7.0, "desc_loja": 72.0, "de_loja": 42.79, "loja": "BMLEI Car Accessories Store", "quando": "2026-09-14"}
-{"id": 1005010439240901, "preco": 6.99, "vol": 149812, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 15.2, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006860874836, "preco": 11.59, "vol": 63084, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 23.18, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005009259589970, "preco": 30.81, "vol": 59795, "nota": 77.9, "com": 7.0, "desc_loja": 54.0, "de_loja": 67.79, "loja": "SUITU Car Store", "quando": "2026-09-14"}
-{"id": 1005010513544564, "preco": 57.02, "vol": 78668, "nota": 89.6, "com": 7.0, "desc_loja": 59.0, "de_loja": 140.73, "loja": "Shop1105082260 Store", "quando": "2026-09-14"}
-{"id": 1005012058103385, "preco": 54.79, "vol": 66927, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 109.58, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012977891937, "preco": 14.73, "vol": 72012, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 29.45, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012993923542, "preco": 32.14, "vol": 113402, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 64.29, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012977835884, "preco": 19.49, "vol": 89336, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 38.97, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010285498450, "preco": 17.62, "vol": 89895, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 40.0, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007097094437, "preco": 15.86, "vol": 72073, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 35.32, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986686256, "preco": 21.3, "vol": 149812, "nota": 98.0, "com": 9.0, "desc_loja": 52.0, "de_loja": 44.85, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012978001229, "preco": 21.55, "vol": 109509, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 43.09, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012172791507, "preco": 15.99, "vol": 64658, "nota": 98.0, "com": 9.0, "desc_loja": 57.0, "de_loja": 37.35, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010439240901, "preco": 16.5, "vol": 149812, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 35.1, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010487399301, "preco": 20.44, "vol": 114051, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 40.87, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967335761, "preco": 18.56, "vol": 72111, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 37.13, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010225246671, "preco": 14.58, "vol": 90872, "nota": 90.2, "com": 9.0, "desc_loja": 59.0, "de_loja": 35.73, "loja": "Cohai Store", "quando": "2026-09-14"}
-{"id": 1005008236561372, "preco": 12.22, "vol": 67768, "nota": 95.9, "com": 7.0, "desc_loja": 71.0, "de_loja": 42.31, "loja": "LAURYN MAGIC Store", "quando": "2026-09-14"}
-{"id": 1005010513544564, "preco": 76.03, "vol": 78668, "nota": 89.6, "com": 7.0, "desc_loja": 60.0, "de_loja": 190.32, "loja": "Shop1105082260 Store", "quando": "2026-09-14"}
-{"id": 1005009983850790, "preco": 16.33, "vol": 87101, "nota": 91.1, "com": 9.0, "desc_loja": 50.0, "de_loja": 32.66, "loja": "Shop1105129671 Store", "quando": "2026-09-14"}
-{"id": 1005006994762009, "preco": 9.18, "vol": 69166, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 20.26, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986632736, "preco": 13.88, "vol": 69166, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 27.76, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006677984952, "preco": 62.1, "vol": 67276, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 132.11, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012978039292, "preco": 15.86, "vol": 68865, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 31.73, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012619684031, "preco": 16.91, "vol": 52622, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 33.83, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006782788933, "preco": 28.06, "vol": 53016, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 63.59, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006966194747, "preco": 22.77, "vol": 52698, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 51.07, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005011939971685, "preco": 20.26, "vol": 54029, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 40.52, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007914556601, "preco": 16.82, "vol": 55441, "nota": 90.0, "com": 7.0, "desc_loja": 7.0, "de_loja": 18.14, "loja": "Sumars Store", "quando": "2026-09-14"}
-{"id": 1005006994544782, "preco": 26.95, "vol": 52808, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 57.54, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007345519285, "preco": 20.61, "vol": 53671, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 44.47, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006860874836, "preco": 26.48, "vol": 63084, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 52.97, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986686385, "preco": 18.91, "vol": 53447, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 37.82, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007010254856, "preco": 21.15, "vol": 50935, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 42.3, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005009259589970, "preco": 52.2, "vol": 59795, "nota": 77.9, "com": 7.0, "desc_loja": 52.0, "de_loja": 110.63, "loja": "SUITU Car Store", "quando": "2026-09-14"}
-{"id": 1005010567441252, "preco": 17.22, "vol": 61984, "nota": 95.3, "com": 9.0, "desc_loja": 58.0, "de_loja": 41.08, "loja": "Shop1104633993 Store", "quando": "2026-09-14"}
-{"id": 1005011955607714, "preco": 28.81, "vol": 59849, "nota": 79.1, "com": 9.0, "desc_loja": 60.0, "de_loja": 73.68, "loja": "TOP BRANDS Store", "quando": "2026-09-14"}
-{"id": 1005007345460326, "preco": 20.89, "vol": 61835, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 41.77, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006995294624, "preco": 37.0, "vol": 56901, "nota": 98.0, "com": 7.0, "desc_loja": 59.0, "de_loja": 90.36, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005005570781785, "preco": 11.91, "vol": 50847, "nota": 96.2, "com": 7.0, "desc_loja": 73.0, "de_loja": 45.17, "loja": "BMLEI Car Accessories Store", "quando": "2026-09-14"}
-{"id": 1005012986702402, "preco": 26.23, "vol": 52887, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 52.46, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012977927515, "preco": 11.97, "vol": 53860, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 23.93, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967568156, "preco": 17.89, "vol": 52689, "nota": 98.0, "com": 7.0, "desc_loja": 57.0, "de_loja": 41.82, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005009695992189, "preco": 20.19, "vol": 59850, "nota": 98.0, "com": 9.0, "desc_loja": 57.0, "de_loja": 47.14, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005008358373725, "preco": 27.17, "vol": 46459, "nota": 92.1, "com": 7.0, "desc_loja": 60.0, "de_loja": 69.51, "loja": "HHxing Store", "quando": "2026-09-14"}
 {"id": 1005008557120999, "preco": 25.36, "vol": 45369, "nota": 95.6, "com": 7.0, "desc_loja": 53.0, "de_loja": 54.47, "loja": "ILMH Store", "quando": "2026-09-14"}
 {"id": 1005008924358757, "preco": 15.76, "vol": 45967, "nota": 95.2, "com": 7.0, "desc_loja": 58.0, "de_loja": 37.82, "loja": "Shop911467045 Store", "quando": "2026-09-14"}
@@ -4049,24 +3972,12 @@
 {"id": 1005007170817720, "preco": 17.7, "vol": 44626, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 35.4, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009806732630, "preco": 20.79, "vol": 49042, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 46.65, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005007010254856, "preco": 14.35, "vol": 50701, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 28.7, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005005785774950, "preco": 8.57, "vol": 48550, "nota": 90.6, "com": 7.0, "desc_loja": 54.0, "de_loja": 18.98, "loja": "Good But Not Expensive Store", "quando": "2026-09-14"}
-{"id": 1005006994627477, "preco": 9.36, "vol": 50247, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 18.72, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005008924358757, "preco": 6.83, "vol": 45967, "nota": 95.2, "com": 7.0, "desc_loja": 57.0, "de_loja": 15.96, "loja": "Shop911467045 Store", "quando": "2026-09-14"}
-{"id": 1005012977891937, "preco": 5.46, "vol": 72012, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 10.92, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005011939971685, "preco": 9.42, "vol": 53874, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 18.84, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007345519285, "preco": 11.59, "vol": 53671, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 24.66, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007097094437, "preco": 6.89, "vol": 72073, "nota": 98.0, "com": 7.0, "desc_loja": 56.0, "de_loja": 16.02, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986686385, "preco": 7.99, "vol": 53447, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 15.98, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967335761, "preco": 6.89, "vol": 72111, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 13.78, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005008236561372, "preco": 4.79, "vol": 67768, "nota": 95.9, "com": 7.0, "desc_loja": 68.0, "de_loja": 15.11, "loja": "LAURYN MAGIC Store", "quando": "2026-09-14"}
 {"id": 1005006994762009, "preco": 4.07, "vol": 68865, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 9.04, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012986632736, "preco": 4.9, "vol": 68865, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 9.79, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012978039292, "preco": 3.64, "vol": 68865, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 7.27, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005007009760703, "preco": 16.25, "vol": 6140, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 32.5, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006783104045, "preco": 11.15, "vol": 7697, "nota": 98.1, "com": 7.0, "desc_loja": 54.0, "de_loja": 24.23, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "1 unidade, Gancho Autoadesivo Sem Furos, Gancho de Aço Inoxidável para Banheiro, Acessório", "cat": "Aparelhos para banheiro"}
 {"id": 1005007010240238, "preco": 9.89, "vol": 7707, "nota": 98.0, "com": 7.0, "desc_loja": 57.0, "de_loja": 23.0, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "Gancho Adesivo de Aço Inoxidável para Roupas, Toalhas, Banheiro, Cozinha e Garagem - Supor", "cat": "Aparelhos para banheiro"}
-{"id": 1005009983850790, "preco": 4.05, "vol": 87101, "nota": 91.1, "com": 9.0, "desc_loja": 50.0, "de_loja": 8.1, "loja": "Shop1105129671 Store", "quando": "2026-09-14"}
-{"id": 1005007914556601, "preco": 13.79, "vol": 55441, "nota": 90.0, "com": 7.0, "desc_loja": 3.0, "de_loja": 14.23, "loja": "Sumars Store", "quando": "2026-09-14"}
 {"id": 1005011832712162, "preco": 22.68, "vol": 2003, "nota": 93.8, "com": 7.0, "desc_loja": 56.0, "de_loja": 52.43, "loja": "Shop1105238247 Store", "quando": "2026-09-14", "nome": "Conjunto de 6 Peças de Bolsas de Armazenamento para Viagem, Organizadores de Malas Portáte", "cat": "Acessórios de viagem"}
 {"id": 1005012683874049, "preco": 24.55, "vol": 2851, "nota": 95.7, "com": 7.0, "desc_loja": 54.0, "de_loja": 53.79, "loja": "Shop1103841275 Store", "quando": "2026-09-14"}
 {"id": 1005006991378678, "preco": 25.21, "vol": 4076, "nota": 93.6, "com": 7.0, "desc_loja": 55.0, "de_loja": 56.95, "loja": "Shop1103807091 Store", "quando": "2026-09-14"}
@@ -4094,30 +4005,23 @@
 {"id": 1005009508845729, "preco": 16.89, "vol": 1238, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 33.78, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "Coleção de utensílios de cozinha de silicone para jantar, pauzinhos de sushi, colheres de ", "cat": "Utilidades Domesticas"}
 {"id": 1005006824959033, "preco": 12.91, "vol": 47156, "nota": 94.3, "com": 7.0, "desc_loja": 69.0, "de_loja": 42.9, "loja": "Shop1103378163 Store", "quando": "2026-09-14"}
 {"id": 1005012399032188, "preco": 26.59, "vol": 6, "nota": 100.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 55.4, "loja": "Best BBQ4 Store", "quando": "2026-09-14"}
-{"id": 1005007791905416, "preco": 11.08, "vol": 46459, "nota": 98.0, "com": 7.0, "desc_loja": 56.0, "de_loja": 25.19, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009508789802, "preco": 8.42, "vol": 8975, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 18.72, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "Pulseira de silicone macio para redmi watch 5 pulseira smartwatch pulseiras para xiaomi re", "cat": "Acessórios para relógios"}
 {"id": 1005012058103385, "preco": 37.19, "vol": 66529, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 74.38, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006966194747, "preco": 13.52, "vol": 52887, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 28.75, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012993923542, "preco": 18.35, "vol": 113402, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 36.7, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012095685328, "preco": 9.06, "vol": 45191, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 18.12, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012977835884, "preco": 8.69, "vol": 89883, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 17.38, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012978001229, "preco": 8.89, "vol": 117816, "nota": 98.0, "com": 9.0, "desc_loja": 49.0, "de_loja": 17.7, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007937866973, "preco": 11.46, "vol": 49551, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 24.39, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012172791507, "preco": 5.59, "vol": 65029, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 12.42, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010439240901, "preco": 6.99, "vol": 150341, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 15.2, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010487399301, "preco": 8.46, "vol": 113402, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 16.92, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010567441252, "preco": 9.53, "vol": 61984, "nota": 95.3, "com": 9.0, "desc_loja": 54.0, "de_loja": 20.88, "loja": "Shop1104633993 Store", "quando": "2026-09-14"}
 {"id": 1005011955607714, "preco": 17.09, "vol": 59849, "nota": 79.1, "com": 9.0, "desc_loja": 61.0, "de_loja": 44.05, "loja": "TOP BRANDS Store", "quando": "2026-09-14"}
-{"id": 1005010225246671, "preco": 6.52, "vol": 90872, "nota": 90.2, "com": 9.0, "desc_loja": 59.0, "de_loja": 16.11, "loja": "Cohai Store", "quando": "2026-09-14"}
 {"id": 1005009351001674, "preco": 7.26, "vol": 46220, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 15.46, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005011967824674, "preco": 10.72, "vol": 47595, "nota": 76.0, "com": 9.0, "desc_loja": 60.0, "de_loja": 27.05, "loja": "DIXSG Phone Accessories Factory Store", "quando": "2026-09-14"}
-{"id": 1005006967568156, "preco": 6.23, "vol": 52689, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 13.54, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009695992189, "preco": 8.69, "vol": 59724, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 19.31, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006860989052, "preco": 54.09, "vol": 2196, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 122.93, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "Caixa de som portátil bluetooth alto-falante rádio sem fio fm subwoofer caixa de som músic", "cat": "Aparelhos audiovisuais portáteis"}
 {"id": 1005008358373725, "preco": 15.05, "vol": 46459, "nota": 92.1, "com": 7.0, "desc_loja": 61.0, "de_loja": 38.87, "loja": "HHxing Store", "quando": "2026-09-14"}
 {"id": 1005010114667138, "preco": 32.09, "vol": 49684, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 64.18, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005008054283376, "preco": 31.21, "vol": 48532, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 67.83, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006995294624, "preco": 25.89, "vol": 56901, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 58.84, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012977927515, "preco": 6.13, "vol": 53635, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 12.26, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006677984952, "preco": 40.99, "vol": 67224, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 91.09, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006943431670, "preco": 5.94, "vol": 9521, "nota": 96.0, "com": 7.0, "desc_loja": 67.0, "de_loja": 18.53, "loja": "Shop911130012 Store", "quando": "2026-09-14", "nome": "Releasable Nylon Abraçadeiras, Loop Reutilizável, Hoop Tape, Correias Laço, Mouse, Fones d", "cat": "Peças e acessórios"}
@@ -4129,8 +4033,6 @@
 {"id": 1005006967291865, "preco": 10.6, "vol": 46190, "nota": 98.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 22.08, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012619684031, "preco": 6.81, "vol": 52458, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 13.62, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006782788933, "preco": 19.14, "vol": 53209, "nota": 98.0, "com": 9.0, "desc_loja": 52.0, "de_loja": 39.87, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010285498450, "preco": 8.91, "vol": 89895, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 19.36, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986702402, "preco": 15.3, "vol": 52887, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 30.61, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010332417387, "preco": 8.41, "vol": 49841, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 18.29, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009806732630, "preco": 7.69, "vol": 48800, "nota": 98.0, "com": 7.0, "desc_loja": 56.0, "de_loja": 17.88, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005011850988720, "preco": 129.59, "vol": 550, "nota": 90.4, "com": 9.0, "desc_loja": 54.0, "de_loja": 281.72, "loja": "QY Shop Store", "quando": "2026-09-14", "nome": "Carregador Magnético Sem Fio QI2 25W para Carro com Carregador Veicular 63W para iPhone 17", "cat": "Acessórios para celulares"}
@@ -4169,13 +4071,9 @@
 {"id": 1005012477719675, "preco": 82.24, "vol": 6922, "nota": 93.8, "com": 7.0, "desc_loja": 58.0, "de_loja": 196.55, "loja": "FSKX2 Store", "quando": "2026-09-14"}
 {"id": 1005007014242966, "preco": 9.45, "vol": 14133, "nota": 98.0, "com": 7.0, "desc_loja": 57.0, "de_loja": 21.96, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005011804581463, "preco": 18.59, "vol": 13338, "nota": 93.7, "com": 7.0, "desc_loja": 60.0, "de_loja": 46.95, "loja": "BL Tools Store", "quando": "2026-09-14"}
-{"id": 1005008557120999, "preco": 11.04, "vol": 45369, "nota": 95.6, "com": 7.0, "desc_loja": 53.0, "de_loja": 23.7, "loja": "ILMH Store", "quando": "2026-09-14"}
 {"id": 1005009508966156, "preco": 13.18, "vol": 970, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 28.65, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012479730305, "preco": 49.59, "vol": 7362, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 99.18, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "Canguru Portátil para Bebês e Crianças, Acessório Multifuncional com Alça Ajustável para O", "cat": "Atividades e acessórios"}
 {"id": 1005006994544782, "preco": 11.99, "vol": 52454, "nota": 98.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 24.98, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007345460326, "preco": 6.38, "vol": 61835, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 12.76, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006893741431, "preco": 9.32, "vol": 48361, "nota": 88.5, "com": 7.0, "desc_loja": 68.0, "de_loja": 29.99, "loja": "Shop1102659735 Store", "quando": "2026-09-14"}
-{"id": 1005005570781785, "preco": 11.68, "vol": 50847, "nota": 96.2, "com": 7.0, "desc_loja": 72.0, "de_loja": 42.79, "loja": "BMLEI Car Accessories Store", "quando": "2026-09-14"}
 {"id": 1005006904700381, "preco": 30.21, "vol": 5277, "nota": 98.0, "com": 9.0, "desc_loja": 52.0, "de_loja": 62.93, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "3 Braços Ajustáveis 360 °   Sistema de aspersão de rotação automática - Ferramenta de jard", "cat": "Utensílios de jardim"}
 {"id": 1005008968564249, "preco": 14.66, "vol": 4900, "nota": 93.5, "com": 7.0, "desc_loja": 58.0, "de_loja": 35.32, "loja": "A False Eyelash Point Store", "quando": "2026-09-14"}
 {"id": 1005012336658603, "preco": 21.4, "vol": 6502, "nota": 91.7, "com": 7.0, "desc_loja": 54.0, "de_loja": 46.53, "loja": "SEXYSHEEP Official Store", "quando": "2026-09-14"}
@@ -4185,67 +4083,33 @@
 {"id": 1005009462844477, "preco": 64.49, "vol": 4, "nota": 40.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 131.61, "loja": "Happy Happy Life Store", "quando": "2026-09-14"}
 {"id": 1005007043908778, "preco": 70.73, "vol": 3687, "nota": 91.7, "com": 7.0, "desc_loja": 71.0, "de_loja": 245.57, "loja": "LIGE Smart Watch Top Store", "quando": "2026-09-14"}
 {"id": 1005009259589970, "preco": 30.81, "vol": 59795, "nota": 78.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 67.79, "loja": "SUITU Car Store", "quando": "2026-09-14"}
-{"id": 1005010513544564, "preco": 57.02, "vol": 78668, "nota": 89.6, "com": 7.0, "desc_loja": 59.0, "de_loja": 140.73, "loja": "Shop1105082260 Store", "quando": "2026-09-14"}
 {"id": 1005006832463652, "preco": 338.88, "vol": 5717, "nota": 96.0, "com": 3.0, "desc_loja": 35.0, "de_loja": 527.52, "loja": "Netac Official Store", "quando": "2026-09-14"}
 {"id": 1005008908988403, "preco": 26.29, "vol": 3715, "nota": 98.0, "com": 3.0, "desc_loja": 54.0, "de_loja": 58.42, "loja": "Stone's Store", "quando": "2026-09-14", "nome": "M2 nvme ssd gabinete 10gbps pcie ssd caso caixa portátil usb c usb 3.1 ferramenta adaptado", "cat": "Armazenamento externo"}
 {"id": 1005012058103385, "preco": 54.79, "vol": 66529, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 109.58, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012977891937, "preco": 14.73, "vol": 72012, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 29.45, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012993923542, "preco": 32.14, "vol": 113402, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 64.29, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012977835884, "preco": 19.49, "vol": 89883, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 38.97, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010285498450, "preco": 17.62, "vol": 89895, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 40.0, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007097094437, "preco": 15.86, "vol": 72073, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 35.32, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012986686256, "preco": 21.3, "vol": 150341, "nota": 98.0, "com": 9.0, "desc_loja": 52.0, "de_loja": 44.85, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012978001229, "preco": 21.55, "vol": 117816, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 43.09, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012172791507, "preco": 15.99, "vol": 65029, "nota": 98.0, "com": 9.0, "desc_loja": 57.0, "de_loja": 37.35, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010439240901, "preco": 16.5, "vol": 150341, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 35.1, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010487399301, "preco": 20.44, "vol": 113402, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 40.87, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967335761, "preco": 18.56, "vol": 72111, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 37.13, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005010225246671, "preco": 14.58, "vol": 90872, "nota": 90.2, "com": 9.0, "desc_loja": 59.0, "de_loja": 35.73, "loja": "Cohai Store", "quando": "2026-09-14"}
-{"id": 1005008236561372, "preco": 12.22, "vol": 67768, "nota": 95.9, "com": 7.0, "desc_loja": 71.0, "de_loja": 42.31, "loja": "LAURYN MAGIC Store", "quando": "2026-09-14"}
-{"id": 1005010513544564, "preco": 76.03, "vol": 78668, "nota": 89.6, "com": 7.0, "desc_loja": 60.0, "de_loja": 190.32, "loja": "Shop1105082260 Store", "quando": "2026-09-14"}
-{"id": 1005009983850790, "preco": 16.33, "vol": 87101, "nota": 91.1, "com": 9.0, "desc_loja": 50.0, "de_loja": 32.66, "loja": "Shop1105129671 Store", "quando": "2026-09-14"}
 {"id": 1005006994762009, "preco": 9.18, "vol": 68865, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 20.26, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012986632736, "preco": 13.88, "vol": 68865, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 27.76, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006677984952, "preco": 62.1, "vol": 67224, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 132.11, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012978039292, "preco": 15.86, "vol": 68865, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 31.73, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012619684031, "preco": 16.91, "vol": 52458, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 33.83, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006782788933, "preco": 28.06, "vol": 53209, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 63.59, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006966194747, "preco": 22.77, "vol": 52887, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 51.07, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005011939971685, "preco": 20.26, "vol": 53874, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 40.52, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007914556601, "preco": 16.82, "vol": 55441, "nota": 90.0, "com": 7.0, "desc_loja": 7.0, "de_loja": 18.14, "loja": "Sumars Store", "quando": "2026-09-14"}
 {"id": 1005006994544782, "preco": 26.95, "vol": 52454, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 57.54, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007345519285, "preco": 20.61, "vol": 53671, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 44.47, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005006860874836, "preco": 26.48, "vol": 62879, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 52.97, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005012986686385, "preco": 18.91, "vol": 53447, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 37.82, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005007010254856, "preco": 21.15, "vol": 50701, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 42.3, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009259589970, "preco": 52.2, "vol": 59795, "nota": 78.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 110.63, "loja": "SUITU Car Store", "quando": "2026-09-14"}
-{"id": 1005010567441252, "preco": 17.22, "vol": 61984, "nota": 95.3, "com": 9.0, "desc_loja": 58.0, "de_loja": 41.08, "loja": "Shop1104633993 Store", "quando": "2026-09-14"}
-{"id": 1005011955607714, "preco": 28.81, "vol": 59849, "nota": 79.1, "com": 9.0, "desc_loja": 60.0, "de_loja": 73.68, "loja": "TOP BRANDS Store", "quando": "2026-09-14"}
-{"id": 1005007345460326, "preco": 20.89, "vol": 61835, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 41.77, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006995294624, "preco": 37.0, "vol": 56901, "nota": 98.0, "com": 7.0, "desc_loja": 59.0, "de_loja": 90.36, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005005570781785, "preco": 11.91, "vol": 50847, "nota": 96.2, "com": 7.0, "desc_loja": 73.0, "de_loja": 45.17, "loja": "BMLEI Car Accessories Store", "quando": "2026-09-14"}
-{"id": 1005012986702402, "preco": 26.23, "vol": 52887, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 52.46, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012977927515, "preco": 11.97, "vol": 53635, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 23.93, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967568156, "preco": 17.89, "vol": 52689, "nota": 98.0, "com": 7.0, "desc_loja": 57.0, "de_loja": 41.82, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009695992189, "preco": 20.19, "vol": 59724, "nota": 98.0, "com": 9.0, "desc_loja": 57.0, "de_loja": 47.14, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005008358373725, "preco": 27.17, "vol": 46459, "nota": 92.1, "com": 7.0, "desc_loja": 60.0, "de_loja": 69.51, "loja": "HHxing Store", "quando": "2026-09-14"}
-{"id": 1005008557120999, "preco": 25.36, "vol": 45369, "nota": 95.6, "com": 7.0, "desc_loja": 53.0, "de_loja": 54.47, "loja": "ILMH Store", "quando": "2026-09-14"}
-{"id": 1005008924358757, "preco": 15.76, "vol": 45967, "nota": 95.2, "com": 7.0, "desc_loja": 58.0, "de_loja": 37.82, "loja": "Shop911467045 Store", "quando": "2026-09-14"}
-{"id": 1005005562814968, "preco": 31.58, "vol": 46284, "nota": 92.1, "com": 7.0, "desc_loja": 64.0, "de_loja": 88.46, "loja": "DIDA BEAR Official Store", "quando": "2026-09-14"}
-{"id": 1005007791905416, "preco": 24.11, "vol": 46459, "nota": 98.0, "com": 7.0, "desc_loja": 58.0, "de_loja": 57.59, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005012095685328, "preco": 23.67, "vol": 45191, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 47.34, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005010114667138, "preco": 50.97, "vol": 49684, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 101.94, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005008054283376, "preco": 48.97, "vol": 48532, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 106.46, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005007937866973, "preco": 27.23, "vol": 49551, "nota": 98.0, "com": 9.0, "desc_loja": 56.0, "de_loja": 62.11, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005005785774950, "preco": 17.31, "vol": 48550, "nota": 90.6, "com": 7.0, "desc_loja": 59.0, "de_loja": 42.43, "loja": "Good But Not Expensive Store", "quando": "2026-09-14"}
-{"id": 1005006994627477, "preco": 12.07, "vol": 50247, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 24.14, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006678149338, "preco": 34.3, "vol": 45788, "nota": 98.0, "com": 3.0, "desc_loja": 50.0, "de_loja": 68.61, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009351001674, "preco": 19.08, "vol": 46220, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 41.82, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005011967824674, "preco": 22.29, "vol": 47595, "nota": 76.0, "com": 9.0, "desc_loja": 60.0, "de_loja": 55.79, "loja": "DIXSG Phone Accessories Factory Store", "quando": "2026-09-14"}
-{"id": 1005006824959033, "preco": 26.83, "vol": 47156, "nota": 94.3, "com": 7.0, "desc_loja": 71.0, "de_loja": 92.81, "loja": "Shop1103378163 Store", "quando": "2026-09-14"}
-{"id": 1005006893741431, "preco": 21.05, "vol": 48361, "nota": 88.5, "com": 7.0, "desc_loja": 71.0, "de_loja": 75.03, "loja": "Shop1102659735 Store", "quando": "2026-09-14"}
 {"id": 1005010332417387, "preco": 18.41, "vol": 49841, "nota": 98.0, "com": 9.0, "desc_loja": 55.0, "de_loja": 41.72, "loja": "Stone's Store", "quando": "2026-09-14"}
-{"id": 1005006967291865, "preco": 14.12, "vol": 46190, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 31.18, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005007170817720, "preco": 17.7, "vol": 44682, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 35.4, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005009806732630, "preco": 20.79, "vol": 48800, "nota": 98.0, "com": 7.0, "desc_loja": 55.0, "de_loja": 46.65, "loja": "Stone's Store", "quando": "2026-09-14"}
 {"id": 1005008148860952, "preco": 19.25, "vol": 33465, "nota": 87.9, "com": 7.0, "desc_loja": 59.0, "de_loja": 47.29, "loja": "FEIWIMI Store", "quando": "2026-09-15"}
@@ -35444,7 +35308,6 @@
 {"id": 1005012993923542, "preco": 18.23, "vol": 112066, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 36.46, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005012095685328, "preco": 9.01, "vol": 45711, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 18.01, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005012977835884, "preco": 8.6, "vol": 90919, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 17.21, "loja": "Stone's Store", "quando": "2026-09-17"}
-{"id": 1005012986686256, "preco": 8.89, "vol": 151280, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 17.78, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005012978001229, "preco": 8.79, "vol": 117764, "nota": 98.0, "com": 9.0, "desc_loja": 49.0, "de_loja": 17.55, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005007937866973, "preco": 11.69, "vol": 48808, "nota": 98.0, "com": 9.0, "desc_loja": 51.0, "de_loja": 24.35, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005012172791507, "preco": 5.69, "vol": 65793, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 12.37, "loja": "Stone's Store", "quando": "2026-09-17"}
@@ -35455,7 +35318,6 @@
 {"id": 1005009351001674, "preco": 7.38, "vol": 45893, "nota": 98.0, "com": 9.0, "desc_loja": 52.0, "de_loja": 15.36, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005011967824674, "preco": 10.89, "vol": 48046, "nota": 76.0, "com": 9.0, "desc_loja": 59.0, "de_loja": 26.88, "loja": "DIXSG Phone Accessories Factory Store", "quando": "2026-09-17"}
 {"id": 1005006967568156, "preco": 6.17, "vol": 52418, "nota": 98.0, "com": 7.0, "desc_loja": 54.0, "de_loja": 13.42, "loja": "Stone's Store", "quando": "2026-09-17"}
-{"id": 1005009695992189, "preco": 8.89, "vol": 59490, "nota": 98.0, "com": 9.0, "desc_loja": 54.0, "de_loja": 19.33, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005011692576359, "preco": 15.69, "vol": 6508, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 31.38, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005008140281748, "preco": 8.89, "vol": 18936, "nota": 79.3, "com": 7.0, "desc_loja": 55.0, "de_loja": 19.93, "loja": "YUTONG 3C Store", "quando": "2026-09-17"}
 {"id": 1005009646517115, "preco": 4.98, "vol": 18586, "nota": 95.8, "com": 3.0, "desc_loja": 57.0, "de_loja": 11.79, "loja": "Fomscvka 3C Store", "quando": "2026-09-17"}
@@ -35550,7 +35412,6 @@
 {"id": 1005009066568188, "preco": 27.94, "vol": 10510, "nota": 95.1, "com": 3.0, "desc_loja": 60.0, "de_loja": 70.55, "loja": "Shop1104759008 Store", "quando": "2026-09-17"}
 {"id": 1005006967291865, "preco": 10.52, "vol": 45647, "nota": 98.0, "com": 7.0, "desc_loja": 52.0, "de_loja": 21.93, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005006727780081, "preco": 13.22, "vol": 7639, "nota": 98.0, "com": 3.0, "desc_loja": 52.0, "de_loja": 27.55, "loja": "Stone's Store", "quando": "2026-09-17"}
-{"id": 1005012619684031, "preco": 6.79, "vol": 52164, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 13.58, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005006782788933, "preco": 19.41, "vol": 53769, "nota": 98.0, "com": 9.0, "desc_loja": 51.0, "de_loja": 39.61, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005007210425837, "preco": 9.8, "vol": 40935, "nota": 90.1, "com": 9.0, "desc_loja": 50.0, "de_loja": 19.62, "loja": "Droma Store", "quando": "2026-09-17"}
 {"id": 1005008744485619, "preco": 9.32, "vol": 36807, "nota": 91.7, "com": 9.0, "desc_loja": 61.0, "de_loja": 23.94, "loja": "Super Deals Wholesale Factory Store", "quando": "2026-09-17"}
@@ -35559,7 +35420,6 @@
 {"id": 1005010439240901, "preco": 7.09, "vol": 151280, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 15.08, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005005912594648, "preco": 13.6, "vol": 39014, "nota": 98.3, "com": 9.0, "desc_loja": 56.0, "de_loja": 31.33, "loja": "BASEUS Choice Store", "quando": "2026-09-17"}
 {"id": 1005012986702402, "preco": 15.21, "vol": 53423, "nota": 98.0, "com": 9.0, "desc_loja": 50.0, "de_loja": 30.42, "loja": "Stone's Store", "quando": "2026-09-17"}
-{"id": 1005010332417387, "preco": 8.59, "vol": 49064, "nota": 98.0, "com": 9.0, "desc_loja": 53.0, "de_loja": 18.28, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005009806732630, "preco": 8.3, "vol": 48418, "nota": 98.0, "com": 7.0, "desc_loja": 53.0, "de_loja": 17.66, "loja": "Stone's Store", "quando": "2026-09-17"}
 {"id": 1005012303832656, "preco": 29.68, "vol": 2426, "nota": 90.6, "com": 7.0, "desc_loja": 56.0, "de_loja": 68.01, "loja": "Shop1104932580 Store", "quando": "2026-09-17"}
 {"id": 1005010109591672, "preco": 94.11, "vol": 2368, "nota": 98.0, "com": 7.0, "desc_loja": 50.0, "de_loja": 188.21, "loja": "Stone's Store", "quando": "2026-09-17"}
@@ -37311,3 +37171,311 @@
 {"id": "awin:38980434691", "preco": 11999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Monitor Gamer Curvo Acer Predator X49 OLED 49\", DQHD, 240Hz, 0.03ms, FreeSync Premium, HDR 400, USB-C, Altura Ajustável, Preto - UM.SXXAA.X02"}
 {"id": "awin:44917634652", "preco": 13499.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
 {"id": "awin:39197437925", "preco": 14724.05, "vol": 0, "loja": "Leveros BR", "quando": "2026-09-17", "nome": "Ar-Condicionado Split Cassete 4 Vias Inverter Daikin SkyAir 31.000 BTUs Quente/Frio 220V Monofásico"}
+{"id": "awin:42178014937", "preco": 11.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:27555008015", "preco": 13.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36984230963", "preco": 14.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36989928316", "preco": 16.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:35925640938", "preco": 19.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:35927233024", "preco": 20.22, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:38857296599", "preco": 24.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45321931192", "preco": 24.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43742370558", "preco": 24.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45246895708", "preco": 28.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39394107740", "preco": 39.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Mousepad Fortrek FK265M, 700x300mm, Couro Premium, Preto - 81002"}
+{"id": "awin:46015890871", "preco": 48.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Switch Online - 3 meses"}
+{"id": "awin:43507605207", "preco": 55.14, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Headset Gamer Fortrek G Spinder, P3, Drivers 40mm, Preto e Vermelho - 75252"}
+{"id": "awin:41996490092", "preco": 59.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44206425675", "preco": 59.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015890013", "preco": 63.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Mouse sem fio Logitech M190 com Design Ambidestro de Tamanho Padrão, Conexão USB e Pilha Inclusa, Azul - 910-005903"}
+{"id": "awin:27555009045", "preco": 69.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36546020276", "preco": 69.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45699899838", "preco": 69.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:38147132414", "preco": 79.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Mouse Gamer Fortrek Vickers New Edition, RGB, 8000 DPI, 6 Botões, Preto - 77246"}
+{"id": "awin:44912335081", "preco": 84.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44082883256", "preco": 94.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Nike Dri-FIT Legend Masculina", "de_loja": 129.99}
+{"id": "awin:42178014939", "preco": 99.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015890870", "preco": 99.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Mouse Gamer Fortrek 83910 Crusader 12800DPI, USB, Branco - 83910"}
+{"id": "awin:44193390335", "preco": 105.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:27557778803", "preco": 109.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36704111895", "preco": 109.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Headset Gamer Fortrek PRO H2 com LED Azul, P2, Preto - H2"}
+{"id": "awin:40047922617", "preco": 119.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41815273079", "preco": 125.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45943838841", "preco": 129.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43550579665", "preco": 129.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44745526991", "preco": 129.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44083771177", "preco": 129.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Nike Dri-FIT Legend Masculina"}
+{"id": "awin:44221457450", "preco": 135.84, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Jordan Jumpman Masculina", "de_loja": 199.99}
+{"id": "awin:41324166980", "preco": 139.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40468094560", "preco": 145.49, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:27555014521", "preco": 149.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44643404234", "preco": 149.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36566022835", "preco": 159.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43229529682", "preco": 159.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:35009355755", "preco": 159.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43229529601", "preco": 159.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42636863278", "preco": 161.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Boné Nike Total 90 Unissex", "de_loja": 199.99}
+{"id": "awin:43229529683", "preco": 178.96, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015969249", "preco": 189.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Meia Jordan Everyday (3 pares) Unissex", "de_loja": 199.99}
+{"id": "awin:43872902178", "preco": 189.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Bola de Futebol Society Brasil Nike Society", "de_loja": 299.99}
+{"id": "awin:40080750991", "preco": 189.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Mouse Sem Fio Logitech Signature M650 L 2000 DPI, Design Padrão, 5 Botões, Silencioso, Bluetooth, USB, Grafite - 910-006231"}
+{"id": "awin:41781646035", "preco": 189.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43069780645", "preco": 193.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44569659220", "preco": 199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43233672742", "preco": 199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46016329179", "preco": 199.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Meia Jordan Everyday (3 pares) Unissex"}
+{"id": "awin:42641577831", "preco": 199.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Boné Nike Total 90 Unissex"}
+{"id": "awin:44223067164", "preco": 199.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Jordan Jumpman Masculina"}
+{"id": "awin:43769314422", "preco": 199.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Nike Beco 2 Society"}
+{"id": "awin:40418251029", "preco": 209.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39007880051", "preco": 209.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:38141347666", "preco": 221.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41226696602", "preco": 227.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43435445621", "preco": 229.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43965545945", "preco": 229.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42995815071", "preco": 229.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41959543673", "preco": 229.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45778789669", "preco": 229.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Jordan Wings Photo Masculina"}
+{"id": "awin:41808145632", "preco": 239.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42901971821", "preco": 239.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40260747445", "preco": 249.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40758050734", "preco": 249.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41943819314", "preco": 249.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43443679208", "preco": 249.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43391786024", "preco": 249.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39007880050", "preco": 259.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44050241137", "preco": 265.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39895826662", "preco": 269.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42834571693", "preco": 273.95, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43144676443", "preco": 273.95, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42178015062", "preco": 278.91, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43690691537", "preco": 279.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41951068429", "preco": 279.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Society Nike Mercurial Vapor 16 Club Infantil", "de_loja": 349.99}
+{"id": "awin:38411837059", "preco": 279.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42917654230", "preco": 284.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Feminino", "de_loja": 449.99}
+{"id": "awin:42480697559", "preco": 285.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40225261230", "preco": 288.79, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Feminino", "de_loja": 449.99}
+{"id": "awin:34524659949", "preco": 289.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39947610106", "preco": 289.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41959543672", "preco": 295.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42933054734", "preco": 295.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:27849546775", "preco": 299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45045322560", "preco": 299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44643404237", "preco": 299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Gabinete Gamer Kalkan Skye, ATX, Mid Tower, Lateral em Vidro Temperado, Sem Fans, Preto - KLK00041"}
+{"id": "awin:45045322893", "preco": 299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Headset Gamer Sem Fio Fortrek Win Air, Driver 50mm, 2.4GHz, Bluetooth, P3, PC, PS4, PS5, Xbox Series, Switch, Mobile, Preto - 86951"}
+{"id": "awin:43876216859", "preco": 299.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Bola de Futebol Society Brasil Nike Society"}
+{"id": "awin:43701298515", "preco": 305.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42834571695", "preco": 309.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43144676444", "preco": 310.52, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41215546542", "preco": 319.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42641669065", "preco": 319.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Society Erling Haaland Nike Phantom 6 Academy", "de_loja": 799.99}
+{"id": "awin:42480697560", "preco": 320.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43146493148", "preco": 328.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43550578949", "preco": 329.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45321178716", "preco": 332.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Calça Brasil Jordan Academy Pro Track 2026 Treino Masculina", "de_loja": 349.99}
+{"id": "awin:43965545990", "preco": 339.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43168316780", "preco": 339.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Feminino", "de_loja": 449.99}
+{"id": "awin:44506688152", "preco": 339.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45321178709", "preco": 341.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Revolution 7 Masculino", "de_loja": 399.99}
+{"id": "awin:46015969253", "preco": 349.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Winflo 11 Feminino", "de_loja": 699.99}
+{"id": "awin:41953652453", "preco": 349.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Society Nike Mercurial Vapor 16 Club Infantil"}
+{"id": "awin:45017052008", "preco": 349.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Calça Brasil Jordan Academy Pro Track 2026 Treino Masculina"}
+{"id": "awin:43827493169", "preco": 351.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike SB Force 58 Masculino", "de_loja": 599.99}
+{"id": "awin:43014262916", "preco": 353.3, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43088260062", "preco": 354.25, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:35935520764", "preco": 369.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42018401533", "preco": 369.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015969250", "preco": 370.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Max Excee Feminino", "de_loja": 799.99}
+{"id": "awin:45128221901", "preco": 379.67, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:37411777757", "preco": 379.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Masculino", "de_loja": 449.99}
+{"id": "awin:43084344298", "preco": 387.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:37706703201", "preco": 389.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40319947737", "preco": 399.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45777188270", "preco": 399.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Court Vision Low Masculino", "de_loja": 599.99}
+{"id": "awin:45288909521", "preco": 399.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Big Low Masculino", "de_loja": 599.99}
+{"id": "awin:43152717430", "preco": 399.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45319903823", "preco": 399.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Revolution 7 Masculino"}
+{"id": "awin:44941971728", "preco": 408.27, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44623315750", "preco": 409.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39869613749", "preco": 419.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45690356067", "preco": 419.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44700475601", "preco": 419.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36734296410", "preco": 419.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39967695810", "preco": 439.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42794060603", "preco": 449.89, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Gabinete Gamer Corsair 480T RGB, Mid-Tower, ATX, Lateral em Vidro Temperado, 3 Ventoinhas AR120 RGB, Preto - CC-9011272-WW"}
+{"id": "awin:37718705232", "preco": 449.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Masculino"}
+{"id": "awin:40224691790", "preco": 449.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Feminino"}
+{"id": "awin:46016329183", "preco": 449.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Feminino"}
+{"id": "awin:43171311634", "preco": 449.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Downshifter 13 Feminino"}
+{"id": "awin:40136690689", "preco": 455.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Society Nike Mercurial Vapor 16 Academy Low Infantil", "de_loja": 599.99}
+{"id": "awin:44506688153", "preco": 489.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43645008881", "preco": 499.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41940815223", "preco": 503.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Precision VII NBR", "de_loja": 599.99}
+{"id": "awin:39990480974", "preco": 509.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44208505471", "preco": 512.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43486750362", "preco": 554.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36262460051", "preco": 568.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015969248", "preco": 569.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Court Air Zoom Pro Feminino", "de_loja": 999.99}
+{"id": "awin:46015969259", "preco": 569.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Agasalho Nike Dri-FIT Academy Masculino", "de_loja": 599.99}
+{"id": "awin:44706563674", "preco": 579.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015969251", "preco": 599.44, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Initiator Feminino", "de_loja": 699.99}
+{"id": "awin:45230073500", "preco": 599.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40140084174", "preco": 599.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Society Nike Mercurial Vapor 16 Academy Low Infantil"}
+{"id": "awin:41943803337", "preco": 599.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Precision VII NBR"}
+{"id": "awin:43828737788", "preco": 599.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike SB Force 58 Masculino"}
+{"id": "awin:45778789677", "preco": 599.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Court Vision Low Masculino"}
+{"id": "awin:45289995141", "preco": 599.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Big Low Masculino"}
+{"id": "awin:46016329191", "preco": 599.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Agasalho Nike Dri-FIT Academy Masculino"}
+{"id": "awin:45813260845", "preco": 617.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Brasil Jordan Manga Longa Goalie Masculina", "de_loja": 649.99}
+{"id": "awin:41620311201", "preco": 621.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015969254", "preco": 645.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Monarch IV Masculino", "de_loja": 699.99}
+{"id": "awin:45810831370", "preco": 649.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camiseta Brasil Jordan Manga Longa Goalie Masculina"}
+{"id": "awin:37748263241", "preco": 664.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 699.99}
+{"id": "awin:44355042331", "preco": 664.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Initiator Masculino", "de_loja": 699.99}
+{"id": "awin:44037027218", "preco": 664.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Initiator Feminino", "de_loja": 699.99}
+{"id": "awin:43213693818", "preco": 671.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45527397755", "preco": 674.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Max Impact 4 Masculino", "de_loja": 799.99}
+{"id": "awin:45690356081", "preco": 699.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45548747217", "preco": 699.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43152717431", "preco": 699.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44734787916", "preco": 699.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Monitor Gamer ASUS 24.5\", Full HD, 120Hz, 1ms, IPS, Adaptive-Sync, HDMI e VGA, Som Integrado, Console Ready - VA259HGA"}
+{"id": "awin:44352949503", "preco": 699.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Initiator Masculino"}
+{"id": "awin:46016329182", "preco": 699.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Initiator Feminino"}
+{"id": "awin:46016329185", "preco": 699.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Winflo 11 Feminino"}
+{"id": "awin:44037096196", "preco": 699.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Initiator Feminino"}
+{"id": "awin:46016329186", "preco": 699.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Monarch IV Masculino"}
+{"id": "awin:45135785844", "preco": 709.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:37245584111", "preco": 719.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43478045304", "preco": 749.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43886725125", "preco": 749.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:45191145914", "preco": 749.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:45501531611", "preco": 749.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:37087838977", "preco": 749.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44067928173", "preco": 759.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Dunk Low Retro SE", "de_loja": 999.99}
+{"id": "awin:45112436158", "preco": 759.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Jordan CMFT ERA Masculino", "de_loja": 999.99}
+{"id": "awin:46015969260", "preco": 759.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camisa Polo Nike Court Air Force Slam U2 NY Masculina", "de_loja": 799.99}
+{"id": "awin:42480697561", "preco": 775.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45896619031", "preco": 798.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45256011130", "preco": 799.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46007859177", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:42879956015", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:43796234952", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1599.99}
+{"id": "awin:43822577783", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1599.99}
+{"id": "awin:44985464925", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:46016329180", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Max Excee Feminino"}
+{"id": "awin:46016329181", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Chuteira Society Erling Haaland Nike Phantom 6 Academy"}
+{"id": "awin:45528183006", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Max Impact 4 Masculino"}
+{"id": "awin:46016329192", "preco": 799.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Camisa Polo Nike Court Air Force Slam U2 NY Masculina"}
+{"id": "awin:44478390937", "preco": 807.49, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Max Plus Masculino", "de_loja": 1399.99}
+{"id": "awin:44677389973", "preco": 849.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1599.99}
+{"id": "awin:45175491754", "preco": 849.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:37080923786", "preco": 854.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 899.99}
+{"id": "awin:42119124748", "preco": 854.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 899.99}
+{"id": "awin:43977363779", "preco": 854.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Women's Nike Dunk Low SE", "de_loja": 999.99}
+{"id": "awin:46015969257", "preco": 854.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Jaqueta Dri-FIT Nike Court Slam NY Masculina", "de_loja": 899.99}
+{"id": "awin:46015969258", "preco": 854.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Nike Total 90", "de_loja": 899.99}
+{"id": "awin:44021806726", "preco": 855.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44681643617", "preco": 879.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1599.99}
+{"id": "awin:45071528663", "preco": 879.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:45896619030", "preco": 879.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40485983401", "preco": 899.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:46016329189", "preco": 899.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Jaqueta Dri-FIT Nike Court Slam NY Masculina"}
+{"id": "awin:46016329190", "preco": 899.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Nike Total 90"}
+{"id": "awin:33522292553", "preco": 929.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Memória RAM Kingston Fury Beast, 16GB, 3200MHz, DDR4, CL16, Preto - KF432C16BB1/16"}
+{"id": "awin:46015969252", "preco": 949.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Air Jordan 1 Low SE Infantil", "de_loja": 999.99}
+{"id": "awin:44723090459", "preco": 949.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:45175491756", "preco": 949.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:46015969256", "preco": 949.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "SABRINA 4", "de_loja": 999.99}
+{"id": "awin:40357080834", "preco": 975.57, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42254170303", "preco": 989.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44562736221", "preco": 999.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Monitor Gamer Curvo MSI MAG 27\", Full HD, 200Hz, 0.5ms, Rapid VA, FreeSync Premium, HDR Ready, Preto - 276CF E20"}
+{"id": "awin:41558167972", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1999.99}
+{"id": "awin:43827493166", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1999.99}
+{"id": "awin:44887772168", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1599.99}
+{"id": "awin:45183408297", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 1499.99}
+{"id": "awin:46016329178", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Court Air Zoom Pro Feminino"}
+{"id": "awin:46016329184", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Air Jordan 1 Low SE Infantil"}
+{"id": "awin:43977969317", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Women's Nike Dunk Low SE"}
+{"id": "awin:44069161044", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Dunk Low Retro SE"}
+{"id": "awin:45112585654", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Jordan CMFT ERA Masculino"}
+{"id": "awin:46016329188", "preco": 999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "SABRINA 4"}
+{"id": "awin:42345432489", "preco": 1089.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44182473152", "preco": 1109.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45366196155", "preco": 1139.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "de_loja": 2499.99}
+{"id": "awin:44069214902", "preco": 1193.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44153377354", "preco": 1199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43850949525", "preco": 1199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Monitor Gamer AOC 27\", Full HD, 200Hz, 0.3ms, IPS, G-Sync, HDR, Ângulo Ajustável, Preto - 27G42HE"}
+{"id": "awin:46015969255", "preco": 1234.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Vomero Plus Feminino", "de_loja": 1299.99}
+{"id": "awin:46016329187", "preco": 1299.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Vomero Plus Feminino"}
+{"id": "awin:44021806793", "preco": 1349.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44021806794", "preco": 1369.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:46015890014", "preco": 1399.91, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Robô Aspirador e Passa Pano KABUM! smart 700 - 5 Modos de Limpeza, Mapeamento a Laser 3D, Base de Carregamento - Bivolt - Preto - KBSF003"}
+{"id": "awin:44479785946", "preco": 1399.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Air Max Plus Masculino"}
+{"id": "awin:43220400998", "preco": 1459.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44213998250", "preco": 1499.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:37775059897", "preco": 1599.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40761219768", "preco": 1599.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Monitor Gamer Curvo Samsung Odyssey G5 27\", QHD, 165Hz, 1ms, FreeSync, HDR10 - LS27CG552ELMZD"}
+{"id": "awin:45989541973", "preco": 1699.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45954662446", "preco": 1799.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45534142589", "preco": 1804.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Vomero Premium Feminino", "de_loja": 1899.99}
+{"id": "awin:42816615225", "preco": 1876.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39874794460", "preco": 1899.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43073087996", "preco": 1899.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45534682872", "preco": 1899.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17", "nome": "Tênis Nike Vomero Premium Feminino"}
+{"id": "awin:45519033139", "preco": 1919.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41651168093", "preco": 1999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Gabinete Gamer Asus ProArt PA602, E-ATX, Full Tower, Lateral em Vidro Temperado, PWM 2x200mm e 1x 140mm Fan, Preto - 90DC00J0-B00000"}
+{"id": "awin:45129263877", "preco": 1999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42331991736", "preco": 1999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41558351160", "preco": 1999.99, "vol": 0, "loja": "Nike BR", "quando": "2026-09-17"}
+{"id": "awin:45232346973", "preco": 2099.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43958269382", "preco": 2139.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41207710585", "preco": 2199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Monitor Gamer Curvo Samsung Odyssey G5 32\", QHD, 165Hz, 1ms, FreeSync, HDR10 - LS32CG552ELMZD"}
+{"id": "awin:37387027754", "preco": 2299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45999032233", "preco": 2369.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:31732230253", "preco": 2399.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43490594608", "preco": 2399.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43478045305", "preco": 2499.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36292127559", "preco": 2499.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Robô Aspirador e Passa Pano KABUM! smart 900 - 5 Modos de Limpeza, Base 2 em 1, Mapeamento 3D - 127v - Preto - KBSF009"}
+{"id": "awin:45590462457", "preco": 2699.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44021806796", "preco": 2799.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44437111924", "preco": 2849.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:36941587660", "preco": 2899.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40775646774", "preco": 2999.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43794150051", "preco": 2999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45377075368", "preco": 3099.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44469267191", "preco": 3099.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41520551627", "preco": 3149.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41875465172", "preco": 3299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43836706942", "preco": 3299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44066093690", "preco": 3459.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45321274356", "preco": 3500.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43615948921", "preco": 3509.9, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:39342234267", "preco": 3949.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43180887261", "preco": 4049.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45174424093", "preco": 4277.07, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43942818197", "preco": 4599.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45864252740", "preco": 4699.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Notebook Acer Aspire Go 15 AG15-51P-564V, Intel Core i5-1334U, 16GB RAM, Intel Iris Xe, SSD 512GB, 15.6\" FHD, Win 11, Azul - NX.JGFAL.006"}
+{"id": "awin:44022936217", "preco": 4899.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41051411323", "preco": 4999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:43528123746", "preco": 5089.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41106797077", "preco": 5099.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41520551605", "preco": 5099.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45851748111", "preco": 5099.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44469267187", "preco": 5149.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40973008530", "preco": 5199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44022936216", "preco": 5199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45279673028", "preco": 5299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44266385802", "preco": 5399.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41429826291", "preco": 5499.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44700475596", "preco": 5999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41036910721", "preco": 6199.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:41051411328", "preco": 6299.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44372206135", "preco": 6899.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44549388319", "preco": 7159.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "Kit Upgrade AMD Ryzen 7 5700X, B550 DDR4, RAM 16GB, FX Swift RX 9070 XT, Fonte 750W"}
+{"id": "awin:41908097597", "preco": 7899.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:40555262061", "preco": 8299.0, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45590462451", "preco": 8599.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44487601406", "preco": 8699.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:44917634652", "preco": 9499.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:45864250729", "preco": 9999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}
+{"id": "awin:42891300804", "preco": 11999.99, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17", "nome": "iPad Air Apple 11\" 512 GB, Chip M3, Wi-Fi + Cellular, Câmera Traseira 12MP, Estelar - MCG64BZ/A"}
+{"id": "awin:45962623767", "preco": 32392.51, "vol": 0, "loja": "Kabum BR", "quando": "2026-09-17"}

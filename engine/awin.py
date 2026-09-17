@@ -222,6 +222,24 @@ def _preco(v) -> float:
         return 0.0
 
 
+def com_clickref(link: str, pid) -> str:
+    """Pendura `clickref=site-<id do produto>` no link do Awin.
+
+    ⭐ O EPC POR PRODUTO (17/09/2026). O relatorio de transacoes do Awin
+    devolve cliques e vendas POR `clickref` — e' o unico jeito de saber qual
+    Nike/Kabum converte, ja' que o feed nao traz review nem vendas
+    (CRITERIOS_DA_VITRINE.md, tensao 5). Hormozi: escolha entre ofertas
+    pelo ganho por clique, nao pelo ganho por venda.
+
+    ⚠️ Idempotente: link que ja' tem clickref sai como esta'. E link vazio
+    sai vazio — a guarda de "produto sem link" continua valendo.
+    """
+    link = (link or "").strip()
+    if not link or "clickref=" in link or pid in (None, ""):
+        return link
+    return link + ("&" if "?" in link else "?") + f"clickref=site-{pid}"
+
+
 def catalogo(teto: float = 0.0, piso: float = 0.0) -> list[dict]:
     """Os produtos de TODO anunciante aprovado, deduplicados.
 
@@ -288,7 +306,8 @@ def catalogo(teto: float = 0.0, piso: float = 0.0) -> list[dict]:
             # ⛔ SEMPRE o aw_deep_link. O `merchant_deep_link` abre a mesma
             # pagina e NAO paga — e' o jeito mais silencioso de perder
             # comissao, porque para o leitor os dois sao identicos.
-            "link": (p.get("aw_deep_link") or "").strip(),
+            "link": com_clickref((p.get("aw_deep_link") or "").strip(),
+                                 p.get("aw_product_id")),
             "loja": (p.get("merchant_name") or "").strip(),
             "categoria": (p.get("merchant_category")
                           or p.get("category_name") or "").strip(),

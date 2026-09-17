@@ -225,5 +225,13 @@ checar('var ext = externa(canal) ? canal : (externa(loja) ? loja : "");' in CODI
        "o download da externa dispara por `canal` OU por `loja`")
 
 print()
+print("10. clickref POR PRODUTO no link do Awin (17/09) — o EPC medido")
+checar(awin.com_clickref("https://www.awin1.com/pclick.php?p=77&a=1&m=2", "77")
+       == "https://www.awin1.com/pclick.php?p=77&a=1&m=2&clickref=site-77", "pendura clickref=site-<id>")
+checar(awin.com_clickref("https://x/?clickref=site-9", "9") == "https://x/?clickref=site-9", "idempotente")
+checar(awin.com_clickref("", "9") == "" and awin.com_clickref("https://x/", None) == "https://x/",
+       "link vazio fica vazio; sem id nao inventa clickref")
+
+print()
 print("tudo verde" if not falhas else f"{len(falhas)} FALHA(S)")
 sys.exit(1 if falhas else 0)

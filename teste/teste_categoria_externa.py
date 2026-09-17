@@ -30,7 +30,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
 sys.path.insert(0, str(RAIZ / "paginas"))
 import publicar_bio  # noqa: E402
-from engine import awin  # noqa: E402
+from engine import awin, regua_vitrine as rv  # noqa: E402
 
 falhas = []
 
@@ -228,6 +228,23 @@ print("⛔ PELO MENU LOJA TAMBEM BAIXA (17/09: 'Clovis 5983' no menu, 0 na grade
 checar('var ext = externa(canal) ? canal : (externa(loja) ? loja : "");' in CODIGO
        and "if (ext && !EXTERNO_CARREGADO[ext])" in CODIGO,
        "o download da externa dispara por `canal` OU por `loja`")
+
+print()
+print("11. OS DOIS BLOCOS: cortar_bloco = top k pela regua, RODIZIO de categorias, sem excluido")
+lote = ([{"id": str(i), "nome": f"Chuteira {i}", "preco": 900.0 + i, "loja": "Nike BR", "categoria": "Masculino > Futebol", "link": "x"} for i in range(10)]
+        + [{"id": "f" + str(i), "nome": f"Tenis fem {i}", "preco": 500.0 + i, "loja": "Nike BR", "categoria": "Feminino > Tenis", "link": "x"} for i in range(10)]
+        + [{"id": "g1", "nome": "Gift Card Nike 200", "preco": 200.0, "loja": "Nike BR", "categoria": "Gift Card", "link": "x"}])
+c = awin.cortar_bloco(lote, 6)
+checar(len(c) == 6, f"6 de 21 ({len(c)})")
+cats = [x["categoria"].split(">")[0].strip() for x in c]
+checar(cats[:4] in (["Masculino", "Feminino", "Masculino", "Feminino"], ["Feminino", "Masculino", "Feminino", "Masculino"]),
+       f"rodizio de categorias: {cats}")
+checar(all("Gift" not in x["nome"] for x in c), "⛔ gift card fica fora mesmo com preco alto")
+checar(c[0]["preco"] >= 906.0 or c[0]["preco"] >= 506.0, f"dentro da categoria, o topo pela regua primeiro (Rende satura no p90; veio {c[0]['preco']})")
+checar("vitrine_nota" not in c[0] and "ganho" not in c[0], "o cartao sai limpo (a regua e' recalculada na pagina)")
+checar(awin.cortar_bloco(lote[:3], 6) == lote[:3], "abaixo do teto, passa como veio")
+checar(rv.piso({"nome": "Tenis", "loja": "Nike", "preco": 142.4}) == "" and rv.piso({"nome": "Tenis", "loja": "Nike", "preco": 1600.0}) != "",
+       "⛔ preco em FLOAT (142.4) nao vira 1424 (derrubava a Nike inteira)")
 
 print()
 print("10. clickref POR PRODUTO no link do Awin (17/09) — o EPC medido")

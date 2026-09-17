@@ -132,7 +132,7 @@ jobs:
           # decide pela idade dele — categoria fora apos 24h, nunca com
           # preco velho. Teto R$ 150: decisao do Bryan em 16/09/2026.
           echo "===== awin (catalogo dos aprovados, ate R$ 150)"
-          python -X utf8 -m engine.awin --guardar --teto 150 || true
+          python -X utf8 -m engine.awin --guardar --teto 150 --teto-alto 1500 --por-bloco 300 || true
           echo "===== pedidos e placar"
           python -X utf8 -m engine.resultado --pedidos --placar || true
       - name: Guardar o historico de preco

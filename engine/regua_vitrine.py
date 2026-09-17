@@ -93,9 +93,12 @@ RECORRENTE = re.compile(
 
 # ⛔ EXCLUSOES (piso): nao e' produto, ou nao e' O produto (juiz de 16/09).
 EXCLUIR = re.compile(
-    r"gift ?card|cart[ãa]o presente|vale.?presente|\bcr[ée]dito\b|\brecarga\b|assinatura|"
+    r"gift ?card|cart[ãa]o.?presente|vale.?presente|\bcr[ée]dito\b|\brecarga\b|assinatura|"
+    r"\bpoints?\b|\bpontos\b|\bgold\b|\bgems?\b|\bcoins?\b|\bmoedas?\b|v-?bucks|robux|"
     r"^pe[çc]a\b|\bpe[çc]a (de )?reposi|\bacess[óo]rio para\b|\bcapa para\b|"
     r"\bpel[íi]cula\b|\blivro\b|\be-?book\b|apostila", re.I)
+# ⛔ e pela CATEGORIA do feed (Kabum: "Gift Card" com nomes como "2800 Points")
+EXCLUIR_CATEGORIA = re.compile(r"gift ?card|vale|cart[ãa]o.?presente|assinatura|servi[çc]o", re.I)
 
 
 def faixa(preco: float) -> float:
@@ -110,9 +113,14 @@ def recorrente(p: dict) -> bool:
 
 
 def _preco(p: dict) -> float:
+    """Preco em numero: aceita float (instantaneo do Awin: 142.4) ou o texto
+    do cartao ("R$ 1.234,56"). ⛔ Medido 17/09: tratar 142.4 como texto
+    virava 1424 e o piso "acima de R$ 1.500" derrubava a Nike inteira."""
+    v = p.get("preco", 0)
+    if isinstance(v, (int, float)):
+        return float(v)
     try:
-        return float(str(p.get("preco", "0")).replace("R$", "").replace(".", "")
-                     .replace(",", ".").strip() or 0)
+        return float(str(v).replace("R$", "").replace(".", "").replace(",", ".").strip() or 0)
     except ValueError:
         return 0.0
 
@@ -219,6 +227,9 @@ def piso(p: dict) -> str:
     nome = str(p.get("nome") or "")
     if EXCLUIR.search(nome):
         return "excluido: " + (EXCLUIR.search(nome).group(0)).strip()
+    cat = str(p.get("categoria") or "")
+    if cat and EXCLUIR_CATEGORIA.search(cat):
+        return "excluido: categoria " + (EXCLUIR_CATEGORIA.search(cat).group(0)).strip()
     if _preco(p) > FAIXAS[-1][0]:
         return f"acima de R$ {FAIXAS[-1][0]:.0f} (fica na serie)"
     if loja in LOJAS_COM_NOTA and p.get("nota") not in (None, "", 0, 0.0):

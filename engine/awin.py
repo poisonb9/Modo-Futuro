@@ -430,7 +430,43 @@ def _ultimo_ponto_por_id() -> dict[str, tuple[str, float]]:
     return saida
 
 
-def guardar_catalogo(teto: float = 0.0) -> dict:
+# ⭐ OS DOIS BLOCOS POR LOJA (Bryan, 17/09/2026): "achadinhos" ate' TETO e
+# "maior valor" de TETO a TETO_ALTO, cada um com ate' POR_BLOCO cartoes
+# escolhidos pela regua — INTERCALANDO CATEGORIAS, senao os 300 da Nike
+# seriam 300 chuteiras de R$ 1.500 (medido: o top por ganho e' o mais caro).
+TETO_ALTO = 1500.0
+POR_BLOCO = 300
+
+
+def _categoria_raiz(p: dict) -> str:
+    return (p.get("categoria") or "?").split(">")[0].strip() or "?"
+
+
+def cortar_bloco(prods: list[dict], k: int = POR_BLOCO) -> list[dict]:
+    """Os `k` melhores pela regua, um de cada categoria por vez (rodizio).
+    Sem regua (ganho ausente) vale a ordem que veio."""
+    if len(prods) <= k:
+        return prods
+    from . import regua_vitrine as rv
+    cartoes = [dict(p, ganho=round(p["preco"] * comissao_de(p.get("loja") or "") / 100, 2))
+               for p in prods]
+    rv.pontuar(cartoes)
+    vivos = [c for c in cartoes if not c.get("vitrine_fora")]
+    vivos.sort(key=lambda c: -float(c.get("vitrine_nota") or 0))
+    filas: dict[str, list] = {}
+    for c in vivos:
+        filas.setdefault(_categoria_raiz(c), []).append(c)
+    saida: list[dict] = []
+    while len(saida) < k and any(filas.values()):
+        for cat in list(filas):
+            if filas[cat] and len(saida) < k:
+                saida.append(filas[cat].pop(0))
+    chaves = {"vitrine_nota", "vitrine_fora", "ganho"}
+    return [{k2: v for k2, v in c.items() if k2 not in chaves} for c in saida]
+
+
+def guardar_catalogo(teto: float = 0.0, teto_alto: float = 0.0,
+                     por_bloco: int = POR_BLOCO) -> dict:
     """Baixa o catalogo, grava o INSTANTANEO e alimenta a SERIE. Devolve o
     instantaneo.
 
@@ -457,11 +493,23 @@ def guardar_catalogo(teto: float = 0.0) -> dict:
     # 8.093 ate' R$ 150 — 18.362 ficavam sem historico nenhum.
     guardar_comissoes()
     todos = catalogo(teto=0)
-    prods = [p for p in todos if not teto or p["preco"] <= teto]
+    if not teto_alto:
+        prods = [p for p in todos if not teto or p["preco"] <= teto]
+    else:
+        # ⭐ dois blocos por loja, cada um cortado pela regua
+        prods = []
+        por_loja: dict[str, list] = {}
+        for p in todos:
+            por_loja.setdefault(p["loja"], []).append(p)
+        for loja, L in por_loja.items():
+            baixo = [p for p in L if p["preco"] <= teto]
+            alto = [p for p in L if teto < p["preco"] <= teto_alto]
+            prods += cortar_bloco(baixo, por_bloco) + cortar_bloco(alto, por_bloco)
     if not prods:
         raise SystemExit("awin: catalogo vazio — instantaneo anterior mantido")
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    inst = {"quando": agora, "teto": teto, "produtos": prods}
+    inst = {"quando": agora, "teto": teto, "teto_alto": teto_alto,
+            "por_bloco": por_bloco, "produtos": prods}
     CATALOGO_ESTADO.parent.mkdir(parents=True, exist_ok=True)
     CATALOGO_ESTADO.write_text(
         json.dumps(inst, ensure_ascii=False), encoding="utf-8")
@@ -505,6 +553,10 @@ def main() -> None:
                    help="preco maximo em reais (0 = sem corte)")
     a.add_argument("--piso", type=float, default=0.0,
                    help="preco minimo em reais (0 = sem corte)")
+    a.add_argument("--teto-alto", type=float, default=0.0,
+                   help="com --guardar: 2o bloco (maior valor) de --teto ate' aqui")
+    a.add_argument("--por-bloco", type=int, default=POR_BLOCO,
+                   help="com --guardar: cartoes por bloco e por loja")
     a.add_argument("--guardar", action="store_true",
                    help="grava estado/awin_catalogo.json e alimenta a serie "
                         "(e' o que roda na nuvem)")
@@ -515,7 +567,7 @@ def main() -> None:
         return
 
     if o.guardar:
-        guardar_catalogo(teto=o.teto)
+        guardar_catalogo(teto=o.teto, teto_alto=o.teto_alto, por_bloco=o.por_bloco)
         return
 
     if o.catalogo:

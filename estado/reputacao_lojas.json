@@ -1,0 +1,4 @@
+{
+  "_leia": "Reputacao por loja no Reclame Aqui, lida A MAO pelo Bryan (o site bloqueia leitura automatica). Chave = nome da loja como aparece no cartao (Nike, Kabum, Clovis Calcados...). nota 0-10, em = data da leitura. Vale 60 dias (engine/regua_vitrine.py).",
+  "_exemplo": {"nota": 8.4, "em": "2026-09-17"}
+}

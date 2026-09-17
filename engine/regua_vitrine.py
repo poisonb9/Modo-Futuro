@@ -31,6 +31,10 @@ posicao). Piso e' "fora da vitrine", nunca "fora do dado".
 """
 from __future__ import annotations
 
+import json
+from datetime import date
+from pathlib import Path
+
 PESOS = {"rende": 35, "confianca": 30, "momento": 20, "mostravel": 15}
 
 # pisos: fora da vitrine (ordem por nota = 0), com o motivo nomeado
@@ -107,9 +111,32 @@ def confianca(p: dict) -> float:
         if hoje >= PISO_VENDEDORES_ML:
             return 0.5
         return 0.0
-    # ⚠️ externa (Awin): sem review no feed, sem decreto. Zero ate' haver
-    # dado (Reclame Aqui por loja e' o proximo passo, decisao do Bryan).
-    return 0.0
+    # ⚠️ externa (Awin): sem review no feed, sem decreto. O que existe e' a
+    # REPUTACAO DA LOJA no Reclame Aqui, lida a mao pelo Bryan (o site
+    # bloqueia leitura automatica — medido 17/09: 403 e desafio anti-bot) e
+    # guardada com data em estado/reputacao_lojas.json. Escala do RA:
+    # >= 8 otimo, 7-8 bom, 6-7 regular, < 6 ruim. Sem numero = 0.
+    return _reputacao(loja)
+
+
+REPUTACAO = Path(__file__).resolve().parent.parent / "estado" / "reputacao_lojas.json"
+REPUTACAO_VALIDADE_DIAS = 60
+
+
+def _reputacao(loja: str) -> float:
+    try:
+        d = json.loads(REPUTACAO.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return 0.0
+    r = d.get(loja) or {}
+    try:
+        nota = float(r.get("nota") or 0)
+        em = date.fromisoformat(str(r.get("em") or ""))
+    except (TypeError, ValueError):
+        return 0.0
+    if (date.today() - em).days > REPUTACAO_VALIDADE_DIAS:
+        return 0.0            # numero velho nao e' numero
+    return 1.0 if nota >= 8 else 0.7 if nota >= 7 else 0.4 if nota >= 6 else 0.0
 
 
 def momento(p: dict) -> float:

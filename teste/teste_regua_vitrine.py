@@ -50,6 +50,18 @@ total, eixos, motivo = rv.nota(nike, ref)
 checar(eixos["confianca"] == 0.0, "confianca 0 (sem review no feed)")
 checar(motivo == "" and total == 35 + 7.5, f"na vitrine com Rende cheio + Mostravel meio = {total}")
 
+import json, tempfile
+from datetime import date, timedelta
+rep_real = rv.REPUTACAO
+rv.REPUTACAO = Path(tempfile.mkdtemp()) / "rep.json"
+rv.REPUTACAO.write_text(json.dumps({"Nike": {"nota": 8.4, "em": date.today().isoformat()},
+                                    "Kabum": {"nota": 7.2, "em": date.today().isoformat()},
+                                    "Clovis Calçados": {"nota": 8.9, "em": (date.today() - timedelta(days=61)).isoformat()}}), encoding="utf-8")
+checar(rv.confianca({"loja": "Nike"}) == 1.0 and rv.confianca({"loja": "Kabum"}) == 0.7,
+       "reputacao lida a mao (Reclame Aqui) vira Confianca: 8,4 = cheia, 7,2 = 0,7")
+checar(rv.confianca({"loja": "Clovis Calçados"}) == 0.0, "numero com 61 dias NAO vale (validade 60)")
+rv.REPUTACAO = rep_real
+
 print()
 print("3. PISO: fora da vitrine com motivo, nota 0")
 ruim = dict(perfeito, nota=87.0)

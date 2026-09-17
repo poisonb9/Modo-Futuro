@@ -168,3 +168,62 @@ vitrine (não da loja, não da série).
 6. Marca-como-confiança nas externas — **só depois da decisão do Bryan** (tensão 2).
 
 Nada aqui muda a coleta: a série continua recebendo tudo (ordem de 17/09).
+
+---
+
+## 6. Régua v2 — parâmetros refinados (17/09/2026, 2ª investigação)
+
+Segunda passada no banco: 3.960 fichas com atributo de produto, e a fonte que faltava —
+**Ecommerce na Prática (Bruno de Oliveira), 211 vídeos, mercado brasileiro/Mercado Livre**.
+O que muda de v1 → v2 é que cada parâmetro abaixo tem **dado medido** (conferido na API em
+17/09) e não só intuição. Base entre colchetes.
+
+### 6.1 O que os brasileiros acrescentam (ENP = Ecommerce na Prática)
+
+| Parâmetro | Regra | Fonte | Dado que temos / conferido |
+|---|---|---|---|
+| **Demanda por categoria** | "Tendências do ML": os 40 termos mais buscados **por categoria e subcategoria** — nunca a tela inicial, que é genérica | ENP ×6 [DEM] | `GET /trends/MLB/{categoria}` responde (ex.: "cadeira gamer", "creatina growth", "bolsa térmica"). Produto cujo nome casa com termo em alta ganha Momento; e os termos viram pauta do garimpo do ML |
+| **Curva B** | Produto com muitos anunciantes = guerra de preço e margem zero; preferir "curva B" (menos concorrentes) | ENP [AFI] + memória "muito vendido no ML = commodity" | `vendedores` do ML: ≥ 5 confiança cheia, **> 30 = commodity, ×0,8** |
+| **Reputação do vendedor** | "termômetro" do vendedor decide confiança e ranqueamento | ENP ×3 [AFI] | `GET /users/{seller_id}` → `level_id 5_green`, `power_seller_status silver`. **Confiança do ML medida**, não só contagem |
+| **Frete grátis** | Embutir frete e anunciar grátis; frete grátis é o que mais converte | ENP ×4 [AFI], meticsmedia | `shipping.free_shipping` no anúncio do ML (true no termômetro). Ali: `ship_to_days`/frete no `product.query` — a conferir |
+| **Parcelamento** | "12× de R$ 10" vende mais que "R$ 120" | ENP [AFI] | ML: `installments` (veio null no produto testado; depende do anúncio). Cartão pode mostrar quando houver |
+| **Faixa de preço** | Primeiras vendas: R$ 8–50; impulso até ~R$ 150; alto ticket precisa de confiança | ENP [AFI], Jungle Scout, meticsmedia | v1 já tem; v2 escalona: ≤ 150 = 1,0 · 150–500 = 0,85 · 500–1.500 = 0,7 · > 1.500 = fora do site (fica na série) |
+| **Recorrência** | Consumíveis (bebida, suplemento, cartucho, fita), desgaste (camiseta, lâmpada), colecionáveis geram recompra | ENP "Produto Recorrente" ×4 [AFI] | Categoria/nome: Exypna (energético), suplemento, ração, lâmpada, filtro. **+0,15 no Rende** (LTV) |
+| **Teste de 30 dias** | 10–20 anúncios por 30 dias; **exclui o que não vendeu** | ENP ×3 [AFI] | Awin: clickref por produto (já no ar). Ali/ML: **falta clique por produto** → o site passa a anotar o clique no Supabase (`clique(produto_id)`) — igual à tabela `busca` que já existe |
+| **Kit / ticket** | Kits sobem o ticket; sugerir complementar no carrinho | ENP ×8 [AFI], motion | `combina` (vai bem com) já existe; vira "monte o kit" |
+| **Gatilhos honestos** | Escassez só real; prova social com número que se confere; "de/por" só verdadeiro | ENP ×5 [AFI] | Selos 3, 4, 5 (já no código) |
+| **Exclusões** | Gift card não é produto; "peça/acessório para X" não é X; livro fora | ENP, juiz de pertinência (16/09) | Lista de exclusão por nome/categoria no `awin --guardar` e no garimpo |
+
+### 6.2 A fórmula v2 (mesmos pesos; eixos mais medidos)
+
+```
+VITRINE = 35·Rende + 30·Confiança + 20·Momento + 15·Mostrável        (× faixa de preço)
+
+Rende      = ganho/ref_loja · faixa(preço) · (1 + 0,15 se recorrente)
+Confiança  = Ali: 0,6·nota + 0,4·volume (v1)
+             ML : 0,5·reputação_vendedor (5_green=1 · 4=0,6 · ≤3=0) + 0,3·vendedores(≥5) + 0,2·frete_grátis
+                  × 0,8 se vendedores > 30 (commodity)
+             Awin: reputação da loja (manual, 60 dias)  |  0 sem dado
+Momento    = v1 (queda medida + volume/vendedores subindo)
+             + 0,3 se o nome casa com termo em alta da categoria no ML (tendências)
+Mostrável  = views do post (quando houver) · imagem · frete grátis (+0,1)
+Piso       = v1 + exclusões (gift card, peça/acessório, livro)
+Kill       = 30 dias na vitrine sem clique (clickref no Awin; `clique` no site pros demais) → sai da vitrine
+```
+
+### 6.3 Lojas externas: os 2 blocos por categoria
+
+- **"achadinhos"**: ≤ R$ 150 · **"maior valor"**: R$ 150–1.500 · acima de 1.500: só série.
+- Por loja e por categoria, **top 300 por bloco** pela régua (o site não pesa; Nike inteira seria 4 MB).
+- Cada bloco com "ver mais" (já existe na página).
+- Enquanto Confiança/Momento das externas forem 0, a ordem é Rende × faixa; **o kill de 30 dias
+  e o clickref fazem a curadoria acontecer sozinha** a partir do 1º mês.
+
+### 6.4 Ordem de implementação (cada passo com guarda e medição)
+
+1. `clique` no Supabase (tabela + anotação no clique do cartão) — o dado que falta em Ali/ML.
+2. ML: reputação do vendedor + frete grátis na reconferência horária (`fichas_atual` já abre o anúncio).
+3. Tendências do ML por categoria no garimpo (pauta) e no Momento (casamento por nome).
+4. Faixa escalonada + recorrência + exclusões na régua; teste teoremático.
+5. `awin --guardar` com dois tetos e top 300 por bloco/categoria; blocos na página.
+6. Kill de 30 dias (lê clickref do relatório Awin e `clique` do Supabase).

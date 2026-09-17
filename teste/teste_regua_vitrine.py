@@ -84,8 +84,20 @@ ref = rv.referencias(dados)
 checar(rv.rende(dados[0], ref) == 1.0 and rv.rende(dados[2], ref) == 1.0,
        "o melhor de CADA loja tem Rende 1 (Kabum a R$ 2 nao e' medido pelo Ali a R$ 10)")
 checar(rv.rende(dados[1], ref) == 0.1 and rv.rende(dados[3], ref) == 0.25, "os outros, proporcionais")
-caro = {"loja": ALI, "ganho": 10.0, "preco": "R$ 191,33"}
-checar(rv.rende(caro, ref) == rv.IMPULSO_ACIMA, f"acima de R$ 150 rebaixa para {rv.IMPULSO_ACIMA}")
+# v2: faixa ESCALONADA (ENP + Jungle Scout): 150 / 500 / 1.500 / fora
+checar(rv.rende({"loja": ALI, "ganho": 10.0, "preco": "R$ 191,33"}, ref) == 0.85, "150-500 = x0,85")
+checar(abs(rv.rende({"loja": ALI, "ganho": 10.0, "preco": "R$ 999,00"}, ref) - 0.7) < 1e-9, "500-1.500 = x0,7")
+checar(rv.rende({"loja": ALI, "ganho": 10.0, "preco": "R$ 1.501,00"}, ref) == 0.0, "> 1.500 = 0 (e piso)")
+checar("acima de" in rv.piso({"loja": ALI, "nome": "x", "preco": "R$ 1.501,00"}), "> 1.500 e' piso nomeado")
+# v2: recorrencia +15% (LTV) — consumivel, desgaste, colecionavel
+checar(abs(rv.rende({"loja": ALI, "ganho": 5.0, "preco": "R$ 50,00", "nome": "Exypna Energy Drink"}, ref) - 0.575) < 1e-9,
+       "energetico = recorrente: 0,5 x 1,15")
+checar(rv.rende({"loja": ALI, "ganho": 10.0, "preco": "R$ 50,00", "nome": "Whey 900g"}, ref) == 1.0, "teto 1,0 mesmo recorrente")
+checar(not rv.recorrente({"nome": "Cafeteira eletrica"}), "⛔ 'cafeteira' NAO e' 'cafe' (borda de palavra)")
+# v2: exclusoes
+for nome, motivo in (("Gift Card Netshoes 150", "Gift Card"), ("Capa para iPhone 15", "Capa para"), ("Livro de receitas", "Livro")):
+    checar(rv.piso({"loja": "Kabum", "nome": nome, "preco": "R$ 50,00"}).startswith("excluido: " + motivo), f"{nome!r} excluido")
+checar(rv.piso({"loja": "Kabum", "nome": "Capa dura Kindle", "preco": "R$ 50,00"}) == "", "'capa dura' NAO e' 'capa para'")
 
 print()
 print("5. QUEM SUBIU NAO TEM MOMENTO DE QUEDA")

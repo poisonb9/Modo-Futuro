@@ -32,6 +32,7 @@ posicao). Piso e' "fora da vitrine", nunca "fora do dado".
 from __future__ import annotations
 
 import json
+import re
 from datetime import date
 from pathlib import Path
 
@@ -74,7 +75,38 @@ def referencias(dados: list[dict]) -> dict[str, float]:
 # venda continua alto, mas a VENDA e' menos provavel. Medido em 17/09: sem
 # isto o topo inteiro ficava entre R$ 134 e R$ 244.
 IMPULSO_TETO = 150.0
-IMPULSO_ACIMA = 0.7
+IMPULSO_ACIMA = 0.7          # (v1) mantido para quem le' o nome
+# ⭐ v2 (17/09): faixa ESCALONADA. ENP: primeiras vendas R$ 8-50, impulso ate'
+# ~150; alto ticket exige confianca. > 1.500 fica na serie, fora do site.
+FAIXAS = ((150.0, 1.0), (500.0, 0.85), (1500.0, 0.7))
+FAIXA_ACIMA = 0.0
+
+# ⭐ RECORRENCIA (ENP "Produto Recorrente", 4 fichas): consumivel, desgaste,
+# colecionavel geram recompra — e' LTV. +15% no Rende.
+RECORRENTE = re.compile(
+    r"energ[ée]tico|energy drink|suplemento|whey|creatina|vitamina|c[áa]psula|\bch[áa]\b|\bcaf[ée]\b|"
+    r"ra[çc][ãa]o|petisco|areia (de|para) gato|fralda|absorvente|len[çc]o|papel toalha|"
+    r"cartucho|toner|filtro|refil|l[âa]mpada|pilha|bateria|\bmeias?\b|camiseta b[áa]sica|"
+    r"fita (adesiva|isolante|dupla)|saco de lixo|esponja|detergente|sab[ãa]o|shampoo|"
+    r"condicionador|creme|hidratante|protetor solar|perfume|desodorante|escova de dente|"
+    r"l[âa]mina de barbear|colecion", re.I)
+
+# ⛔ EXCLUSOES (piso): nao e' produto, ou nao e' O produto (juiz de 16/09).
+EXCLUIR = re.compile(
+    r"gift ?card|cart[ãa]o presente|vale.?presente|\bcr[ée]dito\b|\brecarga\b|assinatura|"
+    r"^pe[çc]a\b|\bpe[çc]a (de )?reposi|\bacess[óo]rio para\b|\bcapa para\b|"
+    r"\bpel[íi]cula\b|\blivro\b|\be-?book\b|apostila", re.I)
+
+
+def faixa(preco: float) -> float:
+    for teto, fator in FAIXAS:
+        if preco <= teto:
+            return fator
+    return FAIXA_ACIMA
+
+
+def recorrente(p: dict) -> bool:
+    return bool(RECORRENTE.search(str(p.get("nome") or "")))
 
 
 def _preco(p: dict) -> float:
@@ -90,7 +122,10 @@ def rende(p: dict, ref: dict[str, float]) -> float:
     if r <= 0:
         return 0.0
     base = min(1.0, _f(p.get("ganho")) / r)
-    return base * (IMPULSO_ACIMA if _preco(p) > IMPULSO_TETO else 1.0)
+    base *= faixa(_preco(p))
+    if recorrente(p):
+        base = min(1.0, base * 1.15)
+    return base
 
 
 def confianca(p: dict) -> float:
@@ -181,6 +216,11 @@ def mostravel(p: dict) -> float:
 def piso(p: dict) -> str:
     """Motivo de ficar FORA da vitrine, ou "" se passa."""
     loja = p.get("loja") or ""
+    nome = str(p.get("nome") or "")
+    if EXCLUIR.search(nome):
+        return "excluido: " + (EXCLUIR.search(nome).group(0)).strip()
+    if _preco(p) > FAIXAS[-1][0]:
+        return f"acima de R$ {FAIXAS[-1][0]:.0f} (fica na serie)"
     if loja in LOJAS_COM_NOTA and p.get("nota") not in (None, "", 0, 0.0):
         if _f(p.get("nota")) < PISO_NOTA_ALI:
             return f"nota {_f(p.get('nota')):.0f}% < {PISO_NOTA_ALI:.0f}%"

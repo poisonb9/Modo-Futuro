@@ -101,7 +101,7 @@ def em_alta(nome: str, lista: list[str] | None = None) -> str:
 
 def pauta(nomes: list[str]) -> list[str]:
     """Termos em alta que nao casam com NENHUM nome do catalogo."""
-    ts = termos()
+    ts = [t for t in termos() if especifico(t)]
     usados = {em_alta(n, ts) for n in nomes}
     return [t for t in ts if t not in usados]
 

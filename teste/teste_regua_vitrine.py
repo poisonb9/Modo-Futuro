@@ -103,9 +103,10 @@ checar(abs(rv.rende({"loja": ALI, "ganho": 5.0, "preco": "R$ 50,00", "nome": "Ex
 checar(rv.rende({"loja": ALI, "ganho": 10.0, "preco": "R$ 50,00", "nome": "Whey 900g"}, ref) == 1.0, "teto 1,0 mesmo recorrente")
 checar(not rv.recorrente({"nome": "Cafeteira eletrica"}), "⛔ 'cafeteira' NAO e' 'cafe' (borda de palavra)")
 # v2: exclusoes
-for nome, motivo in (("Gift Card Netshoes 150", "Gift Card"), ("Capa para iPhone 15", "Capa para"), ("Livro de receitas", "Livro")):
+for nome, motivo in (("Gift Card Netshoes 150", "Gift Card"), ("Recarga de celular Vivo R$ 30", "Recarga de celular"), ("Livro de receitas", "Livro")):
     checar(rv.piso({"loja": "Kabum", "nome": nome, "preco": "R$ 50,00"}).startswith("excluido: " + motivo), f"{nome!r} excluido")
-checar(rv.piso({"loja": "Kabum", "nome": "Capa dura Kindle", "preco": "R$ 50,00"}) == "", "'capa dura' NAO e' 'capa para'")
+for nome in ("Cinto tonificador com recarga USB", "Capa para laptop 13 a 16", "Capa dura Kindle"):
+    checar(rv.piso({"loja": "Kabum", "nome": nome, "preco": "R$ 50,00"}) == "", f"⛔ {nome!r} E' produto, fica")
 
 print()
 print("5. QUEM SUBIU NAO TEM MOMENTO DE QUEDA")

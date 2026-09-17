@@ -92,12 +92,16 @@ RECORRENTE = re.compile(
     r"condicionador|creme|hidratante|protetor solar|perfume|desodorante|escova de dente|"
     r"l[âa]mina de barbear|colecion", re.I)
 
-# ⛔ EXCLUSOES (piso): nao e' produto, ou nao e' O produto (juiz de 16/09).
+# ⛔ EXCLUSOES (piso): o que NAO E' PRODUTO FISICO — gift card, credito,
+# pontos de jogo, assinatura, peca de reposicao, livro. ⚠️ Medido em 17/09:
+# "recarga" solto tirou o "cinto tonificador com recarga USB", e "capa para"
+# tirou a capa de laptop, que E' o produto no catalogo (o juiz de "acessorio
+# para X" vale na BUSCA por X, nao aqui). Ficou so' o que nunca e' produto.
 EXCLUIR = re.compile(
-    r"gift ?card|cart[ãa]o.?presente|vale.?presente|\bcr[ée]dito\b|\brecarga\b|assinatura|"
-    r"\bpoints?\b|\bpontos\b|\bgold\b|\bgems?\b|\bcoins?\b|\bmoedas?\b|v-?bucks|robux|"
-    r"^pe[çc]a\b|\bpe[çc]a (de )?reposi|\bacess[óo]rio para\b|\bcapa para\b|"
-    r"\bpel[íi]cula\b|\blivro\b|\be-?book\b|apostila", re.I)
+    r"gift ?card|cart[ãa]o.?presente|vale.?presente|\bcr[ée]ditos?\b|"
+    r"recarga (de )?(celular|tim|vivo|claro|oi)\b|assinatura|"
+    r"\bpoints?\b|\bpontos\b|\bgold\b|\bgems?\b|\bcoins?\b|\bmoedas? virtua|v-?bucks|robux|"
+    r"^pe[çc]a\b|\bpe[çc]a (de )?reposi|\blivro\b|\be-?book\b|apostila", re.I)
 # ⛔ e pela CATEGORIA do feed (Kabum: "Gift Card" com nomes como "2800 Points")
 EXCLUIR_CATEGORIA = re.compile(r"gift ?card|vale|cart[ãa]o.?presente|assinatura|servi[çc]o", re.I)
 

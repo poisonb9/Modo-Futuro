@@ -453,14 +453,26 @@ def cortar_bloco(prods: list[dict], k: int = POR_BLOCO) -> list[dict]:
     rv.pontuar(cartoes)
     vivos = [c for c in cartoes if not c.get("vitrine_fora")]
     vivos.sort(key=lambda c: -float(c.get("vitrine_nota") or 0))
+    # ⛔ MEDIDO EM 17/09: so' por categoria, o bloco "ate' R$ 150" da Clovis
+    # saiu 100% entre R$ 100-150 — a regua nas externas e' comissao x preco,
+    # entao "melhor" era "mais caro da faixa", e 4.366 itens abaixo de R$ 100
+    # ficaram fora. O rodizio e' por categoria E por terco de preco do bloco.
+    # ⚠️ tercos do INTERVALO de preco (min..max), nao quantis: com quantis a
+    # Nike (767 de 932 entre R$ 100-150) continuava 97% acima de R$ 100.
+    lo = min((c["preco"] for c in vivos), default=0.0)
+    hi = max((c["preco"] for c in vivos), default=0.0)
+    passo = (hi - lo) / 3 or 1.0
+
+    def _terco(c):
+        return min(2, int((c["preco"] - lo) / passo))
     filas: dict[str, list] = {}
     for c in vivos:
-        filas.setdefault(_categoria_raiz(c), []).append(c)
+        filas.setdefault((_categoria_raiz(c), _terco(c)), []).append(c)
     saida: list[dict] = []
     while len(saida) < k and any(filas.values()):
-        for cat in list(filas):
-            if filas[cat] and len(saida) < k:
-                saida.append(filas[cat].pop(0))
+        for chave in list(filas):
+            if filas[chave] and len(saida) < k:
+                saida.append(filas[chave].pop(0))
     chaves = {"vitrine_nota", "vitrine_fora", "ganho"}
     return [{k2: v for k2, v in c.items() if k2 not in chaves} for c in saida]
 

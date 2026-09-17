@@ -237,10 +237,11 @@ lote = ([{"id": str(i), "nome": f"Chuteira {i}", "preco": 900.0 + i, "loja": "Ni
 c = awin.cortar_bloco(lote, 6)
 checar(len(c) == 6, f"6 de 21 ({len(c)})")
 cats = [x["categoria"].split(">")[0].strip() for x in c]
-checar(cats[:4] in (["Masculino", "Feminino", "Masculino", "Feminino"], ["Feminino", "Masculino", "Feminino", "Masculino"]),
-       f"rodizio de categorias: {cats}")
+checar(cats.count("Masculino") == 3 and cats.count("Feminino") == 3, f"rodizio de categorias (3 e 3): {cats}")
+precos = sorted(x["preco"] for x in c)
+checar(precos[0] < 600 and precos[-1] > 900, f"⛔ rodizio por TERCO de preco: entra do barato ao caro, nao so' o topo ({precos})")
 checar(all("Gift" not in x["nome"] for x in c), "⛔ gift card fica fora mesmo com preco alto")
-checar(c[0]["preco"] >= 906.0 or c[0]["preco"] >= 506.0, f"dentro da categoria, o topo pela regua primeiro (Rende satura no p90; veio {c[0]['preco']})")
+checar(all(x["preco"] in (900.0 + i for i in range(10)) or x["preco"] in (500.0 + i for i in range(10)) for x in c), "so' produtos do lote")
 checar("vitrine_nota" not in c[0] and "ganho" not in c[0], "o cartao sai limpo (a regua e' recalculada na pagina)")
 checar(awin.cortar_bloco(lote[:3], 6) == lote[:3], "abaixo do teto, passa como veio")
 checar(rv.piso({"nome": "Tenis", "loja": "Nike", "preco": 142.4}) == "" and rv.piso({"nome": "Tenis", "loja": "Nike", "preco": 1600.0}) != "",

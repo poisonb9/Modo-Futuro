@@ -163,8 +163,11 @@
      controle nomeia a acao no lugar certo (Impeccable: "controls name their
      action"), uma vez por produto, sem frase repetida a cada 6 s. */
   .vivo-dica { display: none; }
-  .vivo-nome { background: linear-gradient(var(--ouro-claro), var(--ouro-claro)) no-repeat 50% 100% / 0 2px; transition: background-size .45s cubic-bezier(.2,.8,.2,1); border-radius: 2px; }
-  .vivo-nome.pronto { background-size: 100% 2px; }
+  /* 18/09, Bryan: o traco de fundo virava uma REGUA entre o produto e o
+     preco (a caixa e' block, o fundo cobre a largura toda). Agora e'
+     sublinhado de texto: acompanha so' as letras, linha a linha. */
+  .vivo-nome { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: 4px; transition: text-decoration-color .45s; }
+  .vivo-nome.pronto { text-decoration-color: var(--ouro-claro); }
   .cursor {
     display: inline-block; width: 2px; height: 1em; margin-left: 1px;
     background: var(--ouro); vertical-align: -2px;

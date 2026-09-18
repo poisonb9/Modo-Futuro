@@ -34,6 +34,24 @@ do mesmo produto, a de nota mais alta.
 
 ⚠️ Falha ABERTA: sem nota (rede, chave) fica a principal. Foto pior e' feia;
 cartao sem foto e' quebrado.
+
+## ⛔ NAO ESTA' LIGADO AO CARTAO — reprovou no caso negativo (18/09/2026, 13:20 UTC)
+
+Com as fotos reais (rodada 13:11, 152 produtos com `imagens`), o ranking
+dentro do mesmo anuncio foi olhado em 18 produtos, 8 trocas:
+
+    MELHOR  luva (banner 22 cores -> a luva)  . carregador (banner -> na tomada)
+            ventosa (STRONG MAGNETIC -> produto no branco)
+    PIOR    teclado -> escolheu a PLACA DE POSICIONAMENTO (outro produto)
+            oculos -> escolheu a foto com texto "One-handed operation"
+            bolsa  -> escolheu a variante PRETA de uma bolsa marrom
+    NEUTRO  tesla (banner -> outro banner) . fone ("Smaller" -> "Official")
+
+3 em 8 erradas, e duas delas mostram OUTRA COISA no cartao — pior que o
+banner. A nota mede "parece foto de produto limpa" e nao "e' ESTE produto
+sem texto". O que falta e' (a) fidelidade ao produto (o vetor RECORTADO da
+dedupe, cos >= 0,93 contra a principal) E (b) um medidor de texto de
+verdade (OCR: area coberta por letras). Sem os dois, fica a principal.
 """
 from __future__ import annotations
 

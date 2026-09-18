@@ -339,6 +339,27 @@ def _comissao_awin(loja: str) -> float:
     return _awin.comissao_de(loja)
 
 
+def _nome_externo(nome: str) -> str:
+    """O nome do feed sem o codigo de SKU.
+
+    ⭐ reparo 3 (18/09/2026, MAESTROS_ESTETICA §autopsia): "Kit com 3 Pares de
+    Meias Sortidas Lupo - 03225 PRETO 41/44", "... - KSHPR256". O Ali passa
+    pelo `nome_produto` (modelo); a externa nao, e o cartao mostrava SKU. Aqui
+    e' REGRA, sem cota: cai o " - <codigo>..." do fim, o token de SKU
+    (>= 6 chars com letras E digitos, ex.: KSHPR256, FB1362) e numero de
+    6+ digitos (8513313). Fica o que e' especificacao curta (ABNT2, 700VA,
+    M280) e a variante (PRETO 34) — na Clovis cada variante e' um produto.
+    """
+    import re as _re
+    n = str(nome or "")
+    n = _re.sub(r"\s+-\s+\d\S*.*$", "", n)
+    n = _re.sub(r"\s+-\s+[A-Z0-9-]{6,}\s*$", "", n)
+    n = _re.sub(r"\b(?=[A-Z0-9-]{6,}\b)(?=[A-Z0-9-]*\d{2})(?=[A-Z0-9-]*[A-Z]{2})[A-Z0-9-]+\b", "", n)
+    n = _re.sub(r"\b\d{6,}\b", "", n)
+    n = _re.sub(r"\s{2,}", " ", n).strip(" -–—·,")
+    return n or str(nome or "")
+
+
 def produtos_externos() -> dict[str, dict]:
     """{categoria: {"arquivo", "passo", "produtos": [cartoes]}} — o que vai
     em arquivo separado. {} quando nao ha' instantaneo valido.
@@ -407,7 +428,7 @@ def produtos_externos() -> dict[str, dict]:
         d = {"id": pid, "preco": f"R$ {preco:.2f}".replace(".", ",")}
         saida.setdefault(cat, {"arquivo": arquivo, "passo": passo,
                                "produtos": []})["produtos"].append({
-            "nome": p["nome"],
+            "nome": _nome_externo(p["nome"]),
             "preco": d["preco"],
             "link": p["link"],
             "imagem": p.get("imagem", ""),
@@ -542,6 +563,14 @@ def economia_radar(dias: int = 30) -> dict:
         dia = (date.today() - timedelta(days=k)).isoformat()
         total, n = 0.0, 0
         for _i, ds in por_dia.items():
+            # ⛔ SO' O QUE O RADAR VIGIA (18/09/2026). A serie das lojas externas
+            # vem do FEED, uma leitura por dia, e o feed da Kabum trocou
+            # R$ 15.599 por R$ 5.999 no mesmo id de um dia pro outro (variante
+            # ou "de"/"por"). Isso levou o multometro de R$ 3.602 a R$ 128.907
+            # numa tarde — erro a nosso favor, o que ninguem contesta. Queda
+            # "encontrada pelo radar" e' a que o radar reconfere de hora em hora.
+            if str(_i).startswith("awin:"):
+                continue
             ate = [v for q, v in ds.items() if q <= dia]
             if len(ate) < 2:
                 continue

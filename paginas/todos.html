@@ -375,7 +375,7 @@
   /* o numero fica a' direita, alinhado — vira coluna e da' pra comparar */
   .opcao .n {
     margin-left: auto; padding-left: 10px; flex: 0 0 auto;
-    font: 500 11.5px/1 var(--mono); color: var(--fraco);
+    font: 500 11.5px/1 var(--mono); color: var(--fraco); opacity: .7;
   }
   .opcao[aria-selected="true"]::before {
     content: ""; width: 5px; height: 5px; border-radius: 50%;
@@ -429,7 +429,14 @@
   }
   .foto { position: relative; aspect-ratio: 1; background: var(--linha); }
   .item.sem-foto { display: none; }
-  .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* ⭐ reparo 1 (18/09): foto branca dentro de cartao branco "flutuava" sem
+     borda no tema claro. Agora a foto tem respiro e cabe inteira (contain)
+     sobre um fundo neutro — a moldura e' a mesma em toda foto, seja qual
+     for o fundo que o lojista usou. */
+  .foto { background: #fff; }
+  .foto img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; box-sizing: border-box; }
+  .foto:not(.ok) { background: var(--linha); animation: esqueleto 1.6s ease-in-out infinite; }
+  @keyframes esqueleto { 50% { opacity: .55; } }
   .foto::before {
     content: ""; position: absolute; inset: 0 0 auto 0; height: 46px;
     background: linear-gradient(rgba(0,0,0,.24), rgba(0,0,0,0));
@@ -467,7 +474,7 @@
   /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
   .sinais > .nota:only-child { margin-left: 0; }
   .vendeu {
-    font: 500 11px/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0;
+    font: 500 11px/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0; white-space: nowrap;
   }
   .promo {
     display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
@@ -574,7 +581,7 @@
   }
   /* o involucro reserva 4 px a` direita: o ponto fica em cima do fim da
      linha e nunca e' cortado pela borda do cartao */
-  .serie-wrap { position: relative; margin-top: 7px; padding-right: 4px; }
+  .serie-wrap { position: relative; margin-top: 2px; padding-right: 4px; }
   .serie-wrap .agora {
     position: absolute; width: 5px; height: 5px; border-radius: 50%;
     background: var(--fraco); transform: translate(-50%, -50%);
@@ -582,7 +589,7 @@
     margin-left: -2px;
   }
   .serie-wrap.baixou .agora { background: var(--verde); }
-  .serie { display: block; width: 100%; height: 22px; }
+  .serie { display: block; width: 100%; height: 14px; }
   .serie .linha {
     fill: none; stroke: var(--fraco); stroke-width: 1.4;
     stroke-linejoin: round; stroke-linecap: round; opacity: .75;
@@ -1082,7 +1089,9 @@
     if ((p.queda || 0) >= 5) {
       foto.appendChild(el("span", "caiu", "caiu " + Math.round(p.queda) + "%"));
     }
-    if (!(p.pontos >= 2)) {
+    // ⭐ reparo 2 (18/09): "novo" so' no catalogo proprio — na externa tudo
+    // e' "novo" no primeiro dia, e o verde e' um segundo acento sem decisao.
+    if (!(p.pontos >= 2) && !externa(p.canal)) {
       foto.appendChild(el("span", "novo", "novo"));
     }
     // ⭐ O FOGUINHO: so' a chama, no canto de baixo da foto, nos poucos que
@@ -1114,6 +1123,7 @@
       });
       img.alt = p.nome || "";
       img.loading = "lazy";
+      img.addEventListener("load", function () { foto.classList.add("ok"); }, { once: true });
       img.decoding = "async";
       img.width = 350; img.height = 350;
       foto.appendChild(img);
@@ -1195,9 +1205,9 @@
       // ruido). E' o numero de vendas "mais real" que o Bryan pediu de
       // volta — nao briga com o "10.000+" da loja porque nao e' o total.
       if (temVendeu) {
-        var vend = el("span", "vendeu", "+" + p.vendeu[0].toLocaleString("pt-BR") +
-          " vendidos desde " + p.vendeu[1]);
-        vend.title = "quanto o volume de vendas na loja cresceu desde que eu acompanho este produto";
+        var vend = el("span", "vendeu", "+" + p.vendeu[0].toLocaleString("pt-BR") + " vendidos");
+        vend.title = "quanto o volume de vendas na loja cresceu desde " + p.vendeu[1] +
+          ", quando comecei a acompanhar este produto";
         sinais.appendChild(vend);
       }
       // ⭐ "+2 vendedores desde 16/09" quando cresceu; "13 vendedores na
@@ -1755,12 +1765,9 @@
     // externas ficam atras do menu Loja, mas sao achadinhos do mesmo jeito.
     // Com filtro ou busca, volta a ser o que esta' na tela.
     var semFiltro = !canal && !loja && !normal(busca.value.trim());
-    var total = lista.length;
-    if (semFiltro) {
-      Object.keys(EXTERNOS).forEach(function (n) { total += EXTERNOS[n].n || 0; });
-    }
-    contagem.textContent = total === 1
-      ? "1 achadinho" : total.toLocaleString("pt-BR") + " achadinhos";
+    contagem.textContent = semFiltro ? "" : (lista.length === 1
+      ? "1 achadinho" : lista.length.toLocaleString("pt-BR") + " achadinhos");
+    contagem.style.display = semFiltro ? "none" : "";
   }
 
   // ⚠️ FECHAR AO TOCAR FORA. Sem isto o painel fica aberto por cima da
@@ -1987,12 +1994,19 @@
 
     // ⚠️ CADA NUMERO SO' APARECE SE EXISTIR. Prova social com zero prova o
     // contrario do que pretende.
-    var linhas = [[String(PRODUTOS.length), "achadinhos de pé agora"]];
+    // ⭐ O CATALOGO INTEIRO (Bryan, 18/09): o numero do heroi e' a soma com as
+    // lojas externas — e a linha "N achadinhos" acima da grade so' aparece
+    // com filtro/busca, senao dizia a mesma coisa duas vezes. Rotulos
+    // curtos: "achadinhos de pe' agora" e "vendidos nas lojas parceiras"
+    // quebravam em duas linhas no iPhone (foto do Bryan, 18/09).
+    var totalCatalogo = PRODUTOS.length;
+    Object.keys(EXTERNOS).forEach(function (n) { totalCatalogo += EXTERNOS[n].n || 0; });
+    var linhas = [[totalCatalogo.toLocaleString("pt-BR"), "achadinhos"]];
     // ⚠️ SO' O NUMERO: "32 de 148" quebrava em duas linhas no celular e
     // esticava o painel (Bryan, 16/09). O 148 ja' esta' na primeira caixa.
     if (caiu) { linhas.push([String(caiu), "baixaram de preço"]); }
     if (vendas > 0) {
-      linhas.push([vendas.toLocaleString("pt-BR"), "vendidos nas lojas parceiras"]);
+      linhas.push([vendas.toLocaleString("pt-BR"), "vendidos nas lojas"]);
     } else if (precos.length) {
       linhas.push(["R$ " + Math.min.apply(null, precos).toFixed(2).replace(".", ","),
                    "o mais barato de hoje"]);

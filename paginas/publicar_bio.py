@@ -647,13 +647,22 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     externos = produtos_externos()
     # ⚠️ O HTML LEVA SO' O INDICE das externas: nome, arquivo, quantos e o
     # passo. Os cartoes ficam no arquivo ao lado.
+    # ⭐ 18/09: alem da contagem por area (`cats`), os CLIQUES de 30 dias por
+    # loja e por area (`cliques`, `cats_cliques`) — e' por eles que os menus
+    # Categoria e Loja se ordenam (Bryan: "em primeiro as que mais vendem";
+    # venda ainda nao ha' pra medir, clique e' o sinal que temos).
     indice = {}
     for cat, b in externos.items():
         cats: dict[str, int] = {}
+        cats_cl: dict[str, int] = {}
+        cl = 0
         for x in b["produtos"]:
             cats[x["canal"]] = cats.get(x["canal"], 0) + 1
+            cats_cl[x["canal"]] = cats_cl.get(x["canal"], 0) + int(x.get("cliques_30") or 0)
+            cl += int(x.get("cliques_30") or 0)
         indice[cat] = {"arquivo": b["arquivo"], "n": len(b["produtos"]),
-                       "passo": b["passo"], "cats": cats}
+                       "passo": b["passo"], "cats": cats,
+                       "cliques": cl, "cats_cliques": cats_cl}
     arquivos = {b["arquivo"]: json.dumps(
         {"categoria": cat, "produtos": b["produtos"]}, ensure_ascii=False)
         for cat, b in externos.items()}

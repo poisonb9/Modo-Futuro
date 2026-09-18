@@ -1905,9 +1905,17 @@
       desenhar();
     }, atual !== "todos"));
 
-    var canais = {};
+    // ⭐ ORDEM DOS MENUS (Bryan, 18/09): primeiro quem mais VENDE. Venda
+    // ainda nao ha' pra medir; o sinal que temos e' o clique de 30 dias
+    // (Supabase), recalculado a cada publicacao — uma vez por dia, nao a
+    // cada visita: menu que muda de lugar a cada abertura quebra o "eu vi
+    // isso ali ontem" (YC: padroes estabelecidos). Empate: quantidade.
+    var canais = {}, canaisCliques = {};
     PRODUTOS.forEach(function (p) {
-      if (p.canal) { canais[p.canal] = (canais[p.canal] || 0) + 1; }
+      if (p.canal) {
+        canais[p.canal] = (canais[p.canal] || 0) + 1;
+        canaisCliques[p.canal] = (canaisCliques[p.canal] || 0) + (p.cliques_30 || 0);
+      }
     });
     // ⚠️ A EXTERNA ENTRA NO MENU ANTES DE SER BAIXADA, com a contagem que o
     // publicador mediu — e' o unico lugar onde a pessoa descobre que ela
@@ -1918,11 +1926,14 @@
     // Nunca o nome da loja aqui — loja e' o menu Loja.
     Object.keys(EXTERNOS).forEach(function (c) {
       if (EXTERNO_CARREGADO[c]) { return; }
-      var cats = EXTERNOS[c].cats || {};
-      Object.keys(cats).forEach(function (k) { canais[k] = (canais[k] || 0) + cats[k]; });
+      var cats = EXTERNOS[c].cats || {}, ccl = EXTERNOS[c].cats_cliques || {};
+      Object.keys(cats).forEach(function (k) {
+        canais[k] = (canais[k] || 0) + cats[k];
+        canaisCliques[k] = (canaisCliques[k] || 0) + (ccl[k] || 0);
+      });
     });
     var areas = Object.keys(canais).sort(function (a, b) {
-      return canais[b] - canais[a];
+      return ((canaisCliques[b] || 0) - (canaisCliques[a] || 0)) || (canais[b] - canais[a]);
     });
     if (areas.length) {
       // ⚠️ "todas" NAO CONTA A EXTERNA: ela nunca aparece no rolar de
@@ -1949,18 +1960,25 @@
 
     // ⭐ LOJA — mesmo recorte da grade na contagem (categoria escolhida
     // conta so' dentro dela). Externa ainda nao baixada conta pelo indice.
-    var lojas = {};
+    var lojas = {}, lojasCliques = {};
     PRODUTOS.forEach(function (p) {
       if (!p.loja) { return; }
       if (canal && p.canal !== canal) { return; }
       lojas[p.loja] = (lojas[p.loja] || 0) + 1;
+      lojasCliques[p.loja] = (lojasCliques[p.loja] || 0) + (p.cliques_30 || 0);
     });
+    // ⭐ loja externa ainda nao baixada: entra com a contagem da AREA escolhida
+    // (canal e' area desde 18/09, nunca o nome da loja)
     Object.keys(EXTERNOS).forEach(function (c) {
-      if (!lojas[c] && !EXTERNO_CARREGADO[c] && (!canal || canal === c)) {
-        lojas[c] = EXTERNOS[c].n || 0;
-      }
+      if (lojas[c] || EXTERNO_CARREGADO[c]) { return; }
+      var n = canal ? ((EXTERNOS[c].cats || {})[canal] || 0) : (EXTERNOS[c].n || 0);
+      if (!n) { return; }
+      lojas[c] = n;
+      lojasCliques[c] = canal ? ((EXTERNOS[c].cats_cliques || {})[canal] || 0) : (EXTERNOS[c].cliques || 0);
     });
-    var nomesLoja = Object.keys(lojas).sort(function (a, b) { return lojas[b] - lojas[a]; });
+    var nomesLoja = Object.keys(lojas).sort(function (a, b) {
+      return ((lojasCliques[b] || 0) - (lojasCliques[a] || 0)) || (lojas[b] - lojas[a]);
+    });
     if (nomesLoja.length > 1 || loja) {
       var deLoja = [{ id: "", rotulo: "Todas", n: Object.keys(lojas).reduce(function (t, k) { return t + lojas[k]; }, 0) }];
       nomesLoja.forEach(function (l) { deLoja.push({ id: l, rotulo: l, n: lojas[l] }); });

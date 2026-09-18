@@ -28,9 +28,14 @@ $env:PATH = 'C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\G
 $ErrorActionPreference = 'Continue'
 # 1. o que o radar escreveu, no remoto (sem tocar na arvore local ainda)
 & git fetch -q origin main 2>&1 | Out-Null
+# ⭐ e tambem o CODIGO da pagina/publicador (18/09): edicao no cartao vai ao
+# ar sozinha, sem ninguem publicar a mao.
 $agora = (& git rev-parse 'origin/main:estado/precos_agora.json' 2>$null) + ' ' +
          (& git rev-parse 'origin/main:estado/awin_catalogo.json' 2>$null) + ' ' +
-         (& git rev-parse 'origin/main:estado/produtos_publicados.jsonl' 2>$null)
+         (& git rev-parse 'origin/main:estado/produtos_publicados.jsonl' 2>$null) + ' ' +
+         (& git rev-parse 'origin/main:paginas/todos.html' 2>$null) + ' ' +
+         (& git rev-parse 'origin/main:paginas/publicar_bio.py' 2>$null) + ' ' +
+         (& git rev-parse 'origin/main:estado/fotos_ocr.json' 2>$null)
 $antes = if (Test-Path $marca) { Get-Content $marca -Raw } else { '' }
 if ($agora.Trim() -eq $antes.Trim()) {
     # nada mudou: uma linha curta no log a cada 30 min seria ruido; so' grava a cada hora cheia

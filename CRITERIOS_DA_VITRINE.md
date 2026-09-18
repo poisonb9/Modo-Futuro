@@ -227,3 +227,55 @@ Kill       = 30 dias na vitrine sem clique (clickref no Awin; `clique` no site p
 4. Faixa escalonada + recorrência + exclusões na régua; teste teoremático.
 5. `awin --guardar` com dois tetos e top 300 por bloco/categoria; blocos na página.
 6. Kill de 30 dias (lê clickref do relatório Awin e `clique` do Supabase).
+
+---
+
+## 7. Máquina de vendas — o que não estamos vendo (18/09/2026, 3ª investigação)
+
+Terceira passada, agora sobre **conversão e diferencial**, não sobre produto: 15.789 fichas de
+venda, 15 temas. Fontes que pesaram: Ecommerce na Prática (Brasil), Hormozi, motion (criativo),
+Saraev (copy), Iman Gadzhi. Abaixo, só o que **não fazemos** — ordenado pelo que os mentores mais
+repetem e pelo que temos dado para executar.
+
+### 7.1 O que não sabemos que não sabemos (os buracos de medição)
+
+| Buraco | Por que importa | Fonte |
+|---|---|---|
+| **Não sabemos qual vídeo gerou qual clique.** O link da bio é por canal; o clique no site não carrega o vídeo de origem | motion: "alinhe oferta, audiência e proposta do anúncio ao checkout"; sem isso não há como escalar o criativo vencedor | motion ×4 |
+| **Não sabemos o prazo de entrega** de nada (Ali 15–40 dias vs ML 2–5) e é a objeção nº 1 de importado | ENP: frete/prazo é o que mais converte; "responda a pergunta antes dela" | ENP ×6 |
+| **Não temos uma lista que seja nossa.** 98,7 % do tráfego é "Para Você" do TikTok; o canal do Telegram é o único ativo próprio | Hormozi: e-mail front-end; ENP: lista de transmissão segmentada por produto | ENP ×12, Hormozi ×3 |
+| **Não medimos a velocidade da página** (PageSpeed) — nunca rodou | ENP, createaprowebsite: PSI antes de qualquer campanha | 3 |
+| **Não temos prova social nossa** — só a da loja (% positivas). Zero "comprei e chegou" | Hormozi: loop de UGC (cliente → depoimento → anúncio); ENP: depoimento + bônus | 8 |
+| **Não lemos as objeções** que já estão nos comentários dos nossos vídeos | Hormozi: "extraia a objeção primária das transcrições e trate em 3–5 linhas"; ENP: FAQ no anúncio | 5 |
+
+### 7.2 Diferenciais que os mentores repetem e que dá para adotar
+
+| # | Diferencial | O que muda no site/anúncio | Dado/infra | Fonte |
+|---|---|---|---|---|
+| 1 | **Link do vídeo abre o produto do vídeo** (`?p=<id>&v=<video>`): quem veio do vídeo do pulverizador vê o pulverizador em 1º, com o mesmo gancho | topo da página troca pelo produto do vídeo; `clique_produto` ganha `video` | contra-capa já conta por canal; falta o parâmetro | motion, Saraev |
+| 2 | **"Frete grátis" e "chega em ~N dias"** no cartão | ML: `free_shipping` já no instantâneo (hoje só na régua); Ali: `ship_to_days` do `product.query` (a medir); Awin: `delivery_time` só Radiale/Exypna | ML pronto; Ali a medir | ENP |
+| 3 | **Objeções dos comentários viram 1 linha no cartão** ("é original?" → "loja oficial 8BitDo"; "demora?" → "chega em 12–25 dias") | ler comentários do TikTok dos nossos posts (`desempenho` já lê views) → modelo extrai objeção → linha honesta | cota de modelo pequena (1 post/produto) | Hormozi, ENP |
+| 4 | **"N pessoas de olho neste preço"** — o nº real de inscritos no avise-me do produto | escassez REAL (ENP: "nunca inventar escassez"); sobe com o próprio uso | `alertas.jsonl` | ENP ×5 |
+| 5 | **Reposição no tempo certo**: consumível (Exypna, whey, ração) ganha "lembrar em 30 dias" no avise-me | recompra sem anúncio; LTV | `alertas.py` + regex de recorrente | ENP "Produto Recorrente" ×4 |
+| 6 | **Loop de prova social nossa**: quem clicou recebe (Telegram, 20 dias depois) "chegou? manda a foto" → foto vira "quem comprou" no cartão, com brinde (cupom/achadinho) | única prova que ninguém copia | canal + avise-me já colhem chat_id | Hormozi ×3, ENP ×4 |
+| 7 | **3 opções lado a lado na categoria** (barato · o que mais rende · premium) — o premium ancora; o do meio vende | ENP "efeito chamariz"; Hormozi "âncora 10×" — é o argumento a favor do bloco "A partir de R$ 100" | dados já existem; é layout | ENP, Hormozi |
+| 8 | **Garantia de conferência**: "preço conferido hoje às 19:55 — se na loja estiver mais caro, me avisa" com botão | reversão de risco possível pra afiliado (não é reembolso, é promessa que cumprimos) | botão → Telegram do bot | Hormozi, Iman |
+| 9 | **Achadinho do dia**: 1 produto, 1 história (o vídeo embutido), 1 motivo medido — no topo, todo dia | Hormozi: "um canal, um produto, um avatar"; ENP: "produto estrela" | `desempenho` + série | Hormozi ×3 |
+| 10 | **Páginas de intenção**: "melhor balança digital 2026", "X vs Y" geradas da série (comparação real de preço/queda/nota) | tráfego do Google além do TikTok; a série é o conteúdo | índice estático já existe; gerar por categoria | ENP, meticsmedia, ferdycom |
+| 11 | **Checklist de copy por cartão** (Saraev): giving · micro-compromisso · prova social · autoridade · rapport · escassez — auditar cada cartão | hoje: giving ✓ (queda medida), social ✓ (%), escassez ✓ (Recorde), autoridade ✗, rapport ✗, micro ✗ | é auditoria + 2 linhas | Saraev |
+| 12 | **PageSpeed** medido e travado como guarda (≥ 80 mobile) | cada 1 s a menos converte mais; nunca medimos | PSI API grátis | ENP |
+
+### 7.3 O que os mentores dizem e NÃO cabe aqui (pra não perseguir)
+- Cupom/cashback próprio, frete grátis condicional, kit com desconto → são da **loja**, não do afiliado.
+- Parcelamento "12×" → a API não expõe; e só numa loja distorce a comparação (decisão de 18/09).
+- Tráfego pago → orgânico é a nossa vantagem (margem menor aceita — meticsmedia); primeiro medir o funil.
+
+### 7.4 Ordem sugerida (o que mais aproxima da venda por menos código)
+1. **`?p=<id>&v=<vídeo>` na bio + `video` no clique** — fecha o buraco nº 1 e habilita o teste de criativo (motion).
+2. **Frete grátis (ML) no cartão** — dado já no instantâneo.
+3. **"N de olho" + "lembrar em 30 dias"** no avise-me — reutiliza tudo que existe.
+4. **Prazo do Ali** (`ship_to_days`) — medir a API; se der, é a maior objeção resolvida.
+5. **Achadinho do dia** com vídeo embutido — 1 layout.
+6. **Objeções dos comentários** → linha no cartão — precisa de leitor de comentários.
+7. **Loop de prova social** (Telegram 20 dias depois) — precisa do avise-me rodando.
+8. **Páginas de intenção** — SEO, resultado em semanas.

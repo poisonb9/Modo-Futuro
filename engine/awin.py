@@ -167,6 +167,22 @@ def link(destino: str, id_anunciante: int) -> str:
             f"&awinaffid={pid}&ued={quote(destino, safe='')}")
 
 
+def _ficha_de_inclusao(nome: str) -> str:
+    """'7,0% · 3 feeds, 1.234 produtos' ou '7,0% · SEM FEED'. Falha de
+    leitura vira '(comissao/feed nao lidos)': o aviso de aprovacao nao pode
+    morrer por causa do enfeite."""
+    try:
+        com = comissoes_da_api().get(nome)
+        meus = [f for f in feeds() if str(f.get("Advertiser Name") or "") == nome]
+        n = sum(int(str(f.get("No of products") or "0").replace(".", "") or 0) for f in meus)
+        c = f"{com:.1f}%".replace(".", ",") if com is not None else "comissao ?"
+        milhar = f"{n:,}".replace(",", ".")
+        return c + " · " + (f"{len(meus)} feed(s), {milhar} produtos"
+                            if meus else "SEM FEED (nao da' pra por produto no site)")
+    except Exception as e:  # noqa: BLE001 — enfeite, nao pode derrubar o aviso
+        return f"(comissao/feed nao lidos: {type(e).__name__})"
+
+
 def _instantaneo() -> dict:
     """{nome do anunciante: relacao} pra TODAS as relacoes, agora."""
     return {x.get("name") or str(x.get("id")): rel
@@ -217,8 +233,13 @@ def vigiar(avisar: bool = True) -> list[str]:
         if rel_antes is None:
             linhas.append(f"NOVO      {nome} ({rel})")
         elif rel == "joined":
-            # ⭐ A unica linha que vale dinheiro hoje.
-            linhas.append(f"APROVADO  {nome}  <- da pra publicar produto dele")
+            # ⭐ A unica linha que vale dinheiro hoje. Desde 18/09 diz TAMBEM
+            # o que decide a inclusao (Bryan: "a Awin aceitou mais parceiros,
+            # vamos avaliar e incluir"): comissao e se ha' feed de produto.
+            # Medido em 18/09: Venancio aprovada a 7% mas SEM feed (nao da'
+            # pra por produto no site); Ali via Awin a 0,85% contra 9% do
+            # Portals. Sem esses dois numeros a linha manda olhar a toa.
+            linhas.append(f"APROVADO  {nome}  {_ficha_de_inclusao(nome)}")
         else:
             linhas.append(f"mudou     {nome}: {rel_antes} -> {rel}")
     for nome in sorted(set(antes) - set(agora)):

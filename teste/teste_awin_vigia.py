@@ -26,6 +26,13 @@ def fingir(d):
     awin._instantaneo = lambda: d
 
 
+# ⭐ 18/09: a linha APROVADO traz comissao e feed; aqui as duas leituras sao
+# fingidas (a de verdade bate na API). Nike com feed, Carrefour sem.
+awin.comissoes_da_api = lambda: {"Nike BR": 7.5, "Carrefour BR": 3.0}
+awin.feeds = lambda: [{"Advertiser Name": "Nike BR", "No of products": "932"},
+                      {"Advertiser Name": "Nike BR", "No of products": "68"}]
+
+
 print("1. NEGATIVO - a estreia nao avisa nada")
 # 28 pendentes viram 28 "novidades" se a linha de base nao existir. Um aviso
 # que grita na estreia ensina a ignorar o aviso.
@@ -43,6 +50,12 @@ fingir({"Nike BR": "joined", "Carrefour BR": "pending"})
 linhas = awin.vigiar(avisar=False)
 checar(len(linhas) == 1, "so' a que mudou entra")
 checar("APROVADO" in linhas[0] and "Nike BR" in linhas[0], "diz APROVADO Nike BR")
+checar("7,5%" in linhas[0] and "2 feed(s), 1.000 produtos" in linhas[0], "e diz comissao + feed: " + linhas[0])
+checar("SEM FEED" in awin._ficha_de_inclusao("Carrefour BR"), "caso negativo: loja sem feed e' dita SEM FEED")
+awin.feeds = estoura_feeds = lambda: (_ for _ in ()).throw(RuntimeError("x"))
+checar("nao lidos" in awin._ficha_de_inclusao("Nike BR"), "falha na leitura do feed nao derruba o aviso")
+awin.feeds = lambda: [{"Advertiser Name": "Nike BR", "No of products": "932"},
+                      {"Advertiser Name": "Nike BR", "No of products": "68"}]
 
 print("")
 print("4. recusa e anunciante novo tambem aparecem")

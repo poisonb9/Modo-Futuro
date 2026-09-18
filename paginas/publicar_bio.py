@@ -273,6 +273,9 @@ EXTERNAS = {
     "Kabum BR": ("Kabum", "kabum.json", 50),
     "Lacoste BR": ("Lacoste", "lacoste.json", 50),
     "Shark-Ninja BR": ("Shark Ninja", "sharkninja.json", 50),
+    # aprovados em 18/09 (Bryan: "Arno cozinha, Camilovers beleza")
+    "Arno BR": ("Arno", "arno.json", 50),
+    "Camilovers BR": ("Camilovers", "camilovers.json", 50),
 }
 # ⛔ LOJAS APROVADAS QUE NAO ENTRAM NO SITE (Bryan, 18/09/2026, resposta ao
 # ponto 4 da AUDITORIA: "dispersao — Carraro/Leveros/Radiale sem fit"; "OK,
@@ -952,6 +955,8 @@ def produtos_todos() -> list[dict]:
             # ⭐ so' ML (regua v2): frete gratis e reputacao do vendedor, do
             # instantaneo horario. Ausentes = sem dado, nunca "ruim".
             "frete_gratis": bool((agora.get(str(d.get("id"))) or {}).get("frete_gratis", False)),
+            # ⭐ envio (so' ML por enquanto): {"full": bool, "de": "SP"}
+            "envio": (agora.get(str(d.get("id"))) or {}).get("envio") or {},
             # ⭐ termo em alta no Mercado Livre contido no nome (regua v2) ou ""
             "em_alta": _tm.em_alta(_nome_bonito(d), _termos_alta),
             # ⭐ #3 (18/09): quantas pessoas pediram aviso (numero real) e se e'

@@ -1250,7 +1250,9 @@
     // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
     var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
     var temFrete = !!p.frete_gratis;
-    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete) {
+    // ⭐ ENVIO (18/09): Full = chega rapido; senao, de onde sai. So' o ML da'.
+    var temEnvio = !!(p.envio && (p.envio.full || p.envio.de));
+    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete || temEnvio) {
       var sinais = el("div", "sinais");
       if (temRecorde) {
         var rec = el("span", "recorde");
@@ -1297,6 +1299,13 @@
       // ⭐ FRETE GRATIS (18/09/2026, maquina de vendas #2): ENP, 4 fichas —
       // "e' o que mais converte". Vem da reconferencia horaria do ML
       // (anuncio mais barato). Ali/Awin: sem dado, sem chip — nunca se inventa.
+      if (temEnvio) {
+        var en = el("span", "frete envio", p.envio.full ? "Full · chega rápido" : "envio de " + p.envio.de);
+        en.title = p.envio.full
+          ? "anúncio no Mercado Envios Full: sai do centro do Mercado Livre, o mais rápido que a loja tem"
+          : "o anúncio mais barato sai de " + p.envio.de;
+        sinais.appendChild(en);
+      }
       if (temFrete) {
         var fr = el("span", "frete", "frete grátis");
         fr.title = "o anúncio mais barato deste produto na loja está com frete grátis (conferido na última hora)";

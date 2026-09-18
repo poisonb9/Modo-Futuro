@@ -650,9 +650,17 @@ def fichas_atual(ids: list[str]) -> dict[str, tuple]:
         # Dele saem frete gratis e o vendedor (regua v2, 17/09/2026).
         barato = min((i for i in itens if i.get("price") and float(i["price"]) > 0),
                      key=lambda i: float(i["price"]))
+        # ⭐ ENVIO (18/09/2026, Maestros EP.8: "prazo de entrega invisivel e' a
+        # objecao no 1"). A API nao da' dias, mas da' o tipo de logistica —
+        # `fulfillment` e' o Full (chega em 1-2 dias na maior parte do pais) —
+        # e o estado de onde sai. E' o que existe; o Ali nao da' nem isso.
+        sh = barato.get("shipping") or {}
+        end = barato.get("seller_address") or {}
+        uf = (end.get("state") or {}).get("id") if isinstance(end.get("state"), dict) else ""
         return pid, (min(precos), len(precos),
-                     bool((barato.get("shipping") or {}).get("free_shipping")),
-                     barato.get("seller_id"), barato.get("item_id"))
+                     bool(sh.get("free_shipping")),
+                     barato.get("seller_id"), barato.get("item_id"),
+                     sh.get("logistic_type") or "", (uf or "").replace("BR-", ""))
 
     with ThreadPoolExecutor(max_workers=4) as ex:
         return {pid: v for pid, v in ex.map(_um, ids) if v is not None}

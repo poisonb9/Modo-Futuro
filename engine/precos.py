@@ -358,6 +358,9 @@ def atualizar(ensaio: bool = False) -> dict:
                 # ⭐ o anuncio que TEM esse preco — o cartao linka nele (18/09)
                 if len(f) >= 5 and f[4]:
                     saida[pid]["item_id"] = str(f[4])
+                # ⭐ envio do ML: Full e de onde sai (ver mercadolivre.fichas_atual)
+                if len(f) >= 7:
+                    saida[pid]["envio"] = {"full": f[5] == "fulfillment", "de": f[6]}
     AGORA.parent.mkdir(parents=True, exist_ok=True)
     AGORA.write_text(json.dumps(saida, ensure_ascii=False, indent=1),
                      encoding="utf-8")

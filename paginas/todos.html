@@ -223,24 +223,29 @@
   /* ⚠️ `.prova > .economia`, e nao `.economia`: a regra `.prova > div`
      (padding 0 4px) ganhava por especificidade e ZERAVA o respiro — o valor
      ficou colado no fio (Bryan viu, 16/09). */
+  /* ⭐ 18/09 (Bryan: "o multometro parece jogado ali"): a linha de baixo
+     segue a MESMA grade das tres caixas de cima — o numero cai na 1a coluna,
+     centrado, no mesmo tamanho (19px) e com a mesma legenda (10,5px); o
+     grafico ocupa as outras duas colunas. Um ritmo so' no painel. */
   .prova > .economia {
-    grid-column: 1 / -1; display: flex; gap: 10px; align-items: center;
-    margin-top: 12px; padding: 13px 4px 3px; text-align: left;
+    grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px; align-items: center;
+    margin-top: 12px; padding: 13px 4px 3px; text-align: center;
     border-top: 1px solid rgba(255,255,255,.12);
   }
-  .economia .lado { flex: 0 0 auto; }
+  .economia .lado { grid-column: 1; padding: 0 4px; }
   .economia .numero {
-    display: block; font: 700 17px/1 var(--mono); color: var(--verde);
-    letter-spacing: -.02em;
+    display: block; font: 700 16.5px/1.1 var(--mono); color: var(--verde);
+    letter-spacing: -.03em; white-space: nowrap;
   }
   .economia .oque {
-    display: block; font-size: 9.5px; line-height: 1.2; margin-top: 3px;
-    color: rgba(255,255,255,.55); white-space: nowrap;
+    display: block; font-size: 10.5px; line-height: 1.35; margin-top: 6px;
+    color: rgba(255,255,255,.62);
   }
   .economia .como { display: none; }
   .economia svg.serie { flex: 1 1 60px; min-width: 50px; height: 22px; display: block; overflow: visible; }
   .economia svg.serie .linha { stroke-width: 1.2px; }
-  .economia .serie-wrap { flex: 1 1 60px; min-width: 50px; margin: 0; padding: 0; }
+  .economia .serie-wrap { grid-column: 2 / -1; min-width: 50px; margin: 0; padding: 0 4px; }
   .economia .serie-wrap .agora { display: none; }
   .economia svg.serie .area { fill: var(--verde); opacity: .14; }
 

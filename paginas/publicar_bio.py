@@ -2149,9 +2149,19 @@ def main() -> None:
     #
     # ⭐ A ordem certa: primeiro o visitante, depois o arquivo. Falha aqui
     # AVISA ALTO e segue.
+    # ⚠️ A CREDENCIAL DO `gh`, SO' NESTE PROCESSO. O `git push` a seco usava a
+    # credencial guardada na maquina — um PAT fine-grained que NAO alcanca o
+    # `bio` ("Permission denied to poisonb9", 403, em toda publicacao de
+    # 18/09). O `gh` esta' logado com o token classico, que tem `push` no
+    # repo (medido: `gh api repos/poisonb9/bio -q .permissions`). O helper
+    # entra por variavel de ambiente deste subprocesso: nada de token em URL,
+    # em arquivo ou na configuracao global.
+    amb_gh = dict(os.environ, GIT_CONFIG_COUNT="1",
+                  GIT_CONFIG_KEY_0="credential.helper",
+                  GIT_CONFIG_VALUE_0="!gh auth git-credential")
     empurrado = subprocess.run(
         ["git", "-C", str(tmp), "push", "-u", "origin", "HEAD:main"],
-        capture_output=True, text=True)
+        capture_output=True, text=True, env=amb_gh)
     if empurrado.returncode == 0:
         print(f"\nempurrado para {REPO} (historico — isto NAO publica)")
     else:

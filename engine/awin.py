@@ -457,6 +457,23 @@ def _categoria_raiz(p: dict) -> str:
     return (p.get("categoria") or "?").split(">")[0].strip() or "?"
 
 
+def quebra_do_teto(loja: str) -> tuple[int, int]:
+    """(extra do bloco barato, extra do bloco caro): 1 a 12 produtos REAIS a
+    mais em cada bloco, fixos por loja.
+
+    ⭐ Bryan, 18/09/2026: "600 na Clovis e 600 na Kabum" denuncia teto — "coloca
+    um numero quebrado, tipo 602, 606, 307; adicione mais produtos para
+    preencher". Os extras saem do SHA-1 do nome da loja, entao sao os MESMOS a
+    cada rodada (a contagem no menu nao danca), e dois por loja porque com um
+    so' Clovis e Kabum caiam no mesmo total (medido: CRC32 deu 611 e 611).
+    Sao os proximos da regua, nao produto inventado. Loja com bloco menor que
+    o teto nem passa por aqui.
+    """
+    import hashlib
+    h = hashlib.sha1(loja.encode("utf-8")).digest()
+    return h[0] % 12 + 1, h[1] % 12 + 1
+
+
 def cortar_bloco(prods: list[dict], k: int = POR_BLOCO) -> list[dict]:
     """Os `k` melhores pela regua, um de cada categoria por vez (rodizio).
     Sem regua (ganho ausente) vale a ordem que veio."""
@@ -531,7 +548,8 @@ def guardar_catalogo(teto: float = 0.0, teto_alto: float = 0.0,
         for loja, L in por_loja.items():
             baixo = [p for p in L if p["preco"] <= teto]
             alto = [p for p in L if teto < p["preco"] <= teto_alto]
-            prods += cortar_bloco(baixo, por_bloco) + cortar_bloco(alto, por_bloco)
+            qb, qa = quebra_do_teto(loja)
+            prods += cortar_bloco(baixo, por_bloco + qb) + cortar_bloco(alto, por_bloco + qa)
     if not prods:
         raise SystemExit("awin: catalogo vazio — instantaneo anterior mantido")
     agora = datetime.now(timezone.utc).isoformat(timespec="seconds")

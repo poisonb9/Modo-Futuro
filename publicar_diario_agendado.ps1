@@ -38,12 +38,18 @@ $saida += (& $python -X utf8 -m engine.nome_produto 2>&1 | Out-String)
 #     pro Telegram do dono (--enviar); publicar o que achou continua manual.
 #     `|| true` nao existe em PowerShell: o rc deste passo NAO derruba o site.
 $saida += (& $python -X utf8 -m engine.buscas_site --rotina --enviar 2>&1 | Out-String)
+# 2c. fotos: mede na NUVEM (conta parada, OCR+CLIP) so' o que ainda nao foi
+#     medido — produto novo do garimpo entra ja' com a foto sem banner.
+#     ⚠️ 40 min de teto: o run instala torch (~5 min) e le ~1 foto/s. Sem
+#     pendente, nao dispara nada. Falha aqui NAO derruba o site: o
+#     publicador fica com a principal de quem nao tem medida.
+$saida += (& $python -X utf8 -m engine.foto_limpa --medir --timeout 40 2>&1 | Out-String)
 # 3. publica e CONFERE no ar (estoura se nao subiu)
 $saida += (& $python -X utf8 paginas/publicar_bio.py --subir 2>&1 | Out-String)
 $rc = $LASTEXITCODE
 # 4. devolve o cache de nomes pra nuvem (o garimpo de la' tambem le)
 if (Test-Path 'estado\nomes_curtos.json') {
-    $saida += (& git add -f estado/nomes_curtos.json 2>&1 | Out-String)
+    $saida += (& git add -f estado/nomes_curtos.json estado/fotos_ocr.json 2>&1 | Out-String)
     $saida += (& git commit -q -m 'nomes: cache do dia (publicacao diaria)' 2>&1 | Out-String)
     $saida += (& git push -q 2>&1 | Out-String)
 }
@@ -52,5 +58,5 @@ $ErrorActionPreference = 'Stop'
 $ok = ($rc -eq 0) -and ($saida -match 'nenhum faltando')
 $linha = if ($ok) { "OK  publicado e conferido" } else { "FALHOU rc=$rc" }
 Add-Content -Path $log -Value "[$carimbo] $linha"
-Add-Content -Path $log -Value ($saida -split "`n" | Where-Object { $_ -match 'catalogo:|multometro:|nome\(s\) novo|endereco\(s\)|NAO |Error|Traceback|File "|line |BUSCAS NO SITE|sem resultado|\[telegram\]' } | ForEach-Object { "    $_" })
+Add-Content -Path $log -Value ($saida -split "`n" | Where-Object { $_ -match 'catalogo:|multometro:|fotos:|nome\(s\) novo|endereco\(s\)|NAO |Error|Traceback|File "|line |BUSCAS NO SITE|sem resultado|\[telegram\]' } | ForEach-Object { "    $_" })
 exit $rc

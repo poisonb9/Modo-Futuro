@@ -238,13 +238,14 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--medir", action="store_true", help="dispara o OCR na nuvem e grava")
     p.add_argument("--pendentes", action="store_true", help="so' conta o que falta")
+    p.add_argument("--timeout", type=int, default=90, help="minutos de espera por run")
     a = p.parse_args()
     if a.pendentes or not a.medir:
         pend = pendentes()
         print(f"{len(pend)} anuncio(s) com foto sem medida, "
               f"{sum(len(v) for v in pend.values())} fotos")
         return
-    medir()
+    medir(timeout_min=a.timeout)
 
 
 if __name__ == "__main__":

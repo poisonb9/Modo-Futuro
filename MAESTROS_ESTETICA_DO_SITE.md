@@ -104,3 +104,44 @@ Bloco A (uma tarde, só CSS/markup, sem risco): 1 + 2 + 3 + 7.
 Bloco B (decisão do Bryan por causa da tensão do 16/09): 4 + 5 + 6.
 Medir depois: cliques no "avise-me" antes/depois (Supabase `clique_produto.origem='avise'`),
 que é a única métrica que o cartão gera hoje.
+## 6. O que foi feito no mesmo dia (18/09, 16:00–19:30 UTC)
+
+Checkpoint do cartão anterior: tag `checkpoint-cartao-v1-18-09` +
+`checkpoints/site_2026-09-18_cartao_v1.html`.
+
+**Cartão v2 (blocos A+B)** — sino e "repor" em SVG monocromático (zero emoji); "avise-me"
+vira botão de 40 px, largura toda, Poppins 12; com "espere" o texto é "avise se voltar a
+R$ X"; Poppins em toda frase, mono só em número, nada abaixo de 11 px; ritmo de 8; chip da
+loja neutro e NA FRENTE do nome (não orfana); saíram do cartão "preço conferido às", "no
+radar há N dias" e o gráfico reto (viraram `title`); gráfico só com queda ≥ 5%, 14 px; o
+botão gruda no fundo (era o vão do Cortador); "Promo 6% OFF" numa linha; Promo no ouro do
+selo (um acento por cartão).
+
+**Reparos 1–8 da autópsia** — foto com moldura igual (contain + respiro, fundo fixo);
+"novo" só no catálogo próprio; nome da externa sem SKU (regra `_nome_externo`, sem cota);
+"+39 vendidos" numa linha; números do menu Loja um tom mais claros; herói com rótulos
+curtos ("achadinhos", "baixaram de preço", "vendidos nas lojas") e a 1ª caixa = catálogo
+inteiro; skeleton pulsando até a foto carregar; foto que não carrega tira o cartão.
+
+**Bryan, pela outra sessão** — "Caiu de preço" → "Maiores quedas"; "Achados novos" só do
+catálogo próprio; "Sendo acompanhados" (telemetria) → "Mais vendidos" (prova social, Movers
+and Shakers); **categoria nunca é loja**: externas ganham área real (`_categoria_externa`:
+Kabum → Eletrônicos/Casa/Moda pelo caminho do feed, Nike → Calçados/Moda, Clovis/Lauri pelo
+nome, Arno → Cozinha, Shark/Ninja pelo nome, Exypna → Mercado), o menu Categoria soma áreas,
+escolher uma área baixa todas as lojas que têm produto nela; Loja continua loja; `#nike`
+abre a loja, `#casa` a área; menus ordenados por cliques de 30 dias (empate: quantidade),
+recalculados 1× por publicação — posição estável, conteúdo vivo.
+
+**Números** — Kabum 610, Clovis 611, Lauri 308 (1–12 produtos reais a mais por bloco,
+fixos pelo sha1 do nome da loja); multômetro só do que o radar reconfere (o feed da Kabum
+trocou 15.599 por 5.999 e levou o número a R$ 128.907 — erro a nosso favor, pego antes de
+publicar; R$ 2.731 em 925 produtos).
+
+**O espaço vazio depois do preço** (pergunta do Bryan): fica vazio. Garry Tan: remover o
+que não carrega significado; anti-slop: nunca apertado. A única linha que mereceria o lugar
+é o prazo de entrega — que a API do Ali não dá.
+
+**Header sempre em dia** — `publicar_ao_mudar_agendado.ps1` (S4U, a cada 10 min): compara
+os blobs de precos_agora/awin_catalogo/produtos_publicados no origin/main com o último
+publicado; igual = nada; diferente = pull, foto nova, publica e confere. Custo: só o deploy
+quando o radar escreveu (≤ 24×/dia; teto do Pages é 500 deploys/dia).

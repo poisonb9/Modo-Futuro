@@ -428,6 +428,7 @@
     .item:hover { box-shadow: 0 6px 18px rgba(20,19,26,.10); transform: translateY(-2px); }
   }
   .foto { position: relative; aspect-ratio: 1; background: var(--linha); }
+  .item.sem-foto { display: none; }
   .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .foto::before {
     content: ""; position: absolute; inset: 0 0 auto 0; height: 46px;
@@ -469,7 +470,7 @@
     font: 500 11px/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0;
   }
   .promo {
-    display: inline-flex; align-items: center; gap: 3px;
+    display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
     font: 700 11px/1 Poppins, sans-serif; color: var(--ouro);
   }
   .promo svg { width: 13px; height: 13px; display: block; }
@@ -525,7 +526,7 @@
      Bryan, 16/09). Um acento por cartao: a cor da loja fica no SIMBOLO
      oficial quando ele existir, e no seletor "Loja". */
   .loja {
-    display: inline-block; vertical-align: 2px; white-space: nowrap;
+    display: inline-block; vertical-align: 1px; white-space: nowrap; margin-right: 1px;
     font: 600 9px/1 Poppins, sans-serif; letter-spacing: .06em;
     color: var(--fraco); border: 1px solid var(--linha);
     padding: 2px 5px; border-radius: 5px; opacity: .85;
@@ -1104,11 +1105,13 @@
       // 81 (medido); ML: `-O.jpg` = 36 KB no lugar de 178. Se a variante
       // falhar, volta pra original — nunca cartao sem foto por causa disso.
       img.src = miniatura(p.imagem);
-      if (img.src !== p.imagem) {
-        img.addEventListener("error", function () {
-          if (img.src !== p.imagem) { img.src = p.imagem; }
-        }, { once: true });
-      }
+      // ⛔ FOTO QUE NAO CARREGA = CARTAO FORA (Bryan viu o icone quebrado na
+      // Clovis, 18/09). Primeiro tenta a original no lugar da miniatura; se a
+      // original tambem falhar, o cartao some — cartao sem foto e' quebrado.
+      img.addEventListener("error", function tentar() {
+        if (img.src !== p.imagem) { img.src = p.imagem; return; }
+        a.classList.add("sem-foto");
+      });
       img.alt = p.nome || "";
       img.loading = "lazy";
       img.decoding = "async";
@@ -1141,8 +1144,11 @@
         // (bloco B, 18/09: sem tinta da loja no chip — um acento por cartao)
       }
       selo.title = p.loja;
-      nome.appendChild(document.createTextNode(" "));
-      nome.appendChild(selo);
+      // ⭐ NA FRENTE do nome (Bryan, 18/09: no "Organizador deslizante de
+      // panelas e tampas" o chip caia sozinho numa linha nova). Como prefixo
+      // ele nunca orfana: o nome quebra depois dele, nao antes.
+      nome.insertBefore(document.createTextNode(" "), nome.firstChild);
+      nome.insertBefore(selo, nome.firstChild);
     }
     corpo.appendChild(nome);
 
@@ -1210,7 +1216,7 @@
       if (temPromo) {
         var promo = el("span", "promo");
         promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/></svg>' +
-          '<span>Promo · ' + Math.round(p.queda) + '% OFF</span>';
+          '<span>Promo −' + Math.round(p.queda) + '%</span>';
         promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
         sinais.appendChild(promo);
       }
@@ -1744,8 +1750,17 @@
     }
     // ⚠️ A CONTAGEM E' DA LISTA NA TELA, sempre. Numero de cabecalho que nao
     // bate com o que se ve' embaixo e' a mentira mais facil de cometer.
-    contagem.textContent = lista.length === 1
-      ? "1 achadinho" : lista.length + " achadinhos";
+    // ⭐ NA HOME, sem filtro, a conta e' do CATALOGO INTEIRO (Bryan, 18/09:
+    // "quero que seja a soma de todos os produtos que temos") — os das lojas
+    // externas ficam atras do menu Loja, mas sao achadinhos do mesmo jeito.
+    // Com filtro ou busca, volta a ser o que esta' na tela.
+    var semFiltro = !canal && !loja && !normal(busca.value.trim());
+    var total = lista.length;
+    if (semFiltro) {
+      Object.keys(EXTERNOS).forEach(function (n) { total += EXTERNOS[n].n || 0; });
+    }
+    contagem.textContent = total === 1
+      ? "1 achadinho" : total.toLocaleString("pt-BR") + " achadinhos";
   }
 
   // ⚠️ FECHAR AO TOCAR FORA. Sem isto o painel fica aberto por cima da

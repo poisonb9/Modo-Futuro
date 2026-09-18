@@ -36,10 +36,10 @@ def bom(ids):
          "product_small_image_urls": {"string": ["m", "e1"]}} for i in ids]}}}}}
 
 
-_chamar, _sleep, _respiro = aliexpress.chamar, time.sleep, precos.RESPIRO_LIMITE_S
+_chamar, _sleep, _respiro = aliexpress.chamar, time.sleep, precos.ESPERAS_LIMITE_S
 try:
     time.sleep = lambda s: None
-    precos.RESPIRO_LIMITE_S = 0
+    precos.ESPERAS_LIMITE_S = (0, 0, 0)
 
     print("1. limite uma vez -> tenta de novo e o lote entra")
     fila = [LIMITE, "bom"]
@@ -54,8 +54,8 @@ try:
     checar(len(chamadas) == 2, f"duas chamadas, nao uma ({len(chamadas)})")
     checar(precos.ULTIMAS_FOTOS.get("1") == ["e1"], "e as fotos extras vieram junto")
 
-    print("2. ⛔ limite duas vezes -> estoura (nunca em silencio)")
-    fila = [LIMITE, LIMITE]
+    print("2. ⛔ limite em TODAS as tentativas -> estoura (nunca em silencio)")
+    fila = [LIMITE] * (1 + len(precos.ESPERAS_LIMITE_S))
     aliexpress.chamar = _uma
     estourou = ""
     try:
@@ -64,13 +64,19 @@ try:
         estourou = str(e)
     checar("ApiCallLimit" in estourou, "levantou RuntimeError com o envelope do Ali")
 
+    print("2b. limite tres vezes e a quarta passa -> entra")
+    fila = [LIMITE, LIMITE, LIMITE, "bom"]
+    chamadas = []
+    aliexpress.chamar = _uma
+    checar(precos.puxar(["5"]) == {"5": 9.9} and len(chamadas) == 4, "quatro chamadas, lote salvo")
+
     print("3. resposta boa -> uma chamada so'")
     chamadas = []
     aliexpress.chamar = lambda metodo, **k: (chamadas.append(1), bom(k["product_ids"].split(",")))[1]
     precos.puxar(["7"])
     checar(len(chamadas) == 1, "sem limite, sem segunda chamada")
 finally:
-    aliexpress.chamar, time.sleep, precos.RESPIRO_LIMITE_S = _chamar, _sleep, _respiro
+    aliexpress.chamar, time.sleep, precos.ESPERAS_LIMITE_S = _chamar, _sleep, _respiro
 
 print()
 print("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde")

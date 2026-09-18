@@ -190,7 +190,12 @@ def fotos_de(d: dict) -> list[str]:
 ULTIMAS_FOTOS: dict[str, list[str]] = {}
 
 
-RESPIRO_LIMITE_S = 5
+# ⚠️ Tres esperas, crescentes. A primeira versao (5s, uma vez) nao bastou:
+# a rodada de 12:17 UTC de 18/09 tomou ApiCallLimit no lote 1, esperou 5s e
+# tomou de novo — o "ban will last 1 seconds" da mensagem MENTE, a janela e'
+# maior. MEDIDO nas 40 rodadas anteriores: 13 falhas (33%), todas assim.
+# Tempo de runner e' de graca; rodada perdida nao.
+ESPERAS_LIMITE_S = (5, 30, 90)
 
 
 def _limite_de_chamadas(r: dict) -> bool:
@@ -236,10 +241,12 @@ def puxar(ids: list[str]) -> dict:
                               product_ids=",".join(pedaco),
                               target_currency="BRL", target_language="PT",
                               country="BR")
-        if _limite_de_chamadas(r):
+        for espera in ESPERAS_LIMITE_S:
+            if not _limite_de_chamadas(r):
+                break
             print(f"      [!] lote {i // LOTE + 1}: ApiCallLimit — espero "
-                  f"{RESPIRO_LIMITE_S}s e tento de novo")
-            time.sleep(RESPIRO_LIMITE_S)
+                  f"{espera}s e tento de novo")
+            time.sleep(espera)
             r = aliexpress.chamar("aliexpress.affiliate.productdetail.get",
                                   product_ids=",".join(pedaco),
                                   target_currency="BRL", target_language="PT",

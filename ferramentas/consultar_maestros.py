@@ -61,6 +61,13 @@ def main() -> None:
     p.add_argument("--max", type=int, default=60)
     a = p.parse_args()
     todas = fichas()
+    # ⛔ GUARDA (Bryan, 18/09: "a skill vai mudar muito, isso pode ficar
+    # desatualizado"): este script so' conhece o FORMATO do indice, nao o
+    # conteudo. Se o gerar_skill.py mudar o formato, falha aqui, alto —
+    # nunca uma consulta vazia que parece "o acervo nao tem nada".
+    if len(todas) < 1000 or sum(1 for f in todas if f["saida"]) < len(todas) // 2:
+        sys.exit(f"formato do indice mudou? li {len(todas)} fichas, "
+                 f"{sum(1 for f in todas if f['saida'])} com 'Saída' — ver fichas() e gerar_skill.py")
     if a.video:
         sel = [f for f in todas if a.video.lower() in f["video"].lower()]
         for f in sorted(sel, key=lambda f: ORDEM.get(f["sec"], 9)):

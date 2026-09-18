@@ -293,7 +293,7 @@ FOTOS_TROCAS_MAX = 10 ** 6
 EXTERNO_MAX_HORAS = 24
 # ⚠️ queda de externa acima disto nao conta no heroi: e' o feed trocando
 # variante, nao preco caindo (medido em 18/09 na Kabum: ate' 89% num dia).
-EXTERNA_QUEDA_MAX = 30.0
+EXTERNA_QUEDA_MAX = 60.0  # Bryan, 18/09: "pode ate 60%"
 
 
 # ⭐ SELO "A LOJA DIZ" (Bryan, 17/09/2026): a Nike preenche `product_price_old`

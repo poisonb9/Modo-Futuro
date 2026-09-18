@@ -2046,10 +2046,10 @@
       .filter(function (v) { return v > 0; });
     var vendas = PRODUTOS.reduce(function (a, p) { return a + (p.vendas || 0); }, 0);
     var caiu = PRODUTOS.filter(function (p) { return (p.queda || 0) >= 5 && !externo(p); }).length;
-    // ⭐ + as externas ainda nao baixadas, pelo indice (queda entre 5% e 30%)
+    // ⭐ + as externas ainda nao baixadas, pelo indice (queda entre 5% e 60%)
     Object.keys(EXTERNOS).forEach(function (n) {
       if (EXTERNO_CARREGADO[n]) {
-        caiu += PRODUTOS.filter(function (p) { return p.loja === n && (p.queda || 0) >= 5 && (p.queda || 0) <= 30; }).length;
+        caiu += PRODUTOS.filter(function (p) { return p.loja === n && (p.queda || 0) >= 5 && (p.queda || 0) <= 60; }).length;
       } else { caiu += EXTERNOS[n].caiu || 0; }
     });
 

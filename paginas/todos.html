@@ -12,7 +12,8 @@
      quando nao acha `apple-touch-icon`. O arquivo tem de existir no deploy —
      ver `publicar_bio.py`, que copia o PNG junto com o index. -->
 <link rel="apple-touch-icon" href="/icone_app.png">
-<link rel="icon" href="/icone.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/icone.png">
 <meta name="description" content="O catálogo do Achadinho Total: produto, preço acompanhado dia a dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
 <meta name="awin" content="publisher">
 <!-- ⭐ INDEXACAO (17/09/2026): o dominio proprio e' o endereco canonico.
@@ -1931,7 +1932,7 @@
     // "que o radar ja' encontrou" (longa) ficaram pra tras em 16/09.
     var lado = el("div", "lado");
     lado.appendChild(el("strong", "numero", reais(r.total)));
-    lado.appendChild(el("span", "oque", "de garimpo já entregue"));
+    lado.appendChild(el("span", "oque", "em quedas de preço encontradas"));
     caixa.appendChild(lado);
     caixa.title = "queda de preço encontrada pelo radar em " + r.produtos +
       " produtos, medida por mim contra o maior preço que eu mesmo vi — não o \"de/por\" da loja";
@@ -1955,7 +1956,7 @@
     // esticava o painel (Bryan, 16/09). O 148 ja' esta' na primeira caixa.
     if (caiu) { linhas.push([String(caiu), "baixaram de preço"]); }
     if (vendas > 0) {
-      linhas.push([vendas.toLocaleString("pt-BR"), "vendas destes na loja"]);
+      linhas.push([vendas.toLocaleString("pt-BR"), "vendidos nas lojas parceiras"]);
     } else if (precos.length) {
       linhas.push(["R$ " + Math.min.apply(null, precos).toFixed(2).replace(".", ","),
                    "o mais barato de hoje"]);

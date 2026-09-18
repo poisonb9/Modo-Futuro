@@ -1881,6 +1881,20 @@ def _por_icone(destino) -> None:
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())
+    # ⭐ E UM `favicon.ico` DE VERDADE (18/09/2026). Painel da Cloudflare,
+    # Google e afins nao leem a tag `<link rel="icon">`: pedem `/favicon.ico`.
+    # Sem o arquivo, o Pages devolve a raiz (HTML, 200) e o robo cai no
+    # apple-touch-icon — que e' OPACO de proposito. O Bryan viu o quadrado
+    # preto no painel da Cloudflare. O .ico sai do PNG transparente.
+    fav = aqui / "icone_achadinho_favicon.png"
+    if fav.exists():
+        try:
+            from PIL import Image
+            im = Image.open(fav).convert("RGBA")
+            im.save(destino / "favicon.ico", format="ICO",
+                    sizes=[(16, 16), (32, 32), (48, 48), (64, 64)])
+        except Exception as e:                       # noqa: BLE001
+            print(f"  [!] favicon.ico nao gerado ({type(e).__name__}) — segue sem")
 
 
 def _carimbar(html: str) -> tuple[str, str]:

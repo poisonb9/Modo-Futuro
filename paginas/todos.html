@@ -471,6 +471,10 @@
     font: 700 11px/1 Poppins, sans-serif; color: var(--verde);
   }
   .recorde svg { width: 13px; height: 13px; display: block; }
+  .frete {
+    font: 600 10px/1 var(--mono); color: var(--verde);
+    border: 1px solid var(--verde); border-radius: 4px; padding: 2px 5px; opacity: .9;
+  }
   .ja-esteve.espere strong { color: var(--tinta); font-weight: 700; letter-spacing: .02em; }
   .ja-esteve.loja-diz strong { color: var(--tinta); font-weight: 600; }
   .ja-esteve.tambem-em a { color: var(--fraco); text-decoration: underline; }
@@ -1116,7 +1120,8 @@
     // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
     var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
     var temConferido = !temRecorde && !temPromo && !temVendeu && !temVendedores && p.conferido;
-    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temConferido) {
+    var temFrete = !!p.frete_gratis;
+    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temConferido || temFrete) {
       var sinais = el("div", "sinais");
       if (temRecorde) {
         var rec = el("span", "recorde");
@@ -1162,6 +1167,14 @@
           '<span>Promo · ' + Math.round(p.queda) + '% OFF</span>';
         promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
         sinais.appendChild(promo);
+      }
+      // ⭐ FRETE GRATIS (18/09/2026, maquina de vendas #2): ENP, 4 fichas —
+      // "e' o que mais converte". Vem da reconferencia horaria do ML
+      // (anuncio mais barato). Ali/Awin: sem dado, sem chip — nunca se inventa.
+      if (temFrete) {
+        var fr = el("span", "frete", "frete grátis");
+        fr.title = "o anúncio mais barato deste produto na loja está com frete grátis (conferido na última hora)";
+        sinais.appendChild(fr);
       }
       if (temNota) {
         var nota = el("span", "nota" + (p.fogo ? " em-fogo" : ""));

@@ -611,6 +611,35 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
     return reais[:quantos]
 
 
+# ⛔ MEDIDO EM 18/09/2026 (Bryan: "Mercado Livre bugou", print com o chip
+# "envio de TUxCUFJJT08xODM5Zg"): o `state.id` da API DEIXOU de ser "BR-RJ" e
+# virou um token opaco (base64 de "MLBPRIOO1839f"). O que continua legivel e'
+# `state.name` ("Rio de Janeiro"). A sigla sai do NOME; nome que eu nao
+# conheca vira "" — e sem UF nao ha' chip (a pagina so' desenha com dado).
+UF_POR_NOME = {
+    "acre": "AC", "alagoas": "AL", "amapa": "AP", "amazonas": "AM", "bahia": "BA",
+    "ceara": "CE", "distrito federal": "DF", "espirito santo": "ES", "goias": "GO",
+    "maranhao": "MA", "mato grosso": "MT", "mato grosso do sul": "MS",
+    "minas gerais": "MG", "para": "PA", "paraiba": "PB", "parana": "PR",
+    "pernambuco": "PE", "piaui": "PI", "rio de janeiro": "RJ",
+    "rio grande do norte": "RN", "rio grande do sul": "RS", "rondonia": "RO",
+    "roraima": "RR", "santa catarina": "SC", "sao paulo": "SP", "sergipe": "SE",
+    "tocantins": "TO",
+}
+
+
+def uf_de(estado) -> str:
+    """Sigla da UF a partir do `state` da API (dict com id/name), ou ""."""
+    import unicodedata
+    if not isinstance(estado, dict):
+        return ""
+    sid = str(estado.get("id") or "")
+    if sid.startswith("BR-") and len(sid) == 5:      # o formato antigo, se voltar
+        return sid[3:]
+    nome = unicodedata.normalize("NFD", str(estado.get("name") or "")).encode("ascii", "ignore").decode().lower().strip()
+    return UF_POR_NOME.get(nome, "")
+
+
 def fichas_atual(ids: list[str]) -> dict[str, tuple]:
     """{id: (MENOR preco agora, QUANTOS vendedores, frete gratis?, seller_id, item_id)}.
     Ficha sem vendedor fica de fora.
@@ -656,11 +685,10 @@ def fichas_atual(ids: list[str]) -> dict[str, tuple]:
         # e o estado de onde sai. E' o que existe; o Ali nao da' nem isso.
         sh = barato.get("shipping") or {}
         end = barato.get("seller_address") or {}
-        uf = (end.get("state") or {}).get("id") if isinstance(end.get("state"), dict) else ""
         return pid, (min(precos), len(precos),
                      bool(sh.get("free_shipping")),
                      barato.get("seller_id"), barato.get("item_id"),
-                     sh.get("logistic_type") or "", (uf or "").replace("BR-", ""))
+                     sh.get("logistic_type") or "", uf_de(end.get("state")))
 
     with ThreadPoolExecutor(max_workers=4) as ex:
         return {pid: v for pid, v in ex.map(_um, ids) if v is not None}

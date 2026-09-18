@@ -458,7 +458,8 @@
      ritmo de 8; um acento por cartao; o BOTAO e' o que gruda no fundo, nao o
      preco (era o vao entre nome e preco que o Bryan viu no Cortador). */
   .sinais {
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    display: flex; align-items: center; justify-content: space-between; gap: 6px 8px;
+    flex-wrap: wrap; /* 18/09: "13 vendedores" + chip de envio sobrepunham num cartao de 2 colunas */
   }
   /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
   .sinais > .nota:only-child { margin-left: 0; }
@@ -1217,7 +1218,9 @@
     var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
     var temFrete = !!p.frete_gratis;
     // ⭐ ENVIO (18/09): Full = chega rapido; senao, de onde sai. So' o ML da'.
-    var temEnvio = !!(p.envio && (p.envio.full || p.envio.de));
+    // ⚠️ 18/09: `de` tem que ser UF (2 letras) — o precos_agora de antes do
+    // reparo guarda um token da API no lugar, e token nao vira chip.
+    var temEnvio = !!(p.envio && (p.envio.full || /^[A-Z]{2}$/.test(p.envio.de || "")));
     if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete || temEnvio) {
       var sinais = el("div", "sinais");
       if (temRecorde) {

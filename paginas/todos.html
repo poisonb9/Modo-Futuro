@@ -1031,8 +1031,14 @@
     if (!p.suave && p.dias >= 2) {
       ponto.remove();
       var esc = el("div", "escala");
-      esc.appendChild(el("span", null, "há " + p.dias + " dias"));
-      esc.appendChild(el("span", null, "hoje"));
+      // ⭐ 18/09 (Bryan: "'hoje' ali nao faz sentido"): a ponta esquerda diz
+      // de onde a linha partiu (o preco de ha' N dias); a direita da' o
+      // VEREDITO — "menor que eu vi" quando o preco de agora e' o piso da
+      // serie, senao quanto ainda esta' acima do piso. Preco nunca quebra linha.
+      var pAgora = vals[vals.length - 1];
+      esc.appendChild(el("span", "nq", "há " + p.dias + " dias: R$ " + reais(vals[0])));
+      esc.appendChild(el("span", "nq", pAgora <= menor + 0.005 ? "menor que eu vi ✓"
+        : "R$ " + reais(pAgora - menor) + " acima do menor"));
       wrap.appendChild(esc);
     }
     return wrap;

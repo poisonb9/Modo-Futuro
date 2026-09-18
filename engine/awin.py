@@ -167,13 +167,21 @@ def link(destino: str, id_anunciante: int) -> str:
             f"&awinaffid={pid}&ued={quote(destino, safe='')}")
 
 
+_FICHA_CACHE: dict = {}
+
+
 def _ficha_de_inclusao(nome: str) -> str:
     """'7,0% · 3 feeds, 1.234 produtos' ou '7,0% · SEM FEED'. Falha de
     leitura vira '(comissao/feed nao lidos)': o aviso de aprovacao nao pode
     morrer por causa do enfeite."""
+    # ⚠️ duas chamadas por linha estouram a API na 3a loja (medido 18/09:
+    # HTTPError na Lauri). Le' uma vez por rodada e reaproveita.
     try:
-        com = comissoes_da_api().get(nome)
-        meus = [f for f in feeds() if str(f.get("Advertiser Name") or "") == nome]
+        if "com" not in _FICHA_CACHE:
+            _FICHA_CACHE["com"] = comissoes_da_api()
+            _FICHA_CACHE["feeds"] = feeds()
+        com = _FICHA_CACHE["com"].get(nome)
+        meus = [f for f in _FICHA_CACHE["feeds"] if str(f.get("Advertiser Name") or "") == nome]
         n = sum(int(str(f.get("No of products") or "0").replace(".", "") or 0) for f in meus)
         c = f"{com:.1f}%".replace(".", ",") if com is not None else "comissao ?"
         milhar = f"{n:,}".replace(",", ".")

@@ -284,7 +284,11 @@ EXTERNAS = {
 # continua colhendo o feed delas (engine/awin.py nao muda): e' a pagina que
 # nao as mostra. Continuam mapeadas em EXTERNAS de proposito — voltar e'
 # tirar daqui, nao redescobrir a categoria.
-FORA_DO_SITE = {"Carraro BR", "Leveros BR", "Radiale Pneus"}
+# ⛔ Clovis (Bryan, 18/09/2026 a` noite): "tirar por enquanto — nao gostei do
+# site deles, ruim de comprar, vai ser ruim pros clientes". Somou-se ao preco
+# do feed que nao batia com a loja (regua_vitrine.QUARENTENA). A serie
+# continua colhendo; a Awin aceitou mais parceiros — avaliar e incluir.
+FORA_DO_SITE = {"Carraro BR", "Leveros BR", "Radiale Pneus", "Clovis Calçados BR"}
 # ⭐ TETO DE TROCAS DE FOTO por publicacao (ver `_foto` em produtos_todos).
 # Subiu em etapas em 18/09: 3 da calibracao -> 13 ("os proximos 10") -> SEM
 # TETO ("gostei, pode aplicar em todas", Bryan, 18/09 12:50). Fica a

@@ -99,6 +99,30 @@ Antes de 2 e da frase-de-avaliação: **conferir na API do Ali se ela devolve pr
 origem e review** — decide se é 1 tarde ou 1 semana. Ordem acordada com o Bryan em 18/09:
 API primeiro, depois os três defeitos, em loop.
 
+## 5b. O que foi feito no mesmo dia (18/09, ~11h BRT)
+
+```
+API do Ali   product.query/productdetail = 33 campos (log da fumaca 03:07 UTC).
+             SEM prazo de envio, SEM origem, SEM texto de avaliacao (so' evaluate_rate).
+             COM product_small_image_urls (varias fotos — hoje nao guardamos) e
+             product_video_url. => prazo e frase-de-avaliacao no Ali: FORA (so' scraping).
+             => imagem limpa: 1 tarde (guardar as small_image_urls no garimpo).
+             ML: shipping.free_shipping ja' usado; logistic_type/seller_address e
+             /reviews/item/{id} existem, a testar.
+Defeito 8    NAO ERA DEFEITO. `target=_blank` foi tirado de proposito em 14/09
+(aba)        (Safari do iPhone bloqueou a aba nova; o upsell fira no `pageshow`).
+             Medido vence suposicao: descartado.
+Defeito 3    Dedupe existia e pega foto igual (ralador/tesla cos 1,00). Os 3 pares
+(duplicata)  restantes eram fotos DIFERENTES do mesmo produto (0,74-0,79) e o par
+             diferente mais parecido esta' em 0,856 — sem limiar de foto. Regra nova:
+             mesmo nome curto + mesma loja + foto >= 0,60. 139 -> 136. Commit 766c6dd.
+Defeito 4    /privacidade + link no rodape, em todos os projetos. Commit 3fb04e8.
+Publicado    um deploy com os tres + o link do ML no anuncio (cb895af). 26 enderecos
+             conferidos; dominio baixado e conferido: 1x cada par, /privacidade 200,
+             3 links produto.mercadolivre.com.br/MLB-... — falta o Bryan conferir o
+             termometro a R$ 16,90 no celular.
+```
+
 ## 6. Como a consulta foi feita (pra repetir)
 
 `referencias/por_resultado.md` da skill `maestros-da-ia`, parse de uma ficha por bloco

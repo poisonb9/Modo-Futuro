@@ -1036,9 +1036,9 @@
       // VEREDITO — "menor que eu vi" quando o preco de agora e' o piso da
       // serie, senao quanto ainda esta' acima do piso. Preco nunca quebra linha.
       var pAgora = vals[vals.length - 1];
-      esc.appendChild(el("span", "nq", "há " + p.dias + " dias: R$ " + reais(vals[0])));
+      esc.appendChild(el("span", "nq", "há " + p.dias + " dias: " + reais(vals[0])));
       esc.appendChild(el("span", "nq", pAgora <= menor + 0.005 ? "menor que eu vi ✓"
-        : "R$ " + reais(pAgora - menor) + " acima do menor"));
+        : reais(pAgora - menor) + " acima do menor"));
       wrap.appendChild(esc);
     }
     return wrap;

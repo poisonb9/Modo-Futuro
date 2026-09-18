@@ -282,6 +282,10 @@ EXTERNAS = {
 # nao as mostra. Continuam mapeadas em EXTERNAS de proposito — voltar e'
 # tirar daqui, nao redescobrir a categoria.
 FORA_DO_SITE = {"Carraro BR", "Leveros BR", "Radiale Pneus"}
+# ⭐ TETO DE TROCAS DE FOTO por publicacao (ver `_foto` em produtos_todos):
+# 3 da calibracao + 10 pedidos pelo Bryan em 18/09. As 23 que a regra faria
+# estao no contact sheet da sessao; ele sobe o teto quando aprovar.
+FOTOS_TROCAS_MAX = 13
 # ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria
 # fora, com aviso — nao categoria com preco de ontem.
@@ -738,6 +742,21 @@ def produtos_todos() -> list[dict]:
     _combina = _c.ler_cache()
     from engine import foto_limpa as _fl
     _medidas_fotos = _fl.medidas()
+    # ⚠️ EM ETAPAS, ordem do Bryan (18/09/2026, "vai tocando com os proximos
+    # 10"): 3 trocas foram ao ar com a calibracao; agora mais 10. O teto vale
+    # na ordem do catalogo (mais novos primeiro), entao o conjunto e' estavel
+    # entre publicacoes. Subir o teto = decisao dele, depois de olhar.
+    _trocas_feitas = [0]
+
+    def _foto(d):
+        principal = d.get("imagem", "")
+        if _trocas_feitas[0] >= FOTOS_TROCAS_MAX:
+            return principal
+        extras = (agora.get(str(d.get("id") or "")) or {}).get("imagens") or []
+        esc = _fl.escolher(principal, extras, _medidas_fotos)
+        if esc != principal:
+            _trocas_feitas[0] += 1
+        return esc
     # ⚠️ 24 HORAS, e nao 48 — decisao do Bryan em 15/09/2026 ("48 e' muito").
     #
     # ⛔ E A TRAVA FALHA FECHADA AGORA. Ela era `if visto_em and visto_em <
@@ -774,9 +793,7 @@ def produtos_todos() -> list[dict]:
             # defeito 1): entre as fotos do anuncio, a que e' o MESMO produto
             # com menos texto — medido na nuvem (engine/foto_limpa.py).
             # Falha aberta: sem medida, a principal.
-            "imagem": _fl.escolher(d.get("imagem", ""),
-                                   (agora.get(str(d.get("id") or "")) or {}).get("imagens") or [],
-                                   _medidas_fotos),
+            "imagem": _foto(d),
             # ⛔ A QUEDA E' RECALCULADA AQUI, e nao lida do registro.
             #
             # ⚠️ O valor gravado em `produtos_publicados.jsonl` foi calculado

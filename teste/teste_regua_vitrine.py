@@ -133,5 +133,13 @@ checar(abs(rv.confianca({"loja": ML, "vendedores": [40, 0, "16/09"], "frete_grat
 checar(abs(rv.momento({"queda": 0.0, "vendedores": [13, 2, "16/09"]}) - 0.28) < 1e-9, "+2 vendedores = momento 0,4 x 0,7")
 
 print()
+print("7. quarentena (18/09): loja com preco do feed != loja fica FORA, as outras nao")
+_q = {"nome": "Chinelo Feminino Moleca 5552100 PRETO 34", "preco": 39.99, "imagem": "x"}
+checar(rv.piso(dict(_q, loja="Clovis Calçados BR")).startswith("quarentena"), "Clovis: piso 'quarentena: ...'")
+checar(rv.nota(dict(_q, loja="Clovis Calçados BR"), {})[0] == 0.0, "Clovis: nota 0")
+checar(rv.piso(dict(_q, loja="Lauri BR")) == "", "caso negativo: a mesma ficha na Lauri passa")
+checar(rv.piso(dict(_q, loja="Kabum BR")) == "", "caso negativo: Kabum passa")
+
+print()
 print("tudo verde" if not falhas else f"{len(falhas)} FALHA(S)")
 sys.exit(1 if falhas else 0)

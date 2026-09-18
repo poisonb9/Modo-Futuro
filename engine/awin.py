@@ -484,6 +484,10 @@ def cortar_bloco(prods: list[dict], k: int = POR_BLOCO) -> list[dict]:
                for p in prods]
     rv.pontuar(cartoes)
     vivos = [c for c in cartoes if not c.get("vitrine_fora")]
+    # ⚠️ loja em QUARENTENA (regua_vitrine): todo cartao sai com piso, e o
+    # bloco ficaria VAZIO — a loja sumiria do catalogo, que nao e' o pedido
+    # (so' a vitrine). Sem vivo nenhum, o bloco e' montado do jeito antigo.
+    vivos = vivos or list(cartoes)
     vivos.sort(key=lambda c: -float(c.get("vitrine_nota") or 0))
     # ⛔ MEDIDO EM 17/09: so' por categoria, o bloco "ate' R$ 150" da Clovis
     # saiu 100% entre R$ 100-150 — a regua nas externas e' comissao x preco,

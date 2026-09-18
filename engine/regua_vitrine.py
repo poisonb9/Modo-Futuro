@@ -47,6 +47,16 @@ KILL_DIAS = 30
 LOJAS_COM_NOTA = ("AliExpress",)
 LOJAS_COM_VENDEDORES = ("Mercado Livre",)
 
+# ⛔ QUARENTENA (Bryan, 18/09/2026: "gravissimo, nao sobe pra vitrine de jeito
+# nenhum"): o feed Awin da Clovis declarou R$ 39,99 para o Chinelo Moleca
+# 5552100 PRETO 34 (id 41738954685, feed de 16:49 UTC) e a loja cobrava
+# R$ 41,99 na mesma hora. Preco que nao bate e' promessa quebrada no clique.
+# A loja continua no CATALOGO (filtro por loja), mas nota 0: sem topo, sem
+# fogo, sem ordem, sem vitrine do Telegram. Sai daqui quando a divergencia
+# for explicada e medida em amostra (a loja esta' atras de desafio Cloudflare,
+# 403 na API VTEX — nao deu para medir em massa em 18/09).
+QUARENTENA = {"Clovis Calçados BR": "preço do feed ≠ preço da loja (medido 18/09)"}
+
 
 def _f(x) -> float:
     try:
@@ -234,6 +244,8 @@ def piso(p: dict) -> str:
     """Motivo de ficar FORA da vitrine, ou "" se passa."""
     loja = p.get("loja") or ""
     nome = str(p.get("nome") or "")
+    if loja in QUARENTENA:
+        return "quarentena: " + QUARENTENA[loja]
     if EXCLUIR.search(nome):
         return "excluido: " + (EXCLUIR.search(nome).group(0)).strip()
     cat = str(p.get("categoria") or "")

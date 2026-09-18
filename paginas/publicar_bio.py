@@ -358,7 +358,11 @@ def _nome_externo(nome: str) -> str:
     """
     import re as _re
     n = str(nome or "")
-    n = _re.sub(r"\s+-\s+\d\S*.*$", "", n)
+    # ⛔ 18/09 (Bryan): "Kit ... Olympikus - 1902 BRANCO 01 33/38" e "... -
+    # 81924 BRANCO 39/44" viravam o MESMO nome, porque o corte levava tudo
+    # depois do codigo — inclusive a cor e o TAMANHO, que e' o que os separa.
+    # Cai so' o token do codigo; a variante fica.
+    n = _re.sub(r"\s+-\s+\d\S*", " ", n)
     n = _re.sub(r"\s+-\s+[A-Z0-9-]{6,}\s*$", "", n)
     n = _re.sub(r"\b(?=[A-Z0-9-]{6,}\b)(?=[A-Z0-9-]*\d{2})(?=[A-Z0-9-]*[A-Z]{2})[A-Z0-9-]+\b", "", n)
     n = _re.sub(r"\b\d{6,}\b", "", n)

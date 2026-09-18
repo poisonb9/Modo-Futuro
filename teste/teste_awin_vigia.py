@@ -72,6 +72,21 @@ except RuntimeError:
 checar(awin.ESTADO.read_text(encoding="utf-8") == antes,
        "e o arquivo ficou intacto")
 
+print("5. ⛔ COMISSOES: resposta PARCIAL da API nao apaga o que ja' se sabia")
+# MEDIDO em 18/09/2026: a API devolveu 12 programas e, um minuto depois, 2;
+# a versao anterior gravou os 2 por cima dos 12.
+import json
+awin.COMISSOES_ESTADO = Path(tempfile.mkdtemp()) / "c.json"
+awin.comissoes_da_api = lambda: {"Nike BR": 7.5, "Lauri Esporte": 11.0}
+awin.guardar_comissoes()
+awin.comissoes_da_api = lambda: {"Nike BR": 7.0}
+r = awin.guardar_comissoes()
+checar(r == {"Nike BR": 7.0, "Lauri Esporte": 11.0}, f"funde: atualiza a Nike, mantem a Lauri ({r})")
+checar(json.loads(awin.COMISSOES_ESTADO.read_text(encoding="utf-8")) == r, "e o arquivo tem o fundido")
+awin.comissoes_da_api = lambda: {}
+checar(awin.guardar_comissoes() == {} and json.loads(awin.COMISSOES_ESTADO.read_text(encoding="utf-8")) == r,
+       "resposta vazia: nao grava nada, arquivo intacto")
+
 print("")
 print("FALHOU: " + "; ".join(falhas) if falhas else "tudo verde")
 sys.exit(1 if falhas else 0)

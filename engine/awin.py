@@ -113,8 +113,23 @@ def guardar_comissoes() -> dict[str, float]:
         print(f"awin: comissoes nao lidas ({type(e).__name__}) — reserva mantida")
         return {}
     if c:
+        # ⛔ FUNDE, NAO SOBRESCREVE (18/09/2026). A API respondeu 12 programas
+        # e, um minuto depois, 2 — e a versao anterior gravou os 2 por cima
+        # dos 12 (medido: o arquivo ficou so' com Nike e Kabum). Comissao de
+        # programa que sumiu da resposta continua valendo ate' vir outra;
+        # quem decide se a loja entra e' o status do programa, nao este mapa.
+        antigo: dict = {}
+        if COMISSOES_ESTADO.exists():
+            try:
+                antigo = json.loads(COMISSOES_ESTADO.read_text(encoding="utf-8"))
+            except ValueError:
+                antigo = {}
+        fundido = dict(antigo)
+        fundido.update(c)
         COMISSOES_ESTADO.parent.mkdir(parents=True, exist_ok=True)
-        COMISSOES_ESTADO.write_text(json.dumps(c, ensure_ascii=False, indent=1), encoding="utf-8")
+        COMISSOES_ESTADO.write_text(json.dumps(fundido, ensure_ascii=False, indent=1),
+                                    encoding="utf-8")
+        return fundido
     return c
 
 

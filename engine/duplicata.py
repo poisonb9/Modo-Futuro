@@ -54,6 +54,31 @@ CACHE = RAIZ / "estado" / "vetores_produto.json"
 # mostra um cartao repetido.
 LIMIAR = 0.93
 
+# ⭐ ATALHO 2 (18/09/2026): MESMO NOME CURTO + FOTO NA MESMA FAMILIA.
+#
+# O Bryan viu no site duas "Balanca digital de cafe com timer e USB" (R$ 52,49
+# e 51,99) e dois "Organizador de maquiagem giratorio 360" (preto e branco).
+# A dedupe por foto NAO pega: sao fotos diferentes do mesmo produto. MEDIDO
+# nos 139 do catalogo em 18/09:
+#
+#     mesmo nome curto, mesma loja:   balanca 0,742 . teclado 0,766 . giratorio 0,791
+#     nomes diferentes, os mais parecidos: luva x luva 0,874 . tapete 3D x
+#         tapete veludo 0,856 (PRODUTOS DIFERENTES) . carregadores 0,856
+#
+# ⛔ Nao existe limiar de FOTO que una os tres sem fundir o tapete: o par
+# diferente pontua MAIS que os pares iguais. E' o mesmo achado do nome cru
+# (Jaccard), so' que do outro lado.
+#
+# O que separa e' o NOME CURTO: ele nao e' o titulo do lojista, e' o nome que
+# o publicador escreve por produto (`estado/nomes_curtos.json`), e dois
+# anuncios com o MESMO nome curto na MESMA loja sao o mesmo produto. A foto
+# entra so' como trava: acima do teto medido de "produto diferente" na guarda
+# de fidelidade (0,5861), pra um nome curto repetido por engano nao fundir
+# duas coisas que nao se parecem em nada.
+#
+# ⚠️ Caso negativo (teste 7): mesmo nome, foto abaixo da trava -> ficam os dois.
+NOME_IGUAL_FOTO_MIN = 0.60
+
 
 def _cache() -> dict:
     if not CACHE.exists():
@@ -150,6 +175,13 @@ def sem_repetidos(produtos: list[dict]) -> list[dict]:
                 _gravar(cache)
         if v is not None and any(
                 w is not None and _parecidos(v, w) >= LIMIAR for w in vetores):
+            continue
+        # atalho 2: mesmo nome curto e foto da mesma familia (ver NOME_IGUAL_FOTO_MIN)
+        nome = (p.get("nome") or "").strip().lower()
+        if nome and v is not None and any(
+                (q.get("nome") or "").strip().lower() == nome
+                and w is not None and _parecidos(v, w) >= NOME_IGUAL_FOTO_MIN
+                for q, w in zip(fim, vetores)):
             continue
         fim.append(p)
         vetores.append(v)

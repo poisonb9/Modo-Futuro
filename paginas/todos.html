@@ -157,7 +157,14 @@
     58% { transform: scale(1.09); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
   }
-  .vivo-dica { font-size: 11.5px; color: var(--fraco); }
+  /* ⭐ 18/09 (Bryan: "nao gosto do 'toque para ver na loja' sempre
+     aparecendo"): a legenda fixa sai. O convite e' o proprio nome, que ganha
+     um sublinhado dourado que ACENDE quando termina de ser digitado — o
+     controle nomeia a acao no lugar certo (Impeccable: "controls name their
+     action"), uma vez por produto, sem frase repetida a cada 6 s. */
+  .vivo-dica { display: none; }
+  .vivo-nome { background: linear-gradient(var(--ouro-claro), var(--ouro-claro)) no-repeat 50% 100% / 0 2px; transition: background-size .45s cubic-bezier(.2,.8,.2,1); border-radius: 2px; }
+  .vivo-nome.pronto { background-size: 100% 2px; }
   .cursor {
     display: inline-block; width: 2px; height: 1em; margin-left: 1px;
     background: var(--ouro); vertical-align: -2px;
@@ -193,46 +200,41 @@
      a cara de instrumento — que e' o que a operacao faz de diferente:
      medir preco. Os numeros sao OURO, o preco dos produtos e' TINTA: cada
      um com a sua voz, e nenhum competindo com o outro. */
-  /* ⭐ A FRASE DO GARIMPO (18/09/2026, 3a versao do "balao preto").
-     Lido no codigo-fonte do Impeccable (craft-floor.md, o que ele RECUSA por
-     padrao): "the hero-metric template: big number, small label, supporting
-     stats, accent" · "nested cards are always wrong" · "sparklines standing
-     in for content" · "pulsing dots" · "don't use pure black (always tint)"
-     · "on colored surfaces tint secondary text from that hue; never gray" ·
-     "copy: the product's own language" · "motion: one authored moment".
-     Entao nao e' painel: e' uma FRASE, no idioma do site ("Eu garimpo"),
-     com os numerais em Archivo Black dourado dentro do texto. Superficie
-     escura TINGIDA pelo ouro, texto secundario cor de areia, a lupa como
-     marca d'agua, o R$ como pico da frase, e a hora da conferencia como o
-     ponto final — sem chip, sem bolinha. Um so' movimento: os numerais
-     contam uma vez ao aparecer. */
+  /* ⭐ PAINEL DE AEROPORTO (18/09/2026, escolha do Bryan entre 3 variantes
+     — protocolo do Impeccable: um eixo por variante, referencia do mundo
+     real). Referente: o painel split-flap de aeroporto. Cada numero e' uma
+     fileira de PLACAS que viram ate' parar no digito certo — a contagem que
+     o Bryan quis manter vira o proprio objeto, e e' o UNICO movimento da
+     dobra. Fundo escuro TINGIDO (nao preto), texto secundario cor de areia,
+     ouro so' nos digitos, o R$ em branco como pico. Sem celula, sem
+     sparkline, sem bolinha, sem legenda fixa. */
   .prova {
-    position: relative; overflow: hidden; isolation: isolate;
-    margin: 20px 0 8px; padding: 20px 22px 18px;
-    background: #1c1810; border-radius: 18px;
-    color: rgba(242, 226, 190, .78);
-    font: 400 15px/1.55 Poppins, sans-serif; text-align: left;
-    box-shadow: 0 1px 0 rgba(242,201,76,.10) inset, 0 12px 32px rgba(28,24,16,.20), 0 2px 6px rgba(28,24,16,.14);
+    position: relative; margin: 20px 0 8px; padding: 4px 14px;
+    background: #14131a; border-radius: 16px; color: #f3efe2;
+    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 12px 32px rgba(20,19,26,.18), 0 2px 6px rgba(20,19,26,.12);
   }
-  .prova p { margin: 0; position: relative; z-index: 1; }
-  .prova p + p { margin-top: 8px; }
-  .prova .n {
-    font-family: "Archivo Black", system-ui, sans-serif; font-weight: 400;
-    font-size: 24px; line-height: 1; color: var(--ouro-claro);
-    letter-spacing: -.02em; white-space: nowrap; font-variant-numeric: tabular-nums;
-    vertical-align: -2px; padding: 0 1px;
+  .prova .fila {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 11px 2px; border-bottom: 1px solid rgba(255,255,255,.08);
   }
-  .prova .pico .n { font-size: 32px; }
-  .prova .fim {
-    margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(242,201,76,.14);
-    font-size: 12.5px; color: rgba(242, 226, 190, .55);
+  .prova .fila:last-of-type { border-bottom: 0; }
+  .prova .l { font: 500 12.5px/1.25 Poppins, sans-serif; color: rgba(243,239,226,.7); }
+  .prova .flap { display: inline-flex; gap: 2px; flex: 0 0 auto; }
+  .prova .flap i {
+    font: 700 20px/1 var(--mono); font-style: normal; color: var(--ouro-claro);
+    background: #1e1d27; border-radius: 4px; padding: 6px 3px; min-width: 14px; text-align: center;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06); position: relative;
+    font-variant-numeric: tabular-nums;
   }
-  .prova .lupa {
-    position: absolute; right: -26px; top: -26px; width: 140px; height: 140px;
-    opacity: .06; pointer-events: none; z-index: 0;
-  }
+  .prova .flap i::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,.55); }
+  .prova .flap i.s { background: none; box-shadow: none; min-width: 6px; padding: 6px 0; color: rgba(242,201,76,.7); }
+  .prova .flap i.s::after { display: none; }
+  .prova .pico .flap i { color: #fff; }
+  .prova .flap i.vira { animation: virar .09s linear; }
+  @keyframes virar { 0% { transform: scaleY(1); } 50% { transform: scaleY(.15); } 100% { transform: scaleY(1); } }
+  .prova .fim { font: 500 11px/1.3 var(--mono); color: rgba(243,239,226,.5); padding: 8px 2px 8px; letter-spacing: .04em; }
   .prova > .economia { display: none; }
-  @media (prefers-reduced-motion: reduce) { .prova .n { transition: none; } }
+  @media (max-width: 380px) { .prova .flap i { font-size: 18px; min-width: 13px; padding: 5px 2px; } .prova .l { font-size: 12px; } }
   /* o fio vertical da prova nao se aplica a` faixa */
 
 
@@ -2032,11 +2034,9 @@
   // ⭐ Por produto: maior preco visto - menor preco visto. So' sobe, por
   // construcao (ver `economia_radar` no publicador). A linha e' o total dia a
   // dia. O rotulo diz o que e': "que o radar ja' encontrou de queda".
-  // ⭐ A FRASE DO GARIMPO — ver o CSS de `.prova`. Os numeros sao os mesmos
-  // de sempre (catalogo inteiro, baixaram, multometro, vendidos), so' que
-  // ditos, no idioma do site, na ordem que o Bryan pediu: achadinhos ->
-  // baixaram -> R$ -> vendidos. Cada trecho so' entra se o numero existir
-  // (prova social com zero prova o contrario).
+  // ⭐ PAINEL DE AEROPORTO — ver o CSS de `.prova`. Os numeros sao os de
+  // sempre (catalogo inteiro, baixaram, multometro, vendidos), na ordem que
+  // o Bryan pediu; cada um so' entra se existir.
   function montarProva() {
     var caixa = document.getElementById("prova");
     if (!PRODUTOS.length) { return; }
@@ -2049,65 +2049,62 @@
     });
     var total = PRODUTOS.length;
     Object.keys(EXTERNOS).forEach(function (n) { total += EXTERNOS[n].n || 0; });
-    var lojas = {};
-    PRODUTOS.forEach(function (p) { if (p.loja) { lojas[p.loja] = 1; } });
-    Object.keys(EXTERNOS).forEach(function (n) { lojas[n] = 1; });
-    var nLojas = Object.keys(lojas).length;
     var r = (ECONOMIA || {}).radar || {};
 
-    function N(v) { return '<span class="n">' + escapar(v) + '</span>'; }
-    var p1 = el("p");
-    p1.innerHTML = "Vigio " + N(total.toLocaleString("pt-BR")) + " achadinhos em " +
-      nLojas + (nLojas === 1 ? " loja" : " lojas") + ", de hora em hora.";
-    caixa.appendChild(p1);
-    if (caiu > 0) {
-      var p2 = el("p");
-      p2.innerHTML = "Hoje " + N(String(caiu)) + " estão abaixo do maior preço que eu já vi.";
-      caixa.appendChild(p2);
+    function fila(rotulo, texto, pico, titulo) {
+      var f = el("div", "fila" + (pico ? " pico" : ""));
+      f.appendChild(el("span", "l", rotulo));
+      var fl = el("span", "flap");
+      // cada caractere vira uma placa; separadores (ponto, R$, espaco) sao "s"
+      String(texto).split("").forEach(function (ch) {
+        var i = el("i", /[0-9]/.test(ch) ? "" : "s", ch);
+        if (/[0-9]/.test(ch)) { i.setAttribute("data-alvo", ch); }
+        fl.appendChild(i);
+      });
+      f.appendChild(fl);
+      if (titulo) { f.title = titulo; }
+      caixa.appendChild(f);
     }
-    if (r.total > 0) {
-      var p3 = el("p", "pico");
-      p3.innerHTML = N(reais(r.total)) + " de queda medida por mim — contra o preço que eu vi, não o \"de/por\" da loja.";
-      p3.title = "queda de preço encontrada pelo radar em " + r.produtos + " produtos";
-      caixa.appendChild(p3);
-    }
-    var fim = el("p", "fim");
+    fila("achadinhos vigiados", total.toLocaleString("pt-BR"), false,
+         "todos os produtos de pe' no catalogo, contando as lojas parceiras");
+    if (caiu > 0) { fila("abaixo do maior preço hoje", String(caiu), false,
+         "produtos que hoje estao pelo menos 5% abaixo do maior preco que eu mesmo vi"); }
+    if (r.total > 0) { fila("de queda medida por mim", "R$ " + Math.round(r.total).toLocaleString("pt-BR"), true,
+         "queda encontrada pelo radar em " + r.produtos + " produtos, contra o preco que eu vi — nao o de/por da loja"); }
+    if (vendas > 0) { fila("vendidos nas lojas", vendas.toLocaleString("pt-BR"), false,
+         "quanto estes produtos ja' venderam nas lojas parceiras"); }
     var partes = [];
-    if (vendas > 0) { partes.push(vendas.toLocaleString("pt-BR") + " vendidos nas lojas parceiras"); }
     var t = ULTIMA_CONFERENCIA ? Date.parse(ULTIMA_CONFERENCIA) : 0;
     if (t) {
       var min = Math.max(0, Math.round((Date.now() - t) / 60000));
-      partes.push(min < 1 ? "conferi os preços agora" : min < 60 ? "conferi os preços há " + min + " min"
-        : min < 2160 ? "conferi os preços há " + Math.round(min / 60) + " h" : "conferi os preços há " + Math.round(min / 1440) + " dias");
-      fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR");
+      partes.push(min < 1 ? "CONFERIDO AGORA" : min < 60 ? "CONFERIDO HÁ " + min + " MIN"
+        : min < 2160 ? "CONFERIDO HÁ " + Math.round(min / 60) + " H" : "CONFERIDO HÁ " + Math.round(min / 1440) + " DIAS");
     }
-    if (partes.length) { fim.textContent = partes.join(" · ") + "."; caixa.appendChild(fim); }
-    var lupa = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    lupa.setAttribute("viewBox", "0 0 100 100"); lupa.setAttribute("class", "lupa"); lupa.setAttribute("aria-hidden", "true");
-    lupa.innerHTML = '<circle cx="42" cy="42" r="26" fill="none" stroke="#F2C94C" stroke-width="9"/><path d="M62 62 L90 90" stroke="#F2C94C" stroke-width="11" stroke-linecap="round"/>';
-    caixa.appendChild(lupa);
+    partes.push("DE HORA EM HORA");
+    var fim = el("div", "fim", partes.join(" · "));
+    if (t) { fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"); }
+    caixa.appendChild(fim);
   }
-  function montarEconomia() { /* a economia mora na frase (montarProva) */ }
+  function montarEconomia() { /* mora no painel (montarProva) */ }
 
-  // ⭐ o unico movimento autorado: os numerais contam uma vez (600 ms)
+  // ⭐ as placas VIRAM ate' parar no digito certo — o unico movimento da
+  // dobra. Cada placa passa por digitos aleatorios, escalonada da esquerda
+  // pra direita, ~700 ms no total. Some com prefers-reduced-motion.
   function contarNumeros() {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
-    var els = document.querySelectorAll("#prova .n");
-    els.forEach(function (e) {
-      var alvo = e.textContent;
-      var n = parseFloat(alvo.replace(/[^0-9,]/g, "").replace(/\./g, "").replace(",", "."));
-      if (!(n > 0)) { return; }
-      var moeda = /^R\$/.test(alvo), dec = /,\d\d$/.test(alvo);
-      var t0 = null;
-      function passo(ts) {
-        if (!t0) { t0 = ts; }
-        var k = Math.min(1, (ts - t0) / 600);
-        var e2 = 1 - Math.pow(1 - k, 3);
-        var v = n * e2;
-        e.textContent = moeda ? reais(v) : (dec ? v.toFixed(2).replace(".", ",") : Math.round(v).toLocaleString("pt-BR"));
-        if (k < 1) { requestAnimationFrame(passo); } else { e.textContent = alvo; }
+    var placas = document.querySelectorAll("#prova .flap i[data-alvo]");
+    placas.forEach(function (e, idx) {
+      var alvo = e.getAttribute("data-alvo");
+      var voltas = 6 + (idx % 5);
+      var k = 0;
+      function vira() {
+        k += 1;
+        if (k >= voltas) { e.textContent = alvo; e.classList.remove("vira"); return; }
+        e.textContent = String((parseInt(alvo, 10) + k * 3 + idx) % 10);
+        e.classList.remove("vira"); void e.offsetWidth; e.classList.add("vira");
+        setTimeout(vira, 70);
       }
-      requestAnimationFrame(passo);
+      setTimeout(vira, 40 * (idx % 9));
     });
   }
 
@@ -2155,7 +2152,7 @@
       i += 1;
       vivoAtual = p;
       alvo.href = p.link;
-      aDica.textContent = "toque para ver na loja →";
+      aNome.classList.remove("pronto");
       aPreco.innerHTML = "";
       var curto = String(p.nome || "").trim();
 
@@ -2171,6 +2168,7 @@
       }
       if (calmo) {
         aNome.textContent = curto;
+        aNome.classList.add("pronto");
         fecharPreco();
         relogio = setTimeout(proximo, 3400);
         return;
@@ -2184,6 +2182,7 @@
           return;
         }
         aNome.textContent = curto;
+        aNome.classList.add("pronto");
         fecharPreco();
         relogio = setTimeout(proximo, 2600);
       })();

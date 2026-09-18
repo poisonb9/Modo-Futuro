@@ -588,6 +588,10 @@
   /* o involucro reserva 4 px a` direita: o ponto fica em cima do fim da
      linha e nunca e' cortado pela borda do cartao */
   .serie-wrap { position: relative; margin-top: 2px; padding-right: 4px; }
+  .serie-wrap .escala {
+    display: block; margin-top: 2px; font: 500 11px/1.2 Poppins, sans-serif;
+    color: var(--fraco);
+  }
   .serie-wrap .agora {
     position: absolute; width: 5px; height: 5px; border-radius: 50%;
     background: var(--fraco); transform: translate(-50%, -50%);
@@ -1033,6 +1037,12 @@
     wrap.className = "serie-wrap" + ((p.queda || 0) >= 5 ? " baixou" : "");
     wrap.appendChild(svg);
     wrap.appendChild(ponto);
+    // ⭐ A ESCALA DO GRAFICO (Bryan, 18/09: "vale mostrar ha' quantos dias e'
+    // acompanhado?"): so' aqui, colado a` linha, o numero de dias explica a
+    // queda ("caiu 47%" — em quanto tempo?). Solto no cartao era telemetria.
+    if (!p.suave && p.dias >= 2) {
+      wrap.appendChild(el("span", "escala", p.dias + " dias de radar"));
+    }
     return wrap;
   }
 

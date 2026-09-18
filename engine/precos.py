@@ -167,11 +167,45 @@ def ler_instantaneo() -> dict:
         return {}
 
 
+def fotos_de(d: dict) -> list[str]:
+    """As fotos extras do anuncio, como a API manda (`product_small_image_urls`
+    vem como {"string": [...]}), sem a principal repetida e sem vazio."""
+    bruto = d.get("product_small_image_urls") or {}
+    if isinstance(bruto, dict):
+        bruto = bruto.get("string") or []
+    if not isinstance(bruto, list):
+        return []
+    principal = d.get("product_main_image_url") or ""
+    vistas, fim = set(), []
+    for u in bruto:
+        if isinstance(u, str) and u and u != principal and u not in vistas:
+            vistas.add(u)
+            fim.append(u)
+    return fim
+
+
+# ⚠️ As fotos saem por AQUI, e nao pela assinatura de `puxar`: os testes
+# substituem `precos.puxar` por um lambda de UM argumento, e mudar a
+# assinatura quebraria arquivo congelado. `puxar` escreve; `atualizar` le'.
+ULTIMAS_FOTOS: dict[str, list[str]] = {}
+
+
 def puxar(ids: list[str]) -> dict:
-    """{id: preco} da loja, agora. Levanta se a chamada falhar."""
+    """{id: preco} da loja, agora. Levanta se a chamada falhar.
+
+    ⭐ FOTOS EXTRAS (18/09/2026). O mesmo DTO traz `product_small_image_urls`
+    — varias fotos por anuncio — e ate' hoje so' a principal era guardada. A
+    principal e' a que o lojista escolhe pra COMPETIR na busca do Ali: banner,
+    "22 colors available~", texto por cima. Os Maestros (Analista de Loja
+    Virtual EP.2) chamam isso de banner na pagina de produto e mandam tirar.
+    Guardar as outras aqui custa ZERO chamada: e' campo que ja' vem. Quem
+    escolhe a limpa e' o publicador, com criterio medido — nao este modulo.
+    Escreve {id: [urls]} em `ULTIMAS_FOTOS`.
+    """
     from . import aliexpress
 
     fora: dict[str, float] = {}
+    ULTIMAS_FOTOS.clear()
     import time
 
     for i in range(0, len(ids), LOTE):
@@ -214,6 +248,7 @@ def puxar(ids: list[str]) -> dict:
             # que nos gravamos um dia como se fosse preco.
             if v > 0:
                 fora[str(d.get("product_id"))] = v
+                ULTIMAS_FOTOS[str(d.get("product_id"))] = fotos_de(d)
         if len(prods) < len(pedaco):
             print(f"      [!] pedi {len(pedaco)} e vieram {len(prods)} — "
                   f"produto fora do ar, ou o corte silencioso do lote")
@@ -228,7 +263,9 @@ def atualizar(ensaio: bool = False) -> dict:
         print("catalogo vazio — nada a reconferir")
         return {}
     antes = ler_instantaneo()
+    ULTIMAS_FOTOS.clear()
     novos = puxar(ids) if ids else {}
+    fotos = dict(ULTIMAS_FOTOS)
     # ⭐ O MERCADO LIVRE, pela porta dele. Falha aqui NAO derruba o
     # instantaneo do AliExpress: sao fontes independentes, e o que ja' foi
     # reconferido acima e' informacao boa. O erro sobe DEPOIS de gravar.
@@ -270,6 +307,12 @@ def atualizar(ensaio: bool = False) -> dict:
     saida = dict(antes)
     for pid, v in novos.items():
         saida[pid] = {"preco": round(v, 2), "quando": quando}
+        # ⭐ fotos extras do Ali (ver `puxar`); quem nao respondeu hoje
+        # mantem as de ontem junto com o preco de ontem
+        if fotos.get(pid):
+            saida[pid]["imagens"] = fotos[pid]
+        elif (antes.get(pid) or {}).get("imagens"):
+            saida[pid]["imagens"] = antes[pid]["imagens"]
     # ⭐ ML (regua v2, 17/09/2026): frete gratis e reputacao do vendedor do
     # anuncio mais barato entram no instantaneo — a Confianca MEDIDA do ML.
     if fichas_ml:

@@ -282,10 +282,11 @@ EXTERNAS = {
 # nao as mostra. Continuam mapeadas em EXTERNAS de proposito — voltar e'
 # tirar daqui, nao redescobrir a categoria.
 FORA_DO_SITE = {"Carraro BR", "Leveros BR", "Radiale Pneus"}
-# ⭐ TETO DE TROCAS DE FOTO por publicacao (ver `_foto` em produtos_todos):
-# 3 da calibracao + 10 pedidos pelo Bryan em 18/09. As 23 que a regra faria
-# estao no contact sheet da sessao; ele sobe o teto quando aprovar.
-FOTOS_TROCAS_MAX = 13
+# ⭐ TETO DE TROCAS DE FOTO por publicacao (ver `_foto` em produtos_todos).
+# Subiu em etapas em 18/09: 3 da calibracao -> 13 ("os proximos 10") -> SEM
+# TETO ("gostei, pode aplicar em todas", Bryan, 18/09 12:50). Fica a
+# constante pra voltar a limitar se uma rodada de fotos novas sair torta.
+FOTOS_TROCAS_MAX = 10 ** 6
 # ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria
 # fora, com aviso — nao categoria com preco de ontem.

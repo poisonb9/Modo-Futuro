@@ -31,3 +31,16 @@ if prods:
         tipo = type(v).__name__
         # ⚠️ so' o TAMANHO do valor, nunca o valor
         print(f"  {c:34} {tipo:6} ({len(str(v))} chars)")
+
+# ⭐ 18/09/2026 — A PERGUNTA DO IMPOSTO. O preco que mostramos e' o que a
+# pessoa paga? `tax_rate` e os tres precos (sem link, sem id: e' numero de
+# imposto e de preco, nao rastreia ninguem). Se `tax_rate` > 0 e o
+# target_sale_price for SEM imposto, o site esta' mostrando preco menor que
+# o checkout — o exato defeito que a nossa regra dos 24h existe pra evitar.
+print("\nIMPOSTO E PRECOS (2 produtos, so' numeros):")
+for p in prods[:2]:
+    print("  tax_rate:", p.get("tax_rate"),
+          "| sale_price:", p.get("sale_price"), p.get("sale_price_currency"),
+          "| target_sale_price:", p.get("target_sale_price"), p.get("target_sale_price_currency"),
+          "| target_app_sale_price:", p.get("target_app_sale_price"),
+          "| original:", p.get("target_original_price"))

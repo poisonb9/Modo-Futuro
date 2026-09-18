@@ -1260,6 +1260,25 @@
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
       av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
       corpo.appendChild(av);
+      // ⭐ #3 (18/09): "N de olho neste preço" — o número REAL de quem pediu
+      // aviso (ENP: escassez só quando é verdade). Aparece a partir de 2.
+      if ((p.de_olho || 0) >= 2) {
+        var olho = el("div", "ja-esteve de-olho", p.de_olho + " pessoas de olho neste preço");
+        olho.title = "quantas pessoas pediram aviso de queda deste produto";
+        corpo.appendChild(olho);
+      }
+      // ⭐ consumível: além do aviso de queda, "lembrar em 30 dias" (ENP:
+      // reposição no tempo certo). Mesmo bot, /start alerta_<id>_repor30.
+      if (p.recorrente) {
+        var rp = document.createElement("a");
+        rp.className = "avise-me repor";
+        rp.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id)) + "_repor30";
+        rp.rel = "noopener";
+        rp.textContent = "🔁 lembrar de repor em 30 dias";
+        rp.title = "eu te lembro no Telegram daqui a 30 dias, com o preço do dia";
+        rp.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
+        corpo.appendChild(rp);
+      }
     }
     // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
     // numero que acabou de ser lido. Volta `null` quando nao ha' 3 pontos.

@@ -694,6 +694,8 @@ def produtos_todos() -> list[dict]:
     agora = _precos_agora()
     from engine import tendencias_ml as _tm
     _termos_alta = _tm.termos()
+    from engine import alertas as _al, regua_vitrine as _rv
+    _olho = _al.de_olho()
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
@@ -777,6 +779,10 @@ def produtos_todos() -> list[dict]:
             "frete_gratis": bool((agora.get(str(d.get("id"))) or {}).get("frete_gratis", False)),
             # ⭐ termo em alta no Mercado Livre contido no nome (regua v2) ou ""
             "em_alta": _tm.em_alta(_nome_bonito(d), _termos_alta),
+            # ⭐ #3 (18/09): quantas pessoas pediram aviso (numero real) e se e'
+            # consumivel (ganha "lembrar em 30 dias" no botao)
+            "de_olho": int(_olho.get(str(d.get("id")), 0)),
+            "recorrente": bool(_rv.recorrente({"nome": _nome_bonito(d)})),
             "reputacao": (agora.get(str(d.get("id"))) or {}).get("reputacao") or {},
             # ⭐ quando o preco foi reconferido pela ultima vez ("hoje 19:00" ou
             # "15/09"): a ancora que TODO produto tem, quando nao ha' Promo

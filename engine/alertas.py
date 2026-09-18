@@ -140,6 +140,20 @@ def interpretar(update: dict) -> tuple[int, str, str] | None:
     return int(chat), pid, nome
 
 
+# ⭐ REPOSICAO (18/09/2026, maquina de vendas #3): consumivel ganha no botao
+# o /start `alerta_<id>_repor30` — alem do aviso de queda, um lembrete aos
+# 30 dias ("hora de repor?"). ENP "Produto Recorrente": reposicao no tempo
+# certo de consumo e' a recompra que nao precisa de anuncio.
+SUFIXO_REPOR = "_repor30"
+REPOR_DIAS = 30
+
+
+def separar_repor(pid: str) -> tuple[str, bool]:
+    if pid.endswith(SUFIXO_REPOR):
+        return pid[: -len(SUFIXO_REPOR)], True
+    return pid, False
+
+
 def colher(updates: list[dict] | None = None) -> int:
     """Le' os /start novos e grava as inscricoes. Devolve quantas.
     `updates` injetado e' para teste; sem ele, chama getUpdates."""
@@ -166,9 +180,10 @@ def colher(updates: list[dict] | None = None) -> int:
             if not r:
                 continue
             chat, pid, nome = r
+            pid, repor = separar_repor(pid)
             if chat in ja.get(pid, set()):
                 continue
-            f.write(json.dumps({"chat": chat, "produto": pid, "nome": nome,
+            f.write(json.dumps({"chat": chat, "produto": pid, "nome": nome, "repor": repor,
                                 "quando": datetime.now(timezone.utc).isoformat(timespec="seconds")},
                                ensure_ascii=False) + chr(10))
             ja.setdefault(pid, set()).add(chat)
@@ -247,6 +262,63 @@ def avisar(sinais_por_produto: dict[str, tuple[str, dict]],
     return n
 
 
+def de_olho() -> dict[str, int]:
+    """{produto_id: quantas pessoas pediram aviso} — o "N de olho neste
+    preco" do cartao. Numero REAL (ENP: nunca inventar escassez)."""
+    return {pid: len(chats) for pid, chats in inscricoes().items() if chats}
+
+
+def lembrar_reposicao(cartoes: dict[str, dict] | None = None, enviar=None,
+                      hoje: date | None = None) -> int:
+    """Manda "hora de repor?" a quem pediu `repor` ha' >= 30 dias, uma vez
+    por pessoa/produto. `cartoes` {id: {nome, preco, link}} e `enviar`
+    injetados sao para teste."""
+    hoje = hoje or date.today()
+    env = _enviados()
+    if cartoes is None:
+        from . import sinais as _s
+        cat = _s._catalogo()
+        cartoes = {pid: {"nome": r.get("nome", ""), "preco": r.get("preco", ""),
+                         "link": r.get("link", "")} for pid, r in cat.items()}
+    if enviar is None:
+        if not token():
+            return 0
+
+        def enviar(chat, texto):
+            _chamar("sendMessage", chat_id=chat, text=texto)
+    n = 0
+    for d in _ler_jsonl(INSCRICOES):
+        if not d.get("repor") or d.get("cancelado"):
+            continue
+        try:
+            quando = datetime.fromisoformat(str(d.get("quando"))).date()
+        except ValueError:
+            continue
+        if (hoje - quando).days < REPOR_DIAS:
+            continue
+        pid, chat = str(d.get("produto")), int(d.get("chat") or 0)
+        chave = f"{chat}|{pid}|repor"
+        if chave in env or not chat:
+            continue
+        p = cartoes.get(pid) or {}
+        texto = (f"🔁 Faz {REPOR_DIAS} dias que você pediu pra eu lembrar: hora de repor "
+                 f"{p.get('nome') or 'o produto'}?" + (f" Hoje está {p['preco']}." if p.get("preco") else ""))
+        if p.get("link"):
+            texto += chr(10) + chr(10) + p["link"]
+        try:
+            enviar(chat, texto)
+        except Exception as e:                        # noqa: BLE001
+            print(f"alertas: lembrete falhou pra {chat}: {e}")
+            continue
+        env[chave] = 1
+        n += 1
+    if n:
+        ENVIADOS.parent.mkdir(parents=True, exist_ok=True)
+        ENVIADOS.write_text(json.dumps(env, indent=0), encoding="utf-8")
+    print(f"alertas: {n} lembrete(s) de reposicao")
+    return n
+
+
 def sinais_de_hoje() -> dict[str, tuple[str, dict]]:
     """Os produtos com sinal hoje, no formato de `avisar`. Usa
     `engine/sinais.py` sobre a serie — a mesma leitura do canal."""
@@ -274,6 +346,7 @@ def main() -> None:
         colher()
     if o.avisar:
         avisar(sinais_de_hoje())
+        lembrar_reposicao()
     if not (o.colher or o.avisar):
         insc = inscricoes()
         print(f"{sum(len(v) for v in insc.values())} inscricao(oes) em {len(insc)} produto(s)")

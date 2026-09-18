@@ -73,6 +73,24 @@ try:
     checar(n == 1, "sinal diferente no mesmo dia avisa")
 
     print()
+    print("3b. (#3, 18/09) 'N de olho' e reposicao em 30 dias")
+    alertas.colher([upd(20, 111, "/start alerta_EXY1_repor30"), upd(21, 222, "/start alerta_EXY1_repor30"), upd(22, 333, "/start alerta_EXY1")])
+    checar(alertas.de_olho().get("EXY1") == 3, f"3 pessoas de olho no EXY1 (repor e simples contam juntos): {alertas.de_olho()}")
+    linhas = [json.loads(l) for l in alertas.INSCRICOES.read_text(encoding="utf-8").splitlines()]
+    checar(sum(1 for l in linhas if l.get("repor")) == 2 and all(l["produto"] == "EXY1" for l in linhas if l.get("repor")),
+           "o sufixo _repor30 vira `repor: true` e o id fica limpo")
+    from datetime import date, timedelta
+    env = []
+    cart = {"EXY1": {"nome": "Exypna", "preco": "R$ 98,00", "link": "https://x"}}
+    n = alertas.lembrar_reposicao(cart, enviar=lambda c, t: env.append((c, t)), hoje=date.today() + timedelta(days=29))
+    checar(n == 0, "29 dias: nenhum lembrete")
+    n = alertas.lembrar_reposicao(cart, enviar=lambda c, t: env.append((c, t)), hoje=date.today() + timedelta(days=30))
+    checar(n == 2 and sorted(c for c, _ in env) == [111, 222] and "hora de repor Exypna" in env[0][1] and "R$ 98,00" in env[0][1],
+           f"30 dias: lembrete so' pra quem pediu repor, com nome, preco e link ({n})")
+    n = alertas.lembrar_reposicao(cart, enviar=lambda c, t: env.append((c, t)), hoje=date.today() + timedelta(days=31))
+    checar(n == 0, "nao repete o lembrete")
+
+    print()
     print("4. SEM BOT: link vazio, no-op")
     checar(alertas.link_para("MLB1") == "", "sem TELEGRAM_BOT_ALERTA o botao nao existe")
     checar(alertas.colher() == 0, "colher sem token = 0, sem estourar")

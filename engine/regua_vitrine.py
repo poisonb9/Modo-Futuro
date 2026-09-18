@@ -85,12 +85,16 @@ FAIXA_ACIMA = 0.0
 # ⭐ RECORRENCIA (ENP "Produto Recorrente", 4 fichas): consumivel, desgaste,
 # colecionavel geram recompra — e' LTV. +15% no Rende.
 RECORRENTE = re.compile(
-    r"energ[ée]tico|energy drink|suplemento|whey|creatina|vitamina|c[áa]psula|\bch[áa]\b|\bcaf[ée]\b|"
-    r"ra[çc][ãa]o|petisco|areia (de|para) gato|fralda|absorvente|len[çc]o|papel toalha|"
-    r"cartucho|toner|filtro|refil|l[âa]mpada|pilha|bateria|\bmeias?\b|camiseta b[áa]sica|"
-    r"fita (adesiva|isolante|dupla)|saco de lixo|esponja|detergente|sab[ãa]o|shampoo|"
-    r"condicionador|creme|hidratante|protetor solar|perfume|desodorante|escova de dente|"
-    r"l[âa]mina de barbear|colecion", re.I)
+    # ⚠️ Apertado em 18/09: "balanca de CAFE", "chuveiro FILTRO", "kit de
+    # maquiagem" casavam como consumivel. So' o que se REPOE: o proprio
+    # consumivel (nao o aparelho que o usa), com borda de palavra.
+    r"energ[ée]tico|energy drink|suplemento|\bwhey\b|creatina|\bvitaminas?\b|c[áa]psulas? de caf|"
+    r"caf[ée] (em gr[ãa]o|mo[íi]do|torrado)|ch[áa] (verde|preto|mate|de )|"
+    r"\bra[çc][ãa]o\b|petisco|areia (de|para) gato|fraldas?\b|absorventes?\b|len[çc]os? umedecid|papel toalha|"
+    r"cartuchos?\b|\btoner\b|refil\b|filtro de (barro|[áa]gua)|l[âa]mpadas?\b|\bpilhas?\b|"
+    r"\bmeias?\b|camiseta b[áa]sica|fita (adesiva|isolante|dupla)|sacos? de lixo|esponjas? (de a[çc]o|para lou[çc]a)|"
+    r"detergente|sab[ãa]o|shampoo|condicionador|hidratante|protetor solar|perfume|desodorante|"
+    r"escova de dente|l[âa]minas? de barbear|colecion", re.I)
 
 # ⛔ EXCLUSOES (piso): o que NAO E' PRODUTO FISICO — gift card, credito,
 # pontos de jogo, assinatura, peca de reposicao, livro. ⚠️ Medido em 17/09:

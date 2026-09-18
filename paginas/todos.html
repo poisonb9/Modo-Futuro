@@ -697,6 +697,27 @@
   // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
   // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
   var BOT_ALERTA = "";
+  // ⭐ DE ONDE A PESSOA VEIO (18/09/2026): `?de=bio.<canal>` da contra-capa,
+  // `?de=telegram` dos posts, `?de=video.<id>` quando houver. Vai em cada
+  // clique de produto. So' texto curto e sem quem: e' origem, nao pessoa.
+  var ORIGEM_DE = "";
+  try {
+    var qs = new URLSearchParams(location.search);
+    ORIGEM_DE = String(qs.get("de") || "").replace(/[^a-zA-Z0-9._-]/g, "").slice(0, 40);
+    // ⭐ `?p=<id>`: o produto do link abre em 1o (o vídeo/post que trouxe a
+    // pessoa era sobre ELE — motion: "alinhe o anúncio ao que a página abre").
+    var pedido = String(qs.get("p") || "").slice(0, 64);
+    if (pedido) {
+      var idx = -1;
+      PRODUTOS.some(function (x, i) { if (String(x.id) === pedido) { idx = i; return true; } return false; });
+      if (idx > 0) {
+        var pp = PRODUTOS[idx];
+        PRODUTOS.splice(idx, 1);
+        PRODUTOS.unshift(pp);
+        pp.topo = 0;      // antes de todo topo
+      }
+    }
+  } catch (e) { /* URL estranha nao derruba a pagina */ }
   // ⭐ QUANTO A MENOS SE PAGA HOJE, somando os que cairam — e a linha por dia.
   // {"hoje": 123.4, "n": 32, "serie": [["09-13", 80.2], ...]}. Publicador
   // preenche; a conta e' a mesma do "de" riscado de cada cartao.
@@ -1563,10 +1584,10 @@
       // ⭐ OS 10 PRIMEIROS (17/09/2026): 5 ate' R$ 99,90 + 5 livres,
       // intercalados, escolhidos pelo publicador (`marcar_topo`). Teste de
       // 30 dias medido por clique. Sem `topo` (pagina velha), nada muda.
-      var comTopo = lista.filter(function (p) { return p.topo; });
+      var comTopo = lista.filter(function (p) { return typeof p.topo === "number"; });
       if (comTopo.length) {
         comTopo.sort(function (a, b) { return a.topo - b.topo; });
-        lista = comTopo.concat(lista.filter(function (p) { return !p.topo; }));
+        lista = comTopo.concat(lista.filter(function (p) { return typeof p.topo !== "number"; }));
       }
       var iv = -1;
       lista.some(function (p, i) { if (p.vitrine) { iv = i; return true; } return false; });
@@ -2082,7 +2103,8 @@
                    "Prefer": "return=minimal" },
         body: JSON.stringify({ produto: String(p.id).slice(0, 64),
                                loja: String(p.loja || "").slice(0, 40),
-                               origem: origem }),
+                               origem: origem,
+                               de: ORIGEM_DE || null }),
         keepalive: true
       }).catch(function () { /* medir nunca derruba a pagina */ });
     } catch (e) { /* idem */ }

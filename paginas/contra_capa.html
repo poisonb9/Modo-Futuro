@@ -610,7 +610,7 @@
   // ⚠️ A CASA DA OPERACAO. Ate' 14/09/2026 o botao "os produtos"
   // mandava pro Telegram, igual ao de cima — dois botoes, um destino.
   // Agora existe endereco proprio pro catalogo inteiro.
-  var CASA = "https://achadinhototal.pages.dev/";
+  var CASA = "https://achadinhototal.com.br/";
 
   // ⚠️ OS PRODUTOS DE VERDADE ENTRAM AQUI, NA PUBLICACAO.
   //
@@ -1148,6 +1148,12 @@
     e.className = "botao" + (falta ? " desligado" : "");
     // ⚠️ SEM `target=_blank` aqui tambem: os botoes (Telegram, catalogo, o
     // mais barato) sofriam do mesmo bloqueio de pop-up que engolia o toque.
+    // ⭐ ORIGEM (18/09/2026, maquina de vendas §7.2 #1): quem entra na casa
+    // pela bio de um canal leva `de=bio.<canal>`; o site grava isso em cada
+    // clique de produto. E' o que faltava pra saber de onde vem quem clica.
+    if (!falta && href === CASA) {
+      href = CASA + "?de=bio." + encodeURIComponent(CANAIS[atual].banco);
+    }
     if (!falta) { e.href = href; e.rel = "noopener"; }
     e.appendChild(miniatura(selo));
     var r = el("span", "rotulo", rotulo);

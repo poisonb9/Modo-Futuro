@@ -1,0 +1,47 @@
+# A velocidade do site mae, medida — e travada.
+#
+# ⭐ POR QUE EXISTE (18/09/2026, maquina de vendas #12): nunca tinhamos medido.
+# ENP e createaprowebsite: PageSpeed ANTES de qualquer campanha. O PSI
+# anonimo esgota a cota do dia e a nossa chave e' restrita, entao o
+# Lighthouse roda AQUI, no runner (a maquina local nao aguenta Chrome).
+#
+# ⚠️ GUARDA: performance mobile < PISO reprova o job — e o Bryan ve' no
+# Actions. Nao publica nada; so' mede. O JSON inteiro fica como artefato.
+name: Velocidade
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 12 * * 1'      # segundas, minuto quebrado (ver garimpo.yml)
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Lighthouse (mobile)
+        run: |
+          npx --yes lighthouse https://achadinhototal.com.br/ \
+            --output=json --output-path=./lh.json \
+            --chrome-flags="--headless --no-sandbox" \
+            --only-categories=performance,seo,accessibility,best-practices \
+            --form-factor=mobile --quiet
+          node -e '
+            const r = require("./lh.json"); const c = r.categories; const a = r.audits;
+            const s = k => Math.round((c[k]?.score ?? 0) * 100);
+            console.log(`performance ${s("performance")} | seo ${s("seo")} | acessibilidade ${s("accessibility")} | boas praticas ${s("best-practices")}`);
+            for (const k of ["first-contentful-paint","largest-contentful-paint","total-blocking-time","cumulative-layout-shift","speed-index","server-response-time"])
+              console.log(`  ${k.padEnd(28)} ${a[k]?.displayValue ?? "-"}`);
+            console.log("oportunidades:");
+            for (const [k,v] of Object.entries(a))
+              if (v.details?.type === "opportunity" && (v.numericValue||0) > 150) console.log(`  ${v.title.slice(0,70).padEnd(70)} ${v.displayValue||""}`);
+            const PISO = 70;
+            if (s("performance") < PISO) { console.log(`::error::performance mobile ${s("performance")} < ${PISO}`); process.exit(1); }
+          '
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse
+          path: lh.json

@@ -521,6 +521,7 @@
   .ja-esteve {
     font: 500 11.5px/1.35 Poppins, sans-serif; color: var(--fraco);
   }
+  .nq { white-space: nowrap; }
 
   /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
      da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
@@ -1288,7 +1289,12 @@
         : p.ja_esteve.em;
       var je = el("div", "ja-esteve espere");
       je.appendChild(el("strong", null, "espere"));
-      je.appendChild(document.createTextNode(" — já esteve a " + p.ja_esteve.preco + " " + quando));
+      // ⚠️ "R$" e o numero NUNCA se separam (Bryan viu "R$" numa linha e
+      // "128,99" na outra, 18/09): o preco vai num span sem quebra, e a
+      // linha quebra ANTES dele quando nao couber.
+      je.appendChild(document.createTextNode(" — já esteve a "));
+      je.appendChild(el("span", "nq", p.ja_esteve.preco));
+      je.appendChild(document.createTextNode(" " + quando));
       je.title = "subiu, mas já esteve mais barato — o menor preço que eu mesmo vi, e quando";
       corpo.appendChild(je);
     }
@@ -1341,7 +1347,7 @@
       var voltar = !!(p.ja_esteve && p.ja_esteve.preco);
       if (voltar) { av.className += " longo"; }
       av.innerHTML = SINO_SVG + '<span>' + (voltar
-        ? 'avise se voltar a ' + escapar(p.ja_esteve.preco) : 'avise-me se cair') + '</span>';
+        ? 'avise se voltar a <span class="nq">' + escapar(p.ja_esteve.preco) + '</span>' : 'avise-me se cair') + '</span>';
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
       av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
       corpo.appendChild(av);

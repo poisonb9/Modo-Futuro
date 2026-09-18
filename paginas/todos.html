@@ -768,6 +768,16 @@
   var EXTERNOS = {};
   var EXTERNO_CARREGADO = {};
   function externa(nome) { return !!(nome && EXTERNOS[nome]); }
+  // ⭐ 18/09 (Bryan: "a categoria nunca pode ser o nome da loja"): o produto
+  // externo agora tem `canal` = AREA (Eletronicos, Calcados...) e `loja` =
+  // loja. Externo e' quem tem a LOJA em EXTERNOS — nao mais o canal.
+  function externo(p) { return !!(p && p.loja && EXTERNOS[p.loja]); }
+  // as lojas externas que tem produto na categoria (pelo indice do publicador)
+  function lojasDaCategoria(cat) {
+    return Object.keys(EXTERNOS).filter(function (n) {
+      return !!((EXTERNOS[n].cats || {})[cat]);
+    });
+  }
 
   // ⭐ a URL da miniatura no CDN da loja (ver montar()); desconhecido = como veio
   function miniatura(u) {
@@ -812,11 +822,17 @@
         return ((b.ganho || 0) * (b.vendas || 0) * fb)
              - ((a.ganho || 0) * (a.vendas || 0) * fa);
       } },
-    { id: "caiu",   rotulo: "Caiu de preço",    cabe: function (p) { return (p.queda || 0) >= 5; },
+    // ⭐ 18/09 (Bryan, pela outra sessao): "Caiu de preco" vira "Maiores
+    // quedas"; "Achados novos" so' do catalogo proprio (a externa inteira
+    // chega com pontos=0 e virava "nova"); "Sendo acompanhados" sai — e'
+    // telemetria nossa, nao decisao de compra — e entra "Mais vendidos", a
+    // ordenacao que toda loja grande tem e a prova social do acervo
+    // (Movers and Shakers, meticsmedia).
+    { id: "caiu",   rotulo: "Maiores quedas",   cabe: function (p) { return (p.queda || 0) >= 5; },
       ordem: function (a, b) { return (b.queda || 0) - (a.queda || 0); } },
-    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2); } },
-    { id: "olho",   rotulo: "Sendo acompanhados", cabe: function (p) { return p.pontos >= 2; },
-      ordem: function (a, b) { return (b.dias || 0) - (a.dias || 0); } },
+    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2) && !externo(p); } },
+    { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
+      ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
     { id: "barato", rotulo: "Mais baratos",     cabe: function () { return true; },
       ordem: function (a, b) { return num(a.preco) - num(b.preco); } }
   ];
@@ -884,7 +900,7 @@
   // ⭐ E A EXTERNA TEM PASSO PROPRIO (50 na Nike — pedido do Bryan em
   // 16/09: "50 cards, depois os outros 50"). Vem do publicador, nao daqui.
   function passoBloco() {
-    return (externa(canal) && EXTERNOS[canal].passo) || PASSO_BLOCO;
+    return (externa(loja) && EXTERNOS[loja].passo) || PASSO_BLOCO;
   }
   // ⚠️ E VALE PRA LISTA CORRIDA TAMBEM. A Nike inteira do instantaneo fica
   // abaixo do teto, entao a categoria nao se divide em dois blocos — cai na
@@ -892,7 +908,7 @@
   // 90 cartoes + "ver mais 30", quando o pedido era 50. Um numero, dois
   // caminhos.
   function passoLista() {
-    return (externa(canal) && EXTERNOS[canal].passo) || PASSO;
+    return (externa(loja) && EXTERNOS[loja].passo) || PASSO;
   }
   var mostrandoAlto = PASSO_BLOCO;
   var mostrandoBaixo = PASSO_BLOCO;
@@ -1051,7 +1067,7 @@
     // ⚠️ TODA categoria externa e' so'-no-segmento, sem precisar ser
     // listada: se ela fosse pro rolar principal, o "so' baixa ao clicar"
     // deixaria de fazer sentido — a lista principal a pediria de cara.
-    return SO_NO_SEGMENTO.indexOf(p.canal) >= 0 || externa(p.canal);
+    return SO_NO_SEGMENTO.indexOf(p.canal) >= 0 || externo(p);
   }
 
   // ⭐ NAVEGAR E' PASSIVO, BUSCAR E' INTENCAO. Quem digitou "nike" ja' disse o
@@ -1091,7 +1107,7 @@
     }
     // ⭐ reparo 2 (18/09): "novo" so' no catalogo proprio — na externa tudo
     // e' "novo" no primeiro dia, e o verde e' um segundo acento sem decisao.
-    if (!(p.pontos >= 2) && !externa(p.canal)) {
+    if (!(p.pontos >= 2) && !externo(p)) {
       foto.appendChild(el("span", "novo", "novo"));
     }
     // ⭐ O FOGUINHO: so' a chama, no canto de baixo da foto, nos poucos que
@@ -1640,11 +1656,21 @@
     // `loja` numa lista onde a Clovis ainda nao tinha sido baixada. O nome
     // da loja externa E' o nome da categoria (ver EXTERNOS): qualquer um
     // dos dois menus dispara o download.
-    var ext = externa(canal) ? canal : (externa(loja) ? loja : "");
-    if (ext && !EXTERNO_CARREGADO[ext]) {
-      carregarExterno(ext, desenhar);
+    // ⭐ categoria = area: pode pedir VARIAS lojas externas de uma vez
+    var pendentes = [];
+    if (externa(loja) && !EXTERNO_CARREGADO[loja]) { pendentes.push(loja); }
+    if (canal) {
+      lojasDaCategoria(canal).forEach(function (n) {
+        if (!EXTERNO_CARREGADO[n] && pendentes.indexOf(n) < 0 && (!loja || loja === n)) { pendentes.push(n); }
+      });
+    }
+    if (pendentes.length) {
+      carregarExterno(pendentes[0], desenhar);
       return;
     }
+    // "externa abre pelo mais barato" vale pra LOJA externa; numa categoria
+    // mista (Casa = Ali + Kabum) manda a nota de vitrine, como no resto.
+    var ext = externa(loja) ? loja : "";
     var f = FILTROS.filter(function (x) { return x.id === atual; })[0];
     var termo = normal(busca.value.trim());
     var lista = PRODUTOS.filter(function (p) {
@@ -1887,8 +1913,13 @@
     // publicador mediu — e' o unico lugar onde a pessoa descobre que ela
     // existe. Depois de baixada, a contagem passa a ser a real (de PRODUTOS),
     // e as duas tem de bater; se nao baterem, o publicador e' quem errou.
+    // ⭐ 18/09: as AREAS das lojas externas ainda nao baixadas entram pelo
+    // indice (`cats`); as ja' baixadas estao em PRODUTOS e contaram acima.
+    // Nunca o nome da loja aqui — loja e' o menu Loja.
     Object.keys(EXTERNOS).forEach(function (c) {
-      if (!canais[c]) { canais[c] = EXTERNOS[c].n || 0; }
+      if (EXTERNO_CARREGADO[c]) { return; }
+      var cats = EXTERNOS[c].cats || {};
+      Object.keys(cats).forEach(function (k) { canais[k] = (canais[k] || 0) + cats[k]; });
     });
     var areas = Object.keys(canais).sort(function (a, b) {
       return canais[b] - canais[a];
@@ -1898,7 +1929,7 @@
       // "todas", e o numero pularia de 142 pra 1.047 no clique que a baixou
       // — sobre a mesma grade de 142.
       var deArea = [{ id: "", rotulo: "Todas", n: PRODUTOS.filter(function (p) {
-        return !externa(p.canal);
+        return !externo(p);
       }).length }];
       areas.forEach(function (c) {
         deArea.push({ id: c, rotulo: c, n: canais[c] });
@@ -2153,7 +2184,12 @@
 
   // ⚠️ ANTES de montar os controles: `visivel()` consulta `canal`, entao
   // ler a url depois faria a primeira pintura sair com o recorte errado.
-  canal = daUrl();
+  // ⭐ 18/09: `#nike` e' LOJA (menu Loja), `#casa` e' categoria — o hash
+  // continua abrindo os dois, cada um no seu menu.
+  function aplicarUrl(v) {
+    if (externa(v)) { loja = v; canal = ""; } else { canal = v; }
+  }
+  aplicarUrl(daUrl());
   mostrando = passoLista();
   mostrandoAlto = passoBloco();
   mostrandoBaixo = passoBloco();
@@ -2168,8 +2204,8 @@
   // coisa e apertou voltar espera a prateleira de novo — nao o catalogo.
   window.addEventListener("hashchange", function () {
     var novo = daUrl();
-    if (novo === canal) { return; }
-    canal = novo;
+    if (novo === canal || novo === loja) { return; }
+    aplicarUrl(novo);
     mostrando = passoLista();
     mostrandoAlto = passoBloco();
     mostrandoBaixo = passoBloco();

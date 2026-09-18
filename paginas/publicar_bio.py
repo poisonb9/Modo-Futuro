@@ -360,6 +360,51 @@ def _nome_externo(nome: str) -> str:
     return n or str(nome or "")
 
 
+def _categoria_externa(loja: str, categoria_feed: str, nome: str) -> str:
+    """A AREA do produto externo, na mesma escala do catalogo proprio.
+
+    ⛔ Bryan, 18/09/2026: "a categoria nunca pode ser o nome da loja, tem que
+    ser o que e' sobre a loja de fato". Ate' aqui a externa entrava com
+    canal = loja ("Nike", "Kabum"), e o menu Categoria misturava Cozinha,
+    Fitness... com nomes de loja. Loja e' o menu Loja; aqui e' a area.
+
+    O feed da Nike/Kabum traz caminho de categoria; Clovis e Lauri vem sem
+    nada, e o nome decide (Tenis/Bota/Sandalia -> Calcados). O que nao casa
+    cai na area padrao da loja — nunca no nome dela.
+    """
+    import re as _re
+    c = (categoria_feed or "").lower()
+    n = (nome or "").lower()
+    calcado = _re.search(r"\b(t[eê]nis|sand[aá]lia|bota|chinelo|sapat|sapatilha|tamanco|chuteira|papete|mocassim|rasteir)", n)
+    if loja == "Kabum BR":
+        if _re.search(r"eletroport|aspirador|cafeteira|air ?fryer|liquidificador|ventilador|purificador", c + " " + n):
+            return "Casa"
+        if _re.search(r"roupas|camiseta|bon[eé]|mochila", c):
+            return "Moda"
+        if _re.search(r"escrit[oó]rio|cadeira|mesa", c):
+            return "Casa"
+        return "Eletrônicos"
+    if loja == "Nike BR":
+        if "calçados" in c or "calcados" in c or calcado:
+            return "Calçados"
+        return "Moda"
+    if loja == "Clovis Calçados BR":
+        return "Calçados" if calcado or not _re.search(r"\b(meia|bolsa|carteira|cinto|mochila|bon[eé])", n) else "Moda"
+    if loja == "Lauri Esporte":
+        return "Calçados" if calcado else "Fitness"
+    if loja == "Arno BR":
+        return "Cozinha"
+    if loja == "Shark-Ninja BR":
+        return "Cozinha" if _re.search(r"ninja|liquidificador|creami|pote|air ?fryer|panela", n) else "Casa"
+    if loja == "Exypna":
+        return "Mercado"
+    if loja == "Lacoste BR":
+        return "Calçados" if calcado else "Moda"
+    if loja == "Camilovers BR":
+        return "Beleza"
+    return "Achadinhos"
+
+
 def produtos_externos() -> dict[str, dict]:
     """{categoria: {"arquivo", "passo", "produtos": [cartoes]}} — o que vai
     em arquivo separado. {} quando nao ha' instantaneo valido.
@@ -442,7 +487,9 @@ def produtos_externos() -> dict[str, dict]:
             "pontos": serie.get(pid, ("", 0, 0.0, ""))[1],
             "serie": _serie_curta(por_dia, d),
             "visto": f"{inst['quando'][8:10]}/{inst['quando'][5:7]}",
-            "canal": cat,
+            # ⭐ 18/09: canal = AREA do produto (Eletrônicos, Calçados...), e a
+            # loja fica no seu campo. O arquivo/menu Loja continua por `cat`.
+            "canal": _categoria_externa(p.get("loja") or "", p.get("categoria") or "", p.get("nome") or ""),
             "id": pid,
             "combina": [],
             "loja": cat,
@@ -600,8 +647,13 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     externos = produtos_externos()
     # ⚠️ O HTML LEVA SO' O INDICE das externas: nome, arquivo, quantos e o
     # passo. Os cartoes ficam no arquivo ao lado.
-    indice = {cat: {"arquivo": b["arquivo"], "n": len(b["produtos"]),
-                    "passo": b["passo"]} for cat, b in externos.items()}
+    indice = {}
+    for cat, b in externos.items():
+        cats: dict[str, int] = {}
+        for x in b["produtos"]:
+            cats[x["canal"]] = cats.get(x["canal"], 0) + 1
+        indice[cat] = {"arquivo": b["arquivo"], "n": len(b["produtos"]),
+                       "passo": b["passo"], "cats": cats}
     arquivos = {b["arquivo"]: json.dumps(
         {"categoria": cat, "produtos": b["produtos"]}, ensure_ascii=False)
         for cat, b in externos.items()}

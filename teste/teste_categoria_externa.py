@@ -89,8 +89,9 @@ try:
     checar([p["preco"] for p in prods] == ["R$ 59,98", "R$ 99,00", "R$ 149,99"],
            "ordenados do mais barato pro mais caro, no formato R$ x,yy")
     p0 = prods[0] if prods else {}
-    checar(p0.get("canal") == "Nike" and p0.get("id") == "awin:12",
-           "canal 'Nike' e id prefixado 'awin:' (nao colide com o AliExpress)")
+    # ⭐ 18/09: canal e' a AREA ("Moda" pra meia da Nike), a loja fica em `loja`
+    checar(p0.get("canal") == "Moda" and p0.get("loja") == "Nike" and p0.get("id") == "awin:12",
+           "canal 'Moda' (area), loja 'Nike', id prefixado 'awin:' (nao colide com o AliExpress)")
     checar(p0.get("loja") == "Nike", "a loja da externa e' a propria categoria (selo Nike)")
     # ⭐ 17/09: ganho pela comissao REAL da loja (Nike 7,5%), nao 7,5% pra todas
     checar(p0.get("ganho") == round(59.98 * awin.comissao_de("Nike BR") / 100, 2)
@@ -132,8 +133,8 @@ try:
     print()
     print("4. O HTML LEVA O INDICE, NAO OS CARTOES")
     html, arquivos = publicar_bio.montar_catalogo()
-    checar('"Nike": {"arquivo": "nike.json", "n": 3, "passo": 50}' in html,
-           "var EXTERNOS traz nome, arquivo, contagem e passo")
+    checar('"Nike": {"arquivo": "nike.json", "n": 3, "passo": 50, "cats": {' in html,
+           "var EXTERNOS traz nome, arquivo, contagem, passo e as AREAS (cats)")
     checar("Meia Nike Everyday" not in html,
            "o nome do produto da Nike NAO esta' no HTML (e' isso que mantem a pagina leve)")
     checar(set(arquivos) == {"nike.json"}, f"um arquivo ao lado: nike.json ({list(arquivos)})")
@@ -221,11 +222,11 @@ HTML = (RAIZ / "paginas" / "todos.html").read_text(encoding="utf-8")
 CODIGO = "\n".join(re.sub(r"\s*//.*$", "", L) for L in HTML.splitlines())
 checar("  var EXTERNOS = {};" in HTML, "o marcador var EXTERNOS = {} existe")
 seg = re.search(r"function soNoSegmento\(p\) \{(.*?)\n  \}", CODIGO, re.S)
-checar(bool(seg) and "externa(p.canal)" in seg.group(1),
-       "toda externa e' so'-no-segmento (nunca no rolar principal)")
+checar(bool(seg) and "externo(p)" in seg.group(1),
+       "toda externa e' so'-no-segmento (nunca no rolar principal) — pela LOJA, nao pelo canal")
 des = re.search(r"function desenhar\(\) \{(.*?)\n  \}", CODIGO, re.S)
-checar(bool(des) and "carregarExterno(ext, desenhar)" in des.group(1),
-       "desenhar() baixa a externa antes de desenhar")
+checar(bool(des) and "carregarExterno(pendentes[0], desenhar)" in des.group(1),
+       "desenhar() baixa as externas que a categoria/loja pede antes de desenhar")
 car = re.search(r"function carregarExterno\(nome, depois\) \{(.*?)\n  \}", CODIGO, re.S)
 corpo = car.group(1) if car else ""
 checar("fetch(EXTERNOS[nome].arquivo" in corpo, "o fetch usa o arquivo do indice (relativo)")
@@ -234,15 +235,16 @@ checar("r.json()" in corpo and ".catch(" in corpo and "tentar de novo" in corpo,
 url = re.search(r"function daUrl\(\) \{(.*?)\n  \}", CODIGO, re.S)
 checar(bool(url) and "Object.keys(EXTERNOS)" in url.group(1),
        "/#nike abre a categoria mesmo antes de ela estar em PRODUTOS")
-checar("EXTERNOS[canal].passo" in CODIGO, "o passo do 'ver mais' vem do indice (50 na Nike)")
+checar("EXTERNOS[loja].passo" in CODIGO, "o passo do 'ver mais' vem do indice da LOJA (50 na Nike)")
 checar('ext && atual === "todos"' in CODIGO,
        "a externa abre pelos mais baratos quando o filtro e' 'tudo'")
 
 print()
 print("⛔ PELO MENU LOJA TAMBEM BAIXA (17/09: 'Clovis 5983' no menu, 0 na grade)")
-checar('var ext = externa(canal) ? canal : (externa(loja) ? loja : "");' in CODIGO
-       and "if (ext && !EXTERNO_CARREGADO[ext])" in CODIGO,
-       "o download da externa dispara por `canal` OU por `loja`")
+# ⭐ 18/09: a categoria e' AREA e pode pedir varias lojas; a loja pede a dela
+checar("if (externa(loja) && !EXTERNO_CARREGADO[loja]) { pendentes.push(loja); }" in CODIGO
+       and "lojasDaCategoria(canal).forEach" in CODIGO,
+       "o download da externa dispara por `loja` OU pelas lojas da `categoria`")
 
 print()
 print("11. OS DOIS BLOCOS: cortar_bloco = top k pela regua, RODIZIO de categorias, sem excluido")

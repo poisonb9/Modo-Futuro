@@ -336,6 +336,9 @@ def ultimo_preco() -> dict[int, tuple[float, int]]:
     return u
 
 
+_MEMO_HISTORICO: dict = {}
+
+
 def historico() -> dict[int, list[float]]:
     """product_id -> UM preco por DIA que nos ja' vimos (o menor do dia).
 
@@ -360,9 +363,18 @@ def historico() -> dict[int, list[float]]:
     o erro que ninguem reclama e que destroi a credibilidade — e credibilidade
     de preco e' o unico ativo que esta pagina tem.
     """
-    por_dia: dict[int, dict[str, float]] = {}
+    # ⚠️ MEMO POR ARQUIVO (18/09/2026). `preco_antes_de` chama isto POR
+    # PRODUTO, e a serie tem 37 mil linhas: 0,5 s por chamada, 446 registros
+    # do catalogo = 4 minutos so' de reler o mesmo arquivo. Foi o que deixou
+    # `teste_vitrine_com_cartaz` "vermelho" desde 16/09 — nao falhava, morria
+    # no tempo. A chave e' o mtime, o mesmo desenho de `_preco_hoje_num` na
+    # pagina: rodada nova (ou RAIZ trocada no teste) invalida sozinha.
     if not PRECOS.exists():
         return {}
+    chave = (str(PRECOS), PRECOS.stat().st_mtime, PRECOS.stat().st_size)
+    if _MEMO_HISTORICO.get("chave") == chave:
+        return _MEMO_HISTORICO["valor"]
+    por_dia: dict[int, dict[str, float]] = {}
     for linha in PRECOS.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
             continue
@@ -385,7 +397,10 @@ def historico() -> dict[int, list[float]]:
             continue
         dias = por_dia.setdefault(d["id"], {})
         dias[dia] = min(dias[dia], v) if dia in dias else v
-    return {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
+    valor = {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
+    _MEMO_HISTORICO.clear()
+    _MEMO_HISTORICO.update({"chave": chave, "valor": valor})
+    return valor
 
 
 def maior_visto(p: dict, h: dict[int, list[float]]) -> float:

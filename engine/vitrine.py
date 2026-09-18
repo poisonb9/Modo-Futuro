@@ -355,8 +355,39 @@ def postar(bruto: dict, origem: str | None = None,
 CATALOGO = RAIZ / "estado" / "produtos_publicados.jsonl"
 
 
-def preco_antes_de(registro: dict) -> str:
+def preco_de_hoje(pid: int, registro: dict | None = None) -> float:
+    """O preco de HOJE pela MESMA regra da pagina (`_preco_hoje_num`):
+    o instantaneo de hora em hora primeiro; senao a ultima leitura da serie;
+    senao o que o registro traz.
+
+    ⛔ O DEFEITO QUE ISTO CONSERTA (18/09/2026, achado pelo teste 8 de
+    `teste_vitrine_com_cartaz`, que ficou 2 dias sem rodar ate' o fim): a
+    pagina comparava o maior visto com o preco de HOJE, e o canal com o preco
+    do DIA DA CAPTURA gravado em `produtos_publicados.jsonl`. Resultado
+    medido no catalogo: "Pular corda" com "de R$ 17,54" no canal e sem
+    queda na pagina; "Luzes de tira led" ao contrario. E' o mesmo defeito
+    que `_preco_hoje_num` consertou na pagina em 16/09 — a outra metade.
+    """
+    from . import garimpo, precos
+    agora = precos.ler_instantaneo().get(str(pid)) or {}
+    try:
+        v = float(agora.get("preco") or 0)
+    except (TypeError, ValueError):
+        v = 0.0
+    if v > 0:
+        return v
+    serie = garimpo.historico().get(pid) or []
+    if serie:
+        return float(serie[-1])
+    return _num((registro or {}).get("preco", ""))
+
+
+def preco_antes_de(registro: dict, hoje: float | None = None) -> str:
     """O maior preco que vimos deste produto, ou "" se ele nao caiu.
+
+    `hoje` e' o preco de agora quando quem chama ACABOU de conferir na loja
+    (`atualizar_preco`); sem ele, sai de `preco_de_hoje` — nunca do campo
+    `preco` do registro, que e' o do dia da captura.
 
     ⛔ ESTE NUMERO TEM DE SER O MESMO QUE A PAGINA MOSTRA, e nao "parecido".
     A pagina calcula em `publicar_bio._antes`, sobre a serie consolidada; aqui
@@ -376,7 +407,8 @@ def preco_antes_de(registro: dict) -> str:
     if not pid:
         return ""
     maior = garimpo.maior_visto({"product_id": pid}, garimpo.historico())
-    hoje = _num(registro.get("preco", ""))
+    if hoje is None:
+        hoje = preco_de_hoje(pid, registro)
     # ⚠️ 2% de piso, o mesmo da pagina: abaixo disso e' arredondamento e
     # cambio, nao queda. Sem este piso o canal marcaria "-1%" onde o site nao
     # marca nada.
@@ -447,7 +479,7 @@ def atualizar_preco(p: dict) -> dict:
     # pra R$ 18,21 mostraria a queda de ontem, menor que a de hoje. Seria a
     # queda falsa de 15/09 pelo avesso — errada pra menos, e do lado que nao
     # incomoda ninguem, que e' justamente o que nunca se confere.
-    novo["preco_antes"] = preco_antes_de({"id": pid, "preco": novo["preco"]})
+    novo["preco_antes"] = preco_antes_de({"id": pid}, hoje=agora)
     return novo
 
 

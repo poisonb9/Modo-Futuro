@@ -21,7 +21,7 @@ código citado. Atualizado em 18/09/2026.
 |---|---|---|
 | Reclame Aqui: nota das 10 lojas → me passar → `estado/reputacao_lojas.json` | mensal (validade 60 dias na régua) | navegador dele (o site bloqueia leitura automática) |
 | Search Console: sitemap `sitemap.xml` enviado; olhar "Páginas" indexadas | 1× agora; depois mensal | search.google.com/search-console |
-| Cloudflare: DNS (CNAME dos canais), Redirect Rule "WWW to root", secrets | quando houver mudança | dash.cloudflare.com (meu token é só de Pages) |
+| Cloudflare: DNS (CNAME dos canais), Redirect Rule "WWW to root", secrets — **checklist em `PARA_FAZER_NO_CLOUDFLARE.md`** | quando houver mudança | dash.cloudflare.com (meu token é só de Pages) |
 | Símbolos oficiais das lojas → `paginas/simbolos_lojas/<Loja>.png` | 1× | kits de afiliado |
 | Awin: aprovar/pedir programas; conferir `AWIN_TOKEN` nos secrets (a nuvem lê comissões da reserva sem ele) | quinzenal | ui.awin.com |
 | Decisão do vídeo de produto (AUDITORIA §3.1) | pendente desde 16/09 | — |

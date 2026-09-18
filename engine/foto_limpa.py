@@ -147,7 +147,10 @@ def medir(esperar: bool = True, timeout_min: int = 90) -> int:
         return 0
     lista = {pid: [u[len(PREFIXO):] for u in urls] for pid, urls in pend.items()}
     corpo = json.dumps(lista, separators=(",", ":"))
-    # ⚠️ o input do dispatch tem teto (~64 KB): em lotes de 120 anuncios
+    # ⚠️ o input do dispatch tem teto (~64 KB): em lotes de 120 anuncios.
+    # ⚠️ E VAI POR STDIN (`--json`), nao por `-f`: no Windows a linha de
+    # comando estoura em ~32 KB ("The filename or extension is too long",
+    # medido em 18/09 com 120 anuncios).
     ids = list(lista)
     entrou = 0
     shell = (sys.platform == "win32")
@@ -155,9 +158,9 @@ def medir(esperar: bool = True, timeout_min: int = 90) -> int:
         parte = {k: lista[k] for k in ids[i:i + 120]}
         corpo = json.dumps(parte, separators=(",", ":"))
         antes = time.time()
-        subprocess.run(["gh", "workflow", "run", WORKFLOW_OCR, "-R", REPO_OCR,
-                        "-f", f"prefixo={PREFIXO}", "-f", f"lista={corpo}"],
-                       check=True, capture_output=True, shell=shell)
+        subprocess.run(["gh", "workflow", "run", WORKFLOW_OCR, "-R", REPO_OCR, "--json"],
+                       input=json.dumps({"prefixo": PREFIXO, "lista": corpo}),
+                       text=True, check=True, capture_output=True, shell=shell)
         print(f"fotos: disparado lote {i // 120 + 1} ({len(parte)} anuncios, "
               f"{sum(len(v) for v in parte.values())} fotos)")
         if not esperar:

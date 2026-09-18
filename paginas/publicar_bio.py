@@ -298,6 +298,21 @@ def _de_inflado(por_dia: dict, d: dict, de_loja: float) -> dict:
             "dias": len(dias)}
 
 
+def _link_ml(d: dict, agora: dict) -> str:
+    """Produto do ML: o link do ANUNCIO mais barato (o preco que o cartao
+    mostra), vindo do instantaneo horario. "" = fica o link do registro.
+    Ver mercadolivre.link_do_anuncio (defeito medido em 18/09)."""
+    if (d.get("fonte") or "") != "mercadolivre":
+        return ""
+    item = (agora.get(str(d.get("id"))) or {}).get("item_id")
+    if not item:
+        return ""
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
+    from engine import mercadolivre as _ml
+    return _ml.link_do_anuncio(item, d.get("canal") or "")
+
+
 def _comissao_awin(loja: str) -> float:
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
@@ -731,7 +746,7 @@ def produtos_todos() -> list[dict]:
         saida.append({
             "nome": _nome_bonito(d),
             "preco": _preco_de_hoje(por_dia, d) or d.get("preco", ""),
-            "link": d["link"],
+            "link": _link_ml(d, agora) or d["link"],
             "imagem": d.get("imagem", ""),
             # ⛔ A QUEDA E' RECALCULADA AQUI, e nao lida do registro.
             #

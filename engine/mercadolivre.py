@@ -38,6 +38,7 @@ chamada do clipe, que precisa gerar clique no mesmo dia.
 from __future__ import annotations
 
 import os
+import re
 import time
 from urllib.parse import urlencode, urlparse, parse_qs, urlunparse
 
@@ -312,6 +313,20 @@ def etiqueta_de(canal: str) -> str:
     separacao por canal, mas NAO perde a comissao.
     """
     return ETIQUETAS.get(canal) or (os.getenv("MELI_MATT_WORD") or "")
+
+
+def link_do_anuncio(item_id: str, canal: str = "") -> str:
+    """O link do ANUNCIO (produto.mercadolivre.com.br/MLB-<n>), com a etiqueta.
+
+    ⛔ O DEFEITO (18/09/2026, celular do Bryan): o site mostrava o MENOR
+    anuncio (R$ 16,90) e o link abria a pagina do PRODUTO, que abre no
+    vendedor da buy box (R$ 19). Numero no site diferente do numero na loja
+    — a regra mais cara da casa, quebrada por desenho. O link tem de ir pro
+    anuncio que TEM o preco mostrado."""
+    d = re.sub(r"\D", "", str(item_id or ""))
+    if not d:
+        return ""
+    return com_afiliado(f"https://produto.mercadolivre.com.br/MLB-{d}", canal)
 
 
 def com_afiliado(url: str, canal: str = "") -> str:
@@ -597,7 +612,7 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
 
 
 def fichas_atual(ids: list[str]) -> dict[str, tuple]:
-    """{id: (MENOR preco agora, QUANTOS vendedores, frete gratis?, seller_id)}.
+    """{id: (MENOR preco agora, QUANTOS vendedores, frete gratis?, seller_id, item_id)}.
     Ficha sem vendedor fica de fora.
 
     ⭐ O NUMERO DE VENDEDORES E' A PROVA SOCIAL DO ML (17/09/2026). A API
@@ -637,7 +652,7 @@ def fichas_atual(ids: list[str]) -> dict[str, tuple]:
                      key=lambda i: float(i["price"]))
         return pid, (min(precos), len(precos),
                      bool((barato.get("shipping") or {}).get("free_shipping")),
-                     barato.get("seller_id"))
+                     barato.get("seller_id"), barato.get("item_id"))
 
     with ThreadPoolExecutor(max_workers=4) as ex:
         return {pid: v for pid, v in ex.map(_um, ids) if v is not None}

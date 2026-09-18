@@ -280,6 +280,9 @@ def atualizar(ensaio: bool = False) -> dict:
                 saida[pid]["frete_gratis"] = bool(f[2])
                 if rep:
                     saida[pid]["reputacao"] = rep
+                # ⭐ o anuncio que TEM esse preco — o cartao linka nele (18/09)
+                if len(f) >= 5 and f[4]:
+                    saida[pid]["item_id"] = str(f[4])
     AGORA.parent.mkdir(parents=True, exist_ok=True)
     AGORA.write_text(json.dumps(saida, ensure_ascii=False, indent=1),
                      encoding="utf-8")

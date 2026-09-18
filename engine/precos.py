@@ -190,6 +190,17 @@ def fotos_de(d: dict) -> list[str]:
 ULTIMAS_FOTOS: dict[str, list[str]] = {}
 
 
+RESPIRO_LIMITE_S = 5
+
+
+def _limite_de_chamadas(r: dict) -> bool:
+    """O envelope de erro do Ali pra rajada: {"error_response": {"code": "ApiCallLimit"}}."""
+    try:
+        return (r.get("error_response") or {}).get("code") == "ApiCallLimit"
+    except AttributeError:
+        return False
+
+
 def puxar(ids: list[str]) -> dict:
     """{id: preco} da loja, agora. Levanta se a chamada falhar.
 
@@ -215,10 +226,24 @@ def puxar(ids: list[str]) -> dict:
         # foi o que produziu a perda de 49.
         if i:
             time.sleep(2)
+        # ⭐ UMA SEGUNDA CHANCE ao ApiCallLimit (18/09/2026). MEDIDO: duas
+        # rodadas do dia (07:35 e 10:56 UTC) morreram no lote 3 com
+        # `"ApiCallLimit" ... "this ban will last 1 seconds"` — um balde por
+        # segundo que esvazia sozinho, e o codigo estourava a rodada inteira
+        # por um segundo de espera. Uma tentativa a mais, com respiro maior;
+        # se vier de novo, ai' e' limite de verdade e estoura como antes.
         r = aliexpress.chamar("aliexpress.affiliate.productdetail.get",
                               product_ids=",".join(pedaco),
                               target_currency="BRL", target_language="PT",
                               country="BR")
+        if _limite_de_chamadas(r):
+            print(f"      [!] lote {i // LOTE + 1}: ApiCallLimit — espero "
+                  f"{RESPIRO_LIMITE_S}s e tento de novo")
+            time.sleep(RESPIRO_LIMITE_S)
+            r = aliexpress.chamar("aliexpress.affiliate.productdetail.get",
+                                  product_ids=",".join(pedaco),
+                                  target_currency="BRL", target_language="PT",
+                                  country="BR")
         # ⛔ ENGOLIR ESTE ERRO CUSTOU 49 PRODUTOS na primeira rodada de verdade,
         # e o relato dizia "153 reconferidos" enquanto o arquivo saia com 104.
         # A versao anterior fazia `except (KeyError, TypeError): prods = []` —

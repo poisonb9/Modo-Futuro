@@ -31,7 +31,12 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<!-- ⭐ FONTES SEM BLOQUEAR A RENDERIZACAO (18/09/2026): o Lighthouse mediu
+     1,19 s de "render-blocking" so' nesta linha (performance mobile 48). A
+     folha carrega em `print` e vira `all` quando chega; o texto aparece na
+     fonte do sistema e troca (display=swap). Sem JS, o <noscript> carrega. -->
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <style>
   /* ⚠️ A COPY DESTA PAGINA SEGUE UMA LISTA DE VERIFICACAO, e nao o gosto de
      quem escreveu. Ela vem do acervo dos Maestros (Nick Saraev, DEMONSTRADO):
@@ -739,6 +744,14 @@
   var EXTERNO_CARREGADO = {};
   function externa(nome) { return !!(nome && EXTERNOS[nome]); }
 
+  // ⭐ a URL da miniatura no CDN da loja (ver montar()); desconhecido = como veio
+  function miniatura(u) {
+    u = String(u || "");
+    if (/aliexpress-media\.com\/.*\.(jpg|jpeg|png)$/i.test(u)) { return u + "_350x350q75.jpg_.webp"; }
+    if (/mlstatic\.com\/.*-F\.(jpg|webp)$/i.test(u)) { return u.replace(/-F\.(jpg|webp)$/i, "-O.jpg"); }
+    return u;
+  }
+
   var grade = document.getElementById("grade");
   var contagem = document.getElementById("contagem");
   var busca = document.getElementById("busca");
@@ -1059,10 +1072,20 @@
     }
     if (p.imagem) {
       var img = document.createElement("img");
-      img.src = p.imagem;
+      // ⭐ MINIATURA DO CDN (18/09/2026): o Lighthouse mediu 974 KiB de imagem
+      // sem redimensionar. Ali: `_350x350q75.jpg_.webp` = 12 KB no lugar de
+      // 81 (medido); ML: `-O.jpg` = 36 KB no lugar de 178. Se a variante
+      // falhar, volta pra original — nunca cartao sem foto por causa disso.
+      img.src = miniatura(p.imagem);
+      if (img.src !== p.imagem) {
+        img.addEventListener("error", function () {
+          if (img.src !== p.imagem) { img.src = p.imagem; }
+        }, { once: true });
+      }
       img.alt = p.nome || "";
       img.loading = "lazy";
       img.decoding = "async";
+      img.width = 350; img.height = 350;
       foto.appendChild(img);
     }
     a.appendChild(foto);

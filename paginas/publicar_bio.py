@@ -696,6 +696,9 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                         # ⭐ selo 2: o @ do bot do "avise-me"; "" = sem botao
                         ('  var BOT_ALERTA = "";',
                          '  var BOT_ALERTA = "' + _bot_alerta() + '";'),
+                        # ⭐ a hora da ultima reconferencia (painel do garimpo, 18/09)
+                        ('  var ULTIMA_CONFERENCIA = "";',
+                         '  var ULTIMA_CONFERENCIA = "' + _ultima_conferencia() + '";'),
                         # ⚠️ elemento, nao comentario: os comentarios saem
                         # ANTES desta troca (tirar_comentarios)
                         ('  <section id="indice-estatico" aria-hidden="true"></section>',
@@ -753,6 +756,15 @@ def _marcar_cliques(cartoes: list[dict]) -> None:
     for c in cartoes:
         c["cliques_30"] = int(d.get(str(c.get("id")), 0))
         c["cliques_medidos"] = bool(_CLIQUES.get("ok"))
+
+
+def _ultima_conferencia() -> str:
+    """ISO da leitura mais nova do instantaneo horario ("" se nao houver)."""
+    try:
+        agora = _precos_agora()
+        return max((v.get("quando") or "") for v in agora.values()) if agora else ""
+    except Exception:  # noqa: BLE001
+        return ""
 
 
 def _bot_alerta() -> str:

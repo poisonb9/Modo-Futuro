@@ -193,25 +193,58 @@
      a cara de instrumento — que e' o que a operacao faz de diferente:
      medir preco. Os numeros sao OURO, o preco dos produtos e' TINTA: cada
      um com a sua voz, e nenhum competindo com o outro. */
+  /* ⭐ PAINEL DO GARIMPO (18/09/2026, Bryan: "um design interessante e
+     criativo pro balao preto"; acervo: elemento de assinatura + risco
+     estetico justificavel; profundidade por camadas de tom e duas sombras
+     no escuro (AILABS); animar o ELEMENTO que carrega significado, nao
+     ornamento (motion); "mostre o produto fazendo a proeza" (YC)).
+
+     Quatro celulas do MESMO peso numa grade 2x2 — o R$ deixa de ser um
+     rodape "jogado ali". A linha do multometro vira o CHAO do painel:
+     area verde fininha por tras das quatro celulas. A lupa dourada da
+     marca entra como assinatura no canto, a 7% — e' a mesma lupa do topo,
+     nao decoracao. E a proeza do produto — "preco vigiado" — vira uma
+     linha viva embaixo: "radar conferiu ha' 12 min". Os numeros contam
+     uma vez ao aparecer (600 ms; some com prefers-reduced-motion). */
   .prova {
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px; margin: 20px 0 8px; text-align: center;
-    background: var(--painel); border-radius: 16px;
-    padding: 16px 8px; align-items: start;
+    position: relative; overflow: hidden; isolation: isolate;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px; margin: 20px 0 8px; text-align: center;
+    background: var(--painel); border-radius: 18px;
+    padding: 14px 10px 10px; align-items: stretch;
+    box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 10px 30px rgba(20,19,26,.18), 0 2px 6px rgba(20,19,26,.12);
   }
-  .prova > div { padding: 0 4px; position: relative; }
-  .prova > div + div::before {
-    content: ""; position: absolute; left: 0; top: 3px; bottom: 3px;
-    width: 1px; background: rgba(255,255,255,.12);
+  .prova > div {
+    position: relative; padding: 12px 6px 11px; border-radius: 12px;
+    background: rgba(255,255,255,.035);
+    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset;
   }
   .prova .numero {
-    display: block; font: 700 19px/1.1 var(--mono); color: var(--ouro-claro);
-    letter-spacing: -.02em;
+    display: block; font: 700 21px/1.1 var(--mono); color: var(--ouro-claro);
+    letter-spacing: -.02em; white-space: nowrap;
   }
   .prova .oque {
     display: block; font-size: 10.5px; line-height: 1.35;
-    color: rgba(255,255,255,.62); margin-top: 6px;
+    color: rgba(255,255,255,.62); margin-top: 5px;
   }
+  .prova .lupa {
+    position: absolute; right: -28px; top: -30px; width: 130px; height: 130px;
+    opacity: .07; pointer-events: none; z-index: 0;
+  }
+  .prova .chao {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 52%;
+    pointer-events: none; z-index: 0;
+  }
+  .prova .chao svg { width: 100%; height: 100%; display: block; }
+  .prova .chao .area { fill: var(--verde); opacity: .10; }
+  .prova .chao .linha { fill: none; stroke: var(--verde); stroke-width: 1.2px; opacity: .38; }
+  .prova > div, .prova .vivo-radar { z-index: 1; }
+  .prova .vivo-radar {
+    grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 7px;
+    margin-top: 2px; padding: 6px 4px 0; font: 500 11px/1.2 Poppins, sans-serif;
+    color: rgba(255,255,255,.6); background: none; box-shadow: none;
+  }
+  .prova .vivo-radar .pulso { flex: 0 0 6px; }
 
   /* ⭐ O MULTOMETRO — DENTRO da prova, como quarta linha, fina. "Junta os
      dois paineis, grafico bem fininho, o valor tem que chamar atencao, nao
@@ -227,31 +260,22 @@
      segue a MESMA grade das tres caixas de cima — o numero cai na 1a coluna,
      centrado, no mesmo tamanho (19px) e com a mesma legenda (10,5px); o
      grafico ocupa as outras duas colunas. Um ritmo so' no painel. */
-  .prova > .economia {
-    grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px; align-items: center;
-    margin-top: 12px; padding: 13px 4px 3px; text-align: center;
-    border-top: 1px solid rgba(255,255,255,.12);
-  }
-  .economia .lado { grid-column: 1; padding: 0 4px; }
+  .prova > .economia { display: block; }
+  .economia .lado { display: block; }
   .economia .numero {
-    display: block; font: 700 16.5px/1.1 var(--mono); color: var(--verde);
-    letter-spacing: -.03em; white-space: nowrap;
+    display: block; font: 700 21px/1.1 var(--mono); color: var(--verde);
+    letter-spacing: -.02em; white-space: nowrap;
   }
   .economia .oque {
-    display: block; font-size: 10.5px; line-height: 1.35; margin-top: 6px;
+    display: block; font-size: 10.5px; line-height: 1.35; margin-top: 5px;
     color: rgba(255,255,255,.62);
   }
   .economia .como { display: none; }
-  .economia svg.serie { flex: 1 1 60px; min-width: 50px; height: 22px; display: block; overflow: visible; }
-  .economia svg.serie .linha { stroke-width: 1.2px; }
-  .economia .serie-wrap { grid-column: 2 / -1; min-width: 50px; margin: 0; padding: 0 4px; }
-  .economia .serie-wrap .agora { display: none; }
-  .economia svg.serie .area { fill: var(--verde); opacity: .14; }
+  .economia .serie-wrap { display: none; }
 
-  .economia.so-numero { grid-template-columns: 1fr; }
+  @media (prefers-reduced-motion: reduce) { .prova .numero { transition: none; } }
   /* o fio vertical da prova nao se aplica a` faixa */
-  .prova > .economia::before { display: none; }
+
 
   /* ---------------- filtros ---------------- */
   .ferramentas {
@@ -741,6 +765,7 @@
   // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
   // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
   var BOT_ALERTA = "";
+  var ULTIMA_CONFERENCIA = "";
   // ⭐ DE ONDE A PESSOA VEIO (18/09/2026): `?de=bio.<canal>` da contra-capa,
   // `?de=telegram` dos posts, `?de=video.<id>` quando houver. Vai em cada
   // clique de produto. So' texto curto e sem quem: e' origem, nao pessoa.
@@ -2096,6 +2121,76 @@
       d.appendChild(el("span", "oque", par[1]));
       caixa.insertBefore(d, faixa);
     });
+    // a lupa da marca, como assinatura no canto (mesma da tag do topo)
+    var lupa = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    lupa.setAttribute("viewBox", "0 0 100 100"); lupa.setAttribute("class", "lupa"); lupa.setAttribute("aria-hidden", "true");
+    lupa.innerHTML = '<circle cx="42" cy="42" r="26" fill="none" stroke="#F2C94C" stroke-width="9"/><path d="M62 62 L90 90" stroke="#F2C94C" stroke-width="11" stroke-linecap="round"/>';
+    caixa.appendChild(lupa);
+  }
+
+  // ⭐ o chao do painel: a linha do multometro por tras das celulas
+  function montarChao(serie) {
+    var caixa = document.getElementById("prova");
+    if (!serie || serie.length < 3) { return; }
+    var vals = serie.map(function (x) { return x[1]; });
+    var menor = Math.min.apply(null, vals), maior = Math.max.apply(null, vals);
+    var faixa = Math.max(maior - menor, 1);
+    var L = 100, A = 30;
+    var pts = serie.map(function (x, i) {
+      return [(i / (serie.length - 1)) * L, 4 + (maior - x[1]) / faixa * (A - 8)];
+    });
+    var d = pts.map(function (q, i) { return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); }).join(" ");
+    var NS = "http://www.w3.org/2000/svg";
+    var chao = el("div", "chao");
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + L + " " + A); svg.setAttribute("preserveAspectRatio", "none"); svg.setAttribute("aria-hidden", "true");
+    var area = document.createElementNS(NS, "path");
+    area.setAttribute("d", d + " L" + L + " " + A + " L0 " + A + " Z"); area.setAttribute("class", "area");
+    var linha = document.createElementNS(NS, "path");
+    linha.setAttribute("d", d); linha.setAttribute("class", "linha"); linha.setAttribute("vector-effect", "non-scaling-stroke");
+    svg.appendChild(area); svg.appendChild(linha); chao.appendChild(svg);
+    caixa.insertBefore(chao, caixa.firstChild);
+  }
+
+  // ⭐ a proeza do produto, visivel: "radar conferiu ha' N min"
+  function montarVivoRadar() {
+    var caixa = document.getElementById("prova");
+    if (!ULTIMA_CONFERENCIA) { return; }
+    var t = Date.parse(ULTIMA_CONFERENCIA);
+    if (!t) { return; }
+    var min = Math.max(0, Math.round((Date.now() - t) / 60000));
+    var txt = min < 1 ? "radar conferiu agora"
+            : min < 60 ? "radar conferiu há " + min + " min"
+            : min < 60 * 36 ? "radar conferiu há " + Math.round(min / 60) + " h"
+            : "radar conferiu há " + Math.round(min / 1440) + " dias";
+    var v = el("div", "vivo-radar");
+    v.appendChild(el("span", "pulso"));
+    v.appendChild(el("span", null, txt + " · de hora em hora"));
+    v.title = "última reconferência de preço na loja: " + new Date(t).toLocaleString("pt-BR");
+    caixa.appendChild(v);
+  }
+
+  // ⭐ os numeros contam uma vez ao aparecer (600 ms) — e' o elemento que
+  // carrega significado se movendo, nao ornamento voando
+  function contarNumeros() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var els = document.querySelectorAll("#prova .numero");
+    els.forEach(function (e) {
+      var alvo = e.textContent;
+      var n = parseFloat(alvo.replace(/[^0-9,]/g, "").replace(/\./g, "").replace(",", "."));
+      if (!(n > 0)) { return; }
+      var moeda = /^R\$/.test(alvo), dec = /,\d\d$/.test(alvo);
+      var t0 = null;
+      function passo(ts) {
+        if (!t0) { t0 = ts; }
+        var k = Math.min(1, (ts - t0) / 600);
+        var e2 = 1 - Math.pow(1 - k, 3);
+        var v = n * e2;
+        e.textContent = moeda ? reais(v) : (dec ? v.toFixed(2).replace(".", ",") : Math.round(v).toLocaleString("pt-BR"));
+        if (k < 1) { requestAnimationFrame(passo); } else { e.textContent = alvo; }
+      }
+      requestAnimationFrame(passo);
+    });
   }
 
   // ⚠️ UM RELOGIO SO'. Dois `setTimeout` escrevendo no mesmo paragrafo
@@ -2242,6 +2337,9 @@
   animarVivo();
   montarProva();
   montarEconomia();
+  montarChao(((ECONOMIA || {}).radar || {}).serie);
+  montarVivoRadar();
+  contarNumeros();
   montarChips();
   desenhar();
 

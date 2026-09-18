@@ -156,9 +156,17 @@ try:
     awin_estado = tmp / "estado" / "awin_catalogo.json"
     awin_estado.write_text('{"quando": "ANTES", "produtos": [1]}', encoding="utf-8")
     cat_real, est_real, pre_real = awin.catalogo, awin.CATALOGO_ESTADO, awin.PRECOS
+    # ⛔ SEM REDE E SEM TOCAR NO ESTADO REAL (18/09/2026): `guardar_catalogo`
+    # chama `guardar_comissoes`, que fala com a API do Awin e REESCREVE
+    # `estado/awin_comissoes.json`. Este teste fez isso de verdade — o repo
+    # ficava sujo depois da suite, e a resposta da API local nao e' a da
+    # nuvem (perdia Clovis, Lauri, Radiale, Exypna). Teste nao escreve estado.
+    com_real, api_real = awin.COMISSOES_ESTADO, awin.comissoes_da_api
     try:
         awin.CATALOGO_ESTADO = awin_estado
         awin.PRECOS = tmp / "estado" / "precos_vistos.jsonl"
+        awin.COMISSOES_ESTADO = tmp / "estado" / "awin_comissoes.json"
+        awin.comissoes_da_api = lambda: {}
         awin.catalogo = lambda teto=0.0, piso=0.0: []
         estourou = False
         try:
@@ -202,6 +210,7 @@ try:
                "e fica FORA do instantaneo (o site continua ate' R$ 150)")
     finally:
         awin.catalogo, awin.CATALOGO_ESTADO, awin.PRECOS = cat_real, est_real, pre_real
+        awin.COMISSOES_ESTADO, awin.comissoes_da_api = com_real, api_real
 finally:
     publicar_bio.RAIZ = raiz_real
     shutil.rmtree(tmp, ignore_errors=True)

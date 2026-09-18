@@ -1,157 +1,248 @@
 # -*- coding: utf-8 -*-
-"""Entre as fotos de um anuncio, qual e' a que NAO e' banner.
+"""Entre as fotos de um anuncio, qual e' a que NAO e' banner — e E' o produto.
 
 ## O PROBLEMA (MAESTROS_DESIGN_DO_SITE.md, defeito 1, 18/09/2026)
 
 A foto principal do AliExpress e' a que o lojista escolhe pra competir na
 busca: "22 colors available~", "STRONG MAGNETIC FORCE", caixa com selo.
 Num cartao escuro e limpo isso e' o banner que os Maestros mandam tirar da
-pagina de produto (Analista de Loja Virtual EP.2). O `precos.py` passou a
-guardar as outras fotos do anuncio (`imagens`); este modulo escolhe.
+pagina de produto (Analista de Loja Virtual EP.2). O `precos.py` guarda as
+outras fotos do anuncio (`imagens`); este modulo escolhe.
 
-## ⛔ O EMBEDDING DA DEDUPE NAO SERVE, e o motivo e' de desenho
+## ⛔ O QUE NAO FUNCIONOU, medido no mesmo dia
 
-`fidelidade._vetor` RECORTA o produto (alfa) antes de embutir — foi feito
-assim pra comparar produto com produto sem o fundo. O texto do banner fica
-FORA do recorte, entao o vetor nao ve banner nenhum. MEDIDO em 18/09 nos 8
-casos conhecidos: com recorte, a balanca "Simple but not simplistic" saiu
-como a foto MAIS limpa do conjunto.
+1. O vetor da dedupe (`fidelidade._vetor`) RECORTA o produto antes de
+   embutir: o texto do banner fica fora do recorte, e a balanca "Simple but
+   not simplistic" saiu como a mais limpa.
+2. Embedding da imagem INTEIRA contra a frase "foto limpa": olhado em 18
+   produtos, 3 de 8 trocas PIORES — escolheu a PLACA DE MONTAGEM no lugar do
+   teclado, a bolsa PRETA no lugar da marrom, uma foto com texto "One-handed
+   operation". A nota media "parece foto de produto" e nao "e' ESTE produto
+   sem texto". Reprovou no caso negativo; ficou desligado.
 
-## O QUE MEDE — a imagem INTEIRA contra duas frases
+## ⭐ O QUE MEDE AGORA — duas medidas, na NUVEM
 
-O mesmo modelo (nemotron-embed-vl), sem recorte, e' comparado com uma frase
-de foto limpa e uma de banner; a nota e' a diferenca dos cossenos. MEDIDO nos
-8 casos (foto principal, vista a olho):
+Ordem do Bryan (18/09): nada instalado na maquina; OCR no GitHub da conta
+parada. `bryanaw2121-sketch/pipeline/.github/workflows/fotos_ocr.yml` roda
+EasyOCR + CLIP e devolve, por foto:
 
-    BANNER  luva 22 colors +0,050 . teclado AJAZZ +0,050 . tesla TEKSY +0,047
-            ralador na caixa +0,094 . balanca "Simple" +0,188 (texto discreto)
-    LIMPO   balanca foto +0,193 . organizador panelas +0,166 . giratorio +0,120
+    texto  fracao da area coberta por letras (0-1)
+    fid    cosseno CLIP contra a foto PRINCIPAL do mesmo anuncio
 
-Separa 4 dos 5 banners de todos os limpos; o que "erra" e' o texto pequeno
-de duas linhas sobre um produto grande — que a olho tambem passa. E o uso
-aqui e' RANKING dentro do mesmo anuncio, nao classificacao: entre as fotos
-do mesmo produto, a de nota mais alta.
+Sem segredo: a lista vai por input do dispatch, o resultado volta por
+artifact (`gh run download`) e fica em `estado/fotos_ocr.json` (versionado:
+os dois clones e a nuvem leem o mesmo).
 
-⚠️ Falha ABERTA: sem nota (rede, chave) fica a principal. Foto pior e' feia;
-cartao sem foto e' quebrado.
+## A REGRA, calibrada nos 18 produtos vistos a olho (run 35356232292)
 
-## ⛔ NAO ESTA' LIGADO AO CARTAO — reprovou no caso negativo (18/09/2026, 13:20 UTC)
+Troca a principal por uma extra SO' se:
+  - a principal tem texto (`texto` > TEXTO_PRINCIPAL_MIN) — bolsa e oculos
+    tinham 0,0 e nao havia o que trocar (era onde a v1 errava);
+  - a extra e' O MESMO produto: `fid` >= FID_MIN. Medido: as fotos da placa
+    de montagem do teclado ficam em 0,32-0,58; fotos boas do mesmo produto,
+    0,61-0,92. ⚠️ Margem FINA (0,584 x 0,62): por isso o piso e' 0,62 e nao
+    0,60, e uma foto boa da luva (0,61) fica de fora — errar pra ficar com a
+    principal e' o erro barato;
+  - a extra tem menos texto por MARGEM_TEXTO (senao e' ruido trocando foto a
+    cada publicacao).
+Entre as que passam, a de MENOS texto. Resultado nos 18: troca luva,
+carregador e ventosa (as tres que o olho aprovou); mantem teclado, tesla,
+fone, balanca "Simple" (sem extra melhor) e todas as que ja' eram limpas.
 
-Com as fotos reais (rodada 13:11, 152 produtos com `imagens`), o ranking
-dentro do mesmo anuncio foi olhado em 18 produtos, 8 trocas:
-
-    MELHOR  luva (banner 22 cores -> a luva)  . carregador (banner -> na tomada)
-            ventosa (STRONG MAGNETIC -> produto no branco)
-    PIOR    teclado -> escolheu a PLACA DE POSICIONAMENTO (outro produto)
-            oculos -> escolheu a foto com texto "One-handed operation"
-            bolsa  -> escolheu a variante PRETA de uma bolsa marrom
-    NEUTRO  tesla (banner -> outro banner) . fone ("Smaller" -> "Official")
-
-3 em 8 erradas, e duas delas mostram OUTRA COISA no cartao — pior que o
-banner. A nota mede "parece foto de produto limpa" e nao "e' ESTE produto
-sem texto". O que falta e' (a) fidelidade ao produto (o vetor RECORTADO da
-dedupe, cos >= 0,93 contra a principal) E (b) um medidor de texto de
-verdade (OCR: area coberta por letras). Sem os dois, fica a principal.
+⚠️ Falha ABERTA: foto sem medida (nao medida ainda, erro no OCR) nao
+concorre; principal sem medida fica. Foto pior e' feia; cartao sem foto e'
+quebrado.
 """
 from __future__ import annotations
 
-import base64
-import io
 import json
-import os
+import subprocess
+import sys
+import time
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-CACHE = RAIZ / "estado" / "fotos_nota.json"
+MEDIDAS = RAIZ / "estado" / "fotos_ocr.json"
 
-FRASE_LIMPA = "clean product photo on a plain background, no text, no banner, no labels"
-FRASE_BANNER = "advertising banner with large text overlay and promotional labels"
+REPO_OCR = "bryanaw2121-sketch/pipeline"
+WORKFLOW_OCR = "fotos_ocr.yml"
+PREFIXO = "https://ae-pic-a1.aliexpress-media.com/kf/"
 
-# ⚠️ Troca a principal so' se a extra ganhar por esta margem. Sem ela, duas
-# fotos igualmente limpas trocariam de lugar a cada publicacao por ruido.
-MARGEM = 0.02
-LADO = 448
-
-_frases: dict[str, list[float]] = {}
+TEXTO_PRINCIPAL_MIN = 0.05
+FID_MIN = 0.62
+MARGEM_TEXTO = 0.03
 
 
-def _cache() -> dict:
-    if not CACHE.exists():
+def medidas() -> dict:
+    if not MEDIDAS.exists():
         return {}
     try:
-        return json.loads(CACHE.read_text(encoding="utf-8"))
+        return json.loads(MEDIDAS.read_text(encoding="utf-8"))
     except ValueError:
         return {}
 
 
-def _gravar(d: dict) -> None:
-    CACHE.parent.mkdir(parents=True, exist_ok=True)
-    CACHE.write_text(json.dumps(d), encoding="utf-8")
+def _boa(m: dict | None) -> bool:
+    return bool(m) and "erro" not in m and m.get("texto") is not None
 
 
-def _embutir(entrada: str, tipo: str) -> list[float]:
-    import requests
-
-    from engine import fidelidade
-    chave = os.getenv("NVIDIA_API_KEY")
-    if not chave:
-        raise RuntimeError("falta NVIDIA_API_KEY no .env")
-    r = requests.post(fidelidade.URL, headers={"Authorization": f"Bearer {chave}"},
-                      timeout=120,
-                      json={"model": fidelidade.MODELO, "input": [entrada],
-                            "encoding_format": "float", "input_type": tipo,
-                            "truncate": "NONE"})
-    r.raise_for_status()
-    v = r.json()["data"][0]["embedding"]
-    n = sum(x * x for x in v) ** 0.5
-    return [x / n for x in v]
-
-
-def _frase(texto: str) -> list[float]:
-    if texto not in _frases:
-        _frases[texto] = _embutir(texto, "query")
-    return _frases[texto]
+def escolher(principal: str, extras: list[str], med: dict | None = None) -> str:
+    """A foto do cartao. Ver a regra no cabecalho."""
+    if not extras:
+        return principal
+    med = medidas() if med is None else med
+    mp = med.get(principal)
+    if not _boa(mp) or mp["texto"] <= TEXTO_PRINCIPAL_MIN:
+        return principal
+    melhor, melhor_texto = principal, mp["texto"]
+    for u in extras:
+        m = med.get(u)
+        if not _boa(m) or (m.get("fid") or 0) < FID_MIN:
+            continue
+        if m["texto"] <= mp["texto"] - MARGEM_TEXTO and m["texto"] < melhor_texto:
+            melhor, melhor_texto = u, m["texto"]
+    return melhor
 
 
-def nota(url: str, cache: dict | None = None) -> float | None:
-    """Quao limpa e' a foto INTEIRA (sem recorte). None = nao deu pra medir."""
-    if not url:
-        return None
-    c = cache if cache is not None else _cache()
-    if url in c:
-        return c[url]
+def _fotos_do_catalogo() -> dict[str, list[str]]:
+    """{id: [principal, extras...]} do instantaneo + registro; so' as URLs
+    com o PREFIXO (o input do dispatch e' um sufixo por foto)."""
+    from . import precos
+    agora = precos.ler_instantaneo()
+    arq = RAIZ / "estado" / "produtos_publicados.jsonl"
+    principal: dict[str, str] = {}
+    if arq.exists():
+        for linha in arq.read_text(encoding="utf-8").splitlines():
+            try:
+                d = json.loads(linha)
+            except ValueError:
+                continue
+            if d.get("id") and d.get("imagem"):
+                principal.setdefault(str(d["id"]), d["imagem"])
+    saida = {}
+    for pid, v in agora.items():
+        p = principal.get(pid)
+        ex = v.get("imagens") or []
+        if not p or not ex:
+            continue
+        urls = [p] + [u for u in ex if u != p]
+        if all(u.startswith(PREFIXO) for u in urls):
+            saida[pid] = urls
+    return saida
+
+
+def pendentes() -> dict[str, list[str]]:
+    """Os anuncios com alguma foto ainda sem medida."""
+    med = medidas()
+    return {pid: urls for pid, urls in _fotos_do_catalogo().items()
+            if any(u not in med for u in urls)}
+
+
+def medir(esperar: bool = True, timeout_min: int = 90) -> int:
+    """Dispara o OCR na nuvem pros pendentes, espera, baixa e grava.
+    Devolve quantas fotos entraram. Sem pendentes, nao dispara nada."""
+    pend = pendentes()
+    if not pend:
+        print("fotos: nada pendente de medir")
+        return 0
+    lista = {pid: [u[len(PREFIXO):] for u in urls] for pid, urls in pend.items()}
+    corpo = json.dumps(lista, separators=(",", ":"))
+    # ⚠️ o input do dispatch tem teto (~64 KB): em lotes de 120 anuncios
+    ids = list(lista)
+    entrou = 0
+    shell = (sys.platform == "win32")
+    for i in range(0, len(ids), 120):
+        parte = {k: lista[k] for k in ids[i:i + 120]}
+        corpo = json.dumps(parte, separators=(",", ":"))
+        antes = time.time()
+        subprocess.run(["gh", "workflow", "run", WORKFLOW_OCR, "-R", REPO_OCR,
+                        "-f", f"prefixo={PREFIXO}", "-f", f"lista={corpo}"],
+                       check=True, capture_output=True, shell=shell)
+        print(f"fotos: disparado lote {i // 120 + 1} ({len(parte)} anuncios, "
+              f"{sum(len(v) for v in parte.values())} fotos)")
+        if not esperar:
+            continue
+        time.sleep(20)
+        run_id = _run_mais_novo(antes)
+        if not run_id:
+            print("fotos: [!] nao achei o run disparado")
+            continue
+        fim = time.time() + timeout_min * 60
+        while time.time() < fim:
+            st = subprocess.run(["gh", "run", "view", run_id, "-R", REPO_OCR,
+                                 "--json", "status,conclusion", "-q",
+                                 '"\\(.status) \\(.conclusion)"'],
+                                capture_output=True, text=True, shell=shell).stdout.strip()
+            if st.startswith("completed"):
+                break
+            time.sleep(45)
+        else:
+            print(f"fotos: [!] run {run_id} nao terminou em {timeout_min} min")
+            continue
+        if "success" not in st:
+            print(f"fotos: [!] run {run_id}: {st}")
+            continue
+        entrou += _baixar_e_gravar(run_id)
+    return entrou
+
+
+def _run_mais_novo(desde: float) -> str:
+    shell = (sys.platform == "win32")
+    r = subprocess.run(["gh", "run", "list", "-R", REPO_OCR, "-w", WORKFLOW_OCR,
+                        "-L", "3", "--json", "databaseId,createdAt"],
+                       capture_output=True, text=True, shell=shell)
     try:
-        import requests
-        from PIL import Image
-        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=60)
-        r.raise_for_status()
-        im = Image.open(io.BytesIO(r.content)).convert("RGB")
-        im.thumbnail((LADO, LADO))
-        bo = io.BytesIO()
-        im.save(bo, "JPEG", quality=85)
-        dado = "data:image/jpeg;base64," + base64.b64encode(bo.getvalue()).decode()
-        v = _embutir(dado, "passage")
-        ql, qb = _frase(FRASE_LIMPA), _frase(FRASE_BANNER)
-        n = round(sum(a * b for a, b in zip(v, ql)) - sum(a * b for a, b in zip(v, qb)), 4)
-    except Exception:
-        return None
-    c[url] = n
-    if cache is None:
-        _gravar(c)
+        runs = json.loads(r.stdout or "[]")
+    except ValueError:
+        return ""
+    from datetime import datetime, timezone
+    for x in runs:
+        t = datetime.fromisoformat(x["createdAt"].replace("Z", "+00:00")).timestamp()
+        if t >= desde - 60:
+            return str(x["databaseId"])
+    return ""
+
+
+def _baixar_e_gravar(run_id: str) -> int:
+    import shutil
+    import tempfile
+    shell = (sys.platform == "win32")
+    pasta = Path(tempfile.mkdtemp())
+    try:
+        subprocess.run(["gh", "run", "download", run_id, "-R", REPO_OCR,
+                        "-n", "fotos_ocr", "-D", str(pasta)],
+                       check=True, capture_output=True, shell=shell)
+        novo = json.loads((pasta / "fotos_ocr.json").read_text(encoding="utf-8"))
+    finally:
+        shutil.rmtree(pasta, ignore_errors=True)
+    med = medidas()
+    # ⚠️ erro de OCR nao apaga medida boa anterior; e medida boa nova substitui
+    n = 0
+    for u, m in novo.items():
+        if "erro" in m and _boa(med.get(u)):
+            continue
+        med[u] = m
+        n += 1
+    MEDIDAS.parent.mkdir(parents=True, exist_ok=True)
+    MEDIDAS.write_text(json.dumps(med, ensure_ascii=False, separators=(",", ":")),
+                       encoding="utf-8")
+    print(f"fotos: {n} medida(s) gravadas em {MEDIDAS.name} (total {len(med)})")
     return n
 
 
-def escolher(principal: str, extras: list[str], cache: dict | None = None) -> str:
-    """A foto do cartao: a principal, a menos que uma extra seja mais limpa
-    por MARGEM. Falha aberta pra principal."""
-    if not extras:
-        return principal
-    np_ = nota(principal, cache)
-    if np_ is None:
-        return principal
-    melhor, melhor_nota = principal, np_
-    for u in extras:
-        n = nota(u, cache)
-        if n is not None and n > melhor_nota + MARGEM:
-            melhor, melhor_nota = u, n
-    return melhor
+def main() -> None:
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("--medir", action="store_true", help="dispara o OCR na nuvem e grava")
+    p.add_argument("--pendentes", action="store_true", help="so' conta o que falta")
+    a = p.parse_args()
+    if a.pendentes or not a.medir:
+        pend = pendentes()
+        print(f"{len(pend)} anuncio(s) com foto sem medida, "
+              f"{sum(len(v) for v in pend.values())} fotos")
+        return
+    medir()
+
+
+if __name__ == "__main__":
+    main()

@@ -736,6 +736,8 @@ def produtos_todos() -> list[dict]:
         sys.path.insert(0, str(RAIZ))
     from engine import combina as _c
     _combina = _c.ler_cache()
+    from engine import foto_limpa as _fl
+    _medidas_fotos = _fl.medidas()
     # ⚠️ 24 HORAS, e nao 48 — decisao do Bryan em 15/09/2026 ("48 e' muito").
     #
     # ⛔ E A TRAVA FALHA FECHADA AGORA. Ela era `if visto_em and visto_em <
@@ -768,7 +770,13 @@ def produtos_todos() -> list[dict]:
             "nome": _nome_bonito(d),
             "preco": _preco_de_hoje(por_dia, d) or d.get("preco", ""),
             "link": _link_ml(d, agora) or d["link"],
-            "imagem": d.get("imagem", ""),
+            # ⭐ A FOTO SEM BANNER (18/09/2026, MAESTROS_DESIGN_DO_SITE.md,
+            # defeito 1): entre as fotos do anuncio, a que e' o MESMO produto
+            # com menos texto — medido na nuvem (engine/foto_limpa.py).
+            # Falha aberta: sem medida, a principal.
+            "imagem": _fl.escolher(d.get("imagem", ""),
+                                   (agora.get(str(d.get("id") or "")) or {}).get("imagens") or [],
+                                   _medidas_fotos),
             # ⛔ A QUEDA E' RECALCULADA AQUI, e nao lida do registro.
             #
             # ⚠️ O valor gravado em `produtos_publicados.jsonl` foi calculado

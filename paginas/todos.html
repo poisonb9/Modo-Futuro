@@ -200,41 +200,42 @@
      a cara de instrumento — que e' o que a operacao faz de diferente:
      medir preco. Os numeros sao OURO, o preco dos produtos e' TINTA: cada
      um com a sua voz, e nenhum competindo com o outro. */
-  /* ⭐ PAINEL DE AEROPORTO (18/09/2026, escolha do Bryan entre 3 variantes
-     — protocolo do Impeccable: um eixo por variante, referencia do mundo
-     real). Referente: o painel split-flap de aeroporto. Cada numero e' uma
-     fileira de PLACAS que viram ate' parar no digito certo — a contagem que
-     o Bryan quis manter vira o proprio objeto, e e' o UNICO movimento da
-     dobra. Fundo escuro TINGIDO (nao preto), texto secundario cor de areia,
-     ouro so' nos digitos, o R$ em branco como pico. Sem celula, sem
-     sparkline, sem bolinha, sem legenda fixa. */
+  /* ⭐ V5 — CENTRAL DE CONTROLE (18/09/2026, "aplica V5 so' pra eu ver").
+     Liquid Glass como efeito ESPECIFICO (Impeccable): capsulas de vidro sobre
+     a LUZ DOURADA da lupa — a marca e' o que esta' atras do vidro. Bordas de
+     luz, refracao nas laterais (sombras internas claras), especular no topo.
+     Texto escuro sobre o vidro claro pra nao repetir a queixa de legibilidade
+     do iOS 26. O split-flap fica guardado no git (checkpoint anterior). */
   .prova {
-    position: relative; margin: 20px 0 8px; padding: 4px 14px;
-    background: #14131a; border-radius: 16px; color: #f3efe2;
-    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 12px 32px rgba(20,19,26,.18), 0 2px 6px rgba(20,19,26,.12);
+    position: relative; overflow: hidden; isolation: isolate;
+    margin: 20px 0 8px; padding: 16px; border-radius: 26px;
+    background: radial-gradient(90% 70% at 20% 10%, rgba(242,201,76,.78), rgba(200,144,26,.28) 45%, transparent 70%),
+                radial-gradient(80% 60% at 90% 90%, rgba(255,236,190,.48), transparent 60%), #2a2210;
+    box-shadow: 0 14px 40px rgba(40,30,0,.22);
   }
-  .prova .fila {
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 11px 2px; border-bottom: 1px solid rgba(255,255,255,.08);
+  .prova .g { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .prova .cap {
+    position: relative; border-radius: 22px; padding: 14px 14px 12px;
+    background: rgba(255,255,255,.14);
+    backdrop-filter: blur(16px) saturate(170%); -webkit-backdrop-filter: blur(16px) saturate(170%);
+    border: 1px solid rgba(255,255,255,.45);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.85), inset 0 -2px 6px rgba(0,0,0,.18),
+                inset 6px 0 14px -12px rgba(255,255,255,.9), inset -6px 0 14px -12px rgba(255,255,255,.7),
+                0 12px 30px rgba(40,30,0,.25);
+    transition: transform .18s cubic-bezier(.2,.8,.2,1);
   }
-  .prova .fila:last-of-type { border-bottom: 0; }
-  .prova .l { font: 500 12.5px/1.25 Poppins, sans-serif; color: rgba(243,239,226,.7); }
-  .prova .flap { display: inline-flex; gap: 2px; flex: 0 0 auto; }
-  .prova .flap i {
-    font: 700 20px/1 var(--mono); font-style: normal; color: var(--ouro-claro);
-    background: #1e1d27; border-radius: 4px; padding: 6px 3px; min-width: 14px; text-align: center;
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06); position: relative;
-    font-variant-numeric: tabular-nums;
+  .prova .cap:active { transform: scale(.97); }
+  .prova .cap.pico { grid-column: 1 / -1; }
+  .prova .n {
+    display: block; font: 400 24px/1 "Archivo Black", system-ui, sans-serif; color: #1e1808;
+    letter-spacing: -.02em; text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    white-space: nowrap; font-variant-numeric: tabular-nums;
   }
-  .prova .flap i::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,.55); }
-  .prova .flap i.s { background: none; box-shadow: none; min-width: 6px; padding: 6px 0; color: rgba(242,201,76,.7); }
-  .prova .flap i.s::after { display: none; }
-  .prova .pico .flap i { color: #fff; }
-  .prova .flap i.vira { animation: virar .09s linear; }
-  @keyframes virar { 0% { transform: scaleY(1); } 50% { transform: scaleY(.15); } 100% { transform: scaleY(1); } }
-  .prova .fim { font: 500 11px/1.3 var(--mono); color: rgba(243,239,226,.5); padding: 8px 2px 8px; letter-spacing: .04em; }
+  .prova .pico .n { font-size: 30px; }
+  .prova .l { display: block; font: 500 11.5px/1.25 Poppins, sans-serif; color: rgba(30,24,8,.75); margin-top: 4px; }
+  .prova .fim { font: 500 10.5px/1.3 var(--mono); color: rgba(30,24,8,.65); padding: 12px 4px 0; letter-spacing: .06em; text-align: center; }
   .prova > .economia { display: none; }
-  @media (max-width: 380px) { .prova .flap i { font-size: 18px; min-width: 13px; padding: 5px 2px; } .prova .l { font-size: 12px; } }
+  @media (prefers-reduced-motion: reduce) { .prova .cap { transition: none; } }
   /* o fio vertical da prova nao se aplica a` faixa */
 
 
@@ -2034,9 +2035,9 @@
   // ⭐ Por produto: maior preco visto - menor preco visto. So' sobe, por
   // construcao (ver `economia_radar` no publicador). A linha e' o total dia a
   // dia. O rotulo diz o que e': "que o radar ja' encontrou de queda".
-  // ⭐ PAINEL DE AEROPORTO — ver o CSS de `.prova`. Os numeros sao os de
-  // sempre (catalogo inteiro, baixaram, multometro, vendidos), na ordem que
-  // o Bryan pediu; cada um so' entra se existir.
+  // ⭐ V5 — CENTRAL DE CONTROLE — ver o CSS de `.prova`. Mesmos numeros de
+  // sempre, na ordem do Bryan: achadinhos -> baixaram -> R$ (pico) -> vendidos
+  // -> ultima conferencia. Cada capsula so' entra se o numero existir.
   function montarProva() {
     var caixa = document.getElementById("prova");
     if (!PRODUTOS.length) { return; }
@@ -2050,61 +2051,52 @@
     var total = PRODUTOS.length;
     Object.keys(EXTERNOS).forEach(function (n) { total += EXTERNOS[n].n || 0; });
     var r = (ECONOMIA || {}).radar || {};
-
-    function fila(rotulo, texto, pico, titulo) {
-      var f = el("div", "fila" + (pico ? " pico" : ""));
-      f.appendChild(el("span", "l", rotulo));
-      var fl = el("span", "flap");
-      // cada caractere vira uma placa; separadores (ponto, R$, espaco) sao "s"
-      String(texto).split("").forEach(function (ch) {
-        var i = el("i", /[0-9]/.test(ch) ? "" : "s", ch);
-        if (/[0-9]/.test(ch)) { i.setAttribute("data-alvo", ch); }
-        fl.appendChild(i);
-      });
-      f.appendChild(fl);
-      if (titulo) { f.title = titulo; }
-      caixa.appendChild(f);
+    var g = el("div", "g");
+    function cap(numero, rotulo, pico, titulo) {
+      var c = el("div", "cap" + (pico ? " pico" : ""));
+      c.appendChild(el("strong", "n", numero));
+      c.appendChild(el("span", "l", rotulo));
+      if (titulo) { c.title = titulo; }
+      g.appendChild(c);
     }
-    fila("achadinhos vigiados", total.toLocaleString("pt-BR"), false,
-         "todos os produtos de pe' no catalogo, contando as lojas parceiras");
-    if (caiu > 0) { fila("abaixo do maior preço hoje", String(caiu), false,
-         "produtos que hoje estao pelo menos 5% abaixo do maior preco que eu mesmo vi"); }
-    if (r.total > 0) { fila("de queda medida por mim", "R$ " + Math.round(r.total).toLocaleString("pt-BR"), true,
-         "queda encontrada pelo radar em " + r.produtos + " produtos, contra o preco que eu vi — nao o de/por da loja"); }
-    if (vendas > 0) { fila("vendidos nas lojas", vendas.toLocaleString("pt-BR"), false,
-         "quanto estes produtos ja' venderam nas lojas parceiras"); }
-    var partes = [];
+    cap(total.toLocaleString("pt-BR"), "achadinhos vigiados", false, "todos os produtos de pé no catálogo, contando as lojas parceiras");
+    if (caiu > 0) { cap(String(caiu), "abaixo do maior preço", false, "produtos que hoje estão pelo menos 5% abaixo do maior preço que eu mesmo vi"); }
+    if (r.total > 0) { cap("R$ " + Math.round(r.total).toLocaleString("pt-BR"), "de queda medida por mim, não pela loja", true,
+      "queda encontrada pelo radar em " + r.produtos + " produtos, contra o preço que eu vi — não o de/por da loja"); }
+    if (vendas > 0) {
+      var v = vendas >= 1e6 ? (vendas / 1e6).toFixed(1).replace(".", ",") + " mi" : vendas.toLocaleString("pt-BR");
+      cap(v, "vendidos nas lojas", false, vendas.toLocaleString("pt-BR") + " vendidos nas lojas parceiras");
+    }
     var t = ULTIMA_CONFERENCIA ? Date.parse(ULTIMA_CONFERENCIA) : 0;
     if (t) {
       var min = Math.max(0, Math.round((Date.now() - t) / 60000));
-      partes.push(min < 1 ? "CONFERIDO AGORA" : min < 60 ? "CONFERIDO HÁ " + min + " MIN"
-        : min < 2160 ? "CONFERIDO HÁ " + Math.round(min / 60) + " H" : "CONFERIDO HÁ " + Math.round(min / 1440) + " DIAS");
+      var txt = min < 1 ? "agora" : min < 60 ? min + " min" : min < 2160 ? Math.round(min / 60) + " h" : Math.round(min / 1440) + " dias";
+      cap(txt, "desde a última conferência", false, "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"));
     }
-    partes.push("DE HORA EM HORA");
-    var fim = el("div", "fim", partes.join(" · "));
-    if (t) { fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"); }
-    caixa.appendChild(fim);
+    caixa.appendChild(g);
+    caixa.appendChild(el("div", "fim", "DE HORA EM HORA"));
   }
   function montarEconomia() { /* mora no painel (montarProva) */ }
 
-  // ⭐ as placas VIRAM ate' parar no digito certo — o unico movimento da
-  // dobra. Cada placa passa por digitos aleatorios, escalonada da esquerda
-  // pra direita, ~700 ms no total. Some com prefers-reduced-motion.
+  // ⭐ o unico movimento: os numeros contam uma vez (600 ms)
   function contarNumeros() {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
-    var placas = document.querySelectorAll("#prova .flap i[data-alvo]");
-    placas.forEach(function (e, idx) {
-      var alvo = e.getAttribute("data-alvo");
-      var voltas = 6 + (idx % 5);
-      var k = 0;
-      function vira() {
-        k += 1;
-        if (k >= voltas) { e.textContent = alvo; e.classList.remove("vira"); return; }
-        e.textContent = String((parseInt(alvo, 10) + k * 3 + idx) % 10);
-        e.classList.remove("vira"); void e.offsetWidth; e.classList.add("vira");
-        setTimeout(vira, 70);
+    document.querySelectorAll("#prova .n").forEach(function (e) {
+      var alvo = e.textContent;
+      var m = alvo.match(/^(R\$ )?([\d.,]+)( mi| min| h| dias)?$/);
+      if (!m) { return; }
+      var n = parseFloat(m[2].replace(/\./g, "").replace(",", "."));
+      if (!(n > 0)) { return; }
+      var dec = /,\d$/.test(m[2]);
+      var t0 = null;
+      function passo(ts) {
+        if (!t0) { t0 = ts; }
+        var k = Math.min(1, (ts - t0) / 600);
+        var v = n * (1 - Math.pow(1 - k, 3));
+        e.textContent = (m[1] || "") + (dec ? v.toFixed(1).replace(".", ",") : Math.round(v).toLocaleString("pt-BR")) + (m[3] || "");
+        if (k < 1) { requestAnimationFrame(passo); } else { e.textContent = alvo; }
       }
-      setTimeout(vira, 40 * (idx % 9));
+      requestAnimationFrame(passo);
     });
   }
 

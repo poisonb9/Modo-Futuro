@@ -2164,16 +2164,17 @@ def main() -> None:
     #
     # ⭐ A ordem certa: primeiro o visitante, depois o arquivo. Falha aqui
     # AVISA ALTO e segue.
-    # ⚠️ A CREDENCIAL DO `gh`, SO' NESTE PROCESSO. O `git push` a seco usava a
-    # credencial guardada na maquina — um PAT fine-grained que NAO alcanca o
-    # `bio` ("Permission denied to poisonb9", 403, em toda publicacao de
-    # 18/09). O `gh` esta' logado com o token classico, que tem `push` no
-    # repo (medido: `gh api repos/poisonb9/bio -q .permissions`). O helper
-    # entra por variavel de ambiente deste subprocesso: nada de token em URL,
-    # em arquivo ou na configuracao global.
-    amb_gh = dict(os.environ, GIT_CONFIG_COUNT="1",
-                  GIT_CONFIG_KEY_0="credential.helper",
-                  GIT_CONFIG_VALUE_0="!gh auth git-credential")
+    # ⛔ SEM `GITHUB_TOKEN` NO AMBIENTE DO PUSH. O topo deste arquivo ja' tira
+    # o token do `.env` (e' o PAT fine-grained, que NAO alcanca o `bio`) — mas
+    # SEIS modulos do engine chamam `load_dotenv()` de novo ao importar
+    # (awin, keys, mercadolivre, telegram...), e o token VOLTA pro ambiente
+    # antes do push. O git ja' fala com o github.com pelo `gh` (config
+    # global), e o `gh auth git-credential` obedece a variavel de ambiente
+    # antes do chaveiro: com ela presente, 403 "denied to poisonb9" em toda
+    # publicacao de 18/09; sem ela, o token classico do chaveiro, que tem
+    # `push` no repo (medido: `gh api repos/poisonb9/bio -q .permissions`).
+    amb_gh = {k: v for k, v in os.environ.items()
+              if k not in ("GITHUB_TOKEN", "GH_TOKEN")}
     empurrado = subprocess.run(
         ["git", "-C", str(tmp), "push", "-u", "origin", "HEAD:main"],
         capture_output=True, text=True, env=amb_gh)

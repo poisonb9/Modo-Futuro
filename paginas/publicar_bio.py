@@ -85,6 +85,12 @@ PARCEIROS = RAIZ / "paginas" / "quem_somos.html"
 # teto de 10), e e' a MESMA pagina que o site mae servira' na raiz quando
 # houver endereco pra ele.
 CATALOGO = RAIZ / "paginas" / "todos.html"
+# ⭐ PRIVACIDADE (18/09/2026). O catalogo grava clique e busca no Supabase;
+# o kit minimo de credibilidade dos Maestros (ecommercenapratica, DEMONSTRADO)
+# e a LGPD pedem que a pagina diga isso. Vai como rota `/privacidade` em
+# TODOS os projetos, pelo mesmo motivo de `/parceiros`: upload direto
+# substitui o diretorio inteiro, e o link do rodape nao pode virar 404.
+PRIVACIDADE = RAIZ / "paginas" / "privacidade.html"
 DESTINO = RAIZ / "paginas" / "_publicado"
 SEGREDOS = (RAIZ.parent.parent.parent / "BACKUP_SISTEMA" / "SEGREDOS_NAO_SUBIR")
 REPO = "poisonb9/bio"
@@ -1852,9 +1858,18 @@ def _carimbar(html: str) -> tuple[str, str]:
     return tag + html, marca
 
 
+def _por_privacidade(pasta: Path, privacidade: str) -> None:
+    """A rota `/privacidade`, em toda pasta que vai pro ar."""
+    if privacidade:
+        (pasta / "privacidade").mkdir(exist_ok=True)
+        (pasta / "privacidade" / "index.html").write_text(
+            privacidade, encoding="utf-8")
+
+
 def publicar_no_ar(html: str, parceiros: str = "",
                    catalogo: str = "",
-                   externos: dict[str, str] | None = None) -> None:
+                   externos: dict[str, str] | None = None,
+                   privacidade: str = "") -> None:
     """Sobe pro Cloudflare Pages e CONFERE no ar. Estoura se nao subiu.
 
     ⚠️ ISTO E' O PASSO QUE FALTAVA, e a falta dele fez eu anunciar uma pagina
@@ -1903,6 +1918,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
         (pasta / "parceiros").mkdir()
         (pasta / "parceiros" / "index.html").write_text(
             parceiros, encoding="utf-8")
+    _por_privacidade(pasta, privacidade)
     try:
         for proj in PROJETOS:
             subprocess.run(["npx", "--yes", "wrangler", "pages", "deploy",
@@ -1934,6 +1950,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
                     (casa / "parceiros").mkdir()
                     (casa / "parceiros" / "index.html").write_text(
                         parceiros, encoding="utf-8")
+                _por_privacidade(casa, privacidade)
                 subprocess.run(
                     ["npx", "--yes", "wrangler", "pages", "deploy", str(casa),
                      "--project-name", PROJETO_MAE, "--commit-dirty=true"],
@@ -2055,7 +2072,10 @@ def main() -> None:
     catalogo, externos = montar_catalogo()
     parceiros = (PARCEIROS.read_text(encoding="utf-8")
                  if PARCEIROS.exists() else "")
-    sobrou = conferir(html) + conferir(parceiros) + conferir(catalogo)
+    privacidade = (PRIVACIDADE.read_text(encoding="utf-8")
+                   if PRIVACIDADE.exists() else "")
+    sobrou = (conferir(html) + conferir(parceiros) + conferir(catalogo)
+              + conferir(privacidade))
     # ⚠️ O JSON DA CATEGORIA EXTERNA PASSA PELO MESMO DETECTOR: ele leva
     # nome, loja e link de cada produto, e e' tao publico quanto o HTML.
     for corpo in externos.values():
@@ -2110,6 +2130,7 @@ def main() -> None:
         (tmp / "parceiros").mkdir(exist_ok=True)
         (tmp / "parceiros" / "index.html").write_text(
             parceiros, encoding="utf-8")
+    _por_privacidade(tmp, privacidade)
 
     subprocess.run(["git", "-C", str(tmp), "add", "-A"], check=True)
     # ⚠️ `check=True` no commit. Estava `False`, e o commit falhou CALADO — o
@@ -2163,7 +2184,7 @@ def main() -> None:
         externos[nome], marcas_e[nome] = _carimbar_json(externos[nome])
 
     print("\npublicando no Cloudflare Pages:")
-    publicar_no_ar(html, parceiros, catalogo, externos)
+    publicar_no_ar(html, parceiros, catalogo, externos, privacidade)
     print(f"\nconferindo no ar (procurando {marca!r}):")
     faltando, conferidos = conferir_no_ar(marca, marca_p, marca_c, marcas_e)
     for nome in conferidos:

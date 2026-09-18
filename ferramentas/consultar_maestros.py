@@ -9,9 +9,9 @@ Ate' entao a mecanica era reescrita no chat a cada pergunta.
 uma pontuacao por palavra que VOCE passa na linha de comando. Mudou a
 pergunta, mudam as palavras — o acervo e' lido inteiro toda vez.
 
-    python consultar.py "landing page=4" "prova social=4" "afiliad=3" --min 7
-    python consultar.py --tema "IMAGEM=foto|imagem" --tema "CTA=bot[aã]o|cta" ...
-    python consultar.py --video "Design for Startups"     # tudo de um video
+    python ferramentas/consultar_maestros.py "landing page=4" "prova social=4" "afiliad=3" --min 7
+    python ferramentas/consultar_maestros.py --tema "IMAGEM=foto|imagem" --tema "CTA=bot[aã]o|cta" ...
+    python ferramentas/consultar_maestros.py --video "Design for Startups"     # tudo de um video
 
 Saida: DEMONSTRADO primeiro, depois OPINIAO (sao poucas e carregam principio),
 depois AFIRMADO. Cada linha: [base pontos] situacao -> saida · video.
@@ -24,8 +24,10 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-AQUI = Path(__file__).resolve().parent
-SKILL = (AQUI.parent.parent / "skills_de_trabalho" / ".claude" / "skills"
+# MORA NO PROJETO, nao no acervo (Bryan, 18/09/2026: "nao coloca dentro da
+# propria skill, posso usar o maestros para outros projetos e nao quero
+# vies"). O acervo e' so' LIDO daqui.
+SKILL = (Path.home() / "Documents" / "skills_de_trabalho" / ".claude" / "skills"
          / "maestros-da-ia" / "referencias" / "por_resultado.md")
 ORDEM = {"DEMONSTRADO": 0, "OPINIAO": 1, "AFIRMADO": 2}
 

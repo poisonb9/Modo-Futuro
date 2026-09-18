@@ -456,16 +456,18 @@
   .fogo svg { width: 15px; height: 15px; display: block; }
   /* com fogo, o "novo" (que tambem mora a` direita) desce um degrau */
   .fogo ~ .novo { top: 38px; }
+  /* ⭐ CARTAO v2 (18/09/2026, MAESTROS_ESTETICA_DO_SITE.md, blocos A+B):
+     uma fonte de corpo (Poppins), mono SO' em numero; nada abaixo de 11px;
+     ritmo de 8; um acento por cartao; o BOTAO e' o que gruda no fundo, nao o
+     preco (era o vao entre nome e preco que o Bryan viu no Cortador). */
   .sinais {
-    display: flex; align-items: center; justify-content: space-between; gap: 6px;
-    margin-top: auto; margin-bottom: -4px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
   }
   /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
   .sinais > .nota:only-child { margin-left: 0; }
   .vendeu {
-    font: 500 10px/1.2 var(--mono); color: var(--fraco); min-width: 0;
+    font: 500 11px/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0;
   }
-  .sinais + .linha-preco { margin-top: 6px; }
   .promo {
     display: inline-flex; align-items: center; gap: 3px;
     font: 700 11px/1 Poppins, sans-serif; color: #FF4747;
@@ -478,29 +480,38 @@
   }
   .recorde svg { width: 13px; height: 13px; display: block; }
   .frete {
-    font: 600 10px/1 var(--mono); color: var(--verde);
-    border: 1px solid var(--verde); border-radius: 4px; padding: 2px 5px; opacity: .9;
+    font: 600 11px/1 Poppins, sans-serif; color: var(--verde);
+    border: 1px solid var(--verde); border-radius: 6px; padding: 3px 6px; opacity: .9;
   }
   .ja-esteve.espere strong { color: var(--tinta); font-weight: 700; letter-spacing: .02em; }
   .ja-esteve.loja-diz strong { color: var(--tinta); font-weight: 600; }
   .ja-esteve.tambem-em a { color: var(--fraco); text-decoration: underline; }
+  /* ⭐ BOTAO DE VERDADE (YC mobile: alvo de toque; acao secundaria neutra):
+     largura toda, 40px, sino em SVG monocromatico — zero emoji na tela. */
   .avise-me {
-    display: inline-block; align-self: flex-start;
-    font: 600 10px/1 var(--mono); color: var(--fraco);
-    border: 1px solid var(--linha); border-radius: 999px; padding: 4px 8px;
-    text-decoration: none; opacity: .9;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%; min-height: 40px; margin-top: auto;
+    font: 600 12px/1.2 Poppins, sans-serif; color: var(--fraco);
+    border: 1px solid var(--linha); border-radius: 10px; padding: 8px 10px;
+    text-decoration: none; background: transparent;
+    transition: color .16s ease, border-color .16s ease, background .16s ease;
   }
+  .avise-me svg { width: 15px; height: 15px; flex: 0 0 15px; display: block; }
+  .avise-me span { white-space: nowrap; }
+  .avise-me.longo span { white-space: normal; text-align: left; }
   .avise-me:hover { color: var(--tinta); border-color: var(--tinta); }
+  .avise-me:active { background: var(--linha); }
+  .avise-me + .avise-me { margin-top: 0; }
+  .avise-me.repor { min-height: 34px; font-size: 11px; }
   .ja-esteve.tambem-em strong { color: var(--verde); font-weight: 700; }
   .nota {
-    display: inline-flex; align-items: center; gap: 3px; margin-left: auto;
-    font: 600 10.5px/1 var(--mono); color: var(--fraco);
+    display: inline-flex; align-items: center; gap: 4px; margin-left: auto;
+    font: 600 12px/1 var(--mono); color: var(--fraco);
   }
-  .nota svg { width: 12px; height: 12px; display: block; opacity: .9; }
+  .nota svg { width: 13px; height: 13px; display: block; opacity: .9; }
   .nota.em-fogo { color: var(--verde); }
   .ja-esteve {
-    font: 500 10px/1.2 var(--mono); color: var(--fraco); opacity: .8;
-    margin-top: -4px;
+    font: 500 11.5px/1.35 Poppins, sans-serif; color: var(--fraco);
   }
 
   /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
@@ -509,25 +520,29 @@
      (inline), o texto e' a sigla ate' o simbolo oficial do kit entrar.
      ⚠️ FORA DA FOTO desde a mesma noite: na foto ele cobria a legenda do
      vendedor ("8BitDo OFFICIAL STORE") — o Bryan viu no celular. */
+  /* ⭐ NEUTRO (bloco B, 18/09): o chip da loja vinha na cor da loja (o
+     vermelho do Ali ao lado do titulo "da' impressao de negacao" — o proprio
+     Bryan, 16/09). Um acento por cartao: a cor da loja fica no SIMBOLO
+     oficial quando ele existir, e no seletor "Loja". */
   .loja {
     display: inline-block; vertical-align: 2px; white-space: nowrap;
-    font: 600 8px/1 var(--mono); letter-spacing: .05em;
+    font: 600 9px/1 Poppins, sans-serif; letter-spacing: .06em;
     color: var(--fraco); border: 1px solid var(--linha);
-    padding: 2px 4px; border-radius: 4px; opacity: .8;
+    padding: 2px 5px; border-radius: 5px; opacity: .85;
   }
   /* o simbolo oficial: mesma altura visual da sigla, sem caixa */
   .loja-simbolo {
     height: 14px; width: auto; vertical-align: -3px;
     border: 0; padding: 0; border-radius: 3px; opacity: 1;
   }
-  .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 11px 12px 12px; gap: 7px; }
-  .nome { font-size: 13px; font-weight: 600; line-height: 1.3; }
-  .linha-preco { margin-top: auto; display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+  .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 12px 14px 14px; gap: 8px; }
+  .nome { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+  .linha-preco { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   /* ⚠️ O PRECO E' TINTA CHEIA. Ele ja' e' o maior e o mais pesado do
      cartao — nao precisa de cor tambem, e com cor ele empatava com o
      painel de prova. */
   .preco { font-family: "Archivo Black", system-ui, sans-serif;
-           font-size: 17.5px; color: var(--tinta); letter-spacing: -.01em; }
+           font-size: 18px; color: var(--tinta); letter-spacing: -.01em; }
   .de { font: 400 11.5px/1 var(--mono); color: var(--fraco); text-decoration: line-through; }
   /* ⚠️ SEM `nowrap`. A linha 'acompanhando ha 1 dia' em fonte mono nao cabia
      na largura do cartao e VAZAVA pra fora da borda arredondada — apareceu
@@ -1041,6 +1056,9 @@
     return !caro(p) && !soNoSegmento(p);
   }
 
+  var SINO_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15zM10 21a2 2 0 0 0 4 0"/></svg>';
+  var REPOR_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>';
+
   function montar(p) {
     var a = document.createElement("a");
     a.className = "item";
@@ -1120,7 +1138,7 @@
         selo = el("span", "loja", cfg.sigla);
         // ⭐ transparente, so' a tinta na cor da loja (Bryan, 16/09: "testar
         // assim transparente e mudar so' a cor pela cor do Ali")
-        if (cfg.tinta) { selo.style.color = cfg.tinta; selo.style.borderColor = cfg.tinta; }
+        // (bloco B, 18/09: sem tinta da loja no chip — um acento por cartao)
       }
       selo.title = p.loja;
       nome.appendChild(document.createTextNode(" "));
@@ -1151,9 +1169,8 @@
     // por vendedor, numero que a pessoa confere na pagina da loja. Piso 2:
     // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
     var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
-    var temConferido = !temRecorde && !temPromo && !temVendeu && !temVendedores && p.conferido;
     var temFrete = !!p.frete_gratis;
-    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temConferido || temFrete) {
+    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete) {
       var sinais = el("div", "sinais");
       if (temRecorde) {
         var rec = el("span", "recorde");
@@ -1165,11 +1182,8 @@
       // ⭐ sem Promo e sem vendas medidas, a ancora e' o que TODO produto tem:
       // "conferido hoje as 19:00". Medicao que falta nao desqualifica o
       // anuncio (Bryan, 16/09) — a regua da pagina e' o preco conferido.
-      if (temConferido) {
-        var conf = el("span", "vendeu", "preço conferido " + p.conferido);
-        conf.title = "última vez que eu reconferi o preço na loja";
-        sinais.appendChild(conf);
-      }
+      // (bloco B, 18/09: "preço conferido X" saiu do cartao — e' telemetria
+      // nossa; vai pro title do preco, a um toque longo)
       // ⭐ SEM PROMO, a ancora da esquerda e' "+792 vendidos desde 14/09":
       // crescimento do volume da loja medido por NOS (piso 20, senao e'
       // ruido). E' o numero de vendas "mais real" que o Bryan pediu de
@@ -1224,6 +1238,7 @@
     // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
     // vendedor), no rodape (cortava o "no radar") e a direita do preco.
     // Aqui ele le como "de onde vem", colado ao nome, e o preco fica limpo.
+    if (p.conferido) { lp.title = "preço conferido " + p.conferido; }
     lp.appendChild(el("span", "preco", p.preco));
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
@@ -1241,7 +1256,7 @@
         : p.ja_esteve.em;
       var je = el("div", "ja-esteve espere");
       je.appendChild(el("strong", null, "espere"));
-      je.appendChild(document.createTextNode(" · já esteve a " + p.ja_esteve.preco + " " + quando));
+      je.appendChild(document.createTextNode(" — já esteve a " + p.ja_esteve.preco + " " + quando));
       je.title = "subiu, mas já esteve mais barato — o menor preço que eu mesmo vi, e quando";
       corpo.appendChild(je);
     }
@@ -1288,7 +1303,13 @@
       av.className = "avise-me";
       av.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id));
       av.rel = "noopener";
-      av.textContent = "🔔 avise-me quando cair";
+      // ⭐ sino em SVG, e o texto responde ao "espere": se ja' esteve mais
+      // barato, o pedido e' "avise-me se voltar a R$ X" (era o "nao compre"
+      // sem saida, MAESTROS_DESIGN §3.6)
+      var voltar = !!(p.ja_esteve && p.ja_esteve.preco);
+      if (voltar) { av.className += " longo"; }
+      av.innerHTML = SINO_SVG + '<span>' + (voltar
+        ? 'avise se voltar a ' + escapar(p.ja_esteve.preco) : 'avise-me se cair') + '</span>';
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
       av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
       corpo.appendChild(av);
@@ -1306,7 +1327,7 @@
         rp.className = "avise-me repor";
         rp.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id)) + "_repor30";
         rp.rel = "noopener";
-        rp.textContent = "🔁 lembrar de repor em 30 dias";
+        rp.innerHTML = REPOR_SVG + '<span>lembrar de repor em 30 dias</span>';
         rp.title = "eu te lembro no Telegram daqui a 30 dias, com o preço do dia";
         rp.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
         corpo.appendChild(rp);
@@ -1314,17 +1335,17 @@
     }
     // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
     // numero que acabou de ser lido. Volta `null` quando nao ha' 3 pontos.
-    var gr = grafico(p);
-    if (gr) { corpo.appendChild(gr); }
-
-    var rod = el("div", "rodape-item");
-    rod.appendChild(el("span", "pulso"));
-    rod.appendChild(el("span", null, p.pontos >= 2
+    // ⭐ bloco B (18/09): o grafico so' quando ele diz algo (queda >= 5%);
+    // reto e' ornamento (YC). E "no radar ha' N dias" sai do cartao: e'
+    // telemetria nossa — fica no title do cartao inteiro.
+    if ((p.queda || 0) >= 5) {
+      var gr = grafico(p);
+      if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
+    }
+    a.title = (p.pontos >= 2
       ? (p.dias <= 0 ? "no radar desde hoje"
-         : (p.dias === 1 ? "no radar há 1 dia"
-            : "no radar há " + p.dias + " dias"))
-      : "achado agora"));
-    corpo.appendChild(rod);
+         : (p.dias === 1 ? "no radar há 1 dia" : "no radar há " + p.dias + " dias"))
+      : "achado agora") + (p.conferido ? " · preço conferido " + p.conferido : "");
 
     a.appendChild(corpo);
 

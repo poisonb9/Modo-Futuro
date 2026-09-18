@@ -43,8 +43,12 @@ checar('var SO_NO_SEGMENTO = ["Calçados"];' in HTML,
 # ⚠️ Desde 16/09/2026 o teto e' do CONTEXTO: 250 na categoria, 150 dentro
 # da loja (`tetoAtual()`). O titulo continua derivando do numero, nunca
 # escrito a mao — e' isso que a guarda protege, nao o nome da variavel.
-checar('"Até R$ " + tetoAtual()' in HTML and '"Acima de R$ " + tetoAtual()' in HTML,
-       "os titulos dos blocos derivam do teto (tetoAtual), nao sao texto cravado")
+# ⚠️ Desde 17/09 o corte dos blocos e' TETO_BLOCO (99,99) e o rotulo sai de
+# `rotuloBloco`, que formata o numero — a guarda continua a mesma: derivar.
+checar('"Até " + reais(TETO_BLOCO)' in HTML or ': TETO_BLOCO;' in HTML,
+       "os titulos dos blocos derivam do teto (TETO_BLOCO), nao sao texto cravado")
+checar('"Até R$ 99,99"' not in HTML and '"A partir de R$ 100"' not in HTML,
+       "e nao existe mais rotulo escrito a mao")
 checar("var TETO_LOJA = 150;" in HTML and 'return (loja && !canal) ? TETO_LOJA : TETO_VITRINE;' in HTML,
        "dentro da loja o corte e' 150; na categoria e na principal continua 250")
 # ⚠️ SO' O CODIGO, sem os comentarios — a primeira versao desta checagem
@@ -94,15 +98,18 @@ checar("decodeURIComponent" in corpo_url and "try {" in corpo_url,
 
 print()
 print("5. OS BLOCOS — e a ordem que o Bryan pediu")
-bl = HTML.index('bloco("Até R$ ')
-ba = HTML.index('bloco("Acima de R$ ')
+# ⚠️ Desde 17/09 (5b48f1e) o rotulo sai de `rotuloBloco(alto)` e o corte e'
+# R$ 99,99 em toda pagina; a chamada e' `bloco(rotuloBloco(false), ...)`.
+# O teste procurava a string antiga e reprovava um HTML certo.
+bl = HTML.index('bloco(rotuloBloco(false)')
+ba = HTML.index('bloco(rotuloBloco(true)')
 checar(bl < ba, "o barato vem PRIMEIRO na pagina")
 checar("var PASSO_BLOCO = 15;" in HTML, "15 por bloco, com 'ver mais' proprio")
-checar("lista.some(caro) && lista.some(function (p) {" in HTML,
+checar("lista.some(caroBloco) && lista.some(function (p) {" in HTML,
        "a divisao so' aparece quando os DOIS grupos existem")
-checar("mostrandoAlto = PASSO_BLOCO;" in HTML and
-       "mostrandoBaixo = PASSO_BLOCO;" in HTML,
-       "trocar de categoria reinicia os dois contadores")
+checar("mostrandoAlto = passoBloco();" in HTML and
+       "mostrandoBaixo = passoBloco();" in HTML,
+       "trocar de categoria reinicia os dois contadores (passo da categoria)")
 
 print()
 if falhas:

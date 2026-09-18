@@ -845,7 +845,14 @@
   // principal ESCONDE no rolar; este decide onde a prateleira PARTE.
   var TETO_BLOCO = 99.99;
   function caroBloco(p) { return num(p.preco) > TETO_BLOCO; }
-  function rotuloBloco(alto) { return alto ? "A partir de R$ 100" : "Até R$ 99,99"; }
+  // ⛔ O ROTULO DERIVA DO NUMERO, nunca escrito a mao (guarda de
+  // teste_vitrine_teto): se o teto virar 149,99 e o titulo continuar "99,99",
+  // a pagina mente por conta. "A partir de" e' o teto mais um centavo.
+  function rotuloBloco(alto) {
+    var v = alto ? Math.round((TETO_BLOCO + 0.01) * 100) / 100 : TETO_BLOCO;
+    // "R$ 100,00" vira "R$ 100" — e' o texto que o Bryan aprovou em 17/09
+    return (alto ? "A partir de " : "Até ") + reais(v).replace(/,00$/, "");
+  }
   // ⭐ QUINZE, e nao 90 como a lista corrida. Dentro da categoria os dois
   // blocos disputam a mesma tela: 90 cartoes no de cima empurrariam o de
   // baixo pra fora e ele deixaria de existir na pratica.

@@ -291,6 +291,9 @@ FOTOS_TROCAS_MAX = 10 ** 6
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria
 # fora, com aviso — nao categoria com preco de ontem.
 EXTERNO_MAX_HORAS = 24
+# ⚠️ queda de externa acima disto nao conta no heroi: e' o feed trocando
+# variante, nao preco caindo (medido em 18/09 na Kabum: ate' 89% num dia).
+EXTERNA_QUEDA_MAX = 30.0
 
 
 # ⭐ SELO "A LOJA DIZ" (Bryan, 17/09/2026): a Nike preenche `product_price_old`
@@ -656,13 +659,21 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
         cats: dict[str, int] = {}
         cats_cl: dict[str, int] = {}
         cl = 0
+        caiu = 0
         for x in b["produtos"]:
             cats[x["canal"]] = cats.get(x["canal"], 0) + 1
             cats_cl[x["canal"]] = cats_cl.get(x["canal"], 0) + int(x.get("cliques_30") or 0)
             cl += int(x.get("cliques_30") or 0)
+            # ⭐ "baixaram de preco" do heroi conta a externa tambem (Bryan,
+            # 18/09: "apenas 30?" — era so' o catalogo proprio). Teto de 30%:
+            # acima disso, no feed, e' variante trocada (Kabum: 7 itens com
+            # "queda" ate' 89% no mesmo dia), nao queda. O radar proprio nao
+            # tem teto porque reconfere de hora em hora.
+            if 5 <= float(x.get("queda") or 0) <= EXTERNA_QUEDA_MAX:
+                caiu += 1
         indice[cat] = {"arquivo": b["arquivo"], "n": len(b["produtos"]),
                        "passo": b["passo"], "cats": cats,
-                       "cliques": cl, "cats_cliques": cats_cl}
+                       "cliques": cl, "cats_cliques": cats_cl, "caiu": caiu}
     arquivos = {b["arquivo"]: json.dumps(
         {"categoria": cat, "produtos": b["produtos"]}, ensure_ascii=False)
         for cat, b in externos.items()}

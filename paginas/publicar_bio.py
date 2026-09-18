@@ -274,6 +274,14 @@ EXTERNAS = {
     "Lacoste BR": ("Lacoste", "lacoste.json", 50),
     "Shark-Ninja BR": ("Shark Ninja", "sharkninja.json", 50),
 }
+# ⛔ LOJAS APROVADAS QUE NAO ENTRAM NO SITE (Bryan, 18/09/2026, resposta ao
+# ponto 4 da AUDITORIA: "dispersao — Carraro/Leveros/Radiale sem fit"; "OK,
+# cortar lojas sem fit do site, ficam na serie"). Pneu e ar-condicionado
+# no meio de organizador de R$ 11 mudam o que a pagina parece ser. A SERIE
+# continua colhendo o feed delas (engine/awin.py nao muda): e' a pagina que
+# nao as mostra. Continuam mapeadas em EXTERNAS de proposito — voltar e'
+# tirar daqui, nao redescobrir a categoria.
+FORA_DO_SITE = {"Carraro BR", "Leveros BR", "Radiale Pneus"}
 # ⚠️ IDADE MAXIMA DO INSTANTANEO. A mesma regra dos 24h do AliExpress: preco
 # que nao foi reconferido hoje nao vai pro ar. Instantaneo velho = categoria
 # fora, com aviso — nao categoria com preco de ontem.
@@ -370,7 +378,11 @@ def produtos_externos() -> dict[str, dict]:
     from engine import tendencias_ml as _tm
     _termos_alta = _tm.termos()
     sem_mapa: dict[str, int] = {}
+    fora: dict[str, int] = {}
     for p in inst.get("produtos") or []:
+        if (p.get("loja") or "") in FORA_DO_SITE:
+            fora[p["loja"]] = fora.get(p["loja"], 0) + 1
+            continue
         cfg = EXTERNAS.get(p.get("loja") or "")
         if not cfg:
             # ⚠️ LOJA APROVADA SEM CATEGORIA: nao entra e AVISA. Silencio aqui
@@ -417,6 +429,9 @@ def produtos_externos() -> dict[str, dict]:
     for loja, n in sem_mapa.items():
         print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "
               "— aprovada no Awin mas fora do site ate' ganhar categoria")
+    for loja, n in fora.items():
+        print(f"externos: {loja!r} fica FORA do site por decisao ({n} produtos; "
+              "FORA_DO_SITE)")
     for cat, bloco in saida.items():
         bloco["produtos"].sort(key=lambda x: float(
             x["preco"].replace("R$", "").replace(",", ".")))

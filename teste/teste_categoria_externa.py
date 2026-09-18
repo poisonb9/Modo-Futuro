@@ -67,6 +67,10 @@ NIKE = [
     {"id": "90", "nome": "Chuteira Outra Loja", "preco": 80.0,
      "imagem": "", "link": "https://www.awin1.com/pclick.php?p=90",
      "loja": "Loja Sem Mapa", "categoria": "", "marca": "", "origem": "awin"},
+    # ⛔ loja MAPEADA mas FORA_DO_SITE (Bryan, 18/09): tem categoria e nao entra
+    {"id": "91", "nome": "Pneu Aro 15", "preco": 399.0,
+     "imagem": "", "link": "https://www.awin1.com/pclick.php?p=91",
+     "loja": "Radiale Pneus", "categoria": "Pneus", "marca": "", "origem": "awin"},
 ]
 
 tmp = Path(tempfile.mkdtemp())
@@ -78,6 +82,8 @@ try:
     _instantaneo(tmp, 2, NIKE)
     ext = publicar_bio.produtos_externos()
     checar(list(ext) == ["Nike"], f"uma categoria, 'Nike' (veio {list(ext)})")
+    checar("Radiale Pneus" in publicar_bio.EXTERNAS and "Radiale Pneus" in publicar_bio.FORA_DO_SITE,
+           "Radiale tem mapa E esta' em FORA_DO_SITE — e por isso nao virou categoria")
     prods = ext.get("Nike", {}).get("produtos", [])
     checar(len(prods) == 3, f"3 produtos da Nike BR, a outra loja fica fora ({len(prods)})")
     checar([p["preco"] for p in prods] == ["R$ 59,98", "R$ 99,00", "R$ 149,99"],

@@ -57,7 +57,16 @@
      que nao executa), continua la. A grade vazia reserva altura para a
      pagina nao encolher enquanto os produtos nao chegam. */
   .js #indice-estatico { display: none; }
-  .js #grade:empty { min-height: 70vh; }
+  .js #grade:empty { min-height: 70vh; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; align-content: start; }
+  /* dois cartoes-esqueleto pulsando enquanto os produtos chegam */
+  .js #grade:empty::before, .js #grade:empty::after {
+    content: ""; display: block; aspect-ratio: 158 / 250; border-radius: 16px;
+    background: linear-gradient(180deg, rgba(128,128,140,.16) 0 62%, rgba(128,128,140,.08) 62%);
+    animation: esqueleto 1.2s ease-in-out infinite;
+  }
+  .js #grade:empty::after { animation-delay: .3s; }
+  @keyframes esqueleto { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .js #grade:empty::before, .js #grade:empty::after { animation: none; } }
   /* ⚠️ A COPY DESTA PAGINA SEGUE UMA LISTA DE VERIFICACAO, e nao o gosto de
      quem escreveu. Ela vem do acervo dos Maestros (Nick Saraev, DEMONSTRADO):
      giving · micro commitment · social proof · authority · rapport · scarcity.

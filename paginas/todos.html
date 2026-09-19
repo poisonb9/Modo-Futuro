@@ -457,6 +457,31 @@
   }
 
   /* ---------------- grade ---------------- */
+  /* ⭐ A VITRINE (Liquid Glass parte 3, 19/09/2026): o produto #1 grande,
+     "o que a pessoa ve logo de cara". Foto no BRANCO (a foto e' o produto;
+     vidro em cima dela so' na placa de preco, tingido — MAESTROS_LIQUID_GLASS
+     §4). Selo de queda em ouro, chip da loja em vidro. So' aparece sem
+     filtro nenhum: com filtro, a grade e' a resposta e nada a atrasa. */
+  .vitrine {
+    display: block; position: relative; margin: 14px 0 0; border-radius: 24px; overflow: hidden;
+    background: #fff; box-shadow: var(--vidro-sombra); color: inherit; text-decoration: none;
+    transition: transform .18s cubic-bezier(.2,.8,.2,1);
+  }
+  .vitrine:active { transform: scale(.985); }
+  .vitrine .vfoto { aspect-ratio: 1 / 1; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; }
+  .vitrine .vselo {
+    position: absolute; top: 12px; left: 12px; background: var(--ouro-claro); color: #17161d;
+    font: 700 12px/1 var(--mono); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(200,144,26,.35);
+  }
+  .vitrine .vloja { position: absolute; top: 12px; right: 12px; padding: 7px 10px; border-radius: 999px; font: 600 11px/1 Poppins, sans-serif; color: var(--tinta); }
+  .vitrine .vplaca {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 16px; border-radius: 18px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+  }
+  .vitrine .vnome { font: 600 14px/1.25 Poppins, sans-serif; color: var(--tinta); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .vitrine .vpreco { font: 700 24px/1 var(--mono); color: var(--tinta); white-space: nowrap; text-align: right; }
+  .vitrine .vpreco s { display: block; font: 400 12px/1 var(--mono); color: var(--fraco); margin-bottom: 4px; }
+  @media (min-width: 700px) { .vitrine { display: grid; grid-template-columns: 1fr 1fr; } .vitrine .vfoto { aspect-ratio: 4 / 3; } }
   .grade {
     display: grid; gap: 13px; margin: 14px 0 0;
     grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
@@ -759,6 +784,7 @@
     </div>
   </div>
 
+  <div id="vitrine"></div>
   <div class="grade" id="grade"></div>
 
   <!-- ⭐ MICRO COMPROMISSO, e nao venda. O pedido e' entrar num canal gratis,
@@ -1849,6 +1875,8 @@
     }
 
     grade.innerHTML = "";
+    var vit0 = document.getElementById("vitrine");
+    if (vit0) { vit0.innerHTML = ""; }
     if (!lista.length) {
       var v = el("div", "vazio");
       v.appendChild(el("strong", null, "Nada aqui com esse filtro."));
@@ -1887,6 +1915,31 @@
               mostrandoAlto += passoBloco(); desenhar();
             });
     } else {
+      // ⭐ A VITRINE: sem filtro nenhum, o #1 da lista sai da grade e vira o
+      // cartao grande; com qualquer filtro, some (a grade e' a resposta).
+      var vit = document.getElementById("vitrine");
+      if (vit) { vit.innerHTML = ""; }
+      var semFiltro = atual === "todos" && !canal && !loja && !termo;
+      if (semFiltro && vit && lista.length && lista[0].imagem) {
+        var v1 = lista[0];
+        lista = lista.slice(1);
+        var a = document.createElement("a");
+        a.className = "vitrine"; a.href = v1.link; a.rel = "noopener";
+        a.addEventListener("click", function () { anotarClique(v1, "vitrine"); });
+        var img = document.createElement("img");
+        img.className = "vfoto"; img.alt = v1.nome; img.src = v1.imagem; img.loading = "eager";
+        a.appendChild(img);
+        if ((v1.queda || 0) >= 5) { a.appendChild(el("span", "vselo", "↓ " + Math.round(v1.queda) + "%")); }
+        a.appendChild(el("span", "vloja vidro", v1.loja || ""));
+        var pl = el("div", "vplaca vidro");
+        pl.appendChild(el("div", "vnome", v1.nome));
+        var pr = el("div", "vpreco");
+        if (v1.antes) { pr.appendChild(el("s", null, v1.antes)); }
+        pr.appendChild(document.createTextNode(v1.preco));
+        pl.appendChild(pr);
+        a.appendChild(pl);
+        vit.appendChild(a);
+      }
       var pedaco = document.createDocumentFragment();
       lista.slice(0, mostrando).forEach(function (p) {
         pedaco.appendChild(montar(p));

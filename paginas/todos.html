@@ -838,9 +838,12 @@
   /* ⚠️ O PRECO E' TINTA CHEIA. Ele ja' e' o maior e o mais pesado do
      cartao — nao precisa de cor tambem, e com cor ele empatava com o
      painel de prova. */
-  .preco { font-family: "Archivo Black", system-ui, sans-serif;
-           font-size: 18px; color: var(--tinta); letter-spacing: -.01em; }
-  .de { font: 400 11.5px/1 var(--mono); color: var(--fraco); text-decoration: line-through; }
+  /* 19/09 (Bryan: "a fonte do 60,31 ficou diferente do 140,17; padronizar"):
+     o preco do cartao segue o desenho da placa da vitrine - Poppins pesada,
+     numeros tabulares, "R$" menor e mais leve; o riscado tambem em Poppins. */
+  .preco { font: 700 20px/1.2 Poppins, sans-serif; color: var(--tinta); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .preco .rs { font-size: 12px; font-weight: 600; color: var(--fraco); letter-spacing: 0; margin-right: 2px; }
+  .de { font: 500 11.5px/1 Poppins, sans-serif; color: var(--fraco); text-decoration: line-through; }
   /* ⚠️ SEM `nowrap`. A linha 'acompanhando ha 1 dia' em fonte mono nao cabia
      na largura do cartao e VAZAVA pra fora da borda arredondada — apareceu
      assim no iPhone do Bryan (14/09/2026). Texto que sai do cartao faz a
@@ -1690,7 +1693,10 @@
     // vendedor), no rodape (cortava o "no radar") e a direita do preco.
     // Aqui ele le como "de onde vem", colado ao nome, e o preco fica limpo.
     if (p.conferido) { lp.title = "preço conferido " + p.conferido; }
-    lp.appendChild(el("span", "preco", p.preco));
+    var pe = el("span", "preco"), mp = /^R\$\s*(.+)$/.exec(String(p.preco || ""));
+    if (mp) { pe.appendChild(el("span", "rs", "R$")); pe.appendChild(document.createTextNode(mp[1])); }
+    else { pe.textContent = p.preco; }
+    lp.appendChild(pe);
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }

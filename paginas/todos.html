@@ -49,7 +49,15 @@
      fonte do sistema e troca (display=swap). Sem JS, o <noscript> carrega. -->
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<script>document.documentElement.className += " js";</script>
 <style>
+  /* 19/09 (print do Bryan, 2a vez): o Safari pinta o HTML aos poucos no
+     "puxar para atualizar" e o indice do crawler aparecia cru antes do
+     script montar a grade. Com JS, o indice nunca se ve; sem JS (robo
+     que nao executa), continua la. A grade vazia reserva altura para a
+     pagina nao encolher enquanto os produtos nao chegam. */
+  .js #indice-estatico { display: none; }
+  .js #grade:empty { min-height: 70vh; }
   /* ⚠️ A COPY DESTA PAGINA SEGUE UMA LISTA DE VERIFICACAO, e nao o gosto de
      quem escreveu. Ela vem do acervo dos Maestros (Nick Saraev, DEMONSTRADO):
      giving · micro commitment · social proof · authority · rapport · scarcity.

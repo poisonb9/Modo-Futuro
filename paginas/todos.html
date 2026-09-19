@@ -2618,8 +2618,8 @@
       "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}",
       "float ruido(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
       "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
-      "vec3 amostra(vec2 u,float k){vec3 c=vec3(0.);float w=0.;",
-      " for(int i=-2;i<=2;i++){for(int j=-2;j<=2;j++){vec2 o=vec2(float(i),float(j))*(A*k/R);float g=exp(-float(i*i+j*j)*.30);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
+      "vec4 amostra(vec2 u,float k){vec4 c=vec4(0.);float w=0.;",
+      " for(int i=-2;i<=2;i++){for(int j=-2;j<=2;j++){vec2 o=vec2(float(i),float(j))*(A*k/R);float g=exp(-float(i*i+j*j)*.30);c+=texture2D(T,u+o)*g;w+=g;}}",
       " return c/w;}",
       "void main(){",
       " vec2 u=vec2(v.x,1.-v.y);vec2 q=(u-.5)*R;",
@@ -2641,13 +2641,13 @@
       " vec2 uu=u+desl/R;",
       " float borda=1.-x;",
       " vec2 ut=vec2(uu.x,O.x+uu.y*O.y);",
-      " vec3 col=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);",
+      " vec4 am=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);vec3 col=am.a>0.001?am.rgb/am.a:vec3(1.);float cob=am.a;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.05+D*.10);",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
       " float sp=pow(max(dot(N,ld),0.),40.)*borda;",
       " col+=vec3(1.)*(sp*.45+borda*.05*(1.-D));",
-      " float a=step(d,0.)*(.82+borda*.15);gl_FragColor=vec4(col*a,a);}"
+      " float a=step(d,0.)*cob*.92;gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function ligar(el, raio) {
       if (!el || el.__espelho) { return; }
@@ -2665,6 +2665,7 @@
       var lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
       var u = {}; ["T","R","L","K","D","A","Z","O"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
       var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
@@ -2689,7 +2690,7 @@
         if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
         ctx.setTransform(dprE, 0, 0, dprE, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
         ctx.filter = "none";
-        ctx.fillStyle = corFundo(); ctx.fillRect(0, 0, r.width, altura);
+        ctx.clearRect(0, 0, r.width, altura);   // transparente: so' as fotos sao opacas
         var houve = false;
         // o retangulo da TIRA em coordenadas de viewport (pra cruzar com os cartoes)
         r = { top: r.top - FOLGA, bottom: r.bottom + FOLGA, left: r.left, right: r.right, width: r.width, height: altura, topoPag: topoPag };
@@ -2701,8 +2702,7 @@
           if (alvos[i].tagName === "IMG") { continue; }
           // corpo do cartao com a COR real e sem borda (a cor do cartao e' quase a do
           // fundo, entao nao ha' aresta); o texto vem do backdrop fino do CSS por cima
-          var cc = getComputedStyle(alvos[i]).backgroundColor;
-          if (cc && cc !== "rgba(0, 0, 0, 0)") { ctx.fillStyle = cc; arred(ctx, b.left - r.left, b.top - r.top, b.width, b.height, 18); ctx.fill(); houve = true; }
+          houve = true;
           var img = alvos[i].querySelector("img");
           if (img && img.complete && img.naturalWidth) {
             var ib = img.getBoundingClientRect(), cs = getComputedStyle(img);

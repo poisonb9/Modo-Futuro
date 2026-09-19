@@ -2613,7 +2613,9 @@
     if (menosMov && location.search.indexOf("gl=1") < 0) { return; }
     var VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
     var FS = [
-      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A;",
+      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A,Z;",
+      "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}",
+      "float ruido(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
       "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
       "vec3 amostra(vec2 u,float k){vec3 c=vec3(0.);float w=0.;",
       " for(int i=-1;i<=1;i++){for(int j=-1;j<=1;j++){vec2 o=vec2(float(i),float(j))*(A*k/R);float g=exp(-float(i*i+j*j)*.5);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
@@ -2624,7 +2626,8 @@
       " float e=smoothstep(0.,-min(R.y*.35,22.*A/14.),d);float borda=1.-e;",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
       " vec2 n=normalize(g+1e-5);float t=smoothstep(0.,1.,clamp(borda,0.,1.));float curva=1.-sqrt(1.-t*t);",
-      " vec2 ref=n*curva*.12*min(R.x,R.y)/R;",
+      " vec2 onda=vec2(ruido(u*3.+vec2(Z*.15,0.))-.5,ruido(u*3.+vec2(0.,Z*.12)+7.)-.5);",
+      " vec2 ref=(n*curva*.12+onda*(.012+curva*.03))*min(R.x,R.y)/R;",
       " float k=1.+curva*2.;vec3 col;col.r=amostra(u-ref*1.00,k).r;col.g=amostra(u-ref*1.015,k).g;col.b=amostra(u-ref*1.03,k).b;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.08+D*.12);col=mix(col,vec3(1.),curva*.28*(1.-D));",
@@ -2648,7 +2651,7 @@
       var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
       var lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
-      var u = {}; ["T","R","L","K","D","A"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
+      var u = {}; ["T","R","L","K","D","A","Z"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
       var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
@@ -2676,10 +2679,8 @@
           houve = true;
           if (alvos[i].tagName === "IMG") { continue; }
           // corpo do cartao (fundo branco da foto + corpo)
-          ctx.fillStyle = "#fff";
-          arred(ctx, b.left - r.left, b.top - r.top, b.width, b.height, 18); ctx.fill();
-          var corpo = alvos[i].querySelector(".corpo");
-          if (corpo) { var cb = corpo.getBoundingClientRect(); ctx.fillStyle = corCaixa(); ctx.fillRect(cb.left - r.left, cb.top - r.top, cb.width, cb.height); }
+          // 20/09 (Bryan: "linhas e quadrados"): NADA de retangulo de cartao no
+          // espelho — as arestas viravam linhas dobradas. So' as fotos.
           var img = alvos[i].querySelector("img");
           if (img && img.complete && img.naturalWidth) {
             var ib = img.getBoundingClientRect();
@@ -2708,7 +2709,7 @@
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
         gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
-        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 9 * dpr);
+        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 9 * dpr); gl.uniform1f(u.Z, ts / 1000);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
       requestAnimationFrame(quadro);

@@ -173,6 +173,14 @@
   @media (prefers-color-scheme: dark) {
     .vidro::after { backdrop-filter: blur(10px) brightness(1.25) saturate(1.4); -webkit-backdrop-filter: blur(10px) brightness(1.25) saturate(1.4); }
   }
+  /* ⛔ MEDIDO 19/09 (print do Bryan): o ::after com backdrop-filter fica POR
+     CIMA do conteudo do vidro e desfoca o proprio conteudo na faixa do aro
+     (texto "AliExpress" fantasma, halo escuro em volta da pilula Inicio).
+     O conteudo sobe (z-index 1) e o aro fica embaixo; em pilulas pequenas
+     (abas, chip da loja) o aro nem existe. */
+  .vidro::after { z-index: 0; }
+  .vidro > * { position: relative; z-index: 1; }
+  .abas::after, .vloja::after { display: none; }
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
   @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
   * { box-sizing: border-box; }

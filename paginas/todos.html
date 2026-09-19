@@ -113,7 +113,10 @@
     --vidro-blur: blur(22px) saturate(160%);
     --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.4), rgba(255,255,255,1) 50%, rgba(255,255,255,.4));
     --vidro-sombra: 0 18px 50px -12px rgba(30,30,40,.20), 0 2px 6px rgba(30,30,40,.06);
-    --vidro-luz: inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,.05);
+    /* receita DEM (Framer University): highlight interno no topo Y=2 e na
+       base Y=-2, blur 0, branco 35%; mais um aro de 1px e a sombra de baixo */
+    --vidro-luz: inset 0 2px 0 -1px rgba(255,255,255,.35), inset 0 -2px 0 -1px rgba(255,255,255,.35),
+                 inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(0,0,0,.06);
     --fio: rgba(0,0,0,.08);
   }
   @media (prefers-color-scheme: dark) {
@@ -125,7 +128,8 @@
       --vidro: rgba(255,255,255,.08); --vidro-forte: rgba(255,255,255,.12);
       --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.28) 50%, rgba(255,255,255,.06));
       --vidro-sombra: 0 18px 50px -10px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.25);
-      --vidro-luz: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.3);
+      --vidro-luz: inset 0 2px 0 -1px rgba(255,255,255,.12), inset 0 -2px 0 -1px rgba(255,255,255,.08),
+                   inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 2px rgba(0,0,0,.4);
       --fio: rgba(255,255,255,.08);
     }
   }
@@ -135,7 +139,9 @@
   /* o vidro como classe unica; a borda de luz (3 paradas, receita DEM) vem
      por mask no ::before, sem elemento extra. Firefox sem backdrop: solido. */
   .vidro {
-    position: relative; background: var(--vidro);
+    position: relative;
+    background-image: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 40%, rgba(0,0,0,.03));
+    background-color: var(--vidro);
     backdrop-filter: var(--vidro-blur); -webkit-backdrop-filter: var(--vidro-blur);
     box-shadow: var(--vidro-luz), var(--vidro-sombra);
   }
@@ -151,8 +157,21 @@
      "3D fluido" sem WebGL. Some com prefers-reduced-motion. */
   .vidro::after {
     content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-    background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.22), transparent 70%);
-    mix-blend-mode: soft-light; transition: background-position .2s;
+    /* ⭐ ARO REFRATIVO (19/09, "parecer agua / 3D"): o que passa por baixo da
+       borda fica mais desfocado, mais claro e mais saturado do que no
+       centro — e' a lente. So' os 14px externos, via mask. */
+    backdrop-filter: blur(14px) brightness(1.18) saturate(1.6); -webkit-backdrop-filter: blur(14px) brightness(1.18) saturate(1.6);
+    padding: 14px;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    /* a dispersao: um fio frio por fora e um fio quente por dentro do aro */
+    box-shadow: inset 0 0 0 1px rgba(140,200,255,.28), inset 0 0 0 3px rgba(255,255,255,.10), inset 0 0 0 4px rgba(255,190,140,.10);
+    /* e o especular que segue o rolar/inclinacao */
+    background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.35), transparent 70%);
+  }
+  @media (prefers-color-scheme: dark) {
+    .vidro::after { backdrop-filter: blur(14px) brightness(1.35) saturate(1.5); -webkit-backdrop-filter: blur(14px) brightness(1.35) saturate(1.5); }
   }
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
   @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
@@ -280,8 +299,7 @@
      ou com reduced-motion, fica o vidro CSS. (MAESTROS_LIQUID_GLASS §3) */
   .console > .gl { position: absolute; inset: 0; border-radius: inherit; z-index: 0; pointer-events: none; display: block; width: 100%; height: 100%; }
   .console > :not(.gl) { position: relative; z-index: 1; }
-  .console.com-gl { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .console.com-gl::after { display: none; }  /* pai = .faixa, que vai ate' o rodape */
+  .console.com-gl { background-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }  /* pai = .faixa, que vai ate' o rodape */
   /* o MOSTRADOR: poco rebaixado no vidro, 3 celas com fios, numero sobre
      rotulo, base com a linha do tempo ate' a proxima conferencia */
   .prova {

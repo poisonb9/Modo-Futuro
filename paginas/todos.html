@@ -206,7 +206,8 @@
   .vidro > canvas.espelho { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; border-radius: inherit; pointer-events: none; display: none; }
   .vidro.espelho-vivo > canvas.espelho { display: block; }
   .vidro.espelho-vivo { background-color: transparent; background-image: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .vidro.espelho-vivo::after { display: none; }
+  .vidro.espelho-vivo::after, .vidro.espelho-vivo::before { display: none !important; }
+  .vidro.espelho-vivo { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: var(--vidro-sombra); }
   .abas::after, .vloja::after { display: none; }
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
   @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
@@ -2627,7 +2628,7 @@
       // tem ESPESSURA e a borda e' uma calota; a altura h(x) da superficie da'
       // a normal 3D, e o raio refrata pela LEI DE SNELL (ior 1.5). So' os
       // ultimos ~10 px sao lente (a barra do Safari e' assim); o centro e' plano.
-      " float L0=6.*A/7.;float x=clamp(-d/L0,0.,1.);",
+      " float L0=5.*A/7.;float x=clamp(-d/L0,0.,1.);",
       " float hz=sqrt(max(0.,1.-(1.-x)*(1.-x)));",
       " float dh=(1.-x)/max(hz,.05);",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
@@ -2635,7 +2636,7 @@
       " vec3 N=normalize(vec3(n2*dh*step(x,.999),1.));",
       " vec3 I=vec3(0.,0.,-1.);float eta=1./1.5;",
       " vec3 Rf=refract(I,N,eta);",
-      " float esp=5.*A/7.;",
+      " float esp=3.*A/7.;",
       " vec2 desl=(Rf.xy/max(-Rf.z,.2))*esp;",
       " vec2 uu=u+desl/R;",
       " float borda=1.-x;",

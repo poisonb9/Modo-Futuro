@@ -2626,8 +2626,8 @@
       " float e=smoothstep(0.,-min(R.y*.35,22.*A/14.),d);float borda=1.-e;",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
       " vec2 n=normalize(g+1e-5);float t=smoothstep(0.,1.,clamp(borda,0.,1.));float curva=1.-sqrt(1.-t*t);",
-      " vec2 onda=vec2(ruido(u*3.+vec2(Z*.15,0.))-.5,ruido(u*3.+vec2(0.,Z*.12)+7.)-.5);",
-      " vec2 ref=(n*curva*.12+onda*(.012+curva*.03))*min(R.x,R.y)/R;",
+      " vec2 onda=vec2(ruido(u*2.+vec2(Z*.06,0.))-.5,ruido(u*2.+vec2(0.,Z*.05)+7.)-.5);",
+      " vec2 ref=(n*curva*.12+onda*curva*.02)*min(R.x,R.y)/R;",
       " float k=1.+curva*2.;vec3 col;col.r=amostra(u-ref*1.00,k).r;col.g=amostra(u-ref*1.015,k).g;col.b=amostra(u-ref*1.03,k).b;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.08+D*.12);col=mix(col,vec3(1.),curva*.28*(1.-D));",
@@ -2668,7 +2668,7 @@
         var W = Math.max(2, Math.round(r.width * dpr)), H = Math.max(2, Math.round(r.height * dpr));
         if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-        try { ctx.filter = "blur(" + (7) + "px)"; } catch (e) { /* sem filter: o shader suaviza */ }
+        try { ctx.filter = "blur(" + (12) + "px)"; } catch (e) { /* sem filter: o shader suaviza */ }
         ctx.fillStyle = corFundo(); ctx.fillRect(0, 0, r.width, r.height);
         var houve = false;
         // cartoes e vitrine que cruzam o retangulo do vidro
@@ -2683,11 +2683,14 @@
           // espelho — as arestas viravam linhas dobradas. So' as fotos.
           var img = alvos[i].querySelector("img");
           if (img && img.complete && img.naturalWidth) {
-            var ib = img.getBoundingClientRect();
-            // object-fit: contain
-            var s = Math.min(ib.width / img.naturalWidth, ib.height / img.naturalHeight);
-            var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
-            try { ctx.drawImage(img, ib.left - r.left + (ib.width - dw) / 2, ib.top - r.top + (ib.height - dh) / 2, dw, dh); } catch (e) { /* sem CORS: fica o branco */ }
+            var ib = img.getBoundingClientRect(), cs = getComputedStyle(img);
+            // object-fit: contain e' no CONTENT box: tira o padding (a foto do
+            // espelho ficava deslocada da real — "copia paralela")
+            var pl = parseFloat(cs.paddingLeft) || 0, pr = parseFloat(cs.paddingRight) || 0, pt = parseFloat(cs.paddingTop) || 0, pb = parseFloat(cs.paddingBottom) || 0;
+            var cw = ib.width - pl - pr, ch = ib.height - pt - pb;
+            var s = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
+            var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+            try { ctx.drawImage(img, ib.left + pl - r.left + (cw - dw) / 2, ib.top + pt - r.top + (ch - dh) / 2, dw, dh); } catch (e) { /* sem CORS: fica o branco */ }
           }
         }
         return houve;

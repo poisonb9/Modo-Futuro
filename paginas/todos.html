@@ -393,6 +393,9 @@
      leve, sombra curta. O ouro fica so' no chip/aba ATIVOS (marca). */
   .abas a { background: none !important; box-shadow: none !important; }  /* 19/09: aba nao e' vidro dentro do vidro (halo em volta da casinha) */
   .abas a.on { background: var(--tinta) !important; color: #fff; }
+  .abas a { transition: background-color .28s cubic-bezier(.2,.8,.2,1), color .28s, transform .15s cubic-bezier(.2,.8,.2,1); }
+  .abas a.on { animation: pilula-entra .32s cubic-bezier(.2,.8,.2,1); }
+  @keyframes pilula-entra { from { transform: scale(.86); } to { transform: none; } }
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
     background-color: rgba(236,242,252,.22);
     background-image: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,.04) 60%);
@@ -2655,9 +2658,9 @@
       // banda de luz que anda com a inclinacao (L.x) ao longo da borda superior
       " float band=smoothstep(.35,0.,abs(u.x-L.x))*smoothstep(0.,.5,1.-u.y)*borda;",
       // gota: brilho radial onde o dedo tocou, decai com G (0..1)
-      " float gota=exp(-length((u-P)*R)/(28.*A/7.))*G;",
+      " float gota=exp(-length((u-P)*R)/(16.*A/7.))*G;",
       " col+=vec3(1.)*(sp*.45+band*.35+gota*.6+borda*.05*(1.-D));",
-      " float aG=gota*.5;",
+      " float aG=gota*.22;",
       " vec3 iris=vec3(.5+.5*sin(x*6.28+0.),.5+.5*sin(x*6.28+2.1),.5+.5*sin(x*6.28+4.2));",
       " float lum=dot(col,vec3(.3,.59,.11));float fio=smoothstep(.0,.35,x)*smoothstep(1.,.55,x)*borda*.5*(1.-lum)*cob;",
       " float a=step(d,0.)*max(smoothstep(.15,.85,cob)*borda*.95,max(aG,fio));col=mix(col,iris,fio*(1.-smoothstep(.15,.85,cob)));gl_FragColor=vec4(col*a,a);}"

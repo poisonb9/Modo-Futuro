@@ -392,10 +392,19 @@
      FRIO e fino: fundo quase transparente com um sopro de azul, aro de luz
      leve, sombra curta. O ouro fica so' no chip/aba ATIVOS (marca). */
   .abas a { background: none !important; box-shadow: none !important; }  /* 19/09: aba nao e' vidro dentro do vidro (halo em volta da casinha) */
-  .abas a.on { background: var(--tinta) !important; color: #fff; }
-  .abas a { transition: background-color .28s cubic-bezier(.2,.8,.2,1), color .28s, transform .15s cubic-bezier(.2,.8,.2,1); }
-  .abas a.on { animation: pilula-entra .32s cubic-bezier(.2,.8,.2,1); }
-  @keyframes pilula-entra { from { transform: scale(.86); } to { transform: none; } }
+  /* ⭐ A PILULA QUE DESLIZA (WhatsApp/iOS 26, video do Bryan 19/09 17:16):
+     um elemento so' anda de uma aba a outra em ~300 ms com overshoot; o
+     espelho recebe a posicao dela e AMPLIA/refrata o que passa por baixo. */
+  .abas a.on { background: none !important; color: #fff; }
+  .abas a { transition: color .2s; }
+  .abas .pilula {
+    position: absolute; top: 6px; bottom: 6px; left: 0; width: 0; border-radius: 999px;
+    background: var(--tinta); z-index: 0; pointer-events: none;
+    transition: left .34s cubic-bezier(.34,1.4,.44,1), width .34s cubic-bezier(.34,1.4,.44,1);
+  }
+  @media (prefers-color-scheme: dark) { .abas .pilula { background: #f4f2f9; } }
+  .abas a { position: relative; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) { .abas .pilula { transition: none; } }
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
     background-color: rgba(236,242,252,.22);
     background-image: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,.04) 60%);
@@ -2489,9 +2498,17 @@
   // e' link. Nenhum caminho novo de estado — so' os que os chips ja' usam.
   function marcarAba() {
     var qual = atual === "caiu" ? "quedas" : (loja ? "lojas" : "inicio");
+    var nav = document.getElementById("abas"), alvo = null;
     document.querySelectorAll("#abas a[data-aba]").forEach(function (a) {
-      a.classList.toggle("on", a.getAttribute("data-aba") === qual);
+      var on = a.getAttribute("data-aba") === qual;
+      a.classList.toggle("on", on);
+      if (on) { alvo = a; }
     });
+    if (!nav || !alvo) { return; }
+    var pil = nav.querySelector(".pilula");
+    if (!pil) { pil = el("span", "pilula"); nav.insertBefore(pil, nav.firstChild); }
+    var nr = nav.getBoundingClientRect(), ar = alvo.getBoundingClientRect();
+    pil.style.left = (ar.left - nr.left) + "px"; pil.style.width = ar.width + "px";
   }
   (function abas() {
     var nav = document.getElementById("abas");
@@ -2622,7 +2639,7 @@
     if (menosMov && location.search.indexOf("gl=1") < 0) { return; }
     var VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
     var FS = [
-      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A,Z,G;uniform vec2 O,P;",
+      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A,Z,G;uniform vec2 O,P;uniform vec4 Q;",
       "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}",
       "float ruido(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
       "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
@@ -2647,6 +2664,14 @@
       " float esp=7.*A/7.;",
       " vec2 desl=(Rf.xy/max(-Rf.z,.2))*esp;",
       " vec2 uu=u+desl/R;",
+      // a PILULA (Q.xy centro, Q.zw meio-tamanho, em px): dentro dela, o conteudo e'
+      // AMPLIADO 1.18x a partir do centro e dobrado na borda dela (lente forte)
+      " vec2 qp=(u*R-Q.xy);float dp=sdb(qp,Q.zw,Q.w);",
+      " float dentro=1.-smoothstep(-1.,1.,dp);",
+      " float bp=clamp(-dp/(8.*A/7.),0.,1.);float hp=sqrt(max(0.,1.-(1.-bp)*(1.-bp)));",
+      " vec2 gp=normalize(qp/max(Q.zw,vec2(1.)))*(1.-bp)/max(hp,.05);",
+      " vec2 ampl=(u*R-Q.xy)*(-.15)+gp*(-10.*A/7.);",
+      " uu=mix(uu,u+ampl/R,dentro*step(0.,Q.z));",
       " float borda=1.-x;",
       " vec2 ut=vec2(uu.x,O.x+uu.y*O.y);",
       " vec2 dd=desl/R*.5;vec4 am=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);vec4 aR=amostra(clamp(ut+dd,vec2(.002),vec2(.998)),1.);vec4 aB=amostra(clamp(ut-dd,vec2(.002),vec2(.998)),1.);",
@@ -2663,7 +2688,7 @@
       " float aG=gota*.22;",
       " vec3 iris=vec3(.5+.5*sin(x*6.28+0.),.5+.5*sin(x*6.28+2.1),.5+.5*sin(x*6.28+4.2));",
       " float lum=dot(col,vec3(.3,.59,.11));float fio=smoothstep(.0,.35,x)*smoothstep(1.,.55,x)*borda*.5*(1.-lum)*cob;",
-      " float a=step(d,0.)*max(smoothstep(.15,.85,cob)*borda*.95,max(aG,fio));col=mix(col,iris,fio*(1.-smoothstep(.15,.85,cob)));gl_FragColor=vec4(col*a,a);}"
+      " float a=step(d,0.)*max(max(smoothstep(.15,.85,cob)*borda*.95,smoothstep(.15,.85,cob)*dentro*.9),max(aG,fio));col=mix(col,iris,fio*(1.-smoothstep(.15,.85,cob)));gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function ligar(el, raio) {
       if (!el || el.__espelho) { return; }
@@ -2679,7 +2704,7 @@
       var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
       var lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
-      var u = {}; ["T","R","L","K","D","A","Z","O","P","G"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
+      var u = {}; ["T","R","L","K","D","A","Z","O","P","G","Q"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
       var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -2786,6 +2811,9 @@
         // onde a barra esta' dentro da tira (fracoes): O.x = inicio, O.y = altura
         gl.uniform2f(u.O, (topoPagBarra - tira.topoPag) / tira.altura, r.height / tira.altura);
         gota *= 0.9; gl.uniform2f(u.P, gx, gy); gl.uniform1f(u.G, gota);
+        var pil = el.querySelector(".pilula");
+        if (pil) { var pr2 = pil.getBoundingClientRect(); gl.uniform4f(u.Q, (pr2.left - r.left + pr2.width / 2) * dpr, (pr2.top - r.top + pr2.height / 2) * dpr, pr2.width / 2 * dpr, pr2.height / 2 * dpr); }
+        else { gl.uniform4f(u.Q, 0, 0, -1, 0); }
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
         gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
@@ -2818,6 +2846,10 @@
     c.classList.add("grudado");
   }
   window.addEventListener("resize", grudar);
+  // a pilula mede a aba: remede quando a fonte assenta e ao virar a tela
+  window.addEventListener("resize", function () { if (typeof marcarAba === "function") { marcarAba(); } });
+  window.addEventListener("load", function () { setTimeout(function () { if (typeof marcarAba === "function") { marcarAba(); } }, 300); });
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { if (typeof marcarAba === "function") { marcarAba(); } }); }
 
   // ⭐ o unico movimento: os numeros contam uma vez (700 ms). Some com
   // prefers-reduced-motion.

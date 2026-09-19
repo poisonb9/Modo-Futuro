@@ -627,7 +627,7 @@
      §4). Selo de queda em ouro, chip da loja em vidro. So' aparece sem
      filtro nenhum: com filtro, a grade e' a resposta e nada a atrasa. */
   .vitrine {
-    display: block; position: relative; margin: 14px 0 0; border-radius: 24px; overflow: hidden;
+    display: block; position: relative; margin: 6px 0 0; border-radius: 24px; overflow: hidden;  /* 19/09 Bryan: menos vao apos o console (8 + 6 = 14, o mesmo da grade) */
     background: #fff; box-shadow: var(--vidro-sombra); color: inherit; text-decoration: none;
     transition: transform .18s cubic-bezier(.2,.8,.2,1);
   }
@@ -659,8 +659,9 @@
   .vitrine.com-3d .vplaca::before, .vitrine.com-3d .vplaca::after { display: none; }
   .vitrine .vplaca, .vitrine .vselo, .vitrine .vloja { z-index: 2; }
   @media (min-width: 700px) { .vitrine { display: grid; grid-template-columns: 1fr 1fr; } .vitrine .vfoto { aspect-ratio: 4 / 3; } }
+  #vitrine:not(:empty) + .grade, #vitrine:not(:empty) ~ .grade { margin-top: 14px; }
   .grade {
-    display: grid; gap: 14px; margin: 14px 0 0; align-items: start;
+    display: grid; gap: 14px; margin: 6px 0 0; align-items: start;
     grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
     /* ⚠️ `start`: o cartao termina onde termina. Sem isto o vizinho de
        titulo longo esticava o cartao curto e deixava um vazio dentro dele

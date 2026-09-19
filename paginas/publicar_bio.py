@@ -2021,8 +2021,10 @@ def _por_icone(destino) -> None:
     #                    — ele compoe o icone sobre PRETO. Um PNG transparente
     #                    viraria uma lupa dourada flutuando num quadrado preto,
     #                    que e' pior do que o fundo escuro que escolhemos.
+    # ⭐ og_achadinho.png: a previa do link no chat (19/09, ferramentas/gerar_og.py)
     for nome, arquivo in (("icone.png", "icone_achadinho_favicon.png"),
-                          ("icone_app.png", "icone_achadinho_180.png")):
+                          ("icone_app.png", "icone_achadinho_180.png"),
+                          ("og_achadinho.png", "og_achadinho.png")):
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())

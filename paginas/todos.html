@@ -28,12 +28,19 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Achadinho Total">
-<meta property="og:title" content="Achadinho Total — preço acompanhado dia a dia">
-<meta property="og:description" content="Produto, preço conferido todo dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
+<!-- 19/09/2026 (Bryan: "mandei o link pra minha namorada, ficou feio"):
+     a previa do chat e' o cartao de visita. Imagem 1200x630 propria
+     (ferramentas/gerar_og.py), summary_large_image, titulo curto. -->
+<meta property="og:title" content="Achadinho Total — Eu garimpo. Você paga menos.">
+<meta property="og:description" content="Preço conferido de hora em hora. A queda é medida contra o que eu vi, não contra a loja.">
 <meta property="og:url" content="https://achadinhototal.com.br/">
-<meta property="og:image" content="https://achadinhototal.com.br/icone_app.png">
+<meta property="og:image" content="https://achadinhototal.com.br/og_achadinho.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Achadinho Total — Eu garimpo. Você paga menos.">
 <meta property="og:locale" content="pt_BR">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://achadinhototal.com.br/og_achadinho.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- ⭐ FONTES SEM BLOQUEAR A RENDERIZACAO (18/09/2026): o Lighthouse mediu
@@ -1266,8 +1273,11 @@
       // 19/09 (Bryan): UMA linha. Nao e' "desconto" — e' quanto o preco de
       // hoje esta' ACIMA do menor que eu vi; dizer desconto seria mentir.
       var noMenor = pAgora <= menor + 0.005;
-      esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""), p.dias + " dias · " + (noMenor ? "menor que eu vi ✓"
-        : "+" + reais(pAgora - menor) + " vs. menor")));
+      // 19/09 (Bryan): "ha N dias rastreando este produto"; o "acima do
+      // menor" ja' esta' dito na linha "espere — ja' esteve a". So' o
+      // veredito bom entra, quando ha': "menor que eu vi ✓".
+      esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""),
+        "rastreando há " + p.dias + " dias" + (noMenor ? " · menor que eu vi ✓" : "")));
       wrap.appendChild(esc);
     }
     return wrap;

@@ -1058,6 +1058,40 @@
   // ⭐ {loja: data URI} do simbolo OFICIAL (kit de afiliado); o publicador
   // preenche a partir de paginas/simbolos_lojas/. Loja sem simbolo = sigla.
   var SIMBOLOS = {};
+  // 19/09 (print do Bryan no 4G com 6% de bateria: a pagina abria crua).
+  // MEDIDO: 582 KB, dos quais ~310 KB eram o LINK de afiliado do Ali (1.065
+  // caracteres, aleatorio, nao comprime) repetido duas vezes por produto.
+  // Agora o HTML embute o link so' da primeira tela (topo + vitrine); os
+  // outros chegam em `LINKS_ARQUIVO` ({"links": {id: link}}) ao lado, e o
+  // cartao recebe o href quando o arquivo chega. Clique antes disso espera
+  // o arquivo (nao falha). O publicador preenche; vazio = tudo embutido.
+  var LINKS_ARQUIVO = "";
+  var LINKS_PRONTOS = !LINKS_ARQUIVO, LINKS_FILA = [], LINKS_VOO = null;
+  function carregarLinks() {
+    if (LINKS_PRONTOS || LINKS_VOO) { return LINKS_VOO; }
+    LINKS_VOO = fetch(LINKS_ARQUIVO, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) { throw new Error("http " + r.status); }
+      return r.json();
+    }).then(function (j) {
+      var ls = (j && j.links) || {};
+      PRODUTOS.forEach(function (p) { if (!p.link && ls[String(p.id)]) { p.link = ls[String(p.id)]; } });
+      var porId = {};
+      PRODUTOS.forEach(function (p) { porId[String(p.id)] = p; });
+      document.querySelectorAll("a.item[data-pid], a.vitrine[data-pid]").forEach(function (a) {
+        var q = porId[a.getAttribute("data-pid")];
+        if (q && q.link) { a.href = q.link; }
+      });
+      if (vivoAtual && vivoAtual.link) { var vv = document.getElementById("vivo"); if (vv) { vv.href = vivoAtual.link; } }
+      LINKS_PRONTOS = true;
+      var fila = LINKS_FILA; LINKS_FILA = [];
+      fila.forEach(function (f) { f(); });
+    }).catch(function () { LINKS_VOO = null; });
+    return LINKS_VOO;
+  }
+  function esperarLinks(f) {
+    if (LINKS_PRONTOS) { f(); return; }
+    LINKS_FILA.push(f); carregarLinks();
+  }
   // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
   // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
   var BOT_ALERTA = "";
@@ -1442,8 +1476,12 @@
   function montar(p) {
     var a = document.createElement("a");
     a.className = "item";
-    a.addEventListener("click", function () { anotarClique(p, "cartao"); });
-    a.href = p.link;
+    a.addEventListener("click", function (ev) {
+      anotarClique(p, "cartao");
+      if (!p.link) { ev.preventDefault(); esperarLinks(function () { if (p.link) { location.href = p.link; } }); }
+    });
+    if (p.link) { a.href = p.link; }
+    a.setAttribute("data-pid", String(p.id));
     a.rel = "noopener";
     // ⚠️ SEM `target=_blank`, E ISSO CONSERTA O DEFEITO MAIOR DA PAGINA.
     //
@@ -1857,7 +1895,7 @@
     var escolhidos = (base.combina || []).map(function (id) {
       return porId[String(id)];
     }).filter(function (p) {
-      return p && p.link !== base.link && num(p.preco) > 0 &&
+      return p && p !== base && num(p.preco) > 0 &&
              num(p.preco) < num(base.preco);
     }).sort(function (a, b) { return num(a.preco) - num(b.preco); });
     if (escolhidos.length) {
@@ -1866,7 +1904,7 @@
     }
 
     var juntos = PRODUTOS.filter(function (p) {
-      return p.link !== base.link && p.canal === base.canal &&
+      return p !== base && p.canal === base.canal &&
              num(p.preco) > 0 && num(p.preco) <= teto &&
              parecidos(p.nome, base.nome) <= 0.25;
     }).sort(function (a, b) {
@@ -2154,8 +2192,15 @@
         var v1 = lista[0];
         lista = lista.slice(1);
         var a = document.createElement("a");
-        a.className = "vitrine"; a.href = v1.link; a.rel = "noopener";
-        a.addEventListener("click", function () { anotarClique(v1, "vitrine"); });
+        a.className = "vitrine"; a.rel = "noopener";
+        // 19/09: com `?p=`, o pedido vira a vitrine e o link dele pode estar
+        // em links.json (era href="undefined"). Mesmo trato do cartao.
+        if (v1.link) { a.href = v1.link; }
+        a.setAttribute("data-pid", String(v1.id));
+        a.addEventListener("click", function (ev) {
+          anotarClique(v1, "vitrine");
+          if (!v1.link) { ev.preventDefault(); esperarLinks(function () { if (v1.link) { location.href = v1.link; } }); }
+        });
         var img = document.createElement("img");
         img.className = "vfoto"; img.alt = v1.nome; img.crossOrigin = "anonymous"; img.src = v1.imagem; img.loading = "eager";
         a.appendChild(img);
@@ -2951,7 +2996,7 @@
       var p = lista[i % lista.length];
       i += 1;
       vivoAtual = p;
-      alvo.href = p.link;
+      if (p.link) { alvo.href = p.link; } else { alvo.removeAttribute("href"); carregarLinks(); }
       aNome.classList.remove("pronto");
       aPreco.innerHTML = "";
       var curto = String(p.nome || "").trim();
@@ -3056,6 +3101,7 @@
   contarNumeros();
   montarChips();
   desenhar();
+  carregarLinks();
 
   // ⭐ O BOTAO VOLTAR TAMBEM. Quem entrou por `/#calcados`, filtrou outra
   // coisa e apertou voltar espera a prateleira de novo — nao o catalogo.

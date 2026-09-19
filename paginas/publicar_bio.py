@@ -688,6 +688,11 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     arquivos = {b["arquivo"]: json.dumps(
         {"categoria": cat, "produtos": b["produtos"]}, ensure_ascii=False)
         for cat, b in externos.items()}
+    # 19/09: o link de afiliado do Ali (1.065 chars, nao comprime) sai do
+    # HTML e vai em `links.json`; a primeira tela fica com o link dentro.
+    links = separar_links(dados)
+    if links:
+        arquivos[LINKS_ARQUIVO] = json.dumps({"links": links}, ensure_ascii=False)
     # ⚠️ ESTOURA SE O MARCADOR SUMIR. Substituicao que nao acha o alvo e segue
     # publicaria um catalogo VAZIO com cara de pronto.
     eco = economia(dados)
@@ -704,6 +709,8 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                          '  var BRASAO = "' + _brasao_total() + '";'),
                         ("  var SIMBOLOS = {};",
                          "  var SIMBOLOS = " + json.dumps(simbolos_lojas()) + ";"),
+                        ('  var LINKS_ARQUIVO = "";',
+                         '  var LINKS_ARQUIVO = "' + (LINKS_ARQUIVO if links else "") + '";'),
                         # ⭐ selo 2: o @ do bot do "avise-me"; "" = sem botao
                         ('  var BOT_ALERTA = "";',
                          '  var BOT_ALERTA = "' + _bot_alerta() + '";'),
@@ -1963,18 +1970,47 @@ PROJETO_MAE = "achadinhototal"
 DOMINIO = "https://achadinhototal.com.br"
 
 
+# LINKS FORA DO HTML (19/09/2026). MEDIDO no ar: 582 KB, ~310 KB so' de
+# link de afiliado do Ali (1.065 caracteres aleatorios, repetidos no
+# PRODUTOS e no indice estatico). O Bryan viu a pagina crua no 4G. O HTML
+# guarda o link so' de quem abre a primeira tela (topo, vitrine e os 2
+# seguintes); o resto vai em `links.json` ao lado e a pagina encaixa o href
+# quando chega (todos.html: carregarLinks).
+LINKS_ARQUIVO = "links.json"
+LINKS_EMBUTIDOS_EXTRA = 2
+
+
+def separar_links(dados: list[dict]) -> dict[str, str]:
+    """Tira `link` dos produtos fora da primeira tela e devolve {id: link}.
+    Muda `dados` no lugar. Quem fica: `topo`, `vitrine` e os primeiros
+    LINKS_EMBUTIDOS_EXTRA sem topo (a ordem da pagina e' topo primeiro)."""
+    fora: dict[str, str] = {}
+    extras = 0
+    for p in dados:
+        if not p.get("link") or p.get("id") in (None, ""):
+            continue
+        if p.get("topo") is not None or p.get("vitrine"):
+            continue
+        if extras < LINKS_EMBUTIDOS_EXTRA:
+            extras += 1
+            continue
+        fora[str(p["id"])] = p.pop("link")
+    return fora
+
+
 def indice_estatico(dados: list[dict]) -> str:
     """HTML puro com os produtos do catalogo, pro crawler. Um `<li>` por
-    produto: nome, preco de hoje e link (rel=sponsored nofollow — e' link
-    de afiliado, e o Google pede que se diga)."""
+    produto: nome, preco de hoje e o endereco da PROPRIA pagina com o
+    produto em primeiro (`?p=<id>`). 19/09: antes era o link de afiliado
+    (1 KB cada, nofollow: nao servia ao Google e pesava 155 KB)."""
     import html as _h
     itens = []
     for p in dados:
-        nome, preco, link = p.get("nome") or "", p.get("preco") or "", p.get("link") or ""
-        if not (nome and link):
+        nome, preco, pid = p.get("nome") or "", p.get("preco") or "", p.get("id")
+        if not (nome and pid not in (None, "")):
             continue
         loja = p.get("loja") or ""
-        itens.append(f'<li><a href="{_h.escape(link, quote=True)}" rel="sponsored nofollow">'
+        itens.append(f'<li><a href="?p={_h.escape(str(pid), quote=True)}">'
                      f'{_h.escape(nome)}</a> — {_h.escape(preco)}'
                      + (f' · {_h.escape(loja)}' if loja else '') + '</li>')
     return ("<h2>Todos os achadinhos</h2>" + chr(10) + "<ul>" + chr(10)

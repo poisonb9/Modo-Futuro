@@ -33,18 +33,40 @@ def checar(ok, oq):
         falhas.append(oq)
 
 
-print("1. INDICE ESTATICO: escapa HTML, link sponsored, preco e loja")
-h = pb.indice_estatico([{"nome": "Cabo <USB> & tal", "preco": "R$ 9,90",
+print("1. INDICE ESTATICO: escapa HTML, aponta pra PROPRIA pagina (?p=id), preco e loja")
+# 19/09/2026: o link de afiliado (1 KB, nofollow) saiu do indice — pesava
+# 155 KB e nao servia ao Google. O item aponta pra pagina com o produto em 1o.
+h = pb.indice_estatico([{"nome": "Cabo <USB> & tal", "preco": "R$ 9,90", "id": "10<0>1",
                          "link": "https://x.y/?a=1&b=2", "loja": "AliExpress"}])
-checar('rel="sponsored nofollow"' in h, "link de afiliado declarado ao Google")
-checar("Cabo &lt;USB&gt; &amp; tal" in h and 'href="https://x.y/?a=1&amp;b=2"' in h,
-       "nome e link escapados")
+checar('href="?p=10&lt;0&gt;1"' in h, "href e' ?p=<id>, escapado")
+checar("s.click" not in h and "https://x.y" not in h, "NEGATIVO: o link de afiliado nao esta' no indice")
+checar("Cabo &lt;USB&gt; &amp; tal" in h, "nome escapado")
 checar("R$ 9,90" in h and "AliExpress" in h, "preco e loja no texto")
 
 print()
-print("2. SEM LINK, FORA")
-h = pb.indice_estatico([{"nome": "Sem link", "preco": "R$ 1,00", "link": ""}])
-checar("<li>" not in h, "produto sem link nao vira item")
+print("2. SEM ID, FORA")
+h = pb.indice_estatico([{"nome": "Sem id", "preco": "R$ 1,00", "link": "https://x.y"}])
+checar("<li>" not in h, "produto sem id nao vira item")
+
+print()
+print("2b. LINKS FORA DO HTML: primeira tela fica, o resto vai pro links.json")
+L = "https://s.click.aliexpress.com/s/" + "x" * 1000
+dados = ([{"id": "t%d" % i, "topo": i, "link": L} for i in range(1, 11)]
+         + [{"id": "v", "vitrine": True, "link": L}]
+         + [{"id": "r%d" % i, "link": L} for i in range(1, 6)]
+         + [{"id": "semlink"}])
+fora = pb.separar_links(dados)
+fica = [p["id"] for p in dados if p.get("link")]
+checar(set(fica) == {"t%d" % i for i in range(1, 11)} | {"v", "r1", "r2"},
+       "ficam com link: 10 do topo + vitrine + %d seguintes" % pb.LINKS_EMBUTIDOS_EXTRA)
+checar(set(fora) == {"r3", "r4", "r5"} and all(v == L for v in fora.values()),
+       "os outros saem, com o link inteiro, por id")
+checar("semlink" not in fora and "link" not in dados[-1], "NEGATIVO: sem link nao entra no arquivo")
+checar(pb.LINKS_ARQUIVO == "links.json", "o arquivo e' links.json (a pagina le' LINKS_ARQUIVO)")
+pagina = (RAIZ / "paginas" / "todos.html").read_text(encoding="utf-8")
+checar('var LINKS_ARQUIVO = "";' in pagina and "function carregarLinks" in pagina
+       and 'a.vitrine[data-pid]' in pagina,
+       "a pagina tem o marcador, o carregador e encaixa o href no cartao E na vitrine")
 
 print()
 print("3. ⛔ NEGATIVO: o indice recebe o CATALOGO (produtos_todos), nunca as lojas externas")

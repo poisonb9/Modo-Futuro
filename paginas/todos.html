@@ -2877,17 +2877,20 @@
       sh.lineTo(x + w, y + h - r); sh.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
       sh.lineTo(x + r, y + h); sh.quadraticCurveTo(x, y + h, x, y + h - r);
       sh.lineTo(x, y + r); sh.quadraticCurveTo(x, y, x + r, y);
-      var g = new THREE.ExtrudeGeometry(sh, { depth: d, bevelEnabled: true, bevelThickness: 4, bevelSize: 4, bevelSegments: 6, curveSegments: 12 });
+      var g = new THREE.ExtrudeGeometry(sh, { depth: d, bevelEnabled: true, bevelThickness: 10, bevelSize: 8, bevelSegments: 10, curveSegments: 16 });
       g.translate(0, 0, -d / 2); return g;
     }
     function ambiente() {
       var c = new THREE.Scene();
       var geo = new THREE.SphereGeometry(400, 16, 8);
       c.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xdfe6ee, side: THREE.BackSide })));
-      var luzA = new THREE.Mesh(new THREE.PlaneGeometry(300, 120), new THREE.MeshBasicMaterial({ color: 0xffffff }));
-      luzA.position.set(-120, 220, -200); luzA.lookAt(0, 0, 0); c.add(luzA);
-      var luzB = new THREE.Mesh(new THREE.PlaneGeometry(200, 80), new THREE.MeshBasicMaterial({ color: 0xffffff }));
-      luzB.position.set(200, -150, -220); luzB.lookAt(0, 0, 0); c.add(luzB);
+      c.add(new THREE.Mesh(new THREE.SphereGeometry(390, 16, 8), new THREE.MeshBasicMaterial({ color: 0x9aa4b0, side: THREE.BackSide })));
+      var luzA = new THREE.Mesh(new THREE.PlaneGeometry(260, 60), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      luzA.position.set(-120, 240, -180); luzA.lookAt(0, 0, 0); c.add(luzA);
+      var luzB = new THREE.Mesh(new THREE.PlaneGeometry(160, 40), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      luzB.position.set(220, -160, -200); luzB.lookAt(0, 0, 0); c.add(luzB);
+      var luzC = new THREE.Mesh(new THREE.PlaneGeometry(90, 400), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      luzC.position.set(300, 60, -60); luzC.lookAt(0, 0, 0); c.add(luzC);
       return c;
     }
     var foto = a.querySelector(".vfoto");
@@ -2916,11 +2919,11 @@
     // a laje de vidro onde esta' a placa de preco (mesma geometria da .vplaca)
     var ra = a.getBoundingClientRect(), rp = placa.getBoundingClientRect(), rf = foto.getBoundingClientRect();
     var pw = rp.width, ph = rp.height, px = (rp.left + rp.width / 2) - (rf.left + rf.width / 2), py = (rf.top + rf.height / 2) - (rp.top + rp.height / 2);
-    var esp = 26;
+    var esp = 44;
     var laje = new THREE.Mesh(lajeArredondada(pw, ph, esp, 18), new THREE.MeshPhysicalMaterial({
-      transmission: 1, ior: 1.5, thickness: esp * 1.6, roughness: 0.04, metalness: 0,
-      clearcoat: 1, clearcoatRoughness: 0.06, dispersion: 0.35, color: 0xffffff,
-      attenuationColor: new THREE.Color(0xf3f7ff), attenuationDistance: 600, envMapIntensity: 0.9
+      transmission: 1, ior: 1.58, thickness: esp * 2.2, roughness: 0.015, metalness: 0,
+      clearcoat: 1, clearcoatRoughness: 0.03, dispersion: 0.9, color: 0xffffff,
+      specularIntensity: 1.2, attenuationColor: new THREE.Color(0xeaf2ff), attenuationDistance: 420, envMapIntensity: 1.4
     }));
     laje.position.set(px, py, 60);
     cena.add(laje);
@@ -2936,9 +2939,10 @@
       ultimo = ts;
       var st = getComputedStyle(raiz);
       var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
-      laje.rotation.x = (ly - 0.3) * 0.18 + Math.sin(ts / 1400) * 0.02;
-      laje.rotation.y = (lx - 0.5) * 0.25 + Math.cos(ts / 1700) * 0.02;
-      laje.position.z = 60 + Math.sin(ts / 1100) * 3;
+      laje.rotation.x = (ly - 0.3) * 0.30 + Math.sin(ts / 1400) * 0.035;
+      laje.rotation.y = (lx - 0.5) * 0.42 + Math.cos(ts / 1700) * 0.035;
+      laje.position.z = 60 + Math.sin(ts / 1100) * 5;
+      if (cena.environmentRotation) { cena.environmentRotation.y = ts / 9000; }
       r.render(cena, cam);
     }
     requestAnimationFrame(quadro);

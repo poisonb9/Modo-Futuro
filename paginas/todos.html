@@ -204,11 +204,16 @@
   /* parte 9: o espelho refratado fica atras do conteudo; quando vivo, o vidro
      CSS sai da frente (o shader e' o vidro) */
   .vidro > canvas.espelho { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; border-radius: inherit; pointer-events: none; display: none; }
-  .vidro.espelho-vivo > canvas.espelho { display: block; }
+  .vidro.espelho-vivo > canvas.espelho, .vidro.gota-viva > canvas.espelho { display: block; }
   .vidro.espelho-vivo { background-color: rgba(255,255,255,.18); background-image: none; backdrop-filter: blur(16px) saturate(1.5); -webkit-backdrop-filter: blur(16px) saturate(1.5); }
   .vidro.espelho-vivo::after, .vidro.espelho-vivo::before { display: none !important; }
   .vidro.espelho-vivo { box-shadow: var(--vidro-sombra); }
-  .abas::after, .vloja::after { display: none; }
+  .abas::after, .vloja::after, .chip-ordem::after, .chip-ordem::before, .escolha::after, .busca-caixa::after, .busca-caixa::before { display: none; }
+  /* o ::before do .escolha e' o ICONE do menu (grade/loja): fica; so' o ::after (aro) sai */
+  .escolha.vidro::before { display: inline-block; }
+  .escolha.vidro { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A7A0B2' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") !important; }
+  .chip-ordem, .escolha, .busca-caixa { overflow: hidden; }
+  .chip-ordem > canvas.espelho, .escolha > canvas.espelho, .busca-caixa > canvas.espelho, .opcoes > canvas.espelho { border-radius: inherit; }
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
   @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
   * { box-sizing: border-box; }
@@ -2614,7 +2619,7 @@
     if (menosMov && location.search.indexOf("gl=1") < 0) { return; }
     var VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
     var FS = [
-      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A,Z;uniform vec2 O;",
+      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A,Z,G;uniform vec2 O,P;",
       "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}",
       "float ruido(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
       "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
@@ -2641,13 +2646,21 @@
       " vec2 uu=u+desl/R;",
       " float borda=1.-x;",
       " vec2 ut=vec2(uu.x,O.x+uu.y*O.y);",
-      " vec4 am=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);vec3 col=am.a>0.001?am.rgb/am.a:vec3(1.);float cob=am.a;",
+      " vec2 dd=desl/R*.35;vec4 am=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);vec4 aR=amostra(clamp(ut+dd,vec2(.002),vec2(.998)),1.);vec4 aB=amostra(clamp(ut-dd,vec2(.002),vec2(.998)),1.);",
+      " vec3 col=vec3(aR.a>0.001?aR.r/aR.a:1.,am.a>0.001?am.g/am.a:1.,aB.a>0.001?aB.b/aB.a:1.);float cob=am.a;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.05+D*.10);",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
       " float sp=pow(max(dot(N,ld),0.),40.)*borda;",
-      " col+=vec3(1.)*(sp*.45+borda*.05*(1.-D));",
-      " float a=step(d,0.)*smoothstep(.15,.85,cob)*borda*.95;gl_FragColor=vec4(col*a,a);}"
+      // banda de luz que anda com a inclinacao (L.x) ao longo da borda superior
+      " float band=smoothstep(.35,0.,abs(u.x-L.x))*smoothstep(0.,.5,1.-u.y)*borda;",
+      // gota: brilho radial onde o dedo tocou, decai com G (0..1)
+      " float gota=exp(-length((u-P)*R)/(28.*A/7.))*G;",
+      " col+=vec3(1.)*(sp*.45+band*.35+gota*.6+borda*.05*(1.-D));",
+      " float aG=gota*.5;",
+      " vec3 iris=vec3(.5+.5*sin(x*6.28+0.),.5+.5*sin(x*6.28+2.1),.5+.5*sin(x*6.28+4.2));",
+      " float fio=smoothstep(.0,.35,x)*smoothstep(1.,.55,x)*borda*.22;",
+      " float a=step(d,0.)*max(smoothstep(.15,.85,cob)*borda*.95,max(aG,fio));col=mix(col,iris,fio*(1.-smoothstep(.15,.85,cob)));gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function ligar(el, raio) {
       if (!el || el.__espelho) { return; }
@@ -2663,12 +2676,14 @@
       var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
       var lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
-      var u = {}; ["T","R","L","K","D","A","Z","O"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
+      var u = {}; ["T","R","L","K","D","A","Z","O","P","G"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
       var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
+      var gota = 0, gx = 0.5, gy = 0.5;
+      el.addEventListener("pointerdown", function (e) { var rr = el.getBoundingClientRect(); gx = (e.clientX - rr.left) / rr.width; gy = (e.clientY - rr.top) / rr.height; gota = 1; }, { passive: true });
       var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
       var esp2 = document.createElement("canvas"), ctx2 = esp2.getContext("2d");
       var dpr = Math.min(window.devicePixelRatio || 1, 2), dprE = 0.5, ultimo = 0, visivel = true;
@@ -2757,8 +2772,9 @@
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, esp);
         }
         // vivo so' se ha' foto NA BARRA agora (nao so' na tira): senao o CSS mostra o texto
-        var fotoNaBarra = !!(tira && tira.houve);
-        el.classList.toggle("espelho-vivo", fotoNaBarra);
+        var fotoNaBarra = true;
+        el.classList.toggle("espelho-vivo", !!(tira && tira.houve));
+        el.classList.toggle("gota-viva", gota > 0.02);
         if (!fotoNaBarra) { return; }
         if (!tira || !tira.houve) { return; }   // nada embaixo: o CSS resolve
         var W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
@@ -2766,6 +2782,7 @@
         gl.bindTexture(gl.TEXTURE_2D, tex);
         // onde a barra esta' dentro da tira (fracoes): O.x = inicio, O.y = altura
         gl.uniform2f(u.O, (topoPagBarra - tira.topoPag) / tira.altura, r.height / tira.altura);
+        gota *= 0.9; gl.uniform2f(u.P, gx, gy); gl.uniform1f(u.G, gota);
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
         gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
@@ -2778,6 +2795,17 @@
     // a barra de abas (pilula: raio = metade da altura) e o console (raio 24)
     ligar(document.getElementById("abas"), -1);
     ligar(document.getElementById("console"), 24);
+    // chips/busca/folha: sao remontados a cada desenhar(); observa e liga os novos
+    function ligarFilhos() {
+      document.querySelectorAll("#chips .chip-ordem, #chips .escolha, .busca-caixa, .opcoes").forEach(function (n) {
+        if (n.__espelho) { return; }
+        n.classList.add("vidro");
+        ligar(n, n.classList.contains("busca-caixa") ? 16 : (n.classList.contains("opcoes") ? 24 : 12));
+      });
+    }
+    ligarFilhos();
+    new MutationObserver(ligarFilhos).observe(document.getElementById("chips"), { childList: true });
+    new MutationObserver(ligarFilhos).observe(document.body, { childList: true });
   })();
 
   function grudar() {

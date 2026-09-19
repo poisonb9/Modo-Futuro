@@ -2483,7 +2483,11 @@
   (function vidroGL() {
     var c = document.getElementById("console");
     var menosMov = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!c || (menosMov && location.search.indexOf("gl=1") < 0)) { return; }   // ?gl=1 forca (so' pra eu ver)
+    // ⛔ 19/09 (Bryan: "perdeu a transparencia"): o canvas e' OPACO por
+    // construcao — ele desenha a propria luz e tampa o que rola por baixo.
+    // Com fundo liso, o vidro CSS (backdrop) e' o que mostra o conteudo.
+    // O shader fica guardado e so' liga com ?gl=1.
+    if (!c || location.search.indexOf("gl=1") < 0) { return; }
     var cv = document.createElement("canvas"); cv.className = "gl";
     var gl = cv.getContext("webgl", { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: "low-power" });
     if (!gl) { return; }

@@ -1,0 +1,2393 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achadinho Total</title>
+<!-- ⚠️ O NOME QUE O IPHONE SALVA NA TELA DE INICIO NAO E' O <title>.
+     Sem `apple-mobile-web-app-title` o iOS pega o <title> inteiro, corta
+     pelo COMECO e mostra "Total — tudo o que estou acompanha...". Foi o que
+     apareceu no telefone do Bryan em 15/09/2026. O atalho fica sem nome
+     reconhecivel justo na tela onde ele deveria ser reconhecido. -->
+<meta name="apple-mobile-web-app-title" content="Achadinho Total">
+<meta name="application-name" content="Achadinho Total">
+<!-- ⚠️ E SEM ISTO O ICONE VIRA UMA LETRA "A" CINZA: o iOS desenha a inicial
+     quando nao acha `apple-touch-icon`. O arquivo tem de existir no deploy —
+     ver `publicar_bio.py`, que copia o PNG junto com o index. -->
+<link rel="apple-touch-icon" href="/icone_app.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/icone.png">
+<meta name="description" content="O catálogo do Achadinho Total: produto, preço acompanhado dia a dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
+<meta name="awin" content="publisher">
+<!-- ⭐ INDEXACAO (17/09/2026): o dominio proprio e' o endereco canonico.
+     A mesma pagina responde em achadinhototal.pages.dev; sem canonical o
+     Google indexaria as duas e dividiria o sinal. O publicador preenche
+     `DOMINIO`. -->
+<link rel="canonical" href="https://achadinhototal.com.br/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Achadinho Total">
+<meta property="og:title" content="Achadinho Total — preço acompanhado dia a dia">
+<meta property="og:description" content="Produto, preço conferido todo dia e link direto pra loja. O desconto é medido contra o preço que nós vimos.">
+<meta property="og:url" content="https://achadinhototal.com.br/">
+<meta property="og:image" content="https://achadinhototal.com.br/icone_app.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ⭐ FONTES SEM BLOQUEAR A RENDERIZACAO (18/09/2026): o Lighthouse mediu
+     1,19 s de "render-blocking" so' nesta linha (performance mobile 48). A
+     folha carrega em `print` e vira `all` quando chega; o texto aparece na
+     fonte do sistema e troca (display=swap). Sem JS, o <noscript> carrega. -->
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<style>
+  /* ⚠️ A COPY DESTA PAGINA SEGUE UMA LISTA DE VERIFICACAO, e nao o gosto de
+     quem escreveu. Ela vem do acervo dos Maestros (Nick Saraev, DEMONSTRADO):
+     giving · micro commitment · social proof · authority · rapport · scarcity.
+
+     Onde cada uma esta', e com o que a gente PROVA:
+       giving      o preco acompanhado e a queda medida — informacao que a
+                   loja nao da'
+       micro       o pedido nao e' "compre": e' ver, filtrar, entrar no canal
+       social      as vendas que as pecas ja' tem na loja, medidas
+       authority   a nossa serie de precos, com data e numero de pontos
+       rapport     primeira pessoa, sem jargao de loja
+       scarcity    ⚠️ AQUI A GENTE DIVERGE DO ACERVO DE PROPOSITO. A ficha
+                   demonstra timer de 90s e "so' restam 150 copias" (Iman
+                   Gadzhi). Numa pagina cujo unico diferencial e' o preco ser
+                   VERIFICAVEL, escassez fabricada queima exatamente o que
+                   sustenta tudo. A nossa e' real: o preco muda, e o que esta'
+                   aqui e' o de hoje. */
+
+  /* ⚠️ A PALETA SAI DA MARCA, e nao do padrao de quem gerou o codigo.
+
+     O acervo dos Maestros tem uma ficha DEMONSTRADA que descreve o defeito
+     com todas as letras: "evitar que o modelo gere interfaces genericas
+     ROXAS" — o remedio proposto e' paleta exata, tipografia com intencao,
+     elemento de assinatura e risco estetico.
+
+     Esta pagina era #5B21F5: o roxo padrao. A marca ja' tinha cor propria
+     e ninguem tinha olhado pra ela — a lupa e' OURO com cromo.
+
+     ⭐ E A HIERARQUIA PASSA A TER UM DONO SO': o Bryan viu o bloco de prova
+     e o preco com a mesma cor e a mesma fonte, competindo ("ta meio
+     redundante"). Agora o PRECO e' tinta cheia em Archivo Black, e o ouro
+     e' so' de selo e numero de prova. Duas vozes, nao duas cores iguais. */
+  :root {
+    --respiro: 18px;
+    --tinta: #16151c;
+    --fraco: #6f6b7d;
+    --linha: #e6e3ec;
+    --fundo: #faf9fc;
+    --caixa: #fff;
+    /* o ouro da lupa, e o cromo que faz o aro dela */
+    --ouro: #C8901A;
+    --ouro-claro: #F2C94C;
+    --painel: #17161d;
+    --verde: #16a34a;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --tinta: #f4f2f9; --fraco: #a5a1b4; --linha: #2b2733;
+      --fundo: #0f0e13; --caixa: #191823; --painel: #08080b;
+      --ouro: #F0B62E;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: clip; }
+  body {
+    margin: 0; overflow-x: clip;
+    background: var(--fundo); color: var(--tinta);
+    font: 16px/1.55 Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .faixa { max-width: 980px; margin: 0 auto; padding: 0 var(--respiro); }
+
+  /* ---------------- topo ---------------- */
+  header { text-align: center; padding: 34px 0 6px; }
+  .marca-logo {
+    width: 86px; height: 86px; margin: 0 auto 12px; border-radius: 50%;
+    overflow: hidden; display: block;
+  }
+  .marca-logo img { width: 100%; height: 100%; display: block; }
+  .marca-nome {
+    font: 700 12px/1 var(--mono); letter-spacing: .2em;
+    text-transform: uppercase; color: var(--fraco); margin: 0 0 8px;
+  }
+  h1 {
+    font-family: "Archivo Black", system-ui, sans-serif;
+    font-size: clamp(28px, 7.2vw, 46px); line-height: 1.05;
+    letter-spacing: -.025em; margin: 0 0 12px;
+  }
+  /* o unico ouro do texto: a promessa. Duas palavras, e so' */
+  h1 em { font-style: normal; color: var(--ouro); }
+  .promessa {
+    margin: 0 auto 18px; max-width: 46ch; color: var(--fraco);
+    font-size: 15.5px;
+  }
+
+  /* ⚠️ ALTURA FIXA. Nome de uma ou de duas linhas mudava a altura e a
+     pagina inteira subia e descia a cada troca — o defeito que o Bryan
+     chamou de "tremendo" nas bios, em 14/09/2026. */
+  .vivo {
+    height: 92px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2px;
+    margin: 0 auto 6px; max-width: 34ch; text-decoration: none;
+    color: inherit; border-radius: 12px; padding: 6px 10px;
+  }
+  .vivo:active { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  .vivo-nome {
+    font-size: 15px; line-height: 1.25; color: var(--tinta);
+    height: 38px; overflow: hidden; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .vivo-preco {
+    height: 26px; font: 700 22px/1 var(--mono); color: var(--tinta);
+  }
+  .vivo-preco s {
+    font: 400 12px/1 var(--mono); color: var(--fraco); margin-left: 8px;
+  }
+  .vivo-preco .pct {
+    display: inline-block; margin-left: 8px; vertical-align: 2px;
+    background: var(--ouro-claro); color: #17161d;
+    font: 700 11px/1 var(--mono); padding: 4px 6px; border-radius: 999px;
+  }
+  .vivo-preco.entra { animation: impulso .5s cubic-bezier(.2,1.5,.3,1) both; }
+  @keyframes impulso {
+    0% { transform: scale(.74); opacity: 0; }
+    58% { transform: scale(1.09); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  /* ⭐ 18/09 (Bryan: "nao gosto do 'toque para ver na loja' sempre
+     aparecendo"): a legenda fixa sai. O convite e' o proprio nome, que ganha
+     um sublinhado dourado que ACENDE quando termina de ser digitado — o
+     controle nomeia a acao no lugar certo (Impeccable: "controls name their
+     action"), uma vez por produto, sem frase repetida a cada 6 s. */
+  .vivo-dica { display: none; }
+  /* 18/09: sem sublinhado nenhum no nome (Bryan: "como link ficou horrivel"); o convite e' o proprio nome + preco. */
+  .cursor {
+    display: inline-block; width: 2px; height: 1em; margin-left: 1px;
+    background: var(--ouro); vertical-align: -2px;
+    animation: piscar 1.05s step-end infinite;
+  }
+  @keyframes piscar { 50% { opacity: 0; } }
+
+  /* ⭐ O UPSELL. Aparece DEPOIS do clique, no lugar onde a pessoa estava —
+     a loja abriu noutra aba, e quando ela volta o complemento esta' aqui. */
+  .junto {
+    grid-column: 1 / -1; border: 1px dashed var(--ouro);
+    border-radius: 14px; padding: 13px; margin: 2px 0;
+    background: color-mix(in srgb, var(--ouro) 7%, transparent);
+  }
+  .junto h3 {
+    margin: 0 0 9px; font-size: 13.5px; display: flex;
+    align-items: center; gap: 7px;
+  }
+  .junto .fila { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  .junto .fechar {
+    margin-left: auto; border: 0; background: none; cursor: pointer;
+    color: var(--fraco); font: 500 12px/1 var(--mono);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor, .vivo-preco.entra { animation: none; }
+  }
+
+  /* ---------------- prova ---------------- */
+  /* ⭐ O RISCO ESTETICO: um painel escuro no meio de uma pagina clara.
+
+     Ele separa a prova do resto sem precisar de cor forte no texto, e da'
+     a cara de instrumento — que e' o que a operacao faz de diferente:
+     medir preco. Os numeros sao OURO, o preco dos produtos e' TINTA: cada
+     um com a sua voz, e nenhum competindo com o outro. */
+  /* ⭐ O CONSOLE (18/09/2026, mock v5 aprovado). Harmonia por REGRA: raio
+     24 fora / 16 dentro / 12 nos chips; grade de 8 px; ouro so' no icone da
+     busca, no chip ativo e no numero-pico; mono so' em numero. Liquid Glass
+     como efeito ESPECIFICO: vidro sobre uma luz dourada centrada — sem luz
+     atras, o vidro nao aparece (Impeccable: glass nao e' decoracao). */
+  .console {
+    position: relative; margin: 16px 0 0; text-align: left; z-index: 5;
+    border-radius: 24px; padding: 8px;
+    background: color-mix(in srgb, var(--caixa) 55%, transparent);
+    backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid color-mix(in srgb, var(--caixa) 95%, transparent);
+    box-shadow: inset 0 1px 0 var(--caixa), inset 0 -1px 0 rgba(0,0,0,.05), 0 16px 40px rgba(60,45,10,.14);
+  }
+  .console::before {
+    content: ""; position: absolute; inset: -24px 8px -24px; border-radius: 48px; z-index: -1;
+    background: radial-gradient(70% 80% at 50% 40%, rgba(242,201,76,.45), rgba(242,201,76,.12) 55%, transparent 75%);
+    filter: blur(22px); pointer-events: none;
+  }
+  /* gruda no topo com o mostrador ja' escondido: `top` negativo = altura do
+     mostrador (medida em JS, `grudar`). Assim so' busca + chips ficam fixos. */
+  .console.grudado { position: sticky; }  /* pai = .faixa, que vai ate' o rodape */
+  /* o MOSTRADOR: poco rebaixado no vidro, 3 celas com fios, numero sobre
+     rotulo, base com a linha do tempo ate' a proxima conferencia */
+  .prova {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; margin: 0 0 8px; border-radius: 16px;
+    background: color-mix(in srgb, var(--caixa) 45%, transparent);
+    border: 1px solid color-mix(in srgb, var(--caixa) 80%, transparent);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
+  }
+  .prova .cela {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    padding: 12px 6px 10px; text-align: center;
+    font: 600 10px/1.2 Poppins, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--fraco);
+  }
+  .prova .cela + .cela { border-left: 1px solid rgba(0,0,0,.07); }
+  .prova .n { font: 700 19px/1 var(--mono); color: var(--tinta); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
+  .prova .pico .n { color: var(--ouro); }
+  .prova .fim {
+    grid-column: 1 / -1; border-top: 1px solid rgba(0,0,0,.07); padding: 8px 8px 10px; text-align: center;
+    font: 600 10px/1 var(--mono); letter-spacing: .1em; color: var(--fraco);
+    position: relative; overflow: hidden; border-radius: 0 0 16px 16px;
+  }
+  .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--ouro-claro); width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+  .prova > .economia { display: none; }
+  @media (max-width: 360px) { .prova .n { font-size: 17px; } .prova .cela { font-size: 9.5px; } }
+  /* o fio vertical da prova nao se aplica a` faixa */
+
+
+  /* ---------------- filtros ---------------- */
+  /* 18/09: as ferramentas moram DENTRO do console (quem gruda e' ele) */
+  .ferramentas { position: relative; }
+  .busca-caixa {
+    display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 16px; border-radius: 16px;
+    background: var(--caixa); border: 1px solid rgba(0,0,0,.06); box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .busca-caixa svg { width: 20px; height: 20px; flex: 0 0 20px; color: var(--ouro); }
+  .busca {
+    flex: 1; min-width: 0; border: 0; background: none; padding: 0;
+    color: var(--tinta); font: 500 16px/1 Poppins, sans-serif; outline: none;
+  }
+  /* ⭐ CHIPS DE PRECO (18/09, mock v5): as 4 ordens em UMA fila rolavel de
+     chips; Categoria e Loja continuam menus (a lista e' longa, chip nao
+     serve — a rolagem as cegas ja' foi recusada uma vez). */
+  .fila-chips { flex: 1 1 100%; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 8px 0 0; }
+  .fila-chips::-webkit-scrollbar { display: none; }
+  .chip-ordem {
+    flex: 0 0 auto; height: 36px; display: inline-flex; align-items: center; gap: 6px;
+    font: 600 13px/1 Poppins, sans-serif; padding: 0 14px; border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.06); background: color-mix(in srgb, var(--caixa) 70%, transparent);
+    color: var(--tinta); white-space: nowrap; cursor: pointer;
+  }
+  .chip-ordem[aria-pressed="true"] { background: var(--ouro-claro); border-color: transparent; color: #17161d; }
+  .chip-ordem .n { font: 600 12px var(--mono); color: var(--fraco); }
+  .chip-ordem[aria-pressed="true"] .n { color: rgba(23,22,29,.65); }
+  .busca::placeholder { color: var(--fraco); }
+  /* ⛔ DUAS TENTATIVAS ERRADAS ANTES DESTA, e vale saber por que:
+       1. fila unica com ROLAGEM HORIZONTAL — escondia metade das opcoes; pra
+          achar "Fitness" a pessoa arrastava sem saber o que havia adiante.
+       2. chips quebrando em LINHAS — tudo visivel, mas viraram CINCO linhas
+          e empurraram os produtos pra fora da tela. Pior que o problema
+          original: o filtro e' acessorio, o produto e' o principal.
+
+     ⭐ Dois seletores NATIVOS resolvem os dois de uma vez: ocupam UMA linha,
+     e ao tocar o iPhone abre a roda do sistema com todas as opcoes de uma
+     vez — sem rolar a pagina e sem empurrar nada. */
+  .filtros {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0;
+  }
+  /* ⚠️ TRES SELETORES NO CELULAR (Preco, Categoria, Loja — desde 16/09/2026).
+     A 375 px os tres cortavam em "Preç… Cate… Loja…" (o Bryan viu). Com tres
+     caixas, o rotulo encolhe e a contagem some: "Preço tudo · Categoria
+     todas · Loja todas" cabe em 343 px; o numero continua dentro do painel.
+     Continua em UMA linha: painel em segunda linha ja' foi recusado por
+     empurrar os produtos pra fora da primeira tela. */
+  /* ⭐ NO CELULAR, ROTULO OU VALOR — nunca os dois: caixa sem filtro mostra
+     "Preço" / "Categoria" / "Loja"; caixa com filtro mostra so' o escolhido
+     ("Cozinha", "Mercado Livre"), ja' pintada de ativa. Medido: com os dois
+     e o icone, cada caixa tem 110 px e corta ate' com fonte 12 px. */
+  @media (max-width: 430px) {
+    .filtros.tres { gap: 5px; }
+    .filtros.tres .escolha { font-size: 12px; padding: 8px 20px 8px 10px;
+                             background-position: right 7px center; }
+    .filtros.tres .escolha::before { display: none; }
+    .filtros.tres .escolha .n { display: none; }
+    .filtros.tres .escolha[data-ativo="nao"] .valor-escolhido { display: none; }
+    .filtros.tres .escolha[data-ativo="nao"] .rotulo-fixo { color: var(--tinta); font-weight: 600; margin: 0; }
+    .filtros.tres .escolha[data-ativo="sim"] .rotulo-fixo { display: none; }
+  }
+  /* ⭐ MENU PROPRIO, e nao o <select> nativo. O nativo resolvia o espaco mas
+     trazia a roda do iOS, que e' a cara do sistema e nao da pagina.
+
+     ⚠️ O QUE NAO PODE MUDAR: o painel abre SOBREPOSTO (position: absolute),
+     nunca empurrando a lista. Foi esse o erro da versao de chips em linhas —
+     cinco linhas de filtro jogaram os produtos pra fora da primeira tela. */
+  .escolha-caixa { position: relative; flex: 1 1 0; min-width: 0; }
+  .escolha {
+    width: 100%; text-align: left;
+    border: 1px solid var(--linha); background: var(--caixa);
+    color: var(--tinta); border-radius: 999px;
+    padding: 9px 30px 9px 14px;
+    font: 600 13px/1 Poppins, sans-serif; cursor: pointer;
+    text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+    /* a setinha, desenhada em SVG pra nao depender de fonte de icone */
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A7A0B2' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center; background-size: 10px;
+  }
+  /* ⭐ ACESO quando ha' filtro: a pessoa precisa ver que a lista esta'
+     recortada, senao acha que o catalogo encolheu. */
+  .escolha[data-ativo="sim"] {
+    background-color: var(--tinta); color: var(--fundo); border-color: var(--tinta);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+  .escolha[aria-expanded="true"] { border-color: var(--ouro); }
+  /* ⭐ O ROTULO FIXO e' quem da' o ar profissional: o menu se apresenta
+     ("Preço") antes de mostrar a escolha ("tudo"). Peso e cor diferentes,
+     senao vira uma frase so' e perde a hierarquia. */
+  .escolha .rotulo-fixo {
+    color: var(--fraco); font-weight: 500; margin-right: 5px;
+  }
+  .escolha .valor-escolhido { font-weight: 700; }
+  .escolha .n {
+    font: 500 11px/1 var(--mono); color: var(--fraco); margin-left: 6px;
+  }
+  .escolha[data-ativo="sim"] .rotulo-fixo,
+  .escolha[data-ativo="sim"] .n {
+    color: color-mix(in srgb, var(--fundo) 72%, transparent);
+  }
+  /* ⚠️ ICONE DESENHADO EM SVG, nao emoji: emoji muda de cara em cada
+     aparelho e num rodape de loja isso aparece como descuido. */
+  .escolha::before {
+    content: ""; display: inline-block; width: 13px; height: 13px;
+    vertical-align: -2px; margin-right: 7px;
+    background-repeat: no-repeat; background-position: center;
+    background-size: contain; opacity: .55;
+  }
+  .escolha[data-icone="preco"]::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2v12M11 5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'/%3E%3C/svg%3E");
+  }
+  .escolha[data-icone="categoria"]::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='5' height='5' rx='1'/%3E%3Crect x='9' y='2' width='5' height='5' rx='1'/%3E%3Crect x='2' y='9' width='5' height='5' rx='1'/%3E%3Crect x='9' y='9' width='5' height='5' rx='1'/%3E%3C/svg%3E");
+  }
+  .escolha[data-icone="loja"]::before {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236f6b7d' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M2 6l1.5-3h9L14 6M2 6h12M3 6v7h10V6M6 13V9h4v4'/%3E%3C/svg%3E");
+  }
+  .escolha[data-ativo="sim"]::before { filter: invert(1) brightness(2); opacity: .8; }
+  /* ⚠️ largura pelo CONTEUDO (min = a caixa): a 375 px o painel de 110 px
+     cortava o numero ("AliExpress 1|") e quebrava "caiu de preco" em tres
+     linhas (Bryan, 16/09). O ultimo seletor abre ancorado a` direita. */
+  .opcoes {
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 40;
+    min-width: 100%; width: max-content; max-width: min(260px, calc(100vw - 32px));
+    background: var(--caixa); border: 1px solid var(--linha);
+    border-radius: 14px; padding: 5px; overflow: hidden;
+    box-shadow: 0 14px 34px rgba(0,0,0,.16);
+  }
+  .opcao {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+    border: 0; background: none; cursor: pointer; text-align: left;
+    color: var(--tinta); border-radius: 10px; padding: 9px 11px;
+    font: 500 13.5px/1.2 Poppins, sans-serif; white-space: nowrap;
+  }
+  .escolha-caixa:last-child .opcoes { left: auto; right: 0; }
+  .opcao:active { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+  .opcao[aria-selected="true"] { font-weight: 700; }
+  /* o numero fica a' direita, alinhado — vira coluna e da' pra comparar */
+  .opcao .n {
+    margin-left: auto; padding-left: 10px; flex: 0 0 auto;
+    font: 500 11.5px/1 var(--mono); color: var(--fraco); opacity: .7;
+  }
+  .opcao[aria-selected="true"]::before {
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--ouro); flex: 0 0 5px;
+  }
+  .opcao:not([aria-selected="true"])::before {
+    content: ""; width: 5px; flex: 0 0 5px;
+  }
+  .chip {
+    flex: 0 0 auto; border: 1px solid var(--linha); background: var(--caixa);
+    color: var(--fraco); border-radius: 999px; padding: 8px 14px;
+    font: 600 13px/1 Poppins, sans-serif; cursor: pointer; white-space: nowrap;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--tinta); color: var(--fundo); border-color: var(--tinta);
+  }
+  /* ⭐ O "ver mais" ocupa a largura da grade: e' o fim da lista, nao mais um
+     cartao. Parecer cartao faria a pessoa tocar achando que e' produto. */
+  .ver-mais {
+    grid-column: 1 / -1; width: 100%;
+    border: 1px dashed var(--linha); background: none; cursor: pointer;
+    color: var(--fraco); border-radius: 14px; padding: 15px;
+    font: 600 13px/1 var(--mono); letter-spacing: -.01em;
+  }
+  .ver-mais:active { background: color-mix(in srgb, var(--tinta) 5%, transparent); }
+  .contagem {
+    font: 500 12px/1 var(--mono); color: var(--fraco);
+    margin: 12px 0 0; display: block;
+  }
+
+  /* ---------------- grade ---------------- */
+  .grade {
+    display: grid; gap: 13px; margin: 14px 0 0;
+    grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+    /* ⚠️ `start`: o cartao termina onde termina. Sem isto o vizinho de
+       titulo longo esticava o cartao curto e deixava um vazio dentro dele
+       (Bryan, 16/09). O nome fica INTEIRO, sem reticencia — 4-5 linhas
+       quando for o caso; quem encurta e' o `nome_produto`, no publicador. */
+    align-items: start;
+  }
+  .item {
+    display: flex; flex-direction: column; height: 100%;
+    background: var(--caixa); border: 1px solid var(--linha);
+    border-radius: 16px; overflow: hidden; text-decoration: none;
+    color: inherit; box-shadow: 0 1px 2px rgba(20,19,26,.05);
+    transition: transform .16s ease, box-shadow .16s ease;
+  }
+  .item:active { transform: scale(.985); }
+  @media (hover: hover) {
+    .item:hover { box-shadow: 0 6px 18px rgba(20,19,26,.10); transform: translateY(-2px); }
+  }
+  .foto { position: relative; aspect-ratio: 1; background: var(--linha); }
+  .item.sem-foto { display: none; }
+  /* ⭐ reparo 1 (18/09): foto branca dentro de cartao branco "flutuava" sem
+     borda no tema claro. Agora a foto tem respiro e cabe inteira (contain)
+     sobre um fundo neutro — a moldura e' a mesma em toda foto, seja qual
+     for o fundo que o lojista usou. */
+  .foto { background: #fff; }
+  .foto img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; box-sizing: border-box; }
+  .foto:not(.ok) { background: var(--linha); animation: esqueleto 1.6s ease-in-out infinite; }
+  @keyframes esqueleto { 50% { opacity: .55; } }
+  .foto::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 46px;
+    background: linear-gradient(rgba(0,0,0,.24), rgba(0,0,0,0));
+    pointer-events: none;
+  }
+  .caiu, .novo {
+    position: absolute; top: 8px; z-index: 1; color: #fff;
+    font: 700 10.5px/1 var(--mono); padding: 5px 8px; border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  }
+  /* ⭐ O SELO E' O OURO DA MARCA, com texto escuro: alto contraste, e
+     amarra o cartao a` lupa sem repetir a cor do preco. */
+  .caiu { left: 8px; background: var(--ouro-claro); color: #17161d;
+          box-shadow: 0 1px 5px rgba(0,0,0,.28); }
+  .novo { right: 8px; background: var(--verde); }
+  /* ⭐ a chama: canto inferior direito da foto, sem fundo, com sombra pra
+     ler sobre qualquer imagem; NAO e' esticada (e' texto, nao SVG escalado) */
+  .foto > .fogo {
+    position: absolute; right: 8px; top: 8px; z-index: 2;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(160deg, #ff7a1a, #e6321b);
+    box-shadow: 0 1px 5px rgba(0,0,0,.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fogo svg { width: 15px; height: 15px; display: block; }
+  /* com fogo, o "novo" (que tambem mora a` direita) desce um degrau */
+  .fogo ~ .novo { top: 38px; }
+  /* ⭐ CARTAO v2 (18/09/2026, MAESTROS_ESTETICA_DO_SITE.md, blocos A+B):
+     uma fonte de corpo (Poppins), mono SO' em numero; nada abaixo de 11px;
+     ritmo de 8; um acento por cartao; o BOTAO e' o que gruda no fundo, nao o
+     preco (era o vao entre nome e preco que o Bryan viu no Cortador). */
+  .sinais {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px 8px;
+    flex-wrap: wrap; /* 18/09: "13 vendedores" + chip de envio sobrepunham num cartao de 2 colunas */
+  }
+  /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
+  .sinais > .nota:only-child { margin-left: 0; }
+  .vendeu {
+    font: 500 11px/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0; white-space: nowrap;
+  }
+  .promo {
+    display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
+    font: 700 11px/1 Poppins, sans-serif; color: var(--ouro);
+  }
+  .promo svg { width: 13px; height: 13px; display: block; }
+  /* ⭐ recorde: verde da casa, mesmo porte do Promo */
+  .recorde {
+    display: inline-flex; align-items: center; gap: 3px;
+    font: 700 11px/1 Poppins, sans-serif; color: var(--verde);
+  }
+  .recorde svg { width: 13px; height: 13px; display: block; }
+  .frete {
+    font: 600 11px/1 Poppins, sans-serif; color: var(--verde);
+    border: 1px solid var(--verde); border-radius: 6px; padding: 3px 6px; opacity: .9;
+  }
+  .ja-esteve.espere strong { color: var(--tinta); font-weight: 700; letter-spacing: .02em; }
+  .ja-esteve.loja-diz strong { color: var(--tinta); font-weight: 600; }
+  .ja-esteve.tambem-em a { color: var(--fraco); text-decoration: underline; }
+  /* ⭐ BOTAO DE VERDADE (YC mobile: alvo de toque; acao secundaria neutra):
+     largura toda, 40px, sino em SVG monocromatico — zero emoji na tela. */
+  .avise-me {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%; min-height: 40px; margin-top: auto;
+    font: 600 12px/1.2 Poppins, sans-serif; color: var(--fraco);
+    border: 1px solid var(--linha); border-radius: 10px; padding: 8px 10px;
+    text-decoration: none; background: transparent;
+    transition: color .16s ease, border-color .16s ease, background .16s ease;
+  }
+  .avise-me svg { width: 15px; height: 15px; flex: 0 0 15px; display: block; }
+  .avise-me span { white-space: nowrap; }
+  .avise-me.longo span { white-space: normal; text-align: left; }
+  .avise-me:hover { color: var(--tinta); border-color: var(--tinta); }
+  .avise-me:active { background: var(--linha); }
+  .avise-me + .avise-me { margin-top: 0; }
+  .avise-me.repor { min-height: 34px; font-size: 11px; }
+  .ja-esteve.tambem-em strong { color: var(--verde); font-weight: 700; }
+  .nota {
+    display: inline-flex; align-items: center; gap: 4px; margin-left: auto;
+    font: 600 12px/1 var(--mono); color: var(--fraco);
+  }
+  .nota svg { width: 13px; height: 13px; display: block; opacity: .9; }
+  .nota.em-fogo { color: var(--verde); }
+  .ja-esteve {
+    font: 500 11.5px/1.35 Poppins, sans-serif; color: var(--fraco);
+  }
+  .nq { white-space: nowrap; }
+
+  /* ⭐ O SELO DA LOJA — na linha do rodape, a direita do "no radar", na cor
+     da loja, so' a marca. Decisao do Bryan em 16/09/2026: "amarelo e o
+     simbolo apenas do ML, nao escreva Mercado Livre". A cor vem de LOJAS
+     (inline), o texto e' a sigla ate' o simbolo oficial do kit entrar.
+     ⚠️ FORA DA FOTO desde a mesma noite: na foto ele cobria a legenda do
+     vendedor ("8BitDo OFFICIAL STORE") — o Bryan viu no celular. */
+  /* ⭐ NEUTRO (bloco B, 18/09): o chip da loja vinha na cor da loja (o
+     vermelho do Ali ao lado do titulo "da' impressao de negacao" — o proprio
+     Bryan, 16/09). Um acento por cartao: a cor da loja fica no SIMBOLO
+     oficial quando ele existir, e no seletor "Loja". */
+  .loja {
+    display: inline-block; vertical-align: 1px; white-space: nowrap; margin-right: 1px;
+    font: 600 9px/1 Poppins, sans-serif; letter-spacing: .06em;
+    color: var(--fraco); border: 1px solid var(--linha);
+    padding: 2px 5px; border-radius: 5px; opacity: .85;
+  }
+  /* o simbolo oficial: mesma altura visual da sigla, sem caixa */
+  .loja-simbolo {
+    height: 14px; width: auto; vertical-align: -3px;
+    border: 0; padding: 0; border-radius: 3px; opacity: 1;
+  }
+  .corpo { display: flex; flex-direction: column; flex: 1 1 auto; padding: 12px 14px 14px; gap: 8px; }
+  .nome { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+  .linha-preco { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  /* ⚠️ O PRECO E' TINTA CHEIA. Ele ja' e' o maior e o mais pesado do
+     cartao — nao precisa de cor tambem, e com cor ele empatava com o
+     painel de prova. */
+  .preco { font-family: "Archivo Black", system-ui, sans-serif;
+           font-size: 18px; color: var(--tinta); letter-spacing: -.01em; }
+  .de { font: 400 11.5px/1 var(--mono); color: var(--fraco); text-decoration: line-through; }
+  /* ⚠️ SEM `nowrap`. A linha 'acompanhando ha 1 dia' em fonte mono nao cabia
+     na largura do cartao e VAZAVA pra fora da borda arredondada — apareceu
+     assim no iPhone do Bryan (14/09/2026). Texto que sai do cartao faz a
+     pagina inteira parecer quebrada, mesmo com todo o resto certo. */
+  /* ⛔ O `overflow: hidden` NAO PODE FICAR NO CONTAINER. Ele corta o
+     `box-shadow` da animacao do pulso, e a bolinha verde aparece COMIDA do
+     lado esquerdo — visto no iPhone do Bryan em 15/09/2026, e causado pelo
+     proprio conserto do vazamento de texto.
+
+     ⭐ Quem corta e' o SPAN DO TEXTO, so' ele. O container fica com
+     `min-width: 0` (que nao corta nada, mas deixa o filho encolher no flex) e
+     um respiro a esquerda para o halo da animacao caber. */
+  /* ⭐ O GRAFICO DA SERIE. Acessorio: 22px de altura, traco fino, cor fraca.
+     O produto continua sendo o principal — a regra que as quatro tentativas
+     de menu de 15/09 deixaram. */
+  /* ⭐ TITULO DE BLOCO. Ocupa a linha inteira do grid (senao vira coluna) e
+     e' discreto de proposito: ele ORGANIZA, nao anuncia. */
+  .bloco-titulo {
+    grid-column: 1 / -1; margin: 6px 0 2px;
+    font: 700 13px/1.2 var(--mono); color: var(--fraco);
+    display: flex; align-items: baseline; gap: 7px;
+    text-transform: none; letter-spacing: .01em;
+  }
+  .bloco-titulo:not(:first-child) { margin-top: 20px; }
+  .bloco-conta {
+    font-weight: 500; color: var(--fraco); opacity: .7; font-size: 11px;
+  }
+  /* o involucro reserva 4 px a` direita: o ponto fica em cima do fim da
+     linha e nunca e' cortado pela borda do cartao */
+  .serie-wrap { position: relative; margin-top: 2px; padding-right: 4px; }
+  .serie-wrap .escala {
+    display: flex; justify-content: space-between; margin-top: 3px;
+    font: 500 11px/1.2 Poppins, sans-serif; color: var(--fraco);
+  }
+  .serie-wrap .agora {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--fraco); transform: translate(-50%, -50%);
+    /* a porcentagem e' do SVG, que termina 4 px antes do involucro */
+    margin-left: -2px;
+  }
+  .serie-wrap.baixou .agora { background: var(--verde); }
+  .serie { display: block; width: 100%; height: 14px; }
+  .serie .linha {
+    fill: none; stroke: var(--fraco); stroke-width: 1.4;
+    stroke-linejoin: round; stroke-linecap: round; opacity: .75;
+  }
+  /* ⭐ So' quem caiu 5% ou mais fica verde — o MESMO limiar do selo "caiu". */
+  .serie.baixou .linha { stroke: var(--verde); opacity: 1; }
+  .rodape-item {
+    display: flex; align-items: center; gap: 5px;
+    font: 500 10px/1.25 var(--mono); color: var(--fraco);
+    min-width: 0; padding-left: 3px;
+  }
+  .rodape-item span:last-child {
+    min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .pulso {
+    width: 6px; height: 6px; border-radius: 50%; flex: 0 0 6px;
+    background: var(--verde); box-shadow: 0 0 0 0 rgba(22,163,74,.55);
+    animation: bater 2.4s ease-out infinite;
+  }
+  @keyframes bater {
+    70% { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+  }
+  .vazio {
+    border: 1px dashed var(--linha); border-radius: 14px;
+    padding: 26px 18px; text-align: center; color: var(--fraco);
+    grid-column: 1 / -1;
+  }
+
+  /* ---------------- fim ---------------- */
+  .convite {
+    margin: 30px 0 0; border: 1px solid var(--linha); border-radius: 16px;
+    background: var(--caixa); padding: 20px; text-align: center;
+  }
+  .convite h2 { font-size: 18px; margin: 0 0 6px; }
+  .convite p { margin: 0 0 14px; color: var(--fraco); font-size: 14px; }
+  .botao {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--tinta); color: var(--fundo); text-decoration: none;
+    padding: 13px 20px; border-radius: 999px; font-weight: 600; font-size: 15px;
+  }
+  footer {
+    margin-top: 28px; padding: 20px 0 54px; border-top: 1px solid var(--linha);
+    font-size: 12px; color: var(--fraco); text-align: center;
+  }
+  footer p { margin: 0 0 5px; }
+  /* ⭐ A MARCA PRIMEIRO, o aviso depois e menor. A hierarquia e' o que faz o
+     rodape parecer de loja e nao de blog: quem assina a pagina vem em tinta
+     cheia, e a obrigacao legal fica legivel sem disputar atencao. */
+  .marca-rodape {
+    font-weight: 600; color: var(--tinta); letter-spacing: -.01em;
+  }
+  .aviso-rodape { font-size: 11px; opacity: .72; }
+  .link-rodape { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    .pulso { animation: none; }
+    .item { transition: none; }
+  }
+</style>
+
+<div class="faixa">
+  <header>
+    <span class="marca-logo" id="logo"></span>
+    <p class="marca-nome">Achadinho Total</p>
+    <h1>Eu garimpo.<br>Você <em>paga menos</em>.</h1>
+    <!-- rapport + authority: primeira pessoa, e o que sustenta a frase vem
+         logo abaixo em numero. -->
+    <!-- ⚠️ O PARAGRAFO SAIU DAQUI (14/09/2026, Bryan: "parece uma bio").
+
+         Ele gastava cinco linhas dizendo o que a pagina FAZ, antes de
+         mostrar qualquer produto. A linha viva diz a mesma coisa em uma
+         linha e com prova: nome e preco de um achadinho de verdade,
+         digitando — o mesmo padrao que funcionou nas bios. -->
+    <a class="vivo" id="vivo" rel="noopener">
+      <span class="vivo-nome" id="vivo_nome"></span>
+      <span class="vivo-preco" id="vivo_preco"></span>
+      <span class="vivo-dica" id="vivo_dica"></span>
+    </a>
+  </header>
+  <!-- ⭐ O CONSOLE (18/09/2026, aprovado pelo Bryan no mock v5): prova +
+       busca + chips numa placa de vidro so'. Ao rolar, a placa gruda no
+       topo com o mostrador ja' fora da tela (top negativo, ver `grudar`). -->
+  <div class="console" id="console">
+    <div class="prova" id="prova"><div class="economia" id="economia" hidden></div></div>
+    <div class="ferramentas">
+      <label class="busca-caixa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l5.5 5.5"/></svg><input class="busca" id="busca" type="search"
+             placeholder="procurar — ex.: organizador, luva, caixa de som"
+             autocomplete="off" enterkeyhint="search"></label>
+      <div class="filtros" id="chips"></div>
+      <span class="contagem" id="contagem"></span>
+    </div>
+  </div>
+
+  <div class="grade" id="grade"></div>
+
+  <!-- ⭐ MICRO COMPROMISSO, e nao venda. O pedido e' entrar num canal gratis,
+       nao comprar — e e' o unico lugar da pagina que pede alguma coisa. -->
+  <section class="convite">
+    <h2>O achadinho aparece lá primeiro</h2>
+    <p>Quando um preço cai, o Telegram recebe antes do vídeo sair.</p>
+    <a class="botao" href="https://t.me/achadinhototal" target="_blank" rel="noopener" id="tg">
+      Entrar no Achadinho Total &rarr;
+    </a>
+  </section>
+
+  <!-- ⚠️ A DIVULGACAO DE AFILIADO FICA, mas em UMA linha discreta.
+       Decisao do Bryan em 15/09/2026: o rodape antigo (duas frases longas)
+       saiu por parecer amador. O que NAO pode sair e' o aviso de que ha'
+       link de afiliado — identificar publicidade e' exigencia de plataforma
+       e do CDC, e um canal que ja' tomou corte de alcance por
+       integridade/autenticidade em 02/08 nao tem margem pra testar isso. -->
+  <!-- ⭐ INDICE ESTATICO PRO CRAWLER (17/09/2026). A pagina inteira e'
+       montada por JS; o Google renderiza JS, mas com atraso e sem garantia
+       de ver cada cartao. Este bloco e' HTML puro com nome, preco e link
+       dos produtos do catalogo (so' AliExpress e ML — as lojas externas
+       ficam fora, "so' o ouro do ouro", Bryan 17/09). O script o REMOVE
+       assim que a grade real existe; o publicador preenche. -->
+  <section id="indice-estatico" aria-hidden="true"></section>
+
+  <footer>
+    <p class="marca-rodape">© 2026 Achadinho Total — todos os direitos reservados</p>
+    <p class="aviso-rodape">Preços conferidos na data indicada em cada item · Contém links de afiliado · <a href="/privacidade" class="link-rodape">Privacidade</a></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // ⭐ www -> raiz (17/09/2026). O `_redirects` do Pages nao aplicou a regra
+  // por hostname (medido: www respondia 200). Este e' o fallback ate' a
+  // Redirect Rule da zona existir; o canonical ja' aponta pro raiz.
+  if (location.hostname === "www.achadinhototal.com.br") {
+    location.replace("https://achadinhototal.com.br" + location.pathname + location.search + location.hash);
+    return;
+  }
+
+  // Substituidos na publicacao (ver paginas/publicar_bio.py).
+  var PRODUTOS = [];
+  var BRASAO = "";
+  // ⭐ {loja: data URI} do simbolo OFICIAL (kit de afiliado); o publicador
+  // preenche a partir de paginas/simbolos_lojas/. Loja sem simbolo = sigla.
+  var SIMBOLOS = {};
+  // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
+  // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
+  var BOT_ALERTA = "";
+  var ULTIMA_CONFERENCIA = "";
+  // ⭐ DE ONDE A PESSOA VEIO (18/09/2026): `?de=bio.<canal>` da contra-capa,
+  // `?de=telegram` dos posts, `?de=video.<id>` quando houver. Vai em cada
+  // clique de produto. So' texto curto e sem quem: e' origem, nao pessoa.
+  var ORIGEM_DE = "";
+  try {
+    var qs = new URLSearchParams(location.search);
+    ORIGEM_DE = String(qs.get("de") || "").replace(/[^a-zA-Z0-9._-]/g, "").slice(0, 40);
+    // ⭐ `?p=<id>`: o produto do link abre em 1o (o vídeo/post que trouxe a
+    // pessoa era sobre ELE — motion: "alinhe o anúncio ao que a página abre").
+    var pedido = String(qs.get("p") || "").slice(0, 64);
+    if (pedido) {
+      var idx = -1;
+      PRODUTOS.some(function (x, i) { if (String(x.id) === pedido) { idx = i; return true; } return false; });
+      if (idx > 0) {
+        var pp = PRODUTOS[idx];
+        PRODUTOS.splice(idx, 1);
+        PRODUTOS.unshift(pp);
+        pp.topo = 0;      // antes de todo topo
+      }
+    }
+  } catch (e) { /* URL estranha nao derruba a pagina */ }
+  // ⭐ QUANTO A MENOS SE PAGA HOJE, somando os que cairam — e a linha por dia.
+  // {"hoje": 123.4, "n": 32, "serie": [["09-13", 80.2], ...]}. Publicador
+  // preenche; a conta e' a mesma do "de" riscado de cada cartao.
+  var ECONOMIA = {};
+  // ⭐ CATEGORIAS QUE BAIXAM SO' QUANDO A PESSOA CLICA.
+  //
+  // {"Nike": {arquivo: "nike.json", n: 905, passo: 50}} — o publicador
+  // preenche. Decisao do Bryan em 16/09/2026: "nao quero o site lento".
+  // MEDIDO: a pagina pesa 258 KB; a Nike ate' R$ 150 sao 905 cartoes =
+  // 372 KB, quase dobra a pagina sozinha. Entao a categoria existe no menu
+  // desde a abertura (com a contagem certa), mas os cartoes so' chegam no
+  // primeiro clique — e entram em PRODUTOS como se sempre tivessem estado
+  // ali. Quem nunca clica nunca baixa.
+  var EXTERNOS = {};
+  var EXTERNO_CARREGADO = {};
+  function externa(nome) { return !!(nome && EXTERNOS[nome]); }
+  // ⭐ 18/09 (Bryan: "a categoria nunca pode ser o nome da loja"): o produto
+  // externo agora tem `canal` = AREA (Eletronicos, Calcados...) e `loja` =
+  // loja. Externo e' quem tem a LOJA em EXTERNOS — nao mais o canal.
+  function externo(p) { return !!(p && p.loja && EXTERNOS[p.loja]); }
+  // as lojas externas que tem produto na categoria (pelo indice do publicador)
+  function lojasDaCategoria(cat) {
+    return Object.keys(EXTERNOS).filter(function (n) {
+      return !!((EXTERNOS[n].cats || {})[cat]);
+    });
+  }
+
+  // ⭐ a URL da miniatura no CDN da loja (ver montar()); desconhecido = como veio
+  function miniatura(u) {
+    u = String(u || "");
+    if (/aliexpress-media\.com\/.*\.(jpg|jpeg|png)$/i.test(u)) { return u + "_350x350q75.jpg_.webp"; }
+    if (/mlstatic\.com\/.*-F\.(jpg|webp)$/i.test(u)) { return u.replace(/-F\.(jpg|webp)$/i, "-O.jpg"); }
+    return u;
+  }
+
+  var grade = document.getElementById("grade");
+  var contagem = document.getElementById("contagem");
+  var busca = document.getElementById("busca");
+
+  // ⚠️ OS FILTROS SAO PERGUNTAS DIFERENTES, nao rotulos bonitos. "Caiu mais" e
+  // "mais barato" ordenam por coisas distintas e as duas listas podem nao se
+  // cruzar — a mesma licao de campeoes x tendencia no garimpo.
+  var FILTROS = [
+    { id: "todos",  rotulo: "Tudo",             cabe: function () { return true; },
+      // ⭐ A ORDEM DE ABERTURA E' A DECISAO MAIS CARA DA PAGINA.
+      // Antes era por DATA: o melhor produto podia estar em 40o lugar, e
+      // com centenas de pecas isso vira desperdicio puro. Agora abre
+      // pelo que tem mais chance de virar dinheiro.
+      //
+      // ⚠️ `ganho x vendas` NAO E' CONVERSAO NOSSA. `vendas` e' o que o
+      // mercado inteiro comprou na loja — nos nao vendemos nada ainda.
+      // Serve pra COMPARAR dois produtos, nao pra prometer faturamento.
+      // Vira medicao de verdade quando houver `tracking_id` por canal e
+      // venda atribuida.
+      // ⭐ QUEM SUBIU DE PRECO DESCE NO RANKING (Bryan, 16/09): `ja_esteve`
+      // so' existe em produto que subiu e ainda esta' abaixo do maior — o
+      // site nao empurra pra frente o que ficou mais caro. Fator 0,7: rebaixa
+      // sem esconder.
+      // ⭐ A ORDEM DE "TUDO" E' A NOTA DE VITRINE (17/09/2026, regua 35/30/20/15
+      // em engine/regua_vitrine.py); desempate pelo antigo ganho x vendas
+      // com o rebaixamento de quem subiu (x0,7). Sem nota (pagina velha),
+      // cai no antigo sozinho.
+      ordem: function (a, b) {
+        var na = a.vitrine_nota || 0, nb = b.vitrine_nota || 0;
+        if (nb !== na) { return nb - na; }
+        var fa = a.ja_esteve && a.ja_esteve.preco ? 0.7 : 1;
+        var fb = b.ja_esteve && b.ja_esteve.preco ? 0.7 : 1;
+        return ((b.ganho || 0) * (b.vendas || 0) * fb)
+             - ((a.ganho || 0) * (a.vendas || 0) * fa);
+      } },
+    // ⭐ 18/09 (Bryan, pela outra sessao): "Caiu de preco" vira "Maiores
+    // quedas"; "Achados novos" so' do catalogo proprio (a externa inteira
+    // chega com pontos=0 e virava "nova"); "Sendo acompanhados" sai — e'
+    // telemetria nossa, nao decisao de compra — e entra "Mais vendidos", a
+    // ordenacao que toda loja grande tem e a prova social do acervo
+    // (Movers and Shakers, meticsmedia).
+    { id: "caiu",   rotulo: "Maiores quedas",   cabe: function (p) { return (p.queda || 0) >= 5; },
+      ordem: function (a, b) { return (b.queda || 0) - (a.queda || 0); } },
+    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2) && !externo(p); } },
+    { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
+      ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
+    { id: "barato", rotulo: "Mais baratos",     cabe: function () { return true; },
+      ordem: function (a, b) { return num(a.preco) - num(b.preco); } }
+  ];
+  // ⭐ QUANTOS APARECEM DE PRIMEIRA. O catalogo vai ter centenas de pecas e
+  // ninguem rola centenas — quem explora usa o filtro e a busca. O papel da
+  // abertura e' mostrar os CAMPEOES, nao o acervo inteiro.
+  //
+  // ⚠️ E isto NAO e' paginacao: os dados ja' estao todos no navegador, entao
+  // filtrar e buscar continuam INSTANTANEOS. O que muda e' so' quantos
+  // cartoes sao desenhados de uma vez.
+  // ⚠️ 90 E NAO 30, e o numero saiu de medicao. As fotos usam
+  // `loading="lazy"`, entao 90 cartoes no HTML NAO sao 90 downloads: cada
+  // foto (88 KB em media) so' baixa quando entra na tela. Quem para na
+  // quinta linha baixou cinco linhas.
+  //
+  // ⛔ E por que nao 120: 90 cartoes ja' sao 45 linhas no telefone. Alem
+  // disso ninguem percorre, e quem chega ao fim clica sem reclamar — os 30
+  // a mais so' engordam o DOM pra quase ninguem ver.
+  var PASSO = 90;
+  var mostrando = PASSO;
+  var atual = "todos";
+  var canal = "";
+  // ⭐ LOJA: o terceiro eixo (Preco, Categoria, Loja). Cor e sigla do selo.
+  //
+  // ⚠️ NAO E' O MENU CATEGORIA. "Cozinha" e "Mercado Livre" nao sao irmaos:
+  // a pessoa precisa poder pedir "Cozinha DA Shopee". Por isso e' um seletor
+  // proprio, combinavel com a categoria — e a pagina principal (sem loja,
+  // sem categoria) continua exatamente como ja' esta'.
+  //
+  // ⚠️ Loja que nao esta' aqui ganha selo cinza com as 2 primeiras letras:
+  // nunca sem selo, senao "sem selo" viraria "e' do AliExpress" por engano.
+  // `tinta` e' a cor do selo vazado no cartao (texto + borda). O ML usa o
+  // AZUL da marca, nao o amarelo: amarelo em fundo claro nao se le.
+  var LOJAS = {
+    "AliExpress":    { cor: "#FF4747", texto: "#fff", sigla: "Ali",  tinta: "#FF4747" },
+    "Mercado Livre": { cor: "#FFE600", texto: "#2D3277", sigla: "ML", tinta: "#2D3277" },
+    "Shopee":        { cor: "#EE4D2D", texto: "#fff", sigla: "S",    tinta: "#EE4D2D" },
+    "Shein":         { cor: "#000",    texto: "#fff", sigla: "SH",   tinta: "#111" },
+    "Nike":          { cor: "#111",    texto: "#fff", sigla: "NIKE", tinta: "#111" }
+  };
+  var loja = "";
+  // ⭐ DENTRO DA LOJA o corte dos dois blocos e' 150, nao 250 — pedido do
+  // Bryan em 16/09 ("a parte de cima ate' 150 e a de baixo acima de 150").
+  // O TETO_VITRINE continua mandando na pagina principal e na categoria.
+  var TETO_LOJA = 150;
+  function tetoAtual() { return (loja && !canal) ? TETO_LOJA : TETO_VITRINE; }
+  // ⭐ A DIVISAO DOS DOIS BLOCOS (loja E categoria) e' R$ 99,99 — decisao do
+  // Bryan em 17/09/2026: "0 a 99,99 e depois de 99,99 pra cima assusta menos".
+  // ⚠️ Nao e' o TETO_VITRINE (250): esse continua decidindo o que a pagina
+  // principal ESCONDE no rolar; este decide onde a prateleira PARTE.
+  var TETO_BLOCO = 99.99;
+  function caroBloco(p) { return num(p.preco) > TETO_BLOCO; }
+  // ⛔ O ROTULO DERIVA DO NUMERO, nunca escrito a mao (guarda de
+  // teste_vitrine_teto): se o teto virar 149,99 e o titulo continuar "99,99",
+  // a pagina mente por conta. "A partir de" e' o teto mais um centavo.
+  function rotuloBloco(alto) {
+    var v = alto ? Math.round((TETO_BLOCO + 0.01) * 100) / 100 : TETO_BLOCO;
+    // "R$ 100,00" vira "R$ 100" — e' o texto que o Bryan aprovou em 17/09
+    return (alto ? "A partir de " : "Até ") + reais(v).replace(/,00$/, "");
+  }
+  // ⭐ QUINZE, e nao 90 como a lista corrida. Dentro da categoria os dois
+  // blocos disputam a mesma tela: 90 cartoes no de cima empurrariam o de
+  // baixo pra fora e ele deixaria de existir na pratica.
+  var PASSO_BLOCO = 15;
+  // ⭐ E A EXTERNA TEM PASSO PROPRIO (50 na Nike — pedido do Bryan em
+  // 16/09: "50 cards, depois os outros 50"). Vem do publicador, nao daqui.
+  function passoBloco() {
+    return (externa(loja) && EXTERNOS[loja].passo) || PASSO_BLOCO;
+  }
+  // ⚠️ E VALE PRA LISTA CORRIDA TAMBEM. A Nike inteira do instantaneo fica
+  // abaixo do teto, entao a categoria nao se divide em dois blocos — cai na
+  // lista corrida, que andaria de 90 em 90. MEDIDO no dublê em 16/09/2026:
+  // 90 cartoes + "ver mais 30", quando o pedido era 50. Um numero, dois
+  // caminhos.
+  function passoLista() {
+    return (externa(loja) && EXTERNOS[loja].passo) || PASSO;
+  }
+  var mostrandoAlto = PASSO_BLOCO;
+  var mostrandoBaixo = PASSO_BLOCO;
+
+  function num(t) {
+    return parseFloat(String(t).replace(/[^0-9,]/g, "").replace(",", ".")) || 0;
+  }
+  function el(tag, classe, texto) {
+    var e = document.createElement(tag);
+    if (classe) { e.className = classe; }
+    if (texto !== undefined) { e.textContent = texto; }
+    return e;
+  }
+  // ⭐ O GRAFICO DA SERIE — o desenho do preco que NOS vimos, dia a dia.
+  //
+  // ⚠️ A DECISAO QUE MAIS IMPORTA AQUI E' A ESCALA, e ela e' contra-intuitiva:
+  // o eixo NAO se ajusta ao minimo e maximo da serie. Sparkline auto-ajustada
+  // transforma oscilacao de 1,6% numa montanha — o Carregador 120W (36,59 ->
+  // 36,59 -> 37,19) sairia com a mesma cara dramatica da Lanterna, que caiu
+  // 12,2% de verdade. Seria a mentira de 15/09/2026 outra vez, trocando o
+  // numero inflado por tinta inflada.
+  //
+  // ⭐ Por isso o eixo tem PISO: ele cobre no minimo 10% do preco. Abaixo
+  // disso a linha sai quase reta, que e' a verdade — o preco nao fez nada.
+  // Quem tem queda real e' quem ocupa a altura toda.
+  var PISO_DO_EIXO = 0.10;
+
+  function grafico(p) {
+    var s = p.serie || [];
+    // ⛔ Menos de 3 pontos nao vira linha. Quem decide isso e' o publicador
+    // (`_serie_curta`), e aqui a guarda se repete: pagina antiga com dado
+    // novo, ou o contrario, nao pode desenhar segmento nenhum.
+    if (s.length < 3) { return null; }
+
+    var vals = s.map(function (x) { return x[1]; });
+    var menor = Math.min.apply(null, vals);
+    var maior = Math.max.apply(null, vals);
+    var faixa = Math.max(maior - menor, maior * PISO_DO_EIXO);
+    // centraliza a serie dentro da faixa minima
+    var meio = (maior + menor) / 2;
+    var topo = meio + faixa / 2;
+
+    var L = 100, A = 22, m = 2;
+    var pts = s.map(function (x, i) {
+      var px = s.length === 1 ? L / 2 : (i / (s.length - 1)) * L;
+      var py = m + (topo - x[1]) / faixa * (A - 2 * m);
+      return [px, py];
+    });
+
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + L + " " + A);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    // ⭐ Caiu de verdade = verde; o resto e' cinza. O limiar e' o MESMO 5%
+    // que o selo "caiu X%" usa — duas leituras diferentes do mesmo dado na
+    // mesma pagina e' como nasce "o grafico diz uma coisa e o selo, outra".
+    svg.setAttribute("class", "serie" + ((p.queda || 0) >= 5 ? " baixou" : ""));
+
+    var d;
+    if (p.suave) {
+      // ⭐ CURVA SUAVE (Catmull-Rom -> Bezier) so' pro multometro: 4 pontos
+      // diarios em reta pareciam regua (Bryan pediu "menos linear"). A curva
+      // passa EXATAMENTE pelos mesmos pontos — muda o traco, nao o dado.
+      d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
+      for (var k = 0; k < pts.length - 1; k++) {
+        var p0 = pts[Math.max(k - 1, 0)], p1 = pts[k],
+            p2 = pts[k + 1], p3 = pts[Math.min(k + 2, pts.length - 1)];
+        var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+        var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+        d += " C" + c1x.toFixed(1) + " " + c1y.toFixed(1) + " " + c2x.toFixed(1) +
+             " " + c2y.toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1);
+      }
+      var area = document.createElementNS(NS, "path");
+      area.setAttribute("d", d + " L" + pts[pts.length - 1][0].toFixed(1) + " " + A +
+                             " L" + pts[0][0].toFixed(1) + " " + A + " Z");
+      area.setAttribute("class", "area");
+      svg.appendChild(area);
+      // ⚠️ SEM bolinhas por dia: o SVG e' esticado sem proporcao e o circulo
+      // vira elipse disforme (Bryan viu, 16/09). A cadencia dos dias ja'
+      // aparece na propria curva — dia que cresce mais inclina mais.
+    } else {
+      d = pts.map(function (q, i) {
+        return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1);
+      }).join(" ");
+    }
+    var linha = document.createElementNS(NS, "path");
+    linha.setAttribute("d", d);
+    linha.setAttribute("class", "linha");
+    // ⚠️ `preserveAspectRatio=none` estica o desenho e esticaria a espessura
+    // do traco junto; sem isto a linha fica grossa e borrada no cartao largo.
+    linha.setAttribute("vector-effect", "non-scaling-stroke");
+    svg.appendChild(linha);
+
+    // ⛔ O PONTO "AGORA" NAO E' MAIS UM <circle>: com preserveAspectRatio=none
+    // o SVG e' esticado e o circulo virava elipse, e na borda direita saia
+    // cortado (Bryan viu os dois em 16/09). Agora e' um <span> redondo de
+    // verdade, posicionado por porcentagem dentro do involucro — e o
+    // involucro tem folga a` direita pra ele nunca ser cortado.
+    var ult = pts[pts.length - 1];
+    var ponto = document.createElement("span");
+    ponto.className = "agora";
+    ponto.style.left = (ult[0] / L * 100).toFixed(1) + "%";
+    ponto.style.top = (ult[1] / A * 100).toFixed(1) + "%";
+
+    // ⭐ O QUE O DESENHO ESCONDE, EM TEXTO. A linha mostra a forma; o titulo
+    // devolve os numeros exatos, que e' o que sustenta a promessa da pagina.
+    var t = document.createElementNS(NS, "title");
+    t.textContent = s.map(function (x) {
+      return x[0].split("-").reverse().join("/") + " R$ " +
+             x[1].toFixed(2).replace(".", ",");
+    }).join(" · ");
+    svg.appendChild(t);
+    var wrap = document.createElement("div");
+    wrap.className = "serie-wrap" + ((p.queda || 0) >= 5 ? " baixou" : "");
+    wrap.appendChild(svg);
+    wrap.appendChild(ponto);
+    // ⭐ A ESCALA DO GRAFICO (Bryan, 18/09: "vale mostrar ha' quantos dias e'
+    // acompanhado?"): so' aqui, colado a` linha, o numero de dias explica a
+    // queda ("caiu 47%" — em quanto tempo?). Solto no cartao era telemetria.
+    // ⭐ 18/09 (Bryan: "nao gostei da bolinha"): a bolinha so' dizia "esta
+    // ponta e' hoje" — e dizia mal. O eixo escrito diz melhor: "ha' N dias"
+    // numa ponta, "hoje" na outra. Sem ponto solto.
+    if (!p.suave && p.dias >= 2) {
+      ponto.remove();
+      var esc = el("div", "escala");
+      // ⭐ 18/09 (Bryan: "'hoje' ali nao faz sentido"): a ponta esquerda diz
+      // de onde a linha partiu (o preco de ha' N dias); a direita da' o
+      // VEREDITO — "menor que eu vi" quando o preco de agora e' o piso da
+      // serie, senao quanto ainda esta' acima do piso. Preco nunca quebra linha.
+      var pAgora = vals[vals.length - 1];
+      esc.appendChild(el("span", "nq", "há " + p.dias + " dias: " + reais(vals[0])));
+      esc.appendChild(el("span", "nq", pAgora <= menor + 0.005 ? "menor que eu vi ✓"
+        : reais(pAgora - menor) + " acima do menor"));
+      wrap.appendChild(esc);
+    }
+    return wrap;
+  }
+
+  function normal(t) {
+    return String(t || "").toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
+  // ⛔ O TETO DA VITRINE — decidido com o Bryan em 15/09/2026.
+  //
+  // ⚠️ SEM ISTO A PAGINA SE INVERTE SOZINHA, e nao por escolha de ninguem: a
+  // lista abre ordenada por `ganho x vendas`, e um tenis de marca rende ~R$ 37
+  // por venda contra ~R$ 2 de um achadinho. No dia em que o primeiro par
+  // entrar no catalogo, ele assume a frente e empurra todo achadinho pra
+  // baixo — a pagina viraria loja de tenis sem ninguem ter decidido isso.
+  //
+  // ⭐ E o numero serve a DOIS usos de proposito, pra nao existir um segundo
+  // limiar pra lembrar: ele tira o produto da lista principal, e e' ele que
+  // divide os dois blocos dentro da categoria.
+  //
+  // ⚠️ MEDIDO no catalogo de 15/09: mediana R$ 30,99, maior R$ 231,99. R$ 250
+  // pega todo tenis de marca (R$ 400 a R$ 700) e NAO esconde nenhum achadinho
+  // que ja' estava rodando. Um teto de R$ 150 tiraria da frente o Projetor de
+  // R$ 231,99, que tem queda medida e rende video — efeito colateral, nao
+  // objetivo.
+  var TETO_VITRINE = 250;
+
+  // ⛔ CATEGORIAS QUE SO' EXISTEM NO SEGMENTO, caras ou baratas.
+  //
+  // Calcado de R$ 180 nao choca ninguem, mas quebra o ritmo: um tenis no meio
+  // de organizadores de R$ 11 muda o que a pagina parece ser. A promessa do
+  // topo e' "eu garimpo, voce paga menos" — calcado de marca e' outro momento
+  // de compra, e mora atras do menu Categoria.
+  var SO_NO_SEGMENTO = ["Calçados"];
+
+  function caro(p) { return num(p.preco) > tetoAtual(); }
+  function soNoSegmento(p) {
+    // ⚠️ TODA categoria externa e' so'-no-segmento, sem precisar ser
+    // listada: se ela fosse pro rolar principal, o "so' baixa ao clicar"
+    // deixaria de fazer sentido — a lista principal a pediria de cara.
+    return SO_NO_SEGMENTO.indexOf(p.canal) >= 0 || externo(p);
+  }
+
+  // ⭐ NAVEGAR E' PASSIVO, BUSCAR E' INTENCAO. Quem digitou "nike" ja' disse o
+  // que quer: esconder dele seria atrapalhar, nao proteger. O mesmo vale pra
+  // quem escolheu a categoria no menu. O recorte existe pra quem so' rola a
+  // pagina sem pedir nada.
+  function visivel(p) {
+    if (canal || loja) { return true; }
+    if (normal(busca.value.trim())) { return true; }
+    return !caro(p) && !soNoSegmento(p);
+  }
+
+  var SINO_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15zM10 21a2 2 0 0 0 4 0"/></svg>';
+  var REPOR_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>';
+
+  function montar(p) {
+    var a = document.createElement("a");
+    a.className = "item";
+    a.addEventListener("click", function () { anotarClique(p, "cartao"); });
+    a.href = p.link;
+    a.rel = "noopener";
+    // ⚠️ SEM `target=_blank`, E ISSO CONSERTA O DEFEITO MAIOR DA PAGINA.
+    //
+    // MEDIDO em 14/09/2026: no iPhone do Bryan nenhum link abria — nem o
+    // cartao, nem a linha do topo. O proprio navegador disse por que:
+    // "the page tried to open a new tab and the pane BLOCKED it". Abrir
+    // aba nova e' tratado como pop-up, e o bloqueador do Safari vem
+    // ligado de fabrica. O link funcionava; a ABA e' que nao abria.
+    //
+    // ⭐ E o upsell nao depende mais da aba de tras: ele aparece quando a
+    // pessoa VOLTA (ver `pageshow` no fim do arquivo), que e' o momento em
+    // que ela realmente esta' aqui de novo.
+
+    var foto = el("div", "foto");
+    if ((p.queda || 0) >= 5) {
+      foto.appendChild(el("span", "caiu", "caiu " + Math.round(p.queda) + "%"));
+    }
+    // ⭐ reparo 2 (18/09): "novo" so' no catalogo proprio — na externa tudo
+    // e' "novo" no primeiro dia, e o verde e' um segundo acento sem decisao.
+    if (!(p.pontos >= 2) && !externo(p)) {
+      foto.appendChild(el("span", "novo", "novo"));
+    }
+    // ⭐ O FOGUINHO: so' a chama, no canto de baixo da foto, nos poucos que
+    // passam na regua do publicador (`marcar_fogo`: nota, queda, vendas,
+    // rendimento; teto 6). Sem texto — o que ele significa esta' na linha
+    // "98% positivas · 12 mil vendas" que so' o cartao com fogo ganha.
+    if (p.fogo) {
+      // ⚠️ SELO pequeno e redondo no canto superior direito, chama em SVG
+      // (emoji renderiza diferente em cada aparelho e saiu grande e solto —
+      // Bryan, 16/09: "nao tem nada a ver com um botao no canto").
+      var fogo = el("span", "fogo");
+      fogo.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2c1 3.5 4 5 4 9a4 4 0 0 1-8 0c0-1 .3-2 .8-2.8C8 9.5 9 11 10 11c0-3 .5-6 2-9z"/></svg>';
+      fogo.title = "escolhido: " + Math.round(p.nota) + "% de avaliações positivas e caiu " + Math.round(p.queda) + "%";
+      foto.appendChild(fogo);
+    }
+    if (p.imagem) {
+      var img = document.createElement("img");
+      // ⭐ MINIATURA DO CDN (18/09/2026): o Lighthouse mediu 974 KiB de imagem
+      // sem redimensionar. Ali: `_350x350q75.jpg_.webp` = 12 KB no lugar de
+      // 81 (medido); ML: `-O.jpg` = 36 KB no lugar de 178. Se a variante
+      // falhar, volta pra original — nunca cartao sem foto por causa disso.
+      img.src = miniatura(p.imagem);
+      // ⛔ FOTO QUE NAO CARREGA = CARTAO FORA (Bryan viu o icone quebrado na
+      // Clovis, 18/09). Primeiro tenta a original no lugar da miniatura; se a
+      // original tambem falhar, o cartao some — cartao sem foto e' quebrado.
+      img.addEventListener("error", function tentar() {
+        if (img.src !== p.imagem) { img.src = p.imagem; return; }
+        a.classList.add("sem-foto");
+      });
+      img.alt = p.nome || "";
+      img.loading = "lazy";
+      img.addEventListener("load", function () { foto.classList.add("ok"); }, { once: true });
+      img.decoding = "async";
+      img.width = 350; img.height = 350;
+      foto.appendChild(img);
+    }
+    a.appendChild(foto);
+
+    var corpo = el("div", "corpo");
+    var nome = el("div", "nome", p.nome);
+    // ⭐ O SELO DA LOJA: no FIM DO NOME, na mesma linha do texto, cinza
+    // vazado — sem cor, sem linha propria. Quarta casa dele em 16/09: na
+    // foto cobria legenda; no rodape cortava o radar; acima do preco
+    // "dividia o cartao, e o vermelho da' impressao de negacao" (Bryan). A
+    // cor da loja fica so' no seletor "Loja", onde ela ajuda a escolher.
+    if (p.loja) {
+      var cfg = LOJAS[p.loja] || { sigla: String(p.loja).slice(0, 2).toUpperCase() };
+      var selo;
+      if (SIMBOLOS[p.loja]) {
+        // ⭐ o simbolo OFICIAL do kit de afiliado, quando existe: 14 px, no
+        // fim do nome, sem borda — a marca fala por si (Bryan, 16/09)
+        selo = el("img", "loja loja-simbolo");
+        selo.src = SIMBOLOS[p.loja];
+        selo.alt = p.loja;
+        selo.loading = "lazy";
+      } else {
+        selo = el("span", "loja", cfg.sigla);
+        // ⭐ transparente, so' a tinta na cor da loja (Bryan, 16/09: "testar
+        // assim transparente e mudar so' a cor pela cor do Ali")
+        // (bloco B, 18/09: sem tinta da loja no chip — um acento por cartao)
+      }
+      selo.title = p.loja;
+      // ⭐ NA FRENTE do nome (Bryan, 18/09: no "Organizador deslizante de
+      // panelas e tampas" o chip caia sozinho numa linha nova). Como prefixo
+      // ele nunca orfana: o nome quebra depois dele, nao antes.
+      nome.insertBefore(document.createTextNode(" "), nome.firstChild);
+      nome.insertBefore(selo, nome.firstChild);
+    }
+    corpo.appendChild(nome);
+
+    // ⭐ PROVA SOCIAL EM TODOS (Bryan, 16/09: "gostei, poderiamos adotar para
+    // todos"), DISCRETA: cinza, na fonte do rodape; verde so' com fogo. So'
+    // aparece com nota >= 90% e >= 100 vendas — vazio nao e' prova.
+    // "vendas na loja" = volume do PRODUTO somando vendedores (a pagina do
+    // AliExpress mostra "este vendedor: 2.000+" e o total separado).
+    // ⭐ UMA LINHA DE SINAIS acima do preco: "Promo · X% OFF" com a seta a`
+    // esquerda (vermelho da AliExpress; X% = a NOSSA queda), e o polegar com
+    // a % de avaliacoes positivas a` direita — compacto, como a propria loja
+    // mostra ("people gave it a positive review"). Decisao do Bryan, 16/09.
+    //
+    // ⛔ SEM VENDAS (o visitante nao confere) e SEM ESTRELA: a API da' so' o
+    // % positivo; "98%" nao vira "4.9" por conta nenhuma honesta.
+    // ⭐ SELO "RECORDE" (17/09/2026): hoje e' o menor preço de toda a nossa
+    // série, com >= 14 dias de radar. O produto ADQUIRE o selo no dia; some
+    // quando o preço sobe. É a âncora mais forte da esquerda.
+    var temRecorde = !!(p.recorde && p.recorde.dias);
+    var temPromo = !temRecorde && (p.queda || 0) >= 5;
+    var temNota = p.nota >= 90;
+    var temVendeu = !temRecorde && !temPromo && p.vendeu && p.vendeu[0] >= 20;
+    // ⭐ MERCADO LIVRE: a API nao da' vendas, da' VENDEDORES — um anuncio
+    // por vendedor, numero que a pessoa confere na pagina da loja. Piso 2:
+    // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
+    var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
+    var temFrete = !!p.frete_gratis;
+    // ⭐ ENVIO (18/09): Full = chega rapido; senao, de onde sai. So' o ML da'.
+    // ⚠️ 18/09: `de` tem que ser UF (2 letras) — o precos_agora de antes do
+    // reparo guarda um token da API no lugar, e token nao vira chip.
+    var temEnvio = !!(p.envio && (p.envio.full || /^[A-Z]{2}$/.test(p.envio.de || "")));
+    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete || temEnvio) {
+      var sinais = el("div", "sinais");
+      if (temRecorde) {
+        var rec = el("span", "recorde");
+        rec.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M4 2h8v3a4 4 0 0 1-8 0zM4 3H2v1.5A2.5 2.5 0 0 0 4.5 7M12 3h2v1.5A2.5 2.5 0 0 1 11.5 7M8 9v3M5.5 14h5"/></svg>' +
+          '<span>Recorde · menor em ' + p.recorde.dias + ' dias</span>';
+        rec.title = "hoje é o menor preço que eu já vi para este produto em " + p.recorde.dias + " dias de acompanhamento";
+        sinais.appendChild(rec);
+      }
+      // ⭐ sem Promo e sem vendas medidas, a ancora e' o que TODO produto tem:
+      // "conferido hoje as 19:00". Medicao que falta nao desqualifica o
+      // anuncio (Bryan, 16/09) — a regua da pagina e' o preco conferido.
+      // (bloco B, 18/09: "preço conferido X" saiu do cartao — e' telemetria
+      // nossa; vai pro title do preco, a um toque longo)
+      // ⭐ SEM PROMO, a ancora da esquerda e' "+792 vendidos desde 14/09":
+      // crescimento do volume da loja medido por NOS (piso 20, senao e'
+      // ruido). E' o numero de vendas "mais real" que o Bryan pediu de
+      // volta — nao briga com o "10.000+" da loja porque nao e' o total.
+      if (temVendeu) {
+        var vend = el("span", "vendeu", "+" + p.vendeu[0].toLocaleString("pt-BR") + " vendidos");
+        vend.title = "quanto o volume de vendas na loja cresceu desde " + p.vendeu[1] +
+          ", quando comecei a acompanhar este produto";
+        sinais.appendChild(vend);
+      }
+      // ⭐ "+2 vendedores desde 16/09" quando cresceu; "13 vendedores na
+      // loja" quando nao — nunca "vendidos", que no ML nao medimos.
+      if (temVendedores) {
+        var vs = p.vendedores;
+        var txt = vs[1] >= 1
+          ? "+" + vs[1] + (vs[1] === 1 ? " vendedor" : " vendedores") + " desde " + vs[2]
+          : vs[0] + " vendedores na loja";
+        var vd = el("span", "vendeu", txt);
+        vd.title = vs[1] >= 1
+          ? "quantos vendedores a mais anunciam este produto desde que eu acompanho"
+          : "quantos vendedores anunciam este produto no Mercado Livre agora";
+        sinais.appendChild(vd);
+      }
+      if (temPromo) {
+        var promo = el("span", "promo");
+        promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/></svg>' +
+          '<span>Promo ' + Math.round(p.queda) + '% OFF</span>';
+        promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
+        sinais.appendChild(promo);
+      }
+      // ⭐ FRETE GRATIS (18/09/2026, maquina de vendas #2): ENP, 4 fichas —
+      // "e' o que mais converte". Vem da reconferencia horaria do ML
+      // (anuncio mais barato). Ali/Awin: sem dado, sem chip — nunca se inventa.
+      if (temEnvio) {
+        var en = el("span", "frete envio", p.envio.full ? "Full · chega rápido" : "envio de " + p.envio.de);
+        en.title = p.envio.full
+          ? "anúncio no Mercado Envios Full: sai do centro do Mercado Livre, o mais rápido que a loja tem"
+          : "o anúncio mais barato sai de " + p.envio.de;
+        sinais.appendChild(en);
+      }
+      if (temFrete) {
+        var fr = el("span", "frete", "frete grátis");
+        fr.title = "o anúncio mais barato deste produto na loja está com frete grátis (conferido na última hora)";
+        sinais.appendChild(fr);
+      }
+      if (temNota) {
+        var nota = el("span", "nota" + (p.fogo ? " em-fogo" : ""));
+        // ⭐ estrela fina, de traco (nao o icone cheio): elegante, e nao
+        // promete "4.9" — o numero ao lado continua sendo o % positivo
+        nota.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>' +
+          '<span>' + Math.round(p.nota) + '%</span>';
+        nota.title = Math.round(p.nota) + "% de avaliações positivas na loja";
+        sinais.appendChild(nota);
+      }
+      corpo.appendChild(sinais);
+    }
+    var lp = el("div", "linha-preco");
+    // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
+    // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
+    // vendedor), no rodape (cortava o "no radar") e a direita do preco.
+    // Aqui ele le como "de onde vem", colado ao nome, e o preco fica limpo.
+    if (p.conferido) { lp.title = "preço conferido " + p.conferido; }
+    lp.appendChild(el("span", "preco", p.preco));
+    // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
+    // serie; sem ele, nao ha' riscado — e nao se inventa um.
+    if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }
+    corpo.appendChild(lp);
+    // ⭐ "JA' ESTEVE A": produto que subiu mas ainda esta' abaixo do maior que
+    // vimos. Discreto, na fonte do rodape, com a data — deixa a pessoa
+    // decidir esperar. Quem esta' no minimo ganha o "de" riscado, nao isto.
+    // ⭐ SELO "ESPERE" (17/09/2026): o cartao manda esperar. "espere · já
+    // esteve a R$ 34 há 6 dias" — a loja nunca diz isso; nós dizemos porque
+    // a série é nossa. Sem `ha` (página velha) cai na frase antiga.
+    if (p.ja_esteve && p.ja_esteve.preco) {
+      var quando = (typeof p.ja_esteve.ha === "number")
+        ? (p.ja_esteve.ha === 0 ? "hoje" : p.ja_esteve.ha === 1 ? "ontem" : "há " + p.ja_esteve.ha + " dias")
+        : p.ja_esteve.em;
+      var je = el("div", "ja-esteve espere");
+      je.appendChild(el("strong", null, "espere"));
+      // ⚠️ "R$" e o numero NUNCA se separam (Bryan viu "R$" numa linha e
+      // "128,99" na outra, 18/09): o preco vai num span sem quebra, e a
+      // linha quebra ANTES dele quando nao couber.
+      je.appendChild(document.createTextNode(" — já esteve a "));
+      je.appendChild(el("span", "nq", p.ja_esteve.preco));
+      je.appendChild(document.createTextNode(" " + quando));
+      je.title = "subiu, mas já esteve mais barato — o menor preço que eu mesmo vi, e quando";
+      corpo.appendChild(je);
+    }
+    // ⭐ SELO 1 (17/09/2026): o MESMO produto em outra loja, com a diferença.
+    // "no Mercado Livre R$ 49,90 · aqui R$ 12,00 mais barato" — ou o inverso,
+    // com link pro irmão: o cliente escolhe (prazo x preço), nós mostramos.
+    if (p.tambem_em && p.tambem_em.length) {
+      p.tambem_em.forEach(function (t) {
+        var te = el("div", "ja-esteve tambem-em");
+        var lk = document.createElement("a");
+        lk.href = t.link; lk.rel = "noopener sponsored";
+        lk.textContent = "no " + t.loja + " " + t.preco;
+        lk.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "irmao"); });
+        te.appendChild(lk);
+        var dif = Math.abs(t.dif || 0).toFixed(2).replace(".", ",");
+        if ((t.dif || 0) > 0.5) {
+          te.appendChild(document.createTextNode(" · "));
+          te.appendChild(el("strong", null, "aqui R$ " + dif + " mais barato"));
+        } else if ((t.dif || 0) < -0.5) {
+          te.appendChild(document.createTextNode(" · lá R$ " + dif + " mais barato"));
+        } else {
+          te.appendChild(document.createTextNode(" · mesmo preço"));
+        }
+        te.title = "o mesmo produto (mesma foto) anunciado em outra loja";
+        corpo.appendChild(te);
+      });
+    }
+    // ⭐ SELO "A LOJA DIZ" (17/09/2026): o "de" da loja ao lado do maior
+    // preço que NÓS vimos. Só nas externas (o feed traz o "de"), só com
+    // >= 3 dias de série, e nunca como riscado — é medição, não desconto.
+    if (p.de_inflado && p.de_inflado.loja) {
+      var di = el("div", "ja-esteve loja-diz");
+      di.appendChild(document.createTextNode("a loja diz de " + p.de_inflado.loja + " · "));
+      di.appendChild(el("strong", null, "nunca vimos acima de " + p.de_inflado.nosso));
+      di.appendChild(document.createTextNode(" em " + p.de_inflado.dias + " dias"));
+      di.title = "o preço 'de' que a loja anuncia, e o maior preço que eu mesmo vi neste produto";
+      corpo.appendChild(di);
+    }
+    // ⭐ SELO 2 "AVISE-ME QUANDO CAIR" (17/09/2026): abre o bot no Telegram
+    // com /start alerta_<id>; a nuvem colhe de hora em hora e avisa quando
+    // a série disparar. É o Keepa brasileiro. Sem BOT_ALERTA, sem botão.
+    if (BOT_ALERTA && p.id) {
+      var av = document.createElement("a");
+      av.className = "avise-me";
+      av.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id));
+      av.rel = "noopener";
+      // ⭐ sino em SVG, e o texto responde ao "espere": se ja' esteve mais
+      // barato, o pedido e' "avise-me se voltar a R$ X" (era o "nao compre"
+      // sem saida, MAESTROS_DESIGN §3.6)
+      var voltar = !!(p.ja_esteve && p.ja_esteve.preco);
+      if (voltar) { av.className += " longo"; }
+      av.innerHTML = SINO_SVG + '<span>' + (voltar
+        ? 'avise se voltar a <span class="nq">' + escapar(p.ja_esteve.preco) + '</span>' : 'avise-me se cair') + '</span>';
+      av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
+      av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
+      corpo.appendChild(av);
+      // ⭐ #3 (18/09): "N de olho neste preço" — o número REAL de quem pediu
+      // aviso (ENP: escassez só quando é verdade). Aparece a partir de 2.
+      if ((p.de_olho || 0) >= 2) {
+        var olho = el("div", "ja-esteve de-olho", p.de_olho + " pessoas de olho neste preço");
+        olho.title = "quantas pessoas pediram aviso de queda deste produto";
+        corpo.appendChild(olho);
+      }
+      // ⭐ consumível: além do aviso de queda, "lembrar em 30 dias" (ENP:
+      // reposição no tempo certo). Mesmo bot, /start alerta_<id>_repor30.
+      if (p.recorrente) {
+        var rp = document.createElement("a");
+        rp.className = "avise-me repor";
+        rp.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id)) + "_repor30";
+        rp.rel = "noopener";
+        rp.innerHTML = REPOR_SVG + '<span>lembrar de repor em 30 dias</span>';
+        rp.title = "eu te lembro no Telegram daqui a 30 dias, com o preço do dia";
+        rp.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
+        corpo.appendChild(rp);
+      }
+    }
+    // ⭐ O grafico entra DEPOIS do preco e ANTES do rodape: ele explica o
+    // numero que acabou de ser lido. Volta `null` quando nao ha' 3 pontos.
+    // ⭐ bloco B (18/09): o grafico so' quando ele diz algo (queda >= 5%);
+    // reto e' ornamento (YC). E "no radar ha' N dias" sai do cartao: e'
+    // telemetria nossa — fica no title do cartao inteiro.
+    if ((p.queda || 0) >= 5) {
+      var gr = grafico(p);
+      if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
+    }
+    a.title = (p.pontos >= 2
+      ? (p.dias <= 0 ? "no radar desde hoje"
+         : (p.dias === 1 ? "no radar há 1 dia" : "no radar há " + p.dias + " dias"))
+      : "achado agora") + (p.conferido ? " · preço conferido " + p.conferido : "");
+
+    a.appendChild(corpo);
+
+    // ⚠️ O UPSELL NAO ATRAPALHA O CLIQUE PRINCIPAL.
+    //
+    // Nada de modal antes de ir pra loja: isso e' atrito no unico momento
+    // em que a pessoa decidiu comprar. O link abre em OUTRA aba, entao a
+    // nossa pagina continua viva atras — e e' la' que o complemento
+    // aparece, pra quando ela voltar.
+    //
+    // ⚠️ E NAO E' 'produto relacionado' generico: e' do MESMO canal e
+    // custa no maximo METADE do que ela acabou de olhar. Um complemento
+    // mais caro que o principal nao e' complemento, e' outra decisao.
+    a.addEventListener("click", function () {
+      // ⚠️ CARTAO DE DENTRO DA SUGESTAO NAO GERA OUTRA SUGESTAO.
+      //
+      // E nao e' so' pra evitar recursao: `sugerir` REMOVE o bloco antigo, e
+      // o cartao clicado esta' dentro dele. Tirar o proprio elemento do DOM
+      // no meio do clique CANCELA a navegacao — o cartao simplesmente nao
+      // abria (medido no iPhone do Bryan, 14/09/2026).
+      // ⚠️ Guarda ANTES de sair: quando a pessoa voltar, a pagina recarrega
+      // do zero e a unica memoria que sobra e' esta.
+      try {
+        sessionStorage.setItem("ultimo", p.id || p.link);
+      } catch (e) { /* navegacao privada: sem upsell, e tudo bem */ }
+      if (a.closest("#junto")) { return; }
+    });
+    return a;
+  }
+
+  // ⚠️ AS PALAVRAS QUE NAO DIZEM NADA ficam de fora da conta. 'kit',
+  // 'conjunto' e 'para' aparecem em metade do catalogo e inflariam a
+  // semelhanca entre produtos que nao tem nada a ver.
+  var VAZIAS = ("kit conjunto jogo pacote unidades unidade para com sem "
+                + "peças pecas novo nova mini super multi").split(" ");
+
+  function palavras(t) {
+    return String(t || "").toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .split(/[^a-z0-9]+/)
+      .filter(function (w) { return w.length >= 4 && VAZIAS.indexOf(w) < 0; });
+  }
+
+  function parecidos(a, b) {
+    var A = palavras(a), B = palavras(b);
+    if (!A.length || !B.length) { return 0; }
+    var juntas = {}, comuns = 0;
+    A.forEach(function (w) { juntas[w] = 1; });
+    B.forEach(function (w) {
+      if (juntas[w] === 1) { comuns += 1; juntas[w] = 2; }
+      else { juntas[w] = juntas[w] || 1; }
+    });
+    var total = Object.keys(juntas).length;
+    return total ? comuns / total : 0;
+  }
+
+  function sugerir(card, base) {
+    // ⚠️ 'METADE DO PRECO' NAO EXISTE NESTE CATALOGO.
+    //
+    // A primeira versao exigia <= 50% do item clicado. Num catalogo onde
+    // quase tudo custa entre R$ 10 e R$ 20, isso pede um produto de R$ 6 —
+    // e o bloco NUNCA aparecia (medido no ar, em 14/09/2026, com um item de
+    // R$ 13,52: zero candidatos).
+    //
+    // ⭐ 20% mais barato E' o que da' a sensacao de 'ja que estou aqui': o
+    // suficiente pra parecer acrescimo, nao outra compra. E continua sendo
+    // sempre MAIS BARATO que o principal — complemento mais caro nao e'
+    // complemento.
+    // ⚠️ O TETO E' ARREDONDADO EM CENTAVOS. Sem isso, 13,52 x 0,8 da'
+    // 10,816 e o candidato de R$ 10,82 fica de fora por meio centavo — o
+    // bloco sumia e parecia que nao havia complemento nenhum (medido no ar).
+    var teto = Math.round(num(base.preco) * 80) / 100;
+    // ⚠️ COMPLEMENTO NAO E' SUBSTITUTO.
+    //
+    // A primeira versao sugeria 'Kit de maquiagem com potes e esponjas' pra
+    // quem abriu 'Conjunto de esponjas para maquiagem' — o MESMO produto com
+    // outro nome. Isso nao soma venda: faz a pessoa reconsiderar a que ela ja'
+    // tinha escolhido.
+    //
+    // ⭐ A medida e' de sobreposicao de palavras (Jaccard). Dois nomes que
+    // dividem metade do vocabulario falam da mesma coisa; complemento divide
+    // a AREA (que ja' esta' garantida) e pouco mais.
+    // ⭐ O JULGAMENTO DO MODELO VEM PRIMEIRO. Ele sabe que esponja combina
+    // com estojo e que pote combina com organizador — coisa que contagem de
+    // palavra nunca saberia. A regra de palavras fica como RESERVA, pro
+    // produto que ainda nao foi julgado.
+    var porId = {};
+    PRODUTOS.forEach(function (p) { porId[String(p.id)] = p; });
+    // ⚠️ QUANDO O MODELO JA' JULGOU, O TETO DE PRECO AFROUXA.
+    //
+    // Exigir 80% do valor E estar na lista julgada derrubava tudo: o
+    // complemento aprovado pelo Gemini quase sempre custa perto do
+    // principal, e o bloco simplesmente nao aparecia (medido em 14/09/2026
+    // — clique registrado, volta certa, e nenhuma sugestao).
+    //
+    // ⭐ O que fica de pe' e' 'mais barato que o que voce viu', que e' a
+    // promessa; os 80% continuam valendo pra regra de palavras, que nao tem
+    // julgamento nenhum pra se apoiar.
+    var escolhidos = (base.combina || []).map(function (id) {
+      return porId[String(id)];
+    }).filter(function (p) {
+      return p && p.link !== base.link && num(p.preco) > 0 &&
+             num(p.preco) < num(base.preco);
+    }).sort(function (a, b) { return num(a.preco) - num(b.preco); });
+    if (escolhidos.length) {
+      mostrarJuntos(card, escolhidos.slice(0, 2));
+      return;
+    }
+
+    var juntos = PRODUTOS.filter(function (p) {
+      return p.link !== base.link && p.canal === base.canal &&
+             num(p.preco) > 0 && num(p.preco) <= teto &&
+             parecidos(p.nome, base.nome) <= 0.25;
+    }).sort(function (a, b) {
+      // o mais barato entre os que mais cairam: barato chama o olho,
+      // queda medida sustenta a escolha
+      return (b.queda || 0) - (a.queda || 0) || num(a.preco) - num(b.preco);
+    }).slice(0, 2);
+
+    // ⚠️ SEM CANDIDATO, NAO INVENTA. Puxar de outro canal, ou produto mais
+    // caro, seria encher a tela por encher — e a pessoa acabou de sair.
+    if (!juntos.length) { return; }
+    mostrarJuntos(card, juntos);
+  }
+
+  function mostrarJuntos(card, juntos) {
+    var antigo = document.getElementById("junto");
+    if (antigo) { antigo.remove(); }
+
+    var caixa = el("div", "junto");
+    caixa.id = "junto";
+    var titulo = el("h3");
+    titulo.appendChild(el("span", "pulso"));
+    // ⚠️ NAO SE FALA DE CANAL AQUI. Quem abre o site mae nao precisa saber
+    // que existem cinco TikToks por tras — isso e' estrutura nossa, nao
+    // informacao util pra quem esta' comprando.
+    //
+    // ⚠️ E NAO SE ANUNCIA "mais barato": dizer isso sugere que havia algo
+    // mais barato guardado. O criterio de escolha continua sendo preco (e
+    // isso e' bom), mas o texto fala de COMBINACAO, que e' o motivo real de
+    // mostrar.
+    titulo.appendChild(el("span", null, "vai bem com o que você viu"));
+    var x = el("button", "fechar", "fechar");
+    x.type = "button";
+    x.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      caixa.remove();
+    });
+    titulo.appendChild(x);
+    caixa.appendChild(titulo);
+    var fila = el("div", "fila");
+    juntos.forEach(function (p) { fila.appendChild(montar(p)); });
+    caixa.appendChild(fila);
+    // ⚠️ SEM CARTAO (veio da linha viva do topo): o bloco entra na FRENTE da
+    // grade. Insistir em colocar 'depois do card' quebraria — e cair fora da
+    // tela seria pior que nao aparecer.
+    if (card) {
+      card.insertAdjacentElement("afterend", caixa);
+    } else {
+      grade.insertBefore(caixa, grade.firstChild);
+    }
+  }
+
+  // Um bloco titulado com a sua propria fila e o seu proprio "ver mais".
+  //
+  // ⚠️ A GRADE E' UM GRID CSS, e titulo e botao NAO sao cartoes: os dois
+  // levam `grid-column: 1/-1` pra ocupar a linha inteira. Sem isso o titulo
+  // vira uma coluna estreita ao lado do primeiro produto.
+  // ⭐ A CATEGORIA TEM ENDERECO. Sem isto havia UMA url pro catalogo inteiro
+  // e nao dava pra mandar ninguem direto pra uma prateleira — nem pela bio,
+  // nem pela descricao do video. Agora `/#calcados` abre ja' filtrado.
+  //
+  // ⛔ E O VALOR DA URL NUNCA E' ESCRITO NA PAGINA. Ele so' e' COMPARADO com
+  // as categorias que ja' existem nos produtos; o que nao casar e' ignorado e
+  // abre o catalogo normal. Endereco que vira texto na tela (`innerHTML`) e'
+  // porta de injecao — aqui ele nao chega nem perto do DOM.
+  //
+  // ⚠️ E isto nao esconde nada de ninguem: os produtos ja' estao todos no
+  // fonte da pagina. Tirar da lista principal e' decisao EDITORIAL, nao
+  // segredo — endereco "criptografado" nao protegeria nada e so' quebraria o
+  // link que a pessoa precisa ditar num video.
+  function daUrl() {
+    var h = "";
+    try {
+      h = normal(decodeURIComponent((location.hash || "").replace(/^#/, "")));
+    } catch (e) { return ""; }
+    if (!h) { return ""; }
+    var achado = "";
+    PRODUTOS.forEach(function (p) {
+      if (p.canal && normal(p.canal) === h) { achado = p.canal; }
+    });
+    // ⚠️ A EXTERNA AINDA NAO ESTA' EM PRODUTOS quando a pagina abre por
+    // `/#nike` — sem esta linha o endereco da categoria nao abriria nada.
+    Object.keys(EXTERNOS).forEach(function (c) {
+      if (normal(c) === h) { achado = c; }
+    });
+    return achado;
+  }
+
+  function guardarUrl() {
+    if (!history.replaceState) { return; }
+    try {
+      history.replaceState(null, "",
+        canal ? "#" + normal(canal) : location.pathname + location.search);
+    } catch (e) { /* endereco nao e' funcionalidade: falhar aqui nao quebra */ }
+  }
+
+  function bloco(titulo, itens, quanto, aoVerMais) {
+    if (!itens.length) { return; }
+    var h = el("h2", "bloco-titulo", titulo);
+    h.appendChild(el("span", "bloco-conta", String(itens.length)));
+    grade.appendChild(h);
+    var frag = document.createDocumentFragment();
+    itens.slice(0, quanto).forEach(function (p) {
+      frag.appendChild(montar(p));
+    });
+    grade.appendChild(frag);
+    if (itens.length > quanto) {
+      var falta = itens.length - quanto;
+      var mais = el("button", "ver-mais",
+        "ver mais " + Math.min(falta, passoBloco()) + " de " + falta);
+      mais.type = "button";
+      mais.addEventListener("click", aoVerMais);
+      grade.appendChild(mais);
+    }
+  }
+
+  // ⭐ BAIXA A CATEGORIA EXTERNA UMA VEZ e devolve os cartoes pra PRODUTOS.
+  //
+  // ⚠️ FALHA COM AVISO, nao com grade vazia: "Nada aqui com esse filtro"
+  // sobre uma categoria que anuncia 905 no menu seria mentira da pagina.
+  // Se o arquivo nao vier, a grade diz que nao veio e oferece tentar de novo.
+  //
+  // ⚠️ E CONFERE QUE VEIO JSON: o Pages devolve a PAGINA RAIZ com 200 pra
+  // caminho inexistente (medido em 14/09/2026 no /todos). `r.json()` estoura
+  // em HTML, e isso cai no mesmo aviso — que e' o comportamento certo.
+  function carregarExterno(nome, depois) {
+    if (EXTERNO_CARREGADO[nome]) { depois(); return; }
+    if (EXTERNO_CARREGADO[nome] === false) { return; } // ja' em voo
+    EXTERNO_CARREGADO[nome] = false;
+    grade.innerHTML = "";
+    var esp = el("div", "vazio");
+    esp.appendChild(el("strong", null, "Buscando " + nome + "…"));
+    grade.appendChild(esp);
+    fetch(EXTERNOS[nome].arquivo, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) { throw new Error("http " + r.status); }
+      return r.json();
+    }).then(function (j) {
+      var lista = (j && j.produtos) || [];
+      if (!lista.length) { throw new Error("arquivo sem produtos"); }
+      lista.forEach(function (p) { PRODUTOS.push(p); });
+      EXTERNO_CARREGADO[nome] = true;
+      montarChips();
+      depois();
+    }).catch(function (e) {
+      delete EXTERNO_CARREGADO[nome];
+      grade.innerHTML = "";
+      var v = el("div", "vazio");
+      v.appendChild(el("strong", null, "Não consegui carregar " + nome + "."));
+      v.appendChild(document.createElement("br"));
+      var b = el("button", "ver-mais", "tentar de novo");
+      b.type = "button";
+      b.addEventListener("click", function () { desenhar(); });
+      v.appendChild(b);
+      grade.appendChild(v);
+    });
+  }
+
+  function desenhar() {
+    // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)
+    var estatico = document.getElementById("indice-estatico");
+    if (estatico) { estatico.parentNode.removeChild(estatico); }
+    // ⛔ O DEFEITO (17/09/2026, celular do Bryan): "Clovis Calçados 5983" no
+    // menu LOJA e "0 achadinhos" na grade. O download da externa so'
+    // disparava pelo menu CATEGORIA; pelo menu Loja a pagina filtrava por
+    // `loja` numa lista onde a Clovis ainda nao tinha sido baixada. O nome
+    // da loja externa E' o nome da categoria (ver EXTERNOS): qualquer um
+    // dos dois menus dispara o download.
+    // ⭐ categoria = area: pode pedir VARIAS lojas externas de uma vez
+    var pendentes = [];
+    if (externa(loja) && !EXTERNO_CARREGADO[loja]) { pendentes.push(loja); }
+    if (canal) {
+      lojasDaCategoria(canal).forEach(function (n) {
+        if (!EXTERNO_CARREGADO[n] && pendentes.indexOf(n) < 0 && (!loja || loja === n)) { pendentes.push(n); }
+      });
+    }
+    if (pendentes.length) {
+      carregarExterno(pendentes[0], desenhar);
+      return;
+    }
+    // "externa abre pelo mais barato" vale pra LOJA externa; numa categoria
+    // mista (Casa = Ali + Kabum) manda a nota de vitrine, como no resto.
+    var ext = externa(loja) ? loja : "";
+    var f = FILTROS.filter(function (x) { return x.id === atual; })[0];
+    var termo = normal(busca.value.trim());
+    var lista = PRODUTOS.filter(function (p) {
+      if (!f.cabe(p)) { return false; }
+      if (canal && p.canal !== canal) { return false; }
+      if (loja && p.loja !== loja) { return false; }
+      // ⭐ A BUSCA CASA COM A CATEGORIA, e nao so' com o nome. Sem isto,
+      // digitar "calçados" devolvia VAZIO — os nomes sao "Tênis Nike Air
+      // Force 1", a palavra "calçado" nao aparece em nenhum deles. Quem
+      // digita o nome de uma prateleira espera a prateleira.
+      if (termo && normal(p.nome).indexOf(termo) < 0
+                && normal(p.canal || "").indexOf(termo) < 0) { return false; }
+      if (!visivel(p)) { return false; }
+      return true;
+    });
+    if (f.ordem) { lista = lista.slice().sort(f.ordem); }
+    // ⭐ A EXTERNA ABRE PELOS MAIS BARATOS — decisao do Bryan em 16/09/2026
+    // ("mais baratos primeiro comunica melhor com nosso publico"). O feed
+    // nao tem `vendas`, entao `ganho x vendas` e' zero pra todos e a ordem
+    // de "tudo" seria a do arquivo, que nao e' criterio nenhum.
+    // ⭐ desde 17/09/2026 a externa abre pela NOTA (Rende x Momento; a
+    // Confianca e' 0 nela ate' haver dado) e so' depois pelo mais barato.
+    // Antes abria pelo mais barato e a Clovis estreava com meia-calca.
+    // ⛔ 17/09, medido no ar: pela nota, a externa abria com o mais CARO da
+    // faixa (a regua dela hoje e' so' comissao x preco). Volta a regra do
+    // Bryan de 16/09 — MAIS BARATO PRIMEIRO; a regua decide quem ENTRA no
+    // bloco (engine/awin.cortar_bloco), a pagina ordena pelo preco.
+    if (ext && atual === "todos") {
+      lista = lista.slice().sort(function (a, b) {
+        return num(a.preco) - num(b.preco);
+      });
+    }
+    // ⭐ A VITRINE: na abertura (sem filtro, sem busca), o melhor do Mercado
+    // Livre vai pra 2a posicao, ao lado dos do Ali — decisao do Bryan em
+    // 16/09 ("a pagina principal e' nossa vitrine"). Quem marca e' o
+    // publicador (`marcar_vitrine_ml`); aqui so' se move UM cartao.
+    if (atual === "todos" && !canal && !loja && !termo) {
+      // ⭐ OS 10 PRIMEIROS (17/09/2026): 5 ate' R$ 99,90 + 5 livres,
+      // intercalados, escolhidos pelo publicador (`marcar_topo`). Teste de
+      // 30 dias medido por clique. Sem `topo` (pagina velha), nada muda.
+      var comTopo = lista.filter(function (p) { return typeof p.topo === "number"; });
+      if (comTopo.length) {
+        comTopo.sort(function (a, b) { return a.topo - b.topo; });
+        lista = comTopo.concat(lista.filter(function (p) { return typeof p.topo !== "number"; }));
+      }
+      var iv = -1;
+      lista.some(function (p, i) { if (p.vitrine) { iv = i; return true; } return false; });
+      if (iv > 1 && !comTopo.length) {
+        var v = lista[iv];
+        lista = lista.slice();
+        lista.splice(iv, 1);
+        lista.splice(1, 0, v);
+      }
+    }
+
+    grade.innerHTML = "";
+    if (!lista.length) {
+      var v = el("div", "vazio");
+      v.appendChild(el("strong", null, "Nada aqui com esse filtro."));
+      v.appendChild(document.createElement("br"));
+      v.appendChild(document.createTextNode(
+        "Tente outra palavra, ou volte pra Tudo."));
+      grade.appendChild(v);
+    } else if ((canal || loja) && lista.some(caroBloco) && lista.some(function (p) {
+      return !caroBloco(p);
+    })) {
+      // ⛔ DOIS BLOCOS, E SO' DENTRO DA CATEGORIA.
+      //
+      // ⭐ O corte e' o MESMO TETO que tira da vitrine — um numero, dois
+      // usos, nada de segundo limiar pra lembrar.
+      //
+      // ⚠️ E os titulos sao FACTUAIS de proposito. "Premium / Básico" foi
+      // recusado pelo Bryan em 15/09 com o argumento certo: "de marca" dizia
+      // o que a secao TEM, "básico" diria o que o produto E' — e diria isso
+      // pra 62 dos 63 itens do catalogo. Quem compra um organizador de R$ 11
+      // leria "voce esta' na prateleira basica". Preco nao ofende ninguem.
+      //
+      // ⚠️ E so' aparece quando os DOIS grupos existem. Categoria inteira
+      // barata mostraria um titulo "Ate' R$ 250" sobre a lista inteira e um
+      // bloco vazio embaixo — divisao que nao divide nada.
+      // ⭐ O BARATO VEM PRIMEIRO — decisao do Bryan em 15/09, e ela e'
+      // coerente com o topo da pagina: "Eu garimpo. Você paga menos." Abrir
+      // a categoria pelo caro contradiria a frase que a pessoa acabou de
+      // ler, mesmo dentro de uma prateleira de marca.
+      bloco(rotuloBloco(false), lista.filter(function (p) {
+              return !caroBloco(p);
+            }), mostrandoBaixo, function () {
+              mostrandoBaixo += passoBloco(); desenhar();
+            });
+      bloco(rotuloBloco(true), lista.filter(caroBloco),
+            mostrandoAlto, function () {
+              mostrandoAlto += passoBloco(); desenhar();
+            });
+    } else {
+      var pedaco = document.createDocumentFragment();
+      lista.slice(0, mostrando).forEach(function (p) {
+        pedaco.appendChild(montar(p));
+      });
+      grade.appendChild(pedaco);
+      // ⚠️ O BOTAO SO' APARECE SE HOUVER RESTO. Botao que nao faz nada ensina
+      // a pessoa a ignorar botao.
+      if (lista.length > mostrando) {
+        var falta = lista.length - mostrando;
+        var mais = el("button", "ver-mais",
+          "ver mais " + Math.min(falta, passoLista()) + " de " + falta);
+        mais.type = "button";
+        mais.addEventListener("click", function () {
+          mostrando += passoLista();
+  desenhar();
+        });
+        grade.appendChild(mais);
+      }
+    }
+    // ⚠️ A CONTAGEM E' DA LISTA NA TELA, sempre. Numero de cabecalho que nao
+    // bate com o que se ve' embaixo e' a mentira mais facil de cometer.
+    // ⭐ NA HOME, sem filtro, a conta e' do CATALOGO INTEIRO (Bryan, 18/09:
+    // "quero que seja a soma de todos os produtos que temos") — os das lojas
+    // externas ficam atras do menu Loja, mas sao achadinhos do mesmo jeito.
+    // Com filtro ou busca, volta a ser o que esta' na tela.
+    var semFiltro = !canal && !loja && !normal(busca.value.trim());
+    contagem.textContent = semFiltro ? "" : (lista.length === 1
+      ? "1 achadinho" : lista.length.toLocaleString("pt-BR") + " achadinhos");
+    contagem.style.display = semFiltro ? "none" : "";
+  }
+
+  // ⚠️ FECHAR AO TOCAR FORA. Sem isto o painel fica aberto por cima da
+  // lista e a pessoa nao encontra como sair — no telefone nao ha' Esc.
+  function fecharMenus() {
+    var abertos = document.querySelectorAll(".opcoes");
+    for (var i = 0; i < abertos.length; i++) { abertos[i].hidden = true; }
+    var bs = document.querySelectorAll(".escolha[aria-expanded='true']");
+    for (var j = 0; j < bs.length; j++) {
+      bs[j].setAttribute("aria-expanded", "false");
+    }
+  }
+  document.addEventListener("click", fecharMenus);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { fecharMenus(); }
+  });
+
+  function montarChips() {
+    var caixa = document.getElementById("chips");
+    // limpar antes de remontar: sem isto cada troca ANEXA controles novos e
+    // os antigos ficam na tela com o estado velho.
+    caixa.innerHTML = "";
+    caixa.classList.remove("tres");
+
+    // DOIS SELETORES, UMA LINHA.
+    //
+    // Duas tentativas erradas antes desta, e vale saber por que:
+    //   1. fila de chips com ROLAGEM HORIZONTAL — escondia metade das
+    //      opcoes; pra achar "Fitness" a pessoa arrastava as cegas.
+    //   2. chips quebrando em LINHAS — tudo visivel, mas viraram CINCO
+    //      linhas e empurraram os produtos pra fora da tela.
+    //
+    // O seletor nativo resolve os dois: ocupa UMA linha e, ao tocar, o iOS
+    // abre a roda do sistema com todas as opcoes de uma vez. O filtro e'
+    // acessorio; o produto e' o principal e nao pode sair da primeira tela.
+    //
+    // A contagem vai DENTRO da opcao ("Beleza (13)"): responde antes da
+    // escolha o que a pessoa so' descobriria depois.
+    function seletor(titulo, opcoes, valorAtual, aoMudar, temFiltro) {
+      var cx = el("div", "escolha-caixa");
+      var sel = opcoes.filter(function (o) { return o.id === valorAtual; })[0]
+                || opcoes[0];
+      // ⭐ ROTULO FIXO + VALOR, e nao so' o valor. "Tudo (62)" sozinho nao
+      // diz sobre O QUE aquele menu decide; "Preço: tudo" diz. E' o padrao
+      // de loja seria — o menu se apresenta antes de mostrar a escolha.
+      var b = el("button", "escolha");
+      var fixo = el("span", "rotulo-fixo", titulo);
+      var val = el("span", "valor-escolhido", sel.rotulo);
+      b.appendChild(fixo);
+      b.appendChild(val);
+      if (sel.n != null) { b.appendChild(el("span", "n", String(sel.n))); }
+      b.type = "button";
+      b.setAttribute("aria-expanded", "false");
+      b.setAttribute("aria-haspopup", "listbox");
+      b.setAttribute("data-ativo", temFiltro ? "sim" : "nao");
+      b.setAttribute("data-icone",
+        titulo === "Preço" ? "preco" : (titulo === "Loja" ? "loja" : "categoria"));
+
+      var painel = el("div", "opcoes");
+      painel.setAttribute("role", "listbox");
+      painel.hidden = true;
+      opcoes.forEach(function (o) {
+        var op = el("button", "opcao", o.rotulo);
+        op.type = "button";
+        op.setAttribute("role", "option");
+        op.setAttribute("aria-selected", String(o.id === valorAtual));
+        if (o.n != null) { op.appendChild(el("span", "n", String(o.n))); }
+        op.addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          fecharMenus();
+          aoMudar(o.id);
+        });
+        painel.appendChild(op);
+      });
+
+      b.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        var vaiAbrir = painel.hidden;
+        // fecha o OUTRO menu antes: dois paineis abertos se sobrepoem e a
+        // pessoa toca no que nao esta' vendo.
+        fecharMenus();
+        if (vaiAbrir) {
+          painel.hidden = false;
+          b.setAttribute("aria-expanded", "true");
+        }
+      });
+
+      cx.appendChild(b);
+      cx.appendChild(painel);
+      return cx;
+    }
+
+    var deEstado = FILTROS.map(function (f) {
+      return {
+        id: f.id, rotulo: f.rotulo,
+        // ⚠️ MESMO RECORTE DA GRADE. Contagem que conta o que a grade
+        // nao desenha e' a mentira mais facil de cometer aqui — a pessoa
+        // le' "tudo 63" e conta 57 cartoes.
+        n: PRODUTOS.filter(function (p) {
+          return f.cabe(p) && (!canal || p.canal === canal)
+              && (!loja || p.loja === loja) && visivel(p);
+        }).length
+      };
+    });
+    // ⭐ 18/09: Preco vira FILA DE CHIPS (mock v5 aprovado); um toque troca
+    // a ordem. Categoria e Loja seguem como menus abaixo.
+    var fila = el("div", "fila-chips");
+    deEstado.forEach(function (o) {
+      var c = el("button", "chip-ordem", o.rotulo);
+      c.type = "button";
+      c.setAttribute("aria-pressed", String(o.id === atual));
+      if (o.n != null && o.id !== "todos") { c.appendChild(el("span", "n", String(o.n))); }
+      c.addEventListener("click", function () {
+        atual = o.id;
+        mostrando = passoLista();
+        montarChips();
+        desenhar();
+      });
+      fila.appendChild(c);
+    });
+    caixa.appendChild(fila);
+
+    // ⭐ ORDEM DOS MENUS (Bryan, 18/09): primeiro quem mais VENDE. Venda
+    // ainda nao ha' pra medir; o sinal que temos e' o clique de 30 dias
+    // (Supabase), recalculado a cada publicacao — uma vez por dia, nao a
+    // cada visita: menu que muda de lugar a cada abertura quebra o "eu vi
+    // isso ali ontem" (YC: padroes estabelecidos). Empate: quantidade.
+    var canais = {}, canaisCliques = {};
+    PRODUTOS.forEach(function (p) {
+      if (p.canal) {
+        canais[p.canal] = (canais[p.canal] || 0) + 1;
+        canaisCliques[p.canal] = (canaisCliques[p.canal] || 0) + (p.cliques_30 || 0);
+      }
+    });
+    // ⚠️ A EXTERNA ENTRA NO MENU ANTES DE SER BAIXADA, com a contagem que o
+    // publicador mediu — e' o unico lugar onde a pessoa descobre que ela
+    // existe. Depois de baixada, a contagem passa a ser a real (de PRODUTOS),
+    // e as duas tem de bater; se nao baterem, o publicador e' quem errou.
+    // ⭐ 18/09: as AREAS das lojas externas ainda nao baixadas entram pelo
+    // indice (`cats`); as ja' baixadas estao em PRODUTOS e contaram acima.
+    // Nunca o nome da loja aqui — loja e' o menu Loja.
+    Object.keys(EXTERNOS).forEach(function (c) {
+      if (EXTERNO_CARREGADO[c]) { return; }
+      var cats = EXTERNOS[c].cats || {}, ccl = EXTERNOS[c].cats_cliques || {};
+      Object.keys(cats).forEach(function (k) {
+        canais[k] = (canais[k] || 0) + cats[k];
+        canaisCliques[k] = (canaisCliques[k] || 0) + (ccl[k] || 0);
+      });
+    });
+    var areas = Object.keys(canais).sort(function (a, b) {
+      return ((canaisCliques[b] || 0) - (canaisCliques[a] || 0)) || (canais[b] - canais[a]);
+    });
+    if (areas.length) {
+      // ⚠️ "todas" NAO CONTA A EXTERNA: ela nunca aparece no rolar de
+      // "todas", e o numero pularia de 142 pra 1.047 no clique que a baixou
+      // — sobre a mesma grade de 142.
+      var deArea = [{ id: "", rotulo: "Todas", n: PRODUTOS.filter(function (p) {
+        return !externo(p);
+      }).length }];
+      areas.forEach(function (c) {
+        deArea.push({ id: c, rotulo: c, n: canais[c] });
+      });
+      caixa.appendChild(seletor("Categoria", deArea, canal, function (v) {
+        canal = v;
+        // ⚠️ os dois blocos recomecam do zero a cada troca: herdar "ver
+        // mais" da categoria anterior abre a proxima ja' esticada.
+        mostrando = passoLista();
+        mostrandoAlto = passoBloco();
+        mostrandoBaixo = passoBloco();
+        guardarUrl();
+        montarChips();
+        desenhar();
+      }, canal !== ""));
+    }
+
+    // ⭐ LOJA — mesmo recorte da grade na contagem (categoria escolhida
+    // conta so' dentro dela). Externa ainda nao baixada conta pelo indice.
+    var lojas = {}, lojasCliques = {};
+    PRODUTOS.forEach(function (p) {
+      if (!p.loja) { return; }
+      if (canal && p.canal !== canal) { return; }
+      lojas[p.loja] = (lojas[p.loja] || 0) + 1;
+      lojasCliques[p.loja] = (lojasCliques[p.loja] || 0) + (p.cliques_30 || 0);
+    });
+    // ⭐ loja externa ainda nao baixada: entra com a contagem da AREA escolhida
+    // (canal e' area desde 18/09, nunca o nome da loja)
+    Object.keys(EXTERNOS).forEach(function (c) {
+      if (lojas[c] || EXTERNO_CARREGADO[c]) { return; }
+      var n = canal ? ((EXTERNOS[c].cats || {})[canal] || 0) : (EXTERNOS[c].n || 0);
+      if (!n) { return; }
+      lojas[c] = n;
+      lojasCliques[c] = canal ? ((EXTERNOS[c].cats_cliques || {})[canal] || 0) : (EXTERNOS[c].cliques || 0);
+    });
+    var nomesLoja = Object.keys(lojas).sort(function (a, b) {
+      return ((lojasCliques[b] || 0) - (lojasCliques[a] || 0)) || (lojas[b] - lojas[a]);
+    });
+    if (nomesLoja.length > 1 || loja) {
+      var deLoja = [{ id: "", rotulo: "Todas", n: Object.keys(lojas).reduce(function (t, k) { return t + lojas[k]; }, 0) }];
+      nomesLoja.forEach(function (l) { deLoja.push({ id: l, rotulo: l, n: lojas[l] }); });
+      caixa.appendChild(seletor("Loja", deLoja, loja, function (v) {
+        loja = v;
+        mostrando = passoLista();
+        mostrandoAlto = passoBloco();
+        mostrandoBaixo = passoBloco();
+        montarChips();
+        desenhar();
+      }, loja !== ""));
+    }
+    marcarTres();
+  }
+
+  function marcarTres() {
+    var caixa = document.getElementById("chips");
+    caixa.classList.toggle("tres", caixa.querySelectorAll(".escolha-caixa").length >= 3);
+  }
+
+  function reais(v) {
+    return "R$ " + v.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  // ⭐ O MULTOMETRO (Bryan, 16/09/2026): "como o multometro que calcula as
+  // multas de uma cidade, o nosso calcula a economia total que o site ja'
+  // gerou". Decisao dele: o volume e' o do RADAR (queda encontrada), nao de
+  // venda — "mudar o multometro no futuro vai pegar mal". Fica assim.
+  //
+  // ⭐ Por produto: maior preco visto - menor preco visto. So' sobe, por
+  // construcao (ver `economia_radar` no publicador). A linha e' o total dia a
+  // dia. O rotulo diz o que e': "que o radar ja' encontrou de queda".
+  // ⭐ O MOSTRADOR do console — ver o CSS de `.prova`. Tres numeros
+  // (vigiados, abaixo do maior, R$ de queda medida) e a base com o tempo
+  // ate' a proxima conferencia. "Vendidos nas lojas" saiu (Bryan, 18/09:
+  // numero da loja, nao nosso).
+  function montarProva() {
+    var caixa = document.getElementById("prova");
+    if (!PRODUTOS.length) { return; }
+    var caiu = PRODUTOS.filter(function (p) { return (p.queda || 0) >= 5 && !externo(p); }).length;
+    Object.keys(EXTERNOS).forEach(function (n) {
+      if (EXTERNO_CARREGADO[n]) {
+        caiu += PRODUTOS.filter(function (p) { return p.loja === n && (p.queda || 0) >= 5 && (p.queda || 0) <= 60; }).length;
+      } else { caiu += EXTERNOS[n].caiu || 0; }
+    });
+    var total = PRODUTOS.length;
+    Object.keys(EXTERNOS).forEach(function (n) { total += EXTERNOS[n].n || 0; });
+    var r = (ECONOMIA || {}).radar || {};
+    function cela(numero, rotulo, pico, titulo) {
+      var c = el("div", "cela" + (pico ? " pico" : ""));
+      c.appendChild(el("strong", "n", numero));
+      c.appendChild(document.createTextNode(rotulo));
+      if (titulo) { c.title = titulo; }
+      caixa.appendChild(c);
+    }
+    cela(total.toLocaleString("pt-BR"), "vigiados", false, "todos os produtos de pé no catálogo, contando as lojas parceiras");
+    cela(String(caiu), "abaixo do maior", false, "produtos que hoje estão pelo menos 5% abaixo do maior preço que eu mesmo vi");
+    if (r.total > 0) { cela("R$ " + Math.round(r.total).toLocaleString("pt-BR"), "queda medida", true,
+      "queda encontrada pelo radar em " + r.produtos + " produtos, contra o preço que eu vi — não o de/por da loja"); }
+    var t = ULTIMA_CONFERENCIA ? Date.parse(ULTIMA_CONFERENCIA) : 0;
+    var fim = el("div", "fim");
+    var min = t ? Math.max(0, Math.round((Date.now() - t) / 60000)) : -1;
+    var txt = min < 0 ? "DE HORA EM HORA"
+      : min < 1 ? "CONFERIDO AGORA · PRÓXIMA EM 60 MIN"
+      : min < 60 ? "CONFERIDO HÁ " + min + " MIN · PRÓXIMA EM " + (60 - min)
+      : min < 2160 ? "CONFERIDO HÁ " + Math.round(min / 60) + " H" : "CONFERIDO HÁ " + Math.round(min / 1440) + " DIAS";
+    fim.appendChild(document.createTextNode(txt));
+    var barra = el("i");
+    fim.appendChild(barra);
+    if (t) { fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"); }
+    caixa.appendChild(fim);
+    if (min >= 0 && min < 60) {
+      requestAnimationFrame(function () { barra.style.width = (min / 60 * 100).toFixed(1) + "%"; });
+    }
+    grudar();
+  }
+  function montarEconomia() { /* mora no mostrador (montarProva) */ }
+
+  // ⭐ o console gruda no topo com o mostrador ja' fora da tela: top
+  // negativo = altura do mostrador + 8 de folga. Recalcula ao redimensionar.
+  function grudar() {
+    var c = document.getElementById("console"), p = document.getElementById("prova");
+    if (!c || !p) { return; }
+    c.style.top = "-" + (p.offsetHeight + 8) + "px";
+    c.classList.add("grudado");
+  }
+  window.addEventListener("resize", grudar);
+
+  // ⭐ o unico movimento: os numeros contam uma vez (700 ms). Some com
+  // prefers-reduced-motion.
+  function contarNumeros() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    document.querySelectorAll("#prova .n").forEach(function (e) {
+      var alvo = e.textContent;
+      var m = alvo.match(/^(R\$ )?([\d.]+)$/);
+      if (!m) { return; }
+      var n = parseInt(m[2].replace(/\./g, ""), 10);
+      if (!(n > 0)) { return; }
+      var t0 = null;
+      function passo(ts) {
+        if (!t0) { t0 = ts; }
+        var k = Math.min(1, (ts - t0) / 700);
+        e.textContent = (m[1] || "") + Math.round(n * (1 - Math.pow(1 - k, 3))).toLocaleString("pt-BR");
+        if (k < 1) { requestAnimationFrame(passo); } else { e.textContent = alvo; }
+      }
+      requestAnimationFrame(passo);
+    });
+  }
+
+  // ⚠️ UM RELOGIO SO'. Dois `setTimeout` escrevendo no mesmo paragrafo
+  // embaralham o texto — letra de um produto no meio do outro.
+  var relogio = null;
+  var vivoAtual = null;
+
+  function escapar(t) {
+    var d = document.createElement("div");
+    d.textContent = t;
+    return d.innerHTML;
+  }
+
+  function animarVivo() {
+    var alvo = document.getElementById("vivo");
+    if (!alvo.dataset.mede) {
+      alvo.dataset.mede = "1";
+      alvo.addEventListener("click", function () { anotarClique(vivoAtual, "topo"); });
+    }
+    var aNome = document.getElementById("vivo_nome");
+    var aPreco = document.getElementById("vivo_preco");
+    var aDica = document.getElementById("vivo_dica");
+    if (relogio) { clearTimeout(relogio); relogio = null; }
+
+    // ⭐ OS QUE MAIS CAIRAM PRIMEIRO: se so' da' tempo de ver um, que seja
+    // o que melhor prova a promessa da pagina.
+    // ⛔ O TOPO E' A CARA DA PAGINA e obedece ao teto ANTES de ordenar.
+    // Ele pesca "os 8 que mais cairam" — e um tenis de marca com 30% de
+    // queda entraria sozinho, na primeira tela, que e' exatamente o que a
+    // regra existe pra evitar. Filtrar aqui, e nao so' na grade.
+    var lista = PRODUTOS.filter(function (p) {
+      return !caro(p) && !soNoSegmento(p);
+    }).sort(function (a, b) {
+      return (b.queda || 0) - (a.queda || 0);
+    }).slice(0, 8);
+    if (!lista.length) { alvo.hidden = true; return; }
+
+    var calmo = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var i = 0;
+
+    function proximo() {
+      var p = lista[i % lista.length];
+      i += 1;
+      vivoAtual = p;
+      alvo.href = p.link;
+      aNome.classList.remove("pronto");
+      aPreco.innerHTML = "";
+      var curto = String(p.nome || "").trim();
+
+      function fecharPreco() {
+        aPreco.innerHTML = escapar(p.preco) +
+          (p.antes ? "<s>" + escapar(p.antes) + "</s>" : "") +
+          ((p.queda || 0) >= 5
+            ? '<span class="pct">↓ ' + Math.round(p.queda) + '%</span>'
+            : "");
+        aPreco.classList.remove("entra");
+        void aPreco.offsetWidth;
+        aPreco.classList.add("entra");
+      }
+      if (calmo) {
+        aNome.textContent = curto;
+        aNome.classList.add("pronto");
+        fecharPreco();
+        relogio = setTimeout(proximo, 3400);
+        return;
+      }
+      var n = 0;
+      (function digitar() {
+        n += 1;
+        aNome.innerHTML = escapar(curto.slice(0, n)) + '<span class="cursor"></span>';
+        if (n < curto.length) {
+          relogio = setTimeout(digitar, 24);
+          return;
+        }
+        aNome.textContent = curto;
+        aNome.classList.add("pronto");
+        fecharPreco();
+        relogio = setTimeout(proximo, 2600);
+      })();
+    }
+    proximo();
+
+    // ⚠️ O DEDO PARA O CARROSSEL, e ele volta sozinho em 6s. Sem parar, o
+    // produto podia rodar entre o toque e o clique e a pessoa abriria um
+    // item que nao escolheu. Sem voltar, um encostao congelava a linha.
+    var retomar = null;
+    ["pointerdown", "touchstart"].forEach(function (ev) {
+      alvo.addEventListener(ev, function () {
+        if (relogio) { clearTimeout(relogio); relogio = null; }
+        if (retomar) { clearTimeout(retomar); }
+        retomar = setTimeout(function () {
+          if (!relogio) { animarVivo(); }
+        }, 6000);
+      }, { passive: true });
+    });
+    alvo.addEventListener("click", function () {
+      if (!vivoAtual) { return; }
+      try {
+        sessionStorage.setItem("ultimo", vivoAtual.id || vivoAtual.link);
+      } catch (e) { /* sem sessao: segue sem upsell */ }
+    });
+  }
+
+  if (BRASAO) {
+    var img = document.createElement("img");
+    img.src = BRASAO;
+    img.alt = "Achadinho Total";
+    document.getElementById("logo").appendChild(img);
+  }
+  // ⚠️ O UPSELL ACONTECE NA VOLTA, e nao na saida.
+  //
+  // Antes ele contava com a nossa aba viva atras — e como a aba nova nem
+  // abria, ele nunca era visto no celular. Agora o gatilho e' a pessoa
+  // ESTAR aqui de novo: ela viu o produto na loja e voltou.
+  //
+  // ⚠️ `pageshow` e nao `load`: voltando pelo botao 'voltar' o Safari
+  // restaura a pagina do cache (bfcache) e `load` NAO dispara.
+  window.addEventListener("pageshow", function () {
+    var id;
+    try {
+      id = sessionStorage.getItem("ultimo");
+      sessionStorage.removeItem("ultimo");
+    } catch (e) { return; }
+    if (!id) { return; }
+    var base = PRODUTOS.filter(function (p) {
+      return String(p.id) === String(id) || p.link === id;
+    })[0];
+    if (!base) { return; }
+    // espera a grade existir antes de tentar encaixar o bloco
+    setTimeout(function () { sugerir(null, base); }, 60);
+  });
+
+  // ⚠️ ANTES de montar os controles: `visivel()` consulta `canal`, entao
+  // ler a url depois faria a primeira pintura sair com o recorte errado.
+  // ⭐ 18/09: `#nike` e' LOJA (menu Loja), `#casa` e' categoria — o hash
+  // continua abrindo os dois, cada um no seu menu.
+  function aplicarUrl(v) {
+    if (externa(v)) { loja = v; canal = ""; } else { canal = v; }
+  }
+  aplicarUrl(daUrl());
+  mostrando = passoLista();
+  mostrandoAlto = passoBloco();
+  mostrandoBaixo = passoBloco();
+
+  animarVivo();
+  montarProva();
+  contarNumeros();
+  montarChips();
+  desenhar();
+
+  // ⭐ O BOTAO VOLTAR TAMBEM. Quem entrou por `/#calcados`, filtrou outra
+  // coisa e apertou voltar espera a prateleira de novo — nao o catalogo.
+  window.addEventListener("hashchange", function () {
+    var novo = daUrl();
+    if (novo === canal || novo === loja) { return; }
+    aplicarUrl(novo);
+    mostrando = passoLista();
+    mostrandoAlto = passoBloco();
+    mostrandoBaixo = passoBloco();
+    montarChips();
+    desenhar();
+  });
+  // ⚠️ BUSCAR REINICIA A CONTAGEM. Sem isto, quem ja' tinha clicado em "ver
+  // mais" e depois digita fica com um limite alto colado numa lista curta —
+  // e o oposto tambem: acha 80 resultados e ve' 30 sem entender por que.
+  busca.addEventListener("input", function () {
+    mostrando = passoLista();
+    desenhar();
+    anotarBusca();
+  });
+
+  // ⭐ O QUE AS PESSOAS PROCURAM E NAO ACHAM — ordem do Bryan em 16/09/2026:
+  // "meu amigo pesquisou macbook e nao tinha nada; eu queria que a gente
+  // soubesse e o proximo radar ja' viesse com o item". A pagina so' ANOTA
+  // (termo, quantos apareceram, categoria); quem procura fonte e' o motor.
+  //
+  // ⚠️ MESMO CONTRATO da bio: so' INSERT com a chave publica, que as
+  // politicas do banco deixam somar e nao deixam ler. Sem IP, sem
+  // identificador. E medir NUNCA derruba a pagina: sem rede, sem chave, o
+  // catalogo abre igual.
+  //
+  // ⚠️ SO' QUANDO A PESSOA PARA DE DIGITAR (900 ms), e uma vez por termo:
+  // registrar cada tecla gravaria "m", "ma", "mac"... e o motor sairia
+  // procurando fonte pra prefixo.
+  var SUPABASE = {
+    url: "https://lwtqfwkfcknzyyzmuymg.supabase.co",
+    anon: "sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy"
+  };
+  // ⭐ CLIQUE POR PRODUTO (regua v2, 17/09/2026): o EPC medido pra TODAS as
+  // lojas — Ali e ML so' contam por canal. Mesmo contrato da busca: id do
+  // produto, loja e onde clicou; nada de quem. `keepalive` porque a pagina
+  // esta' saindo pra loja; medir NUNCA segura o clique.
+  function anotarClique(p, origem) {
+    if (!p || !p.id || !SUPABASE.url || !SUPABASE.anon) { return; }
+    try {
+      fetch(SUPABASE.url + "/rest/v1/clique_produto", {
+        method: "POST",
+        headers: { "apikey": SUPABASE.anon,
+                   "Authorization": "Bearer " + SUPABASE.anon,
+                   "Content-Type": "application/json",
+                   "Prefer": "return=minimal" },
+        body: JSON.stringify({ produto: String(p.id).slice(0, 64),
+                               loja: String(p.loja || "").slice(0, 40),
+                               origem: origem,
+                               de: ORIGEM_DE || null }),
+        keepalive: true
+      }).catch(function () { /* medir nunca derruba a pagina */ });
+    } catch (e) { /* idem */ }
+  }
+  var buscaTimer = null;
+  var ultimaAnotada = "";
+  function anotarBusca() {
+    if (buscaTimer) { clearTimeout(buscaTimer); }
+    buscaTimer = setTimeout(function () {
+      var termo = busca.value.trim().slice(0, 80);
+      if (termo.length < 2 || termo === ultimaAnotada) { return; }
+      ultimaAnotada = termo;
+      var n = document.querySelectorAll("#grade .item").length;
+      if (!SUPABASE.url || !SUPABASE.anon) { return; }
+      try {
+        fetch(SUPABASE.url + "/rest/v1/busca", {
+          method: "POST",
+          headers: { "apikey": SUPABASE.anon,
+                     "Authorization": "Bearer " + SUPABASE.anon,
+                     "Content-Type": "application/json",
+                     "Prefer": "return=minimal" },
+          body: JSON.stringify({ termo: termo, resultados: n,
+                                 categoria: canal || null }),
+          keepalive: true
+        }).catch(function () { /* medir nunca derruba a pagina */ });
+      } catch (e) { /* idem */ }
+    }, 900);
+  }
+})();
+</script>

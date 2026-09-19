@@ -108,11 +108,15 @@
        verdade, um toque de azul; cinza escuro a noite, claro de manha". O
        material e' NEUTRO: branco translucido com um sopro frio, sombra
        difusa e neutra (flutua), ouro so' na marca e no selo de queda. */
-    --vidro: rgba(244,246,250,.62);
-    --vidro-forte: rgba(244,246,250,.72);
-    --vidro-blur: blur(22px) saturate(160%);
-    --vidro-borda: linear-gradient(135deg, rgba(20,25,40,.10), rgba(255,255,255,1) 50%, rgba(20,25,40,.10));
-    --vidro-sombra: 0 18px 50px -12px rgba(30,30,40,.20), 0 2px 6px rgba(30,30,40,.06);
+    /* 20/09 (Bryan, barra de URL do Safari): "a translucidez parece vidro
+       independente do fundo". Receita: MUITO desfoque + saturacao, pouca
+       tinta (28%) com um sopro azul, leve clareamento (brightness), sem fio
+       de contorno — o que define a forma e' a sombra curta e o brilho de topo. */
+    --vidro: rgba(236,242,252,.30);
+    --vidro-forte: rgba(236,242,252,.42);
+    --vidro-blur: blur(34px) saturate(190%) brightness(1.06);
+    --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.95) 50%, rgba(255,255,255,.55));
+    --vidro-sombra: 0 10px 30px -10px rgba(30,40,60,.22), 0 1px 3px rgba(30,40,60,.06);
     /* receita DEM (Framer University): highlight interno no topo Y=2 e na
        base Y=-2, blur 0, branco 35%; mais um aro de 1px e a sombra de baixo */
     --vidro-luz: inset 0 2px 0 -1px rgba(255,255,255,.35), inset 0 -2px 0 -1px rgba(255,255,255,.35),
@@ -125,7 +129,7 @@
       --fundo: #0f0e13; --caixa: #191823; --painel: #08080b;
       --ouro: #F0B62E;
       /* noite: o escuro original (Bryan: "aquela cor do inicio"); vidro fume */
-      --vidro: rgba(255,255,255,.08); --vidro-forte: rgba(255,255,255,.12);
+      --vidro: rgba(120,140,180,.14); --vidro-forte: rgba(120,140,180,.20);
       --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.28) 50%, rgba(255,255,255,.06));
       --vidro-sombra: 0 18px 50px -10px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.25);
       --vidro-luz: inset 0 2px 0 -1px rgba(255,255,255,.12), inset 0 -2px 0 -1px rgba(255,255,255,.08),
@@ -139,7 +143,7 @@
      e' um sopro — manchas cinza-azuladas a 4-6%, grandes e desfocadas, que
      so' o vidro revela (o corpo da pagina continua lendo como branco). */
   .luz {
-    position: fixed; inset: -10%; z-index: -1; pointer-events: none; display: block;
+    position: fixed; inset: -10%; z-index: -1; pointer-events: none; display: none;
     background: radial-gradient(40% 30% at 22% 18%, rgba(120,140,175,.10), transparent 70%),
                 radial-gradient(38% 30% at 80% 34%, rgba(150,170,200,.09), transparent 70%),
                 radial-gradient(50% 34% at 50% 78%, rgba(120,140,175,.08), transparent 70%),
@@ -157,7 +161,7 @@
      por mask no ::before, sem elemento extra. Firefox sem backdrop: solido. */
   .vidro {
     position: relative;
-    background-image: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 45%, rgba(200,208,222,.10));
+    background-image: linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,0) 50%);
     background-color: var(--vidro);
     backdrop-filter: var(--vidro-blur); -webkit-backdrop-filter: var(--vidro-blur);
     box-shadow: var(--vidro-luz), var(--vidro-sombra);
@@ -177,13 +181,13 @@
     /* ⭐ ARO REFRATIVO (19/09, "parecer agua / 3D"): o que passa por baixo da
        borda fica mais desfocado, mais claro e mais saturado do que no
        centro — e' a lente. So' os 14px externos, via mask. */
-    backdrop-filter: blur(10px) saturate(1.4); -webkit-backdrop-filter: blur(10px) saturate(1.4);
-    padding: 10px;
+    backdrop-filter: blur(6px) saturate(1.2); -webkit-backdrop-filter: blur(6px) saturate(1.2);
+    padding: 6px;
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
     /* a dispersao: um fio frio por fora e um fio quente por dentro do aro */
-    box-shadow: inset 0 0 0 1px rgba(140,200,255,.14), inset 0 0 0 2px rgba(255,255,255,.18), inset 0 0 0 3px rgba(255,190,140,.05);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
     /* e o especular que segue o rolar/inclinacao */
     background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.28), transparent 70%);
   }
@@ -378,10 +382,10 @@
   .abas a { background: none !important; box-shadow: none !important; }  /* 19/09: aba nao e' vidro dentro do vidro (halo em volta da casinha) */
   .abas a.on { background: var(--tinta) !important; color: #fff; }
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
-    background-color: rgba(238,241,247,.72);
-    background-image: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.15) 55%, rgba(200,208,222,.18));
-    box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(20,25,40,.06), inset 0 0 0 1px rgba(20,25,40,.07),
-                0 6px 16px -8px rgba(20,25,40,.22), 0 1px 2px rgba(20,25,40,.06);
+    background-color: rgba(236,242,252,.34);
+    background-image: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08) 60%);
+    backdrop-filter: blur(24px) saturate(180%) brightness(1.05); -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 6px 16px -8px rgba(30,40,60,.22), 0 1px 2px rgba(30,40,60,.05);
     color: var(--tinta);
   }
   .chip-ordem[aria-pressed="true"], .abas a.on {
@@ -2860,9 +2864,11 @@
 <script type="module">
 (function () {
   if (!window.IntersectionObserver) { return; }
-  var menosMov = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (menosMov && location.search.indexOf("gl=1") < 0) { return; }
-  var ligado = null;   // a vitrine que esta' com a lente
+  // 20/09 (Bryan, fotos): a laje 3D mostrava uma faixa cinza (face de cima
+  // refletindo) e espelhava pedacos da foto — pior que a placa em vidro CSS
+  // sobre a foto, que e' onde o vidro CSS mais brilha. Fica guardada: ?v3=1.
+  if (location.search.indexOf("v3=1") < 0) { return; }
+  var ligado = null;
   function tentar() {
     var a = document.querySelector("#vitrine .vitrine");
     if (!a || a === ligado) { return; }

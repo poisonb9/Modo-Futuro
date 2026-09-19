@@ -2623,9 +2623,9 @@
       " float r=K<0.?min(R.x,R.y)*.5:K;float d=sdb(q,R*.5,r);",
       " float e=smoothstep(0.,-min(R.y*.35,22.*A/14.),d);float borda=1.-e;",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
-      " vec2 n=normalize(g+1e-5);float curva=pow(borda,2.2);",
-      " vec2 ref=n*curva*.26;",
-      " float k=1.+curva*2.5;vec3 col;col.r=amostra(u-ref*1.00,k).r;col.g=amostra(u-ref*1.05,k).g;col.b=amostra(u-ref*1.11,k).b;",
+      " vec2 n=normalize(g+1e-5);float t=clamp(borda,0.,1.);float curva=1.-sqrt(1.-t*t);",
+      " vec2 ref=n*curva*.16*min(R.x,R.y)/R;",
+      " float k=1.+curva*4.;vec3 col;col.r=amostra(u-ref*1.00,k).r;col.g=amostra(u-ref*1.05,k).g;col.b=amostra(u-ref*1.11,k).b;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.08+D*.12);col=mix(col,vec3(1.),curva*.28*(1.-D));",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
@@ -2654,7 +2654,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
       var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
-      var dpr = Math.min(window.devicePixelRatio || 1, 2) * 0.5, ultimo = 0, visivel = true;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2), ultimo = 0, visivel = true;
       el.insertBefore(cv, el.firstChild); el.classList.add("com-espelho"); el.__espelho = true;
       if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(el); }
       var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;

@@ -135,7 +135,24 @@
   }
   /* ⭐ A LUZ ATRAS DO VIDRO (regra de ouro do acervo: sem luz atras, o vidro
      some). Duas luzes douradas fixas e suaves — gradiente, nao imagem. */
-  .luz { display: none; }  /* 19/09: fundo liso; a transparencia mostra o conteudo, nao uma pintura */
+  /* 19/09 (teste com o Bryan): o vidro precisa de ALGO atras. Nao e' pintura:
+     e' um sopro — manchas cinza-azuladas a 4-6%, grandes e desfocadas, que
+     so' o vidro revela (o corpo da pagina continua lendo como branco). */
+  .luz {
+    position: fixed; inset: -10%; z-index: -1; pointer-events: none; display: block;
+    background: radial-gradient(40% 30% at 22% 18%, rgba(120,140,175,.10), transparent 70%),
+                radial-gradient(38% 30% at 80% 34%, rgba(150,170,200,.09), transparent 70%),
+                radial-gradient(50% 34% at 50% 78%, rgba(120,140,175,.08), transparent 70%),
+                radial-gradient(30% 24% at 10% 90%, rgba(170,180,200,.08), transparent 70%);
+    filter: blur(40px);
+  }
+  @media (prefers-color-scheme: dark) {
+    .luz {
+      background: radial-gradient(40% 30% at 22% 18%, rgba(120,140,175,.14), transparent 70%),
+                  radial-gradient(38% 30% at 80% 34%, rgba(150,170,200,.12), transparent 70%),
+                  radial-gradient(50% 34% at 50% 78%, rgba(120,140,175,.10), transparent 70%);
+    }
+  }
   /* o vidro como classe unica; a borda de luz (3 paradas, receita DEM) vem
      por mask no ::before, sem elemento extra. Firefox sem backdrop: solido. */
   .vidro {

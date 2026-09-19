@@ -307,7 +307,10 @@
      ou com reduced-motion, fica o vidro CSS. (MAESTROS_LIQUID_GLASS §3) */
   .console > .gl { position: absolute; inset: 0; border-radius: inherit; z-index: 0; pointer-events: none; display: block; width: 100%; height: 100%; }
   .console > :not(.gl) { position: relative; z-index: 1; }
-  .console.com-gl { background-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }  /* pai = .faixa, que vai ate' o rodape */
+  /* 19/09 (Bryan: "quero o shader E a transparencia"): o canvas e' uma lamina
+     translucida (alpha parcial) POR CIMA do backdrop CSS — o conteudo passa
+     desfocado por baixo e o shader poe a refracao, o aro e o especular. */
+  .console.com-gl { background-color: transparent; }  /* pai = .faixa, que vai ate' o rodape */
   /* o MOSTRADOR: poco rebaixado no vidro, 3 celas com fios, numero sobre
      rotulo, base com a linha do tempo ate' a proxima conferencia */
   .prova {
@@ -2520,7 +2523,7 @@
       " float sp=pow(max(dot(normalize(vec3(n*borda,1.)),ld),0.),18.)*borda;",
       " float top=smoothstep(.0,.08,1.-u.y)*smoothstep(1.,.85,1.-u.y);",
       " col+=vec3(1.)*(sp*.9+top*.10+gota*.25+curva*.08);",
-      " float a=step(d,0.);gl_FragColor=vec4(col*a,a);}"
+      " float a=step(d,0.)*clamp(.30+D*.12+sp*.6+curva*.35+gota*.35+top*.3,0.,.9);gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function sh(t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; }
     var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);

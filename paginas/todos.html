@@ -2621,17 +2621,17 @@
       "void main(){",
       " vec2 u=vec2(v.x,1.-v.y);vec2 q=(u-.5)*R;",
       " float r=K<0.?min(R.x,R.y)*.5:K;float d=sdb(q,R*.5,r);",
-      " float e=smoothstep(0.,-min(R.y*.45,40.),d);float borda=1.-e;",
+      " float e=smoothstep(0.,-min(R.y*.35,22.*A/14.),d);float borda=1.-e;",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
-      " vec2 n=normalize(g+1e-5);float curva=pow(borda,1.5);",
-      " vec2 ref=n*curva*.11;",
-      " vec3 col;col.r=amostra(u-ref*1.00).r;col.g=amostra(u-ref*1.06).g;col.b=amostra(u-ref*1.14).b;",
+      " vec2 n=normalize(g+1e-5);float curva=pow(borda,2.2);",
+      " vec2 ref=n*curva*.26;",
+      " vec3 col;col.r=amostra(u-ref*1.00).r;col.g=amostra(u-ref*1.05).g;col.b=amostra(u-ref*1.11).b;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
-      " col=mix(col,tinta,.16+D*.10+curva*.10);",
+      " col=mix(col,tinta,.08+D*.12);col=mix(col,vec3(1.),curva*.28*(1.-D));",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
-      " float sp=pow(max(dot(normalize(vec3(n*curva,1.)),ld),0.),24.)*borda;",
+      " float sp=pow(max(dot(normalize(vec3(n*curva,1.)),ld),0.),30.)*borda;",
       " float top=smoothstep(.0,.10,1.-u.y)*smoothstep(1.,.80,1.-u.y);",
-      " col+=vec3(1.)*(sp*.7+top*.10+curva*.06);",
+      " col+=vec3(1.)*(sp*.45);",
       " float a=step(d,0.);gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function ligar(el, raio) {
@@ -2707,7 +2707,7 @@
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
         gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
-        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 14 * dpr);
+        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 9 * dpr);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
       requestAnimationFrame(quadro);

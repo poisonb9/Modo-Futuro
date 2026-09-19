@@ -1,5 +1,9 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 19/09 (Bryan: "risco preto na ilha do iPhone"): a cor da barra do Safari
+     e' a do fundo da pagina, nos dois temas; viewport-fit=cover pinta ate' a ilha -->
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9fc">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0e13">
 <title>Achadinho Total</title>
 <!-- ⚠️ O NOME QUE O IPHONE SALVA NA TELA DE INICIO NAO E' O <title>.
      Sem `apple-mobile-web-app-title` o iOS pega o <title> inteiro, corta
@@ -142,7 +146,7 @@
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
   @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
   * { box-sizing: border-box; }
-  html { overflow-x: clip; }
+  html { overflow-x: clip; background: var(--fundo); }
   body {
     margin: 0; overflow-x: clip;
     background: var(--fundo); color: var(--tinta);
@@ -406,19 +410,42 @@
   /* ⚠️ largura pelo CONTEUDO (min = a caixa): a 375 px o painel de 110 px
      cortava o numero ("AliExpress 1|") e quebrava "caiu de preco" em tres
      linhas (Bryan, 16/09). O ultimo seletor abre ancorado a` direita. */
+  /* ⭐ PARTE 5 (Liquid Glass, 19/09/2026): o menu e' uma FOLHA de vidro que
+     sobe de baixo (sheet do iOS), com escurecimento atras. Nao empurra a
+     lista (regra antiga: painel sobreposto), e no celular e' o gesto que a
+     pessoa ja' conhece. No desktop largo continua um painel ancorado. */
   .opcoes {
-    position: absolute; top: calc(100% + 6px); left: 0; z-index: 40;
-    min-width: 100%; width: max-content; max-width: min(260px, calc(100vw - 32px));
-    background: var(--caixa); border: 1px solid var(--linha);
-    border-radius: 14px; padding: 5px; overflow: hidden;
-    box-shadow: 0 14px 34px rgba(0,0,0,.16);
+    position: fixed; left: 8px; right: 8px; bottom: 0; z-index: 60;
+    max-height: 70vh; overflow: auto; -webkit-overflow-scrolling: touch;
+    border-radius: 24px 24px 0 0; padding: 14px 8px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--vidro-forte); backdrop-filter: var(--vidro-blur); -webkit-backdrop-filter: var(--vidro-blur);
+    box-shadow: var(--vidro-luz), 0 -12px 40px rgba(60,45,10,.18);
+    animation: subir .28s cubic-bezier(.2,.8,.2,1);
+  }
+  .opcoes::before {
+    content: ""; display: block; width: 36px; height: 4px; border-radius: 2px;
+    background: rgba(0,0,0,.18); margin: 0 auto 10px;
+  }
+  @keyframes subir { from { transform: translate3d(0, 24px, 0); opacity: 0; } to { transform: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .opcoes { animation: none; } }
+  /* so' escurece: blur de tela inteira em cima de cartoes com blur trava o Safari */
+  .escurece { position: fixed; inset: 0; z-index: 55; background: rgba(20,19,26,.32); }
+  @media (min-width: 700px) {
+    .opcoes {
+      position: absolute; top: calc(100% + 6px); left: 0; right: auto; bottom: auto; z-index: 40;
+      min-width: 100%; width: max-content; max-width: min(260px, calc(100vw - 32px));
+      border-radius: 16px; padding: 6px; animation: none; max-height: none;
+    }
+    .opcoes::before { display: none; }
+    .escurece { display: none; }
   }
   .opcao {
     display: flex; align-items: center; gap: 8px; width: 100%;
     border: 0; background: none; cursor: pointer; text-align: left;
-    color: var(--tinta); border-radius: 10px; padding: 9px 11px;
-    font: 500 13.5px/1.2 Poppins, sans-serif; white-space: nowrap;
+    color: var(--tinta); border-radius: 12px; padding: 12px 12px;
+    font: 500 15px/1.2 Poppins, sans-serif; white-space: nowrap;
   }
+  @media (min-width: 700px) { .opcao { padding: 9px 11px; font-size: 13.5px; } }
   .escolha-caixa:last-child .opcoes { left: auto; right: 0; }
   .opcao:active { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
   .opcao[aria-selected="true"] { font-weight: 700; }
@@ -515,7 +542,10 @@
      sobre um fundo neutro — a moldura e' a mesma em toda foto, seja qual
      for o fundo que o lojista usou. */
   .foto { background: #fff; }
-  .foto img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; box-sizing: border-box; }
+  /* 19/09 (Bryan: "ta cortando as quinas de fotos quadradas"): a foto
+     fica com folga dentro do poco e com raio proprio menor que o do cartao —
+     o cartao recorta o poco, nunca a foto. */
+  .foto img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 10px; box-sizing: border-box; border-radius: 14px; }
   .foto:not(.ok) { background: var(--linha); animation: esqueleto 1.6s ease-in-out infinite; }
   @keyframes esqueleto { 50% { opacity: .55; } }
   .foto::before {
@@ -637,6 +667,10 @@
   @supports not (backdrop-filter: blur(1px)) { .corpo { background: var(--caixa); } }
   .nome { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
   .linha-preco { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  /* a estrela fica na MESMA linha do preco (a direita); o "de" riscado desce
+     pra linha de baixo quando ha' estrela — nunca os tres disputando */
+  .linha-preco .nota.na-linha { margin-left: auto; align-self: center; }
+  .linha-preco .nota.na-linha ~ .de { flex-basis: 100%; }
   /* ⚠️ O PRECO E' TINTA CHEIA. Ele ja' e' o maior e o mais pesado do
      cartao — nao precisa de cor tambem, e com cor ele empatava com o
      painel de prova. */
@@ -673,10 +707,16 @@
   /* o involucro reserva 4 px a` direita: o ponto fica em cima do fim da
      linha e nunca e' cortado pela borda do cartao */
   .serie-wrap { position: relative; margin-top: 2px; padding-right: 4px; }
+  /* 19/09 (Bryan: "texto embaixo bugado"): as duas pontas nao podem se
+     encostar. Fio de separacao, gap, cada ponta sem quebra; se nao couber,
+     a direita desce pra segunda linha alinhada a` direita. */
   .serie-wrap .escala {
-    display: flex; justify-content: space-between; margin-top: 3px;
-    font: 500 11px/1.2 Poppins, sans-serif; color: var(--fraco);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2px 10px; margin-top: 4px;
+    font: 500 10.5px/1.3 Poppins, sans-serif; color: var(--fraco);
   }
+  .serie-wrap .escala .nq { white-space: nowrap; }
+  .serie-wrap .escala .nq:last-child { margin-left: auto; text-align: right; }
+  .serie-wrap .escala .nq.ok { color: var(--verde); font-weight: 600; }
   .serie-wrap .agora {
     position: absolute; width: 5px; height: 5px; border-radius: 50%;
     background: var(--fraco); transform: translate(-50%, -50%);
@@ -1168,9 +1208,11 @@
       // VEREDITO — "menor que eu vi" quando o preco de agora e' o piso da
       // serie, senao quanto ainda esta' acima do piso. Preco nunca quebra linha.
       var pAgora = vals[vals.length - 1];
-      esc.appendChild(el("span", "nq", "há " + p.dias + " dias: " + reais(vals[0])));
-      esc.appendChild(el("span", "nq", pAgora <= menor + 0.005 ? "menor que eu vi ✓"
-        : reais(pAgora - menor) + " acima do menor"));
+      // 19/09 (Bryan): o preco de "ha N dias" e' redundante com o riscado — sai
+      esc.appendChild(el("span", "nq", "há " + p.dias + " dias"));
+      var noMenor = pAgora <= menor + 0.005;
+      esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""), noMenor ? "menor que eu vi ✓"
+        : "+" + reais(pAgora - menor) + " do menor"));
       wrap.appendChild(esc);
     }
     return wrap;
@@ -1411,6 +1453,9 @@
         fr.title = "o anúncio mais barato deste produto na loja está com frete grátis (conferido na última hora)";
         sinais.appendChild(fr);
       }
+      // ⭐ 19/09 (Bryan: "o valor pode ficar alinhado com a estrela"): a
+      // estrela nao fica nos sinais — vai pra LINHA DO PRECO, a direita.
+      var notaPraLinha = null;
       if (temNota) {
         var nota = el("span", "nota" + (p.fogo ? " em-fogo" : ""));
         // ⭐ estrela fina, de traco (nao o icone cheio): elegante, e nao
@@ -1418,9 +1463,9 @@
         nota.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>' +
           '<span>' + Math.round(p.nota) + '%</span>';
         nota.title = Math.round(p.nota) + "% de avaliações positivas na loja";
-        sinais.appendChild(nota);
+        notaPraLinha = nota;
       }
-      corpo.appendChild(sinais);
+      if (sinais.childNodes.length) { corpo.appendChild(sinais); }
     }
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
@@ -1431,6 +1476,8 @@
     lp.appendChild(el("span", "preco", p.preco));
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
+    // a estrela entra ANTES do "de": preco + estrela na 1a linha, "de" na 2a
+    if (typeof notaPraLinha !== "undefined" && notaPraLinha) { notaPraLinha.classList.add("na-linha"); lp.appendChild(notaPraLinha); }
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }
     corpo.appendChild(lp);
     // ⭐ "JA' ESTEVE A": produto que subiu mas ainda esta' abaixo do maior que
@@ -1988,6 +2035,8 @@
   // ⚠️ FECHAR AO TOCAR FORA. Sem isto o painel fica aberto por cima da
   // lista e a pessoa nao encontra como sair — no telefone nao ha' Esc.
   function fecharMenus() {
+    var esc = document.getElementById("escurece");
+    if (esc) { esc.remove(); }
     var abertos = document.querySelectorAll(".opcoes");
     for (var i = 0; i < abertos.length; i++) { abertos[i].hidden = true; }
     var bs = document.querySelectorAll(".escolha[aria-expanded='true']");
@@ -2006,6 +2055,8 @@
     // os antigos ficam na tela com o estado velho.
     caixa.innerHTML = "";
     caixa.classList.remove("tres");
+    // folhas que foram pro <body> (celular) morrem junto com os menus antigos
+    document.querySelectorAll("body > .opcoes").forEach(function (o) { o.remove(); });
 
     // DOIS SELETORES, UMA LINHA.
     //
@@ -2065,8 +2116,16 @@
         // pessoa toca no que nao esta' vendo.
         fecharMenus();
         if (vaiAbrir) {
+          // ⛔ MEDIDO 19/09: `backdrop-filter` no console vira containing
+          // block de `position: fixed` — a folha abria DENTRO do console
+          // (188 px, top negativo). No celular ela vai pro <body>.
+          if (window.innerWidth < 700 && painel.parentNode !== document.body) { document.body.appendChild(painel); }
           painel.hidden = false;
           b.setAttribute("aria-expanded", "true");
+          // a folha sobe com escurecimento atras; tocar fora fecha
+          var esc = el("div", "escurece"); esc.id = "escurece";
+          esc.addEventListener("click", function (e2) { e2.stopPropagation(); fecharMenus(); });
+          document.body.appendChild(esc);
         }
       });
 

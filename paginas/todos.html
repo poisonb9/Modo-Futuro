@@ -84,14 +84,63 @@
     --painel: #17161d;
     --verde: #16a34a;
     --mono: "JetBrains Mono", ui-monospace, monospace;
+    /* ⭐ O MATERIAL — Liquid Glass Safari-safe (MAESTROS_LIQUID_GLASS.md §2).
+       Uma classe `.vidro` usa estes tokens; nada de refracao SVG (nao
+       renderiza no Safari, medido no acervo). */
+    --vidro: rgba(255,255,255,.55);
+    --vidro-forte: rgba(255,255,255,.72);
+    --vidro-blur: blur(24px) saturate(160%);
+    --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.95) 50%, rgba(255,255,255,.08));
+    --vidro-sombra: 0 12px 40px rgba(60,45,10,.14);
+    --vidro-luz: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(0,0,0,.05),
+                 inset -1px -1px 1px -1px rgba(255,255,255,.7), inset 1px 1px 1px -1px rgba(255,255,255,.7);
+    --fio: rgba(0,0,0,.07);
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --tinta: #f4f2f9; --fraco: #a5a1b4; --linha: #2b2733;
       --fundo: #0f0e13; --caixa: #191823; --painel: #08080b;
       --ouro: #F0B62E;
+      --vidro: rgba(30,28,36,.6); --vidro-forte: rgba(30,28,36,.8);
+      --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.35) 50%, rgba(255,255,255,.04));
+      --vidro-sombra: 0 12px 40px rgba(0,0,0,.45);
+      --vidro-luz: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.3);
+      --fio: rgba(255,255,255,.08);
     }
   }
+  /* ⭐ A LUZ ATRAS DO VIDRO (regra de ouro do acervo: sem luz atras, o vidro
+     some). Duas luzes douradas fixas e suaves — gradiente, nao imagem. */
+  .luz {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(55% 40% at 15% 8%, rgba(242,201,76,.42), transparent 70%),
+                radial-gradient(45% 35% at 90% 30%, rgba(255,236,190,.55), transparent 70%),
+                radial-gradient(60% 40% at 50% 100%, rgba(200,144,26,.18), transparent 70%);
+  }
+  @media (prefers-color-scheme: dark) { .luz { opacity: .45; } }
+  /* o vidro como classe unica; a borda de luz (3 paradas, receita DEM) vem
+     por mask no ::before, sem elemento extra. Firefox sem backdrop: solido. */
+  .vidro {
+    position: relative; background: var(--vidro);
+    backdrop-filter: var(--vidro-blur); -webkit-backdrop-filter: var(--vidro-blur);
+    box-shadow: var(--vidro-luz), var(--vidro-sombra);
+  }
+  .vidro::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+    background: var(--vidro-borda);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  /* ⭐ A LUZ QUE SE MOVE: um reflexo especular cuja posicao segue o rolar da
+     pagina (e a inclinacao do iPhone, via `--luz-x/--luz-y` no JS). E' o
+     "3D fluido" sem WebGL. Some com prefers-reduced-motion. */
+  .vidro::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.35), transparent 70%);
+    mix-blend-mode: soft-light; transition: background-position .2s;
+  }
+  @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
+  @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
   * { box-sizing: border-box; }
   html { overflow-x: clip; }
   body {
@@ -204,19 +253,7 @@
      busca, no chip ativo e no numero-pico; mono so' em numero. Liquid Glass
      como efeito ESPECIFICO: vidro sobre uma luz dourada centrada — sem luz
      atras, o vidro nao aparece (Impeccable: glass nao e' decoracao). */
-  .console {
-    position: relative; margin: 16px 0 0; text-align: left; z-index: 5;
-    border-radius: 24px; padding: 8px;
-    background: color-mix(in srgb, var(--caixa) 55%, transparent);
-    backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%);
-    border: 1px solid color-mix(in srgb, var(--caixa) 95%, transparent);
-    box-shadow: inset 0 1px 0 var(--caixa), inset 0 -1px 0 rgba(0,0,0,.05), 0 16px 40px rgba(60,45,10,.14);
-  }
-  .console::before {
-    content: ""; position: absolute; inset: -24px 8px -24px; border-radius: 48px; z-index: -1;
-    background: radial-gradient(70% 80% at 50% 40%, rgba(242,201,76,.45), rgba(242,201,76,.12) 55%, transparent 75%);
-    filter: blur(22px); pointer-events: none;
-  }
+  .console { margin: 12px 0 0; text-align: left; z-index: 5; border-radius: 24px; padding: 8px; }
   /* gruda no topo com o mostrador ja' escondido: `top` negativo = altura do
      mostrador (medida em JS, `grudar`). Assim so' busca + chips ficam fixos. */
   .console.grudado { position: sticky; }  /* pai = .faixa, que vai ate' o rodape */
@@ -224,20 +261,19 @@
      rotulo, base com a linha do tempo ate' a proxima conferencia */
   .prova {
     display: grid; grid-template-columns: 1fr 1fr 1fr; margin: 0 0 8px; border-radius: 16px;
-    background: color-mix(in srgb, var(--caixa) 45%, transparent);
-    border: 1px solid color-mix(in srgb, var(--caixa) 80%, transparent);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
+    background: rgba(255,255,255,.35); box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
   }
+  @media (prefers-color-scheme: dark) { .prova { background: rgba(0,0,0,.25); } }
   .prova .cela {
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
     padding: 12px 6px 10px; text-align: center;
     font: 600 10px/1.2 Poppins, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--fraco);
   }
-  .prova .cela + .cela { border-left: 1px solid rgba(0,0,0,.07); }
+  .prova .cela + .cela { border-left: 1px solid var(--fio); }
   .prova .n { font: 700 19px/1 var(--mono); color: var(--tinta); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
   .prova .pico .n { color: var(--ouro); }
   .prova .fim {
-    grid-column: 1 / -1; border-top: 1px solid rgba(0,0,0,.07); padding: 8px 8px 10px; text-align: center;
+    grid-column: 1 / -1; border-top: 1px solid var(--fio); padding: 8px 8px 10px; text-align: center;
     font: 600 10px/1 var(--mono); letter-spacing: .1em; color: var(--fraco);
     position: relative; overflow: hidden; border-radius: 0 0 16px 16px;
   }
@@ -252,7 +288,7 @@
   .ferramentas { position: relative; }
   .busca-caixa {
     display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 16px; border-radius: 16px;
-    background: var(--caixa); border: 1px solid rgba(0,0,0,.06); box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    background: var(--vidro-forte); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(0,0,0,.04);
   }
   .busca-caixa svg { width: 20px; height: 20px; flex: 0 0 20px; color: var(--ouro); }
   .busca {
@@ -267,10 +303,12 @@
   .chip-ordem {
     flex: 0 0 auto; height: 36px; display: inline-flex; align-items: center; gap: 6px;
     font: 600 13px/1 Poppins, sans-serif; padding: 0 14px; border-radius: 12px;
-    border: 1px solid rgba(0,0,0,.06); background: color-mix(in srgb, var(--caixa) 70%, transparent);
+    border: 0; background: var(--vidro-forte); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
     color: var(--tinta); white-space: nowrap; cursor: pointer;
+    transition: transform .15s cubic-bezier(.2,.8,.2,1);
   }
-  .chip-ordem[aria-pressed="true"] { background: var(--ouro-claro); border-color: transparent; color: #17161d; }
+  .chip-ordem:active { transform: scale(.96); }
+  .chip-ordem[aria-pressed="true"] { background: var(--ouro-claro); color: #17161d; box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 4px 12px rgba(200,144,26,.35); }
   .chip-ordem .n { font: 600 12px var(--mono); color: var(--fraco); }
   .chip-ordem[aria-pressed="true"] .n { color: rgba(23,22,29,.65); }
   .busca::placeholder { color: var(--fraco); }
@@ -316,8 +354,8 @@
   .escolha-caixa { position: relative; flex: 1 1 0; min-width: 0; }
   .escolha {
     width: 100%; text-align: left;
-    border: 1px solid var(--linha); background: var(--caixa);
-    color: var(--tinta); border-radius: 999px;
+    border: 0; background: var(--vidro-forte); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+    color: var(--tinta); border-radius: 12px;
     padding: 9px 30px 9px 14px;
     font: 600 13px/1 Poppins, sans-serif; cursor: pointer;
     text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
@@ -668,6 +706,7 @@
   }
 </style>
 
+<div class="luz" aria-hidden="true"></div>
 <div class="faixa">
   <header>
     <span class="marca-logo" id="logo"></span>
@@ -690,7 +729,7 @@
   <!-- ⭐ O CONSOLE (18/09/2026, aprovado pelo Bryan no mock v5): prova +
        busca + chips numa placa de vidro so'. Ao rolar, a placa gruda no
        topo com o mostrador ja' fora da tela (top negativo, ver `grudar`). -->
-  <div class="console" id="console">
+  <div class="console vidro" id="console">
     <div class="prova" id="prova"><div class="economia" id="economia" hidden></div></div>
     <div class="ferramentas">
       <label class="busca-caixa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l5.5 5.5"/></svg><input class="busca" id="busca" type="search"
@@ -2128,6 +2167,31 @@
 
   // ⭐ o console gruda no topo com o mostrador ja' fora da tela: top
   // negativo = altura do mostrador + 8 de folga. Recalcula ao redimensionar.
+  // ⭐ A LUZ QUE SE MOVE (MAESTROS_LIQUID_GLASS §3): o reflexo do vidro
+  // segue o rolar e, no iPhone, a inclinacao. So' muda duas variaveis CSS;
+  // o resto e' o ::after de `.vidro`. Sem WebGL, sem custo.
+  (function luzViva() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var raiz = document.documentElement, gx = 0, gy = 0, agendado = false;
+    function pinta() {
+      agendado = false;
+      var s = Math.min(1, (window.scrollY || 0) / 600);
+      raiz.style.setProperty("--luz-x", (30 + s * 40 + gx * 25).toFixed(1) + "%");
+      raiz.style.setProperty("--luz-y", (0 + s * 60 + gy * 25).toFixed(1) + "%");
+    }
+    function pede() { if (!agendado) { agendado = true; requestAnimationFrame(pinta); } }
+    window.addEventListener("scroll", pede, { passive: true });
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", function (e) {
+        if (e.gamma == null) { return; }
+        gx = Math.max(-1, Math.min(1, e.gamma / 45));
+        gy = Math.max(-1, Math.min(1, (e.beta - 45) / 45));
+        pede();
+      }, { passive: true });
+    }
+    pinta();
+  })();
+
   function grudar() {
     var c = document.getElementById("console"), p = document.getElementById("prova");
     if (!c || !p) { return; }

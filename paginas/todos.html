@@ -2642,10 +2642,10 @@
       " float borda=1.-x;",
       " vec3 col=amostra(clamp(uu,vec2(.002),vec2(.998)),1.);",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
-      " col=mix(col,tinta,.10+D*.12);",
+      " col=mix(col,tinta,.05+D*.10);",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
       " float sp=pow(max(dot(N,ld),0.),40.)*borda;",
-      " col+=vec3(1.)*(sp*.5+borda*.12*(1.-D));",
+      " col+=vec3(1.)*(sp*.45+borda*.05*(1.-D));",
       " float a=step(d,0.);gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function ligar(el, raio) {
@@ -2688,7 +2688,6 @@
         for (var i = 0; i < alvos.length; i++) {
           var b = alvos[i].getBoundingClientRect();
           if (b.bottom < r.top || b.top > r.bottom || b.right < r.left || b.left > r.right) { continue; }
-          houve = true;
           if (alvos[i].tagName === "IMG") { continue; }
           // corpo do cartao (fundo branco da foto + corpo)
           // 20/09 (Bryan: "linhas e quadrados"): NADA de retangulo de cartao no
@@ -2702,7 +2701,10 @@
             var cw = ib.width - pl - pr, ch = ib.height - pt - pb;
             var s = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
             var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
-            try { ctx.drawImage(img, ib.left + pl - r.left + (cw - dw) / 2, ib.top + pt - r.top + (ch - dh) / 2, dw, dh); } catch (e) { /* sem CORS: fica o branco */ }
+            var fy = ib.top + pt + (ch - dh) / 2, fx = ib.left + pl + (cw - dw) / 2;
+            if (fy + dh < r.top || fy > r.bottom || fx + dw < r.left || fx > r.right) { continue; }
+            houve = true;   // so' foto de verdade cruzando a barra liga o espelho
+            try { ctx.drawImage(img, fx - r.left, fy - r.top, dw, dh); } catch (e) { /* sem CORS: fica o branco */ }
           }
         }
         return houve;

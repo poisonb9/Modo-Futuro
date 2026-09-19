@@ -2618,7 +2618,7 @@
       "float ruido(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}",
       "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
       "vec3 amostra(vec2 u,float k){vec3 c=vec3(0.);float w=0.;",
-      " for(int i=-1;i<=1;i++){for(int j=-1;j<=1;j++){vec2 o=vec2(float(i),float(j))*(A*k/R);float g=exp(-float(i*i+j*j)*.5);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
+      " for(int i=-2;i<=2;i++){for(int j=-2;j<=2;j++){vec2 o=vec2(float(i),float(j))*(A*k/R);float g=exp(-float(i*i+j*j)*.30);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
       " return c/w;}",
       "void main(){",
       " vec2 u=vec2(v.x,1.-v.y);vec2 q=(u-.5)*R;",
@@ -2667,7 +2667,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
       var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
-      var dpr = Math.min(window.devicePixelRatio || 1, 2), ultimo = 0, visivel = true;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2), dprE = 0.5, ultimo = 0, visivel = true;
       el.insertBefore(cv, el.firstChild); el.classList.add("com-espelho"); el.__espelho = true;
       if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(el); }
       var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -2675,10 +2675,10 @@
       function corFundo() { return getComputedStyle(document.documentElement).getPropertyValue("--fundo").trim() || "#fff"; }
       function corCaixa() { return escuro ? "#191823" : "#ffffff"; }
       function desenharEspelho(r) {
-        var W = Math.max(2, Math.round(r.width * dpr)), H = Math.max(2, Math.round(r.height * dpr));
+        var W = Math.max(2, Math.round(r.width * dprE)), H = Math.max(2, Math.round(r.height * dprE));
         if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-        try { ctx.filter = "blur(" + (8) + "px)"; } catch (e) { /* sem filter: o shader suaviza */ }
+        ctx.setTransform(dprE, 0, 0, dprE, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+        ctx.filter = "none";
         ctx.fillStyle = corFundo(); ctx.fillRect(0, 0, r.width, r.height);
         var houve = false;
         // cartoes e vitrine que cruzam o retangulo do vidro
@@ -2715,14 +2715,14 @@
         var houve = desenharEspelho(r);
         el.classList.toggle("espelho-vivo", houve);
         if (!houve) { return; }   // nada embaixo: o CSS resolve (fundo liso)
-        var W = esp.width, H = esp.height;
+        var W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
         if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; gl.viewport(0, 0, W, H); }
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, esp);
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
         gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
-        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 9 * dpr); gl.uniform1f(u.Z, ts / 1000);
+        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 7 * dpr); gl.uniform1f(u.Z, ts / 1000);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
       requestAnimationFrame(quadro);

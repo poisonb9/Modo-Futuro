@@ -596,6 +596,12 @@
   .vitrine .vnome { font: 600 14px/1.25 Poppins, sans-serif; color: var(--tinta); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .vitrine .vpreco { font: 700 24px/1 var(--mono); color: var(--tinta); white-space: nowrap; text-align: right; }
   .vitrine .vpreco s { display: block; font: 400 12px/1 var(--mono); color: var(--fraco); margin-bottom: 4px; }
+  /* parte 8: o canvas 3D cobre a foto; a placa HTML fica transparente por
+     cima (o vidro e' a laje 3D) */
+  .vitrine .v3d { position: absolute; inset: 0; width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; pointer-events: none; z-index: 1; }
+  .vitrine.com-3d .vplaca { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+  .vitrine.com-3d .vplaca::before, .vitrine.com-3d .vplaca::after { display: none; }
+  .vitrine .vplaca, .vitrine .vselo, .vitrine .vloja { z-index: 2; }
   @media (min-width: 700px) { .vitrine { display: grid; grid-template-columns: 1fr 1fr; } .vitrine .vfoto { aspect-ratio: 4 / 3; } }
   .grade {
     display: grid; gap: 14px; margin: 14px 0 0; align-items: start;
@@ -2824,5 +2830,128 @@
       } catch (e) { /* idem */ }
     }, 900);
   }
+})();
+</script>
+<!-- ⭐ PARTE 8 (19/09/2026) — LENTE DE VIDRO FISICO NA VITRINE (three.js).
+     Receita DEMONSTRADA no acervo (Yuri Artiukh, Robin Payot, drei): o vidro
+     so' refrata o que esta' NA CENA — entao a foto do produto vira textura
+     (o CDN do Ali/ML manda Access-Control-Allow-Origin: *), e a placa de
+     preco vira uma laje de MeshPhysicalMaterial com transmission=1, ior 1.5,
+     roughness 0, thickness > 0 e dispersao (aberracao cromatica). O texto
+     continua em HTML por cima. three.js so' baixa quando a vitrine entra na
+     tela; 30 fps; pausa fora da tela; qualquer falha = fica o vidro CSS. -->
+<script type="module">
+(function () {
+  if (!window.IntersectionObserver) { return; }
+  var menosMov = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (menosMov && location.search.indexOf("gl=1") < 0) { return; }
+  var ligado = null;   // a vitrine que esta' com a lente
+  function tentar() {
+    var a = document.querySelector("#vitrine .vitrine");
+    if (!a || a === ligado) { return; }
+    var img = a.querySelector("img.vfoto"), placa = a.querySelector(".vplaca");
+    if (!img || !placa) { return; }
+    ligado = a;
+    var feito = false;
+    function vai() {
+      if (feito) { return; }
+      feito = true; io.disconnect();
+      montar(a, img, placa).catch(function (e) { console.warn("vitrine 3d:", e && e.message); });
+    }
+    var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { vai(); } }, { rootMargin: "200px" });
+    io.observe(a);
+    // ⚠️ aba em segundo plano nao dispara o observer: se ja' esta' na tela, vai
+    setTimeout(function () {
+      var r = a.getBoundingClientRect();
+      if (r.top < innerHeight + 200 && r.bottom > -200) { vai(); }
+    }, 1500);
+  }
+  async function montar(a, img, placa) {
+    var THREE = await import("https://cdn.jsdelivr.net/npm/three@0.169.0/+esm");
+    // so' o nucleo do three (os addons importam "three" por nome e quebram
+    // sem import map; a laje arredondada sai de ExtrudeGeometry, e a luz de
+    // ambiente e' uma cena minima em PMREM)
+    function lajeArredondada(w, h, d, r) {
+      var sh = new THREE.Shape(), x = -w / 2, y = -h / 2;
+      sh.moveTo(x + r, y); sh.lineTo(x + w - r, y); sh.quadraticCurveTo(x + w, y, x + w, y + r);
+      sh.lineTo(x + w, y + h - r); sh.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      sh.lineTo(x + r, y + h); sh.quadraticCurveTo(x, y + h, x, y + h - r);
+      sh.lineTo(x, y + r); sh.quadraticCurveTo(x, y, x + r, y);
+      var g = new THREE.ExtrudeGeometry(sh, { depth: d, bevelEnabled: true, bevelThickness: 4, bevelSize: 4, bevelSegments: 6, curveSegments: 12 });
+      g.translate(0, 0, -d / 2); return g;
+    }
+    function ambiente() {
+      var c = new THREE.Scene();
+      var geo = new THREE.SphereGeometry(400, 16, 8);
+      c.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xdfe6ee, side: THREE.BackSide })));
+      var luzA = new THREE.Mesh(new THREE.PlaneGeometry(300, 120), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      luzA.position.set(-120, 220, -200); luzA.lookAt(0, 0, 0); c.add(luzA);
+      var luzB = new THREE.Mesh(new THREE.PlaneGeometry(200, 80), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      luzB.position.set(200, -150, -220); luzB.lookAt(0, 0, 0); c.add(luzB);
+      return c;
+    }
+    var foto = a.querySelector(".vfoto");
+    var W = foto.clientWidth, H = foto.clientHeight;
+    if (!W || !H) { return; }
+    // a textura: a MESMA foto (CORS liberado no CDN do Ali/ML); se falhar, fica o CSS
+    var tex = await new Promise(function (ok, erro) {
+      var l = new THREE.TextureLoader(); l.setCrossOrigin("anonymous");
+      l.load(img.currentSrc || img.src, ok, undefined, erro);
+    });
+    tex.colorSpace = THREE.SRGBColorSpace;
+    var cv = document.createElement("canvas"); cv.className = "v3d";
+    var r = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true, powerPreference: "low-power" });
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    r.setPixelRatio(dpr); r.setSize(W, H, false); r.setClearColor(0x000000, 0);
+    r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.0;
+    var cena = new THREE.Scene();
+    var pm = new THREE.PMREMGenerator(r);
+    cena.environment = pm.fromScene(ambiente(), 0.04).texture;
+    var cam = new THREE.OrthographicCamera(-W / 2, W / 2, H / 2, -H / 2, 1, 2000); cam.position.z = 600;
+    // a foto como plano de fundo, em object-fit: contain com a folga de 6%
+    var iw = tex.image.width, ih = tex.image.height, folga = 0.88;
+    var esc = Math.min(W * folga / iw, H * folga / ih);
+    var fundo = new THREE.Mesh(new THREE.PlaneGeometry(iw * esc, ih * esc), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false }));
+    cena.add(fundo);
+    // a laje de vidro onde esta' a placa de preco (mesma geometria da .vplaca)
+    var ra = a.getBoundingClientRect(), rp = placa.getBoundingClientRect(), rf = foto.getBoundingClientRect();
+    var pw = rp.width, ph = rp.height, px = (rp.left + rp.width / 2) - (rf.left + rf.width / 2), py = (rf.top + rf.height / 2) - (rp.top + rp.height / 2);
+    var esp = 26;
+    var laje = new THREE.Mesh(lajeArredondada(pw, ph, esp, 18), new THREE.MeshPhysicalMaterial({
+      transmission: 1, ior: 1.5, thickness: esp * 1.6, roughness: 0.04, metalness: 0,
+      clearcoat: 1, clearcoatRoughness: 0.06, dispersion: 0.35, color: 0xffffff,
+      attenuationColor: new THREE.Color(0xf3f7ff), attenuationDistance: 600, envMapIntensity: 0.9
+    }));
+    laje.position.set(px, py, 60);
+    cena.add(laje);
+    var luz = new THREE.DirectionalLight(0xffffff, 1.2); luz.position.set(-200, 300, 400); cena.add(luz);
+    cena.add(new THREE.AmbientLight(0xffffff, 0.4));
+    a.appendChild(cv); a.classList.add("com-3d");
+    // movimento: a laje inclina levemente com o rolar e o giroscopio; flutua
+    var raiz = document.documentElement, visivel = true, ultimo = 0;
+    new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(a);
+    function quadro(ts) {
+      requestAnimationFrame(quadro);
+      if (!visivel || ts - ultimo < 33) { return; }
+      ultimo = ts;
+      var st = getComputedStyle(raiz);
+      var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
+      laje.rotation.x = (ly - 0.3) * 0.18 + Math.sin(ts / 1400) * 0.02;
+      laje.rotation.y = (lx - 0.5) * 0.25 + Math.cos(ts / 1700) * 0.02;
+      laje.position.z = 60 + Math.sin(ts / 1100) * 3;
+      r.render(cena, cam);
+    }
+    requestAnimationFrame(quadro);
+    window.addEventListener("resize", function () {
+      var w2 = foto.clientWidth, h2 = foto.clientHeight;
+      if (!w2 || !h2) { return; }
+      r.setSize(w2, h2, false);
+      cam.left = -w2 / 2; cam.right = w2 / 2; cam.top = h2 / 2; cam.bottom = -h2 / 2; cam.updateProjectionMatrix();
+    });
+    cv.addEventListener("webglcontextlost", function () { a.classList.remove("com-3d"); cv.remove(); });
+  }
+  // a vitrine e' remontada a cada desenhar(): observa a grade
+  new MutationObserver(tentar).observe(document.getElementById("vitrine"), { childList: true });
+  tentar();
 })();
 </script>

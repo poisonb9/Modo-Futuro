@@ -155,5 +155,9 @@ jobs:
           # ⚠️ `git push` TEM DE FALHAR ALTO se nao subir. Empurrar sem
           # conferir e' como dizer "esta' no ar" olhando o status do
           # push — erro que ja' custou uma tarde nesta operacao.
-          git push
+          # ⛔ 18/09/2026: o push foi REJEITADO (outro commit chegou antes)
+          # e o dia inteiro de pontos da serie morreu com o runner. Rebase
+          # antes, como o precos.yml ja' fazia. Tres tentativas.
+          for i in 1 2 3; do git pull --rebase && git push && break || sleep 20; done
+          git status -sb | head -1 | grep -q ahead && { echo "::error::push nao subiu"; exit 1; } || true
           echo "estado commitado: $(git rev-parse --short HEAD)"

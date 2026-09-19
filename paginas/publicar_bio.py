@@ -835,6 +835,24 @@ def _desde(serie: dict, d: dict) -> str:
     return f"{q[8:10]}/{q[5:7]}" if len(q) == 10 else ""
 
 
+def _visto_em(serie: dict, agora: dict, pid) -> str:
+    """A data da ULTIMA LEITURA do produto: o maior entre o ultimo ponto da
+    serie e a reconferencia horaria (`precos_agora.json`, campo `quando`).
+
+    ⛔ MEDIDO EM 19/09/2026 00:10: o site ia amanhecer com 1 PRODUTO. A
+    guarda de 24h lia so' a serie, e a serie ganha ponto so' quando o preco
+    MUDA (`anotar_serie`) ou no garimpo diario — e o garimpo de 18/09 perdeu
+    o push (corrida com outro commit, sem rebase). Dia quieto + push perdido
+    = "ninguem foi visto ontem" = catalogo vazio. A reconferencia horaria
+    existe e diz a verdade: 157 de 160 reconferidos as 23:33.
+    """
+    pid = str(pid or "")
+    da_serie = serie.get(pid, ("", 0, 0.0, ""))[3] or ""
+    reg = agora.get(pid) if isinstance(agora, dict) else None
+    da_hora = (reg.get("quando") or "")[:10] if isinstance(reg, dict) else ""
+    return max(da_serie, da_hora)
+
+
 def produtos_todos() -> list[dict]:
     """TODOS os produtos que ainda valem — o catalogo do site mae.
 
@@ -905,7 +923,7 @@ def produtos_todos() -> list[dict]:
         marca = d.get("id") or d.get("nome")
         if marca in vistos:
             continue
-        visto_em = serie.get(d.get("id"), ("", 0, 0.0, ""))[3]
+        visto_em = _visto_em(serie, agora, d.get("id"))
         if not visto_em or visto_em < limite:
             continue
         vistos.add(marca)
@@ -1724,11 +1742,12 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     # guarda so' barrava quem tinha data velha, e deixava entrar quem nao
     # tinha data. "Preco reconferido nas ultimas 24h" tem de significar que a
     # reconferencia EXISTE. Custo medido da mudanca: 158 -> 152 produtos.
+    agora = _precos_agora()
     limite = (date.today() - timedelta(days=1)).isoformat()
     for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
         if not d.get("link") or not d.get("nome"):
             continue
-        visto_em = serie.get(d.get("id"), ("", 0, 0.0, ""))[3]
+        visto_em = _visto_em(serie, agora, d.get("id"))
         if not visto_em or visto_em < limite:
             continue
         quando = (d.get("quando") or "")[:10]

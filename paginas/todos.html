@@ -911,6 +911,10 @@
   }
 
   /* ---------------- fim ---------------- */
+  /* 19/09 (print do Bryan ao recarregar): antes do script montar a grade, o
+     HTML cru mostrava o convite logo abaixo da busca. Grade vazia = convite
+     escondido; ele so' existe depois dos produtos. */
+  #grade:empty ~ .convite { display: none; }
   .convite {
     margin: 30px 0 0; border: 1px solid var(--linha); border-radius: 16px;
     background: var(--caixa); padding: 20px; text-align: center;

@@ -640,14 +640,18 @@
   .vitrine .vloja { position: absolute; top: 12px; right: 12px; padding: 7px 10px; border-radius: 999px; font: 600 11px/1 Poppins, sans-serif; color: var(--tinta); }
   .vitrine .vplaca {
     position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 16px; border-radius: 18px;
-    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
   }
   /* 19/09 (foto do Bryan, iPhone no escuro): a placa fica SEMPRE sobre foto
      branca, entao o texto e' escuro fixo - no modo escuro --tinta e' branco
      e o titulo sumia. */
   .vitrine .vnome { font: 600 14px/1.25 Poppins, sans-serif; color: #16151c; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .vitrine .vpreco { font: 700 24px/1 var(--mono); color: #16151c; white-space: nowrap; text-align: right; }
-  .vitrine .vpreco s { display: block; font: 400 12px/1 var(--mono); color: #6b6779; margin-bottom: 4px; }
+  /* 19/09 (Bryan: "nao ta premium a fonte, nao ta alinhado"): o preco na
+     MESMA familia do nome (Poppins, pesada, numeros tabulares), alinhado
+     pela linha de base da ultima linha do nome; "R$" menor e mais leve. */
+  .vitrine .vpreco { font: 700 26px/1.25 Poppins, sans-serif; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: #16151c; white-space: nowrap; text-align: right; align-self: flex-end; }
+  .vitrine .vpreco .rs { font-size: 15px; font-weight: 600; color: #6b6779; letter-spacing: 0; margin-right: 3px; }
+  .vitrine .vpreco s { display: block; font: 500 12px/1.25 Poppins, sans-serif; color: #6b6779; letter-spacing: 0; }
   /* parte 8: o canvas 3D cobre a foto; a placa HTML fica transparente por
      cima (o vidro e' a laje 3D) */
   .vitrine .v3d { position: absolute; inset: 0; width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; pointer-events: none; z-index: 1; }
@@ -922,6 +926,10 @@
      Lojas, Telegram. Aba ativa em ouro; toque encolhe com mola. O corpo
      ganha respiro embaixo pra nada ficar escondido atras dela. */
   body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  /* a barra fica FORA do fundido (a pilula continua deslizando por cima) */
+  #abas { view-transition-name: abas; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .26s; }
+  ::view-transition-group(abas) { animation: none; }
   .abas {
     position: fixed; left: 16px; right: 16px; bottom: max(14px, env(safe-area-inset-bottom, 0px));
     z-index: 20; padding: 6px; display: flex; border-radius: 999px; max-width: 440px; margin: 0 auto;
@@ -2152,7 +2160,9 @@
         pl.appendChild(el("div", "vnome", v1.nome));
         var pr = el("div", "vpreco");
         if (v1.antes) { pr.appendChild(el("s", null, v1.antes)); }
-        pr.appendChild(document.createTextNode(v1.preco));
+        var mo = /^R\$\s*(.+)$/.exec(String(v1.preco));
+        if (mo) { pr.appendChild(el("span", "rs", "R$")); pr.appendChild(document.createTextNode(mo[1])); }
+        else { pr.appendChild(document.createTextNode(v1.preco)); }
         pl.appendChild(pr);
         a.appendChild(pl);
         vit.appendChild(a);
@@ -2525,16 +2535,30 @@
       if (!a || a.getAttribute("data-aba") === "telegram") { return; }
       ev.preventDefault();
       var qual = a.getAttribute("data-aba");
+      // 19/09 (video do Bryan, "ta estranho"): redesenhar e DEPOIS rolar fazia
+      // a pagina saltar num corte seco (heroi e vitrine entram/saem, a altura
+      // muda) e so' entao deslizar. Agora a troca de estado + a rolagem
+      // acontecem por baixo de um fundido nativo (View Transition, Safari 18+);
+      // sem suporte, cai no caminho antigo.
+      var fundir = function (fn) {
+        if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.startViewTransition(fn);
+        } else { fn(); }
+      };
       if (qual === "inicio") {
-        atual = "todos"; loja = ""; canal = "";
-        mostrando = passoLista(); mostrandoAlto = passoBloco(); mostrandoBaixo = passoBloco();
-        guardarUrl(); montarChips(); desenhar();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        fundir(function () {
+          atual = "todos"; loja = ""; canal = "";
+          mostrando = passoLista(); mostrandoAlto = passoBloco(); mostrandoBaixo = passoBloco();
+          guardarUrl(); montarChips(); desenhar();
+          window.scrollTo({ top: 0, behavior: document.startViewTransition ? "instant" : "smooth" });
+        });
       } else if (qual === "quedas") {
-        atual = "caiu";
-        mostrando = passoLista(); montarChips(); desenhar();
-        var c = document.getElementById("console");
-        if (c) { window.scrollTo({ top: c.offsetTop - 8, behavior: "smooth" }); }
+        fundir(function () {
+          atual = "caiu";
+          mostrando = passoLista(); montarChips(); desenhar();
+          var c = document.getElementById("console");
+          if (c) { window.scrollTo({ top: c.offsetTop - 8, behavior: document.startViewTransition ? "instant" : "smooth" }); }
+        });
       } else if (qual === "lojas") {
         var b = document.querySelector('#chips .escolha[data-icone="loja"]');
         var c2 = document.getElementById("console");

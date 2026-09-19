@@ -2641,12 +2641,12 @@
       " vec3 N=normalize(vec3(n2*dh*step(x,.999),1.));",
       " vec3 I=vec3(0.,0.,-1.);float eta=1./1.5;",
       " vec3 Rf=refract(I,N,eta);",
-      " float esp=3.*A/7.;",
+      " float esp=7.*A/7.;",
       " vec2 desl=(Rf.xy/max(-Rf.z,.2))*esp;",
       " vec2 uu=u+desl/R;",
       " float borda=1.-x;",
       " vec2 ut=vec2(uu.x,O.x+uu.y*O.y);",
-      " vec2 dd=desl/R*.35;vec4 am=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);vec4 aR=amostra(clamp(ut+dd,vec2(.002),vec2(.998)),1.);vec4 aB=amostra(clamp(ut-dd,vec2(.002),vec2(.998)),1.);",
+      " vec2 dd=desl/R*.5;vec4 am=amostra(clamp(ut,vec2(.002),vec2(.998)),1.);vec4 aR=amostra(clamp(ut+dd,vec2(.002),vec2(.998)),1.);vec4 aB=amostra(clamp(ut-dd,vec2(.002),vec2(.998)),1.);",
       " vec3 col=vec3(aR.a>0.001?aR.r/aR.a:1.,am.a>0.001?am.g/am.a:1.,aB.a>0.001?aB.b/aB.a:1.);float cob=am.a;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.05+D*.10);",
@@ -2659,7 +2659,7 @@
       " col+=vec3(1.)*(sp*.45+band*.35+gota*.6+borda*.05*(1.-D));",
       " float aG=gota*.5;",
       " vec3 iris=vec3(.5+.5*sin(x*6.28+0.),.5+.5*sin(x*6.28+2.1),.5+.5*sin(x*6.28+4.2));",
-      " float fio=smoothstep(.0,.35,x)*smoothstep(1.,.55,x)*borda*.22;",
+      " float lum=dot(col,vec3(.3,.59,.11));float fio=smoothstep(.0,.35,x)*smoothstep(1.,.55,x)*borda*.5*(1.-lum)*cob;",
       " float a=step(d,0.)*max(smoothstep(.15,.85,cob)*borda*.95,max(aG,fio));col=mix(col,iris,fio*(1.-smoothstep(.15,.85,cob)));gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function ligar(el, raio) {

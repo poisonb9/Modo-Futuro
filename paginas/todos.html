@@ -208,6 +208,10 @@
   .vidro.espelho-vivo { background-color: rgba(255,255,255,.18); background-image: none; backdrop-filter: blur(16px) saturate(1.5); -webkit-backdrop-filter: blur(16px) saturate(1.5); }
   .vidro.espelho-vivo::after, .vidro.espelho-vivo::before { display: none !important; }
   .vidro.espelho-vivo { box-shadow: var(--vidro-sombra); }
+  /* 19/09 (Bryan, foto): a sombra da barra escorria sobre os cartoes como um
+     borrao 'ghost'. A barra flutua SEM sombra externa; so' a luz interna. */
+  .abas.vidro { box-shadow: var(--vidro-luz); }
+  .abas.vidro.espelho-vivo { box-shadow: none; }
   .abas::after, .vloja::after, .chip-ordem::after, .chip-ordem::before, .escolha::after, .busca-caixa::after, .busca-caixa::before { display: none; }
   /* o ::before do .escolha e' o ICONE do menu (grade/loja): fica; so' o ::after (aro) sai */
   .escolha.vidro::before { display: inline-block; }

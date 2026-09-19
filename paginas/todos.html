@@ -687,6 +687,25 @@
     background: var(--tinta); color: var(--fundo); text-decoration: none;
     padding: 13px 20px; border-radius: 999px; font-weight: 600; font-size: 15px;
   }
+  /* ⭐ BARRA DE ABAS em vidro (Liquid Glass parte 2, 19/09/2026). E' a
+     metafora do iOS 26 e o que faz a pagina "parecer app": Inicio, Quedas,
+     Lojas, Telegram. Aba ativa em ouro; toque encolhe com mola. O corpo
+     ganha respiro embaixo pra nada ficar escondido atras dela. */
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  .abas {
+    position: fixed; left: 16px; right: 16px; bottom: max(14px, env(safe-area-inset-bottom, 0px));
+    z-index: 20; padding: 6px; display: flex; border-radius: 999px; max-width: 440px; margin: 0 auto;
+  }
+  .abas a {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 0 6px; border-radius: 999px; font: 600 10.5px/1 Poppins, sans-serif;
+    color: var(--fraco); text-decoration: none; transition: transform .15s cubic-bezier(.2,.8,.2,1), background .2s, color .2s;
+  }
+  .abas a:active { transform: scale(.94); }
+  .abas a svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .abas a.on { color: #17161d; background: var(--ouro-claro); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 6px 16px rgba(200,144,26,.35); }
+  @media (prefers-reduced-motion: reduce) { .abas a { transition: none; } }
+
   footer {
     margin-top: 28px; padding: 20px 0 54px; border-top: 1px solid var(--linha);
     font-size: 12px; color: var(--fraco); text-align: center;
@@ -770,6 +789,12 @@
     <p class="marca-rodape">© 2026 Achadinho Total — todos os direitos reservados</p>
     <p class="aviso-rodape">Preços conferidos na data indicada em cada item · Contém links de afiliado · <a href="/privacidade" class="link-rodape">Privacidade</a></p>
   </footer>
+  <nav class="abas vidro" id="abas" aria-label="Navegação">
+    <a href="#" data-aba="inicio" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1z"/></svg>Início</a>
+    <a href="#" data-aba="quedas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6l6 8 4-5 6 9M14 18h6v-6"/></svg>Quedas</a>
+    <a href="#" data-aba="lojas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/></svg>Lojas</a>
+    <a href="https://t.me/achadinhototal" target="_blank" rel="noopener" data-aba="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg>Telegram</a>
+  </nav>
 </div>
 
 <script>
@@ -2103,6 +2128,7 @@
   }
 
   function marcarTres() {
+    if (typeof marcarAba === "function") { marcarAba(); }
     var caixa = document.getElementById("chips");
     caixa.classList.toggle("tres", caixa.querySelectorAll(".escolha-caixa").length >= 3);
   }
@@ -2190,6 +2216,43 @@
       }, { passive: true });
     }
     pinta();
+  })();
+
+  // ⭐ AS ABAS (parte 2): Inicio limpa filtro e volta ao topo; Quedas e' o
+  // chip "Maiores quedas"; Lojas abre o menu Loja que ja' existe; Telegram
+  // e' link. Nenhum caminho novo de estado — so' os que os chips ja' usam.
+  function marcarAba() {
+    var qual = atual === "caiu" ? "quedas" : (loja ? "lojas" : "inicio");
+    document.querySelectorAll("#abas a[data-aba]").forEach(function (a) {
+      a.classList.toggle("on", a.getAttribute("data-aba") === qual);
+    });
+  }
+  (function abas() {
+    var nav = document.getElementById("abas");
+    if (!nav) { return; }
+    nav.addEventListener("click", function (ev) {
+      var a = ev.target.closest("a[data-aba]");
+      if (!a || a.getAttribute("data-aba") === "telegram") { return; }
+      ev.preventDefault();
+      var qual = a.getAttribute("data-aba");
+      if (qual === "inicio") {
+        atual = "todos"; loja = ""; canal = "";
+        mostrando = passoLista(); mostrandoAlto = passoBloco(); mostrandoBaixo = passoBloco();
+        guardarUrl(); montarChips(); desenhar();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (qual === "quedas") {
+        atual = "caiu";
+        mostrando = passoLista(); montarChips(); desenhar();
+        var c = document.getElementById("console");
+        if (c) { window.scrollTo({ top: c.offsetTop - 8, behavior: "smooth" }); }
+      } else if (qual === "lojas") {
+        var b = document.querySelector('#chips .escolha[data-icone="loja"]');
+        var c2 = document.getElementById("console");
+        if (c2) { window.scrollTo({ top: c2.offsetTop - 8, behavior: "smooth" }); }
+        if (b) { setTimeout(function () { b.click(); }, 350); }
+      }
+      marcarAba();
+    });
   })();
 
   function grudar() {

@@ -105,10 +105,13 @@
       --tinta: #f4f2f9; --fraco: #a5a1b4; --linha: #2b2733;
       --fundo: #0f0e13; --caixa: #191823; --painel: #08080b;
       --ouro: #F0B62E;
-      --vidro: rgba(30,28,36,.6); --vidro-forte: rgba(30,28,36,.8);
-      --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.35) 50%, rgba(255,255,255,.04));
-      --vidro-sombra: 0 12px 40px rgba(0,0,0,.45);
-      --vidro-luz: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.3);
+      /* 19/09 (Bryan: "corrigir no modo escuro, a noite cansa a vista"): o
+         vidro escuro e' TINGIDO de ouro (nao cinza), a luz atras fica mais
+         forte e a borda de luz e' quente. */
+      --vidro: rgba(44,38,26,.58); --vidro-forte: rgba(52,45,30,.82);
+      --vidro-borda: linear-gradient(135deg, rgba(255,230,160,.06), rgba(255,236,190,.45) 50%, rgba(255,230,160,.06));
+      --vidro-sombra: 0 12px 40px rgba(0,0,0,.5);
+      --vidro-luz: inset 0 1px 0 rgba(255,236,190,.22), inset 0 -1px 0 rgba(0,0,0,.35);
       --fio: rgba(255,255,255,.08);
     }
   }
@@ -120,7 +123,7 @@
                 radial-gradient(45% 35% at 90% 30%, rgba(255,236,190,.55), transparent 70%),
                 radial-gradient(60% 40% at 50% 100%, rgba(200,144,26,.18), transparent 70%);
   }
-  @media (prefers-color-scheme: dark) { .luz { opacity: .45; } }
+  @media (prefers-color-scheme: dark) { .luz { opacity: .8; } }
   /* o vidro como classe unica; a borda de luz (3 paradas, receita DEM) vem
      por mask no ::before, sem elemento extra. Firefox sem backdrop: solido. */
   .vidro {
@@ -149,7 +152,8 @@
   html { overflow-x: clip; background: var(--fundo); }
   body {
     margin: 0; overflow-x: clip;
-    background: var(--fundo); color: var(--tinta);
+    /* 19/09: o fundo mora no <html>; com fundo no body a .luz (z-index -1) sumia */
+    background: transparent; color: var(--tinta);
     font: 16px/1.55 Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -260,14 +264,23 @@
   .console { margin: 12px 0 0; text-align: left; z-index: 5; border-radius: 24px; padding: 8px; }
   /* gruda no topo com o mostrador ja' escondido: `top` negativo = altura do
      mostrador (medida em JS, `grudar`). Assim so' busca + chips ficam fixos. */
-  .console.grudado { position: sticky; }  /* pai = .faixa, que vai ate' o rodape */
+  .console.grudado { position: sticky; }
+  /* ⭐ PARTE 6 — VIDRO DE VERDADE (WebGL, 19/09/2026). Um canvas so', atras
+     do console, desenha a luz dourada e uma placa de vidro com refracao,
+     dispersao cromatica e especular que segue a inclinacao. O DOM fica
+     nitido por cima. Custo: 1 canvas, 30 fps, para fora da tela; sem WebGL
+     ou com reduced-motion, fica o vidro CSS. (MAESTROS_LIQUID_GLASS §3) */
+  .console > .gl { position: absolute; inset: 0; border-radius: inherit; z-index: 0; pointer-events: none; display: block; width: 100%; height: 100%; }
+  .console > :not(.gl) { position: relative; z-index: 1; }
+  .console.com-gl { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .console.com-gl::after { display: none; }  /* pai = .faixa, que vai ate' o rodape */
   /* o MOSTRADOR: poco rebaixado no vidro, 3 celas com fios, numero sobre
      rotulo, base com a linha do tempo ate' a proxima conferencia */
   .prova {
     display: grid; grid-template-columns: 1fr 1fr 1fr; margin: 0 0 8px; border-radius: 16px;
     background: rgba(255,255,255,.35); box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
   }
-  @media (prefers-color-scheme: dark) { .prova { background: rgba(0,0,0,.25); } }
+  @media (prefers-color-scheme: dark) { .prova { background: rgba(0,0,0,.28); } }
   .prova .cela {
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
     padding: 12px 6px 10px; text-align: center;
@@ -534,7 +547,8 @@
   @media (hover: hover) {
     .item:hover { box-shadow: 0 14px 34px rgba(60,45,10,.16); transform: translateY(-2px); }
   }
-  @media (prefers-color-scheme: dark) { .item { background: #fff; } }
+  /* no escuro o poco da foto e' marfim, nao branco puro: nao ofusca */
+  @media (prefers-color-scheme: dark) { .item { background: #f3efe6; } .vitrine { background: #f3efe6; } .vitrine .vfoto { background: #f3efe6; } }
   .foto { position: relative; aspect-ratio: 1; background: var(--linha); }
   .item.sem-foto { display: none; }
   /* ⭐ reparo 1 (18/09): foto branca dentro de cartao branco "flutuava" sem
@@ -2379,6 +2393,87 @@
       }
       marcarAba();
     });
+  })();
+
+  // ⭐ PARTE 6 — o shader do vidro. Fragment shader unico: campo de luz
+  // dourada (o mesmo da .luz), placa arredondada por SDF, refracao pela
+  // normal da borda, 3 amostras (R/G/B) pra dispersao, especular pela
+  // direcao da luz (rolar + giroscopio: --luz-x/--luz-y) e uma gota no
+  // toque. 30 fps, IntersectionObserver, e desliga em reduced-motion.
+  (function vidroGL() {
+    var c = document.getElementById("console");
+    var menosMov = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!c || (menosMov && location.search.indexOf("gl=1") < 0)) { return; }   // ?gl=1 forca (so' pra eu ver)
+    var cv = document.createElement("canvas"); cv.className = "gl";
+    var gl = cv.getContext("webgl", { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: "low-power" });
+    if (!gl) { return; }
+    var VS = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+    var FS = [
+      "precision mediump float;",
+      "uniform vec2 R;uniform vec3 L;uniform float T,D,K,Z;uniform vec2 P;",
+      "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
+      "vec3 luz(vec2 u){",
+      " vec2 c1=vec2(.18+.06*sin(Z*.37),.22+.05*cos(Z*.29));",
+      " vec2 c2=vec2(.86+.05*cos(Z*.23),.72+.06*sin(Z*.31));",
+      " float a=smoothstep(.85,0.,length((u-c1)*vec2(1.,1.5)));",
+      " float b=smoothstep(.75,0.,length((u-c2)*vec2(1.2,1.)));",
+      " float c=smoothstep(.6,0.,length((u-vec2(.5,1.05))*vec2(.9,1.)));",
+      " vec3 ouro=vec3(.95,.79,.30),creme=vec3(1.,.93,.75),ambar=vec3(.85,.62,.18);",
+      " vec3 base=mix(vec3(.965,.945,.905),vec3(.07,.06,.08),D);",
+      " return base+ouro*a*(.85-D*.45)+creme*b*(.6-D*.35)+ambar*c*(.35-D*.15);}",
+      "void main(){",
+      " vec2 u=gl_FragCoord.xy/R;vec2 q=(u-.5)*R;",
+      " float r=24.*K;float d=sdb(q,R*.5,r);",
+      " float e=smoothstep(0.,-28.*K,d);",
+      " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
+      " vec2 n=normalize(g+1e-5);float borda=1.-e;",
+      " float gota=exp(-length(q-P)*.012/K)*.9*T;",
+      " float curva=pow(borda,1.6);",
+      " vec2 ref=n*curva*.14+normalize(q-P+1e-3)*gota*.04;",
+      " vec3 col;col.r=luz(u-ref*1.00).r;col.g=luz(u-ref*1.10).g;col.b=luz(u-ref*1.22).b;",
+      " col=mix(col,mix(vec3(1.),vec3(.12,.11,.14),D),(1.-D)*.04+D*.18);",
+      " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
+      " float sp=pow(max(dot(normalize(vec3(n*borda,1.)),ld),0.),18.)*borda;",
+      " float top=smoothstep(.0,.08,1.-u.y)*smoothstep(1.,.85,1.-u.y);",
+      " col+=vec3(1.,.97,.9)*(sp*1.1+top*.12+gota*.3+curva*.10);",
+      " float a=step(d,0.);gl_FragColor=vec4(col*a,a);}"
+    ].join("\n");
+    function sh(t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; }
+    var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+    if (!vs || !fs) { return; }
+    var pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { return; }
+    gl.useProgram(pr);
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    var lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+    var uR = gl.getUniformLocation(pr, "R"), uL = gl.getUniformLocation(pr, "L"), uT = gl.getUniformLocation(pr, "T"),
+        uD = gl.getUniformLocation(pr, "D"), uK = gl.getUniformLocation(pr, "K"), uP = gl.getUniformLocation(pr, "P"),
+        uZ = gl.getUniformLocation(pr, "Z");
+    c.insertBefore(cv, c.firstChild); c.classList.add("com-gl");
+    var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), visivel = true, toque = 0, px = 0, py = 0, ultimo = 0;
+    function medir() {
+      var w = c.clientWidth, h = c.clientHeight;
+      if (cv.width !== (w * dpr | 0) || cv.height !== (h * dpr | 0)) { cv.width = w * dpr | 0; cv.height = h * dpr | 0; gl.viewport(0, 0, cv.width, cv.height); }
+    }
+    function quadro(ts) {
+      requestAnimationFrame(quadro);
+      if (!visivel || ts - ultimo < 33) { return; }   // 30 fps
+      ultimo = ts; medir();
+      var st = getComputedStyle(document.documentElement);
+      var lx = parseFloat(st.getPropertyValue("--luz-x")) || 30, ly = parseFloat(st.getPropertyValue("--luz-y")) || 0;
+      toque *= .92;
+      gl.uniform2f(uR, cv.width, cv.height); gl.uniform3f(uL, lx / 100, ly / 100, 0);
+      gl.uniform1f(uT, toque); gl.uniform1f(uD, escuro ? 1 : 0); gl.uniform1f(uK, dpr); gl.uniform1f(uZ, ts / 1000);
+      gl.uniform2f(uP, (px - c.clientWidth / 2) * dpr, (c.clientHeight / 2 - py) * dpr);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+    c.addEventListener("pointerdown", function (e) { var r = c.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; toque = 1; }, { passive: true });
+    if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(c); }
+    if (window.matchMedia) { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) { escuro = e.matches; }); }
+    cv.addEventListener("webglcontextlost", function () { c.classList.remove("com-gl"); cv.remove(); });
+    requestAnimationFrame(quadro);
   })();
 
   function grudar() {

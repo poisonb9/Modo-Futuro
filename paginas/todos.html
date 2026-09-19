@@ -2627,7 +2627,7 @@
       // tem ESPESSURA e a borda e' uma calota; a altura h(x) da superficie da'
       // a normal 3D, e o raio refrata pela LEI DE SNELL (ior 1.5). So' os
       // ultimos ~10 px sao lente (a barra do Safari e' assim); o centro e' plano.
-      " float L0=10.*A/9.;float x=clamp(-d/L0,0.,1.);",
+      " float L0=8.*A/9.;float x=clamp(-d/L0,0.,1.);",
       " float hz=sqrt(max(0.,1.-(1.-x)*(1.-x)));",
       " float dh=(1.-x)/max(hz,.05);",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
@@ -2635,11 +2635,11 @@
       " vec3 N=normalize(vec3(n2*dh*step(x,.999),1.));",
       " vec3 I=vec3(0.,0.,-1.);float eta=1./1.5;",
       " vec3 Rf=refract(I,N,eta);",
-      " float esp=18.*A/9.;",
+      " float esp=6.*A/9.;",
       " vec2 desl=(Rf.xy/max(-Rf.z,.2))*esp;",
       " vec2 uu=u+desl/R;",
       " float borda=1.-x;",
-      " vec3 col=amostra(uu,1.);",
+      " vec3 col=amostra(clamp(uu,vec2(.002),vec2(.998)),1.);",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.10+D*.12);",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
@@ -2678,7 +2678,7 @@
         var W = Math.max(2, Math.round(r.width * dpr)), H = Math.max(2, Math.round(r.height * dpr));
         if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-        try { ctx.filter = "blur(" + (12) + "px)"; } catch (e) { /* sem filter: o shader suaviza */ }
+        try { ctx.filter = "blur(" + (8) + "px)"; } catch (e) { /* sem filter: o shader suaviza */ }
         ctx.fillStyle = corFundo(); ctx.fillRect(0, 0, r.width, r.height);
         var houve = false;
         // cartoes e vitrine que cruzam o retangulo do vidro

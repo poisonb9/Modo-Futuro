@@ -2720,18 +2720,8 @@
         // ⭐ TEXTO TAMBEM (Bryan, 20/09: "em cima das letras a barra nao faz
         // nada"): nome, preco, sinais e chips passam pelo espelho como texto
         // desenhado no canvas — o vidro dobra tudo, nao so' a foto.
-        var textos = document.querySelectorAll("#grade .item .nome, #grade .item .preco, #grade .item .de, #grade .item .sinais, #grade .item .avise-me, #grade .item .loja, #vitrine .vnome, #vitrine .vpreco, .convite h2, .convite p");
-        for (var t = 0; t < textos.length; t++) {
-          var tb = textos[t].getBoundingClientRect();
-          if (tb.bottom < r.top || tb.top > r.bottom || !tb.width) { continue; }
-          var cs2 = getComputedStyle(textos[t]);
-          ctx.font = cs2.fontWeight + " " + cs2.fontSize + " " + cs2.fontFamily;
-          ctx.fillStyle = cs2.color; ctx.textBaseline = "top";
-          var linhas = (textos[t].innerText || "").split("\n");
-          var lh = parseFloat(cs2.lineHeight) || parseFloat(cs2.fontSize) * 1.3;
-          for (var q = 0; q < linhas.length && q < 4; q++) { ctx.fillText(linhas[q], tb.left - r.left + 2, tb.top - r.top + q * lh, tb.width); }
-          houve = true;
-        }
+        // texto NAO entra no espelho (fillText nao bate 1:1 com o DOM e vira
+        // copia deslocada); sobre texto, o CSS backdrop-filter e' o vidro.
         tira = { topoPag: topoPag, altura: altura, houve: houve };
         return houve;
       }
@@ -2742,9 +2732,10 @@
         ultimo = ts;
         var r = el.getBoundingClientRect();
         if (!r.width || !r.height) { return; }
-        var topoPagBarra = r.top + window.scrollY;
-        var precisa = !tira || topoPagBarra < tira.topoPag + 24 || topoPagBarra + r.height > tira.topoPag + tira.altura - 24
-                      || ts - ultimaTira > 400 || el.__grade !== document.getElementById("grade").childElementCount;
+        var sy = window.scrollY, topoPagBarra = r.top + sy;
+        var parado = Math.abs(sy - (el.__sy || 0)) < 0.5; el.__sy = sy;
+        var fora = !tira || topoPagBarra < tira.topoPag + 24 || topoPagBarra + r.height > tira.topoPag + tira.altura - 24;
+        var precisa = fora || (parado && (ts - ultimaTira > 250 || el.__grade !== document.getElementById("grade").childElementCount));
         if (precisa) {
           ultimaTira = ts; el.__grade = document.getElementById("grade").childElementCount;
           var houve = desenharEspelho(r);
@@ -2757,7 +2748,14 @@
           ctx.imageSmoothingEnabled = true; ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, esp.width, esp.height); ctx.drawImage(esp2, 0, 0, esp.width, esp.height);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, esp);
         }
-        el.classList.toggle("espelho-vivo", !!(tira && tira.houve));
+        // vivo so' se ha' foto NA BARRA agora (nao so' na tira): senao o CSS mostra o texto
+        var fotoNaBarra = false;
+        if (tira && tira.houve) {
+          var imgs = document.querySelectorAll("#grade .item img, #vitrine img.vfoto");
+          for (var q = 0; q < imgs.length; q++) { var qb = imgs[q].getBoundingClientRect(); if (qb.bottom > r.top && qb.top < r.bottom && qb.right > r.left && qb.left < r.right) { fotoNaBarra = true; break; } }
+        }
+        el.classList.toggle("espelho-vivo", fotoNaBarra);
+        if (!fotoNaBarra) { return; }
         if (!tira || !tira.houve) { return; }   // nada embaixo: o CSS resolve
         var W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
         if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; gl.viewport(0, 0, W, H); }

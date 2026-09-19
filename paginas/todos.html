@@ -2615,8 +2615,8 @@
     var FS = [
       "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A;",
       "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
-      "vec3 amostra(vec2 u){vec3 c=vec3(0.);float w=0.;",
-      " for(int i=-2;i<=2;i++){for(int j=-2;j<=2;j++){vec2 o=vec2(float(i),float(j))*(A/R);float g=exp(-float(i*i+j*j)*.35);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
+      "vec3 amostra(vec2 u,float k){vec3 c=vec3(0.);float w=0.;",
+      " for(int i=-3;i<=3;i++){for(int j=-3;j<=3;j++){vec2 o=vec2(float(i),float(j))*(A*k/R);float g=exp(-float(i*i+j*j)*.22);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
       " return c/w;}",
       "void main(){",
       " vec2 u=vec2(v.x,1.-v.y);vec2 q=(u-.5)*R;",
@@ -2625,7 +2625,7 @@
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
       " vec2 n=normalize(g+1e-5);float curva=pow(borda,2.2);",
       " vec2 ref=n*curva*.26;",
-      " vec3 col;col.r=amostra(u-ref*1.00).r;col.g=amostra(u-ref*1.05).g;col.b=amostra(u-ref*1.11).b;",
+      " float k=1.+curva*2.5;vec3 col;col.r=amostra(u-ref*1.00,k).r;col.g=amostra(u-ref*1.05,k).g;col.b=amostra(u-ref*1.11,k).b;",
       " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
       " col=mix(col,tinta,.08+D*.12);col=mix(col,vec3(1.),curva*.28*(1.-D));",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
@@ -2654,7 +2654,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
       var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
-      var dpr = Math.min(window.devicePixelRatio || 1, 2), ultimo = 0, visivel = true;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2) * 0.5, ultimo = 0, visivel = true;
       el.insertBefore(cv, el.firstChild); el.classList.add("com-espelho"); el.__espelho = true;
       if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(el); }
       var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -2664,7 +2664,7 @@
       function desenharEspelho(r) {
         var W = Math.max(2, Math.round(r.width * dpr)), H = Math.max(2, Math.round(r.height * dpr));
         if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
         ctx.fillStyle = corFundo(); ctx.fillRect(0, 0, r.width, r.height);
         var houve = false;
         // cartoes e vitrine que cruzam o retangulo do vidro

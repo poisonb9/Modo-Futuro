@@ -575,7 +575,7 @@
   .vitrine .vpreco s { display: block; font: 400 12px/1 var(--mono); color: var(--fraco); margin-bottom: 4px; }
   @media (min-width: 700px) { .vitrine { display: grid; grid-template-columns: 1fr 1fr; } .vitrine .vfoto { aspect-ratio: 4 / 3; } }
   .grade {
-    display: grid; gap: 14px; margin: 14px 0 0;
+    display: grid; gap: 14px; margin: 14px 0 0; align-items: start;
     grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
     /* ⚠️ `start`: o cartao termina onde termina. Sem isto o vizinho de
        titulo longo esticava o cartao curto e deixava um vazio dentro dele
@@ -587,8 +587,11 @@
      BRANCO (a foto e' o produto) e o corpo e' vidro tingido — o mesmo
      material do console. Sem borda de 1px: quem separa e' a sombra tingida
      de ouro e o brilho de topo do vidro. Toque encolhe com mola. */
+  /* 19/09 (Bryan): o cartao tem a ALTURA DO PROPRIO conteudo — o vizinho
+     mais alto (grafico + "espere") nao estica o de cima e nao deixa um
+     vazio abaixo do botao. A grade alinha pelo topo. */
   .item {
-    display: flex; flex-direction: column; height: 100%;
+    display: flex; flex-direction: column; height: auto;
     background: #fff; border: 0;
     border-radius: 18px; overflow: hidden; text-decoration: none;
     color: inherit; box-shadow: 0 8px 24px rgba(60,45,10,.10);

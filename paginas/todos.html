@@ -108,10 +108,10 @@
        verdade, um toque de azul; cinza escuro a noite, claro de manha". O
        material e' NEUTRO: branco translucido com um sopro frio, sombra
        difusa e neutra (flutua), ouro so' na marca e no selo de queda. */
-    --vidro: rgba(255,255,255,.55);
-    --vidro-forte: rgba(255,255,255,.62);
+    --vidro: rgba(244,246,250,.62);
+    --vidro-forte: rgba(244,246,250,.72);
     --vidro-blur: blur(22px) saturate(160%);
-    --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.4), rgba(255,255,255,1) 50%, rgba(255,255,255,.4));
+    --vidro-borda: linear-gradient(135deg, rgba(20,25,40,.10), rgba(255,255,255,1) 50%, rgba(20,25,40,.10));
     --vidro-sombra: 0 18px 50px -12px rgba(30,30,40,.20), 0 2px 6px rgba(30,30,40,.06);
     /* receita DEM (Framer University): highlight interno no topo Y=2 e na
        base Y=-2, blur 0, branco 35%; mais um aro de 1px e a sombra de baixo */
@@ -140,7 +140,7 @@
      por mask no ::before, sem elemento extra. Firefox sem backdrop: solido. */
   .vidro {
     position: relative;
-    background-image: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0) 45%);
+    background-image: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0) 45%, rgba(200,208,222,.10));
     background-color: var(--vidro);
     backdrop-filter: var(--vidro-blur); -webkit-backdrop-filter: var(--vidro-blur);
     box-shadow: var(--vidro-luz), var(--vidro-sombra);
@@ -361,10 +361,10 @@
   .abas a { background: none !important; box-shadow: none !important; }  /* 19/09: aba nao e' vidro dentro do vidro (halo em volta da casinha) */
   .abas a.on { background: var(--tinta) !important; color: #fff; }
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
-    background-color: rgba(255,255,255,.45);
-    background-image: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.05) 60%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 0 0 1px rgba(0,0,0,.04),
-                0 8px 20px -10px rgba(30,30,40,.25);
+    background-color: rgba(238,241,247,.72);
+    background-image: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.15) 55%, rgba(200,208,222,.18));
+    box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(20,25,40,.06), inset 0 0 0 1px rgba(20,25,40,.07),
+                0 6px 16px -8px rgba(20,25,40,.22), 0 1px 2px rgba(20,25,40,.06);
     color: var(--tinta);
   }
   .chip-ordem[aria-pressed="true"], .abas a.on {
@@ -2883,8 +2883,7 @@
     function ambiente() {
       var c = new THREE.Scene();
       var geo = new THREE.SphereGeometry(400, 16, 8);
-      c.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xdfe6ee, side: THREE.BackSide })));
-      c.add(new THREE.Mesh(new THREE.SphereGeometry(390, 16, 8), new THREE.MeshBasicMaterial({ color: 0x9aa4b0, side: THREE.BackSide })));
+      c.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xf4f6fa, side: THREE.BackSide })));
       var luzA = new THREE.Mesh(new THREE.PlaneGeometry(260, 60), new THREE.MeshBasicMaterial({ color: 0xffffff }));
       luzA.position.set(-120, 240, -180); luzA.lookAt(0, 0, 0); c.add(luzA);
       var luzB = new THREE.Mesh(new THREE.PlaneGeometry(160, 40), new THREE.MeshBasicMaterial({ color: 0xffffff }));
@@ -2921,9 +2920,9 @@
     var pw = rp.width, ph = rp.height, px = (rp.left + rp.width / 2) - (rf.left + rf.width / 2), py = (rf.top + rf.height / 2) - (rp.top + rp.height / 2);
     var esp = 44;
     var laje = new THREE.Mesh(lajeArredondada(pw, ph, esp, 18), new THREE.MeshPhysicalMaterial({
-      transmission: 1, ior: 1.58, thickness: esp * 2.2, roughness: 0.015, metalness: 0,
-      clearcoat: 1, clearcoatRoughness: 0.03, dispersion: 0.9, color: 0xffffff,
-      specularIntensity: 1.2, attenuationColor: new THREE.Color(0xeaf2ff), attenuationDistance: 420, envMapIntensity: 1.4
+      transmission: 1, ior: 1.52, thickness: esp * 1.3, roughness: 0.02, metalness: 0,
+      clearcoat: 0.6, clearcoatRoughness: 0.05, dispersion: 0.7, color: 0xffffff,
+      specularIntensity: 0.8, attenuationColor: new THREE.Color(0xffffff), attenuationDistance: 900, envMapIntensity: 0.7
     }));
     laje.position.set(px, py, 60);
     cena.add(laje);

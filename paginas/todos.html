@@ -2,8 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- 19/09 (Bryan: "risco preto na ilha do iPhone"): a cor da barra do Safari
      e' a do fundo da pagina, nos dois temas; viewport-fit=cover pinta ate' a ilha -->
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9fc">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#17130d">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef1f5">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1e24">
 <title>Achadinho Total</title>
 <!-- ⚠️ O NOME QUE O IPHONE SALVA NA TELA DE INICIO NAO E' O <title>.
      Sem `apple-mobile-web-app-title` o iOS pega o <title> inteiro, corta
@@ -87,7 +87,7 @@
     --tinta: #16151c;
     --fraco: #6f6b7d;
     --linha: #e6e3ec;
-    --fundo: #faf9fc;
+    --fundo: #eef1f5;
     --caixa: #fff;
     /* o ouro da lupa, e o cromo que faz o aro dela */
     --ouro: #C8901A;
@@ -98,27 +98,28 @@
     /* ⭐ O MATERIAL — Liquid Glass Safari-safe (MAESTROS_LIQUID_GLASS.md §2).
        Uma classe `.vidro` usa estes tokens; nada de refracao SVG (nao
        renderiza no Safari, medido no acervo). */
-    --vidro: rgba(255,255,255,.55);
-    --vidro-forte: rgba(255,255,255,.72);
-    --vidro-blur: blur(24px) saturate(160%);
-    --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.95) 50%, rgba(255,255,255,.08));
-    --vidro-sombra: 0 12px 40px rgba(60,45,10,.14);
-    --vidro-luz: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(0,0,0,.05),
-                 inset -1px -1px 1px -1px rgba(255,255,255,.7), inset 1px 1px 1px -1px rgba(255,255,255,.7);
-    --fio: rgba(0,0,0,.07);
+    /* ⭐ 19/09 (Bryan): "tire o dourado; nuvem, leve, transparente, vidro de
+       verdade, um toque de azul; cinza escuro a noite, claro de manha". O
+       material e' NEUTRO: branco translucido com um sopro frio, sombra
+       difusa e neutra (flutua), ouro so' na marca e no selo de queda. */
+    --vidro: rgba(255,255,255,.42);
+    --vidro-forte: rgba(255,255,255,.58);
+    --vidro-blur: blur(28px) saturate(140%);
+    --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.95) 50%, rgba(255,255,255,.25));
+    --vidro-sombra: 0 18px 50px -10px rgba(40,50,70,.18), 0 2px 6px rgba(40,50,70,.05);
+    --vidro-luz: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(40,50,70,.05);
+    --fio: rgba(40,50,70,.08);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --tinta: #f4f2f9; --fraco: #a5a1b4; --linha: #2b2733;
-      --fundo: #17130d; --caixa: #221c14; --painel: #08080b;
+      --tinta: #f2f3f6; --fraco: #a3a8b3; --linha: #2c3038;
+      --fundo: #1b1e24; --caixa: #262a31; --painel: #0e1013;
       --ouro: #F0B62E;
-      /* 19/09 (Bryan: "corrigir no modo escuro, a noite cansa a vista"): o
-         vidro escuro e' TINGIDO de ouro (nao cinza), a luz atras fica mais
-         forte e a borda de luz e' quente. */
-      --vidro: rgba(44,38,26,.58); --vidro-forte: rgba(52,45,30,.82);
-      --vidro-borda: linear-gradient(135deg, rgba(255,230,160,.06), rgba(255,236,190,.45) 50%, rgba(255,230,160,.06));
-      --vidro-sombra: 0 12px 40px rgba(0,0,0,.5);
-      --vidro-luz: inset 0 1px 0 rgba(255,236,190,.22), inset 0 -1px 0 rgba(0,0,0,.35);
+      /* noite: cinza-carvao (nunca preto), vidro fumê com aro frio */
+      --vidro: rgba(255,255,255,.07); --vidro-forte: rgba(255,255,255,.11);
+      --vidro-borda: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.28) 50%, rgba(255,255,255,.06));
+      --vidro-sombra: 0 18px 50px -10px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.25);
+      --vidro-luz: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.35);
       --fio: rgba(255,255,255,.08);
     }
   }
@@ -126,18 +127,16 @@
      some). Duas luzes douradas fixas e suaves — gradiente, nao imagem. */
   .luz {
     position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background: radial-gradient(55% 40% at 15% 8%, rgba(242,201,76,.42), transparent 70%),
-                radial-gradient(45% 35% at 90% 30%, rgba(255,236,190,.55), transparent 70%),
-                radial-gradient(60% 40% at 50% 100%, rgba(200,144,26,.18), transparent 70%);
+    background: radial-gradient(50% 38% at 18% 12%, rgba(255,255,255,.95), transparent 70%),
+                radial-gradient(45% 36% at 85% 28%, rgba(214,228,246,.85), transparent 70%),
+                radial-gradient(60% 40% at 50% 92%, rgba(226,230,240,.9), transparent 70%);
   }
-  /* no escuro a luz de cima nasce mais baixo e mais larga: a barra do Safari
-     (cor solida, theme-color) encosta num fundo quase da mesma cor */
+  /* noite: as mesmas nuvens, so' que fumaca sobre carvao — nunca preto */
   @media (prefers-color-scheme: dark) {
     .luz {
-      opacity: .85;
-      background: radial-gradient(70% 45% at 20% 22%, rgba(242,201,76,.40), transparent 70%),
-                  radial-gradient(45% 35% at 90% 40%, rgba(255,236,190,.40), transparent 70%),
-                  radial-gradient(60% 40% at 50% 100%, rgba(200,144,26,.22), transparent 70%);
+      background: radial-gradient(50% 38% at 18% 12%, rgba(70,78,92,.55), transparent 70%),
+                  radial-gradient(45% 36% at 85% 28%, rgba(60,74,96,.5), transparent 70%),
+                  radial-gradient(60% 40% at 50% 92%, rgba(50,55,66,.6), transparent 70%);
     }
   }
   /* o vidro como classe unica; a borda de luz (3 paradas, receita DEM) vem
@@ -159,7 +158,7 @@
      "3D fluido" sem WebGL. Some com prefers-reduced-motion. */
   .vidro::after {
     content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-    background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.35), transparent 70%);
+    background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.22), transparent 70%);
     mix-blend-mode: soft-light; transition: background-position .2s;
   }
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
@@ -304,13 +303,13 @@
   }
   .prova .cela + .cela { border-left: 1px solid var(--fio); }
   .prova .n { font: 700 19px/1 var(--mono); color: var(--tinta); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
-  .prova .pico .n { color: var(--ouro); }
+  .prova .pico .n { color: var(--tinta); }
   .prova .fim {
     grid-column: 1 / -1; border-top: 1px solid var(--fio); padding: 8px 8px 10px; text-align: center;
     font: 600 10px/1 var(--mono); letter-spacing: .1em; color: var(--fraco);
     position: relative; overflow: hidden; border-radius: 0 0 16px 16px;
   }
-  .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--ouro-claro); width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+  .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--tinta); opacity: .5; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
   .prova > .economia { display: none; }
   @media (max-width: 360px) { .prova .n { font-size: 17px; } .prova .cela { font-size: 9.5px; } }
   /* o fio vertical da prova nao se aplica a` faixa */
@@ -323,7 +322,7 @@
     display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 16px; border-radius: 16px;
     background: var(--vidro-forte); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(0,0,0,.04);
   }
-  .busca-caixa svg { width: 20px; height: 20px; flex: 0 0 20px; color: var(--ouro); }
+  .busca-caixa svg { width: 20px; height: 20px; flex: 0 0 20px; color: var(--fraco); }
   .busca {
     flex: 1; min-width: 0; border: 0; background: none; padding: 0;
     color: var(--tinta); font: 500 16px/1 Poppins, sans-serif; outline: none;
@@ -338,30 +337,30 @@
      FRIO e fino: fundo quase transparente com um sopro de azul, aro de luz
      leve, sombra curta. O ouro fica so' no chip/aba ATIVOS (marca). */
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais, .abas a {
-    background-color: rgba(232, 240, 255, .38);
-    background-image: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.05) 60%, rgba(120,150,200,.06));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 -1px 0 rgba(90,120,170,.10),
-                inset 0 0 0 1px rgba(255,255,255,.35),
-                0 4px 10px -6px rgba(60,80,120,.25);
+    background-color: rgba(255,255,255,.40);
+    background-image: linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,.05) 60%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.85), inset 0 0 0 1px rgba(255,255,255,.35),
+                0 8px 20px -10px rgba(40,50,70,.25);
   }
   .chip-ordem[aria-pressed="true"], .abas a.on {
-    background-color: var(--ouro-claro);
-    background-image: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 60%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(120,80,0,.15),
-                0 4px 12px -6px rgba(200,144,26,.45);
+    background-color: var(--tinta); color: var(--fundo);
+    background-image: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 60%);
+    box-shadow: 0 8px 20px -8px rgba(20,25,35,.45);
   }
+  .chip-ordem[aria-pressed="true"] .n { color: var(--fundo); opacity: .7; }
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {
-    box-shadow: inset 0 2px 4px rgba(60,80,120,.16), inset 0 -1px 0 rgba(255,255,255,.4);
-    background-image: linear-gradient(180deg, rgba(120,150,200,.06), rgba(255,255,255,.12));
+    box-shadow: inset 0 2px 4px rgba(40,50,70,.14), inset 0 -1px 0 rgba(255,255,255,.4);
+    background-image: none;
   }
   @media (prefers-color-scheme: dark) {
     .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais, .abas a {
-      background-color: rgba(150, 180, 230, .10);
-      background-image: linear-gradient(180deg, rgba(200,220,255,.12), rgba(255,255,255,.02) 60%, rgba(0,0,0,.06));
-      box-shadow: inset 0 1px 0 rgba(200,220,255,.22), inset 0 -1px 0 rgba(0,0,0,.28),
-                  inset 0 0 0 1px rgba(200,220,255,.08),
-                  0 6px 12px -6px rgba(0,0,0,.5);
+      background-color: rgba(255,255,255,.08);
+      background-image: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02) 60%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,255,255,.06),
+                  0 8px 20px -10px rgba(0,0,0,.5);
     }
+    .chip-ordem[aria-pressed="true"], .abas a.on { background-color: #f2f3f6; color: #1b1e24; }
+    .chip-ordem[aria-pressed="true"] .n { color: #1b1e24; }
   }
   /* ⭐ CHIPS DE PRECO (18/09, mock v5): as 4 ordens em UMA fila rolavel de
      chips; Categoria e Loja continuam menus (a lista e' longa, chip nao
@@ -376,9 +375,9 @@
     transition: transform .15s cubic-bezier(.2,.8,.2,1);
   }
   .chip-ordem:active { transform: scale(.96); }
-  .chip-ordem[aria-pressed="true"] { background: var(--ouro-claro); color: #17161d; box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 4px 12px rgba(200,144,26,.35); }
+  .chip-ordem[aria-pressed="true"] { color: var(--fundo); }
   .chip-ordem .n { font: 600 12px var(--mono); color: var(--fraco); }
-  .chip-ordem[aria-pressed="true"] .n { color: rgba(23,22,29,.65); }
+  .chip-ordem[aria-pressed="true"] .n { color: var(--fundo); }
   .busca::placeholder { color: var(--fraco); }
   /* ⛔ DUAS TENTATIVAS ERRADAS ANTES DESTA, e vale saber por que:
        1. fila unica com ROLAGEM HORIZONTAL — escondia metade das opcoes; pra
@@ -594,15 +593,15 @@
     display: flex; flex-direction: column; height: auto;
     background: #fff; border: 0;
     border-radius: 18px; overflow: hidden; text-decoration: none;
-    color: inherit; box-shadow: 0 8px 24px rgba(60,45,10,.10);
+    color: inherit; box-shadow: 0 14px 34px -12px rgba(40,50,70,.22), 0 2px 6px rgba(40,50,70,.05);
     transition: transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease;
   }
   .item:active { transform: scale(.975); }
   @media (hover: hover) {
-    .item:hover { box-shadow: 0 14px 34px rgba(60,45,10,.16); transform: translateY(-2px); }
+    .item:hover { box-shadow: 0 22px 44px -12px rgba(40,50,70,.28); transform: translateY(-2px); }
   }
   /* no escuro o poco da foto e' marfim, nao branco puro: nao ofusca */
-  @media (prefers-color-scheme: dark) { .item { background: #f3efe6; } .vitrine { background: #f3efe6; } .vitrine .vfoto { background: #f3efe6; } }
+  @media (prefers-color-scheme: dark) { .item { background: #f4f5f7; } .vitrine { background: #f4f5f7; } .vitrine .vfoto { background: #f4f5f7; } }
   .foto { position: relative; aspect-ratio: 1; background: var(--linha); }
   .item.sem-foto { display: none; }
   /* ⭐ reparo 1 (18/09): foto branca dentro de cartao branco "flutuava" sem
@@ -853,7 +852,7 @@
   }
   .abas a:active { transform: scale(.94); }
   .abas a svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .abas a.on { color: #17161d; background: var(--ouro-claro); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 6px 16px rgba(200,144,26,.35); }
+  .abas a.on { color: var(--fundo); }
   @media (prefers-reduced-motion: reduce) { .abas a { transition: none; } }
 
   footer {
@@ -2479,9 +2478,9 @@
       " float a=smoothstep(.85,0.,length((u-c1)*vec2(1.,1.5)));",
       " float b=smoothstep(.75,0.,length((u-c2)*vec2(1.2,1.)));",
       " float c=smoothstep(.6,0.,length((u-vec2(.5,1.05))*vec2(.9,1.)));",
-      " vec3 ouro=vec3(.95,.79,.30),creme=vec3(1.,.93,.75),ambar=vec3(.85,.62,.18);",
-      " vec3 base=mix(vec3(.965,.945,.905),vec3(.07,.06,.08),D);",
-      " return base+ouro*a*(.85-D*.45)+creme*b*(.6-D*.35)+ambar*c*(.35-D*.15);}",
+      " vec3 nuvem=vec3(1.,1.,1.),ceu=vec3(.84,.90,.98),neblina=vec3(.89,.91,.95);",
+      " vec3 base=mix(vec3(.93,.945,.965),vec3(.11,.12,.14),D);",
+      " return base+nuvem*a*(.10+D*.16)+ceu*b*(.16-D*.02)+neblina*c*(.08+D*.04);}",
       "void main(){",
       " vec2 u=gl_FragCoord.xy/R;vec2 q=(u-.5)*R;",
       " float r=24.*K;float d=sdb(q,R*.5,r);",
@@ -2492,11 +2491,11 @@
       " float curva=pow(borda,1.6);",
       " vec2 ref=n*curva*.14+normalize(q-P+1e-3)*gota*.04;",
       " vec3 col;col.r=luz(u-ref*1.00).r;col.g=luz(u-ref*1.10).g;col.b=luz(u-ref*1.22).b;",
-      " col=mix(col,mix(vec3(1.),vec3(.12,.11,.14),D),(1.-D)*.04+D*.18);",
+      " col=mix(col,mix(vec3(1.),vec3(.15,.16,.19),D),(1.-D)*.06+D*.22);",
       " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
       " float sp=pow(max(dot(normalize(vec3(n*borda,1.)),ld),0.),18.)*borda;",
       " float top=smoothstep(.0,.08,1.-u.y)*smoothstep(1.,.85,1.-u.y);",
-      " col+=vec3(1.,.97,.9)*(sp*1.1+top*.12+gota*.3+curva*.10);",
+      " col+=vec3(1.)*(sp*.9+top*.10+gota*.25+curva*.08);",
       " float a=step(d,0.);gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
     function sh(t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; }

@@ -201,6 +201,12 @@
      (abas, chip da loja) o aro nem existe. */
   .vidro::after { z-index: 0; }
   .vidro > * { position: relative; z-index: 1; }
+  /* parte 9: o espelho refratado fica atras do conteudo; quando vivo, o vidro
+     CSS sai da frente (o shader e' o vidro) */
+  .vidro > canvas.espelho { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; border-radius: inherit; pointer-events: none; display: none; }
+  .vidro.espelho-vivo > canvas.espelho { display: block; }
+  .vidro.espelho-vivo { background-color: transparent; background-image: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .vidro.espelho-vivo::after { display: none; }
   .abas::after, .vloja::after { display: none; }
   @media (prefers-reduced-motion: reduce) { .vidro::after { display: none; } }
   @supports not (backdrop-filter: blur(1px)) { .vidro { background: var(--caixa); } }
@@ -1437,6 +1443,7 @@
     }
     if (p.imagem) {
       var img = document.createElement("img");
+      img.crossOrigin = "anonymous";   // parte 9: o espelho desenha a foto num canvas
       // ⭐ MINIATURA DO CDN (18/09/2026): o Lighthouse mediu 974 KiB de imagem
       // sem redimensionar. Ali: `_350x350q75.jpg_.webp` = 12 KB no lugar de
       // 81 (medido); ML: `-O.jpg` = 36 KB no lugar de 178. Se a variante
@@ -2112,7 +2119,7 @@
         a.className = "vitrine"; a.href = v1.link; a.rel = "noopener";
         a.addEventListener("click", function () { anotarClique(v1, "vitrine"); });
         var img = document.createElement("img");
-        img.className = "vfoto"; img.alt = v1.nome; img.src = v1.imagem; img.loading = "eager";
+        img.className = "vfoto"; img.alt = v1.nome; img.crossOrigin = "anonymous"; img.src = v1.imagem; img.loading = "eager";
         a.appendChild(img);
         if ((v1.queda || 0) >= 5) { a.appendChild(el("span", "vselo", "↓ " + Math.round(v1.queda) + "%")); }
         a.appendChild(el("span", "vloja vidro", v1.loja || ""));
@@ -2590,6 +2597,127 @@
     requestAnimationFrame(quadro);
   })();
 
+  // ⭐ PARTE 9 — O ESPELHO (20/09/2026). O que faltava para o vidro DOBRAR o
+  // conteudo no Safari (que nao tem refracao por SVG): o vidro so' refrata o
+  // que esta' na cena (acervo: Yuri Artiukh; "Snapshot Views": capturar o
+  // conteudo como imagem e aplicar o filtro — LiquidGlass DEM). Nos SABEMOS o
+  // que esta' embaixo da barra e do console: as fotos (CORS liberado no Ali e
+  // no ML) e os corpos dos cartoes. Entao desenhamos isso num canvas 2D
+  // (o espelho) e um shader WebGL refrata essa textura com o mapa de
+  // deslocamento saido do SDF da forma arredondada (acervo, qYFMOMVZoPY).
+  // Custo: <= 8 imagens desenhadas por quadro, 1 textura pequena, 30 fps,
+  // so' quando ha' algo embaixo; sem WebGL fica o backdrop CSS.
+  (function espelho() {
+    if (!window.WebGLRenderingContext) { return; }
+    var menosMov = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (menosMov && location.search.indexOf("gl=1") < 0) { return; }
+    var VS = "attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
+    var FS = [
+      "precision mediump float;varying vec2 v;uniform sampler2D T;uniform vec2 R;uniform vec3 L;uniform float K,D,A;",
+      "float sdb(vec2 q,vec2 b,float r){vec2 d=abs(q)-b+r;return length(max(d,0.))+min(max(d.x,d.y),0.)-r;}",
+      "vec3 amostra(vec2 u){vec3 c=vec3(0.);float w=0.;",
+      " for(int i=-2;i<=2;i++){for(int j=-2;j<=2;j++){vec2 o=vec2(float(i),float(j))*(A/R);float g=exp(-float(i*i+j*j)*.35);c+=texture2D(T,u+o).rgb*g;w+=g;}}",
+      " return c/w;}",
+      "void main(){",
+      " vec2 u=vec2(v.x,1.-v.y);vec2 q=(u-.5)*R;",
+      " float r=K<0.?min(R.x,R.y)*.5:K;float d=sdb(q,R*.5,r);",
+      " float e=smoothstep(0.,-min(R.y*.45,40.),d);float borda=1.-e;",
+      " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
+      " vec2 n=normalize(g+1e-5);float curva=pow(borda,1.5);",
+      " vec2 ref=n*curva*.11;",
+      " vec3 col;col.r=amostra(u-ref*1.00).r;col.g=amostra(u-ref*1.06).g;col.b=amostra(u-ref*1.14).b;",
+      " vec3 tinta=mix(vec3(1.),vec3(.10,.11,.14),D);",
+      " col=mix(col,tinta,.16+D*.10+curva*.10);",
+      " vec3 ld=normalize(vec3(L.x-u.x,u.y-L.y,.8));",
+      " float sp=pow(max(dot(normalize(vec3(n*curva,1.)),ld),0.),24.)*borda;",
+      " float top=smoothstep(.0,.10,1.-u.y)*smoothstep(1.,.80,1.-u.y);",
+      " col+=vec3(1.)*(sp*.7+top*.10+curva*.06);",
+      " float a=step(d,0.);gl_FragColor=vec4(col*a,a);}"
+    ].join("\n");
+    function ligar(el, raio) {
+      if (!el || el.__espelho) { return; }
+      var cv = document.createElement("canvas"); cv.className = "espelho";
+      var gl = cv.getContext("webgl", { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: "low-power" });
+      if (!gl) { return; }
+      function sh(t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; }
+      var vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+      if (!vs || !fs) { return; }
+      var pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { return; }
+      gl.useProgram(pr);
+      var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      var lp = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+      var u = {}; ["T","R","L","K","D","A"].forEach(function (k) { u[k] = gl.getUniformLocation(pr, k); });
+      var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
+      var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
+      var dpr = Math.min(window.devicePixelRatio || 1, 2), ultimo = 0, visivel = true;
+      el.insertBefore(cv, el.firstChild); el.classList.add("com-espelho"); el.__espelho = true;
+      if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(el); }
+      var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (window.matchMedia) { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) { escuro = e.matches; }); }
+      function corFundo() { return getComputedStyle(document.documentElement).getPropertyValue("--fundo").trim() || "#fff"; }
+      function corCaixa() { return escuro ? "#191823" : "#ffffff"; }
+      function desenharEspelho(r) {
+        var W = Math.max(2, Math.round(r.width * dpr)), H = Math.max(2, Math.round(r.height * dpr));
+        if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.fillStyle = corFundo(); ctx.fillRect(0, 0, r.width, r.height);
+        var houve = false;
+        // cartoes e vitrine que cruzam o retangulo do vidro
+        var alvos = document.querySelectorAll("#grade .item, #vitrine .vitrine, #vitrine img.vfoto");
+        for (var i = 0; i < alvos.length; i++) {
+          var b = alvos[i].getBoundingClientRect();
+          if (b.bottom < r.top || b.top > r.bottom || b.right < r.left || b.left > r.right) { continue; }
+          houve = true;
+          if (alvos[i].tagName === "IMG") { continue; }
+          // corpo do cartao (fundo branco da foto + corpo)
+          ctx.fillStyle = "#fff";
+          arred(ctx, b.left - r.left, b.top - r.top, b.width, b.height, 18); ctx.fill();
+          var corpo = alvos[i].querySelector(".corpo");
+          if (corpo) { var cb = corpo.getBoundingClientRect(); ctx.fillStyle = corCaixa(); ctx.fillRect(cb.left - r.left, cb.top - r.top, cb.width, cb.height); }
+          var img = alvos[i].querySelector("img");
+          if (img && img.complete && img.naturalWidth) {
+            var ib = img.getBoundingClientRect();
+            // object-fit: contain
+            var s = Math.min(ib.width / img.naturalWidth, ib.height / img.naturalHeight);
+            var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+            try { ctx.drawImage(img, ib.left - r.left + (ib.width - dw) / 2, ib.top - r.top + (ib.height - dh) / 2, dw, dh); } catch (e) { /* sem CORS: fica o branco */ }
+          }
+        }
+        return houve;
+      }
+      function arred(c, x, y, w, h, rr) { c.beginPath(); c.moveTo(x + rr, y); c.arcTo(x + w, y, x + w, y + h, rr); c.arcTo(x + w, y + h, x, y + h, rr); c.arcTo(x, y + h, x, y, rr); c.arcTo(x, y, x + w, y, rr); c.closePath(); }
+      function quadro(ts) {
+        requestAnimationFrame(quadro);
+        if (!visivel || ts - ultimo < 33) { return; }
+        ultimo = ts;
+        var r = el.getBoundingClientRect();
+        if (!r.width || !r.height) { return; }
+        var houve = desenharEspelho(r);
+        el.classList.toggle("espelho-vivo", houve);
+        if (!houve) { return; }   // nada embaixo: o CSS resolve (fundo liso)
+        var W = esp.width, H = esp.height;
+        if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; gl.viewport(0, 0, W, H); }
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, esp);
+        var st = getComputedStyle(document.documentElement);
+        var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
+        gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
+        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 14 * dpr);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+      requestAnimationFrame(quadro);
+      cv.addEventListener("webglcontextlost", function () { el.classList.remove("com-espelho", "espelho-vivo"); cv.remove(); el.__espelho = false; });
+    }
+    // a barra de abas (pilula: raio = metade da altura) e o console (raio 24)
+    ligar(document.getElementById("abas"), -1);
+    ligar(document.getElementById("console"), 24);
+  })();
+
   function grudar() {
     var c = document.getElementById("console"), p = document.getElementById("prova");
     if (!c || !p) { return; }

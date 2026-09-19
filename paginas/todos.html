@@ -2627,7 +2627,7 @@
       // tem ESPESSURA e a borda e' uma calota; a altura h(x) da superficie da'
       // a normal 3D, e o raio refrata pela LEI DE SNELL (ior 1.5). So' os
       // ultimos ~10 px sao lente (a barra do Safari e' assim); o centro e' plano.
-      " float L0=8.*A/9.;float x=clamp(-d/L0,0.,1.);",
+      " float L0=6.*A/7.;float x=clamp(-d/L0,0.,1.);",
       " float hz=sqrt(max(0.,1.-(1.-x)*(1.-x)));",
       " float dh=(1.-x)/max(hz,.05);",
       " vec2 g=vec2(sdb(q+vec2(1.,0.),R*.5,r)-sdb(q-vec2(1.,0.),R*.5,r),sdb(q+vec2(0.,1.),R*.5,r)-sdb(q-vec2(0.,1.),R*.5,r));",
@@ -2635,7 +2635,7 @@
       " vec3 N=normalize(vec3(n2*dh*step(x,.999),1.));",
       " vec3 I=vec3(0.,0.,-1.);float eta=1./1.5;",
       " vec3 Rf=refract(I,N,eta);",
-      " float esp=6.*A/9.;",
+      " float esp=5.*A/7.;",
       " vec2 desl=(Rf.xy/max(-Rf.z,.2))*esp;",
       " vec2 uu=u+desl/R;",
       " float borda=1.-x;",
@@ -2666,8 +2666,9 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       // o espelho 2D: o que esta' embaixo do vidro, desenhado a partir do DOM
-      var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
-      var dpr = Math.min(window.devicePixelRatio || 1, 2), dprE = 0.5, ultimo = 0, visivel = true;
+      var esp = document.createElement("canvas"), ctx = esp.getContext("2d");
+      var esp2 = document.createElement("canvas"), ctx2 = esp2.getContext("2d");
+      var dpr = Math.min(window.devicePixelRatio || 1, 2), dprE = 0.25, ultimo = 0, visivel = true;
       el.insertBefore(cv, el.firstChild); el.classList.add("com-espelho"); el.__espelho = true;
       if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(el); }
       var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -2718,6 +2719,13 @@
         var W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
         if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; gl.viewport(0, 0, W, H); }
         gl.bindTexture(gl.TEXTURE_2D, tex);
+        // 2a passada: reduz a metade e volta — cada passada e' um filtro bilinear;
+        // duas passadas somam um gaussiano limpo (o ctx.filter do Safari quantiza)
+        var w2 = Math.max(1, esp.width >> 1), h2 = Math.max(1, esp.height >> 1);
+        if (esp2.width !== w2 || esp2.height !== h2) { esp2.width = w2; esp2.height = h2; }
+        ctx2.imageSmoothingEnabled = true; ctx2.imageSmoothingQuality = "high";
+        ctx2.clearRect(0, 0, w2, h2); ctx2.drawImage(esp, 0, 0, w2, h2);
+        ctx.imageSmoothingEnabled = true; ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, esp.width, esp.height); ctx.drawImage(esp2, 0, 0, esp.width, esp.height);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, esp);
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;

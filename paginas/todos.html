@@ -2684,8 +2684,15 @@
       // upload de textura por quadro era o gargalo. Redesenha quando a barra
       // sai da tira, quando a grade muda ou a cada 400 ms (fotos carregando).
       var FOLGA = 320, tira = null, ultimaTira = 0;
+      // ⛔ MEDIDO 20/09 (video a 6 fps): a cor dentro da pilula ficava PARADA
+      // enquanto a pagina rolava — window.scrollY no iOS chega atrasado (o
+      // scroll e' assincrono no compositor). O rect de um elemento do
+      // documento, lido no mesmo rAF, reflete a posicao real. A referencia
+      // de "pagina" passa a ser o topo da faixa.
+      var ancora = document.querySelector(".faixa") || document.body;
+      function scrollReal() { return -ancora.getBoundingClientRect().top; }
       function desenharEspelho(r) {
-        var topoPag = r.top + window.scrollY - FOLGA, altura = r.height + FOLGA * 2;
+        var topoPag = r.top + scrollReal() - FOLGA, altura = r.height + FOLGA * 2;
         var W = Math.max(2, Math.round(r.width * dprE)), H = Math.max(2, Math.round(altura * dprE));
         if (esp.width !== W || esp.height !== H) { esp.width = W; esp.height = H; }
         ctx.setTransform(dprE, 0, 0, dprE, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
@@ -2733,7 +2740,7 @@
         ultimo = ts;
         var r = el.getBoundingClientRect();
         if (!r.width || !r.height) { return; }
-        var sy = window.scrollY, topoPagBarra = r.top + sy;
+        var sy = scrollReal(), topoPagBarra = r.top + sy;
         var parado = Math.abs(sy - (el.__sy || 0)) < 0.5; el.__sy = sy;
         var fora = !tira || topoPagBarra < tira.topoPag + 24 || topoPagBarra + r.height > tira.topoPag + tira.altura - 24;
         var precisa = fora || (parado && (ts - ultimaTira > 250 || el.__grade !== document.getElementById("grade").childElementCount));

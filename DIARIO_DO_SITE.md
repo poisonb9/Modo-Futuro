@@ -6,6 +6,54 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 22:46 — `0275d1f`
+
+**O quê:** Nome maior e a caixa que cabe; e a guarda do titulo restrito
+
+**Por quê:** 1) ⛔ O ATROPELO QUE ELE FOTOGRAFOU. Com o nome em duas linhas, a segunda sumia atras do preco ("Carregador de carro USB / C carregamento rapido"). Mesma classe de erro de horas atras, cometida por mim DE NOVO: cresci o preco de 26 para 34px de altura e NAO cresci a caixa de altura fixa que o contem. Com `justify-content: center`, o que nao cabe vaza pelos dois lados. 134 -> 152, somando a mao: nome 42 + preco 34 + dica 15 + botao 26 mais vaos e padding. Altura fixa continua de proposito (a linha nao pode pular quando o nome muda de tamanho) — mas altura fixa OBRIGA a somar a mao toda vez qu...
+
+Carimbo no ar: `927a54668c32` · 25 endereço(s) conferidos · HTML 107 KB
+
+---
+
+## 20/09/2026 22:33 — `56f6975`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `a0a5771b908c` · 25 endereço(s) conferidos · HTML 106 KB
+
+---
+
+## 20/09/2026 22:21 — `e5af22b`
+
+**O quê:** O preco vira o dono da linha; e a caixa do CTA finalmente acende
+
+**Por quê:** 1) "DE QUE MANEIRA APRESENTAR O NOME E O VALOR PARA O CLIENTE QUERER MUITO COMPRAR?" O acervo do projeto responde com o TESTE DO OLHO MEIO FECHADO (YC, Garry Tan): o elemento de maior peso tem de ser o que importa. MEDIDO no heroi, havia TRES familias — Archivo Black no titulo, Poppins no nome, JetBrains Mono no preco — e o acervo e' DEMONSTRADO nisso: "uma fonte de exibicao so'". O preco era o UNICO ainda em mono: vitrine e cartoes migraram para Poppins em 19/09 e o heroi ficou para tras. Estava escrito no handoff como item 1 da minha lista desde as 01:30 e nunca foi feito. preco mono 22px...
+
+Carimbo no ar: `79ada51843b6` · 25 endereço(s) conferidos · HTML 106 KB
+
+---
+
+## 20/09/2026 22:17 — `e5af22b`
+
+**O quê:** O preco vira o dono da linha; e a caixa do CTA finalmente acende
+
+**Por quê:** 1) "DE QUE MANEIRA APRESENTAR O NOME E O VALOR PARA O CLIENTE QUERER MUITO COMPRAR?" O acervo do projeto responde com o TESTE DO OLHO MEIO FECHADO (YC, Garry Tan): o elemento de maior peso tem de ser o que importa. MEDIDO no heroi, havia TRES familias — Archivo Black no titulo, Poppins no nome, JetBrains Mono no preco — e o acervo e' DEMONSTRADO nisso: "uma fonte de exibicao so'". O preco era o UNICO ainda em mono: vitrine e cartoes migraram para Poppins em 19/09 e o heroi ficou para tras. Estava escrito no handoff como item 1 da minha lista desde as 01:30 e nunca foi feito. preco mono 22px...
+
+Carimbo no ar: `8828a0a4041e` · 25 endereço(s) conferidos · HTML 105 KB
+
+---
+
+## 20/09/2026 21:59 — `52589c2`
+
+**O quê:** A caixa do CTA acende com a luz; barra alinhada com a busca
+
+**Por quê:** 1) A CAIXA, NAO O FIO. Ele viu a borda enchendo pelo perimetro e disse: "isso e' legal mas nao e' bem o que eu queria ... quando a luz aparece e comeca a encher, a caixa que envolve comprar agora comeca a acender, comeca a ter cor e vai chegando a cor ate' o auge e depois apaga tudo". Agora o que anima e' o PREENCHIMENTO, no mesmo compasso do clarao. ⚠️ O TEXTO NAO DEPENDE DESSA COR: e' --tinta sobre a pagina branca, 18:1 mesmo com a caixa completamente apagada. A cor e' evento; leitura nao pode ser evento. ⚠️ `background-color`, nao o atalho `background`, senao a animacao apagaria tambem q...
+
+Carimbo no ar: `a9dc01030951` · 25 endereço(s) conferidos · HTML 105 KB
+
+---
+
 ## 20/09/2026 21:39 — `bff3685`
 
 **O quê:** Borda do CTA enche com a luz; e a primeira tela para de cortar o produto

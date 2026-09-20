@@ -53,9 +53,29 @@ $saida += (& $python -X utf8 paginas/publicar_bio.py --subir 2>&1 | Out-String)
 $rc = $LASTEXITCODE
 $ErrorActionPreference = 'Stop'
 
+# A MARCA TEM DE SER O QUE FOI PUBLICADO, nao o que se viu ao decidir.
+# 20/09/2026: entre ler o hash (passo 1) e o `git pull` acima cabe um push.
+# Quando isso acontece, publica-se o estado NOVO mas grava-se a marca do
+# VELHO — e o ciclo seguinte republica identico, sem necessidade. Nao era
+# defeito de correcao (o sistema se conserta sozinho em 10 min); era um
+# deploy jogado fora. Relendo aqui, a marca casa com o byte que subiu.
+$publicado = (& git rev-parse 'HEAD:estado/precos_agora.json' 2>$null) + ' ' +
+             (& git rev-parse 'HEAD:estado/awin_catalogo.json' 2>$null) + ' ' +
+             (& git rev-parse 'HEAD:estado/produtos_publicados.jsonl' 2>$null) + ' ' +
+             (& git rev-parse 'HEAD:paginas/todos.html' 2>$null) + ' ' +
+             (& git rev-parse 'HEAD:paginas/publicar_bio.py' 2>$null) + ' ' +
+             (& git rev-parse 'HEAD:estado/fotos_ocr.json' 2>$null)
+if ($publicado.Trim()) { $agora = $publicado }
+
 $ok = ($rc -eq 0) -and ($saida -match 'nenhum faltando')
 if ($ok) { Set-Content -Path $marca -Value $agora -Encoding utf8 }
-$linha = if ($ok) { "OK  radar mudou -> publicado e conferido" } else { "FALHOU rc=$rc (publica de novo na proxima)" }
+# rc=2 e' a TRAVA, nao falha: outra publicacao estava em andamento e esta
+# esperou a vez. Chamar isso de "FALHOU" no log faz o dono procurar defeito
+# onde houve disciplina. A marca nao e' gravada nos dois casos, entao o
+# ciclo seguinte tenta de novo do mesmo jeito.
+$linha = if ($ok) { "OK  radar mudou -> publicado e conferido" }
+         elseif ($rc -eq 2) { "na fila: outra publicacao rodando, tenta na proxima" }
+         else { "FALHOU rc=$rc (publica de novo na proxima)" }
 Add-Content -Path $log -Value "[$carimbo] $linha"
 Add-Content -Path $log -Value ($saida -split "`n" | Where-Object { $_ -match 'catalogo:|multometro:|fotos:|endereco\(s\)|NAO |Error|Traceback|File "|line ' } | ForEach-Object { "    $_" })
 exit $rc

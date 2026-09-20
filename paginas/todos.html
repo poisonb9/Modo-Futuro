@@ -399,23 +399,46 @@
      console em volta — entao agora precisa de superficie propria, e as
      regras que o alcancavam por `.console ... .prova` foram re-escopadas.
      Margem de respiro em cima, porque ele nao encosta mais em nada. */
+  /* ⭐ TRES LADRILHOS, NAO UMA LAJOTA (20/09, ideia do Bryan a partir do
+     dock do iOS 26 que ele mandou: "inves dos icones deles verdes podemos
+     por nossas informacoes").
+
+     Era uma peca unica cortada por dois fios, que le' como TABELA. Agora
+     cada numero e' um objeto proprio, com superficie, borda e brilho seus,
+     flutuando lado a lado — como os icones flutuam no dock.
+
+     Tres ganhos, e o terceiro e' o que importa:
+       1. baixa a altura: a linha do "conferido" sai de dentro da caixa e
+          vira rodape solto, pequeno (ele pediu para nao ocupar espaco);
+       2. cada numero vira objeto em vez de celula;
+       3. o CLARAO rende mais: atravessando uma chapa unica ele acende tudo
+          junto e chapado; em tres pecas separadas ele acende cada uma em
+          tempo e angulo um pouco diferentes, que e' o que faz o dock da
+          Apple parecer vivo em vez de impresso.
+
+     ⚠️ NAO PODE VIRAR BOTAO. Pecas soltas convidam ao toque; por isso
+     ficam largas e baixas (nada da proporcao de botao), sem `:active`,
+     sem cursor e sem sombra de elevacao. Sao placas, nao controles. */
   .prova {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; margin: 22px 0 10px; border-radius: 16px;
-    background: rgba(0,0,0,.04); box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px;
+    margin: 22px 0 10px; background: none; box-shadow: none;
   }
-  @media (prefers-color-scheme: dark) { .prova { background: rgba(0,0,0,.25); } }
   .prova .cela {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-    padding: 12px 6px 10px; text-align: center;
-    font: 600 10px/1.2 Poppins, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--fraco);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    padding: 9px 6px 8px; text-align: center; border-radius: 13px; position: relative;
+    background: rgba(18,16,28,.045); box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+    font: 600 9.5px/1.2 Poppins, sans-serif; letter-spacing: .05em; text-transform: uppercase; color: var(--fraco);
   }
-  .prova .cela + .cela { border-left: 1px solid var(--fio); }
+  @media (prefers-color-scheme: dark) {
+    .prova .cela { background: rgba(255,255,255,.055); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+  }
   .prova .n { font: 700 19px/1 var(--mono); color: var(--tinta); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
   .prova .pico .n { color: var(--tinta); }
+  /* o "conferido ha" sai de dentro da caixa: vira rodape solto e miudo */
   .prova .fim {
-    grid-column: 1 / -1; border-top: 1px solid var(--fio); padding: 8px 8px 10px; text-align: center;
-    font: 600 10px/1 var(--mono); letter-spacing: .1em; color: var(--fraco);
-    position: relative; overflow: hidden; border-radius: 0 0 16px 16px;
+    grid-column: 1 / -1; padding: 7px 8px 0; text-align: center;
+    font: 600 9px/1 var(--mono); letter-spacing: .1em; color: var(--fraco);
+    position: relative; overflow: hidden; opacity: .8;
   }
   .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--tinta); opacity: .5; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
   .prova > .economia { display: none; }
@@ -538,7 +561,7 @@
      DEMONSTRADO). */
   @media (prefers-reduced-motion: no-preference) {
     .faixa.acende .clarao { animation: clarao 1650ms cubic-bezier(.22,.61,.36,1) both; }
-    .faixa.acende .prova::before { animation: girar-aro 1650ms cubic-bezier(.33,.0,.2,1); }
+    .faixa.acende .prova .cela::before { animation: girar-aro 1650ms cubic-bezier(.33,.0,.2,1); }
   }
   /* ⭐ MAIS DELICADA (pedido dele): pico menor (.82 no lugar de .95), subida
      mais longa e saida lenta — a luz se apaga em vez de sumir. */
@@ -565,16 +588,17 @@
     /* ⚠️ ERA translucido (rgba(255,255,255,.30)) porque o vidro do console
        aparecia por baixo. Solto sobre o branco da pagina, branco translucido
        sobre branco e' NADA: o bloco sumia. Superficie propria, discreta. */
-    .prova {
+    .prova .cela {
       position: relative;
       background-color: rgba(18,16,28,.045);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.26'/%3E%3C/svg%3E");
       background-size: 140px 140px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(0,0,0,.04);
     }
-    /* ⚠️ `::before` de um `display:grid` vira ITEM do grid; `position:absolute`
-       e' o que o tira do fluxo. Reusa a mascara do `.vidro::before`. */
-    .prova::before {
+    /* ⚠️ O `::before` vira ITEM do pai (grid ou flex, e a cela e' flex);
+       `position:absolute` e' o que o tira do fluxo. Sem isso ele ocupa
+       espaco e empurra o numero. Reusa a mascara do `.vidro::before`. */
+    .prova .cela::before {
       content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
       background: conic-gradient(from var(--aro),
         rgba(255,255,255,.98), rgba(255,255,255,.20) 26%,

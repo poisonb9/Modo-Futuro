@@ -6,6 +6,16 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 18:05 — `28555be`
+
+**O quê:** Pilula da aba mais sutil: menos tinta e muito menos sombra
+
+**Por quê:** MEDIDO ANTES DE BAIXAR, e a medicao mudou onde eu ia mexer: no CLARO o preenchimento quase nao afeta a legibilidade — de 72% para 36% a razao vai de 18,04 para 17,93, ou seja 0,11 de diferenca. A barra ja' e' quase branca, entao branco sobre branco nao muda a luminancia. Quem da' presenca a' pilula nao e' a tinta: e' a SOMBRA.
+
+Carimbo no ar: `3713b1a3a7a4` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
 ## 20/09/2026 17:54 — `59962b7`
 
 **O quê:** Aba ativa: fica a "clara", andaime removido, e tres regras viram uma

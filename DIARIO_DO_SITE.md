@@ -6,6 +6,26 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 20:43 — `76343c4`
+
+**O quê:** Cabecalhos de seguranca: os tres faceis, CSP de conteudo fica para depois
+
+**Por quê:** Autorizado pelo Bryan depois de eu explicar cada um em portugues claro. Hoje o Pages nao manda NENHUM dos quatro (conferido no ar).
+
+Carimbo no ar: `7b1747b39101` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 20:40 — `b5ef17c`
+
+**O quê:** Vigia: marca relida depois do pull, e rc=2 e' fila, nao falha
+
+**Por quê:** A marca era gravada com o hash lido ANTES do `git pull` — entre uma coisa e outra cabe um push, e ai' publicava-se o estado novo gravando a marca do velho: o ciclo seguinte repetia um deploy identico. Nao era incorrecao (o sistema se conserta em 10 min), era deploy jogado fora. Agora a marca vem de HEAD depois do pull: casa com o byte que subiu.
+
+Carimbo no ar: `6bc979fed2e4` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
 ## 20/09/2026 20:25 — `35dec4f`
 
 **O quê:** Diario: entrada de 1c47c12 (segunda linha viva no ar)

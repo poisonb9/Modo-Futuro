@@ -6,6 +6,40 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 17:20 — `1c4bc6c`
+
+**O quê:** Tres variantes da aba ativa, testaveis pelo endereco
+
+**Por quê:** Bryan (20/09): "a pilula no inicio ta' muito evidente, tem como chamar menos atencao? Nao sei? Vamos testar".
+
+Carimbo no ar: `7716e7f68efe` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 17:03 — `c7ea7ee`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `2bc1c798d499` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 16:23 — `c655a12`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `fe11cd36490a` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 16:12 — `95d2902`
+
+**O quê:** Diario: entrada de 005afe6 (CTA sai com o preco; pilula da aba solida)
+
+Carimbo no ar: `abe22868e922` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
 ## 20/09/2026 16:04 — `005afe6`
 
 **O quê:** CTA some junto com o preco; e a pilula da aba volta a ser solida

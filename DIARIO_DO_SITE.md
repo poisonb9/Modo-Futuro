@@ -6,6 +6,44 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 21:39 — `bff3685`
+
+**O quê:** Borda do CTA enche com a luz; e a primeira tela para de cortar o produto
+
+**Por quê:** 1) A BORDA QUE ENCHE. "o botao vai acendendo o contorno dele conforme a luz que vem por tras enche ele, e no fim ele fica ligado igual esta' agora; depois some e reinicia no proximo preco". Barra de progresso circular: `conic-gradient` com parada dura que anda pelo perimetro, com o angulo registrado por `@property` para poder interpolar (sem registrar, a variavel e' texto e o contorno pularia de 0 para 360). `from -90deg` comeca no topo, que e' onde o olho espera. Mesma duracao e curva do clarao, senao a borda corre por fora da luz que deveria estar enchendo ela. `both` deixa acesa no fim;...
+
+Carimbo no ar: `9ee29ec2d74d` · 25 endereço(s) conferidos · HTML 105 KB
+
+---
+
+## 20/09/2026 21:15 — `0d4fedd`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `d5e9ec089495` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 21:05 — `5fa16ff`
+
+**O quê:** A forma: tres ladrilhos no lugar da lajota fatiada
+
+**Por quê:** Ideia do Bryan, do dock do iOS 26 que ele mandou: "inves dos icones deles verdes podemos por nossas informacoes". Era a ultima peca da ideia dele que faltava construir.
+
+Carimbo no ar: `d5e9ec089495` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 21:01 — `5fa16ff`
+
+**O quê:** A forma: tres ladrilhos no lugar da lajota fatiada
+
+**Por quê:** Ideia do Bryan, do dock do iOS 26 que ele mandou: "inves dos icones deles verdes podemos por nossas informacoes". Era a ultima peca da ideia dele que faltava construir.
+
+Carimbo no ar: `a7e77e363759` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
 ## 20/09/2026 20:43 — `76343c4`
 
 **O quê:** Cabecalhos de seguranca: os tres faceis, CSP de conteudo fica para depois

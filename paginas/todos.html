@@ -284,8 +284,17 @@
      vazava pelos DOIS lados: o preco atropelava a segunda linha do nome.
      Visto no print antes de publicar. 92 -> 118 e' o minimo que cabe
      nome de 2 linhas + preco + pilula. */
+  /* ⛔ 134 -> 152. O ATROPELO QUE ELE FOTOGRAFOU: quando o nome quebra em
+     duas linhas, a segunda sumia atras do preco. Mesma classe de erro de
+     horas atras, e cometida por mim de novo: cresci o PRECO de 26 para 34px
+     de altura e NAO cresci a caixa de altura fixa que o contem. Com
+     `justify-content: center`, o que nao cabe vaza pelos DOIS lados.
+     A conta agora: nome 42 + preco 34 + dica 15 + botao 26, mais os vaos e
+     o padding = 152. Altura fixa continua sendo de proposito, para a linha
+     nao pular quando o nome muda de tamanho — mas altura fixa exige somar a
+     mao toda vez que uma peca cresce. */
   .vivo {
-    height: 134px; display: flex; flex-direction: column;
+    height: 152px; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 2px;
     margin: 0 auto 6px; max-width: 34ch; text-decoration: none;
     color: inherit; border-radius: 12px; padding: 6px 10px;
@@ -296,9 +305,15 @@
      deixar uma palavra orfa embaixo. NAO resolve o teto: o nome e um titulo
      de marketplace traduzido por maquina, e tipografia melhora a leitura
      sem transformar isso em desejo. */
+  /* ⭐ 16,5px (20/09, "o texto que esta sendo digitado, ele parece
+     pequeno?"). O acervo responde com faixa, nao com gosto: "uma fonte de
+     exibicao so; CORPO 16-18px" (MAESTROS_ESTETICA, DEMONSTRADO). Estava em
+     15px, abaixo da faixa — e ficou pequeno de vez quando o preco subiu
+     para 30px ao lado.
+     A caixa de duas linhas acompanha: 16,5 x 1,25 x 2 = 41,25 -> 42px. */
   .vivo-nome {
-    font-size: 15px; line-height: 1.25; color: var(--tinta); text-wrap: balance;
-    height: 38px; overflow: hidden; display: -webkit-box;
+    font-size: 16.5px; line-height: 1.25; color: var(--tinta); text-wrap: balance;
+    height: 42px; overflow: hidden; display: -webkit-box;
     -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   }
   /* ⭐ O PRECO E O DONO DA LINHA (20/09, pergunta dele: "de que maneira
@@ -391,7 +406,12 @@
     header { padding: 14px 0 4px; }
     h1 { font-size: clamp(24px, 6.2vw, 34px); }
     .marca-nome { font-size: 10px; }
-    .vivo { height: 118px; margin-bottom: 2px; }
+    /* ⚠️ Em tela baixa o preco encolhe junto: sem isso, os 18px que o nome
+       e a caixa ganharam acima voltariam a empurrar o cartao da vitrine
+       para debaixo da barra — o defeito que ele fotografou de manha e que
+       o `teste_primeira_tela_cabe` agora guarda. */
+    .vivo { height: 132px; margin-bottom: 2px; }
+    .vivo-preco { height: 30px; font-size: 26px; }
     /* ⛔ EU TINHA ESCRITO AQUI QUE O CARTAO NAO ENCOLHERIA, e estava errado.
        So' o topo nao bastou: MEDIDO depois de corta-lo de 375 para 290, o
        preco ainda ficava 36 px abaixo da barra e 63 px do cartao sumiam.
@@ -405,14 +425,20 @@
        especificidade, quem vem depois vence. Medi e o cartao continuava em
        358 px — a regra estava escrita e sem efeito. */
     #vitrine .vitrine .vfoto { aspect-ratio: 4 / 3; }
-    .vivo-nome { font-size: 14px; }
+    .vivo-nome { font-size: 15px; height: 38px; }
     .vivo-cta { height: 24px; margin-top: 7px; }
     .console { margin-top: 8px; }
   }
   @media (max-height: 640px) {
     .marca-logo { width: 46px; height: 46px; margin-bottom: 5px; }
     header { padding: 10px 0 2px; }
-    .vivo { height: 108px; }
+    /* na tela mais baixa o heroi cede o maximo: e a unica faixa onde a
+       busca disputa lugar com o cartao da vitrine. */
+    .vivo { height: 112px; }
+    .vivo-preco { height: 26px; font-size: 22px; }
+    .vivo-nome { font-size: 14.5px; height: 36px; }
+    .marca-logo { width: 40px; height: 40px; margin-bottom: 4px; }
+    .vivo-cta { height: 23px; margin-top: 5px; }
   }
   /* 18/09: sem sublinhado nenhum no nome (Bryan: "como link ficou horrivel"); o convite e' o proprio nome + preco. */
   .cursor {

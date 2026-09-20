@@ -1024,6 +1024,26 @@
 
   <div id="vitrine"></div>
   <div class="grade" id="grade"></div>
+  <!-- 20/09 (Bryan, 4 prints do recarregar): o Safari pinta o HTML antes de
+       o script grande chegar (~1 s no 4G). A pagina guarda a copia do que
+       montou (prova, chips, vitrine, primeiros cartoes) no localStorage,
+       chaveada pelo carimbo do deploy (<meta name="v">); no recarregar, este
+       script pequeno repoe a copia ANTES do script grande, e ele troca pela
+       viva ao chegar. Primeira visita: esqueleto. Copia de outro deploy: fora. -->
+  <script>
+  (function () {
+    try {
+      var m = document.querySelector('meta[name="v"]'), v = m && m.getAttribute("content");
+      var c = JSON.parse(localStorage.getItem("at_pronto") || "null");
+      if (!v || !c || c.v !== v) { return; }
+      var q = function (id) { return document.getElementById(id); };
+      if (c.prova && q("prova")) { q("prova").insertAdjacentHTML("beforeend", c.prova); }
+      if (c.chips && q("chips")) { q("chips").innerHTML = c.chips; }
+      if (c.vitrine && q("vitrine")) { q("vitrine").innerHTML = c.vitrine; }
+      if (c.grade && q("grade")) { q("grade").innerHTML = c.grade; }
+    } catch (e) { /* sem localStorage (privado): esqueleto */ }
+  })();
+  </script>
 
   <!-- ⭐ MICRO COMPROMISSO, e nao venda. O pedido e' entrar num canal gratis,
        nao comprar — e e' o unico lugar da pagina que pede alguma coisa. -->
@@ -2517,6 +2537,7 @@
   function montarProva() {
     var caixa = document.getElementById("prova");
     if (!PRODUTOS.length) { return; }
+    caixa.querySelectorAll(".cela, .fim").forEach(function (n) { n.parentNode.removeChild(n); });
     var caiu = PRODUTOS.filter(function (p) { return (p.queda || 0) >= 5 && !externo(p); }).length;
     Object.keys(EXTERNOS).forEach(function (n) {
       if (EXTERNO_CARREGADO[n]) {
@@ -3125,6 +3146,30 @@
   montarChips();
   desenhar();
   carregarLinks();
+  // a copia para o proximo recarregar (ver o script pequeno antes deste)
+  setTimeout(function () {
+    try {
+      var m = document.querySelector('meta[name="v"]'), v = m && m.getAttribute("content");
+      if (!v) { return; }
+      var semCanvas = function (html) { return html.replace(/<canvas[^>]*>(<\/canvas>)?/g, ""); };
+      // o cartao vivo tem <a> dentro de <a> (feito via DOM); o parser de HTML
+      // nao aceita e partia o cartao em dois ao repor. A copia e' so' visual:
+      // links internos viram <span>, botoes ficam.
+      var inerte = function (n) {
+        var c = n.cloneNode(true);
+        Array.prototype.forEach.call(c.querySelectorAll("a"), function (a) {
+          var s = document.createElement("span"); s.className = a.className; s.innerHTML = a.innerHTML; a.parentNode.replaceChild(s, a);
+        });
+        return c.outerHTML;
+      };
+      var prova = document.getElementById("prova"), chips = document.getElementById("chips");
+      var vit = document.getElementById("vitrine"), grade = document.getElementById("grade");
+      var cartoes = Array.prototype.slice.call(grade.querySelectorAll(":scope > .item"), 0, 8).map(inerte).join("");
+      var celas = Array.prototype.map.call(prova.querySelectorAll(".cela, .fim"), function (n) { return n.outerHTML; }).join("");
+      localStorage.setItem("at_pronto", JSON.stringify({ v: v, prova: celas, chips: semCanvas(chips.innerHTML),
+        vitrine: semCanvas(Array.prototype.map.call(vit.children, inerte).join("")), grade: semCanvas(cartoes) }));
+    } catch (e) { /* sem espaco ou privado: tudo bem */ }
+  }, 2500);
 
   // ⭐ O BOTAO VOLTAR TAMBEM. Quem entrou por `/#calcados`, filtrou outra
   // coisa e apertou voltar espera a prateleira de novo — nao o catalogo.

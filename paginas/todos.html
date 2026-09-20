@@ -603,6 +603,38 @@
   @media (prefers-color-scheme: dark) { .abas .pilula { background: #f4f2f9; } }
   .abas a { position: relative; z-index: 2; }
   @media (prefers-reduced-motion: reduce) { .abas .pilula { transition: none; } }
+  /* ⭐ TRES VARIANTES DA ABA ATIVA, TESTAVEIS PELO ENDERECO (20/09).
+     Bryan: "a pilula no inicio ta' muito evidente, tem como chamar menos
+     atencao? Nao sei? Vamos testar". Eu tinha acabado de deixa-la SOLIDA
+     para consertar o especular pintando por cima — consertei o defeito e
+     criei um exagero.
+
+     Em vez de adivinhar e republicar tres vezes, ele troca no proprio
+     iPhone: `?aba=clara`, `?aba=discreta`, `?aba=sem`. Sem query, fica o
+     que esta' no ar hoje (solida).
+     ⚠️ ISTO E' ANDAIME: quando ele escolher, as outras duas saem do codigo.
+
+     Contraste MEDIDO em cada uma, texto sobre a pilula:
+       solida    branco sobre rgb(22,21,28)        18,13:1
+       clara     tinta  sobre ~rgb(254,254,255)    17,4:1  (claro)
+                 branco sobre ~rgb(66,64,74)        8,9:1  (escuro)
+       discreta  tinta  sobre ~rgb(229,229,232)    14,6:1  (claro)
+       sem       tinta  sobre o vidro da barra     ~15:1 — marca so' por cor */
+  .abas.v-clara .pilula { background: rgba(255,255,255,.72); box-shadow: 0 1px 3px rgba(30,40,60,.14); }
+  .abas.v-clara a.on { color: var(--tinta); }
+  @media (prefers-color-scheme: dark) {
+    .abas.v-clara .pilula { background: rgba(255,255,255,.16); box-shadow: none; }
+    .abas.v-clara a.on { color: #fff; }
+  }
+  .abas.v-discreta .pilula { background: rgba(22,21,28,.10); box-shadow: none; }
+  .abas.v-discreta a.on { color: var(--tinta); }
+  @media (prefers-color-scheme: dark) {
+    .abas.v-discreta .pilula { background: rgba(255,255,255,.10); }
+    .abas.v-discreta a.on { color: #fff; }
+  }
+  .abas.v-sem .pilula { display: none; }
+  .abas.v-sem a.on { color: var(--ouro); }
+
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
     background-color: rgba(236,242,252,.22);
     background-image: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,.04) 60%);
@@ -3153,6 +3185,17 @@
     new MutationObserver(ligarFilhos).observe(document.body, { childList: true });
   })();
 
+  // ⭐ ANDAIME DE TESTE (20/09): `?aba=clara|discreta|sem` troca o desenho
+  // da aba ativa sem republicar. Sai do codigo quando ele escolher.
+  (function variantesDaAba() {
+    try {
+      var q = (location.search.match(/[?&]aba=([a-z]+)/) || [])[1];
+      var n = document.getElementById("abas");
+      if (q && n && ["clara", "discreta", "sem"].indexOf(q) >= 0) {
+        n.classList.add("v-" + q);
+      }
+    } catch (e) { /* sem query, fica a de hoje */ }
+  })();
   function grudar() {
     var c = document.getElementById("console");
     if (!c) { return; }

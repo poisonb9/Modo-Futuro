@@ -412,13 +412,37 @@
      ⛔ E ELE NAO PODE VAZAR PARA A REGIAO APROVADA. O Bryan fechou a busca
      e os chips ("gostei demais de como as cores se comportam"): o clarao
      e' um evento curto e some; nao muda material nenhum. */
+  /* ⚠️ DUAS CORRECOES MEDIDAS (Bryan, 20/09: "embaixo ela espalha, em cima
+     ela corta na linha do paga menos", "a luz acontece meio picada").
+
+     1) O CORTE NAO ERA CLIPPING — era a geometria do brilho. MEDIDO pintando
+        a caixa de vermelho: 543x313 px, elipse larga e baixa. `closest-side`
+        mede pelo lado MAIS PERTO, que numa elipse dessas e' o de cima: o
+        gradiente chega ao transparente rapido na vertical e devagar na
+        horizontal, e vira uma aresta em cima. Embaixo isso nao aparecia
+        porque o `backdrop-filter` do console BORRA a luz ao refrata-la — o
+        vidro suavizava de um lado so'. Agora a elipse e' mais alta
+        (1/.72), centrada mais perto do preco, e a queda e' uma rampa de
+        nove paradas com decaimento suave: sem aresta em lugar nenhum, e
+        sem banding (gradiente de duas paradas em area grande faz listra).
+
+     2) O "PICADO" ERA O `filter: blur(16px)`. O elemento animado estava
+        borrado E dentro do backdrop do console: o navegador refazia o
+        desfoque do clarao e o do vidro a cada quadro. A maciez agora mora
+        no proprio gradiente (de graca, e' so' pintura), e a animacao mexe
+        so' em `opacity` e `transform`, que o compositor resolve sem
+        repintar. `will-change` promove a camada antes de comecar. */
   .clarao {
-    position: absolute; left: 50%; top: 76%; width: min(640px, 160%);
-    aspect-ratio: 1 / .58; border-radius: 50%; pointer-events: none; z-index: -1;
-    opacity: 0; transform: translate(-50%, -28%) scale(.3); transform-origin: 50% 42%;
+    position: absolute; left: 50%; top: 70%; width: min(760px, 190%);
+    aspect-ratio: 1 / .72; border-radius: 50%; pointer-events: none; z-index: -1;
+    opacity: 0; transform: translate(-50%, -30%) scale(.42);
+    transform-origin: 50% 45%; will-change: opacity, transform;
     background: radial-gradient(closest-side,
-      rgba(255,206,112,.92), rgba(255,190,88,.42) 42%, rgba(255,186,84,0) 72%);
-    filter: blur(16px);
+      rgba(255,209,120,.82) 0%,   rgba(255,206,114,.64) 12%,
+      rgba(255,201,106,.44) 24%,  rgba(255,196,98,.27) 36%,
+      rgba(255,192,93,.155) 47%,  rgba(255,189,89,.082) 58%,
+      rgba(255,187,86,.040) 69%,  rgba(255,185,84,.017) 79%,
+      rgba(255,184,84,.006) 88%,  rgba(255,184,84,0) 100%);
   }
   @media (prefers-color-scheme: dark) {
     .clarao { background: radial-gradient(closest-side,
@@ -428,14 +452,17 @@
      flash nenhum, e o mostrador continua correto sem ele (acervo de CSS,
      DEMONSTRADO). */
   @media (prefers-reduced-motion: no-preference) {
-    .faixa.acende .clarao { animation: clarao 1150ms cubic-bezier(.16,.9,.22,1) both; }
-    .faixa.acende .prova::before { animation: girar-aro 1150ms cubic-bezier(.3,.7,.3,1); }
+    .faixa.acende .clarao { animation: clarao 1650ms cubic-bezier(.22,.61,.36,1) both; }
+    .faixa.acende .prova::before { animation: girar-aro 1650ms cubic-bezier(.33,.0,.2,1); }
   }
+  /* ⭐ MAIS DELICADA (pedido dele): pico menor (.82 no lugar de .95), subida
+     mais longa e saida lenta — a luz se apaga em vez de sumir. */
   @keyframes clarao {
-    0%   { opacity: 0;   transform: translate(-50%,-28%) scale(.26); }
-    20%  { opacity: .95; transform: translate(-50%,-28%) scale(.66); }
-    52%  { opacity: .58; transform: translate(-50%,-28%) scale(1.0); }
-    100% { opacity: 0;   transform: translate(-50%,-28%) scale(1.26); }
+    0%   { opacity: 0;   transform: translate(-50%,-30%) scale(.42); }
+    16%  { opacity: .82; transform: translate(-50%,-30%) scale(.70); }
+    44%  { opacity: .50; transform: translate(-50%,-30%) scale(.93); }
+    72%  { opacity: .20; transform: translate(-50%,-30%) scale(1.08); }
+    100% { opacity: 0;   transform: translate(-50%,-30%) scale(1.18); }
   }
   /* ⭐ A LUZ TAMBEM PASSA PELA BORDA ("uma luz passando pela borda em 3d").
      `@property` registra o angulo como <angle> para o navegador poder
@@ -3086,6 +3113,17 @@
   // ⚠️ UM RELOGIO SO'. Dois `setTimeout` escrevendo no mesmo paragrafo
   // embaralham o texto — letra de um produto no meio do outro.
   var relogio = null;
+  // ⭐ GERACAO DA LINHA VIVA (20/09/2026). Bryan: "em alguns momentos ela
+  // buga e aparecendo durante a digitacao" — o clarao acendia fora de hora.
+  // ⛔ EU NAO CONSEGUI REPRODUZIR O GATILHO, entao nao tentei consertar o
+  // gatilho: `animarVivo` podia ser chamado de novo (o carrossel volta
+  // sozinho 6 s depois do dedo) e a chamada nova NAO cancelava o laco de
+  // digitacao em voo — so' o `relogio`. Dois lacos escrevendo no mesmo
+  // elemento, cada um chamando `fecharPreco()` na sua hora, e a luz
+  // acendendo no meio da digitacao do outro. Com a geracao, o laco velho
+  // morre na primeira volta, qualquer que seja o gatilho.
+  var geracao = 0;
+  var VIVO_LIGADO = false;
   var vivoAtual = null;
 
   function escapar(t) {
@@ -3104,6 +3142,8 @@
     var aPreco = document.getElementById("vivo_preco");
     var aDica = document.getElementById("vivo_dica");
     var faixa = document.querySelector(".faixa");
+    geracao += 1;
+    var minha = geracao;
     if (relogio) { clearTimeout(relogio); relogio = null; }
 
     // ⭐ OS QUE MAIS CAIRAM PRIMEIRO: se so' da' tempo de ver um, que seja
@@ -3124,6 +3164,7 @@
     var i = 0;
 
     function proximo() {
+      if (minha !== geracao) { return; }
       var p = lista[i % lista.length];
       i += 1;
       vivoAtual = p;
@@ -3139,7 +3180,7 @@
       // navegador coalesce as duas mudancas e a animacao nao reinicia (mesma
       // receita que o `.entra` do preco logo abaixo ja' usava).
       function acender() {
-        if (!faixa) { return; }
+        if (!faixa || minha !== geracao) { return; }
         faixa.classList.remove("acende");
         void faixa.offsetWidth;
         faixa.classList.add("acende");
@@ -3164,6 +3205,7 @@
       }
       var n = 0;
       (function digitar() {
+        if (minha !== geracao) { return; }
         n += 1;
         aNome.innerHTML = escapar(curto.slice(0, n)) + '<span class="cursor"></span>';
         if (n < curto.length) {
@@ -3181,7 +3223,12 @@
     // ⚠️ O DEDO PARA O CARROSSEL, e ele volta sozinho em 6s. Sem parar, o
     // produto podia rodar entre o toque e o clique e a pessoa abriria um
     // item que nao escolheu. Sem voltar, um encostao congelava a linha.
+    // ⚠️ UMA VEZ SO': cada chamada de `animarVivo` re-adicionava estes
+    // ouvintes, e eles se empilhavam a cada retomada do carrossel.
     var retomar = null;
+    // (o `proximo()` acima ja' religou o carrossel desta geracao)
+    if (VIVO_LIGADO) { return; }
+    VIVO_LIGADO = true;
     ["pointerdown", "touchstart"].forEach(function (ev) {
       alvo.addEventListener(ev, function () {
         if (relogio) { clearTimeout(relogio); relogio = null; }

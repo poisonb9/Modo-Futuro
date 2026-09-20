@@ -6,6 +6,36 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 18:51 — `f11a21c`
+
+**O quê:** CTA: a discreta vira o padrao; o andaime fica ate' ele fechar
+
+**Por quê:** Bryan: "por hora gostei do discreto" e, logo depois, "mas to' na duvida, vamos definir mais tarde?". Entao a discreta vai para o ar — e' a que ele prefere hoje — e as outras CONTINUAM testaveis, agora com o caminho de volta incluido:
+
+Carimbo no ar: `80b1ec53f13a` · 25 endereço(s) conferidos · HTML 104 KB
+
+---
+
+## 20/09/2026 18:42 — `d82b7c9`
+
+**O quê:** Uma publicacao por vez: trava contra o vigia que publica sozinho
+
+**Por quê:** 18:1x eu disparei `publicar_bio.py --subir` a mao 18:20 a tarefa `AchadinhoTotal_Publicar_Ao_Mudar` disparou SOZINHA 18:2x minha verificacao acusou "NAO ESTA' NO AR em: pagomenos/todos, achadinhodehoje/todos, meulivro/todos"
+
+Carimbo no ar: `29cb0a66819b` · 25 endereço(s) conferidos · HTML 104 KB
+
+---
+
+## 20/09/2026 18:35 — `d82b7c9`
+
+**O quê:** Uma publicacao por vez: trava contra o vigia que publica sozinho
+
+**Por quê:** 18:1x eu disparei `publicar_bio.py --subir` a mao 18:20 a tarefa `AchadinhoTotal_Publicar_Ao_Mudar` disparou SOZINHA 18:2x minha verificacao acusou "NAO ESTA' NO AR em: pagomenos/todos, achadinhodehoje/todos, meulivro/todos"
+
+Carimbo no ar: `5d3b42b4c9df` · 25 endereço(s) conferidos · HTML 104 KB
+
+---
+
 ## 20/09/2026 18:13 — `63dee00`
 
 **O quê:** Diario: entrada de 28555be (pilula da aba mais sutil)

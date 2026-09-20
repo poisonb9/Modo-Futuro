@@ -335,6 +335,59 @@
     letter-spacing: .01em;
   }
   .vivo-dica:empty { display: none; }
+  /* ⭐ TELA BAIXA: O TOPO ENCOLHE PARA O PRODUTO CABER (20/09, print do
+     Bryan: "o anuncio esta' cortado pela barra, nao aparece inteiro, a
+     barra cobre um pedaco do preco").
+
+     MEDIDO em 393x660 — que e' o iPhone dele COM a barra do Safari visivel,
+     nao um aparelho pequeno:
+       tela util ate' a barra de abas   585 px
+       o topo consumia                  375 px   (64% antes do produto)
+       o cartao da vitrine precisa      357 px
+       resultado: 148 px do cartao abaixo da barra, e o PRECO inteiro
+       escondido — 89 px abaixo dela.
+
+     ⚠️ A CULPA NAO E' DA BARRA. Ela e' fixa e o `padding-bottom: 84px` do
+     corpo ja' cuida do FIM da pagina. O que faltava era orcamento vertical
+     na PRIMEIRA tela: o topo cresceu peca por peca ao longo do dia (linha
+     viva, prova social, botao) sem ninguem somar o total.
+
+     ⚠️ `max-height`, nao `max-width`: o problema e' altura, e ele aparece
+     no MESMO aparelho conforme a barra do Safari aparece e some. A unidade
+     que acompanha isso e' `dvh` (acervo de CSS, DEMONSTRADO); aqui basta a
+     media query de altura, porque so' precisamos reagir, nao medir.
+
+     ⛔ E O CARTAO NAO ENCOLHE. Encolher o produto para caber seria resolver
+     o sintoma contra a regra do projeto — "topo entrega produto". Quem
+     cede e' o que fala de nos: brasao, titulo e respiros. */
+  @media (max-height: 740px) {
+    .marca-logo { width: 58px; height: 58px; margin-bottom: 7px; }
+    header { padding: 14px 0 4px; }
+    h1 { font-size: clamp(24px, 6.2vw, 34px); }
+    .marca-nome { font-size: 10px; }
+    .vivo { height: 118px; margin-bottom: 2px; }
+    /* ⛔ EU TINHA ESCRITO AQUI QUE O CARTAO NAO ENCOLHERIA, e estava errado.
+       So' o topo nao bastou: MEDIDO depois de corta-lo de 375 para 290, o
+       preco ainda ficava 36 px abaixo da barra e 63 px do cartao sumiam.
+       Cartao cortado ao meio entrega MENOS produto que cartao inteiro um
+       pouco menor — "topo entrega produto" se cumpre com o produto
+       VISIVEL, nao com ele grande e pela metade. A foto passa de quadrada
+       para 4/3, que e' a mesma proporcao que o desenho ja' usa em tela
+       larga (linha 1013): nao e' excecao nova, e' a regra de la'. */
+    /* ⚠️ `#vitrine` no seletor de proposito: existe um `.vitrine .vfoto`
+       MAIS ADIANTE no arquivo (a regra quadrada) e, com a mesma
+       especificidade, quem vem depois vence. Medi e o cartao continuava em
+       358 px — a regra estava escrita e sem efeito. */
+    #vitrine .vitrine .vfoto { aspect-ratio: 4 / 3; }
+    .vivo-nome { font-size: 14px; }
+    .vivo-cta { height: 24px; margin-top: 7px; }
+    .console { margin-top: 8px; }
+  }
+  @media (max-height: 640px) {
+    .marca-logo { width: 46px; height: 46px; margin-bottom: 5px; }
+    header { padding: 10px 0 2px; }
+    .vivo { height: 108px; }
+  }
   /* 18/09: sem sublinhado nenhum no nome (Bryan: "como link ficou horrivel"); o convite e' o proprio nome + preco. */
   .cursor {
     display: inline-block; width: 2px; height: 1em; margin-left: 1px;
@@ -482,6 +535,49 @@
     opacity: 0; transform: translateY(6px);
   }
   .vivo-cta:empty { display: none; }
+  /* ⭐ A BORDA QUE ENCHE COM A LUZ (20/09, pedido do Bryan): "o botao vai
+     acendendo o contorno dele conforme a luz que vem por tras enche ele, e
+     no fim ele fica ligado igual esta' agora; depois some e reinicia no
+     proximo preco".
+
+     E' uma barra de progresso circular: um `conic-gradient` com PARADA DURA
+     que anda pelo perimetro. `@property` registra o angulo como <angle>
+     para o navegador poder interpolar — sem registrar, a custom property e'
+     texto e o contorno pularia de 0 para 360 (mesma receita DEMONSTRADA do
+     acervo de CSS que ja' usamos no aro do mostrador).
+
+     ⚠️ `from -90deg` faz a volta comecar no TOPO, nao na direita, que e'
+     onde o olho espera que um preenchimento comece.
+     ⚠️ `both` no fim da animacao: a borda FICA acesa depois de fechar a
+     volta — era a parte "no fim ele fica ligado igual esta' agora". Some
+     sozinha porque o CTA inteiro e' esvaziado na troca de produto.
+     ⚠️ A mesma duracao e a mesma curva do clarao, senao a borda corre por
+     fora da luz que deveria estar enchendo ela. */
+  @property --cta-borda { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+  .vivo-cta { position: relative; }
+  .vivo-cta::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+    background: conic-gradient(from -90deg,
+      #C8901A 0 var(--cta-borda), rgba(200,144,26,0) var(--cta-borda));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    .vivo-cta::before {
+      background: conic-gradient(from -90deg,
+        #E9B93F 0 var(--cta-borda), rgba(233,185,63,0) var(--cta-borda));
+    }
+  }
+  /* ⚠️ Quem pediu menos movimento recebe a borda JA' ACESA: o estado final
+     e' o certo, e' so' a viagem ate' ele que some. */
+  @media (prefers-reduced-motion: reduce) {
+    .vivo-cta { --cta-borda: 360deg; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .vivo-cta.entra::before { animation: encher-borda 1650ms cubic-bezier(.22,.61,.36,1) both; }
+  }
+  @keyframes encher-borda { from { --cta-borda: 0deg; } to { --cta-borda: 360deg; } }
   @media (prefers-color-scheme: dark) {
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }

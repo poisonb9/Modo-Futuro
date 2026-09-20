@@ -294,7 +294,7 @@
      nao pular quando o nome muda de tamanho — mas altura fixa exige somar a
      mao toda vez que uma peca cresce. */
   .vivo {
-    height: 152px; display: flex; flex-direction: column;
+    height: 157px; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 2px;
     margin: 0 auto 6px; max-width: 34ch; text-decoration: none;
     color: inherit; border-radius: 12px; padding: 6px 10px;
@@ -312,8 +312,17 @@
      para 30px ao lado.
      A caixa de duas linhas acompanha: 16,5 x 1,25 x 2 = 41,25 -> 42px. */
   .vivo-nome {
-    font-size: 16.5px; line-height: 1.25; color: var(--tinta); text-wrap: balance;
-    height: 42px; overflow: hidden; display: -webkit-box;
+    /* ⭐ PESO 500 e nao tamanho (20/09: "algo que possa ser acrescentado
+       para que ele tenha mais evidencia?"). O acervo de CSS traz o peso
+       medio como passo proprio (DEMONSTRADO). E' a ultima alavanca segura:
+       o nome ganha presenca SEM disputar tamanho com o preco, que fica em
+       700/30px. Acima disto (600/700, ou cor de acento no nome) ele passa
+       a competir e quebra a hierarquia que o proprio acervo manda manter
+       — "o elemento de maior peso tem de ser o que importa".
+       18px e o TETO da faixa de corpo do acervo (16-18); por isso o
+       proximo passo foi peso, nao mais um ponto de fonte. */
+    font-size: 18px; font-weight: 500; line-height: 1.25; color: var(--tinta); text-wrap: balance;
+    height: 46px; overflow: hidden; display: -webkit-box;
     -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   }
   /* ⭐ O PRECO E O DONO DA LINHA (20/09, pergunta dele: "de que maneira

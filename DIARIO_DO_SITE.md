@@ -6,6 +6,24 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 17:54 — `59962b7`
+
+**O quê:** Aba ativa: fica a "clara", andaime removido, e tres regras viram uma
+
+**Por quê:** Bryan escolheu entre as quatro testadas no aparelho: "a clara". As outras duas variantes e o seletor `?aba=` saem do codigo — era andaime declarado, nao podia virar entulho.
+
+Carimbo no ar: `6b6d7622e63f` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
+## 20/09/2026 17:24 — `e183b71`
+
+**O quê:** Diario: entrada de 1c4bc6c (tres variantes da aba ativa)
+
+Carimbo no ar: `73073d008326` · 25 endereço(s) conferidos · HTML 103 KB
+
+---
+
 ## 20/09/2026 17:20 — `1c4bc6c`
 
 **O quê:** Tres variantes da aba ativa, testaveis pelo endereco

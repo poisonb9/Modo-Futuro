@@ -45,10 +45,25 @@ CABECA = (
 
 def _do_commit() -> tuple[str, str, str]:
     """(sha curto, assunto, porque) do ultimo commit deste repositorio."""
+    # O COMMIT DE DIARIO NAO E' NOTICIA. Quando o vigia publica logo depois
+    # de eu commitar o diario, o HEAD e' "Diario: entrada de ...", e a
+    # entrada saia com esse assunto — um registro que nao diz nada sobre o
+    # site. Visto em 20/09/2026 as 20:25. Agora se pula ate' o primeiro
+    # commit que fala do site (10 de historico bastam; se so' houver commits
+    # de diario, fica o mais recente em vez de nada).
     r = subprocess.run(
-        ["git", "-C", str(RAIZ), "log", "-1", "--format=%h%n%s%n%b"],
+        ["git", "-C", str(RAIZ), "log", "-10", "--format=%h%n%s%n%b%x1e"],
         capture_output=True, text=True, encoding="utf-8", errors="replace")
-    partes = (r.stdout or "").split(chr(10), 2)
+    blocos = [b for b in (r.stdout or "").split(chr(30)) if b.strip()]
+    escolhido = None
+    for b in blocos:
+        linhas = b.strip(chr(10)).split(chr(10), 2)
+        if len(linhas) >= 2 and not linhas[1].strip().lower().startswith("diario:"):
+            escolhido = b
+            break
+    if escolhido is None and blocos:
+        escolhido = blocos[0]
+    partes = (escolhido or "").strip(chr(10)).split(chr(10), 2)
     sha = partes[0].strip() if partes else "?"
     assunto = partes[1].strip() if len(partes) > 1 else "(sem assunto)"
     corpo = partes[2] if len(partes) > 2 else ""

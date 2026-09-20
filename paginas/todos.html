@@ -462,34 +462,6 @@
   @media (prefers-color-scheme: dark) {
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }
-  /* ⭐ OS OUTROS PESOS CONTINUAM TESTAVEIS (20/09). Ele escolheu a discreta
-     "por hora" e disse "to' na duvida, vamos definir mais tarde" — entao o
-     andaime FICA ate' ele fechar. Agora com o caminho de volta:
-       ?cta=ouro  a dourada cheia que estava no ar antes
-       ?cta=a     fantasma: sem preenchimento, borda de 1px
-       ?cta=c     texto: sem pilula nenhuma
-     Sem query, fica a discreta.
-     ⛔ O dourado da marca (#C8901A) da' 2,81:1 sobre branco: reprova como
-     texto (>=4,5) e como borda de controle (>=3). Onde o ouro precisa
-     carregar forma ou leitura, vai #8A6210 (5,48:1). */
-  .v-cta-ouro .vivo-cta {
-    background: linear-gradient(180deg, #f5c542, #e8a92b);
-    color: #2a2008; font-weight: 700;
-    box-shadow: 0 2px 8px rgba(190,140,20,.32), inset 0 1px 0 rgba(255,255,255,.55);
-  }
-  .v-cta-a .vivo-cta {
-    background: none; box-shadow: none; color: var(--tinta); font-weight: 600;
-    border: 1px solid #8A6210; box-sizing: border-box;
-  }
-  .v-cta-c .vivo-cta {
-    background: none; box-shadow: none; padding: 0; height: auto;
-    color: #8A6210; font-weight: 700; margin-top: 7px;
-  }
-  .v-cta-c .vivo-cta .eco { color: var(--fraco); font-weight: 600; opacity: 1; }
-  @media (prefers-color-scheme: dark) {
-    .v-cta-a .vivo-cta { border-color: #E9B93F; color: #f4f2f9; }
-    .v-cta-c .vivo-cta { color: #E9B93F; }
-  }
 
 
   .vivo-cta .eco { font-weight: 600; opacity: .72; }
@@ -3237,14 +3209,6 @@
     new MutationObserver(ligarFilhos).observe(document.body, { childList: true });
   })();
 
-  // ⭐ ANDAIME (20/09, fica ate' ele fechar): `?cta=ouro|a|c` compara os
-  // outros pesos com a discreta que esta' no ar.
-  (function variantesDoCta() {
-    try {
-      var q = (location.search.match(/[?&]cta=(ouro|[ac])/) || [])[1];
-      if (q) { document.documentElement.classList.add("v-cta-" + q); }
-    } catch (e) { /* sem query, fica a discreta */ }
-  })();
   function grudar() {
     var c = document.getElementById("console");
     if (!c) { return; }

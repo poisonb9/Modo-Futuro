@@ -1,0 +1,521 @@
+{
+  "baixado_em": "2026-09-20T10:58:09+00:00",
+  "conta_id": "(omitido de proposito — esta no .env)",
+  "projetos": {
+    "achadinhototal": {
+      "name": "achadinhototal",
+      "subdomain": "achadinhototal.pages.dev",
+      "domains": [
+        "achadinhototal.pages.dev",
+        "achadinhototal.com.br",
+        "www.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-14",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-14",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-09-20T10:23:07.680761Z",
+        "modified_on": "2026-09-20T10:23:09.058663Z",
+        "environment": "production",
+        "url": "https://c99977f0.achadinhototal.pages.dev",
+        "short_id": "c99977f0"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-09-20T10:23:07.680761Z",
+        "modified_on": "2026-09-20T10:23:09.058663Z",
+        "environment": "production",
+        "url": "https://c99977f0.achadinhototal.pages.dev",
+        "short_id": "c99977f0"
+      },
+      "created_on": "2026-09-14T15:15:23.924197Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19404860-production",
+      "preview_script_name": "pages-worker--19404860-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "meulivro": {
+      "name": "meulivro",
+      "subdomain": "meulivro.pages.dev",
+      "domains": [
+        "meulivro.pages.dev",
+        "livro.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-09-20T10:22:50.594634Z",
+        "modified_on": "2026-09-20T10:22:51.576272Z",
+        "environment": "production",
+        "url": "https://38f69f95.meulivro.pages.dev",
+        "short_id": "38f69f95"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-09-20T10:22:50.594634Z",
+        "modified_on": "2026-09-20T10:22:51.576272Z",
+        "environment": "production",
+        "url": "https://38f69f95.meulivro.pages.dev",
+        "short_id": "38f69f95"
+      },
+      "created_on": "2026-09-12T21:13:19.364556Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19326849-production",
+      "preview_script_name": "pages-worker--19326849-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "achadinhodehoje": {
+      "name": "achadinhodehoje",
+      "subdomain": "achadinhodehoje.pages.dev",
+      "domains": [
+        "achadinhodehoje.pages.dev",
+        "hoje.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-09-20T10:22:35.403188Z",
+        "modified_on": "2026-09-20T10:22:36.495292Z",
+        "environment": "production",
+        "url": "https://f04c1602.achadinhodehoje.pages.dev",
+        "short_id": "f04c1602"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-09-20T10:22:35.403188Z",
+        "modified_on": "2026-09-20T10:22:36.495292Z",
+        "environment": "production",
+        "url": "https://f04c1602.achadinhodehoje.pages.dev",
+        "short_id": "f04c1602"
+      },
+      "created_on": "2026-09-12T21:09:39.460008Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19326746-production",
+      "preview_script_name": "pages-worker--19326746-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "pagomenos": {
+      "name": "pagomenos",
+      "subdomain": "pagomenos.pages.dev",
+      "domains": [
+        "pagomenos.pages.dev",
+        "pagomenos.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-09-20T10:22:20.452688Z",
+        "modified_on": "2026-09-20T10:22:21.57799Z",
+        "environment": "production",
+        "url": "https://35d29b5e.pagomenos.pages.dev",
+        "short_id": "35d29b5e"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-09-20T10:22:20.452688Z",
+        "modified_on": "2026-09-20T10:22:21.57799Z",
+        "environment": "production",
+        "url": "https://35d29b5e.pagomenos.pages.dev",
+        "short_id": "35d29b5e"
+      },
+      "created_on": "2026-09-12T21:12:54.478488Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19326837-production",
+      "preview_script_name": "pages-worker--19326837-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "achadinhochef": {
+      "name": "achadinhochef",
+      "subdomain": "achadinhochef.pages.dev",
+      "domains": [
+        "achadinhochef.pages.dev",
+        "chef.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-09-20T10:22:04.867468Z",
+        "modified_on": "2026-09-20T10:22:06.231134Z",
+        "environment": "production",
+        "url": "https://00a72680.achadinhochef.pages.dev",
+        "short_id": "00a72680"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-09-20T10:22:04.867468Z",
+        "modified_on": "2026-09-20T10:22:06.231134Z",
+        "environment": "production",
+        "url": "https://00a72680.achadinhochef.pages.dev",
+        "short_id": "00a72680"
+      },
+      "created_on": "2026-09-12T21:09:37.012252Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19326743-production",
+      "preview_script_name": "pages-worker--19326743-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "oachadinho": {
+      "name": "oachadinho",
+      "subdomain": "oachadinho.pages.dev",
+      "domains": [
+        "oachadinho.pages.dev",
+        "make.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-09-20T10:21:47.349321Z",
+        "modified_on": "2026-09-20T10:21:48.532539Z",
+        "environment": "production",
+        "url": "https://468b0161.oachadinho.pages.dev",
+        "short_id": "468b0161"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-09-20T10:21:47.349321Z",
+        "modified_on": "2026-09-20T10:21:48.532539Z",
+        "environment": "production",
+        "url": "https://468b0161.oachadinho.pages.dev",
+        "short_id": "468b0161"
+      },
+      "created_on": "2026-09-12T21:13:13.471598Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19326846-production",
+      "preview_script_name": "pages-worker--19326846-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "treinoquefunciona": {
+      "name": "treinoquefunciona",
+      "subdomain": "treinoquefunciona.pages.dev",
+      "domains": [
+        "treinoquefunciona.pages.dev"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": null,
+      "canonical_deployment": null,
+      "created_on": "2026-09-12T21:39:27.290639Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19327507-production",
+      "preview_script_name": "pages-worker--19327507-preview",
+      "uses_functions": null,
+      "framework": "",
+      "framework_version": ""
+    },
+    "achadinhofitness": {
+      "name": "achadinhofitness",
+      "subdomain": "achadinhofitness.pages.dev",
+      "domains": [
+        "achadinhofitness.pages.dev"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": null,
+      "canonical_deployment": null,
+      "created_on": "2026-09-12T21:39:24.419655Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19327504-production",
+      "preview_script_name": "pages-worker--19327504-preview",
+      "uses_functions": null,
+      "framework": "",
+      "framework_version": ""
+    },
+    "atefalhar": {
+      "name": "atefalhar",
+      "subdomain": "atefalhar.pages.dev",
+      "domains": [
+        "atefalhar.pages.dev"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": null,
+      "canonical_deployment": null,
+      "created_on": "2026-09-12T21:39:21.75495Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19327501-production",
+      "preview_script_name": "pages-worker--19327501-preview",
+      "uses_functions": null,
+      "framework": "",
+      "framework_version": ""
+    },
+    "otreinodehoje": {
+      "name": "otreinodehoje",
+      "subdomain": "otreinodehoje.pages.dev",
+      "domains": [
+        "otreinodehoje.pages.dev"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": null,
+      "canonical_deployment": null,
+      "created_on": "2026-09-12T21:39:16.361434Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19327497-production",
+      "preview_script_name": "pages-worker--19327497-preview",
+      "uses_functions": null,
+      "framework": "",
+      "framework_version": ""
+    }
+  },
+  "zonas": [
+    {
+      "nome": "achadinhototal.com.br",
+      "name_servers": [
+        "carl.ns.cloudflare.com",
+        "joyce.ns.cloudflare.com"
+      ],
+      "status": "active",
+      "plano": "Free Website"
+    }
+  ],
+  "rulesets": [
+    {
+      "name": "Cloudflare Normalization Ruleset",
+      "phase": "http_request_sanitize",
+      "kind": "managed",
+      "description": "Created by the Cloudflare security team, this ruleset provides normalization on the URL path"
+    },
+    {
+      "name": "Cloudflare Managed Free Ruleset",
+      "phase": "http_request_firewall_managed",
+      "kind": "managed",
+      "description": "Created by the Cloudflare security team, this ruleset is designed to provide protection for free zones"
+    },
+    {
+      "name": "DDoS L7 ruleset",
+      "phase": "ddos_l7",
+      "kind": "managed",
+      "description": "Automatic mitigation of HTTP-based DDoS attacks. Cloudflare routinely adds signatures to address new attack vectors. Additional configuration allows you to customize the sensitivity of each rule and the performed mitigation action."
+    }
+  ],
+  "NAO_CONSEGUI_LER": {
+    "dns_records": "403 — o token de publicacao nao tem DNS:Read. Os registros do dominio NAO estao neste backup.",
+    "settings_ssl": "403 — idem para SSL/TLS da zona.",
+    "o_que_isso_significa": "para refazer do zero, DNS e SSL sao trabalho manual no painel; o resto (projetos Pages, dominios, branch, rulesets, bytes servidos) esta guardado."
+  }
+}

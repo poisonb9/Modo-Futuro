@@ -1,0 +1,241 @@
+{
+  "baixado_em": "2026-09-20T10:58:09+00:00",
+  "commit": "5fb5828ca4841cbe2265a938794a7a199a1f46e8",
+  "origem": "baixado DO AR, nao da pasta de build",
+  "total_bytes": 3662457,
+  "falhas": 0,
+  "arquivos": [
+    {
+      "url": "https://achadinhototal.com.br/",
+      "arquivo": "index.html",
+      "bytes": 103520,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+    },
+    {
+      "url": "https://achadinhototal.com.br/motor.js",
+      "arquivo": "motor.js",
+      "bytes": 225979,
+      "tipo": "application/javascript",
+      "cache": "public, max-age=31536000, immutable",
+      "sha256": "e3842752fbc2c161b5c18b500f9523139f76775f0d4daef9b56b1e20bbced877"
+    },
+    {
+      "url": "https://achadinhototal.com.br/links.json",
+      "arquivo": "links.json",
+      "bytes": 145099,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f98a6563bcbb48ba20e6282c7cdce112796ffbd6272c3984b2e2249ecb191548"
+    },
+    {
+      "url": "https://achadinhototal.com.br/robots.txt",
+      "arquivo": "robots.txt",
+      "bytes": 79,
+      "tipo": "text/plain; charset=utf-8",
+      "cache": "public, max-age=14400, must-revalidate",
+      "sha256": "d5706dafc562a77d6a50e5106aee7658d2709f095a22722053709b5fb1b32f72"
+    },
+    {
+      "url": "https://achadinhototal.com.br/sitemap.xml",
+      "arquivo": "sitemap.xml",
+      "bytes": 352,
+      "tipo": "application/xml",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9760c1997e6444b1e2513f04fce298aec08aad7d5f27530dc8cf56eb93b4e768"
+    },
+    {
+      "url": "https://achadinhototal.com.br/icone.png",
+      "arquivo": "icone.png",
+      "bytes": 404258,
+      "tipo": "image/png",
+      "cache": "public, max-age=14400, must-revalidate",
+      "sha256": "27da0ecd7a4f9d17bf580dae9b3aee6a9d272276c83483caf8683c027fe19e14"
+    },
+    {
+      "url": "https://achadinhototal.com.br/parceiros/",
+      "arquivo": "parceiros/index.html",
+      "bytes": 8015,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+    },
+    {
+      "url": "https://achadinhototal.com.br/privacidade/",
+      "arquivo": "privacidade/index.html",
+      "bytes": 4424,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6ea7ddf50c863d1de2b6f491f311bcef63396f6d6e0173576a9a51ecfd4e251f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/kabum.json",
+      "arquivo": "kabum.json",
+      "bytes": 416301,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e4116e14db2f38586ada29f0dbcadf7bdc8d3bef760c467173cf2fa82cab54b4"
+    },
+    {
+      "url": "https://achadinhototal.com.br/nike.json",
+      "arquivo": "nike.json",
+      "bytes": 273677,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "d8fa6837812209dbebde12e49470afe837899f1e894f0ca703efd5f1ea66f9a1"
+    },
+    {
+      "url": "https://achadinhototal.com.br/lauri.json",
+      "arquivo": "lauri.json",
+      "bytes": 198524,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b95bf185094cba2c2e078bf92f06ad8a57d042245c5f9b13e7d5d8bc0dca55f2"
+    },
+    {
+      "url": "https://achadinhototal.com.br/arno.json",
+      "arquivo": "arno.json",
+      "bytes": 66881,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "c24b4c822081b3a5b4d54e2c2f6e8568251a828d642df214416c84f93134ed79"
+    },
+    {
+      "url": "https://achadinhototal.com.br/sharkninja.json",
+      "arquivo": "sharkninja.json",
+      "bytes": 5646,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "cd5974b3338bde697e28681723d26462ae2b615af1c5c21045a87ce3453255c0"
+    },
+    {
+      "url": "https://achadinhototal.com.br/exypna.json",
+      "arquivo": "exypna.json",
+      "bytes": 3092,
+      "tipo": "application/json",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "1060dbc9bd24fd75ecb105083c34ef0799f7176bdbd7045026a6e9747e980d78"
+    },
+    {
+      "url": "https://oachadinho.pages.dev/",
+      "arquivo": "bios/oachadinho/index.html",
+      "bytes": 249787,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+    },
+    {
+      "url": "https://oachadinho.pages.dev/todos",
+      "arquivo": "bios/oachadinho/todos.html",
+      "bytes": 103520,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+    },
+    {
+      "url": "https://oachadinho.pages.dev/parceiros",
+      "arquivo": "bios/oachadinho/parceiros.html",
+      "bytes": 8015,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+    },
+    {
+      "url": "https://achadinhochef.pages.dev/",
+      "arquivo": "bios/achadinhochef/index.html",
+      "bytes": 249787,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+    },
+    {
+      "url": "https://achadinhochef.pages.dev/todos",
+      "arquivo": "bios/achadinhochef/todos.html",
+      "bytes": 103520,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+    },
+    {
+      "url": "https://achadinhochef.pages.dev/parceiros",
+      "arquivo": "bios/achadinhochef/parceiros.html",
+      "bytes": 8015,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+    },
+    {
+      "url": "https://pagomenos.pages.dev/",
+      "arquivo": "bios/pagomenos/index.html",
+      "bytes": 249787,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+    },
+    {
+      "url": "https://pagomenos.pages.dev/todos",
+      "arquivo": "bios/pagomenos/todos.html",
+      "bytes": 103520,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+    },
+    {
+      "url": "https://pagomenos.pages.dev/parceiros",
+      "arquivo": "bios/pagomenos/parceiros.html",
+      "bytes": 8015,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+    },
+    {
+      "url": "https://achadinhodehoje.pages.dev/",
+      "arquivo": "bios/achadinhodehoje/index.html",
+      "bytes": 249787,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+    },
+    {
+      "url": "https://achadinhodehoje.pages.dev/todos",
+      "arquivo": "bios/achadinhodehoje/todos.html",
+      "bytes": 103520,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+    },
+    {
+      "url": "https://achadinhodehoje.pages.dev/parceiros",
+      "arquivo": "bios/achadinhodehoje/parceiros.html",
+      "bytes": 8015,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+    },
+    {
+      "url": "https://meulivro.pages.dev/",
+      "arquivo": "bios/meulivro/index.html",
+      "bytes": 249787,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+    },
+    {
+      "url": "https://meulivro.pages.dev/todos",
+      "arquivo": "bios/meulivro/todos.html",
+      "bytes": 103520,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+    },
+    {
+      "url": "https://meulivro.pages.dev/parceiros",
+      "arquivo": "bios/meulivro/parceiros.html",
+      "bytes": 8015,
+      "tipo": "text/html; charset=utf-8",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+    }
+  ]
+}

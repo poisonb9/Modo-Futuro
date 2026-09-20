@@ -3141,12 +3141,32 @@
   mostrandoAlto = passoBloco();
   mostrandoBaixo = passoBloco();
 
-  animarVivo();
-  montarProva();
-  contarNumeros();
-  montarChips();
-  desenhar();
-  carregarLinks();
+  // ⭐ 20/09: PINTAR ANTES DE MONTAR. Bryan: "recarregar da' uma piscada".
+  // MEDIDO (localhost, desktop, aba visivel): o script sincrono custa 331 ms
+  // (desenhar 108, animarVivo 49, montarChips 23) e a primeira pintura so' saia
+  // aos 1.084 ms — com a primeira tela JA' pronta no HTML (SSR) desde os 621 ms.
+  // No iPhone via LTE, esse buraco e' a tela preta que ele fotografou.
+  // Quando o SSR entregou cartoes, o arranque espera DOIS quadros: o navegador
+  // pinta o que ja' esta' no HTML e so' entao o JS remonta por cima — mesmo
+  // conteudo, troca invisivel. Sem SSR, ou com `?p=`/hash (que limpam a
+  // pre-montagem), roda na hora como antes: ali nao ha' nada pintado a salvar.
+  // ⚠️ rAF nao roda em aba escondida — o setTimeout e' a rede de seguranca.
+  function arrancar() {
+    animarVivo();
+    montarProva();
+    contarNumeros();
+    montarChips();
+    desenhar();
+    carregarLinks();
+  }
+  var arrancou = false;
+  function arrancarUmaVez() { if (arrancou) { return; } arrancou = true; arrancar(); }
+  if (document.querySelector("#grade .item")) {
+    requestAnimationFrame(function () { requestAnimationFrame(arrancarUmaVez); });
+    setTimeout(arrancarUmaVez, 300);
+  } else {
+    arrancarUmaVez();
+  }
 
   // ⭐ O BOTAO VOLTAR TAMBEM. Quem entrou por `/#calcados`, filtrou outra
   // coisa e apertou voltar espera a prateleira de novo — nao o catalogo.

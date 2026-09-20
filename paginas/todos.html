@@ -285,7 +285,7 @@
      Visto no print antes de publicar. 92 -> 118 e' o minimo que cabe
      nome de 2 linhas + preco + pilula. */
   .vivo {
-    height: 118px; display: flex; flex-direction: column;
+    height: 134px; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 2px;
     margin: 0 auto 6px; max-width: 34ch; text-decoration: none;
     color: inherit; border-radius: 12px; padding: 6px 10px;
@@ -318,7 +318,23 @@
      um sublinhado dourado que ACENDE quando termina de ser digitado — o
      controle nomeia a acao no lugar certo (Impeccable: "controls name their
      action"), uma vez por produto, sem frase repetida a cada 6 s. */
-  .vivo-dica { display: none; }
+  /* ⭐ A SEGUNDA LINHA VIVA (20/09). Bryan: "o que fazer para o cliente
+     desejar clicar?". O acervo do projeto responde primeiro pelo NEGATIVO
+     (secao 4): gatilho de "ultimas horas", timer, "so' 150 copias" e pop-up
+     de saida estao RECUSADOS aqui, porque contradizem a estrela-de-traco-
+     sem-"4.9" e a regua de sinais medidos. O ativo do site e' ser o lugar
+     que nao mente sobre preco; queimar isso rende um clique e custa o
+     motivo de existir.
+     Entao o desejo vem de FATO MEDIDO, na escada de `dicaDoProduto()`.
+     ⛔ `dias` fica de FORA mesmo estando em 100% dos produtos: o proprio
+     acervo o condena pelo nome — "telemetria no card ... e' a nossa
+     telemetria vazando pra tela; fica o que decide compra". */
+  .vivo-dica {
+    display: block; margin-top: 3px;
+    font: 600 11.5px/1.25 Poppins, sans-serif; color: var(--fraco);
+    letter-spacing: .01em;
+  }
+  .vivo-dica:empty { display: none; }
   /* 18/09: sem sublinhado nenhum no nome (Bryan: "como link ficou horrivel"); o convite e' o proprio nome + preco. */
   .cursor {
     display: inline-block; width: 2px; height: 1em; margin-left: 1px;
@@ -3338,6 +3354,7 @@
       // `.vivo-cta:empty { display: none }` faz o resto; `entra` sai para a
       // animacao poder rodar de novo no proximo preco.
       if (aCta) { aCta.innerHTML = ""; aCta.classList.remove("entra"); }
+      if (aDica) { aDica.innerHTML = ""; }
       var curto = String(p.nome || "").trim();
 
       // ⭐ O CLARAO ACENDE A CADA TROCA DE PRODUTO (Bryan, 20/09: "a luz
@@ -3361,6 +3378,32 @@
         return isFinite(v) ? v : null;
       }
       function moeda(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
+
+      // ⭐ A ESCADA DA SEGUNDA LINHA: mostra o fato MAIS FORTE que existir,
+      // e nada quando nao existir nenhum. Cobertura medida em 148 produtos:
+      //   vendeu   27%  movimento real — quantos sairam e desde quando
+      //   nota     97%  reputacao, com o volume que a sustenta
+      //   (nada)        linha vazia e' melhor que telemetria nossa
+      // ⛔ PRAZO DE ENTREGA FICOU DE FORA, e o Bryan tinha razao em achar
+      // arriscado: `envio` existe em 3 de 148 e NAO guarda prazo — guarda a
+      // origem (`{full:false, de:'RJ'}`). `frete_gratis` em 1, `recorde` em
+      // 0. Nao da' pra dizer quando chega nem para um subconjunto util.
+      function milhar(n) {
+        n = Number(n) || 0;
+        if (n >= 1000) { return Math.round(n / 1000) + " mil"; }
+        return String(n);
+      }
+      function dicaDoProduto(p) {
+        var v = p.vendeu;
+        if (v && v.length === 2 && Number(v[0]) > 0) {
+          return milhar(v[0]) + " vendidos desde " + escapar(String(v[1]));
+        }
+        var nota = Number(p.nota);
+        if (nota > 0 && Number(p.vendas) > 0) {
+          return Math.round(nota) + "% positivas em " + milhar(p.vendas) + " vendas";
+        }
+        return "";
+      }
       function fecharPreco() {
         aPreco.innerHTML = escapar(p.preco) +
           (p.antes ? "<s>" + escapar(p.antes) + "</s>" : "") +
@@ -3375,6 +3418,7 @@
         // problema e' AFFORDANCE, nao falta de informacao: a linha inteira
         // sempre foi um link e nao parecia um. A pilula e' o que ela ve' e
         // aperta. ("toque aqui" ele ja' tinha recusado: "feio tambem".)
+        if (aDica) { aDica.innerHTML = dicaDoProduto(p); }
         if (aCta) {
           var vAntes = emReais(p.antes), vAgora = emReais(p.preco);
           var eco = (vAntes && vAgora && vAntes > vAgora) ? vAntes - vAgora : null;

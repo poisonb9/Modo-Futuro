@@ -291,21 +291,47 @@
     color: inherit; border-radius: 12px; padding: 6px 10px;
   }
   .vivo:active { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  /* ⚠️ `text-wrap: balance` (Kevin Powell, DEMONSTRADO, e explicitamente
+     "para titulos de ate tres linhas") equilibra as duas linhas em vez de
+     deixar uma palavra orfa embaixo. NAO resolve o teto: o nome e um titulo
+     de marketplace traduzido por maquina, e tipografia melhora a leitura
+     sem transformar isso em desejo. */
   .vivo-nome {
-    font-size: 15px; line-height: 1.25; color: var(--tinta);
+    font-size: 15px; line-height: 1.25; color: var(--tinta); text-wrap: balance;
     height: 38px; overflow: hidden; display: -webkit-box;
     -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   }
+  /* ⭐ O PRECO E O DONO DA LINHA (20/09, pergunta dele: "de que maneira
+     apresentar o nome e o valor para o cliente querer muito comprar?").
+     O acervo do projeto responde com o TESTE DO OLHO MEIO FECHADO (YC,
+     Garry Tan): o elemento de maior peso tem de ser o que importa. MEDIDO,
+     o heroi tinha TRES familias -- Archivo Black no titulo, Poppins no
+     nome, JetBrains Mono no preco -- e o acervo e DEMONSTRADO nisso: "uma
+     fonte de exibicao so". O preco era o unico ainda em mono: a vitrine e
+     os cartoes migraram para Poppins em 19/09 (a66ccae, 11c3a76) e o heroi
+     ficou para tras. Estava no handoff como item 1 da minha lista e nunca
+     foi feito.
+     22 -> 30px porque tamanho sozinho nao bastava: ao lado dele havia DUAS
+     pilulas douradas CHEIAS, e forma preenchida pesa mais que letra. */
   .vivo-preco {
-    height: 26px; font: 700 22px/1 var(--mono); color: var(--tinta);
+    height: 34px; font: 700 30px/1 Poppins, sans-serif; color: var(--tinta);
+    font-variant-numeric: tabular-nums; letter-spacing: -.01em;
   }
   .vivo-preco s {
-    font: 400 12px/1 var(--mono); color: var(--fraco); margin-left: 8px;
+    font: 500 13px/1 Poppins, sans-serif; color: var(--fraco); margin-left: 9px;
+    font-variant-numeric: tabular-nums;
   }
+  /* ⭐ UM ACENTO SO. O percentual era pilula dourada CHEIA, o mesmo acento
+     do botao, a dois centimetros dele -- "pagina neutra; cor forte so em
+     ponto de foco" (DEMONSTRADO) e "um acento por cartao". Vira TEXTO
+     dourado: diz a mesma coisa, sai da disputa de peso e devolve o foco ao
+     numero.
+     ⚠️ Dourado ESCURO (#8A6210, 5,48:1), nao o da marca: MEDIDO em 20/09,
+     #C8901A sobre branco da 2,81:1 e reprova como texto. */
   .vivo-preco .pct {
-    display: inline-block; margin-left: 8px; vertical-align: 2px;
-    background: var(--ouro-claro); color: #17161d;
-    font: 700 11px/1 var(--mono); padding: 4px 6px; border-radius: 999px;
+    display: inline-block; margin-left: 9px; vertical-align: 2px;
+    background: none; color: #8A6210; padding: 0;
+    font: 700 13px/1 Poppins, sans-serif; font-variant-numeric: tabular-nums;
   }
   .vivo-preco.entra { animation: impulso .5s cubic-bezier(.2,1.5,.3,1) both; }
   @keyframes impulso {
@@ -600,23 +626,59 @@
      ⚠️ Mesma duracao e curva do clarao, senao a caixa acende fora do
      compasso da luz que deveria estar enchendo ela. */
   @media (prefers-reduced-motion: no-preference) {
-    .vivo-cta.entra { animation: acender-caixa 1650ms cubic-bezier(.22,.61,.36,1) both; }
+    /* ⛔ AS DUAS NUMA DECLARACAO SO. `animation` e uma propriedade: duas
+       regras de mesma especificidade nao somam -- a de baixo SUBSTITUI a de
+       cima. Estavam separadas, a `cta-entra` escrita 16 linhas abaixo matava
+       esta, e a caixa NUNCA acendeu: o que se via era o clarao passando por
+       TRAS do botao. Terceira vez no dia que a cascata mata uma regra minha
+       em silencio (antes: a cor da aba ativa, escrita em tres lugares, e o
+       aspect-ratio da foto da vitrine).
+       Elas animam propriedades diferentes -- opacity/transform de um lado,
+       background-color/box-shadow do outro -- entao convivem. */
+    .vivo-cta.entra {
+      animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both,
+                 acender-caixa 1650ms cubic-bezier(.22,.61,.36,1) both;
+    }
   }
   @keyframes acender-caixa {
+    /* ⭐ AJUSTE DELE: "quando ele chega na parte mais acesa pode acender ele
+       mais um pouco, e depois quando ele estabiliza a cor mais fracamente eu
+       quero ela um pouco ainda mais fraca".
+         auge       .26 -> .36   (halo .30 -> .44)
+         assentado  .16 -> .07, e PARA em .07 em vez de ir a zero: ele falou
+                    em "estabiliza", logo existe repouso -- e .07 fica abaixo
+                    dos .13 da regra base, que e o "ainda mais fraca". */
     0%   { background-color: rgba(200,144,26,0);   box-shadow: none; }
-    18%  { background-color: rgba(200,144,26,.10); box-shadow: none; }
-    46%  { background-color: rgba(200,144,26,.26); box-shadow: 0 2px 14px rgba(200,144,26,.30); }
-    68%  { background-color: rgba(200,144,26,.16); box-shadow: 0 2px 8px rgba(200,144,26,.14); }
-    100% { background-color: rgba(200,144,26,0);   box-shadow: none; }
+    16%  { background-color: rgba(200,144,26,.12); box-shadow: none; }
+    44%  { background-color: rgba(200,144,26,.36); box-shadow: 0 2px 16px rgba(200,144,26,.44); }
+    64%  { background-color: rgba(200,144,26,.18); box-shadow: 0 2px 8px rgba(200,144,26,.16); }
+    100% { background-color: rgba(200,144,26,.07); box-shadow: none; }
   }
-  @media (prefers-color-scheme: dark) {
+  @keyframes acender-caixa-escuro {
+    0%   { background-color: rgba(233,185,63,0);   box-shadow: none; }
+    16%  { background-color: rgba(233,185,63,.14); box-shadow: none; }
+    44%  { background-color: rgba(233,185,63,.40); box-shadow: 0 2px 16px rgba(233,185,63,.38); }
+    64%  { background-color: rgba(233,185,63,.20); box-shadow: 0 2px 8px rgba(233,185,63,.14); }
+    100% { background-color: rgba(233,185,63,.08); box-shadow: none; }
+  }
+  /* ⚠️ NOME PROPRIO em vez de redefinir `acender-caixa` dentro do @media:
+     redefinir o mesmo nome funciona, mas quem le depois nao ve que existem
+     duas versoes -- e esconder isso e como a cascata me mordeu tres vezes
+     hoje. */
+  @media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
+    .vivo-cta.entra {
+      animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both,
+                 acender-caixa-escuro 1650ms cubic-bezier(.22,.61,.36,1) both;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }
 
 
   .vivo-cta .eco { font-weight: 600; opacity: .72; }
   @media (prefers-reduced-motion: no-preference) {
-    .vivo-cta.entra { animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both; }
+    /* (a `cta-entra` subiu para a declaracao unica, junto com a luz) */
   }
   @media (prefers-reduced-motion: reduce) {
     .vivo-cta { opacity: 1; transform: none; }

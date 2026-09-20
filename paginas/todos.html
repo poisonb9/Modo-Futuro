@@ -426,33 +426,44 @@
   .vivo-cta {
     display: inline-flex; align-items: center; gap: 6px; margin-top: 9px;
     padding: 0 13px; height: 26px; border-radius: 13px;
-    background: linear-gradient(180deg, #f5c542, #e8a92b);
-    color: #2a2008; font: 700 12.5px/1 Poppins, sans-serif; letter-spacing: .01em;
-    box-shadow: 0 2px 8px rgba(190,140,20,.32), inset 0 1px 0 rgba(255,255,255,.55);
+    /* ⭐ A "DISCRETA" (escolha do Bryan em 20/09 entre quatro pesos testados
+       no aparelho dele: "por hora gostei do discreto").
+       O problema que ela resolve tem numero: MEDIDO, a pilula dourada cheia
+       ocupava 279x26 = 7.260 px2 e pintava 100% da propria caixa, enquanto o
+       preco ocupava 211x26 mas so' pinta o traco das letras (~18% da caixa).
+       Na pratica o botao punha ~7x mais cor na tela que o numero que ele veio
+       vender — e o preco e' o heroi da linha, nao ele.
+       ⛔ E NAO SE RESOLVE DANDO FUNDO AO PRECO: o acervo de liquid glass poe
+       o material nos CONTROLES (barra, chips, busca, avise-me); vidro sobre
+       conteudo so' na placa da vitrine, tingida. Fundo no preco acrescentaria
+       um segundo bloco pintado em vez de tirar um. */
+    background: rgba(200,144,26,.13);
+    color: var(--tinta); font: 600 12.5px/1 Poppins, sans-serif; letter-spacing: .01em;
+    box-shadow: none;
     opacity: 0; transform: translateY(6px);
   }
   .vivo-cta:empty { display: none; }
-  /* ⭐ TRES PESOS PARA O CTA, TESTAVEIS PELO ENDERECO (20/09).
-     Bryan: "a pilula comprar agora ... ta' chamando mais atencao que o
-     proprio numero do valor do produto". Ele tem razao: o preco e' o heroi
-     da linha, e o CTA e' a affordance — nao pode competir com o que veio
-     vender.
-     `?cta=a` (fantasma) `?cta=b` (discreta) `?cta=c` (texto). Sem query,
-     fica a dourada cheia de hoje. ⚠️ ANDAIME: sai quando ele escolher.
-
-     ⛔ O DOURADO DA MARCA NAO SERVE DE TEXTO NEM DE BORDA AQUI. MEDIDO:
-     #C8901A sobre branco da' 2,81:1 — reprova como texto (>=4,5) e ate'
-     como borda de controle (>=3). Por isso as variantes usam #8A6210
-     (5,48:1) quando o ouro precisa carregar forma ou leitura. O ouro cheio
-     de hoje passa (8,77:1) porque o texto em cima dele e' quase preto;
-     o problema dele nao e' contraste, e' PESO. */
+  @media (prefers-color-scheme: dark) {
+    .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
+  }
+  /* ⭐ OS OUTROS PESOS CONTINUAM TESTAVEIS (20/09). Ele escolheu a discreta
+     "por hora" e disse "to' na duvida, vamos definir mais tarde" — entao o
+     andaime FICA ate' ele fechar. Agora com o caminho de volta:
+       ?cta=ouro  a dourada cheia que estava no ar antes
+       ?cta=a     fantasma: sem preenchimento, borda de 1px
+       ?cta=c     texto: sem pilula nenhuma
+     Sem query, fica a discreta.
+     ⛔ O dourado da marca (#C8901A) da' 2,81:1 sobre branco: reprova como
+     texto (>=4,5) e como borda de controle (>=3). Onde o ouro precisa
+     carregar forma ou leitura, vai #8A6210 (5,48:1). */
+  .v-cta-ouro .vivo-cta {
+    background: linear-gradient(180deg, #f5c542, #e8a92b);
+    color: #2a2008; font-weight: 700;
+    box-shadow: 0 2px 8px rgba(190,140,20,.32), inset 0 1px 0 rgba(255,255,255,.55);
+  }
   .v-cta-a .vivo-cta {
     background: none; box-shadow: none; color: var(--tinta); font-weight: 600;
     border: 1px solid #8A6210; box-sizing: border-box;
-  }
-  .v-cta-b .vivo-cta {
-    background: rgba(200,144,26,.13); box-shadow: none;
-    color: var(--tinta); font-weight: 600;
   }
   .v-cta-c .vivo-cta {
     background: none; box-shadow: none; padding: 0; height: auto;
@@ -461,9 +472,9 @@
   .v-cta-c .vivo-cta .eco { color: var(--fraco); font-weight: 600; opacity: 1; }
   @media (prefers-color-scheme: dark) {
     .v-cta-a .vivo-cta { border-color: #E9B93F; color: #f4f2f9; }
-    .v-cta-b .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
     .v-cta-c .vivo-cta { color: #E9B93F; }
   }
+
 
   .vivo-cta .eco { font-weight: 600; opacity: .72; }
   @media (prefers-reduced-motion: no-preference) {
@@ -3210,12 +3221,13 @@
     new MutationObserver(ligarFilhos).observe(document.body, { childList: true });
   })();
 
-  // ⭐ ANDAIME (20/09): `?cta=a|b|c` troca o peso do botao sem republicar.
+  // ⭐ ANDAIME (20/09, fica ate' ele fechar): `?cta=ouro|a|c` compara os
+  // outros pesos com a discreta que esta' no ar.
   (function variantesDoCta() {
     try {
-      var q = (location.search.match(/[?&]cta=([a-c])/) || [])[1];
+      var q = (location.search.match(/[?&]cta=(ouro|[ac])/) || [])[1];
       if (q) { document.documentElement.classList.add("v-cta-" + q); }
-    } catch (e) { /* sem query, fica a de hoje */ }
+    } catch (e) { /* sem query, fica a discreta */ }
   })();
   function grudar() {
     var c = document.getElementById("console");

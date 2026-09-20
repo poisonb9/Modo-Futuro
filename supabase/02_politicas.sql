@@ -23,9 +23,18 @@ drop policy if exists canal_le on canal;
 create policy canal_le on canal
   for select to anon using (ativo);
 
+-- FECHADA EM 20/09/2026, por ordem do Bryan ("fecha o link_bio tambem").
+-- Era a UNICA tabela que a chave publica ainda lia. Conferido antes de
+-- derrubar: nada consome. No repo so' ha' mencao em comentario e no teste;
+-- nas quatro paginas NO AR (site mae, /contracapa, bio, /parceiros) a
+-- palavra `link_bio` nao aparece nenhuma vez, e a contra-capa so' ESCREVE
+-- (POST em `medir`). O fluxo que lia — os convites de WhatsApp — foi
+-- abandonado quando a vitrine migrou para o Telegram.
+-- Com RLS ligado, ausencia de politica e' proibicao: a tabela continua
+-- gravavel pela chave de servico e invisivel para o visitante.
+-- PARA REABRIR, se um dia algo precisar ler:
+--   create policy link_le on link_bio for select to anon using (ativo);
 drop policy if exists link_le on link_bio;
-create policy link_le on link_bio
-  for select to anon using (ativo);
 
 drop policy if exists produto_le on produto;
 create policy produto_le on produto

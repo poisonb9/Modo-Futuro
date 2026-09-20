@@ -276,8 +276,16 @@
   /* ⚠️ ALTURA FIXA. Nome de uma ou de duas linhas mudava a altura e a
      pagina inteira subia e descia a cada troca — o defeito que o Bryan
      chamou de "tremendo" nas bios, em 14/09/2026. */
+  /* ⚠️ ALTURA FIXA, E ELA TEVE DE CRESCER COM O CTA (20/09). Os 92 px
+     existiam para a linha NAO PULAR quando o nome do produto muda de
+     tamanho — nome de duas linhas e nome de uma tem de ocupar o mesmo
+     espaco. Ao entrar a pilula "Comprar agora" (26 px + 9 de margem) o
+     conteudo passou a estourar a caixa e, com `justify-content: center`,
+     vazava pelos DOIS lados: o preco atropelava a segunda linha do nome.
+     Visto no print antes de publicar. 92 -> 118 e' o minimo que cabe
+     nome de 2 linhas + preco + pilula. */
   .vivo {
-    height: 92px; display: flex; flex-direction: column;
+    height: 118px; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 2px;
     margin: 0 auto 6px; max-width: 34ch; text-decoration: none;
     color: inherit; border-radius: 12px; padding: 6px 10px;
@@ -390,6 +398,45 @@
   .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--tinta); opacity: .5; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
   .prova > .economia { display: none; }
   @media (max-width: 360px) { .prova .n { font-size: 17px; } .prova .cela { font-size: 9.5px; } }
+  /* ⭐ "COMPRAR AGORA" QUE NASCE COM O PRECO (Bryan, 20/09: "algo como
+     comprar agora ... de uma maneira muito inteligente que estimulasse a
+     pessoa a comprar").
+
+     ⭐ POR QUE NAO E' SO' "COMPRAR AGORA". O acervo destilado do projeto
+     (MAESTROS_DESIGN_DO_SITE, secao 2) e' direto: "prova social perto do
+     CTA" (DEMONSTRADO) e a nossa proposta de valor real e' *desconto
+     MEDIDO contra o preco que nos vimos*. Botao generico qualquer vitrine
+     de afiliado tem; o que so' nos temos e' o numero. Entao o CTA carrega
+     a economia em reais, calculada do proprio par preco/antes que ja'
+     esta' na tela — urgencia por medicao, nunca por escassez inventada
+     (que seria mentira, e o site inteiro e' construido para nao mentir).
+
+     ⚠️ E' UM <span>, NAO UM <button> NEM UM <a>. A linha viva inteira ja' e'
+     um `<a>`; interativo dentro de interativo e' HTML invalido, e o SSR ja'
+     tinha apanhado disso (o parser parte o cartao em dois). O span so'
+     PARECE botao: quem leva o clique continua sendo a linha.
+
+     ⚠️ Altura: pilula de 26 px e margem de 8. Ele pediu para nao crescer. */
+  .vivo-cta {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 9px;
+    padding: 0 13px; height: 26px; border-radius: 13px;
+    background: linear-gradient(180deg, #f5c542, #e8a92b);
+    color: #2a2008; font: 700 12.5px/1 Poppins, sans-serif; letter-spacing: .01em;
+    box-shadow: 0 2px 8px rgba(190,140,20,.32), inset 0 1px 0 rgba(255,255,255,.55);
+    opacity: 0; transform: translateY(6px);
+  }
+  .vivo-cta:empty { display: none; }
+  .vivo-cta .eco { font-weight: 600; opacity: .72; }
+  @media (prefers-reduced-motion: no-preference) {
+    .vivo-cta.entra { animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vivo-cta { opacity: 1; transform: none; }
+  }
+  @keyframes cta-entra {
+    from { opacity: 0; transform: translateY(6px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
   /* ⭐ O CLARAO (20/09/2026) — ideia do Bryan, em video: "uma luz surgindo
      bem forte no campo de cima, por tras de onde o numero aparece sendo
      digitado ... um flash crescendo, visto de longe, iluminando o preco",
@@ -435,7 +482,7 @@
   .clarao {
     position: absolute; left: 50%; top: 70%; width: min(760px, 190%);
     aspect-ratio: 1 / .72; border-radius: 50%; pointer-events: none; z-index: -1;
-    opacity: 0; transform: translate(-50%, -30%) scale(.42);
+    opacity: 0; transform: translate(-50%, -38%) scale(.42);
     transform-origin: 50% 45%; will-change: opacity, transform;
     background: radial-gradient(closest-side,
       rgba(255,209,120,.82) 0%,   rgba(255,206,114,.64) 12%,
@@ -458,11 +505,11 @@
   /* ⭐ MAIS DELICADA (pedido dele): pico menor (.82 no lugar de .95), subida
      mais longa e saida lenta — a luz se apaga em vez de sumir. */
   @keyframes clarao {
-    0%   { opacity: 0;   transform: translate(-50%,-30%) scale(.42); }
-    16%  { opacity: .82; transform: translate(-50%,-30%) scale(.70); }
-    44%  { opacity: .50; transform: translate(-50%,-30%) scale(.93); }
-    72%  { opacity: .20; transform: translate(-50%,-30%) scale(1.08); }
-    100% { opacity: 0;   transform: translate(-50%,-30%) scale(1.18); }
+    0%   { opacity: 0;   transform: translate(-50%,-38%) scale(.42); }
+    16%  { opacity: .82; transform: translate(-50%,-38%) scale(.70); }
+    44%  { opacity: .50; transform: translate(-50%,-38%) scale(.93); }
+    72%  { opacity: .20; transform: translate(-50%,-38%) scale(1.08); }
+    100% { opacity: 0;   transform: translate(-50%,-38%) scale(1.18); }
   }
   /* ⭐ A LUZ TAMBEM PASSA PELA BORDA ("uma luz passando pela borda em 3d").
      `@property` registra o angulo como <angle> para o navegador poder
@@ -1118,6 +1165,7 @@
       <span class="vivo-nome" id="vivo_nome"></span>
       <span class="vivo-preco" id="vivo_preco"></span>
       <span class="vivo-dica" id="vivo_dica"></span>
+      <span class="vivo-cta" id="vivo_cta"></span>
     </a>
   </header>
   <!-- ⭐ O CONSOLE (18/09/2026, aprovado pelo Bryan no mock v5): prova +
@@ -3141,6 +3189,7 @@
     var aNome = document.getElementById("vivo_nome");
     var aPreco = document.getElementById("vivo_preco");
     var aDica = document.getElementById("vivo_dica");
+    var aCta = document.getElementById("vivo_cta");
     var faixa = document.querySelector(".faixa");
     geracao += 1;
     var minha = geracao;
@@ -3185,6 +3234,15 @@
         void faixa.offsetWidth;
         faixa.classList.add("acende");
       }
+      // ⭐ A ECONOMIA EM REAIS, do par preco/antes que ja' esta' na tela.
+      // ⚠️ Formato brasileiro: milhar com ponto, decimal com virgula. Tirar o
+      // ponto ANTES de trocar a virgula, senao "R$ 1.234,56" vira 1.23456.
+      function emReais(s) {
+        var t = String(s || "").replace(/[^0-9,.]/g, "").replace(/\./g, "").replace(",", ".");
+        var v = parseFloat(t);
+        return isFinite(v) ? v : null;
+      }
+      function moeda(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
       function fecharPreco() {
         aPreco.innerHTML = escapar(p.preco) +
           (p.antes ? "<s>" + escapar(p.antes) + "</s>" : "") +
@@ -3194,6 +3252,20 @@
         aPreco.classList.remove("entra");
         void aPreco.offsetWidth;
         aPreco.classList.add("entra");
+        // ⭐ O CTA NASCE COM O PRECO. Bryan, 20/09: "o preco mostra mas a
+        // pessoa nao sabe que ela tem que clicar pra ir pro produto". O
+        // problema e' AFFORDANCE, nao falta de informacao: a linha inteira
+        // sempre foi um link e nao parecia um. A pilula e' o que ela ve' e
+        // aperta. ("toque aqui" ele ja' tinha recusado: "feio tambem".)
+        if (aCta) {
+          var vAntes = emReais(p.antes), vAgora = emReais(p.preco);
+          var eco = (vAntes && vAgora && vAntes > vAgora) ? vAntes - vAgora : null;
+          aCta.innerHTML = 'Comprar agora <span aria-hidden="true">→</span>' +
+            (eco ? ' <span class="eco">economiza ' + escapar(moeda(eco)) + '</span>' : "");
+          aCta.classList.remove("entra");
+          void aCta.offsetWidth;
+          aCta.classList.add("entra");
+        }
         acender();
       }
       if (calmo) {

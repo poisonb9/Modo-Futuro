@@ -129,7 +129,10 @@ async function main() {
       .filter((a) => a.name !== "data-mede")
       .map((a) => ` ${a.name}="${String(a.value).replace(/"/g, "&quot;")}"`).join("");
     troca('<a class="vivo" id="vivo" rel="noopener">', "<a" + atrs + ">");
-    for (const id of ["vivo_nome", "vivo_preco", "vivo_dica"]) {
+    // ⭐ `vivo_cta` entra junto (20/09): a pilula "Comprar agora" e' a
+    // affordance do topo; se ela so' aparecesse com o motor, a primeira
+    // tela voltaria a ter um buraco — o defeito que o SSR existe pra evitar.
+    for (const id of ["vivo_nome", "vivo_preco", "vivo_dica", "vivo_cta"]) {
       const e = q(id);
       const vazio = `<span class="${id.replace("_", "-")}" id="${id}"></span>`;
       if (e && e.innerHTML && saida.indexOf(vazio) >= 0) { troca(vazio, inerte(win, e)); }

@@ -2580,6 +2580,15 @@ def main() -> None:
             "nao ha' o que confirmar. Isto nao e' sucesso.")
     print(f"  {len(conferidos)} endereco(s) conferidos no ar, "
           f"nenhum faltando")
+    # o diario do site: uma entrada por publicacao confirmada (ordem do
+    # Bryan, 20/09). Mora em ferramentas/ e nunca derruba a publicacao.
+    try:
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ferramentas"))
+        import diario_do_site
+        diario_do_site.anotar(marca, conferidos, len(html))
+    except Exception as _e:
+        print(f"  AVISO: diario nao anotado ({_e}). O site subiu igual.")
 
 
 if __name__ == "__main__":

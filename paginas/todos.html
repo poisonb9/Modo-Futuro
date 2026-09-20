@@ -585,13 +585,23 @@
      espelho recebe a posicao dela e AMPLIA/refrata o que passa por baixo. */
   .abas a.on { background: none !important; color: #fff; }
   .abas a { transition: color .2s; }
+  /* ⛔ 20/09 (Bryan: "o inicio preto ficou transparente ... ficou muito
+     ruim assim"). A pilula estava em `z-index: 0`, o MESMO nivel do
+     `.vidro::after` — e o `::after` vem depois na arvore, entao o especular
+     branco da lamina (`radial-gradient(... rgba(255,255,255,.28) ...)`, que
+     segue o rolar e a inclinacao por `--luz-x/--luz-y`) pintava POR CIMA
+     dela. Era o degrade preto->branco do print dele, e piorou quando a
+     barra passou a ficar sobre foto de produto saturada.
+     Subir a pilula para 1 e os links para 2 poe os dois acima do especular.
+     ⚠️ NAO E' O CONGELAMENTO: nada de `.vidro`, `--vidro-*`, shader ou
+     `.espelho-vivo` foi tocado — so' a ordem de pintura dentro de `#abas`. */
   .abas .pilula {
     position: absolute; top: 6px; bottom: 6px; left: 0; width: 0; border-radius: 999px;
-    background: var(--tinta); z-index: 0; pointer-events: none;
+    background: var(--tinta); z-index: 1; pointer-events: none;
     transition: left .34s cubic-bezier(.34,1.4,.44,1), width .34s cubic-bezier(.34,1.4,.44,1);
   }
   @media (prefers-color-scheme: dark) { .abas .pilula { background: #f4f2f9; } }
-  .abas a { position: relative; z-index: 1; }
+  .abas a { position: relative; z-index: 2; }
   @media (prefers-reduced-motion: reduce) { .abas .pilula { transition: none; } }
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
     background-color: rgba(236,242,252,.22);
@@ -3243,6 +3253,15 @@
       if (p.link) { alvo.href = p.link; } else { alvo.removeAttribute("href"); carregarLinks(); }
       aNome.classList.remove("pronto");
       aPreco.innerHTML = "";
+      // ⛔ A PILULA SAI JUNTO COM O PRECO. Bryan, 20/09: "quero que esse
+      // botao apareca so' quando o preco no final aparece, ele esta' ficando
+      // constantemente aparecendo". Eu limpava o preco na troca de produto e
+      // esquecia o CTA: ele sobrava da rodada anterior durante a digitacao do
+      // nome seguinte — um botao de comprar sem preco nenhum na tela, que e'
+      // o oposto do que ele foi criado para fazer.
+      // `.vivo-cta:empty { display: none }` faz o resto; `entra` sai para a
+      // animacao poder rodar de novo no proximo preco.
+      if (aCta) { aCta.innerHTML = ""; aCta.classList.remove("entra"); }
       var curto = String(p.nome || "").trim();
 
       // ⭐ O CLARAO ACENDE A CADA TROCA DE PRODUTO (Bryan, 20/09: "a luz

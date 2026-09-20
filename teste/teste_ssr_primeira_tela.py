@@ -83,5 +83,37 @@ checar("/[?&]p=/.test(location.search) || location.hash.length > 1" in pagina,
        "?p= e #categoria limpam a grade pre-montada (ordem diferente da abertura)")
 
 print()
+print("7. O TOPO (BRASAO E LINHA VIVA) TAMBEM VEM PRE-MONTADO")
+# ⭐ 20/09: o video do Bryan (02:24) mostrou a primeira pintura CORRETA mas
+# com dois buracos no cabecalho — logo e linha viva, ambos escritos pelo
+# motor, que agora chega em `defer`. Sem estes, a piscada volta.
+checar('<span class="marca-logo" id="logo"></span>' in html,
+       "antes: logo vazio no HTML")
+checar('<span class="marca-logo" id="logo"></span>' not in saida
+       and 'decoding="sync"' in saida,
+       "depois: brasao dentro do HTML, com decoding=sync")
+checar('<span class="vivo-nome" id="vivo_nome"></span>' in html,
+       "antes: linha viva vazia no HTML")
+m_vivo = re.search(r'<span class="vivo-nome[^"]*" id="vivo_nome">(.+?)</span>', saida)
+checar(bool(m_vivo and m_vivo.group(1).strip()),
+       f"depois: nome do produto do topo no HTML ({(m_vivo.group(1)[:34] + '...') if m_vivo else 'vazio'})")
+m_preco = re.search(r'<span class="vivo-preco[^"]*" id="vivo_preco">(.+?)</span>', saida, re.S)
+checar(bool(m_preco and "R$" in m_preco.group(1)), "depois: preco do topo no HTML")
+
+print()
+print("8. NEGATIVO: `data-mede` NAO PODE VIAJAR NO HTML")
+# ⛔ `animarVivo` usa `data-mede` como "ja' liguei o clique aqui". Congelado
+# no HTML, o motor pula a linha e o clique no produto do topo — o mais
+# visivel da pagina — deixa de ser medido. Nao aparece na tela: so' este
+# teste pega. O caso positivo (o atributo existe depois do JS) esta' provado
+# pela propria pagina; aqui se prova que ele NAO chegou ao byte servido.
+i_vivo = saida.find('<a class="vivo" id="vivo"')
+abre = saida[i_vivo:saida.find(">", i_vivo) + 1] if i_vivo >= 0 else ""
+checar(i_vivo >= 0, "o <a class=vivo> continua no HTML")
+checar("data-mede" not in abre, f"sem data-mede no <a> servido ({abre[:70]})")
+checar('if (!alvo.dataset.mede)' in pagina,
+       "e a pagina REALMENTE usa data-mede como trava (senao este teste nao guarda nada)")
+
+print()
 print("tudo verde" if not FALHAS else f"{FALHAS} FALHA(S)")
 sys.exit(1 if FALHAS else 0)

@@ -98,6 +98,44 @@ async function main() {
   troca('<div id="vitrine"></div>', '<div id="vitrine">' + vitHtml + '</div>');
   troca('<div class="grade" id="grade"></div>', '<div class="grade" id="grade">' + cartoes + '</div>');
 
+  // ⭐ O TOPO TAMBEM (20/09/2026, video do Bryan as 02:24). O SSR cobria
+  // prova, chips, vitrine e cartoes — e deixava de fora as DUAS coisas mais
+  // altas da pagina: o brasao (`#logo`) e a linha viva (`#vivo`), ambas
+  // escritas pelo motor. MEDIDO no video: com o motor agora em `defer`, a
+  // primeira pintura sai cedo e correta, mas com dois buracos no cabecalho
+  // — o espaco ja' reservado, sem conteudo — ate' o motor chegar. Era a
+  // piscada que sobrou.
+  //
+  // ⚠️ O `<a class="vivo">` VAI COM OS ATRIBUTOS DE DEPOIS, href inclusive:
+  // o link do topo e' um dos poucos que continuam embutidos no HTML, e sem
+  // ele a primeira tela teria um produto que nao abre.
+  // Repintar por cima nao duplica: `animarVivo` escreve por innerHTML/texto
+  // nos mesmos tres spans (diferente de `montarProva`, que anexa celas).
+  const logo = q("logo"), vivo = q("vivo");
+  if (logo && logo.children.length) {
+    // ⚠️ `decoding="sync"`: o brasao e' um data: URI de 86 px ja' dentro do
+    // HTML; sem isto o Safari pode pintar a pagina e decodificar depois, que
+    // e' exatamente o buraco redondo do video.
+    troca('<span class="marca-logo" id="logo"></span>',
+          inerte(win, logo).replace("<img ", '<img decoding="sync" fetchpriority="high" '));
+  }
+  if (vivo && !vivo.hidden) {
+    // ⛔ `data-mede` NAO VAI JUNTO. `animarVivo` usa esse atributo como
+    // "ja' liguei o clique aqui" (`if (!alvo.dataset.mede)`). Congelado no
+    // HTML, o motor pularia a linha e o produto do topo — o mais visivel da
+    // pagina — ficaria para sempre sem o registro do clique. Defeito que nao
+    // aparece na tela: o link abre igual, so' a medicao some.
+    const atrs = Array.from(vivo.attributes)
+      .filter((a) => a.name !== "data-mede")
+      .map((a) => ` ${a.name}="${String(a.value).replace(/"/g, "&quot;")}"`).join("");
+    troca('<a class="vivo" id="vivo" rel="noopener">', "<a" + atrs + ">");
+    for (const id of ["vivo_nome", "vivo_preco", "vivo_dica"]) {
+      const e = q(id);
+      const vazio = `<span class="${id.replace("_", "-")}" id="${id}"></span>`;
+      if (e && e.innerHTML && saida.indexOf(vazio) >= 0) { troca(vazio, inerte(win, e)); }
+    }
+  }
+
   process.stderr.write(`ssr: ${celas.split('class="cela').length - 1} celas, ${chipsHtml.length} B de chips, vitrine ${vitHtml ? "sim" : "nao"}, ${Math.min(n, CARTOES)} de ${n} cartoes` + (erros.length ? ` (avisos: ${erros.length})` : "") + "\n");
   if (erros.length) { process.stderr.write(erros.slice(0, 5).join("\n") + "\n"); }
   process.stdout.write(saida);

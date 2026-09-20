@@ -24,6 +24,7 @@ strings. Arquivo proprio, escrito de uma vez, nao tem essa classe de defeito.
 from __future__ import annotations
 
 import datetime
+import re
 import subprocess
 from pathlib import Path
 
@@ -51,13 +52,24 @@ def _do_commit() -> tuple[str, str, str]:
     sha = partes[0].strip() if partes else "?"
     assunto = partes[1].strip() if len(partes) > 1 else "(sem assunto)"
     corpo = partes[2] if len(partes) > 2 else ""
-    porque = ""
+    # o motivo e' o primeiro paragrafo COM SUBSTANCIA. MEDIDO na estreia do
+    # diario: o commit comecava com "Tres pedidos do Bryan (20/09)." e era
+    # isso que ia para o campo "Por que" — um cabecalho, nao um motivo.
+    candidatos = []
     for bloco in corpo.split(chr(10) + chr(10)):
         bloco = " ".join(bloco.split())
-        # a linha de atribuicao nao e' motivo de nada
-        if bloco and not bloco.startswith("Co-Authored-By"):
+        if not bloco or bloco.startswith("Co-Authored-By"):
+            continue
+        candidatos.append(bloco)
+    porque = ""
+    for bloco in candidatos:
+        if len(bloco) >= 90:
             porque = bloco
             break
+    if not porque and candidatos:
+        porque = candidatos[0]
+    if len(porque) > 600:
+        porque = porque[:597].rstrip() + "..."
     return sha or "?", assunto, porque
 
 
@@ -65,6 +77,9 @@ def anotar(marca: str, conferidos: list[str], tamanho_html: int) -> None:
     """Poe a entrada no TOPO do diario. Falha vira aviso, nunca excecao."""
     try:
         sha, assunto, porque = _do_commit()
+        # o carimbo chega como `name="v" content="<sha>"`; no diario so' o sha
+        so_sha = re.search(r'([0-9a-f]{8,})', marca or "")
+        marca = so_sha.group(1) if so_sha else (marca or "?")
         agora = datetime.datetime.now().astimezone().strftime("%d/%m/%Y %H:%M")
         linhas = [
             "## " + agora + " — `" + sha + "`",

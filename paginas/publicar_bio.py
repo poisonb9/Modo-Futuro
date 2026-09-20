@@ -2586,7 +2586,11 @@ def main() -> None:
         import sys as _sys
         _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ferramentas"))
         import diario_do_site
-        diario_do_site.anotar(marca, conferidos, len(html))
+        # ⚠️ O CATALOGO, NAO A BIO. `marca`/`html` sao da pagina de bio;
+        # o site e' o catalogo, e era o tamanho da bio (240 KB) que ia
+        # parar no diario no lugar dos 103 KB que o visitante recebe.
+        diario_do_site.anotar(marca_c or marca, conferidos,
+                              len(catalogo) if catalogo else len(html))
     except Exception as _e:
         print(f"  AVISO: diario nao anotado ({_e}). O site subiu igual.")
 

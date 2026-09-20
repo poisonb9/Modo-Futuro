@@ -575,9 +575,40 @@
     .vivo-cta { --cta-borda: 360deg; }
   }
   @media (prefers-reduced-motion: no-preference) {
-    .vivo-cta.entra::before { animation: encher-borda 1650ms cubic-bezier(.22,.61,.36,1) both; }
+    /* ⭐ GUARDADA COMO OPCAO (`?cta=borda`), a pedido dele: "deixa salvo
+       essa opcao mas vamos tentar de novo". A linha do contorno enchendo
+       pelo perimetro ficou boa, mas nao era o pedido — ele queria a CAIXA
+       acendendo, nao o fio dela. Fica testavel em vez de virar comentario
+       morto: opcao guardada que nao roda apodrece sem ninguem ver. */
+    html.v-cta-borda .vivo-cta.entra::before { animation: encher-borda 1650ms cubic-bezier(.22,.61,.36,1) both; }
   }
   @keyframes encher-borda { from { --cta-borda: 0deg; } to { --cta-borda: 360deg; } }
+  /* o fio so' aparece na opcao da borda; no padrao quem acende e' a caixa */
+  .vivo-cta::before { opacity: 0; }
+  html.v-cta-borda .vivo-cta::before { opacity: 1; }
+
+  /* ⭐ A CAIXA ACENDE COM A LUZ (20/09, segunda tentativa a pedido dele):
+     "quando a luz aparece e comeca a encher, a caixa que envolve comprar
+     agora comeca a acender, comeca a ter cor e vai chegando a cor ate' o
+     auge e depois apaga tudo".
+     Entao o que anima e' o PREENCHIMENTO, nao o contorno.
+     ⚠️ O TEXTO NAO DEPENDE DESSA COR: e' `--tinta` sobre a pagina branca,
+     18:1 mesmo com a caixa completamente apagada. A cor e' evento; a
+     leitura nao pode ser evento.
+     ⚠️ `background-color`, nao `background`: animar o atalho apagaria
+     tambem qualquer imagem de fundo que a regra base traga.
+     ⚠️ Mesma duracao e curva do clarao, senao a caixa acende fora do
+     compasso da luz que deveria estar enchendo ela. */
+  @media (prefers-reduced-motion: no-preference) {
+    .vivo-cta.entra { animation: acender-caixa 1650ms cubic-bezier(.22,.61,.36,1) both; }
+  }
+  @keyframes acender-caixa {
+    0%   { background-color: rgba(200,144,26,0);   box-shadow: none; }
+    18%  { background-color: rgba(200,144,26,.10); box-shadow: none; }
+    46%  { background-color: rgba(200,144,26,.26); box-shadow: 0 2px 14px rgba(200,144,26,.30); }
+    68%  { background-color: rgba(200,144,26,.16); box-shadow: 0 2px 8px rgba(200,144,26,.14); }
+    100% { background-color: rgba(200,144,26,0);   box-shadow: none; }
+  }
   @media (prefers-color-scheme: dark) {
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }
@@ -1304,7 +1335,17 @@
   ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .26s; }
   ::view-transition-group(abas) { animation: none; }
   .abas {
-    position: fixed; left: 16px; right: 16px; bottom: max(14px, env(safe-area-inset-bottom, 0px));
+    /* ⚠️ 26px ALINHA COM A BUSCA (20/09, desenho do Bryan em cima do
+       print: "queria bem alinhado os dois"). MEDIDO, havia TRES reguas na
+       pagina ao mesmo tempo:
+         18 -> 375   console, vitrine, mostrador, convite, cartoes (--respiro)
+         26 -> 367   busca e chips (os 8px de respiro interno do console)
+         16 -> 377   esta barra — 2px fora de todo mundo
+       A barra passa a usar a regua da BUSCA, que e' o elemento com que ela
+       divide a tela e o que ele apontou. Fica mais estreita que os cartoes
+       de proposito: dock flutuante inset e' o desenho do iOS 26, nao
+       descuido. */
+    position: fixed; left: 26px; right: 26px; bottom: max(14px, env(safe-area-inset-bottom, 0px));
     z-index: 20; padding: 6px; display: flex; border-radius: 999px; max-width: 440px; margin: 0 auto;
   }
   .abas a {
@@ -3329,6 +3370,15 @@
     new MutationObserver(ligarFilhos).observe(document.body, { childList: true });
   })();
 
+  // ⭐ `?cta=borda` traz de volta a versao do contorno enchendo, guardada a
+  // pedido dele. Unica opcao viva; o resto do andaime do CTA ja' saiu.
+  (function opcaoDaBorda() {
+    try {
+      if (/[?&]cta=borda/.test(location.search)) {
+        document.documentElement.classList.add("v-cta-borda");
+      }
+    } catch (e) { /* sem query, acende a caixa */ }
+  })();
   function grudar() {
     var c = document.getElementById("console");
     if (!c) { return; }

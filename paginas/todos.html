@@ -608,11 +608,11 @@
        SOMBRA, nao a tinta. Entao a tinta cai bastante e a sombra cai mais
        ainda. No ESCURO baixar ate' AJUDA: 16% -> 11% leva a razao de 9,91
        para 11,78, porque a pilula fica mais escura sob texto branco. */
-    background: rgba(255,255,255,.42); z-index: 1; pointer-events: none;
-    box-shadow: 0 1px 2px rgba(30,40,60,.07);
+    background: rgba(255,255,255,.30); z-index: 1; pointer-events: none;
+    box-shadow: 0 1px 2px rgba(30,40,60,.05);
     transition: left .34s cubic-bezier(.34,1.4,.44,1), width .34s cubic-bezier(.34,1.4,.44,1);
   }
-  @media (prefers-color-scheme: dark) { .abas .pilula { background: rgba(255,255,255,.11); box-shadow: none; } }
+  @media (prefers-color-scheme: dark) { .abas .pilula { background: rgba(255,255,255,.08); box-shadow: none; } }
   .abas a { position: relative; z-index: 2; }
   @media (prefers-reduced-motion: reduce) { .abas .pilula { transition: none; } }
 

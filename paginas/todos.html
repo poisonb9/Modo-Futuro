@@ -583,7 +583,11 @@
   /* ⭐ A PILULA QUE DESLIZA (WhatsApp/iOS 26, video do Bryan 19/09 17:16):
      um elemento so' anda de uma aba a outra em ~300 ms com overshoot; o
      espelho recebe a posicao dela e AMPLIA/refrata o que passa por baixo. */
-  .abas a.on { background: none !important; color: #fff; }
+  /* ⭐ A ABA ATIVA E' MARCADA PELA PILULA, nao por fundo proprio (escolha do
+     Bryan em 20/09 entre quatro variantes testadas no aparelho dele: "a
+     clara"). Cor do rotulo aqui, uma vez so' — ver o defeito de ordem que
+     isto conserta, logo abaixo no bloco escuro. */
+  .abas a.on { background: none !important; color: var(--tinta); }
   .abas a { transition: color .2s; }
   /* ⛔ 20/09 (Bryan: "o inicio preto ficou transparente ... ficou muito
      ruim assim"). A pilula estava em `z-index: 0`, o MESMO nivel do
@@ -597,43 +601,13 @@
      `.espelho-vivo` foi tocado — so' a ordem de pintura dentro de `#abas`. */
   .abas .pilula {
     position: absolute; top: 6px; bottom: 6px; left: 0; width: 0; border-radius: 999px;
-    background: var(--tinta); z-index: 1; pointer-events: none;
+    background: rgba(255,255,255,.72); z-index: 1; pointer-events: none;
+    box-shadow: 0 1px 3px rgba(30,40,60,.14);
     transition: left .34s cubic-bezier(.34,1.4,.44,1), width .34s cubic-bezier(.34,1.4,.44,1);
   }
-  @media (prefers-color-scheme: dark) { .abas .pilula { background: #f4f2f9; } }
+  @media (prefers-color-scheme: dark) { .abas .pilula { background: rgba(255,255,255,.16); box-shadow: none; } }
   .abas a { position: relative; z-index: 2; }
   @media (prefers-reduced-motion: reduce) { .abas .pilula { transition: none; } }
-  /* ⭐ TRES VARIANTES DA ABA ATIVA, TESTAVEIS PELO ENDERECO (20/09).
-     Bryan: "a pilula no inicio ta' muito evidente, tem como chamar menos
-     atencao? Nao sei? Vamos testar". Eu tinha acabado de deixa-la SOLIDA
-     para consertar o especular pintando por cima — consertei o defeito e
-     criei um exagero.
-
-     Em vez de adivinhar e republicar tres vezes, ele troca no proprio
-     iPhone: `?aba=clara`, `?aba=discreta`, `?aba=sem`. Sem query, fica o
-     que esta' no ar hoje (solida).
-     ⚠️ ISTO E' ANDAIME: quando ele escolher, as outras duas saem do codigo.
-
-     Contraste MEDIDO em cada uma, texto sobre a pilula:
-       solida    branco sobre rgb(22,21,28)        18,13:1
-       clara     tinta  sobre ~rgb(254,254,255)    17,4:1  (claro)
-                 branco sobre ~rgb(66,64,74)        8,9:1  (escuro)
-       discreta  tinta  sobre ~rgb(229,229,232)    14,6:1  (claro)
-       sem       tinta  sobre o vidro da barra     ~15:1 — marca so' por cor */
-  .abas.v-clara .pilula { background: rgba(255,255,255,.72); box-shadow: 0 1px 3px rgba(30,40,60,.14); }
-  .abas.v-clara a.on { color: var(--tinta); }
-  @media (prefers-color-scheme: dark) {
-    .abas.v-clara .pilula { background: rgba(255,255,255,.16); box-shadow: none; }
-    .abas.v-clara a.on { color: #fff; }
-  }
-  .abas.v-discreta .pilula { background: rgba(22,21,28,.10); box-shadow: none; }
-  .abas.v-discreta a.on { color: var(--tinta); }
-  @media (prefers-color-scheme: dark) {
-    .abas.v-discreta .pilula { background: rgba(255,255,255,.10); }
-    .abas.v-discreta a.on { color: #fff; }
-  }
-  .abas.v-sem .pilula { display: none; }
-  .abas.v-sem a.on { color: var(--ouro); }
 
   .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
     background-color: rgba(236,242,252,.22);
@@ -642,7 +616,13 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 6px 16px -8px rgba(30,40,60,.22), 0 1px 2px rgba(30,40,60,.05);
     color: var(--tinta);
   }
-  .chip-ordem[aria-pressed="true"], .abas a.on {
+  /* ⛔ A ABA ATIVA SAIU DESTE GRUPO (20/09). Ela vinha junto do chip ligado
+     e herdava `color: #fff` — e esta regra fica DEPOIS da que define a cor
+     do rotulo ativo, entao vencia por ordem. Com a pilula clara isso dava
+     branco sobre branco: MEDIDO 1,01:1, pior do que o que eu tinha acabado
+     de consertar. Terceira regra em tres lugares diferentes mexendo na
+     mesma cor; e' o tipo de defeito que so' aparece medindo o computado. */
+  .chip-ordem[aria-pressed="true"] {
     background-color: var(--tinta); color: #fff; background-image: none;
     box-shadow: 0 8px 20px -8px rgba(20,20,30,.45);
   }
@@ -651,14 +631,14 @@
     box-shadow: inset 0 2px 4px rgba(0,0,0,.12); background-image: none;
   }
   @media (prefers-color-scheme: dark) {
-    .abas a.on { background: #f4f2f9 !important; color: #16151c; }
+    .abas a.on { background: none !important; color: #fff; }
     .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
       background-color: rgba(255,255,255,.08);
       background-image: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02) 60%);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,255,255,.06),
                   0 8px 20px -10px rgba(0,0,0,.5);
     }
-    .chip-ordem[aria-pressed="true"], .abas a.on { background-color: #f4f2f9; color: #16151c; }
+    .chip-ordem[aria-pressed="true"] { background-color: #f4f2f9; color: #16151c; }
     .chip-ordem[aria-pressed="true"] .n { color: #16151c; }
   }
   /* ⭐ CHIPS DE PRECO (18/09, mock v5): as 4 ordens em UMA fila rolavel de
@@ -1175,7 +1155,12 @@
   }
   .abas a:active { transform: scale(.94); }
   .abas a svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .abas a.on { color: #fff; }
+  /* ⛔ ERA `.abas a.on { color: #fff }` AQUI. MEDIDO em 20/09: no escuro a
+     regra de cima dava fundo CLARO (#f4f2f9) a' aba ativa e esta, por vir
+     DEPOIS no arquivo, forcava o texto a branco — branco sobre claro,
+     1,11:1. O defeito era de ordem de cascata, e ficava invisivel porque
+     ninguem le' duas regras a 600 linhas de distancia como uma so'.
+     A cor agora sai de um lugar unico (`.abas a.on`, la' em cima). */
   @media (prefers-reduced-motion: reduce) { .abas a { transition: none; } }
 
   footer {
@@ -3185,17 +3170,6 @@
     new MutationObserver(ligarFilhos).observe(document.body, { childList: true });
   })();
 
-  // ⭐ ANDAIME DE TESTE (20/09): `?aba=clara|discreta|sem` troca o desenho
-  // da aba ativa sem republicar. Sai do codigo quando ele escolher.
-  (function variantesDaAba() {
-    try {
-      var q = (location.search.match(/[?&]aba=([a-z]+)/) || [])[1];
-      var n = document.getElementById("abas");
-      if (q && n && ["clara", "discreta", "sem"].indexOf(q) >= 0) {
-        n.classList.add("v-" + q);
-      }
-    } catch (e) { /* sem query, fica a de hoje */ }
-  })();
   function grudar() {
     var c = document.getElementById("console");
     if (!c) { return; }

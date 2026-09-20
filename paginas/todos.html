@@ -251,7 +251,7 @@
   .faixa { max-width: 980px; margin: 0 auto; padding: 0 var(--respiro); }
 
   /* ---------------- topo ---------------- */
-  header { text-align: center; padding: 34px 0 6px; }
+  header { text-align: center; padding: 34px 0 6px; position: relative; }
   .marca-logo {
     width: 86px; height: 86px; margin: 0 auto 12px; border-radius: 50%;
     overflow: hidden; display: block;
@@ -390,66 +390,80 @@
   .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--tinta); opacity: .5; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
   .prova > .economia { display: none; }
   @media (max-width: 360px) { .prova .n { font-size: 17px; } .prova .cela { font-size: 9.5px; } }
-  /* ⭐ O MOSTRADOR COMO PECA DE VIDRO FOSCO (20/09/2026).
+  /* ⭐ O CLARAO (20/09/2026) — ideia do Bryan, em video: "uma luz surgindo
+     bem forte no campo de cima, por tras de onde o numero aparece sendo
+     digitado ... um flash crescendo, visto de longe, iluminando o preco",
+     "e a luz acontece toda vez que muda de produto, um atras do outro".
 
-     ESCOPO CORRIGIDO PELO BRYAN, e a correcao importa mais que a ideia:
-     a primeira versao punha `brightness()` no `#console` INTEIRO — e o
-     console inteiro inclui a busca e os chips, que e' onde as cores dos
-     produtos atravessam o vidro quando a pagina rola. Ele mandou video:
-     "gostei demais de como as cores se comportam, nao quero que altere".
-     Entao o container volta ao que era, byte a byte, e o trabalho fica
-     so' no `.prova` — o bloco dos numeros da foto dele.
+     ⭐ POR QUE ISTO RESOLVE O QUE NADA RESOLVIA. Ele mandou tambem o dock
+     do iOS 26 ("inves dos icones verdes podemos por nossas informacoes").
+     O dock da Apple so' funciona porque TEM COR ATRAS: o papel de parede
+     atravessa o vidro. Aqui o fundo e' branco chapado e a `.luz` da pagina
+     esta' desligada por decisao dele — por isso o mostrador nunca virou
+     vidro (blur e saturate sao convolucoes: sobre campo uniforme devolvem
+     o proprio campo). O clarao E' o papel de parede que faltava, so' que
+     acontecendo no tempo do dado em vez de pintado ali para sempre.
 
-     ⛔ POR QUE NENHUM TRUQUE DE FUNDO SALVARIA ESTE BLOCO. MEDIDO: o
-     `#console` e' `position:sticky` com `top:-106px`, ou seja, o mostrador
-     SOME ao rolar. Ele so' e' visto parado no topo, e la' o fundo do
-     <html> e' rgb(255,255,255) chapado, com a `.luz` desligada por decisao
-     dele (4a1bae3). `blur()` e `saturate()` sao convolucoes: sobre campo
-     uniforme devolvem o proprio campo. Nao ha' o que refratar — e ele
-     recusou por o que refratar. Logo: SUPERFICIE, nao fundo.
+     ⚠️ A MECANICA E' REAL, NAO DESENHADA: o clarao fica no `header`, que
+     pinta ANTES do `.console` (z-index 5). Logo ele entra no BACKDROP do
+     console, e o `backdrop-filter` que ja' existe o borra e o refrata
+     sozinho. Nao ha' gradiente falso no mostrador imitando luz.
 
-     ⭐ GRAO. Tres fontes DEMONSTRADAS do acervo de liquid glass mandam a
-     mesma coisa ("acrescentar textura ou ruido ao glass morphism e reduzir
-     opacidade"; "textura de ruido para aumentar profundidade"; "camada de
-     ruido como mascara"). Vidro fosco real TEM microtextura; sem ela a
-     superficie le' como plastico. O grao nao olha o fundo: e' tinta na
-     face, entao funciona sobre branco chapado.
-     ⚠️ O `feTurbulence` vai dentro de um SVG usado como IMAGEM, nunca como
-     `filter: url()` sobre backdrop — este ultimo e' o que o Safari nao
-     renderiza (MAESTROS_LIQUID_GLASS 1). Como imagem, quem desenha e' o
-     renderizador de SVG e funciona em todo lugar.
-
-     ⭐ ARO CONICO. A borda de luz do projeto e' um gradiente LINEAR de tres
-     paradas: mesmo brilho na volta inteira, que le' como contorno desenhado.
-     O acervo de CSS traz `conic-gradient` em pseudo-elemento (DEMONSTRADO,
-     Kevin Powell) e o de liquid glass pede brilho de borda com azimute ~45
-     graus. Conico faz o reflexo ANDAR pelo perimetro — forte no canto de
-     cima-esquerda, fraco nos lados — como aresta curva pegando luz de um
-     lado so'. Reusa a mesma mascara do `.vidro::before`.
-     ⚠️ `::before` de um `display:grid` vira ITEM do grid; `position:absolute`
-     e' o que o tira do fluxo (sem isso, ele ocupa uma cela).
-
-     ⚠️ NADA DE `backdrop-filter` AQUI. MEDIDO em 19/09: backdrop-filter
-     vira containing block de `position:fixed` e as folhas de menu abriram
-     DENTRO do console. O poco escurece por cor, nao por filtro.
-
-     ⚠️ CONTRASTE MEDIDO ANTES DE ESCREVER: escurecer o poco derruba texto
-     escuro. Em .04 o rotulo dava 4,63:1 (raspando o minimo de 4,5); em .055
-     cairia para 4,48 — REPROVADO. Por isso o rotulo escurece junto, para
-     rgb(100,96,114): 5,28:1, melhor do que era. As duas linhas andam
-     juntas; mexer numa sem a outra quebra a guarda. */
+     ⛔ E ELE NAO PODE VAZAR PARA A REGIAO APROVADA. O Bryan fechou a busca
+     e os chips ("gostei demais de como as cores se comportam"): o clarao
+     e' um evento curto e some; nao muda material nenhum. */
+  .clarao {
+    position: absolute; left: 50%; top: 76%; width: min(640px, 160%);
+    aspect-ratio: 1 / .58; border-radius: 50%; pointer-events: none; z-index: -1;
+    opacity: 0; transform: translate(-50%, -28%) scale(.3); transform-origin: 50% 42%;
+    background: radial-gradient(closest-side,
+      rgba(255,206,112,.92), rgba(255,190,88,.42) 42%, rgba(255,186,84,0) 72%);
+    filter: blur(16px);
+  }
+  @media (prefers-color-scheme: dark) {
+    .clarao { background: radial-gradient(closest-side,
+      rgba(255,198,104,.55), rgba(255,180,80,.24) 42%, rgba(255,176,76,0) 72%); }
+  }
+  /* ⚠️ `no-preference`, nao `reduce`: quem pediu menos movimento nao ganha
+     flash nenhum, e o mostrador continua correto sem ele (acervo de CSS,
+     DEMONSTRADO). */
+  @media (prefers-reduced-motion: no-preference) {
+    .faixa.acende .clarao { animation: clarao 1150ms cubic-bezier(.16,.9,.22,1) both; }
+    .faixa.acende .prova::before { animation: girar-aro 1150ms cubic-bezier(.3,.7,.3,1); }
+  }
+  @keyframes clarao {
+    0%   { opacity: 0;   transform: translate(-50%,-28%) scale(.26); }
+    20%  { opacity: .95; transform: translate(-50%,-28%) scale(.66); }
+    52%  { opacity: .58; transform: translate(-50%,-28%) scale(1.0); }
+    100% { opacity: 0;   transform: translate(-50%,-28%) scale(1.26); }
+  }
+  /* ⭐ A LUZ TAMBEM PASSA PELA BORDA ("uma luz passando pela borda em 3d").
+     `@property` registra o angulo como <angle> para o navegador poder
+     ANIMA-LO — sem isso a custom property e' texto e nao interpola
+     (acervo de CSS, DEMONSTRADO, receita exata). Uma volta por troca de
+     produto, nao giro infinito: a luz pertence ao dado, nao ao enfeite. */
+  @property --aro { syntax: "<angle>"; inherits: false; initial-value: 315deg; }
+  @keyframes girar-aro { to { --aro: 675deg; } }
+  /* ⭐ O MOSTRADOR: TRANSLUCIDO, NAO ESCURO (Bryan: "algo mais transparente,
+     translucido, nao escuro assim"). A versao anterior escurecia o poco em
+     4-5% para o vidro aparecer sobre branco; com o clarao atras isso deixa
+     de ser necessario — e MEDIDO, clarear ate' AJUDA o contraste: o rotulo
+     sai de 5,28:1 para 5,99:1 (era 4,63:1 antes de tudo). */
   @media (prefers-color-scheme: light) {
     .console:not(.com-gl) .prova {
       position: relative;
-      background-color: rgba(0,0,0,.055);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.38'/%3E%3C/svg%3E");
+      background-color: rgba(255,255,255,.30);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.26'/%3E%3C/svg%3E");
       background-size: 140px 140px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(0,0,0,.04);
     }
+    /* ⚠️ `::before` de um `display:grid` vira ITEM do grid; `position:absolute`
+       e' o que o tira do fluxo. Reusa a mascara do `.vidro::before`. */
     .console:not(.com-gl) .prova::before {
       content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
-      background: conic-gradient(from 315deg,
-        rgba(255,255,255,.98), rgba(255,255,255,.22) 28%,
-        rgba(255,255,255,.70) 50%, rgba(255,255,255,.22) 72%,
+      background: conic-gradient(from var(--aro),
+        rgba(255,255,255,.98), rgba(255,255,255,.20) 26%,
+        rgba(255,236,196,.85) 50%, rgba(255,255,255,.20) 74%,
         rgba(255,255,255,.98));
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -1072,6 +1086,7 @@
          mostrar qualquer produto. A linha viva diz a mesma coisa em uma
          linha e com prova: nome e preco de um achadinho de verdade,
          digitando — o mesmo padrao que funcionou nas bios. -->
+    <span class="clarao" id="clarao" aria-hidden="true"></span>
     <a class="vivo" id="vivo" rel="noopener">
       <span class="vivo-nome" id="vivo_nome"></span>
       <span class="vivo-preco" id="vivo_preco"></span>
@@ -3088,6 +3103,7 @@
     var aNome = document.getElementById("vivo_nome");
     var aPreco = document.getElementById("vivo_preco");
     var aDica = document.getElementById("vivo_dica");
+    var faixa = document.querySelector(".faixa");
     if (relogio) { clearTimeout(relogio); relogio = null; }
 
     // ⭐ OS QUE MAIS CAIRAM PRIMEIRO: se so' da' tempo de ver um, que seja
@@ -3116,6 +3132,18 @@
       aPreco.innerHTML = "";
       var curto = String(p.nome || "").trim();
 
+      // ⭐ O CLARAO ACENDE A CADA TROCA DE PRODUTO (Bryan, 20/09: "a luz
+      // acontece toda vez que muda de produto, um atras do outro"). O pico
+      // cai JUNTO com o preco: e' ele que a luz ilumina.
+      // ⚠️ `remove` + leitura de offsetWidth + `add`: sem o reflow no meio, o
+      // navegador coalesce as duas mudancas e a animacao nao reinicia (mesma
+      // receita que o `.entra` do preco logo abaixo ja' usava).
+      function acender() {
+        if (!faixa) { return; }
+        faixa.classList.remove("acende");
+        void faixa.offsetWidth;
+        faixa.classList.add("acende");
+      }
       function fecharPreco() {
         aPreco.innerHTML = escapar(p.preco) +
           (p.antes ? "<s>" + escapar(p.antes) + "</s>" : "") +
@@ -3125,6 +3153,7 @@
         aPreco.classList.remove("entra");
         void aPreco.offsetWidth;
         aPreco.classList.add("entra");
+        acender();
       }
       if (calmo) {
         aNome.textContent = curto;

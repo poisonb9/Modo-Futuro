@@ -2411,6 +2411,31 @@ def main() -> None:
     p.add_argument("--subir", action="store_true", help="empurra pro repo bio")
     a = p.parse_args()
 
+    # UMA PUBLICACAO POR VEZ (20/09/2026). Em 18:20 a tarefa
+    # `AchadinhoTotal_Publicar_Ao_Mudar` disparou sozinha no meio de uma
+    # publicacao minha e os dois enviaram para os MESMOS seis projetos do
+    # Pages. Upload direto substitui o diretorio inteiro: dois de uma vez
+    # deixam o conjunto em estado misto, e a verificacao acusou tres
+    # enderecos velhos. Nao e' azar — o vigia olha o hash de todos.html a
+    # cada 10 min, entao todo push que toca a pagina agenda uma publicacao
+    # automatica; publicar a mao logo depois E' a colisao esperada.
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "ferramentas"))
+    try:
+        import trava_de_publicacao as _trava
+    except Exception:  # noqa: BLE001
+        _trava = None
+    if _trava is not None and not _trava.pegar():
+        raise SystemExit(2)
+    try:
+        _publicar(a)
+    finally:
+        if _trava is not None:
+            _trava.soltar()
+
+
+def _publicar(a) -> None:
+
     # ⚠️ INJETAR ANTES DE MASCARAR: o `conferir()` roda depois e precisa ver
     # o que vai pro ar de verdade, produtos inclusive.
     html = mascarar(tirar_previa(injetar_produtos(

@@ -154,3 +154,4 @@ estado/pedidos.jsonl
 
 # ferramentas/ssr: jsdom instalado localmente (npm install), nunca versionado
 node_modules/
+estado/publicando.lock

@@ -2008,6 +2008,66 @@ def separar_links(dados: list[dict]) -> dict[str, str]:
 SSR = RAIZ / "ferramentas" / "ssr" / "ssr.js"
 
 
+# ⭐ O MOTOR SAI DE DENTRO DO HTML (20/09/2026). Bryan: "recarregar da'
+# uma piscada". O script da pagina tem ~116 KB e, morando dentro do HTML,
+# o Safari tinha de ler e compilar tudo ANTES de pintar a primeira tela —
+# que o SSR ja' tinha deixado pronta ali do lado, parada, esperando.
+#
+# MEDIDO em 20/09 (aba visivel, localhost): o arranque sozinho custa 128-185
+# ms e o parse so' fechava aos 768 ms. Tirar o script pra fora e marcar
+# `defer` inverte a ordem: o navegador pinta o que o SSR escreveu e so'
+# depois busca o motor.
+#
+# ⭐ E O GANHO MAIOR E' NO RECARREGAR, que e' o gesto que ele descreveu
+# ("as pessoas vao ficar recarregando pra ver se tem desconto novo"): o
+# arquivo tem nome fixo e versao na query, entao fica no cache do telefone
+# e some do fio na segunda visita — o HTML cai de ~310 KB para ~195 KB.
+#
+# ⚠️ A ORDEM IMPORTA: isto roda DEPOIS do `ssr_primeira_tela` (o jsdom
+# executa os <script> INLINE do documento; se o motor ja' estivesse fora,
+# o SSR nao montaria nada) e ANTES do `conferir` (o corpo do js passa pelo
+# mesmo detector de vazamento que o HTML, pela volta do `externos`).
+MOTOR_ARQUIVO = "motor.js"
+
+
+def externalizar_motor(html: str) -> tuple[str, str, str]:
+    """Tira o maior <script> inline do HTML e devolve (html, corpo, marca).
+
+    Corpo vem carimbado com o sha do proprio js; a mesma marca vai na query
+    do `src`, entao versao nova = endereco novo = cache velho nao pega.
+    Nao achou script grande: devolve o html intacto e corpo vazio.
+    """
+    import hashlib
+    import re
+    melhor = None
+    for m in re.finditer(r"<script(?![^>]*src=)([^>]*)>(.*?)</script>",
+                         html, re.S):
+        if "module" in m.group(1):
+            continue
+        if melhor is None or len(m.group(2)) > len(melhor.group(2)):
+            melhor = m
+    # ⚠️ LIMIAR: abaixo disso nao e' o motor, e' o pre-script que limpa a
+    # pre-montagem — esse TEM de continuar inline e sincrono, senao ele roda
+    # depois da pintura e a pessoa ve' a tela errada por um quadro.
+    if melhor is None or len(melhor.group(2)) < 50000:
+        return html, "", ""
+    corpo = melhor.group(2)
+    sha = hashlib.sha256(corpo.encode("utf-8")).hexdigest()[:12]
+    marca = "/*carimbo:" + sha + "*/"
+    tag = ('<script src="' + MOTOR_ARQUIVO + "?v=" + sha
+           + '" defer></script>')
+    return html[:melhor.start()] + tag + html[melhor.end():], marca + corpo, marca
+
+
+def _carimbar_js(corpo: str) -> tuple[str, str]:
+    """O js ja' sai carimbado de `externalizar_motor`; aqui so' se le a marca."""
+    import re
+    m = re.match(r"/\*carimbo:([0-9a-f]{12})\*/", corpo)
+    if not m:
+        raise SystemExit("motor.js sem carimbo — nao publico o que nao sei conferir")
+    return corpo, m.group(0)
+
+
 def ssr_primeira_tela(html: str) -> str:
     import shutil
     import subprocess
@@ -2073,6 +2133,22 @@ def sitemap_xml(caminhos: list[str]) -> str:
 # ⚠️ O pages.dev NAO redireciona ainda: e' nele que `conferir_no_ar` le' a
 # marca, e o dominio so' passa a existir quando a zona ativar.
 REDIRECTS = "https://www.achadinhototal.com.br/* " + DOMINIO + "/:splat 301" + chr(10)
+
+# ⭐ O MOTOR FICA NO CACHE DO TELEFONE (20/09/2026). Sem isto, tirar o
+# script pra fora do HTML nao ganharia nada no RECARREGAR — que e' o gesto
+# que o Bryan descreveu ("as pessoas vao ficar recarregando pra ver se tem
+# desconto novo"): o telefone baixaria os 116 KB de novo toda vez.
+#
+# ⚠️ `immutable` SO' E' SEGURO PORQUE O ENDERECO CARREGA A VERSAO
+# (`motor.js?v=<sha>`): motor novo = endereco novo = o cache velho nao
+# responde por ele. Com nome fixo e sem query, isto deixaria gente com
+# codigo velho por um ano.
+CABECALHOS = (
+    "/motor.js" + chr(10) +
+    "  Cache-Control: public, max-age=31536000, immutable" + chr(10) +
+    "/todos/motor.js" + chr(10) +
+    "  Cache-Control: public, max-age=31536000, immutable" + chr(10)
+)
 
 
 
@@ -2175,6 +2251,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
     # pagina HTML inteira, porque o Cloudflare devolve a raiz quando o
     # caminho nao existe. Conferir por status daria "publicado".
     _por_icone(pasta)
+    (pasta / "_headers").write_text(CABECALHOS, encoding="utf-8")
     # ⚠️ UPLOAD DIRETO SUBSTITUI O DIRETORIO INTEIRO. Se a rota nao for
     # junto neste mesmo deploy, o deploy seguinte a APAGA — sem erro, sem
     # aviso, e o link que esta no perfil do Awin vira 404.
@@ -2214,6 +2291,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
                     sitemap_xml(["/"] + (["/parceiros"] if parceiros else [])),
                     encoding="utf-8")
                 (casa / "_redirects").write_text(REDIRECTS, encoding="utf-8")
+                (casa / "_headers").write_text(CABECALHOS, encoding="utf-8")
                 # ⛔ O SITE MAE E' QUEM TEM A TAG `apple-touch-icon`. Sem esta
                 # linha, a tag aponta pra um arquivo que nao existe e o
                 # Cloudflare responde 200 servindo a pagina HTML no lugar do
@@ -2346,6 +2424,14 @@ def main() -> None:
     # pegou o nome do dono no rodape na primeira versao dela.
     catalogo, externos = montar_catalogo()
     catalogo = ssr_primeira_tela(catalogo)
+    # ⚠️ DEPOIS do SSR (o jsdom roda os <script> INLINE) e ANTES do
+    # `conferir` logo abaixo: o corpo do motor entra em `externos` e passa
+    # pelo mesmo detector de vazamento que o HTML.
+    catalogo, motor_js, marca_motor = externalizar_motor(catalogo)
+    if motor_js:
+        externos[MOTOR_ARQUIVO] = motor_js
+        print(f"motor: {len(motor_js)//1024} KB fora do HTML "
+              f"({MOTOR_ARQUIVO}, defer, cache por versao)")
     parceiros = (PARCEIROS.read_text(encoding="utf-8")
                  if PARCEIROS.exists() else "")
     privacidade = (PRIVACIDADE.read_text(encoding="utf-8")
@@ -2468,7 +2554,10 @@ def main() -> None:
     catalogo, marca_c = _carimbar(catalogo) if catalogo else ("", "")
     marcas_e: dict[str, str] = {}
     for nome in list(externos):
-        externos[nome], marcas_e[nome] = _carimbar_json(externos[nome])
+        # ⚠️ O motor nao e' JSON: ele ja' sai carimbado com `/*carimbo:*/`
+        # e a conferencia no ar procura essa marca do mesmo jeito.
+        carimbar = _carimbar_js if nome.endswith(".js") else _carimbar_json
+        externos[nome], marcas_e[nome] = carimbar(externos[nome])
 
     print("\npublicando no Cloudflare Pages:")
     publicar_no_ar(html, parceiros, catalogo, externos, privacidade)

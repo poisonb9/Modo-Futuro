@@ -2143,7 +2143,42 @@ REDIRECTS = "https://www.achadinhototal.com.br/* " + DOMINIO + "/:splat 301" + c
 # (`motor.js?v=<sha>`): motor novo = endereco novo = o cache velho nao
 # responde por ele. Com nome fixo e sem query, isto deixaria gente com
 # codigo velho por um ano.
+# ⭐ OS TRES CABECALHOS FACEIS (20/09/2026, autorizado pelo Bryan). Sao
+# instrucoes que o servidor manda junto com a pagina, dizendo ao navegador
+# o que ele pode ou nao fazer. O visitante nunca ve.
+#
+#   frame-ancestors 'none' (+ X-Frame-Options por navegador velho)
+#     impede que OUTRO site ponha o nosso dentro de um iframe e finja ser
+#     nos — com um botao falso por cima. Risco zero: nada nosso e' embutido
+#     em lugar nenhum.
+#
+#   Permissions-Policy
+#     desliga o que a pagina nao usa: camera, microfone, localizacao,
+#     pagamento, USB. Se um dia entrar script estranho, ele nem consegue
+#     pedir. Risco zero: conferido que o site nao chama nenhuma delas.
+#
+#   Strict-Transport-Security
+#     obriga o navegador a so' falar HTTPS com a gente.
+#     ⚠️ COMECA CURTO DE PROPOSITO: 86400 = 1 dia. HSTS e' a unica coisa
+#     aqui que o navegador GUARDA e obedece mesmo contra a nossa vontade;
+#     se algo der errado, um dia depois expira sozinho. Subir para um ano
+#     e' decisao para depois de ver que nao quebrou nada.
+#     E SEM `includeSubDomains`: `www` e' subdominio e hoje se resolve por
+#     JS — incluir subdominios podia prender um caminho que ainda muda.
+#
+# ⛔ CSP DE CONTEUDO (script-src/img-src) FICA DE FORA POR ORA, por decisao
+# dele. Ela precisa da lista dos 18 dominios que o site carrega, e `img-src`
+# e' lista ABERTA: muda a cada anunciante novo. CSP apertada demais some com
+# a foto de uma loja futura em silencio — guarda que quebra o negocio sem
+# avisar e' pior que guarda nenhuma. Aqui so' entra `frame-ancestors`, que
+# nao tem nada a ver com carregar recurso.
 CABECALHOS = (
+    "/*" + chr(10) +
+    "  X-Frame-Options: DENY" + chr(10) +
+    "  Content-Security-Policy: frame-ancestors 'none'" + chr(10) +
+    "  Permissions-Policy: camera=(), microphone=(), geolocation=(), "
+    "payment=(), usb=()" + chr(10) +
+    "  Strict-Transport-Security: max-age=86400" + chr(10) +
     "/motor.js" + chr(10) +
     "  Cache-Control: public, max-age=31536000, immutable" + chr(10) +
     "/todos/motor.js" + chr(10) +

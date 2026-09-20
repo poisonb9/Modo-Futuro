@@ -390,6 +390,52 @@
   .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--tinta); opacity: .5; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
   .prova > .economia { display: none; }
   @media (max-width: 360px) { .prova .n { font-size: 17px; } .prova .cela { font-size: 9.5px; } }
+  /* ⭐ O VIDRO DO CONSOLE NO MODO CLARO (20/09, foto do Bryan as 07:52:
+     "como podemos aplicar o liquid glass nele"). Ele descongelou SO' o
+     #console para isto; a barra de abas segue congelada.
+
+     ⛔ O DIAGNOSTICO E' ARITMETICO, NAO ESTETICO. No claro o fundo do
+     <html> e' rgb(255,255,255) chapado e a `.luz` esta' `display:none` por
+     decisao dele (4a1bae3, "fundo branco liso"). `blur()` de um campo
+     uniforme devolve o MESMO campo; `saturate()` de um cinza neutro devolve
+     o mesmo cinza. O vidro estava processando o nada: sobrava a tinta de
+     16% e as linhas internas — a lajota lilas chapada da foto.
+     (O shader `.gl` e' que punha a luz dourada atras; ele nao roda com
+     `prefers-reduced-motion` nem sem WebGL, e ai' cai exatamente aqui.
+     Por isso a regra pula `.com-gl`: quando o shader esta' ligado, ele
+     manda, e este bloco nao tem o que consertar.)
+
+     ⭐ `brightness()` E' O UNICO FILTRO QUE AINDA FAZ EFEITO SOBRE BRANCO
+     CHAPADO — desloca o valor em vez de misturar vizinhos (Kevin Powell,
+     DEMONSTRADO: backdrop-filter aceita filtros encadeados,
+     `blur(10px) brightness(1.2)`). Escurecer e' o unico sentido possivel:
+     sobre branco, clarear satura e nao muda nada.
+
+     ⚠️ E ESCURECER O FUNDO DERRUBA O TEXTO ESCURO. MEDIDO antes de
+     escrever: o rotulo `--fraco` sobre o poco estava em 4,63:1 (ja' raspando
+     o minimo de 4,5); com brightness(.965) cairia para 4,34 — REPROVADO.
+     Por isso o rotulo escurece junto, para rgb(100,96,114): da' 5,12:1,
+     melhor do que era antes da mudanca. As duas linhas andam juntas; mexer
+     numa sem a outra quebra a guarda.
+
+     Sombras: tres internas BRANCAS (topo/base/centro), receita repetida no
+     acervo de liquid glass; e a externa passa a ser DOURADA
+     (rgba(60,45,10,.14), MAESTROS_LIQUID_GLASS §2) no lugar do azul frio
+     rgba(30,40,60,.22) que estava la' — a marca e' ouro. */
+  @media (prefers-color-scheme: light) {
+    .console.vidro:not(.com-gl) {
+      backdrop-filter: blur(26px) saturate(2) contrast(1.04) brightness(.965);
+      -webkit-backdrop-filter: blur(26px) saturate(2) contrast(1.04) brightness(.965);
+      box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.90),
+        inset 0 -1px 2px rgba(255,255,255,.45),
+        inset 0 0 10px rgba(255,255,255,.35),
+        0 12px 40px rgba(60,45,10,.14),
+        0 1px 3px rgba(60,45,10,.07);
+    }
+    .console:not(.com-gl) .prova .cela,
+    .console:not(.com-gl) .prova .fim { color: rgb(100,96,114); }
+  }
   /* o fio vertical da prova nao se aplica a` faixa */
 
 

@@ -151,3 +151,6 @@ estado/precos_vistos.jsonl
 
 estado/produtos_publicados.jsonl
 estado/pedidos.jsonl
+
+# ferramentas/ssr: jsdom instalado localmente (npm install), nunca versionado
+node_modules/

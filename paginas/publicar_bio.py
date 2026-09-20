@@ -1998,6 +1998,43 @@ def separar_links(dados: list[dict]) -> dict[str, str]:
     return fora
 
 
+# SSR DA PRIMEIRA TELA (20/09/2026). O Bryan viu 5 vezes a pagina "crua"
+# (esqueleto) ao recarregar no 4G: o script grande so' roda quando o HTML
+# inteiro chega. Agora a primeira tela (prova, chips, vitrine, 8 cartoes) ja'
+# vai montada no HTML. Quem monta e' O PROPRIO SCRIPT DA PAGINA, rodando num
+# DOM de mentira (jsdom) em `ferramentas/ssr/ssr.js` — o cartao nao existe em
+# dois lugares. Sem node/jsdom, publica sem SSR e AVISA (preco na hora vale
+# mais do que a primeira tela bonita).
+SSR = RAIZ / "ferramentas" / "ssr" / "ssr.js"
+
+
+def ssr_primeira_tela(html: str) -> str:
+    import shutil
+    import subprocess
+    if not html:
+        return html
+    node = shutil.which("node")
+    if not node or not SSR.exists() or not (SSR.parent / "node_modules").exists():
+        print("ssr: SEM node/jsdom (ferramentas/ssr: npm install) -> primeira tela "
+              "vazia ate' o script chegar")
+        return html
+    try:
+        r = subprocess.run([node, str(SSR)], input=html.encode("utf-8"),
+                           capture_output=True, timeout=120)
+    except subprocess.TimeoutExpired:
+        print("ssr: TEMPO ESGOTADO (120 s) -> publicando sem a primeira tela")
+        return html
+    aviso = r.stderr.decode("utf-8", "replace").strip()
+    if r.returncode != 0 or not r.stdout:
+        print("ssr: FALHOU -> publicando sem a primeira tela")
+        if aviso:
+            print("  " + aviso.replace(chr(10), chr(10) + "  "))
+        return html
+    if aviso:
+        print(aviso)
+    return r.stdout.decode("utf-8")
+
+
 def indice_estatico(dados: list[dict]) -> str:
     """HTML puro com os produtos do catalogo, pro crawler. Um `<li>` por
     produto: nome, preco de hoje e o endereco da PROPRIA pagina com o
@@ -2308,6 +2345,7 @@ def main() -> None:
     # nao tem comentario de motor, mas tem nome de canal — e o detector ja'
     # pegou o nome do dono no rodape na primeira versao dela.
     catalogo, externos = montar_catalogo()
+    catalogo = ssr_primeira_tela(catalogo)
     parceiros = (PARCEIROS.read_text(encoding="utf-8")
                  if PARCEIROS.exists() else "")
     privacidade = (PRIVACIDADE.read_text(encoding="utf-8")

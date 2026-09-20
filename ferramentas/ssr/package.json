@@ -1,0 +1,6 @@
+{
+  "name": "achadinho-ssr",
+  "private": true,
+  "description": "roda o script da pagina num DOM de mentira na publicacao (paginas/publicar_bio.py -> ssr.js)",
+  "dependencies": { "jsdom": "^26.1.0" }
+}

@@ -6,6 +6,16 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 20/09/2026 23:00 — `2ac75ad`
+
+**O quê:** Nome do produto no teto da faixa: 18px e peso 500
+
+**Por quê:** "Voce acha que aumentamos ainda um pouco mais o texto que esta sendo digitado?" — sim, e o acervo da' a regua: corpo 16-18px (MAESTROS_ESTETICA, DEMONSTRADO). 16,5 -> 18px, que e' o TETO. Acima disso o nome passa a disputar tamanho com o preco.
+
+Carimbo no ar: `f9d10e09208b` · 25 endereço(s) conferidos · HTML 107 KB
+
+---
+
 ## 20/09/2026 22:46 — `0275d1f`
 
 **O quê:** Nome maior e a caixa que cabe; e a guarda do titulo restrito

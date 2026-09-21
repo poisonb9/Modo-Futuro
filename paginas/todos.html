@@ -2756,6 +2756,8 @@
      ⚠️ TODO caminho de erro so' faz `return`, de proposito: sem classe o
      cartao fica exatamente como estava. Meio-termo seria pior que nada. */
   function classificarFotoHeroi(a, img) {
+    if (a.dataset.fundoMedido) { return; }
+    a.dataset.fundoMedido = "1";
     var L = 96, cai = null;
     function medir() {
       var cv = document.createElement("canvas"); cv.width = cv.height = L;
@@ -2848,6 +2850,32 @@
     if (img.complete && img.naturalWidth) { medir(); }
     else { img.addEventListener("load", medir, { once: true }); }
   }
+
+  /* ⚠️ A PRIMEIRA TELA VEM PRONTA DO SERVIDOR (SSR, ver `ssr_primeira_tela`
+     no publicador): o heroi ja' esta' no HTML quando a pagina abre, e nesse
+     caminho `montar` NAO RODA. MEDIDO no ar em 21/09: a foto nova entrou e o
+     cartao saiu `class="vitrine"` puro, com o poco branco de antes — enquanto
+     no teste local, onde a vitrine e' montada pelo JS, funcionava. Eu tinha
+     provado o caminho que eu controlava, nao o caminho do visitante.
+     Entao a classificacao passa a olhar QUALQUER vitrine que exista: a que
+     veio do servidor e a que o JS remonta depois. `data-fundo-medido` impede
+     medir duas vezes e criar duas sombras. */
+  function classificarVitrineNaTela() {
+    var alvo = document.getElementById("vitrine");
+    var a = alvo && alvo.querySelector(".vitrine");
+    var img = a && a.querySelector("img.vfoto");
+    if (img) { classificarFotoHeroi(a, img); }
+  }
+
+  function ligarClassificador() {
+    var alvo = document.getElementById("vitrine");
+    if (!alvo) { return; }
+    new MutationObserver(classificarVitrineNaTela).observe(alvo, { childList: true });
+    classificarVitrineNaTela();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ligarClassificador);
+  } else { ligarClassificador(); }
 
   function desenhar() {
     // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)

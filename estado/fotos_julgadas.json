@@ -1,0 +1,262 @@
+{
+"https://ae-pic-a1.aliexpress-media.com/kf/Aab95df905221456c98e7291c8e6a58b0K.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Fundo branco e produto visivel, mas possui texto na imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Aade43780bdc44ecd9a6293d1e1aada200.png": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 4,
+"porque": "Poluída por banners promocionais e textos nas bordas da imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S0ba9dedfb7d44fbbaf853b8ecc27580fD.jpg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 3,
+"porque": "Mostra apenas amostras na pele, sem a embalagem do produto.",
+"produto_inteiro": false,
+"quadros": 3,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S1027660567ca4336a6f375ee898cdc92I.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Exibe o produto completo em uso com excelente clareza e sem texto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S1b17be955f3a4e8aa960bfa3fd022d3cy.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 6,
+"porque": "Possui texto sobreposto em outro idioma na imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S248ca760ad904833978fc88860c4f033A.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Produto completo e fundo limpo, porem contem texto e graficos sobrepostos.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S29a1a89628f6408c958002d05c08005aa.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 3,
+"porque": "Imagem e uma colagem de 4 quadros, inadequada para capa.",
+"produto_inteiro": false,
+"quadros": 4,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S322337184d9c45a1b510bbe7d2a57f2cd.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Imagem clara, fundo limpo e kit de pinceis bem destacado.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S342e6993faf04290875d6b5c2db84a774.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Imagem ambientada de alta qualidade, clara e destaca bem o produto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S403f6590e3be4e0295b5b52d68da3295Y.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.5-flash",
+"nota": 9,
+"porque": "Imagem limpa, otima iluminacao e mostra variacoes do produto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S4f76a25cb5c540a08cc8af33addebcf7E.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 8,
+"porque": "Ótima qualidade e fundo limpo, porém contém texto sobreposto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S52229e1a36ac488cb280bb57716a0eb9x.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.5-flash",
+"nota": 5,
+"porque": "Excesso de textos, logos e selos promocionais polui a imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S607f0a00b00e45de9cea526535a62acaW.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Excelente qualidade visual com o produto inteiro e em destaque.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S6362ccd8c50f40418bade386b5fb9eddt.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.5-flash",
+"nota": 9,
+"porque": "Foto contextualizada excelente, sem poluição visual e mostra bem o produto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S7bb437da6d5345bf9144831eb59858cd7.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 6,
+"porque": "Possui texto sobreposto e logo, mas produto está bem visível.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S806b2933c03a422198e52a8713152989S.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 5,
+"porque": "Possui texto com dimensoes e esquemas graficos sobre a imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S8c7c37a499cf4189ba47553b4af85a2an.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 8,
+"porque": "Excelente foto de estúdio, destaque para os produtos e fundo limpo.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S90db796685b34efa9645670ba4d3ccc8q.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.5-flash",
+"nota": 7,
+"porque": "Boa demonstração de uso, mas elementos flutuantes poluem a imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sae64bd601118454ebbe42dc21d5e50b8Y.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 8,
+"porque": "Excelente foto ambientada com o produto em destaque central.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sb8dd4dacc4ae4567be9859ee9c1f033dB.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Excelente imagem de contexto, produto visível por inteiro e sem texto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sc14985377fa3443d94a54a26f353815ev.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Foto de boa qualidade com produto inteiro, porem possui texto sobreposto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sc32fdfe302d64e9ea4a12169a7cfdefdi.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Produto em uso contextualizado, mas com montagem digital visivel.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sd0ed7b919269438aa9747ff1abcdb020G.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 3,
+"porque": "Muitos elementos flutuantes, textos e setas poluem a imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sd3119048f5254fa2ad5850cb5de69d4fa.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.5-flash",
+"nota": 4,
+"porque": "Colagem com muitos quadros deixa o visual poluído para vitrine.",
+"produto_inteiro": true,
+"quadros": 9,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Se3c91ab1866c4f00975d2126e3b1cb46v.jpeg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 5,
+"porque": "Muitos ícones, textos sobrepostos e fundo muito poluído.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Se72c55e79df04f7291c60e8fe67bb4a4a.png": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.5-flash",
+"nota": 4,
+"porque": "Muito texto e elementos gráficos poluem a imagem do produto.",
+"produto_inteiro": true,
+"quadros": 2,
+"texto_queimado": true
+}
+}

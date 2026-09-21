@@ -109,6 +109,12 @@ estado/*
 # de 30 min por 900 fotos; e a regra de escolha da foto le daqui.
 !estado/fotos_ocr.json
 
+# excecao 7, 21/09/2026: O JULGAMENTO DE VISAO DAS FOTOS (engine/foto_julga).
+# Vai para o git pela mesma razao do OCR e por UMA a mais: a procedencia dele
+# e' AFIRMADO, nao medido -- e' julgamento de modelo. Versionado, da' para
+# AUDITAR o que o modelo disse e o mesmo veredito nao muda de publicacao em
+# publicacao. Refazer custa ~45 s por foto por causa dos 503 do Gemini.
+
 # excecao 6, 20/09/2026: ESCOLHA A OLHO da foto do cartao. Diferente do resto
 # de estado/, isto NAO e' derivado: e' julgamento humano onde a medida nao
 # alcanca (texto e fid nao separam "mostra o produto inteiro"). Se ficar fora

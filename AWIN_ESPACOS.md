@@ -1,136 +1,139 @@
-# Awin — o que o anunciante vê, e como caber tudo num endereço só
+# Awin — o estado real, 21/09/2026
 
-⚠️ **CORRIGIDO EM 14/09/2026, depois da print do Bryan.** A primeira versão
-deste arquivo listava dez Espaços Promocionais pra cadastrar. **A tela não
-aceita dez.**
-
----
-
-## O que a tela realmente oferece
-
-`Configurações → Links de redes sociais` tem **quatro campos, e só**:
-
-```
-Site                 https://oachadinho.pages.dev
-URL do Blog          https://oachadinho.pages.dev
-Nome no Twitter      (vazio)
-Página do Facebook   (vazio)
-```
-
-Não há campo de TikTok, nem de Telegram, nem lugar pra um segundo site.
-
-⚠️ **E a API também não alcança** (medido): `/promotionalspaces`,
-`/websites` e `/profile` respondem **404** com o nosso token, que só abre
-`programmes` e relatórios.
+> ⚠️ **Este arquivo foi reescrito em 21/09/2026.** A versão anterior dizia que
+> a Nike era o **único** anunciante aprovado, ensinava a **pegar** a chave de
+> datafeed, e mandava cadastrar `achadinhototal.pages.dev`. As três coisas
+> estavam vencidas. O que elas ensinavam continua abaixo, na parte que ainda
+> vale — mas os números eram de 16/09 e a operação andou.
 
 ---
 
-## ⭐ Por isso a saída inverte
+## O QUE ESTÁ FEITO ✅
 
-Se o anunciante vê **um endereço**, a resposta não é cadastrar mais
-endereços — é **esse endereço mostrar a operação inteira**.
-
-Hoje ele abre `oachadinho.pages.dev`, que é a bio do **Truque Importado**:
-maquiagem e beleza. Foi exatamente a queixa da 365Rider (*Sportswear*):
-
-> **O site não complementa a marca do anunciante**
-
-⚠️ E **não dá pra encher a bio do Truque Importado de links dos outros
-canais.** Ela tem outro trabalho: converter quem chegou de um vídeo de
-maquiagem. Duas plateias, dois objetivos — quem paga a conta de misturar é a
-conversão de quem veio do vídeo.
-
-### ✅ ATUALIZADO em 15/09 — agora é o SITE MÃE, e os dois campos são usados
-
-⚠️ **A instrução de 14/09 mandava colar a MESMA coisa nos dois campos.** Era
-desperdício: a tela tem `Site` e `URL do Blog`, e eles podem apontar para
-coisas diferentes.
-
-**Cole assim:**
+**O perfil foi preenchido pelo Bryan em 21/09.** Era o item mais urgente da
+fila havia três dias:
 
 ```
-Site           https://achadinhototal.pages.dev
-URL do Blog    https://achadinhototal.pages.dev/parceiros
+Site           https://achadinhototal.com.br
+URL do Blog    https://achadinhototal.com.br/parceiros
 ```
 
-⭐ **Por que o site mãe, e não a bio.** Decisão do Bryan em 15/09, e ela
-ataca a causa MEDIDA da recusa. A 365Rider (Sportswear) recusou com *"o site
-não complementa a marca do anunciante"* — porque abriu `oachadinho`, que é a
-bio de um canal de **maquiagem**. O site mãe mostra **cinco áreas numa página
-só** (medido em 15/09: Beleza, Casa, Cozinha, Eletrônicos, Fitness), com
-preço e histórico. Anunciante de esporte abre e vê Fitness ali dentro.
+⭐ **O domínio próprio, e não o `pages.dev`.** O `achadinhototal.com.br` está
+no ar desde 17/09. Conferido em 21/09 **pelo conteúdo, não pelo status**:
+`/parceiros` devolve 8.015 bytes contendo a frase `search bidding`, que só
+existe na página do anunciante. Conferir por `200` não provaria nada — o
+Cloudflare devolve a raiz quando o caminho não existe.
 
-⭐ **E a ordem dos dois campos não é arbitrária.** A `/parceiros` é
-**discurso** — nós dizendo o que fazemos. O catálogo é **prova** — 62
-produtos reais com preço acompanhado dia a dia. Quem avalia parceria confia
-mais no que vê funcionando, então a prova vai no campo principal e a
-explicação fica a um clique.
+⭐ **A ordem dos dois campos não é arbitrária.** O catálogo é **prova** (62
+produtos com preço acompanhado dia a dia); a `/parceiros` é **discurso**. Quem
+avalia parceria confia mais no que vê funcionando, então a prova vai no campo
+principal e a explicação fica a um clique.
 
-⚠️ **O site mãe NÃO fala de canal** (decisão do Bryan em 14/09, e está certa
-para quem compra). O anunciante só descobre que há cinco TikToks se abrir a
-`/parceiros` — que é exatamente por isso que ela continua no segundo campo,
-em vez de sumir.
+⚠️ Twitter e Facebook ficam **vazios**. Link que não abre é pior que campo
+vazio na tela de quem está decidindo.
 
-⚠️ **O que eu NÃO sei:** se o Awin reavalia as 28 pendentes quando o perfil
-muda, ou se isso só vale para as próximas. Trocar não custa nada e melhora as
-próximas de qualquer forma — mas a 365Rider pode estar perdida.
+**A chave de datafeed já está no `.env`**, como `AWIN_FEED_API_KEY` (não
+`AWIN_DATAFEED_KEY`, como a versão antiga deste arquivo dizia). Ela funciona:
+`estado/awin_catalogo.json` de 21/09 tem **3.063 produtos de 11 lojas**.
 
-⭐ A rota foi conferida pelo CONTEÚDO, não pelo status: `/parceiros` do site
-mãe tem a frase "search bidding", que só existe na página do anunciante.
-Conferir por `200` não provaria nada — o Cloudflare devolve a raiz quando o
-caminho não existe.
+---
 
-Ela lista os **seis canais** com a categoria de cada um e o setor de
-anunciante que combina, como eu trabalho (garimpo diário, preço conferido
-contra histórico próprio), o Telegram, e a frase que remove a objeção.
+## OS NÚMEROS DE HOJE, MEDIDOS
 
-⚠️ **Não é um projeto novo:** a conta do Cloudflare bateu o teto de **10
-projetos** (medido em 14/09; 4 dos 10 são endereços reservados do Até
-Falhar). Então ela vai como **rota** dentro dos projetos que já existem —
-o mesmo endereço serve nos cinco:
+`python -m engine.awin`, 21/09/2026:
 
 ```
-oachadinho.pages.dev/parceiros       200
-achadinhochef.pages.dev/parceiros    200
-pagomenos.pages.dev/parceiros        200
-achadinhodehoje.pages.dev/parceiros  200
-meulivro.pages.dev/parceiros         200
+JOINED      14
+PENDING     37
+REJECTED    23
+SUSPENDED    0
 ```
 
-⭐ **E ela sobrevive ao próximo deploy.** Upload direto substitui o
-diretório inteiro: se a rota não subisse no mesmo deploy da bio, o deploy
-seguinte a apagaria em silêncio e o link do perfil viraria 404. Por isso
-`publicar_bio.py` sobe as duas juntas e **confere a rota separadamente** —
-a raiz estar nova não prova que `/parceiros` subiu.
+⛔ **A versão anterior deste arquivo dizia "a Nike BR é o ÚNICO aprovado".**
+São 14, e entre eles está o AliExpress, que é a base do catálogo:
+
+```
+Aliexpress BR & LATAM   Kabum BR        Nike BR          Lacoste BR
+Shark-Ninja BR          Arno BR         Carraro BR       Clóvis Calçados BR
+Lauri Esporte           Leveros BR      Exypna           Radiale Pneus
+Drogaria Venancio BR    Camilovers BR
+```
+
+O que já chega ao site, do `awin_catalogo.json`:
+
+```
+Aliexpress 614 · Clóvis 611 · Kabum 610 · Nike 460 · Lauri 308
+Carraro 305 · Arno 116 · Radiale 20 · Shark-Ninja 10 · Exypna 5 · Leveros 4
+```
+
+---
+
+## ⛔ POR QUE AS 23 RECUSAS — A CAUSA, DITA PELO BRYAN
+
+**Elas não trabalham com pessoa física.** Bryan confirmou em 21/09.
+
+⚠️ **Isto derruba a teoria que sustentava este arquivo inteiro.** A versão
+anterior partia da recusa da 365Rider (*Sportswear*), cujo texto foi:
+
+> O site não complementa a marca do anunciante
+
+…e concluía que a saída era o perfil apontar para o site mãe, que mostra cinco
+áreas em vez da bio de um canal de maquiagem. **Essa conclusão continua certa
+e já foi executada** — mas ela explica *uma* recusa, não as 23. A causa
+dominante é cadastral, e **nenhuma mudança de site a resolve**.
+
+⭐ **O que muda na prática:** parar de ler as recusas como veredito sobre a
+qualidade do site. Das 23, a única com sinal aproveitável sobre a vitrine é a
+365Rider. As outras 22 são porta fechada por CNPJ, e insistir nelas é gasto de
+atenção onde não há decisão nossa a tomar.
+
+⛔ **E NÃO DÁ PARA SABER ANTES.** O painel da Awin **não mostra** se o
+anunciante aceita pessoa física (Bryan conferiu, 21/09). Não há campo, filtro
+nem coluna: descobrir custa **uma candidatura e uma recusa**, uma por vez.
+
+⭐ **A consequência prática, que é o que interessa:** as **37 pendentes são um
+teto, não uma previsão**. Se a proporção das 23 recusas se repetir entre elas, o
+número real de aprovações possíveis é bem menor — e nenhum trabalho nosso move
+esse número. É a diferença entre uma frente onde dá para melhorar o resultado e
+uma fila onde só dá para esperar.
+
+⚠️ Por isso, ao decidir quanto tempo a Awin merece, a conta honesta usa os
+**14 aprovados de hoje** — que já incluem o AliExpress, a Kabum e a Nike — e
+não os 51 (14 + 37) que a soma sugere.
+
+---
+
+## O QUE A TELA OFERECE, E O QUE A API NÃO ALCANÇA
+
+`Configurações → Links de redes sociais` tem **quatro campos, e só**: Site,
+URL do Blog, Nome no Twitter, Página do Facebook. Não há campo de TikTok, nem
+de Telegram, nem lugar para um segundo site.
+
+⚠️ **A primeira versão deste arquivo listava dez Espaços Promocionais para
+cadastrar. A tela não aceita dez.**
+
+⚠️ **E a API também não alcança** (medido): `/promotionalspaces`, `/websites`
+e `/profile` respondem **404** com o nosso token, que só abre `programmes` e
+relatórios. Não adianta automatizar o preenchimento — é tela, na mão.
+
+## ⚠️ A ROTA `/parceiros` SOBREVIVE AO PRÓXIMO DEPLOY — E ISSO NÃO É DE GRAÇA
+
+O Pages é **upload direto, e ele substitui o diretório inteiro**. Se a rota
+não subisse no mesmo deploy da bio, o deploy seguinte a apagaria **em
+silêncio** e o link do perfil da Awin viraria 404 — com a raiz do site no ar,
+nova, sem nada indicando o estrago.
+
+⭐ Por isso `publicar_bio.py` sobe as duas **juntas** e **confere a rota
+separadamente**: a raiz estar nova não prova que `/parceiros` subiu. A
+conferência é pelo **conteúdo** (a frase `search bidding`), nunca pelo `200`.
+
+⚠️ **Não é um projeto novo no Cloudflare:** a conta bateu o teto de **10
+projetos** (medido em 14/09). A `/parceiros` vai como **rota** dentro dos
+projetos que já existem, e o mesmo endereço serve nos cinco.
 
 ⚠️ **O nome do dono saiu do rodapé**: o detector de vazamento do próprio
 `publicar_bio.py` reprovou a primeira versão. O anunciante já vê o nome na
-conta do Awin.
-⚠️ **O que eu não sei:** se o Awin reavalia sozinho uma candidatura
-pendente quando o perfil muda, ou se só vale pras próximas. As 28 em aberto
-é que estão em jogo — a 365Rider pode estar perdida.
-
----
-
-## Enquanto isso, o que cabe hoje na tela
-
-Os dois campos vazios aceitam alguma coisa:
-
-| campo | o que pôr |
-|---|---|
-| Nome no Twitter | (não temos — deixar vazio) |
-| Página do Facebook | (não temos — deixar vazio) |
-
-⚠️ **Não invente perfil pra preencher campo.** Link que não abre é pior que
-campo vazio na tela de quem está decidindo.
-
----
-
-⭐ Para reconferir o estado das candidaturas, sem abrir o painel:
-
-```bash
-python -m engine.awin
-```
+conta da Awin.
 
 ---
 
@@ -214,7 +217,11 @@ faz no AliExpress — e é o acompanhamento de preço que esta operação vende.
 
 ---
 
-# COMO PEGAR A CHAVE DE DATAFEED
+# COMO A CHAVE DE DATAFEED FOI PEGA
+
+> ✅ **Já está no `.env` como `AWIN_FEED_API_KEY`** desde 16/09, e o
+> `awin_catalogo.json` prova que funciona (3.063 produtos). Fica aqui
+> porque a chave vence e o caminho de volta não é óbvio.
 
 ⛔ **É outra chave.** Confirmado por medição em 16/09/2026 e pela documentação
 do Awin: *"The API key for product feeds is different from your Publisher API

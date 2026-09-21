@@ -236,6 +236,16 @@ def _precos_por_dia() -> dict:
 # pegou na hora: o site dizia "sem queda" e o canal continuava anunciando
 # "de R$ 21,73" do mesmo produto, no mesmo dia. Uma regra, um arquivo.
 def _sem_ponto_solto(dias: dict) -> dict:
+    # ⛔ A RAIZ NO PATH ANTES DO IMPORT -- e' a convencao deste arquivo
+    # (linhas 133, 350, 357 fazem o mesmo). Sem isso, `python
+    # paginas/publicar_bio.py --subir` estoura ModuleNotFoundError: rodando
+    # assim, o diretorio no path e' `paginas/`, nao a raiz. A suite NAO pega
+    # porque os testes inserem a raiz eles mesmos.
+    # ⚠ E' a SEGUNDA vez hoje que eu tropeco nisto (a primeira foi o
+    # `foto_julga` no topo do modulo). Import dentro da funcao resolve o
+    # teste; o path e' o que resolve a publicacao.
+    if str(RAIZ) not in sys.path:
+        sys.path.insert(0, str(RAIZ))
     from engine import serie_limpa
     return serie_limpa.sem_ponto_solto(dias)
 
@@ -1640,7 +1650,17 @@ def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
             agora = round(float(reg["preco"]), 2)
         except (TypeError, ValueError):
             agora = 0.0
-        if agora > 0 and max(dias) != hoje:
+        if agora > 0:
+            # ⛔ SUBSTITUI o ponto de hoje, nao so' acrescenta quando falta.
+            # MEDIDO em 21/09 na capa: a serie diaria tinha 09-21 = R$ 19,61
+            # e o instantaneo das 18:58 dizia R$ 11,89. O cartao anunciava
+            # 11,89 e a linha SUBIA ate' 19,61 -- o grafico contradizendo o
+            # numero escrito ao lado dele, que foi o que o Bryan viu.
+            # ⚠ O ponto diario e' o MENOR do dia consolidado ate' a ultima
+            # gravacao; o instantaneo e' a leitura MAIS RECENTE, e e' ele que
+            # a pagina exibe. O desenho tem de terminar onde o preco termina.
+            # ⭐ E isto vale so' para DESENHAR: `dias` e' uma copia. Queda,
+            # riscado e trava de 24 h continuam saindo da serie intacta.
             dias = dict(dias)
             dias[hoje] = agora
     # ⭐ AS LEITURAS HORARIAS GANHAM DO DIARIO, quando ha' o bastante.
@@ -1655,7 +1675,20 @@ def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
     # a linha descer todo fim de dia por artefato da consolidacao, e nao
     # porque o preco caiu.
     horas = _por_hora().get(str(d.get("id") or "")) or []
-    if len(horas) >= max(minimo, 4):
+    # ⛔ O LIMIAR DE 4 PONTOS ESTAVA ERRADO E MATOU A REGUA DA CAPA.
+    # MEDIDO em 21/09: depois de quatro publicacoes na mesma hora, TODO
+    # produto tinha 4 leituras horarias -- todas do mesmo dia, todas com o
+    # mesmo preco. Com `>= 4` elas GANHAVAM do historico diario, e a serie
+    # de cada cartao virou uma reta de uma hora. Efeito em cascata: ninguem
+    # mais tinha 5 pontos, `marcar_capa` nao achou UM candidato e a vitrine
+    # caiu no modo de reserva.
+    # ⭐ Quatro leituras em uma hora nao sao historia. A serie horaria so'
+    # substitui a diaria quando cobre ao menos DOIS DIAS e tem 8 pontos --
+    # ai' ela conta algo que o ponto-por-dia nao contava.
+    # ⚠ E ate' la' o diario manda, que e' o que sustenta queda, riscado e
+    # a trava de 24 h.
+    dias_cobertos = {q[:10] for q, _ in horas}
+    if len(horas) >= 8 and len(dias_cobertos) >= 2:
         return [[q[5:16].replace("T", " "), v] for q, v in horas]
     # ⭐ "MM-DD" e nao a data inteira: o ano nao cabe no eixo e nao muda nada
     # pra quem le. Sao ~14 bytes por ponto no JSON da pagina.

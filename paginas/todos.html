@@ -1311,8 +1311,46 @@
      ⚠️ SO' QUANDO O BRANCO E' PURO (media da borda > 250, classe `puro`).
      Em fundo quase-branco (240) o multiply pinta um cinza e o retangulo
      volta, mais feio. Foto assim fica sem a mistura, de proposito. */
-  .vitrine.fundo-estudio.puro .vfoto { mix-blend-mode: multiply; }
-  .vitrine.fundo-estudio.puro { background-color: #fff; }
+  /* ⛔ O `multiply` SAIU, e o palco do `puro` virou BRANCO CHAPADO.
+
+     Bryan, 21/09: "tem um risco cortando o anuncio". Eu procurei elemento
+     no DOM (nao havia), pseudo-elemento (nao havia) e so' entao medi os
+     PIXELS da foto: aos 4,5% da altura ha' um degrau de 253,8 para 219,9 --
+     34 niveis de cinza em 4 linhas. O `multiply` sobre palco claro revela
+     qualquer pixel que nao seja branco puro, e era ele que desenhava a faixa.
+
+     ⚠ DESLIGAR SO' O `multiply` NAO BASTAVA: volta o RETANGULO que o
+     comentario original avisa -- a foto branca formando um bloco visivel
+     contra o palco tingido. Troca de um defeito por outro, os dois na tela.
+
+     ⭐ A saida que o codigo original nao considerou: o retangulo so' existe
+     porque o palco e' TINGIDO. Se a foto e' branco puro (que e' exatamente
+     o que a classe `puro` certifica: borda > 250), o palco pode ser branco
+     tambem -- e ai' nao ha' retangulo para esconder nem faixa para revelar.
+
+     ⚠ O QUE SOBRA, e fica dito: as primeiras linhas da propria foto nao
+     sao branco puro e deixam um traco fino no topo. Muito mais fraco, mas
+     nao zero. Nao ha' CSS que conserte pixel da imagem.
+
+     ⛔ E EU NAO CONSEGUI MEDIR ISSO AUTOMATICAMENTE. Duas tentativas de
+     detector reprovaram: 'maior degrau no topo' acusou 21 de 30 fotos
+     (a borda do proprio produto e um degrau), e 'faixa que atravessa a
+     largura inteira' deu ZERO ate' na foto que tem o defeito. Por isso nao
+     ha' guarda automatica aqui -- so' esta mudanca, que trata a causa. */
+  .vitrine.fundo-estudio.puro { background-image: none; background-color: #fff; }
+  /* ⭐ E O CORTE DE 12% NO TOPO mata o traco que sobrava. As primeiras
+     linhas da foto nao sao branco puro -- MEDIDO na capa: degrau de 253,8
+     para 219,9 aos 4,5% da altura da imagem.
+     ⚠ 12% E NAO 5%, e a conta e' do `contain`: o `clip-path` corta a
+     CAIXA, e a imagem so' comeca depois do respiro de 5%. Cortar 6% comeu
+     o respiro e nao tocou na imagem -- foi o que eu tentei primeiro e
+     MEDIDO na tela: o traco continuou la'. 5% de respiro + ~4,5% da imagem
+     + folga = 12%.
+     ⛔ E E' CORTE, NAO EDICAO. Nenhum pixel e' inventado e nada precisa
+     ser hospedado por nos -- a foto continua vindo do CDN do anunciante.
+     Editar a imagem exigiria servir 148 arquivos nossos, e `fidelidade.py`
+     ja' registra que refazer produto com modelo nao passa na nossa guarda. */
+  .vitrine.fundo-estudio .vfoto { clip-path: inset(12% 0 0 0); }
   /* no palco branco o chip branco sumia: vira um chip escuro discreto */
   .vitrine.fundo-estudio .vloja {
     background-color: rgba(22,21,28,.07); color: #47444f;

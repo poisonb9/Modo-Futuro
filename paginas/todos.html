@@ -690,23 +690,41 @@
     100% { background-color: rgba(200,144,26,.07); box-shadow: none; }
   }
   @keyframes acender-caixa-escuro {
+
     0%   { background-color: rgba(233,185,63,0);   box-shadow: none; }
+
     16%  { background-color: rgba(233,185,63,.14); box-shadow: none; }
+
     44%  { background-color: rgba(233,185,63,.40); box-shadow: 0 2px 16px rgba(233,185,63,.38); }
+
     64%  { background-color: rgba(233,185,63,.20); box-shadow: 0 2px 8px rgba(233,185,63,.14); }
+
     100% { background-color: rgba(233,185,63,.08); box-shadow: none; }
+
   }
+
   /* ⚠️ NOME PROPRIO em vez de redefinir `acender-caixa` dentro do @media:
+
      redefinir o mesmo nome funciona, mas quem le depois nao ve que existem
+
      duas versoes -- e esconder isso e como a cascata me mordeu tres vezes
+
      hoje. */
+
   @media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
+
     .vivo-cta.entra {
+
       animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both,
+
                  acender-caixa-escuro 1650ms cubic-bezier(.22,.61,.36,1) both;
+
     }
+
   }
+
   @media (prefers-color-scheme: dark) {
+
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }
 
@@ -1125,7 +1143,114 @@
     transition: transform .18s cubic-bezier(.2,.8,.2,1);
   }
   .vitrine:active { transform: scale(.985); }
-  .vitrine .vfoto { aspect-ratio: 1 / 1; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; }
+  .vitrine .vfoto { aspect-ratio: 1 / 1; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; box-sizing: border-box; }
+
+  /* =========== O HEROI PREMIUM (21/09/2026) ===========
+     Bryan: "nao esta espetacular, cortando o produto, o produto meio
+     largado, as bordas do card como foram criadas". Sao tres queixas com
+     UMA causa: o heroi tratava TODA foto como se fosse de estudio em fundo
+     branco. MEDIDO nas duas fotos escolhidas a olho em 20/09:
+
+       pulverizador     800x800   borda = grama   0% branca   desvio 53,0
+       bolsa de fones  1000x1000  borda = branco 100% branca  desvio  0,2
+
+     A borda separa os dois casos SEM SOBREPOSICAO (0% x 100%), e por isso
+     aqui a medida decide sozinha — ao contrario da ESCOLHA da foto, onde
+     texto e fid nao separavam e a decisao teve de ser humana.
+
+     FOTO DE CENA quer a moldura inteira: `cover`, sem poco branco. O poco
+     era "as bordas como foram criadas" — a foto acabava e o cartao seguia.
+     FOTO DE ESTUDIO quer um PALCO: luz focal no topo e uma sombra de
+     CONTATO embaixo do produto. Sem contato o produto flutua, e flutuar e'
+     exatamente o "largado".
+
+     Os dois passos vem do acervo de CSS, DEMONSTRADO:
+       luz     `radial-gradient(circle at top, claro, escuro)`
+       sombra  elemento SEPARADO com radial-gradient, nao box-shadow — a
+               box-shadow so' sabe seguir a CAIXA, nunca o contorno do
+               produto, e e' por isso que ela nunca parece contato.
+
+     ⚠️ Sem classe nenhuma o cartao fica como estava. A medida roda no
+     canvas e pode falhar (CDN sem CORS): falhar tem de deixar o desenho
+     de antes, nunca um meio-termo. */
+
+  /* ---- cena: sangra ate' a borda ---- */
+  .vitrine.fundo-cena .vfoto { object-fit: cover; padding: 0; }
+  /* ⭐ so' AQUI o vidro tem o que refratar. Sobre foto o branco da placa
+     sobe, porque o texto dela e' escuro FIXO desde 19/09 (a placa vivia
+     sobre foto branca; agora nao vive mais). */
+  /* ⚠️ MEDIDO na tela, nao suposto: com a placa so' em branco translucido,
+     a grama SUBIA e tingia o vidro de verde — e o preco antigo (cinza sobre
+     verde claro) perdia contraste. O vidro tem de DESSATURAR o que passa por
+     baixo; e' o que faz o material continuar neutro sobre qualquer cena. */
+  .vitrine.fundo-cena .vplaca {
+    background-color: rgba(255,255,255,.82);
+    backdrop-filter: blur(20px) saturate(.62) brightness(1.06);
+    -webkit-backdrop-filter: blur(20px) saturate(.62) brightness(1.06);
+  }
+  .vitrine.fundo-cena .vloja {
+    background-color: rgba(255,255,255,.70);
+    backdrop-filter: blur(14px) saturate(.62) brightness(1.06);
+    -webkit-backdrop-filter: blur(14px) saturate(.62) brightness(1.06);
+  }
+  /* o leito que assenta a placa: escurece a cena o bastante para a borda
+     clara da placa aparecer, sem virar tarja preta */
+  /* o mesmo leito do topo que os cartoes da grade ja' usam (`.foto::before`):
+     sobre ceu claro o selo de ouro e o chip da loja perdiam contraste */
+  .vitrine.fundo-cena::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22%;
+    background: linear-gradient(rgba(10,12,18,.30), rgba(10,12,18,0));
+    pointer-events: none; z-index: 1;
+  }
+  .vitrine.fundo-cena::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
+    background: linear-gradient(to top, rgba(10,12,18,.40), rgba(10,12,18,.10) 55%, rgba(10,12,18,0));
+    pointer-events: none; z-index: 1;
+  }
+
+  /* ---- estudio: palco com luz e sombra de contato ---- */
+  .vitrine.fundo-estudio {
+    background-image: radial-gradient(118% 84% at 50% 0%, #fff 0%, #fafafc 44%, #ebe9f0 100%);
+  }
+  /* ⚠️ MEDIDO na tela: mesmo com a foto certa, a placa cobria a BASE do
+     produto — e cobria junto a sombra de contato, que nasce ali. Entao o
+     poco do estudio RESERVA a altura da placa (`--reserva`, medida no JS,
+     nao chutada): o produto encolhe um pouco e fica INTEIRO, que e' o que
+     "nao cortar o produto" quer dizer. O respiro lateral cai de 6% para 5%
+     para devolver parte do tamanho perdido. */
+  .vitrine.fundo-estudio .vfoto {
+    background: none; position: relative; z-index: 1;
+    padding: 5% 5% var(--reserva, 26%) 5%;
+  }
+  /* ⭐⭐ O RETANGULO SOME. Foto de estudio e' produto sobre BRANCO PURO, e
+     branco puro e' o elemento neutro da multiplicacao: `multiply` apaga o
+     fundo da foto contra o palco e deixa so' o produto. E' isto que mata
+     "as bordas do card como foram criadas" no caso do estudio — sem
+     recorte, sem modelo, sem chamar API nenhuma.
+
+     ⚠️ SO' QUANDO O BRANCO E' PURO (media da borda > 250, classe `puro`).
+     Em fundo quase-branco (240) o multiply pinta um cinza e o retangulo
+     volta, mais feio. Foto assim fica sem a mistura, de proposito. */
+  .vitrine.fundo-estudio.puro .vfoto { mix-blend-mode: multiply; }
+  .vitrine.fundo-estudio.puro { background-color: #fff; }
+  /* no palco branco o chip branco sumia: vira um chip escuro discreto */
+  .vitrine.fundo-estudio .vloja {
+    background-color: rgba(22,21,28,.07); color: #47444f;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    box-shadow: inset 0 0 0 1px rgba(22,21,28,.06);
+  }
+  /* ⭐ `--cx` e `--cy` sao MEDIDOS: centro horizontal e base do produto na
+     foto (caixa dos pixels nao-brancos). Sem medir, a sombra cai no meio da
+     caixa e desmente a propria foto — produto a` esquerda, sombra no meio. */
+  .vitrine.fundo-estudio .vchao {
+    position: absolute; z-index: 0; pointer-events: none;
+    left: var(--cx); top: var(--cy); width: var(--cw);
+    height: calc(var(--cw) * .20);
+    transform: translate(-50%, -50%);
+    /* ⚠️ MEDIDO com a sombra pintada de vermelho: o lugar estava certo desde
+       o inicio, a FORCA e' que nao lia. Por isso .40 e nao .32. */
+    background: radial-gradient(closest-side, rgba(26,24,36,.40), rgba(26,24,36,.16) 54%, rgba(26,24,36,0) 100%);
+  }
   .vitrine .vselo {
     position: absolute; top: 12px; left: 12px; background: var(--ouro-claro); color: #17161d;
     font: 700 12px/1 var(--mono); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(200,144,26,.35);
@@ -1151,7 +1276,25 @@
   .vitrine.com-3d .vplaca { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
   .vitrine.com-3d .vplaca::before, .vitrine.com-3d .vplaca::after { display: none; }
   .vitrine .vplaca, .vitrine .vselo, .vitrine .vloja { z-index: 2; }
-  @media (min-width: 700px) { .vitrine { display: grid; grid-template-columns: 1fr 1fr; } .vitrine .vfoto { aspect-ratio: 4 / 3; } }
+  /* ⚠️ EM TELA LARGA O HEROI ERA UMA GRADE DE 2 COLUNAS E A SEGUNDA NUNCA
+     RECEBIA NADA: o construtor anexa foto, selo, chip e placa, e todos menos
+     a foto sao `position: absolute`. A metade direita ficava vazia. Isso
+     passava despercebido enquanto TUDO era branco — a foto contida no poco
+     branco e a coluna vazia branca eram a mesma mancha. Com a foto sangrando
+     (21/09) a metade vazia virou um bloco chapado ao lado da cena, e o que
+     era invisivel virou defeito a` vista.
+     Entao a foto passa a ocupar o cartao INTEIRO. A proporcao muda com o
+     caso, pelo mesmo motivo de sempre: cena aguenta (e pede) ser larga;
+     estudio com produto ao centro nao pode ser larga demais, ou o produto
+     volta a ficar pequeno no meio do vazio — o "largado" de novo.
+     A ALTURA NAO MUDA: a 944 px o cartao dava 354 px de altura na grade de
+     2 colunas, e 944/(8/3) = 354. Ele ganha largura, nao ganha caixa. */
+  @media (min-width: 700px) {
+    .vitrine { display: block; }
+    .vitrine .vfoto { aspect-ratio: 5 / 2; }
+    .vitrine.fundo-cena .vfoto { aspect-ratio: 8 / 3; }
+    .vitrine.fundo-estudio .vfoto { aspect-ratio: 2 / 1; }
+  }
   #vitrine:not(:empty) + .grade, #vitrine:not(:empty) ~ .grade { margin-top: 14px; }
   .grade {
     display: grid; gap: 14px; margin: 6px 0 0; align-items: start;
@@ -2605,6 +2748,107 @@
     });
   }
 
+  /* ⭐ A MEDIDA QUE ESCOLHE O DESENHO DO HEROI (21/09/2026). Ver o bloco
+     "O HEROI PREMIUM" no CSS. A BORDA da foto separa cena de estudio, e a
+     conta roda AQUI (no navegador) e nao no publicador, para valer tambem
+     em produto que ainda nao foi cadastrado.
+
+     ⚠️ TODO caminho de erro so' faz `return`, de proposito: sem classe o
+     cartao fica exatamente como estava. Meio-termo seria pior que nada. */
+  function classificarFotoHeroi(a, img) {
+    var L = 96, cai = null;
+    function medir() {
+      var cv = document.createElement("canvas"); cv.width = cv.height = L;
+      var g = cv.getContext("2d", { willReadFrequently: true });
+      if (!g || !img.naturalWidth) { return; }
+      g.drawImage(img, 0, 0, L, L);
+      var d;
+      // CDN sem CORS suja o canvas: e' o erro ESPERADO aqui, nao um defeito
+      try { d = g.getImageData(0, 0, L, L).data; } catch (e) { return; }
+      var k = 3, borda = 0, brancos = 0, somaBorda = 0, x0 = L, y0 = L, x1 = -1, y1 = -1;
+      for (var y = 0; y < L; y++) {
+        for (var x = 0; x < L; x++) {
+          var i = (y * L + x) * 4;
+          var fundo = d[i + 3] <= 8 || Math.min(d[i], d[i + 1], d[i + 2]) > 233;
+          if (x < k || y < k || x >= L - k || y >= L - k) {
+            borda++; if (fundo) { brancos++; }
+            somaBorda += d[i] + d[i + 1] + d[i + 2];
+          }
+          if (!fundo) {
+            if (x < x0) { x0 = x; } if (x > x1) { x1 = x; }
+            if (y < y0) { y0 = y; } if (y > y1) { y1 = y; }
+          }
+        }
+      }
+      var frac = borda ? brancos / borda : 0;
+      var mediaBorda = somaBorda / Math.max(1, borda * 3);
+      if (frac <= 0.50) { a.classList.add("fundo-cena"); return; }
+      /* ⚠️ A FAIXA DO MEIO (0,50 a 0,90) FICA SEM CLASSE de proposito: e'
+         foto que nao e' nem cena nem estudio — fundo degrade, meia-moldura,
+         colagem com tarja. Chutar ali estraga mais do que nao fazer nada. */
+      if (frac < 0.90 || x1 < 0) { return; }
+      a.classList.add("fundo-estudio");
+      if (mediaBorda > 250) { a.classList.add("puro"); }
+      cai = { x0: x0 / L, x1: (x1 + 1) / L, y1: (y1 + 1) / L };
+      var chao = document.createElement("span"); chao.className = "vchao";
+      a.insertBefore(chao, img);
+      aoEntrar(chao, 0);
+      var quando = null;
+      window.addEventListener("resize", function () {
+        clearTimeout(quando);
+        quando = setTimeout(function () { reservar(); posicionar(chao); }, 120);
+      });
+    }
+    /* A caixa foi medida em fracao da FOTO. A sombra mora no CARTAO. Entao
+       ela precisa passar pelo mesmo `contain` que o navegador aplica — e o
+       `contain` depende do respiro em % e da proporcao da tela (1/1 no
+       telefone, 4/3 acima de 700px). Por isso: medir os retangulos reais. */
+    /* ⚠️ COM A FOTO EM CACHE, `medir()` roda SINCRONO — e nessa hora o cartao
+       ainda nao entrou na pagina: todo retangulo vale 0, a placa nem existe
+       (ela e' anexada depois da foto), e a sombra nasceria sem lugar. Medido
+       exatamente assim: na primeira carga funcionava e ao remontar a vitrine
+       parava. Entao a colocacao espera o layout existir. */
+    function aoEntrar(chao, n) {
+      requestAnimationFrame(function () {
+        if (!a.isConnected || !img.getBoundingClientRect().width || !a.querySelector(".vplaca")) {
+          if (n < 40) { aoEntrar(chao, n + 1); }
+          return;
+        }
+        reservar();
+        posicionar(chao);
+      });
+    }
+
+    /* a altura da placa MEDIDA (ela cresce com nome de 2 linhas), mais o
+       recuo de 12px dela e um respiro. Chutar em % erraria justamente no
+       caso que importa: o nome longo. */
+    function reservar() {
+      var pl = a.querySelector(".vplaca");
+      if (!pl) { return; }
+      var h = pl.getBoundingClientRect().height;
+      if (h) { a.style.setProperty("--reserva", Math.round(h + 12 + 10) + "px"); }
+    }
+
+    function posicionar(chao) {
+      var rc = a.getBoundingClientRect(), ri = img.getBoundingClientRect();
+      if (!ri.width || !ri.height || !cai) { return; }
+      var e = getComputedStyle(img);
+      var pe = parseFloat(e.paddingLeft) || 0, pt = parseFloat(e.paddingTop) || 0;
+      var W = ri.width - pe - (parseFloat(e.paddingRight) || 0);
+      var H = ri.height - pt - (parseFloat(e.paddingBottom) || 0);
+      var iw = img.naturalWidth, ih = img.naturalHeight;
+      var s = Math.min(W / iw, H / ih), dw = iw * s, dh = ih * s;
+      var ox = (ri.left - rc.left) + pe + (W - dw) / 2;
+      var oy = (ri.top - rc.top) + pt + (H - dh) / 2;
+      var larg = (cai.x1 - cai.x0) * dw;
+      chao.style.setProperty("--cx", (ox + (cai.x0 + cai.x1) / 2 * dw).toFixed(1) + "px");
+      chao.style.setProperty("--cy", (oy + cai.y1 * dh).toFixed(1) + "px");
+      chao.style.setProperty("--cw", Math.max(24, larg * 0.98).toFixed(1) + "px");
+    }
+    if (img.complete && img.naturalWidth) { medir(); }
+    else { img.addEventListener("load", medir, { once: true }); }
+  }
+
   function desenhar() {
     // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)
     var estatico = document.getElementById("indice-estatico");
@@ -2747,6 +2991,8 @@
         var img = document.createElement("img");
         img.className = "vfoto"; img.alt = v1.nome; img.crossOrigin = "anonymous"; img.src = v1.imagem; img.loading = "eager";
         a.appendChild(img);
+        // ⭐ a borda da foto decide o desenho do heroi: ver "O HEROI PREMIUM"
+        classificarFotoHeroi(a, img);
         if ((v1.queda || 0) >= 5) { a.appendChild(el("span", "vselo", "↓ " + Math.round(v1.queda) + "%")); }
         a.appendChild(el("span", "vloja vidro", v1.loja || ""));
         var pl = el("div", "vplaca vidro");
@@ -3945,9 +4191,21 @@
     cena.environment = pm.fromScene(ambiente(), 0.04).texture;
     var cam = new THREE.OrthographicCamera(-W / 2, W / 2, H / 2, -H / 2, 1, 2000); cam.position.z = 600;
     // a foto como plano de fundo, em object-fit: contain com a folga de 6%
-    var iw = tex.image.width, ih = tex.image.height, folga = 0.88;
-    var esc = Math.min(W * folga / iw, H * folga / ih);
+    /* ⚠️ 21/09: o `folga` era 0.88 FIXO, e sobrava 12% de vazio em volta de
+       QUALQUER foto — somado a` margem interna da propria foto, e' metade do
+       "produto largado". Agora o 3D obedece a mesma classe do CSS: foto de
+       CENA sangra (cover, folga 1), foto de estudio fica contida com um
+       respiro bem menor. O canvas tem alpha, entao onde o plano nao cobre
+       aparece o PALCO do CSS — luz e sombra de contato continuam valendo. */
+    var iw = tex.image.width, ih = tex.image.height;
+    var ehCena = a.classList.contains("fundo-cena");
+    /* ⚠️ o 3D precisa obedecer a MESMA reserva do CSS, senao ele redesenha a
+       foto por cima e a placa volta a cortar a base do produto. */
+    var res = ehCena ? 0 : (parseFloat(getComputedStyle(a).getPropertyValue("--reserva")) || H * 0.26);
+    var Hu = Math.max(40, H - res);
+    var esc = ehCena ? Math.max(W / iw, H / ih) : Math.min(W * 0.90 / iw, Hu / ih);
     var fundo = new THREE.Mesh(new THREE.PlaneGeometry(iw * esc, ih * esc), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false }));
+    fundo.position.y = res / 2;
     cena.add(fundo);
     // a laje de vidro onde esta' a placa de preco (mesma geometria da .vplaca)
     var ra = a.getBoundingClientRect(), rp = placa.getBoundingClientRect(), rf = foto.getBoundingClientRect();

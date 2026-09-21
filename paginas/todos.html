@@ -1322,6 +1322,47 @@
     box-shadow: none; border-radius: 0;
   }
   .vitrine .vplaca::before, .vitrine .vplaca::after { display: none; }
+  /* ---- o bloco da CAPA (21/09/2026) ---------------------------------
+     ⭐ A ORDEM E' POR DONO DO NUMERO, e nao por importancia visual:
+       1. preco + riscado + acao   -> a decisao
+       2. o carimbo do garimpo     -> o que SO' NOS temos
+       3. o grafico                -> a prova do carimbo
+       4. a prova da loja          -> o unico dado que nao e' nosso
+     ⛔ O NOME DO PRODUTO SAIU. Com quatro blocos ele nao cabia, e e' o
+     mais fraco: titulo traduzido de catalogo. O AliExpress tambem nao
+     mostra nome na vitrine de ofertas. A foto diz o que e'. */
+  .vitrine .vplaca.cap, .vitrine .vplaca { display: block; }
+  .cap-linha { display: flex; align-items: baseline; gap: 8px; }
+  /* ⚠ `i` no lugar do "R$": menor e mais leve, sem separar do numero
+     (o Bryan viu "R$" numa linha e "128,99" na outra em 18/09). */
+  .cap-preco { font: 800 30px/1.1 Poppins, sans-serif; color: #16151c;
+    letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cap-preco i { font-style: normal; font-size: 17px; font-weight: 700; margin-right: 1px; }
+  .cap-linha s { font: 500 14px/1 Poppins, sans-serif; color: #9a97a6; }
+  /* ⭐ O ACENTO VAI PARA A ACAO. O ouro do selo de queda e o ouro do
+     botao sao o MESMO acento usado duas vezes -- o da foto diz "caiu", o
+     do bloco diz "aperte". A regra de um acento por cartao continua. */
+  .cap-cta { margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+    white-space: nowrap; font: 700 13px/1 Poppins, sans-serif; color: #17161d;
+    background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px; }
+  /* ⭐ O CARIMBO e' o unico elemento com FUNDO no bloco, de proposito:
+     ele tem de ler como selo, nao como legenda. E' o nosso argumento. */
+  .cap-carimbo { margin-top: 10px; display: inline-flex; align-items: center; gap: 7px;
+    font: 600 12.5px/1 Poppins, sans-serif; color: #7a5f13;
+    background: rgba(242,201,76,.16); padding: 8px 11px; border-radius: 10px; }
+  .cap-carimbo svg { width: 13px; height: 13px; color: #b8933a; flex: 0 0 auto; }
+  /* ⛔ SEM ALTURA FIXA AQUI. `grafico()` NAO devolve um <svg>: devolve
+     um `.serie-wrap`, que ja' traz a ESCALA junto (a ponta esquerda diz de
+     onde a linha partiu, a direita da' o veredito "menor que eu vi"). Eu
+     prendi o involucro em 34 px achando que era o svg, e o desenho de 79 px
+     VAZOU para fora do cartao, por cima da linha da loja. Medido no
+     navegador: wrap 34 px, svg 78,8 px. */
+  .vitrine .vplaca .serie-wrap { margin-top: 10px; }
+  .cap-loja { margin-top: 9px; font: 500 12.5px/1 Poppins, sans-serif; color: #8a8794; }
+  /* ⚠ O SELO DA CAPA leva o foguinho ANTES da seta, na mesma pilula:
+     dois selos separados brigavam pelo mesmo canto. */
+  .vitrine .vselo { display: inline-flex; align-items: center; gap: 5px; }
+  .vitrine .vselo svg { width: 12px; height: 12px; }
   /* esquerda: loja + nome. direita: preco + botao. Duas colunas de duas
      linhas cada -- a placa fica com DOIS andares, nao tres: tres viraram a
      laje que o Bryan reprovou as 05:02. */
@@ -2259,6 +2300,32 @@
   var SINO_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15zM10 21a2 2 0 0 0 4 0"/></svg>';
   var REPOR_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>';
 
+  // ⭐ OS TRES AJUDANTES DE NUMERO, NO ESCOPO DO MOTOR (21/09/2026).
+  //
+  // ⛔ ELES MORAVAM DENTRO DE `animarVivo`, e so' a linha viva os
+  // enxergava. Quando o cartao da CAPA precisou de `emReais` para dizer
+  // "a R$ 2 do menor que eu ja' vi", o codigo ficava sintaticamente
+  // perfeito e estourava `ReferenceError` NO NAVEGADOR -- derrubando a
+  // vitrine inteira, nao so' a frase. Pego na leitura, antes de publicar.
+  //
+  // ⚠ A saida NAO e' copiar: e' a mesma doutrina de `linhaDeSinais`.
+  // Duas copias de "quanto e' isto em reais" divergem na primeira
+  // mudanca, e divergencia em dinheiro e' a pior que existe aqui.
+  //
+  // ⚠ Formato brasileiro: milhar com ponto, decimal com virgula. Tirar
+  // o ponto ANTES de trocar a virgula, senao "R$ 1.234,56" vira 1.23456.
+  function emReais(s) {
+    var t = String(s || "").replace(/[^0-9,.]/g, "").replace(/\./g, "").replace(",", ".");
+    var v = parseFloat(t);
+    return isFinite(v) ? v : null;
+  }
+  function moeda(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
+  function milhar(n) {
+    n = Number(n) || 0;
+    if (n >= 1000) { return Math.round(n / 1000) + " mil"; }
+    return String(n);
+  }
+
   // ⭐ A LINHA DE SINAIS, UMA SO', PARA OS DOIS CARTOES (21/09/2026).
   //
   // ⛔ POR QUE ELA VIROU FUNCAO. Ate' hoje ela vivia dentro do `montar`
@@ -3191,8 +3258,20 @@
       if (vit) { vit.innerHTML = ""; }
       var semFiltro = atual === "todos" && !canal && !loja && !termo;
       if (semFiltro && vit && lista.length && lista[0].imagem) {
-        var v1 = lista[0];
-        lista = lista.slice(1);
+        // ⭐ A CAPA E' ESCOLHIDA, NAO SORTEADA PELA ORDEM (21/09/2026). Ate'
+        // hoje era `lista[0]` -- o primeiro do TOPO, que por desenho e' o
+        // melhor BARATO e nao o melhor produto (MEDIDO: topo1 com nota 79,4
+        // enquanto topo2 e topo4 tinham 80,5). O publicador agora carimba
+        // `capa: true` num unico produto, pela regua de CAPA_* em
+        // publicar_bio.py -- e esse e' o que abre a vitrine.
+        // ⚠ FALHA ABERTA: sem ninguem carimbado (dia sem queda forte), cai
+        // no primeiro da lista. Pior, mas nao vazio.
+        var iCapa = 0;
+        for (var ic = 0; ic < lista.length; ic++) {
+          if (lista[ic].capa && lista[ic].imagem) { iCapa = ic; break; }
+        }
+        var v1 = lista[iCapa];
+        lista = lista.slice(0, iCapa).concat(lista.slice(iCapa + 1));
         var a = document.createElement("a");
         a.className = "vitrine"; a.rel = "noopener";
         // 19/09: com `?p=`, o pedido vira a vitrine e o link dele pode estar
@@ -3228,54 +3307,117 @@
         // separados, o selo de ouro e o chip de prova se sobrepunham sempre
         // que houvesse queda >= 5%.
         var topo = el("div", "vtopo");
-        if ((v1.queda || 0) >= 5) { topo.appendChild(el("span", "vselo", "↓ " + Math.round(v1.queda) + "%")); }
+        if ((v1.queda || 0) >= 5) {
+          var selo = el("span", "vselo");
+          // ⭐ O FOGUINHO NA CAPA (pedido do Bryan, 21/09). Ele nao vinha
+          // sozinho porque `marcar_fogo` usa o piso ABSOLUTO de R$ 3 -- o
+          // mesmo piso que a medida mostrou estar barrando os melhores
+          // baratos. O publicador acende `fogo` na capa de proposito.
+          if (v1.fogo) {
+            selo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true">'
+              + '<path fill="currentColor" d="M8.5 1.2c.3 2-1 2.9-2 3.9C5.2 6.3 4 7.6 4 9.6a4 4 0 1 0 8 0c0-1.3-.5-2.4-1.2-3.3-.2.6-.7 1-1.2 1.1.4-1.6.2-4.4-1.1-6.2z"/>'
+              + '</svg>';
+          }
+          selo.appendChild(document.createTextNode("\u2193 " + Math.round(v1.queda) + "%"));
+          topo.appendChild(selo);
+        }
         // ⛔ NO MAXIMO DOIS. A regua da grade pode devolver cinco chips
         // (recorde, vendidos, promo, frete, envio, nota); cinco no alto da
         // foto viram poluicao e empurram o chip da loja. Dois e' o que cabe
         // na fileira a 430 px -- os outros continuam inteiros na grade.
         var vsin = linhaDeSinais(v1);
         if (vsin) {
-          Array.prototype.slice.call(vsin.childNodes, 0, 2).forEach(function (c) { topo.appendChild(c); });
+          // ⛔ O CHIP "Promo N% OFF" SAI DA CAPA: o selo ao lado JA' diz
+          // "↓ N%", com o mesmo numero. Medido na tela: tres pilulas no topo,
+          // duas dizendo a mesma coisa. Na grade ele fica, porque la' nao ha'
+          // selo de queda no canto.
+          Array.prototype.slice.call(vsin.childNodes)
+            .filter(function (c) { return !/promo/.test(c.className || ""); })
+            .slice(0, 2)
+            .forEach(function (c) { topo.appendChild(c); });
         }
         if (topo.childNodes.length) { a.appendChild(topo); }
-        var pl = el("div", "vplaca vidro");
-        // ⭐ O CHIP DA LOJA DESCE PARA A PLACA (21/09/2026, Analista de Loja
-        // Virtual / ecommercenapratica). Ele repete em tres episodios que o
-        // que compete com o principal -- redes sociais no topo, newsletter no
-        // header -- tem de ir para o rodape. O chip estava no canto superior,
-        // que e' o primeiro lugar que o olho varre, e a procedencia nao e' o
-        // argumento de venda. Vai NA FRENTE do nome, que e' a mesma solucao
-        // que o cartao v2 da grade adotou em 18/09 (assim ele nao orfana).
-        // ⚠ SEM a classe `vidro`: as pseudo-camadas dela desenhavam uma
-        // pilula vazada de 300 px por cima do nome (visto na medida).
-        var esq = el("div", "vesq");
-        if (v1.loja) { esq.appendChild(el("span", "vloja", v1.loja)); }
-        esq.appendChild(el("div", "vnome", v1.nome));
-        pl.appendChild(esq);
-        var dir = el("div", "vdir");
-        var pr = el("div", "vpreco");
-        if (v1.antes) { pr.appendChild(el("s", null, v1.antes)); }
+        var pl = el("div", "vplaca");
+        // ---- linha 1: o preco, o riscado e a acao -----------------------
+        var l1 = el("div", "cap-linha");
+        var pr = el("div", "cap-preco");
         var mo = /^R\$\s*(.+)$/.exec(String(v1.preco));
-        if (mo) { pr.appendChild(el("span", "rs", "R$")); pr.appendChild(document.createTextNode(mo[1])); }
+        if (mo) { pr.appendChild(el("i", null, "R$")); pr.appendChild(document.createTextNode(mo[1])); }
         else { pr.appendChild(document.createTextNode(v1.preco)); }
-        dir.appendChild(pr);
-        // ⭐ O BOTAO -- a critica numero 1 do Analista, e a mesma que o Bryan
-        // ja' tinha feito da LINHA VIVA em 20/09: "o preco mostra mas a pessoa
-        // nao sabe que ela tem que clicar pra ir pro produto". O problema e'
-        // AFFORDANCE: o cartao inteiro sempre foi um link e nunca pareceu um.
-        // A linha viva ganhou a pilula e funciona; o heroi, que e' maior,
-        // continuava sem nada que pedisse o toque.
-        //
-        // ⛔ E O TEXTO E' CURTO, DE PROPOSITO. Com "economiza R$ 29,59" a
-        // pilula vai a 268 px e ATROPELA o nome -- medido a 430 px, o nome
-        // ficou em "Suporte telescopi..." com o botao por cima. Curto ela da'
-        // 140 px e nada encosta. A economia ja' esta' dita duas vezes no
-        // cartao (o riscado e o selo de queda); uma terceira so' quebrou o
-        // layout. Ela continua inteira na linha viva, onde cabe.
-        var cta = el("span", "vcta");
+        l1.appendChild(pr);
+        // ⚠ O RISCADO SO' EXISTE SE FOR NOSSO: `antes` e' o maior valor da
+        // NOSSA serie, nao o "de" do vendedor (que e' inflado -- medido:
+        // R$ 31,48 "de R$ 122,22"). Sem ele, nao ha' riscado.
+        if (v1.antes) { l1.appendChild(el("s", null, v1.antes)); }
+        var cta = el("span", "cap-cta");
         cta.innerHTML = 'Comprar agora <span aria-hidden="true">\u2192</span>';
-        dir.appendChild(cta);
-        pl.appendChild(dir);
+        l1.appendChild(cta);
+        pl.appendChild(l1);
+
+        // ---- o CARIMBO DO GARIMPO: uma frase so', a mais forte -----------
+        // ⛔ POR QUE UMA ESCADA, E NAO QUATRO LINHAS. Em 21/09 eu empilhei
+        // quatro fatos de mesmo peso e o Bryan leu como "texto jogado no
+        // card". Pior: duas das linhas eram o MESMO numero. MEDIDO nos 3.398
+        // produtos da serie, `recorde.dias` e `dias` sao iguais em 3.398 de
+        // 3.398 -- os dois contam os dias desde o primeiro dia em que vimos o
+        // produto, por caminhos diferentes. "menor preco em 21 dias" ao lado
+        // de "acompanho ha 9" era uma contradicao que ele pegou na hora.
+        //
+        // ⭐ Entao so' o degrau MAIS ALTO que aquele produto consegue provar
+        // aparece. E o carimbo NUNCA fica vazio: o piso vale para todo
+        // produto, e diz o que nenhuma loja diz -- ha' quanto tempo eu vigio
+        // este preco.
+        var frase = "";
+        if (v1.recorde && v1.recorde.dias) {
+          frase = "menor pre\u00e7o em " + v1.recorde.dias + " dias";
+        } else if (v1.menor && Math.abs(emReais(v1.preco) - v1.menor) < 0.01) {
+          frase = "nunca esteve t\u00e3o barato desde que acompanho";
+        } else if (v1.menor && emReais(v1.preco) > v1.menor) {
+          frase = "a " + moeda(emReais(v1.preco) - v1.menor) + " do menor que eu j\u00e1 vi";
+        } else if (v1.dias > 0) {
+          frase = "acompanho h\u00e1 " + v1.dias + (v1.dias === 1 ? " dia" : " dias");
+        }
+        // ⛔ O CARIMBO SO' EXISTE SEM GRAFICO, e a regra nasceu de eu
+        // repetir o mesmo erro duas vezes na mesma hora. Primeiro o chip
+        // "Promo 62% OFF" ao lado do selo "↓ 62%"; depois este carimbo
+        // dizendo "nunca esteve tao barato desde que acompanho" logo acima
+        // da escala do grafico, que ja' diz "rastreando ha 8 dias · menor que
+        // eu vi ✓". O grafico diz a MESMA coisa e ainda MOSTRA a prova.
+        // ⭐ Entao: com grafico, quem fala e' o grafico. Sem grafico (queda
+        // abaixo de 5%, ou serie curta), o carimbo assume -- e e' justamente
+        // ai' que ele importa, porque senao o cartao nao diria nada nosso.
+        var vaiTerGrafico = (v1.queda || 0) >= 5 && (v1.serie || []).length >= 3;
+        if (frase && !vaiTerGrafico) {
+          var car = el("div", "cap-carimbo");
+          car.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true">'
+            + '<circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+            + '<path d="M10.4 10.4L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
+            + '</svg><span></span>';
+          car.querySelector("span").textContent = frase;
+          if (v1.conferido) { car.title = "pre\u00e7o conferido " + v1.conferido; }
+          pl.appendChild(car);
+        }
+
+        // ---- o GRAFICO: so' quando ele diz algo --------------------------
+        // ⛔ RETO E' ORNAMENTO (auditoria estetica de 18/09, Garry Tan). A
+        // regua da capa ja' exige 5 pontos de serie E queda >= 15%, entao
+        // aqui ele sempre tem o que mostrar -- mas a guarda fica, porque a
+        // capa pode cair no 1o da lista quando ninguem passa na regua.
+        if ((v1.queda || 0) >= 5) {
+          var gr = grafico(v1);
+          if (gr) { pl.appendChild(gr); }
+        }
+
+        // ---- a prova da LOJA, por ultimo: e' o unico dado que nao e' nosso
+        var partes = [];
+        if (v1.nota >= 90) { partes.push(Math.round(v1.nota) + "% positivas"); }
+        if (v1.vendeu && v1.vendeu[0] >= 20) {
+          partes.push("+" + v1.vendeu[0].toLocaleString("pt-BR") + " vendidos");
+        } else if (v1.vendas > 0) {
+          partes.push(v1.vendas.toLocaleString("pt-BR") + " vendas na loja");
+        }
+        if (v1.loja) { partes.push(v1.loja); }
+        if (partes.length) { pl.appendChild(el("div", "cap-loja", partes.join(" \u00b7 "))); }
         a.appendChild(pl);
         vit.appendChild(a);
       }
@@ -4119,15 +4261,6 @@
         void faixa.offsetWidth;
         faixa.classList.add("acende");
       }
-      // ⭐ A ECONOMIA EM REAIS, do par preco/antes que ja' esta' na tela.
-      // ⚠️ Formato brasileiro: milhar com ponto, decimal com virgula. Tirar o
-      // ponto ANTES de trocar a virgula, senao "R$ 1.234,56" vira 1.23456.
-      function emReais(s) {
-        var t = String(s || "").replace(/[^0-9,.]/g, "").replace(/\./g, "").replace(",", ".");
-        var v = parseFloat(t);
-        return isFinite(v) ? v : null;
-      }
-      function moeda(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
 
       // ⭐ A ESCADA DA SEGUNDA LINHA: mostra o fato MAIS FORTE que existir,
       // e nada quando nao existir nenhum. Cobertura medida em 148 produtos:
@@ -4138,11 +4271,6 @@
       // arriscado: `envio` existe em 3 de 148 e NAO guarda prazo — guarda a
       // origem (`{full:false, de:'RJ'}`). `frete_gratis` em 1, `recorde` em
       // 0. Nao da' pra dizer quando chega nem para um subconjunto util.
-      function milhar(n) {
-        n = Number(n) || 0;
-        if (n >= 1000) { return Math.round(n / 1000) + " mil"; }
-        return String(n);
-      }
       function dicaDoProduto(p) {
         var v = p.vendeu;
         if (v && v.length === 2 && Number(v[0]) > 0) {

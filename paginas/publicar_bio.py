@@ -1004,6 +1004,10 @@ def produtos_todos() -> list[dict]:
             "ja_esteve": _ja_esteve(por_dia, d),
             # ⭐ {"dias": N} quando hoje e' o menor da serie com N >= 14 dias
             "recorde": _recorde(por_dia, d),
+            # ⭐ O MENOR PRECO QUE NOS VIMOS (21/09/2026). Irmao do `antes`,
+            # que e' o maior. A capa usa os dois para dizer onde o preco de
+            # hoje esta' na faixa que ja' andou.
+            "menor": _menor(por_dia, d),
             # ⭐ [vendidos desde que acompanhamos, "dd/mm"] ou []
             "vendeu": list(vendas_desde.get(str(d.get("id")), ())),
             # ⭐ so' ML: [vendedores hoje, a mais desde, "dd/mm"] ou []
@@ -1083,6 +1087,7 @@ def produtos_todos() -> list[dict]:
     marcar_fogo(fim)
     marcar_vitrine_ml(fim)
     marcar_topo(fim)
+    marcar_capa(fim)
     return fim
 
 
@@ -1098,6 +1103,86 @@ def produtos_todos() -> list[dict]:
 TOPO_BARATO = 99.90
 TOPO_GANHO_MIN = 3.0        # = FOGO_GANHO_MIN (definido abaixo); um piso so'
 TOPO_N = 10
+
+
+def marcar_capa(dados: list[dict]) -> dict | None:
+    """Escreve `capa: True` no UNICO produto que abre a vitrine. Devolve ele.
+
+    ⭐ A CAPA NAO É MAIS "O PRIMEIRO DA LISTA". Até 21/09/2026 o heroi era
+    `lista[0]` -- o primeiro do TOPO, que por desenho é o melhor BARATO, nao
+    o melhor produto. MEDIDO no mesmo dia: o topo1 tinha nota 79,4 enquanto o
+    topo2 e o topo4 tinham 80,5. A capa mostrava o mais barato qualificado, e
+    o Bryan queria o melhor.
+
+    Os pisos estao em CAPA_* e no comentario delas. Entre os que passam,
+    ganha a maior `vitrine_nota`; empate, o maior ganho x vendas.
+
+    ⚠ PODE DEVOLVER None, e a pagina tem de aguentar: em dia sem queda forte
+    nenhum produto passa. Nesse caso a vitrine cai no comportamento antigo
+    (o primeiro da lista), que é pior mas nao é vazio.
+    """
+    # ⚠ IMPORT AQUI DENTRO, e nao no topo do modulo. O
+    # `teste_guarda_confirma_nomeando` importa `publicar_bio` com a pasta
+    # `paginas` no path mas SEM a raiz, e um `from engine import ...` no topo
+    # derruba o import inteiro com ModuleNotFoundError. `regua_vitrine` ja
+    # era importada dentro da funcao pelo mesmo motivo -- eu quebrei o padrao
+    # e a suite pegou.
+    from engine import foto_julga
+    for p in dados:
+        p.pop("capa", None)
+    cand = []
+    for p in dados:
+        if p.get("vitrine_fora"):
+            continue
+        preco = _preco_hoje_num(p)
+        ganho = float(p.get("ganho") or 0)
+        if preco <= 0 or preco > CAPA_PRECO_MAX:
+            continue
+        if ganho / preco * 100 < CAPA_GANHO_PCT_MIN:
+            continue
+        if float(p.get("nota") or 0) < FOGO_NOTA_MIN:
+            continue
+        if float(p.get("queda") or 0) < FOGO_QUEDA_MIN:
+            continue
+        if int(p.get("vendas") or 0) < FOGO_VENDAS_MIN:
+            continue
+        if len(p.get("serie") or []) < CAPA_SERIE_MIN:
+            continue
+        # ⭐ A FOTO TAMBEM E' PISO (21/09/2026). A regua acertou todos os
+        # numeros -- 62.879 vendas, 19,4% de ganho, 61,5% de queda -- e
+        # escolheu uma COLAGEM de quatro cenas com texto queimado. Nem o OCR
+        # nem o CLIP pegavam: o primeiro mede texto (0,0356, ABAIXO da
+        # mediana de 0,0568) e o segundo mede semelhanca contra a principal,
+        # que E' a colagem. Quem responde a pergunta certa e' um modelo de
+        # visao -- ver engine/foto_julga.py e a aferição de 6 fotos que esta'
+        # no cabecalho dele.
+        # ⚠ FALHA ABERTA: foto sem julgamento PASSA. A guarda barra colagem
+        # conhecida; ela nao pode esvaziar a capa quando a API esta' fora.
+        if not foto_julga.serve_de_capa(p.get("imagem") or "", CAPA_FOTO_NOTA_MIN):
+            continue
+        cand.append(p)
+    if not cand:
+        print("capa: NENHUM produto passou na regua -- a vitrine cai no 1o da lista")
+        return None
+    cand.sort(key=lambda x: (-float(x.get("vitrine_nota") or 0),
+                             -(float(x.get("ganho") or 0) * int(x.get("vendas") or 0))))
+    escolhido = cand[0]
+    escolhido["capa"] = True
+    # ⭐ A CAPA ACENDE O FOGUINHO, e isso e' decisao, nao efeito colateral.
+    # Pedido do Bryan: "esses produtos da capa devem ter essa informacao".
+    # Ele nao ganharia o fogo sozinho porque `marcar_fogo` usa o piso
+    # ABSOLUTO de R$ 3 -- e acabamos de medir que esse piso e' o que barra os
+    # melhores baratos. A capa passou por uma regua MAIS DURA (o mesmo
+    # nota+queda+vendas, mais ganho proporcional e serie de 5 pontos), entao
+    # negar o fogo a ela seria a mesma medida errada duas vezes.
+    escolhido["fogo"] = True
+    pr = _preco_hoje_num(escolhido)
+    print(f"capa: {len(cand)} candidato(s); escolhido nota "
+          f"{escolhido.get('vitrine_nota')} a R$ {pr:.2f} "
+          f"(ganho {float(escolhido.get('ganho') or 0) / pr * 100:.1f}% do preco, "
+          f"queda {float(escolhido.get('queda') or 0):.0f}%, "
+          f"{len(escolhido.get('serie') or [])} pontos de serie)")
+    return escolhido
 
 
 def marcar_topo(dados: list[dict]) -> list[dict]:
@@ -1343,6 +1428,39 @@ FOGO_GANHO_MIN = 3.0
 FOGO_COMISSAO_MIN = 10.0
 FOGO_TETO = 6
 
+# ⭐ A REGUA DA CAPA (21/09/2026). O heroi da vitrine deixou de ser "o
+# primeiro da lista" e passou a ser ESCOLHIDO: pedido do Bryan -- "tem que ser
+# um produto top que esteja vendendo muito muito e que nos de' um bom lucro e
+# que seja elegivel para estar na capa", com foguinho e grafico.
+#
+# ⛔ O PISO DE GANHO AQUI É PROPORCIONAL, E ESSA É A MUDANCA. MEDIDO em
+# 21/09/2026, entre os 120 produtos vivos de até R$ 99:
+#
+#   passam em nota + queda + vendas .......... 14
+#   desses, passam no ganho >= R$ 3 ........... 1   <- a trava
+#   afrouxar a QUEDA de 15% para 5% ........... 1   <- NAO era a queda
+#
+# O piso absoluto matava justamente os melhores da faixa barata POR SEREM
+# baratos: R$ 1,45 num produto de R$ 6,36 é 22,8% do preco -- proporcionalmente
+# muito melhor que R$ 3 num de R$ 150, que é 2%. Os 14 barrados tinham 62 mil
+# a 113 mil vendas e quedas de 46% a 69%.
+#
+# ⚠ ISTO NAO ABANDONA A REGRA DE 17/09 ("nao podemos postar so' porque é
+# barato e nao lucrar"): muda a UNIDADE, de reais para proporcao. O ganho
+# absoluto por venda cai para ~R$ 1,50 e só se paga no volume -- que estes
+# produtos tem. O piso de R$ 3 continua valendo no TOPO e no FOGO da grade.
+CAPA_PRECO_MAX = 99.0
+CAPA_GANHO_PCT_MIN = 6.0
+# ⚠ SERIE MINIMA: a capa mostra o GRAFICO, e grafico precisa de historia.
+# Com 3 pontos ele existe (`_serie_curta`), mas a capa exige 5 -- a auditoria
+# estetica de 18/09 já tinha decidido que "a linha do grafico quando é reta
+# é ornamento", e na capa ela ocupa espaco nobre.
+CAPA_SERIE_MIN = 5
+# ⚠ O PISO DA NOTA DA FOTO fica em 7 ate' a distribuicao das 148 dizer
+# outra coisa. Na aferição de 6 fotos: 9 = foto limpa, 8 = boa demonstracao,
+# 6 e 5 = texto queimado ou fundo poluido, 3 = a colagem.
+CAPA_FOTO_NOTA_MIN = 7
+
 
 def marcar_fogo(dados: list[dict]) -> list[dict]:
     """Poe `fogo: True` nos que passam na regua, ate' o teto. Devolve eles."""
@@ -1446,6 +1564,37 @@ def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
     dias = por_dia.get(d.get("id")) or {}
     if len(dias) < minimo:
         return []
+    # ⛔ O PONTO DE HOJE ENTRA AQUI, e sem ele o desenho CONTRADIZ o preco.
+    #
+    # MEDIDO em 21/09/2026, no produto que a regua escolheu para a capa:
+    #
+    #   serie ... 09-19 R$ 9,48 | 09-20 R$ 24,63   (ultimo ponto: ONTEM)
+    #   preco exibido .......... R$ 9,48           (instantaneo de HOJE)
+    #
+    # O cartao dizia "caiu 62%, R$ 9,48" e a linha do grafico SUBIA ate' o
+    # fim. Os dois estavam certos: o preco caiu mesmo de ontem para hoje, e
+    # a serie so' ia ate' ontem porque ela e' consolidada por DIA e o
+    # garimpo de hoje ainda nao escreveu. Errado era desenhar um sem o outro.
+    #
+    # ⚠ E o proprio `_preco_de_hoje` avisa disto: "tres numeros do mesmo
+    # cartao (preco, de riscado e linha do grafico) que saissem de leituras
+    # diferentes poderiam se contradizer na mesma tela". Quando ele passou a
+    # preferir o instantaneo horario, o grafico ficou para tras.
+    #
+    # ⭐ A regra: se o instantaneo tem preco e o ultimo ponto e' de outro
+    # dia, o instantaneo VIRA o ponto de hoje. O desenho passa a terminar no
+    # numero que esta' escrito ao lado dele.
+    from datetime import date as _d
+    hoje = _d.today().isoformat()
+    reg = _precos_agora().get(str(d.get("id") or ""))
+    if isinstance(reg, dict) and reg.get("preco"):
+        try:
+            agora = round(float(reg["preco"]), 2)
+        except (TypeError, ValueError):
+            agora = 0.0
+        if agora > 0 and max(dias) != hoje:
+            dias = dict(dias)
+            dias[hoje] = agora
     # ⭐ "MM-DD" e nao a data inteira: o ano nao cabe no eixo e nao muda nada
     # pra quem le. Sao ~14 bytes por ponto no JSON da pagina.
     return [[k[5:], round(v, 2)] for k, v in sorted(dias.items())]
@@ -1524,6 +1673,28 @@ def _ja_esteve(por_dia: dict, d: dict) -> dict:
 # fica enquanto o preco segurar, some quando subir (ai' vira "espere").
 # Menos de 14 dias nao e' recorde — e' estreia.
 RECORDE_DIAS_MIN = 14
+
+
+def _menor(por_dia: dict, d: dict) -> float:
+    """O MENOR preco que nos vimos neste produto, ou 0.
+
+    ⭐ O IRMAO DO `antes`. `_antes` devolve o MAIOR valor da nossa serie (o
+    riscado); este devolve o MENOR. Juntos eles dao a faixa em que o preco
+    andou desde que acompanhamos, e é isso que o grafico da capa desenha --
+    "voce está a R$ 2 do menor preco que eu já vi" só se pode dizer com os
+    dois. Até 21/09/2026 só o maior era calculado.
+
+    ⚠ Lé `por_dia`, a mesma leitura da queda e do grafico: um dia é um
+    ponto, e o ponto é o MENOR preco do dia. Ler o arquivo cru faria cada
+    anuncio do mesmo id virar um vale.
+    """
+    dias = por_dia.get(d.get("id")) or {}
+    if not dias:
+        return 0.0
+    try:
+        return round(min(dias.values()), 2)
+    except (TypeError, ValueError):
+        return 0.0
 
 
 def _recorde(por_dia: dict, d: dict) -> dict:

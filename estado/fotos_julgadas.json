@@ -91,6 +91,17 @@
 "rodadas": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S047d48dabc9944c8b9ede8cb9057587aX.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.8-flash",
+"nota": 4,
+"porque": "Fundo muito poluído e excesso de texto promocional sobreposto.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S0668b61aba954297b230e7f248914b4eE.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -223,6 +234,17 @@
 "quadros": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S19742757ef17493aac0e8d99496d06d9A.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Fundo limpo e produto destacado, porém apresenta texto sobreposto na imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S1984dbf9d6eb4e0588a7f978f50f15b1L.jpg": {
 "colagem": true,
 "fundo_limpo": false,
@@ -274,6 +296,17 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S23016967de3449129980481bff597036H.jpg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3.8-flash",
+"nota": 4,
+"porque": "Colagem com tabela e texto torna a capa poluida para vitrine",
+"produto_inteiro": true,
+"quadros": 3,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S248ca760ad904833978fc88860c4f033A.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -282,6 +315,17 @@
 "porque": "Produto completo e fundo limpo, porem contem texto e graficos sobrepostos.",
 "produto_inteiro": true,
 "quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S2519651f2fc849f4a460a9140a9d01a7S.png": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.8-flash",
+"nota": 2,
+"porque": "Infográfico com três quadros e texto explicativo, inadequado para foto de capa",
+"produto_inteiro": false,
+"quadros": 3,
+"rodadas": 1,
 "texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S282eeabfaaf844c1bfa4af5d7f37cad7t.jpg": {
@@ -303,6 +347,28 @@
 "porque": "Colagem de 4 quadros com texto, inadequada para foto principal.",
 "produto_inteiro": true,
 "quadros": 4,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S28d87896d93f4f439dc7b61536a48524M.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 4,
+"porque": "Muitos textos queimados e fundo poluído reduzem a clareza do produto.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S28e49ade1d894357b33faba4d6043097B.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.8-flash",
+"nota": 8,
+"porque": "Produto nítido e fundo limpo, mas com marca d'água no canto.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
 "texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S29a1a89628f6408c958002d05c08005aa.jpg": {
@@ -486,6 +552,17 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S53c78b954745430d865fd53016bdde92H.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 2,
+"porque": "Colagem com textos e quadros divididos polui a foto principal.",
+"produto_inteiro": false,
+"quadros": 4,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S5d136c28c6054f2ca266ed415a772cf2y.jpg": {
 "colagem": true,
 "fundo_limpo": false,
@@ -494,6 +571,17 @@
 "porque": "Texto excessivo e elementos gráficos poluem a imagem de capa.",
 "produto_inteiro": true,
 "quadros": 2,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S5d9a2ece2760400b9e9db0386dec49caO.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 5,
+"porque": "Possui texto sobreposto na imagem, reduzindo a qualidade para capa.",
+"produto_inteiro": true,
+"quadros": 1,
 "rodadas": 1,
 "texto_queimado": true
 },
@@ -587,6 +675,17 @@
 "quadros": 3,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S6c30f29dcf3c4b829da45c54be457a9dU.png": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 5,
+"porque": "Imagem dividida em dois quadros e possui texto sobreposto.",
+"produto_inteiro": true,
+"quadros": 2,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S6d722b0d93a6480bb7d89468841e92baS.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -617,6 +716,17 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S7207c9641b3f4f8990ca06567437c416V.png": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 5,
+"porque": "Possui texto e ícones sobrepostos que poluem a imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S725007040365409cae98f659c4443eacJ.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -635,6 +745,17 @@
 "porque": "Demonstra bem o uso, mas o cenário é um pouco poluído.",
 "produto_inteiro": true,
 "quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S73f0771809fe4a88ae47125cdf784780a.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Fundo limpo, produto em destaque e sem textos sobrepostos.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
 "texto_queimado": false
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S74c7d3e32f274dd48a0c3e522b1932e3y.jpg": {
@@ -666,6 +787,28 @@
 "produto_inteiro": true,
 "quadros": 2,
 "texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S7a76cbf2bafc43ab9a0d166146b52456Q.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 8,
+"porque": "Produto visível com fundo limpo, possui pequena marca d'água.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S7b689207851545cf84dd0dd9ded90c1er.png": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 6,
+"porque": "Possui texto sobreposto e fundo com muitos elementos visuais.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S7bb437da6d5345bf9144831eb59858cd7.jpg": {
 "colagem": false,
@@ -921,6 +1064,28 @@
 "quadros": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/Sa7b175f64e8844b78aa5fc14c09f04e6A.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 4,
+"porque": "Fundo poluído com texto grande sobreposto, reduzindo a clareza da vitrine.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Saaea2774beee41ef942fd4de4cb9adadA.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Fundo branco limpo, produto completo em destaque e sem texto.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/Sabb0422fed5a4b98a3341bbde44283d2o.jpg": {
 "colagem": true,
 "fundo_limpo": true,
@@ -970,6 +1135,28 @@
 "produto_inteiro": true,
 "quadros": 1,
 "texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sb2f9d632a6604c2e9d53f3c8e1acc1f16.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.8-flash",
+"nota": 3,
+"porque": "Imagem de demonstracao com textos sobrepostos e produto cortado na base.",
+"produto_inteiro": false,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sb3c799d8f97b45e0989c4931bcad61e1t.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.8-flash",
+"nota": 2,
+"porque": "Imagem promocional com muito texto e produto quase imperceptivel na orelha",
+"produto_inteiro": false,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/Sb4a204d19e5d46b6956c10a0dc34e9b5h.png": {
 "colagem": true,
@@ -1092,6 +1279,17 @@
 "rodadas": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/Sc1f80c0ba72147fbafe3d62a2180b9842.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Produto bem visivel, mas possui texto sobreposto na imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/Sc32fdfe302d64e9ea4a12169a7cfdefdi.jpg": {
 "colagem": false,
 "fundo_limpo": false,
@@ -1101,6 +1299,17 @@
 "produto_inteiro": true,
 "quadros": 1,
 "texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sc34ba106bfc346c8a2bc9a2ec12b643dJ.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 4,
+"porque": "Possui textos, gráficos explicativos e colagem com pessoa.",
+"produto_inteiro": true,
+"quadros": 2,
+"rodadas": 1,
+"texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/Sc4e5a38f186542c2a188903d4c7eb2fb9.jpg": {
 "colagem": false,

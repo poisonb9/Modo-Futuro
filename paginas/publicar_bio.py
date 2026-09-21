@@ -1149,6 +1149,10 @@ def marcar_capa(dados: list[dict]) -> dict | None:
     # era importada dentro da funcao pelo mesmo motivo -- eu quebrei o padrao
     # e a suite pegou.
     from engine import foto_julga
+    # ⭐ O INSTANTANEO E' LIDO UMA VEZ, e nao por produto: e' dele que saem
+    # as fotos EXTRAS do anuncio, e `_precos_agora()` le arquivo.
+    agora_fotos = _precos_agora()
+    trocas = []
     for p in dados:
         p.pop("capa", None)
     cand = []
@@ -1180,8 +1184,36 @@ def marcar_capa(dados: list[dict]) -> dict | None:
         # ⚠ FALHA ABERTA: foto sem julgamento PASSA. A guarda barra colagem
         # conhecida; ela nao pode esvaziar a capa quando a API esta' fora.
         if not foto_julga.serve_de_capa(p.get("imagem") or "", CAPA_FOTO_NOTA_MIN):
-            continue
+            # ⭐ FOTO RUIM TROCA, E SO' DESQUALIFICA SE NAO HOUVER TROCA.
+            # Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao
+            # perder vendas". Ate' aqui a foto ruim matava o produto, e o
+            # preco dele era o melhor da lista.
+            #
+            # ⚠️ O TAMANHO DO PREJUIZO, MEDIDO no catalogo de 21/09: dos 7
+            # produtos que passam em TODO o resto da regua, 5 eram barrados
+            # SO' pela foto -- 71%. Depois de julgar as 23 extras desses 5,
+            # 2 voltam com foto nota 10 e nota 9. Os candidatos a capa vao
+            # de 2 para 4.
+            #
+            # ⛔ E A TROCA E' ESCOLHA, NUNCA EDICAO. `engine/fidelidade.py`
+            # registra que o inpainting REFEZ o produto com menos detalhe e
+            # ainda assim tirou 0,9786 -- acima de qualquer limiar util. A
+            # guarda de fidelidade nao pega degradacao, entao redesenhar
+            # quebraria a ordem de 15/09 ("nao pode ir pra internet o
+            # produto que nao e' de acordo") sem nada ficar vermelho.
+            extras = (agora_fotos.get(str(p.get("id") or "")) or {}).get("imagens") or []
+            nova = foto_julga.melhor_foto(p.get("imagem") or "", extras,
+                                          CAPA_FOTO_NOTA_MIN)
+            if nova == (p.get("imagem") or ""):
+                continue
+            trocas.append((p.get("nome") or "", nova))
+            p["imagem"] = nova
         cand.append(p)
+    # ⚠️ A TROCA APARECE NO LOG. Publicacao que troca a foto do produto em
+    # silencio e' exatamente o tipo de mudanca que ninguem confere depois.
+    for nome, url in trocas:
+        print("capa: foto trocada por extra nota "
+              + str(foto_julga.julgado(url).get("nota")) + " -- " + nome[:46])
     if not cand:
         print("capa: NENHUM produto passou na regua -- a vitrine cai no 1o da lista")
         return None

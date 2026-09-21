@@ -184,11 +184,19 @@ def melhor_foto(principal: str, extras=(), piso: int = 7) -> str:
     que nao e' de acordo") sem que nada ficasse vermelho.
     """
     cands = [u for u in ([principal] + list(extras or [])) if u]
-    julgadas = [(int(julgado(u).get("nota") or 0), u) for u in cands if julgado(u)]
-    if not julgadas:
-        return principal
-    boa = [(n, u) for n, u in julgadas
-           if not julgado(u).get("colagem") and n >= piso]
+    # ⛔ UMA SO' DEFINICAO DE "SERVE". A primeira versao desta funcao
+    # filtrava por `colagem` e `nota`, mas `serve_de_capa` barra TAMBEM
+    # `texto_queimado` -- entao ela podia devolver uma foto que a regua da
+    # capa recusava em seguida, e o produto morria do mesmo jeito depois de
+    # dar o trabalho todo. Agora quem decide e' `serve_de_capa`, aqui e la'.
+    #
+    # ⚠️ E O `julgado(u)` E' OBRIGATORIO, apesar de `serve_de_capa` falhar
+    # ABERTO (foto sem julgamento passa). La' o falhar aberto esta' certo: a
+    # guarda nao pode esvaziar a capa quando a API esta' fora. AQUI seria o
+    # contrario -- trocar uma foto que sabemos ruim por uma que nao sabemos
+    # nada e' piorar a aposta com cara de conserto.
+    boa = [(int(julgado(u).get("nota") or 0), u) for u in cands
+           if julgado(u) and serve_de_capa(u, piso)]
     if boa:
         boa.sort(key=lambda x: -x[0])
         return boa[0][1]

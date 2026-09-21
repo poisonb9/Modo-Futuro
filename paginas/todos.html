@@ -3057,6 +3057,18 @@
 
     grade.innerHTML = "";
     var vit0 = document.getElementById("vitrine");
+    /* ⚠️ A CAPTURA TEM DE VIR ANTES DA **PRIMEIRA** LIMPEZA. Eu ja' errei
+       isto duas vezes: coloquei a leitura depois de um `innerHTML = ""` e a
+       heranca ficou sempre nula. Existem DOIS pontos que esvaziam a vitrine
+       em `desenhar()`, e este e' o primeiro. Quem mexer aqui, mexa junto. */
+    var heranca = { pid: null, classes: [] };
+    var vVelho = vit0 && vit0.querySelector(".vitrine");
+    if (vVelho) {
+      heranca.pid = vVelho.getAttribute("data-pid");
+      ["fundo-cena", "fundo-estudio", "puro"].forEach(function (c) {
+        if (vVelho.classList.contains(c)) { heranca.classes.push(c); }
+      });
+    }
     if (vit0) { vit0.innerHTML = ""; }
     if (!lista.length) {
       var v = el("div", "vazio");
@@ -3099,16 +3111,6 @@
       // ⭐ A VITRINE: sem filtro nenhum, o #1 da lista sai da grade e vira o
       // cartao grande; com qualquer filtro, some (a grade e' a resposta).
       var vit = document.getElementById("vitrine");
-      /* ⚠️ LER ANTES DE LIMPAR. Na primeira versao eu procurava o cartao
-         velho DEPOIS do `innerHTML = ""` — sempre nulo, heranca morta. */
-      var heranca = { pid: null, classes: [] };
-      var velho = vit && vit.querySelector(".vitrine");
-      if (velho) {
-        heranca.pid = velho.getAttribute("data-pid");
-        ["fundo-cena", "fundo-estudio", "puro"].forEach(function (c) {
-          if (velho.classList.contains(c)) { heranca.classes.push(c); }
-        });
-      }
       if (vit) { vit.innerHTML = ""; }
       var semFiltro = atual === "todos" && !canal && !loja && !termo;
       if (semFiltro && vit && lista.length && lista[0].imagem) {

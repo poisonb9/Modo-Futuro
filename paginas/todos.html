@@ -2336,15 +2336,77 @@
     var vals = s.map(function (x) { return x[1]; });
     var menor = Math.min.apply(null, vals);
     var maior = Math.max.apply(null, vals);
-    var faixa = Math.max(maior - menor, maior * PISO_DO_EIXO);
-    // centraliza a serie dentro da faixa minima
-    var meio = (maior + menor) / 2;
-    var topo = meio + faixa / 2;
+
+    // ⭐ O MODO GANHO: a linha deixa de ser PRECO e passa a ser ECONOMIA.
+    // Pedido do Bryan em 21/09/2026: "eu quero ele de cabeca pra baixo para
+    // mostrar que a queda e' positiva em favor do nosso cliente".
+    //
+    // ⛔ E EU NAO INVERTI O EIXO DO PRECO, que era o pedido ao pe' da letra.
+    // Eixo de preco virado desenha a linha subindo enquanto o preco cai, sem
+    // nada dizendo isso -- e' o grafico invertido classico, o truque de fazer
+    // crime caindo virar crime subindo. Seria a mesma familia do "a pagina
+    // passa a mentir sozinha" que este arquivo inteiro combate, e bastava um
+    // print ao lado da serie para a gente perder a unica coisa que nos
+    // diferencia: o dado ser nosso E ser verdadeiro.
+    //
+    // ⭐ Trocar O QUE e' plotado da a MESMA imagem, honesta. A referencia e'
+    // o preco riscado (`ganhoRef`, o mesmo numero do <s> e do "voce economiza
+    // R$ X" logo acima), e cada ponto vira `ref - preco`:
+    //
+    //   preco     11,79 11,99 11,89  19,73 19,61 11,89   desce no fim
+    //   economia   7,94  7,74  7,84   0,00  0,12  7,84   SOBE no fim
+    //
+    // A linha termina EXATAMENTE no valor verde que esta' acima dela: o texto
+    // diz o numero, a linha mostra ele crescendo. Uma coisa so'.
+    //
+    // ⚠️ A BASE E' ZERO, e nao o menor da serie. Economia zero e' um fato --
+    // significa "hoje nao ha' ganho" -- e ancorar no zero mantem a defesa do
+    // PISO_DO_EIXO de graca: ganho pequeno desenha pequeno. Se a base fosse
+    // o minimo da serie, R$ 0,10 de economia encheria a altura do cartao.
+    var ganho = null;
+    if (p.ganhoRef > 0) {
+      ganho = vals.map(function (v) { return Math.max(p.ganhoRef - v, 0); });
+      var gMax = Math.max.apply(null, ganho);
+      // ⚠️ Ganho zero em toda a serie nao vira linha reta no chao: cai fora
+      // do modo e o grafico volta a ser de preco, que ao menos diz algo.
+      if (gMax <= 0.005) { ganho = null; }
+    }
+
+    // ⛔ `vals` NAO E' REATRIBUIDO -- e este comentario e' um defeito MEDIDO,
+    // nao precaucao. A primeira versao deste bloco fazia `vals = ganho`, e la'
+    // embaixo a escala le' `var pAgora = vals[vals.length - 1]` para decidir o
+    // selo "menor que eu vi". Com `vals` trocado, a conta virou
+    // "economia 7,84 <= menor PRECO 11,79" -- verdadeira sempre.
+    //
+    // ⚠️ MEDIDO na capa de 21/09: o cartao exibia "menor que eu vi ✓" com
+    // hoje a R$ 11,89 e o menor visto a R$ 11,79. A pagina mentindo, pelo
+    // caminho que este arquivo inteiro existe para fechar -- e o erro caia
+    // A NOSSO FAVOR, que e' o lado que ninguem reclama e por isso ninguem
+    // confere. Por isso o desenho tem vetor PROPRIO e o preco fica intacto.
+    var desenho = vals;
+    var faixa, topo;
+    if (ganho) {
+      desenho = ganho;
+      // ⚠️ FOLGA DE 12% NO TOPO. Sem ela `topo` e' o proprio maximo e o
+      // ponto mais alto cai em y = m, colado na borda de cima: medido a 430
+      // px, 3 dos 5 pontos ficaram a 2,0-2,5 de 22 e o traco leu como a
+      // BORDA do cartao, nao como dado. A folga nao mexe na proporcao com o
+      // zero -- a base continua sendo zero, que e' o que mantem a leitura
+      // honesta "quanto disto e' ganho".
+      faixa = topo = Math.max.apply(null, ganho) * 1.12;
+    } else {
+      faixa = Math.max(maior - menor, maior * PISO_DO_EIXO);
+      // centraliza a serie dentro da faixa minima
+      var meio = (maior + menor) / 2;
+      topo = meio + faixa / 2;
+    }
 
     var L = 100, A = 22, m = 2;
     var pts = s.map(function (x, i) {
       var px = s.length === 1 ? L / 2 : (i / (s.length - 1)) * L;
-      var py = m + (topo - x[1]) / faixa * (A - 2 * m);
+      // ⚠️ `vals[i]`, e nao `x[1]`: no modo ganho `vals` ja' foi trocado
+      // pela economia. Ler x[1] aqui desenhava preco com escala de ganho.
+      var py = m + (topo - desenho[i]) / faixa * (A - 2 * m);
       return [px, py];
     });
 
@@ -2416,13 +2478,18 @@
     // ⭐ O QUE O DESENHO ESCONDE, EM TEXTO. A linha mostra a forma; o titulo
     // devolve os numeros exatos, que e' o que sustenta a promessa da pagina.
     var t = document.createElementNS(NS, "title");
-    t.textContent = s.map(function (x) {
-      return x[0].split("-").reverse().join("/") + " R$ " +
-             x[1].toFixed(2).replace(".", ",");
+    // ⚠️ O TITULO SEGUE O QUE FOI DESENHADO. Ele e' a prova em texto do
+    // que a linha mostra; deixar preco num desenho de economia era a
+    // divergencia entre o dado e a tinta, por dentro.
+    t.textContent = s.map(function (x, i) {
+      return x[0].split("-").reverse().join("/") + " " +
+             (ganho ? "economia R$ " : "R$ ") +
+             desenho[i].toFixed(2).replace(".", ",");
     }).join(" · ");
     svg.appendChild(t);
     var wrap = document.createElement("div");
-    wrap.className = "serie-wrap" + ((p.queda || 0) >= 5 ? " baixou" : "");
+    wrap.className = "serie-wrap" + ((p.queda || 0) >= 5 ? " baixou" : "")
+                   + (ganho ? " ganho" : "");
     wrap.appendChild(svg);
     wrap.appendChild(ponto);
     // ⭐ A ESCALA DO GRAFICO (Bryan, 18/09: "vale mostrar ha' quantos dias e'
@@ -2438,6 +2505,9 @@
       // de onde a linha partiu (o preco de ha' N dias); a direita da' o
       // VEREDITO — "menor que eu vi" quando o preco de agora e' o piso da
       // serie, senao quanto ainda esta' acima do piso. Preco nunca quebra linha.
+      // ⛔ PRECO, e nunca `desenho`: no modo ganho `desenho` e' a economia,
+      // e comparar economia com `menor` (que e' preco) da' "menor que eu vi"
+      // sempre verdadeiro. Foi o defeito de 21/09, medido no cartao.
       var pAgora = vals[vals.length - 1];
       // 19/09 (Bryan): o preco de "ha N dias" e' redundante com o riscado — sai
       // 19/09 (Bryan): UMA linha. Nao e' "desconto" — e' quanto o preco de
@@ -2446,8 +2516,38 @@
       // 19/09 (Bryan): "ha N dias rastreando este produto"; o "acima do
       // menor" ja' esta' dito na linha "espere — ja' esteve a". So' o
       // veredito bom entra, quando ha': "menor que eu vi ✓".
+      // ⭐ QUANDO NAO E' O PISO, A DISTANCIA ATE' ELE (Bryan, 21/09: "nao e'
+      // o menor, para nao tirar isso, o que poderiamos colocar no lugar").
+      //
+      // ⛔ E NAO "caminhando para o menor preco", que foi a primeira ideia.
+      // Isso afirma TENDENCIA, e a serie nao tem. A da capa de hoje e'
+      // 11,79 -> 11,99 -> 11,89 -> 19,73 -> 11,89: subiu, despencou e ficou
+      // parada. A frase sairia igual num produto que SUBIU hoje, desde que
+      // esteja perto do piso -- a pagina afirmando uma direcao que o dado
+      // nao tem, que e' a mesma familia do eixo de preco invertido.
+      // A DISTANCIA nao e' tendencia: e' uma subtracao, e ela e' verdadeira
+      // em qualquer serie.
+      //
+      // ⚠️ O LIMIAR DE 3% E' MEDIDO, nos 147 produtos com serie de 3+ pontos:
+      //
+      //   no piso (hoje E' o menor) ...  22 produtos   15%
+      //   folga <= 1% ................   38            26%
+      //   folga <= 3% ................   63            43%   <- aqui
+      //   folga <= 5% ................   79            54%
+      //   mediana da folga ...........  3,58%
+      //
+      // Na mediana do catalogo (R$ 38,79) 3% e' R$ 1,16 -- ainda le' como
+      // "praticamente o piso". Acima disso a frase se vira contra nos:
+      // "a R$ 12,00 do menor que eu vi" e' argumento para ESPERAR, nao para
+      // comprar, e ai' o silencio de hoje e' melhor. Com o limiar, 43% dos
+      // cartoes dizem algo, contra 15% antes.
+      var folga = pAgora - menor;
+      var perto = !noMenor && menor > 0 && folga / menor <= 0.03;
+      var veredito = noMenor ? " · menor que eu vi ✓"
+                   : perto ? " · a " + moeda(folga) + " do menor que eu vi"
+                   : "";
       esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""),
-        "rastreando há " + p.dias + " dias" + (noMenor ? " · menor que eu vi ✓" : "")));
+        "rastreando há " + p.dias + " dias" + veredito));
       wrap.appendChild(esc);
     }
     return wrap;
@@ -3650,6 +3750,11 @@
         // aqui ele sempre tem o que mostrar -- mas a guarda fica, porque a
         // capa pode cair no 1o da lista quando ninguem passa na regua.
         if ((v1.queda || 0) >= 5) {
+          // ⭐ A REFERENCIA DO GRAFICO E' O RISCADO, o mesmo `vA` que ja'
+          // calculou o "voce economiza" acima -- nao um numero novo. Duas
+          // contas para o mesmo valor e' como nasce o cartao dizendo R$ 7,84
+          // no texto e desenhando outra coisa na linha.
+          v1.ganhoRef = (vA > 0 && vA > vB) ? vA : 0;
           var gr = grafico(v1);
           if (gr) { pl.appendChild(gr); }
         }

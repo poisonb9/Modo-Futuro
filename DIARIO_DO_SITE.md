@@ -6,6 +6,26 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 21/09/2026 21:52 — `4b314c1`
+
+**O quê:** O piso da foto vai a 9 (MEDIDO em 138), e o 0x08 que estava no HEAD
+
+**Por quê:** O que: piso da nota da foto 7 -> 9, conserto do byte 0x08 em externalizar_motor, brilho do foguinho e o grafico colado na economia.
+
+Carimbo no ar: `6852bb8de985` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 21:30 — `4b314c1`
+
+**O quê:** O piso da foto vai a 9 (MEDIDO em 138), e o 0x08 que estava no HEAD
+
+**Por quê:** O que: piso da nota da foto 7 -> 9, conserto do byte 0x08 em externalizar_motor, brilho do foguinho e o grafico colado na economia.
+
+Carimbo no ar: `7785e717e13f` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
 ## 21/09/2026 20:51 — `b8a265a`
 
 **O quê:** precos: instantaneo do catalogo

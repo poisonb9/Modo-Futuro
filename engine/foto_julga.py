@@ -153,6 +153,18 @@ def serve_de_capa(url: str, piso: int = 7) -> bool:
         return True
     if j.get("colagem"):
         return False
+    if j.get("texto_queimado"):
+        # ⛔ TEXTO QUEIMADO NA CAPA BRIGA COM OS NOSSOS CHIPS. MEDIDO no ar
+        # em 21/09/2026: a capa do Carregador 120W tem "120W Output" desenhado
+        # na foto, e o selo de queda e a estrela caem EM CIMA dele -- dois
+        # textos disputando o mesmo canto. Nenhum leito de CSS conserta isso,
+        # porque o ruido esta' DENTRO da imagem.
+        # ⚠ O proprio juiz ja' avisava: nota 8, "otima qualidade e fundo
+        # limpo, porem contem texto sobreposto". O dado estava la' e a regua
+        # nao lia.
+        # ⭐ E da' para exigir: dos 14 candidatos, 5 tem foto sem colagem E
+        # sem texto -- tres deles com nota 10.
+        return False
     return int(j.get("nota") or 0) >= piso
 
 

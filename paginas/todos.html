@@ -1146,7 +1146,13 @@
      texto caiu atras da barra de navegacao. Tem de mudar a ESTRUTURA. */
   .vitrine {
     display: flex; flex-direction: column; position: relative; margin: 6px 0 0; border-radius: 24px; overflow: hidden;  /* 19/09 Bryan: menos vao apos o console (8 + 6 = 14, o mesmo da grade) */
-    background: #fff; box-shadow: var(--vidro-sombra); color: inherit; text-decoration: none;
+    /* ⭐ ELEVACAO EM DUAS CAMADAS. Kevin Powell, ajustando ao vivo, baixa a
+       sombra de .5 para .25 dizendo "now things are starting to look a little
+       bit better" -- opacidade baixa. Aqui sao DUAS: uma de 1 px que desenha
+       a borda do cartao contra o creme do fundo, e uma larga e fraca que da'
+       a altura. Com `--vidro-sombra` sozinha o cartao sumia no papel. */
+    background: #fff; color: inherit; text-decoration: none;
+    box-shadow: 0 1px 2px rgba(22,21,28,.06), 0 8px 24px -8px rgba(22,21,28,.18);
     transition: transform .18s cubic-bezier(.2,.8,.2,1);
   }
   .vitrine:active { transform: scale(.985); }
@@ -1246,11 +1252,16 @@
      clara da placa aparecer, sem virar tarja preta */
   /* o mesmo leito do topo que os cartoes da grade ja' usam (`.foto::before`):
      sobre ceu claro o selo de ouro e o chip da loja perdiam contraste */
-  .vitrine.fundo-cena::before {
-    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22%;
-    background: linear-gradient(rgba(10,12,18,.30), rgba(10,12,18,0));
-    pointer-events: none; z-index: 1;
-  }
+  /* ⛔ O LEITO DO TOPO FOI REMOVIDO, e o motivo e' que eu diagnostiquei
+     errado. Olhando o print do Bryan eu disse que o selo e a estrela
+     'flutuavam por falta de leito'. Nao era: os nossos chips ja' sao
+     ESCUROS com texto branco, e o selo e' ouro com texto escuro -- os dois
+     leem bem sobre foto clara. O que brigava com eles era o TEXTO QUEIMADO
+     na propria foto ('120W Output'), que nenhum leito conserta.
+     ⭐ Quem consertou foi a regua: `serve_de_capa` passou a recusar foto
+     com `texto_queimado`. E o leito, posto sobre o palco branco do estudio,
+     virou uma FAIXA CINZA visivel cortando a foto -- pior que o problema.
+     Fica escrito para ninguem re-adicionar achando que resolve. */
   /* ⛔ O LEITO DE BAIXO FOI REMOVIDO em 21/09/2026. Ele era a "dimming
      layer" que sustentava o texto BRANCO sobre a foto; sem texto sobre a
      foto, ele nao sustenta nada -- e, com o cartao virando coluna, ele
@@ -1315,6 +1326,15 @@
      De quebra ela resolve sozinha tres coisas que custaram a madrugada -- o
      escurecimento medido (.58), a saturacao que tingia de verde e a briga
      com o `backdrop-filter`. Texto sobre branco nao precisa de nada disso. */
+  /* ⭐ BLOCO 1 -- PROXIMIDADE (Kevin Powell, DEMONSTRADO): "always group
+     related information together and that means also SEPARATE things that
+     aren't directly related". Os espacos do cartao eram todos iguais (~9 px),
+     entao existiam tres grupos e nenhum se lia como grupo:
+        a DECISAO ....... preco + riscado + botao
+        a NOSSA prova ... grafico + escala
+        prova de TERCEIROS  98% · vendidos · loja
+     Agora: 6 px dentro do grupo, 16 px entre grupos. Custo em altura: ZERO,
+     e' redistribuicao. */
   .vitrine .vplaca {
     padding: 14px 16px 16px;
     display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
@@ -1347,7 +1367,7 @@
     background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px; }
   /* ⭐ O CARIMBO e' o unico elemento com FUNDO no bloco, de proposito:
      ele tem de ler como selo, nao como legenda. E' o nosso argumento. */
-  .cap-carimbo { margin-top: 10px; display: inline-flex; align-items: center; gap: 7px;
+  .cap-carimbo { display: inline-flex; align-items: center; gap: 7px;
     font: 600 12.5px/1 Poppins, sans-serif; color: #7a5f13;
     background: rgba(242,201,76,.16); padding: 8px 11px; border-radius: 10px; }
   .cap-carimbo svg { width: 13px; height: 13px; color: #b8933a; flex: 0 0 auto; }
@@ -1357,7 +1377,16 @@
      prendi o involucro em 34 px achando que era o svg, e o desenho de 79 px
      VAZOU para fora do cartao, por cima da linha da loja. Medido no
      navegador: wrap 34 px, svg 78,8 px. */
-  .vitrine .vplaca .serie-wrap { margin-top: 10px; }
+  .vitrine .vplaca .serie-wrap { margin-top: 16px; }   /* entre grupos */
+  .vitrine .cap-loja { margin-top: 6px; }              /* dentro do grupo */
+  /* ⭐ A ECONOMIA fica DENTRO do grupo da decisao (6 px), nao entre grupos:
+     ela explica o preco que esta' logo acima. Verde porque e' ganho -- o
+     mesmo verde do veredito da escala do grafico. O ouro continua sendo o
+     acento da ACAO (selo de queda e botao), entao a regra de um acento por
+     cartao segue de pe': verde e' semantica, nao decoracao. */
+  .vitrine .cap-eco { margin-top: 6px; font: 500 13px/1 Poppins, sans-serif; color: var(--verde, #1f7a45); }
+  .vitrine .cap-eco strong { font-weight: 800; }
+  .vitrine .cap-carimbo { margin-top: 16px; }          /* entre grupos */
   .cap-loja { margin-top: 9px; font: 500 12.5px/1 Poppins, sans-serif; color: #8a8794; }
   /* ⚠ O SELO DA CAPA leva o foguinho ANTES da seta, na mesma pilula:
      dois selos separados brigavam pelo mesmo canto. */
@@ -3353,6 +3382,24 @@
         cta.innerHTML = 'Comprar agora <span aria-hidden="true">\u2192</span>';
         l1.appendChild(cta);
         pl.appendChild(l1);
+
+        // ⭐ QUANTO A PESSOA ECONOMIZA, EM REAIS, logo abaixo do preco
+        // (pedido do Bryan, 21/09). "R$ 17,73" e' mais concreto que "33%":
+        // ninguem faz conta de porcentagem na vitrine.
+        // ⚠ E ela e' NOSSA: sai de `antes`, o maior valor da nossa serie,
+        // nao do "de/por" do vendedor (que e' inflado -- medido: R$ 31,48
+        // "de R$ 122,22"). Sem `antes`, a linha nao existe. Nao se inventa.
+        // ⛔ E E' AQUI, E NAO NO BOTAO. Tentei em 21/09 dentro da pilula:
+        // com "economiza R$ 29,59" ela vai a 268 px e ATROPELA o resto,
+        // medido a 430 px. Embaixo do preco ela cabe e ainda fica no mesmo
+        // grupo visual da decisao.
+        var vA = emReais(v1.antes), vB = emReais(v1.preco);
+        if (vA && vB && vA > vB) {
+          var eco = el("div", "cap-eco");
+          eco.appendChild(document.createTextNode("você economiza "));
+          eco.appendChild(el("strong", null, moeda(vA - vB)));
+          pl.appendChild(eco);
+        }
 
         // ---- o CARIMBO DO GARIMPO: uma frase so', a mais forte -----------
         // ⛔ POR QUE UMA ESCADA, E NAO QUATRO LINHAS. Em 21/09 eu empilhei

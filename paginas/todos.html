@@ -1335,6 +1335,25 @@
   }
   /* a coluna da esquerda: nome em cima, sinais embaixo, no ritmo de 8 */
   .vitrine .vtexto { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  /* ⛔ NO TELEFONE O PRECO DESCE PARA A LINHA DELE. MEDIDO no ar, a 380 px:
+     com nome, sinais e preco na MESMA linha, a coluna de texto recebia 100 px
+     dos 244 da placa -- o preco a 30 px pede 96 e nao encolhe (`nowrap`). O
+     nome virava "Suporte telescopico..." cortado e os dois sinais quebravam
+     em duas fileiras: eu tinha acabado de POR os sinais e ja' os estava
+     espremendo.
+
+     Com a quebra, medido no mesmo lugar: nome 212 px (as duas linhas
+     inteiras) e os sinais numa fileira so'. O preco continua o elemento mais
+     pesado da peca -- so' que na propria linha, alinhado a` direita.
+
+     ⚠ ENCOLHER A FONTE DO PRECO foi a outra tentativa, e REPROVOU na
+     medida: 23 px deu 135 px de nome e os sinais continuaram em duas
+     fileiras. Custou 28 px de placa e nao resolveu nada. */
+  @media (max-width: 460px) {
+    .vitrine .vplaca { flex-wrap: wrap; row-gap: 10px; padding: 14px; }
+    .vitrine .vtexto { flex: 1 1 100%; }
+    .vitrine .vpreco { flex: 1 1 100%; text-align: right; align-self: auto; }
+  }
   /* ⚠️ A LINHA DE SINAIS DA GRADE VIVE SOBRE BRANCO; aqui ela vive sobre
      FOTO. Herdar as cores de la' deixaria cinza sobre cena clara, que e'
      o contraste que a auditoria de 18/09 ja' reprovou no cartao. Sobre a

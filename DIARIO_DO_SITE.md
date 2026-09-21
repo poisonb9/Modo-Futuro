@@ -6,6 +6,16 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 21/09/2026 01:36 — `b68193c`
+
+**O quê:** Handoff: rodape para o /clear
+
+**Por quê:** Escrito e commitado ANTES de ser entregue no chat -- a ordem importa: ja' aconteceu de o rodape apontar para um bloco que nao existia no arquivo.
+
+Carimbo no ar: `1925beefc883` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
 ## 21/09/2026 01:25 — `7fd35ee`
 
 **O quê:** Heroi: capturar a classe herdada antes da PRIMEIRA limpeza da vitrine

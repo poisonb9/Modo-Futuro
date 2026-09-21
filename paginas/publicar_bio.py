@@ -842,6 +842,20 @@ def _desde(serie: dict, d: dict) -> str:
     return f"{q[8:10]}/{q[5:7]}" if len(q) == 10 else ""
 
 
+def _inteiro(pid):
+    """O mesmo id como INTEIRO, ou None quando nao for numero.
+
+    ⚠ Existe so' para atravessar a fronteira de tipo entre a serie
+    (chave int, de precos_vistos.jsonl) e o instantaneo (chave str, de
+    precos_agora.json). Devolver None em vez de levantar mantem a guarda
+    falhando FECHADA: id torto continua sem leitura, nao vira leitura falsa.
+    """
+    try:
+        return int(pid)
+    except (TypeError, ValueError):
+        return None
+
+
 def _visto_em(serie: dict, agora: dict, pid) -> str:
     """A data da ULTIMA LEITURA do produto: o maior entre o ultimo ponto da
     serie e a reconferencia horaria (`precos_agora.json`, campo `quando`).
@@ -854,7 +868,16 @@ def _visto_em(serie: dict, agora: dict, pid) -> str:
     existe e diz a verdade: 157 de 160 reconferidos as 23:33.
     """
     pid = str(pid or "")
-    da_serie = serie.get(pid, ("", 0, 0.0, ""))[3] or ""
+    # ⛔ A SERIE E' CHAVEADA POR INTEIRO, o instantaneo por TEXTO.
+    # MEDIDO em 21/09/2026: precos_vistos.jsonl grava "id": 1005007542604477
+    # (int) e precos_agora.json grava "1005007096727922" (str). Com pid
+    # normalizado para TEXTO, serie.get(pid) NUNCA casava, e esta metade da
+    # guarda estava MORTA em producao: o _todos inteiro dependia so' do
+    # instantaneo horario. E' o "amanhecer com 1 produto" descrito acima —
+    # o reparo de 19/09 mascarou o defeito de tipo em vez de corrigi-lo.
+    # Procurar pelos DOIS tipos e' o unico jeito de a serie voltar a contar.
+    da_serie = (serie.get(pid) or serie.get(_inteiro(pid))
+                or ("", 0, 0.0, ""))[3] or ""
     reg = agora.get(pid) if isinstance(agora, dict) else None
     da_hora = (reg.get("quando") or "")[:10] if isinstance(reg, dict) else ""
     return max(da_serie, da_hora)

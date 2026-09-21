@@ -2215,7 +2215,32 @@ def sitemap_xml(caminhos: list[str]) -> str:
 # ⭐ www -> raiz (decisao do Bryan, 17/09). Arquivo `_redirects` do Pages.
 # ⚠️ O pages.dev NAO redireciona ainda: e' nele que `conferir_no_ar` le' a
 # marca, e o dominio so' passa a existir quando a zona ativar.
-REDIRECTS = "https://www.achadinhototal.com.br/* " + DOMINIO + "/:splat 301" + chr(10)
+# ⛔ E `/todos` -> RAIZ, SO' NO SITE MAE (21/09/2026). MEDIDO no ar:
+#
+#   achadinhototal.com.br/motor.js        200  application/javascript  226 KB
+#   achadinhototal.com.br/todos/motor.js  200  text/html               114 KB
+#
+# Nas bios o catalogo mora em `/todos/` e os externos vao junto, entao la'
+# o motor existe. No site mae a RAIZ e' o catalogo e os externos ficam na
+# raiz -- a pasta `todos/` nunca e' criada. Quem abria `/todos/` recebia a
+# pagina raiz (o Pages devolve a raiz para caminho inexistente), e o
+# `<script src="motor.js?v=...">` RELATIVO virava `/todos/motor.js`, que
+# devolve HTML. O navegador recusa por MIME e a pagina fica SEM JS NENHUM:
+# sem lupa, sem filtro, sem carregar link.
+#
+# ⚠ E O SINTOMA ENGANA DE DOIS JEITOS. Primeiro, tudo responde 200.
+# Segundo, `/todos` SEM barra funcionava (o relativo resolve para
+# `/motor.js`) -- so' a forma COM barra quebrava. Por isso a conferencia do
+# publicador passava verde: ela olha a raiz e o `/todos` sem barra.
+#
+# ⭐ REDIRECIONAR, E NAO ESPELHAR (decisao do Bryan, 21/09). Espelhar
+# criaria uma segunda copia identica do mesmo HTML no mesmo dominio --
+# conteudo duplicado, com o `sitemap.xml` listando so' a raiz, e mais um
+# motor de 235 KB por deploy. `/todos/` nao precisa ser pagina DIFERENTE da
+# raiz: no site mae a raiz JA' E' o catalogo.
+REDIRECTS = ("https://www.achadinhototal.com.br/* " + DOMINIO + "/:splat 301"
+             + chr(10) + "/todos/* / 301" + chr(10)
+             + "/todos / 301" + chr(10))
 
 # ⭐ O MOTOR FICA NO CACHE DO TELEFONE (20/09/2026). Sem isto, tirar o
 # script pra fora do HTML nao ganharia nada no RECARREGAR — que e' o gesto

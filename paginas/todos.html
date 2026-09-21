@@ -1160,7 +1160,16 @@
      cartao agora SOMA foto + bloco de texto, entao foto quadrada deixava
      o cartao alto demais. MEDIDO a 430 px: em ESTUDIO o quadrado dava
      495 px de cartao e o texto caia atras da barra de navegacao. */
-  .vitrine .vfoto { aspect-ratio: 4 / 3; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; box-sizing: border-box; }
+  /* ⚠ 3:2 DESDE O BLOCO 3, e o motivo e' aritmetico. MEDIDO a 430 px:
+       foto 4:3 ...... 296 px      bloco de texto ... 179 px   = 475
+       foto 3:2 ...... 263 px      bloco de texto ... 179 px   = 442
+     O grafico ganhou corpo (14 -> 34 px) e o cartao passou de 442 para 475;
+     a ultima linha caiu atras da barra de navegacao. A altura veio do
+     grafico, entao ou eu devolvia o grafico ao tamanho de risco ou tirava
+     da foto. Tirei da foto: o produto encolhe 11% e continua inteiro; o
+     grafico a 14 px nao era grafico. ⭐ Era 1:1 ate' 21/09, depois 4:3
+     quando o texto saiu de dentro da imagem, e agora 3:2. */
+  .vitrine .vfoto { aspect-ratio: 3 / 2; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; box-sizing: border-box; }
 
   /* =========== O HEROI PREMIUM (21/09/2026) ===========
      Bryan: "nao esta espetacular, cortando o produto, o produto meio
@@ -1397,7 +1406,21 @@
      do bloco diz "aperte". A regra de um acento por cartao continua. */
   .cap-cta { margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
     white-space: nowrap; font: 700 var(--cap-fs-2)/1 Poppins, sans-serif; color: #17161d;
-    background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px; }
+    background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px;
+    /* ⭐ O BOTAO RESPONDE AO TOQUE. O cartao inteiro ja' tinha
+       `:active { scale(.985) }`, mas o BOTAO -- a unica coisa que a pessoa
+       mira -- nao reagia. O acervo demonstra o padrao com
+       `transition: transform 250ms ease`; aqui 120 ms, porque toque pede
+       resposta imediata e 250 ms num aperto parece atraso.
+       ⚠ `transform` e `filter` so': os dois rodam no compositor e nao
+       forcam layout. Animar `padding` ou `background-color` aqui faria o
+       cartao inteiro recalcular a cada toque. */
+    transition: transform 120ms cubic-bezier(.2,.8,.2,1), filter 120ms linear; }
+  .vitrine:active .cap-cta { transform: scale(.94); filter: brightness(.94); }
+  @media (prefers-reduced-motion: reduce) {
+    .cap-cta { transition: none; }
+    .vitrine:active .cap-cta { transform: none; }
+  }
   /* ⭐ O CARIMBO e' o unico elemento com FUNDO no bloco, de proposito:
      ele tem de ler como selo, nao como legenda. E' o nosso argumento. */
   .cap-carimbo { display: inline-flex; align-items: center; gap: 7px;
@@ -1725,7 +1748,19 @@
     margin-left: -2px;
   }
   .serie-wrap.baixou .agora { background: var(--verde); }
-  .serie { display: block; width: 100%; height: 14px; }
+  .serie { display: block; width: 100%; height: 14px; }
+  /* ⭐ A AREA E' MUITO FRACA DE PROPOSITO: ela da' CORPO, nao informacao.
+     A 10% ela lê como sombra da curva; mais que isso e ela compete com a
+     linha, que e' quem carrega o dado. */
+  .serie .area { fill: var(--fraco); opacity: .10; stroke: none; }
+  .serie.baixou .area { fill: var(--verde); opacity: .13; }
+  /* ⭐ NA CAPA O GRAFICO TEM CORPO: 34 px no lugar de 14. MEDIDO no ar --
+     a 14 px, uma linha de 1,4 px atravessando 370 px de cartao nao lia como
+     grafico, lia como um risco solto. Na GRADE ele continua com 14: la' ele
+     e' nota de rodape ao lado de outras seis coisas, aqui ele e' a PROVA do
+     carimbo. Mesma peca, dois pesos, porque sao dois papeis. */
+  .vitrine .vplaca .serie { height: 34px; }
+  .vitrine .vplaca .serie .linha { stroke-width: 2; }
   .serie .linha {
     fill: none; stroke: var(--fraco); stroke-width: 1.4;
     stroke-linejoin: round; stroke-linecap: round; opacity: .75;
@@ -2237,11 +2272,7 @@
         d += " C" + c1x.toFixed(1) + " " + c1y.toFixed(1) + " " + c2x.toFixed(1) +
              " " + c2y.toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1);
       }
-      var area = document.createElementNS(NS, "path");
-      area.setAttribute("d", d + " L" + pts[pts.length - 1][0].toFixed(1) + " " + A +
-                             " L" + pts[0][0].toFixed(1) + " " + A + " Z");
-      area.setAttribute("class", "area");
-      svg.appendChild(area);
+      // (a area saiu daqui: ver o bloco logo apos o `if`)
       // ⚠️ SEM bolinhas por dia: o SVG e' esticado sem proporcao e o circulo
       // vira elipse disforme (Bryan viu, 16/09). A cadencia dos dias ja'
       // aparece na propria curva — dia que cresce mais inclina mais.
@@ -2250,6 +2281,18 @@
         return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1);
       }).join(" ");
     }
+    // ⭐ A AREA VALE PARA TODO GRAFICO, e nao so' para o multometro.
+    // Ela existia desde sempre, presa dentro do `if (p.suave)` -- ou seja,
+    // so' o multometro a desenhava. No cartao da capa a linha de 1,4 px
+    // sozinha lia como um RISCO atravessando o cartao, nao como um dado.
+    // ⚠ O `d` usado aqui e' o MESMO da linha, nos dois ramos (curva suave
+    // ou reta): a area fecha a curva ate' a base. Ela nao acrescenta
+    // informacao nenhuma -- da' corpo ao que ja' esta' desenhado.
+    var area = document.createElementNS(NS, "path");
+    area.setAttribute("d", d + " L" + pts[pts.length - 1][0].toFixed(1) + " " + A +
+                           " L" + pts[0][0].toFixed(1) + " " + A + " Z");
+    area.setAttribute("class", "area");
+    svg.appendChild(area);
     var linha = document.createElementNS(NS, "path");
     linha.setAttribute("d", d);
     linha.setAttribute("class", "linha");

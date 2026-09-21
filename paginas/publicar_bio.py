@@ -2372,6 +2372,7 @@ def externalizar_motor(html: str) -> tuple[str, str, str]:
 def _carimbar_js(corpo: str) -> tuple[str, str]:
     """O js ja' sai carimbado de `externalizar_motor`; aqui so' se le a marca."""
     import re
+    sem_bytes_de_controle(corpo, "motor.js")
     m = re.match(r"/\*carimbo:([0-9a-f]{12})\*/", corpo)
     if not m:
         raise SystemExit("motor.js sem carimbo — nao publico o que nao sei conferir")
@@ -2669,6 +2670,41 @@ def _por_icone(destino) -> None:
             print(f"  [!] favicon.ico nao gerado ({type(e).__name__}) — segue sem")
 
 
+def sem_bytes_de_controle(corpo: str, nome: str) -> str:
+    """Estoura se `corpo` tem byte de controle. Devolve `corpo` intacto.
+
+    ⛔ POR QUE ISTO EXISTE, e nao e' zelo. O byte 0x08 (o `\b` do teclado
+    antigo) apareceu DUAS vezes neste projeto, e de uma delas ele saiu por
+    commit e por suite verde: em `externalizar_motor`, dentro do
+    `(?![^>]*src=)`, um `|` virou 0x08 e a lookahead deixou de casar --
+    a funcao parou de pular `<script src=...>` e ninguem viu.
+
+    ⚠️ A ARMADILHA E' O TERMINAL, e ela e' cruel: `sed -n '2353p'` imprime
+    a linha e o TERMINAL EXECUTA o backspace, apagando na TELA o caractere
+    anterior. A linha parece consertada e nao esta'. Nenhuma leitura de
+    texto prova nada aqui -- so' byte. Por isso a conta e' sobre
+    `corpo.encode('utf-8')`, e nao sobre o str.
+
+    ⭐ E O LUGAR E' O CARIMBADOR porque ele e' o funil: todo byte que vai
+    pro ar (html, motor.js, json externo) passa por um dos tres. Guarda em
+    lugar mais cedo deixa porta; aqui nao ha' porta.
+    """
+    b = corpo.encode("utf-8")
+    # ⚠️ TAB, LF e CR sao os unicos de controle legitimos num arquivo de texto.
+    ruins = sorted({c for c in b if c < 32 and c not in (9, 10, 13)}
+                   | ({127} & set(b)))
+    if ruins:
+        onde = []
+        for c in ruins:
+            i = b.index(bytes([c]))
+            linha = b[:i].count(b"\n") + 1
+            onde.append("0x%02x na linha %d" % (c, linha))
+        raise SystemExit(
+            "byte de controle em " + nome + ": " + "; ".join(onde) +
+            " -- nao publico. NAO confira por sed/cat: o terminal executa o"
+            " byte e a linha mente. Leia em bytes.")
+    return corpo
+
 def _carimbar(html: str) -> tuple[str, str]:
     """Poe um carimbo do conteudo no HTML e devolve (html, carimbo).
 
@@ -2676,6 +2712,7 @@ def _carimbar(html: str) -> tuple[str, str]:
     byte servido e' o byte que este deploy montou.
     """
     import hashlib
+    sem_bytes_de_controle(html, "html")
     sha = hashlib.sha256(html.encode("utf-8")).hexdigest()[:12]
     marca = 'name="v" content="' + sha + '"'
     tag = "<meta " + marca + ">\n"
@@ -2880,6 +2917,7 @@ def conferir_no_ar(marca: str, marca_parceiros: str = "",
 def _carimbar_json(corpo: str) -> tuple[str, str]:
     """Poe `"carimbo": "<sha12>"` no JSON e devolve (json, marca)."""
     import hashlib
+    sem_bytes_de_controle(corpo, "json externo")
     sha = hashlib.sha256(corpo.encode("utf-8")).hexdigest()[:12]
     marca = '"carimbo": "' + sha + '"'
     if not corpo.startswith("{"):

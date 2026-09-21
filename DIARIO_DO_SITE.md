@@ -6,6 +6,16 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 21/09/2026 21:59 — `30adbc3`
+
+**O quê:** Awin: as 23 recusas nao sao sobre o site -- e o painel nao diz quais serao
+
+**Por quê:** A causa, dita pelo Bryan em 21/09: os anunciantes que recusaram NAO TRABALHAM COM PESSOA FISICA.
+
+Carimbo no ar: `9074e036af5a` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
 ## 21/09/2026 21:52 — `4b314c1`
 
 **O quê:** O piso da foto vai a 9 (MEDIDO em 138), e o 0x08 que estava no HEAD

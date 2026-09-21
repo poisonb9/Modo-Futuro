@@ -2758,7 +2758,7 @@
   function classificarFotoHeroi(a, img) {
     if (a.dataset.fundoMedido) { return; }
     a.dataset.fundoMedido = "1";
-    var L = 96, cai = null;
+    var L = 96, cai = null, tentativas = 0;
     function medir() {
       var cv = document.createElement("canvas"); cv.width = cv.height = L;
       var g = cv.getContext("2d", { willReadFrequently: true });
@@ -2784,11 +2784,23 @@
       }
       var frac = borda ? brancos / borda : 0;
       var mediaBorda = somaBorda / Math.max(1, borda * 3);
+      /* ⚠⚠ DESENHO VAZIO NAO E' MEDIDA. `complete` pode ser true com a
+         foto ainda NAO DECODIFICADA: o `drawImage` nao pinta nada, sai tudo
+         transparente, e como transparente conta como fundo isso vira borda
+         100% branca com caixa VAZIA — que cai no `return` de baixo, sem
+         classe e sem ninguem ficar vermelho. Foi exatamente isso no ar em
+         21/09, e no teste local nunca aconteceu porque la' a foto vinha do
+         disco, ja' decodificada. A caixa vazia agora e' "ainda nao da' para
+         medir", e tenta de novo. */
+      if (x1 < 0) {
+        if (tentativas++ < 20) { setTimeout(medir, 120); }
+        return;
+      }
       if (frac <= 0.50) { a.classList.add("fundo-cena"); return; }
       /* ⚠️ A FAIXA DO MEIO (0,50 a 0,90) FICA SEM CLASSE de proposito: e'
          foto que nao e' nem cena nem estudio — fundo degrade, meia-moldura,
          colagem com tarja. Chutar ali estraga mais do que nao fazer nada. */
-      if (frac < 0.90 || x1 < 0) { return; }
+      if (frac < 0.90) { return; }
       a.classList.add("fundo-estudio");
       if (mediaBorda > 250) { a.classList.add("puro"); }
       cai = { x0: x0 / L, x1: (x1 + 1) / L, y1: (y1 + 1) / L };
@@ -2847,8 +2859,14 @@
       chao.style.setProperty("--cy", (oy + cai.y1 * dh).toFixed(1) + "px");
       chao.style.setProperty("--cw", Math.max(24, larg * 0.98).toFixed(1) + "px");
     }
-    if (img.complete && img.naturalWidth) { medir(); }
-    else { img.addEventListener("load", medir, { once: true }); }
+    /* `decode()` resolve quando a foto esta' PRONTA PARA PINTAR, que e' a
+       condicao que `complete` nao garante. Onde nao existir, o `x1 < 0`
+       acima ainda segura. */
+    function quandoDer() {
+      if (img.decode) { img.decode().then(medir, medir); } else { medir(); }
+    }
+    if (img.complete && img.naturalWidth) { quandoDer(); }
+    else { img.addEventListener("load", quandoDer, { once: true }); }
   }
 
   /* ⚠️ A PRIMEIRA TELA VEM PRONTA DO SERVIDOR (SSR, ver `ssr_primeira_tela`

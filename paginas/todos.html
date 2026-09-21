@@ -1318,7 +1318,7 @@
   }
   .vitrine .vselo {
     position: absolute; top: 12px; left: 12px; background: var(--ouro-claro); color: #17161d;
-    font: 700 12px/1 var(--mono); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(200,144,26,.35);
+    font: 700 var(--cap-fs-3)/1 var(--mono); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(200,144,26,.35);
   }
   /* o chip da loja agora mora DENTRO da placa, na frente do nome */
   .vitrine .vloja { display: inline-flex; padding: 4px 8px; border-radius: 999px; font: 500 10px/1 Poppins, sans-serif; color: var(--tinta); }
@@ -1355,20 +1355,53 @@
   .cap-linha { display: flex; align-items: baseline; gap: 8px; }
   /* ⚠ `i` no lugar do "R$": menor e mais leve, sem separar do numero
      (o Bryan viu "R$" numa linha e "128,99" na outra em 18/09). */
-  .cap-preco { font: 800 30px/1.1 Poppins, sans-serif; color: #16151c;
+  /* ⭐ BLOCO 2 -- A ESCALA. O cartao tinha OITO tamanhos escolhidos a dedo:
+     30, 14, 13, 13, 12,5, 12,5, 12 e 12 px. Cinco distintos, nenhum com
+     razao para o outro -- e' o que faz um cartao parecer montado em vez de
+     desenhado. O acervo do Kevin Powell demonstra o oposto: variaveis em
+     `rem` e escala fluida com `clamp()`.
+
+     TRES DEGRAUS, razao 1,2 (terca menor), ancorados em 12,5 px:
+
+       --cap-fs-3   12,5 px   o que so' confirma (carimbo, loja, chips)
+       --cap-fs-2     15 px   o que apoia (riscado, botao, economia)
+       --cap-fs-1     31 px   o que decide (o preco) -- cinco degraus acima
+
+     ⚠ E O PRECO É FLUIDO, nao fixo. Ele divide a linha com o botao, que
+     nao encolhe (`nowrap`). A 375 px o par preco+botao ja' estava no limite;
+     `clamp` faz o preco ceder até 26 px no telefone estreito e voltar a 31
+     quando há espaco. Foi assim que a laje de 21/09 comecou -- um numero
+     fixo que nao cabia. */
+  .vitrine {
+    /* ⭐ A CONTA DO `clamp`, ancorada nas DUAS larguras que existem de
+       verdade: 26 px a 375 (iPhone estreito) e 31 px a 430 (o do Bryan).
+         inclinacao = (31-26)/(430-375) = 0,0909 px/px = 9,1vw
+         base       = 26 - 0,0909x375  = -8,1 px = -0,5rem
+       A primeira tentativa (1.05rem + 2.4vw) so' chegava a 31 px num
+       viewport de ~470 -- MEDIDO: a 430 dava 27,1. Rasa demais. */
+    --cap-fs-1: clamp(1.625rem, -0.5rem + 9.1vw, 1.9375rem);   /* 26 -> 31 */
+    --cap-fs-2: 0.9375rem;                                      /* 15 */
+    --cap-fs-3: 0.78125rem;                                     /* 12,5 */
+  }
+  .cap-preco { font: 800 var(--cap-fs-1)/1.1 Poppins, sans-serif; color: #16151c;
     letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .cap-preco i { font-style: normal; font-size: 17px; font-weight: 700; margin-right: 1px; }
-  .cap-linha s { font: 500 14px/1 Poppins, sans-serif; color: #9a97a6; }
+  .cap-preco i { font-style: normal; font-size: .56em; font-weight: 700; margin-right: 1px; }
+  /* ⚠ `nowrap` NO RISCADO: a 375 px, com o preco cedendo para 26 px, o
+     "R$ 27,54" quebrou em duas linhas -- "R$" em cima e "27,54" embaixo.
+     E' o mesmo defeito que o Bryan pegou em 18/09 e que ja' esta' escrito
+     no cartao da grade: R$ e o numero NUNCA se separam. A escala nova
+     reintroduziu por outro caminho, porque agora quem encolhe e' o vizinho. */
+  .cap-linha s { font: 500 var(--cap-fs-2)/1 Poppins, sans-serif; color: #9a97a6; white-space: nowrap; }
   /* ⭐ O ACENTO VAI PARA A ACAO. O ouro do selo de queda e o ouro do
      botao sao o MESMO acento usado duas vezes -- o da foto diz "caiu", o
      do bloco diz "aperte". A regra de um acento por cartao continua. */
   .cap-cta { margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
-    white-space: nowrap; font: 700 13px/1 Poppins, sans-serif; color: #17161d;
+    white-space: nowrap; font: 700 var(--cap-fs-2)/1 Poppins, sans-serif; color: #17161d;
     background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px; }
   /* ⭐ O CARIMBO e' o unico elemento com FUNDO no bloco, de proposito:
      ele tem de ler como selo, nao como legenda. E' o nosso argumento. */
   .cap-carimbo { display: inline-flex; align-items: center; gap: 7px;
-    font: 600 12.5px/1 Poppins, sans-serif; color: #7a5f13;
+    font: 600 var(--cap-fs-3)/1 Poppins, sans-serif; color: #7a5f13;
     background: rgba(242,201,76,.16); padding: 8px 11px; border-radius: 10px; }
   .cap-carimbo svg { width: 13px; height: 13px; color: #b8933a; flex: 0 0 auto; }
   /* ⛔ SEM ALTURA FIXA AQUI. `grafico()` NAO devolve um <svg>: devolve
@@ -1384,10 +1417,10 @@
      mesmo verde do veredito da escala do grafico. O ouro continua sendo o
      acento da ACAO (selo de queda e botao), entao a regra de um acento por
      cartao segue de pe': verde e' semantica, nao decoracao. */
-  .vitrine .cap-eco { margin-top: 6px; font: 500 13px/1 Poppins, sans-serif; color: var(--verde, #1f7a45); }
+  .vitrine .cap-eco { margin-top: 6px; font: 500 var(--cap-fs-2)/1 Poppins, sans-serif; color: var(--verde, #1f7a45); }
   .vitrine .cap-eco strong { font-weight: 800; }
   .vitrine .cap-carimbo { margin-top: 16px; }          /* entre grupos */
-  .cap-loja { margin-top: 9px; font: 500 12.5px/1 Poppins, sans-serif; color: #8a8794; }
+  .cap-loja { font: 500 var(--cap-fs-3)/1 Poppins, sans-serif; color: #8a8794; }
   /* ⚠ O SELO DA CAPA leva o foguinho ANTES da seta, na mesma pilula:
      dois selos separados brigavam pelo mesmo canto. */
   .vitrine .vselo { display: inline-flex; align-items: center; gap: 5px; }
@@ -1428,7 +1461,7 @@
      ficava so' para constar. */
   .vitrine .vtopo > span:not(.vselo) {
     display: inline-flex; align-items: center; gap: 4px;
-    font: 600 12px/1 Poppins, sans-serif; color: rgba(255,255,255,.95);
+    font: 600 var(--cap-fs-3)/1 Poppins, sans-serif; color: rgba(255,255,255,.95);
     background-color: rgba(12,14,20,.55); padding: 7px 11px; border-radius: 999px;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   }

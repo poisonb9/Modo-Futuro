@@ -77,15 +77,26 @@ finally:
     shutil.rmtree(tmp, ignore_errors=True)
 
 print()
-print("4. A PAGINA: o bloco e' o radar, com linha, e some quando zero")
+print("4. A PAGINA: o multometro e' uma cela do mostrador, e some quando zero")
+# ⚠ ONDE ELE MORA MUDOU EM 18/09/2026 (625b7d1, mock v5 aprovado pelo Bryan):
+# `montarEconomia` virou casca vazia e o numero do radar passou a ser uma CELA
+# do mostrador (`montarProva`), sem o grafico. Este teste ficou 3 dias vermelho
+# apontando para a funcao esvaziada -- guarda que mede o lugar errado nao
+# protege nada e ensina a ignorar vermelho. Agora ele mede o mostrador.
 HTML = (RAIZ / "paginas" / "todos.html").read_text(encoding="utf-8")
-import re
-f = re.search(r"function montarEconomia\(\) \{(.*?)" + chr(10) + r"  \}", HTML, re.S)
-corpo = f.group(1) if f else ""
-checar("(ECONOMIA || {}).radar" in corpo and "grafico({ serie: r.serie" in corpo, "le' ECONOMIA.radar e desenha a serie dele")
-checar("if (!(r.total > 0)) { return; }" in corpo, "R$ 0 nao aparece")
-checar("de garimpo já entregue" in corpo and "queda de preço encontrada pelo radar" in corpo,
+i = HTML.find("function montarProva")
+corpo = HTML[i:i + 6000] if i >= 0 else ""
+checar("(ECONOMIA || {}).radar" in corpo, "o mostrador le' ECONOMIA.radar")
+checar("if (r.total > 0) {" in corpo, "R$ 0 nao aparece")
+checar('"queda medida"' in corpo
+       and "queda encontrada pelo radar em " in corpo
+       and "contra o pre\u00e7o que eu vi" in corpo,
        "rotulo curto na tela, e a definicao honesta no title")
+# ⛔ CASO NEGATIVO: a casca vazia tem de CONTINUAR vazia. Se alguem
+# ressuscitar `montarEconomia` sem apagar a cela, o numero sai DUAS vezes.
+j = HTML.find("function montarEconomia")
+checar(j >= 0 and "ECONOMIA" not in HTML[j:j + 200].split("}")[0],
+       "montarEconomia segue casca vazia (sem numero em dobro)")
 
 print()
 print("tudo verde" if not falhas else f"{len(falhas)} FALHA(S)")

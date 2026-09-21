@@ -1,4 +1,14 @@
 {
+"https://ae-pic-a1.aliexpress-media.com/kf/A5b7cc882902e48f7a522a09cf63f5ff7l.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 10,
+"porque": "Imagem profissional, fundo branco, produto nítido e sem poluição visual.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/Aab95df905221456c98e7291c8e6a58b0K.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -18,6 +28,60 @@
 "produto_inteiro": true,
 "quadros": 1,
 "texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/H6612bdb62367476a996230101ab938e2H.jpg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3.5-flash",
+"nota": 4,
+"porque": "Colagem com três quadros explicativos não serve para foto de capa.",
+"produto_inteiro": false,
+"quadros": 3,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S019eda013cbd49789cc12ab935965a46p.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.8-flash",
+"nota": 10,
+"porque": "Fundo branco limpo e produto bem destacado em dois angulos.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S0212df1edabc4080bfeea89a8aeb92a01.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Foto contextualizada, sem texto, com produto em destaque e boa iluminação.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S0722adb31b7b484e9a38537abc85d8e7u.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3-flash-preview",
+"nota": 3,
+"porque": "Colagem com quatro cenas e texto polui a imagem da vitrine.",
+"produto_inteiro": false,
+"quadros": 4,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S0b1bf5c6d76741c0bf646258bf86af81v.jpg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3.8-flash",
+"nota": 6,
+"porque": "Contem detalhe circular em recorte, caracterizando colagem.",
+"produto_inteiro": true,
+"quadros": 2,
+"rodadas": 1,
+"texto_queimado": false
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S0ba9dedfb7d44fbbaf853b8ecc27580fD.jpg": {
 "colagem": true,
@@ -39,6 +103,26 @@
 "quadros": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S12463028b1e8497b855f07cd927a97767.png": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Imagem de alta qualidade, produto bem destacado e sem poluição.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S16e355a3ea934222a861a7ab92663149g.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.5-flash",
+"nota": 8,
+"porque": "Fundo branco limpo, mostra produto, variações e acessórios com clareza.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S1b17be955f3a4e8aa960bfa3fd022d3cy.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -49,6 +133,17 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S1b3835303b654bb59eb990112c8fdd40C.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3-flash-preview",
+"nota": 7,
+"porque": "Produto bem visível, mas fundo poluído e texto superior atrapalham.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S248ca760ad904833978fc88860c4f033A.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -57,6 +152,27 @@
 "porque": "Produto completo e fundo limpo, porem contem texto e graficos sobrepostos.",
 "produto_inteiro": true,
 "quadros": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S282eeabfaaf844c1bfa4af5d7f37cad7t.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 10,
+"porque": "Imagem nítida, produto em destaque, fundo contextualizado e sem poluição visual.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S2861b85bdded4b60ad35966dd2ac4973i.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 2,
+"porque": "Colagem de 4 quadros com texto, inadequada para foto principal.",
+"produto_inteiro": true,
+"quadros": 4,
 "texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S29a1a89628f6408c958002d05c08005aa.jpg": {
@@ -89,6 +205,16 @@
 "quadros": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S3c53b404e11f4b8f805e8f8679d2ca94N.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 7,
+"porque": "Produto bem visivel e bonito, mas contem texto e logo sobrepostos.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S403f6590e3be4e0295b5b52d68da3295Y.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -97,6 +223,17 @@
 "porque": "Imagem limpa, otima iluminacao e mostra variacoes do produto.",
 "produto_inteiro": true,
 "quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S4e6d2ab9526946b2b53a79614e4e5849c.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 9,
+"porque": "Imagem clara, demonstra bem o uso do produto em ambiente limpo.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
 "texto_queimado": false
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S4f76a25cb5c540a08cc8af33addebcf7E.png": {
@@ -119,6 +256,17 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S5d136c28c6054f2ca266ed415a772cf2y.jpg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3-flash-preview",
+"nota": 5,
+"porque": "Texto excessivo e elementos gráficos poluem a imagem de capa.",
+"produto_inteiro": true,
+"quadros": 2,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S607f0a00b00e45de9cea526535a62acaW.jpg": {
 "colagem": false,
 "fundo_limpo": false,
@@ -137,6 +285,26 @@
 "porque": "Foto contextualizada excelente, sem poluição visual e mostra bem o produto.",
 "produto_inteiro": true,
 "quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S65386707118c49a2820d2cadda94d4b77.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Produto completo, fundo branco limpo e otima qualidade visual.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S79cee145d05b425788b16fb600117d273.jpg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 9,
+"porque": "Imagem limpa, produto inteiro e mostra variações de cores claramente.",
+"produto_inteiro": true,
+"quadros": 2,
 "texto_queimado": false
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/S7bb437da6d5345bf9144831eb59858cd7.jpg": {
@@ -159,6 +327,37 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/S8390c13291024f878c715b9b26ff09a5a.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Foto perfeita com fundo branco, produto inteiro e sem textos sobrepostos.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S872742dba9ed42378a7ee6105e707105F.jpg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 4,
+"porque": "Possui texto de medidas, setas e duas visões em colagem.",
+"produto_inteiro": true,
+"quadros": 2,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S8bf103354a3a4abe9cd8c7c79d77059dI.jpeg": {
+"colagem": true,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 6,
+"porque": "Colagem e textos informativos poluem a imagem principal da vitrine.",
+"produto_inteiro": true,
+"quadros": 5,
+"rodadas": 1,
+"texto_queimado": true
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/S8c7c37a499cf4189ba47553b4af85a2an.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -178,6 +377,49 @@
 "produto_inteiro": true,
 "quadros": 1,
 "texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S91610f67faf6466f9ea57abe0ea53e7bD.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.8-flash",
+"nota": 9,
+"porque": "Demonstração clara do produto em uso, boa iluminação e sem poluição.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S91e3070f2aa24638a5105994255f0badY.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 8,
+"porque": "Fundo limpo e produto inteiro, mas imagem um pouco escura.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/S9724edb0783849d08c5fa29611723edaS.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 10,
+"porque": "Imagem limpa, fundo branco, produto bem visível e sem textos editados.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sabca99b1e9404d90be92cc03a5c502e2s.jpeg": {
+"colagem": true,
+"fundo_limpo": false,
+"modelo": "gemini-3.5-flash",
+"nota": 5,
+"porque": "Possui colagem, textos explicativos e muitos elementos gráficos sobrepostos.",
+"produto_inteiro": true,
+"quadros": 3,
+"texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/Sae64bd601118454ebbe42dc21d5e50b8Y.jpg": {
 "colagem": false,
@@ -199,6 +441,16 @@
 "quadros": 1,
 "texto_queimado": false
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/Sbdbc2a01d5c046c88ef55c6ccdaba6ceX.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 8,
+"porque": "Foto atraente com produto completo, bom uso e fundo contextual limpo.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/Sc14985377fa3443d94a54a26f353815ev.jpg": {
 "colagem": false,
 "fundo_limpo": true,
@@ -208,6 +460,17 @@
 "produto_inteiro": true,
 "quadros": 1,
 "texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sc1b4cc07338d4eec9ac53d6a4463aa43V.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 9,
+"porque": "Foto limpa, bem iluminada, destaca o produto em contexto real.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/Sc32fdfe302d64e9ea4a12169a7cfdefdi.jpg": {
 "colagem": false,
@@ -229,6 +492,16 @@
 "quadros": 1,
 "texto_queimado": true
 },
+"https://ae-pic-a1.aliexpress-media.com/kf/Sd28366c41f514ec48c045f1c9125fa680.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Foto excelente, produto destacado, completo e com fundo branco limpo.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
 "https://ae-pic-a1.aliexpress-media.com/kf/Sd3119048f5254fa2ad5850cb5de69d4fa.jpg": {
 "colagem": true,
 "fundo_limpo": false,
@@ -238,6 +511,37 @@
 "produto_inteiro": true,
 "quadros": 9,
 "texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sd99faa26f7464ba788342fcde8f456ded.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3-flash-preview",
+"nota": 9,
+"porque": "Imagem limpa, mostra o produto em uso com clareza e qualidade.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Se029fefc1d8a4048aa9f1d3ea217e319Y.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 9,
+"porque": "Ótima imagem com produto completo, acessórios e fundo limpo sem distrações.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Se30e55990aa44d9e86476063ce529d498.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 3,
+"porque": "Excesso de texto, poluição visual e muitas variações na imagem.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": true
 },
 "https://ae-pic-a1.aliexpress-media.com/kf/Se3c91ab1866c4f00975d2126e3b1cb46v.jpeg": {
 "colagem": false,
@@ -258,5 +562,57 @@
 "produto_inteiro": true,
 "quadros": 2,
 "texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sebc17b05129847fa9e834016025b37dfN.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3-flash-preview",
+"nota": 7,
+"porque": "Mostra bem o produto, mas o texto e grafismos poluem a vitrine.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": true
+},
+"https://ae-pic-a1.aliexpress-media.com/kf/Sf611f9cae39345a4932913010e6dd470R.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.8-flash",
+"nota": 10,
+"porque": "Fundo branco limpo, produto em destaque e excelente qualidade.",
+"produto_inteiro": true,
+"quadros": 1,
+"rodadas": 1,
+"texto_queimado": false
+},
+"https://http2.mlstatic.com/D_NQ_NP_859301-MLA100106250801_122025-F.jpg": {
+"colagem": false,
+"fundo_limpo": false,
+"modelo": "gemini-3.6-flash",
+"nota": 5,
+"porque": "Fundo poluído com elementos gráficos e imagem duplicada do produto.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://http2.mlstatic.com/D_NQ_NP_875203-MLA99937159991_112025-F.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Fundo branco, produto inteiro em destaque, sem textos promocionais sobrepostos.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
+},
+"https://http2.mlstatic.com/D_NQ_NP_938706-MLA99840898881_112025-F.jpg": {
+"colagem": false,
+"fundo_limpo": true,
+"modelo": "gemini-3.6-flash",
+"nota": 10,
+"porque": "Foto perfeita com produto inteiro e fundo branco limpo.",
+"produto_inteiro": true,
+"quadros": 1,
+"texto_queimado": false
 }
 }

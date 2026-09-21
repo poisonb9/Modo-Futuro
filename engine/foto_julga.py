@@ -69,7 +69,32 @@ MEDIDAS = RAIZ / "estado" / "fotos_julgadas.json"
 # O 3.5 tambem responde e deu o MESMO veredito na foto da colagem; fica como
 # reserva porque em 21/09 ele atendeu de primeira enquanto o 3.6 pediu cinco
 # chaves. Modelo de reserva nao e' luxo aqui: o 503 e' frequente.
-MODELOS = ("gemini-3.6-flash", "gemini-3.5-flash")
+MODELOS = ("gemini-3.6-flash", "gemini-3.8-flash",
+           "gemini-3-flash-preview", "gemini-3.5-flash")
+
+# ⭐ QUATRO PORTAS, E NAO UMA. MEDIDO em 21/09/2026 com o lote rodando: o
+# gargalo deixou de ser cota (as chaves queimadas pararam em 9 de 28) e
+# passou a ser `503 high demand` do modelo. Com uma porta so', cada foto
+# gastava minutos batendo na mesma que estava cheia.
+#
+# ⚠ E AS QUATRO SAO CONFIAVEIS PORQUE FORAM TRIANGULADAS, nao porque
+# estavam na lista. Na foto da colagem, tres modelos independentes deram o
+# veredito IDENTICO:
+#
+#   gemini-3.6-flash ........ colagem=True quadros=4 nota=3
+#   gemini-3.8-flash ........ colagem=True quadros=4 nota=3
+#   gemini-3-flash-preview .. colagem=True quadros=4 nota=3
+#
+# ⛔ O `gemini-3.1-flash-lite` NAO entra, mesmo sendo 10x mais rapido: ele
+# acusou colagem onde nao havia e inflou notas (ver o cabecalho deste
+# arquivo). Velocidade nao compra veredito.
+
+# ⭐ A FOTO VAI REDUZIDA A 512 px. MEDIDO: 374 KB -> 42 KB, e cinco
+# tentativas caem de 36 s para 7,3 s. O ganho nao e' no acerto -- e' no
+# CUSTO DA FALHA, que e' o que domina quando a maioria das tentativas
+# devolve 503. O julgamento (colagem, texto, produto inteiro) nao precisa de
+# resolucao: sao perguntas de composicao, nao de detalhe.
+LADO_MAX = 512
 
 RUBRICA = (
     "Voce julga a FOTO PRINCIPAL de um anuncio para uma vitrine de ofertas. "
@@ -160,7 +185,17 @@ def melhor_foto(principal: str, extras=(), piso: int = 7) -> str:
 
 def _baixar(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    return urllib.request.urlopen(req, timeout=60).read()
+    bruta = urllib.request.urlopen(req, timeout=60).read()
+    try:
+        import io
+        from PIL import Image
+        im = Image.open(io.BytesIO(bruta)).convert("RGB")
+        im.thumbnail((LADO_MAX, LADO_MAX))
+        bo = io.BytesIO()
+        im.save(bo, "JPEG", quality=82)
+        return bo.getvalue()
+    except Exception:  # noqa: BLE001
+        return bruta          # sem PIL, manda a original: pior, nao quebrado
 
 
 def _pedir(modelo: str, chave: str, img: bytes) -> tuple[str, str]:
@@ -206,8 +241,74 @@ def _json_do_texto(txt: str) -> dict:
         return {}
 
 
-def medir(urls, forcar: bool = False, teto: int = 0) -> dict:
+# ⭐ NO 503 A GENTE INSISTE (ordem do Bryan, 21/09). E a razao e' que os
+# tres erros NAO sao a mesma coisa:
+#
+#   503 high demand .. FILA do lado do Google. Passa sozinho. Insistir.
+#   429 sem cota ..... a CHAVE acabou por hoje. Queimar e trocar.
+#   403 sem acesso ... a CHAVE nao pode. Queimar e trocar.
+#
+# ⛔ Ate' agora eu tratava os tres como "falhou" e desistia em 3 tentativas
+# por modelo -- jogando fora foto que ia passar na rodada seguinte. MEDIDO
+# nas 28 chaves de uma vez: 14 devolveram 503 e so' 5 devolveram 429.
+# Desistir do 503 era desistir da METADE do parque.
+TETO_RODADAS = 40
+ESPERA_MAX = 30
+
+
+def _julgar_uma(url: str, rod) -> dict:
+    """Baixa, reduz e julga UMA foto, insistindo enquanto for fila.
+
+    ⚠ So' desiste quando a rodada inteira foi 429/403 -- ai' nao e' fila,
+    e' parque sem cota, e esperar nao resolve.
+    """
+    import time
+    try:
+        img = _baixar(url)
+    except Exception:  # noqa: BLE001
+        return {}
+    for rodada in range(TETO_RODADAS):
+        houve_fila = False
+        for modelo in MODELOS:
+            for _ in range(2):
+                chave = rod.proxima()
+                estado, txt = _pedir(modelo, chave, img)
+                if estado == "ok":
+                    v = _json_do_texto(txt)
+                    if v:
+                        v["modelo"] = modelo
+                        v["rodadas"] = rodada + 1
+                        return v
+                elif estado in ("429", "403"):
+                    rod.queimar(chave)
+                else:
+                    houve_fila = True       # 503 ou erro de rede
+        if not houve_fila:
+            return {}
+        time.sleep(min(3 * (rodada + 1), ESPERA_MAX))
+    return {}
+
+# ⭐ EM PARALELO, e o numero saiu de MEDIDA. Em 21/09/2026 eu testei as 28
+# chaves com uma chamada cada, ao mesmo tempo:
+#
+#   503 high demand ... 14     429 (sem cota) ... 5
+#   403 (sem acesso) ...  2     erro de rede ..... 4
+#   atenderam ..........  3
+#
+# ⛔ EU TINHA CONCLUIDO "a cota acabou" E ESTAVA ERRADO. A cota explica 5 de
+# 28; o que domina e' o 503, que e' fila do lado do Google e PASSA. Serial,
+# cada foto esperava a fila inteira; em paralelo, as que pegam porta aberta
+# andam enquanto as outras esperam.
+#
+# ⚠ 8 E NAO 28: o gargalo nao e' a nossa maquina, e martelar com 28
+# threads em cima de um servico que ja' responde 503 e' pedir para virar
+# 429 de verdade. Com 3 chaves atendendo por vez, 8 ja' satura.
+PARALELO = 8
+
+
+def medir(urls, forcar: bool = False, teto: int = 0, paralelo: int = PARALELO) -> dict:
     """Julga as fotos que faltam e grava o cache. Devolve o que julgou agora."""
+    from concurrent.futures import ThreadPoolExecutor
     from engine import keys
     rod = keys.gemini()
     novos: dict = {}
@@ -215,42 +316,29 @@ def medir(urls, forcar: bool = False, teto: int = 0) -> dict:
                  if u and (forcar or not julgado(u))]
     if teto:
         pendentes = pendentes[:teto]
-    print(f"julgando {len(pendentes)} foto(s) com {len(rod)} chave(s)")
-    for n, url in enumerate(pendentes, 1):
-        try:
-            img = _baixar(url)
-        except Exception as e:  # noqa: BLE001
-            print(f"  [{n}/{len(pendentes)}] nao baixou ({e})")
-            continue
-        veredito = {}
-        # ⚠️ 6 tentativas por modelo: o 503 e' transitorio e cai em outra
-        # chave; o 429 e o 403 sao da CHAVE, e ela sai do rodizio.
-        for modelo in MODELOS:
-            for _ in range(6):
-                chave = rod.proxima()
-                estado, txt = _pedir(modelo, chave, img)
-                if estado == "ok":
-                    veredito = _json_do_texto(txt)
-                    if veredito:
-                        veredito["modelo"] = modelo
-                    break
-                if estado in ("429", "403"):
-                    rod.queimar(chave)
-            if veredito:
-                break
-        if not veredito:
-            print(f"  [{n}/{len(pendentes)}] sem resposta -- fica sem julgamento")
-            continue
-        with _TRAVA:
-            _cache()[url] = veredito
-            novos[url] = veredito
-            _gravar()          # ⭐ grava a CADA resposta: 503 no meio do lote
-                               # nao pode custar o que ja' foi obtido
-        print(f"  [{n}/{len(pendentes)}] colagem={veredito.get('colagem')} "
-              f"quadros={veredito.get('quadros')} nota={veredito.get('nota')} "
-              f"{str(veredito.get('porque'))[:40]}")
-    return novos
+    total = len(pendentes)
+    print(f"julgando {total} foto(s) com {len(rod)} chave(s), {paralelo} em paralelo")
+    feitas = [0]
 
+    def tarefa(url: str) -> None:
+        v = _julgar_uma(url, rod)
+        with _TRAVA:
+            feitas[0] += 1
+            n = feitas[0]
+            if v:
+                _cache()[url] = v
+                novos[url] = v
+                _gravar()   # ⭐ a cada resposta: 503 no meio do lote nao
+                            # pode custar o que ja foi obtido
+                print(f"  [{n}/{total}] colagem={v.get('colagem')} "
+                      f"quadros={v.get('quadros')} nota={v.get('nota')} "
+                      f"{str(v.get('porque'))[:38]}")
+            else:
+                print(f"  [{n}/{total}] sem resposta -- fica sem julgamento")
+
+    with ThreadPoolExecutor(max_workers=paralelo) as ex:
+        list(ex.map(tarefa, pendentes))
+    return novos
 
 def _distribuicao() -> None:
     c = _cache()
@@ -287,6 +375,9 @@ if __name__ == "__main__":
     teto = 0
     if "--teto" in sys.argv:
         teto = int(sys.argv[sys.argv.index("--teto") + 1])
-    medir(fotos, forcar="--forcar" in sys.argv, teto=teto)
+    par = PARALELO
+    if "--paralelo" in sys.argv:
+        par = int(sys.argv[sys.argv.index("--paralelo") + 1])
+    medir(fotos, forcar="--forcar" in sys.argv, teto=teto, paralelo=par)
     print()
     _distribuicao()

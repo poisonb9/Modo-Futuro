@@ -1183,15 +1183,56 @@
      a grama SUBIA e tingia o vidro de verde — e o preco antigo (cinza sobre
      verde claro) perdia contraste. O vidro tem de DESSATURAR o que passa por
      baixo; e' o que faz o material continuar neutro sobre qualquer cena. */
+  /* ⭐⭐ A BARRA EM **CLEAR**, NAO EM REGULAR (21/09/2026). Bryan: "deixar um
+     pouco transparente mas chamando a atencao para o nome e principalmente o
+     preco". O acervo do Liquid Glass responde com a doutrina da Apple, e ela
+     e' contra-intuitiva:
+
+       "There are two to choose from: Regular and Clear. They should never be
+        mixed."                                         (WWDC, via o acervo)
+       "Clear needs a DIMMING LAYER for legibility; use localized dimming for
+        small footprints to keep content vibrancy."
+       ⛔ "Nao usar Clear sem camada de dimming."
+       "Use color very sparingly... in the BACKGROUND content layer, not on
+        the liquid glass components."
+
+     Entao o caminho para "mais transparente E mais legivel" nao e' subir o
+     branco da placa — e' BAIXAR o branco e escurecer o que passa por tras.
+     A placa vira quase so' superficie, o leito embaixo dela faz o contraste,
+     e o texto vira BRANCO, que e' o lado forte sobre foto.
+
+     ⚠️ Isto derruba a decisao de 19/09 ("o texto e' escuro FIXO porque a
+     placa vive sobre foto branca"). Ela continua valendo — no ESTUDIO, que
+     e' onde a placa ainda vive sobre branco. Cena e estudio agora sao duas
+     pecas diferentes, e nenhuma delas mistura as duas variantes.
+
+     ⚠️ A COR FICA FORA DO VIDRO. O ouro continua no selo de queda, que mora
+     na FOTO (camada de fundo), e nao na barra — e' a regra acima, ao pe' da
+     letra. */
   .vitrine.fundo-cena .vplaca {
-    background-color: rgba(255,255,255,.82);
-    backdrop-filter: blur(20px) saturate(.62) brightness(1.06);
-    -webkit-backdrop-filter: blur(20px) saturate(.62) brightness(1.06);
+    background-color: rgba(12,14,20,.20);
+    backdrop-filter: blur(16px) saturate(1.12);
+    -webkit-backdrop-filter: blur(16px) saturate(1.12);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 8px 24px -10px rgba(0,0,0,.45);
   }
+  .vitrine.fundo-cena .vplaca::before { background: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.08)); }
+  /* o NOME: branco quase cheio, um passo maior e com sombra propria — sobre
+     foto o contorno e' que da' leitura, nao o peso */
+  .vitrine.fundo-cena .vnome {
+    font-size: 15px; color: rgba(255,255,255,.96);
+    text-shadow: 0 1px 3px rgba(0,0,0,.45);
+  }
+  /* o PRECO: o elemento mais claro e mais pesado da peca inteira */
+  .vitrine.fundo-cena .vpreco {
+    font-size: 30px; color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,.45);
+  }
+  .vitrine.fundo-cena .vpreco .rs { color: rgba(255,255,255,.74); }
+  .vitrine.fundo-cena .vpreco s { color: rgba(255,255,255,.66); }
   .vitrine.fundo-cena .vloja {
-    background-color: rgba(255,255,255,.70);
-    backdrop-filter: blur(14px) saturate(.62) brightness(1.06);
-    -webkit-backdrop-filter: blur(14px) saturate(.62) brightness(1.06);
+    background-color: rgba(12,14,20,.26); color: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
   }
   /* o leito que assenta a placa: escurece a cena o bastante para a borda
      clara da placa aparecer, sem virar tarja preta */
@@ -1203,8 +1244,11 @@
     pointer-events: none; z-index: 1;
   }
   .vitrine.fundo-cena::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
-    background: linear-gradient(to top, rgba(10,12,18,.40), rgba(10,12,18,.10) 55%, rgba(10,12,18,0));
+    /* ⚠️ COM CLEAR ISTO DEIXA DE SER ENFEITE: e' a "dimming layer" que a
+       Apple exige, e e' ela que sustenta o texto branco. Se alguem baixar
+       isto, baixa a legibilidade junto — nao e' so' estetica. */
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 56%;
+    background: linear-gradient(to top, rgba(8,10,16,.74), rgba(8,10,16,.34) 42%, rgba(8,10,16,0));
     pointer-events: none; z-index: 1;
   }
 

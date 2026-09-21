@@ -2068,6 +2068,66 @@ def _carimbar_js(corpo: str) -> tuple[str, str]:
     return corpo, m.group(0)
 
 
+def marcar_fundo_do_heroi(html: str) -> str:
+    """Carimba `fundo-cena` / `fundo-estudio` no cartao do heroi, no HTML.
+
+    ⚠️ POR QUE AQUI, E NAO SO' NO NAVEGADOR. O JS mede a foto num canvas e
+    SO' ENTAO troca o desenho — e o visitante VIA a troca acontecer (Bryan,
+    21/09: "quando eu recarrego a pagina mostra em um flash a imagem do
+    anuncio menor e volta"). Medir na publicacao e mandar a resposta pronta
+    tira o flash. De quebra faz valer em `/todos/`, que hoje nao executa JS
+    nenhum (o `motor.js` de la' devolve HTML e o navegador recusa por MIME).
+
+    ⚠️ A CONTA E' A MESMA DO JS, de proposito: reduz para 96x96, olha a moldura
+    de 3 px e conta pixel quase-branco (min(r,g,b) > 233). Se as duas contas
+    divergirem, o carimbo e o retoque do navegador brigam e o flash VOLTA,
+    invertido. Mudou uma, muda a outra.
+
+    Falhar (sem rede, sem PIL, foto estranha) devolve o HTML intacto: o JS
+    ainda mede no navegador. Perde-se o flash, nao a pagina.
+    """
+    m = re.search(r'<img class="vfoto"[^>]*?src="([^"]+)"', html)
+    if not m:
+        return html
+    try:
+        import io
+        import requests
+        from PIL import Image
+        r = requests.get(m.group(1), timeout=30)
+        r.raise_for_status()
+        im = Image.open(io.BytesIO(r.content)).convert("RGB").resize((96, 96))
+        px = im.load()
+    except Exception as e:  # noqa: BLE001
+        print(f"heroi: nao medi o fundo da foto ({e}) -> o navegador mede")
+        return html
+    L, k = 96, 3
+    borda = brancos = soma = 0
+    for y in range(L):
+        for x in range(L):
+            if x < k or y < k or x >= L - k or y >= L - k:
+                c = px[x, y]
+                borda += 1
+                soma += c[0] + c[1] + c[2]
+                if min(c) > 233:
+                    brancos += 1
+    frac = brancos / borda
+    media = soma / (borda * 3)
+    if frac <= 0.50:
+        classe = "fundo-cena"
+    elif frac >= 0.90:
+        classe = "fundo-estudio" + (" puro" if media > 250 else "")
+    else:
+        # ⚠️ A FAIXA DO MEIO fica sem classe, igual ao JS: nem cena nem
+        # estudio, e chutar estraga mais do que nao fazer nada.
+        print(f"heroi: fundo na faixa do meio (borda {frac:.0%} branca) -> sem classe")
+        return html
+    alvo = '<a class="vitrine"'
+    if alvo not in html:
+        return html
+    print(f"heroi: fundo medido -> {classe} (borda {frac:.0%} branca, media {media:.0f})")
+    return html.replace(alvo, '<a class="vitrine ' + classe + '"', 1)
+
+
 def ssr_primeira_tela(html: str) -> str:
     import shutil
     import subprocess
@@ -2484,6 +2544,7 @@ def _publicar(a) -> None:
     # pegou o nome do dono no rodape na primeira versao dela.
     catalogo, externos = montar_catalogo()
     catalogo = ssr_primeira_tela(catalogo)
+    catalogo = marcar_fundo_do_heroi(catalogo)
     # ⚠️ DEPOIS do SSR (o jsdom roda os <script> INLINE) e ANTES do
     # `conferir` logo abaixo: o corpo do motor entra em `externos` e passa
     # pelo mesmo detector de vazamento que o HTML.

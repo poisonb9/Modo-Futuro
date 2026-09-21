@@ -108,6 +108,12 @@ estado/*
 # conta parada e lidas pelo publicador nos DOIS clones. Refazer custa um run
 # de 30 min por 900 fotos; e a regra de escolha da foto le daqui.
 !estado/fotos_ocr.json
+
+# excecao 6, 20/09/2026: ESCOLHA A OLHO da foto do cartao. Diferente do resto
+# de estado/, isto NAO e' derivado: e' julgamento humano onde a medida nao
+# alcanca (texto e fid nao separam "mostra o produto inteiro"). Se ficar fora
+# do git, some no proximo clone e o cartao volta para o banner.
+!estado/foto_escolhida.json
 teste/*.mp4
 teste/*.mp3
 teste/*.log

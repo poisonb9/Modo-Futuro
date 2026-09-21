@@ -1,0 +1,25 @@
+{
+  "_leia": [
+    "ESCOLHA A OLHO da foto do cartao, por URL da foto PRINCIPAL.",
+    "Existe porque a regra automatica de engine/foto_limpa.py nao consegue",
+    "decidir estes casos: ela mede TEXTO (fracao de letras) e FID (cosseno",
+    "CLIP contra a principal), e nenhuma das duas ve 'a foto mostra o",
+    "produto INTEIRO'.",
+    "MEDIDO em 20/09/2026 nos 5 produtos presos com extra de texto zero:",
+    "  bolsa de fones  fid 0,60  extra = as duas bolsas em estudio   GANHA",
+    "  pulverizador    fid 0,51  extra = no gramado, jogando agua    GANHA",
+    "  controle 8BitDo fid 0,56  extra = close do direcional         PIORA",
+    "  tapete banheiro fid 0,55  extra = colagem 3x3                 PIORA",
+    "2 ganham e 2 pioram, e nem texto nem fid separam os grupos (0,60 e",
+    "0,51 ganham; 0,56 e 0,55 pioram). Por isso a decisao e' humana, e por",
+    "isso ela fica AQUI e nao num limiar.",
+    "COMO ACRESCENTAR: rode `python -m engine.foto_limpa --presos`, olhe as",
+    "candidatas e cole a URL escolhida. Chave = URL da principal de hoje.",
+    "Se a principal do anuncio mudar, a entrada para' de valer sozinha e a",
+    "regra automatica volta a mandar — falha para o lado seguro."
+  ],
+  "escolhas": {
+    "https://ae-pic-a1.aliexpress-media.com/kf/Sddbecc2d6d684ad886e56d7ec7569262b.png": "https://ae-pic-a1.aliexpress-media.com/kf/S8935d470e9fd414380dc1a670402d38d5.jpg",
+    "https://ae-pic-a1.aliexpress-media.com/kf/Se58f51e59e454edaa5634ff84a66468bK.png": "https://ae-pic-a1.aliexpress-media.com/kf/S79cee145d05b425788b16fb600117d273.jpg"
+  }
+}

@@ -63,6 +63,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 MEDIDAS = RAIZ / "estado" / "fotos_ocr.json"
+ESCOLHIDAS = RAIZ / "estado" / "foto_escolhida.json"
 
 REPO_OCR = "bryanaw2121-sketch/pipeline"
 WORKFLOW_OCR = "fotos_ocr.yml"
@@ -86,8 +87,35 @@ def _boa(m: dict | None) -> bool:
     return bool(m) and "erro" not in m and m.get("texto") is not None
 
 
+def curadas() -> dict:
+    """{url da principal: url escolhida a olho}. Ver estado/foto_escolhida.json."""
+    if not ESCOLHIDAS.exists():
+        return {}
+    try:
+        return json.loads(ESCOLHIDAS.read_text(encoding="utf-8")).get("escolhas") or {}
+    except ValueError:
+        return {}
+
+
 def escolher(principal: str, extras: list[str], med: dict | None = None) -> str:
-    """A foto do cartao. Ver a regra no cabecalho."""
+    """A foto do cartao. Ver a regra no cabecalho.
+
+    ⭐ A LISTA CURADA VEM PRIMEIRO (20/09/2026). Medido nos 5 produtos que a
+    regra deixa presos no banner: a extra de texto ZERO e' um GANHO em 2
+    (bolsa em estudio, pulverizador no gramado) e uma PERDA em 2 (close do
+    direcional do controle, colagem 3x3 do tapete). Nem `texto` nem `fid`
+    separam os grupos — 0,60 e 0,51 ganham, 0,56 e 0,55 perdem. O que separa
+    e' "a foto mostra o produto INTEIRO", que nenhuma das duas medidas ve.
+    Baixar o FID_MIN estragaria o controle e o tapete: reprovou no caso
+    negativo. Entao a excecao e' humana, explicita e versionada.
+
+    ⚠️ A chave e' a URL da PRINCIPAL DE HOJE. Se o anuncio trocar a principal,
+    a entrada deixa de casar e a regra automatica volta a mandar sozinha —
+    falha para o lado seguro (fica o banner, nao a foto de outro produto).
+    """
+    escolhida = curadas().get(principal)
+    if escolhida:
+        return escolhida
     if not extras:
         return principal
     med = medidas() if med is None else med
@@ -233,13 +261,52 @@ def _baixar_e_gravar(run_id: str) -> int:
     return n
 
 
+def presos() -> list[tuple]:
+    """Os anuncios que a regra deixa NO BANNER tendo extra de texto zero.
+
+    Sao os candidatos a` lista curada (`estado/foto_escolhida.json`): a
+    principal e' suja, existe extra sem uma letra, e mesmo assim a regra
+    mantem a principal porque o `fid` da extra nao alcanca o piso. Ver o
+    docstring de `escolher` — metade desses casos a troca PIORA, entao isto
+    lista para o olho decidir, nunca troca sozinho."""
+    med = medidas()
+    cur = curadas()
+    saida = []
+    for pid, urls in _fotos_do_catalogo().items():
+        pri, extras = urls[0], urls[1:]
+        if pri in cur:
+            continue
+        mp = med.get(pri)
+        if not _boa(mp) or mp["texto"] <= TEXTO_PRINCIPAL_MIN:
+            continue
+        if escolher(pri, extras, med) != pri:
+            continue
+        zeros = [u for u in extras if _boa(med.get(u)) and med[u]["texto"] == 0.0]
+        if zeros:
+            saida.append((pid, pri, [(u, med[u].get("fid")) for u in zeros]))
+    return saida
+
+
 def main() -> None:
     import argparse
     p = argparse.ArgumentParser()
     p.add_argument("--medir", action="store_true", help="dispara o OCR na nuvem e grava")
     p.add_argument("--pendentes", action="store_true", help="so' conta o que falta")
+    p.add_argument("--presos", action="store_true",
+                   help="lista os que ficam no banner tendo extra sem texto")
     p.add_argument("--timeout", type=int, default=90, help="minutos de espera por run")
     a = p.parse_args()
+    if a.presos:
+        pres = presos()
+        print(f"{len(pres)} anuncio(s) preso(s) no banner com extra de texto zero:")
+        for pid, pri, zeros in pres:
+            print(f"\n  {pid}\n    principal {pri}")
+            for u, fid in zeros:
+                print(f"    candidata fid {fid:.2f}  {u}")
+        if pres:
+            print("\n  Olhe as candidatas. A que mostra o PRODUTO INTEIRO vai para")
+            print("  estado/foto_escolhida.json, em 'escolhas', chaveada pela principal.")
+        return
     if a.pendentes or not a.medir:
         pend = pendentes()
         print(f"{len(pend)} anuncio(s) com foto sem medida, "

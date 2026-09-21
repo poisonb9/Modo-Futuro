@@ -1258,6 +1258,7 @@
      ⭐ Ele nao some (a procedencia importa e o Bryan pediu a loja a` vista):
      perde peso ate' ler como legenda, nao como titulo. */
   .vitrine.fundo-cena .vloja {
+    /* dentro da placa escura: legenda, nunca titulo */
     background-color: rgba(12,14,20,.34); color: rgba(255,255,255,.72);
     font-weight: 500; font-size: 10px; padding: 5px 9px;
     backdrop-filter: blur(12px) saturate(1);
@@ -1328,10 +1329,26 @@
     position: absolute; top: 12px; left: 12px; background: var(--ouro-claro); color: #17161d;
     font: 700 12px/1 var(--mono); padding: 7px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(200,144,26,.35);
   }
-  .vitrine .vloja { position: absolute; top: 12px; right: 12px; padding: 7px 10px; border-radius: 999px; font: 600 11px/1 Poppins, sans-serif; color: var(--tinta); }
+  /* o chip da loja agora mora DENTRO da placa, na frente do nome */
+  .vitrine .vloja { display: inline-flex; padding: 4px 8px; border-radius: 999px; font: 500 10px/1 Poppins, sans-serif; color: var(--tinta); }
   .vitrine .vplaca {
     position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 16px; border-radius: 18px;
-    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+  }
+  /* esquerda: loja + nome. direita: preco + botao. Duas colunas de duas
+     linhas cada -- a placa fica com DOIS andares, nao tres: tres viraram a
+     laje que o Bryan reprovou as 05:02. */
+  .vitrine .vesq { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; flex: 1 1 auto; }
+  .vitrine .vdir { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex: 0 0 auto; }
+  /* ⭐ O ACENTO VAI PARA A ACAO. O Analista manda "dar cor de contraste ao
+     preco" (EP. 5, OPINIAO), e isso bateria de frente com a regra de UM
+     ACENTO POR CARTAO -- o ouro ja' e' do selo de queda. A saida honesta: o
+     ouro fica no BOTAO, que e' o que a pessoa tem de apertar. Mesmo acento,
+     usado no lugar que converte, e o preco segue branco e pesado. */
+  .vitrine .vcta {
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+    font: 700 12px/1 Poppins, sans-serif; color: #17161d;
+    background: var(--ouro-claro); padding: 9px 13px; border-radius: 999px;
   }
   /* ⭐ A FILEIRA DE CIMA: selo de queda e prova social, lado a lado. Ela
      é uma FILEIRA e nao dois elementos soltos porque o selo de queda já
@@ -1349,10 +1366,13 @@
      o contraste que a auditoria de 18/09 já reprovou. Cada chip ganha o
      proprio leito escuro -- o mesmo remedio da barra Clear: o escurecimento
      entra ATRAS. */
+  /* ⭐ UM PASSO MAIOR que o chip da grade: o Analista (EP. 5) reclama de
+     "avaliacoes presentes mas sem destaque", e a 11 px sobre foto a estrela
+     ficava so' para constar. */
   .vitrine .vtopo > span:not(.vselo) {
     display: inline-flex; align-items: center; gap: 4px;
-    font: 600 11px/1 Poppins, sans-serif; color: rgba(255,255,255,.95);
-    background-color: rgba(12,14,20,.55); padding: 6px 10px; border-radius: 999px;
+    font: 600 12px/1 Poppins, sans-serif; color: rgba(255,255,255,.95);
+    background-color: rgba(12,14,20,.55); padding: 7px 11px; border-radius: 999px;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   }
   .vitrine .vtopo > span:not(.vselo) svg { width: 12px; height: 12px; color: currentColor; }
@@ -3231,15 +3251,44 @@
           Array.prototype.slice.call(vsin.childNodes, 0, 2).forEach(function (c) { topo.appendChild(c); });
         }
         if (topo.childNodes.length) { a.appendChild(topo); }
-        a.appendChild(el("span", "vloja vidro", v1.loja || ""));
         var pl = el("div", "vplaca vidro");
-        pl.appendChild(el("div", "vnome", v1.nome));
+        // ⭐ O CHIP DA LOJA DESCE PARA A PLACA (21/09/2026, Analista de Loja
+        // Virtual / ecommercenapratica). Ele repete em tres episodios que o
+        // que compete com o principal -- redes sociais no topo, newsletter no
+        // header -- tem de ir para o rodape. O chip estava no canto superior,
+        // que e' o primeiro lugar que o olho varre, e a procedencia nao e' o
+        // argumento de venda. Vai NA FRENTE do nome, que e' a mesma solucao
+        // que o cartao v2 da grade adotou em 18/09 (assim ele nao orfana).
+        // ⚠ SEM a classe `vidro`: as pseudo-camadas dela desenhavam uma
+        // pilula vazada de 300 px por cima do nome (visto na medida).
+        var esq = el("div", "vesq");
+        if (v1.loja) { esq.appendChild(el("span", "vloja", v1.loja)); }
+        esq.appendChild(el("div", "vnome", v1.nome));
+        pl.appendChild(esq);
+        var dir = el("div", "vdir");
         var pr = el("div", "vpreco");
         if (v1.antes) { pr.appendChild(el("s", null, v1.antes)); }
         var mo = /^R\$\s*(.+)$/.exec(String(v1.preco));
         if (mo) { pr.appendChild(el("span", "rs", "R$")); pr.appendChild(document.createTextNode(mo[1])); }
         else { pr.appendChild(document.createTextNode(v1.preco)); }
-        pl.appendChild(pr);
+        dir.appendChild(pr);
+        // ⭐ O BOTAO -- a critica numero 1 do Analista, e a mesma que o Bryan
+        // ja' tinha feito da LINHA VIVA em 20/09: "o preco mostra mas a pessoa
+        // nao sabe que ela tem que clicar pra ir pro produto". O problema e'
+        // AFFORDANCE: o cartao inteiro sempre foi um link e nunca pareceu um.
+        // A linha viva ganhou a pilula e funciona; o heroi, que e' maior,
+        // continuava sem nada que pedisse o toque.
+        //
+        // ⛔ E O TEXTO E' CURTO, DE PROPOSITO. Com "economiza R$ 29,59" a
+        // pilula vai a 268 px e ATROPELA o nome -- medido a 430 px, o nome
+        // ficou em "Suporte telescopi..." com o botao por cima. Curto ela da'
+        // 140 px e nada encosta. A economia ja' esta' dita duas vezes no
+        // cartao (o riscado e o selo de queda); uma terceira so' quebrou o
+        // layout. Ela continua inteira na linha viva, onde cabe.
+        var cta = el("span", "vcta");
+        cta.innerHTML = 'Comprar agora <span aria-hidden="true">\u2192</span>';
+        dir.appendChild(cta);
+        pl.appendChild(dir);
         a.appendChild(pl);
         vit.appendChild(a);
       }

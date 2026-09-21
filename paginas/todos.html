@@ -2808,10 +2808,22 @@
     if (a._fundoMedido) { return; }
     a._fundoMedido = true;
     var L = 96, cai = null, tentativas = 0;
+    /* ⚠️⚠️ "AINDA NAO ESTA' PRONTO" NAO E' "NAO E'". Este foi o MESMO defeito
+       tres vezes seguidas em 21/09, em tres ramos diferentes desta funcao:
+       cada saida antecipada era um `return` DEFINITIVO, entao um instante
+       ruim virava decisao permanente — e silenciosa, porque nada fica
+       vermelho. Agora todo motivo TEMPORARIO adia e tenta de novo; so' o que
+       nao muda com o tempo (canvas sujo por CORS, faixa do meio) desiste. */
+    function adiar() {
+      if (tentativas++ < 20) { setTimeout(medir, 120); }
+    }
+
     function medir() {
       var cv = document.createElement("canvas"); cv.width = cv.height = L;
       var g = cv.getContext("2d", { willReadFrequently: true });
-      if (!g || !img.naturalWidth) { return; }
+      // sem contexto e' permanente; sem `naturalWidth` e' so' cedo demais
+      if (!g) { return; }
+      if (!img.naturalWidth) { adiar(); return; }
       g.drawImage(img, 0, 0, L, L);
       var d;
       // CDN sem CORS suja o canvas: e' o erro ESPERADO aqui, nao um defeito
@@ -2841,17 +2853,24 @@
          21/09, e no teste local nunca aconteceu porque la' a foto vinha do
          disco, ja' decodificada. A caixa vazia agora e' "ainda nao da' para
          medir", e tenta de novo. */
-      if (x1 < 0) {
-        if (tentativas++ < 20) { setTimeout(medir, 120); }
+      if (x1 < 0) { adiar(); return; }
+      /* ⚠️ tira a OUTRA antes de por a sua: o cartao pode ter chegado com a
+         classe herdada do servidor, e se as duas contas discordassem o
+         cartao ficaria com as duas classes ao mesmo tempo. So' removo DEPOIS
+         de ter uma decisao — falhar no meio nao pode apagar o carimbo. */
+      if (frac <= 0.50) {
+        a.classList.remove("fundo-estudio", "puro");
+        a.classList.add("fundo-cena");
         return;
       }
-      if (frac <= 0.50) { a.classList.add("fundo-cena"); return; }
       /* ⚠️ A FAIXA DO MEIO (0,50 a 0,90) FICA SEM CLASSE de proposito: e'
          foto que nao e' nem cena nem estudio — fundo degrade, meia-moldura,
          colagem com tarja. Chutar ali estraga mais do que nao fazer nada. */
       if (frac < 0.90) { return; }
+      a.classList.remove("fundo-cena");
       a.classList.add("fundo-estudio");
       if (mediaBorda > 250) { a.classList.add("puro"); }
+      if (a.querySelector(".vchao")) { return; }
       cai = { x0: x0 / L, x1: (x1 + 1) / L, y1: (y1 + 1) / L };
       var chao = document.createElement("span"); chao.className = "vchao";
       a.insertBefore(chao, img);
@@ -2908,11 +2927,23 @@
       chao.style.setProperty("--cy", (oy + cai.y1 * dh).toFixed(1) + "px");
       chao.style.setProperty("--cw", Math.max(24, larg * 0.98).toFixed(1) + "px");
     }
-    /* `decode()` resolve quando a foto esta' PRONTA PARA PINTAR, que e' a
-       condicao que `complete` nao garante. Onde nao existir, o `x1 < 0`
-       acima ainda segura. */
+    /* `decode()` resolve quando a foto esta' PRONTA PARA PINTAR — a condicao
+       que `complete` nao garante.
+
+       ⚠️⚠️ MAS ELA PODE NUNCA RESOLVER numa <img> que ainda esta' FORA DO
+       DOCUMENTO, e e' exatamente essa que o construtor cria. MEDIDO em
+       21/09: a promessa nao cumpriu NEM rejeitou, `medir()` nunca foi
+       chamada, e o cartao ficou sem classe em silencio. No ar isso nao
+       aparecia porque la' o cartao vem do servidor, ja' anexado.
+
+       Entao `decode()` e' ATALHO COM PRAZO: se nao responder em 120 ms, a
+       medicao vai assim mesmo — e se a foto ainda nao der, o `adiar()`
+       tenta de novo. Quem garante e' a repeticao, nao a promessa. */
     function quandoDer() {
-      if (img.decode) { img.decode().then(medir, medir); } else { medir(); }
+      var feito = false;
+      function seguir() { if (!feito) { feito = true; medir(); } }
+      if (img.decode) { img.decode().then(seguir, seguir); }
+      setTimeout(seguir, 120);
     }
     if (img.complete && img.naturalWidth) { quandoDer(); }
     else { img.addEventListener("load", quandoDer, { once: true }); }
@@ -3068,6 +3099,16 @@
       // ⭐ A VITRINE: sem filtro nenhum, o #1 da lista sai da grade e vira o
       // cartao grande; com qualquer filtro, some (a grade e' a resposta).
       var vit = document.getElementById("vitrine");
+      /* ⚠️ LER ANTES DE LIMPAR. Na primeira versao eu procurava o cartao
+         velho DEPOIS do `innerHTML = ""` — sempre nulo, heranca morta. */
+      var heranca = { pid: null, classes: [] };
+      var velho = vit && vit.querySelector(".vitrine");
+      if (velho) {
+        heranca.pid = velho.getAttribute("data-pid");
+        ["fundo-cena", "fundo-estudio", "puro"].forEach(function (c) {
+          if (velho.classList.contains(c)) { heranca.classes.push(c); }
+        });
+      }
       if (vit) { vit.innerHTML = ""; }
       var semFiltro = atual === "todos" && !canal && !loja && !termo;
       if (semFiltro && vit && lista.length && lista[0].imagem) {
@@ -3086,7 +3127,15 @@
         var img = document.createElement("img");
         img.className = "vfoto"; img.alt = v1.nome; img.crossOrigin = "anonymous"; img.src = v1.imagem; img.loading = "eager";
         a.appendChild(img);
-        // ⭐ a borda da foto decide o desenho do heroi: ver "O HEROI PREMIUM"
+        /* ⭐ HERDA a resposta que o servidor ja' carimbou (`marcar_fundo_do_heroi`
+           no publicador) quando o produto e' o MESMO. Sem isto o cartao novo
+           nasce sem classe e refaz a conta no canvas — e por uns milissegundos
+           ele volta a `contain`, que e' a mesma piscada de antes, so' que
+           menor e no filtro em vez de na recarga. */
+        if (heranca.pid === String(v1.id)) {
+          heranca.classes.forEach(function (c) { a.classList.add(c); });
+        }
+        // a borda da foto decide o desenho: ver "O HEROI PREMIUM" no CSS
         classificarFotoHeroi(a, img);
         if ((v1.queda || 0) >= 5) { a.appendChild(el("span", "vselo", "↓ " + Math.round(v1.queda) + "%")); }
         a.appendChild(el("span", "vloja vidro", v1.loja || ""));

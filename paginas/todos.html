@@ -1375,7 +1375,10 @@
      ser hospedado por nos -- a foto continua vindo do CDN do anunciante.
      Editar a imagem exigiria servir 148 arquivos nossos, e `fidelidade.py`
      ja' registra que refazer produto com modelo nao passa na nossa guarda. */
-  .vitrine.fundo-estudio .vfoto { clip-path: inset(12% 0 0 0); }
+  /* ⭐ O CORTE E' MEDIDO POR FOTO e chega como `--corte`, carimbado pelo
+     publicador em `marcar_fundo_do_heroi`. Foto sem traco recebe 0 e nao
+     perde nada -- o fixo de 12% cobrava de todas para resolver o de uma. */
+  .vitrine.fundo-estudio .vfoto { clip-path: inset(var(--corte, 0%) 0 0 0); }
   /* no palco branco o chip branco sumia: vira um chip escuro discreto */
   .vitrine.fundo-estudio .vloja {
     background-color: rgba(22,21,28,.07); color: #47444f;
@@ -1502,7 +1505,14 @@
      prendi o involucro em 34 px achando que era o svg, e o desenho de 79 px
      VAZOU para fora do cartao, por cima da linha da loja. Medido no
      navegador: wrap 34 px, svg 78,8 px. */
-  .vitrine .vplaca .serie-wrap { margin-top: 16px; }   /* entre grupos */
+  /* ⭐ O GRAFICO ENCOSTA NA ECONOMIA (6 px), nao fica entre grupos (16 px).
+     Pedido do Bryan em 21/09/2026, e a razao e' de agrupamento: o grafico NAO
+     e' um terceiro assunto -- ele e' a PROVA do "voce economiza R$ X" que esta'
+     logo acima. A 16 px ele lia como bloco separado, e o olho tinha de voltar
+     para ligar um no outro. Medido no navegador a 430 px: o vao caiu de 16 para
+     6 px e o traco comeca na mesma coluna do texto verde (left 34 nos dois).
+     ⚠ Quem passa a marcar a separacao de grupo e' `.cap-loja`, abaixo. */
+  .vitrine .vplaca .serie-wrap { margin-top: 6px; }     /* prova da economia */
   .vitrine .cap-loja { margin-top: 6px; }              /* dentro do grupo */
   /* ⭐ A ECONOMIA fica DENTRO do grupo da decisao (6 px), nao entre grupos:
      ela explica o preco que esta' logo acima. Verde porque e' ganho -- o
@@ -1526,7 +1536,18 @@
     background-color: rgba(12,14,20,.55); color: #ffb23f;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   }
-  .vitrine .vfogo svg { width: 14px; height: 14px; }
+  /* ⭐ UM BRILHO BEM SUTIL no foguinho (Bryan, 21/09). Duas camadas, as
+     duas fracas: um halo ambar por fora da pilula e um `drop-shadow` no
+     proprio simbolo, que e' o que faz ele parecer ACESO em vez de
+     desenhado. ⚠ Sem animacao: brilho que pulsa vira alarme, e o fogo
+     aqui diz "este e' o escolhido", nao "corre". */
+  .vitrine .vfogo {
+    box-shadow: 0 0 0 1px rgba(255,178,63,.22), 0 0 12px -2px rgba(255,178,63,.45);
+  }
+  .vitrine .vfogo svg {
+    width: 14px; height: 14px;
+    filter: drop-shadow(0 0 3px rgba(255,178,63,.75));
+  }
   .vitrine .vselo svg { width: 12px; height: 12px; }
   /* esquerda: loja + nome. direita: preco + botao. Duas colunas de duas
      linhas cada -- a placa fica com DOIS andares, nao tres: tres viraram a
@@ -3397,6 +3418,12 @@
       ["fundo-cena", "fundo-estudio", "puro"].forEach(function (c) {
         if (vVelho.classList.contains(c)) { heranca.classes.push(c); }
       });
+      // ⛔ O `--corte` TAMBEM SE HERDA, e eu esqueci dele na primeira vez.
+      // O publicador carimba `style="--corte:6%"` no cartao do SSR, mas o JS
+      // REMONTA o `<a>` do zero -- o atributo morria junto e o traco voltava.
+      // E' o mesmo defeito que a heranca das classes de fundo ja' resolvia:
+      // quem vem do servidor nao sobrevive ao primeiro desenho do JS.
+      heranca.corte = vVelho.style.getPropertyValue("--corte") || "";
     }
     if (vit0) { vit0.innerHTML = ""; }
     if (!lista.length) {
@@ -3477,6 +3504,7 @@
            menor e no filtro em vez de na recarga. */
         if (heranca.pid === String(v1.id)) {
           heranca.classes.forEach(function (c) { a.classList.add(c); });
+          if (heranca.corte) { a.style.setProperty("--corte", heranca.corte); }
         }
         // a borda da foto decide o desenho: ver "O HEROI PREMIUM" no CSS
         classificarFotoHeroi(a, img);

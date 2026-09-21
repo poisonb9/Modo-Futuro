@@ -6,6 +6,526 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 21/09/2026 20:51 — `b8a265a`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `a87d5a037ef3` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 20:25 — `4b5aee6`
+
+**O quê:** O grafico termina no preco exibido, e o traco da foto sai por CORTE
+
+**Por quê:** ⛔ O GRAFICO CONTRADIZIA O PRECO, DE NOVO E POR OUTRO CAMINHO. Bryan mandou o desenho do que queria: a linha comecando alta e descendo. Fui ver e nao era estetica -- era defeito. MEDIDO na capa: a serie diaria tinha 09-21 = R$ 19,61 e o instantaneo das 18:58 dizia R$ 11,89. O cartao anunciava 11,89 e a linha SUBIA ate' 19,61.
+
+Carimbo no ar: `cff2e5583fa4` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 20:15 — `19f909d`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `988a22bb2bc6` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 19:55 — `e88fa78`
+
+**O quê:** O ponto SOLTO da serie nao e' preco, e' outro anuncio -- e ele virava o desconto
+
+**Por quê:** ⛔ O DEFEITO, medido em 13 dos 147 produtos com serie de 3+ pontos. Sempre a mesma assinatura: um valor gritante, ISOLADO, no meio de uma serie estavel.
+
+Carimbo no ar: `80e302ec8a75` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 19:46 — `e88fa78`
+
+**O quê:** O ponto SOLTO da serie nao e' preco, e' outro anuncio -- e ele virava o desconto
+
+**Por quê:** ⛔ O DEFEITO, medido em 13 dos 147 produtos com serie de 3+ pontos. Sempre a mesma assinatura: um valor gritante, ISOLADO, no meio de uma serie estavel.
+
+Carimbo no ar: `03d8e236c2e7` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 19:05 — `9be4667`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `8c531994031c` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 18:34 — `36fe38d`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `17840c406877` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 18:25 — `9abd39f`
+
+**O quê:** Bloco 3: o grafico ganha corpo e o botao responde ao toque
+
+**Por quê:** ⭐ A AREA PREENCHIDA JA' EXISTIA -- presa dentro do `if (p.suave)`, ou seja, so' o multometro a desenhava. O produto ficava com a linha de 1,4 px sozinha, atravessando 370 px de cartao: lia como um RISCO, nao como um dado. Ela saiu do `if` e vale para todo grafico. Nao acrescenta informacao nenhuma -- usa o MESMO `d` da linha, nos dois ramos (curva suave ou reta), e fecha ate' a base.
+
+Carimbo no ar: `17840c406877` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 18:21 — `9abd39f`
+
+**O quê:** Bloco 3: o grafico ganha corpo e o botao responde ao toque
+
+**Por quê:** ⭐ A AREA PREENCHIDA JA' EXISTIA -- presa dentro do `if (p.suave)`, ou seja, so' o multometro a desenhava. O produto ficava com a linha de 1,4 px sozinha, atravessando 370 px de cartao: lia como um RISCO, nao como um dado. Ela saiu do `if` e vale para todo grafico. Nao acrescenta informacao nenhuma -- usa o MESMO `d` da linha, nos dois ramos (curva suave ou reta), e fecha ate' a base.
+
+Carimbo no ar: `e8d47c01bed4` · 25 endereço(s) conferidos · HTML 111 KB
+
+---
+
+## 21/09/2026 17:10 — `0778e95`
+
+**O quê:** Handoff completo da vitrine: a regua da capa, o juiz de foto e os cinco defeitos
+
+**Por quê:** ⭐ O maior pendente esta' escrito como item 1: O JULGAMENTO RODA LOCAL e morre junto com a sessao -- por isso o lote nunca passa de ~60 de 148. O OCR ja' resolve isso do jeito certo, num run do GitHub da conta parada (`bryanaw2121-sketch/pipeline/.github/workflows/fotos_ocr.yml`), com a lista por dispatch e o resultado por artifact.
+
+Carimbo no ar: `879ae4d9d68d` · 25 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 16:43 — `a8e4275`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `67b624fa9ce4` · 25 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 16:05 — `5409c8c`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `c2f736d6d8a6` · 19 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 15:35 — `1cf5e90`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `676fc4f15a1b` · 19 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 14:26 — `a5fc4ef`
+
+**O quê:** Handoff da CAPA: a regua, os quatro defeitos e o julgamento de foto
+
+**Por quê:** Escrito e commitado ANTES de ir para o chat -- ja' aconteceu de o rodape apontar para um bloco que nao existia no arquivo.
+
+Carimbo no ar: `5ad95ae932d7` · 19 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 12:03 — `d26740d`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `6c281d239988` · 25 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 11:56 — `1c5f2eb`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `06c341215031` · 25 endereço(s) conferidos · HTML 71 KB
+
+---
+
+## 21/09/2026 10:26 — `1c5f2eb`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `b22f8d182f46` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 10:15 — `2666690`
+
+**O quê:** O nome e o preco SAEM da foto: o cartao vira coluna, e a barra acaba
+
+**Por quê:** Decisao do Bryan, 21/09 06:29, com o print na mao: "olha o espaco que ocupa, quase nem da' pra ver o produto, nao to' gostando dessa barra. E se o nome e o preco nao estiverem dentro da imagem?"
+
+Carimbo no ar: `7969f7332d12` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 09:05 — `9233322`
+
+**O quê:** O cartao do heroi segundo o Analista de Loja Virtual: botao, chip no rodape e prova em destaque
+
+**Por quê:** Pedido do Bryan: "corrige tudo de acordo com o que ele viu". As fichas sao do `ecommercenapratica` (que E' o Analista de Loja Virtual -- ja' estava no acervo, com 7.420 fichas, 80 da serie).
+
+Carimbo no ar: `6324b811871d` · 25 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 08:21 — `c0b991f`
+
+**O quê:** A prova social sai da placa e sobe para o alto da foto (a placa tinha virado uma laje)
+
+**Por quê:** E estava. Na tela DELE -- iPhone, 430 px, tema CLARO -- a placa de tres andares (nome em duas linhas + sinais + preco) virou uma LAJE cobrindo quase metade do cartao, tapando justo o produto, e a quebra que eu tinha feito abriu um VAZIO grande a` esquerda do preco.
+
+Carimbo no ar: `ae21ca0ce608` · 25 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 07:56 — `fec8a29`
+
+**O quê:** Heroi, bloco A: a linha de sinais da grade passa a servir os DOIS cartoes
+
+**Por quê:** O heroi mostrava nome, preco e FORNECEDOR. Nenhum dos tres decide uma compra. Tudo o que faz desejar -- estrela, "+N vendidos", recorde, frete -- ja' estava medido, aprovado e implementado UM COMPONENTE AO LADO, e nao chegava nele.
+
+Carimbo no ar: `f83fe220363e` · 25 endereço(s) conferidos · HTML 110 KB
+
+---
+
+## 21/09/2026 07:44 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `afa1ae5a7d05` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 07:33 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `b203cd6889aa` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 07:25 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `38dbc940953a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 07:14 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `eb70302e0a1e` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 07:05 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `2961561de6ce` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 06:53 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `b76df0a01a5b` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 06:46 — `b306c25`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `0dc21aa77800` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 06:32 — `3eccb4f`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `838927e3302a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 06:23 — `3eccb4f`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `838927e3302a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 06:12 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `e842e0d87091` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 06:03 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `e842e0d87091` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 05:52 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `e842e0d87091` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 05:42 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `93fed8bbaa01` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 05:32 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `6a32daae8e73` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 05:22 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `b56362e1a86a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 05:12 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `0f95ea6d0050` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 05:03 — `f4f4a93`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `b57afaf19773` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 04:42 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `a3c3449e509d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 04:32 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `a3c3449e509d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 04:23 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `a3c3449e509d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 04:15 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `a3c3449e509d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 04:04 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `a3c3449e509d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 03:55 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `a3c3449e509d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 03:44 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `48f05b51c692` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 03:34 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `48f05b51c692` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 03:23 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `48f05b51c692` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 03:12 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `48f05b51c692` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 03:03 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `48f05b51c692` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 02:53 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `7e82d1ee8b31` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 02:48 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `161870c978d3` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 02:33 — `673efd4`
+
+**O quê:** O heroi frente aos Maestros: o unico cartao do site que nunca passou pela regua
+
+**Por quê:** Pedido do Bryan (21/09, madrugada): "o cliente abre e chega e ta' esse anuncio sem graca, precisamos fazer com que ele deseje comprar. Consulte o +acervo e descubra o ouro."
+
+Carimbo no ar: `161870c978d3` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 02:24 — `3e5cbd0`
+
+**O quê:** Handoff: o arquivo sujo do outro clone e' redundante (conferido)
+
+**Por quê:** O `engine/foto_limpa.py` nao commitado no Modo-Futuro e' identico ao que esta' em 9f11f38 aqui -- 12.845 bytes dos dois lados, ignorando fim de linha. Nao ha' trabalho unico perdido la'.
+
+Carimbo no ar: `161870c978d3` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 02:15 — `3e5cbd0`
+
+**O quê:** Handoff: o arquivo sujo do outro clone e' redundante (conferido)
+
+**Por quê:** O `engine/foto_limpa.py` nao commitado no Modo-Futuro e' identico ao que esta' em 9f11f38 aqui -- 12.845 bytes dos dois lados, ignorando fim de linha. Nao ha' trabalho unico perdido la'.
+
+Carimbo no ar: `2e77698be7fb` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
 ## 21/09/2026 01:36 — `b68193c`
 
 **O quê:** Handoff: rodape para o /clear

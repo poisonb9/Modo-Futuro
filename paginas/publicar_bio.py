@@ -1477,10 +1477,31 @@ CAPA_GANHO_PCT_MIN = 6.0
 # estetica de 18/09 já tinha decidido que "a linha do grafico quando é reta
 # é ornamento", e na capa ela ocupa espaco nobre.
 CAPA_SERIE_MIN = 5
-# ⚠ O PISO DA NOTA DA FOTO fica em 7 ate' a distribuicao das 148 dizer
-# outra coisa. Na aferição de 6 fotos: 9 = foto limpa, 8 = boa demonstracao,
-# 6 e 5 = texto queimado ou fundo poluido, 3 = a colagem.
-CAPA_FOTO_NOTA_MIN = 7
+# ⭐ O PISO DA NOTA DA FOTO, agora MEDIDO em 138 das 148 (21/09/2026). O 7
+# era chute, tirado de uma aferição de SEIS fotos, e ele estava errado.
+#
+# 'Limpa' = sem colagem, sem texto queimado, fundo limpo e produto inteiro:
+#
+#   nota 10 ... 18 limpas / 0 sujas        piso  7 ... 32 sujas de 77 (42%)
+#   nota  9 ... 20 limpas / 2 sujas        piso  8 ... 11 de 56 (20%)
+#   nota  8 ...  7 limpas / 9 sujas        piso  9 ...  2 de 40 ( 5%)
+#   nota <=7 .. 0 limpas / 61 sujas        piso 10 ...  0 de 18 ( 0%)
+#
+# ⭐ ABAIXO DE 8 NAO EXISTE UMA UNICA FOTO LIMPA -- 61 de 61 tem colagem,
+# texto queimado, fundo poluido ou produto cortado. O piso 7 aprovava 32
+# fotos sujas, 42% de tudo que ele deixava passar: era ele a porta por onde
+# a colagem de quatro cenas entrou na capa.
+#
+# ⚠ E 9, NAO 10: o 10 descarta 27 das 45 fotos limpas para ganhar 2 sujas
+# a menos. O 9 erra 5% e guarda a folga -- e com 148 produtos a capa precisa
+# de candidato sobrando, nao de perfeicao.
+#
+# ⚠ MEDIDO no catalogo de hoje: 2 candidatos a capa com piso 7, 8, 9 E 10.
+# As duas fotos que chegam ao fim da regua tiram 10 -- apertar de 7 para 9
+# nao custa candidato nenhum hoje, so' fecha a porta.
+# ⚠ A distribuicao NAO e' bimodal. Com 69 julgadas eu disse que era e havia
+# um 'vale' no 7; com 138 ele sumiu. Era tamanho de amostra.
+CAPA_FOTO_NOTA_MIN = 9
 
 
 def marcar_fogo(dados: list[dict]) -> list[dict]:
@@ -2329,7 +2350,7 @@ def externalizar_motor(html: str) -> tuple[str, str, str]:
     import hashlib
     import re
     melhor = None
-    for m in re.finditer(r"<script(?![^>]*src=)([^>]*)>(.*?)</script>",
+    for m in re.finditer(r"<script(?![^>]*\bsrc=)([^>]*)>(.*?)</script>",
                          html, re.S):
         if "module" in m.group(1):
             continue
@@ -2413,8 +2434,54 @@ def marcar_fundo_do_heroi(html: str) -> str:
     alvo = '<a class="vitrine"'
     if alvo not in html:
         return html
-    print(f"heroi: fundo medido -> {classe} (borda {frac:.0%} branca, media {media:.0f})")
-    return html.replace(alvo, '<a class="vitrine ' + classe + '"', 1)
+    # ⭐ O CORTE DO TOPO, MEDIDO NESTA FOTO -- e nao 12% para todas.
+    #
+    # ⚠ O corte fixo resolvia o traco e cobrava de quem nao tinha traco
+    # nenhum: toda foto de estudio perdia 12% da altura. Aqui a mesma imagem
+    # que ja' esta' carregada diz quantas linhas do topo NAO sao fundo --
+    # varre de cima para baixo enquanto a linha inteira for clara e para na
+    # primeira que destoa. Se nao destoa nenhuma, o corte e' ZERO.
+    #
+    # ⛔ E E' CORTE, NAO EDICAO. Nenhum pixel novo, nada hospedado por nos:
+    # a foto continua vindo do CDN do anunciante e o `clip-path` so' decide
+    # o que aparece. Editar de verdade esbarra no `fidelidade.py`, que mediu
+    # que o inpainting refaz o produto com menos detalhe e ainda passa.
+    corte = 0
+    try:
+        im2 = Image.open(io.BytesIO(r.content)).convert("RGB")
+        W, H = im2.size
+        p2 = im2.load()
+        passo = max(1, W // 40)
+        anterior = None
+        for y in range(0, int(H * 0.18)):
+            linha = [sum(p2[x, y]) / 3 for x in range(0, W, passo)]
+            m = sum(linha) / len(linha)
+            # ⚠ 8 niveis: abaixo disso e' ruido de JPEG, e cortar por ruido
+            # comeria foto boa. O degrau que o Bryan viu tinha 34.
+            if anterior is not None and abs(m - anterior) > 8:
+                corte = y
+            anterior = m
+        # ⛔ A CONVERSAO DE IMAGEM PARA CAIXA, que eu errei na primeira vez.
+        # O `clip-path` corta a CAIXA do <img>, e com `object-fit: contain` a
+        # imagem so' comeca depois do respiro de 5% e termina 5% antes do fim
+        # -- ela ocupa 90% da caixa. Um degrau a 4,5% da IMAGEM esta' a
+        # 5 + 4,5 x 0,90 = 9% da CAIXA.
+        # ⚠ Sem essa conta eu cortava 6% e o traco continuava: 6% da caixa
+        # e' 1% da imagem, ou seja, quase so' respiro. Medido na tela duas
+        # vezes antes de eu procurar a causa.
+        if corte:
+            na_imagem = corte / H * 100
+            corte = min(int(5 + na_imagem * 0.90) + 2, 16)
+        else:
+            corte = 0
+    except Exception as e:  # noqa: BLE001
+        print(f"heroi: nao medi o corte do topo ({e}) -> sem corte")
+    print(f"heroi: fundo medido -> {classe} "
+          f"(borda {frac:.0%} branca, media {media:.0f}, corte {corte}%)")
+    novo_alvo = '<a class="vitrine ' + classe + '"'
+    if corte:
+        novo_alvo += ' style="--corte:' + str(corte) + '%"'
+    return html.replace(alvo, novo_alvo, 1)
 
 
 def ssr_primeira_tela(html: str) -> str:

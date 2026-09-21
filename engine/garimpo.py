@@ -397,6 +397,14 @@ def historico() -> dict[int, list[float]]:
             continue
         dias = por_dia.setdefault(d["id"], {})
         dias[dia] = min(dias[dia], v) if dia in dias else v
+    # ⭐ O PONTO SOLTO SAI AQUI TAMBEM (21/09/2026). Este historico alimenta
+    # `maior_visto`, que e' o "de R$ X" riscado do cartaz do Telegram. Limpar
+    # so' na pagina fazia o site dizer "sem queda" e o canal anunciar "de
+    # R$ 21,73" do mesmo produto, no mesmo dia -- foi o
+    # `teste_vitrine_com_cartaz` que pegou, e e' para isso que ele existe.
+    # A regra mora em `engine/serie_limpa.py`: uma so' para os tres caminhos.
+    from engine import serie_limpa
+    por_dia = {i: serie_limpa.sem_ponto_solto(dd) for i, dd in por_dia.items()}
     valor = {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
     _MEMO_HISTORICO.clear()
     _MEMO_HISTORICO.update({"chave": chave, "valor": valor})

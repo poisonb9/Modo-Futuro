@@ -73,6 +73,65 @@ CATALOGO = RAIZ / "estado" / "produtos_publicados.jsonl"
 AGORA = RAIZ / "estado" / "precos_agora.json"
 SERIE = RAIZ / "estado" / "precos_vistos.jsonl"
 
+# ⭐ AS LEITURAS HORARIAS, SO' PARA O DESENHO (21/09/2026, pedido do Bryan:
+# "vai gerar movimento no grafico").
+#
+# ⛔ E ELAS NAO VAO PARA A SERIE. O comentario acima explica os dois
+# motivos, e os dois continuam de pe':
+#   tamanho ... 154 ids x 24 = ~3.700 linhas/dia num arquivo commitado
+#   sentido ... a serie consolida o dia pelo MENOR preco, que esta' certo
+#               para QUEDA e errado para EXIBIR
+#
+# ⚠ ENTAO E' UM TERCEIRO ARQUIVO, com um papel so': dar pontos ao
+# GRAFICO. Ele nao entra na queda, nao entra no riscado, nao entra na trava
+# de 24 h -- se entrasse, mudaria numeros que a pagina ja' promete.
+#
+# ⚠ E ELE E' ROTATIVO E NAO VERSIONADO: guarda os ultimos HORAS_DIAS dias
+# e fica fora do git. Em 10 dias sao ~37 mil linhas (~3 MB) que se renovam;
+# sem a rotacao, era o 100 MB/ano que a decisao original recusou.
+HORAS = RAIZ / "estado" / "precos_horas.jsonl"
+HORAS_DIAS = 10
+
+
+def anotar_hora(precos: dict) -> int:
+    """Acrescenta as leituras de agora e joga fora o que passou de HORAS_DIAS.
+
+    `precos` e' {id: preco}. Grava `quando` com HORA, que e' a diferenca
+    inteira para a serie -- e' dela que sai o movimento do grafico.
+    """
+    import json as _j
+    from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+    agora = _dt.now(_tz.utc)
+    carimbo = agora.strftime("%Y-%m-%dT%H:%M")
+    novas = []
+    for pid, preco in (precos or {}).items():
+        try:
+            v = round(float(preco), 2)
+        except (TypeError, ValueError):
+            continue
+        if v <= 0:
+            continue
+        novas.append({"id": str(pid), "preco": v, "quando": carimbo})
+    if not novas:
+        return 0
+    antigas = []
+    corte = (agora - _td(days=HORAS_DIAS)).strftime("%Y-%m-%dT%H:%M")
+    if HORAS.exists():
+        for linha in HORAS.read_text(encoding="utf-8").splitlines():
+            if not linha.strip():
+                continue
+            try:
+                r = _j.loads(linha)
+            except ValueError:
+                continue      # linha torta nao derruba o arquivo inteiro
+            if str(r.get("quando") or "") >= corte:
+                antigas.append(r)
+    HORAS.parent.mkdir(parents=True, exist_ok=True)
+    HORAS.write_text(
+        "\n".join(_j.dumps(r, ensure_ascii=False) for r in antigas + novas) + "\n",
+        encoding="utf-8")
+    return len(novas)
+
 # ⛔ MEDIDO, nao escolhido: acima disto a API devolve 50 e cala a boca.
 LOTE = 50
 
@@ -365,6 +424,12 @@ def atualizar(ensaio: bool = False) -> dict:
     AGORA.write_text(json.dumps(saida, ensure_ascii=False, indent=1),
                      encoding="utf-8")
     print(f"gravado: {AGORA.name} com {len(saida)} produtos")
+    # ⛔ A CHAMADA DE `anotar_hora` NAO FICA AQUI. Este modulo roda no
+    # GitHub Actions (.github/workflows/precos.yml, `-m engine.precos
+    # --atualizar`), e `precos_horas.jsonl` e' gitignorado: ele seria escrito
+    # na nuvem e DESCARTADO no fim do run, sem nunca chegar na maquina que
+    # publica. Quem chama e' o publicador, em `paginas/publicar_bio.py`, que
+    # roda aqui e le' o `precos_agora.json` recem-puxado.
     if fichas_ml:
         n = anotar_serie({pid: (f[0], f[1]) for pid, f in fichas_ml.items()}, "Mercado Livre")
         print(f"serie ML: +{n} ponto(s)")

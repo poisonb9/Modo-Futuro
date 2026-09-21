@@ -167,3 +167,10 @@ estado/pedidos.jsonl
 # ferramentas/ssr: jsdom instalado localmente (npm install), nunca versionado
 node_modules/
 estado/publicando.lock
+
+# ⚠ As leituras HORARIAS (engine/precos.anotar_hora) ficam FORA do git.
+# Elas existem so' para dar pontos ao grafico e sao rotativas (10 dias).
+# Versionar era o 100 MB/ano que a decisao original recusou -- e nao ha'
+# o que auditar nelas: a queda, o riscado e a trava de 24 h continuam
+# saindo da serie diaria, que E' versionada.
+estado/precos_horas.jsonl

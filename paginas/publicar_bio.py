@@ -226,7 +226,18 @@ def _precos_por_dia() -> dict:
             continue
         dias = por_dia.setdefault(i, {})
         dias[q] = min(dias[q], v) if q in dias else v
-    return por_dia
+    return {i: _sem_ponto_solto(d) for i, d in por_dia.items()}
+
+
+# ⭐ A LIMPEZA MORA EM `engine/serie_limpa.py`, e nao aqui. TRES caminhos
+# consolidam esta mesma serie -- a pagina, o `garimpo.historico` (cartaz do
+# Telegram) e o `vitrine.preco_antes_de` (post do canal) -- e eles NAO podem
+# divergir. Quando a limpeza existia so' aqui, o `teste_vitrine_com_cartaz`
+# pegou na hora: o site dizia "sem queda" e o canal continuava anunciando
+# "de R$ 21,73" do mesmo produto, no mesmo dia. Uma regra, um arquivo.
+def _sem_ponto_solto(dias: dict) -> dict:
+    from engine import serie_limpa
+    return serie_limpa.sem_ponto_solto(dias)
 
 
 # ⭐ CATEGORIAS QUE NAO VIAJAM NA PAGINA — baixam quando a pessoa clica.
@@ -1546,6 +1557,43 @@ def _nome_do_canal(nome_buffer: str) -> str:
     return vitrine.ORIGEM.get(nome_buffer, nome_buffer)
 
 
+_MEMO_HORAS: dict = {}
+
+
+def _por_hora() -> dict:
+    """{id: [(carimbo, preco), ...]} das leituras horarias, ou {}.
+
+    ⭐ ELAS SAO SO' PARA O DESENHO. A queda, o riscado e a trava de 24 h
+    continuam saindo da serie DIARIA -- mudar isso mudaria numeros que a
+    pagina ja' promete, e a serie consolida o dia pelo MENOR preco de
+    proposito (conservador para queda).
+    ⚠ Arquivo ausente devolve {} e tudo cai na serie diaria: a gravacao
+    horaria comecou em 21/09/2026 e produto antigo nao tem nada aqui.
+    """
+    global _MEMO_HORAS
+    if _MEMO_HORAS:
+        return _MEMO_HORAS
+    import json as _json
+    arq = RAIZ / "estado" / "precos_horas.jsonl"
+    if not arq.exists():
+        return {}
+    fora: dict = {}
+    for linha in arq.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        try:
+            r = _json.loads(linha)
+            pid, q, v = str(r["id"]), str(r["quando"]), float(r["preco"])
+        except (ValueError, KeyError, TypeError):
+            continue
+        if v > 0:
+            fora.setdefault(pid, []).append((q, round(v, 2)))
+    for v in fora.values():
+        v.sort()
+    _MEMO_HORAS = fora
+    return fora
+
+
 def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
     """Os pontos que o cartao DESENHA — [] quando nao ha' o que desenhar.
 
@@ -1595,6 +1643,20 @@ def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
         if agora > 0 and max(dias) != hoje:
             dias = dict(dias)
             dias[hoje] = agora
+    # ⭐ AS LEITURAS HORARIAS GANHAM DO DIARIO, quando ha' o bastante.
+    # Pedido do Bryan em 21/09: "vai gerar movimento no grafico". E gera de
+    # verdade -- sao leituras que nos fizemos, nao interpolacao. MEDIDO no
+    # dado antes de escrever isto: a serie diaria tem 80.727 pares (id, dia)
+    # distintos para 82.206 leituras, ou seja, praticamente uma por dia; o
+    # movimento que faltava nunca esteve la' para ser desenhado.
+    #
+    # ⛔ E E' UMA FONTE SO' POR DESENHO, nunca as duas misturadas: o ponto
+    # diario e' o MENOR do dia e o horario e' a leitura em si. Misturar faria
+    # a linha descer todo fim de dia por artefato da consolidacao, e nao
+    # porque o preco caiu.
+    horas = _por_hora().get(str(d.get("id") or "")) or []
+    if len(horas) >= max(minimo, 4):
+        return [[q[5:16].replace("T", " "), v] for q, v in horas]
     # ⭐ "MM-DD" e nao a data inteira: o ano nao cabe no eixo e nao muda nada
     # pra quem le. Sao ~14 bytes por ponto no JSON da pagina.
     return [[k[5:], round(v, 2)] for k, v in sorted(dias.items())]
@@ -2761,6 +2823,21 @@ def _publicar(a) -> None:
     # ⚠️ A pagina do anunciante passa pelo MESMO detector de vazamento. Ela
     # nao tem comentario de motor, mas tem nome de canal — e o detector ja'
     # pegou o nome do dono no rodape na primeira versao dela.
+    # ⭐ A LEITURA DE AGORA VIRA PONTO DO GRAFICO (21/09/2026).
+    # ⚠ AQUI, e nao no `engine/precos`: aquele roda na NUVEM e o arquivo
+    # horario e' gitignorado -- seria escrito e descartado. O publicador roda
+    # NESTA maquina e ja' tem o `precos_agora.json` puxado.
+    # ⚠ A cadencia passa a ser a das PUBLICACOES, nao a das leituras: o
+    # vigia publica quando o radar mexe, varias vezes ao dia. E' menos denso
+    # que de hora em hora e MUITO mais denso que um ponto por dia -- e cada
+    # ponto e' uma leitura que nos fizemos, nao interpolacao.
+    try:
+        from engine import precos as _pr
+        _n = _pr.anotar_hora({k: (v or {}).get("preco")
+                              for k, v in _precos_agora().items()})
+        print(f"grafico: +{_n} leitura(s) na serie horaria")
+    except Exception as e:  # noqa: BLE001
+        print(f"grafico: nao anotei a leitura horaria ({e})")
     catalogo, externos = montar_catalogo()
     catalogo = ssr_primeira_tela(catalogo)
     catalogo = marcar_fundo_do_heroi(catalogo)

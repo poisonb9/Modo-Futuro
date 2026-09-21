@@ -1280,7 +1280,13 @@
 
   /* ---- estudio: palco com luz e sombra de contato ---- */
   .vitrine.fundo-estudio {
-    background-image: radial-gradient(118% 84% at 50% 0%, #fff 0%, #fafafc 44%, #ebe9f0 100%);
+    /* ⚠ O PALCO PUXAVA PARA O ROSA -- Bryan viu: "pegou levemente um tom
+       diferente meio arosado". E puxava mesmo, MEDIDO no proprio valor:
+       `#ebe9f0` e' R 235, G 233, B 240 -- o VERMELHO supera o verde, e e'
+       exatamente isso que o olho le como rosa. Trocado por `#e8ecf3`
+       (R 232, G 236, B 243): o verde passa o vermelho e o azul lidera com
+       folga maior. Vira cor de vidro em vez de cor de pele. */
+    background-image: radial-gradient(118% 84% at 50% 0%, #fff 0%, #f8fafc 44%, #e8ecf3 100%);
   }
   /* ⚠️ MEDIDO na tela: mesmo com a foto certa, a placa cobria a BASE do
      produto — e cobria junto a sombra de contato, que nasce ali. Entao o
@@ -1447,6 +1453,17 @@
   /* ⚠ O SELO DA CAPA leva o foguinho ANTES da seta, na mesma pilula:
      dois selos separados brigavam pelo mesmo canto. */
   .vitrine .vselo { display: inline-flex; align-items: center; gap: 5px; }
+  /* ⭐ O FOGO tem pilula propria, no canto OPOSTO ao da queda. Escuro e
+     nao dourado: dois dourados no mesmo alto brigariam, e o ouro ja' e' do
+     selo de queda e do botao. O simbolo fica ambar sobre o escuro. */
+  .vitrine .vfogo {
+    position: absolute; top: 12px; right: 12px; z-index: 2;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 27px; height: 27px; border-radius: 999px;
+    background-color: rgba(12,14,20,.55); color: #ffb23f;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .vitrine .vfogo svg { width: 14px; height: 14px; }
   .vitrine .vselo svg { width: 12px; height: 12px; }
   /* esquerda: loja + nome. direita: preco + botao. Duas colunas de duas
      linhas cada -- a placa fica com DOIS andares, nao tres: tres viraram a
@@ -3418,11 +3435,6 @@
           // sozinho porque `marcar_fogo` usa o piso ABSOLUTO de R$ 3 -- o
           // mesmo piso que a medida mostrou estar barrando os melhores
           // baratos. O publicador acende `fogo` na capa de proposito.
-          if (v1.fogo) {
-            selo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true">'
-              + '<path fill="currentColor" d="M8.5 1.2c.3 2-1 2.9-2 3.9C5.2 6.3 4 7.6 4 9.6a4 4 0 1 0 8 0c0-1.3-.5-2.4-1.2-3.3-.2.6-.7 1-1.2 1.1.4-1.6.2-4.4-1.1-6.2z"/>'
-              + '</svg>';
-          }
           selo.appendChild(document.createTextNode("\u2193 " + Math.round(v1.queda) + "%"));
           topo.appendChild(selo);
         }
@@ -3430,7 +3442,15 @@
         // (recorde, vendidos, promo, frete, envio, nota); cinco no alto da
         // foto viram poluicao e empurram o chip da loja. Dois e' o que cabe
         // na fileira a 430 px -- os outros continuam inteiros na grade.
-        var vsin = linhaDeSinais(v1);
+        // ⛔ O CHIP DE % POSITIVAS SAIU DO ALTO DA FOTO. Bryan, 21/09: "o
+        // 98% ta' estranho em cima do anuncio, parece jogado". Estava -- mas
+        // o defeito nao era o LUGAR, era a REPETICAO: o rodape do cartao ja'
+        // diz "98% positivas · 52.454 vendas na loja · AliExpress". Foi a
+        // QUARTA vez no mesmo dia que eu disse a mesma coisa em dois lugares
+        // (o chip Promo ao lado do selo, o carimbo acima da escala, a
+        // economia no botao e no riscado). Em cima da foto fica so' o que
+        // NAO esta' escrito embaixo: a queda a` esquerda, o fogo a` direita.
+        var vsin = null;
         if (vsin) {
           // ⛔ O CHIP "Promo N% OFF" SAI DA CAPA: o selo ao lado JA' diz
           // "↓ N%", com o mesmo numero. Medido na tela: tres pilulas no topo,
@@ -3442,6 +3462,18 @@
             .forEach(function (c) { topo.appendChild(c); });
         }
         if (topo.childNodes.length) { a.appendChild(topo); }
+        // ⭐ O FOGUINHO EM PILULA PROPRIA, A` DIREITA (Bryan, 21/09). Ele
+        // vinha grudado na seta dentro do MESMO selo -- "fogo + seta + 57%"
+        // lia como um simbolo so'. Sao duas coisas diferentes: a seta diz
+        // QUANTO caiu, o fogo diz que este e' o escolhido da regua da capa.
+        if (v1.fogo) {
+          var fg = el("span", "vfogo");
+          fg.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true">'
+            + '<path fill="currentColor" d="M8.5 1.2c.3 2-1 2.9-2 3.9C5.2 6.3 4 7.6 4 9.6a4 4 0 1 0 8 0c0-1.3-.5-2.4-1.2-3.3-.2.6-.7 1-1.2 1.1.4-1.6.2-4.4-1.1-6.2z"/>'
+            + '</svg>';
+          fg.title = "escolhido pela regua da capa";
+          a.appendChild(fg);
+        }
         var pl = el("div", "vplaca");
         // ---- linha 1: o preco, o riscado e a acao -----------------------
         var l1 = el("div", "cap-linha");

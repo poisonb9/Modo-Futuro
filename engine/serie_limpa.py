@@ -1,0 +1,99 @@
+# -*- coding: utf-8 -*-
+"""O ponto SOLTO da serie de precos nao e' preco: e' outro anuncio.
+
+## ⛔ O DEFEITO, medido em 21/09/2026
+
+13 dos 147 produtos com serie de 3+ pontos tinham a MESMA assinatura: um
+valor gritante, isolado, no meio de uma serie estavel.
+
+    Escova de dentes ... 7,17 7,17 6,99 7,25 7,28 7,25 [40,30] 6,66
+    Kit limpeza ........ 4,05 4,02 4,04 3,96 3,98 [16,16] 3,49
+    Carregador USB C ... 6,37 6,37 6,11 6,32 6,35 6,17 6,20 [18,16] 6,43
+
+⚠️ E era justamente ele que virava o `antes` RISCADO. A "queda de 84%" da
+Escova nao era queda: era um 40,30 cercado de 7,00. O cartao prometia "voce
+economiza R$ 33,64" num produto que sempre custou ~R$ 7 — o "a pagina passa a
+mentir sozinha" que o projeto inteiro combate, por um caminho que nenhuma
+guarda olhava.
+
+⚠️ A guarda que existia (`SALTO_VARIANTE`) so' ve' o preco de HOJE subindo
+acima do minimo — o caso do produto que esgotou. Aqui e' o contrario: hoje
+esta' baixo e o ruido esta' no passado, virando desconto.
+
+## ⭐ POR QUE ESTE MODULO EXISTE, E NAO UMA FUNCAO EM CADA LUGAR
+
+TRES caminhos consolidam a mesma serie e nao podem divergir:
+
+    publicar_bio._precos_por_dia   a pagina (queda, riscado, grafico)
+    garimpo.historico              o cartaz do Telegram (`maior_visto`)
+    vitrine.preco_antes_de         o post do canal
+
+O `teste_vitrine_com_cartaz` cruza os tres sobre o catalogo inteiro e PEGOU a
+divergencia quando a limpeza existia so' na pagina: o site dizia "sem queda" e
+o canal continuava anunciando "de R$ 21,73". Uma regra, um arquivo.
+
+## A REGRA: pico ISOLADO NO TEMPO
+
+⭐ O discriminador e' temporal, e nao estatistico. Ruido e' um valor alto cujos
+vizinhos de ANTES e de DEPOIS estao os dois bem abaixo. Queda de verdade nao
+faz isso — ela desce em degraus, e cada ponto tem um vizinho perto.
+
+⛔ DUAS REGRAS FORAM TESTADAS E REPROVADAS ANTES DESTA:
+
+    por MEDIANA ..... com DOIS pontos de ruido a mediana sobe e eles se
+                      protegem. Reprovou no Limpa vidro (27,54 com 19,73
+                      por perto): o limiar subia para 28,44 e o ruido
+                      passava por baixo da propria guarda.
+    por AGRUPAMENTO . o maior grupo vira o "corpo" e o resto cai. Mas numa
+                      queda real (27,5 26,9 20,1 12,0 11,8) o maior grupo
+                      e' o de BAIXO, e a regra apaga a queda inteira.
+
+⚠️ E a base e' o PERCENTIL 30, nao a mediana, pelo mesmo motivo: e' o preco
+HABITUAL que interessa como referencia, nao a media entre o habitual e o
+estranho.
+
+## O que foi medido depois
+
+    series com amplitude > 1,8x .... 13 -> 1
+    Escova de dentes ............... queda 84% -> 8%
+    Kit limpeza .................... queda 78% -> 14%
+    Carregador USB C ............... queda 65% -> 0% (perdeu o riscado)
+    Luz LED ........................ queda 62% -> 18%
+
+⚠️ O que SOBROU fica dito: o "Filtro plastico" tem 6,26 ... 6,36 e depois
+20,82 e 20,70 — as duas altas sao VIZINHAS uma da outra, entao nao sao pico
+isolado. Pode ser variante e pode ser aumento real. A regra e' conservadora de
+proposito: na duvida, nao apaga.
+"""
+from __future__ import annotations
+
+RUIDO_FATOR = 1.8
+RUIDO_VIZINHO = 0.25
+RUIDO_MIN_PONTOS = 4
+
+
+def sem_ponto_solto(dias: dict) -> dict:
+    """{dia: preco} sem os pontos que nao sao deste produto."""
+    if len(dias) < RUIDO_MIN_PONTOS:
+        return dias
+    ordem = sorted(dias)                      # por DIA, nao por valor
+    vals = [dias[q] for q in ordem]
+    calmo = sorted(vals)
+    base = calmo[max(0, int(len(calmo) * 0.30) - 1)]
+    if base <= 0:
+        return dias
+    fora = set()
+    for k, v in enumerate(vals):
+        if v <= RUIDO_FATOR * base:
+            continue                          # nem alto o bastante
+        antes = vals[k - 1] if k > 0 else None
+        depois = vals[k + 1] if k < len(vals) - 1 else None
+        vizinhos = [x for x in (antes, depois) if x is not None]
+        if vizinhos and all(x < v * (1 - RUIDO_VIZINHO) for x in vizinhos):
+            fora.add(ordem[k])
+    if not fora:
+        return dias
+    limpo = {q: v for q, v in dias.items() if q not in fora}
+    # ⚠️ NUNCA devolve menos de dois pontos: sem serie o produto perde a trava
+    # de 24 h e some da pagina inteira. Na duvida, fica o original.
+    return limpo if len(limpo) >= 2 else dias

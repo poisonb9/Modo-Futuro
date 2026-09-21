@@ -1137,13 +1137,24 @@
      vidro em cima dela so' na placa de preco, tingido — MAESTROS_LIQUID_GLASS
      §4). Selo de queda em ouro, chip da loja em vidro. So' aparece sem
      filtro nenhum: com filtro, a grade e' a resposta e nada a atrasa. */
+  /* ⭐ O CARTAO E' UMA COLUNA (21/09/2026, decisao do Bryan: "e se o nome e
+     o preco nao estiverem dentro da imagem?"). A placa sobre a foto tapava o
+     produto -- no pulverizador ela cobria o tripe inteiro. Fora da foto, a
+     altura do cartao passa a ser FOTO + TEXTO, e nao so' a foto.
+     ⚠ E' POR ISSO QUE A PRIMEIRA TENTATIVA DISSO FALHOU: eu tentei por CSS
+     por cima, com o cartao ainda em `block` e a placa em `absolute` -- o
+     texto caiu atras da barra de navegacao. Tem de mudar a ESTRUTURA. */
   .vitrine {
-    display: block; position: relative; margin: 6px 0 0; border-radius: 24px; overflow: hidden;  /* 19/09 Bryan: menos vao apos o console (8 + 6 = 14, o mesmo da grade) */
+    display: flex; flex-direction: column; position: relative; margin: 6px 0 0; border-radius: 24px; overflow: hidden;  /* 19/09 Bryan: menos vao apos o console (8 + 6 = 14, o mesmo da grade) */
     background: #fff; box-shadow: var(--vidro-sombra); color: inherit; text-decoration: none;
     transition: transform .18s cubic-bezier(.2,.8,.2,1);
   }
   .vitrine:active { transform: scale(.985); }
-  .vitrine .vfoto { aspect-ratio: 1 / 1; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; box-sizing: border-box; }
+  /* ⭐ 4:3, e nao 1:1, desde que o texto saiu da foto (21/09/2026): o
+     cartao agora SOMA foto + bloco de texto, entao foto quadrada deixava
+     o cartao alto demais. MEDIDO a 430 px: em ESTUDIO o quadrado dava
+     495 px de cartao e o texto caia atras da barra de navegacao. */
+  .vitrine .vfoto { aspect-ratio: 4 / 3; width: 100%; object-fit: contain; display: block; background: #fff; padding: 6%; box-sizing: border-box; }
 
   /* =========== O HEROI PREMIUM (21/09/2026) ===========
      Bryan: "nao esta espetacular, cortando o produto, o produto meio
@@ -1175,6 +1186,10 @@
      de antes, nunca um meio-termo. */
 
   /* ---- cena: sangra ate' a borda ---- */
+  /* ⭐ 4:3 EM VEZ DE 1:1. Com o texto fora, o cartao somaria a altura do
+     bloco a` foto quadrada e ficaria alto demais. MEDIDO a 430 px: 401 px de
+     cartao, contra ~370 antes -- so' que antes 40% disso era barra tapando o
+     produto, e agora e' produto. */
   .vitrine.fundo-cena .vfoto { object-fit: cover; padding: 0; }
   /* ⭐ so' AQUI o vidro tem o que refratar. Sobre foto o branco da placa
      sobe, porque o texto dela e' escuro FIXO desde 19/09 (a placa vivia
@@ -1209,47 +1224,11 @@
      ⚠️ A COR FICA FORA DO VIDRO. O ouro continua no selo de queda, que mora
      na FOTO (camada de fundo), e nao na barra — e' a regra acima, ao pe' da
      letra. */
-  /* ⛔ ERA `.20` COM `saturate(1.12)` -- MEDIDO em 21/09/2026 sobre a foto
-     do pulverizador: 20% de escurecimento sobre gramado ensolarado nao
-     separa o texto do fundo, e o `saturate` ainda PUXA O VERDE PARA CIMA
-     (e' de la' que vem o "verde-oliva" que o Bryan viu; a placa nunca teve
-     cor propria). Com uma terceira linha na placa o problema dobra.
-     ⭐ O remedio e' o mesmo da barra Clear e o mesmo que o acervo do Kevin
-     Powell demonstra: MAIS ESCURECIMENTO ATRAS, nao mais cor. O vidro
-     continua vidro -- o blur sobe, a saturacao desce para nao colorir. */
-  .vitrine.fundo-cena .vplaca {
-    /* ⭐ .58 NAO É GOSTO, É A CONTA. MEDIDO contra o PIOR pixel possivel
-       (248,250,250 -- praticamente branco -- preenchendo a area da placa):
-       .46 -> 3,09   .52 -> 3,74   .56 -> 4,28   .58 -> 4,59   .60 -> 4,92
-       O minimo exigido é 4,5, e o nome tem 15px/600 (nao se qualifica como
-       texto grande, entao nao vale o 3,0). .58 é o MENOR escurecimento que
-       passa -- escurecer mais só tiraria vidro sem comprar leitura.
-       Sobre a grama da foto do pulverizador a folga é bem maior. */
-    background-color: rgba(10,11,16,.58);
-    /* ⭐ SATURACAO ABAIXO DE 1, e nao acima. O vidro do site satura para
-       dar vida (a barra Clear usa 1.12); aqui ele fica sobre UMA FOTO
-       INTEIRA, e saturar tingia a placa com a cor dominante da cena -- é
-       de lá que vinha o "verde-oliva" do gramado. .72 tira o tingimento
-       sem tirar o vidro: a placa volta a ser cinza-escuro translucido, e o
-       ouro do selo de queda volta a ser o unico acento do cartao. */
-    backdrop-filter: blur(20px) saturate(.72);
-    -webkit-backdrop-filter: blur(20px) saturate(.72);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 8px 24px -10px rgba(0,0,0,.45);
-  }
-  .vitrine.fundo-cena .vplaca::before { background: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.08)); }
-  /* o NOME: branco quase cheio, um passo maior e com sombra propria — sobre
-     foto o contorno e' que da' leitura, nao o peso */
-  .vitrine.fundo-cena .vnome {
-    font-size: 15px; color: rgba(255,255,255,.96);
-    text-shadow: 0 1px 3px rgba(0,0,0,.45);
-  }
-  /* o PRECO: o elemento mais claro e mais pesado da peca inteira */
-  .vitrine.fundo-cena .vpreco {
-    font-size: 30px; color: #fff;
-    text-shadow: 0 2px 6px rgba(0,0,0,.45);
-  }
-  .vitrine.fundo-cena .vpreco .rs { color: rgba(255,255,255,.74); }
-  .vitrine.fundo-cena .vpreco s { color: rgba(255,255,255,.66); }
+  /* ⛔ O TEXTO DA CENA VOLTOU A SER ESCURO. Ele era branco com sombra
+     porque vivia SOBRE A FOTO; agora vive sobre o branco do cartao, e
+     branco sobre branco nao se le. */
+  .vitrine.fundo-cena .vnome { font-size: 15px; }
+  .vitrine.fundo-cena .vpreco { font-size: 30px; }
   /* ⛔ O CHIP DA LOJA ERA O 3o ELEMENTO DE MAIOR PESO DA TELA (teste do olho
      meio fechado, Garry Tan) -- branco a 92% num leito de vidro, no canto
      que o olho varre primeiro. E' a coisa MENOS persuasiva do cartao. A
@@ -1257,12 +1236,11 @@
      nasceu tres dias depois e o promoveu a destaque.
      ⭐ Ele nao some (a procedencia importa e o Bryan pediu a loja a` vista):
      perde peso ate' ler como legenda, nao como titulo. */
-  .vitrine.fundo-cena .vloja {
-    /* dentro da placa escura: legenda, nunca titulo */
-    background-color: rgba(12,14,20,.34); color: rgba(255,255,255,.72);
-    font-weight: 500; font-size: 10px; padding: 5px 9px;
-    backdrop-filter: blur(12px) saturate(1);
-    -webkit-backdrop-filter: blur(12px) saturate(1);
+  /* o chip da loja e' igual nas duas variantes: legenda discreta sobre o
+     branco do cartao. Antes eram dois desenhos porque eram dois fundos. */
+  .vitrine .vloja {
+    background-color: rgba(22,21,28,.07); color: #47444f;
+    box-shadow: inset 0 0 0 1px rgba(22,21,28,.06);
   }
   /* o leito que assenta a placa: escurece a cena o bastante para a borda
      clara da placa aparecer, sem virar tarja preta */
@@ -1273,14 +1251,12 @@
     background: linear-gradient(rgba(10,12,18,.30), rgba(10,12,18,0));
     pointer-events: none; z-index: 1;
   }
-  .vitrine.fundo-cena::after {
-    /* ⚠️ COM CLEAR ISTO DEIXA DE SER ENFEITE: e' a "dimming layer" que a
-       Apple exige, e e' ela que sustenta o texto branco. Se alguem baixar
-       isto, baixa a legibilidade junto — nao e' so' estetica. */
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 56%;
-    background: linear-gradient(to top, rgba(8,10,16,.74), rgba(8,10,16,.34) 42%, rgba(8,10,16,0));
-    pointer-events: none; z-index: 1;
-  }
+  /* ⛔ O LEITO DE BAIXO FOI REMOVIDO em 21/09/2026. Ele era a "dimming
+     layer" que sustentava o texto BRANCO sobre a foto; sem texto sobre a
+     foto, ele nao sustenta nada -- e, com o cartao virando coluna, ele
+     vazava por cima do bloco de texto e pintava uma FAIXA CINZA embaixo.
+     Foi isso que me fez achar, na primeira tentativa, que "tirar o texto da
+     foto nao funciona". Funcionava; o leito e' que sobrava. */
 
   /* ---- estudio: palco com luz e sombra de contato ---- */
   .vitrine.fundo-estudio {
@@ -1294,7 +1270,11 @@
      para devolver parte do tamanho perdido. */
   .vitrine.fundo-estudio .vfoto {
     background: none; position: relative; z-index: 1;
-    padding: 5% 5% var(--reserva, 26%) 5%;
+    /* ⛔ A RESERVA MORREU COM A PLACA SAINDO DA FOTO. `--reserva` existia
+       porque a placa cobria a BASE do produto e a sombra de contato que
+       nasce ali; o produto encolhia para caber. Sem placa em cima, o poco
+       volta ao respiro normal e o produto recupera o tamanho perdido. */
+    padding: 5%;
   }
   /* ⭐⭐ O RETANGULO SOME. Foto de estudio e' produto sobre BRANCO PURO, e
      branco puro e' o elemento neutro da multiplicacao: `multiply` apaga o
@@ -1331,10 +1311,17 @@
   }
   /* o chip da loja agora mora DENTRO da placa, na frente do nome */
   .vitrine .vloja { display: inline-flex; padding: 4px 8px; border-radius: 999px; font: 500 10px/1 Poppins, sans-serif; color: var(--tinta); }
+  /* ⭐ A PLACA VIRA RODAPE DO CARTAO: no fluxo, sem vidro, sem sombra.
+     De quebra ela resolve sozinha tres coisas que custaram a madrugada -- o
+     escurecimento medido (.58), a saturacao que tingia de verde e a briga
+     com o `backdrop-filter`. Texto sobre branco nao precisa de nada disso. */
   .vitrine .vplaca {
-    position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 16px; border-radius: 18px;
+    padding: 14px 16px 16px;
     display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+    background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+    box-shadow: none; border-radius: 0;
   }
+  .vitrine .vplaca::before, .vitrine .vplaca::after { display: none; }
   /* esquerda: loja + nome. direita: preco + botao. Duas colunas de duas
      linhas cada -- a placa fica com DOIS andares, nao tres: tres viraram a
      laje que o Bryan reprovou as 05:02. */

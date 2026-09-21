@@ -6,6 +6,46 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 21/09/2026 01:25 — `7fd35ee`
+
+**O quê:** Heroi: capturar a classe herdada antes da PRIMEIRA limpeza da vitrine
+
+**Por quê:** MEDIDO no ar com MutationObserver: o cartao era remontado sem classe e so' 17 ms depois recebia `fundo-cena`. Um quadro -- mas a heranca existia justamente para nao ter nem isso.
+
+Carimbo no ar: `8ecd4297f42d` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 01:20 — `833abe7`
+
+**O quê:** Heroi: `decode()` numa <img> solta pode nunca responder (e a heranca lia tarde)
+
+**Por quê:** 1. `img.decode()` NUNCA CUMPRE NEM REJEITA numa <img> que ainda esta' fora do documento -- e e' exatamente essa que o construtor cria. MEDIDO: os logs mostraram "quandoDer" e depois NADA; `medir()` nunca foi chamada e o cartao ficou sem classe, em silencio. No ar isso nao aparecia porque la' o cartao vem do SSR, ja' anexado -- por isso a cena passava e o estudio, que so' eu testo local, nao. Agora `decode()` e' ATALHO COM PRAZO (120 ms): se nao responder, mede-se assim mesmo. Quem garante e' a repeticao, nao a promessa.
+
+Carimbo no ar: `80ae9b5c9b7a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 01:17 — `b45a93b`
+
+**O quê:** Heroi: `decode()` numa <img> solta pode nunca responder (e a heranca lia tarde)
+
+**Por quê:** 1. `img.decode()` NUNCA CUMPRE NEM REJEITA numa <img> que ainda esta' fora do documento -- e e' exatamente essa que o construtor cria. MEDIDO: os logs mostraram "quandoDer" e depois NADA; `medir()` nunca foi chamada e o cartao ficou sem classe, em silencio. No ar isso nao aparecia porque la' o cartao vem do SSR, ja' anexado -- por isso a cena passava e o estudio, que so' eu testo local, nao. Agora `decode()` e' ATALHO COM PRAZO (120 ms): se nao responder, mede-se assim mesmo. Quem garante e' a repeticao, nao a promessa.
+
+Carimbo no ar: `bd1335386b05` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 01:10 — `4fcc823`
+
+**O quê:** Barra do heroi em Clear, e o fundo medido na PUBLICACAO (mata o flash)
+
+**Por quê:** 1) "deixar um pouco transparente mas chamando a atencao para o nome e principalmente o preco"
+
+Carimbo no ar: `458a36f4aa8b` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
 ## 20/09/2026 23:00 — `2ac75ad`
 
 **O quê:** Nome do produto no teto da faixa: 18px e peso 500

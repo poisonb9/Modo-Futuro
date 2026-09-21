@@ -2756,8 +2756,13 @@
      ⚠️ TODO caminho de erro so' faz `return`, de proposito: sem classe o
      cartao fica exatamente como estava. Meio-termo seria pior que nada. */
   function classificarFotoHeroi(a, img) {
-    if (a.dataset.fundoMedido) { return; }
-    a.dataset.fundoMedido = "1";
+    /* ⚠⚠ PROPRIEDADE, NAO `dataset`. O SSR roda estes scripts no jsdom,
+       onde canvas nao existe: a medida falha, mas a MARCA ficava — e saia
+       carimbada no HTML servido (`data-fundo-medido="1"`, conferido no ar em
+       21/09). Ai' o navegador do visitante via o cartao como "ja' medido" e
+       nunca media. Atributo atravessa a serializacao; propriedade nao. */
+    if (a._fundoMedido) { return; }
+    a._fundoMedido = true;
     var L = 96, cai = null, tentativas = 0;
     function medir() {
       var cv = document.createElement("canvas"); cv.width = cv.height = L;

@@ -6,6 +6,96 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 21/09/2026 23:45 — `684c416`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `c79914967177` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 23:33 — `684c416`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `ace4d701a2bb` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 23:23 — `684c416`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `3dfe9029c779` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 23:13 — `714a83b`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `363a8bb43e78` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 23:03 — `714a83b`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `44c2cd7407ff` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 22:53 — `828bf7c`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `3467c6571ed4` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 22:45 — `828bf7c`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `af4bc2d19816` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 22:38 — `828bf7c`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `13f44b23e6f9` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 22:34 — `828bf7c`
+
+**O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca
+
+**Por quê:** Ordem do Bryan em 21/09: "temos que ter uma extra boa pra nao perder vendas". Ate' aqui foto ruim MATAVA o produto na regua da capa -- e o preco dele era o melhor da lista.
+
+Carimbo no ar: `9296bb02e4b8` · 25 endereço(s) conferidos · HTML 74 KB
+
+---
+
 ## 21/09/2026 21:59 — `30adbc3`
 
 **O quê:** Awin: as 23 recusas nao sao sobre o site -- e o painel nao diz quais serao

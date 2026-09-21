@@ -1209,10 +1209,31 @@
      ⚠️ A COR FICA FORA DO VIDRO. O ouro continua no selo de queda, que mora
      na FOTO (camada de fundo), e nao na barra — e' a regra acima, ao pe' da
      letra. */
+  /* ⛔ ERA `.20` COM `saturate(1.12)` -- MEDIDO em 21/09/2026 sobre a foto
+     do pulverizador: 20% de escurecimento sobre gramado ensolarado nao
+     separa o texto do fundo, e o `saturate` ainda PUXA O VERDE PARA CIMA
+     (e' de la' que vem o "verde-oliva" que o Bryan viu; a placa nunca teve
+     cor propria). Com uma terceira linha na placa o problema dobra.
+     ⭐ O remedio e' o mesmo da barra Clear e o mesmo que o acervo do Kevin
+     Powell demonstra: MAIS ESCURECIMENTO ATRAS, nao mais cor. O vidro
+     continua vidro -- o blur sobe, a saturacao desce para nao colorir. */
   .vitrine.fundo-cena .vplaca {
-    background-color: rgba(12,14,20,.20);
-    backdrop-filter: blur(16px) saturate(1.12);
-    -webkit-backdrop-filter: blur(16px) saturate(1.12);
+    /* ⭐ .58 NAO É GOSTO, É A CONTA. MEDIDO contra o PIOR pixel possivel
+       (248,250,250 -- praticamente branco -- preenchendo a area da placa):
+       .46 -> 3,09   .52 -> 3,74   .56 -> 4,28   .58 -> 4,59   .60 -> 4,92
+       O minimo exigido é 4,5, e o nome tem 15px/600 (nao se qualifica como
+       texto grande, entao nao vale o 3,0). .58 é o MENOR escurecimento que
+       passa -- escurecer mais só tiraria vidro sem comprar leitura.
+       Sobre a grama da foto do pulverizador a folga é bem maior. */
+    background-color: rgba(10,11,16,.58);
+    /* ⭐ SATURACAO ABAIXO DE 1, e nao acima. O vidro do site satura para
+       dar vida (a barra Clear usa 1.12); aqui ele fica sobre UMA FOTO
+       INTEIRA, e saturar tingia a placa com a cor dominante da cena -- é
+       de lá que vinha o "verde-oliva" do gramado. .72 tira o tingimento
+       sem tirar o vidro: a placa volta a ser cinza-escuro translucido, e o
+       ouro do selo de queda volta a ser o unico acento do cartao. */
+    backdrop-filter: blur(20px) saturate(.72);
+    -webkit-backdrop-filter: blur(20px) saturate(.72);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 8px 24px -10px rgba(0,0,0,.45);
   }
   .vitrine.fundo-cena .vplaca::before { background: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.08)); }
@@ -1229,10 +1250,18 @@
   }
   .vitrine.fundo-cena .vpreco .rs { color: rgba(255,255,255,.74); }
   .vitrine.fundo-cena .vpreco s { color: rgba(255,255,255,.66); }
+  /* ⛔ O CHIP DA LOJA ERA O 3o ELEMENTO DE MAIOR PESO DA TELA (teste do olho
+     meio fechado, Garry Tan) -- branco a 92% num leito de vidro, no canto
+     que o olho varre primeiro. E' a coisa MENOS persuasiva do cartao. A
+     estetica de 18/09 ja' tinha mandado o chip da loja ser neutro; o heroi
+     nasceu tres dias depois e o promoveu a destaque.
+     ⭐ Ele nao some (a procedencia importa e o Bryan pediu a loja a` vista):
+     perde peso ate' ler como legenda, nao como titulo. */
   .vitrine.fundo-cena .vloja {
-    background-color: rgba(12,14,20,.26); color: rgba(255,255,255,.92);
-    backdrop-filter: blur(12px) saturate(1.1);
-    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    background-color: rgba(12,14,20,.34); color: rgba(255,255,255,.72);
+    font-weight: 500; font-size: 10px; padding: 5px 9px;
+    backdrop-filter: blur(12px) saturate(1);
+    -webkit-backdrop-filter: blur(12px) saturate(1);
   }
   /* o leito que assenta a placa: escurece a cena o bastante para a borda
      clara da placa aparecer, sem virar tarja preta */
@@ -1301,9 +1330,23 @@
   }
   .vitrine .vloja { position: absolute; top: 12px; right: 12px; padding: 7px 10px; border-radius: 999px; font: 600 11px/1 Poppins, sans-serif; color: var(--tinta); }
   .vitrine .vplaca {
-    position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 16px; border-radius: 18px;
-    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 16px; border-radius: 18px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
   }
+  /* a coluna da esquerda: nome em cima, sinais embaixo, no ritmo de 8 */
+  .vitrine .vtexto { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  /* ⚠️ A LINHA DE SINAIS DA GRADE VIVE SOBRE BRANCO; aqui ela vive sobre
+     FOTO. Herdar as cores de la' deixaria cinza sobre cena clara, que e'
+     o contraste que a auditoria de 18/09 ja' reprovou no cartao. Sobre a
+     placa o texto e' claro, e cada sinal ganha o proprio leito escuro --
+     o mesmo remedio da barra Clear: o escurecimento entra ATRAS. */
+  .vitrine .sinais { margin: 0; flex-wrap: wrap; row-gap: 6px; }
+  .vitrine.fundo-cena .sinais > * {
+    color: rgba(255,255,255,.94);
+    background-color: rgba(12,14,20,.42);
+    padding: 4px 8px; border-radius: 999px;
+  }
+  .vitrine.fundo-cena .sinais > * svg { color: rgba(255,255,255,.94); }
   /* 19/09 (foto do Bryan, iPhone no escuro): a placa fica SEMPRE sobre foto
      branca, entao o texto e' escuro fixo - no modo escuro --tinta e' branco
      e o titulo sumia. */
@@ -2200,6 +2243,110 @@
   var SINO_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15zM10 21a2 2 0 0 0 4 0"/></svg>';
   var REPOR_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>';
 
+  // ⭐ A LINHA DE SINAIS, UMA SO', PARA OS DOIS CARTOES (21/09/2026).
+  //
+  // ⛔ POR QUE ELA VIROU FUNCAO. Ate' hoje ela vivia dentro do `montar`
+  // da GRADE, e o HEROI -- o cartao maior, o primeiro da tela, o que decide
+  // -- mostrava so' nome, preco e o nome do FORNECEDOR. Nenhum dos tres
+  // decide uma compra. Tudo o que faz desejar (estrela, vendidos, recorde,
+  // frete) ja' estava medido e aprovado UM COMPONENTE AO LADO, e nao
+  // chegava nele. Ver MAESTROS_HEROI.md.
+  //
+  // ⚠ UMA REGUA SO', E E' ESSE O PONTO: copiar o bloco para o heroi faria
+  // duas reguas que divergem na primeira mudanca. Devolve o elemento ou
+  // `null` -- quem chama decide ONDE pendurar.
+  function linhaDeSinais(p) {
+    var temRecorde = !!(p.recorde && p.recorde.dias);
+    var temPromo = !temRecorde && (p.queda || 0) >= 5;
+    var temNota = p.nota >= 90;
+    var temVendeu = !temRecorde && !temPromo && p.vendeu && p.vendeu[0] >= 20;
+    // ⭐ MERCADO LIVRE: a API nao da' vendas, da' VENDEDORES — um anuncio
+    // por vendedor, numero que a pessoa confere na pagina da loja. Piso 2:
+    // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
+    var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
+    var temFrete = !!p.frete_gratis;
+    // ⭐ ENVIO (18/09): Full = chega rapido; senao, de onde sai. So' o ML da'.
+    // ⚠️ 18/09: `de` tem que ser UF (2 letras) — o precos_agora de antes do
+    // reparo guarda um token da API no lugar, e token nao vira chip.
+    var temEnvio = !!(p.envio && (p.envio.full || /^[A-Z]{2}$/.test(p.envio.de || "")));
+    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete || temEnvio) {
+      var sinais = el("div", "sinais");
+      if (temRecorde) {
+        var rec = el("span", "recorde");
+        rec.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M4 2h8v3a4 4 0 0 1-8 0zM4 3H2v1.5A2.5 2.5 0 0 0 4.5 7M12 3h2v1.5A2.5 2.5 0 0 1 11.5 7M8 9v3M5.5 14h5"/></svg>' +
+          '<span>Recorde · menor em ' + p.recorde.dias + ' dias</span>';
+        rec.title = "hoje é o menor preço que eu já vi para este produto em " + p.recorde.dias + " dias de acompanhamento";
+        sinais.appendChild(rec);
+      }
+      // ⭐ sem Promo e sem vendas medidas, a ancora e' o que TODO produto tem:
+      // "conferido hoje as 19:00". Medicao que falta nao desqualifica o
+      // anuncio (Bryan, 16/09) — a regua da pagina e' o preco conferido.
+      // (bloco B, 18/09: "preço conferido X" saiu do cartao — e' telemetria
+      // nossa; vai pro title do preco, a um toque longo)
+      // ⭐ SEM PROMO, a ancora da esquerda e' "+792 vendidos desde 14/09":
+      // crescimento do volume da loja medido por NOS (piso 20, senao e'
+      // ruido). E' o numero de vendas "mais real" que o Bryan pediu de
+      // volta — nao briga com o "10.000+" da loja porque nao e' o total.
+      if (temVendeu) {
+        var vend = el("span", "vendeu", "+" + p.vendeu[0].toLocaleString("pt-BR") + " vendidos");
+        vend.title = "quanto o volume de vendas na loja cresceu desde " + p.vendeu[1] +
+          ", quando comecei a acompanhar este produto";
+        sinais.appendChild(vend);
+      }
+      // ⭐ "+2 vendedores desde 16/09" quando cresceu; "13 vendedores na
+      // loja" quando nao — nunca "vendidos", que no ML nao medimos.
+      if (temVendedores) {
+        var vs = p.vendedores;
+        var txt = vs[1] >= 1
+          ? "+" + vs[1] + (vs[1] === 1 ? " vendedor" : " vendedores") + " desde " + vs[2]
+          : vs[0] + " vendedores na loja";
+        var vd = el("span", "vendeu", txt);
+        vd.title = vs[1] >= 1
+          ? "quantos vendedores a mais anunciam este produto desde que eu acompanho"
+          : "quantos vendedores anunciam este produto no Mercado Livre agora";
+        sinais.appendChild(vd);
+      }
+      if (temPromo) {
+        var promo = el("span", "promo");
+        promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/></svg>' +
+          '<span>Promo ' + Math.round(p.queda) + '% OFF</span>';
+        promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
+        sinais.appendChild(promo);
+      }
+      // ⭐ FRETE GRATIS (18/09/2026, maquina de vendas #2): ENP, 4 fichas —
+      // "e' o que mais converte". Vem da reconferencia horaria do ML
+      // (anuncio mais barato). Ali/Awin: sem dado, sem chip — nunca se inventa.
+      if (temEnvio) {
+        var en = el("span", "frete envio", p.envio.full ? "Full · chega rápido" : "envio de " + p.envio.de);
+        en.title = p.envio.full
+          ? "anúncio no Mercado Envios Full: sai do centro do Mercado Livre, o mais rápido que a loja tem"
+          : "o anúncio mais barato sai de " + p.envio.de;
+        sinais.appendChild(en);
+      }
+      if (temFrete) {
+        var fr = el("span", "frete", "frete grátis");
+        fr.title = "o anúncio mais barato deste produto na loja está com frete grátis (conferido na última hora)";
+        sinais.appendChild(fr);
+      }
+      // ⭐ 19/09 (Bryan: "o valor pode ficar alinhado com a estrela"): a
+      // estrela nao fica nos sinais — vai pra LINHA DO PRECO, a direita.
+      var notaPraLinha = null;
+      if (temNota) {
+        var nota = el("span", "nota" + (p.fogo ? " em-fogo" : ""));
+        // ⭐ estrela fina, de traco (nao o icone cheio): elegante, e nao
+        // promete "4.9" — o numero ao lado continua sendo o % positivo
+        nota.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>' +
+          '<span>' + Math.round(p.nota) + '%</span>';
+        nota.title = Math.round(p.nota) + "% de avaliações positivas na loja";
+        // 19/09 (Bryan): a estrela fica na linha dos vendidos, a` esquerda,
+        // logo depois deles; sem vendidos, sozinha logo apos o titulo.
+        sinais.appendChild(nota);
+      }
+      if (sinais.childNodes.length) { return sinais; }
+    }
+    return null;
+  }
+
   function montar(p) {
     var a = document.createElement("a");
     a.className = "item";
@@ -2315,94 +2462,8 @@
     // ⭐ SELO "RECORDE" (17/09/2026): hoje e' o menor preço de toda a nossa
     // série, com >= 14 dias de radar. O produto ADQUIRE o selo no dia; some
     // quando o preço sobe. É a âncora mais forte da esquerda.
-    var temRecorde = !!(p.recorde && p.recorde.dias);
-    var temPromo = !temRecorde && (p.queda || 0) >= 5;
-    var temNota = p.nota >= 90;
-    var temVendeu = !temRecorde && !temPromo && p.vendeu && p.vendeu[0] >= 20;
-    // ⭐ MERCADO LIVRE: a API nao da' vendas, da' VENDEDORES — um anuncio
-    // por vendedor, numero que a pessoa confere na pagina da loja. Piso 2:
-    // e' o que `mercadolivre.buscar` ja' exige pra chamar de produto real.
-    var temVendedores = !temRecorde && !temPromo && !temVendeu && p.vendedores && p.vendedores[0] >= 2;
-    var temFrete = !!p.frete_gratis;
-    // ⭐ ENVIO (18/09): Full = chega rapido; senao, de onde sai. So' o ML da'.
-    // ⚠️ 18/09: `de` tem que ser UF (2 letras) — o precos_agora de antes do
-    // reparo guarda um token da API no lugar, e token nao vira chip.
-    var temEnvio = !!(p.envio && (p.envio.full || /^[A-Z]{2}$/.test(p.envio.de || "")));
-    if (temRecorde || temPromo || temNota || temVendeu || temVendedores || temFrete || temEnvio) {
-      var sinais = el("div", "sinais");
-      if (temRecorde) {
-        var rec = el("span", "recorde");
-        rec.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" d="M4 2h8v3a4 4 0 0 1-8 0zM4 3H2v1.5A2.5 2.5 0 0 0 4.5 7M12 3h2v1.5A2.5 2.5 0 0 1 11.5 7M8 9v3M5.5 14h5"/></svg>' +
-          '<span>Recorde · menor em ' + p.recorde.dias + ' dias</span>';
-        rec.title = "hoje é o menor preço que eu já vi para este produto em " + p.recorde.dias + " dias de acompanhamento";
-        sinais.appendChild(rec);
-      }
-      // ⭐ sem Promo e sem vendas medidas, a ancora e' o que TODO produto tem:
-      // "conferido hoje as 19:00". Medicao que falta nao desqualifica o
-      // anuncio (Bryan, 16/09) — a regua da pagina e' o preco conferido.
-      // (bloco B, 18/09: "preço conferido X" saiu do cartao — e' telemetria
-      // nossa; vai pro title do preco, a um toque longo)
-      // ⭐ SEM PROMO, a ancora da esquerda e' "+792 vendidos desde 14/09":
-      // crescimento do volume da loja medido por NOS (piso 20, senao e'
-      // ruido). E' o numero de vendas "mais real" que o Bryan pediu de
-      // volta — nao briga com o "10.000+" da loja porque nao e' o total.
-      if (temVendeu) {
-        var vend = el("span", "vendeu", "+" + p.vendeu[0].toLocaleString("pt-BR") + " vendidos");
-        vend.title = "quanto o volume de vendas na loja cresceu desde " + p.vendeu[1] +
-          ", quando comecei a acompanhar este produto";
-        sinais.appendChild(vend);
-      }
-      // ⭐ "+2 vendedores desde 16/09" quando cresceu; "13 vendedores na
-      // loja" quando nao — nunca "vendidos", que no ML nao medimos.
-      if (temVendedores) {
-        var vs = p.vendedores;
-        var txt = vs[1] >= 1
-          ? "+" + vs[1] + (vs[1] === 1 ? " vendedor" : " vendedores") + " desde " + vs[2]
-          : vs[0] + " vendedores na loja";
-        var vd = el("span", "vendeu", txt);
-        vd.title = vs[1] >= 1
-          ? "quantos vendedores a mais anunciam este produto desde que eu acompanho"
-          : "quantos vendedores anunciam este produto no Mercado Livre agora";
-        sinais.appendChild(vd);
-      }
-      if (temPromo) {
-        var promo = el("span", "promo");
-        promo.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 1 4 9h3.2L6 15l6-8H8.8z"/></svg>' +
-          '<span>Promo ' + Math.round(p.queda) + '% OFF</span>';
-        promo.title = "queda medida por mim contra o maior preço que eu mesmo vi";
-        sinais.appendChild(promo);
-      }
-      // ⭐ FRETE GRATIS (18/09/2026, maquina de vendas #2): ENP, 4 fichas —
-      // "e' o que mais converte". Vem da reconferencia horaria do ML
-      // (anuncio mais barato). Ali/Awin: sem dado, sem chip — nunca se inventa.
-      if (temEnvio) {
-        var en = el("span", "frete envio", p.envio.full ? "Full · chega rápido" : "envio de " + p.envio.de);
-        en.title = p.envio.full
-          ? "anúncio no Mercado Envios Full: sai do centro do Mercado Livre, o mais rápido que a loja tem"
-          : "o anúncio mais barato sai de " + p.envio.de;
-        sinais.appendChild(en);
-      }
-      if (temFrete) {
-        var fr = el("span", "frete", "frete grátis");
-        fr.title = "o anúncio mais barato deste produto na loja está com frete grátis (conferido na última hora)";
-        sinais.appendChild(fr);
-      }
-      // ⭐ 19/09 (Bryan: "o valor pode ficar alinhado com a estrela"): a
-      // estrela nao fica nos sinais — vai pra LINHA DO PRECO, a direita.
-      var notaPraLinha = null;
-      if (temNota) {
-        var nota = el("span", "nota" + (p.fogo ? " em-fogo" : ""));
-        // ⭐ estrela fina, de traco (nao o icone cheio): elegante, e nao
-        // promete "4.9" — o numero ao lado continua sendo o % positivo
-        nota.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>' +
-          '<span>' + Math.round(p.nota) + '%</span>';
-        nota.title = Math.round(p.nota) + "% de avaliações positivas na loja";
-        // 19/09 (Bryan): a estrela fica na linha dos vendidos, a` esquerda,
-        // logo depois deles; sem vendidos, sozinha logo apos o titulo.
-        sinais.appendChild(nota);
-      }
-      if (sinais.childNodes.length) { corpo.appendChild(sinais); }
-    }
+    var sinaisDoCartao = linhaDeSinais(p);
+    if (sinaisDoCartao) { corpo.appendChild(sinaisDoCartao); }
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
     // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
@@ -3142,7 +3203,19 @@
         if ((v1.queda || 0) >= 5) { a.appendChild(el("span", "vselo", "↓ " + Math.round(v1.queda) + "%")); }
         a.appendChild(el("span", "vloja vidro", v1.loja || ""));
         var pl = el("div", "vplaca vidro");
-        pl.appendChild(el("div", "vnome", v1.nome));
+        // ⭐ A COLUNA DA ESQUERDA (21/09/2026). A placa era `space-between`
+        // com dois filhos -- nome e preco. Com a linha de sinais seriam TRES
+        // pecas disputando a mesma linha, e a de baixo e' justamente a que
+        // faz desejar. Nome e sinais viram uma coluna; o preco continua
+        // sozinho a` direita, alinhado pela base.
+        var col = el("div", "vtexto");
+        col.appendChild(el("div", "vnome", v1.nome));
+        // ⭐ A MESMA LINHA DE SINAIS DA GRADE -- estrela, "+N vendidos",
+        // recorde, frete. Ver MAESTROS_HEROI.md: o heroi mostrava nome,
+        // preco e FORNECEDOR, e nenhum dos tres decide uma compra.
+        var vsin = linhaDeSinais(v1);
+        if (vsin) { col.appendChild(vsin); }
+        pl.appendChild(col);
         var pr = el("div", "vpreco");
         if (v1.antes) { pr.appendChild(el("s", null, v1.antes)); }
         var mo = /^R\$\s*(.+)$/.exec(String(v1.preco));

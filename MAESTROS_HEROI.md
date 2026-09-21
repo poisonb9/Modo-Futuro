@@ -65,9 +65,13 @@ nome, só no herói, que é UM produto por publicação.
 
 ## 4. A placa — Kevin Powell, DEMONSTRADO
 
-A placa verde-oliva é cor **tirada da própria foto**: um terceiro acento que não carrega
-significado (§1 da estética: *um acento por cartão*). O acervo do Kevin Powell resolve texto
-sobre foto com **escurecimento semi-opaco atrás do texto**, não com uma chapa colorida:
+⚠ **Correcao do que eu escrevi antes:** a placa NAO tem cor tirada da foto. Ela é
+vidro escuro a 20% (`rgba(12,14,20,.20)` + `backdrop-filter: blur(16px) saturate(1.12)`) --
+o verde-oliva é a GRAMA passando atras. O mecanismo é outro, o sintoma é o mesmo:
+20% de escurecimento sobre um gramado ensolarado nao separa o texto do fundo, e o
+`saturate` ainda puxa o verde para cima. O acervo do Kevin Powell resolve texto sobre
+foto com **mais escurecimento atras do texto** -- que é exatamente a doutrina que a
+barra Clear já segue neste site:
 
 ```
 background: rgba(0,0,0,.5); color: white

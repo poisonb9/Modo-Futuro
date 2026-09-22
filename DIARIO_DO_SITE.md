@@ -6,6 +6,24 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 19:14 — `60dbbc7`
+
+**O quê:** Cor da legenda volta a seguir o tema (minha "correcao" quebrou o escuro)
+
+**Por quê:** ⛔ ERRO MEU, medido hoje: eu fixei a legenda em #6f6c7b afirmando que o cartao era branco nos dois temas. MEDIDO agora no ar, no tema escuro: o corpo do cartao e' rgba(30,28,36,.94) e #6f6c7b da' 3,3:1 ali. A medicao que me levou ao erro leu a cor JA no tema escuro (#a5a1b4) e comparou contra fundo branco -- fundo que aquele texto nunca tem nesse tema.
+
+Carimbo no ar: `ef6863c016e3` · 25 endereço(s) conferidos · HTML 161 KB
+
+---
+
+## 22/09/2026 19:04 — `37e4678`
+
+**O quê:** Diario do site: publicacoes
+
+Carimbo no ar: `efecfe4c48e5` · 25 endereço(s) conferidos · HTML 160 KB
+
+---
+
 ## 22/09/2026 18:16 — `6f00020`
 
 **O quê:** precos: instantaneo do catalogo

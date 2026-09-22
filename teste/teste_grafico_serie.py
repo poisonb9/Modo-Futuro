@@ -120,6 +120,48 @@ for nome in ("todos.html", "contra_capa.html"):
            f"{nome} escala com piso — sem ele, 1,6% vira montanha")
 
 print()
+print("4b. ⛔ EXCECAO MANUAL (print do Bryan, 22/09/2026) — so' o ID listado")
+# ⚠️ O "Filtro plastico" (id 1005007345460326) tem duas ofertas persistentes
+# sob o mesmo id (barata ~6,3x, cara ~20,8x) e a regra automatica (secao 4 do
+# docstring de serie_limpa.py) recusa apagar de proposito: os dois dias caros
+# sao VIZINHOS, nao pico isolado. Eu nao consegui confirmar no AliExpress (o
+# bot-check bloqueou); o Bryan decidiu forcar so' este produto.
+pb.RAIZ = antigo
+antigo = com_serie([
+    {"id": 1005007345460326, "preco": 6.38, "quando": "2026-09-14"},
+    {"id": 1005007345460326, "preco": 6.33, "quando": "2026-09-15"},
+    {"id": 1005007345460326, "preco": 6.35, "quando": "2026-09-16"},
+    {"id": 1005007345460326, "preco": 6.36, "quando": "2026-09-19"},
+    {"id": 1005007345460326, "preco": 20.82, "quando": "2026-09-20"},
+    {"id": 1005007345460326, "preco": 20.70, "quando": "2026-09-21"},
+])
+serie = pb._serie_de_precos()
+checar(abs(serie[1005007345460326][2] - 6.38) < 0.01,
+       "o id da excecao ganha o 'maior' forcado (6,38), nao 20,82")
+d = {"id": 1005007345460326, "preco": "R$ 6,32"}
+checar(pb._antes(serie, d) == "", "e some o riscado fantasma")
+
+print()
+print("4c. NEGATIVO — o MESMO padrao, id DIFERENTE, continua conservador")
+# ⛔ SENSIBILIDADE: a excecao e' POR ID, nao um relaxamento geral da regra.
+# Um produto qualquer com o MESMO desenho (dois dias caros vizinhos) tem de
+# continuar SEM riscado apagado — senao eu teria acabado de reintroduzir,
+# escondida, a mesma ideia de mediana que ja' foi testada e reprovada.
+pb.RAIZ = antigo
+antigo = com_serie([
+    {"id": 999, "preco": 6.38, "quando": "2026-09-14"},
+    {"id": 999, "preco": 6.33, "quando": "2026-09-15"},
+    {"id": 999, "preco": 6.35, "quando": "2026-09-16"},
+    {"id": 999, "preco": 6.36, "quando": "2026-09-19"},
+    {"id": 999, "preco": 20.82, "quando": "2026-09-20"},
+    {"id": 999, "preco": 20.70, "quando": "2026-09-21"},
+])
+serie = pb._serie_de_precos()
+checar(abs(serie[999][2] - 20.82) < 0.01,
+       "id 999 (fora da excecao) mantem o 'maior' de 20,82 -- conservador")
+pb.RAIZ = antigo
+
+print()
 print("5. O CAMPO CHEGA NOS TRES MONTADORES DE CARTAO")
 fonte = (RAIZ / "paginas" / "publicar_bio.py").read_text(encoding="utf-8")
 # ⚠️ QUATRO desde 16/09/2026: catalogo, as duas trilhas da bio e a categoria

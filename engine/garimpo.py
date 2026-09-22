@@ -404,7 +404,7 @@ def historico() -> dict[int, list[float]]:
     # `teste_vitrine_com_cartaz` que pegou, e e' para isso que ele existe.
     # A regra mora em `engine/serie_limpa.py`: uma so' para os tres caminhos.
     from engine import serie_limpa
-    por_dia = {i: serie_limpa.sem_ponto_solto(dd) for i, dd in por_dia.items()}
+    por_dia = {i: serie_limpa.sem_ponto_solto(dd, i) for i, dd in por_dia.items()}
     valor = {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
     _MEMO_HISTORICO.clear()
     _MEMO_HISTORICO.update({"chave": chave, "valor": valor})

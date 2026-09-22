@@ -64,6 +64,22 @@ estranho.
 20,82 e 20,70 — as duas altas sao VIZINHAS uma da outra, entao nao sao pico
 isolado. Pode ser variante e pode ser aumento real. A regra e' conservadora de
 proposito: na duvida, nao apaga.
+
+## ⭐ A EXCECAO MANUAL (22/09/2026)
+
+O "Filtro plastico" ficou no ar 2 dias com queda de 70% depois desta regra
+existir — o Bryan viu no celular (print) e perguntou. Tentei confirmar no
+AliExpress pelo navegador e o bot-check bloqueou (redireciona pra pagina
+generica, nao renderiza o produto). Sem forma automatica de saber se
+R$ 20,82 foi um preco real algum dia, a decisao virou HUMANA: o Bryan pediu
+pra forcar este produto agora, sem esperar mais um dia sanduichando os dois
+caros (o que a regra automatica precisaria pra resolver sozinha).
+
+`EXCECAO_MANUAL` e' isso: {id: (maior aprovado, motivo)}. Roda ANTES da
+regra automatica e para um id que esta' nela, decide sozinha — documentada,
+por id, reversivel removendo a linha. Nao muda `RUIDO_FATOR` nem
+`RUIDO_VIZINHO`: a regra geral continua a mesma, testada, para todo o
+resto do catalogo.
 """
 from __future__ import annotations
 
@@ -71,9 +87,34 @@ RUIDO_FATOR = 1.8
 RUIDO_VIZINHO = 0.25
 RUIDO_MIN_PONTOS = 4
 
+EXCECAO_MANUAL = {
+    1005007345460326: (6.38,
+        "Filtro plastico do funil: 20,82 e 20,70 sao a outra oferta do "
+        "mesmo anuncio, nao o preco real. Decisao do Bryan, 22/09/2026, "
+        "depois de EU NAO CONSEGUIR confirmar no AliExpress (bot-check "
+        "bloqueou a checagem automatica) e a regra automatica recusar "
+        "apagar por os dois dias caros serem VIZINHOS."),
+}
 
-def sem_ponto_solto(dias: dict) -> dict:
-    """{dia: preco} sem os pontos que nao sao deste produto."""
+
+def sem_ponto_solto(dias: dict, pid=None) -> dict:
+    """{dia: preco} sem os pontos que nao sao deste produto.
+
+    ⭐ `pid` e' opcional (os tres chamadores de producao sempre passam; so'
+    fica None nos testes que nao precisam da excecao). Ver EXCECAO_MANUAL.
+    """
+    if pid is not None:
+        try:
+            exc = EXCECAO_MANUAL.get(int(pid))
+        except (TypeError, ValueError):
+            exc = None
+        if exc:
+            maior, _motivo = exc
+            limpo = {q: v for q, v in dias.items() if v <= maior * 1.001}
+            if len(limpo) >= 2:
+                return limpo
+            # ⚠️ mesma trava da regra automatica: nunca devolve menos de
+            # dois pontos, senao o produto some da pagina inteira.
     if len(dias) < RUIDO_MIN_PONTOS:
         return dias
     ordem = sorted(dias)                      # por DIA, nao por valor

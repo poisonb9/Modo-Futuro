@@ -226,7 +226,7 @@ def _precos_por_dia() -> dict:
             continue
         dias = por_dia.setdefault(i, {})
         dias[q] = min(dias[q], v) if q in dias else v
-    return {i: _sem_ponto_solto(d) for i, d in por_dia.items()}
+    return {i: _sem_ponto_solto(d, i) for i, d in por_dia.items()}
 
 
 # ⭐ A LIMPEZA MORA EM `engine/serie_limpa.py`, e nao aqui. TRES caminhos
@@ -235,7 +235,7 @@ def _precos_por_dia() -> dict:
 # divergir. Quando a limpeza existia so' aqui, o `teste_vitrine_com_cartaz`
 # pegou na hora: o site dizia "sem queda" e o canal continuava anunciando
 # "de R$ 21,73" do mesmo produto, no mesmo dia. Uma regra, um arquivo.
-def _sem_ponto_solto(dias: dict) -> dict:
+def _sem_ponto_solto(dias: dict, pid=None) -> dict:
     # ⛔ A RAIZ NO PATH ANTES DO IMPORT -- e' a convencao deste arquivo
     # (linhas 133, 350, 357 fazem o mesmo). Sem isso, `python
     # paginas/publicar_bio.py --subir` estoura ModuleNotFoundError: rodando
@@ -247,7 +247,7 @@ def _sem_ponto_solto(dias: dict) -> dict:
     if str(RAIZ) not in sys.path:
         sys.path.insert(0, str(RAIZ))
     from engine import serie_limpa
-    return serie_limpa.sem_ponto_solto(dias)
+    return serie_limpa.sem_ponto_solto(dias, pid)
 
 
 # ⭐ CATEGORIAS QUE NAO VIAJAM NA PAGINA — baixam quando a pessoa clica.

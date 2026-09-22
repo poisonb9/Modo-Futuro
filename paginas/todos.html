@@ -1545,10 +1545,10 @@
   .vitrine .cap-cta { min-height: 44px; padding: 0 18px; }
   .vitrine .cap-eco { margin-top: 8px; }
   .vitrine .vplaca .serie-wrap { margin-top: 8px; }
-  .vitrine .serie-wrap .escala { margin-top: 4px;
+  .vitrine .serie-wrap .escala { margin-top: 6px;
     font: 500 var(--cap-fs-3)/1.3 Poppins, sans-serif; color: #6f6c7b; }  /* 5,1:1 */
   .vitrine .serie-wrap .escala .nq.ok { color: var(--verde); }
-  .vitrine .cap-loja { margin-top: 16px; color: #6f6c7b; }        /* entre grupos */
+  .vitrine .cap-loja { margin-top: 20px; color: #6f6c7b; }        /* entre grupos: 16 px de tinta */
   /* ⛔ A CASCATA MATOU O `tabular-nums` DO BLOCO EM SILENCIO: riscado,
      economia, escala e loja declaram `font:` (atalho), e o atalho ZERA
      `font-variant-numeric`. MEDIDO no ar: so' o preco grande saiu
@@ -1870,8 +1870,14 @@
      a direita desce pra segunda linha alinhada a` direita. */
   .serie-wrap .escala {
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2px 10px; margin-top: 4px;
-    font: 500 10.5px/1.3 Poppins, sans-serif; color: var(--fraco);
+    font: 500 0.78125rem/1.3 Poppins, sans-serif; color: #6f6c7b;
+    font-variant-numeric: tabular-nums; margin-top: 6px;
   }
+  /* ⭐ 22/09/2026 (Bryan: "aplique mecanicamente para todos os anuncios"):
+     o que a capa ganhou vale em TODO cartao. 10,5 px -> 12,5 px (a mesma
+     escala); cor FIXA #6f6c7b (5,1:1), e nao `--fraco`: o cartao e' branco
+     nos dois temas, e no tema escuro `--fraco` vira #a5a1b4 -- 2,6:1 sobre
+     branco, o cinza apagado medido na capa. Grafico -> legenda: 6 px. */
   /* ⛔ 22/09/2026: `nowrap` CORTAVA a frase na borda do cartao -- "a R$ 0,7"
      no print do Bryan (grade) e "...que eu vi" na capa, quando a escala
      subiu para 12,5 px. A frase quebra em duas linhas equilibradas; o
@@ -2399,6 +2405,12 @@
     // ⛔ O "MENOR QUE EU VI" E' DA SERIE INTEIRA, nao da janela cortada:
     // os dias baratos ANTES do pico continuam sendo o menor que eu vi.
     var menorVisto = Math.min.apply(null, s.map(function (x) { return x[1]; }));
+    // ⭐ PRECO ESTAVEL (22/09/2026): o Coador do ML ficou R$ 13,44 em TODOS
+    // os dias e a legenda dizia, em verde, "menor que eu vi ✓" -- verdade
+    // tecnica, mas e' tambem o MAIOR que eu vi. Serie sem variacao diz so'
+    // "preco estavel", sem veredito e sem verde.
+    var maiorVisto = Math.max.apply(null, s.map(function (x) { return x[1]; }));
+    var estavel = maiorVisto - menorVisto < 0.01;
     var refAntes = emReais(p.antes), refHoje = emReais(p.preco);
     if (refAntes && refHoje && refAntes > refHoje) {
       var iPico = 0;
@@ -2637,16 +2649,25 @@
       // cartoes dizem algo, contra 15% antes.
       var folga = pAgora - menorVisto;
       var perto = !noMenor && menorVisto > 0 && folga / menorVisto <= 0.03;
-      var veredito = noMenor ? " · menor que eu vi ✓"
-                   : perto ? " · a " + moeda(folga) + " do menor preço"
+      // ⚠ " ·" prende o separador na palavra ANTES dele: quando a
+      // frase quebra, a segunda linha nunca comeca com "·" (print do Bryan,
+      // Coador do ML, 22/09).
+      var veredito = estavel ? ""
+                   : noMenor ? " · menor que eu vi ✓"
+                   : perto ? " · a " + moeda(folga) + " do menor preço"
                    : "";
       // ⭐ 22/09/2026 (Bryan): produto que entrou hoje tem linha quase reta
       // porque tem poucas horas de leitura -- e a pessoa precisa saber
       // POR QUE. "novo" explica; "rastreando ha 0 dias" nao.
-      var idade = (p.dias || 0) <= 0 ? "novo · acompanhando desde hoje"
+      var idade = (p.dias || 0) <= 0 ? "novo · acompanhando desde hoje"
+                : estavel ? (p.dias === 1 ? "preço estável há 1 dia"
+                                          : "preço estável há " + p.dias + " dias")
                 : p.dias === 1 ? "rastreando há 1 dia"
                 : "rastreando há " + p.dias + " dias";
-      esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""), idade + veredito));
+      // ⭐ VERDE SO' SE A LINHA TAMBEM E' VERDE: texto verde embaixo de
+      // linha cinza e' o cartao dizendo duas coisas (Coador, 22/09).
+      esc.appendChild(el("span", "nq" + (noMenor && desceu && !estavel ? " ok" : ""),
+                         idade + veredito));
       wrap.appendChild(esc);
     }
     return wrap;
@@ -2719,6 +2740,52 @@
   //
   // ⚠ Formato brasileiro: milhar com ponto, decimal com virgula. Tirar
   // o ponto ANTES de trocar a virgula, senao "R$ 1.234,56" vira 1.23456.
+  // ⭐ AJUSTE EXATO DAS DUAS LINHAS DE BAIXO DA CAPA (22/09/2026, escolha do
+  // Bryan entre tres opcoes). MEDIDO a 430 px: legenda 302 px e loja 298 px
+  // numa largura util de 362 -- ~60 px sobrando a` direita das duas.
+  // As duas saem com o MESMO tamanho: o maior em que AMBAS cabem numa linha,
+  // entre 12,5 px (a escala) e 16 px. A mais longa encosta na borda; a outra
+  // quase. Tamanhos diferentes em linhas vizinhas leriam como desalinhamento.
+  // Se nem a 12,5 px uma delas cabe, volta a quebrar linha (o piso manda).
+  // ⚠ So' na capa: na grade, cada cartao com um tamanho diferente do vizinho
+  // viraria ruido -- repeticao e' o que faz uma grade ler como uma coisa so'.
+  var CAPA_LINHA_MIN = 12.5, CAPA_LINHA_MAX = 16, capaPlaca = null;
+  function ajustarLinhasCapa(pl) {
+    // ⛔ NUNCA PODE DERRUBAR A PAGINA. MEDIDO: o SSR roda isto no jsdom, que
+    // nao mede texto (Range sem getBoundingClientRect) -- a excecao matou a
+    // primeira tela inteira (0 cartoes). Sem medida, a linha fica no piso.
+    try { ajustarLinhasCapaJa(pl); } catch (e) { /* fica 12,5 px */ }
+  }
+  function ajustarLinhasCapaJa(pl) {
+    capaPlaca = pl;
+    var linhas = [pl.querySelector(".escala .nq"), pl.querySelector(".cap-loja")]
+      .filter(Boolean);
+    if (!linhas.length) { return; }
+    var tam = CAPA_LINHA_MAX;
+    linhas.forEach(function (l) {
+      l.style.fontSize = CAPA_LINHA_MIN + "px";
+      l.style.whiteSpace = "nowrap";
+      if (!document.createRange) { return; }
+      var r = document.createRange(); r.selectNodeContents(l);
+      if (!r.getBoundingClientRect) { return; }
+      var natural = r.getBoundingClientRect().width;
+      var disp = (l.classList.contains("nq") ? l.parentNode : l).clientWidth - 1;
+      if (natural > 0 && disp > 0) { tam = Math.min(tam, CAPA_LINHA_MIN * disp / natural); }
+    });
+    tam = Math.max(CAPA_LINHA_MIN, Math.floor(tam * 4) / 4);
+    linhas.forEach(function (l) {
+      l.style.fontSize = tam + "px";
+      l.style.whiteSpace = tam > CAPA_LINHA_MIN ? "nowrap" : "";
+    });
+  }
+  // a fonte chega depois do primeiro desenho e a largura muda ao girar a tela
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { if (capaPlaca) { ajustarLinhasCapa(capaPlaca); } });
+  }
+  window.addEventListener("resize", function () {
+    if (capaPlaca && capaPlaca.isConnected) { ajustarLinhasCapa(capaPlaca); }
+  });
+
   function emReais(s) {
     var t = String(s || "").replace(/[^0-9,.]/g, "").replace(/\./g, "").replace(",", ".");
     var v = parseFloat(t);
@@ -3881,6 +3948,7 @@
         if (partes.length) { pl.appendChild(el("div", "cap-loja", partes.join(" \u00b7 "))); }
         a.appendChild(pl);
         vit.appendChild(a);
+        ajustarLinhasCapa(pl);
       }
       var pedaco = document.createDocumentFragment();
       lista.slice(0, mostrando).forEach(function (p) {

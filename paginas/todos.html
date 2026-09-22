@@ -1549,6 +1549,13 @@
     font: 500 var(--cap-fs-3)/1.3 Poppins, sans-serif; color: #6f6c7b; }  /* 5,1:1 */
   .vitrine .serie-wrap .escala .nq.ok { color: var(--verde); }
   .vitrine .cap-loja { margin-top: 16px; color: #6f6c7b; }        /* entre grupos */
+  /* ⛔ A CASCATA MATOU O `tabular-nums` DO BLOCO EM SILENCIO: riscado,
+     economia, escala e loja declaram `font:` (atalho), e o atalho ZERA
+     `font-variant-numeric`. MEDIDO no ar: so' o preco grande saiu
+     tabular. Daqui, com especificidade acima de cada `font:`. */
+  .vitrine .vplaca .cap-linha s, .vitrine .vplaca .cap-eco,
+  .vitrine .vplaca .serie-wrap .escala, .vitrine .vplaca .cap-loja {
+    font-variant-numeric: tabular-nums; }
   /* ⚠ O SELO DA CAPA leva o foguinho ANTES da seta, na mesma pilula:
      dois selos separados brigavam pelo mesmo canto. */
   .vitrine .vselo { display: inline-flex; align-items: center; gap: 5px; }

@@ -4087,6 +4087,18 @@
             si.alt = v1.loja;
             si.loading = "lazy";
             lj.appendChild(si);
+          } else {
+            // ⚠ SEM SIMBOLO OFICIAL (a pasta simbolos_lojas esta vazia),
+            // a linha ganha um icone de LOJA desenhado, no mesmo traco da
+            // lupa. ⛔ Nunca a sigla no lugar do icone: o craft-floor do
+            // Impeccable recusa "unicode glyphs standing in for an icon
+            // system" -- e uma letra num quadrado e exatamente isso.
+            var lo = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            lo.setAttribute("viewBox", "0 0 16 16");
+            lo.setAttribute("aria-hidden", "true");
+            lo.innerHTML = '<path d="M2.6 6.2h10.8v7.2H2.6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>'
+              + '<path d="M2.2 6.2l1.2-3.6h9.2l1.2 3.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>';
+            lj.appendChild(lo);
           }
           lj.appendChild(document.createTextNode(partes.join(" \u00b7 ")));
           pl.appendChild(lj);

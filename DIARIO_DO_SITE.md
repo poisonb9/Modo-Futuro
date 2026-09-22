@@ -6,6 +6,14 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 16:22 — `412deea`
+
+**O quê:** Diario do site: publicacao do acabamento da capa (030b83f)
+
+Carimbo no ar: `1ff5310257e9` · 25 endereço(s) conferidos · HTML 156 KB
+
+---
+
 ## 22/09/2026 16:18 — `030b83f`
 
 **O quê:** Capa: acabamento medido (contraste, escala, ritmo base 4) e cor da linha

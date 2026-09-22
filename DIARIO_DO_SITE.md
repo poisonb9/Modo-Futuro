@@ -6,6 +6,32 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 19:38 — `2fe8288`
+
+**O quê:** Bloco A: o "98%" no mesmo degrau do "vendidos" (12 -> 12,5 px)
+
+**Por quê:** Mexi so' no "+N vendidos" no commit anterior e medi depois: a nota ficou em 12 px. Mesmo papel, mesmo degrau.
+
+Carimbo no ar: `d942c6f3519e` · 25 endereço(s) conferidos · HTML 164 KB
+
+---
+
+## 22/09/2026 19:33 — `49b3d62`
+
+**O quê:** Diario do site: publicacoes
+
+Carimbo no ar: `080c7f2f516d` · 25 endereço(s) conferidos · HTML 163 KB
+
+---
+
+## 22/09/2026 19:29 — `49b3d62`
+
+**O quê:** Diario do site: publicacoes
+
+Carimbo no ar: `b10942bf31c9` · 25 endereço(s) conferidos · HTML 161 KB
+
+---
+
 ## 22/09/2026 19:14 — `60dbbc7`
 
 **O quê:** Cor da legenda volta a seguir o tema (minha "correcao" quebrou o escuro)

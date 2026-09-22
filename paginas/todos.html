@@ -1738,8 +1738,12 @@
   }
   /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
   .sinais > .nota:only-child { margin-left: 0; }
+  /* ⭐ BLOCO A (22/09/2026): "+22 vendidos" (11 px) e "98%" (12 px) sao o
+     MESMO papel -- prova da loja -- e saiam em dois tamanhos. O Impeccable
+     (typeset.md) pede papeis distinguiveis sem ler, e dois tamanhos para um
+     papel so' e' o contrario disso. Os dois no degrau de 12,5 px. */
   .vendeu {
-    font: 500 11px/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0; white-space: nowrap;
+    font: 500 0.78125rem/1.25 Poppins, sans-serif; color: var(--fraco); min-width: 0; white-space: nowrap;
   }
   .promo {
     display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
@@ -1763,8 +1767,10 @@
      largura toda, 40px, sino em SVG monocromatico — zero emoji na tela. */
   .avise-me {
     display: flex; align-items: center; justify-content: center; gap: 7px;
-    width: 100%; min-height: 40px; margin-top: 2px; /* 19/09 (Bryan): colado ao preco, nao no pe' do cartao */
-    font: 600 12px/1.2 Poppins, sans-serif; color: var(--fraco);
+    /* ⭐ BLOCO A: 44 px e' o piso de alvo de toque (craft-floor). Era 40 --
+       e este e' o unico botao proprio do cartao. */
+    width: 100%; min-height: 44px; margin-top: 4px; /* 19/09 (Bryan): colado ao preco, nao no pe' do cartao */
+    font: 600 0.78125rem/1.2 Poppins, sans-serif; color: var(--fraco);
     border: 0; border-radius: 12px; padding: 8px 10px;
     text-decoration: none; background: var(--vidro-forte);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(0,0,0,.04);
@@ -1801,7 +1807,9 @@
      oficial quando ele existir, e no seletor "Loja". */
   .loja {
     display: inline-block; vertical-align: 1px; white-space: nowrap; margin-right: 1px;
-    font: 600 9px/1 Poppins, sans-serif; letter-spacing: .06em;
+    /* ⭐ BLOCO A: 9 px ficava abaixo do piso de 11 px do texto funcional
+       (craft-floor). Agora 11 px. */
+    font: 600 11px/1 Poppins, sans-serif; letter-spacing: .04em;
     color: var(--fraco); border: 0; background: rgba(0,0,0,.06);
     padding: 3px 5px; border-radius: 5px; opacity: .95;
   }
@@ -1817,8 +1825,39 @@
   .corpo { background: var(--caixa); }
   @media (prefers-color-scheme: dark) { .corpo { background: rgba(30,28,36,.94); box-shadow: inset 0 1px 0 rgba(255,255,255,.10); } }
   @supports not (backdrop-filter: blur(1px)) { .corpo { background: var(--caixa); } }
-  .nome { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+  /* ⭐ BLOCO C (decisao do Bryan): o nome e' o conteudo do cartao e era o
+     3o menor texto dele. 13,5 -> 14,5 px, ainda abaixo do preco. */
+  .nome { font-size: 14.5px; font-weight: 600; line-height: 1.3; }
   .linha-preco { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  /* ⭐ BLOCO A: numerais tabulares no cartao inteiro (craft-floor: "the
+     numerals in tabular data ship with browser defaults"). O atalho `font:`
+     de cada peca zera a propriedade, entao ela vem aqui, por peca. */
+  .item .preco, .item .de, .item .vendeu, .item .nota, .item .eco,
+  .item .ja-esteve, .item .escala { font-variant-numeric: tabular-nums; }
+  /* ⭐ BLOCO B (22/09/2026): a ECONOMIA EM REAIS, como na capa. O cartao ja'
+     dizia "↓13%" e o riscado; porcentagem e' conta, real e' decisao. */
+  .item .eco { margin-top: 4px; font: 500 0.78125rem/1.2 Poppins, sans-serif;
+    color: var(--verde, #1f7a45); }
+  .item .eco strong { font-weight: 800; }
+  /* ⭐ BLOCO B: A ACAO. Sao 90 cartoes e nenhum parecia clicavel -- o mesmo
+     defeito de affordance que o Bryan pegou na capa em 20/09 ("a pessoa nao
+     sabe que ela tem que clicar"). Mesmo ouro da capa, mesma altura de
+     toque. ⚠ E' um <span>, nao um <a>: o cartao INTEIRO ja' e' o link, e
+     <a> dentro de <a> e' HTML invalido (o parser quebra o cartao). */
+  /* ⭐ BLOCO C: o rodape que recebe o selo da loja. */
+  .item .rodape-loja { margin-top: 8px; display: flex; justify-content: flex-start; }
+  .item .cta {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%; min-height: 44px; margin-top: 8px; padding: 0 12px;
+    font: 700 0.8125rem/1 Poppins, sans-serif; color: #17161d;
+    background: var(--ouro-claro); border-radius: 999px; white-space: nowrap;
+    transition: transform 120ms cubic-bezier(.2,.8,.2,1), filter 120ms linear;
+  }
+  .item:active .cta { transform: scale(.96); filter: brightness(.94); }
+  @media (prefers-reduced-motion: reduce) {
+    .item .cta { transition: none; }
+    .item:active .cta { transform: none; }
+  }
   /* a estrela fica na MESMA linha do preco (a direita); o "de" riscado desce
      pra linha de baixo quando ha' estrela — nunca os tres disputando */
   .linha-preco:has(.nota.na-linha) { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 6px; row-gap: 2px; }
@@ -3020,11 +3059,12 @@
         // (bloco B, 18/09: sem tinta da loja no chip — um acento por cartao)
       }
       selo.title = p.loja;
-      // ⭐ NA FRENTE do nome (Bryan, 18/09: no "Organizador deslizante de
-      // panelas e tampas" o chip caia sozinho numa linha nova). Como prefixo
-      // ele nunca orfana: o nome quebra depois dele, nao antes.
-      nome.insertBefore(document.createTextNode(" "), nome.firstChild);
-      nome.insertBefore(selo, nome.firstChild);
+      // ⭐ BLOCO C (22/09/2026): o selo SAI da frente do nome e vai para o
+      // RODAPE do cartao. §1 da estetica de 18/09 ja' mandava isso e nunca
+      // foi feito: o nome e' o conteudo, e o fornecedor nao decide compra --
+      // ele responde "de onde vem", que e' pergunta de conferencia, no fim.
+      // ⚠ Guardado aqui e anexado depois de tudo (ver `rodape`).
+      a.__selo = selo;
     }
     corpo.appendChild(nome);
 
@@ -3059,6 +3099,16 @@
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }
     corpo.appendChild(lp);
+    // ⭐ BLOCO B (22/09/2026): "voce economiza R$ X", o mesmo da capa. O
+    // riscado diz o de/por e o selo diz a %; nenhum dos dois diz quanto a
+    // pessoa poupa em dinheiro, que e' o numero da decisao.
+    var vAntes = emReais(p.antes), vHoje = emReais(p.preco);
+    if (vAntes && vHoje && vAntes > vHoje) {
+      var eco = el("div", "eco");
+      eco.appendChild(document.createTextNode("você economiza "));
+      eco.appendChild(el("strong", null, moeda(vAntes - vHoje)));
+      corpo.appendChild(eco);
+    }
     // ⭐ "JA' ESTEVE A": produto que subiu mas ainda esta' abaixo do maior que
     // vimos. Discreto, na fonte do rodape, com a data — deixa a pessoa
     // decidir esperar. Quem esta' no minimo ganha o "de" riscado, nao isto.
@@ -3163,6 +3213,23 @@
     // continua em `grafico()`.
     var gr = grafico(p);
     if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
+    // ⭐ BLOCO B (22/09/2026): A ACAO, no fim do cartao. Sao 90 cartoes
+    // e nenhum parecia clicavel -- o cartao inteiro sempre foi link, mas
+    // nada dizia isso. E o mesmo defeito de affordance que a capa resolveu
+    // em 20/09, por pedido do Bryan ("a pessoa nao sabe que ela tem que
+    // clicar"). ⚠ E um <span>, nao um <a>: o cartao ja e o link, e
+    // <a> dentro de <a> e HTML invalido -- o parser quebraria o cartao.
+    var cta = el("span", "cta");
+    cta.appendChild(document.createTextNode("Comprar agora"));
+    cta.appendChild(el("span", null, "\u2192"));
+    cta.setAttribute("aria-hidden", "true");
+    corpo.appendChild(cta);
+    // ⭐ BLOCO C: o selo da loja fecha o cartao (ver onde ele e criado).
+    if (a.__selo) {
+      var rod = el("div", "rodape-loja");
+      rod.appendChild(a.__selo);
+      corpo.appendChild(rod);
+    }
     a.title = (p.pontos >= 2
       ? (p.dias <= 0 ? "no radar desde hoje"
          : (p.dias === 1 ? "no radar há 1 dia" : "no radar há " + p.dias + " dias"))

@@ -6,6 +6,14 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 15:35 — `be19fdf`
+
+**O quê:** fotos_ocr: medidas novas da publicacao
+
+Carimbo no ar: `7853b089848c` · 25 endereço(s) conferidos · HTML 155 KB
+
+---
+
 ## 22/09/2026 15:25 — `182c79b`
 
 **O quê:** Radar sempre, microvariacao visivel e "novo" pra quem entrou hoje
@@ -50,7 +58,6 @@ Carimbo no ar: `24038ae1c7bc` · 25 endereço(s) conferidos · HTML 113 KB
 
 ---
 
-<<<<<<< Updated upstream
 ## 22/09/2026 13:46 — `0d9a57a`
 
 **O quê:** serie_limpa: 2a excecao manual (Limpa vidro) + guarda permanente de microvariacao
@@ -1376,17 +1383,22 @@ Carimbo no ar: `bd1335386b05` · 25 endereço(s) conferidos · HTML 109 KB
 ---
 
 ## 21/09/2026 01:10 — `4fcc823`
-=======
-## 21/09/2026 01:07 — `4fcc823`
->>>>>>> Stashed changes
 
 **O quê:** Barra do heroi em Clear, e o fundo medido na PUBLICACAO (mata o flash)
 
 **Por quê:** 1) "deixar um pouco transparente mas chamando a atencao para o nome e principalmente o preco"
 
-<<<<<<< Updated upstream
 Carimbo no ar: `458a36f4aa8b` · 25 endereço(s) conferidos · HTML 109 KB
-=======
+
+---
+
+## 21/09/2026 01:07 — `4fcc823`
+
+**O quê:** Barra do heroi em Clear, e o fundo medido na PUBLICACAO (mata o flash)
+
+**Por quê:** 1) "deixar um pouco transparente mas chamando a atencao para o nome e principalmente o preco"
+
+Carimbo no ar: `458a36f4aa8b` · 25 endereço(s) conferidos · HTML 109 KB
 Carimbo no ar: `917e5089a80b` · 25 endereço(s) conferidos · HTML 109 KB
 
 ---
@@ -1446,7 +1458,6 @@ Carimbo no ar: `3d22d9b0cb13` · 25 endereço(s) conferidos · HTML 107 KB
 **Por quê:** 1. A REGRA QUE MANDA NO DESENHO — a regiao do #console onde o conteudo passa POR TRAS do vidro (busca e chips) esta' aprovada e FECHADA. Eu errei esse escopo uma vez e publiquei; ele so' viu porque mandou video. Mirar sempre no seletor mais estreito que resolve o problema. ⛔ E o congelamento de 19/09 (#abas e #console) NAO vale mais: ele reabriu peca por peca ao longo do dia. Quem chegar amanha precisa saber disso.
 
 Carimbo no ar: `fc33c6c7fba8` · 25 endereço(s) conferidos · HTML 104 KB
->>>>>>> Stashed changes
 
 ---
 
@@ -1735,4 +1746,3 @@ Carimbo no ar: `93e26b515f64` · 25 endereço(s) conferidos · HTML 103 KB
 Carimbo no ar: `af88cfa90b9e` · 25 endereço(s) conferidos · HTML 103 KB
 
 ---
-

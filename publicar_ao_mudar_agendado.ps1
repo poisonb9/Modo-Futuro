@@ -45,9 +45,15 @@ if ($agora.Trim() -eq $antes.Trim()) {
 
 # 2. traz o estado, publica, confere
 $saida = ''
+# 22/09/2026: o pop so' roda se o stash GUARDOU algo. Sem nada a guardar,
+# `git stash` nao cria entrada e o pop aplicava o stash ANTIGO do topo da
+# pilha (um de 21/09) -- conflito com marcadores em DIARIO, radar,
+# ml_raizes e fotos_ocr as 15:35, e um diario commitado com marcador.
+$pilhaAntes = @(& git stash list 2>$null).Count
 $saida += (& git stash -q -u 2>&1 | Out-String)
+$guardou = @(& git stash list 2>$null).Count -gt $pilhaAntes
 $saida += (& git pull --rebase -q 2>&1 | Out-String)
-$saida += (& git stash pop -q 2>&1 | Out-String)
+if ($guardou) { $saida += (& git stash pop -q 2>&1 | Out-String) }
 $saida += (& $python -X utf8 -m engine.foto_limpa --medir --timeout 20 2>&1 | Out-String)
 $saida += (& $python -X utf8 paginas/publicar_bio.py --subir 2>&1 | Out-String)
 $rc = $LASTEXITCODE

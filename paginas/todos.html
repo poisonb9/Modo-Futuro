@@ -1523,6 +1523,32 @@
   .vitrine .cap-eco strong { font-weight: 800; }
   .vitrine .cap-carimbo { margin-top: 16px; }          /* entre grupos */
   .cap-loja { font: 500 var(--cap-fs-3)/1 Poppins, sans-serif; color: #8a8794; }
+  /* ⭐ ACABAMENTO DA CAPA (22/09/2026, Bryan: "analise profundamente o
+     tamanho das letras, numeros e posicao ... o mais organizado e premium
+     possivel"). MEDIDO no ar a 375 px antes de mexer:
+       escala do grafico   10,5 px, #a5a1b4 -> 4o tamanho fora da escala e
+                           contraste 2,6:1 (ilegivel no sol)
+       linha da loja       #8a8794 -> 3,6:1 (texto pequeno pede 4,5:1)
+       riscado             #9a97a6 -> 2,9:1
+       botao               39 px de altura (toque pede 44)
+       vaos                14 / 6 / 6 / 4 / 6 -- fora do ritmo de 8, e a
+                           loja colada no grafico lia como parte dele
+     Nada novo entra; so' escala, contraste e ritmo. Cores e acentos
+     aprovados ficam onde estao. Escopo: SO' a capa (.vitrine). */
+  /* ⭐ E DA LEITURA DO IMPECCABLE (pbakaus/impeccable, atualizado 21/09 --
+     reference/typeset.md, layout.md, craft-floor.md): espacamento em BASE 4
+     ("a 4-unit base provides the middle steps an 8-only scale misses") e
+     numerais tabulares em TODO dado, nao so' no preco grande ("the numerals
+     in tabular data ship with browser defaults ... theme them"). */
+  .vitrine .vplaca { padding: 16px 16px 20px; font-variant-numeric: tabular-nums; }
+  .vitrine .cap-linha s { color: #7d7a89; }                       /* 4,2:1 */
+  .vitrine .cap-cta { min-height: 44px; padding: 0 18px; }
+  .vitrine .cap-eco { margin-top: 8px; }
+  .vitrine .vplaca .serie-wrap { margin-top: 8px; }
+  .vitrine .serie-wrap .escala { margin-top: 4px;
+    font: 500 var(--cap-fs-3)/1.3 Poppins, sans-serif; color: #6f6c7b; }  /* 5,1:1 */
+  .vitrine .serie-wrap .escala .nq.ok { color: var(--verde); }
+  .vitrine .cap-loja { margin-top: 16px; color: #6f6c7b; }        /* entre grupos */
   /* ⚠ O SELO DA CAPA leva o foguinho ANTES da seta, na mesma pilula:
      dois selos separados brigavam pelo mesmo canto. */
   .vitrine .vselo { display: inline-flex; align-items: center; gap: 5px; }
@@ -2468,7 +2494,15 @@
     // ⭐ Caiu de verdade = verde; o resto e' cinza. O limiar e' o MESMO 5%
     // que o selo "caiu X%" usa — duas leituras diferentes do mesmo dado na
     // mesma pagina e' como nasce "o grafico diz uma coisa e o selo, outra".
-    svg.setAttribute("class", "serie" + ((p.queda || 0) >= 5 ? " baixou" : ""));
+    // ⭐ A COR SEGUE A LINHA (22/09/2026, Bryan: "os produtos com queda
+    // eu quero o grafico verde; os que subiram ou estao no mesmo preco de
+    // quando comecamos, cinza"). Antes era `queda >= 5%` contra o MAIOR ja'
+    // visto -- um produto podia subir no desenho e sair verde. Agora e' o
+    // que o olho le': a linha termina ABAIXO de onde comeca (1 centavo ja'
+    // conta) = verde. Com queda, a linha ja' comeca no pico, entao os
+    // dois criterios concordam ali.
+    var desceu = vals[vals.length - 1] < vals[0] - 0.005;
+    svg.setAttribute("class", "serie" + (desceu ? " baixou" : ""));
 
     var d;
     if (p.suave) {
@@ -2537,7 +2571,7 @@
     }).join(" · ");
     svg.appendChild(t);
     var wrap = document.createElement("div");
-    wrap.className = "serie-wrap" + ((p.queda || 0) >= 5 ? " baixou" : "")
+    wrap.className = "serie-wrap" + (desceu ? " baixou" : "")
                    + (ganho ? " ganho" : "");
     wrap.appendChild(svg);
     wrap.appendChild(ponto);

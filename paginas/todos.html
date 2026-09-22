@@ -2331,6 +2331,19 @@
   // grafico e na escala; o desenho mostra FORMA, nao tamanho.
   var PISO_DO_EIXO = 0.02;
 
+  // "09-13" (dia) ou "09-21 18:46" (hora) -> milissegundos. O dia vai ao
+  // meio-dia: ele e' o menor preco do dia inteiro, nao de um instante.
+  function momentoDoRotulo(r) {
+    var mm = /^(\d\d)-(\d\d)(?: (\d\d):(\d\d))?$/.exec(r || "");
+    if (!mm) { return NaN; }
+    return Date.UTC(2000, +mm[1] - 1, +mm[2], mm[3] ? +mm[3] : 12, mm[4] ? +mm[4] : 0);
+  }
+  // "09-21 18:46" -> "21/09 18:46" (antes saia "21 18:46/09").
+  function rotuloBonito(r) {
+    var mm = /^(\d\d)-(\d\d)(.*)$/.exec(r || "");
+    return mm ? mm[2] + "/" + mm[1] + mm[3] : r;
+  }
+
   function grafico(p) {
     var s = p.serie || [];
     // ⛔ Menos de 3 pontos nao vira linha. Quem decide isso e' o publicador
@@ -2407,8 +2420,19 @@
     }
 
     var L = 100, A = 22, m = 2;
+    // ⭐ EIXO X POR TEMPO (22/09/2026). A serie agora emenda dias ("09-13")
+    // com horas ("09-21 18:46"); por INDICE, 8 dias ficariam espremidos no
+    // canto esquerdo de 93 horas. Rotulo que nao parse, ou tempo fora de
+    // ordem (virada de ano), volta ao eixo por indice -- nunca desenho torto.
+    var tempos = s.map(function (x) { return momentoDoRotulo(x[0]); });
+    var t0 = tempos[0], tN = tempos[tempos.length - 1];
+    var porTempo = tN > t0 && tempos.every(function (tt, i) {
+      return !isNaN(tt) && (i === 0 || tt >= tempos[i - 1]);
+    });
     var pts = s.map(function (x, i) {
-      var px = s.length === 1 ? L / 2 : (i / (s.length - 1)) * L;
+      var px = s.length === 1 ? L / 2
+             : porTempo ? (tempos[i] - t0) / (tN - t0) * L
+             : (i / (s.length - 1)) * L;
       // ⚠️ `vals[i]`, e nao `x[1]`: no modo ganho `vals` ja' foi trocado
       // pela economia. Ler x[1] aqui desenhava preco com escala de ganho.
       var py = m + (topo - desenho[i]) / faixa * (A - 2 * m);
@@ -2487,7 +2511,7 @@
     // que a linha mostra; deixar preco num desenho de economia era a
     // divergencia entre o dado e a tinta, por dentro.
     t.textContent = s.map(function (x, i) {
-      return x[0].split("-").reverse().join("/") + " " +
+      return rotuloBonito(x[0]) + " " +
              (ganho ? "economia R$ " : "R$ ") +
              desenho[i].toFixed(2).replace(".", ",");
     }).join(" · ");

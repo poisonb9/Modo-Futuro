@@ -162,6 +162,35 @@ checar(abs(serie[999][2] - 20.82) < 0.01,
 pb.RAIZ = antigo
 
 print()
+print("4d. ⭐ DIAS + HORAS EMENDADOS — o historico nao some (22/09/2026)")
+# ⚠️ O defeito: com leituras horarias, o desenho usava SO' as horas (~21h)
+# e o cartao dizia "rastreando ha 9 dias" com uma reta de um dia. A regra
+# nova: dias ANTES do primeiro dia coberto pelas horas + as horas. Nenhum
+# dia tem as duas fontes.
+pb.RAIZ = antigo
+antigo = com_serie([
+    {"id": 77, "preco": 59.39, "quando": "2026-09-13"},
+    {"id": 77, "preco": 60.50, "quando": "2026-09-14"},
+    {"id": 77, "preco": 60.09, "quando": "2026-09-15"},
+    {"id": 77, "preco": 59.99, "quando": "2026-09-21"},
+    {"id": 77, "preco": 59.99, "quando": "2026-09-22"},
+])
+horas = [{"id": "77", "preco": 59.99 + (0.1 if k % 3 == 0 else 0),
+          "quando": f"2026-09-{21 + k // 6}T{10 + k % 6:02d}:00"} for k in range(12)]
+(pb.RAIZ / "estado" / "precos_horas.jsonl").write_text(
+    "\n".join(json.dumps(h) for h in horas), encoding="utf-8")
+pb._MEMO_HORAS.clear()
+pts = pb._serie_curta(pb._precos_por_dia(), {"id": 77})
+rotulos = [x[0] for x in pts]
+checar(rotulos[:3] == ["09-13", "09-14", "09-15"],
+       "os tres dias antes das horas entram primeiro")
+checar(not any(r in ("09-21", "09-22") for r in rotulos),
+       "dia ja' coberto pelas horas NAO entra como ponto diario")
+checar(len(pts) == 3 + 12, "3 dias + 12 horas = 15 pontos")
+pb._MEMO_HORAS.clear()
+pb.RAIZ = antigo
+
+print()
 print("5. O CAMPO CHEGA NOS TRES MONTADORES DE CARTAO")
 fonte = (RAIZ / "paginas" / "publicar_bio.py").read_text(encoding="utf-8")
 # ⚠️ QUATRO desde 16/09/2026: catalogo, as duas trilhas da bio e a categoria

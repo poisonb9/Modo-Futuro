@@ -1030,8 +1030,20 @@
     var topo = meio + faixa / 2;
 
     var L = 100, A = 22, m = 2;
+    // ⭐ EIXO X POR TEMPO (22/09/2026) -- o mesmo do irmao (todos.html):
+    // a serie emenda dias e horas, e por indice os dias ficariam espremidos.
+    var tempos = s.map(function (x) {
+      var mm = /^(\d\d)-(\d\d)(?: (\d\d):(\d\d))?$/.exec(x[0] || "");
+      return mm ? Date.UTC(2000, +mm[1] - 1, +mm[2], mm[3] ? +mm[3] : 12, mm[4] ? +mm[4] : 0) : NaN;
+    });
+    var t0 = tempos[0], tN = tempos[tempos.length - 1];
+    var porTempo = tN > t0 && tempos.every(function (tt, i) {
+      return !isNaN(tt) && (i === 0 || tt >= tempos[i - 1]);
+    });
     var pts = s.map(function (x, i) {
-      var px = s.length === 1 ? L / 2 : (i / (s.length - 1)) * L;
+      var px = s.length === 1 ? L / 2
+             : porTempo ? (tempos[i] - t0) / (tN - t0) * L
+             : (i / (s.length - 1)) * L;
       var py = m + (topo - x[1]) / faixa * (A - 2 * m);
       return [px, py];
     });
@@ -1070,7 +1082,7 @@
     // devolve os numeros exatos, que e' o que sustenta a promessa da pagina.
     var t = document.createElementNS(NS, "title");
     t.textContent = s.map(function (x) {
-      return x[0].split("-").reverse().join("/") + " R$ " +
+      return x[0].replace(/^(\d\d)-(\d\d)/, "$2/$1") + " R$ " +
              x[1].toFixed(2).replace(".", ",");
     }).join(" · ");
     svg.appendChild(t);

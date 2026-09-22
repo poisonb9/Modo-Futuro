@@ -1750,7 +1750,19 @@ def _serie_curta(por_dia: dict, d: dict, minimo: int = 3) -> list:
     # a trava de 24 h.
     dias_cobertos = {q[:10] for q, _ in horas}
     if len(horas) >= 8 and len(dias_cobertos) >= 2:
-        return [[q[5:16].replace("T", " "), v] for q, v in horas]
+        # ⭐ EMENDA, E NAO TROCA (22/09/2026). Ate' hoje as horas SUBSTITUIAM
+        # o diario inteiro: o cartao dizia "rastreando ha' 9 dias" e desenhava
+        # ~21 horas -- e jogava fora justamente os dias em que o preco tinha
+        # se mexido (MEDIDO na capa: 59,39 -> 60,50 -> 59,99 no diario, e 93
+        # leituras horarias quase todas a 59,99). O Bryan viu reto e perguntou.
+        # ⚠ Continua valendo "uma fonte so' POR INSTANTE": dia diario entra
+        # so' ANTES do primeiro dia coberto pelas horas, entao nenhum dia tem
+        # as duas fontes e o artefato "desce todo fim de dia" nao existe.
+        # O eixo x do desenho e' por TEMPO (ver `grafico()` na pagina), senao
+        # 8 dias ficariam espremidos no canto de 93 horas.
+        inicio = min(dias_cobertos)
+        antes = [[k[5:], round(v, 2)] for k, v in sorted(dias.items()) if k < inicio]
+        return antes + [[q[5:16].replace("T", " "), v] for q, v in horas]
     # ⭐ "MM-DD" e nao a data inteira: o ano nao cabe no eixo e nao muda nada
     # pra quem le. Sao ~14 bytes por ponto no JSON da pagina.
     return [[k[5:], round(v, 2)] for k, v in sorted(dias.items())]

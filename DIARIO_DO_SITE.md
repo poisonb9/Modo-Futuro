@@ -6,6 +6,32 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 15:25 — `182c79b`
+
+**O quê:** Radar sempre, microvariacao visivel e "novo" pra quem entrou hoje
+
+**Por quê:** Pedido do Bryan (22/09/2026), depois de a capa cair num produto sem queda e o cartao perder o grafico: "quero microvariacoes, de hora em hora, tanto pra cima como pra baixo", e produto que entrou hoje deve dizer que e' novo, pra linha reta ter explicacao.
+
+Carimbo no ar: `d09e1243384b` · 25 endereço(s) conferidos · HTML 153 KB
+
+---
+
+## 22/09/2026 15:15 — `4c54d56`
+
+**O quê:** garimpo: precos vistos
+
+Carimbo no ar: `60b99701572c` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 14:45 — `2a49d10`
+
+**O quê:** Diario do site: republicacao com estado limpo (fotos_ocr sem conflito)
+
+Carimbo no ar: `9c7904566b8f` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
 ## 22/09/2026 14:15 — `f6d26ea`
 
 **O quê:** Diario do site: publicacao da regra de oferta dupla (582d89a)

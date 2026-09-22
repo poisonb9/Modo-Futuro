@@ -4100,8 +4100,11 @@
             var lo = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             lo.setAttribute("viewBox", "0 0 16 16");
             lo.setAttribute("aria-hidden", "true");
-            lo.innerHTML = '<path d="M2.6 6.2h10.8v7.2H2.6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>'
-              + '<path d="M2.2 6.2l1.2-3.6h9.2l1.2 3.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>';
+            // ⭐ 22/09 (Bryan): "o icone da loja pode ser um simbolo de
+            // certo, mas sem ser esse emoticon". Visto DESENHADO dentro de
+            // circulo, mesmo traco da lupa -- diz "conferido na loja".
+            lo.innerHTML = '<circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+              + '<path d="M5.4 8.2l1.9 1.9 3.4-3.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
             lj.appendChild(lo);
           }
           lj.appendChild(document.createTextNode(partes.join(" \u00b7 ")));

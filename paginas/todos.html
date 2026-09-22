@@ -1867,8 +1867,14 @@
      sabe que ela tem que clicar"). Mesmo ouro da capa, mesma altura de
      toque. ⚠ E' um <span>, nao um <a>: o cartao INTEIRO ja' e' o link, e
      <a> dentro de <a> e' HTML invalido (o parser quebra o cartao). */
-  /* ⭐ BLOCO C: o rodape que recebe o selo da loja. */
-  .item .rodape-loja { margin-top: 8px; display: flex; justify-content: flex-start; }
+  /* ⭐ A PROCEDENCIA COMO LEGENDA (22/09/2026, Bryan: "leva pra legenda").
+     Mesmo degrau, mesma cor e mesmo dono das outras linhas de legenda -- o
+     chip solto no rodape lia como botao morto. */
+  .item .leg-loja { display: flex; align-items: center; gap: 6px;
+    font: 500 0.78125rem/1.3 Poppins, sans-serif; color: var(--fraco); }
+  .item .leg-loja .leg-simbolo { width: 13px; height: 13px; flex: 0 0 auto;
+    border-radius: 3px; opacity: .9; }
+  .item .leg-loja svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .9; }
   .item .cta {
     display: flex; align-items: center; justify-content: center; gap: 6px;
     width: 100%; min-height: 44px; margin-top: 8px; padding: 0 12px;
@@ -2423,6 +2429,21 @@
     if (classe) { e.className = classe; }
     if (texto !== undefined) { e.textContent = texto; }
     return e;
+  }
+  // ⭐ O VISTO DESENHADO (22/09/2026, Bryan: "o icone da loja pode ser um
+  // simbolo de certo, mas sem ser esse emoticon"). Diz "conferido na loja",
+  // no mesmo traco da lupa. ⛔ Nunca a sigla no lugar do icone: o
+  // craft-floor do Impeccable recusa "unicode glyphs standing in for an icon
+  // system" -- e uma letra num quadrado e exatamente isso.
+  // ⚠ Funcao UNICA porque a capa e a grade desenham o mesmo visto: em
+  // 15/09 o mesmo conserto foi esquecido no irmao TRES vezes.
+  function vistoSVG() {
+    var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("viewBox", "0 0 16 16");
+    s.setAttribute("aria-hidden", "true");
+    s.innerHTML = '<circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+      + '<path d="M5.4 8.2l1.9 1.9 3.4-3.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    return s;
   }
   // ⭐ O GRAFICO DA SERIE — o desenho do preco que NOS vimos, dia a dia.
   //
@@ -3095,11 +3116,11 @@
         // (bloco B, 18/09: sem tinta da loja no chip — um acento por cartao)
       }
       selo.title = p.loja;
-      // ⭐ BLOCO C (22/09/2026): o selo SAI da frente do nome e vai para o
-      // RODAPE do cartao. §1 da estetica de 18/09 ja' mandava isso e nunca
-      // foi feito: o nome e' o conteudo, e o fornecedor nao decide compra --
-      // ele responde "de onde vem", que e' pergunta de conferencia, no fim.
-      // ⚠ Guardado aqui e anexado depois de tudo (ver `rodape`).
+      // ⭐ 22/09/2026: o selo saiu da frente do nome (§1 da estetica de
+      // 18/09: o nome e' o conteudo; o fornecedor responde "de onde vem",
+      // que e' pergunta de conferencia, no fim). E depois saiu tambem do
+      // rodape proprio -- hoje a procedencia e' uma LINHA DE LEGENDA, montada
+      // adiante. Este `selo` fica so' como titulo acessivel do cartao.
       a.__selo = selo;
     }
     corpo.appendChild(nome);
@@ -3249,6 +3270,29 @@
     // continua em `grafico()`.
     var gr = grafico(p, true);
     if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
+    // ⭐ 22/09/2026 (Bryan: "o ALI tem ir pra baixo agora que ficou ruim"
+    // -> "leva pra legenda"). O selo sozinho num rodape proprio ficou como um
+    // chip solto. Ele vira a TERCEIRA linha da legenda, do mesmo jeito que a
+    // capa resolveu: cada linha com DONO -- a lupa marca o que e' nosso, o
+    // visto marca o que e' da loja (layout.md: "group by meaning; use
+    // proximity before adding containers"). Sem grafico, a legenda entra
+    // sozinha antes do avise-me, para o cartao nunca perder a procedencia.
+    if (p.loja) {
+      var lloja = el("div", "leg-loja meta-linha");
+      if (SIMBOLOS[p.loja]) {
+        var sim = el("img", "leg-simbolo");
+        sim.src = SIMBOLOS[p.loja];
+        sim.alt = p.loja;
+        sim.loading = "lazy";
+        lloja.appendChild(sim);
+      } else {
+        lloja.appendChild(vistoSVG());
+      }
+      lloja.appendChild(document.createTextNode(p.loja));
+      var escG = gr && gr.querySelector(".escala");
+      if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }
+      else { corpo.insertBefore(lloja, corpo.querySelector(".avise-me")); }
+    }
     // ⭐ BLOCO B (22/09/2026): A ACAO, no fim do cartao. Sao 90 cartoes
     // e nenhum parecia clicavel -- o cartao inteiro sempre foi link, mas
     // nada dizia isso. E o mesmo defeito de affordance que a capa resolveu
@@ -3260,12 +3304,6 @@
     cta.appendChild(el("span", null, "\u2192"));
     cta.setAttribute("aria-hidden", "true");
     corpo.appendChild(cta);
-    // ⭐ BLOCO C: o selo da loja fecha o cartao (ver onde ele e criado).
-    if (a.__selo) {
-      var rod = el("div", "rodape-loja");
-      rod.appendChild(a.__selo);
-      corpo.appendChild(rod);
-    }
     a.title = (p.pontos >= 2
       ? (p.dias <= 0 ? "no radar desde hoje"
          : (p.dias === 1 ? "no radar há 1 dia" : "no radar há " + p.dias + " dias"))
@@ -4103,15 +4141,7 @@
             // lupa. ⛔ Nunca a sigla no lugar do icone: o craft-floor do
             // Impeccable recusa "unicode glyphs standing in for an icon
             // system" -- e uma letra num quadrado e exatamente isso.
-            var lo = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            lo.setAttribute("viewBox", "0 0 16 16");
-            lo.setAttribute("aria-hidden", "true");
-            // ⭐ 22/09 (Bryan): "o icone da loja pode ser um simbolo de
-            // certo, mas sem ser esse emoticon". Visto DESENHADO dentro de
-            // circulo, mesmo traco da lupa -- diz "conferido na loja".
-            lo.innerHTML = '<circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/>'
-              + '<path d="M5.4 8.2l1.9 1.9 3.4-3.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
-            lj.appendChild(lo);
+            lj.appendChild(vistoSVG());
           }
           lj.appendChild(document.createTextNode(partes.join(" \u00b7 ")));
           pl.appendChild(lj);

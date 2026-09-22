@@ -43,6 +43,31 @@
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://achadinhototal.com.br/og_achadinho.png">
+<!-- ⭐ SEO (22/09/2026, item 8 da fila): og:title/og:description ja' existiam,
+     mas o Twitter/X nao herda os do OG de forma confiavel — as tags proprias
+     sao a diferenca entre a previa vir certa ou vir generica em cima do fio. -->
+<meta name="twitter:title" content="Achadinho Total — Eu garimpo. Você paga menos.">
+<meta name="twitter:description" content="Preço conferido de hora em hora. A queda é medida contra o que eu vi, não contra a loja.">
+<!-- ⭐ DADOS ESTRUTURADOS (22/09/2026): Organization + WebSite, o par que da'
+     ao Google uma ENTIDADE pra associar ao dominio (nao so' paginas soltas).
+     `sameAs` aponta so' pro Telegram — e' o unico perfil com o MESMO nome do
+     dominio; as contas de TikTok sao marcas-irmas, nao esta entidade (ver
+     IDENTIDADE_DOS_CANAIS.md). Sem Product/Offer aqui de proposito: o
+     catalogo e' montado por JS por cima do SSR, e JSON-LD teria de nascer do
+     MESMO consolidador que a pagina usa — trabalho maior, fila em aberto. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://achadinhototal.com.br/#organizacao",
+ "name":"Achadinho Total","url":"https://achadinhototal.com.br/",
+ "logo":"https://achadinhototal.com.br/icone_app.png",
+ "sameAs":["https://t.me/achadinhototal"]},
+{"@type":"WebSite","@id":"https://achadinhototal.com.br/#site",
+ "name":"Achadinho Total","url":"https://achadinhototal.com.br/",
+ "inLanguage":"pt-BR",
+ "publisher":{"@id":"https://achadinhototal.com.br/#organizacao"},
+ "description":"O catálogo do Achadinho Total: produto, preço acompanhado dia a dia e link direto pra loja. O desconto é medido contra o preço que nós vimos."}
+]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- ⭐ FONTES SEM BLOQUEAR A RENDERIZACAO (18/09/2026): o Lighthouse mediu
@@ -689,41 +714,41 @@
     64%  { background-color: rgba(200,144,26,.18); box-shadow: 0 2px 8px rgba(200,144,26,.16); }
     100% { background-color: rgba(200,144,26,.07); box-shadow: none; }
   }
-  @keyframes acender-caixa-escuro {
+  @keyframes acender-caixa-escuro {
 
-    0%   { background-color: rgba(233,185,63,0);   box-shadow: none; }
+    0%   { background-color: rgba(233,185,63,0);   box-shadow: none; }
 
-    16%  { background-color: rgba(233,185,63,.14); box-shadow: none; }
+    16%  { background-color: rgba(233,185,63,.14); box-shadow: none; }
 
-    44%  { background-color: rgba(233,185,63,.40); box-shadow: 0 2px 16px rgba(233,185,63,.38); }
+    44%  { background-color: rgba(233,185,63,.40); box-shadow: 0 2px 16px rgba(233,185,63,.38); }
 
-    64%  { background-color: rgba(233,185,63,.20); box-shadow: 0 2px 8px rgba(233,185,63,.14); }
+    64%  { background-color: rgba(233,185,63,.20); box-shadow: 0 2px 8px rgba(233,185,63,.14); }
 
-    100% { background-color: rgba(233,185,63,.08); box-shadow: none; }
+    100% { background-color: rgba(233,185,63,.08); box-shadow: none; }
 
-  }
+  }
 
-  /* ⚠️ NOME PROPRIO em vez de redefinir `acender-caixa` dentro do @media:
+  /* ⚠️ NOME PROPRIO em vez de redefinir `acender-caixa` dentro do @media:
 
-     redefinir o mesmo nome funciona, mas quem le depois nao ve que existem
+     redefinir o mesmo nome funciona, mas quem le depois nao ve que existem
 
-     duas versoes -- e esconder isso e como a cascata me mordeu tres vezes
+     duas versoes -- e esconder isso e como a cascata me mordeu tres vezes
 
-     hoje. */
+     hoje. */
 
-  @media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
+  @media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
 
-    .vivo-cta.entra {
+    .vivo-cta.entra {
 
-      animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both,
+      animation: cta-entra 520ms cubic-bezier(.2,.8,.3,1) 90ms both,
 
-                 acender-caixa-escuro 1650ms cubic-bezier(.22,.61,.36,1) both;
+                 acender-caixa-escuro 1650ms cubic-bezier(.22,.61,.36,1) both;
 
-    }
+    }
 
-  }
+  }
 
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) {
 
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }
@@ -1450,20 +1475,20 @@
      do bloco diz "aperte". A regra de um acento por cartao continua. */
   .cap-cta { margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
     white-space: nowrap; font: 700 var(--cap-fs-2)/1 Poppins, sans-serif; color: #17161d;
-    background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px;
-    /* ⭐ O BOTAO RESPONDE AO TOQUE. O cartao inteiro ja' tinha
-       `:active { scale(.985) }`, mas o BOTAO -- a unica coisa que a pessoa
-       mira -- nao reagia. O acervo demonstra o padrao com
-       `transition: transform 250ms ease`; aqui 120 ms, porque toque pede
-       resposta imediata e 250 ms num aperto parece atraso.
-       ⚠ `transform` e `filter` so': os dois rodam no compositor e nao
-       forcam layout. Animar `padding` ou `background-color` aqui faria o
-       cartao inteiro recalcular a cada toque. */
-    transition: transform 120ms cubic-bezier(.2,.8,.2,1), filter 120ms linear; }
-  .vitrine:active .cap-cta { transform: scale(.94); filter: brightness(.94); }
-  @media (prefers-reduced-motion: reduce) {
-    .cap-cta { transition: none; }
-    .vitrine:active .cap-cta { transform: none; }
+    background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px;
+    /* ⭐ O BOTAO RESPONDE AO TOQUE. O cartao inteiro ja' tinha
+       `:active { scale(.985) }`, mas o BOTAO -- a unica coisa que a pessoa
+       mira -- nao reagia. O acervo demonstra o padrao com
+       `transition: transform 250ms ease`; aqui 120 ms, porque toque pede
+       resposta imediata e 250 ms num aperto parece atraso.
+       ⚠ `transform` e `filter` so': os dois rodam no compositor e nao
+       forcam layout. Animar `padding` ou `background-color` aqui faria o
+       cartao inteiro recalcular a cada toque. */
+    transition: transform 120ms cubic-bezier(.2,.8,.2,1), filter 120ms linear; }
+  .vitrine:active .cap-cta { transform: scale(.94); filter: brightness(.94); }
+  @media (prefers-reduced-motion: reduce) {
+    .cap-cta { transition: none; }
+    .vitrine:active .cap-cta { transform: none; }
   }
   /* ⭐ O CARIMBO e' o unico elemento com FUNDO no bloco, de proposito:
      ele tem de ler como selo, nao como legenda. E' o nosso argumento. */
@@ -1803,18 +1828,18 @@
     margin-left: -2px;
   }
   .serie-wrap.baixou .agora { background: var(--verde); }
-  .serie { display: block; width: 100%; height: 14px; }
-  /* ⭐ A AREA E' MUITO FRACA DE PROPOSITO: ela da' CORPO, nao informacao.
-     A 10% ela lê como sombra da curva; mais que isso e ela compete com a
-     linha, que e' quem carrega o dado. */
-  .serie .area { fill: var(--fraco); opacity: .10; stroke: none; }
-  .serie.baixou .area { fill: var(--verde); opacity: .13; }
-  /* ⭐ NA CAPA O GRAFICO TEM CORPO: 34 px no lugar de 14. MEDIDO no ar --
-     a 14 px, uma linha de 1,4 px atravessando 370 px de cartao nao lia como
-     grafico, lia como um risco solto. Na GRADE ele continua com 14: la' ele
-     e' nota de rodape ao lado de outras seis coisas, aqui ele e' a PROVA do
-     carimbo. Mesma peca, dois pesos, porque sao dois papeis. */
-  .vitrine .vplaca .serie { height: 34px; }
+  .serie { display: block; width: 100%; height: 14px; }
+  /* ⭐ A AREA E' MUITO FRACA DE PROPOSITO: ela da' CORPO, nao informacao.
+     A 10% ela lê como sombra da curva; mais que isso e ela compete com a
+     linha, que e' quem carrega o dado. */
+  .serie .area { fill: var(--fraco); opacity: .10; stroke: none; }
+  .serie.baixou .area { fill: var(--verde); opacity: .13; }
+  /* ⭐ NA CAPA O GRAFICO TEM CORPO: 34 px no lugar de 14. MEDIDO no ar --
+     a 14 px, uma linha de 1,4 px atravessando 370 px de cartao nao lia como
+     grafico, lia como um risco solto. Na GRADE ele continua com 14: la' ele
+     e' nota de rodape ao lado de outras seis coisas, aqui ele e' a PROVA do
+     carimbo. Mesma peca, dois pesos, porque sao dois papeis. */
+  .vitrine .vplaca .serie { height: 34px; }
   .vitrine .vplaca .serie .linha { stroke-width: 2; }
   .serie .linha {
     fill: none; stroke: var(--fraco); stroke-width: 1.4;

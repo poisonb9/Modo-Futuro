@@ -18,6 +18,14 @@
      pastas (bios e site mae). -->
 <link rel="apple-touch-icon" href="/icone_app.png">
 <link rel="icon" href="/icone.png">
+<!-- ⭐ SEO (22/09/2026, item 8 da fila): NOINDEX de proposito. Esta MESMA
+     pagina e' publicada em 5-7 subdominios (um por canal) com o mesmo HTML
+     — se o Google indexasse os sete, seria conteudo duplicado competindo
+     contra o proprio dominio principal, que e' quem o `sitemap.xml` ja'
+     assume como o unico endereco canonico (so' lista achadinhototal.com.br).
+     `follow` continua: o link pro site mae (achadinhototal.com.br) nesta
+     pagina ainda deve contar peso pra ele, so' esta pagina que nao compete. -->
+<meta name="robots" content="noindex,follow">
 <!-- Verificacao de propriedade do Awin (12/09/2026): eles pedem a palavra
      "Awin" no codigo-fonte pra confirmar que a pagina e' nossa. Meta tag,
      e nao comentario, porque o publicador TIRA comentario. -->

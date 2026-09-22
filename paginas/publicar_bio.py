@@ -2696,8 +2696,13 @@ def publicar_no_ar(html: str, parceiros: str = "",
                 (casa / "index.html").write_text(catalogo, encoding="utf-8")
                 # ⭐ indexacao (17/09/2026): robots, sitemap e www -> raiz
                 (casa / "robots.txt").write_text(robots_txt(), encoding="utf-8")
+                # ⭐ SEO (22/09/2026, item 8 da fila): `/privacidade` faltava
+                # aqui — ela E' escrita no deploy (`_por_privacidade` mais
+                # abaixo) mas nunca tinha entrado no mapa. Pagina real, sem
+                # ela, so' fica visivel pra quem ja' sabe o endereco.
                 (casa / "sitemap.xml").write_text(
-                    sitemap_xml(["/"] + (["/parceiros"] if parceiros else [])),
+                    sitemap_xml(["/", "/privacidade"]
+                                + (["/parceiros"] if parceiros else [])),
                     encoding="utf-8")
                 (casa / "_redirects").write_text(REDIRECTS, encoding="utf-8")
                 (casa / "_headers").write_text(CABECALHOS, encoding="utf-8")

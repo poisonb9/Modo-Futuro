@@ -2638,7 +2638,7 @@
       var folga = pAgora - menorVisto;
       var perto = !noMenor && menorVisto > 0 && folga / menorVisto <= 0.03;
       var veredito = noMenor ? " · menor que eu vi ✓"
-                   : perto ? " · a " + moeda(folga) + " do menor que eu vi"
+                   : perto ? " · a " + moeda(folga) + " do menor preço"
                    : "";
       // ⭐ 22/09/2026 (Bryan): produto que entrou hoje tem linha quase reta
       // porque tem poucas horas de leitura -- e a pessoa precisa saber
@@ -3823,7 +3823,7 @@
         } else if (v1.menor && Math.abs(emReais(v1.preco) - v1.menor) < 0.01) {
           frase = "nunca esteve t\u00e3o barato desde que acompanho";
         } else if (v1.menor && emReais(v1.preco) > v1.menor) {
-          frase = "a " + moeda(emReais(v1.preco) - v1.menor) + " do menor que eu j\u00e1 vi";
+          frase = "a " + moeda(emReais(v1.preco) - v1.menor) + " do menor preço";
         } else if (v1.dias > 0) {
           frase = "acompanho h\u00e1 " + v1.dias + (v1.dias === 1 ? " dia" : " dias");
         }

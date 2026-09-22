@@ -6,6 +6,14 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 16:29 — `48e5f82`
+
+**O quê:** Diario do site: publicacao do tabular-nums da capa
+
+Carimbo no ar: `1ed89e12074a` · 25 endereço(s) conferidos · HTML 157 KB
+
+---
+
 ## 22/09/2026 16:22 — `412deea`
 
 **O quê:** Diario do site: publicacao do acabamento da capa (030b83f)

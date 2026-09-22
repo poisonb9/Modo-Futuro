@@ -6,6 +6,17 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 14:11 — `582d89a`
+
+**O quê:** serie_limpa: oferta dupla CONFIRMADA sai sozinha (prova no mesmo instante)
+
+**Por quê:** Terceiro caso do dia (22/09/2026): "Bolsa grande para cabos e fones", R$ 32,29 com "de R$ 49,71" e grafico reto. Mesmo padrao dos dois anteriores -- duas ofertas reais sob o mesmo id. Remendar um por um nao escala ("toda vez", nas palavras do Bryan).
+
+Carimbo no ar: `24038ae1c7bc` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+<<<<<<< Updated upstream
 ## 22/09/2026 13:46 — `0d9a57a`
 
 **O quê:** serie_limpa: 2a excecao manual (Limpa vidro) + guarda permanente de microvariacao
@@ -1331,12 +1342,77 @@ Carimbo no ar: `bd1335386b05` · 25 endereço(s) conferidos · HTML 109 KB
 ---
 
 ## 21/09/2026 01:10 — `4fcc823`
+=======
+## 21/09/2026 01:07 — `4fcc823`
+>>>>>>> Stashed changes
 
 **O quê:** Barra do heroi em Clear, e o fundo medido na PUBLICACAO (mata o flash)
 
 **Por quê:** 1) "deixar um pouco transparente mas chamando a atencao para o nome e principalmente o preco"
 
+<<<<<<< Updated upstream
 Carimbo no ar: `458a36f4aa8b` · 25 endereço(s) conferidos · HTML 109 KB
+=======
+Carimbo no ar: `917e5089a80b` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 00:58 — `5950bba`
+
+**O quê:** Heroi: a marca de "ja' medido" nao pode atravessar o SSR
+
+**Por quê:** Conferido no ar em 21/09: o HTML servido saia com `data-fundo-medido="1"` no cartao. O SSR roda estes scripts no jsdom, onde canvas nao existe -- a medida falha, mas a MARCA ficava posta e era serializada junto com a pagina. O navegador do visitante entao via o cartao do servidor como "ja' medido" e nunca media.
+
+Carimbo no ar: `34457b99deb1` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 00:52 — `c7210a9`
+
+**O quê:** Heroi: desenho vazio nao e' medida (a foto podia nao estar decodificada)
+
+**Por quê:** MEDIDO no ar depois de ab9dff8: a funcao RODOU no cartao do servidor (`data-fundo-medido` estava posto) e mesmo assim o cartao saiu sem classe. O mesmo algoritmo, rodado a mao na mesma pagina, decidia `fundo-cena` com frac 0,000. A diferenca era o INSTANTE.
+
+Carimbo no ar: `5e1133f5a588` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 00:48 — `ab9dff8`
+
+**O quê:** Heroi: classificar tambem o cartao que veio PRONTO do servidor
+
+**Por quê:** MEDIDO no ar depois de publicar f0f13f2: a foto nova entrou, mas o cartao saiu `class="vitrine"` puro, com `object-fit: contain` e o poco branco de antes. O desenho novo nao apareceu para o visitante.
+
+Carimbo no ar: `ebf22a22839a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 21/09/2026 00:43 — `f0f13f2`
+
+**O quê:** Heroi premium: a borda da foto escolhe entre CENA e ESTUDIO
+
+**Por quê:** Bryan: "nao esta espetacular, cortando o produto, o produto meio largado, as bordas do card como foram criadas". Sao tres queixas com UMA causa: o heroi tratava TODA foto como se fosse de estudio em fundo branco.
+
+Carimbo no ar: `a3dbb080a32a` · 25 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 20/09/2026 23:36 — `6b53e0b`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `3d22d9b0cb13` · 25 endereço(s) conferidos · HTML 107 KB
+
+---
+
+## 20/09/2026 23:06 — `1c4eb4c`
+
+**O quê:** Handoff para o /clear: o dia inteiro, e as 3 armadilhas que valem mais que o codigo
+
+**Por quê:** 1. A REGRA QUE MANDA NO DESENHO — a regiao do #console onde o conteudo passa POR TRAS do vidro (busca e chips) esta' aprovada e FECHADA. Eu errei esse escopo uma vez e publiquei; ele so' viu porque mandou video. Mirar sempre no seletor mais estreito que resolve o problema. ⛔ E o congelamento de 19/09 (#abas e #console) NAO vale mais: ele reabriu peca por peca ao longo do dia. Quem chegar amanha precisa saber disso.
+
+Carimbo no ar: `fc33c6c7fba8` · 25 endereço(s) conferidos · HTML 104 KB
+>>>>>>> Stashed changes
 
 ---
 

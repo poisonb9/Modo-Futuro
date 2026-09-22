@@ -1540,7 +1540,7 @@
      ("a 4-unit base provides the middle steps an 8-only scale misses") e
      numerais tabulares em TODO dado, nao so' no preco grande ("the numerals
      in tabular data ship with browser defaults ... theme them"). */
-  .vitrine .vplaca { padding: 16px 16px 20px; font-variant-numeric: tabular-nums; }
+  .vitrine .vplaca { padding: 16px; font-variant-numeric: tabular-nums; }
   .vitrine .cap-linha s { color: var(--fraco); }                  /* seguem o tema (ver nota acima) */
   .vitrine .cap-cta { min-height: 44px; padding: 0 18px; }
   .vitrine .cap-eco { margin-top: 8px; }
@@ -2753,7 +2753,15 @@
   // Se nem a 12,5 px uma delas cabe, volta a quebrar linha (o piso manda).
   // ⚠ So' na capa: na grade, cada cartao com um tamanho diferente do vizinho
   // viraria ruido -- repeticao e' o que faz uma grade ler como uma coisa so'.
-  var CAPA_LINHA_MIN = 12.5, CAPA_LINHA_MAX = 16, capaPlaca = null;
+  // ⛔ TETO DE 13 px, e nao 16 (22/09/2026, Bryan: "achei que ficou grande
+  // as letras"). A 430 px o ajuste levava as duas linhas a 14,75 px -- e o
+  // papel de APOIO do cartao (riscado, botao, economia) e' 15 px. O
+  // Impeccable (typeset.md) exige que os papeis se distingam SEM ler:
+  // "are adjacent sizes or weights too close to carry different jobs?" e
+  // "primary, secondary, body, and metadata roles are recognizable".
+  // Metadado a 14,75 ao lado de apoio a 15 e' um papel so'. 13 px fica 2 px
+  // abaixo do apoio e 2 px acima do piso de 11 px do texto funcional.
+  var CAPA_LINHA_MIN = 12.5, CAPA_LINHA_MAX = 13, capaPlaca = null;
   function ajustarLinhasCapa(pl) {
     // ⛔ NUNCA PODE DERRUBAR A PAGINA. MEDIDO: o SSR roda isto no jsdom, que
     // nao mede texto (Range sem getBoundingClientRect) -- a excecao matou a

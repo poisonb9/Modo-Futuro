@@ -94,6 +94,18 @@ EXCECAO_MANUAL = {
         "depois de EU NAO CONSEGUIR confirmar no AliExpress (bot-check "
         "bloqueou a checagem automatica) e a regra automatica recusar "
         "apagar por os dois dias caros serem VIZINHOS."),
+    # ⛔ SEGUNDO CASO DO MESMO DIA (22/09/2026) — o proprio "Limpa vidro" que
+    # o docstring acima ja citava como prova contra a mediana. Bruto:
+    # 13-15/09 ~11,8-12,0; 16/09 27,54 (sozinho); GAP 17-19/09; 20-21/09
+    # 19,73/19,61; hoje (instantaneo, 12:43 UTC) 11,89 de novo. E' o MESMO
+    # padrao do Filtro plastico -- duas ofertas reais sob o mesmo id -- so'
+    # que a leitura barata de hoje ainda nao virou linha na serie DIARIA
+    # (so' existe no instantaneo horario), entao o "depois" que fecharia o
+    # sanduiche pra regra automatica ainda nao existe onde ela olha.
+    1005006994544782: (11.99,
+        "Limpa vidro carro: 19,73/19,61/27,54 sao a oferta cara do mesmo "
+        "anuncio (varia demais pra ser SO' aumento real -- de 19,6 a 27,5 "
+        "em 5 dias). Decisao do Bryan, 22/09/2026."),
 }
 
 

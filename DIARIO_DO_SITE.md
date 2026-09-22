@@ -6,6 +6,650 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 13:46 — `0d9a57a`
+
+**O quê:** serie_limpa: 2a excecao manual (Limpa vidro) + guarda permanente de microvariacao
+
+**Por quê:** Segundo caso do mesmo dia (22/09/2026): o "Limpa vidro" -- que o proprio docstring de serie_limpa.py ja citava como a prova contra a abordagem por mediana -- estava com o mesmo padrao do Filtro plastico. Bruto: 13-15/09 ~11,8-12,0; 16/09 27,54 sozinho; gap 17-19/09; 20-21/09 19,73/19,61; hoje (instantaneo, 12:43 UTC) 11,89 de novo. Mesma causa de fundo medida nos dois casos: a API do AliExpress devolve preco de uma OFERTA/variante diferente pro mesmo anuncio -- `target_sale_price` e `target_original_price` saltam JUNTOS, na mesma proporcao, com `discount%` identico -- e bateu especificament...
+
+Carimbo no ar: `e8e6ef55391c` · 25 endereço(s) conferidos · HTML 117 KB
+
+---
+
+## 22/09/2026 12:54 — `b623330`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `64ebf2d5170c` · 25 endereço(s) conferidos · HTML 117 KB
+
+---
+
+## 22/09/2026 11:37 — `70c64dc`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `f74f1e63472d` · 25 endereço(s) conferidos · HTML 117 KB
+
+---
+
+## 22/09/2026 11:14 — `ebd65f2`
+
+**O quê:** serie_limpa: excecao manual para o Filtro plastico (decisao do Bryan)
+
+**Por quê:** O card do "Filtro plastico do funil" (id 1005007345460326) ficou no ar com queda de 70% fantasma (R$ 20,82 -> R$ 6,32) mesmo depois da regra automatica de serie_limpa.py existir -- ela recusa apagar DE PROPOSITO porque os dois dias caros (20/09 e 21/09) sao vizinhos um do outro, nao um pico isolado no tempo (a assinatura que ela sabe reconhecer).
+
+Carimbo no ar: `b28a5da96eab` · 25 endereço(s) conferidos · HTML 116 KB
+
+---
+
+## 22/09/2026 10:33 — `c1321cc`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `5af658b481a4` · 25 endereço(s) conferidos · HTML 116 KB
+
+---
+
+## 22/09/2026 10:13 — `0d6f77f`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `3c9d53fed891` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 10:03 — `0d6f77f`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `45ba922c2e82` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 09:56 — `9ffe557`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `1682e35a643b` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 09:44 — `07e0c3a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `0fd72a1001d3` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 09:34 — `07e0c3a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `c07dc21f1513` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 09:25 — `07e0c3a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `c8a26f079b3d` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 09:12 — `07e0c3a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `2faff8dd402e` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 09:03 — `07e0c3a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `f5ae530a55d8` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 08:53 — `07e0c3a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `28a08271ea46` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 08:32 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `e1e7fd8ad2fb` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 08:23 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `7dac386dc76c` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 08:12 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `fe4bd69e1448` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 08:03 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `cb6a77442248` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 07:52 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `331534ed8f26` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 07:43 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `96f556efa1e6` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 07:33 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `704c5e5d92b8` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 07:23 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `d1576dca6759` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 07:13 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `b8db4a730a1a` · 25 endereço(s) conferidos · HTML 115 KB
+
+---
+
+## 22/09/2026 07:03 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `80eebdddda00` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 06:52 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `b9590f5d4789` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 06:42 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `fc1fa28d7a70` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 06:32 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `db689d3c01e8` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 06:23 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `9c0dd456756a` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 06:13 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `fdd2f9ace956` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 06:02 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `8466778b762f` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 05:52 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `46192eec7776` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 05:42 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `35717ecfa320` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 05:32 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `11836bb31e24` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 05:23 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `7da4139919e9` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 05:13 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `1fdfadd9873e` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 05:02 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `470ae4c4071b` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 04:53 — `2ff91a2`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `bf037744aead` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 04:46 — `f134e0a`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `d592adf21000` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 04:32 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `4b16940727f2` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 04:22 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `e1f83c9bc05b` · 25 endereço(s) conferidos · HTML 114 KB
+
+---
+
+## 22/09/2026 04:13 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `9bf27d10c537` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 04:02 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `bbb3fb39b110` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 03:52 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `124e02a3e9c3` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 03:42 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `d8ea599dfb9f` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 03:32 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `2cf75e5bb562` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 03:22 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `15fd8409d95f` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 03:15 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `8ece5c2406d9` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 03:04 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `83082266974d` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 02:52 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `e4adbacc0458` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 02:42 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `0fb7fd00d45f` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 02:32 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `81250b1c4f04` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 02:23 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `070bd5a5586d` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 02:17 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `bb72537fafa3` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 02:08 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `d4805e5459b3` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 01:43 — `01e8e25`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `e46f9502480a` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 01:30 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `a01a97fc6566` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 01:17 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `a36ff23d86ed` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 01:03 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `dadad35174e9` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 00:54 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `7d34efd91add` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 00:43 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `8937df271e54` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 00:34 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `b155209ce35a` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 00:23 — `a1add30`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `01ebdb113365` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 00:13 — `2285f74`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `84d36439dc1d` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
+## 22/09/2026 00:03 — `2285f74`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `7d52ba7145b8` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
+## 21/09/2026 23:54 — `2285f74`
+
+**O quê:** Cobertura de julgamento das fotos fecha: 0 principais sem nota
+
+**Por quê:** Julguei a fila estreita -- as 11 principais sem julgamento mais as 2 extras de candidato a capa que tinham batido cota mais cedo. 13 de 13 vieram: a cota do Gemini se recuperou desde a leva da tarde.
+
+Carimbo no ar: `0fdc066ed366` · 25 endereço(s) conferidos · HTML 112 KB
+
+---
+
 ## 21/09/2026 23:45 — `684c416`
 
 **O quê:** Foto ruim TROCA por uma extra boa, e so' desqualifica se nao houver troca

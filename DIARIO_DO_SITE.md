@@ -6,6 +6,16 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 17:11 — `e86d60f`
+
+**O quê:** Capa: vao legenda -> loja igual aos outros (Bryan: "padronize")
+
+**Por quê:** Era 20 px de margem (17 px de tinta) contra ~5 px dos outros vaos do bloco; o Bryan achou estranho. Agora 8 px de margem, a mesma distancia visual das outras linhas.
+
+Carimbo no ar: `f7917818dd03` · 25 endereço(s) conferidos · HTML 159 KB
+
+---
+
 ## 22/09/2026 17:03 — `5aba80b`
 
 **O quê:** Diario do site: publicacoes anteriores

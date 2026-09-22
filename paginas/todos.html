@@ -1761,15 +1761,18 @@
   }
   /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
   .sinais > .nota:only-child { margin-left: 0; }
-  /* ⭐ 22/09/2026 (Bryan: "os vendidos vem antes do 98%, e aproxima o maximo
-     que der os dois sem dar quebra de linha ou reticencias"): o par
-     vendidos+98% vira UM item do flex-wrap, entao quem quebra pro resto
-     (frete, envio) e' o PAR inteiro, nunca os dois um do outro. O icone da
-     estrela some SO' aqui (a` toa num par tao apertado -- o numero ao lado
-     ja' diz "%") pra abrir espaco: e' o que sobra pro numero raro de 4
-     digitos ("+3.536 vendidos") continuar sem cortar. */
+  /* ⭐ 22/09/2026 (Bryan: "os vendidos vem antes do 98%... não precisa
+     aproximar se tiver espaço suficiente para caber os dois nos extremos"):
+     o par vendidos+98% vira UM item do flex-wrap, entao quem quebra pro
+     resto (frete, envio) e' o PAR inteiro, nunca os dois um do outro.
+     `space-between` empurra os dois pras pontas QUANDO sobra espaco; o
+     `gap` e' so' o minimo pro cartao apertado, nunca os dois colados a`
+     toa. O icone da estrela some SO' aqui (o numero ao lado ja' diz "%")
+     pra abrir espaco: e' o que sobra pro numero raro de 4 digitos
+     ("+3.536 vendidos") continuar sem cortar. */
   .par-frente {
-    display: flex; align-items: center; gap: 6px 4px; min-width: 0; max-width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 6px 4px; min-width: 0; max-width: 100%; width: 100%;
   }
   .par-frente .nota svg { display: none; }
   .par-frente .nota { gap: 0; }

@@ -6,6 +6,36 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 16:18 — `030b83f`
+
+**O quê:** Capa: acabamento medido (contraste, escala, ritmo base 4) e cor da linha
+
+**Por quê:** Pedido do Bryan (22/09/2026): "analise profundamente o tamanho das letras, numeros e posicao ... o mais organizado e premium possivel", e "investigue mais a fundo, temos conhecimento novo". Medido no ar a 375 px antes de mexer; conferido contra MAESTROS_HEROI.md e contra o Impeccable atualizado em 21/09 (typeset.md, layout.md, craft-floor.md).
+
+Carimbo no ar: `8d712a3049fa` · 25 endereço(s) conferidos · HTML 155 KB
+
+---
+
+## 22/09/2026 16:09 — `d7f2738`
+
+**O quê:** Vigia so' faz stash pop se guardou algo; diario sem marcadores de conflito
+
+**Por quê:** ⛔ O DEFEITO: `publicar_ao_mudar_agendado.ps1` fazia stash, pull e pop sempre. Sem nada a guardar, `git stash` nao cria entrada e o pop aplicava o stash ANTIGO do topo da pilha (21/09, "Barra do heroi em Clear"). As 15:35 isso deixou DIARIO, radar, ml_raizes e fotos_ocr com marcadores. Eu tinha cometido o mesmo erro a mao as 14h, e o commit f6d26ea levou o DIARIO com 4 linhas de marcador; acc2284 e 2a49d10 herdaram.
+
+Carimbo no ar: `da8312e0da86` · 25 endereço(s) conferidos · HTML 154 KB
+
+---
+
+## 22/09/2026 16:01 — `d7f2738`
+
+**O quê:** Vigia so' faz stash pop se guardou algo; diario sem marcadores de conflito
+
+**Por quê:** ⛔ O DEFEITO: `publicar_ao_mudar_agendado.ps1` fazia stash, pull e pop sempre. Sem nada a guardar, `git stash` nao cria entrada e o pop aplicava o stash ANTIGO do topo da pilha (21/09, "Barra do heroi em Clear"). As 15:35 isso deixou DIARIO, radar, ml_raizes e fotos_ocr com marcadores. Eu tinha cometido o mesmo erro a mao as 14h, e o commit f6d26ea levou o DIARIO com 4 linhas de marcador; acc2284 e 2a49d10 herdaram.
+
+Carimbo no ar: `764d5d405ec5` · 25 endereço(s) conferidos · HTML 154 KB
+
+---
+
 ## 22/09/2026 15:35 — `be19fdf`
 
 **O quê:** fotos_ocr: medidas novas da publicacao

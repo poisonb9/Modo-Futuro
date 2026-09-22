@@ -2324,7 +2324,12 @@
   // ⭐ Por isso o eixo tem PISO: ele cobre no minimo 10% do preco. Abaixo
   // disso a linha sai quase reta, que e' a verdade — o preco nao fez nada.
   // Quem tem queda real e' quem ocupa a altura toda.
-  var PISO_DO_EIXO = 0.10;
+  // ⭐ 22/09/2026 (Bryan: "eu quero microvariacoes, de hora em hora, tanto
+  // pra cima como pra baixo"): o piso era 10% e achatava toda variacao
+  // menor que isso numa linha RETA -- o "grafico reto" das capas. A 2% o
+  // sobe-e-desce horario aparece. O numero exato continua no <title> do
+  // grafico e na escala; o desenho mostra FORMA, nao tamanho.
+  var PISO_DO_EIXO = 0.02;
 
   function grafico(p) {
     var s = p.serie || [];
@@ -2498,7 +2503,7 @@
     // ⭐ 18/09 (Bryan: "nao gostei da bolinha"): a bolinha so' dizia "esta
     // ponta e' hoje" — e dizia mal. O eixo escrito diz melhor: "ha' N dias"
     // numa ponta, "hoje" na outra. Sem ponto solto.
-    if (!p.suave && p.dias >= 2) {
+    if (!p.suave) {
       ponto.remove();
       var esc = el("div", "escala");
       // ⭐ 18/09 (Bryan: "'hoje' ali nao faz sentido"): a ponta esquerda diz
@@ -2546,8 +2551,13 @@
       var veredito = noMenor ? " · menor que eu vi ✓"
                    : perto ? " · a " + moeda(folga) + " do menor que eu vi"
                    : "";
-      esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""),
-        "rastreando há " + p.dias + " dias" + veredito));
+      // ⭐ 22/09/2026 (Bryan): produto que entrou hoje tem linha quase reta
+      // porque tem poucas horas de leitura -- e a pessoa precisa saber
+      // POR QUE. "novo" explica; "rastreando ha 0 dias" nao.
+      var idade = (p.dias || 0) <= 0 ? "novo · acompanhando desde hoje"
+                : p.dias === 1 ? "rastreando há 1 dia"
+                : "rastreando há " + p.dias + " dias";
+      esc.appendChild(el("span", "nq" + (noMenor ? " ok" : ""), idade + veredito));
       wrap.appendChild(esc);
     }
     return wrap;
@@ -2966,10 +2976,11 @@
     // ⭐ bloco B (18/09): o grafico so' quando ele diz algo (queda >= 5%);
     // reto e' ornamento (YC). E "no radar ha' N dias" sai do cartao: e'
     // telemetria nossa — fica no title do cartao inteiro.
-    if ((p.queda || 0) >= 5) {
-      var gr = grafico(p);
-      if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
-    }
+    // ⭐ 22/09/2026 (Bryan): radar SEMPRE, com a leitura horaria -- reto
+    // tambem diz algo ("preco parado ha' N dias"). A guarda de 3 pontos
+    // continua em `grafico()`.
+    var gr = grafico(p);
+    if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
     a.title = (p.pontos >= 2
       ? (p.dias <= 0 ? "no radar desde hoje"
          : (p.dias === 1 ? "no radar há 1 dia" : "no radar há " + p.dias + " dias"))
@@ -3732,7 +3743,9 @@
         // ⭐ Entao: com grafico, quem fala e' o grafico. Sem grafico (queda
         // abaixo de 5%, ou serie curta), o carimbo assume -- e e' justamente
         // ai' que ele importa, porque senao o cartao nao diria nada nosso.
-        var vaiTerGrafico = (v1.queda || 0) >= 5 && (v1.serie || []).length >= 3;
+        // ⭐ 22/09/2026 (Bryan): o radar vale sempre que ha' serie, com ou
+        // sem queda. O carimbo so' entra quando NAO ha' pontos.
+        var vaiTerGrafico = (v1.serie || []).length >= 3;
         if (frase && !vaiTerGrafico) {
           var car = el("div", "cap-carimbo");
           car.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true">'
@@ -3749,7 +3762,7 @@
         // regua da capa ja' exige 5 pontos de serie E queda >= 15%, entao
         // aqui ele sempre tem o que mostrar -- mas a guarda fica, porque a
         // capa pode cair no 1o da lista quando ninguem passa na regua.
-        if ((v1.queda || 0) >= 5) {
+        if (vaiTerGrafico) {
           // ⭐ A REFERENCIA DO GRAFICO E' O RISCADO, o mesmo `vA` que ja'
           // calculou o "voce economiza" acima -- nao um numero novo. Duas
           // contas para o mesmo valor e' como nasce o cartao dizendo R$ 7,84

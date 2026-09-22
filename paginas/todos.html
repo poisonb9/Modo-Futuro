@@ -2857,7 +2857,27 @@
   // "primary, secondary, body, and metadata roles are recognizable".
   // Metadado a 14,75 ao lado de apoio a 15 e' um papel so'. 13 px fica 2 px
   // abaixo do apoio e 2 px acima do piso de 11 px do texto funcional.
-  var CAPA_LINHA_MIN = 12.5, CAPA_LINHA_MAX = 13, capaPlaca = null;
+  // ⛔ 22/09/2026 (Bryan, print do celular: "deu erro na legenda que
+  //    quebrou a linha, ponha tudo na mesma linha"). O ajustador so' sabia
+  //    CRESCER (12,5 -> 13) e, quando nao cabia, desistia e deixava quebrar.
+  //    MEDIDO no ar, frase "rastreando ha 8 dias · a R$ 0,03 do menor preco"
+  //    (302 px a 12,5 px), contra a largura util da legenda:
+  //
+  //      320 px -> 248 disp   NAO cabe      390 px -> 306 disp   cabe
+  //      360 px -> 281 disp   NAO cabe      412 px -> 324 disp   cabe
+  //      375 px -> 294 disp   NAO cabe      430 px -> 339 disp   cabe
+  //
+  //    Ou seja: em TODO celular abaixo de 390 px a capa quebrava a linha no
+  //    meio da frase ("· a" / "R$ 0,03 do menor preco"). Nao era defeito do
+  //    aparelho dele -- era o piso 12,5 do ajustador.
+  // ⭐ O PISO DE VERDADE E' 11 px, e ele vem do Impeccable (typeset.md):
+  //    "functional text stays at or above 11px". O 12,5 nunca foi piso, era
+  //    o degrau PREFERIDO da escala de 3 tamanhos. Entao o ajustador passa a
+  //    encolher de 12,5 ate' 11 quando precisa, e so' abaixo de 11 e' que a
+  //    frase volta a quebrar -- porque ai' o piso manda, e ilegivel numa
+  //    linha e' pior que legivel em duas.
+  var CAPA_LINHA_MIN = 12.5, CAPA_LINHA_MAX = 13, CAPA_LINHA_PISO = 11,
+      capaPlaca = null;
   function ajustarLinhasCapa(pl) {
     // ⛔ NUNCA PODE DERRUBAR A PAGINA. MEDIDO: o SSR roda isto no jsdom, que
     // nao mede texto (Range sem getBoundingClientRect) -- a excecao matou a
@@ -2870,17 +2890,21 @@
       .filter(Boolean);
     if (!linhas.length) { return; }
     // cada linha ganha o tamanho em que ELA encosta na borda
+    // ⚠ `null` significa NAO MEDI (jsdom do SSR, sem Range que mede texto).
+    //   Nao e' o mesmo que "nao coube": sem medida a linha fica no degrau
+    //   preferido e livre para quebrar, que e' o unico palpite seguro.
     var alvos = linhas.map(function (l) {
       l.style.fontSize = CAPA_LINHA_MIN + "px";
       l.style.whiteSpace = "nowrap";
-      if (!document.createRange) { return CAPA_LINHA_MIN; }
+      if (!document.createRange) { return null; }
       var r = document.createRange(); r.selectNodeContents(l);
-      if (!r.getBoundingClientRect) { return CAPA_LINHA_MIN; }
+      if (!r.getBoundingClientRect) { return null; }
       var natural = r.getBoundingClientRect().width;
       var disp = (l.classList.contains("nq") ? l.parentNode : l).clientWidth - 1;
-      if (!(natural > 0 && disp > 0)) { return CAPA_LINHA_MIN; }
-      var t = CAPA_LINHA_MIN * disp / natural;
-      return Math.min(CAPA_LINHA_MAX, Math.max(CAPA_LINHA_MIN, Math.floor(t * 20) / 20));
+      if (!(natural > 0 && disp > 0)) { return null; }
+      // o tamanho em que a frase encosta na borda -- pode ficar ABAIXO de
+      // 12,5 agora, e e' justamente esse o caso que o Bryan fotografou.
+      return Math.floor(CAPA_LINHA_MIN * disp / natural * 20) / 20;
     });
     // ⭐ TERMINAR JUNTO (Bryan, 22/09): com tamanho PROPRIO por linha as duas
     // acabam na mesma coluna. So' que isso vale enquanto os dois tamanhos
@@ -2888,12 +2912,27 @@
     // que so' diz "rastreando ha 8 dias"), ela iria ao teto e a diferenca
     // apareceria como desalinhamento. Acima de 1 px de diferenca, as duas
     // voltam ao MENOR tamanho comum e a mais curta simplesmente sobra.
-    var juntas = Math.max.apply(null, alvos) - Math.min.apply(null, alvos) <= 1;
-    var comum = Math.min.apply(null, alvos);
+    var medidos = alvos.filter(function (a) { return a !== null; });
+    if (!medidos.length) { return; }          // SSR: fica 12,5 px, livre para quebrar
+    var juntas = Math.max.apply(null, medidos) - Math.min.apply(null, medidos) <= 1;
+    var comum = Math.min.apply(null, medidos);
+    // ⭐ UMA LINHA SO' ENQUANTO O PISO PERMITIR -- E A DECISAO E' COLETIVA.
+    //   Acima de 11 px a frase inteira cabe encolhendo, que e' o que o Bryan
+    //   pediu. Abaixo de 11 px nem encolhendo cabe, e ai' ela volta ao degrau
+    //   preferido e quebra: legivel em duas linhas e' melhor que ilegivel numa.
+    // ⛔ POR QUE COLETIVA, e nao linha a linha. MEDIDO a 340 px de tela:
+    //   a legenda cabia a 11,3 e a linha da loja so' a 10,9. Decidindo
+    //   separado, o cartao mostrava 11,3 INTEIRA ao lado de 12,5 QUEBRADA --
+    //   a linha maior sendo a que quebra, que le' como defeito. E contradiz a
+    //   regra que este mesmo bloco ja' seguia: "tamanhos diferentes em linhas
+    //   vizinhas leriam como desalinhamento". Ou as duas encolhem, ou nenhuma.
+    var cabemTodas = Math.min.apply(null, medidos) >= CAPA_LINHA_PISO;
     linhas.forEach(function (l, i) {
-      var tam = juntas ? alvos[i] : comum;
+      if (alvos[i] === null) { l.style.fontSize = ""; l.style.whiteSpace = ""; return; }
+      var ideal = juntas ? alvos[i] : comum;
+      var tam = cabemTodas ? Math.min(CAPA_LINHA_MAX, ideal) : CAPA_LINHA_MIN;
       l.style.fontSize = tam + "px";
-      l.style.whiteSpace = tam > CAPA_LINHA_MIN ? "nowrap" : "";
+      l.style.whiteSpace = cabemTodas ? "nowrap" : "";
     });
   }
   // a fonte chega depois do primeiro desenho e a largura muda ao girar a tela

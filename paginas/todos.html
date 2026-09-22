@@ -1761,16 +1761,18 @@
   }
   /* so' a estrela: fica a` esquerda, nao flutuando a` direita */
   .sinais > .nota:only-child { margin-left: 0; }
-  /* ⭐ 22/09/2026 (Bryan: "a % tem que estar na mesma linha do numero de
-     vendidos"): o par 98%+"vendidos" nunca quebra em duas linhas -- vira UM
-     item do flex-wrap, entao quem quebra e' o PAR contra o resto (frete,
-     envio), nunca o 98% sozinho contra o vendidos. Em numero raro e' grande
-     demais pro cartao (ex: "+3.536 vendidos"), o `.vendeu` corta com
-     reticencia em vez de quebrar -- a regra e' "mesma linha", nao "sem corte". */
+  /* ⭐ 22/09/2026 (Bryan: "os vendidos vem antes do 98%, e aproxima o maximo
+     que der os dois sem dar quebra de linha ou reticencias"): o par
+     vendidos+98% vira UM item do flex-wrap, entao quem quebra pro resto
+     (frete, envio) e' o PAR inteiro, nunca os dois um do outro. O icone da
+     estrela some SO' aqui (a` toa num par tao apertado -- o numero ao lado
+     ja' diz "%") pra abrir espaco: e' o que sobra pro numero raro de 4
+     digitos ("+3.536 vendidos") continuar sem cortar. */
   .par-frente {
     display: flex; align-items: center; gap: 6px 4px; min-width: 0; max-width: 100%;
   }
-  .par-frente .vendeu { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .par-frente .nota svg { display: none; }
+  .par-frente .nota { gap: 0; }
   /* ⭐ BLOCO A (22/09/2026): "+22 vendidos" (11 px) e "98%" (12 px) sao o
      MESMO papel -- prova da loja -- e saiam em dois tamanhos. O Impeccable
      (typeset.md) pede papeis distinguiveis sem ler, e dois tamanhos para um
@@ -3064,18 +3066,21 @@
         nota.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>' +
           '<span>' + Math.round(p.nota) + '%</span>';
         nota.title = Math.round(p.nota) + "% de avaliações positivas na loja";
-        // ⭐ 22/09/2026 (Bryan): "eu quero o 98% na frente dos vendidos
-        // SEMPRE". A prova de qualidade abre a linha; o volume vem depois.
+        // ⛔ 22/09/2026: a ordem "98% na frente dos vendidos SEMPRE" (mais
+        // cedo hoje) foi REVERTIDA no mesmo dia -- Bryan: "os vendidos vem
+        // antes do 98%". O volume abre a linha agora; a nota vem logo atras.
         var proximo = sinais.firstChild;
-        sinais.insertBefore(nota, proximo);
-        // ⭐ 22/09/2026 (Bryan): "a % tem que estar na mesma linha do numero
-        // de vendidos" -- nota + o chip que vem logo depois viram UM par
-        // (`.par-frente`), pra` o `flex-wrap` nunca separar os dois.
+        // ⭐ "a % tem que estar na mesma linha do numero de vendidos, o mais
+        // proximo que der, sem quebra ou reticencia" -- os dois viram UM par
+        // (`.par-frente`), pra` o `flex-wrap` nunca separar os dois; a
+        // estrela some so' dentro do par (CSS) pra abrir espaco.
         if (proximo) {
           var par = el("span", "par-frente");
-          sinais.insertBefore(par, nota);
-          par.appendChild(nota);
+          sinais.insertBefore(par, proximo);
           par.appendChild(proximo);
+          par.appendChild(nota);
+        } else {
+          sinais.appendChild(nota);
         }
       }
       if (sinais.childNodes.length) { return sinais; }

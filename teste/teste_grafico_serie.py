@@ -114,8 +114,12 @@ print("4. ⛔ OS DOIS IRMAOS DESENHAM — nao so' o catalogo")
 # ⚠️ Em 15/09 o mesmo conserto foi esquecido no irmao TRES vezes.
 for nome in ("todos.html", "contra_capa.html"):
     txt = (RAIZ / "paginas" / nome).read_text(encoding="utf-8")
-    checar("function grafico(p)" in txt, f"{nome} define grafico()")
-    checar("var gr = grafico(p);" in txt, f"{nome} chama grafico() no cartao")
+    # ⚠️ 22/09/2026: `todos.html` passou a aceitar um segundo argumento
+    # (`empilhado`, que quebra a legenda em duas linhas na grade). A guarda
+    # continua sendo "os DOIS irmaos desenham" -- so' deixou de exigir a
+    # assinatura de um argumento so'.
+    checar("function grafico(p" in txt, f"{nome} define grafico()")
+    checar("= grafico(p" in txt, f"{nome} chama grafico() no cartao")
     checar("PISO_DO_EIXO" in txt,
            f"{nome} escala com piso — sem ele, 1,6% vira montanha")
 

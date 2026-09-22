@@ -1223,7 +1223,40 @@ def marcar_capa(dados: list[dict]) -> dict | None:
         print("capa: foto trocada por extra nota "
               + str(foto_julga.julgado(url).get("nota")) + " -- " + nome[:46])
     if not cand:
-        print("capa: NENHUM produto passou na regua -- a vitrine cai no 1o da lista")
+        # ⭐ RESERVA POR QUEDA REAL (22/09/2026). Ate' hoje, sem ninguem na
+        # regua, a vitrine caia no 1o da lista -- um regador que SUBIU de
+        # preco (59,39 -> 60,09) virou capa e o Bryan perguntou por que o
+        # grafico "comeca de baixo". A capa tem de mostrar um grafico que
+        # vem do caro para o barato, e a unica forma honesta e' escolher um
+        # produto que CAIU de verdade -- nunca desenhar queda onde nao ha'.
+        # Entre os que tem queda >= 5% e serie de 3+ pontos, a maior queda
+        # ganha; a foto continua sendo piso (troca por extra boa, senao pula).
+        # ⚠ SEM foguinho: a reserva nao passou na regua mais dura, e o fogo
+        # diz exatamente isso.
+        reserva = [p for p in dados
+                   if not p.get("vitrine_fora")
+                   and float(p.get("queda") or 0) >= 5
+                   and len(p.get("serie") or []) >= 3
+                   and _preco_hoje_num(p) > 0]
+        reserva.sort(key=lambda x: (-float(x.get("queda") or 0),
+                                    -float(x.get("vitrine_nota") or 0)))
+        for p in reserva:
+            img = p.get("imagem") or ""
+            if not foto_julga.serve_de_capa(img, CAPA_FOTO_NOTA_MIN):
+                extras = (agora_fotos.get(str(p.get("id") or "")) or {}).get("imagens") or []
+                nova = foto_julga.melhor_foto(img, extras, CAPA_FOTO_NOTA_MIN)
+                if nova == img:
+                    continue
+                p["imagem"] = nova
+                print("capa: foto trocada por extra nota "
+                      + str(foto_julga.julgado(nova).get("nota")) + " -- "
+                      + (p.get("nome") or "")[:46])
+            p["capa"] = True
+            print(f"capa: NENHUM passou na regua -- reserva pela maior queda real: "
+                  f"{(p.get('nome') or '')[:40]} ({float(p.get('queda') or 0):.0f}%, "
+                  f"{len(p.get('serie') or [])} pontos)")
+            return p
+        print("capa: NENHUM produto passou na regua nem na reserva -- a vitrine cai no 1o da lista")
         return None
     cand.sort(key=lambda x: (-float(x.get("vitrine_nota") or 0),
                              -(float(x.get("ganho") or 0) * int(x.get("vendas") or 0))))

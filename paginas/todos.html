@@ -2351,6 +2351,26 @@
     // novo, ou o contrario, nao pode desenhar segmento nenhum.
     if (s.length < 3) { return null; }
 
+    // ⭐ O GRAFICO COMECA NO PICO quando ha' queda (22/09/2026). Bryan:
+    // "ele era 80,51 e esta' 77,09 -- como o grafico nao comeca nos 80,51?"
+    // O riscado e' o MAIOR preco que eu vi, e a linha comecava no PRIMEIRO
+    // dia (mais barato), subia e so' depois caia: o desenho nao conversava
+    // com o numero ao lado dele. Agora a janela e' a da queda -- do pico ate'
+    // hoje, variando no caminho. Dado inteiro verdadeiro; muda a janela.
+    // ⚠ So' com queda (riscado > preco de hoje) e se sobrarem 3+ pontos;
+    // produto que subiu ou esta' parado continua com a serie inteira.
+    // ⛔ O "MENOR QUE EU VI" E' DA SERIE INTEIRA, nao da janela cortada:
+    // os dias baratos ANTES do pico continuam sendo o menor que eu vi.
+    var menorVisto = Math.min.apply(null, s.map(function (x) { return x[1]; }));
+    var refAntes = emReais(p.antes), refHoje = emReais(p.preco);
+    if (refAntes && refHoje && refAntes > refHoje) {
+      var iPico = 0;
+      for (var kp = 1; kp < s.length; kp++) {
+        if (s[kp][1] > s[iPico][1]) { iPico = kp; }
+      }
+      if (s.length - iPico >= 3) { s = s.slice(iPico); }
+    }
+
     var vals = s.map(function (x) { return x[1]; });
     var menor = Math.min.apply(null, vals);
     var maior = Math.max.apply(null, vals);
@@ -2541,7 +2561,7 @@
       // 19/09 (Bryan): o preco de "ha N dias" e' redundante com o riscado — sai
       // 19/09 (Bryan): UMA linha. Nao e' "desconto" — e' quanto o preco de
       // hoje esta' ACIMA do menor que eu vi; dizer desconto seria mentir.
-      var noMenor = pAgora <= menor + 0.005;
+      var noMenor = pAgora <= menorVisto + 0.005;
       // 19/09 (Bryan): "ha N dias rastreando este produto"; o "acima do
       // menor" ja' esta' dito na linha "espere — ja' esteve a". So' o
       // veredito bom entra, quando ha': "menor que eu vi ✓".
@@ -2570,8 +2590,8 @@
       // "a R$ 12,00 do menor que eu vi" e' argumento para ESPERAR, nao para
       // comprar, e ai' o silencio de hoje e' melhor. Com o limiar, 43% dos
       // cartoes dizem algo, contra 15% antes.
-      var folga = pAgora - menor;
-      var perto = !noMenor && menor > 0 && folga / menor <= 0.03;
+      var folga = pAgora - menorVisto;
+      var perto = !noMenor && menorVisto > 0 && folga / menorVisto <= 0.03;
       var veredito = noMenor ? " · menor que eu vi ✓"
                    : perto ? " · a " + moeda(folga) + " do menor que eu vi"
                    : "";
@@ -3791,7 +3811,11 @@
           // calculou o "voce economiza" acima -- nao um numero novo. Duas
           // contas para o mesmo valor e' como nasce o cartao dizendo R$ 7,84
           // no texto e desenhando outra coisa na linha.
-          v1.ganhoRef = (vA > 0 && vA > vB) ? vA : 0;
+          // ⭐ 22/09/2026 (Bryan: "comecar o grafico mais em cima e ir
+          // caindo"): a capa volta ao modo PRECO, igual a' grade. No modo
+          // economia a linha cortada no pico nasce em ZERO, embaixo -- o
+          // oposto do pedido. O "voce economiza R$ X" acima continua.
+          v1.ganhoRef = 0;
           var gr = grafico(v1);
           if (gr) { pl.appendChild(gr); }
         }

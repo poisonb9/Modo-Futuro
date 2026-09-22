@@ -6,6 +6,14 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 22/09/2026 14:15 — `f6d26ea`
+
+**O quê:** Diario do site: publicacao da regra de oferta dupla (582d89a)
+
+Carimbo no ar: `837e9c787992` · 25 endereço(s) conferidos · HTML 113 KB
+
+---
+
 ## 22/09/2026 14:11 — `582d89a`
 
 **O quê:** serie_limpa: oferta dupla CONFIRMADA sai sozinha (prova no mesmo instante)

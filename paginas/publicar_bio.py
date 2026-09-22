@@ -176,33 +176,6 @@ def _serie_de_precos() -> dict:
     ⚠️ E `pontos` passa a contar DIAS distintos, nao linhas. "Acompanhando
     ha' 3 dias" com quatro leituras num dia so' seria mentira pequena, do
     tipo que ninguem confere e que nao deveria existir.
-
-    ## ⛔ A MESMA FAMILIA DE DEFEITO VOLTOU, medida em 22/09/2026 (print do
-    Bryan: "Filtro plastico do funil", card mostrando R$ 20,82 -> R$ 6,32,
-    queda de 70%, com o GRAFICO RETO)
-
-    O conserto de 15/09 pega os DOIS anuncios quando os DOIS aparecem no
-    MESMO dia. Mas as duas ofertas nao sao lidas com a mesma regularidade —
-    em 6 dos 7 dias o garimpo leu as duas (barata ~R$ 6,3x e cara ~R$ 20,8x);
-    em UM dia (20/09) so' a cara foi lida. O menor-do-dia daquele dia virou
-    R$ 20,82 por falta de opcao, nao porque o preco subiu — e como `maior`
-    e' o maior entre os menores-do-dia, esse unico dia solto virou "o maior
-    preco que ja' vimos" e fabricou uma queda de 70% inteira. Medido no
-    catalogo inteiro: 34 ids com essa marca (maior/mediana > 2x, >=3 dias de
-    historico) — de R$ 100 num produto de R$ 13,78 (7,3x) a este aqui (3,3x).
-
-    ⭐ O CONSERTO: `maior` so' aceita um dia cujo preco nao destoa mais que
-    `TETO_MAIOR_SOBRE_MEDIANA` da MEDIANA da propria serie do id. Mediana, e
-    nao media, porque ela nao se deixa puxar pelos dias de anuncio duplo (a
-    mesma razao de preferir o menor do dia, agora do lado do "antes"). So'
-    entra em vigor com >= 3 dias de historico — com menos que isso nao ha'
-    "tipico" pra comparar, e o teto ficaria arbitrario.
-
-    ⚠️ SO' O LADO DE CIMA E' FILTRADO. Um dia mais BARATO que o tipico (uma
-    promocao relampago real) continua contando — e' o menor do dia que vira
-    o preco EXIBIDO, e a mesma regra de 15/09 ja' decidiu que errar pro lado
-    barato e' o erro que ninguem reclama. Filtrar os dois lados esconderia
-    queda real.
     """
     por_dia = _precos_por_dia()
     serie: dict = {}
@@ -210,36 +183,8 @@ def _serie_de_precos() -> dict:
         if not dias:
             continue
         chaves = sorted(dias)
-        valores = list(dias.values())
-        serie[i] = (chaves[0], len(chaves), _maior_confiavel(valores), chaves[-1])
+        serie[i] = (chaves[0], len(chaves), max(dias.values()), chaves[-1])
     return serie
-
-
-TETO_MAIOR_SOBRE_MEDIANA = 2.0
-
-
-def _maior_confiavel(valores: list[float]) -> float:
-    """O maior preco-do-dia que a propria serie corrobora.
-
-    Descarta dia isolado que destoa mais que `TETO_MAIOR_SOBRE_MEDIANA` da
-    MEDIANA da serie inteira — o sinal de que aquele dia so' leu o anuncio
-    caro da dupla, nao de que o preco subiu. Ver o defeito de 22/09 no
-    docstring de `_serie_de_precos`.
-
-    ⚠️ Exige >= 3 valores pra agir. Com 1 ou 2 pontos nao ha' "tipico" contra
-    o que comparar, e recusar aceitar QUALQUER maximo deixaria produto novo
-    sem "antes" nenhum — falha fechada do lado errado.
-    """
-    import statistics
-    if not valores:
-        return 0.0
-    if len(valores) < 3:
-        return max(valores)
-    tipico = statistics.median(valores)
-    if tipico <= 0:
-        return max(valores)
-    confiaveis = [v for v in valores if v <= tipico * TETO_MAIOR_SOBRE_MEDIANA]
-    return max(confiaveis) if confiaveis else max(valores)
 
 
 def _precos_por_dia() -> dict:

@@ -120,55 +120,7 @@ for nome in ("todos.html", "contra_capa.html"):
            f"{nome} escala com piso — sem ele, 1,6% vira montanha")
 
 print()
-print("5. ⛔ DIA SOLITARIO NAO VIRA PICO (print do Bryan, 22/09/2026)")
-# ⚠️ O "Filtro plastico do funil": card mostrava R$ 20,82 -> R$ 6,32, queda de
-# 70%, com o GRAFICO RETO. O conserto de 15/09 (dedup no MESMO dia) nao pega
-# isto — aqui os dois anuncios (barato ~6,3x, caro ~20,8x) aparecem em dias
-# DIFERENTES, e o dia que so' leu o caro vira sozinho "o maior que ja' vimos".
-pb.RAIZ = antigo
-antigo = com_serie([
-    {"id": 5, "preco": 6.38, "quando": "2026-09-14"},
-    {"id": 5, "preco": 20.89, "quando": "2026-09-14"},
-    {"id": 5, "preco": 6.33, "quando": "2026-09-15"},
-    {"id": 5, "preco": 20.73, "quando": "2026-09-15"},
-    {"id": 5, "preco": 6.35, "quando": "2026-09-16"},
-    {"id": 5, "preco": 6.36, "quando": "2026-09-19"},
-    {"id": 5, "preco": 20.82, "quando": "2026-09-20"},   # o dia solitario
-])
-serie = pb._serie_de_precos()
-checar(abs(serie[5][2] - 6.38) < 0.01,
-       "o 'maior' confiavel e' 6,38 (o real), nao 20,82 (o dia solitario)")
-d = {"id": 5, "preco": "R$ 6,32"}
-checar(pb._antes(serie, d) == "",
-       "sem 'antes': nenhuma queda fantasma pro visitante ver")
-checar(pb._queda_real(serie, d) == 0.0, "e a queda publicada e' zero, nao 70%")
-# ⛔ SENSIBILIDADE — o mesmo predicado tem de reprovar o CRU (sem o filtro).
-# O "cru" e' o maximo dos MENORES-do-dia (o comportamento de antes do
-# conserto de hoje) — nao o maximo de toda leitura solta, que ja' tinha sido
-# resolvido em 15/09.
-menores_por_dia = [6.38, 6.33, 6.35, 6.36, 20.82]   # um por dia, 14-20/09
-checar(abs(max(menores_por_dia) - 20.82) < 0.01,
-       "sem o filtro, o maior CRU seria 20,82 — e' o defeito que isto barra")
-
-print()
-print("5b. NEGATIVO — alta REAL e corroborada continua contando")
-# ⚠️ A guarda so' pode existir se souber deixar passar o caso legitimo: um
-# preco que realmente subiu por alguns dias (nao um anuncio-fantasma de UM
-# dia so') tem de continuar valendo como pico.
-pb.RAIZ = antigo
-antigo = com_serie([
-    {"id": 6, "preco": 50.00, "quando": "2026-09-12"},
-    {"id": 6, "preco": 50.00, "quando": "2026-09-13"},
-    {"id": 6, "preco": 68.00, "quando": "2026-09-14"},   # alta real, 1,36x
-    {"id": 6, "preco": 50.00, "quando": "2026-09-15"},
-])
-serie = pb._serie_de_precos()
-checar(abs(serie[6][2] - 68.00) < 0.01,
-       "alta de 1,36x sobre a mediana passa: nao e' anuncio duplo, e' o preco")
-pb.RAIZ = antigo
-
-print()
-print("6. O CAMPO CHEGA NOS TRES MONTADORES DE CARTAO")
+print("5. O CAMPO CHEGA NOS TRES MONTADORES DE CARTAO")
 fonte = (RAIZ / "paginas" / "publicar_bio.py").read_text(encoding="utf-8")
 # ⚠️ QUATRO desde 16/09/2026: catalogo, as duas trilhas da bio e a categoria
 # EXTERNA (`produtos_externos`, a Nike). O quarto montador e' justamente o

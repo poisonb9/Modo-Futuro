@@ -103,6 +103,45 @@ maior_lv, _ = sl.EXCECAO_MANUAL[1005006994544782]
 checar(abs(maior_lv - 11.99) < 0.01, "o maior aprovado do Limpa vidro e' 11,99")
 
 print()
+print("7. ⭐ OFERTA DUPLA CONFIRMADA — resolve SOZINHO, sem excecao manual")
+# ⚠️ O terceiro caso do mesmo dia (22/09/2026, "Bolsa grande para cabos e
+# fones") nao ganhou excecao manual -- a regra geral por evidencia
+# resolveu sozinha. A prova e' TEMPORAL num sentido diferente do vizinho
+# no tempo: e' o MESMO instante tendo duas leituras.
+dias_bolsa = {"2026-09-12": 31.99, "2026-09-14": 31.21, "2026-09-15": 31.69,
+              "2026-09-16": 31.79, "2026-09-17": 49.71}
+maiores_bolsa = {"2026-09-12": 31.99, "2026-09-14": 48.97, "2026-09-15": 49.66,
+                  "2026-09-16": 49.88, "2026-09-17": 49.71}
+limpo = sl.sem_ponto_solto(dias_bolsa, None, maiores_bolsa)
+checar("2026-09-17" not in limpo,
+       "o 49,71 sai mesmo sem excecao manual -- 3 dias provam a oferta dupla")
+checar(len(limpo) == 4, "os quatro dias baratos ficam")
+
+print()
+print("8. ⛔ NEGATIVO — UM SO' dia com leitura dupla nao confirma nada")
+# ⚠️ SENSIBILIDADE: exigir >= 2 dias (DIAS_MIN_CONFIRMA) e' o que separa
+# "oferta dupla confirmada" do caso que o dedup-por-dia original (15/09)
+# ja' resolve sozinho -- um UNICO dia com leitura dupla nao e' prova de
+# nada alem do que ja' era tratado antes desta regra existir.
+dias_um_dia = {"2026-09-12": 13.36, "2026-09-13": 13.36, "2026-09-14": 12.56}
+maiores_um_dia = {"2026-09-12": 13.36, "2026-09-13": 13.36, "2026-09-14": 25.08}
+confirmado = sl.maior_confiavel_oferta_dupla(dias_um_dia, maiores_um_dia)
+checar(confirmado is None, "um dia so' com leitura dupla nao confirma oferta dupla")
+
+print()
+print("9. ⛔ NEGATIVO — queda/subida real, mesmo com `maiores_do_dia`, sobrevive")
+# ⚠️ A prova positiva e' PASSIVA: se o id nunca teve leitura dupla no mesmo
+# dia, `maiores_do_dia` e' identico a `dias` (uma leitura por dia, minimo
+# igual ao maximo) -- e a funcao tem de continuar deixando o degrau a
+# degrau intacto, exatamente como nos casos 1 e 2, mesmo com o parametro
+# novo preenchido.
+dias_queda = {"2026-09-13": 27.5, "2026-09-14": 26.9, "2026-09-15": 20.1,
+              "2026-09-16": 12.0, "2026-09-17": 11.8}
+limpo = sl.sem_ponto_solto(dias_queda, None, dict(dias_queda))
+checar(limpo == dias_queda,
+       "queda real com maiores_do_dia preenchido (=dias) continua intacta")
+
+print()
 if falhas:
     print(f"[x] {len(falhas)} falha(s)")
     for f in falhas:

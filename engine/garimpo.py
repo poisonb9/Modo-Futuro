@@ -375,6 +375,7 @@ def historico() -> dict[int, list[float]]:
     if _MEMO_HISTORICO.get("chave") == chave:
         return _MEMO_HISTORICO["valor"]
     por_dia: dict[int, dict[str, float]] = {}
+    maiores: dict[int, dict[str, float]] = {}
     for linha in PRECOS.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
             continue
@@ -397,6 +398,8 @@ def historico() -> dict[int, list[float]]:
             continue
         dias = por_dia.setdefault(d["id"], {})
         dias[dia] = min(dias[dia], v) if dia in dias else v
+        altos = maiores.setdefault(d["id"], {})
+        altos[dia] = max(altos[dia], v) if dia in altos else v
     # ⭐ O PONTO SOLTO SAI AQUI TAMBEM (21/09/2026). Este historico alimenta
     # `maior_visto`, que e' o "de R$ X" riscado do cartaz do Telegram. Limpar
     # so' na pagina fazia o site dizer "sem queda" e o canal anunciar "de
@@ -404,7 +407,8 @@ def historico() -> dict[int, list[float]]:
     # `teste_vitrine_com_cartaz` que pegou, e e' para isso que ele existe.
     # A regra mora em `engine/serie_limpa.py`: uma so' para os tres caminhos.
     from engine import serie_limpa
-    por_dia = {i: serie_limpa.sem_ponto_solto(dd, i) for i, dd in por_dia.items()}
+    por_dia = {i: serie_limpa.sem_ponto_solto(dd, i, maiores.get(i))
+               for i, dd in por_dia.items()}
     valor = {i: [dias[k] for k in sorted(dias)] for i, dias in por_dia.items()}
     _MEMO_HISTORICO.clear()
     _MEMO_HISTORICO.update({"chave": chave, "valor": valor})

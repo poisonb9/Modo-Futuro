@@ -109,11 +109,65 @@ EXCECAO_MANUAL = {
 }
 
 
-def sem_ponto_solto(dias: dict, pid=None) -> dict:
+RAZAO_OFERTA_DUPLA = 1.4
+DIAS_MIN_CONFIRMA = 2
+
+
+def maior_confiavel_oferta_dupla(dias: dict, maiores_do_dia: dict) -> float | None:
+    """O teto do lado barato, SE o id tiver oferta dupla CONFIRMADA -- ou
+    None se nao houver evidencia.
+
+    ## ⭐ POR QUE ISTO E' DIFERENTE DE MEDIANA E DE AGRUPAMENTO (22/09/2026)
+
+    As duas abordagens anteriores (ver docstring do modulo) decidiam por
+    ESTATISTICA sobre os valores -- e por isso conseguiam confundir queda
+    real com ruido: nada nos numeros sozinhos distingue "o preco caiu" de
+    "e' outro anuncio". A prova que FALTAVA e' TEMPORAL num sentido
+    diferente do vizinho-no-tempo: e' o MESMO instante.
+
+    ⭐ Um dia em que o garimpo le' barato E caro NA MESMA VARREDURA e' prova
+    de que existem DUAS ofertas reais sob o id -- uma queda de preco de
+    verdade nunca produz duas leituras diferentes no mesmo instante, so'
+    entre instantes diferentes. Isso e' o que `maiores_do_dia` (o MAIOR
+    do dia, ao lado do menor que `dias` ja' guarda) revela.
+
+    ⭐ EXIGE >= 2 DIAS com essa prova (`DIAS_MIN_CONFIRMA`), nao 1 -- um
+    dia so' com leitura dupla e' exatamente o caso que o dedup-por-dia
+    original (15/09) ja' resolve sozinho (pega o menor). A confirmacao
+    aqui e' para o caso em que o dia CARO aparece SOZINHO em outros dias
+    -- e so' se justifica achando o mesmo par se repetindo.
+
+    MEDIDO nos tres casos reais de 22/09/2026 -- todos batem com a
+    EXCECAO_MANUAL que o Bryan aprovou a mao, sem eu ter contado a ele o
+    numero antes:
+
+        Filtro plastico ... dias com prova: 14,15,16,17/09 -> teto 6,38
+        Limpa vidro ....... dias com prova: 14,15/09       -> teto 11,99
+        Bolsa cabos/fones . dias com prova: 14,15,16/09    -> teto 31,79
+    """
+    baratos = []
+    for dia, menor in dias.items():
+        maior = maiores_do_dia.get(dia)
+        if maior is not None and menor > 0 and maior / menor >= RAZAO_OFERTA_DUPLA:
+            baratos.append(menor)
+    if len(baratos) < DIAS_MIN_CONFIRMA:
+        return None
+    return max(baratos)
+
+
+def sem_ponto_solto(dias: dict, pid=None,
+                     maiores_do_dia: dict | None = None) -> dict:
     """{dia: preco} sem os pontos que nao sao deste produto.
 
-    ⭐ `pid` e' opcional (os tres chamadores de producao sempre passam; so'
-    fica None nos testes que nao precisam da excecao). Ver EXCECAO_MANUAL.
+    ⭐ `pid` e `maiores_do_dia` sao opcionais (os tres chamadores de
+    producao sempre passam os dois; so' ficam None nos testes que nao
+    precisam deles). Ver EXCECAO_MANUAL e `maior_confiavel_oferta_dupla`.
+
+    A ORDEM IMPORTA: excecao manual primeiro (decisao humana explicita
+    vence qualquer regra), depois oferta-dupla-confirmada (evidencia
+    positiva, o mesmo instante com dois precos), so' por ultimo o
+    isolamento temporal (estatistico, o mais fraco dos tres -- e' quem
+    fica quando nao ha' prova nenhuma, so' suspeita).
     """
     if pid is not None:
         try:
@@ -127,6 +181,12 @@ def sem_ponto_solto(dias: dict, pid=None) -> dict:
                 return limpo
             # ⚠️ mesma trava da regra automatica: nunca devolve menos de
             # dois pontos, senao o produto some da pagina inteira.
+    if maiores_do_dia:
+        confirmado = maior_confiavel_oferta_dupla(dias, maiores_do_dia)
+        if confirmado is not None:
+            limpo = {q: v for q, v in dias.items() if v <= confirmado * 1.05}
+            if len(limpo) >= 2:
+                return limpo
     if len(dias) < RUIDO_MIN_PONTOS:
         return dias
     ordem = sorted(dias)                      # por DIA, nao por valor

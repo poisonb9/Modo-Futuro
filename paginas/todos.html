@@ -957,7 +957,14 @@
      pequenos e proximos, a MESMA sombra grande vira uma mancha continua
      por baixo de todos -- o "apoiado em algo" que ele viu. So' o brilho
      de cima (aro de luz) fica; sem sombra por baixo. */
-  .chip-ordem { box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
+  /* ⛔ 23/09/2026, RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- sem
+     sombra nenhuma elas ficam coladas na superficie branca de baixo, o
+     oposto do "levantado" que ele queria desde a rodada 1. A rodada 1
+     errou pro lado de MUITA sombra (vazava nos vizinhos); esta zerou
+     DEMAIS. Meio-termo: blur bem pequeno (4px) e offset quase todo pra
+     baixo (praticamente zero espalhamento pros lados) -- da' o
+     descolamento sem repetir a mancha continua entre chips vizinhos. */
+  .chip-ordem { box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 2px 4px -1px rgba(30,40,60,.16); }
   /* ⛔ A ABA ATIVA SAIU DESTE GRUPO (20/09). Ela vinha junto do chip ligado
      e herdava `color: #fff` — e esta regra fica DEPOIS da que define a cor
      do rotulo ativo, entao vencia por ordem. Com a pilula clara isso dava
@@ -982,8 +989,13 @@
        ⛔ RODADA 3 (Bryan, foto com circulo em CADA chip, incluindo o
        preto): reduzir nao bastou -- ainda sobrava sombra visivel embaixo.
        O preenchimento SOLIDO (--tinta) ja' da' todo o "levantado" que
-       precisa por contraste; zero sombra externa aqui. */
-    box-shadow: none;
+       precisa por contraste; zero sombra externa aqui.
+       ⛔ RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- zero sombra
+       tambem zerou o descolamento deste chip da superficie branca de
+       baixo. Mesma sombra contida do chip nao-selecionado (blur 4px,
+       quase sem espalhamento lateral) -- nao repete o vazamento da
+       rodada 1. */
+    box-shadow: 0 2px 4px -1px rgba(20,20,30,.22);
   }
   .chip-ordem[aria-pressed="true"] .n { color: #fff; opacity: .85; }
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {

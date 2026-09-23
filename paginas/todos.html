@@ -574,12 +574,14 @@
   .prova .n { font: 700 19px/1 var(--mono); color: var(--tinta); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
   .prova .pico .n { color: var(--tinta); }
   /* o "conferido ha" sai de dentro da caixa: vira rodape solto e miudo */
+  /* ⛔ 23/09/2026 (Bryan: "tira esse risco debaixo do conferido"): a barra
+     de progresso animada (`<i>`, contagem visual pro proximo ciclo de 60
+     min) saiu -- linha simples, sem risco. */
   .prova .fim {
     grid-column: 1 / -1; padding: 7px 8px 0; text-align: center;
     font: 600 9px/1 var(--mono); letter-spacing: .1em; color: var(--fraco);
-    position: relative; overflow: hidden; opacity: .8;
+    opacity: .8;
   }
-  .prova .fim i { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--tinta); opacity: .5; width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
   .prova > .economia { display: none; }
   @media (max-width: 360px) { .prova .n { font-size: 17px; } .prova .cela { font-size: 9.5px; } }
   /* ⭐ "COMPRAR AGORA" QUE NASCE COM O PRECO (Bryan, 20/09: "algo como
@@ -1030,8 +1032,15 @@
      ⭐ Dois seletores NATIVOS resolvem os dois de uma vez: ocupam UMA linha,
      e ao tocar o iPhone abre a roda do sistema com todas as opcoes de uma
      vez — sem rolar a pagina e sem empurrar nada. */
+  /* ⛔ 23/09/2026 (Bryan desenhou exatamente onde: o encontro entre a fila
+     de chips e a linha Categoria/Loja embaixo dela). Os dois moram no
+     MESMO flex (`.filtros` = `#chips`) e quebram linha por `flex-wrap`;
+     o espaco entre as duas linhas empilhadas vem do `row-gap` do proprio
+     `gap` -- 8px, igual ao espaco DENTRO de cada linha. `row-gap` maior
+     separa sem tocar no espaco horizontal entre os chips nem entre
+     Categoria/Loja. */
   .filtros {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0;
+    display: flex; flex-wrap: wrap; gap: 8px; row-gap: 14px; margin-top: 0;
   }
   /* ⚠️ TRES SELETORES NO CELULAR (Preco, Categoria, Loja — desde 16/09/2026).
      A 375 px os tres cortavam em "Preç… Cate… Loja…" (o Bryan viu). Com tres
@@ -2184,6 +2193,15 @@
     background: var(--tinta); color: var(--fundo); text-decoration: none;
     padding: 13px 20px; border-radius: 999px; font-weight: 600; font-size: 15px;
   }
+  /* ⭐ 23/09/2026 (Bryan: "entrar no achadinho total e' nosso Telegram,
+     organiza esse botao"): o texto dizia "entrar", mas nada sinalizava
+     PARA ONDE -- o mesmo icone de papel (aviao) que a aba "Telegram" ja'
+     usa embaixo entra aqui tambem, mesmo path, pra ler como o MESMO
+     destino em dois lugares da pagina, nao dois convites diferentes. */
+  .botao svg {
+    width: 18px; height: 18px; flex: 0 0 18px;
+    stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
   /* ⭐ BARRA DE ABAS em vidro (Liquid Glass parte 2, 19/09/2026). E' a
      metafora do iOS 26 e o que faz a pagina "parecer app": Inicio, Quedas,
      Lojas, Telegram. Aba ativa em ouro; toque encolhe com mola. O corpo
@@ -2311,6 +2329,7 @@
     <h2>O achadinho aparece lá primeiro</h2>
     <p>Quando um preço cai, o Telegram recebe antes do vídeo sair.</p>
     <a class="botao" href="https://t.me/achadinhototal" target="_blank" rel="noopener" id="tg">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg>
       Entrar no Achadinho Total &rarr;
     </a>
   </section>
@@ -2983,7 +3002,14 @@
       // como LINHA PROPRIA (o Bryan ja' tinha pedido "duas linhas
       // inteiras", 22/09), e uma sem dono destoa das vizinhas que ja'
       // tem. As DUAS ganham o check quando empilhadas.
-      var linha1 = empilhado ? el("span", classe + " tem-icone") : el("span", classe);
+      // ⛔ 23/09/2026 (Bryan: "porque esse rastreando esta verde e o do
+      // anuncio do lado nao esta? acho que pode ficar sem ser verde
+      // mesmo"): linha1 ("rastreando ha X dias") herdava o MESMO `classe`
+      // (com " ok") da linha2 -- as duas viravam verdes juntas quando o
+      // produto batia o piso. Mas o verde e' o VEREDITO ("menor que eu
+      // vi"), nao a idade do rastreamento; linha1 fica sempre neutra,
+      // so' linha2 carrega o " ok" condicional.
+      var linha1 = empilhado ? el("span", "nq tem-icone") : el("span", classe);
       if (empilhado) { linha1.appendChild(vistoSVG()); }
       if (empilhado && veredito) {
         esc.classList.add("empilhada");
@@ -4955,13 +4981,8 @@
       : min < 60 ? "CONFERIDO HÁ " + min + " MIN · PRÓXIMA EM " + (60 - min)
       : min < 2160 ? "CONFERIDO HÁ " + Math.round(min / 60) + " H" : "CONFERIDO HÁ " + Math.round(min / 1440) + " DIAS";
     fim.appendChild(document.createTextNode(txt));
-    var barra = el("i");
-    fim.appendChild(barra);
     if (t) { fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"); }
     caixa.appendChild(fim);
-    if (min >= 0 && min < 60) {
-      requestAnimationFrame(function () { barra.style.width = (min / 60 * 100).toFixed(1) + "%"; });
-    }
     grudar();
   }
   function montarEconomia() { /* mora no mostrador (montarProva) */ }

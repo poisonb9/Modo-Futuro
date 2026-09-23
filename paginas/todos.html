@@ -1697,11 +1697,6 @@
        o conteudo e o botao, nao o texto. */
     align-items: stretch;
   }
-  /* ⭐ 23/09/2026: mensagem quando o filtro esvazia (ex: "Instantâneos" em
-     dia sem recorde). `grid-column: 1 / -1` ocupa a largura das DUAS
-     colunas -- sem isto ficaria espremida numa coluna so'. */
-  .grade-vazia { grid-column: 1 / -1; text-align: center; padding: 32px 16px;
-    font: 500 0.875rem/1.4 Poppins, sans-serif; color: var(--fraco); }
   /* ⭐ CARTAO (Liquid Glass parte 4, 19/09/2026): a foto mora num poco
      BRANCO (a foto e' o produto) e o corpo e' vidro tingido — o mesmo
      material do console. Sem borda de 1px: quem separa e' a sombra tingida
@@ -4131,11 +4126,26 @@
     }
     if (vit0) { vit0.innerHTML = ""; }
     if (!lista.length) {
+      // ⛔ 23/09/2026 (medido testando "Instantâneos" ao vivo, publicado):
+      // ESTE bloco ja' tratava a grade vazia -- a mensagem que eu tinha
+      // adicionado mais abaixo (perto de `grade.appendChild(pedaco)`) era
+      // codigo morto, porque aquele trecho so' roda no `else` final deste
+      // if/else-if/else, nunca quando `lista.length` e' zero. Removida
+      // dali; a mensagem por filtro entra AQUI, onde de fato executa.
       var v = el("div", "vazio");
-      v.appendChild(el("strong", null, "Nada aqui com esse filtro."));
-      v.appendChild(document.createElement("br"));
-      v.appendChild(document.createTextNode(
-        "Tente outra palavra, ou volte pra Tudo."));
+      var semFiltroTermo = !canal && !loja && !termo;
+      var vaziaMsg = { recorde: "nenhum produto bateu recorde de preço agora — confira de novo mais tarde.",
+                       novo: "nenhum achado novo agora — confira de novo mais tarde.",
+                       subiu: "nenhum produto subiu de preço agora — boa notícia.",
+                       todos: "nenhuma queda de 5% ou mais agora — confira de novo mais tarde." };
+      if (semFiltroTermo && vaziaMsg[atual]) {
+        v.appendChild(document.createTextNode(vaziaMsg[atual]));
+      } else {
+        v.appendChild(el("strong", null, "Nada aqui com esse filtro."));
+        v.appendChild(document.createElement("br"));
+        v.appendChild(document.createTextNode(
+          "Tente outra palavra, ou volte pro Início."));
+      }
       grade.appendChild(v);
     } else if ((canal || loja) && lista.some(caroBloco) && lista.some(function (p) {
       return !caroBloco(p);
@@ -4460,19 +4470,6 @@
         pedaco.appendChild(montar(p));
       });
       grade.appendChild(pedaco);
-      // ⛔ 23/09/2026 (medido testando "Instantâneos" ao vivo): "recorde"
-      // (menor preço em >= 14 dias) e' raro por natureza -- no dia do
-      // teste, ZERO dos 149 produtos tinham. Sem isto, a grade ficava
-      // vazia e MUDA, sem dizer se e' bug ou so' nao ha' recorde hoje. Vale
-      // pra qualquer filtro que possa esvaziar, nao so' este.
-      if (!lista.length) {
-        var vaziaMsg = { recorde: "nenhum produto bateu recorde de preço agora -- confira de novo mais tarde.",
-                         novo: "nenhum achado novo agora -- confira de novo mais tarde.",
-                         subiu: "nenhum produto subiu de preço agora -- boa notícia.",
-                         caiu: "nenhuma queda de 5% ou mais agora -- confira de novo mais tarde." };
-        var msg = vaziaMsg[atual] || "nada aqui agora -- confira de novo mais tarde.";
-        grade.appendChild(el("div", "grade-vazia", msg));
-      }
       // ⚠️ O BOTAO SO' APARECE SE HOUVER RESTO. Botao que nao faz nada ensina
       // a pessoa a ignorar botao.
       if (lista.length > mostrando) {

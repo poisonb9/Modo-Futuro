@@ -526,6 +526,7 @@ def produtos_externos() -> dict[str, dict]:
             # eram 7,5% pra todas, o numero da Nike; o Kabum paga 1,15%.
             "ganho": round(preco * _comissao_awin(p.get("loja") or "") / 100, 2),
             "antes": _antes(serie, d),
+            "subiu": _subiu(serie, por_dia, d),
             "dias": _dias(serie, d),
             "pontos": serie.get(pid, ("", 0, 0.0, ""))[1],
             "serie": _serie_curta(por_dia, d),
@@ -1021,6 +1022,7 @@ def produtos_todos() -> list[dict]:
             # canal existir e houver venda atribuida.
             "ganho": round(float(d.get("ganho_previsto") or 0), 2),
             "antes": _antes(serie, d),
+            "subiu": _subiu(serie, por_dia, d),
             "dias": _dias(serie, d),
             "pontos": serie.get(d.get("id"), ("", 0, 0.0, ""))[1],
             # ⭐ A SERIE DESENHADA. Vazia ate' haver 3 dias — ver
@@ -1948,6 +1950,37 @@ def _antes(serie: dict, d: dict) -> str:
     return f"R$ {maior:.2f}".replace(".", ",")
 
 
+def _subiu(serie: dict, por_dia: dict, d: dict) -> str:
+    """O MENOR preco que vimos, formatado — "" se hoje nao for o pico.
+
+    ⭐ 23/09/2026 (Bryan, print do celular: "R$ 55,49 sem riscado" — um
+    produto que subiu ACIMA do maior que a serie ja tinha visto. `_antes`
+    so' cobre queda (hoje < maior): quando hoje E' o maior, ele fica vazio
+    de proposito e o cartao nao mostrava nada — nem elogio nem aviso.
+    Espelho de `_antes`, na direcao oposta: se hoje e' o proprio pico da
+    serie, mostra o MENOR que ja vimos, pra virar "voce perde R$ X" no
+    cartao (confirmado por Bryan: "55,49 GRANDE, e menor o preco antigo
+    riscado embaixo").
+
+    ⚠️ MUTUAMENTE EXCLUSIVO com `_antes` por construcao: so' dispara
+    quando `maior <= hoje*1,02` -- exatamente o caso em que `_antes` ja'
+    devolve "". Nunca os dois preenchidos ao mesmo tempo.
+    """
+    tid = d.get("id")
+    maior = serie.get(tid, ("", 0, 0.0, ""))[2]
+    hoje = _preco_hoje_num(d)
+    if not (maior and hoje) or maior > hoje * 1.02:
+        return ""
+    # ⭐ reusa `_menor` (o irmao do `antes`) em vez de reler `por_dia` aqui
+    # -- a mesma queda ja' ensinou que dois caminhos pro mesmo calculo
+    # divergem em silencio (ver docstring de `_precos_por_dia`).
+    menor = _menor(por_dia, d)
+    # ⚠️ mesmo piso de 2% de `_antes`: abaixo disso e' cambio, nao subida.
+    if not menor or hoje <= menor * 1.02:
+        return ""
+    return f"R$ {menor:.2f}".replace(".", ",")
+
+
 def _preco_de_hoje(por_dia: dict, d: dict) -> str:
     """O preco da ULTIMA leitura nossa, formatado. "" se nao houver serie.
 
@@ -2117,6 +2150,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # maior valor que NOS vimos na serie, nao o "de" do vendedor.
             # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.
             "antes": _antes(serie, d),
+            "subiu": _subiu(serie, por_dia, d),
             # ha' quantos dias acompanhamos: "desde 13/09" faz a pessoa fazer
             # a conta; "ha' 2 dias" ja' entrega a conta feita.
             "dias": _dias(serie, d),
@@ -2180,6 +2214,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # maior valor que NOS vimos na serie, nao o "de" do vendedor.
             # Sem ele, "caiu 8%" e' um numero que a pessoa tem de acreditar.
             "antes": _antes(serie, d),
+            "subiu": _subiu(serie, por_dia, d),
             "dias": _dias(serie, d),
         }))
         if len(geral) >= 12:

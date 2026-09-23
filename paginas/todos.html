@@ -1521,6 +1521,11 @@
      cartao segue de pe': verde e' semantica, nao decoracao. */
   .vitrine .cap-eco { margin-top: 6px; font: 500 var(--cap-fs-2)/1 Poppins, sans-serif; color: var(--verde, #1f7a45); }
   .vitrine .cap-eco strong { font-weight: 800; }
+  /* ⭐ 23/09/2026 (Bryan): "voce perde" -- o oposto do economiza. A placa
+     (.vplaca) e' sempre branca (o preco ao lado e' #16151c, escuro), entao
+     um so' tom basta aqui -- nao precisa da troca por tema que o cartao da
+     grade precisa (o corpo dele SIM escurece no tema escuro do sistema). */
+  .vitrine .cap-eco.perde { color: #c22c14; }
   .vitrine .cap-carimbo { margin-top: 16px; }          /* entre grupos */
   .cap-loja { font: 400 0.6875rem/1 Poppins, sans-serif; color: #8a8794; }
   /* ⭐ ACABAMENTO DA CAPA (22/09/2026, Bryan: "analise profundamente o
@@ -1879,6 +1884,14 @@
   .item .eco { margin-top: 4px; font: 500 0.78125rem/1.2 Poppins, sans-serif;
     color: var(--verde, #1f7a45); }
   .item .eco strong { font-weight: 800; }
+  /* ⭐ 23/09/2026 (Bryan): o oposto de "economiza" -- mesma mecanica, cor de
+     alerta em vez de verde. Dois tons (nao um so'): #c22c14 sobre o corpo
+     branco do tema claro da' 5,8:1; no escuro o corpo e' rgba(30,28,36,.94)
+     e a MESMA cor cairia a 3:1 -- #f87171 e' o vermelho claro que passa la'
+     (6,3:1). O `--verde` do "economiza" ao lado NAO faz essa troca e fica
+     a 3,4:1 no claro; aqui nao repito o mesmo defeito. */
+  .item .eco.perde { color: #c22c14; }
+  @media (prefers-color-scheme: dark) { .item .eco.perde { color: #f87171; } }
   /* ⭐ BLOCO B: A ACAO. Sao 90 cartoes e nenhum parecia clicavel -- o mesmo
      defeito de affordance que o Bryan pegou na capa em 20/09 ("a pessoa nao
      sabe que ela tem que clicar"). Mesmo ouro da capa, mesma altura de
@@ -3249,7 +3262,12 @@
     if (notaSolta) { notaSolta.classList.add("na-linha"); lp.appendChild(notaSolta); }
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
+    // ⭐ 23/09/2026 (Bryan: "55,49 GRANDE, e menor o preço antigo riscado
+    // embaixo, no MESMO estilo"): `subiu` e' o espelho de `antes` -- quando
+    // hoje E' o pico da serie, mostra o MENOR que ja vimos, no MESMO `.de`
+    // (mutuamente exclusivo com `antes` por construcao no backend).
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }
+    else if (p.subiu) { lp.appendChild(el("span", "de subiu", p.subiu)); }
     corpo.appendChild(lp);
     // ⭐ BLOCO B (22/09/2026): "voce economiza R$ X", o mesmo da capa. O
     // riscado diz o de/por e o selo diz a %; nenhum dos dois diz quanto a
@@ -3260,6 +3278,17 @@
       eco.appendChild(document.createTextNode("você economiza "));
       eco.appendChild(el("strong", null, moeda(vAntes - vHoje)));
       corpo.appendChild(eco);
+    } else {
+      // ⭐ O OPOSTO DE "economiza": o mesmo numero, a mesma mecanica, cor de
+      // alerta em vez de verde -- "voce perde R$ X" ficando com o produto
+      // no preco de hoje em vez do menor que a gente ja viu.
+      var vSubiu = emReais(p.subiu);
+      if (vSubiu && vHoje && vHoje > vSubiu) {
+        var perde = el("div", "eco perde");
+        perde.appendChild(document.createTextNode("você perde "));
+        perde.appendChild(el("strong", null, moeda(vHoje - vSubiu)));
+        corpo.appendChild(perde);
+      }
     }
     // ⭐ "JA' ESTEVE A": produto que subiu mas ainda esta' abaixo do maior que
     // vimos. Discreto, na fonte do rodape, com a data — deixa a pessoa
@@ -4106,6 +4135,7 @@
         // NOSSA serie, nao o "de" do vendedor (que e' inflado -- medido:
         // R$ 31,48 "de R$ 122,22"). Sem ele, nao ha' riscado.
         if (v1.antes) { l1.appendChild(el("s", null, v1.antes)); }
+        else if (v1.subiu) { l1.appendChild(el("s", "subiu", v1.subiu)); }
         var cta = el("span", "cap-cta");
         cta.innerHTML = 'Comprar agora <span aria-hidden="true">\u2192</span>';
         l1.appendChild(cta);
@@ -4127,6 +4157,16 @@
           eco.appendChild(document.createTextNode("você economiza "));
           eco.appendChild(el("strong", null, moeda(vA - vB)));
           pl.appendChild(eco);
+        } else {
+          // ⭐ 23/09/2026 (Bryan): o mesmo bloco B, na direcao oposta --
+          // "voce perde R$ X" quando o preco de hoje E' o pico da serie.
+          var vSb = emReais(v1.subiu);
+          if (vSb && vB && vB > vSb) {
+            var perde = el("div", "cap-eco perde");
+            perde.appendChild(document.createTextNode("você perde "));
+            perde.appendChild(el("strong", null, moeda(vB - vSb)));
+            pl.appendChild(perde);
+          }
         }
 
         // ---- o CARIMBO DO GARIMPO: uma frase so', a mais forte -----------

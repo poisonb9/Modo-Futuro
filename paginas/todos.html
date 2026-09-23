@@ -1922,6 +1922,13 @@
      (sem ele, `text-overflow` nao tem o que cortar). */
   .item .leg-loja-txt { overflow: hidden; text-overflow: ellipsis;
     white-space: nowrap; min-width: 0; }
+  /* ⭐ 23/09/2026 (Bryan: "check sem o alo, igual o AliExpress, pequeno,
+     proximo a legenda, sem quebrar"): mesmo layout de `.leg-loja` (icone
+     fixo + texto que nunca quebra) -- o `.nq` do `.escala.empilhada` ja'
+     e' `white-space: nowrap`, so' falta o `display:flex` pro icone entrar
+     na mesma linha. */
+  .item .leg-conferido { display: flex; align-items: center; gap: 6px; }
+  .item .leg-conferido svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .9; }
   .item .cta {
     display: flex; align-items: center; justify-content: center; gap: 6px;
     width: 100%; min-height: 44px; margin-top: 8px; padding: 0 12px;
@@ -3550,10 +3557,19 @@
       lloja.appendChild(document.createTextNode(p.loja));
       var escG = gr && gr.querySelector(".escala");
       if (p.conferido && escG) {
+        // ⭐ 23/09/2026 (Bryan: "coloca o check sem o alo, igual o
+        // AliExpress, pequeno e proximo a legenda, sem quebrar"): CADA
+        // linha da pilha ganha um DONO (layout.md: "group by meaning") --
+        // a lupa marca a primeira, o visto marca a loja; esta ficava sem
+        // nenhum. Mesmo `vistoSVG()` (o mesmo check, sem emoji, sem halo)
+        // que a loja ja' usa -- reusado, nao duplicado.
         // ⚠️ `_conferido_em` devolve "hoje às HH:MM" OU "DD/MM" (dia
         // diferente) -- os dois já têm a preposição certa quando existe;
         // "conferido " + valor funciona pros dois sem duplicar "às".
-        escG.appendChild(el("span", "nq leg-conferido", "conferido " + p.conferido));
+        var lc = el("div", "nq leg-conferido");
+        lc.appendChild(vistoSVG());
+        lc.appendChild(document.createTextNode("conferido " + p.conferido));
+        escG.appendChild(lc);
       }
       if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }
       else { corpo.insertBefore(lloja, corpo.querySelector(".avise-me")); }

@@ -516,6 +516,17 @@
      como efeito ESPECIFICO: vidro sobre uma luz dourada centrada — sem luz
      atras, o vidro nao aparece (Impeccable: glass nao e' decoracao). */
   .console { margin: 12px 0 0; text-align: left; z-index: 5; border-radius: 24px; padding: 8px; }
+  /* ⛔ 23/09/2026, RODADA 7 (Bryan, print sem zoom: "essa distancia... quero
+     um espaco entre eles que nao e' esse card branco" / "quero ver o
+     fundo entre eles"): o "card branco" era o FUNDO PROPRIO do `.console`
+     -- a mesma classe `.vidro` compartilhada com TODO elemento de vidro do
+     site (abas, chips, escolha, busca-caixa, opcoes). NAO toquei em
+     `.vidro` (isso mudaria todo mundo); so' `.console.vidro`, mais
+     especifico, sobrescreve a cor solida e o gradiente SO' aqui -- o
+     desfoque, a borda refrativa e o espelho WebGL continuam intocados.
+     O espaco entre a fila de chips e Categoria/Loja passa a mostrar o
+     que estiver atras (o proprio pedido), nao mais um painel pintado. */
+  .console.vidro { background-color: transparent; background-image: none; }
   /* gruda no topo com o mostrador ja' escondido: `top` negativo = altura do
      mostrador (medida em JS, `grudar`). Assim so' busca + chips ficam fixos. */
   .console.grudado { position: sticky; }

@@ -1767,15 +1767,17 @@
      resto (frete, envio) e' o PAR inteiro, nunca os dois um do outro.
      `space-between` empurra os dois pras pontas QUANDO sobra espaco; o
      `gap` e' so' o minimo pro cartao apertado, nunca os dois colados a`
-     toa. O icone da estrela some SO' aqui (o numero ao lado ja' diz "%")
-     pra abrir espaco: e' o que sobra pro numero raro de 4 digitos
-     ("+3.536 vendidos") continuar sem cortar. */
+     toa.
+     ⛔ 23/09/2026 (Bryan: "o 98 99% ta sem a estrela"): a estrela tinha
+     sumido SO' aqui pra abrir espaco pro numero raro de 4 digitos. Volta --
+     o numero raro continua cortando com reticencia (ver `.par-frente
+     .vendeu`), preco menor que perder o icone em TODO cartao. */
   .par-frente {
     display: flex; align-items: center; justify-content: space-between;
     gap: 6px 4px; min-width: 0; max-width: 100%; width: 100%;
   }
-  .par-frente .nota svg { display: none; }
-  .par-frente .nota { gap: 0; }
+  .par-frente .vendeu { overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
+  .par-frente .nota { flex: 0 0 auto; }
   /* ⭐ BLOCO A (22/09/2026): "+22 vendidos" (11 px) e "98%" (12 px) sao o
      MESMO papel -- prova da loja -- e saiam em dois tamanhos. O Impeccable
      (typeset.md) pede papeis distinguiveis sem ler, e dois tamanhos para um
@@ -3220,7 +3222,17 @@
     // série, com >= 14 dias de radar. O produto ADQUIRE o selo no dia; some
     // quando o preço sobe. É a âncora mais forte da esquerda.
     var sinaisDoCartao = linhaDeSinais(p);
-    if (sinaisDoCartao) { corpo.appendChild(sinaisDoCartao); }
+    // ⛔ 23/09/2026 (Bryan: "sem a quantidade de vendas, a % nao deve ficar
+    // sozinha numa linha nunca -- nesse caso ela fica na linha do preco").
+    // Quando `linhaDeSinais` so' tem a nota (sem vendeu/vendedores/promo/
+    // recorde/frete/envio), ela NAO vira child direto de `sinais` -- so'
+    // nesse caso ela sai sem par (ver `linhaDeSinais`). Uma linha inteira
+    // so' pra "98%" e' o mesmo desperdicio que o hero ja' resolveu em
+    // 19/09 (".nota.na-linha", ao lado do preco); aqui e' a MESMA solucao.
+    var notaSolta = sinaisDoCartao && sinaisDoCartao.children.length === 1
+      && sinaisDoCartao.firstChild.classList.contains("nota")
+      ? sinaisDoCartao.firstChild : null;
+    if (sinaisDoCartao && !notaSolta) { corpo.appendChild(sinaisDoCartao); }
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
     // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
@@ -3231,6 +3243,10 @@
     if (mp) { pe.appendChild(el("span", "rs", "R$")); pe.appendChild(document.createTextNode(mp[1])); }
     else { pe.textContent = p.preco; }
     lp.appendChild(pe);
+    // ⚠️ a nota entra ANTES do riscado: o CSS (`.nota.na-linha ~ .de`) usa
+    // irmao geral pra empurrar o riscado pra segunda linha, e so' funciona
+    // nessa ordem.
+    if (notaSolta) { notaSolta.classList.add("na-linha"); lp.appendChild(notaSolta); }
     // ⚠️ O RISCADO SO' EXISTE SE FOR NOSSO. `antes` e' o maior valor da nossa
     // serie; sem ele, nao ha' riscado — e nao se inventa um.
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }

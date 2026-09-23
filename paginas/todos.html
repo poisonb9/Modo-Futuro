@@ -2245,7 +2245,13 @@
   </footer>
   <nav class="abas vidro" id="abas" aria-label="Navegação">
     <a href="#" data-aba="inicio" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1z"/></svg>Início</a>
-    <a href="#" data-aba="quedas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6l6 8 4-5 6 9M14 18h6v-6"/></svg>Quedas</a>
+    <!-- ⭐ 23/09/2026 (Bryan: "Record"): "Quedas" virou "Instantâneos" -- o
+         id continua "quedas" no `data-aba` (e' so' o NOME do slot do menu
+         inferior, ver `marcarAba`/`navAtiva`); quem mudou de verdade e' o
+         filtro que ele abre, pro novo id "recorde" em FILTROS. Icone
+         trocado de seta-de-queda pra raio: nao faz sentido mais mostrar
+         queda num botao que agora fala de recorde/instantaneo. -->
+    <a href="#" data-aba="quedas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>Instantâneos</a>
     <a href="#" data-aba="lojas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/></svg>Lojas</a>
     <a href="https://t.me/achadinhototal" target="_blank" rel="noopener" data-aba="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg>Telegram</a>
   </nav>
@@ -2411,6 +2417,15 @@
     // compra — e entra "Mais vendidos", a ordenacao que toda loja grande
     // tem e a prova social do acervo (Movers and Shakers, meticsmedia).
     { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2) && !externo(p); } },
+    // ⭐ 23/09/2026 (Bryan queria "Super Oferta · apenas 10 restantes" do
+    // AliExpress -- a API de afiliados que usamos NAO devolve estoque, so'
+    // a pagina renderizada tem, e capturar isso seria scraping instavel
+    // (o mesmo bot-check que ja bloqueou antes) reproduzindo uma tatica de
+    // escassez que nem sempre e' real. Confirmado com o Bryan: "Record" --
+    // o selo "Recorde" (hoje e' o MENOR preco que JA' vimos em N dias de
+    // acompanhamento NOSSO) e' urgencia genuina, medida, sem esse risco.
+    { id: "recorde", rotulo: "Instantâneos",    cabe: function (p) { return !!(p.recorde && p.recorde.dias); },
+      ordem: function (a, b) { return (b.recorde && b.recorde.dias || 0) - (a.recorde && a.recorde.dias || 0); } },
     { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
       ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
     // ⭐ 23/09/2026 (Bryan: "como transparencia, pra nao ficarmos mostrando
@@ -4830,12 +4845,12 @@
         });
       } else if (qual === "quedas") {
         fundir(function () {
-          // ⛔ 23/09/2026: `atual = "caiu"` -- o id que este botao setava
-          // ANTES da aba "Maiores quedas" se fundir com "todos" (mesma
-          // sessao). Sem a correcao, o clique aqui apontava pra um filtro
-          // que nao existe mais em FILTROS e a grade ficava vazia.
+          // ⭐ 23/09/2026 (Bryan: "Record"): este botao agora abre
+          // "Instantâneos" -- o filtro "recorde" (menor preco que JA'
+          // vimos em N dias de acompanhamento nosso), nao mais "Maiores
+          // quedas" (que se fundiu com "todos" na mesma sessao).
           navAtiva = "quedas";
-          atual = "todos";
+          atual = "recorde";
           mostrando = passoLista(); montarChips(); desenhar();
           var c = document.getElementById("console");
           if (c) { window.scrollTo({ top: c.offsetTop - 8, behavior: document.startViewTransition ? "instant" : "smooth" }); }

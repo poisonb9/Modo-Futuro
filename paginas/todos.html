@@ -1911,10 +1911,17 @@
      Mesmo degrau, mesma cor e mesmo dono das outras linhas de legenda -- o
      chip solto no rodape lia como botao morto. */
   .item .leg-loja { display: flex; align-items: center; gap: 6px;
+    width: 100%; min-width: 0;
     font: 500 0.78125rem/1.3 Poppins, sans-serif; color: var(--fraco); }
   .item .leg-loja .leg-simbolo { width: 13px; height: 13px; flex: 0 0 auto;
     border-radius: 3px; opacity: .9; }
   .item .leg-loja svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .9; }
+  /* ⭐ 23/09/2026 (Bryan: "conferido hoje as 05:35 ficou com a linha
+     quebrada"): o texto nunca quebra mais -- corta com reticencia. `min-
+     width:0` e' o que deixa um item flex encolher abaixo do seu conteudo
+     (sem ele, `text-overflow` nao tem o que cortar). */
+  .item .leg-loja-txt { overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; min-width: 0; }
   .item .cta {
     display: flex; align-items: center; justify-content: center; gap: 6px;
     width: 100%; min-height: 44px; margin-top: 8px; padding: 0 12px;
@@ -3057,6 +3064,15 @@
   // "0,02" na outra -- o defeito que o Bryan pegou em 18/09. `emReais` ignora
   // tudo que nao e' digito, entao a leitura de volta nao muda.
   function moeda(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
+  // ⭐ 23/09/2026 (Bryan: "tá muito grande o texto, vamos tentar com 'se
+  // voltar a R$72'"): SO' pro botao "avise-me", que ja' e' o texto mais
+  // longo do cartao ("avise se voltar a R$ 72,19" em duas linhas). Trunca
+  // os centavos (Math.floor, nunca arredonda pra cima) -- e' um preco
+  // APROXIMADO no convite, o valor exato continua no "espere" e no title.
+  function precoTruncado(s) {
+    var v = emReais(s);
+    return v === null ? s : "R$ " + Math.floor(v);
+  }
   function milhar(n) {
     n = Number(n) || 0;
     if (n >= 1000) { return Math.round(n / 1000) + " mil"; }
@@ -3428,7 +3444,7 @@
       var voltar = !!(p.ja_esteve && p.ja_esteve.preco);
       if (voltar) { av.className += " longo"; }
       av.innerHTML = SINO_SVG + '<span>' + (voltar
-        ? 'avise se voltar a <span class="nq">' + escapar(p.ja_esteve.preco) + '</span>' : 'avise-me se cair') + '</span>';
+        ? 'avise se voltar a <span class="nq">' + escapar(precoTruncado(p.ja_esteve.preco)) + '</span>' : 'avise-me se cair') + '</span>';
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
       av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
       corpo.appendChild(av);
@@ -3480,12 +3496,18 @@
       } else {
         lloja.appendChild(vistoSVG());
       }
-      lloja.appendChild(document.createTextNode(p.loja +
-        // ⭐ 23/09/2026 (Bryan: "coloca uma informacao interessante sobre
-        // o produto que tivermos em mao"): o horario da ULTIMA conferencia
-        // -- dado real, ja' existe (`_conferido_em`), so' morava no title
-        // (invisivel sem toque longo). Mesma linha da loja, sem cartao
-        // novo: "AliExpress · conferido hoje às 19:32".
+      // ⭐ 23/09/2026 (Bryan: "coloca uma informacao interessante sobre o
+      // produto que tivermos em mao"): o horario da ULTIMA conferencia --
+      // dado real, ja' existe (`_conferido_em`), so' morava no title
+      // (invisivel sem toque longo). Mesma linha da loja: "AliExpress ·
+      // conferido hoje às 19:32".
+      // ⛔ 23/09/2026 (Bryan, print: "ficou com a linha quebrada, ficou
+      // feio"): sem wrapper, o texto quebrava dentro do proprio flex e o
+      // icone da loja ficava desalinhado, sobrando numa segunda/terceira
+      // linha torta. Agora o texto mora num `<span>` proprio que corta com
+      // reticencia (nunca quebra) quando nao cabe -- perde legibilidade do
+      // "conferido", nunca a leitura.
+      lloja.appendChild(el("span", "leg-loja-txt", p.loja +
         (p.conferido ? " · conferido " + p.conferido : "")));
       var escG = gr && gr.querySelector(".escala");
       if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }

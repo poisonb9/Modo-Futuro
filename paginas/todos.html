@@ -526,7 +526,15 @@
      desfoque, a borda refrativa e o espelho WebGL continuam intocados.
      O espaco entre a fila de chips e Categoria/Loja passa a mostrar o
      que estiver atras (o proprio pedido), nao mais um painel pintado. */
-  .console.vidro { background-color: transparent; background-image: none; }
+  /* ⛔ RODADA 12 (Bryan: "consegue tirar essa sombra estranha entre as
+     pilulas"): transparente de verdade deixava o desfoque revelar a COR
+     de qualquer foto de produto atras -- a "sombra estranha" era uma
+     mancha azulada, nao sombra. Um branco bem leve (so' 55%) esconde a
+     cor de baixo sem voltar a ser o card SOLIDO/colado da rodada 7. */
+  .console.vidro { background-color: rgba(255,255,255,.55); background-image: none; }
+  @media (prefers-color-scheme: dark) {
+    .console.vidro { background-color: rgba(20,19,26,.55); }
+  }
   /* ⛔ 23/09/2026, RODADA 8 (Bryan: "quando eu clico em cima da' pra ver
      sobrepondo"): o destaque de toque PADRAO do Safari (um retangulo
      azul semi-transparente) sempre existiu ao tocar os chips/seletores

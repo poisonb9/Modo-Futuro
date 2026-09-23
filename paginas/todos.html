@@ -1824,16 +1824,33 @@
        e este e' o unico botao proprio do cartao. */
     width: 100%; min-height: 44px; margin-top: 4px; /* 19/09 (Bryan): colado ao preco, nao no pe' do cartao */
     font: 600 0.78125rem/1.2 Poppins, sans-serif; color: var(--fraco);
-    border: 1.5px solid var(--linha); border-radius: 12px; padding: 8px 10px;
+    border: 1.5px solid var(--linha); border-radius: 12px;
+    /* ⛔ 23/09/2026 (Bryan, print: "se voltar a R$195 esta' tocando nas
+       bordas do botao, ta' horrivel"): MEDIDO no acervo (Impeccable
+       adapt.md) -- botao bom tem padding HORIZONTAL bem maior que o
+       vertical. Tentei so' subir o padding (8px/16px) e MEDI no DOM real:
+       o card so' tem 138,5px uteis, e o texto sozinho ("se voltar a
+       R$ 208,00") ja' precisa de ~115px -- com 16px de cada lado (32
+       total) NAO cabe de jeito nenhum, so' pioraria (cortaria o preco,
+       a unica informacao que importa aqui). O sino nunca foi essencial
+       (o link ja' tem texto + title explicando); tirando ele (17/09
+       liberava 15px+7px de gap = 22px), 8px/12px passa a caber em TODOS
+       os precos medidos sem cortar nada. */
+    padding: 8px 12px;
     text-decoration: none; background: transparent; box-shadow: none;
     transition: color .16s ease, border-color .16s ease, transform .15s cubic-bezier(.2,.8,.2,1);
     order: 2;
   }
   .avise-me:hover { border-color: var(--fraco); }
   .item .de-olho, .avise-me.repor { order: 2; }
-  .avise-me svg { width: 15px; height: 15px; flex: 0 0 15px; display: block; }
-  .avise-me span { white-space: nowrap; }
-  .avise-me.longo span { white-space: normal; text-align: left; }
+  .avise-me svg { display: none; }
+  /* ⚠️ SALVAGUARDA, nao o plano principal: sem o sino, o padding de 12px
+     ja' resolve todo caso medido. Pro raro produto com preco de 4+
+     digitos que AINDA nao coubesse, corta com reticencia em vez de
+     estourar a borda -- nunca mais feio que o texto tocando a moldura,
+     nunca quebra linha. */
+  .avise-me span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .avise-me.longo span { white-space: normal; text-align: left; overflow: visible; text-overflow: clip; }
   .avise-me:hover { color: var(--tinta); }
   .avise-me:active { transform: scale(.96); }
   .avise-me + .avise-me { margin-top: 0; }
@@ -2875,17 +2892,23 @@
       // ⭐ 23/09/2026 (Bryan: "coloca o simbolo no rastreando ha X dias
       // tambem"): na GRADE (`empilhado` truthy) esta linha nao tinha
       // NENHUM icone -- so' a capa ganhava a lupa (inserida por fora,
-      // `escL.insertBefore`). Mesmo check reusado (`vistoSVG()`), so' na
-      // PRIMEIRA linha do grupo -- a segunda (quando empilhada) e'
-      // continuacao da MESMA frase, nao um dado novo que precise de dono
-      // proprio.
+      // `escL.insertBefore`). Mesmo check reusado (`vistoSVG()`).
+      // ⛔ 23/09/2026 (Bryan, print: "a R$ 4,59 do menor ficou sem o
+      // icone"): eu tinha posto so' na PRIMEIRA linha, achando que a
+      // segunda era continuacao da mesma frase -- mas empilhada ela le'
+      // como LINHA PROPRIA (o Bryan ja' tinha pedido "duas linhas
+      // inteiras", 22/09), e uma sem dono destoa das vizinhas que ja'
+      // tem. As DUAS ganham o check quando empilhadas.
       var linha1 = empilhado ? el("span", classe + " tem-icone") : el("span", classe);
       if (empilhado) { linha1.appendChild(vistoSVG()); }
       if (empilhado && veredito) {
         esc.classList.add("empilhada");
         linha1.appendChild(document.createTextNode(idade));
         esc.appendChild(linha1);
-        esc.appendChild(el("span", classe, veredito.replace(/^\u00a0·\s*/, "")));
+        var linha2 = el("span", classe + " tem-icone");
+        linha2.appendChild(vistoSVG());
+        linha2.appendChild(document.createTextNode(veredito.replace(/^\u00a0·\s*/, "")));
+        esc.appendChild(linha2);
       } else {
         linha1.appendChild(document.createTextNode(idade + veredito));
         esc.appendChild(linha1);

@@ -954,7 +954,15 @@
      mesma cor; e' o tipo de defeito que so' aparece medindo o computado. */
   .chip-ordem[aria-pressed="true"] {
     background-color: var(--tinta); color: #fff; background-image: none;
-    box-shadow: 0 8px 20px -8px rgba(20,20,30,.45);
+    /* ⛔ 23/09/2026 (Bryan, print: "tem botoes que estao meio que se
+       sobrepondo"): MEDIDO -- os chips NUNCA se tocam no DOM (8px de gap
+       real entre eles, `getBoundingClientRect` confirma). O que parecia
+       sobreposicao era a SOMBRA deste chip selecionado: blur de 20px com
+       spread de -8px vaza visualmente por cima do vizinho mesmo sem
+       tocar a caixa. NAO e' o vidro/espelho (aquele mecanismo fica
+       intacto, nem foi tocado) -- e' so' um box-shadow solto demais.
+       Blur menor (10px) contem o vazamento e ainda da' o "levantado". */
+    box-shadow: 0 5px 10px -6px rgba(20,20,30,.4);
   }
   .chip-ordem[aria-pressed="true"] .n { color: #fff; opacity: .65; }
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {
@@ -1133,6 +1141,16 @@
   .opcao:not([aria-selected="true"])::before {
     content: ""; width: 5px; flex: 0 0 5px;
   }
+  /* ⭐ 23/09/2026: a cor da loja, reservada pra este menu desde 18/09
+     (comentario em `.loja`, linha ~1899) e nunca desenhada. NAO e' o
+     mesmo elemento do vidro -- so' um selo dentro da linha, do MESMO
+     jeito que o cartao ja' faz (SIMBOLOS oficial > sigla colorida). */
+  .opcao-loja-cor {
+    display: flex; align-items: center; justify-content: center; flex: 0 0 22px;
+    width: 22px; height: 22px; border-radius: 7px;
+    font: 700 9.5px/1 Poppins, sans-serif; letter-spacing: .01em;
+  }
+  .opcao-loja-simbolo { height: 18px; width: auto; max-width: 30px; flex: 0 0 auto; border-radius: 4px; object-fit: contain; }
   .chip {
     flex: 0 0 auto; border: 1px solid var(--linha); background: var(--caixa);
     color: var(--fraco); border-radius: 999px; padding: 8px 14px;
@@ -2457,12 +2475,10 @@
         return ((b.ganho || 0) * (b.vendas || 0) * fb)
              - ((a.ganho || 0) * (a.vendas || 0) * fa);
       } },
-    // ⭐ 18/09 (Bryan, pela outra sessao): "Achados novos" so' do catalogo
-    // proprio (a externa inteira chega com pontos=0 e virava "nova");
-    // "Sendo acompanhados" sai — e' telemetria nossa, nao decisao de
-    // compra — e entra "Mais vendidos", a ordenacao que toda loja grande
-    // tem e a prova social do acervo (Movers and Shakers, meticsmedia).
-    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2) && !externo(p); } },
+    // ⭐ 23/09/2026 (Bryan): ORDEM DA BARRA — Maiores quedas, Instantâneos,
+    // Achados novos, Mais vendidos, Subiram de preço. "Mais baratos" saiu
+    // (aba deletada a pedido dele -- nao tinha comprador nem selo, so'
+    // reordenava por preco sem dizer POR QUE aquele preco era bom).
     // ⭐ 23/09/2026 (Bryan queria "Super Oferta · apenas 10 restantes" do
     // AliExpress -- a API de afiliados que usamos NAO devolve estoque, so'
     // a pagina renderizada tem, e capturar isso seria scraping instavel
@@ -2472,16 +2488,33 @@
     // acompanhamento NOSSO) e' urgencia genuina, medida, sem esse risco.
     { id: "recorde", rotulo: "Instantâneos",    cabe: function (p) { return !!(p.recorde && p.recorde.dias); },
       ordem: function (a, b) { return (b.recorde && b.recorde.dias || 0) - (a.recorde && a.recorde.dias || 0); } },
+    // ⭐ 18/09 (Bryan, pela outra sessao): "Achados novos" so' do catalogo
+    // proprio (a externa inteira chega com pontos=0 e virava "nova").
+    // ⛔ 23/09/2026 (Bryan: "esse vai comecar pelos mais recentes até com 3
+    // dias de vida"): ERA `!(p.pontos >= 2)` -- um proxy (numero de
+    // leituras) sem relacao direta com idade em dias. Agora usa `dias`
+    // (`_dias()` no backend, calendario real desde o 1o dia na serie),
+    // que e' exatamente a medida que o Bryan descreveu: cabe ate' 3 dias
+    // de vida, ordenado do mais novo (0 dia) pro mais velho (3 dias).
+    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return (p.dias || 0) <= 3 && !externo(p); },
+      ordem: function (a, b) { return (a.dias || 0) - (b.dias || 0); } },
+    // ⭐ prova social do acervo (Movers and Shakers, meticsmedia): a
+    // ordenacao que toda loja grande tem.
     { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
       ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
     // ⭐ 23/09/2026 (Bryan: "como transparencia, pra nao ficarmos mostrando
     // esses produtos na vitrine... ter um lugar pra eles"). `subiu` e' o
     // campo do backend (espelho de `antes`) -- so' existe quando hoje E'
     // o pico da serie. Sozinho aqui, nunca na vitrine principal.
+    // ⛔ 23/09/2026 (Bryan: "os precos devem comecar pelas menores subidas
+    // de preco para os maiores"): ERA `num(b.preco) - num(a.preco)` --
+    // ordenava pelo preco ATUAL, sem relacao com o QUANTO subiu. Agora
+    // ordena pela DIFERENCA (preco de hoje menos o menor que ja vimos,
+    // o mesmo numero que aparece em "voce perde R$ X" no cartao).
     { id: "subiu",  rotulo: "Subiram de preço", cabe: function (p) { return !!p.subiu; },
-      ordem: function (a, b) { return num(b.preco) - num(a.preco); } },
-    { id: "barato", rotulo: "Mais baratos",     cabe: function () { return true; },
-      ordem: function (a, b) { return num(a.preco) - num(b.preco); } }
+      ordem: function (a, b) {
+        return (num(a.preco) - num(a.subiu)) - (num(b.preco) - num(b.subiu));
+      } }
   ];
   // ⭐ QUANTOS APARECEM DE PRIMEIRA. O catalogo vai ter centenas de pecas e
   // ninguem rola centenas — quem explora usa o filtro e a busca. O papel da
@@ -4637,11 +4670,33 @@
       var painel = el("div", "opcoes");
       painel.setAttribute("role", "listbox");
       painel.hidden = true;
+      // ⭐ 23/09/2026 (Bryan: "quando clicamos em lojas... esta totalmente
+      // cru, nunca mexemos nele... deixe premium"): o proprio comentario de
+      // 18/09 (linha ~1899, "a cor da loja fica... no seletor Loja") ja'
+      // RESERVAVA a cor pra este menu -- ela so' nunca chegou a ser
+      // desenhada aqui. Reaproveita o MESMO par (SIMBOLOS oficial > sigla
+      // colorida) que o cartao usa, sem tocar em nada do vidro (`.opcoes`,
+      // `backdrop-filter`, folha, escurece -- intocados): so' um elemento
+      // novo DENTRO da linha existente.
+      var ehLoja = titulo === "Loja";
       opcoes.forEach(function (o) {
-        var op = el("button", "opcao", o.rotulo);
+        var op = el("button", "opcao");
         op.type = "button";
         op.setAttribute("role", "option");
         op.setAttribute("aria-selected", String(o.id === valorAtual));
+        if (ehLoja && o.id) {
+          var cfg = LOJAS[o.id] || { sigla: String(o.id).slice(0, 2).toUpperCase(), cor: "rgba(120,120,130,.18)", texto: "var(--fraco)" };
+          if (SIMBOLOS[o.id]) {
+            var sim = el("img", "opcao-loja-simbolo");
+            sim.src = SIMBOLOS[o.id]; sim.alt = ""; sim.loading = "lazy";
+            op.appendChild(sim);
+          } else {
+            var cor = el("span", "opcao-loja-cor", cfg.sigla);
+            cor.style.background = cfg.cor; cor.style.color = cfg.texto || "#fff";
+            op.appendChild(cor);
+          }
+        }
+        op.appendChild(document.createTextNode(o.rotulo));
         if (o.n != null) { op.appendChild(el("span", "n", String(o.n))); }
         op.addEventListener("click", function (ev) {
           ev.stopPropagation();

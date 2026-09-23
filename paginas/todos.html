@@ -2440,6 +2440,12 @@
   var PASSO = 90;
   var mostrando = PASSO;
   var atual = "todos";
+  // ⭐ 23/09/2026: separado de `atual` DE PROPOSITO. "Maiores quedas" se
+  // fundiu com "todos" (mesmo id) -- os botoes "Início" e "Quedas" do
+  // menu inferior agora levam ao MESMO filtro, e `atual` sozinho nao
+  // teria como dizer qual dos dois foi clicado por ultimo, pra pintar o
+  // icone certo. So' os handlers do menu inferior escrevem aqui.
+  var navAtiva = "inicio";
   var canal = "";
   // ⭐ LOJA: o terceiro eixo (Preco, Categoria, Loja). Cor e sigla do selo.
   //
@@ -4780,7 +4786,10 @@
   // chip "Maiores quedas"; Lojas abre o menu Loja que ja' existe; Telegram
   // e' link. Nenhum caminho novo de estado — so' os que os chips ja' usam.
   function marcarAba() {
-    var qual = atual === "caiu" ? "quedas" : (loja ? "lojas" : "inicio");
+    // ⛔ 23/09/2026: `atual === "caiu"` nunca mais e' verdade -- "Maiores
+    // quedas" se fundiu com "todos" na mesma sessao, e sem esta troca o
+    // icone "Quedas"/"Instantâneos" nunca acendia.
+    var qual = navAtiva === "quedas" ? "quedas" : (loja ? "lojas" : "inicio");
     var nav = document.getElementById("abas"), alvo = null;
     document.querySelectorAll("#abas a[data-aba]").forEach(function (a) {
       var on = a.getAttribute("data-aba") === qual;
@@ -4813,6 +4822,7 @@
       };
       if (qual === "inicio") {
         fundir(function () {
+          navAtiva = "inicio";
           atual = "todos"; loja = ""; canal = "";
           mostrando = passoLista(); mostrandoAlto = passoBloco(); mostrandoBaixo = passoBloco();
           guardarUrl(); montarChips(); desenhar();
@@ -4820,7 +4830,12 @@
         });
       } else if (qual === "quedas") {
         fundir(function () {
-          atual = "caiu";
+          // ⛔ 23/09/2026: `atual = "caiu"` -- o id que este botao setava
+          // ANTES da aba "Maiores quedas" se fundir com "todos" (mesma
+          // sessao). Sem a correcao, o clique aqui apontava pra um filtro
+          // que nao existe mais em FILTROS e a grade ficava vazia.
+          navAtiva = "quedas";
+          atual = "todos";
           mostrando = passoLista(); montarChips(); desenhar();
           var c = document.getElementById("console");
           if (c) { window.scrollTo({ top: c.offsetTop - 8, behavior: document.startViewTransition ? "instant" : "smooth" }); }

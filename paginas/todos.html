@@ -1810,17 +1810,29 @@
   .ja-esteve.tambem-em a { color: var(--fraco); text-decoration: underline; }
   /* ⭐ BOTAO DE VERDADE (YC mobile: alvo de toque; acao secundaria neutra):
      largura toda, 40px, sino em SVG monocromatico — zero emoji na tela. */
+  /* ⭐ 23/09/2026 (Bryan: "tem como fazer isso de um jeito melhor, mais
+     premium?"): MEDIDO -- "avise-me" e "Comprar agora" tinham o MESMO peso
+     (fundo cheio, 44px, largura total), e o secundario lia PRIMEIRO (ordem
+     no DOM). Impeccable distill.md: "ONE primary action, few secondary,
+     everything else tertiary"; colorize.md: "keep the primary action easy
+     to find; do not spend its color on decoration". O CTA e' a acao que
+     gera a comissao -- precisa ser a UNICA que parece "cheia". Este vira
+     GHOST (borda fina, sem fundo solido) -- ainda 44px de alvo de toque,
+     so' que lendo como convite discreto, nao como um segundo botao
+     "cheio" competindo com o dourado. */
   .avise-me {
     display: flex; align-items: center; justify-content: center; gap: 7px;
     /* ⭐ BLOCO A: 44 px e' o piso de alvo de toque (craft-floor). Era 40 --
        e este e' o unico botao proprio do cartao. */
     width: 100%; min-height: 44px; margin-top: 4px; /* 19/09 (Bryan): colado ao preco, nao no pe' do cartao */
     font: 600 0.78125rem/1.2 Poppins, sans-serif; color: var(--fraco);
-    border: 0; border-radius: 12px; padding: 8px 10px;
-    text-decoration: none; background: var(--vidro-forte);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(0,0,0,.04);
-    transition: color .16s ease, transform .15s cubic-bezier(.2,.8,.2,1);
+    border: 1.5px solid var(--linha); border-radius: 12px; padding: 8px 10px;
+    text-decoration: none; background: transparent; box-shadow: none;
+    transition: color .16s ease, border-color .16s ease, transform .15s cubic-bezier(.2,.8,.2,1);
+    order: 2;
   }
+  .avise-me:hover { border-color: var(--fraco); }
+  .item .de-olho, .avise-me.repor { order: 2; }
   .avise-me svg { width: 15px; height: 15px; flex: 0 0 15px; display: block; }
   .avise-me span { white-space: nowrap; }
   .avise-me.longo span { white-space: normal; text-align: left; }
@@ -1911,6 +1923,11 @@
     font: 700 0.8125rem/1 Poppins, sans-serif; color: #17161d;
     background: var(--ouro-claro); border-radius: 999px; white-space: nowrap;
     transition: transform 120ms cubic-bezier(.2,.8,.2,1), filter 120ms linear;
+    /* ⭐ 23/09/2026 (Bryan: "essas duas opcoes sao as melhores que temos?" +
+       Impeccable distill.md: "ONE primary action, few secondary" e
+       colorize.md: "keep the primary action easy to find"): o CTA sobe pra
+       ANTES do "avise-me" no fluxo -- hoje o secundario lia primeiro. */
+    order: 1;
   }
   .item:active .cta { transform: scale(.96); filter: brightness(.94); }
   @media (prefers-reduced-motion: reduce) {
@@ -2926,6 +2943,19 @@
     // primeira tela inteira (0 cartoes). Sem medida, a linha fica no piso.
     try { ajustarLinhasCapaJa(pl); } catch (e) { /* fica 11 px */ }
   }
+  // ⭐ 23/09/2026 (Bryan, print com as linhas marcadas: "quero que termine
+  // onde termina o grafico, assim como a legenda comeca onde comeca o
+  // grafico"): o `.nq` NAO comeca na borda esquerda do `.escala` -- a lupa
+  // (irmao dele no mesmo flex) mora ali antes, ~19 px. Usar a largura do
+  // PAI inteiro como "espaco disponivel pro texto" contava esses 19 px
+  // como se fossem do texto, e a legenda ia 3 px alem da borda do grafico
+  // (MEDIDO no print: `right` do `.nq` em 340, do svg em 337).
+  function dispDe(l) {
+    if (!l.classList.contains("nq")) { return l.clientWidth - 1; }
+    var pai = l.parentNode;
+    var offsetEsq = l.getBoundingClientRect().left - pai.getBoundingClientRect().left;
+    return pai.clientWidth - offsetEsq - 1;
+  }
   function ajustarLinhasCapaJa(pl) {
     capaPlaca = pl;
     var linhas = [pl.querySelector(".escala .nq"), pl.querySelector(".cap-loja")]
@@ -2948,7 +2978,7 @@
       var r = document.createRange(); r.selectNodeContents(l);
       if (!r.getBoundingClientRect) { return null; }
       var natural = r.getBoundingClientRect().width;
-      var disp = (l.classList.contains("nq") ? l.parentNode : l).clientWidth - 1;
+      var disp = dispDe(l);
       if (!(natural > 0 && disp > 0)) { return null; }
       // o tamanho em que a frase encosta na borda -- pode ficar ABAIXO de
       // 12,5 agora, e e' justamente esse o caso que o Bryan fotografou.
@@ -2993,7 +3023,7 @@
       linhas.forEach(function (l) {
         var r = document.createRange(); r.selectNodeContents(l);
         var natural = r.getBoundingClientRect().width;
-        var disp = (l.classList.contains("nq") ? l.parentNode : l).clientWidth - 1;
+        var disp = dispDe(l);
         var espacos = (l.textContent.match(/ /g) || []).length;
         if (!(disp > natural && espacos > 0)) { return; }
         // ⚠️ 0,8 e' margem de seguranca MEDIDA: dividir a sobra IGUAL pelos

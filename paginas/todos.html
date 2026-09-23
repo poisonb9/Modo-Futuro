@@ -946,6 +946,16 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 6px 16px -8px rgba(30,40,60,.22), 0 1px 2px rgba(30,40,60,.05);
     color: var(--tinta);
   }
+  /* ⛔ 23/09/2026, RODADA 3 (Bryan, foto com circulo em volta de CADA chip
+     da fila: "ainda estao apoiados em alguma coisa"): a sombra externa
+     (0 6px 16px -8px) e' a MESMA "espessura" do Liquid Glass parte 7
+     aprovada em 19/09 -- INTOCADA em `.escolha`, `.busca-caixa`,
+     `.avise-me`, `.ver-mais` (so' esta regra, mais especifica, sobrescreve
+     DEPOIS -- nenhuma delas perdeu espessura). So' que numa fila de chips
+     pequenos e proximos, a MESMA sombra grande vira uma mancha continua
+     por baixo de todos -- o "apoiado em algo" que ele viu. So' o brilho
+     de cima (aro de luz) fica; sem sombra por baixo. */
+  .chip-ordem { box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
   /* ⛔ A ABA ATIVA SAIU DESTE GRUPO (20/09). Ela vinha junto do chip ligado
      e herdava `color: #fff` — e esta regra fica DEPOIS da que define a cor
      do rotulo ativo, entao vencia por ordem. Com a pilula clara isso dava
@@ -1955,6 +1965,11 @@
      dizia "↓13%" e o riscado; porcentagem e' conta, real e' decisao. */
   .item .eco { margin-top: 4px; font: 500 0.78125rem/1.2 Poppins, sans-serif;
     color: var(--verde, #1f7a45); }
+  /* ⭐ 23/09/2026 (Bryan: "consegue ficar na mesma linha?"): "economiza"
+     (sem "voce") ja' resolve o pior caso medido; isto e' so' a
+     salvaguarda -- corta com reticencia no caso extremo (4+ digitos)
+     que eu nao medi, em vez de voltar a quebrar linha. */
+  .item .eco { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
   .item .eco strong { font-weight: 800; }
   /* ⭐ 23/09/2026 (Bryan): o oposto de "economiza" -- mesma mecanica, cor de
      alerta em vez de verde. Dois tons (nao um so'): #c22c14 sobre o corpo
@@ -3504,20 +3519,27 @@
     // ⭐ BLOCO B (22/09/2026): "voce economiza R$ X", o mesmo da capa. O
     // riscado diz o de/por e o selo diz a %; nenhum dos dois diz quanto a
     // pessoa poupa em dinheiro, que e' o numero da decisao.
+    // ⛔ 23/09/2026 (Bryan: "consegue ficar na mesma linha?"): MEDIDO no
+    // card estreito da GRADE (139px uteis) -- "você economiza R$ 153,93"
+    // quebrava em 2 linhas mesmo a 12,5px; SO' na grade, a capa (300px+)
+    // nunca teve esse problema e continua com "você" (nao mexi la').
+    // Cortar "você" (5 caracteres) e' o suficiente pra caber numa linha
+    // so' ATE' no pior caso medido, sem precisar encolher a fonte abaixo
+    // do piso de 11px (typeset.md).
     var vAntes = emReais(p.antes), vHoje = emReais(p.preco);
     if (vAntes && vHoje && vAntes > vHoje) {
       var eco = el("div", "eco");
-      eco.appendChild(document.createTextNode("você economiza "));
+      eco.appendChild(document.createTextNode("economiza "));
       eco.appendChild(el("strong", null, moeda(vAntes - vHoje)));
       corpo.appendChild(eco);
     } else {
       // ⭐ O OPOSTO DE "economiza": o mesmo numero, a mesma mecanica, cor de
-      // alerta em vez de verde -- "voce perde R$ X" ficando com o produto
-      // no preco de hoje em vez do menor que a gente ja viu.
+      // alerta em vez de verde -- "perde R$ X" ficando com o produto no
+      // preco de hoje em vez do menor que a gente ja viu.
       var vSubiu = emReais(p.subiu);
       if (vSubiu && vHoje && vHoje > vSubiu) {
         var perde = el("div", "eco perde");
-        perde.appendChild(document.createTextNode("você perde "));
+        perde.appendChild(document.createTextNode("perde "));
         perde.appendChild(el("strong", null, moeda(vHoje - vSubiu)));
         corpo.appendChild(perde);
       }

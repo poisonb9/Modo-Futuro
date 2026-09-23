@@ -976,9 +976,12 @@
        ainda tem uma sombra estranha" + "ainda estao encavalados"): 10px de
        blur ainda deixava um halo visivel na curva do canto (a mesma
        curvatura do border-radius amplia a percepcao do blur ali).
-       Reduzido mais uma vez (10->6px) e offset simetrico -- praticamente
-       so' a pista de "levantado", sem nevoa nas bordas. */
-    box-shadow: 0 3px 6px -4px rgba(20,20,30,.38);
+       Reduzido mais uma vez (10->6px) e offset simetrico.
+       ⛔ RODADA 3 (Bryan, foto com circulo em CADA chip, incluindo o
+       preto): reduzir nao bastou -- ainda sobrava sombra visivel embaixo.
+       O preenchimento SOLIDO (--tinta) ja' da' todo o "levantado" que
+       precisa por contraste; zero sombra externa aqui. */
+    box-shadow: none;
   }
   .chip-ordem[aria-pressed="true"] .n { color: #fff; opacity: .85; }
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {

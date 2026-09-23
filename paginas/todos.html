@@ -2938,6 +2938,12 @@
     var alvos = linhas.map(function (l) {
       l.style.fontSize = CAPA_LINHA_MIN + "px";
       l.style.whiteSpace = "nowrap";
+      // ⚠️ RESETA ANTES DE MEDIR: a chamada de resize roda de novo em cima
+      // de uma placa que a chamada ANTERIOR ja' esticou -- medir "natural"
+      // com um word-spacing de sobra ainda aplicado infla a largura e o
+      // alvo calculado sai errado (MEDIDO: fazia a frase voltar a quebrar
+      // sozinha, sem o texto ter mudado).
+      l.style.wordSpacing = "";
       if (!document.createRange) { return null; }
       var r = document.createRange(); r.selectNodeContents(l);
       if (!r.getBoundingClientRect) { return null; }
@@ -2970,12 +2976,33 @@
     //   vizinhas leriam como desalinhamento". Ou as duas encolhem, ou nenhuma.
     var cabemTodas = Math.min.apply(null, medidos) >= CAPA_LINHA_PISO;
     linhas.forEach(function (l, i) {
-      if (alvos[i] === null) { l.style.fontSize = ""; l.style.whiteSpace = ""; return; }
+      if (alvos[i] === null) { l.style.fontSize = ""; l.style.whiteSpace = ""; l.style.wordSpacing = ""; return; }
       var ideal = juntas ? alvos[i] : comum;
       var tam = cabemTodas ? Math.min(CAPA_LINHA_MAX, ideal) : CAPA_LINHA_MIN;
       l.style.fontSize = tam + "px";
       l.style.whiteSpace = cabemTodas ? "nowrap" : "";
+      l.style.wordSpacing = "";
     });
+    // ⭐ 23/09/2026 (Bryan: "tem como colocar mais alguma coisa na legenda
+    // pra ela terminar no tamanho certinho do grafico?"). Sem inventar
+    // palavra nenhuma: a SOBRA entre o texto e a borda vira espaco extra
+    // entre as palavras que ja' estao ali -- a mesma ideia de "justificar"
+    // texto, so' que fatiada manualmente porque `.escala` e' flex (o
+    // `text-align-last: justify` do CSS nao pega em container flex).
+    if (cabemTodas) {
+      linhas.forEach(function (l) {
+        var r = document.createRange(); r.selectNodeContents(l);
+        var natural = r.getBoundingClientRect().width;
+        var disp = (l.classList.contains("nq") ? l.parentNode : l).clientWidth - 1;
+        var espacos = (l.textContent.match(/ /g) || []).length;
+        if (!(disp > natural && espacos > 0)) { return; }
+        // ⚠️ 0,8 e' margem de seguranca MEDIDA: dividir a sobra IGUAL pelos
+        // espacos sempre estourava por 1-3 px (arredondamento de subpixel
+        // por caractere) -- 80% da sobra fecha sem nunca passar da borda.
+        var extra = (disp - natural) / espacos * 0.8;
+        l.style.wordSpacing = extra.toFixed(2) + "px";
+      });
+    }
   }
   // a fonte chega depois do primeiro desenho e a largura muda ao girar a tela
   if (document.fonts && document.fonts.ready) {

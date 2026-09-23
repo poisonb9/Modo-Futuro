@@ -3542,19 +3542,21 @@
       // quero assim, coloque como uma legenda curta que caiba".
       // ⭐ Tentativa 2: linha PROPRIA, curta ("conferido às 19:32", sem
       // "hoje" nem repetir a loja) -- cabe sozinha, nunca corta. Entra
-      // DEPOIS da loja, no MESMO `.escala.empilhada` (a mesma pilha que
-      // ja' tem "rastreando ha N dias" e "a R$ X do menor preço") --
-      // "abaixo do 0,70 do menor preço", onde o Bryan apontou.
+      // no MESMO `.escala.empilhada` (a mesma pilha que ja' tem
+      // "rastreando ha N dias" e "a R$ X do menor preço") -- "abaixo do
+      // 0,70 do menor preço", onde o Bryan apontou.
+      // ⛔ 23/09/2026 (Bryan, print: "coloca o aliexpress abaixo do
+      // conferido"): a ordem original era loja -> conferido; inverte.
       lloja.appendChild(document.createTextNode(p.loja));
       var escG = gr && gr.querySelector(".escala");
-      if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }
-      else { corpo.insertBefore(lloja, corpo.querySelector(".avise-me")); }
       if (p.conferido && escG) {
         // ⚠️ `_conferido_em` devolve "hoje às HH:MM" OU "DD/MM" (dia
         // diferente) -- os dois já têm a preposição certa quando existe;
         // "conferido " + valor funciona pros dois sem duplicar "às".
         escG.appendChild(el("span", "nq leg-conferido", "conferido " + p.conferido));
       }
+      if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }
+      else { corpo.insertBefore(lloja, corpo.querySelector(".avise-me")); }
     }
     // ⭐ BLOCO B (22/09/2026): A ACAO, no fim do cartao. Sao 90 cartoes
     // e nenhum parecia clicavel -- o cartao inteiro sempre foi link, mas

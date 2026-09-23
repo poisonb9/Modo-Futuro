@@ -1040,7 +1040,7 @@
      separa sem tocar no espaco horizontal entre os chips nem entre
      Categoria/Loja. */
   .filtros {
-    display: flex; flex-wrap: wrap; gap: 8px; row-gap: 14px; margin-top: 0;
+    display: flex; flex-wrap: wrap; gap: 8px; row-gap: 20px; margin-top: 0;
   }
   /* ⚠️ TRES SELETORES NO CELULAR (Preco, Categoria, Loja — desde 16/09/2026).
      A 375 px os tres cortavam em "Preç… Cate… Loja…" (o Bryan viu). Com tres
@@ -2325,9 +2325,15 @@
 
   <!-- ⭐ MICRO COMPROMISSO, e nao venda. O pedido e' entrar num canal gratis,
        nao comprar — e e' o unico lugar da pagina que pede alguma coisa. -->
+  <!-- ⛔ 23/09/2026 (Bryan: "vamos mudar essa legenda, nao aparece la
+       primeiro. e' postado junto"): a versao antiga prometia uma vantagem
+       de TEMPO que nao existe (Telegram e video saem JUNTOS) -- o site
+       inteiro e' construido pra nao mentir (ver comentario da divulgacao
+       de afiliado, poucas linhas abaixo). Nova frase promete so' o que e'
+       verdade: a notificacao no celular, sem precisar abrir o site. -->
   <section class="convite">
-    <h2>O achadinho aparece lá primeiro</h2>
-    <p>Quando um preço cai, o Telegram recebe antes do vídeo sair.</p>
+    <h2>Receba as melhores ofertas no seu celular</h2>
+    <p>Sem precisar abrir o site: cada queda de preço boa que eu encontro cai direto no seu Telegram.</p>
     <a class="botao" href="https://t.me/achadinhototal" target="_blank" rel="noopener" id="tg">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg>
       Entrar no Achadinho Total &rarr;
@@ -5234,8 +5240,16 @@
       " float lum=dot(col,vec3(.3,.59,.11));float fio=smoothstep(.0,.35,x)*smoothstep(1.,.55,x)*borda*.5*(1.-lum)*cob;",
       " float a=step(d,0.)*max(max(smoothstep(.15,.85,cob)*borda*.95,smoothstep(.15,.85,cob)*dentro*.9),max(aG,fio));col=mix(col,iris,fio*(1.-smoothstep(.15,.85,cob)));gl_FragColor=vec4(col*a,a);}"
     ].join("\n");
-    function ligar(el, raio) {
+    function ligar(el, raio, ampl) {
       if (!el || el.__espelho) { return; }
+      // ⭐ 23/09/2026 (Bryan: "essa bordinha de liquid glass... consegue
+      // colocar no meu menu de baixo?" -- ela JA' estava (mesma `ligar()`
+      // que o console usa, mesmo shader), so' que a amplitude da lente
+      // (`A`) era um numero FIXO (7) pra todo mundo. Terceiro parametro
+      // opcional deixa so' este elemento mais evidente sem mexer no
+      // shader nem nos outros (console, chips, busca-caixa continuam
+      // recebendo o MESMO 7 de sempre).
+      ampl = ampl || 7;
       var cv = document.createElement("canvas"); cv.className = "espelho";
       var gl = cv.getContext("webgl", { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: "low-power" });
       if (!gl) { return; }
@@ -5361,14 +5375,16 @@
         var st = getComputedStyle(document.documentElement);
         var lx = (parseFloat(st.getPropertyValue("--luz-x")) || 30) / 100, ly = (parseFloat(st.getPropertyValue("--luz-y")) || 0) / 100;
         gl.uniform1i(u.T, 0); gl.uniform2f(u.R, W, H); gl.uniform3f(u.L, lx, ly, 0);
-        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, 7 * dpr); gl.uniform1f(u.Z, ts / 1000);
+        gl.uniform1f(u.K, raio < 0 ? -1 : raio * dpr); gl.uniform1f(u.D, escuro ? 1 : 0); gl.uniform1f(u.A, ampl * dpr); gl.uniform1f(u.Z, ts / 1000);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
       requestAnimationFrame(quadro);
       cv.addEventListener("webglcontextlost", function () { el.classList.remove("com-espelho", "espelho-vivo"); cv.remove(); el.__espelho = false; });
     }
     // a barra de abas (pilula: raio = metade da altura) e o console (raio 24)
-    ligar(document.getElementById("abas"), -1);
+    // ⭐ amplitude 11 (era 7) so' na barra de abas -- "se ele esta' presente
+    // entao deixe ele mais evidente" (Bryan, 23/09). O console e' o padrao.
+    ligar(document.getElementById("abas"), -1, 11);
     ligar(document.getElementById("console"), 24);
     // chips/busca/folha: sao remontados a cada desenhar(); observa e liga os novos
     function ligarFilhos() {

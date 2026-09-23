@@ -527,6 +527,16 @@
      O espaco entre a fila de chips e Categoria/Loja passa a mostrar o
      que estiver atras (o proprio pedido), nao mais um painel pintado. */
   .console.vidro { background-color: transparent; background-image: none; }
+  /* ⛔ 23/09/2026, RODADA 8 (Bryan: "quando eu clico em cima da' pra ver
+     sobrepondo"): o destaque de toque PADRAO do Safari (um retangulo
+     azul semi-transparente) sempre existiu ao tocar os chips/seletores
+     -- so' que o fundo SOLIDO do console (que acabei de tirar na rodada
+     7) escondia esse retangulo por baixo dele. Sem fundo, ele fica
+     visivel por cima de tudo, atravessando os dois chips como um
+     bloco so'. Desligar o destaque padrao (o :active do proprio site ja'
+     da' o feedback visual certo, `scale(.96)`) resolve sem tocar em
+     nada do vidro. */
+  .console * { -webkit-tap-highlight-color: transparent; }
   /* gruda no topo com o mostrador ja' escondido: `top` negativo = altura do
      mostrador (medida em JS, `grudar`). Assim so' busca + chips ficam fixos. */
   .console.grudado { position: sticky; }

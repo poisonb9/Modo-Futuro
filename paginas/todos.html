@@ -957,14 +957,6 @@
      pequenos e proximos, a MESMA sombra grande vira uma mancha continua
      por baixo de todos -- o "apoiado em algo" que ele viu. So' o brilho
      de cima (aro de luz) fica; sem sombra por baixo. */
-  /* ⛔ 23/09/2026, RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- sem
-     sombra nenhuma elas ficam coladas na superficie branca de baixo, o
-     oposto do "levantado" que ele queria desde a rodada 1. A rodada 1
-     errou pro lado de MUITA sombra (vazava nos vizinhos); esta zerou
-     DEMAIS. Meio-termo: blur bem pequeno (4px) e offset quase todo pra
-     baixo (praticamente zero espalhamento pros lados) -- da' o
-     descolamento sem repetir a mancha continua entre chips vizinhos. */
-  .chip-ordem { box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 2px 4px -1px rgba(30,40,60,.16); }
   /* ⛔ A ABA ATIVA SAIU DESTE GRUPO (20/09). Ela vinha junto do chip ligado
      e herdava `color: #fff` — e esta regra fica DEPOIS da que define a cor
      do rotulo ativo, entao vencia por ordem. Com a pilula clara isso dava
@@ -1019,10 +1011,20 @@
      8px -> 10px. So' o respiro entre os chips -- nao e' o vidro. */
   .fila-chips { flex: 1 1 100%; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 8px 0 0; }
   .fila-chips::-webkit-scrollbar { display: none; }
+  /* ⛔ 23/09/2026, RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- sem
+     sombra nenhuma elas ficam coladas na superficie branca de baixo. A
+     rodada 1 errou pro lado de MUITA sombra (vazava nos vizinhos); a
+     rodada 3 zerou DEMAIS. Meio-termo: blur pequeno (4px), quase sem
+     espalhamento lateral. ⛔ RODADA 5: essa sombra tinha sido escrita
+     numa regra ANTERIOR no arquivo (linha ~967) -- esta regra base,
+     MAIS ABAIXO, vencia a cascata e apagava a sombra de volta pro
+     "colado" que o Bryan viu de novo. Corrigido direto AQUI, na regra
+     que realmente decide. */
   .chip-ordem {
     flex: 0 0 auto; height: 36px; display: inline-flex; align-items: center; gap: 6px;
     font: 600 13px/1 Poppins, sans-serif; padding: 0 14px; border-radius: 12px;
-    border: 0; background: var(--vidro-forte); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+    border: 0; background: var(--vidro-forte);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 2px 4px -1px rgba(30,40,60,.16);
     color: var(--tinta); white-space: nowrap; cursor: pointer;
     transition: transform .15s cubic-bezier(.2,.8,.2,1);
   }

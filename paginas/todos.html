@@ -4346,6 +4346,18 @@
         // (12,5px, livre pra quebrar). Chamar aqui, com o `pl` de
         // verdade, e' o que faltava pra ligar o ajustador na placa.
         ajustarLinhasCapa(pl);
+        // \u26d4 23/09/2026: MEDIDO ao vivo -- com a fonte ja' em cache do
+        // navegador, `document.fonts.ready` as vezes resolve ANTES desta
+        // linha rodar, entao o `.then()` dispara com `capaPlaca` ainda
+        // `null` e a "segunda chance" de reajuste nunca acontece. A
+        // chamada sincrona sozinha mede o texto num instante em que o
+        // layout as vezes ainda nao assentou -- o resultado fica CORRETO
+        // no font-size/nowrap mas o espacamento de justificar sai 0 (sem
+        // sobra aparente). Disparar de novo num rAF duplo (depois do
+        // layout e do paint) fecha a fresta sem depender do fonts.ready.
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { ajustarLinhasCapa(pl); });
+        });
         a.appendChild(pl);
         vit.appendChild(a);
       }

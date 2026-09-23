@@ -1823,8 +1823,18 @@
     /* ⭐ BLOCO A: 44 px e' o piso de alvo de toque (craft-floor). Era 40 --
        e este e' o unico botao proprio do cartao. */
     width: 100%; min-height: 44px; margin-top: 4px; /* 19/09 (Bryan): colado ao preco, nao no pe' do cartao */
-    font: 600 0.78125rem/1.2 Poppins, sans-serif; color: var(--fraco);
-    border: 1.5px solid var(--linha); border-radius: 12px;
+    /* ⛔ 23/09/2026 (Bryan: "acho ele feio... bonita, discreta e premium"):
+       o ghost ja' existia (comentario acima), mas ainda gritava -- peso
+       600 (o MESMO peso do preco riscado e do "Comprar agora") e borda
+       1,5px competiam com o CTA em vez de ficar atras dele. distill.md:
+       "2-3 weights maximum" (500 ja' e' usado no site, nao inventei um
+       peso novo) e craft-floor.md proibe sombra/glass decorativo aqui --
+       entao o refino e' so' tipografia + borda mais fina, sem chrome
+       novo: peso 500 (mais calmo que o 600 anterior), leve tracking (a
+       'letra respirando' que separa um rotulo premium de um grito), e
+       borda 1px (era 1,5px) na MESMA cor --linha, so' menos presente. */
+    font: 500 0.71875rem/1.3 Poppins, sans-serif; color: var(--fraco);
+    border: 1px solid var(--linha); border-radius: 12px;
     /* ⛔ 23/09/2026 (Bryan, print: "se voltar a R$195 esta' tocando nas
        bordas do botao, ta' horrivel"): MEDIDO no acervo (Impeccable
        adapt.md) -- botao bom tem padding HORIZONTAL bem maior que o
@@ -1850,7 +1860,7 @@
      estourar a borda -- nunca mais feio que o texto tocando a moldura,
      nunca quebra linha. */
   .avise-me span {
-    font-size: 0.71875rem; letter-spacing: -.15px;
+    font-size: 0.71875rem; letter-spacing: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
   }
   .avise-me.longo span { white-space: normal; text-align: left; overflow: visible; text-overflow: clip; }
@@ -2150,7 +2160,11 @@
   .abas a {
     flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
     padding: 8px 0 6px; border-radius: 999px; font: 600 10.5px/1 Poppins, sans-serif;
-    color: var(--fraco); text-decoration: none; transition: transform .15s cubic-bezier(.2,.8,.2,1), background .2s, color .2s;
+    /* ⛔ 23/09/2026 (Bryan, print): "o botao fica preto quando selecionado
+       mas eu quero todos pretos mesmo sem estarem selecionados" -- era
+       `var(--fraco)` (cinza) por padrao e so' a aba ativa (`.abas a.on`,
+       linha ~913) virava `var(--tinta)`. Ele nao quer essa distincao. */
+    color: var(--tinta); text-decoration: none; transition: transform .15s cubic-bezier(.2,.8,.2,1), background .2s, color .2s;
   }
   .abas a:active { transform: scale(.94); }
   .abas a svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

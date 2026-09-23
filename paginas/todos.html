@@ -5,7 +5,8 @@
 <!-- 19/09 (Bryan: "risco preto na ilha do iPhone"): a cor da barra do Safari
      e' a do fundo da pagina, nos dois temas; viewport-fit=cover pinta ate' a ilha -->
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0e13">
+<!-- TRAVADO-SEMPRE-CLARO 23-09: o media abaixo virou impossivel de proposito (pagina inteira esta' travada no tema claro agora, a barra do Safari tem de seguir). Reverter: tirar " and (prefers-color-scheme: light)". -->
+<meta name="theme-color" media="(prefers-color-scheme: dark) and (prefers-color-scheme: light)" content="#0f0e13">
 <title>Achadinho Total</title>
 <!-- ⚠️ O NOME QUE O IPHONE SALVA NA TELA DE INICIO NAO E' O <title>.
      Sem `apple-mobile-web-app-title` o iOS pega o <title> inteiro, corta
@@ -167,7 +168,7 @@
                  inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(0,0,0,.06);
     --fio: rgba(0,0,0,.08);
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     :root {
       --tinta: #f4f2f9; --fraco: #a5a1b4; --linha: #2b2733;
       --fundo: #0f0e13; --caixa: #191823; --painel: #08080b;
@@ -194,7 +195,7 @@
                 radial-gradient(30% 24% at 10% 90%, rgba(170,180,200,.08), transparent 70%);
     filter: blur(40px);
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .luz {
       background: radial-gradient(40% 30% at 22% 18%, rgba(120,140,175,.14), transparent 70%),
                   radial-gradient(38% 30% at 80% 34%, rgba(150,170,200,.12), transparent 70%),
@@ -235,7 +236,7 @@
     /* e o especular que segue o rolar/inclinacao */
     background: radial-gradient(60% 40% at var(--luz-x, 30%) var(--luz-y, 0%), rgba(255,255,255,.28), transparent 70%);
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .vidro::after { backdrop-filter: blur(10px) brightness(1.25) saturate(1.4); -webkit-backdrop-filter: blur(10px) brightness(1.25) saturate(1.4); }
   }
   /* ⛔ MEDIDO 19/09 (print do Bryan): o ::after com backdrop-filter fica POR
@@ -532,7 +533,7 @@
      mancha azulada, nao sombra. Um branco bem leve (so' 55%) esconde a
      cor de baixo sem voltar a ser o card SOLIDO/colado da rodada 7. */
   .console.vidro { background-color: rgba(255,255,255,.55); background-image: none; }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .console.vidro { background-color: rgba(20,19,26,.55); }
   }
   /* ⛔ 23/09/2026, RODADA 8 (Bryan: "quando eu clico em cima da' pra ver
@@ -545,6 +546,15 @@
      da' o feedback visual certo, `scale(.96)`) resolve sem tocar em
      nada do vidro. */
   .console * { -webkit-tap-highlight-color: transparent; }
+  /* ⭐ 23/09/2026 (Bryan: "ao pressionar os botoes da barra aparece essa
+     sombra quadrada nos cantos"): MESMO defeito da RODADA 8 acima, so' que
+     na barra de abas em vez do console -- o retangulo de toque padrao do
+     Safari/Chrome nao segue o border-radius do botao, entao aparece
+     quadrado nos cantos da pilula redonda. A `.abas` tambem e' `.vidro`
+     sem fundo solido por baixo (mesma causa: nada esconde o retangulo).
+     O `:active { transform: scale(.94) }` da propria aba ja' da' o
+     feedback -- mesma solucao aplicada. */
+  .abas a { -webkit-tap-highlight-color: transparent; }
   /* gruda no topo com o mostrador ja' escondido: `top` negativo = altura do
      mostrador (medida em JS, `grudar`). Assim so' busca + chips ficam fixos. */
   .console.grudado { position: sticky; }
@@ -597,7 +607,7 @@
     background: rgba(18,16,28,.045); box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
     font: 600 9.5px/1.2 Poppins, sans-serif; letter-spacing: .05em; text-transform: uppercase; color: var(--fraco);
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .prova .cela { background: rgba(255,255,255,.055); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
   }
   .prova .n { font: 700 19px/1 var(--mono); color: var(--tinta); font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
@@ -680,7 +690,7 @@
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .vivo-cta::before {
       background: conic-gradient(from -90deg,
         #E9B93F 0 var(--cta-borda), rgba(233,185,63,0) var(--cta-borda));
@@ -767,7 +777,7 @@
 
      hoje. */
 
-  @media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ and (prefers-reduced-motion: no-preference) {
 
     .vivo-cta.entra {
 
@@ -779,7 +789,7 @@
 
   }
 
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
 
     .vivo-cta { background: rgba(233,185,63,.16); color: #f4f2f9; }
   }
@@ -850,7 +860,7 @@
       rgba(255,187,86,.040) 69%,  rgba(255,185,84,.017) 79%,
       rgba(255,184,84,.006) 88%,  rgba(255,184,84,0) 100%);
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .clarao { background: radial-gradient(closest-side,
       rgba(255,198,104,.55), rgba(255,180,80,.24) 42%, rgba(255,176,76,0) 72%); }
   }
@@ -966,7 +976,7 @@
     box-shadow: 0 1px 2px rgba(30,40,60,.05);
     transition: left .34s cubic-bezier(.34,1.4,.44,1), width .34s cubic-bezier(.34,1.4,.44,1);
   }
-  @media (prefers-color-scheme: dark) { .abas .pilula { background: rgba(255,255,255,.08); box-shadow: none; } }
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ { .abas .pilula { background: rgba(255,255,255,.08); box-shadow: none; } }
   .abas a { position: relative; z-index: 2; }
   @media (prefers-reduced-motion: reduce) { .abas .pilula { transition: none; } }
 
@@ -1023,7 +1033,7 @@
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {
     box-shadow: inset 0 2px 4px rgba(0,0,0,.12); background-image: none;
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ {
     .abas a.on { background: none !important; color: #fff; }
     .chip-ordem, .escolha, .busca-caixa, .avise-me, .ver-mais {
       background-color: rgba(255,255,255,.08);
@@ -1552,7 +1562,7 @@
      mais fraco: titulo traduzido de catalogo. O AliExpress tambem nao
      mostra nome na vitrine de ofertas. A foto diz o que e'. */
   .vitrine .vplaca.cap, .vitrine .vplaca { display: block; }
-  .cap-linha { display: flex; align-items: baseline; gap: 8px; }
+  .cap-linha { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   /* ⚠ `i` no lugar do "R$": menor e mais leve, sem separar do numero
      (o Bryan viu "R$" numa linha e "128,99" na outra em 18/09). */
   /* ⭐ BLOCO 2 -- A ESCALA. O cartao tinha OITO tamanhos escolhidos a dedo:
@@ -1595,7 +1605,17 @@
   /* ⭐ O ACENTO VAI PARA A ACAO. O ouro do selo de queda e o ouro do
      botao sao o MESMO acento usado duas vezes -- o da foto diz "caiu", o
      do bloco diz "aperte". A regra de um acento por cartao continua. */
+  /* ⭐ 23/09/2026 (Bryan: "o comprar agora fica cortado no botao"): MEDIDO a
+     375 px, `.cap-linha` real -- preco (99px) + riscado (68,6px) + gap (16px)
+     + botao (176,8px) = 360,4px contra 307px de container, 53px pra fora.
+     O comentario acima ("preco+botao no limite a 375") nunca contou o
+     RISCADO junto -- ele so' existe quando ha' desconto, que e' exatamente
+     o caso que estourou aqui. Nenhum dos tres pode encolher mais (preco ja'
+     no piso do `clamp`, riscado e botao sao `nowrap` de proposito, ver notas
+     acima) -- a saida e' o botao cair pra propria linha quando nao cabe
+     (`flex-wrap` em `.cap-linha`), em vez de vazar pra fora do cartao. */
   .cap-cta { margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+    justify-content: center;
     white-space: nowrap; font: 700 var(--cap-fs-2)/1 Poppins, sans-serif; color: #17161d;
     background: var(--ouro-claro); padding: 12px 16px; border-radius: 999px;
     /* ⭐ O BOTAO RESPONDE AO TOQUE. O cartao inteiro ja' tinha
@@ -2017,7 +2037,7 @@
     color: var(--fraco); border: 0; background: rgba(0,0,0,.06);
     padding: 3px 5px; border-radius: 5px; opacity: .95;
   }
-  @media (prefers-color-scheme: dark) { .loja { background: rgba(255,255,255,.12); } }
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ { .loja { background: rgba(255,255,255,.12); } }
   /* o simbolo oficial: mesma altura visual da sigla, sem caixa */
   .loja-simbolo {
     height: 14px; width: auto; vertical-align: -3px;
@@ -2027,7 +2047,7 @@
     display: flex; flex-direction: column; flex: 1 1 auto; padding: 12px; gap: 8px;
   }
   .corpo { background: var(--caixa); }
-  @media (prefers-color-scheme: dark) { .corpo { background: rgba(30,28,36,.94); box-shadow: inset 0 1px 0 rgba(255,255,255,.10); } }
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ { .corpo { background: rgba(30,28,36,.94); box-shadow: inset 0 1px 0 rgba(255,255,255,.10); } }
   @supports not (backdrop-filter: blur(1px)) { .corpo { background: var(--caixa); } }
   /* ⭐ BLOCO C (decisao do Bryan): o nome e' o conteudo do cartao e era o
      3o menor texto dele. 13,5 -> 14,5 px, ainda abaixo do preco. */
@@ -2055,7 +2075,7 @@
      (6,3:1). O `--verde` do "economiza" ao lado NAO faz essa troca e fica
      a 3,4:1 no claro; aqui nao repito o mesmo defeito. */
   .item .eco.perde { color: #c22c14; }
-  @media (prefers-color-scheme: dark) { .item .eco.perde { color: #f87171; } }
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 23-09 */ { .item .eco.perde { color: #f87171; } }
   /* ⭐ BLOCO B: A ACAO. Sao 90 cartoes e nenhum parecia clicavel -- o mesmo
      defeito de affordance que o Bryan pegou na capa em 20/09 ("a pessoa nao
      sabe que ela tem que clicar"). Mesmo ouro da capa, mesma altura de
@@ -2301,6 +2321,15 @@
   }
   .abas a:active { transform: scale(.94); }
   .abas a svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  /* ⭐ 23/09/2026 (Bryan: "o instantaneos esta cortando a palavra"): MEDIDO
+     a 360-375 px -- "Instantâneos" (o rotulo mais longo, trocado de "Quedas"
+     hoje) tem so' 1,6-3,6 px de folga de cada lado dentro da coluna
+     `flex:1`. Nao quebrou no nosso navegador de teste, mas a folga e' fina
+     demais pra confiar em toda fonte/OS -- mesmo padrao do `.item .eco` e
+     `.leg-loja-txt`: nunca deixar o texto vazar por cima do vizinho, corta
+     com reticencia se precisar. */
+  .abas .aba-rotulo { align-self: stretch; text-align: center; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap; }
   /* ⛔ ERA `.abas a.on { color: #fff }` AQUI. MEDIDO em 20/09: no escuro a
      regra de cima dava fundo CLARO (#f4f2f9) a' aba ativa e esta, por vir
      DEPOIS no arquivo, forcava o texto a branco — branco sobre claro,
@@ -2430,16 +2459,16 @@
     <p class="aviso-rodape">Preços conferidos na data indicada em cada item · Contém links de afiliado · <a href="/privacidade" class="link-rodape">Privacidade</a></p>
   </footer>
   <nav class="abas vidro" id="abas" aria-label="Navegação">
-    <a href="#" data-aba="inicio" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1z"/></svg>Início</a>
+    <a href="#" data-aba="inicio" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1z"/></svg><span class="aba-rotulo">Início</span></a>
     <!-- ⭐ 23/09/2026 (Bryan: "Record"): "Quedas" virou "Instantâneos" -- o
          id continua "quedas" no `data-aba` (e' so' o NOME do slot do menu
          inferior, ver `marcarAba`/`navAtiva`); quem mudou de verdade e' o
          filtro que ele abre, pro novo id "recorde" em FILTROS. Icone
          trocado de seta-de-queda pra raio: nao faz sentido mais mostrar
          queda num botao que agora fala de recorde/instantaneo. -->
-    <a href="#" data-aba="quedas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>Instantâneos</a>
-    <a href="#" data-aba="lojas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/></svg>Lojas</a>
-    <a href="https://t.me/achadinhototal" target="_blank" rel="noopener" data-aba="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg>Telegram</a>
+    <a href="#" data-aba="quedas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg><span class="aba-rotulo">Instantâneos</span></a>
+    <a href="#" data-aba="lojas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/></svg><span class="aba-rotulo">Lojas</span></a>
+    <a href="https://t.me/achadinhototal" target="_blank" rel="noopener" data-aba="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg><span class="aba-rotulo">Telegram</span></a>
   </nav>
 </div>
 
@@ -5213,7 +5242,7 @@
         uD = gl.getUniformLocation(pr, "D"), uK = gl.getUniformLocation(pr, "K"), uP = gl.getUniformLocation(pr, "P"),
         uZ = gl.getUniformLocation(pr, "Z");
     c.insertBefore(cv, c.firstChild); c.classList.add("com-gl");
-    var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && false; // TRAVADO-SEMPRE-CLARO 23-09: reverter apagando " && false" aqui e no addEventListener logo abaixo
     var dpr = Math.min(window.devicePixelRatio || 1, 2), visivel = true, toque = 0, px = 0, py = 0, ultimo = 0;
     function medir() {
       var w = c.clientWidth, h = c.clientHeight;
@@ -5233,7 +5262,7 @@
     }
     c.addEventListener("pointerdown", function (e) { var r = c.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; toque = 1; }, { passive: true });
     if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(c); }
-    if (window.matchMedia) { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) { escuro = e.matches; }); }
+    if (window.matchMedia) { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) { escuro = e.matches && false; /* TRAVADO-SEMPRE-CLARO 23-09 */ }); }
     cv.addEventListener("webglcontextlost", function () { c.classList.remove("com-gl"); cv.remove(); });
     requestAnimationFrame(quadro);
   })();
@@ -5340,8 +5369,8 @@
       var dpr = Math.min(window.devicePixelRatio || 1, 2), dprE = 0.5, ultimo = 0, visivel = true;
       el.insertBefore(cv, el.firstChild); el.classList.add("com-espelho"); el.__espelho = true;
       if (window.IntersectionObserver) { new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; }).observe(el); }
-      var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (window.matchMedia) { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) { escuro = e.matches; }); }
+      var escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && false; // TRAVADO-SEMPRE-CLARO 23-09
+      if (window.matchMedia) { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) { escuro = e.matches && false; /* TRAVADO-SEMPRE-CLARO 23-09 */ }); }
       function corFundo() { return getComputedStyle(document.documentElement).getPropertyValue("--fundo").trim() || "#fff"; }
       function corCaixa() { return escuro ? "#191823" : "#ffffff"; }
       // ⭐ FLUIDEZ (Bryan, 20/09: "quero 120 Hz"): a tira e' desenhada UMA vez

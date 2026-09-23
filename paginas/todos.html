@@ -5447,13 +5447,15 @@
       cv.addEventListener("webglcontextlost", function () { el.classList.remove("com-espelho", "espelho-vivo"); cv.remove(); el.__espelho = false; });
     }
     // a barra de abas (pilula: raio = metade da altura) e o console (raio 24)
-    // ⭐ amplitude 11 (era 7) so' na barra de abas -- "se ele esta' presente
-    // entao deixe ele mais evidente" (Bryan, 23/09). O console e' o padrao.
-    // ⛔ RODADA 2 (Bryan, comparando com o halo dos chips no mesmo print):
-    // 11 ainda lia mais fraco que o efeito nos chips/console -- a barra e'
-    // uma pilula bem maior/mais alongada, e a MESMA amplitude em px rende
-    // proporcionalmente menos halo numa area maior. Subido pra 16.
-    ligar(document.getElementById("abas"), -1, 16);
+    // ⛔ RODADA 3 (Bryan: "quando eu aperto Inicio e mudo pro Instantaneo
+    // ta' aparecendo uma sombra estranha do nada"): a amplitude 16 (subida
+    // em 2 rodadas, 7->11->16) ficava exagerada durante a troca de aba --
+    // a View Transitions API mistura o snapshot antigo com o novo por
+    // ~0,26s, e com a lente muito forte esse instante de mistura pisca
+    // como um brilho fora do lugar. Voltado pro padrao (7, o MESMO que
+    // console/chips/escolha usam) ate' termos um jeito de medir o
+    // resultado visual de verdade (esta sessao nao renderiza WebGL).
+    ligar(document.getElementById("abas"), -1);
     ligar(document.getElementById("console"), 24);
     // chips/busca/folha: sao remontados a cada desenhar(); observa e liga os novos
     function ligarFilhos() {

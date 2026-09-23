@@ -4213,6 +4213,14 @@
           lj.appendChild(document.createTextNode(partes.join(" \u00b7 ")));
           pl.appendChild(lj);
         }
+        // \u26d4 22/09/2026 (Bryan, print: "legenda aqui est\u00e1 quebrada... na
+        // mesma linha"): `ajustarLinhasCapa` (o encolhedor 12,5 -> 11px)
+        // EXISTIA mas nunca era chamado daqui -- `capaPlaca` so' era
+        // setado DENTRO dela mesma, entao a placa real do heroi nunca
+        // entrava no ajuste, e a legenda ficava sempre no fallback
+        // (12,5px, livre pra quebrar). Chamar aqui, com o `pl` de
+        // verdade, e' o que faltava pra ligar o ajustador na placa.
+        ajustarLinhasCapa(pl);
         a.appendChild(pl);
         vit.appendChild(a);
       }

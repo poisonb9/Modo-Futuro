@@ -962,9 +962,15 @@
        tocar a caixa. NAO e' o vidro/espelho (aquele mecanismo fica
        intacto, nem foi tocado) -- e' so' um box-shadow solto demais.
        Blur menor (10px) contem o vazamento e ainda da' o "levantado". */
-    box-shadow: 0 5px 10px -6px rgba(20,20,30,.4);
+    /* ⛔ 23/09/2026, RODADA 2 (Bryan viu ao vivo: "o cantinho do botao preto
+       ainda tem uma sombra estranha" + "ainda estao encavalados"): 10px de
+       blur ainda deixava um halo visivel na curva do canto (a mesma
+       curvatura do border-radius amplia a percepcao do blur ali).
+       Reduzido mais uma vez (10->6px) e offset simetrico -- praticamente
+       so' a pista de "levantado", sem nevoa nas bordas. */
+    box-shadow: 0 3px 6px -4px rgba(20,20,30,.38);
   }
-  .chip-ordem[aria-pressed="true"] .n { color: #fff; opacity: .65; }
+  .chip-ordem[aria-pressed="true"] .n { color: #fff; opacity: .85; }
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {
     box-shadow: inset 0 2px 4px rgba(0,0,0,.12); background-image: none;
   }
@@ -982,7 +988,9 @@
   /* ⭐ CHIPS DE PRECO (18/09, mock v5): as 4 ordens em UMA fila rolavel de
      chips; Categoria e Loja continuam menus (a lista e' longa, chip nao
      serve — a rolagem as cegas ja' foi recusada uma vez). */
-  .fila-chips { flex: 1 1 100%; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 8px 0 0; }
+  /* ⭐ 23/09/2026, RODADA 2 (Bryan: "queria uma pequeninissima distancia"):
+     8px -> 10px. So' o respiro entre os chips -- nao e' o vidro. */
+  .fila-chips { flex: 1 1 100%; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 8px 0 0; }
   .fila-chips::-webkit-scrollbar { display: none; }
   .chip-ordem {
     flex: 0 0 auto; height: 36px; display: inline-flex; align-items: center; gap: 6px;
@@ -993,7 +1001,10 @@
   }
   .chip-ordem:active { transform: scale(.96); }
   .chip-ordem[aria-pressed="true"] { color: #fff; }
-  .chip-ordem .n { font: 600 12px var(--mono); color: var(--fraco); }
+  /* ⭐ 23/09/2026, RODADA 2 (Bryan: "os numeros ainda estao meio apagados"):
+     `var(--fraco)` sobre o vidro translucido lia quase invisivel. Mais
+     escuro (mix com --tinta), sem precisar inventar um token novo. */
+  .chip-ordem .n { font: 600 12px var(--mono); color: color-mix(in srgb, var(--tinta) 55%, var(--fraco)); }
   .chip-ordem[aria-pressed="true"] .n { color: #fff; }
   .busca::placeholder { color: var(--fraco); }
   /* ⛔ DUAS TENTATIVAS ERRADAS ANTES DESTA, e vale saber por que:
@@ -1130,9 +1141,12 @@
   .opcao:active { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
   .opcao[aria-selected="true"] { font-weight: 700; }
   /* o numero fica a' direita, alinhado — vira coluna e da' pra comparar */
+  /* ⭐ 23/09/2026, RODADA 2 (Bryan: "os numeros ainda estao meio apagados"):
+     ERA `var(--fraco)` (ja' fraco) MAIS `opacity:.7` -- duas camadas de
+     esmaecimento empilhadas. Uma so' basta. */
   .opcao .n {
     margin-left: auto; padding-left: 10px; flex: 0 0 auto;
-    font: 500 11.5px/1 var(--mono); color: var(--fraco); opacity: .7;
+    font: 500 11.5px/1 var(--mono); color: color-mix(in srgb, var(--tinta) 45%, var(--fraco));
   }
   .opcao[aria-selected="true"]::before {
     content: ""; width: 5px; height: 5px; border-radius: 50%;
@@ -2475,10 +2489,16 @@
         return ((b.ganho || 0) * (b.vendas || 0) * fb)
              - ((a.ganho || 0) * (a.vendas || 0) * fa);
       } },
-    // ⭐ 23/09/2026 (Bryan): ORDEM DA BARRA — Maiores quedas, Instantâneos,
-    // Achados novos, Mais vendidos, Subiram de preço. "Mais baratos" saiu
-    // (aba deletada a pedido dele -- nao tinha comprador nem selo, so'
-    // reordenava por preco sem dizer POR QUE aquele preco era bom).
+    // ⭐ 23/09/2026 (Bryan): ORDEM FINAL DA BARRA — Maiores quedas, Mais
+    // vendidos, Instantâneos, Achados novos, Subiram de preço. (Primeiro
+    // pedido do mesmo dia tinha Instantâneos antes de Mais vendidos; ele
+    // viu no ar e trocou.) "Mais baratos" saiu (aba deletada a pedido
+    // dele -- nao tinha comprador nem selo, so' reordenava por preco sem
+    // dizer POR QUE aquele preco era bom).
+    // ⭐ prova social do acervo (Movers and Shakers, meticsmedia): a
+    // ordenacao que toda loja grande tem.
+    { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
+      ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
     // ⭐ 23/09/2026 (Bryan queria "Super Oferta · apenas 10 restantes" do
     // AliExpress -- a API de afiliados que usamos NAO devolve estoque, so'
     // a pagina renderizada tem, e capturar isso seria scraping instavel
@@ -2498,10 +2518,6 @@
     // de vida, ordenado do mais novo (0 dia) pro mais velho (3 dias).
     { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return (p.dias || 0) <= 3 && !externo(p); },
       ordem: function (a, b) { return (a.dias || 0) - (b.dias || 0); } },
-    // ⭐ prova social do acervo (Movers and Shakers, meticsmedia): a
-    // ordenacao que toda loja grande tem.
-    { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
-      ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
     // ⭐ 23/09/2026 (Bryan: "como transparencia, pra nao ficarmos mostrando
     // esses produtos na vitrine... ter um lugar pra eles"). `subiu` e' o
     // campo do backend (espelho de `antes`) -- so' existe quando hoje E'
@@ -4685,7 +4701,14 @@
         op.setAttribute("role", "option");
         op.setAttribute("aria-selected", String(o.id === valorAtual));
         if (ehLoja && o.id) {
-          var cfg = LOJAS[o.id] || { sigla: String(o.id).slice(0, 2).toUpperCase(), cor: "rgba(120,120,130,.18)", texto: "var(--fraco)" };
+          // ⭐ 23/09/2026, RODADA 2 (Bryan: "tem loja sem cor de icone, nao
+          // deixa nenhuma assim apagada"): o fallback era translucido
+          // (rgba ,.18) com texto var(--fraco) sobre ele -- duas camadas
+          // fracas, Kabum/Arno/Lauri/Shark Ninja/Exypna ficavam quase
+          // invisiveis ao lado do vermelho/amarelo/preto das outras. Selo
+          // CHEIO (mesmo peso visual das coloridas), so' neutro por nao
+          // termos a cor oficial ainda -- nunca mais translucido.
+          var cfg = LOJAS[o.id] || { sigla: String(o.id).slice(0, 2).toUpperCase(), cor: "#5b5566", texto: "#fff" };
           if (SIMBOLOS[o.id]) {
             var sim = el("img", "opcao-loja-simbolo");
             sim.src = SIMBOLOS[o.id]; sim.alt = ""; sim.loading = "lazy";

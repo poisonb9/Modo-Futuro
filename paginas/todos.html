@@ -1044,11 +1044,19 @@
      nu; o Bryan continuava vendo "colado". Nao era mais bug de cascata,
      era FORCA insuficiente. Dobrado o blur (4->8px) e mais que dobrada
      a opacidade (.16->.35) -- ainda contido (spread negativo, quase
-     todo o deslocamento pra baixo), mas agora inequivoco. */
+     todo o deslocamento pra baixo), mas agora inequivoco.
+     ⛔ RODADA 9 (Bryan: "no [tema] branco fica [grudado]... no [tema]
+     escuro nao esta'"): no ESCURO a mesma sombra contrasta forte contra
+     o fundo escuro da pagina e fica obvia; no CLARO, sombra desfocada
+     sobre pagina JA' branca tem pouquissimo contraste (sombra clara
+     sobre fundo claro) -- nao e' mais bug de forca, e' o limite fisico
+     de shadow sozinho em fundo branco sobre branco. Borda fina e SOLIDA
+     (nao depende de contraste de luz, sempre desenha uma linha) resolve
+     nos dois temas ao mesmo tempo. */
   .chip-ordem {
     flex: 0 0 auto; height: 36px; display: inline-flex; align-items: center; gap: 6px;
     font: 600 13px/1 Poppins, sans-serif; padding: 0 14px; border-radius: 12px;
-    border: 0; background: var(--vidro-forte);
+    border: 1px solid rgba(20,20,30,.12); background: var(--vidro-forte);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 4px 8px -2px rgba(20,20,30,.35);
     color: var(--tinta); white-space: nowrap; cursor: pointer;
     transition: transform .15s cubic-bezier(.2,.8,.2,1);

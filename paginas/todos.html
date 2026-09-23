@@ -1688,23 +1688,21 @@
   }
   #vitrine:not(:empty) + .grade, #vitrine:not(:empty) ~ .grade { margin-top: 14px; }
   .grade {
-    display: grid; gap: 14px; margin: 6px 0 0; align-items: start;
+    display: grid; gap: 14px; margin: 6px 0 0;
     grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
-    /* ⚠️ `start`: o cartao termina onde termina. Sem isto o vizinho de
-       titulo longo esticava o cartao curto e deixava um vazio dentro dele
-       (Bryan, 16/09). O nome fica INTEIRO, sem reticencia — 4-5 linhas
-       quando for o caso; quem encurta e' o `nome_produto`, no publicador. */
-    align-items: start;
+    /* ⭐ 23/09/2026 (Bryan: "os cards ainda nao tem o mesmo tamanho
+       padronizado"): reverte o `start` de 16/09 -- `stretch` (o padrao do
+       grid) faz os dois cartoes da MESMA linha terminarem juntos. O nome
+       continua INTEIRO (nunca corta): quem varia de altura e' o vao entre
+       o conteudo e o botao, nao o texto. */
+    align-items: stretch;
   }
   /* ⭐ CARTAO (Liquid Glass parte 4, 19/09/2026): a foto mora num poco
      BRANCO (a foto e' o produto) e o corpo e' vidro tingido — o mesmo
      material do console. Sem borda de 1px: quem separa e' a sombra tingida
      de ouro e o brilho de topo do vidro. Toque encolhe com mola. */
-  /* 19/09 (Bryan): o cartao tem a ALTURA DO PROPRIO conteudo — o vizinho
-     mais alto (grafico + "espere") nao estica o de cima e nao deixa um
-     vazio abaixo do botao. A grade alinha pelo topo. */
   .item {
-    display: flex; flex-direction: column; height: auto;
+    display: flex; flex-direction: column; height: 100%;
     background: #fff; border: 0;
     border-radius: 18px; overflow: hidden; text-decoration: none;
     color: inherit; box-shadow: 0 14px 34px -12px rgba(40,50,70,.22), 0 2px 6px rgba(40,50,70,.05);
@@ -1928,6 +1926,13 @@
        colorize.md: "keep the primary action easy to find"): o CTA sobe pra
        ANTES do "avise-me" no fluxo -- hoje o secundario lia primeiro. */
     order: 1;
+    /* ⭐ 23/09/2026 (Bryan: "os cards ainda nao tem o mesmo tamanho
+       padronizado"): com `.grade` em `stretch`, o `.corpo` agora tem
+       altura de sobra quando o vizinho e' mais alto (grafico, "espere").
+       `margin-top: auto` empurra o CTA -- e tudo que vem depois dele na
+       ordem visual (avise-me, de-olho, repor) -- pro fundo do cartao, e' o
+       vao que sobra que vira espaco, nunca o texto que estica. */
+    margin-top: auto;
   }
   .item:active .cta { transform: scale(.96); filter: brightness(.94); }
   @media (prefers-reduced-motion: reduce) {
@@ -3302,7 +3307,10 @@
     var notaSolta = sinaisDoCartao && sinaisDoCartao.children.length === 1
       && sinaisDoCartao.firstChild.classList.contains("nota")
       ? sinaisDoCartao.firstChild : null;
-    if (sinaisDoCartao && !notaSolta) { corpo.appendChild(sinaisDoCartao); }
+    // ⭐ 23/09/2026 (Bryan: "eu quero que o preço venha depois do título do
+    // produto e o número de vendidos e porcentagem vem depois"): a ordem
+    // vira nome -> preco -> sinais (vendidos/%/promo/frete/envio). So'
+    // adiciona `sinaisDoCartao` ao corpo DEPOIS de `lp`, mais abaixo.
     var lp = el("div", "linha-preco");
     // ⭐ O SELO DA LOJA: linha propria ACIMA do preco, a esquerda, pequeno —
     // onde o Bryan desenhou (16/09). Ja' morou na foto (cobria legenda de
@@ -3326,6 +3334,9 @@
     if (p.antes) { lp.appendChild(el("span", "de", p.antes)); }
     else if (p.subiu) { lp.appendChild(el("span", "de subiu", p.subiu)); }
     corpo.appendChild(lp);
+    // ⭐ o preco decide primeiro; os sinais (vendidos/%/promo/frete/envio)
+    // vem DEPOIS dele, nao antes -- ordem pedida pelo Bryan.
+    if (sinaisDoCartao && !notaSolta) { corpo.appendChild(sinaisDoCartao); }
     // ⭐ BLOCO B (22/09/2026): "voce economiza R$ X", o mesmo da capa. O
     // riscado diz o de/por e o selo diz a %; nenhum dos dois diz quanto a
     // pessoa poupa em dinheiro, que e' o numero da decisao.
@@ -3469,7 +3480,13 @@
       } else {
         lloja.appendChild(vistoSVG());
       }
-      lloja.appendChild(document.createTextNode(p.loja));
+      lloja.appendChild(document.createTextNode(p.loja +
+        // ⭐ 23/09/2026 (Bryan: "coloca uma informacao interessante sobre
+        // o produto que tivermos em mao"): o horario da ULTIMA conferencia
+        // -- dado real, ja' existe (`_conferido_em`), so' morava no title
+        // (invisivel sem toque longo). Mesma linha da loja, sem cartao
+        // novo: "AliExpress · conferido hoje às 19:32".
+        (p.conferido ? " · conferido " + p.conferido : "")));
       var escG = gr && gr.querySelector(".escala");
       if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }
       else { corpo.insertBefore(lloja, corpo.querySelector(".avise-me")); }

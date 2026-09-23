@@ -1828,15 +1828,15 @@
     /* ⛔ 23/09/2026 (Bryan, print: "se voltar a R$195 esta' tocando nas
        bordas do botao, ta' horrivel"): MEDIDO no acervo (Impeccable
        adapt.md) -- botao bom tem padding HORIZONTAL bem maior que o
-       vertical. Tentei so' subir o padding (8px/16px) e MEDI no DOM real:
-       o card so' tem 138,5px uteis, e o texto sozinho ("se voltar a
-       R$ 208,00") ja' precisa de ~115px -- com 16px de cada lado (32
-       total) NAO cabe de jeito nenhum, so' pioraria (cortaria o preco,
-       a unica informacao que importa aqui). O sino nunca foi essencial
-       (o link ja' tem texto + title explicando); tirando ele (17/09
-       liberava 15px+7px de gap = 22px), 8px/12px passa a caber em TODOS
-       os precos medidos sem cortar nada. */
-    padding: 8px 12px;
+       vertical. Primeira tentativa (padding 8px/12px, sino removido) ainda
+       cortava no site PUBLICADO (medi ao vivo: "R$ 208,00" precisava de
+       117px, so' cabiam 96-118px dependendo do card -- a viewport real
+       differ um pouco do que eu tinha medido antes de publicar). Faltava
+       tirar mais ~5-7px: padding foi pra 9px e o SPAN (nao o botao todo,
+       pra nao encolher o "avise-me se cair") ganhou fonte 11,5px (piso do
+       acervo/typeset.md e' 11px) -- medido de novo ao vivo, ZERO corte em
+       todos os precos reais, incluindo o de 3 digitos. */
+    padding: 8px 9px;
     text-decoration: none; background: transparent; box-shadow: none;
     transition: color .16s ease, border-color .16s ease, transform .15s cubic-bezier(.2,.8,.2,1);
     order: 2;
@@ -1844,12 +1844,15 @@
   .avise-me:hover { border-color: var(--fraco); }
   .item .de-olho, .avise-me.repor { order: 2; }
   .avise-me svg { display: none; }
-  /* ⚠️ SALVAGUARDA, nao o plano principal: sem o sino, o padding de 12px
-     ja' resolve todo caso medido. Pro raro produto com preco de 4+
-     digitos que AINDA nao coubesse, corta com reticencia em vez de
+  /* ⚠️ SALVAGUARDA, nao o plano principal: sem o sino, o padding de 9px +
+     fonte 11,5px ja' resolve todo caso medido. Pro raro produto com preco
+     de 4+ digitos que AINDA nao coubesse, corta com reticencia em vez de
      estourar a borda -- nunca mais feio que o texto tocando a moldura,
      nunca quebra linha. */
-  .avise-me span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .avise-me span {
+    font-size: 0.71875rem; letter-spacing: -.15px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  }
   .avise-me.longo span { white-space: normal; text-align: left; overflow: visible; text-overflow: clip; }
   .avise-me:hover { color: var(--tinta); }
   .avise-me:active { transform: scale(.96); }

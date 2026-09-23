@@ -984,10 +984,11 @@
        precisa por contraste; zero sombra externa aqui.
        ⛔ RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- zero sombra
        tambem zerou o descolamento deste chip da superficie branca de
-       baixo. Mesma sombra contida do chip nao-selecionado (blur 4px,
-       quase sem espalhamento lateral) -- nao repete o vazamento da
-       rodada 1. */
-    box-shadow: 0 2px 4px -1px rgba(20,20,30,.22);
+       baixo. Mesma sombra contida do chip nao-selecionado -- nao repete
+       o vazamento da rodada 1.
+       ⛔ RODADA 6: mesma correcao de forca do chip nao-selecionado --
+       16-22% de opacidade era proximo de invisivel a olho nu. */
+    box-shadow: 0 4px 8px -2px rgba(20,20,30,.4);
   }
   .chip-ordem[aria-pressed="true"] .n { color: #fff; opacity: .85; }
   .chip-ordem:active, .escolha:active, .avise-me:active, .ver-mais:active, .abas a:active {
@@ -1014,17 +1015,20 @@
   /* ⛔ 23/09/2026, RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- sem
      sombra nenhuma elas ficam coladas na superficie branca de baixo. A
      rodada 1 errou pro lado de MUITA sombra (vazava nos vizinhos); a
-     rodada 3 zerou DEMAIS. Meio-termo: blur pequeno (4px), quase sem
-     espalhamento lateral. ⛔ RODADA 5: essa sombra tinha sido escrita
-     numa regra ANTERIOR no arquivo (linha ~967) -- esta regra base,
-     MAIS ABAIXO, vencia a cascata e apagava a sombra de volta pro
-     "colado" que o Bryan viu de novo. Corrigido direto AQUI, na regra
-     que realmente decide. */
+     rodada 3 zerou DEMAIS.
+     ⛔ RODADA 5: a cascata apagava a sombra (corrigido, ver historico).
+     ⛔ RODADA 6: MEDIDO o computado depois do fix da rodada 5 -- a
+     sombra ESTAVA la' (`0 2px 4px -1px rgba(30,40,60,.16)`), mas 16% de
+     opacidade sobre fundo quase branco e' proximo de invisivel a olho
+     nu; o Bryan continuava vendo "colado". Nao era mais bug de cascata,
+     era FORCA insuficiente. Dobrado o blur (4->8px) e mais que dobrada
+     a opacidade (.16->.35) -- ainda contido (spread negativo, quase
+     todo o deslocamento pra baixo), mas agora inequivoco. */
   .chip-ordem {
     flex: 0 0 auto; height: 36px; display: inline-flex; align-items: center; gap: 6px;
     font: 600 13px/1 Poppins, sans-serif; padding: 0 14px; border-radius: 12px;
     border: 0; background: var(--vidro-forte);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 2px 4px -1px rgba(30,40,60,.16);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 4px 8px -2px rgba(20,20,30,.35);
     color: var(--tinta); white-space: nowrap; cursor: pointer;
     transition: transform .15s cubic-bezier(.2,.8,.2,1);
   }

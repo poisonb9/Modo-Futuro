@@ -90,7 +90,15 @@ async function main() {
   let saida = html;
   const troca = (alvo, novo) => {
     if (saida.indexOf(alvo) < 0) { throw new Error("ssr: marcador sumiu -> " + alvo); }
-    saida = saida.replace(alvo, novo);
+    // ⛔ 23/09/2026 (Bryan viu o bug ao vivo mas nao' conseguiu tirar print --
+    // "aparece muito rapido quando atualiza a tela"): `String.replace(alvo,
+    // novo)` com `novo` STRING trata "$&", "$1", "$$" etc como PADRAO, nao
+    // texto literal. Preco vem como "R$&nbsp;101,00" -- o "$&" ali dentro
+    // mandava o replace reinserir o proprio `alvo` casado (a div#grade
+    // vazia) no meio do preco, virando "R<div id=grade></div>nbsp;101,00"
+    // e duplicando id="grade" por card. Replacement como FUNCAO nunca
+    // interpreta padrao -- o retorno entra literal.
+    saida = saida.replace(alvo, () => novo);
   };
   troca('<div class="prova" id="prova"><div class="economia" id="economia" hidden></div></div>',
         '<div class="prova" id="prova"><div class="economia" id="economia" hidden></div>' + celas + '</div>');

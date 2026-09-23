@@ -115,5 +115,20 @@ checar('if (!alvo.dataset.mede)' in pagina,
        "e a pagina REALMENTE usa data-mede como trava (senao este teste nao guarda nada)")
 
 print()
+print("9. ⛔ NEGATIVO — PRECO COM 'R$' NAO PODE COMER O PROPRIO MARCADOR")
+# 23/09/2026 (Bryan viu ao vivo, sem conseguir print: "aparece muito rapido
+# quando atualiza a tela"): `saida.replace(alvo, novo)` com `novo` STRING
+# trata "$&" dentro do preco ("R$&nbsp;101,00") como PADRAO de substituicao
+# (insere o proprio `alvo` casado), nao como texto literal -- sobrava
+# "R<div class=\"grade\" id=\"grade\"></div>nbsp;101,00" e id="grade"
+# duplicado por cartao. O caso positivo (numeros/HTML aparecem) ja' prova
+# que o replace RODOU; so' este caso prova que ele nao comeu o "$&" de
+# dentro do proprio conteudo inserido.
+checar(saida.count('id="grade"') == 1,
+       f"id=\"grade\" aparece uma unica vez no HTML final ({saida.count('id=\"grade\"')}x)")
+orfas = [m.start() for m in re.finditer("nbsp;", saida) if saida[m.start() - 1:m.start()] != "&"]
+checar(not orfas, f"todo 'nbsp;' vem com o '&' na frente, nenhum orfao ({len(orfas)} orfao(s))")
+
+print()
 print("tudo verde" if not FALHAS else f"{FALHAS} FALHA(S)")
 sys.exit(1 if FALHAS else 0)

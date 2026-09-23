@@ -1929,6 +1929,11 @@
      na mesma linha. */
   .item .leg-conferido { display: flex; align-items: center; gap: 6px; }
   .item .leg-conferido svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .9; }
+  /* ⭐ 23/09/2026 (Bryan: "coloca o simbolo no rastreando ha X dias
+     tambem"): mesmo padrao das duas classes acima -- icone fixo pequeno,
+     texto que nunca quebra. */
+  .item .tem-icone { display: flex; align-items: center; gap: 6px; }
+  .item .tem-icone svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .9; }
   .item .cta {
     display: flex; align-items: center; justify-content: center; gap: 6px;
     width: 100%; min-height: 44px; margin-top: 8px; padding: 0 12px;
@@ -2867,12 +2872,23 @@
       // em vez de quebrar no meio ("a R$ 0,98 / do menor preco"). Na capa
       // elas continuam numa linha so', que e' onde cabem.
       var classe = "nq" + (noMenor && desceu && !estavel ? " ok" : "");
+      // ⭐ 23/09/2026 (Bryan: "coloca o simbolo no rastreando ha X dias
+      // tambem"): na GRADE (`empilhado` truthy) esta linha nao tinha
+      // NENHUM icone -- so' a capa ganhava a lupa (inserida por fora,
+      // `escL.insertBefore`). Mesmo check reusado (`vistoSVG()`), so' na
+      // PRIMEIRA linha do grupo -- a segunda (quando empilhada) e'
+      // continuacao da MESMA frase, nao um dado novo que precise de dono
+      // proprio.
+      var linha1 = empilhado ? el("span", classe + " tem-icone") : el("span", classe);
+      if (empilhado) { linha1.appendChild(vistoSVG()); }
       if (empilhado && veredito) {
         esc.classList.add("empilhada");
-        esc.appendChild(el("span", classe, idade));
+        linha1.appendChild(document.createTextNode(idade));
+        esc.appendChild(linha1);
         esc.appendChild(el("span", classe, veredito.replace(/^\u00a0·\s*/, "")));
       } else {
-        esc.appendChild(el("span", classe, idade + veredito));
+        linha1.appendChild(document.createTextNode(idade + veredito));
+        esc.appendChild(linha1);
       }
       wrap.appendChild(esc);
     }
@@ -3482,12 +3498,16 @@
       av.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id));
       av.rel = "noopener";
       // ⭐ sino em SVG, e o texto responde ao "espere": se ja' esteve mais
-      // barato, o pedido e' "avise-me se voltar a R$ X" (era o "nao compre"
+      // barato, o pedido e' "se voltar a R$ X" (era o "nao compre"
       // sem saida, MAESTROS_DESIGN §3.6)
+      // ⛔ 23/09/2026 (Bryan: "quero um botao mais compacto -- apenas 'se
+      // voltar a R$ X' em uma linha"): a classe "longo" (`white-space:
+      // normal`) permitia quebrar em 2 linhas -- e' exatamente o que ele
+      // NAO quer mais. "avise " sai do texto (o sino ja' diz "aviso"), e
+      // sem a classe o botao volta ao `nowrap` padrao.
       var voltar = !!(p.ja_esteve && p.ja_esteve.preco);
-      if (voltar) { av.className += " longo"; }
       av.innerHTML = SINO_SVG + '<span>' + (voltar
-        ? 'avise se voltar a <span class="nq">' + escapar(precoTruncado(p.ja_esteve.preco)) + '</span>' : 'avise-me se cair') + '</span>';
+        ? 'se voltar a <span class="nq">' + escapar(precoTruncado(p.ja_esteve.preco)) + '</span>' : 'avise-me se cair') + '</span>';
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
       av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
       corpo.appendChild(av);

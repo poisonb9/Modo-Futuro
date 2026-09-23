@@ -2370,7 +2370,15 @@
   // "mais barato" ordenam por coisas distintas e as duas listas podem nao se
   // cruzar — a mesma licao de campeoes x tendencia no garimpo.
   var FILTROS = [
-    { id: "todos",  rotulo: "Tudo",             cabe: function () { return true; },
+    // ⭐ 23/09/2026 (Bryan: "invés do site começar no Tudo, o Tudo já ser
+    // 'Maiores quedas'... depois Achados Novos, Mais vendidos, Subiram de
+    // preço"): o `id` continua "todos" DE PROPOSITO -- e' dele que
+    // dependem o topo manual (`marcar_topo`), o ML na 2a posicao e a
+    // ordem da externa (`atual === "todos"` em 3 pontos mais abaixo).
+    // Trocar o id quebraria os tres em silencio. So' o FILTRO (agora exige
+    // queda) e o ROTULO mudam -- a antiga aba separada "Maiores quedas"
+    // (id "caiu") deixou de existir, fundida aqui.
+    { id: "todos",  rotulo: "Maiores quedas",   cabe: function (p) { return (p.queda || 0) >= 5; },
       // ⭐ A ORDEM DE ABERTURA E' A DECISAO MAIS CARA DA PAGINA.
       // Antes era por DATA: o melhor produto podia estar em 40o lugar, e
       // com centenas de pecas isso vira desperdicio puro. Agora abre
@@ -2397,17 +2405,20 @@
         return ((b.ganho || 0) * (b.vendas || 0) * fb)
              - ((a.ganho || 0) * (a.vendas || 0) * fa);
       } },
-    // ⭐ 18/09 (Bryan, pela outra sessao): "Caiu de preco" vira "Maiores
-    // quedas"; "Achados novos" so' do catalogo proprio (a externa inteira
-    // chega com pontos=0 e virava "nova"); "Sendo acompanhados" sai — e'
-    // telemetria nossa, nao decisao de compra — e entra "Mais vendidos", a
-    // ordenacao que toda loja grande tem e a prova social do acervo
-    // (Movers and Shakers, meticsmedia).
-    { id: "caiu",   rotulo: "Maiores quedas",   cabe: function (p) { return (p.queda || 0) >= 5; },
-      ordem: function (a, b) { return (b.queda || 0) - (a.queda || 0); } },
+    // ⭐ 18/09 (Bryan, pela outra sessao): "Achados novos" so' do catalogo
+    // proprio (a externa inteira chega com pontos=0 e virava "nova");
+    // "Sendo acompanhados" sai — e' telemetria nossa, nao decisao de
+    // compra — e entra "Mais vendidos", a ordenacao que toda loja grande
+    // tem e a prova social do acervo (Movers and Shakers, meticsmedia).
     { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return !(p.pontos >= 2) && !externo(p); } },
     { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
       ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
+    // ⭐ 23/09/2026 (Bryan: "como transparencia, pra nao ficarmos mostrando
+    // esses produtos na vitrine... ter um lugar pra eles"). `subiu` e' o
+    // campo do backend (espelho de `antes`) -- so' existe quando hoje E'
+    // o pico da serie. Sozinho aqui, nunca na vitrine principal.
+    { id: "subiu",  rotulo: "Subiram de preço", cabe: function (p) { return !!p.subiu; },
+      ordem: function (a, b) { return num(b.preco) - num(a.preco); } },
     { id: "barato", rotulo: "Mais baratos",     cabe: function () { return true; },
       ordem: function (a, b) { return num(a.preco) - num(b.preco); } }
   ];
@@ -3070,8 +3081,12 @@
   // os centavos (Math.floor, nunca arredonda pra cima) -- e' um preco
   // APROXIMADO no convite, o valor exato continua no "espere" e no title.
   function precoTruncado(s) {
+    // ⭐ 23/09/2026 (Bryan, segunda volta: "quero assim -- R$72,00"): nao e'
+    // "R$72" seco, e' o mesmo formato de moeda de sempre (`moeda()`), so'
+    // com os centavos truncados pro inteiro. Math.floor nunca arredonda
+    // pra cima -- o convite fica levemente mais barato, nunca mais caro.
     var v = emReais(s);
-    return v === null ? s : "R$ " + Math.floor(v);
+    return v === null ? s : moeda(Math.floor(v));
   }
   function milhar(n) {
     n = Number(n) || 0;
@@ -3499,19 +3514,26 @@
       // ⭐ 23/09/2026 (Bryan: "coloca uma informacao interessante sobre o
       // produto que tivermos em mao"): o horario da ULTIMA conferencia --
       // dado real, ja' existe (`_conferido_em`), so' morava no title
-      // (invisivel sem toque longo). Mesma linha da loja: "AliExpress ·
-      // conferido hoje às 19:32".
-      // ⛔ 23/09/2026 (Bryan, print: "ficou com a linha quebrada, ficou
-      // feio"): sem wrapper, o texto quebrava dentro do proprio flex e o
-      // icone da loja ficava desalinhado, sobrando numa segunda/terceira
-      // linha torta. Agora o texto mora num `<span>` proprio que corta com
-      // reticencia (nunca quebra) quando nao cabe -- perde legibilidade do
-      // "conferido", nunca a leitura.
-      lloja.appendChild(el("span", "leg-loja-txt", p.loja +
-        (p.conferido ? " · conferido " + p.conferido : "")));
+      // (invisivel sem toque longo).
+      // ⛔ Tentativa 1 -- na MESMA linha da loja ("AliExpress · conferido
+      // hoje às 19:32") -- quebrava feio (sem wrapper) e depois de
+      // corrigido com wrapper+ellipsis, o Bryan REJEITOU o corte: "não
+      // quero assim, coloque como uma legenda curta que caiba".
+      // ⭐ Tentativa 2: linha PROPRIA, curta ("conferido às 19:32", sem
+      // "hoje" nem repetir a loja) -- cabe sozinha, nunca corta. Entra
+      // DEPOIS da loja, no MESMO `.escala.empilhada` (a mesma pilha que
+      // ja' tem "rastreando ha N dias" e "a R$ X do menor preço") --
+      // "abaixo do 0,70 do menor preço", onde o Bryan apontou.
+      lloja.appendChild(document.createTextNode(p.loja));
       var escG = gr && gr.querySelector(".escala");
       if (escG) { escG.appendChild(lloja); escG.classList.add("empilhada"); }
       else { corpo.insertBefore(lloja, corpo.querySelector(".avise-me")); }
+      if (p.conferido && escG) {
+        // ⚠️ `_conferido_em` devolve "hoje às HH:MM" OU "DD/MM" (dia
+        // diferente) -- os dois já têm a preposição certa quando existe;
+        // "conferido " + valor funciona pros dois sem duplicar "às".
+        escG.appendChild(el("span", "nq leg-conferido", "conferido " + p.conferido));
+      }
     }
     // ⭐ BLOCO B (22/09/2026): A ACAO, no fim do cartao. Sao 90 cartoes
     // e nenhum parecia clicavel -- o cartao inteiro sempre foi link, mas

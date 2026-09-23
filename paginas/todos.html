@@ -3542,8 +3542,10 @@
     // clicar"). ⚠ E um <span>, nao um <a>: o cartao ja e o link, e
     // <a> dentro de <a> e HTML invalido -- o parser quebraria o cartao.
     var cta = el("span", "cta");
+    // \u2b50 23/09/2026 (Bryan: "o comprar agora dos cards menores eu quero sem
+    // a seta"): so' na grade -- a capa (bem maior, o hero) continua com a
+    // seta, que e' de onde este pedido NAO fala.
     cta.appendChild(document.createTextNode("Comprar agora"));
-    cta.appendChild(el("span", null, "\u2192"));
     cta.setAttribute("aria-hidden", "true");
     corpo.appendChild(cta);
     a.title = (p.pontos >= 2

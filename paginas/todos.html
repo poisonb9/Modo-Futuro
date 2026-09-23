@@ -1031,7 +1031,12 @@
      serve — a rolagem as cegas ja' foi recusada uma vez). */
   /* ⭐ 23/09/2026, RODADA 2 (Bryan: "queria uma pequeninissima distancia"):
      8px -> 10px. So' o respiro entre os chips -- nao e' o vidro. */
-  .fila-chips { flex: 1 1 100%; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 8px 0 0; }
+  /* ⛔ RODADA 11 (Bryan: "quero o espacamento entre as pilulas iguais e
+     tambem da barra de pesquisa"): o espaco ACIMA da fila de chips
+     (padding-top, entre a busca e os chips) e o espaco ENTRE as fileiras
+     de chips e Categoria/Loja (row-gap de `.filtros`) eram numeros
+     diferentes -- 8px aqui, 12px la'. Igualado nos dois: 12px. */
+  .fila-chips { flex: 1 1 100%; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 12px 0 0; }
   .fila-chips::-webkit-scrollbar { display: none; }
   /* ⛔ 23/09/2026, RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- sem
      sombra nenhuma elas ficam coladas na superficie branca de baixo. A

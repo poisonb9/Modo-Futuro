@@ -31,6 +31,13 @@ O anterior é [`RETOMADA_23-09-2026_PARTE3.md`](RETOMADA_23-09-2026_PARTE3.md)
   `teste_legenda_uma_linha` (exige 12,5 px; código usa 11 desde 22/09) e
   `teste_categoria_externa` (campo `subiu` a mais no cartão). Não consertados.
 
+⛔ **3 commits LOCAIS NÃO EMPURRADOS** (`95e7aed`, `db2e9ff` e o deste
+handoff). O push foi recusado: o radar da nuvem empurrou `a43629f` antes, e a
+árvore tem mudanças de estado das tarefas agendadas, então não rebaseei no
+meio da publicação do vigia. Próxima sessão: esperar o vigia terminar,
+`git stash -u` → `git pull --rebase` → `git stash pop` → `git push`.
+(`c148b88`, o dos balões, JÁ está no GitHub.)
+
 ## 1b. Backup e documentação (commit `db2e9ff`)
 
 - `publicar_ao_mudar_agendado.ps1`: depois de TODA publicação conferida roda

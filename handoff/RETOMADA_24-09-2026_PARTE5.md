@@ -5,6 +5,13 @@ contato — continua sendo o próximo trabalho grande).
 
 ## 0. ⛔ PRIMEIRA COISA
 
+0. ⛔ ORDEM DO DONO (fim da parte 5): **antes de publicar QUALQUER coisa pelo
+   bot/canal do Telegram, rever com ele o PADRÃO DAS PUBLICAÇÕES** (formato da
+   mensagem, foto, preço, link, frequência). Nada vai ao Telegram antes disso.
+   ⚠️ A troca do link do avise-me para o bot novo entra sozinha na próxima
+   publicação automática do site (o publicador lê o `.env`); isso NÃO posta
+   nada no Telegram — só muda para onde o botão leva.
+
 1. Publicar e conferir o **bot novo no "avise-me"**: `.env` já tem
    `TELEGRAM_BOT_ALERTA` + `TELEGRAM_BOT_ALERTA_USERNAME=AchadinhoTotalBot`, e o
    secret `TELEGRAM_BOT_ALERTA` foi gravado no GitHub (23:36 UTC). A próxima

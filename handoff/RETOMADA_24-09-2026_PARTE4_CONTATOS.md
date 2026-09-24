@@ -99,3 +99,42 @@ o Bryan JÁ AUTORIZOU testes para esse endereço.
 - DNS antigo do domínio tinha SPF `-all` + DMARC `reject` (proteção de domínio
   sem e-mail) — tinham de ser EDITADOS, não duplicados.
 - Consultar DNS público: `curl "https://cloudflare-dns.com/dns-query?name=X&type=TXT" -H "accept: application/dns-json"`.
+
+
+## 5. ATUALIZAÇÃO 12:05 UTC (depois do 1º handoff da parte 4)
+
+**Estado no fechamento:** commit `3f61372` enviado e publicação disparada às
+12:01 — NÃO CONFIRMADA. Prova: `curl -s https://achadinhototal.com.br/ | grep -c "var minimo = innerHeight + 240"` ≥ 1.
+
+Feito:
+- **Convite no celular** (`ce34964`, NO AR 11:41): caixa 46 px mais estreita de
+  cada lado, um CORAÇÃO de cada lado (`inaug_coracao_p.webp`, 34 px), texto
+  enxuto: "As quedas de preço no seu celular" + "Cada queda boa que eu encontro
+  cai direto no seu Telegram."; botão em 1 linha (12,5 px).
+- **Balões por bloco — conserto** (`3f61372`): MEDIDO no ar, a grade tem só 3
+  fileiras (1.727 px, topo em ~1.261) numa página de ~3.520 → só cabia 1
+  balão. Agora o trecho vai do topo da grade até o fim da página (−380 px de
+  rodapé), vão mínimo = 1 tela + 240 px, sobra dividida por igual, sorteio só
+  dentro da sobra. Prévia 1920×1000: 2 balões (1.695 e 3.162, lados alternados).
+- **E-mail de inauguração** (`ferramentas/email_inauguracao.py`):
+  - caixas dos 3 produtos com a MESMA altura no celular (borda na célula,
+    preço/queda `nowrap`, nome ≤ 40 chars) — medido 225 px as três;
+  - citação assinada **"— Fundador do Achadinho Total"** (o Bryan escolheu; NÃO
+    usar o nome dele);
+  - **produto linka DIRETO ao link de afiliado** (ordem permanente, memória
+    `modofuturo-email-link-direto-afiliado`); capa e botão levam ao site com UTM.
+- **Brevo segurou envios**: de 08:36 a ~08:50 (Brasília) os envios ficaram só em
+  "requests" — era aviso de IP desta VPS no painel do Brevo; o Bryan liberou.
+  Enviados para o Lucas (lucasmarianocomunicacao@gmail.com) sem querer: até
+  3–4 cópias de teste (o "pro Lucas não" chegou depois do envio). ⛔ Regra:
+  antes de QUALQUER envio, dizer para quem vai e esperar confirmação.
+- Último teste: 11:52 UTC só para bryanarchives@gmail.com, assinatura Fundador.
+
+Pendente (novo):
+- **Foto do remetente no Gmail**: criar conta Google com
+  `ofertas@achadinhototal.com.br` e pôr a imagem do Bryan (ele tem a imagem;
+  conferir recorte em círculo de 40 px). EXIGE antes o **Email Routing** da
+  Cloudflare (ofertas@ → Gmail), porque o domínio tem MX nulo. BIMI descartado
+  (VMC ~US$ 1.000/ano + marca registrada).
+- Perguntar ao Bryan se os e-mails de teste chegaram na caixa principal, em
+  Promoções ou no Spam, e pedir "Mostrar original" (SPF/DKIM/DMARC).

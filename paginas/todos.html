@@ -1837,6 +1837,37 @@
     .vitrine .vfoto { aspect-ratio: 5 / 2; }
     .vitrine.fundo-cena .vfoto { aspect-ratio: 8 / 3; }
     .vitrine.fundo-estudio .vfoto { aspect-ratio: 2 / 1; }
+
+  /* ⭐ A GALERIA DO DESTAQUE (24/09/2026, so' PC >= 1024; celular fica como
+     esta', pedido do Bryan). Foto grande QUADRADA + grade 2x2 de miniaturas
+     quadradas, todas `contain` sobre branco: nada esticado, nada cortado (o
+     8:3 do `fundo-cena` cortava; o `contain` largo deixava a foto miuda e
+     "desconexa"). Altura ~ a do heroi antigo, para a troca pos-carga nao
+     empurrar a pagina. As classes `fundo-*` sao neutralizadas aqui: elas
+     desenhavam o heroi de UMA foto. */
+  .vgal { display: none; }
+  @media (min-width: 1024px) {
+    #vitrine .vitrine.com-galeria .vgal {
+      display: flex; justify-content: center; gap: 12px;
+      --gh: clamp(320px, 40vh, 440px); height: var(--gh);
+      padding: 14px 14px 0; background: #fff; box-sizing: content-box;
+    }
+    #vitrine .vitrine.com-galeria .vgal .vfoto {
+      height: 100%; width: auto; aspect-ratio: 1; object-fit: contain;
+      padding: 3%; box-sizing: border-box; clip-path: none; border-radius: 16px;
+      background: #fff; view-transition-name: vgal-grande;
+    }
+    #vitrine .vitrine.com-galeria > .vfoto { display: none; }
+    .vmini { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap: 12px; height: 100%; aspect-ratio: 1; }
+    .vmini button { all: unset; box-sizing: border-box; cursor: pointer; border-radius: 14px;
+      background: #fff; border: 1px solid var(--linha, rgba(0,0,0,.08)); padding: 7%;
+      display: grid; place-items: center; transition: border-color .2s, transform .2s; }
+    .vmini button:hover { transform: translateY(-2px); border-color: var(--fraco); }
+    .vmini button[aria-current="true"] { border-color: #c8921c; box-shadow: 0 0 0 1px #c8921c inset; }
+    .vmini button:focus-visible { outline: 2px solid #c8921c; outline-offset: 2px; }
+    .vmini img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  }
   }
   #vitrine:not(:empty) + .grade, #vitrine:not(:empty) ~ .grade { margin-top: 14px; }
   .grade {
@@ -2424,6 +2455,76 @@
     .estrela-centro.esq { animation: balanca 6.6s ease-in-out -1.5s infinite alternate; }
     .estrela-centro.dir { animation: balanca 7.3s ease-in-out -4.1s infinite alternate; --gira: -2.5deg; }
   }
+  /* ⭐ DUAS ESTRELAS NO CELULAR, dos lados do PRECO da linha viva (24/09,
+     print do Bryan com as duas areas marcadas). Na altura do nome a linha
+     ocupa ~322 de 354 px; na do preco sobram ~80 px de cada lado -- e' ali.
+     Mesmo efeito do cupom e do cifrao (animacao guiada pela rolagem), mas
+     comecando MAIS TARDE (120 -> 520 px), porque elas moram mais embaixo:
+     sobem e somem enquanto a pessoa passa pelo preco a caminho da vitrine.
+     (Bryan achou que podia ficar apertado; ficou para ele ver no aparelho.) */
+  .estrela-vivo { display: none; }
+  @media (max-width: 759px) {
+    .estrela-vivo { display: block; position: absolute; top: 262px; width: 30px;
+      transform-origin: 50% 100%; opacity: .95; }
+    .estrela-vivo.esq { left: 3vw; }
+    .estrela-vivo.dir { right: 3vw; }
+    .estrela-vivo img { width: 100%; height: auto; display: block; }
+    .estrela-vivo picture { display: block; }
+  }
+  @media (max-height: 740px) and (max-width: 759px) { .estrela-vivo { top: 214px; width: 26px; } }
+  @supports (animation-timeline: scroll()) {
+    @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
+      .estrela-vivo { animation: soltar linear both; animation-timeline: scroll(root);
+        animation-range: 120px 520px; }
+      .estrela-vivo picture { animation: balanca 6.2s ease-in-out -1.1s infinite alternate; }
+      .estrela-vivo.dir picture { animation-duration: 7.4s; animation-delay: -3.7s; --gira: -2.5deg; }
+    }
+  }
+  @supports not (animation-timeline: scroll()) {
+    @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
+      .estrela-vivo {
+        transform: translateY(calc(var(--solta2, 0) * -150px)) scale(calc(1 - var(--solta2, 0) * .2));
+        opacity: calc(.95 - var(--solta2, 0) * .95);
+      }
+    }
+  }
+  /* ⭐ BALOES QUE SOBEM COM A ROLAGEM, NO PC (24/09/2026, Bryan: "quando
+     estiver rolando a pagina sobe um balao do lado direito e depois um do
+     lado esquerdo, casando com o fim do rolamento"). Fixos nas MARGENS (so'
+     >= 1440 px, onde a grade de 1180 deixa lateral livre), guiados pela
+     rolagem da pagina inteira: o da direita atravessa a tela entre 15% e 60%
+     do caminho; o da esquerda entre 55% e 100% -- chega ao topo exatamente no
+     fim. Sem suporte ao recurso, o script do fim da pagina escreve --prog. */
+  .sobe-rolagem { display: none; }
+  @media (min-width: 1440px) {
+    .sobe-rolagem { display: block; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .sobe { position: absolute; top: 0; width: 92px; opacity: 0; }
+    .sobe img { width: 100%; height: auto; display: block;
+      filter: drop-shadow(0 8px 12px rgba(20, 16, 30, .14)); }
+    .sobe.dir { right: calc((100vw - 1180px) / 4 - 46px); }
+    .sobe.esq { left: calc((100vw - 1180px) / 4 - 46px); }
+  }
+  @keyframes subirTela {
+    0%   { transform: translateY(105vh) rotate(-4deg); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateY(-45vh) rotate(4deg); opacity: 0; }
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+      .sobe { animation: subirTela linear both; animation-timeline: scroll(root); }
+      .sobe.dir { animation-range: 15% 60%; }
+      .sobe.esq { animation-range: 55% 100%; }
+    }
+  }
+  @supports not (animation-timeline: scroll()) {
+    @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+      .sobe.dir { --f: clamp(0, calc((var(--prog, 0) - .15) / .45), 1); }
+      .sobe.esq { --f: clamp(0, calc((var(--prog, 0) - .55) / .45), 1); }
+      .sobe { transform: translateY(calc(105vh - var(--f) * 150vh)) rotate(calc(-4deg + var(--f) * 8deg));
+        opacity: clamp(0, calc(min(var(--f), 1 - var(--f)) * 12), 1); }
+    }
+  }
   /* ⭐ O VARAL "INAUGURACAO" (24/09/2026, arte do Bryan, letra por letra).
      A faixa inteira ficou "espremida, enfiada de qualquer jeito" (Bryan) --
      cada letra agora e' um balao: separadas por erosao + dono mais proximo
@@ -2615,6 +2716,7 @@
 </style>
 
 <div class="luz" aria-hidden="true"></div>
+<div class="sobe-rolagem" aria-hidden="true"><span class="sobe dir"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" loading="lazy"></span><span class="sobe esq"><img src="/baloes/inaug_porcento.webp" alt="" decoding="async" loading="lazy"></span></div>
 <div class="faixa">
   <header>
     <!-- ⭐ baloes da inauguracao (24/09/2026). Enfeite puro: aria-hidden, sem
@@ -2624,6 +2726,8 @@
     <div class="baloes" aria-hidden="true">
       <span class="estrela-centro esq"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span>
       <span class="estrela-centro dir"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span>
+      <span class="estrela-vivo esq"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_estrela_p.webp"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></picture></span>
+      <span class="estrela-vivo dir"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_estrela_p.webp"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></picture></span>
       <div class="varal">
         <span style="--i:1;--arco:1.00;--dy:0"><picture><source media="(max-width: 759px)" srcset="/baloes/letra_01_p.webp"><img src="/baloes/letra_01.webp" alt="" decoding="async" fetchpriority="low"></picture></span>
         <span style="--i:2;--arco:0.64;--dy:0"><picture><source media="(max-width: 759px)" srcset="/baloes/letra_02_p.webp"><img src="/baloes/letra_02.webp" alt="" decoding="async" fetchpriority="low"></picture></span>
@@ -2791,6 +2895,7 @@
   // cartao recebe o href quando o arquivo chega. Clique antes disso espera
   // o arquivo (nao falha). O publicador preenche; vazio = tudo embutido.
   var LINKS_ARQUIVO = "";
+  var GALERIAS_ARQUIVO = "";
   var LINKS_PRONTOS = !LINKS_ARQUIVO, LINKS_FILA = [], LINKS_VOO = null;
   function carregarLinks() {
     if (LINKS_PRONTOS || LINKS_VOO) { return LINKS_VOO; }
@@ -4656,6 +4761,76 @@
     document.addEventListener("DOMContentLoaded", ligarClassificador);
   } else { ligarClassificador(); }
 
+  /* ⭐ GALERIA DO DESTAQUE (24/09/2026). Liga do MESMO jeito que o
+     classificador de fundo acima: a primeira tela vem pronta do SERVIDOR e o
+     `montar` nao roda nela -- a galeria tem de pegar qualquer vitrine que
+     aparecer no #vitrine. So' PC (>= 1024): no celular nem baixa o arquivo.
+     A miniatura do Ali vem em 350 px (`_350x350.jpg`: 30 KB contra 109 KB). */
+  var GALERIAS = null, GALERIAS_PEDIDO = false;
+  var mqGaleria = window.matchMedia ? matchMedia("(min-width: 1024px)") : null;
+  function miniaturaDe(u) {
+    return /aliexpress-media\.com|alicdn\.com/.test(u) && /\.(jpe?g|png|webp)$/i.test(u) ? u + "_350x350.jpg" : u;
+  }
+  function aplicarGaleria() {
+    if (!GALERIAS || !mqGaleria || !mqGaleria.matches) { return; }
+    var alvo = document.getElementById("vitrine");
+    var a = alvo && alvo.querySelector(".vitrine");
+    if (!a || a.querySelector(".vgal")) { return; }
+    var fotos = GALERIAS[a.getAttribute("data-pid") || ""];
+    var velha = a.querySelector("img.vfoto");
+    if (!fotos || fotos.length < 3 || !velha) { return; }
+    var gal = el("div", "vgal");
+    var grande = document.createElement("img");
+    grande.className = "vfoto"; grande.alt = velha.alt || ""; grande.src = fotos[0];
+    grande.decoding = "async";
+    gal.appendChild(grande);
+    var mini = el("div", "vmini");
+    fotos.slice(1, 5).forEach(function (u, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.setAttribute("aria-label", "ver foto " + (i + 2));
+      var im = document.createElement("img");
+      im.src = miniaturaDe(u); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+      b.appendChild(im);
+      b.addEventListener("click", function (ev) {
+        // o cartao inteiro e' um link: a miniatura troca a foto, NAO navega
+        ev.preventDefault(); ev.stopPropagation();
+        var troca = function () {
+          var antes = grande.src;
+          grande.src = u; im.src = miniaturaDe(antes);
+          u = antes;
+        };
+        if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.startViewTransition(troca);
+        } else { troca(); }
+      });
+      mini.appendChild(b);
+    });
+    gal.appendChild(mini);
+    a.insertBefore(gal, velha);
+    a.classList.add("com-galeria");
+  }
+  function pedirGalerias() {
+    if (GALERIAS_PEDIDO || !GALERIAS_ARQUIVO || !mqGaleria || !mqGaleria.matches) { return; }
+    GALERIAS_PEDIDO = true;
+    fetch(GALERIAS_ARQUIVO, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) { throw new Error("http " + r.status); }
+      return r.json();
+    }).then(function (j) { GALERIAS = (j && j.galerias) || {}; aplicarGaleria(); })
+      .catch(function () { GALERIAS_PEDIDO = false; });
+  }
+  function ligarGaleria() {
+    var alvo = document.getElementById("vitrine");
+    if (!alvo) { return; }
+    new MutationObserver(function () { aplicarGaleria(); }).observe(alvo, { childList: true });
+    pedirGalerias();
+    if (mqGaleria && mqGaleria.addEventListener) {
+      mqGaleria.addEventListener("change", function () { pedirGalerias(); aplicarGaleria(); });
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ligarGaleria);
+  } else { ligarGaleria(); }
+
   function desenhar() {
     // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)
     var estatico = document.getElementById("indice-estatico");
@@ -6388,11 +6563,18 @@
   try {
     if (window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()")) { return; }
     var mq = matchMedia("(max-width: 759px) and (prefers-reduced-motion: no-preference)");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
     var alvo = document.querySelector(".baloes"); if (!alvo) { return; }
     var pedido = false;
     function pinta() { pedido = false;
-      var s = mq.matches ? Math.min(1, Math.max(0, (window.scrollY || 0) / 320)) : 0;
-      alvo.style.setProperty("--solta", s.toFixed(3)); }
+      var y = window.scrollY || 0;
+      var s = mq.matches ? Math.min(1, Math.max(0, y / 320)) : 0;
+      var s2 = mq.matches ? Math.min(1, Math.max(0, (y - 120) / 400)) : 0;
+      alvo.style.setProperty("--solta", s.toFixed(3));
+      alvo.style.setProperty("--solta2", s2.toFixed(3));
+      var sr = document.querySelector(".sobe-rolagem");
+      if (sr) { var tot = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+        sr.style.setProperty("--prog", Math.min(1, y / tot).toFixed(4)); } }
     addEventListener("scroll", function () { if (!pedido) { pedido = true; requestAnimationFrame(pinta); } }, { passive: true });
     pinta();
   } catch (e) {}

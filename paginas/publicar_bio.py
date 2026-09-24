@@ -676,6 +676,62 @@ def economia_radar(dias: int = 30) -> dict:
     return {"total": round(total_hoje, 2), "produtos": n_hoje, "serie": serie}
 
 
+
+# ⭐ A GALERIA DO DESTAQUE NO PC (24/09/2026, Bryan: "em vez dessa imagem
+# gigante e muitas vezes desconexa ou esticada, varias imagens do mesmo
+# anuncio de maneira organizada"). As fotos JA' existiam: `precos.puxar`
+# guarda `product_small_image_urls` do Ali em `precos_agora.json` desde
+# 18/09 (MEDIDO hoje: 164 de 168 produtos, 157 com 5), e so' serviam para
+# escolher a capa. Sobem num arquivo AO LADO, que so' o PC baixa: no celular
+# o custo e' zero.
+#
+# Acervo: Maestros/WooCommerce (DEMONSTRADO) -- principal + secundarias; e a
+# regra de quando NAO usar: "se os produtos nao tiverem imagens secundarias".
+# Por isso o piso: menos de GALERIA_MIN fotos boas = o produto fica com a
+# foto unica de sempre.
+#
+# ⛔ QUEM SAI: foto JULGADA pelo modelo de visao (`foto_julga`) que e'
+# colagem ou tem nota abaixo de GALERIA_NOTA_MIN. Foto NAO julgada entra,
+# depois das julgadas boas: na galeria, detalhe com medida escrita ajuda; o
+# que desmonta a vitrine e' colagem e banner. (Hoje so' 53 das 809 extras
+# estao julgadas -- rodar `foto_julga.medir` nelas melhora o filtro.)
+GALERIAS_ARQUIVO = "galerias.json"
+GALERIA_MIN = 3
+GALERIA_MAX = 5
+GALERIA_NOTA_MIN = 5
+
+
+def montar_galerias(dados: list[dict]) -> dict[str, list[str]]:
+    from engine import foto_julga
+    agora = _precos_agora()
+    fim: dict[str, list[str]] = {}
+    for p in dados:
+        pid = str(p.get("id") or "")
+        principal = p.get("imagem") or ""
+        extras = (agora.get(pid) or {}).get("imagens") or []
+        if not pid or not principal or not extras:
+            continue
+        boas, sem_julgamento = [], []
+        for u in extras:
+            if not u or u == principal:
+                continue
+            j = foto_julga.julgado(u)
+            if not j:
+                sem_julgamento.append(u)
+            elif not j.get("colagem") and int(j.get("nota") or 0) >= GALERIA_NOTA_MIN:
+                boas.append((int(j.get("nota") or 0), u))
+        boas.sort(key=lambda x: -x[0])
+        fotos = [principal] + [u for _, u in boas] + sem_julgamento
+        vistas, lista = set(), []
+        for u in fotos:
+            if u not in vistas:
+                vistas.add(u)
+                lista.append(u)
+        if len(lista) >= GALERIA_MIN:
+            fim[pid] = lista[:GALERIA_MAX]
+    return fim
+
+
 def montar_catalogo() -> tuple[str, dict[str, str]]:
     """O HTML do catalogo com os produtos e o brasao dentro, e os arquivos
     das categorias externas ({nome do arquivo: JSON}) que sobem ao lado."""
@@ -723,6 +779,10 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     links = separar_links(dados)
     if links:
         arquivos[LINKS_ARQUIVO] = json.dumps({"links": links}, ensure_ascii=False)
+    galerias = montar_galerias(dados)
+    if galerias:
+        arquivos[GALERIAS_ARQUIVO] = json.dumps({"galerias": galerias}, ensure_ascii=False)
+    print(f"galerias: {len(galerias)} produto(s) com {GALERIA_MIN}+ fotos boas")
     # ⚠️ ESTOURA SE O MARCADOR SUMIR. Substituicao que nao acha o alvo e segue
     # publicaria um catalogo VAZIO com cara de pronto.
     eco = economia(dados)
@@ -741,6 +801,8 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                          "  var SIMBOLOS = " + json.dumps(simbolos_lojas()) + ";"),
                         ('  var LINKS_ARQUIVO = "";',
                          '  var LINKS_ARQUIVO = "' + (LINKS_ARQUIVO if links else "") + '";'),
+                        ('  var GALERIAS_ARQUIVO = "";',
+                         '  var GALERIAS_ARQUIVO = "' + (GALERIAS_ARQUIVO if galerias else "") + '";'),
                         # ⭐ selo 2: o @ do bot do "avise-me"; "" = sem botao
                         ('  var BOT_ALERTA = "";',
                          '  var BOT_ALERTA = "' + _bot_alerta() + '";'),

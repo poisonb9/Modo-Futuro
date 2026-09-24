@@ -2488,6 +2488,73 @@
       }
     }
   }
+  /* ⭐ O CORACAO DO CONVITE (24/09/2026, Bryan desenhou no print: a` esquerda
+     do bloco "Receba as melhores ofertas no seu celular"). E' o bloco que pede
+     a relacao -- o coracao diz "a gente cuida de voce". So' PC >= 1440, na
+     margem (fora do bloco); no celular nao cabe sem apertar o texto. */
+  .coracao-convite { display: none; }
+  @media (min-width: 1440px) {
+    .convite { position: relative; }
+    /* 24/09: um DE CADA LADO e menores (Bryan), espelhados. */
+    .coracao-convite { display: block; position: absolute; top: -20px;
+      width: 78px; pointer-events: none; transform-origin: 50% 100%; }
+    .coracao-convite.esq { left: -112px; }
+    .coracao-convite.dir { right: -112px; }
+    .coracao-convite img { width: 100%; height: auto; display: block;
+      filter: drop-shadow(0 10px 16px rgba(120, 10, 20, .16)); }
+  }
+  @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+    .coracao-convite.esq { animation: balanca 6.8s ease-in-out -2.6s infinite alternate; }
+    .coracao-convite.dir { animation: balanca 7.9s ease-in-out -5.1s infinite alternate; --gira: -2.5deg; }
+  }
+  /* ⭐ OS PRECOS RESPIRAM (24/09/2026, Bryan: "balancarem bem levemente, quase
+     imperceptivel, para criar uma ilusao de otica muito sutil"). Meio pixel e
+     0,6 grau, ciclo de ~7 s, e cada cartao DEFASADO do vizinho (nth-child), para
+     a grade nao balancar em bloco -- ai' o olho percebe. Propriedades
+     `translate`/`rotate` (nao `transform`), para nao brigar com nada que ja'
+     mexa no elemento. Os tres sao itens de flex (medido), entao aceitam. */
+  @media (prefers-reduced-motion: no-preference) {
+    /* a linha viva DIGITA o preco letra por letra: partir em caracteres
+       quebraria a digitacao, entao ela respira inteira. */
+    .vivo-preco { transform-origin: 30% 80%;
+      animation: respira 6.9s ease-in-out -0.8s infinite alternate; }
+    /* ⭐ 24/09 (Bryan: "e cada numero e cifrao balanca aleatoriamente"): na
+       grade e na capa o script `tremularPrecos` parte o preco em caracteres
+       (.dg) e sorteia duracao, atraso e sentido de cada um. */
+    /* Mesmo esquema das letras do varal (dois periodos independentes:
+       sobe/desce e gira), com ~1/3 da amplitude delas -- 0,3-0,6 px e
+       0,5-1 grau. Quase imperceptivel, de proposito (Bryan). */
+    .dg { display: inline-block; transform-origin: 50% 85%;
+      animation: dgSobe var(--dd, 5s) ease-in-out var(--da, 0s) infinite alternate,
+                 dgGira var(--dd2, 6s) ease-in-out var(--da2, 0s) infinite alternate; }
+  }
+  @keyframes dgSobe { from { translate: 0 calc(var(--dy2, .4px) * -1); } to { translate: 0 var(--dy2, .4px); } }
+  @keyframes dgGira { from { rotate: calc(var(--dr, .7deg) * -1); } to { rotate: var(--dr, .7deg); } }
+  @keyframes respira {
+    from { translate: 0 -.5px; rotate: -.6deg; }
+    to   { translate: 0 .5px;  rotate: .6deg; }
+  }
+  /* ⭐ AVISE-ME VIRA LINK TERCIARIO (24/09/2026, Bryan: "menor como um todo
+     para disputar menos visual com o comprar"). Depois de 3 rodadas em 23/09
+     ele ainda era uma CAIXA de largura inteira, o mesmo tamanho do CTA.
+     Acervo: Maestros (DEMONSTRADO) -- principal na cor da marca, secundario
+     cinza claro/baixa opacidade; alvo de toque >= 44 px (iOS) -- e Impeccable
+     distill ("ONE primary, few secondary, everything else tertiary"). Entao:
+     SEM caixa (sai borda e o vidro), texto cinza da largura dele, centrado,
+     sublinhado pontilhado fino como sinal de clique -- e os 44 px de toque
+     FICAM, invisiveis. Especificidade `.item .avise-me` vence a regra do
+     vidro compartilhado (`.chip-ordem, ..., .avise-me`). */
+  .item .avise-me {
+    width: auto; align-self: center; min-height: 44px; margin-top: 0;
+    padding: 4px 10px; border: 0; border-radius: 10px;
+    background: none; background-image: none; box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    color: var(--fraco); font-weight: 500;
+    text-decoration: underline dotted; text-decoration-thickness: 1px;
+    text-underline-offset: 3px; text-decoration-color: rgba(120, 115, 135, .45);
+  }
+  .item .avise-me:hover { color: var(--tinta); text-decoration-color: currentColor; }
+  .item .avise-me::before, .item .avise-me::after { display: none; }
   /* ⭐ BALOES QUE SOBEM COM A ROLAGEM, NO PC (24/09/2026, Bryan: "quando
      estiver rolando a pagina sobe um balao do lado direito e depois um do
      lado esquerdo, casando com o fim do rolamento"). Fixos nas MARGENS (so'
@@ -2838,6 +2905,8 @@
        de afiliado, poucas linhas abaixo). Nova frase promete so' o que e'
        verdade: a notificacao no celular, sem precisar abrir o site. -->
   <section class="convite">
+    <span class="coracao-convite esq" aria-hidden="true"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></span>
+    <span class="coracao-convite dir" aria-hidden="true"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></span>
     <h2>Receba as melhores ofertas no seu celular</h2>
     <p>Sem precisar abrir o site: cada queda de preço boa que eu encontro cai direto no seu Telegram.</p>
     <a class="botao" href="https://t.me/achadinhototal" target="_blank" rel="noopener" id="tg">
@@ -4844,6 +4913,61 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", ligarGaleria);
   } else { ligarGaleria(); }
+
+  /* ⭐ CADA CARACTERE DO PRECO BALANCA SOZINHO (24/09/2026). Parte o texto de
+     `.item .preco` e `.cap-preco` em <span class="dg">, cada um com duracao
+     (3,4-7,6 s), atraso e amplitude sorteados. Marca `data-dg` para nao
+     partir duas vezes (o observador ve as proprias mudancas). Com
+     reduced-motion nao parte nada: o CSS ja' nao anima, e o DOM fica intacto. */
+  var dgReduz = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function partirPreco(el) {
+    if (el.getAttribute("data-dg")) { return; }
+    el.setAttribute("data-dg", "1");
+    var nos = [];
+    (function colher(n) {
+      for (var c = n.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3) { nos.push(c); }
+        else if (c.nodeType === 1 && c.tagName !== "S") { colher(c); }
+      }
+    })(el);
+    nos.forEach(function (tn) {
+      var txt = tn.nodeValue; if (!txt || !txt.trim()) { return; }
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < txt.length; i++) {
+        var ch = txt.charAt(i);
+        if (ch === " ") { frag.appendChild(document.createTextNode(" ")); continue; }
+        var s = document.createElement("span");
+        s.className = "dg"; s.textContent = ch;
+        var d = 3.1 + Math.random() * 2.2, d2 = 4.3 + Math.random() * 3.6;
+        s.style.setProperty("--dd", d.toFixed(2) + "s");
+        s.style.setProperty("--dd2", d2.toFixed(2) + "s");
+        s.style.setProperty("--da", (-Math.random() * d).toFixed(2) + "s");
+        s.style.setProperty("--da2", (-Math.random() * d2).toFixed(2) + "s");
+        s.style.setProperty("--dr", ((0.5 + Math.random() * 0.5) * (Math.random() < .5 ? -1 : 1)).toFixed(2) + "deg");
+        s.style.setProperty("--dy2", (0.3 + Math.random() * 0.3).toFixed(2) + "px");
+        frag.appendChild(s);
+      }
+      tn.parentNode.replaceChild(frag, tn);
+    });
+  }
+  function tremularPrecos(raiz) {
+    if (dgReduz) { return; }
+    var lista = (raiz || document).querySelectorAll(".item .preco:not([data-dg]), .cap-preco:not([data-dg])");
+    for (var i = 0; i < lista.length; i++) { partirPreco(lista[i]); }
+  }
+  function ligarTremor() {
+    if (dgReduz) { return; }
+    tremularPrecos();
+    var pendente = false;
+    new MutationObserver(function () {
+      if (pendente) { return; }
+      pendente = true;
+      requestAnimationFrame(function () { pendente = false; tremularPrecos(); });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ligarTremor);
+  } else { ligarTremor(); }
 
   function desenhar() {
     // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)

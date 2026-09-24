@@ -459,7 +459,13 @@
        MAIS ADIANTE no arquivo (a regra quadrada) e, com a mesma
        especificidade, quem vem depois vence. Medi e o cartao continuava em
        358 px — a regra estava escrita e sem efeito. */
-    #vitrine .vitrine .vfoto { aspect-ratio: 4 / 3; }
+    /* ⛔ 24/09/2026 (Bryan, print do PC: a foto da vitrine tomava a tela
+       inteira). Esta regra e' de CELULAR baixo, mas `max-height` sozinho
+       tambem pega notebook: 1920x1080 com zoom de 125% do Windows da'
+       ~730 px de altura util. E o `#vitrine` que a faz vencer a cascata aqui
+       e' o mesmo que a fazia vencer o 8:3 de tela larga (min-width: 700px)
+       -- 944 px de largura em 4:3 = 708 px de foto. So' abaixo de 700. */
+    @media (max-width: 699px) { #vitrine .vitrine .vfoto { aspect-ratio: 4 / 3; } }
     .vivo-nome { font-size: 15px; height: 38px; }
     .vivo-cta { height: 24px; margin-top: 7px; }
     .console { margin-top: 8px; }
@@ -1056,6 +1062,13 @@
      diferentes -- 8px aqui, 12px la'. Igualado nos dois: 12px. */
   .fila-chips { flex: 1 1 100%; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 12px 0 0; }
   .fila-chips::-webkit-scrollbar { display: none; }
+  /* ⭐ 24/09/2026 (Bryan, print do PC: "sobrando espaco no PC, temos que
+     centralizar esses botoes, sem estragar no celular/tablet"). So' a partir
+     de 1024 px, onde a fila inteira cabe. `safe` e' o que protege o resto:
+     se um dia ela nao couber, volta a alinhar no inicio em vez de cortar o
+     primeiro chip para fora da rolagem (o defeito classico de `center` em
+     container com overflow). */
+  @media (min-width: 1024px) { .fila-chips { justify-content: safe center; } }
   /* ⛔ 23/09/2026, RODADA 4 (Bryan: "quero as pilulas DESAPOIADAS" -- sem
      sombra nenhuma elas ficam coladas na superficie branca de baixo. A
      rodada 1 errou pro lado de MUITA sombra (vazava nos vizinhos); a
@@ -2355,11 +2368,140 @@
     .pulso { animation: none; }
     .item { transition: none; }
   }
+
+  /* ---------------- baloes da inauguracao ---------------- */
+  /* ⭐ 24/09/2026, pedido do Bryan: de um lado os baloes da inauguracao, do
+     outro os baloes com o brasao dos canais, "pequenos de maneira
+     extremamente organizada e premium" no celular.
+
+     ⛔ ENFEITE NAO EMPURRA NADA. Tudo aqui e' `position: absolute` dentro do
+     header: a primeira tela mede o mesmo com e sem baloes, e o
+     `teste_primeira_tela_cabe` continua valendo sem mexer em numero.
+     ⛔ E NAO RECEBE TOQUE (`pointer-events: none`): balao por cima da linha
+     viva roubaria o clique do "Comprar agora".
+
+     Acervo (css-frontend, Kevin Powell, DEMONSTRADO): o movimento fica
+     dentro de `prefers-reduced-motion: no-preference` — quem desligou
+     animacao no aparelho ve os baloes parados. E o MAESTROS_ESTETICA recusa
+     animacao cinematografica: o balanco e' de poucos pixels, lento, e cada
+     balao num ritmo seu para nao marchar em coro.
+
+     Estrutura: .balao (lugar na grade) > .flutua (o que balanca) > img.
+     A cordinha e' o ::after do .flutua, entao balanca junto — a branca da
+     foto original sumiu no recorte (branco sobre branco). */
+  /* ⚠️ Sem mexer no `position` dos irmaos: `.clarao` e a linha viva ja' tem
+     posicao propria, e for'ca-los a `relative` mudaria onde eles desenham.
+     Os baloes nao cruzam o texto por construcao (moram nas laterais). */
+  .baloes { position: absolute; inset: 0; pointer-events: none; }
+  .lado { position: absolute; display: grid; }
+  .balao { display: flex; justify-content: center; align-items: flex-start; }
+  .flutua {
+    position: relative; display: block; height: var(--t); width: var(--t);
+    transform-origin: 50% 100%;
+  }
+  /* ⭐ CAIXA QUADRADA IGUAL PARA TODOS: a boca e o carrinho sao largos, o
+     cifrao e o chapeu sao altos. Pela altura, os largos transbordavam a
+     coluna e o carrinho saia cortado na borda do celular (medido na previa).
+     Na mesma caixa, o conjunto le' como grade — e' isso o "organizado". */
+  .flutua img {
+    height: 100%; width: 100%; object-fit: contain; object-position: 50% 100%; display: block;
+    filter: drop-shadow(0 6px 10px rgba(20, 16, 30, .14));
+  }
+  .flutua::after {
+    content: ""; position: absolute; top: 96%; left: var(--corda, 50%);
+    width: 1px; height: calc(var(--t) * .55);
+    background: linear-gradient(var(--fraco), transparent);
+    opacity: .55;
+  }
+  .flutua b {
+    position: absolute; left: 0; right: 0; top: 42%;
+    font: 400 calc(var(--t) * .105)/1 "Archivo Black", sans-serif;
+    letter-spacing: .02em; color: #fff; text-align: center;
+    text-shadow: 0 1px 2px rgba(120, 50, 0, .35);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .flutua { animation: balanca var(--dur, 6s) ease-in-out var(--atraso, 0s) infinite alternate; }
+  }
+  @keyframes balanca {
+    from { transform: translate3d(0, calc(var(--amp, 6px) * -1), 0) rotate(calc(var(--gira, 2.5deg) * -1)); }
+    to   { transform: translate3d(0, var(--amp, 6px), 0) rotate(var(--gira, 2.5deg)); }
+  }
+  /* cada balao no seu ritmo — duracoes que nao se dividem, atrasos negativos
+     para ja' abrir a pagina no meio do movimento */
+  .balao:nth-child(1) .flutua { --dur: 5.8s; --atraso: -1.2s; }
+  .balao:nth-child(2) .flutua { --dur: 6.9s; --atraso: -3.4s; --gira: -2deg; }
+  .balao:nth-child(3) .flutua { --dur: 6.3s; --atraso: -2.1s; }
+  .balao:nth-child(4) .flutua { --dur: 7.4s; --atraso: -4.6s; --gira: -3deg; }
+  .balao:nth-child(5) .flutua { --dur: 5.5s; --atraso: -0.7s; }
+  .balao:nth-child(6) .flutua { --dur: 7.1s; --atraso: -5.3s; --gira: -2deg; }
+  .corda-lupa { --corda: 38%; }
+
+  /* CELULAR: tres de cada lado, em arco subindo para o brasao. So' os tres
+     primeiros de cada lado aparecem; o arco e' o mesmo espelhado. */
+  .lado { top: 16px; width: calc(50% - 56px); height: 96px;
+          grid-template-columns: repeat(3, 1fr); align-items: start; }
+  .festa { left: 0; }
+  .canais { right: 0; }
+  .balao:nth-child(n+4) { display: none; }
+  .lado .flutua { --t: 36px; --amp: 3px; }
+  .festa .balao:nth-child(1), .canais .balao:nth-child(3) { margin-top: 44px; }
+  .festa .balao:nth-child(2), .canais .balao:nth-child(2) { margin-top: 20px; }
+  .flutua b { display: none; }
+  @media (max-height: 740px) { .lado { top: 8px; height: 70px; } .lado .flutua { --t: 28px; }
+    .festa .balao:nth-child(1), .canais .balao:nth-child(3) { margin-top: 30px; }
+    .festa .balao:nth-child(2), .canais .balao:nth-child(2) { margin-top: 13px; } }
+  @media (max-height: 640px) { .baloes { display: none; } }
+
+  /* TELA MEDIA: os seis de cada lado, dos lados do titulo, em duas colunas
+     desencontradas (a coluna da direita desce meia fileira). */
+  @media (min-width: 760px) {
+    .lado { top: 18px; width: calc(50% - 250px); height: 300px;
+            grid-template-columns: 1fr 1fr; grid-auto-rows: 96px; }
+    .balao:nth-child(n+4) { display: flex; }
+    .lado .flutua { --t: 74px; --amp: 5px; }
+    .festa .balao:nth-child(n), .canais .balao:nth-child(n) { margin-top: 0; }
+    .balao:nth-child(even) { margin-top: 44px !important; }
+  }
+  /* COMPUTADOR LARGO: sai do titulo e vai para as margens, ao lado da
+     vitrine. 1400px e' onde a margem passa de 200px (faixa de 980). */
+  @media (min-width: 1400px) {
+    /* a margem a 1400px e' (1400 - 944) / 2 = 228px: 2 colunas de 100px
+       cabem com folga dos dois lados (medido: com 118px transbordava). */
+    .lado { top: 40px; width: 204px; height: 780px;
+            grid-template-columns: 100px 100px; column-gap: 4px; grid-auto-rows: 250px; }
+    .festa { left: auto; right: calc(100% + 12px); }
+    .canais { right: auto; left: calc(100% + 12px); }
+    .lado .flutua { --t: 96px; --amp: 7px; }
+    .balao:nth-child(even) { margin-top: 120px !important; }
+    .flutua b { display: block; }
+  }
 </style>
 
 <div class="luz" aria-hidden="true"></div>
 <div class="faixa">
   <header>
+    <!-- ⭐ baloes da inauguracao (24/09/2026). Enfeite puro: aria-hidden, sem
+         toque, fora do fluxo. A ordem importa: no celular so' os tres
+         primeiros de cada lado aparecem. Os arquivos sobem em /baloes/ pelo
+         `_por_icone` do publicador, nos DOIS diretorios do deploy. -->
+    <div class="baloes" aria-hidden="true">
+      <div class="lado festa">
+        <span class="balao"><span class="flutua"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"><b>INAUGURAÇÃO</b></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/inaug_etiqueta.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/inaug_sacola.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua corda-lupa"><img src="/baloes/inaug_lupa.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+      </div>
+      <div class="lado canais">
+        <span class="balao"><span class="flutua"><img src="/baloes/canal_achadinho_make.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/canal_achadinho_chef.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/canal_achadinhos_instantaneos.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/canal_sem_anestesia.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/canal_pago_menos.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/canal_modo_futuro.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+      </div>
+    </div>
     <span class="marca-logo" id="logo"></span>
     <p class="marca-nome">Achadinho Total</p>
     <h1>Eu garimpo.<br>Você <em>paga menos</em>.</h1>
@@ -2586,6 +2728,47 @@
   var grade = document.getElementById("grade");
   var contagem = document.getElementById("contagem");
   var busca = document.getElementById("busca");
+
+  // ⭐ A BUSCA DIGITANDO SOZINHA (24/09/2026, Bryan: "fazer a digitacao
+  // automatica igual no header, como se alguem estivesse digitando, isso
+  // estimula a pessoa a pesquisar" + "mais opcoes para digitar"). O mesmo
+  // gesto da linha viva do topo, so' que no placeholder: nunca no VALOR --
+  // a busca real so' roda com o que a pessoa escreve.
+  // ⛔ TRES PARADAS, todas silenciosas:
+  //   - foco ou texto digitado: o placeholder volta ao fixo e o relogio para;
+  //   - `prefers-reduced-motion`: nem comeca, fica o texto fixo de sempre;
+  //   - SSR (jsdom): nem comeca. Atributo mexido la' sai CARIMBADO no HTML
+  //     publicado -- iria um "procurar — ex.: fone blu" congelado pro ar.
+  (function () {
+    if (!busca) { return; }
+    if (/jsdom/i.test(navigator.userAgent || "")) { return; }
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var fixo = busca.getAttribute("placeholder") || "";
+    var EXEMPLOS = ["organizador", "fone bluetooth", "caixa de som", "luva",
+      "cabo USB-C", "garrafa térmica", "mochila", "lâmpada LED", "air fryer",
+      "teclado", "carregador", "relógio", "tênis", "panela"];
+    var BASE = "procurar — ex.: ";
+    var i = 0, n = 0, apagando = false, relogio = null;
+    function parado() { return document.activeElement === busca || busca.value; }
+    function passo() {
+      relogio = null;
+      if (parado()) { busca.setAttribute("placeholder", fixo); return; }
+      var alvo = EXEMPLOS[i % EXEMPLOS.length];
+      n += apagando ? -1 : 1;
+      busca.setAttribute("placeholder", BASE + alvo.slice(0, n));
+      var espera = apagando ? 38 : 85;
+      if (!apagando && n >= alvo.length) { apagando = true; espera = 1700; }
+      else if (apagando && n <= 0) { apagando = false; i += 1; espera = 380; }
+      relogio = setTimeout(passo, espera);
+    }
+    function retomar() { if (!relogio && !parado()) { relogio = setTimeout(passo, 900); } }
+    busca.addEventListener("focus", function () {
+      if (relogio) { clearTimeout(relogio); relogio = null; }
+      busca.setAttribute("placeholder", fixo);
+    });
+    busca.addEventListener("blur", retomar);
+    retomar();
+  })();
 
   // ⚠️ OS FILTROS SAO PERGUNTAS DIFERENTES, nao rotulos bonitos. "Caiu mais" e
   // "mais barato" ordenam por coisas distintas e as duas listas podem nao se
@@ -3330,6 +3513,12 @@
         // espacos sempre estourava por 1-3 px (arredondamento de subpixel
         // por caractere) -- 80% da sobra fecha sem nunca passar da borda.
         var extra = (disp - natural) / espacos * 0.8;
+        // ⛔ 24/09/2026 (Bryan, print do PC: "rastreando ha 10 dias" com
+        // cada palavra numa coluna). No celular a sobra e' de poucos px; a
+        // 944 px de cartao ela virava 65 px ENTRE CADA PALAVRA. Justificar so'
+        // enquanto o vao nao passa de 6 px (meio espaco a mais a 11 px);
+        // acima disso a frase fica natural e a sobra, a direita.
+        if (extra > 6) { return; }
         l.style.wordSpacing = extra.toFixed(2) + "px";
       });
     }

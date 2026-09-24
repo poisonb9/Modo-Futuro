@@ -2774,6 +2774,16 @@ def _por_icone(destino) -> None:
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())
+    # ⭐ OS BALOES DA INAUGURACAO (24/09/2026) moram aqui pelo mesmo motivo do
+    # icone: upload direto substitui o diretorio inteiro, e o catalogo os pede
+    # por caminho ABSOLUTO (`/baloes/...`) tanto no site mae quanto em
+    # `/todos/` das bios. Faltando a pasta, o Pages responde 200 com HTML no
+    # lugar da imagem e o balao some sem erro nenhum.
+    baloes = aqui / "baloes"
+    if baloes.is_dir():
+        (destino / "baloes").mkdir(exist_ok=True)
+        for f in sorted(baloes.glob("*.webp")):
+            (destino / "baloes" / f.name).write_bytes(f.read_bytes())
     # ⭐ E UM `favicon.ico` DE VERDADE (18/09/2026). Painel da Cloudflare,
     # Google e afins nao leem a tag `<link rel="icon">`: pedem `/favicon.ico`.
     # Sem o arquivo, o Pages devolve a raiz (HTML, 200) e o robo cai no

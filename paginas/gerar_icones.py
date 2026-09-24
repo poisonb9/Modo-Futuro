@@ -45,7 +45,8 @@ MESTRE = AQUI / "logo_achadinho_mestre.png"
 
 # ⚠️ A MESMA COR DE FUNDO DO ICONE ANTIGO (#17161D), medida nele antes de
 # trocar. Icone de tela de inicio que muda de cor parece app trocado.
-FUNDO_APP = (23, 22, 29)
+# ⭐ 24/09/2026 (dono): BRANCO -- a marca e o site sao sempre claros.
+FUNDO_APP = (255, 255, 255)
 
 # ⚠️ MARGENS DIFERENTES DE PROPOSITO.
 #

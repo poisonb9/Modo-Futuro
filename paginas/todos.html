@@ -18,7 +18,7 @@
 <!-- ⚠️ E SEM ISTO O ICONE VIRA UMA LETRA "A" CINZA: o iOS desenha a inicial
      quando nao acha `apple-touch-icon`. O arquivo tem de existir no deploy —
      ver `publicar_bio.py`, que copia o PNG junto com o index. -->
-<link rel="apple-touch-icon" href="/icone_app.png">
+<link rel="apple-touch-icon" href="/icone_app.png?v=branco">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/icone.png">
 <meta name="description" content="O catálogo do Achadinho Total: produto, preço acompanhado de hora em hora e link direto pra loja. O desconto é medido contra o preço que eu vi.">
@@ -2325,10 +2325,24 @@
      HTML cru mostrava o convite logo abaixo da busca. Grade vazia = convite
      escondido; ele so' existe depois dos produtos. */
   #grade:empty ~ .convite { display: none; }
+  /* ⭐ 24/09/2026 (dono: "card mais premium"), pelo acervo (Kevin Powell,
+     DEMONSTRADO): borda em GRADIENTE dourado fino (truque padding-box /
+     border-box) e sombra em CAMADAS -- uma curta que assenta, uma longa e
+     quente que levanta. Fundo continua claro (regra: so' fundo branco). */
   .convite {
-    margin: 30px 0 0; border: 1px solid var(--linha); border-radius: 16px;
-    background: var(--caixa); padding: 20px; text-align: center;
+    margin: 30px 0 0; border: 1px solid transparent; border-radius: 20px;
+    background:
+      radial-gradient(120% 90% at 50% 0%, #fff8e6 0%, #fff 60%) padding-box,
+      linear-gradient(135deg, #f2d27a, #fff3cf 35%, #d9a93a 65%, #f7e2a4) border-box;
+    padding: 24px 20px 22px; text-align: center;
+    box-shadow: 0 1px 2px rgba(60, 40, 0, .06), 0 14px 34px -12px rgba(170, 120, 20, .28);
   }
+  .convite .selo-convite {
+    display: inline-block; margin: 0 0 10px; padding: 4px 11px; border-radius: 999px;
+    font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;
+    color: #9a6c0c; background: #fff4d6; border: 1px solid #f0d58c;
+  }
+  .convite .botao { box-shadow: 0 0 0 3px #fff, 0 0 0 4px #e8c35e, 0 10px 22px -8px rgba(20, 16, 30, .45); }
   .convite h2 { font-size: 18px; margin: 0 0 6px; }
   .convite p { margin: 0 0 14px; color: var(--fraco); font-size: 14px; }
   .botao {
@@ -2927,6 +2941,7 @@
   <section class="convite">
     <span class="coracao-convite esq" aria-hidden="true"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_coracao_p.webp"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></picture></span>
     <span class="coracao-convite dir" aria-hidden="true"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_coracao_p.webp"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></picture></span>
+    <span class="selo-convite">grátis · no Telegram</span>
     <h2>As quedas de preço no seu celular</h2>
     <p>Cada queda boa que eu encontro cai direto no seu Telegram.</p>
     <a class="botao" href="https://t.me/achadinhototal" target="_blank" rel="noopener" id="tg">

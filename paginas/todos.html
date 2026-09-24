@@ -2602,29 +2602,27 @@
      ciclo. Cada um sobe enquanto o PROPRIO trecho passa pela tela
      (animation-timeline: view()) -- um de cada vez, por construcao.
      Premium (mantido): deriva lateral e balanco pelo RELOGIO no <img>. */
+  /* ⛔ 24/09 tarde (prints do Bryan): com view() o 1o so' apontava na BORDA DE
+     BAIXO quando a loja ja' ia embora, o 2o e o 3o nem apareciam e o ultimo
+     caia em cima dos coracoes do convite. Agora e' FIXO na margem: o script
+     acende UM por vez (.on) conforme o MEIO da tela passa pelo bloco, e
+     apaga todos fora da grade -- o convite fica so' com os coracoes dele. */
   .balao-bloco { display: none; }
   @media (min-width: 1440px) {
-    #grade { position: relative; }
-    .balao-bloco { display: block; position: absolute; width: 92px; pointer-events: none; z-index: 0; }
+    .balao-bloco { display: block; position: fixed; width: 92px; pointer-events: none; z-index: 0;
+      opacity: 0; transform: translateY(70px) scale(.9);
+      transition: opacity .6s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+    .balao-bloco.on { opacity: 1; transform: none; }
     .balao-bloco img { width: 100%; height: auto; display: block; transform-origin: 50% 90%;
       filter: drop-shadow(0 14px 18px rgba(20, 16, 30, .12)); }
   }
-  @supports (animation-timeline: view()) {
-    @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
-      .balao-bloco { animation: blocoSobe linear both; animation-timeline: view();
-        animation-range: cover 0% cover 100%; }
-    }
+  @media (min-width: 1440px) and (prefers-reduced-motion: reduce) {
+    .balao-bloco { transform: none; transition: opacity .4s ease; }
   }
   @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
     .balao-bloco img { animation: sobeDeriva 4.9s ease-in-out infinite alternate,
                                   sobeBalanco 3.7s ease-in-out infinite alternate; }
-    .balao-bloco:nth-of-type(2n) img { animation-duration: 5.6s, 4.3s; animation-delay: -2.1s, -1.3s; }
-  }
-  @keyframes blocoSobe {
-    0%   { transform: translateY(30vh) scale(.92); opacity: 0; }
-    5%   { opacity: 1; }
-    95%  { opacity: 1; }
-    100% { transform: translateY(-30vh) scale(1.04); opacity: 0; }
+    .balao-bloco.dir img { animation-duration: 5.6s, 4.3s; animation-delay: -2.1s, -1.3s; }
   }
   @keyframes sobeDeriva  { from { translate: -10px 0; } to { translate: 10px 0; } }
   @keyframes sobeBalanco { from { rotate: -5deg; } to { rotate: 5deg; } }
@@ -4996,48 +4994,43 @@
      ~1,4 tela de grade, lado ALTERNADO, altura sorteada sem nunca juntar dois,
      tipo em ciclo: 1o, 2o, 3o, e recomeca. Refaz quando a grade cresce
      ("ver mais") ou a janela muda; ignora as proprias insercoes. */
-  var BALOES_BLOCO = ["inaug_laranja", "inaug_porcento", "inaug_estrela"];
+  // 24/09 tarde: laranja e estrela sairam (Bryan); entram presente e apaixonado
+  var BALOES_BLOCO = ["inaug_presente", "inaug_porcento", "inaug_apaixonado"];
   var mqBloco = window.matchMedia ? matchMedia("(min-width: 1440px)") : null;
-  var alturaBloco = 0, qtdBloco = 0;
+  var baloesFixos = [];
+  // ⭐ Um bloco = 1 tela de grade (minimo 3 blocos). Acende o balao do bloco
+  // em que esta' o MEIO da tela; fora da grade, todos apagados.
+  function acendeBloco() {
+    var g = document.getElementById("grade");
+    if (!g || !baloesFixos.length) { return; }
+    var r = g.getBoundingClientRect(), meio = innerHeight * .5;
+    var p = (meio - r.top) / Math.max(1, r.height);
+    var ativo = (r.top < innerHeight * .6 && r.bottom > innerHeight * .7 && p >= 0 && p < 1)
+      ? Math.min(baloesFixos.length - 1, Math.floor(p * baloesFixos.length)) : -1;
+    for (var i = 0; i < baloesFixos.length; i++) { baloesFixos[i].classList.toggle("on", i === ativo); }
+  }
   function baloesPorBloco() {
     var g = document.getElementById("grade");
+    baloesFixos.forEach(function (b) { b.remove(); }); baloesFixos = [];
     if (!g || !mqBloco || !mqBloco.matches) { return; }
-    // passo = 1,4 tela; o sorteio de altura nunca deixa o vao entre dois
-    // baloes menor que 1 tela + 220 px (altura do balao): nunca dois juntos.
-    // ⛔ 24/09 (print do Bryan: "na 2a tela nada, muito menos na 3a"):
-    // MEDIDO no ar -- a grade tem so' 3 fileiras (1.727 px) numa pagina de
-    // 3.506. Com passo de 1,4 tela SO' DENTRO da grade cabia UM balao. Agora
-    // o trecho vai do topo da grade ate' o fim da pagina (menos o rodape) e o
-    // passo e' o MINIMO que ainda separa dois: 1 tela + 240 px. Resultado:
-    // um balao por tela, nunca dois juntos.
-    var rgT = g.getBoundingClientRect().top + scrollY;
-    var h = Math.max(g.offsetHeight, document.documentElement.scrollHeight - rgT - 380);
-    // quantos cabem com vao minimo; a sobra vira passo maior e o sorteio mora
-    // SO' dentro dela (vao real = passo + r2 - r1 >= passo - folga = minimo)
-    var minimo = innerHeight + 240, util = Math.max(0, h - 350);
-    var n = util > 0 ? 1 + Math.floor(util / minimo) : 0;
-    var passo = n > 1 ? Math.max(minimo, util / (n - 1)) : minimo;
-    var folga = Math.min(Math.round(innerHeight * .3), Math.max(0, passo - minimo));
-    if (n === qtdBloco && Math.abs(h - alturaBloco) < passo / 2) { return; }
-    alturaBloco = h; qtdBloco = n;
-    Array.prototype.slice.call(g.querySelectorAll(".balao-bloco")).forEach(function (b) { b.remove(); });
-    // lado ALTERNA (Bryan: "um de um lado, um do outro"); so' o 1o e' sorteado
+    var n = Math.max(3, Math.round(g.offsetHeight / innerHeight));
     var comeca = Math.random() < .5 ? 0 : 1;
-    // centro de cada MARGEM, medido (a grade tem 944 px, nao 1180 -- medi)
     var rg = g.getBoundingClientRect();
     var mEsq = rg.left, mDir = document.documentElement.clientWidth - rg.right;
     for (var i = 0; i < n; i++) {
       var lado = (i + comeca) % 2 ? "dir" : "esq";
       var s = document.createElement("span");
       s.className = "balao-bloco " + lado; s.setAttribute("aria-hidden", "true");
-      s.style.top = (200 + i * passo + Math.round(Math.random() * folga)) + "px";
-      if (lado === "esq") { s.style.left = -Math.round(mEsq / 2 + 46) + "px"; }
-      else { s.style.right = -Math.round(mDir / 2 + 46) + "px"; }
+      // altura sorteada entre 24% e 46% da tela (abaixo da barra de busca)
+      s.style.top = Math.round(innerHeight * (.24 + Math.random() * .22)) + "px";
+      if (lado === "esq") { s.style.left = Math.round(mEsq / 2 - 46) + "px"; }
+      else { s.style.right = Math.round(mDir / 2 - 46) + "px"; }
       var im = document.createElement("img");
       im.src = "/baloes/" + BALOES_BLOCO[i % BALOES_BLOCO.length] + ".webp";
-      im.alt = ""; im.loading = "lazy"; im.decoding = "async";
-      s.appendChild(im); g.appendChild(s);
+      im.alt = ""; im.decoding = "async";
+      s.appendChild(im); document.body.appendChild(s); baloesFixos.push(s);
     }
+    acendeBloco();
   }
   function ligarBaloesBloco() {
     var g = document.getElementById("grade");
@@ -5049,11 +5042,13 @@
       for (var k = 0; k < lista.length; k++) {
         var ns = lista[k].addedNodes;
         for (var m = 0; m < ns.length; m++) {
-          if (!(ns[m].classList && ns[m].classList.contains("balao-bloco"))) { refaz(); return; }
+          refaz(); return;
         }
       }
     }).observe(g, { childList: true });
     addEventListener("resize", refaz, { passive: true });
+    // direto (1 medida + toggle de classe, barato); a transicao do CSS anima
+    addEventListener("scroll", acendeBloco, { passive: true });
     if (mqBloco.addEventListener) { mqBloco.addEventListener("change", refaz); }
     refaz();
   }

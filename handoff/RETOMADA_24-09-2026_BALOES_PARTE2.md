@@ -101,9 +101,11 @@ continuam ABERTOS (não mexi). Os 2 testes vermelhos antigos também
 - Até Falhar e Modo Futuro não têm host de bio no ar (a página já sabe o
   balão deles).
 
-## 4. Ferramentas desta sessão (em `%TEMP%\fio\`, descartáveis)
+## 4. Ferramentas desta sessão (copiadas para `ferramentas/baloes/`)
 
-`fio.py` (recupera o fio da foto), `pequeno.py` (gera `_p`), `letras.py`
+⚠️ Os scripts leem entradas de `%TEMP%\fio\` e das pastas de upload da
+sessão, que NÃO sobrevivem: servem de receita, ajuste os caminhos antes de
+rodar. `fio.py` (recupera o fio da foto), `pequeno.py` (gera `_p`), `letras.py`
 (separa letras), `varal.py`, `estrelas.py`, `ajuste_celular.py`. Originais dos
 balões: `Desktop\inauguracao\` e `\recortados\`. Se precisar refazer, a
 lógica está descrita nos comentários do `todos.html`.

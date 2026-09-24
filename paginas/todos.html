@@ -2555,6 +2555,25 @@
   }
   .item .avise-me:hover { color: var(--tinta); text-decoration-color: currentColor; }
   .item .avise-me::before, .item .avise-me::after { display: none; }
+  /* ⭐ O "COMPRAR AGORA" FLUTUA (24/09/2026, Bryan: "bem sutilmente, bem fraco,
+     quase uma ilusao"). Mesmo esquema dos precos e das letras -- dois
+     movimentos independentes (sobe/desce 0,7 px; inclina 0,25 grau) --, cada
+     cartao defasado do vizinho. `translate`/`rotate` e nao `transform`: o
+     botao ja' tem transform no toque (:active) e os dois nao podem brigar.
+     Os tres sao itens de flex (medido). */
+  @media (prefers-reduced-motion: no-preference) {
+    .item .cta, .cap-cta, .vivo-cta {
+      animation: ctaSobe 5.2s ease-in-out infinite alternate,
+                 ctaGira 7.1s ease-in-out infinite alternate;
+    }
+    .item:nth-child(3n+1) .cta { animation-duration: 4.7s, 6.4s; animation-delay: -1.9s, -3.2s; }
+    .item:nth-child(3n+2) .cta { animation-duration: 5.9s, 7.8s; animation-delay: -3.6s, -0.7s; }
+    .item:nth-child(3n)   .cta { animation-duration: 5.3s, 6.9s; animation-delay: -0.4s, -5.1s; animation-direction: alternate-reverse; }
+    .cap-cta  { animation-duration: 5.6s, 7.4s; animation-delay: -2.4s, -4.4s; }
+    .vivo-cta { animation-duration: 4.9s, 6.6s; animation-delay: -1.2s, -2.8s; }
+  }
+  @keyframes ctaSobe { from { translate: 0 -.7px; } to { translate: 0 .7px; } }
+  @keyframes ctaGira { from { rotate: -.25deg; } to { rotate: .25deg; } }
   /* ⭐ BALOES QUE SOBEM COM A ROLAGEM, NO PC (24/09/2026, Bryan: "quando
      estiver rolando a pagina sobe um balao do lado direito e depois um do
      lado esquerdo, casando com o fim do rolamento"). Fixos nas MARGENS (so'

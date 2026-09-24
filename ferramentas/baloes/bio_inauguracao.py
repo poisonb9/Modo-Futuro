@@ -14,7 +14,7 @@ for i in range(1, 12):
     arco = ((i - 6) / 5) ** 2
     letras += '      <span style="--i:%d;--arco:%.2f;--dy:%s"><img src="/baloes/letra_%02d_p.webp" alt=""></span>\n' % (i, arco, dy.get(i, 0), i)
 html = ('    <div class="varal-bio" aria-hidden="true">\n' + letras + '    </div>\n'
-        '    <span class="festa-bio laranja" aria-hidden="true"><img src="/baloes/inaug_laranja_p.webp" alt=""></span>\n'
+        '    <span class="festa-bio presente" aria-hidden="true"><img src="/baloes/inaug_presente_p.webp" alt=""></span>\n'
         '    <span class="festa-bio laco" aria-hidden="true"><img src="/baloes/inaug_laco_p.webp" alt=""></span>\n'
         '    <span class="festa-bio cupom" aria-hidden="true"><img src="/baloes/inaug_etiqueta_p.webp" alt=""></span>\n')
 t = t.replace(a, html + a)

@@ -2057,7 +2057,8 @@
     font: 600 0.78125rem/1 var(--mono); color: var(--fraco);   /* BLOCO A: mesmo degrau do 'vendidos' */
   }
   .nota svg { width: 13px; height: 13px; display: block; opacity: .9; }
-  .nota.em-fogo { color: var(--verde); }
+  /* ⛔ 24/09/2026 (Bryan): o verde saiu -- a chama no canto da foto ja'
+     diz "escolhido"; a estrela verde repetia o sinal e parecia a capa. */
   .ja-esteve {
     font: 500 11.5px/1.35 Poppins, sans-serif; color: var(--fraco);
   }
@@ -4995,7 +4996,9 @@
      tipo em ciclo: 1o, 2o, 3o, e recomeca. Refaz quando a grade cresce
      ("ver mais") ou a janela muda; ignora as proprias insercoes. */
   // 24/09 tarde: laranja e estrela sairam (Bryan); entram presente e apaixonado
-  var BALOES_BLOCO = ["inaug_presente", "inaug_porcento", "inaug_apaixonado"];
+  var BALOES_BLOCO = ["inaug_presente", "inaug_seta_lado", "inaug_apaixonado"];
+  // a seta aponta para a DIREITA: esse balao mora sempre na margem ESQUERDA
+  var SO_ESQUERDA = { inaug_seta_lado: 1 };
   var mqBloco = window.matchMedia ? matchMedia("(min-width: 1440px)") : null;
   var baloesFixos = [];
   // ⭐ Um bloco = 1 tela de grade (minimo 3 blocos). Acende o balao do bloco
@@ -5014,11 +5017,14 @@
     baloesFixos.forEach(function (b) { b.remove(); }); baloesFixos = [];
     if (!g || !mqBloco || !mqBloco.matches) { return; }
     var n = Math.max(3, Math.round(g.offsetHeight / innerHeight));
-    var comeca = Math.random() < .5 ? 0 : 1;
+    var ant = "esq";
     var rg = g.getBoundingClientRect();
     var mEsq = rg.left, mDir = document.documentElement.clientWidth - rg.right;
     for (var i = 0; i < n; i++) {
-      var lado = (i + comeca) % 2 ? "dir" : "esq";
+      var tipo = BALOES_BLOCO[i % BALOES_BLOCO.length];
+      // alterna o lado; a seta fica a` esquerda, e o vizinho dela vai pra direita
+      var lado = SO_ESQUERDA[tipo] ? "esq" : (ant === "esq" ? "dir" : "esq");
+      ant = lado;
       var s = document.createElement("span");
       s.className = "balao-bloco " + lado; s.setAttribute("aria-hidden", "true");
       // altura sorteada entre 24% e 46% da tela (abaixo da barra de busca)
@@ -5026,7 +5032,7 @@
       if (lado === "esq") { s.style.left = Math.round(mEsq / 2 - 46) + "px"; }
       else { s.style.right = Math.round(mDir / 2 - 46) + "px"; }
       var im = document.createElement("img");
-      im.src = "/baloes/" + BALOES_BLOCO[i % BALOES_BLOCO.length] + ".webp";
+      im.src = "/baloes/" + tipo + ".webp";
       im.alt = ""; im.decoding = "async";
       s.appendChild(im); document.body.appendChild(s); baloesFixos.push(s);
     }

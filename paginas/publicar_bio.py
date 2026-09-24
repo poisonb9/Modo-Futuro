@@ -1198,6 +1198,10 @@ TOPO_GANHO_MIN = 3.0        # = FOGO_GANHO_MIN (definido abaixo); um piso so'
 TOPO_N = 10
 
 
+# rodizio da capa: uma troca a cada 3 horas (24/09/2026, Bryan)
+CAPA_RODIZIO_S = 3 * 3600
+
+
 def marcar_capa(dados: list[dict]) -> dict | None:
     """Escreve `capa: True` no UNICO produto que abre a vitrine. Devolve ele.
 
@@ -1233,17 +1237,20 @@ def marcar_capa(dados: list[dict]) -> dict | None:
             continue
         preco = _preco_hoje_num(p)
         ganho = float(p.get("ganho") or 0)
-        if preco <= 0 or preco > CAPA_PRECO_MAX:
-            continue
-        if ganho / preco * 100 < CAPA_GANHO_PCT_MIN:
-            continue
-        if float(p.get("nota") or 0) < FOGO_NOTA_MIN:
-            continue
-        if float(p.get("queda") or 0) < FOGO_QUEDA_MIN:
-            continue
-        if int(p.get("vendas") or 0) < FOGO_VENDAS_MIN:
-            continue
-        if len(p.get("serie") or []) < CAPA_SERIE_MIN:
+        regua = (0 < preco <= CAPA_PRECO_MAX
+                 and ganho / preco * 100 >= CAPA_GANHO_PCT_MIN
+                 and float(p.get("nota") or 0) >= FOGO_NOTA_MIN
+                 and float(p.get("queda") or 0) >= FOGO_QUEDA_MIN
+                 and int(p.get("vendas") or 0) >= FOGO_VENDAS_MIN
+                 and len(p.get("serie") or []) >= CAPA_SERIE_MIN)
+        # ⭐ 24/09/2026 (Bryan: "entre foguinho e os da regra, rotacionando a
+        # cada 3 horas"): quem tem FOGUINHO tambem entra no rodizio da capa,
+        # desde que tenha grafico (3+ pontos) e passe no piso da foto abaixo.
+        fogo_ok = bool(p.get("fogo")) and preco > 0 and len(p.get("serie") or []) >= 3
+        if not (regua or fogo_ok):
+            if p.get("fogo"):
+                print("capa: foguinho sem grafico (%d ponto(s)) -- %s"
+                      % (len(p.get("serie") or []), (p.get("nome") or "")[:46]))
             continue
         # ⭐ A FOTO TAMBEM E' PISO (21/09/2026). A regua acertou todos os
         # numeros -- 62.879 vendas, 19,4% de ganho, 61,5% de queda -- e
@@ -1277,6 +1284,7 @@ def marcar_capa(dados: list[dict]) -> dict | None:
             nova = foto_julga.melhor_foto(p.get("imagem") or "", extras,
                                           CAPA_FOTO_NOTA_MIN)
             if nova == (p.get("imagem") or ""):
+                print("capa: fora do rodizio, sem foto boa -- " + (p.get("nome") or "")[:46])
                 continue
             trocas.append((p.get("nome") or "", nova))
             p["imagem"] = nova
@@ -1324,8 +1332,26 @@ def marcar_capa(dados: list[dict]) -> dict | None:
         return None
     cand.sort(key=lambda x: (-float(x.get("vitrine_nota") or 0),
                              -(float(x.get("ganho") or 0) * int(x.get("vendas") or 0))))
-    escolhido = cand[0]
+    # ⭐ RODIZIO DE 3 HORAS (24/09/2026, Bryan). A janela e' o relogio (UTC
+    # // 3 h), nao o numero de publicacoes: o vigia publica quando a janela
+    # vira (ver `janela_capa` em publicar_ao_mudar_agendado.ps1). Com 8
+    # janelas por dia, 2-3 candidatos passam 3-4 vezes cada pela capa.
+    import time as _t
+    janela = int(_t.time() // CAPA_RODIZIO_S)
+    escolhido = cand[janela % len(cand)]
     escolhido["capa"] = True
+    # ⭐ OS OUTROS DO RODIZIO ABREM A GRADE, logo depois da capa (Bryan: "nao
+    # estando na vitrine, deixe eles como os primeiros produtos"). Entram na
+    # frente do topo da regua (`marcar_topo`), que desce uma casa por eles.
+    resto = [p for p in cand if p is not escolhido]
+    for p in resto:
+        p.pop("topo", None)
+    k = len(resto)
+    for p in dados:
+        if isinstance(p.get("topo"), int):
+            p["topo"] += k
+    for i, p in enumerate(resto, 1):
+        p["topo"] = i
     # ⭐ A CAPA ACENDE O FOGUINHO, e isso e' decisao, nao efeito colateral.
     # Pedido do Bryan: "esses produtos da capa devem ter essa informacao".
     # Ele nao ganharia o fogo sozinho porque `marcar_fogo` usa o piso
@@ -1335,7 +1361,7 @@ def marcar_capa(dados: list[dict]) -> dict | None:
     # negar o fogo a ela seria a mesma medida errada duas vezes.
     escolhido["fogo"] = True
     pr = _preco_hoje_num(escolhido)
-    print(f"capa: {len(cand)} candidato(s); escolhido nota "
+    print(f"capa: rodizio de {len(cand)}, janela {janela % len(cand) + 1}; escolhido nota "
           f"{escolhido.get('vitrine_nota')} a R$ {pr:.2f} "
           f"(ganho {float(escolhido.get('ganho') or 0) / pr * 100:.1f}% do preco, "
           f"queda {float(escolhido.get('queda') or 0):.0f}%, "

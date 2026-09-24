@@ -2878,7 +2878,9 @@ def _por_icone(destino) -> None:
     # ⭐ og_achadinho.png: a previa do link no chat (19/09, ferramentas/gerar_og.py)
     for nome, arquivo in (("icone.png", "icone_achadinho_favicon.png"),
                           ("icone_app.png", "icone_achadinho_180.png"),
-                          ("og_achadinho.png", "og_achadinho.png")):
+                          ("og_achadinho.png", "og_achadinho.png"),
+                          # inauguracao (24/09): ferramentas/og_inauguracao.py
+                          ("og_inauguracao.png", "og_inauguracao.png")):
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())

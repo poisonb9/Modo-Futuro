@@ -2403,24 +2403,13 @@
      cifrao e o chapeu sao altos. Pela altura, os largos transbordavam a
      coluna e o carrinho saia cortado na borda do celular (medido na previa).
      Na mesma caixa, o conjunto le' como grade — e' isso o "organizado". */
+  /* 24/09: o FIO E' O DA FOTO ORIGINAL, recuperado pelo contorno cinza da
+     fita (ferramenta: ver handoff). O webp e' o quadrado de antes (balao
+     embaixo, centrado) + o fio abaixo; largura 100% e altura livre fazem o
+     balao ficar do mesmo tamanho e o fio transbordar a caixa para baixo. */
   .flutua img {
-    height: 100%; width: 100%; object-fit: contain; object-position: 50% 100%; display: block;
+    width: 100%; height: auto; display: block;
     filter: drop-shadow(0 6px 10px rgba(20, 16, 30, .14));
-  }
-  /* 24/09 (print do Bryan: "os fios ficaram estranhos"): a linha reta de
-     1px lia como vareta cinza e comecava DEPOIS do vao transparente do
-     recorte (laco, carrinho). Agora e' fita ondulada em SVG, nasce 14% acima
-     da base POR TRAS do balao (z-index -1; o transform do .flutua fecha o
-     contexto de empilhamento, entao nao vaza para tras da pagina) e
-     some em degrade. */
-  .flutua::after {
-    content: ""; position: absolute; z-index: -1; top: 86%;
-    left: calc(var(--corda, 50%) - 6px);
-    width: 12px; height: calc(var(--t) * .7);
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 100' preserveAspectRatio='none'%3E%3Cpath d='M6 0C1 14 11 26 6 40S1 66 6 80 9 94 6 100' fill='none' stroke='%239a96a3' stroke-width='1.1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
-    -webkit-mask: linear-gradient(#000 55%, transparent);
-            mask: linear-gradient(#000 55%, transparent);
-    opacity: .7;
   }
   .flutua b {
     position: absolute; left: 0; right: 0; top: 42%;

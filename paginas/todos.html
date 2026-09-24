@@ -2406,6 +2406,25 @@
      posicao propria, e for'ca-los a `relative` mudaria onde eles desenham.
      Os baloes nao cruzam o texto por construcao (moram nas laterais). */
   .baloes { position: absolute; inset: 0; pointer-events: none; }
+  /* ⭐ DUAS ESTRELAS NO MEIO (24/09/2026, print do Bryan com as duas areas
+     marcadas no PC, entre as colunas de baloes e o titulo). Espelhadas,
+     cada uma no seu ritmo. So' a partir de 1280 px: abaixo disso as areas
+     encostam nas colunas. A estrela SAI da coluna da esquerda (fica o vao ate'
+     chegar o balao novo que o Bryan vai gerar). */
+  .estrela-centro { display: none; }
+  @media (min-width: 1280px) {
+    .estrela-centro { display: block; position: absolute; top: 110px; width: 104px;
+      transform-origin: 50% 100%; }
+    .estrela-centro.esq { left: calc(50% - 470px); }
+    .estrela-centro.dir { left: calc(50% + 400px); }
+    .estrela-centro img { width: 100%; height: auto; display: block;
+      filter: drop-shadow(0 8px 12px rgba(20, 16, 30, .14)); }
+    .festa .balao:nth-child(3) { visibility: hidden; }
+  }
+  @media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
+    .estrela-centro.esq { animation: balanca 6.6s ease-in-out -1.5s infinite alternate; }
+    .estrela-centro.dir { animation: balanca 7.3s ease-in-out -4.1s infinite alternate; --gira: -2.5deg; }
+  }
   /* ⭐ O VARAL "INAUGURACAO" (24/09/2026, arte do Bryan, letra por letra).
      A faixa inteira ficou "espremida, enfiada de qualquer jeito" (Bryan) --
      cada letra agora e' um balao: separadas por erosao + dono mais proximo
@@ -2587,6 +2606,8 @@
          primeiros de cada lado aparecem. Os arquivos sobem em /baloes/ pelo
          `_por_icone` do publicador, nos DOIS diretorios do deploy. -->
     <div class="baloes" aria-hidden="true">
+      <span class="estrela-centro esq"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span>
+      <span class="estrela-centro dir"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span>
       <div class="varal">
         <span style="--i:1;--arco:1.00;--dy:0"><picture><source media="(max-width: 759px)" srcset="/baloes/letra_01_p.webp"><img src="/baloes/letra_01.webp" alt="" decoding="async" fetchpriority="low"></picture></span>
         <span style="--i:2;--arco:0.64;--dy:0"><picture><source media="(max-width: 759px)" srcset="/baloes/letra_02_p.webp"><img src="/baloes/letra_02.webp" alt="" decoding="async" fetchpriority="low"></picture></span>

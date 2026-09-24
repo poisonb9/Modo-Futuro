@@ -2464,19 +2464,19 @@
      TOTAL", onde a linha e' curta e sobra lateral), um pouco apagados --
      balao mais longe. E eles SE SOLTAM na rolagem: o acervo (Kevin Powell,
      "True parallax with CSS-only", DEMONSTRADO) mostra parallax so' de CSS
-     com animation-timeline; aqui o cupom e o MF sobem e somem enquanto a
+     com animation-timeline; aqui o cupom e o cifrao (troca pedida pelo Bryan no lugar do MF) sobem e somem enquanto a
      pessoa desce para a vitrine. Sem suporte (Safari antigo), ficam parados. */
   @media (max-width: 759px) {
-    .festa .balao:nth-child(4), .canais .balao:nth-child(6) {
+    .festa .balao:nth-child(4), .canais .balao:nth-child(5) {
       display: flex; position: absolute; top: 96px; opacity: .82;
     }
     .festa .balao:nth-child(4) { right: 22px; }
-    .canais .balao:nth-child(6) { left: 22px; }
-    .festa .balao:nth-child(4) .flutua, .canais .balao:nth-child(6) .flutua { --t: 28px; }
+    .canais .balao:nth-child(5) { left: 22px; }
+    .festa .balao:nth-child(4) .flutua, .canais .balao:nth-child(5) .flutua { --t: 28px; }
   }
   @supports (animation-timeline: scroll()) {
     @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
-      .festa .balao:nth-child(4), .canais .balao:nth-child(6) {
+      .festa .balao:nth-child(4), .canais .balao:nth-child(5) {
         animation: soltar linear both; animation-timeline: scroll(root);
         animation-range: 0 320px;
       }
@@ -2484,7 +2484,7 @@
   }
   @keyframes soltar { to { transform: translateY(-150px) scale(.8); opacity: 0; } }
   @media (max-height: 740px) and (max-width: 759px) {
-    .festa .balao:nth-child(4), .canais .balao:nth-child(6) { top: 72px; } }
+    .festa .balao:nth-child(4), .canais .balao:nth-child(5) { top: 72px; } }
   @media (max-height: 740px) { .lado { top: 8px; height: 70px; } .lado .flutua { --t: 28px; }
     .festa .balao:nth-child(1), .canais .balao:nth-child(3) { margin-top: 30px; }
     .festa .balao:nth-child(2), .canais .balao:nth-child(2) { margin-top: 13px; } }
@@ -2524,7 +2524,7 @@
          `_por_icone` do publicador, nos DOIS diretorios do deploy. -->
     <div class="baloes" aria-hidden="true">
       <div class="lado festa">
-        <span class="balao"><span class="flutua"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"><b>INAUGURAÇÃO</b></span></span>
+        <span class="balao"><span class="flutua"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"></span></span>
         <span class="balao"><span class="flutua"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></span></span>
         <span class="balao"><span class="flutua"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span></span>
         <span class="balao"><span class="flutua"><img src="/baloes/inaug_etiqueta.webp" alt="" decoding="async" fetchpriority="low"></span></span>

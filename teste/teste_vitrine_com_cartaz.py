@@ -82,8 +82,10 @@ class _TelegramFalso:
     def __init__(self, foto_vai=True):
         self.fotos, self.textos, self.foto_vai = [], [], foto_vai
 
-    def enviar_foto(self, imagem, legenda="", destino=None, botao=None):
-        self.fotos.append((imagem, legenda, botao))
+    def enviar_foto(self, imagem, legenda="", destino=None, botao=None,
+                    botoes=None, html=False):
+        # desde 24/09 o post leva `botoes` (loja em cima); o 1o e' o da loja
+        self.fotos.append((imagem, legenda, (botoes or [botao])[0]))
         return self.foto_vai
 
     def enviar(self, texto, destino=None):
@@ -126,7 +128,7 @@ try:
            "saiu UMA foto e nenhum texto solto")
     if tg.fotos:
         img = Image.open(io.BytesIO(tg.fotos[0][0]))
-        checar(img.size == (1080, 1920), "o cartaz entregue e' 9x16")
+        checar(img.size == (1080, 1350), "o cartaz entregue e' 4x5 (padrao claro de 24/09)")
         legenda, botao = tg.fotos[0][1], tg.fotos[0][2]
         checar("13,52" in legenda, "a legenda leva o preco")
         checar(len(legenda) <= 1024,

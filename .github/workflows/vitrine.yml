@@ -28,7 +28,7 @@ on:
       quantos:
         description: quantos produtos postar
         required: true
-        default: '3'
+        default: '1'
   schedule:
     # horario de Brasilia = UTC-3
     - cron: '17 12 * * *'    # 09:17 BRT — manha
@@ -72,7 +72,7 @@ jobs:
             echo "::error::falta o secret TELEGRAM_CANAL_VITRINE (@ do canal)"
             exit 1
           }
-          python -X utf8 -m engine.vitrine --quantos "${{ inputs.quantos || 3 }}" \
+          python -X utf8 -m engine.vitrine --quantos "${{ inputs.quantos || 1 }}" \
             | tee saida_vitrine.txt
           # ⛔ RUN VERDE COM ZERO POST E' FALHA, e sem esta conferencia ele
           # passa despercebido: se a credencial do AliExpress sumir, todo

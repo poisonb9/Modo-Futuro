@@ -69,7 +69,9 @@ def enviar(texto: str, destino: str | None = None) -> bool:
 
 def enviar_foto(imagem: bytes, legenda: str = "",
                 destino: str | None = None,
-                botao: tuple[str, str] | None = None) -> bool:
+                botao: tuple[str, str] | None = None,
+                botoes: list[tuple[str, str]] | None = None,
+                html: bool = False) -> bool:
     """Manda uma FOTO com legenda. Devolve False (sem estourar) se nao deu.
 
     ⚠️ A LEGENDA DA FOTO TEM OUTRO LIMITE, e e' quatro vezes menor: 1024
@@ -92,9 +94,14 @@ def enviar_foto(imagem: bytes, legenda: str = "",
         return False
     cabe = len(legenda) <= LIMITE_LEGENDA
     campos = {"chat_id": destino, "caption": legenda if cabe else ""}
-    if botao:
+    # ⭐ `botoes`: um botao por LINHA (24/09/2026 — "Ver na loja" em cima,
+    # "Avisar se baixar" embaixo). Lado a lado o rotulo corta no celular.
+    fila = list(botoes or []) or ([botao] if botao else [])
+    if fila:
         campos["reply_markup"] = json.dumps(
-            {"inline_keyboard": [[{"text": botao[0], "url": botao[1]}]]})
+            {"inline_keyboard": [[{"text": t, "url": u}] for t, u in fila]})
+    if html and cabe:
+        campos["parse_mode"] = "HTML"
     try:
         r = requests.post(
             API.format(token=_token(), metodo="sendPhoto"),

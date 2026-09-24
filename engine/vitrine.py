@@ -80,6 +80,66 @@ def canal() -> str | None:
 
 
 ROTULO_BOTAO = "Ver na loja"
+ROTULO_AVISO = "🔔 Avisar se baixar"
+SITE = "https://achadinhototal.com.br"
+
+
+def _milhar(n: int) -> str:
+    return f"{n:,}".replace(",", ".")
+
+
+def _dd_mm(iso: str) -> str:
+    return f"{iso[8:10]}/{iso[5:7]}" if len(iso or "") >= 10 else ""
+
+
+def legenda_premium(p: dict) -> str:
+    """A legenda do padrao aprovado pelo Bryan em 24/09/2026.
+
+    ⭐ CADA NUMERO APARECE UMA VEZ. O padrao anterior dizia o preco tres vezes
+    (cartaz, gancho, 💰) porque, sem fato medido, o gancho do modelo so'
+    repetia o preco. Agora o gancho e' DETERMINISTICO e sai dos MESMOS campos
+    que o site mostra (`publicar_bio.produtos_todos`): queda contra a nossa
+    serie, vendidos medidos desde que acompanhamos, % de avaliacoes positivas.
+    Sem fato forte, a primeira linha e' o nome curto — nunca uma frase vazia.
+
+    ⛔ Nenhum numero daqui e' inventado ou arredondado pra cima: a queda sai do
+    par `preco`/`preco_antes` que o cartaz desenha (o mesmo selo), e o
+    `vendeu` e' o que NOS medimos, nao o contador da loja.
+    """
+    from html import escape
+    r = p.get("_site") or {}
+    preco = p.get("preco") or ""
+    queda = 0.0
+    try:
+        from .cartaz import QUEDA_MINIMA, queda_do_par
+        queda = queda_do_par(_num(preco), _num(p.get("preco_antes", "")) or None)
+    except Exception:
+        QUEDA_MINIMA = 5.0
+    vendeu = r.get("vendeu") or []
+    nota = float(r.get("nota") or 0)
+    fatos = []
+    if queda >= QUEDA_MINIMA:
+        fatos.append(("queda", f"📉 <b>Caiu {queda:.0f}%</b> — era {p['preco_antes']}"))
+    if len(vendeu) == 2 and int(vendeu[0]) >= 50:
+        fatos.append(("vendeu", f"🔥 <b>+{_milhar(int(vendeu[0]))} vendidos</b> desde {vendeu[1]}"))
+    if nota >= 90:
+        fatos.append(("nota", f"⭐ <b>{nota:.0f}%</b> de avaliações positivas"))
+    # a linha de cima: o fato mais forte; sem fato forte (so' nota), o nome
+    if fatos and fatos[0][0] != "nota":
+        topo, resto = fatos[0][1], [t for _, t in fatos[1:]]
+    else:
+        topo, resto = f"<b>{escape(p['nome'])}</b>", [t for _, t in fatos]
+    quando = _dd_mm(p.get("preco_em") or f"{date.today():%Y-%m-%d}")
+    linhas = [topo, "", f"💰 <b>{escape(preco)}</b> · preço de hoje, {quando}"]
+    linhas += resto
+    onde = " · ".join(x for x in (r.get("loja") or p.get("loja") or "",
+                                  r.get("canal") or "") if x)
+    if onde:
+        linhas.append("🏪 " + escape(onde))
+    nome_origem = ORIGEM.get(p.get("_canal") or "", "")
+    if nome_origem:
+        linhas.append(f"📺 do {nome_origem}")
+    return chr(10).join(linhas)
 
 
 def postar_texto(p: dict, origem: str | None = None,
@@ -184,8 +244,9 @@ def cartaz_de(p: dict, tempo: int = 25) -> bytes | None:
                          headers={"User-Agent": "Mozilla/5.0"})
         r.raise_for_status()
         foto = Image.open(io.BytesIO(r.content))
-        img = _cartaz.montar(foto, p["nome"], preco,
-                             _num(p.get("preco_antes", "")) or None)
+        img = _cartaz.montar_claro(foto, p["nome"], preco,
+                                   _num(p.get("preco_antes", "")) or None,
+                                   rodape="achadinhototal.com.br")
         saco = io.BytesIO()
         img.save(saco, format="JPEG", quality=88)
         return saco.getvalue()
@@ -331,10 +392,15 @@ def postar(bruto: dict, origem: str | None = None,
         # ⚠️ O GANCHO SO' SE PEDE QUANDO HA' CARTAZ. Ele custa uma chamada de
         # modelo, e no caminho de texto puro ele nem seria usado — a primeira
         # linha la' volta a ser o nome.
+        # ⭐ PADRAO DE 24/09/2026: legenda premium (sem chamada de modelo) e
+        # dois botoes — a loja (afiliado) e o "avise-me" do site, que e' onde
+        # a pessoa deixa o contato. O 2o so' existe quando o produto esta' no
+        # site; sem `_id` nao ha' pagina pra onde levar.
+        botoes = [("🛒 " + ROTULO_BOTAO, p["link"])]
+        if p.get("_site") and p.get("_id"):
+            botoes.append((ROTULO_AVISO, f"{SITE}/?p={p['_id']}&de=telegram"))
         entregue = telegram.enviar_foto(
-            foto, postar_texto(p, origem, com_link=False,
-                               gancho=_gancho_de(p)), destino,
-            botao=(ROTULO_BOTAO, p["link"]))
+            foto, legenda_premium(p), destino, botoes=botoes, html=True)
     if not entregue:
         entregue = telegram.enviar(texto, destino)
     if not entregue:
@@ -496,6 +562,7 @@ def pendentes(limite: int | None = None) -> list[dict]:
     """
     if not CATALOGO.exists():
         return []
+    site = _do_site()
     vistos: set[str] = set()
     fila: list[tuple[float, dict]] = []
     for linha in CATALOGO.read_text(encoding="utf-8").splitlines():
@@ -520,7 +587,19 @@ def pendentes(limite: int | None = None) -> list[dict]:
             vistos.add(ident)
         if ja_foi_produto(r):
             continue
+        # ⛔ PREMIUM = SO' O QUE O SITE MOSTRA (24/09/2026). O site ja' aplica
+        # as travas que a vitrine nao tinha: preco reconferido em 48h, esgotado
+        # fora, mesmo produto de dois lojistas num cartao so', nome curto.
+        # Fora do site, fora do canal.
+        rico = site.get(str(r.get("id") or ""))
+        if site and not rico:
+            continue
+        if rico and not _foto_serve(rico.get("imagem") or r.get("imagem") or ""):
+            continue
         bruto = dict(r, preco_antes=preco_antes_de(r))
+        if rico:
+            bruto["nome"] = rico.get("nome") or bruto.get("nome")
+            bruto["imagem"] = rico.get("imagem") or bruto.get("imagem")
         try:
             p = _produto.normalizar(bruto)
         except _produto.ProdutoInvalido:
@@ -534,6 +613,8 @@ def pendentes(limite: int | None = None) -> list[dict]:
         # ⚠️ O id viaja junto pra `marcar` poder gravar a identidade, e nao so'
         # o link. Sem ele o produto volta pra fila com outro link amanha.
         p["_id"] = r.get("id")
+        if rico:
+            p["_site"] = rico
         # ⚠️ `ganho_previsto` e `vendas` ja' vem gravados pelo garimpo. Faltando
         # um dos dois o produto vai pro fim da fila em vez de sumir: ele e'
         # legitimo, so' nao da' pra ordenar.
@@ -542,6 +623,43 @@ def pendentes(limite: int | None = None) -> list[dict]:
     fila.sort(key=lambda x: x[0], reverse=True)
     escolhidos = _intercalar([p for _, p in fila])
     return escolhidos[:limite] if limite else escolhidos
+
+
+_SITE: dict | None = None
+
+
+def _do_site() -> dict[str, dict]:
+    """{id: produto como o SITE o mostra}. Vazio se o gerador do site falhar.
+
+    ⚠️ Vazio desliga o filtro premium em vez de zerar a fila: o canal parado
+    em silencio e' pior (a guarda do workflow reprova run sem post, mas so'
+    depois). O aviso sai alto no log.
+    """
+    global _SITE
+    if _SITE is None:
+        try:
+            import sys
+            sys.path.insert(0, str(RAIZ / "paginas"))
+            import publicar_bio
+            _SITE = {str(x.get("id")): x for x in publicar_bio.produtos_todos()}
+        except Exception as e:
+            print(f"      [!] sem os dados do site ({type(e).__name__}: "
+                  f"{str(e)[:80]}) — a fila volta ao registro cru")
+            _SITE = {}
+    return _SITE
+
+
+def _foto_serve(url: str) -> bool:
+    """So' reprova foto JA' julgada como colagem ou nota < 5 (`foto_julga`).
+    Nao julgada passa: julgar custa modelo e o cartaz nao pode travar nisso."""
+    try:
+        from . import foto_julga
+        j = foto_julga._cache().get(url) or {}
+    except Exception:
+        return True
+    if not j:
+        return True
+    return not j.get("colagem") and int(j.get("nota") or 0) >= 5
 
 
 def _intercalar(fila: list[dict]) -> list[dict]:

@@ -43,16 +43,23 @@ def miniatura(u):
 
 def cartao(p):
     e = html.escape
-    url = f"{SITE}/?p={p['id']}&{UTM}"
+    # 24/09 (Bryan): o clique no produto vai DIRETO ao link de afiliado da
+    # loja -- um toque a menos ate' a compra. O site perde a contagem desse
+    # clique; o Brevo continua medindo. Sem link, cai no site.
+    url = p.get("link") or f"{SITE}/?p={p['id']}&{UTM}"
+    # 24/09 (print do Bryan no iPhone): no celular as colunas estreitam e a
+    # caixa do suporte ficou mais alta (o "↓ 17%" desceu; o "R$" do grip
+    # separou do numero). A BORDA agora e' da propria celula -- celulas da
+    # mesma linha tem sempre a mesma altura --, preco e queda nao quebram
+    # (nowrap) e o nome encurta para caber no mesmo espaco.
+    nome = p['nome'] if len(p['nome']) <= 40 else p['nome'][:38].rsplit(" ", 1)[0] + "…"
     return f'''
-<td width="33%" valign="top" style="padding:6px">
- <a href="{url}" style="text-decoration:none;color:#16141c">
-  <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eeeaf2;border-radius:14px">
-   <tr><td align="center" style="padding:10px"><img src="{e(miniatura(p['imagem']))}" width="150" alt="{e(p['nome'][:60])}" style="display:block;width:100%;max-width:150px;height:auto;border-radius:10px"></td></tr>
-   <tr><td style="padding:0 12px;font:600 13px/1.35 Arial,Helvetica,sans-serif;color:#16141c;height:54px;vertical-align:top">{e(p['nome'][:58])}</td></tr>
-   <tr><td style="padding:6px 12px 2px;font:800 20px/1.1 Arial,Helvetica,sans-serif;color:#16141c">{e(p['preco'])}</td></tr>
-   <tr><td style="padding:0 12px 12px;font:12px/1.3 Arial,Helvetica,sans-serif;color:#8a8696"><s>{e(p['antes'])}</s> &nbsp;<b style="color:#1f7a45">↓ {round(p['queda'])}%</b></td></tr>
-  </table>
+<td width="33%" valign="top" style="padding:10px;border:1px solid #eeeaf2;border-radius:14px">
+ <a href="{url}" style="text-decoration:none;color:#16141c;display:block">
+  <img src="{e(miniatura(p['imagem']))}" width="150" alt="{e(nome)}" style="display:block;width:100%;max-width:150px;height:auto;border-radius:10px;margin:0 auto 8px">
+  <div style="font:600 13px/1.35 Arial,Helvetica,sans-serif;color:#16141c;height:54px;overflow:hidden">{e(nome)}</div>
+  <div style="padding-top:6px;font:800 18px/1.1 Arial,Helvetica,sans-serif;color:#16141c;white-space:nowrap">{e(p['preco'])}</div>
+  <div style="padding-top:3px;font:11px/1.3 Arial,Helvetica,sans-serif;color:#8a8696;white-space:nowrap"><s>{e(p['antes'])}</s>&nbsp;<b style="color:#1f7a45">↓{round(p['queda'])}%</b></div>
  </a>
 </td>'''
 
@@ -73,12 +80,12 @@ def montar():
  <tr><td align="center" style="padding:6px 28px 18px;font:16px/1.55 Arial,Helvetica,sans-serif;color:#3b3845">
    O Achadinho Total abriu as portas. Todo dia eu confiro o preço de mais de <b>1.600 produtos</b> em várias lojas e só mostro o que <b>caiu de verdade</b> — comparando com o que eu mesmo vi antes, não com o "de" inflado do vendedor.</td></tr>
  <tr><td align="center" style="padding:4px 20px 8px;font:700 17px/1.2 Arial,Helvetica,sans-serif;color:#16141c">As maiores quedas de hoje ({hora})</td></tr>
- <tr><td><table width="100%" cellpadding="0" cellspacing="0"><tr>{cards}</tr></table></td></tr>
+ <tr><td><table width="100%" cellpadding="0" cellspacing="6" style="border-collapse:separate"><tr>{cards}</tr></table></td></tr>
  <tr><td align="center" style="padding:22px 20px 8px">
    <a href="{SITE}/?{UTM}" style="display:inline-block;background:#f2c94c;color:#16141c;text-decoration:none;font:700 17px/1 Arial,Helvetica,sans-serif;padding:16px 34px;border-radius:999px">Ver todos os achadinhos →</a></td></tr>
  <tr><td align="center" style="padding:18px 34px 6px;font:italic 15px/1.55 Georgia,serif;color:#3b3845">
    "Eu fiz o site que eu queria ter: sem propaganda enganosa, sem precisar ficar caçando cupom. Se o preço cair, você fica sabendo."</td></tr>
- <tr><td align="center" style="padding:0 20px 20px;font:13px/1.4 Arial,Helvetica,sans-serif;color:#8a8696">— quem garimpa no Achadinho Total</td></tr>
+ <tr><td align="center" style="padding:0 20px 20px;font:13px/1.4 Arial,Helvetica,sans-serif;color:#8a8696">— <b style="color:#3b3845">Fundador do Achadinho Total</b></td></tr>
  <tr><td align="center" style="padding:16px 24px;border-top:1px solid #eeeaf2;font:14px/1.5 Arial,Helvetica,sans-serif;color:#3b3845">
    Quer saber na hora quando um produto cair? <a href="https://t.me/achadinhototal" style="color:#1f6fd1;font-weight:700;text-decoration:none">Entre no Telegram do Achadinho Total</a>.</td></tr>
  <tr><td align="center" style="padding:10px 24px 24px;font:11px/1.5 Arial,Helvetica,sans-serif;color:#9a96a3">

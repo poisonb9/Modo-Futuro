@@ -5004,9 +5004,20 @@
     if (!g || !mqBloco || !mqBloco.matches) { return; }
     // passo = 1,4 tela; o sorteio de altura nunca deixa o vao entre dois
     // baloes menor que 1 tela + 220 px (altura do balao): nunca dois juntos.
-    var h = g.offsetHeight, passo = Math.round(innerHeight * 1.4);
-    var folga = Math.max(0, passo - innerHeight - 220);
-    var n = Math.max(0, Math.floor((h - 200) / passo));
+    // ⛔ 24/09 (print do Bryan: "na 2a tela nada, muito menos na 3a"):
+    // MEDIDO no ar -- a grade tem so' 3 fileiras (1.727 px) numa pagina de
+    // 3.506. Com passo de 1,4 tela SO' DENTRO da grade cabia UM balao. Agora
+    // o trecho vai do topo da grade ate' o fim da pagina (menos o rodape) e o
+    // passo e' o MINIMO que ainda separa dois: 1 tela + 240 px. Resultado:
+    // um balao por tela, nunca dois juntos.
+    var rgT = g.getBoundingClientRect().top + scrollY;
+    var h = Math.max(g.offsetHeight, document.documentElement.scrollHeight - rgT - 380);
+    // quantos cabem com vao minimo; a sobra vira passo maior e o sorteio mora
+    // SO' dentro dela (vao real = passo + r2 - r1 >= passo - folga = minimo)
+    var minimo = innerHeight + 240, util = Math.max(0, h - 350);
+    var n = util > 0 ? 1 + Math.floor(util / minimo) : 0;
+    var passo = n > 1 ? Math.max(minimo, util / (n - 1)) : minimo;
+    var folga = Math.min(Math.round(innerHeight * .3), Math.max(0, passo - minimo));
     if (n === qtdBloco && Math.abs(h - alturaBloco) < passo / 2) { return; }
     alturaBloco = h; qtdBloco = n;
     Array.prototype.slice.call(g.querySelectorAll(".balao-bloco")).forEach(function (b) { b.remove(); });

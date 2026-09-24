@@ -59,6 +59,10 @@ def _alvos() -> list[tuple[str, str]]:
          (MAE + "/parceiros/", "parceiros/index.html"),
          (MAE + "/privacidade/", "privacidade/index.html")]
     a += [(MAE + "/" + f + ".json", f + ".json") for f in EXTERNAS]
+    # os baloes da inauguracao (24/09/2026): mesmos nomes da pasta de origem
+    origem_baloes = Path(__file__).resolve().parent.parent / "paginas" / "baloes"
+    a += [(MAE + "/baloes/" + f.name, "baloes/" + f.name)
+          for f in sorted(origem_baloes.glob("*.webp"))]
     for b in BIOS:
         for rota, nome in (("/", "index.html"), ("/todos", "todos.html"),
                            ("/parceiros", "parceiros.html")):
@@ -76,6 +80,14 @@ def bytes_do_ar() -> int:
             manifesto.append({"url": url, "arquivo": rel, "ERRO": str(e)})
             falhas += 1
             print("  FALHOU " + rel + ": " + str(e))
+            continue
+        # ⚠️ o Pages responde 200 COM HTML para caminho que nao existe: uma
+        # imagem que volta como text/html e' arquivo faltando no ar, nao backup.
+        if rel.endswith((".webp", ".png")) and not str(tipo).startswith("image"):
+            manifesto.append({"url": url, "arquivo": rel,
+                              "ERRO": "veio " + str(tipo) + " no lugar de imagem"})
+            falhas += 1
+            print("  FALHOU " + rel + ": veio " + str(tipo) + " no lugar de imagem")
             continue
         destino = RAIZ / rel
         destino.parent.mkdir(parents=True, exist_ok=True)

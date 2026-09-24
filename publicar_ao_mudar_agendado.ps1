@@ -75,6 +75,16 @@ if ($publicado.Trim()) { $agora = $publicado }
 
 $ok = ($rc -eq 0) -and ($saida -match 'nenhum faltando')
 if ($ok) { Set-Content -Path $marca -Value $agora -Encoding utf8 }
+# ⭐ BACKUP DO AR A CADA PUBLICACAO CONFERIDA (24/09/2026, Bryan: "quero que
+# tenhamos um backup aqui na maquina do site sempre, porque se mudarmos de
+# computador temos o backup"). So' depois do OK: backup de publicacao que
+# falhou guardaria o site velho achando que e' o novo. Falha do backup NAO
+# derruba a publicacao (ela ja' esta' no ar) -- vai pro log como BACKUP FALHOU.
+if ($ok) {
+    $bk = (& $python -X utf8 ferramentas/backup_do_ar.py 2>&1 | Out-String)
+    $bkLinha = if ($LASTEXITCODE -eq 0) { "backup do ar atualizado em site_no_ar/" } else { "BACKUP FALHOU (rc=$LASTEXITCODE): " + (($bk.Trim() -split "`n")[-1]) }
+    Add-Content -Path $log -Value "[$carimbo] $bkLinha"
+}
 # rc=2 e' a TRAVA, nao falha: outra publicacao estava em andamento e esta
 # esperou a vez. Chamar isso de "FALHOU" no log faz o dono procurar defeito
 # onde houve disciplina. A marca nao e' gravada nos dois casos, entao o

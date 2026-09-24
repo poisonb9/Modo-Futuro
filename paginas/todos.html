@@ -2420,6 +2420,10 @@
      fita (ferramenta: ver handoff). O webp e' o quadrado de antes (balao
      embaixo, centrado) + o fio abaixo; largura 100% e altura livre fazem o
      balao ficar do mesmo tamanho e o fio transbordar a caixa para baixo. */
+  /* ⭐ 24/09 (print do Bryan: "nao apareceu as fitas"): o fio original tem
+     2-3 px em 360; reduzido 10x no celular vira sub-pixel e o iPhone apaga.
+     Ate' 759 px vai `*_p.webp` (96 px, fio engrossado ANTES da reducao). */
+  .flutua picture { display: block; }
   .flutua img {
     width: 100%; height: auto; display: block;
     filter: drop-shadow(0 6px 10px rgba(20, 16, 30, .14));
@@ -2528,20 +2532,20 @@
          `_por_icone` do publicador, nos DOIS diretorios do deploy. -->
     <div class="baloes" aria-hidden="true">
       <div class="lado festa">
-        <span class="balao"><span class="flutua"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/inaug_etiqueta.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/inaug_sacola.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua corda-lupa"><img src="/baloes/inaug_lupa.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laranja_p.webp"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laco_p.webp"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_estrela_p.webp"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_etiqueta_p.webp"><img src="/baloes/inaug_etiqueta.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_sacola_p.webp"><img src="/baloes/inaug_sacola.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua corda-lupa"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_lupa_p.webp"><img src="/baloes/inaug_lupa.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
       </div>
       <div class="lado canais">
-        <span class="balao"><span class="flutua"><img src="/baloes/canal_achadinho_make.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/canal_achadinho_chef.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/canal_achadinhos_instantaneos.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/canal_sem_anestesia.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/canal_pago_menos.webp" alt="" decoding="async" fetchpriority="low"></span></span>
-        <span class="balao"><span class="flutua"><img src="/baloes/canal_modo_futuro.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_achadinho_make_p.webp"><img src="/baloes/canal_achadinho_make.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_achadinho_chef_p.webp"><img src="/baloes/canal_achadinho_chef.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_achadinhos_instantaneos_p.webp"><img src="/baloes/canal_achadinhos_instantaneos.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_sem_anestesia_p.webp"><img src="/baloes/canal_sem_anestesia.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_pago_menos_p.webp"><img src="/baloes/canal_pago_menos.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_modo_futuro_p.webp"><img src="/baloes/canal_modo_futuro.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
       </div>
     </div>
     <span class="marca-logo" id="logo"></span>
@@ -4658,7 +4662,7 @@
       // ⭐ 24/09 (Impeccable, delight: estado vazio orienta PRIMEIRO, a
       // personalidade vem depois): a lupa parada, pequena, acima da frase.
       var lupaV = el("img", "vazio-lupa");
-      lupaV.src = "/baloes/inaug_lupa.webp"; lupaV.alt = ""; lupaV.setAttribute("aria-hidden", "true");
+      lupaV.src = "/baloes/inaug_lupa_p.webp"; lupaV.alt = ""; lupaV.setAttribute("aria-hidden", "true");
       v.appendChild(lupaV);
       var semFiltroTermo = !canal && !loja && !termo;
       var vaziaMsg = { recorde: "nenhum produto bateu recorde de preço agora — confira de novo mais tarde.",

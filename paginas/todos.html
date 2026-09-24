@@ -2274,6 +2274,19 @@
     padding: 26px 18px; text-align: center; color: var(--fraco);
     grid-column: 1 / -1;
   }
+  .vazio-lupa { display: block; width: 44px; height: auto; margin: 0 auto 10px;
+    filter: drop-shadow(0 4px 8px rgba(20, 16, 30, .12)); }
+  /* ⭐ 24/09: o cupom que sobe UMA vez ao tocar em "se voltar a R$ X" --
+     momento de conclusao (Impeccable delight). Some sozinho, sem loop. */
+  .cupom-sobe {
+    position: fixed; z-index: 60; width: 46px; height: auto; pointer-events: none;
+    animation: cupomSobe 1.5s cubic-bezier(.3, .6, .4, 1) forwards;
+  }
+  @keyframes cupomSobe {
+    0%   { transform: translate(-50%, 0) rotate(-6deg); opacity: 0; }
+    15%  { opacity: 1; }
+    100% { transform: translate(-50%, -220px) rotate(6deg); opacity: 0; }
+  }
 
   /* ---------------- fim ---------------- */
   /* 19/09 (print do Bryan ao recarregar): antes do script montar a grade, o
@@ -2445,6 +2458,33 @@
   .festa .balao:nth-child(1), .canais .balao:nth-child(3) { margin-top: 44px; }
   .festa .balao:nth-child(2), .canais .balao:nth-child(2) { margin-top: 20px; }
   .flutua b { display: none; }
+  /* ⭐ 24/09 (Bryan: "mais um de cada lado, o MF e o cupom, de maneira
+     inteligente e criativa"). O arco nao tem mais lugar, entao os dois vem
+     como um SEGUNDO PLANO: menores, mais baixos (ao lado de "ACHADINHO
+     TOTAL", onde a linha e' curta e sobra lateral), um pouco apagados --
+     balao mais longe. E eles SE SOLTAM na rolagem: o acervo (Kevin Powell,
+     "True parallax with CSS-only", DEMONSTRADO) mostra parallax so' de CSS
+     com animation-timeline; aqui o cupom e o MF sobem e somem enquanto a
+     pessoa desce para a vitrine. Sem suporte (Safari antigo), ficam parados. */
+  @media (max-width: 759px) {
+    .festa .balao:nth-child(4), .canais .balao:nth-child(6) {
+      display: flex; position: absolute; top: 96px; opacity: .82;
+    }
+    .festa .balao:nth-child(4) { right: 22px; }
+    .canais .balao:nth-child(6) { left: 22px; }
+    .festa .balao:nth-child(4) .flutua, .canais .balao:nth-child(6) .flutua { --t: 28px; }
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
+      .festa .balao:nth-child(4), .canais .balao:nth-child(6) {
+        animation: soltar linear both; animation-timeline: scroll(root);
+        animation-range: 0 320px;
+      }
+    }
+  }
+  @keyframes soltar { to { transform: translateY(-150px) scale(.8); opacity: 0; } }
+  @media (max-height: 740px) and (max-width: 759px) {
+    .festa .balao:nth-child(4), .canais .balao:nth-child(6) { top: 72px; } }
   @media (max-height: 740px) { .lado { top: 8px; height: 70px; } .lado .flutua { --t: 28px; }
     .festa .balao:nth-child(1), .canais .balao:nth-child(3) { margin-top: 30px; }
     .festa .balao:nth-child(2), .canais .balao:nth-child(2) { margin-top: 13px; } }
@@ -2666,6 +2706,19 @@
   // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
   // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
   var BOT_ALERTA = "";
+  // ⭐ 24/09: toque em "se voltar a R$ X" solta o cupom UMA vez, do proprio
+  // botao. Delegado no documento porque os cartoes nascem depois. Nao
+  // segura a navegacao (o link abre o Telegram normalmente).
+  document.addEventListener("click", function (e) {
+    var b = e.target && e.target.closest && e.target.closest(".avise-me");
+    if (!b || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) { return; }
+    var r = b.getBoundingClientRect(), c = document.createElement("img");
+    c.className = "cupom-sobe"; c.src = "/baloes/inaug_etiqueta.webp"; c.alt = "";
+    c.setAttribute("aria-hidden", "true");
+    c.style.left = (r.left + r.width / 2) + "px"; c.style.top = (r.top - 40) + "px";
+    document.body.appendChild(c);
+    setTimeout(function () { c.remove(); }, 1600);
+  });
   var ULTIMA_CONFERENCIA = "";
   // ⭐ DE ONDE A PESSOA VEIO (18/09/2026): `?de=bio.<canal>` da contra-capa,
   // `?de=telegram` dos posts, `?de=video.<id>` quando houver. Vai em cada
@@ -4598,6 +4651,11 @@
       // if/else-if/else, nunca quando `lista.length` e' zero. Removida
       // dali; a mensagem por filtro entra AQUI, onde de fato executa.
       var v = el("div", "vazio");
+      // ⭐ 24/09 (Impeccable, delight: estado vazio orienta PRIMEIRO, a
+      // personalidade vem depois): a lupa parada, pequena, acima da frase.
+      var lupaV = el("img", "vazio-lupa");
+      lupaV.src = "/baloes/inaug_lupa.webp"; lupaV.alt = ""; lupaV.setAttribute("aria-hidden", "true");
+      v.appendChild(lupaV);
       var semFiltroTermo = !canal && !loja && !termo;
       var vaziaMsg = { recorde: "nenhum produto bateu recorde de preço agora — confira de novo mais tarde.",
                        novo: "nenhum achado novo agora — confira de novo mais tarde.",

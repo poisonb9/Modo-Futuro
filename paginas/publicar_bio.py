@@ -2957,6 +2957,11 @@ def publicar_no_ar(html: str, parceiros: str = "",
                 # Cloudflare responde 200 servindo a pagina HTML no lugar do
                 # PNG — foi o que aconteceu em 15/09/2026.
                 _por_icone(casa)
+                # ⭐ 404 SO' NO SITE MAE (24/09/2026). Nas bios nao: `/c1`...
+                # dependem da raiz servida para caminho inexistente.
+                nao_achei = Path(__file__).resolve().parent / "nao_achei.html"
+                if nao_achei.exists():
+                    (casa / "404.html").write_bytes(nao_achei.read_bytes())
                 for nome, corpo in (externos or {}).items():
                     (casa / nome).write_text(corpo, encoding="utf-8")
                 if parceiros:

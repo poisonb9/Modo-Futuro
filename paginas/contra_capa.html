@@ -126,7 +126,23 @@
   .interruptor:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
 
   /* ---------------- topo ---------------- */
-  .topo { display: flex; flex-direction: column; align-items: center; gap: 9px; text-align: center; }
+  .topo { display: flex; flex-direction: column; align-items: center; gap: 9px; text-align: center; position: relative; }
+  /* o balao do canal: enfeite puro ao lado do brasao, fio pendurado da foto
+     original. Absoluto, sem toque, parado em reduced-motion. */
+  .balao-canal {
+    position: absolute; top: -4px; left: calc(50% + 62px); width: 58px;
+    pointer-events: none; transform-origin: 50% 100%;
+  }
+  .balao-canal img { width: 100%; height: auto; display: block;
+    filter: drop-shadow(0 6px 10px rgba(20, 16, 30, .14)); }
+  .balao-canal img:not([src]) { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .balao-canal { animation: flutuar 6.4s ease-in-out -2s infinite alternate; }
+  }
+  @keyframes flutuar {
+    from { transform: translate3d(0, -5px, 0) rotate(-3deg); }
+    to   { transform: translate3d(0, 5px, 0) rotate(3deg); }
+  }
   /* ⚠️ O TOPO E' O UNICO LUGAR QUE TODO MUNDO VE'.
 
      MEDIDO nesta operacao: 98,7% do trafego vem da Para Voce e a
@@ -550,6 +566,7 @@
   </section>
 
   <header class="topo">
+    <span class="balao-canal" aria-hidden="true"><img id="balao_canal" alt="" decoding="async"></span>
     <div class="avatar" id="avatar"></div>
     <div class="heroi">
       <p class="marca" id="marca"></p>
@@ -1456,6 +1473,15 @@
     return e;
   }
 
+  var BALOES_CANAL = {
+    "achadinho.make": "canal_achadinho_make",
+    "modofuturo": "canal_modo_futuro",
+    "semanestesia.pod": "canal_sem_anestesia",
+    "fatura.chora": "canal_pago_menos",
+    "achadinhos.instantaneos": "canal_achadinhos_instantaneos",
+    "cozinha.internacional": "canal_achadinho_chef"
+    // atefalhar: sem balao proprio -> lupa
+  };
   function desenhar(chave) {
     var c = CANAIS[chave];
     raiz.style.setProperty("--acento", c.acento);
@@ -1483,6 +1509,11 @@
       av.textContent = c.inicial;
       av.classList.remove("com-brasao");
     }
+    // ⭐ O BALAO DO CANAL (24/09/2026, Bryan: cada canal com o seu balao na
+    // propria pagina; canal sem balao proprio leva a lupa). Um so', ao lado
+    // do brasao: o site mae tem os 12, a bio tem o dela.
+    var bc = document.getElementById("balao_canal");
+    if (bc) { bc.src = "/baloes/" + (BALOES_CANAL[chave] || "inaug_lupa") + ".webp"; }
     // ⚠️ O NOME E' O DO CANAL. A pagina e' um arquivo so', servido em varios
     // enderecos — isso e' detalhe de hospedagem, nao de marca.
     document.getElementById("marca").textContent = c.nome;

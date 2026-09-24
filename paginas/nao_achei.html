@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Não achei essa página · Achadinho Total</title>
+<link rel="icon" href="/icone.png">
+<!-- ⭐ 24/09/2026: a 404 do SITE MAE (sobe como /404.html so' no
+     achadinhototal). As bios NAO recebem: la' `/c1`...`/c7` dependem de o
+     Pages devolver a raiz para caminho inexistente. -->
+<style>
+  :root { --fundo: #fdfcfb; --tinta: #16141c; --fraco: #6b6776; --ouro: #c8921c; }
+  @media (prefers-color-scheme: dark) { :root { --fundo: #121016; --tinta: #f3f1f6; --fraco: #a39fae; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100dvh; display: grid; place-items: center;
+    background: var(--fundo); color: var(--tinta); padding: 24px 16px;
+    font: 400 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; text-align: center; }
+  .balao { width: 120px; margin: 0 auto 8px; transform-origin: 50% 100%; }
+  .balao img { width: 100%; height: auto; display: block;
+    filter: drop-shadow(0 8px 14px rgba(20, 16, 30, .16)); }
+  @media (prefers-reduced-motion: no-preference) {
+    .balao { animation: flutuar 6s ease-in-out infinite alternate; }
+  }
+  @keyframes flutuar { from { transform: translateY(-6px) rotate(-3deg); } to { transform: translateY(6px) rotate(3deg); } }
+  h1 { font: 900 clamp(26px, 7vw, 36px)/1.1 "Archivo Black", system-ui, sans-serif; margin: 6px 0 8px; }
+  h1 span { color: var(--ouro); }
+  p { color: var(--fraco); margin: 0 auto 22px; max-width: 30ch; }
+  a.volta { display: inline-block; background: var(--tinta); color: var(--fundo);
+    text-decoration: none; font-weight: 700; padding: 13px 22px; border-radius: 999px; }
+</style>
+</head>
+<body>
+  <main>
+    <div class="balao" aria-hidden="true"><img src="/baloes/inaug_estrela.webp" alt=""></div>
+    <h1>Essa página <span>voou</span>.</h1>
+    <p>O endereço mudou ou saiu do ar. Os achadinhos continuam lá no início.</p>
+    <a class="volta" href="/">Ver os achadinhos</a>
+  </main>
+</body>
+</html>

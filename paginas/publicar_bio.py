@@ -2844,7 +2844,8 @@ def _por_icone(destino) -> None:
     baloes = aqui / "baloes"
     if baloes.is_dir():
         (destino / "baloes").mkdir(exist_ok=True)
-        for f in sorted(baloes.glob("*.webp")):
+        # 24/09: + `.png` -- a arte do e-mail (e-mail nao le' WebP no Outlook)
+        for f in sorted(list(baloes.glob("*.webp")) + list(baloes.glob("*.png"))):
             (destino / "baloes" / f.name).write_bytes(f.read_bytes())
     # ⭐ E UM `favicon.ico` DE VERDADE (18/09/2026). Painel da Cloudflare,
     # Google e afins nao leem a tag `<link rel="icon">`: pedem `/favicon.ico`.

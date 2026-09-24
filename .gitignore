@@ -174,3 +174,6 @@ estado/publicando.lock
 # o que auditar nelas: a queda, o riscado e a trava de 24 h continuam
 # saindo da serie diaria, que E' versionada.
 estado/precos_horas.jsonl
+
+# contatos e rascunhos com dado pessoal (LGPD) -- nunca no repositorio
+_privado/

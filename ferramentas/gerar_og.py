@@ -76,7 +76,7 @@ def gerar(escuro: bool = False, inauguracao: bool = False) -> Path:
     d.text((x, 150), "INAUGURAÇÃO · ACHADINHO TOTAL" if inauguracao else "ACHADINHO TOTAL",
            font=fonte("Poppins-Medium.ttf", 26), fill=ouro if inauguracao else fraco, spacing=4)
     f1 = fonte("ArchivoBlack.ttf", 66)
-    d.text((x, 196), "Eu garimpo.", font=f1, fill=tinta)
+    d.text((x, 196), "Eu procuro.", font=f1, fill=tinta)
     d.text((x, 276), "Você ", font=f1, fill=tinta)
     dx = d.textlength("Você ", font=f1)
     d.text((x + dx, 276), "paga menos.", font=f1, fill=ouro)

@@ -32,7 +32,7 @@ def main() -> Path:
     x = 630
     d.text((x, 150), "ACHADINHO TOTAL", font=fonte("Poppins-Medium.ttf", 26), fill=fraco)
     f1 = fonte("ArchivoBlack.ttf", 54)
-    d.text((x, 196), "Eu garimpo.", font=f1, fill=tinta)
+    d.text((x, 196), "Eu procuro.", font=f1, fill=tinta)
     d.text((x, 264), "Você ", font=f1, fill=tinta)
     d.text((x + d.textlength("Você ", font=f1), 264), "paga menos.", font=f1, fill=ouro)
     d.text((x, 384), "Preço conferido de hora em hora.", font=fonte("Poppins-Medium.ttf", 29), fill=tinta)

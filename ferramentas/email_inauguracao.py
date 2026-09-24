@@ -21,7 +21,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ)); sys.path.insert(0, str(RAIZ / "paginas"))
 SITE = "https://achadinhototal.com.br"
 UTM = "utm_source=email&utm_medium=inauguracao&utm_campaign=inauguracao_2026_09"
-ASSUNTO = "🎈 Inauguramos: eu garimpo, você paga menos"
+ASSUNTO = "🎈 Inauguramos: eu procuro, você paga menos"
 PREHEADER = "As maiores quedas de preço de hoje, conferidas por mim. Sem enrolação."
 
 
@@ -76,7 +76,7 @@ def montar():
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px">
  <tr><td align="center"><a href="{SITE}/?{UTM}"><img src="{SITE}/baloes/email_inauguracao.png" width="600" alt="Inauguração do Achadinho Total" style="display:block;width:100%;max-width:600px;height:auto"></a></td></tr>
  <tr><td align="center" style="padding:8px 20px 0;font:12px/1 Arial,Helvetica,sans-serif;letter-spacing:4px;color:#6b6776">ACHADINHO TOTAL</td></tr>
- <tr><td align="center" style="padding:10px 20px 6px;font:800 30px/1.15 Arial,Helvetica,sans-serif;color:#16141c">Eu garimpo.<br>Você <span style="color:#c8921c">paga menos</span>.</td></tr>
+ <tr><td align="center" style="padding:10px 20px 6px;font:800 30px/1.15 Arial,Helvetica,sans-serif;color:#16141c">Eu procuro.<br>Você <span style="color:#c8921c">paga menos</span>.</td></tr>
  <tr><td align="center" style="padding:6px 28px 18px;font:16px/1.55 Arial,Helvetica,sans-serif;color:#3b3845">
    O Achadinho Total abriu as portas. Todo dia eu confiro o preço de mais de <b>1.600 produtos</b> em várias lojas e só mostro o que <b>caiu de verdade</b> — comparando com o que eu mesmo vi antes, não com o "de" inflado do vendedor.</td></tr>
  <tr><td align="center" style="padding:4px 20px 8px;font:700 17px/1.2 Arial,Helvetica,sans-serif;color:#16141c">As maiores quedas de hoje ({hora})</td></tr>

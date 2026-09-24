@@ -2505,11 +2505,25 @@
     .sobe.esq { left: calc((100vw - 1180px) / 4 - 46px); }
   }
   @keyframes subirTela {
-    0%   { transform: translateY(105vh) rotate(-4deg); opacity: 0; }
+    0%   { transform: translateY(105vh) scale(.92); opacity: 0; }
     8%   { opacity: 1; }
     92%  { opacity: 1; }
-    100% { transform: translateY(-45vh) rotate(4deg); opacity: 0; }
+    100% { transform: translateY(-45vh) scale(1.04); opacity: 0; }
   }
+  /* ⭐ PREMIUM (24/09, Bryan: "gostei demais dos baloes descendo a pagina,
+     tem como dar um efeito mais premium"). A subida reta lia como elevador.
+     Balao de verdade DERIVA de lado e BALANCA no proprio eixo, cada um no seu
+     tempo -- e isso corre pelo RELOGIO, no <img>, enquanto a subida corre
+     pela ROLAGEM, no <span> (propriedades separadas, nao brigam). Periodos
+     4.9 s e 3.7 s: nunca coincidem. A escala .92 -> 1.04 da' profundidade. */
+  .sobe img { filter: drop-shadow(0 14px 18px rgba(20, 16, 30, .12)); transform-origin: 50% 90%; }
+  @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+    .sobe img { animation: sobeDeriva 4.9s ease-in-out infinite alternate,
+                           sobeBalanco 3.7s ease-in-out infinite alternate; }
+    .sobe.esq img { animation-duration: 5.6s, 4.3s; animation-delay: -2.1s, -1.3s; }
+  }
+  @keyframes sobeDeriva  { from { translate: -10px 0; } to { translate: 10px 0; } }
+  @keyframes sobeBalanco { from { rotate: -5deg; } to { rotate: 5deg; } }
   @supports (animation-timeline: scroll()) {
     @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
       .sobe { animation: subirTela linear both; animation-timeline: scroll(root); }
@@ -2521,7 +2535,7 @@
     @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
       .sobe.dir { --f: clamp(0, calc((var(--prog, 0) - .15) / .45), 1); }
       .sobe.esq { --f: clamp(0, calc((var(--prog, 0) - .55) / .45), 1); }
-      .sobe { transform: translateY(calc(105vh - var(--f) * 150vh)) rotate(calc(-4deg + var(--f) * 8deg));
+      .sobe { transform: translateY(calc(105vh - var(--f) * 150vh)) scale(calc(.92 + var(--f) * .12));
         opacity: clamp(0, calc(min(var(--f), 1 - var(--f)) * 12), 1); }
     }
   }

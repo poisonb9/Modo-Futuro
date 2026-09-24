@@ -2880,7 +2880,9 @@ def _por_icone(destino) -> None:
                           ("icone_app.png", "icone_achadinho_180.png"),
                           ("og_achadinho.png", "og_achadinho.png"),
                           # inauguracao (24/09): ferramentas/og_inauguracao.py
-                          ("og_inauguracao.png", "og_inauguracao.png")):
+                          ("og_inauguracao.png", "og_inauguracao.png"),
+                          # buque da lupa (24/09): cena gerada, Desktop/inauguracao/og_buque_lupa.png
+                          ("og_buque.png", "og_buque.png")):
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())

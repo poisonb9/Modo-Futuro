@@ -2883,7 +2883,9 @@ def _por_icone(destino) -> None:
                           ("og_inauguracao.png", "og_inauguracao.png"),
                           # buque da lupa (24/09): cena gerada, Desktop/inauguracao/og_buque_lupa.png
                           ("og_buque.png", "og_buque.png"),
-                          ("og_buque_v3.png", "og_buque_v3.png")):
+                          ("og_buque_v3.png", "og_buque_v3.png"),
+                          # v4 = v3 com acabamento (contraste 1,07, cor 1,05, nitidez leve)
+                          ("og_buque_v4.png", "og_buque_v4.png")):
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())

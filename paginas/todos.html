@@ -2414,7 +2414,7 @@
      ("topo entrega produto"). O vao entre as pontas e' ~49% da largura: cabe
      o logo de 86 px a partir de ~180 px de faixa. */
   .faixa-inaug { position: absolute; left: 50%; top: 6px; width: 212px;
-    transform: translateX(-50%); display: block; }
+    transform: translateX(-50%); display: block; z-index: 1; }
   .faixa-inaug img { width: 100%; height: auto; display: block; }
   @media (prefers-reduced-motion: no-preference) {
     .faixa-inaug { animation: faixaBalanca 7.8s ease-in-out -2.4s infinite alternate; }
@@ -2430,7 +2430,7 @@
      colunas nao pode reposicionar os vizinhos. */
   @media (max-width: 759px) {
     .festa .balao:nth-child(3), .canais .balao:nth-child(1) { visibility: hidden; }
-    .faixa-inaug { top: 4px; width: 206px; }
+    .faixa-inaug { top: 4px; width: 198px; }
   }
   @media (max-height: 740px) and (max-width: 759px) { .faixa-inaug { top: 0; width: 176px; } }
   @media (min-width: 760px) { .faixa-inaug { top: 2px; width: 290px; } }

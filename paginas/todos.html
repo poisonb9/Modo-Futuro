@@ -2473,6 +2473,10 @@
     .festa .balao:nth-child(4) { right: 22px; }
     .canais .balao:nth-child(5) { left: 22px; }
     .festa .balao:nth-child(4) .flutua, .canais .balao:nth-child(5) .flutua { --t: 28px; }
+    /* o cifrao e' ALTO (216x360): na mesma caixa quadrada do cupom (largo) ele
+       sai com o dobro da altura e encostou no "garimpo." (print 24/09 00:02) */
+    .canais .balao:nth-child(5) { margin-top: -6px; }
+    .canais .balao:nth-child(5) .flutua { --t: 24px; }
   }
   @supports (animation-timeline: scroll()) {
     @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {

@@ -2514,10 +2514,8 @@
      `translate`/`rotate` (nao `transform`), para nao brigar com nada que ja'
      mexa no elemento. Os tres sao itens de flex (medido), entao aceitam. */
   @media (prefers-reduced-motion: no-preference) {
-    /* a linha viva DIGITA o preco letra por letra: partir em caracteres
-       quebraria a digitacao, entao ela respira inteira. */
-    .vivo-preco { transform-origin: 30% 80%;
-      animation: respira 6.9s ease-in-out -0.8s infinite alternate; }
+    /* a linha viva: o preco agora e' partido por caractere em `fecharPreco`
+       (so' o NOME e' digitado); a respiracao inteira saiu. */
     /* ⭐ 24/09 (Bryan: "e cada numero e cifrao balanca aleatoriamente"): na
        grade e na capa o script `tremularPrecos` parte o preco em caracteres
        (.dg) e sorteia duracao, atraso e sentido de cada um. */
@@ -2574,57 +2572,42 @@
   }
   @keyframes ctaSobe { from { translate: 0 -.7px; } to { translate: 0 .7px; } }
   @keyframes ctaGira { from { rotate: -.25deg; } to { rotate: .25deg; } }
-  /* ⭐ BALOES QUE SOBEM COM A ROLAGEM, NO PC (24/09/2026, Bryan: "quando
-     estiver rolando a pagina sobe um balao do lado direito e depois um do
-     lado esquerdo, casando com o fim do rolamento"). Fixos nas MARGENS (so'
-     >= 1440 px, onde a grade de 1180 deixa lateral livre), guiados pela
-     rolagem da pagina inteira: o da direita atravessa a tela entre 15% e 60%
-     do caminho; o da esquerda entre 55% e 100% -- chega ao topo exatamente no
-     fim. Sem suporte ao recurso, o script do fim da pagina escreve --prog. */
-  .sobe-rolagem { display: none; }
+  /* ⭐ UM BALAO POR BLOCO DE PRODUTOS (24/09/2026, Bryan: "um balao por bloco
+     ate' o 3o bloco; se estender, repete o primeiro; posicao aleatoria, sem
+     dois visiveis na mesma tela -- vao fazer as pessoas olharem mais o bloco").
+     Substitui os 2 baloes FIXOS da rolagem. A grade nao tem blocos no DOM (os
+     cartoes entram direto no #grade), entao "bloco" = ~1,4 altura de tela:
+     o script `baloesPorBloco` espalha um balao a cada bloco, na MARGEM (so'
+     >= 1440, onde a grade de 1180 deixa lateral), lado alternado, tipo em
+     ciclo. Cada um sobe enquanto o PROPRIO trecho passa pela tela
+     (animation-timeline: view()) -- um de cada vez, por construcao.
+     Premium (mantido): deriva lateral e balanco pelo RELOGIO no <img>. */
+  .balao-bloco { display: none; }
   @media (min-width: 1440px) {
-    .sobe-rolagem { display: block; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-    .sobe { position: absolute; top: 0; width: 92px; opacity: 0; }
-    .sobe img { width: 100%; height: auto; display: block;
-      filter: drop-shadow(0 8px 12px rgba(20, 16, 30, .14)); }
-    .sobe.dir { right: calc((100vw - 1180px) / 4 - 46px); }
-    .sobe.esq { left: calc((100vw - 1180px) / 4 - 46px); }
+    #grade { position: relative; }
+    .balao-bloco { display: block; position: absolute; width: 92px; pointer-events: none; z-index: 0; }
+    .balao-bloco img { width: 100%; height: auto; display: block; transform-origin: 50% 90%;
+      filter: drop-shadow(0 14px 18px rgba(20, 16, 30, .12)); }
   }
-  @keyframes subirTela {
-    0%   { transform: translateY(105vh) scale(.92); opacity: 0; }
-    8%   { opacity: 1; }
-    92%  { opacity: 1; }
-    100% { transform: translateY(-45vh) scale(1.04); opacity: 0; }
+  @supports (animation-timeline: view()) {
+    @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+      .balao-bloco { animation: blocoSobe linear both; animation-timeline: view();
+        animation-range: cover 0% cover 100%; }
+    }
   }
-  /* ⭐ PREMIUM (24/09, Bryan: "gostei demais dos baloes descendo a pagina,
-     tem como dar um efeito mais premium"). A subida reta lia como elevador.
-     Balao de verdade DERIVA de lado e BALANCA no proprio eixo, cada um no seu
-     tempo -- e isso corre pelo RELOGIO, no <img>, enquanto a subida corre
-     pela ROLAGEM, no <span> (propriedades separadas, nao brigam). Periodos
-     4.9 s e 3.7 s: nunca coincidem. A escala .92 -> 1.04 da' profundidade. */
-  .sobe img { filter: drop-shadow(0 14px 18px rgba(20, 16, 30, .12)); transform-origin: 50% 90%; }
   @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
-    .sobe img { animation: sobeDeriva 4.9s ease-in-out infinite alternate,
-                           sobeBalanco 3.7s ease-in-out infinite alternate; }
-    .sobe.esq img { animation-duration: 5.6s, 4.3s; animation-delay: -2.1s, -1.3s; }
+    .balao-bloco img { animation: sobeDeriva 4.9s ease-in-out infinite alternate,
+                                  sobeBalanco 3.7s ease-in-out infinite alternate; }
+    .balao-bloco:nth-of-type(2n) img { animation-duration: 5.6s, 4.3s; animation-delay: -2.1s, -1.3s; }
+  }
+  @keyframes blocoSobe {
+    0%   { transform: translateY(30vh) scale(.92); opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { transform: translateY(-30vh) scale(1.04); opacity: 0; }
   }
   @keyframes sobeDeriva  { from { translate: -10px 0; } to { translate: 10px 0; } }
   @keyframes sobeBalanco { from { rotate: -5deg; } to { rotate: 5deg; } }
-  @supports (animation-timeline: scroll()) {
-    @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
-      .sobe { animation: subirTela linear both; animation-timeline: scroll(root); }
-      .sobe.dir { animation-range: 15% 60%; }
-      .sobe.esq { animation-range: 55% 100%; }
-    }
-  }
-  @supports not (animation-timeline: scroll()) {
-    @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
-      .sobe.dir { --f: clamp(0, calc((var(--prog, 0) - .15) / .45), 1); }
-      .sobe.esq { --f: clamp(0, calc((var(--prog, 0) - .55) / .45), 1); }
-      .sobe { transform: translateY(calc(105vh - var(--f) * 150vh)) scale(calc(.92 + var(--f) * .12));
-        opacity: clamp(0, calc(min(var(--f), 1 - var(--f)) * 12), 1); }
-    }
-  }
   /* ⭐ O VARAL "INAUGURACAO" (24/09/2026, arte do Bryan, letra por letra).
      A faixa inteira ficou "espremida, enfiada de qualquer jeito" (Bryan) --
      cada letra agora e' um balao: separadas por erosao + dono mais proximo
@@ -2816,7 +2799,6 @@
 </style>
 
 <div class="luz" aria-hidden="true"></div>
-<div class="sobe-rolagem" aria-hidden="true"><span class="sobe dir"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" loading="lazy"></span><span class="sobe esq"><img src="/baloes/inaug_porcento.webp" alt="" decoding="async" loading="lazy"></span></div>
 <div class="faixa">
   <header>
     <!-- ⭐ baloes da inauguracao (24/09/2026). Enfeite puro: aria-hidden, sem
@@ -4969,6 +4951,8 @@
       tn.parentNode.replaceChild(frag, tn);
     });
   }
+  // a linha viva do topo chama isto a cada preco novo (ver `fecharPreco`)
+  window.__partirPreco = function (el) { if (!dgReduz) { partirPreco(el); } };
   function tremularPrecos(raiz) {
     if (dgReduz) { return; }
     var lista = (raiz || document).querySelectorAll(".item .preco:not([data-dg]), .cap-preco:not([data-dg])");
@@ -4987,6 +4971,64 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", ligarTremor);
   } else { ligarTremor(); }
+
+  /* ⭐ BALOES POR BLOCO (24/09/2026) -- ver o CSS `.balao-bloco`. Um a cada
+     ~1,4 tela de grade, lado ALTERNADO, altura sorteada sem nunca juntar dois,
+     tipo em ciclo: 1o, 2o, 3o, e recomeca. Refaz quando a grade cresce
+     ("ver mais") ou a janela muda; ignora as proprias insercoes. */
+  var BALOES_BLOCO = ["inaug_laranja", "inaug_porcento", "inaug_estrela"];
+  var mqBloco = window.matchMedia ? matchMedia("(min-width: 1440px)") : null;
+  var alturaBloco = 0, qtdBloco = 0;
+  function baloesPorBloco() {
+    var g = document.getElementById("grade");
+    if (!g || !mqBloco || !mqBloco.matches) { return; }
+    // passo = 1,4 tela; o sorteio de altura nunca deixa o vao entre dois
+    // baloes menor que 1 tela + 220 px (altura do balao): nunca dois juntos.
+    var h = g.offsetHeight, passo = Math.round(innerHeight * 1.4);
+    var folga = Math.max(0, passo - innerHeight - 220);
+    var n = Math.max(0, Math.floor((h - 200) / passo));
+    if (n === qtdBloco && Math.abs(h - alturaBloco) < passo / 2) { return; }
+    alturaBloco = h; qtdBloco = n;
+    Array.prototype.slice.call(g.querySelectorAll(".balao-bloco")).forEach(function (b) { b.remove(); });
+    // lado ALTERNA (Bryan: "um de um lado, um do outro"); so' o 1o e' sorteado
+    var comeca = Math.random() < .5 ? 0 : 1;
+    // centro de cada MARGEM, medido (a grade tem 944 px, nao 1180 -- medi)
+    var rg = g.getBoundingClientRect();
+    var mEsq = rg.left, mDir = document.documentElement.clientWidth - rg.right;
+    for (var i = 0; i < n; i++) {
+      var lado = (i + comeca) % 2 ? "dir" : "esq";
+      var s = document.createElement("span");
+      s.className = "balao-bloco " + lado; s.setAttribute("aria-hidden", "true");
+      s.style.top = (200 + i * passo + Math.round(Math.random() * folga)) + "px";
+      if (lado === "esq") { s.style.left = -Math.round(mEsq / 2 + 46) + "px"; }
+      else { s.style.right = -Math.round(mDir / 2 + 46) + "px"; }
+      var im = document.createElement("img");
+      im.src = "/baloes/" + BALOES_BLOCO[i % BALOES_BLOCO.length] + ".webp";
+      im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+      s.appendChild(im); g.appendChild(s);
+    }
+  }
+  function ligarBaloesBloco() {
+    var g = document.getElementById("grade");
+    if (!g || !mqBloco) { return; }
+    var pedido = false;
+    var refaz = function () { if (pedido) { return; } pedido = true;
+      setTimeout(function () { pedido = false; baloesPorBloco(); }, 400); };
+    new MutationObserver(function (lista) {
+      for (var k = 0; k < lista.length; k++) {
+        var ns = lista[k].addedNodes;
+        for (var m = 0; m < ns.length; m++) {
+          if (!(ns[m].classList && ns[m].classList.contains("balao-bloco"))) { refaz(); return; }
+        }
+      }
+    }).observe(g, { childList: true });
+    addEventListener("resize", refaz, { passive: true });
+    if (mqBloco.addEventListener) { mqBloco.addEventListener("change", refaz); }
+    refaz();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ligarBaloesBloco);
+  } else { ligarBaloesBloco(); }
 
   function desenhar() {
     // ⭐ a grade real substitui o indice estatico do crawler (17/09/2026)
@@ -6353,6 +6395,10 @@
         aPreco.classList.remove("entra");
         void aPreco.offsetWidth;
         aPreco.classList.add("entra");
+        // ⭐ 24/09 (Bryan: "o efeito dos numeros balancando no hero tambem"):
+        // o preco entra INTEIRO aqui (so' o nome e' digitado), entao da' para
+        // partir em caracteres como na grade. O riscado (<s>) fica de fora.
+        if (window.__partirPreco) { aPreco.removeAttribute("data-dg"); window.__partirPreco(aPreco); }
         // ⭐ O CTA NASCE COM O PRECO. Bryan, 20/09: "o preco mostra mas a
         // pessoa nao sabe que ela tem que clicar pra ir pro produto". O
         // problema e' AFFORDANCE, nao falta de informacao: a linha inteira
@@ -6728,10 +6774,7 @@
       var s = mq.matches ? Math.min(1, Math.max(0, y / 320)) : 0;
       var s2 = mq.matches ? Math.min(1, Math.max(0, (y - 120) / 400)) : 0;
       alvo.style.setProperty("--solta", s.toFixed(3));
-      alvo.style.setProperty("--solta2", s2.toFixed(3));
-      var sr = document.querySelector(".sobe-rolagem");
-      if (sr) { var tot = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-        sr.style.setProperty("--prog", Math.min(1, y / tot).toFixed(4)); } }
+      alvo.style.setProperty("--solta2", s2.toFixed(3)); }
     addEventListener("scroll", function () { if (!pedido) { pedido = true; requestAnimationFrame(pinta); } }, { passive: true });
     pinta();
   } catch (e) {}

@@ -2419,7 +2419,6 @@
     .estrela-centro.dir { left: calc(50% + 400px); }
     .estrela-centro img { width: 100%; height: auto; display: block;
       filter: drop-shadow(0 8px 12px rgba(20, 16, 30, .14)); }
-    .festa .balao:nth-child(3) { visibility: hidden; }
   }
   @media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
     .estrela-centro.esq { animation: balanca 6.6s ease-in-out -1.5s infinite alternate; }
@@ -2441,13 +2440,30 @@
     transform: translateY(calc(var(--arco) * var(--sag) + var(--dy) * var(--lh))); }
   .varal picture { display: block; transform-origin: 50% 100%; }
   .varal img { height: var(--lh); width: auto; display: block; }
+  /* ⭐ 24/09 (Bryan: "cada um com vida propria, movimentos extremamente
+     leves e sutis"). A onda em fase (2.6s, atraso por letra) era um coro. Agora
+     cada letra tem DOIS movimentos independentes -- sobe/desce num periodo,
+     gira noutro -- nas propriedades `translate` e `rotate` (separadas, nao
+     brigam; Safari 14.1+). Periodos sorteados (semente fixa 2409) entre
+     3.1-5.3 s e 4.3-7.9 s, nenhum multiplo do outro: o conjunto nunca repete
+     o mesmo quadro. Amplitude 1-2 px e 1.5-3 graus. */
   @media (prefers-reduced-motion: no-preference) {
-    .varal picture { animation: onda 2.6s ease-in-out calc(var(--i) * -.19s) infinite alternate; }
+    .varal picture { animation: vSobe var(--d1) ease-in-out var(--a1) infinite alternate,
+                                vGira var(--d2) ease-in-out var(--a2) infinite alternate; }
   }
-  @keyframes onda {
-    from { transform: translateY(-1.5px) rotate(-4deg); }
-    to   { transform: translateY(1.5px) rotate(4deg); }
-  }
+  @keyframes vSobe { from { translate: 0 calc(var(--amp) * -1); } to { translate: 0 var(--amp); } }
+  @keyframes vGira { from { rotate: calc(var(--rot) * -1); } to { rotate: var(--rot); } }
+  .varal span:nth-child(1) picture { --d1:3.99s; --d2:5.39s; --a1:-1.25s; --a2:-0.71s; --amp:1.2px; --rot:2.5deg; }
+  .varal span:nth-child(2) picture { --d1:5.09s; --d2:5.99s; --a1:-3.2s; --a2:-4.92s; --amp:1.9px; --rot:2.3deg; }
+  .varal span:nth-child(3) picture { --d1:3.18s; --d2:4.77s; --a1:-2.37s; --a2:-1.6s; --amp:1.9px; --rot:1.7deg; }
+  .varal span:nth-child(4) picture { --d1:3.66s; --d2:4.83s; --a1:-1.17s; --a2:-0.1s; --amp:1.6px; --rot:1.8deg; }
+  .varal span:nth-child(5) picture { --d1:3.59s; --d2:7.07s; --a1:-2.08s; --a2:-2.19s; --amp:1.2px; --rot:2.8deg; }
+  .varal span:nth-child(6) picture { --d1:4.6s; --d2:5.98s; --a1:-1.06s; --a2:-4.4s; --amp:1.7px; --rot:1.8deg; }
+  .varal span:nth-child(7) picture { --d1:3.44s; --d2:6.34s; --a1:-0.97s; --a2:-6.32s; --amp:1.2px; --rot:2.6deg; }
+  .varal span:nth-child(8) picture { --d1:3.67s; --d2:5.87s; --a1:-0.73s; --a2:-2.85s; --amp:1.2px; --rot:1.6deg; }
+  .varal span:nth-child(9) picture { --d1:4.83s; --d2:7.18s; --a1:-2.23s; --a2:-1.59s; --amp:1.7px; --rot:2.4deg; }
+  .varal span:nth-child(10) picture { --d1:4.84s; --d2:4.57s; --a1:-0.91s; --a2:-0.47s; --amp:1.2px; --rot:1.9deg; }
+  .varal span:nth-child(11) picture { --d1:4.83s; --d2:5.57s; --a1:-2.27s; --a2:-2.91s; --amp:1.8px; --rot:1.6deg; }
   /* celular: o varal toma o lugar da estrela e da boca (o vao entre elas e'
      de 112 px, nao cabe). `visibility` para a grade nao reposicionar. */
   @media (max-width: 759px) {
@@ -2624,7 +2640,7 @@
       <div class="lado festa">
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laranja_p.webp"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laco_p.webp"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
-        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_estrela_p.webp"><img src="/baloes/inaug_estrela.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_porcento_p.webp"><img src="/baloes/inaug_porcento.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_etiqueta_p.webp"><img src="/baloes/inaug_etiqueta.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_sacola_p.webp"><img src="/baloes/inaug_sacola.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua corda-lupa"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_lupa_p.webp"><img src="/baloes/inaug_lupa.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>

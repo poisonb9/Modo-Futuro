@@ -1231,6 +1231,26 @@ def marcar_capa(dados: list[dict]) -> dict | None:
     trocas = []
     for p in dados:
         p.pop("capa", None)
+    # ⭐ CAPA FIXADA A MAO (24/09/2026, Bryan: "ja' sobe o SSD pra vitrine").
+    # `estado/capa_fixa.json` = {"id": "...", "ate": "AAAA-MM-DDTHH:MM"} (UTC).
+    # Vale ate' `ate`; depois o rodizio volta sozinho. E' ordem do dono: passa
+    # por cima da regua E do piso da foto -- o log diz isso com todas as letras.
+    import json as _json, datetime as _dt
+    fixa = RAIZ / "estado" / "capa_fixa.json"
+    if fixa.exists():
+        try:
+            f = _json.loads(fixa.read_text(encoding="utf-8"))
+            if _dt.datetime.utcnow().isoformat() < str(f.get("ate") or ""):
+                for p in dados:
+                    if str(p.get("id")) == str(f.get("id")) and not p.get("vitrine_fora"):
+                        p["capa"] = True
+                        p["fogo"] = True
+                        print("capa: FIXADA A MAO ate' " + str(f.get("ate")) + " UTC -- "
+                              + (p.get("nome") or "")[:46])
+                        return p
+                print("capa: fixada a mao, mas o id " + str(f.get("id")) + " nao esta' no catalogo -- segue a regua")
+        except (ValueError, OSError) as e:
+            print("capa: capa_fixa.json ilegivel (" + str(e) + ") -- segue a regua")
     cand = []
     for p in dados:
         if p.get("vitrine_fora"):

@@ -10,7 +10,7 @@
 <meta name="robots" content="noindex, follow">
 <style>
 :root{--tinta:#16151c;--fraco:#6f6b7d;--linha:#e6e3ec;--fundo:#faf9fc;--caixa:#fff;--ouro:#C8901A}
-@media(prefers-color-scheme:dark){:root{--tinta:#f4f2f9;--fraco:#a5a1b4;--linha:#2b2733;--fundo:#0f0e13;--caixa:#191823;--ouro:#F0B62E}}
+@media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 24-09: so' fundo branco (Bryan) */{:root{--tinta:#f4f2f9;--fraco:#a5a1b4;--linha:#2b2733;--fundo:#0f0e13;--caixa:#191823;--ouro:#F0B62E}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--fundo);color:var(--tinta);font:16px/1.6 Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 .faixa{max-width:640px;margin:0 auto;padding:40px 18px 64px}

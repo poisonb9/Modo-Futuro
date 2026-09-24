@@ -50,7 +50,7 @@
     --aviso-fundo: #FFF6DA;
     --raio: 14px;
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) and (prefers-color-scheme: light) /* TRAVADO-SEMPRE-CLARO 24-09: so' fundo branco (Bryan) */ {
     :root:not([data-theme="light"]) {
       --tinta:       #F2EFF4;
       --tinta-fraca: #A7A0B2;
@@ -130,7 +130,7 @@
   /* o balao do canal: enfeite puro ao lado do brasao, fio pendurado da foto
      original. Absoluto, sem toque, parado em reduced-motion. */
   .balao-canal {
-    position: absolute; top: -4px; left: calc(50% + 62px); width: 58px;
+    position: absolute; top: 26px; left: calc(50% + 62px); width: 58px;
     pointer-events: none; transform-origin: 50% 100%;
   }
   .balao-canal img { width: 100%; height: auto; display: block;
@@ -143,6 +143,45 @@
     from { transform: translate3d(0, -5px, 0) rotate(-3deg); }
     to   { transform: translate3d(0, 5px, 0) rotate(3deg); }
   }
+  /* ⭐ A INAUGURACAO NAS BIOS (24/09/2026, Bryan: "aplicar o conceito de
+     inauguracao nos sites de cada bio tambem"). O mesmo varal do site mae,
+     em arco por cima do brasao (as pontas descem pelos lados), letras com
+     vida propria (dois periodos independentes, mesma semente 2409), e um arco
+     pequeno de festa: laranja e laco a` esquerda, o balao do canal (que ja'
+     existia) e o cupom a` direita. O topo ganha 30 px para o varal respirar.
+     Enfeite puro: absoluto, aria-hidden, sem toque. */
+  .topo { padding-top: 30px; }
+  .varal-bio { position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 1px; pointer-events: none;
+    --lh: 21px; --sag: 10px; z-index: 1; }
+  .varal-bio span { display: block;
+    transform: translateY(calc(var(--arco) * var(--sag) + var(--dy) * var(--lh))); }
+  .varal-bio img { height: var(--lh); width: auto; display: block; }
+  .festa-bio { position: absolute; pointer-events: none; transform-origin: 50% 100%; }
+  .festa-bio img { width: 100%; height: auto; display: block; }
+  .festa-bio.laranja { width: 30px; top: 70px; left: calc(50% - 150px); }
+  .festa-bio.laco    { width: 32px; top: 40px; left: calc(50% - 116px); }
+  .festa-bio.cupom   { width: 30px; top: 74px; left: calc(50% + 116px); }
+  @media (prefers-reduced-motion: no-preference) {
+    .varal-bio img { animation: vbSobe var(--d1) ease-in-out var(--a1) infinite alternate,
+                               vbGira var(--d2) ease-in-out var(--a2) infinite alternate; }
+    .festa-bio.laranja { animation: flutuar 6.1s ease-in-out -1.4s infinite alternate; }
+    .festa-bio.laco    { animation: flutuar 7.3s ease-in-out -3.9s infinite alternate; }
+    .festa-bio.cupom   { animation: flutuar 6.7s ease-in-out -2.2s infinite alternate; }
+  }
+  @keyframes vbSobe { from { translate: 0 calc(var(--amp) * -1); } to { translate: 0 var(--amp); } }
+  @keyframes vbGira { from { rotate: calc(var(--rot) * -1); } to { rotate: var(--rot); } }
+  .varal-bio span:nth-child(1) img { --d1:3.99s; --d2:5.39s; --a1:-1.25s; --a2:-0.71s; --amp:1.2px; --rot:2.5deg; }
+  .varal-bio span:nth-child(2) img { --d1:5.09s; --d2:5.99s; --a1:-3.2s; --a2:-4.92s; --amp:1.9px; --rot:2.3deg; }
+  .varal-bio span:nth-child(3) img { --d1:3.18s; --d2:4.77s; --a1:-2.37s; --a2:-1.6s; --amp:1.9px; --rot:1.7deg; }
+  .varal-bio span:nth-child(4) img { --d1:3.66s; --d2:4.83s; --a1:-1.17s; --a2:-0.1s; --amp:1.6px; --rot:1.8deg; }
+  .varal-bio span:nth-child(5) img { --d1:3.59s; --d2:7.07s; --a1:-2.08s; --a2:-2.19s; --amp:1.2px; --rot:2.8deg; }
+  .varal-bio span:nth-child(6) img { --d1:4.6s; --d2:5.98s; --a1:-1.06s; --a2:-4.4s; --amp:1.7px; --rot:1.8deg; }
+  .varal-bio span:nth-child(7) img { --d1:3.44s; --d2:6.34s; --a1:-0.97s; --a2:-6.32s; --amp:1.2px; --rot:2.6deg; }
+  .varal-bio span:nth-child(8) img { --d1:3.67s; --d2:5.87s; --a1:-0.73s; --a2:-2.85s; --amp:1.2px; --rot:1.6deg; }
+  .varal-bio span:nth-child(9) img { --d1:4.83s; --d2:7.18s; --a1:-2.23s; --a2:-1.59s; --amp:1.7px; --rot:2.4deg; }
+  .varal-bio span:nth-child(10) img { --d1:4.84s; --d2:4.57s; --a1:-0.91s; --a2:-0.47s; --amp:1.2px; --rot:1.9deg; }
+  .varal-bio span:nth-child(11) img { --d1:4.83s; --d2:5.57s; --a1:-2.27s; --a2:-2.91s; --amp:1.8px; --rot:1.6deg; }
   /* ⚠️ O TOPO E' O UNICO LUGAR QUE TODO MUNDO VE'.
 
      MEDIDO nesta operacao: 98,7% do trafego vem da Para Voce e a
@@ -566,6 +605,22 @@
   </section>
 
   <header class="topo">
+    <div class="varal-bio" aria-hidden="true">
+      <span style="--i:1;--arco:1.00;--dy:0"><img src="/baloes/letra_01_p.webp" alt=""></span>
+      <span style="--i:2;--arco:0.64;--dy:0"><img src="/baloes/letra_02_p.webp" alt=""></span>
+      <span style="--i:3;--arco:0.36;--dy:0"><img src="/baloes/letra_03_p.webp" alt=""></span>
+      <span style="--i:4;--arco:0.16;--dy:0"><img src="/baloes/letra_04_p.webp" alt=""></span>
+      <span style="--i:5;--arco:0.04;--dy:0"><img src="/baloes/letra_05_p.webp" alt=""></span>
+      <span style="--i:6;--arco:0.00;--dy:0"><img src="/baloes/letra_06_p.webp" alt=""></span>
+      <span style="--i:7;--arco:0.04;--dy:0"><img src="/baloes/letra_07_p.webp" alt=""></span>
+      <span style="--i:8;--arco:0.16;--dy:0"><img src="/baloes/letra_08_p.webp" alt=""></span>
+      <span style="--i:9;--arco:0.36;--dy:0.1"><img src="/baloes/letra_09_p.webp" alt=""></span>
+      <span style="--i:10;--arco:0.64;--dy:-0.11"><img src="/baloes/letra_10_p.webp" alt=""></span>
+      <span style="--i:11;--arco:1.00;--dy:0"><img src="/baloes/letra_11_p.webp" alt=""></span>
+    </div>
+    <span class="festa-bio laranja" aria-hidden="true"><img src="/baloes/inaug_laranja_p.webp" alt=""></span>
+    <span class="festa-bio laco" aria-hidden="true"><img src="/baloes/inaug_laco_p.webp" alt=""></span>
+    <span class="festa-bio cupom" aria-hidden="true"><img src="/baloes/inaug_etiqueta_p.webp" alt=""></span>
     <span class="balao-canal" aria-hidden="true"><img id="balao_canal" alt="" decoding="async"></span>
     <div class="avatar" id="avatar"></div>
     <div class="heroi">

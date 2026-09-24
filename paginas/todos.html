@@ -1852,7 +1852,7 @@
       --gh: clamp(320px, 40vh, 440px); height: var(--gh);
       padding: 14px 14px 0; background: #fff; box-sizing: content-box;
     }
-    #vitrine .vitrine.com-galeria .vgal .vfoto {
+    #vitrine .vitrine.com-galeria .vgal .vgal-grande {
       height: 100%; width: auto; aspect-ratio: 1; object-fit: contain;
       padding: 3%; box-sizing: border-box; clip-path: none; border-radius: 16px;
       background: #fff; view-transition-name: vgal-grande;
@@ -4781,7 +4781,7 @@
     if (!fotos || fotos.length < 3 || !velha) { return; }
     var gal = el("div", "vgal");
     var grande = document.createElement("img");
-    grande.className = "vfoto"; grande.alt = velha.alt || ""; grande.src = fotos[0];
+    grande.className = "vgal-grande"; grande.alt = velha.alt || ""; grande.src = fotos[0];
     grande.decoding = "async";
     gal.appendChild(grande);
     var mini = el("div", "vmini");

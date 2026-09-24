@@ -2406,6 +2406,34 @@
      posicao propria, e for'ca-los a `relative` mudaria onde eles desenham.
      Os baloes nao cruzam o texto por construcao (moram nas laterais). */
   .baloes { position: absolute; inset: 0; pointer-events: none; }
+  /* ⭐ A FAIXA "INAUGURACAO" (24/09/2026, arte do Bryan). O arco dela
+     CONTORNA o logo por cima: as letras do meio passam acima do brasao e as
+     pontas descem pelos lados. No celular as pontas encostam na estrela e na
+     boca e ficam ATRAS delas (a faixa vem antes dos .lado no HTML), entao le'
+     como faixa amarrada nos dois baloes -- sem empurrar o topo para baixo
+     ("topo entrega produto"). O vao entre as pontas e' ~49% da largura: cabe
+     o logo de 86 px a partir de ~180 px de faixa. */
+  .faixa-inaug { position: absolute; left: 50%; top: 6px; width: 212px;
+    transform: translateX(-50%); display: block; }
+  .faixa-inaug img { width: 100%; height: auto; display: block; }
+  @media (prefers-reduced-motion: no-preference) {
+    .faixa-inaug { animation: faixaBalanca 7.8s ease-in-out -2.4s infinite alternate; }
+  }
+  @keyframes faixaBalanca {
+    from { transform: translateX(-50%) translateY(-2px) rotate(-.8deg); }
+    to   { transform: translateX(-50%) translateY(2px) rotate(.8deg); }
+  }
+  /* ⛔ 1a tentativa (medida na previa): estrela e boca na FRENTE das pontas
+     cobriam o "IN" e o "AO" -- o vao entre elas e' de 112 px. No celular a
+     faixa TOMA O LUGAR das duas e vira o trecho do meio do arco (laranja,
+     laco, faixa, chef, carrinho). `visibility`, nao `display`: a grade de 3
+     colunas nao pode reposicionar os vizinhos. */
+  @media (max-width: 759px) {
+    .festa .balao:nth-child(3), .canais .balao:nth-child(1) { visibility: hidden; }
+    .faixa-inaug { top: 4px; width: 206px; }
+  }
+  @media (max-height: 740px) and (max-width: 759px) { .faixa-inaug { top: 0; width: 176px; } }
+  @media (min-width: 760px) { .faixa-inaug { top: 2px; width: 290px; } }
   .lado { position: absolute; display: grid; }
   .balao { display: flex; justify-content: center; align-items: flex-start; }
   .flutua {
@@ -2471,17 +2499,29 @@
      com animation-timeline; aqui o cupom e o cifrao (troca pedida pelo Bryan no lugar do MF) sobem e somem enquanto a
      pessoa desce para a vitrine. Sem suporte (Safari antigo), ficam parados. */
   @media (max-width: 759px) {
+    /* 24/09 04:02 (print do Bryan, iPhone 14 e 12): cupom descia sobre o "Eu"
+       e o cifrao ficava solto no meio. Agora os dois ESPELHADOS, colados na
+       borda de fora (5vw acompanha a largura do aparelho, inclusive o zoom de
+       tela do iPhone 12) e na altura de "ACHADINHO TOTAL" -- a linha curta,
+       onde sobra lateral. Tamanho casado pela ALTURA VISIVEL do balao: o
+       cupom e' largo, o cifrao e' alto, entao caixas diferentes. */
     .festa .balao:nth-child(4), .canais .balao:nth-child(5) {
-      display: flex; position: absolute; top: 96px; opacity: .82;
+      display: flex; position: absolute; top: 92px; opacity: .9;
     }
-    .festa .balao:nth-child(4) { right: 22px; }
-    .canais .balao:nth-child(5) { left: 22px; }
-    .festa .balao:nth-child(4) .flutua, .canais .balao:nth-child(5) .flutua { --t: 28px; }
-    /* o cifrao e' ALTO (216x360): na mesma caixa quadrada do cupom (largo) ele
-       sai com o dobro da altura e encostou no "garimpo." (print 24/09 00:02) */
-    .canais .balao:nth-child(5) { margin-top: -6px; }
-    .canais .balao:nth-child(5) .flutua { --t: 24px; }
+    .festa .balao:nth-child(4) { left: 5vw; }
+    .canais .balao:nth-child(5) { right: 5vw; }
+    .festa .balao:nth-child(4) .flutua { --t: 34px; }
+    .canais .balao:nth-child(5) .flutua { --t: 26px; }
+    /* ⛔ Safari iOS: drop-shadow + camada animada pinta um RETANGULO que tampa
+       o clarao quente atras do titulo (print 04:02, estrela/boca/chef). A
+       sombra num balao de 36 px nem se ve'; no celular sai. */
+    .lado .flutua img { filter: none; }
   }
+  /* ⭐ SOLTAR NA ROLAGEM. Com suporte (Safari 26+/iOS 26, Chrome 115+) e' CSS
+     puro; sem suporte (iPhone em iOS antigo) o script no fim da pagina
+     escreve --solta (0..1) no .baloes a cada quadro de rolagem -- o MESMO
+     efeito, com a mesma curva. */
+  @keyframes soltar { to { transform: translateY(-150px) scale(.8); opacity: 0; } }
   @supports (animation-timeline: scroll()) {
     @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
       .festa .balao:nth-child(4), .canais .balao:nth-child(5) {
@@ -2490,9 +2530,16 @@
       }
     }
   }
-  @keyframes soltar { to { transform: translateY(-150px) scale(.8); opacity: 0; } }
+  @supports not (animation-timeline: scroll()) {
+    @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
+      .festa .balao:nth-child(4), .canais .balao:nth-child(5) {
+        transform: translateY(calc(var(--solta, 0) * -150px)) scale(calc(1 - var(--solta, 0) * .2));
+        opacity: calc(.9 - var(--solta, 0) * .9);
+      }
+    }
+  }
   @media (max-height: 740px) and (max-width: 759px) {
-    .festa .balao:nth-child(4), .canais .balao:nth-child(5) { top: 72px; } }
+    .festa .balao:nth-child(4), .canais .balao:nth-child(5) { top: 70px; } }
   @media (max-height: 740px) { .lado { top: 8px; height: 70px; } .lado .flutua { --t: 28px; }
     .festa .balao:nth-child(1), .canais .balao:nth-child(3) { margin-top: 30px; }
     .festa .balao:nth-child(2), .canais .balao:nth-child(2) { margin-top: 13px; } }
@@ -2531,6 +2578,7 @@
          primeiros de cada lado aparecem. Os arquivos sobem em /baloes/ pelo
          `_por_icone` do publicador, nos DOIS diretorios do deploy. -->
     <div class="baloes" aria-hidden="true">
+      <picture class="faixa-inaug"><source media="(max-width: 759px)" srcset="/baloes/faixa_inauguracao_p.webp"><img src="/baloes/faixa_inauguracao.webp" alt="" decoding="async" fetchpriority="low"></picture>
       <div class="lado festa">
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laranja_p.webp"><img src="/baloes/inaug_laranja.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laco_p.webp"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
@@ -6273,6 +6321,23 @@
   // a vitrine e' remontada a cada desenhar(): observa a grade
   new MutationObserver(tentar).observe(document.getElementById("vitrine"), { childList: true });
   tentar();
+})();
+</script>
+<script>
+/* 24/09: fallback do "soltar na rolagem" para Safari sem animation-timeline
+   (ver CSS "SOLTAR NA ROLAGEM"). So' celular, so' sem reduced-motion. */
+(function () {
+  try {
+    if (window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()")) { return; }
+    var mq = matchMedia("(max-width: 759px) and (prefers-reduced-motion: no-preference)");
+    var alvo = document.querySelector(".baloes"); if (!alvo) { return; }
+    var pedido = false;
+    function pinta() { pedido = false;
+      var s = mq.matches ? Math.min(1, Math.max(0, (window.scrollY || 0) / 320)) : 0;
+      alvo.style.setProperty("--solta", s.toFixed(3)); }
+    addEventListener("scroll", function () { if (!pedido) { pedido = true; requestAnimationFrame(pinta); } }, { passive: true });
+    pinta();
+  } catch (e) {}
 })();
 </script>
 </html>

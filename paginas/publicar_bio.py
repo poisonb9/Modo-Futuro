@@ -2885,7 +2885,9 @@ def _por_icone(destino) -> None:
                           ("og_buque.png", "og_buque.png"),
                           ("og_buque_v3.png", "og_buque_v3.png"),
                           # v4 = v3 com acabamento (contraste 1,07, cor 1,05, nitidez leve)
-                          ("og_buque_v4.png", "og_buque_v4.png")):
+                          ("og_buque_v4.png", "og_buque_v4.png"),
+                          # so' a logo no branco, padrao grandes marcas (24/09): ferramentas/og_logo.py
+                          ("og_logo.png", "og_logo.png")):
         origem = aqui / arquivo
         if origem.exists():
             (destino / nome).write_bytes(origem.read_bytes())

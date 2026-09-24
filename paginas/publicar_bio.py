@@ -2916,11 +2916,23 @@ def publicar_no_ar(html: str, parceiros: str = "",
     _por_privacidade(pasta, privacidade)
     try:
         for proj in PROJETOS:
-            subprocess.run(["npx", "--yes", "wrangler", "pages", "deploy",
-                            str(pasta), "--project-name", proj,
-                            "--commit-dirty=true"],
-                           env=amb, check=True, capture_output=True,
-                           shell=(os.name == "nt"))
+            # 24/09/2026: o deploy de 01:10 caiu com rc=1 e o log so' tinha o
+            # traceback -- o motivo do wrangler morria no capture_output.
+            # Na falha, imprime o fim da saida dele antes de estourar.
+            try:
+                subprocess.run(["npx", "--yes", "wrangler", "pages", "deploy",
+                                str(pasta), "--project-name", proj,
+                                "--commit-dirty=true"],
+                               env=amb, check=True, capture_output=True,
+                               shell=(os.name == "nt"))
+            except subprocess.CalledProcessError as e:
+                def _fim(b):
+                    t = (b or b"").decode("utf-8", "replace") if isinstance(b, bytes) else (b or "")
+                    return t.strip()[-2000:]
+                print(f"  NAO publicou: {proj} (wrangler rc={e.returncode})")
+                for linha in (_fim(e.stderr) or _fim(e.stdout) or "(sem saida)").splitlines():
+                    print(f"  wrangler Error: {linha}")
+                raise
             print(f"  publicado: {proj}")
         # ⭐ O SITE MAE: mesma arte, outro papel. A raiz recebe o catalogo, e
         # `/parceiros` vai junto porque e' o endereco que o Awin abre.

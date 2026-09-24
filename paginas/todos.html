@@ -2503,6 +2503,26 @@
     .coracao-convite img { width: 100%; height: auto; display: block;
       filter: drop-shadow(0 10px 16px rgba(120, 10, 20, .16)); }
   }
+  /* ⭐ CELULAR (24/09, print do Bryan: "diminua a caixa para caber os dois
+     coracoes"): a caixa estreita 46 px de cada lado e os coracoes (versao
+     _p, fita engrossada) moram nesse vao, na altura do titulo. O texto
+     encolheu para 1 linha de explicacao -- 3 linhas pesavam a 390 px. */
+  @media (max-width: 759px) {
+    .convite { position: relative; margin-left: 46px; margin-right: 46px; padding: 18px 14px; }
+    .convite h2 { font-size: 16px; }
+    .convite p { font-size: 13px; margin-bottom: 12px; }
+    .convite .botao { font-size: 12.5px; padding: 12px 13px; gap: 6px; white-space: nowrap; max-width: 100%; box-sizing: border-box; }
+    .coracao-convite { display: block; position: absolute; top: 6px; width: 34px;
+      pointer-events: none; transform-origin: 50% 100%; }
+    .coracao-convite picture { display: block; }
+    .coracao-convite img { width: 100%; height: auto; display: block; }
+    .coracao-convite.esq { left: -42px; }
+    .coracao-convite.dir { right: -42px; }
+  }
+  @media (max-width: 759px) and (prefers-reduced-motion: no-preference) {
+    .coracao-convite.esq { animation: balanca 6.8s ease-in-out -2.6s infinite alternate; }
+    .coracao-convite.dir { animation: balanca 7.9s ease-in-out -5.1s infinite alternate; --gira: -2.5deg; }
+  }
   @media (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
     .coracao-convite.esq { animation: balanca 6.8s ease-in-out -2.6s infinite alternate; }
     .coracao-convite.dir { animation: balanca 7.9s ease-in-out -5.1s infinite alternate; --gira: -2.5deg; }
@@ -2906,10 +2926,10 @@
        de afiliado, poucas linhas abaixo). Nova frase promete so' o que e'
        verdade: a notificacao no celular, sem precisar abrir o site. -->
   <section class="convite">
-    <span class="coracao-convite esq" aria-hidden="true"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></span>
-    <span class="coracao-convite dir" aria-hidden="true"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></span>
-    <h2>Receba as melhores ofertas no seu celular</h2>
-    <p>Sem precisar abrir o site: cada queda de preço boa que eu encontro cai direto no seu Telegram.</p>
+    <span class="coracao-convite esq" aria-hidden="true"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_coracao_p.webp"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></picture></span>
+    <span class="coracao-convite dir" aria-hidden="true"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_coracao_p.webp"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" loading="lazy"></picture></span>
+    <h2>As quedas de preço no seu celular</h2>
+    <p>Cada queda boa que eu encontro cai direto no seu Telegram.</p>
     <a class="botao" href="https://t.me/achadinhototal" target="_blank" rel="noopener" id="tg">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg>
       Entrar no Achadinho Total &rarr;

@@ -1,5 +1,5 @@
 {
-  "quando": "2026-09-23T15:07:28+00:00",
+  "quando": "2026-09-24T15:18:21+00:00",
   "programas": {
     "Nike BR": "joined",
     "Kabum BR": "joined",
@@ -23,7 +23,6 @@
     "MAC Cosmeticos BR": "pending",
     "Kitchenaid BR": "pending",
     "Quero Passagem BR": "pending",
-    "Drogaria Araujo BR": "pending",
     "Vult BR": "pending",
     "Jo Malone BR": "pending",
     "Brinox Shop BR": "pending",
@@ -53,6 +52,7 @@
     "Kipling BR": "rejected",
     "Centauro BR": "rejected",
     "Eudora BR": "rejected",
+    "Drogaria Araujo BR": "rejected",
     "Continental BR": "rejected",
     "Avon BR": "rejected",
     "Allianz Travel BR": "rejected",

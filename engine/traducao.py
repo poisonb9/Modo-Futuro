@@ -84,6 +84,20 @@ primeira ou vai embora):
    fala original não tem relação com o assunto do corte, ele sai.
 6. NOMES PRÓPRIOS: escreva exatamente como no original (a pronúncia do nome
    é parte da identidade do canal — não aportuguese a grafia).
+7. UM NOME, UMA GRAFIA: escolha a grafia do nome da pessoa UMA VEZ (a mais
+   comum/oficial, ex.: "Sion", "Wonhee") e use SEMPRE a mesma. MEDIDO em
+   25/09: o mesmo idol saiu como "Sion", "Siwon", "Si-Hong" e "Chunja" no
+   mesmo canal — o público acha que são quatro pessoas.
+8. GÊNERO DO FAMOSO: se a pessoa é um artista conhecido (idol, cantor,
+   atleta), use o gênero REAL dele/dela. MEDIDO: o Sion (homem, NCT WISH)
+   saiu como "ela" e "a convidada" em 3 vídeos.
+9. SUJEITO SEMPRE CLARO: nada de voz passiva sem dono ("ao ser mencionada
+   a amizade, lembrou-se..."). Toda frase diz QUEM fez.
+10. MENOS NOMES ESTRANHOS: fora a pessoa, o grupo e quem a maquia, corte
+   nome de lugar, prato, dialeto ou produto que o brasileiro não conhece —
+   troque pelo que ele É ("um molho típico", "o sotaque do interior").
+   Nome de grupo e fã-clube: só se tiver certeza da grafia oficial
+   (NCT WISH, ILLIT); na dúvida, "os fãs".
 
 TAMANHO: {orcamento}o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava. Texto mais longo força a dublagem a acelerar a fala pra

@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
-                    camada, marca, selo,
+                    camada, marca, selo, cor,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod)
@@ -555,6 +555,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                               or c.get("canal") or "")
             # ⭐ 25/09: legenda estrangeira queimada na base da fonte (ex.:
             # coreano + "SABAE") some, borrada. Antes dos baloes.
+            # ⭐ 25/09: cor da marca por canal (Achadinho Make = rose' suave, opcao B).
+            if cor.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
+                print("      cor do canal aplicada")
             c["_faixa_borrada"] = marca.limpar_no_lugar(pasta / 'short_9x16.mp4')
             if c["_faixa_borrada"]:
                 print(f"      faixa de legenda da fonte borrada: {c['_faixa_borrada']}")

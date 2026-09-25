@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
-                    camada, marca,
+                    camada, marca, selo,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod)
@@ -27,6 +27,11 @@ for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
         _stream.reconfigure(encoding="utf-8")
 
+
+
+def canais_registro_canonico(nome):
+    from engine import canais_registro
+    return canais_registro.canonico(nome) or (nome or "")
 
 def _limpar(nome: str) -> str:
     for c in '<>:"/\\|?*':
@@ -553,6 +558,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             c["_faixa_borrada"] = marca.limpar_no_lugar(pasta / 'short_9x16.mp4')
             if c["_faixa_borrada"]:
                 print(f"      faixa de legenda da fonte borrada: {c['_faixa_borrada']}")
+            # ⭐ 25/09: selo "NOME · PARTE N" quando o tema ja' apareceu no canal.
+            # Nome = 1a tag (regra de nomes da selecao). So' onde a camada liga.
+            if camada.ligado(_canal_cascata):
+                _tags = c.get("tags") or []
+                _nome = (str(_tags[0]).strip().title() if _tags else "")
+                _parte = selo.parte_do_tema(
+                    canais_registro_canonico(_canal_cascata), _nome) if _nome else 1
+                if selo.aplicar_no_lugar(pasta / 'short_9x16.mp4', _nome, _parte):
+                    print(f"      selo da serie: {_nome} parte {_parte}")
             if camada.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
                 print('      camada aplicada')
             elif cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):

@@ -15,6 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
+                    camada,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod)
@@ -537,7 +538,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # chamada: a variavel de ambiente primeiro, o clipe como reserva.
             _canal_cascata = (os.environ.get("CANAL_ESPERADO")
                               or c.get("canal") or "")
-            if cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
+            if camada.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
+                print('      camada aplicada')
+            elif cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
                 print('      cascata de CTA aplicada')
 
             if not so_vertical:

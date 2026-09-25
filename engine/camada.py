@@ -17,10 +17,14 @@ from PIL import Image
 
 ATIVOS = Path(__file__).resolve().parent / "camada"
 W, H, FPS = 1080, 1920, 30
-DUR = 16.0
 FOLGA = 22
 BORDA = 1000
-FIM_ANTES_S = 0.6
+INICIO_S = 3.0
+DUR_A = 10.6
+DUR_B = 6.2
+B_FRAC = 0.40
+B_MIN_S = 14.5
+B_FIM_S = 0.5
 
 POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590), "e3": (250, 1585)}
 
@@ -134,11 +138,13 @@ class _Cruza:
             tela.alpha_composite(av, (xa, ya))
 
 
-def cena(n: int = 6, semente: int = 7) -> list:
+def cena(n: int = 6, semente: int = 7, parte: str = "a") -> list:
+    if parte == "b":
+        return [_Cruza(0.0, fica=3.4)]
     rnd = random.Random(semente)
     base = [_img("c1", 150), _img("c2", 150)]
     els: list = []
-    t, passo = 0.3, 0.14
+    t, passo = 0.0, 0.12
     bx, by = POS["a"]
     for i in range(n):
         b = base[i % 2]
@@ -148,13 +154,21 @@ def cena(n: int = 6, semente: int = 7) -> list:
                          by + rnd.uniform(-FOLGA, FOLGA), rnd.uniform(60, 240),
                          rnd.uniform(0, 6.28), rnd.uniform(12, 30)))
         t += passo
-        passo *= 1.35
-    els.append(_Sobe(_img("c2", 190), t + 0.25, 3.4, bx, by, 110, 1.0, 12))
-    els.append(_Para(_img("e1", 190), 4.3, 1.3, *POS["e1"]))
-    els.append(_Para(_img("e2", 200), 6.9, 1.3, *POS["e2"]))
-    els.append(_Para(_img("e3", 210), 9.5, 3.4, *POS["e3"]))
-    els.append(_Cruza(9.5, fica=3.4))
+        passo *= 1.3
+    els.append(_Sobe(_img("c2", 190), t + 0.15, 3.0, bx, by, 110, 1.0, 12))
+    els.append(_Para(_img("e1", 190), 2.6, 1.0, *POS["e1"]))
+    els.append(_Para(_img("e2", 200), 4.4, 1.0, *POS["e2"]))
+    els.append(_Para(_img("e3", 210), 6.0, 3.4, *POS["e3"]))
     return els
+
+
+def plano(dur_video: float) -> list[tuple[str, float]]:
+    """[(parte, inicio_s)] que cabem neste video."""
+    p = [("a", INICIO_S)] if dur_video >= INICIO_S + DUR_A * 0.6 else []
+    ib = max(B_FRAC * dur_video, B_MIN_S)
+    if ib + DUR_B <= dur_video - B_FIM_S:
+        p.append(("b", ib))
+    return p
 
 
 def pintar(fundo: Image.Image, els, t) -> Image.Image:
@@ -188,50 +202,61 @@ def _guias(im: Image.Image) -> Image.Image:
     return im
 
 
-def gerar(saida: Path, fundo_video: Path | None = None, previa: bool = False,
-          n: int = 6) -> Path:
-    """`previa`: mp4 com fundo e guias. Senao: .mov com alfa (ProRes 4444)."""
-    els = cena(n)
-    quadros = int(DUR * FPS)
-    if previa:
-        enc = ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20"]
-    else:
-        enc = ["-c:v", "prores_ks", "-profile:v", "4444", "-pix_fmt", "yuva444p10le"]
+def gerar(saida: Path, parte: str = "a", n: int = 6) -> Path:
+    """.mov com alfa (ProRes 4444) de uma parte."""
+    els = cena(n, parte=parte)
+    quadros = int((DUR_A if parte == "a" else DUR_B) * FPS)
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",
-           "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", *enc, str(saida)]
+           "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "prores_ks",
+           "-profile:v", "4444", "-pix_fmt", "yuva444p10le", str(saida)]
     vazio = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    liso = Image.new("RGBA", (W, H), (40, 38, 46, 255))
-    fundo = None
-    if previa and fundo_video:
-        bruto = subprocess.run(
-            ["ffmpeg", "-loglevel", "error", "-ss", "30", "-i", str(fundo_video),
-             "-t", str(DUR), "-vf", f"scale={W}:{H}:force_original_aspect_ratio=increase,"
-             f"crop={W}:{H},fps={FPS}", "-f", "rawvideo", "-pix_fmt", "rgba", "-"],
-            capture_output=True).stdout
-        tam = W * H * 4
-        fundo = [bruto[i:i + tam] for i in range(0, len(bruto) - tam + 1, tam)]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for i in range(quadros):
-        if not previa:
-            base = vazio
-        elif fundo:
-            base = _guias(Image.frombytes("RGBA", (W, H), fundo[min(i, len(fundo) - 1)]))
-        else:
-            base = _guias(liso)
-        p.stdin.write(pintar(base, els, i / FPS).tobytes())
+        p.stdin.write(pintar(vazio, els, i / FPS).tobytes())
     p.stdin.close()
     if p.wait() != 0:
         raise RuntimeError("ffmpeg falhou ao gerar a camada")
     return saida
 
 
+def previa(saida: Path, fundo_video: Path | None = None, dur: float = 30.0,
+           n: int = 6) -> Path:
+    """mp4 simulando um video de `dur` s, com as partes nos seus momentos."""
+    partes = [(cena(n, parte=k), ini, DUR_A if k == "a" else DUR_B)
+              for k, ini in plano(dur)]
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",
+           "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264",
+           "-pix_fmt", "yuv420p", "-crf", "22", str(saida)]
+    liso = Image.new("RGBA", (W, H), (40, 38, 46, 255))
+    src = None
+    if fundo_video:
+        src = subprocess.Popen(
+            ["ffmpeg", "-loglevel", "error", "-ss", "30", "-i", str(fundo_video), "-t",
+             str(dur), "-vf", f"scale={W}:{H}:force_original_aspect_ratio=increase,"
+             f"crop={W}:{H},fps={FPS}", "-f", "rawvideo", "-pix_fmt", "rgba", "-"],
+            stdout=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    tam = W * H * 4
+    for i in range(int(dur * FPS)):
+        t = i / FPS
+        raw = src.stdout.read(tam) if src else b""
+        base = _guias(Image.frombytes("RGBA", (W, H), raw) if len(raw) == tam else liso)
+        for els, ini, d in partes:
+            if ini <= t < ini + d:
+                base = pintar(base, els, t - ini)
+        p.stdin.write(base.tobytes())
+    p.stdin.close()
+    p.wait()
+    return saida
+
+
 _CACHE: dict[str, Path] = {}
 
 
-def _mov() -> Path:
-    if "mov" not in _CACHE or not _CACHE["mov"].exists():
-        _CACHE["mov"] = gerar(Path(tempfile.mkdtemp()) / "camada.mov")
-    return _CACHE["mov"]
+def _mov(parte: str) -> Path:
+    if parte not in _CACHE or not _CACHE[parte].exists():
+        _CACHE[parte] = gerar(Path(tempfile.mkdtemp()) / f"{parte}.mov", parte)
+    return _CACHE[parte]
 
 
 def ligado(canal: str) -> bool:
@@ -241,16 +266,21 @@ def ligado(canal: str) -> bool:
 
 
 def aplicar(video: Path, destino: Path) -> Path | None:
-    """Sobrepoe a camada terminando perto do fim do video. None se nao deu."""
+    """Sobrepoe as partes que cabem (ver `plano`). None se nada cabe."""
     r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                         "-of", "csv=p=0", str(video)], capture_output=True, text=True)
-    dur = float(r.stdout.strip())
-    ini = max(0.0, dur - DUR - FIM_ANTES_S)
-    filtro = (f"[1:v]setpts=PTS-STARTPTS+{ini:.3f}/TB[c];"
-              f"[0:v][c]overlay=0:0:eof_action=pass:format=auto[v]")
+    pl = plano(float(r.stdout.strip()))
+    if not pl:
+        return None
+    entradas, filtros, ant = [], [], "0:v"
+    for i, (k, ini) in enumerate(pl, start=1):
+        entradas += ["-i", str(_mov(k))]
+        filtros.append(f"[{i}:v]setpts=PTS-STARTPTS+{ini:.3f}/TB[c{i}];"
+                       f"[{ant}][c{i}]overlay=0:0:eof_action=pass:format=auto[v{i}]")
+        ant = f"v{i}"
     subprocess.run(
-        ["ffmpeg", "-y", "-v", "error", "-i", str(video), "-i", str(_mov()),
-         "-filter_complex", filtro, "-map", "[v]", "-map", "0:a?",
+        ["ffmpeg", "-y", "-v", "error", "-i", str(video), *entradas,
+         "-filter_complex", ";".join(filtros), "-map", f"[{ant}]", "-map", "0:a?",
          "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
          "-c:a", "copy", "-movflags", "+faststart", str(destino)],
         check=True, capture_output=True)
@@ -264,7 +294,8 @@ def aplicar_no_lugar(video: Path, canal: str) -> bool:
         return False
     novo = video.with_name(video.stem + "_c.mp4")
     try:
-        aplicar(video, novo)
+        if aplicar(video, novo) is None:
+            return False
         r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                             "-of", "csv=p=0", str(novo)], capture_output=True, text=True)
         if r.returncode != 0 or not r.stdout.strip():
@@ -284,10 +315,11 @@ def main() -> None:
     a.add_argument("--video", type=Path)
     a.add_argument("--canal")
     a.add_argument("--n", type=int, default=6)
+    a.add_argument("--dur", type=float, default=30.0)
     o = a.parse_args()
     if o.previa:
         Path(o.previa).parent.mkdir(parents=True, exist_ok=True)
-        print(gerar(Path(o.previa), o.video, previa=True, n=o.n))
+        print(previa(Path(o.previa), o.video, o.dur, o.n))
     elif o.video:
         CANAIS.add(o.canal or "")
         destino = o.video.with_name(o.video.stem + "_c.mp4")

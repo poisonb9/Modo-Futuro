@@ -19,16 +19,16 @@ ATIVOS = Path(__file__).resolve().parent / "camada"
 W, H, FPS = 1080, 1920, 30
 FOLGA = 22
 BORDA = 1000
-INICIO_S = 3.0
-DUR_A = 10.6
+INICIO_S = 2.0
+DUR_A = 9.6
 DUR_B = 6.2
 B_FRAC = 0.40
-B_MIN_S = 14.5
+B_MIN_S = 12.5
 B_FIM_S = 0.5
 
 POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590), "e3": (250, 1585)}
 
-CANAIS: set[str] = set()
+CANAIS: set[str] = {"truque.importado"}
 
 
 def _img(nome: str, largura: int) -> Image.Image:
@@ -156,9 +156,9 @@ def cena(n: int = 6, semente: int = 7, parte: str = "a") -> list:
         t += passo
         passo *= 1.3
     els.append(_Sobe(_img("c2", 190), t + 0.15, 3.0, bx, by, 110, 1.0, 12))
-    els.append(_Para(_img("e1", 190), 2.6, 1.0, *POS["e1"]))
-    els.append(_Para(_img("e2", 200), 4.4, 1.0, *POS["e2"]))
-    els.append(_Para(_img("e3", 210), 6.0, 3.4, *POS["e3"]))
+    els.append(_Para(_img("e1", 190), 1.8, 1.0, *POS["e1"]))
+    els.append(_Para(_img("e2", 200), 3.2, 1.0, *POS["e2"]))
+    els.append(_Para(_img("e3", 210), 4.5, 3.4, *POS["e3"]))
     return els
 
 

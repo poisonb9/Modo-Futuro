@@ -18,6 +18,7 @@ from PIL import Image
 ATIVOS = Path(__file__).resolve().parent / "camada"
 W, H, FPS = 1080, 1920, 30
 FOLGA = 22
+REVELA_ANTES_S = 2.8
 BORDA = 1000
 INICIO_S = 2.3
 DUR_A = 9.6
@@ -278,11 +279,38 @@ def aplicar(video: Path, destino: Path) -> Path | None:
         filtros.append(f"[{i}:v]setpts=PTS-STARTPTS+{ini:.3f}/TB[c{i}];"
                        f"[{ant}][c{i}]overlay=0:0:eof_action=pass:format=auto[v{i}]")
         ant = f"v{i}"
+    # sons: estalo em cada coracao (parte A) + sino na revelacao (fim)
+    dur = float(r.stdout.strip())
+    momentos = []
+    for k, ini in pl:
+        if k == "a":
+            momentos += [("s1", ini + e.t0, 0.7) for e in cena(parte="a")
+                         if isinstance(e, _Sobe)]
+    if dur > REVELA_ANTES_S + 4:
+        momentos.append(("s2", dur - REVELA_ANTES_S, 1.0))
+    n = 1 + len(pl)
+    audio, rotulos = [], []
+    for j, (som, t, vol) in enumerate(momentos):
+        entradas += ["-i", str(ATIVOS / f"{som}.wav")]
+        ms = int(t * 1000)
+        audio.append(f"[{n + j}:a]adelay={ms}|{ms},volume={vol}[x{j}]")
+        rotulos.append(f"[x{j}]")
+    tem_audio = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries",
+         "stream=index", "-of", "csv=p=0", str(video)],
+        capture_output=True, text=True).stdout.strip() != ""
+    if momentos and tem_audio:
+        filtros += audio
+        filtros.append(f"[0:a]{''.join(rotulos)}amix=inputs={len(rotulos) + 1}:"
+                       f"normalize=0:duration=first[aa]")
+        mapa_a, cod_a = ["-map", "[aa]"], ["-c:a", "aac", "-b:a", "192k"]
+    else:
+        mapa_a, cod_a = ["-map", "0:a?"], ["-c:a", "copy"]
     subprocess.run(
         ["ffmpeg", "-y", "-v", "error", "-i", str(video), *entradas,
-         "-filter_complex", ";".join(filtros), "-map", f"[{ant}]", "-map", "0:a?",
+         "-filter_complex", ";".join(filtros), "-map", f"[{ant}]", *mapa_a,
          "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
-         "-c:a", "copy", "-movflags", "+faststart", str(destino)],
+         *cod_a, "-movflags", "+faststart", str(destino)],
         check=True, capture_output=True)
     return destino
 

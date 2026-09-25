@@ -29,16 +29,11 @@ def checar(cond, recado):
         falhas.append(recado)
 
 
-print("1. cada canal com destino tem a sua chamada")
-checar("livro" in chamada.do_canal("semanestesia.pod").lower(),
-       "o Sem Anestesia chama pro LIVRO, que e' o produto que estreia la'")
-checar(chamada.do_canal("truque.importado") == "",
-       "o Achadinho Make NAO tem chamada (retirada em 25/09)")
-checar(chamada.do_canal("@achadinho.make") == "",
-       "e pelo arroba tambem nao (resolve pelo registro)")
-# aceita apelido e arroba, como o resto do motor
-checar(chamada.do_canal("@semanestesia.pod") == chamada.do_canal("semanestesia.pod"),
-       "resolve pelo registro: arroba e apelido dao a mesma chamada")
+print("1. desde 25/09/2026 NENHUM canal tem chamada (decisao do dono)")
+for _c in ("semanestesia.pod", "truque.importado", "@achadinho.make",
+           "cozinha.importada", "fatura.chora", "achadinhos.instantaneos",
+           "atefalhar", "modofuturo"):
+    checar(chamada.do_canal(_c) == "", f"{_c}: sem chamada")
 
 print("\n2. NEGATIVO — canal desconhecido nao ganha chamada nenhuma")
 # ⚠️ Esta e' a metade que importa. Uma chamada generica no canal errado e'

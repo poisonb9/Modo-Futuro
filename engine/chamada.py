@@ -41,28 +41,9 @@ from . import canais_registro
 # ⚠️ Cada uma diz O QUE TEM la', em vez de mandar clicar. E nenhuma promete o
 # que a pagina nao entrega hoje: o @semanestesia.pod fala do livro porque o
 # livro existe; os canais de achadinho falam do grupo porque o grupo existe.
-CHAMADA = {
-    "semanestesia.pod":
-        "O livro que nasceu deste canal está no link da bio.",
-    # truque.importado: SEM chamada desde 25/09/2026 (decisao do dono).
-    "cozinha.importada":
-        "As receitas e os achadinhos da cozinha estão no link da bio.",
-    "fatura.chora":
-        "As promoções que valem a pena estão no link da bio.",
-    "achadinhos.instantaneos":
-        "O achadinho de hoje está no link da bio.",
-    # ⚠️ ENTROU EM 12/09/2026, quando o canal ganhou destino. Ate' entao ele
-    # estava de fora junto com o @modofuturo, e estava certo assim: nao tinha
-    # grupo nem produto. Agora aponta pro Achadinho Total, como os outros.
-    #
-    # ⚠️ E ISSO CUSTA O GRUPO DE CONTROLE. Ele e o @modofuturo eram os dois
-    # canais SEM chamada, no mesmo mes e no mesmo motor — era com eles que a
-    # calibragem de 12/09 ia ser medida. Sobra um. Com um canal so' de
-    # controle, a comparacao fica mais fraca, e isso tem de estar escrito em
-    # vez de descoberto no proximo export.
-    "atefalhar":
-        "Os achadinhos de academia saem no canal — link na bio.",
-}
+# Vazio desde 25/09/2026: sem chamada em nenhum canal (decisao do dono).
+# Os textos antigos estao guardados fora do repositorio.
+CHAMADA: dict[str, str] = {}
 
 
 def do_canal(canal: str | None) -> str:

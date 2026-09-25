@@ -35,12 +35,16 @@ AQUI = Path(__file__).resolve().parent / "cta"
 W, H, FPS = 1080, 1920, 30
 
 POS = {
-    "curtir": (1000, 1060),       # de onde os coracoes nascem
+    # ⛔ MEDIDO no print do iPhone (25/09): o TikTok AMPLIA o 9x16 pra cobrir a
+    # area acima da barra (924x1805 no iPhone -> x0,940) e corta ~45 px de cada
+    # lado. A coluna de botoes cai em x~954 do video, NAO em 1000 (era o erro:
+    # os coracoes nasciam a direita do botao).
+    "curtir": (954, 1058),        # de onde os coracoes nascem
     # ⭐ 25/09 (Bryan): SIGA fica LA' EMBAIXO, pertinho do @perfil (canto
     # inferior esquerdo, onde a pessoa toca pra abrir o perfil e seguir)
-    "siga": (150, 1560),
-    "comente": (860, 1170),       # a esquerda/acima do botao de comentar
-    "compartilhe": (860, 1450),   # a esquerda/acima do botao de compartilhar
+    "siga": (230, 1560),          # acima do nome do perfil (x~213, y~1667)
+    "comente": (815, 1200),       # a esquerda do botao de comentar (954, 1223)
+    "compartilhe": (815, 1530),   # a esquerda do botao de compartilhar (954, 1559)
 }
 
 
@@ -73,7 +77,7 @@ class Coracao:
         if u < 0 or u > 1:
             return None
         # nasce pequeno no botao, cresce rapido e sobe acelerando de leve
-        esc = 0.35 + 0.65 * _suave(u / 0.18)
+        esc = 0.15 + 0.85 * _suave(u / 0.2)
         y = self.y0 - (self.y0 + self.im.height) * (u ** 1.15)
         x = self.x0 - self.deriva * u + self.amp * math.sin(self.fase + u * 7)
         ang = 8 * math.sin(self.fase + u * 5)
@@ -120,14 +124,14 @@ def cena(coracoes: int = 6, t_curtir: float = 0.3, t_coment: float = 4.3,
     for i in range(coracoes):
         im = base[i % 2].resize((w := rnd.randint(105, 165),
                                  round(base[i % 2].height * w / base[i % 2].width)))
-        elems.append(Coracao(im, t, rnd.uniform(1.5, 1.9), bx - 20, by,
+        elems.append(Coracao(im, t, rnd.uniform(1.5, 1.9), bx, by,
                              rnd.uniform(60, 240), rnd.uniform(0, 6.28),
                              rnd.uniform(12, 30)))
         t += passo
         passo *= 1.35                                      # frequencia caindo
     # ⭐ o ultimo e' o MAIS BONITO (heart2, fita em espiral): maior e devagar.
     # O torto (heart3) saiu por decisao do Bryan em 25/09.
-    elems.append(Coracao(_img("heart2", 190), t + 0.25, 3.4, bx - 30, by,
+    elems.append(Coracao(_img("heart2", 190), t + 0.25, 3.4, bx, by,
                          110, 1.0, 12))
     # comente: o balao CROMADO (o preto some em video escuro)
     elems.append(Estacionado(_img("cta_comente", 190), t_coment, 1.3,
@@ -138,8 +142,8 @@ def cena(coracoes: int = 6, t_curtir: float = 0.3, t_coment: float = 4.3,
     return elems
 
 
-BOTOES = [("avatar", 1000, 880), ("curtir", 1000, 1060), ("comentar", 1000, 1240),
-          ("salvar", 1000, 1390), ("compartilhar", 1000, 1540)]
+BOTOES = [("avatar", 954, 878), ("curtir", 954, 1058), ("comentar", 954, 1223),
+          ("salvar", 954, 1388), ("compartilhar", 954, 1559)]
 
 
 def guias(im: Image.Image) -> Image.Image:
@@ -150,7 +154,7 @@ def guias(im: Image.Image) -> Image.Image:
     for _, x, y in BOTOES:
         d.ellipse([x - 42, y - 42, x + 42, y + 42], outline=(255, 255, 255, 170), width=4)
     # o @perfil (nome do canal), canto inferior esquerdo
-    d.rounded_rectangle([40, 1650, 360, 1700], 12, outline=(255, 255, 255, 170), width=4)
+    d.rounded_rectangle([60, 1640, 420, 1695], 12, outline=(255, 255, 255, 170), width=4)
     return im
 
 
@@ -168,7 +172,7 @@ def pintar(fundo: Image.Image, elems, t) -> Image.Image:
             a = p.getchannel("A").point(lambda v: int(v * alfa))
             p.putalpha(a)
         # (x, y) = centro do CORPO do balao (terco de cima da imagem)
-        tela.alpha_composite(p, (int(x - p.width / 2), int(y - p.height * 0.33)))
+        tela.alpha_composite(p, (int(x - p.width / 2), int(y - p.height * 0.28)))
     return tela
 
 

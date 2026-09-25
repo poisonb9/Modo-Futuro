@@ -311,6 +311,9 @@ def main() -> None:
                         # no agendador, e ele so' le' o manifesto.
                         "fonte_id": m.get("fonte_id", ""),
                         "titulo": m.get("titulo", ""),
+                        # A/B do titulo na tela (engine/ab_titulo.py)
+                        "ab_titulo": m.get("ab_titulo", ""),
+                        "titulo_tela": m.get("titulo_tela", ""),
                         # A pagina da bio le' isto. Vazio = clipe sem capa, que
                         # e' estado normal (clipe anterior a 12/09/2026).
                         "capa_url": capa_url,

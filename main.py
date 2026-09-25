@@ -18,7 +18,7 @@ from engine import (midia, selecao, transcricao, legendas, render, traducao, fal
                     camada, marca, selo, cor, ritmo,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
-                    cauda, gramatica, chamada as chamada_mod)
+                    cauda, gramatica, chamada as chamada_mod, ab_titulo)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -533,6 +533,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             else:
                 _versoes = [(None, "short_9x16.mp4")]
             _fv = ritmo.fator(_canal_leg)   # legenda e' queimada ANTES da velocidade
+            # ⭐ 25/09: A/B do titulo NA TELA (afirmacao x pergunta). O grupo
+            # vai pro post.json e pro manifesto; ver engine/ab_titulo.py.
+            _titulo_tela = ab_titulo.aplicar(c, nome_fonte)
             for _plat, _arq in _versoes:
                 _estreito = ([(a * _fv, b * _fv, f, lado)
                               for a, b, f, lado in camada.janelas(_plat)]
@@ -549,7 +552,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # post — a informação existia e estava sendo jogada fora justamente
                 # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
                 render.vertical(bruto, ass_v, pasta / _arq, audio_dublado,
-                                titulo=c.get("titulo", ""), duracao_max=dur_max,
+                                titulo=_titulo_tela, duracao_max=dur_max,
                                 chamada=texto_chamada)
 
             # ⚠️ A CASCATA VEM DEPOIS DO RENDER, e nunca dentro dele. O
@@ -637,6 +640,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      # nenhum erro em lugar nenhum. E' a MESMA armadilha da
                      # `legenda_premium` acima, com o campo seguinte.
                      "produto", "chamada",
+                     # A/B do titulo na tela (25/09): sem isto no post.json o
+                     # manifesto nao recebe o grupo e o teste nao se le'.
+                     "ab_titulo", "titulo_tela",
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",

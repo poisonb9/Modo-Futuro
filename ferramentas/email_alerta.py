@@ -25,6 +25,9 @@ sys.path.insert(0, str(RAIZ)); sys.path.insert(0, str(RAIZ / "paginas"))
 SITE = "https://achadinhototal.com.br"
 UTM = "utm_source=email&utm_medium=alerta&utm_campaign=alerta_preco"
 SINO_URL = f"{SITE}/baloes/email_sino.png"
+# ⭐ 25/09: topo animado (sino + confete + serpentinas). 1o quadro ja' e' bonito
+# parado, porque o Outlook do PC so' mostra ele.
+TOPO_URL = f"{SITE}/baloes/email_topo_festa.gif"
 SINO_LOCAL = RAIZ / "_privado" / "camada" / "ativos" / "email_sino.webp"
 
 FRASE = {
@@ -105,7 +108,7 @@ def foto_hospedada(p: dict) -> str:
         return orig
 
 
-def montar(p: dict, sinal: str, sino_src: str = SINO_URL, sair_url: str = "",
+def montar(p: dict, sinal: str, sino_src: str = TOPO_URL, sair_url: str = "",
            foto: str = "") -> str:
     e = html.escape
     url = p.get("link") or f"{SITE}/?p={p['id']}&{UTM}"
@@ -123,7 +126,7 @@ def montar(p: dict, sinal: str, sino_src: str = SINO_URL, sair_url: str = "",
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">{e(preheader(p))}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff"><tr><td align="center" style="padding:20px 12px">
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px">
- <tr><td align="center" style="padding:4px 0 0"><img src="{sino_src}" width="110" alt="" style="display:block;width:110px;height:auto"></td></tr>
+ <tr><td align="center" style="padding:0"><img src="{sino_src}" width="520" alt="" style="display:block;width:100%;max-width:520px;height:auto"></td></tr>
  <tr><td align="center" style="padding:6px 20px 0;font:12px/1 Arial,Helvetica,sans-serif;letter-spacing:4px;color:#6b6776">ACHADINHO TOTAL</td></tr>
  <tr><td align="center" style="padding:12px 24px 4px;font:800 26px/1.2 Arial,Helvetica,sans-serif;color:#16141c">Você pediu, eu avisei:<br><span style="color:#c8921c">o preço caiu</span>.</td></tr>
  <tr><td align="center" style="padding:6px 28px 18px;font:16px/1.5 Arial,Helvetica,sans-serif;color:#3b3845">
@@ -177,8 +180,8 @@ if __name__ == "__main__":
     # previa local: o sino embutido (a URL publica so' existe depois de publicar o site)
     from PIL import Image
     import io
-    buf = io.BytesIO(); Image.open(SINO_LOCAL).save(buf, "PNG")
-    sino = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+    sino = "data:image/gif;base64," + base64.b64encode(
+        (RAIZ / "paginas" / "baloes" / "email_topo_festa.gif").read_bytes()).decode()
     saida = RAIZ / "_privado" / "email_alerta.html"
     saida.write_text(montar(p, sinal, sino), encoding="utf-8")
     print("assunto:", assunto(p)); print("preheader:", preheader(p)); print("previa:", saida)

@@ -58,7 +58,7 @@ def top3() -> list[dict]:
 
 
 def montar(p: dict | None, destaques: list[dict], fotos: dict, sair_url: str = "",
-           sino_src: str = ea.SINO_URL) -> str:
+           sino_src: str = ea.TOPO_URL) -> str:
     e = html.escape
     hoje = datetime.now().strftime("%d/%m")
     if p and p.get("nome"):
@@ -74,7 +74,7 @@ def montar(p: dict | None, destaques: list[dict], fotos: dict, sair_url: str = "
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">{e(preheader())}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff"><tr><td align="center" style="padding:20px 12px">
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px">
- <tr><td align="center" style="padding:4px 0 0"><img src="{sino_src}" width="100" alt="" style="display:block;width:100px;height:auto"></td></tr>
+ <tr><td align="center" style="padding:0"><img src="{sino_src}" width="600" alt="" style="display:block;width:100%;max-width:600px;height:auto"></td></tr>
  <tr><td align="center" style="padding:6px 20px 0;font:12px/1 Arial,Helvetica,sans-serif;letter-spacing:4px;color:#6b6776">ACHADINHO TOTAL</td></tr>
  <tr><td align="center" style="padding:12px 20px 6px;font:800 28px/1.15 Arial,Helvetica,sans-serif;color:#16141c">Pronto. Agora eu<br><span style="color:#c8921c">fico de olho</span> pra você.</td></tr>
  <tr><td align="center" style="padding:6px 28px 8px;font:16px/1.55 Arial,Helvetica,sans-serif;color:#3b3845">{pedido}</td></tr>

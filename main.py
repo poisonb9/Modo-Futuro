@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
-                    camada,
+                    camada, marca,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod)
@@ -548,6 +548,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # chamada: a variavel de ambiente primeiro, o clipe como reserva.
             _canal_cascata = (os.environ.get("CANAL_ESPERADO")
                               or c.get("canal") or "")
+            # ⭐ 25/09: legenda estrangeira queimada na base da fonte (ex.:
+            # coreano + "SABAE") some, borrada. Antes dos baloes.
+            c["_faixa_borrada"] = marca.limpar_no_lugar(pasta / 'short_9x16.mp4')
+            if c["_faixa_borrada"]:
+                print(f"      faixa de legenda da fonte borrada: {c['_faixa_borrada']}")
             if camada.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
                 print('      camada aplicada')
             elif cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
@@ -600,6 +605,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      "compartilhabilidade", "independencia",
                      "intensidade_emocional", "valor_social")}
             meta["fonte"] = fonte.name
+            meta["faixa_borrada"] = c.get("_faixa_borrada")
             # ⭐ 25/09/2026 (dono): guardar a LEGENDA/NARRACAO de cada video.
             # Sem isto, analisar a dublagem exigia baixar o clipe e
             # transcrever de volta. Vai no post.json (que sobe pro Drive e

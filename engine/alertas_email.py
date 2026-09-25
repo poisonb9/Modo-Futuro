@@ -32,6 +32,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 ENV = RAIZ / ".env"
 ENVIADOS = RAIZ / "_privado" / "alertas_email_enviados.json"
+BOAS_VINDAS = RAIZ / "_privado" / "boas_vindas_enviados.json"
 SITE = "https://achadinhototal.com.br"
 REF = "lwtqfwkfcknzyyzmuymg"
 TETO_RODADA = 80
@@ -100,11 +101,45 @@ def inscritos() -> dict[str, set[str]]:
     return out
 
 
-def _enviados() -> dict:
+def _enviados(arq: Path = ENVIADOS) -> dict:
     try:
-        return json.loads(ENVIADOS.read_text(encoding="utf-8"))
+        return json.loads(arq.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {}
+
+
+def _hash(email: str) -> str:
+    return hashlib.sha256(email.encode()).hexdigest()[:16]
+
+
+def boas_vindas(insc: dict[str, set[str]], simular: bool, teto: int) -> int:
+    """UMA vez por pessoa: o e-mail de boas-vindas (ferramentas/email_boas_vindas.py).
+    O produto citado e' o primeiro que ela pediu para vigiar."""
+    import email_boas_vindas as bv
+    import publicar_bio as pb
+    ja = _enviados(BOAS_VINDAS)
+    pedido: dict[str, str] = {}
+    for pid, emails in sorted(insc.items()):
+        for em in emails:
+            pedido.setdefault(em, pid)
+    novos = [em for em in sorted(pedido) if _hash(em) not in ja][:teto]
+    if not novos or simular:
+        return len(novos)
+    cat = {str(p.get("id")): p for p in pb.produtos_todos()}
+    n = 0
+    for em in novos:
+        p = cat.get(pedido[em])
+        try:
+            a, corpo = bv.pronto_para_enviar(p, sair_url=link_sair(em))
+            bv.enviar(em, a, corpo, tag="boas-vindas")
+        except Exception as e:                           # noqa: BLE001
+            print(f"alertas_email: boas-vindas falhou ({type(e).__name__})")
+            continue
+        ja[_hash(em)] = date.today().isoformat()
+        n += 1
+        BOAS_VINDAS.parent.mkdir(exist_ok=True)
+        BOAS_VINDAS.write_text(json.dumps(ja, indent=0), encoding="utf-8")
+    return n
 
 
 def rodada(simular: bool = False) -> dict:
@@ -116,9 +151,11 @@ def rodada(simular: bool = False) -> dict:
     saidas = 0 if simular else tratar_saidas()
     insc = inscritos()
     res = {"saidas": saidas, "inscritos": sum(len(v) for v in insc.values()),
-           "produtos_vigiados": len(insc), "com_sinal": 0, "enviados": 0, "falhas": 0}
+           "produtos_vigiados": len(insc), "boas_vindas": 0, "com_sinal": 0,
+           "enviados": 0, "falhas": 0}
     if not insc:
         return res
+    res["boas_vindas"] = boas_vindas(insc, simular, TETO_RODADA // 2)
     sinais = {pid: v for pid, v in alertas.sinais_de_hoje().items() if pid in insc}
     res["com_sinal"] = len(sinais)
     if not sinais:
@@ -133,8 +170,9 @@ def rodada(simular: bool = False) -> dict:
             p.setdefault(k, cartao.get(k, ""))
         if not p.get("nome") or not p.get("preco"):
             continue
+        foto = "" if simular else tpl.foto_hospedada(p)
         for email in sorted(insc[pid]):
-            chave = f"{hashlib.sha256(email.encode()).hexdigest()[:16]}|{pid}|{sinal}|{hoje}"
+            chave = f"{_hash(email)}|{pid}|{sinal}|{hoje}"
             if chave in env:
                 continue
             if res["enviados"] >= TETO_RODADA:
@@ -143,7 +181,8 @@ def rodada(simular: bool = False) -> dict:
                 res["enviados"] += 1
                 continue
             try:
-                tpl.enviar(email, p, tpl.montar(p, sinal, sair_url=link_sair(email)), tag="alerta")
+                tpl.enviar(email, p, tpl.montar(p, sinal, sair_url=link_sair(email),
+                                                foto=foto), tag="alerta")
             except Exception as e:                       # noqa: BLE001
                 res["falhas"] += 1
                 print(f"alertas_email: falha ({type(e).__name__})")

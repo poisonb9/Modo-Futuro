@@ -55,7 +55,58 @@ def _miniatura(u: str) -> str:
     return u
 
 
-def montar(p: dict, sinal: str, sino_src: str = SINO_URL, sair_url: str = "") -> str:
+REF = "lwtqfwkfcknzyyzmuymg"
+BALDE = "email-fotos"
+_CHAVE_SERVICO: list[str] = []
+
+
+def _env(nome: str) -> str:
+    for l in (RAIZ / ".env").read_text(encoding="utf-8").splitlines():
+        if l.startswith(nome + "="):
+            return l.split("=", 1)[1].strip()
+    return ""
+
+
+def _chave_servico() -> str:
+    """Chave de servico do Supabase, pedida na hora com a chave mestra (nao fica em disco)."""
+    if not _CHAVE_SERVICO:
+        r = urllib.request.Request(f"https://api.supabase.com/v1/projects/{REF}/api-keys?reveal=true",
+            headers={"Authorization": "Bearer " + _env("SUPABASE_PAT"), "user-agent": "achadinho-total/1.0"})
+        with urllib.request.urlopen(r, timeout=30) as x:
+            _CHAVE_SERVICO.append(next(k["api_key"] for k in json.load(x) if k.get("name") == "service_role"))
+    return _CHAVE_SERVICO[0]
+
+
+def foto_hospedada(p: dict) -> str:
+    """A foto do produto copiada para o NOSSO armazenamento (Supabase, balde
+    publico `email-fotos`). ⭐ 25/09: a foto direto do AliExpress pode nao
+    abrir em leitor de e-mail que busca imagem por servidor proprio (o Mail
+    do iPhone). Falha aqui = devolve a original; o e-mail nunca deixa de sair."""
+    orig = _miniatura(p.get("imagem") or "")
+    if not orig:
+        return ""
+    try:
+        import io
+        from PIL import Image
+        r = urllib.request.Request(orig, headers={"user-agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(r, timeout=30) as x:
+            im = Image.open(io.BytesIO(x.read())).convert("RGB")
+        im.thumbnail((480, 480))
+        buf = io.BytesIO(); im.save(buf, "JPEG", quality=85, optimize=True)
+        nome = "".join(c for c in str(p.get("id") or "x") if c.isalnum() or c in "-_")[:64] + ".jpg"
+        k = _chave_servico()
+        up = urllib.request.Request(f"https://{REF}.supabase.co/storage/v1/object/{BALDE}/{nome}",
+            data=buf.getvalue(), method="POST",
+            headers={"Authorization": "Bearer " + k, "apikey": k, "Content-Type": "image/jpeg",
+                     "x-upsert": "true", "cache-control": "86400", "user-agent": "achadinho-total/1.0"})
+        urllib.request.urlopen(up, timeout=30).close()
+        return f"https://{REF}.supabase.co/storage/v1/object/public/{BALDE}/{nome}"
+    except Exception:                                    # noqa: BLE001
+        return orig
+
+
+def montar(p: dict, sinal: str, sino_src: str = SINO_URL, sair_url: str = "",
+           foto: str = "") -> str:
     e = html.escape
     url = p.get("link") or f"{SITE}/?p={p['id']}&{UTM}"
     hora = datetime.now().strftime("%d/%m às %H:%M")
@@ -63,7 +114,7 @@ def montar(p: dict, sinal: str, sino_src: str = SINO_URL, sair_url: str = "") ->
              if p.get("queda") else "")
     antes = (f'<div style="padding-top:4px;font:14px/1.3 Arial,Helvetica,sans-serif;color:#8a8696">'
              f'já esteve a <s>{e(p["antes"])}</s>{queda}</div>') if p.get("antes") else ""
-    img = (f'<a href="{url}"><img src="{e(_miniatura(p["imagem"]))}" width="240" alt="{e(_curto(p["nome"]))}" '
+    img = (f'<a href="{url}"><img src="{e(foto or _miniatura(p["imagem"]))}" width="240" alt="{e(_curto(p["nome"]))}" '
            f'style="display:block;width:240px;max-width:100%;height:auto;border-radius:14px;margin:0 auto"></a>'
            if p.get("imagem") else "")
     return f'''<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -132,4 +183,4 @@ if __name__ == "__main__":
     saida.write_text(montar(p, sinal, sino), encoding="utf-8")
     print("assunto:", assunto(p)); print("preheader:", preheader(p)); print("previa:", saida)
     if "--teste" in sys.argv:
-        enviar(sys.argv[sys.argv.index("--teste") + 1], p, montar(p, sinal))
+        enviar(sys.argv[sys.argv.index("--teste") + 1], p, montar(p, sinal, foto=foto_hospedada(p)))

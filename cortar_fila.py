@@ -124,9 +124,10 @@ def tem_cota() -> tuple[bool, str]:
     def _sondar(chave: str) -> str:
         req = urllib.request.Request(
             "https://generativelanguage.googleapis.com/v1beta/models/"
-            f"gemini-3.6-flash:generateContent?key={chave.strip()}",
+            "gemini-3.6-flash:generateContent",
             data=json.dumps({"contents": [{"parts": [{"text": "oi"}]}]}).encode(),
-            headers={"Content-Type": "application/json"})
+            headers={"Content-Type": "application/json",
+                     "x-goog-api-key": chave.strip()})
         try:
             urllib.request.urlopen(req, timeout=TIMEOUT_SONDA_S)
             return "ok"

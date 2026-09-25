@@ -228,10 +228,11 @@ def _pedir(modelo: str, chave: str, img: bytes) -> tuple[str, str]:
         "generationConfig": {"temperature": 0, "maxOutputTokens": 8192},
     }
     url = (f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}"
-           f":generateContent?key={chave}")
+           f":generateContent")
     req = urllib.request.Request(
         url, data=json.dumps(corpo).encode(),
-        headers={"Content-Type": "application/json"})
+        headers={"Content-Type": "application/json",
+                 "x-goog-api-key": chave})
     try:
         d = json.load(urllib.request.urlopen(req, timeout=120))
     except urllib.error.HTTPError as e:

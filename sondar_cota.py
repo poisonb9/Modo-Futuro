@@ -71,9 +71,10 @@ def _classificar(par: tuple[str, str]) -> tuple[str, str]:
     nome, chave = par
     req = urllib.request.Request(
         f"https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{MODELO}:generateContent?key={chave}",
+        f"{MODELO}:generateContent",
         data=json.dumps({"contents": [{"parts": [{"text": "oi"}]}]}).encode(),
-        headers={"Content-Type": "application/json"})
+        headers={"Content-Type": "application/json",
+                 "x-goog-api-key": chave})
     try:
         with urllib.request.urlopen(req, timeout=TIMEOUT_S) as r:
             return nome, "viva" if r.status == 200 else f"http{r.status}"

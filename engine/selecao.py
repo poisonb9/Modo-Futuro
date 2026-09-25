@@ -549,6 +549,23 @@ def _pedir(caminho: Path, mime: str, monta_corpo, oquefaz: str, valida=None) -> 
         f"{modelos}. Último erro: {ultimo_erro}")
 
 
+# ⭐ NOMES QUE AS PESSOAS BUSCAM (25/09/2026). MEDIDO no TikTok Studio do
+# @achadinho.make: quem viu o viral de 83 mil PROCUROU o nome da idol
+# ("wonhee risabae" 18,8%, "maquiagem wonhee", "Rize illit") -- e o post nao
+# dizia quem era. Nome na legenda e nas tags e' o que a busca indexa.
+# ⛔ Nao inventar: sem certeza do nome, nao cita (nome errado e' pior).
+def _regra_nomes(caminho: Path) -> str:
+    origem = caminho.stem.split("__", 1)[-1].replace("_", " ")[:160]
+    return (
+        "\n\nTÍTULO DO VÍDEO DE ORIGEM (pode trazer os nomes): " + origem + "\n"
+        "NOMES: se aparece PESSOA FAMOSA identificável (idol, artista, "
+        "convidado) cujo nome esteja na fala, na tela ou no título de origem, "
+        "(1) a DESCRIÇÃO cita o nome e o grupo/obra na PRIMEIRA frase, e "
+        "(2) as DUAS PRIMEIRAS tags são o nome e o grupo/obra, em minúsculas "
+        "e sem espaço (ex.: 'wonhee', 'illit'). Sem certeza do nome, não cite."
+    )
+
+
 def escolher(caminho: Path, dur_total: float, usar_video: bool,
              qtd: int = config.QTD_CLIPES) -> list[dict]:
     """Devolve os melhores momentos, já com título/descrição/tags.
@@ -565,7 +582,7 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     def corpo(uri):
         return {"contents": [{"parts": [
             {"file_data": {"mime_type": mime, "file_uri": uri}},
-            {"text": prompt},
+            {"text": prompt + _regra_nomes(caminho)},
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 
@@ -630,7 +647,7 @@ def metadados(caminho: Path, usar_video: bool = True) -> dict:
     def corpo(uri):
         return {"contents": [{"parts": [
             {"file_data": {"mime_type": mime, "file_uri": uri}},
-            {"text": PROMPT_METADADOS},
+            {"text": PROMPT_METADADOS + _regra_nomes(caminho)},
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 

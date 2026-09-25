@@ -476,6 +476,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print(f"      cauda muda: {dur_final - dur_max:.1f}s sem voz "
                           f"no fim — clipe aparado pra {dur_max:.1f}s")
                     dur_final = dur_max
+            # ⭐ 25/09: o que NAO foi aparado (piso de 65 s, ou a revelacao do
+            # resultado) deixa de ficar mudo: volta o som original do programa.
+            if audio_dublado is not None:
+                _cheio = cauda.preencher_com_original(
+                    bruto, audio_dublado, ps,
+                    Path(audio_dublado).with_name("trilha_com_fim.wav"))
+                if _cheio:
+                    audio_dublado = _cheio
+                    print("      fim sem fala: som original do programa por baixo")
 
             # ---- a chamada pro link da bio (12/09/2026)
             #

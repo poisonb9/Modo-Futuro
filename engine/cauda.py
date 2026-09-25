@@ -97,3 +97,35 @@ def duracao_util(duracao_total: float, palavras: list[dict] | None,
     if util < dur_min:
         return None
     return round(util, 3)
+
+
+def preencher_com_original(bruto, dublado, palavras, destino):
+    """Trilha dublada + o SOM ORIGINAL a partir de onde a fala acaba.
+
+    ⭐ 25/09/2026 (dono: "o fim do video esta' ficando sem dublagem e o video
+    passando mudo"). O aparo da cauda recusa quando cairia abaixo do DUR_MIN,
+    e em procedimento o fim E' a revelacao do resultado — nao pode ser
+    cortado. Entao, em vez de silencio, entra o audio do programa (musica,
+    reacoes) com fade de 0,8 s. Antes da ultima palavra, o original fica
+    mudo: a dublagem continua sozinha, como sempre.
+
+    Falha ABERTA: qualquer erro devolve None e quem chama segue com a trilha
+    dublada de antes.
+    """
+    import subprocess
+    from pathlib import Path
+    fim = fim_da_fala(palavras)
+    if fim <= 0:
+        return None
+    ini = fim + CAUDA_MARGEM_S
+    filtro = (f"[0:a]volume='if(gte(t,{ini:.3f}),1,0)':eval=frame,"
+              f"afade=t=in:st={ini:.3f}:d=0.8[o];"
+              f"[1:a][o]amix=inputs=2:duration=longest:normalize=0[a]")
+    try:
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(bruto),
+                        "-i", str(dublado), "-filter_complex", filtro,
+                        "-map", "[a]", str(destino)],
+                       check=True, capture_output=True)
+        return Path(destino)
+    except Exception:
+        return None

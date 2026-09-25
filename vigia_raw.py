@@ -271,6 +271,11 @@ def canal_da_pasta(caminho: str) -> str | None:
     return None
 
 
+ENTRADAS_POR_CANAL = {
+    "truque.importado": {"selecao_modo": "procedimento", "amostra_voz": "bruna"},
+}
+
+
 def disparar(file_id: str, nome: str, conta: str = "principal",
              estilo_legenda: str = ESTILO_LEGENDA, canal: str | None = None):
     if not GITHUB_TOKEN:
@@ -290,6 +295,11 @@ def disparar(file_id: str, nome: str, conta: str = "principal",
             # ⚠️ SEM ESTA LINHA o workflow cai no default e o clipe nasce
             # rotulado como modofuturo, seja ele biscoito ou maquiagem.
             **({"canal": canal} if canal else {}),
+            # ⚠️ 25/09/2026: o vigia mandava maquiagem SEM o modo procedimento
+            # (marcado OBRIGATORIO no workflow) e sem a voz da Bruna — o
+            # corte saia no criterio retorico, que termina abrupto. A fila
+            # curada sempre passou os dois; este caminho nao passava.
+            **(ENTRADAS_POR_CANAL.get(canal or "", {})),
         }},
         timeout=30,
     )

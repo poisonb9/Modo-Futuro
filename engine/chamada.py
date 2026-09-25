@@ -44,8 +44,7 @@ from . import canais_registro
 CHAMADA = {
     "semanestesia.pod":
         "O livro que nasceu deste canal está no link da bio.",
-    "truque.importado":
-        "Os achadinhos de hoje, com preço e link, estão na bio.",
+    # truque.importado: SEM chamada desde 25/09/2026 (decisao do dono).
     "cozinha.importada":
         "As receitas e os achadinhos da cozinha estão no link da bio.",
     "fatura.chora":

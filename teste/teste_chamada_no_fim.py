@@ -32,10 +32,12 @@ def checar(cond, recado):
 print("1. cada canal com destino tem a sua chamada")
 checar("livro" in chamada.do_canal("semanestesia.pod").lower(),
        "o Sem Anestesia chama pro LIVRO, que e' o produto que estreia la'")
-checar("bio" in chamada.do_canal("truque.importado").lower(),
-       "o Achadinho Make chama pros achadinhos")
+checar(chamada.do_canal("truque.importado") == "",
+       "o Achadinho Make NAO tem chamada (retirada em 25/09)")
+checar(chamada.do_canal("@achadinho.make") == "",
+       "e pelo arroba tambem nao (resolve pelo registro)")
 # aceita apelido e arroba, como o resto do motor
-checar(chamada.do_canal("@achadinho.make") == chamada.do_canal("truque.importado"),
+checar(chamada.do_canal("@semanestesia.pod") == chamada.do_canal("semanestesia.pod"),
        "resolve pelo registro: arroba e apelido dao a mesma chamada")
 
 print("\n2. NEGATIVO — canal desconhecido nao ganha chamada nenhuma")

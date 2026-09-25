@@ -257,12 +257,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                              "semelhanca": "1.00", "canal": ""}
             print(f"   origem EXATA (veio do upload): {url_origem}")
     if not url_origem:
-        marca = fonte.with_suffix(".origem.txt")
-        if marca.exists():
+        # ⚠️ NAO chamar de `marca`: e' o nome do modulo engine.marca, e
+        # atribuir aqui torna o nome LOCAL na funcao inteira — o
+        # `marca.limpar_no_lugar` la' embaixo pegava este Path (25/09).
+        arq_origem = fonte.with_suffix(".origem.txt")
+        if arq_origem.exists():
             try:
                 from engine import origem as _origem
                 origem_achada = _origem.descobrir(
-                    marca.read_text(encoding="utf-8").strip())
+                    arq_origem.read_text(encoding="utf-8").strip())
                 if origem_achada:
                     url_origem = origem_achada["url"]
                     print(f"   origem provavel ({origem_achada['confianca']}, "

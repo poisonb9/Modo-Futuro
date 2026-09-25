@@ -36,8 +36,10 @@ W, H, FPS = 1080, 1920, 30
 
 POS = {
     "curtir": (1000, 1060),       # de onde os coracoes nascem
-    "siga": (905, 700),           # onde os bonecos estacionam (acima do avatar)
-    "compartilhe": (860, 1450),   # onde a seta estaciona (a esquerda/acima do botao)
+    # ⭐ 25/09 (Bryan): SIGA fica LA' EMBAIXO, pertinho do @perfil (canto
+    # inferior esquerdo, onde a pessoa toca pra abrir o perfil e seguir)
+    "siga": (150, 1560),
+    "compartilhe": (860, 1450),   # a esquerda/acima do botao de compartilhar
 }
 
 
@@ -79,7 +81,7 @@ class Coracao:
 
 
 class Estacionado:
-    """Surge (mola), estaciona balancando, e no fim sobe e some."""
+    """VEM DE BAIXO sutilmente, estaciona balancando, e VOLTA pra baixo."""
 
     def __init__(self, im, t0, fica, x, y):
         self.im, self.t0, self.fica, self.x, self.y = im, t0, fica, x, y
@@ -88,18 +90,18 @@ class Estacionado:
         u = t - self.t0
         if u < 0:
             return None
-        entra, sai = 0.55, 0.9
+        entra, sai = 0.9, 0.8
         if u > entra + self.fica + sai:
             return None
-        esc = 0.2 + 0.8 * _mola(u / entra)
-        dy = 60 * (1 - _suave(u / entra))                 # sobe um pouco ao surgir
+        esc = 0.85 + 0.15 * _mola(u / entra)
+        dy = 420 * (1 - _mola(u / entra))                 # sobe de baixo, com mola leve
         bal = 10 * math.sin(u * 2.4)                       # balanco estacionado
         ang = 4 * math.sin(u * 1.7)
         alfa = min(1.0, u / 0.2)
         fim = u - entra - self.fica
-        if fim > 0:                                        # vai embora pra cima
+        if fim > 0:                                        # desce e some por baixo
             k = _suave(fim / sai)
-            dy -= 900 * k * k
+            dy += 520 * k
             alfa *= 1 - k
         return self.im, self.x, self.y + dy + bal, esc, ang, alfa
 
@@ -107,7 +109,7 @@ class Estacionado:
 def cena(coracoes: int = 6, t_curtir: float = 0.3, t_siga: float = 4.4,
          t_comp: float = 7.4, semente: int = 7) -> list:
     rnd = random.Random(semente)
-    base = [_img("heart1", 150), _img("heart2", 150)]
+    base = [_img("heart1", 150), _img("heart2", 150)]   # rajada
     elems = []
     t = t_curtir
     passo = 0.14
@@ -120,9 +122,10 @@ def cena(coracoes: int = 6, t_curtir: float = 0.3, t_siga: float = 4.4,
                              rnd.uniform(12, 30)))
         t += passo
         passo *= 1.35                                      # frequencia caindo
-    # o ultimo: o torto, maior e devagar
-    elems.append(Coracao(_img("heart3", 175), t + 0.25, 3.2, bx - 30, by,
-                         120, 1.0, 14))
+    # ⭐ o ultimo e' o MAIS BONITO (heart2, fita em espiral): maior e devagar.
+    # O torto (heart3) saiu por decisao do Bryan em 25/09.
+    elems.append(Coracao(_img("heart2", 190), t + 0.25, 3.4, bx - 30, by,
+                         110, 1.0, 12))
     elems.append(Estacionado(_img("cta_siga", 210), t_siga, 2.2, *POS["siga"]))
     elems.append(Estacionado(_img("cta_compartilhe", 200), t_comp, 2.2,
                              *POS["compartilhe"]))
@@ -140,6 +143,8 @@ def guias(im: Image.Image) -> Image.Image:
     d = ImageDraw.Draw(im, "RGBA")
     for _, x, y in BOTOES:
         d.ellipse([x - 42, y - 42, x + 42, y + 42], outline=(255, 255, 255, 170), width=4)
+    # o @perfil (nome do canal), canto inferior esquerdo
+    d.rounded_rectangle([40, 1650, 360, 1700], 12, outline=(255, 255, 255, 170), width=4)
     return im
 
 

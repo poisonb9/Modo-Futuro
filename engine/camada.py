@@ -28,7 +28,66 @@ B_FRAC = 0.40
 B_MIN_S = 16.0
 B_FIM_S = 3.0
 
-POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590), "e3": (250, 1585)}
+# Uma camada por plataforma: cada balao ao lado do SEU botao, e os botoes
+# do Reels ficam ~250 px mais altos que os do TikTok (medido em 25/09).
+# "esc" reduz comente/compartilhe/siga; "e2" e' a peca do compartilhe.
+PLAT = {
+    "tiktok": {"pos": {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590),
+                       "e3": (250, 1555)},
+               "e2": ("e2", 200), "esc": 0.8},
+    "reels": {"pos": {"a": (886, 848), "e1": (760, 992), "e2": (760, 1327),
+                      "e3": (250, 1345)},
+              "e2": ("e2r", 230), "esc": 0.8},
+}
+POS = PLAT["tiktok"]["pos"]
+SUFIXO = {"tiktok": "", "reels": "_reels"}
+ENTRA, SAI = 0.9, 0.8
+MARGEM_COLUNA = 0.20
+FICA = {"e1": FICA_E, "e2": FICA_E, "e3": 3.4}
+LARG = {"e1": 190, "e3": 210}
+
+
+def arquivo(plat: str) -> str:
+    return f"short_9x16{SUFIXO[plat]}.mp4"
+
+
+VAO = 0.25          # respiro entre um balao sair e o proximo entrar
+
+
+def _coracoes(n: int = 6, semente: int = 7, plat: str = "tiktok") -> list:
+    rnd = random.Random(semente)
+    base = [_img("c1", 150), _img("c2", 150)]
+    bx, by = PLAT[plat]["pos"]["a"]
+    els: list = []
+    t, passo = 0.0, 0.12
+    for i in range(n):
+        b = base[i % 2]
+        w = rnd.randint(105, 165)
+        els.append(_Sobe(b.resize((w, round(b.height * w / b.width))), t,
+                         rnd.uniform(1.5, 1.9), bx + rnd.uniform(-FOLGA, FOLGA),
+                         by + rnd.uniform(-FOLGA, FOLGA), rnd.uniform(60, 240),
+                         rnd.uniform(0, 6.28), rnd.uniform(12, 30)))
+        t += passo
+        passo *= 1.3
+    els.append(_Sobe(_img("c2", 190), t + 0.15, 3.0, bx, by, 110, 1.0, 12))
+    return els
+
+
+def tempos(n: int = 6) -> dict[str, float]:
+    """Inicio de cada balao parado. ⛔ NUNCA DOIS BALOES NA TELA (dono,
+    25/09): cada um so' entra quando o anterior saiu — coracoes (a rajada
+    conta como um), depois comente, compartilhe e siga."""
+    fim = max(e.t0 + e.dur for e in _coracoes(n))
+    out = {}
+    for e in ("e1", "e2", "e3"):
+        out[e] = fim + VAO
+        fim = out[e] + ENTRA + FICA[e] + SAI
+    return out
+
+
+def dur_a(plat: str = "tiktok", n: int = 6) -> float:
+    t = tempos(n)
+    return t["e3"] + ENTRA + FICA["e3"] + SAI
 
 CANAIS: set[str] = {"truque.importado"}
 
@@ -90,7 +149,7 @@ class _Para:
 class _Cruza:
     ENTRA, SAI = 1.4, 1.4
 
-    def __init__(self, t0, fica=3.4, y=250):
+    def __init__(self, t0, fica=3.4, y=370):     # abaixo de "Para voce"/"Reels" (25/09)
         self.t0, self.fica, self.y = t0, fica, y
         self.dur = self.ENTRA + fica + self.SAI
         self.av = _img("v1", 330)
@@ -140,28 +199,52 @@ class _Cruza:
             tela.alpha_composite(av, (xa, ya))
 
 
-def cena(n: int = 6, semente: int = 7, parte: str = "a") -> list:
+def cena(n: int = 6, semente: int = 7, parte: str = "a",
+         plat: str = "tiktok") -> list:
     if parte == "b":
         return [_Cruza(0.0, fica=3.4)]
-    rnd = random.Random(semente)
-    base = [_img("c1", 150), _img("c2", 150)]
-    els: list = []
-    t, passo = 0.0, 0.12
-    bx, by = POS["a"]
-    for i in range(n):
-        b = base[i % 2]
-        w = rnd.randint(105, 165)
-        els.append(_Sobe(b.resize((w, round(b.height * w / b.width))), t,
-                         rnd.uniform(1.5, 1.9), bx + rnd.uniform(-FOLGA, FOLGA),
-                         by + rnd.uniform(-FOLGA, FOLGA), rnd.uniform(60, 240),
-                         rnd.uniform(0, 6.28), rnd.uniform(12, 30)))
-        t += passo
-        passo *= 1.3
-    els.append(_Sobe(_img("c2", 190), t + 0.15, 3.0, bx, by, 110, 1.0, 12))
-    els.append(_Para(_img("e1", 190), 1.8, FICA_E, *POS["e1"]))
-    els.append(_Para(_img("e2", 200), 3.2, FICA_E, *POS["e2"]))
-    els.append(_Para(_img("e3", 210), 4.5, 3.4, *POS["e3"]))
+    els = _coracoes(n, semente, plat)
+    t = tempos(n)
+    pos = PLAT[plat]["pos"]
+    for e, im in _parados(plat):
+        els.append(_Para(im, t[e], FICA[e], *pos[e]))
     return els
+
+
+def _parados(plat: str) -> list:
+    cfg = PLAT[plat]
+    e2, l2 = cfg["e2"]
+    return [("e1", _img("e1", round(LARG["e1"] * cfg["esc"]))),
+            ("e2", _img(e2, round(l2 * cfg["esc"]))),
+            ("e3", _img("e3", round(LARG["e3"] * cfg["esc"])))]
+
+
+def janelas(plat: str = "tiktok") -> list[tuple[float, float, float, str]]:
+    """[(inicio, fim, fracao, lado)] no tempo do video final: enquanto um
+    balao parado cruza a faixa da legenda, ela abre espaco do lado dele."""
+    from .legendas import faixa_ocupada
+    topo, base = faixa_ocupada(H)
+    topo -= 40                                   # linha que cresce no estilo 2
+    # a coluna de botoes (e os numeros) fica na altura da legenda nos dois
+    # apps: frase longa nunca passa de x ~865 (medido nos prints, 25/09).
+    # Margem IGUAL dos dois lados: so' a' direita, a legenda ficava sempre
+    # fora do centro e parecia "nao voltar" depois do balao (dono, 25/09).
+    out = [(0.0, 1e9, MARGEM_COLUNA, "ambos")]
+    for e, im in _parados(plat):
+        x, y = PLAT[plat]["pos"][e]
+        a = im.getchannel("A").point(lambda v: 255 if v > 40 else 0)
+        # so' o corpo do balao conta; a fita fina pode cruzar o texto
+        corpo = a.crop((0, 0, im.width, int(im.height * 0.62))).getbbox()
+        if not corpo:
+            continue
+        y0 = y - im.height * 0.28 + corpo[1]
+        y1 = y - im.height * 0.28 + corpo[3]
+        if y1 < topo or y0 > base:
+            continue
+        ini = INICIO_S + tempos()[e]
+        out.append((ini, ini + ENTRA + FICA[e] + SAI, 0.40,
+                    "esq" if x < W / 2 else "dir"))
+    return out
 
 
 def janela_comente() -> tuple[float, float, float]:
@@ -171,10 +254,11 @@ def janela_comente() -> tuple[float, float, float]:
     return (ini, ini + 0.9 + FICA_E + 0.8, 0.40)
 
 
-def plano(dur_video: float) -> list[tuple[str, float]]:
+def plano(dur_video: float, plat: str = "tiktok") -> list[tuple[str, float]]:
     """[(parte, inicio_s)] que cabem neste video."""
-    p = [("a", INICIO_S)] if dur_video >= INICIO_S + DUR_A * 0.6 else []
-    ib = max(B_FRAC * dur_video, B_MIN_S)
+    p = [("a", INICIO_S)] if dur_video >= INICIO_S + dur_a(plat) * 0.6 else []
+    # o aviao tambem e' balao: so' depois de a parte A inteira sair
+    ib = max(B_FRAC * dur_video, B_MIN_S, INICIO_S + dur_a(plat) + VAO)
     if ib + DUR_B <= dur_video - B_FIM_S:
         p.append(("b", ib))
     return p
@@ -211,10 +295,10 @@ def _guias(im: Image.Image) -> Image.Image:
     return im
 
 
-def gerar(saida: Path, parte: str = "a", n: int = 6) -> Path:
+def gerar(saida: Path, parte: str = "a", n: int = 6, plat: str = "tiktok") -> Path:
     """.mov com alfa (ProRes 4444) de uma parte."""
-    els = cena(n, parte=parte)
-    quadros = int((DUR_A if parte == "a" else DUR_B) * FPS)
+    els = cena(n, parte=parte, plat=plat)
+    quadros = int((dur_a(plat) if parte == "a" else DUR_B) * FPS)
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",
            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "prores_ks",
            "-profile:v", "4444", "-pix_fmt", "yuva444p10le", str(saida)]
@@ -229,10 +313,10 @@ def gerar(saida: Path, parte: str = "a", n: int = 6) -> Path:
 
 
 def previa(saida: Path, fundo_video: Path | None = None, dur: float = 30.0,
-           n: int = 6) -> Path:
+           n: int = 6, plat: str = "tiktok") -> Path:
     """mp4 simulando um video de `dur` s, com as partes nos seus momentos."""
-    partes = [(cena(n, parte=k), ini, DUR_A if k == "a" else DUR_B)
-              for k, ini in plano(dur)]
+    partes = [(cena(n, parte=k, plat=plat), ini, dur_a(plat) if k == "a" else DUR_B)
+              for k, ini in plano(dur, plat)]
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",
            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264",
            "-pix_fmt", "yuv420p", "-crf", "22", str(saida)]
@@ -262,10 +346,12 @@ def previa(saida: Path, fundo_video: Path | None = None, dur: float = 30.0,
 _CACHE: dict[str, Path] = {}
 
 
-def _mov(parte: str) -> Path:
-    if parte not in _CACHE or not _CACHE[parte].exists():
-        _CACHE[parte] = gerar(Path(tempfile.mkdtemp()) / f"{parte}.mov", parte)
-    return _CACHE[parte]
+def _mov(parte: str, plat: str = "tiktok") -> Path:
+    chave = f"{plat}_{parte}"
+    if chave not in _CACHE or not _CACHE[chave].exists():
+        _CACHE[chave] = gerar(Path(tempfile.mkdtemp()) / f"{chave}.mov", parte,
+                              plat=plat)
+    return _CACHE[chave]
 
 
 def ligado(canal: str) -> bool:
@@ -274,16 +360,16 @@ def ligado(canal: str) -> bool:
     return bool(nome) and nome in CANAIS
 
 
-def aplicar(video: Path, destino: Path) -> Path | None:
+def aplicar(video: Path, destino: Path, plat: str = "tiktok") -> Path | None:
     """Sobrepoe as partes que cabem (ver `plano`). None se nada cabe."""
     r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                         "-of", "csv=p=0", str(video)], capture_output=True, text=True)
-    pl = plano(float(r.stdout.strip()))
+    pl = plano(float(r.stdout.strip()), plat)
     if not pl:
         return None
     entradas, filtros, ant = [], [], "0:v"
     for i, (k, ini) in enumerate(pl, start=1):
-        entradas += ["-i", str(_mov(k))]
+        entradas += ["-i", str(_mov(k, plat))]
         filtros.append(f"[{i}:v]setpts=PTS-STARTPTS+{ini:.3f}/TB[c{i}];"
                        f"[{ant}][c{i}]overlay=0:0:eof_action=pass:format=auto[v{i}]")
         ant = f"v{i}"
@@ -322,21 +408,25 @@ def aplicar(video: Path, destino: Path) -> Path | None:
     return destino
 
 
-def aplicar_no_lugar(video: Path, canal: str) -> bool:
+def _abre(arq: Path) -> bool:
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(arq)], capture_output=True, text=True)
+    return r.returncode == 0 and bool(r.stdout.strip())
+
+
+def aplicar_no_lugar(video: Path, canal: str, plat: str = "tiktok") -> bool:
     """Troca o arquivo so' se o novo existir e abrir. Falha aberta."""
     video = Path(video)
     if not ligado(canal):
         return False
     novo = video.with_name(video.stem + "_c.mp4")
     try:
-        if aplicar(video, novo) is None:
+        if aplicar(video, novo, plat) is None:
             return False
-        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
-                            "-of", "csv=p=0", str(novo)], capture_output=True, text=True)
-        if r.returncode != 0 or not r.stdout.strip():
+        if not _abre(novo):
             raise RuntimeError("saida nao abre")
     except Exception as e:
-        print(f"      [!] camada falhou ({type(e).__name__}) — video sem ela")
+        print(f"      [!] camada {plat} falhou ({type(e).__name__}) — video sem ela")
         novo.unlink(missing_ok=True)
         return False
     video.unlink(missing_ok=True)
@@ -351,14 +441,15 @@ def main() -> None:
     a.add_argument("--canal")
     a.add_argument("--n", type=int, default=6)
     a.add_argument("--dur", type=float, default=30.0)
+    a.add_argument("--plat", default="tiktok", choices=sorted(PLAT))
     o = a.parse_args()
     if o.previa:
         Path(o.previa).parent.mkdir(parents=True, exist_ok=True)
-        print(previa(Path(o.previa), o.video, o.dur, o.n))
+        print(previa(Path(o.previa), o.video, o.dur, o.n, o.plat))
     elif o.video:
         CANAIS.add(o.canal or "")
-        destino = o.video.with_name(o.video.stem + "_c.mp4")
-        print(aplicar(o.video, destino))
+        destino = o.video.with_name(o.video.stem + (SUFIXO[o.plat] or "_c") + ".mp4")
+        print(aplicar(o.video, destino, o.plat))
 
 
 if __name__ == "__main__":

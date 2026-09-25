@@ -209,6 +209,11 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
               f"nota {nota:.0f}  {clipe.name}")
         try:
             _upload_renomeado(servico, destino, video, nome_video, "video/mp4")
+            # ⭐ 25/09: mesma edicao com os baloes nas posicoes do Reels.
+            reels = clipe / "short_9x16_reels.mp4"
+            if reels.exists():
+                _upload_renomeado(servico, destino, reels, f"{base}_reels.mp4",
+                                  "video/mp4")
             _upload_renomeado(servico, destino, txt, nome_txt, "text/plain")
             # ⭐ 25/09: a legenda falada (narracao) vai junto, pra poder
             # analisar a dublagem sem baixar e transcrever o video de volta.

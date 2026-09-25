@@ -521,24 +521,33 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
 
             lv, av = config.VERTICAL
             _canal_leg = (os.environ.get("CANAL_ESPERADO") or c.get("canal") or "")
-            _estreito = None
+            # ⭐ 25/09: com a camada ligada sai UM 9:16 POR PLATAFORMA (TikTok e
+            # Reels), cada um com a legenda desviando dos SEUS baloes. O caro
+            # (corte, dublagem) ja' foi feito uma vez; aqui so' o render.
+            # O TikTok vai por ULTIMO: `ass_v` segue sendo o dele (ver abaixo).
             if camada.ligado(_canal_leg):
-                _ji, _jf, _jl = camada.janela_comente()
-                _fv = ritmo.fator(_canal_leg)   # legenda e' queimada ANTES da velocidade
-                _estreito = (_ji * _fv, _jf * _fv, _jl)
-            ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
-                                       estilo=estilo_legenda,
-                                       oculto_ate=render.TITULO_SEGUNDOS,
-                                       estreito=_estreito)
-            print("      renderizando 9:16 com face tracking...")
-            status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
-            # O título vai NA TELA nos primeiros segundos, não só na descrição.
-            # O Gemini já devolvia esse campo e ele só era usado como legenda do
-            # post — a informação existia e estava sendo jogada fora justamente
-            # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
-            render.vertical(bruto, ass_v, pasta / "short_9x16.mp4", audio_dublado,
-                            titulo=c.get("titulo", ""), duracao_max=dur_max,
-                            chamada=texto_chamada)
+                _versoes = [(p, camada.arquivo(p)) for p in reversed(camada.PLAT)]
+            else:
+                _versoes = [(None, "short_9x16.mp4")]
+            _fv = ritmo.fator(_canal_leg)   # legenda e' queimada ANTES da velocidade
+            for _plat, _arq in _versoes:
+                _estreito = ([(a * _fv, b * _fv, f, lado)
+                              for a, b, f, lado in camada.janelas(_plat)]
+                             if _plat else None)
+                _suf = camada.SUFIXO[_plat] if _plat else ""
+                ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}{_suf}.ass",
+                                           lv, av, estilo=estilo_legenda,
+                                           oculto_ate=render.TITULO_SEGUNDOS,
+                                           estreito=_estreito)
+                print(f"      renderizando 9:16 com face tracking{' (' + _plat + ')' if _plat else ''}...")
+                status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
+                # O título vai NA TELA nos primeiros segundos, não só na descrição.
+                # O Gemini já devolvia esse campo e ele só era usado como legenda do
+                # post — a informação existia e estava sendo jogada fora justamente
+                # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
+                render.vertical(bruto, ass_v, pasta / _arq, audio_dublado,
+                                titulo=c.get("titulo", ""), duracao_max=dur_max,
+                                chamada=texto_chamada)
 
             # ⚠️ A CASCATA VEM DEPOIS DO RENDER, e nunca dentro dele. O
             # `render.vertical` monta quatro arranjos de filter_complex
@@ -564,27 +573,29 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # coreano + "SABAE") some, borrada. Antes dos baloes.
             # ⭐ 25/09: velocidade por canal (Achadinho Make 1,1x, aprovado).
             # ANTES da cor, da limpeza e da camada: elas usam a duracao final.
-            if ritmo.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
-                print(f"      velocidade {ritmo.fator(_canal_cascata)}x")
-            # ⭐ 25/09: cor da marca por canal (Achadinho Make = rose' suave, opcao B).
-            if cor.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
-                print("      cor do canal aplicada")
-            c["_faixa_borrada"] = marca.limpar_no_lugar(pasta / 'short_9x16.mp4')
-            if c["_faixa_borrada"]:
-                print(f"      faixa de legenda da fonte borrada: {c['_faixa_borrada']}")
-            # ⭐ 25/09: selo "NOME · PARTE N" quando o tema ja' apareceu no canal.
-            # Nome = 1a tag (regra de nomes da selecao). So' onde a camada liga.
-            if camada.ligado(_canal_cascata):
-                _tags = c.get("tags") or []
-                _nome = (str(_tags[0]).strip().title() if _tags else "")
-                _parte = selo.parte_do_tema(
-                    canais_registro_canonico(_canal_cascata), _nome) if _nome else 1
-                if selo.aplicar_no_lugar(pasta / 'short_9x16.mp4', _nome, _parte):
-                    print(f"      selo da serie: {_nome} parte {_parte}")
-            if camada.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
-                print('      camada aplicada')
-            elif cascata.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
-                print('      cascata de CTA aplicada')
+            for _plat, _arq in _versoes:
+                _v = pasta / _arq
+                if ritmo.aplicar_no_lugar(_v, _canal_cascata):
+                    print(f"      velocidade {ritmo.fator(_canal_cascata)}x")
+                # ⭐ 25/09: cor da marca por canal (Achadinho Make = rose' suave, opcao B).
+                if cor.aplicar_no_lugar(_v, _canal_cascata):
+                    print("      cor do canal aplicada")
+                c["_faixa_borrada"] = marca.limpar_no_lugar(_v)
+                if c["_faixa_borrada"]:
+                    print(f"      faixa de legenda da fonte borrada: {c['_faixa_borrada']}")
+                # ⭐ 25/09: selo "NOME · PARTE N" quando o tema ja' apareceu no canal.
+                # Nome = 1a tag (regra de nomes da selecao). So' onde a camada liga.
+                if camada.ligado(_canal_cascata):
+                    _tags = c.get("tags") or []
+                    _nome = (str(_tags[0]).strip().title() if _tags else "")
+                    _parte = selo.parte_do_tema(
+                        canais_registro_canonico(_canal_cascata), _nome) if _nome else 1
+                    if selo.aplicar_no_lugar(_v, _nome, _parte):
+                        print(f"      selo da serie: {_nome} parte {_parte}")
+                if camada.aplicar_no_lugar(_v, _canal_cascata, _plat or "tiktok"):
+                    print('      camada aplicada')
+                elif cascata.aplicar_no_lugar(_v, _canal_cascata):
+                    print('      cascata de CTA aplicada')
 
             if not so_vertical:
                 lh, ah = config.HORIZONTAL

@@ -76,7 +76,7 @@ def _t(seg: float) -> str:
 
 def escrever(palavras: list[dict], destino: Path, largura: int, altura: int,
              estilo: int = 1, oculto_ate: float = 0.0,
-             estreito: tuple[float, float, float] | None = None) -> Path | None:
+             estreito: tuple | list | None = None) -> Path | None:
     """Cria o arquivo .ass. Devolve None se não houver o que legendar.
 
     `estilo`: 1 = padrão do canal (Inter Black, corpo fixo). 2 = réplica da
@@ -169,17 +169,24 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
         texto = "".join(partes).strip()
         # ⭐ 25/09: enquanto o balao de COMENTARIO esta' na tela (lado direito),
         # a legenda ganha margem direita e quebra a' esquerda dele.
-        mr = 0
-        if estreito and ini < estreito[1] and fim > estreito[0]:
-            mr = int(largura * estreito[2])
-        linhas.append(f"Dialogue: 1,{_t(ini)},{_t(fim)},K,,0,{mr},0,,{texto}")
+        # `estreito`: uma janela (ini, fim, fracao) ou lista de (ini, fim,
+        # fracao, lado); lado "esq" abre espaco a' esquerda (balao ali).
+        ml = mr = 0
+        for jan in ([estreito] if isinstance(estreito, tuple) else estreito or []):
+            if ini < jan[1] and fim > jan[0]:
+                lado = jan[3] if len(jan) > 3 else "dir"
+                if lado in ("esq", "ambos"):
+                    ml = max(ml, int(largura * jan[2]))
+                if lado in ("dir", "ambos"):
+                    mr = max(mr, int(largura * jan[2]))
+        linhas.append(f"Dialogue: 1,{_t(ini)},{_t(fim)},K,,{ml},{mr},0,,{texto}")
 
         if estilo == 2:
             # Camada de sombra, MESMO texto (sem cor — só a silhueta borrada
             # importa), Layer 0 = desenhada ATRÁS da camada nítida acima.
             palavras_planas = " ".join(p["palavra"].upper() for p in grupo)
             texto_sombra = f"{{{fs_override}\\be{_ESTILO_2_BLUR}}}{palavras_planas}"
-            linhas.append(f"Dialogue: 0,{_t(ini)},{_t(fim)},S,,0,0,0,,{texto_sombra}")
+            linhas.append(f"Dialogue: 0,{_t(ini)},{_t(fim)},S,,{ml},{mr},0,,{texto_sombra}")
 
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(cab + "\n".join(linhas) + "\n", encoding="utf-8")

@@ -19,6 +19,7 @@ ATIVOS = Path(__file__).resolve().parent / "camada"
 W, H, FPS = 1080, 1920, 30
 FOLGA = 22
 REVELA_ANTES_S = 2.8
+FICA_E = 2.0          # comente e compartilhe parados (dono: "mais tempo", 25/09)
 BORDA = 1000
 INICIO_S = 2.3
 DUR_A = 9.6
@@ -89,7 +90,7 @@ class _Para:
 class _Cruza:
     ENTRA, SAI = 1.4, 1.4
 
-    def __init__(self, t0, fica=3.4, y=360):
+    def __init__(self, t0, fica=3.4, y=250):
         self.t0, self.fica, self.y = t0, fica, y
         self.dur = self.ENTRA + fica + self.SAI
         self.av = _img("v1", 330)
@@ -157,10 +158,17 @@ def cena(n: int = 6, semente: int = 7, parte: str = "a") -> list:
         t += passo
         passo *= 1.3
     els.append(_Sobe(_img("c2", 190), t + 0.15, 3.0, bx, by, 110, 1.0, 12))
-    els.append(_Para(_img("e1", 190), 1.8, 1.0, *POS["e1"]))
-    els.append(_Para(_img("e2", 200), 3.2, 1.0, *POS["e2"]))
+    els.append(_Para(_img("e1", 190), 1.8, FICA_E, *POS["e1"]))
+    els.append(_Para(_img("e2", 200), 3.2, FICA_E, *POS["e2"]))
     els.append(_Para(_img("e3", 210), 4.5, 3.4, *POS["e3"]))
     return els
+
+
+def janela_comente() -> tuple[float, float, float]:
+    """(inicio, fim, fracao da largura) em que o balao de comentario ocupa o
+    lado direito, no tempo do video final."""
+    ini = INICIO_S + 1.8
+    return (ini, ini + 0.9 + FICA_E + 0.8, 0.40)
 
 
 def plano(dur_video: float) -> list[tuple[str, float]]:
@@ -284,8 +292,7 @@ def aplicar(video: Path, destino: Path) -> Path | None:
     momentos = []
     for k, ini in pl:
         if k == "a":
-            momentos += [("s1", ini + e.t0, 0.7) for e in cena(parte="a")
-                         if isinstance(e, _Sobe)]
+            pass   # estalo nos coracoes: REPROVADO pelo dono (25/09)
     if dur > REVELA_ANTES_S + 4:
         momentos.append(("s2", dur - REVELA_ANTES_S, 1.0))
     n = 1 + len(pl)

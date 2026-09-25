@@ -75,7 +75,8 @@ def _t(seg: float) -> str:
 
 
 def escrever(palavras: list[dict], destino: Path, largura: int, altura: int,
-             estilo: int = 1, oculto_ate: float = 0.0) -> Path | None:
+             estilo: int = 1, oculto_ate: float = 0.0,
+             estreito: tuple[float, float, float] | None = None) -> Path | None:
     """Cria o arquivo .ass. Devolve None se não houver o que legendar.
 
     `estilo`: 1 = padrão do canal (Inter Black, corpo fixo). 2 = réplica da
@@ -166,7 +167,12 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
             else:
                 partes.append(f"{{\\k{dur}}}{palavra} ")
         texto = "".join(partes).strip()
-        linhas.append(f"Dialogue: 1,{_t(ini)},{_t(fim)},K,,0,0,0,,{texto}")
+        # ⭐ 25/09: enquanto o balao de COMENTARIO esta' na tela (lado direito),
+        # a legenda ganha margem direita e quebra a' esquerda dele.
+        mr = 0
+        if estreito and ini < estreito[1] and fim > estreito[0]:
+            mr = int(largura * estreito[2])
+        linhas.append(f"Dialogue: 1,{_t(ini)},{_t(fim)},K,,0,{mr},0,,{texto}")
 
         if estilo == 2:
             # Camada de sombra, MESMO texto (sem cor — só a silhueta borrada

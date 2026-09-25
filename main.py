@@ -15,7 +15,7 @@ from pathlib import Path
 
 import config
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
-                    camada, marca, selo, cor,
+                    camada, marca, selo, cor, ritmo,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod)
@@ -520,9 +520,16 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 os.environ.get("CANAL_ESPERADO") or c.get("canal"))
 
             lv, av = config.VERTICAL
+            _canal_leg = (os.environ.get("CANAL_ESPERADO") or c.get("canal") or "")
+            _estreito = None
+            if camada.ligado(_canal_leg):
+                _ji, _jf, _jl = camada.janela_comente()
+                _fv = ritmo.fator(_canal_leg)   # legenda e' queimada ANTES da velocidade
+                _estreito = (_ji * _fv, _jf * _fv, _jl)
             ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
                                        estilo=estilo_legenda,
-                                       oculto_ate=render.TITULO_SEGUNDOS)
+                                       oculto_ate=render.TITULO_SEGUNDOS,
+                                       estreito=_estreito)
             print("      renderizando 9:16 com face tracking...")
             status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
             # O título vai NA TELA nos primeiros segundos, não só na descrição.
@@ -555,6 +562,10 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                               or c.get("canal") or "")
             # ⭐ 25/09: legenda estrangeira queimada na base da fonte (ex.:
             # coreano + "SABAE") some, borrada. Antes dos baloes.
+            # ⭐ 25/09: velocidade por canal (Achadinho Make 1,1x, aprovado).
+            # ANTES da cor, da limpeza e da camada: elas usam a duracao final.
+            if ritmo.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
+                print(f"      velocidade {ritmo.fator(_canal_cascata)}x")
             # ⭐ 25/09: cor da marca por canal (Achadinho Make = rose' suave, opcao B).
             if cor.aplicar_no_lugar(pasta / 'short_9x16.mp4', _canal_cascata):
                 print("      cor do canal aplicada")

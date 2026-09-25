@@ -91,6 +91,13 @@ INADMISSIVEL — descarte o trecho em vez de entregar assim:
 ⚠️ NAO termine de forma abrupta, e NAO corte no pico. Isso vale para canais
 de fala, nao aqui: em procedimento, o "pico" e o RESULTADO, e ele vem no fim.
 
+⭐ O RESULTADO FINAL TEM DE APARECER (25/09/2026). Comentario no viral de
+83 mil: "ele nao posta o resultado, nao percam seu tempo". Quando o video
+mostra uma TRANSFORMACAO, o corte termina com o ROSTO PRONTO na tela (o
+visual final, nao so' a etapa) por pelo menos 2 segundos. Se o resultado
+final so' aparece mais tarde no video, estenda o corte ate' ele — pode
+passar do tamanho sugerido. Nunca termine antes da revelacao.
+
 ⚠️ Se nenhuma etapa inteira couber na duracao pedida, DESCARTE o video. E
 melhor devolver menos cortes do que devolver um passo pela metade. Nao
 estique nem comprima uma etapa pra caber.
@@ -577,7 +584,10 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     mime = "video/mp4" if usar_video else "audio/flac"
     tipo = "vídeo" if usar_video else "áudio"
     prompt = PROMPT.format(tipo=tipo, n=qtd, criterio=_criterio(),
-                           dmin=config.DUR_MIN, dmax=config.DUR_MAX)
+                           dmin=config.DUR_MIN,
+                           dmax=(180 if (os.environ.get("SELECAO_MODO") or "")
+                                 .strip().lower() == "procedimento"
+                                 else config.DUR_MAX))
 
     def corpo(uri):
         return {"contents": [{"parts": [
@@ -723,8 +733,13 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
             recusados.append(("curto demais", titulo,
                               f"{fim - ini:.1f}s < DUR_MIN {config.DUR_MIN}s"))
             continue
-        if fim - ini > config.DUR_MAX:
-            fim = ini + config.DUR_MAX
+        # ⭐ 25/09/2026: em procedimento o corte pode ir alem do DUR_MAX pra
+        # chegar ao RESULTADO FINAL (dono: "nao tem problema ficar mais
+        # longo"). Teto de seguranca de 180 s contra alucinacao de tempo.
+        teto = (180 if (os.environ.get("SELECAO_MODO") or "").strip().lower()
+                == "procedimento" else config.DUR_MAX)
+        if fim - ini > teto:
+            fim = ini + teto
         if any(ini < f and fim > i for i, f in ocupados):   # sobreposição
             recusados.append(("sobrepoe outro", titulo,
                               f"{ini:.1f}-{fim:.1f}s"))

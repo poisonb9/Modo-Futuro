@@ -98,6 +98,13 @@ primeira ou vai embora):
    troque pelo que ele É ("um molho típico", "o sotaque do interior").
    Nome de grupo e fã-clube: só se tiver certeza da grafia oficial
    (NCT WISH, ILLIT); na dúvida, "os fãs".
+11. SEM VÍCIO DE TEXTO DE IA (princípios da skill "humanizer", adaptados
+   ao português falado): nada de "não é apenas X, é Y"; nada de listas de
+   três adjetivos; nada de adjetivo de propaganda ("incrível",
+   "impressionante", "surpreendente", "fascinante") — mostre o fato e deixe
+   a pessoa achar incrível; nada de frase de efeito no fim ("e isso mudou
+   tudo"); nada de travessão. Soe como alguém contando pra uma amiga, não
+   como um locutor de comercial.
 
 TAMANHO: {orcamento}o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava. Texto mais longo força a dublagem a acelerar a fala pra

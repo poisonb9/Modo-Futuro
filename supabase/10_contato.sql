@@ -16,7 +16,7 @@ create table if not exists contato (
   telefone        text check (telefone is null or telefone ~ '^\+?[0-9]{10,15}$'),
   origem          text not null check (origem in ('site','bot')),
   produto         text check (produto is null or char_length(produto) <= 200),
-  consentimento_em timestamptz not null,
+  consentimento_em timestamptz not null default now(),
   saiu_em         timestamptz,
   check (email is not null or telefone is not null)
 );

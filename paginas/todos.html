@@ -2588,6 +2588,42 @@
   }
   .item .avise-me:hover { color: var(--tinta); text-decoration-color: currentColor; }
   .item .avise-me::before, .item .avise-me::after { display: none; }
+  /* ⭐ PAINEL DO AVISE-ME (25/09/2026): branco, discreto, dentro do cartão. */
+  .aviso-fundo { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: flex-end;
+    justify-content: center; background: rgba(22,21,28,0); transition: background .25s; }
+  .aviso-fundo.aberto { background: rgba(22,21,28,.42); }
+  .aviso-painel { position: relative; width: 100%; max-width: 440px; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 12px; padding: 22px 20px calc(20px + env(safe-area-inset-bottom));
+    border-radius: 22px 22px 0 0; background: #fff; color: var(--tinta); font-size: 14px; text-align: left;
+    box-shadow: 0 -12px 40px rgba(22,21,28,.18); transform: translateY(100%); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+  .aviso-fundo.aberto .aviso-painel { transform: none; }
+  @media (min-width: 700px) { .aviso-fundo { align-items: center; } .aviso-painel { border-radius: 22px; } }
+  @media (prefers-reduced-motion: reduce) { .aviso-painel, .aviso-fundo { transition: none; } }
+  .aviso-x { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border: 0; background: none;
+    font-size: 26px; line-height: 1; color: var(--fraco); cursor: pointer; }
+  .aviso-topo { display: flex; gap: 12px; align-items: center; padding-right: 36px; }
+  .aviso-topo img { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; border: 1px solid #ECE9F1; flex: none; }
+  .aviso-tx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .aviso-tx strong { font-size: 17px; }
+  .aviso-tx span { color: var(--fraco); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .aviso-tx .aviso-hoje { color: #A8740F; font-weight: 600; }
+  .aviso-tg { display: flex; align-items: center; justify-content: center; min-height: 48px; font-size: 15px;
+    border-radius: 10px; background: #229ED9; color: #fff; font-weight: 600; text-decoration: none; }
+  .aviso-ou { display: flex; align-items: center; gap: 10px; color: var(--fraco); font-size: 12px; }
+  .aviso-ou::before, .aviso-ou::after { content: ""; flex: 1; height: 1px; background: #ECE9F1; }
+  .aviso-form { display: flex; flex-direction: column; gap: 8px; margin: 0; }
+  .aviso-form input[type=email] { min-height: 44px; padding: 0 12px; border: 1px solid rgba(120,115,135,.35);
+    border-radius: 10px; font: inherit; font-size: 16px; background: #fff; color: var(--tinta); }
+  .aviso-ok { display: flex; gap: 10px; align-items: flex-start; color: var(--fraco); font-size: 12.5px; line-height: 1.4; }
+  .aviso-ok input { margin-top: 2px; width: 16px; height: 16px; flex: none; }
+  .aviso-ok a { color: inherit; }
+  .aviso-form button { min-height: 48px; font-size: 15px; border: 0; border-radius: 10px; background: var(--tinta);
+    color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+  .aviso-form button:disabled { opacity: .6; }
+  .aviso-msg { margin: 0; min-height: 1em; color: var(--fraco); font-size: 11.5px; }
+  .aviso-feito { margin: 0; color: var(--tinta); font-weight: 600; text-align: center; }
+  .aviso-form .isca { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .aviso-form .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   /* ⭐ O "COMPRAR AGORA" FLUTUA (24/09/2026, Bryan: "bem sutilmente, bem fraco,
      quase uma ilusao"). Mesmo esquema dos precos e das letras -- dois
      movimentos independentes (sobe/desce 0,7 px; inclina 0,25 grau) --, cada
@@ -3043,6 +3079,82 @@
   // ⭐ SELO 2 (17/09/2026): o @ do bot do "avise-me quando cair". O
   // publicador preenche a partir de TELEGRAM_BOT_ALERTA; vazio = sem botao.
   var BOT_ALERTA = "";
+  // ⭐ O PAINEL DO AVISE-ME (25/09/2026). Telegram em 1 toque OU e-mail —
+  // o e-mail só sai com a caixa de consentimento marcada (LGPD), e vai pra
+  // tabela `contato` do Supabase, que o anon só pode INSERIR (nunca ler).
+  // ⚠️ `site` é armadilha pra robô: campo invisível; preenchido = descarta.
+  // ⭐ FOLHA QUE SOBE DE BAIXO (25/09, Bryan: "isso tá horrível"): no cartão
+  // de 2 colunas o formulário virava uma tira de 1 palavra por linha. A
+  // folha tem a largura da tela, mostra O QUE está sendo acompanhado (foto,
+  // nome, preço) e fecha no X, no fundo ou no Esc.
+  function abrirFolhaAviso(p, hrefTg, origem) {
+    var velha = document.querySelector(".aviso-fundo"); if (velha) { velha.remove(); }
+    var fundo = el("div", "aviso-fundo");
+    var box = painelAviso(p, hrefTg);
+    box.setAttribute("role", "dialog"); box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", "Aviso de preço");
+    fundo.appendChild(box);
+    function fechar() { fundo.remove(); document.removeEventListener("keydown", tecla); if (origem) { origem.focus(); } }
+    function tecla(e) { if (e.key === "Escape") { fechar(); } }
+    fundo.addEventListener("click", function (e) { if (e.target === fundo) { fechar(); } });
+    document.addEventListener("keydown", tecla);
+    box.querySelector(".aviso-x").addEventListener("click", fechar);
+    document.body.appendChild(fundo);
+    requestAnimationFrame(function () { fundo.classList.add("aberto"); });
+    box.querySelector(".aviso-tg").focus();
+  }
+  function painelAviso(p, hrefTg) {
+    var box = el("div", "aviso-painel");
+    box.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    var x = document.createElement("button"); x.type = "button"; x.className = "aviso-x";
+    x.setAttribute("aria-label", "fechar"); x.textContent = "×"; box.appendChild(x);
+    var topo = el("div", "aviso-topo");
+    if (p.imagem) { var im = document.createElement("img"); im.src = p.imagem; im.alt = ""; topo.appendChild(im); }
+    var tx = el("div", "aviso-tx");
+    tx.appendChild(el("strong", null, "Te aviso quando baixar"));
+    tx.appendChild(el("span", null, String(p.nome || "")));
+    if (p.preco) { tx.appendChild(el("span", "aviso-hoje", "hoje " + p.preco)); }
+    topo.appendChild(tx); box.appendChild(topo);
+    var tg = document.createElement("a");
+    tg.className = "aviso-tg"; tg.href = hrefTg; tg.rel = "noopener";
+    tg.textContent = "Telegram · 1 toque";
+    box.appendChild(tg);
+    box.appendChild(el("div", "aviso-ou", "ou por e-mail"));
+    var f = document.createElement("form"); f.className = "aviso-form"; f.noValidate = true;
+    var id = "av-" + String(p.id).replace(/[^0-9a-zA-Z]/g, "");
+    f.innerHTML =
+      '<label class="sr" for="' + id + '-e">seu e-mail</label>' +
+      '<input id="' + id + '-e" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="seu@email.com" required>' +
+      '<input class="isca" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<label class="aviso-ok"><input type="checkbox" required><span>Aceito receber por e-mail o aviso de preço deste produto. Saio quando quiser. <a href="/privacidade" target="_blank" rel="noopener">Privacidade</a></span></label>' +
+      '<button type="submit">Avisar por e-mail</button>' +
+      '<p class="aviso-msg" role="status" aria-live="polite"></p>';
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var em = f.querySelector('input[type=email]'), ok = f.querySelector('input[type=checkbox]');
+      var msg = f.querySelector(".aviso-msg"), bt = f.querySelector("button");
+      var v = em.value.trim().toLowerCase();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) || v.length < 6) { msg.textContent = "Confira o e-mail."; em.focus(); return; }
+      if (!ok.checked) { msg.textContent = "Marque a caixa para eu poder te avisar."; return; }
+      if (f.querySelector(".isca").value) { return; }
+      bt.disabled = true; msg.textContent = "Enviando…";
+      fetch(SUPABASE.url + "/rest/v1/contato", {
+        method: "POST",
+        headers: { "apikey": SUPABASE.anon, "Authorization": "Bearer " + SUPABASE.anon,
+                   "Content-Type": "application/json", "Prefer": "return=minimal" },
+        body: JSON.stringify({ email: v, origem: "site", produto: String(p.id).slice(0, 200) })
+      }).then(function (r) {
+        if (!r.ok) { throw new Error(r.status); }
+        box.innerHTML = "";
+        box.appendChild(el("p", "aviso-feito", "Pronto! Quando o preço cair, eu te aviso em " + v + "."));
+      }).catch(function () {
+        bt.disabled = false;
+        msg.textContent = "Não deu agora. Tente de novo ou use o Telegram.";
+      });
+    });
+    box.appendChild(f);
+    return box;
+  }
   // ⭐ 24/09: toque em "se voltar a R$ X" solta o cupom UMA vez, do proprio
   // botao. Delegado no documento porque os cartoes nascem depois. Nao
   // segura a navegacao (o link abre o Telegram normalmente).
@@ -4326,7 +4438,16 @@
       av.innerHTML = SINO_SVG + '<span>' + (voltar
         ? 'se voltar a <span class="nq">' + escapar(precoTruncado(p.ja_esteve.preco)) + '</span>' : 'avise-me se cair') + '</span>';
       av.title = "eu confiro o preço toda hora e te aviso no Telegram quando ele cair";
-      av.addEventListener("click", function (ev) { ev.stopPropagation(); anotarClique(p, "avise"); });
+      // ⭐ 25/09/2026 (captação de contato, aprovada pelo Bryan): o toque NAO
+      // pula mais direto pro Telegram — abre, DENTRO do cartão, as duas
+      // saídas: "Telegram · 1 toque" e e-mail com consentimento. Quem não
+      // usa Telegram ia embora sem deixar caminho.
+      av.addEventListener("click", function (ev) {
+        ev.stopPropagation(); ev.preventDefault();
+        anotarClique(p, "avise");
+        abrirFolhaAviso(p, av.href, av);
+      });
+      av.setAttribute("aria-expanded", "false");
       corpo.appendChild(av);
       // ⭐ #3 (18/09): "N de olho neste preço" — o número REAL de quem pediu
       // aviso (ENP: escassez só quando é verdade). Aparece a partir de 2.

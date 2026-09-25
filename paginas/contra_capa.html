@@ -11,7 +11,7 @@
      ⚠️ E a pagina inteira e' feita pra celular: quem chega vem de video
      vertical. A bio era o unico lugar da operacao sem esta linha. -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contra-capa Modo Futuro</title>
+<title>Achadinho Total</title>
 <!-- ⚠️ SEM ISTO O ICONE DO ATALHO VIRA UMA LETRA CINZA: o iOS desenha a
      inicial quando nao acha `apple-touch-icon`. O arquivo sobe junto no
      deploy — ver `_por_icone()` em `publicar_bio.py`, que copia nas DUAS
@@ -1539,6 +1539,7 @@
   };
   function desenhar(chave) {
     var c = CANAIS[chave];
+    document.title = c.nome + " · Achadinho Total";
     raiz.style.setProperty("--acento", c.acento);
 
     // O brasao do canal quando existe; a inicial quando ainda nao existe. Os

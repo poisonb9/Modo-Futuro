@@ -584,6 +584,24 @@ def rodar(cmd: list[str], rotulo: str = "", peso: str | None = None) -> int:
     return r.returncode
 
 
+def rodar_capturado(cmd: list[str], rotulo: str = "", peso: str | None = None,
+                    timeout: float | None = None) -> subprocess.CompletedProcess:
+    """Igual a `rodar`, mas devolve o processo com a saida capturada (texto)
+    em vez de imprimi-la — pra quem precisa ler o stdout/stderr."""
+    peso = peso or peso_do_comando(cmd)
+    with vez(rotulo or " ".join(cmd[:2]), peso):
+        r = subprocess.run(cmd, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=timeout)
+    saida = (r.stdout or "") + (r.stderr or "")
+    if e_bloqueio(saida):
+        motivo = next((l for l in saida.splitlines() if e_bloqueio(l)),
+                      "bot-check")
+        puxar_freio(motivo, peso=peso)
+        print(f"[sentinela] FREIO PUXADO por {freio_h()}h: {motivo[:120]}",
+              file=sys.stderr)
+    return r
+
+
 def main() -> int:
     args = sys.argv[1:]
     if "--estado" in args:

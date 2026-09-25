@@ -32,7 +32,6 @@ import re
 import subprocess
 import sys
 import tempfile
-import time
 import unicodedata
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -41,6 +40,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 
 import config                       # noqa: E402
 from engine import nemotron         # noqa: E402
+from engine import sentinela_youtube as sentinela  # noqa: E402
 
 def _achar_descobridor() -> Path:
     """Procura a pasta do descobridor subindo a árvore, em vez de contar
@@ -100,20 +100,23 @@ def baixar_legenda(url: str, tentativas: int = 3) -> tuple[str, str] | tuple[Non
                        "--retries", "3", "--extractor-retries", "2",
                        "-o", str(Path(tmp) / "%(id)s"), url]
                 try:
-                    p = subprocess.run(cmd, capture_output=True, text=True,
-                                       encoding="utf-8", errors="replace",
-                                       timeout=300, check=False)
+                    # ⛔ Legenda tambem e' chamada ao YouTube: passa pela sentinela.
+                    p = sentinela.rodar_capturado(cmd, "legenda " + url[-24:],
+                                                  timeout=300)
                 except subprocess.TimeoutExpired:
                     return None, "timeout"
+                except sentinela.Bloqueada:
+                    # freio puxado ou teto do dia: o video continua candidato
+                    return None, "bloqueado_ip"
                 vtts = sorted(Path(tmp).glob("*.vtt"))
                 if vtts:
                     txt = vtts[0].read_text(encoding="utf-8", errors="replace")
                     return limpar_vtt(txt), idioma
                 erro = (p.stderr or "") + (p.stdout or "")
                 if "429" in erro or "Too Many Requests" in erro:
-                    # rate limit de IP do YouTube: espera crescente
-                    time.sleep(20 * (t + 1))
-                    continue
+                    # ⛔ 429: a sentinela ja' puxou o freio. Insistir e' o que
+                    # vira bot-check — para aqui, o video continua candidato.
+                    return None, "bloqueado_ip"
                 if "not a bot" in erro or "Sign in to confirm" in erro:
                     # Bloqueio de IP de datacenter — o MESMO que impede o
                     # download de vídeo na VPS. Medido em 30/07/2026: numa

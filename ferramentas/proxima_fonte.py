@@ -63,10 +63,15 @@ def temas_quentes(posts: list[dict], temas: dict[str, list[str]]) -> dict[str, f
 
 
 def escolher(dados: dict, posts: list[dict]) -> tuple[dict | None, str]:
-    livres = [c for c in dados["candidatos"] if not c.get("usado")]
-    if not livres:
-        return None, "sem candidato livre: renovar a lista"
     hoje = datetime.now().date().isoformat()
+    # ⛔ 25/09/2026 (dono): "nunca baixe um video atras do outro". Ja' houve
+    # download hoje -> nada hoje. E `nao_antes` segura o candidato ate' a data.
+    if any(c.get("baixado_em") == hoje for c in dados["candidatos"]):
+        return None, "ja' houve download hoje — o proximo so' amanha (regra: nunca em sequencia)"
+    livres = [c for c in dados["candidatos"] if not c.get("usado")
+              and (c.get("nao_antes") or "") <= hoje]
+    if not livres:
+        return None, "sem candidato liberado hoje (ver nao_antes) ou lista vazia"
     ja_hoje = {c["idol"] for c in dados["candidatos"] if c.get("baixado_em") == hoje}
     temas = dict(dados.get("idols_ja_postados", {}))
     for c in dados["candidatos"]:

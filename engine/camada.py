@@ -28,7 +28,9 @@ B_FRAC = 0.40
 B_MIN_S = 16.0
 B_FIM_S = 3.0
 
-POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590), "e3": (250, 1585)}
+# e2/e3 subiram 140 px (25/09): a 1590 caiam na faixa do perfil e da legenda
+# do post no Reels. A 1450 ficam entre a legenda (base a 30%) e essa faixa.
+POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1450), "e3": (250, 1445)}
 
 CANAIS: set[str] = {"truque.importado"}
 

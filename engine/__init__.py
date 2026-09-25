@@ -1,6 +1,28 @@
 """Motor de cortes: Gemini escolhe, Groq legenda, ffmpeg monta."""
 
 
+import os as _os
+import re as _re
+
+CADEIA_GEMINI = [m.strip() for m in _os.environ.get(
+    "GEMINI_CADEIA", "gemini-3.8-flash,gemini-3.7-flash,gemini-3.6-flash,gemini-3.5-flash"
+).split(",") if m.strip()]
+_CAI = {429, 500, 503}
+_MODELO_NA_URL = _re.compile(r"/models/(gemini-[0-9.]+-flash):(generateContent|streamGenerateContent)")
+
+
+def _cadeia(url: str) -> list[str]:
+    """A cadeia a tentar, se a URL e' uma geracao num modelo da cadeia."""
+    m = _MODELO_NA_URL.search(url or "")
+    if not m or m.group(1) not in CADEIA_GEMINI:
+        return []
+    return list(CADEIA_GEMINI)
+
+
+def _trocar_modelo(url: str, modelo: str) -> str:
+    return _MODELO_NA_URL.sub(lambda m: f"/models/{modelo}:{m.group(2)}", url, count=1)
+
+
 def _chave_no_cabecalho() -> None:
     """Chave do Google vai no CABECALHO, nunca na URL (25/09/2026).
 
@@ -19,6 +41,23 @@ def _chave_no_cabecalho() -> None:
         return
 
     def request(self, method, url, *args, **kwargs):
+        cadeia = _cadeia(url)
+        if cadeia:
+            # ⭐ 25/09 (dono): 3.8 -> 3.7 -> 3.6 -> 3.5. Sobrecarga (503) ou
+            # cota (429/500) num modelo NAO espera: tenta o proximo na hora.
+            # Em 25/09 a espera no 3.6 sobrecarregado custou 4 h e um clipe.
+            r = None
+            for modelo in cadeia:
+                r = _chamar(self, method, _trocar_modelo(url, modelo), args, kwargs)
+                if r.status_code not in _CAI:
+                    if modelo != cadeia[0]:
+                        print(f"   [gemini] respondeu no {modelo} (os anteriores falharam)")
+                    return r
+            return r
+        return _chamar(self, method, url, args, kwargs)
+
+    def _chamar(self, method, url, args, kwargs):
+        kwargs = dict(kwargs)
         try:
             p = urlsplit(url)
             if p.hostname and p.hostname.endswith("googleapis.com") and "key=" in (p.query or ""):

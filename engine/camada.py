@@ -21,11 +21,11 @@ FOLGA = 22
 REVELA_ANTES_S = 2.8
 FICA_E = 2.0          # comente e compartilhe parados (dono: "mais tempo", 25/09)
 BORDA = 1000
-INICIO_S = 2.3
+INICIO_S = 3.0          # respiro depois do titulo (dono, 25/09)
 DUR_A = 9.6
 DUR_B = 6.2
 B_FRAC = 0.40
-B_MIN_S = 12.8
+B_MIN_S = 16.0
 B_FIM_S = 3.0
 
 POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590), "e3": (250, 1585)}

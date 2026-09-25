@@ -96,3 +96,19 @@ contato — continua sendo o próximo trabalho grande).
 - Envio do aviso por e-mail (Brevo) quando o preço cair + cópia `_privado/contatos.jsonl`.
   ⛔ Nenhum e-mail sem dizer ao dono para quem vai.
 - Bot: /start sem produto responde algo útil; /parar; request_contact.
+
+## 6. Balões de CTA do TikTok (25/09, aprovado "ficou muito bom")
+
+- `ferramentas/baloes/cta_tiktok.py` (`--previa [mp4] --video X`, `--overlay X.mov` com alfa
+  ProRes 4444 p/ o motor). Balões recortados em `ferramentas/baloes/cta/*.webp`
+  (originais em `Desktop\inauguracao`: heart1/2/3, cta_siga, cta_compartilhe,
+  cta_comente_cromado/preto, email_sino).
+- Cena (13,8 s): rajada de N corações (`--coracoes`, padrão 6) nascendo NO ❤️ com
+  intervalo crescendo, fecha com o MAIS BONITO (heart2) devagar — o torto (heart3) saiu.
+  Depois comente (CROMADO) → compartilhe → siga (por último, ~2,4 s parado, junto ao
+  @perfil). Estacionados entram e saem POR BAIXO, com mola leve.
+- ⛔ Posição medida no print do iPhone 12: o TikTok amplia o 9x16 pra cobrir a área
+  (x0,940) e corta ~45 px por lado → coluna de botões em x≈954 do vídeo (não 1000).
+  Android 20:9 estimado em x≈900, y +~90. Pendente: print de Android p/ calibrar.
+- Comentar: proposta "corações em todo vídeo + UM pedido por vídeo" ainda não decidida.
+- Pendente: ligar no motor (vídeo de teste antes de qualquer canal); e-mail de aviso (sino).

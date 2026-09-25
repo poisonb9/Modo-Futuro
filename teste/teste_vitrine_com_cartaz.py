@@ -156,9 +156,10 @@ for oq, efeito in (("a rede cai", requests.exceptions.Timeout("estourou")),
         t = vitrine.postar(dict(P, link=f"https://exemplo.com/{len(oq)}",
                                 imagem=f"https://ae01.alicdn.com/{len(oq)}.jpg"),
                            "truque.importado")
-        checar(t is not None, f"{oq}: o post SAIU assim mesmo")
-        checar(len(tg.textos) == 1 and len(tg.fotos) == 0,
-               f"{oq}: saiu pela porta de texto")
+        # ⛔ 25/09: sem cartaz o post e' ADIADO (paredao de link reprovado)
+        checar(t is None, f"{oq}: o post e' ADIADO, nao sai em texto")
+        checar(len(tg.textos) == 0 and len(tg.fotos) == 0,
+               f"{oq}: nada vai ao canal")
     finally:
         requests.get = guardado
         vitrine.telegram = real
@@ -172,14 +173,14 @@ try:
     t = vitrine.postar(dict(P, link="https://exemplo.com/recusada",
                             imagem="https://ae01.alicdn.com/recusada.jpg"),
                        "truque.importado")
-    checar(t is not None, "o post saiu")
-    checar(len(tg.fotos) == 1 and len(tg.textos) == 1,
-           "tentou a foto, e caiu pro texto")
+    checar(t is None, "foto recusada: o post e' adiado")
+    checar(len(tg.fotos) == 1 and len(tg.textos) == 0,
+           "tentou a foto, e NAO caiu pro texto")
     # ⛔ O DEFEITO QUE ESTA GUARDA EXISTE PRA IMPEDIR: com o link no botao, um
     # caminho que caisse pro texto SEM link poria o produto no feed sem para
     # onde ir. Pior que nao ter postado.
-    checar(bool(tg.textos) and "https://exemplo.com/recusada" in tg.textos[0],
-           "o texto de reserva leva o LINK - post sem link nao pode existir")
+    checar(not vitrine.ja_foi("https://exemplo.com/recusada"),
+           "e NAO e' marcado: volta na proxima rodada")
 finally:
     requests.get = guardado
     vitrine.telegram = real

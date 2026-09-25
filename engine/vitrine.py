@@ -401,9 +401,13 @@ def postar(bruto: dict, origem: str | None = None,
             botoes.append((ROTULO_AVISO, f"{SITE}/?p={p['_id']}&de=telegram"))
         entregue = telegram.enviar_foto(
             foto, legenda_premium(p), destino, botoes=botoes, html=True)
+    # ⛔ 25/09/2026 (Bryan, vendo o canal no iPhone: "apague todos que
+    # estiverem assim"): o post em TEXTO PURO, com o link de afiliado de
+    # 1.065 caracteres escrito por extenso, nao vai mais ao ar. Sem cartaz,
+    # o produto NAO e' marcado e volta na proxima rodada — post atrasado nao
+    # custa nada; paredao de link custa a cara do canal.
     if not entregue:
-        entregue = telegram.enviar(texto, destino)
-    if not entregue:
+        print(f"      [adiado] sem cartaz entregue: {p['nome'][:44]}")
         return None
     marcar(p["link"], produto=p)
     # ⚠️ SO' DEPOIS DE O TELEGRAM ACEITAR. Anotar antes registraria como

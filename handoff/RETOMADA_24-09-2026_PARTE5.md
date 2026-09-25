@@ -73,3 +73,26 @@ contato — continua sendo o próximo trabalho grande).
 - Prévia de link: WhatsApp guarda por URL — imagem nova = nome de arquivo novo.
 - Brevo: envio p/ endereço que deu hard bounce fica BLOQUEADO → `DELETE /v3/smtp/blockedContacts/{email}`.
 - ⛔ Nunca enviar e-mail sem dizer para quem e esperar confirmação.
+
+## 4. Feito em 25/09 (madrugada)
+
+- **Vitrine premium** (`1772eb3`, `27fe2c6`): cartaz CLARO 4x5 (`cartaz.montar_claro`),
+  fila = só o que o SITE mostra (`publicar_bio.produtos_todos`: nome curto, 48h,
+  dedupe), legenda sem repetir número (`legenda_premium`, gancho determinístico:
+  queda > vendidos medidos > nota), botões 🛒 loja + 🔔 `?p=<id>&de=telegram`,
+  1 post por horário (3/dia). Sem cartaz = ADIADO, nunca texto com link cru.
+  Workflow Vitrine religado.
+- **Posts antigos em texto com link cru**: o dono apaga à mão no app (não apago mensagem).
+- **Fixada nova** (msg 107, `paginas/telegram_fixada.jpg`), enviada pelo AchadinhoTotalBot
+  (admin do canal); a antiga (5) só desafixada. 1 botão: "Ver todos os achados".
+- **Captação** (`27b7cfe`, no ar): tabela `contato` criada (anon só INSERT, testado
+  com rollback — vazia); avise-me abre FOLHA inferior (Telegram 1 toque | e-mail +
+  consentimento); Privacidade revista.
+- ⚠️ `TELEGRAM_BOT_TOKEN` do `.env` local dá 401 (revogado); a nuvem usa o secret.
+- ⚠️ O vigia publica sozinho quando `paginas/todos.html` muda no origin/main —
+  editar em cópia e só commitar depois do OK do dono.
+
+## 5. Próximo
+- Envio do aviso por e-mail (Brevo) quando o preço cair + cópia `_privado/contatos.jsonl`.
+  ⛔ Nenhum e-mail sem dizer ao dono para quem vai.
+- Bot: /start sem produto responde algo útil; /parar; request_contact.

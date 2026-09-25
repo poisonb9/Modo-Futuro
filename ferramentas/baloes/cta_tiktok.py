@@ -39,6 +39,7 @@ POS = {
     # ⭐ 25/09 (Bryan): SIGA fica LA' EMBAIXO, pertinho do @perfil (canto
     # inferior esquerdo, onde a pessoa toca pra abrir o perfil e seguir)
     "siga": (150, 1560),
+    "comente": (860, 1170),       # a esquerda/acima do botao de comentar
     "compartilhe": (860, 1450),   # a esquerda/acima do botao de compartilhar
 }
 
@@ -106,8 +107,10 @@ class Estacionado:
         return self.im, self.x, self.y + dy + bal, esc, ang, alfa
 
 
-def cena(coracoes: int = 6, t_curtir: float = 0.3, t_siga: float = 4.4,
-         t_comp: float = 7.4, semente: int = 7) -> list:
+# ⭐ ORDEM (Bryan, 25/09): curtidas -> comente -> compartilhe -> SIGA por
+# ultimo e mais tempo na tela (~2 s parado alem da entrada/saida).
+def cena(coracoes: int = 6, t_curtir: float = 0.3, t_coment: float = 4.3,
+         t_comp: float = 6.9, t_siga: float = 9.5, semente: int = 7) -> list:
     rnd = random.Random(semente)
     base = [_img("heart1", 150), _img("heart2", 150)]   # rajada
     elems = []
@@ -126,9 +129,12 @@ def cena(coracoes: int = 6, t_curtir: float = 0.3, t_siga: float = 4.4,
     # O torto (heart3) saiu por decisao do Bryan em 25/09.
     elems.append(Coracao(_img("heart2", 190), t + 0.25, 3.4, bx - 30, by,
                          110, 1.0, 12))
-    elems.append(Estacionado(_img("cta_siga", 210), t_siga, 2.2, *POS["siga"]))
-    elems.append(Estacionado(_img("cta_compartilhe", 200), t_comp, 2.2,
+    # comente: o balao CROMADO (o preto some em video escuro)
+    elems.append(Estacionado(_img("cta_comente", 190), t_coment, 1.3,
+                             *POS["comente"]))
+    elems.append(Estacionado(_img("cta_compartilhe", 200), t_comp, 1.3,
                              *POS["compartilhe"]))
+    elems.append(Estacionado(_img("cta_siga", 210), t_siga, 2.4, *POS["siga"]))
     return elems
 
 
@@ -168,7 +174,7 @@ def pintar(fundo: Image.Image, elems, t) -> Image.Image:
 
 def render(saida: Path, fundo_video: Path | None, coracoes: int, alfa: bool) -> None:
     elems = cena(coracoes)
-    dur = 11.5
+    dur = 13.8
     n = int(dur * FPS)
     if alfa:
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",

@@ -150,7 +150,7 @@ def _num(nome: str, padrao: int) -> int:
 def intervalo(peso: str = "pesado") -> int:
     if peso == "leve":
         return _num("SENTINELA_YT_INTERVALO_LEVE", 300)
-    return _num("SENTINELA_YT_INTERVALO", 600)
+    return _num("SENTINELA_YT_INTERVALO", 1200)   # 20 min (dono, 25/09)
 
 
 def espera_max() -> int:
@@ -439,6 +439,61 @@ _BATIDA_S = 60
 _TENTATIVA_CADEADO_S = 60
 
 
+_LIVRO = "https://lwtqfwkfcknzyyzmuymg.supabase.co/rest/v1/download_youtube"
+_ANON = "sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy"
+
+
+def _livro(metodo: str, sufixo: str = "", corpo: dict | None = None):
+    import json
+    import urllib.request
+    r = urllib.request.Request(_LIVRO + sufixo, method=metodo,
+        data=json.dumps(corpo).encode() if corpo is not None else None,
+        headers={"apikey": _ANON, "Authorization": "Bearer " + _ANON,
+                 "Content-Type": "application/json", "Prefer": "return=minimal",
+                 "user-agent": "sentinela-youtube/1.0"})
+    with urllib.request.urlopen(r, timeout=20) as x:
+        dado = x.read()
+    return json.loads(dado) if dado else None
+
+
+def _onde() -> str:
+    if os.environ.get("GITHUB_ACTIONS"):
+        return f"actions:{os.environ.get('GITHUB_REPOSITORY', '')}"[:60]
+    import socket
+    return f"maquina:{socket.gethostname()}"[:60]
+
+
+def livro_esperar_e_anotar(rotulo: str = "") -> None:
+    """⛔ ENTRE MAQUINAS: 20 min desde o ULTIMO download de video em qualquer
+    lugar (este PC, a nuvem, outro projeto). O disco da sentinela so' governa
+    uma maquina; este livro no Supabase governa todas. Espera na fila (nao
+    recusa) ate' `espera_max()`; livro fora do ar = NAO baixa (falha fechada).
+    `SENTINELA_YT_SEM_LIVRO=1` desliga, so' para teste."""
+    if os.environ.get("SENTINELA_YT_SEM_LIVRO") == "1":
+        return
+    from datetime import datetime
+    limite = time.time() + espera_max()
+    while True:
+        try:
+            ult = _livro("GET", "?select=quando&order=quando.desc&limit=1")
+        except Exception as e:                              # noqa: BLE001
+            raise RuntimeError(f"livro de downloads fora do ar ({type(e).__name__}) "
+                               "— NAO baixo sem a guarda") from e
+        falta = 0.0
+        if ult:
+            q = datetime.fromisoformat(ult[0]["quando"].replace("Z", "+00:00")).timestamp()
+            falta = intervalo("pesado") - (time.time() - q)
+        if falta <= 0:
+            break
+        if time.time() + falta > limite:
+            raise RuntimeError(f"ultimo download foi ha' pouco; faltam {falta / 60:.0f} min "
+                               "e passa do teto de espera — tente mais tarde")
+        print(f"   [sentinela] ultimo download de video ha' menos de "
+              f"{intervalo('pesado') // 60} min: esperando {falta / 60:.1f} min na fila")
+        time.sleep(min(falta + 2, 300))
+    _livro("POST", corpo={"onde": _onde(), "rotulo": (rotulo or "")[:120]})
+
+
 @contextlib.contextmanager
 def vez(rotulo: str = "", peso: str = "pesado"):
     """Espera a vez E SEGURA A PORTA enquanto o comando roda.
@@ -461,6 +516,12 @@ def vez(rotulo: str = "", peso: str = "pesado"):
     """
     esperar_vez(rotulo, peso)
     cadeado = _pegar_cadeado(espera_max())
+    if peso != "leve":
+        try:
+            livro_esperar_e_anotar(rotulo)
+        except Exception:
+            cadeado.unlink(missing_ok=True)
+            raise
     parar = threading.Event()
 
     def _bater():

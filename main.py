@@ -600,6 +600,17 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      "compartilhabilidade", "independencia",
                      "intensidade_emocional", "valor_social")}
             meta["fonte"] = fonte.name
+            # ⭐ 25/09/2026 (dono): guardar a LEGENDA/NARRACAO de cada video.
+            # Sem isto, analisar a dublagem exigia baixar o clipe e
+            # transcrever de volta. Vai no post.json (que sobe pro Drive e
+            # entra no manifesto) + o .ass na pasta do clipe.
+            meta["narracao"] = " ".join(
+                str(p.get("palavra", "")) for p in (ps or [])).strip()
+            try:
+                if ass_v and Path(ass_v).exists():
+                    shutil.copy2(ass_v, pasta / "legenda_9x16.ass")
+            except Exception:
+                pass
             # duracao_s vinha do recorte na fonte; depois da decupagem o clipe
             # é mais curto. O que vale pra regra dos 60s é a duração FINAL.
             meta["duracao_recorte_s"] = round(fim - ini, 2)

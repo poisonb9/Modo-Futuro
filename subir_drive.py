@@ -210,6 +210,12 @@ def subir(pasta_pai_id: str, avisar_telegram: bool = True, conta: str = "princip
         try:
             _upload_renomeado(servico, destino, video, nome_video, "video/mp4")
             _upload_renomeado(servico, destino, txt, nome_txt, "text/plain")
+            # ⭐ 25/09: a legenda falada (narracao) vai junto, pra poder
+            # analisar a dublagem sem baixar e transcrever o video de volta.
+            ass = clipe / "legenda_9x16.ass"
+            if ass.exists():
+                _upload_renomeado(servico, destino, ass, f"{base}.ass",
+                                  "text/plain")
         finally:
             txt.unlink(missing_ok=True)
 

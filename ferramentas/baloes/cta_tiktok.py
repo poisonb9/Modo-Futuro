@@ -32,6 +32,8 @@ from pathlib import Path
 from PIL import Image
 
 AQUI = Path(__file__).resolve().parent / "cta"
+JITTER = 22                      # px: raio de onde cada coracao pode nascer
+BORDA_DIR = 1000                 # area segura: nada a direita disto
 W, H, FPS = 1080, 1920, 30
 
 POS = {
@@ -39,12 +41,16 @@ POS = {
     # area acima da barra (924x1805 no iPhone -> x0,940) e corta ~45 px de cada
     # lado. A coluna de botoes cai em x~954 do video, NAO em 1000 (era o erro:
     # os coracoes nasciam a direita do botao).
-    "curtir": (954, 1058),        # de onde os coracoes nascem
+    # ⭐ 2 e 3 (25/09): SERVIR EM TODOS. Os valores abaixo sao o MEIO entre o
+    # iPhone (medido) e o Android 20:9 (estimado: coluna x~900, ~90 px abaixo).
+    # E ha' FOLGA: coracao nasce numa area (JITTER), estacionado fica ~130 px ao
+    # lado. AREA SEGURA: nada passa de x 1000 (o 20:9 corta ~80 px por lado).
+    "curtir": (928, 1100),        # de onde os coracoes nascem
     # ⭐ 25/09 (Bryan): SIGA fica LA' EMBAIXO, pertinho do @perfil (canto
     # inferior esquerdo, onde a pessoa toca pra abrir o perfil e seguir)
-    "siga": (230, 1560),          # acima do nome do perfil (x~213, y~1667)
-    "comente": (815, 1200),       # a esquerda do botao de comentar (954, 1223)
-    "compartilhe": (815, 1530),   # a esquerda do botao de compartilhar (954, 1559)
+    "siga": (250, 1585),          # acima do nome do perfil
+    "comente": (795, 1250),       # a esquerda do botao de comentar
+    "compartilhe": (795, 1590),   # a esquerda do botao de compartilhar
 }
 
 
@@ -124,7 +130,10 @@ def cena(coracoes: int = 6, t_curtir: float = 0.3, t_coment: float = 4.3,
     for i in range(coracoes):
         im = base[i % 2].resize((w := rnd.randint(105, 165),
                                  round(base[i % 2].height * w / base[i % 2].width)))
-        elems.append(Coracao(im, t, rnd.uniform(1.5, 1.9), bx, by,
+        # FOLGA: nasce num raio pequeno em volta do botao, nao num ponto
+        elems.append(Coracao(im, t, rnd.uniform(1.5, 1.9),
+                             bx + rnd.uniform(-JITTER, JITTER),
+                             by + rnd.uniform(-JITTER, JITTER),
                              rnd.uniform(60, 240), rnd.uniform(0, 6.28),
                              rnd.uniform(12, 30)))
         t += passo
@@ -151,8 +160,12 @@ def guias(im: Image.Image) -> Image.Image:
     from PIL import ImageDraw
     im = im.copy()
     d = ImageDraw.Draw(im, "RGBA")
-    for _, x, y in BOTOES:
+    for _, x, y in BOTOES:                            # iPhone 12 (medido): branco
         d.ellipse([x - 42, y - 42, x + 42, y + 42], outline=(255, 255, 255, 170), width=4)
+    for _, x, y in BOTOES:                            # Android 20:9 (estimado): amarelo
+        x2, y2 = x - 54, y + 90
+        d.ellipse([x2 - 42, y2 - 42, x2 + 42, y2 + 42], outline=(255, 214, 0, 170), width=4)
+    d.line([(BORDA_DIR, 0), (BORDA_DIR, H)], fill=(255, 80, 80, 90), width=2)
     # o @perfil (nome do canal), canto inferior esquerdo
     d.rounded_rectangle([60, 1640, 420, 1695], 12, outline=(255, 255, 255, 170), width=4)
     return im
@@ -172,6 +185,7 @@ def pintar(fundo: Image.Image, elems, t) -> Image.Image:
             a = p.getchannel("A").point(lambda v: int(v * alfa))
             p.putalpha(a)
         # (x, y) = centro do CORPO do balao (terco de cima da imagem)
+        x = min(x, BORDA_DIR - p.width / 2)             # area segura (corte do 20:9)
         tela.alpha_composite(p, (int(x - p.width / 2), int(y - p.height * 0.28)))
     return tela
 

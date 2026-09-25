@@ -183,13 +183,62 @@ def _num(v, padrao=0.0) -> float:
         return padrao
 
 
+# ⭐ "DA MAKE DO VIDEO" (25/09/2026, aprovado pelo dono): o que aparece nos
+# posts RECENTES do canal vira termo de busca PRIMEIRO. O catalogo de beleza
+# tinha 14 itens e nenhum delineador — justo o tema do viral de 10,6 mil.
+# Palavra no titulo -> termo de busca (duas palavras: objeto + contexto).
+TEMAS_DO_VIDEO = {
+    "truque.importado": {
+        "delinead": "delineador caneta", "gatinho": "delineador caneta",
+        "cílio": "cilios postico", "cilio": "cilios postico",
+        "lábio": "batom matte", "labio": "batom matte", "batom": "batom matte",
+        "gloss": "gloss labial", "blush": "blush liquido",
+        "glitter": "glitter maquiagem", "brilho": "glitter maquiagem",
+        "sobrancelha": "lapis sobrancelha", "base": "base liquida",
+        "pele": "base liquida", "sombra": "paleta sombra",
+        "contorno": "contorno facial", "iluminador": "iluminador facial",
+        "pincel": "kit pinceis", "lágrima": "glitter maquiagem",
+    },
+}
+
+
+def termos_do_video(canal: str, dias: int = 3) -> list[str]:
+    """Termos tirados dos titulos dos posts dos ultimos `dias` (desempenho.jsonl)."""
+    import json as _j
+    from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+    mapa = TEMAS_DO_VIDEO.get(canal) or {}
+    arq = RAIZ / "desempenho.jsonl"
+    if not mapa or not arq.exists():
+        return []
+    corte = _dt.now(_tz.utc) - _td(days=dias)
+    achados: list[str] = []
+    for linha in arq.read_text(encoding="utf-8").splitlines()[-3000:]:
+        try:
+            d = _j.loads(linha)
+            if d.get("canal") != canal:
+                continue
+            if _dt.fromisoformat(d["publicado_em"].replace("Z", "+00:00")) < corte:
+                continue
+        except Exception:
+            continue
+        t = (d.get("titulo") or "").lower()
+        for chave, termo in mapa.items():
+            if chave in t and termo not in achados:
+                achados.append(termo)
+    return achados
+
+
 def buscar(canal: str, por_termo: int = 20) -> list[dict]:
     """Os produtos crus deste canal, de todos os termos dele."""
     perfil = CANAIS.get(canal)
     if not perfil:
         raise KeyError(f"{canal!r} nao tem perfil de garimpo — ver CANAIS")
     vistos, saida = set(), []
-    for termo in perfil["termos"]:
+    do_video = termos_do_video(canal)
+    if do_video:
+        print(f"  da make do video: {', '.join(do_video)}")
+    termos = do_video + [t for t in perfil["termos"] if t not in do_video]
+    for termo in termos:
         r = aliexpress.chamar(
             "aliexpress.affiliate.product.query", keywords=termo,
             page_size=str(por_termo), target_currency="BRL",

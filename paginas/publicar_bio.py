@@ -854,7 +854,9 @@ def _cliques_30() -> dict:
         d = {k: v["cliques"] for k, v in _cl.por_produto(30).items()}
         _CLIQUES["d"] = d
         _CLIQUES["ok"] = True
-    except Exception as e:                            # noqa: BLE001
+    # ⛔ SystemExit TAMBEM: sem PAT o `buscas_site._sql` levanta SystemExit,
+    # que `Exception` nao pega — e a vitrine inteira morria na nuvem.
+    except (Exception, SystemExit) as e:              # noqa: BLE001
         print(f"cliques: nao lidos ({type(e).__name__}) — kill de 30 dias desligado nesta rodada")
         _CLIQUES["d"] = {}
         _CLIQUES["ok"] = False

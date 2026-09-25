@@ -55,7 +55,7 @@ def _miniatura(u: str) -> str:
     return u
 
 
-def montar(p: dict, sinal: str, sino_src: str = SINO_URL) -> str:
+def montar(p: dict, sinal: str, sino_src: str = SINO_URL, sair_url: str = "") -> str:
     e = html.escape
     url = p.get("link") or f"{SITE}/?p={p['id']}&{UTM}"
     hora = datetime.now().strftime("%d/%m às %H:%M")
@@ -90,7 +90,7 @@ def montar(p: dict, sinal: str, sino_src: str = SINO_URL) -> str:
  <tr><td align="center" style="padding:10px 24px 24px;font:11px/1.5 Arial,Helvetica,sans-serif;color:#9a96a3">
    Você recebeu isto porque pediu um aviso de queda de preço no Achadinho Total.<br>
    Contém link de afiliado: se você comprar, a loja me paga uma comissão, sem custo para você.<br>
-   <a href="{{{{ unsubscribe }}}}" style="color:#9a96a3">Não quero mais receber avisos</a> · <a href="{SITE}/privacidade" style="color:#9a96a3">Privacidade</a></td></tr>
+   <a href="{e(sair_url or SITE + '/sair')}" style="color:#9a96a3">Não quero mais receber avisos</a> · <a href="{SITE}/privacidade" style="color:#9a96a3">Privacidade</a></td></tr>
 </table></td></tr></table></body></html>'''
 
 
@@ -106,17 +106,18 @@ def exemplo(pid: str | None = None) -> tuple[dict, str]:
     return cand[0], "voltou_a_cair"
 
 
-def enviar(para: str, p: dict, corpo: str) -> None:
+def enviar(para: str, p: dict, corpo: str, tag: str = "alerta-teste") -> None:
     k = next(l.split("=", 1)[1].strip() for l in (RAIZ / ".env").read_text(encoding="utf-8").splitlines()
              if l.startswith("BREVO_API_KEY="))
     body = {"sender": {"name": "Achadinho Total", "email": "ofertas@achadinhototal.com.br"},
             "to": [{"email": para}], "subject": assunto(p), "htmlContent": corpo,
-            "tags": ["alerta-teste"]}
+            "tags": [tag]}
     r = urllib.request.Request("https://api.brevo.com/v3/smtp/email", data=json.dumps(body).encode(),
         headers={"api-key": k, "content-type": "application/json", "accept": "application/json",
                  "user-agent": "achadinho-total/1.0"}, method="POST")
     with urllib.request.urlopen(r, timeout=30) as x:
-        print("enviado:", x.status, json.load(x))
+        if tag == "alerta-teste":
+            print("enviado:", x.status, json.load(x))
 
 
 if __name__ == "__main__":

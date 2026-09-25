@@ -3011,6 +3011,13 @@ def _por_privacidade(pasta: Path, privacidade: str) -> None:
         (pasta / "privacidade").mkdir(exist_ok=True)
         (pasta / "privacidade" / "index.html").write_text(
             privacidade, encoding="utf-8")
+    # ⭐ 25/09: a rota `/sair` (link "Nao quero mais receber avisos" do
+    # e-mail de queda). Vai junto da privacidade: e' a outra metade da LGPD.
+    sair = RAIZ / "paginas" / "sair.html"
+    if sair.exists():
+        (pasta / "sair").mkdir(exist_ok=True)
+        (pasta / "sair" / "index.html").write_text(
+            sair.read_text(encoding="utf-8"), encoding="utf-8")
 
 
 def publicar_no_ar(html: str, parceiros: str = "",

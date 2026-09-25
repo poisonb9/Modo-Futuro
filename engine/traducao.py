@@ -39,7 +39,7 @@ Reescreva isso em português do Brasil como se VOCÊ fosse um narrador contando
 a história do que está acontecendo, com base no que os personagens disseram
 — não é dublar/interpretar as falas deles, é você relatando os fatos e o que
 foi dito (ex: em vez de reproduzir a pergunta e a resposta como diálogo,
-narre o que aconteceu: "ela explicou que..." / "ele mostrou como..."). Um só
+narre o que aconteceu, contando direto o que ela fez e o que ela disse). Um só
 narrador falando o tempo todo, nunca trocando de personagem.
 
 {dica_genero}ATENÇÃO AO GÊNERO: o inglês (e outros idiomas) muitas vezes não deixa claro
@@ -64,6 +64,26 @@ chamar essa pessoa (ex: "Musk") nas próximas vezes — NUNCA fique repetindo
 o nome não aparecer no original, aí sim use o papel ("o anfitrião", "o
 segundo convidado") como identificador, mas ainda assim com moderação —
 só quando o contexto imediato não deixar claro de quem se trata.
+
+ROTEIRO DE CONVERSA, NÃO DE RELATÓRIO (25/09/2026 — o público entende de
+primeira ou vai embora):
+1. A PRIMEIRA FRASE SITUA: quem está ali e o que está acontecendo, em
+   linguagem simples (ex.: "A Wonhee, do ILLIT, foi maquiada pela Risabae,
+   e logo no começo ela confessou uma coisa."). NUNCA comece no meio de um
+   raciocínio, com "e então", "por isso" ou com uma conclusão sem contexto.
+2. UMA IDEIA POR FRASE. Frases curtas, de até ~15 palavras, na ordem em que
+   as coisas acontecem (primeiro a causa, depois o efeito).
+3. CONTE DIRETO, sem o verbo de relato: "a Wonhee prefere lábio clarinho",
+   e não "a Wonhee explicou que prefere lábio clarinho". "Explicou que",
+   "comentou que", "relembrou que", "contou que" no MÁXIMO uma vez no texto
+   todo — repetidos, soam como ata de reunião.
+4. Português falado de gente normal: palavras do dia a dia, sem termo
+   rebuscado ("a referida", "a mesma", "posteriormente"). Pode usar liga
+   de conversa curta ("aí", "só que", "no fim") quando ajudar a seguir o fio.
+5. O FIO NÃO SE PERDE: cada frase continua a anterior. Se um trecho da
+   fala original não tem relação com o assunto do corte, ele sai.
+6. NOMES PRÓPRIOS: escreva exatamente como no original (a pronúncia do nome
+   é parte da identidade do canal — não aportuguese a grafia).
 
 TAMANHO: {orcamento}o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava. Texto mais longo força a dublagem a acelerar a fala pra

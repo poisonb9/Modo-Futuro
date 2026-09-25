@@ -507,7 +507,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
 
             lv, av = config.VERTICAL
             ass_v = legendas.escrever(ps, config.TRABALHO / f"v_{i:02d}.ass", lv, av,
-                                       estilo=estilo_legenda)
+                                       estilo=estilo_legenda,
+                                       oculto_ate=render.TITULO_SEGUNDOS)
             print("      renderizando 9:16 com face tracking...")
             status.etapa(nome_fonte, "renderizando_vertical", c.get("titulo", ""), i, len(clipes))
             # O título vai NA TELA nos primeiros segundos, não só na descrição.

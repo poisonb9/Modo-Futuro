@@ -75,11 +75,18 @@ def _t(seg: float) -> str:
 
 
 def escrever(palavras: list[dict], destino: Path, largura: int, altura: int,
-             estilo: int = 1) -> Path | None:
+             estilo: int = 1, oculto_ate: float = 0.0) -> Path | None:
     """Cria o arquivo .ass. Devolve None se não houver o que legendar.
 
     `estilo`: 1 = padrão do canal (Inter Black, corpo fixo). 2 = réplica da
     referência (Poppins Bold, corpo variável — ver FONTE_ESTILO_2 acima)."""
+    # ⭐ CAPA LIMPA (25/09/2026): o TikTok usa o 1o quadro como capa, e nele a
+    # 1a palavra da legenda saia queimada no meio ("ELA EXPLICOU QUE") — cara
+    # de corte automatico na grade inteira. Enquanto o titulo esta' na tela
+    # (`oculto_ate`), nao ha' legenda; a fala segue normal.
+    if oculto_ate > 0:
+        palavras = [dict(p, inicio=max(p["inicio"], oculto_ate))
+                    for p in palavras if p["fim"] > oculto_ate]
     if not palavras:
         return None
 

@@ -118,9 +118,14 @@ def preencher_com_original(bruto, dublado, palavras, destino):
     if fim <= 0:
         return None
     ini = fim + CAUDA_MARGEM_S
-    filtro = (f"[0:a]volume='if(gte(t,{ini:.3f}),1,0)':eval=frame,"
+    # ⭐ NO VOLUME DA NARRACAO (pedido do dono): as duas trilhas passam pelo
+    # MESMO loudnorm do render (I=-14) antes de somar — o original entra na
+    # mesma altura da voz, nem sussurro nem estouro.
+    ln = "loudnorm=I=-14:TP=-1.5:LRA=11"
+    filtro = (f"[0:a]{ln},volume='if(gte(t,{ini:.3f}),1,0)':eval=frame,"
               f"afade=t=in:st={ini:.3f}:d=0.8[o];"
-              f"[1:a][o]amix=inputs=2:duration=longest:normalize=0[a]")
+              f"[1:a]{ln}[d];"
+              f"[d][o]amix=inputs=2:duration=longest:normalize=0[a]")
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(bruto),
                         "-i", str(dublado), "-filter_complex", filtro,

@@ -1699,6 +1699,12 @@
     // mao; `PRODUTOS_REAIS[chave]` e' o que o garimpo escolheu de verdade.
     var lista_do_canal = [];
     var reais = PRODUTOS_REAIS[atual] || [];
+    // ⭐ 25/09: "da make do video" vem na frente, com a etiqueta.
+    var dv = (PRODUTOS_REAIS["_do_video"] || {})[atual];
+    if (dv && dv.produtos && dv.produtos.length) {
+      var ids = dv.produtos.map(function (p) { return p.link; });
+      reais = dv.produtos.concat(reais.filter(function (p) { return ids.indexOf(p.link) < 0; }));
+    }
     var disponiveis = reais.length ? reais : c.produtos;
     var real = reais.length > 0 || c.produtoReal;
     if (mostrandoProdutos && disponiveis.length > 0) {
@@ -1711,7 +1717,7 @@
       // ⚠️ VAZIA QUANDO E' REAL. Ela dizia o mesmo que o <h2> logo ao lado,
       // e o iPhone do Bryan mostrou o titulo DUPLICADO na tela. A etiqueta
       // so' existe pra avisar que o que esta' abaixo NAO e' real.
-      etiqueta.textContent = real ? "" : "exemplo — ainda não é real";
+      etiqueta.textContent = real ? (dv && dv.tema ? "✨ da make do vídeo: " + dv.tema : "") : "exemplo — ainda não é real";
       lista.forEach(function (p) { vitrine.appendChild(montarProduto(p)); });
     } else {
       // Este e' o estado de HOJE, e ele e' NORMAL, nao erro: nenhum clipe

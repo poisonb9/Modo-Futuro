@@ -2369,8 +2369,43 @@ def injetar_produtos(html: str, dados: dict | None = None) -> str:
         raise SystemExit(
             "nao achei o marcador PRODUTOS_REAIS na pagina — "
             "alguem mexeu no contra_capa.html")
+    dados = dict(dados)
+    dados["_do_video"] = do_video()
     corpo = json.dumps(dados, ensure_ascii=False, indent=2)
     return html.replace(alvo, "  var PRODUTOS_REAIS = " + corpo + ";", 1)
+
+
+# ⭐ "DA MAKE DO VIDEO" (25/09/2026, aprovado pelo dono): o produto do tema dos
+# posts recentes (delineador, cilios, glitter...) aparece PRIMEIRO na bio do
+# canal, com a etiqueta. Termo -> palavra que casa no nome do produto.
+def do_video() -> dict:
+    try:
+        from engine import garimpo
+        termos = garimpo.termos_do_video("truque.importado", 3)
+    except Exception:
+        return {}
+    if not termos:
+        return {}
+    import unicodedata as _u
+
+    def _sem_acento(t: str) -> str:
+        return "".join(c for c in _u.normalize("NFD", (t or "").lower())
+                       if _u.category(c) != "Mn")
+
+    todos = [p for p in produtos_todos() if p.get("canal") == "Beleza"]
+    escolhidos, tema = [], ""
+    for termo in termos:
+        chave = _sem_acento(termo.split()[0])[:7]
+        achados = [p for p in todos if chave in _sem_acento(p.get("nome"))
+                   and p not in escolhidos]
+        if achados and not tema:
+            tema = {"cilios": "cílios", "lapis": "sobrancelha", "paleta": "sombra",
+                    "kit": "pincéis"}.get(termo.split()[0], termo.split()[0])
+        escolhidos += achados[:2]
+    if not escolhidos:
+        return {}
+    return {_chave_da_pagina("truque.importado"): {
+        "tema": tema, "produtos": escolhidos[:3]}}
 
 def tirar_comentarios(html: str) -> str:
     """Tira comentario de JS, de CSS e de HTML.

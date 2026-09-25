@@ -19,12 +19,12 @@ ATIVOS = Path(__file__).resolve().parent / "camada"
 W, H, FPS = 1080, 1920, 30
 FOLGA = 22
 BORDA = 1000
-INICIO_S = 2.0
+INICIO_S = 2.3
 DUR_A = 9.6
 DUR_B = 6.2
 B_FRAC = 0.40
-B_MIN_S = 12.5
-B_FIM_S = 0.5
+B_MIN_S = 12.8
+B_FIM_S = 3.0
 
 POS = {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590), "e3": (250, 1585)}
 

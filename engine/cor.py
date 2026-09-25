@@ -7,6 +7,7 @@ from pathlib import Path
 
 COR_POR_CANAL = {
     "truque.importado": "colorbalance=rm=0.04:gm=-0.01:bm=0.03,eq=saturation=1.06:brightness=0.02",
+    "semanestesia.pod": "colorbalance=rm=0.05:gm=0.01:bm=-0.04:rh=0.03:bh=-0.03,eq=contrast=1.06:saturation=0.95",
 }
 
 

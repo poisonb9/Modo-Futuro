@@ -567,6 +567,8 @@ def _regra_nomes(caminho: Path) -> str:
         "\n\nTÍTULO DO VÍDEO DE ORIGEM (pode trazer os nomes): " + origem + "\n"
         "NOMES: se aparece PESSOA FAMOSA identificável (idol, artista, "
         "convidado) cujo nome esteja na fala, na tela ou no título de origem, "
+        "(0) o TÍTULO leva o NOME dela/dele (ex.: 'Wonhee do ILLIT...'; "
+        "nome curto, sem estourar os 80 caracteres), "
         "(1) a DESCRIÇÃO cita o nome e o grupo/obra na PRIMEIRA frase, e "
         "(2) as DUAS PRIMEIRAS tags são o nome e o grupo/obra, em minúsculas "
         "e sem espaço (ex.: 'wonhee', 'illit'). Sem certeza do nome, não cite."

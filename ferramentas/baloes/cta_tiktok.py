@@ -147,7 +147,7 @@ def cena(coracoes: int = 6, t_curtir: float = 0.3, t_coment: float = 4.3,
                              *POS["comente"]))
     elems.append(Estacionado(_img("cta_compartilhe", 200), t_comp, 1.3,
                              *POS["compartilhe"]))
-    elems.append(Estacionado(_img("cta_siga", 210), t_siga, 2.4, *POS["siga"]))
+    elems.append(Estacionado(_img("cta_siga", 210), t_siga, 3.4, *POS["siga"]))
     return elems
 
 
@@ -192,7 +192,7 @@ def pintar(fundo: Image.Image, elems, t) -> Image.Image:
 
 def render(saida: Path, fundo_video: Path | None, coracoes: int, alfa: bool) -> None:
     elems = cena(coracoes)
-    dur = 13.8
+    dur = 14.8
     n = int(dur * FPS)
     if alfa:
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",

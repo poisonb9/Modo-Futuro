@@ -11,7 +11,7 @@ mudança é refeita. Disparar errado aqui PUBLICARIA um clipe de teste, então:
   [3] recorte só vai quando está fixado; vazio = o motor escolhe
   [4] voice-over exige fala_literal (o motor recusa a combinação errada)
   [5] congelar lê o trecho do post.json
-  [6] a config real (se existir nesta máquina) tem os 3 e nada publicável
+  [6] a config real (se existir nesta máquina) tem os 4 e nada publicável
 
 Roda com: python teste/teste_referencia.py
 """
@@ -73,8 +73,11 @@ checar(referencia.trecho_do_post({}) is None, "sem tempos = None")
 print("\n[6] config real")
 if referencia.CONFIG.exists():
     real = json.loads(referencia.CONFIG.read_text(encoding="utf-8"))
-    checar(sorted(c["nome"] for c in real["clipes"]) == ["chips", "make", "semanestesia"],
-           "os 3 clipes")
+    checar(sorted(c["nome"] for c in real["clipes"]) == ["chips", "cozinha", "make", "semanestesia"],
+           "os 4 clipes (cozinha entrou em 26/09 com o modo receita)")
+    coz = [c for c in real["clipes"] if c["nome"] == "cozinha"]
+    checar(bool(coz) and coz[0]["selecao_modo"] == "receita" and coz[0]["amostra_voz"] == "bruna",
+           "cozinha em modo receita, voz da Bruna")
     for c in real["clipes"]:
         pr = pares(referencia.campos(real, c))
         checar(pr["previa"] == "true" and not (pr["voice_over"] == "true" and pr["fala_literal"] != "true"),

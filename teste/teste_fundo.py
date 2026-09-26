@@ -14,6 +14,10 @@ fundo = ruido rosa continuo, dublagem = tom de 1 a 3 s.
   [4] NEGATIVO: sem Demucs, `misturar` devolve None (falha aberta) e o
       clipe segue so' com a voz, como antes
   [5] desligado por padrao ate' o dono aprovar pela previa
+  [6]-[8] 26/09 (dono: "ambiente e risadas"): a MUSICA do fundo sai por
+      janela de ~1 s (YAMNet), risada/ambiente ficam, rampa sem estalo
+  [9] NEGATIVO: sem classificador, nada de fundo (falha FECHADA)
+  [10] classificador real nos audios de demonstracao, quando existirem
 
 Roda com: python teste/teste_fundo.py
 """
@@ -92,6 +96,53 @@ fundo.MODELO = real
 print("\n[5] desligado por padrão")
 checar(os.environ.get("FUNDO_ORIGINAL") == "1" or fundo.LIGADO is False,
        "sem FUNDO_ORIGINAL=1, LIGADO é False")
+
+# ⭐ 26/09 (dono: "ambiente e risadas"): a MÚSICA do fundo sai, o resto fica
+print("\n[6] decisão por janela de ~1 s (música sai, risada fica)")
+jan = [(0.0, 0.05, 0.0),    # ambiente
+       (0.975, 0.8, 0.0),   # música
+       (1.95, 0.5, 0.0),    # música (seguida: junta)
+       (2.925, 0.4, 0.6),   # risada com música fraca -> fica
+       (3.9, 0.7, 0.6),     # música FORTE com risada -> sai
+       (4.875, 0.1, 0.9)]   # risada -> fica
+d = fundo._decidir(jan)
+print(f"       {d}")
+checar(d == [(0.975, 2.925), (3.9, 4.875)], "tira os dois trechos de música, fica o resto")
+checar(fundo._decidir([(0.0, 0.2, 0.0)]) == [], "música abaixo do limiar = fica")
+
+print("\n[7] ganho no tempo: 0 na música, 1 fora, rampa sem salto")
+e = fundo.expr_sem_musica([(2.0, 4.0)])
+g = lambda t: eval(e.replace("clip(", "_clip("), {"_clip": lambda x, a, b: max(a, min(b, x)),
+                                                  "min": min, "t": t})
+print(f"       1,0:{g(1.0):.2f} 1,9:{g(1.9):.2f} 3,0:{g(3.0):.2f} 4,1:{g(4.1):.2f} 5,0:{g(5.0):.2f}")
+checar(g(1.0) == 1 and g(3.0) == 0 and g(5.0) == 1, "fora 1, dentro 0")
+checar(0 < g(1.9) < 1 and 0 < g(4.1) < 1, "rampa nas bordas (sem estalo)")
+checar(fundo.expr_sem_musica([]) == "1", "sem música = ganho 1")
+
+print("\n[8] no áudio de verdade: o fundo some no trecho de música")
+ff("-i", str(T / "f.wav"), "-i", str(T / "d.wav"), "-filter_complex",
+   fundo.filtro_mix(None, [(5.0, 7.0)]), "-map", "[a]", str(T / "m.wav"))
+fora, dentro = rms(T / "m.wav", 4.0, 4.7), rms(T / "m.wav", 5.4, 6.6)
+print(f"       fundo 4,0-4,7 s {fora:.1f} dB | 5,4-6,6 s (música) {dentro:.1f} dB")
+checar(dentro < fora - 30, "música tirada: >30 dB abaixo do ambiente")
+
+print("\n[9] NEGATIVO: sem classificador, NADA de fundo (falha fechada)")
+real_sep, real_tm = fundo.separar, fundo.trechos_de_musica
+fundo.separar = lambda b, p: T / "f.wav"
+fundo.trechos_de_musica = lambda w: None
+checar(fundo.misturar(T / "x.mp4", T / "d.wav", T / "z.wav") is None,
+       "sem saber onde há música, sai só a voz")
+fundo.separar, fundo.trechos_de_musica = real_sep, real_tm
+
+print("\n[10] classificador real (se o modelo e os vídeos de teste existirem)")
+demo = Path(os.environ.get("TEMP", "/tmp")) / "claude" / "demo_enq"
+if (demo / "sala.wav").exists() and (demo / "gog.wav").exists():
+    sala, gog = fundo.trechos_de_musica(demo / "sala.wav"), fundo.trechos_de_musica(demo / "gog.wav")
+    print(f"       sala limpa (tem música): {sala} | Goggins (só conversa): {gog}")
+    checar(bool(sala), "acha a música da sala limpa")
+    checar(gog == [], "não acha música no Goggins")
+else:
+    print("       (pulado: sem os áudios de demonstração nesta máquina)")
 
 print()
 if falhas:

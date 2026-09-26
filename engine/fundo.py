@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""O FUNDO do original (musica, ambiente, risada) por baixo da dublagem.
+"""O FUNDO do original (ambiente, risada — a MUSICA sai) por baixo da dublagem.
 
     python -m engine.fundo --bruto trecho.mp4 --dublado voz.wav --saida mix.wav
 
@@ -52,6 +52,113 @@ VOL_FUNDO = 0.45
 FADE_S = 0.8
 _LN = "loudnorm=I=-14:TP=-1.5:LRA=11"
 
+# ⭐ FUNDO SEM MUSICA (26/09/2026, decisao do dono: "ambiente e risadas").
+# Em programa de K-pop o fundo costuma ter MUSICA, e musica conhecida no
+# TikTok = audio silenciado ou alcance cortado (acervo F10520, F09747,
+# F134273/F134274: silenciar so' a musica e manter o resto). O fundo que o
+# Demucs separa passa por um classificador de sons gratuito (YAMNet, Google,
+# pelo MediaPipe que o motor ja' usa pro rosto) em janelas de ~1 s: onde e'
+# MUSICA, o fundo some (com rampa curta); onde e' risada, aplauso, plateia ou
+# ambiente, fica.
+#
+# Risada COM musica por tras: fica, se a musica nao for forte — a risada vale
+# mais. Musica forte (>= MUSICA_FORTE) sai mesmo com risada.
+#
+# ⛔ Falha FECHADA: sem o classificador nao da' pra garantir "sem musica",
+# entao o clipe sai so' com a voz (como antes do Demucs), nunca com o fundo
+# inteiro. Medido 26/09: na sala limpa (musica de fundo) "Music" 0,8-0,9;
+# no Goggins (so' conversa) "Music" 0,00.
+YAMNET_URL = ("https://storage.googleapis.com/mediapipe-models/audio_classifier/"
+              "yamnet/float32/latest/yamnet.tflite")
+MUSICA_LIMIAR = 0.30
+MUSICA_FORTE = 0.60
+RISADA_LIMIAR = 0.30
+RAMPA_S = 0.15
+_RISADA = {"laughter", "giggle", "chuckle, chortle", "belly laugh", "baby laughter",
+           "snicker", "applause", "cheering", "crowd", "clapping", "chatter"}
+_MUSICA = {"singing", "choir", "song", "beat", "jingle (music)", "theme music",
+           "background music", "soundtrack music", "musical instrument", "guitar",
+           "drum", "drum kit", "piano", "keyboard (musical)", "synthesizer",
+           "bass guitar", "orchestra", "rapping", "a capella", "vocal music"}
+
+
+def _eh_musica(nome: str) -> bool:
+    n = nome.lower()
+    return n in _MUSICA or "music" in n
+
+
+def _garantir_yamnet() -> Path | None:
+    import config
+    arq = config.RAIZ / "modelos" / "yamnet.tflite"
+    if arq.exists() and arq.stat().st_size > 0:
+        return arq
+    try:
+        import urllib.request
+        arq.parent.mkdir(parents=True, exist_ok=True)
+        urllib.request.urlretrieve(YAMNET_URL, arq)
+        return arq if arq.stat().st_size > 0 else None
+    except Exception as e:
+        print(f"      [!] classificador de som indisponivel ({type(e).__name__})", flush=True)
+        return None
+
+
+def _decidir(janelas: list[tuple[float, float, float]]) -> list[tuple[float, float]]:
+    """[(t, musica, risada)] por janela de ~1 s -> trechos (ini, fim) a TIRAR.
+    Janelas seguidas viram um trecho so'. Exposto pro teste."""
+    passo, trechos = 0.975, []
+    for t, musica, risada in janelas:
+        tirar = musica >= MUSICA_FORTE or (musica >= MUSICA_LIMIAR and risada < RISADA_LIMIAR)
+        if not tirar:
+            continue
+        if trechos and t - trechos[-1][1] <= 0.05:
+            trechos[-1] = (trechos[-1][0], t + passo)
+        else:
+            trechos.append((t, t + passo))
+    return [(round(a, 3), round(b, 3)) for a, b in trechos]
+
+
+def trechos_de_musica(wav: Path) -> list[tuple[float, float]] | None:
+    """Onde o fundo e' musica (a tirar). None = nao deu pra classificar."""
+    modelo = _garantir_yamnet()
+    if modelo is None:
+        return None
+    try:
+        import numpy as np
+        from mediapipe.tasks import python as mp_python
+        from mediapipe.tasks.python import audio
+        from mediapipe.tasks.python.components import containers
+        raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(wav), "-ac", "1",
+                              "-ar", "16000", "-f", "s16le", "-"],
+                             check=True, capture_output=True, timeout=300).stdout
+        sinal = np.frombuffer(raw, np.int16).astype(np.float32) / 32768.0
+        clf = audio.AudioClassifier.create_from_options(audio.AudioClassifierOptions(
+            base_options=mp_python.BaseOptions(model_asset_path=str(modelo)),
+            running_mode=audio.RunningMode.AUDIO_CLIPS, max_results=12))
+        janelas = []
+        for r in clf.classify(containers.AudioData.create_from_array(sinal, 16000)):
+            cats = r.classifications[0].categories
+            musica = max([c.score for c in cats if _eh_musica(c.category_name)], default=0.0)
+            risada = max([c.score for c in cats if c.category_name.lower() in _RISADA],
+                         default=0.0)
+            janelas.append((r.timestamp_ms / 1000.0, musica, risada))
+        clf.close()
+        return _decidir(janelas)
+    except Exception as e:
+        print(f"      [!] classificacao do fundo falhou ({type(e).__name__}: "
+              f"{str(e)[:80]})", flush=True)
+        return None
+
+
+def expr_sem_musica(trechos: list[tuple[float, float]]) -> str:
+    """Ganho do fundo no tempo: 0 dentro de cada trecho de musica, 1 fora,
+    com rampa de RAMPA_S nas bordas (sem estalo). Exposto pro teste."""
+    if not trechos:
+        return "1"
+    r = RAMPA_S
+    partes = [f"clip((t-{a - r:.3f})/{r},0,1)*clip(({b + r:.3f}-t)/{r},0,1)"
+              for a, b in trechos]
+    return f"1-min(1,{'+'.join(partes)})"
+
 
 def separar(bruto: Path, pasta: Path) -> Path | None:
     """O FUNDO (tudo menos a voz) do audio de `bruto`, em wav. None se falhar."""
@@ -83,12 +190,16 @@ def separar(bruto: Path, pasta: Path) -> Path | None:
         return None
 
 
-def filtro_mix(ate_s: float | None) -> str:
-    """[0:a] = fundo, [1:a] = dublagem -> [a]. Exposto pro teste."""
+def filtro_mix(ate_s: float | None,
+               sem_musica: list[tuple[float, float]] | None = None) -> str:
+    """[0:a] = fundo, [1:a] = dublagem -> [a]. Exposto pro teste.
+    `sem_musica`: trechos em que o fundo e' musica e sai (ver trechos_de_musica)."""
     corte = ""
+    if sem_musica:
+        corte += f",volume='{expr_sem_musica(sem_musica)}':eval=frame"
     if ate_s is not None and ate_s > 0:
-        corte = (f",volume='if(gte(t,{ate_s:.3f}),0,1)':eval=frame,"
-                 f"afade=t=out:st={max(0.0, ate_s - FADE_S):.3f}:d={FADE_S}")
+        corte += (f",volume='if(gte(t,{ate_s:.3f}),0,1)':eval=frame,"
+                  f"afade=t=out:st={max(0.0, ate_s - FADE_S):.3f}:d={FADE_S}")
     return (f"[0:a]{_LN},volume={VOL_FUNDO}{corte}[f];"
             f"[1:a]{_LN},asplit=2[d][sc];"
             f"[f][sc]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=350[fd];"
@@ -102,9 +213,21 @@ def misturar(bruto: Path, dublado: Path, destino: Path,
     fundo = separar(Path(bruto), pasta)
     if fundo is None:
         return None
+    musica = trechos_de_musica(fundo)
+    if musica is None:
+        # falha FECHADA: sem saber onde ha' musica, nada de fundo
+        print("      [fundo] sem classificador — segue so' a voz", flush=True)
+        shutil.rmtree(pasta / MODELO, ignore_errors=True)
+        return None
+    if musica:
+        seg = sum(b - a for a, b in musica)
+        print(f"      [fundo] musica tirada em {len(musica)} trecho(s), "
+              f"{seg:.1f}s: {musica[:6]}{' ...' if len(musica) > 6 else ''}", flush=True)
+    else:
+        print("      [fundo] sem musica no fundo — ambiente e risadas inteiros", flush=True)
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(fundo), "-i", str(dublado),
-                        "-filter_complex", filtro_mix(ate_s), "-map", "[a]",
+                        "-filter_complex", filtro_mix(ate_s, musica), "-map", "[a]",
                         "-ar", "44100", str(destino)],
                        check=True, capture_output=True, timeout=300)
         return Path(destino)

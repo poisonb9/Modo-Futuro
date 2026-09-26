@@ -8,7 +8,7 @@ de cada canal entra no prompt (tom, glossário, proibido).
 
 ⛔ PRONÚNCIA: o dono decidiu NÃO alterar ("não pode mudar a pronúncia",
 26/09). As tabelas ficam vazias e este teste FALHA se alguém preenchê-las
-sem pedido dele.
+sem pedido dele. Única exceção pedida por ele: "Wonhee" -> "Uônwee" no make.
 
   [1] os 7 canais do registro têm guia com as 5 seções
   [2] o bloco do canal entra no prompt de narração E no literal; canal sem
@@ -61,11 +61,18 @@ checar("GUIA DE VOZ" not in traducao._montar(traducao.PROMPT_NARRACAO, "T", None
 os.environ.pop("CANAL_ESPERADO")
 checar("GUIA DE VOZ" not in traducao._montar(traducao.PROMPT, "T"), "NEGATIVO: sem canal = como antes")
 
-print("\n[3] pronúncia NÃO muda (decisão do dono, 26/09)")
+print("\n[3] pronúncia NÃO muda (decisão do dono, 26/09), exceto Wonhee no make")
+# ⭐ única exceção, pedida pelo dono em 26/09: "Wonhee" falada "Uônwee"
+EXCECOES = {"truque.importado": (("Wonhee", "Uônwee"),)}
 for nome in canais_registro.CANAIS:
-    checar(guia_voz.pronuncias(nome) == (), f"{nome}: tabela de pronúncia vazia")
+    esperado = EXCECOES.get(nome, ())
+    checar(guia_voz.pronuncias(nome) == esperado,
+           f"{nome}: tabela = {esperado or 'vazia'} ({guia_voz.pronuncias(nome)})")
 frase = "A Risabae maquiou a Wonhee do ILLIT e o Felix do Stray Kids."
-checar(guia_voz.para_fala(frase, "truque.importado") == frase, "texto falado igual ao escrito")
+checar(guia_voz.para_fala(frase, "truque.importado") ==
+       "A Risabae maquiou a Uônwee do ILLIT e o Felix do Stray Kids.",
+       "make: só a Wonhee muda na fala; Risabae, ILLIT e Felix ficam")
+checar(guia_voz.para_fala(frase, "modofuturo") == frase, "outro canal: nada muda")
 
 print("\n[4] a legenda não passa pela pronúncia")
 usos = [p.relative_to(RAIZ).as_posix() for p in (RAIZ / "engine").glob("*.py")

@@ -12,8 +12,13 @@ o corte fecha num passo inteiro, nunca no meio da make.
 
 ## Pronúncia
 ⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são
-falados como a voz fala naturalmente. Esta seção fica VAZIA de propósito;
-o motor só troca pronúncia se houver tabela aqui.
+falados como a voz fala naturalmente. A ÚNICA exceção é a linha abaixo,
+pedida pelo dono na mesma data. Não acrescentar outra sem pedido dele.
+Só a voz muda; legenda e título continuam com a grafia oficial.
+
+| escrita | falada |
+|---|---|
+| Wonhee | Uônwee |
 
 ## Glossário
 - idol: "a idol" / "o idol" (não traduzir para "ídolo")

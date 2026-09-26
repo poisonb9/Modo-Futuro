@@ -43,6 +43,11 @@ _PAUSA_ENTRE_FRASES_S = 0.15
 # workflow `previa_voz.yml`). Env `VOZ_CFG_PESO` sobrepoe, pra testar.
 VOZ_CFG_PESO: float | None = None
 
+# ⭐ Frase ancorada no tempo do original (item 2, ver `_ancorar`). Env
+# `DUB_ANCORAR=0` volta ao modo antigo (frases emendadas desde 0 s).
+import os as _os
+ANCORAR_FRASES = _os.environ.get("DUB_ANCORAR", "1") != "0"
+
 
 def _bypass_watermarker():
     import perth
@@ -193,6 +198,47 @@ def _aplicar_ganho(caminho: Path, ganho: float) -> Path:
     return saida if saida.exists() else caminho
 
 
+def _janelas_por_segmento(segmentos: list[dict],
+                          frases: list[str]) -> list[tuple[float, float]]:
+    """(inicio, fim) de cada frase pela POSICAO dela no texto dos segmentos.
+
+    As frases saem de juntar o texto dos segmentos e cortar na pontuacao, na
+    mesma ordem — entao cada frase e' um trecho contiguo desse texto. Acha o
+    trecho, ve' em que segmento(s) cai e interpola pelo numero de letras.
+    Devolve [] se alguma frase nao for achada (ai' vale a divisao proporcional).
+    """
+    pedacos, texto, pos = [], "", 0
+    for s in segmentos:
+        t = (s.get("texto") or "").strip()
+        if not t:
+            continue
+        if texto:
+            texto += " "
+            pos += 1
+        pedacos.append((pos, pos + len(t), float(s["inicio"]), float(s["fim"])))
+        texto += t
+        pos += len(t)
+    if not pedacos:
+        return []
+
+    def tempo(off: int) -> float:
+        for a, b, ti, tf in pedacos:
+            if off <= b:
+                frac = min(1.0, max(0.0, (off - a) / max(1, b - a)))
+                return ti + frac * (tf - ti)
+        return pedacos[-1][3]
+
+    janelas, cursor = [], 0
+    for f in frases:
+        achou = texto.find(f.strip(), cursor)
+        if achou < 0:
+            return []
+        fim_off = achou + len(f.strip())
+        janelas.append((tempo(achou), tempo(fim_off)))
+        cursor = fim_off
+    return janelas
+
+
 def _janelas_das_frases(segmentos: list[dict],
                         frases: list[str]) -> list[tuple[float, float]]:
     """Onde cada frase sintetizada cai no VIDEO ORIGINAL.
@@ -210,6 +256,13 @@ def _janelas_das_frases(segmentos: list[dict],
                if s.get("inicio") is not None and s.get("fim") is not None]
     if not validos or not frases:
         return []
+    # ⭐ 26/09: primeiro tenta achar cada frase DENTRO do texto do seu
+    # segmento e interpolar o tempo ali. A divisao proporcional abaixo espalha
+    # pelo intervalo inteiro e ignora onde cada segmento comeca (a ultima
+    # frase de um teste caiu 1,5 s antes da fala original dela).
+    por_segmento = _janelas_por_segmento(validos, frases)
+    if por_segmento:
+        return por_segmento
     ini = float(min(s["inicio"] for s in validos))
     fim = float(max(s["fim"] for s in validos))
     if fim <= ini:
@@ -278,6 +331,41 @@ def _concatenar_com_pausas(caminhos: list[Path], destino: Path,
             rotulos.append(f"[{i}:a]")
     filtro = ";".join(filtros) + ";" + "".join(rotulos) + f"concat=n={n}:v=0:a=1[out]"
 
+    cmd += ["-filter_complex", filtro, "-map", "[out]", "-ar", "44100", str(destino)]
+    midia.roda(cmd)
+    return destino
+
+
+def _ancorar(duracoes: list[float], janelas: list[tuple[float, float]],
+             pausa_min: float = _PAUSA_MIN_S) -> list[float]:
+    """Inicio de cada frase: quando a fala ORIGINAL dela comeca, ou logo
+    depois da anterior se esta ainda estiver falando.
+
+    ⭐ 26/09/2026 (item 2 da dublagem). MEDIDO nas 12 ultimas runs: de 71
+    clipes dublados, 70 terminavam a narracao CEDO — 2,5 a 35,7 s de silencio
+    no fim (tipico ~19 s). As frases eram emendadas desde 0 s com pausa de no
+    maximo 0,6 s, entao a fala corria na frente da imagem e acabava antes do
+    video. Ancorada, a voz acompanha o original ate' o fim.
+    """
+    inicios, fim_ant = [], 0.0
+    for i, dur in enumerate(duracoes):
+        alvo = janelas[i][0] if i < len(janelas) else fim_ant
+        ini = max(alvo, fim_ant + (pausa_min if i else 0.0))
+        inicios.append(ini)
+        fim_ant = ini + dur
+    return inicios
+
+
+def _montar_ancorado(caminhos: list[Path], inicios: list[float],
+                     destino: Path) -> Path:
+    """Cada frase no seu instante (adelay), somadas sem normalizar."""
+    cmd = ["ffmpeg", "-y"]
+    for c in caminhos:
+        cmd += ["-i", str(c)]
+    filtros = [f"[{i}:a]aresample=44100,adelay={int(t * 1000)}:all=1[a{i}]"
+               for i, t in enumerate(inicios)]
+    filtro = (";".join(filtros) + ";" + "".join(f"[a{i}]" for i in range(len(caminhos)))
+              + f"amix=inputs={len(caminhos)}:normalize=0:duration=longest[out]")
     cmd += ["-filter_complex", filtro, "-map", "[out]", "-ar", "44100", str(destino)]
     midia.roda(cmd)
     return destino
@@ -402,9 +490,10 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     enfases: list[float | None] = [None] * len(frases)
     ganhos: list[float] = [1.0] * len(frases)
     pausas: list[float] = []
-    if fonte is not None and Path(fonte).exists():
+    # onde cada frase cai no original — serve a' dinamica E a' ancoragem
+    janelas = _janelas_das_frases(segmentos, frases)
+    if fonte is not None and Path(fonte).exists() and janelas:
         try:
-            janelas = _janelas_das_frases(segmentos, frases)
             medidas = dinamica.medir_blocos(Path(fonte), janelas)
             enfases = dinamica.enfase_por_bloco(medidas)
             ganhos = dinamica.ganho_por_bloco(medidas)
@@ -447,8 +536,25 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     print(f"      [voz] as {len(frases)} frases prontas em "
           f"{time.monotonic() - t_lote:.0f}s", flush=True)
 
-    concatenado = trabalho / "voz_concatenada.wav"
-    _concatenar_com_pausas(partes, concatenado, pausas=pausas)
+    if ANCORAR_FRASES and len(janelas) == len(frases):
+        inicios = _ancorar(duracoes, janelas)
+        concatenado = _montar_ancorado(partes, inicios, trabalho / "voz_ancorada.wav")
+        print(f"      [voz] frases ancoradas no tempo do original "
+              f"(1a em {inicios[0]:.1f}s, ultima termina em "
+              f"{inicios[-1] + duracoes[-1]:.1f}s)", flush=True)
+    else:
+        concatenado = trabalho / "voz_concatenada.wav"
+        _concatenar_com_pausas(partes, concatenado, pausas=pausas)
+        # ⚠️ o timing tem de somar AS MESMAS pausas do audio. Antes somava
+        # sempre 0,15 s enquanto o audio usava as pausas do original (ate'
+        # 0,6 s): a legenda escorregava pra frente da voz frase a frase.
+        inicios, t = [], 0.0
+        for i, dur in enumerate(duracoes):
+            inicios.append(t)
+            p_i = _PAUSA_ENTRE_FRASES_S
+            if pausas and i + 1 < len(pausas):
+                p_i = min(_PAUSA_MAX_S, max(_PAUSA_MIN_S, pausas[i + 1]))
+            t += dur + p_i
     dur_concatenada = midia.duracao(concatenado)
 
     destino = trabalho / "trilha_dublada_clonada.wav"
@@ -478,10 +584,7 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
               f"pro clipe de {duracao_total:.1f}s (acelerando {fator_atempo:.2f}x"
               f"{' — NO TETO, ainda vai soar corrido' if fator_atempo >= 1.6 else ''})")
 
-    timing, t = [], 0.0
-    for frase, dur in zip(frases, duracoes):
-        timing.append({"frase": frase, "inicio": t * escala,
-                        "fim": (t + dur) * escala})
-        t += dur + _PAUSA_ENTRE_FRASES_S
+    timing = [{"frase": frase, "inicio": ini * escala, "fim": (ini + dur) * escala}
+              for frase, ini, dur in zip(frases, inicios, duracoes)]
 
     return destino, timing

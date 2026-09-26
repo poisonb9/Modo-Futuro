@@ -96,6 +96,9 @@ jobs:
       contents: write
     env:
       HF_HOME: ${{ github.workspace }}/.cache/huggingface
+      # modelo do Demucs (torch.hub) num caminho FIXO: na run 36206642639 o
+      # cache em ~/.cache/torch/hub nao existia no fim e nao foi salvo
+      TORCH_HOME: ${{ github.workspace }}/.cache/torch
     steps:
       - uses: actions/checkout@v4
 
@@ -196,8 +199,8 @@ jobs:
         if: ${{ inputs.dublar == 'true' && inputs.fundo_original == 'true' }}
         uses: actions/cache@v4
         with:
-          path: ~/.cache/torch/hub
-          key: demucs-htdemucs-v1
+          path: ${{ github.workspace }}/.cache/torch
+          key: demucs-htdemucs-v2
 
       - name: Instalar Demucs
         if: ${{ inputs.dublar == 'true' && inputs.fundo_original == 'true' }}

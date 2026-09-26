@@ -751,6 +751,14 @@ def main() -> None:
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")
 
     horarios = proximos_horarios(agendados, max(0, vagas), conhecidos)
+    # ⭐ COZINHA: RECEITA NA HORA DA REFEICAO (trazido do `pipeline`, 26/09,
+    # quando a cozinha veio para este motor). "Cafe da Manha" nao vai as
+    # 16:27. So' reordena o que a refeicao exigir; clipe que nao casa com
+    # nada segue a ordem de sempre. Ver engine/refeicao.py. Outros canais: nada muda.
+    from engine import canais_registro as _cr
+    if _cr.canonico(canal_deste_run) == "cozinha.importada":
+        from engine import refeicao
+        fila = refeicao.casar(fila, horarios)
     enviados = 0
     for (chave, clipe), quando in zip(fila, horarios):
         if enviados >= vagas:

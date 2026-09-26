@@ -260,6 +260,13 @@ def _montar(prompt: str, texto: str, genero: str | None = None,
 
 def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
                     duracao_s: float | None = None) -> str:
+    # ⭐ MODO RECEITA (trazido do motor `pipeline`, 26/09): converte medida
+    # ANTES de traduzir. O Gemini recebe a receita ja' em grama e °C e so'
+    # traduz o texto em volta; deixar pra depois daria ao modelo a chance de
+    # "ajudar" e desconverter, e a densidade por ingrediente ele nao tem.
+    if config.modo_receita():
+        from . import conversoes
+        texto, _selos = conversoes.converter(texto)
     if not texto.strip():
         return texto
 

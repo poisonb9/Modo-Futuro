@@ -46,6 +46,10 @@ async def _sintetizar(texto: str, destino: Path, voz: str,
     # TTS, nao so' do que estava ativo em 22/08/2026.
     from . import guia_voz   # pronuncia do canal, so' na fala (26/09)
     extra = {"rate": velocidade} if velocidade else {}
+    import config
+    if config.modo_receita():   # unidade por extenso, ver voz_clonada._falar
+        from . import conversoes
+        texto = conversoes.para_fala(texto)
     comm = edge_tts.Communicate(guia_voz.para_fala(numeros.por_extenso(texto)),
                                 voice=voz, **extra)
     await comm.save(str(destino))

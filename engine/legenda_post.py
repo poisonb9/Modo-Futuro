@@ -62,7 +62,10 @@ def montar(meta: dict, nome_padrao: str = "") -> str:
     # ponto: hashtag e' rodape, ninguem le' o que vem depois dela. A chamada
     # tem de ser a ultima COISA LIDA, nao a ultima linha do arquivo.
     # Ver engine/chamada.py — canal sem destino nao ganha chamada nenhuma.
-    for campo in ("descricao", "legenda_premium", "chamada"):
+    # `receita_texto` (so' no modo receita, 26/09): a receita escrita, com a
+    # medida ja' convertida, logo depois da descricao — e' o que a pessoa le'
+    # com a mao na massa.
+    for campo in ("descricao", "receita_texto", "legenda_premium", "chamada"):
         v = str(meta.get(campo) or "").strip()
         if v:
             partes.append(v)

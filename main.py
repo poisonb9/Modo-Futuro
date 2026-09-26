@@ -340,7 +340,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # ser a propria acao — a mao aplicando o produto sem fala. Cortar
             # tiraria passo da make.
             dur_final = fim - ini
-            _procedimento = (os.environ.get("SELECAO_MODO") or "").strip() == "procedimento"
+            # receita (26/09) idem: o silencio e' a mao mexendo/despejando
+            _procedimento = (os.environ.get("SELECAO_MODO") or "").strip() in (
+                "procedimento", "receita")
             if config.CORTAR_SILENCIOS and not _procedimento:
                 enxuto = midia.cortar_silencios(
                     bruto, config.TRABALHO / f"bruto_{i:02d}_enxuto.mp4")
@@ -378,6 +380,22 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": {motivo}")
                 continue
 
+            # ⭐ MODO RECEITA (trazido do motor `pipeline`, 26/09). A fonte e'
+            # compilacao: corte que abre apoiado na receita ANTERIOR ("a mesma
+            # frigideira") nao se entende — 6 de 32 abriam assim (30/08). E
+            # corte so' do encerramento do canal-fonte nao e' receita.
+            if config.modo_receita():
+                from engine import abertura
+                for _guarda in (abertura.orfa, abertura.so_encerramento):
+                    _ruim, _motivo = _guarda(ps)
+                    if _ruim:
+                        print(f"      [!] descartado \"{c.get('titulo','')[:40]}\": {_motivo}")
+                        break
+                else:
+                    _ruim = False
+                if _ruim:
+                    continue
+
             # guardrail de ritmo [PAPER]: acima de ~200 palavras/min a
             # compreensão cai (Weinstein-Shr & Griffiths). A decupagem não
             # acelera a fala, mas aumenta a densidade — vale medir e avisar.
@@ -411,7 +429,14 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print("      ⚠️ QUARENTENA: traduzido pela reserva, "
                           "nao entra na fila de postagem sem o Bryan aprovar")
                 ps = traducao.segmentos_para_palavras(segmentos)
-                if getattr(config, "LEGENDA_PREMIUM", False):
+                if config.modo_receita():
+                    # receita: o texto da legenda e' a RECEITA (medida ja'
+                    # convertida), no lugar do contexto premium
+                    from engine import receita_texto
+                    c["receita_texto"] = receita_texto.gerar(segmentos)
+                    if c["receita_texto"]:
+                        print(f"      receita em texto: {len(c['receita_texto'])} chars")
+                elif getattr(config, "LEGENDA_PREMIUM", False):
                     from engine import legenda_premium
                     c["legenda_premium"] = legenda_premium.gerar(segmentos)
                     if c["legenda_premium"]:
@@ -680,6 +705,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # defeito nao era a montagem: era o dado que nunca chegava.
             meta = {k: c.get(k) for k in
                     ("titulo", "descricao", "tags", "legenda_premium",
+                     # receita escrita do modo receita (26/09); fora desta
+                     # lista ela morreria aqui, como a premium em 31/08
+                     "receita_texto",
                      "gancho", "porque",
                      # ⚠️ ESTES DOIS SAO A QUARENTENA. Fora desta lista, o
                      # clipe traduzido pela reserva chega ao agendador sem
@@ -894,6 +922,15 @@ def main():
         escopo.exigir_canal_do_motor(os.environ.get("CANAL_ESPERADO"))
     except escopo.ForaDoEscopo as e:
         sys.exit(f"[x] RECUSADO: {e}")
+
+    # ⭐ 26/09/2026: a cozinha AGORA e' deste motor, e o defeito de 03/09 acima
+    # nao pode voltar por um disparo que esqueceu o modo. Cozinha = SEMPRE
+    # modo receita (conversao de medida), qualquer que seja o SELECAO_MODO.
+    from engine import canais_registro as _cr
+    if (_cr.canonico(os.environ.get("CANAL_ESPERADO") or "") == "cozinha.importada"
+            and not config.modo_receita()):
+        print("[i] cozinha: SELECAO_MODO forcado para 'receita' (conversao de medida)")
+        os.environ["SELECAO_MODO"] = "receita"
 
     for b in ("ffmpeg", "ffprobe"):
         if not shutil.which(b):

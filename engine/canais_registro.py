@@ -112,9 +112,14 @@ CANAIS: dict[str, Canal] = {
         #
         # ⚠️ Havera' DOIS canais "achadinho" (make e chef). E' de proposito,
         # e' familia de marca. Nao e' duplicata, nao "conserte".
+        # ⭐ 26/09/2026: A COZINHA VEIO PARA ESTE MOTOR (dono: "trazer a
+        # cozinha para este motor e todos os canais"). A conversao de medidas
+        # que so' existia no `pipeline` agora esta' aqui (engine/conversoes.py,
+        # modo receita: `SELECAO_MODO=receita`). O `pipeline` deixa de ser quem
+        # serve o canal — desligar os agendamentos de la' e' ato do dono.
         Canal("cozinha.importada", "@cozinha.internacional",
               "6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15",
-              "BUFFER_TOKEN_COZINHA", motor=False,
+              "BUFFER_TOKEN_COZINHA", motor=True,
               apelidos=("cozinha.internacional", "cozinha")),
 
         # ⚠️⚠️ AS DUAS DE BAIXO EXISTEM NO TIKTOK E **NAO** NO BUFFER.

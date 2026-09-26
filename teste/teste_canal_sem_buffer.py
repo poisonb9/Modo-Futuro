@@ -81,9 +81,9 @@ for n in COM_BUFFER:
                f"{n}: org, canal_id e env PREENCHIDOS")
 checar("modofuturo" in escopo.CANAIS_DO_MOTOR,
        "modofuturo continua no escopo do motor")
-checar(len(escopo.CANAIS_DO_MOTOR) == 4,
-       f"4 canais no escopo (veio {len(escopo.CANAIS_DO_MOTOR)}) — "
-       "cozinha e' motor=False, os dois da fase 2 tambem")
+checar(len(escopo.CANAIS_DO_MOTOR) == 5,
+       f"5 canais no escopo (veio {len(escopo.CANAIS_DO_MOTOR)}) — "
+       "a cozinha entrou em 26/09 (dono); os dois da fase 2 seguem motor=False")
 
 print("\n4. o canonico() traduz os nomes novos (e' ele que le' export e manifesto)")
 checar(cr.canonico("fatura.chora") == "fatura.chora", "fatura.chora")

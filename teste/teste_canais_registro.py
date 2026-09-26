@@ -40,9 +40,12 @@ def teste_negativo_desconhecido_devolve_None_e_nao_chute():
     assert "cozinha.internacional" not in cr.CANAIS
 
 
-def teste_negativo_a_cozinha_nao_e_deste_motor():
-    assert "cozinha.importada" not in cr.do_motor()
-    assert cr.CANAIS["cozinha.importada"].motor is False
+def teste_a_cozinha_agora_e_deste_motor():
+    # 26/09/2026, dono: "trazer a cozinha para este motor e todos os canais".
+    # Pre-condicao que a tornou possivel: a conversao de medidas veio junto.
+    assert "cozinha.importada" in cr.do_motor()
+    assert cr.CANAIS["cozinha.importada"].motor is True
+    assert (RAIZ / "engine" / "conversoes.py").exists()
 
 
 # ------------------------------------------------- o default morreu

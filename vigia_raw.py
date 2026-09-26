@@ -274,6 +274,9 @@ def canal_da_pasta(caminho: str) -> str | None:
 
 ENTRADAS_POR_CANAL = {
     "truque.importado": {"selecao_modo": "procedimento", "amostra_voz": "bruna"},
+    # ⭐ 26/09/2026: a cozinha veio do motor `pipeline` para este (dono). Modo
+    # receita = conversao de medida + guardas de abertura; voz da Bruna (dono).
+    "cozinha.importada": {"selecao_modo": "receita", "amostra_voz": "bruna"},
 }
 
 

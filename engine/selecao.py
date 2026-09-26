@@ -111,6 +111,78 @@ CRITERIOS (nesta ordem de peso):
 """
 
 
+# ⭐ RECEITA (26/09/2026): a cozinha veio do motor `pipeline` para este, por
+# decisao do dono ("trazer a cozinha para este motor e todos os canais").
+# Texto trazido do PROMPT_RECEITA de la', que ja' estava medido e calibrado
+# (abertura orfa 6/32 em 30/08, fecho duro de 28/08). `SELECAO_MODO=receita`.
+CRITERIO_RECEITA = """ESTRUTURA DE UM CORTE DE RECEITA — as tres partes dentro do mesmo trecho:
+1. ABERTURA (primeiros ~2s): comece com o PRATO PRONTO na tela, ou com o
+   momento mais bonito do preparo (algo derretendo, dourando, sendo cortado).
+   NUNCA comece com o cozinheiro se apresentando, falando "oi pessoal",
+   explicando o que vai fazer, ou com tela de titulo. Corte DEPOIS disso.
+
+   ⚠️ A PRIMEIRA FRASE NAO PODE SE APOIAR NO QUE VEIO ANTES.
+   O video-fonte e' uma compilacao: quando voce corta no meio, o espectador
+   NUNCA VIU a receita anterior. Uma frase que se refere a ela nao significa
+   nada e confunde nos dois primeiros segundos, que e' onde a audiencia
+   decide ficar.
+
+   Nao comece com: "a MESMA frigideira", "TERMINAMOS o grao-de-bico", "EM
+   SEGUIDA vamos", "DE VOLTA ao fogo", "AGORA que ja' fizemos", "pro SEGUNDO
+   prato", "reserve ISSO", nem com uma palavra solta que era o fim da frase
+   anterior ("Abacate.", "Peito de frango!").
+
+   Teste antes de escolher o inicio: se a primeira frase contem "mesma",
+   "terminamos", "em seguida", "de volta", "agora que", "tambem" ou um
+   ordinal ("segunda", "terceira") apontando pra fora do trecho, ANDE PRA
+   FRENTE ate' a primeira frase que se sustenta sozinha.
+
+   Medido em 30/08/2026: de 32 cortes ja' produzidos, 6 (19%) abriam assim.
+   E o melhor video do canal ate' hoje (536 views) e' justamente o que abre
+   limpo, com beneficio: "Sustenta bastante e me mantem satisfeita".
+2. PREPARO: o passo que faz diferenca — a tecnica, o ingrediente inesperado,
+   a quantidade que surpreende. Nao precisa da receita inteira; precisa da
+   parte que a pessoa nao sabia.
+3. RESULTADO: termine no prato pronto ou na primeira mordida.
+
+O FECHO E UMA REGRA DURA, NAO UMA SUGESTAO:
+Corte EXATAMENTE no ultimo passo util da receita. Nada depois.
+Nao inclua: conversa depois de comer ("voce gosta?", "hum", "quer um
+pouco?"), reacao de quem prova, despedida, "se inscreva", agradecimento,
+nem o cozinheiro comentando o resultado.
+Isso nao e' preciosismo: no corte de 28/08/2026 sobraram 9 segundos de
+conversa com uma crianca depois do prato pronto. Segundo vazio no fim
+derruba a retencao, que e' o que governa a distribuicao.
+Se a fala util acaba aos 100s e o video segue ate' 115s, o corte
+termina aos 100s.
+
+CRITERIOS (nesta ordem de peso):
+1. Comida na tela nos 2 primeiros segundos. Sem isso o corte nao serve.
+2. O trecho cita INGREDIENTE e QUANTIDADE em algum momento. Isso vale muito:
+   e' onde a conversao de medida aparece na legenda, que e' o diferencial
+   deste canal. Prefira trechos com medida a trechos so' de conversa.
+3. Receita COMPLETA o suficiente pra pessoa entender e querer repetir.
+4. Apetite: closes, vapor, textura, som de fritura ou corte.
+5. Corte em pausa natural da fala.
+
+REGRA MAIS IMPORTANTE — O CORTE TEM QUE SER SEGUIVEL SOZINHO:
+Quem assiste esta tentando FAZER o prato. Um corte que termina no meio de um
+passo nao e' so' ruim, e' inutil: a pessoa fica sem saber o que vem depois e
+nao consegue cozinhar.
+
+O trecho precisa ser uma UNIDADE COMPLETA. Duas formas valem:
+  (a) a receita inteira, do inicio ao prato pronto; ou
+  (b) uma etapa que se basta — "a massa", "o recheio", "a cobertura" — com
+      comeco, meio e fim dentro do proprio corte.
+
+NUNCA corte no meio de uma instrucao nem no meio da lista de ingredientes.
+Se o passo nao couber inteiro no tempo, escolha OUTRO trecho — nao entregue
+metade.
+
+Se for uma etapa (caso b), o TITULO precisa dizer isso com honestidade
+("Como fazer a massa do donut"), nunca prometer a receita completa.
+"""
+
 def _criterio() -> str:
     """Qual criterio de corte este disparo usa.
 
@@ -123,7 +195,8 @@ def _criterio() -> str:
     por causa de um typo no disparo do quinto.
     """
     modo = (os.environ.get("SELECAO_MODO") or "").strip().lower()
-    bloco = CRITERIO_PROCEDIMENTO if modo == "procedimento" else CRITERIO_RETORICO
+    bloco = {"procedimento": CRITERIO_PROCEDIMENTO,
+             "receita": CRITERIO_RECEITA}.get(modo, CRITERIO_RETORICO)
     # normaliza as pontas: o espacamento em volta e do TEMPLATE, nao do
     # bloco. Sem isto, uma linha em branco a mais ou a menos em cada
     # constante muda o prompt dos quatro canais que ja rodam.
@@ -588,7 +661,7 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     prompt = PROMPT.format(tipo=tipo, n=qtd, criterio=_criterio(),
                            dmin=config.DUR_MIN,
                            dmax=(180 if (os.environ.get("SELECAO_MODO") or "")
-                                 .strip().lower() == "procedimento"
+                                 .strip().lower() in ("procedimento", "receita")
                                  else config.DUR_MAX))
 
     def corpo(uri):
@@ -739,7 +812,7 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
         # chegar ao RESULTADO FINAL (dono: "nao tem problema ficar mais
         # longo"). Teto de seguranca de 180 s contra alucinacao de tempo.
         teto = (180 if (os.environ.get("SELECAO_MODO") or "").strip().lower()
-                == "procedimento" else config.DUR_MAX)
+                in ("procedimento", "receita") else config.DUR_MAX)
         if fim - ini > teto:
             fim = ini + teto
         if any(ini < f and fim > i for i, f in ocupados):   # sobreposição

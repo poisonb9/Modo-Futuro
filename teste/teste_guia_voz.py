@@ -76,7 +76,8 @@ checar(guia_voz.para_fala(frase, "modofuturo") == frase, "outro canal: nada muda
 
 print("\n[4] a legenda não passa pela pronúncia")
 usos = [p.relative_to(RAIZ).as_posix() for p in (RAIZ / "engine").glob("*.py")
-        if "para_fala(" in p.read_text(encoding="utf-8") and p.name != "guia_voz.py"]
+        # `guia_voz.para_fala`; o `conversoes.para_fala` (unidade da receita) e' outro
+        if "guia_voz.para_fala(" in p.read_text(encoding="utf-8") and p.name != "guia_voz.py"]
 # conferencia.py usa para comparar o que a voz OUVIU com o que ela RECEBEU
 checar(sorted(usos) == ["engine/conferencia.py", "engine/dublagem.py", "engine/voz_clonada.py"],
        f"só os caminhos de VOZ (e a conferência dela) chamam para_fala ({usos})")

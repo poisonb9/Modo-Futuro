@@ -66,7 +66,7 @@ on:
         required: false
         default: ""
       selecao_modo:
-        description: "Criterio de corte. (vazio) = retorico, o corte fecha quando a IDEIA se resolve — os canais de fala. 'procedimento' = o corte tem de ser um PASSO INTEIRO (comeco limpo, meio inteiro, fim resolvido) e descarta se nao couber. OBRIGATORIO no truque.importado: o criterio retorico manda terminar ABRUPTO, que em maquiagem e' o video quebrado."
+        description: "Criterio de corte. (vazio) = retorico, o corte fecha quando a IDEIA se resolve — os canais de fala. 'procedimento' = o corte tem de ser um PASSO INTEIRO (comeco limpo, meio inteiro, fim resolvido) e descarta se nao couber. OBRIGATORIO no truque.importado: o criterio retorico manda terminar ABRUPTO, que em maquiagem e' o video quebrado. 'receita' = cozinha (26/09): abre no prato, fecha no resultado, converte medida (g, ml, C) e escreve a receita na legenda. OBRIGATORIO na cozinha.importada."
         required: false
         default: ""
       recorte:

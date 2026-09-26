@@ -177,6 +177,13 @@ def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,
     # Numero por extenso SO' aqui, no ponto em que o texto vira audio. A
     # legenda na tela continua com o digito ("2030" le' melhor que "dois mil
     # e trinta" escrito), e o `timing` devolvido segue com o texto original.
+    # ⭐ receita (26/09): "240 g" tem de sair "duzentos e quarenta GRAMAS", nao
+    # "ge'". Unidade vira palavra ANTES do numeros.py (trazido do `pipeline`).
+    # So' no modo receita: em chips, "5g" nao e' grama.
+    import config
+    if config.modo_receita():
+        from . import conversoes
+        texto = conversoes.para_fala(texto)
     falado = numeros.por_extenso(texto)
     # ⭐ 26/09: nome dito como o canal fala ("Risabae" -> "Rissabé"), pela
     # tabela de pronuncia do Guia de voz do canal. SO' aqui — a legenda nao muda.

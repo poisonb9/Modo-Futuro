@@ -52,8 +52,13 @@ def nota_texto(esperado: str, ouvido: str) -> float:
 
 def formas_faladas(texto: str) -> list[str]:
     """A grafia e o que a voz de fato recebeu (numero por extenso + Guia de voz)."""
+    import config
     from . import guia_voz, numeros
-    falado = guia_voz.para_fala(numeros.por_extenso(texto))
+    base = texto
+    if config.modo_receita():   # "240 g" foi DITO "gramas" (ver voz_clonada._falar)
+        from . import conversoes
+        base = conversoes.para_fala(texto)
+    falado = guia_voz.para_fala(numeros.por_extenso(base))
     return [texto] if falado == texto else [texto, falado]
 
 

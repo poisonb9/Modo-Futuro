@@ -1,0 +1,429 @@
+# -*- coding: utf-8 -*-
+"""Medida americana vira medida brasileira, antes de virar fala.
+
+POR QUE EXISTE
+E' o diferencial do canal. Receita americana vem em cup, oz e F; o brasileiro
+cozinha em grama, ml e C. Converter e' o produto, nao um detalhe.
+
+A ARMADILHA CENTRAL
+"1 cup" NAO tem valor fixo em gramas — depende da densidade do ingrediente:
+
+    1 cup de farinha = 120 g      1 cup de acucar = 200 g
+    1 cup de mel     = 340 g
+
+Quase o triplo entre o mais leve e o mais pesado. Por isso a tabela e' POR
+INGREDIENTE. Ingrediente desconhecido cai pra **ml**, que e' conversao exata de
+volume e vale pra qualquer coisa. Chutar grama quebra a receita, e a confianca e'
+o unico ativo deste canal.
+
+ORDEM NO PIPELINE
+Roda ANTES de `engine/numeros.py`. O numeros.py transforma digito em palavra pro
+TTS ("180" -> "cento e oitenta"), entao se a conversao rodar depois, o valor
+convertido chega no TTS como digito e a voz chuta a leitura.
+"""
+from __future__ import annotations
+
+import re
+import unicodedata
+
+ML_POR_CUP = 240.0
+
+# gramas em 1 cup. Arredondado de proposito: receita nao usa decimal, e numero
+# redondo le' melhor na tela.
+DENSIDADE = {
+    "agua": 240, "leite": 240, "caldo": 240, "suco": 240,
+    "farinha de trigo": 120, "farinha": 120, "farinha integral": 130,
+    "farinha de amendoa": 96, "amido de milho": 120,
+    "acucar": 200, "acucar mascavo": 220, "acucar de confeiteiro": 120,
+    "mel": 340, "melado": 340, "xarope": 340,
+    "manteiga": 227, "oleo": 218, "azeite": 216,
+    "creme de leite": 240, "iogurte": 245,
+    "arroz": 185, "aveia": 90, "farinha de rosca": 108,
+    "cacau em po": 85, "chocolate": 175,
+    "queijo ralado": 100, "castanhas": 120, "nozes": 117,
+    "sal": 273, "sal grosso": 220,
+}
+
+# ingrediente em ingles -> (nome em portugues, chave da densidade)
+GLOSSARIO = {
+    "all-purpose flour": ("farinha de trigo", "farinha de trigo"),
+    "flour": ("farinha de trigo", "farinha de trigo"),
+    "whole wheat flour": ("farinha integral", "farinha integral"),
+    "almond flour": ("farinha de amendoa", "farinha de amendoa"),
+    "cornstarch": ("amido de milho", "amido de milho"),
+    "sugar": ("acucar", "acucar"),
+    "granulated sugar": ("acucar", "acucar"),
+    "brown sugar": ("acucar mascavo", "acucar mascavo"),
+    "powdered sugar": ("acucar de confeiteiro", "acucar de confeiteiro"),
+    "confectioners sugar": ("acucar de confeiteiro", "acucar de confeiteiro"),
+    "honey": ("mel", "mel"),
+    "maple syrup": ("xarope de bordo", "xarope"),
+    "butter": ("manteiga", "manteiga"),
+    "oil": ("oleo", "oleo"),
+    "olive oil": ("azeite", "azeite"),
+    "milk": ("leite", "leite"),
+    "water": ("agua", "agua"),
+    "heavy cream": ("creme de leite fresco", "creme de leite"),
+    "cream": ("creme de leite", "creme de leite"),
+    "yogurt": ("iogurte", "iogurte"),
+    "rice": ("arroz", "arroz"),
+    "rolled oats": ("aveia em flocos", "aveia"),
+    "oats": ("aveia", "aveia"),
+    "breadcrumbs": ("farinha de rosca", "farinha de rosca"),
+    "cocoa powder": ("cacau em po", "cacau em po"),
+    "chocolate chips": ("gotas de chocolate", "chocolate"),
+    "grated cheese": ("queijo ralado", "queijo ralado"),
+    "walnuts": ("nozes", "nozes"),
+    "salt": ("sal", "sal"),
+    "broth": ("caldo", "caldo"), "stock": ("caldo", "caldo"),
+}
+
+# termos que traducao literal estraga — sem medida associada
+TERMOS = {
+    "baking soda": "bicarbonato de sodio",
+    "baking powder": "fermento quimico em po",
+    "buttermilk": "leite fermentado",
+    "half-and-half": "metade leite, metade creme",
+    "shortening": "gordura vegetal",
+    "to fold": "incorporar delicadamente",
+    "broil": "gratinar",
+    "mirin": "mirin (vinho doce de arroz)",
+    "dashi": "dashi (caldo de peixe e alga)",
+    "creme fraiche": "creme de leite azedo",
+    "roux": "roux (farinha tostada na manteiga)",
+    "passata": "molho de tomate peneirado",
+    "guanciale": "guanciale (papada suina)",
+}
+
+FRACOES = {"½": 0.5, "¼": 0.25, "¾": 0.75, "⅓": 1/3, "⅔": 2/3, "⅛": 0.125}
+
+# QUANTIDADE ESCRITA POR EXTENSO. Fala nao usa digito: o video do muffin abre
+# com "A POUND of breakfast sausage" e o da batata-doce diz "HALF A CUP of
+# black beans". As regras exigiam \d+, entao nada disso convertia — a receita
+# saia com "uma libra de linguica", que nao diz nada pro brasileiro.
+#
+# "half a" tem de vir antes de "a", senao "a" casa primeiro e sobra "half".
+# A forma com "one" e' tao comum quanto a com "a": o Fit Men Cook diz "ONE
+# THIRD OF A CUP of mayonnaise". Sem ela, "a cup" casava sozinho, virava
+# 240 ml, e sobrava um "one third of" orfao — o corte saiu dizendo "um terco
+# de 240 ml de maionese".
+POR_EXTENSO = [
+    ("half a", 0.5), ("half an", 0.5), ("a half", 0.5), ("one half of a", 0.5),
+    ("a quarter of a", 0.25), ("one quarter of a", 0.25),
+    ("a third of a", 1/3), ("one third of a", 1/3), ("two thirds of a", 2/3),
+    ("three quarters of a", 0.75), ("one and a half", 1.5),
+    ("a couple of", 2),
+    ("twelve", 12), ("eleven", 11), ("ten", 10), ("nine", 9), ("eight", 8),
+    ("seven", 7), ("six", 6), ("five", 5), ("four", 4), ("three", 3),
+    ("two", 2), ("one", 1), ("an", 1), ("a", 1),
+]
+
+# Unidades em PORTUGUES. Rede de seguranca: se algum texto chegar aqui ja'
+# traduzido (caminho literal, reprocessamento, legenda escrita a mao), a
+# medida ainda converte em vez de passar batido.
+UNIDADE_PT = {
+    "onca": "oz", "oncas": "oz", "libra": "lb", "libras": "lb",
+    "polegada": "inch", "polegadas": "inch",
+}
+
+
+def _sem_acento(t: str) -> str:
+    return unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
+
+
+def _num(txt: str) -> float | None:
+    txt = txt.strip()
+    if txt in FRACOES:
+        return FRACOES[txt]
+    m = re.fullmatch(r"(\d+)\s*([½¼¾⅓⅔⅛])", txt)
+    if m:
+        return int(m.group(1)) + FRACOES[m.group(2)]
+    m = re.fullmatch(r"(\d+)\s*/\s*(\d+)", txt)
+    if m:
+        return int(m.group(1)) / int(m.group(2))
+    try:
+        return float(txt.replace(",", "."))
+    except ValueError:
+        return None
+
+
+def _bonito(v: float) -> str:
+    """Numero pra tela: sem decimal inutil, arredondado ao util."""
+    if v >= 100:
+        v = round(v / 5) * 5
+    elif v >= 10:
+        v = round(v)
+    else:
+        return f"{v:.1f}".replace(".0", "").replace(".", ",")
+    return str(int(v))
+
+
+def _ingrediente(resto: str) -> tuple[str | None, str | None, str]:
+    """Acha o ingrediente logo depois da medida.
+
+    Devolve tambem o TEXTO QUE SOBROU. Sem isso o " and " que vem depois do
+    ingrediente era engolido pela captura, e duas medidas na mesma frase
+    grudavam: "240 g de farinha de trigo200 g de acucar".
+
+    Casa o nome MAIS LONGO primeiro: 'brown sugar' antes de 'sugar', senao
+    vira acucar comum.
+    """
+    bruto = resto
+    r = _sem_acento(resto.lower()).lstrip()
+    corte = len(resto) - len(r)
+    m = re.match(r"(of|de|da|do)\s+", r)
+    if m:
+        r = r[m.end():]; corte += m.end()
+    for en in sorted(GLOSSARIO, key=len, reverse=True):
+        if r.startswith(en):
+            nome, chave = GLOSSARIO[en]
+            return nome, chave, bruto[corte + len(en):]
+    return None, None, bruto
+
+
+def _numerar_extenso(t: str) -> str:
+    """Troca quantidade por extenso por digito, ANTES das regras de medida.
+
+    So' age quando vem colada numa UNIDADE — "a pound", "half a cup". Sem essa
+    trava, todo artigo "a" do texto viraria "1" e a narracao ficaria absurda
+    ("1 chicken breast that 1 friend gave me").
+    """
+    unidades = (r"(?:cups?|tbsp|tablespoons?|tsp|teaspoons?|oz|ounces?|lbs?"
+                r"|pounds?|inch(?:es)?|sticks?)")
+    # MAIS LONGO PRIMEIRO, sempre. Depender da ordem da lista foi o que deixou
+    # "one third of a cup" passar: "a" casava o "a cup" do fim e a frase
+    # inteira se perdia. Ordenar aqui torna a lista a prova de edicao futura.
+    for palavra, valor in sorted(POR_EXTENSO, key=lambda x: -len(x[0])):
+        # PRECISAO: nao use `_bonito` aqui. Ele arredonda pra exibicao, e este
+        # numero ainda vai ser MULTIPLICADO. Um terco virava "0,3" e 1/3 de
+        # xicara dava 72 ml em vez de 80; um quarto virava "0,2" e 1/4 de
+        # xicara de aveia dava 18 g em vez de 22. O arredondamento e' a ultima
+        # etapa, nunca uma etapa do meio.
+        t = re.sub(rf"\b{palavra}\s+({unidades})\b",
+                   lambda m, v=valor: f"{v:.6g} {m.group(1)}",
+                   t, flags=re.I)
+    return t
+
+
+def converter(texto: str) -> tuple[str, list[str]]:
+    """Devolve (texto convertido, lista de conversoes pra mostrar na tela)."""
+    achados: list[str] = []
+    texto = _numerar_extenso(texto)
+    # Unidade em portugues -> a inglesa que as regras abaixo entendem.
+    for pt, en in UNIDADE_PT.items():
+        texto = re.sub(rf"(\d)\s*{pt}\b", rf"\1 {en}", texto, flags=re.I)
+        texto = re.sub(rf"(\d)\s*{pt.replace('c', 'ç')}\b", rf"\1 {en}",
+                       texto, flags=re.I)
+
+    def volume(m):
+        qtd = _num(m.group(1))
+        if qtd is None:
+            return m.group(0)
+        unidade = m.group(2).lower()
+        nome, chave, sobra = _ingrediente(m.group(3) or "")
+        rotulo = f"de {nome}" if nome else ""
+        if unidade.startswith(("tbsp", "tablespoon", "tsp", "teaspoon")):
+            # Colher NAO vira grama. A colher de sopa brasileira e' ~15 ml e a
+            # de cha' ~5 ml, entao a traducao e' direta e e' como a pessoa
+            # realmente mede. "5,7 g de sal" nao ajuda ninguem na cozinha.
+            colher = "sopa" if unidade.startswith(("tbsp", "tablespoon")) else "cha"
+            n_ = _bonito(qtd)
+            plural = "colheres" if qtd > 1 else "colher"
+            saida = f"{n_} {plural} de {colher}"
+            achados.append(f"{m.group(1).strip()} {unidade} = {saida}")
+            return f"{saida} {rotulo}".strip() + " " + sobra.lstrip()
+        ml = qtd * ML_POR_CUP
+        if chave and chave in DENSIDADE:
+            saida = f"{_bonito(qtd * DENSIDADE[chave])} g"
+        else:
+            # FALLBACK HONESTO: ingrediente desconhecido -> ml, nunca chutar grama
+            saida = f"{_bonito(ml)} ml"
+        achados.append(f"{m.group(1).strip()} {unidade} = {saida}")
+        return f"{saida} {rotulo}".strip() + " " + sobra.lstrip()
+
+    t = re.sub(r"(\d+\s*[½¼¾⅓⅔⅛]|[½¼¾⅓⅔⅛]|\d+\s*/\s*\d+|\d+(?:[.,]\d+)?)\s*"
+               r"(cups?|tbsp|tablespoons?|tsp|teaspoons?)\b\s*"
+               r"((?:of\s+)?[a-zA-Z\- ]{0,25})", volume, texto, flags=re.I)
+
+    def temperatura(m):
+        # Forno se arredonda a 10, nao a 5: 350F da' 176,7 e a convencao
+        # brasileira e' 180. Arredondar a 5 dava 175, que contradizia ate' a
+        # bio do canal ("350F e' 180C"). Abaixo de 100 mantem precisao.
+        f = _num(m.group(1))
+        c = (f - 32) / 1.8
+        c = round(c / 10) * 10 if c >= 100 else round(c)
+        achados.append(f"{int(f)}°F = {int(c)}°C")
+        return f"{int(c)}°C"
+    t = re.sub(r"(\d+)\s*°?\s*F\b", temperatura, t)
+
+    # "425 DEGREES", sem o F. E' como a pessoa FALA, e a regra acima exigia o
+    # F — entao forno nenhum convertia na narracao. O video da batata-doce diz
+    # "bake at 425 degrees" e saiu "425 graus" na dublagem.
+    #
+    # So' converte de 250 pra cima, e isso NAO e' cautela vaga: forno em
+    # Fahrenheit vive entre 300 e 450 (325, 350, 375, 400, 425), e em Celsius
+    # entre 160 e 220. Abaixo de 250 os dois se sobrepoem e nao da' pra saber
+    # qual e' — entao deixa quieto, igual ao fallback de grama.
+    def graus(m):
+        f = _num(m.group(1))
+        if f is None or f < 250:
+            return m.group(0)
+        c = (f - 32) / 1.8
+        c = round(c / 10) * 10 if c >= 100 else round(c)
+        achados.append(f"{int(f)} degrees = {int(c)}°C")
+        return f"{int(c)}°C"
+    # ⚠️ A UNIDADE TEM DE SER ENGOLIDA JUNTO COM O NUMERO.
+    #
+    # MEDIDO em 03/09/2026, num video que FOI AO AR no canal. A legenda dizia:
+    #
+    #     "Em seguida, leve ao forno a 220°C Fahrenheit ou 220 Celsius."
+    #
+    # O original era "bake at 425 degrees Fahrenheit or 220 Celsius": o numero
+    # converteu certo (425F = 220C) e a palavra "Fahrenheit" ficou ORFA, colada
+    # no valor ja' convertido. A frase se contradiz sozinha e ainda repete a
+    # temperatura duas vezes — e o mesmo texto vai pra legenda E pra dublagem.
+    #
+    # A causa era o lookahead `(?!\s*c)`: ele so' evitava casar quando vinha um
+    # "c" depois, e nao dizia nada sobre "Fahrenheit" ou "F" — que sao
+    # justamente o jeito MAIS COMUM de dizer temperatura em receita americana.
+    # O caso raro estava tratado; o comum, nao.
+    #
+    # Agora a unidade entra no casamento e desaparece com o numero.
+    t = re.sub(r"(\d+)\s*degrees?\s*(?:fahrenheit|f)\b(?!\w)", graus, t,
+               flags=re.I)
+    # ⚠️ O `(?!...c)` CONTINUA NECESSARIO aqui: sem ele, "220 degrees Celsius"
+    # seria lido como Fahrenheit e convertido de novo, virando 104°C — trocar
+    # um erro visivel por um silencioso.
+    t = re.sub(r"(\d+)\s*degrees?\b(?!\s*(?:c\b|celsius|centigrade))", graus, t,
+               flags=re.I)
+
+    # ⚠️ E a unidade orfa que JA' esta' no acervo tambem some: os clipes
+    # cortados antes deste conserto tem "220°C Fahrenheit" gravado no texto.
+    t = re.sub(r"(\d+\s*°\s*C)\s*(?:degrees?\s*)?(?:fahrenheit|f)\b(?!\w)",
+               r"\1", t, flags=re.I)
+
+    # ⚠️ "CELSIUS" POR EXTENSO VIRA °C — pra FALA sair "220 graus", so'.
+    #
+    # Pedido do Bryan em 03/09/2026: "quando for falar 220C falar 220 graus
+    # apenas". O simbolo `°C` ja' virava "graus" na tabela de fala, mas a
+    # PALAVRA "Celsius" nao passava por ali e era dublada como esta' escrita:
+    #
+    #     "220°C or 220 Celsius"  ->  "duzentos e vinte graus or
+    #                                  duzentos e vinte Celsius"
+    #
+    # Em portugues do Brasil ninguem diz "duzentos e vinte Celsius" numa
+    # receita — diz "duzentos e vinte graus". A unidade e' implicita.
+    t = re.sub(r"(\d+)\s*(?:graus\s*)?(?:degrees?\s*)?(?:celsius|centigrade)\b(?!\w)",
+               r"\1°C", t, flags=re.I)
+
+    # ⚠️ E A REPETICAO SOME. Receita americana costuma falar as DUAS unidades
+    # ("425 Fahrenheit or 220 Celsius"), e depois de converter as duas viram o
+    # MESMO valor — a dublagem dizia a temperatura duas vezes seguidas. Só
+    # colapsa quando os numeros sao IGUAIS: valores diferentes podem ser dois
+    # passos da receita ("doure a 220°C e termine a 180°C").
+    t = re.sub(r"(\d+)\s*°\s*C\s*(?:or|ou|/|,)?\s*\1\s*°\s*C\b",
+               r"\1°C", t, flags=re.I)
+
+    # "AT 420", numero pelado — sem grau, sem F, sem "degrees". E' como o
+    # Will Tennyson fala: "roast for 25 to 30 minutes AT 420". Nem a regra do
+    # °F nem a de "degrees" pegam, e o corte saiu dizendo "a 420".
+    #
+    # Converter numero solto seria temerario, entao a regra e' estreita de
+    # proposito: precisa vir depois de "at", ter exatamente 3 digitos, e cair
+    # entre 250 e 550. Forno em Celsius nao chega a 250 na pratica de receita
+    # domestica, e "at 350" nesse contexto so' pode ser Fahrenheit.
+    def graus_pelado(m):
+        f = _num(m.group(1))
+        if f is None or not (250 <= f <= 550):
+            return m.group(0)
+        c = (f - 32) / 1.8
+        c = round(c / 10) * 10 if c >= 100 else round(c)
+        achados.append(f"{int(f)} (F implicito) = {int(c)}°C")
+        return f"{int(c)}°C"
+    t = re.sub(r"\bat\s+(\d{3})\b(?!\s*(?:°|degrees?|f\b|ml\b|g\b|graus))",
+               graus_pelado, t, flags=re.I)
+
+    def peso(m):
+        q = _num(m.group(1)); u = m.group(2).lower()
+        g = q * (453.6 if u.startswith("lb") or u.startswith("pound") else 28.35)
+        achados.append(f"{m.group(1)} {u} = {_bonito(g)} g")
+        return f"{_bonito(g)} g"
+    t = re.sub(r"(\d+(?:[.,]\d+)?)\s*(oz|ounces?|lbs?|pounds?)\b", peso, t, flags=re.I)
+
+    # Forma/assadeira em polegadas: "9 by 13 pan" -> "23 por 33 cm". Vem ANTES
+    # da polegada solta, porque "9 by 13" tem dois numeros e a regra simples
+    # converteria so' o primeiro. Sem isto o Gemini improvisava a conversao e
+    # errava: disse "20 por 30" onde o certo e' 23x33.
+    def forma(m):
+        a = _num(m.group(1)); b = _num(m.group(2))
+        ca, cb = round(a * 2.54), round(b * 2.54)
+        achados.append(f"forma {m.group(1)}x{m.group(2)} pol = {ca}x{cb} cm")
+        return f"{ca} por {cb} cm "
+    t = re.sub(r"(\d+(?:[.,]\d+)?)\s*(?:x|by|por)\s*(\d+(?:[.,]\d+)?)\s*"
+               r"(?:-?\s*inch(?:es)?)?\s*(?=pan|dish|baking|forma|assadeira|tin)",
+               forma, t, flags=re.I)
+
+    def polegada(m):
+        v_ = _num(m.group(1))
+        cm = v_ * 2.54
+        achados.append(f"{m.group(1)} pol = {_bonito(cm)} cm")
+        return f"{_bonito(cm)} cm"
+    t = re.sub(r"(\d+\s*/\s*\d+|\d+(?:[.,]\d+)?|[½¼¾])\s*(?:-\s*)?inch(?:es)?", polegada, t, flags=re.I)
+
+    def stick(m):
+        q = _num(m.group(1)) or 1
+        achados.append(f"{m.group(1)} stick(s) de manteiga = {_bonito(q*113)} g")
+        return f"{_bonito(q*113)} g de manteiga"
+    t = re.sub(r"(\d+(?:\s*[½¼¾])?)\s*sticks?\s+of\s+butter", stick, t, flags=re.I)
+
+    for en, pt in sorted(TERMOS.items(), key=lambda x: -len(x[0])):
+        t = re.sub(re.escape(en), pt, t, flags=re.I)
+    # A remontagem deixa espaco sobrando: espaco duplo, e espaco antes de
+    # pontuacao. Passa na legenda, mas o TTS respira nesse espaco e a fala
+    # sai truncada — e o Bryan pediu que dubagem e legenda ficassem redondas.
+    t = re.sub(r"[ 	]{2,}", " ", t)
+    t = re.sub(r"\s+([,.;:!?])", r"\1", t)
+    return t.strip(), achados
+
+
+# ---------------------------------------------------------------- fala x tela
+# A legenda quer "240 g"; a boca quer "duzentos e quarenta gramas". Sao dois
+# textos diferentes a partir da mesma conversao.
+#
+# Sem isto o TTS le' a abreviacao como letra — "240 g" sai "duzentos e quarenta
+# ge'", e "180 C" sai "cento e oitenta ce'". O `engine/numeros.py` resolve o
+# digito, mas nao sabe nada de unidade.
+#
+# ORDEM: converter() -> para_fala() -> numeros.py -> TTS.
+# Concordancia antes de tudo: o numeros.py troca "1" por "um" sem olhar o
+# genero do substantivo, e "um colher de cha" e' erro de portugues saindo
+# pela boca do narrador. O Bryan pediu a dubagem redonda; isto e' parte.
+FEMININAS = ['colher', 'colheres', 'xicara', 'xicaras', 'xícara', 'xícaras', 'pitada', 'pitadas', 'lata', 'latas', 'fatia', 'fatias']
+
+UNIDADES_FALADAS = [
+    (r"\b1 (?=(?:colher|colheres|xicara|xicaras|xícara|xícaras|pitada|pitadas|lata|latas|fatia|fatias)\b)", "uma "),
+    (r"\b2 (?=(?:colher|colheres|xicara|xicaras|xícara|xícaras|pitada|pitadas|lata|latas|fatia|fatias)\b)", "duas "),
+    (r"(\d)\s*°\s*C\b", r"\1 graus"),
+    (r"(\d)\s*°\s*F\b", r"\1 graus Fahrenheit"),
+    (r"(\d)\s*ml\b", r"\1 mililitros"),
+    (r"(\d)\s*kg\b", r"\1 quilos"),
+    (r"\b1\s*g\b", r"1 grama"),
+    (r"(\d)\s*g\b", r"\1 gramas"),
+    (r"\b1\s*cm\b", r"1 centimetro"),
+    (r"(\d)\s*cm\b", r"\1 centimetros"),
+    (r"\b1\s*min\b", r"1 minuto"),
+    (r"(\d)\s*min\b", r"\1 minutos"),
+]
+
+
+def para_fala(texto: str) -> str:
+    """Expande unidade abreviada em palavra, pro TTS nao soletrar.
+
+    Roda DEPOIS de converter() e ANTES de numeros.py. A ordem importa: se
+    numeros.py rodar antes, "240" ja' virou "duzentos e quarenta" e o digito
+    nao casa mais com nada.
+    """
+    t = texto
+    for padrao, troca in UNIDADES_FALADAS:
+        t = re.sub(padrao, troca, t)
+    return t

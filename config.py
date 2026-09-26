@@ -348,6 +348,15 @@ SUAVIZAR_TEXTO = False
 LEGENDA_PREMIUM = True
 
 
+# ⭐ MODO RECEITA (26/09/2026): a cozinha veio do motor `pipeline` para este.
+# Ligado por `SELECAO_MODO=receita` no disparo (o canal da cozinha usa isso).
+# Converte medida antes de traduzir, guarda abertura orfa/so' encerramento,
+# receita escrita na legenda do post. Funcao, e nao constante: o env chega
+# depois do import em alguns caminhos (vigia, testes).
+def modo_receita() -> bool:
+    return (os.environ.get("SELECAO_MODO") or "").strip().lower() == "receita"
+
+
 # A combinacao contraditoria (VOZ_CANAL pedida + clonagem ligada) morre AQUI,
 # no import, antes de baixar bruto ou chamar Gemini. Perder 10 segundos e'
 # melhor que descobrir a voz errada num video ja' publicado.

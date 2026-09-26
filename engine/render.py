@@ -595,6 +595,7 @@ def _ken_burns(bruto: Path, largura: int, altura: int) -> str:
 # camera unica nao ha' outro angulo pra cortar — entao o CORTE e' o proprio
 # enquadramento: 100% <-> 108% alternando a cada frase (jump cut), e um
 # empurrao lento de 1%/s (teto 3%) dentro da frase pra nunca ficar parado.
+NITIDEZ = ",unsharp=5:5:0.5:5:5:0.0"   # so' luma; ver vertical()
 _CORTE_NIVEL = 0.08
 _CORTE_EMPURRA_S = 0.01
 _CORTE_EMPURRA_MAX = 0.03
@@ -650,7 +651,11 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     # sem fala medida, o ciclo cego de sempre
     movimento = (_zoom_por_frase(bruto, lv, av, cortes) if cortes
                  else _ken_burns(bruto, lv, av))
-    filtro = enquadrar.filtro_vertical(l, a, caminho) + movimento
+    # ⭐ 26/09: nitidez LEVE depois do zoom. MEDIDO: fonte 16:9 em 1080p vira
+    # 607 px de largura esticados 1,78x — imagem mole. 0,5 devolve borda sem
+    # realcar o bloco da compressao (0,8 ja' realcava, comparado lado a lado).
+    # A melhora de verdade e' baixar maior (baixar_em_intervalos.FORMATO).
+    filtro = enquadrar.filtro_vertical(l, a, caminho) + movimento + NITIDEZ
     if config.GRADE_CINEMATICO:
         filtro += pos_producao.FILTRO_COR_CINEMATICO
     # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a

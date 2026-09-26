@@ -168,6 +168,7 @@ def _falar_d(texto: str, destino: Path, amostra_voz: Path,
         except ImportError:
             pass
         ta.save(str(destino), wav, _VC.sr)
+        _aparar_cauda_vc(base, destino)
         print(f"        [voz D] edge {t1 - t0:.1f}s + timbre "
               f"{time.monotonic() - t1:.1f}s", flush=True)
         return destino
@@ -175,6 +176,65 @@ def _falar_d(texto: str, destino: Path, amostra_voz: Path,
         print(f"        [voz D] falhou nesta frase ({type(e).__name__}: "
               f"{str(e)[:80]}) — usando a voz A", flush=True)
         return None
+
+
+# ⛔ O "BARULHO DE SUSPENSE" (RETOMADA §1.3, achado 26/09/2026). O edge-tts
+# termina cada frase com ~0,8-0,9 s de silencio, e o ChatterboxVC PREENCHE esse
+# silencio com ruido de -45 a -50 dB que soa como bicho: o YAMNet ouviu
+# "Insect", "Cricket", "Wild animals", "Bird", "Buzz" em 8 de 29 frases (make
+# e chips), SEMPRE nos ultimos ~0,5 s da saida do VC e NUNCA no mp3 do edge
+# da mesma frase. Depois o loudnorm e a mistura levantam o ruido, e ele cai
+# bem na pausa entre frases. Remedio: cortar a saida do VC logo depois de onde
+# a fala do EDGE acaba (o VC preserva o tempo), com fade curto.
+CAUDA_VC_S = 0.12        # o que fica depois da ultima silaba (decaimento)
+FADE_CAUDA_VC_S = 0.06
+LIMIAR_FALA_DB = -45.0   # fala do edge: acima disto, em janelas de 50 ms
+
+
+def _fim_da_fala(arq: Path, limiar_db: float = LIMIAR_FALA_DB,
+                 passo_s: float = 0.05) -> float | None:
+    """Onde a fala de `arq` acaba (s), ou None se nao der pra medir."""
+    try:
+        import subprocess
+        import numpy as np
+        raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(arq), "-ac", "1",
+                              "-ar", "16000", "-f", "s16le", "-"],
+                             capture_output=True, check=True, timeout=60).stdout
+        a = np.frombuffer(raw, np.int16).astype(np.float64) / 32768.0
+        n = int(passo_s * 16000)
+        if len(a) < n:
+            return None
+        db = [20 * np.log10(np.sqrt(np.mean(a[i:i + n] ** 2)) + 1e-9)
+              for i in range(0, len(a) - n + 1, n)]
+        vivos = [i for i, x in enumerate(db) if x > limiar_db]
+        return (vivos[-1] + 1) * passo_s if vivos else None
+    except Exception:
+        return None
+
+
+def _aparar_cauda_vc(edge: Path, vc: Path) -> bool:
+    """Corta o `vc` em fim-da-fala-do-edge + CAUDA_VC_S, com fade. Falha
+    ABERTA: sem medida ou com erro, a frase fica como saiu do VC."""
+    fim = _fim_da_fala(edge)
+    dur = midia.duracao(vc) if fim else 0.0
+    if not fim or dur <= 0:
+        return False
+    corte = fim + CAUDA_VC_S
+    if corte >= dur - 0.05:
+        return False
+    tmp = vc.with_name(vc.stem + "_cauda.wav")
+    try:
+        midia.roda(["ffmpeg", "-y", "-v", "error", "-i", str(vc), "-af",
+                    f"atrim=end={corte:.3f},afade=t=out:"
+                    f"st={corte - FADE_CAUDA_VC_S:.3f}:d={FADE_CAUDA_VC_S}", str(tmp)])
+        tmp.replace(vc)
+        print(f"        [voz D] cauda do conversor aparada: {dur - corte:.2f}s "
+              f"(fala do edge acaba em {fim:.2f}s)", flush=True)
+        return True
+    except Exception as e:
+        print(f"        [!] cauda nao aparada ({str(e)[:50]})", flush=True)
+        tmp.unlink(missing_ok=True)
+        return False
 
 
 def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,

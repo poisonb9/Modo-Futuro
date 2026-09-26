@@ -30,6 +30,19 @@ IDIOMA_PADRAO = "pt"
 _MODELO = None
 _PAUSA_ENTRE_FRASES_S = 0.15
 
+# ⭐ CALIBRAGEM DA EXPRESSIVIDADE (26/09/2026, item 4 da dublagem, "urgente"
+# pelo dono). Ate' aqui so' a `exaggeration` ia ao modelo (da dinamica do
+# original, 0,35-0,75); o `cfg_weight` ficava no padrao 0,5. Os praticantes
+# deixam a voz de IA natural soltando o controle e subindo o estilo (acervo
+# F123413, F123435, F123795, na linguagem do ElevenLabs); no Chatterbox o par
+# equivalente e' exaggeration + cfg_weight baixo (~0,3) — isso vem da
+# documentacao do Chatterbox, NAO do acervo.
+#
+# ⚠️ None = padrao do modelo (comportamento de antes). O valor so' muda
+# depois de o dono OUVIR a comparacao (`ferramentas/previa_voz.py`,
+# workflow `previa_voz.yml`). Env `VOZ_CFG_PESO` sobrepoe, pra testar.
+VOZ_CFG_PESO: float | None = None
+
 
 def _bypass_watermarker():
     import perth
@@ -55,7 +68,7 @@ def _carregar_modelo():
 
 
 def _enfase_aceita(modelo, enfase: float | None) -> dict:
-    """`{"exaggeration": x}` se o modelo aceitar esse parametro; senao `{}`.
+    """`exaggeration` (e `cfg_weight`, se calibrado) que o modelo aceitar.
 
     ⚠️ DESCOBERTO EM EXECUCAO, NAO SUPOSTO. O Chatterbox nao roda na maquina
     do Bryan (nem cabe: a GPU e a CPU dela ja' vivem no limite), entao eu nao
@@ -64,15 +77,19 @@ def _enfase_aceita(modelo, enfase: float | None) -> dict:
     TypeError — e derrubaria depois de o run ja' ter pago corte e transcricao.
     Perguntar ao proprio modelo custa uma linha e nao pode errar.
     """
-    if enfase is None:
-        return {}
+    import os
+    extra = {}
     try:
         import inspect
-        if "exaggeration" in inspect.signature(modelo.generate).parameters:
-            return {"exaggeration": float(enfase)}
+        aceita = inspect.signature(modelo.generate).parameters
     except Exception:
-        pass
-    return {}
+        return {}
+    if enfase is not None and "exaggeration" in aceita:
+        extra["exaggeration"] = float(enfase)
+    cfg = os.environ.get("VOZ_CFG_PESO") or VOZ_CFG_PESO
+    if cfg not in (None, "") and "cfg_weight" in aceita:
+        extra["cfg_weight"] = float(cfg)
+    return extra
 
 
 def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,

@@ -1,0 +1,58 @@
+name: Previa - calibragem da voz clonada (nao publica nada)
+
+# So' audio: as mesmas frases em varias calibragens do Chatterbox, pra ouvir
+# lado a lado antes de mudar a producao (ferramentas/previa_voz.py).
+# Nao baixa video, nao passa pela guarda de download, nao toca no Buffer.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  previa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - run: pip install -r requirements.txt
+
+      - name: Cache do modelo de voz clonada (Chatterbox)
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.cache/huggingface
+          key: chatterbox-hf-cache-v1
+
+      - name: Instalar dependencias da voz clonada (Chatterbox)
+        run: |
+          pip install --upgrade "setuptools>=70"
+          pip install chatterbox-tts
+          pip install --force-reinstall --no-deps resemble-perth
+
+      - name: Baixar as duas amostras de voz do Drive
+        env:
+          GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
+        run: |
+          mkdir -p vozes
+          python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/_m" --conta "reserva"
+          ffmpeg -y -i vozes/_m -ar 24000 -ac 1 vozes/bryan_amostra.wav && rm -f vozes/_m
+          python -X utf8 baixar_bruto_drive.py --file-id "1RWD71Uyp-UICDfRw4sTiUXXO2u25_wj0" --destino "vozes/_f" --conta "reserva"
+          ffmpeg -y -i vozes/_f -ar 24000 -ac 1 vozes/bruna_amostra.wav && rm -f vozes/_f
+          ls -la vozes/
+
+      - name: Sintetizar as variantes
+        env:
+          HF_HOME: ${{ github.workspace }}/.cache/huggingface
+        run: python -X utf8 ferramentas/previa_voz.py --saida previa_voz
+
+      - name: Guardar os audios
+        uses: actions/upload-artifact@v4
+        with:
+          name: previa-voz
+          path: previa_voz/

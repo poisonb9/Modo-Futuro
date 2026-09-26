@@ -78,6 +78,17 @@ def teste_o_call_site_passa_o_canal_da_pasta():
         "o laco de disparo nao deduz o canal da pasta"
 
 
+def teste_make_leva_voz_original_e_chips_nao():
+    """26/09/2026: aprovado no make (fundo + voz original a -16 dB); o dono
+    disse "chips nao", entao nenhum outro canal pode herdar."""
+    make = V.ENTRADAS_POR_CANAL["truque.importado"]
+    assert make.get("fundo_original") == "true" and make.get("voz_original_db") == "-16"
+    for canal, e in V.ENTRADAS_POR_CANAL.items():
+        if canal != "truque.importado":
+            assert not e.get("voz_original_db"), f"{canal} herdou a voz original"
+    assert "modofuturo" not in V.ENTRADAS_POR_CANAL
+
+
 if __name__ == "__main__":
     n = 0
     for nome, fn in sorted(globals().items()):

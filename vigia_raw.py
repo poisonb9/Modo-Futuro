@@ -273,7 +273,11 @@ def canal_da_pasta(caminho: str) -> str | None:
 
 
 ENTRADAS_POR_CANAL = {
-    "truque.importado": {"selecao_modo": "procedimento", "amostra_voz": "bruna"},
+    # ⭐ 26/09/2026: fundo do original + voz original a -16 dB por baixo
+    # (APROVADO pelo dono na rodada de referencia 2026-09-26_1231: "ficou bom
+    # demais"). So' o make — chips nao (dono). Ver engine/fundo.py.
+    "truque.importado": {"selecao_modo": "procedimento", "amostra_voz": "bruna",
+                         "fundo_original": "true", "voz_original_db": "-16"},
     # ⭐ 26/09/2026: a cozinha veio do motor `pipeline` para este (dono). Modo
     # receita = conversao de medida + guardas de abertura; voz da Bruna (dono).
     "cozinha.importada": {"selecao_modo": "receita", "amostra_voz": "bruna"},

@@ -214,7 +214,9 @@ def separar(bruto: Path, pasta: Path) -> Path | None:
 # sai pelo YAMNet, e canto na voz sai pelo mesmo classificador), a
 # VOZ_ORIGINAL_DB abaixo da dublagem nas pausas e derrubada forte (ratio 10,
 # como o voice-over) enquanto a dublagem fala. Vazio = desligado (padrao).
-# So' a previa de referencia `make_vozorig` liga, ate' o dono ouvir.
+# ✅ APROVADO pelo dono em 26/09/2026 ("ficou bom demais", rodada de
+# referencia 2026-09-26_1231): o make (truque.importado) liga a -16 dB pelo
+# `vigia_raw.ENTRADAS_POR_CANAL`; os outros canais seguem desligados.
 VOZ_ORIGINAL_DB = os.environ.get("VOZ_ORIGINAL_DB", "").strip()
 
 

@@ -73,13 +73,14 @@ checar(referencia.trecho_do_post({}) is None, "sem tempos = None")
 print("\n[6] config real")
 if referencia.CONFIG.exists():
     real = json.loads(referencia.CONFIG.read_text(encoding="utf-8"))
-    fixos = [c["nome"] for c in real["clipes"] if not c.get("voz_original_db")]
+    fixos = [c["nome"] for c in real["clipes"]]
     checar(sorted(fixos) == ["chips", "cozinha", "make", "semanestesia"],
            "os 4 clipes (cozinha entrou em 26/09 com o modo receita)")
-    # variante A/B da voz original baixa: SO' no make (dono, 26/09: "chips nao")
+    # voz original baixa: APROVADA no make em 26/09 e SO' nele ("chips nao")
     var = [c for c in real["clipes"] if c.get("voz_original_db")]
     checar(all(c["canal"] == "truque.importado" for c in var),
-           "voz original por baixo so' em variante do make")
+           "voz original por baixo so' no make")
+    checar([c["nome"] for c in var] == ["make"], "o make de referencia ja' vem com ela")
     for c in var:
         checar(pares(referencia.campos(real, c)).get("voz_original_db") == c["voz_original_db"],
                f"{c['nome']}: a variante chega ao workflow")

@@ -111,6 +111,21 @@ def enviar(arquivo: Path, pasta_pai_id: str, apagar_local: bool = False,
         fileId=file_id, body={"type": "anyone", "role": "reader"}).execute()
     print(f"Enviado: {arquivo.name}")
     print(f"DRIVE_FILE_ID={file_id}")
+    # ⭐ 26/09/2026 (dono: "temos que ser organizados para nao deixar lixo no
+    # pc, os arquivos sao grandes"). `apagar_local` existia desde sempre e
+    # NINGUEM o lia: toda copia enviada ficava no disco (ex.: 882 MB do
+    # Goggins em trabalho/brutos). So' apaga depois de CONFERIR que o Drive
+    # tem o arquivo inteiro — mesmo tamanho em bytes.
+    if apagar_local:
+        no_drive = int(servico.files().get(fileId=file_id, fields="size")
+                       .execute().get("size", -1))
+        local = arquivo.stat().st_size
+        if no_drive == local:
+            arquivo.unlink()
+            print(f"Copia local apagada ({local / 1e6:.0f} MB conferidos no Drive)")
+        else:
+            print(f"[!] tamanho nao confere (Drive {no_drive} x local {local}) — "
+                  "copia local MANTIDA")
     return file_id
 
 
@@ -123,11 +138,14 @@ def main():
     p.add_argument("--url", default="",
                    help="URL de origem (YouTube); viaja ate' o manifesto e e' o "
                         "que permite conferir duplicata depois")
+    p.add_argument("--manter-local", action="store_true",
+                   help="NAO apagar a copia local depois de subir (o padrao e' "
+                        "apagar, so' depois de conferir o tamanho no Drive)")
     p.add_argument("--subpasta", default="brutos",
                    help="subpasta a criar dentro do destino; vazio grava direto")
     a = p.parse_args()
     enviar(Path(a.arquivo), a.pasta_id, conta=a.conta, subpasta=a.subpasta,
-           url=a.url)
+           url=a.url, apagar_local=not a.manter_local)
 
 
 if __name__ == "__main__":

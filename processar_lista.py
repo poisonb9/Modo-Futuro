@@ -196,8 +196,8 @@ def baixar(url: str, destino: Path):
     # curtas sem nem devolver erro pro insistindo() lá de fora.
     _yt([
         "yt-dlp", "-f",
-        "bv*[height<=1080][vcodec^=avc1]+ba[acodec^=mp4a]/"
-        "bv*[height<=1080]+ba/b[height<=1080]/b",
+        FORMATO_VIDEO,
+        "-S", ORDEM_VIDEO,
         "--merge-output-format", "mp4",
         "--continue",
         "--retries", "infinite",
@@ -205,6 +205,16 @@ def baixar(url: str, destino: Path):
         "--retry-sleep", "exp=1:60",
         "-o", str(destino), url,
     ], f"baixar {url[:50]}")
+
+
+# ⭐ 26/09/2026: 1080p -> 1440p (dono: "vamos para 1440p"). MEDIDO: fonte 16:9
+# em 1080p vira 607 px de largura no 9:16, esticados 1,78x — imagem mole. Em
+# 1440p sao 810 px. Acima de 1080p o YouTube quase so' serve VP9/AV1 (nao
+# H.264): o `-S` prefere a RESOLUCAO primeiro e o H.264 so' como desempate,
+# senao o yt-dlp continuaria escolhendo o H.264 de 1080p. Custo: o corte na
+# nuvem decodifica VP9/AV1, mais lento que H.264.
+FORMATO_VIDEO = "bv*[height<=1440]+ba/b[height<=1440]/b"
+ORDEM_VIDEO = "res:1440,vcodec:h264,acodec:aac"
 
 
 def escolher_conta() -> dict:
@@ -239,7 +249,10 @@ def subir_bruto(arquivo: Path, conta: dict) -> str:
     # credencial nenhuma do GitHub.
     saida = _roda([sys.executable, "-X", "utf8", "enviar_bruto_drive.py",
                    "--arquivo", str(arquivo), "--pasta-id", conta["raw"],
-                   "--conta", conta["nome"], "--subpasta", ""])
+                   "--conta", conta["nome"], "--subpasta", "",
+                   # quem apaga e' o processar(), DEPOIS de disparar: se o
+                   # disparo falhar, a proxima rodada nao baixa de novo
+                   "--manter-local"])
     for linha in saida.splitlines():
         if linha.startswith("DRIVE_FILE_ID="):
             return linha.split("=", 1)[1].strip()
@@ -362,7 +375,10 @@ def main():
                      "drive_file_id": file_id, "arquivo": str(destino),
                      "conta": conta["nome"],
                      "quando": time.strftime("%Y-%m-%d %H:%M:%S")})
-        log(f"[{n}/{total}] ok: {info['titulo'][:50]}")
+        # ⭐ 26/09: as tres etapas deram certo e o registro foi gravado — a
+        # copia local nao serve mais pra nada (o corte roda da copia no Drive).
+        destino.unlink(missing_ok=True)
+        log(f"[{n}/{total}] ok: {info['titulo'][:50]} (copia local apagada)")
         return None
 
     with ThreadPoolExecutor(max_workers=SIMULTANEOS) as pool:

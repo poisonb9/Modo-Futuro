@@ -70,7 +70,10 @@ JITTER = 0.30
 
 # Formato: video ate' 1080p + audio, juntados em mp4. Acima de 1080 o arquivo
 # dobra e o corte nao fica melhor — o destino e' um video 9x16 de celular.
-FORMATO = "bv*[height<=1080]+ba/b[height<=1080]"
+# ⭐ 26/09/2026: 1440p (ver processar_lista.FORMATO_VIDEO — mesma regra, e
+# o -S prefere resolucao antes de codec).
+FORMATO = "bv*[height<=1440]+ba/b[height<=1440]/b"
+ORDEM = "res:1440,vcodec:h264,acodec:aac"
 
 
 def _carregar() -> dict:
@@ -145,7 +148,7 @@ def _baixar_agora(url: str) -> tuple[bool, str]:
     solto, entao esperar aqui nao tranca ninguem alem deste download.
     """
     cmd = [
-        "yt-dlp", "-f", FORMATO, "--merge-output-format", "mp4",
+        "yt-dlp", "-f", FORMATO, "-S", ORDEM, "--merge-output-format", "mp4",
         "--no-warnings", "--no-progress",
         # ⚠️ A retentativa do proprio yt-dlp com espera CRESCENTE. Se o
         # YouTube reclamar no meio, insistir rapido e' o pior que da' pra
@@ -259,6 +262,7 @@ def main() -> None:
     print("   A pasta do Drive e' que decide o canal — e' ali que nasceu o")
     print("   defeito de 04/09. Subir e' passo separado e deliberado:")
     print("   python enviar_bruto_drive.py --arquivo <arq> --pasta-id <pasta>")
+    print("   (a copia local e' APAGADA depois de conferida no Drive; --manter-local evita)")
 
 
 if __name__ == "__main__":

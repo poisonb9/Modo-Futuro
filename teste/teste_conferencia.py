@@ -51,7 +51,7 @@ melhor = max(conferencia.nota_texto(f, ouvido) for f in conferencia.formas_falad
 checar(melhor >= 0.95, f"compara com a forma falada ({melhor:.2f})")
 
 # --- gerar_trilha com voz e ouvido falsos ---------------------------------
-def voz_falsa(texto, destino, amostra, idioma, enfase=None):
+def voz_falsa(texto, destino, amostra, idioma, enfase=None, motor=None):
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i",
                     f"sine=f=330:d={0.3 * len(texto.split()):.2f}", "-ar", "24000",
                     str(destino)], check=True)

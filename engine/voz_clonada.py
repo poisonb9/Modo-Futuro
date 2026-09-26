@@ -50,6 +50,22 @@ VOZ_CFG_PESO: float | None = None
 import os as _os
 ANCORAR_FRASES = _os.environ.get("DUB_ANCORAR", "1") != "0"
 
+# ⭐ MOTOR DA VOZ = D (26/09/2026, decisao do dono apos ouvir a previa:
+# "D para os dois" — Bryan e Bruna). O edge-tts INTERPRETA a frase (boa
+# entonacao em pt-BR, ~2 s) e o ChatterboxVC (mesmo pacote, MIT) troca SO' o
+# timbre pelo da amostra clonada. Medido na previa (run 36207479880): ~28 s
+# por frase contra ~77 s da A, 2,7x mais rapida.
+#
+# ⚠️ Falha ABERTA para a A: sem o VC, sem rede pro edge, ou idioma que nao e'
+# portugues, a frase sai no Chatterbox TTS de sempre — clipe com a voz antiga
+# e' aceitavel, clipe sem voz nao. Env `VOZ_MOTOR=A` volta tudo pra A.
+VOZ_MOTOR = (_os.environ.get("VOZ_MOTOR") or "D").strip().upper()
+# voz do edge-tts que interpreta a frase, pelo DONO da amostra
+EDGE_MASCULINA = "pt-BR-AntonioNeural"
+EDGE_FEMININA = "pt-BR-ThalitaMultilingualNeural"
+_VC = None
+_VC_INDISPONIVEL = False
+
 
 def _bypass_watermarker():
     import perth
@@ -99,8 +115,54 @@ def _enfase_aceita(modelo, enfase: float | None) -> dict:
     return extra
 
 
+def _edge_da_amostra(amostra_voz: Path) -> str:
+    """Voz do edge-tts do mesmo sexo da amostra (Thalita p/ Bruna, Antonio p/ Bryan)."""
+    fem = Path(_os.environ.get("AMOSTRA_VOZ_FEMININO") or "bruna_amostra.wav").stem.lower()
+    s = amostra_voz.stem.lower()
+    return EDGE_FEMININA if (s == fem or "bruna" in s) else EDGE_MASCULINA
+
+
+def _falar_d(texto: str, destino: Path, amostra_voz: Path) -> Path | None:
+    """Motor D: edge-tts -> ChatterboxVC(timbre da amostra). None = use a A."""
+    global _VC, _VC_INDISPONIVEL
+    if _VC_INDISPONIVEL:
+        return None
+    try:
+        if _VC is None:
+            _bypass_watermarker()
+            from chatterbox.vc import ChatterboxVC
+            print("      carregando conversor de timbre (ChatterboxVC)...", flush=True)
+            _VC = ChatterboxVC.from_pretrained(device="cpu")
+    except Exception as e:
+        # uma vez so': sem o VC, o lote inteiro segue na A sem tentar de novo
+        _VC_INDISPONIVEL = True
+        print(f"        [voz D] ChatterboxVC indisponivel ({type(e).__name__}: "
+              f"{str(e)[:80]}) — lote segue na voz A", flush=True)
+        return None
+    try:
+        import torchaudio as ta
+        from . import dublagem
+        t0 = time.monotonic()
+        base = destino.with_name(destino.stem + "_edge.mp3")
+        # numero por extenso e Guia de voz: o `dublagem._sintetizar` ja' aplica
+        dublagem._falar(texto, base, _edge_da_amostra(amostra_voz))
+        t1 = time.monotonic()
+        wav = _VC.generate(audio=str(base), target_voice_path=str(amostra_voz))
+        ta.save(str(destino), wav, _VC.sr)
+        print(f"        [voz D] edge {t1 - t0:.1f}s + timbre "
+              f"{time.monotonic() - t1:.1f}s", flush=True)
+        return destino
+    except Exception as e:
+        print(f"        [voz D] falhou nesta frase ({type(e).__name__}: "
+              f"{str(e)[:80]}) — usando a voz A", flush=True)
+        return None
+
+
 def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,
-           enfase: float | None = None) -> Path:
+           enfase: float | None = None, motor: str | None = None) -> Path:
+    if (motor or VOZ_MOTOR) == "D" and (idioma or "").lower().startswith("pt"):
+        if _falar_d(texto, destino, amostra_voz):
+            return destino
     import torchaudio as ta
     from . import numeros
     modelo = _carregar_modelo()
@@ -549,8 +611,11 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
                     print(f"        [qc] nota {nota_i:.2f} — ouviu {r[1][:70]!r}; "
                           "refazendo a frase", flush=True)
                     p2 = trabalho / f"voz_frase_{i:03d}_b.wav"
+                    # na D o edge repetiria a mesma leitura: a 2a tentativa
+                    # vai pela A, que e' outro motor e erra diferente
                     _falar(frase, p2, pares[i][1], idioma,
-                           enfase=enfases[i] if i < len(enfases) else None)
+                           enfase=enfases[i] if i < len(enfases) else None,
+                           motor="A")
                     refeitas += 1
                     r2 = conferencia.nota(p2, frase, idioma)
                     if r2 and r2[0] > nota_i:

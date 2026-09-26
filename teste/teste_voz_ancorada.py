@@ -44,7 +44,7 @@ def carregar(ancorar: bool):
     from engine import voz_clonada
     v = importlib.reload(voz_clonada)
 
-    def falso(texto, destino, amostra, idioma, enfase=None):
+    def falso(texto, destino, amostra, idioma, enfase=None, motor=None):
         d = 0.4 * len(texto.split())
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i",
                         f"sine=f=330:d={d:.2f}", "-ar", "24000", str(destino)], check=True)

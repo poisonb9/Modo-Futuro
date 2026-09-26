@@ -202,6 +202,15 @@ jobs:
           path: ${{ github.workspace }}/.cache/torch
           key: demucs-htdemucs-v2
 
+      # classificador que acha MUSICA no fundo (engine/fundo.py, YAMNet, 4 MB):
+      # o `_garantir_yamnet` so' baixa se o arquivo nao estiver aqui
+      - name: Cache do classificador de musica (YAMNet)
+        if: ${{ inputs.dublar == 'true' && inputs.fundo_original == 'true' }}
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/modelos/yamnet.tflite
+          key: yamnet-float32-v1
+
       - name: Instalar Demucs
         if: ${{ inputs.dublar == 'true' && inputs.fundo_original == 'true' }}
         run: pip install demucs

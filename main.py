@@ -18,7 +18,8 @@ from engine import (midia, selecao, transcricao, legendas, render, traducao, fal
                     camada, marca, selo, cor, ritmo,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
-                    cauda, gramatica, chamada as chamada_mod, ab_titulo, fundo, sfx, capa_nitida)
+                    cauda, gramatica, chamada as chamada_mod, ab_titulo, fundo, sfx, capa_nitida,
+                    loop_final)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -652,6 +653,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print('      camada aplicada')
                 elif cascata.aplicar_no_lugar(_v, _canal_cascata):
                     print('      cascata de CTA aplicada')
+                # ⭐ 26/09 (dono): final em loop. POR ULTIMO: o fim funde no
+                # quadro 0 exatamente como vai ao ar. Ver engine/loop_final.py.
+                loop_final.aplicar_no_lugar(_v)
 
             if not so_vertical:
                 lh, ah = config.HORIZONTAL

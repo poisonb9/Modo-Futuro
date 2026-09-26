@@ -105,6 +105,12 @@ primeira ou vai embora):
    a pessoa achar incrível; nada de frase de efeito no fim ("e isso mudou
    tudo"); nada de travessão. Soe como alguém contando pra uma amiga, não
    como um locutor de comercial.
+12. FINAL QUE VOLTA PRO COMEÇO (o vídeo recomeça sozinho no TikTok): a
+   última frase NÃO se despede, NÃO resume e NÃO dá lição ("e é isso",
+   "no fim das contas", "fica a dica"). Ela termina num fato ou numa
+   reação concreta da pessoa, de preferência ligada ao que a primeira
+   frase apresentou, para que, quando o vídeo voltar ao início, soe como
+   continuação e não como outro vídeo.
 
 TAMANHO: {orcamento}o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava. Texto mais longo força a dublagem a acelerar a fala pra

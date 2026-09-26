@@ -56,11 +56,10 @@ def checar(cond, msg):
 
 
 def montar(dur):
-    """O prompt como `_traduzir_texto` o monta, sem tocar na rede."""
-    return t.PROMPT_NARRACAO.format(
-        texto="fala original aqui",
-        dica_genero=t.dica_de_genero(None),
-        orcamento=t.orcamento_de_palavras(dur))
+    """O prompt como `_traduzir_texto` o monta, sem tocar na rede.
+    Pelo `_montar` do motor: ele preenche TODOS os campos (inclusive o
+    `{guia}` do Guia de voz, 26/09), e o teste nao envelhece a cada campo."""
+    return t._montar(t.PROMPT_NARRACAO, "fala original aqui", None, dur)
 
 
 print(__doc__.splitlines()[0])
@@ -108,8 +107,11 @@ for frase, oque in [
 # --- 5. o outro prompt (traducao comum) nao quebra ------------------------
 print("\n[5] o PROMPT comum, que nao tem esses campos, continua formatando")
 try:
-    comum = t.PROMPT.format(texto="abc")
-    checar("abc" in comum, "PROMPT comum formata so' com {texto}")
+    # pelo `_montar`, como o motor faz: desde 26/09 o PROMPT comum tambem
+    # tem `{guia}`, que o `_montar` preenche e um `.format(texto=)` nao
+    comum = t._montar(t.PROMPT, "abc")
+    checar("abc" in comum and "{" not in comum.replace("{{", ""),
+           "PROMPT comum formata sem campo sobrando")
 except KeyError as e:
     checar(False, f"PROMPT comum quebrou: {e}")
 

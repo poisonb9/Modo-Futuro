@@ -6,6 +6,11 @@ name: Previa - calibragem da voz clonada (nao publica nada)
 
 on:
   workflow_dispatch:
+    inputs:
+      variantes:
+        description: "Quais variantes (ex: A,D). Vazio = todas. A atual, B cfg 0,3, C expressiva, D edge-tts + troca de timbre"
+        required: false
+        default: ""
 
 jobs:
   previa:
@@ -49,6 +54,7 @@ jobs:
       - name: Sintetizar as variantes
         env:
           HF_HOME: ${{ github.workspace }}/.cache/huggingface
+          PREVIA_VARIANTES: ${{ inputs.variantes }}
         run: python -X utf8 ferramentas/previa_voz.py --saida previa_voz
 
       - name: Guardar os audios

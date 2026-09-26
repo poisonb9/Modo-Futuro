@@ -18,7 +18,7 @@ from engine import (midia, selecao, transcricao, legendas, render, traducao, fal
                     camada, marca, selo, cor, ritmo,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
-                    cauda, gramatica, chamada as chamada_mod, ab_titulo, fundo)
+                    cauda, gramatica, chamada as chamada_mod, ab_titulo, fundo, sfx)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -621,6 +621,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # ANTES da cor, da limpeza e da camada: elas usam a duracao final.
             for _plat, _arq in _versoes:
                 _v = pasta / _arq
+                # ⭐ 26/09: "pop" no titulo, "whoosh" na saida dele (engine/sfx.py).
+                # ANTES do ritmo: os instantes sao do render; a velocidade
+                # leva o som junto.
+                if sfx.aplicar_no_lugar(_v):
+                    print("      efeitos sonoros do titulo aplicados")
                 if ritmo.aplicar_no_lugar(_v, _canal_cascata):
                     print(f"      velocidade {ritmo.fator(_canal_cascata)}x")
                 # ⭐ 25/09: cor da marca por canal (Achadinho Make = rose' suave, opcao B).

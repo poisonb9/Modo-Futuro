@@ -89,6 +89,15 @@ def _duracao_curta() -> bool:
 
 
 DURACAO_CURTA = _duracao_curta()
+
+# ⭐ ABERTURA VISUAL (26/09/2026, plano de virada item 2, aprovado pelo dono).
+# MEDIDO: 5 de 8 perdedores do modofuturo abriam no mesmo estudio de podcast;
+# 6 de 9 vencedores abriam na maquina/chip/fabrica. Nestes canais, quando o
+# trecho abre num rosto, a IMAGEM dos primeiros ABERTURA_VISUAL_S segundos e'
+# trocada pelo momento em que o assunto aparece (`momento_visual_s` da
+# selecao). O audio nao muda. Ver engine/abertura_visual.py.
+CANAIS_ABERTURA_VISUAL = {"modofuturo"}
+ABERTURA_VISUAL_S = 1.5
 if DURACAO_CURTA:
     DUR_MIN, DUR_MAX = DUR_CURTA_MIN, DUR_CURTA_MAX
 

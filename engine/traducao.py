@@ -515,6 +515,80 @@ def _completar_se_curta(texto_narrado: str, texto_original: str,
     return segunda if fica == 2 else texto_narrado
 
 
+# ⭐ ABERTURA POR FATO (26/09/2026, plano de virada item 1). MEDIDO (Whisper
+# nos 3,5 s iniciais de 92 clipes do modofuturo): 55 abriam com "Ele explicou
+# que", "O convidado ressaltou", "Ao ser questionado"; ~12 com conectivo
+# solto. So' vale para canal cujo guia de voz tem `## Abertura`.
+_VERBO = (r"(?:explic\w*|coment\w*|destac\w*|ressalt\w*|apont\w*|afirm\w*|"
+          r"consider\w*|descrev\w*|lembr\w*|contou|conta|disse|diz|revel\w*|"
+          r"avali\w*|declar\w*|garant\w*|mostr\w*|exib\w*|abord\w*|"
+          r"fez quest[aã]o de \w+)")
+# Quem fala — so' PESSOA. "O chip considerado..." nao e' atribuicao.
+_QUEM = (r"(?:[oa]s?\s+)?(?:especialista|convidad[oa]|analista|entrevistad[oa]|"
+         r"apresentador[a]?|anfitri[aã]o|pesquisador[a]?|guia|engenheir[oa]|"
+         r"cientista|executiv[oa]|fundador[a]?|ceo|host|narrador[a]?|"
+         r"entrevistador[a]?|professor[a]?|v[ií]deo)")
+_ATRIBUICAO = re.compile(
+    rf"^\s*(?:ele|ela|eles|elas|{_QUEM}|segundo\s+\w+)\s+"
+    rf"(?:come[cç]ou\s+)?{_VERBO}\b", re.IGNORECASE)
+_ATRIB_QUE = re.compile(
+    rf"^\s*(?:(?:ele|ela|eles|elas|{_QUEM})\s+){_VERBO}\s+que\s+(?=\S)",
+    re.IGNORECASE)
+_QUESTIONADO = re.compile(r"^\s*ao ser questionad[oa]s?\b", re.IGNORECASE)
+_CONECTIVO = re.compile(
+    r"^\s*(?:al[eé]m disso|no entanto|em resumo|por isso|claro que|"
+    r"em segundo lugar|e ent[aã]o|mas|por[eé]m)\b,?\s*", re.IGNORECASE)
+
+
+def abertura_fraca(texto: str) -> str | None:
+    """O pedaco que desperdica o 1o segundo, ou None. Exposto pro teste."""
+    primeira = re.split(r"(?<=[.!?])\s", (texto or "").strip(), maxsplit=1)[0]
+    for rx in (_QUESTIONADO, _ATRIBUICAO, _CONECTIVO):
+        m = rx.match(primeira)
+        if m:
+            return m.group(0).strip()
+    return None
+
+
+def tirar_atribuicao(texto: str) -> str:
+    """Ultimo recurso, mecanico: "Ele explicou que a maquina X..." ->
+    "A maquina X...", e "Alem disso, o chip..." -> "O chip...". So' quando o
+    resto da frase fica inteiro; o resto dos casos volta intacto."""
+    for rx in (_ATRIB_QUE, _CONECTIVO):
+        m = rx.match(texto)
+        if m and len(texto) - m.end() > 10:
+            resto = texto[m.end():]
+            return resto[:1].upper() + resto[1:]
+    return texto
+
+
+def _garantir_abertura(texto_narrado: str, texto_original: str,
+                       genero: str | None, dur: float | None) -> str:
+    from . import guia_voz
+    if not guia_voz.abre_por_fato():
+        return texto_narrado
+    fraca = abertura_fraca(texto_narrado)
+    if not fraca:
+        return texto_narrado
+    aviso = (f"\n\n⚠️ ATENCAO: uma versao anterior comecou com \"{fraca}\". "
+             "A PRIMEIRA FRASE tem de ser o FATO mais surpreendente e concreto, "
+             "sem dizer quem fala e sem conectivo. Reescreva comecando pelo fato.")
+    try:
+        segunda = _traduzir_texto(texto_original, prompt=PROMPT_NARRACAO + aviso,
+                                  genero=genero, duracao_s=dur)
+    except Exception as e:
+        segunda = ""
+        print(f"      [!] abertura fraca e a 2a tentativa falhou "
+              f"({type(e).__name__})", flush=True)
+    if segunda and not abertura_fraca(segunda):
+        print(f"      abertura refeita: \"{fraca}\" -> \"{segunda[:50]}\"", flush=True)
+        return segunda
+    corrigido = tirar_atribuicao(segunda or texto_narrado)
+    print(f"      [!] abertura ainda fraca (\"{fraca}\"); corte mecanico -> "
+          f"\"{corrigido[:50]}\"", flush=True)
+    return corrigido
+
+
 def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
                         narrar: bool = False,
                         genero_falante: str | None = None) -> list[dict]:
@@ -542,6 +616,10 @@ def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
         if dur and dur > 0:
             texto_narrado = _completar_se_curta(texto_narrado, texto_completo,
                                                 genero_falante, dur)
+        # DEPOIS da 2a tentativa de "curta": ela tambem pode abrir fraco.
+        texto_narrado = _garantir_abertura(texto_narrado, texto_completo,
+                                           genero_falante, dur)
+        if dur and dur > 0:
             n = len(texto_narrado.split())
             ppm = n / (dur / 60.0)
             alvo = int(dur / 60.0 * PALAVRAS_POR_MINUTO)

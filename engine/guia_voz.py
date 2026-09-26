@@ -72,11 +72,19 @@ def _secao(canal, *nomes) -> str:
 def bloco_prompt(canal: str | None) -> str:
     """O trecho que entra no prompt de narracao. Vazio sem guia de voz."""
     tom = _secao(canal, "tom")
+    abertura = _secao(canal, "abertura")
+    estrutura = _secao(canal, "estrutura")
     glos = _secao(canal, "glossário", "glossario")
     proib = _secao(canal, "proibido")
-    if not (tom or glos or proib):
+    if not (tom or abertura or estrutura or glos or proib):
         return ""
     partes = ["GUIA DE VOZ DO CANAL (vale acima das regras gerais quando conflitar):"]
+    # ⭐ 26/09/2026: `## Abertura` e `## Estrutura` (plano de virada, itens 1
+    # e 3). A abertura vem PRIMEIRO: e' a frase que decide se o video e' visto.
+    if abertura:
+        partes.append(f"ABERTURA (obrigatório):\n{abertura}")
+    if estrutura:
+        partes.append(f"ESTRUTURA:\n{estrutura}")
     if tom:
         partes.append(f"TOM: {tom}")
     if glos:
@@ -84,6 +92,13 @@ def bloco_prompt(canal: str | None) -> str:
     if proib:
         partes.append(f"PROIBIDO:\n{proib}")
     return "\n".join(partes) + "\n\n"
+
+
+def abre_por_fato(canal: str | None = None) -> bool:
+    """O canal exige que a 1a frase seja o fato (tem `## Abertura`)?"""
+    if canal is None:
+        canal = os.environ.get("CANAL_ESPERADO")
+    return bool(_secao(canal, "abertura"))
 
 
 @lru_cache(maxsize=16)

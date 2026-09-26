@@ -203,6 +203,53 @@ def _criterio() -> str:
     return bloco.strip(chr(10))
 
 
+BLOCO_ABERTURA_VISUAL = """
+
+⭐ REGRAS EXTRAS DESTE CANAL (explicativo de tecnologia):
+
+A) ABERTURA VISUAL OBRIGATÓRIA. MEDIDO em 26/09/2026 nos clipes do canal: 5
+de 8 perdedores abriam no MESMO estúdio de podcast (alguém ao microfone), e 6
+de 9 vencedores abriam na máquina, no chip ou na fábrica. Aqui a imagem do
+primeiro segundo NÃO é desempate: prefira sempre o trecho que abre com o
+ASSUNTO na tela. E, em TODO clipe, informe no JSON o campo extra
+  "momento_visual_s": <float ou null — o segundo (tempo ABSOLUTO no vídeo,
+     dentro do trecho) em que o ASSUNTO aparece mais forte na tela: a máquina
+     funcionando, o chip, a fábrica, o objeto. null se o trecho nunca mostra
+     o assunto, só pessoas falando>
+Um trecho de estúdio que NUNCA mostra o assunto PODE entrar quando a frase é
+forte — não descarte por isso. Só informe null com honestidade: o motor pesa
+isso junto com o resto.
+
+B) TÍTULO POR ESPECIFICIDADE, NÃO POR OMISSÃO. Título que esconde ("o que
+aconteceu vai te chocar", "o segredo revelado", "a verdade sobre") custa
+confiança e é MENOS compartilhado (PLAYBOOK §15.3). Título que dá o detalhe
+concreto e estranho vence: "O macacão de US$ 1.000 para entrar na Intel",
+"1 poeira destrói US$ 1 milhão em chips". Um número, um objeto ou uma
+consequência que dá pra imaginar — e nada de "segredo", "verdade" ou
+"revelado" sem o detalhe junto.
+"""
+
+
+def _bloco_canal() -> str:
+    """Regras de selecao que valem SO' para o canal do corte.
+
+    ⭐ 26/09/2026 (dono aprovou os itens 2 e 4 do plano de virada): abertura
+    visual obrigatoria e titulo por especificidade no modofuturo. Fica FORA
+    do PROMPT de proposito: os outros canais recebem o prompt de sempre.
+    """
+    if _canal_atual() in config.CANAIS_ABERTURA_VISUAL:
+        return BLOCO_ABERTURA_VISUAL
+    return ""
+
+
+def _canal_atual() -> str | None:
+    try:
+        from .canais_registro import canonico
+        return canonico(os.environ.get("CANAL_ESPERADO"))
+    except Exception:
+        return None
+
+
 def _regra_duracao(dmin: int, dmax: int) -> str:
     """A regra de duracao do prompt: a de dinheiro (>60 s) ou a curta.
 
@@ -691,14 +738,45 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     def corpo(uri):
         return {"contents": [{"parts": [
             {"file_data": {"mime_type": mime, "file_uri": uri}},
-            {"text": prompt + _regra_nomes(caminho)},
+            {"text": prompt + _regra_nomes(caminho) + _bloco_canal()},
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 
     txt = _pedir(caminho, mime, corpo, "escolha de clipes", valida=_extrair_json)
     dados = _extrair_json(txt)
     clipes = dados if isinstance(dados, list) else dados.get("clipes", [])
-    return _validar(clipes, dur_total)
+    return _validar(marcar_sem_assunto(clipes), dur_total)
+
+
+# Penalidade de ORDEM (nao de corte) para trecho que nunca mostra o assunto.
+PENALIDADE_SEM_ASSUNTO = 5
+
+
+def marcar_sem_assunto(clipes: list[dict]) -> list[dict]:
+    """Item 5 do plano de virada, com o cuidado do dono (26/09/2026): "nao
+    generalize, podemos perder muitos bons videos assim, temos que ter outra
+    forma de avaliar".
+
+    Entao NADA e' descartado aqui. O trecho que abre em alguem falando e nunca
+    mostra o assunto (`momento_visual_s` null) ganha a marca
+    `sem_assunto_na_tela` e perde PENALIDADE_SEM_ASSUNTO pontos SO' na
+    ordenacao — uma frase forte continua passando na frente de uma fraca. A
+    marca vai pro post.json: com as views de volta, se ela nao prever nada, a
+    penalidade sai (a avaliacao e' pelo numero, nao pela regra).
+    """
+    if _canal_atual() not in config.CANAIS_ABERTURA_VISUAL:
+        return clipes
+    for c in clipes:
+        abre = str(c.get("abertura_mostra") or "").strip().lower()
+        if c.get("momento_visual_s") in (None, "", "null") and abre in (
+                "pessoa_falando", "parado"):
+            c["sem_assunto_na_tela"] = True
+            c["nota_original"] = c.get("nota")
+            c["nota"] = _num(c, "nota") - PENALIDADE_SEM_ASSUNTO
+            print(f"   [abertura] sem o assunto na tela (-{PENALIDADE_SEM_ASSUNTO} "
+                  f"na ordem, NAO descartado): {str(c.get('titulo'))[:50]}",
+                  flush=True)
+    return clipes
 
 
 PROMPT_METADADOS = """Este é um corte de vídeo JÁ PRONTO para YouTube Shorts/TikTok.

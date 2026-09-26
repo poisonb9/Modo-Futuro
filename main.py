@@ -14,6 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 import config
+from engine import abertura_visual
 from engine import (midia, selecao, transcricao, legendas, render, traducao, fala,
                     camada, marca, selo, cor, ritmo,
                     cascata,
@@ -325,6 +326,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
 
             status.etapa(nome_fonte, "cortando", c.get("titulo", ""), i, len(clipes))
             bruto = render.cortar(fonte, ini, fim, config.TRABALHO / f"bruto_{i:02d}.mp4")
+
+            # ⭐ 26/09/2026: abertura no ASSUNTO, nao no estudio (so' a imagem
+            # do 1o 1,5 s; o audio fica igual). Ver engine/abertura_visual.py.
+            _t_vis = abertura_visual.instante(c, ini, fim)
+            if _t_vis is not None:
+                bruto = abertura_visual.aplicar(fonte, bruto, _t_vis)
 
             # ---- decupagem: tira as pausas mortas (retenção + originalidade)
             #

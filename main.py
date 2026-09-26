@@ -326,10 +326,21 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             bruto = render.cortar(fonte, ini, fim, config.TRABALHO / f"bruto_{i:02d}.mp4")
 
             # ---- decupagem: tira as pausas mortas (retenção + originalidade)
-            # Não roda com --dublar: a trilha dublada é gerada pra duração do
-            # recorte original e dessincronizaria.
+            #
+            # ⭐ 26/09/2026: VALE TAMBEM COM --dublar. Antes era pulada ("a
+            # trilha dublada e' gerada pra duracao do recorte original e
+            # dessincronizaria") — mas a transcricao e a dublagem ja' acontecem
+            # DEPOIS daqui, sobre o clipe enxuto; o unico elo com a duracao
+            # antiga era o `fim - ini` passado ao gerador de voz, que agora e'
+            # `dur_final`. Como quase todo clipe e' dublado, a decupagem estava
+            # desligada na pratica.
+            #
+            # ⚠️ Menos no modo PROCEDIMENTO (maquiagem): la' o silencio costuma
+            # ser a propria acao — a mao aplicando o produto sem fala. Cortar
+            # tiraria passo da make.
             dur_final = fim - ini
-            if config.CORTAR_SILENCIOS and not dublar:
+            _procedimento = (os.environ.get("SELECAO_MODO") or "").strip() == "procedimento"
+            if config.CORTAR_SILENCIOS and not _procedimento:
                 enxuto = midia.cortar_silencios(
                     bruto, config.TRABALHO / f"bruto_{i:02d}_enxuto.mp4")
                 if enxuto != bruto:
@@ -412,7 +423,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                         # sabe de quem e' cada trecho. Vazio ou ausente: uma voz
                         # so', como sempre.
                         audio_dublado, timing_dub = voz_clonada.gerar_trilha(
-                            segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
+                            segmentos, dur_final, config.TRABALHO / f"dub_{i:02d}",
                             amostra_voz=config.VOZ_CLONADA_AMOSTRA,
                             falantes=c.get("falantes"),
                             # ⚠️ O ORIGINAL vai junto pra medir a dinamica
@@ -447,7 +458,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                         print("      dublando (edge-tts)...")
                         status.etapa(nome_fonte, "dublando", c.get("titulo", ""), i, len(clipes))
                         audio_dublado = dublagem.gerar_trilha(
-                            segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}")
+                            segmentos, dur_final, config.TRABALHO / f"dub_{i:02d}")
 
             # Palavra sensivel vira grafia adaptada (morte -> m0rte) APENAS no texto
             # escrito: legenda na tela, card de titulo e legenda do post. O audio

@@ -23,3 +23,19 @@ o motor só troca pronúncia se houver tabela aqui.
 - Conselho médico como verdade absoluta ("isso cura")
 - Inventar dado que o convidado não citou
 - Tirar a atribuição ("dizem que") de uma afirmação do convidado
+
+## Abertura (DESLIGADA — aguardando a medição do Modo Futuro)
+> ⛔ Desligada de propósito (dono, 26/09/2026). Ver
+> `_privado/HANDOFF_MOTOR_DE_ABERTURA.md`. ⚠️ Este canal é voice-over com
+> FALA LITERAL: não passa pela narração, então a checagem "Ele explicou que"
+> NÃO se aplica aqui. A regra vale na SELEÇÃO do trecho.
+
+O trecho começa NA frase mais forte do convidado, dita por ele, com o rosto e
+os olhos na tela, e não na pergunta do apresentador nem numa introdução
+("então, o que eu queria dizer é…"). Se a frase forte vem depois de 10 s de
+contexto, o corte começa nela e o contexto vem depois, ou sai.
+
+## Estrutura (DESLIGADA)
+(1) a frase que dói ou que choca; (2) o porquê, na voz do convidado; (3) o
+exemplo concreto ou a história pessoal; (4) a virada; (5) a frase final que
+dá vontade de mandar pra alguém.

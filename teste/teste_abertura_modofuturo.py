@@ -60,6 +60,12 @@ print("\n[4] so' o modofuturo tem abertura por fato no guia de voz")
 checar(guia_voz.abre_por_fato("modofuturo"), "modofuturo: sim")
 for c in ("truque.importado", "semanestesia.pod", "cozinha.importada"):
     checar(not guia_voz.abre_por_fato(c), f"{c}: nao")
+    # ⛔ As regras deles JA' ESTAO ESCRITAS no guia, com "(DESLIGADA)" no
+    # titulo (dono, 26/09: "deixa desligadas"). Ligar e' decisao dele, depois
+    # da medicao do modofuturo — ver _privado/HANDOFF_MOTOR_DE_ABERTURA.md.
+    b = guia_voz.bloco_prompt(c)
+    checar("ABERTURA" not in b and "ESTRUTURA" not in b,
+           f"{c}: regra escrita mas DESLIGADA (nao chega ao prompt)")
 bloco = guia_voz.bloco_prompt("modofuturo")
 checar("ABERTURA (obrigatório)" in bloco and "ESTRUTURA" in bloco,
        "bloco do prompt traz abertura e estrutura")

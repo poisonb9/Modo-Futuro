@@ -18,6 +18,9 @@ fundo = ruido rosa continuo, dublagem = tom de 1 a 3 s.
       janela de ~1 s (YAMNet), risada/ambiente ficam, rampa sem estalo
   [9] NEGATIVO: sem classificador, nada de fundo (falha FECHADA)
   [10] classificador real nos audios de demonstracao, quando existirem
+  [11] 26/09 (dono: "testar no make"): voz original BAIXA por baixo — na
+       pausa fica abaixo da dublagem, na fala abaixa mais, canto sai
+  [12] NEGATIVO: sem VOZ_ORIGINAL_DB a mistura e' a de sempre (2 entradas)
 
 Roda com: python teste/teste_fundo.py
 """
@@ -133,6 +136,31 @@ fundo.trechos_de_musica = lambda w: None
 checar(fundo.misturar(T / "x.mp4", T / "d.wav", T / "z.wav") is None,
        "sem saber onde há música, sai só a voz")
 fundo.separar, fundo.trechos_de_musica = real_sep, real_tm
+
+print("\n[11] voz original baixa por baixo (VOZ_ORIGINAL_DB)")
+# 'voz original' = ruido branco continuo (o ISO so' tira o tom da dublagem);
+# fundo mudo pra medir so' a voz
+ff("-f", "lavfi", "-i", "anoisesrc=d=8:c=white:a=0.3", "-ar", "44100", "-ac", "2", str(T / "v.wav"))
+ff("-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-t", "8", str(T / "zero.wav"))
+g = 10 ** (-16 / 20)
+ff("-i", str(T / "zero.wav"), "-i", str(T / "d.wav"), "-i", str(T / "v.wav"),
+   "-filter_complex", fundo.filtro_mix(None, None, g, [(5.0, 7.0)]), "-map", "[a]",
+   str(T / "vo3.wav"))
+# ⚠️ mede acima de 4 kHz: o tom da dublagem (440 Hz) vaza -38,7 dB pelo
+# ISO e mascarava o ducking (medido 26/09); o ruido branco tem energia la'
+ISO = "highpass=f=4000,highpass=f=4000,"
+pausa, sob_fala, canto = (rms(T / "vo3.wav", 3.6, 4.7), rms(T / "vo3.wav", 1.3, 2.7),
+                          rms(T / "vo3.wav", 5.4, 6.6))
+print(f"       pausa {pausa:.1f} | sob a fala {sob_fala:.1f} | canto {canto:.1f} dB")
+checar(-50 < pausa < -20, f"na pausa a voz original e' audivel mas baixa ({pausa:.1f} dB)")
+checar(sob_fala < pausa - 8, f"sob a dublagem abaixa mais ({pausa - sob_fala:.1f} dB)")
+checar(canto < pausa - 30, "trecho de canto sai")
+
+print("\n[12] NEGATIVO: desligada por padrao")
+checar(fundo._ganho_voz_original() is None or os.environ.get("VOZ_ORIGINAL_DB"),
+       "sem VOZ_ORIGINAL_DB, sem voz original")
+checar("[2:a]" not in fundo.filtro_mix(None) and "inputs=2" in fundo.filtro_mix(None),
+       "mistura de sempre com 2 entradas")
 
 print("\n[10] classificador real (se o modelo e os vídeos de teste existirem)")
 demo = Path(os.environ.get("TEMP", "/tmp")) / "claude" / "demo_enq"

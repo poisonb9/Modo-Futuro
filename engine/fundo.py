@@ -190,20 +190,49 @@ def separar(bruto: Path, pasta: Path) -> Path | None:
         return None
 
 
-def filtro_mix(ate_s: float | None,
-               sem_musica: list[tuple[float, float]] | None = None) -> str:
-    """[0:a] = fundo, [1:a] = dublagem -> [a]. Exposto pro teste.
-    `sem_musica`: trechos em que o fundo e' musica e sai (ver trechos_de_musica)."""
+# ⭐ VOZ ORIGINAL BAIXA POR BAIXO (26/09/2026, dono: "deixar as conversas
+# originais de fundo assim como no Sem Anestesia, mas mais baixo" -> "testar
+# no make, chips nao"). A voz que o Demucs ISOLOU (sem musica: a do fundo ja'
+# sai pelo YAMNet, e canto na voz sai pelo mesmo classificador), a
+# VOZ_ORIGINAL_DB abaixo da dublagem nas pausas e derrubada forte (ratio 10,
+# como o voice-over) enquanto a dublagem fala. Vazio = desligado (padrao).
+# So' a previa de referencia `make_vozorig` liga, ate' o dono ouvir.
+VOZ_ORIGINAL_DB = os.environ.get("VOZ_ORIGINAL_DB", "").strip()
+
+
+def _ganho_voz_original() -> float | None:
+    try:
+        return 10 ** (float(VOZ_ORIGINAL_DB) / 20) if VOZ_ORIGINAL_DB else None
+    except ValueError:
+        return None
+
+
+def _corte(ate_s: float | None, trechos: list[tuple[float, float]] | None) -> str:
     corte = ""
-    if sem_musica:
-        corte += f",volume='{expr_sem_musica(sem_musica)}':eval=frame"
+    if trechos:
+        corte += f",volume='{expr_sem_musica(trechos)}':eval=frame"
     if ate_s is not None and ate_s > 0:
         corte += (f",volume='if(gte(t,{ate_s:.3f}),0,1)':eval=frame,"
                   f"afade=t=out:st={max(0.0, ate_s - FADE_S):.3f}:d={FADE_S}")
-    return (f"[0:a]{_LN},volume={VOL_FUNDO}{corte}[f];"
-            f"[1:a]{_LN},asplit=2[d][sc];"
-            f"[f][sc]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=350[fd];"
-            f"[d][fd]amix=inputs=2:duration=first:normalize=0[a]")
+    return corte
+
+
+def filtro_mix(ate_s: float | None,
+               sem_musica: list[tuple[float, float]] | None = None,
+               voz_ganho: float | None = None,
+               voz_sem_canto: list[tuple[float, float]] | None = None) -> str:
+    """[0:a] = fundo, [1:a] = dublagem [, [2:a] = voz original] -> [a].
+    Exposto pro teste. `sem_musica`: trechos em que o fundo e' musica e sai
+    (ver trechos_de_musica). `voz_ganho`: liga a voz original baixa."""
+    fundo = (f"[0:a]{_LN},volume={VOL_FUNDO}{_corte(ate_s, sem_musica)}[f];"
+             f"[f][sc]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=350[fd];")
+    if voz_ganho is None:
+        return (f"[1:a]{_LN},asplit=2[d][sc];" + fundo
+                + "[d][fd]amix=inputs=2:duration=first:normalize=0[a]")
+    return (f"[1:a]{_LN},asplit=3[d][sc][sv];" + fundo
+            + f"[2:a]{_LN},volume={voz_ganho:.4f}{_corte(ate_s, voz_sem_canto)}[v];"
+            f"[v][sv]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=400[vd];"
+            "[d][fd][vd]amix=inputs=3:duration=first:normalize=0[a]")
 
 
 def misturar(bruto: Path, dublado: Path, destino: Path,
@@ -235,9 +264,29 @@ def misturar(bruto: Path, dublado: Path, destino: Path,
                 json.dumps({"musica": musica}), encoding="utf-8")
         except Exception:
             pass
+    entradas = ["-i", str(fundo), "-i", str(dublado)]
+    voz_ganho, canto = _ganho_voz_original(), None
+    voz = fundo.with_name("vocals.wav")
+    if voz_ganho is not None and voz.exists():
+        canto = trechos_de_musica(voz)
+        if canto is None:
+            voz_ganho = None       # falha FECHADA: sem saber onde ha' canto
+        else:
+            entradas += ["-i", str(voz)]
+            print(f"      [fundo] voz original a {VOZ_ORIGINAL_DB} dB por baixo"
+                  f"{f', canto tirado em {len(canto)} trecho(s)' if canto else ''}",
+                  flush=True)
+            if diagnostico.ligado():
+                try:
+                    shutil.copy2(voz, Path(destino).with_name("voz_original_demucs.wav"))
+                except Exception:
+                    pass
+    else:
+        voz_ganho = None
     try:
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(fundo), "-i", str(dublado),
-                        "-filter_complex", filtro_mix(ate_s, musica), "-map", "[a]",
+        subprocess.run(["ffmpeg", "-y", "-v", "error", *entradas,
+                        "-filter_complex", filtro_mix(ate_s, musica, voz_ganho, canto),
+                        "-map", "[a]",
                         "-ar", "44100", str(destino)],
                        check=True, capture_output=True, timeout=300)
         return Path(destino)

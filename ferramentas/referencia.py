@@ -77,6 +77,8 @@ def campos(cfg: dict, clipe: dict) -> list[str]:
     }
     if clipe.get("recorte"):
         f["recorte"] = clipe["recorte"]
+    if clipe.get("voz_original_db"):          # variante A/B (engine/fundo.py)
+        f["voz_original_db"] = clipe["voz_original_db"]
     return [x for k, v in f.items() for x in ("-f", f"{k}={v}")]
 
 

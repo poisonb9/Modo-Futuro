@@ -85,6 +85,10 @@ on:
         description: "Com dublar=true: mantem o FUNDO do original (musica, ambiente) por baixo da dublagem, separado pelo Demucs; no voice-over, o original abaixa so' durante a fala. Ver engine/fundo.py."
         required: false
         default: "false"
+      voz_original_db:
+        description: "TESTE (so' previa de referencia): com fundo_original=true, a VOZ original isolada pelo Demucs fica por baixo da dublagem a este nivel (ex.: -16). Vazio = desligado. Ver engine/fundo.py."
+        required: false
+        default: ""
 
 jobs:
   cortar:
@@ -347,6 +351,7 @@ jobs:
           FUNDO_ORIGINAL: ${{ inputs.fundo_original == 'true' && '1' || '0' }}
           # na previa o main.py guarda as trilhas do meio (engine/diagnostico.py)
           PREVIA: ${{ inputs.previa }}
+          VOZ_ORIGINAL_DB: ${{ inputs.voz_original_db }}
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"

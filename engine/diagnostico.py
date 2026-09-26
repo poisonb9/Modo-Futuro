@@ -34,7 +34,7 @@ PASTA = "diagnostico"
 _PADROES = ("voz_frase_*", "ancoragem.json", "voz_ancorada.wav",
             "voz_concatenada.wav", "trilha_dublada_clonada.wav",
             "trilha_com_fundo.wav", "trilha_com_fim.wav",
-            "fundo_demucs.wav", "fundo_musica.json")
+            "fundo_demucs.wav", "fundo_musica.json", "voz_original_demucs.wav")
 
 
 def ligado() -> bool:

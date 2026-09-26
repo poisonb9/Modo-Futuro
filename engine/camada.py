@@ -89,7 +89,18 @@ def dur_a(plat: str = "tiktok", n: int = 6) -> float:
     t = tempos(n)
     return t["e3"] + ENTRA + FICA["e3"] + SAI
 
-CANAIS: set[str] = {"truque.importado"}
+# ⭐ 26/09/2026, dono: "estende a todos" — os baloes viraram o UNICO CTA
+# (a cascata de selos saiu no mesmo dia, engine/cascata.py). ⚠️ Liga junto o
+# selo da serie (main.py so' o aplica onde a camada liga).
+CANAIS: set[str] = {
+    "modofuturo", "semanestesia.pod", "atefalhar", "achadinhos.instantaneos",
+    "truque.importado", "cozinha.importada", "fatura.chora",
+}
+# O AVIAO (parte B) leva a faixa "AchadinhoTotal.com.br" (v2.webp). Eu propus
+# deixar so' nos canais de achados; o dono decidiu (26/09): "quero o aviao com
+# faixa em todos os canais". Conjunto separado fica pra poder tirar de um canal
+# sem tirar os baloes.
+CANAIS_COM_AVIAO: set[str] = set(CANAIS)
 
 
 def _img(nome: str, largura: int) -> Image.Image:
@@ -254,12 +265,13 @@ def janela_comente() -> tuple[float, float, float]:
     return (ini, ini + 0.9 + FICA_E + 0.8, 0.40)
 
 
-def plano(dur_video: float, plat: str = "tiktok") -> list[tuple[str, float]]:
+def plano(dur_video: float, plat: str = "tiktok",
+          aviao: bool = True) -> list[tuple[str, float]]:
     """[(parte, inicio_s)] que cabem neste video."""
     p = [("a", INICIO_S)] if dur_video >= INICIO_S + dur_a(plat) * 0.6 else []
     # o aviao tambem e' balao: so' depois de a parte A inteira sair
     ib = max(B_FRAC * dur_video, B_MIN_S, INICIO_S + dur_a(plat) + VAO)
-    if ib + DUR_B <= dur_video - B_FIM_S:
+    if aviao and ib + DUR_B <= dur_video - B_FIM_S:
         p.append(("b", ib))
     return p
 
@@ -360,11 +372,20 @@ def ligado(canal: str) -> bool:
     return bool(nome) and nome in CANAIS
 
 
-def aplicar(video: Path, destino: Path, plat: str = "tiktok") -> Path | None:
-    """Sobrepoe as partes que cabem (ver `plano`). None se nada cabe."""
+def com_aviao(canal: str | None) -> bool:
+    if canal is None:
+        return True
+    from . import canais_registro
+    return canais_registro.canonico(canal) in CANAIS_COM_AVIAO
+
+
+def aplicar(video: Path, destino: Path, plat: str = "tiktok",
+            canal: str | None = None) -> Path | None:
+    """Sobrepoe as partes que cabem (ver `plano`). None se nada cabe.
+    `canal` None (linha de comando) = com aviao, como sempre foi."""
     r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                         "-of", "csv=p=0", str(video)], capture_output=True, text=True)
-    pl = plano(float(r.stdout.strip()), plat)
+    pl = plano(float(r.stdout.strip()), plat, aviao=com_aviao(canal))
     if not pl:
         return None
     entradas, filtros, ant = [], [], "0:v"
@@ -421,7 +442,7 @@ def aplicar_no_lugar(video: Path, canal: str, plat: str = "tiktok") -> bool:
         return False
     novo = video.with_name(video.stem + "_c.mp4")
     try:
-        if aplicar(video, novo, plat) is None:
+        if aplicar(video, novo, plat, canal) is None:
             return False
         if not _abre(novo):
             raise RuntimeError("saida nao abre")

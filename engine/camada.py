@@ -32,8 +32,13 @@ B_FIM_S = 3.0
 # do Reels ficam ~250 px mais altos que os do TikTok (medido em 25/09).
 # "esc" reduz comente/compartilhe/siga; "e2" e' a peca do compartilhe.
 PLAT = {
+    # ⭐ 26/09/2026 (print do dono, ILLIT no ar): o "siga" em (250, 1555)
+    # ficava EM CIMA do nome da conta. No TikTok o seguir e' o "+" do AVATAR,
+    # no topo da coluna (~912, 830 no video): o balao vai ao lado dele, como
+    # os outros ficam ao lado do seu botao. No Reels o "Seguir" e' mesmo ao
+    # lado do nome, embaixo a' esquerda — la' nao muda.
     "tiktok": {"pos": {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590),
-                       "e3": (250, 1555)},
+                       "e3": (780, 938)},
                "e2": ("e2", 200), "esc": 0.8},
     "reels": {"pos": {"a": (886, 848), "e1": (760, 992), "e2": (760, 1327),
                       "e3": (250, 1345)},

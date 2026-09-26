@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
-"""Plano aberto sem rosto + pulso de zoom na palavra de ênfase.
+"""Sem rosto -> segue o movimento em tela cheia; pulso na palavra de ênfase.
 
 POR QUE EXISTE
 
-26/09/2026, aprovado pelo dono depois da prévia da ILLIT (run 36206642639):
-em 2 de 16 quadros o crop ficou em close na nuca/cabelo, porque a pessoa virou
-e o detector perdeu o rosto. Agora, sem rosto por >= 1,2 s num clipe que TEM
-rosto, o quadro abre (16:9 inteiro sobre o próprio vídeo desfocado). E cada
-frase ganha um pulso de +5% no início da palavra mais forte (acervo F133628).
+26/09/2026, prévia da ILLIT (run 36206642639): em 2 de 16 quadros o crop
+ficou em close na nuca, porque a pessoa virou e o detector perdeu o rosto.
+⛔ A 1ª correção (plano aberto: 16:9 pequeno sobre fundo desfocado) foi
+REPROVADA pelo dono: "fica um vídeo pequeno na tela vertical". Agora, sem
+rosto por >= 1,2 s num clipe que TEM rosto, o crop 9:16 continua em tela
+cheia e segue o movimento. E cada frase ganha um pulso de +5% na palavra
+mais forte (acervo F133628).
 
-  [1] trechos_abertos: junta amostras seguidas, ignora buraco curto
-  [2] NEGATIVO: clipe quase sem rosto (receita) não abre nunca
-  [3] render real: no trecho aberto o topo é fundo desfocado; fora, é crop
+  [1] trechos_sem_rosto: junta amostras seguidas, ignora buraco curto
+  [2] NEGATIVO: clipe quase sem rosto (receita) não entra nessa regra
+  [3] o movimento só entra DENTRO dos trechos; o render é SEMPRE tela cheia
+      (nada de split/overlay/fundo desfocado — NEGATIVO do plano aberto)
   [4] ênfase: número > "!" > palavra longa; longe do corte; conectivo não
   [5] o pulso sobe e desce (triângulo) e some fora da janela
 
-Roda com: python teste/teste_enquadramento_aberto_enfase.py
+Roda com: python teste/teste_enquadramento_sem_rosto_enfase.py
 """
 import re
 import subprocess
@@ -43,48 +46,49 @@ print(__doc__.splitlines()[0])
 print("\n[1] trechos sem rosto")
 enquadrar.ULTIMA_ANALISE = {"passo": 0.5, "cobertura": 0.8,
                             "sem_rosto": [2.0, 2.5, 3.0, 3.5, 7.0, 10.0, 10.5, 11.0]}
-t = enquadrar.trechos_abertos()
+t = enquadrar.trechos_sem_rosto()
 print(f"       {t}")
 checar(t == [(2.0, 4.0), (10.0, 11.5)], "2,0-4,0 e 10,0-11,5; o 7,0 isolado fica de fora")
 
 print("\n[2] NEGATIVO: clipe sem rosto quase nenhum")
 enquadrar.ULTIMA_ANALISE["cobertura"] = 0.1
-checar(enquadrar.trechos_abertos() == [], "cobertura 10% = não abre")
+checar(enquadrar.trechos_sem_rosto() == [], "cobertura 10% = regra não entra")
 enquadrar.ULTIMA_ANALISE = {}
-checar(enquadrar.trechos_abertos() == [], "sem análise = não abre")
+checar(enquadrar.trechos_sem_rosto() == [], "sem análise = regra não entra")
 
-print("\n[3] render real")
+print("\n[3] movimento só no buraco, e tela cheia sempre")
+rosto = [(0.0, 0.3), (1.5, 0.3), (4.5, 0.3), (6.0, 0.3)]
+mov = [(0.5, 0.9), (2.0, 0.8), (3.0, 0.8), (5.0, 0.9)]
+c = enquadrar.preencher_com_movimento(rosto, mov, [(2.0, 4.0)])
+checar(c == [(0.0, 0.3), (1.5, 0.3), (2.0, 0.8), (3.0, 0.8), (4.5, 0.3), (6.0, 0.3)],
+       f"só os pontos de 2,0 e 3,0 entram ({c})")
+f = enquadrar.filtro_vertical(1920, 1080, c)
+checar("split" not in f and "overlay" not in f and "boxblur" not in f,
+       "sem fundo desfocado nem vídeo pequeno (plano aberto reprovado)")
 T = Path(tempfile.mkdtemp())
 src = T / "s.mp4"
-# fonte 16:9 de RUÍDO (detalhe em todo pixel) — o fundo desfocado perde isso
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i",
-                "nullsrc=s=1920x1080:r=30:d=4,geq=lum='random(1)*255':cb=128:cr=128",
+                "nullsrc=s=1920x1080:r=30:d=6,geq=lum='random(1)*255':cb=128:cr=128",
                 "-pix_fmt", "yuv420p", str(src)], check=True)
-f = enquadrar.filtro_vertical(1920, 1080, [(0.0, 0.5), (4.0, 0.5)], [(2.0, 3.0)])
 render.midia.fps = lambda _b: 30.0
-mov = render._zoom_por_frase(src, 1080, 1920, [1.0], [2.2])
 out = T / "o.mp4"
-r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", f + mov,
-                    str(out)], capture_output=True, text=True)
-checar(r.returncode == 0, f"ffmpeg aceita a cadeia com split/overlay + zoompan {r.stderr[-160:]}")
+r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf",
+                    f + render._zoom_por_frase(src, 1080, 1920, [1.0], [2.2]), str(out)],
+                   capture_output=True, text=True)
+checar(r.returncode == 0, f"ffmpeg aceita {r.stderr[-160:]}")
 
 
-def quadro(seg):
+def detalhe(seg, y0, y1):
     raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(seg), "-i", str(out),
                           "-frames:v", "1", "-f", "rawvideo", "-pix_fmt", "gray", "-"],
                          capture_output=True).stdout
-    return np.frombuffer(raw, np.uint8).reshape(1920, 1080).astype(float)
+    img = np.frombuffer(raw, np.uint8).reshape(1920, 1080).astype(float)
+    return float(np.abs(np.diff(img[y0:y1], axis=1)).mean())
 
 
-def detalhe_topo(img):
-    faixa = img[80:400]          # topo: no aberto é só fundo desfocado
-    return float(np.abs(np.diff(faixa, axis=1)).mean())
-
-
-normal, aberto = detalhe_topo(quadro(0.5)), detalhe_topo(quadro(2.5))
-print(f"       detalhe no topo: crop {normal:.1f} | aberto {aberto:.1f}")
-checar(aberto < normal * 0.5, "no trecho aberto o topo é fundo desfocado")
-checar(detalhe_topo(quadro(3.5)) > aberto * 2, "depois do trecho volta o crop")
+topo = [detalhe(s, 80, 400) for s in (0.5, 2.5, 3.5, 5.0)]
+print(f"       detalhe no topo em 0,5/2,5/3,5/5,0 s: {[round(x) for x in topo]}")
+checar(min(topo) > 20, "imagem de verdade no topo o tempo todo (tela cheia)")
 
 print("\n[4] palavra de ênfase")
 ps = [{"palavra": w, "inicio": 0.5 * i, "fim": 0.5 * i + 0.45} for i, w in enumerate(

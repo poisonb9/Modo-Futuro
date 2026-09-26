@@ -270,23 +270,30 @@ def trajetoria_movimento(clipe, largura: int, altura: int) -> list[tuple[float, 
     return list(zip(tempos, _suavizar(xs, config.SUAVIZACAO)))
 
 
-# ⭐ PLANO ABERTO QUANDO O ROSTO SOME (26/09/2026, aprovado pelo dono).
+# ⭐ SEM ROSTO -> SEGUE O MOVIMENTO, EM TELA CHEIA (26/09/2026).
 # MEDIDO na previa da ILLIT (run 36206642639): 2 de 16 quadros mostravam nuca
 # e cabelo em close — a pessoa virou de costas, o detector perdeu o rosto e o
-# crop ficou parado onde a cabeca estava. Nesses trechos o quadro ABRE: o
-# 16:9 inteiro no meio, com o proprio video desfocado preenchendo em cima e
-# embaixo. Continua sendo o video, so' que sem cortar ninguem.
+# crop ficou PARADO onde a cabeca estava.
 #
-# So' vale em clipe COM rosto (cobertura >= COBERTURA_MIN): em receita, sem
-# rosto nenhum, o rastreio por movimento e' o certo e nada muda.
-ABERTO_MIN_S = 1.2        # buraco menor que isto e' piscada do detector
+# ⛔ A 1a tentativa (4d2a3e4) abria o quadro: o 16:9 inteiro no meio sobre
+# fundo desfocado. O dono viu a demo e REPROVOU: "fica de longe, fica um video
+# pequeno na tela vertical". Nao voltar a isso.
+#
+# Agora: nesses trechos o crop continua 9:16 em TELA CHEIA e passa a seguir
+# onde a imagem mais muda (`trajetoria_movimento`, o mesmo rastreio da
+# receita). Entre o ultimo rosto e o primeiro ponto de movimento o recorte
+# desliza (a rampa linear do `_filtro_crop`), sem salto.
+#
+# So' vale em clipe COM rosto (cobertura >= COBERTURA_MIN): em clipe quase
+# sem rosto o `caminho_para` ja' usa movimento (ou centro) no clipe todo.
+SEM_ROSTO_MIN_S = 1.2     # buraco menor que isto e' piscada do detector
 COBERTURA_MIN = 0.30
 ULTIMA_ANALISE: dict = {}
 
 
-def trechos_abertos() -> list[tuple[float, float]]:
-    """(inicio, fim) em que o ultimo `trajetoria` nao achou rosto por tempo
-    suficiente pra valer abrir o quadro. Vazio = crop de sempre."""
+def trechos_sem_rosto() -> list[tuple[float, float]]:
+    """(inicio, fim) em que o ultimo `trajetoria` ficou sem rosto por tempo
+    suficiente pra valer trocar pro movimento. Vazio = so' rosto."""
     a = ULTIMA_ANALISE or {}
     if a.get("cobertura", 0.0) < COBERTURA_MIN:
         return []
@@ -301,11 +308,22 @@ def trechos_abertos() -> list[tuple[float, float]]:
         ant = t
     if ini is not None:
         trechos.append((ini, ant + passo))
-    return [(round(i, 2), round(f, 2)) for i, f in trechos if f - i >= ABERTO_MIN_S]
+    return [(round(i, 2), round(f, 2)) for i, f in trechos if f - i >= SEM_ROSTO_MIN_S]
+
+
+def preencher_com_movimento(rosto: list[tuple[float, float]],
+                            movimento: list[tuple[float, float]],
+                            trechos: list[tuple[float, float]]) -> list[tuple[float, float]]:
+    """Caminho do rosto + os pontos de movimento que caem DENTRO dos trechos
+    sem rosto, em ordem de tempo. Fora dos trechos, o rosto manda."""
+    extra = [(t, x) for t, x in movimento
+             if any(i <= t <= f for i, f in trechos)]
+    return sorted(rosto + extra)
 
 
 def caminho_para(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
-    """Rosto primeiro; movimento quando nao ha' rosto e o canal pediu.
+    """Rosto primeiro; movimento quando nao ha' rosto e o canal pediu, e nos
+    trechos longos sem rosto de um clipe que tem rosto.
 
     O movimento e' FALLBACK, nao substituto: onde ha' rosto, rosto ganha. Num
     corte de entrevista o movimento maior costuma ser a mao gesticulando, e
@@ -313,35 +331,24 @@ def caminho_para(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     """
     caminho = trajetoria(clipe, largura, altura)
     if caminho:
+        trechos = trechos_sem_rosto()
+        if trechos:
+            mov = trajetoria_movimento(clipe, largura, altura)
+            if mov:
+                print(f"      sem rosto em {len(trechos)} trecho(s) {trechos}: "
+                      "segue o movimento, em tela cheia")
+                return preencher_com_movimento(caminho, mov, trechos)
         return caminho
-    ULTIMA_ANALISE["cobertura"] = 0.0   # sem caminho de rosto: nada de abrir
+    ULTIMA_ANALISE["cobertura"] = 0.0
     if getattr(config, "RASTREIO_MOVIMENTO", False):
         return trajetoria_movimento(clipe, largura, altura)
     return []
 
 
 def filtro_vertical(largura: int, altura: int,
-                    caminho: list[tuple[float, float]],
-                    abertos: list[tuple[float, float]] | None = None) -> str:
-    """Monta o filtro ffmpeg do crop 9:16 seguindo o rosto.
-
-    `abertos` (ver `trechos_abertos`): nesses intervalos o crop da' lugar ao
-    quadro inteiro sobre fundo desfocado. Os rotulos `enq_*` sao internos —
-    a cadeia continua com uma entrada e uma saida sem rotulo, entao serve em
-    `-vf` e dentro de `-filter_complex` igual a antes."""
-    base = _filtro_crop(largura, altura, caminho)
-    if not abertos or int(altura * 9 / 16) >= largura:
-        return base
-    lv, av = config.VERTICAL
-    quando = "+".join(f"between(t,{i:.2f},{f:.2f})" for i, f in abertos)
-    # fundo: reduz ANTES de desfocar (barato) e amplia de volta
-    return (f"split=3[enq_a][enq_b][enq_c];"
-            f"[enq_a]{base}[enq_crop];"
-            f"[enq_b]scale=270:480:force_original_aspect_ratio=increase,"
-            f"crop=270:480,boxblur=12:2,scale={lv}:{av}[enq_fundo];"
-            f"[enq_c]scale={lv}:-2[enq_meio];"
-            f"[enq_fundo][enq_meio]overlay=0:(H-h)/2[enq_aberto];"
-            f"[enq_crop][enq_aberto]overlay=0:0:enable='{quando}'")
+                    caminho: list[tuple[float, float]]) -> str:
+    """Monta o filtro ffmpeg do crop 9:16 seguindo o rosto."""
+    return _filtro_crop(largura, altura, caminho)
 
 
 def _filtro_crop(largura: int, altura: int,

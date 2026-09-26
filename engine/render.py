@@ -704,9 +704,6 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     """
     l, a = midia.dimensoes(bruto)
     caminho = enquadrar.caminho_para(bruto, l, a)
-    abertos = enquadrar.trechos_abertos() if caminho else []
-    if abertos:
-        print(f"      plano aberto (sem rosto) em {len(abertos)} trecho(s): {abertos}")
     lv, av = config.VERTICAL
     # `cortes` (inicio de cada frase) -> movimento sincronizado com a fala;
     # sem fala medida, o ciclo cego de sempre
@@ -716,7 +713,7 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     # 607 px de largura esticados 1,78x — imagem mole. 0,5 devolve borda sem
     # realcar o bloco da compressao (0,8 ja' realcava, comparado lado a lado).
     # A melhora de verdade e' baixar maior (baixar_em_intervalos.FORMATO).
-    filtro = enquadrar.filtro_vertical(l, a, caminho, abertos) + movimento + NITIDEZ
+    filtro = enquadrar.filtro_vertical(l, a, caminho) + movimento + NITIDEZ
     if config.GRADE_CINEMATICO:
         filtro += pos_producao.FILTRO_COR_CINEMATICO
     # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a

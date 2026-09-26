@@ -588,9 +588,54 @@ def _ken_burns(bruto: Path, largura: int, altura: int) -> str:
             f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={largura}x{altura}:fps={fps:.3f}")
 
 
+# ⭐ MOVIMENTO SINCRONIZADO COM A FALA (26/09/2026, item aprovado pelo dono na
+# analise "o que falta pra ficar premium", +acervo). O ciclo de 3 s acima e'
+# cego: nao sabe onde a frase comeca. Os praticantes cortam a cada 1-3 s
+# (acervo F26017, F24734) e mexem no quadro no inicio (F32512). Em fonte de
+# camera unica nao ha' outro angulo pra cortar — entao o CORTE e' o proprio
+# enquadramento: 100% <-> 108% alternando a cada frase (jump cut), e um
+# empurrao lento de 1%/s (teto 3%) dentro da frase pra nunca ficar parado.
+_CORTE_NIVEL = 0.08
+_CORTE_EMPURRA_S = 0.01
+_CORTE_EMPURRA_MAX = 0.03
+_CORTE_MIN_S = 1.5        # nunca dois cortes em menos que isto
+_CORTE_PAUSA_S = 0.25     # silencio entre palavras que conta como troca de frase
+
+
+def cortes_da_fala(palavras: list[dict] | None) -> list[float]:
+    """Instantes (s) em que uma frase comeca: depois de pausa ou de ./!/?."""
+    cortes, ultimo = [], -1e9
+    ps = [p for p in (palavras or []) if p.get("inicio") is not None]
+    for i in range(1, len(ps)):
+        ant, p = ps[i - 1], ps[i]
+        pausa = float(p["inicio"]) - float(ant.get("fim", ant["inicio"]))
+        fim_frase = str(ant.get("palavra", "")).rstrip().endswith((".", "!", "?"))
+        t = float(p["inicio"])
+        if (pausa > _CORTE_PAUSA_S or fim_frase) and t - ultimo >= _CORTE_MIN_S:
+            cortes.append(round(t, 3))
+            ultimo = t
+    return cortes
+
+
+def _zoom_por_frase(bruto: Path, largura: int, altura: int,
+                    cortes: list[float]) -> str:
+    """zoompan com nivel alternado a cada corte + empurrao dentro da frase.
+    `k` = quantos cortes ja' passaram; `ini` = frame do ultimo corte (soma
+    telescopica), tudo em expressao do ffmpeg, sem estado."""
+    fps = midia.fps(bruto)
+    fr = [round(c * fps) for c in cortes]
+    k = "+".join(f"gte(on,{f})" for f in fr) or "0"
+    ini = "+".join(f"gte(on,{f})*{f - a}" for f, a in zip(fr, [0] + fr[:-1])) or "0"
+    z = (f"1+{_CORTE_NIVEL}*mod({k},2)"
+         f"+min({_CORTE_EMPURRA_MAX},{_CORTE_EMPURRA_S}*(on-({ini}))/{fps:.3f})")
+    return (f",zoompan=z='{z}':d=1:"
+            f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={largura}x{altura}:fps={fps:.3f}")
+
+
 def vertical(bruto: Path, ass: Path | None, destino: Path,
              audio_dublado: Path | None = None, titulo: str = "",
-             duracao_max: float | None = None, chamada: str = "") -> Path:
+             duracao_max: float | None = None, chamada: str = "",
+             cortes: list[float] | None = None) -> Path:
     """9:16 para Shorts, com o quadro seguindo o rosto.
 
     `titulo` desenha o card de abertura (ver imagem_titulo) — caixa branca
@@ -601,7 +646,11 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     l, a = midia.dimensoes(bruto)
     caminho = enquadrar.caminho_para(bruto, l, a)
     lv, av = config.VERTICAL
-    filtro = enquadrar.filtro_vertical(l, a, caminho) + _ken_burns(bruto, lv, av)
+    # `cortes` (inicio de cada frase) -> movimento sincronizado com a fala;
+    # sem fala medida, o ciclo cego de sempre
+    movimento = (_zoom_por_frase(bruto, lv, av, cortes) if cortes
+                 else _ken_burns(bruto, lv, av))
+    filtro = enquadrar.filtro_vertical(l, a, caminho) + movimento
     if config.GRADE_CINEMATICO:
         filtro += pos_producao.FILTRO_COR_CINEMATICO
     # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a

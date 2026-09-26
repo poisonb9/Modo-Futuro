@@ -577,9 +577,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # O Gemini já devolvia esse campo e ele só era usado como legenda do
                 # post — a informação existia e estava sendo jogada fora justamente
                 # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
+                # ⭐ 26/09: `cortes` = onde cada frase comeca (no timing REAL da
+                # voz, dublada ou nao) -> o enquadramento corta junto da fala
                 render.vertical(bruto, ass_v, pasta / _arq, audio_dublado,
                                 titulo=_titulo_tela, duracao_max=dur_max,
-                                chamada=texto_chamada)
+                                chamada=texto_chamada,
+                                cortes=render.cortes_da_fala(ps))
 
             # ⚠️ A CASCATA VEM DEPOIS DO RENDER, e nunca dentro dele. O
             # `render.vertical` monta quatro arranjos de filter_complex

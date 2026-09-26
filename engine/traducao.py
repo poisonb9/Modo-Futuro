@@ -21,7 +21,7 @@ PROMPT = """Traduza a fala abaixo para português do Brasil, natural e coloquial
 aproximado de frases. Responda SOMENTE com o texto traduzido, sem aspas,
 sem comentário, sem markdown.
 
-Fala original:
+{biblia}Fala original:
 {texto}"""
 
 # Usado só quando --dublar: a fala original costuma ter mais de uma pessoa
@@ -132,7 +132,7 @@ demais), só remova a troca de interlocutor e os cacoetes de fala, deixando o
 texto linear e natural de se ouvir em voz alta. Responda SOMENTE com o texto
 reescrito, sem aspas, sem comentário, sem markdown.
 
-Fala original:
+{biblia}Fala original:
 {texto}"""
 
 
@@ -232,6 +232,26 @@ def orcamento_de_palavras(duracao_s: float | None) -> str:
             f"portugues tem ~{PALAVRAS_POR_MINUTO} palavras por minuto). ")
 
 
+def _montar(prompt: str, texto: str, genero: str | None = None,
+            duracao_s: float | None = None) -> str:
+    """Preenche SO' os campos que o prompt tem. UM lugar so' — antes a mesma
+    montagem estava copiada no caminho do Gemini e no da reserva (Nemotron).
+
+    `{biblia}` = tom, glossario e proibido do canal (engine/biblia.py, 26/09).
+    O canal vem de CANAL_ESPERADO, que desde 5520df5 chega ao passo de corte.
+    """
+    import os
+    from . import biblia
+    campos = {"texto": texto}
+    if "{dica_genero}" in prompt:
+        campos["dica_genero"] = dica_de_genero(genero)
+    if "{orcamento}" in prompt:
+        campos["orcamento"] = orcamento_de_palavras(duracao_s)
+    if "{biblia}" in prompt:
+        campos["biblia"] = biblia.bloco_prompt(os.environ.get("CANAL_ESPERADO"))
+    return prompt.format(**campos)
+
+
 def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
                     duracao_s: float | None = None) -> str:
     if not texto.strip():
@@ -250,12 +270,8 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
                     # `dica_genero` só existe no PROMPT_NARRACAO; o PROMPT
                     # comum não tem esse campo, então formatar com ele daria
                     # KeyError. Preenche só quando o prompt pede.
-                    "contents": [{"parts": [{"text": (
-                        prompt.format(texto=texto,
-                                      dica_genero=dica_de_genero(genero),
-                                      orcamento=orcamento_de_palavras(duracao_s))
-                        if "{dica_genero}" in prompt else prompt.format(texto=texto)
-                    )}]}],
+                    "contents": [{"parts": [{"text": _montar(
+                        prompt, texto, genero, duracao_s)}]}],
                     "generationConfig": {"temperature": 0.3},
                 },
                 timeout=60,
@@ -326,11 +342,7 @@ def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,
     if sem_cota:
         try:
             from . import nemotron
-            txt = nemotron.conversar(prompt.format(texto=texto)
-                                     if "{dica_genero}" not in prompt else
-                                     prompt.format(texto=texto,
-                                                   dica_genero=dica_de_genero(genero),
-                                                   orcamento=orcamento_de_palavras(duracao_s)),
+            txt = nemotron.conversar(_montar(prompt, texto, genero, duracao_s),
                                      modelo=nemotron.ULTRA)
             if txt and txt.strip():
                 global USOU_RESERVA

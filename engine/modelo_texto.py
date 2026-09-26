@@ -40,7 +40,15 @@ def perguntar(pergunta: str, tentativas: int = 3) -> str | None:
         except Exception as e:                       # noqa: BLE001
             print(f"  [!] gemini falhou ({type(e).__name__}) — proxima chave")
             continue
-    rot = keys.openrouter()
+    # ⛔ SEM CHAVE DE RESERVA = None, nao excecao (26/09/2026). `keys.openrouter`
+    # LEVANTA quando nao ha' chave; com o Gemini sem cota (5 previas em
+    # paralelo), o A/B do titulo derrubava o CLIPE INTEIRO depois de 8 min de
+    # dublagem ("NENHUM clipe sobreviveu"). O contrato acima e' devolver None.
+    try:
+        rot = keys.openrouter()
+    except Exception as e:                           # noqa: BLE001
+        print(f"  [!] sem modelo de reserva ({str(e)[:40]}) — segue sem resposta")
+        return None
     for _ in range(min(tentativas, len(rot))):
         chave = rot.proxima()
         try:

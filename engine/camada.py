@@ -78,13 +78,15 @@ def _coracoes(n: int = 6, semente: int = 7, plat: str = "tiktok") -> list:
     return els
 
 
-# ⭐ AVIAO CEDO (26/09/2026, dono: "achei que o balao do aviao demorou pra
-# entrar"). Ele so' entrava DEPOIS de comente/compartilhe/siga (~18 s de parte
-# A) e depois de 40% do video: 34-50 s nos clipes longos, ~21 s nos curtos.
-# MEDIDO no Studio (08/09): o tempo medio assistido e' 5-20 s — quase ninguem
-# via. Agora ele entra logo depois dos coracoes (~8 s do video), num espaco
-# RESERVADO na parte A; a regra "nunca dois baloes na tela" continua valendo.
-AVIAO_CEDO = True
+# ⭐ AVIAO LOGO DEPOIS DOS BALOES (26/09/2026, dono: "achei que o balao do
+# aviao demorou pra entrar" -> "o aviao deve entrar depois de todos os baloes,
+# com um respiro de alguns segundos"). Antes ele esperava tambem 40% do video
+# e um piso de 16 s: nos clipes longos entrava aos 34-50 s, e o tempo medio
+# assistido e' 5-20 s (Studio, 08/09). Agora: fim da parte A + RESPIRO_AVIAO.
+# (Uma versao intermediaria, dcfd1f9, o punha antes dos baloes — o dono pediu
+# depois de todos.)
+AVIAO_CEDO = False
+RESPIRO_AVIAO = 2.0
 
 
 def _fim_coracoes(n: int = 6) -> float:
@@ -295,7 +297,7 @@ def plano(dur_video: float, plat: str = "tiktok",
     if AVIAO_CEDO:
         ib = INICIO_S + _fim_coracoes() + VAO
     else:
-        ib = max(B_FRAC * dur_video, B_MIN_S, INICIO_S + dur_a(plat) + VAO)
+        ib = INICIO_S + dur_a(plat) + RESPIRO_AVIAO
     if aviao and ib + DUR_B <= dur_video - B_FIM_S:
         p.append(("b", ib))
     return p

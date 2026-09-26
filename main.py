@@ -590,10 +590,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # onde ela decide se a pessoa para de rolar. Ver render.filtro_titulo.
                 # ⭐ 26/09: `cortes` = onde cada frase comeca (no timing REAL da
                 # voz, dublada ou nao) -> o enquadramento corta junto da fala
+                # + pulso de zoom na palavra de enfase de cada frase
+                _cortes = render.cortes_da_fala(ps)
                 render.vertical(bruto, ass_v, pasta / _arq, audio_dublado,
                                 titulo=_titulo_tela, duracao_max=dur_max,
-                                chamada=texto_chamada,
-                                cortes=render.cortes_da_fala(ps))
+                                chamada=texto_chamada, cortes=_cortes,
+                                enfases=render.enfases_da_fala(ps, _cortes))
 
             # ⚠️ A CASCATA VEM DEPOIS DO RENDER, e nunca dentro dele. O
             # `render.vertical` monta quatro arranjos de filter_complex

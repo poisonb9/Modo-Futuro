@@ -82,6 +82,9 @@ def trajetoria(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     fps = cap.get(cv2.CAP_PROP_FPS) or 30
     salto = max(1, int(round(fps / config.AMOSTRA_FPS)))
 
+    global ULTIMA_ANALISE
+    ULTIMA_ANALISE = {"sem_rosto": [], "passo": 1.0 / config.AMOSTRA_FPS,
+                      "cobertura": 0.0}
     tempos, xs = [], []
     idx, amostras, achou_1x, achou_2x = 0, 0, 0, 0
     ultimo_x = None
@@ -161,12 +164,15 @@ def trajetoria(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
                     ultimo_x = centro
                     xs.append(centro)
                     tempos.append(idx / fps)
+                else:
+                    ULTIMA_ANALISE["sem_rosto"].append(idx / fps)
             idx += 1
     finally:
         cap.release()
         det.close()
 
     cobertura = (achou_1x + achou_2x) / amostras if amostras else 0.0
+    ULTIMA_ANALISE["cobertura"] = cobertura
     print(f"      enquadramento: rosto em {cobertura*100:.0f}% das amostras "
           f"({achou_1x} direto, {achou_2x} so' na 2a passada ampliada)")
     if cobertura < 0.30:
@@ -264,6 +270,40 @@ def trajetoria_movimento(clipe, largura: int, altura: int) -> list[tuple[float, 
     return list(zip(tempos, _suavizar(xs, config.SUAVIZACAO)))
 
 
+# ⭐ PLANO ABERTO QUANDO O ROSTO SOME (26/09/2026, aprovado pelo dono).
+# MEDIDO na previa da ILLIT (run 36206642639): 2 de 16 quadros mostravam nuca
+# e cabelo em close — a pessoa virou de costas, o detector perdeu o rosto e o
+# crop ficou parado onde a cabeca estava. Nesses trechos o quadro ABRE: o
+# 16:9 inteiro no meio, com o proprio video desfocado preenchendo em cima e
+# embaixo. Continua sendo o video, so' que sem cortar ninguem.
+#
+# So' vale em clipe COM rosto (cobertura >= COBERTURA_MIN): em receita, sem
+# rosto nenhum, o rastreio por movimento e' o certo e nada muda.
+ABERTO_MIN_S = 1.2        # buraco menor que isto e' piscada do detector
+COBERTURA_MIN = 0.30
+ULTIMA_ANALISE: dict = {}
+
+
+def trechos_abertos() -> list[tuple[float, float]]:
+    """(inicio, fim) em que o ultimo `trajetoria` nao achou rosto por tempo
+    suficiente pra valer abrir o quadro. Vazio = crop de sempre."""
+    a = ULTIMA_ANALISE or {}
+    if a.get("cobertura", 0.0) < COBERTURA_MIN:
+        return []
+    passo = a.get("passo", 0.5)
+    trechos, ini, ant = [], None, None
+    for t in a.get("sem_rosto", []):
+        if ini is not None and t - ant > passo * 1.5:
+            trechos.append((ini, ant + passo))
+            ini = None
+        if ini is None:
+            ini = t
+        ant = t
+    if ini is not None:
+        trechos.append((ini, ant + passo))
+    return [(round(i, 2), round(f, 2)) for i, f in trechos if f - i >= ABERTO_MIN_S]
+
+
 def caminho_para(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     """Rosto primeiro; movimento quando nao ha' rosto e o canal pediu.
 
@@ -274,14 +314,38 @@ def caminho_para(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     caminho = trajetoria(clipe, largura, altura)
     if caminho:
         return caminho
+    ULTIMA_ANALISE["cobertura"] = 0.0   # sem caminho de rosto: nada de abrir
     if getattr(config, "RASTREIO_MOVIMENTO", False):
         return trajetoria_movimento(clipe, largura, altura)
     return []
 
 
 def filtro_vertical(largura: int, altura: int,
-                    caminho: list[tuple[float, float]]) -> str:
-    """Monta o filtro ffmpeg do crop 9:16 seguindo o rosto."""
+                    caminho: list[tuple[float, float]],
+                    abertos: list[tuple[float, float]] | None = None) -> str:
+    """Monta o filtro ffmpeg do crop 9:16 seguindo o rosto.
+
+    `abertos` (ver `trechos_abertos`): nesses intervalos o crop da' lugar ao
+    quadro inteiro sobre fundo desfocado. Os rotulos `enq_*` sao internos —
+    a cadeia continua com uma entrada e uma saida sem rotulo, entao serve em
+    `-vf` e dentro de `-filter_complex` igual a antes."""
+    base = _filtro_crop(largura, altura, caminho)
+    if not abertos or int(altura * 9 / 16) >= largura:
+        return base
+    lv, av = config.VERTICAL
+    quando = "+".join(f"between(t,{i:.2f},{f:.2f})" for i, f in abertos)
+    # fundo: reduz ANTES de desfocar (barato) e amplia de volta
+    return (f"split=3[enq_a][enq_b][enq_c];"
+            f"[enq_a]{base}[enq_crop];"
+            f"[enq_b]scale=270:480:force_original_aspect_ratio=increase,"
+            f"crop=270:480,boxblur=12:2,scale={lv}:{av}[enq_fundo];"
+            f"[enq_c]scale={lv}:-2[enq_meio];"
+            f"[enq_fundo][enq_meio]overlay=0:(H-h)/2[enq_aberto];"
+            f"[enq_crop][enq_aberto]overlay=0:0:enable='{quando}'")
+
+
+def _filtro_crop(largura: int, altura: int,
+                 caminho: list[tuple[float, float]]) -> str:
     alvo_l = int(altura * 9 / 16)          # largura da janela vertical
     if alvo_l >= largura:
         # fonte já é estreita: só escala e preenche as bordas

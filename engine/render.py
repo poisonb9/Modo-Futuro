@@ -1,4 +1,5 @@
 """Corte e render final. Aqui a GTX 1650 trabalha (NVENC)."""
+import re
 from functools import lru_cache
 from pathlib import Path
 
@@ -603,8 +604,17 @@ _CORTE_MIN_S = 1.5        # nunca dois cortes em menos que isto
 _CORTE_PAUSA_S = 0.25     # silencio entre palavras que conta como troca de frase
 
 
+# ⭐ ABERTURA MAIS PICADA (26/09, aprovado pelo dono, acervo F26017: corte a
+# cada 1-3 s no comeco; F135206: ~20 cortes em 25 s). Nos primeiros
+# `_ABERTURA_S` o corte nao espera a frase acabar: entra no inicio da palavra
+# seguinte assim que passar `_ABERTURA_MIN_S` do anterior. Depois, so' frase.
+_ABERTURA_S = 3.0
+_ABERTURA_MIN_S = 1.0
+
+
 def cortes_da_fala(palavras: list[dict] | None) -> list[float]:
-    """Instantes (s) em que uma frase comeca: depois de pausa ou de ./!/?."""
+    """Instantes (s) em que uma frase comeca: depois de pausa ou de ./!/?;
+    na abertura, tambem a cada ~1 s no inicio de palavra."""
     cortes, ultimo = [], -1e9
     ps = [p for p in (palavras or []) if p.get("inicio") is not None]
     for i in range(1, len(ps)):
@@ -612,23 +622,70 @@ def cortes_da_fala(palavras: list[dict] | None) -> list[float]:
         pausa = float(p["inicio"]) - float(ant.get("fim", ant["inicio"]))
         fim_frase = str(ant.get("palavra", "")).rstrip().endswith((".", "!", "?"))
         t = float(p["inicio"])
-        if (pausa > _CORTE_PAUSA_S or fim_frase) and t - ultimo >= _CORTE_MIN_S:
+        abertura = t < _ABERTURA_S and t - max(ultimo, 0.0) >= _ABERTURA_MIN_S
+        # corte de abertura nao pode engolir o inicio da frase logo depois
+        folga = _ABERTURA_MIN_S if ultimo < _ABERTURA_S else _CORTE_MIN_S
+        if abertura or ((pausa > _CORTE_PAUSA_S or fim_frase)
+                        and t - ultimo >= folga):
             cortes.append(round(t, 3))
             ultimo = t
     return cortes
 
 
+# ⭐ EMPURRAO NA PALAVRA DE ENFASE (26/09, aprovado pelo dono; acervo F133628
+# "pattern interrupt": dar zoom no ponto que importa). Um pulso de +5% que
+# sobe e desce em 0,4 s no inicio da palavra mais forte de cada frase. A
+# escolha e' local, sem Gemini: numero > palavra com "!" > a mais longa que
+# nao e' conectivo (mesma regra do destaque.escolher_local).
+_ENFASE_PULSO = 0.05
+_ENFASE_DUR_S = 0.4
+_ENFASE_FOLGA_S = 0.5     # longe do corte: pulso colado no corte vira tranco
+
+
+def enfases_da_fala(palavras: list[dict] | None,
+                    cortes: list[float]) -> list[float]:
+    """Inicio (s) da palavra de enfase de cada frase entre dois cortes."""
+    from .destaque import _FRACAS
+    ps = [p for p in (palavras or []) if p.get("inicio") is not None]
+    limites = [0.0] + list(cortes) + [1e9]
+    saida = []
+    for a, b in zip(limites, limites[1:]):
+        melhor, nota = None, 0
+        for p in ps:
+            t = float(p["inicio"])
+            if not (a + _ENFASE_FOLGA_S <= t <= b - _ENFASE_FOLGA_S):
+                continue
+            bruta = str(p.get("palavra", ""))
+            w = re.sub(r"[^\wÀ-ÿ]", "", bruta).lower()
+            numero = any(c.isdigit() for c in w)   # "400" tem 3 letras e vale
+            if not numero and (len(w) < 4 or w in _FRACAS):
+                continue
+            n = (100 if numero else
+                 50 + len(w) if "!" in bruta else len(w))
+            if n > nota:
+                melhor, nota = t, n
+        if melhor is not None and nota >= 6:
+            saida.append(round(melhor, 3))
+    return saida
+
+
 def _zoom_por_frase(bruto: Path, largura: int, altura: int,
-                    cortes: list[float]) -> str:
-    """zoompan com nivel alternado a cada corte + empurrao dentro da frase.
-    `k` = quantos cortes ja' passaram; `ini` = frame do ultimo corte (soma
-    telescopica), tudo em expressao do ffmpeg, sem estado."""
+                    cortes: list[float],
+                    enfases: list[float] | None = None) -> str:
+    """zoompan com nivel alternado a cada corte + empurrao dentro da frase
+    + pulso na palavra de enfase. `k` = quantos cortes ja' passaram; `ini` =
+    frame do ultimo corte (soma telescopica), tudo em expressao do ffmpeg,
+    sem estado. O pulso e' um triangulo: sobe e desce sem quina de salto."""
     fps = midia.fps(bruto)
     fr = [round(c * fps) for c in cortes]
     k = "+".join(f"gte(on,{f})" for f in fr) or "0"
     ini = "+".join(f"gte(on,{f})*{f - a}" for f, a in zip(fr, [0] + fr[:-1])) or "0"
+    meia = max(1.0, _ENFASE_DUR_S * fps / 2)
+    pulso = "".join(f"+{_ENFASE_PULSO}*max(0,1-abs(on-{round(e * fps + meia)})/{meia:.1f})"
+                    for e in (enfases or []))
     z = (f"1+{_CORTE_NIVEL}*mod({k},2)"
-         f"+min({_CORTE_EMPURRA_MAX},{_CORTE_EMPURRA_S}*(on-({ini}))/{fps:.3f})")
+         f"+min({_CORTE_EMPURRA_MAX},{_CORTE_EMPURRA_S}*(on-({ini}))/{fps:.3f})"
+         f"{pulso}")
     return (f",zoompan=z='{z}':d=1:"
             f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={largura}x{altura}:fps={fps:.3f}")
 
@@ -636,7 +693,8 @@ def _zoom_por_frase(bruto: Path, largura: int, altura: int,
 def vertical(bruto: Path, ass: Path | None, destino: Path,
              audio_dublado: Path | None = None, titulo: str = "",
              duracao_max: float | None = None, chamada: str = "",
-             cortes: list[float] | None = None) -> Path:
+             cortes: list[float] | None = None,
+             enfases: list[float] | None = None) -> Path:
     """9:16 para Shorts, com o quadro seguindo o rosto.
 
     `titulo` desenha o card de abertura (ver imagem_titulo) — caixa branca
@@ -646,16 +704,19 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     """
     l, a = midia.dimensoes(bruto)
     caminho = enquadrar.caminho_para(bruto, l, a)
+    abertos = enquadrar.trechos_abertos() if caminho else []
+    if abertos:
+        print(f"      plano aberto (sem rosto) em {len(abertos)} trecho(s): {abertos}")
     lv, av = config.VERTICAL
     # `cortes` (inicio de cada frase) -> movimento sincronizado com a fala;
     # sem fala medida, o ciclo cego de sempre
-    movimento = (_zoom_por_frase(bruto, lv, av, cortes) if cortes
+    movimento = (_zoom_por_frase(bruto, lv, av, cortes, enfases) if cortes
                  else _ken_burns(bruto, lv, av))
     # ⭐ 26/09: nitidez LEVE depois do zoom. MEDIDO: fonte 16:9 em 1080p vira
     # 607 px de largura esticados 1,78x — imagem mole. 0,5 devolve borda sem
     # realcar o bloco da compressao (0,8 ja' realcava, comparado lado a lado).
     # A melhora de verdade e' baixar maior (baixar_em_intervalos.FORMATO).
-    filtro = enquadrar.filtro_vertical(l, a, caminho) + movimento + NITIDEZ
+    filtro = enquadrar.filtro_vertical(l, a, caminho, abertos) + movimento + NITIDEZ
     if config.GRADE_CINEMATICO:
         filtro += pos_producao.FILTRO_COR_CINEMATICO
     # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a

@@ -47,7 +47,16 @@ ps = [{"palavra": "Essa", "inicio": 0.0, "fim": 0.3},
       {"palavra": "dentro", "inicio": 3.52, "fim": 3.9}]     # sem pausa
 c = render.cortes_da_fala(ps)
 print(f"       cortes {c}")
-checar(c == [0.75, 3.0], "corta depois de '.' e na pausa, respeitando 1,5 s")
+checar(c == [0.75, 2.0, 3.0],
+       "corta depois de '.', na abertura a cada ~1 s (2,0) e na pausa (3,0)")
+# depois da abertura (>= 3 s) volta a regra de 1,5 s e so' frase
+tarde = [{"palavra": w, "inicio": 4.0 + 0.4 * i, "fim": 4.0 + 0.4 * i + 0.35}
+         for i, w in enumerate("uma frase longa sem pausa nenhuma aqui dentro".split())]
+checar(render.cortes_da_fala(tarde) == [], "fora da abertura, sem pausa = sem corte")
+rapido = [{"palavra": w, "inicio": 0.4 * i, "fim": 0.4 * i + 0.35}
+          for i, w in enumerate("isso aqui muda tudo que voce sabe".split())]
+cr = render.cortes_da_fala(rapido)
+checar(cr == [1.2, 2.4], f"abertura sem pausa ainda corta a cada ~1 s ({cr})")
 checar(render.cortes_da_fala([]) == [], "sem palavras, sem cortes")
 
 print("\n[2] zoom em cada quadro")

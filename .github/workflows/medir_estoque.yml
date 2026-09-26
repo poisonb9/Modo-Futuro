@@ -48,7 +48,9 @@ jobs:
         run: python -X utf8 medir_estoque.py
 
       - name: Avisar no Telegram
-        if: always()
+        # ⛔ 26/09/2026, dono: "por enquanto sem avisos pra mim". Religar com a
+        # variavel do repo AVISOS_TELEGRAM=1 (gh variable set AVISOS_TELEGRAM --body 1).
+        if: ${{ always() && vars.AVISOS_TELEGRAM == '1' }}
         run: |
           if [ -f relato_estoque.txt ]; then T="$(cat relato_estoque.txt)"
           else T="Medicao de estoque FALHOU: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; fi

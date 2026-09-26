@@ -139,7 +139,9 @@ jobs:
           fi
 
       - name: Avisar no Telegram
-        if: always() && hashFiles('relato_cortes.txt') != ''
+        # ⛔ 26/09/2026, dono: "por enquanto sem avisos pra mim". Religar com a
+        # variavel do repo AVISOS_TELEGRAM=1 (gh variable set AVISOS_TELEGRAM --body 1).
+        if: always() && hashFiles('relato_cortes.txt') != '' && vars.AVISOS_TELEGRAM == '1'
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \

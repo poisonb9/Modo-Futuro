@@ -55,7 +55,9 @@ jobs:
       - run: pip install requests python-dotenv pillow
       - name: Postar no canal
         env:
-          TELEGRAM_BOT_TOKEN:       ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          # 26/09/2026: o bot da operacao foi apagado pelo dono. A vitrine e' do
+          # SITE e usa o bot do site, @AchadinhoTotalBot (o mesmo do alerta).
+          TELEGRAM_BOT_TOKEN:       ${{ secrets.TELEGRAM_BOT_ALERTA }}
           TELEGRAM_CANAL_VITRINE:   ${{ secrets.TELEGRAM_CANAL_VITRINE }}
           # ⛔ SEM ESTAS DUAS O CANAL NAO POSTA NADA, e o job "passa": desde
           # 15/09 o preco e' conferido na loja no instante do post, e produto

@@ -506,7 +506,9 @@ jobs:
         run: python -X utf8 limpar_bruto_drive.py --file-id "${{ inputs.drive_file_id }}" --conta "${{ inputs.conta }}"
 
       - name: Avisar no Telegram
-        if: ${{ always() && inputs.previa != 'true' }}
+        # ⛔ 26/09/2026, dono: "por enquanto sem avisos pra mim". Religar com a
+        # variavel do repo AVISOS_TELEGRAM=1 (gh variable set AVISOS_TELEGRAM --body 1).
+        if: ${{ always() && inputs.previa != 'true' && vars.AVISOS_TELEGRAM == '1' }}
         run: |
           # ⚠️ QUARENTENA TEM DE APARECER AQUI, e nao no meio do log.
           #

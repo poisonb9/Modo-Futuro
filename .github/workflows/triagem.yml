@@ -33,7 +33,9 @@ jobs:
           --titulo "${{ inputs.titulo }}"
 
       - name: Avisar resultado no Telegram
-        if: always()
+        # ⛔ 26/09/2026, dono: "por enquanto sem avisos pra mim". Religar com a
+        # variavel do repo AVISOS_TELEGRAM=1 (gh variable set AVISOS_TELEGRAM --body 1).
+        if: ${{ always() && vars.AVISOS_TELEGRAM == '1' }}
         run: |
           if [ "${{ job.status }}" = "success" ]; then
             TEXTO="🔎 Triagem terminou: ${{ inputs.titulo }} — veja o resultado no log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

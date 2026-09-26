@@ -91,7 +91,9 @@ jobs:
         run: python -X utf8 painel_filas.py | tee -a relato_fila.txt
 
       - name: Avisar no Telegram
-        if: always()
+        # ⛔ 26/09/2026, dono: "por enquanto sem avisos pra mim". Religar com a
+        # variavel do repo AVISOS_TELEGRAM=1 (gh variable set AVISOS_TELEGRAM --body 1).
+        if: ${{ always() && vars.AVISOS_TELEGRAM == '1' }}
         env:
           RELATO: ${{ env.RELATO }}
         run: |

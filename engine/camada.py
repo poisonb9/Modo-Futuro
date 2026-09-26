@@ -78,11 +78,27 @@ def _coracoes(n: int = 6, semente: int = 7, plat: str = "tiktok") -> list:
     return els
 
 
+# ⭐ AVIAO CEDO (26/09/2026, dono: "achei que o balao do aviao demorou pra
+# entrar"). Ele so' entrava DEPOIS de comente/compartilhe/siga (~18 s de parte
+# A) e depois de 40% do video: 34-50 s nos clipes longos, ~21 s nos curtos.
+# MEDIDO no Studio (08/09): o tempo medio assistido e' 5-20 s — quase ninguem
+# via. Agora ele entra logo depois dos coracoes (~8 s do video), num espaco
+# RESERVADO na parte A; a regra "nunca dois baloes na tela" continua valendo.
+AVIAO_CEDO = True
+
+
+def _fim_coracoes(n: int = 6) -> float:
+    return max(e.t0 + e.dur for e in _coracoes(n))
+
+
 def tempos(n: int = 6) -> dict[str, float]:
     """Inicio de cada balao parado. ⛔ NUNCA DOIS BALOES NA TELA (dono,
     25/09): cada um so' entra quando o anterior saiu — coracoes (a rajada
-    conta como um), depois comente, compartilhe e siga."""
-    fim = max(e.t0 + e.dur for e in _coracoes(n))
+    conta como um), [o aviao, se AVIAO_CEDO], depois comente, compartilhe e
+    siga."""
+    fim = _fim_coracoes(n)
+    if AVIAO_CEDO:
+        fim += VAO + DUR_B          # o espaco do aviao (parte B)
     out = {}
     for e in ("e1", "e2", "e3"):
         out[e] = fim + VAO
@@ -274,8 +290,12 @@ def plano(dur_video: float, plat: str = "tiktok",
           aviao: bool = True) -> list[tuple[str, float]]:
     """[(parte, inicio_s)] que cabem neste video."""
     p = [("a", INICIO_S)] if dur_video >= INICIO_S + dur_a(plat) * 0.6 else []
-    # o aviao tambem e' balao: so' depois de a parte A inteira sair
-    ib = max(B_FRAC * dur_video, B_MIN_S, INICIO_S + dur_a(plat) + VAO)
+    # o aviao tambem e' balao: com AVIAO_CEDO entra no espaco reservado logo
+    # depois dos coracoes; sem ele, so' depois de a parte A inteira sair
+    if AVIAO_CEDO:
+        ib = INICIO_S + _fim_coracoes() + VAO
+    else:
+        ib = max(B_FRAC * dur_video, B_MIN_S, INICIO_S + dur_a(plat) + VAO)
     if aviao and ib + DUR_B <= dur_video - B_FIM_S:
         p.append(("b", ib))
     return p

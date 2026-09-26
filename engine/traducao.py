@@ -8,6 +8,7 @@ do trecho original, proporcional ao tamanho de cada palavra. Não é
 sincronismo labial nem por palavra exata — é karaokê aproximado, suficiente
 pra legenda (não estamos dublando áudio).
 """
+import os
 import re
 import time
 
@@ -218,7 +219,18 @@ def dica_de_genero(genero: str | None) -> str:
 #
 # ⚠️ O ritmo VARIA por clipe (102 a 135 na mesma rodada), entao isto nunca
 # sera' exato. E' o centro da faixa, nao uma garantia.
-PALAVRAS_POR_MINUTO = 113
+PALAVRAS_POR_MINUTO_A = 113
+# ⭐ 26/09/2026: a voz de producao virou a D (edge-tts + troca de timbre), e
+# ela fala MAIS RAPIDO. MEDIDO com texto de narracao real: Thalita (Bruna) 164
+# ppm, Antonio (Bryan) 150 ppm. Com o orcamento em 113 a narracao acabava cedo
+# e, ancorada no tempo do original, cada frase ESPERAVA a proxima: no ILLIT
+# v2 foram 10 pausas de 0,9 a 5,5 s, 26 s de silencio em 78 s (dono: "pausa
+# gigante totalmente errado"). 145 fica um pouco abaixo do medido, pra frase
+# caber na janela dela. `VOZ_MOTOR=A` volta ao 113.
+PALAVRAS_POR_MINUTO_D = 145
+PALAVRAS_POR_MINUTO = (PALAVRAS_POR_MINUTO_D
+                       if (os.environ.get("VOZ_MOTOR") or "D").strip().upper() == "D"
+                       else PALAVRAS_POR_MINUTO_A)
 
 
 def orcamento_de_palavras(duracao_s: float | None) -> str:

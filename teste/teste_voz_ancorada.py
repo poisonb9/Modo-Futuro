@@ -77,13 +77,18 @@ audio, timing = v.gerar_trilha(SEG, TOTAL, Path(tempfile.mkdtemp()), amostra)
 fim_voz = timing[-1]["fim"]
 print(f"       ancorada: {len(timing)} frases, voz de {timing[0]['inicio']:.1f}s a {fim_voz:.1f}s")
 
-print("\n[1] cada frase que abre um segmento começa junto com a fala original dele")
-inicios = [round(t["inicio"], 1) for t in timing]
-print(f"       inícios {inicios} (original: 2, 16, 31, 45)")
-for alvo in (2.0, 16.0, 31.0, 45.0):
-    checar(any(abs(i - alvo) < 0.3 for i in inicios), f"tem frase começando em ~{alvo:.0f}s")
-checar(fim_voz > 45, f"a voz vai até o último bloco ({fim_voz:.1f}s)")
+print("\n[1] ⭐ 26/09: NENHUMA pausa maior que o teto (dono: 'pausa gigante')")
+gaps = [round(b["inicio"] - a["fim"], 2) for a, b in zip(timing, timing[1:])]
+print(f"       pausas entre frases {gaps} (teto {v.PAUSA_MAX_ANCORA_S}s)")
+checar(max(gaps) <= v.PAUSA_MAX_ANCORA_S + 0.05, "nenhuma pausa passa do teto")
+checar(abs(timing[0]["inicio"] - 2.0) < 0.3, "a 1a frase começa com a fala original (2 s)")
 checar(abs(v.midia.duracao(audio) - TOTAL) < 0.3, "trilha tem a duração do clipe")
+# quando a voz PREENCHE a janela (orcamento certo), a ancoragem segue o original
+cheio = v._ancorar([13.5, 14.5, 13.6, 10.0],
+                   [(2.0, 12.0), (16.0, 28.0), (31.0, 42.0), (45.0, 55.0)])
+print(f"       voz enchendo a janela: inícios {[round(x, 1) for x in cheio]} (original 2, 16, 31, 45)")
+checar(all(abs(a - b) < 0.7 for a, b in zip(cheio, (2.0, 16.0, 31.0, 45.0))),
+       "com a voz do tamanho certo, cada frase fica junto da fala original")
 
 print("\n[2] sem sobreposição")
 checar(all(b["inicio"] >= a["fim"] - 1e-6 for a, b in zip(timing, timing[1:])),
@@ -94,11 +99,15 @@ entradas = silencios(audio)   # onde cada trecho de som COMEÇA
 ok = all(any(abs(t["inicio"] - e) < 0.15 for e in entradas) for t in timing[1:])
 checar(ok, "cada início do timing tem som começando ali (±0,15 s)")
 
-print("\n[4] NEGATIVO: modo antigo acaba cedo")
-v0 = carregar(False)
-_, t0 = v0.gerar_trilha(SEG, TOTAL, Path(tempfile.mkdtemp()), amostra)
-print(f"       antigo: voz termina em {t0[-1]['fim']:.1f}s")
-checar(t0[-1]["fim"] < fim_voz - 10, "modo antigo termina >10 s antes")
+print("\n[4] NEGATIVO: sem o teto, a voz curta deixaria buracos de segundos")
+_teto = v.PAUSA_MAX_ANCORA_S
+v.PAUSA_MAX_ANCORA_S = 1e9
+sem = v._ancorar([3.0, 3.0, 3.0], [(2.0, 12.0), (16.0, 28.0), (31.0, 42.0)])
+v.PAUSA_MAX_ANCORA_S = _teto
+com = v._ancorar([3.0, 3.0, 3.0], [(2.0, 12.0), (16.0, 28.0), (31.0, 42.0)])
+print(f"       sem teto {sem} | com teto {com}")
+checar(sem[1] - (sem[0] + 3.0) > 5, "sem teto: 11 s de silêncio entre a 1a e a 2a (o defeito)")
+checar(com[1] - (com[0] + 3.0) <= _teto + 1e-9, "com teto: a 2a entra em até 0,6 s")
 
 print("\n[5] frase que invade empurra a próxima")
 ini = v._ancorar([5.0, 2.0], [(0.0, 3.0), (3.0, 6.0)])

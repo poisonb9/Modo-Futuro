@@ -74,12 +74,18 @@ checar("PALAVRAS (sao" not in sem, "nenhum numero de palavras vaza pro prompt")
 checar("MESMO TEMPO que a fala" in sem, "a secao TAMANHO continua no prompt")
 
 # --- 2. o caso positivo: a conta ------------------------------------------
-print("\n[2] com duracao, o orcamento e' 113 ppm")
-# ⚠️ 113 e' MEDIDO na sintese (run #17: 135, 103 e 102 ppm
+print("\n[2] com duracao, o orcamento: 145 ppm na voz D (padrao), 113 na A")
+# ⚠️ 113 e' MEDIDO na sintese da voz A (run #17: 135, 103 e 102 ppm
 # reais, media 113). O 150 da primeira versao era ritmo de NARRADOR
 # HUMANO, numero editorial — por isso pedia 32% de texto a mais do
 # que cabia na janela.
-checar(t.PALAVRAS_POR_MINUTO == 113, "o alvo e' 113, o ritmo MEDIDO da sintese")
+# ⭐ 26/09: a voz D (producao) fala 150-164 ppm, MEDIDO; 145 fica logo
+# abaixo. Com 113 ela terminava cedo e deixava pausas de segundos.
+import os as _os
+checar(t.PALAVRAS_POR_MINUTO_A == 113 and t.PALAVRAS_POR_MINUTO_D == 145, "113 (A) e 145 (D)")
+checar(t.PALAVRAS_POR_MINUTO == (113 if (_os.environ.get("VOZ_MOTOR") or "D").upper() == "A"
+                                 else 145), "o alvo segue o motor da voz")
+t.PALAVRAS_POR_MINUTO = 113   # as contas abaixo sao do caso real da voz A
 for dur, esperado in ((60, 113), (90, 169), (110, 207), (118.3, 222)):
     txt = t.orcamento_de_palavras(dur)
     checar(f"{esperado} PALAVRAS" in txt,

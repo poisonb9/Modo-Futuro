@@ -258,6 +258,7 @@ _ABREVIACOES = {
 # MEDIDO do @modofuturo (a audiencia sai em 0:02). O piso preserva a
 # respiracao entre frases que ja' existia antes desta mudanca.
 _PAUSA_MIN_S = 0.12
+PAUSA_MAX_ANCORA_S = 0.6   # teto da espera entre frases ancoradas (ver _ancorar)
 _PAUSA_MAX_S = 0.60
 
 
@@ -433,6 +434,14 @@ def _ancorar(duracoes: list[float], janelas: list[tuple[float, float]],
     inicios, fim_ant = [], 0.0
     for i, dur in enumerate(duracoes):
         alvo = janelas[i][0] if i < len(janelas) else fim_ant
+        if i:
+            # ⭐ TETO DA ESPERA (26/09, dono: "pausa gigante totalmente
+            # errado"). A frase nunca espera mais que PAUSA_MAX_ANCORA_S depois
+            # da anterior: se a voz adiantou, ela entra antes do instante
+            # original em vez de deixar buraco. O orcamento de palavras da voz
+            # D (traducao.PALAVRAS_POR_MINUTO_D) e' quem mantem a fala junto
+            # da imagem; isto so' impede o silencio.
+            alvo = min(alvo, fim_ant + PAUSA_MAX_ANCORA_S)
         ini = max(alvo, fim_ant + (pausa_min if i else 0.0))
         inicios.append(ini)
         fim_ant = ini + dur

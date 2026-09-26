@@ -19,7 +19,7 @@ from engine import (midia, selecao, transcricao, legendas, render, traducao, fal
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
                     cauda, gramatica, chamada as chamada_mod, ab_titulo, fundo, sfx, capa_nitida,
-                    loop_final)
+                    loop_final, diagnostico)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -556,6 +556,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 if _cheio:
                     audio_dublado = _cheio
                     print("      fim sem fala: som original do programa por baixo")
+                # ⭐ PREVIA: cada etapa da trilha ao lado do clipe, pra achar
+                # onde a ultima frase some (engine/diagnostico.py)
+                diagnostico.guardar(Path(audio_dublado).parent, pasta)
 
             # ---- a chamada pro link da bio (12/09/2026)
             #

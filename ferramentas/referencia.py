@@ -85,8 +85,12 @@ def _ultima_rodada() -> Path | None:
     return arqs[-1] if arqs else None
 
 
-def disparar(motivo: str) -> None:
+def disparar(motivo: str, so: str = "") -> None:
     cfg = _config()
+    if so:
+        # rodada de DIAGNOSTICO com parte dos clipes (ex.: --so make,chips)
+        nomes = {n.strip() for n in so.split(",") if n.strip()}
+        cfg["clipes"] = [c for c in cfg["clipes"] if c["nome"] in nomes]
     RODADAS.mkdir(parents=True, exist_ok=True)
     carimbo = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
     rodada = {"carimbo": carimbo, "motivo": motivo, "commit": _gh(
@@ -157,6 +161,10 @@ def baixar() -> None:
                              media_body=MediaFileUpload(str(final), mimetype="video/mp4",
                                                         resumable=True)).execute()
             print(f"  {final.name}")
+        # as trilhas do meio (engine/diagnostico.py): so' local, pra medir
+        diags = sorted(glob.glob(str(tmp / "**" / "diagnostico"), recursive=True))
+        if diags:
+            shutil.copytree(diags[0], destino / f"diag_{nome}", dirs_exist_ok=True)
         posts = sorted(glob.glob(str(tmp / "**" / "post.json"), recursive=True))
         if posts:
             shutil.copy(posts[0], destino / f"post_{nome}.json")
@@ -197,6 +205,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="clipes de referencia")
     ap.add_argument("acao", choices=["disparar", "status", "baixar", "congelar"])
     ap.add_argument("--motivo", default="", help="o que esta rodada testa")
+    ap.add_argument("--so", default="", help="so' estes clipes (ex.: make,chips)")
     a = ap.parse_args()
-    {"disparar": lambda: disparar(a.motivo), "status": status,
+    {"disparar": lambda: disparar(a.motivo, a.so), "status": status,
      "baixar": baixar, "congelar": congelar}[a.acao]()

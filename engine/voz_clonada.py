@@ -154,6 +154,19 @@ def _falar_d(texto: str, destino: Path, amostra_voz: Path,
         dublagem._falar(texto, base, _edge_da_amostra(amostra_voz), velocidade)
         t1 = time.monotonic()
         wav = _VC.generate(audio=str(base), target_voice_path=str(amostra_voz))
+        # ⚠️ amostra NaN/inf do conversor envenena o loudnorm de tudo que vem
+        # depois (fim mudo, RETOMADA §1.1, hipotese). Zera e AVISA.
+        try:
+            import torch
+            ruins = int((~torch.isfinite(wav)).sum())
+            if ruins:
+                print(f"        [voz D] {ruins} amostra(s) NaN/inf nesta frase — "
+                      "zeradas", flush=True)
+                wav = torch.nan_to_num(wav, nan=0.0, posinf=0.0, neginf=0.0)
+            print(f"        [voz D] {wav.shape[-1] / _VC.sr:.2f}s, pico "
+                  f"{float(wav.abs().max()):.3f}", flush=True)
+        except ImportError:
+            pass
         ta.save(str(destino), wav, _VC.sr)
         print(f"        [voz D] edge {t1 - t0:.1f}s + timbre "
               f"{time.monotonic() - t1:.1f}s", flush=True)
@@ -710,5 +723,18 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
 
     timing = [{"frase": frase, "inicio": ini * escala, "fim": (ini + dur) * escala}
               for frase, ini, dur in zip(frases, inicios, duracoes)]
+    # a conta da ancoragem ao lado das trilhas (a previa guarda; ver
+    # engine/diagnostico.py). Barato: fica sempre.
+    try:
+        import json
+        (trabalho / "ancoragem.json").write_text(json.dumps({
+            "duracao_total": duracao_total, "dur_concatenada": dur_concatenada,
+            "escala": escala, "frases": [
+                {"frase": f, "arquivo": Path(pt).name, "inicio": round(ini, 3),
+                 "duracao": round(dur, 3)}
+                for f, pt, ini, dur in zip(frases, partes, inicios, duracoes)]},
+            ensure_ascii=False, indent=1), encoding="utf-8")
+    except Exception:
+        pass
 
     return destino, timing

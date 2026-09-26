@@ -345,6 +345,8 @@ jobs:
           CANAL_ESPERADO: ${{ inputs.canal }}
           PERMITIR_FORA_DO_ESCOPO: ${{ inputs.permitir_fora_do_escopo }}
           FUNDO_ORIGINAL: ${{ inputs.fundo_original == 'true' && '1' || '0' }}
+          # na previa o main.py guarda as trilhas do meio (engine/diagnostico.py)
+          PREVIA: ${{ inputs.previa }}
         run: >
           python -X utf8 main.py
           --arquivo "${{ inputs.nome_arquivo }}"
@@ -366,6 +368,7 @@ jobs:
           path: |
             saida/**/*.mp4
             saida/**/post.json
+            saida/**/diagnostico/**
 
       - name: Subir clipes prontos pro Drive
         if: ${{ inputs.previa != 'true' }}

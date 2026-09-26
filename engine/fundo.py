@@ -225,6 +225,16 @@ def misturar(bruto: Path, dublado: Path, destino: Path,
               f"{seg:.1f}s: {musica[:6]}{' ...' if len(musica) > 6 else ''}", flush=True)
     else:
         print("      [fundo] sem musica no fundo — ambiente e risadas inteiros", flush=True)
+    from . import diagnostico
+    if diagnostico.ligado():
+        # a previa guarda o fundo ANTES de tirar a musica (RETOMADA §1.4)
+        try:
+            import json
+            shutil.copy2(fundo, Path(destino).with_name("fundo_demucs.wav"))
+            Path(destino).with_name("fundo_musica.json").write_text(
+                json.dumps({"musica": musica}), encoding="utf-8")
+        except Exception:
+            pass
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(fundo), "-i", str(dublado),
                         "-filter_complex", filtro_mix(ate_s, musica), "-map", "[a]",

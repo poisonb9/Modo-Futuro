@@ -1,0 +1,12 @@
+CORTES PAUSADOS
+
+quem:    Claude, a pedido do dono
+quando:  2026-09-26T01:16:36+00:00
+por que: dono, 26/09: "antes de soltar um novo video vamos terminar as analises". Padrao premium (legenda, titulo, baloes, dublagem nova) no ar mas ainda em previa/aprovacao. Previas manuais (previa=true) seguem funcionando.
+
+Enquanto este arquivo existir:
+  - o vigia NAO despacha corte de bruto novo;
+  - o cortar_fila NAO consome a fila;
+  - baixar fonte e subir bruto pro Drive CONTINUAM liberados.
+
+Pra soltar o freio: apague este arquivo e commite.

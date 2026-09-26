@@ -67,7 +67,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
               so_vertical: bool, traduzir: bool = True, dublar: bool = False,
               url_origem: str = "", recorte: tuple[float, float] | None = None,
               janela: tuple[float, float] | None = None,
-              estilo_legenda: int = 1, manter_temp: bool = False,
+              estilo_legenda: int = 3, manter_temp: bool = False,
               fala_literal: bool = False) -> Path:
     t0 = time.time()
 
@@ -796,10 +796,11 @@ def main():
                         "longo caber no teto de 6h do Actions. Nao confundir com "
                         "--recorte, que diz que o trecho JA' E' o clipe.")
     p.add_argument("--manter-temp", action="store_true")
-    p.add_argument("--estilo-legenda", type=int, choices=(1, 2), default=1,
+    p.add_argument("--estilo-legenda", type=int, choices=(1, 2, 3), default=3,
                    help="1 = padrão do canal (Inter Black, corpo fixo). "
                         "2 = réplica da referência Erica Bruno (Poppins Bold, "
-                        "corpo variável — ver engine/legendas.py)")
+                        "corpo variável). 3 = premium, o padrão desde 25/09/2026 "
+                        "(palavra falada acende em âmbar — ver engine/legendas.py)")
     a = p.parse_args()
 
     recorte = None

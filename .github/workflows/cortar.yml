@@ -50,9 +50,9 @@ on:
         required: false
         default: ""
       estilo_legenda:
-        description: "1 = padrao do canal, 2 = replica da referencia (padrao universal)"
+        description: "1 = padrao do canal, 2 = replica da referencia, 3 = premium (padrao desde 25/09/2026)"
         required: false
-        default: "2"
+        default: "3"
 
 jobs:
   cortar:

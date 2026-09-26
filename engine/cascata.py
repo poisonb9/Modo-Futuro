@@ -125,9 +125,14 @@ UI_BASE_FRAC = 0.86
 #
 # ⭐ `travessia=True` faz o selo comecar FORA da tela, independente do lado.
 # Sem isso ele brota no meio do video.
+#
+# ⚠️ 3a AJUSTADA em 25/09/2026: 0,459 -> 0,440. A legenda premium (estilo 3,
+# corpo 5,8%) subiu o topo da faixa de 1195 para 1067 px, e o COMENTE ia
+# ate' 1094 — o teste_cascata pegou (colocar devolveu None). 37 px acima
+# ele termina em 1058, antes da legenda, sem sair do desenho.
 ZONAS = (
     ("dir", 0.105, "dir", False),
-    ("esq", 0.459, "esq", False),
+    ("esq", 0.440, "esq", False),
     ("dir", 0.735, "dir", True),
 )
 

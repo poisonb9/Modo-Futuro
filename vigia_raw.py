@@ -85,10 +85,11 @@ MAX_POR_PASSADA = 1
 # idioma=pt — ai a traducao e a dublagem sao puladas de proposito.
 IDIOMA = "en"
 # 1 = padrão do canal (Inter Black). 2 = réplica da referência Erica Bruno
-# (Poppins Bold, corpo variável) — ver engine/legendas.py. Trocar aqui muda
+# (Poppins Bold, corpo variável). 3 = premium (25/09/2026, palavra falada
+# acende em âmbar) — ver engine/legendas.py. Trocar aqui muda
 # TODO disparo desta máquina; pra escolher por vídeo, disparar manual pelo
 # GitHub Actions com o input estilo_legenda.
-ESTILO_LEGENDA = "1"
+ESTILO_LEGENDA = "3"
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 EXTS = {".mp4", ".mkv", ".mov", ".webm", ".m4v"}

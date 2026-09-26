@@ -330,8 +330,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # ⭐ 26/09/2026: abertura no ASSUNTO, nao no estudio (so' a imagem
             # do 1o 1,5 s; o audio fica igual). Ver engine/abertura_visual.py.
             _t_vis = abertura_visual.instante(c, ini, fim)
+            if abertura_visual.no_canal():
+                print(f"      [abertura] mostra: {c.get('abertura_mostra')!r}  "
+                      f"assunto em: {c.get('momento_visual_s')!r}  -> "
+                      f"{'troca' if _t_vis is not None else 'mantem'}", flush=True)
             if _t_vis is not None:
-                bruto = abertura_visual.aplicar(fonte, bruto, _t_vis)
+                _novo = abertura_visual.aplicar(fonte, bruto, _t_vis)
+                if _novo != bruto:
+                    c["abertura_trocada_s"] = _t_vis
+                bruto = _novo
 
             # ---- decupagem: tira as pausas mortas (retenção + originalidade)
             #
@@ -719,6 +726,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      # lista ela morreria aqui, como a premium em 31/08
                      "receita_texto",
                      "gancho", "porque",
+                     # ⭐ ABERTURA (26/09, plano de virada): sem estes tres no
+                     # post.json nao da' pra medir pelas views se a penalidade
+                     # `sem_assunto_na_tela` acerta — e o dono pediu que o item
+                     # 5 fosse avaliado pelo numero, nao pela regra.
+                     "abertura_mostra", "momento_visual_s", "sem_assunto_na_tela",
+                     "abertura_trocada_s",
                      # ⚠️ ESTES DOIS SAO A QUARENTENA. Fora desta lista, o
                      # clipe traduzido pela reserva chega ao agendador sem
                      # marca nenhuma e e' postado como qualquer outro — que

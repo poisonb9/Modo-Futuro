@@ -33,6 +33,11 @@ import config
 ABRE_SEM_ASSUNTO = {"pessoa_falando", "parado"}
 
 
+def no_canal() -> bool:
+    from .canais_registro import canonico
+    return canonico(os.environ.get("CANAL_ESPERADO")) in config.CANAIS_ABERTURA_VISUAL
+
+
 def instante(c: dict, ini: float, fim: float,
              dur: float = config.ABERTURA_VISUAL_S) -> float | None:
     """O segundo ABSOLUTO na fonte de onde tirar a abertura, ou None.

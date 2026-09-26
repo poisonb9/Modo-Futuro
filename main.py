@@ -415,10 +415,18 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                             segmentos, fim - ini, config.TRABALHO / f"dub_{i:02d}",
                             amostra_voz=config.VOZ_CLONADA_AMOSTRA,
                             falantes=c.get("falantes"),
-                            # ⚠️ A FONTE ORIGINAL vai junto pra medir a dinamica
-                            # (enfase, envelope e pausas). Sem ela a sintese sai
+                            # ⚠️ O ORIGINAL vai junto pra medir a dinamica
+                            # (enfase, envelope e pausas). Sem ele a sintese sai
                             # como antes — falha ABERTA, ver engine/dinamica.py.
-                            fonte=fonte)
+                            #
+                            # ⛔ E' O CLIPE (`bruto`), NAO A `fonte`. De 01/09 a
+                            # 26/09 ia a fonte INTEIRA: os tempos dos segmentos
+                            # sao relativos ao CLIPE (transcricao do proprio
+                            # clipe), e o `dinamica._pcm` le' o arquivo nesses
+                            # segundos sem deslocamento — toda dublagem copiava a
+                            # enfase dos primeiros ~90 s do video original, nao
+                            # do trecho cortado. Guarda: teste_dinamica_do_clipe.
+                            fonte=bruto)
                         # a legenda tem que seguir o timing REAL do áudio
                         # dublado (pausas entre frases + atempo final mudam o
                         # ritmo em relação ao vídeo fonte), não o timing de

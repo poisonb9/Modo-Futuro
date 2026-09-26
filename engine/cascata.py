@@ -364,15 +364,14 @@ if __name__ == "__main__":
 # dele existir — o `selos_do_canal` devolve None e a cascata e' pulada. Assim
 # ele entra sozinho no dia em que a arte chegar, sem ninguem lembrar de editar
 # esta linha.
-CANAIS_COM_CASCATA: set[str] = {
-    "modofuturo",
-    "semanestesia.pod",
-    "atefalhar",
-    "achadinhos.instantaneos",
-    "truque.importado",
-    "cozinha.importada",
-    "fatura.chora",
-}
+#
+# ⛔ DESLIGADA EM TODOS em 26/09/2026, por decisao do Bryan: "pode tirar esse
+# comente e outros parecidos, so' vamos usar balao". CTA agora e' so' a
+# camada de baloes (engine/camada.py). O codigo e os selos ficam: religar e'
+# devolver os nomes a este conjunto (a lista de 13/09 era: modofuturo,
+# semanestesia.pod, atefalhar, achadinhos.instantaneos, truque.importado,
+# cozinha.importada, fatura.chora).
+CANAIS_COM_CASCATA: set[str] = set()
 
 
 def ligado(canal: str) -> bool:

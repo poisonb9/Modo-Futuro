@@ -15,17 +15,15 @@ def checar(ok, oq):
     if not ok:
         falhas.append(oq)
 
-print("1. ⭐ LIGADO EM TODOS — decisao do Bryan em 13/09/2026")
-# ⚠️ Nasceu vazio de proposito e foi o Bryan quem mandou ligar. Eu
-# desaconselhei tres vezes; o custo (nao ha' grupo de controle pra esta
-# mudanca) esta' escrito no cabecalho do modulo, nao so' na conversa.
+print("1. ⛔ DESLIGADA EM TODOS — decisao do Bryan em 26/09/2026")
+# Ligada em todos em 13/09; em 26/09 o Bryan tirou: "so' vamos usar balao".
+# O CTA passou a ser so' a camada (engine/camada.py). As secoes 2-4 abaixo
+# seguem valendo: guardam o codigo pro dia em que religar.
 for c in ("modofuturo", "atefalhar", "truque.importado",
           "semanestesia.pod", "achadinhos.instantaneos",
-          "cozinha.importada", "fatura.chora"):
-    checar(cascata.ligado(c), f"{c}: ligado")
-checar(not cascata.ligado("canal_que_nao_existe"),
-       "canal inexistente: nao (resolve pelo registro, nao pelo texto)")
-checar(cascata.ligado("@atefalhar"), "e o @ tambem resolve")
+          "cozinha.importada", "fatura.chora", "@atefalhar"):
+    checar(not cascata.ligado(c), f"{c}: desligado")
+checar(not cascata.ligado("canal_que_nao_existe"), "canal inexistente: nao")
 
 print("")
 print("2. ⭐ CANAL LIGADO SEM SELO E' PULADO, nao quebra nem usa o de outro")

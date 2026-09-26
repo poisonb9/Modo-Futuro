@@ -38,18 +38,23 @@ def _exige_edge_tts():
             "31/08/2026; se o run e' antigo, rode: pip install edge-tts")
 
 
-async def _sintetizar(texto: str, destino: Path, voz: str):
+async def _sintetizar(texto: str, destino: Path, voz: str,
+                      velocidade: str | None = None):
     import edge_tts
     from . import numeros
     # Mesmo conserto do voz_clonada: o defeito e' dos dois caminhos de
     # TTS, nao so' do que estava ativo em 22/08/2026.
     from . import guia_voz   # pronuncia do canal, so' na fala (26/09)
-    comm = edge_tts.Communicate(guia_voz.para_fala(numeros.por_extenso(texto)), voice=voz)
+    extra = {"rate": velocidade} if velocidade else {}
+    comm = edge_tts.Communicate(guia_voz.para_fala(numeros.por_extenso(texto)),
+                                voice=voz, **extra)
     await comm.save(str(destino))
 
 
-def _falar(texto: str, destino: Path, voz: str) -> Path:
-    asyncio.run(_sintetizar(texto, destino, voz))
+def _falar(texto: str, destino: Path, voz: str,
+           velocidade: str | None = None) -> Path:
+    """`velocidade` no formato do edge-tts ("-10%"); None = a de sempre."""
+    asyncio.run(_sintetizar(texto, destino, voz, velocidade))
     return destino
 
 

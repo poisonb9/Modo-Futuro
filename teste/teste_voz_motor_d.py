@@ -14,7 +14,8 @@ quem foi chamado e com que voz.
   [2] edge falhando numa frase -> essa frase sai na A
   [3] VC indisponivel -> A, e nao tenta carregar de novo na frase seguinte
   [4] idioma que nao e' pt -> A direto
-  [5] VOZ_MOTOR=A -> A; e motor="A" explicito (a refeita da conferencia) -> A
+  [5] VOZ_MOTOR=A -> A; e motor="A" explicito -> A
+  [6] a refeita da conferencia (motor "D-") fica na D, 10% mais lenta
 
 Roda com: python teste/teste_voz_motor_d.py
 """
@@ -73,10 +74,10 @@ def carregar(motor_env=None):
     v._bypass_watermarker = lambda: None
     VCFalso.cargas = 0
 
-    def edge_falso(texto, destino, voz):
+    def edge_falso(texto, destino, voz, velocidade=None):
         if "QUEBRA" in texto:
             raise ConnectionError("sem rede")
-        chamadas.append(("edge", voz))
+        chamadas.append(("edge", voz) if velocidade is None else ("edge", voz, velocidade))
         Path(destino).write_bytes(b"mp3")
         return destino
     dublagem._falar = edge_falso
@@ -141,9 +142,16 @@ checar(chamadas == [("A", "bryan_amostra.wav")], "env VOZ_MOTOR=A usa a A")
 v = carregar()
 chamadas.clear()
 v._falar("Frase.", tmp / "i2.wav", bryan, "pt", motor="A")
-checar(chamadas == [("A", "bryan_amostra.wav")], "motor='A' (refeita) usa a A")
+checar(chamadas == [("A", "bryan_amostra.wav")], "motor='A' explicito usa a A")
 fonte = (RAIZ / "engine" / "voz_clonada.py").read_text(encoding="utf-8")
-checar('motor="A")' in fonte, "a refeita da conferencia pede a A")
+checar('motor="D-" if VOZ_MOTOR == "D" else "A")' in fonte,
+       "a refeita da conferencia pede a D lenta (e a A fora da D)")
+
+print("\n[6] refeita na D: mesma voz, leitura mais lenta")
+chamadas.clear()
+v._falar("Frase.", tmp / "j1.wav", bruna, "pt", motor="D-")
+checar(chamadas == [("edge", v.EDGE_FEMININA, v.REFEITA_VELOCIDADE), ("vc", "bruna_amostra.wav")],
+       f"edge com {v.REFEITA_VELOCIDADE} + timbre da Bruna ({chamadas})")
 
 os.environ.pop("VOZ_MOTOR", None)
 print()

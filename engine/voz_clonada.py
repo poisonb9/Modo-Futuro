@@ -65,6 +65,11 @@ EDGE_MASCULINA = "pt-BR-AntonioNeural"
 EDGE_FEMININA = "pt-BR-ThalitaMultilingualNeural"
 _VC = None
 _VC_INDISPONIVEL = False
+# refeita da conferencia na D (dono, 26/09: "refazer na D com outra
+# velocidade"): o edge le' a mesma frase mais devagar -> leitura diferente,
+# palavra engolida tende a sair inteira, e o clipe inteiro fica no MESMO
+# timbre (refazer na A misturava a voz antiga no meio). motor "D-" = isto.
+REFEITA_VELOCIDADE = "-10%"
 
 
 def _bypass_watermarker():
@@ -122,7 +127,8 @@ def _edge_da_amostra(amostra_voz: Path) -> str:
     return EDGE_FEMININA if (s == fem or "bruna" in s) else EDGE_MASCULINA
 
 
-def _falar_d(texto: str, destino: Path, amostra_voz: Path) -> Path | None:
+def _falar_d(texto: str, destino: Path, amostra_voz: Path,
+            velocidade: str | None = None) -> Path | None:
     """Motor D: edge-tts -> ChatterboxVC(timbre da amostra). None = use a A."""
     global _VC, _VC_INDISPONIVEL
     if _VC_INDISPONIVEL:
@@ -145,7 +151,7 @@ def _falar_d(texto: str, destino: Path, amostra_voz: Path) -> Path | None:
         t0 = time.monotonic()
         base = destino.with_name(destino.stem + "_edge.mp3")
         # numero por extenso e Guia de voz: o `dublagem._sintetizar` ja' aplica
-        dublagem._falar(texto, base, _edge_da_amostra(amostra_voz))
+        dublagem._falar(texto, base, _edge_da_amostra(amostra_voz), velocidade)
         t1 = time.monotonic()
         wav = _VC.generate(audio=str(base), target_voice_path=str(amostra_voz))
         ta.save(str(destino), wav, _VC.sr)
@@ -160,8 +166,10 @@ def _falar_d(texto: str, destino: Path, amostra_voz: Path) -> Path | None:
 
 def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,
            enfase: float | None = None, motor: str | None = None) -> Path:
-    if (motor or VOZ_MOTOR) == "D" and (idioma or "").lower().startswith("pt"):
-        if _falar_d(texto, destino, amostra_voz):
+    m = motor or VOZ_MOTOR
+    if m in ("D", "D-") and (idioma or "").lower().startswith("pt"):
+        vel = REFEITA_VELOCIDADE if m == "D-" else None
+        if _falar_d(texto, destino, amostra_voz, vel):
             return destino
     import torchaudio as ta
     from . import numeros
@@ -611,11 +619,11 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
                     print(f"        [qc] nota {nota_i:.2f} — ouviu {r[1][:70]!r}; "
                           "refazendo a frase", flush=True)
                     p2 = trabalho / f"voz_frase_{i:03d}_b.wav"
-                    # na D o edge repetiria a mesma leitura: a 2a tentativa
-                    # vai pela A, que e' outro motor e erra diferente
+                    # na D: mesma voz, leitura 10% mais lenta (ver
+                    # REFEITA_VELOCIDADE); fora da D, a A de sempre
                     _falar(frase, p2, pares[i][1], idioma,
                            enfase=enfases[i] if i < len(enfases) else None,
-                           motor="A")
+                           motor="D-" if VOZ_MOTOR == "D" else "A")
                     refeitas += 1
                     r2 = conferencia.nota(p2, frase, idioma)
                     if r2 and r2[0] > nota_i:

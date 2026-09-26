@@ -80,6 +80,14 @@ checar("{" not in s.PROMPT.format(tipo="vídeo", n=5, criterio="", dmin=30, dmax
                                   regra_duracao=regra).split("REGRAS DURAS")[1][:600],
        "nenhum placeholder sobrou nas regras")
 
+print("\n[4] make (procedimento): curto, mas estende ate' o resultado (dono, 26/09)")
+c, s = carregar("truque.importado")
+os.environ["SELECAO_MODO"] = "procedimento"
+regra = s._regra_duracao(c.DUR_MIN, 180)
+checar("35-45s" in regra and "RESULTADO FINAL" in regra and "180s" in regra,
+       "ideal 35-45s, pode ir ate' 180s so' pelo resultado")
+os.environ.pop("SELECAO_MODO", None)
+
 carregar(None)
 print("\ntudo verde" if not falhas else f"\n{len(falhas)} FALHA(S)")
 sys.exit(1 if falhas else 0)

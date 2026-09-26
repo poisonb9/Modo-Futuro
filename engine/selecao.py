@@ -210,6 +210,14 @@ def _regra_duracao(dmin: int, dmax: int) -> str:
     monetizar). Na faixa longa o texto e' EXATAMENTE o de antes — mudar uma
     virgula mudaria o prompt do Sem Anestesia e da cozinha.
     """
+    modo = (os.environ.get("SELECAO_MODO") or "").strip().lower()
+    if config.DURACAO_CURTA and modo in ("procedimento", "receita"):
+        # ⭐ 26/09 (dono): "pode estender para mostrar o resultado". Curto
+        # por padrao, mas o passo nao pode acabar antes do RESULTADO FINAL.
+        return (f"- Ponto ideal: 35-{config.DUR_CURTA_MAX}s. Comece NO passo que\n"
+                f"  importa, sem introducao. Passe de {config.DUR_CURTA_MAX}s (ate' {dmax}s)\n"
+                f"  SO' o necessario para mostrar o RESULTADO FINAL — cortar antes\n"
+                f"  do resultado e' pior que passar do tempo.")
     if config.DURACAO_CURTA:
         return (f"- Ponto ideal: 35-{dmax}s. O clipe e' CURTO de proposito: comece\n"
                 f"  NO fato mais forte e termine quando a historia fecha. Um trecho\n"

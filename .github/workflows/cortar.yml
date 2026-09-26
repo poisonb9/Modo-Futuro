@@ -269,6 +269,11 @@ jobs:
           # Lidas por `_amostra_do_genero`; sem elas, uma voz so'.
           AMOSTRA_VOZ_MASCULINO: bryan_amostra.wav
           AMOSTRA_VOZ_FEMININO: bruna_amostra.wav
+          # ⛔ O CANAL NO CORTE (26/09/2026). Ate' aqui so' a publicacao sabia o
+          # canal: o main.py cortava sem ele, e baloes/Reels, cor, ritmo, selo
+          # da serie e a guarda de escopo desligavam calados.
+          CANAL_ESPERADO: ${{ inputs.canal }}
+          PERMITIR_FORA_DO_ESCOPO: ${{ 'false' }}
         run: >
           python -X utf8 main.py
           --url "${{ inputs.url }}"

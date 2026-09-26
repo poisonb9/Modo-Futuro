@@ -105,6 +105,15 @@ for arq in CORTAM:
         for v in ("VOZ_CANAL", "VOZ_CLONADA", "SELECAO_MODO", "VOICE_OVER"):
             checar(v in env, f"{v} chega ao ambiente do corte")
 
+        # ⛔ O CANAL tem de chegar ao CORTE, nao so' a' publicacao. Achado em
+        # 26/09/2026: CANAL_ESPERADO so' existia nos passos Release/Buffer. No
+        # corte o main.py rodava sem canal, e tudo que depende dele desligava
+        # CALADO: baloes + versao Reels (camada), cor da marca, ritmo 1,1x,
+        # selo da serie, e a guarda de escopo do inicio do main.py.
+        checar("CANAL_ESPERADO" in env, "CANAL_ESPERADO chega ao ambiente do corte")
+        checar("PERMITIR_FORA_DO_ESCOPO" in env,
+               "PERMITIR_FORA_DO_ESCOPO chega ao corte (a guarda roda la')")
+
 print()
 if falhas:
     print(f"{len(falhas)} FALHA(S)")

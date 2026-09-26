@@ -182,12 +182,18 @@ class _Para:
 
 class _Cruza:
     ENTRA, SAI = 1.4, 1.4
+    # ⭐ 26/09/2026 (print do dono): parado no meio, o AVIAO saia CORTADO. O
+    # celular mostra o 9:16 cheio na altura e corta ~96 px de cada lado
+    # (medido no print: visivel de x=96 a 983). Com 330+90+600 = 1020 px o
+    # conjunto ficava a 30 px da borda (e ainda desliza 25 px). Com 736 px
+    # fica a ~172 px (~50 px de folga no fim do deslize, ja' com o corte).
+    AV_L, VAO_L, FX_L = 240, 56, 440
 
     def __init__(self, t0, fica=3.4, y=370):     # abaixo de "Para voce"/"Reels" (25/09)
         self.t0, self.fica, self.y = t0, fica, y
         self.dur = self.ENTRA + fica + self.SAI
-        self.av = _img("v1", 330)
-        self.fx = _img("v2", 600)
+        self.av = _img("v1", self.AV_L)
+        self.fx = _img("v2", self.FX_L)
         self.cd = Image.open(ATIVOS / "v3.webp").convert("RGBA")
 
     def _onda(self, t):
@@ -204,7 +210,7 @@ class _Cruza:
         tt = t - self.t0
         if tt < 0 or tt > self.dur:
             return
-        vao = 90
+        vao = self.VAO_L
         total = self.av.width + vao + self.fx.width
         meio = (W - total) / 2
         if tt < self.ENTRA:

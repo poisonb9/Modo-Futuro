@@ -43,8 +43,8 @@ async def _sintetizar(texto: str, destino: Path, voz: str):
     from . import numeros
     # Mesmo conserto do voz_clonada: o defeito e' dos dois caminhos de
     # TTS, nao so' do que estava ativo em 22/08/2026.
-    from . import biblia   # pronuncia do canal, so' na fala (26/09)
-    comm = edge_tts.Communicate(biblia.para_fala(numeros.por_extenso(texto)), voice=voz)
+    from . import guia_voz   # pronuncia do canal, so' na fala (26/09)
+    comm = edge_tts.Communicate(guia_voz.para_fala(numeros.por_extenso(texto)), voice=voz)
     await comm.save(str(destino))
 
 

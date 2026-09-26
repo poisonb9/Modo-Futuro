@@ -21,7 +21,7 @@ PROMPT = """Traduza a fala abaixo para português do Brasil, natural e coloquial
 aproximado de frases. Responda SOMENTE com o texto traduzido, sem aspas,
 sem comentário, sem markdown.
 
-{biblia}Fala original:
+{guia}Fala original:
 {texto}"""
 
 # Usado só quando --dublar: a fala original costuma ter mais de uma pessoa
@@ -132,7 +132,7 @@ demais), só remova a troca de interlocutor e os cacoetes de fala, deixando o
 texto linear e natural de se ouvir em voz alta. Responda SOMENTE com o texto
 reescrito, sem aspas, sem comentário, sem markdown.
 
-{biblia}Fala original:
+{guia}Fala original:
 {texto}"""
 
 
@@ -237,18 +237,18 @@ def _montar(prompt: str, texto: str, genero: str | None = None,
     """Preenche SO' os campos que o prompt tem. UM lugar so' — antes a mesma
     montagem estava copiada no caminho do Gemini e no da reserva (Nemotron).
 
-    `{biblia}` = tom, glossario e proibido do canal (engine/biblia.py, 26/09).
+    `{guia}` = tom, glossario e proibido do canal (engine/guia_voz.py, 26/09).
     O canal vem de CANAL_ESPERADO, que desde 5520df5 chega ao passo de corte.
     """
     import os
-    from . import biblia
+    from . import guia_voz
     campos = {"texto": texto}
     if "{dica_genero}" in prompt:
         campos["dica_genero"] = dica_de_genero(genero)
     if "{orcamento}" in prompt:
         campos["orcamento"] = orcamento_de_palavras(duracao_s)
-    if "{biblia}" in prompt:
-        campos["biblia"] = biblia.bloco_prompt(os.environ.get("CANAL_ESPERADO"))
+    if "{guia}" in prompt:
+        campos["guia"] = guia_voz.bloco_prompt(os.environ.get("CANAL_ESPERADO"))
     return prompt.format(**campos)
 
 

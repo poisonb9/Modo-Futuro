@@ -51,9 +51,9 @@ def nota_texto(esperado: str, ouvido: str) -> float:
 
 
 def formas_faladas(texto: str) -> list[str]:
-    """A grafia e o que a voz de fato recebeu (numero por extenso + Biblia)."""
-    from . import biblia, numeros
-    falado = biblia.para_fala(numeros.por_extenso(texto))
+    """A grafia e o que a voz de fato recebeu (numero por extenso + Guia de voz)."""
+    from . import guia_voz, numeros
+    falado = guia_voz.para_fala(numeros.por_extenso(texto))
     return [texto] if falado == texto else [texto, falado]
 
 

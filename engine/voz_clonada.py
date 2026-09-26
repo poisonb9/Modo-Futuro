@@ -109,9 +109,9 @@ def _falar(texto: str, destino: Path, amostra_voz: Path, idioma: str,
     # e trinta" escrito), e o `timing` devolvido segue com o texto original.
     falado = numeros.por_extenso(texto)
     # ⭐ 26/09: nome dito como o canal fala ("Risabae" -> "Rissabé"), pela
-    # tabela de pronuncia da Biblia do canal. SO' aqui — a legenda nao muda.
-    from . import biblia
-    falado = biblia.para_fala(falado)
+    # tabela de pronuncia do Guia de voz do canal. SO' aqui — a legenda nao muda.
+    from . import guia_voz
+    falado = guia_voz.para_fala(falado)
     # Os tres sub-passos sao marcados SEPARADAMENTE de proposito. Nos runs
     # #188 e #189 (31/08/2026) o processo congelou logo apos o Chatterbox
     # terminar a amostragem de uma frase — mas nao dava pra saber se parou

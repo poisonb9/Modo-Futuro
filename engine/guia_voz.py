@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Le' a BIBLIA DA DUBLAGEM de cada canal (.claude/skills/biblia-da-dublagem).
+"""Le' o GUIA DE VOZ de cada canal (.claude/skills/guia-de-voz).
 
-    python -m engine.biblia --canal truque.importado      mostra o que o motor usa
+    python -m engine.guia_voz --canal truque.importado      mostra o que o motor usa
 
 ## POR QUE EXISTE
 
-Pedido do dono em 25-26/09/2026 ("a Biblia da dublagem de cada canal, isso vai
-ser muito util"). O prompt de narracao era UM so' para todos os canais: o de
+Pedido do dono em 25-26/09/2026 (um guia de dublagem por canal, "isso vai
+ser muito util"). Nasceu com outro nome; o dono pediu a troca em 26/09
+(a palavra era de uso sagrado) — ficou GUIA DE VOZ. O prompt de narracao era UM so' para todos os canais: o de
 chips e o de maquiagem recebiam o mesmo tom, e nome de idol saia pronunciado
 de qualquer jeito ("Risabae" lido letra a letra pela voz clonada).
 
@@ -27,7 +28,7 @@ from functools import lru_cache
 from pathlib import Path
 
 PASTA = (Path(__file__).resolve().parent.parent / ".claude" / "skills"
-         / "biblia-da-dublagem" / "canais")
+         / "guia-de-voz" / "canais")
 
 
 def _canal(canal: str | None) -> str | None:
@@ -69,13 +70,13 @@ def _secao(canal, *nomes) -> str:
 
 
 def bloco_prompt(canal: str | None) -> str:
-    """O trecho que entra no prompt de narracao. Vazio sem biblia."""
+    """O trecho que entra no prompt de narracao. Vazio sem guia de voz."""
     tom = _secao(canal, "tom")
     glos = _secao(canal, "glossário", "glossario")
     proib = _secao(canal, "proibido")
     if not (tom or glos or proib):
         return ""
-    partes = ["BÍBLIA DO CANAL (vale acima das regras gerais quando conflitar):"]
+    partes = ["GUIA DE VOZ DO CANAL (vale acima das regras gerais quando conflitar):"]
     if tom:
         partes.append(f"TOM: {tom}")
     if glos:
@@ -117,6 +118,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--canal", required=True)
     a = ap.parse_args()
-    print(bloco_prompt(a.canal) or "(sem biblia para este canal)")
+    print(bloco_prompt(a.canal) or "(sem guia de voz para este canal)")
     for e, f in pronuncias(a.canal):
         print(f"  {e!r} -> {f!r}")

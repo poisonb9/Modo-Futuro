@@ -121,6 +121,31 @@ try:
 except KeyError as e:
     checar(False, f"PROMPT comum quebrou: {e}")
 
+# ⭐ 26/09 (make: 154 de 206 palavras -> 24 s sem voz no fim do clipe)
+print("\n[9] narracao CURTA: faixa no prompt e uma 2a tentativa")
+t.PALAVRAS_POR_MINUTO = 145
+orc = t.orcamento_de_palavras(85.0)
+checar("entre 184 e 205 PALAVRAS" in orc, f"orcamento pede faixa ({orc[:60]})")
+checar(t.escolher_narracao(154, 200, 205) == 2, "2a mais perto do alvo: fica a 2a")
+checar(t.escolher_narracao(154, 150, 205) == 1, "2a ainda mais curta: fica a 1a")
+checar(t.escolher_narracao(154, 260, 205) == 1, "NEGATIVO: 2a passa de 115%: fica a 1a")
+chamadas = []
+_real = t._traduzir_texto
+t._traduzir_texto = lambda texto, prompt=None, genero=None, duracao_s=None: (
+    chamadas.append(prompt) or " ".join(["palavra"] * 198))
+curta = " ".join(["x"] * 154)
+novo = t._completar_se_curta(curta, "orig", None, 85.0)
+checar(len(chamadas) == 1 and "CURTA" in chamadas[0] and len(novo.split()) == 198,
+       "curta (154/205): pede de novo e fica com a de 198")
+chamadas.clear()
+ok = " ".join(["x"] * 190)
+checar(t._completar_se_curta(ok, "orig", None, 85.0) == ok and not chamadas,
+       "NEGATIVO: no tamanho certo nao gasta 2a chamada")
+t._traduzir_texto = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("sem cota"))
+checar(t._completar_se_curta(curta, "orig", None, 85.0) == curta,
+       "2a chamada falhou: segue a 1a (falha aberta)")
+t._traduzir_texto = _real
+
 print()
 if falhas:
     print(f"{len(falhas)} FALHA(S)")

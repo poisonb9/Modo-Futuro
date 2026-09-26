@@ -245,9 +245,12 @@ def orcamento_de_palavras(duracao_s: float | None) -> str:
     limite = int(duracao_s / 60.0 * PALAVRAS_POR_MINUTO)
     if limite < 10:
         return ""
-    return (f"o texto tem que caber em cerca de {limite} PALAVRAS "
+    # ⭐ 26/09: FAIXA, e nao "cerca de". Com "cerca de 206" o modelo entregou
+    # 154 no make (75%): a voz D acabou aos 61 s de um clipe de 85 s.
+    return (f"o texto tem que ter entre {int(limite * 0.9)} e {limite} PALAVRAS "
             f"(sao {duracao_s:.0f} segundos de video, e narracao boa em "
-            f"portugues tem ~{PALAVRAS_POR_MINUTO} palavras por minuto). ")
+            f"portugues tem ~{PALAVRAS_POR_MINUTO} palavras por minuto; "
+            f"texto CURTO deixa o fim do video sem voz). ")
 
 
 def _montar(prompt: str, texto: str, genero: str | None = None,
@@ -472,6 +475,46 @@ def _distribuir_texto_em_janelas(texto: str, grupos: list[list[dict]]) -> list[d
     return resultado
 
 
+# Narracao abaixo desta fracao do orcamento ganha UMA segunda tentativa.
+# ⭐ 26/09/2026 (medido no make, depois do teto de pausa 65d170b): 154 de 206
+# palavras = 75% -> 24 s do clipe sem narracao no fim. Antes do teto, a
+# ancoragem escondia isso esticando as pausas (o "pausa gigante" do dono).
+CURTA_FRACAO = 0.85
+
+
+def escolher_narracao(n1: int, n2: int, alvo: int) -> int:
+    """1 ou 2: qual versao fica. A mais perto do alvo, sem passar de 115%
+    (mais longa que isso o atempo acelera). Exposto pro teste."""
+    if n2 > alvo * 1.15 or n2 <= 0:
+        return 1
+    return 2 if abs(n2 - alvo) < abs(n1 - alvo) else 1
+
+
+def _completar_se_curta(texto_narrado: str, texto_original: str,
+                        genero: str | None, dur: float) -> str:
+    alvo = int(dur / 60.0 * PALAVRAS_POR_MINUTO)
+    n = len(texto_narrado.split())
+    if alvo < 10 or n >= alvo * CURTA_FRACAO:
+        return texto_narrado
+    aviso = (f"\n\n⚠️ ATENCAO: uma versao anterior saiu com {n} palavras, CURTA "
+             f"DEMAIS para {dur:.0f} segundos de video (a voz acaba antes da "
+             f"imagem). Escreva entre {int(alvo * 0.9)} e {alvo} palavras, "
+             "contando com mais detalhe o que acontece no trecho. NAO invente "
+             "fatos que o trecho nao tem.")
+    try:
+        segunda = _traduzir_texto(texto_original, prompt=PROMPT_NARRACAO + aviso,
+                                  genero=genero, duracao_s=dur)
+    except Exception as e:
+        print(f"      [!] narracao curta ({n}/{alvo}) e a 2a tentativa falhou "
+              f"({type(e).__name__}) — segue a 1a", flush=True)
+        return texto_narrado
+    n2 = len(segunda.split())
+    fica = escolher_narracao(n, n2, alvo)
+    print(f"      narracao curta ({n} de {alvo} palavras): 2a tentativa com "
+          f"{n2} — fica a {'2a' if fica == 2 else '1a'}", flush=True)
+    return segunda if fica == 2 else texto_narrado
+
+
 def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
                         narrar: bool = False,
                         genero_falante: str | None = None) -> list[dict]:
@@ -497,6 +540,8 @@ def traduzir_segmentos(palavras: list[dict], tamanho_janela_s: float = 4.0,
         texto_narrado = _traduzir_texto(texto_completo, prompt=PROMPT_NARRACAO,
                                         genero=genero_falante, duracao_s=dur)
         if dur and dur > 0:
+            texto_narrado = _completar_se_curta(texto_narrado, texto_completo,
+                                                genero_falante, dur)
             n = len(texto_narrado.split())
             ppm = n / (dur / 60.0)
             alvo = int(dur / 60.0 * PALAVRAS_POR_MINUTO)

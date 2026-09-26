@@ -21,6 +21,9 @@ fundo = ruido rosa continuo, dublagem = tom de 1 a 3 s.
   [11] 26/09 (dono: "testar no make"): voz original BAIXA por baixo — na
        pausa fica abaixo da dublagem, na fala abaixa mais, canto sai
   [12] NEGATIVO: sem VOZ_ORIGINAL_DB a mistura e' a de sempre (2 entradas)
+  [13] 26/09 (§1.3): fundo QUASE MUDO nao e' empurrado a -14 LUFS — ganho
+       fixo com teto de +10 dB (o loudnorm dinamico levantava ~29 dB o
+       residuo do Demucs: "Goat", "Insect", "Howl" no video final)
 
 Roda com: python teste/teste_fundo.py
 """
@@ -111,7 +114,18 @@ jan = [(0.0, 0.05, 0.0),    # ambiente
 d = fundo._decidir(jan)
 print(f"       {d}")
 checar(d == [(0.975, 2.925), (3.9, 4.875)], "tira os dois trechos de música, fica o resto")
-checar(fundo._decidir([(0.0, 0.2, 0.0)]) == [], "música abaixo do limiar = fica")
+checar(fundo._decidir([(0.0, 0.1, 0.0)]) == [], "música abaixo do limiar = fica")
+# ⭐ 26/09 (§1.4): musica BAIXA (0,15-0,26 no chips) sai; ilha curta sai junto
+checar(fundo._decidir([(0.0, 0.18, 0.0)]) == [(0.0, 0.975)], "música baixa (0,18) sai")
+ilha = [(0.0, 0.5, 0.0), (0.975, 0.05, 0.0), (1.95, 0.05, 0.0), (2.925, 0.5, 0.0)]
+checar(fundo._decidir(ilha) == [(0.0, 3.9)], "ilha de 2 janelas entre músicas sai junto")
+longa = [(0.0, 0.5, 0.0), (0.975, 0.0, 0.0), (1.95, 0.0, 0.0), (2.925, 0.0, 0.0),
+         (3.9, 0.5, 0.0)]
+checar(fundo._decidir(longa) == [(0.0, 0.975), (3.9, 4.875)],
+       "NEGATIVO: trecho sem música de 3 janelas fica")
+riso = [(0.0, 0.5, 0.0), (0.975, 0.05, 0.7), (1.95, 0.5, 0.0)]
+checar(fundo._decidir(riso) == [(0.0, 0.975), (1.95, 2.925)],
+       "NEGATIVO: ilha com risada fica")
 
 print("\n[7] ganho no tempo: 0 na música, 1 fora, rampa sem salto")
 e = fundo.expr_sem_musica([(2.0, 4.0)])
@@ -161,6 +175,18 @@ checar(fundo._ganho_voz_original() is None or os.environ.get("VOZ_ORIGINAL_DB"),
        "sem VOZ_ORIGINAL_DB, sem voz original")
 checar("[2:a]" not in fundo.filtro_mix(None) and "inputs=2" in fundo.filtro_mix(None),
        "mistura de sempre com 2 entradas")
+
+print("\n[13] ganho fixo no fundo")
+ff("-f", "lavfi", "-i", "anoisesrc=d=6:c=pink:a=0.004", "-ar", "44100", "-ac", "2", str(T / "baixo.wav"))
+ff("-f", "lavfi", "-i", "anoisesrc=d=6:c=white:a=1.0", "-ar", "44100", "-ac", "2", str(T / "alto.wav"))
+gb, ga = fundo.ganho_fixo_db(T / "baixo.wav"), fundo.ganho_fixo_db(T / "alto.wav")
+print(f"       fundo baixo {gb} dB | fundo alto {ga} dB")
+checar(gb == fundo.GANHO_MAX_DB, "fundo quase mudo: sobe no maximo o teto")
+checar(ga is not None and ga < 0, "fundo alto: desce")
+checar(fundo.ganho_fixo_db(T / "nao_existe.wav") is None, "sem medida = None (loudnorm de antes)")
+f = fundo.filtro_mix(None, None, dur=6.0, fundo_db=10.0)
+checar(f.startswith("[1:a]apad=pad_dur=4,loudnorm") and "[0:a]apad=pad_dur=4,volume=10.00dB" in f,
+       "no filtro: ganho fixo no fundo, loudnorm so' na dublagem")
 
 print("\n[10] classificador real (se o modelo e os vídeos de teste existirem)")
 demo = Path(os.environ.get("TEMP", "/tmp")) / "claude" / "demo_enq"

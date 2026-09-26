@@ -122,15 +122,26 @@ def preencher_com_original(bruto, dublado, palavras, destino):
     # MESMO loudnorm do render (I=-14) antes de somar — o original entra na
     # mesma altura da voz, nem sussurro nem estouro.
     ln = "loudnorm=I=-14:TP=-1.5:LRA=11"
-    filtro = (f"[0:a]{ln},volume='if(gte(t,{ini:.3f}),1,0)':eval=frame,"
+    # ⛔ FOLGA + CORTE EXATO: o ffmpeg 6.1 do runner devolvia esta soma ~3 s
+    # curta NA DUBLAGEM (lookahead do loudnorm) e a ultima frase sumia — ver
+    # fundo.FOLGA_S. A saida tem o tamanho da maior entrada, como o
+    # `duration=longest` de antes.
+    from .fundo import FOLGA_S, _duracao
+    durs = [d for d in (_duracao(bruto), _duracao(dublado)) if d]
+    pad = f"apad=pad_dur={FOLGA_S:g}," if durs else ""
+    corte = f"[m];[m]atrim=end={max(durs):.3f}[a]" if durs else "[a]"
+    filtro = (f"[0:a]{pad}{ln},volume='if(gte(t,{ini:.3f}),1,0)':eval=frame,"
               f"afade=t=in:st={ini:.3f}:d=0.8[o];"
-              f"[1:a]{ln}[d];"
-              f"[d][o]amix=inputs=2:duration=longest:normalize=0[a]")
+              f"[1:a]{pad}{ln}[d];"
+              f"[d][o]amix=inputs=2:duration=longest:normalize=0{corte}")
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(bruto),
                         "-i", str(dublado), "-filter_complex", filtro,
                         "-map", "[a]", str(destino)],
                        check=True, capture_output=True)
+        from .fundo import inteira
+        if not inteira(Path(destino), dublado):
+            return None
         return Path(destino)
     except Exception:
         return None

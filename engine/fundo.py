@@ -70,7 +70,15 @@ _LN = "loudnorm=I=-14:TP=-1.5:LRA=11"
 # no Goggins (so' conversa) "Music" 0,00.
 YAMNET_URL = ("https://storage.googleapis.com/mediapipe-models/audio_classifier/"
               "yamnet/float32/latest/yamnet.tflite")
-MUSICA_LIMIAR = 0.30
+# ⚠️ 0,12, e nao 0,30 (26/09/2026, RETOMADA §1.4, medido nas trilhas da
+# previa). Musica de fundo BAIXA e continua — a trilha de documentario do chips
+# — pontua so' 0,15-0,26 no fundo separado pelo Demucs, e escapava janela a
+# janela: no video final, com a dublagem por cima, o YAMNet a ouvia a 0,80-0,92.
+# Onde o fundo nao e' musica, a nota fica em 0,00-0,11 (ambiente, silencio).
+MUSICA_LIMIAR = 0.12
+# Ilha de ate' 2 janelas entre dois trechos de musica = a musica ficou mais
+# baixa ali, nao parou: sai junto. Risada na ilha a protege (a risada vale mais).
+ILHA_MAX_S = 2.0
 MUSICA_FORTE = 0.60
 RISADA_LIMIAR = 0.30
 RAMPA_S = 0.15
@@ -114,7 +122,17 @@ def _decidir(janelas: list[tuple[float, float, float]]) -> list[tuple[float, flo
             trechos[-1] = (trechos[-1][0], t + passo)
         else:
             trechos.append((t, t + passo))
-    return [(round(a, 3), round(b, 3)) for a, b in trechos]
+    # ilhas curtas entre dois trechos de musica saem junto (sem risada nelas)
+    juntos: list[tuple[float, float]] = []
+    for a, b in trechos:
+        if juntos:
+            fim_ant = juntos[-1][1]
+            riso = any(r >= RISADA_LIMIAR for t, _, r in janelas if fim_ant - 0.05 <= t < a)
+            if a - fim_ant <= ILHA_MAX_S + 0.05 and not riso:
+                juntos[-1] = (juntos[-1][0], b)
+                continue
+        juntos.append((a, b))
+    return [(round(a, 3), round(b, 3)) for a, b in juntos]
 
 
 def trechos_de_musica(wav: Path) -> list[tuple[float, float]] | None:
@@ -217,22 +235,100 @@ def _corte(ate_s: float | None, trechos: list[tuple[float, float]] | None) -> st
     return corte
 
 
+# ⛔ O FIM MUDO (RETOMADA §1.1, achado 26/09/2026 com as trilhas da previa).
+# O ffmpeg do runner (6.1.1, apt do Ubuntu) devolve esta mistura ~3 s MAIS
+# CURTA que a dublagem — conteudo identico (correlacao 1,0) ate' ali, e
+# depois nada: 82,4 s para uma dublagem de 85,3 s no make. ~3 s e' a janela
+# de lookahead do `loudnorm`. O `cauda.preencher_com_original` perdia mais
+# ~3 s, e a ultima frase caia no buraco (o "zero digital" de 4-7 s no fim).
+# O ffmpeg 8 da maquina local NAO tem o defeito: por isso toda reproducao
+# local "inocentava" as etapas. Remedio que vale nas duas versoes: FOLGA de
+# silencio no fim de cada entrada, e corte exato na duracao da dublagem.
+FOLGA_S = 4.0
+
+
+# ⛔ GANHO FIXO no fundo, e nao o loudnorm dinamico (26/09/2026, RETOMADA
+# §1.3/§1.4, medido nas trilhas da previa). O fundo que o Demucs separa costuma
+# ser QUASE MUDO (chips: -43 LUFS; make: -32), e o loudnorm dinamico o empurrava
+# ate' -14 LUFS — ~29 dB de ganho nos trechos baixos. O que ele levantava era o
+# RESIDUO da voz original que o Demucs deixa no fundo, e o YAMNet ouvia no
+# video final "Goat", "Insect", "Howl" e "Music" (o dono: "barulho estranho...
+# tipo suspense"). Com um ganho unico medido no arquivo inteiro (teto de
+# GANHO_MAX_DB), o que e' baixo continua baixo: remix local sem cabra, sem
+# inseto e sem musica no chips e no make.
+GANHO_MAX_DB = 10.0
+ALVO_LUFS = -14.0
+
+
+def ganho_fixo_db(arq: Path) -> float | None:
+    """Ganho unico (dB) que leva `arq` a ALVO_LUFS, limitado a +-GANHO_MAX_DB
+    na subida. None = nao mediu (quem chama cai no loudnorm de antes)."""
+    try:
+        import json
+        r = subprocess.run(["ffmpeg", "-v", "info", "-i", str(arq), "-af",
+                            f"{_LN}:print_format=json", "-f", "null", "-"],
+                           capture_output=True, text=True, timeout=300).stderr
+        i = float(json.loads(r[r.rfind("{"):r.rfind("}") + 1])["input_i"])
+        if i != i or i < -70:            # NaN ou mudo: nada a levantar
+            return None
+        return round(max(-20.0, min(GANHO_MAX_DB, ALVO_LUFS - i)), 2)
+    except Exception:
+        return None
+
+
+def _nivel(ganho_db: float | None) -> str:
+    return _LN if ganho_db is None else f"volume={ganho_db:.2f}dB"
+
+
 def filtro_mix(ate_s: float | None,
                sem_musica: list[tuple[float, float]] | None = None,
                voz_ganho: float | None = None,
-               voz_sem_canto: list[tuple[float, float]] | None = None) -> str:
+               voz_sem_canto: list[tuple[float, float]] | None = None,
+               dur: float | None = None,
+               fundo_db: float | None = None,
+               voz_db: float | None = None) -> str:
     """[0:a] = fundo, [1:a] = dublagem [, [2:a] = voz original] -> [a].
     Exposto pro teste. `sem_musica`: trechos em que o fundo e' musica e sai
-    (ver trechos_de_musica). `voz_ganho`: liga a voz original baixa."""
-    fundo = (f"[0:a]{_LN},volume={VOL_FUNDO}{_corte(ate_s, sem_musica)}[f];"
+    (ver trechos_de_musica). `voz_ganho`: liga a voz original baixa.
+    `dur`: duracao da dublagem — com ela, cada entrada ganha FOLGA_S de
+    silencio antes do loudnorm e a saida e' cortada exatamente em `dur`.
+    `fundo_db`/`voz_db`: ganho FIXO (ver ganho_fixo_db) no lugar do loudnorm
+    dinamico no fundo e na voz original; None = loudnorm, como antes."""
+    pad = f"apad=pad_dur={FOLGA_S:g}," if dur else ""
+    fim = f"[m];[m]atrim=end={dur:.3f}[a]" if dur else "[a]"
+    fundo = (f"[0:a]{pad}{_nivel(fundo_db)},volume={VOL_FUNDO}{_corte(ate_s, sem_musica)}[f];"
              f"[f][sc]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=350[fd];")
     if voz_ganho is None:
-        return (f"[1:a]{_LN},asplit=2[d][sc];" + fundo
-                + "[d][fd]amix=inputs=2:duration=first:normalize=0[a]")
-    return (f"[1:a]{_LN},asplit=3[d][sc][sv];" + fundo
-            + f"[2:a]{_LN},volume={voz_ganho:.4f}{_corte(ate_s, voz_sem_canto)}[v];"
+        return (f"[1:a]{pad}{_LN},asplit=2[d][sc];" + fundo
+                + "[d][fd]amix=inputs=2:duration=first:normalize=0" + fim)
+    return (f"[1:a]{pad}{_LN},asplit=3[d][sc][sv];" + fundo
+            + f"[2:a]{pad}{_nivel(voz_db)},volume={voz_ganho:.4f}{_corte(ate_s, voz_sem_canto)}[v];"
             f"[v][sv]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=400[vd];"
-            "[d][fd][vd]amix=inputs=3:duration=first:normalize=0[a]")
+            "[d][fd][vd]amix=inputs=3:duration=first:normalize=0" + fim)
+
+
+def _duracao(arq: Path) -> float | None:
+    """Duracao em s, ou None (sem ela a mistura sai sem folga, como antes)."""
+    try:
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                            "-of", "csv=p=0", str(arq)], capture_output=True, text=True,
+                           timeout=120)
+        d = float(r.stdout.strip())
+        return d if d > 0 else None
+    except Exception:
+        return None
+
+
+def inteira(saida: Path, dublado: Path, tol_s: float = 0.3) -> bool:
+    """A mistura tem o tamanho da dublagem? Mais curta = o fim (a ultima
+    frase) sumiu; quem chama descarta e segue com a trilha anterior.
+    Sem medida, nao barra (falha aberta)."""
+    a, b = _duracao(saida), _duracao(dublado)
+    if a is None or b is None or a >= b - tol_s:
+        return True
+    print(f"      [!] mistura saiu {b - a:.1f}s mais curta que a dublagem "
+          f"({a:.1f}s de {b:.1f}s) — descartada, a fala vai inteira", flush=True)
+    return False
 
 
 def misturar(bruto: Path, dublado: Path, destino: Path,
@@ -264,6 +360,9 @@ def misturar(bruto: Path, dublado: Path, destino: Path,
                 json.dumps({"musica": musica}), encoding="utf-8")
         except Exception:
             pass
+    g_fundo = ganho_fixo_db(fundo)
+    print(f"      [fundo] ganho fixo no fundo: "
+          f"{'loudnorm (sem medida)' if g_fundo is None else f'{g_fundo:+.1f} dB'}", flush=True)
     entradas = ["-i", str(fundo), "-i", str(dublado)]
     voz_ganho, canto = _ganho_voz_original(), None
     voz = fundo.with_name("vocals.wav")
@@ -285,10 +384,15 @@ def misturar(bruto: Path, dublado: Path, destino: Path,
         voz_ganho = None
     try:
         subprocess.run(["ffmpeg", "-y", "-v", "error", *entradas,
-                        "-filter_complex", filtro_mix(ate_s, musica, voz_ganho, canto),
+                        "-filter_complex", filtro_mix(
+                            ate_s, musica, voz_ganho, canto, dur=_duracao(dublado),
+                            fundo_db=g_fundo,
+                            voz_db=ganho_fixo_db(voz) if voz_ganho is not None else None),
                         "-map", "[a]",
                         "-ar", "44100", str(destino)],
                        check=True, capture_output=True, timeout=300)
+        if not inteira(Path(destino), dublado):
+            return None        # a dublagem inteira sem fundo > fundo sem o fim
         return Path(destino)
     except Exception as e:
         print(f"      [!] mistura do fundo falhou ({type(e).__name__})", flush=True)

@@ -18,7 +18,7 @@ from engine import (midia, selecao, transcricao, legendas, render, traducao, fal
                     camada, marca, selo, cor, ritmo,
                     cascata,
                     dublagem, status, ancoragem, pos_producao, voz_clonada, suavizar,
-                    cauda, gramatica, chamada as chamada_mod, ab_titulo)
+                    cauda, gramatica, chamada as chamada_mod, ab_titulo, fundo)
 
 # console do Windows costuma abrir em cp1252, que não tem caractere "→"
 # usado nos prints de progresso — força UTF-8 pra não derrubar o processo
@@ -484,6 +484,21 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print(f"      cauda muda: {dur_final - dur_max:.1f}s sem voz "
                           f"no fim — clipe aparado pra {dur_max:.1f}s")
                     dur_final = dur_max
+            # ⭐ 26/09: o FUNDO do original (musica, ambiente) por baixo da
+            # dublagem, via Demucs — ver engine/fundo.py. Sai em fade onde a
+            # cauda abaixo devolve o original inteiro, pra nao somar dobrado.
+            # Voice-over nao passa aqui: la' o original inteiro ja' entra no
+            # render (com ducking quando o fundo esta' ligado).
+            if (audio_dublado is not None and fundo.LIGADO
+                    and not getattr(config, "VOICE_OVER", False)):
+                _com_fundo = fundo.misturar(
+                    bruto, audio_dublado,
+                    Path(audio_dublado).with_name("trilha_com_fundo.wav"),
+                    ate_s=((cauda.fim_da_fala(ps) + cauda.CAUDA_MARGEM_S)
+                           if cauda.fim_da_fala(ps) > 0 else None))
+                if _com_fundo:
+                    audio_dublado = _com_fundo
+                    print("      fundo original por baixo da dublagem")
             # ⭐ 25/09: o que NAO foi aparado (piso de 65 s, ou a revelacao do
             # resultado) deixa de ficar mudo: volta o som original do programa.
             if audio_dublado is not None:

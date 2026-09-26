@@ -363,6 +363,11 @@ def _cadeia_audio_vo() -> str:
     Normalizar depois da mistura tambem e' o certo — normalizar as duas
     trilhas antes faria a soma estourar.
     """
+    from . import fundo
+    if fundo.LIGADO:
+        # ⭐ 26/09: o original so' ABAIXA enquanto a dublagem fala (sidechain)
+        # e volta nas pausas — antes ficava fixo a 0,18 o tempo todo.
+        return fundo.filtro_voice_over() + f";[vo]{AUDIO_LOUDNORM}[a]"
     vol = getattr(config, "VOICE_OVER_VOL_ORIGINAL", 0.18)
     return (f"[0:a]volume={vol}[orig];"
             f"[orig][1:a]amix=inputs=2:normalize=0,{AUDIO_LOUDNORM}[a]")

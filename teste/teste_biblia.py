@@ -74,8 +74,9 @@ checar(biblia.para_fala("Risabae", "canal_que_nao_existe") == "Risabae",
 print("\n[4] a legenda não passa pela pronúncia")
 usos = [p.relative_to(RAIZ).as_posix() for p in (RAIZ / "engine").glob("*.py")
         if "para_fala(" in p.read_text(encoding="utf-8") and p.name != "biblia.py"]
-checar(sorted(usos) == ["engine/dublagem.py", "engine/voz_clonada.py"],
-       f"só os dois caminhos de VOZ chamam para_fala ({usos})")
+# conferencia.py usa para comparar o que a voz OUVIU com o que ela RECEBEU
+checar(sorted(usos) == ["engine/conferencia.py", "engine/dublagem.py", "engine/voz_clonada.py"],
+       f"só os caminhos de VOZ (e a conferência dela) chamam para_fala ({usos})")
 
 print()
 if falhas:

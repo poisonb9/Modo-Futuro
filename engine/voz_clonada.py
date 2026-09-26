@@ -24,9 +24,11 @@ import shutil
 import time
 from pathlib import Path
 
-from . import dinamica, midia
+from . import conferencia, dinamica, midia
 
 IDIOMA_PADRAO = "pt"
+# resumo da conferencia do ULTIMO gerar_trilha (o main.py grava no post.json)
+ULTIMO_QC: dict = {}
 _MODELO = None
 _PAUSA_ENTRE_FRASES_S = 0.15
 
@@ -456,6 +458,9 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     fonte) não bate mais com esse áudio — a legenda tem que usar ESSE
     timing, não o dos `segmentos` de entrada (Bryan reportou legenda
     "correndo" em 05/08/2026 quando ela ainda seguia o timing antigo)."""
+    # zera ANTES de tudo: saida cedo nao pode deixar a nota do clipe anterior
+    global ULTIMO_QC
+    ULTIMO_QC = {}
     if not segmentos:
         return None, []
     if not amostra_voz.exists():
@@ -522,6 +527,8 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
     # sub-passo e o minuto — e o `flush=True` garante que a linha chegue ao
     # log do Actions ANTES do congelamento, nao presa num buffer.
     t_lote = time.monotonic()
+    notas: list[float | None] = []
+    refeitas = 0
     print(f"      [voz] {len(frases)} frase(s) para sintetizar", flush=True)
     for i, frase in enumerate(frases):
         p = trabalho / f"voz_frase_{i:03d}.wav"
@@ -530,6 +537,26 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
               f"(acumulado {time.monotonic() - t_lote:.0f}s)", flush=True)
         _falar(frase, p, pares[i][1], idioma,
                enfase=enfases[i] if i < len(enfases) else None)
+        # ⭐ 26/09 (item 3): a voz falou o que devia? Refaz UMA vez a frase
+        # abaixo do limiar e fica com a melhor. Ver engine/conferencia.py.
+        nota_i = None
+        if conferencia.LIGADO:
+            r = conferencia.nota(p, frase, idioma)
+            if r:
+                nota_i = r[0]
+                if (nota_i < conferencia.LIMIAR
+                        and refeitas < conferencia.MAX_REFEITAS_POR_CLIPE):
+                    print(f"        [qc] nota {nota_i:.2f} — ouviu {r[1][:70]!r}; "
+                          "refazendo a frase", flush=True)
+                    p2 = trabalho / f"voz_frase_{i:03d}_b.wav"
+                    _falar(frase, p2, pares[i][1], idioma,
+                           enfase=enfases[i] if i < len(enfases) else None)
+                    refeitas += 1
+                    r2 = conferencia.nota(p2, frase, idioma)
+                    if r2 and r2[0] > nota_i:
+                        p, nota_i = p2, r2[0]
+                    print(f"        [qc] ficou nota {nota_i:.2f}", flush=True)
+        notas.append(nota_i)
         if i < len(ganhos) and abs(ganhos[i] - 1.0) > 0.01:
             p = _aplicar_ganho(p, ganhos[i])
         partes.append(p)
@@ -539,6 +566,10 @@ def gerar_trilha(segmentos: list[dict], duracao_total: float, trabalho: Path,
         duracoes.append(midia.duracao(p))
     print(f"      [voz] as {len(frases)} frases prontas em "
           f"{time.monotonic() - t_lote:.0f}s", flush=True)
+    ULTIMO_QC = conferencia.resumo(notas, refeitas)
+    if ULTIMO_QC.get("conferidas"):
+        print(f"      [qc] dublagem: media {ULTIMO_QC['media']:.2f}, pior "
+              f"{ULTIMO_QC['min']:.2f}, {refeitas} frase(s) refeita(s)", flush=True)
 
     if ANCORAR_FRASES and len(janelas) == len(frases):
         inicios = _ancorar(duracoes, janelas)

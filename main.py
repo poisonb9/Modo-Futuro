@@ -427,6 +427,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                             # enfase dos primeiros ~90 s do video original, nao
                             # do trecho cortado. Guarda: teste_dinamica_do_clipe.
                             fonte=bruto)
+                        # ⭐ 26/09: nota da conferencia (engine/conferencia.py)
+                        # vai pro post.json pra cruzar com a retencao
+                        c["qc_dublagem"] = dict(voz_clonada.ULTIMO_QC)
                         # a legenda tem que seguir o timing REAL do áudio
                         # dublado (pausas entre frases + atempo final mudam o
                         # ritmo em relação ao vídeo fonte), não o timing de
@@ -666,6 +669,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      # A/B do titulo na tela (25/09): sem isto no post.json o
                      # manifesto nao recebe o grupo e o teste nao se le'.
                      "ab_titulo", "titulo_tela", "titulo_tela_curto",
+                     # conferencia da dublagem (26/09): nota da voz gerada
+                     "qc_dublagem",
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",

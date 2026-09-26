@@ -8,11 +8,9 @@ cena ("ele correu com a perna quebrada"). O fio é sempre a lição prática.
 Voz clonada do Bryan.
 
 ## Pronúncia
-| escrita | falada |
-|---|---|
-| Goggins | Góguins |
-| Navy SEAL | Nêivi Sil |
-| Huberman | Rúberman |
+⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são
+falados como a voz fala naturalmente. Esta seção fica VAZIA de propósito;
+o motor só troca pronúncia se houver tabela aqui.
 
 ## Glossário
 - "calos na mente" (callus the mind): manter a expressão, é marca do Goggins

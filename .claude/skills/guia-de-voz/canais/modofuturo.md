@@ -9,15 +9,9 @@ técnico só quando necessário, e explicado na primeira vez em palavras simples
 Voz clonada do Bryan.
 
 ## Pronúncia
-| escrita | falada |
-|---|---|
-| TSMC | tê-esse-eme-cê |
-| ASML | á-esse-eme-éle |
-| EUV | ê-u-vê |
-| wafer | uêifer |
-| Nvidia | Envídia |
-| Intel | Intél |
-| fab | fáb |
+⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são
+falados como a voz fala naturalmente. Esta seção fica VAZIA de propósito;
+o motor só troca pronúncia se houver tabela aqui.
 
 ## Glossário
 - nm: "nanômetros" por extenso na fala

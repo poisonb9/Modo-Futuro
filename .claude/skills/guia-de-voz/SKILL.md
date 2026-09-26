@@ -22,7 +22,7 @@ Um arquivo por canal em `canais/<nome_buffer>.md` (o `nome_buffer` do
 ```
 ## Tom            texto livre, curto (vai no prompt)
 ## Voz            qual voz e por quê (documentação; o disparo é que escolhe)
-## Pronúncia      tabela | escrita | falada |
+## Pronúncia      VAZIA por decisão do dono (26/09): não alterar pronúncia
 ## Glossário      lista "- termo: como tratar" (vai no prompt)
 ## Proibido       lista "- ..." (vai no prompt)
 ```
@@ -30,6 +30,7 @@ Um arquivo por canal em `canais/<nome_buffer>.md` (o `nome_buffer` do
 ## Regras
 
 - ⚠️ Repositório PÚBLICO: nada privado aqui (sem token, sem dado de pessoa).
-- Pronúncia marcada `(a conferir)` é proposta: o dono confirma ouvindo.
+- ⛔ Pronúncia: o dono decidiu NÃO alterar (26/09). Não preencher a tabela
+  sem pedido explícito dele.
 - Mudou algo? Rodar `python teste/teste_guia_voz.py`.
 - Canal sem arquivo = motor segue como antes (falha aberta).

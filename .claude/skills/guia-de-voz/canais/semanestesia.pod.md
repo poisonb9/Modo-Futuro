@@ -10,12 +10,9 @@ Voz clonada do Bryan em VOICE-OVER (`voice_over=true`, `fala_literal=true`):
 o original fica audível por baixo e abaixa enquanto a dublagem fala.
 
 ## Pronúncia
-| escrita | falada |
-|---|---|
-| Huberman | Rúberman |
-| Goggins | Góguins |
-| Andrew | Ândriu |
-| Lex Fridman | Léx Fríman (a conferir) |
+⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são
+falados como a voz fala naturalmente. Esta seção fica VAZIA de propósito;
+o motor só troca pronúncia se houver tabela aqui.
 
 ## Glossário
 - cortisol, dopamina, oxitocina, melatonina: em português, sem artigo em inglês

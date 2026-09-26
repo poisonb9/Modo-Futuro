@@ -12,11 +12,9 @@ explicado em seguida ("o chocolate quente italiano").
 A definir com o dono (hoje sai pelo motor da cozinha).
 
 ## Pronúncia
-| escrita | falada |
-|---|---|
-| ramen | lámen |
-| croissant | croassã |
-| brioche | briôche |
+⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são
+falados como a voz fala naturalmente. Esta seção fica VAZIA de propósito;
+o motor só troca pronúncia se houver tabela aqui.
 
 ## Glossário
 - medidas SEMPRE no sistema métrico: g, ml, °C (nunca xícara, polegada, °F)

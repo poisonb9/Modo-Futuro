@@ -11,17 +11,9 @@ Voz clonada da Bruna (`amostra_voz=bruna`). Modo `procedimento` obrigatório:
 o corte fecha num passo inteiro, nunca no meio da make.
 
 ## Pronúncia
-| escrita | falada |
-|---|---|
-| Risabae | Rissabé |
-| ILLIT | Ílit |
-| Wonhee | Uônri (a conferir) |
-| Iroha | Irôra (a conferir) |
-| Yeongseo | Iôngsô (a conferir) |
-| Stray Kids | Strêi Quids |
-| Felix | Félix |
-| NCT WISH | ên-ci-tí uích (a conferir) |
-| K-beauty | quêi biúti |
+⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são
+falados como a voz fala naturalmente. Esta seção fica VAZIA de propósito;
+o motor só troca pronúncia se houver tabela aqui.
 
 ## Glossário
 - idol: "a idol" / "o idol" (não traduzir para "ídolo")

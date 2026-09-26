@@ -203,6 +203,26 @@ def _criterio() -> str:
     return bloco.strip(chr(10))
 
 
+def _regra_duracao(dmin: int, dmax: int) -> str:
+    """A regra de duracao do prompt: a de dinheiro (>60 s) ou a curta.
+
+    ⭐ 26/09/2026: canais curtos (config.DURACAO_CURTA, 30-45 s ate'
+    monetizar). Na faixa longa o texto e' EXATAMENTE o de antes — mudar uma
+    virgula mudaria o prompt do Sem Anestesia e da cozinha.
+    """
+    if config.DURACAO_CURTA:
+        return (f"- Ponto ideal: 35-{dmax}s. O clipe e' CURTO de proposito: comece\n"
+                f"  NO fato mais forte e termine quando a historia fecha. Um trecho\n"
+                f"  otimo de 70s nao serve inteiro — ache dentro dele os {dmin}-{dmax}s\n"
+                f"  que se sustentam sozinhos, ou descarte o trecho.")
+    return (f"- O mínimo de {dmin}s é INEGOCIÁVEL: o TikTok só paga por vídeo acima de\n"
+            f"  60 segundos. Um trecho ótimo de 50s não serve — ou você abre o recorte\n"
+            f"  pra pegar o contexto em volta e passar de {dmin}s, ou descarta o trecho.\n"
+            f"- Ponto ideal: 70-95s. Só passe de 95s (até o limite de {dmax}) quando o\n"
+            f"  arco da história PRECISA do contexto todo pra fazer sentido — não estique\n"
+            f"  por preguiça de cortar.")
+
+
 PROMPT = """Você é editor de cortes virais. Analise este {tipo} INTEIRO e escolha
 os {n} melhores momentos para YouTube Shorts.
 
@@ -210,12 +230,7 @@ os {n} melhores momentos para YouTube Shorts.
 
 REGRAS DURAS:
 - Duração entre {dmin} e {dmax} segundos. Nunca fora disso.
-- O mínimo de {dmin}s é INEGOCIÁVEL: o TikTok só paga por vídeo acima de
-  60 segundos. Um trecho ótimo de 50s não serve — ou você abre o recorte
-  pra pegar o contexto em volta e passar de {dmin}s, ou descarta o trecho.
-- Ponto ideal: 70-95s. Só passe de 95s (até o limite de {dmax}) quando o
-  arco da história PRECISA do contexto todo pra fazer sentido — não estique
-  por preguiça de cortar.
+{regra_duracao}
 - Preencher com enrolação pra alcançar {dmin}s é PIOR que descartar:
   enrolação derruba a retenção, e retenção é o que governa a DISTRIBUIÇÃO
   do vídeo pelo algoritmo. Um clipe elegível que ninguém assiste não vale
@@ -658,11 +673,12 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     """
     mime = "video/mp4" if usar_video else "audio/flac"
     tipo = "vídeo" if usar_video else "áudio"
+    dmax = (180 if (os.environ.get("SELECAO_MODO") or "")
+            .strip().lower() in ("procedimento", "receita")
+            else config.DUR_MAX)
     prompt = PROMPT.format(tipo=tipo, n=qtd, criterio=_criterio(),
-                           dmin=config.DUR_MIN,
-                           dmax=(180 if (os.environ.get("SELECAO_MODO") or "")
-                                 .strip().lower() in ("procedimento", "receita")
-                                 else config.DUR_MAX))
+                           dmin=config.DUR_MIN, dmax=dmax,
+                           regra_duracao=_regra_duracao(config.DUR_MIN, dmax))
 
     def corpo(uri):
         return {"contents": [{"parts": [

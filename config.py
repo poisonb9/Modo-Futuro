@@ -66,6 +66,32 @@ DUR_MIN = 65                     # segundos
 # que a visualização qualificada também exige. Era 120.
 DUR_MAX = 110
 
+# ⭐ 30-45 s ATE' MONETIZAR (26/09/2026, dono: "vamos em videos de 30-45s
+# para esse canal e outros tirando o sem anestesia e o de cozinha, isso
+# diminuira' tempo de maquina ate' estarmos monetizando").
+# MEDIDO no Studio (18 posts do modofuturo, 08/09): tempo medio de 5-20 s em
+# clipes de ~85 s, conclusao 0,3-9%. Com 64 seguidores, os 10 mil do Creator
+# Rewards estao longe: a regra de dinheiro do DUR_MIN acima so' volta a valer
+# quando o canal chegar perto disso. Plano: _privado/PLANO_VIRADA_MODOFUTURO.md.
+# Vale pelo canal do corte (CANAL_ESPERADO, que o workflow sempre passa). Sem
+# canal (rodada local, teste) fica a faixa longa de sempre.
+CANAIS_DURACAO_LONGA = {"semanestesia.pod", "cozinha.importada"}
+DUR_CURTA_MIN, DUR_CURTA_MAX = 30, 45
+
+
+def _duracao_curta() -> bool:
+    try:
+        from engine.canais_registro import canonico
+        canal = canonico(os.environ.get("CANAL_ESPERADO"))
+    except Exception:
+        return False
+    return bool(canal) and canal not in CANAIS_DURACAO_LONGA
+
+
+DURACAO_CURTA = _duracao_curta()
+if DURACAO_CURTA:
+    DUR_MIN, DUR_MAX = DUR_CURTA_MIN, DUR_CURTA_MAX
+
 # ------------------------------------------------- corte de silêncios
 # "Decupagem": remover as pausas mortas é o ajuste de RETENÇÃO de maior
 # impacto da destilação (PLAYBOOK_TIKTOK.md §4.4) e ainda conta como

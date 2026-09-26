@@ -58,7 +58,9 @@ def monta(modo):
     import config
     return selecao.PROMPT.format(tipo="vídeo", n=5,
                                  criterio=selecao._criterio(),
-                                 dmin=config.DUR_MIN, dmax=config.DUR_MAX)
+                                 dmin=config.DUR_MIN, dmax=config.DUR_MAX,
+                                 regra_duracao=selecao._regra_duracao(
+                                     config.DUR_MIN, config.DUR_MAX))
 
 
 print(__doc__.splitlines()[0])

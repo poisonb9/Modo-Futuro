@@ -22,7 +22,13 @@ import hashlib
 import os
 
 LIGADO = os.environ.get("AB_TITULO", "1") != "0"
-MAX_CHARS = 70
+# ⭐ 26/09/2026: 70 -> 40, e vale pros DOIS grupos. O titulo do post (45-60
+# letras) ia inteiro pra tela: 3 linhas, corpo encolhido ate' 55%, ilegivel
+# nos 2 s. O acervo converge em <=40 letras / <=7 palavras (F132187,
+# F136632, F134676). A e B passam pelo MESMO limite, entao o teste segue
+# medindo so' afirmacao x pergunta. ⚠️ Posts de 25/09 (antes disto) sairam
+# com titulo longo: o campo `titulo_tela_curto` separa na leitura.
+MAX_CHARS = 40
 
 
 def grupo(fonte: str, inicio_s) -> str:
@@ -45,9 +51,26 @@ def como_pergunta(titulo: str) -> str | None:
         "sem explicacao. Responda so' a pergunta.\n\n"
         f"Titulo: {titulo}")
     p = _limpar(r or "")
-    if not p or not p.endswith("?") or len(p) > MAX_CHARS + 10 or len(p) < 12:
+    if not p or not p.endswith("?") or len(p) > MAX_CHARS + 5 or len(p) < 12:
         return None
     return p
+
+
+def encurtar(titulo: str) -> str | None:
+    """A MESMA afirmacao em <=40 letras, pra tela. None se nao der."""
+    from . import modelo_texto
+    r = modelo_texto.perguntar(
+        "Encurte o titulo abaixo de um video curto para a tela de abertura, em "
+        "portugues do Brasil. Mantenha o mesmo fato e a mesma forma (afirmacao "
+        "continua afirmacao), os nomes e numeros principais; corte o resto e "
+        "nao invente nada. Frase de impacto, sem artigo inicial se nao fizer "
+        f"falta. No maximo {MAX_CHARS} caracteres e 7 palavras, sem aspas, sem "
+        "emoji, sem explicacao. Responda so' o titulo.\n\n"
+        f"Titulo: {titulo}")
+    t = _limpar(r or "")
+    if not t or len(t) > MAX_CHARS + 5 or len(t) < 8 or t.endswith("?"):
+        return None
+    return t
 
 
 def aplicar(c: dict, fonte: str) -> str:
@@ -64,5 +87,11 @@ def aplicar(c: dict, fonte: str) -> str:
             c["titulo_tela"] = p
         else:
             c["ab_titulo"] = "B_falhou"
+    if len(c["titulo_tela"]) > MAX_CHARS + 5 and not c["titulo_tela"].endswith("?"):
+        curto = encurtar(c["titulo_tela"])
+        if curto:
+            c["titulo_tela"] = curto
+    # False = foi longo pra tela (modelo fora): o card encolhe e quebra em 3
+    c["titulo_tela_curto"] = len(c["titulo_tela"]) <= MAX_CHARS + 5
     print(f"      A/B do titulo: grupo {c['ab_titulo']} -> \"{c['titulo_tela'][:60]}\"")
     return c["titulo_tela"]

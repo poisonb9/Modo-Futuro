@@ -314,6 +314,8 @@ def main() -> None:
                         # A/B do titulo na tela (engine/ab_titulo.py)
                         "ab_titulo": m.get("ab_titulo", ""),
                         "titulo_tela": m.get("titulo_tela", ""),
+                        # None = post anterior a 26/09 (titulo longo na tela)
+                        "titulo_tela_curto": m.get("titulo_tela_curto"),
                         # A pagina da bio le' isto. Vazio = clipe sem capa, que
                         # e' estado normal (clipe anterior a 12/09/2026).
                         "capa_url": capa_url,

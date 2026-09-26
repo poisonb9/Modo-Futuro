@@ -214,6 +214,63 @@ TITULO_GAP_FRAC = 0.16     # respiro vertical entre uma caixa e a próxima
 # inteiro. Ver o comentário em `vertical()` pro porquê de 0.16.
 TITULO_TOPO_FRAC = 0.16
 
+# ⭐ CARD PREMIUM (26/09/2026, aprovado pelo Bryan na comparação lado a lado).
+# A autópsia do card anterior achou:
+#   1. corpo 4,0% — MENOR que a legenda premium (5,8%): hierarquia invertida,
+#      o título deixou de ser a 1a coisa lida  -> TITULO_CORPO_FRAC 5,4%
+#   2. linha enchida da esquerda pra direita: sobrava "mundo" sozinho
+#      embaixo                                 -> _linhas_premium, EQUILIBRADA
+#   3. caixa-alta mista do Gemini ("A sala MAIS LIMPA do mundo") sem cor:
+#      cara de automático                      -> tudo em MAIÚSCULAS, e o
+#      trecho que o Gemini marcou vira PÍLULA ÂMBAR (a cor da legenda)
+# Posição (16%) e tempo (2 s) ficaram: o acervo confirma topo nos 2-3 s
+# iniciais (F16934, F22762). O comprimento (≤40 letras) é do ab_titulo.
+TITULO_CORPO_FRAC = 0.054
+TITULO_AMBAR = (255, 210, 0, 255)
+_TITULO_FRACA = {"a", "o", "as", "os", "um", "uma", "de", "do", "da", "dos", "das",
+                 "e", "que", "por", "para", "pra", "com", "em", "no", "na", "nos",
+                 "nas", "foi", "é", "ao", "à", "se", "seu", "sua", "mais"}
+
+
+def _linhas_premium(palavras: list[str], enf: set[str], fonte: str,
+                    max_px: float, corpo_ideal: int) -> tuple[list[str], int]:
+    """Melhor quebra em até TITULO_MAX_LINHAS, no maior corpo que couber.
+
+    Testa TODAS as quebras possíveis (título tem < 12 palavras: são no máximo
+    ~60 combinações) e fica com a de menos linhas; entre iguais, a mais
+    equilibrada. Recusa quebra que deixe palavra fraca no fim da linha ou que
+    parta o trecho em destaque ("MAIS" / "LIMPA").
+    """
+    minimo = max(12, round(corpo_ideal * TITULO_CORPO_MIN))
+    corpo = corpo_ideal
+    n = len(palavras)
+    cands = [[palavras]]
+    cands += [[palavras[:i], palavras[i:]] for i in range(1, n)]
+    if TITULO_MAX_LINHAS >= 3:
+        cands += [[palavras[:i], palavras[i:j], palavras[j:]]
+                  for i in range(1, n) for j in range(i + 1, n)]
+    limpa = lambda w: w.strip(".,!?:;")
+    while True:
+        melhor = None
+        for c in cands:
+            if any(l[-1].lower() in _TITULO_FRACA for l in c[:-1]):
+                continue
+            if any(limpa(l[-1]) in enf and limpa(m[0]) in enf for l, m in zip(c, c[1:])):
+                continue
+            ls = [" ".join(l) for l in c]
+            larg = [_largura_px(l, fonte, corpo) for l in ls]
+            if max(larg) > max_px:
+                continue
+            chave = (len(ls), max(larg) - min(larg))
+            if melhor is None or chave < melhor[0]:
+                melhor = (chave, ls)
+        if melhor:
+            return melhor[1], corpo
+        if corpo <= minimo:
+            # nada coube nem no piso: cai na quebra antiga (nunca perde palavra)
+            return _ajustar_titulo(" ".join(palavras), fonte, int(max_px / TITULO_MARGEM), corpo)
+        corpo = max(minimo, corpo - max(2, corpo // 20))
+
 
 def imagem_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> Path | None:
     """Gera o PNG do card de título (transparente, com as caixas brancas
@@ -227,8 +284,19 @@ def imagem_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> Pat
 
     texto = _destaque.marcar_titulo(texto)
 
-    corpo_ideal = round(altura * 0.040)
-    linhas, corpo = _ajustar_titulo(texto, FONTE_TITULO_CAIXA, largura, corpo_ideal)
+    # o que o Gemini pôs em caixa alta é o destaque; o resto vira caixa alta
+    # depois. Se ele (ou o título original) gritou quase tudo, não há destaque.
+    palavras = texto.split()
+    limpa = lambda w: w.strip(".,!?:;")
+    enf = {limpa(w).upper() for w in palavras
+           if len(limpa(w)) > 1 and limpa(w).isupper()}
+    if len(enf) * 2 > len(palavras):
+        enf = set()
+    palavras = [w.upper() for w in palavras]
+
+    corpo_ideal = round(altura * TITULO_CORPO_FRAC)
+    linhas, corpo = _linhas_premium(palavras, enf, FONTE_TITULO_CAIXA,
+                                    largura * TITULO_MARGEM, corpo_ideal)
     if not linhas:
         return None
 
@@ -254,6 +322,25 @@ def imagem_titulo(texto: str, largura: int, altura: int, pasta_tmp: Path) -> Pat
         raio = round(box_h * TITULO_RAIO_FRAC)
         draw.rounded_rectangle([x0, y, x0 + box_w, y + box_h],
                                radius=raio, fill=(255, 255, 255, 255))
+        # pílula âmbar atrás de cada TRECHO em destaque (palavras vizinhas
+        # destacadas viram uma pílula só), desenhada antes do texto
+        x = x0 + pad_x - bbox[0]
+        espaco = fonte.getlength(" ")
+        trecho = None
+        for w in linha.split() + [None]:
+            if w is not None and limpa(w) in enf:
+                ww = fonte.getlength(w)
+                trecho = [trecho[0] if trecho else x, x + ww]
+                x += ww + espaco
+                continue
+            if trecho:
+                folga = corpo * 0.12
+                draw.rounded_rectangle([trecho[0] - folga, y + pad_y * 0.45,
+                                        trecho[1] + folga, y + box_h - pad_y * 0.45],
+                                       radius=round(corpo * 0.16), fill=TITULO_AMBAR)
+                trecho = None
+            if w is not None:
+                x += fonte.getlength(w) + espaco
         draw.text((x0 + pad_x - bbox[0], y + pad_y - bbox[1]), linha,
                    font=fonte, fill=(0, 0, 0, 255))
         y += box_h + gap

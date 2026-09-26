@@ -642,7 +642,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      "produto", "chamada",
                      # A/B do titulo na tela (25/09): sem isto no post.json o
                      # manifesto nao recebe o grupo e o teste nao se le'.
-                     "ab_titulo", "titulo_tela",
+                     "ab_titulo", "titulo_tela", "titulo_tela_curto",
                      "nota", "inicio_s", "fim_s", "duracao_s",
                      "tipo_conteudo", "emocao_dominante", "dinamica",
                      "genero_falante", "falantes",

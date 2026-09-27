@@ -93,12 +93,21 @@ c = {"titulo": LONGO}
 t = ab_titulo.aplicar(c, "x")
 checar(t == "China banida dos microchips" and c["titulo_tela_curto"] is True,
        f"A: {t!r}")
-ab_titulo.grupo = lambda f, i: "B"
-respostas["r"] = "Por que a China foi banida dos chips?"
+# ⭐ 27/09/2026: o B (pergunta) foi encerrado; o C e' a IDENTIFICACAO
+ab_titulo.grupo = lambda f, i: "C"
+respostas["r"] = "Quando voce acha que chip e' so' software"
 c = {"titulo": LONGO}
 t = ab_titulo.aplicar(c, "x")
-checar(t.endswith("?") and len(t) <= ab_titulo.MAX_CHARS + 5 and c["ab_titulo"] == "B",
-       f"B: pergunta curta {t!r}")
+checar(t.startswith("Quando voce") and c["ab_titulo"] == "C"
+       and c["titulo_tela_curto"] is True, f"C: identificacao {t!r}")
+respostas["r"] = "A China foi banida dos chips"          # nao nomeia a pessoa
+c = {"titulo": LONGO}
+ab_titulo.aplicar(c, "x")
+checar(c["ab_titulo"] == "C_falhou", "C sem 'Quando voce/Se voce' -> C_falhou, fora da conta")
+respostas["r"] = "Quando voce descobre por que a China foi banida?"
+c = {"titulo": LONGO}
+ab_titulo.aplicar(c, "x")
+checar(c["ab_titulo"] == "C_falhou", "C com '?' e' recusado")
 
 print("\n[6] NEGATIVO: modelo fora ou resposta longa -> fica o original, marcado")
 ab_titulo.grupo = lambda f, i: "A"

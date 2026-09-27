@@ -121,6 +121,16 @@ def enviar(arquivo: Path, pasta_pai_id: str, apagar_local: bool = False,
                        .execute().get("size", -1))
         local = arquivo.stat().st_size
         if no_drive == local:
+            # ⚠️ WINDOWS (27/09/2026): o MediaFileUpload segura o arquivo
+            # aberto, e o unlink dava PermissionError (WinError 32) — 5 brutos
+            # da Lista A subiram e ficaram no disco quase cheio. Fecha antes.
+            try:
+                media.stream().close()
+            except Exception:
+                pass
+            del media
+            import gc
+            gc.collect()
             arquivo.unlink()
             print(f"Copia local apagada ({local / 1e6:.0f} MB conferidos no Drive)")
         else:

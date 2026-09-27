@@ -51,6 +51,23 @@ def nova_legenda(canal: str, titulo: str, texto_antigo: str) -> str | None:
     return r or None
 
 
+# ⛔ 27/09/2026, simulacao do make: o post "O contorno da mandibula... estilo
+# Noze" ganhou uma legenda sobre a Rose' do BLACKPINK. Nome proprio do titulo
+# (a idol, o convidado) TEM de aparecer na legenda nova.
+_COMUNS = {"o", "a", "os", "as", "de", "da", "do", "e", "com", "para", "no", "na",
+           "que", "um", "uma", "como", "por", "seu", "sua", "este", "esta"}
+
+
+def fala_de_quem_o_titulo_fala(titulo: str, corpo: str) -> bool:
+    palavras = re.findall(r"[A-Za-zÀ-ÿ]+", titulo)
+    nomes = [w for i, w in enumerate(palavras)
+             if i > 0 and w[:1].isupper() and not w.isupper()
+             and _n(w) not in _COMUNS and len(w) > 2]
+    if not nomes:
+        return True
+    return any(_n(w) in _n(corpo) for w in nomes)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--canal", required=True)
@@ -73,9 +90,14 @@ def main() -> None:
             print(f"  [!] sem video no manifesto, pulado: {texto[:60]!r}")
             continue
         titulo = m["titulo"].strip()
-        corpo = nova_legenda(nome, titulo, texto[len(titulo):])
+        corpo = None
+        for _ in range(2):
+            corpo = nova_legenda(nome, titulo, texto[len(titulo):])
+            if corpo and fala_de_quem_o_titulo_fala(titulo, corpo):
+                break
+            corpo = None
         if not corpo:
-            print(f"  [!] legenda nao gerada, pulado: {titulo[:60]}")
+            print(f"  [!] legenda nao gerada ou fala de OUTRA pessoa, pulado: {titulo[:60]}")
             continue
         tags = " ".join(re.findall(r"#\w+", texto))
         novo = f"{titulo}\n\n{corpo}\n\n{tags}".strip()

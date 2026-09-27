@@ -21,21 +21,31 @@ OURO_A, OURO_B = (0xF2, 0xC9, 0x4C), (0xC8, 0x90, 0x1A)
 TINTA = (0x16, 0x15, 0x1C)
 
 
-def parte_do_tema(canal: str, nome: str) -> int:
-    """Quantas vezes o nome ja' apareceu em posts do canal, +1."""
-    arq = RAIZ / "desempenho.jsonl"
-    if not nome or not arq.exists():
+def parte_do_tema(canal: str, nome: str, usados: dict | None = None) -> int:
+    """Quantos clipes do canal ja' falaram deste nome, +1.
+
+    ⛔ 27/09/2026 (dono, prints: "ta' ficando tudo PARTE 3"). Contava pelo
+    `desempenho.jsonl`, que NAO e' atualizado a cada corte: todos os clipes de
+    um mesmo corte (e dos cortes seguintes) recebiam o MESMO numero. Agora
+    conta pelo `registro_clipes.json` (commitado depois de cada corte) e soma
+    dentro do proprio corte via `usados` (o 1o e' N, o 2o N+1...).
+    """
+    if not nome:
         return 1
     chave = nome.lower().replace(" ", "")
-    posts = set()
-    for linha in arq.read_text(encoding="utf-8").splitlines():
-        try:
-            d = json.loads(linha)
-        except ValueError:
-            continue
-        if d.get("canal") == canal and chave in (d.get("titulo") or "").lower().replace(" ", ""):
-            posts.add(d.get("post_id"))
-    return len(posts) + 1
+    n = 0
+    arq = RAIZ / "registro_clipes.json"
+    try:
+        reg = json.loads(arq.read_text(encoding="utf-8")).get("clipes") or {}
+    except (OSError, ValueError):
+        reg = {}
+    for v in reg.values():
+        if chave in str(v.get("titulo") or "").lower().replace(" ", ""):
+            n += 1
+    if usados is not None:
+        n = max(n, usados.get(chave, 0))
+        usados[chave] = n + 1
+    return n + 1
 
 
 def imagem(texto: str, largura: int) -> Image.Image:

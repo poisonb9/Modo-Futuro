@@ -290,6 +290,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     # ruim tem de virar uma publicacao, nao zero.
     falhas_de_clipe = []
     _series_usadas: dict[str, int] = {}   # engine/serie.py
+    _selos_usados: dict[str, int] = {}    # engine/selo.py (parte N do tema)
     for i, c in enumerate(clipes, 1):
         try:
             ini, fim = c["inicio_s"], c["fim_s"]
@@ -691,11 +692,14 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print(f"      faixa de legenda da fonte borrada: {c['_faixa_borrada']}")
                 # ⭐ 25/09: selo "NOME · PARTE N" quando o tema ja' apareceu no canal.
                 # Nome = 1a tag (regra de nomes da selecao). So' onde a camada liga.
-                if camada.ligado(_canal_cascata):
+                # ⛔ 27/09: com serie numerada no titulo (engine/serie.py) o selo
+                # seria uma SEGUNDA numeracao na tela — fica so' a da serie.
+                if camada.ligado(_canal_cascata) and not c.get("serie"):
                     _tags = c.get("tags") or []
                     _nome = (str(_tags[0]).strip().title() if _tags else "")
                     _parte = selo.parte_do_tema(
-                        canais_registro_canonico(_canal_cascata), _nome) if _nome else 1
+                        canais_registro_canonico(_canal_cascata), _nome,
+                        _selos_usados) if _nome else 1
                     if selo.aplicar_no_lugar(_v, _nome, _parte):
                         print(f"      selo da serie: {_nome} parte {_parte}")
                 if camada.aplicar_no_lugar(_v, _canal_cascata, _plat or "tiktok",

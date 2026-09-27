@@ -492,15 +492,32 @@
      envelhece calado e a pagina passa a mentir sozinha. */
   /* ⭐ O GRAFICO DA SERIE — a mesma conta do catalogo, na paleta da bio.
      Acessorio: 22px, traco fino. O produto continua sendo o principal. */
-  .serie { display: block; width: 100%; height: 22px; margin-top: 2px; }
-  .serie .linha {
-    fill: none; stroke: var(--tinta-fraca); stroke-width: 1.4;
-    stroke-linejoin: round; stroke-linecap: round; opacity: .7;
+  /* ⭐ 27/09/2026: o grafico e' o do site mae (todos.html), no peso da CAPA
+     da vitrine: 34 px, traco 2, area a 10%, ponto redondo, legenda com lupa. */
+  .produto { --fraco: var(--tinta-fraca); --verde: #16a34a; }
+  .serie-wrap { position: relative; margin-top: 8px; padding-right: 4px; }
+  .serie-wrap .escala {
+    display: flex; justify-content: flex-start; flex-wrap: nowrap; gap: 6px;
+    margin-top: 6px; align-items: center;
+    font: 400 0.6875rem/1.3 Poppins, sans-serif; color: var(--fraco);
+    font-variant-numeric: tabular-nums;
   }
-  .serie .agora { fill: var(--tinta-fraca); }
-  /* ⭐ Queda de 5% ou mais usa a cor do selo "caiu" — um dado, uma cor. */
-  .serie.baixou .linha { stroke: var(--acento); opacity: 1; }
-  .serie.baixou .agora { fill: var(--acento); }
+  .serie-wrap .escala svg { width: 13px; height: 13px; flex: 0 0 auto; opacity: .9; }
+  .serie-wrap .escala .nq { white-space: normal; text-wrap: balance; }
+  .serie-wrap .escala .nq.ok { color: var(--verde); font-weight: 600; }
+  .serie-wrap .agora {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--fraco); transform: translate(-50%, -50%); margin-left: -2px;
+  }
+  .serie-wrap.baixou .agora { background: var(--verde); }
+  .serie { display: block; width: 100%; height: 34px; }
+  .serie .area { fill: var(--fraco); opacity: .10; stroke: none; }
+  .serie.baixou .area { fill: var(--verde); opacity: .13; }
+  .serie .linha {
+    fill: none; stroke: var(--fraco); stroke-width: 2;
+    stroke-linejoin: round; stroke-linecap: round; opacity: .75;
+  }
+  .serie.baixou .linha { stroke: var(--verde); opacity: 1; }
   .foto { position: relative; }
   /* ⭐ SETORES (27/09/2026): atalhos por categoria + uma faixa por setor. */
   .areas {
@@ -1131,6 +1148,17 @@
   var atual = "achadinho.make";
   var mostrandoProdutos = true;
 
+  // ⭐ 27/09/2026 (dono: "os graficos exatamente como no produto da vitrine
+  // do site mae"): COPIADO de paginas/todos.html (vistoSVG, eixo, grafico,
+  // emReais, moeda). Mexer la' e aqui juntos -- duas versoes divergem.
+  function vistoSVG() {
+    var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("viewBox", "0 0 16 16");
+    s.setAttribute("aria-hidden", "true");
+    s.innerHTML = '<circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+      + '<path d="M5.4 8.2l1.9 1.9 3.4-3.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    return s;
+  }
   // ⭐ O GRAFICO DA SERIE — o desenho do preco que NOS vimos, dia a dia.
   //
   // ⚠️ A DECISAO QUE MAIS IMPORTA AQUI E' A ESCALA, e ela e' contra-intuitiva:
@@ -1143,30 +1171,133 @@
   // ⭐ Por isso o eixo tem PISO: ele cobre no minimo 10% do preco. Abaixo
   // disso a linha sai quase reta, que e' a verdade — o preco nao fez nada.
   // Quem tem queda real e' quem ocupa a altura toda.
-  var PISO_DO_EIXO = 0.10;
+  // ⭐ 22/09/2026 (Bryan: "eu quero microvariacoes, de hora em hora, tanto
+  // pra cima como pra baixo"): o piso era 10% e achatava toda variacao
+  // menor que isso numa linha RETA -- o "grafico reto" das capas. A 2% o
+  // sobe-e-desce horario aparece. O numero exato continua no <title> do
+  // grafico e na escala; o desenho mostra FORMA, nao tamanho.
+  var PISO_DO_EIXO = 0.02;
 
-  function grafico(p) {
+  // "09-13" (dia) ou "09-21 18:46" (hora) -> milissegundos. O dia vai ao
+  // meio-dia: ele e' o menor preco do dia inteiro, nao de um instante.
+  function momentoDoRotulo(r) {
+    var mm = /^(\d\d)-(\d\d)(?: (\d\d):(\d\d))?$/.exec(r || "");
+    if (!mm) { return NaN; }
+    return Date.UTC(2000, +mm[1] - 1, +mm[2], mm[3] ? +mm[3] : 12, mm[4] ? +mm[4] : 0);
+  }
+  // "09-21 18:46" -> "21/09 18:46" (antes saia "21 18:46/09").
+  function rotuloBonito(r) {
+    var mm = /^(\d\d)-(\d\d)(.*)$/.exec(r || "");
+    return mm ? mm[2] + "/" + mm[1] + mm[3] : r;
+  }
+
+  function grafico(p, empilhado) {
     var s = p.serie || [];
     // ⛔ Menos de 3 pontos nao vira linha. Quem decide isso e' o publicador
     // (`_serie_curta`), e aqui a guarda se repete: pagina antiga com dado
     // novo, ou o contrario, nao pode desenhar segmento nenhum.
     if (s.length < 3) { return null; }
 
+    // ⭐ O GRAFICO COMECA NO PICO quando ha' queda (22/09/2026). Bryan:
+    // "ele era 80,51 e esta' 77,09 -- como o grafico nao comeca nos 80,51?"
+    // O riscado e' o MAIOR preco que eu vi, e a linha comecava no PRIMEIRO
+    // dia (mais barato), subia e so' depois caia: o desenho nao conversava
+    // com o numero ao lado dele. Agora a janela e' a da queda -- do pico ate'
+    // hoje, variando no caminho. Dado inteiro verdadeiro; muda a janela.
+    // ⚠ So' com queda (riscado > preco de hoje) e se sobrarem 3+ pontos;
+    // produto que subiu ou esta' parado continua com a serie inteira.
+    // ⛔ O "MENOR QUE EU VI" E' DA SERIE INTEIRA, nao da janela cortada:
+    // os dias baratos ANTES do pico continuam sendo o menor que eu vi.
+    var menorVisto = Math.min.apply(null, s.map(function (x) { return x[1]; }));
+    // ⭐ PRECO ESTAVEL (22/09/2026): o Coador do ML ficou R$ 13,44 em TODOS
+    // os dias e a legenda dizia, em verde, "menor que eu vi ✓" -- verdade
+    // tecnica, mas e' tambem o MAIOR que eu vi. Serie sem variacao diz so'
+    // "preco estavel", sem veredito e sem verde.
+    var maiorVisto = Math.max.apply(null, s.map(function (x) { return x[1]; }));
+    var estavel = maiorVisto - menorVisto < 0.01;
+    var refAntes = emReais(p.antes), refHoje = emReais(p.preco);
+    if (refAntes && refHoje && refAntes > refHoje) {
+      var iPico = 0;
+      for (var kp = 1; kp < s.length; kp++) {
+        if (s[kp][1] > s[iPico][1]) { iPico = kp; }
+      }
+      if (s.length - iPico >= 3) { s = s.slice(iPico); }
+    }
+
     var vals = s.map(function (x) { return x[1]; });
     var menor = Math.min.apply(null, vals);
     var maior = Math.max.apply(null, vals);
-    var faixa = Math.max(maior - menor, maior * PISO_DO_EIXO);
-    // centraliza a serie dentro da faixa minima
-    var meio = (maior + menor) / 2;
-    var topo = meio + faixa / 2;
+
+    // ⭐ O MODO GANHO: a linha deixa de ser PRECO e passa a ser ECONOMIA.
+    // Pedido do Bryan em 21/09/2026: "eu quero ele de cabeca pra baixo para
+    // mostrar que a queda e' positiva em favor do nosso cliente".
+    //
+    // ⛔ E EU NAO INVERTI O EIXO DO PRECO, que era o pedido ao pe' da letra.
+    // Eixo de preco virado desenha a linha subindo enquanto o preco cai, sem
+    // nada dizendo isso -- e' o grafico invertido classico, o truque de fazer
+    // crime caindo virar crime subindo. Seria a mesma familia do "a pagina
+    // passa a mentir sozinha" que este arquivo inteiro combate, e bastava um
+    // print ao lado da serie para a gente perder a unica coisa que nos
+    // diferencia: o dado ser nosso E ser verdadeiro.
+    //
+    // ⭐ Trocar O QUE e' plotado da a MESMA imagem, honesta. A referencia e'
+    // o preco riscado (`ganhoRef`, o mesmo numero do <s> e do "voce economiza
+    // R$ X" logo acima), e cada ponto vira `ref - preco`:
+    //
+    //   preco     11,79 11,99 11,89  19,73 19,61 11,89   desce no fim
+    //   economia   7,94  7,74  7,84   0,00  0,12  7,84   SOBE no fim
+    //
+    // A linha termina EXATAMENTE no valor verde que esta' acima dela: o texto
+    // diz o numero, a linha mostra ele crescendo. Uma coisa so'.
+    //
+    // ⚠️ A BASE E' ZERO, e nao o menor da serie. Economia zero e' um fato --
+    // significa "hoje nao ha' ganho" -- e ancorar no zero mantem a defesa do
+    // PISO_DO_EIXO de graca: ganho pequeno desenha pequeno. Se a base fosse
+    // o minimo da serie, R$ 0,10 de economia encheria a altura do cartao.
+    var ganho = null;
+    if (p.ganhoRef > 0) {
+      ganho = vals.map(function (v) { return Math.max(p.ganhoRef - v, 0); });
+      var gMax = Math.max.apply(null, ganho);
+      // ⚠️ Ganho zero em toda a serie nao vira linha reta no chao: cai fora
+      // do modo e o grafico volta a ser de preco, que ao menos diz algo.
+      if (gMax <= 0.005) { ganho = null; }
+    }
+
+    // ⛔ `vals` NAO E' REATRIBUIDO -- e este comentario e' um defeito MEDIDO,
+    // nao precaucao. A primeira versao deste bloco fazia `vals = ganho`, e la'
+    // embaixo a escala le' `var pAgora = vals[vals.length - 1]` para decidir o
+    // selo "menor que eu vi". Com `vals` trocado, a conta virou
+    // "economia 7,84 <= menor PRECO 11,79" -- verdadeira sempre.
+    //
+    // ⚠️ MEDIDO na capa de 21/09: o cartao exibia "menor que eu vi ✓" com
+    // hoje a R$ 11,89 e o menor visto a R$ 11,79. A pagina mentindo, pelo
+    // caminho que este arquivo inteiro existe para fechar -- e o erro caia
+    // A NOSSO FAVOR, que e' o lado que ninguem reclama e por isso ninguem
+    // confere. Por isso o desenho tem vetor PROPRIO e o preco fica intacto.
+    var desenho = vals;
+    var faixa, topo;
+    if (ganho) {
+      desenho = ganho;
+      // ⚠️ FOLGA DE 12% NO TOPO. Sem ela `topo` e' o proprio maximo e o
+      // ponto mais alto cai em y = m, colado na borda de cima: medido a 430
+      // px, 3 dos 5 pontos ficaram a 2,0-2,5 de 22 e o traco leu como a
+      // BORDA do cartao, nao como dado. A folga nao mexe na proporcao com o
+      // zero -- a base continua sendo zero, que e' o que mantem a leitura
+      // honesta "quanto disto e' ganho".
+      faixa = topo = Math.max.apply(null, ganho) * 1.12;
+    } else {
+      faixa = Math.max(maior - menor, maior * PISO_DO_EIXO);
+      // centraliza a serie dentro da faixa minima
+      var meio = (maior + menor) / 2;
+      topo = meio + faixa / 2;
+    }
 
     var L = 100, A = 22, m = 2;
-    // ⭐ EIXO X POR TEMPO (22/09/2026) -- o mesmo do irmao (todos.html):
-    // a serie emenda dias e horas, e por indice os dias ficariam espremidos.
-    var tempos = s.map(function (x) {
-      var mm = /^(\d\d)-(\d\d)(?: (\d\d):(\d\d))?$/.exec(x[0] || "");
-      return mm ? Date.UTC(2000, +mm[1] - 1, +mm[2], mm[3] ? +mm[3] : 12, mm[4] ? +mm[4] : 0) : NaN;
-    });
+    // ⭐ EIXO X POR TEMPO (22/09/2026). A serie agora emenda dias ("09-13")
+    // com horas ("09-21 18:46"); por INDICE, 8 dias ficariam espremidos no
+    // canto esquerdo de 93 horas. Rotulo que nao parse, ou tempo fora de
+    // ordem (virada de ano), volta ao eixo por indice -- nunca desenho torto.
+    var tempos = s.map(function (x) { return momentoDoRotulo(x[0]); });
     var t0 = tempos[0], tN = tempos[tempos.length - 1];
     var porTempo = tN > t0 && tempos.every(function (tt, i) {
       return !isNaN(tt) && (i === 0 || tt >= tempos[i - 1]);
@@ -1175,7 +1306,9 @@
       var px = s.length === 1 ? L / 2
              : porTempo ? (tempos[i] - t0) / (tN - t0) * L
              : (i / (s.length - 1)) * L;
-      var py = m + (topo - x[1]) / faixa * (A - 2 * m);
+      // ⚠️ `vals[i]`, e nao `x[1]`: no modo ganho `vals` ja' foi trocado
+      // pela economia. Ler x[1] aqui desenhava preco com escala de ganho.
+      var py = m + (topo - desenho[i]) / faixa * (A - 2 * m);
       return [px, py];
     });
 
@@ -1188,11 +1321,51 @@
     // ⭐ Caiu de verdade = verde; o resto e' cinza. O limiar e' o MESMO 5%
     // que o selo "caiu X%" usa — duas leituras diferentes do mesmo dado na
     // mesma pagina e' como nasce "o grafico diz uma coisa e o selo, outra".
-    svg.setAttribute("class", "serie" + ((p.queda || 0) >= 5 ? " baixou" : ""));
+    // ⭐ A COR SEGUE A LINHA (22/09/2026, Bryan: "os produtos com queda
+    // eu quero o grafico verde; os que subiram ou estao no mesmo preco de
+    // quando comecamos, cinza"). Antes era `queda >= 5%` contra o MAIOR ja'
+    // visto -- um produto podia subir no desenho e sair verde. Agora e' o
+    // que o olho le': a linha termina ABAIXO de onde comeca (1 centavo ja'
+    // conta) = verde. Com queda, a linha ja' comeca no pico, entao os
+    // dois criterios concordam ali.
+    var desceu = vals[vals.length - 1] < vals[0] - 0.005;
+    svg.setAttribute("class", "serie" + (desceu ? " baixou" : ""));
 
-    var d = pts.map(function (q, i) {
-      return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1);
-    }).join(" ");
+    var d;
+    if (p.suave) {
+      // ⭐ CURVA SUAVE (Catmull-Rom -> Bezier) so' pro multometro: 4 pontos
+      // diarios em reta pareciam regua (Bryan pediu "menos linear"). A curva
+      // passa EXATAMENTE pelos mesmos pontos — muda o traco, nao o dado.
+      d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
+      for (var k = 0; k < pts.length - 1; k++) {
+        var p0 = pts[Math.max(k - 1, 0)], p1 = pts[k],
+            p2 = pts[k + 1], p3 = pts[Math.min(k + 2, pts.length - 1)];
+        var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+        var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+        d += " C" + c1x.toFixed(1) + " " + c1y.toFixed(1) + " " + c2x.toFixed(1) +
+             " " + c2y.toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1);
+      }
+      // (a area saiu daqui: ver o bloco logo apos o `if`)
+      // ⚠️ SEM bolinhas por dia: o SVG e' esticado sem proporcao e o circulo
+      // vira elipse disforme (Bryan viu, 16/09). A cadencia dos dias ja'
+      // aparece na propria curva — dia que cresce mais inclina mais.
+    } else {
+      d = pts.map(function (q, i) {
+        return (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1);
+      }).join(" ");
+    }
+    // ⭐ A AREA VALE PARA TODO GRAFICO, e nao so' para o multometro.
+    // Ela existia desde sempre, presa dentro do `if (p.suave)` -- ou seja,
+    // so' o multometro a desenhava. No cartao da capa a linha de 1,4 px
+    // sozinha lia como um RISCO atravessando o cartao, nao como um dado.
+    // ⚠ O `d` usado aqui e' o MESMO da linha, nos dois ramos (curva suave
+    // ou reta): a area fecha a curva ate' a base. Ela nao acrescenta
+    // informacao nenhuma -- da' corpo ao que ja' esta' desenhado.
+    var area = document.createElementNS(NS, "path");
+    area.setAttribute("d", d + " L" + pts[pts.length - 1][0].toFixed(1) + " " + A +
+                           " L" + pts[0][0].toFixed(1) + " " + A + " Z");
+    area.setAttribute("class", "area");
+    svg.appendChild(area);
     var linha = document.createElementNS(NS, "path");
     linha.setAttribute("d", d);
     linha.setAttribute("class", "linha");
@@ -1201,25 +1374,152 @@
     linha.setAttribute("vector-effect", "non-scaling-stroke");
     svg.appendChild(linha);
 
-    var fim = document.createElementNS(NS, "circle");
-    fim.setAttribute("cx", pts[pts.length - 1][0].toFixed(1));
-    fim.setAttribute("cy", pts[pts.length - 1][1].toFixed(1));
-    fim.setAttribute("r", "2.2");
-    fim.setAttribute("class", "agora");
-    fim.setAttribute("vector-effect", "non-scaling-stroke");
-    svg.appendChild(fim);
+    // ⛔ O PONTO "AGORA" NAO E' MAIS UM <circle>: com preserveAspectRatio=none
+    // o SVG e' esticado e o circulo virava elipse, e na borda direita saia
+    // cortado (Bryan viu os dois em 16/09). Agora e' um <span> redondo de
+    // verdade, posicionado por porcentagem dentro do involucro — e o
+    // involucro tem folga a` direita pra ele nunca ser cortado.
+    var ult = pts[pts.length - 1];
+    var ponto = document.createElement("span");
+    ponto.className = "agora";
+    ponto.style.left = (ult[0] / L * 100).toFixed(1) + "%";
+    ponto.style.top = (ult[1] / A * 100).toFixed(1) + "%";
 
     // ⭐ O QUE O DESENHO ESCONDE, EM TEXTO. A linha mostra a forma; o titulo
     // devolve os numeros exatos, que e' o que sustenta a promessa da pagina.
     var t = document.createElementNS(NS, "title");
-    t.textContent = s.map(function (x) {
-      return x[0].replace(/^(\d\d)-(\d\d)/, "$2/$1") + " R$ " +
-             x[1].toFixed(2).replace(".", ",");
+    // ⚠️ O TITULO SEGUE O QUE FOI DESENHADO. Ele e' a prova em texto do
+    // que a linha mostra; deixar preco num desenho de economia era a
+    // divergencia entre o dado e a tinta, por dentro.
+    t.textContent = s.map(function (x, i) {
+      return rotuloBonito(x[0]) + " " +
+             (ganho ? "economia R$ " : "R$ ") +
+             desenho[i].toFixed(2).replace(".", ",");
     }).join(" · ");
     svg.appendChild(t);
-    return svg;
+    var wrap = document.createElement("div");
+    wrap.className = "serie-wrap" + (desceu ? " baixou" : "")
+                   + (ganho ? " ganho" : "");
+    wrap.appendChild(svg);
+    wrap.appendChild(ponto);
+    // ⭐ A ESCALA DO GRAFICO (Bryan, 18/09: "vale mostrar ha' quantos dias e'
+    // acompanhado?"): so' aqui, colado a` linha, o numero de dias explica a
+    // queda ("caiu 47%" — em quanto tempo?). Solto no cartao era telemetria.
+    // ⭐ 18/09 (Bryan: "nao gostei da bolinha"): a bolinha so' dizia "esta
+    // ponta e' hoje" — e dizia mal. O eixo escrito diz melhor: "ha' N dias"
+    // numa ponta, "hoje" na outra. Sem ponto solto.
+    if (!p.suave) {
+      ponto.remove();
+      var esc = el("div", "escala");
+      // ⭐ 18/09 (Bryan: "'hoje' ali nao faz sentido"): a ponta esquerda diz
+      // de onde a linha partiu (o preco de ha' N dias); a direita da' o
+      // VEREDITO — "menor que eu vi" quando o preco de agora e' o piso da
+      // serie, senao quanto ainda esta' acima do piso. Preco nunca quebra linha.
+      // ⛔ PRECO, e nunca `desenho`: no modo ganho `desenho` e' a economia,
+      // e comparar economia com `menor` (que e' preco) da' "menor que eu vi"
+      // sempre verdadeiro. Foi o defeito de 21/09, medido no cartao.
+      var pAgora = vals[vals.length - 1];
+      // 19/09 (Bryan): o preco de "ha N dias" e' redundante com o riscado — sai
+      // 19/09 (Bryan): UMA linha. Nao e' "desconto" — e' quanto o preco de
+      // hoje esta' ACIMA do menor que eu vi; dizer desconto seria mentir.
+      var noMenor = pAgora <= menorVisto + 0.005;
+      // 19/09 (Bryan): "ha N dias rastreando este produto"; o "acima do
+      // menor" ja' esta' dito na linha "espere — ja' esteve a". So' o
+      // veredito bom entra, quando ha': "menor que eu vi ✓".
+      // ⭐ QUANDO NAO E' O PISO, A DISTANCIA ATE' ELE (Bryan, 21/09: "nao e'
+      // o menor, para nao tirar isso, o que poderiamos colocar no lugar").
+      //
+      // ⛔ E NAO "caminhando para o menor preco", que foi a primeira ideia.
+      // Isso afirma TENDENCIA, e a serie nao tem. A da capa de hoje e'
+      // 11,79 -> 11,99 -> 11,89 -> 19,73 -> 11,89: subiu, despencou e ficou
+      // parada. A frase sairia igual num produto que SUBIU hoje, desde que
+      // esteja perto do piso -- a pagina afirmando uma direcao que o dado
+      // nao tem, que e' a mesma familia do eixo de preco invertido.
+      // A DISTANCIA nao e' tendencia: e' uma subtracao, e ela e' verdadeira
+      // em qualquer serie.
+      //
+      // ⚠️ O LIMIAR DE 3% E' MEDIDO, nos 147 produtos com serie de 3+ pontos:
+      //
+      //   no piso (hoje E' o menor) ...  22 produtos   15%
+      //   folga <= 1% ................   38            26%
+      //   folga <= 3% ................   63            43%   <- aqui
+      //   folga <= 5% ................   79            54%
+      //   mediana da folga ...........  3,58%
+      //
+      // Na mediana do catalogo (R$ 38,79) 3% e' R$ 1,16 -- ainda le' como
+      // "praticamente o piso". Acima disso a frase se vira contra nos:
+      // "a R$ 12,00 do menor que eu vi" e' argumento para ESPERAR, nao para
+      // comprar, e ai' o silencio de hoje e' melhor. Com o limiar, 43% dos
+      // cartoes dizem algo, contra 15% antes.
+      var folga = pAgora - menorVisto;
+      var perto = !noMenor && menorVisto > 0 && folga / menorVisto <= 0.03;
+      // ⚠ " ·" prende o separador na palavra ANTES dele: quando a
+      // frase quebra, a segunda linha nunca comeca com "·" (print do Bryan,
+      // Coador do ML, 22/09).
+      var veredito = estavel ? ""
+                   : noMenor ? " · menor que eu vi ✓"
+                   : perto ? " · " + moeda(folga) + " do menor preço"
+                   : "";
+      // ⭐ 22/09/2026 (Bryan): produto que entrou hoje tem linha quase reta
+      // porque tem poucas horas de leitura -- e a pessoa precisa saber
+      // POR QUE. "novo" explica; "rastreando ha 0 dias" nao.
+      var idade = (p.dias || 0) <= 0 ? "novo · acompanhando desde hoje"
+                : estavel ? (p.dias === 1 ? "preço estável há 1 dia"
+                                          : "preço estável há " + p.dias + " dias")
+                : p.dias === 1 ? "rastreando há 1 dia"
+                : "rastreando há " + p.dias + " dias";
+      // ⭐ VERDE SO' SE A LINHA TAMBEM E' VERDE: texto verde embaixo de
+      // linha cinza e' o cartao dizendo duas coisas (Coador, 22/09).
+      // ⭐ 22/09/2026 (Bryan): na GRADE as duas frases viram duas linhas
+      // inteiras -- "rastreando ha 10 dias" e "a R$ 0,98 do menor preco" --
+      // em vez de quebrar no meio ("a R$ 0,98 / do menor preco"). Na capa
+      // elas continuam numa linha so', que e' onde cabem.
+      var classe = "nq" + (noMenor && desceu && !estavel ? " ok" : "");
+      // ⭐ 23/09/2026 (Bryan: "coloca o simbolo no rastreando ha X dias
+      // tambem"): na GRADE (`empilhado` truthy) esta linha nao tinha
+      // NENHUM icone -- so' a capa ganhava a lupa (inserida por fora,
+      // `escL.insertBefore`). Mesmo check reusado (`vistoSVG()`).
+      // ⛔ 23/09/2026 (Bryan, print: "a R$ 4,59 do menor ficou sem o
+      // icone"): eu tinha posto so' na PRIMEIRA linha, achando que a
+      // segunda era continuacao da mesma frase -- mas empilhada ela le'
+      // como LINHA PROPRIA (o Bryan ja' tinha pedido "duas linhas
+      // inteiras", 22/09), e uma sem dono destoa das vizinhas que ja'
+      // tem. As DUAS ganham o check quando empilhadas.
+      // ⛔ 23/09/2026 (Bryan: "porque esse rastreando esta verde e o do
+      // anuncio do lado nao esta? acho que pode ficar sem ser verde
+      // mesmo"): linha1 ("rastreando ha X dias") herdava o MESMO `classe`
+      // (com " ok") da linha2 -- as duas viravam verdes juntas quando o
+      // produto batia o piso. Mas o verde e' o VEREDITO ("menor que eu
+      // vi"), nao a idade do rastreamento; linha1 fica sempre neutra,
+      // so' linha2 carrega o " ok" condicional.
+      var linha1 = empilhado ? el("span", "nq tem-icone") : el("span", classe);
+      if (empilhado) { linha1.appendChild(vistoSVG()); }
+      if (empilhado && veredito) {
+        esc.classList.add("empilhada");
+        linha1.appendChild(document.createTextNode(idade));
+        esc.appendChild(linha1);
+        var linha2 = el("span", classe + " tem-icone");
+        linha2.appendChild(vistoSVG());
+        linha2.appendChild(document.createTextNode(veredito.replace(/^\u00a0·\s*/, "")));
+        esc.appendChild(linha2);
+      } else {
+        linha1.appendChild(document.createTextNode(idade + veredito));
+        esc.appendChild(linha1);
+      }
+      wrap.appendChild(esc);
+    }
+    return wrap;
   }
-
+  function emReais(s) {
+    var t = String(s || "").replace(/[^0-9,.]/g, "").replace(/\./g, "").replace(",", ".");
+    var v = parseFloat(t);
+    return isFinite(v) ? v : null;
+  }
+  // ⚠ ESPACO DURO ( ) entre "R$" e o numero: com a escala do grafico
+  // quebrando linha (22/09/2026), um espaco comum deixaria "R$" numa linha e
+  // "0,02" na outra -- o defeito que o Bryan pegou em 18/09. `emReais` ignora
+  // tudo que nao e' digito, entao a leitura de volta nao muda.
+  function moeda(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
   function el(tag, classe, texto) {
     var e = document.createElement(tag);
     if (classe) e.className = classe;
@@ -1542,7 +1842,20 @@
     // ⭐ O grafico entra DEPOIS do preco: ele explica o numero que acabou
     // de ser lido. Volta `null` quando nao ha' 3 pontos — ver `grafico`.
     var gr = grafico(p);
-    if (gr) { corpo.appendChild(gr); }
+    if (gr) {
+      // ⭐ a lupa da' dono a' legenda, igual a' capa do site mae
+      var escL = gr.querySelector(".escala");
+      if (escL) {
+        escL.classList.add("meta-linha");
+        var lupa = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        lupa.setAttribute("viewBox", "0 0 16 16");
+        lupa.setAttribute("aria-hidden", "true");
+        lupa.innerHTML = '<circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+          + '<path d="M10.4 10.4L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>';
+        escL.insertBefore(lupa, escL.firstChild);
+      }
+      corpo.appendChild(gr);
+    }
     // A data anda colada no preco. E' a regra do engine/produto.py na tela.
     // ⚠️ "PRECO ACOMPANHADO", e nao "preco visto".
     //
@@ -1563,7 +1876,9 @@
     // ⚠️ A MESMA CONDICAO DO SELO, e nao uma parecida. Ate' agora o selo
     // usava `pontos` e o rodape usava `pontos && dias`; num produto sem
     // `dias` o cartao saiu hibrido — rodape de novidade e nenhum selo.
-    if (!eNovo) {
+    if (gr) {
+      // a legenda do grafico ja' diz "rastreando ha' N dias" -- sem rodape
+    } else if (!eNovo) {
       var ac = el("div", "acompanha");
       ac.appendChild(el("span", "pulso"));
       var quanto = p.dias <= 0

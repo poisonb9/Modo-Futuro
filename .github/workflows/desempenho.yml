@@ -121,8 +121,11 @@ jobs:
             echo "[!] nenhum dos arquivos de medicao existe — nada a guardar"
             exit 0
           fi
-          if ! git diff --quiet $ALVOS 2>/dev/null; then
-            git add $ALVOS
+          # ⚠️ `git diff` NAO enxerga arquivo NOVO (nunca commitado): a lista
+          # mestre nasceu em 27/09 e o passo dizia "sem leitura nova". Adiciona
+          # primeiro e compara o que ficou em stage.
+          git add $ALVOS
+          if ! git diff --cached --quiet; then
             git commit -m "desempenho: foto das views + registro de publicados"
             # ⚠️ O cron da fila commita no mesmo repo. Sem o rebase, duas
             # escritas na mesma hora derrubam uma das duas.

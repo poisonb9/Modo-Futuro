@@ -180,3 +180,7 @@ estado/precos_horas.jsonl
 
 # contatos e rascunhos com dado pessoal (LGPD) -- nunca no repositorio
 _privado/
+# ⭐ 27/09/2026: medicao por canal e a LISTA MESTRE voltam do runner
+!estado/desempenho_por_canal.json
+!estado/lista_mestre.json
+!estado/LISTA_MESTRE.csv

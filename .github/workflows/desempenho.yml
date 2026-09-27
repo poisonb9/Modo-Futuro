@@ -107,7 +107,7 @@ jobs:
           # e' o mesmo padrao que segurou a cozinha em zero por seis dias:
           # um passo acessorio derrubando o que era produto.
           ALVOS=""
-          for f in desempenho.jsonl estado/publicados.json estado/serie_views.jsonl; do
+          for f in desempenho.jsonl estado/publicados.json estado/serie_views.jsonl estado/desempenho_por_canal.json; do
             [ -e "$f" ] && ALVOS="$ALVOS $f"
           done
           if [ -z "$ALVOS" ]; then

@@ -79,7 +79,7 @@ def puxar(token: str, teto_paginas: int = 8,
     return saida
 
 
-def gravar(posts: list[dict]) -> tuple[int, int]:
+def gravar(posts: list[dict], canal: str = "") -> tuple[int, int]:
     pub = _ler_publicados()
     novos = 0
     agora = datetime.datetime.now(datetime.timezone.utc).isoformat()[:19]
@@ -93,11 +93,16 @@ def gravar(posts: list[dict]) -> tuple[int, int]:
             pub[chave] = {"titulo": texto.split("#")[0].strip()[:80],
                           "sentAt": p.get("sentAt")}
             novos += 1
+        # ⭐ 27/09/2026 (dono: "medir cada canal separado dos outros"). O
+        # post vem do Buffer JA' filtrado por canal — e' so' nao jogar fora.
+        if canal and not pub[chave].get("canal"):
+            pub[chave]["canal"] = canal
         v = {m["name"]: m["value"] for m in (p.get("metrics") or [])}
         confiavel = bool(p.get("metricsUpdatedAt") and p.get("sentAt")
                          and p["metricsUpdatedAt"] > p["sentAt"])
         linhas.append(json.dumps({
-            "quando": agora, "chave": chave, "sentAt": p.get("sentAt"),
+            "quando": agora, "chave": chave, "canal": canal,
+            "sentAt": p.get("sentAt"),
             "views": v.get("Views", 0), "reacoes": v.get("Reactions", 0),
             "comentarios": v.get("Comments", 0), "shares": v.get("Shares", 0),
             "confiavel": confiavel}, ensure_ascii=False))
@@ -170,6 +175,7 @@ def main() -> None:
     a = p.parse_args()
     if a.crescimento:
         crescimento()
+        por_canal()
         return
     # ⚠️ TODOS OS CANAIS, nao so' o @modofuturo.
     #
@@ -200,7 +206,7 @@ def main() -> None:
         except Exception as e:
             print(f"  [!] {nome}: falhou ({str(e)[:60]}) — NAO conferido")
             continue
-        novos, n = gravar(posts)
+        novos, n = gravar(posts, canal=nome)
         total_lidos += n
         total_novos += novos
         print(f"  {nome:20} {n:4} post(s) lidos, {novos} novo(s) no registro")
@@ -209,6 +215,73 @@ def main() -> None:
           f"novos no registro.")
     print(f"registro: {len(_ler_publicados())} textos ja' publicados (dedup offline)")
     crescimento()
+    por_canal()
+
+
+PAINEL = RAIZ / "estado" / "desempenho_por_canal.json"
+
+
+def por_canal(dias: int = 7) -> dict:
+    """O painel POR CANAL: a ultima leitura CONFIAVEL de cada post, somada
+    por canal (total e ultimos `dias`). Grava `estado/desempenho_por_canal.json`.
+
+    ⭐ 27/09/2026 (dono). O canal vem da leitura (desde hoje) ou, para a serie
+    antiga que nao tinha o campo, do `publicados.json` — que ganha o canal na
+    primeira passada nova, porque o Buffer devolve as ultimas paginas de cada
+    canal. Post sem canal conhecido fica em "(sem canal)", nunca somado a outro.
+    ⚠️ Leitura nao confiavel (Buffer sem metrica) NAO entra como zero.
+    """
+    import statistics
+    if not SERIE.exists():
+        return {}
+    pub = _ler_publicados()
+    ult: dict[str, dict] = {}
+    for linha in SERIE.read_text(encoding="utf-8").splitlines():
+        if not linha.strip():
+            continue
+        d = json.loads(linha)
+        if not d.get("confiavel"):
+            continue
+        if d["chave"] not in ult or d["quando"] >= ult[d["chave"]]["quando"]:
+            ult[d["chave"]] = d
+    agora = datetime.datetime.now(datetime.timezone.utc)
+    corte = (agora - datetime.timedelta(days=dias)).isoformat()[:19]
+    canais: dict[str, dict] = {}
+    for chave, d in ult.items():
+        canal = d.get("canal") or pub.get(chave, {}).get("canal") or "(sem canal)"
+        c = canais.setdefault(canal, {"posts": 0, "views": 0, "reacoes": 0,
+                                      "comentarios": 0, "shares": 0,
+                                      "_v": [], "_rec": []})
+        c["posts"] += 1
+        for k in ("views", "reacoes", "comentarios", "shares"):
+            c[k] += int(d.get(k) or 0)
+        c["_v"].append(int(d.get("views") or 0))
+        if (d.get("sentAt") or "")[:19] >= corte:
+            c["_rec"].append((int(d.get("views") or 0),
+                              pub.get(chave, {}).get("titulo", chave)[:60]))
+    saida = {"medido_em": agora.isoformat()[:19], "janela_dias": dias,
+             "canais": {}}
+    print(f"\n{'canal':22s} {'posts':>5s} {'views':>8s} {'mediana':>8s} "
+          f"{'eng%':>5s} {'ult.' + str(dias) + 'd':>7s} {'views ' + str(dias) + 'd':>8s}")
+    for canal, c in sorted(canais.items(), key=lambda x: -x[1]["views"]):
+        eng = ((c["reacoes"] + c["comentarios"] + c["shares"]) / c["views"] * 100
+               if c["views"] else 0.0)
+        rec = sorted(c["_rec"], reverse=True)
+        saida["canais"][canal] = {
+            "posts": c["posts"], "views": c["views"],
+            "mediana_views": int(statistics.median(c["_v"])) if c["_v"] else 0,
+            "reacoes": c["reacoes"], "comentarios": c["comentarios"],
+            "shares": c["shares"], "engajamento_pct": round(eng, 2),
+            "posts_recentes": len(rec),
+            "views_recentes": sum(v for v, _ in rec),
+            "melhores_recentes": [{"views": v, "titulo": t} for v, t in rec[:3]],
+        }
+        r = saida["canais"][canal]
+        print(f"{canal:22s} {r['posts']:5d} {r['views']:8d} {r['mediana_views']:8d} "
+              f"{r['engajamento_pct']:5.1f} {r['posts_recentes']:7d} {r['views_recentes']:8d}")
+    PAINEL.write_text(json.dumps(saida, ensure_ascii=False, indent=2),
+                      encoding="utf-8")
+    return saida
 
 
 if __name__ == "__main__":

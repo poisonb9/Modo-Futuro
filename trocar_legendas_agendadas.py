@@ -72,6 +72,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--canal", required=True)
     ap.add_argument("--simular", action="store_true")
+    ap.add_argument("--id", help="so' este post do Buffer")
+    ap.add_argument("--texto", help="com --id: o CORPO da legenda escrito a mao")
     a = ap.parse_args()
     nome = canais_registro.canonico(a.canal)
     c = canais_registro.CANAIS[nome]
@@ -80,6 +82,8 @@ def main() -> None:
     manif = ab.manifesto(ab._token_github(), None)
     por_titulo = {_n(m.get("titulo")): m for m in manif.values() if m.get("titulo")}
     posts = agendados(token, c.org, c.canal_id)
+    if a.id:
+        posts = [p for p in posts if p["id"] == a.id]
     print(f"{nome}: {len(posts)} agendado(s)")
     trocados = 0
     for p in posts:
@@ -90,12 +94,14 @@ def main() -> None:
             print(f"  [!] sem video no manifesto, pulado: {texto[:60]!r}")
             continue
         titulo = m["titulo"].strip()
-        corpo = None
-        for _ in range(2):
+        corpo = a.texto.replace("\\n", "\n") if a.texto else None
+        for _ in range(0 if corpo else 2):
             corpo = nova_legenda(nome, titulo, texto[len(titulo):])
             if corpo and fala_de_quem_o_titulo_fala(titulo, corpo):
                 break
             corpo = None
+        if not corpo and a.texto:
+            corpo = a.texto
         if not corpo:
             print(f"  [!] legenda nao gerada ou fala de OUTRA pessoa, pulado: {titulo[:60]}")
             continue

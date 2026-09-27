@@ -10,6 +10,12 @@ on:
       simular:
         description: "true = so' mostra o antes/depois"
         default: "true"
+      id:
+        description: "(opcional) so' este post do Buffer"
+        default: ""
+      texto:
+        description: "(opcional, com id) corpo da legenda; use \n para quebrar linha"
+        default: ""
 jobs:
   trocar:
     runs-on: ubuntu-latest
@@ -59,4 +65,7 @@ jobs:
           GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
         run: |
           if [ "${{ inputs.simular }}" = "true" ]; then S=--simular; else S=; fi
-          python -X utf8 trocar_legendas_agendadas.py --canal "${{ inputs.canal }}" $S
+          EXTRA=()
+          [ -n "${{ inputs.id }}" ] && EXTRA+=(--id "${{ inputs.id }}")
+          [ -n "${{ inputs.texto }}" ] && EXTRA+=(--texto "${{ inputs.texto }}")
+          python -X utf8 trocar_legendas_agendadas.py --canal "${{ inputs.canal }}" $S "${EXTRA[@]}"

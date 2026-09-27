@@ -159,7 +159,14 @@ NUCLEO = [
 
 # Vizinhos que a busca traz e o canal nao cobre.
 FORA_DO_TEMA = ["crypto", "bitcoin", "mining rig", "gaming setup",
-                "unboxing", "phone review", "laptop review", "buy now"]
+                "unboxing", "phone review", "laptop review", "buy now",
+                # ⚠️ 27/09/2026: "Lay's Potato Chips", "Pringles" e "Jackfruit
+                # Chips" chegaram ao topo do radar (notas 80-81) — "chip" esta'
+                # no NUCLEO e casa com salgadinho. O veto de 08/09 pegou comida
+                # SEM a palavra chip; estes a tinham.
+                "potato", "pringles", "lay's", "lays ", "jackfruit", "snack",
+                "crisps", "tortilla", "banana chip", "chocolate chip",
+                "cookie", "fries", "recipe", "food tech", "how it's made food"]
 
 # Duracao: o corte precisa de arco autocontido, e o Gemini estoura o limite
 # de frames acima de 90 min (cai pra modo so'-audio). `medium` ja' limita a

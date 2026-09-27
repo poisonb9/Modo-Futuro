@@ -1,0 +1,37 @@
+# Le' o organizationId e o channelId do TikTok de uma conta do Buffer, pela
+# chave que esta' nos Secrets — sem ninguem ver a chave. Criado em 27/09/2026
+# para a conta NOVA do @modofuturo (a chave antiga expirou em 23/09).
+name: Buffer - ler ids da conta
+on:
+  workflow_dispatch:
+    inputs:
+      segredo:
+        description: "nome do secret (BUFFER_TOKEN, BUFFER_TOKEN_COZINHA...)"
+        default: BUFFER_TOKEN
+jobs:
+  ids:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ler
+        env:
+          TOKEN: ${{ secrets[inputs.segredo] }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          def q(query, var=None):
+              r = urllib.request.Request("https://api.buffer.com/",
+                  data=json.dumps({"query": query, "variables": var or {}}).encode(),
+                  headers={"Authorization": "Bearer " + os.environ["TOKEN"],
+                           "Content-Type": "application/json"})
+              d = json.load(urllib.request.urlopen(r, timeout=60))
+              if "errors" in d:
+                  raise SystemExit("ERRO: " + json.dumps(d["errors"])[:300])
+              return d["data"]
+          orgs = q("{ account { organizations { id name } } }")["account"]["organizations"]
+          for o in orgs:
+              print("org", o["id"], o.get("name"))
+              cs = q("query($i: ChannelsInput!){ channels(input:$i){ id service name } }",
+                     {"i": {"organizationId": o["id"]}})["channels"]
+              for c in cs:
+                  print("   canal", c["service"], c["id"], c["name"])
+          PY

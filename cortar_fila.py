@@ -538,7 +538,7 @@ def main() -> None:
     # projeto. Ver engine/freio.py — o mesmo arquivo pausa o vigia daqui e
     # este consumidor na nuvem, porque o workflow faz checkout do repo.
     from engine import freio
-    if freio.puxado():
+    if freio.puxado() and not freio.liberados():
         print(freio.motivo())
         Path("relato_cortes.txt").write_text(freio.motivo(), encoding="utf-8")
         return
@@ -580,6 +580,13 @@ def main() -> None:
                         encoding="utf-8")
 
     pendentes = [i for i in d["itens"] if i["estado"] == "pendente"]
+    # ⭐ FREIO POR CANAL (27/09): com o freio puxado, so' o que esta' na linha
+    # LIBERADOS do PAUSA_CORTES segue. Os outros continuam na fila, intactos.
+    if freio.puxado():
+        presos = [i for i in pendentes if freio.puxado(i.get("canal"))]
+        pendentes = [i for i in pendentes if not freio.puxado(i.get("canal"))]
+        print(f"[freio] {len(presos)} item(ns) presos; liberados: "
+              f"{', '.join(sorted(freio.liberados()))}")
 
     if not pendentes:
         print("fila vazia — nada pendente")

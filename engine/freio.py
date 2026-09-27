@@ -49,9 +49,68 @@ RAIZ = Path(__file__).resolve().parent.parent
 ARQUIVO = RAIZ / "PAUSA_CORTES"
 
 
-def puxado() -> bool:
-    """Os cortes estao pausados?"""
-    return ARQUIVO.exists()
+def puxado(canal: str | None = None) -> bool:
+    """Os cortes estao pausados? Com `canal`: pausados PARA ESTE canal.
+
+    ⭐ FREIO POR CANAL (27/09/2026, dono: "cria um freio por canal para soltar
+    so' modo futuro e achadinho make, que sao os que estamos revisando"). O
+    freio geral continua sendo o arquivo; a linha `LIBERADOS:` dentro dele
+    lista os canais que cortam mesmo com o freio puxado. Sem `canal`, a
+    pergunta e' a de sempre: existe freio?
+    """
+    if not ARQUIVO.exists():
+        return False
+    if canal is None:
+        return True
+    return _canonico(canal) not in liberados()
+
+
+def _canonico(canal: str | None) -> str | None:
+    try:
+        from .canais_registro import canonico
+        return canonico(canal) or (canal or "").strip().lower() or None
+    except Exception:
+        return (canal or "").strip().lower() or None
+
+
+def liberados() -> set[str]:
+    """Canais que cortam mesmo com o freio puxado (linha `LIBERADOS:`)."""
+    try:
+        linhas = ARQUIVO.read_text(encoding="utf-8").splitlines()
+    except Exception:
+        return set()
+    for l in linhas:
+        if l.strip().upper().startswith("LIBERADOS:"):
+            itens = l.split(":", 1)[1].replace(";", ",").split(",")
+            return {c for c in (_canonico(i) for i in itens) if c}
+    return set()
+
+
+def liberar(*canais: str) -> set[str]:
+    """Solta o freio SO' para estes canais (o resto segue parado)."""
+    if not ARQUIVO.exists():
+        return set()
+    lib = liberados() | {c for c in (_canonico(x) for x in canais) if c}
+    _gravar_liberados(lib)
+    return lib
+
+
+def prender(*canais: str) -> set[str]:
+    """Volta a frear estes canais."""
+    if not ARQUIVO.exists():
+        return set()
+    lib = liberados() - {_canonico(x) for x in canais}
+    _gravar_liberados(lib)
+    return lib
+
+
+def _gravar_liberados(lib: set[str]) -> None:
+    linhas = [l for l in ARQUIVO.read_text(encoding="utf-8").splitlines()
+              if not l.strip().upper().startswith("LIBERADOS:")]
+    # logo depois do cabecalho, pra quem abrir o arquivo ver primeiro
+    novo = f"LIBERADOS: {', '.join(sorted(lib))}" if lib else "LIBERADOS:"
+    linhas.insert(1 if linhas else 0, novo)
+    ARQUIVO.write_text("\n".join(linhas) + "\n", encoding="utf-8")
 
 
 def motivo() -> str:

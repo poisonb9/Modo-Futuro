@@ -81,6 +81,35 @@ def teste_motivo_util_mesmo_com_arquivo_vazio():
     _limpo()
 
 
+def teste_freio_por_canal():
+    """⭐ 27/09/2026, dono: "cria um freio por canal para soltar so' modo
+    futuro e achadinho make". A linha LIBERADOS solta SO' esses; o resto segue
+    parado, e sem o arquivo tudo continua solto como sempre."""
+    _limpo()
+    assert not freio.puxado("modofuturo"), "sem freio, nada preso"
+    freio.puxar("teste")
+    assert freio.puxado("modofuturo") and freio.puxado("atefalhar")
+    freio.liberar("modofuturo", "truque.importado")
+    assert not freio.puxado("modofuturo")
+    assert not freio.puxado("truque.importado")
+    assert freio.puxado("semanestesia.pod"), "canal nao liberado tem de seguir preso"
+    assert freio.puxado("atefalhar")
+    assert freio.puxado(), "o freio geral continua existindo"
+    assert "teste" in freio.motivo(), "liberar nao pode apagar o motivo"
+    freio.prender("truque.importado")
+    assert freio.puxado("truque.importado") and not freio.puxado("modofuturo")
+    freio.liberar("modofuturo")
+    assert freio.liberados() == {"modofuturo"}, "liberar de novo nao duplica"
+    _limpo()
+
+
+def teste_o_vigia_e_a_fila_filtram_por_canal():
+    assert "freio.puxado(canal_da_pasta(" in VIGIA, "o vigia nao filtra por canal"
+    assert 'freio.puxado(i.get("canal"))' in FILA, "a fila nao filtra por canal"
+    # o filtro vem ANTES de qualquer disparo
+    assert FILA.index('freio.puxado(i.get("canal"))') < FILA.index("/dispatches\"")
+
+
 def teste_o_vigia_respeita_o_freio():
     assert "freio.puxado()" in VIGIA, "o vigia nao consulta o freio"
     # E consulta ANTES de despachar, senao ja' gastou.

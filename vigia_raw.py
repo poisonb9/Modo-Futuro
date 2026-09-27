@@ -431,13 +431,22 @@ def uma_passada(drive) -> int:
         meus = [v for v in novos
                 if not escopo.fora_do_escopo(canal_da_pasta(v.get("caminho", "")))
                 and canal_da_pasta(v.get("caminho", ""))]
-        print(f"[freio] {len(meus)} bruto(s) DESTE motor esperando; NAO "
-              f"despachei ({len(novos) - len(meus)} sao de outro motor).")
+        # ⭐ FREIO POR CANAL (27/09): o que esta' na linha LIBERADOS segue.
+        soltos = [v for v in meus
+                  if not freio.puxado(canal_da_pasta(v.get("caminho", "")))]
+        presos = [v for v in meus if v not in soltos]
+        print(f"[freio] {len(presos)} bruto(s) DESTE motor esperando; NAO "
+              f"despachei ({len(novos) - len(meus)} sao de outro motor)."
+              + (f" Liberados: {', '.join(sorted(freio.liberados()))}"
+                 if freio.liberados() else ""))
         print(f"    {freio.motivo().splitlines()[0]}")
-        for v in meus[:8]:
+        for v in presos[:8]:
             print(f"      [{canal_da_pasta(v.get('caminho','')) or '?'}] "
                   f"{v['name'][:52]}")
-        return 0
+        if not soltos:
+            return 0
+        ids = {v["id"] for v in soltos}
+        novos = [v for v in novos if v["id"] in ids]
 
     # ⚠️ A COZINHA DISPARA PRIMEIRO. Ordem do Bryan em 07/09/2026.
     #

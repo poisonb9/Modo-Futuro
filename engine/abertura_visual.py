@@ -30,7 +30,9 @@ from pathlib import Path
 
 import config
 
-ABRE_SEM_ASSUNTO = {"pessoa_falando", "parado"}
+# ⭐ 27/09: "texto_alheio" tambem troca — legenda/marca de OUTRA plataforma no
+# 1o segundo vira a capa da grade (dono aprovou a capa limpa).
+ABRE_SEM_ASSUNTO = {"pessoa_falando", "parado", "texto_alheio"}
 
 
 def no_canal() -> bool:

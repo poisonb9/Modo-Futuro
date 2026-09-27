@@ -31,6 +31,62 @@ LIGADO = os.environ.get("CAPA_NITIDA", "1") != "0"
 GANHO_MIN = 1.15
 PASSO_S = 0.15
 
+# ⭐ CAPA SEM TEXTO QUEIMADO DA FONTE (27/09/2026, dono aprovou: "a grade mistura
+# o nosso titulo com texto grande do video original" — "Futuro Tem Preço",
+# "Está Fora do Jogo?" atras das nossas caixas brancas).
+#
+# ⚠️ A nitidez (variancia das bordas) PREFERE esses quadros: letra grande e'
+# borda pura. Por isso a capa nitida escolhia justamente o quadro sujo.
+#
+# MEDIDO (EasyOCR, so' deteccao, 4 quadros nos 2 s do titulo, % da area com
+# letras FORA da faixa do nosso titulo): limpos 2-8%; sujos com picos de 22%,
+# 37%, 43% e 48% — e o texto da fonte APARECE E SOME dentro dos 2 s, entao
+# quase sempre ha' quadro limpo pra escolher. Corte: LIMITE_TEXTO.
+# O OCR roda NA NUVEM (passo "OCR da capa" do cortar_de_bruto.yml); sem ele
+# instalado, a capa volta ao criterio so' de nitidez (falha aberta).
+LIMITE_TEXTO = 12.0          # % da area fora do titulo
+FAIXA_TITULO = 0.36          # o nosso titulo ocupa o topo ate' 36% da altura
+_LEITOR = None
+
+
+def texto_fora_do_titulo(img) -> float | None:
+    """% da area (abaixo da faixa do titulo) coberta por letras, ou None se
+    o OCR nao estiver instalado. Exposto pro teste."""
+    global _LEITOR
+    try:
+        import numpy as np
+        if _LEITOR is None:
+            import easyocr
+            _LEITOR = easyocr.Reader(["en"], gpu=False, recognizer=False,
+                                     verbose=False)
+        a = np.array(img.convert("RGB"))
+        h, w = a.shape[:2]
+        caixas, _ = _LEITOR.detect(a, min_size=15)
+        area = 0.0
+        for x0, x1, y0, y1 in caixas[0]:
+            if (y0 + y1) / 2 < FAIXA_TITULO * h:
+                continue
+            area += max(0, x1 - x0) * max(0, y1 - y0)
+        return area / (w * h * (1 - FAIXA_TITULO)) * 100
+    except Exception:
+        return None
+
+
+def escolher(amostras: list[tuple[float, float, float | None]]
+             ) -> tuple[float, float, bool]:
+    """(instante, nota, trocar?) a partir de [(t, nitidez, texto%)]. Exposto
+    pro teste: quadros com texto > LIMITE_TEXTO nao podem ser capa; se o
+    quadro 0 tem texto e existe um limpo, troca mesmo sem ganho de nitidez."""
+    t0, n0, x0 = amostras[0]
+    limpos = [a for a in amostras if a[2] is None or a[2] <= LIMITE_TEXTO]
+    if not limpos:
+        return t0, n0, False
+    t, n, _ = max(limpos, key=lambda a: a[1])
+    sujo0 = x0 is not None and x0 > LIMITE_TEXTO
+    if sujo0 and t > 0.05:
+        return t, n, True
+    return t, n, t >= 0.05 and n >= n0 * GANHO_MIN
+
 
 def nota_quadro(img) -> float:
     """Nitidez (variancia das bordas) com penalidade de exposicao ruim."""
@@ -43,23 +99,24 @@ def nota_quadro(img) -> float:
     return nit
 
 
-def melhor_instante(video: Path, ate_s: float) -> tuple[float, float, float]:
-    """(instante do melhor quadro, nota dele, nota do quadro 0)."""
+def amostrar(video: Path, ate_s: float) -> list[tuple[float, float, float | None]]:
+    """[(instante, nitidez, % de texto fora do titulo)] nos `ate_s` iniciais."""
     from PIL import Image
     pasta = Path(tempfile.mkdtemp(prefix="capa_"))
-    t, notas = 0.0, []
+    t, out = 0.0, []
     while t < ate_s - 0.05:
         f = pasta / f"q_{int(t * 1000):05d}.png"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{t:.3f}", "-i", str(video),
-                        "-frames:v", "1", "-vf", "scale=360:-2", str(f)],
+                        "-frames:v", "1", "-vf", "scale=540:-2", str(f)],
                        check=True, capture_output=True, timeout=60)
         if f.exists():
-            notas.append((t, nota_quadro(Image.open(f))))
+            im = Image.open(f)
+            out.append((t, nota_quadro(im.resize((360, round(im.height * 360 / im.width)))),
+                        texto_fora_do_titulo(im)))
         t += PASSO_S
-    if not notas:
+    if not out:
         raise RuntimeError("nenhum quadro lido")
-    melhor = max(notas, key=lambda x: x[1])
-    return melhor[0], melhor[1], notas[0][1]
+    return out
 
 
 def aplicar_no_lugar(video: Path) -> bool:
@@ -70,8 +127,14 @@ def aplicar_no_lugar(video: Path) -> bool:
     video = Path(video)
     novo = video.with_name(video.stem + "_capa.mp4")
     try:
-        t, nota, nota0 = melhor_instante(video, TITULO_SEGUNDOS)
-        if t < 0.05 or nota < nota0 * GANHO_MIN:
+        amostras = amostrar(video, TITULO_SEGUNDOS)
+        t, nota, trocar = escolher(amostras)
+        nota0, texto0 = amostras[0][1], amostras[0][2]
+        sujos = sum(1 for a in amostras if a[2] is not None and a[2] > LIMITE_TEXTO)
+        print(f"      capa: OCR {'ok' if texto0 is not None else 'AUSENTE (so nitidez)'}"
+              f"; {sujos}/{len(amostras)} quadro(s) com texto da fonte"
+              + (f"; quadro 0 tem {texto0:.0f}% de letras" if texto0 else ""))
+        if not trocar:
             return False
         fps = midia.fps(video)
         q = 1.0 / fps

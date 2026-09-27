@@ -359,7 +359,7 @@ def gerar(saida: Path, parte: str = "a", n: int = 6, plat: str = "tiktok") -> Pa
 
 
 def previa(saida: Path, fundo_video: Path | None = None, dur: float = 30.0,
-           n: int = 6, plat: str = "tiktok") -> Path:
+           n: int = 6, plat: str = "tiktok", fecho: Image.Image | None = None) -> Path:
     """mp4 simulando um video de `dur` s, com as partes nos seus momentos."""
     partes = [(cena(n, parte=k, plat=plat), ini, dur_a(plat) if k == "a" else DUR_B)
               for k, ini in plano(dur, plat)]
@@ -383,9 +383,109 @@ def previa(saida: Path, fundo_video: Path | None = None, dur: float = 30.0,
         for els, ini, d in partes:
             if ini <= t < ini + d:
                 base = pintar(base, els, t - ini)
+        if fecho is not None and t >= dur - FECHO_S:
+            base.alpha_composite(_fecho_quadro(fecho, t - (dur - FECHO_S)))
         p.stdin.write(base.tobytes())
     p.stdin.close()
     p.wait()
+    return saida
+
+
+# ---- cartao de fechamento (27/09/2026, dono escolheu a opcao A: so' na tela)
+FECHO: dict[str, str] = {
+    "semanestesia.pod": "Manda pra quem precisa ouvir isso hoje.",
+}
+FECHO_MARCA = {"semanestesia.pod": ("SEM ANESTESIA", (217, 43, 43))}
+FECHO_S = 3.2
+FONTES = Path(__file__).resolve().parent / "fontes"
+
+
+def _fecho_do_canal(canal: str | None) -> tuple[str, str, tuple] | None:
+    from . import canais_registro
+    nome = canais_registro.canonico(canal) if canal else None
+    if not nome or nome not in FECHO:
+        return None
+    marca, cor = FECHO_MARCA.get(nome, ("", (255, 255, 255)))
+    return FECHO[nome], marca, cor
+
+
+def cartao_fim(frase: str, marca: str, cor: tuple, rotulo: str = "") -> Image.Image:
+    """O cartao pronto, do tamanho do video, fundo transparente."""
+    from PIL import ImageDraw, ImageFont
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    f1 = ImageFont.truetype(str(FONTES / "Inter-Black.ttf"), 26)
+    f2 = ImageFont.truetype(str(FONTES / "Poppins-Bold.ttf"), 50)
+    # fora dos botoes do iPhone (x>=912) e do Android (x>=858), ver _guias
+    x0, larg = 60, 770
+    texto_max = larg - 2 * 48
+    palavras, linhas, atual = frase.split(), [], ""
+    for w in palavras:
+        teste = (atual + " " + w).strip()
+        if d.textlength(teste, font=f2) <= texto_max:
+            atual = teste
+        else:
+            linhas.append(atual)
+            atual = w
+    if atual:
+        linhas.append(atual)
+    topo_txt = " · ".join(x for x in (marca, rotulo.upper()) if x)
+    alto = 44 + 36 + 22 + len(linhas) * 64 + 40
+    # ⚠️ ACIMA da legenda (base em 1344, ~1230-1344): a parte de baixo nao e'
+    # segura — a legenda do post e o @nome do TikTok sobem ate' ~1355.
+    base = 1200
+    y1 = base - alto
+    # ⭐ 27/09/2026 (dono: "coloca nesse estilo" — o cartao da bio): papel
+    # branco, contorno preto, sombra DURA deslocada, texto preto forte e o
+    # destaque na cor do canal. Mesma familia visual da vitrine.
+    sombra = 12
+    d.rounded_rectangle([x0 + sombra, y1 + sombra, x0 + larg + sombra, base + sombra],
+                        30, fill=(20, 18, 24, 255))
+    d.rounded_rectangle([x0, y1, x0 + larg, base], 30, fill=(255, 255, 255, 255),
+                        outline=(20, 18, 24, 255), width=5)
+    y = y1 + 44
+    def _larg(t, f):
+        return sum(d.textlength(ch, font=f) + 2 for ch in t)
+    if topo_txt and _larg(topo_txt, f1) > texto_max and rotulo:
+        topo_txt = rotulo.upper()          # a marca ja' esta' no perfil
+    tam = 26
+    while topo_txt and _larg(topo_txt, f1) > texto_max and tam > 18:
+        tam -= 1
+        f1 = ImageFont.truetype(str(FONTES / "Inter-Black.ttf"), tam)
+    if topo_txt:
+        xx = x0 + 48
+        for ch in topo_txt:                     # letra espacada
+            d.text((xx, y), ch, font=f1, fill=cor + (255,) if ch != "·" else (120, 116, 128, 255))
+            xx += d.textlength(ch, font=f1) + 2
+    y += 36 + 22
+    for ln in linhas:
+        d.text((x0 + 48, y), ln, font=f2, fill=(20, 18, 24, 255))
+        y += 64
+    return im
+
+
+def _fecho_quadro(card: Image.Image, t: float) -> Image.Image:
+    """Entrada de 0,35 s: sobe 40 px e aparece."""
+    k = _suave(min(1.0, max(0.0, t / 0.35)))
+    q = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    c = card
+    if k < 1:
+        c = card.copy()
+        c.putalpha(c.getchannel("A").point(lambda v: int(v * k)))
+    q.alpha_composite(c, (0, int(40 * (1 - k))))
+    return q
+
+
+def gerar_fecho(saida: Path, card: Image.Image) -> Path:
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgba",
+           "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "prores_ks",
+           "-profile:v", "4444", "-pix_fmt", "yuva444p10le", str(saida)]
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    for i in range(int(FECHO_S * FPS)):
+        p.stdin.write(_fecho_quadro(card, i / FPS).tobytes())
+    p.stdin.close()
+    if p.wait() != 0:
+        raise RuntimeError("ffmpeg falhou ao gerar o fecho")
     return saida
 
 
@@ -414,13 +514,20 @@ def com_aviao(canal: str | None) -> bool:
 
 
 def aplicar(video: Path, destino: Path, plat: str = "tiktok",
-            canal: str | None = None) -> Path | None:
+            canal: str | None = None, rotulo: str = "") -> Path | None:
     """Sobrepoe as partes que cabem (ver `plano`). None se nada cabe.
     `canal` None (linha de comando) = com aviao, como sempre foi."""
     r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                         "-of", "csv=p=0", str(video)], capture_output=True, text=True)
     pl = plano(float(r.stdout.strip()), plat, aviao=com_aviao(canal))
-    if not pl:
+    fc = _fecho_do_canal(canal)
+    dur0 = float(r.stdout.strip())
+    if fc and dur0 >= FECHO_S + 8:
+        mov_f = gerar_fecho(Path(tempfile.mkdtemp()) / "fecho.mov",
+                            cartao_fim(fc[0], fc[1], fc[2], rotulo))
+    else:
+        mov_f = None
+    if not pl and mov_f is None:
         return None
     entradas, filtros, ant = [], [], "0:v"
     for i, (k, ini) in enumerate(pl, start=1):
@@ -428,6 +535,13 @@ def aplicar(video: Path, destino: Path, plat: str = "tiktok",
         filtros.append(f"[{i}:v]setpts=PTS-STARTPTS+{ini:.3f}/TB[c{i}];"
                        f"[{ant}][c{i}]overlay=0:0:eof_action=pass:format=auto[v{i}]")
         ant = f"v{i}"
+    if mov_f is not None:
+        i = len(pl) + 1
+        entradas += ["-i", str(mov_f)]
+        filtros.append(f"[{i}:v]setpts=PTS-STARTPTS+{dur0 - FECHO_S:.3f}/TB[f{i}];"
+                       f"[{ant}][f{i}]overlay=0:0:eof_action=pass:format=auto[vf]")
+        ant = "vf"
+        pl = pl + [("f", dur0 - FECHO_S)]
     # sons: estalo em cada coracao (parte A) + sino na revelacao (fim)
     dur = float(r.stdout.strip())
     momentos = []
@@ -469,14 +583,15 @@ def _abre(arq: Path) -> bool:
     return r.returncode == 0 and bool(r.stdout.strip())
 
 
-def aplicar_no_lugar(video: Path, canal: str, plat: str = "tiktok") -> bool:
+def aplicar_no_lugar(video: Path, canal: str, plat: str = "tiktok",
+                     rotulo: str = "") -> bool:
     """Troca o arquivo so' se o novo existir e abrir. Falha aberta."""
     video = Path(video)
     if not ligado(canal):
         return False
     novo = video.with_name(video.stem + "_c.mp4")
     try:
-        if aplicar(video, novo, plat, canal) is None:
+        if aplicar(video, novo, plat, canal, rotulo) is None:
             return False
         if not _abre(novo):
             raise RuntimeError("saida nao abre")
@@ -497,10 +612,13 @@ def main() -> None:
     a.add_argument("--n", type=int, default=6)
     a.add_argument("--dur", type=float, default=30.0)
     a.add_argument("--plat", default="tiktok", choices=sorted(PLAT))
+    a.add_argument("--serie", default="", help="rotulo do fecho, ex. 'Goggins sem filtro #4'")
     o = a.parse_args()
     if o.previa:
         Path(o.previa).parent.mkdir(parents=True, exist_ok=True)
-        print(previa(Path(o.previa), o.video, o.dur, o.n, o.plat))
+        fc = _fecho_do_canal(o.canal)
+        card = cartao_fim(fc[0], fc[1], fc[2], o.serie) if fc else None
+        print(previa(Path(o.previa), o.video, o.dur, o.n, o.plat, card))
     elif o.video:
         CANAIS.add(o.canal or "")
         destino = o.video.with_name(o.video.stem + (SUFIXO[o.plat] or "_c") + ".mp4")

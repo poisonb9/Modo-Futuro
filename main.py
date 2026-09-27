@@ -289,6 +289,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     # ⚠️ E o run so' fracassa se NENHUM clipe vingar. Um clipe bom e um
     # ruim tem de virar uma publicacao, nao zero.
     falhas_de_clipe = []
+    _series_usadas: dict[str, int] = {}   # engine/serie.py
     for i, c in enumerate(clipes, 1):
         try:
             ini, fim = c["inicio_s"], c["fim_s"]
@@ -517,6 +518,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # — o modelo gerou assim. Ver engine/gramatica.py: conserta so' o
             # que nao tem segunda leitura e AVISA no resto.
             c = dict(c)
+            # ⭐ 27/09/2026: serie numerada no titulo (engine/serie.py) — antes
+            # da gramatica e do suavizar, que tratam o titulo final inteiro.
+            from engine import serie as _serie
+            c = _serie.numerar(c, os.environ.get("CANAL_ESPERADO"), _series_usadas)
+            if c.get("serie"):
+                print(f"      serie: {c['serie']}")
             for campo in ("titulo", "descricao"):
                 antes_g = c.get(campo) or ""
                 c[campo] = gramatica.corrigir(antes_g)

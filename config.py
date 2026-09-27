@@ -75,7 +75,10 @@ DUR_MAX = 110
 # quando o canal chegar perto disso. Plano: _privado/PLANO_VIRADA_MODOFUTURO.md.
 # Vale pelo canal do corte (CANAL_ESPERADO, que o workflow sempre passa). Sem
 # canal (rodada local, teste) fica a faixa longa de sempre.
-CANAIS_DURACAO_LONGA = {"semanestesia.pod", "cozinha.importada"}
+# ⭐ 27/09/2026 (dono): o Sem Anestesia entra na faixa curta ate' ~10 mil
+# seguidores (44 hoje; o publico sai aos 1-2 s). Volta a' longa (>60 s, a
+# regra do Creator Rewards) quando chegar perto dos 10 mil.
+CANAIS_DURACAO_LONGA = {"cozinha.importada"}
 DUR_CURTA_MIN, DUR_CURTA_MAX = 30, 45
 
 

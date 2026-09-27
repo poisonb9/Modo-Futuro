@@ -259,6 +259,13 @@ detalhe que dá pra imaginar: um número, uma regra, um nome, uma cena. Ex.:
 "A regra dos 40%: o cérebro desiste antes do corpo", "Goggins: 135 kg,
 3 empregos e uma lista na geladeira", "2 minutos de água fria e a
 dopamina fica alta por 3 horas" (só com números que estão NA FALA).
+NÃO escreva o nome da série no título: o motor põe "Série #N:" na frente.
+
+D) SÉRIE. Em TODO clipe, informe no JSON o campo extra
+  "serie": <"Goggins sem filtro" (fala do David Goggins) | "Protocolo" (um
+     passo prático de ciência: sono, dopamina, frio, foco, hábito) | "Seu
+     cérebro desiste antes" (desistência, limite mental, regra dos 40%) |
+     null quando o trecho não é de nenhuma das três>
 """
 
 

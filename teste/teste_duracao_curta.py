@@ -42,7 +42,7 @@ def carregar(canal):
 
 print("[1] faixa por canal")
 for canal, esperado in [("modofuturo", (30, 45)), ("truque.importado", (30, 45)),
-                        ("atefalhar", (30, 45)), ("semanestesia.pod", (65, 110)),
+                        ("atefalhar", (30, 45)), ("semanestesia.pod", (30, 45)),
                         ("cozinha.importada", (65, 110)),
                         ("cozinha.internacional", (65, 110)),   # apelido antigo
                         (None, (65, 110)), ("canal-que-nao-existe", (65, 110))]:
@@ -50,7 +50,7 @@ for canal, esperado in [("modofuturo", (30, 45)), ("truque.importado", (30, 45))
     checar((c.DUR_MIN, c.DUR_MAX) == esperado, f"{canal}: {c.DUR_MIN}-{c.DUR_MAX}s")
 
 print("\n[2] o prompt dos longos e' o de antes, byte a byte")
-c, s = carregar("semanestesia.pod")
+c, s = carregar("cozinha.importada")
 novo = s.PROMPT.format(tipo="vídeo", n=5, criterio=s._criterio(),
                        dmin=c.DUR_MIN, dmax=c.DUR_MAX,
                        regra_duracao=s._regra_duracao(c.DUR_MIN, c.DUR_MAX))

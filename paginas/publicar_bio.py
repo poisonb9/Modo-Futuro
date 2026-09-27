@@ -2478,6 +2478,16 @@ _NAO_TECH = ("filtro", "aspirador", "escova", "refil", "capa para", "pelicula",
              "suporte", "adaptador", "parafuso")
 
 
+def _nome_curto_tech(nome: str) -> str:
+    """"Processador AMD Ryzen 5 7600 (5.1GHz Max Cache 38MB, 6 Nucleos...)" ->
+    "Processador AMD Ryzen 5 7600". ⭐ 27/09/2026 (dono: "encurtar no mesmo
+    padrao dos livros") — o nome da KaBuM! e' a ficha tecnica inteira."""
+    n = re.split(r"\s*[,(|]\s*|\s+-\s+", (nome or "").strip())[0].strip()
+    if len(n.split()) < 3:              # "Monitor Gamer" sozinho nao diz nada
+        n = (nome or "").split(",")[0].strip()
+    return n[:60].rstrip() if len(n) > 60 else n
+
+
 def produtos_de_tecnologia(quantos: int = 12) -> list[dict]:
     """Os cartoes de tecnologia (KaBuM!) para o topo da bio do @modofuturo.
     Ordem: nota da vitrine; depois quem tem serie de preco (grafico)."""
@@ -2514,7 +2524,8 @@ def produtos_de_tecnologia(quantos: int = 12) -> list[dict]:
             continue
         por_tipo[tipo] = por_tipo.get(tipo, 0) + 1
         vistos.add(quase)
-        out.append(p)
+        out.append(dict(p, nome=_nome_curto_tech(p.get("nome")),
+                        nome_loja=p.get("nome")))
     return out[:quantos]
 
 

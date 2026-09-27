@@ -22,7 +22,7 @@ from __future__ import annotations
 import re
 
 PROMPT_PREMIUM = """Abaixo esta a fala de um corte de video curto, ja em
-portugues. O canal fala de tecnologia, chips, industria e geopolitica.
+portugues. {canal_contexto}
 
 Escreva a DESCRICAO do post. Formato EXATO, sem titulo de secao nenhum:
 
@@ -96,8 +96,39 @@ REGRAS DURAS:
 - Cada seta tem que trazer informacao NOVA. Cinco setas dizendo a mesma coisa
   de cinco jeitos e' pior que tres bem escolhidas.
 
+- FALE SO' DO ASSUNTO DESTA FALA. Os exemplos acima sao de um canal de
+  chips e servem SO' de formato. Se a fala e' sobre maquiagem, disciplina,
+  treino ou receita, NENHUM dado de tecnologia, chip, fabrica ou geopolitica.
+- NUNCA cite marca ou produto patrocinado que aparece na fala (ex.: "AG1",
+  cupom, "link na descricao"): e' o anuncio do podcast original, nao nosso.
+
 Fala do corte:
 {texto}"""
+
+# ⛔ 27/09/2026 (metricas do TikTok, setembro): o prompt dizia para TODOS os
+# canais "O canal fala de tecnologia, chips, industria e geopolitica". Medido
+# no export do Studio: 3 posts do make e 2 do Sem Anestesia foram ao ar com
+# paragrafos de semicondutor/DRAM/ASML na legenda — e a busca do TikTok le'
+# a legenda para decidir a quem mostrar o video.
+CONTEXTO: dict[str, str] = {
+    "modofuturo": "O canal fala de tecnologia, chips, industria e geopolitica.",
+    "semanestesia.pod": ("O canal fala de disciplina, mente e o cerebro por tras "
+                         "delas (Goggins, Huberman, dopamina, habito, sono)."),
+    "truque.importado": ("O canal fala de maquiagem coreana e dos idols de K-pop: "
+                         "tecnica, produto, bastidor do camarim."),
+    "atefalhar": "O canal fala de treino, corpo e disciplina fisica.",
+    "cozinha.importada": "O canal fala de receitas e tecnicas de cozinha.",
+}
+
+
+def _contexto() -> str:
+    import os
+    try:
+        from . import canais_registro
+        c = canais_registro.canonico(os.environ.get("CANAL_ESPERADO"))
+    except Exception:  # noqa: BLE001
+        c = None
+    return CONTEXTO.get(c or "", "Fale so' do assunto da fala.")
 
 
 def da_fala(segmentos: list[dict]) -> str:
@@ -115,7 +146,8 @@ def gerar(segmentos: list[dict]) -> str:
     if len(texto) < 150:
         return ""
     try:
-        r = traducao._traduzir_texto(texto, prompt=PROMPT_PREMIUM)
+        r = traducao._traduzir_texto(
+            texto, prompt=PROMPT_PREMIUM.replace("{canal_contexto}", _contexto()))
     except Exception:
         return ""
     r = re.sub(r"^```.*?$|^```$", "", r, flags=re.M).strip()

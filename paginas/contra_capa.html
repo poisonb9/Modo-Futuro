@@ -502,6 +502,20 @@
   .serie.baixou .linha { stroke: var(--acento); opacity: 1; }
   .serie.baixou .agora { fill: var(--acento); }
   .foto { position: relative; }
+  /* ⭐ Filtro por AREA na vitrine geral (27/09/2026): categoria, nunca loja. */
+  .areas {
+    display: flex; gap: 8px; overflow-x: auto; margin: 0 0 14px;
+    padding-bottom: 4px; scrollbar-width: none;
+  }
+  .areas::-webkit-scrollbar { display: none; }
+  .area {
+    flex: none; font: 600 13px/1 inherit; font-family: inherit;
+    padding: 9px 14px; border-radius: 999px; cursor: pointer;
+    border: 1.5px solid var(--tinta); background: var(--superficie);
+    color: var(--tinta);
+  }
+  .area.ligada { background: var(--tinta); color: var(--superficie); }
+  .produto[hidden] { display: none; }
   /* ⭐ LIVRO EM PE' (27/09/2026, dono: "melhorar como as capas estao"). Capa
      e' retrato: no quadrado com `cover` o titulo sumia ("NADA" cortado). Aqui
      a capa aparece INTEIRA, de pe', com lombada e sombra, sobre um fundo
@@ -1827,35 +1841,70 @@
       return fora;
     }
 
-    // ⚠️ NA ORDEM DE VENDA, nao na ordem em que os canais foram escritos.
-    // `_ordem` vem calculada da publicacao (ver publicar_bio.produtos_reais):
-    // quem vende mais primeiro; sem venda nossa, quem tem mais chance —
-    // medida pelo volume que os produtos ja' tem na loja.
-    var blocos = [];
+    // ⭐ 27/09/2026 (dono: "o Achadinho Total nao e' de maquiagem — mostrar
+    // bastante produto sem ficar falando de que lojas sao"). Os blocos "No
+    // Achadinho Total", "No Pago menos"... viraram UMA vitrine, intercalada
+    // por CATEGORIA (um de cada area por vez), com filtro por area. O `_todos`
+    // (os 12 mais recentes) era quase so' beleza: agora ele so' completa.
+    var AREA = {
+      "achadinho.make": "Beleza", "achadinhos.instantaneos": "Casa",
+      "fatura.chora": "Eletrônicos", "cozinha.internacional": "Cozinha",
+      "atefalhar": "Fitness", "varredura.carro": "Carro",
+      "varredura.jardim": "Jardim", "varredura.ferramentas": "Ferramentas"
+    };
     var ordem = (PRODUTOS_REAIS["_ordem"] || []).concat(
-      Object.keys(CANAIS).filter(function (k) {
+      Object.keys(AREA).filter(function (k) {
         return (PRODUTOS_REAIS["_ordem"] || []).indexOf(k) < 0;
-      }));
-    ordem.forEach(function (chave) {
-      if (!CANAIS[chave]) { return; }
-      if (chave === atual) { return; }
-      var itens = pegar(PRODUTOS_REAIS[chave], 4);
-      if (itens.length) { blocos.push([CANAIS[chave].nome, itens]); }
+      })).filter(function (k) { return k !== atual && AREA[k]; });
+    var filas = ordem.map(function (k) {
+      return pegar(PRODUTOS_REAIS[k], 8).map(function (p) {
+        return [AREA[k], p];
+      });
     });
-    // o Total escolhe por ultimo e aparece primeiro
-    var doTotal = pegar(PRODUTOS_REAIS["_todos"], 4);
-    if (doTotal.length) { blocos.unshift(["Achadinho Total", doTotal]); }
+    var mistura = [];
+    for (var volta = 0; volta < 8; volta++) {
+      filas.forEach(function (f) { if (f[volta]) mistura.push(f[volta]); });
+    }
+    var doTotal = pegar(PRODUTOS_REAIS["_todos"], 12);
+    doTotal.forEach(function (p) { mistura.push(["Achadinhos", p]); });
+    mistura = mistura.slice(0, 16);
 
-    blocos.forEach(function (bloco) {
+    if (mistura.length) {
       var sec = el("section", "produtos");
       var cab = el("div", "cabeca");
-      cab.appendChild(el("h2", null, "No " + bloco[0]));
+      cab.appendChild(el("h2", null, "Mais achados de hoje"));
       sec.appendChild(cab);
+      var areas = [];
+      mistura.forEach(function (m) {
+        if (areas.indexOf(m[0]) < 0) areas.push(m[0]);
+      });
       var g = el("div", "vitrine");
-      bloco[1].forEach(function (p) { g.appendChild(montarProduto(p)); });
+      var cartoes = mistura.map(function (m) {
+        var c = montarProduto(m[1]);
+        c.dataset.area = m[0];
+        g.appendChild(c);
+        return c;
+      });
+      if (areas.length > 1) {
+        var chips = el("div", "areas");
+        ["Todos"].concat(areas).forEach(function (nome, i) {
+          var b = el("button", "area" + (i ? "" : " ligada"), nome);
+          b.type = "button";
+          b.addEventListener("click", function () {
+            chips.querySelectorAll(".area").forEach(function (x) {
+              x.classList.toggle("ligada", x === b);
+            });
+            cartoes.forEach(function (c) {
+              c.hidden = !(nome === "Todos" || c.dataset.area === nome);
+            });
+          });
+          chips.appendChild(b);
+        });
+        sec.appendChild(chips);
+      }
       sec.appendChild(g);
       outros.appendChild(sec);
-    });
+    }
 
     // ⚠️ O CONTADOR SAI DO QUE ESTA' NA TELA, nao de um numero escrito na
     // mao. Numero de vitrine que nao bate com o que se ve' embaixo e' o
@@ -1880,7 +1929,8 @@
     // ⚠️ A LINHA VIVA MOSTRA PRODUTO, nao slogan. Quem chega vem de video
     // vertical e sai em dois segundos; o topo tem que entregar o que a
     // pagina promete ANTES de pedir rolagem.
-    animarVitrine(usaNicho ? nicho : lista_do_canal.concat(doTotal));
+    animarVitrine(usaNicho ? nicho : lista_do_canal.concat(
+      mistura.map(function (m) { return m[1]; })));
 
 
     Array.prototype.forEach.call(document.querySelectorAll(".aba"), function (a) {

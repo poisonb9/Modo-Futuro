@@ -2338,6 +2338,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     # reconferencia EXISTE. Custo medido da mudanca: 158 -> 152 produtos.
     agora = _precos_agora()
     limite = (date.today() - timedelta(days=1)).isoformat()
+    por_area: dict[str, int] = {}
     for d in sorted(linhas, key=lambda x: x.get("quando") or "", reverse=True):
         if not d.get("link") or not d.get("nome"):
             continue
@@ -2347,6 +2348,12 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
         if _parecido({"nome": _nome_bonito(d), "imagem": d.get("imagem")},
                      geral):
             continue
+        # ⭐ 27/09/2026 (dono: "o Achadinho Total nao e' de maquiagem"): os 12
+        # mais recentes eram quase so' beleza. No maximo 2 por canal.
+        ch = _chave_da_pagina(d.get("canal") or "")
+        if por_area.get(ch, 0) >= 2:
+            continue
+        por_area[ch] = por_area.get(ch, 0) + 1
         quando = (d.get("quando") or "")[:10]
         geral.append(_coerente({
             # ⭐ O NOME ESCRITO PRA GENTE, nao pro buscador do AliExpress.

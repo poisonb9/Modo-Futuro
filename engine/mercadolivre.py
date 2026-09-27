@@ -124,6 +124,9 @@ COMISSAO_BASE = {   # id da raiz: (direta, indireta)
     "MLB1384": (8.0, 4.0),    # Bebês
     "MLB3937": (8.0, 4.0),    # Joias e Relógios
     "MLB3025": (8.0, 4.0),    # Livros, Revistas e Comics
+    # ⚠️ 27/09/2026: a raiz REAL de livro na API e' MLB1196 (medido:
+    # MLB437616 -> MLB1196). A linha de cima nunca casou com livro nenhum.
+    "MLB1196": (8.0, 4.0),    # Livros, Revistas e Comics
     "MLB1144": (8.0, 4.0),    # Games
     "MLB5672": (8.0, 4.0),    # Acessórios para Veículos
     "MLB1500": (8.0, 4.0),    # Construção
@@ -609,6 +612,91 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
     reais = [x for x in brutos if x["vendedores"] >= 2] or brutos
     reais.sort(key=lambda x: x["preco_num"])
     return reais[:quantos]
+
+
+def _nome_de_livro(nome: str) -> str:
+    """"Nada pode me ferir - Goggins, David - Sextante - Capa Mole" ->
+    "Nada pode me ferir — David Goggins". Nome de ficha fora desse molde
+    so' perde o "Livro " da frente."""
+    nome = re.sub(r"^\s*livro\s+", "", nome or "", flags=re.I).strip()
+    partes = [p.strip() for p in nome.split(" - ")]
+    if len(partes) >= 2 and "," in partes[1]:
+        sobren, prenome = [x.strip() for x in partes[1].split(",", 1)]
+        return f"{partes[0]} — {prenome} {sobren}"
+    return partes[0]
+
+
+def livros(consultas: list[tuple[str, tuple[str, ...]]], canal: str = "",
+           ) -> list[dict]:
+    """Um cartao por LIVRO pedido, no menor anuncio, com a nossa etiqueta.
+
+    ⭐ 27/09/2026 (dono aprovou a vitrine de livros do @semanestesia.pod).
+    `consultas` = [(busca, palavras que o NOME tem de ter)]. A busca por texto
+    devolve o livro certo, o kit com outro livro e ate' CD de musica com nome
+    parecido (medido: "Nada pode me ferir" trouxe "Nada pode me assustar" e um
+    CD do Marcelo D2) — por isso so' vale ficha MLB-BOOKS cujo nome tem TODAS
+    as palavras, e kit ("kit", "+") fica fora: o preco dele nao e' o do livro.
+
+    ⚠️ Aqui o `FORA_DOMINIOS` se inverte: livro e' o produto, nao o ruido.
+    """
+    import unicodedata as _u
+
+    def _s(t):
+        return "".join(c for c in _u.normalize("NFD", (t or "").lower())
+                       if _u.category(c) != "Mn")
+    saida = []
+    for busca, precisa in consultas:
+        try:
+            d = _get("/products/search", status="active", site_id="MLB",
+                     q=busca, limit=15)
+        except requests.HTTPError:
+            continue
+        melhor = None
+        for r in d.get("results") or []:
+            nome = r.get("name") or ""
+            n = _s(nome)
+            if (r.get("domain_id") != "MLB-BOOKS" or "kit" in n or "+" in n
+                    or not all(_s(p) in n for p in precisa)):
+                continue
+            try:
+                itens = _get(f"/products/{r['id']}/items").get("results") or []
+            except requests.HTTPError as e:
+                if e.response is not None and e.response.status_code == 404:
+                    continue
+                raise
+            # so' livro NOVO: usado mais barato mostraria um preco que a
+            # maioria de quem clica nao quer
+            itens = [i for i in itens if i.get("condition", "new") == "new"]
+            precos = [float(i["price"]) for i in itens
+                      if i.get("price") and float(i["price"]) > 0]
+            # ⛔ ficha de 1 vendedor ou acima de R$ 150 e' anuncio avulso
+            # (medido: "Garra" a R$ 499, 1 vendedor), nao o livro de estante
+            if len(precos) < 2 or min(precos) > 150:
+                continue
+            menor = min(precos)
+            vencedor = next(i for i in itens
+                            if float(i.get("price") or 0) == menor)
+            link = link_do_anuncio(vencedor.get("item_id")
+                                   or vencedor.get("id"), canal)
+            if not link:
+                continue
+            cat = vencedor.get("category_id") or ""
+            melhor = {
+                "nome": _nome_de_livro(nome), "link": link,
+                "imagem": (r.get("pictures") or [{}])[0].get("url", ""),
+                "preco": f"R$ {menor:.2f}".replace(".", ","),
+                "preco_num": menor, "vendedores": len(itens),
+                "frete_gratis": bool((vencedor.get("shipping") or {})
+                                     .get("free_shipping")),
+                "dominio": "MLB-BOOKS", "categoria_ml": cat,
+                "loja": "Mercado Livre", "_id": r["id"], "_tipo": "PRODUCT",
+                "comissao_base": comissao_base(cat) if cat else 0.0,
+            }
+            melhor["comissao"] = melhor["comissao_base"]
+            break
+        if melhor:
+            saida.append(melhor)
+    return saida
 
 
 # ⛔ MEDIDO EM 18/09/2026 (Bryan: "Mercado Livre bugou", print com o chip

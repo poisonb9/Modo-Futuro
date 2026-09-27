@@ -828,6 +828,8 @@
       // 27/09/2026: mesma promessa da bio nova do perfil (os videos agora
       // tem 30-45 s — "sessenta segundos" e "um minuto" ficaram falsos).
       promessa: "A tecnologia por dentro: chips, fábricas e IA.",
+      // o que o TOPO diz quando a vitrine e' o nicho do canal
+      nicho: ["ofertas de tecnologia hoje", "Ofertas de tecnologia de hoje"],
       vantagens: [
         ["⚙️", "Chip, fábrica e IA explicados sem aula chata"],
         ["⏱️", "Menos de um minuto por história, e você sai sabendo"],
@@ -855,11 +857,14 @@
       arroba: "@semanestesia.pod",
       inicial: "SA",
       acento: "#D92B2B",
-      promessa: "Disciplina, dinheiro e decisão difícil. Sem anestesia.",
+      // ⭐ 27/09/2026 (dono aprovou o reposicionamento): so' disciplina e o
+      // cerebro por tras dela — os dois temas que rendem 3-5x os outros.
+      promessa: "Mente forte, com ciência. Disciplina, dopamina e hábitos.",
+      nicho: ["livros na estante hoje", "Os livros por trás dos cortes"],
       vantagens: [
-        ["🥊", "O conselho que ninguém quer ouvir"],
-        ["⏱️", "Um minuto, direto ao osso"],
-        ["📈", "De quem já pagou caro pra aprender"]
+        ["🥊", "Goggins, Huberman e quem pagou caro pra aprender"],
+        ["🧠", "O cérebro por trás da disciplina, sem enrolação"],
+        ["📚", "Os livros dos cortes, com o preço conferido"]
       ],
       grupos: [
         {
@@ -1611,7 +1616,7 @@
       // ⚠️ CADA NUMERO SO' APARECE SE EXISTIR. Um bloco de prova com
       // "0 vendas" ou "R$ 0,00" prova o contrario do que pretende.
       var provas = [];
-      provas.push([String(todos.length), usaNicho ? "ofertas de tecnologia hoje"
+      provas.push([String(todos.length), usaNicho ? (c.nicho || [""])[0]
                                                   : "achadinhos garimpados hoje"]);
       if (precos.length) {
         provas.push([real(Math.min.apply(null, precos)), "o mais barato de hoje"]);
@@ -1778,7 +1783,7 @@
     // ⚠️ NAO REPETE o que ja' esta' na vitrine de cima, e NAO mostra o
     // proprio canal como se fosse outro canto.
     document.getElementById("titulo_vitrine").textContent =
-      (!reais.length && usaNicho) ? "Ofertas de tecnologia de hoje"
+      (!reais.length && usaNicho) ? (c.nicho || ["", ""])[1]
                                   : "O que apareceu no " + c.nome;
 
     // ⚠️ TODOS OS CANTOS DA CASA, cada um com o seu bloco.
@@ -1906,7 +1911,7 @@
   // (o canal padrao) — conferido no ar. "make" so' funcionava por sorte.
   var PORTAS = {
     "oachadinho": "c1", "make": "c1",        // Achadinho Make
-    "meulivro": "c2", "livro": "c2",         // Sem Anestesia
+    "meulivro": "c2", "livro": "c2", "livros": "c2",         // Sem Anestesia
     "modofuturo": "c4", "futuro": "c4",      // Modo Futuro (27/09/2026)
     "achadinhochef": "c5", "chef": "c5",
     "pagomenos": "c6",                       // Fatura Chora

@@ -99,7 +99,13 @@ checar(selecao._bloco_canal() != "", "bloco extra de selecao no modofuturo")
 os.environ["CANAL_ESPERADO"] = "semanestesia.pod"
 checar(selecao.marcar_sem_assunto([dict(c) for c in cl])[0]["nota"] == 95,
        "outro canal: nada muda")
-checar(selecao._bloco_canal() == "", "outro canal: sem bloco extra")
+# ⭐ 27/09/2026: o Sem Anestesia ganhou bloco proprio (tema + abertura +
+# titulo), aprovado pelo dono; a cozinha continua sem nada.
+bs = selecao._bloco_canal()
+checar("ABERTURA NA FRASE MAIS FORTE" in bs and "seducao" not in bs
+       and "sedução" in bs, "Sem Anestesia: bloco proprio")
+os.environ["CANAL_ESPERADO"] = "cozinha.importada"
+checar(selecao._bloco_canal() == "", "cozinha: sem bloco extra")
 
 print("\n[7] a troca de imagem nao mexe no audio nem na duracao (ffmpeg real)")
 with tempfile.TemporaryDirectory() as d:

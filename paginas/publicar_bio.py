@@ -2374,8 +2374,37 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             nicho["modofuturo"] = tech
     except Exception as e:  # noqa: BLE001
         print(f"nicho: tecnologia indisponivel ({e})")
+    # ⭐ 27/09/2026 (dono aprovou o reposicionamento do Sem Anestesia:
+    # disciplina + cerebro). A vitrine do canal vira ESTANTE: os livros dos
+    # mesmos autores dos cortes, no Mercado Livre (8% de comissao em livro).
+    try:
+        from engine import mercadolivre as _ml
+        estante = _ml.livros(LIVROS_SEMANESTESIA, "semanestesia.pod")
+        print(f"nicho: {len(estante)} livro(s) para o Sem Anestesia")
+        if len(estante) >= 4:
+            nicho["semanestesia.pod"] = estante
+    except Exception as e:  # noqa: BLE001
+        print(f"nicho: livros indisponiveis ({e})")
     saida["_nicho"] = nicho
     return saida
+
+
+# ⭐ A ESTANTE DO SEM ANESTESIA: (busca, palavras que o nome TEM de ter).
+# Os autores sao os dos cortes que mais renderam (Goggins 490-603 views,
+# Huberman/dopamina 470-577) — o livro continua a conversa do video.
+# ⛔ Nada de sedução/relacionamento: o canal saiu desse tema (27/09/2026).
+LIVROS_SEMANESTESIA = [
+    ("Nada pode me ferir David Goggins", ("nada pode me ferir",)),
+    ("Nunca é hora de parar David Goggins", ("nunca", "parar")),
+    ("Hábitos atômicos James Clear", ("habitos atomicos",)),
+    ("Nação dopamina Anna Lembke", ("dopamina",)),
+    ("Por que nós dormimos Matthew Walker", ("por que nos dormimos",)),
+    ("Mindset Carol Dweck", ("mindset",)),
+    ("Garra Angela Duckworth", ("garra",)),
+    ("O poder do hábito Charles Duhigg", ("poder do habito",)),
+    ("Trabalho focado Cal Newport", ("trabalho focado",)),
+    ("Rápido e devagar Daniel Kahneman", ("rapido e devagar",)),
+]
 
 
 # Palavras de produto de TECNOLOGIA (sem acento, minusculas). O catalogo da

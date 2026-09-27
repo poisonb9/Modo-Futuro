@@ -1,4 +1,4 @@
-# @semanestesia.pod — podcasts: neurociência, saúde, comportamento
+# @semanestesia.pod — mente forte, com ciência (disciplina + cérebro)
 
 ## Tom
 Sóbrio e fiel ao que foi dito: aqui a FALA da pessoa é o valor. Narra quem é o
@@ -24,8 +24,11 @@ o motor só troca pronúncia se houver tabela aqui.
 - Inventar dado que o convidado não citou
 - Tirar a atribuição ("dizem que") de uma afirmação do convidado
 
-## Abertura (DESLIGADA — aguardando a medição do Modo Futuro)
-> ⛔ Desligada de propósito (dono, 26/09/2026). Ver
+## Abertura (na SELEÇÃO — LIGADA em 27/09/2026)
+> ⭐ Ligada pelo dono em 27/09/2026 junto com o reposicionamento (só
+> disciplina + cérebro). Vale na SELEÇÃO: `selecao.BLOCO_SEMANESTESIA`.
+> O título desta seção NÃO é "## Abertura" de propósito — assim ela não entra
+> no prompt de narração, que este canal não usa. Ver
 > `_privado/HANDOFF_MOTOR_DE_ABERTURA.md`. ⚠️ Este canal é voice-over com
 > FALA LITERAL: não passa pela narração, então a checagem "Ele explicou que"
 > NÃO se aplica aqui. A regra vale na SELEÇÃO do trecho.

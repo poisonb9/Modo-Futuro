@@ -231,6 +231,37 @@ consequência que dá pra imaginar — e nada de "segredo", "verdade" ou
 """
 
 
+# ⭐ 27/09/2026 (dono aprovou o reposicionamento do @semanestesia.pod).
+# MEDIDO nos ~60 posts do canal (prints do perfil, 27/09): Goggins/disciplina
+# 490-603 views e neurociencia da forca de vontade 470-577, contra
+# sedução/relacionamento/beleza 111-261. A abertura e' a regra que ja' estava
+# escrita no guia de voz (desligada desde 26/09) — aqui, na SELECAO, porque o
+# canal e' fala literal e nao passa pela narracao.
+BLOCO_SEMANESTESIA = """
+
+⭐ REGRAS EXTRAS DESTE CANAL (Sem Anestesia — "mente forte, com ciência"):
+
+A) TEMA. O canal é SÓ disciplina e o cérebro por trás dela: resistência
+mental, desistência, força de vontade, dopamina, hábito, foco, sono,
+estresse, medo. Prefira SEMPRE esses trechos. Trecho de sedução, conquista,
+relacionamento amoroso, beleza/estética ou IA/tecnologia NÃO serve a este
+canal: descarte, mesmo com nota alta (IA e tecnologia são de outro canal).
+
+B) ABERTURA NA FRASE MAIS FORTE. O trecho começa NA frase mais forte do
+convidado, dita por ele, com o rosto na tela — não na pergunta do
+apresentador nem numa introdução ("então, o que eu queria dizer é…"). Se a
+frase forte vem depois de 10 s de contexto, comece nela e o contexto vem
+depois, ou sai. O público sai aos 1-2 s: a primeira frase decide tudo.
+
+C) TÍTULO CONCRETO, NUNCA GENÉRICO. Proibido "O segredo…", "A verdade que
+ninguém te conta", "O preço secreto…", "…vai te chocar". O título dá o
+detalhe que dá pra imaginar: um número, uma regra, um nome, uma cena. Ex.:
+"A regra dos 40%: o cérebro desiste antes do corpo", "Goggins: 135 kg,
+3 empregos e uma lista na geladeira", "2 minutos de água fria e a
+dopamina fica alta por 3 horas" (só com números que estão NA FALA).
+"""
+
+
 def _bloco_canal() -> str:
     """Regras de selecao que valem SO' para o canal do corte.
 
@@ -240,6 +271,8 @@ def _bloco_canal() -> str:
     """
     if _canal_atual() in config.CANAIS_ABERTURA_VISUAL:
         return BLOCO_ABERTURA_VISUAL
+    if _canal_atual() == "semanestesia.pod":
+        return BLOCO_SEMANESTESIA
     return ""
 
 

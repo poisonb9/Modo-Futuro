@@ -83,9 +83,13 @@ checar("{" not in s.PROMPT.format(tipo="vídeo", n=5, criterio="", dmin=30, dmax
 print("\n[4] make (procedimento): curto, mas estende ate' o resultado (dono, 26/09)")
 c, s = carregar("truque.importado")
 os.environ["SELECAO_MODO"] = "procedimento"
-regra = s._regra_duracao(c.DUR_MIN, 180)
-checar("35-45s" in regra and "RESULTADO FINAL" in regra and "180s" in regra,
-       "ideal 35-45s, pode ir ate' 180s so' pelo resultado")
+checar(s.teto_procedimento() == 75, "teto do procedimento nos curtos: 75 s (opcao A, 27/09)")
+regra = s._regra_duracao(c.DUR_MIN, s.teto_procedimento())
+checar("35-45s" in regra and "RESULTADO FINAL" in regra and "75s" in regra
+       and "ENXUTA" in regra, "ideal 35-45s, ate' 75s so' pelo resultado, versao enxuta")
+c2, s2 = carregar("cozinha.importada")
+os.environ["SELECAO_MODO"] = "receita"
+checar(s2.teto_procedimento() == 180, "cozinha (longa) continua com 180 s")
 os.environ.pop("SELECAO_MODO", None)
 
 carregar(None)

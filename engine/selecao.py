@@ -250,6 +250,21 @@ def _canal_atual() -> str | None:
         return None
 
 
+def teto_procedimento() -> float:
+    """Duracao maxima do trecho. Procedimento/receita podem passar do DUR_MAX
+    para chegar ao RESULTADO (dono, 25/09): 180 s nos canais longos.
+
+    ⭐ 27/09/2026 (dono escolheu a opcao A): nos canais CURTOS o teto do
+    procedimento cai para config.PROCEDIMENTO_TETO_CURTO (75 s). MEDIDO no 1o
+    corte do make liberado (run 36283251816, NOZE): com 180 s o Gemini entregou
+    134, 116, 141 e 74 s — etapas inteiras, contra um publico que sai aos 5-20 s.
+    """
+    modo = (os.environ.get("SELECAO_MODO") or "").strip().lower()
+    if modo not in ("procedimento", "receita"):
+        return config.DUR_MAX
+    return config.PROCEDIMENTO_TETO_CURTO if config.DURACAO_CURTA else 180
+
+
 def _regra_duracao(dmin: int, dmax: int) -> str:
     """A regra de duracao do prompt: a de dinheiro (>60 s) ou a curta.
 
@@ -262,9 +277,11 @@ def _regra_duracao(dmin: int, dmax: int) -> str:
         # ⭐ 26/09 (dono): "pode estender para mostrar o resultado". Curto
         # por padrao, mas o passo nao pode acabar antes do RESULTADO FINAL.
         return (f"- Ponto ideal: 35-{config.DUR_CURTA_MAX}s. Comece NO passo que\n"
-                f"  importa, sem introducao. Passe de {config.DUR_CURTA_MAX}s (ate' {dmax}s)\n"
+                f"  importa, sem introducao. Passe de {config.DUR_CURTA_MAX}s (ate' {dmax:.0f}s)\n"
                 f"  SO' o necessario para mostrar o RESULTADO FINAL — cortar antes\n"
-                f"  do resultado e' pior que passar do tempo.")
+                f"  do resultado e' pior que passar do tempo. Mostre a versao MAIS\n"
+                f"  ENXUTA da etapa: pule repeticao, espera e explicacao longa, e\n"
+                f"  termine no resultado daquela parte (o rosto pronto).")
     if config.DURACAO_CURTA:
         return (f"- Ponto ideal: 35-{dmax}s. O clipe e' CURTO de proposito: comece\n"
                 f"  NO fato mais forte e termine quando a historia fecha. Um trecho\n"
@@ -728,9 +745,7 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     """
     mime = "video/mp4" if usar_video else "audio/flac"
     tipo = "vídeo" if usar_video else "áudio"
-    dmax = (180 if (os.environ.get("SELECAO_MODO") or "")
-            .strip().lower() in ("procedimento", "receita")
-            else config.DUR_MAX)
+    dmax = teto_procedimento()
     prompt = PROMPT.format(tipo=tipo, n=qtd, criterio=_criterio(),
                            dmin=config.DUR_MIN, dmax=dmax,
                            regra_duracao=_regra_duracao(config.DUR_MIN, dmax))
@@ -913,8 +928,7 @@ def _validar(clipes: list[dict], dur_total: float) -> list[dict]:
         # ⭐ 25/09/2026: em procedimento o corte pode ir alem do DUR_MAX pra
         # chegar ao RESULTADO FINAL (dono: "nao tem problema ficar mais
         # longo"). Teto de seguranca de 180 s contra alucinacao de tempo.
-        teto = (180 if (os.environ.get("SELECAO_MODO") or "").strip().lower()
-                in ("procedimento", "receita") else config.DUR_MAX)
+        teto = teto_procedimento()
         if fim - ini > teto:
             fim = ini + teto
         if any(ini < f and fim > i for i, f in ocupados):   # sobreposição

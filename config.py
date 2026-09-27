@@ -90,6 +90,10 @@ def _duracao_curta() -> bool:
 
 DURACAO_CURTA = _duracao_curta()
 
+# Teto do modo procedimento (make) nos canais curtos. Ver
+# selecao.teto_procedimento (27/09/2026, dono: opcao A, "~75 s").
+PROCEDIMENTO_TETO_CURTO = 75
+
 # ⭐ ABERTURA VISUAL (26/09/2026, plano de virada item 2, aprovado pelo dono).
 # MEDIDO: 5 de 8 perdedores do modofuturo abriam no mesmo estudio de podcast;
 # 6 de 9 vencedores abriam na maquina/chip/fabrica. Nestes canais, quando o

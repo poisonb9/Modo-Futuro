@@ -1,0 +1,1125 @@
+{
+ "_leia": "Semente da memoria de temas (27/09/2026): titulos JA PUBLICADOS por canal, cruzando os manifestos das releases com estado/publicados.json (Buffer). O que entra depois vem de estado/trechos_usados.json. Ver engine/memoria_temas.py.",
+ "canais": {
+  "modofuturo": [
+   {
+    "titulo": "O segredo geopolítico que protege Taiwan de guerras",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A indústria que controla todas as outras indústrias do mundo",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Onde estão os mentes por trás dos chips da Nvidia e AMD?",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A estratégia secreta para escapar do monopólio da China",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O atraso de 50 anos na indústria e a virada histórica",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Exército Cria Baratas Ciborgues Para Zonas de Guerra",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A VERDADEIRA CORRIDA DA IA NÃO É O CHATGPT!",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Como uma Empresa de Privadas Domina a Produção de Chips",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O Software Mais Caro do Mundo Custa $500.000 por Engenheiro",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Por Que uma Guerra em Taiwan Pararia o Mundo Inteiro",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "As Gigantes Ocultas que Realmente Dominam o Mercado Tech",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O Monopólio Silencioso da Areia dos Processadores",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O buraco financeiro de US$ 35 bilhões da fábrica do Japão",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A guerra brutal dos chips: TSMC e Samsung vs Japão",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O Mundo Depende Absolutamente Desta Única Empresa de Chips",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Como as Sanções dos EUA Tiveram um Efeito Inesperado na IA",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A Cultura de Trabalho Extrema Que Tornou Taiwan Líder de Chips",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O Custo Bilionário para os EUA Dominarem a Produção de Chips",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "EUA vs China: A Guerra Fria dos Semicondutores",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Por Que Fabricar Seus Próprios Chips Ficou Impossível?",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A Hiperespecialização Extrema na Fabricação de Microchips",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O segredo do Ryzen 9800X3D revelado!",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Por que o 3D V-Cache esquentava tanto?",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Por que chips 3D são tão caros de fabricar?",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Usamos a mesma tecnologia de chips desde os anos 60!",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Como a ASML construiu o monopólio mais valioso da Terra",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A Lei de Moore REALMENTE Morreu? Nvidia, Intel e IBM Respondem",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "O Segredo dos Chips do Futuro: A Inovacao CFET Revelada",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A Solucao Genial da IBM para Conectar Transistores 3D",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "1500 Graus! O Problema Termico que Quase Destruiu os Processadores",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "A analogia brutal sobre o futuro dos profissionais na era da IA",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "O maior crescimento da historia do capitalismo aconteceu em UM MES",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "A Anthropic esta superando a OpenAI em eficiencia de capital",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "O segredo por tras da explosao na demanda global por GPUs",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "O plano real da SpaceX para criar Data Centers no Espaco",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "A vantagem decisiva dos EUA que ninguem percebeu na corrida da IA",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "A megafabrica de chips de Elon Musk que quer mudar o mundo",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "O que acontece quando a IA supera o QI humano?",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "Como um engenheiro aprendeu física quântica e óptica sozinho!",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "Os nanometros dos chips sao uma mentira do marketing?",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "Como a alimentacao traseira vai revolucionar os novos processadores",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "O erro de US$ 1 trilhão que quase destruiu a Intel",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "O erro microscópico que custa US$ 500.000 na fábrica da Intel",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "Por que o mundo depende de Taiwan para não parar?",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "O macacão de US$ 1.000 para entrar na fábrica da Intel",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "O fim do silício: a corrida por novos elementos na Intel",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "A máquina que escuta o som dentro dos microchips",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "Por Dentro da Fábrica Mais Secreta de Chips do Mundo",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "A Aposta Bilionária que Mudou o Futuro da Inteligência Artificial",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "O Preço dos Celulares Disparou e a Culpa É da IA",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "Por Que Seu Processador Superrápido É Inútil Sem Esse Chip",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "Por Que Construir Fábricas de Chips nos EUA Custa o Dobro?",
+    "quando": "2026-08-30"
+   },
+   {
+    "titulo": "O maior erro da história da Intel: rejeitar Steve Jobs e o iPhone",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A máquina mais cara do mundo: R$ 2 bilhões por unidade",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Por que o mundo depende de Taiwan para fabricar microchips",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A fábrica mais limpa do planeta: 1 poeira destrói tudo",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O erro de 500 mil dólares na fabricação de microchips",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O fim do silício: a corrida pelo novo material dos chips",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Como a água e o som são usados para testar chips de computador",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A CHINA Conseguiu Criar Sua Própria Máquina de Chips Sem o Ocidente!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A Tecnologia Secreta Por Trás dos Processadores Mais Rápidos do Mundo",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A Verdade Sobre a Cópia Chinesa da Máquina de Chips de $400 Milhões",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A Máquina de 400 Milhões de Dólares Que Controla Todo o Planeta",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O Tiro Pela Culatra das Sanções dos EUA Contra a China",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A Verdade Sobre o Chip de 0.7nm da IBM",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Como Funciona a Arquitetura NanoStack 3D",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O Processo de Fabricação Mais Exigente do Mundo",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A Corrida de 5 Anos para Produzir o Chip do Futuro",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "AQUECENDO SILÍCIO A 1.100°C PARA CRIAR MEMÓRIA RAM 🔥🧪",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "Construi uma Sala Limpa Class 100 ao nivel da Samsung no meu quintal",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "A Precisão Incrível por Trás da Criação dos Microchips",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "Por Que a China Foi Banida do Mercado de Microchips?",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "O Problema de Energia que Pode Parar a Inteligência Artificial",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "A Máquina de 400 Milhões de Dólares que Move o Mundo",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "A Nova Corrida do Silício: EUA Trazem Fabs de Microchips",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "Chegamos ao Limite da Física na Produção de Microchips?",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "Revelada a Máquina Secreta Mais Valiosa do Mundo",
+    "quando": "2026-09-08"
+   },
+   {
+    "titulo": "As regras extremas para entrar na fabrica mais limpa do mundo",
+    "quando": "2026-08-22"
+   },
+   {
+    "titulo": "O erro microscopico que custa US$ 500.000 na fabrica da Intel",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "Por Que Fabricar Seus Proprios Chips Ficou Impossivel?",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A maquina que escuta o som dentro dos microchips",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Por que o mundo depende de Taiwan para nao parar?",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "Por Que Seu Processador Superrapido E Inutil Sem Esse Chip",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Como 1 poeira pode destruir 1 milhao de dolares em microchips",
+    "quando": "2026-08-22"
+   },
+   {
+    "titulo": "A maquina de 400 milhoes de dolares que cria os chips mais avancados",
+    "quando": "2026-08-22"
+   },
+   {
+    "titulo": "Exercito Cria Baratas Ciborgues Para Zonas de Guerra",
+    "quando": "2026-08-26"
+   },
+   {
+    "titulo": "ELON MUSK REVELA O VERDADEIRO OBJETIVO DA SPACEX!",
+    "quando": "2026-07-26"
+   },
+   {
+    "titulo": "O dia em que a Intel rejeitou Steve Jobs e perdeu o iPhone",
+    "quando": "2026-08-22"
+   },
+   {
+    "titulo": "Demitido por Mark Zuckerberg, Criou Imperio Militar de $6B",
+    "quando": "2026-08-25"
+   },
+   {
+    "titulo": "Como uma Empresa de Privadas Domina a Producao de Chips",
+    "quando": "2026-08-26"
+   }
+  ],
+  "truque.importado": [
+   {
+    "titulo": "Como fazer base e contorno em creme perfeito sem marcar a pele",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "Truque de contorno em po para esculpir o rosto e o nariz",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "Como fazer cut crease e delineado gatinho perfeito",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "Segredo para iluminar e selar a regiao das olheiras",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "Truque Infalível para Cílios Postiços Sem Usar Cola!",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "Como Fazer Ondas e Dar Volume no Cabelo Usando Chapinha!",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "Passo a Passo para Sobrancelhas Alinhadas com Efeito Wet Brow!",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "O segredo da base perfeita para esconder poros e acne sem empelotar",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "Truque de maquiadora para preparar pele com acne sem empelotar",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "Segredo das Sardas Fakes Naturais e Batom Bambi Look",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Tecnica de Contorno e Bronzer para Efeito Bambi Eyes",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "ELE RASPOU O CABELO DE MADRUGADA EM SEGREDO!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "ELE COMEÇOU A ROSNAR DURANTE A MAQUIAGEM!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O DESENHO ASSUSTADOR MAS EDUCADO DO HYUNJIN!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "HYUNJIN DO STRAY KIDS REVELA POR QUE RASPOU O CABELO!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "HYUNJIN ANUNCIA NOVO VISUAL PARA OS FÃS!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "POR QUE O HYUNJIN CHAMAVA O PRÓPRIO PAI DE LADRÃO?!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "8 ANOS DE CARREIRA E ELE AINDA NÃO APRENDEU ISSO?!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O VISUAL MAIS FOFO DO HYUNJIN QUE VOCÊ VAI VER HOJE!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O segredo de preparação para maquiagem em pele com acne!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como fazer lábios volumosos estilo Tailandês!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Técnica Tailandesa de Contorno de Nariz e Iluminação Cream!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Truque de maquiador para colar cílios postiços perfeito!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A técnica dos 3 blushes para uma pele perfeita de maquiador!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como criar profundidade em olhos asiáticos com maquiagem!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como Aplicar Corretivo para Efeito Lifting no Rosto",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como Selar a Pele com Pó Solto sem Ficar Pesada",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Guia Definitivo de Primers: Blurring, Hidratante ou Sticky?",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como Fazer o Combo de Lábios Degradê Perfeito",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como Deixar a Sobrancelha Perfeita e Natural com Cera",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "YOSHI DO TREASURE PEDE PARA CHAMAR SABAE DE IRMA MAIS VELHA!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "YOSHI DO TREASURE MOSTRA SEU RAP E SURPREENDE SABAE!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "REVELADO O NOME COREANO UNICO DE YOSHI DO TREASURE!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "YOSHI CONTA COMO ERA CRESCER COM 3 IRMAS MAIS VELHAS!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A DECLARACAO EMOCIONANTE DE YOSHI SOBRE SUA CARREIRA!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "SABAE ANALISA A ESTRUTURA FACIAL DE YOSHI DO TREASURE!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "COMO OS MEMBROS DO TREASURE REAGIRAM A APARICAO DE YOSHI!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "VISUAL GOTH-PUNK FINAL DE YOSHI E MENSAGEM AOS FAS!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Tzuyu do TWICE revela ser fã de maquiadora e emoção toma conta!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O apelido secreto do Idol que encantou a maquiadora!",
+    "quando": "2026-09-06"
+   },
+   {
+    "titulo": "Açúcar ou sal? O debate de comida que dividiu opiniões!",
+    "quando": "2026-09-06"
+   },
+   {
+    "titulo": "Idol de K-pop revela segredo de infância que ninguém sabia!",
+    "quando": "2026-09-06"
+   },
+   {
+    "titulo": "Posso te chamar de Nuna? O momento fofo do Yoshi do Treasure!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Idol de K-Pop manda rap ao vivo durante maquiagem!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Transformação gótica: cicatriz de glitter e piercings de vampiro!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Idol de K-Pop mostra cinto customizado por ele mesmo!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Yoshi pede maquiagem cover para Risabae e gera reação hilária!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A filosofia de vida marcante de Risabae e Yoshi!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Como é ter 3 irmãs mais velhas segundo um idol de K-Pop!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Resultado impressionante da maquiagem Goth Punk do Yoshi!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Tzuyu do TWICE reage ao rap da Risabae ao vivo",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O hobby secreto inacreditável da Tzuyu do TWICE",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Onde a Tzuyu do TWICE treinava canto escondida",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A incrível transformação de maquiagem gatinho da Tzuyu",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Como adaptar o delineado para o formato de rosto da Tzuyu",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids revela por que assinou o canal do JYP no Bubble!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids choca maquiadora ao revelar segredo dos fãs!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids descobre coincidência surreal com famosa maquiadora!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids ensina seu método bizarro de colocar lentes de contato!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids explica o significado do álbum ATE e o novo conceito!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids reage à transformação de maquiagem igual a ele!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Felix do Stray Kids ganha maquiagem de lágrimas angelicais!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Quando os membros do grupo te ensinam girias erradas em coreano",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Transformacao surreal de idolo em personagem de anime/webtoon",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Reacao debochada de idolo de K-Pop ao falar dos companheiros de grupo",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Idolo de K-Pop e tao alto que nao cabe no cenario do programa",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Idolo de K-Pop aprende a falar sogra em coreano e faz piada",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Idolo de K-Pop refuta MBTI da maquiadora com logica imbativel",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Idolo de K-Pop impressiona ao desenhar seu proprio visual de webtoon",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Apresentadora desafia idolo de K-Pop a fazer a maquiagem dela",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O DESENHO DA MAQUIAGEM DOS SONHOS VIROU UM FILME DE TERROR!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A FANTASIA MAIS BIZARRA DE UMA IDOL DE K-POP NUMA LOJA DE MAKE!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "PEDI PARA ME DAREM TAPAS NO ROSTO ANTES DA MAQUIAGEM!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A REAÇÃO ENGRAÇADA DA FAMÍLIA QUANDO ELA FINALMENTE ESTREOU!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "ELA TROCOU DE LENTES E PARECE UM PERSONAGEM DE ANIME!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "ELA ASSISTE OS TUTORIAIS DOS FÃS RECRIANDO A MAKE DELA!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O TRUQUE DE MAKE QUE TRANSFORMA OLHAR DE GATO EM OLHAR MEIGO!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O CONVITE AO VIVO PARA MAQUIAR O COLEGA DE GRUPO!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A gafe inacreditavel no camarim que fez todo mundo cair na risada",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O erro secreto do Instagram que quase deu spoiler antes da hora",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O plano secreto da idol para assustar o proprio grupo com maquiagem",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A idol de K-Pop que era fa de infancia da maquiadora",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A transformacao incrivel com delineado de gato no camarim",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A explicacao do conceito fofo por tras do novo hit de K-Pop",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Quando voce quer fazer uma maquiagem marcante mas tem medo do resultado",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A idol que desenhou a propria maquiagem antes de ir ao estudio",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Segredo fofo revelado por Sion do NCT WISH!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A reação dos amigos de Sion ao ver ele com Son Heung-min!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Sion do NCT WISH e o debate culinário da Coreia do Sul!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Sion (NCT WISH) falando japonês perfeitamente!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A transformação de Príncipe do Sion do NCT WISH!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Sion do NCT WISH desenhou seu próprio visual de Príncipe!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Wonhee e Iroha do ILLIT chegam vestidas de princesas",
+    "quando": "2026-09-26"
+   }
+  ],
+  "atefalhar": [
+   {
+    "titulo": "A Ordem Certa Para Montar Seu Treino de Glúteos",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "O CHECKLIST PERFEITO PARA ESCOLHER EXERCÍCIOS DE GLÚTEO",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "DICA DE OURO PARA INICIANTES NA ACADEMIA! 🏋️‍♀️",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "COMO FAZER AGACHAMENTO E AFUNDO PERFEITO! 🦵",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "Como hipertrofiar o glúteo treinando no déficit calórico",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "A DICA DEFINITIVA PARA DEFINIR O BUMBUM NO RDL 🍑",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "VOCÊ ESTÁ DESCENDO DEMAIS NO RDL? CUIDADO! ⚠️",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "PARE DE SE IMPORTAR COM O NÚMERO NA BALANÇA",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "POR QUE VOCÊ NÃO DEVE PULAR O AQUECIMENTO",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "CHOCAR O MÚSCULO É UMA MENTIRA NA MUSCULAÇÃO",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Como eu finalmente fiz meus quadríceps crescerem",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Por que você deve começar o treino de perna pela flexora",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "É PRECISO COMER MAIS PARA GANHAR MÚSCULOS? A VERDADE!",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "RECOMPOSIÇÃO CORPORAL: COMO PERDER GORDURA E GANHAR MÚSCULO",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "O DÉFICIT CALÓRICO CERTO PARA GANHAR MÚSCULOS SEM ENGORDAR",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Guia Definitivo para Crescer os Glúteos na Academia",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "O Segredo da Ordem dos Exercícios no Treino",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Os 3 Melhores Exercicios Para Crescer os Gluteos",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Como Fazer Cardio Divertido no Deficit Calorico",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Como Vencer a Vergonha de Comecar Algo Novo na Academia",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Você NÃO Precisa Fazer 40 Séries de Glúteo por Semana!",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Por Que Troquei o Agachamento Livre Pelo Hack Squat?",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Apenas 4 Exercícios Para um Treino Brutal de Glúteos!",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Seu corpo dos sonhos e um pesadelo de manter?",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O maior erro ao voltar a treinar depois da pausa",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A Melhor Rotina de 3 Exercícios para Crescer os Glúteos",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como Perder a Vergonha na Academia e Fazer Cardio Divertido",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como Estruturar um Dia de Cutting Sem Perder Massa Magra",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A LUTA SECRETA DE DAVID GOGGINS CONTRA A TIMIDEZ",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "COMO CRIAR CALOS NA MENTE SEGUNDO DAVID GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O DIÁLOGO INTERNO QUE MUDOU A VIDA DE DAVID GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A VOZ INTERNA QUE LEVA À VITÓRIA DE ACORDO COM GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "O SEGREDO DOS HOMENS 'ALFA' REVELADO POR DAVID GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A FAÇANHA FÍSICA INACREDITÁVEL DE DAVID GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "MUDE SUA PERSPECTIVA PARA SAIR DA LAMA - DAVID GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "COMO CONSTRUIR UMA ARMADURA MENTAL - DAVID GOGGINS",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Como Reprogramar seu Corpo em Apenas 7 Dias!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "A Rotina Noturna Perfeita para Acalmar a Mente!",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Como Criar uma Rotina para Viver Como um Campeão",
+    "quando": "2026-09-07"
+   },
+   {
+    "titulo": "Por Que Suas Primeiras Horas Definem Seu Sucesso",
+    "quando": "2026-09-07"
+   }
+  ],
+  "semanestesia.pod": [
+   {
+    "titulo": "Sem Disciplina Você Será Escravo | Jocko Willink",
+    "quando": "2026-08-31"
+   },
+   {
+    "titulo": "A verdade doída sobre o motivo do seu fracasso",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "Pare de se fazer de vítima e mude sua vida",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "O segredo da rotina matinal inabalável",
+    "quando": "2026-09-01"
+   },
+   {
+    "titulo": "É FÁCIL SER GRANDE HOJE EM DIA: A MAIORIA É FRACA!",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "Sem motivação: a verdade brutal sobre disciplina e sofrimento",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "A razão de você não ter sucesso segundo David Goggins",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "A neurociência da força de vontade explicada por Andrew Huberman",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "De 135kg ao topo: a transformação incondicional de David Goggins",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "Como calar a voz interna que diz que você vai falhar",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "Você não tem ideia do seu verdadeiro potencial",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "O preço secreto da grandeza que ninguém te conta",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "Como David Goggins estuda e aprende mesmo tendo TDAH",
+    "quando": "2026-09-02"
+   },
+   {
+    "titulo": "O Segredo de Kobe Bryant Para Vencer a Concorrência",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Como Ajustar Seu Sono e Acordar Cedo em 7 Dias",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Perdido e sem rumo? O segredo para sair da paralisia mental",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Punição ou oportunidade? Mude sua mentalidade no trabalho",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Onde você foca, você chega: a lição de um ex-Navy SEAL",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "A Regra dos 40%: Seu Cérebro Esta Te Enganando",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Como Calejar a Mente e Ficar Inabalavel",
+    "quando": "2026-09-03"
+   },
+   {
+    "titulo": "Por Que É IMPOSSÍVEL Desligar uma IA Perigosa?",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Estamos Vivendo em uma Simulação? A Prova Estatística",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "O Fim dos Empregos: Por Que Se Requalificar Não Vai Funcionar",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "A Verdade Sobre Sam Altman e a OpenAI Que Ninguém Conta",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Criador do Termo 'Segurança em IA' Admite: É Impossível Controlá-la",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "99% de Desemprego? A Previsão Assustadora Para 2027",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "A IA Vai Cura a Velhice? Entenda a Velocidade de Escape",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "O Maior Risco Existencial da História da Humanidade",
+    "quando": "2026-09-04"
+   },
+   {
+    "titulo": "Como o estresse cria gordura abdominal difícil de queimar",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A limpeza do cérebro enquanto você dorme",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Dormir em quartos separados destrói a conexão do casal?",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O tipo de contato visual que gera confiança imediata",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como reprogramar seu cérebro após os 25 anos",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O que a neurociência diz sobre a intuição humana",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Os 4 passos científicos para mudar qualquer hábito",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Por que contratar amigos e um erro e usar inimigos funciona",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O sentimento mais miseravel que um ser humano pode ter",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Seu Chefe Pode Estar Te Fazendo Ganhar Barriga!",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Por Que os Ciclos das Mulheres se Sincronizam?",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A diferença secreta entre vulnerabilidade e insegurança na sedução",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Por que os jovens perderam a habilidade de seduzir na vida real",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O SEGREDO da neurociência para atrair o parceiro perfeito",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O impacto da neuroestética na sua longevidade",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Por que a autossatisfação não traz felicidade duradoura",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O maior erro e considerar sua saude garantida",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O maior erro de carreira aos 20 anos",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O Poder do Perdão Incondicional na Saúde Mental",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O real motivo por tras das doencas do envelhecimento",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Por que pacientes perto da janela curam mais rapido?",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A neurociência por trás da desistência e como vencê-la",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O segredo neuroquímico da resiliência extrema",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "De adolescente internado a cientista: a história inacreditável de Andrew Huberman",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "O dia em que decidi mudar de vida: de invasor de casas a neurocientista",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "Como desativar o medo e o trauma no cérebro segundo a neurociência",
+    "quando": "2026-09-05"
+   },
+   {
+    "titulo": "A armadilha invisível da dopamina e a verdadeira causa da recaída",
+    "quando": "2026-09-05"
+   }
+  ]
+ }
+}

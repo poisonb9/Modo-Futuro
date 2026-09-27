@@ -732,6 +732,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      # 5 fosse avaliado pelo numero, nao pela regra.
                      "abertura_mostra", "momento_visual_s", "sem_assunto_na_tela",
                      "abertura_trocada_s",
+                     # memoria de temas (27/09): pra medir se repetir tema
+                     # rende menos mesmo (engine/memoria_temas.py)
+                     "tema_repetido",
                      # ⚠️ ESTES DOIS SAO A QUARENTENA. Fora desta lista, o
                      # clipe traduzido pela reserva chega ao agendador sem
                      # marca nenhuma e e' postado como qualquer outro — que

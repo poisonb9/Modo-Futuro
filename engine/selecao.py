@@ -24,6 +24,7 @@ import requests
 
 import config
 from . import keys
+from . import memoria_temas
 
 # ─────────────────────────────────────────────────────────────────────────
 # O CRITERIO DE "MOMENTO COMPLETO" MUDA POR CANAL
@@ -753,13 +754,17 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
     def corpo(uri):
         return {"contents": [{"parts": [
             {"file_data": {"mime_type": mime, "file_uri": uri}},
-            {"text": prompt + _regra_nomes(caminho) + _bloco_canal()},
+            {"text": prompt + _regra_nomes(caminho) + _bloco_canal()
+                     + memoria_temas.bloco_prompt(_canal_atual())},
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 
     txt = _pedir(caminho, mime, corpo, "escolha de clipes", valida=_extrair_json)
     dados = _extrair_json(txt)
     clipes = dados if isinstance(dados, list) else dados.get("clipes", [])
+    # ⭐ 27/09: memoria de temas (plano de virada item 2) — marca e reordena,
+    # NAO descarta. Ver engine/memoria_temas.py.
+    clipes = memoria_temas.marcar(clipes, _canal_atual())
     return _validar(marcar_sem_assunto(clipes), dur_total)
 
 

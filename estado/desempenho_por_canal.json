@@ -1,0 +1,92 @@
+{
+  "medido_em": "2026-09-27T23:03:43",
+  "janela_dias": 7,
+  "canais": {
+    "(sem canal)": {
+      "posts": 260,
+      "views": 7516,
+      "mediana_views": 0,
+      "reacoes": 7773,
+      "comentarios": 63,
+      "shares": 51,
+      "engajamento_pct": 104.94,
+      "posts_recentes": 14,
+      "views_recentes": 0,
+      "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "PEDI PARA ME DAREM TAPAS NO ROSTO ANTES DA MAQUIAGEM!\n\nYeong"
+        },
+        {
+          "views": 0,
+          "titulo": "O TRUQUE DE MAKE QUE TRANSFORMA OLHAR DE GATO EM OLHAR MEIGO"
+        },
+        {
+          "views": 0,
+          "titulo": "O CONVITE AO VIVO PARA MAQUIAR O COLEGA DE GRUPO!\n\nYeongseo "
+        }
+      ]
+    },
+    "modofuturo": {
+      "posts": 25,
+      "views": 0,
+      "mediana_views": 0,
+      "reacoes": 173,
+      "comentarios": 4,
+      "shares": 2,
+      "engajamento_pct": 0.0,
+      "posts_recentes": 0,
+      "views_recentes": 0,
+      "melhores_recentes": []
+    },
+    "truque.importado": {
+      "posts": 78,
+      "views": 0,
+      "mediana_views": 0,
+      "reacoes": 8491,
+      "comentarios": 55,
+      "shares": 50,
+      "engajamento_pct": 0.0,
+      "posts_recentes": 18,
+      "views_recentes": 0,
+      "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Wonhee e Iroha do ILLIT escolhem o cardápio dos sonhos\n\nWonh"
+        },
+        {
+          "views": 0,
+          "titulo": "Wonhee e Iroha do ILLIT chegam vestidas de princesas\n\nWonhee"
+        },
+        {
+          "views": 0,
+          "titulo": "Wonhee do ILLIT entra na maior discussão sobre menta e choco"
+        }
+      ]
+    },
+    "semanestesia.pod": {
+      "posts": 55,
+      "views": 0,
+      "mediana_views": 0,
+      "reacoes": 663,
+      "comentarios": 7,
+      "shares": 13,
+      "engajamento_pct": 0.0,
+      "posts_recentes": 0,
+      "views_recentes": 0,
+      "melhores_recentes": []
+    },
+    "atefalhar": {
+      "posts": 38,
+      "views": 0,
+      "mediana_views": 0,
+      "reacoes": 293,
+      "comentarios": 2,
+      "shares": 0,
+      "engajamento_pct": 0.0,
+      "posts_recentes": 0,
+      "views_recentes": 0,
+      "melhores_recentes": []
+    }
+  }
+}

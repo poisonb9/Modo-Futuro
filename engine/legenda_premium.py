@@ -121,6 +121,15 @@ CONTEXTO: dict[str, str] = {
 }
 
 
+def _canal() -> str | None:
+    import os
+    try:
+        from . import canais_registro
+        return canais_registro.canonico(os.environ.get("CANAL_ESPERADO"))
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def _contexto() -> str:
     import os
     try:
@@ -146,8 +155,12 @@ def gerar(segmentos: list[dict]) -> str:
     if len(texto) < 150:
         return ""
     try:
+        # ⭐ 27/09/2026: cada canal com o seu formato (engine/legenda_canais.py);
+        # o PROMPT_PREMIUM (fatos + setas) fica pro Modo Futuro.
+        from . import legenda_canais
+        proprio = legenda_canais.prompt_do_canal(_canal())
         r = traducao._traduzir_texto(
-            texto, prompt=PROMPT_PREMIUM.replace("{canal_contexto}", _contexto()))
+            texto, prompt=proprio or PROMPT_PREMIUM.replace("{canal_contexto}", _contexto()))
     except Exception:
         return ""
     r = re.sub(r"^```.*?$|^```$", "", r, flags=re.M).strip()

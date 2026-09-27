@@ -2200,6 +2200,44 @@ def _coerente(p: dict) -> dict:
     return p
 
 
+_VAZIAS = {"para", "com", "sem", "de", "da", "do", "das", "dos", "e", "em",
+           "kit", "novo", "nova", "pecas", "peca", "unidades", "conjunto"}
+
+
+def _palavras(nome: str) -> list[str]:
+    import unicodedata as _u
+    t = "".join(c for c in _u.normalize("NFD", (nome or "").lower())
+                if _u.category(c) != "Mn")
+    return [w.rstrip("s") if len(w) > 4 else w
+            for w in re.findall(r"[a-z0-9]+", t)]
+
+
+def _parecido(p: dict, ja: list[dict]) -> bool:
+    """O cartao `p` e' o MESMO produto de algum de `ja`?
+
+    ⛔ 27/09/2026 (dono, prints da bio: "ta' cheio de produto repetido"). O
+    dedup era so' pelo ID, e o mesmo produto chega por anuncios diferentes:
+    kit do Tesla 2x com a MESMA foto, "Organizador giratorio 360°" 2x (preto
+    e branco), 2 espelhos de LED, 3 luvas/grips de academia, 2 fones, 2 jogos
+    de soquete. Repetido se: mesma foto; mesmo TIPO (1a palavra do nome, ou
+    a 1a palavra de um aparece no outro); ou 2+ palavras de peso em comum.
+    """
+    img = (p.get("imagem") or "").split("?")[0]
+    pw = [w for w in _palavras(p.get("nome")) if w not in _VAZIAS]
+    for q in ja:
+        if img and img == (q.get("imagem") or "").split("?")[0]:
+            return True
+        qw = [w for w in _palavras(q.get("nome")) if w not in _VAZIAS]
+        if not (pw and qw):
+            continue
+        if pw[0] == qw[0] or pw[0] in qw or qw[0] in pw:
+            return True
+        fortes = {w for w in pw if len(w) >= 4} & {w for w in qw if len(w) >= 4}
+        if len(fortes) >= 2:
+            return True
+    return False
+
+
 def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
     """O que o garimpo escolheu, agrupado pela chave que a pagina usa.
 
@@ -2238,6 +2276,9 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
         vistos[chave].add(marca)
         fila = saida.setdefault(chave, [])
         if len(fila) >= por_canal:
+            continue
+        if _parecido({"nome": _nome_bonito(d), "imagem": d.get("imagem")},
+                     fila):
             continue
         quando = (d.get("quando") or "")[:10]
         fila.append(_coerente({
@@ -2302,6 +2343,9 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             continue
         visto_em = _visto_em(serie, agora, d.get("id"))
         if not visto_em or visto_em < limite:
+            continue
+        if _parecido({"nome": _nome_bonito(d), "imagem": d.get("imagem")},
+                     geral):
             continue
         quando = (d.get("quando") or "")[:10]
         geral.append(_coerente({
@@ -2458,7 +2502,8 @@ def produtos_de_tecnologia(quantos: int = 12) -> list[dict]:
     for p in cartoes:
         n = _s(p.get("nome"))
         tipo, quase = n.replace("-", " ").split()[0], " ".join(n.split()[:4])
-        if por_tipo.get(tipo, 0) >= 2 or quase in vistos:
+        if (por_tipo.get(tipo, 0) >= 1 or quase in vistos
+                or _parecido(p, out)):
             continue
         por_tipo[tipo] = por_tipo.get(tipo, 0) + 1
         vistos.add(quase)

@@ -522,7 +522,11 @@ def produtos_externos() -> dict[str, dict]:
             "nome": _nome_externo(p["nome"]),
             "preco": d["preco"],
             "link": p["link"],
-            "imagem": p.get("imagem", ""),
+            # ⚠️ HTTPS (27/09/2026): o feed da KaBuM! manda `http://images4...`
+            # e a pagina (https) bloqueia imagem insegura — a esteira da bio
+            # do Modo Futuro saiu com as fotos em BRANCO. O mesmo endereco
+            # responde 200 em https (conferido).
+            "imagem": (p.get("imagem", "") or "").replace("http://", "https://", 1),
             "queda": _queda_real(serie, d),
             "vendas": 0,
             # ⭐ pela comissao REAL da loja (awin.comissao_de) — ate' 17/09
@@ -2357,7 +2361,72 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             continue
         forca[chave] = sum(p.get("vendas") or 0 for p in itens)
     saida["_ordem"] = sorted(forca, key=lambda c: -forca[c])
+    # ⭐ VITRINE DE NICHO (27/09/2026, dono aprovou). A bio do @modofuturo
+    # mostrava BALSAMO LABIAL na capa e PINCEIS no "mais barato de hoje": o
+    # topo da pagina usava o `_todos` geral, e o canal de chips nao tem
+    # produto proprio no garimpo. `_nicho[chave]` e' o que o TOPO da pagina
+    # daquele canal usa (numeros, esteira, destaque, mais barato). Canal sem
+    # nicho continua exatamente como antes.
+    nicho = {}
+    try:
+        tech = produtos_de_tecnologia()
+        if len(tech) >= 4:
+            nicho["modofuturo"] = tech
+    except Exception as e:  # noqa: BLE001
+        print(f"nicho: tecnologia indisponivel ({e})")
+    saida["_nicho"] = nicho
     return saida
+
+
+# Palavras de produto de TECNOLOGIA (sem acento, minusculas). O catalogo da
+# KaBuM! traz tambem filtro de aspirador e utilidade de casa — ficam fora.
+_TECH = ("processador", "placa de video", "placa-mae", "placa mae", "ssd",
+         "nvme", "memoria", "ddr4", "ddr5", "notebook", "monitor", "headset",
+         "teclado", "mouse", "geforce", "radeon", "ryzen", "intel core",
+         "roteador", "webcam", "pen drive", "hd externo", "gabinete",
+         "water cooler", "smartwatch", "fone", "tablet", "microfone", "cpu",
+         "gpu", "controle", "console", "carregador", "power bank", "cabo usb")
+_NAO_TECH = ("filtro", "aspirador", "escova", "refil", "capa para", "pelicula",
+             "suporte", "adaptador", "parafuso")
+
+
+def produtos_de_tecnologia(quantos: int = 12) -> list[dict]:
+    """Os cartoes de tecnologia (KaBuM!) para o topo da bio do @modofuturo.
+    Ordem: nota da vitrine; depois quem tem serie de preco (grafico)."""
+    import unicodedata as _u
+
+    def _s(t):
+        return "".join(c for c in _u.normalize("NFD", (t or "").lower())
+                       if _u.category(c) != "Mn")
+    ext = produtos_externos()
+    cartoes = []
+    for cat, v in ext.items():
+        if "kabum" not in cat.lower():
+            continue
+        for p in v.get("produtos", []):
+            n = _s(p.get("nome"))
+            if not (p.get("link") and p.get("preco") and p.get("imagem")):
+                continue
+            if any(x in n for x in _NAO_TECH) or not any(x in n for x in _TECH):
+                continue
+            cartoes.append(p)
+    # o canal e' de CHIP: processador, placa de video, SSD e memoria na frente
+    chip = ("processador", "placa de video", "geforce", "radeon", "ryzen",
+            "intel core", "ssd", "nvme", "memoria", "ddr4", "ddr5")
+    cartoes.sort(key=lambda p: (not any(x in _s(p.get("nome")) for x in chip),
+                                -(p.get("vitrine_nota") or 0),
+                                -len(p.get("serie") or [])))
+    # variedade: no maximo 2 por TIPO (1a palavra) e nada quase igual
+    out, por_tipo, vistos = [], {}, set()
+    for p in cartoes:
+        n = _s(p.get("nome"))
+        tipo, quase = n.replace("-", " ").split()[0], " ".join(n.split()[:4])
+        if por_tipo.get(tipo, 0) >= 2 or quase in vistos:
+            continue
+        por_tipo[tipo] = por_tipo.get(tipo, 0) + 1
+        vistos.add(quase)
+        out.append(p)
+    return out[:quantos]
 
 
 def injetar_produtos(html: str, dados: dict | None = None) -> str:

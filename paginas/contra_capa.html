@@ -197,6 +197,13 @@
     letter-spacing: .18em; text-transform: uppercase;
     color: var(--fraco); margin: 10px 0 4px;
   }
+  /* ⭐ 27/09/2026 (dono): a promessa do CANAL logo abaixo do nome — antes
+     o topo so' tinha o slogan geral e o visitante do Modo Futuro nao via
+     nada do canal de onde veio. Uma linha, discreta, acima da chamada. */
+  .promessa-canal {
+    font-size: 14px; line-height: 1.4; color: var(--fraco);
+    max-width: 30ch; margin: 2px auto 6px;
+  }
   .chamada {
     font-family: 'Archivo Black', system-ui, sans-serif;
     font-size: clamp(27px, 8.4vw, 38px); line-height: 1.04;
@@ -625,6 +632,7 @@
     <div class="avatar" id="avatar"></div>
     <div class="heroi">
       <p class="marca" id="marca"></p>
+      <p class="promessa-canal" id="promessa_canal"></p>
       <h1 class="chamada" id="chamada"></h1>
       <!-- ⚠️ E' UM LINK, e nao um paragrafo. Na primeira versao era texto
            solto: o Bryan tentou tocar no produto do topo e nao aconteceu
@@ -819,7 +827,7 @@
       acento: "#1B5BFF",
       // 27/09/2026: mesma promessa da bio nova do perfil (os videos agora
       // tem 30-45 s — "sessenta segundos" e "um minuto" ficaram falsos).
-      promessa: "A tecnologia por dentro. Chips, fábricas e IA, uma história nova por dia.",
+      promessa: "A tecnologia por dentro: chips, fábricas e IA.",
       vantagens: [
         ["⚙️", "Chip, fábrica e IA explicados sem aula chata"],
         ["⏱️", "Menos de um minuto por história, e você sai sabendo"],
@@ -831,7 +839,7 @@
           botoes: [["🎬", "Mais vídeos como esse", "https://www.tiktok.com/@modofuturo"]]
         },
         {
-          guia: "O que não cabe em sessenta segundos vai pra cá 👇",
+          guia: "O que não cabe no vídeo vai pra cá 👇",
           botoes: [["📡", "Grupo do Modo Futuro", FALTA]]
         }
       ],
@@ -1509,9 +1517,9 @@
       var ac = el("div", "acompanha");
       ac.appendChild(el("span", "pulso"));
       var quanto = p.dias <= 0
-        ? "acompanhando desde hoje"
-        : (p.dias === 1 ? "acompanhando há 1 dia"
-                        : "acompanhando há " + p.dias + " dias");
+        ? "de olho desde hoje"
+        : (p.dias === 1 ? "de olho há 1 dia"
+                        : "de olho há " + p.dias + " dias");
       ac.appendChild(el("span", null, quanto));
       corpo.appendChild(ac);
     } else {
@@ -1575,6 +1583,7 @@
     // ⚠️ O NOME E' O DO CANAL. A pagina e' um arquivo so', servido em varios
     // enderecos — isso e' detalhe de hospedagem, nao de marca.
     document.getElementById("marca").textContent = c.nome;
+    document.getElementById("promessa_canal").textContent = c.promessa || "";
     document.getElementById("chamada").innerHTML =
       "Eu procuro.<br>Você <em>paga menos</em>.";
 
@@ -1582,7 +1591,12 @@
     // na pagina; nenhum e' escrito na mao. Numero de vitrine que nao bate
     // com o que se ve' embaixo e' a mentira mais barata de fazer e a mais
     // cara de pagar.
-    var todos = PRODUTOS_REAIS["_todos"] || [];
+    // ⭐ VITRINE DE NICHO (27/09/2026): o topo (numeros, esteira, destaque,
+    // mais barato) usa o nicho do canal quando ele existe. A bio do Modo
+    // Futuro mostrava balsamo labial e pinceis. Canal sem nicho: como antes.
+    var nicho = (PRODUTOS_REAIS["_nicho"] || {})[atual] || [];
+    var usaNicho = nicho.length >= 4;
+    var todos = usaNicho ? nicho : (PRODUTOS_REAIS["_todos"] || []);
     var caixa = document.getElementById("prova_forte");
     caixa.innerHTML = "";
     if (todos.length) {
@@ -1597,7 +1611,8 @@
       // ⚠️ CADA NUMERO SO' APARECE SE EXISTIR. Um bloco de prova com
       // "0 vendas" ou "R$ 0,00" prova o contrario do que pretende.
       var provas = [];
-      provas.push([String(todos.length), "achadinhos garimpados hoje"]);
+      provas.push([String(todos.length), usaNicho ? "ofertas de tecnologia hoje"
+                                                  : "achadinhos garimpados hoje"]);
       if (precos.length) {
         provas.push([real(Math.min.apply(null, precos)), "o mais barato de hoje"]);
       }
@@ -1659,10 +1674,18 @@
       return ta - tb;
     });
 
+    // ⭐ 27/09/2026 (dono): SAI "Mais videos como esse" — quem esta' aqui
+    // veio do TikTok, o botao so' devolvia a pessoa pra la'. E botao SEM LINK
+    // (FALTA) nao aparece mais ao publico: cartao "falta o link" parecia
+    // pagina inacabada. Grupo que fica sem botao nenhum some inteiro.
     ordenados.forEach(function (g) {
+      var bs = g.botoes.filter(function (b) {
+        return b[2] !== FALTA && !/tiktok\.com\/@/.test(String(b[2]));
+      });
+      if (!bs.length) { return; }
       var sec = el("section", "grupo");
       sec.appendChild(el("p", "guia", g.guia));
-      g.botoes.forEach(function (b) {
+      bs.forEach(function (b) {
         sec.appendChild(montarBotao(b[0], b[1], b[2]));
       });
       grupos.appendChild(sec);
@@ -1676,7 +1699,7 @@
     //
     // ⚠️ SO' APARECE SE HOUVER PRODUTO. Um botao 'o mais barato de hoje'
     // sem preco e' promessa vazia no lugar mais visivel da pagina.
-    var baratos = (PRODUTOS_REAIS["_todos"] || []).filter(function (p) {
+    var baratos = todos.filter(function (p) {
       return p.link && p.preco;
     }).slice().sort(function (a, b) {
       return preco_num(a.preco) - preco_num(b.preco);
@@ -1707,8 +1730,9 @@
       var ids = dv.produtos.map(function (p) { return p.link; });
       reais = dv.produtos.concat(reais.filter(function (p) { return ids.indexOf(p.link) < 0; }));
     }
-    var disponiveis = reais.length ? reais : c.produtos;
-    var real = reais.length > 0 || c.produtoReal;
+    var disponiveis = reais.length ? reais
+      : (usaNicho ? nicho.slice(0, 4) : c.produtos);
+    var real = reais.length > 0 || c.produtoReal || usaNicho;
     if (mostrandoProdutos && disponiveis.length > 0) {
       var lista = disponiveis.slice(0, 4);
       lista_do_canal = reais.length ? lista : [];
@@ -1737,7 +1761,10 @@
     // ar ele oferecia ao visitante 'ver como fica sem produto' — apareceu
     // assim no iPhone do Bryan, embaixo de quatro produtos que existem.
     var chave_int = document.getElementById("interruptor");
-    chave_int.hidden = reais.length > 0;
+    // ⭐ 27/09: no ar ele NUNCA aparece (vazou em modofuturo.pages.dev);
+    // so' abrindo o arquivo local ou em localhost.
+    chave_int.hidden = reais.length > 0 ||
+      !/^(localhost|127\.0\.0\.1|)$/.test(location.hostname);
     chave_int.textContent = mostrandoProdutos
       ? "ver como fica sem produto (é o estado de hoje)"
       : "ver com os dois produtos preenchidos";
@@ -1751,7 +1778,8 @@
     // ⚠️ NAO REPETE o que ja' esta' na vitrine de cima, e NAO mostra o
     // proprio canal como se fosse outro canto.
     document.getElementById("titulo_vitrine").textContent =
-      "O que apareceu no " + c.nome;
+      (!reais.length && usaNicho) ? "Ofertas de tecnologia de hoje"
+                                  : "O que apareceu no " + c.nome;
 
     // ⚠️ TODOS OS CANTOS DA CASA, cada um com o seu bloco.
     //
@@ -1831,7 +1859,7 @@
     // ⚠️ A LINHA VIVA MOSTRA PRODUTO, nao slogan. Quem chega vem de video
     // vertical e sai em dois segundos; o topo tem que entregar o que a
     // pagina promete ANTES de pedir rolagem.
-    animarVitrine(lista_do_canal.concat(doTotal));
+    animarVitrine(usaNicho ? nicho : lista_do_canal.concat(doTotal));
 
 
     Array.prototype.forEach.call(document.querySelectorAll(".aba"), function (a) {

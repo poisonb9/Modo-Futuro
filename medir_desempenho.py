@@ -43,7 +43,7 @@ import requests
 import agendar_buffer as ab
 from engine import buffer_cota as cota
 
-ORG_PADRAO = "6a6ca3c3aba3767824bf6234"
+ORG_PADRAO = "6ab9939bd05c27f623993733"
 FUSO_SP = datetime.timedelta(hours=3)   # America/Sao_Paulo = UTC-3
 
 

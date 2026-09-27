@@ -56,8 +56,11 @@ class Canal:
 
 CANAIS: dict[str, Canal] = {
     c.nome_buffer: c for c in [
+        # ⭐ 27/09/2026: conta NOVA do Buffer (a chave da antiga, org
+        # 6a6ca3c3aba3767824bf6234 / canal 6a6cd9d54b2d03035f771631, EXPIROU
+        # em 23/09). Ids lidos pelo workflow buffer_ids.yml.
         Canal("modofuturo", "@modofuturo",
-              "6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631",
+              "6ab9939bd05c27f623993733", "6ab994eaea19ca0bde09dc31",
               "BUFFER_TOKEN"),
         # ⚠️ O @ MUDOU EM 08/09/2026: era `@truque.importado`, virou
         # `@achadinho.make` (renomeado pelo Bryan, confirmado por ele).

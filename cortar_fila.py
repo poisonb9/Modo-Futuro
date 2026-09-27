@@ -294,7 +294,7 @@ def horizonte_dos_canais() -> dict:
 
 
 CANAIS_BUFFER = {
-    "modofuturo": ("6a6ca3c3aba3767824bf6234", "6a6cd9d54b2d03035f771631",
+    "modofuturo": ("6ab9939bd05c27f623993733", "6ab994eaea19ca0bde09dc31",
                    "BUFFER_TOKEN"),
     "semanestesia.pod": ("6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6",
                          "BUFFER_TOKEN_SEMANESTESIA"),

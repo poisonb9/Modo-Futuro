@@ -32,8 +32,8 @@ import agendar_buffer as ab
 RAIZ = Path(__file__).resolve().parent
 PUBLICADOS = RAIZ / "estado" / "publicados.json"
 SERIE = RAIZ / "estado" / "serie_views.jsonl"
-ORG = "6a6ca3c3aba3767824bf6234"
-CANAL = "6a6cd9d54b2d03035f771631"
+ORG = "6ab9939bd05c27f623993733"
+CANAL = "6ab994eaea19ca0bde09dc31"
 FUSO_SP = datetime.timedelta(hours=3)
 
 

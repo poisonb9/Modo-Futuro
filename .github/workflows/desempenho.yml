@@ -82,7 +82,10 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
-        run: python -X utf8 historico.py
+        run: |
+          python -X utf8 historico.py
+          # ⭐ 27/09/2026: a LISTA MESTRE (todo video, canal, data e hora)
+          python -X utf8 lista_mestre.py || echo "[!] lista mestre falhou"
 
       - name: Guardar
         run: |
@@ -111,7 +114,7 @@ jobs:
           # e' o mesmo padrao que segurou a cozinha em zero por seis dias:
           # um passo acessorio derrubando o que era produto.
           ALVOS=""
-          for f in desempenho.jsonl estado/publicados.json estado/serie_views.jsonl estado/desempenho_por_canal.json; do
+          for f in desempenho.jsonl estado/publicados.json estado/serie_views.jsonl estado/desempenho_por_canal.json estado/lista_mestre.json estado/LISTA_MESTRE.csv; do
             [ -e "$f" ] && ALVOS="$ALVOS $f"
           done
           if [ -z "$ALVOS" ]; then

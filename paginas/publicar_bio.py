@@ -2394,16 +2394,24 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
 # Huberman/dopamina 470-577) — o livro continua a conversa do video.
 # ⛔ Nada de sedução/relacionamento: o canal saiu desse tema (27/09/2026).
 LIVROS_SEMANESTESIA = [
-    ("Nada pode me ferir David Goggins", ("nada pode me ferir",)),
-    ("Nunca é hora de parar David Goggins", ("nunca", "parar")),
-    ("Hábitos atômicos James Clear", ("habitos atomicos",)),
-    ("Nação dopamina Anna Lembke", ("dopamina",)),
-    ("Por que nós dormimos Matthew Walker", ("por que nos dormimos",)),
-    ("Mindset Carol Dweck", ("mindset",)),
-    ("Garra Angela Duckworth", ("garra",)),
-    ("O poder do hábito Charles Duhigg", ("poder do habito",)),
-    ("Trabalho focado Cal Newport", ("trabalho focado",)),
-    ("Rápido e devagar Daniel Kahneman", ("rapido e devagar",)),
+    ("Nada pode me ferir David Goggins", ("nada pode me ferir",),
+     "Nada pode me ferir — David Goggins"),
+    ("Nunca é hora de parar David Goggins", ("nunca", "parar"),
+     "Nunca é hora de parar — David Goggins"),
+    ("Hábitos atômicos James Clear", ("habitos atomicos",),
+     "Hábitos Atômicos — James Clear"),
+    ("Nação dopamina Anna Lembke", ("dopamina",),
+     "Nação Dopamina — Anna Lembke"),
+    ("Por que nós dormimos Matthew Walker", ("por que nos dormimos",),
+     "Por que nós dormimos — Matthew Walker"),
+    ("Mindset Carol Dweck", ("mindset",), "Mindset — Carol S. Dweck"),
+    ("Garra Angela Duckworth", ("garra",), "Garra — Angela Duckworth"),
+    ("O poder do hábito Charles Duhigg", ("poder do habito",),
+     "O poder do hábito — Charles Duhigg"),
+    ("Trabalho focado Cal Newport", ("trabalho focado",),
+     "Trabalho focado — Cal Newport"),
+    ("Rápido e devagar Daniel Kahneman", ("rapido e devagar",),
+     "Rápido e devagar — Daniel Kahneman"),
 ]
 
 

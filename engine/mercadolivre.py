@@ -645,7 +645,7 @@ def livros(consultas: list[tuple[str, tuple[str, ...]]], canal: str = "",
         return "".join(c for c in _u.normalize("NFD", (t or "").lower())
                        if _u.category(c) != "Mn")
     saida = []
-    for busca, precisa in consultas:
+    for busca, precisa, *titulo in consultas:
         try:
             d = _get("/products/search", status="active", site_id="MLB",
                      q=busca, limit=15)
@@ -682,8 +682,13 @@ def livros(consultas: list[tuple[str, tuple[str, ...]]], canal: str = "",
                 continue
             cat = vencedor.get("category_id") or ""
             melhor = {
-                "nome": _nome_de_livro(nome), "link": link,
-                "imagem": (r.get("pictures") or [{}])[0].get("url", ""),
+                # o nome da ficha vem sujo ("Livro ... Editorial Alta Life"):
+                # quem pediu pode dar o titulo de estante
+                "nome": titulo[0] if titulo else _nome_de_livro(nome),
+                "link": link,
+                "imagem": re.sub(r"-[A-Z]\.(jpg|webp)$", r"-O.\1",
+                                 (r.get("pictures") or [{}])[0].get("url", "")
+                                 ).replace("http://", "https://"),
                 "preco": f"R$ {menor:.2f}".replace(".", ","),
                 "preco_num": menor, "vendedores": len(itens),
                 "frete_gratis": bool((vencedor.get("shipping") or {})

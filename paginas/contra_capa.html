@@ -502,20 +502,35 @@
   .serie.baixou .linha { stroke: var(--acento); opacity: 1; }
   .serie.baixou .agora { fill: var(--acento); }
   .foto { position: relative; }
-  /* ⭐ Filtro por AREA na vitrine geral (27/09/2026): categoria, nunca loja. */
+  /* ⭐ SETORES (27/09/2026): atalhos por categoria + uma faixa por setor. */
   .areas {
-    display: flex; gap: 8px; overflow-x: auto; margin: 0 0 14px;
-    padding-bottom: 4px; scrollbar-width: none;
+    position: sticky; top: 0; z-index: 5;
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    margin: 0 -16px 6px; padding: 10px 16px;
+    background: color-mix(in srgb, var(--fundo, #f6f6f8) 88%, transparent);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   }
   .areas::-webkit-scrollbar { display: none; }
   .area {
-    flex: none; font: 600 13px/1 inherit; font-family: inherit;
-    padding: 9px 14px; border-radius: 999px; cursor: pointer;
+    flex: none; font-family: inherit; font-weight: 600; font-size: 13px;
+    line-height: 1; padding: 9px 15px; border-radius: 999px; cursor: pointer;
     border: 1.5px solid var(--tinta); background: var(--superficie);
     color: var(--tinta);
   }
-  .area.ligada { background: var(--tinta); color: var(--superficie); }
-  .produto[hidden] { display: none; }
+  .area:active { background: var(--tinta); color: var(--superficie); }
+  .setor { scroll-margin-top: 64px; margin-top: 26px; }
+  .setor .cabeca { display: block; margin-bottom: 12px; }
+  .setor .apoio {
+    margin: 4px 0 0; font-size: 13.5px; color: var(--tinta-fraca);
+  }
+  .vitrine.trilho-setor {
+    display: grid; grid-auto-flow: column; grid-template-columns: none;
+    grid-auto-columns: 46%; gap: 12px; overflow-x: auto;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: 0 -16px; padding: 2px 16px 10px; scroll-padding: 0 16px;
+  }
+  .vitrine.trilho-setor::-webkit-scrollbar { display: none; }
+  .vitrine.trilho-setor .produto { scroll-snap-align: start; }
   /* ⭐ LIVRO EM PE' (27/09/2026, dono: "melhorar como as capas estao"). Capa
      e' retrato: no quadrado com `cover` o titulo sumia ("NADA" cortado). Aqui
      a capa aparece INTEIRA, de pe', com lombada e sombra, sobre um fundo
@@ -1846,64 +1861,58 @@
     // Achadinho Total", "No Pago menos"... viraram UMA vitrine, intercalada
     // por CATEGORIA (um de cada area por vez), com filtro por area. O `_todos`
     // (os 12 mais recentes) era quase so' beleza: agora ele so' completa.
-    var AREA = {
-      "achadinho.make": "Beleza", "achadinhos.instantaneos": "Casa",
-      "fatura.chora": "Eletrônicos", "cozinha.internacional": "Cozinha",
-      "atefalhar": "Fitness", "varredura.carro": "Carro",
-      "varredura.jardim": "Jardim", "varredura.ferramentas": "Ferramentas"
+    // ⭐ SETORES (27/09/2026, dono: "setorizar a vitrine, sem nome de canal,
+    // com nome viral, premium e organizado"). Cada area vira uma secao com
+    // nome curto e uma linha de apoio; os cartoes correm de lado (trilho com
+    // encaixe), e os botoes do topo levam direto a' secao.
+    var SETORES = {
+      "achadinho.make":          ["Beleza", "Make que viraliza", "O que está em alta no TikTok, pelo menor preço"],
+      "fatura.chora":            ["Tech", "Tech que vale cada real", "Fone, carregador e gadget com preço conferido"],
+      "achadinhos.instantaneos": ["Casa", "Casa mais esperta", "O detalhe que resolve o dia a dia"],
+      "cozinha.internacional":   ["Cozinha", "Cozinha sem esforço", "Utensílio que economiza tempo de verdade"],
+      "atefalhar":               ["Treino", "Treino em casa", "Acessório de academia sem pagar de academia"],
+      "varredura.carro":         ["Carro", "Pro seu carro", "Limpeza, luz e organização"],
+      "varredura.jardim":        ["Jardim", "Jardim & varanda", "Planta viva e varanda bonita"],
+      "varredura.ferramentas":   ["Ferramentas", "Faça você mesmo", "Ferramenta boa sem preço de loja"]
     };
     var ordem = (PRODUTOS_REAIS["_ordem"] || []).concat(
-      Object.keys(AREA).filter(function (k) {
+      Object.keys(SETORES).filter(function (k) {
         return (PRODUTOS_REAIS["_ordem"] || []).indexOf(k) < 0;
-      })).filter(function (k) { return k !== atual && AREA[k]; });
-    var filas = ordem.map(function (k) {
-      return pegar(PRODUTOS_REAIS[k], 8).map(function (p) {
-        return [AREA[k], p];
-      });
+      })).filter(function (k) { return k !== atual && SETORES[k]; });
+    var setores = [];
+    ordem.forEach(function (k) {
+      var itens = pegar(PRODUTOS_REAIS[k], 8);
+      if (itens.length >= 2) setores.push([k, itens]);
     });
+    var doTotal = [];      // o geral ja' esta' dentro dos setores
     var mistura = [];
-    for (var volta = 0; volta < 8; volta++) {
-      filas.forEach(function (f) { if (f[volta]) mistura.push(f[volta]); });
-    }
-    var doTotal = pegar(PRODUTOS_REAIS["_todos"], 12);
-    doTotal.forEach(function (p) { mistura.push(["Achadinhos", p]); });
-    mistura = mistura.slice(0, 16);
+    setores.forEach(function (st) {
+      st[1].forEach(function (p) { mistura.push([st[0], p]); });
+    });
 
-    if (mistura.length) {
-      var sec = el("section", "produtos");
-      var cab = el("div", "cabeca");
-      cab.appendChild(el("h2", null, "Mais achados de hoje"));
-      sec.appendChild(cab);
-      var areas = [];
-      mistura.forEach(function (m) {
-        if (areas.indexOf(m[0]) < 0) areas.push(m[0]);
-      });
-      var g = el("div", "vitrine");
-      var cartoes = mistura.map(function (m) {
-        var c = montarProduto(m[1]);
-        c.dataset.area = m[0];
-        g.appendChild(c);
-        return c;
-      });
-      if (areas.length > 1) {
-        var chips = el("div", "areas");
-        ["Todos"].concat(areas).forEach(function (nome, i) {
-          var b = el("button", "area" + (i ? "" : " ligada"), nome);
-          b.type = "button";
-          b.addEventListener("click", function () {
-            chips.querySelectorAll(".area").forEach(function (x) {
-              x.classList.toggle("ligada", x === b);
-            });
-            cartoes.forEach(function (c) {
-              c.hidden = !(nome === "Todos" || c.dataset.area === nome);
-            });
-          });
-          chips.appendChild(b);
+    if (setores.length) {
+      var nav = el("nav", "areas");
+      nav.setAttribute("aria-label", "Categorias");
+      outros.appendChild(nav);
+      setores.forEach(function (st) {
+        var info = SETORES[st[0]];
+        var sec = el("section", "produtos setor");
+        sec.id = "setor-" + info[0].toLowerCase();
+        var cab = el("div", "cabeca");
+        cab.appendChild(el("h2", null, info[1]));
+        cab.appendChild(el("p", "apoio", info[2]));
+        sec.appendChild(cab);
+        var g = el("div", "vitrine trilho-setor");
+        st[1].forEach(function (p) { g.appendChild(montarProduto(p)); });
+        sec.appendChild(g);
+        outros.appendChild(sec);
+        var b = el("button", "area", info[0]);
+        b.type = "button";
+        b.addEventListener("click", function () {
+          sec.scrollIntoView({ behavior: "smooth", block: "start" });
         });
-        sec.appendChild(chips);
-      }
-      sec.appendChild(g);
-      outros.appendChild(sec);
+        nav.appendChild(b);
+      });
     }
 
     // ⚠️ O CONTADOR SAI DO QUE ESTA' NA TELA, nao de um numero escrito na

@@ -1872,12 +1872,17 @@
   //
   // O caminho (`/bio/c1`) e o `?c=` continuam valendo: link ja' publicado nao
   // pode quebrar quando o formato melhora.
+  // ⛔ 27/09/2026: os SUBDOMINIOS tambem entram. So' havia os nomes do
+  // pages.dev, e o 1o pedaco do endereco bonito ("chef", "hoje", "livro")
+  // nao casava: chef.AchadinhoTotal.com.br abria a pagina do ACHADINHO MAKE
+  // (o canal padrao) — conferido no ar. "make" so' funcionava por sorte.
   var PORTAS = {
-    "oachadinho": "c1",   // Achadinho Make
-    "meulivro": "c2",     // Sem Anestesia
-    "achadinhochef": "c5",
-    "pagomenos": "c6",    // Fatura Chora
-    "achadinhodehoje": "c7"
+    "oachadinho": "c1", "make": "c1",        // Achadinho Make
+    "meulivro": "c2", "livro": "c2",         // Sem Anestesia
+    "modofuturo": "c4", "futuro": "c4",      // Modo Futuro (27/09/2026)
+    "achadinhochef": "c5", "chef": "c5",
+    "pagomenos": "c6",                       // Fatura Chora
+    "achadinhodehoje": "c7", "hoje": "c7"
   };
   var doHost = PORTAS[location.hostname.split(".")[0]];
 

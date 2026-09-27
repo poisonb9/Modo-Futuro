@@ -110,12 +110,33 @@ def mais_parecido(titulo: str, canal: str | None) -> tuple[float, str]:
     return melhor
 
 
+# ⭐ 27/09/2026 (dono: "gostei da ideia de reaproveitar o tema"). O que
+# derrubou as views no Modo Futuro foi a MESMA HISTORIA de novo (1.011 -> 327).
+# Tema vencedor com OUTRA historia/trecho/podcast e' o contrario: e' o assunto
+# que o publico ja' provou que quer. Medido nos prints de 27/09: Goggins
+# 490-603, desistencia/40% 526, dopamina 500, forca de vontade 577.
+TEMAS_VENCEDORES: dict[str, str] = {
+    "semanestesia.pod": ("David Goggins; desistir / a regra dos 40% / limite "
+                         "mental; dopamina; força de vontade"),
+}
+
+
 def bloco_prompt(canal: str | None) -> str:
     ts = publicados(canal)[-MAX_NO_PROMPT:]
     if not ts:
         return ""
     lista = "\n".join(f"- {t}" for t in ts)
-    return ("\n\nJA' PUBLICADOS NESTE CANAL (os mais recentes por ultimo). Cada "
+    try:
+        from . import canais_registro
+        _c = canais_registro.canonico(canal) or canal
+    except Exception:  # noqa: BLE001
+        _c = canal
+    venc = TEMAS_VENCEDORES.get(_c or "")
+    excecao = (f"EXCECAO — TEMAS QUE VENCERAM ({venc}): estes DEVEM voltar, "
+               "com OUTRA historia, outro trecho ou outro podcast. O que nao "
+               "pode e' a MESMA historia (o mesmo caso, o mesmo numero, a "
+               "mesma frase).\n") if venc else ""
+    return excecao + ("\n\nJA' PUBLICADOS NESTE CANAL (os mais recentes por ultimo). Cada "
             "historia repetida rendeu MENOS que a primeira (medido: 1.011 -> 327 "
             "views). NAO escolha trecho cujo ASSUNTO CENTRAL ja' esteja aqui; "
             "prefira historia, objeto ou numero que o canal ainda nao contou:\n"

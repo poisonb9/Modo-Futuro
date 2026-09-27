@@ -48,7 +48,10 @@ on:
       canal:
         description: "Para qual canal e' este corte: modofuturo | cozinha.importada | semanestesia.pod | atefalhar | truque.importado. Decide o token do Buffer E o nome que a guarda confere antes de publicar. O valor tem que bater com o NOME do canal no Buffer."
         required: false
-        default: "modofuturo"
+        # ⛔ SEM DEFAULT (27/09/2026): o default "modofuturo" fez manteiga e
+        # cookies (02/09) virarem clipes do canal de chips. O passo
+        # "Conferir o canal" recusa o corte sem canal, antes de gastar nada.
+        default: ""
       voice_over:
         description: "Mantem o audio ORIGINAL audivel por baixo da dublagem (documentario). Para o Sem Anestesia, onde a voz da pessoa E' parte do argumento. EXIGE fala_literal=true — com narracao de contexto as duas faixas se contradizem, e o motor recusa."
         required: false
@@ -137,6 +140,18 @@ jobs:
           sudo apt-get install -y libgles2 || sudo apt-get install -y libgles2-mesa || true
 
       - run: pip install -r requirements.txt
+
+      - name: Conferir o canal (sem canal, nao corta)
+        env:
+          CANAL: ${{ inputs.canal }}
+        run: |
+          if [ -z "$CANAL" ]; then
+            echo "[x] corte SEM canal. O default 'modofuturo' saiu em 27/09/2026:"
+            echo "    em 02/09 manteiga e cookies viraram clipes do canal de chips."
+            echo "    Dispare com -f canal=<canal>."
+            exit 1
+          fi
+          echo "canal: $CANAL"
 
       - name: Sondar cota do Gemini ANTES de baixar
         # ⚠️ A SELECAO NAO TEM RESERVA (engine/selecao.py), a traducao tem.

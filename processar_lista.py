@@ -259,8 +259,29 @@ def subir_bruto(arquivo: Path, conta: dict) -> str:
     raise RuntimeError("não achei o DRIVE_FILE_ID na saída")
 
 
+def _canal_da_linha_de_comando() -> str | None:
+    """`--canal X` na linha de comando, canonico, ou None."""
+    if "--canal" in sys.argv:
+        i = sys.argv.index("--canal")
+        if i + 1 < len(sys.argv):
+            from engine.canais_registro import canonico
+            return canonico(sys.argv[i + 1])
+    return None
+
+
 def disparar_corte(file_id: str, nome_arquivo: str, idioma: str = "pt",
-                   conta: dict | None = None):
+                   conta: dict | None = None, canal: str | None = None):
+    # ⛔ SEM CANAL, NAO DISPARA (27/09/2026). Este caminho mandava o corte SEM
+    # `canal`, o workflow caia no default `modofuturo`, e em 02/09 a manteiga
+    # do Chef Jean-Pierre e os cookies da Levain viraram 8 clipes rotulados
+    # como Modo Futuro (manifesto clipes-09-2026). O vigia ja' recusava sem
+    # canal desde 02/09; so' este caminho continuava aberto.
+    canal = canal or _canal_da_linha_de_comando()
+    if not canal:
+        log("   [!] sem --canal: NAO disparei o corte. Mova o bruto para a pasta "
+            "do canal na RAW (o vigia corta com o canal certo) ou rode de novo "
+            "com --canal <canal>.")
+        return
     if not GITHUB_TOKEN:
         # Não é problema: o bruto foi pra RAW, e o vigia_raw da VPS varre essa
         # pasta a cada 10 minutos e dispara o corte com o token DELE. Este
@@ -283,6 +304,7 @@ def disparar_corte(file_id: str, nome_arquivo: str, idioma: str = "pt",
             "qtd": "8", "idioma": idioma,
             "pasta_drive": (conta or {}).get("a_postar", PASTA_DRIVE),
             "conta": (conta or {}).get("nome", "principal"),
+            "canal": canal,
         }},
     )
     if r.status_code != 204:

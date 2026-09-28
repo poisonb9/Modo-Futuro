@@ -14,7 +14,7 @@ from __future__ import annotations
 import hashlib
 import os
 
-CANAIS = {"cozinha.importada"}
+CANAIS = {"cozinha.importada", "atefalhar"}  # atefalhar = nostalgia (28/09)
 
 
 def grupo(fonte: str, inicio_s) -> str:

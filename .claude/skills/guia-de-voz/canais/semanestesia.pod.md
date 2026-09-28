@@ -18,6 +18,9 @@ o motor só troca pronúncia se houver tabela aqui.
 - cortisol, dopamina, oxitocina, melatonina: em português, sem artigo em inglês
 - sistema glinfático: explicar na primeira menção ("a limpeza do cérebro")
 - estudo / pesquisa: dizer "segundo ele" quando for opinião do convidado
+- (Goggins, veio do Até Falhar em 28/09/2026) "calos na mente" (callus the mind): manter, é marca dele
+- (Goggins) "cookie jar": "o pote de vitórias" na 1a menção
+- (Goggins) accountability mirror: "o espelho da cobrança"
 
 ## Proibido
 - Conselho médico como verdade absoluta ("isso cura")

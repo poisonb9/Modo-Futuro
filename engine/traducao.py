@@ -22,6 +22,8 @@ PROMPT = """Traduza a fala abaixo para português do Brasil, natural e coloquial
 aproximado de frases. Responda SOMENTE com o texto traduzido, sem aspas,
 sem comentário, sem markdown.
 
+MEDIDAS NO SISTEMA BRASILEIRO (pedido do Bryan, 28/09/2026): converta SEMPRE pés e polegadas para metros/centímetros, milhas para quilômetros, jardas para metros, libras e onças para quilos/gramas, galões para litros e Fahrenheit para graus Celsius. Diga só o valor convertido, arredondado como se fala ("117 pés" -> "uns 36 metros"; "100 °F" -> "38 graus"), nunca a unidade americana.
+
 {guia}Fala original:
 {texto}"""
 
@@ -112,6 +114,8 @@ primeira ou vai embora):
    reação concreta da pessoa, de preferência ligada ao que a primeira
    frase apresentou, para que, quando o vídeo voltar ao início, soe como
    continuação e não como outro vídeo.
+
+MEDIDAS NO SISTEMA BRASILEIRO (pedido do Bryan, 28/09/2026): converta SEMPRE pés e polegadas para metros/centímetros, milhas para quilômetros, jardas para metros, libras e onças para quilos/gramas, galões para litros e Fahrenheit para graus Celsius. Diga só o valor convertido, arredondado como se fala ("117 pés" -> "uns 36 metros"; "100 °F" -> "38 graus"), nunca a unidade americana.
 
 TAMANHO: {orcamento}o texto reescrito vai ser falado no MESMO TEMPO que a fala
 original durava. Texto mais longo força a dublagem a acelerar a fala pra

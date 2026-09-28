@@ -663,6 +663,15 @@
   }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* isca por e-mail (28/09/2026) */
+  .isca-texto { margin: 4px 0 10px; font-size: 14px; line-height: 1.5; opacity: .85; }
+  .isca-form { display: grid; gap: 8px; }
+  .isca-form input[type=email] { font: inherit; padding: 12px 14px; border: 2px solid currentColor; border-radius: 12px; background: transparent; color: inherit; }
+  .isca-form button { font: inherit; font-weight: 700; padding: 13px; border: 0; border-radius: 999px; background: var(--acento, #1F8A5F); color: #fff; cursor: pointer; }
+  .isca-ok { display: flex; gap: 8px; font-size: 12px; line-height: 1.4; align-items: flex-start; }
+  .isca-mel { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  .isca-msg { margin: 0; font-size: 13px; min-height: 1em; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>
 
 <div class="envelope">
@@ -1090,6 +1099,17 @@
         ["💪", "Proteína de verdade, com o que tem no mercado"],
         ["⚖️", "Medida em grama e °C, sem chute"]
       ],
+      // ⭐ 28/09/2026 (dono): a ISCA do canal — o cardapio de marmitas por
+      // e-mail (ferramentas/email_marmitas.py; sai pela rodada do
+      // engine/alertas_email.py com `produto = receitas_marmita`).
+      isca: {
+        guia: "Receba o cardápio de marmitas da semana 🍱",
+        texto: "As receitas do canal, já em grama e °C, direto no seu e-mail. Grátis.",
+        produto: "receitas_marmita",
+        ok: "Aceito receber as receitas do Achadinho Chef por e-mail. Saio quando quiser.",
+        botao: "Quero o cardápio",
+        feito: "Pronto! O cardápio vai para "
+      },
       grupos: [
         {
           guia: "Chegou por uma receita e quer mais?",
@@ -2077,6 +2097,47 @@
       sec.appendChild(montarBotao("queda", p0.nome + " — " + p0.preco,
                                   p0.link));
       grupos.insertBefore(sec, grupos.children[1] || null);
+    }
+
+    // ⭐ ISCA POR E-MAIL (28/09/2026, Achadinho Chef). Mesmo cadastro do
+    // avise-me do site (tabela `contato`, consentimento obrigatorio, LGPD);
+    // `produto` diz O QUE a pessoa pediu. Fica no TOPO dos grupos.
+    if (c.isca && SUPABASE.url && SUPABASE.anon) {
+      var isc = c.isca, sx = el("section", "grupo isca");
+      sx.appendChild(el("p", "guia", isc.guia));
+      sx.appendChild(el("p", "isca-texto", isc.texto));
+      var fm = document.createElement("form");
+      fm.className = "isca-form";
+      fm.innerHTML =
+        '<label class="sr" for="isca-e">seu e-mail</label>' +
+        '<input id="isca-e" type="email" required autocomplete="email" placeholder="seu@email.com">' +
+        '<input class="isca-mel" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<label class="isca-ok"><input type="checkbox" required><span></span></label>' +
+        '<button type="submit"></button><p class="isca-msg" role="status"></p>';
+      fm.querySelector(".isca-ok span").textContent = isc.ok;
+      fm.querySelector("button").textContent = isc.botao;
+      fm.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var em = fm.querySelector("#isca-e"), ck = fm.querySelector("input[type=checkbox]");
+        var msg = fm.querySelector(".isca-msg"), bt = fm.querySelector("button");
+        var v = em.value.trim().toLowerCase();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) || v.length < 6) { msg.textContent = "Confira o e-mail."; em.focus(); return; }
+        if (!ck.checked) { msg.textContent = "Marque a caixa para eu poder te mandar."; return; }
+        if (fm.querySelector(".isca-mel").value) { return; }
+        bt.disabled = true; msg.textContent = "Enviando…";
+        fetch(SUPABASE.url + "/rest/v1/contato", {
+          method: "POST",
+          headers: { "apikey": SUPABASE.anon, "Authorization": "Bearer " + SUPABASE.anon,
+                     "Content-Type": "application/json", "Prefer": "return=minimal" },
+          body: JSON.stringify({ email: v, origem: "bio." + (c.banco || atual), produto: isc.produto })
+        }).then(function (r) {
+          if (!r.ok) { throw new Error(r.status); }
+          sx.removeChild(fm);
+          sx.appendChild(el("p", "isca-texto", isc.feito + v + "."));
+        }).catch(function () { bt.disabled = false; msg.textContent = "Não deu agora. Tente de novo."; });
+      });
+      sx.appendChild(fm);
+      grupos.insertBefore(sx, grupos.children[0] || null);
     }
 
     var vitrine = document.getElementById("vitrine");

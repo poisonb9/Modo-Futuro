@@ -412,8 +412,12 @@ def previa(saida: Path, fundo_video: Path | None = None, dur: float = 30.0,
 # ---- cartao de fechamento (27/09/2026, dono escolheu a opcao A: so' na tela)
 FECHO: dict[str, str] = {
     "semanestesia.pod": "Manda pra quem precisa ouvir isso hoje.",
+    # ⭐ 28/09/2026 (dono, Achadinho Chef): a ficha da receita no fim — o
+    # texto convertido esta' na legenda (receita_texto); o cartao aponta pra la'.
+    "cozinha.importada": "Receita completa, em grama e °C, na legenda. Salva pra fazer depois.",
 }
-FECHO_MARCA = {"semanestesia.pod": ("SEM ANESTESIA", (217, 43, 43))}
+FECHO_MARCA = {"semanestesia.pod": ("SEM ANESTESIA", (217, 43, 43)),
+               "cozinha.importada": ("ACHADINHO CHEF", (31, 138, 95))}
 FECHO_S = 3.2
 FONTES = Path(__file__).resolve().parent / "fontes"
 

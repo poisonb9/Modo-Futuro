@@ -67,10 +67,23 @@ def imagem(texto: str, largura: int) -> Image.Image:
     return im
 
 
+# ⭐ 28/09/2026 (dono, Achadinho Chef): na cozinha o selo do topo e' a PROVA
+# do diferencial, nao serie ("FRANGO · PARTE 3" numa receita nao diz nada).
+TEXTO_COZINHA = "MEDIDAS EM GRAMA E °C"
+CANAIS_SELO_MEDIDAS = {"cozinha.importada"}
+
+
 def aplicar_no_lugar(video: Path, nome: str, parte: int) -> bool:
-    """Sobrepoe o selo entre INI_S e FIM_S. Falha aberta."""
-    video = Path(video)
+    """Sobrepoe o selo "NOME · PARTE N" entre INI_S e FIM_S. Falha aberta."""
     if parte < 2 or not nome:
+        return False
+    return aplicar_texto_no_lugar(video, f"{nome.upper()} · PARTE {parte}")
+
+
+def aplicar_texto_no_lugar(video: Path, texto: str) -> bool:
+    """Sobrepoe uma pilula com `texto` entre INI_S e FIM_S. Falha aberta."""
+    video = Path(video)
+    if not texto:
         return False
     try:
         r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
@@ -78,7 +91,7 @@ def aplicar_no_lugar(video: Path, nome: str, parte: int) -> bool:
                             str(video)], capture_output=True, text=True)
         w, h = (int(v) for v in r.stdout.strip().split(",")[:2])
         png = Path(tempfile.mkdtemp()) / "selo.png"
-        imagem(f"{nome.upper()} · PARTE {parte}", w).save(png)
+        imagem(texto, w).save(png)
         novo = video.with_name(video.stem + "_s.mp4")
         x, y = int(w * 0.06), int(h * TOPO_FRAC)
         filtro = (f"[1:v]format=rgba,fade=t=in:st={INI_S}:d=0.3:alpha=1,"

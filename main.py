@@ -698,7 +698,12 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # Nome = 1a tag (regra de nomes da selecao). So' onde a camada liga.
                 # ⛔ 27/09: com serie numerada no titulo (engine/serie.py) o selo
                 # seria uma SEGUNDA numeracao na tela — fica so' a da serie.
-                if camada.ligado(_canal_cascata) and not c.get("serie"):
+                _can_selo = canais_registro_canonico(_canal_cascata)
+                if _can_selo in selo.CANAIS_SELO_MEDIDAS:
+                    # ⭐ 28/09 (Achadinho Chef): selo de MEDIDAS, nunca de serie
+                    if selo.aplicar_texto_no_lugar(_v, selo.TEXTO_COZINHA):
+                        print(f"      selo de medidas: {selo.TEXTO_COZINHA}")
+                elif camada.ligado(_canal_cascata) and not c.get("serie"):
                     _tags = c.get("tags") or []
                     _nome = (str(_tags[0]).strip().title() if _tags else "")
                     _parte = selo.parte_do_tema(

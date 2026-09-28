@@ -126,11 +126,21 @@ def boas_vindas(insc: dict[str, set[str]], simular: bool, teto: int) -> int:
     if not novos or simular:
         return len(novos)
     cat = {str(p.get("id")): p for p in pb.produtos_todos()}
+    import email_marmitas as em_
     n = 0
     for em in novos:
         p = cat.get(pedido[em])
         try:
-            a, corpo = bv.pronto_para_enviar(p, sair_url=link_sair(em))
+            # ⭐ 28/09/2026: quem pediu o CARDAPIO DE MARMITAS (bio do Achadinho
+            # Chef) recebe as receitas, nao o boas-vindas de preco. Sem receitas
+            # bastantes ainda: espera (nao marca como enviado).
+            if pedido[em] == em_.PRODUTO:
+                pronto = em_.pronto_para_enviar(sair_url=link_sair(em))
+                if not pronto:
+                    continue
+                a, corpo = pronto
+            else:
+                a, corpo = bv.pronto_para_enviar(p, sair_url=link_sair(em))
             bv.enviar(em, a, corpo, tag="boas-vindas")
         except Exception as e:                           # noqa: BLE001
             print(f"alertas_email: boas-vindas falhou ({type(e).__name__})")

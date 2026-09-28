@@ -27,6 +27,7 @@ DUR_B = 6.2
 B_FRAC = 0.40
 B_MIN_S = 16.0
 B_FIM_S = 3.0
+B_FIM_MIN_S = 0.6
 
 # Uma camada por plataforma: cada balao ao lado do SEU botao, e os botoes
 # do Reels ficam ~250 px mais altos que os do TikTok (medido em 25/09).
@@ -38,8 +39,16 @@ PLAT = {
     # ao lado dele o balao nunca tem lugar fixo. O avatar com "+" (o seguir do
     # TikTok) fica SEMPRE na mesma altura (x~954, y~878, LEIA_CAMADA §5): o
     # corpo do balao para ao lado dele. Reels nao muda.
-    "tiktok": {"pos": {"a": (928, 1100), "e1": (795, 1250), "e2": (795, 1590),
-                       "e3": (760, 872)},
+    # ⭐ 28/09/2026 (prints do dono, Modo Futuro no ar): "os baloes do tiktok
+    # tem que parar bem do lado do objetivo". Nos prints a coluna de botoes
+    # estava ~100 px ABAIXO da medida de 25/09 (barra de busca no topo) e o
+    # balao parecia acima/esquerda do botao. Desceu +60 (meio-termo entre o
+    # For You, esse layout e o Android) e o corpo encosta a ~20 px do icone.
+    # ⭐ Mesmo dia, dono: "vamos testar em cima dos botoes, como se apertasse
+    # nele" — TESTE: o balao para EM CIMA do botao (prévia em _privado/previas_28-09).
+    # Versao "ao lado": e1 (814, 1283), e2 (810, 1619), e3 (806, 938).
+    "tiktok": {"pos": {"a": (928, 1100), "e1": (944, 1250), "e2": (944, 1590),
+                       "e3": (944, 905)},
                "e2": ("e2", 200), "esc": 0.8},
     "reels": {"pos": {"a": (886, 848), "e1": (760, 992), "e2": (760, 1327),
                       "e3": (250, 1345)},
@@ -305,7 +314,16 @@ def plano(dur_video: float, plat: str = "tiktok",
         ib = INICIO_S + _fim_coracoes() + VAO
     else:
         ib = INICIO_S + dur_a(plat) + RESPIRO_AVIAO
-    if aviao and ib + DUR_B <= dur_video - B_FIM_S:
+    # ⭐ 28/09/2026 (dono: "esse video nao passou o aviao, que e' muito
+    # importante"): clipe de 30,5 s ficava SEM aviao (exigia ~32 s). Se nao
+    # cabe com o respiro inteiro, entra o mais tarde que couber, sem nunca
+    # dividir a tela com a parte A e saindo ate' B_FIM_MIN_S antes do fim.
+    if aviao and ib + DUR_B > dur_video - B_FIM_S:
+        ib = max(INICIO_S + dur_a(plat) + VAO,
+                 min(ib, dur_video - B_FIM_MIN_S - DUR_B))
+        if ib + DUR_B > dur_video - B_FIM_MIN_S:
+            ib = None
+    if aviao and ib is not None:
         p.append(("b", ib))
     return p
 

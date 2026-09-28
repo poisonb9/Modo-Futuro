@@ -145,7 +145,11 @@ def main() -> None:
     if a.apagar:
         # ⛔ 28/09/2026: Samsung "teste de queda" com narracao INVENTADA (fonte
         # so' musica). Dono pediu para excluir; ele nao estava logado no Buffer.
-        if not a.id or len(posts) != 1:
+        if not a.id:
+            for p in posts:   # lista os ids pra escolher (nada e' apagado)
+                print(f"  id {p['id']}  {p['dueAt']}  {(p.get('text') or '')[:60]!r}")
+            return
+        if len(posts) != 1:
             sys.exit("--apagar exige --id de UM post agendado deste canal")
         print(f"apagar: {posts[0]['dueAt']}  {(posts[0].get('text') or '')[:70]!r}")
         if a.simular:

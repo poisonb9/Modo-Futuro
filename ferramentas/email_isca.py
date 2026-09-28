@@ -61,6 +61,18 @@ PRODUTOS = {
         "rodape": "Você recebeu isto porque pediu as ideias do Sem Anestesia na página do canal.",
         "medida": False, "minimo": 3, "maximo": 5, "corte": 600,
     },
+    "nostalgia_historias": {
+        "canal": "atefalhar", "marca": "NOSTALGIA 2000", "cor": "#E36414",
+        "assunto": "Os desenhos da sua infância, do jeito que ninguém contou 📺",
+        "titulo": "Lembra disso?<br><span>Tem mais história.</span>",
+        "abre": "As histórias por trás dos desenhos que a gente assistia no começo dos anos 2000.",
+        "perfil": "https://www.tiktok.com/@atefalhar", "bio": SITE,
+        "botao": "Ver os vídeos no TikTok →",
+        "rodape": "Você recebeu isto porque pediu as histórias de nostalgia na página do canal.",
+        "medida": False, "minimo": 3, "maximo": 5, "corte": 600,
+        # so' cortes da fase NOSTALGIA (nao os de treino antigos do canal)
+        "desde": "2026-09-28",
+    },
     "make_achados": {
         "canal": "truque.importado", "marca": "ACHADINHO MAKE", "cor": "#D6336C",
         "assunto": "As makes dos vídeos, com o preço conferido 💄",
@@ -82,6 +94,8 @@ def itens(produto: str) -> list[dict]:
     out = []
     for _, v in sorted(man.items(), reverse=True):
         if v.get("canal") != cfg["canal"]:
+            continue
+        if cfg.get("desde") and str(v.get("publicado_em") or "")[:10] < cfg["desde"]:
             continue
         titulo = (v.get("titulo") or "").strip()
         leg = (v.get("legenda") or "").strip()

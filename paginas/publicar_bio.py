@@ -2447,8 +2447,48 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             nicho["cozinha.internacional"] = cozinha
     except Exception as e:  # noqa: BLE001
         print(f"nicho: marmita indisponivel ({e})")
+    # ⭐ 28/09/2026 (dono: "ja' vamos pensar na vitrine" do canal de nostalgia,
+    # ex-@atefalhar). Nao e' brinquedo retro (dono: pouca saida): e' o que a
+    # GERACAO 2000 compra hoje (videogame de jogos antigos, projetor pra ver
+    # desenho na parede, Tamagotchi original, controle, headset).
+    try:
+        g2000 = produtos_geracao2000()
+        print(f"nicho: {len(g2000)} item(ns) da geracao 2000 para o canal de nostalgia")
+        if len(g2000) >= 4:
+            nicho["atefalhar"] = g2000
+    except Exception as e:  # noqa: BLE001
+        print(f"nicho: geracao 2000 indisponivel ({e})")
     saida["_nicho"] = nicho
     return saida
+
+
+BUSCAS_GERACAO2000 = [
+    "video game retro portatil",
+    "mini projetor portatil",
+    "tamagotchi",
+    "console retro 2 controles hdmi",
+    "controle sem fio bluetooth celular",
+    "headset gamer",
+    "caneca game retro",
+    "fita led quarto gamer",
+]
+
+
+def produtos_geracao2000(quantos: int = 8) -> list[dict]:
+    """Um cartao por busca de BUSCAS_GERACAO2000 (o 1o com foto e preco)."""
+    from engine import mercadolivre as _ml
+    out = []
+    for termo in BUSCAS_GERACAO2000:
+        try:
+            r = _ml.buscar(termo, quantos=3, canal="atefalhar",
+                           candidatos=10, paginas=1, expandir_termo=False)
+        except Exception as e:  # noqa: BLE001
+            print(f"  geracao2000: '{termo}' falhou ({str(e)[:60]})")
+            continue
+        r = [x for x in r if x.get("link") and x.get("preco") and x.get("imagem")]
+        if r and not _parecido(r[0], out):
+            out.append(r[0])
+    return out[:quantos]
 
 
 # O que quem faz marmita barata e proteica compra (angulo de 28/09/2026).

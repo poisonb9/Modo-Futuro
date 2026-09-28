@@ -526,25 +526,10 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # ⚠️ Arquivo que falta nao leva os outros embora (mesma licao do
-          # desempenho.yml): monta a lista so' com o que existe.
-          ALVOS=""
-          for f in estado/trechos_usados.json registro_clipes.json; do
-            [ -e "$f" ] && ALVOS="$ALVOS $f"
-          done
-          if [ -z "$ALVOS" ]; then
-            echo "[!] nenhuma guarda escreveu nada — nada a guardar"
-            exit 0
-          fi
-          if ! git diff --quiet $ALVOS 2>/dev/null; then
-            git add $ALVOS
-            git commit -m "guardas: trecho enfileirado e registro de clipe"
-            # O cron da fila e a foto de desempenho escrevem no mesmo repo.
-            git pull --rebase --autostash -q origin main || true
-            git push
-          else
-            echo "guardas inalteradas"
-          fi
+          # 28/09/2026: o pull --rebase dava CONFLITO quando outro run gravava
+          # no mesmo minuto (Coragem perdeu registro e trechos). Agora soma os
+          # dicionarios em cima do main atual e tenta de novo. Ver o script.
+          python ferramentas/guardar_guardas.py estado/trechos_usados.json registro_clipes.json
 
 
       # So roda se TUDO acima deu certo: bruto de corte que falhou nao pode

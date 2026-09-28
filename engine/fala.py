@@ -77,3 +77,38 @@ def mudo(palavras: list[dict], duracao_s: float) -> tuple[bool, str]:
         return True, (f"densidade de fala {d:.2f} palavra/s em {duracao_s:.0f}s "
                       f"(mínimo {DENSIDADE_MIN}) — imagem com fala esparsa")
     return False, f"densidade de fala {d:.2f} palavra/s, ok"
+
+
+# ⛔ NARRACAO INVENTADA (28/09/2026, dono: "video de tecnologia falando de
+# cozinha"). A fonte da Samsung e' musica + texto na tela; o transcritor
+# "ouviu" frases na musica, a densidade passou, e a narracao saiu sobre um
+# restaurante no Japao (fabrica) e sobre chuva (teste de queda) — enquanto o
+# titulo, que vem do Gemini VENDO o video, dizia Samsung/celulares. Titulo e
+# narracao sao os dois em pt-BR: se nao dividem NENHUMA palavra de conteudo,
+# um deles nao e' sobre este video. Segura o clipe (quarentena).
+_VAZIAS = set("""sobre entre depois antes quando porque ainda mesmo muito muita
+muitos muitas todos todas tambem assim desse dessa deste desta esse essa este
+esta isso isto aqui onde como mais menos pelo pela pelos pelas para numa num
+cada outro outra seus suas nosso nossa voce voces eles elas sendo sempre nunca
+dentro fora agora hoje coisa coisas forma parte vezes""".split())
+
+
+def _conteudo(texto: str) -> set[str]:
+    import re
+    import unicodedata
+    t = unicodedata.normalize("NFKD", (texto or "").lower())
+    t = "".join(ch for ch in t if not unicodedata.combining(ch))
+    ws = re.findall(r"[a-z0-9]{4,}", t)
+    # raiz grosseira: celulares/celular, robos/robo, testa/testes
+    return {w[:5] for w in ws if w not in _VAZIAS}
+
+
+def narracao_incoerente(narracao: str, titulo: str, descricao: str = "",
+                        gancho: str = "") -> bool:
+    """True quando a narracao nao compartilha NENHUMA palavra de conteudo com
+    titulo+descricao+gancho. Falha aberta: texto curto demais = nao julga."""
+    n = _conteudo(narracao)
+    ref = _conteudo(" ".join((titulo or "", descricao or "", gancho or "")))
+    if len(n) < 8 or len(ref) < 4:
+        return False
+    return not (n & ref)

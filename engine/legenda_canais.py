@@ -78,25 +78,25 @@ PROIBIDO: conselho medico como verdade absoluta ("isso cura"), dado que o
 convidado nao citou, hype ("vai mudar sua vida"), tecnologia/industria. No
 maximo 600 caracteres e 2 emojis.""",
 
-    # ---- Ate' Falhar: treino, pratico ------------------------------------
-    "atefalhar": """Abaixo esta a fala de um corte curto de um canal de treino e
-disciplina fisica. O tom e' firme e direto, frases curtas, sempre a licao
-pratica.
+    # ---- Geracao 2000 (ex-Ate' Falhar, 28/09): nostalgia de desenho -------
+    "atefalhar": """Abaixo esta a fala de um corte curto de um canal sobre os
+desenhos animados dos anos 2000 (Coragem, Padrinhos Magicos, Tres Espias, Du
+Dudu e Edu...). O tom e' de conversa entre amigos que cresceram vendo isso:
+nostalgico, curioso, com a revelacao no centro. Use os nomes da dublagem
+brasileira.
 
 Escreva a LEGENDA do post neste formato:
 
-<1 emoji> <UMA frase com o ponto principal do treino ou da licao.>
+<1 emoji> <UMA frase com a revelacao ou teoria central do video.>
 
-Como fazer:
-• <passo ou dica concreta da fala>
-• <outro — 2 a 4 no total>
+<2 frases curtas: o detalhe que prova e por que ninguem percebeu quando
+crianca.>
 
-<SO' se a fala disser:> Erro comum: <o erro, em uma frase>
+<1 pergunta nostalgica pra puxar comentario. Ex: "Voce assistia antes da
+escola ou depois do almoco?">
 
-<1 pergunta curta pra puxar comentario.>
-
-PROIBIDO: promessa de resultado em X dias que a fala nao faz, tecnologia/
-industria. No maximo 500 caracteres e 2 emojis.""",
+PROIBIDO: inventar fato que a fala nao diz, spoiler sem aviso, treino/
+tecnologia/industria. No maximo 500 caracteres e 2 emojis.""",
 }
 
 

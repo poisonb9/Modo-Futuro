@@ -16,7 +16,11 @@ from PIL import Image, ImageDraw, ImageFont
 RAIZ = Path(__file__).resolve().parent.parent
 FONTE = Path(__file__).resolve().parent / "fontes" / "Poppins-Bold.ttf"
 INI_S, FIM_S = 2.2, 5.0
-TOPO_FRAC = 0.085
+# 0.085 -> 0.13 em 28/09 (dono, print do Microsoft Parte 8): a barra de
+# pesquisa do TikTok (~5-10% da altura) cobria a pilula. 0.13 = 250 px de
+# 1920, logo abaixo dela. Nao colide com o titulo (0.16): ele sai aos 2,0 s
+# e a pilula so' entra aos 2,2 s (INI_S).
+TOPO_FRAC = 0.13
 OURO_A, OURO_B = (0xF2, 0xC9, 0x4C), (0xC8, 0x90, 0x1A)
 TINTA = (0x16, 0x15, 0x1C)
 

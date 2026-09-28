@@ -119,13 +119,14 @@ TERMOS: dict[str, dict[str, int]] = {
         # o detector acusava 4 clipes legitimos do @semanestesia.pod nos 255
         # do manifesto. Esses quatro foram os UNICOS falsos positivos que a
         # medicao encontrou, e a causa era esta.
-        "workout": 3, "treino": 3, "glute": 3, "gluteo": 3, "gym": 3,
-        "academia": 3, "muscle": 3, "musculo": 3, "hypertrophy": 3,
-        "hipertrofia": 3, "marathon": 3, "maratona": 3, "ultramarathon": 3,
-        "bodybuilding": 3, "crossfit": 3,
-        "reps": 3, "deadlift": 3, "squat": 3, "cardio": 2, "running": 2,
-        "corrida": 2, "discipline": 2, "disciplina": 2, "endurance": 2,
-        "resistencia": 2, "pain": 1, "dor": 1,
+        # ⭐ 28/09: virou Geracao 2000 (desenhos anos 2000); treino cancelado.
+        "cartoon": 3, "desenho": 3, "animation": 2, "animacao": 2,
+        "cartoon network": 3, "nickelodeon": 3, "courage": 3, "coragem": 3,
+        "fairly oddparents": 3, "padrinhos magicos": 3, "totally spies": 3,
+        "tres espias": 3, "ed edd": 3, "dexter": 3, "powerpuff": 3,
+        "meninas superpoderosas": 3, "spongebob": 3, "bob esponja": 3,
+        "kim possible": 3, "danny phantom": 3, "jimmy neutron": 3,
+        "film theory": 2, "nostalgia": 2, "childhood": 2, "infancia": 2,
     },
     "truque.importado": {
         # README: maquiagem coreana. RISABAE e' a fonte medida.

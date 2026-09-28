@@ -116,7 +116,10 @@ CONTEXTO: dict[str, str] = {
                          "delas (Goggins, Huberman, dopamina, habito, sono)."),
     "truque.importado": ("O canal fala de maquiagem coreana e dos idols de K-pop: "
                          "tecnica, produto, bastidor do camarim."),
-    "atefalhar": "O canal fala de treino, corpo e disciplina fisica.",
+    # 28/09: virou Geracao 2000 (nostalgia de desenhos anos 2000)
+    "atefalhar": ("O canal fala dos desenhos animados dos anos 2000 (Cartoon "
+                  "Network, Nickelodeon, Disney): teorias, bastidores e "
+                  "curiosidades que a infancia nao percebeu."),
     "cozinha.importada": "O canal fala de receitas e tecnicas de cozinha.",
 }
 

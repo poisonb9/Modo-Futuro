@@ -449,6 +449,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print("      ⚠️ QUARENTENA: traduzido pela reserva, "
                           "nao entra na fila de postagem sem o Bryan aprovar")
                 ps = traducao.segmentos_para_palavras(segmentos)
+                # ⛔ 28/09: narracao sobre OUTRO assunto (Samsung falando de
+                # restaurante) -> quarentena. Ver engine/fala.narracao_incoerente.
+                from engine import fala as _fala
+                _narr = " ".join(str(p.get("palavra", "")) for p in (ps or []))
+                if _fala.narracao_incoerente(_narr, c.get("titulo", ""),
+                                             c.get("descricao", ""), c.get("gancho", "")):
+                    c["quarentena"] = True
+                    print("      ⛔ NARRACAO INCOERENTE com o titulo (transcricao "
+                          "inventada?) — QUARENTENA, nao vai ao ar")
                 if config.modo_receita():
                     # receita: o texto da legenda e' a RECEITA (medida ja'
                     # convertida), no lugar do contexto premium

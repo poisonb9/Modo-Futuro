@@ -2187,7 +2187,9 @@
     // ⭐ ULTIMAS RECEITAS (28/09/2026, dono). VALOR ANTES DO PEDIDO (acervo
     // F09873/F05126): quem chega do TikTok ve' a receita pronta pra usar ANTES
     // do convite de e-mail — por isso entra no topo, acima da isca.
-    if ((c.banco === "cozinha.importada") && RECEITAS.length) {
+    // ⚠️ pelo NOME publico: o nome interno do canal e' barrado pelo detector
+    // de vazamento do publicar_bio (e nao pode ir pra pagina publica).
+    if (c.nome === "Achadinho Chef" && RECEITAS.length) {
       var sr = el("section", "grupo");
       sr.appendChild(el("p", "guia", "Últimas receitas do canal 🍳"));
       var lista = el("div", "receitas");

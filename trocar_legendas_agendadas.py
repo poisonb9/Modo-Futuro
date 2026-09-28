@@ -68,12 +68,33 @@ def fala_de_quem_o_titulo_fala(titulo: str, corpo: str) -> bool:
     return any(_n(w) in _n(corpo) for w in nomes)
 
 
+def _editar(token: str, p: dict, texto: str, url: str, titulo: str) -> bool:
+    """editPost SUBSTITUI o post inteiro: texto, video, horario e metadata."""
+    d = ab.consultar(token, """mutation($input: EditPostInput!) {
+      editPost(input: $input) { __typename
+        ... on PostActionSuccess { post { id dueAt } }
+        ... on InvalidInputError { message }
+        ... on UnexpectedError { message }
+        ... on RestProxyError { message } } }""", {"input": {
+        "id": p["id"], "text": texto, "dueAt": p["dueAt"],
+        "mode": "customScheduled", "schedulingType": "automatic",
+        "assets": [{"video": {"url": url}}],
+        "metadata": {"tiktok": {"isAiGenerated": True, "title": titulo[:90]}},
+    }})["editPost"]
+    if d["__typename"] != "PostActionSuccess":
+        print(f"  [!] editPost recusou: {d['__typename']} {d.get('message', '')[:150]}")
+        return False
+    print(f"  ✓ trocado (horario mantido: {d['post'].get('dueAt')})")
+    return True
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--canal", required=True)
     ap.add_argument("--simular", action="store_true")
     ap.add_argument("--id", help="so' este post do Buffer")
     ap.add_argument("--texto", help="com --id: o CORPO da legenda escrito a mao")
+    ap.add_argument("--video", help="com --id: troca SO' o video (url), mantem o texto")
     a = ap.parse_args()
     nome = canais_registro.canonico(a.canal)
     c = canais_registro.CANAIS[nome]
@@ -94,6 +115,15 @@ def main() -> None:
             print(f"  [!] sem video no manifesto, pulado: {texto[:60]!r}")
             continue
         titulo = m["titulo"].strip()
+        url = a.video or m["url"]
+        if a.video:
+            # ⭐ 28/09/2026: selo "PARTE 3" gravado errado — so' o video muda
+            print(f"\n--- {p['dueAt']}  {titulo[:70]}\nVIDEO NOVO: {url}")
+            if a.simular:
+                continue
+            _editar(token, p, texto, url, titulo)
+            trocados += 1
+            continue
         corpo = a.texto.replace("\\n", "\n") if a.texto else None
         for _ in range(0 if corpo else 2):
             corpo = nova_legenda(nome, titulo, texto[len(titulo):])
@@ -111,22 +141,8 @@ def main() -> None:
               f"DEPOIS ({len(novo)}):\n{novo}")
         if a.simular:
             continue
-        d = ab.consultar(token, """mutation($input: EditPostInput!) {
-          editPost(input: $input) { __typename
-            ... on PostActionSuccess { post { id dueAt } }
-            ... on InvalidInputError { message }
-            ... on UnexpectedError { message }
-            ... on RestProxyError { message } } }""", {"input": {
-            "id": p["id"], "text": novo, "dueAt": p["dueAt"],
-            "mode": "customScheduled", "schedulingType": "automatic",
-            "assets": [{"video": {"url": m["url"]}}],
-            "metadata": {"tiktok": {"isAiGenerated": True, "title": titulo[:90]}},
-        }})["editPost"]
-        if d["__typename"] != "PostActionSuccess":
-            print(f"  [!] editPost recusou: {d['__typename']} {d.get('message', '')[:150]}")
-            continue
-        trocados += 1
-        print(f"  ✓ trocado (horario mantido: {d['post'].get('dueAt')})")
+        if _editar(token, p, novo, url, titulo):
+            trocados += 1
     print(f"\n{trocados} legenda(s) trocada(s){' (SIMULADO)' if a.simular else ''}.")
 
 

@@ -137,6 +137,12 @@ SLOTS_SP = [(8, 15), (13, 10), (16, 27), (19, 45)]
 # Buffer dizia 0. Cadencia nao deve mexer nisso. Se os zeros sumirem depois
 # desta mudanca, desconfie de coincidencia antes de creditar a cadencia.
 MAX_POR_DIA = 4
+
+# Titulos que NUNCA voltam a ser agendados (vale no runner; ver uso abaixo).
+TITULOS_BLOQUEADOS = (
+    "O TESTE EXTREMO DE QUEDA DOS CELULARES DA SAMSUNG",
+    "FÁBRICA ROBÓTICA DA SAMSUNG PRODUZ MILHÕES DE CELULARES SOZINHA",
+)
 VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
 
 # Intervalo MINIMO entre dois posts do mesmo dia, em horas. Ordem do Bryan em
@@ -566,6 +572,11 @@ def main() -> None:
               "dedup usando so' o que o Buffer devolveu.")
 
     rejeitados_ = rejeitados.chaves()
+    # ⛔ 28/09/2026: o `estado/rejeitados.json` e' gitignored — o runner nasce
+    # sem ele. Esta lista VAI no repo. Samsung (fonte so' musica): narracao
+    # inventada; o repor_fila recolocou o original da fila minutos depois de
+    # o dono mandar excluir.
+    rejeitados_ |= {_chave_texto(t) for t in TITULOS_BLOQUEADOS}
 
     # ⚠️ GUARDA DE ORIGEM. A `CANAL_ESPERADO` confere o DESTINO (que o token
     # abre o canal certo). Esta confere a ORIGEM (que o clipe e' deste canal).

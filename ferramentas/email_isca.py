@@ -62,7 +62,7 @@ PRODUTOS = {
         "medida": False, "minimo": 3, "maximo": 5, "corte": 600,
     },
     "nostalgia_historias": {
-        "canal": "atefalhar", "marca": "NOSTALGIA 2000", "cor": "#E36414",
+        "canal": "atefalhar", "marca": "GERAÇÃO 2000", "cor": "#E36414",
         "assunto": "Os desenhos da sua infância, do jeito que ninguém contou 📺",
         "titulo": "Lembra disso?<br><span>Tem mais história.</span>",
         "abre": "As histórias por trás dos desenhos que a gente assistia no começo dos anos 2000.",

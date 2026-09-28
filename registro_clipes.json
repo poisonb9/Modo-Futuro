@@ -1064,7 +1064,15 @@
       "canal": "",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-09-2026/2026-09-26_04_nota90_A_historia_assustadora_da_cabana_que_chocou_Wonhee_do_ILLIT_short_9x16.mp4",
       "criado_em": "2026-09-26T20:51:42+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-28T11:09:00.000Z",
+          "canal": "truque.importado",
+          "detalhe": "A história assustadora da cabana que chocou Wonhee do ILLIT",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "365526b9672a269b7890407297f9a94d9261207a123fbb1eebf0407ff42c3fea": {
       "arquivo": "2026-09-26_05_nota88_Wonhee_e_Iroha_do_ILLIT_chegam_vestidas_de_princesas_short_9x16.mp4",
@@ -1104,7 +1112,15 @@
       "canal": "",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-09-2026/2026-09-26_07_nota85_Wonhee_do_ILLIT_escolhe_entre_doce_e_salgado_para_sempre_short_9x16.mp4",
       "criado_em": "2026-09-26T20:51:50+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-27T22:43:00.000Z",
+          "canal": "truque.importado",
+          "detalhe": "Wonhee do ILLIT escolhe entre doce e salgado para sempre",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "80aee73c9091c9c333692feb6ed3fe9e5db637c44628771425ee430518a68ac0": {
       "arquivo": "2026-09-26_08_nota83_Wonhee_e_Iroha_do_ILLIT_escolhem_o_cardapio_dos_sonhos_short_9x16.mp4",
@@ -1392,7 +1408,15 @@
       "canal": "",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-09-2026/2026-09-27_05_nota85_FABRICA_ROBOTICA_DA_SAMSUNG_PRODUZ_MILHOES_DE_CELULARES_SOZI_short_9x16.mp4",
       "criado_em": "2026-09-27T15:23:06+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-28T11:12:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "FÁBRICA ROBÓTICA DA SAMSUNG PRODUZ MILHÕES DE CELULARES SOZINHA",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "ba6bec4e89f904ebc3a5b99dedfadc9197de65dfdbc3524c7088484565b7487f": {
       "arquivo": "2026-09-27_06_nota84_Processo_de_dopagem_e_teste_automatizado_de_chips_de_computa_short_9x16.mp4",
@@ -1424,7 +1448,22 @@
       "canal": "",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-09-2026/2026-09-27_02_nota90_MICROSOFT_COLOCOU_SEUS_SERVIDORES_NO_FUNDO_DO_MAR_short_9x16.mp4",
       "criado_em": "2026-09-27T18:06:13+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-09-28T12:45:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "MICROSOFT COLOCOU SEUS SERVIDORES NO FUNDO DO MAR",
+          "plataforma": "tiktok"
+        },
+        {
+          "origem": "buffer",
+          "quando": "2026-09-27T22:50:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "MICROSOFT COLOCOU SEUS SERVIDORES NO FUNDO DO MAR",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "2f79f66e2e520518afa80ddad49bcfbbd28fbde150346d54edc6c07426f6b2c6": {
       "arquivo": "2026-09-27_03_nota89_A_AGUA_DO_MAR_RESFRIA_1.000_VEZES_MELHOR_QUE_O_AR_short_9x16.mp4",

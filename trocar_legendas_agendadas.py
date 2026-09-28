@@ -167,7 +167,7 @@ def main() -> None:
             novo = legenda_post.limitar_hashtags(texto)
             atual = video_do_post(token, p["id"])
             antes, depois = len(re.findall(r"#\w+", texto)), len(re.findall(r"#\w+", novo))
-            print(f"\n--- {p['dueAt']}  {titulo[:60]}\n  hashtags: {antes} -> {depois}"
+            print(f"\n--- {p['dueAt']}  id={p['id']}  {titulo[:60]}\n  hashtags: {antes} -> {depois}"
                   f"  video: {atual or 'NAO ACHADO'}")
             if novo == texto or a.simular:
                 continue

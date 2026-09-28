@@ -22,6 +22,7 @@ import re
 import unicodedata
 
 import agendar_buffer as ab
+from engine import legenda_post
 from engine import canais_registro, legenda_canais, traducao
 
 
@@ -37,6 +38,19 @@ def agendados(token: str, org: str, canal: str) -> list[dict]:
       {"i": {"organizationId": org,
              "filter": {"status": ["scheduled"], "channelIds": [canal]}}})
     return [e["node"] for e in d["posts"]["edges"]]
+
+
+def video_do_post(token: str, pid: str) -> str | None:
+    """URL do video que ESTA' no post agendado (nao a do manifesto)."""
+    try:
+        d = ab.consultar(token, """query($i: PostInput!){ post(input:$i){
+          assets { ... on VideoAsset { source } } } }""", {"i": {"id": pid}})
+        for x in (d.get("post") or {}).get("assets") or []:
+            if x.get("source"):
+                return x["source"]
+    except Exception as e:  # noqa: BLE001
+        print(f"  [!] nao li o video do post: {str(e)[:200]}")
+    return None
 
 
 def nova_legenda(canal: str, titulo: str, texto_antigo: str) -> str | None:
@@ -95,6 +109,8 @@ def main() -> None:
     ap.add_argument("--id", help="so' este post do Buffer")
     ap.add_argument("--texto", help="com --id: o CORPO da legenda escrito a mao")
     ap.add_argument("--video", help="com --id: troca SO' o video (url), mantem o texto")
+    ap.add_argument("--so-hashtags", action="store_true",
+                    help="so' corta pra 3 hashtags; mantem texto, video e horario")
     a = ap.parse_args()
     nome = canais_registro.canonico(a.canal)
     c = canais_registro.CANAIS[nome]
@@ -116,6 +132,23 @@ def main() -> None:
             continue
         titulo = m["titulo"].strip()
         url = a.video or m["url"]
+        if a.so_hashtags:
+            # ⛔ 28/09/2026: o TikTok aceita 3 hashtags; os agendados tinham 5.
+            # O video tem de ser o QUE ESTA' NO POST (os da Wonhee ja' foram
+            # trocados pelo selo corrigido — o do manifesto desfaria isso).
+            novo = legenda_post.limitar_hashtags(texto)
+            atual = video_do_post(token, p["id"])
+            antes, depois = len(re.findall(r"#\w+", texto)), len(re.findall(r"#\w+", novo))
+            print(f"\n--- {p['dueAt']}  {titulo[:60]}\n  hashtags: {antes} -> {depois}"
+                  f"  video: {atual or 'NAO ACHADO'}")
+            if novo == texto or a.simular:
+                continue
+            if not atual:
+                print("  [!] video atual nao lido, pulado (nao arrisco trocar o video)")
+                continue
+            if _editar(token, p, novo, atual, titulo):
+                trocados += 1
+            continue
         if a.video:
             # ⭐ 28/09/2026: selo "PARTE 3" gravado errado — so' o video muda
             print(f"\n--- {p['dueAt']}  {titulo[:70]}\nVIDEO NOVO: {url}")

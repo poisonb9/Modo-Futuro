@@ -47,7 +47,7 @@ import requests
 from engine import canais_registro, registro_clipes
 
 from engine import buffer_cota as cota, dedup, estreia, trechos
-from engine import adiados, rejeitados
+from engine import adiados, legenda_post, rejeitados
 
 API_BUFFER = "https://api.buffer.com/"
 API_GITHUB = "https://api.github.com"
@@ -467,6 +467,7 @@ def proximos_horarios(agendados: list[dict], quantos: int,
 def enfileirar(token: str, canal: str, clipe: dict, simular: bool,
                quando_sp: datetime.datetime | None = None) -> str:
     legenda = (clipe.get("legenda") or clipe.get("titulo") or "").strip()
+    legenda = legenda_post.limitar_hashtags(legenda)  # max 3 (28/09/2026)
     titulo = (clipe.get("titulo") or legenda.split("#")[0]).strip()[:90]
     if simular:
         return "SIMULADO"

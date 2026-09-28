@@ -32,6 +32,7 @@ isso agora e' UMA funcao, e as duas chamam esta.
 """
 from __future__ import annotations
 
+import re
 import unicodedata
 
 
@@ -45,6 +46,26 @@ def hashtag(tag: str) -> str:
     sem_acento = (unicodedata.normalize("NFKD", tag)
                   .encode("ascii", "ignore").decode("ascii"))
     return "#" + "".join(ch for ch in sem_acento if ch.isalnum())
+
+
+# ⛔ 28/09/2026 (Bryan): o TikTok aceita no maximo 3 hashtags; saiamos com 5.
+MAX_HASHTAGS = 3
+
+
+def limitar_hashtags(texto: str, n: int = MAX_HASHTAGS) -> str:
+    """Mantem as `n` primeiras hashtags do texto e tira o resto (sem repetir)."""
+    vistas: list[str] = []
+
+    def _troca(m: re.Match) -> str:
+        t = m.group(0)
+        if t.lower() in (v.lower() for v in vistas) or len(vistas) >= n:
+            return ""
+        vistas.append(t)
+        return t
+    out = re.sub(r"#\w+", _troca, texto or "")
+    out = re.sub(r"[ \t]{2,}", " ", out)
+    out = re.sub(r"[ \t]+\n", "\n", out)
+    return re.sub(r"\n{3,}", "\n\n", out).strip()
 
 
 def montar(meta: dict, nome_padrao: str = "") -> str:
@@ -72,7 +93,7 @@ def montar(meta: dict, nome_padrao: str = "") -> str:
     tags = " ".join(hashtag(t) for t in (meta.get("tags") or []) if t).strip()
     if tags:
         partes.append(tags)
-    return "\n\n".join(p for p in partes if p).strip()
+    return limitar_hashtags("\n\n".join(p for p in partes if p).strip())
 
 
 # Quantas linhas em branco sobram no fim do .txt. Pedido do Bryan em

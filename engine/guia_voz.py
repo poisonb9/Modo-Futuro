@@ -66,6 +66,11 @@ def _secao(canal, *nomes) -> str:
     for n in nomes:
         if s.get(n):
             return s[n]
+        # ⭐ 28/09/2026 (dono: "vamos fazer o teste A/B" na cozinha): secao
+        # titulada "<nome> (A/B)" so' vale no clipe sorteado para o grupo B
+        # (env AB_ABERTURA, posto por main.py por clipe; ver engine/ab_abertura.py).
+        if s.get(f"{n} (a/b)") and os.environ.get("AB_ABERTURA") == "B":
+            return s[f"{n} (a/b)"]
     return ""
 
 

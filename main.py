@@ -436,6 +436,10 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # Nemotron contaminaria todos os seguintes, e clipe traduzido
                 # pelo Gemini iria pra quarentena a` toa.
                 traducao.zerar_marca_de_reserva()
+                # ⭐ 28/09: A/B da abertura (so' cozinha hoje) — ver engine/ab_abertura.py
+                from engine import ab_abertura
+                if ab_abertura.aplicar(c, nome_fonte, os.environ.get("CANAL_ESPERADO")):
+                    print(f"      A/B da abertura: grupo {c['ab_abertura']}")
                 segmentos = traducao.traduzir_segmentos(
                     ps, narrar=dublar and not fala_literal,
                     genero_falante=c.get("genero_falante"))
@@ -765,7 +769,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                      "produto", "chamada",
                      # A/B do titulo na tela (25/09): sem isto no post.json o
                      # manifesto nao recebe o grupo e o teste nao se le'.
-                     "ab_titulo", "titulo_tela", "titulo_tela_curto",
+                     "ab_titulo", "ab_abertura", "titulo_tela", "titulo_tela_curto",
                      # conferencia da dublagem (26/09): nota da voz gerada
                      "qc_dublagem",
                      "nota", "inicio_s", "fim_s", "duracao_s",

@@ -87,17 +87,27 @@ CHAVES = _chaves()
 # Os nomes proprios sao os MEDIDOS: Babish rendeu a French Onion Soup ja'
 # aprovada, e o README aponta Chef Jean-Pierre e Joshua Weissman como a
 # aposta melhor por falarem sem parar.
+# ⭐ 28/09/2026 (dono): ÂNGULO DO CANAL = MARMITA, BARATO E PROTEICO. As
+# buscas miram receita UNICA que rende varias porcoes, custa pouco e tem
+# proteina. "meal prep" saiu do VETO: marmita de 2-4 receitas com ~2 min
+# cada cabe na janela de 65-210 s por receita (o que quebrava era lista de
+# segundos, e essa continua vetada: compilation, top 10, tips, hacks).
 BUSCAS = [
-    "binging with babish basics recipe",
-    "chef jean pierre recipe",
-    "joshua weissman recipe how to make",
-    "how to make classic french recipe step by step",
-    "easy no bake dessert recipe tutorial",
-    "authentic italian pasta recipe how to make",
-    "homemade bread recipe step by step",
-    "korean street food recipe how to make",
-    "mexican tacos authentic recipe how to make",
-    "classic dessert recipe explained",
+    "high protein meal prep recipe step by step",
+    "cheap meal prep recipe budget",
+    "budget meal prep chicken and rice",
+    "high protein breakfast recipe make ahead",
+    "one pot high protein dinner recipe",
+    "cheap healthy recipe under 5 dollars",
+    "joshua weissman high protein recipe",
+    "chef jean pierre chicken recipe",
+    "egg recipe high protein cheap",
+    "tuna recipe cheap healthy",
+    "chickpea recipe high protein",
+    "freezer meal prep recipe",
+    "sheet pan chicken recipe meal prep",
+    "overnight oats high protein recipe",
+    "ground beef budget recipe",
 ]
 
 # Material que o motor da cozinha NAO consegue usar. Nao e' gosto: cada um
@@ -109,7 +119,7 @@ VETO = [
     # lista: quebra o criterio de segundos por receita (o Gordon de 39M)
     "compilation", "compilado", "best of", "top 10", "top 5", "tips",
     "dicas", "hacks", "mistakes", "things you", "ways to", "recipes",
-    "ideas", "menu", "meal prep", "week of", "everything you",
+    "ideas", "menu", "everything you",
     # nao e' receita
     "shorts", "reaction", "review", "taste test", "vlog", "challenge",
     "ranking", "tier list", "restaurant tour", "kitchen tour",
@@ -125,10 +135,13 @@ TEMA = [
     "chicken", "beef", "pork", "fish", "rice", "egg", "cheese",
     "chocolate", "cookie", "pie", "tart", "custard", "curry", "stew",
     "babish", "jean-pierre", "jean pierre", "weissman", "kitchen", "chef",
+    # angulo de 28/09: marmita, barato, proteico
+    "meal prep", "protein", "budget", "cheap", "tuna", "chickpea", "oats",
+    "ground beef", "sheet pan", "one pot", "breakfast", "lunch", "dinner",
 ]
 
 # Vizinhos que a busca traz e o canal NAO cobre.
-FORA_DO_TEMA = ["diet", "weight loss", "calories", "keto", "protein shake",
+FORA_DO_TEMA = ["weight loss", "keto", "protein shake",
                 "dog food", "cat food", "survival", "prison", "airline"]
 
 # A faixa onde mora a receita unica falada, MEDIDA nas duas ja' aprovadas

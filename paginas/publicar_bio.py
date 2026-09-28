@@ -2436,8 +2436,49 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             nicho["semanestesia.pod"] = estante
     except Exception as e:  # noqa: BLE001
         print(f"nicho: livros indisponiveis ({e})")
+    # ⭐ 28/09/2026 (dono: nome unico Achadinho Chef, angulo MARMITA, BARATO
+    # E PROTEICO). A bio do chef mostrava FITA DE LED no "mais barato de
+    # hoje" (vinha do `_todos` geral). Agora o topo e' a COZINHA DA MARMITA:
+    # um item por busca, no Mercado Livre (loja brasileira, entrega rapida).
+    try:
+        cozinha = produtos_de_marmita()
+        print(f"nicho: {len(cozinha)} item(ns) de marmita para o Achadinho Chef")
+        if len(cozinha) >= 4:
+            nicho["cozinha.internacional"] = cozinha
+    except Exception as e:  # noqa: BLE001
+        print(f"nicho: marmita indisponivel ({e})")
     saida["_nicho"] = nicho
     return saida
+
+
+# O que quem faz marmita barata e proteica compra (angulo de 28/09/2026).
+BUSCAS_MARMITA = [
+    "pote de vidro marmita hermetico",
+    "marmita eletrica",
+    "balanca digital de cozinha",
+    "air fryer",
+    "bolsa termica marmita",
+    "forma de silicone para forno",
+    "mixer de mao",
+    "potes para congelar comida",
+]
+
+
+def produtos_de_marmita(quantos: int = 8) -> list[dict]:
+    """Um cartao por busca de BUSCAS_MARMITA (o de menor preco com foto)."""
+    from engine import mercadolivre as _ml
+    out = []
+    for termo in BUSCAS_MARMITA:
+        try:
+            r = _ml.buscar(termo, quantos=3, canal="cozinha.importada",
+                           candidatos=10, paginas=1, expandir_termo=False)
+        except Exception as e:  # noqa: BLE001
+            print(f"  marmita: '{termo}' falhou ({str(e)[:60]})")
+            continue
+        r = [x for x in r if x.get("link") and x.get("preco") and x.get("imagem")]
+        if r and not _parecido(r[0], out):
+            out.append(r[0])
+    return out[:quantos]
 
 
 # ⭐ A ESTANTE DO SEM ANESTESIA: (busca, palavras que o nome TEM de ter).

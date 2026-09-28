@@ -120,10 +120,16 @@ CANAIS: dict[str, Canal] = {
         # que so' existia no `pipeline` agora esta' aqui (engine/conversoes.py,
         # modo receita: `SELECAO_MODO=receita`). O `pipeline` deixa de ser quem
         # serve o canal — desligar os agendamentos de la' e' ato do dono.
-        Canal("cozinha.importada", "@cozinha.internacional",
-              "6a90dddb9bb05f07b058e9bc", "6a90de80ccaf649a672ebe15",
+        # ⭐ 28/09/2026 (dono): NOME UNICO "Achadinho Chef", @achadinhochef, e
+        # BUFFER NOVO (org/canal lidos pelo buffer_ids.yml com o secret novo;
+        # a conta antiga era 6a90dddb.../6a90de80...). No Buffer o canal se
+        # chama "achadinhochef" — entra como apelido; a guarda do
+        # agendar_buffer compara pelo nome canonico.
+        Canal("cozinha.importada", "@achadinhochef",
+              "6ab9a356aea5bc653c7c48e9", "6ab9a38bea19ca0bde0afed8",
               "BUFFER_TOKEN_COZINHA", motor=True,
-              apelidos=("cozinha.internacional", "cozinha")),
+              apelidos=("achadinhochef", "achadinho.chef", "cozinha.internacional",
+                        "cozinha")),
 
         # ⚠️⚠️ AS DUAS DE BAIXO EXISTEM NO TIKTOK E **NAO** NO BUFFER.
         #

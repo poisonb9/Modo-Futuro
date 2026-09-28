@@ -237,6 +237,19 @@ def contexto_buffer(token: str, fresco: bool = False) -> tuple[str, str, list[di
     # o alcance conta, e apagar deixa o video em 0 pra sempre.
     esperado = (os.environ.get("CANAL_ESPERADO") or "").strip().lower()
     if esperado:
+        # ⭐ 28/09/2026: o canal da cozinha no Buffer novo chama
+        # "achadinhochef" (o @ mudou), e o nome interno segue
+        # "cozinha.importada". Vale o NOME CANONICO: o nome do Buffer tem de
+        # ser um APELIDO REGISTRADO do mesmo canal (canais_registro), nunca
+        # um canal qualquer — a guarda continua fechada para destino errado.
+        def _can(n):
+            try:
+                return canais_registro.canonico(n) or n
+            except Exception:  # noqa: BLE001
+                return n
+        esperado = _can(esperado)
+        tiktok = [dict(c, name=_can((c.get("name") or "").strip().lower()))
+                  for c in tiktok]
         nomes = [(c.get("name") or "").strip().lower() for c in tiktok]
         if esperado not in nomes:
             sys.exit(

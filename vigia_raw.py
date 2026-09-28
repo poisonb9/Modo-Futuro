@@ -245,6 +245,10 @@ MAPA_PASTA_CANAL = {
     "modo futuro": "modofuturo",
     "truque importado": "truque.importado",
     "ate falhar": "atefalhar",
+    # ⭐ 28/09/2026: pastas renomeadas com o nome ATUAL do canal (dono achou
+    # confuso). Os nomes antigos ficam: brutos velhos seguem no lugar.
+    "geracao 2000": "atefalhar",
+    "achadinho chef": "cozinha.importada",
     # ⚠️ `cozinha.importada` e' o nome NO BUFFER, que e' o que a guarda
     # CANAL_ESPERADO compara e o que os workflows usam pra escolher o
     # token. O `@cozinha.internacional` e' o @ do TikTok — outro campo.

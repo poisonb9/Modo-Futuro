@@ -609,6 +609,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             # limite e' a duracao que o clipe tinha antes do aparo.
             texto_chamada = chamada_mod.do_canal(
                 os.environ.get("CANAL_ESPERADO") or c.get("canal"))
+            # 28/09: no Chef a chamada e' SO' da legenda (o video ja' tem o fecho
+            # da camada); sem card no fim.
+            if canais_registro_canonico(os.environ.get("CANAL_ESPERADO")
+                                        or c.get("canal")) in chamada_mod.SO_LEGENDA:
+                texto_chamada = ""
             if texto_chamada and dur_max:
                 dur_max = min(dur_final_antes, dur_max + render.CHAMADA_SEGUNDOS)
                 dur_final = dur_max

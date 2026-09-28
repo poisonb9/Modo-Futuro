@@ -43,7 +43,13 @@ from . import canais_registro
 # livro existe; os canais de achadinho falam do grupo porque o grupo existe.
 # Vazio desde 25/09/2026: sem chamada em nenhum canal (decisao do dono).
 # Os textos antigos estao guardados fora do repositorio.
-CHAMADA: dict[str, str] = {}
+# ⭐ 28/09/2026 (dono): o Chef volta a ter chamada — a pagina da bio entrega a
+# receita completa (ficha em grama e °C). So' ele; os outros seguem sem.
+CHAMADA: dict[str, str] = {
+    "cozinha.importada": "📖 A receita completa, em grama e °C, está no link da bio.",
+}
+# canais cuja chamada fica SO' na legenda (sem card desenhado no fim do video)
+SO_LEGENDA = {"cozinha.importada"}
 
 
 def do_canal(canal: str | None) -> str:

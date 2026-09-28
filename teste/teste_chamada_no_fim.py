@@ -29,9 +29,10 @@ def checar(cond, recado):
         falhas.append(recado)
 
 
-print("1. desde 25/09/2026 NENHUM canal tem chamada (decisao do dono)")
+print("1. desde 25/09/2026 nenhum canal tem chamada — exceto o Chef (28/09, dono)")
+checar(chamada.do_canal("achadinhochef") != "", "achadinhochef: TEM chamada (receita na bio)")
 for _c in ("semanestesia.pod", "truque.importado", "@achadinho.make",
-           "cozinha.importada", "fatura.chora", "achadinhos.instantaneos",
+           "fatura.chora", "achadinhos.instantaneos",
            "atefalhar", "modofuturo"):
     checar(chamada.do_canal(_c) == "", f"{_c}: sem chamada")
 

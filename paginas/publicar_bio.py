@@ -2630,7 +2630,35 @@ def injetar_produtos(html: str, dados: dict | None = None) -> str:
     dados = dict(dados)
     dados["_do_video"] = do_video()
     corpo = json.dumps(dados, ensure_ascii=False, indent=2)
-    return html.replace(alvo, "  var PRODUTOS_REAIS = " + corpo + ";", 1)
+    html = html.replace(alvo, "  var PRODUTOS_REAIS = " + corpo + ";", 1)
+    # ⭐ 28/09/2026: ultimas receitas do Chef + fichas em /receitas/ (o deploy
+    # sobe `_FICHAS`). Falha aberta: sem fichas, a bio sai sem o bloco.
+    global _FICHAS
+    try:
+        from ferramentas import fichas_receita
+        _FICHAS, bio = fichas_receita.gerar()
+        print(f"receitas: {sum(1 for k in _FICHAS if k.endswith('.html'))} ficha(s), "
+              f"{len(bio)} na bio")
+    except Exception as e:  # noqa: BLE001
+        _FICHAS, bio = {}, []
+        print(f"receitas: indisponivel ({type(e).__name__}: {str(e)[:80]})")
+    return html.replace("  var RECEITAS = [];",
+                        "  var RECEITAS = " + json.dumps(bio, ensure_ascii=False) + ";", 1)
+
+
+_FICHAS: dict = {}
+
+
+def _por_fichas(pasta: Path) -> None:
+    """Grava as fichas de receita no diretorio do deploy (upload direto
+    substitui TUDO: se nao forem juntas, o deploy seguinte as apaga)."""
+    for rel, corpo in (_FICHAS or {}).items():
+        f = pasta / rel
+        f.parent.mkdir(parents=True, exist_ok=True)
+        if isinstance(corpo, bytes):
+            f.write_bytes(corpo)
+        else:
+            f.write_text(corpo, encoding="utf-8")
 
 
 # ⭐ "DA MAKE DO VIDEO" (25/09/2026, aprovado pelo dono): o produto do tema dos
@@ -3334,6 +3362,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
         (pasta / "parceiros" / "index.html").write_text(
             parceiros, encoding="utf-8")
     _por_privacidade(pasta, privacidade)
+    _por_fichas(pasta)
     try:
         for proj in PROJETOS:
             # 24/09/2026: o deploy de 01:10 caiu com rc=1 e o log so' tinha o

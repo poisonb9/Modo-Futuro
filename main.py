@@ -755,6 +755,14 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                                   audio_dublado, duracao_max=dur_max)
 
             render.capa(bruto, pasta / "capa.jpg")
+            if config.modo_receita():
+                # ⭐ 28/09: em receita a capa e' o PRATO (bruto limpo, sem rosto)
+                # — vira a foto da ficha da receita na bio. Ver engine/capa_prato.
+                from engine import capa_prato
+                _jpg = capa_prato.escolher(bruto)
+                if _jpg:
+                    (pasta / "capa.jpg").write_bytes(_jpg)
+                    print("      capa: foto do prato")
 
             # ⚠️ `legenda_premium` TEM DE ESTAR NESTA LISTA. Ela e' uma copia por
             # nomes: o que nao esta' aqui nao chega ao post.json, mesmo tendo sido

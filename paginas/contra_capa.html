@@ -671,6 +671,14 @@
   @keyframes isca-flutua { 50% { transform: translateY(-5px) rotate(-3deg); } }
   @media (prefers-reduced-motion: reduce) { .isca-balao { animation: none; } }
   .isca-texto { margin: 4px 0 10px; font-size: 14px; line-height: 1.5; opacity: .85; }
+  /* ⭐ 28/09: ultimas receitas (ficha C5 caramelo) */
+  .receitas { display: grid; gap: 10px; }
+  .receita { display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: center;
+             background: #FAF6EF; color: #2A211B; border: 2px solid currentColor; border-radius: 14px;
+             padding: 8px; text-decoration: none; box-shadow: 3px 3px 0 #2A211B; }
+  .receita img, .receita .semfoto { width: 92px; height: 69px; object-fit: cover; border-radius: 9px; background: #EFE7DA; }
+  .receita b { display: block; font-size: 15px; line-height: 1.25; }
+  .receita small { display: block; margin-top: 4px; font-size: 12px; color: #9A6414; font-weight: 700; letter-spacing: .02em; }
   .isca-form { display: grid; gap: 8px; }
   .isca-form input[type=email] { font: inherit; padding: 12px 14px; border: 2px solid currentColor; border-radius: 12px; background: transparent; color: inherit; }
   .isca-form button { font: inherit; font-weight: 700; padding: 13px; border: 0; border-radius: 999px; background: var(--acento, #1F8A5F); color: #fff; cursor: pointer; }
@@ -793,6 +801,9 @@
   // baixo, com a etiqueta dizendo que sao exemplo. Falha aberta pro lado que
   // nao mente.
   var PRODUTOS_REAIS = {};
+  // ⭐ ULTIMAS RECEITAS (28/09/2026, Achadinho Chef): as 3 fichas mais novas,
+  // injetadas pelo publicar_bio (ferramentas/fichas_receita.py). Vazio = sem bloco.
+  var RECEITAS = [];
 
   // Os convites da comunidade Achadinho. ⚠️ Estao AQUI por decisao do Bryan em
   // 12/09/2026 — "pode guardar nos nossos arquivos de projeto, e' publico
@@ -2171,6 +2182,35 @@
       });
       sx.appendChild(fm);
       grupos.insertBefore(sx, grupos.children[0] || null);
+    }
+
+    // ⭐ ULTIMAS RECEITAS (28/09/2026, dono). VALOR ANTES DO PEDIDO (acervo
+    // F09873/F05126): quem chega do TikTok ve' a receita pronta pra usar ANTES
+    // do convite de e-mail — por isso entra no topo, acima da isca.
+    if ((c.banco === "cozinha.importada") && RECEITAS.length) {
+      var sr = el("section", "grupo");
+      sr.appendChild(el("p", "guia", "Últimas receitas do canal 🍳"));
+      var lista = el("div", "receitas");
+      RECEITAS.slice(0, 3).forEach(function (r) {
+        var a = document.createElement("a");
+        a.className = "receita"; a.href = r.url;
+        if (r.capa) {
+          var im = document.createElement("img");
+          im.src = r.capa; im.alt = ""; im.loading = "lazy";
+          im.onerror = function () { im.className = "semfoto"; im.removeAttribute("src"); };
+          a.appendChild(im);
+        } else { a.appendChild(el("span", "semfoto", "")); }
+        var tx = el("span", "", "");
+        tx.appendChild(el("b", "", r.titulo));
+        var meta = ["Ficha Nº " + ("00" + r.numero).slice(-3)];
+        if (r.rende) { meta.push(r.rende + " porções"); }
+        if (r.tempo) { meta.push(r.tempo); }
+        tx.appendChild(el("small", "", meta.join(" · ")));
+        a.appendChild(tx);
+        lista.appendChild(a);
+      });
+      sr.appendChild(lista);
+      grupos.insertBefore(sr, grupos.children[0] || null);
     }
 
     var vitrine = document.getElementById("vitrine");

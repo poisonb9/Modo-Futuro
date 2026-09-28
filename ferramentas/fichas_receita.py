@@ -80,9 +80,11 @@ def ler_receita(legenda: str, titulo: str) -> dict | None:
     subs = [l.strip(" -•\t") for l in subs_txt.splitlines() if l.strip(" -•\t")]
     blocos = [b.strip() for b in antes.split("\n\n") if b.strip()]
     sub = blocos[1] if len(blocos) > 1 and blocos[0] == titulo.strip() else ""
-    m = re.search(r"Rende\s+(\d+)\s+porc\w*\s*[-·]\s*([^\n]+)", antes, re.I)
+    m = re.search(r"Rende\s+(\d+)\s+por[cç]\w*\s*[-·]\s*([^\n]+)", antes, re.I)
     rende = m.group(1) if m else ""
-    tempo = m.group(2).strip() if m else ""
+    # "Rende 1 travessa média - 6 h 30 min": sem porções, mas o tempo vale
+    t = m or re.search(r"Rende\s+[^\n]*?\s[-·]\s*(\d[^\n]*)", antes, re.I)
+    tempo = t.group(t.lastindex).strip() if t else ""
     if not ing or not passos:
         return None
     return {"titulo": titulo.strip(), "sub": acentuar(sub.split(". ")[0].rstrip(".")),
@@ -130,6 +132,7 @@ h1{font-family:Fraunces,Georgia,serif;font-size:34px;line-height:1.02;padding:10
 .col{display:block;margin:22px 20px 0;border-radius:16px;padding:16px;background:var(--popesc);color:#fff;text-align:center;text-decoration:none;box-shadow:0 10px 26px rgba(201,138,46,.25)}
 .col b{display:block;font-family:Fraunces,Georgia,serif;font-size:20px}.col span{font-size:13px;opacity:.9}
 .pe{padding:22px 20px 30px;font-size:12px;color:var(--sec);line-height:1.6}
+.et{padding:16px 20px 6px;font-family:Fraunces,Georgia,serif;font-size:17px;color:var(--popesc)}
 @media print{.col{display:none}body{background:#fff}}"""
 
 FONTES = ('<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;'
@@ -141,8 +144,13 @@ def ficha_html(r: dict, numero: int, total: int, capa: str, credito: str) -> str
     lin = "".join(
         f'<label class="lin"><input type="checkbox"><b>{e(q) or "—"}</b><span>{e(n)}</span></label>'
         for q, n in ((q, n[:1].lower() + n[1:]) for q, n in (_qtd(i) for i in r["ing"])))
-    pas = "".join(f'<div class="p"><b>{k:02d}</b><span>{e(t)}</span></div>'
-                  for k, t in enumerate(r["passos"], 1))
+    pas, k = "", 0
+    for nome, passos in r.get("etapas") or [("", r["passos"])]:
+        if nome and len(r.get("etapas") or []) > 1:
+            pas += f'<div class="et">{e(nome)}</div>'
+        for t in passos:
+            k += 1
+            pas += f'<div class="p"><b>{k:02d}</b><span>{e(t)}</span></div>'
     cel = "".join(f'<div class="cel"><b>{e(v)}</b><small>{e(l)}</small></div>'
                   for v, l in ((r["rende"], "porções"), (r["tempo"], "tempo"),
                                (str(len(r["ing"])), "ingredientes")) if v)
@@ -173,27 +181,98 @@ def _credito(fonte: str) -> str:
     return "Receita adaptada de um vídeo do YouTube"
 
 
+def _chave_ing(item: str) -> str:
+    """Nome do ingrediente sem quantidade/"a gosto"/plural, p/ juntar repetidos."""
+    _, nome = _qtd(item)
+    nome = re.sub(r"\(.*?\)|\ba gosto\b|:", " ", nome.lower())
+    nome = unicodedata.normalize("NFKD", nome)
+    nome = "".join(c for c in nome if not unicodedata.combining(c))
+    return " ".join(re.sub(r"s$", "", w) for w in re.findall(r"[a-z]+", nome))
+
+
+def _juntar(partes: list[dict]) -> dict:
+    """1 video = 1 receita = 1 ficha (dono, 28/09: "o tiramisu tudo em uma
+    ficha so'"). As partes vem em ordem do video (inicio_s); a 1a da' o
+    titulo/subtitulo/porcoes. Ingrediente repetido entra 1 vez, preferindo o
+    que tem quantidade. O preparo guarda os passos de cada parte, na ordem."""
+    base = dict(partes[0])
+    if len(partes) == 1:
+        base["etapas"] = [("", base["passos"])]
+        return base
+    ing, vistos = [], {}
+    for r in partes:
+        for i in r["ing"]:
+            k = _chave_ing(i)
+            if k in vistos:
+                if not _qtd(ing[vistos[k]])[0] and _qtd(i)[0]:
+                    ing[vistos[k]] = i
+                continue
+            vistos[k] = len(ing)
+            ing.append(i)
+    base["ing"] = ing
+    base["etapas"] = [(r["titulo"], r["passos"]) for r in partes]
+    base["passos"] = [p for r in partes for p in r["passos"]]
+    base["subs"] = list(dict.fromkeys(s for r in partes for s in r["subs"]))
+    # o tempo da receita e' o da parte mais longa (a do mascarpone inclui
+    # 6 h de geladeira: "15 min" da 1a parte enganaria quem vai fazer)
+    def _min(t):
+        h = re.search(r"(\d+)\s*h", t or "")
+        m = re.search(r"(\d+)\s*min", t or "")
+        return (int(h.group(1)) * 60 if h else 0) + (int(m.group(1)) if m else 0)
+    base["tempo"] = max((r["tempo"] for r in partes), key=_min, default="")
+    return base
+
+
+ORDEM = RAIZ / "paginas" / "receitas_ordem.json"
+
+
+def _numerar(itens: list[dict]) -> None:
+    """Numero FIXO por receita, na ordem em que foi PUBLICADA (dono, 28/09: a
+    cebola saiu Nº 004 sendo o 1o post). Guardado em paginas/receitas_ordem.json
+    (versionado): uma vez dado, o numero nunca muda; receita nova pega o proximo."""
+    try:
+        ordem = json.loads(ORDEM.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        ordem = {}
+    for r in itens:
+        if r["vid"] not in ordem:
+            ordem[r["vid"]] = max(ordem.values(), default=0) + 1
+        r["numero"] = ordem[r["vid"]]
+    try:
+        ORDEM.write_text(json.dumps(ordem, ensure_ascii=False, indent=1), encoding="utf-8")
+    except OSError:
+        pass
+    itens.sort(key=lambda r: r["numero"])
+
+
 def coletar(manifesto: dict | None = None) -> list[dict]:
-    """Receitas do Chef, da mais antiga para a mais nova (numeracao estavel)."""
+    """Receitas do Chef (1 por video de origem), da mais antiga para a mais nova."""
     if manifesto is None:
         import agendar_buffer as ab
         manifesto = ab.manifesto(ab._token_github(), None)
     from engine import canais_registro
-    itens = []
+    grupos: dict[str, list[dict]] = {}
     for k, v in sorted(manifesto.items()):
         can = canais_registro.canonico(v.get("canal") or v.get("canal_esperado") or "")
         if can != CANAL and "INGREDIENTES" not in str(v.get("legenda") or ""):
             continue
+        if v.get("quarentena") or v.get("nao_publicar"):
+            continue   # nao foi ao ar: nao ganha ficha
         r = ler_receita(str(v.get("legenda") or ""), str(v.get("titulo") or ""))
         if not r:
             continue
-        r.update(slug=slug(r["titulo"]), capa=v.get("capa_url") or "",
-                 credito=_credito(v.get("fonte") or ""), chave=k,
-                 fonte=v.get("fonte") or "", ini=float(v.get("inicio_s") or 0),
+        fonte = v.get("fonte") or ""
+        vid = fonte.split("__", 1)[0] or k
+        r.update(credito=_credito(fonte), chave=k, fonte=fonte, vid=vid,
+                 capa=v.get("capa_url") or "", ini=float(v.get("inicio_s") or 0),
                  fim=float(v.get("fim_s") or 0) or None)
-        if any(x["slug"] == r["slug"] for x in itens):
-            continue
+        grupos.setdefault(vid, []).append(r)
+    itens = []
+    for partes in grupos.values():
+        r = _juntar(sorted(partes, key=lambda x: x["ini"]))
+        r["slug"] = slug(r["titulo"])
         itens.append(r)
+    _numerar(itens)
     return itens
 
 
@@ -233,8 +312,8 @@ def gerar(manifesto: dict | None = None, fotos: bool = True) -> tuple[dict, list
     itens = coletar(manifesto)
     total = max(30, len(itens))
     arquivos = {}
-    for n, r in enumerate(itens, 1):
-        r["numero"] = n
+    for r in itens:
+        n = r["numero"]
         # foto guardada no repo depois da 1a vez: nao rebaixa o bruto a cada
         # publicacao da bio (rede instavel + PC com pouco disco, 28/09)
         guardada = FOTOS / f"{r['slug']}.jpg"

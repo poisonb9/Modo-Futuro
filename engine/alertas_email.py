@@ -126,16 +126,16 @@ def boas_vindas(insc: dict[str, set[str]], simular: bool, teto: int) -> int:
     if not novos or simular:
         return len(novos)
     cat = {str(p.get("id")): p for p in pb.produtos_todos()}
-    import email_marmitas as em_
+    import email_isca as isca
     n = 0
     for em in novos:
         p = cat.get(pedido[em])
         try:
-            # ⭐ 28/09/2026: quem pediu o CARDAPIO DE MARMITAS (bio do Achadinho
-            # Chef) recebe as receitas, nao o boas-vindas de preco. Sem receitas
+            # ⭐ 28/09/2026: quem pediu a ISCA de um canal (bio; ferramentas/
+            # email_isca.py) recebe o e-mail do canal, nao o boas-vindas de preco. Sem receitas
             # bastantes ainda: espera (nao marca como enviado).
-            if pedido[em] == em_.PRODUTO:
-                pronto = em_.pronto_para_enviar(sair_url=link_sair(em))
+            if pedido[em] in isca.PRODUTOS:
+                pronto = isca.pronto_para_enviar(pedido[em], sair_url=link_sair(em))
                 if not pronto:
                     continue
                 a, corpo = pronto

@@ -703,7 +703,8 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     cortada se viesse antes dele.
     """
     l, a = midia.dimensoes(bruto)
-    caminho = enquadrar.caminho_para(bruto, l, a)
+    estatico = enquadrar.estatico()
+    caminho = [] if estatico else enquadrar.caminho_para(bruto, l, a)
     lv, av = config.VERTICAL
     # `cortes` (inicio de cada frase) -> movimento sincronizado com a fala;
     # sem fala medida, o ciclo cego de sempre
@@ -714,6 +715,10 @@ def vertical(bruto: Path, ass: Path | None, destino: Path,
     # realcar o bloco da compressao (0,8 ja' realcava, comparado lado a lado).
     # A melhora de verdade e' baixar maior (baixar_em_intervalos.FORMATO).
     filtro = enquadrar.filtro_vertical(l, a, caminho) + movimento + NITIDEZ
+    if estatico:
+        # desenho (28/09): quadro PARADO, imagem inteira, sem zoom
+        print("      enquadramento: ESTATICO (imagem inteira, sem rastreio/zoom)")
+        filtro = enquadrar.filtro_estatico() + NITIDEZ
     if config.GRADE_CINEMATICO:
         filtro += pos_producao.FILTRO_COR_CINEMATICO
     # A imagem do título vai pra pasta de TRABALHO, não pra pasta do clipe: a
@@ -763,7 +768,8 @@ def horizontal(bruto: Path, ass: Path | None, destino: Path,
 def capa(bruto: Path, destino: Path, em: float = 1.0) -> Path:
     """Thumbnail: pega um frame já com o crop vertical aplicado."""
     l, a = midia.dimensoes(bruto)
-    filtro = enquadrar.filtro_vertical(l, a, [])
+    filtro = (enquadrar.filtro_estatico() if enquadrar.estatico()
+              else enquadrar.filtro_vertical(l, a, []))
     midia.roda(["ffmpeg", "-y", "-ss", f"{em:.2f}", "-i", str(bruto),
                 "-vf", filtro, "-frames:v", "1", "-q:v", "2", str(destino)])
     return destino

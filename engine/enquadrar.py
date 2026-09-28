@@ -3,6 +3,7 @@
 Sem isso o crop vertical fica fixo no centro e corta a cabeça de quem está
 falando de lado. Roda em CPU numa boa (MediaPipe é leve).
 """
+import os
 import config
 
 try:
@@ -343,6 +344,21 @@ def caminho_para(clipe, largura: int, altura: int) -> list[tuple[float, float]]:
     if getattr(config, "RASTREIO_MOVIMENTO", False):
         return trajetoria_movimento(clipe, largura, altura)
     return []
+
+
+def estatico() -> bool:
+    """Canal com quadro PARADO (desenho): sem rastreio e sem zoom."""
+    from .canais_registro import canonico
+    return canonico(os.environ.get("CANAL_ESPERADO")) in config.CANAIS_QUADRO_ESTATICO
+
+
+def filtro_estatico() -> str:
+    """Imagem inteira na largura da tela vertical, fundo = a mesma imagem
+    ampliada e desfocada. Nada do quadro original sai da tela."""
+    lv, av = config.VERTICAL
+    return (f"split[qe_f][qe_p];[qe_f]scale={lv}:{av}:force_original_aspect_ratio=increase,"
+            f"crop={lv}:{av},boxblur=20:2,eq=brightness=-0.12[qe_fd];"
+            f"[qe_p]scale={lv}:-2[qe_pp];[qe_fd][qe_pp]overlay=(W-w)/2:(H-h)/2")
 
 
 def filtro_vertical(largura: int, altura: int,

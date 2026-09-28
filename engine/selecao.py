@@ -776,6 +776,49 @@ def _regra_nomes(caminho: Path) -> str:
     )
 
 
+CORRECAO_SEGUNDOS = (
+    "\n\n⚠️ CORRECAO: na resposta anterior 'inicio_s' e 'fim_s' vieram em "
+    "MINUTOS (ex.: 1.30 = 1min30s). Use SEGUNDOS desde o comeco do video: "
+    "1min30s = 90.0, 3min05s = 185.0. Cada trecho tem de durar o minimo pedido."
+)
+
+
+def tempo_em_minutos(clipes: list[dict], dur_total: float) -> bool:
+    """True quando TODOS os momentos cabem nos primeiros `dur_total/60`
+    'segundos' e sao curtos demais pra ser corte: o modelo respondeu em
+    minutos. Video curto (< 2 min) nunca dispara (nao da' pra distinguir)."""
+    if dur_total < 120 or not clipes:
+        return False
+    limite = dur_total / 60 + 1
+    try:
+        return all(float(c["fim_s"]) <= limite and
+                   float(c["fim_s"]) - float(c["inicio_s"]) < config.DUR_MIN / 4
+                   for c in clipes)
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
+def _mmss(v: float) -> float:
+    m = int(v)
+    frac = round((v - m) * 100, 2)
+    # 1.30 -> 1min30s; fracao >= 60 so' pode ser minuto decimal
+    return m * 60 + frac if frac < 60 else v * 60
+
+
+def minutos_para_segundos(clipes: list[dict]) -> list[dict]:
+    for c in clipes:
+        c["inicio_s"] = _mmss(float(c["inicio_s"]))
+        c["fim_s"] = _mmss(float(c["fim_s"]))
+    return clipes
+
+
+def _mostrar_tempos(clipes: list[dict]) -> None:
+    """O log nao mostrava os tempos crus — sem isso o '1.9s' foi adivinhacao."""
+    for c in clipes[:8]:
+        print(f"      [modelo] {c.get('inicio_s')!r} -> {c.get('fim_s')!r}  "
+              f"\"{str(c.get('titulo') or c.get('gancho') or '?')[:40]}\"")
+
+
 def escolher(caminho: Path, dur_total: float, usar_video: bool,
              qtd: int = config.QTD_CLIPES) -> list[dict]:
     """Devolve os melhores momentos, já com título/descrição/tags.
@@ -799,9 +842,24 @@ def escolher(caminho: Path, dur_total: float, usar_video: bool,
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 
-    txt = _pedir(caminho, mime, corpo, "escolha de clipes", valida=_extrair_json)
-    dados = _extrair_json(txt)
-    clipes = dados if isinstance(dados, list) else dados.get("clipes", [])
+    def _clipes(txt):
+        dados = _extrair_json(txt)
+        return dados if isinstance(dados, list) else dados.get("clipes", [])
+
+    clipes = _clipes(_pedir(caminho, mime, corpo, "escolha de clipes",
+                            valida=_extrair_json))
+    _mostrar_tempos(clipes)
+    if tempo_em_minutos(clipes, dur_total):
+        # ⭐ 28/09 (Chef, French Onion Soup, run 36423439652): o modelo
+        # devolveu 3 momentos de ~1s cada — era MINUTO (mm.ss), nao segundo.
+        print("      [!] tempos parecem MINUTOS, nao segundos — pergunto de novo")
+        prompt += CORRECAO_SEGUNDOS
+        clipes = _clipes(_pedir(caminho, mime, corpo, "escolha de clipes (segundos)",
+                                valida=_extrair_json))
+        _mostrar_tempos(clipes)
+        if tempo_em_minutos(clipes, dur_total):
+            print("      [!] ainda em minutos — converto mm.ss -> segundos")
+            clipes = minutos_para_segundos(clipes)
     # ⭐ 27/09: memoria de temas (plano de virada item 2) — marca e reordena,
     # NAO descarta. Ver engine/memoria_temas.py.
     clipes = memoria_temas.marcar(clipes, _canal_atual())

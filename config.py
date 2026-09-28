@@ -365,6 +365,12 @@ AMOSTRA_FPS = 4                  # quantos frames/s analisar p/ achar rosto
 # mao que despeja. Ver engine/enquadrar.trajetoria_movimento.
 RASTREIO_MOVIMENTO = False
 
+# ⭐ 28/09 (dono, prévia do Coragem): em DESENHO o rastreio de rosto/movimento
+# pula de um lado pro outro e deixa o personagem fora da tela. Nestes canais o
+# quadro fica PARADO: imagem inteira na largura, fundo desfocado em cima e
+# embaixo, sem zoom/ken burns. Ver engine/enquadrar.estatico.
+CANAIS_QUADRO_ESTATICO = {"atefalhar"}
+
 # Trocar palavra sensivel por grafia adaptada na legenda (morte -> m0rte).
 # DESLIGADO em 25/08/2026, no mesmo dia em que foi escrito, depois que o Bryan
 # perguntou "tem certeza que isso vai confundir o algoritmo?" — e nao vai:

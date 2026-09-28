@@ -31,6 +31,9 @@ on:
       texto:
         description: "(opcional, com id) corpo da legenda; use \n para quebrar linha"
         default: ""
+      apagar:
+        description: "true = com id, EXCLUI o post agendado (so' com pedido do dono)"
+        default: "false"
 jobs:
   trocar:
     runs-on: ubuntu-latest
@@ -86,5 +89,6 @@ jobs:
           [ -n "${{ inputs.hora }}" ] && EXTRA+=(--hora "${{ inputs.hora }}")
           [ -n "${{ inputs.criar }}" ] && EXTRA+=(--criar "${{ inputs.criar }}" --titulo "${{ inputs.titulo }}")
           [ "${{ inputs.so_hashtags }}" = "true" ] && EXTRA+=(--so-hashtags)
+          [ "${{ inputs.apagar }}" = "true" ] && EXTRA+=(--apagar)
           [ -n "${{ inputs.video }}" ] && EXTRA+=(--video "${{ inputs.video }}")
           python -X utf8 trocar_legendas_agendadas.py --canal "${{ inputs.canal }}" $S "${EXTRA[@]}"

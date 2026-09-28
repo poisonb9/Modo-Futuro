@@ -116,6 +116,8 @@ def main() -> None:
     ap.add_argument("--titulo", help="com --criar: parte do titulo do clipe no manifesto (a legenda vem dele)")
     ap.add_argument("--so-hashtags", action="store_true",
                     help="so' corta pra 3 hashtags; mantem texto, video e horario")
+    ap.add_argument("--apagar", action="store_true",
+                    help="com --id: EXCLUI o post agendado (so' com pedido do dono)")
     a = ap.parse_args()
     nome = canais_registro.canonico(a.canal)
     c = canais_registro.CANAIS[nome]
@@ -140,6 +142,18 @@ def main() -> None:
     if a.id:
         posts = [p for p in posts if p["id"] == a.id]
     print(f"{nome}: {len(posts)} agendado(s)")
+    if a.apagar:
+        # ⛔ 28/09/2026: Samsung "teste de queda" com narracao INVENTADA (fonte
+        # so' musica). Dono pediu para excluir; ele nao estava logado no Buffer.
+        if not a.id or len(posts) != 1:
+            sys.exit("--apagar exige --id de UM post agendado deste canal")
+        print(f"apagar: {posts[0]['dueAt']}  {(posts[0].get('text') or '')[:70]!r}")
+        if a.simular:
+            return
+        pid = a.id.replace('"', "")
+        d = ab.consultar(token, 'mutation { deletePost(input: {id: "%s"}) { __typename } }' % pid)
+        print("  resultado:", d)
+        return
     trocados = 0
     for p in posts:
         texto = p.get("text") or ""

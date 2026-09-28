@@ -45,10 +45,10 @@ PLAT = {
     # balao parecia acima/esquerda do botao. Desceu +60 (meio-termo entre o
     # For You, esse layout e o Android) e o corpo encosta a ~20 px do icone.
     # ⭐ Mesmo dia, dono: "vamos testar em cima dos botoes, como se apertasse
-    # nele" — TESTE: o balao para EM CIMA do botao (prévia em _privado/previas_28-09).
-    # Versao "ao lado": e1 (814, 1283), e2 (810, 1619), e3 (806, 938).
-    "tiktok": {"pos": {"a": (928, 1100), "e1": (944, 1250), "e2": (944, 1590),
-                       "e3": (944, 905)},
+    # nele" — testado EM CIMA do botao; o dono CONFIRMOU o "ao lado" (28/09).
+    # Em cima era x=944 (e1 y 1250, e2 1590, e3 905).
+    "tiktok": {"pos": {"a": (928, 1100), "e1": (814, 1283), "e2": (810, 1619),
+                       "e3": (806, 938)},
                "e2": ("e2", 200), "esc": 0.8},
     "reels": {"pos": {"a": (886, 848), "e1": (760, 992), "e2": (760, 1327),
                       "e3": (250, 1345)},

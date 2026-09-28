@@ -80,6 +80,9 @@ on:
         description: "LIMITA a busca a esta faixa em segundos (ex: 300-1500); o Gemini escolhe DENTRO dela. E' o que faz podcast longo caber no teto de 6h. NAO e' o mesmo que recorte."
         required: false
         default: ""
+      selo_parte:
+        description: "(opcional) numero fixo da PARTE no selo, pra refazer clipe ja' numerado"
+        default: ""
       previa:
         description: "PREVIA: corta e renderiza, mas NAO sobe pro Drive, NAO publica Release, NAO enfileira no Buffer, NAO grava guarda nem apaga o bruto. Os clipes ficam como anexo (artifact) do run, pra ouvir/ver antes de ligar algo."
         required: false
@@ -392,6 +395,7 @@ jobs:
           FUNDO_ORIGINAL: ${{ inputs.fundo_original == 'true' && '1' || '0' }}
           # na previa o main.py guarda as trilhas do meio (engine/diagnostico.py)
           PREVIA: ${{ inputs.previa }}
+          SELO_PARTE: ${{ inputs.selo_parte }}
           VOZ_ORIGINAL_DB: ${{ inputs.voz_original_db }}
         run: >
           python -X utf8 main.py

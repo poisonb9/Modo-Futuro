@@ -700,6 +700,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     _parte = selo.parte_do_tema(
                         canais_registro_canonico(_canal_cascata), _nome,
                         _selos_usados) if _nome else 1
+                    # 28/09: refazer um clipe ja' numerado mantendo a PARTE (dono)
+                    if os.environ.get("SELO_PARTE", "").strip().isdigit():
+                        _parte = int(os.environ["SELO_PARTE"])
                     if selo.aplicar_no_lugar(_v, _nome, _parte):
                         print(f"      selo da serie: {_nome} parte {_parte}")
                 if camada.aplicar_no_lugar(_v, _canal_cascata, _plat or "tiktok",

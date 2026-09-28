@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-09-28T00:36:32",
+  "medido_em": "2026-09-28T06:41:50",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -83,6 +83,18 @@
       "reacoes": 293,
       "comentarios": 2,
       "shares": 0,
+      "engajamento_pct": 0.0,
+      "posts_recentes": 0,
+      "views_recentes": 0,
+      "melhores_recentes": []
+    },
+    "cozinha.importada": {
+      "posts": 21,
+      "views": 0,
+      "mediana_views": 0,
+      "reacoes": 119,
+      "comentarios": 2,
+      "shares": 1,
       "engajamento_pct": 0.0,
       "posts_recentes": 0,
       "views_recentes": 0,

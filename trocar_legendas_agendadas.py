@@ -16,6 +16,8 @@ text or media". O video sai do manifesto da release (casado pelo titulo).
 from __future__ import annotations
 
 import argparse
+import sys
+import datetime
 import json
 import os
 import re
@@ -110,6 +112,8 @@ def main() -> None:
     ap.add_argument("--texto", help="com --id: o CORPO da legenda escrito a mao")
     ap.add_argument("--video", help="com --id: troca SO' o video (url), mantem o texto")
     ap.add_argument("--hora", help="com --id: novo horario (ISO UTC, ex. 2026-09-29T11:11:00.000Z); mantem texto e video")
+    ap.add_argument("--criar", help="url do video: cria um post NOVO (com --hora e --titulo)")
+    ap.add_argument("--titulo", help="com --criar: parte do titulo do clipe no manifesto (a legenda vem dele)")
     ap.add_argument("--so-hashtags", action="store_true",
                     help="so' corta pra 3 hashtags; mantem texto, video e horario")
     a = ap.parse_args()
@@ -119,6 +123,19 @@ def main() -> None:
     os.environ["CANAL_ESPERADO"] = nome
     manif = ab.manifesto(ab._token_github(), None)
     por_titulo = {_n(m.get("titulo")): m for m in manif.values() if m.get("titulo")}
+    if a.criar:
+        # ⭐ 28/09/2026: repostar o video do mar que o dono apagou (refeito com
+        # metros, baloes ao lado, aviao e selo Microsoft Parte 8).
+        alvo = _n(a.titulo or "")
+        m = next((v for k, v in por_titulo.items() if alvo and alvo in k), None)
+        if not m:
+            sys.exit(f"titulo nao achado no manifesto: {a.titulo!r}")
+        quando = datetime.datetime.strptime(a.hora, "%Y-%m-%dT%H:%M") if a.hora else None
+        clipe = dict(m, url=a.criar)
+        print(f"criar: {m['titulo']} -> {a.hora} SP  video: {a.criar}")
+        if not a.simular:
+            print("  ✓ criado:", ab.enfileirar(token, c.canal_id, clipe, False, quando))
+        return
     posts = agendados(token, c.org, c.canal_id)
     if a.id:
         posts = [p for p in posts if p["id"] == a.id]

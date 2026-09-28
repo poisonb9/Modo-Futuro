@@ -112,6 +112,9 @@ PORTAS = {
     # 27/09/2026 (dono): liberado o reservado `otreinodehoje` (0 deploys) para
     # o Modo Futuro. Endereco na bio: futuro.AchadinhoTotal.com.br
     "modofuturo": "c4",
+    # 28/09/2026 (dono): o reservado `atefalhar` (0 deploys) vira a bio do
+    # GERACAO 2000 (nostalgia). Endereco na bio: 2000.AchadinhoTotal.com.br
+    "atefalhar": "c3",
 }
 
 # nome interno -> codigo. So' entram os que NAO aparecem na tela.
@@ -2780,7 +2783,7 @@ def escrever_decodificador() -> Path:
 # reservado sem pagina (os cinco do Ate Falhar) e ha' projeto que existe mas
 # fica fora da bio (o `meulivro`, ate' a Kiwify). Publicar so' nestes.
 PROJETOS = ("oachadinho", "achadinhochef", "pagomenos", "achadinhodehoje",
-            "meulivro", "modofuturo")
+            "meulivro", "modofuturo", "atefalhar")
 
 # ⚠️ O SITE MAE E' OUTRO TIPO DE PAGINA, e por isso nao entra em PROJETOS.
 #

@@ -52,6 +52,30 @@ def parte_do_tema(canal: str, nome: str, usados: dict | None = None) -> int:
     return n + 1
 
 
+def nome_da_tag(tag: str, titulo: str = "") -> str:
+    """Nome curto do tema pra pilula a partir da 1a tag.
+
+    ⛔ 28/09 (previa do Coragem): a tag vem GRUDADA ("coragemocaocovarde") e a
+    pilula saiu "CORAGEMOCAOCOVARDE · PARTE 2". Tag longa sem espaco: usa a
+    palavra do TITULO que comeca a tag ("Coragem"). Sem casar, a tag como veio.
+    """
+    import unicodedata
+
+    def _n(s):
+        s = unicodedata.normalize("NFKD", s.lower())
+        return "".join(c for c in s if c.isalnum())
+
+    tag = str(tag or "").strip()
+    if len(tag) <= 12 or " " in tag:
+        return tag.title()
+    t = _n(tag)
+    for w in sorted(str(titulo or "").split(), key=len, reverse=True):
+        wn = _n(w)
+        if len(wn) >= 3 and t.startswith(wn):
+            return w.strip(",.!?:;").title()
+    return tag.title()
+
+
 def imagem(texto: str, largura: int) -> Image.Image:
     f = ImageFont.truetype(str(FONTE), max(24, largura // 26))
     d0 = ImageDraw.Draw(Image.new("RGBA", (1, 1)))

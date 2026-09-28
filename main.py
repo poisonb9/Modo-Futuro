@@ -714,7 +714,8 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                         print(f"      selo de medidas: {selo.TEXTO_COZINHA}")
                 elif camada.ligado(_canal_cascata) and not c.get("serie"):
                     _tags = c.get("tags") or []
-                    _nome = (str(_tags[0]).strip().title() if _tags else "")
+                    _nome = (selo.nome_da_tag(_tags[0], c.get("titulo", ""))
+                             if _tags else "")
                     _parte = selo.parte_do_tema(
                         canais_registro_canonico(_canal_cascata), _nome,
                         _selos_usados) if _nome else 1

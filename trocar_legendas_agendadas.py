@@ -116,6 +116,7 @@ def main() -> None:
     ap.add_argument("--titulo", help="com --criar: parte do titulo do clipe no manifesto (a legenda vem dele)")
     ap.add_argument("--so-hashtags", action="store_true",
                     help="so' corta pra 3 hashtags; mantem texto, video e horario")
+    ap.add_argument("--linha", help="com --id e --hora: insere esta linha antes das hashtags")
     ap.add_argument("--apagar", action="store_true",
                     help="com --id: EXCLUI o post agendado (so' com pedido do dono)")
     a = ap.parse_args()
@@ -173,6 +174,12 @@ def main() -> None:
             # intercalar temas trocando so' o horario.
             atual = video_do_post(token, p["id"])
             print(f"\n--- {p['dueAt']} -> {a.hora}  {titulo[:60]}  video: {atual or 'NAO ACHADO'}")
+            if a.linha:
+                # ⭐ 28/09 (dono): linha do link da bio antes das hashtags
+                m_t = re.search(r"\n\s*(#\w+.*)$", texto, re.S)
+                corpo_t, tags_t = (texto[:m_t.start()], m_t.group(1)) if m_t else (texto, "")
+                texto = f"{corpo_t.rstrip()}\n\n{a.linha.strip()}\n\n{tags_t}".strip()
+                print(f"  legenda nova:\n{texto}")
             if a.simular or not atual:
                 continue
             if _editar(token, dict(p, dueAt=a.hora), texto, atual, titulo):

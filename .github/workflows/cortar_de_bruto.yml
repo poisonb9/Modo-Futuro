@@ -81,7 +81,7 @@ on:
         required: false
         default: ""
       selo_parte:
-        description: "(opcional) numero fixo da PARTE no selo, pra refazer clipe ja' numerado"
+        description: "(opcional) selo fixo ao refazer: N | Nome:N | 0 = sem selo"
         default: ""
       previa:
         description: "PREVIA: corta e renderiza, mas NAO sobe pro Drive, NAO publica Release, NAO enfileira no Buffer, NAO grava guarda nem apaga o bruto. Os clipes ficam como anexo (artifact) do run, pra ouvir/ver antes de ligar algo."

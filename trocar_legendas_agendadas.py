@@ -109,6 +109,7 @@ def main() -> None:
     ap.add_argument("--id", help="so' este post do Buffer")
     ap.add_argument("--texto", help="com --id: o CORPO da legenda escrito a mao")
     ap.add_argument("--video", help="com --id: troca SO' o video (url), mantem o texto")
+    ap.add_argument("--hora", help="com --id: novo horario (ISO UTC, ex. 2026-09-29T11:11:00.000Z); mantem texto e video")
     ap.add_argument("--so-hashtags", action="store_true",
                     help="so' corta pra 3 hashtags; mantem texto, video e horario")
     a = ap.parse_args()
@@ -132,6 +133,16 @@ def main() -> None:
             continue
         titulo = m["titulo"].strip()
         url = a.video or m["url"]
+        if a.hora:
+            # 28/09/2026: 3 cortes do MESMO video seguidos no Modo Futuro —
+            # intercalar temas trocando so' o horario.
+            atual = video_do_post(token, p["id"])
+            print(f"\n--- {p['dueAt']} -> {a.hora}  {titulo[:60]}  video: {atual or 'NAO ACHADO'}")
+            if a.simular or not atual:
+                continue
+            if _editar(token, dict(p, dueAt=a.hora), texto, atual, titulo):
+                trocados += 1
+            continue
         if a.so_hashtags:
             # ⛔ 28/09/2026: o TikTok aceita 3 hashtags; os agendados tinham 5.
             # O video tem de ser o QUE ESTA' NO POST (os da Wonhee ja' foram

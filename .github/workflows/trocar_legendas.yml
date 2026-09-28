@@ -16,6 +16,9 @@ on:
       video:
         description: "(opcional, com id) url do video novo; mantem o texto"
         default: ""
+      hora:
+        description: "(opcional, com id) novo horario ISO UTC; mantem texto e video"
+        default: ""
       so_hashtags:
         description: "true = so' corta pra 3 hashtags (mantem texto e video)"
         default: "false"
@@ -74,6 +77,7 @@ jobs:
           EXTRA=()
           [ -n "${{ inputs.id }}" ] && EXTRA+=(--id "${{ inputs.id }}")
           [ -n "${{ inputs.texto }}" ] && EXTRA+=(--texto "${{ inputs.texto }}")
+          [ -n "${{ inputs.hora }}" ] && EXTRA+=(--hora "${{ inputs.hora }}")
           [ "${{ inputs.so_hashtags }}" = "true" ] && EXTRA+=(--so-hashtags)
           [ -n "${{ inputs.video }}" ] && EXTRA+=(--video "${{ inputs.video }}")
           python -X utf8 trocar_legendas_agendadas.py --canal "${{ inputs.canal }}" $S "${EXTRA[@]}"

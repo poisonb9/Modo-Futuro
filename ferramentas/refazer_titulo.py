@@ -127,8 +127,7 @@ def main() -> None:
     a = ap.parse_args()
     manif = ab.manifesto(ab._token_github(), None)
     for t in [x.strip() for x in a.titulos.split("||") if x.strip()]:
-        print(f"
-=== {t}", flush=True)
+        print(f"\n=== {t}", flush=True)
         try:
             refazer(t, manif)
         except Exception as e:  # noqa: BLE001 — um clipe nao derruba os outros

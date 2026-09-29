@@ -69,7 +69,8 @@ SO_RELATA = {n: _do(n, nota="motor no repo pipeline")
 Q = ("query($i: PostsInput!){ posts(input:$i){ edges{ node{ dueAt } } } }")
 
 
-def fila(token: str, org: str, canal: str) -> list[str] | None:
+def fila(token: str, org: str, canal: str,
+         status: tuple[str, ...] = ("scheduled",)) -> list[str] | None:
     """Datas dos posts agendados, ou None se o token nao responder."""
     if not token:
         return None
@@ -77,7 +78,7 @@ def fila(token: str, org: str, canal: str) -> list[str] | None:
         API,
         data=json.dumps({"query": Q, "variables": {"i": {
             "organizationId": org,
-            "filter": {"status": ["scheduled"], "channelIds": [canal]}}}}).encode(),
+            "filter": {"status": list(status), "channelIds": [canal]}}}}).encode(),
         headers={"Authorization": f"Bearer {token}",
                  "Content-Type": "application/json"})
     try:
@@ -123,6 +124,15 @@ def main() -> None:
             linha += f"  [{nota}]"
         print(linha)
         linhas.append(linha)
+        if os.environ.get("DETALHE"):
+            # so' leitura: o que saiu nas ultimas 30h e o que sai nas proximas 48h (hora SP)
+            import datetime as _dt
+            agora = _dt.datetime.now(_dt.timezone.utc)
+            for rot, st in (("saiu", ("sent",)), ("agendado", ("scheduled",))):
+                for d in fila(token, cfg["org"], cfg["canal"], st) or []:
+                    t = _dt.datetime.fromisoformat(d.replace("Z", "+00:00"))
+                    if -30 <= (t - agora).total_seconds() / 3600 <= 48:
+                        linhas.append(f"      {rot} {(t - _dt.timedelta(hours=3)):%d/%m %H:%M}")
 
         if not cfg.get("repoe"):
             continue

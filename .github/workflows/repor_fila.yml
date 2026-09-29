@@ -27,6 +27,10 @@ on:
         description: "Repoe o canal quando a fila estiver ABAIXO deste numero"
         required: false
         default: "5"
+      detalhe:
+        description: "1 = lista horarios (saiu/agendado) de cada canal"
+        required: false
+        default: ""
       canais:
         description: "Quais conferir, separados por virgula. Vazio = os que o Bryan liberou (hoje so' modofuturo)"
         required: false
@@ -51,6 +55,7 @@ jobs:
         env:
           PISO: ${{ inputs.piso || '5' }}
           CANAIS: ${{ inputs.canais }}
+          DETALHE: ${{ inputs.detalhe }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
           BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}

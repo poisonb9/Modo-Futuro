@@ -247,6 +247,7 @@ def fotos_de(d: dict) -> list[str]:
 # substituem `precos.puxar` por um lambda de UM argumento, e mudar a
 # assinatura quebraria arquivo congelado. `puxar` escreve; `atualizar` le'.
 ULTIMAS_FOTOS: dict[str, list[str]] = {}
+ULTIMA_CONFIANCA: dict[str, dict] = {}   # {id: {"nota": 0-5, "vendas": n}} da ultima leitura
 
 
 # ⚠️ Tres esperas, crescentes. A primeira versao (5s, uma vez) nao bastou:
@@ -281,6 +282,7 @@ def puxar(ids: list[str]) -> dict:
 
     fora: dict[str, float] = {}
     ULTIMAS_FOTOS.clear()
+    ULTIMA_CONFIANCA.clear()
     import time
 
     for i in range(0, len(ids), LOTE):
@@ -340,6 +342,14 @@ def puxar(ids: list[str]) -> dict:
             if v > 0:
                 fora[str(d.get("product_id"))] = v
                 ULTIMAS_FOTOS[str(d.get("product_id"))] = fotos_de(d)
+                # ⭐ 29/09/2026: a CONFIANCA do Ali (nota e vendas) viaja no
+                # instantaneo — o filtro de qualidade do Pago Menos le' daqui.
+                try:
+                    ULTIMA_CONFIANCA[str(d.get("product_id"))] = {
+                        "nota": round(float(str(d.get("evaluate_rate") or "0").rstrip("%")) / 20, 2),
+                        "vendas": int(float(d.get("lastest_volume") or 0))}
+                except (TypeError, ValueError):
+                    pass
         if len(prods) < len(pedaco):
             print(f"      [!] pedi {len(pedaco)} e vieram {len(prods)} — "
                   f"produto fora do ar, ou o corte silencioso do lote")
@@ -404,6 +414,10 @@ def atualizar(ensaio: bool = False) -> dict:
             saida[pid]["imagens"] = fotos[pid]
         elif (antes.get(pid) or {}).get("imagens"):
             saida[pid]["imagens"] = antes[pid]["imagens"]
+        for k in ("nota", "vendas"):
+            v2 = (ULTIMA_CONFIANCA.get(pid) or {}).get(k, (antes.get(pid) or {}).get(k))
+            if v2:
+                saida[pid][k] = v2
     # ⭐ ML (regua v2, 17/09/2026): frete gratis e reputacao do vendedor do
     # anuncio mais barato entram no instantaneo — a Confianca MEDIDA do ML.
     if fichas_ml:

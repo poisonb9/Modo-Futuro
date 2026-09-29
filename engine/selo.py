@@ -44,6 +44,10 @@ def parte_do_tema(canal: str, nome: str, usados: dict | None = None) -> int:
     except (OSError, ValueError):
         reg = {}
     for v in reg.values():
+        # so' o MESMO canal: "coragem" num titulo motivacional do Sem
+        # Anestesia nao e' parte da serie do Coragem no Geracao 2000
+        if canal and v.get("canal") and v.get("canal") != canal:
+            continue
         if chave in str(v.get("titulo") or "").lower().replace(" ", ""):
             n += 1
     if usados is not None:

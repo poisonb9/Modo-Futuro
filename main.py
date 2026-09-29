@@ -291,6 +291,13 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     falhas_de_clipe = []
     _series_usadas: dict[str, int] = {}   # engine/serie.py
     _selos_usados: dict[str, int] = {}    # engine/selo.py (parte N do tema)
+    # ⛔ 29/09/2026 (dono: 1o post do Geracao 2000 saiu "CORAGEM · PARTE 8").
+    # O contador somava a cada VERSAO renderizada (tiktok + reels = 2 por
+    # clipe) e seguia a ordem da NOTA; o Buffer posta na ordem do VIDEO
+    # (inicio_s). Agora: 1 numero por clipe, pela posicao no video.
+    _ordem_no_video = {id(x): r for r, x in enumerate(
+        sorted(clipes, key=lambda x: float(x.get("inicio_s") or 0)))}
+    _base_selo: dict[str, int] = {}
     for i, c in enumerate(clipes, 1):
         try:
             ini, fim = c["inicio_s"], c["fim_s"]
@@ -721,9 +728,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     _tags = c.get("tags") or []
                     _nome = (selo.nome_da_tag(_tags[0], c.get("titulo", ""))
                              if _tags else "")
-                    _parte = selo.parte_do_tema(
-                        canais_registro_canonico(_canal_cascata), _nome,
-                        _selos_usados) if _nome else 1
+                    if _nome and _nome not in _base_selo:
+                        _base_selo[_nome] = selo.parte_do_tema(
+                            canais_registro_canonico(_canal_cascata), _nome) - 1
+                    _parte = (_base_selo[_nome] + 1 + _ordem_no_video[id(c)]
+                              if _nome else 1)
                     # 28/09: refazer um clipe ja' numerado mantendo a PARTE (dono).
                     # SELO_PARTE = "N" (so' o numero), "Nome:N" (nome e numero
                     # fixos) ou "0" (SEM selo). Ver cortar_de_bruto.yml.

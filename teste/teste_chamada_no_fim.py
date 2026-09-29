@@ -29,11 +29,11 @@ def checar(cond, recado):
         falhas.append(recado)
 
 
-print("1. desde 25/09/2026 nenhum canal tem chamada — exceto o Chef (28/09, dono)")
-checar(chamada.do_canal("achadinhochef") != "", "achadinhochef: TEM chamada (receita na bio)")
-for _c in ("semanestesia.pod", "truque.importado", "@achadinho.make",
-           "fatura.chora", "achadinhos.instantaneos",
-           "atefalhar", "modofuturo"):
+print("1. 29/09/2026 (dono): chamada na legenda de todo canal cuja bio entrega algo")
+for _c in ("achadinhochef", "atefalhar", "modofuturo", "truque.importado", "@achadinho.make"):
+    checar(chamada.do_canal(_c) != "", f"{_c}: TEM chamada")
+# Pago Menos e instantaneos: so' quando a pagina mostrar a oferta do video.
+for _c in ("semanestesia.pod", "fatura.chora", "achadinhos.instantaneos"):
     checar(chamada.do_canal(_c) == "", f"{_c}: sem chamada")
 
 print("\n2. NEGATIVO — canal desconhecido nao ganha chamada nenhuma")
@@ -51,7 +51,10 @@ print("\n3. NEGATIVO — canal conhecido SEM destino tambem fica sem chamada")
 # ⚠️ ERAM DOIS ATE' 12/09/2026. O @atefalhar saiu daqui no dia em que ganhou o
 # grupo, e a guarda tem de acompanhar a realidade, senao ela reprova o certo.
 # Mas o que ela protegia continua de pe' e agora se apoia num canal so'.
-for sem in ("modofuturo",):
+# ⚠️ 29/09/2026: o @modofuturo ganhou o e-mail gratis na bio e saiu daqui; a
+# guarda passa a se apoiar no Pago Menos, cuja pagina ainda nao mostra a
+# oferta do video.
+for sem in ("fatura.chora",):
     checar(chamada.do_canal(sem) == "",
            f"{sem} nao tem destino -> nao chama")
 
@@ -68,15 +71,17 @@ _pagina = io.open("paginas/contra_capa.html", encoding="utf-8").read()
 # proposito: se um convite voltar pra pagina um dia, ele CONTA como
 # destino de verdade — a guarda e' sobre a pessoa ter onde chegar, nao
 # sobre qual aplicativo esta' na moda.
+# ⭐ 29/09/2026: a `isca:` (e-mail gratis com consentimento, gravado no
+# Supabase) tambem e' destino — a pessoa chega e recebe algo.
 _DESTINOS = ("VITRINE", "https://t.me/", "https://chat.whatsapp.com",
-             "kiwify", "CAPA_LIVRO", "GRUPO.")
+             "kiwify", "CAPA_LIVRO", "GRUPO.", "isca: {")
 for _canal in chamada.CHAMADA:
     _b = re.search(r'banco: "' + re.escape(_canal) + r'".*?(?=banco: "|\Z)',
                    _pagina, re.S)
     checar(_b is not None, _canal + ": existe na contra-capa")
     if _b:
         checar(any(d in _b.group(0) for d in _DESTINOS),
-               _canal + ": tem destino de verdade (grupo ou produto)")
+               _canal + ": tem destino de verdade (grupo, produto ou e-mail)")
 
 print("\n4. a chamada MOSTRA, nao pergunta")
 # ⭐ Playbook §23.9: titulo-PERGUNTA converteu 0 de 4; o que AFIRMA, 7 de 14.

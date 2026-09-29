@@ -45,11 +45,19 @@ from . import canais_registro
 # Os textos antigos estao guardados fora do repositorio.
 # ⭐ 28/09/2026 (dono): o Chef volta a ter chamada — a pagina da bio entrega a
 # receita completa (ficha em grama e °C). So' ele; os outros seguem sem.
+# ⭐ 29/09/2026 (dono): "quero o link na legenda de todos os videos de todos os
+# canais, de maneira inteligente sem agredir o cliente". Cada linha diz o que a
+# pagina da bio ENTREGA HOJE (conferido no ar nesse dia: e-mail gratis no
+# Geracao 2000 e no Modo Futuro, makes com preco no Make). O Pago Menos e o
+# achadinhos.instantaneos entram quando a pagina mostrar a oferta do video.
 CHAMADA: dict[str, str] = {
     "cozinha.importada": "📖 A receita completa, em grama e °C, está no link da bio.",
+    "atefalhar": "📺 A nostalgia da semana, grátis no seu e-mail. Link da bio.",
+    "modofuturo": "⚡ A tecnologia por dentro, grátis no seu e-mail. Link da bio.",
+    "truque.importado": "💄 As makes dos vídeos, com preço conferido. Link da bio.",
 }
 # canais cuja chamada fica SO' na legenda (sem card desenhado no fim do video)
-SO_LEGENDA = {"cozinha.importada"}
+SO_LEGENDA = {"cozinha.importada", "atefalhar", "modofuturo", "truque.importado"}
 
 
 def do_canal(canal: str | None) -> str:

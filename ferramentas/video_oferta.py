@@ -258,9 +258,12 @@ def narracao(d: dict, destino: Path) -> None:
 
 def _leitor_demo(url: str, tmp: Path):
     """Quadros 820x820 do video do vendedor (os DEMO_S primeiros segundos)."""
-    arq = tmp / "demo.mp4"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    arq.write_bytes(urllib.request.urlopen(req, timeout=60).read())
+    if Path(url).exists():             # trecho ja' baixado (ex.: demo_youtube)
+        arq = Path(url)
+    else:
+        arq = tmp / "demo.mp4"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        arq.write_bytes(urllib.request.urlopen(req, timeout=60).read())
     lado = 820
     # a maioria dos videos de vendedor abre com 1-2 s de logo: pula quando da'
     r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
@@ -286,9 +289,11 @@ def _leitor_demo(url: str, tmp: Path):
 
 
 def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = None,
-          exigir_queda: bool = True, gancho: str = "") -> dict:
+          exigir_queda: bool = True, gancho: str = "", demo_arquivo: Path | None = None) -> dict:
     d = dados(pid, exigir_queda)
     d["gancho"] = gancho.upper()
+    if demo_arquivo and Path(demo_arquivo).exists():
+        d["video"] = str(demo_arquivo)
     if canal:
         d["marca"] = MARCAS.get(canal, d["marca"])
         d["numero"] = numero or proximo_numero(canal)
@@ -330,5 +335,7 @@ if __name__ == "__main__":
     ap.add_argument("--canal")
     ap.add_argument("--sem-queda", action="store_true", help="mostra so' o preco de hoje")
     ap.add_argument("--gancho", default="")
+    ap.add_argument("--demo", type=Path, help="trecho de demonstracao ja' baixado")
     a = ap.parse_args()
-    print(gerar(a.id, a.saida, a.canal, exigir_queda=not a.sem_queda, gancho=a.gancho))
+    print(gerar(a.id, a.saida, a.canal, exigir_queda=not a.sem_queda, gancho=a.gancho,
+                demo_arquivo=a.demo))

@@ -1,0 +1,61 @@
+# TESTE (29/09/2026, decisao do dono): trecho de demonstracao do produto tirado
+# do YouTube — canal oficial > estrangeiro, nunca brasileiro — e o video de
+# oferta montado com ele. So' PREVIA: sobe na release, nao agenda nada.
+# ⛔ Se estado/demo_youtube_parado.json existir, nao roda (trava do dono/flag).
+name: Demo YouTube (teste)
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "id do produto"
+        required: true
+      canal:
+        description: "fatura.chora | achadinhos.instantaneos"
+        default: "achadinhos.instantaneos"
+      gancho:
+        description: "gancho problema->solucao (afirmando)"
+        default: ""
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: youtube
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get install -y -qq ffmpeg && pip install -q pillow edge-tts requests python-dotenv yt-dlp
+      - name: Trecho do YouTube + video
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY:   ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          SENTINELA_YT_INTERVALO: "60"
+          SENTINELA_YT_INTERVALO_LEVE: "30"
+        run: |
+          python -X utf8 ferramentas/demo_youtube.py --id "${{ inputs.id }}" --saida demo.mp4 || true
+          if [ -f demo.mp4 ]; then
+            python -X utf8 ferramentas/video_oferta.py --id "${{ inputs.id }}" --saida "PREVIA_yt_${{ inputs.id }}.mp4" \
+              --canal "${{ inputs.canal }}" --sem-queda --gancho "${{ inputs.gancho }}" --demo demo.mp4
+            T="ofertas-$(date +%Y-%m)"
+            gh release view "$T" >/dev/null 2>&1 || gh release create "$T" --title "$T" --notes "videos de oferta"
+            gh release upload "$T" "PREVIA_yt_${{ inputs.id }}.mp4" --clobber
+          fi
+      - name: Guardar fontes e trava
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in estado/demo_youtube_fontes.jsonl estado/demo_youtube_parado.json; do
+            [ -f "$f" ] && git add -f "$f" || true
+          done
+          git diff --cached --quiet && exit 0
+          git commit -m "demo youtube: fonte/trava"
+          git pull --rebase && git push

@@ -147,6 +147,13 @@ TITULOS_BLOQUEADOS = (
     "Esta fábrica é 100 vezes mais limpa que uma UTI",
     "CRIEI UM CHIP DE SILÍCIO CASEIRO NA MINHA GARAGEM",
     "Processo de dopagem e teste automatizado de chips de computador",
+    # 29/09/2026: a FALA nao bate com o titulo (ferramentas/conferir_titulos.py)
+    "A farsa da foto real da casa de Coragem o Cão Covarde",
+    "As caixas inteiras de chocolate que Coragem devora sem passar mal",
+    "JIWOO do NMIXX canta ao vivo de forma angelical nos bastidores!",
+    "JIWOO do NMIXX recebe alerta importante sobre hábito diário nocivo!",
+    "O apelido secreto de JIWOO do NMIXX que revelou sua fraqueza!",
+    "O cálculo da dose 3 vezes letal de chocolate que Coragem comeu",
 )
 VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
 
@@ -790,10 +797,28 @@ def main() -> None:
         from engine import refeicao
         fila = refeicao.casar(fila, horarios)
     enviados = 0
-    for (chave, clipe), quando in zip(fila, horarios):
-        if enviados >= vagas:
+    livres = list(horarios)
+    for chave, clipe in fila:
+        if enviados >= vagas or not livres:
             break
         titulo = (clipe.get("titulo") or "")[:56]
+        # ⛔ 29/09/2026 (dono: "corrija todos os erros e faca que nao aconteca
+        # de novo"): o Coragem "caixas de chocolate" falava de Kansas e
+        # monstros. Antes de agendar, o Gemini OUVE o clipe e confere se a
+        # fala trata do titulo. Nao bate -> fica de fora. Sem veredito (modelo
+        # fora) -> tambem fica de fora: na duvida, nao posta.
+        if not a.simular:
+            from ferramentas import conferir_titulos as _ct
+            try:
+                j = _ct.julgar(_ct.audio_do_video(clipe["url"]), clipe.get("titulo") or "")
+            except Exception as e:  # noqa: BLE001
+                j = None
+                print(f"  [!] {titulo}: nao consegui ouvir o clipe ({type(e).__name__})")
+            if not j or not j.get("bate"):
+                motivo = f"a fala e' sobre: {j.get('fala_de')}" if j else "sem veredito"
+                print(f"  ⛔ {titulo}: titulo NAO bate com a fala ({motivo}) — pulado")
+                continue
+        quando = livres.pop(0)
         try:
             quando_txt = enfileirar(tb, canal, clipe, a.simular, quando_sp=quando)
         except Exception as e:

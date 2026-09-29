@@ -77,7 +77,7 @@ GRAFIA = {"jiwou": "Jiwoo", "jiwu": "Jiwoo", "jiu": "Jiwoo"}
 
 def corrige_grafia(t: str) -> str:
     for errado, certo in GRAFIA.items():
-        t = re.sub(rf"{errado}",
+        t = re.sub(rf"\b{errado}\b",
                    lambda m, c=certo: c.upper() if m.group().isupper() else c, t, flags=re.I)
     return t
 

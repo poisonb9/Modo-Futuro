@@ -6,7 +6,8 @@ MEDIDO em 18/09/2026: 07:35 e 10:56 UTC, lote 3 de 4, `"ApiCallLimit" ...
 
 O que protege:
 1. limite UMA vez -> espera, tenta de novo, e o lote entra;
-2. ⛔ limite DUAS vezes -> estoura como antes (silencio custou 49 produtos);
+2. ⛔ limite em todas as tentativas -> o lote sai, a falha fica registrada e
+   a rodada termina vermelha (silencio custou 49 produtos em 18/09);
 3. resposta boa -> uma chamada so', sem espera.
 """
 import sys
@@ -54,15 +55,18 @@ try:
     checar(len(chamadas) == 2, f"duas chamadas, nao uma ({len(chamadas)})")
     checar(precos.ULTIMAS_FOTOS.get("1") == ["e1"], "e as fotos extras vieram junto")
 
-    print("2. ⛔ limite em TODAS as tentativas -> estoura (nunca em silencio)")
+    print("2. ⛔ limite em TODAS as tentativas -> o lote fica de fora, MAS registrado (nunca em silencio)")
+    # 29/09/2026: antes estourava a rodada inteira e jogava fora os lotes bons.
+    # Agora o lote recusado vai pra LOTES_FALHOS e o `main` sai com erro
+    # DEPOIS de gravar o resto.
+    precos.LOTES_FALHOS.clear()
     fila = [LIMITE] * (1 + len(precos.ESPERAS_LIMITE_S))
     aliexpress.chamar = _uma
-    estourou = ""
-    try:
-        precos.puxar(["1"])
-    except RuntimeError as e:
-        estourou = str(e)
-    checar("ApiCallLimit" in estourou, "levantou RuntimeError com o envelope do Ali")
+    r2 = precos.puxar(["1"])
+    checar(r2 == {}, f"o lote recusado nao inventa preco ({r2})")
+    checar(any("ApiCallLimit" in m for m in precos.LOTES_FALHOS),
+           "a falha ficou registrada com o envelope do Ali")
+    precos.LOTES_FALHOS.clear()
 
     print("2b. limite tres vezes e a quarta passa -> entra")
     fila = [LIMITE, LIMITE, LIMITE, "bom"]

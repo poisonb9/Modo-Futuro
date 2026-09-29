@@ -247,7 +247,8 @@ def fotos_de(d: dict) -> list[str]:
 # substituem `precos.puxar` por um lambda de UM argumento, e mudar a
 # assinatura quebraria arquivo congelado. `puxar` escreve; `atualizar` le'.
 ULTIMAS_FOTOS: dict[str, list[str]] = {}
-ULTIMA_CONFIANCA: dict[str, dict] = {}   # {id: {"nota": 0-5, "vendas": n}} da ultima leitura
+ULTIMA_CONFIANCA: dict[str, dict] = {}
+LOTES_FALHOS: list[str] = []   # lotes que a API recusou nesta rodada   # {id: {"nota": 0-5, "vendas": n}} da ultima leitura
 
 
 # ⚠️ Tres esperas, crescentes. A primeira versao (5s, uma vez) nao bastou:
@@ -326,11 +327,17 @@ def puxar(ids: list[str]) -> dict:
         try:
             prods = (r["aliexpress_affiliate_productdetail_get_response"]
                      ["resp_result"]["result"]["products"]["product"])
-        except (KeyError, TypeError) as e:
-            raise RuntimeError(
-                f"a API nao devolveu produtos no lote {i // LOTE + 1} "
-                f"({len(pedaco)} ids): {json.dumps(r, ensure_ascii=False)[:200]}"
-            ) from e
+        except (KeyError, TypeError):
+            # ⭐ 29/09/2026: um lote recusado (ApiCallLimit mesmo apos as
+            # esperas) NAO derruba mais a rodada inteira — os outros lotes sao
+            # informacao boa e eram jogados fora. Os ids deste lote ficam com a
+            # leitura anterior (a regra do `atualizar`), e a falha NAO some:
+            # vai pra LOTES_FALHOS e o `main` sai com erro depois de gravar.
+            msg = (f"a API nao devolveu produtos no lote {i // LOTE + 1} "
+                   f"({len(pedaco)} ids): {json.dumps(r, ensure_ascii=False)[:200]}")
+            print(f"      [!] {msg}")
+            LOTES_FALHOS.append(msg)
+            continue
         for d in prods:
             try:
                 v = float(d.get("target_sale_price") or 0)
@@ -465,6 +472,11 @@ def main() -> None:
     o = a.parse_args()
     if o.atualizar:
         atualizar(o.ensaio)
+        if LOTES_FALHOS:
+            # gravou o que veio; a rodada ainda sai VERMELHA pra ninguem achar
+            # que o catalogo inteiro foi reconferido
+            raise SystemExit(f"{len(LOTES_FALHOS)} lote(s) recusado(s) pela API — "
+                             "leitura anterior mantida para esses ids")
     else:
         a.print_help()
 

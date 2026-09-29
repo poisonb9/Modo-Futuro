@@ -1,0 +1,47 @@
+# Videos de oferta do dia — Pago Menos (@fatura.chora) e @achadinhos.instantaneos.
+#
+# ⭐ 29/09/2026 (dono): 4 videos por dia em cada canal, so' com queda REAL
+# (engine/ofertas.py: mediana da nossa serie, nota >= 4,7, >= 1.000 vendas,
+# sem marca famosa). ⛔ Por enquanto SO' A MAO e SO' GERA: os canais ainda nao
+# tem Buffer, e o dono aprova a previa antes de ligar o horario.
+name: Ofertas
+
+on:
+  workflow_dispatch:
+    inputs:
+      ensaio:
+        description: "so' dizer o que faria (true/false)"
+        default: "true"
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ofertas
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get install -y -qq ffmpeg && pip install -q pillow edge-tts requests python-dotenv
+      - name: Gerar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          E=""; [ "${{ inputs.ensaio }}" = "true" ] && E="--ensaio"
+          python -X utf8 ferramentas/ofertas_do_dia.py --pasta saida $E
+      - name: Guardar o registro
+        if: inputs.ensaio != 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in estado/ofertas_feitas.jsonl estado/produtos_publicados.jsonl; do
+            [ -f "$f" ] && git add -f "$f" || true
+          done
+          git diff --cached --quiet && exit 0
+          git commit -m "ofertas: videos do dia"
+          git pull --rebase
+          git push

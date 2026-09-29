@@ -72,8 +72,7 @@ def main() -> None:
             o["comentario"] = d["comentario"]
             o["numero"] = d["numero"]
             n += 1
-            comentarios.append(f"{arq.name}
-  comentario fixado: {d['comentario']}")
+            comentarios.append(f"{arq.name}\n  comentario fixado: {d['comentario']}")
             print(f"  ok {canal} #{d['numero']}: {o['nome']} -> {arq.name}")
             if not a.registrar:
                 continue
@@ -90,10 +89,7 @@ def main() -> None:
 
     if comentarios:
         txt = a.pasta / f"{hoje}_comentarios_fixados.txt"
-        txt.write_text("
-
-".join(comentarios) + "
-", encoding="utf-8")
+        txt.write_text("\n\n".join(comentarios) + "\n", encoding="utf-8")
         subprocess.run(["gh", "release", "upload", tag, str(txt), "--clobber"], check=True)
 
 

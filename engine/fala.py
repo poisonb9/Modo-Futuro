@@ -112,3 +112,24 @@ def narracao_incoerente(narracao: str, titulo: str, descricao: str = "",
     if len(n) < 8 or len(ref) < 4:
         return False
     return not (n & ref)
+
+
+def titulo_nao_bate(narracao: str, titulo: str) -> bool:
+    """⛔ 29/09/2026: a guarda de cima so' pega narracao SEM NENHUMA palavra em
+    comum — "Coragem" no titulo e na fala bastou para o clipe de Kansas passar
+    como "caixas de chocolate". Aqui o modelo le' a transcricao DO PROPRIO
+    CLIPE e diz se ela trata do assunto CENTRAL do titulo.
+    True = nao bate (quarentena). Sem modelo ou texto curto = False (a trava
+    do agendador, que ouve o audio, ainda pega depois)."""
+    if len((narracao or "").split()) < 12 or not titulo:
+        return False
+    try:
+        from . import modelo_texto
+    except Exception:  # noqa: BLE001
+        return False
+    r = modelo_texto.perguntar(
+        "Transcricao de um video curto:\n<<<" + narracao[:3000] + ">>>\n\n"
+        "TITULO publicado: <<" + titulo + ">>\n"
+        "A transcricao trata do assunto CENTRAL do titulo? Citar o mesmo personagem "
+        "nao basta. Responda so' SIM ou NAO.") or ""
+    return r.strip().upper().startswith("NAO") or r.strip().upper().startswith("NÃO")

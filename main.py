@@ -460,8 +460,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 # restaurante) -> quarentena. Ver engine/fala.narracao_incoerente.
                 from engine import fala as _fala
                 _narr = " ".join(str(p.get("palavra", "")) for p in (ps or []))
-                if _fala.narracao_incoerente(_narr, c.get("titulo", ""),
-                                             c.get("descricao", ""), c.get("gancho", "")):
+                if (_fala.narracao_incoerente(_narr, c.get("titulo", ""),
+                                              c.get("descricao", ""), c.get("gancho", ""))
+                        or _fala.titulo_nao_bate(_narr, c.get("titulo", ""))):
                     c["quarentena"] = True
                     print("      ⛔ NARRACAO INCOERENTE com o titulo (transcricao "
                           "inventada?) — QUARENTENA, nao vai ao ar")

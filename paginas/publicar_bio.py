@@ -2257,6 +2257,7 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
         return {}
     serie = _serie_de_precos()
     por_dia = _precos_por_dia()
+    _inst = _precos_agora()
     linhas = []
     for linha in arq.read_text(encoding="utf-8").splitlines():
         if not linha.strip():
@@ -2318,6 +2319,10 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # ⭐ 29/09/2026: o id vai no cartao pro botao "avise-me no
             # Telegram" (o /start alerta_<id> do engine/alertas.py)
             "id": str(d.get("id") or ""),
+            # ⭐ 29/09/2026 (plano, ideia 10): a confianca da LOJA lida na API
+            # (engine/precos.py) — nota 0-5 e vendas. Vazio se nao lida.
+            "nota_loja": (_inst.get(str(d.get("id"))) or {}).get("nota") or 0,
+            "vendas_loja": (_inst.get(str(d.get("id"))) or {}).get("vendas") or 0,
         }))
     # ⚠️ `_todos` E' O ACHADINHO TOTAL: a vitrine geral, o que saiu em
     # QUALQUER canal. A pagina usa isto pra mostrar os outros cantos da casa

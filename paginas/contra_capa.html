@@ -495,6 +495,7 @@
   /* ⭐ 27/09/2026: o grafico e' o do site mae (todos.html), no peso da CAPA
      da vitrine: 34 px, traco 2, area a 10%, ponto redondo, legenda com lupa. */
   .produto { --fraco: var(--tinta-fraca); --verde: #16a34a; }
+  .produto .loja-boa { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--tinta-fraca); }
   .produto .avise-me {
     display: block; margin-top: 8px; padding: 7px 10px; text-align: center;
     font-size: 12.5px; font-weight: 700; color: var(--tinta);
@@ -1957,6 +1958,15 @@
       // o certo e' a frase caber. O catalogo ja' usa esta forma curta.
       novoRod.appendChild(el("span", null, "achado agora"));
       corpo.appendChild(novoRod);
+    }
+    // ⭐ 29/09/2026 (plano, ideia 10): a confianca da loja, so' se foi LIDA
+    // na API. Nunca um selo inventado.
+    if (p.nota_loja >= 4.5 && p.vendas_loja >= 1000) {
+      var mil = p.vendas_loja >= 1000
+        ? (Math.round(p.vendas_loja / 100) / 10).toString().replace(".", ",").replace(/,0$/, "") + " mil"
+        : String(p.vendas_loja);
+      corpo.appendChild(el("div", "loja-boa",
+        "✓ loja nota " + String(p.nota_loja).replace(".", ",") + " · " + mil + " vendidos"));
     }
     // ⭐ 29/09/2026 (dono): "me avise quando baixar" no Telegram DA PESSOA,
     // em privado. O mesmo bot e o mesmo /start do site mae (engine/alertas.py

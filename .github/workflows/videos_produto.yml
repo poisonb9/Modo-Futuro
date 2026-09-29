@@ -1,0 +1,31 @@
+# Videos do vendedor na PAGINA do produto no AliExpress (29/09/2026).
+# Devagar; para no primeiro desafio de robo (nao contorna).
+name: Videos da pagina do produto
+
+on:
+  workflow_dispatch:
+    inputs:
+      max:
+        description: "quantos produtos olhar"
+        default: "5"
+
+jobs:
+  olhar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q requests
+      - run: python -X utf8 ferramentas/videos_aliexpress.py --max ${{ inputs.max }}
+      - name: Guardar
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f estado/videos_produto.json
+          git diff --cached --quiet && exit 0
+          git commit -m "videos: pagina do produto"
+          git pull --rebase && git push

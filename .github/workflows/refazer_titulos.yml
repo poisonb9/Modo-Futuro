@@ -1,0 +1,59 @@
+# Refaz o titulo de clipes cujo titulo nao batia com a fala (29/09/2026).
+# Entrada: titulos ANTIGOS exatos, separados por "||".
+name: Refazer titulos
+
+on:
+  workflow_dispatch:
+    inputs:
+      titulos:
+        description: "titulos antigos separados por ||"
+        required: true
+
+jobs:
+  refazer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get install -y -qq ffmpeg && pip install -r requirements.txt
+      - name: Refazer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_KEY_4: ${{ secrets.GEMINI4 }}
+          GEMINI_API_KEY_5: ${{ secrets.GEMINI5 }}
+          GEMINI_API_KEY_6: ${{ secrets.GEMINI6 }}
+          GEMINI_API_KEY_7: ${{ secrets.GEMINI7 }}
+          GEMINI_API_KEY_8: ${{ secrets.GEMINI8 }}
+          GEMINI_API_KEY_9: ${{ secrets.GEMINI9 }}
+          GEMINI_API_KEY_10: ${{ secrets.GEMINI10 }}
+          GEMINI_API_KEY_11: ${{ secrets.GEMINI11 }}
+          GEMINI_API_KEY_12: ${{ secrets.GEMINI12 }}
+          GEMINI_API_KEY_13: ${{ secrets.GEMINI13 }}
+          GEMINI_API_KEY_14: ${{ secrets.GEMINI14 }}
+          GEMINI_API_KEY_15: ${{ secrets.GEMINI15 }}
+          GEMINI_API_KEY_16: ${{ secrets.GEMINI16 }}
+          GEMINI_API_KEY_17: ${{ secrets.GEMINI17 }}
+          GEMINI_API_KEY_18: ${{ secrets.GEMINI18 }}
+          GEMINI_API_KEY_19: ${{ secrets.GEMINI19 }}
+          GEMINI_API_KEY_20: ${{ secrets.GEMINI_API_KEY_20 }}
+          GEMINI_API_KEY_21: ${{ secrets.GEMINI21 }}
+          GEMINI_API_KEY_22: ${{ secrets.GEMINI_API_KEY_22 }}
+          GEMINI_API_KEY_23: ${{ secrets.GEMINI_API_KEY_23 }}
+          GEMINI_API_KEY_24: ${{ secrets.GEMINI_API_KEY_24 }}
+          GEMINI_API_KEY_25: ${{ secrets.GEMINI_API_KEY_25 }}
+          GEMINI_API_KEY_26: ${{ secrets.GEMINI_API_KEY_26 }}
+          GEMINI_API_KEY_27: ${{ secrets.GEMINI_API_KEY_27 }}
+          GEMINI_API_KEY_28: ${{ secrets.GEMINI_API_KEY_28 }}
+          GEMINI_API_KEY_29: ${{ secrets.GEMINI_API_KEY_29 }}
+          GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
+          GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
+          TITULOS: ${{ inputs.titulos }}
+        run: python -X utf8 ferramentas/refazer_titulo.py --titulos "$TITULOS"

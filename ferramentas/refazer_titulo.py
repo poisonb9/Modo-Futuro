@@ -41,7 +41,7 @@ PEDIDO = (
     "O titulo antigo estava ERRADO (falava de outra coisa): \"{antigo}\".\n"
     "Escreva um titulo NOVO sobre o que a fala REALMENTE diz: afirmativo (nunca pergunta), "
     "curioso, ate' 60 caracteres, em portugues do Brasil, com o nome do personagem/pessoa "
-    "principal. Escreva em CAIXA ALTA so' as 1-2 palavras de destaque.\n"
+    "principal, com a MESMA grafia do nome usada no titulo antigo. Escreva em CAIXA ALTA so' as 1-2 palavras de destaque.\n"
     "Responda SO' um JSON: {{\"titulo\": \"...\", \"legenda\": \"<2 frases sobre a fala>\", "
     "\"hashtags\": [\"#a\", \"#b\", \"#c\"]}}"
 )
@@ -71,6 +71,17 @@ def gemini_ouve(audio: bytes, canal: str, antigo: str) -> dict:
     raise SystemExit("o Gemini nao respondeu")
 
 
+# nomes que o ouvido do Gemini escreve errado -> grafia certa
+GRAFIA = {"jiwou": "Jiwoo", "jiwu": "Jiwoo", "jiu": "Jiwoo"}
+
+
+def corrige_grafia(t: str) -> str:
+    for errado, certo in GRAFIA.items():
+        t = re.sub(rf"{errado}",
+                   lambda m, c=certo: c.upper() if m.group().isupper() else c, t, flags=re.I)
+    return t
+
+
 def sh(*a: str) -> None:
     subprocess.run(list(a), check=True)
 
@@ -87,7 +98,8 @@ def refazer(titulo_antigo: str, manif: dict) -> None:
     sh("ffmpeg", "-v", "error", "-y", "-i", str(v), "-vn", "-ac", "1", "-ar", "16000",
        "-b:a", "32k", str(au))
     novo = gemini_ouve(au.read_bytes(), clipe.get("canal") or "", clipe["titulo"])
-    titulo = novo["titulo"].strip().strip('"')
+    titulo = corrige_grafia(novo["titulo"].strip().strip('"'))
+    novo["legenda"] = corrige_grafia(novo.get("legenda", ""))
     print(f"titulo novo: {titulo}")
 
     # card novo, com a mesma funcao do motor

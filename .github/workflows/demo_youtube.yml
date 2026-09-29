@@ -37,8 +37,6 @@ jobs:
           GEMINI_API_KEY:   ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
-          SENTINELA_YT_INTERVALO: "60"
-          SENTINELA_YT_INTERVALO_LEVE: "30"
         run: |
           python -X utf8 ferramentas/demo_youtube.py --id "${{ inputs.id }}" --saida demo.mp4 || true
           if [ -f demo.mp4 ]; then
@@ -53,7 +51,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in estado/demo_youtube_fontes.jsonl estado/demo_youtube_parado.json; do
+          for f in estado/demo_youtube_fontes.jsonl estado/demo_youtube_parado.json estado/youtube_ultima_chamada.json; do
             [ -f "$f" ] && git add -f "$f" || true
           done
           git diff --cached --quiet && exit 0

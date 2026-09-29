@@ -35,6 +35,12 @@ RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
 TRAVA = RAIZ / "estado" / "demo_youtube_parado.json"
 FONTES = RAIZ / "estado" / "demo_youtube_fontes.jsonl"
+ULTIMO = RAIZ / "estado" / "youtube_ultima_chamada.json"
+# ⭐ 29/09/2026 (dono: "o YouTube e' extremamente sensivel... bom intervalo entre
+# downloads"). Cada maquina do GitHub nasce sem memoria, entao a sentinela
+# sozinha nao espaca UMA RODADA da outra. A hora da ultima chamada mora no
+# repositorio e nenhuma rodada fala com o YouTube antes deste intervalo.
+INTERVALO_ENTRE_RODADAS_MIN = 30
 TRECHO_S = 8
 DUR_MIN, DUR_MAX = 20, 900
 
@@ -58,7 +64,21 @@ def travar(motivo: str) -> None:
     print(f"⛔ TRAVADO: {motivo[:200]}")
 
 
+def cedo_demais() -> float:
+    """Minutos que ainda faltam para poder falar com o YouTube (0 = pode)."""
+    if not ULTIMO.exists():
+        return 0.0
+    try:
+        t = datetime.fromisoformat(json.loads(ULTIMO.read_text(encoding="utf-8"))["quando"])
+    except (ValueError, KeyError):
+        return 0.0
+    passou = (datetime.now(timezone.utc) - t).total_seconds() / 60
+    return max(0.0, INTERVALO_ENTRE_RODADAS_MIN - passou)
+
+
 def _yt(args: list[str]) -> str:
+    ULTIMO.write_text(json.dumps({"quando": datetime.now(timezone.utc).isoformat(timespec="seconds")}),
+                      encoding="utf-8")
     r = subprocess.run([sys.executable, "-X", "utf8", "-m", "engine.sentinela_youtube", "--",
                         "yt-dlp", *args], cwd=RAIZ, capture_output=True, text=True,
                        encoding="utf-8", errors="replace", timeout=3600)
@@ -106,6 +126,10 @@ def achar(pid: str, saida: Path) -> dict | None:
     motivo = parado()
     if motivo:
         print(f"demo do YouTube PARADA ({motivo}) — nada a fazer")
+        return None
+    falta = cedo_demais()
+    if falta:
+        print(f"ultima chamada ao YouTube foi ha' pouco — faltam {falta:.0f} min; nao chamo")
         return None
     nomes = {}
     for l in (RAIZ / "estado" / "produtos_publicados.jsonl").read_text(encoding="utf-8").splitlines():

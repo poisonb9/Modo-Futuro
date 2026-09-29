@@ -347,7 +347,10 @@ def puxar(ids: list[str]) -> dict:
                 try:
                     ULTIMA_CONFIANCA[str(d.get("product_id"))] = {
                         "nota": round(float(str(d.get("evaluate_rate") or "0").rstrip("%")) / 20, 2),
-                        "vendas": int(float(d.get("lastest_volume") or 0))}
+                        "vendas": int(float(d.get("lastest_volume") or 0)),
+                        # ⭐ 29/09/2026 (plano, ideia 12): o video OFICIAL do
+                        # vendedor, pro video de demonstracao do Pago Menos
+                        "video": str(d.get("product_video_url") or "")}
                 except (TypeError, ValueError):
                     pass
         if len(prods) < len(pedaco):
@@ -414,7 +417,7 @@ def atualizar(ensaio: bool = False) -> dict:
             saida[pid]["imagens"] = fotos[pid]
         elif (antes.get(pid) or {}).get("imagens"):
             saida[pid]["imagens"] = antes[pid]["imagens"]
-        for k in ("nota", "vendas"):
+        for k in ("nota", "vendas", "video"):
             v2 = (ULTIMA_CONFIANCA.get(pid) or {}).get(k, (antes.get(pid) or {}).get(k))
             if v2:
                 saida[pid][k] = v2

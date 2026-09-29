@@ -59,7 +59,9 @@ def pilula_que_cobre(antigo: str, novo: str, w: int) -> tuple[Image.Image, int]:
     return n, -MARGEM
 
 
-def tampar(video: Path, antigo: str, novo: str, saida: Path) -> None:
+def tampar(video: Path, antigo: str, novo: str, saida: Path, topo: float | None = None) -> None:
+    """`topo`: fracao da altura onde a pilula ANTIGA comeca (padrao selo.TOPO_FRAC).
+    ⛔ 29/09/2026: clipes velhos do Modo Futuro tem o selo mais alto — medir antes."""
     r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
                         "-show_entries", "stream=width,height", "-of", "csv=p=0",
                         str(video)], capture_output=True, text=True, check=True)
@@ -67,7 +69,7 @@ def tampar(video: Path, antigo: str, novo: str, saida: Path) -> None:
     im, dx = pilula_que_cobre(antigo, novo, w)
     png = Path(tempfile.mkdtemp()) / "tampa.png"
     im.save(png)
-    x, y = int(w * 0.06) + dx, int(h * selo.TOPO_FRAC)
+    x, y = int(w * 0.06) + dx, int(h * (selo.TOPO_FRAC if topo is None else topo))
     ini, fim = selo.INI_S - 0.2, selo.FIM_S + 0.3
     filtro = (f"[1:v]format=rgba,fade=t=in:st={ini}:d=0.2:alpha=1,"
               f"fade=t=out:st={fim - 0.3}:d=0.3:alpha=1[s];"
@@ -85,8 +87,9 @@ def main() -> None:
     ap.add_argument("--antigo", required=True)
     ap.add_argument("--novo", required=True)
     ap.add_argument("--saida", type=Path, required=True)
+    ap.add_argument("--topo", type=float, help="fracao da altura do topo da pilula antiga")
     a = ap.parse_args()
-    tampar(a.video, a.antigo, a.novo, a.saida)
+    tampar(a.video, a.antigo, a.novo, a.saida, a.topo)
     print(f"ok -> {a.saida}")
 
 

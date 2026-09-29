@@ -142,6 +142,11 @@ MAX_POR_DIA = 4
 TITULOS_BLOQUEADOS = (
     "O TESTE EXTREMO DE QUEDA DOS CELULARES DA SAMSUNG",
     "FÁBRICA ROBÓTICA DA SAMSUNG PRODUZ MILHÕES DE CELULARES SOZINHA",
+    # 29/09/2026: selo tampado na altura errada (duas pilulas); original perdido.
+    "O transistor ficou 10.000 vezes menor que um fio de cabelo",
+    "Esta fábrica é 100 vezes mais limpa que uma UTI",
+    "CRIEI UM CHIP DE SILÍCIO CASEIRO NA MINHA GARAGEM",
+    "Processo de dopagem e teste automatizado de chips de computador",
 )
 VARIACAO_MIN = 8      # minuto varia ±8 pra não parecer robô
 

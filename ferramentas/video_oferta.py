@@ -44,7 +44,7 @@ def reais(v: float) -> str:
     return "R$ " + f"{v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
-def dados(pid: str) -> dict:
+def dados(pid: str, exigir_queda: bool = True) -> dict:
     serie = []
     for l in open(RAIZ / "estado" / "precos_vistos.jsonl", encoding="utf-8"):
         x = json.loads(l)
@@ -53,18 +53,22 @@ def dados(pid: str) -> dict:
     agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))[pid]
     hoje = agora["quando"][:10]
     antes = [p for q, p in sorted(serie) if q < hoje][-30:]
-    if len(antes) < 7:
+    if len(antes) < 7 and exigir_queda:
         raise ValueError(f"serie curta demais ({len(antes)} dias) — sem prova de queda")
-    ref = statistics.median(antes)
+    ref = statistics.median(antes) if antes else agora["preco"]
     queda = 1 - agora["preco"] / ref
-    if queda < QUEDA_MIN:
+    if queda < QUEDA_MIN and exigir_queda:
         raise ValueError(f"queda de {queda:.0%} nao justifica video")
+    # ⛔ "provada" decide se o video pode dizer CAIU e mostrar o riscado. Sem
+    # ela o video mostra so' o preco de hoje — nunca uma queda inventada.
+    provada = len(antes) >= 7 and queda >= QUEDA_MIN
     nome = json.load(open(RAIZ / "estado" / "nomes_curtos.json", encoding="utf-8"))[pid]
     sp = datetime.fromisoformat(agora["quando"]).astimezone(timezone(timedelta(hours=-3)))
     return {"nome": nome, "agora": agora["preco"], "ref": ref, "dias": len(antes),
             "queda": queda, "hora": sp.strftime("%d/%m às %H:%M"), "imagens": agora["imagens"][:4],
             "nota": agora.get("nota"), "vendas": agora.get("vendas"),
-            "marca": "PAGO MENOS", "numero": None}
+            "marca": "PAGO MENOS", "numero": None, "provada": provada,
+            "video": agora.get("video") or "", "gancho": ""}
 
 
 # ⭐ 29/09/2026 (plano aprovado, ideias 5 e 10): a marca de cada canal no topo
@@ -129,7 +133,11 @@ def cartao(foto: Image.Image, lado: int) -> Image.Image:
     return c
 
 
-def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) -> Image.Image:
+DEMO_S = 8.0   # ⭐ ideia 12: segundos do video OFICIAL do vendedor no cartao
+
+
+def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
+           demo: Image.Image | None = None) -> Image.Image:
     im = fundo.copy()
     dr = ImageDraw.Draw(im)
     # topo: marca + selo de confianca
@@ -157,6 +165,8 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
     if frac > 0.85 and n > 1:
         b = cartoes[(k + 1) % n].resize((lado, lado))
         a = Image.blend(a, b, (frac - 0.85) / 0.15)
+    if demo is not None:
+        a = demo          # o produto FUNCIONANDO, no lugar da foto parada
     mask = Image.new("L", (lado, lado), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, lado - 1, lado - 1], 48, fill=255)
     y_foto = 290
@@ -166,7 +176,14 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
     if t < 3.2:
         e = ease(t / 0.4) * (1 - ease((t - 2.8) / 0.4))
         fg = fonte("Anton-Regular.ttf", 120)
-        txt = "CAIU PELA METADE" if d["queda"] >= 0.5 else f"CAIU {round(d['queda'] * 100)}%"
+        if d.get("gancho"):
+            txt = d["gancho"]              # problema -> solucao, AFIRMANDO
+        elif d.get("provada"):
+            txt = "CAIU PELA METADE" if d["queda"] >= 0.5 else f"CAIU {round(d['queda'] * 100)}%"
+        else:
+            txt = "ACHADO DO DIA"
+        while dr.textlength(txt, font=fg) > W - 160 and fg.size > 60:
+            fg = fonte("Anton-Regular.ttf", fg.size - 6)
         tw = dr.textlength(txt, font=fg)
         camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         cd = ImageDraw.Draw(camada)
@@ -176,7 +193,10 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
         dr = ImageDraw.Draw(im)
 
     # nome
-    centro(dr, 1140, d["nome"], fonte("Poppins-Bold.ttf", 46), BRANCO)
+    fn = fonte("Poppins-Bold.ttf", 46)
+    while dr.textlength(d["nome"], font=fn) > W - 100 and fn.size > 30:
+        fn = fonte("Poppins-Bold.ttf", fn.size - 2)    # nome longo nao vaza da tela
+    centro(dr, 1140, d["nome"], fn, BRANCO)
     # ideia 10: a confianca da LOJA, lida na API (nunca inventada)
     if d.get("nota") and d.get("vendas"):
         loja = f"loja nota {str(d['nota']).replace('.', ',')}  ·  {vendas_curto(d['vendas'])} vendidos"
@@ -187,18 +207,23 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
         e = ease((t - 3.5) / 0.6)
         y = int(1270 + 40 * (1 - e))
         fa = fonte("Poppins-Bold.ttf", 52)
-        antes = f"antes {reais(d['ref'])}"
-        aw = centro(dr, y, antes, fa, CINZA)
-        dr.line([((W - aw) / 2, y + 36), ((W + aw) / 2, y + 36)], fill=CINZA, width=5)
         fp = fonte("Anton-Regular.ttf", 200)
-        pw = centro(dr, y + 70, reais(d["agora"]), fp, OURO)
-        fb = fonte("Poppins-Bold.ttf", 44)
-        badge = f"-{round(d['queda'] * 100)}%"
-        bw = dr.textlength(badge, font=fb)
-        bx = (W + aw) / 2 + 40
-        pilula(dr, bx - 22, y - 6, bx + bw + 22, y + 60, (200, 46, 60))
-        dr.text((bx, y - 2), badge, font=fb, fill=BRANCO)
-        nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
+        if d.get("provada"):
+            antes = f"antes {reais(d['ref'])}"
+            aw = centro(dr, y, antes, fa, CINZA)
+            dr.line([((W - aw) / 2, y + 36), ((W + aw) / 2, y + 36)], fill=CINZA, width=5)
+            centro(dr, y + 70, reais(d["agora"]), fp, OURO)
+            fb = fonte("Poppins-Bold.ttf", 44)
+            badge = f"-{round(d['queda'] * 100)}%"
+            bw = dr.textlength(badge, font=fb)
+            bx = (W + aw) / 2 + 40
+            pilula(dr, bx - 22, y - 6, bx + bw + 22, y + 60, (200, 46, 60))
+            dr.text((bx, y - 2), badge, font=fb, fill=BRANCO)
+            nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
+        else:
+            centro(dr, y, "preço de hoje", fa, CINZA)
+            centro(dr, y + 70, reais(d["agora"]), fp, OURO)
+            nota = "sem desconto inventado: é o preço da loja agora"
         centro(dr, y + 330, nota, fonte("Poppins-Bold.ttf", 28), CINZA)
 
     # chamada final (a partir de 15 s)
@@ -220,14 +245,50 @@ def narracao(d: dict, destino: Path) -> None:
     import edge_tts
     from engine import numeros
     r, a = d["ref"], d["agora"]
-    txt = (f"{d['nome']}. Nos últimos {d['dias']} dias ele custava, na maior parte do tempo, "
-           f"{int(r)} reais. Hoje está {int(a)} reais e {round((a - int(a)) * 100)} centavos. "
-           f"Eu conferi o preço agora há pouco. O link está na bio.")
+    hoje = f"{int(a)} reais e {round((a - int(a)) * 100)} centavos"
+    abre = (d["gancho"].capitalize() + ". ") if d.get("gancho") else ""
+    if d.get("provada"):
+        txt = (f"{abre}{d['nome']}. Nos últimos {d['dias']} dias ele custava, na maior parte do tempo, "
+               f"{int(r)} reais. Hoje está {hoje}. Eu conferi o preço agora há pouco. O link está na bio.")
+    else:
+        txt = (f"{abre}{d['nome']}. Hoje está {hoje}. Eu conferi o preço agora há pouco. "
+               f"O link está na bio.")
     asyncio.run(edge_tts.Communicate(numeros.por_extenso(txt), voice=VOZ, rate="+4%").save(str(destino)))
 
 
-def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = None) -> dict:
-    d = dados(pid)
+def _leitor_demo(url: str, tmp: Path):
+    """Quadros 820x820 do video do vendedor (os DEMO_S primeiros segundos)."""
+    arq = tmp / "demo.mp4"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    arq.write_bytes(urllib.request.urlopen(req, timeout=60).read())
+    lado = 820
+    # a maioria dos videos de vendedor abre com 1-2 s de logo: pula quando da'
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(arq)], capture_output=True, text=True)
+    try:
+        dur = float(r.stdout.strip())
+    except ValueError:
+        dur = 0.0
+    pulo = "3" if dur >= DEMO_S + 4 else "0"
+    p = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", pulo, "-i", str(arq), "-t", str(DEMO_S), "-an",
+                          "-vf", f"fps={FPS},scale={lado}:{lado}:force_original_aspect_ratio=increase,"
+                                 f"crop={lado}:{lado}", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+                         stdout=subprocess.PIPE)
+    ultimo = None
+    while True:
+        b = p.stdout.read(lado * lado * 3)
+        if len(b) < lado * lado * 3:
+            break
+        ultimo = Image.frombytes("RGB", (lado, lado), b)
+        yield ultimo
+    while True:               # video curto: segura o ultimo quadro
+        yield ultimo
+
+
+def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = None,
+          exigir_queda: bool = True, gancho: str = "") -> dict:
+    d = dados(pid, exigir_queda)
+    d["gancho"] = gancho.upper()
     if canal:
         d["marca"] = MARCAS.get(canal, d["marca"])
         d["numero"] = numero or proximo_numero(canal)
@@ -242,8 +303,20 @@ def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = 
                           "-t", str(DUR), "-c:v", "libx264", "-preset", "medium", "-crf", "19",
                           "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k",
                           "-movflags", "+faststart", str(saida)], stdin=subprocess.PIPE)
+    demo = None
+    if d.get("video"):
+        try:
+            demo = _leitor_demo(d["video"], tmp)
+            primeiro = next(demo)
+            if primeiro is None:
+                demo = None
+        except Exception as e:  # noqa: BLE001 — sem demo, volta pra foto
+            print(f"  [!] video do vendedor indisponivel ({type(e).__name__}); uso as fotos")
+            demo = None
     for i in range(int(DUR * FPS)):
-        p.stdin.write(quadro(i / FPS, d, fundo, cartoes).tobytes())
+        t = i / FPS
+        dq = next(demo) if (demo is not None and t < DEMO_S) else None
+        p.stdin.write(quadro(t, d, fundo, cartoes, dq).tobytes())
     p.stdin.close()
     p.wait()
     d["comentario"] = comentario_fixado(d)
@@ -255,5 +328,7 @@ if __name__ == "__main__":
     ap.add_argument("--id", required=True)
     ap.add_argument("--saida", type=Path, required=True)
     ap.add_argument("--canal")
+    ap.add_argument("--sem-queda", action="store_true", help="mostra so' o preco de hoje")
+    ap.add_argument("--gancho", default="")
     a = ap.parse_args()
-    print(gerar(a.id, a.saida, a.canal))
+    print(gerar(a.id, a.saida, a.canal, exigir_queda=not a.sem_queda, gancho=a.gancho))

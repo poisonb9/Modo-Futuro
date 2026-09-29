@@ -2315,6 +2315,9 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             # ha' quantos dias acompanhamos: "desde 13/09" faz a pessoa fazer
             # a conta; "ha' 2 dias" ja' entrega a conta feita.
             "dias": _dias(serie, d),
+            # ⭐ 29/09/2026: o id vai no cartao pro botao "avise-me no
+            # Telegram" (o /start alerta_<id> do engine/alertas.py)
+            "id": str(d.get("id") or ""),
         }))
     # ⚠️ `_todos` E' O ACHADINHO TOTAL: a vitrine geral, o que saiu em
     # QUALQUER canal. A pagina usa isto pra mostrar os outros cantos da casa
@@ -2628,7 +2631,7 @@ def injetar_produtos(html: str, dados: dict | None = None) -> str:
             "nao achei o marcador PRODUTOS_REAIS na pagina — "
             "alguem mexeu no contra_capa.html")
     dados = dict(dados)
-    dados["_do_video"] = do_video()
+    dados["_do_video"] = {**do_video(), **do_video_ofertas(dados)}
     corpo = json.dumps(dados, ensure_ascii=False, indent=2)
     html = html.replace(alvo, "  var PRODUTOS_REAIS = " + corpo + ";", 1)
     # ⭐ 28/09/2026: ultimas receitas do Chef + fichas em /receitas/ (o deploy
@@ -2688,10 +2691,30 @@ def do_video() -> dict:
             tema = {"cilios": "cílios", "lapis": "sobrancelha", "paleta": "sombra",
                     "kit": "pincéis"}.get(termo.split()[0], termo.split()[0])
         escolhidos += achados[:2]
-    if not escolhidos:
+    saida = {}
+    if escolhidos:
+        saida[_chave_da_pagina("truque.importado")] = {"tema": tema, "produtos": escolhidos[:3]}
+    return saida
+
+
+def do_video_ofertas(reais: dict) -> dict:
+    """⭐ 29/09/2026 (dono: "a pagina igual ao video"): nos canais de oferta
+    (engine/ofertas.py) o produto do ULTIMO video vem primeiro, com a
+    etiqueta. So' produtos que o `produtos_reais` ja' montou (link, serie,
+    preco reconferido) — nada de cartao feito a parte."""
+    try:
+        from engine import ofertas
+    except Exception:
         return {}
-    return {_chave_da_pagina("truque.importado"): {
-        "tema": tema, "produtos": escolhidos[:3]}}
+    feitas = ofertas._feitas()
+    out = {}
+    for canal in ofertas.CANAIS:
+        chave = _chave_da_pagina(canal)
+        ids = [f["id"] for f in reversed(feitas) if f.get("canal") == canal][:2]
+        cartoes = [c for i in ids for c in reais.get(chave, []) if c.get("id") == i]
+        if cartoes:
+            out[chave] = {"tema": "", "rotulo": "🎬 do vídeo de hoje", "produtos": cartoes}
+    return out
 
 def tirar_comentarios(html: str) -> str:
     """Tira comentario de JS, de CSS e de HTML.

@@ -495,6 +495,13 @@
   /* ⭐ 27/09/2026: o grafico e' o do site mae (todos.html), no peso da CAPA
      da vitrine: 34 px, traco 2, area a 10%, ponto redondo, legenda com lupa. */
   .produto { --fraco: var(--tinta-fraca); --verde: #16a34a; }
+  .produto .avise-me {
+    display: block; margin-top: 8px; padding: 7px 10px; text-align: center;
+    font-size: 12.5px; font-weight: 700; color: var(--tinta);
+    border: 1.5px solid var(--tinta); border-radius: 999px; cursor: pointer;
+    background: transparent;
+  }
+  .produto .avise-me:active { transform: translateY(1px); }
   .serie-wrap { position: relative; margin-top: 8px; padding-right: 4px; }
   .serie-wrap .escala {
     display: flex; justify-content: flex-start; flex-wrap: nowrap; gap: 6px;
@@ -1951,9 +1958,30 @@
       novoRod.appendChild(el("span", null, "achado agora"));
       corpo.appendChild(novoRod);
     }
+    // ⭐ 29/09/2026 (dono): "me avise quando baixar" no Telegram DA PESSOA,
+    // em privado. O mesmo bot e o mesmo /start do site mae (engine/alertas.py
+    // colhe de hora em hora). ⚠️ E' um <span> e nao um <a>: o cartao inteiro
+    // ja' e' link, e link dentro de link e' HTML invalido — o toque aqui
+    // abre o bot SEM acionar a loja.
+    if (!falta && p.id && /^\d+$/.test(String(p.id))) {
+      var av = el("span", "avise-me", "🔔 avise-me no Telegram se baixar");
+      av.setAttribute("role", "link");
+      av.tabIndex = 0;
+      var abrirBot = function (ev) {
+        ev.preventDefault(); ev.stopPropagation();
+        medir("clique", { canal: CANAIS[atual].banco, tipo: "alerta", rotulo: p.nome });
+        location.href = "https://t.me/" + BOT_ALERTA + "?start=alerta_" + encodeURIComponent(String(p.id));
+      };
+      av.addEventListener("click", abrirBot);
+      av.addEventListener("keydown", function (ev) { if (ev.key === "Enter") abrirBot(ev); });
+      corpo.appendChild(av);
+    }
     e.appendChild(corpo);
     return e;
   }
+
+  // o mesmo bot do site mae (site_no_ar/motor.js, BOT_ALERTA)
+  var BOT_ALERTA = "AchadinhoTotalBot";
 
   var BALOES_CANAL = {
     "achadinho.make": "canal_achadinho_make",
@@ -2242,7 +2270,7 @@
       // ⚠️ VAZIA QUANDO E' REAL. Ela dizia o mesmo que o <h2> logo ao lado,
       // e o iPhone do Bryan mostrou o titulo DUPLICADO na tela. A etiqueta
       // so' existe pra avisar que o que esta' abaixo NAO e' real.
-      etiqueta.textContent = real ? (dv && dv.tema ? "✨ da make do vídeo: " + dv.tema : "") : "exemplo — ainda não é real";
+      etiqueta.textContent = real ? (dv && dv.rotulo ? dv.rotulo : (dv && dv.tema ? "✨ da make do vídeo: " + dv.tema : "")) : "exemplo — ainda não é real";
       lista.forEach(function (p) { vitrine.appendChild(montarProduto(p)); });
     } else {
       // Este e' o estado de HOJE, e ele e' NORMAL, nao erro: nenhum clipe

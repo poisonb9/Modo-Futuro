@@ -43,7 +43,17 @@ def main() -> None:
     hoje = date.today()
     tag = f"ofertas-{hoje:%Y-%m}"
     escolha = ofertas.do_dia(hoje)
-    links = json.load(open(RAIZ / "site_no_ar" / "links.json", encoding="utf-8"))
+    # ⭐ o link de afiliado (com o nosso tracking) vem do garimpo, gravado em
+    # produtos_publicados.jsonl — o que esta' no git. O `site_no_ar/links.json`
+    # e' so' backup do ar e fica velho no repositorio.
+    links: dict[str, str] = {}
+    for l in (RAIZ / "estado" / "produtos_publicados.jsonl").read_text(encoding="utf-8").splitlines():
+        try:
+            x = json.loads(l)
+        except ValueError:
+            continue
+        if x.get("id") and str(x.get("link", "")).startswith("https://s.click.aliexpress.com/"):
+            links[str(x["id"])] = x["link"]
     agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
     total = sum(len(v) for v in escolha.values())
     print(f"{hoje}: {total} oferta(s) passaram em todas as guardas")

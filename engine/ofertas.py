@@ -114,7 +114,10 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
 def registrar(canal: str, oferta: dict, dia: date | None = None) -> None:
     with open(FEITAS, "a", encoding="utf-8") as f:
         f.write(json.dumps({"dia": (dia or date.today()).isoformat(), "canal": canal,
-                            "id": oferta["id"], "agora": oferta["agora"]}) + "\n")
+                            "id": oferta["id"], "agora": oferta["agora"],
+                            "numero": oferta.get("numero"),
+                            "comentario": oferta.get("comentario", "")},
+                           ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":

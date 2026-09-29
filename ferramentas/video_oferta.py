@@ -62,7 +62,30 @@ def dados(pid: str) -> dict:
     nome = json.load(open(RAIZ / "estado" / "nomes_curtos.json", encoding="utf-8"))[pid]
     sp = datetime.fromisoformat(agora["quando"]).astimezone(timezone(timedelta(hours=-3)))
     return {"nome": nome, "agora": agora["preco"], "ref": ref, "dias": len(antes),
-            "queda": queda, "hora": sp.strftime("%d/%m às %H:%M"), "imagens": agora["imagens"][:4]}
+            "queda": queda, "hora": sp.strftime("%d/%m às %H:%M"), "imagens": agora["imagens"][:4],
+            "nota": agora.get("nota"), "vendas": agora.get("vendas"),
+            "marca": "PAGO MENOS", "numero": None}
+
+
+# ⭐ 29/09/2026 (plano aprovado, ideias 5 e 10): a marca de cada canal no topo
+# e a serie "ACHADO DO DIA #N" — numero por canal, contado no registro das
+# ofertas feitas (nunca chutado: mesma regra do selo PARTE N).
+MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHOS INSTANTÂNEOS"}
+
+
+def proximo_numero(canal: str) -> int:
+    from engine import ofertas
+    return 1 + sum(1 for f in ofertas._feitas() if f.get("canal") == canal)
+
+
+def vendas_curto(n: int) -> str:
+    return f"{n / 1000:.1f}".replace(".0", "").replace(".", ",") + " mil" if n >= 1000 else str(n)
+
+
+def comentario_fixado(d: dict) -> str:
+    """Ideia 6: o texto que o dono cola e fixa (o TikTok nao tem API pra isso)."""
+    return (f"Preço conferido em {d['hora']}: {reais(d['agora'])}. "
+            f"Se mudar, eu aviso no Telegram 🔔 (link da bio)")
 
 
 def baixar(url: str) -> Image.Image:
@@ -110,14 +133,18 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
     im = fundo.copy()
     dr = ImageDraw.Draw(im)
     # topo: marca + selo de confianca
-    centro(dr, 110, "PAGO MENOS", fonte("Poppins-Bold.ttf", 44), OURO)
+    centro(dr, 92 if d.get("numero") else 110, d.get("marca") or "PAGO MENOS",
+           fonte("Poppins-Bold.ttf", 44), OURO)
+    if d.get("numero"):
+        centro(dr, 146, f"ACHADO DO DIA #{d['numero']}", fonte("Poppins-Bold.ttf", 26), BRANCO)
     fs = fonte("Poppins-Bold.ttf", 30)
     selo = f"preço conferido {d['hora']}"
     sw = dr.textlength(selo, font=fs) + 44          # + o visto desenhado
     x0 = (W - sw) / 2
-    pilula(dr, x0 - 28, 180, x0 + sw + 28, 236, (36, 34, 44))
-    dr.line([(x0 + 2, 210), (x0 + 12, 221), (x0 + 30, 196)], fill=(88, 200, 120), width=6, joint="curve")
-    dr.text((x0 + 44, 186), selo, font=fs, fill=BRANCO)
+    y0 = 200 if d.get("numero") else 180
+    pilula(dr, x0 - 28, y0, x0 + sw + 28, y0 + 56, (36, 34, 44))
+    dr.line([(x0 + 2, y0 + 30), (x0 + 12, y0 + 41), (x0 + 30, y0 + 16)], fill=(88, 200, 120), width=6, joint="curve")
+    dr.text((x0 + 44, y0 + 6), selo, font=fs, fill=BRANCO)
 
     # foto: cartao branco arredondado, zoom lento, troca com fusao a cada 3 s
     lado = 820
@@ -132,7 +159,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
         a = Image.blend(a, b, (frac - 0.85) / 0.15)
     mask = Image.new("L", (lado, lado), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, lado - 1, lado - 1], 48, fill=255)
-    y_foto = 300
+    y_foto = 290
     im.paste(a, ((W - lado) // 2, y_foto), mask)
 
     # gancho (0-3 s): faixa ouro por cima da foto
@@ -149,12 +176,16 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image]) ->
         dr = ImageDraw.Draw(im)
 
     # nome
-    centro(dr, 1150, d["nome"], fonte("Poppins-Bold.ttf", 46), BRANCO)
+    centro(dr, 1140, d["nome"], fonte("Poppins-Bold.ttf", 46), BRANCO)
+    # ideia 10: a confianca da LOJA, lida na API (nunca inventada)
+    if d.get("nota") and d.get("vendas"):
+        loja = f"loja nota {str(d['nota']).replace('.', ',')}  ·  {vendas_curto(d['vendas'])} vendidos"
+        centro(dr, 1200, loja, fonte("Poppins-Bold.ttf", 30), CINZA)
 
     # preco (a partir de 3,5 s)
     if t >= 3.5:
         e = ease((t - 3.5) / 0.6)
-        y = int(1250 + 40 * (1 - e))
+        y = int(1270 + 40 * (1 - e))
         fa = fonte("Poppins-Bold.ttf", 52)
         antes = f"antes {reais(d['ref'])}"
         aw = centro(dr, y, antes, fa, CINZA)
@@ -195,8 +226,11 @@ def narracao(d: dict, destino: Path) -> None:
     asyncio.run(edge_tts.Communicate(numeros.por_extenso(txt), voice=VOZ, rate="+4%").save(str(destino)))
 
 
-def gerar(pid: str, saida: Path) -> dict:
+def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = None) -> dict:
     d = dados(pid)
+    if canal:
+        d["marca"] = MARCAS.get(canal, d["marca"])
+        d["numero"] = numero or proximo_numero(canal)
     tmp = Path(tempfile.mkdtemp())
     cartoes = [cartao(baixar(u), 820) for u in d["imagens"]]
     voz = tmp / "voz.mp3"
@@ -212,6 +246,7 @@ def gerar(pid: str, saida: Path) -> dict:
         p.stdin.write(quadro(i / FPS, d, fundo, cartoes).tobytes())
     p.stdin.close()
     p.wait()
+    d["comentario"] = comentario_fixado(d)
     return d
 
 
@@ -219,5 +254,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--id", required=True)
     ap.add_argument("--saida", type=Path, required=True)
+    ap.add_argument("--canal")
     a = ap.parse_args()
-    print(gerar(a.id, a.saida))
+    print(gerar(a.id, a.saida, a.canal))

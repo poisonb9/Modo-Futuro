@@ -34,6 +34,10 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pasta", type=Path, required=True)
     ap.add_argument("--ensaio", action="store_true")
+    # ⚠️ SEM --registrar os videos sao PREVIA: sobem na release, mas nao entram
+    # em ofertas_feitas nem na pagina da bio. Registrar = o video VAI AO AR
+    # (senao a bio diria "do video de hoje" de um video que ninguem viu).
+    ap.add_argument("--registrar", action="store_true")
     a = ap.parse_args()
     a.pasta.mkdir(parents=True, exist_ok=True)
     hoje = date.today()
@@ -51,18 +55,28 @@ def main() -> None:
     subprocess.run(["gh", "release", "view", tag], capture_output=True) .returncode == 0 or \
         subprocess.run(["gh", "release", "create", tag, "--title", tag, "--notes",
                         "videos de oferta (Pago Menos / instantaneos)"], check=True)
+    comentarios = []
     for canal, os_ in escolha.items():
+        n = video_oferta.proximo_numero(canal)
         for o in os_:
             if o["id"] not in links:
                 print(f"  [!] {o['id']} sem link de afiliado — pulado")
                 continue
             arq = a.pasta / f"{hoje}_{canal.replace('.', '-')}_{o['id']}.mp4"
             try:
-                video_oferta.gerar(o["id"], arq)
+                d = video_oferta.gerar(o["id"], arq, canal, n)
             except Exception as e:  # noqa: BLE001 — um produto nao derruba o dia
                 print(f"  [!] {o['id']}: {type(e).__name__}: {str(e)[:120]}")
                 continue
             subprocess.run(["gh", "release", "upload", tag, str(arq), "--clobber"], check=True)
+            o["comentario"] = d["comentario"]
+            o["numero"] = d["numero"]
+            n += 1
+            comentarios.append(f"{arq.name}
+  comentario fixado: {d['comentario']}")
+            print(f"  ok {canal} #{d['numero']}: {o['nome']} -> {arq.name}")
+            if not a.registrar:
+                continue
             ofertas.registrar(canal, o, hoje)
             with open(RAIZ / "estado" / "produtos_publicados.jsonl", "a", encoding="utf-8") as f:
                 f.write(json.dumps({
@@ -72,7 +86,15 @@ def main() -> None:
                     "vendas": o["vendas"], "fonte": "aliexpress",
                     "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 }, ensure_ascii=False) + "\n")
-            print(f"  ok {canal}: {o['nome']} -> {arq.name}")
+
+
+    if comentarios:
+        txt = a.pasta / f"{hoje}_comentarios_fixados.txt"
+        txt.write_text("
+
+".join(comentarios) + "
+", encoding="utf-8")
+        subprocess.run(["gh", "release", "upload", tag, str(txt), "--clobber"], check=True)
 
 
 if __name__ == "__main__":

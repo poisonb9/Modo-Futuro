@@ -12,6 +12,9 @@ on:
       ensaio:
         description: "so' dizer o que faria (true/false)"
         default: "true"
+      registrar:
+        description: "o video VAI AO AR? (entra na bio e no registro) true/false"
+        default: "false"
 
 jobs:
   gerar:
@@ -32,9 +35,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           E=""; [ "${{ inputs.ensaio }}" = "true" ] && E="--ensaio"
+          [ "${{ inputs.registrar }}" = "true" ] && E="$E --registrar"
           python -X utf8 ferramentas/ofertas_do_dia.py --pasta saida $E
       - name: Guardar o registro
-        if: inputs.ensaio != 'true'
+        if: inputs.ensaio != 'true' && inputs.registrar == 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

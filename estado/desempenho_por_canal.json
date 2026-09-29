@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-09-29T08:21:06",
+  "medido_em": "2026-09-29T15:41:53",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -10,13 +10,9 @@
       "comentarios": 63,
       "shares": 51,
       "engajamento_pct": 104.94,
-      "posts_recentes": 10,
+      "posts_recentes": 9,
       "views_recentes": 0,
       "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "O CONVITE AO VIVO PARA MAQUIAR O COLEGA DE GRUPO!\n\nYeongseo "
-        },
         {
           "views": 0,
           "titulo": "Felix do Stray Kids revela por que assinou o canal do JYP no"
@@ -24,6 +20,10 @@
         {
           "views": 0,
           "titulo": "Felix do Stray Kids reage à transformação de maquiagem igual"
+        },
+        {
+          "views": 0,
+          "titulo": "Felix do Stray Kids ganha maquiagem de lágrimas angelicais!\n"
         }
       ]
     },
@@ -60,7 +60,7 @@
       "comentarios": 68,
       "shares": 53,
       "engajamento_pct": 0.0,
-      "posts_recentes": 25,
+      "posts_recentes": 24,
       "views_recentes": 0,
       "melhores_recentes": [
         {

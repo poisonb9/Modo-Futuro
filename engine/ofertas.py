@@ -26,7 +26,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 FEITAS = RAIZ / "estado" / "ofertas_feitas.jsonl"
-QUEDA_MIN = 0.25
+QUEDA_MIN = 0.15   # 30/09/2026 (dono): era 0.25 — so' 1 oferta nova passava; queda continua REAL e medida
 DIAS_MIN = 7
 NOTA_MIN = 4.7
 VENDAS_MIN = 1000

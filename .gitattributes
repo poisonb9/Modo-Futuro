@@ -1,4 +1,4 @@
-# 30/09/2026 17:xx: run 36743009796 perdeu o registro das ofertas num conflito de rebase
+# 30/09/2026 17:40: run 36743009796 perdeu o registro das ofertas num conflito de rebase
 # neste arquivo (so' recebe linha no fim). union junta as duas pontas sem conflito.
 estado/produtos_publicados.jsonl merge=union
 estado/ofertas_feitas.jsonl merge=union

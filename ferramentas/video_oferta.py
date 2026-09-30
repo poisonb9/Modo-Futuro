@@ -369,7 +369,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         selo = ease((t - PRECO_T - ROLA_S - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
         _colar(im, _balao("selo_preco_conferido", 215), esq - 45,
                y_foto + lado - 95 + 30 * (1 - selo) + 6 * math.sin(t * 1.5), -8 + 3 * math.sin(t * 1.2), selo)
-        _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
+        _colar(im, _balao("inaug_laco", 88, (0, 0, 360, 330)), dir_ - 4, y_foto + 36, 18)   # abaixo do selo do topo   # o cartao vira PRESENTE
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite
     faixa = None
@@ -424,12 +424,13 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     y = y_base_foto + 92
     fn = fonte("Poppins-Bold.ttf", 52)
     linhas = [d["nome"]]
-    if dr.textlength(d["nome"], font=fn) > SEG_LARG:
+    if dr.textlength(d["nome"], font=fn) > SEG_LARG - 110:
         pal = d["nome"].split()
         k = min(range(1, len(pal)), key=lambda i: abs(dr.textlength(" ".join(pal[:i]), font=fn)
                                                       - dr.textlength(" ".join(pal[i:]), font=fn)))
         linhas = [" ".join(pal[:k]), " ".join(pal[k:])]
-    fn = _caber(dr, max(linhas, key=lambda l: dr.textlength(l, font=fn)), "Poppins-Bold.ttf", 52, SEG_LARG, 36)
+    MIOLO = SEG_LARG - 110          # 30/09 (dono): "letras encostando no anel dourado"
+    fn = _caber(dr, max(linhas, key=lambda l: dr.textlength(l, font=fn)), "Poppins-Bold.ttf", 52, MIOLO, 34)
     # ⭐ 30/09 (arte do dono, premium item 7): a PLACA preta com friso dourado
     # atras do nome, e a parte que diz O QUE O PRODUTO FAZ (depois de "com"/"para")
     # em dourado. O nome continua texto limpo — informacao, nao enfeite.
@@ -536,7 +537,21 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             centro(dr, y, "preço de hoje", fa, CINZA)
             nota = "sem desconto inventado: é o preço da loja agora"
             centro(dr, y + 36, preco, fp, OURO)
-        centro(dr, min(y + 214, SEG_BASE - 26), nota, fonte("Poppins-Bold.ttf", 22), CINZA)
+        # ⭐ 30/09 (dono: "ta' muito jogado, algo mais caprichado"): a PROVA vira
+        # uma capsula propria — graficozinho dourado + frase clara — em linha
+        # livre, abaixo da explosao. Mesmo fato, dito como garantia.
+        if d.get("provada"):
+            nota = f"Medimos por {d['dias']} dias: o normal era {reais(d['ref'])}"
+        fcap = fonte("Poppins-Bold.ttf", 26)
+        tw_n = dr.textlength(nota, font=fcap)
+        cw, ch = tw_n + 90, 50
+        cy_n = min(y + 232, SEG_BASE - ch)
+        cx0 = (W - cw) / 2
+        dr.rounded_rectangle([cx0, cy_n, cx0 + cw, cy_n + ch], ch // 2, fill=(24, 22, 28), outline=OURO, width=2)
+        for k, hbar in enumerate((12, 20, 28)):          # o grafico: tres barrinhas subindo
+            bx_ = cx0 + 24 + k * 11
+            dr.rounded_rectangle([bx_, cy_n + 38 - hbar, bx_ + 7, cy_n + 38], 2, fill=OURO)
+        dr.text((cx0 + 70, cy_n + 10), nota, font=fcap, fill=BRANCO)
     return im
 
 def narracao(d: dict, destino: Path) -> None:

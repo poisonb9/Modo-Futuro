@@ -201,6 +201,46 @@ def cortar(origem: Path, ini: float, saida: Path) -> bool:
     return r.returncode == 0 and saida.exists()
 
 
+PEDIDO_QUADROS = """Imagem 1 = foto do ANUNCIO de "{nome}". Imagens 2, 3 e 4 = quadros do video que vai ao ar.
+Compare com RIGOR de perito: formato, cor, botoes/portas, encaixes, texto e logo impressos.
+Um produto PARECIDO de outro modelo ou marca = REPROVADO. Na duvida, REPROVADO.
+Responda SO' JSON: {{"mesmo_produto": true/false, "diferencas": ["..."], "confianca": 0-10}}"""
+
+
+def conferir_quadros(trecho: Path, foto_url: str, nome: str) -> dict:
+    """⭐ 30/09/2026: 2a porta, sobre o TRECHO que vai ao ar. O dono reprovou a
+    Luz LED (video de outro produto) que o Gemini aprovou olhando o video
+    inteiro. Aqui ele ve' 3 quadros soltos DO TRECHO ao lado da foto e tem de
+    listar diferencas — aprova so' com zero diferencas e confianca >= 9."""
+    from engine import keys
+    partes = [{"inline_data": {"mime_type": "image/jpeg",
+                               "data": base64.b64encode(requests.get(foto_url, timeout=30).content).decode()}}]
+    for k, frac in enumerate((0.2, 0.5, 0.8)):
+        q = trecho.with_name(f"q{k}.jpg")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-sseof", f"-{12 * (1 - frac):.1f}", "-i", str(trecho),
+                        "-frames:v", "1", str(q)], capture_output=True)
+        if q.exists():
+            partes.append({"inline_data": {"mime_type": "image/jpeg",
+                                           "data": base64.b64encode(q.read_bytes()).decode()}})
+    partes.append({"text": PEDIDO_QUADROS.format(nome=nome)})
+    rot = keys.gemini()
+    for _ in range(min(5, len(rot))):
+        k = rot.proxima().strip()
+        r = requests.post(
+            f"https://generativelanguage.googleapis.com/v1beta/models/{MODELO}:generateContent?key={k}",
+            json={"contents": [{"parts": partes}],
+                  "generationConfig": {"temperature": 0, "responseMimeType": "application/json"}},
+            timeout=200)
+        if r.status_code in (403, 429, 503):
+            rot.queimar(k)
+            continue
+        try:
+            return json.loads(r.json()["candidates"][0]["content"]["parts"][0]["text"])
+        except Exception as e:
+            return {"erro": str(e)[:80]}
+    return {"erro": "chaves esgotadas"}
+
+
 def limpar(pasta: Path) -> None:
     if not pasta.exists():
         return
@@ -256,6 +296,14 @@ def fazer(pid: str) -> bool:
         trecho = pasta / f"demo_{pid}.mp4"
         if not cortar(arq, float(g.get("melhor_segundo") or 0), trecho):
             registrar("corte_falhou", pid=pid)
+            return False
+        q = conferir_quadros(trecho, foto, nome)
+        passou = q.get("mesmo_produto") is True and not q.get("diferencas") and q.get("confianca", 0) >= 9
+        registrar("quadros", pid=pid, aprovado=passou, confianca=q.get("confianca"),
+                  diferencas=q.get("diferencas", q.get("erro")))
+        if not passou:
+            registrar("sem_demo", pid=pid, nome=nome,
+                      motivo="2a porta (quadros do trecho x foto) reprovou — fica a foto")
             return False
         conta = cd.escolher(1.0)
         s = cd.servico(conta)

@@ -102,7 +102,7 @@ def legenda_post(d: dict) -> str:
             f"Hoje {reais(d['agora'])} — o normal dele, nos nossos {d['dias']} dias "
             f"de acompanhamento, é {reais(d['ref'])}.\n"
             f"Loja nota {str(d['nota']).replace('.', ',')} · {vendas_curto(int(d['vendas']))} vendidos.\n"
-            f"🔗 Link na bio.\n"
+            f"🔗 Link na bio → Achado do dia{num}\n"
             f"#achadinhos #promoção #aliexpress")
 
 

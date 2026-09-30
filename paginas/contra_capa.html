@@ -1857,6 +1857,15 @@
     // de desconto falso.
     var foto = el("div", "foto");
     if (p.dominio === "MLB-BOOKS") e.classList.add("livro");
+    // ⭐ 30/09/2026 (dono): o TikTok nao tem link clicavel na legenda — ela diz
+    // "Link na bio → Achado do dia #N". O cartao mostra o MESMO numero, pro
+    // cliente achar o produto do video sem procurar.
+    if (p.achado) {
+      var sa = el("span", "achado-num", "Achado do dia #" + p.achado);
+      sa.style.cssText = "position:absolute;top:8px;left:8px;z-index:2;background:#f5c542;color:#1a1a1a;font-weight:800;font-size:12px;padding:3px 8px;border-radius:999px";
+      foto.style.position = "relative";
+      foto.appendChild(sa);
+    }
     // ⚠️ NOVO E' QUEM NAO TEM SERIE: entrou hoje, nao ha' o que acompanhar
     // ainda. E' a mesma condicao que deixava o rodape do cartao vazio.
     var eNovo = !(p.pontos >= 2);

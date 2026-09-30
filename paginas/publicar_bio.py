@@ -2715,8 +2715,11 @@ def do_video_ofertas(reais: dict) -> dict:
     out = {}
     for canal in ofertas.CANAIS:
         chave = _chave_da_pagina(canal)
-        ids = [f["id"] for f in reversed(feitas) if f.get("canal") == canal][:2]
-        cartoes = [c for i in ids for c in reais.get(chave, []) if c.get("id") == i]
+        # ⭐ 30/09/2026: os 4 do dia (era 2) e cada cartao leva o numero do
+        # "Achado do dia #N" — o mesmo da legenda e do video.
+        meus = [f for f in reversed(feitas) if f.get("canal") == canal][:4]
+        cartoes = [dict(c, achado=f.get("numero")) for f in meus
+                   for c in reais.get(chave, []) if c.get("id") == f["id"]]
         if cartoes:
             out[chave] = {"tema": "", "rotulo": "🎬 do vídeo de hoje", "produtos": cartoes}
     return out

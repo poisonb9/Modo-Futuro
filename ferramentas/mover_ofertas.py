@@ -44,6 +44,8 @@ def main() -> None:
         _, cid, posts = ab.contexto_buffer(tok, fresco=True)
         for x in posts:
             m = re.match(r"\s*Achado do dia #(\d+)", x.get("text") or "")
+            if not m and "Inauguração amanhã" in (x.get("text") or ""):
+                m = re.match(r"(0)", "0")      # 30/09: o TEASER da inauguracao = numero 0
             print(f"  {canal}: {x.get('status')} {x.get('dueAt')} {(x.get('text') or '')[:50]!r}")
             if not m or int(m.group(1)) not in nums or x.get("status") != "scheduled":
                 continue

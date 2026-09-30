@@ -1123,6 +1123,35 @@
       produtos: []
     },
 
+    // ⭐ 30/09/2026 (dono: "pode fazer o supabase"): @achadinhototal, 3o canal
+    // de oferta (engine/ofertas.py). Codigo c8 no banco (supabase/13). Mora no
+    // site mae, em achadinhototal.com.br/dodia — o endereco pode mudar: basta
+    // outro apelido no casamento de caminho la' embaixo.
+    "achadinhototal": {
+      banco: "achadinhototal",
+      nome: "Achadinho Total",
+      arroba: "@achadinhototal",
+      inicial: "AT",
+      acento: "#E4572E",
+      promessa: "Os achados do dia com a maior queda de preço — conferida, não prometida.",
+      vantagens: [
+        ["📉", "Só entra o que caiu de verdade na nossa série de preços"],
+        ["🔎", "Preço conferido no dia do vídeo"],
+        ["📦", "Link direto pra loja"]
+      ],
+      grupos: [
+        {
+          guia: "Chegou por um vídeo e quer mais?",
+          botoes: [["🎬", "Mais achados como esse", "https://www.tiktok.com/@achadinhototal"]]
+        },
+        {
+          guia: "É lá que aparece primeiro 👇",
+          botoes: [["telegram", "Achadinho Total no Telegram — promoção antes de todo mundo", VITRINE]]
+        }
+      ],
+      produtos: []
+    },
+
     "cozinha.internacional": {
       // `banco` e' o nome_buffer do canais_registro — nem sempre igual a
       // chave da pagina (aqui a chave e' o @ do TikTok). E' ele que vai pro
@@ -2492,6 +2521,8 @@
   var doHost = PORTAS[location.hostname.split(".")[0]];
 
   var doCaminho = (location.pathname.match(/\/(c[1-9])\/?$/) || [])[1];
+  // ⭐ 30/09/2026: achadinhototal.com.br/dodia -> @achadinhototal (c8)
+  if (/\/dodia\/?$/.test(location.pathname)) doCaminho = "c8";
   var pedido = doHost || doCaminho ||
               new URLSearchParams(location.search).get("c");
   if (pedido) {

@@ -126,6 +126,9 @@ CODIGOS = {
     "cozinha.importada": "c5",
     "fatura.chora": "c6",
     "achadinhos.instantaneos": "c7",
+    # 30/09/2026: 3o canal de oferta; linha no banco em supabase/13. Mora no
+    # site mae, em /dodia (ver PROJETO_MAE) — nao tem projeto proprio.
+    "achadinhototal": "c8",
 }
 
 
@@ -2814,7 +2817,7 @@ def conferir(html: str) -> list[str]:
     # justamente os que revelam historia da operacao — o canal de maquiagem se
     # chama `truque.importado` por dentro, e a cozinha `cozinha.importada`.
     so_internos = [n for n in CODIGOS
-                   if f"@{n}" not in html and n not in ("modofuturo",)]
+                   if f"@{n}" not in html and n not in ("modofuturo", "achadinhototal")]  # 30/09: achadinhototal e' o @ publico E o dominio
     for nome in so_internos:
         # se o nome aparece SEM ser precedido de @, vazou
         if re.search(rf"(?<!@){re.escape(nome)}", html):
@@ -3449,6 +3452,10 @@ def publicar_no_ar(html: str, parceiros: str = "",
                     (casa / "parceiros" / "index.html").write_text(
                         parceiros, encoding="utf-8")
                 _por_privacidade(casa, privacidade)
+                # ⭐ 30/09/2026: a bio do @achadinhototal (c8) mora aqui, em
+                # /dodia — a pagina casa o caminho e abre o canal certo.
+                (casa / "dodia").mkdir()
+                (casa / "dodia" / "index.html").write_text(html, encoding="utf-8")
                 subprocess.run(
                     ["npx", "--yes", "wrangler", "pages", "deploy", str(casa),
                      "--project-name", PROJETO_MAE, "--commit-dirty=true"],
@@ -3523,6 +3530,9 @@ def conferir_no_ar(marca: str, marca_parceiros: str = "",
     if marca_catalogo:
         _confere(f"{PROJETO_MAE} (site mae)",
                  f"https://{PROJETO_MAE}.pages.dev/", marca_catalogo)
+        # ⭐ 30/09/2026: a bio do @achadinhototal (c8) no site mae
+        _confere(f"{PROJETO_MAE}/dodia",
+                 f"https://{PROJETO_MAE}.pages.dev/dodia", marca)
         if marca_parceiros:
             # ⚠️ O SITE MAE TAMBEM SERVE `/parceiros`, e e' ELE que esta'
             # escrito no perfil do Awin (`achadinhototal.pages.dev/parceiros`).

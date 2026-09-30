@@ -6,6 +6,22 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 30/09/2026 18:50 — `1712733`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `578d4e6c46e7` · 33 endereço(s) conferidos · HTML 284 KB
+
+---
+
+## 30/09/2026 18:17 — `1712733`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `acac646f0070` · 32 endereço(s) conferidos · HTML 283 KB
+
+---
+
 ## 30/09/2026 18:03 — `1712733`
 
 **O quê:** vitrine: o que ja' foi ao canal

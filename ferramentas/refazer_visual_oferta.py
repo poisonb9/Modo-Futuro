@@ -13,7 +13,7 @@ for f in feitas:
     c=f['canal']; nome=f"{f['dia']}_{c.replace('.','-')}_{f['id']}"
     orig=sp/'out'/(nome+'_orig.mp4')
     urllib.request.urlretrieve(f"https://github.com/poisonb9/Modo-Futuro/releases/download/ofertas-2026-09/{nome}.mp4",orig)
-    d=vo.dados(f['id']); d['gancho']=''; d['marca']=vo.MARCAS[c]; d['numero']=num
+    d=vo.dados(f['id']); d['gancho']=''; d['marca']=vo.MARCAS[c]; d['numero']=num; d['id']=f['id']; d['festa']=True
     assert abs(d['agora']-f['agora'])<0.005 and d['hora'] in f['comentario'], (d['agora'],d['hora'])
     cart=[vo.cartao(vo.baixar(u),820) for u in d['imagens']]; fundo=vo.base_fundo()
     saida=sp/'out'/(nome+'_v2.mp4')

@@ -1,0 +1,57 @@
+# Semana de inauguracao (30/09/2026, dono: "monta tudo usando a nuvem").
+# teaser: gera e agenda o teaser de cada perfil. refazer: troca o visual dos
+# Achados ja' agendados pela camada de festa (mesmo audio). Ver
+# ferramentas/inauguracao_nuvem.py.
+name: Inauguracao
+
+on:
+  workflow_dispatch:
+    inputs:
+      teaser:
+        description: "canal@@AAAA-MM-DD HH:MM:SS (hora SP) separados por ||"
+        default: ""
+      refazer:
+        description: "canal:N@@AAAA-MM-DD HH:MM:SS separados por ||"
+        default: ""
+
+jobs:
+  festa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get install -y -qq ffmpeg && pip install -q pillow edge-tts requests python-dotenv
+      - name: Cache do modelo de voz clonada (Chatterbox)
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.cache/huggingface
+          key: chatterbox-hf-cache-v1
+      - name: Instalar voz clonada e amostra
+        continue-on-error: true
+        env:
+          HF_HOME: ${{ github.workspace }}/.cache/huggingface
+          GOOGLE_OAUTH_TOKEN_JSON_2: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_2 }}
+        run: |
+          pip install -q -r requirements.txt
+          pip install -q --upgrade "setuptools>=70"
+          pip install -q chatterbox-tts
+          pip install -q --force-reinstall --no-deps resemble-perth
+          mkdir -p vozes
+          python -X utf8 baixar_bruto_drive.py --file-id "1vGJd2pa-ogzV1Z3vmVR926k72auLbmI-" --destino "vozes/_m" --conta "reserva"
+          ffmpeg -y -v error -i vozes/_m -ar 24000 -ac 1 vozes/bryan_amostra.wav && rm -f vozes/_m
+          ls -la vozes/
+      - name: Festa
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HF_HOME: ${{ github.workspace }}/.cache/huggingface
+          PAGOMENOS: ${{ secrets.PAGOMENOS }}
+          ACHADINHOSINSTANTANEOS: ${{ secrets.ACHADINHOSINSTANTANEOS }}
+          ACHADINHOTOTAL: ${{ secrets.ACHADINHOTOTAL }}
+        run: python -X utf8 ferramentas/inauguracao_nuvem.py --teaser "${{ inputs.teaser }}" --refazer "${{ inputs.refazer }}"

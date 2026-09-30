@@ -156,6 +156,69 @@ def cartao(foto: Image.Image, lado: int) -> Image.Image:
 DEMO_S = 8.0   # ⭐ ideia 12: segundos do video OFICIAL do vendedor no cartao
 
 
+# ⭐ 30/09/2026 21h — CAMADA DE INAUGURACAO (aprovada pelo dono: "gostei
+# demais"). A mesma festa do site e dos e-mails dentro do anuncio:
+#   0-1,4 s  o balao do canal sobe e pousa no canto da foto (gancho visual,
+#            sem preco nos 2 primeiros segundos — acervo marketing-e-oferta)
+#   3,5 s    o preco ESTOURA com os lanca-confetes do site (baloes/lanca)
+#   prova    o "antes" vira a ETIQUETA dourada de inauguracao, riscada
+#   15 s     o ENVELOPE-convite dos e-mails ao lado do "link na bio"
+#   selo     "INAUGURACAO" ao lado do "preco conferido" ate' INAUGURACAO_ATE
+# Tudo dentro da zona segura (SEG_*); enfeite so' na margem esquerda, que o
+# TikTok nao cobre.
+BALOES = RAIZ / "paginas" / "baloes"
+# ⚠️ o NOME do arquivo engana: `canal_pago_menos` e' o CIFRAO e `canal_achadinhos_instantaneos`
+# o CARRINHO. Aqui vale o AVATAR de cada perfil (prints do dono, 30/09).
+BALAO_DO_CANAL = {"PAGO MENOS": "canal_achadinhos_instantaneos", "ACHADINHO TOTAL": "canal_pago_menos",
+                  "ACHEI PRA VOCÊ": "inaug_lupa"}
+INAUGURACAO_ATE = "2026-10-07"
+_CACHE: dict = {}
+
+
+def _balao(nome: str, altura: int, corte: tuple | None = None) -> Image.Image:
+    chave = (nome, altura, corte)
+    if chave not in _CACHE:
+        im = Image.open(BALOES / f"{nome}.webp").convert("RGBA")
+        if corte:
+            im = im.crop(corte)
+        im = im.crop(im.getbbox())
+        _CACHE[chave] = im.resize((max(1, round(im.width * altura / im.height)), altura), Image.LANCZOS)
+    return _CACHE[chave]
+
+
+def _colar(im: Image.Image, peca: Image.Image, cx: float, cy: float, ang: float = 0, alfa: float = 1):
+    if alfa <= 0:
+        return
+    if ang:
+        peca = peca.rotate(ang, expand=True, resample=Image.BICUBIC)
+    if alfa < 1:
+        peca = peca.copy()
+        peca.putalpha(peca.split()[3].point(lambda v: int(v * alfa)))
+    im.paste(peca, (int(cx - peca.width / 2), int(cy - peca.height / 2)), peca)
+
+
+def _confete(im: Image.Image, t: float, semente: int, cx: float, cy: float):
+    """Os dois cones do site disparam dos lados do preco (t = s desde o disparo)."""
+    import math
+    import random
+    if not (0 <= t <= 2.2):
+        return
+    pecas = sorted((BALOES / "lanca").glob("p*.webp"))
+    rnd = random.Random(semente)
+    for lado, x0 in ((-1, cx - 360), (1, cx + 300)):
+        _colar(im, _balao("lanca/cone", 110), x0, cy + 40, 35 * -lado, 1 - max(0, t - 1.6) / 0.6)
+        for _ in range(26):
+            f = pecas[rnd.randrange(len(pecas))]
+            ang = math.radians(rnd.uniform(55, 88))
+            v = rnd.uniform(900, 1500)
+            spin = rnd.uniform(-400, 400)
+            tam = rnd.randint(26, 44)
+            x = x0 - lado * math.cos(ang) * v * t * 0.55
+            y = cy - math.sin(ang) * v * t + 1300 * t * t
+            if SEG_TOPO < y < SEG_BASE:
+                _colar(im, _balao(f"lanca/{f.stem}", tam), x, y, spin * t, 1 - max(0, t - 1.5) / 0.7)
+
+
 # ⭐ 30/09/2026 19:50 — ZONA SEGURA DO TIKTOK (print do dono no iPhone: topo
 # embaixo da BUSCA, preco embaixo do @/legenda, "caiu pela metade" e o -56%
 # embaixo dos botoes da direita). Medido nos prints (924x2000 -> 1080x1920):
@@ -175,8 +238,10 @@ def _caber(dr, txt, nome, tam, larg, minimo=24):
 
 def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
            demo: Image.Image | None = None) -> Image.Image:
+    import math
     im = fundo.copy()
     dr = ImageDraw.Draw(im)
+    festa = bool(d.get("festa"))
     # topo (logo abaixo da busca): marca + "achado do dia" numa linha so'
     marca = d.get("marca") or "PAGO MENOS"
     topo = f"{marca}  ·  ACHADO DO DIA #{d['numero']}" if d.get("numero") else marca
@@ -184,9 +249,13 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     fs = fonte("Poppins-Bold.ttf", 26)
     selo = f"preço conferido {d['hora']}"
     sw = dr.textlength(selo, font=fs) + 40
-    x0 = (W - sw) / 2
+    iw = dr.textlength("INAUGURAÇÃO", font=fs) + 60 if festa else 0
+    x0 = (W - sw - iw) / 2 + iw
     y0 = SEG_TOPO + 56
-    pilula(dr, x0 - 24, y0, x0 + sw + 24, y0 + 48, (36, 34, 44))
+    if festa:   # a pilula vermelha da festa, colada no selo de confianca
+        pilula(dr, x0 - iw - 16, y0, x0 - 20, y0 + 48, (200, 46, 60))
+        dr.text((x0 - iw + 6, y0 + 5), "INAUGURAÇÃO", font=fs, fill=BRANCO)
+    pilula(dr, x0 - 24 + (12 if festa else 0), y0, x0 + sw + 24, y0 + 48, (36, 34, 44))
     dr.line([(x0 + 2, y0 + 26), (x0 + 11, y0 + 36), (x0 + 27, y0 + 14)], fill=(88, 200, 120), width=5, joint="curve")
     dr.text((x0 + 40, y0 + 5), selo, font=fs, fill=BRANCO)
 
@@ -203,16 +272,33 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         a = Image.blend(a, b, (frac - 0.85) / 0.15)
     if demo is not None:
         a = demo.resize((lado, lado)) if demo.size != (lado, lado) else demo
-    mask = Image.new("L", (lado, lado), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, lado - 1, lado - 1], 44, fill=255)
     y_foto = y0 + 76
-    im.paste(a, ((W - lado) // 2, y_foto), mask)
     y_base_foto = y_foto + lado
+    entra = ease((t - 0.7) / 0.5) if festa else 1.0      # a foto entra depois do balao
+    if entra > 0.02:
+        ld = max(2, int(lado * (0.6 + 0.4 * entra)))
+        mask = Image.new("L", (ld, ld), 0)
+        ImageDraw.Draw(mask).rounded_rectangle([0, 0, ld - 1, ld - 1], max(1, int(44 * ld / lado)),
+                                               fill=int(255 * min(1.0, entra * 1.4)))
+        im.paste(a.resize((ld, ld)), ((W - ld) // 2, y_foto + (lado - ld) // 2), mask)
 
-    # faixa ouro sobre a base da foto: gancho (0-3 s) e, no fim, "link na bio"
+    if festa:
+        # enfeite na margem ESQUERDA (o TikTok nao cobre), balancando
+        _colar(im, _balao("inaug_estrela", 120), 92, y_foto + 420 + 10 * math.sin(t * 1.7), 6 * math.sin(t * 1.3))
+        _colar(im, _balao("inaug_laco", 100), 96, y_foto + 250 + 8 * math.sin(t * 1.4 + 1), 5 * math.sin(t * 1.1 + 2))
+        # o balao do canal sobe grande (0-0,9 s) e pousa no canto da foto
+        v, pousa = ease(t / 0.9), ease((t - 0.9) / 0.5)
+        alt = int(520 - 360 * pousa)
+        cx = W / 2 + (100 - W / 2) * pousa           # pousa na MARGEM, fora da foto
+        cy = (SEG_BASE + 200) - (SEG_BASE + 200 - (y_foto + lado * 0.45)) * v
+        cy += ((y_foto + 70) - (y_foto + lado * 0.45)) * pousa + 6 * math.sin(t * 2)
+        _colar(im, _balao(BALAO_DO_CANAL.get(marca, "inaug_lupa"), alt), cx, cy, -8 * pousa + 3 * math.sin(t * 1.5))
+
+    # faixa ouro sobre a base da foto: gancho e, no fim, o convite
     faixa = None
-    if t < 3.2:
-        e = ease(t / 0.4) * (1 - ease((t - 2.8) / 0.4))
+    ini = 1.2 if festa else 0.0
+    if ini <= t < 3.2:
+        e = ease((t - ini) / 0.4) * (1 - ease((t - 2.8) / 0.4))
         if d.get("gancho"):
             faixa = d["gancho"]
         elif d.get("provada"):
@@ -223,14 +309,19 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         e = ease((t - 15) / 0.5)
         faixa = "LINK NA BIO"
     if faixa:
-        fg = _caber(dr, faixa, "Anton-Regular.ttf", 96, SEG_LARG - 90, 50)
+        conv = festa and t >= 15
+        fg = _caber(dr, faixa, "Anton-Regular.ttf", 96, SEG_LARG - 90 - (170 if conv else 0), 50)
         tw = dr.textlength(faixa, font=fg)
+        desl = 80 if conv else 0            # abre espaco pro envelope
         camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         cd = ImageDraw.Draw(camada)
         yf = y_base_foto - 70
-        pilula(cd, (W - tw) / 2 - 45, yf, (W + tw) / 2 + 45, yf + 132, OURO + (int(255 * e),))
-        cd.text(((W - tw) / 2, yf + 6), faixa, font=fg, fill=FUNDO + (int(255 * e),))
+        pilula(cd, (W - tw) / 2 - 45 + desl, yf, (W + tw) / 2 + 45 + desl, yf + 132, OURO + (int(255 * e),))
+        cd.text(((W - tw) / 2 + desl, yf + 6), faixa, font=fg, fill=FUNDO + (int(255 * e),))
         im.paste(camada, (0, 0), camada)
+        if conv:    # o envelope-convite dos e-mails, chegando
+            _colar(im, _balao("chef_envelope_coracao", 170, (0, 0, 1254, 860)),
+                   (W - tw) / 2 - 45 + desl - 80, yf + 66 + 60 * (1 - e), -10 + 4 * math.sin(t * 2), e)
         dr = ImageDraw.Draw(im)
 
     # nome + confianca da loja
@@ -246,7 +337,34 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         y = int(y_base_foto + 184 + 20 * (1 - e))
         fa = fonte("Poppins-Bold.ttf", 40)
         fp = fonte("Anton-Regular.ttf", 128)
-        if d.get("provada"):
+        preco = reais(d["agora"])
+        if d.get("provada") and festa:
+            # a ETIQUETA de inauguracao carrega o "antes", riscado, balancando
+            tag = _balao("inaug_etiqueta", 160, (0, 90, 360, 318)).copy()
+            pw = dr.textlength(preco, font=fp)
+            gx = (W - (tag.width + 16 + pw)) / 2
+            td = ImageDraw.Draw(tag)
+            f1, f2 = fonte("Poppins-Bold.ttf", 26), fonte("Poppins-Bold.ttf", 38)
+            antes = reais(d["ref"])
+            w2, cxt = td.textlength(antes, font=f2), tag.width * 0.45
+            td.text((cxt - td.textlength("antes", font=f1) / 2, tag.height * 0.16), "antes", font=f1, fill=FUNDO)
+            td.text((cxt - w2 / 2, tag.height * 0.40), antes, font=f2, fill=FUNDO)
+            ly = tag.height * 0.40 + 27
+            td.line([(cxt - w2 / 2 - 4, ly), (cxt + w2 / 2 + 4, ly)], fill=(200, 46, 60), width=5)
+            _colar(im, tag, gx + tag.width / 2, y + 108, -7 + 4 * math.sin((t - 3.5) * 2.2), e)
+            dr = ImageDraw.Draw(im)
+            px = gx + tag.width + 16
+            dr.text((px, y + 36), preco, font=fp, fill=OURO)
+            fb = fonte("Poppins-Bold.ttf", 36)
+            badge = f"-{round(d['queda'] * 100)}%"
+            bw = dr.textlength(badge, font=fb)
+            bx = px + pw - bw - 10
+            pilula(dr, bx - 18, y - 4, bx + bw + 18, y + 48, (200, 46, 60))
+            dr.text((bx, y - 1), badge, font=fb, fill=BRANCO)
+            nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
+            _confete(im, t - 3.5, int(str(d.get("id") or "7")[-6:]), W / 2, y + 100)
+            dr = ImageDraw.Draw(im)
+        elif d.get("provada"):
             antes = f"antes {reais(d['ref'])}"
             fb = fonte("Poppins-Bold.ttf", 36)
             badge = f"-{round(d['queda'] * 100)}%"
@@ -258,10 +376,11 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             pilula(dr, bx - 18, y - 2, bx + bw + 18, y + 50, (200, 46, 60))
             dr.text((bx, y + 1), badge, font=fb, fill=BRANCO)
             nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
+            centro(dr, y + 36, preco, fp, OURO)
         else:
             centro(dr, y, "preço de hoje", fa, CINZA)
             nota = "sem desconto inventado: é o preço da loja agora"
-        centro(dr, y + 36, reais(d["agora"]), fp, OURO)
+            centro(dr, y + 36, preco, fp, OURO)
         centro(dr, min(y + 214, SEG_BASE - 26), nota, fonte("Poppins-Bold.ttf", 22), CINZA)
     return im
 
@@ -289,6 +408,7 @@ def narracao(d: dict, destino: Path) -> None:
         partes = [(f"{abre}Olha isso! {d['nome']}.", "+14%", 0.25),
                   (f"Hoje... tá {hoje}.", "-4%", 0.35),
                   ("O link tá na bio!", "+12%", 0.0)]
+    partes = d.get("partes") or partes        # roteiro pronto (teaser da inauguracao)
     txt = " ".join(p[0] for p in partes)
     # Mesma voz dos canais de corte: edge-tts -> ChatterboxVC com o timbre da
     # amostra (motor D do engine/voz_clonada), uma parte por vez. Sem amostra ou
@@ -372,6 +492,10 @@ def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = 
     if canal:
         d["marca"] = MARCAS.get(canal, d["marca"])
         d["numero"] = numero or proximo_numero(canal)
+    # ⭐ semana de inauguracao: a festa entra sozinha e sai sozinha no dia 8
+    from datetime import date as _date
+    d.setdefault("festa", _date.today().isoformat() <= INAUGURACAO_ATE)
+    d.setdefault("id", pid)
     tmp = Path(tempfile.mkdtemp())
     cartoes = [cartao(baixar(u), 820) for u in d["imagens"]]
     voz = tmp / "voz.mp3"

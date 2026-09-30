@@ -29,10 +29,13 @@ def main() -> None:
     p.add_argument("--simular", action="store_true")
     a = p.parse_args()
     pedidos: dict[str, dict[int, str]] = {}
+    global SUFIXO
+    SUFIXO = {}
     for it in [i.strip() for i in a.itens.split("||") if i.strip()]:
-        alvo, quando = it.split("@@")
+        alvo, quando, *resto = it.split("@@")      # 3o campo opcional: sufixo do video (ex.: _v2)
         canal, n = alvo.split(":")
         pedidos.setdefault(canal.strip(), {})[int(n)] = quando.strip()
+        SUFIXO[(canal.strip(), int(n))] = resto[0].strip() if resto else ""
     falhou = False
     for canal, nums in pedidos.items():
         c = cr.CANAIS[canal]
@@ -54,7 +57,7 @@ def main() -> None:
             n = int(m.group(1))
             f = next(f for f in reversed(FEITAS) if f["canal"] == canal and f.get("numero") == n)
             url = (f"https://github.com/poisonb9/Modo-Futuro/releases/download/ofertas-{f['dia'][:7]}/"
-                   f"{f['dia']}_{canal.replace('.', '-')}_{f['id']}.mp4")
+                   f"{f['dia']}_{canal.replace('.', '-')}_{f['id']}{SUFIXO.get((canal, n), '')}.mp4")
             titulo = (x.get("text") or "").splitlines()[0][:90]
             d = ab.consultar(tok, M, {"input": {"id": x["id"], "dueAt": due, "text": x.get("text"),
                                                 "mode": "customScheduled", "schedulingType": "automatic",

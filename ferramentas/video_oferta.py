@@ -331,7 +331,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         _colar(im, _balao(per, 330), AVATAR_X + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
                2 * math.sin(t * 1.1), ease((t - 0.4) / 0.6))
         # 3. sacola ao lado do cartao (sai quando a mao chega) e laco = presente
-        _colar(im, _balao("loja_sacola", 180, (0, 0, 454, 560)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),
+        _colar(im, _balao("loja_sacola", 180, (0, 0, 970, 610)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),
                6 + 4 * math.sin(t * 1.1 + 2), 1 - ease((t - 14.6) / 0.4))
         _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
 
@@ -427,6 +427,15 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             _colar(im, tag, gx + tag.width / 2, y + 108, -7 + 4 * math.sin((t - PRECO_T) * 2.2), e)
             dr = ImageDraw.Draw(im)
             px = gx + tag.width + 16
+            # ⭐ 30/09 (arte do dono): a EXPLOSAO vermelha atras do preco — o heroi
+            # ganha palco. Preco dourado com sombra escura pra ler no vermelho.
+            asc, desc = fp.getmetrics()
+            ex = _balao("loja_explosao", int((asc + desc) * 1.1))
+            larg_ex = int(pw + 120)
+            ex = ex.resize((larg_ex, ex.height))
+            _colar(im, ex, px + pw / 2, y + 36 + (asc + desc) / 2 + 6, 2 * math.sin((t - PRECO_T) * 3), e)
+            dr = ImageDraw.Draw(im)
+            dr.text((px + 5, y + 41), preco, font=fp, fill=(60, 8, 12))
             dr.text((px, y + 36), preco, font=fp, fill=OURO)
             fb = fonte("Poppins-Bold.ttf", 36)
             badge = f"-{round(d['queda'] * 100)}%"

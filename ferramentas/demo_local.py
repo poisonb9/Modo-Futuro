@@ -148,7 +148,7 @@ def conferir(v: dict, nome: str, foto_url: str) -> dict:
     except Exception as e:
         return {"erro": f"foto: {e}"}
     rot = keys.gemini()
-    for _ in range(min(5, len(rot))):
+    for _ in range(len(rot)):  # 30/09 18:55: eram 5 — as 5 primeiras sem cota fechavam a porta com 18 chaves boas
         k = rot.proxima().strip()
         r = requests.post(
             f"https://generativelanguage.googleapis.com/v1beta/models/{MODELO}:generateContent?key={k}",
@@ -224,7 +224,7 @@ def conferir_quadros(trecho: Path, foto_url: str, nome: str) -> dict:
                                            "data": base64.b64encode(q.read_bytes()).decode()}})
     partes.append({"text": PEDIDO_QUADROS.format(nome=nome)})
     rot = keys.gemini()
-    for _ in range(min(5, len(rot))):
+    for _ in range(len(rot)):  # 30/09 18:55: eram 5 — as 5 primeiras sem cota fechavam a porta com 18 chaves boas
         k = rot.proxima().strip()
         r = requests.post(
             f"https://generativelanguage.googleapis.com/v1beta/models/{MODELO}:generateContent?key={k}",

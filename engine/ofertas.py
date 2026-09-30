@@ -91,8 +91,28 @@ def avaliar(pid: str, agora: dict, serie: list, nome: str) -> tuple[dict | None,
             "vendas": agora["vendas"]}, "ok"
 
 
-def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
-    """{canal: [ofertas]} — POR_DIA por canal, maiores quedas primeiro, alternando."""
+def _com_video() -> set[str]:
+    """Produtos com video pra demonstracao: oficial do vendedor OU trecho do
+    YouTube aprovado pelo Gemini (estado/demos_drive.json, item 16)."""
+    ids = set()
+    try:
+        agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
+        ids |= {pid for pid, a in agora.items() if a.get("video")}
+    except (OSError, ValueError):
+        pass
+    try:
+        ids |= set(json.load(open(RAIZ / "estado" / "demos_drive.json", encoding="utf-8")))
+    except (OSError, ValueError):
+        pass
+    return ids
+
+
+def candidatas(dia: date | None = None) -> list[dict]:
+    """TODAS as ofertas que passam nas guardas hoje, na ordem de preferencia.
+
+    Ordem: maior queda provada. `tem_video` e' so' informacao (o demo_local
+    usa pra saber pra quem ainda falta video).
+    """
     dia = dia or date.today()
     agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
     nomes = json.load(open(RAIZ / "estado" / "nomes_curtos.json", encoding="utf-8"))
@@ -106,7 +126,19 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
         o, _ = avaliar(pid, a, serie.get(pid, []), nomes[pid])
         if o:
             boas.append(o)
+    video = _com_video()
+    for o in boas:
+        o["tem_video"] = o["id"] in video
+    # ⛔ 30/09/2026 (dono): a ordem e' SEMPRE a melhor oferta (maior queda
+    # provada). Ter video NAO passa ninguem na frente — o trabalho e' conseguir
+    # o video pra oferta escolhida, nao escolher a oferta pelo video.
     boas.sort(key=lambda o: o["queda"], reverse=True)
+    return boas
+
+
+def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
+    """{canal: [ofertas]} — POR_DIA por canal, maiores quedas primeiro, alternando."""
+    boas = candidatas(dia)
     saida: dict[str, list[dict]] = {c: [] for c in CANAIS}
     for i, o in enumerate(boas[:POR_DIA * len(CANAIS)]):
         saida[CANAIS[i % len(CANAIS)]].append(o)

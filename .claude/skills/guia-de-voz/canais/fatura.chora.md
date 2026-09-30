@@ -1,14 +1,15 @@
-# @fatura.chora — achadinhos (Fase 2, ainda sem Buffer)
+# @fatura.chora — achadinhos (canal de oferta)
 
-⚠️ RASCUNHO: canal ainda fora do motor (`motor=False`). Tom e voz a definir
-com o dono antes do primeiro corte.
+Buffer ligado em 30/09/2026. Quem publica é o `ferramentas/ofertas_do_dia.py`,
+não o motor de corte (`motor=False`).
 
 ## Tom
 Achado que cabe no bolso, com bom humor sobre a fatura do cartão. Preço e
 utilidade primeiro; a piada é o nome do canal, não o texto inteiro.
 
 ## Voz
-A definir com o dono.
+`pt-BR-AntonioNeural` (edge-tts), a mesma do `video_oferta.py` nos três
+canais de oferta.
 
 ## Pronúncia
 ⛔ NÃO ALTERAR A PRONÚNCIA (decisão do dono, 26/09/2026): os nomes são

@@ -36,6 +36,29 @@ import video_oferta  # noqa: E402
 REPO = "poisonb9/Modo-Futuro"
 
 
+def conferir_buffer(canais: list[str]) -> None:
+    """So' LE: o secret de cada canal chegou e abre o canal certo no Buffer?
+    Roda no ensaio, pra o dia de ligar nao ter surpresa. Nada e' agendado."""
+    import os
+    import agendar_buffer as ab
+    from engine import canais_registro as cr
+    for canal in canais:
+        c = cr.CANAIS[canal]
+        token = (os.environ.get(c.env) or "").strip()
+        if not token:
+            print(f"  buffer {canal}: secret {c.env} AUSENTE")
+            continue
+        os.environ["CANAL_ESPERADO"] = canal
+        try:
+            _, cid, posts = ab.contexto_buffer(token, fresco=True)
+            fila = sum(1 for x in posts if x.get("status") != "sent")
+            print(f"  buffer {canal}: OK (canal {cid}, {fila} na fila)")
+        except SystemExit as e:
+            print(f"  buffer {canal}: ERRO {str(e)[:120]}")
+        except Exception as e:  # noqa: BLE001
+            print(f"  buffer {canal}: ERRO {type(e).__name__}: {str(e)[:120]}")
+
+
 def agendar(por_canal: dict[str, list[dict]]) -> None:
     """Cada video na fila do Buffer do SEU canal. Um canal que falha nao
     derruba os outros — mas a falha aparece (exit 1 no fim)."""
@@ -104,6 +127,8 @@ def main() -> None:
         for c, os_ in escolha.items():
             for o in os_:
                 print(f"  {c}: -{o['queda']:.0%} {o['nome']} R$ {o['agora']:.2f}")
+        if a.ensaio:
+            conferir_buffer(list(escolha))
         return
     subprocess.run(["gh", "release", "view", tag], capture_output=True) .returncode == 0 or \
         subprocess.run(["gh", "release", "create", tag, "--title", tag, "--notes",

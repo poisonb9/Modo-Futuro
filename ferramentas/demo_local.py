@@ -278,6 +278,8 @@ def fazer(pid: str) -> bool:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--id", action="append")
+    ap.add_argument("--estoque", type=int, default=0,
+                    help="varre as N melhores elegiveis sem video (nao so' as de hoje)")
     a = ap.parse_args()
     # ⛔ A trava e' o botao de parar do DONO. So' ele solta (apagando o
     # arquivo). Nenhum codigo decide ignorar.
@@ -285,10 +287,26 @@ def main() -> None:
         registrar("parado", motivo=json.loads(TRAVA.read_text(encoding="utf-8")).get("motivo"),
                   obs="botao de parar do dono (estado/demo_youtube_parado.json)")
         return
+    from engine import ofertas
     if a.id:
         pids = a.id
+    elif a.estoque:
+        # ⭐ 30/09/2026: varre TODAS as elegiveis (nao so' as de hoje) pra o
+        # video ja' existir quando o produto for escolhido. Pula quem ja' tem
+        # video e quem ja' foi tentado sem sucesso nos ultimos 7 dias.
+        tentados = set()
+        if REG.exists():
+            corte = (datetime.now().timestamp() - 7 * 86400)
+            for l in REG.read_text(encoding="utf-8").splitlines():
+                try:
+                    x = json.loads(l)
+                except ValueError:
+                    continue
+                if x.get("evento") == "sem_demo" and                         datetime.fromisoformat(x["quando"]).timestamp() > corte:
+                    tentados.add(x.get("pid"))
+        pids = [o["id"] for o in ofertas.candidatas(date.today())
+                if not o["tem_video"] and o["id"] not in tentados][:a.estoque]
     else:
-        from engine import ofertas
         pids = [o["id"] for os_ in ofertas.do_dia(date.today()).values() for o in os_]
     registrar("rodada", produtos=len(pids))
     for pid in pids:

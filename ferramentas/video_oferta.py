@@ -26,7 +26,7 @@ from datetime import datetime, timedelta, timezone
 from io import BytesIO
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
@@ -207,7 +207,23 @@ def _balao(nome: str, altura: int, corte: tuple | None = None) -> Image.Image:
     return _CACHE[chave]
 
 
-def _colar(im: Image.Image, peca: Image.Image, cx: float, cy: float, ang: float = 0, alfa: float = 1):
+def _brilho(peca: Image.Image, fase: float) -> Image.Image:
+    """⭐ 30/09 (premium, item 3): um REFLEXO de luz atravessa a peca dourada,
+    como vitrine de joalheria. `fase` 0..1 = posicao da faixa; fora disso, nada."""
+    if not (0 <= fase <= 1):
+        return peca
+    w, h = peca.size
+    faixa = Image.new("L", (w, h), 0)
+    x = -0.4 * w + fase * 1.8 * w
+    ImageDraw.Draw(faixa).polygon([(x, 0), (x + w * 0.18, 0), (x + w * 0.18 - h * 0.6, h), (x - h * 0.6, h)], fill=120)
+    faixa = ImageChops.multiply(faixa.filter(ImageFilter.GaussianBlur(max(2, w * 0.03))), peca.split()[3])
+    luz = Image.new("RGBA", (w, h), (255, 250, 230, 0))
+    luz.putalpha(faixa)
+    return Image.alpha_composite(peca, luz)
+
+
+def _colar(im: Image.Image, peca: Image.Image, cx: float, cy: float, ang: float = 0, alfa: float = 1,
+           sombra: bool = True):
     if alfa <= 0:
         return
     if ang:
@@ -215,7 +231,18 @@ def _colar(im: Image.Image, peca: Image.Image, cx: float, cy: float, ang: float 
     if alfa < 1:
         peca = peca.copy()
         peca.putalpha(peca.split()[3].point(lambda v: int(v * alfa)))
-    im.paste(peca, (int(cx - peca.width / 2), int(cy - peca.height / 2)), peca)
+    x, y = int(cx - peca.width / 2), int(cy - peca.height / 2)
+    # ⭐ 30/09 (premium, item 2): SOMBRA suave embaixo — o balao FLUTUA em vez
+    # de parecer colado. So' nas pecas grandes (confete nao precisa).
+    if sombra and peca.height >= 70:
+        a = peca.split()[3].point(lambda v: int(v * 0.42))
+        pad = 30
+        sm = Image.new("L", (peca.width + 2 * pad, peca.height + 2 * pad), 0)
+        sm.paste(a, (pad, pad))
+        sm = sm.filter(ImageFilter.GaussianBlur(14))
+        preto = Image.new("RGB", sm.size, (0, 0, 0))
+        im.paste(preto, (x - pad + 10, y - pad + 22), sm)
+    im.paste(peca, (x, y), peca)
 
 
 def _confete(im: Image.Image, t: float, semente: int, cx: float, cy: float):
@@ -243,7 +270,7 @@ def _confete(im: Image.Image, t: float, semente: int, cx: float, cy: float):
             x = x0 - lado * math.cos(ang) * v * t * 0.55
             y = cy - math.sin(ang) * v * t + 1300 * t * t
             if SEG_TOPO < y < SEG_BASE:
-                _colar(im, _balao(f"lanca/{f.stem}", tam), x, y, spin * t, 1 - max(0, t - 1.5) / 0.7)
+                _colar(im, _balao(f"lanca/{f.stem}", tam), x, y, spin * t, 1 - max(0, t - 1.5) / 0.7, sombra=False)
 
 
 # ⭐ 30/09/2026 19:50 — ZONA SEGURA DO TIKTOK (print do dono no iPhone: topo
@@ -255,6 +282,7 @@ def _confete(im: Image.Image, t: float, semente: int, cx: float, cy: float):
 #   centrada de no maximo SEG_LARG (160..920).
 SEG_TOPO, SEG_BASE, SEG_LARG = 262, 1380, 740
 PRECO_T = 2.0
+ROLA_S = 0.9       # o preco rola do "antes" ate' o de hoje
 
 
 def _caber(dr, txt, nome, tam, larg, minimo=24):
@@ -288,7 +316,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     dr.text((x0 + 40, y0 + 5), selo, font=fs, fill=BRANCO)
 
     # foto: cartao menor, centrado, inteiro fora da coluna de icones
-    lado = 480
+    lado = 440
     n = min(len(cartoes), 4)
     k = int(t // 3.2) % n
     frac = (t % 3.2) / 3.2
@@ -338,7 +366,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
                6 + 4 * math.sin(t * 1.1 + 2), 1 - ease((t - PRECO_T - 0.4) / 0.4))
         # ⭐ 30/09 (arte do dono): logo depois do preco, o SELO "preco conferido"
         # toma o lugar da sacola — a prova no momento da decisao. Sai quando a mao entra.
-        selo = ease((t - PRECO_T - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
+        selo = ease((t - PRECO_T - ROLA_S - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
         _colar(im, _balao("selo_preco_conferido", 215), esq - 45,
                y_foto + lado - 95 + 30 * (1 - selo) + 6 * math.sin(t * 1.5), -8 + 3 * math.sin(t * 1.2), selo)
         _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
@@ -393,7 +421,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     # nome + confianca da loja
     # ⭐ 30/09 (dono: "a descricao do produto esta' muito pequena"): 52 px, ate'
     # 2 linhas partidas no meio (acervo: "garantir que o texto seja legivel").
-    y = y_base_foto + 76
+    y = y_base_foto + 92
     fn = fonte("Poppins-Bold.ttf", 52)
     linhas = [d["nome"]]
     if dr.textlength(d["nome"], font=fn) > SEG_LARG:
@@ -402,9 +430,28 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
                                                       - dr.textlength(" ".join(pal[i:]), font=fn)))
         linhas = [" ".join(pal[:k]), " ".join(pal[k:])]
     fn = _caber(dr, max(linhas, key=lambda l: dr.textlength(l, font=fn)), "Poppins-Bold.ttf", 52, SEG_LARG, 36)
+    # ⭐ 30/09 (arte do dono, premium item 7): a PLACA preta com friso dourado
+    # atras do nome, e a parte que diz O QUE O PRODUTO FAZ (depois de "com"/"para")
+    # em dourado. O nome continua texto limpo — informacao, nao enfeite.
+    alt_nome = len(linhas) * (fn.size + 10) + 34
+    placa = _balao("placa_nome_produto", 100).resize((SEG_LARG + 60, alt_nome))
+    im.paste(placa, (int((W - placa.width) / 2), int(y - 20)), placa)
+    dr = ImageDraw.Draw(im)
+    chave = ""
+    for sep in (" com ", " para "):
+        if sep in d["nome"]:
+            chave = d["nome"].split(sep, 1)[1]
+            chave = " ".join(chave.split()[:3])
+            break
+    douradas = set(chave.split())          # palavra a palavra: a chave pode quebrar de linha
     for li in linhas:
-        centro(dr, y, li, fn, BRANCO)
+        xw = (W - dr.textlength(li, font=fn)) / 2
+        for k, pal in enumerate(li.split()):
+            pedaco = pal + (" " if k < len(li.split()) - 1 else "")
+            dr.text((xw, y), pedaco, font=fn, fill=OURO if pal in douradas else BRANCO)
+            xw += dr.textlength(pedaco, font=fn)
         y += fn.size + 10
+    y += 14
     if d.get("nota") and d.get("vendas"):
         loja = f"loja nota {str(d['nota']).replace('.', ',')}  ·  {vendas_curto(d['vendas'])} vendidos"
         centro(dr, y + 2, loja, fonte("Poppins-Bold.ttf", 28), CINZA)
@@ -432,6 +479,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             td.text((cxt - w2 / 2, tag.height * 0.40), antes, font=f2, fill=FUNDO)
             ly = tag.height * 0.40 + 27
             td.line([(cxt - w2 / 2 - 4, ly), (cxt + w2 / 2 + 4, ly)], fill=(200, 46, 60), width=5)
+            tag = _brilho(tag, ((t - PRECO_T) % 3.0 - 1.2) / 0.9)
             _colar(im, tag, gx + tag.width / 2, y + 108, -7 + 4 * math.sin((t - PRECO_T) * 2.2), e)
             dr = ImageDraw.Draw(im)
             px = gx + tag.width + 16
@@ -441,10 +489,18 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             ex = _balao("loja_explosao", int((asc + desc) * 1.1))
             larg_ex = int(pw + 120)
             ex = ex.resize((larg_ex, ex.height))
-            _colar(im, ex, px + pw / 2, y + 36 + (asc + desc) / 2 + 6, 2 * math.sin((t - PRECO_T) * 3), e)
+            # ⭐ 30/09 (premium, itens 4 e 6): o numero ROLA do "antes" ate' o de
+            # hoje em ROLA_S — a queda que medimos, acontecendo na frente de quem
+            # ve. SO' DEPOIS estouram a explosao, a pilula e o confete.
+            rola = ease((t - PRECO_T) / ROLA_S)
+            festa_p = ease((t - PRECO_T - ROLA_S) / 0.3)
+            valor = d["ref"] + (d["agora"] - d["ref"]) * rola
+            mostra = preco if rola >= 1 else reais(valor)
+            ex = _brilho(ex, ((t - PRECO_T - ROLA_S) % 3.0) / 0.9)
+            _colar(im, ex, px + pw / 2, y + 36 + (asc + desc) / 2 + 6, 2 * math.sin((t - PRECO_T) * 3), festa_p)
             dr = ImageDraw.Draw(im)
-            dr.text((px + 5, y + 41), preco, font=fp, fill=(60, 8, 12))
-            dr.text((px, y + 36), preco, font=fp, fill=OURO)
+            dr.text((px + 5, y + 41), mostra, font=fp, fill=(60, 8, 12))
+            dr.text((px, y + 36), mostra, font=fp, fill=OURO if rola >= 1 else BRANCO)
             fb = fonte("Poppins-Bold.ttf", 36)
             badge = f"-{round(d['queda'] * 100)}%"
             bw = dr.textlength(badge, font=fb)
@@ -458,10 +514,10 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             py2 = pil.height * 0.60 - (by0 + by1) / 2         # (a pilula sobe pra direita)
             pd.text((px2 + 3, py2 + 3), badge, font=fb2, fill=(70, 5, 10))
             pd.text((px2, py2), badge, font=fb2, fill=BRANCO)
-            _colar(im, pil, bx + bw / 2, y + 16, 0, e)
+            _colar(im, pil, bx + bw / 2, y + 16, 0, festa_p)
             dr = ImageDraw.Draw(im)
             nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
-            _confete(im, t - PRECO_T, int(str(d.get("id") or "7")[-6:]), W / 2, y + 100)
+            _confete(im, t - PRECO_T - ROLA_S, int(str(d.get("id") or "7")[-6:]), W / 2, y + 100)
             dr = ImageDraw.Draw(im)
         elif d.get("provada"):
             antes = f"antes {reais(d['ref'])}"

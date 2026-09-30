@@ -2720,7 +2720,9 @@ def do_video_ofertas(reais: dict) -> dict:
         chave = _chave_da_pagina(canal)
         # ⭐ 30/09/2026: os 4 do dia (era 2) e cada cartao leva o numero do
         # "Achado do dia #N" — o mesmo da legenda e do video.
-        meus = [f for f in reversed(feitas) if f.get("canal") == canal][:4]
+        # ⛔ 30/09/2026: bloqueado pelo dono (ofertas.BLOQUEADOS) nao aparece
+        meus = [f for f in reversed(feitas) if f.get("canal") == canal
+                and str(f.get("id")) not in getattr(ofertas, "BLOQUEADOS", ())][:4]
         cartoes = [dict(c, achado=f.get("numero")) for f in meus
                    for c in reais.get(chave, []) if c.get("id") == f["id"]]
         if cartoes:

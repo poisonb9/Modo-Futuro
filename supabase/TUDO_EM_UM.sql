@@ -44,7 +44,8 @@ create table if not exists clique (
   id      bigint generated always as identity primary key,
   quando  timestamptz not null default now(),
   canal   text not null references canal(nome_buffer) on delete cascade,
-  tipo    text not null check (tipo in ('link','produto')),
+  -- 'alerta' (botao avise-me): supabase/14, 30/09/2026
+  tipo    text not null check (tipo in ('link','produto','alerta')),
   rotulo  text not null
 );
 

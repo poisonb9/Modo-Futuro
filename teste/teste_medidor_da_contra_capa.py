@@ -88,7 +88,7 @@ checar('banco: "truque.importado"' in PAGINA,
        "achadinho.make -> truque.importado")
 checar('banco: "cozinha.importada"' in PAGINA,
        "cozinha.internacional -> cozinha.importada")
-checar(PAGINA.count('banco: "') == 7, "os 7 canais tem nome de banco")
+checar(PAGINA.count('banco: "') == 8, "os 8 canais tem nome de banco")  # 30/09: +achadinhototal (c8)
 checar("canal: CANAIS[atual].banco" in PAGINA, "e e' ele que e' enviado")
 
 print("\n4. o banco so' deixa fazer o que deve")
@@ -114,7 +114,7 @@ checar("select" not in POLITICAS.split("visita_conta")[1].split(";")[0],
        "NEGATIVO: a politica de visita e' so' de INSERT")
 
 print("\n5. o esquema guarda o que a pagina manda")
-checar("tipo    text not null check (tipo in ('link','produto'))" in ESQUEMA,
+checar("tipo    text not null check (tipo in ('link','produto','alerta'))" in ESQUEMA,
        "clique tem `tipo`")
 checar("rotulo  text not null" in ESQUEMA, "e `rotulo`, nao id de botao")
 checar("link_id" not in ESQUEMA,

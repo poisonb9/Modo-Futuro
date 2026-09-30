@@ -270,23 +270,48 @@ def narracao(d: dict, destino: Path) -> None:
     # ⭐ 30/09/2026 (dono: "a dublagem esta' horrivel"): roteiro na ordem do
     # acervo (gancho -> prova -> oferta, FTA "How This Funnel Sold 100,000
     # Books", DEMONSTRADO), frase curta de conversa, e SO' o que a serie prova.
+    # ⭐ ENTONACAO DE VENDA (dono, 30/09: "entonacao propria para vendas", +acervo).
+    # Cada parte com o seu ritmo: acelerar na emocao, PAUSAR, desacelerar no
+    # ponto importante (FTA Jeremy Miner, AFIRMADO); 135-185 palavras/min
+    # (FTA sGakuNs9mT4); voz de IA um pouco acima de 1x soa mais natural
+    # (roboverse987, DEMONSTRADO). (texto, velocidade edge-tts, pausa depois s)
     if d.get("provada"):
         queda = round(float(d["queda"]) * 100)
-        txt = (f"{abre}Olha isso: {d['nome']} caiu {queda} por cento. "
-               f"Eu acompanho o preço dele há {d['dias']} dias, e o normal é {int(r)} reais. "
-               f"Hoje tá {hoje}. Conferi agora há pouco. O link tá na bio.")
+        partes = [(f"{abre}Olha isso! {d['nome']} caiu {queda} por cento.", "+14%", 0.25),
+                  (f"Eu acompanho o preço dele há {d['dias']} dias. O normal é {int(r)} reais.", "+6%", 0.40),
+                  (f"Hoje... tá {hoje}.", "-4%", 0.35),
+                  ("O link tá na bio!", "+12%", 0.0)]
     else:
-        txt = (f"{abre}{d['nome']}. Hoje tá {hoje}. Conferi agora há pouco. "
-               f"O link tá na bio.")
-    # ⭐ Mesma voz dos canais de corte: edge-tts -> ChatterboxVC com o timbre da
-    # amostra (motor D do engine/voz_clonada). Sem amostra ou sem o modelo,
-    # volta pra voz simples — video sem voz nao sai.
+        partes = [(f"{abre}Olha isso! {d['nome']}.", "+14%", 0.25),
+                  (f"Hoje... tá {hoje}.", "-4%", 0.35),
+                  ("O link tá na bio!", "+12%", 0.0)]
+    txt = " ".join(p[0] for p in partes)
+    # Mesma voz dos canais de corte: edge-tts -> ChatterboxVC com o timbre da
+    # amostra (motor D do engine/voz_clonada), uma parte por vez. Sem amostra ou
+    # sem o modelo, volta pra voz simples — video sem voz nao sai.
     amostra = Path(os.environ.get("AMOSTRA_VOZ_OFERTA") or "vozes/bryan_amostra.wav")
     if amostra.exists():
         from engine import voz_clonada
-        wav = destino.with_suffix(".vc.wav")
-        if voz_clonada._falar_d(txt, wav, amostra):
-            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav),
+        pedacos, ok = [], True
+        for k, (frase, vel, pausa) in enumerate(partes):
+            wav = destino.with_name(f"parte{k}.wav")
+            if not voz_clonada._falar_d(frase, wav, amostra, vel):
+                ok = False
+                break
+            pedacos.append((wav, pausa))
+        if ok:
+            lista = destino.with_name("partes.txt")
+            linhas = []
+            for k, (wav, pausa) in enumerate(pedacos):
+                linhas.append(f"file '{wav.as_posix()}'")
+                if pausa:
+                    sil = destino.with_name(f"sil{k}.wav")
+                    subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i",
+                                    "anullsrc=r=24000:cl=mono", "-t", str(pausa), str(sil)], check=True)
+                    linhas.append(f"file '{sil.as_posix()}'")
+            lista.write_text("\n".join(linhas), encoding="utf-8")
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", str(lista),
+                            "-ar", "24000", "-ac", "1",
                             "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", str(destino)], check=True)
             return
         print("  [!] voz clonada falhou — uso a voz simples", flush=True)

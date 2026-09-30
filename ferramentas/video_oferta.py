@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import statistics
 import subprocess
 import sys
@@ -266,12 +267,29 @@ def narracao(d: dict, destino: Path) -> None:
     r, a = d["ref"], d["agora"]
     hoje = f"{int(a)} reais e {round((a - int(a)) * 100)} centavos"
     abre = (d["gancho"].capitalize() + ". ") if d.get("gancho") else ""
+    # ⭐ 30/09/2026 (dono: "a dublagem esta' horrivel"): roteiro na ordem do
+    # acervo (gancho -> prova -> oferta, FTA "How This Funnel Sold 100,000
+    # Books", DEMONSTRADO), frase curta de conversa, e SO' o que a serie prova.
     if d.get("provada"):
-        txt = (f"{abre}{d['nome']}. Nos últimos {d['dias']} dias ele custava, na maior parte do tempo, "
-               f"{int(r)} reais. Hoje está {hoje}. Eu conferi o preço agora há pouco. O link está na bio.")
+        queda = round(float(d["queda"]) * 100)
+        txt = (f"{abre}Olha isso: {d['nome']} caiu {queda} por cento. "
+               f"Eu acompanho o preço dele há {d['dias']} dias, e o normal é {int(r)} reais. "
+               f"Hoje tá {hoje}. Conferi agora há pouco. O link tá na bio.")
     else:
-        txt = (f"{abre}{d['nome']}. Hoje está {hoje}. Eu conferi o preço agora há pouco. "
-               f"O link está na bio.")
+        txt = (f"{abre}{d['nome']}. Hoje tá {hoje}. Conferi agora há pouco. "
+               f"O link tá na bio.")
+    # ⭐ Mesma voz dos canais de corte: edge-tts -> ChatterboxVC com o timbre da
+    # amostra (motor D do engine/voz_clonada). Sem amostra ou sem o modelo,
+    # volta pra voz simples — video sem voz nao sai.
+    amostra = Path(os.environ.get("AMOSTRA_VOZ_OFERTA") or "vozes/bryan_amostra.wav")
+    if amostra.exists():
+        from engine import voz_clonada
+        wav = destino.with_suffix(".vc.wav")
+        if voz_clonada._falar_d(txt, wav, amostra):
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav),
+                            "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", str(destino)], check=True)
+            return
+        print("  [!] voz clonada falhou — uso a voz simples", flush=True)
     asyncio.run(edge_tts.Communicate(numeros.por_extenso(txt), voice=VOZ, rate="+4%").save(str(destino)))
 
 

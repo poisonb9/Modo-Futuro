@@ -9,6 +9,10 @@ on:
       token:
         description: "nome do secret do Buffer (ex.: BUFFER_TOKEN_ATEFALHAR)"
         required: true
+      mover:
+        description: "1 = se ja' agendado, muda o horario"
+        required: false
+        default: ""
       itens:
         description: "titulo@@AAAA-MM-DD HH:MM (hora SP) separados por ||"
         required: true
@@ -65,4 +69,4 @@ jobs:
           GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
           GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
 
-        run: python -X utf8 ferramentas/agendar_pontual.py --itens "${{ inputs.itens }}"
+        run: python -X utf8 ferramentas/agendar_pontual.py --itens "${{ inputs.itens }}" ${{ inputs.mover && '--mover' || '' }}

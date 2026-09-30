@@ -27,6 +27,8 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--itens", required=True, help='"titulo@@AAAA-MM-DD HH:MM" separados por ||')
     p.add_argument("--simular", action="store_true")
+    p.add_argument("--mover", action="store_true",
+                   help="se ja' estiver agendado, MUDA o horario (editPost)")
     a = p.parse_args()
     tb, tg = ab._token_buffer(), ab._token_github()
     _, canal, conhecidos = ab.contexto_buffer(tb, fresco=True)
@@ -41,6 +43,20 @@ def main() -> None:
         if ab._chave_texto(clipe.get("legenda") or titulo) in na_fila:
             x = na_fila[ab._chave_texto(clipe.get("legenda") or titulo)]
             print(f"  = ja' esta' no Buffer ({x.get('status')} {x.get('dueAt')}): {titulo}")
+            if a.mover and x.get("status") == "scheduled" and not a.simular:
+                q = datetime.datetime.strptime(quando, "%Y-%m-%d %H:%M")
+                due = (q + datetime.timedelta(hours=ab.FUSO_SP_H)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+                d = ab.consultar(tb, """mutation($input: EditPostInput!) {
+                  editPost(input: $input) { __typename
+                    ... on PostActionSuccess { post { id dueAt } }
+                    ... on InvalidInputError { message }
+                    ... on UnexpectedError { message }
+                    ... on RestProxyError { message } } }""", {"input": {
+                    "id": x["id"], "text": x.get("text") or clipe.get("legenda") or titulo,
+                    "dueAt": due, "mode": "customScheduled", "schedulingType": "automatic",
+                    "assets": [{"video": {"url": clipe["url"]}}],
+                    "metadata": {"tiktok": {"isAiGenerated": True, "title": titulo[:90]}}}})["editPost"]
+                print(f"    movido -> {d.get('post', {}).get('dueAt') if d['__typename'] == 'PostActionSuccess' else d}")
             continue
         j = ct.julgar(ct.audio_do_video(clipe["url"]), titulo)
         if not j or not j.get("bate"):

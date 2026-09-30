@@ -4,9 +4,12 @@
     python -X utf8 ferramentas/ofertas_do_dia.py --pasta saida/      gera e sobe na release
     python -X utf8 ferramentas/ofertas_do_dia.py --pasta saida/ --ensaio   so' diz o que faria
 
-Roda na NUVEM (workflow `ofertas.yml`). ⛔ NAO AGENDA NADA: os dois canais
-ainda nao tem Buffer (canais_registro, motor=False) e o dono ve' a previa
-antes de ligar. Quando ligar, o agendamento entra aqui — 4 por canal por dia.
+Roda na NUVEM (workflow `ofertas.yml`).
+⭐ 30/09/2026: com `--agendar` (so' junto de `--registrar`) cada video entra
+na fila do Buffer DO SEU CANAL — token pelo `env` do canais_registro
+(PAGOMENOS, ACHADINHOSINSTANTANEOS, ACHADINHOTOTAL), guarda CANAL_ESPERADO
+(aborta se o token abrir outra conta) e grade do agendar_buffer (4/dia,
+intervalo minimo 3 h). Sem `--agendar` nada vai ao Buffer.
 
 Cada video gerado:
   - sobe na release `ofertas-AAAA-MM` (nome = canal + id + dia);
@@ -30,6 +33,41 @@ from engine import ofertas  # noqa: E402
 import video_oferta  # noqa: E402
 
 
+REPO = "poisonb9/Modo-Futuro"
+
+
+def agendar(por_canal: dict[str, list[dict]]) -> None:
+    """Cada video na fila do Buffer do SEU canal. Um canal que falha nao
+    derruba os outros — mas a falha aparece (exit 1 no fim)."""
+    import os
+    import agendar_buffer as ab
+    from engine import canais_registro as cr
+    falhou = []
+    for canal, posts in por_canal.items():
+        c = cr.CANAIS[canal]
+        token = (os.environ.get(c.env) or "").strip()
+        if not token:
+            print(f"  [!] {canal}: secret {c.env} nao chegou ao ambiente — nada agendado")
+            falhou.append(canal)
+            continue
+        os.environ["CANAL_ESPERADO"] = canal          # guarda de canal errado
+        try:
+            _, canal_id, conhecidos = ab.contexto_buffer(token, fresco=True)
+            agendados = [x for x in conhecidos if x.get("status") != "sent"]
+            horas = ab.proximos_horarios(agendados, len(posts), conhecidos)
+            for post, h in zip(posts, horas):
+                quando = ab.enfileirar(token, canal_id, post, simular=False, quando_sp=h)
+                print(f"  📅 {canal}: {post['titulo'][:60]} -> {quando}")
+        except SystemExit as e:
+            print(f"  [!] {canal}: {e}")
+            falhou.append(canal)
+        except Exception as e:  # noqa: BLE001
+            print(f"  [!] {canal}: {type(e).__name__}: {str(e)[:160]}")
+            falhou.append(canal)
+    if falhou:
+        sys.exit(f"agendamento falhou em: {', '.join(falhou)}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pasta", type=Path, required=True)
@@ -38,7 +76,12 @@ def main() -> None:
     # em ofertas_feitas nem na pagina da bio. Registrar = o video VAI AO AR
     # (senao a bio diria "do video de hoje" de um video que ninguem viu).
     ap.add_argument("--registrar", action="store_true")
+    ap.add_argument("--agendar", action="store_true",
+                    help="poe cada video na fila do Buffer do canal (exige --registrar)")
     a = ap.parse_args()
+    if a.agendar and not a.registrar:
+        sys.exit("--agendar exige --registrar: post no ar sem registro quebra a pagina da bio")
+    para_agendar: dict[str, list[dict]] = {}
     a.pasta.mkdir(parents=True, exist_ok=True)
     hoje = date.today()
     tag = f"ofertas-{hoje:%Y-%m}"
@@ -86,6 +129,9 @@ def main() -> None:
             print(f"  ok {canal} #{d['numero']}: {o['nome']} -> {arq.name}")
             if not a.registrar:
                 continue
+            para_agendar.setdefault(canal, []).append({
+                "url": f"https://github.com/{REPO}/releases/download/{tag}/{arq.name}",
+                "legenda": d["legenda"], "titulo": f"Achado do dia #{d['numero']}: {o['nome']}"[:90]})
             ofertas.registrar(canal, o, hoje)
             with open(RAIZ / "estado" / "produtos_publicados.jsonl", "a", encoding="utf-8") as f:
                 f.write(json.dumps({
@@ -96,6 +142,9 @@ def main() -> None:
                     "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 }, ensure_ascii=False) + "\n")
 
+
+    if a.agendar:
+        agendar(para_agendar)
 
     if comentarios:
         txt = a.pasta / f"{hoje}_comentarios_fixados.txt"

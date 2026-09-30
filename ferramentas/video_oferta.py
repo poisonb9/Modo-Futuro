@@ -74,7 +74,8 @@ def dados(pid: str, exigir_queda: bool = True) -> dict:
 # ⭐ 29/09/2026 (plano aprovado, ideias 5 e 10): a marca de cada canal no topo
 # e a serie "ACHADO DO DIA #N" — numero por canal, contado no registro das
 # ofertas feitas (nunca chutado: mesma regra do selo PARTE N).
-MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHOS INSTANTÂNEOS"}
+MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHOS INSTANTÂNEOS",
+          "achadinhototal": "ACHADINHO TOTAL"}
 
 
 def proximo_numero(canal: str) -> int:
@@ -84,6 +85,24 @@ def proximo_numero(canal: str) -> int:
 
 def vendas_curto(n: int) -> str:
     return f"{n / 1000:.1f}".replace(".0", "").replace(".", ",") + " mil" if n >= 1000 else str(n)
+
+
+def legenda_post(d: dict) -> str:
+    """A legenda do post no TikTok (30/09/2026).
+
+    Mesma regra-mae do video ("sempre confianca, sempre"): so' afirma o que a
+    nossa serie prova — o preco de hoje, a mediana dos nossos N dias e a loja.
+    Estrutura do acervo (gancho -> prova -> oferta com chamada clara):
+    afirma, nunca pergunta. Max 3 hashtags (legenda_post do motor, 28/09).
+    """
+    queda = round(float(d["queda"]) * 100)
+    num = f" #{d['numero']}" if d.get("numero") else ""
+    return (f"Achado do dia{num}: {d['nome']} caiu {queda}% 📉\n"
+            f"Hoje {reais(d['agora'])} — o normal dele, nos nossos {d['dias']} dias "
+            f"de acompanhamento, é {reais(d['ref'])}.\n"
+            f"Loja nota {str(d['nota']).replace('.', ',')} · {vendas_curto(int(d['vendas']))} vendidos.\n"
+            f"🔗 Link na bio.\n"
+            f"#achadinhos #promoção #aliexpress")
 
 
 def comentario_fixado(d: dict) -> str:
@@ -294,6 +313,15 @@ def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = 
     d["gancho"] = gancho.upper()
     if demo_arquivo and Path(demo_arquivo).exists():
         d["video"] = str(demo_arquivo)
+    elif not d.get("video"):
+        # ⭐ item 16 (30/09/2026): trecho de demo que o PC tirou do YouTube,
+        # conferido pelo Gemini contra a foto do anuncio (mesmo_produto >= 9),
+        # e subiu pro Drive. Ver ferramentas/demo_local.py.
+        demos = RAIZ / "estado" / "demos_drive.json"
+        if demos.exists():
+            reg = json.loads(demos.read_text(encoding="utf-8")).get(str(pid))
+            if reg:
+                d["video"] = reg["link"]
     if canal:
         d["marca"] = MARCAS.get(canal, d["marca"])
         d["numero"] = numero or proximo_numero(canal)
@@ -325,6 +353,7 @@ def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = 
     p.stdin.close()
     p.wait()
     d["comentario"] = comentario_fixado(d)
+    d["legenda"] = legenda_post(d)
     return d
 
 

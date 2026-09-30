@@ -152,12 +152,25 @@ CANAIS: dict[str, Canal] = {
         # ⚠️ E ha' um teste guardando isto: `teste_canal_sem_buffer.py`. Quando
         # elas ganharem token, o teste ACUSA — e' o lembrete de preencher os
         # tres campos no mesmo commit.
+        # ⭐ 30/09/2026: OS TRES CANAIS DE OFERTA GANHARAM BUFFER. O dono criou
+        # os secrets (PAGOMENOS, ACHADINHOSINSTANTANEOS, ACHADINHOTOTAL) em
+        # 30/09 00:31-00:41 UTC; org/canal LIDOS pelo buffer_ids.yml (runs
+        # 36697094341, 36697105901, 36697117364) — nao digitados.
+        # ⚠️ `motor=False` CONTINUA: o motor de CORTE nao serve oferta. Quem
+        # publica aqui e' o `ferramentas/ofertas_do_dia.py`.
         Canal("achadinhos.instantaneos", "@achadinhos.instantaneos",
-              "", "", "", motor=False,
+              "6abc586acd1f1d11a38bd635", "6abc58f3ea19ca0bde2bdde1",
+              "ACHADINHOSINSTANTANEOS", motor=False,
               apelidos=("achadinhos.instantaneos", "instantaneos")),
         Canal("fatura.chora", "@fatura.chora",
-              "", "", "", motor=False,
-              apelidos=("fatura.chora", "fatura")),
+              "6abc5994791367e5ab7fa878", "6abc5a57ea19ca0bde2be6e2",
+              "PAGOMENOS", motor=False,
+              apelidos=("fatura.chora", "fatura", "pagomenos", "pago.menos")),
+        # Criado pelo dono em 29/09 19:00 (hoje exibe "Achei Pra Voce").
+        Canal("achadinhototal", "@achadinhototal",
+              "6abc56f7577f6aa19829d962", "6abc57a4ea19ca0bde2bd4a2",
+              "ACHADINHOTOTAL", motor=False,
+              apelidos=("achadinhototal", "achadinho.total", "acheipravoce")),
     ]
 }
 

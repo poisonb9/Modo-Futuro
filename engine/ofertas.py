@@ -32,7 +32,9 @@ NOTA_MIN = 4.7
 VENDAS_MIN = 1000
 JANELA_DIAS = 21
 POR_DIA = 4
-CANAIS = ("fatura.chora", "achadinhos.instantaneos")
+# ⭐ 30/09/2026: @achadinhototal entra na divisao (plano, 3º canal). Um produto
+# nunca sai em dois canais — a alternancia abaixo garante.
+CANAIS = ("fatura.chora", "achadinhos.instantaneos", "achadinhototal")
 
 # minusculo, palavra inteira. Lista curta de proposito: e' o que mais aparece
 # falsificado no Ali; cresce quando aparecer um caso.

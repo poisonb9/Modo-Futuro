@@ -51,17 +51,19 @@ def checar(cond, recado):
         falhas += 1
 
 
-SEM_BUFFER = ("achadinhos.instantaneos", "fatura.chora")
+# ⭐ 30/09/2026: ganharam Buffer (ids lidos pelo buffer_ids.yml). Continuam
+# FORA do motor de corte — quem publica e' o ofertas_do_dia.
+SEM_BUFFER = ("achadinhos.instantaneos", "fatura.chora", "achadinhototal")
 COM_BUFFER = ("modofuturo", "semanestesia.pod", "atefalhar",
               "truque.importado", "cozinha.importada")
 
-print("1. os dois da FASE 2 estao registrados, e com os campos do Buffer VAZIOS")
+print("1. os canais de OFERTA estao registrados, com Buffer completo e motor=False")
 for n in SEM_BUFFER:
     c = cr.CANAIS.get(n)
     checar(c is not None, f"{n} esta' no registro")
     if c:
-        checar(c.org == "" and c.canal_id == "" and c.env == "",
-               f"{n}: org/canal_id/env vazios, nao inventados")
+        checar(c.org.startswith("6abc") and c.canal_id.startswith("6abc") and bool(c.env),
+               f"{n}: org/canal_id/env preenchidos com os ids LIDOS em 30/09")
         checar(c.motor is False, f"{n}: motor=False")
 
 print("\n2. e por isso nada que publica os alcanca")
@@ -93,8 +95,9 @@ checar(cr.canonico("instantaneos") == "achadinhos.instantaneos",
 checar(cr.canonico("achadinho.make") == "truque.importado",
        "achadinho.make continua caindo em truque.importado")
 
-print("\n5. e o registro tem SETE contas, que e' o que o app mostra")
-checar(len(cr.CANAIS) == 7, f"{len(cr.CANAIS)} contas (esperado 7)")
+print("\n5. e o registro tem OITO contas (7 do app + @achadinhototal, 29/09)")
+checar(len(cr.CANAIS) == 8, f"{len(cr.CANAIS)} contas (esperado 8)")
+checar(cr.canonico("pagomenos") == "fatura.chora", "apelido pagomenos")
 
 if falhas:
     print(chr(10) + f"{falhas} FALHA(S)")

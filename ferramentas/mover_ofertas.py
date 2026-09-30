@@ -44,7 +44,8 @@ def main() -> None:
             print(f"  {canal}: {x.get('status')} {x.get('dueAt')} {(x.get('text') or '')[:50]!r}")
             if not m or int(m.group(1)) not in nums or x.get("status") != "scheduled":
                 continue
-            q = datetime.datetime.strptime(nums.pop(int(m.group(1))), "%Y-%m-%d %H:%M")
+            txt = nums.pop(int(m.group(1)))
+            q = datetime.datetime.strptime(txt, "%Y-%m-%d %H:%M:%S" if txt.count(":") == 2 else "%Y-%m-%d %H:%M")
             due = (q + datetime.timedelta(hours=ab.FUSO_SP_H)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
             if a.simular:
                 print(f"    SIMULADO -> {due}")

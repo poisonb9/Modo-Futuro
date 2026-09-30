@@ -67,8 +67,18 @@ def marca_suspeita(nome: str) -> str | None:
     return None
 
 
+# ⛔ BLOQUEADOS pelo dono (nunca viram oferta). Motivo e data em cada um.
+BLOQUEADOS = {
+    # 30/09/2026: "suporte dobravel de aluminio para laptop", mas as fotos do
+    # anuncio mostram um TRIPE DE CELULAR — produto diferente do anunciado.
+    "1005011940143389",
+}
+
+
 def avaliar(pid: str, agora: dict, serie: list, nome: str) -> tuple[dict | None, str]:
     """(oferta, motivo). `oferta` None = fica de fora, e o motivo diz por que."""
+    if str(pid) in BLOQUEADOS:
+        return None, "bloqueado pelo dono"
     hoje = agora["quando"][:10]
     antes = [p for q, p in sorted(serie) if q < hoje][-30:]
     if len(antes) < DIAS_MIN:

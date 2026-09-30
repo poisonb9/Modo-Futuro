@@ -48,6 +48,14 @@ def main() -> None:
             if not m or int(m.group(1)) not in nums or x.get("status") != "scheduled":
                 continue
             txt = nums.pop(int(m.group(1)))
+            if txt.upper() == "APAGAR":        # tirar da fila (pedido do dono)
+                if a.simular:
+                    print("    SIMULADO -> apagar"); continue
+                d = ab.consultar(tok, 'mutation { deletePost(input: {id: "%s"}) { __typename } }' % x["id"])["deletePost"]
+                ok = "Success" in d["__typename"]
+                falhou |= not ok
+                print(f"    {'APAGADO' if ok else '[!] FALHOU apagar'} #{m.group(1)} -> {d}")
+                continue
             q = datetime.datetime.strptime(txt, "%Y-%m-%d %H:%M:%S" if txt.count(":") == 2 else "%Y-%m-%d %H:%M")
             due = (q + datetime.timedelta(hours=ab.FUSO_SP_H)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
             if a.simular:

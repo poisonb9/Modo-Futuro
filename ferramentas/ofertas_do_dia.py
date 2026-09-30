@@ -59,6 +59,19 @@ def conferir_buffer(canais: list[str]) -> None:
             print(f"  buffer {canal}: ERRO {type(e).__name__}: {str(e)[:120]}")
 
 
+def _espalhar(h, usados: set) -> "datetime":
+    """Desloca o horario do slot em -20..+20 min e segundo aleatorio, sem
+    repetir o MINUTO de outro post ja' marcado nesta rodada (qualquer canal)."""
+    import random
+    from datetime import timedelta
+    for _ in range(200):
+        q = h + timedelta(minutes=random.randint(-20, 20), seconds=random.randint(1, 58))
+        if not any(abs((q - u).total_seconds()) < 180 for u in usados):
+            usados.add(q)
+            return q
+    return h
+
+
 def agendar(por_canal: dict[str, list[dict]]) -> None:
     """Cada video na fila do Buffer do SEU canal. Um canal que falha nao
     derruba os outros — mas a falha aparece (exit 1 no fim)."""
@@ -66,6 +79,7 @@ def agendar(por_canal: dict[str, list[dict]]) -> None:
     import agendar_buffer as ab
     from engine import canais_registro as cr
     falhou = []
+    usados: set = set()        # horarios ja' marcados (todos os canais)
     for canal, posts in por_canal.items():
         c = cr.CANAIS[canal]
         token = (os.environ.get(c.env) or "").strip()
@@ -78,6 +92,9 @@ def agendar(por_canal: dict[str, list[dict]]) -> None:
             _, canal_id, conhecidos = ab.contexto_buffer(token, fresco=True)
             agendados = [x for x in conhecidos if x.get("status") != "sent"]
             horas = ab.proximos_horarios(agendados, len(posts), conhecidos)
+            # ⭐ 30/09/2026 (dono): "minutos aleatorios, sem bater nenhum canal
+            # postando junto no mesmo minuto e segundo" — pra nao parecer bot.
+            horas = [_espalhar(h, usados) for h in horas]
             for post, h in zip(posts, horas):
                 quando = ab.enfileirar(token, canal_id, post, simular=False, quando_sp=h)
                 print(f"  📅 {canal}: {post['titulo'][:60]} -> {quando}")

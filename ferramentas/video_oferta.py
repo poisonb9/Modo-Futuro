@@ -75,8 +75,8 @@ def dados(pid: str, exigir_queda: bool = True) -> dict:
 # ⭐ 29/09/2026 (plano aprovado, ideias 5 e 10): a marca de cada canal no topo
 # e a serie "ACHADO DO DIA #N" — numero por canal, contado no registro das
 # ofertas feitas (nunca chutado: mesma regra do selo PARTE N).
-MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHOS INSTANTÂNEOS",
-          "achadinhototal": "ACHADINHO TOTAL"}
+MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHO TOTAL",
+          "achadinhototal": "ACHEI PRA VOCÊ"}  # 30/09: = nome de exibicao do perfil (print do dono)
 
 
 def proximo_numero(canal: str) -> int:
@@ -156,26 +156,42 @@ def cartao(foto: Image.Image, lado: int) -> Image.Image:
 DEMO_S = 8.0   # ⭐ ideia 12: segundos do video OFICIAL do vendedor no cartao
 
 
+# ⭐ 30/09/2026 19:50 — ZONA SEGURA DO TIKTOK (print do dono no iPhone: topo
+# embaixo da BUSCA, preco embaixo do @/legenda, "caiu pela metade" e o -56%
+# embaixo dos botoes da direita). Medido nos prints (924x2000 -> 1080x1920):
+#   busca/abas terminam em ~y 200  -> nada importante acima de SEG_TOPO
+#   @ + legenda + "promover" comecam em ~y 1400 -> nada abaixo de SEG_BASE
+#   coluna de icones comeca em ~x 935 (de y ~750 a ~1590) -> largura util
+#   centrada de no maximo SEG_LARG (160..920).
+SEG_TOPO, SEG_BASE, SEG_LARG = 262, 1380, 740
+
+
+def _caber(dr, txt, nome, tam, larg, minimo=24):
+    f = fonte(nome, tam)
+    while dr.textlength(txt, font=f) > larg and f.size > minimo:
+        f = fonte(nome, f.size - 2)
+    return f
+
+
 def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
            demo: Image.Image | None = None) -> Image.Image:
     im = fundo.copy()
     dr = ImageDraw.Draw(im)
-    # topo: marca + selo de confianca
-    centro(dr, 92 if d.get("numero") else 110, d.get("marca") or "PAGO MENOS",
-           fonte("Poppins-Bold.ttf", 44), OURO)
-    if d.get("numero"):
-        centro(dr, 146, f"ACHADO DO DIA #{d['numero']}", fonte("Poppins-Bold.ttf", 26), BRANCO)
-    fs = fonte("Poppins-Bold.ttf", 30)
+    # topo (logo abaixo da busca): marca + "achado do dia" numa linha so'
+    marca = d.get("marca") or "PAGO MENOS"
+    topo = f"{marca}  ·  ACHADO DO DIA #{d['numero']}" if d.get("numero") else marca
+    centro(dr, SEG_TOPO, topo, _caber(dr, topo, "Poppins-Bold.ttf", 34, SEG_LARG), OURO)
+    fs = fonte("Poppins-Bold.ttf", 26)
     selo = f"preço conferido {d['hora']}"
-    sw = dr.textlength(selo, font=fs) + 44          # + o visto desenhado
+    sw = dr.textlength(selo, font=fs) + 40
     x0 = (W - sw) / 2
-    y0 = 200 if d.get("numero") else 180
-    pilula(dr, x0 - 28, y0, x0 + sw + 28, y0 + 56, (36, 34, 44))
-    dr.line([(x0 + 2, y0 + 30), (x0 + 12, y0 + 41), (x0 + 30, y0 + 16)], fill=(88, 200, 120), width=6, joint="curve")
-    dr.text((x0 + 44, y0 + 6), selo, font=fs, fill=BRANCO)
+    y0 = SEG_TOPO + 56
+    pilula(dr, x0 - 24, y0, x0 + sw + 24, y0 + 48, (36, 34, 44))
+    dr.line([(x0 + 2, y0 + 26), (x0 + 11, y0 + 36), (x0 + 27, y0 + 14)], fill=(88, 200, 120), width=5, joint="curve")
+    dr.text((x0 + 40, y0 + 5), selo, font=fs, fill=BRANCO)
 
-    # foto: cartao branco arredondado, zoom lento, troca com fusao a cada 3 s
-    lado = 820
+    # foto: cartao menor, centrado, inteiro fora da coluna de icones
+    lado = 560
     n = min(len(cartoes), 4)
     k = int(t // 3.2) % n
     frac = (t % 3.2) / 3.2
@@ -186,80 +202,68 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         b = cartoes[(k + 1) % n].resize((lado, lado))
         a = Image.blend(a, b, (frac - 0.85) / 0.15)
     if demo is not None:
-        a = demo          # o produto FUNCIONANDO, no lugar da foto parada
+        a = demo.resize((lado, lado)) if demo.size != (lado, lado) else demo
     mask = Image.new("L", (lado, lado), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, lado - 1, lado - 1], 48, fill=255)
-    y_foto = 290
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, lado - 1, lado - 1], 44, fill=255)
+    y_foto = y0 + 76
     im.paste(a, ((W - lado) // 2, y_foto), mask)
+    y_base_foto = y_foto + lado
 
-    # gancho (0-3 s): faixa ouro por cima da foto
+    # faixa ouro sobre a base da foto: gancho (0-3 s) e, no fim, "link na bio"
+    faixa = None
     if t < 3.2:
         e = ease(t / 0.4) * (1 - ease((t - 2.8) / 0.4))
-        fg = fonte("Anton-Regular.ttf", 120)
         if d.get("gancho"):
-            txt = d["gancho"]              # problema -> solucao, AFIRMANDO
+            faixa = d["gancho"]
         elif d.get("provada"):
-            txt = "CAIU PELA METADE" if d["queda"] >= 0.5 else f"CAIU {round(d['queda'] * 100)}%"
+            faixa = "CAIU PELA METADE" if d["queda"] >= 0.5 else f"CAIU {round(d['queda'] * 100)}%"
         else:
-            txt = "ACHADO DO DIA"
-        while dr.textlength(txt, font=fg) > W - 160 and fg.size > 60:
-            fg = fonte("Anton-Regular.ttf", fg.size - 6)
-        tw = dr.textlength(txt, font=fg)
+            faixa = "ACHADO DO DIA"
+    elif t >= 15:
+        e = ease((t - 15) / 0.5)
+        faixa = "LINK NA BIO"
+    if faixa:
+        fg = _caber(dr, faixa, "Anton-Regular.ttf", 96, SEG_LARG - 90, 50)
+        tw = dr.textlength(faixa, font=fg)
         camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         cd = ImageDraw.Draw(camada)
-        pilula(cd, (W - tw) / 2 - 50, 960, (W + tw) / 2 + 50, 1130, OURO + (int(255 * e),))
-        cd.text(((W - tw) / 2, 968), txt, font=fg, fill=FUNDO + (int(255 * e),))
+        yf = y_base_foto - 70
+        pilula(cd, (W - tw) / 2 - 45, yf, (W + tw) / 2 + 45, yf + 132, OURO + (int(255 * e),))
+        cd.text(((W - tw) / 2, yf + 6), faixa, font=fg, fill=FUNDO + (int(255 * e),))
         im.paste(camada, (0, 0), camada)
         dr = ImageDraw.Draw(im)
 
-    # nome
-    fn = fonte("Poppins-Bold.ttf", 46)
-    while dr.textlength(d["nome"], font=fn) > W - 100 and fn.size > 30:
-        fn = fonte("Poppins-Bold.ttf", fn.size - 2)    # nome longo nao vaza da tela
-    centro(dr, 1140, d["nome"], fn, BRANCO)
-    # ideia 10: a confianca da LOJA, lida na API (nunca inventada)
+    # nome + confianca da loja
+    y = y_base_foto + 80
+    centro(dr, y, d["nome"], _caber(dr, d["nome"], "Poppins-Bold.ttf", 42, SEG_LARG, 28), BRANCO)
     if d.get("nota") and d.get("vendas"):
         loja = f"loja nota {str(d['nota']).replace('.', ',')}  ·  {vendas_curto(d['vendas'])} vendidos"
-        centro(dr, 1200, loja, fonte("Poppins-Bold.ttf", 30), CINZA)
+        centro(dr, y + 52, loja, fonte("Poppins-Bold.ttf", 26), CINZA)
 
-    # preco (a partir de 3,5 s)
+    # preco (a partir de 3,5 s) — tudo termina acima de SEG_BASE
     if t >= 3.5:
         e = ease((t - 3.5) / 0.6)
-        y = int(1270 + 40 * (1 - e))
-        fa = fonte("Poppins-Bold.ttf", 52)
-        fp = fonte("Anton-Regular.ttf", 200)
+        y = int(y_base_foto + 184 + 20 * (1 - e))
+        fa = fonte("Poppins-Bold.ttf", 40)
+        fp = fonte("Anton-Regular.ttf", 128)
         if d.get("provada"):
             antes = f"antes {reais(d['ref'])}"
-            aw = centro(dr, y, antes, fa, CINZA)
-            dr.line([((W - aw) / 2, y + 36), ((W + aw) / 2, y + 36)], fill=CINZA, width=5)
-            centro(dr, y + 70, reais(d["agora"]), fp, OURO)
-            fb = fonte("Poppins-Bold.ttf", 44)
+            fb = fonte("Poppins-Bold.ttf", 36)
             badge = f"-{round(d['queda'] * 100)}%"
-            bw = dr.textlength(badge, font=fb)
-            bx = (W + aw) / 2 + 40
-            pilula(dr, bx - 22, y - 6, bx + bw + 22, y + 60, (200, 46, 60))
-            dr.text((bx, y - 2), badge, font=fb, fill=BRANCO)
+            aw, bw = dr.textlength(antes, font=fa), dr.textlength(badge, font=fb)
+            x = (W - (aw + 36 + bw + 36)) / 2          # antes + selo, centrados JUNTOS
+            dr.text((x, y), antes, font=fa, fill=CINZA)
+            dr.line([(x, y + 28), (x + aw, y + 28)], fill=CINZA, width=4)
+            bx = x + aw + 36
+            pilula(dr, bx - 18, y - 2, bx + bw + 18, y + 50, (200, 46, 60))
+            dr.text((bx, y + 1), badge, font=fb, fill=BRANCO)
             nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
         else:
             centro(dr, y, "preço de hoje", fa, CINZA)
-            centro(dr, y + 70, reais(d["agora"]), fp, OURO)
             nota = "sem desconto inventado: é o preço da loja agora"
-        centro(dr, y + 330, nota, fonte("Poppins-Bold.ttf", 28), CINZA)
-
-    # chamada final (a partir de 15 s)
-    if t >= 15:
-        e = ease((t - 15) / 0.5)
-        fc = fonte("Poppins-Bold.ttf", 56)
-        txt = "link na bio"
-        tw = dr.textlength(txt, font=fc) + 60        # + a seta desenhada
-        x0 = (W - tw) / 2
-        y = int(1720 + 30 * (1 - e))
-        pilula(dr, x0 - 50, y, x0 + tw + 50, y + 96, OURO)
-        dr.text((x0, y + 12), txt, font=fc, fill=FUNDO)
-        ax = x0 + tw - 22
-        dr.polygon([(ax - 18, y + 38), (ax + 18, y + 38), (ax, y + 62)], fill=FUNDO)
+        centro(dr, y + 36, reais(d["agora"]), fp, OURO)
+        centro(dr, min(y + 214, SEG_BASE - 26), nota, fonte("Poppins-Bold.ttf", 22), CINZA)
     return im
-
 
 def narracao(d: dict, destino: Path) -> None:
     import edge_tts

@@ -184,9 +184,12 @@ BALOES = RAIZ / "paginas" / "baloes"
 # ⚠️ o NOME do arquivo engana: `canal_pago_menos` e' o CIFRAO e `canal_achadinhos_instantaneos`
 # o CARRINHO. Aqui vale o AVATAR de cada perfil (prints do dono, 30/09).
 BALAO_DO_CANAL = {"PAGO MENOS": "canal_achadinhos_instantaneos", "ACHADINHO TOTAL": "canal_pago_menos",
+                  # 30/09: o perfil volta a se chamar Achadinhos Instantaneos (dono) — mesmo cifrao
+                  "ACHADINHOS INSTANTÂNEOS": "canal_pago_menos",
                   "ACHEI PRA VOCÊ": "loja_lupa"}
 # o que ENTRA no comeco (0-1,5 s). Achei Pra Voce: a lupa dourada de letra-balao.
 BALAO_ENTRADA = {"PAGO MENOS": "canal_achadinhos_instantaneos", "ACHADINHO TOTAL": "canal_pago_menos",
+                 "ACHADINHOS INSTANTÂNEOS": "canal_pago_menos",
                  "ACHEI PRA VOCÊ": "inaug_lupa"}
 AVATAR_X, AVATAR_Y = 993, 797     # foto de perfil na coluna do TikTok (prints do dono, 1080x1920)   # 30/09: a lupa da LOJA (arte do dono), = avatar
 INAUGURACAO_ATE = "2026-10-07"

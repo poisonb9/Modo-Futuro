@@ -136,12 +136,62 @@ def candidatas(dia: date | None = None) -> list[dict]:
     return boas
 
 
+# ⭐ 30/09/2026 (pendente 4 do handoff): DIVISAO POR NICHO. O nicho do produto
+# e' o canal em que o GARIMPO o achou (estado/produtos_publicados.jsonl, linhas
+# que nao sao `video_oferta`). Pago Menos = eletronico; Instantaneos = casa /
+# irritacao resolvida; Achadinho Total = o resto. Dentro do nicho, SEMPRE a
+# maior queda primeiro; nicho sem oferta completa com a melhor que sobrou —
+# nicho nunca passa uma oferta pior na frente de uma melhor do mesmo canal.
+NICHO = {
+    "fatura.chora": ("fatura.chora", "modofuturo"),
+    "achadinhos.instantaneos": ("achadinhos.instantaneos", "cozinha.importada",
+                                "varredura.jardim", "varredura.ferramentas"),
+    "achadinhototal": None,   # None = qualquer origem
+}
+
+
+def _origem() -> dict[str, str]:
+    out: dict[str, str] = {}
+    arq = RAIZ / "estado" / "produtos_publicados.jsonl"
+    if not arq.exists():
+        return out
+    for l in arq.read_text(encoding="utf-8").splitlines():
+        try:
+            x = json.loads(l)
+        except ValueError:
+            continue
+        if x.get("id") and x.get("onde") != "video_oferta" and x.get("canal"):
+            out.setdefault(str(x["id"]), x["canal"])
+    return out
+
+
 def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
-    """{canal: [ofertas]} — POR_DIA por canal, maiores quedas primeiro, alternando."""
-    boas = candidatas(dia)
+    """{canal: [ofertas]} — POR_DIA por canal, por nicho, maiores quedas primeiro."""
+    boas = candidatas(dia)          # ja' vem da maior queda para a menor
+    origem = _origem()
     saida: dict[str, list[dict]] = {c: [] for c in CANAIS}
-    for i, o in enumerate(boas[:POR_DIA * len(CANAIS)]):
-        saida[CANAIS[i % len(CANAIS)]].append(o)
+    usados: set[str] = set()
+    # 1a passada: cada canal pega o melhor DO SEU nicho (os de nicho fechado primeiro)
+    for canal in sorted(CANAIS, key=lambda c: NICHO.get(c) is None):
+        aceita = NICHO.get(canal)
+        for o in boas:
+            if len(saida[canal]) >= POR_DIA:
+                break
+            if o["id"] in usados or (aceita and origem.get(str(o["id"])) not in aceita):
+                continue
+            if aceita is None and any(origem.get(str(o["id"])) in (n or ()) for n in NICHO.values()):
+                continue            # o Total nao rouba produto de nicho de outro canal
+            saida[canal].append(o)
+            usados.add(o["id"])
+    # 2a passada: sobra vai pra quem ficou curto, sempre a maior queda restante
+    for o in boas:
+        if o["id"] in usados:
+            continue
+        curtos = [c for c in CANAIS if len(saida[c]) < POR_DIA]
+        if not curtos:
+            break
+        saida[min(curtos, key=lambda c: len(saida[c]))].append(o)
+        usados.add(o["id"])
     return saida
 
 

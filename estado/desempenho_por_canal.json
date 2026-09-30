@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-09-30T13:36:08",
+  "medido_em": "2026-09-30T19:08:01",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -10,7 +10,7 @@
       "comentarios": 63,
       "shares": 51,
       "engajamento_pct": 104.94,
-      "posts_recentes": 5,
+      "posts_recentes": 4,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -23,7 +23,7 @@
         },
         {
           "views": 0,
-          "titulo": "Felix do Stray Kids explica o significado do álbum ATE e o n"
+          "titulo": "Felix do Stray Kids ensina seu método bizarro de colocar len"
         }
       ]
     },
@@ -53,14 +53,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 93,
+      "posts": 96,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 9304,
-      "comentarios": 69,
-      "shares": 53,
+      "reacoes": 9503,
+      "comentarios": 70,
+      "shares": 54,
       "engajamento_pct": 0.0,
-      "posts_recentes": 23,
+      "posts_recentes": 25,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -81,7 +81,7 @@
       "posts": 55,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 664,
+      "reacoes": 665,
       "comentarios": 7,
       "shares": 13,
       "engajamento_pct": 0.0,
@@ -90,14 +90,14 @@
       "melhores_recentes": []
     },
     "atefalhar": {
-      "posts": 41,
+      "posts": 43,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 329,
+      "reacoes": 356,
       "comentarios": 4,
-      "shares": 0,
+      "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 3,
+      "posts_recentes": 5,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -110,7 +110,7 @@
         },
         {
           "views": 0,
-          "titulo": "A LEI QUE ACABOU COM OS DESENHOS DE SÁBADO DE MANHÃ\n\nDesenho"
+          "titulo": "Onde REALMENTE fica a casa do CORAGEM\n\nA casa do Coragem fic"
         }
       ]
     },

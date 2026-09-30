@@ -6,6 +6,570 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 30/09/2026 18:03 — `1712733`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `3a413c221e38` · 32 endereço(s) conferidos · HTML 282 KB
+
+---
+
+## 30/09/2026 17:56 — `c751926`
+
+**O quê:** registro: postagens conferidas
+
+Carimbo no ar: `0575c35f85a4` · 32 endereço(s) conferidos · HTML 282 KB
+
+---
+
+## 30/09/2026 16:32 — `50410f1`
+
+**O quê:** Handoff: ofertas no ar (run 36743009796)
+
+Carimbo no ar: `dd4dabfd772a` · 32 endereço(s) conferidos · HTML 280 KB
+
+---
+
+## 30/09/2026 15:57 — `412f0ed`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `a164029f4e2a` · 32 endereço(s) conferidos · HTML 280 KB
+
+---
+
+## 30/09/2026 15:36 — `d4d22d1`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `ced9a24185b1` · 32 endereço(s) conferidos · HTML 277 KB
+
+---
+
+## 30/09/2026 14:27 — `d4d22d1`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `8608abaa6380` · 32 endereço(s) conferidos · HTML 276 KB
+
+---
+
+## 30/09/2026 12:48 — `6bbe6e2`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `8740b096a3e8` · 32 endereço(s) conferidos · HTML 269 KB
+
+---
+
+## 30/09/2026 12:19 — `49d6157`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `ec55d795b712` · 32 endereço(s) conferidos · HTML 269 KB
+
+---
+
+## 30/09/2026 11:38 — `49d6157`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `1abdd67e5c51` · 32 endereço(s) conferidos · HTML 268 KB
+
+---
+
+## 30/09/2026 11:12 — `d4b4d32`
+
+**O quê:** Ofertas: entonacao de venda na narracao (ritmo por parte + pausas)
+
+**Por quê:** Dono (30/09): 'entonacao propria para vendas' (+acervo). Gancho rapido, prova no ritmo normal, pausa, preco mais devagar, chamada leve. Cada parte passa pela voz clonada com a sua velocidade e as partes se juntam com silencio. Fala enxugada pra caber nos 20 s do video.
+
+Carimbo no ar: `e0d81f29545a` · 32 endereço(s) conferidos · HTML 267 KB
+
+---
+
+## 30/09/2026 10:06 — `305b599`
+
+**O quê:** Ofertas: 3 canais no Buffer, agendamento 4x/dia, demo do produto pelo PC
+
+**Por quê:** - canais_registro: fatura.chora, achadinhos.instantaneos e achadinhototal com org/canal lidos pelo buffer_ids.yml (secrets PAGOMENOS, ACHADINHOSINSTANTANEOS, ACHADINHOTOTAL criados pelo dono em 30/09). motor=False continua: o motor de corte nao serve oferta. - ofertas: @achadinhototal entra na divisao (3 canais, sem repetir produto). - ofertas_do_dia --agendar (exige --registrar): cada video na fila do Buffer do seu canal, guarda CANAL_ESPERADO, grade do agendar_buffer. - video_oferta: legenda do post (so' o que a serie prova) e demo do Drive (estado/demos_drive.json) quando nao ha' video o...
+
+Carimbo no ar: `f84cc09832b5` · 32 endereço(s) conferidos · HTML 267 KB
+
+---
+
+## 30/09/2026 07:18 — `df3bcca`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `36859f1ff0f2` · 32 endereço(s) conferidos · HTML 266 KB
+
+---
+
+## 30/09/2026 06:18 — `3d3cd3e`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `677d3441ebd3` · 32 endereço(s) conferidos · HTML 268 KB
+
+---
+
+## 30/09/2026 05:47 — `3d3cd3e`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `5524dbc3ab5b` · 32 endereço(s) conferidos · HTML 267 KB
+
+---
+
+## 30/09/2026 03:17 — `63fafaa`
+
+**O quê:** guardas: trecho enfileirado e registro de clipe
+
+Carimbo no ar: `0eae62005215` · 32 endereço(s) conferidos · HTML 266 KB
+
+---
+
+## 30/09/2026 02:46 — `fdabc62`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `db7ee05d8bf9` · 32 endereço(s) conferidos · HTML 266 KB
+
+---
+
+## 30/09/2026 02:20 — `c55cca8`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `ea3ca1ca648c` · 32 endereço(s) conferidos · HTML 266 KB
+
+---
+
+## 30/09/2026 01:30 — `d69604f`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e782a70ceb10` · 32 endereço(s) conferidos · HTML 109 KB
+
+---
+
+## 30/09/2026 00:39 — `b44df7e`
+
+**O quê:** semanestesia: radar de fontes (disciplina + neurociencia da forca de vontade)
+
+Carimbo no ar: `d437fe73bc31` · 32 endereço(s) conferidos · HTML 265 KB
+
+---
+
+## 30/09/2026 00:14 — `a72789d`
+
+**O quê:** agendar_pontual: mostra status/horario do que ja' esta' no Buffer
+
+Carimbo no ar: `8d66bbf9299d` · 32 endereço(s) conferidos · HTML 265 KB
+
+---
+
+## 29/09/2026 23:38 — `d0f2000`
+
+**O quê:** refazer_titulo: corrige quebra de linha no f-string
+
+Carimbo no ar: `f1563bfbfc25` · 32 endereço(s) conferidos · HTML 264 KB
+
+---
+
+## 29/09/2026 23:09 — `b3728f2`
+
+**O quê:** ferramenta: conferir se a fala do video agendado bate com o titulo (Gemini ouve o audio), todos os canais
+
+Carimbo no ar: `9770fdc2314c` · 32 endereço(s) conferidos · HTML 264 KB
+
+---
+
+## 29/09/2026 22:06 — `b012e6d`
+
+**O quê:** bio: selo da loja (nota e vendas lidas na API) no cartao
+
+Carimbo no ar: `b10937808808` · 32 endereço(s) conferidos · HTML 263 KB
+
+---
+
+## 29/09/2026 21:44 — `4600817`
+
+**O quê:** ofertas_do_dia: link de afiliado do produtos_publicados (o links.json do repo e' velho)
+
+Carimbo no ar: `3b6cc3216bce` · 32 endereço(s) conferidos · HTML 263 KB
+
+---
+
+## 29/09/2026 20:41 — `038874b`
+
+**O quê:** ofertas: workflow manual que gera os videos do dia (sem agendar); alertas rodam mesmo com ApiCallLimit
+
+Carimbo no ar: `77b028be56d8` · 32 endereço(s) conferidos · HTML 262 KB
+
+---
+
+## 29/09/2026 19:36 — `d924345`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `8925e23cb82b` · 32 endereço(s) conferidos · HTML 261 KB
+
+---
+
+## 29/09/2026 18:35 — `91e75fa`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `595eb4728a7a` · 32 endereço(s) conferidos · HTML 260 KB
+
+---
+
+## 29/09/2026 18:15 — `633b568`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `d83a0fda882e` · 32 endereço(s) conferidos · HTML 260 KB
+
+---
+
+## 29/09/2026 17:57 — `12e7ad3`
+
+**O quê:** ferramenta: video de oferta 9:16 (Pago Menos) com preco provado pela serie
+
+Carimbo no ar: `c4888dff430f` · 32 endereço(s) conferidos · HTML 259 KB
+
+---
+
+## 29/09/2026 17:04 — `2b49acb`
+
+**O quê:** garimpo: precos vistos
+
+Carimbo no ar: `39825ffd3572` · 32 endereço(s) conferidos · HTML 259 KB
+
+---
+
+## 29/09/2026 16:20 — `d19bd61`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `7a76ebdc43de` · 32 endereço(s) conferidos · HTML 258 KB
+
+---
+
+## 29/09/2026 15:52 — `f10eec4`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `335723fe8907` · 32 endereço(s) conferidos · HTML 258 KB
+
+---
+
+## 29/09/2026 15:21 — `f10eec4`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `a6d3219d5e7b` · 32 endereço(s) conferidos · HTML 108 KB
+
+---
+
+## 29/09/2026 12:36 — `8106c44`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `605bf0ea3601` · 32 endereço(s) conferidos · HTML 247 KB
+
+---
+
+## 29/09/2026 12:08 — `8106c44`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `1d47f0ecee97` · 32 endereço(s) conferidos · HTML 247 KB
+
+---
+
+## 29/09/2026 11:47 — `87f499a`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e2a1b9a3d4a8` · 32 endereço(s) conferidos · HTML 246 KB
+
+---
+
+## 29/09/2026 11:19 — `50394cf`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `050a62a5c279` · 32 endereço(s) conferidos · HTML 245 KB
+
+---
+
+## 29/09/2026 09:26 — `2cbbeb5`
+
+**O quê:** selo PARTE N: 1 numero por clipe (nao por versao tiktok/reels), na ordem do video (= ordem do Buffer), contando so' o mesmo canal
+
+Carimbo no ar: `d272e17300ad` · 32 endereço(s) conferidos · HTML 245 KB
+
+---
+
+## 29/09/2026 07:29 — `20a3dda`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `95ae44525d25` · 32 endereço(s) conferidos · HTML 245 KB
+
+---
+
+## 29/09/2026 06:38 — `b1fd773`
+
+**O quê:** guardas: trecho enfileirado e registro de clipe
+
+Carimbo no ar: `537853510497` · 32 endereço(s) conferidos · HTML 259 KB
+
+---
+
+## 29/09/2026 03:15 — `10777d2`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `442bf0bcf5a9` · 32 endereço(s) conferidos · HTML 258 KB
+
+---
+
+## 29/09/2026 02:57 — `10777d2`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e0737399b1d1` · 32 endereço(s) conferidos · HTML 257 KB
+
+---
+
+## 29/09/2026 01:37 — `c1c4c23`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `6e1c119ebcff` · 32 endereço(s) conferidos · HTML 257 KB
+
+---
+
+## 29/09/2026 00:16 — `fc3b4fb`
+
+**O quê:** corte: guardas somam em cima do main e tentam de novo (conflito do Coragem 28/09)
+
+Carimbo no ar: `ccb91395bb34` · 32 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 22:20 — `4e4c549`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `974d12bf15b4` · 32 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 21:42 — `c554976`
+
+**O quê:** vigia: pastas GERACAO 2000 e ACHADINHO CHEF (nomes atuais dos canais), antigos seguem valendo
+
+Carimbo no ar: `0626753b344c` · 32 endereço(s) conferidos · HTML 255 KB
+
+---
+
+## 28/09/2026 20:21 — `724825b`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `2c405b99e459` · 32 endereço(s) conferidos · HTML 257 KB
+
+---
+
+## 28/09/2026 19:53 — `7ba64c1`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `595ce1c64a62` · 32 endereço(s) conferidos · HTML 255 KB
+
+---
+
+## 28/09/2026 19:10 — `5e8c6a4`
+
+**O quê:** Chef: 1 ficha por video (tiramisu junto), numero fixo na ordem de publicacao, fora quarentena, tempo da parte mais longa
+
+Carimbo no ar: `e2f41cd6abb5` · 32 endereço(s) conferidos · HTML 255 KB
+
+---
+
+## 28/09/2026 18:54 — `5e8c6a4`
+
+**O quê:** Chef: 1 ficha por video (tiramisu junto), numero fixo na ordem de publicacao, fora quarentena, tempo da parte mais longa
+
+Carimbo no ar: `8c90cbbd4f82` · 32 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 18:14 — `e5d8fd4`
+
+**O quê:** bio: bloco de receitas pelo nome publico (detector de vazamento)
+
+Carimbo no ar: `cdb3dc69837a` · 26 endereço(s) conferidos · HTML 252 KB
+
+---
+
+## 28/09/2026 17:36 — `86d26e2`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `41f3f45bba0a` · 26 endereço(s) conferidos · HTML 251 KB
+
+---
+
+## 28/09/2026 16:22 — `e1d991f`
+
+**O quê:** trocar_legendas: --apagar sem --id so' lista os ids
+
+Carimbo no ar: `1888c1075f68` · 26 endereço(s) conferidos · HTML 251 KB
+
+---
+
+## 28/09/2026 15:22 — `7a3a41d`
+
+**O quê:** guardas: trecho enfileirado e registro de clipe
+
+Carimbo no ar: `7b60924f54a8` · 26 endereço(s) conferidos · HTML 247 KB
+
+---
+
+## 28/09/2026 13:08 — `f4378a8`
+
+**O quê:** trocar legendas: simulacao mostra o id do post
+
+Carimbo no ar: `50b11628dfad` · 32 endereço(s) conferidos · HTML 248 KB
+
+---
+
+## 28/09/2026 12:26 — `c6cad35`
+
+**O quê:** trocar legendas: --criar cria post novo com a legenda do manifesto (repost do video do mar)
+
+Carimbo no ar: `192d6e8e82a8` · 29 endereço(s) conferidos · HTML 247 KB
+
+---
+
+## 28/09/2026 12:11 — `f687a0c`
+
+**O quê:** nostalgia: nome Geracao 2000 na bio e no e-mail (@atefalhar ate' o @ liberar)
+
+Carimbo no ar: `0d09266389c1` · 29 endereço(s) conferidos · HTML 247 KB
+
+---
+
+## 28/09/2026 11:55 — `5afd987`
+
+**O quê:** nostalgia: balao do controle remoto no bloco de e-mail da bio
+
+Carimbo no ar: `21118e3adb74` · 29 endereço(s) conferidos · HTML 246 KB
+
+---
+
+## 28/09/2026 11:35 — `7e968e6`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `44ca3a17af6a` · 29 endereço(s) conferidos · HTML 246 KB
+
+---
+
+## 28/09/2026 11:13 — `4a8e43d`
+
+**O quê:** bios: balao do canal no bloco de e-mail (chef envelope com receita, make batom, modo futuro foguete, sem anestesia cerebro)
+
+Carimbo no ar: `18ffbcf69951` · 29 endereço(s) conferidos · HTML 258 KB
+
+---
+
+## 28/09/2026 10:09 — `3c1e6f6`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `a7f061d9a91e` · 29 endereço(s) conferidos · HTML 257 KB
+
+---
+
+## 28/09/2026 09:29 — `2bbef9f`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `c5fa7b24e8c8` · 29 endereço(s) conferidos · HTML 257 KB
+
+---
+
+## 28/09/2026 07:20 — `2bbef9f`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `8727f014b8db` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 06:12 — `31f94ba`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `1b39463c7c9b` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 05:33 — `31f94ba`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `f28d18857b17` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 03:11 — `105c12c`
+
+**O quê:** Achadinho Chef: selo MEDIDAS EM GRAMA E C (nunca selo de serie na receita), cartao de fecho da receita, bloco de e-mail 'cardapio de marmitas' na bio e e-mail das receitas (so' com >= 3 receitas)
+
+Carimbo no ar: `44ffb0e06b8b` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 02:12 — `105c12c`
+
+**O quê:** Achadinho Chef: selo MEDIDAS EM GRAMA E C (nunca selo de serie na receita), cartao de fecho da receita, bloco de e-mail 'cardapio de marmitas' na bio e e-mail das receitas (so' com >= 3 receitas)
+
+Carimbo no ar: `5fe3edbf4663` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 01:51 — `195b991`
+
+**O quê:** Achadinho Chef: Buffer novo (@achadinhochef) com guarda por nome canonico, freio solto, A/B da abertura (prato pronto), radar marmita/barato/proteico, bio com vitrine de marmita e sem Telegram
+
+Carimbo no ar: `4f8059d019db` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
+## 28/09/2026 01:38 — `ac96dd4`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `ec43650e36e3` · 29 endereço(s) conferidos · HTML 255 KB
+
+---
+
+## 28/09/2026 00:11 — `e2f0f79`
+
+**O quê:** trocar legendas: --video troca so' o video de um post agendado (selo PARTE 3 gravado errado)
+
+Carimbo no ar: `9c8e2cdf3012` · 29 endereço(s) conferidos · HTML 256 KB
+
+---
+
 ## 22/09/2026 20:49 — `3e78f1b`
 
 **O quê:** precos: instantaneo do catalogo

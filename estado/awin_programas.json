@@ -1,5 +1,5 @@
 {
-  "quando": "2026-09-29T16:35:14+00:00",
+  "quando": "2026-09-30T16:28:25+00:00",
   "programas": {
     "Nike BR": "joined",
     "Kabum BR": "joined",
@@ -35,7 +35,6 @@
     "Phebo BR": "pending",
     "IBBL BR": "pending",
     "Nutriage BR": "pending",
-    "JBL BR": "pending",
     "CVC BR": "pending",
     "Drogaria Catarinense BR": "pending",
     "Farmácia Preço Popular BR": "pending",
@@ -53,7 +52,6 @@
     "Eudora BR": "rejected",
     "Drogaria Araujo BR": "rejected",
     "Continental BR": "rejected",
-    "Vult BR": "rejected",
     "Avon BR": "rejected",
     "Allianz Travel BR": "rejected",
     "Motorola BR": "rejected",
@@ -71,6 +69,7 @@
     "Trussardi BR": "rejected",
     "Expedia BR": "rejected",
     "Shop2gether BR": "rejected",
+    "JBL BR": "rejected",
     "Loja do Mecanico BR": "rejected",
     "Truss BR": "rejected",
     "Dark Lab BR": "rejected",

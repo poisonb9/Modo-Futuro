@@ -306,10 +306,13 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         # disso e' a coluna de icones do TikTok).
         esq, dir_ = (W - lado) / 2, (W + lado) / 2
         chega = ease(t / 0.8)                      # o balao do perfil entra pela esquerda
-        _colar(im, _balao(BALAO_DO_CANAL.get(marca, "loja_lupa"), 230),
+        bal = BALAO_DO_CANAL.get(marca, "loja_lupa")
+        _colar(im, _balao(bal, 170, (0, 0, 494, 560)) if bal == "loja_lupa" else _balao(bal, 230),
                esq - 40 - 260 * (1 - chega), y_foto + 150 + 8 * math.sin(t * 2), -8 + 3 * math.sin(t * 1.5))
         _colar(im, _balao("inaug_estrela", 118), dir_ + 22, y_foto + 40 + 9 * math.sin(t * 1.7), 8 + 5 * math.sin(t * 1.3))
-        _colar(im, _balao("inaug_laco", 92), esq - 30, y_foto + lado - 60 + 7 * math.sin(t * 1.4 + 1), 5 * math.sin(t * 1.1 + 2))
+        _colar(im, _balao("loja_sacola", 190, (0, 0, 454, 560)), esq - 42, y_foto + lado - 150 + 7 * math.sin(t * 1.4 + 1),
+               6 + 4 * math.sin(t * 1.1 + 2))
+        _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite
     faixa = None
@@ -326,18 +329,35 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         faixa = "LINK NA BIO"
     if faixa:
         conv = festa and t >= 15
-        fg = _caber(dr, faixa, "Anton-Regular.ttf", 96, SEG_LARG - 90 - (170 if conv else 0), 50)
-        tw = dr.textlength(faixa, font=fg)
-        desl = 80 if conv else 0            # abre espaco pro envelope
-        camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-        cd = ImageDraw.Draw(camada)
         yf = y_base_foto - 70
-        pilula(cd, (W - tw) / 2 - 45 + desl, yf, (W + tw) / 2 + 45 + desl, yf + 132, OURO + (int(255 * e),))
-        cd.text(((W - tw) / 2 + desl, yf + 6), faixa, font=fg, fill=FUNDO + (int(255 * e),))
-        im.paste(camada, (0, 0), camada)
-        if conv:    # o envelope-convite dos e-mails, chegando
-            _colar(im, _balao("chef_envelope_coracao", 170, (0, 0, 1254, 860)),
-                   (W - tw) / 2 - 45 + desl - 80, yf + 66 + 60 * (1 - e), -10 + 4 * math.sin(t * 2), e)
+        if festa:
+            # ⭐ 30/09 (dono: "balao faixa azul bem bonito", arte dele): o texto vai
+            # no miolo liso da FAIXA AZUL (17%-83% da largura). No convite final a
+            # MAO de balao aponta pro "link na bio" (troca o envelope, "feio").
+            larg = 700 if conv else 760
+            fx = _balao("loja_faixa_azul", 200, (0, 0, 1000, 262))   # so' pra proporcao
+            alt = round(larg * fx.height / fx.width)
+            banda = _balao("loja_faixa_azul", alt, (0, 0, 1000, 262)).copy()
+            bd = ImageDraw.Draw(banda)
+            fg = _caber(bd, faixa, "Anton-Regular.ttf", int(alt * 0.52), int(banda.width * 0.64), 40)
+            tw = bd.textlength(faixa, font=fg)
+            asc, desc = fg.getmetrics()
+            ty = (alt - asc - desc) / 2 - alt * 0.03
+            bd.text(((banda.width - tw) / 2 + 3, ty + 4), faixa, font=fg, fill=(10, 20, 70))
+            bd.text(((banda.width - tw) / 2, ty), faixa, font=fg, fill=BRANCO)
+            cx = W / 2 + (60 if conv else 0)
+            _colar(im, banda, cx, yf + 66 + (40 * (1 - e) if conv else 0), 1.5 * math.sin(t * 1.6), e)
+            if conv:
+                _colar(im, _balao("loja_mao", 250, (0, 0, 419, 780)), cx - banda.width / 2 - 20,
+                       yf + 40 + 70 * (1 - e) + 8 * math.sin(t * 3), -18 + 6 * math.sin(t * 3), e)
+        else:
+            fg = _caber(dr, faixa, "Anton-Regular.ttf", 96, SEG_LARG - 90, 50)
+            tw = dr.textlength(faixa, font=fg)
+            camada = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            cd = ImageDraw.Draw(camada)
+            pilula(cd, (W - tw) / 2 - 45, yf, (W + tw) / 2 + 45, yf + 132, OURO + (int(255 * e),))
+            cd.text(((W - tw) / 2, yf + 6), faixa, font=fg, fill=FUNDO + (int(255 * e),))
+            im.paste(camada, (0, 0), camada)
         dr = ImageDraw.Draw(im)
 
     # nome + confianca da loja

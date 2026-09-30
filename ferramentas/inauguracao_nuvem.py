@@ -73,7 +73,8 @@ def refazer(itens: str) -> bool:
     feitas = [json.loads(l) for l in open(RAIZ / "estado" / "ofertas_feitas.jsonl", encoding="utf-8") if l.strip()]
     novos = []
     for it in [i.strip() for i in itens.split("||") if i.strip()]:
-        alvo, quando = [x.strip() for x in it.split("@@")]
+        alvo, quando, *modo = [x.strip() for x in it.split("@@")]
+        festa = not (modo and modo[0] == "semfesta")    # antes da abertura: so' o layout novo
         canal, n = alvo.split(":")
         f = next(x for x in reversed(feitas) if x["canal"] == canal and x.get("numero") == int(n))
         nome = f"{f['dia']}_{canal.replace('.', '-')}_{f['id']}"
@@ -83,10 +84,11 @@ def refazer(itens: str) -> bool:
         d = vo.dados(f["id"])
         vo.RAIZ = raiz_real
         assert abs(d["agora"] - f["agora"]) < 0.005 and d["hora"] in f["comentario"], (d["agora"], d["hora"])
-        d.update(gancho="", marca=vo.MARCAS[canal], numero=int(n), id=f["id"], festa=True)
+        d.update(gancho="", marca=vo.MARCAS[canal], numero=int(n), id=f["id"], festa=festa)
         cart = [vo.cartao(vo.baixar(u), 820) for u in d["imagens"]]
         fundo = vo.base_fundo()
-        saida = Path(nome + "_festa.mp4")
+        suf = "_festa" if festa else "_v2"
+        saida = Path(nome + suf + ".mp4")
         p = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
                               "-s", f"{vo.W}x{vo.H}", "-r", str(vo.FPS), "-i", "-", "-i", str(orig),
                               "-map", "0:v", "-map", "1:a", "-t", str(vo.DUR), "-c:v", "libx264",
@@ -98,7 +100,7 @@ def refazer(itens: str) -> bool:
         p.wait()
         _gh("release", "upload", f"ofertas-{f['dia'][:7]}", str(saida), "--clobber")
         print(f"  ok visual de festa: {saida.name}")
-        novos.append(f"{canal}:{n}@@{quando}@@_festa")
+        novos.append(f"{canal}:{n}@@{quando}@@{suf}")
     r = subprocess.run([sys.executable, "-X", "utf8", str(RAIZ / "ferramentas" / "mover_ofertas.py"),
                         "--itens", "||".join(novos)])
     return r.returncode == 0

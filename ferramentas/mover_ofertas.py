@@ -15,6 +15,9 @@ sys.path.insert(0, str(RAIZ))
 import agendar_buffer as ab  # noqa: E402
 from engine import canais_registro as cr  # noqa: E402
 
+import json  # noqa: E402
+FEITAS = [json.loads(l) for l in (RAIZ / "estado" / "ofertas_feitas.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+
 M = """mutation($input: EditPostInput!) { editPost(input: $input) { __typename
   ... on PostActionSuccess { post { id dueAt } } ... on InvalidInputError { message }
   ... on UnexpectedError { message } ... on RestProxyError { message } } }"""
@@ -46,8 +49,16 @@ def main() -> None:
             if a.simular:
                 print(f"    SIMULADO -> {due}")
                 continue
-            d = ab.consultar(tok, M, {"input": {"id": x["id"], "dueAt": due,
-                                                "mode": "customScheduled", "schedulingType": "automatic"}})["editPost"]
+            # ⚠️ o editPost EXIGE texto e video de novo (InvalidInputError sem eles)
+            n = int(m.group(1))
+            f = next(f for f in reversed(FEITAS) if f["canal"] == canal and f.get("numero") == n)
+            url = (f"https://github.com/poisonb9/Modo-Futuro/releases/download/ofertas-{f['dia'][:7]}/"
+                   f"{f['dia']}_{canal.replace('.', '-')}_{f['id']}.mp4")
+            titulo = (x.get("text") or "").splitlines()[0][:90]
+            d = ab.consultar(tok, M, {"input": {"id": x["id"], "dueAt": due, "text": x.get("text"),
+                                                "mode": "customScheduled", "schedulingType": "automatic",
+                                                "assets": [{"video": {"url": url}}],
+                                                "metadata": {"tiktok": {"isAiGenerated": True, "title": titulo}}}})["editPost"]
             ok = d["__typename"] == "PostActionSuccess"
             falhou |= not ok
             print(f"    {'movido' if ok else '[!] FALHOU'} #{m.group(1)} -> {d.get('post', {}).get('dueAt') if ok else d}")

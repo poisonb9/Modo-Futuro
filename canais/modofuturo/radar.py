@@ -95,6 +95,19 @@ BUSCAS = [
     "chip fab contamination particle",
     "wafer defect cost",
     "inside chip factory documentary",
+    # ⭐ 30/09/2026: as 12 buscas acima esgotaram — os 36 que devolviam ja'
+    # estavam em `baixados_em_intervalos.json`. Novas buscas, todas dentro
+    # do NUCLEO (o filtro de tema e os vetos seguem valendo).
+    "how GPUs are made",
+    "nvidia chip manufacturing",
+    "TSMC fab tour",
+    "Intel fab tour",
+    "memory chip factory micron",
+    "samsung semiconductor factory",
+    "how transistors are made",
+    "wafer fab robots",
+    "silicon ingot growing",
+    "most expensive machine in the world lithography",
 ]
 
 # Material que o motor nao consegue usar, ou que o canal ja' provou nao render.

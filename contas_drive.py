@@ -50,9 +50,9 @@ CONTAS = [
         "nome": "labzirkonart",
         "token": "token_drive_3.json",
         "email": "zirkonartlaboratorio@gmail.com",
-        "raiz": "15_jJUWfjvPdmrdaju5Me2b67OO7_jZpA",
-        "raw": "1yt0JvJMeqiRkyDF9IS4vl2QOV-Wtt0yd",
-        "a_postar": "1QoJwIYvZ-gOYvaxBXOY7xjX4JTJkWa_Z",
+        "raiz": "10I3xaLSxtM1xehT0nrBYhm5aGo-FQhpZ",   # tiktok (recriada 30/09/2026 — a antiga sumiu, 404)
+        "raw": "1or83cjMHqex4GsFdGP7lOLmdNfjSLwBY",
+        "a_postar": "1ekQb_zMhLct1zoVRlIP-2vpeCMsJCPgF",
         "secret": "GOOGLE_OAUTH_TOKEN_JSON_3",
     },
 ]

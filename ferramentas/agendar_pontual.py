@@ -30,7 +30,7 @@ def main() -> None:
     a = p.parse_args()
     tb, tg = ab._token_buffer(), ab._token_github()
     _, canal, conhecidos = ab.contexto_buffer(tb, fresco=True)
-    na_fila = {ab._chave_texto(x.get("text") or "") for x in conhecidos}
+    na_fila = {ab._chave_texto(x.get("text") or ""): x for x in conhecidos}
     manif = ab.manifesto(tg, None)
     for item in [i.strip() for i in a.itens.split("||") if i.strip()]:
         titulo, quando = [x.strip() for x in item.split("@@")]
@@ -39,7 +39,8 @@ def main() -> None:
             print(f"  [!] nao achei no manifesto: {titulo}")
             continue
         if ab._chave_texto(clipe.get("legenda") or titulo) in na_fila:
-            print(f"  = ja' esta' no Buffer: {titulo}")
+            x = na_fila[ab._chave_texto(clipe.get("legenda") or titulo)]
+            print(f"  = ja' esta' no Buffer ({x.get('status')} {x.get('dueAt')}): {titulo}")
             continue
         j = ct.julgar(ct.audio_do_video(clipe["url"]), titulo)
         if not j or not j.get("bate"):

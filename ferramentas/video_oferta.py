@@ -184,7 +184,11 @@ BALOES = RAIZ / "paginas" / "baloes"
 # ⚠️ o NOME do arquivo engana: `canal_pago_menos` e' o CIFRAO e `canal_achadinhos_instantaneos`
 # o CARRINHO. Aqui vale o AVATAR de cada perfil (prints do dono, 30/09).
 BALAO_DO_CANAL = {"PAGO MENOS": "canal_achadinhos_instantaneos", "ACHADINHO TOTAL": "canal_pago_menos",
-                  "ACHEI PRA VOCÊ": "loja_lupa"}   # 30/09: a lupa da LOJA (arte do dono), = avatar
+                  "ACHEI PRA VOCÊ": "loja_lupa"}
+# o que ENTRA no comeco (0-1,5 s). Achei Pra Voce: a lupa dourada de letra-balao.
+BALAO_ENTRADA = {"PAGO MENOS": "canal_achadinhos_instantaneos", "ACHADINHO TOTAL": "canal_pago_menos",
+                 "ACHEI PRA VOCÊ": "inaug_lupa"}
+AVATAR_X, AVATAR_Y = 993, 797     # foto de perfil na coluna do TikTok (prints do dono, 1080x1920)   # 30/09: a lupa da LOJA (arte do dono), = avatar
 INAUGURACAO_ATE = "2026-10-07"
 _CACHE: dict = {}
 
@@ -219,8 +223,14 @@ def _confete(im: Image.Image, t: float, semente: int, cx: float, cy: float):
         return
     pecas = sorted((BALOES / "lanca").glob("p*.webp"))
     rnd = random.Random(semente)
-    for lado, x0 in ((-1, cx - 360), (1, cx + 300)):
-        _colar(im, _balao("lanca/cone", 110), x0, cy + 40, 35 * -lado, 1 - max(0, t - 1.6) / 0.6)
+    for lado, x0 in ((-1, cx - 390), (1, cx + 360)):
+        # ⭐ 30/09 (dono: "cada um mirando pra um canto aleatorio"): os dois
+        # SIMETRICOS, boca pra dentro e pra cima (o da direita e' o espelho).
+        cone = _balao("lanca/cone", 120)
+        if lado > 0:
+            from PIL import ImageOps
+            cone = ImageOps.mirror(cone)
+        _colar(im, cone, x0, cy + 60, 0, 1 - max(0, t - 1.6) / 0.6)
         for _ in range(26):
             f = pecas[rnd.randrange(len(pecas))]
             ang = math.radians(rnd.uniform(55, 88))
@@ -275,7 +285,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     dr.text((x0 + 40, y0 + 5), selo, font=fs, fill=BRANCO)
 
     # foto: cartao menor, centrado, inteiro fora da coluna de icones
-    lado = 560
+    lado = 480
     n = min(len(cartoes), 4)
     k = int(t // 3.2) % n
     frac = (t % 3.2) / 3.2
@@ -300,18 +310,29 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         im.paste(a.resize((ld, ld)), ((W - ld) // 2, y_foto + (lado - ld) // 2), mask)
 
     if festa:
-        # enfeite na margem ESQUERDA (o TikTok nao cobre), balancando
-        # ⭐ 30/09 (dono: "os baloes grudados na borda poderiam estar perto do
-        # produto"): tudo ABRACANDO o cartao. Direita so' acima de y 750 (abaixo
-        # disso e' a coluna de icones do TikTok).
+        # ⭐ 30/09 18:30 (dono, ajuste fino): 3 papeis de balao —
+        #  1. ENTRADA: a lupa (ou o balao do perfil) sobe grande, passa POR CIMA
+        #     do produto "procurando" e vai pro lado esquerdo do cartao;
+        #  2. PERFIL: a lupa da LOJA, com fita, flutua em cima da foto de perfil
+        #     do TikTok (coluna da direita), a fita encostando na foto — e' la'
+        #     que esta' o link;
+        #  3. sem balao atras do laco; sacola some quando a MAO entra (15 s).
         esq, dir_ = (W - lado) / 2, (W + lado) / 2
-        chega = ease(t / 0.8)                      # o balao do perfil entra pela esquerda
-        bal = BALAO_DO_CANAL.get(marca, "loja_lupa")
-        _colar(im, _balao(bal, 170, (0, 0, 494, 560)) if bal == "loja_lupa" else _balao(bal, 230),
-               esq - 40 - 260 * (1 - chega), y_foto + 150 + 8 * math.sin(t * 2), -8 + 3 * math.sin(t * 1.5))
-        _colar(im, _balao("inaug_estrela", 118), dir_ + 22, y_foto + 40 + 9 * math.sin(t * 1.7), 8 + 5 * math.sin(t * 1.3))
-        _colar(im, _balao("loja_sacola", 190, (0, 0, 454, 560)), esq - 42, y_foto + lado - 150 + 7 * math.sin(t * 1.4 + 1),
-               6 + 4 * math.sin(t * 1.1 + 2))
+        ent = BALAO_ENTRADA.get(marca, "inaug_lupa")
+        sobe, some = ease(t / 0.7), ease((t - 1.05) / 0.5)
+        procura = 60 * math.sin(max(0.0, t - 0.6) * 5) * (1 - some) if t > 0.6 else 0
+        alt = int(470 - 270 * some)
+        cx = W / 2 + procura + (esq - 55 - W / 2) * some
+        cy = (H + 300) - (H + 300 - (y_foto + lado * 0.45)) * sobe
+        cy += ((y_foto + 175) - (y_foto + lado * 0.45)) * some + 6 * math.sin(t * 2)
+        _colar(im, _balao(ent, alt), cx, cy, -6 * some + 3 * math.sin(t * 1.5))
+        # 2. em cima da foto de perfil (medida nos prints: centro ~(993, 797))
+        per = BALAO_DO_CANAL.get(marca, "loja_lupa")
+        _colar(im, _balao(per, 330), AVATAR_X + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
+               2 * math.sin(t * 1.1), ease((t - 0.4) / 0.6))
+        # 3. sacola ao lado do cartao (sai quando a mao chega) e laco = presente
+        _colar(im, _balao("loja_sacola", 180, (0, 0, 454, 560)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),
+               6 + 4 * math.sin(t * 1.1 + 2), 1 - ease((t - 14.6) / 0.4))
         _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite
@@ -348,8 +369,9 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             cx = W / 2 + (60 if conv else 0)
             _colar(im, banda, cx, yf + 66 + (40 * (1 - e) if conv else 0), 1.5 * math.sin(t * 1.6), e)
             if conv:
-                _colar(im, _balao("loja_mao", 250, (0, 0, 419, 780)), cx - banda.width / 2 - 20,
-                       yf + 40 + 70 * (1 - e) + 8 * math.sin(t * 3), -18 + 6 * math.sin(t * 3), e)
+                # aponta pra cima-direita: pro balao em cima da foto de perfil (o link)
+                _colar(im, _balao("loja_mao", 240, (0, 0, 419, 780)), cx - banda.width / 2 + 10,
+                       yf - 10 + 70 * (1 - e) + 8 * math.sin(t * 3), -38 + 5 * math.sin(t * 3), e)
         else:
             fg = _caber(dr, faixa, "Anton-Regular.ttf", 96, SEG_LARG - 90, 50)
             tw = dr.textlength(faixa, font=fg)
@@ -361,18 +383,31 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         dr = ImageDraw.Draw(im)
 
     # nome + confianca da loja
-    y = y_base_foto + 80
-    centro(dr, y, d["nome"], _caber(dr, d["nome"], "Poppins-Bold.ttf", 42, SEG_LARG, 28), BRANCO)
+    # ⭐ 30/09 (dono: "a descricao do produto esta' muito pequena"): 52 px, ate'
+    # 2 linhas partidas no meio (acervo: "garantir que o texto seja legivel").
+    y = y_base_foto + 76
+    fn = fonte("Poppins-Bold.ttf", 52)
+    linhas = [d["nome"]]
+    if dr.textlength(d["nome"], font=fn) > SEG_LARG:
+        pal = d["nome"].split()
+        k = min(range(1, len(pal)), key=lambda i: abs(dr.textlength(" ".join(pal[:i]), font=fn)
+                                                      - dr.textlength(" ".join(pal[i:]), font=fn)))
+        linhas = [" ".join(pal[:k]), " ".join(pal[k:])]
+    fn = _caber(dr, max(linhas, key=lambda l: dr.textlength(l, font=fn)), "Poppins-Bold.ttf", 52, SEG_LARG, 36)
+    for li in linhas:
+        centro(dr, y, li, fn, BRANCO)
+        y += fn.size + 10
     if d.get("nota") and d.get("vendas"):
         loja = f"loja nota {str(d['nota']).replace('.', ',')}  ·  {vendas_curto(d['vendas'])} vendidos"
-        centro(dr, y + 52, loja, fonte("Poppins-Bold.ttf", 26), CINZA)
+        centro(dr, y + 2, loja, fonte("Poppins-Bold.ttf", 28), CINZA)
+    y_preco = y + 58
 
     # preco (a partir de PRECO_T) — tudo termina acima de SEG_BASE. 30/09: era
     # 3,5 s e o terco de baixo ficava vazio; o acervo so' pede nada de desconto
     # nos 2 PRIMEIROS segundos.
     if t >= PRECO_T:
         e = ease((t - PRECO_T) / 0.6)
-        y = int(y_base_foto + 184 + 20 * (1 - e))
+        y = int(min(y_preco, SEG_BASE - 250) + 20 * (1 - e))
         fa = fonte("Poppins-Bold.ttf", 40)
         fp = fonte("Anton-Regular.ttf", 128)
         preco = reais(d["agora"])

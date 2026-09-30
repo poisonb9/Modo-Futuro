@@ -332,7 +332,12 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
                2 * math.sin(t * 1.1), ease((t - 0.4) / 0.6))
         # 3. sacola ao lado do cartao (sai quando a mao chega) e laco = presente
         _colar(im, _balao("loja_sacola", 180, (0, 0, 970, 610)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),
-               6 + 4 * math.sin(t * 1.1 + 2), 1 - ease((t - 14.6) / 0.4))
+               6 + 4 * math.sin(t * 1.1 + 2), 1 - ease((t - PRECO_T - 0.4) / 0.4))
+        # ⭐ 30/09 (arte do dono): logo depois do preco, o SELO "preco conferido"
+        # toma o lugar da sacola — a prova no momento da decisao. Sai quando a mao entra.
+        selo = ease((t - PRECO_T - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
+        _colar(im, _balao("selo_preco_conferido", 215, (0, 0, 733, 770)), esq - 45,
+               y_foto + lado - 95 + 30 * (1 - selo) + 6 * math.sin(t * 1.5), -8 + 3 * math.sin(t * 1.2), selo)
         _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite

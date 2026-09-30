@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-09-30T19:08:01",
+  "medido_em": "2026-09-30T23:41:26",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -10,7 +10,7 @@
       "comentarios": 63,
       "shares": 51,
       "engajamento_pct": 104.94,
-      "posts_recentes": 4,
+      "posts_recentes": 2,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -19,36 +19,32 @@
         },
         {
           "views": 0,
-          "titulo": "Felix do Stray Kids ganha maquiagem de lágrimas angelicais!\n"
-        },
-        {
-          "views": 0,
-          "titulo": "Felix do Stray Kids ensina seu método bizarro de colocar len"
+          "titulo": "Felix do Stray Kids choca maquiadora ao revelar segredo dos "
         }
       ]
     },
     "modofuturo": {
-      "posts": 32,
+      "posts": 35,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 244,
-      "comentarios": 7,
+      "reacoes": 268,
+      "comentarios": 13,
       "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 7,
+      "posts_recentes": 10,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "POR QUE O ACIDENTE DE THREE MILE ISLAND NÃO FOI COMO CHERNOB"
+        },
+        {
+          "views": 0,
+          "titulo": "POR QUE A MICROSOFT JOGOU SEUS SERVIDORES NO MAR?\n\nMais da m"
+        },
+        {
+          "views": 0,
           "titulo": "O TRUQUE BILIONÁRIO DA MICROSOFT COM ENERGIA NUCLEAR\n\nConstr"
-        },
-        {
-          "views": 0,
-          "titulo": "O REATOR NUCLEAR QUE A MICROSOFT VAI REATIVAR EM 2028\n\nA Mic"
-        },
-        {
-          "views": 0,
-          "titulo": "O ACORDO DE 20 ANOS DA MICROSOFT COM UMA USINA NUCLEAR\n\nA Mi"
         }
       ]
     },
@@ -60,7 +56,7 @@
       "comentarios": 70,
       "shares": 54,
       "engajamento_pct": 0.0,
-      "posts_recentes": 25,
+      "posts_recentes": 21,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +111,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 26,
+      "posts": 27,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 141,
+      "reacoes": 154,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 5,
+      "posts_recentes": 6,
       "views_recentes": 0,
       "melhores_recentes": [
         {

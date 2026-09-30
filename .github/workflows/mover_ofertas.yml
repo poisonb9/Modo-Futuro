@@ -1,0 +1,25 @@
+name: Mover ofertas (horario no Buffer)
+on:
+  workflow_dispatch:
+    inputs:
+      itens:
+        description: "canal:N@@AAAA-MM-DD HH:MM (hora SP) separados por ||"
+        required: true
+      simular:
+        description: "true = so' lista"
+        default: "false"
+jobs:
+  mover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests python-dotenv
+      - env:
+          PAGOMENOS: ${{ secrets.PAGOMENOS }}
+          ACHADINHOSINSTANTANEOS: ${{ secrets.ACHADINHOSINSTANTANEOS }}
+          ACHADINHOTOTAL: ${{ secrets.ACHADINHOTOTAL }}
+        run: python -X utf8 ferramentas/mover_ofertas.py --itens "${{ inputs.itens }}" ${{ inputs.simular == 'true' && '--simular' || '' }}

@@ -336,7 +336,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         # ⭐ 30/09 (arte do dono): logo depois do preco, o SELO "preco conferido"
         # toma o lugar da sacola — a prova no momento da decisao. Sai quando a mao entra.
         selo = ease((t - PRECO_T - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
-        _colar(im, _balao("selo_preco_conferido", 215, (0, 0, 733, 770)), esq - 45,
+        _colar(im, _balao("selo_preco_conferido", 215), esq - 45,
                y_foto + lado - 95 + 30 * (1 - selo) + 6 * math.sin(t * 1.5), -8 + 3 * math.sin(t * 1.2), selo)
         _colar(im, _balao("inaug_laco", 96, (0, 0, 360, 330)), dir_ - 10, y_foto + 8, 18)   # o cartao vira PRESENTE
 
@@ -446,8 +446,17 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             badge = f"-{round(d['queda'] * 100)}%"
             bw = dr.textlength(badge, font=fb)
             bx = px + pw - bw - 10
-            pilula(dr, bx - 18, y - 4, bx + bw + 18, y + 48, (200, 46, 60))
-            dr.text((bx, y - 1), badge, font=fb, fill=BRANCO)
+            # ⭐ 30/09 (arte do dono): a PILULA de balao vermelha carrega o -N%
+            pil = _balao("pilula_desconto", 110).copy()
+            pd = ImageDraw.Draw(pil)
+            fb2 = _caber(pd, badge, "Anton-Regular.ttf", 64, int(pil.width * 0.55), 30)
+            bx0, by0, bx1, by1 = pd.textbbox((0, 0), badge, font=fb2)
+            px2 = pil.width * 0.45 - (bx0 + bx1) / 2          # centro do miolo liso
+            py2 = pil.height * 0.60 - (by0 + by1) / 2         # (a pilula sobe pra direita)
+            pd.text((px2 + 3, py2 + 3), badge, font=fb2, fill=(70, 5, 10))
+            pd.text((px2, py2), badge, font=fb2, fill=BRANCO)
+            _colar(im, pil, bx + bw / 2, y + 16, 0, e)
+            dr = ImageDraw.Draw(im)
             nota = f"“antes” = preço mais comum nos últimos {d['dias']} dias"
             _confete(im, t - PRECO_T, int(str(d.get("id") or "7")[-6:]), W / 2, y + 100)
             dr = ImageDraw.Draw(im)

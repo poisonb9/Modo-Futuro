@@ -118,6 +118,8 @@ def main() -> None:
     ap.add_argument("--registrar", action="store_true")
     ap.add_argument("--agendar", action="store_true",
                     help="poe cada video na fila do Buffer do canal (exige --registrar)")
+    # 01/10/2026 (dono: "publica 1 para analisarmos"): so' estes ids (virgula)
+    ap.add_argument("--so", default="")
     a = ap.parse_args()
     if a.agendar and not a.registrar:
         sys.exit("--agendar exige --registrar: post no ar sem registro quebra a pagina da bio")
@@ -126,6 +128,10 @@ def main() -> None:
     hoje = date.today()
     tag = f"ofertas-{hoje:%Y-%m}"
     escolha = ofertas.do_dia(hoje)
+    if a.so:
+        so = {x.strip() for x in a.so.split(",") if x.strip()}
+        escolha = {c: [o for o in v if str(o["id"]) in so] for c, v in escolha.items()}
+        escolha = {c: v for c, v in escolha.items() if v}
     # ⭐ o link de afiliado (com o nosso tracking) vem do garimpo, gravado em
     # produtos_publicados.jsonl — o que esta' no git. O `site_no_ar/links.json`
     # e' so' backup do ar e fica velho no repositorio.

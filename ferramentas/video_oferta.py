@@ -165,8 +165,18 @@ def ordenar_fotos(urls: list[str]) -> list[str]:
 
 def cartao(foto: Image.Image, lado: int) -> Image.Image:
     c = Image.new("RGB", (lado, lado), (255, 255, 255))
-    f = foto.copy()
-    f.thumbnail((int(lado * 0.9), int(lado * 0.9)))
+    f = foto.copy().convert("RGB")
+    # 01/10 (dono: "o produto ta' pequeno" na capa): foto de loja vem com muita
+    # margem de fundo liso -> recorta ate' o produto quando os 4 cantos sao
+    # do mesmo fundo (foto "de cena" fica como esta').
+    cantos = [f.getpixel(p) for p in ((0, 0), (f.width - 1, 0), (0, f.height - 1), (f.width - 1, f.height - 1))]
+    if max(max(abs(x - y) for x, y in zip(c_, cantos[0])) for c_ in cantos) < 18:
+        dif = ImageChops.difference(f, Image.new("RGB", f.size, cantos[0])).convert("L").point(lambda v: 255 if v > 24 else 0)
+        bb = dif.getbbox()
+        if bb:
+            pad = int(max(bb[2] - bb[0], bb[3] - bb[1]) * 0.04)
+            f = f.crop((max(0, bb[0] - pad), max(0, bb[1] - pad), min(f.width, bb[2] + pad), min(f.height, bb[3] + pad)))
+    f.thumbnail((int(lado * 0.94), int(lado * 0.94)))
     c.paste(f, ((lado - f.width) // 2, (lado - f.height) // 2))
     return c
 
@@ -320,7 +330,10 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     dr.text((x0 + 40, y0 + 5), selo, font=fs, fill=BRANCO)
 
     # foto: cartao menor, centrado, inteiro fora da coluna de icones
-    lado = 440
+    # 01/10 (dono: "produto pequeno na capa"; acervo: miniatura com o assunto
+    # GRANDE): nos 2 s antes do preco o cartao e' 540 e encolhe pra 440 quando
+    # o preco entra — o quadro 0 (capa da grade) mostra o produto grande.
+    lado = int(440 + 100 * (1 - ease((t - (PRECO_T - 0.5)) / 0.5)))
     n = min(len(cartoes), 4)
     k = int(t // 3.2) % n
     frac = (t % 3.2) / 3.2
@@ -364,8 +377,9 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         # 2. em cima da foto de perfil (medida nos prints: centro ~(993, 797))
         per = BALAO_DO_CANAL.get(marca, "loja_lupa")
         bp = _balao(per, 330)
-        # 01/10 (dono): o carrinho ficava cortado na borda direita -> encosta na borda
-        _colar(im, bp, min(AVATAR_X, W - bp.width / 2 - 12) + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
+        # 01/10 (dono): o carrinho ficava cortado. Celular alto (iPhone) corta ~9% de cada
+        # lado do 9:16 -> a borda direita util e' ~W-100.
+        _colar(im, bp, min(AVATAR_X, W - bp.width / 2 - 105) + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
                2 * math.sin(t * 1.1), ease((t - 0.4) / 0.6))
         # 3. sacola ao lado do cartao (sai quando a mao chega) e laco = presente
         _colar(im, _balao("loja_sacola", 180, (0, 0, 970, 610)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),
@@ -633,6 +647,28 @@ def narracao(d: dict, destino: Path) -> None:
     asyncio.run(edge_tts.Communicate(numeros.por_extenso(txt), voice=VOZ, rate="+4%").save(str(destino)))
 
 
+SONS = os.environ.get("SONS_OFERTA", "1") != "0"
+
+
+def sons_filtro(ent: str, sai: str) -> str:
+    """01/10/2026 (dono: "testar com 2 sons"; +acervo: efeito curto da' ritmo,
+    mas pouco e baixo pra nao competir com a voz). SO' DOIS, sintetizados aqui
+    (livres de direito, sem arquivo de terceiro):
+      DING quando o preco para no valor de hoje (PRECO_T + ROLA_S)
+      ESTOURO curto do confete, logo depois.
+    SONS_OFERTA=0 desliga (pro teste com/sem)."""
+    if not SONS:
+        return f"[{ent}]anull[{sai}]"
+    ms = int((PRECO_T + ROLA_S) * 1000)
+    ding = ("aevalsrc='0.55*sin(2*PI*1568*t)*exp(-5*t)+0.35*sin(2*PI*2349*t)*exp(-7*t)"
+            "+0.2*sin(2*PI*3136*t)*exp(-9*t)':s=44100:d=0.9,aformat=channel_layouts=stereo,"
+            f"volume=0.45,adelay={ms}|{ms}[ding]")
+    m2 = ms + 60
+    estouro = (f"anoisesrc=d=0.35:c=pink:a=0.9:r=44100,highpass=f=1800,afade=t=out:st=0.02:d=0.33,"
+               f"aformat=channel_layouts=stereo,volume=0.35,adelay={m2}|{m2}[est]")
+    return f"{ding};{estouro};[{ent}][ding][est]amix=inputs=3:duration=first:normalize=0[{sai}]"
+
+
 def _leitor_demo(url: str, tmp: Path):
     """Quadros 820x820 do video do vendedor (os DEMO_S primeiros segundos)."""
     if Path(url).exists():             # trecho ja' baixado (ex.: demo_youtube)
@@ -694,7 +730,8 @@ def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = 
     fundo = base_fundo()
     p = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
                           "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", str(voz),
-                          "-filter_complex", "[1:a]adelay=600|600,apad[a]", "-map", "0:v", "-map", "[a]",
+                          "-filter_complex", "[1:a]adelay=600|600,apad[v1];" + sons_filtro("v1", "a"),
+                          "-map", "0:v", "-map", "[a]",
                           "-t", str(DUR), "-c:v", "libx264", "-preset", "medium", "-crf", "19",
                           "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k",
                           "-movflags", "+faststart", str(saida)], stdin=subprocess.PIPE)

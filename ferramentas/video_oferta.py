@@ -370,11 +370,12 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         selo = ease((t - PRECO_T - ROLA_S - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
         _colar(im, _balao("selo_preco_conferido", 215), esq - 45,
                y_foto + lado - 95 + 30 * (1 - selo) + 6 * math.sin(t * 1.5), -8 + 3 * math.sin(t * 1.2), selo)
+        _colar(im, _balao("inaug_laco", 88, (0, 0, 360, 330)), dir_ - 4, y_foto + 36, 18)   # abaixo do selo do topo   # o cartao vira PRESENTE
         # 01/10 (arte do dono): no final, o COMENTE QUERO entra do lado do cartao
         cq = ease((t - 15.2) / 0.5)
-        _colar(im, _balao("selo_comente_quero", 230), dir_ + 70, y_foto + 150 + 40 * (1 - cq) + 6 * math.sin(t * 2),
-               8 + 3 * math.sin(t * 1.4), cq)
-        _colar(im, _balao("inaug_laco", 88, (0, 0, 360, 330)), dir_ - 4, y_foto + 36, 18)   # abaixo do selo do topo   # o cartao vira PRESENTE
+        # grande, sobre a metade direita da foto (no fim o produto ja' foi visto)
+        _colar(im, _balao("selo_comente_quero", 300, (0, 0, 979, 1000)), dir_ - 70, y_foto + lado * 0.42 + 50 * (1 - cq)
+               + 6 * math.sin(t * 2), 6 + 3 * math.sin(t * 1.4), cq)
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite
     faixa = None

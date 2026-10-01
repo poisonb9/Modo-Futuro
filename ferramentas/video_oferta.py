@@ -376,10 +376,12 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         _colar(im, _balao(ent, alt), cx, cy, -6 * some + 3 * math.sin(t * 1.5))
         # 2. em cima da foto de perfil (medida nos prints: centro ~(993, 797))
         per = BALAO_DO_CANAL.get(marca, "loja_lupa")
-        bp = _balao(per, 330)
-        # 01/10 (dono): o carrinho ficava cortado. Celular alto (iPhone) corta ~9% de cada
-        # lado do 9:16 -> a borda direita util e' ~W-100.
-        _colar(im, bp, min(AVATAR_X, W - bp.width / 2 - 105) + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
+        # 01/10 (dono, prints do iPhone): o balao ficava LONGE da foto de perfil e
+        # embolava no laco. No iPhone o 9:16 perde ~9% de cada lado e a foto de
+        # perfil cai em x~914 do video (nao 993). Menor (200) e logo ACIMA da
+        # foto, como quem aponta "siga aqui"; fora do laco do cartao.
+        bp = _balao(per, 200)
+        _colar(im, bp, 890 + 3 * math.sin(t * 1.3), AVATAR_Y - 70 - bp.height / 2 + 4 * math.sin(t * 1.7),
                2 * math.sin(t * 1.1), ease((t - 0.4) / 0.6))
         # 3. sacola ao lado do cartao (sai quando a mao chega) e laco = presente
         _colar(im, _balao("loja_sacola", 180, (0, 0, 970, 610)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),

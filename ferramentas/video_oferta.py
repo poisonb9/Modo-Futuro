@@ -369,13 +369,16 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         # 01/10 (dono): a LUPA entrando "procurando" e' o padrao de TODOS — o
         # balao do canal ja' esta' em cima da foto de perfil, repetir era redundante.
         ent = "inaug_lupa_cromada"   # 01/10 (dono): cromada, nao dourada
+        # 01/10 (dono): a lupa vem DO ESPECTADOR — entra gigante, enchendo a
+        # tela, encolhe ate' o produto puxando o olhar, procura e pousa no canto.
         sobe, some = ease(t / 0.7), ease((t - 1.05) / 0.5)
         procura = 60 * math.sin(max(0.0, t - 0.6) * 5) * (1 - some) if t > 0.6 else 0
-        alt = int(470 - 270 * some)
+        alt = int(2200 - (2200 - 470) * sobe - 270 * some)
         cx = W / 2 + procura + (esq - 55 - W / 2) * some
-        cy = (H + 300) - (H + 300 - (y_foto + lado * 0.45)) * sobe
+        cy = H / 2 + (y_foto + lado * 0.45 - H / 2) * sobe
         cy += ((y_foto + 175) - (y_foto + lado * 0.45)) * some + 6 * math.sin(t * 2)
-        _colar(im, _balao(ent, alt), cx, cy, -6 * some + 3 * math.sin(t * 1.5))
+        _colar(im, _balao(ent, alt), cx, cy, -6 * some + 3 * math.sin(t * 1.5) + 12 * (1 - sobe),
+               ease(t / 0.15))
         # 2. em cima da foto de perfil (medida nos prints: centro ~(993, 797))
         per = BALAO_DO_CANAL.get(marca, "loja_lupa")
         # 01/10 (dono, prints do iPhone): o balao ficava LONGE da foto de perfil e

@@ -1,4 +1,4 @@
-"""Manda o vídeo bruto pra lixeira do Drive depois que o corte terminou.
+"""Apaga de vez o vídeo bruto do Drive depois que o corte terminou.
 
     python limpar_bruto_drive.py --file-id XXXX
 
@@ -6,9 +6,9 @@ Roda como última etapa do cortar_de_bruto.yml, condicionada ao sucesso dos
 passos anteriores: bruto de corte que falhou não pode sumir, senão perde-se
 a fonte junto com a tentativa.
 
-**Lixeira, não exclusão definitiva.** O Drive segura item na lixeira por 30
-dias, então engano dá pra desfazer. `files().delete()` seria irreversível e
-não vale o risco pra ganhar 30 dias de antecedência no espaço.
+**Exclusão definitiva (01/10/2026, decisão do dono).** Antes ia pra lixeira,
+mas lixeira ocupa cota e a FATOS enchia mesmo "limpando". Só roda depois
+do corte subir com sucesso, então o bruto já virou clipe.
 
 Por que existe: o bruto só precisa viver enquanto o Actions o baixa. Depois
 é peso morto — e a conta tem 15 GB no total, com podcast em 1080p custando
@@ -64,15 +64,16 @@ def limpar(file_id: str, conta: str = "principal"):
     nome = info.get("name", file_id)
     mb = int(info.get("size", 0)) / 1e6
     try:
-        servico.files().update(fileId=file_id, body={"trashed": True}).execute()
-        print(f"[limpeza] '{nome}' ({mb:.0f} MB) foi pra lixeira do Drive.")
-        print("[limpeza] recuperável por 30 dias, se precisar.")
+        # 01/10 (dono): apaga DE VEZ, sem lixeira — lixeira ainda ocupa a cota
+        # e a FATOS nao liberava espaco.
+        servico.files().delete(fileId=file_id).execute()
+        print(f"[limpeza] '{nome}' ({mb:.0f} MB) apagado de vez do Drive (sem lixeira).")
     except Exception as e:
-        print(f"[limpeza] falhou ao mandar pra lixeira: {e}")
+        print(f"[limpeza] falhou ao apagar: {e}")
 
 
 def main():
-    p = argparse.ArgumentParser(description="Manda o bruto pra lixeira do Drive")
+    p = argparse.ArgumentParser(description="Apaga de vez o bruto do Drive")
     p.add_argument("--file-id", required=True)
     p.add_argument("--conta", default="principal")
     a = p.parse_args()

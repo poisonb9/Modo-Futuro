@@ -333,7 +333,11 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     # 01/10 (dono: "produto pequeno na capa"; acervo: miniatura com o assunto
     # GRANDE): nos 2 s antes do preco o cartao e' 540 e encolhe pra 440 quando
     # o preco entra — o quadro 0 (capa da grade) mostra o produto grande.
-    lado = int(440 + 100 * (1 - ease((t - (PRECO_T - 0.5)) / 0.5)))
+    # 01/10 (dono, grade do perfil): na grade a capa vira um selo de ~120 px —
+    # o produto ocupa quase a largura util do iPhone (700) e a faixa do CAIU
+    # cresce junto; tudo volta ao tamanho normal quando o preco entra.
+    capa = 1 - ease((t - (PRECO_T - 0.5)) / 0.5)
+    lado = int(440 + 260 * capa)
     n = min(len(cartoes), 4)
     k = int(t // 3.2) % n
     frac = (t % 3.2) / 3.2
@@ -429,7 +433,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             # ⭐ 30/09 (dono: "balao faixa azul bem bonito", arte dele): o texto vai
             # no miolo liso da FAIXA AZUL (17%-83% da largura). No convite final a
             # MAO de balao aponta pro "link na bio" (troca o envelope, "feio").
-            larg = 700 if conv else 760
+            larg = 700 if conv else int(760 + 100 * capa)
             fx = _balao("loja_faixa_azul", 200, (0, 0, 1000, 262))   # so' pra proporcao
             alt = round(larg * fx.height / fx.width)
             banda = _balao("loja_faixa_azul", alt, (0, 0, 1000, 262)).copy()

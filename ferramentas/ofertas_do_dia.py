@@ -72,7 +72,7 @@ def _espalhar(h, usados: set) -> "datetime":
     return h
 
 
-def agendar(por_canal: dict[str, list[dict]]) -> None:
+def agendar(por_canal: dict[str, list[dict]], ja: bool = False) -> None:
     """Cada video na fila do Buffer do SEU canal. Um canal que falha nao
     derruba os outros — mas a falha aparece (exit 1 no fim)."""
     import os
@@ -95,6 +95,18 @@ def agendar(por_canal: dict[str, list[dict]]) -> None:
             # ⭐ 30/09/2026 (dono): "minutos aleatorios, sem bater nenhum canal
             # postando junto no mesmo minuto e segundo" — pra nao parecer bot.
             horas = [_espalhar(h, usados) for h in horas]
+            if ja and horas:
+                # 01/10/2026 (dono: "pode postar agora nos 3 canais"): o 1o de
+                # cada canal sai JA' (5-15 min), >= 3 min entre canais.
+                import random
+                from datetime import datetime as _dt, timedelta as _td
+                agora_sp = (_dt.utcnow() - _td(hours=ab.FUSO_SP_H))
+                for _ in range(200):
+                    q = agora_sp + _td(minutes=random.randint(5, 15), seconds=random.randint(1, 58))
+                    if not any(abs((q - u).total_seconds()) < 180 for u in usados):
+                        break
+                usados.add(q)
+                horas[0] = q
             for post, h in zip(posts, horas):
                 quando = ab.enfileirar(token, canal_id, post, simular=False, quando_sp=h)
                 print(f"  📅 {canal}: {post['titulo'][:60]} -> {quando}")
@@ -120,6 +132,7 @@ def main() -> None:
                     help="poe cada video na fila do Buffer do canal (exige --registrar)")
     # 01/10/2026 (dono: "publica 1 para analisarmos"): so' estes ids (virgula)
     ap.add_argument("--so", default="")
+    ap.add_argument("--ja", action="store_true", help="1o post de cada canal em 5-15 min")
     a = ap.parse_args()
     if a.agendar and not a.registrar:
         sys.exit("--agendar exige --registrar: post no ar sem registro quebra a pagina da bio")
@@ -192,7 +205,7 @@ def main() -> None:
 
 
     if a.agendar:
-        agendar(para_agendar)
+        agendar(para_agendar, a.ja)
 
     if comentarios:
         txt = a.pasta / f"{hoje}_comentarios_fixados.txt"

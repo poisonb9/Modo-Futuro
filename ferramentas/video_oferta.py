@@ -368,7 +368,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         esq, dir_ = (W - lado) / 2, (W + lado) / 2
         # 01/10 (dono): a LUPA entrando "procurando" e' o padrao de TODOS — o
         # balao do canal ja' esta' em cima da foto de perfil, repetir era redundante.
-        ent = "inaug_lupa"
+        ent = "inaug_lupa_cromada"   # 01/10 (dono): cromada, nao dourada
         sobe, some = ease(t / 0.7), ease((t - 1.05) / 0.5)
         procura = 60 * math.sin(max(0.0, t - 0.6) * 5) * (1 - some) if t > 0.6 else 0
         alt = int(470 - 270 * some)

@@ -1,33 +1,28 @@
 {
-  "medido_em": "2026-10-01T13:02:13",
+  "medido_em": "2026-10-01T18:49:44",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
-      "posts": 260,
+      "posts": 259,
       "views": 7516,
       "mediana_views": 0,
-      "reacoes": 7773,
+      "reacoes": 7768,
       "comentarios": 63,
       "shares": 51,
-      "engajamento_pct": 104.94,
-      "posts_recentes": 1,
+      "engajamento_pct": 104.87,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "Felix do Stray Kids revela por que assinou o canal do JYP no"
-        }
-      ]
+      "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 35,
+      "posts": 50,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 268,
-      "comentarios": 13,
-      "shares": 3,
+      "reacoes": 385,
+      "comentarios": 22,
+      "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 10,
+      "posts_recentes": 24,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -36,23 +31,23 @@
         },
         {
           "views": 0,
-          "titulo": "POR QUE A MICROSOFT JOGOU SEUS SERVIDORES NO MAR?\n\nMais da m"
+          "titulo": "POR QUE O ACIDENTE DE THREE MILE ISLAND NÃO FOI COMO CHERNOB"
         },
         {
           "views": 0,
-          "titulo": "O TRUQUE BILIONÁRIO DA MICROSOFT COM ENERGIA NUCLEAR\n\nConstr"
+          "titulo": "POR QUE A MICROSOFT JOGOU SEUS SERVIDORES NO MAR? Mais da me"
         }
       ]
     },
     "truque.importado": {
-      "posts": 96,
+      "posts": 100,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 9503,
-      "comentarios": 70,
-      "shares": 54,
+      "reacoes": 11734,
+      "comentarios": 89,
+      "shares": 72,
       "engajamento_pct": 0.0,
-      "posts_recentes": 20,
+      "posts_recentes": 23,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -70,28 +65,37 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 55,
+      "posts": 56,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 665,
+      "reacoes": 679,
       "comentarios": 7,
       "shares": 13,
       "engajamento_pct": 0.0,
-      "posts_recentes": 0,
+      "posts_recentes": 1,
       "views_recentes": 0,
-      "melhores_recentes": []
+      "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Protocolo"
+        }
+      ]
     },
     "atefalhar": {
-      "posts": 43,
+      "posts": 45,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 356,
+      "reacoes": 387,
       "comentarios": 4,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 5,
+      "posts_recentes": 7,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE\n\nAmi e Yumi fic"
+        },
         {
           "views": 0,
           "titulo": "Os comportamentos 100% humanos de Coragem o Cão Covarde\n\nDen"
@@ -99,35 +103,31 @@
         {
           "views": 0,
           "titulo": "Os alimentos venenosos para cães que Coragem consome todo di"
-        },
-        {
-          "views": 0,
-          "titulo": "Onde REALMENTE fica a casa do CORAGEM\n\nA casa do Coragem fic"
         }
       ]
     },
     "cozinha.importada": {
-      "posts": 27,
+      "posts": 35,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 154,
+      "reacoes": 200,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 6,
+      "posts_recentes": 14,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Tiramisù artesanal cremoso de café e rum Aprenda a preparar "
+        },
         {
           "views": 0,
           "titulo": "Tiramisù artesanal cremoso de café e rum\n\nAprenda a preparar"
         },
         {
           "views": 0,
-          "titulo": "Rabanada perfeita com pão brioche de verdade\n\nAprenda a faze"
-        },
-        {
-          "views": 0,
-          "titulo": "O jeito certo de caramelizar cebolas para sopa\n\nCaramelizaçã"
+          "titulo": "Rabanada perfeita com pão brioche de verdade Aprenda a fazer"
         }
       ]
     }

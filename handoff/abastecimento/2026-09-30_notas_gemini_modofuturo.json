@@ -1,0 +1,224 @@
+{
+ "modofuturo": [
+  {
+   "id": "8ekndZwyOzo",
+   "titulo": "How Huawei Just Built an Impossible Chip",
+   "canal": "Dr Ben Miles",
+   "url": "https://www.youtube.com/watch?v=8ekndZwyOzo",
+   "views": 1362666,
+   "views_h": 496.2,
+   "eng": 2.75,
+   "dur_min": 16.5,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 85.5,
+   "gemini": {
+    "nota": 9,
+    "gancho": 9,
+    "autossuficiencia": 9,
+    "imagem": 9,
+    "tema": 10,
+    "motivo": "Excelente conteúdo visual com animações 3D dinâmicas e explicações autossuficientes sobre engenharia de microchips e arquitetura 3D.",
+    "melhor_momento": "05:28"
+   }
+  },
+  {
+   "id": "HjneAhCy2N4",
+   "titulo": "HOW TRANSISTORS RUN CODE?",
+   "canal": "Core Dumped",
+   "url": "https://www.youtube.com/watch?v=HjneAhCy2N4",
+   "views": 1598931,
+   "views_h": 75.7,
+   "eng": 5.06,
+   "dur_min": 14.5,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 82.8,
+   "gemini": {
+    "nota": 7,
+    "gancho": 7,
+    "autossuficiencia": 7,
+    "imagem": 6,
+    "tema": 9,
+    "motivo": "Apresenta excelente didática sobre lógica de circuitos e chips com animações claras, embora o estilo seja predominantemente esquemático em 2D com fundo preto.",
+    "melhor_momento": "09:40"
+   }
+  },
+  {
+   "id": "aJmHfmrRMUE",
+   "titulo": "'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Progress, Says BRI Will Push Them Forth",
+   "canal": "Mint",
+   "url": "https://www.youtube.com/watch?v=aJmHfmrRMUE",
+   "views": 1149708,
+   "views_h": 159.8,
+   "eng": 1.37,
+   "dur_min": 15.4,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 82.7,
+   "gemini": {
+    "nota": 3,
+    "gancho": 5,
+    "autossuficiencia": 6,
+    "imagem": 2,
+    "tema": 4,
+    "motivo": "O vídeo é uma entrevista estática de painel com foco predominante em geopolítica e políticas públicas, sem imagens dinâmicas de engenharia ou fábricas.",
+    "melhor_momento": "01:05"
+   }
+  },
+  {
+   "id": "GS35VHEfFDU",
+   "titulo": "They Turned off this GPU Factory For Me! PowerColor Factory Tour",
+   "canal": "Linus Tech Tips",
+   "url": "https://www.youtube.com/watch?v=GS35VHEfFDU",
+   "views": 1603231,
+   "views_h": 79.0,
+   "eng": 4.41,
+   "dur_min": 15.5,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 82.5,
+   "gemini": {
+    "nota": 10,
+    "gancho": 9,
+    "autossuficiencia": 10,
+    "imagem": 10,
+    "tema": 10,
+    "motivo": "Excelente conteúdo visual sobre fabricação e manutenção de GPUs, repleto de máquinas impressionantes e processos bem explicados ideais para cortes curtos.",
+    "melhor_momento": "07:15"
+   }
+  },
+  {
+   "id": "FFTZzJdPYag",
+   "titulo": "Micron’s $50 Billion Buildout In Its Hometown Of Boise Is Minting Millionaires",
+   "canal": "CNBC",
+   "url": "https://www.youtube.com/watch?v=FFTZzJdPYag",
+   "views": 274163,
+   "views_h": 282.2,
+   "eng": 1.01,
+   "dur_min": 8.8,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 82.0,
+   "gemini": {
+    "nota": 9,
+    "gancho": 9,
+    "autossuficiencia": 9,
+    "imagem": 9,
+    "tema": 10,
+    "motivo": "Excelente cobertura sobre a expansão das fábricas de chips de IA da Micron com ótimas filmagens dinâmicas e histórias impactantes.",
+    "melhor_momento": "03:51"
+   }
+  },
+  {
+   "id": "vnGC4YS36gU",
+   "titulo": "No Nvidia Chips Needed! Amazon’s New AI Data Center For Anthropic Is Truly Massive",
+   "canal": "CNBC",
+   "url": "https://www.youtube.com/watch?v=vnGC4YS36gU",
+   "views": 1514501,
+   "views_h": 188.1,
+   "eng": 0.94,
+   "dur_min": 16.9,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 81.9,
+   "gemini": {
+    "nota": 9,
+    "gancho": 9,
+    "autossuficiencia": 9,
+    "imagem": 9,
+    "tema": 10,
+    "motivo": "Excelente material com imagens reais e dinâmicas de datacenters, instalação de racks, chips de IA proprietários (Trainium) e infraestrutura de engenharia em larga escala.",
+    "melhor_momento": "07:44"
+   }
+  },
+  {
+   "id": "Y8tiCArU5pU",
+   "titulo": "How Microchips Are Actually Made (It's Insane)",
+   "canal": "Mr. HowMade",
+   "url": "https://www.youtube.com/watch?v=Y8tiCArU5pU",
+   "views": 672398,
+   "views_h": 94.4,
+   "eng": 1.44,
+   "dur_min": 19.1,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 81.2,
+   "gemini": {
+    "nota": 10,
+    "gancho": 10,
+    "autossuficiencia": 10,
+    "imagem": 10,
+    "tema": 10,
+    "motivo": "Vídeo visualmente impressionante com animações 3D dinâmicas e seções modulares perfeitas para cortes autossuficientes sobre fabricação de chips.",
+    "melhor_momento": "07:02"
+   }
+  },
+  {
+   "id": "yCqrv0SM02o",
+   "titulo": "Germany's New Photonic NPU Just Made NVIDIA’s Billion Dollar GPUs Look Like TRASH!",
+   "canal": "Evolving AI",
+   "url": "https://www.youtube.com/watch?v=yCqrv0SM02o",
+   "views": 316728,
+   "views_h": 80.8,
+   "eng": 2.12,
+   "dur_min": 12.1,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 78.5,
+   "gemini": {
+    "nota": 9.5,
+    "gancho": 9,
+    "autossuficiencia": 9,
+    "imagem": 9,
+    "tema": 10,
+    "motivo": "Excelente conteúdo focado em chips fotônicos e hardware do futuro, com ganchos impactantes e rica variedade de filmagens reais de laboratórios e animações técnicas.",
+    "melhor_momento": "00:00"
+   }
+  },
+  {
+   "id": "UDmW-pGzsWs",
+   "titulo": "Inside Intel’s $20 Billion Chip Factory in the US",
+   "canal": "FRAME",
+   "url": "https://www.youtube.com/watch?v=UDmW-pGzsWs",
+   "views": 541359,
+   "views_h": 72.9,
+   "eng": 1.3,
+   "dur_min": 18.6,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 74.5,
+   "gemini": {
+    "nota": 9,
+    "gancho": 9,
+    "autossuficiencia": 9,
+    "imagem": 10,
+    "tema": 9,
+    "motivo": "Imagens espetaculares de automação fabril, salas limpas e fabricação de chips e câmeras com excelente dinamismo visual.",
+    "melhor_momento": "05:30"
+   }
+  },
+  {
+   "id": "rM9BjciBLmg",
+   "titulo": "HOW TRANSISTORS REMEMBER DATA",
+   "canal": "Core Dumped",
+   "url": "https://www.youtube.com/watch?v=rM9BjciBLmg",
+   "views": 793125,
+   "views_h": 38.5,
+   "eng": 5.23,
+   "dur_min": 17.0,
+   "pt": false,
+   "na_faixa": true,
+   "nota": 72.0,
+   "gemini": {
+    "nota": 4.5,
+    "gancho": 4,
+    "autossuficiencia": 6,
+    "imagem": 3,
+    "tema": 9,
+    "motivo": "O conteúdo é excelente em engenharia de computadores, mas o visual consiste quase que exclusivamente em diagramas lógicos 2D minimalistas sem cenas reais ou movimento dinâmico atrativo para o TikTok.",
+    "melhor_momento": "15:20"
+   }
+  }
+ ]
+}

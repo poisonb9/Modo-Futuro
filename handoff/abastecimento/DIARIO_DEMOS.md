@@ -66,3 +66,17 @@
 - 30/09/2026 16:13:17 **sem_demo** `1005006860874836` nome: Luz LED com sensor de movimento USB Tipo C · motivo: 2a porta (quadros do trecho x foto) reprovou — fica a foto
 - 30/09/2026 16:13:17 **pc_limpo** `1005006860874836` pasta: C:\Users\Administrator\Downloads\abastecer\_demos\1005006860874836
 - 30/09/2026 16:13:32 **observacao** 1ª porta deu 10 a vídeo de OUTRA marca (MCGOR) para a Luz LED; 2ª porta (quadros) falhou FECHADA por cota do Gemini esgotada. Demo do YouTube só vale com as DUAS portas.
+- 30/09/2026 18:47:30 **rodada** `` produtos: 1
+- 30/09/2026 18:47:33 **inicio** `1005006860874836` nome: Luz LED com sensor de movimento USB Tipo C
+- 30/09/2026 18:48:59 **busca** `1005006860874836` consulta: USB C motion sensor light review · candidatos: 13
+- 30/09/2026 18:49:18 **gemini** `1005006860874836` video: https://www.youtube.com/watch?v=q6DY8LXibHw · canal: TechWiser · oficial: False · mesmo_produto: 10 · em_uso: 10 · marca_dagua: 10 · aprovado: True · motivo: O vídeo demonstra exatamente a mesma luminária LED fina com sensor de movimento, mostrando a fixação magnética e o funcionamento.
+- 30/09/2026 18:50:18 **baixado** `1005006860874836` arquivo: You Need This Type-C Motion Sensor Light! (3840p_30fps_AV1-128kbit_AAC-English).mp4 · mb: 42
+- 30/09/2026 18:53:56 **quadros** `1005006860874836` aprovado: False · confianca: None · diferencas: chaves esgotadas
+- 30/09/2026 18:53:56 **sem_demo** `1005006860874836` nome: Luz LED com sensor de movimento USB Tipo C · motivo: 2a porta (quadros do trecho x foto) reprovou — fica a foto
+- 30/09/2026 18:53:56 **pc_limpo** `1005006860874836` pasta: C:\Users\Administrator\Downloads\abastecer\_demos\1005006860874836
+- 30/09/2026 18:54:28 **rodada** `` produtos: 1
+- 30/09/2026 18:54:30 **inicio** `1005006860874836` nome: Luz LED com sensor de movimento USB Tipo C
+- 30/09/2026 18:54:56 **busca** `1005006860874836` consulta: usb c motion sensor led light · candidatos: 13
+- 30/09/2026 18:55:32 **gemini** `1005006860874836` video: https://www.youtube.com/watch?v=q6DY8LXibHw · canal: TechWiser · oficial: False · mesmo_produto: 10 · em_uso: 10 · marca_dagua: 10 · aprovado: True · motivo: O vídeo exibe exatamente a mesma barra de luz LED com sensor de movimento, mostrando suas funcionalidades de fixação magnética, acionamento automático e carregamento USB-C.
+- 30/09/2026 19:15:32 **download_falhou** `1005006860874836` video: https://www.youtube.com/watch?v=q6DY8LXibHw
+- 30/09/2026 19:15:32 **pc_limpo** `1005006860874836` pasta: C:\Users\Administrator\Downloads\abastecer\_demos\1005006860874836

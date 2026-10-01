@@ -1,0 +1,15 @@
+- 30/09 04:05 atefalhar: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 30/09 04:05 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 30/09 04:05 atefalhar: 78 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 30/09 04:05   ✅ 9.5 — Film Theory: Was Courage the Cowardly Dog the REAL Monster? — O vídeo é perfeito para o nicho, trazendo teorias nostálgicas dinâmicas de Coragem, o Cão 
+- 30/09 04:05   ✅ 9.5 — What If You Could DELETE Your Feelings? | The Fairly OddPare — Excelente análise nostálgica de Os Padrinhos Mágicos com edição dinâmica, conexões com mem
+- 30/09 04:05   ✅ 9 — How SpongeBob FINALLY Did The Impossible... — Análise dinâmica sobre a evolução de Bob Esponja e referências nostálgicas com ótimo ganch
+- 30/09 04:06   · 8.8 — Why This CARTOON got DISCONTINUED in Whole World — O video explora profundamente os bastidores, segredos e a historia de Coragem, o Cao Covar
+- 30/09 04:06   ✅ 9.3 — Try Not To Eat - 2000s Cartoons (Rocket Power, Recess, Fairl — Excelente fonte com recriações de comidas icônicas de desenhos dos anos 2000, fatos nostál
+- 30/09 04:07   ✅ 9.5 — Poof RETURNS Grown Up in The Fairly OddParents: A New Wish!  — Excelente fonte de cortes sobre Os Padrinhos Mágicos, com tópicos altamente virais como a 
+- 30/09 04:07 ⬇️ atefalhar: 5 no JDownloader
+- 30/09 04:13 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Film Theory: Was Courage the Cowardly Dog the REAL Monster?
+- 30/09 04:13 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: How SpongeBob FINALLY Did The Impossible...
+- 30/09 04:14 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Poof RETURNS Grown Up in The Fairly OddParents: A New Wish! 
+- 30/09 04:14 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Try Not To Eat - 2000s Cartoons (Rocket Power, Recess, Fairl
+- 30/09 04:14 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: What If You Could DELETE Your Feelings? | The Fairly OddPare

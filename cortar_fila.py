@@ -626,11 +626,13 @@ def main() -> None:
     for item in pendentes[:vagas]:
         entradas = {
             "drive_file_id": item["drive_file_id"],
-            "pasta_drive": PASTA_DRIVE,
+            # 01/10/2026: item pode dizer onde o BRUTO esta' (os brutos do Sem
+            # Anestesia moram na FATOS/principal e nunca entravam na fila).
+            "pasta_drive": item.get("pasta_drive") or PASTA_DRIVE,
             "canal": item["canal"],
             "qtd": item["qtd"],
             "idioma": "en",
-            "conta": "reserva",
+            "conta": item.get("conta") or "reserva",
             # ⚠️ ONDE O BRUTO ESTA' (`conta`) NAO E' ONDE O CLIPE VAI
             # (`conta_saida`). Ficaram colados no mesmo parametro ate'
             # 02/09/2026: a pasta 'A POSTAR' pertence a` principal e a reserva

@@ -516,7 +516,7 @@
       "run_id": 36833193862
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",
@@ -526,11 +526,10 @@
       "quando": "2026-10-01T13:37:30+00:00",
       "tentativas": 0,
       "conta": "principal",
-      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
-      "run_id": 36870050271
+      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO"
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",
@@ -544,7 +543,7 @@
       "run_id": 36870060243
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",

@@ -366,7 +366,9 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         #     que esta' o link;
         #  3. sem balao atras do laco; sacola some quando a MAO entra (15 s).
         esq, dir_ = (W - lado) / 2, (W + lado) / 2
-        ent = BALAO_ENTRADA.get(marca, "inaug_lupa")
+        # 01/10 (dono): a LUPA entrando "procurando" e' o padrao de TODOS — o
+        # balao do canal ja' esta' em cima da foto de perfil, repetir era redundante.
+        ent = "inaug_lupa"
         sobe, some = ease(t / 0.7), ease((t - 1.05) / 0.5)
         procura = 60 * math.sin(max(0.0, t - 0.6) * 5) * (1 - some) if t > 0.6 else 0
         alt = int(470 - 270 * some)

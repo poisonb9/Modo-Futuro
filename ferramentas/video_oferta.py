@@ -363,7 +363,9 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         _colar(im, _balao(ent, alt), cx, cy, -6 * some + 3 * math.sin(t * 1.5))
         # 2. em cima da foto de perfil (medida nos prints: centro ~(993, 797))
         per = BALAO_DO_CANAL.get(marca, "loja_lupa")
-        _colar(im, _balao(per, 330), AVATAR_X + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
+        bp = _balao(per, 330)
+        # 01/10 (dono): o carrinho ficava cortado na borda direita -> encosta na borda
+        _colar(im, bp, min(AVATAR_X, W - bp.width / 2 - 12) + 3 * math.sin(t * 1.3), AVATAR_Y - 55 - 165 + 5 * math.sin(t * 1.7),
                2 * math.sin(t * 1.1), ease((t - 0.4) / 0.6))
         # 3. sacola ao lado do cartao (sai quando a mao chega) e laco = presente
         _colar(im, _balao("loja_sacola", 180, (0, 0, 970, 610)), esq - 50, y_foto + lado - 110 + 7 * math.sin(t * 1.4 + 1),
@@ -376,9 +378,15 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         _colar(im, _balao("inaug_laco", 88, (0, 0, 360, 330)), dir_ - 4, y_foto + 36, 18)   # abaixo do selo do topo   # o cartao vira PRESENTE
         # 01/10 (arte do dono): no final, o COMENTE QUERO entra do lado do cartao
         cq = ease((t - 15.2) / 0.5)
-        # grande, sobre a metade direita da foto (no fim o produto ja' foi visto)
-        _colar(im, _balao("selo_comente_quero", 300, (0, 0, 979, 1000)), dir_ - 70, y_foto + lado * 0.42 + 50 * (1 - cq)
-               + 6 * math.sin(t * 2), 6 + 3 * math.sin(t * 1.4), cq)
+        # 01/10 (dono, print com o circulo): pode ENTRAR sobre o fone, mas logo
+        # VOA pro canto de cima a' direita e fica la' — abaixo da busca/abas do
+        # TikTok (~y 200), a' direita do texto do topo, sem cobrir o produto.
+        vai = ease((t - 16.1) / 0.6)
+        alt_cq = int(round((300 - 150 * vai) / 10) * 10)
+        x_cq = (dir_ - 70) + (865 - (dir_ - 70)) * vai
+        y_cq = (y_foto + lado * 0.42 + 50 * (1 - cq)) + (175 - (y_foto + lado * 0.42) - 50 * (1 - cq)) * vai
+        _colar(im, _balao("selo_comente_quero", alt_cq, (0, 0, 979, 1000)), x_cq, y_cq + 6 * math.sin(t * 2),
+               6 + 3 * math.sin(t * 1.4), cq)
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite
     faixa = None
@@ -478,6 +486,23 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         fa = fonte("Poppins-Bold.ttf", 40)
         fp = fonte("Anton-Regular.ttf", 128)
         preco = reais(d["agora"])
+        # ⭐ 30/09 (dono: "ta' muito jogado, algo mais caprichado"): a PROVA vira
+        # uma capsula propria — graficozinho dourado + frase clara — em linha
+        # livre, abaixo da explosao. Mesmo fato, dito como garantia.
+        # 01/10 (dono): a capsula cobria a explosao do preco, que e' PRIORIDADE ->
+        # desenhada ANTES (fica por baixo) e um pouco mais abaixo.
+        nota = (f"Medimos por {d['dias']} dias: o normal era {reais(d['ref'])}" if d.get("provada")
+                else "sem desconto inventado: é o preço da loja agora")
+        fcap = fonte("Poppins-Bold.ttf", 26)
+        tw_n = dr.textlength(nota, font=fcap)
+        cw, ch = tw_n + 90, 50
+        cy_n = min(y + 256, SEG_BASE - ch + 18)
+        cx0 = (W - cw) / 2
+        dr.rounded_rectangle([cx0, cy_n, cx0 + cw, cy_n + ch], ch // 2, fill=(24, 22, 28), outline=OURO, width=2)
+        for k, hbar in enumerate((12, 20, 28)):          # o grafico: tres barrinhas subindo
+            bx_ = cx0 + 24 + k * 11
+            dr.rounded_rectangle([bx_, cy_n + 38 - hbar, bx_ + 7, cy_n + 38], 2, fill=OURO)
+        dr.text((cx0 + 70, cy_n + 10), nota, font=fcap, fill=BRANCO)
         if d.get("provada") and festa:
             # a ETIQUETA de inauguracao carrega o "antes", riscado, balancando
             tag = _balao("inaug_etiqueta", 160, (0, 90, 360, 318)).copy()
@@ -498,7 +523,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             # ⭐ 30/09 (arte do dono): a EXPLOSAO vermelha atras do preco — o heroi
             # ganha palco. Preco dourado com sombra escura pra ler no vermelho.
             asc, desc = fp.getmetrics()
-            ex = _balao("loja_explosao", int((asc + desc) * 1.1))
+            ex = _balao("loja_explosao", int((asc + desc) * 0.98))   # 01/10: era 1.1 e pisava na capsula
             larg_ex = int(pw + 120)
             ex = ex.resize((larg_ex, ex.height))
             # ⭐ 30/09 (premium, itens 4 e 6): o numero ROLA do "antes" ate' o de
@@ -548,21 +573,6 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             centro(dr, y, "preço de hoje", fa, CINZA)
             nota = "sem desconto inventado: é o preço da loja agora"
             centro(dr, y + 36, preco, fp, OURO)
-        # ⭐ 30/09 (dono: "ta' muito jogado, algo mais caprichado"): a PROVA vira
-        # uma capsula propria — graficozinho dourado + frase clara — em linha
-        # livre, abaixo da explosao. Mesmo fato, dito como garantia.
-        if d.get("provada"):
-            nota = f"Medimos por {d['dias']} dias: o normal era {reais(d['ref'])}"
-        fcap = fonte("Poppins-Bold.ttf", 26)
-        tw_n = dr.textlength(nota, font=fcap)
-        cw, ch = tw_n + 90, 50
-        cy_n = min(y + 232, SEG_BASE - ch)
-        cx0 = (W - cw) / 2
-        dr.rounded_rectangle([cx0, cy_n, cx0 + cw, cy_n + ch], ch // 2, fill=(24, 22, 28), outline=OURO, width=2)
-        for k, hbar in enumerate((12, 20, 28)):          # o grafico: tres barrinhas subindo
-            bx_ = cx0 + 24 + k * 11
-            dr.rounded_rectangle([bx_, cy_n + 38 - hbar, bx_ + 7, cy_n + 38], 2, fill=OURO)
-        dr.text((cx0 + 70, cy_n + 10), nota, font=fcap, fill=BRANCO)
     return im
 
 def narracao(d: dict, destino: Path) -> None:

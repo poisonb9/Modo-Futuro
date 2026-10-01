@@ -523,11 +523,11 @@
       "selecao_modo": "",
       "drive_file_id": "1d_n5fMC6dhKdv4MOdbbsxD35T7S4SvsG",
       "nome": "How to Build Extreme Willpower - Goggins & Huberman",
-      "quando": "2026-10-01T19:08:46+00:00",
+      "quando": "2026-10-01T22:54:26+00:00",
       "tentativas": 0,
       "conta": "principal",
       "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
-      "run_id": 36912118129
+      "run_id": 36937820228
     },
     {
       "estado": "pronto",
@@ -558,30 +558,32 @@
       "run_id": 36875587731
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1j-Q21B9-xt7xIKoq4UYTFR_S5aGvqhHn",
       "nome": "Avoiding Distractions & Doing Deep Work - Cal Newport",
-      "quando": "2026-10-01T02:00:33+00:00",
+      "quando": "2026-10-01T22:54:31+00:00",
       "tentativas": 0,
       "conta": "principal",
-      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO"
+      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
+      "run_id": 36937827278
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1zYd9jgDMQCoiX-_8URHeOJW-QyWdLRKz",
       "nome": "I Worked Out Like David Goggins for 100 Days",
-      "quando": "2026-10-01T02:00:33+00:00",
+      "quando": "2026-10-01T22:54:35+00:00",
       "tentativas": 0,
       "conta": "principal",
-      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO"
+      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
+      "run_id": 36937834574
     }
   ],
   "teto_normal": 3,

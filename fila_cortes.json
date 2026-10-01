@@ -516,17 +516,18 @@
       "run_id": 36833193862
     },
     {
-      "estado": "pendente",
+      "estado": "disparado",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",
       "selecao_modo": "",
       "drive_file_id": "1d_n5fMC6dhKdv4MOdbbsxD35T7S4SvsG",
       "nome": "How to Build Extreme Willpower - Goggins & Huberman",
-      "quando": "2026-10-01T13:37:30+00:00",
+      "quando": "2026-10-01T19:08:46+00:00",
       "tentativas": 0,
       "conta": "principal",
-      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO"
+      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
+      "run_id": 36912118129
     },
     {
       "estado": "pronto",

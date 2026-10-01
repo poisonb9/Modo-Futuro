@@ -32,7 +32,10 @@ RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
 FONTES = RAIZ / "engine" / "fontes"
 W, H, FPS, DUR = 1080, 1920, 30, 20.0
-QUEDA_MIN = 0.25
+# ⛔ 01/10/2026: UMA regra so'. Aqui era 0.25 fixo e o motor (engine/ofertas)
+# ja' estava em 0.15 (dono, 30/09): a nuvem escolheu 9 ofertas e o video
+# recusou 8 ("queda de 21% nao justifica video"). Agora le' de la'.
+from engine.ofertas import QUEDA_MIN  # noqa: E402
 FUNDO, OURO, OURO2, CINZA, BRANCO = (14, 13, 18), (232, 190, 84), (198, 146, 40), (150, 148, 160), (250, 248, 244)
 VOZ = "pt-BR-AntonioNeural"
 

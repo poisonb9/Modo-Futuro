@@ -1,9 +1,11 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
 2026-10-02;13:13;atefalhar;agendado;O RETORNO DE POOF ADULTO DEPOIS DE 1.000 ANOS;6abc529b5df9296bd8d81bd6
 2026-10-02;13:07;modofuturo;agendado;O PRIMEIRO TRANSISTOR DE 1948 ERA DO TAMANHO DE UM PRÉDIO;6abc524d5df9296bd8d81350
+2026-10-02;13:06;truque.importado;agendado;Adivinhe quem é a idol só pelos traços do rosto!;6abe54ed534a309fe98476b2
 2026-10-02;08:23;semanestesia.pod;agendado;Protocolo;6abd4309687431f7eb891e66
 2026-10-02;08:19;modofuturo;agendado;O esquema que comprava placas Nvidia nos EUA e desviava para a Ásia;6abc523ebc79f721888de9f3
 2026-10-02;08:16;atefalhar;agendado;O ERRO QUE DESTRUIU A HISTÓRIA DA SANDY EM BOB ESPONJA;6abc527b5df9296bd8d817d4
+2026-10-02;08:13;truque.importado;agendado;Ahyeon do BABYMONSTER passa perrengue para colocar lentes verdes;6abe54d8f52f692c189fc1fa
 2026-10-01;19:52;truque.importado;agendado;Ahyeon do BABYMONSTER pede o número da Risabae e paralisa a gravação;6abc52e13b1eb12e6e3c3fd5
 2026-10-01;19:42;modofuturo;agendado;A técnica bizarra de colar etiquetas falsas em GPUs da Nvidia;6abc52385df9296bd8d81143
 2026-10-01;19:40;semanestesia.pod;agendado;Seu cérebro desiste antes;6abd42fe58e50b242171d348
@@ -17,11 +19,11 @@
 2026-10-01;13:09;atefalhar;agendado;O EPISÓDIO DO CARTOON NETWORK BANIDO PELO TSUNAMI DE 2004;6abb006193a81b612b53f6d2
 2026-10-01;13:04;modofuturo;agendado;A MÁQUINA DE IMPRIMIR CIRCUITOS MICROSCÓPICOS;6abc5222d3050be9e37a604c
 2026-10-01;11:36;cozinha.importada;agendado;Massa de Croissant Francês: Ingredientes e Sovagem Correta;6abd44cce5e975d8b31cc3ac
-2026-10-01;08:23;atefalhar;agendado;PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE;6abb0060b6b261489588231f
-2026-10-01;08:20;semanestesia.pod;agendado;Protocolo;6abd42cae5e975d8b31c68eb
-2026-10-01;08:19;modofuturo;agendado;O GRÁFICO DA CURVA DO PATO E O PROBLEMA DA ENERGIA SOLAR;6abc51e5bc79f721888dd544
-2026-10-01;08:16;truque.importado;agendado;A técnica simples para desenhar sobrancelhas com JIWOO do NMIXX!;6abc52bda1ba5ce146e1947f
-2026-10-01;08:16;cozinha.importada;agendado;O SEGREDO PARA A MANTEIGA CASEIRA PERFEITA (NUNCA RANCIFICA!);6abd44cb58e50b2421720ee7
+2026-10-01;08:24;atefalhar;postado;PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE;6abb0060b6b261489588231f
+2026-10-01;08:21;semanestesia.pod;postado;Protocolo;6abd42cae5e975d8b31c68eb
+2026-10-01;08:20;modofuturo;postado;O GRÁFICO DA CURVA DO PATO E O PROBLEMA DA ENERGIA SOLAR;6abc51e5bc79f721888dd544
+2026-10-01;08:18;cozinha.importada;postado;O SEGREDO PARA A MANTEIGA CASEIRA PERFEITA (NUNCA RANCIFICA!);6abd44cb58e50b2421720ee7
+2026-10-01;08:17;truque.importado;postado;A técnica simples para desenhar sobrancelhas com JIWOO do NMIXX!;6abc52bda1ba5ce146e1947f
 2026-09-30;19:54;truque.importado;postado;JIWOO descobre SEGREDO de beleza de sua maquiadora!;6abc52ba3b1eb12e6e3c3d36
 2026-09-30;19:53;modofuturo;postado;O PODER INCRÍVEL DE APENAS 1 REATOR NUCLEAR;6abc5161d3050be9e37a3a47
 2026-09-30;19:52;semanestesia.pod;postado;Protocolo;6abd42c03197c43feb7a59eb

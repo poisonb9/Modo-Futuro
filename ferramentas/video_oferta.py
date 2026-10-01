@@ -102,6 +102,7 @@ def legenda_post(d: dict) -> str:
             f"Hoje {reais(d['agora'])} — o normal dele, nos nossos {d['dias']} dias "
             f"de acompanhamento, é {reais(d['ref'])}.\n"
             f"Loja nota {str(d['nota']).replace('.', ',')} · {vendas_curto(int(d['vendas']))} vendidos.\n"
+            f"💬 Comenta QUERO aqui embaixo que eu te respondo!\n"
             f"🔗 Link na bio → Achado do dia{num}\n"
             f"#achadinhos #promoção #aliexpress")
 
@@ -369,6 +370,10 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
         selo = ease((t - PRECO_T - ROLA_S - 0.6) / 0.5) * (1 - ease((t - 14.6) / 0.4))
         _colar(im, _balao("selo_preco_conferido", 215), esq - 45,
                y_foto + lado - 95 + 30 * (1 - selo) + 6 * math.sin(t * 1.5), -8 + 3 * math.sin(t * 1.2), selo)
+        # 01/10 (arte do dono): no final, o COMENTE QUERO entra do lado do cartao
+        cq = ease((t - 15.2) / 0.5)
+        _colar(im, _balao("selo_comente_quero", 230), dir_ + 70, y_foto + 150 + 40 * (1 - cq) + 6 * math.sin(t * 2),
+               8 + 3 * math.sin(t * 1.4), cq)
         _colar(im, _balao("inaug_laco", 88, (0, 0, 360, 330)), dir_ - 4, y_foto + 36, 18)   # abaixo do selo do topo   # o cartao vira PRESENTE
 
     # faixa ouro sobre a base da foto: gancho e, no fim, o convite
@@ -434,9 +439,11 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
     # ⭐ 30/09 (arte do dono, premium item 7): a PLACA preta com friso dourado
     # atras do nome, e a parte que diz O QUE O PRODUTO FAZ (depois de "com"/"para")
     # em dourado. O nome continua texto limpo — informacao, nao enfeite.
-    alt_nome = len(linhas) * (fn.size + 10) + 34
+    # 01/10 (dono: "o P de Tipo encosta, ta' muito colado"): respiro de verdade —
+    # 30 px em cima e 40 embaixo (a perna do p/g/q desce abaixo da linha).
+    alt_nome = len(linhas) * (fn.size + 10) + 70
     placa = _balao("placa_nome_produto", 100).resize((SEG_LARG + 60, alt_nome))
-    im.paste(placa, (int((W - placa.width) / 2), int(y - 20)), placa)
+    im.paste(placa, (int((W - placa.width) / 2), int(y - 30)), placa)
     dr = ImageDraw.Draw(im)
     chave = ""
     for sep in (" com ", " para "):
@@ -452,7 +459,7 @@ def quadro(t: float, d: dict, fundo: Image.Image, cartoes: list[Image.Image],
             dr.text((xw, y), pedaco, font=fn, fill=OURO if pal in douradas else BRANCO)
             xw += dr.textlength(pedaco, font=fn)
         y += fn.size + 10
-    y += 14
+    y += 30
     if d.get("nota") and d.get("vendas"):
         loja = f"loja nota {str(d['nota']).replace('.', ',')}  ·  {vendas_curto(d['vendas'])} vendidos"
         centro(dr, y + 2, loja, fonte("Poppins-Bold.ttf", 28), CINZA)
@@ -573,11 +580,11 @@ def narracao(d: dict, destino: Path) -> None:
         partes = [(f"{abre}Olha isso! {d['nome']} caiu {queda} por cento.", "+14%", 0.25),
                   (f"Eu acompanho o preço dele há {d['dias']} dias. O normal é {int(r)} reais.", "+6%", 0.40),
                   (f"Hoje... tá {hoje}.", "-4%", 0.35),
-                  ("O link tá na bio!", "+12%", 0.0)]
+                  ("Comenta QUERO aqui embaixo... o link tá na bio!", "+12%", 0.0)]
     else:
         partes = [(f"{abre}Olha isso! {d['nome']}.", "+14%", 0.25),
                   (f"Hoje... tá {hoje}.", "-4%", 0.35),
-                  ("O link tá na bio!", "+12%", 0.0)]
+                  ("Comenta QUERO aqui embaixo... o link tá na bio!", "+12%", 0.0)]
     partes = d.get("partes") or partes        # roteiro pronto (teaser da inauguracao)
     txt = " ".join(p[0] for p in partes)
     # Mesma voz dos canais de corte: edge-tts -> ChatterboxVC com o timbre da

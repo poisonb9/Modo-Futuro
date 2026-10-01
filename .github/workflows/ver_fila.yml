@@ -1,0 +1,26 @@
+name: Ver fila (so' le)
+# 01/10/2026: le a fila de UM canal no Buffer (agendado/enviado/erro). Nao escreve nada.
+on:
+  workflow_dispatch:
+    inputs:
+      canal:
+        required: true
+        default: "semanestesia.pod"
+permissions:
+  contents: read
+jobs:
+  ver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+        run: python -X utf8 ferramentas/ver_fila.py --canal "${{ inputs.canal }}"

@@ -295,8 +295,10 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     # O contador somava a cada VERSAO renderizada (tiktok + reels = 2 por
     # clipe) e seguia a ordem da NOTA; o Buffer posta na ordem do VIDEO
     # (inicio_s). Agora: 1 numero por clipe, pela posicao no video.
-    _ordem_no_video = {id(x): r for r, x in enumerate(
-        sorted(clipes, key=lambda x: float(x.get("inicio_s") or 0)))}
+    # 01/10: por POSICAO na lista, nao por id() — o clipe e' trocado por outro
+    # dict no meio do laco e o id() quebrava com KeyError (run 36858269070).
+    _ordem_no_video = {k: r for r, k in enumerate(sorted(
+        range(1, len(clipes) + 1), key=lambda k: float(clipes[k - 1].get("inicio_s") or 0)))}
     _base_selo: dict[str, int] = {}
     for i, c in enumerate(clipes, 1):
         try:
@@ -732,7 +734,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     if _nome and _nome not in _base_selo:
                         _base_selo[_nome] = selo.parte_do_tema(
                             canais_registro_canonico(_canal_cascata), _nome) - 1
-                    _parte = (_base_selo[_nome] + 1 + _ordem_no_video[id(c)]
+                    _parte = (_base_selo[_nome] + 1 + _ordem_no_video[i]
                               if _nome else 1)
                     # 28/09: refazer um clipe ja' numerado mantendo a PARTE (dono).
                     # SELO_PARTE = "N" (so' o numero), "Nome:N" (nome e numero

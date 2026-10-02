@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-02T12:23:27",
+  "medido_em": "2026-10-02T18:21:19",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 50,
+      "posts": 53,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 385,
+      "reacoes": 397,
       "comentarios": 22,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 24,
+      "posts_recentes": 27,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -40,14 +40,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 100,
+      "posts": 115,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 11734,
-      "comentarios": 89,
-      "shares": 72,
+      "reacoes": 15161,
+      "comentarios": 107,
+      "shares": 90,
       "engajamento_pct": 0.0,
-      "posts_recentes": 23,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -65,56 +65,64 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 56,
+      "posts": 58,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 679,
+      "reacoes": 693,
       "comentarios": 7,
       "shares": 13,
       "engajamento_pct": 0.0,
-      "posts_recentes": 1,
+      "posts_recentes": 3,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "Seu cérebro desiste antes"
+        },
+        {
+          "views": 0,
           "titulo": "Protocolo"
+        },
+        {
+          "views": 0,
+          "titulo": "Goggins sem filtro"
         }
       ]
     },
     "atefalhar": {
-      "posts": 45,
+      "posts": 56,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 387,
-      "comentarios": 4,
-      "shares": 1,
+      "reacoes": 530,
+      "comentarios": 6,
+      "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 7,
+      "posts_recentes": 18,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "Scooby-Doo é oficialmente um ALIENÍGENA O crossover especial"
+        },
+        {
+          "views": 0,
+          "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE Ami e Yumi fica"
+        },
+        {
+          "views": 0,
           "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE\n\nAmi e Yumi fic"
-        },
-        {
-          "views": 0,
-          "titulo": "Os comportamentos 100% humanos de Coragem o Cão Covarde\n\nDen"
-        },
-        {
-          "views": 0,
-          "titulo": "Os alimentos venenosos para cães que Coragem consome todo di"
         }
       ]
     },
     "cozinha.importada": {
-      "posts": 35,
+      "posts": 39,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 201,
+      "reacoes": 222,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 14,
+      "posts_recentes": 18,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -127,7 +135,7 @@
         },
         {
           "views": 0,
-          "titulo": "Rabanada perfeita com pão brioche de verdade Aprenda a fazer"
+          "titulo": "TRUFAS DE CHOCOLATE DUPLO QUE PARECEM BROWNIE MAS SÃO FIT\n\nP"
         }
       ]
     }

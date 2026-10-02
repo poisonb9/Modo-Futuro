@@ -104,6 +104,7 @@ jobs:
     # somente leitura, e a criacao da release volta 403.
     permissions:
       contents: write
+      actions: read      # 02/10: esperar_vez_buffer le os outros runs
     env:
       HF_HOME: ${{ github.workspace }}/.cache/huggingface
       # modelo do Demucs (torch.hub) num caminho FIXO: na run 36206642639 o
@@ -477,6 +478,14 @@ jobs:
       # sem tarefa agendada separada.
       # `continue-on-error`: agendar e' conveniencia; o clipe ja' esta' no
       # Drive e na Release, e um erro do Buffer nao pode reprovar o corte.
+      # ⭐ 02/10/2026: um corte por vez no Buffer (dois juntos duplicaram clipe).
+      # Pergunta ao GitHub, nao ao Buffer — nao gasta cota do Buffer.
+      - name: Esperar a vez de agendar
+        if: ${{ inputs.previa != 'true' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -X utf8 ferramentas/esperar_vez_buffer.py
       - name: Enfileirar no Buffer
         if: ${{ inputs.previa != 'true' }}
         continue-on-error: true

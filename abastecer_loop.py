@@ -75,6 +75,13 @@ CANAIS = {
         "json": "radar_truque_importado.json", "min_views": 300_000,
         "tema": "tutorial de maquiagem passo a passo, close no rosto, "
                 "procedimento que da' pra seguir"},
+    # ⭐ 02/10/2026 (dono): Camarim K-pop — mesmas configs do make, angulo
+    # de BASTIDOR (reacao, humor, fofura das idols).
+    "camarim.kpop": {
+        "pasta": "CAMARIM KPOP", "radar": "canais/camarim.kpop/radar.py",
+        "json": "radar_camarim_kpop.json", "min_views": 100_000,
+        "tema": "bastidores de idols de K-pop: reacoes, humor, fofura e conversa "
+                "com fala (programa da Risabae, variedades), idol famosa com nome"},
     "modofuturo": {
         "pasta": "MODO FUTURO", "radar": "canais/modofuturo/radar.py",
         "json": "radar_modofuturo.json", "min_views": 150_000,
@@ -310,6 +317,12 @@ def passada() -> None:
         if est[canal] + na_fila >= PISO:
             continue
         log(f"{canal}: estoque {est[canal]} no Drive + {na_fila} baixando < piso {PISO} — reposicao")
+        # ⭐ 02/10/2026 (dono): o limite do JDownloader e' o DISCO, nao o dia.
+        import shutil
+        livre = shutil.disk_usage(RAIZ.anchor).free / 1e9
+        if livre < 5:
+            log(f"[!] disco com {livre:.1f} GB livres (< 5; < 3 e' critico) — sem download nesta passada")
+            return
         itens = escolher(canal, cfg, usados)
         if not itens:
             log(f"{canal}: nenhum candidato passou no criterio — nao baixo nada fraco")

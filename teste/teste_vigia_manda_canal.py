@@ -84,7 +84,7 @@ def teste_make_leva_voz_original_e_chips_nao():
     make = V.ENTRADAS_POR_CANAL["truque.importado"]
     assert make.get("fundo_original") == "true" and make.get("voz_original_db") == "-16"
     for canal, e in V.ENTRADAS_POR_CANAL.items():
-        if canal != "truque.importado":
+        if canal not in ("truque.importado", "camarim.kpop"):  # 02/10: camarim = configs do make (dono)
             assert not e.get("voz_original_db"), f"{canal} herdou a voz original"
     assert "modofuturo" not in V.ENTRADAS_POR_CANAL
 

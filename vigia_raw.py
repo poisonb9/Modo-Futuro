@@ -288,7 +288,7 @@ ENTRADAS_POR_CANAL = {
     "cozinha.importada": {"selecao_modo": "receita", "amostra_voz": "bruna"},
     # ⭐ 02/10/2026 (dono): Camarim K-pop com a voz da Bruna; modo padrao
     # (GPC: gancho-progresso-climax) serve o MOMENTO, que e' o angulo do canal.
-    "camarim.kpop": {"amostra_voz": "bruna", "fundo_original": "true"},  # voz original so' no make (26/09)
+    "camarim.kpop": {"amostra_voz": "bruna", "fundo_original": "true", "voz_original_db": "-16"},  # 02/10 dono: mesmas configs do make
 }
 
 

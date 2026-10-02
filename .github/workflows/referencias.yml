@@ -1,18 +1,20 @@
-name: Capas do Pinterest (busca + analise)
-# 02/10/2026 (dono): gallery-dl busca capas no Pinterest, o Gemini le, so' o JSON volta.
-# As imagens morrem com o runner. Raspagem: rodar com parcimonia.
+name: Referencias visuais
+# Coleta imagens de referencia (gallery-dl) e le com o Gemini; so' o JSON fica (artefato).
 on:
   workflow_dispatch:
     inputs:
-      buscas:
-        description: "termos separados por ||"
-        required: true
-      por_busca:
+      fonte:
+        description: "base da busca (secret REF_FONTE se vazio)"
+        default: ""
+      termos:
+        description: "termos separados por || (vazio = secret REF_TERMOS)"
+        default: ""
+      quantos:
         default: "20"
 permissions:
   contents: read
 jobs:
-  capas:
+  ler:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -21,21 +23,25 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q -r requirements.txt gallery-dl pillow
-      - name: Buscar no Pinterest
+      - name: Coletar
         env:
-          BUSCAS: ${{ inputs.buscas }}
-          N: ${{ inputs.por_busca }}
+          TERMOS: ${{ inputs.termos || secrets.REF_TERMOS }}
+          N: ${{ inputs.quantos }}
+          FONTE: ${{ inputs.fonte || secrets.REF_FONTE }}
         run: |
-          mkdir -p capas
-          IFS='|' ; for t in $(echo "$BUSCAS" | sed 's/||/|/g'); do
-            t=$(echo "$t" | xargs); [ -z "$t" ] && continue
-            q=$(python -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$t")
-            echo "== $t"
-            gallery-dl --range "1-$N" -D capas -f "{id}.{extension}" "https://www.pinterest.com/search/pins/?q=$q" || echo "[!] falhou: $t"
-          done
-          ls capas | wc -l
-      - name: Analisar com o Gemini
+          mkdir -p ref
+          python - <<'EOF'
+          import os, subprocess, urllib.parse
+          for t in [x.strip() for x in os.environ["TERMOS"].split("||") if x.strip()]:
+              url = os.environ["FONTE"] + urllib.parse.quote(t)
+              r = subprocess.run(["gallery-dl", "-q", "--range", "1-" + os.environ["N"], "-D", "ref",
+                                  "-f", "{id}.{extension}", url])
+              print("termo", "ok" if r.returncode == 0 else "sem retorno")
+          print("imagens:", len(os.listdir("ref")))
+          EOF
+      - name: Ler
         env:
+          REF_ROTEIRO: ${{ secrets.REF_ROTEIRO }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
@@ -67,8 +73,9 @@ jobs:
           GEMINI_API_KEY_29: ${{ secrets.GEMINI_API_KEY_29 }}
           GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
           GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
-        run: python -X utf8 ferramentas/analisar_capas.py capas capas.json
+        run: python -X utf8 ferramentas/ler_referencias.py ref ref.json
       - uses: actions/upload-artifact@v4
         with:
-          name: capas-json
-          path: capas.json
+          name: referencias
+          path: ref.json
+          retention-days: 7

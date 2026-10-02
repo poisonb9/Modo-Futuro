@@ -326,7 +326,7 @@ def limpar_temp() -> None:
     agora = time.time()
     for f in BAIXADOS.rglob("*"):
         if f.is_file() and f.suffix.lower() in (".m4a", ".opus", ".srt", ".jpg", ".txt", ".webm", ".part") \
-                and agora - f.stat().st_mtime > 3600:
+                and agora - f.stat().st_mtime > (3600 if f.suffix.lower() == ".part" else 120):  # 02/10 dono: sem residuo; so' o .part espera 1 h
             try:
                 f.unlink()
             except Exception:

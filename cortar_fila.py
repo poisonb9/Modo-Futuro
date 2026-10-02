@@ -302,6 +302,8 @@ CANAIS_BUFFER = {
                   "BUFFER_TOKEN_ATEFALHAR"),
     "truque.importado": ("6a94c752e0b1602e8c5cf1ae", "6a94c8f3065799be465981f6",
                          "BUFFER_TOKEN_TRUQUEIMPORTADO"),
+    "camarim.kpop": ("6abf1f5076a6b4a9eafea86a", "6abf2026ea19ca0bde4ded28",
+                     "BUFFER_TOKEN_CAMARIM"),
 }
 Q_FILA = "query($i: PostsInput!){ posts(input:$i){ edges{ node{ dueAt } } } }"
 

@@ -80,9 +80,9 @@ CANAIS: dict[str, Canal] = {
               "BUFFER_TOKEN_TRUQUEIMPORTADO",
               apelidos=("truque.importado", "achadinho.make")),
         # ⭐ 02/10/2026 (dono): canal NOVO @camarim.kpop — bastidor/reacao/humor
-        # das idols (o Make fica com a tecnica). org/canal_id VAZIOS ate' o
-        # buffer_ids.yml ler com o secret BUFFER_TOKEN_CAMARIM — nao inventar.
-        Canal("camarim.kpop", "@camarim.kpop", "", "",
+        # das idols (o Make fica com a tecnica). ids LIDOS pelo buffer_ids.yml
+        # (run 37004634813, 02/10) — nao digitados.
+        Canal("camarim.kpop", "@camarim.kpop", "6abf1f5076a6b4a9eafea86a", "6abf2026ea19ca0bde4ded28",
               "BUFFER_TOKEN_CAMARIM", apelidos=("camarim.kpop", "camarim")),
         Canal("semanestesia.pod", "@semanestesia.pod",
               "6a937e2ccae8f6fdedefa317", "6a938ce8065799be46508cc6",

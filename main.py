@@ -300,6 +300,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
     _ordem_no_video = {k: r for r, k in enumerate(sorted(
         range(1, len(clipes) + 1), key=lambda k: float(clipes[k - 1].get("inicio_s") or 0)))}
     _base_selo: dict[str, int] = {}
+    _base_secao: dict[str, int] = {}   # 02/10: secoes fixas do Camarim
     for i, c in enumerate(clipes, 1):
         try:
             ini, fim = c["inicio_s"], c["fim_s"]
@@ -727,6 +728,15 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     # ⭐ 28/09 (Achadinho Chef): selo de MEDIDAS, nunca de serie
                     if selo.aplicar_texto_no_lugar(_v, selo.TEXTO_COZINHA):
                         print(f"      selo de medidas: {selo.TEXTO_COZINHA}")
+                elif (camada.ligado(_canal_cascata) and not c.get("serie")
+                      and selo.secao(_can_selo, c.get("titulo", ""))):
+                    # ⭐ 02/10 (dono): secao fixa do Camarim ("O MICO DA SEMANA · Nº 3")
+                    _sec = selo.secao(_can_selo, c.get("titulo", ""))
+                    if _sec not in _base_secao:
+                        _base_secao[_sec] = selo.numero_da_secao(_can_selo, _sec) - 1
+                    _base_secao[_sec] += 1
+                    if selo.aplicar_texto_no_lugar(_v, f"{_sec} · Nº {_base_secao[_sec]}"):
+                        print(f"      selo da secao: {_sec} {_base_secao[_sec]}")
                 elif camada.ligado(_canal_cascata) and not c.get("serie"):
                     _tags = c.get("tags") or []
                     _nome = (selo.nome_da_tag(_tags[0], c.get("titulo", ""))

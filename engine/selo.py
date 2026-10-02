@@ -114,6 +114,46 @@ TEXTO_COZINHA = "MEDIDAS EM GRAMA E °C"
 CANAIS_SELO_MEDIDAS = {"cozinha.importada"}
 
 
+# ⭐ 02/10/2026 (dono): SECOES FIXAS no Camarim, como as da revista teen
+# ("Segredos da conquista", "Tudo sobre garotos" — _privado/capricho/). O
+# clipe cai numa secao pelo TITULO; a pilula vira "SECAO · Nº N" (N = quantos
+# clipes do canal ja' cairam nela, +1). Sem secao = selo de serie de sempre.
+# Ordem importa: a 1a secao que casar ganha.
+CANAIS_SECOES = {"camarim.kpop"}
+SECOES = (
+    ("O MICO DA SEMANA", ("mico", "panico", "pânico", "desastre", "gargalh", "chora de rir",
+                          "choram de rir", "vergonha", "caiu", "trapalh", "erro")),
+    ("SEGREDOS DO CAMARIM", ("segredo", "secret", "esconde", "nunca contou", "bizarro")),
+    ("EXCLUSIVO DO CAMARIM", ("revela", "confessa", "exclusivo", "admite", "conta tudo")),
+)
+
+
+def secao(canal: str, titulo: str) -> str:
+    if canal not in CANAIS_SECOES:
+        return ""
+    t = (titulo or "").lower()
+    for nome, chaves in SECOES:
+        if any(k in t for k in chaves):
+            return nome
+    return ""
+
+
+def numero_da_secao(canal: str, nome: str, usados: dict | None = None) -> int:
+    """Quantos clipes do canal ja' cairam nesta secao (registro_clipes), +1."""
+    n = 0
+    try:
+        reg = json.loads((RAIZ / "registro_clipes.json").read_text(encoding="utf-8")).get("clipes") or {}
+    except (OSError, ValueError):
+        reg = {}
+    for v in reg.values():
+        if v.get("canal") == canal and secao(canal, v.get("titulo", "")) == nome:
+            n += 1
+    if usados is not None:
+        n = max(n, usados.get(nome, 0))
+        usados[nome] = n + 1
+    return n + 1
+
+
 def aplicar_no_lugar(video: Path, nome: str, parte: int) -> bool:
     """Sobrepoe o selo "NOME · PARTE N" entre INI_S e FIM_S. Falha aberta."""
     if parte < 2 or not nome:

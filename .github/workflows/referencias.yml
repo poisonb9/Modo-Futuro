@@ -39,6 +39,12 @@ jobs:
               print("termo", "ok" if r.returncode == 0 else "sem retorno")
           print("imagens:", len(os.listdir("ref")))
           EOF
+      - name: Guardar no Drive
+        continue-on-error: true
+        env:
+          REF_PASTA: ${{ secrets.REF_PASTA }}
+          GOOGLE_OAUTH_TOKEN_JSON_3: ${{ secrets.GOOGLE_OAUTH_TOKEN_JSON_3 }}
+        run: python -X utf8 ferramentas/guardar_referencias.py ref
       - name: Ler
         env:
           REF_ROTEIRO: ${{ secrets.REF_ROTEIRO }}

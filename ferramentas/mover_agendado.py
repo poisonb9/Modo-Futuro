@@ -23,6 +23,7 @@ p = argparse.ArgumentParser()
 p.add_argument("--canal", required=True)
 p.add_argument("--de", required=True)
 p.add_argument("--em-min", type=int, default=5)
+p.add_argument("--para", default="", help="horario exato em UTC AAAA-MM-DDTHH:MM (no lugar de --em-min)")
 p.add_argument("--simular", action="store_true")
 a = p.parse_args()
 c = cr.CANAIS[cr.canonico(a.canal)]
@@ -42,8 +43,11 @@ clipe = next((v for v in man.values()
                            or ini.startswith((v.get("titulo") or "#").strip()[:40]))), None)
 if not clipe:
     sys.exit("[!] nao achei o video desse post no manifesto")
-quando = datetime.datetime.utcnow() + datetime.timedelta(minutes=a.em_min + random.randint(0, 3),
-                                                          seconds=random.randint(1, 58))
+if a.para:
+    quando = datetime.datetime.strptime(a.para, "%Y-%m-%dT%H:%M") + datetime.timedelta(seconds=random.randint(1, 58))
+else:
+    quando = datetime.datetime.utcnow() + datetime.timedelta(minutes=a.em_min + random.randint(0, 3),
+                                                              seconds=random.randint(1, 58))
 due = quando.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 print("video:", clipe["url"][-70:], "->", due)
 if a.simular:

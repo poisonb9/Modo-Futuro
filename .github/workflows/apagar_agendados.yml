@@ -13,6 +13,9 @@ on:
       mover_em_min:
         description: "vazio = apagar; N = MOVER o 1o horario para daqui a N min"
         default: ""
+      mover_para:
+        description: "MOVER para este horario exato (UTC AAAA-MM-DDTHH:MM)"
+        default: ""
 permissions:
   contents: read
 jobs:
@@ -35,6 +38,10 @@ jobs:
           BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
         run: |
           S=""; [ "${{ inputs.simular }}" = "true" ] && S="--simular"
+          if [ -n "${{ inputs.mover_para }}" ]; then
+            python -X utf8 ferramentas/mover_agendado.py --canal "${{ inputs.canal }}" --de "${{ inputs.horarios }}" --para "${{ inputs.mover_para }}" $S
+            exit $?
+          fi
           if [ -n "${{ inputs.mover_em_min }}" ]; then
             python -X utf8 ferramentas/mover_agendado.py --canal "${{ inputs.canal }}" --de "${{ inputs.horarios }}" --em-min "${{ inputs.mover_em_min }}" $S
             exit $?

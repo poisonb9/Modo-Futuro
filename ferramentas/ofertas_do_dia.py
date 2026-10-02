@@ -101,12 +101,17 @@ def agendar(por_canal: dict[str, list[dict]], ja: bool = False) -> None:
                 import random
                 from datetime import datetime as _dt, timedelta as _td
                 agora_sp = (_dt.utcnow() - _td(hours=ab.FUSO_SP_H))
-                for _ in range(200):
-                    q = agora_sp + _td(minutes=random.randint(5, 15), seconds=random.randint(1, 58))
-                    if not any(abs((q - u).total_seconds()) < 180 for u in usados):
-                        break
-                usados.add(q)
-                horas[0] = q
+                # 02/10/2026 (dono: "posta nos 3 canais daqui a 5 minutos, em
+                # minutos aleatorios cada um"): TODOS os posts saem ja', entre
+                # 5 e ~30 min, >= 3 min de qualquer outro post (todos os canais).
+                for k in range(len(horas)):
+                    for _ in range(500):
+                        q = agora_sp + _td(minutes=random.randint(5, 30), seconds=random.randint(1, 58))
+                        if not any(abs((q - u).total_seconds()) < 180 for u in usados):
+                            break
+                    usados.add(q)
+                    horas[k] = q
+                horas.sort()
             for post, h in zip(posts, horas):
                 quando = ab.enfileirar(token, canal_id, post, simular=False, quando_sp=h)
                 print(f"  📅 {canal}: {post['titulo'][:60]} -> {quando}")
@@ -132,7 +137,7 @@ def main() -> None:
                     help="poe cada video na fila do Buffer do canal (exige --registrar)")
     # 01/10/2026 (dono: "publica 1 para analisarmos"): so' estes ids (virgula)
     ap.add_argument("--so", default="")
-    ap.add_argument("--ja", action="store_true", help="1o post de cada canal em 5-15 min")
+    ap.add_argument("--ja", action="store_true", help="todos os posts entre 5 e 30 min")
     a = ap.parse_args()
     if a.agendar and not a.registrar:
         sys.exit("--agendar exige --registrar: post no ar sem registro quebra a pagina da bio")

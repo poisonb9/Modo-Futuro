@@ -142,6 +142,33 @@ def ids_usados(estado: dict) -> set:
     return u
 
 
+def titulos_usados() -> list[str]:
+    """Titulos (normalizados, 25 letras) de brutos que ja' passaram pelo Drive.
+
+    ⭐ 02/10/2026: o JDownloader salva o bruto SEM o id do YouTube no nome, e
+    o `raw_vistos.json` guarda so' o nome do arquivo. A trava por id deixou o
+    video do Hyunjin (Risabae) ir pro Camarim depois de ja' ter ido pro Make.
+    """
+    try:
+        d = json.loads((RAIZ / "estado" / "raw_vistos.json").read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return [t for t in (_chave_titulo(Path(v.get("nome", "")).stem)[:25] for v in d.values()) if len(t) >= 10]
+
+
+def _chave_titulo(t: str) -> str:
+    """Como o `norm`, mas MANTEM letra de qualquer alfabeto (coreano, japones):
+    o `norm` reduzia "18분동안 현진이..." a "18" e casava titulo diferente."""
+    t = re.sub(r"_?\[[A-Za-z0-9_-]{11}\]$", "", t)          # id no fim do nome
+    t = re.sub(r"\((?:\d{3,4}p|BQ|Description|[A-Za-z]+_ASR)[^)]*\)", "", t)  # sufixo do JD
+    return "".join(c for c in unicodedata.normalize("NFKC", t).lower() if c.isalnum())
+
+
+def ja_usado_pelo_titulo(titulo: str, usados_t: list[str]) -> bool:
+    t = _chave_titulo(titulo)
+    return bool(t) and any(u in t or t[:25] in u for u in usados_t)
+
+
 # ------------------------------------------------------------------ drive
 
 def _subpastas(s, pai: str) -> list:
@@ -215,7 +242,9 @@ def escolher(canal: str, cfg: dict, usados: set) -> list:
     except Exception as e:
         log(f"[!] {canal}: radar sem arquivo ({e}) — nao baixo no escuro")
         return []
+    usados_t = titulos_usados()
     novos = [i for i in radar if i.get("id") not in usados
+             and not ja_usado_pelo_titulo(i.get("titulo", ""), usados_t)
              and i.get("views", 0) >= cfg["min_views"] and i.get("eng", 0) >= 2.5]
     novos.sort(key=lambda i: -i.get("nota", 0))
     por, cand = {}, []

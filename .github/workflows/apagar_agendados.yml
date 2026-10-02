@@ -1,0 +1,34 @@
+name: Apagar agendados (por horario)
+# 02/10/2026: apaga posts agendados de UM canal pelo horario exato (UTC). So' com pedido do dono.
+on:
+  workflow_dispatch:
+    inputs:
+      canal:
+        required: true
+      horarios:
+        description: "AAAA-MM-DDTHH:MM (UTC) separados por ||"
+        required: true
+      simular:
+        default: "true"
+permissions:
+  contents: read
+jobs:
+  apagar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+        run: |
+          S=""; [ "${{ inputs.simular }}" = "true" ] && S="--simular"
+          python -X utf8 ferramentas/apagar_agendados.py --canal "${{ inputs.canal }}" --horarios "${{ inputs.horarios }}" $S

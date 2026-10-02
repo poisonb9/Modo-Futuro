@@ -22,7 +22,9 @@ ROTEIRO = os.environ.get("REF_ROTEIRO") or """Analise esta imagem de capa/layout
 "chamada_principal": "", "chamadas_secundarias": [], "brinde": "", "formulas": [], "palavras_gatilho": [],
 "cores": "", "logo": "", "pose_olhar": "", "hierarquia": ""}
 Use "" quando ilegivel. Nao invente texto."""
-MODELOS = ("gemini-3.6-flash", "gemini-3.5-flash")
+# ⭐ 02/10/2026 (dono): modelos FORA da cadeia dos cortes (3.8/3.7/3.6/3.5-flash),
+# pra nao disputar cota com eles. Gemma 4 le capa muito bem (medido).
+MODELOS = ("gemma-4-31b-it", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite")
 
 
 def ler(f: Path, rot) -> dict:
@@ -33,7 +35,7 @@ def ler(f: Path, rot) -> dict:
     corpo = {"contents": [{"parts": [{"inline_data": {"mime_type": "image/jpeg",
                                                       "data": base64.b64encode(b.getvalue()).decode()}},
                                      {"text": ROTEIRO}]}],
-             "generationConfig": {"temperature": 0, "responseMimeType": "application/json"}}
+             "generationConfig": {"temperature": 0}}
     for _ in range(min(12, len(rot))):
         k = rot.proxima().strip()
         for modelo in MODELOS:
@@ -44,7 +46,8 @@ def ler(f: Path, rot) -> dict:
                 continue
             if r.status_code == 200:
                 try:
-                    d = json.loads(r.json()["candidates"][0]["content"]["parts"][0]["text"])
+                    t = r.json()["candidates"][0]["content"]["parts"][-1]["text"]
+                    d = json.loads(t[t.index("{"):t.rindex("}") + 1])   # Gemma nao tem modo JSON
                     d["arquivo"] = f.name
                     return d
                 except (KeyError, ValueError, IndexError):

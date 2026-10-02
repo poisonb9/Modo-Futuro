@@ -6,7 +6,8 @@
 Le a lista de candidatos (arquivo privado) e o `desempenho.jsonl`. Regras:
   1. tema QUENTE (posts dos ultimos 4 dias com alcance >= 2x a mediana do
      canal) e com candidato livre -> vai primeiro.
-  2. no maximo 1 fonte por tema por dia.
+  2. prefere tema que ainda nao teve fonte hoje (variedade, nao trava).
+  0. limite = DISCO: >= 5 GB livres para baixar; < 3 GB critico (02/10).
   3. senao, a ordem da lista.
 Registra cada decisao em `_privado/serie/decisoes.jsonl` para medir depois.
 """
@@ -14,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import statistics
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -24,6 +26,8 @@ DECISOES = RAIZ / "_privado" / "serie" / "decisoes.jsonl"
 DESEMPENHO = RAIZ / "desempenho.jsonl"
 DIAS_QUENTE = 4
 FATOR_QUENTE = 2.0
+DISCO_MIN_GB = 5.0       # abaixo disso, nao baixa (02/10, dono)
+DISCO_CRITICO_GB = 3.0   # critico
 
 
 def _posts(canal: str) -> list[dict]:
@@ -64,10 +68,14 @@ def temas_quentes(posts: list[dict], temas: dict[str, list[str]]) -> dict[str, f
 
 def escolher(dados: dict, posts: list[dict]) -> tuple[dict | None, str]:
     hoje = datetime.now().date().isoformat()
-    # ⛔ 25/09/2026 (dono): "nunca baixe um video atras do outro". Ja' houve
-    # download hoje -> nada hoje. E `nao_antes` segura o candidato ate' a data.
-    if any(c.get("baixado_em") == hoje for c in dados["candidatos"]):
-        return None, "ja' houve download hoje — o proximo so' amanha (regra: nunca em sequencia)"
+    # ⭐ 02/10/2026 (dono): com o JDownloader NAO ha' limite de 1 por dia. O
+    # limite e' o DISCO: >= 5 GB livres para baixar; abaixo de 3 GB e' critico.
+    # Cada bruto sai do PC assim que o DRIVE_FILE_ID= aparece.
+    livre = shutil.disk_usage(RAIZ.anchor).free / 1e9
+    if livre < DISCO_CRITICO_GB:
+        return None, f"DISCO CRITICO: {livre:.1f} GB livres (< {DISCO_CRITICO_GB}) — nada de download; esvaziar brutos"
+    if livre < DISCO_MIN_GB:
+        return None, f"disco com {livre:.1f} GB livres (< {DISCO_MIN_GB}) — esperar os brutos subirem e saírem do PC"
     livres = [c for c in dados["candidatos"] if not c.get("usado")
               and (c.get("nao_antes") or "") <= hoje]
     if not livres:
@@ -84,7 +92,7 @@ def escolher(dados: dict, posts: list[dict]) -> tuple[dict | None, str]:
     for c in livres:
         if c["idol"] not in ja_hoje:
             return c, "ordem da lista" + (f" (quentes sem candidato: {', '.join(quentes)})" if quentes else "")
-    return None, "todos os temas livres ja' tiveram fonte hoje"
+    return livres[0], "ordem da lista (todos os temas ja' tiveram fonte hoje; variedade e' preferencia, nao trava)"
 
 
 def main() -> None:

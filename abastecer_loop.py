@@ -352,8 +352,8 @@ def passada() -> None:
         # ⭐ 02/10/2026 (dono): o limite do JDownloader e' o DISCO, nao o dia.
         import shutil
         livre = shutil.disk_usage(RAIZ.anchor).free / 1e9
-        if livre < 5:
-            log(f"[!] disco com {livre:.1f} GB livres (< 5; < 3 e' critico) — sem download nesta passada")
+        if livre < 3.5:          # 02/10 dono: trava em 3,5 GB (era 5)
+            log(f"[!] disco com {livre:.1f} GB livres (< 3,5; < 3 e' critico) — sem download nesta passada")
             return
         itens = escolher(canal, cfg, usados)
         if not itens:

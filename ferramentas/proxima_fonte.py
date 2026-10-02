@@ -7,7 +7,7 @@ Le a lista de candidatos (arquivo privado) e o `desempenho.jsonl`. Regras:
   1. tema QUENTE (posts dos ultimos 4 dias com alcance >= 2x a mediana do
      canal) e com candidato livre -> vai primeiro.
   2. prefere tema que ainda nao teve fonte hoje (variedade, nao trava).
-  0. limite = DISCO: >= 5 GB livres para baixar; < 3 GB critico (02/10).
+  0. limite = DISCO: >= 3,5 GB livres para baixar; < 3 GB critico (02/10).
   3. senao, a ordem da lista.
 Registra cada decisao em `_privado/serie/decisoes.jsonl` para medir depois.
 """
@@ -26,7 +26,7 @@ DECISOES = RAIZ / "_privado" / "serie" / "decisoes.jsonl"
 DESEMPENHO = RAIZ / "desempenho.jsonl"
 DIAS_QUENTE = 4
 FATOR_QUENTE = 2.0
-DISCO_MIN_GB = 5.0       # abaixo disso, nao baixa (02/10, dono)
+DISCO_MIN_GB = 3.5       # abaixo disso, nao baixa (02/10, dono: 3,5 em vez de 5)
 DISCO_CRITICO_GB = 3.0   # critico
 
 

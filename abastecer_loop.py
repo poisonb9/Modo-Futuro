@@ -287,10 +287,13 @@ def subir_prontos(estado: dict) -> None:
     if not BAIXADOS.exists():
         return
     for v in list(BAIXADOS.rglob("*.mp4")):
-        a = v.stat().st_size
-        time.sleep(8)
-        if not v.exists() or v.stat().st_size != a:
-            continue  # ainda baixando
+        try:                      # 02/10: arquivo pode sumir no meio (removido do JD)
+            a = v.stat().st_size
+            time.sleep(8)
+            if not v.exists() or v.stat().st_size != a:
+                continue  # ainda baixando
+        except FileNotFoundError:
+            continue
         base = norm(v.name)
         vid = next((k for k, p in estado["pendentes"].items()
                     if norm(p["titulo"])[:25] and norm(p["titulo"])[:25] in base), None)

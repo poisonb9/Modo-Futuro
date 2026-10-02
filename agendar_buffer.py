@@ -818,27 +818,6 @@ def main() -> None:
                 motivo = f"a fala e' sobre: {j.get('fala_de')}" if j else "sem veredito"
                 print(f"  ⛔ {titulo}: titulo NAO bate com a fala ({motivo}) — pulado")
                 continue
-        # ⛔ 02/10/2026: DOIS CORTES DO MESMO CANAL agendando ao mesmo tempo
-        # (o @camarim.kpop) puseram o MESMO clipe duas vezes e posts a 3 min
-        # um do outro: cada run olhou o Buffer no inicio e o outro encheu a
-        # fila no meio (a conferencia do titulo pelo Gemini leva minutos).
-        # Agora, logo antes de CADA post, o Buffer e' lido de novo: titulo ja'
-        # na fila -> pula; e o horario sai da fila FRESCA (>= 3 h de qualquer
-        # post do canal).
-        if not a.simular:
-            try:
-                _, _, _frescos = contexto_buffer(tb, fresco=True)
-                _ini = (clipe.get("titulo") or "").strip().lower()[:40]
-                if _ini and any((x.get("text") or "").strip().lower().startswith(_ini)
-                                for x in _frescos if x.get("status") in ("scheduled", "sent", "sending")):
-                    print(f"  ⏭️ {titulo}: ja' esta' na fila do Buffer (outro run) — pulado")
-                    continue
-                _ag = [x for x in _frescos if x.get("status") != "sent"]
-                _novo = proximos_horarios(_ag, 1, _frescos)
-                if _novo:
-                    livres = [_novo[0]] + livres
-            except Exception as e:  # noqa: BLE001
-                print(f"  [!] reconferencia do Buffer falhou ({type(e).__name__}) — sigo com o horario calculado")
         quando = livres.pop(0)
         try:
             quando_txt = enfileirar(tb, canal, clipe, a.simular, quando_sp=quando)

@@ -516,7 +516,7 @@
       "run_id": 36833193862
     },
     {
-      "estado": "disparado",
+      "estado": "pendente",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",
@@ -526,8 +526,7 @@
       "quando": "2026-10-02T21:14:29+00:00",
       "tentativas": 1,
       "conta": "principal",
-      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
-      "run_id": 37065638408
+      "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO"
     },
     {
       "estado": "pronto",

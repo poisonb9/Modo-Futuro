@@ -99,6 +99,50 @@ def nota_quadro(img) -> float:
     return nit
 
 
+# ⭐ 02/10/2026 (dono): CAPA COM OLHAR NA CAMERA E SORRISO. Engenharia reversa
+# de 162 capas de revista teen (_privado/capricho/): 161 olham para a lente,
+# 69% sorriem, 51% em close. O acervo confirma (contato visual direto prende
+# no feed). Rosto FRONTAL (detector de frente) ~ olhando para a camera; olhos
+# abertos e sorriso somam. Bonus multiplica a nitidez; sem OpenCV = 1.0.
+BONUS_FRONTAL = 0.6
+BONUS_OLHOS = 0.3
+BONUS_SORRISO = 0.3
+_HAAR = {}
+
+
+def _cascata(nome: str):
+    import cv2
+    if nome not in _HAAR:
+        base = os.environ.get("HAAR_DIR") or cv2.data.haarcascades
+        _HAAR[nome] = cv2.CascadeClassifier(os.path.join(base, nome))
+    return _HAAR[nome]
+
+
+def bonus_rosto(img) -> float:
+    """1.0 sem rosto; ate' ~2.4 com rosto grande, de frente, olhos e sorriso."""
+    try:
+        import cv2
+        import numpy as np
+        g = cv2.cvtColor(np.array(img.convert("RGB")), cv2.COLOR_RGB2GRAY)
+        h, w = g.shape
+        caras = _cascata("haarcascade_frontalface_default.xml").detectMultiScale(
+            g, 1.1, 5, minSize=(w // 8, w // 8))
+        if len(caras) == 0:
+            return 1.0
+        x, y, cw, ch = max(caras, key=lambda r: r[2] * r[3])
+        b = 1.0 + BONUS_FRONTAL * min(1.0, (cw / w) / 0.35)      # maior = melhor ate' 35% da largura
+        rosto = g[y:y + ch, x:x + cw]
+        olhos = _cascata("haarcascade_eye.xml").detectMultiScale(rosto[: ch // 2], 1.1, 6)
+        if len(olhos) >= 2:
+            b += BONUS_OLHOS
+        sorr = _cascata("haarcascade_smile.xml").detectMultiScale(rosto[ch // 2:], 1.7, 22)
+        if len(sorr) >= 1:
+            b += BONUS_SORRISO
+        return b
+    except Exception:
+        return 1.0
+
+
 def amostrar(video: Path, ate_s: float) -> list[tuple[float, float, float | None]]:
     """[(instante, nitidez, % de texto fora do titulo)] nos `ate_s` iniciais."""
     from PIL import Image
@@ -111,7 +155,7 @@ def amostrar(video: Path, ate_s: float) -> list[tuple[float, float, float | None
                        check=True, capture_output=True, timeout=60)
         if f.exists():
             im = Image.open(f)
-            out.append((t, nota_quadro(im.resize((360, round(im.height * 360 / im.width)))),
+            out.append((t, nota_quadro(im.resize((360, round(im.height * 360 / im.width)))) * bonus_rosto(im),
                         texto_fora_do_titulo(im)))
         t += PASSO_S
     if not out:

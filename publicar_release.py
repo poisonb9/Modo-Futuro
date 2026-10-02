@@ -296,7 +296,10 @@ def main() -> None:
         # como @modofuturo, que e' de quem sao todos os 66 anteriores.
         registro_clipes.registrar(sha, arquivo=nome,
                                   titulo=str(m.get('titulo') or clipe.name),
-                                  canal=str(m.get('canal') or ''), url=url)
+                                  # 02/10/2026: o post.json vinha sem canal (244 de 257
+                                  # vazios) e o selo de serie misturava canais; o
+                                  # canal do run (CANAL_ESPERADO) e' a fonte certa.
+                                  canal=str(m.get('canal') or os.environ.get('CANAL_ESPERADO') or ''), url=url)
 
         novos[chave] = {"url": url, "nota": nota, "legenda": legenda,
                         # ⚠️ O SHA VIAJA NO MANIFESTO pra que o agendador

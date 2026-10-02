@@ -25,6 +25,10 @@ OURO_A, OURO_B = (0xF2, 0xC9, 0x4C), (0xC8, 0x90, 0x1A)
 TINTA = (0x16, 0x15, 0x1C)
 
 
+# canais nascidos depois que o registro passou a gravar o canal (02/10/2026)
+CANAIS_NOVOS = {"camarim.kpop"}
+
+
 def parte_do_tema(canal: str, nome: str, usados: dict | None = None) -> int:
     """Quantos clipes do canal ja' falaram deste nome, +1.
 
@@ -47,6 +51,11 @@ def parte_do_tema(canal: str, nome: str, usados: dict | None = None) -> int:
         # so' o MESMO canal: "coragem" num titulo motivacional do Sem
         # Anestesia nao e' parte da serie do Coragem no Geracao 2000
         if canal and v.get("canal") and v.get("canal") != canal:
+            continue
+        # ⛔ 02/10/2026: clipe SEM canal (legado, 244 de 257) contava em todo
+        # canal — o 1o post do @camarim.kpop saiu "BANGCHAN · PARTE 2" e o Han
+        # "PARTE 7", herdando o Make. Canal novo so' conta clipe COM o canal dele.
+        if canal in CANAIS_NOVOS and not v.get("canal"):
             continue
         if chave in str(v.get("titulo") or "").lower().replace(" ", ""):
             n += 1

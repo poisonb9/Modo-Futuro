@@ -84,7 +84,10 @@ MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHO TO
 
 def proximo_numero(canal: str) -> int:
     from engine import ofertas
-    return 1 + sum(1 for f in ofertas._feitas() if f.get("canal") == canal)
+    # 02/10/2026: maior numero ja' usado + 1 (contar linhas repetia o numero
+    # quando um post refeito saia do registro).
+    ns = [f.get("numero") or 0 for f in ofertas._feitas() if f.get("canal") == canal]
+    return 1 + max(ns + [sum(1 for _ in ns)])
 
 
 def vendas_curto(n: int) -> str:

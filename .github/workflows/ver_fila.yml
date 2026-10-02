@@ -23,4 +23,7 @@ jobs:
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
           BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+          PAGOMENOS: ${{ secrets.PAGOMENOS }}
+          ACHADINHOSINSTANTANEOS: ${{ secrets.ACHADINHOSINSTANTANEOS }}
+          ACHADINHOTOTAL: ${{ secrets.ACHADINHOTOTAL }}
         run: python -X utf8 ferramentas/ver_fila.py --canal "${{ inputs.canal }}"

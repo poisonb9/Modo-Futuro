@@ -16,7 +16,7 @@ permissions:
 jobs:
   ler:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 340   # leitura ~4 s/imagem; 20 termos x 20 passa de 2 h
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -81,6 +81,7 @@ jobs:
           GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
         run: python -X utf8 ferramentas/ler_referencias.py ref ref.json
       - uses: actions/upload-artifact@v4
+        if: always()   # guarda o parcial mesmo se a leitura estourar o tempo
         with:
           name: referencias
           path: ref.json

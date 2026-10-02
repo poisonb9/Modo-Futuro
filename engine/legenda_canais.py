@@ -27,6 +27,23 @@ Fala do corte:
 {texto}"""
 
 PROMPTS: dict[str, str] = {
+    # ---- camarim: bastidor, reacao, humor (02/10/2026) -----------------
+    "camarim.kpop": """Abaixo esta a fala de um corte curto de um canal de
+BASTIDORES de idols de K-pop: reacoes, humor, fofura e personalidade. O tom e'
+de fa contando pra outra fa o que viu: leve, animado, sem propaganda.
+
+Escreva a LEGENDA do post neste formato:
+
+<1 emoji> <UMA frase curta com o momento mais fofo ou engracado, com o NOME da
+idol e o GRUPO. Ex: "A Wonhee do ILLIT nao conseguiu parar de rir 😂">
+
+<1 frase curta de contexto (programa, com quem estava), se a fala disser.>
+
+<1 pergunta leve pra puxar comentario, com 1 emoji. Ex: "Qual idol voce
+quer ver no camarim depois? 👀">
+
+Fala do corte:
+{texto}""",
     # ---- make: fofo, amiga contando pra amiga -------------------------
     "truque.importado": """Abaixo esta a fala de um corte curto de um canal FOFO
 de maquiagem coreana e idols de K-pop. O tom e' de AMIGA contando pra outra

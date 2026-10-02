@@ -83,8 +83,8 @@ for n in COM_BUFFER:
                f"{n}: org, canal_id e env PREENCHIDOS")
 checar("modofuturo" in escopo.CANAIS_DO_MOTOR,
        "modofuturo continua no escopo do motor")
-checar(len(escopo.CANAIS_DO_MOTOR) == 5,
-       f"5 canais no escopo (veio {len(escopo.CANAIS_DO_MOTOR)}) — "
+checar(len(escopo.CANAIS_DO_MOTOR) == 6,
+       f"6 canais no escopo, com o camarim 02/10 (veio {len(escopo.CANAIS_DO_MOTOR)}) — "
        "a cozinha entrou em 26/09 (dono); os dois da fase 2 seguem motor=False")
 
 print("\n4. o canonico() traduz os nomes novos (e' ele que le' export e manifesto)")
@@ -96,7 +96,7 @@ checar(cr.canonico("achadinho.make") == "truque.importado",
        "achadinho.make continua caindo em truque.importado")
 
 print("\n5. e o registro tem OITO contas (7 do app + @achadinhototal, 29/09)")
-checar(len(cr.CANAIS) == 8, f"{len(cr.CANAIS)} contas (esperado 8)")
+checar(len(cr.CANAIS) == 9, f"{len(cr.CANAIS)} contas (esperado 9)")
 checar(cr.canonico("pagomenos") == "fatura.chora", "apelido pagomenos")
 
 if falhas:

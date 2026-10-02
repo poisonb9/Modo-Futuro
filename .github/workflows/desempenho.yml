@@ -54,6 +54,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
         run: python -X utf8 registrar_desempenho.py
 
       # ⚠️ A REDE OFFLINE CONTRA REPOSTAR ESTAVA CONGELADA HA' 5 DIAS.
@@ -82,6 +83,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
         run: |
           python -X utf8 historico.py
           # ⭐ 27/09/2026: a LISTA MESTRE (todo video, canal, data e hora)

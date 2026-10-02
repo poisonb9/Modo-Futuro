@@ -45,6 +45,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
         run: python -X utf8 medir_estoque.py
 
       - name: Avisar no Telegram

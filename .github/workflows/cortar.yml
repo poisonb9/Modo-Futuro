@@ -315,7 +315,9 @@ jobs:
                     && secrets.BUFFER_TOKEN_ATEFALHAR
                     || (inputs.canal == 'truque.importado'
                         && secrets.BUFFER_TOKEN_TRUQUEIMPORTADO
-                        || secrets.BUFFER_TOKEN))) }}
+                        || (inputs.canal == 'camarim.kpop'
+                            && secrets.BUFFER_TOKEN_CAMARIM
+                            || secrets.BUFFER_TOKEN)))) }}
           CANAL_ESPERADO: ${{ inputs.canal }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 01/10: a trava do titulo (conferir_titulos) OUVE o clipe com o Gemini;

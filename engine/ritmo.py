@@ -5,7 +5,7 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
-VELOCIDADE_POR_CANAL = {"truque.importado": 1.1}
+VELOCIDADE_POR_CANAL = {"truque.importado": 1.1, "camarim.kpop": 1.1}
 
 
 def fator(canal: str) -> float:

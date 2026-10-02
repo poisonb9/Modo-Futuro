@@ -244,6 +244,7 @@ MAPA_PASTA_CANAL = {
     "sem anestesia": "semanestesia.pod",
     "modo futuro": "modofuturo",
     "truque importado": "truque.importado",
+    "camarim kpop": "camarim.kpop",   # 02/10/2026
     "ate falhar": "atefalhar",
     # ⭐ 28/09/2026: pastas renomeadas com o nome ATUAL do canal (dono achou
     # confuso). Os nomes antigos ficam: brutos velhos seguem no lugar.
@@ -285,6 +286,9 @@ ENTRADAS_POR_CANAL = {
     # ⭐ 26/09/2026: a cozinha veio do motor `pipeline` para este (dono). Modo
     # receita = conversao de medida + guardas de abertura; voz da Bruna (dono).
     "cozinha.importada": {"selecao_modo": "receita", "amostra_voz": "bruna"},
+    # ⭐ 02/10/2026 (dono): Camarim K-pop com a voz da Bruna; modo padrao
+    # (GPC: gancho-progresso-climax) serve o MOMENTO, que e' o angulo do canal.
+    "camarim.kpop": {"amostra_voz": "bruna", "fundo_original": "true"},  # voz original so' no make (26/09)
 }
 
 

@@ -36,6 +36,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
           # 29/09/2026: o agendador OUVE o clipe e confere o titulo (Gemini)
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}

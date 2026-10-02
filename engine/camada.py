@@ -127,7 +127,7 @@ def dur_a(plat: str = "tiktok", n: int = 6) -> float:
 # selo da serie (main.py so' o aplica onde a camada liga).
 CANAIS: set[str] = {
     "modofuturo", "semanestesia.pod", "atefalhar", "achadinhos.instantaneos",
-    "truque.importado", "cozinha.importada", "fatura.chora",
+    "truque.importado", "cozinha.importada", "fatura.chora", "camarim.kpop",
 }
 # O AVIAO (parte B) leva a faixa "AchadinhoTotal.com.br" (v2.webp). Eu propus
 # deixar so' nos canais de achados; o dono decidiu (26/09): "quero o aviao com

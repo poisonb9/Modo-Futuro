@@ -62,6 +62,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
           # 29/09/2026: o agendador OUVE o clipe e confere o titulo (Gemini)
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_1 }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
@@ -104,6 +105,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
         run: python -X utf8 conferir_postados.py
 
       - name: Guardar o registro
@@ -125,6 +127,7 @@ jobs:
           BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
           BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
           BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
         run: python -X utf8 painel_filas.py | tee -a relato_fila.txt
 
       - name: Avisar no Telegram

@@ -28,6 +28,7 @@ com o A e o teste diria "tanto faz" sem ter testado.
 from __future__ import annotations
 
 import hashlib
+import re
 import os
 
 LIGADO = os.environ.get("AB_TITULO", "1") != "0"
@@ -40,9 +41,49 @@ LIGADO = os.environ.get("AB_TITULO", "1") != "0"
 MAX_CHARS = 40
 
 
-def grupo(fonte: str, inicio_s) -> str:
+# ⭐ 02/10/2026 (dono): grupo K = CAPA DE REVISTA. Engenharia reversa de 196
+# capas da Capricho e revistas teen (_privado/capricho/ENGENHARIA_REVERSA.md):
+# nome do idolo 87%, exclamacao 63%, numero 47%, gatilho (EXCLUSIVO,
+# segredo, revela, descubra, mico) e angulo intimo. No Camarim o C nao serve
+# (bastidor nao e' "situacao de quem assiste"): A x K. No Make: A x C x K.
+GRUPOS_POR_CANAL = {"camarim.kpop": ("A", "K"), "truque.importado": ("A", "C", "K")}
+
+
+def grupo(fonte: str, inicio_s, canal: str = "") -> str:
     h = hashlib.sha1(f"{fonte}|{round(float(inicio_s or 0), 1)}".encode()).hexdigest()
-    return "A" if int(h[:8], 16) % 2 == 0 else "C"
+    gs = GRUPOS_POR_CANAL.get(canal, ("A", "C"))
+    return gs[int(h[:8], 16) % len(gs)]
+
+
+GATILHOS_CAPA = ("EXCLUSIVO", "SEGREDO", "REVELA", "DESCUBRA", "MICO", "SURPREENDE")
+
+
+def como_capa(titulo: str, contexto: str = "") -> str | None:
+    """O mesmo fato no formato de chamada de capa de revista teen."""
+    from . import modelo_texto
+    achou = re.search(r"\bd[oa]s? ((?:[A-Z0-9][\w&'-]*)(?: [A-Z0-9][\w&'-]*)*)", titulo)
+    grupo_k = achou.group(1) if achou else ""
+    r = modelo_texto.perguntar(
+        "Reescreva o titulo abaixo de um video curto sobre idols de K-pop como CHAMADA "
+        "DE CAPA de revista teen brasileira (estilo Capricho), em portugues correto do "
+        "Brasil. Escolha UMA das estruturas, a que combinar com o fato:\n"
+        "- 'O SEGREDO de <idol> do <grupo> para <fato>!'\n"
+        "- 'O MICO de <idol> do <grupo> <fato>!'\n"
+        "- 'EXCLUSIVO: <idol> do <grupo> <fato>!'\n"
+        "- '<idol> do <grupo> REVELA <fato>!'\n"
+        "- 'DESCUBRA <fato> de <idol> do <grupo>!'\n"
+        "- '<numero> <coisas> de <idol> do <grupo>!' (so' se o video for lista)\n"
+        "Mantenha o NOME do idolo E o nome do GRUPO exatamente como no titulo; "
+        "a palavra-gatilho em MAIUSCULAS; frase gramaticalmente correta. Nao invente "
+        f"fato, nome ou numero. No maximo {MAX_CHARS + 8} caracteres, sem aspas, sem "
+        "emoji, sem pergunta. Responda so' a chamada.\n\n"
+        f"Titulo: {titulo}\nContexto: {contexto[:300]}")
+    t = _limpar(r or "")
+    if (not t or t.endswith("?") or len(t) > MAX_CHARS + 12 or len(t) < 10
+            or not any(g in t.upper() for g in GATILHOS_CAPA)
+            or (grupo_k and grupo_k.lower() not in t.lower())):
+        return None
+    return t
 
 
 # a identificacao precisa de um pouco mais de ar que a afirmacao
@@ -109,7 +150,7 @@ def aplicar(c: dict, fonte: str) -> str:
     titulo = c.get("titulo", "")
     if not LIGADO or not titulo:
         return titulo
-    g = grupo(fonte, c.get("inicio_s"))
+    g = grupo(fonte, c.get("inicio_s"), (os.environ.get("CANAL_ESPERADO") or "").strip().lower())
     c["ab_titulo"] = g
     c["titulo_tela"] = titulo
     if g == "C":
@@ -118,6 +159,12 @@ def aplicar(c: dict, fonte: str) -> str:
             c["titulo_tela"] = p
         else:
             c["ab_titulo"] = "C_falhou"
+    elif g == "K":
+        p = como_capa(titulo, str(c.get("gancho") or c.get("descricao") or ""))
+        if p:
+            c["titulo_tela"] = p
+        else:
+            c["ab_titulo"] = "K_falhou"
     if (c["ab_titulo"] != "C" and len(c["titulo_tela"]) > MAX_CHARS + 5
             and not c["titulo_tela"].endswith("?")):
         curto = encurtar(c["titulo_tela"])

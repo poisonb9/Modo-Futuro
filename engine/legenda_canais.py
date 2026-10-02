@@ -39,8 +39,10 @@ idol e o GRUPO. Ex: "A Wonhee do ILLIT nao conseguiu parar de rir 😂">
 
 <1 frase curta de contexto (programa, com quem estava), se a fala disser.>
 
-<1 pergunta leve pra puxar comentario, com 1 emoji. Ex: "Qual idol voce
-quer ver no camarim depois? 👀">
+<1 pergunta no formato TESTE de revista teen (02/10/2026: 38% das capas da
+Capricho traziam teste), que a pessoa responde nos comentarios sobre ELA
+mesma, com 1 emoji. Ex: "Qual integrante do Stray Kids e' voce? Comenta 👇",
+"Voce seria a BFF de quem? 👀", "Doce ou salgado: qual time e' o seu? 🍪">
 
 Fala do corte:
 {texto}""",

@@ -87,14 +87,14 @@ print("\n[5] título longo vai pra tela ENCURTADO (os dois grupos)")
 LONGO = "Por Que a China Foi Banida do Mercado de Microchips Avancados"
 respostas = {}
 modelo_texto.perguntar = lambda p, **k: respostas["r"]
-ab_titulo.grupo = lambda f, i: "A"
+ab_titulo.grupo = lambda f, i, *a: "A"
 respostas["r"] = "China banida dos microchips"
 c = {"titulo": LONGO}
 t = ab_titulo.aplicar(c, "x")
 checar(t == "China banida dos microchips" and c["titulo_tela_curto"] is True,
        f"A: {t!r}")
 # ⭐ 27/09/2026: o B (pergunta) foi encerrado; o C e' a IDENTIFICACAO
-ab_titulo.grupo = lambda f, i: "C"
+ab_titulo.grupo = lambda f, i, *a: "C"
 respostas["r"] = "Quando voce acha que chip e' so' software"
 c = {"titulo": LONGO}
 t = ab_titulo.aplicar(c, "x")
@@ -110,7 +110,7 @@ ab_titulo.aplicar(c, "x")
 checar(c["ab_titulo"] == "C_falhou", "C com '?' e' recusado")
 
 print("\n[6] NEGATIVO: modelo fora ou resposta longa -> fica o original, marcado")
-ab_titulo.grupo = lambda f, i: "A"
+ab_titulo.grupo = lambda f, i, *a: "A"
 respostas["r"] = None
 c = {"titulo": LONGO}
 checar(ab_titulo.aplicar(c, "x") == LONGO and c["titulo_tela_curto"] is False,

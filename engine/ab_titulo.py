@@ -58,32 +58,60 @@ def grupo(fonte: str, inicio_s, canal: str = "") -> str:
 GATILHOS_CAPA = ("EXCLUSIVO", "SEGREDO", "REVELA", "DESCUBRA", "MICO", "SURPREENDE")
 
 
-def como_capa(titulo: str, contexto: str = "") -> str | None:
-    """O mesmo fato no formato de chamada de capa de revista teen."""
+def _norm_fala(t: str) -> str:
+    import unicodedata
+    t = unicodedata.normalize("NFKD", (t or "").lower())
+    return re.sub(r"[^a-z0-9 ]", "", "".join(c for c in t if not unicodedata.combining(c)))
+
+
+def como_capa(titulo: str, contexto: str = "", fala: str = "", canal: str = "") -> str | None:
+    """O mesmo fato no formato de chamada de capa de revista teen.
+
+    02/10/2026: estruturas medidas em 162 capas (_privado/capricho/): gatilho,
+    "TEMA: promessa" (dois pontos, 174 chamadas), citacao em 1a pessoa entre
+    aspas (22%) e, no Make, a OCASIAO da vida real (escola, festa, foto).
+    Citacao so' passa se as palavras existem de verdade na `fala`.
+    """
     from . import modelo_texto
     achou = re.search(r"\bd[oa]s? ((?:[A-Z0-9][\w&'-]*)(?: [A-Z0-9][\w&'-]*)*)", titulo)
     grupo_k = achou.group(1) if achou else ""
+    make = canal == "truque.importado"
     r = modelo_texto.perguntar(
         "Reescreva o titulo abaixo de um video curto sobre idols de K-pop como CHAMADA "
         "DE CAPA de revista teen brasileira (estilo Capricho), em portugues correto do "
-        "Brasil. Escolha UMA das estruturas, a que combinar com o fato:\n"
+        "Brasil. Escolha UMA das estruturas, a que combinar melhor com o fato:\n"
         "- 'O SEGREDO de <idol> do <grupo> para <fato>!'\n"
         "- 'O MICO de <idol> do <grupo> <fato>!'\n"
         "- 'EXCLUSIVO: <idol> do <grupo> <fato>!'\n"
         "- '<idol> do <grupo> REVELA <fato>!'\n"
         "- 'DESCUBRA <fato> de <idol> do <grupo>!'\n"
+        "- '<IDOL> do <grupo>: <promessa curta>!' (dois pontos)\n"
+        "- '\"<frase curta que o idol DISSE na fala abaixo>\" — <idol> do <grupo>' "
+        "(SO' se a fala tiver uma frase marcante; use as palavras exatas da fala)\n"
         "- '<numero> <coisas> de <idol> do <grupo>!' (so' se o video for lista)\n"
-        "Mantenha o NOME do idolo E o nome do GRUPO exatamente como no titulo; "
-        "a palavra-gatilho em MAIUSCULAS; frase gramaticalmente correta. Nao invente "
-        f"fato, nome ou numero. No maximo {MAX_CHARS + 8} caracteres, sem aspas, sem "
-        "emoji, sem pergunta. Responda so' a chamada.\n\n"
-        f"Titulo: {titulo}\nContexto: {contexto[:300]}")
-    t = _limpar(r or "")
-    if (not t or t.endswith("?") or len(t) > MAX_CHARS + 12 or len(t) < 10
-            or not any(g in t.upper() for g in GATILHOS_CAPA)
-            or (grupo_k and grupo_k.lower() not in t.lower())):
+        + ("- 'Como fazer <o look/make> de <idol> do <grupo> PARA <escola/festa/foto/"
+           "encontro>!' (so' se o video ensina a make; a ocasiao tem de combinar)\n"
+           if make else "")
+        + "Mantenha o NOME do idolo E o nome do GRUPO exatamente como no titulo; "
+        "palavra-gatilho (se houver) em MAIUSCULAS; frase gramaticalmente correta. Nao "
+        f"invente fato, nome ou numero. No maximo {MAX_CHARS + 8} caracteres, sem emoji, "
+        "sem pergunta. Responda so' a chamada.\n\n"
+        f"Titulo: {titulo}\nContexto: {contexto[:300]}\nFala do video: {fala[:900]}")
+    # o _limpar tira aspas das pontas — aqui elas podem ser a CITACAO
+    t = ((r or "").strip().splitlines() or [""])[0].strip()
+    if not t or t.endswith("?") or len(t) > MAX_CHARS + 14 or len(t) < 10:
         return None
-    return t
+    if grupo_k and grupo_k.lower() not in t.lower():
+        return None
+    citacao = re.search(r"[\"“'‘](.{6,}?)[\"”'’]", t)
+    if citacao:
+        # ⛔ citacao inventada e' pior que nenhuma: tem de estar na fala
+        if not fala or _norm_fala(citacao.group(1)) not in _norm_fala(fala):
+            return None
+        return t
+    estrutura_ok = (any(g in t.upper() for g in GATILHOS_CAPA) or ":" in t
+                    or (make and " PARA " in t.upper()))
+    return t if estrutura_ok else None
 
 
 # a identificacao precisa de um pouco mais de ar que a afirmacao
@@ -160,7 +188,8 @@ def aplicar(c: dict, fonte: str) -> str:
         else:
             c["ab_titulo"] = "C_falhou"
     elif g == "K":
-        p = como_capa(titulo, str(c.get("gancho") or c.get("descricao") or ""))
+        p = como_capa(titulo, str(c.get("gancho") or c.get("descricao") or ""),
+                      str(c.get("_fala") or ""), (os.environ.get("CANAL_ESPERADO") or "").strip().lower())
         if p:
             c["titulo_tela"] = p
         else:

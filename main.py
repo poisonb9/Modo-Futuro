@@ -652,7 +652,11 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
             _fv = ritmo.fator(_canal_leg)   # legenda e' queimada ANTES da velocidade
             # ⭐ 25/09: A/B do titulo NA TELA (afirmacao x pergunta). O grupo
             # vai pro post.json e pro manifesto; ver engine/ab_titulo.py.
+            # 02/10: a fala dublada vai junto pro grupo K poder CITAR o idol
+            # entre aspas (so' frase que existe de verdade na fala).
+            c["_fala"] = " ".join(str(p.get("palavra", "")) for p in (ps or []))
             _titulo_tela = ab_titulo.aplicar(c, nome_fonte)
+            c.pop("_fala", None)
             for _plat, _arq in _versoes:
                 _estreito = ([(a * _fv, b * _fv, f, lado)
                               for a, b, f, lado in camada.janelas(_plat)]

@@ -523,11 +523,11 @@
       "selecao_modo": "",
       "drive_file_id": "1d_n5fMC6dhKdv4MOdbbsxD35T7S4SvsG",
       "nome": "How to Build Extreme Willpower - Goggins & Huberman",
-      "quando": "2026-10-01T22:54:26+00:00",
+      "quando": "2026-10-02T02:22:02+00:00",
       "tentativas": 0,
       "conta": "principal",
       "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
-      "run_id": 36937820228
+      "run_id": 36955292599
     },
     {
       "estado": "pronto",
@@ -565,14 +565,14 @@
       "selecao_modo": "",
       "drive_file_id": "1j-Q21B9-xt7xIKoq4UYTFR_S5aGvqhHn",
       "nome": "Avoiding Distractions & Doing Deep Work - Cal Newport",
-      "quando": "2026-10-01T22:54:31+00:00",
+      "quando": "2026-10-02T02:22:07+00:00",
       "tentativas": 0,
       "conta": "principal",
       "pasta_drive": "1k8fh9qZPxEkr64IK1TIpucdSstVDxDFO",
-      "run_id": 36937827278
+      "run_id": 36955299647
     },
     {
-      "estado": "disparado",
+      "estado": "pronto",
       "canal": "semanestesia.pod",
       "qtd": "4",
       "amostra_voz": "bryan",

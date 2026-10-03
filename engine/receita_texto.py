@@ -52,6 +52,10 @@ MEDIDAS
   "1 xicara americana = 240 ml. A brasileira varia de 150 a 250 ml, por isso
   convertemos.">
 
+<1 pergunta-TESTE curta sobre a propria pessoa, com 1 emoji (03/10/2026,
+dono: em todos os canais). Ex: "Voce faria pra marmita ou pro jantar? 👇",
+"Time mais queijo ou mais pimenta?">
+
 REGRAS DE MEDIDA — leia com atencao, e' o diferencial do canal:
 - LIQUIDO (leite, agua, oleo, caldo): converta para ml. 1 xicara = 240 ml.
 - SECO E PESAVEL (farinha, acucar, manteiga, mel, aveia): converta para GRAMAS.

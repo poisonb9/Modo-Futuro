@@ -22,6 +22,9 @@ REGRAS PARA TODOS:
 - NUNCA cite marca/produto patrocinado que aparece na fala (ex.: "AG1",
   cupom, "link na descricao"): e' o anuncio do podcast original.
 - As DUAS primeiras linhas aparecem antes do "ver mais": sao conteudo.
+- A PERGUNTA FINAL e' um TESTE de revista (03/10/2026, dono: em todos os
+  canais): a pessoa responde sobre ELA MESMA, com escolha clara (A ou B,
+  "qual e' voce", "voce faria?"). Nunca "o que voce acha?".
 
 Fala do corte:
 {texto}"""
@@ -65,8 +68,9 @@ disser.>
 • <outro>
 • <outro — no maximo 4>
 
-<1 pergunta leve e divertida pra puxar comentario, com 1 emoji. Ex: "Voce
-teria coragem de usar esse glitter no dia a dia? 👀">
+<1 pergunta-TESTE leve, sobre a propria pessoa, com 1 emoji. Ex: "Voce
+usaria esse glitter na escola ou so' na festa? 👀", "Time delineado ou time
+cilios? Comenta 👇">
 
 PROIBIDO NESTE CANAL: numero de industria, economia, pais, PIB, tecnologia,
 "sistema de treinamento", tom de reportagem. Nada de seta "→". No maximo 450
@@ -90,8 +94,9 @@ Pra levar pro seu dia:
 • <1 acao pratica e concreta que sai da fala>
 • <outra — 2 ou 3 no total>
 
-<1 pergunta direta, pessoal, sem ser retorica vazia. Ex: "O que voce faz nos
-dias em que a vontade nao aparece?">
+<1 pergunta-TESTE direta e pessoal, com escolha clara. Ex: "Voce treina
+cedo ou a noite?", "Voce aguentaria 1 semana da rotina do Goggins? Sim ou
+nao">
 
 PROIBIDO: conselho medico como verdade absoluta ("isso cura"), dado que o
 convidado nao citou, hype ("vai mudar sua vida"), tecnologia/industria. No
@@ -111,8 +116,9 @@ Escreva a LEGENDA do post neste formato:
 <2 frases curtas: o detalhe que prova e por que ninguem percebeu quando
 crianca.>
 
-<1 pergunta nostalgica pra puxar comentario. Ex: "Voce assistia antes da
-escola ou depois do almoco?">
+<1 pergunta-TESTE nostalgica sobre a propria pessoa. Ex: "Voce assistia
+antes da escola ou depois do almoco?", "Qual Padrinho Magico seria o seu:
+Cosmo ou Wanda?">
 
 PROIBIDO: inventar fato que a fala nao diz, spoiler sem aviso, treino/
 tecnologia/industria. No maximo 500 caracteres e 2 emojis.""",
@@ -122,4 +128,7 @@ tecnologia/industria. No maximo 500 caracteres e 2 emojis.""",
 def prompt_do_canal(canal: str | None) -> str | None:
     """O prompt proprio do canal, ou None (usa o formato do Modo Futuro)."""
     base = PROMPTS.get(canal or "")
-    return (base + "\n" + _COMUM) if base else None
+    if not base:
+        return None
+    from . import calendario   # 03/10/2026: data do momento (volta as aulas...)
+    return base + calendario.dica(canal or "") + "\n" + _COMUM

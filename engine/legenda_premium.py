@@ -53,9 +53,10 @@ monopolio:">
 
 <1 frase de fecho: o que isso decide, ou o que observar daqui pra frente.>
 
-<UM icone> <uma PERGUNTA curta pro leitor, ou um gancho de curiosidade sobre o
-que vem a seguir. Ex: "E se essa fabrica parar por uma semana?" / "O proximo
-gargalo talvez nem seja o chip — e sim a energia pra alimenta-lo.">
+<UM icone> <uma pergunta-TESTE curta sobre o PROPRIO leitor, com escolha
+clara (03/10/2026, dono: em todos os canais). Ex: "Voce compraria um celular
+montado 100% por robos? Sim ou nao" / "Voce trocaria de celular por um chip 2x
+mais rapido?">
 
 REGRAS DE ACABAMENTO — o Bryan reprovou a versao anterior por parecer rascunho:
 - NUNCA use titulo de secao em caixa alta ("O CONTEXTO", "POR QUE IMPORTA").

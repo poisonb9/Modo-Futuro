@@ -107,6 +107,9 @@ def nota_quadro(img) -> float:
 BONUS_FRONTAL = 0.6
 BONUS_OLHOS = 0.3
 BONUS_SORRISO = 0.3
+# 03/10/2026 (dono): capa com UM rosto so' — 114 de 155 capas teen eram solo.
+# Rosto vizinho com >= 60% do tamanho do maior conta como "segundo rosto".
+BONUS_SOLO = 0.2
 _HAAR = {}
 
 
@@ -132,6 +135,8 @@ def bonus_rosto(img) -> float:
             return 1.0
         x, y, cw, ch = max(caras, key=lambda r: r[2] * r[3])
         b = 1.0 + BONUS_FRONTAL * min(1.0, (cw / w) / 0.35)      # maior = melhor ate' 35% da largura
+        if sum(1 for r in caras if r[2] * r[3] >= 0.6 * cw * ch) == 1:
+            b += BONUS_SOLO
         rosto = g[y:y + ch, x:x + cw]
         olhos = _cascata("haarcascade_eye.xml").detectMultiScale(rosto[: ch // 2], 1.1, 6)
         if len(olhos) >= 2:

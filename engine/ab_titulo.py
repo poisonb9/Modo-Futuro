@@ -70,7 +70,10 @@ def grupo(fonte: str, inicio_s, canal: str = "") -> str:
     return gs[int(h[:8], 16) % len(gs)]
 
 
-GATILHOS_CAPA = ("EXCLUSIVO", "SEGREDO", "REVELA", "DESCUBRA", "MICO", "SURPREENDE")
+# 03/10/2026: + os gatilhos mais lidos nas 155 capas (Gemini): especial 23,
+# truques/infaliveis, BFF, diva, "adeus" (antes/depois).
+GATILHOS_CAPA = ("EXCLUSIVO", "SEGREDO", "REVELA", "DESCUBRA", "MICO", "SURPREENDE",
+                 "ESPECIAL", "INFALÍVE", "INFALIVE", "TRUQUE", "ADEUS", "BFF", "DIVA")
 
 
 def _norm_fala(t: str) -> str:
@@ -87,7 +90,7 @@ def como_capa(titulo: str, contexto: str = "", fala: str = "", canal: str = "") 
     aspas (22%) e, no Make, a OCASIAO da vida real (escola, festa, foto).
     Citacao so' passa se as palavras existem de verdade na `fala`.
     """
-    from . import modelo_texto
+    from . import calendario, modelo_texto
     achou = re.search(r"\bd[oa]s? ((?:[A-Z0-9][\w&'-]*)(?: [A-Z0-9][\w&'-]*)*)", titulo)
     grupo_k = achou.group(1) if achou else ""
     make = canal == "truque.importado"
@@ -107,7 +110,11 @@ def como_capa(titulo: str, contexto: str = "", fala: str = "", canal: str = "") 
         f"- 'O MICO de {quem} <fato>!'\n"
         f"- '\"<frase curta DITA na fala abaixo>\" — {quem}' "
         "(SO' se a fala tiver uma frase marcante; use as palavras exatas da fala)\n"
+        f"- 'ADEUS <problema>: o truque de {quem}!' (antes/depois, so' se o video mostra)\n"
+        f"- 'O truque INFALIVEL de {quem} para <fato>!'\n"
         f"- 'EXCLUSIVO: {quem} <fato>!' (RARO: so' se o fato for de fato inedito)\n"
+        + ("Palavras de capa que combinam com K-pop, se couber: ESPECIAL, BFF, DIVA.\n"
+           if kpop else "")
         + ("- 'Como fazer <o look/make> de <idol> do <grupo> PARA <escola/festa/foto/"
            "encontro>!' (so' se o video ensina a make; a ocasiao tem de combinar)\n"
            if make else "")
@@ -116,6 +123,7 @@ def como_capa(titulo: str, contexto: str = "", fala: str = "", canal: str = "") 
         + ("Mantenha o NOME do idolo E o nome do GRUPO exatamente como no titulo; "
            if kpop else
            "Mantenha o NOME principal do titulo (pessoa, empresa, personagem ou prato); ")
+        + calendario.dica(canal, titulo)
         + "palavra-gatilho (se houver) em MAIUSCULAS; frase gramaticalmente correta. Nao "
         f"invente fato, nome ou numero. No maximo {MAX_CHARS + 8} caracteres, sem emoji, "
         "sem pergunta. Responda so' a chamada.\n\n"

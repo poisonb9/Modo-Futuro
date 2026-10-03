@@ -58,6 +58,10 @@ clara (03/10/2026, dono: em todos os canais). Ex: "Voce compraria um celular
 montado 100% por robos? Sim ou nao" / "Voce trocaria de celular por um chip 2x
 mais rapido?">
 
+ESCOLA DE REVISTA (03/10/2026, dono): a primeira frase leva o NOME (empresa,
+produto, pessoa) e um NUMERO real, como chamada de capa; frase marcante da fala
+pode ir ENTRE ASPAS com as palavras exatas; varie o jeito de abrir entre posts.
+
 REGRAS DE ACABAMENTO — o Bryan reprovou a versao anterior por parecer rascunho:
 - NUNCA use titulo de secao em caixa alta ("O CONTEXTO", "POR QUE IMPORTA").
   Parece wireframe, nao produto acabado.

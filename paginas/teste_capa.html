@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Teste da Capa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!--
+  TESTE DA CAPA (03/10/2026, dono: "A e B!!! extraordinario, premium e organizado").
+  Engenharia reversa das capas teen: o TESTE estava em 43% das capas nos anos
+  2000 e migrou para a internet. Aqui ele vira a isca de topo: a pessoa faz o
+  teste, ganha um cartao para compartilhar e recebe a Ficha da Semana por e-mail.
+
+  ⛔ PREVIA = true: o formulario NAO grava nada. So' vira false com OK do dono,
+  junto com o produto novo cadastrado no envio de e-mail.
+  ⚠️ Resultados apoiados em fatos dos clipes do canal; sem inventar fala de idol.
+  ⚠️ Pagina publica: nada de nome interno de canal aqui.
+-->
+<style>
+:root{--cor:#D6336C;--fundo:#FFF4F8;--tinta:#17141d;--suave:#5b5666;--linha:#ece7f0}
+*{box-sizing:border-box;margin:0}
+html{background:#fff;color-scheme:light only}
+body{background:#fff;color:var(--tinta);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.app{max-width:560px;margin:0 auto;padding:clamp(18px,5vw,36px) 16px 48px;min-height:100svh;display:flex;flex-direction:column}
+.topo{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:3px solid var(--tinta)}
+.marca{font:800 12px/1 Inter,sans-serif;letter-spacing:.3em;color:var(--cor)}
+.selo{font:700 11px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--tinta);border-radius:999px;padding:7px 12px}
+.tela{flex:1;display:none;flex-direction:column;padding-top:26px;animation:entra .35s ease both}
+.tela.ativa{display:flex}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.tela{animation:none}}
+.capa{position:relative;background:var(--fundo);border-radius:28px;padding:clamp(24px,6vw,36px);overflow:hidden}
+.capa::after{content:"?";position:absolute;right:8px;bottom:-40px;font:900 200px/1 Fraunces,Georgia,serif;color:var(--cor);opacity:.12}
+.kicker{font:800 12px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--cor)}
+h1{margin:14px 0 12px;font:900 clamp(32px,8vw,46px)/1.03 Fraunces,Georgia,serif;letter-spacing:-.02em;text-wrap:balance;position:relative;z-index:1}
+.lead{color:var(--suave);font-size:17px;position:relative;z-index:1;max-width:38ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative;z-index:1}
+.chips span{background:#fff;border-radius:999px;padding:7px 12px;font:600 13px/1 Inter,sans-serif}
+.btn{appearance:none;border:0;cursor:pointer;font:800 17px/1 Inter,sans-serif;border-radius:999px;padding:18px 26px;background:var(--cor);color:#fff;width:100%;margin-top:22px;transition:transform .15s ease,box-shadow .15s ease;box-shadow:0 10px 24px -12px var(--cor)}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible,.op:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+.btn.sec{background:#fff;color:var(--tinta);border:2px solid var(--tinta);box-shadow:none;margin-top:10px}
+.barra{height:6px;background:var(--linha);border-radius:99px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--cor);border-radius:99px;transition:width .3s ease}
+.passo{margin-top:14px;font:700 13px/1 Inter,sans-serif;color:var(--suave);letter-spacing:.08em}
+h2{margin:12px 0 18px;font:800 clamp(24px,6vw,30px)/1.2 Fraunces,Georgia,serif;text-wrap:balance}
+.ops{display:grid;gap:10px}
+.op{appearance:none;cursor:pointer;text-align:left;display:flex;gap:14px;align-items:center;background:#fff;border:2px solid var(--linha);border-radius:18px;padding:15px 16px;font:600 16px/1.35 Inter,sans-serif;color:var(--tinta);transition:border-color .15s ease,background .15s ease}
+.op:hover{border-color:var(--cor);background:var(--fundo)}
+.op b{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--fundo);color:var(--cor);font-weight:800}
+.cartao{position:relative;border-radius:28px;padding:clamp(24px,6vw,34px);color:#fff;background:linear-gradient(150deg,var(--cor),var(--tinta) 120%);overflow:hidden}
+.cartao::after{content:attr(data-n);position:absolute;right:-4px;bottom:-30px;font:900 150px/1 Fraunces,Georgia,serif;opacity:.14}
+.cartao .kicker{color:#fff;opacity:.8}
+.cartao h1{color:#fff;margin-bottom:10px}
+.cartao p{opacity:.92;position:relative;z-index:1}
+.cartao .assin{margin-top:18px;font:700 12px/1 Inter,sans-serif;letter-spacing:.2em;opacity:.75}
+.bloco{margin-top:16px;border:1.5px solid var(--linha);border-radius:20px;padding:18px}
+.bloco b{display:block;font:800 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;color:var(--cor)}
+.bloco ol{padding-left:1.15em;display:grid;gap:6px}
+.bloco li::marker{color:var(--cor);font-weight:800}
+.isca{margin-top:16px;background:var(--fundo);border-radius:24px;padding:22px}
+.isca h3{font:800 22px/1.2 Fraunces,Georgia,serif;margin:8px 0 6px;text-wrap:balance}
+.isca p{color:var(--suave)}
+.isca form{display:grid;gap:10px;margin-top:14px}
+.isca input[type=email]{font:16px Inter,sans-serif;padding:15px 16px;border-radius:14px;border:2px solid var(--linha);background:#fff}
+.isca input[type=email]:focus{outline:none;border-color:var(--cor)}
+.isca label.ok{display:flex;gap:10px;font-size:13px;color:var(--suave);align-items:flex-start}
+.isca .btn{margin-top:4px}
+.mel{position:absolute;left:-9999px}
+.msg{font-size:14px;font-weight:600;min-height:1.2em}
+.previa{margin-top:10px;font:700 12px/1.4 Inter,sans-serif;color:#9a5b00;background:#fff6e0;border-radius:10px;padding:8px 10px}
+.rodape{margin-top:26px;font-size:12px;color:var(--suave);text-align:center}
+.rodape a{color:var(--cor);font-weight:700;text-decoration:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topo"><span class="marca" id="marca"></span><span class="selo">Teste da capa</span></header>
+
+  <section class="tela ativa" id="t-abre">
+    <div class="capa">
+      <div class="kicker" id="kicker"></div>
+      <h1 id="titulo"></h1>
+      <p class="lead" id="lead"></p>
+      <div class="chips"><span id="n-perg"></span><span>1 minuto</span><span>Resultado para compartilhar</span></div>
+    </div>
+    <button class="btn" id="comecar">Começar o teste</button>
+  </section>
+
+  <section class="tela" id="t-perg" aria-live="polite">
+    <div class="barra"><i id="progresso"></i></div>
+    <div class="passo" id="passo"></div>
+    <h2 id="pergunta"></h2>
+    <div class="ops" id="ops"></div>
+  </section>
+
+  <section class="tela" id="t-res">
+    <div class="cartao" id="cartao">
+      <div class="kicker">Seu resultado</div>
+      <h1 id="r-nome"></h1>
+      <p id="r-texto"></p>
+      <div class="assin" id="r-assin"></div>
+    </div>
+    <div class="bloco"><b id="r-lista-tit"></b><ol id="r-lista"></ol></div>
+    <button class="btn sec" id="compartilhar">Compartilhar meu resultado</button>
+    <div class="isca">
+      <div class="kicker" id="i-kicker"></div>
+      <h3 id="i-titulo"></h3>
+      <p id="i-texto"></p>
+      <form id="form" novalidate>
+        <label class="sr" for="email">seu e-mail</label>
+        <input id="email" type="email" required autocomplete="email" placeholder="seu@email.com">
+        <input class="mel" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="ok"><input type="checkbox" id="aceite"><span id="i-ok"></span></label>
+        <button class="btn" type="submit" id="i-botao"></button>
+        <p class="msg" id="msg" role="status"></p>
+      </form>
+      <p class="previa" id="previa" hidden>PRÉVIA: o envio está desligado até a aprovação.</p>
+    </div>
+    <button class="btn sec" id="refazer">Refazer o teste</button>
+  </section>
+
+  <footer class="rodape"><a id="perfil" href="#">Ver os vídeos no TikTok →</a> · <a href="/privacidade">Privacidade</a></footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var PREVIA = true;
+  var SUPABASE = { url: "https://lwtqfwkfcknzyyzmuymg.supabase.co",
+                   anon: "sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy" };
+
+  // Cada pergunta: 4 opcoes, cada opcao soma 1 ponto num resultado (indice).
+  var TESTES = {
+    make: {
+      marca: "ACHADINHO MAKE", cor: "#D6336C", fundo: "#FFF4F8",
+      perfil: "https://www.tiktok.com/@achadinho.make", origem: "teste.make", produto: "ficha_make",
+      kicker: "Teste da capa · Nº 1",
+      titulo: "Qual make de idol combina com você?",
+      lead: "6 perguntas rápidas. No fim, a make da sua vibe com o passo a passo das idols do canal.",
+      perguntas: [
+        ["Sexta à noite, você está...", ["Num show, brilhando na pista", "Num jantar, com o olhar marcado", "Num rolê de fotos com as amigas", "Num café, de cara lavada e feliz"]],
+        ["Seu item de make que nunca falta:", ["Glitter ou iluminador", "Delineador", "Blush", "Protetor solar e lip tint"]],
+        ["Elogio que você mais ama ouvir:", ["Você está brilhando!", "Que olhar poderoso!", "Que fofa!", "Que pele linda!"]],
+        ["Na foto, você...", ["Faz pose de palco", "Olha sério pra câmera", "Faz coraçãozinho com os dedos", "Sorri sem filtro"]],
+        ["Qual cor te representa?", ["Prata e lilás", "Marrom e vinho", "Rosa bebê", "Pêssego"]],
+        ["Tempo para se arrumar:", ["O tempo que precisar, é arte", "15 minutos, mas o delineado é sagrado", "10 minutos de blush e alegria", "5 minutos e pronta"]]
+      ],
+      resultados: [
+        { nome: "Fada Brilhante", texto: "Você é a make que vira assunto. Brilho no lugar certo, ponto de luz no olhar e coragem de ser palco. É a vibe da Jiwoo do NMIXX desenhando a própria maquiagem de fada.",
+          lista: ["Pele leve e iluminada no centro do rosto", "Glitter só na pálpebra móvel e no canto interno", "Lábio com brilho para fechar"] },
+        { nome: "Gatinha Marcante", texto: "Seu olhar fala antes de você. Delineado alongado, sombras quentes e atitude. É a vibe do delineado gatinho que a Noze mostrou no canal.",
+          lista: ["Sombra quente esfumada no côncavo", "Delineado puxado para cima, no ângulo da sobrancelha", "Máscara só nos cílios de fora"] },
+        { nome: "Bonequinha Dumpling", texto: "Você é fofura com propósito. Bochecha rosada, pele de pêssego e sorriso. É a vibe da famosa make dumpling que o Hyunjin do Stray Kids completou no canal.",
+          lista: ["Blush rosado bem no alto das bochechas", "Iluminador por cima do blush", "Lábio em degradê, mais forte no centro"] },
+        { nome: "Natural Glow", texto: "Você é a pele mais bonita da sala. Pouca coisa, tudo bem feito. É a vibe da Jiwoo do NMIXX defendendo o protetor solar com a maquiadora.",
+          lista: ["Protetor solar como primeiro passo", "Corretivo só onde precisa", "Lip tint e sobrancelha penteada"] }
+      ],
+      isca: { kicker: "Brinde exclusivo", titulo: "Receba a Make da Semana", texto: "Toda semana, as makes que as idols usaram nos vídeos, com o passo a passo e o que comprar. Cada edição tem número, dá vontade de juntar todas.", ok: "Aceito receber a Make da Semana por e-mail. Saio quando quiser.", botao: "Quero receber" },
+      compartilha: "Fiz o teste e minha make de idol é"
+    },
+    camarim: {
+      marca: "CAMARIM K-POP", cor: "#7B2FF7", fundo: "#F6F0FF",
+      perfil: "https://www.tiktok.com/@camarim.kpop", origem: "teste.camarim", produto: "ficha_camarim",
+      kicker: "Teste da capa · Nº 1",
+      titulo: "Qual integrante do Stray Kids seria seu BFF?",
+      lead: "6 perguntas. No fim, seu BFF do Stray Kids e os bastidores que provam que vocês combinam.",
+      perguntas: [
+        ["No grupo de amigos, você é...", ["Quem cuida de todo mundo", "Quem faz todo mundo rir", "Quem treina até ficar perfeito", "O caçula mimado da turma"]],
+        ["Seu jeito de resolver um problema:", ["Assumo a frente e organizo", "Transformo em piada", "Ensaio sozinho até dar certo", "Faço uma carinha e todo mundo perdoa"]],
+        ["Programa perfeito:", ["Live até tarde com os amigos", "Dançar sem parar", "Ficar em casa praticando algo novo", "Comer muito e tirar fotos"]],
+        ["O que te irrita?", ["Ver alguém desanimado", "Silêncio constrangedor", "Errar na frente dos outros", "Ser deixado de lado"]],
+        ["Sua frase:", ["Pode contar comigo", "Calma, vai dar tudo certo", "Mais uma vez, do começo", "Mas eu sou fofo, né?"]],
+        ["Seu superpoder:", ["Liderar", "Alegrar o ambiente", "Disciplina", "Ser impossível de ficar bravo com você"]]
+      ],
+      resultados: [
+        { nome: "Bang Chan", texto: "Seu BFF é o líder que abre o coração. Ele já desabafou sobre o chat do 3RACHA e cuida do grupo como família. Vocês são os que seguram a barra dos amigos.",
+          lista: ["Os dois nasceram para cuidar de todo mundo", "Conversam até tarde sem ver a hora", "Nunca deixam ninguém desanimar"] },
+        { nome: "Han", texto: "Seu BFF é o que transforma tudo em história. Ele contou que foi ignorado por 2 semanas no grupo e riu disso. Vocês dois fazem piada até do perrengue.",
+          lista: ["Humor é a língua oficial da amizade", "Perrengue vira meme em 5 minutos", "Ninguém fica sério perto de vocês"] },
+        { nome: "Seungmin", texto: "Seu BFF é o disciplinado de coração mole. Ele treinava choro no espelho para acertar a cena. Vocês dois ensaiam até ficar perfeito.",
+          lista: ["Os dois levam o que amam a sério", "Treino é forma de carinho", "Perfeccionistas, mas morrem de rir juntos"] },
+        { nome: "I.N", texto: "Seu BFF é o caçula que se livra de tudo sendo fofo. Ele comete erros e é perdoado na hora. Vocês dois são impossíveis de ficar bravos.",
+          lista: ["Carinha de inocente é a arma secreta", "Fazem bagunça e saem ilesos", "O grupo inteiro protege vocês"] }
+      ],
+      isca: { kicker: "Brinde exclusivo", titulo: "Receba o Photocard da Semana", texto: "Toda semana, os bastidores que mais deram o que falar, contados como fã conta pra fã. Cada photocard tem número, dá vontade de completar a coleção.", ok: "Aceito receber o Photocard da Semana por e-mail. Saio quando quiser.", botao: "Quero o meu photocard" },
+      compartilha: "Fiz o teste e meu BFF do Stray Kids é"
+    }
+  };
+
+  var chave = (new URLSearchParams(location.search).get("c") || "make").toLowerCase();
+  var T = TESTES[chave] || TESTES.make;
+  var $ = function (id) { return document.getElementById(id); };
+  var root = document.documentElement.style;
+  root.setProperty("--cor", T.cor); root.setProperty("--fundo", T.fundo);
+  document.title = T.titulo + " · " + T.marca;
+
+  $("marca").textContent = T.marca; $("kicker").textContent = T.kicker;
+  $("titulo").textContent = T.titulo; $("lead").textContent = T.lead;
+  $("n-perg").textContent = T.perguntas.length + " perguntas";
+  $("perfil").href = T.perfil;
+  $("i-kicker").textContent = T.isca.kicker; $("i-titulo").textContent = T.isca.titulo;
+  $("i-texto").textContent = T.isca.texto; $("i-ok").textContent = T.isca.ok;
+  $("i-botao").textContent = T.isca.botao;
+  if (PREVIA) { $("previa").hidden = false; }
+
+  var atual = 0, pontos = [];
+  function mostrar(id) {
+    ["t-abre", "t-perg", "t-res"].forEach(function (t) { $(t).classList.toggle("ativa", t === id); });
+    window.scrollTo(0, 0);
+  }
+  function pergunta() {
+    var p = T.perguntas[atual];
+    $("progresso").style.width = (100 * atual / T.perguntas.length) + "%";
+    $("passo").textContent = "PERGUNTA " + (atual + 1) + " DE " + T.perguntas.length;
+    $("pergunta").textContent = p[0];
+    var ops = $("ops"); ops.innerHTML = "";
+    p[1].forEach(function (txt, i) {
+      var b = document.createElement("button");
+      b.className = "op"; b.type = "button";
+      b.innerHTML = "<b>" + String.fromCharCode(65 + i) + "</b><span></span>";
+      b.querySelector("span").textContent = txt;
+      b.addEventListener("click", function () { pontos[i] = (pontos[i] || 0) + 1; avancar(); });
+      ops.appendChild(b);
+    });
+    ops.firstChild.focus({ preventScroll: true });
+  }
+  function avancar() {
+    atual++;
+    if (atual < T.perguntas.length) { pergunta(); } else { resultado(); }
+  }
+  function resultado() {
+    var melhor = 0;
+    for (var i = 1; i < T.resultados.length; i++) { if ((pontos[i] || 0) > (pontos[melhor] || 0)) melhor = i; }
+    var r = T.resultados[melhor];
+    $("cartao").setAttribute("data-n", String(melhor + 1).padStart(2, "0"));
+    $("r-nome").textContent = r.nome; $("r-texto").textContent = r.texto;
+    $("r-assin").textContent = T.marca;
+    $("r-lista-tit").textContent = chave === "camarim" ? "Por que vocês combinam" : "Seu passo a passo";
+    var ol = $("r-lista"); ol.innerHTML = "";
+    r.lista.forEach(function (x) { var li = document.createElement("li"); li.textContent = x; ol.appendChild(li); });
+    $("compartilhar").onclick = function () {
+      var txt = T.compartilha + " " + r.nome + "! Faz o seu:";
+      if (navigator.share) { navigator.share({ title: T.titulo, text: txt, url: location.href }).catch(function () {}); }
+      else if (navigator.clipboard) { navigator.clipboard.writeText(txt + " " + location.href); $("compartilhar").textContent = "Link copiado!"; }
+    };
+    mostrar("t-res");
+  }
+  $("comecar").addEventListener("click", function () { atual = 0; pontos = []; mostrar("t-perg"); pergunta(); });
+  $("refazer").addEventListener("click", function () { mostrar("t-abre"); });
+
+  $("form").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var v = $("email").value.trim().toLowerCase(), msg = $("msg"), bt = $("i-botao");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) || v.length < 6) { msg.textContent = "Confira o e-mail."; $("email").focus(); return; }
+    if (!$("aceite").checked) { msg.textContent = "Marque a caixa para eu poder te mandar."; return; }
+    if (document.querySelector(".mel").value) { return; }
+    if (PREVIA) { msg.textContent = "Prévia: nada foi enviado."; return; }
+    bt.disabled = true; msg.textContent = "Enviando…";
+    fetch(SUPABASE.url + "/rest/v1/contato", {
+      method: "POST",
+      headers: { "apikey": SUPABASE.anon, "Authorization": "Bearer " + SUPABASE.anon,
+                 "Content-Type": "application/json", "Prefer": "return=minimal" },
+      body: JSON.stringify({ email: v, origem: T.origem, produto: T.produto })
+    }).then(function (r) {
+      if (!r.ok) { throw new Error(r.status); }
+      $("form").innerHTML = "<p class='msg'>Pronto! A primeira edição chega em " + v.replace(/</g, "") + ".</p>";
+    }).catch(function () { bt.disabled = false; msg.textContent = "Não deu agora. Tente de novo."; });
+  });
+})();
+</script>
+</body>
+</html>

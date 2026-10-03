@@ -18,10 +18,28 @@ _COMUM = """
 REGRAS PARA TODOS:
 - Portugues do Brasil, natural, como gente fala. Nada de titulo de secao em
   caixa alta, nada de "nao coube no video", sem hashtag, sem "siga para mais".
-- NAO INVENTE: so' o que a fala sustenta. Na duvida, deixe de fora.
+- NAO INVENTE: so' o que a fala sustenta. Na duvida, deixe de fora. ONDE e
+  COM QUEM (programa, live, entrevista, bate-papo com fas) so' se a fala
+  disser — em 03/10 saiu "em um bate-papo com fas" sem a fala dizer.
+- Pergunta-teste sem "A)" "B)": escreva as opcoes na frase ("time X ou time Y?").
 - NUNCA cite marca/produto patrocinado que aparece na fala (ex.: "AG1",
   cupom, "link na descricao"): e' o anuncio do podcast original.
 - As DUAS primeiras linhas aparecem antes do "ver mais": sao conteudo.
+
+ESCOLA DE REVISTA (03/10/2026, dono: "reformular todas as legendas com base nas
+revistas"; 155 capas teen lidas, _privado/capricho/ENGENHARIA_REVERSA.md):
+- A 1a LINHA e' CHAMADA DE CAPA: o NOME em destaque (94% das capas) + um
+  NUMERO real da fala (74%) ou um gatilho (segredo, revela, descubra,
+  especial, infalivel, adeus...). Exclamacao combina (80%). Nao copie o
+  titulo da tela palavra por palavra: complete-o.
+- Se a fala tiver uma frase marcante, use-a ENTRE ASPAS com as palavras
+  exatas, atribuida a quem disse (22% das capas). Nunca invente citacao.
+- Fale com VOCE e com a vida real (escola, festa, rotina, trabalho), quando
+  a fala permitir: capa teen vende o beneficio pra leitora.
+- Nome, programa, data e evento concretos ajudam o TikTok a entender o post.
+- SOE GENTE (skill humanizar): varie o jeito de abrir entre posts; nada de
+  lista de tres em toda frase, nada de "nao e' X, e' Y", travessao so' se
+  precisar, sem "alem disso"/"vale ressaltar"/"em resumo".
 - A PERGUNTA FINAL e' um TESTE de revista (03/10/2026, dono: em todos os
   canais): a pessoa responde sobre ELA MESMA, com escolha clara (A ou B,
   "qual e' voce", "voce faria?"). Nunca "o que voce acha?".
@@ -37,8 +55,9 @@ de fa contando pra outra fa o que viu: leve, animado, sem propaganda.
 
 Escreva a LEGENDA do post neste formato:
 
-<1 emoji> <UMA frase curta com o momento mais fofo ou engracado, com o NOME da
-idol e o GRUPO. Ex: "A Wonhee do ILLIT nao conseguiu parar de rir 😂">
+<1 emoji> <CHAMADA DE CAPA com o NOME da idol e o GRUPO e o momento mais fofo
+ou engracado. Ex: "O ataque de riso da Wonhee do ILLIT que ninguem segurou 😂",
+"HAN do Stray Kids REVELA: 2 semanas sendo ignorado no grupo!">
 
 <1 frase curta de contexto (programa, com quem estava), se a fala disser.>
 
@@ -56,9 +75,9 @@ amiga o que viu: leve, curiosa, animada, sem virar propaganda e sem aula.
 
 Escreva a LEGENDA do post neste formato:
 
-<1 emoji fofo> <UMA frase curta com o momento mais fofo, engracado ou o
-resultado da make. Ex: "O delineado de gatinho que deixou a Wonhee com cara
-de boneca 🐱">
+<1 emoji fofo> <CHAMADA DE CAPA com o NOME da idol e o resultado ou o segredo
+da make. Ex: "O delineado de gatinho que deixou a Wonhee com cara de boneca 🐱",
+"3 passos da make dumpling do Hyunjin pra voce copiar!">
 
 <1 frase curta dizendo quem e' (a idol, o grupo, a maquiadora), se a fala
 disser.>
@@ -84,9 +103,10 @@ nem suavizar.
 
 Escreva a LEGENDA do post neste formato:
 
-<1 emoji discreto> <UMA frase forte com a ideia central da fala, atribuida a
-quem falou. Ex: "Goggins nao esperou motivacao: ele reescrevia a mesma pagina
-ate' decorar.">
+<1 emoji discreto> <CHAMADA DE CAPA sobria: o NOME de quem falou + a ideia
+central, com numero se a fala tiver. Ex: "Goggins nao esperou motivacao: ele
+reescrevia a mesma pagina ate' decorar.", "O protocolo de 2 minutos do Huberman
+pra dopamina nao despencar">
 
 <2 frases curtas explicando o porque, no que a fala sustenta.>
 
@@ -111,7 +131,9 @@ brasileira.
 
 Escreva a LEGENDA do post neste formato:
 
-<1 emoji> <UMA frase com a revelacao ou teoria central do video.>
+<1 emoji> <CHAMADA DE CAPA com o NOME do desenho ou personagem e a revelacao.
+Ex: "O SEGREDO do Coragem que voce nao viu quando crianca!", "Adeus, Cosmo e
+Wanda: o que mudou nos Padrinhos Magicos">
 
 <2 frases curtas: o detalhe que prova e por que ninguem percebeu quando
 crianca.>

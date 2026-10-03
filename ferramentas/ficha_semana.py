@@ -38,6 +38,7 @@ DIAS = 7
 
 CANAIS = {
     "truque.importado": {
+        "logo": "Achadinho Make",
         "marca": "ACHADINHO MAKE", "arroba": "@achadinho.make", "cor": "#D6336C",
         "fundo": "#FFF4F8", "ficha": "Make da Semana",
         "foco": "as makes das idols da semana: para cada uma, o PASSO A PASSO e o "
@@ -45,6 +46,7 @@ CANAIS = {
         "secao": "A make", "itens": "Passo a passo", "extra": "O que foi usado",
     },
     "camarim.kpop": {
+        "logo": "Camarim K-pop",
         "marca": "CAMARIM K-POP", "arroba": "@camarim.kpop", "cor": "#7B2FF7",
         "fundo": "#F6F0FF", "ficha": "Photocard da Semana",
         "foco": "os bastidores da semana: para cada idol, o momento, o que ele/ela "
@@ -52,6 +54,7 @@ CANAIS = {
         "secao": "Bastidor", "itens": "O que rolou", "extra": "Para guardar",
     },
     "cozinha.importada": {
+        "logo": "Achadinho Chef",
         "marca": "ACHADINHO CHEF", "arroba": "@achadinhochef", "cor": "#1F8A5F",
         "fundo": "#F1FAF5", "ficha": "Cardápio da Semana",
         "foco": "as receitas da semana: ingredientes JA em grama/ml/°C e o modo de "
@@ -59,6 +62,7 @@ CANAIS = {
         "secao": "Receita", "itens": "Modo de preparo", "extra": "Ingredientes",
     },
     "semanestesia.pod": {
+        "logo": "Sem Anestesia",
         "marca": "SEM ANESTESIA", "arroba": "@semanestesia.pod", "cor": "#D92B2B",
         "fundo": "#FFF3F2", "ficha": "Rotina da Semana",
         "foco": "as ideias da semana viradas em PROTOCOLO pratico: a ideia, quem "
@@ -66,6 +70,7 @@ CANAIS = {
         "secao": "Protocolo", "itens": "Checklist", "extra": "Por que funciona",
     },
     "modofuturo": {
+        "logo": "Modo Futuro",
         "marca": "MODO FUTURO", "arroba": "@modofuturo", "cor": "#1B5BFF",
         "fundo": "#F1F5FF", "ficha": "O Que Vem Aí",
         "foco": "as historias de tecnologia da semana: o fato, os numeros que a "
@@ -73,6 +78,7 @@ CANAIS = {
         "secao": "Historia", "itens": "Os fatos", "extra": "O que observar",
     },
     "atefalhar": {
+        "logo": "Geração 2000",
         "marca": "GERACAO 2000", "arroba": "@atefalhar", "cor": "#E36414",
         "fundo": "#FFF6EE", "ficha": "Hora do Recreio",
         "foco": "as revelacoes da semana sobre os desenhos dos anos 2000: o "
@@ -91,12 +97,17 @@ REGRAS DURAS:
 - Portugues do Brasil, leve e caprichado, como revista. Nomes como estao.
 - Use {n_min} a {n_max} secoes (uma por video forte; junte repetidos).
 - NAO use a palavra "ficha" e NAO repita "Nº" na capa (o numero ja' aparece no selo).
-- Titulo de capa no estilo das capas: NUMERO quando houver, gatilho
-  (SEGREDO, REVELA, DESCUBRA, ESPECIAL, INFALIVEL), nome em destaque.
+- Manchete de capa: nome em destaque + gatilho (SEGREDO, REVELA, DESCUBRA,
+  ESPECIAL, INFALIVEL). NUMERO so' se for uma QUANTIDADE real das legendas
+  ("3 passos", "14 dias"); nunca um numero solto no comeco ("19 SEGREDO" e
+  "1 DESCUBRA" sairam errados em 03/10). Frase com sentido, de 3 a 7 palavras.
+- No Camarim, cada secao e' UM idol pelo nome (nao o grupo inteiro).
+- Itens COMPLETOS: nenhuma frase cortada no meio.
 
 Responda SO' JSON, neste formato:
 {{"capa": "chamada principal, ate' 60 caracteres",
-  "subtitulo": "1 frase que vende a ficha, ate' 110 caracteres",
+  "subtitulo": "1 frase que vende a edicao, ate' 110 caracteres",
+  "selo": "texto do selo estourado da capa, 2 a 4 palavras com exclamacao (ex: EXCLUSIVO!, 3 MAKES NOVAS!)",
   "secoes": [{{"nome": "nome em destaque (idol, prato, pessoa, empresa ou desenho)",
               "titulo": "chamada curta da secao, ate' 55 caracteres",
               "resumo": "1 a 2 frases",
@@ -170,7 +181,7 @@ def montar_dados(canal: str, numero: int) -> dict | None:
     if len(cs) < 2:
         print(f"  {canal}: so' {len(cs)} clipe(s) na semana — ficha nao sai")
         return None
-    legendas = "\n\n".join(f"- {c['titulo']}\n{c['legenda'][:600]}" for c in cs[:12])
+    legendas = "\n\n".join(f"- {c['titulo']}\n{c['legenda'][:900]}" for c in cs[:10])
     p = PROMPT.format(numero=numero, n_min=min(3, len(cs)), n_max=min(5, len(cs)),
                       legendas=legendas, **{k: cfg[k] for k in ("ficha", "marca", "foco", "itens", "extra")})
     for _ in range(2):
@@ -395,7 +406,8 @@ def gerar(canal: str, gravar: bool = False) -> Path | None:
     # JSON primeiro: erro de layout nao pode jogar fora a resposta do modelo
     (SAIDA / f"{canal}_N{n:02d}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     cards = [c.name for c in photocards(canal, n, d)] if canal == "camarim.kpop" else None
-    p.write_text(render(canal, n, d, cards=cards), encoding="utf-8")
+    import edicao_design
+    p.write_text(edicao_design.render(canal, CANAIS[canal], n, d, cards=cards), encoding="utf-8")
     (SAIDA / f"{canal}_N{n:02d}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     if gravar:
         gravar_numero(canal, n)

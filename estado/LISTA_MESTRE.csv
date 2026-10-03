@@ -1,27 +1,37 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
-2026-10-05;13:13;truque.importado;agendado;ESFUMADO NEUTRO E ALONGADO COM SOMBRAS QUENTES;6ac07e5316dec17c2651ab7a
-2026-10-05;08:12;truque.importado;agendado;ILUMINAÇÃO PRECISA COM CORRETIVO EM POTE E ESPONJA;6ac07e4c4619427d30debbae
-2026-10-04;19:41;truque.importado;agendado;CONTORNO CREMOSO PONTUAL PARA EFEITO LIFTING NO ROSTO;6ac07e4316dec17c2651a37c
-2026-10-04;16:25;truque.importado;agendado;BASE CUSHION DE CORAÇÃO COM ACABAMENTO GLOW E FPS 35;6ac07e3d4619427d30deb998
-2026-10-04;13:16;truque.importado;agendado;UM CUT CREASE PERFEITO E SEM COMPLICAÇÃO;6ac04ce2ad2f47bd7d4d3845
-2026-10-04;08:18;truque.importado;agendado;ESTE COMBO DE LÁBIOS COM 3 LÁPIS DE BOCA FICA PERFEITO;6ac04cd7ad2f47bd7d4d36f6
-2026-10-03;19:49;truque.importado;agendado;MISTURA DE 2 CORRETIVOS PARA APAGAR AS OLHEIRAS;6ac04ccf6b1c05e151e76144
+2026-10-05;13:13;truque.importado;removido;ESFUMADO NEUTRO E ALONGADO COM SOMBRAS QUENTES;6ac07e5316dec17c2651ab7a
+2026-10-05;08:12;truque.importado;removido;ILUMINAÇÃO PRECISA COM CORRETIVO EM POTE E ESPONJA;6ac07e4c4619427d30debbae
+2026-10-04;19:47;camarim.kpop;agendado;I.N do Stray Kids comete erros e se livra por ser fofo;6ac0f7537d53b827e0dc1e93
+2026-10-04;19:41;truque.importado;removido;CONTORNO CREMOSO PONTUAL PARA EFEITO LIFTING NO ROSTO;6ac07e4316dec17c2651a37c
+2026-10-04;16:25;truque.importado;removido;BASE CUSHION DE CORAÇÃO COM ACABAMENTO GLOW E FPS 35;6ac07e3d4619427d30deb998
+2026-10-04;16:25;camarim.kpop;agendado;BANG CHAN do Stray Kids desabafa sobre o chat do 3RACHA;6ac0f74efec591339475a967
+2026-10-04;13:16;truque.importado;removido;UM CUT CREASE PERFEITO E SEM COMPLICAÇÃO;6ac04ce2ad2f47bd7d4d3845
+2026-10-04;13:11;camarim.kpop;agendado;BANG CHAN do Stray Kids usa roupas transparentes no grupo;6ac0f748905eed02e065c340
+2026-10-04;08:22;camarim.kpop;agendado;HAN do Stray Kids foi ignorado por 2 semanas no grupo;6ac0f73e3bfd38430fe08635
+2026-10-04;08:18;truque.importado;removido;ESTE COMBO DE LÁBIOS COM 3 LÁPIS DE BOCA FICA PERFEITO;6ac04cd7ad2f47bd7d4d36f6
+2026-10-03;19:49;truque.importado;removido;MISTURA DE 2 CORRETIVOS PARA APAGAR AS OLHEIRAS;6ac04ccf6b1c05e151e76144
+2026-10-03;19:48;camarim.kpop;agendado;MOKA DO ILLIT IMPRESSIONA EQUIPE COM SEU TALENTO EXPRESSIVO;6ac0f72a905eed02e065c0f4
 2026-10-03;19:47;atefalhar;agendado;O TOMBO DE 80% NA AUDIÊNCIA DO CARTOON NETWORK EM 5 ANOS;6abe9fce0fdd0066b7accd8c
-2026-10-03;19:45;camarim.kpop;agendado;WONHEE do ILLIT comprou bebida aos 20 anos só para mostrar o RG;6ac01c65e25183641e5807e9
+2026-10-03;19:45;camarim.kpop;removido;WONHEE do ILLIT comprou bebida aos 20 anos só para mostrar o RG;6ac01c65e25183641e5807e9
 2026-10-03;19:37;cozinha.importada;agendado;Sopa de repolho finalizada com limão e salsa;6abee47522215530c70711b0
-2026-10-03;16:27;camarim.kpop;agendado;HYUNJIN do Stray Kids revela qual é a coreografia mais difícil do grupo;6abfe64f918015097ad1484d
+2026-10-03;16:27;camarim.kpop;removido;HYUNJIN do Stray Kids revela qual é a coreografia mais difícil do grupo;6abfe64f918015097ad1484d
 2026-10-03;16:24;atefalhar;agendado;PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME;6abe9fb8399500185dacb60f
-2026-10-03;16:23;truque.importado;agendado;O CONTORNO DE NARIZ PERFEITO COM PINCEL DE DETALHES;6ac04cc4f942e39137030b3c
+2026-10-03;16:24;camarim.kpop;agendado;J-HOPE do BTS diz que está cheio mas come 1 pote inteiro de KIMCHI;6ac0f71d3bfd38430fe083de
+2026-10-03;16:23;truque.importado;removido;O CONTORNO DE NARIZ PERFEITO COM PINCEL DE DETALHES;6ac04cc4f942e39137030b3c
 2026-10-03;16:22;cozinha.importada;agendado;O segredo do extrato de tomate caramelizado;6abee46d22215530c707110e
-2026-10-03;13:13;truque.importado;agendado;ESTE CONTORNO EM BASTÃO AFINA O ROSTO NA HORA;6ac04cbead2f47bd7d4d3500
-2026-10-03;13:12;camarim.kpop;agendado;HAN do Stray Kids revela as manias mais estranhas que tem ao relaxar;6abfe378c1a1f62091fa6784
+2026-10-03;13:15;truque.importado;agendado;Hyunjin do Stray Kids raspou a cabeça sozinho no quarto;6ac0f00b7d53b827e0db0e42
+2026-10-03;13:13;truque.importado;removido;ESTE CONTORNO EM BASTÃO AFINA O ROSTO NA HORA;6ac04cbead2f47bd7d4d3500
+2026-10-03;13:12;camarim.kpop;removido;HAN do Stray Kids revela as manias mais estranhas que tem ao relaxar;6abfe378c1a1f62091fa6784
+2026-10-03;13:12;camarim.kpop;agendado;WONHEE do ILLIT acendeu incenso pela 1ª vez e levou um susto;6ac0f708905eed02e065be74
 2026-10-03;13:07;cozinha.importada;agendado;Carne moída dourada com repolho de 1 panela;6abee44f22215530c7070f7c
 2026-10-03;13:04;atefalhar;agendado;OS DETALHES SECRETOS NO CABELO DO PERI ADULTO;6abe9fa7e0299a86f41b731d
-2026-10-03;08:20;modofuturo;agendado;O MOTIVO DE TODA A SEDE DA NVIDIA SER FEITA DE TRIÂNGULOS;6abea1d8d230700baf5164ef
-2026-10-03;08:20;truque.importado;agendado;SOBRANCELHA DESENHADA COM 2 TONS DE CORRETIVO;6ac04cac724c7034229b82cf
-2026-10-03;08:15;atefalhar;agendado;O VERDADEIRO MOTIVO DE MUDAR O NOME DO POOF EM OS PADRINHOS MÁGICOS;6abe9f9edd6976cfc68026e1
-2026-10-03;08:12;camarim.kpop;agendado;J-HOPE do BTS revela que o exército coreano tem BRUNCH todo 1 sábado;6ac01711e25183641e5749b0
-2026-10-03;08:07;cozinha.importada;agendado;Wrap caseiro com 3 ingredientes e 4g de proteína;6abee4478bccc8e6415d69c3
+2026-10-03;09:16;truque.importado;postado;Hyunjin do Stray Kids completa a famosa maquiagem dumpling;6ac0ef92ad7fd83bc5f0a5a7
+2026-10-03;08:21;modofuturo;postado;O MOTIVO DE TODA A SEDE DA NVIDIA SER FEITA DE TRIÂNGULOS;6abea1d8d230700baf5164ef
+2026-10-03;08:21;truque.importado;postado;SOBRANCELHA DESENHADA COM 2 TONS DE CORRETIVO;6ac04cac724c7034229b82cf
+2026-10-03;08:16;atefalhar;postado;O VERDADEIRO MOTIVO DE MUDAR O NOME DO POOF EM OS PADRINHOS MÁGICOS;6abe9f9edd6976cfc68026e1
+2026-10-03;08:12;camarim.kpop;removido;J-HOPE do BTS revela que o exército coreano tem BRUNCH todo 1 sábado;6ac01711e25183641e5749b0
+2026-10-03;08:08;cozinha.importada;postado;Wrap caseiro com 3 ingredientes e 4g de proteína;6abee4478bccc8e6415d69c3
+2026-10-03;08:03;camarim.kpop;postado;WONHEE do ILLIT foi descoberta por olheiro em terminal de ônibus Wonhee do ILLIT contou como foi abordada na rodoviária ;6ac0e69318308c8f1b1e7c2e
 2026-10-02;22:33;camarim.kpop;postado;O segredo de beleza bizarro do CHANGBIN do Stray Kids de 20 segundos;6abfe5b1288b7aa49073a719
 2026-10-02;19:50;semanestesia.pod;postado;Goggins sem filtro;6abe8356125be4c82725e066
 2026-10-02;19:46;modofuturo;postado;COMO OS CHIPS DE US$ 2 TRILHÕES PROJETARAM O PRÓPRIO PRÉDIO;6abea1d1b3804ae2cb9a0d4a

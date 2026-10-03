@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-03T13:18:56",
+  "medido_em": "2026-10-03T17:53:34",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 53,
+      "posts": 56,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 397,
+      "reacoes": 437,
       "comentarios": 22,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 27,
+      "posts_recentes": 30,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -40,14 +40,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 115,
+      "posts": 116,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 15161,
-      "comentarios": 107,
+      "reacoes": 16019,
+      "comentarios": 112,
       "shares": 90,
       "engajamento_pct": 0.0,
-      "posts_recentes": 38,
+      "posts_recentes": 39,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -68,9 +68,9 @@
       "posts": 58,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 693,
+      "reacoes": 721,
       "comentarios": 7,
-      "shares": 13,
+      "shares": 15,
       "engajamento_pct": 0.0,
       "posts_recentes": 3,
       "views_recentes": 0,
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 56,
+      "posts": 60,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 530,
+      "reacoes": 600,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 22,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,27 +115,27 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 39,
+      "posts": 43,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 222,
+      "reacoes": 248,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 22,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "Wrap verde de espinafre com cominho e nigella no pilão\n\nWrap"
+        },
+        {
+          "views": 0,
+          "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína\n\nWrap saudá"
+        },
+        {
+          "views": 0,
           "titulo": "Tiramisù artesanal cremoso de café e rum Aprenda a preparar "
-        },
-        {
-          "views": 0,
-          "titulo": "Tiramisù artesanal cremoso de café e rum\n\nAprenda a preparar"
-        },
-        {
-          "views": 0,
-          "titulo": "TRUFAS DE CHOCOLATE DUPLO QUE PARECEM BROWNIE MAS SÃO FIT\n\nP"
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-03T01:52:35",
+  "medido_em": "2026-10-03T07:59:06",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -136,6 +136,31 @@
         {
           "views": 0,
           "titulo": "TRUFAS DE CHOCOLATE DUPLO QUE PARECEM BROWNIE MAS SÃO FIT\n\nP"
+        }
+      ]
+    },
+    "camarim.kpop": {
+      "posts": 3,
+      "views": 0,
+      "mediana_views": 0,
+      "reacoes": 1,
+      "comentarios": 0,
+      "shares": 0,
+      "engajamento_pct": 0.0,
+      "posts_recentes": 3,
+      "views_recentes": 0,
+      "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "O segredo de beleza bizarro do CHANGBIN do Stray Kids de 20 "
+        },
+        {
+          "views": 0,
+          "titulo": "BANG CHAN do Stray Kids revela seu cabelo mais destrutivo de"
+        },
+        {
+          "views": 0,
+          "titulo": "BANG CHAN do Stray Kids cheira os membros para ver quem é o "
         }
       ]
     }

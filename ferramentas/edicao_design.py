@@ -40,7 +40,7 @@ BALOES = RAIZ / "paginas" / "baloes"
 BALAO = {
     "truque.importado": "make_compacto", "camarim.kpop": "camarim_photocard",
     "cozinha.importada": "chef_panela", "semanestesia.pod": "semanestesia_ampulheta",
-    "modofuturo": "modofuturo_chip", "atefalhar": "nostalgia_tv",
+    "modofuturo": "modofuturo_foguete"  # 03/10: dono trocou o chip pelo foguete, "atefalhar": "nostalgia_tv",
 }
 RESERVA = {"truque.importado": "make_batom", "cozinha.importada": "chef_marmita",
            "semanestesia.pod": "semanestesia_cerebro", "modofuturo": "modofuturo_robo",

@@ -24,8 +24,9 @@ ROTEIRO = os.environ.get("REF_ROTEIRO") or """Analise esta imagem de capa/layout
 Use "" quando ilegivel. Nao invente texto."""
 # ⭐ 02/10/2026 (dono): modelos FORA da cadeia dos cortes (3.8/3.7/3.6/3.5-flash),
 # pra nao disputar cota com eles. Gemma 4 le capa muito bem (medido).
-# ⛔ 03/10/2026 (dono): flash-lite e' fraco demais — fora. So' Gemma 4 (o 26B de reserva).
-MODELOS = ("gemma-4-31b-it", "gemma-4-26b-a4b-it")
+# ⛔ 03/10/2026 (dono): GEMINI primeiro; Gemma 4 so' se o Gemini nao estiver disponivel
+# (qualidade do Gemma ainda a confirmar). Flash-lite proibido (fraco).
+MODELOS = ("gemini-3.6-flash", "gemini-3.5-flash", "gemma-4-31b-it")
 
 
 def ler(f: Path, rot) -> dict:

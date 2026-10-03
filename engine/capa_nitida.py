@@ -113,7 +113,8 @@ _HAAR = {}
 def _cascata(nome: str):
     import cv2
     if nome not in _HAAR:
-        base = os.environ.get("HAAR_DIR") or cv2.data.haarcascades
+        # 03/10: o opencv da nuvem (e o do PC) vem SEM os XML; eles moram no repo
+        base = os.environ.get("HAAR_DIR") or str(Path(__file__).with_name("haar"))
         _HAAR[nome] = cv2.CascadeClassifier(os.path.join(base, nome))
     return _HAAR[nome]
 

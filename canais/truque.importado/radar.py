@@ -82,17 +82,20 @@ CHAVES = _chaves()
 # Todos os termos puxam para o formato FALADO ("explains", "tutorial",
 # "how to", "artist"), porque o veto de fonte muda mata o resto de qualquer
 # jeito e nao adianta gastar cota trazendo o que vai ser descartado.
+# ⭐ 03/10/2026 (dono): o canal virou @achadinho.make = TECNICA de maquiagem
+# de IDOL de K-pop. As buscas genericas antigas ("makeup artist explains...")
+# trouxeram "FULL GLAM", "Bambi eyes" e "Paloma Mami" — 19 clipes sem idol
+# foram ao manifesto e 10 ao Buffer, e o dono apagou. Toda busca agora nomeia
+# o universo K-pop, e o filtro KPOP abaixo e' VETO DURO.
 BUSCAS = [
-    "makeup artist explains technique",
-    "professional makeup tutorial talking",
-    "korean makeup tutorial english subtitles",
-    "makeup artist reacts common mistake",
-    # ⚠️ NAO usar "foundation technique explained artist": as tres palavras
-    # colidem com desenho a lapis e a busca trouxe retrato, nao maquiagem.
-    "makeup foundation application technique",
-    "eyeliner technique tutorial explained",
-    "maquillaje profesional paso a paso tutorial",
-    "makeup transformation artist explains",
+    "RISABAE idol makeup",
+    "이사배 아이돌 메이크업",
+    "kpop idol makeup tutorial eng sub",
+    "idol makeup artist reveals secret eng sub",
+    "kpop idol makeup routine eng sub",
+    "kpop stage makeup artist eng sub",
+    "idol get ready with me makeup eng sub",
+    "PONY syndrome idol makeup",
 ]
 
 # ⚠️ Termos que denunciam material que o motor NAO consegue usar. Nao e'
@@ -123,6 +126,25 @@ TEMA = [
     "eyeliner", "eyeshadow", "lipstick", "blush", "skin",
 ]
 
+# ⭐ 03/10/2026: TEM de ser do universo K-pop. Fonte com maquiagem mas sem
+# idol/grupo/programa coreano NAO entra, por melhor que seja a tecnica.
+KPOP = [
+    "idol", "kpop", "k-pop", "아이돌", "risabae", "이사배", "pony", "포니",
+    "stray kids", "skz", "felix", "hyunjin", "skz han", "nmixx", "jiwoo", "nmixx lily",
+    "illit", "wonhee", "twice", "tzuyu", "nayeon", "nct", "babymonster",
+    "ahyeon", "ive", "wonyoung", "yujin", "aespa", "karina", "winter",
+    "le sserafim", "chaewon", "kazuha", "newjeans", "hanni", "blackpink",
+    "jennie", "blackpink lisa", "rosé", "jisoo", "itzy", "yeji", "kiss of life",
+    "seventeen", "treasure", "enhypen", "txt", "bts", "allday project",
+    "noze", "스우파",
+]
+
+# ⭐ Capas de revista teen (03/10/2026, 155 capas lidas pelo Gemini): nome do
+# idolo 94%, segredo/bastidor 22-24%, numero 74%. Fonte cujo titulo ja' traz
+# segredo/rotina/bastidor da idol rende titulo de capa melhor. BONUS, nao veto.
+GANCHO_CAPA = ["secret", "reveal", "routine", "behind", "tip", "trick",
+               "비법", "꿀팁", "루틴", "비밀"]
+
 # Vizinhos que a busca traz e o canal NAO cobre. Cabelo e unha sao beleza, mas
 # nao sao maquiagem; desenho e' colisao de vocabulario, nao vizinhanca.
 FORA_DO_TEMA = ["hair colour", "hair color", "nail ", "nails",
@@ -138,6 +160,23 @@ OUTRO_MERCADO = {"hi": "indiano", "ur": "indiano/paquistanes", "bn": "bengali"}
 # sabe distinguir, entao ele MARCA e nao decide.
 PT_PRECISA_DE_OLHO = ("fonte PT: conferir se e' material estrangeiro "
                       "dublado/legendado, e nao criadora brasileira")
+
+
+def tem_termo(texto: str, termos) -> bool:
+    """Casa por PALAVRA inteira nos termos latinos.
+
+    ⚠️ Substring simples nao serve: "ive" casa "live"/"five", "lisa" casa
+    "Elisa", "rose" casa "rose gold". Termo em hangul nao tem fronteira de
+    palavra confiavel, entao casa por substring.
+    """
+    t = texto.lower()
+    for x in termos:
+        if x.isascii():
+            if re.search(r"(?<![a-z0-9])" + re.escape(x) + r"(?![a-z0-9])", t):
+                return True
+        elif x in t:
+            return True
+    return False
 
 
 def http(url):
@@ -208,8 +247,23 @@ def avaliar(v):
     else:
         custo = 0.3           # so' com --recorte
 
+    # ⭐ 03/10/2026: fonte em coreano FALADO sem legenda gerou transcricao
+    # inventada — 3 de 7 clipes do Hyunjin (Risabae) e 20 de 39 do Camarim
+    # cairam na quarentena "narracao incoerente". Legenda EN/eng sub vale
+    # mais; coreano sem legenda vale menos (nao veta: Risabae [Eng] e' ouro).
+    texto = (v["snippet"]["title"] + " " + v["snippet"]["channelTitle"]).lower()
+    com_legenda = (v["contentDetails"].get("caption") == "true"
+                   or tem_termo(texto, ["eng sub", "eng", "english sub", "engsub"]))
+    if com_legenda:
+        legenda = 1.3
+    elif idioma.lower().startswith("ko"):
+        legenda = 0.5
+    else:
+        legenda = 1.0
+    capa = 1.15 if tem_termo(texto, GANCHO_CAPA) else 1.0
+
     nota = (min(views / 1000, 100) * 0.5 + min(vph, 100) * 0.3
-            + min(eng * 10, 100) * 0.2) * custo
+            + min(eng * 10, 100) * 0.2) * custo * legenda * capa
     return {
         "id": v["id"], "titulo": v["snippet"]["title"],
         "canal": v["snippet"]["channelTitle"],
@@ -217,6 +271,7 @@ def avaliar(v):
         "views": views, "views_h": round(vph, 1), "eng": round(eng, 2),
         "dur_min": round(dur / 60, 1), "idioma": idioma or "?",
         "pt": pt, "aviso": PT_PRECISA_DE_OLHO if pt else "",
+        "legenda": com_legenda,
         "nota": round(nota, 1),
     }
 
@@ -237,7 +292,7 @@ def main():
             brutos += detalhes(novos[j:j + 50])
 
     aval, vetados = [], 0
-    fora_tema = 0
+    fora_tema = sem_kpop = 0
     for v in brutos:
         t = (v["snippet"]["title"] + " " + v["snippet"]["channelTitle"]).lower()
         if any(x in t for x in VETO):
@@ -245,6 +300,10 @@ def main():
             continue
         if not any(x in t for x in TEMA) or any(x in t for x in FORA_DO_TEMA):
             fora_tema += 1
+            continue
+        # ⛔ VETO DURO (03/10/2026): sem idol/grupo/programa K-pop nao entra.
+        if not tem_termo(t, KPOP):
+            sem_kpop += 1
             continue
         aval.append(avaliar(v))
     aval.sort(key=lambda x: -x["nota"])
@@ -259,7 +318,7 @@ def main():
         return t.encode("ascii", "replace").decode("ascii")
 
     print(f"\n{len(aval)} candidato(s), {vetados} vetado(s) "
-          f"(mudo, compilacao, venda)\n")
+          f"(mudo, compilacao, venda), {sem_kpop} sem K-pop\n")
     print(f"{'#':<3} {'nota':>5} {'min':>6} {'idio':>5} {'views':>9} "
           f"{'v/h':>7} {'eng%':>5}  titulo")
     print("-" * 108)

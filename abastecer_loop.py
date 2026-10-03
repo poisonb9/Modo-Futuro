@@ -73,8 +73,12 @@ CANAIS = {
     "truque.importado": {
         "pasta": "TRUQUE IMPORTADO", "radar": "canais/truque.importado/radar.py",
         "json": "radar_truque_importado.json", "min_views": 300_000,
-        "tema": "tutorial de maquiagem passo a passo, close no rosto, "
-                "procedimento que da' pra seguir"},
+        # ⭐ 03/10/2026 (dono): SO' maquiagem de IDOL de K-pop. Tutorial
+        # generico sem idol (FULL GLAM, Bambi eyes, Paloma Mami) foi apagado.
+        "tema": "TECNICA de maquiagem de idol de K-pop com o NOME da idol/grupo "
+                "(programa da Risabae, maquiador de idol, rotina de palco), passo "
+                "a passo com close no rosto e FALA (legenda em ingles ajuda). "
+                "Tutorial sem idol de K-pop = nota 0"},
     # ⭐ 02/10/2026 (dono): Camarim K-pop — mesmas configs do make, angulo
     # de BASTIDOR (reacao, humor, fofura das idols).
     "camarim.kpop": {

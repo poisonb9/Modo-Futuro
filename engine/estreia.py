@@ -26,7 +26,8 @@ ESTREIA_ATE: dict = {
     # ⛔ 03/10/2026 (dono): o @camarim.kpop estreou no AUTOMATICO e os 3 primeiros
     # deram 0 views (apagados). Eu esqueci de por o canal aqui no dia 02/10.
     # O dono posta na mao com o .mp4 + .txt do Drive. Destrava sozinho.
-    "camarim.kpop": datetime.date(2026, 10, 6),
+    # ✅ 03/10/2026 (noite): dono destravou ("o camarim destravou, pode postar
+    # automaticamente") — o post manual da Wonhee passou de 1.300 views.
     # ⚠️ VAZIO desde 01/09/2026: o Bryan liberou os tres canais novos. O
     # @atefalhar foi o ultimo, quando ele pediu "preencha todas as filas" — e
     # o prazo de 2 dias que ele mesmo fixou vencia nesse mesmo dia.

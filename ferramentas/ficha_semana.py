@@ -438,15 +438,40 @@ def gerar(canal: str, gravar: bool = False) -> Path | None:
     return p
 
 
+# ⭐ 03/10/2026 (dono: "podemos publicar, mas temos que rever depois"): a edicao
+# vai ao site em /edicao/<slug>/<NN>/, com nome PUBLICO (o detector de vazamento
+# do publicar_bio barra nome interno de canal em pagina publica).
+SLUG = {"truque.importado": "make", "camarim.kpop": "camarim", "cozinha.importada": "chef",
+        "semanestesia.pod": "semanestesia", "modofuturo": "modofuturo", "atefalhar": "recreio"}
+EDICOES = RAIZ / "paginas" / "edicoes"
+
+
+def exportar(canal: str, numero: int) -> Path:
+    """Copia a edicao pronta para paginas/edicoes/<slug>/<NN>/ (index.html + cards)."""
+    origem = SAIDA / f"{canal}_N{numero:02d}.html"
+    destino = EDICOES / SLUG[canal] / f"{numero:02d}"
+    destino.mkdir(parents=True, exist_ok=True)
+    html_txt = origem.read_text(encoding="utf-8")
+    for k, c in enumerate(sorted(SAIDA.glob(f"{canal}_N{numero:02d}_card*.png")), 1):
+        (destino / f"photocard{k}.png").write_bytes(c.read_bytes())
+        html_txt = html_txt.replace(c.name, f"photocard{k}.png")
+    (destino / "index.html").write_text(html_txt, encoding="utf-8")
+    return destino
+
+
 def main() -> None:
     a = argparse.ArgumentParser()
     a.add_argument("--canal")
     a.add_argument("--todos", action="store_true")
     a.add_argument("--gravar", action="store_true", help="avanca o numero (so' na edicao que sai de verdade)")
+    a.add_argument("--exportar", type=int, help="so' copia a edicao Nº N ja' gerada para paginas/edicoes/")
     x = a.parse_args()
     for c in (CANAIS if x.todos else [x.canal]):
         if c not in CANAIS:
             sys.exit(f"canal desconhecido: {c}")
+        if x.exportar:
+            print("  exportado:", exportar(c, x.exportar))
+            continue
         gerar(c, x.gravar)
 
 

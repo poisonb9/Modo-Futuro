@@ -3337,6 +3337,16 @@ def _por_privacidade(pasta: Path, privacidade: str) -> None:
             privacidade, encoding="utf-8")
     # ⭐ 25/09: a rota `/sair` (link "Nao quero mais receber avisos" do
     # e-mail de queda). Vai junto da privacidade: e' a outra metade da LGPD.
+    # ⭐ 03/10/2026: o brinde — /teste (Teste da Capa) e /edicao/<canal>/<NN>/
+    # (Edicao da Semana, gerada por ferramentas/ficha_semana.py --exportar).
+    teste = RAIZ / "paginas" / "teste_capa.html"
+    if teste.exists():
+        (pasta / "teste").mkdir(exist_ok=True)
+        (pasta / "teste" / "index.html").write_text(teste.read_text(encoding="utf-8"), encoding="utf-8")
+    edicoes = RAIZ / "paginas" / "edicoes"
+    if edicoes.is_dir():
+        import shutil as _sh
+        _sh.copytree(edicoes, pasta / "edicao", dirs_exist_ok=True)
     sair = RAIZ / "paginas" / "sair.html"
     if sair.exists():
         (pasta / "sair").mkdir(exist_ok=True)

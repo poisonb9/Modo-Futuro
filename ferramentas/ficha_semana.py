@@ -361,35 +361,58 @@ def photocards(canal: str, numero: int, d: dict) -> list[Path]:
     fundo = tuple(int(cfg["fundo"][i:i + 2], 16) for i in (1, 3, 5))
     secoes = d.get("secoes") or []
     out = []
+    import math
+    amarelo, tinta = (255, 214, 10), (20, 17, 24)
+    balao = None
+    for nome in ("camarim_microfone", "camarim_photocard", "inaug_estrela"):
+        bp = RAIZ / "paginas" / "baloes" / f"{nome}.webp"
+        if bp.exists():
+            balao = Image.open(bp).convert("RGBA")
+            balao.thumbnail((520, 600))
+            break
+
+    def estourado(cx, cy, r, pontas=22):
+        return [(cx + (r if q % 2 == 0 else r * .8) * math.cos(math.pi * q / pontas - math.pi / 2),
+                 cy + (r if q % 2 == 0 else r * .8) * math.sin(math.pi * q / pontas - math.pi / 2))
+                for q in range(2 * pontas)]
+
+    # 03/10/2026 (dono: "cara de AI"): gramatica de capa de revista — faixa no
+    # topo, logo cursivo, balao como estrela, nome condensado gigante em 2 cores
+    # com sombra amarela, selo estourado inclinado com o numero da colecao.
     for k, s in enumerate(secoes, 1):
         im = Image.new("RGB", (W, H), (255, 255, 255))
         dr = ImageDraw.Draw(im)
-        dr.rounded_rectangle((40, 40, W - 40, H - 40), radius=64, fill=fundo, outline=cor, width=6)
-        # numero gigante ao fundo
-        dr.text((W - 60, H - 120), f"{numero:02d}", font=_fonte("georgiab.ttf", 520),
-                fill=tuple(int(c + (255 - c) * .82) for c in cor), anchor="rs")
-        dr.text((M, 150), cfg["marca"], font=_fonte("seguibl.ttf", 40), fill=cor)
-        selo = f"PHOTOCARD Nº {numero:02d} · {k}/{len(secoes)}"
-        dr.rounded_rectangle((M, 230, M + dr.textlength(selo, font=_fonte("segoeuib.ttf", 34)) + 56, 300),
-                             radius=35, outline=(23, 20, 29), width=4)
-        dr.text((M + 28, 265), selo, font=_fonte("segoeuib.ttf", 34), fill=(23, 20, 29), anchor="lm")
-        y = 560
-        for ln in _quebrar(dr, str(s.get("nome", "")).upper(), _fonte("georgiab.ttf", 150), W - 2 * M)[:3]:
-            dr.text((M, y), ln, font=_fonte("georgiab.ttf", 150), fill=(23, 20, 29))
-            y += 165
-        y += 30
-        dr.rectangle((M, y, M + 140, y + 12), fill=cor)
-        y += 60
-        for ln in _quebrar(dr, str(s.get("titulo", "")), _fonte("georgiab.ttf", 64), W - 2 * M)[:4]:
-            dr.text((M, y), ln, font=_fonte("georgiab.ttf", 64), fill=(23, 20, 29))
-            y += 80
-        y += 24
-        for ln in _quebrar(dr, str(s.get("resumo", "")), _fonte("segoeui.ttf", 42), W - 2 * M)[:5]:
-            dr.text((M, y), ln, font=_fonte("segoeui.ttf", 42), fill=(91, 86, 102))
-            y += 58
-        dr.text((M, H - 150), cfg["arroba"], font=_fonte("segoeuib.ttf", 40), fill=cor)
-        dr.text((M, H - 100), "coleção semanal · guarde e troque", font=_fonte("segoeui.ttf", 32),
-                fill=(91, 86, 102))
+        dr.rectangle((0, 0, W - 1, H - 1), outline=cor, width=28)
+        dr.rectangle((28, 28, W - 29, 128), fill=cor)
+        faixa = f"PHOTOCARD Nº {numero:02d} · {k}/{len(secoes)} · COLEÇÃO DA SEMANA"
+        dr.text((W // 2, 80), faixa, font=_fonte("impact.ttf", 46), fill=amarelo, anchor="mm")
+        dr.text((M - 10, 190), cfg.get("logo") or cfg["marca"].title(), font=_fonte("segoescb.ttf", 96), fill=cor)
+        if balao:
+            im.paste(balao, (W - balao.width - 60, 290), balao)
+        y = 900
+        fn = _fonte("impact.ttf", 190)
+        for ln in _quebrar(dr, str(s.get("nome", "")).upper(), fn, W - 2 * M)[:2]:
+            dr.text((M + 8, y + 8), ln, font=fn, fill=amarelo)
+            dr.text((M, y), ln, font=fn, fill=cor)
+            y += 200
+        y += 20
+        for ln in _quebrar(dr, str(s.get("titulo", "")).upper(), _fonte("impact.ttf", 76), W - 2 * M)[:3]:
+            dr.text((M, y), ln, font=_fonte("impact.ttf", 76), fill=tinta)
+            y += 86
+        y += 18
+        for ln in _quebrar(dr, str(s.get("resumo", "")), _fonte("segoeuib.ttf", 40), W - 2 * M)[:4]:
+            dr.text((M, y), ln, font=_fonte("segoeuib.ttf", 40), fill=(85, 80, 94))
+            y += 54
+        selo = Image.new("RGBA", (330, 330), (0, 0, 0, 0))
+        ds = ImageDraw.Draw(selo)
+        ds.polygon(estourado(165, 165, 160), fill=amarelo)
+        ds.text((165, 130), "Nº", font=_fonte("impact.ttf", 60), fill=tinta, anchor="mm")
+        ds.text((165, 200), f"{numero:02d}", font=_fonte("impact.ttf", 110), fill=tinta, anchor="mm")
+        selo = selo.rotate(14, resample=Image.BICUBIC)
+        im.paste(selo, (60, 470), selo)
+        dr.text((M, H - 170), cfg["arroba"], font=_fonte("impact.ttf", 58), fill=cor)
+        dr.text((M, H - 100), "guarde, colecione e troque com as amigas", font=_fonte("segoeuib.ttf", 34),
+                fill=(85, 80, 94))
         p = SAIDA / f"{canal}_N{numero:02d}_card{k}.png"
         im.save(p, optimize=True)
         out.append(p)

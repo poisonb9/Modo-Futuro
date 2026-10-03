@@ -46,12 +46,27 @@ MAX_CHARS = 40
 # nome do idolo 87%, exclamacao 63%, numero 47%, gatilho (EXCLUSIVO,
 # segredo, revela, descubra, mico) e angulo intimo. No Camarim o C nao serve
 # (bastidor nao e' "situacao de quem assiste"): A x K. No Make: A x C x K.
-GRUPOS_POR_CANAL = {"camarim.kpop": ("A", "K"), "truque.importado": ("A", "C", "K")}
+#
+# ⭐ 03/10/2026 (dono): "aplicar em TODOS os canais, no contexto de cada um".
+# Releitura das 155 capas pelo Gemini (o Gemma inflava EXCLUSIVO ~3x): nome
+# 94%, exclamacao 80%, NUMERO 74%, pergunta 45%, bastidor 24%, EXCLUSIVO so' 14%.
+# Todo canal agora sorteia A x C x K; o Camarim segue A x K.
+GRUPOS_POR_CANAL = {"camarim.kpop": ("A", "K")}
+
+# O "idolo" de cada canal: quem a capa poe em destaque pelo NOME.
+ASSUNTO_CAPA = {
+    "camarim.kpop": "bastidores de idols de K-pop",
+    "truque.importado": "maquiagem de idols de K-pop",
+    "modofuturo": "tecnologia, chips e fabricas de ponta (o nome e' a EMPRESA ou o produto)",
+    "semanestesia.pod": "disciplina, mente e saude com especialistas famosos (o nome e' o especialista)",
+    "atefalhar": "desenhos animados e cultura pop dos anos 90/2000 (o nome e' o personagem ou o desenho)",
+    "cozinha.importada": "receitas praticas (o nome e' o prato ou o chef)",
+}
 
 
 def grupo(fonte: str, inicio_s, canal: str = "") -> str:
     h = hashlib.sha1(f"{fonte}|{round(float(inicio_s or 0), 1)}".encode()).hexdigest()
-    gs = GRUPOS_POR_CANAL.get(canal, ("A", "C"))
+    gs = GRUPOS_POR_CANAL.get(canal, ("A", "C", "K"))
     return gs[int(h[:8], 16) % len(gs)]
 
 
@@ -76,24 +91,32 @@ def como_capa(titulo: str, contexto: str = "", fala: str = "", canal: str = "") 
     achou = re.search(r"\bd[oa]s? ((?:[A-Z0-9][\w&'-]*)(?: [A-Z0-9][\w&'-]*)*)", titulo)
     grupo_k = achou.group(1) if achou else ""
     make = canal == "truque.importado"
+    kpop = canal in ("camarim.kpop", "truque.importado")
+    assunto = ASSUNTO_CAPA.get(canal, "o tema do video")
+    quem = "<idol> do <grupo>" if kpop else "<NOME>"
     r = modelo_texto.perguntar(
-        "Reescreva o titulo abaixo de um video curto sobre idols de K-pop como CHAMADA "
+        f"Reescreva o titulo abaixo de um video curto sobre {assunto} como CHAMADA "
         "DE CAPA de revista teen brasileira (estilo Capricho), em portugues correto do "
-        "Brasil. Escolha UMA das estruturas, a que combinar melhor com o fato:\n"
-        "- 'O SEGREDO de <idol> do <grupo> para <fato>!'\n"
-        "- 'O MICO de <idol> do <grupo> <fato>!'\n"
-        "- 'EXCLUSIVO: <idol> do <grupo> <fato>!'\n"
-        "- '<idol> do <grupo> REVELA <fato>!'\n"
-        "- 'DESCUBRA <fato> de <idol> do <grupo>!'\n"
-        "- '<IDOL> do <grupo>: <promessa curta>!' (dois pontos)\n"
-        "- '\"<frase curta que o idol DISSE na fala abaixo>\" — <idol> do <grupo>' "
+        "Brasil. Escolha UMA das estruturas, a que combinar melhor com o fato "
+        "(as primeiras sao as que mais aparecem nas capas):\n"
+        f"- '<numero> <coisas> de {quem}!' (SEMPRE que o fato tiver um numero real)\n"
+        f"- 'O SEGREDO de {quem} para <fato>!'\n"
+        f"- '{quem} REVELA <fato>!'\n"
+        f"- '{quem}: <promessa curta>!' (dois pontos)\n"
+        f"- 'DESCUBRA <fato> de {quem}!'\n"
+        f"- 'O MICO de {quem} <fato>!'\n"
+        f"- '\"<frase curta DITA na fala abaixo>\" — {quem}' "
         "(SO' se a fala tiver uma frase marcante; use as palavras exatas da fala)\n"
-        "- '<numero> <coisas> de <idol> do <grupo>!' (so' se o video for lista)\n"
+        f"- 'EXCLUSIVO: {quem} <fato>!' (RARO: so' se o fato for de fato inedito)\n"
         + ("- 'Como fazer <o look/make> de <idol> do <grupo> PARA <escola/festa/foto/"
            "encontro>!' (so' se o video ensina a make; a ocasiao tem de combinar)\n"
            if make else "")
-        + "Mantenha o NOME do idolo E o nome do GRUPO exatamente como no titulo; "
-        "palavra-gatilho (se houver) em MAIUSCULAS; frase gramaticalmente correta. Nao "
+        + ("- 'Como fazer <prato> PARA <a marmita/o jantar/a visita>!' (so' se combinar)\n"
+           if canal == "cozinha.importada" else "")
+        + ("Mantenha o NOME do idolo E o nome do GRUPO exatamente como no titulo; "
+           if kpop else
+           "Mantenha o NOME principal do titulo (pessoa, empresa, personagem ou prato); ")
+        + "palavra-gatilho (se houver) em MAIUSCULAS; frase gramaticalmente correta. Nao "
         f"invente fato, nome ou numero. No maximo {MAX_CHARS + 8} caracteres, sem emoji, "
         "sem pergunta. Responda so' a chamada.\n\n"
         f"Titulo: {titulo}\nContexto: {contexto[:300]}\nFala do video: {fala[:900]}")
@@ -109,8 +132,12 @@ def como_capa(titulo: str, contexto: str = "", fala: str = "", canal: str = "") 
         if not fala or _norm_fala(citacao.group(1)) not in _norm_fala(fala):
             return None
         return t
+    # numero (74% das capas) e' estrutura propria: antes "3 manias de HAN!"
+    # era recusado por nao ter gatilho
     estrutura_ok = (any(g in t.upper() for g in GATILHOS_CAPA) or ":" in t
-                    or (make and " PARA " in t.upper()))
+                    or re.match(r"\d", t) is not None
+                    or (canal in ("truque.importado", "cozinha.importada")
+                        and " PARA " in t.upper()))
     return t if estrutura_ok else None
 
 

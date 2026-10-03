@@ -57,6 +57,12 @@ def video_do_post(token: str, pid: str) -> str | None:
 
 def nova_legenda(canal: str, titulo: str, texto_antigo: str) -> str | None:
     prompt = legenda_canais.prompt_do_canal(canal)
+    if not prompt and canal == "modofuturo":
+        # 03/10/2026: o Modo Futuro usa o PROMPT_PREMIUM (agora com a escola de
+        # revista). A cozinha continua fora: a legenda dela e' a RECEITA.
+        from engine import legenda_premium
+        prompt = legenda_premium.PROMPT_PREMIUM.replace(
+            "{canal_contexto}", legenda_premium._contexto())
     if not prompt:
         return None
     fala = ("TITULO DO VIDEO: " + titulo + "\nLEGENDA ANTIGA (use SO' o que for do "

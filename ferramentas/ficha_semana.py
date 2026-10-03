@@ -170,11 +170,12 @@ def montar_dados(canal: str, numero: int) -> dict | None:
     if len(cs) < 2:
         print(f"  {canal}: so' {len(cs)} clipe(s) na semana — ficha nao sai")
         return None
-    legendas = "\n\n".join(f"- {c['titulo']}\n{c['legenda'][:900]}" for c in cs[:12])
+    legendas = "\n\n".join(f"- {c['titulo']}\n{c['legenda'][:600]}" for c in cs[:12])
     p = PROMPT.format(numero=numero, n_min=min(3, len(cs)), n_max=min(5, len(cs)),
                       legendas=legendas, **{k: cfg[k] for k in ("ficha", "marca", "foco", "itens", "extra")})
     for _ in range(2):
-        d = _json(modelo_texto.perguntar(p))
+        # 03/10: 3 tentativas caiam na reserva (OpenRouter) que pendurava; Gemini primeiro
+        d = _json(modelo_texto.perguntar(p, tentativas=12))
         if not d or not d.get("secoes"):
             continue
         ruins = conferir(d, legendas)
@@ -236,11 +237,35 @@ li::marker{color:var(--cor);font-weight:800}
   justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--suave)}
 .rodape a{color:var(--cor);font-weight:700;text-decoration:none}
 @page{size:A4;margin:14mm}
-@media print{.folha{padding:0}.capa,.teste{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.baixar{margin:30px 0 0;padding:24px;border:2px dashed var(--cor);border-radius:24px;text-align:center}
+.baixar h3{font:800 22px/1.2 Fraunces,Georgia,serif;margin-bottom:6px}
+.baixar p{color:var(--suave);font-size:15px}
+.btn{display:inline-block;margin-top:14px;background:var(--cor);color:#fff;border:0;cursor:pointer;
+  font:800 16px/1 Inter,sans-serif;padding:16px 26px;border-radius:999px;text-decoration:none}
+.btn:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:16px}
+.cards a{display:block;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px -12px rgba(0,0,0,.4)}
+.cards img{display:block;width:100%%;height:auto}
+@media print{.folha{padding:0}.baixar{display:none}.capa,.teste{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 """
 
 
-def render(canal: str, numero: int, d: dict, hoje: datetime.date | None = None) -> str:
+def _baixar(canal: str, numero: int, cards: list[str] | None) -> str:
+    """O botao BAIXAR (03/10/2026, dono): photocards em PNG no Camarim; PDF nos outros."""
+    if cards:
+        e = html.escape
+        miniaturas = "".join(f'<a href="{e(c)}" download><img src="{e(c)}" alt="Photocard {k} de {len(cards)}" loading="lazy"></a>'
+                             for k, c in enumerate(cards, 1))
+        return (f'<section class="baixar"><h3>Seus photocards Nº {numero:02d}</h3>'
+                f'<p>Toque em cada um para baixar. Tamanho de tela de celular, pronto para wallpaper.</p>'
+                f'<div class="cards">{miniaturas}</div></section>')
+    return ('<section class="baixar"><h3>Guarde esta edição</h3>'
+            '<p>Baixe em PDF para ler depois ou imprimir. No celular, escolha "Salvar como PDF".</p>'
+            '<button class="btn" type="button" onclick="window.print()">Baixar em PDF</button></section>')
+
+
+def render(canal: str, numero: int, d: dict, hoje: datetime.date | None = None,
+           cards: list[str] | None = None) -> str:
     e = html.escape
     cfg = CANAIS[canal]
     hoje = hoje or datetime.date.today()
@@ -279,10 +304,85 @@ def render(canal: str, numero: int, d: dict, hoje: datetime.date | None = None) 
 <div class="indice">NESTA EDIÇÃO</div>
 {"".join(secoes)}
 {teste}
+{_baixar(canal, numero, cards)}
 <p class="proxima">{e(str(d.get("proxima", "")))}<br>A edição Nº {numero + 1} chega no seu e-mail.</p>
 <footer class="rodape"><span>{e(cfg["ficha"])} Nº {numero} · feita com os vídeos da semana no {e(cfg["arroba"])}</span>
 <a href="https://www.tiktok.com/{e(cfg["arroba"])}">Ver os vídeos →</a></footer>
 </main></body></html>"""
+
+
+FONTES = Path("C:/Windows/Fonts")
+
+
+def _fonte(nome: str, tam: int):
+    from PIL import ImageFont
+    for n in (nome, "arialbd.ttf"):
+        try:
+            return ImageFont.truetype(str(FONTES / n), tam)
+        except Exception:  # noqa: BLE001
+            continue
+    return ImageFont.load_default()
+
+
+def _quebrar(draw, texto: str, fonte, largura: int) -> list[str]:
+    linhas, atual = [], ""
+    for p in texto.split():
+        t = (atual + " " + p).strip()
+        if draw.textlength(t, font=fonte) <= largura:
+            atual = t
+        else:
+            if atual:
+                linhas.append(atual)
+            atual = p
+    return linhas + ([atual] if atual else [])
+
+
+def photocards(canal: str, numero: int, d: dict) -> list[Path]:
+    """Um PNG 1080x1920 (tela de celular) por destaque: o PHOTOCARD da semana.
+
+    ⛔ SEM FOTO de idol (direito de imagem): e' arte nossa com o nome, a
+    chamada da semana e o numero da colecao — o que o fa coleciona e troca.
+    """
+    from PIL import Image, ImageDraw
+    cfg = CANAIS[canal]
+    W, H, M = 1080, 1920, 96
+    cor = tuple(int(cfg["cor"][i:i + 2], 16) for i in (1, 3, 5))
+    fundo = tuple(int(cfg["fundo"][i:i + 2], 16) for i in (1, 3, 5))
+    secoes = d.get("secoes") or []
+    out = []
+    for k, s in enumerate(secoes, 1):
+        im = Image.new("RGB", (W, H), (255, 255, 255))
+        dr = ImageDraw.Draw(im)
+        dr.rounded_rectangle((40, 40, W - 40, H - 40), radius=64, fill=fundo, outline=cor, width=6)
+        # numero gigante ao fundo
+        dr.text((W - 60, H - 120), f"{numero:02d}", font=_fonte("georgiab.ttf", 520),
+                fill=tuple(int(c + (255 - c) * .82) for c in cor), anchor="rs")
+        dr.text((M, 150), cfg["marca"], font=_fonte("seguibl.ttf", 40), fill=cor)
+        selo = f"PHOTOCARD Nº {numero:02d} · {k}/{len(secoes)}"
+        dr.rounded_rectangle((M, 230, M + dr.textlength(selo, font=_fonte("segoeuib.ttf", 34)) + 56, 300),
+                             radius=35, outline=(23, 20, 29), width=4)
+        dr.text((M + 28, 265), selo, font=_fonte("segoeuib.ttf", 34), fill=(23, 20, 29), anchor="lm")
+        y = 560
+        for ln in _quebrar(dr, str(s.get("nome", "")).upper(), _fonte("georgiab.ttf", 150), W - 2 * M)[:3]:
+            dr.text((M, y), ln, font=_fonte("georgiab.ttf", 150), fill=(23, 20, 29))
+            y += 165
+        y += 30
+        dr.rectangle((M, y, M + 140, y + 12), fill=cor)
+        y += 60
+        for ln in _quebrar(dr, str(s.get("titulo", "")), _fonte("georgiab.ttf", 64), W - 2 * M)[:4]:
+            dr.text((M, y), ln, font=_fonte("georgiab.ttf", 64), fill=(23, 20, 29))
+            y += 80
+        y += 24
+        for ln in _quebrar(dr, str(s.get("resumo", "")), _fonte("segoeui.ttf", 42), W - 2 * M)[:5]:
+            dr.text((M, y), ln, font=_fonte("segoeui.ttf", 42), fill=(91, 86, 102))
+            y += 58
+        dr.text((M, H - 150), cfg["arroba"], font=_fonte("segoeuib.ttf", 40), fill=cor)
+        dr.text((M, H - 100), "coleção semanal · guarde e troque", font=_fonte("segoeui.ttf", 32),
+                fill=(91, 86, 102))
+        p = SAIDA / f"{canal}_N{numero:02d}_card{k}.png"
+        im.save(p, optimize=True)
+        out.append(p)
+    return out
 
 
 def gerar(canal: str, gravar: bool = False) -> Path | None:
@@ -292,7 +392,10 @@ def gerar(canal: str, gravar: bool = False) -> Path | None:
         return None
     SAIDA.mkdir(parents=True, exist_ok=True)
     p = SAIDA / f"{canal}_N{n:02d}.html"
-    p.write_text(render(canal, n, d), encoding="utf-8")
+    # JSON primeiro: erro de layout nao pode jogar fora a resposta do modelo
+    (SAIDA / f"{canal}_N{n:02d}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    cards = [c.name for c in photocards(canal, n, d)] if canal == "camarim.kpop" else None
+    p.write_text(render(canal, n, d, cards=cards), encoding="utf-8")
     (SAIDA / f"{canal}_N{n:02d}.json").write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     if gravar:
         gravar_numero(canal, n)

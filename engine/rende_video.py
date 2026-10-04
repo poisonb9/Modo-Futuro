@@ -151,7 +151,12 @@ def _pedir(titulos: list[str], tentativa: int = 1) -> dict[int, tuple[bool, str]
     import requests
     from . import keys
 
-    rot = keys.openrouter()
+    # ⛔ 04/10/2026: sem chave nenhuma o Rotador LEVANTA (nao devolve vazio) e
+    # derrubava o garimpo do ML inteiro. Sem modelo = cai na lista, como diz acima.
+    try:
+        rot = keys.openrouter()
+    except RuntimeError:
+        return None
     if not len(rot):
         return None
     lista = "\n".join(f"{i+1}. {t[:110]}" for i, t in enumerate(titulos))

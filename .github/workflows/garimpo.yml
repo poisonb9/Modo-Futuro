@@ -98,6 +98,12 @@ jobs:
           GEMINI_API_KEY_29: ${{ secrets.GEMINI_API_KEY_29 }}
           GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
           GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
+          # reserva do filtro editorial (engine/rende_video.py)
+          OPENROUTER_API_KEY:    ${{ secrets.OPENROUTER }}
+          OPENROUTER_API_KEY_2:  ${{ secrets.NVIDIAOPENROUTER }}
+          OPENROUTER_API_KEY_3:  ${{ secrets.NVIDIAOPENROUTER2 }}
+          OPENROUTER_API_KEY_4:  ${{ secrets.NVIDIAOPENROUTER3 }}
+          OPENROUTER_API_KEY_5:  ${{ secrets.NVIDIAOPENROUTER4 }}
         run: |
           # ⚠️ EM PARALELO, e nao em fila. Ate' 13/09/2026 os cinco canais
           # rodavam em sequencia: se um travava numa chamada lenta, os

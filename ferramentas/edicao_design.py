@@ -67,7 +67,7 @@ body{background:var(--papel);color:var(--tinta);font:16px/1.55 var(--texto);-web
 .caixa .n{display:block;font:400 34px/1 var(--capa);color:var(--tinta)}
 .barras{display:block;margin:6px 0 0 auto;width:74px;height:26px;
  background:repeating-linear-gradient(90deg,var(--tinta) 0 2px,transparent 2px 4px,var(--tinta) 4px 5px,transparent 5px 8px,var(--tinta) 8px 11px,transparent 11px 12px)}
-.estrela{position:absolute;right:-8px;top:clamp(70px,16vw,120px);width:clamp(150px,36vw,250px);height:auto;
+.estrela{position:absolute;right:-8px;top:clamp(118px,30vw,140px);width:clamp(150px,36vw,250px);height:auto;
  transform:rotate(8deg);filter:drop-shadow(0 18px 18px rgba(20,17,24,.18));z-index:2}
 .chamadas{position:relative;z-index:3;display:grid;gap:16px;max-width:58%;margin-top:clamp(10px,3vw,22px)}
 .chamada .k{display:block;font:400 clamp(20px,4.6vw,27px)/1 var(--capa);color:var(--cor);text-transform:uppercase;letter-spacing:.01em}

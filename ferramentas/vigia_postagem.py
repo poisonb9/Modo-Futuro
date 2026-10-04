@@ -100,7 +100,7 @@ def avisar(texto: str) -> None:
         return
     r = requests.post(f"https://api.telegram.org/bot{tok}/sendMessage",
                       json={"chat_id": chat, "text": texto}, timeout=30)
-    print(f"  telegram: {r.status_code}")
+    print(f"  telegram: {r.status_code} {r.text[:200] if r.status_code != 200 else ''}")
 
 
 def main() -> None:

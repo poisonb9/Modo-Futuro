@@ -1212,9 +1212,19 @@
     url: "https://lwtqfwkfcknzyyzmuymg.supabase.co",
     anon: "sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy"
   };
+  // ⭐ 04/10/2026 (dono: "sem ser eu, obviamente"): abrir qualquer pagina com
+  // ?eu=1 marca ESTE aparelho para nao ser contado (visita, clique, busca);
+  // ?eu=0 desfaz. Fica no localStorage do aparelho, sem cookie e sem rede.
+  var NAO_CONTAR = (function () {
+    try {
+      var m = /[?&]eu=([01])/.exec(location.search);
+      if (m) { localStorage.setItem("nao_contar", m[1] === "1" ? "1" : ""); }
+      return localStorage.getItem("nao_contar") === "1";
+    } catch (e) { return false; }
+  })();
 
   function medir(tabela, dados) {
-    if (!SUPABASE.url || !SUPABASE.anon) return;
+    if (NAO_CONTAR || !SUPABASE.url || !SUPABASE.anon) return;
     try {
       fetch(SUPABASE.url + "/rest/v1/" + tabela, {
         method: "POST",

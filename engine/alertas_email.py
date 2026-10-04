@@ -36,6 +36,8 @@ BOAS_VINDAS = RAIZ / "_privado" / "boas_vindas_enviados.json"
 SITE = "https://achadinhototal.com.br"
 REF = "lwtqfwkfcknzyyzmuymg"
 TETO_RODADA = 80
+# produto "geral" = inscrito no quadro do Telegram (sem produto escolhido)
+GERAL = "geral"
 
 
 def _env(nome: str) -> str:
@@ -130,6 +132,9 @@ def boas_vindas(insc: dict[str, set[str]], simular: bool, teto: int) -> int:
     n = 0
     for em in novos:
         p = cat.get(pedido[em])
+        if pedido[em] == GERAL:
+            # ⭐ 04/10/2026: inscrito do quadro geral cita a maior queda de hoje
+            p = max(cat.values(), key=lambda c: float(c.get("queda") or 0), default=None)
         try:
             # ⭐ 28/09/2026: quem pediu a ISCA de um canal (bio; ferramentas/
             # email_isca.py) recebe o e-mail do canal, nao o boas-vindas de preco. Sem receitas
@@ -166,7 +171,17 @@ def rodada(simular: bool = False) -> dict:
     if not insc:
         return res
     res["boas_vindas"] = boas_vindas(insc, simular, TETO_RODADA // 2)
-    sinais = {pid: v for pid, v in alertas.sinais_de_hoje().items() if pid in insc}
+    todos_sinais = alertas.sinais_de_hoje()
+    sinais = {pid: v for pid, v in todos_sinais.items() if pid in insc}
+    # ⭐ 04/10/2026 (dono: e-mail no quadro do Telegram): quem se inscreveu no
+    # quadro GERAL recebe, no maximo uma vez por dia, o primeiro sinal do dia
+    # (a mesma lista do Telegram). Mesma regra de saida e de teto.
+    if insc.get(GERAL) and todos_sinais:
+        pid0 = next(iter(todos_sinais))
+        sinais.setdefault(pid0, todos_sinais[pid0])
+        insc = dict(insc)
+        insc[pid0] = set(insc.get(pid0, set())) | {
+            em for em in insc[GERAL] if f"{_hash(em)}|{GERAL}|{date.today().isoformat()}" not in _enviados()}
     res["com_sinal"] = len(sinais)
     if not sinais:
         return res
@@ -198,6 +213,8 @@ def rodada(simular: bool = False) -> dict:
                 print(f"alertas_email: falha ({type(e).__name__})")
                 continue
             env[chave] = 1
+            if email in insc.get(GERAL, ()):
+                env[f"{_hash(email)}|{GERAL}|{hoje}"] = 1
             res["enviados"] += 1
             ENVIADOS.parent.mkdir(exist_ok=True)
             ENVIADOS.write_text(json.dumps(env, indent=0), encoding="utf-8")

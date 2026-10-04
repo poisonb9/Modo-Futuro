@@ -149,7 +149,9 @@ CANAIS = {
         "min": 20.0, "max": 300.0,
     },
     "atefalhar": {
-        "termos": ["luva academia", "faixa elastica treino", "coqueteleira",
+        # ⭐ 04/10/2026 (dono: secao Academia com whey e multivitaminico)
+        "termos": ["whey protein", "creatina monohidratada", "multivitaminico",
+                   "pre treino", "luva academia", "faixa elastica treino", "coqueteleira",
                    "strap treino", "corda pular",
                    "halter ajustavel", "colchonete yoga", "rolo massagem",
                    "garrafa academia", "tornozeleira peso", "elastico exercicio",

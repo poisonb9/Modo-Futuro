@@ -451,7 +451,8 @@ def _categoria_externa(loja: str, categoria_feed: str, nome: str) -> str:
     if loja == "Clovis Calçados BR":
         return "Calçados" if calcado or not _re.search(r"\b(meia|bolsa|carteira|cinto|mochila|bon[eé])", n) else "Moda"
     if loja == "Lauri Esporte":
-        return "Calçados" if calcado else "Fitness"
+        # ⭐ 04/10/2026 (dono: "sessao de academia, com whey, multivitaminicos")
+        return "Calçados" if calcado else "Academia"
     if loja == "Arno BR":
         return "Cozinha"
     if loja == "Shark-Ninja BR":
@@ -468,7 +469,7 @@ def _categoria_externa(loja: str, categoria_feed: str, nome: str) -> str:
     if loja == "Oceane BR":
         return "Beleza"
     if loja == "Soldiers Nutrition BR":
-        return "Suplementos"
+        return "Academia"
     if loja == "Stanley BR":
         return "Cozinha"
     if loja == "Guess BR":
@@ -1784,7 +1785,7 @@ LOJA_DA_FONTE = {
 AREA_DO_CANAL = {
     "truque.importado": "Beleza",
     "cozinha.importada": "Cozinha",
-    "atefalhar": "Fitness",
+    "atefalhar": "Academia",   # 04/10/2026: era "Fitness" (uma secao so' com Soldiers/Lauri)
     "achadinhos.instantaneos": "Casa",
     "fatura.chora": "Eletrônicos",
     "modofuturo": "Tecnologia",

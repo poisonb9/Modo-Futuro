@@ -1,0 +1,35 @@
+# Vigia de postagem: avisa no Telegram quando um canal nao vai bater os 4 do dia,
+# quando a fila das proximas 24 h esta' vazia, ou quando o Buffer tem erro.
+# 04/10/2026 (dono): o @achadinho.make ficou 1 dia parado e ninguem viu.
+# Minuto quebrado de proposito (ver garimpo.yml).
+name: Vigia de postagem
+
+on:
+  schedule:
+    - cron: '13 11 * * *'    # 08:13 BRT
+    - cron: '47 16 * * *'    # 13:47 BRT
+    - cron: '21 22 * * *'    # 19:21 BRT
+  workflow_dispatch:
+
+jobs:
+  vigiar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - env:
+          BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}
+          BUFFER_TOKEN_SEMANESTESIA: ${{ secrets.BUFFER_TOKEN_SEMANESTESIA }}
+          BUFFER_TOKEN_ATEFALHAR: ${{ secrets.BUFFER_TOKEN_ATEFALHAR }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}
+          BUFFER_TOKEN_CAMARIM: ${{ secrets.BUFFER_TOKEN_CAMARIM }}
+          BUFFER_TOKEN_COZINHA: ${{ secrets.BUFFER_TOKEN_COZINHA }}
+          PAGOMENOS: ${{ secrets.PAGOMENOS }}
+          ACHADINHOSINSTANTANEOS: ${{ secrets.ACHADINHOSINSTANTANEOS }}
+          ACHADINHOTOTAL: ${{ secrets.ACHADINHOTOTAL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_ALERTA }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -X utf8 ferramentas/vigia_postagem.py

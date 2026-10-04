@@ -632,6 +632,21 @@ def garimpar(canal: str, quantos: int = 8,
     return escolhidos, motivos
 
 
+# ⭐ 04/10/2026: suplementacao no ML (secao Academia). So' SUPLEMENTO — nada de
+# remedio: medicamento tem regra propria de publicidade (Anvisa) e nao entra.
+# 20 termos, 6 por dia: o catalogo inteiro passa em ~3 dias.
+SUPLEMENTOS_CANAL = "atefalhar"
+SUPLEMENTOS_POR_DIA = 6
+SUPLEMENTOS_QUANTOS = 10
+SUPLEMENTOS_ML = [
+    "whey protein", "creatina monohidratada", "multivitaminico", "vitamina d3",
+    "omega 3", "colageno verisol", "magnesio dimalato", "vitamina c",
+    "zinco quelato", "pre treino", "bcaa", "glutamina", "cafeina capsula",
+    "coenzima q10", "biotina", "complexo b", "vitamina b12", "hipercalorico",
+    "barra de proteina", "polivitaminico mulher",
+]
+
+
 def termos_ml_de_hoje(canal: str, por_dia: int = 3) -> list[str]:
     """Os termos do canal que o ML busca HOJE — rodizio pelo dia do ano.
 
@@ -655,8 +670,16 @@ def garimpar_ml(canal: str, quantos: int = 4, guardar: bool = True) -> list[dict
     isto o produto entraria no catalogo e ficaria invisivel ate' o
     `precos.py` passar.
     """
-    escolhidos = do_mercado_livre(canal, quantos, termos_ml_de_hoje(canal))
-    print(f"ML {canal}: {len(escolhidos)} escolhido(s) de {termos_ml_de_hoje(canal)}")
+    termos = termos_ml_de_hoje(canal)
+    if canal == SUPLEMENTOS_CANAL:
+        # ⭐ 04/10/2026 (dono: "quero muitos produtos de multivitaminicos...
+        # suplementacao vende muito, bom de termos como principais produtos"):
+        # a secao Academia puxa SUPLEMENTO todo dia, mais termos e mais itens.
+        i = (date.today().timetuple().tm_yday * SUPLEMENTOS_POR_DIA) % len(SUPLEMENTOS_ML)
+        termos = [SUPLEMENTOS_ML[(i + k) % len(SUPLEMENTOS_ML)] for k in range(SUPLEMENTOS_POR_DIA)]
+        quantos = max(quantos, SUPLEMENTOS_QUANTOS)
+    escolhidos = do_mercado_livre(canal, quantos, termos)
+    print(f"ML {canal}: {len(escolhidos)} escolhido(s) de {termos}")
     for x in escolhidos:
         print(f"   R$ {x['preco_num']:>8.2f}  {x['_comissao']:>4.0f}%  "
               f"{x['vendedores']:>2} vend  {x['nome'][:50]}")

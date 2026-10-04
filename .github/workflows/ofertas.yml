@@ -7,6 +7,9 @@
 name: Ofertas
 
 on:
+  # 04/10/2026 (dono): todo dia, registrando e agendando. Minuto quebrado (ver garimpo.yml).
+  schedule:
+    - cron: '19 12 * * *'    # 09:19 BRT
   workflow_dispatch:
     inputs:
       ensaio:
@@ -75,9 +78,10 @@ jobs:
           [ "${{ inputs.registrar }}" = "true" ] && E="$E --registrar"
           [ "${{ inputs.agendar }}" = "true" ] && E="$E --agendar"
           [ "${{ inputs.ja }}" = "true" ] && E="$E --ja"
+          [ "${{ github.event_name }}" = "schedule" ] && E="--registrar --agendar"
           python -X utf8 ferramentas/ofertas_do_dia.py --pasta saida $E --so "${{ inputs.so }}"
       - name: Guardar o registro
-        if: inputs.ensaio != 'true' && inputs.registrar == 'true'
+        if: github.event_name == 'schedule' || (inputs.ensaio != 'true' && inputs.registrar == 'true')
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

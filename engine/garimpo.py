@@ -1031,10 +1031,6 @@ def main() -> None:
               .replace(",", "."))
 
 
-if __name__ == "__main__":
-    main()
-
-
 # ⚠️ O MERCADO LIVRE ENTRA COMO SEGUNDA FONTE, e nao como substituto. Os dois
 # fazem coisas diferentes, e misturar sem dizer isso faria o canal de
 # achadinho postar papel higienico:
@@ -1105,3 +1101,9 @@ def do_mercado_livre(canal: str, quantos: int = 5,
             if fila and len(rodizio) < quantos:
                 rodizio.append(fila.pop(0))
     return rodizio
+
+
+# ⛔ 04/10/2026: este bloco ficava ANTES de do_mercado_livre — o --ml morria
+# todo dia com NameError (escondido pelo `|| true` do workflow) desde 16/09.
+if __name__ == "__main__":
+    main()

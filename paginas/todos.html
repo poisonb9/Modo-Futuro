@@ -6011,7 +6011,7 @@
     // ⭐ 04/10/2026: o que de fato medimos (ver economia_radar, "medidos")
     if (r.medidos > 0) {
       var med = r.medidos >= 10000 ? Math.floor(r.medidos / 1000).toLocaleString("pt-BR") + " mil" : r.medidos.toLocaleString("pt-BR");
-      txt = (med + " preços medidos todo dia · ").toUpperCase() + txt;
+      txt = (med + " preços acompanhados todo dia · ").toUpperCase() + txt;
     }
     fim.appendChild(document.createTextNode(txt));
     if (t) { fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"); }

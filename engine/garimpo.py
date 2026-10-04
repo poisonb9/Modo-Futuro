@@ -1110,7 +1110,15 @@ def do_mercado_livre(canal: str, quantos: int = 5,
                               _ganho=round(preco * com / 100, 2)))
     saida = ml.so_monetizados(saida)
     # ⭐ O CORTE EDITORIAL VEM AQUI, sobre a lista INTEIRA e de uma vez so'.
-    fica, cai = rende_video.peneirar_com_ia(saida)
+    if canal == SUPLEMENTOS_CANAL and any(x["categoria"] in SUPLEMENTOS_ML for x in saida):
+        # ⭐ 04/10/2026 (dono): suplemento e' produto de LOJA, nao de video — o
+        # corte "uso obvio / marca conhecida" e' justamente o que vende aqui
+        # (Lavitan, Nature's, Katiguá caiam todos). Sem corte editorial.
+        fica = [x for x in saida if x["categoria"] in SUPLEMENTOS_ML]
+        rest, cai = rende_video.peneirar_com_ia([x for x in saida if x["categoria"] not in SUPLEMENTOS_ML])
+        fica += rest
+    else:
+        fica, cai = rende_video.peneirar_com_ia(saida)
     for nome, porque in cai:
         print(f"  [editorial] fora: {nome[:40]}… — {porque}")
     # ⭐ INTERCALA POR TERMO: sem isto os 4 do dia sairiam todos do primeiro

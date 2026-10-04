@@ -31,5 +31,5 @@ jobs:
           ACHADINHOSINSTANTANEOS: ${{ secrets.ACHADINHOSINSTANTANEOS }}
           ACHADINHOTOTAL: ${{ secrets.ACHADINHOTOTAL }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_ALERTA }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_DONO }}   # privado do dono com @AchadinhoTotalBot (04/10)
         run: python -X utf8 ferramentas/vigia_postagem.py

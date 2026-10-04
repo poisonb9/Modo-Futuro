@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-04T06:45:59",
+  "medido_em": "2026-10-04T13:09:11",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -47,20 +47,20 @@
       "comentarios": 112,
       "shares": 90,
       "engajamento_pct": 0.0,
-      "posts_recentes": 37,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Wonhee e Iroha do ILLIT escolhem o cardápio dos sonhos 🍭 A f"
-        },
-        {
-          "views": 0,
-          "titulo": "Wonhee e Iroha do ILLIT escolhem o cardápio dos sonhos\n\nWonh"
-        },
-        {
-          "views": 0,
           "titulo": "Wonhee do ILLIT viu este fantasma assustador no quarto 👻 A W"
+        },
+        {
+          "views": 0,
+          "titulo": "Wonhee do ILLIT tenta pular o elástico gigante nesta brincad"
+        },
+        {
+          "views": 0,
+          "titulo": "Wonhee do ILLIT escolhe entre doce e salgado para sempre 🍰 A"
         }
       ]
     },
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 60,
+      "posts": 64,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 600,
+      "reacoes": 645,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 22,
+      "posts_recentes": 26,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -106,11 +106,11 @@
         },
         {
           "views": 0,
-          "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE Ami e Yumi fica"
+          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME\n\n🪄 O SEG"
         },
         {
           "views": 0,
-          "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE\n\nAmi e Yumi fic"
+          "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE Ami e Yumi fica"
         }
       ]
     },

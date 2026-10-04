@@ -159,7 +159,9 @@ def main() -> None:
             continue
         if x.get("id") and str(x.get("link", "")).startswith("https://s.click.aliexpress.com/"):
             links[str(x["id"])] = x["link"]
-    agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
+    agora = ofertas.agora_todos()
+    # ⭐ 04/10/2026: produto Awin ja' traz o aw_deep_link (o que paga) no feed
+    links.update({pid: a["link"] for pid, a in agora.items() if a.get("origem") == "awin" and a.get("link")})
     total = sum(len(v) for v in escolha.values())
     print(f"{hoje}: {total} oferta(s) passaram em todas as guardas")
     if a.ensaio or not total:
@@ -179,7 +181,7 @@ def main() -> None:
             if o["id"] not in links:
                 print(f"  [!] {o['id']} sem link de afiliado — pulado")
                 continue
-            arq = a.pasta / f"{hoje}_{canal.replace('.', '-')}_{o['id']}.mp4"
+            arq = a.pasta / f"{hoje}_{canal.replace('.', '-')}_{str(o['id']).replace(':', '-')}.mp4"
             try:
                 d = video_oferta.gerar(o["id"], arq, canal, n)
             except Exception as e:  # noqa: BLE001 — um produto nao derruba o dia
@@ -202,7 +204,7 @@ def main() -> None:
                     "id": o["id"], "nome": o["nome"], "canal": canal, "onde": "video_oferta",
                     "preco": video_oferta.reais(o["agora"]), "link": links[o["id"]],
                     "imagem": (agora[o["id"]].get("imagens") or [""])[0],
-                    "vendas": o["vendas"], "fonte": "aliexpress",
+                    "vendas": o["vendas"], "fonte": agora[o["id"]].get("origem") or "aliexpress",
                     "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 }, ensure_ascii=False) + "\n")
 

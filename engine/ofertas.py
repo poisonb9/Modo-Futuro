@@ -53,6 +53,74 @@ def _serie() -> dict[str, list[tuple[str, float]]]:
     return s
 
 
+# ⭐ 04/10/2026 (dono: "comecar, divisao, liberar, criar categorias"): as lojas
+# da Awin entram nas ofertas. O feed so' grava ponto na serie quando o preco
+# MUDA (engine/awin.py, guardar_catalogo), entao a serie de um id `awin:` e'
+# esticada dia a dia ate' ontem (`_diaria`) antes da mediana — sem isso um
+# tenis com preco parado ha' 18 dias teria "1 dia" de serie.
+# ⛔ O AliExpress pela Awin fica de fora: o mesmo produto ja' vem pelo garimpo
+# direto, com nota e vendas lidas, e la' a regra de marca continua valendo.
+AWIN_FORA = {"Aliexpress BR & LATAM"}
+SEM_FOTO = "noimage"
+
+
+def _agora_awin() -> dict[str, dict]:
+    """{"awin:<id>": registro no formato do precos_agora} das lojas oficiais."""
+    from engine import categorias
+    try:
+        inst = json.load(open(RAIZ / "estado" / "awin_catalogo.json", encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for p in inst.get("produtos", []):
+        if p["loja"] in AWIN_FORA or not p.get("imagem") or SEM_FOTO in p["imagem"]:
+            continue
+        cat = categorias.categoria_de(p["loja"], p.get("categoria", ""), p.get("nome", ""))
+        out["awin:" + str(p["id"])] = {
+            "quando": inst["quando"], "preco": p["preco"], "imagens": [p["imagem"]],
+            "nota": None, "vendas": None, "link": p["link"], "loja": p["loja"],
+            "categoria": cat, "nome": _nome_curto(p["nome"]), "origem": "awin"}
+    return out
+
+
+def _nome_curto(nome: str, limite: int = 48) -> str:
+    nome = re.sub(r"\s+", " ", nome).strip()
+    if len(nome) <= limite:
+        return nome
+    return nome[:limite].rsplit(" ", 1)[0].rstrip(" ,;-–")
+
+
+def agora_todos() -> dict[str, dict]:
+    """precos_agora (AliExpress/ML) + lojas oficiais da Awin."""
+    agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
+    agora.update(_agora_awin())
+    return agora
+
+
+def _diaria(serie: list, hoje: str) -> list[float]:
+    """Pontos de mudanca -> um preco por dia, do 1o ponto ate' ontem."""
+    from datetime import date as _d
+    pts = sorted((q[:10], p) for q, p in serie if q[:10] < hoje)
+    if not pts:
+        return []
+    out, i, preco = [], 0, pts[0][1]
+    dia, fim = _d.fromisoformat(pts[0][0]), _d.fromisoformat(hoje)
+    while dia < fim:
+        while i < len(pts) and pts[i][0] <= dia.isoformat():
+            preco = pts[i][1]
+            i += 1
+        out.append(preco)
+        dia += timedelta(days=1)
+    return out
+
+
+def antes_de(pid: str, serie: list, hoje: str) -> list[float]:
+    """Os precos dos ultimos 30 dias antes de hoje, como a mediana espera."""
+    if str(pid).startswith("awin:"):
+        return _diaria(serie, hoje)[-30:]
+    return [p for q, p in sorted(serie) if q < hoje][-30:]
+
+
 def _feitas() -> list[dict]:
     if not FEITAS.exists():
         return []
@@ -80,13 +148,19 @@ def avaliar(pid: str, agora: dict, serie: list, nome: str) -> tuple[dict | None,
     if str(pid) in BLOQUEADOS:
         return None, "bloqueado pelo dono"
     hoje = agora["quando"][:10]
-    antes = [p for q, p in sorted(serie) if q < hoje][-30:]
+    antes = antes_de(pid, serie, hoje)
     if len(antes) < DIAS_MIN:
         return None, f"serie curta ({len(antes)} dias)"
     ref = statistics.median(antes)
     queda = 1 - agora["preco"] / ref
     if queda < QUEDA_MIN:
         return None, f"queda {queda:.0%}"
+    if agora.get("origem") == "awin":
+        # ⭐ 04/10/2026 (dono: "liberar"): loja OFICIAL, sem nota/vendas no
+        # feed e sem risco de replica — a regra de marca nao se aplica.
+        return {"id": pid, "nome": nome, "agora": agora["preco"], "ref": round(ref, 2),
+                "dias": len(antes), "queda": round(queda, 3), "nota": None, "vendas": None,
+                "loja": agora["loja"], "categoria": agora["categoria"]}, "ok"
     if not agora.get("nota"):
         return None, "sem nota lida"
     if agora["nota"] < NOTA_MIN:
@@ -124,14 +198,15 @@ def candidatas(dia: date | None = None) -> list[dict]:
     usa pra saber pra quem ainda falta video).
     """
     dia = dia or date.today()
-    agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
+    agora = agora_todos()
     nomes = json.load(open(RAIZ / "estado" / "nomes_curtos.json", encoding="utf-8"))
+    nomes.update({pid: a["nome"] for pid, a in agora.items() if a.get("origem") == "awin"})
     serie = _serie()
     corte = (dia - timedelta(days=JANELA_DIAS)).isoformat()
     ja = {f["id"] for f in _feitas() if f.get("dia", "") >= corte}
     boas = []
     for pid, a in agora.items():
-        if pid in ja or pid not in nomes or not pid.isdigit():
+        if pid in ja or pid not in nomes or not (pid.isdigit() or pid.startswith("awin:")):
             continue
         o, _ = avaliar(pid, a, serie.get(pid, []), nomes[pid])
         if o:
@@ -187,7 +262,18 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
         for o in boas:
             if len(saida[canal]) >= POR_DIA:
                 break
-            if o["id"] in usados or (aceita and origem.get(str(o["id"])) not in aceita):
+            if o["id"] in usados:
+                continue
+            if o.get("categoria"):
+                # ⭐ 04/10/2026: produto Awin vai pelo canal da CATEGORIA
+                # (engine/categorias.py), nao pela origem do garimpo.
+                from engine import categorias
+                if categorias.canal_de(o["categoria"]) != canal:
+                    continue
+                saida[canal].append(o)
+                usados.add(o["id"])
+                continue
+            if aceita and origem.get(str(o["id"])) not in aceita:
                 continue
             if aceita is None and any(origem.get(str(o["id"])) in (n or ()) for n in NICHO.values()):
                 continue            # o Total nao rouba produto de nicho de outro canal

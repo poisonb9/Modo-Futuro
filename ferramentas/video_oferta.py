@@ -49,14 +49,16 @@ def reais(v: float) -> str:
 
 
 def dados(pid: str, exigir_queda: bool = True) -> dict:
+    from engine import ofertas
     serie = []
     for l in open(RAIZ / "estado" / "precos_vistos.jsonl", encoding="utf-8"):
         x = json.loads(l)
         if str(x["id"]) == pid:
             serie.append((x["quando"], x["preco"]))
-    agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))[pid]
+    # ⭐ 04/10/2026: AliExpress/ML (precos_agora) + lojas oficiais da Awin
+    agora = ofertas.agora_todos()[pid]
     hoje = agora["quando"][:10]
-    antes = [p for q, p in sorted(serie) if q < hoje][-30:]
+    antes = ofertas.antes_de(pid, serie, hoje)
     if len(antes) < 7 and exigir_queda:
         raise ValueError(f"serie curta demais ({len(antes)} dias) — sem prova de queda")
     ref = statistics.median(antes) if antes else agora["preco"]
@@ -66,13 +68,13 @@ def dados(pid: str, exigir_queda: bool = True) -> dict:
     # ⛔ "provada" decide se o video pode dizer CAIU e mostrar o riscado. Sem
     # ela o video mostra so' o preco de hoje — nunca uma queda inventada.
     provada = len(antes) >= 7 and queda >= QUEDA_MIN
-    nome = json.load(open(RAIZ / "estado" / "nomes_curtos.json", encoding="utf-8"))[pid]
+    nome = agora.get("nome") or json.load(open(RAIZ / "estado" / "nomes_curtos.json", encoding="utf-8"))[pid]
     sp = datetime.fromisoformat(agora["quando"]).astimezone(timezone(timedelta(hours=-3)))
     return {"nome": nome, "agora": agora["preco"], "ref": ref, "dias": len(antes),
             "queda": queda, "hora": sp.strftime("%d/%m às %H:%M"), "imagens": agora["imagens"][:4],
             "nota": agora.get("nota"), "vendas": agora.get("vendas"),
             "marca": "PAGO MENOS", "numero": None, "provada": provada,
-            "video": agora.get("video") or "", "gancho": ""}
+            "video": agora.get("video") or "", "gancho": "", "loja": agora.get("loja") or ""}
 
 
 # ⭐ 29/09/2026 (plano aprovado, ideias 5 e 10): a marca de cada canal no topo
@@ -107,10 +109,13 @@ def legenda_post(d: dict) -> str:
     return (f"Achado do dia{num}: {d['nome']} caiu {queda}% 📉\n"
             f"Hoje {reais(d['agora'])} — o normal dele, nos nossos {d['dias']} dias "
             f"de acompanhamento, é {reais(d['ref'])}.\n"
-            f"Loja nota {str(d['nota']).replace('.', ',')} · {vendas_curto(int(d['vendas']))} vendidos.\n"
-            f"💬 Comenta QUERO aqui embaixo que eu te respondo!\n"
+            + (f"Loja nota {str(d['nota']).replace('.', ',')} · {vendas_curto(int(d['vendas']))} vendidos.\n"
+               if d.get("nota") and d.get("vendas") else
+               # ⭐ 04/10/2026: loja oficial (Awin) nao manda nota/vendas no feed
+               f"Direto da loja oficial {d['loja'].removesuffix(' BR')}.\n" if d.get("loja") else "")
+            + f"💬 Comenta QUERO aqui embaixo que eu te respondo!\n"
             f"🔗 Link na bio → Achado do dia{num}\n"
-            f"#achadinhos #promoção #aliexpress")
+            + ("#achadinhos #promoção #lojaoficial" if d.get("loja") else "#achadinhos #promoção #aliexpress"))
 
 
 def comentario_fixado(d: dict) -> str:

@@ -178,6 +178,54 @@ def placar() -> dict:
             "produtos_publicados": len({p.get("id") for p in pubs})}
 
 
+# ⭐ 04/10/2026 (dono: "como vamos ter certeza que vamos receber a comissao?
+# alguem comprou?"): a AWIN responde transacoes E cliques pela API — o clique
+# contado PELA AWIN e' a prova de que o link rastreia; a transacao, de que pagou.
+# Medido hoje: 29 cliques em 30 dias (Kabum 21, Nike 5, Clovis 3), 0 vendas.
+# ⛔ O Mercado Livre NAO tem API de ganhos de afiliado (404 em todas, medido
+# 15/09 — ver engine/mercadolivre.py): o ML se confere no painel do hub.
+PEDIDOS_AWIN = RAIZ / "estado" / "pedidos_awin.jsonl"
+
+
+def awin_resumo(dias: int = 30) -> dict:
+    """{"cliques": {loja: n}, "vendas": [...]} dos ultimos `dias`, pela API."""
+    import os
+    import requests
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(RAIZ / ".env")
+    except ImportError:
+        pass
+    from . import awin
+    tok, pid = awin._credencial()
+    h = {"Authorization": "Bearer " + tok}
+    fim = datetime.now(timezone.utc)
+    vendas: list[dict] = []
+    # a API aceita no maximo 31 dias por chamada
+    for k in range(0, dias, 30):
+        a, b = fim - timedelta(days=min(k + 30, dias)), fim - timedelta(days=k)
+        r = requests.get(f"https://api.awin.com/publishers/{pid}/transactions/",
+                         params={"startDate": a.strftime("%Y-%m-%dT%H:%M:%S"),
+                                 "endDate": b.strftime("%Y-%m-%dT%H:%M:%S"),
+                                 "timezone": "UTC", "dateType": "transaction"},
+                         headers=h, timeout=60)
+        r.raise_for_status()
+        vendas += r.json() or []
+    r = requests.get(f"https://api.awin.com/publishers/{pid}/reports/advertiser",
+                     params={"startDate": (fim - timedelta(days=dias)).strftime("%Y-%m-%d"),
+                             "endDate": fim.strftime("%Y-%m-%d"), "region": "BR",
+                             "timezone": "UTC"}, headers=h, timeout=60)
+    r.raise_for_status()
+    cliques = {x["advertiserName"]: int(x.get("clicks") or 0)
+               for x in r.json() or [] if x.get("clicks")}
+    ja = {str(v.get("id")) for v in _ler(PEDIDOS_AWIN)}
+    with PEDIDOS_AWIN.open("a", encoding="utf-8") as f:
+        for v in vendas:
+            if str(v.get("id")) not in ja:
+                f.write(json.dumps(v, ensure_ascii=False) + "\n")
+    return {"cliques": cliques, "vendas": vendas}
+
+
 def main() -> None:
     a = argparse.ArgumentParser(description="o laco de resultado")
     a.add_argument("--pedidos", action="store_true")
@@ -204,6 +252,19 @@ def main() -> None:
         # ⚠️ O AVISO VAI JUNTO DO NUMERO, sempre. Placar sem esta linha seria
         # lido como "o canal X vendeu N", e a atribuicao por canal NAO existe
         # enquanto houver um tracking_id so'.
+        try:
+            aw = awin_resumo(o.dias)
+            print(f"\nAWIN ({o.dias} dias): {sum(aw['cliques'].values())} clique(s) contados pela Awin, "
+                  f"{len(aw['vendas'])} venda(s)")
+            for loja, n in sorted(aw["cliques"].items(), key=lambda x: -x[1]):
+                print(f"  {loja:26} {n} clique(s)")
+            for v in aw["vendas"]:
+                print(f"  venda {v.get('transactionDate', '')[:10]} {v.get('advertiserId')} "
+                      f"R$ {(v.get('saleAmount') or {}).get('amount')} -> comissao "
+                      f"R$ {(v.get('commissionAmount') or {}).get('amount')} ({v.get('commissionStatus')})")
+        except Exception as e:                       # noqa: BLE001
+            print(f"\nAWIN: nao li ({type(e).__name__}: {str(e)[:80]})")
+        print("MERCADO LIVRE: sem API de ganhos — conferir no painel de afiliados")
         print("\n⚠️ o pedido nao diz por qual CANAL a pessoa chegou —")
         print("   falta um tracking_id por canal no Portals do AliExpress")
 

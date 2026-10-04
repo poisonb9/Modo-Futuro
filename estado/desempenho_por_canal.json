@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-04T00:30:47",
+  "medido_em": "2026-10-04T06:45:59",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -140,14 +140,14 @@
       ]
     },
     "camarim.kpop": {
-      "posts": 4,
+      "posts": 5,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 10,
+      "reacoes": 100,
       "comentarios": 1,
-      "shares": 1,
+      "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 4,
+      "posts_recentes": 5,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -160,7 +160,7 @@
         },
         {
           "views": 0,
-          "titulo": "BANG CHAN do Stray Kids revela seu cabelo mais destrutivo de"
+          "titulo": "MOKA DO ILLIT IMPRESSIONA EQUIPE COM SEU TALENTO EXPRESSIVO\n"
         }
       ]
     }

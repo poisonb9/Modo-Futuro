@@ -5981,6 +5981,11 @@
       : min < 1 ? "CONFERIDO AGORA · PRÓXIMA EM 60 MIN"
       : min < 60 ? "CONFERIDO HÁ " + min + " MIN · PRÓXIMA EM " + (60 - min)
       : min < 2160 ? "CONFERIDO HÁ " + Math.round(min / 60) + " H" : "CONFERIDO HÁ " + Math.round(min / 1440) + " DIAS";
+    // ⭐ 04/10/2026: o que de fato medimos (ver economia_radar, "medidos")
+    if (r.medidos > 0) {
+      var med = r.medidos >= 10000 ? Math.floor(r.medidos / 1000).toLocaleString("pt-BR") + " MIL" : r.medidos.toLocaleString("pt-BR");
+      txt = med + " PREÇOS MEDIDOS TODO DIA · " + txt;
+    }
     fim.appendChild(document.createTextNode(txt));
     if (t) { fim.title = "última reconferência na loja: " + new Date(t).toLocaleString("pt-BR"); }
     caixa.appendChild(fim);

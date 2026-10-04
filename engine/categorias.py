@@ -56,6 +56,7 @@ POR_LOJA = {
     "Drogaria Venancio BR": "saude_farmacia",
     "Farmácias Indiana BR": "saude_farmacia",
     "Oceane BR": "beleza",
+    "Camilovers BR": "beleza",
     "Clovis Calçados BR": "calcados",
     "Carraro BR": "calcados",
     "Lauri Esporte": "esporte",

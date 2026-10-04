@@ -205,6 +205,7 @@ def main() -> None:
                     "preco": video_oferta.reais(o["agora"]), "link": links[o["id"]],
                     "imagem": (agora[o["id"]].get("imagens") or [""])[0],
                     "vendas": o["vendas"], "fonte": agora[o["id"]].get("origem") or "aliexpress",
+                    "loja": agora[o["id"]].get("loja") or "",
                     "quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 }, ensure_ascii=False) + "\n")
 

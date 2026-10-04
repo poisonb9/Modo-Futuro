@@ -314,6 +314,14 @@ EXTERNAS = {
     # aprovados em 18/09 (Bryan: "Arno cozinha, Camilovers beleza")
     "Arno BR": ("Arno", "arno.json", 50),
     "Camilovers BR": ("Camilovers", "camilovers.json", 50),
+    # ⭐ 04/10/2026 (dono: "pode fazer"): aprovadas na Awin e colhidas pela
+    # serie havia dias, mas sem mapa — 1.973 produtos fora da loja. Categoria
+    # de cada uma em engine/categorias.py (POR_LOJA).
+    "Drogal BR": ("Drogal", "drogal.json", 50),
+    "Oceane BR": ("Oceane", "oceane.json", 50),
+    "Soldiers Nutrition BR": ("Soldiers Nutrition", "soldiers.json", 50),
+    "Guess BR": ("Guess", "guess.json", 50),
+    "Stanley BR": ("Stanley", "stanley.json", 50),
 }
 # ⛔ LOJAS APROVADAS QUE NAO ENTRAM NO SITE (Bryan, 18/09/2026, resposta ao
 # ponto 4 da AUDITORIA: "dispersao — Carraro/Leveros/Radiale sem fit"; "OK,
@@ -454,6 +462,19 @@ def _categoria_externa(loja: str, categoria_feed: str, nome: str) -> str:
         return "Calçados" if calcado else "Moda"
     if loja == "Camilovers BR":
         return "Beleza"
+    # ⭐ 04/10/2026: as 5 que entraram (mesmas categorias de engine/categorias.py)
+    if loja == "Drogal BR":
+        return "Saúde"
+    if loja == "Oceane BR":
+        return "Beleza"
+    if loja == "Soldiers Nutrition BR":
+        return "Suplementos"
+    if loja == "Stanley BR":
+        return "Cozinha"
+    if loja == "Guess BR":
+        return "Calçados" if calcado else (
+            "Moda" if _re.search(r"\b(camis|vestid|cal[cç]a|blus|jaqueta|saia|short|roupa)", n)
+            else "Bolsas e acessórios")
     return "Achadinhos"
 
 
@@ -686,7 +707,11 @@ def economia_radar(dias: int = 30) -> dict:
         total_hoje, n_hoje = total, n
     while serie and serie[0][1] == 0 and len(serie) > 3:
         serie.pop(0)
-    return {"total": round(total_hoje, 2), "produtos": n_hoje, "serie": serie}
+    # ⭐ 04/10/2026 (dono): "temos tantos produtos e tao poucos vigiados". O
+    # "vigiados" conta o que esta' NA LOJA; este conta todo id com preco na
+    # nossa serie (feed inteiro da Awin + radar), o que de fato medimos.
+    return {"total": round(total_hoje, 2), "produtos": n_hoje, "serie": serie,
+            "medidos": len(por_dia)}
 
 
 
@@ -1155,7 +1180,10 @@ def produtos_todos() -> list[dict]:
             # e um seletor "Loja" ao lado de "Categoria". E' o que torna
             # honesto mostrar o MESMO produto duas vezes (Brasil rapido x
             # AliExpress barato): o comprador escolhe o prazo, nao a gente.
-            "loja": LOJA_DA_FONTE.get(d.get("fonte") or "aliexpress", "AliExpress"),
+            # ⭐ 04/10/2026: oferta de loja oficial da Awin leva o nome da loja
+            # ("Kabum BR" -> "Kabum"), nao o AliExpress de reserva.
+            "loja": ((d.get("loja") or "").removesuffix(" BR") if d.get("fonte") == "awin"
+                     else LOJA_DA_FONTE.get(d.get("fonte") or "aliexpress", "AliExpress")),
         })
     # ⭐ O MESMO PRODUTO DE DOIS LOJISTAS VIRA UM CARTAO SO'.
     #

@@ -26,11 +26,11 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 FEITAS = RAIZ / "estado" / "ofertas_feitas.jsonl"
-QUEDA_MIN = 0.15   # 30/09/2026 (dono): era 0.25 — so' 1 oferta nova passava; queda continua REAL e medida
+QUEDA_MIN = 0.10   # 04/10/2026 (dono): era 0.15 — catalogo esgotado, 0 ofertas novas. # 30/09/2026 (dono): era 0.25 — so' 1 oferta nova passava; queda continua REAL e medida
 DIAS_MIN = 7
 NOTA_MIN = 4.7
 VENDAS_MIN = 1000
-JANELA_DIAS = 21
+JANELA_DIAS = 10   # 04/10/2026 (dono): era 21
 POR_DIA = 4
 # ⭐ 30/09/2026: @achadinhototal entra na divisao (plano, 3º canal). Um produto
 # nunca sai em dois canais — a alternancia abaixo garante.

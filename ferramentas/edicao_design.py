@@ -35,6 +35,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 BALOES = RAIZ / "paginas" / "baloes"
+FIGURINHAS = RAIZ / "paginas" / "figurinhas"
 
 # o balao "estrela da capa" de cada canal (gerados em 03/10 por gerar_balao.py)
 BALAO = {
@@ -212,10 +213,28 @@ def render(canal: str, cfg: dict, numero: int, d: dict, cards: list[str] | None 
 <section class="sumario"><h2>Nesta edição</h2>{"".join(blocos)}</section>
 {teste}
 {baixar}
+{figurinhas(canal, numero)}
 <p class="proxima">{e(str(d.get("proxima", "")))}<small>A edição Nº {numero + 1:02d} chega no seu e-mail</small></p>
 <footer class="rodape"><span>{e(cfg["ficha"])} Nº {numero:02d} · feita com os vídeos da semana do {e(cfg["arroba"])}</span>
 <a href="https://www.tiktok.com/{e(cfg["arroba"])}">Ver os vídeos →</a></footer>
 </main></body></html>"""
+
+
+def figurinhas(canal: str, numero: int) -> str:
+    """Bloco "Baixar figurinhas" (04/10/2026): so' aparece se existir
+    paginas/figurinhas/<canal>/<NN>/pacote.json com o link do Sticker.ly."""
+    import json
+    pasta = FIGURINHAS / canal / f"{numero:02d}"
+    cfg = pasta / "pacote.json"
+    if not cfg.exists():
+        return ""
+    d = json.loads(cfg.read_text(encoding="utf-8"))
+    imgs = "".join(
+        f'<img src="data:image/webp;base64,{base64.b64encode((pasta / f"{n}.webp").read_bytes()).decode()}" alt="" loading="lazy">'
+        for n in d.get("ordem", []) if (pasta / f"{n}.webp").exists())
+    return (f'<section class="baixar figurinhas"><h3>Figurinhas Nº {numero:02d} pro WhatsApp</h3>'
+            f'<p>{len(d.get("ordem", []))} figurinhas exclusivas, só aqui.</p><div class="cards">{imgs}</div>'
+            f'<a class="btn" href="{html.escape(d["link"])}" target="_blank" rel="noopener">Adicionar no WhatsApp</a></section>')
 
 
 def uri_teste() -> str:

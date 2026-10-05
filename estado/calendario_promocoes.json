@@ -1,0 +1,22 @@
+{
+ "_leia": "Datas de promocao do varejo BR. O lembretes.py avisa no Telegram do dono 14, 7, 3 e 1 dia antes. Para acrescentar: so' editar esta lista (data AAAA-MM-DD).",
+ "datas": [
+  {"data": "2026-10-10", "nome": "10.10 (Shopee, AliExpress, Mercado Livre)", "preparar": "vitrine + cupons Awin/Ali + clipes de oferta 2 dias antes"},
+  {"data": "2026-10-12", "nome": "Dia das Criancas", "preparar": "brinquedos/Geracao 2000; Kabum games"},
+  {"data": "2026-11-11", "nome": "11.11 (Shopee, AliExpress)", "preparar": "maior data do Ali; cupons na loja e no Telegram"},
+  {"data": "2026-11-27", "nome": "Black Friday", "preparar": "historico de preco (prova de queda real) e alerta de 'falsa promocao'"},
+  {"data": "2026-11-30", "nome": "Cyber Monday", "preparar": "tecnologia (Kabum)"},
+  {"data": "2026-12-12", "nome": "12.12 (Shopee, AliExpress)", "preparar": "presentes de Natal"},
+  {"data": "2026-12-25", "nome": "Natal", "preparar": "vitrine de presentes ate R$100 a partir de 01/12"},
+  {"data": "2027-01-01", "nome": "Liquidacao de Ano Novo", "preparar": ""},
+  {"data": "2027-03-15", "nome": "Dia do Consumidor", "preparar": ""},
+  {"data": "2027-05-09", "nome": "Dia das Maes", "preparar": "beleza (Make, Oceane)"},
+  {"data": "2027-06-06", "nome": "6.6 (Shopee)", "preparar": ""},
+  {"data": "2027-06-12", "nome": "Dia dos Namorados", "preparar": ""},
+  {"data": "2027-07-07", "nome": "7.7 (Shopee)", "preparar": ""},
+  {"data": "2027-08-08", "nome": "8.8 (Shopee)", "preparar": ""},
+  {"data": "2027-08-08", "nome": "Dia dos Pais", "preparar": "conferir data (2o domingo de agosto)"},
+  {"data": "2027-09-09", "nome": "9.9 (Shopee)", "preparar": ""},
+  {"data": "2027-09-15", "nome": "Dia do Cliente", "preparar": ""}
+ ]
+}

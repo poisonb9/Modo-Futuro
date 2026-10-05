@@ -2692,6 +2692,26 @@
      caia em cima dos coracoes do convite. Agora e' FIXO na margem: o script
      acende UM por vez (.on) conforme o MEIO da tela passa pelo bloco, e
      apaga todos fora da grade -- o convite fica so' com os coracoes dele. */
+    /* ⭐ 05/10/2026 (dono: "embolado", pediu premium). PC = 3 balões por lado (dono: "2 ficou vazio"); ouro/vermelho em xadrez: presente/laço/sacola dourada | boca/lupa/coração,
+     uma coluna no meio da margem, paleta da marca (ouro + vermelho) em
+     diagonal: presente (ouro) / laço (verm.) | boca (verm.) / lupa (ouro).
+     Prata, roxo e letras saem do PC (o celular segue com o arco aprovado).
+     Respiro = luxo: o olho vai para INAUGURAÇÃO → estrelas → cupons → vitrine. */
+  @media (min-width: 760px) {
+    .baloes .lado .balao:not(.pc) { display: none !important; }
+    .baloes .lado { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+    .baloes .lado .balao.pc { margin-top: 0 !important; }
+  }
+  /* tela média: o 2º de cada lado bate nos cupons -> só 1 por lado */
+  @media (min-width: 760px) and (max-width: 1399px) {
+    .baloes .lado .balao.pc ~ .balao.pc { display: none !important; }
+  }
+  @media (min-width: 1400px) {
+    .baloes .lado { width: 120px; grid-template-columns: 120px; grid-auto-rows: 235px; top: 30px; height: auto; }
+    .baloes .festa { right: calc(100% + max(12px, (100vw - 944px) / 4 - 60px)); }
+    .baloes .canais { left: calc(100% + max(12px, (100vw - 944px) / 4 - 60px)); }
+    .baloes .lado .flutua { --t: 112px; }
+  }
   .balao-bloco { display: none; }
   @media (min-width: 1440px) {
     .balao-bloco { display: block; position: fixed; width: 92px; pointer-events: none; z-index: 0;
@@ -2981,17 +3001,20 @@
         <span style="--i:11;--arco:1.00;--dy:0"><picture><source media="(max-width: 759px)" srcset="/baloes/letra_11_p.webp"><img src="/baloes/letra_11.webp" alt="" decoding="async" fetchpriority="low"></picture></span>
       </div>
       <div class="lado festa">
-        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_presente_p.webp"><img src="/baloes/inaug_presente.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
-        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laco_p.webp"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao pc"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_presente_p.webp"><img src="/baloes/inaug_presente.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao pc"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_laco_p.webp"><img src="/baloes/inaug_laco.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_sacola_p.webp"><img src="/baloes/inaug_sacola.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua corda-lupa"><picture><source media="(max-width: 759px)" srcset="/baloes/inaug_lupa_p.webp"><img src="/baloes/inaug_lupa.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao pc"><span class="flutua"><img src="/baloes/inaug_sacola_dourada.webp" alt="" decoding="async" fetchpriority="low"></span></span>
       </div>
       <div class="lado canais">
-        <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_achadinho_make_p.webp"><img src="/baloes/canal_achadinho_make.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao pc"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_achadinho_make_p.webp"><img src="/baloes/canal_achadinho_make.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_achadinhos_instantaneos_p.webp"><img src="/baloes/canal_achadinhos_instantaneos.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_sem_anestesia_p.webp"><img src="/baloes/canal_sem_anestesia.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_pago_menos_p.webp"><img src="/baloes/canal_pago_menos.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
         <span class="balao"><span class="flutua"><picture><source media="(max-width: 759px)" srcset="/baloes/canal_modo_futuro_p.webp"><img src="/baloes/canal_modo_futuro.webp" alt="" decoding="async" fetchpriority="low"></picture></span></span>
+        <span class="balao pc"><span class="flutua corda-lupa"><img src="/baloes/inaug_lupa.webp" alt="" decoding="async" fetchpriority="low"></span></span>
+        <span class="balao pc"><span class="flutua"><img src="/baloes/inaug_coracao.webp" alt="" decoding="async" fetchpriority="low"></span></span>
       </div>
     </div>
     <span class="marca-logo" id="logo"></span>

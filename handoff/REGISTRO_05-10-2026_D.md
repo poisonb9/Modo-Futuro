@@ -226,3 +226,13 @@
   Domínio precisa do endereço INTEIRO; "sitemap.xml" sozinho dá "endereço inválido"). No ar: 27 endereços.
 - Balões (pedido do dono, "muito embolado"): saíram %, etiqueta (o "de cupom") e chapéu de chef; estrelas em destaque no alto
   (`.estrela-centro` top 18px, 124px, ao lado do "INAUGURAÇÃO"); cupons de desconto mantidos no lugar. Backup %TEMP%/claude/todos_antes_estrelas.html.
+
+## 34. Balões premium no PC (dono: "ainda não gostei", pediu organizado/premium, pode tirar)
+- Acervo (+acervo): página que converte = poucos elementos e o olho guiado até a oferta e o botão. Respiro e hierarquia.
+- `todos.html`: no PC ficam SÓ 2 balões por lado, numa coluna no meio da margem, só ouro e vermelho, cores cruzadas:
+  presente (ouro) / laço (vermelho) | boca (vermelho) / lupa (ouro). Saem do PC: sacola roxa, carrinho, A, $, MF (prata).
+  Tela média (760–1399 px): 1 balão por lado (o 2º batia nos cupons). Celular inalterado. Estrelas no alto e cupons mantidos.
+  Classe `.balao.pc`; regras com prefixo `.baloes` (as de 1400 px vinham depois no arquivo e ganhavam).
+- Backup: %TEMP%/claude/todos_antes_baloes_premium.html. Conferido na prévia em 1912, 1100 e 375 px.
+- Dono: "ficou vazio" → 3 por lado no PC (≥1400 px), em xadrez ouro/vermelho: presente/laço/sacola dourada | boca/lupa/coração
+  (linhas de 235 px, a partir de top 30 px). Tela média segue com 1 por lado; celular inalterado.

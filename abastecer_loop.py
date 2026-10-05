@@ -188,6 +188,14 @@ def estoque_drive() -> tuple[dict, set]:
     que ja' estao no Drive (description)."""
     est = {k: 0 for k in CANAIS}
     ids = set()
+    # ⭐ 05/10/2026: bruto JA' CORTADO nao e' estoque. Antes contava todo .mp4
+    # da pasta, e o Chef ficou com 9 brutos ja' processados "em estoque" —
+    # acima do piso, sem reposicao e sem corte novo por mais de 1 dia.
+    try:
+        cortados = set(json.loads((RAIZ / "estado" / "raw_vistos.json")
+                                  .read_text(encoding="utf-8")))
+    except Exception:
+        cortados = set()
     pasta_canal = {v["pasta"]: k for k, v in CANAIS.items()}
     for c in cd.CONTAS:
         try:
@@ -200,10 +208,11 @@ def estoque_drive() -> tuple[dict, set]:
                     fila += [x["id"] for x in _subpastas(s, atual)]
                     arqs = s.files().list(
                         q=f"'{atual}' in parents and mimeType!='application/vnd.google-apps.folder' and trashed=false",
-                        fields="files(name,description)", pageSize=500).execute().get("files", [])
+                        fields="files(id,name,description)", pageSize=500).execute().get("files", [])
                     for a in arqs:
                         ids |= set(re.findall(r"(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})", a.get("description", "")))
-                        if canal and a["name"].lower().endswith((".mp4", ".mkv", ".webm")):
+                        if (canal and a["id"] not in cortados
+                                and a["name"].lower().endswith((".mp4", ".mkv", ".webm"))):
                             est[canal] += 1
         except Exception as e:
             log(f"[!] Drive {c['nome']}: {str(e)[:90]}")

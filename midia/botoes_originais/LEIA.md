@@ -17,3 +17,4 @@ No SITE o botão é em CÓDIGO (mesmo visual, ajusta a qualquer tela): ver pagin
 
 Recortados (sem sobra transparente): midia/botoes_web/*.png e *.webp (600 px).
 Prompts: handoff/REGISTRO_05-10-2026_D.md e conversa de 05/10.
+- 05/10 23:30: botao_ver_no_mercado_livre trocado pela versão COM o logo (aperto de mãos), enviada pelo dono no chat.

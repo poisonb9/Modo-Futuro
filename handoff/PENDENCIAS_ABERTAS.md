@@ -22,6 +22,10 @@
 - [ ] **Bing Webmaster** — dono importa do Search Console (§5-B). **Pinterest** — conta empresa (§5-C). (05/10)
 - [ ] **Palavras-chave** — lista de 30–50 termos (Keyword Planner + autocompletar) para escolher as próximas listas /melhores/. (05/10)
 
+- [ ] **⭐ Guia novo quando um tema juntar ≥3 produtos com /p/** — candidatos: organizador de cabos, descascador/ralador, whey/creatina, tapete de banheiro, pistola de massagem. Molde: `GUIAS` em engine/paginas_produto.py. (05/10, pedido do dono: "não esqueça")
+- [ ] **Hospedar as fotos dos produtos** no nosso domínio com nome-palavra-chave (Google Imagens). Hoje a foto vem da loja. Pesa no PC → fazer na nuvem (Actions) ou no Cloudflare. (05/10, dono: "não podemos esquecer")
+- [ ] **Vídeos → link:** regra do dono (05/10): por padrão o vídeo leva DIRETO à loja (venda sem atrito); /p/ só quando agrega (comparar preço, vários modelos, cupom). Implementar nos posts do Telegram/descrições com essa regra.
+
 ## Resolvidas
 - 05/10 Sem Anestesia barrado por '#N' no título (agendador) — ver REGISTRO_05-10-2026_D.
 - 05/10 Corte 1 por vez → até 3 simultâneos.

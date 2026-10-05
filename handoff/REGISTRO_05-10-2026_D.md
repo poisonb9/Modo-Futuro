@@ -267,3 +267,14 @@
 - Google Imagens (+acervo: alt e nome descritivos): todas as fotos de /p/, /melhores/ e /guias/ com alt = nome do produto;
   sitemap com `<image:image>` (loc + title) em cada /p/ (namespace image no urlset).
 - +3 guias: suporte de celular para carro (4), fita de LED (4), luva/grip/strap de academia (6). Total: 6 guias.
+
+## 38. Botões do dono na vitrine + avise-me + menu de lojas no PC
+- Dono: "esse não é o botão que eu fiz". A vitrine usava imitação em CSS ("opção A"). Agora cada cartão usa a IMAGEM do dono
+  (`/baloes/botao_ver_*.webp`, 420 px, ~9 KB; mapa `BOTAO_LOJA` no todos.html; sem botão próprio → `botao_ver_na_loja`).
+- O "Ver no Mercado Livre" COM o logo (aperto de mãos) só existia no chat → salvo em midia/botoes_originais + botoes_web (substitui o sem logo).
+- Avise-me (+acervo: 1 CTA principal cheio + 1 secundário de contorno): no desenho do botão "Me avise quando baixar" do dono
+  (branco, borda preta, sombra dura, sino) em CSS para o texto mudar ("se voltar a R$ X"); menor que o da loja; sem sino quando tem preço.
+  Medido: 0 cortes no PC (antes 19), 1 com reticência no celular.
+- Menu de lojas no PC transparente: o espelho de vidro (WebGL, só desenha em PC com GPU) ligava no `.opcoes`. Não liga mais ≥700 px
+  e fundo branco com prioridade. Cartões do ML sem foto no print = ainda carregando (conferido: fotos ok).
+- Pendências anotadas (PENDENCIAS_ABERTAS, lembrete toda segunda): guia novo por tema, hospedar fotos, regra vídeo → loja direto.

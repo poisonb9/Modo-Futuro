@@ -1245,6 +1245,8 @@
     }
     .opcoes::before { display: none; }
     .escurece { display: none; }
+    .opcoes.vidro, .opcoes { background: #fff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    .opcoes > canvas.espelho { display: none !important; }
   }
   .opcao {
     display: flex; align-items: center; gap: 8px; width: 100%;
@@ -2058,6 +2060,19 @@
   .avise-me + .avise-me { margin-top: 0; }
   .avise-me.repor { min-height: 34px; font-size: 11px; }
   .ja-esteve.tambem-em strong { color: var(--verde); font-weight: 700; }
+  /* ⭐ 05/10/2026 (dono: "botão para o avise-me? e de fundo para o 'se voltar a X'?"): o MESMO desenho do
+     botão "Me avise quando baixar" dele (branco, borda preta, sombra dura, sino) em CSS -- assim o texto
+     muda ("se voltar a R$ X"). Secundário (acervo: um principal cheio + um de contorno): menor que o da loja. */
+  .item .avise-me:not(.repor) { background: #fff; color: #111; border: 1.5px solid #111; border-radius: 999px;
+    box-shadow: 2px 2px 0 #111; font-weight: 600; min-height: 32px; padding: 5px 8px; gap: 5px;
+    margin: 8px 3% 4px; width: 94%;
+    transition: transform .12s ease, box-shadow .12s ease; }
+  .item .avise-me:not(.repor) svg { display: inline-block; width: 13px; height: 13px; flex: none; }
+  .item .avise-me:not(.repor) span { font-size: 0.6875rem; }
+  .item .avise-me:not(.repor):has(.nq) svg { display: none; }
+  .item .avise-me:not(.repor) svg path { fill: currentColor; }
+  .item .avise-me:not(.repor):hover { color: #111; border-color: #111; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #111; }
+  .item .avise-me:not(.repor):active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #111; }
   .nota {
     display: inline-flex; align-items: center; gap: 4px; margin-left: 0;
     font: 600 0.78125rem/1 var(--mono); color: var(--fraco);   /* BLOCO A: mesmo degrau do 'vendidos' */
@@ -2712,7 +2727,7 @@
     .baloes .canais { left: calc(100% + max(12px, (100vw - 944px) / 4 - 60px)); }
     .baloes .lado .flutua { --t: 112px; }
   }
-  .hist-link { display: inline-block; margin-top: 4px; font-size: 12px; color: #8a6d12; text-decoration: underline; text-underline-offset: 2px; }
+  .hist-link { display: inline-block; white-space: nowrap; margin-top: 4px; font-size: 11.5px; color: #8a6d12; text-decoration: underline; text-underline-offset: 2px; }
   .links-seo { font-size: 13px; text-align: center; } .links-seo a { color: inherit; }
   .balao-bloco { display: none; }
   @media (min-width: 1440px) {
@@ -2921,6 +2936,13 @@
     .balao:nth-child(even) { margin-top: 120px !important; }
     .flutua b { display: block; }
   }
+  /* ⭐ 05/10/2026: botao = IMAGEM do dono (ver BOTAO_LOJA no JS); as cores abaixo ficam de reserva */
+  .item .cta.cta-img { background: none !important; border: 0 !important; padding: 0 !important; box-shadow: none !important;
+    min-height: 0; display: block; line-height: 0; transition: transform .15s cubic-bezier(.2,.8,.2,1), filter .15s; }
+  .item .cta.cta-img::before, .item .cta.cta-img::after { display: none !important; }
+  .item .cta.cta-img img { width: 100%; height: auto; display: block; filter: drop-shadow(0 3px 6px rgba(20,16,30,.18)); }
+  .item:hover .cta.cta-img { transform: translateY(-1px); filter: brightness(1.05); }
+  .item:active .cta.cta-img { transform: scale(.97); }
   /* 05/10/2026 (dono, "opcao A"): botao com a COR DE CADA LOJA (cores aproximadas) */
   .item .cta.cta-loja { position: relative; overflow: hidden; border: 2px solid transparent; font-weight: 800;
     letter-spacing: .3px; text-transform: uppercase; font-size: .75rem; white-space: normal; text-align: center; line-height: 1.1; }
@@ -4711,7 +4733,19 @@
     // \u2b50 23/09/2026 (Bryan: "o comprar agora dos cards menores eu quero sem
     // a seta"): so' na grade -- a capa (bem maior, o hero) continua com a
     // seta, que e' de onde este pedido NAO fala.
-    cta.appendChild(document.createTextNode(ctaL[1]));
+    // ⭐ 05/10/2026 (dono: "esse não é o botão que eu fiz"): os BOTÕES DO DONO
+    // (imagens em /baloes/botao_*.webp). Loja sem botão próprio: "Ver na loja".
+    var BOTAO_LOJA = {
+      "AliExpress": "botao_ver_no_aliexpress", "Mercado Livre": "botao_ver_no_mercado_livre",
+      "Kabum": "botao_ver_na_kabum", "Nike": "botao_ver_na_nike", "Drogal": "botao_ver_na_drogal",
+      "Guess": "botao_ver_na_guess", "Lauri Esporte": "botao_ver_na_lauri", "Soldiers Nutrition": "botao_ver_na_soldiers",
+      "Stanley": "botao_ver_na_stanley", "Arno": "botao_ver_na_arno"
+    };
+    var bimg = document.createElement("img");
+    bimg.src = "/baloes/" + (BOTAO_LOJA[p.loja] || "botao_ver_na_loja") + ".webp";
+    bimg.alt = ""; bimg.decoding = "async"; bimg.loading = "lazy";
+    cta.className += " cta-img";
+    cta.appendChild(bimg);
     cta.setAttribute("aria-hidden", "true");
     corpo.appendChild(cta);
     a.title = (p.pontos >= 2
@@ -6618,6 +6652,10 @@
     function ligarFilhos() {
       document.querySelectorAll("#chips .chip-ordem, #chips .escolha, .busca-caixa, .opcoes").forEach(function (n) {
         if (n.__espelho) { return; }
+        // ⛔ 05/10/2026 (print do dono no PC): o espelho de vidro (WebGL) pintava
+        // o menu de lojas transparente por cima do fundo branco. No PC o menu
+        // e' painel opaco -- sem vidro.
+        if (n.classList.contains("opcoes") && window.matchMedia && matchMedia("(min-width: 700px)").matches) { return; }
         n.classList.add("vidro");
         ligar(n, n.classList.contains("busca-caixa") ? 16 : (n.classList.contains("opcoes") ? 24 : 12));
       });

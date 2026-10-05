@@ -7,6 +7,7 @@ No SITE o botão é em CÓDIGO (mesmo visual, ajusta a qualquer tela): ver pagin
 | botao_ver_na_loja.png | compra (ouro) |
 | botao_ver_no_mercado_livre.png | compra de item do Mercado Livre (amarelo) |
 | botao_ver_no_aliexpress.png | compra de item do AliExpress (vermelho) |
+| botao_ver_na_kabum.png | compra Kabum (laranja, borda azul) |
 | botao_pegar_a_oferta.png | destaque máximo (BF, 1º lugar, oferta do dia) |
 | botao_copiar_cupom.png | cupom (troque o código no prompt) |
 | botao_entrar_no_telegram.png | canal do Telegram |

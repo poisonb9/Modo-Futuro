@@ -314,6 +314,8 @@ EXTERNAS = {
     # aprovados em 18/09 (Bryan: "Arno cozinha, Camilovers beleza")
     "Arno BR": ("Arno", "arno.json", 50),
     "Camilovers BR": ("Camilovers", "camilovers.json", 50),
+    # ⭐ 04/10/2026: mais vendidos do ML (engine/ml_vitrine.py), nao e' Awin
+    "Mercado Livre": ("Mercado Livre", "mercadolivre.json", 50),
     # ⭐ 04/10/2026 (dono: "pode fazer"): aprovadas na Awin e colhidas pela
     # serie havia dias, mas sem mapa — 1.973 produtos fora da loja. Categoria
     # de cada uma em engine/categorias.py (POR_LOJA).
@@ -463,6 +465,8 @@ def _categoria_externa(loja: str, categoria_feed: str, nome: str) -> str:
         return "Calçados" if calcado else "Moda"
     if loja == "Camilovers BR":
         return "Beleza"
+    if loja == "Mercado Livre":
+        return categoria_feed or "Achadinhos"   # ja' vem com a area (engine/ml_vitrine.py)
     # ⭐ 04/10/2026: as 5 que entraram (mesmas categorias de engine/categorias.py)
     if loja == "Drogal BR":
         return "Saúde"
@@ -477,6 +481,25 @@ def _categoria_externa(loja: str, categoria_feed: str, nome: str) -> str:
             "Moda" if _re.search(r"\b(camis|vestid|cal[cç]a|blus|jaqueta|saia|short|roupa)", n)
             else "Bolsas e acessórios")
     return "Achadinhos"
+
+
+
+def _ml_vitrine() -> list[dict]:
+    """Os mais vendidos do ML (estado/ml_vitrine.json), se o instantaneo tiver
+    ate' 48 h. Velho = fora, com aviso — mesma regra das lojas da Awin."""
+    import json
+    from datetime import datetime, timezone
+    arq = RAIZ / "estado" / "ml_vitrine.json"
+    try:
+        inst = json.loads(arq.read_text(encoding="utf-8"))
+        q = datetime.fromisoformat(inst["quando"])
+    except (OSError, ValueError, KeyError):
+        return []
+    idade = (datetime.now(timezone.utc) - q).total_seconds() / 3600
+    if idade > 48:
+        print(f"externos: ml_vitrine tem {idade:.0f}h (> 48h) — Mercado Livre fora")
+        return []
+    return inst.get("produtos") or []
 
 
 def produtos_externos() -> dict[str, dict]:
@@ -524,7 +547,9 @@ def produtos_externos() -> dict[str, dict]:
     _termos_alta = _tm.termos()
     sem_mapa: dict[str, int] = {}
     fora: dict[str, int] = {}
-    for p in inst.get("produtos") or []:
+    # ⭐ 04/10/2026 (dono: "loja bem abastecida com o portfolio do Mercado Livre"):
+    # os mais vendidos do ML (engine/ml_vitrine.py) entram como mais uma loja externa.
+    for p in (inst.get("produtos") or []) + _ml_vitrine():
         if (p.get("loja") or "") in FORA_DO_SITE:
             fora[p["loja"]] = fora.get(p["loja"], 0) + 1
             continue
@@ -543,7 +568,7 @@ def produtos_externos() -> dict[str, dict]:
             continue
         if preco <= 0:
             continue
-        pid = "awin:" + str(p.get("id"))
+        pid = (str(p["id"]) if p.get("origem") == "mercadolivre" else "awin:" + str(p.get("id")))
         d = {"id": pid, "preco": f"R$ {preco:.2f}".replace(".", ",")}
         saida.setdefault(cat, {"arquivo": arquivo, "passo": passo,
                                "produtos": []})["produtos"].append({
@@ -559,7 +584,8 @@ def produtos_externos() -> dict[str, dict]:
             "vendas": 0,
             # ⭐ pela comissao REAL da loja (awin.comissao_de) — ate' 17/09
             # eram 7,5% pra todas, o numero da Nike; o Kabum paga 1,15%.
-            "ganho": round(preco * _comissao_awin(p.get("loja") or "") / 100, 2),
+            "ganho": round(preco * (float(p.get("comissao") or 0) if p.get("origem") == "mercadolivre"
+                                    else _comissao_awin(p.get("loja") or "")) / 100, 2),
             "antes": _antes(serie, d),
             "subiu": _subiu(serie, por_dia, d),
             "dias": _dias(serie, d),

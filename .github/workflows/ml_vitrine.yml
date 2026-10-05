@@ -1,0 +1,41 @@
+# Vitrine do Mercado Livre: os MAIS VENDIDOS de cada categoria vao para a loja.
+# 04/10/2026 (dono: "loja bem abastecida com o portfolio do Mercado Livre").
+# Roda na nuvem (a API do ML responde daqui; da VPS deu timeout em 04/10).
+# Minuto quebrado (ver garimpo.yml). Commita o instantaneo e a serie.
+name: Vitrine Mercado Livre
+
+on:
+  schedule:
+    - cron: '41 9 * * *'     # 06:41 BRT
+    - cron: '17 19 * * *'    # 16:17 BRT
+  workflow_dispatch:
+
+jobs:
+  vitrine:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: estado-precos
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - name: Colher mais vendidos
+        env:
+          MELI_CLIENT_ID:     ${{ secrets.MELI_CLIENT_ID }}
+          MELI_CLIENT_SECRET: ${{ secrets.MELI_CLIENT_SECRET }}
+          MELI_MATT_WORD:     ${{ secrets.MELI_MATT_WORD }}
+          MELI_MATT_TOOL:     ${{ secrets.MELI_MATT_TOOL }}
+        run: python -X utf8 -m engine.ml_vitrine --guardar
+      - name: Guardar
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f estado/ml_vitrine.json estado/precos_vistos.jsonl estado/ml_raizes.json || true
+          git diff --cached --quiet && exit 0
+          git commit -m "ml_vitrine: mais vendidos do Mercado Livre"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

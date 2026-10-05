@@ -337,3 +337,50 @@
 - 05/10 09:57   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
 - 05/10 09:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
 - 05/10 09:58 [!] Drive principal: The read operation timed out
+- 05/10 10:26 [!] Drive labzirkonart: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url
+- 05/10 10:26 semanestesia.pod: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 10:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 10:26 semanestesia.pod: 92 no radar, 14 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 10:26   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 05/10 10:26   · chaves esgotadas — how to actually quit any addiction in 9 minutes (explained b — 
+- 05/10 10:26   · chaves esgotadas — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — 
+- 05/10 10:27   · chaves esgotadas — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — 
+- 05/10 10:27   · chaves esgotadas — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — 
+- 05/10 10:27   · chaves esgotadas — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — 
+- 05/10 10:27   · chaves esgotadas — Neuroscience based Tricks to leave phone addiction | Dr Raks — 
+- 05/10 10:27   · chaves esgotadas — Why Can’t I Motivate Myself To Work? — 
+- 05/10 10:27   · chaves esgotadas — The Science of Procrastination (and how to stop) — 
+- 05/10 10:27   · chaves esgotadas — How to Trick Monkey Brain To Like Doing Hard Things (Dopamin — 
+- 05/10 10:27 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 10:27 cozinha.importada: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 10:27 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 05/10 10:27 cozinha.importada: 46 no radar, 16 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 10:27   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 05/10 10:28   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 05/10 10:28   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 05/10 10:28   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 05/10 10:28   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 05/10 10:28   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 05/10 10:29   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 05/10 10:29   · chaves esgotadas — A Revolution in Meal Prepping... — 
+- 05/10 10:29   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 05/10 10:29   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 05/10 10:29 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 10:29 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 10:29 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 10:30 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 05/10 10:30   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 05/10 10:30   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 05/10 10:31   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 05/10 10:31   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 05/10 10:31 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 10:31 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 10:31 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 05/10 10:32 modofuturo: 74 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 05/10 10:32   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 05/10 10:32   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 05/10 10:33   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 05/10 10:33   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 05/10 10:33   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 05/10 10:33   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 05/10 10:33 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco

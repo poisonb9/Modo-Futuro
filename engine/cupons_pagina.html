@@ -53,7 +53,7 @@ article.aberto h2{-webkit-line-clamp:unset;display:block}
 .cod.ok span{color:#1e8449;border-color:#b7e1c4}
 .sem{font-size:13px;color:var(--suave);background:#f6f3ea;border-radius:12px;padding:10px 12px}
 .t{font-size:12px;color:var(--suave);margin:0}
-article a.ir{text-align:center;background:var(--preto);color:#fff;text-decoration:none;border-radius:12px;padding:11px;font-weight:600}
+article a.btn-ouro{align-self:stretch;} article a.ir{text-align:center;background:var(--preto);color:#fff;text-decoration:none;border-radius:12px;padding:11px;font-weight:600}
 article a.ir:hover{background:#26232f}
 .balao-bloco{display:none}
 @media(min-width:1300px){
@@ -62,6 +62,25 @@ article a.ir:hover{background:#26232f}
  .balao-bloco img{width:100%;height:auto;display:block;transform-origin:50% 90%;filter:drop-shadow(0 14px 18px rgba(20,16,30,.16));animation:balanca 4.9s ease-in-out infinite alternate}
  .balao-bloco.dir img{animation-duration:5.6s;animation-delay:-2.1s}}
 @media(prefers-reduced-motion:reduce){.varal-bf img,.balao-bloco img{animation:none}.balao-bloco{transition:opacity .4s}}
+
+/* ⭐ 05/10/2026: botao de compra no visual dos selos (pilula preta, borda e texto
+   dourados, brilho). Em CODIGO, nao imagem: nitido em qualquer tela, legivel por
+   leitor de tela e troca de texto sem gerar arte. */
+.btn-ouro{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ padding:12px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;
+ font:800 14.5px/1 Poppins,sans-serif;letter-spacing:.4px;text-transform:uppercase;
+ color:#f6d977;background:linear-gradient(180deg,#2a2a2e 0%,#0b0b0d 55%,#000 100%);
+ border:2px solid #d4a937;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(0,0,0,.6),0 8px 18px rgba(20,16,30,.18);
+ transition:transform .15s ease,box-shadow .15s ease;overflow:hidden}
+.btn-ouro::before{content:"";position:absolute;left:8%;right:8%;top:2px;height:42%;border-radius:999px;
+ background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0));pointer-events:none}
+.btn-ouro:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 0 1px rgba(0,0,0,.6),0 12px 26px rgba(20,16,30,.26)}
+.btn-ouro:active{transform:translateY(1px)}
+.btn-ouro:focus-visible{outline:3px solid #f3d77a;outline-offset:3px}
+.btn-ouro .seta{font-size:16px}
+@media(prefers-reduced-motion:reduce){.btn-ouro{transition:none}}
+.info .btn-ouro{align-self:stretch}
+@media(max-width:560px){.btn-ouro{padding:12px 12px;font-size:12.5px;letter-spacing:.2px;white-space:normal;text-align:center}}
 footer{color:var(--suave);font-size:12px;margin-top:30px;text-align:center}footer a{color:inherit}
 </style>
 <header class="heroi">
@@ -120,7 +139,7 @@ function desenhar(lista){
    b.onclick=function(){try{navigator.clipboard.writeText(c.codigo)}catch(e){}b.classList.add("ok");s.textContent="copiado ✓";ev("cupom_copiado",{codigo:c.codigo,loja:c.loja})};bx.appendChild(b)}
   else bx.appendChild(el("span","sem","Sem código: o desconto já vem no link"));
   if(c.termos&&c.termos.length>3&&c.termos!==c.titulo)bx.appendChild(el("p","t",c.termos.slice(0,160)));
-  var k=el("a","ir","Ir para a loja →");k.href=c.link;k.target="_blank";k.rel="sponsored noopener";
+  var k=el("a","btn-ouro","Ir para a loja →");k.href=c.link;k.target="_blank";k.rel="sponsored noopener";
   k.onclick=function(){ev("cupom_clique",{loja:c.loja})};bx.appendChild(k);a.appendChild(bx);g.appendChild(a)});
  if(!g.children.length)g.appendChild(el("p",null,"Nenhum cupom ativo agora — volte daqui a pouco."));
  setTimeout(baloes,50);

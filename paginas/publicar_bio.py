@@ -618,6 +618,7 @@ def produtos_externos() -> dict[str, dict]:
             "desconto_loja": (round((1 - preco / float(p["de_loja"])) * 100)
                               if float(p.get("de_loja") or 0) > preco else 0),
             "em_alta": _tm.em_alta(p["nome"], _termos_alta),
+            "remedio": bool(p.get("remedio")),
         })
     for loja, n in sem_mapa.items():
         print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "
@@ -626,8 +627,9 @@ def produtos_externos() -> dict[str, dict]:
         print(f"externos: {loja!r} fica FORA do site por decisao ({n} produtos; "
               "FORA_DO_SITE)")
     for cat, bloco in saida.items():
-        bloco["produtos"].sort(key=lambda x: float(
-            x["preco"].replace("R$", "").replace(",", ".")))
+        # remedio sempre no FIM (regra do dono, 05/10/2026)
+        bloco["produtos"].sort(key=lambda x: (bool(x.get("remedio")), float(
+            x["preco"].replace("R$", "").replace(",", "."))))
         print(f"externos: {cat} {len(bloco['produtos'])} produto(s) "
               f"-> {bloco['arquivo']}")
     # ⭐ Nota de Vitrine tambem nas externas (Confianca = 0 ate' haver dado)
@@ -838,6 +840,7 @@ def promover_ofertas_ml(dados: list[dict], externos: dict) -> list[dict]:
             loja = 0
         return max(real * 1.5, loja)   # queda medida por nos vale mais
     boas = [x for x in ml if str(x.get("id")) not in ja and not x.get("vitrine_fora")
+            and not x.get("remedio")
             and (((x.get("dias") or 0) >= 3 and (x.get("queda") or 0) >= ML_QUEDA_MIN)
                  or (not x.get("de_inflado")
                      and ML_DESCONTO_MIN <= (x.get("desconto_loja") or 0) <= ML_DESCONTO_MAX))]

@@ -34,7 +34,6 @@ ol.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;g
 .item{position:relative;display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--caixa);border:1px solid var(--linha);border-radius:20px;padding:16px;transition:transform .2s,box-shadow .2s}
 .item:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(20,16,30,.10)}
 .pos{position:absolute;top:-10px;left:-10px;width:40px;height:40px;border-radius:12px;background:var(--preto);color:var(--ouro2);display:grid;place-items:center;font:800 18px Poppins,sans-serif;box-shadow:0 6px 16px rgba(0,0,0,.25)}
-.item:nth-child(1) .pos{background:linear-gradient(135deg,#f3d77a,#c99a23);color:var(--preto)}
 .foto{display:block;aspect-ratio:1;border-radius:14px;background:#fff;overflow:hidden;border:1px solid var(--linha)}
 .foto img{width:100%;height:100%;object-fit:contain}
 .info{display:flex;flex-direction:column;gap:6px;min-width:0}
@@ -49,6 +48,34 @@ a.ir{align-self:flex-start;white-space:nowrap;margin-top:4px;background:var(--pr
 a.ir:hover{background:#26232f}
 .item.nicho{display:block;padding:0;border:0;background:none}.item.nicho a.ir{display:block;width:100%;font-size:17px;padding:18px;text-align:left}
 @media(max-width:560px){.item{grid-template-columns:96px 1fr;gap:12px;padding:12px}.preco b{font-size:20px}}
+
+/* ⭐ 05/10/2026: botao de compra no visual dos selos (pilula preta, borda e texto
+   dourados, brilho). Em CODIGO, nao imagem: nitido em qualquer tela, legivel por
+   leitor de tela e troca de texto sem gerar arte. */
+.btn-ouro{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ padding:12px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;
+ font:800 14.5px/1 Poppins,sans-serif;letter-spacing:.4px;text-transform:uppercase;
+ color:#f6d977;background:linear-gradient(180deg,#2a2a2e 0%,#0b0b0d 55%,#000 100%);
+ border:2px solid #d4a937;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(0,0,0,.6),0 8px 18px rgba(20,16,30,.18);
+ transition:transform .15s ease,box-shadow .15s ease;overflow:hidden}
+.btn-ouro::before{content:"";position:absolute;left:8%;right:8%;top:2px;height:42%;border-radius:999px;
+ background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0));pointer-events:none}
+.btn-ouro:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 0 1px rgba(0,0,0,.6),0 12px 26px rgba(20,16,30,.26)}
+.btn-ouro:active{transform:translateY(1px)}
+.btn-ouro:focus-visible{outline:3px solid #f3d77a;outline-offset:3px}
+.btn-ouro .seta{font-size:16px}
+@media(prefers-reduced-motion:reduce){.btn-ouro{transition:none}}
+.info .btn-ouro{align-self:stretch}
+@media(max-width:560px){.btn-ouro{padding:12px 12px;font-size:12.5px;letter-spacing:.2px;white-space:normal;text-align:center}}
+
+/* podio: 1 ouro, 2 prata, 3 bronze; do 4 em diante, preto com numero dourado */
+.item:nth-child(1) .pos{background:linear-gradient(135deg,#fff1b8,#f3d77a 35%,#c99a23);color:#0f0e13}
+.item:nth-child(2) .pos{background:linear-gradient(135deg,#ffffff,#d9dde3 40%,#9aa1ab);color:#0f0e13}
+.item:nth-child(3) .pos{background:linear-gradient(135deg,#ffe0c2,#d99a5b 40%,#9c5b25);color:#0f0e13}
+/* moldura EM VOLTA da foto (nunca por cima: a foto e' a do vendedor) */
+.item:nth-child(1) .foto{border:3px solid #d4a937;box-shadow:0 0 0 3px #fff6d6}
+.item:nth-child(2) .foto{border:3px solid #b9bfc8}
+.item:nth-child(3) .foto{border:3px solid #c58a52}
 footer{color:var(--suave);font-size:12px;margin-top:30px;text-align:center}footer a{color:inherit}
 </style>
 <header class="heroi"><div class="in">

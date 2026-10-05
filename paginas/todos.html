@@ -5318,10 +5318,17 @@
       return true;
     });
     if (f.ordem) { lista = lista.slice().sort(f.ordem); }
+    // ⭐ 05/10/2026 (dono): remedio fica na loja mas NAO compete — sempre no fim.
+    lista = lista.filter(function (p) { return !p.remedio; })
+      .concat(lista.filter(function (p) { return p.remedio; }));
     // ⭐ 05/10/2026 (dono): na BUSCA, o Mercado Livre vem primeiro.
     if (termo) {
       lista = lista.filter(function (p) { return p.loja === "Mercado Livre"; })
         .concat(lista.filter(function (p) { return p.loja !== "Mercado Livre"; }));
+    }
+    if (termo) {  // remedio continua no fim mesmo com o ML na frente
+      lista = lista.filter(function (p) { return !p.remedio; })
+        .concat(lista.filter(function (p) { return p.remedio; }));
     }
     // ⭐ A EXTERNA ABRE PELOS MAIS BARATOS — decisao do Bryan em 16/09/2026
     // ("mais baratos primeiro comunica melhor com nosso publico"). O feed

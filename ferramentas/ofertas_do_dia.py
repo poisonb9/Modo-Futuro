@@ -181,6 +181,12 @@ def main() -> None:
             if o["id"] not in links:
                 print(f"  [!] {o['id']} sem link de afiliado — pulado")
                 continue
+            # ⭐ 05/10/2026 (atribuicao por canal): na Awin o clickref vira
+            # "<canal>-<id>" — o relatorio de transacoes diz QUAL CONTA vendeu.
+            if str(o["id"]).startswith("awin:") and o["id"] in links:
+                import re as _re
+                links[o["id"]] = _re.sub(r"clickref=[^&]*", f"clickref={canal.replace('.', '')}-"
+                                         + str(o["id"]).split(":", 1)[1], links[o["id"]])
             arq = a.pasta / f"{hoje}_{canal.replace('.', '-')}_{str(o['id']).replace(':', '-')}.mp4"
             try:
                 d = video_oferta.gerar(o["id"], arq, canal, n)

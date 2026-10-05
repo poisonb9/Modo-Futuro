@@ -104,3 +104,11 @@
   `--ml` (nuvem, no ml_vitrine.yml) busca no ML e grava `estado/ml_busca.json`, que entra na loja 14 dias. Testado: "whey" → 6 produtos.
 - **Armadilha:** a API do ML NÃO responde da VPS (timeout) — tudo de ML roda na nuvem.
 - **Falta:** agendar `--termos` de hora em hora na VPS (tarefa do Windows).
+
+## 18. Top 10 do Mercado Livre por nicho + bios
+- `engine/top10.py` + `engine/top10_pagina.html` → `/top10/` e `/top10/<academia|eletronicos|beleza|saude|casa|cozinha|infantil|pet>/`.
+  Ordem = mais vendidos do próprio ML (`/highlights`), sem nome repetido, preço com data/hora, selo "⚡ Oferta de hoje",
+  "por que está aqui", JSON-LD ItemList (Google), canonical, PostHog `top10_clique`. Gerado em toda publicação.
+- Bios: grupo "Os mais vendidos do Mercado Livre, com o preço de hoje" (3º grupo) em 8 canais, cada um no seu nicho.
+  Armadilha: inserir por texto quebrou (grupo sem vírgula, canal com 1 grupo) → inserção por contagem de colchetes.
+- **Cookie de 24 h:** conta a partir do CLIQUE; link não expira, nada a renovar. Por isso o selo "oferta de hoje" + aviso "compre hoje".

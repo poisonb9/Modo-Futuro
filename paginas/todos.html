@@ -2897,6 +2897,9 @@
     .balao:nth-child(even) { margin-top: 120px !important; }
     .flutua b { display: block; }
   }
+  /* 05/10/2026 (dono): CTA do Mercado Livre no amarelo da marca */
+  .cta.cta-ml { color: #2d3277 !important; background: linear-gradient(180deg,#fff59a 0%,#ffe600 55%,#f2d600 100%) !important;
+    border: 2px solid #2d3277 !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 6px 14px rgba(45,50,119,.18) !important; }
 </style>
 
 <div class="luz" aria-hidden="true"></div>
@@ -4582,11 +4585,13 @@
     // em 20/09, por pedido do Bryan ("a pessoa nao sabe que ela tem que
     // clicar"). ⚠ E um <span>, nao um <a>: o cartao ja e o link, e
     // <a> dentro de <a> e HTML invalido -- o parser quebraria o cartao.
-    var cta = el("span", "cta");
+    // ⭐ 05/10/2026 (dono): item do MERCADO LIVRE = botao no AMARELO da marca.
+    var ehML = p.loja === "Mercado Livre";
+    var cta = el("span", ehML ? "cta cta-ml" : "cta");
     // \u2b50 23/09/2026 (Bryan: "o comprar agora dos cards menores eu quero sem
     // a seta"): so' na grade -- a capa (bem maior, o hero) continua com a
     // seta, que e' de onde este pedido NAO fala.
-    cta.appendChild(document.createTextNode("Comprar agora"));
+    cta.appendChild(document.createTextNode(ehML ? "Ver no Mercado Livre" : "Comprar agora"));
     cta.setAttribute("aria-hidden", "true");
     corpo.appendChild(cta);
     a.title = (p.pontos >= 2

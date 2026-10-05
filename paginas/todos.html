@@ -6818,6 +6818,23 @@
       return localStorage.getItem("nao_contar") === "1";
     } catch (e) { return false; }
   })();
+  // ⭐ 05/10/2026 (dono: "ligar urgente, de ponta a ponta"): os mesmos
+  // eventos que vao ao Supabase vao tambem ao PostHog (funil: visita ->
+  // busca -> clique na loja). ?eu=1 desliga o PostHog neste aparelho.
+  function ph(nome, props) {
+    try {
+      if (!window.posthog) { return; }
+      if (NAO_CONTAR) { window.posthog.opt_out_capturing && window.posthog.opt_out_capturing(); return; }
+      props = props || {};
+      if (ORIGEM_DE) { props.de = ORIGEM_DE; }
+      window.posthog.capture(nome, props);
+    } catch (e) { /* medir nunca derruba a pagina */ }
+  }
+  if (NAO_CONTAR) { ph("_"); }
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a[href*="t.me/"]');
+    if (a) { ph("telegram_clique", { destino: a.getAttribute("href").slice(0, 80) }); }
+  }, true);
 
   // ⭐ 04/10/2026: o e-mail do quadro do Telegram (inscricao "geral"; quem
   // envia e' engine/alertas_email.py, maximo uma por dia, com link de sair).
@@ -6860,6 +6877,7 @@
   // produto, loja e onde clicou; nada de quem. `keepalive` porque a pagina
   // esta' saindo pra loja; medir NUNCA segura o clique.
   function anotarClique(p, origem) {
+    if (p && p.id) { ph("produto_clique", { produto: String(p.id).slice(0, 64), loja: String(p.loja || ""), origem: origem }); }
     if (NAO_CONTAR || !p || !p.id || !SUPABASE.url || !SUPABASE.anon) { return; }
     try {
       fetch(SUPABASE.url + "/rest/v1/clique_produto", {
@@ -6977,6 +6995,7 @@
       if (termo.length < 2 || termo === ultimaAnotada) { return; }
       ultimaAnotada = termo;
       var n = document.querySelectorAll("#grade .item").length;
+      ph("busca", { termo: termo, resultados: n });
       if (NAO_CONTAR || !SUPABASE.url || !SUPABASE.anon) { return; }
       try {
         fetch(SUPABASE.url + "/rest/v1/busca", {

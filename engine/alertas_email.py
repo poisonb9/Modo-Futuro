@@ -157,6 +157,67 @@ def boas_vindas(insc: dict[str, set[str]], simular: bool, teto: int) -> int:
     return n
 
 
+BUSCAS_RESPONDIDAS = RAIZ / "_privado" / "buscas_respondidas.json"
+
+
+def _br(v) -> str:
+    return f"{float(v):.2f}".replace(".", ",")
+
+
+def responder_buscas(simular: bool, teto: int = 30) -> int:
+    """⭐ 05/10/2026 (dono: "nao achou? deixe seu e-mail e eu rastreio o melhor
+    preco pra voce"). Contato com produto "busca:<termo>" recebe UMA vez os 4
+    mais baratos que o catalogo inteiro (supabase/15, buscar_catalogo) achar.
+    Nada achado = nao manda nada e tenta de novo amanha (o catalogo muda todo dia)."""
+    import html as _h
+    ja = _enviados(BUSCAS_RESPONDIDAS)
+    pedidos = _sql("select distinct lower(email) email, produto from contato where email is not null "
+                   "and saiu_em is null and produto like 'busca:%'")
+    n = 0
+    for d in pedidos:
+        termo = d["produto"].split(":", 1)[1].strip()
+        chave = f"{_hash(d['email'])}|{termo.lower()}"
+        if chave in ja or n >= teto or len(termo) < 2:
+            continue
+        achados = _sql(f"select * from buscar_catalogo({_lit(termo)})")[:12]
+        # variacao de sabor/cor vem com o MESMO nome (whey: 4x o mesmo pote) — 1 de cada
+        unicos, vistos = [], set()
+        for p in sorted(achados, key=lambda p: float(p["preco"])):
+            if p["nome"].lower()[:45] not in vistos:
+                vistos.add(p["nome"].lower()[:45])
+                unicos.append(p)
+        achados = unicos[:4]
+        if not achados:
+            continue
+        if simular:
+            n += 1
+            continue
+        linhas = "".join(
+            f'<tr><td style="padding:10px 0;border-bottom:1px solid #eee">'
+            f'<a href="{_h.escape(p["link"])}" style="color:#16141c;text-decoration:none">'
+            f'<b>{_h.escape(p["nome"][:80])}</b><br>'
+            f'<span style="font-size:18px;font-weight:700">R$ {_br(p["preco"])}</span>'
+            f' <span style="color:#6b6776">· {_h.escape(p["loja"])}</span></a></td></tr>'
+            for p in achados)
+        corpo = (f'<div style="font-family:system-ui,sans-serif;max-width:520px;margin:auto;color:#16141c">'
+                 f'<h2>Achei “{_h.escape(termo)}” pra você</h2>'
+                 f'<p style="color:#6b6776">Os mais baratos de hoje nas lojas parceiras, preço conferido hoje.</p>'
+                 f'<table style="width:100%;border-collapse:collapse">{linhas}</table>'
+                 f'<p style="font-size:12px;color:#6b6776">Contém links de afiliado. '
+                 f'<a href="{link_sair(d["email"])}">Não quero mais receber</a></p></div>')
+        try:
+            import email_boas_vindas as bv
+            bv.enviar(d["email"], f"🔎 Achei {termo[:40]} pra você", corpo, tag="busca")
+        except Exception as e:  # noqa: BLE001
+            print(f"alertas_email: busca falhou ({type(e).__name__})")
+            continue
+        ja[chave] = date.today().isoformat()
+        BUSCAS_RESPONDIDAS.parent.mkdir(exist_ok=True)
+        BUSCAS_RESPONDIDAS.write_text(json.dumps(ja, indent=0), encoding="utf-8")
+        n += 1
+    return n
+
+
 def rodada(simular: bool = False) -> dict:
     sys.path.insert(0, str(RAIZ)); sys.path.insert(0, str(RAIZ / "paginas"))
     sys.path.insert(0, str(RAIZ / "ferramentas"))
@@ -164,8 +225,13 @@ def rodada(simular: bool = False) -> dict:
     import email_alerta as tpl
 
     saidas = 0 if simular else tratar_saidas()
+    try:
+        buscas = responder_buscas(simular)
+    except Exception as e:  # noqa: BLE001 — a resposta de busca nunca derruba os alertas
+        print(f"alertas_email: buscas nao respondidas ({type(e).__name__})")
+        buscas = 0
     insc = inscritos()
-    res = {"saidas": saidas, "inscritos": sum(len(v) for v in insc.values()),
+    res = {"saidas": saidas, "buscas": buscas, "inscritos": sum(len(v) for v in insc.values()),
            "produtos_vigiados": len(insc), "boas_vindas": 0, "com_sinal": 0,
            "enviados": 0, "falhas": 0}
     if not insc:

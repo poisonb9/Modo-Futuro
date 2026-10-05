@@ -93,3 +93,14 @@
 - HTML separado em `engine/cupons_pagina.html` (o gerador só injeta os dados). Herói preto/ouro, cupom-ticket com picote,
   título longo recolhido ("ver regras completas"), código quebra linha (bug do "copiar" vazando), filtros fixos no topo,
   balões BF no herói + balões que aparecem/somem na rolagem em telas ≥1300 px (mesma mecânica da loja).
+
+## 17. Mercado Livre na loja: hora em hora, prioridade, busca rápida, busca → loja
+- `ml_vitrine.yml` de hora em hora (rodada ~4 min, sem 429) + `ml_vitrine.json`/`ml_busca.json` na lista do publicador automático (10 min).
+- **Prioridade:** `promover_ofertas_ml` (publicar_bio) põe até 4 ofertas "muito boas" do ML no topo da 1ª página:
+  queda REAL ≥15% (3+ dias de série) ou desconto da loja 25–60% (acima de 60% o "de" costuma ser inflado). Vitrine guarda `de_loja` (original_price).
+- **Busca sem delay:** antes as lojas baixavam UMA POR VEZ com tela de espera. Agora: com termo, todas em paralelo, ML na frente e
+  primeiro na lista; pré-carrega ao TOCAR na busca e o ML na ociosidade; sem cartão repetido.
+- **Busca → loja:** `ferramentas/buscas_para_loja.py`: `--termos` (VPS, SUPABASE_PAT) grava `estado/termos_buscados.json`;
+  `--ml` (nuvem, no ml_vitrine.yml) busca no ML e grava `estado/ml_busca.json`, que entra na loja 14 dias. Testado: "whey" → 6 produtos.
+- **Armadilha:** a API do ML NÃO responde da VPS (timeout) — tudo de ML roda na nuvem.
+- **Falta:** agendar `--termos` de hora em hora na VPS (tarefa do Windows).

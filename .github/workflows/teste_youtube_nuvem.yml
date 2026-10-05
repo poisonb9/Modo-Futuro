@@ -1,0 +1,25 @@
+# TESTE (05/10/2026, dono: "vamos tentar o jdownloader em nuvem"): o YouTube
+# deixa baixar do IP do GitHub? Em 29/09 deu "Sign in to confirm you're not a
+# bot". So' baixa 1 video curto e mostra o resultado; nao sobe nada.
+name: Teste YouTube na nuvem
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "video do YouTube"
+        default: "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -q -U yt-dlp
+      - name: Baixar (cliente padrao)
+        continue-on-error: true
+        run: yt-dlp -f "best[height<=360]" -o v1.mp4 "${{ inputs.url }}" && ls -la v1.mp4
+      - name: Baixar (cliente android/tv, que as vezes escapa)
+        continue-on-error: true
+        run: yt-dlp --extractor-args "youtube:player_client=tv,android" -f "best[height<=360]" -o v2.mp4 "${{ inputs.url }}" && ls -la v2.mp4
+      - name: Resultado
+        run: ls -la *.mp4 2>/dev/null && echo "BAIXOU NA NUVEM" || echo "BLOQUEADO NA NUVEM"

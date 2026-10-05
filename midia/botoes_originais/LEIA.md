@@ -9,7 +9,9 @@ No SITE o botão é em CÓDIGO (mesmo visual, ajusta a qualquer tela): ver pagin
 | botao_pegar_a_oferta.png | destaque máximo (BF, 1º lugar, oferta do dia) |
 | botao_copiar_cupom.png | cupom (troque o código no prompt) |
 | botao_entrar_no_telegram.png | canal do Telegram |
-| (faltam) | alerta de preço, prata "ver mais ofertas", fantasma "ver os cupons" |
+| botao_me_avise_quando_baixar.png | alerta de preço (secundário, contorno preto) |
+| botao_ver_os_cupons_v1.png / _v2.png | fantasma dourado sobre fundo ESCURO (v2 = dourado mais forte). Original tinha pixels quase transparentes na borda; a versão web corta alpha ≤ 60 |
+| (falta) | prata "ver mais ofertas" |
 
 Recortados (sem sobra transparente): midia/botoes_web/*.png e *.webp (600 px).
 Prompts: handoff/REGISTRO_05-10-2026_D.md e conversa de 05/10.

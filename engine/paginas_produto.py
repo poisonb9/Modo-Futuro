@@ -386,10 +386,84 @@ GUIAS = [{
     ],
 }]
 
+GUIAS += [{
+    "slug": "como-escolher-carregador-rapido-e-cabo-usb-c",
+    "termos": ("carregador", "cabo usb", "cabo tipo c", "cabo colorido tipo c", "gan "),
+    "fora": ("suporte", "organizador", "testador", "kit limpeza", "lanterna", "ventilador", "power bank", "fone"),
+    "curto": "carregador rápido e cabo USB-C",
+    "titulo": "Como escolher carregador rápido e cabo USB-C em {ano} (watts, PD, GaN): guia com preços acompanhados",
+    "h1": "Como escolher <em>carregador rápido</em> e cabo USB-C",
+    "desc": "Quantos watts seu celular aceita, o que é PD e PPS, quando vale GaN e qual cabo aguenta 60 W, 100 W ou 240 W — com o menor preço já visto.",
+    "resposta": ("Veja quantos watts o seu celular aceita (a maioria fica entre 20 W e 45 W) e compre um carregador USB-C com Power Delivery (PD) "
+                 "pelo menos dessa potência — um maior não estraga o celular, ele só puxa o que suporta. "
+                 "O cabo também conta: para mais de 60 W ele precisa ser de 100 W ou 240 W (chip e-marker), senão a carga fica limitada."),
+    "secoes": [
+        ("1. Quantos watts você precisa?", [
+            "iPhone: até ~20–30 W. Samsung: 25 W ou 45 W (\"Super Fast Charging\" pede PPS). Xiaomi/Motorola: alguns passam de 60 W, mas só com o carregador da marca.",
+            "Notebook com USB-C: normalmente 45–100 W. Um carregador de 65 W+ resolve celular e notebook com o mesmo bloco."]),
+        ("2. PD e PPS: os nomes que importam", [
+            "<b>PD (Power Delivery)</b> é o padrão de carga rápida pelo USB-C — iPhone, Pixel, notebooks.",
+            "<b>PPS</b> é uma extensão do PD que a Samsung usa para os 25/45 W. Sem PPS, o Samsung carrega, mas mais devagar.",
+            "\"QC 3.0\" é um padrão antigo de USB-A: funciona, mas não é o ideal para celular novo."]),
+        ("3. GaN vale a pena?", [
+            "GaN é um material que deixa o carregador menor e mais frio na mesma potência. Para 65 W ou mais, vale: um GaN de 65 W tem o tamanho de um carregador comum de 20 W."]),
+        ("4. Várias portas: leia a divisão", [
+            "\"240 W com 5 portas\" é a soma. Ao ligar 2 ou 3 aparelhos juntos, cada porta recebe menos. Veja no anúncio a potência POR porta."]),
+        ("5. O cabo certo", [
+            "Cabo USB-C comum aguenta até 60 W (3 A). Para 100 W ou 240 W o cabo precisa dizer isso (5 A / e-marker).",
+            "Cabo com visor digital mostra os watts reais — útil para conferir se a carga rápida está funcionando.",
+            "Nylon trançado dura mais que o de borracha nas pontas, que é onde quebra."]),
+        ("6. Segurança", [
+            "Desconfie de carregador sem nenhuma marca, muito leve e muito barato para a potência anunciada. Proteções contra sobretensão e superaquecimento devem estar no anúncio."]),
+        ("7. Como não pagar caro", [
+            "Cabos e carregadores mudam muito de preço no AliExpress. Na tabela abaixo, cada um mostra o preço de hoje e o menor que já vimos."]),
+    ],
+    "faq": [
+        ("Carregador mais forte estraga o celular?", "Não. O celular só puxa a potência que suporta; um carregador de 65 W carrega um iPhone a ~20 W."),
+        ("Qual a diferença entre PD e PPS?", "PD é o padrão de carga rápida do USB-C; PPS é uma extensão dele que a Samsung usa para 25 W e 45 W."),
+        ("Todo cabo USB-C faz carga rápida?", "Até 60 W, quase todos. Acima disso, só cabo de 100 W ou 240 W (5 A, com chip e-marker)."),
+        ("O que é carregador GaN?", "Um carregador feito com nitreto de gálio: menor e mais frio na mesma potência."),
+    ],
+}, {
+    "slug": "como-escolher-caixa-de-som-bluetooth",
+    "termos": ("caixa de som", "caixinha de som", "speaker"),
+    "fora": ("suporte", "capa "),
+    "curto": "caixa de som Bluetooth",
+    "titulo": "Como escolher caixa de som Bluetooth boa e barata em {ano}: guia com preços acompanhados",
+    "h1": "Como escolher uma <em>caixa de som Bluetooth</em>",
+    "desc": "Potência RMS x PMPO, bateria, IPX7, TWS (parear duas) e tamanho explicados — e as caixas que acompanhamos, com o menor preço já visto.",
+    "resposta": ("Para usar em casa, no banho ou na praia, procure uma caixa com potência RMS (não PMPO) de 10 W ou mais, "
+                 "bateria de 8 horas ou mais e resistência IPX7 se for perto de água. "
+                 "Se quiser som mais forte sem pagar caro, escolha uma com função TWS: dá para parear duas iguais e tocar em estéreo."),
+    "secoes": [
+        ("1. Watts de verdade: RMS, não PMPO", [
+            "RMS é a potência contínua real. PMPO é um número de pico, inflado (\"2000 W\" em caixa de bolso). Compare só RMS.",
+            "5 W: quarto e banheiro. 10–20 W: sala e churrasco pequeno. 30 W+: área externa."]),
+        ("2. Bateria", [
+            "8 horas ou mais é bom para um dia fora. Volume alto e LED ligado consomem mais — o número do anúncio costuma ser em volume médio.",
+            "Carregar por USB-C é mais prático do que por micro-USB."]),
+        ("3. Água e poeira (IPX)", [
+            "IPX4: respingo. IPX5/IPX6: jato d'água. IPX7: aguenta cair na piscina rapidamente. Para banho e praia, prefira IPX7."]),
+        ("4. TWS: duas caixas em estéreo", [
+            "Caixas com \"TWS\" pareiam com outra igual — dois lados, som mais cheio, pelo preço de duas pequenas."]),
+        ("5. Extras que ajudam (ou não)", [
+            "Microfone para viva-voz, rádio FM, entrada de cartão e LED são extras; não melhoram o som. Escolha pelo RMS, bateria e IPX primeiro."]),
+        ("6. Como não pagar caro", [
+            "Na tabela abaixo, cada caixa mostra o preço de hoje e o menor que já vimos. Se não estiver no menor, ative o aviso de queda."]),
+    ],
+    "faq": [
+        ("O que é potência RMS?", "É a potência contínua real do alto-falante. É o único número de watts que dá para comparar entre caixas."),
+        ("Caixa de som IPX7 pode molhar?", "Pode: aguenta respingo, chuva e uma queda rápida na água. Não é para ficar submersa."),
+        ("O que é TWS em caixa de som?", "É a função de parear duas caixas iguais para tocar em estéreo."),
+        ("Quantos watts para uma caixa de som boa?", "10 a 20 W RMS resolvem sala e área pequena; 5 W basta para quarto e banheiro."),
+    ],
+}]
 
 def _do_guia(g: dict, p: dict) -> bool:
-    n = _ascii(p.get("nome", ""))
-    return any(t in n for t in g["termos"]) and not any(f in n for f in g["fora"])
+    # palavra inteira no começo do termo: "fone" não casa "telefone"
+    n = " " + re.sub(r"[^a-z0-9]+", " ", _ascii(p.get("nome", ""))) + " "
+    tem = lambda t: (" " + t.strip() + (" " if t.endswith(" ") else "")) in n
+    return any(tem(t) for t in g["termos"]) and not any(tem(f) for f in g["fora"])
 
 
 def pagina_guia(g: dict, itens: list[dict], listas: list[dict], ano: int, quando: str) -> str:

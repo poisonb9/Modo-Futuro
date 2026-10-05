@@ -257,3 +257,6 @@
   JSON-LD Article + FAQPage + Breadcrumb. As /p/ do tema ganham a caixa "📘 Guia" (link de volta = cluster). Rodapé das páginas: link /guias/.
 - Teste: 1 guia, 7 fones na tabela, 7 /p/ com caixa. Conferido na prévia em 375 px (sem rolagem lateral).
 - Próximo nicho = novo item em GUIAS (sugestão: whey/creatina, air fryer).
+- +2 guias: /guias/como-escolher-carregador-rapido-e-cabo-usb-c/ (9 produtos: watts, PD x PPS, GaN, divisão por porta, cabo 60/100/240 W,
+  segurança) e /guias/como-escolher-caixa-de-som-bluetooth/ (5: RMS x PMPO, bateria, IPX7, TWS, extras).
+- Bug pego: "fone" casava "telefone" (carregador entrava no guia de fones e saía do de carregadores). `_do_guia` agora compara palavra inteira.

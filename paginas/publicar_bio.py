@@ -869,6 +869,44 @@ def promover_ofertas_ml(dados: list[dict], externos: dict) -> list[dict]:
         f"{x['nome'][:30]} {x['preco']} (-{x.get('desconto_loja') or x.get('queda')}%)" for x in escolhidas))
     return escolhidas
 
+
+#: ⭐ 05/10/2026 (dono: "vamos colocar itens do Mercado Livre na vitrine").
+#:   Medido no ar: 145 de 148 cartoes da vitrine eram AliExpress. Alem das
+#:   ofertas "muito boas" (acima), entram os MAIS VENDIDOS do ML intercalados
+#:   nos primeiros da vitrine: 1 ML a cada 2 cartoes, ate' ML_MISTURA_N.
+#:   Remedio fica fora (regra do dono: nao compete). Nome repetido fora.
+ML_MISTURA_N = 8
+
+
+def misturar_ml_na_vitrine(dados: list[dict], externos: dict) -> int:
+    ml = (externos.get("Mercado Livre") or {}).get("produtos") or []
+    ja = {str(p.get("id")) for p in dados}
+    raizes = {" ".join(str(p.get("nome") or "").lower().split()[:4]) for p in dados}
+    cand = [x for x in ml if str(x.get("id")) not in ja and not x.get("remedio")
+            and not x.get("vitrine_fora") and x.get("imagem")]
+    cand.sort(key=lambda x: -float(x.get("vitrine_nota") or 0))
+    escolhidas = []
+    por_area: dict[str, int] = {}
+    for x in cand:
+        r = " ".join(str(x.get("nome") or "").lower().split()[:4])
+        area = str(x.get("canal") or "")
+        # no maximo 2 por area: a 1a rodada trouxe 5 tenis de 8
+        if r in raizes or por_area.get(area, 0) >= 2:
+            continue
+        raizes.add(r)
+        por_area[area] = por_area.get(area, 0) + 1
+        escolhidas.append(x)
+        if len(escolhidas) >= ML_MISTURA_N:
+            break
+    if not escolhidas:
+        return 0
+    # posicao: depois de cada 2 cartoes do topo atual (1.5, 3.5, 5.5 ...)
+    ultimo = max([float(p["topo"]) for p in dados if isinstance(p.get("topo"), (int, float))] or [0])
+    for j, x in enumerate(escolhidas):
+        dados.append(dict(x, topo=min(2 * j + 2.5, ultimo + j + 1), mistura_ml=True))
+    print(f"vitrine: +{len(escolhidas)} mais vendidos do ML intercalados")
+    return len(escolhidas)
+
 def montar_catalogo() -> tuple[str, dict[str, str]]:
     """O HTML do catalogo com os produtos e o brasao dentro, e os arquivos
     das categorias externas ({nome do arquivo: JSON}) que sobem ao lado."""
@@ -883,6 +921,7 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     dados = produtos_todos()
     externos = produtos_externos()
     promover_ofertas_ml(dados, externos)
+    misturar_ml_na_vitrine(dados, externos)
     # ⚠️ O HTML LEVA SO' O INDICE das externas: nome, arquivo, quantos e o
     # passo. Os cartoes ficam no arquivo ao lado.
     # ⭐ 18/09: alem da contagem por area (`cats`), os CLIQUES de 30 dias por
@@ -3308,6 +3347,11 @@ def robots_txt() -> str:
             + f"Sitemap: {DOMINIO}/sitemap.xml" + chr(10))
 
 
+#: nichos do /top10/ que entram no sitemap (mesmos slugs de engine/top10.NICHOS)
+TOP10_NICHOS_MAPA = ("academia", "eletronicos", "beleza", "saude",
+                     "casa", "cozinha", "infantil", "pet")
+
+
 def sitemap_xml(caminhos: list[str]) -> str:
     from datetime import date
     hoje = date.today().isoformat()
@@ -3673,8 +3717,12 @@ def publicar_no_ar(html: str, parceiros: str = "",
                 # abaixo) mas nunca tinha entrado no mapa. Pagina real, sem
                 # ela, so' fica visivel pra quem ja' sabe o endereco.
                 (casa / "sitemap.xml").write_text(
-                    sitemap_xml(["/", "/privacidade"]
-                                + (["/parceiros"] if parceiros else [])),
+                    # ⭐ 05/10/2026: /cupons/ e /top10/ (+8 nichos) existiam
+                    # e o Google nao sabia — o mapa tinha so' 2 enderecos.
+                    sitemap_xml(["/", "/cupons/", "/top10/"]
+                                + [f"/top10/{n}/" for n in TOP10_NICHOS_MAPA]
+                                + (["/parceiros"] if parceiros else [])
+                                + ["/privacidade"]),
                     encoding="utf-8")
                 (casa / "_redirects").write_text(REDIRECTS, encoding="utf-8")
                 (casa / "_headers").write_text(CABECALHOS, encoding="utf-8")

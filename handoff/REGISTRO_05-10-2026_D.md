@@ -193,3 +193,16 @@
 ## 29. Reranker medido no acervo NÃO-trade (30 perguntas M01–M30)
 - Só embedding (Voyage 3.5): 17/30 no top-5 (57%). Com rerank-2.5 (top-250): **21/30 (70%)**, ganho +4. 1 URLError na rodada (M28/M29).
 - Comparar só com esta mesma lista. Arquivo: `ia mind/_afericao/rerank_rerank-2.5_n250_acervo_geral.json`.
+
+## 30. +livros no mesmo molde do +acervo
+- `+livros` injetava a SKILL.md de trade (16 KB) → cortada em prévia de 2 KB. Agora: bloco de ~1,4 KB com a busca unificada nos 7 índices
+  de trade (livros_estrategia/metodo/texto, mentores_estrategia/nao_fazer/visao, falas_mentores = 300.543 itens, rerank-2.5, ~50 s).
+  Testado: "quando não entrar num rompimento" → regras de mentores com link do minuto. `/mentores-de-trade` continua funcionando.
+  Tamanhos: +livros 1,4 KB · +acervo +livros 2,3 KB (ambos abaixo do corte).
+- Dono: atalho de trade renomeado para `+trade` (`+livros` segue como apelido; os dois juntos entram uma vez só).
+
+## 31. Site que vende — diagnóstico e plano (documento-mestre: handoff/PLANO_SITE_VENDAS_2026.md)
+- Medido: 45 cliques/30 dias; sitemap com 2 endereços; vitrine 145/148 AliExpress. Plano de 6 frentes aprovado pelo dono.
+- **Sitemap completo:** `publicar_bio.py` agora lista /, /cupons/, /top10/ + 8 nichos, /parceiros, /privacidade (11). `TOP10_NICHOS_MAPA`.
+- **ML na vitrine:** `misturar_ml_na_vitrine()` — 8 mais vendidos do ML intercalados (topo 2.5, 4.5, …), máx. 2 por área
+  (1ª versão trouxe 5 tênis de 8), sem remédio, sem nome repetido. Testado: tênis, whey, kit Wella, Galaxy A17, modeladora, microfone.

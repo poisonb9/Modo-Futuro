@@ -13,3 +13,327 @@
 - 30/09 04:14 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Poof RETURNS Grown Up in The Fairly OddParents: A New Wish! 
 - 30/09 04:14 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Try Not To Eat - 2000s Cartoons (Rocket Power, Recess, Fairl
 - 30/09 04:14 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: What If You Could DELETE Your Feelings? | The Fairly OddPare
+- 05/10 00:31 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: [ENG CC] 언니 폭격기💥 엔믹스 지우🐶 언니들 심장 부여잡고 오세요💎✨ NMIXX JIWOO  l 이사
+- 05/10 00:38 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: how to *quickly* escape a dopamine hole
+- 05/10 00:44 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: How to Quit Any Addiction in 13 Minutes 🔥| 5 Scientific Step
+- 05/10 00:44 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 00:44 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 00:45 truque.importado: 13 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 05/10 00:45   · 7 — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — Kazuha do LE SSERAFIM demonstra técnicas e rotina com closes claros, legendas e segmentos 
+- 05/10 00:46   ✅ 9.8 — [ENG] 엘라 트와일라잇 벨라 만들기🧛‍♀️ l 이사배(RISABAE Makeup) — Episodio perfeito com Risabae maquiando a idol Ella (MEOVV) passo a passo em close, replet
+- 05/10 00:46 ⬇️ truque.importado: 1 no JDownloader
+- 05/10 00:46 atefalhar: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 00:46 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 00:46 atefalhar: 79 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 05/10 00:46   ✅ 9.0 — The Worst Era Of Nickelodeon — O video analisa detalhadamente o auge e o declinio dos desenhos da Nickelodeon com otimos 
+- 05/10 00:46 ⬇️ atefalhar: 1 no JDownloader
+- 05/10 00:57 [!] upload falhou (The Worst Era Of Nickelodeon): [WinError 10054] An existing connection was forcibly closed by the remote host
+- 05/10 01:00 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: Stray Kids Adoring And Being Whipped For Their Angel FELIX ♡
+- 05/10 01:07 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: [ENG] 엘라 트와일라잇 벨라 만들기🧛‍♀️ l 이사배(RISABAE Makeup)
+- 05/10 01:07 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 01:07 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 01:08 truque.importado: 13 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 05/10 01:09   · 7 — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — Kazuha do LE SSERAFIM demonstra sua rotina passo a passo com closes nítidos e falas legend
+- 05/10 01:09 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 01:09 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 05/10 01:09 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 01:10 atefalhar: 79 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 01:10 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 01:37 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: The Worst Era Of Nickelodeon
+- 05/10 01:38 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 01:38 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 01:38 truque.importado: 13 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 05/10 01:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — 
+- 05/10 01:39 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 01:39 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 01:39 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 01:39 atefalhar: 79 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 01:39 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 02:17 [!] Drive labzirkonart: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url
+- 05/10 02:19 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 02:19 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 02:20 truque.importado: 12 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 05/10 02:21   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — 
+- 05/10 02:21 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 02:21 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 02:21 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 02:55 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 02:55 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 02:56 truque.importado: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 02:56   · chaves esgotadas — LE SSERAFIM’s HUH YUNJIN on Her Skin Care Routine & Eyelash  — 
+- 05/10 02:56   · chaves esgotadas — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — 
+- 05/10 02:56   · chaves esgotadas — [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS — 
+- 05/10 02:56   · chaves esgotadas — I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B — 
+- 05/10 02:56   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 05/10 02:56   · chaves esgotadas — KPOP IDOL MAKEUP TRANSFORMATION ♡ hair & makeup tips — 
+- 05/10 02:56   · chaves esgotadas — K-pop makeup artist does my makeup — 
+- 05/10 02:57   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 05/10 02:57   · chaves esgotadas — 키오프 하늘이랑 조잘조잘 메이크업😘 골져스 하늘이 보러오세요👸🏻✨🩵 KISS OF LIFE HANEUL l  — 
+- 05/10 02:57   · chaves esgotadas — 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌 — 
+- 05/10 02:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 02:57 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 02:57 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 02:57 atefalhar: 162 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 05/10 02:57   · 4 — The Moment Avatar: The Last Airbender Became A Masterpiece — O video e um ensaio critico profundo e dramatico sobre narrativa e trauma, fugindo do foco
+- 05/10 02:57   · chaves esgotadas — 13 Genius Details in Dragon Ball Sparking Zero! (Tenkaichi 4 — 
+- 05/10 02:58   · chaves esgotadas — 15 Crazy Details in Dragon Ball Sparking Zero! (Tenkaichi 4) — 
+- 05/10 02:58   · chaves esgotadas — Dragon Ball: The Original Plans for GT — 
+- 05/10 02:58   · chaves esgotadas — 10 Obscure Pokemon Facts You DON'T Know — 
+- 05/10 02:58   · 2 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de jogabilidade para um videogame recente (Dragon Ball: Sparkin
+- 05/10 02:58 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 03:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 03:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 03:26 truque.importado: 47 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 03:26   · chaves esgotadas — LE SSERAFIM’s HUH YUNJIN on Her Skin Care Routine & Eyelash  — 
+- 05/10 03:26   · chaves esgotadas — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — 
+- 05/10 03:26   · chaves esgotadas — [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS — 
+- 05/10 03:26   · chaves esgotadas — I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B — 
+- 05/10 03:26   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 05/10 03:27   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — KPOP IDOL MAKEUP TRANSFORMATION ♡ hair & makeup tips — 
+- 05/10 03:27   · chaves esgotadas — K-pop makeup artist does my makeup — 
+- 05/10 03:27   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 05/10 03:27   · chaves esgotadas — 키오프 하늘이랑 조잘조잘 메이크업😘 골져스 하늘이 보러오세요👸🏻✨🩵 KISS OF LIFE HANEUL l  — 
+- 05/10 03:27   · chaves esgotadas — 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌 — 
+- 05/10 03:27 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 03:27 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 03:27 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 03:28 atefalhar: 24 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 03:28 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 03:55 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 03:55 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 03:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 03:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 03:56 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 03:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 03:56 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 03:56 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 04:25 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 04:25 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 04:25 semanestesia.pod: 11 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 04:25 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 04:25 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 04:25 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 04:26 truque.importado: 29 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 05/10 04:26   · chaves esgotadas — TWICE's JIHYO on Skin Care & Soft Blush Makeup | Beauty Secr — 
+- 05/10 04:26   · chaves esgotadas — [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS — 
+- 05/10 04:26   · chaves esgotadas — I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B — 
+- 05/10 04:26   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 05/10 04:26   · chaves esgotadas — KPOP IDOL MAKEUP TRANSFORMATION ♡ hair & makeup tips — 
+- 05/10 04:26   · chaves esgotadas — K-pop makeup artist does my makeup — 
+- 05/10 04:26   · chaves esgotadas — 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌 — 
+- 05/10 04:26   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 05/10 04:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 04:26 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 04:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 04:27 atefalhar: 5 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 04:27 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 04:55 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 04:55 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 04:55 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 04:55 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 04:55 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 04:55 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 04:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 04:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 04:56 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 04:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 04:56 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 04:56 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 05:25 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 05:25 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 05:25 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 05:25 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 05:25 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 05:25 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 05:26 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 05:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 05:26 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 05:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 05:26 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 05:26 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 05:55 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 05:55 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 05:55 semanestesia.pod: 6 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 05:55 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 05:55 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 05:55 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 05:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 05:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 05:56 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 05:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 05:56 atefalhar: 5 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 05:56 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 06:25 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 06:25 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 06:26 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 06:26 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 06:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 06:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 06:26 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 06:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 06:26 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 06:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 06:26 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 06:26 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 06:55 semanestesia.pod: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 06:55 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 06:56 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 06:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 06:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 06:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 06:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 06:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 06:56 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 06:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 06:56 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 05/10 06:56 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 07:26 semanestesia.pod: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 07:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 07:26 semanestesia.pod: 92 no radar, 17 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 07:26   · 7.2 — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — O conteúdo sobre neurociência da procrastinação é bem estruturado e autocontido, mas o for
+- 05/10 07:26   · 7 — how to actually quit any addiction in 9 minutes (explained b — O conteúdo sobre vício e dopamina é excelente para o tema, mas o formato de animação simpl
+- 05/10 07:27   · 7.5 — How to Control Your BRAIN 🤯| Neuroscience Explained | Prasha — O conteudo tem excelente dinamica visual e foca em controle mental e dopamina, mas e apres
+- 05/10 07:28   · 4 — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — O vídeo é um resumo animado de livro com desenhos de palito e não um corte de podcast ou e
+- 05/10 07:28   · 5.5 — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — Embora aborde neurociência e disciplina, o formato é vlog explicativo suave e não podcast/
+- 05/10 07:28   · 4 — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — O vídeo é um monólogo estilo ensaio bíblico com neurociência, distante do formato de podca
+- 05/10 07:28   · 4 — Give Me 15 Minutes, You’ll D.E.T.O.X Your Brain Rot !! — O vídeo é um ensaio solo em hindi com pausas longas e formato tutorial, fugindo do padrão 
+- 05/10 07:29   ✅ 9.5 — I Tried Andrew Huberman's Morning Routine for 30 Days — Excelente fonte com explicações diretas do Huberman e testes práticos dinâmicos perfeitos 
+- 05/10 07:29   · 2 — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — O material é uma animação 2D de resumo de livro em híndi, fugindo totalmente do formato de
+- 05/10 07:29   · 3 — Neuroscience based Tricks to leave phone addiction | Dr Raks — Trata-se de uma videoaula indiana com lousa digital para estudantes de medicina (NEET), fu
+- 05/10 07:29 ⬇️ semanestesia.pod: 1 no JDownloader
+- 05/10 07:29 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 07:29 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 07:30 truque.importado: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 07:31   ✅ 9 — LE SSERAFIM’s HUH YUNJIN on Her Skin Care Routine & Eyelash  — O vídeo é excelente e está perfeitamente no tema, apresentando a Huh Yunjin do LE SSERAFIM
+- 05/10 07:31   · 7 — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — Tutorial oficial da Kazuha do LE SSERAFIM com rotina detalhada, closes claros e otimos cor
+- 05/10 07:32   · 7 — [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS — Risabae maquia Yoshi do TREASURE com técnica detalhada, interação dinâmica e excelentes mo
+- 05/10 07:33   · 7 — I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B — Apresenta a maquiadora Risabae recriando o visual da Jisoo do BLACKPINK com detalhes tecni
+- 05/10 07:33   · 7.5 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — Mostra técnicas reais de maquiadora de idols (Eunbi ssem) com ótimos closes e narração det
+- 05/10 07:34   · 7 — KPOP IDOL MAKEUP TRANSFORMATION ♡ hair & makeup tips — Apresenta técnicas diretas da maquiadora de idols com ótimos closes e explicações modulare
+- 05/10 07:34   · 7 — K-pop makeup artist does my makeup — O vídeo traz maquiadora real de idols do IVE com passos detalhados em close-up e ótima nar
+- 05/10 07:34   · 3 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo é um tutorial de maquiagem geek-chic da criadora Pony, sem relação direta ou mençã
+- 05/10 07:35   · 7 — 키오프 하늘이랑 조잘조잘 메이크업😘 골져스 하늘이 보러오세요👸🏻✨🩵 KISS OF LIFE HANEUL l  — Apresenta Risabae maquiando Haneul do KISS OF LIFE com técnicas em close e ótima dinâmica 
+- 05/10 07:35   · 0 — 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌 — O vídeo é um tutorial genérico de maquiagem com estilo idol feito pela Pony, sem a presenç
+- 05/10 07:35 ⬇️ truque.importado: 1 no JDownloader
+- 05/10 07:35 atefalhar: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 07:35 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 05/10 07:36 atefalhar: 162 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 05/10 07:36   · 5.0 — The Moment Avatar: The Last Airbender Became A Masterpiece — O conteudo e um ensaio analitico e dramatico sobre narrativa e traumas dos personagens, di
+- 05/10 07:37   ✅ 9.0 — 13 Genius Details in Dragon Ball Sparking Zero! (Tenkaichi 4 — O vídeo é estruturado em blocos de curiosidades e easter eggs de Dragon Ball com gameplay 
+- 05/10 07:37   ✅ 9.2 — 15 Crazy Details in Dragon Ball Sparking Zero! (Tenkaichi 4) — O vídeo é repleto de curiosidades, easter eggs e detalhes ocultos de Dragon Ball com excel
+- 05/10 07:38   ✅ 9.5 — Dragon Ball: The Original Plans for GT — Excelente acervo de bastidores e conteúdos deletados de Dragon Ball GT, perfeitamente modu
+- 05/10 07:38   · 7.5 — 10 Obscure Pokemon Facts You DON'T Know — O vídeo traz curiosidades e segredos reais de Pokémon dos anos 90/2000 bem divididos em bl
+- 05/10 07:38   · 2 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O conteudo e um guia de dicas de gameplay do jogo Dragon Ball: Sparking! ZERO, fugindo do 
+- 05/10 07:38 ⬇️ atefalhar: 3 no JDownloader
+- 05/10 07:56 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: 13 Genius Details in Dragon Ball Sparking Zero! (Tenkaichi 4
+- 05/10 07:56 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: 15 Crazy Details in Dragon Ball Sparking Zero! (Tenkaichi 4)
+- 05/10 07:57 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Dragon Ball: The Original Plans for GT
+- 05/10 07:57 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: I Tried Andrew Huberman's Morning Routine for 30 Days
+- 05/10 07:58 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: LE SSERAFIM’s HUH YUNJIN on Her Skin Care Routine & Eyelash 
+- 05/10 07:58 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 07:58 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 07:58 semanestesia.pod: 93 no radar, 17 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 07:59   · 7.8 — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — O conteudo traz explicacoes neurocientificas claras e praticas sobre procrastinacao com ot
+- 05/10 07:59   · 5 — how to actually quit any addiction in 9 minutes (explained b — O tema de superação de vícios e dopamina é excelente, mas o formato de animação simples de
+- 05/10 07:59   · 4 — How to Control Your BRAIN 🤯| Neuroscience Explained | Prasha — O vídeo é em hindi no formato de ensaio educativo de YouTuber, fugindo do estilo podcast/e
+- 05/10 08:00   · 4.5 — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — Trata-se de uma animacao explicativa de resumo de livro (Deep Work), fugindo totalmente do
+- 05/10 08:00   · 4 — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — O formato e tom sao de vlog calmo de produtividade feminina com publi integrada, bem dista
+- 05/10 08:01   · 8 — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — O vídeo possui ótimos ganchos e conceitos de neuroplasticidade bem explicados, mas o foco 
+- 05/10 08:01   · 4 — Give Me 15 Minutes, You’ll D.E.T.O.X Your Brain Rot !! — O vídeo é um ensaio/resumo do YouTube em híndi no formato de vídeo-aula/animação, e não um
+- 05/10 08:02   · 3 — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — O vídeo é um resumo animado 2D de livro em hindi, distante do formato de podcast ou entrev
+- 05/10 08:03   · 6 — Neuroscience based Tricks to leave phone addiction | Dr Raks — O tema de vício em celular e neurociência é excelente, mas o formato de lousa estática e a
+- 05/10 08:04   · 8.7 — How to Control Dopamine (You're Destroying Your Mind) — Excelente conteudo sobre dopamina e produtividade com explicacoes visuais e trechos autono
+- 05/10 08:04 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 08:04 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 08:04 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 08:04 truque.importado: 48 no radar, 14 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 08:05   ✅ 10 — KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog — A idol Kazuha do LE SSERAFIM mostra passo a passo sua rotina de maquiagem e skincare com e
+- 05/10 08:05   · 7 — TWICE's JIHYO on Skin Care & Soft Blush Makeup | Beauty Secr — Jihyo do TWICE demonstra sua rotina passo a passo com close e legendas, gerando bons corte
+- 05/10 08:05   · 7 — [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS — Vídeo dinâmico da Risabae maquiando Yoshi do TREASURE, com técnicas detalhadas em close e 
+- 05/10 08:06   · 6 — I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B — O vídeo traz a maquiadora Risabae recriando o visual da Jisoo com boas explicações e close
+- 05/10 08:06   · 0 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não apresenta uma idol de K-pop real, o que desq
+- 05/10 08:08   ✅ 9.5 — KPOP IDOL MAKEUP TRANSFORMATION ♡ hair & makeup tips — Excelente tutorial de maquiagem de idols com técnicas reais da maquiadora da IU e Wonyoung
+- 05/10 08:08   ✅ 9.2 — K-pop makeup artist does my makeup — O vídeo mostra detalhadamente a técnica de maquiagem e cabelo em um salão de K-pop famoso,
+- 05/10 08:09   · 3 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de estilo geek-chic da Pony sem vincular a técnica a uma ido
+- 05/10 08:09   · 7 — 키오프 하늘이랑 조잘조잘 메이크업😘 골져스 하늘이 보러오세요👸🏻✨🩵 KISS OF LIFE HANEUL l  — O video traz a maquiadora Risabae transformando Haneul do KISS OF LIFE com tecnicas detalh
+- 05/10 08:10   · 3 — 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌 — O vídeo aborda uma maquiagem genérica no estilo idol para publicidade, sem focar em uma id
+- 05/10 08:10 ⬇️ truque.importado: 3 no JDownloader
+- 05/10 08:25 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: K-pop makeup artist does my makeup
+- 05/10 08:26 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: KAZUHA's K-Pop Star Skin Care Routine | Beauty Secrets | Vog
+- 05/10 08:26 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: KPOP IDOL MAKEUP TRANSFORMATION ♡ hair & makeup tips
+- 05/10 08:27 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 08:27 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 08:27 semanestesia.pod: 92 no radar, 16 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 08:27   · 5 — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — Embora aborde procrastinação e neurociência com boa estrutura didática, o formato é de vlo
+- 05/10 08:27   · 2 — how to actually quit any addiction in 9 minutes (explained b — Trata-se de uma animação simples/ensaio educativo em desenho 2D, e não de um podcast ou en
+- 05/10 08:27   · 5.0 — How to Control Your BRAIN 🤯| Neuroscience Explained | Prasha — O vídeo é um conteúdo didático do YouTube em híndi com animações e apresentação solo, fugi
+- 05/10 08:28   · 4.5 — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — O vídeo é um resumo ilustrado/animação em estilo cômico do livro Deep Work, fugindo do for
+- 05/10 08:29   · 4 — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — O vídeo possui um tom suave de vlog educacional com patrocínio, distante do estilo forte e
+- 05/10 08:29   · 8 — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — O vídeo aborda neuroplasticidade e mudança de hábitos com bons ganchos e conceitos explica
+- 05/10 08:33   · 4.5 — Give Me 15 Minutes, You’ll D.E.T.O.X Your Brain Rot !! — O conteudo e' um video-ensaio em hindi com b-roll e exercicio guiado, distante do formato 
+- 05/10 08:34   · 3 — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — O vídeo é uma animação didática em 2D com tom amigável, o que foge totalmente da estética 
+- 05/10 08:34   · 2 — Neuroscience based Tricks to leave phone addiction | Dr Raks — Trata-se de uma aula/webinar em hindi com tela de anotações para estudantes do exame NEET,
+- 05/10 08:35   · 8.8 — Why Can’t I Motivate Myself To Work? — Cal Newport aborda procrastinação profunda e 'dopamine sickness' com conceitos práticos e 
+- 05/10 08:35 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 08:35 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 08:35 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 08:35 truque.importado: 48 no radar, 11 ineditos e com alcance, 9 vao ao Gemini
+- 05/10 08:35   · 7 — TWICE's JIHYO on Skin Care & Soft Blush Makeup | Beauty Secr — O vídeo cumpre perfeitamente o tema com a Jihyo demonstrando técnicas detalhadas em close,
+- 05/10 08:36   ✅ 9.5 — LE SSERAFIM’s SAKURA on Hydrating Skin Care and Lash Curling — Sakura do LE SSERAFIM ensina seu passo a passo com closes impecáveis, legendas em inglês e
+- 05/10 08:36   ✅ 9.0 — [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS — O vídeo traz a maquiadora Risabae maquiando Yoshi do TREASURE com ótimos closes técnicos, 
+- 05/10 08:36   ✅ 9.5 — I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B — O vídeo é excelente para o nicho, apresentando a famosa maquiadora Risabae transformando a
+- 05/10 08:37   · 6 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — Contem tecnicas de maquiadora de idols com explicacoes claras, porem divide espaco com out
+- 05/10 08:37   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de maquiagem da influenciadora Pony, sem focar em uma técnic
+- 05/10 08:37   ✅ 9.5 — 키오프 하늘이랑 조잘조잘 메이크업😘 골져스 하늘이 보러오세요👸🏻✨🩵 KISS OF LIFE HANEUL l  — O vídeo é excelente para o canal pois traz a maquiadora Risabae fazendo uma transformação 
+- 05/10 08:38   ✅ 9.2 — 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌 — O vídeo traz um tutorial completo e dinâmico de maquiagem estilo idol de K-pop com a PONY,
+- 05/10 08:38   · 0 — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — O vídeo se passa em um salão famoso de K-pop, mas quem está sendo maquiada é uma influenci
+- 05/10 08:38 ⬇️ truque.importado: 5 no JDownloader
+- 05/10 08:56 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: I HIRED A PROFESSIONAL MAKEUP ARTIST TO TURN ME INTO JISOO B
+- 05/10 08:56 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: LE SSERAFIM’s SAKURA on Hydrating Skin Care and Lash Curling
+- 05/10 08:57 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: [ENG/JPN CC] 너, 내 동생할래..? YG의 보석💎 트레저 요시 메이크업😈🤘 TREASURE YOS
+- 05/10 08:57 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: 키오프 하늘이랑 조잘조잘 메이크업😘 골져스 하늘이 보러오세요👸🏻✨🩵 KISS OF LIFE HANEUL l 
+- 05/10 08:58 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: 🍫K-POP / K-IDOL INSPIRED VALENTINE’S DAY MAKEUP LOOK 로맨틱한 발렌
+- 05/10 08:58 semanestesia.pod: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 08:58 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 05/10 08:58 semanestesia.pod: 92 no radar, 16 ineditos e com alcance, 10 vao ao Gemini
+- 05/10 08:59   · 7 — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — O conteúdo sobre neurociência da procrastinação é bem estruturado em blocos explicativos, 
+- 05/10 08:59   · 6 — how to actually quit any addiction in 9 minutes (explained b — O vídeo aborda disciplina e superação de vícios, mas é uma animação de bonecos de palito e
+- 05/10 08:59   ✅ 9 — How to Control Your BRAIN 🤯| Neuroscience Explained | Prasha — O vídeo aborda neurociência, disciplina e foco com edição extremamente dinâmica e seções a
+- 05/10 09:00   · 6 — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — O vídeo é uma excelente animação didática sobre produtividade, mas destoa do formato de co
+- 05/10 09:01   · 8 — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — O vídeo tem um excelente gancho inicial e aborda neuroplasticidade e hábitos, mas a forte 
+- 05/10 09:01   ✅ 9 — Give Me 15 Minutes, You’ll D.E.T.O.X Your Brain Rot !! — O vídeo é extremamente dinâmico, estruturado em passos claros sobre foco e disciplina, com
+- 05/10 09:02   · 4 — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — O vídeo é um resumo animado em híndi, distante do formato de podcast/entrevista com pessoa
+- 05/10 09:02   · 3 — Neuroscience based Tricks to leave phone addiction | Dr Raks — Formato de videoaula/live com tela digital em hindi e divulgação de curso, fora do estilo 
+- 05/10 09:02   · 8 — Why Can’t I Motivate Myself To Work? — Conteudo muito rico sobre foco e procrastinacao profunda de Cal Newport, com varios trecho
+- 05/10 09:02 ⬇️ semanestesia.pod: 2 no JDownloader
+- 05/10 09:02 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 09:02 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 09:03 truque.importado: 48 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 05/10 09:03   ✅ 9.5 — TWICE's JIHYO on Skin Care & Soft Blush Makeup | Beauty Secr — O vídeo apresenta a Jihyo do TWICE demonstrando detalhadamente sua rotina de maquiagem e s
+- 05/10 09:04   · 6 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — Mostra maquiagem profissional no estilo idol com detalhes visuais, intercalada com rotina 
+- 05/10 09:04   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de maquiagem da influenciadora Pony, sem focar em uma técnic
+- 05/10 09:05   ✅ 9.5 — 해원이 너무 귀여운데 한입만 베어봐ㄷ..😘🍎l 이사배(RISABAE Makeup) — O vídeo é excelente para o nicho, apresentando a idol Haewon do NMIXX no canal da Risabae 
+- 05/10 09:05   · 6 — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — O vídeo apresenta técnicas detalhadas de maquiagem de idol, mas a modelo é uma influenciad
+- 05/10 09:06   · 3 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — Trata-se de um tutorial geral da criadora Pony, sem menção ou foco em técnica de idol de K
+- 05/10 09:06 ⬇️ truque.importado: 2 no JDownloader
+- 05/10 09:25 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: Give Me 15 Minutes, You’ll D.E.T.O.X Your Brain Rot !!
+- 05/10 09:26 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: How to Control Your BRAIN 🤯| Neuroscience Explained | Prasha
+- 05/10 09:26 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: TWICE's JIHYO on Skin Care & Soft Blush Makeup | Beauty Secr
+- 05/10 09:27 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: 해원이 너무 귀여운데 한입만 베어봐ㄷ..😘🍎l 이사배(RISABAE Makeup)
+- 05/10 09:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 09:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 09:27 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 05/10 09:28   · 0 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não apresenta uma idol de K-pop real, o que desq
+- 05/10 09:28   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 05/10 09:28   · 0 — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — O vídeo mostra uma influenciadora japonesa fazendo maquiagem em um salão coreano, mas não 
+- 05/10 09:29   · 0 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial de maquiagem geral da Pony e não foca em uma técnica de idol de K-po
+- 05/10 09:29 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 09:55 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 05/10 09:55 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 05/10 09:56 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 05/10 09:56   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 05/10 09:57   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 05/10 09:57   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 05/10 09:57   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 05/10 09:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 05/10 09:58 [!] Drive principal: The read operation timed out

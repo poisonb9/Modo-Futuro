@@ -58,3 +58,15 @@
 ## 10. Cupons — fonte encontrada
 - Awin `POST /publisher/{id}/promotions` (filtro joined/active/BR) devolve cupom + validade das NOSSAS lojas (testado: 50+, ex. Kabum STREAMER10).
 - AliExpress: API de afiliado já integrada (`engine/aliexpress.py`) tem promoções; a conferir.
+
+## 11. Página /cupons (pedido do dono)
+- `engine/cupons.py`: Awin promotions → `/cupons/` (109 ativos, 53 com código, 17 lojas). Filtro por loja, botão "copiar" código,
+  "vence hoje/amanhã" em vermelho, link `urlTracking` (nosso id). Sem API → usa `estado/cupons.json` (último bom).
+- Gerada em toda publicação (`_por_privacidade` em `publicar_bio.py`), com PostHog: `cupom_copiado`, `cupom_clique`, `cupom_filtro`.
+- Aba "Cupons" na barra de baixo da loja.
+- Próximo: cupons do AliExpress (API já integrada) e card "cupom do dia" no Telegram.
+
+## 12. Resposta a "automatizar DM/interação no TikTok"
+- Acervo: F62331 — **evitar bots de mensagem no TikTok** (limite de contatos, risco de bloqueio). Caminho oficial: **ManyChat × TikTok**
+  (o painel do dono já mostra o banner "TikTok × Manychat"): comentário com palavra-chave → DM automática, pela API oficial.
+- Acervo F27194: responder comentário com VÍDEO (função "Responder com vídeo") converte — pode virar formato semi-automático.

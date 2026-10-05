@@ -40,3 +40,21 @@
 
 ## 6. Anotado para depois
 - ManyChat (Instagram do achadinho já conectado): Claude monta pelo Chrome a automação QUERO → DM, **depois do TikTok redondo**.
+
+## 7. Telegram do dono estava MUDO (achado em 05/10 ~07:15 BRT)
+- **Sintoma:** log do corte: `Telegram falhou: 401 Unauthorized`.
+- **Causa:** `TELEGRAM_BOT_TOKEN` (de 28/07) foi revogado. Vigia de postagem e avisos de corte não chegavam.
+- **Correção:** secrets `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` agora = AchadinhoTotalBot + chat do dono. Testado: `telegram: 200`.
+- **Aberto:** o `.env` local ainda tem o token morto (ver PENDENCIAS_ABERTAS).
+
+## 8. Lembretes que não deixam esquecer
+- `estado/calendario_promocoes.json` (forçado no git: `estado/` é ignorado) + `ferramentas/lembretes.py` + `lembretes.yml` (08:00 BRT).
+- Datas: avisa 14/7/5/3/2/1/0 dias antes. Pendências: `handoff/PENDENCIAS_ABERTAS.md` toda segunda (ou `-f pendencias=1`). Testado: chegou.
+
+## 9. PostHog ponta a ponta
+- Eventos: `produto_clique` (produto, loja, origem), `busca` (termo, resultados), `telegram_clique`; `?eu=1` desliga (opt-out).
+- Mesmo ponto que já gravava no Supabase (`anotarClique`, `anotarBusca`).
+
+## 10. Cupons — fonte encontrada
+- Awin `POST /publisher/{id}/promotions` (filtro joined/active/BR) devolve cupom + validade das NOSSAS lojas (testado: 50+, ex. Kabum STREAMER10).
+- AliExpress: API de afiliado já integrada (`engine/aliexpress.py`) tem promoções; a conferir.

@@ -130,3 +130,18 @@
 **B. Bing Webmaster Tools (2 min):** bing.com/webmasters → entrar com a conta Google → "Importar do Google Search Console" → escolher achadinhototal.com.br. Pronto (o IndexNow já avisa o Bing a cada publicação).
 
 **C. Pinterest (depois):** criar conta Empresa "Achadinho Total", reivindicar o site (Claude põe a meta tag), e Claude gera os pins de /p/ e /melhores/ automaticamente.
+
+### 5.1 Buscadores cadastrados (05/10 ~23h)
+- **Bing Webmaster:** importado do Search Console pelo dono ✅ (dados em até 48 h). IndexNow já avisa o Bing a cada publicação.
+- **Yandex Webmaster:** verificação por arquivo `/yandex_851a481d1b0d7eff.html` (gerado pelo `publicar_bio.py`, `YANDEX_VERIFICACAO`).
+  Dono clica **Verify** depois da próxima publicação. Depois: Indexing → Sitemap files → `https://achadinhototal.com.br/sitemap.xml`.
+
+### 5.2 Próxima onda (consulta +acervo 05/10 ~23h) — ainda NÃO feito
+1. **Autoridade por tema (clusters):** escolher 2–3 nichos (ex.: fones, whey, air fryer) e cobrir TUDO: guia "como escolher", "melhores até R$ Y",
+   comparativos "X vs Y", e as /p/ — todos linkados entre si no momento da publicação.
+2. **Guias com "answer targets":** cada guia responde a pergunta em 2 frases no topo (alvo do trecho em destaque / posição zero) + várias
+   respostas curtas ao longo do texto.
+3. **Backlinks de verdade:** parcerias e menções em sites/fóruns de promoção (Pelando, Promobit, grupos), imprensa local; vídeos dos canais
+   com link para /p/ na descrição (YouTube Shorts conta).
+4. **Imagens no Google Imagens:** alt descritivo + nome de arquivo com o produto (hoje usamos a foto da loja direto).
+5. **Pinterest:** pin por /p/ e /melhores/ (busca visual de compras).

@@ -3383,6 +3383,9 @@ MAPA_P: list = []
 # ⭐ 05/10/2026 IndexNow (Bing, Yandex, Seznam...): a chave mora num .txt na raiz
 # e cada publicacao avisa os enderecos na hora. Chave publica por desenho.
 INDEXNOW_CHAVE = "91ee5d3529b1d9efecfd406d47ade8c3"
+YANDEX_VERIFICACAO = ('<html>'+chr(10)+'    <head>'+chr(10)
+    + '        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'+chr(10)
+    + '    </head>'+chr(10)+'    <body>Verification: 851a481d1b0d7eff</body>'+chr(10)+'</html>'+chr(10))
 
 
 def avisar_indexnow(caminhos: list[str]) -> None:
@@ -3784,6 +3787,9 @@ def publicar_no_ar(html: str, parceiros: str = "",
                                 + list(MAPA_P)),
                     encoding="utf-8")
                 (casa / f"{INDEXNOW_CHAVE}.txt").write_text(INDEXNOW_CHAVE, encoding="utf-8")
+                # ⭐ 05/10/2026 verificacao do Yandex Webmaster (arquivo na raiz; codigo publico por desenho)
+                (casa / "yandex_851a481d1b0d7eff.html").write_text(
+                    YANDEX_VERIFICACAO, encoding="utf-8")
                 for rel, corpo in PAGINAS_P.items():
                     alvo = casa / rel
                     alvo.parent.mkdir(parents=True, exist_ok=True)

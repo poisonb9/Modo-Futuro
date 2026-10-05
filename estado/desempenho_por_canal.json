@@ -1,15 +1,15 @@
 {
-  "medido_em": "2026-10-05T08:52:33",
+  "medido_em": "2026-10-05T09:42:35",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
-      "posts": 259,
+      "posts": 242,
       "views": 7516,
       "mediana_views": 0,
-      "reacoes": 7768,
-      "comentarios": 63,
+      "reacoes": 7469,
+      "comentarios": 62,
       "shares": 51,
-      "engajamento_pct": 104.87,
+      "engajamento_pct": 100.88,
       "posts_recentes": 0,
       "views_recentes": 0,
       "melhores_recentes": []
@@ -40,11 +40,11 @@
       ]
     },
     "truque.importado": {
-      "posts": 117,
+      "posts": 134,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 16501,
-      "comentarios": 113,
+      "reacoes": 16802,
+      "comentarios": 114,
       "shares": 92,
       "engajamento_pct": 0.0,
       "posts_recentes": 31,
@@ -65,14 +65,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 61,
+      "posts": 71,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 731,
-      "comentarios": 7,
-      "shares": 15,
+      "reacoes": 853,
+      "comentarios": 8,
+      "shares": 17,
       "engajamento_pct": 0.0,
-      "posts_recentes": 6,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -81,11 +81,11 @@
         },
         {
           "views": 0,
-          "titulo": "Protocolo"
+          "titulo": "Seu cérebro desiste antes"
         },
         {
           "views": 0,
-          "titulo": "Goggins sem filtro"
+          "titulo": "Protocolo"
         }
       ]
     },

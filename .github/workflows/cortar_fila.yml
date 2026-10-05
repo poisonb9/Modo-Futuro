@@ -132,7 +132,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet fila_cortes.json; then
-            git add fila_cortes.json
+            git add fila_cortes.json; git add -f estado/ab_por_post.jsonl 2>/dev/null || true
             git commit -m "fila de cortes: marca o que foi disparado"
             git push
           else

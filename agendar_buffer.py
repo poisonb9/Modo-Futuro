@@ -545,6 +545,18 @@ def enfileirar(token: str, canal: str, clipe: dict, simular: bool,
     }})["createPost"]
     if d["__typename"] != "PostActionSuccess":
         raise RuntimeError(f"{d['__typename']}: {d.get('message', '')[:160]}")
+    # ⭐ 05/10/2026: guarda o GRUPO do titulo (engine/ab_titulo.py) pelo id do
+    # post no Buffer — ferramentas/views_tiktok.py le' as views pelo mesmo id,
+    # e a leitura A x C x K passa a ser possivel (antes o grupo morria no post.json).
+    try:
+        import json as _j
+        from pathlib import Path as _P
+        with (_P(__file__).resolve().parent / "estado" / "ab_por_post.jsonl").open("a", encoding="utf-8") as f:
+            f.write(_j.dumps({"post_id": d["post"]["id"], "canal_buffer": canal,
+                              "ab": clipe.get("ab_titulo") or "", "titulo_tela": clipe.get("titulo_tela") or "",
+                              "titulo": titulo}, ensure_ascii=False) + "\n")
+    except Exception:  # noqa: BLE001 — anotar nunca derruba o agendamento
+        pass
     return d["post"].get("dueAt") or "sem horário"
 
 

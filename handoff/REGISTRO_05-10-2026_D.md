@@ -219,3 +219,10 @@
 - **Achado:** `cupons.yml` (cron :17) nunca rodou por agendamento → JSON parado desde 10:43. Cupons agora no `precos.yml` (hora em hora).
 - Conferido na prévia: Kabum/Arno em 1400 px e 375 px; link do Telegram correto; 35 cupons da Arno; 14 links internos.
 - Balões de cupom subidos (top 300→180 px) para o "clique aqui" não cobrir o anúncio; /cupons e /top10 sem barra → 301 (Search Console).
+
+## 33. Search Console + arrumação dos balões
+- Search Console: propriedade de Domínio JÁ existia e verificada. /cupons/ testada ao vivo = disponível, indexação SOLICITADA
+  (o 404 da 1ª tentativa foi o instante da publicação). Sitemap reenviado (`https://achadinhototal.com.br/sitemap.xml` — em propriedade
+  Domínio precisa do endereço INTEIRO; "sitemap.xml" sozinho dá "endereço inválido"). No ar: 27 endereços.
+- Balões (pedido do dono, "muito embolado"): saíram %, etiqueta (o "de cupom") e chapéu de chef; estrelas em destaque no alto
+  (`.estrela-centro` top 18px, 124px, ao lado do "INAUGURAÇÃO"); cupons de desconto mantidos no lugar. Backup %TEMP%/claude/todos_antes_estrelas.html.

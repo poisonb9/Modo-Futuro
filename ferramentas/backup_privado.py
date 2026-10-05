@@ -8,7 +8,7 @@ que são 1,9 GB e já vivem no Drive), `.env*`, `token*.json`, `*token*.txt`,
 `client_secrets*.json`, `credentials.json`.
 Sai: um .zip em Drive reserva > pasta BACKUP_PRIVADO, nome com a data; guarda os
 8 mais novos (2 meses). Roda toda segunda 09:00 pela tarefa do Windows
-`clip_engine_backup_privado` (ferramentas/backup_privado_agendado.ps1).
+`clip_engine_backup_privado` (Agendador do Windows, criada em 05/10/2026 com OK do dono).
 
 ⚠️ O zip tem segredos: a pasta no Drive é PRIVADA da conta reserva (nunca compartilhar).
 

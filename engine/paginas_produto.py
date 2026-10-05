@@ -244,7 +244,7 @@ def pagina_produto(p: dict, s: dict, parecidos: list[dict], cupons_loja: tuple[s
                f'<a class="btn" data-ev="p_cupom" href="/cupons/{sl}/">Ver cupons da {e(nl)} →</a></section>')
     topo_fora = ('<section class="cx fora"><b>Não encontramos mais este preço na loja.</b> O produto pode ter saído de linha '
                  'ou mudado de anúncio. Veja os parecidos abaixo ou ative o aviso para saber se voltar.</section>') if fora else ""
-    par = "".join(f'<a href="/p/{x["pg"]}/"><img src="{e(x["imagem"].replace("http://", "https://", 1))}" alt="" loading="lazy">'
+    par = "".join(f'<a href="/p/{x["pg"]}/"><img src="{e(x["imagem"].replace("http://", "https://", 1))}" alt="{e(x["nome"][:100])}" loading="lazy">'
                   f'{e(x["nome"][:60])}<b>{e(x["preco"])}</b></a>' for x in parecidos)
     corpo = f"""{topo_fora}<section class="cx prod"><img src="{e(img)}" alt="{e(nome[:100])}" width="220" height="220">
 <div><span class="selo{' bom' if bom else ''}">{e(selo)}</span>
@@ -306,7 +306,7 @@ def pagina_lista(l: dict, quando: str, mes: str) -> str:
     for i, p in enumerate(l["itens"], 1):
         s = estatisticas(p["_dias"], _num(p["preco"]))
         selo, _ = veredito(s, _num(p["preco"]))
-        linhas.append(f'<tr><td>{i}</td><td><img src="{e(p["imagem"].replace("http://", "https://", 1))}" alt="" loading="lazy"></td>'
+        linhas.append(f'<tr><td>{i}</td><td><img src="{e(p["imagem"].replace("http://", "https://", 1))}" alt="{e(p["nome"][:100])}" loading="lazy"></td>'
                       f'<td><a href="/p/{p["pg"]}/"><b>{e(p["nome"][:80])}</b></a><br><small>{e(p.get("loja") or "")} · {e(selo)}</small></td>'
                       f'<td><b>{e(p["preco"])}</b></td><td class="esc">{_brl(s["menor"])}</td><td class="esc">{s["n"]} dias</td></tr>')
     top = l["itens"][0]
@@ -458,6 +458,108 @@ GUIAS += [{
         ("Quantos watts para uma caixa de som boa?", "10 a 20 W RMS resolvem sala e área pequena; 5 W basta para quarto e banheiro."),
     ],
 }]
+GUIAS += [{
+    "slug": "como-escolher-suporte-de-celular-para-carro",
+    "termos": ("suporte magnetico", "suporte celular", "suporte para celular"),
+    "fora": ("lavadora", "geladeira", "mesa", "bicicleta", "moto"),
+    "curto": "suporte de celular para carro",
+    "titulo": "Como escolher suporte de celular para carro em {ano} (magnético, ventosa ou saída de ar): guia com preços",
+    "h1": "Como escolher <em>suporte de celular</em> para carro",
+    "desc": "Saída de ar, ventosa ou adesivo no painel? Magnético ou garra? O que funciona com capinha e MagSafe — e os suportes que acompanhamos, com o menor preço já visto.",
+    "resposta": ("Para a maioria dos carros, o suporte magnético de painel (adesivo) ou de saída de ar é o mais prático: encaixa com uma mão e não balança. "
+                 "Se o seu celular é pesado ou a saída de ar é redonda e frágil, prefira ventosa no vidro ou painel. "
+                 "Com suporte magnético, a capinha precisa ser fina ou ter MagSafe — senão use a placa metálica que vem junto."),
+    "secoes": [
+        ("1. Onde prender", [
+            "<b>Saída de ar (clipe):</b> barato e fácil; em saída redonda ou frágil pode quebrar a aleta. No inverno o ar quente esquenta o celular.",
+            "<b>Painel com adesivo:</b> firme e no campo de visão; o adesivo é difícil de tirar depois (veja se vem fita 3M).",
+            "<b>Ventosa (vidro ou painel):</b> segura celular pesado; no sol forte a ventosa pode soltar — limpe a superfície antes."]),
+        ("2. Magnético ou garra?", [
+            "<b>Magnético:</b> encaixa e solta com uma mão. Precisa de MagSafe ou da plaquinha metálica entre o celular e a capa.",
+            "<b>Garra (braços que fecham):</b> serve em qualquer celular e capa grossa, mas é mais lento de tirar."]),
+        ("3. MagSafe e carregamento sem fio", [
+            "Plaquinha metálica atrapalha o carregamento por indução. Se você carrega sem fio, prefira capa MagSafe ou suporte de garra."]),
+        ("4. Rotação 360°", [
+            "Útil para alternar entre vertical (mensagens) e horizontal (GPS). Confira se a articulação trava firme — a solta faz o celular cair na lombada."]),
+        ("5. Segurança e lei", [
+            "Posicione sem tapar a visão da via e longe do airbag. Mexer no celular dirigindo continua proibido — o suporte é para ver o GPS."]),
+        ("6. Como não pagar caro", [
+            "Na tabela abaixo, cada suporte mostra o preço de hoje e o menor que já vimos."]),
+    ],
+    "faq": [
+        ("Suporte magnético estraga o celular?", "Não. Os ímãs desses suportes não afetam a memória nem a tela; podem só atrapalhar a bússola enquanto o celular está preso."),
+        ("Suporte magnético funciona com capinha?", "Com capa fina ou MagSafe, sim. Em capa grossa, cole a plaquinha metálica por dentro ou por fora da capa."),
+        ("Qual o melhor suporte de celular para carro?", "Para uso diário, magnético de painel ou saída de ar; para celular pesado ou capa grossa, ventosa com garra."),
+    ],
+}, {
+    "slug": "como-escolher-fita-de-led",
+    "termos": ("fita de led", "fita led"),
+    "fora": (),
+    "curto": "fita de LED",
+    "titulo": "Como escolher fita de LED em {ano} (USB, app, Bluetooth, TV): guia com preços acompanhados",
+    "h1": "Como escolher <em>fita de LED</em>",
+    "desc": "USB ou fonte na tomada, controle por app ou remoto, RGB x branco, TV e quarto — o que olhar antes de comprar fita LED, com o menor preço já visto.",
+    "resposta": ("Para TV, monitor e mesa, a fita LED USB (5 V) é a mais simples: liga na porta USB da TV e acende junto com ela. "
+                 "Para quarto e sanca, prefira fita com fonte na tomada e controle por app (Bluetooth ou Wi-Fi). "
+                 "Meça o comprimento antes — a maioria pode ser cortada nas marcas, mas não emendada sem conector."),
+    "secoes": [
+        ("1. Como ela liga", [
+            "<b>USB (5 V):</b> TV, monitor, carro, mesa. Poucos metros (até ~5 m), brilho moderado.",
+            "<b>Fonte na tomada (12 V/24 V):</b> quarto, sanca, cozinha. Mais metros e mais brilho."]),
+        ("2. Controle", [
+            "<b>Controle remoto (IR):</b> simples, precisa apontar.",
+            "<b>App por Bluetooth:</b> cores, timer e modo música no celular, sem Wi-Fi.",
+            "<b>Wi-Fi:</b> funciona com Alexa/Google e de fora de casa."]),
+        ("3. Cor: RGB, branco ou RGBIC", [
+            "RGB faz todas as cores, mas o \"branco\" sai azulado. Para iluminar de verdade (cozinha, leitura), escolha fita branca quente/fria ou RGBW.",
+            "RGBIC mostra várias cores ao mesmo tempo (efeito arco-íris correndo)."]),
+        ("4. Medida e instalação", [
+            "Meça o contorno antes. Corte só nas marcas (tesourinha). Limpe a superfície com álcool — a fita adesiva solta em parede com poeira ou gordura.",
+            "Em banheiro e área externa, use fita à prova d'água (IP65 ou mais)."]),
+        ("5. Para TV: o tamanho", [
+            "Regra prática: o perímetro da TV em metros. 32\": ~2 m · 43\": ~2,5 m · 50–55\": ~3 m · 65\": ~3,5–4 m."]),
+        ("6. Como não pagar caro", [
+            "Na tabela abaixo, cada fita mostra o preço de hoje e o menor que já vimos."]),
+    ],
+    "faq": [
+        ("Fita LED USB pode ligar na TV?", "Pode: ela usa 5 V da porta USB e acende e apaga junto com a TV."),
+        ("Pode cortar fita de LED?", "Pode, nas marcas indicadas (geralmente a cada 3 LEDs ou a cada 5–10 cm). O pedaço cortado só volta a funcionar com conector."),
+        ("Quantos metros de fita LED para TV de 50 polegadas?", "Cerca de 3 metros para contornar a parte de trás."),
+        ("Fita LED gasta muita energia?", "Não: alguns watts por metro, menos que uma lâmpada comum."),
+    ],
+}, {
+    "slug": "como-escolher-luva-de-academia",
+    "termos": ("luva", "luvas", "grip", "alcas de pulso"),
+    "fora": ("boxe", "ciclismo", "cozinha", "jardinagem", "limpeza"),
+    "curto": "luva de academia",
+    "titulo": "Luva de academia, grip ou strap? Como escolher em {ano}: guia com preços acompanhados",
+    "h1": "Luva, grip ou strap: como escolher para a <em>academia</em>",
+    "desc": "Diferença entre luva, grip (luva sapo/palmar) e strap (alça de pulso), quando cada um ajuda e quando atrapalha — com o menor preço já visto.",
+    "resposta": ("Se o problema é calo e mão escorregando, use um grip (protetor palmar) ou luva fina — protegem a palma sem engrossar a pegada. "
+                 "Se o problema é a pegada cansar antes das costas no levantamento terra e na remada, use strap (alça de pulso). "
+                 "Luva grossa e acolchoada aumenta o diâmetro da barra e pode até diminuir a força de pegada."),
+    "secoes": [
+        ("1. Luva", [
+            "Protege toda a mão e evita calo. Prefira luva fina e com boa aderência; as muito acolchoadas deixam a barra \"mais grossa\".",
+            "Luva com munhequeira (suporte para o punho) ajuda quem sente o punho no supino e no desenvolvimento."]),
+        ("2. Grip (protetor palmar / \"luva sapo\")", [
+            "Cobre só a palma, com furos para os dedos. Protege contra calo e dá aderência sem perder a sensação da barra. Muito usado em barra fixa e crossfit."]),
+        ("3. Strap (alça de pulso)", [
+            "Uma fita que dá a volta na barra e no punho. Serve para puxadas pesadas (terra, remada, puxada) quando a pegada cansa antes do músculo-alvo.",
+            "Não use em todos os exercícios: treinar sem strap também fortalece a pegada."]),
+        ("4. Magnésio", [
+            "O pó/líquido de magnésio absorve o suor e melhora a aderência. Algumas academias não permitem o pó — o grip é a alternativa."]),
+        ("5. Tamanho e lavagem", [
+            "Luva tem que ficar justa (folgada dobra na palma e faz calo). Lave à mão e seque à sombra; neoprene e borracha ressecam no sol."]),
+        ("6. Como não pagar caro", [
+            "Na tabela abaixo, cada item mostra o preço de hoje e o menor que já vimos."]),
+    ],
+    "faq": [
+        ("Luva de academia é necessária?", "Não é obrigatória; ajuda quem tem calo ou mão que escorrega. Para força de pegada, strap é mais útil nas puxadas pesadas."),
+        ("Qual a diferença entre grip e strap?", "Grip protege a palma e melhora a aderência; strap é uma alça que prende o punho à barra para a pegada não falhar."),
+        ("Luva tira calo da academia?", "Ajuda a prevenir; luva justa e fina ou grip protegem melhor do que luva grossa e folgada."),
+    ],
+}]
 
 def _do_guia(g: dict, p: dict) -> bool:
     # palavra inteira no começo do termo: "fone" não casa "telefone"
@@ -476,7 +578,7 @@ def pagina_guia(g: dict, itens: list[dict], listas: list[dict], ano: int, quando
     for x in sorted(itens, key=lambda x: _num(x["preco"]))[:20]:
         st = estatisticas(x["_dias"], _num(x["preco"]))
         selo, _ = veredito(st, _num(x["preco"]))
-        linhas.append(f'<tr><td><img src="{e(x["imagem"].replace("http://", "https://", 1))}" alt="" loading="lazy"></td>'
+        linhas.append(f'<tr><td><img src="{e(x["imagem"].replace("http://", "https://", 1))}" alt="{e(x["nome"][:100])}" loading="lazy"></td>'
                       f'<td><a href="/p/{x["pg"]}/"><b>{e(x["nome"][:80])}</b></a><br><small>{e(x.get("loja") or "")} · {e(selo)}</small></td>'
                       f'<td><b>{e(x["preco"])}</b></td><td class="esc">{_brl(st["menor"])}</td></tr>')
     tab = (f'<section class="cx"><h2>Os modelos que acompanhamos (preços de {e(quando)})</h2><table><tr><th></th><th>Produto</th>'
@@ -549,7 +651,7 @@ def gerar(cartoes: list[dict], por_dia: dict, bot: str = "") -> tuple[dict[str, 
         viz = [x for x in por_area[p.get("canal") or "Ofertas"] if x is not p][:6]
         c = cup.get((p.get("loja") or "").lower())
         saida[f"p/{p['pg']}/index.html"] = pagina_produto(p, s, viz, c, bot, quando)
-        mapa.append((f"/p/{p['pg']}/", s["pontos"][-1][0]))
+        mapa.append((f"/p/{p['pg']}/", s["pontos"][-1][0], p["imagem"].replace("http://", "https://", 1), p["nome"]))
         slugs[str(p["id"])] = p["pg"]
         reg[str(p["id"])] = {k: p.get(k) for k in ("nome", "preco", "imagem", "loja", "canal", "id", "pg")} | {
             "_dias": p["_dias"], "visto": agora.date().isoformat()}

@@ -145,3 +145,12 @@
    com link para /p/ na descrição (YouTube Shorts conta).
 4. **Imagens no Google Imagens:** alt descritivo + nome de arquivo com o produto (hoje usamos a foto da loja direto).
 5. **Pinterest:** pin por /p/ e /melhores/ (busca visual de compras).
+
+### 5.3 Estado da "próxima onda" (05/10 ~23h20)
+1. Autoridade por tema — ✅ em andamento: 6 guias (fone, carregador/cabo, caixa de som, suporte carro, fita LED, luva academia), cada um
+   ligado às /p/ do tema e às /melhores/. Novo tema = item em `GUIAS` (engine/paginas_produto.py), só com ≥3 produtos com /p/.
+2. Respostas diretas — ✅ "Resposta rápida" no topo dos guias, "É uma boa hora para comprar?" nas /p/, "Qual comprar?" nas /melhores/.
+3. Links de fora — ⚠️ comprar/automatizar backlinks em outros sites = spam (Google pune). O que é automático e seguro: NOSSOS canais
+   apontando para /p/ (Telegram, descrição dos Shorts, Pinterest quando a API sair) + IndexNow. Manual (dono): Pelando/Promobit/grupos.
+4. Google Imagens — ✅ alt descritivo + sitemap de imagens. (Hospedar a foto com nome-palavra-chave fica para depois: pesa no PC.)
+5. Pinterest — ⏳ assim que a API liberar.

@@ -3404,10 +3404,20 @@ def sitemap_xml(caminhos: list) -> str:
     """`caminhos`: "/x/" (lastmod = hoje) ou ("/x/", "AAAA-MM-DD") com a data REAL."""
     from datetime import date
     hoje = date.today().isoformat()
-    urls = "".join(f"  <url><loc>{DOMINIO}{c}</loc><lastmod>{m}</lastmod></url>" + chr(10)
-                   for c, m in ((x, hoje) if isinstance(x, str) else x for x in caminhos))
+    import html as _h
+
+    def _url(x):
+        # ("/p/x/", lastmod, imagem, legenda) -> com <image:image> (Google Imagens, 05/10/2026)
+        c, m = (x, hoje) if isinstance(x, str) else x[:2]
+        img = ""
+        if not isinstance(x, str) and len(x) >= 3 and x[2]:
+            img = (f"<image:image><image:loc>{_h.escape(x[2])}</image:loc>"
+                   + (f"<image:title>{_h.escape(x[3][:100])}</image:title>" if len(x) > 3 else "") + "</image:image>")
+        return f"  <url><loc>{DOMINIO}{c}</loc><lastmod>{m}</lastmod>{img}</url>" + chr(10)
+    urls = "".join(_url(x) for x in caminhos)
     return ('<?xml version="1.0" encoding="UTF-8"?>' + chr(10)
-            + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + chr(10)
+            + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+            'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' + chr(10)
             + urls + '</urlset>' + chr(10))
 
 
@@ -3825,7 +3835,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
                 print(f"  publicado: {PROJETO_MAE} (site mae)")
                 avisar_indexnow(["/", "/cupons/", "/top10/", "/melhores/"]
                                 + [f"/cupons/{s}/" for s in _slugs_cupons()]
-                                + [c for c, _ in MAPA_P])
+                                + [x[0] for x in MAPA_P])
             finally:
                 shutil.rmtree(casa, ignore_errors=True)
     finally:

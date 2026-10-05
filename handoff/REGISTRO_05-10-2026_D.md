@@ -260,3 +260,10 @@
 - +2 guias: /guias/como-escolher-carregador-rapido-e-cabo-usb-c/ (9 produtos: watts, PD x PPS, GaN, divisão por porta, cabo 60/100/240 W,
   segurança) e /guias/como-escolher-caixa-de-som-bluetooth/ (5: RMS x PMPO, bateria, IPX7, TWS, extras).
 - Bug pego: "fone" casava "telefone" (carregador entrava no guia de fones e saía do de carregadores). `_do_guia` agora compara palavra inteira.
+
+## 37. Backup automático + Google Imagens + 3 guias
+- Dono rodou o 1º backup (`ferramentas/backup_privado.py`) e AUTORIZOU automatizar. Tarefa do Windows `clip_engine_backup_privado`:
+  toda segunda 09:00 → zip (docs de _privado + .env + tokens) no Drive reserva/BACKUP_PRIVADO, guarda 8.
+- Google Imagens (+acervo: alt e nome descritivos): todas as fotos de /p/, /melhores/ e /guias/ com alt = nome do produto;
+  sitemap com `<image:image>` (loc + title) em cada /p/ (namespace image no urlset).
+- +3 guias: suporte de celular para carro (4), fita de LED (4), luva/grip/strap de academia (6). Total: 6 guias.

@@ -3472,6 +3472,14 @@ def _carimbar(html: str) -> tuple[str, str]:
 
 def _por_privacidade(pasta: Path, privacidade: str) -> None:
     """A rota `/privacidade`, em toda pasta que vai pro ar."""
+    # ⭐ 05/10/2026: /cupons (Awin, conferido a cada publicacao). Ver engine/cupons.py.
+    try:
+        from engine import cupons as _cup
+        (pasta / "cupons").mkdir(exist_ok=True)
+        (pasta / "cupons" / "index.html").write_text(
+            _com_posthog(_cup.pagina_html()), encoding="utf-8")
+    except Exception as e:
+        print(f"  [!] /cupons nao saiu: {str(e)[:80]}")
     if privacidade:
         (pasta / "privacidade").mkdir(exist_ok=True)
         (pasta / "privacidade" / "index.html").write_text(

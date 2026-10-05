@@ -3063,6 +3063,7 @@
          queda num botao que agora fala de recorde/instantaneo. -->
     <a href="#" data-aba="quedas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg><span class="aba-rotulo">Instantâneos</span></a>
     <a href="#" data-aba="lojas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/></svg><span class="aba-rotulo">Lojas</span></a>
+    <a href="/cupons/" data-aba="cupons"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v4a2 2 0 000 4v4H3v-4a2 2 0 000-4zM10 7v12" stroke-dasharray="2 2"/></svg><span class="aba-rotulo">Cupons</span></a>
     <a href="https://t.me/achadinhototal" target="_blank" rel="noopener" data-aba="telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg><span class="aba-rotulo">Telegram</span></a>
   </nav>
 </div>
@@ -6107,7 +6108,7 @@
     if (!nav) { return; }
     nav.addEventListener("click", function (ev) {
       var a = ev.target.closest("a[data-aba]");
-      if (!a || a.getAttribute("data-aba") === "telegram") { return; }
+      if (!a || a.getAttribute("data-aba") === "telegram" || a.getAttribute("data-aba") === "cupons") { return; }
       ev.preventDefault();
       var qual = a.getAttribute("data-aba");
       // 19/09 (video do Bryan, "ta estranho"): redesenhar e DEPOIS rolar fazia

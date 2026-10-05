@@ -127,3 +127,10 @@
   (ilegível em tela pequena, sem texto para leitor de tela/Google, troca de texto exige arte nova).
   Celular: largura do cartão, quebra em 2 linhas (medido: 0 botões cortados em 375 px).
 - Pódio 1/2/3 ouro/prata/bronze e moldura EM VOLTA da foto (nunca por cima — a foto é a do vendedor).
+
+## 21. Botões: família + cor de cada loja (opção A do dono)
+- Família de 9 botões (prévia: paginas/previa_botoes.html; imagens do ChatGPT em midia/botoes_originais + botoes_web).
+- Loja principal (todos.html, `CTA_LOJA`): o CTA de cada cartão tem a COR DA LOJA e o nome ("Ver na Nike"):
+  ML amarelo, Ali vermelho, Nike preto, Kabum laranja/azul, Drogal azul, Clovis vermelho-escuro, Oceane rosa,
+  Soldiers verde/ouro, Lauri azul, Guess preto/vermelho, Stanley verde, Arno vermelho; fora do mapa = ouro da casa.
+  Prévia comparando hoje × A × B: paginas/previa_botoes_lojas.html. Loja nova aprovada: acrescentar em `CTA_LOJA`.

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prévia — botão com a cor de cada loja</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--tinta:#14131a;--suave:#6b6878;--fundo:#f7f4ec;--linha:#ece6d6}
+*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--tinta);font:15px/1.5 Poppins,sans-serif;padding:24px 16px 60px}
+h1{font-size:24px;margin:0 0 4px}p.sub{color:var(--suave);margin:0 0 20px;max-width:760px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--suave);margin:28px 0 10px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;max-width:1150px}
+.cartao{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.ft{height:110px;border-radius:12px;background:linear-gradient(135deg,#f3f1ea,#e7e3d8);display:grid;place-items:center;font-size:40px}
+.nome{font-size:13px;line-height:1.3;min-height:34px}.p{font:800 20px Poppins}.loja{font-size:12px;color:var(--suave)}
+/* base */
+.cta{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:44px;margin-top:6px;padding:0 10px;
+ border-radius:999px;font:800 12.5px/1.1 Poppins,sans-serif;letter-spacing:.3px;text-transform:uppercase;text-decoration:none;text-align:center;
+ border:2px solid transparent;overflow:hidden;transition:transform .15s,filter .15s}
+.cta::before{content:"";position:absolute;left:8%;right:8%;top:2px;height:42%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));pointer-events:none}
+.cta:hover{transform:translateY(-1px);filter:brightness(1.05)}
+/* hoje */
+.cta.hoje{background:#f3d77a;color:#17161d;text-transform:none;font-weight:700}
+.cta.hoje::before{display:none}
+/* lojas (cores aproximadas das marcas) */
+.l-ml{color:#2d3277;background:linear-gradient(180deg,#fff59a,#ffe600 55%,#f2d600);border-color:#2d3277}
+.l-ali{color:#fff;background:linear-gradient(180deg,#ff6a4d,#ff4747 45%,#e62e04);border-color:#b21f00}
+.l-nike{color:#fff;background:linear-gradient(180deg,#3a3a3a,#111 55%,#000);border-color:#000}
+.l-kabum{color:#fff;background:linear-gradient(180deg,#ff8a3d,#ff6500 55%,#e85a00);border-color:#0060b1}
+.l-drogal{color:#fff;background:linear-gradient(180deg,#4fb0e8,#0a88d2 55%,#0072b8);border-color:#005a91}
+.l-clovis{color:#fff;background:linear-gradient(180deg,#e04848,#c8102e 55%,#a50d26);border-color:#7d0a1c}
+.l-oceane{color:#fff;background:linear-gradient(180deg,#f58bb6,#e8578f 55%,#d43f7a);border-color:#a92d5e}
+.l-soldiers{color:#f6d977;background:linear-gradient(180deg,#3b4a2a,#26321a 55%,#1a2311);border-color:#c9a227}
+.l-lauri{color:#fff;background:linear-gradient(180deg,#3d7bdc,#1f5fc6 55%,#164aa0);border-color:#0f377a}
+.l-guess{color:#fff;background:linear-gradient(180deg,#333,#111 55%,#000);border-color:#c8102e}
+.l-stanley{color:#fff;background:linear-gradient(180deg,#2f7a52,#1b5e3b 55%,#124a2d);border-color:#0b3520}
+.l-arno{color:#fff;background:linear-gradient(180deg,#f04a4a,#d71920 55%,#b5121a);border-color:#8a0c12}
+.l-ouro{color:#f6d977;background:linear-gradient(180deg,#2a2a2e,#0b0b0d 55%,#000);border-color:#d4a937}
+.l-ouro::before{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0))}
+@media(max-width:560px){.grade{grid-template-columns:1fr 1fr}.cta{font-size:11px}}
+</style>
+<h1>Botão com a cor de cada loja</h1>
+<p class="sub">Primeiro, como é HOJE (todos iguais, "Comprar agora"). Depois, a opção A: cada loja com a sua cor. Por último, a opção B: só Mercado Livre e AliExpress com cor própria, o resto no ouro da casa. Cores aproximadas das marcas.</p>
+
+<h2>Hoje</h2>
+<div class="grade">
+ <div class="cartao"><div class="ft">🎧</div><div class="nome">Fone Bluetooth</div><div class="p">R$ 89,90</div><div class="loja">AliExpress</div><a class="cta hoje" href="#">Comprar agora</a></div>
+ <div class="cartao"><div class="ft">👟</div><div class="nome">Tênis Air Max</div><div class="p">R$ 499,99</div><div class="loja">Nike</div><a class="cta hoje" href="#">Comprar agora</a></div>
+ <div class="cartao"><div class="ft">🖥️</div><div class="nome">Monitor 24"</div><div class="p">R$ 699,90</div><div class="loja">Kabum</div><a class="cta hoje" href="#">Comprar agora</a></div>
+</div>
+
+<h2>Opção A — cada loja com a sua cor</h2>
+<div class="grade">
+ <div class="cartao"><div class="ft">💪</div><div class="nome">Creatina 300 g</div><div class="p">R$ 49,90</div><div class="loja">Mercado Livre</div><a class="cta l-ml" href="#">Ver no Mercado Livre →</a></div>
+ <div class="cartao"><div class="ft">🎧</div><div class="nome">Fone Bluetooth</div><div class="p">R$ 89,90</div><div class="loja">AliExpress</div><a class="cta l-ali" href="#">Ver no AliExpress →</a></div>
+ <div class="cartao"><div class="ft">👟</div><div class="nome">Tênis Air Max</div><div class="p">R$ 499,99</div><div class="loja">Nike</div><a class="cta l-nike" href="#">Ver na Nike →</a></div>
+ <div class="cartao"><div class="ft">🖥️</div><div class="nome">Monitor 24"</div><div class="p">R$ 699,90</div><div class="loja">Kabum</div><a class="cta l-kabum" href="#">Ver na Kabum →</a></div>
+ <div class="cartao"><div class="ft">💊</div><div class="nome">Vitamina D 60 caps</div><div class="p">R$ 29,90</div><div class="loja">Drogal</div><a class="cta l-drogal" href="#">Ver na Drogal →</a></div>
+ <div class="cartao"><div class="ft">👞</div><div class="nome">Sapatênis couro</div><div class="p">R$ 159,90</div><div class="loja">Clovis</div><a class="cta l-clovis" href="#">Ver na Clovis →</a></div>
+ <div class="cartao"><div class="ft">💄</div><div class="nome">Base líquida</div><div class="p">R$ 59,90</div><div class="loja">Oceane</div><a class="cta l-oceane" href="#">Ver na Oceane →</a></div>
+ <div class="cartao"><div class="ft">🥤</div><div class="nome">Whey 900 g</div><div class="p">R$ 119,90</div><div class="loja">Soldiers Nutrition</div><a class="cta l-soldiers" href="#">Ver na Soldiers →</a></div>
+ <div class="cartao"><div class="ft">⚽</div><div class="nome">Chuteira society</div><div class="p">R$ 199,90</div><div class="loja">Lauri Esporte</div><a class="cta l-lauri" href="#">Ver na Lauri →</a></div>
+ <div class="cartao"><div class="ft">👜</div><div class="nome">Bolsa tiracolo</div><div class="p">R$ 399,90</div><div class="loja">Guess</div><a class="cta l-guess" href="#">Ver na Guess →</a></div>
+ <div class="cartao"><div class="ft">🥤</div><div class="nome">Copo térmico 1,2 L</div><div class="p">R$ 249,90</div><div class="loja">Stanley</div><a class="cta l-stanley" href="#">Ver na Stanley →</a></div>
+ <div class="cartao"><div class="ft">🍳</div><div class="nome">Air fryer 4 L</div><div class="p">R$ 399,90</div><div class="loja">Arno</div><a class="cta l-arno" href="#">Ver na Arno →</a></div>
+</div>
+
+<h2>Opção B — só ML e Ali com cor; o resto no ouro da casa</h2>
+<div class="grade">
+ <div class="cartao"><div class="ft">💪</div><div class="nome">Creatina 300 g</div><div class="p">R$ 49,90</div><div class="loja">Mercado Livre</div><a class="cta l-ml" href="#">Ver no Mercado Livre →</a></div>
+ <div class="cartao"><div class="ft">🎧</div><div class="nome">Fone Bluetooth</div><div class="p">R$ 89,90</div><div class="loja">AliExpress</div><a class="cta l-ali" href="#">Ver no AliExpress →</a></div>
+ <div class="cartao"><div class="ft">👟</div><div class="nome">Tênis Air Max</div><div class="p">R$ 499,99</div><div class="loja">Nike</div><a class="cta l-ouro" href="#">Ver na Nike →</a></div>
+ <div class="cartao"><div class="ft">🖥️</div><div class="nome">Monitor 24"</div><div class="p">R$ 699,90</div><div class="loja">Kabum</div><a class="cta l-ouro" href="#">Ver na Kabum →</a></div>
+ <div class="cartao"><div class="ft">💄</div><div class="nome">Base líquida</div><div class="p">R$ 59,90</div><div class="loja">Oceane</div><a class="cta l-ouro" href="#">Ver na Oceane →</a></div>
+ <div class="cartao"><div class="ft">⚽</div><div class="nome">Chuteira society</div><div class="p">R$ 199,90</div><div class="loja">Lauri Esporte</div><a class="cta l-ouro" href="#">Ver na Lauri →</a></div>
+</div>
+</html>

@@ -81,6 +81,20 @@ def _filhas(cat: str) -> list[str]:
             if c["id"] not in ml.FORA]
 
 
+# ⛔ REGRA DO DONO: remedio NAO entra na loja (suplemento sim) — inclusive de pet.
+# 05/10/2026: Bravecto, Simparic, NexGard e Defenza estavam na vitrine (Pet).
+REMEDIO = ("bravecto", "nexgard", "simparic", "credeli", "defenza", "revolution ",
+           "vermifugo", "antipulga", "comp. mastigavel", "dipirona",
+           "paracetamol", "ibuprofeno", "dorflex", "neosaldina", "omeprazol",
+           "antibiotico", "colirio")
+
+
+def _e_remedio(nome: str) -> bool:
+    import unicodedata
+    n = unicodedata.normalize("NFKD", nome or "").encode("ascii", "ignore").decode().lower()
+    return any(r in n for r in REMEDIO)
+
+
 def colher() -> list[dict]:
     vistos: dict[str, dict] = {}
     for cat, area in CATEGORIAS.items():
@@ -108,7 +122,11 @@ def colher() -> list[dict]:
                 }
             print(f"  {alvo} ({area}): +{len(prods)}  total {len(vistos)}")
             time.sleep(0.5)   # o ML limita por aplicacao (429 medido em 16/09)
-    return [p for p in vistos.values() if p["nome"] and p["preco"] > 0 and p["link"]]
+    fora = [p["nome"][:40] for p in vistos.values() if _e_remedio(p["nome"])]
+    if fora:
+        print(f"  remedio fora ({len(fora)}): " + "; ".join(fora[:6]))
+    return [p for p in vistos.values() if p["nome"] and p["preco"] > 0 and p["link"]
+            and not _e_remedio(p["nome"])]
 
 
 def guardar() -> dict:

@@ -36,6 +36,14 @@ NICHOS = {  # area da vitrine -> (slug, titulo, emoji, frase)
     "Pet": ("pet", "Pet", "🐾", "cachorro, gato, acessórios"),
 }
 MINIMO = 6
+# ⛔ 05/10/2026: a categoria do ML "Beleza e Cuidado Pessoal" abria com papel
+# higienico em 1o. Cesta basica nao e' "top de beleza" — fica fora do Top 10.
+FORA = ("papel higien", "fralda", "absorvente", "umedecid", "sabao em po",
+        "amaciante", "detergente", "desodorante aerosol", "aparelho de barbear descart",
+        "lava roupas", "papel toalha", "guardanapo", "saco de lixo", "agua sanitaria",
+        # ⛔ regra do dono: remedio NAO (suplemento sim) — inclusive remedio de pet
+        "bravecto", "nexgard", "simparic", "credeli", "vermifugo", "antipulga",
+        "comp. mastigavel", "comprimido mastigavel", "dipirona", "paracetamol", "ibuprofeno")
 
 
 def _raiz(n: str) -> str:
@@ -54,6 +62,9 @@ def listas() -> dict[str, list[dict]]:
     for p in inst.get("produtos") or []:
         a = p.get("categoria")
         if a not in NICHOS or not p.get("link") or not p.get("imagem"):
+            continue
+        n = unicodedata.normalize("NFKD", p.get("nome") or "").encode("ascii", "ignore").decode().lower()
+        if any(f in n for f in FORA):
             continue
         r = _raiz(p.get("nome") or "")
         if r in vistos.setdefault(a, set()):
@@ -80,7 +91,7 @@ def _cartoes(lista: list[dict], quando: str) -> str:
   <span class="pos">{i}</span>
   <a class="foto" href="{e(p["link"])}" target="_blank" rel="sponsored noopener" data-i="{i}"><img src="{img}" alt="{e(p["nome"][:90])}" loading="{"eager" if i < 3 else "lazy"}"></a>
   <div class="info">
-    <span class="selo-hoje">⚡ Oferta de hoje</span>
+    {'<img class="selo-img" src="/baloes/selo_mais_vendido_p.webp" alt="Mais vendido" width="150">' if i == 1 else '<img class="selo-img" src="/baloes/selo_oferta_de_hoje_p.webp" alt="Oferta de hoje" width="150">'}
     <h3>{e(p["nome"])}</h3>
     <ul class="motivos">{"".join(f"<li>{e(m)}</li>" for m in motivos)}</ul>
     <div class="preco">{f'<s>{_brl(de)}</s>' if 0 < desc <= 60 else ''}<b>{_brl(preco)}</b>{f'<em>-{desc}%</em>' if 0 < desc <= 60 else ''}</div>

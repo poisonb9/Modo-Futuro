@@ -29,7 +29,7 @@ nav.nichos{display:flex;gap:8px;overflow-x:auto;padding:12px;background:rgba(255
 nav.nichos::-webkit-scrollbar{display:none}
 nav.nichos a{flex:0 0 auto;border:1px solid var(--linha);border-radius:999px;padding:7px 14px;color:var(--tinta);text-decoration:none;font-weight:500;font-size:13.5px;white-space:nowrap;background:#fff}
 nav.nichos a.on{background:var(--preto);color:#fff;border-color:var(--preto)}
-.aviso{display:flex;gap:10px;align-items:flex-start;background:#fffbea;border:1px solid #f3e3a6;border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:18px}
+.aviso{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fffbea;border:1px solid #f3e3a6;border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:18px}
 ol.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
 .item{position:relative;display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--caixa);border:1px solid var(--linha);border-radius:20px;padding:16px;transition:transform .2s,box-shadow .2s}
 .item:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(20,16,30,.10)}
@@ -38,13 +38,14 @@ ol.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;g
 .foto{display:block;aspect-ratio:1;border-radius:14px;background:#fff;overflow:hidden;border:1px solid var(--linha)}
 .foto img{width:100%;height:100%;object-fit:contain}
 .info{display:flex;flex-direction:column;gap:6px;min-width:0}
+.selo-img{align-self:flex-start;height:auto;max-width:150px}
 .selo-hoje{align-self:flex-start;display:inline-flex;align-items:center;gap:4px;background:var(--preto);color:var(--ouro2);border-radius:999px;padding:3px 10px;font:700 11px/1.6 Poppins,sans-serif;letter-spacing:.3px;text-transform:uppercase}
 h3{margin:0;font-size:16px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .motivos{margin:0;padding:0 0 0 18px;color:var(--suave);font-size:13px}
 .preco{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .preco s{color:var(--suave);font-size:13px}.preco b{font:800 24px Poppins,sans-serif}.preco em{font-style:normal;background:#e6f6ec;color:#1e8449;border-radius:8px;padding:1px 7px;font-weight:700;font-size:13px}
 small{color:var(--suave);font-size:12px}
-a.ir{align-self:flex-start;margin-top:4px;background:var(--preto);color:#fff;text-decoration:none;border-radius:12px;padding:10px 16px;font-weight:600}
+a.ir{align-self:flex-start;white-space:nowrap;margin-top:4px;background:var(--preto);color:#fff;text-decoration:none;border-radius:12px;padding:10px 16px;font-weight:600}
 a.ir:hover{background:#26232f}
 .item.nicho{display:block;padding:0;border:0;background:none}.item.nicho a.ir{display:block;width:100%;font-size:17px;padding:18px;text-align:left}
 @media(max-width:560px){.item{grid-template-columns:96px 1fr;gap:12px;padding:12px}.preco b{font-size:20px}}
@@ -59,7 +60,7 @@ footer{color:var(--suave);font-size:12px;margin-top:30px;text-align:center}foote
 </div></header>
 <main>
 <nav class="nichos" aria-label="Outros nichos">__NAV__</nav>
-<div class="aviso"><span aria-hidden="true">⏰</span><span><b>Compre hoje:</b> a oferta e o preço podem mudar a qualquer momento na loja. O link já leva direto para o anúncio deste preço.</span></div>
+<div class="aviso"><img src="/baloes/selo_compre_hoje_p.webp" alt="Compre hoje" width="130" style="flex:0 0 auto;height:auto"><span>A oferta e o preço podem mudar a qualquer momento na loja. O link já leva direto para o anúncio deste preço.</span></div>
 <ol class="lista">__ITENS__</ol>
 <footer>A ordem é a dos mais vendidos do próprio Mercado Livre na categoria. Os links são de afiliado: a loja nos paga uma comissão e você não paga nada a mais. <a href="/cupons/">Cupons de desconto</a> · <a href="/privacidade">Privacidade</a></footer>
 </main>

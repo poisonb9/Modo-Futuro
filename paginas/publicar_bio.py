@@ -499,7 +499,19 @@ def _ml_vitrine() -> list[dict]:
     if idade > 48:
         print(f"externos: ml_vitrine tem {idade:.0f}h (> 48h) — Mercado Livre fora")
         return []
-    return inst.get("produtos") or []
+    prods = inst.get("produtos") or []
+    # ⭐ 05/10/2026 (dono): o que as pessoas BUSCAM vira produto visivel
+    # (ferramentas/buscas_para_loja.py -> estado/ml_busca.json).
+    try:
+        ja = {str(p.get("id")) for p in prods}
+        extra = [p for p in json.loads((RAIZ / "estado" / "ml_busca.json").read_text(encoding="utf-8"))
+                 .get("produtos", []) if str(p.get("id")) not in ja]
+        if extra:
+            print(f"externos: +{len(extra)} do ML vindos das BUSCAS do site")
+        prods = prods + extra
+    except (OSError, ValueError):
+        pass
+    return prods
 
 
 def produtos_externos() -> dict[str, dict]:

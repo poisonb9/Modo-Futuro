@@ -36,6 +36,7 @@ $janelaCapa = 'janela_capa=' + [math]::Floor([DateTimeOffset]::UtcNow.ToUnixTime
 $agora = (& git rev-parse 'origin/main:estado/precos_agora.json' 2>$null) + ' ' +
          (& git rev-parse 'origin/main:estado/awin_catalogo.json' 2>$null) + ' ' +
          (& git rev-parse 'origin/main:estado/ml_vitrine.json' 2>$null) + ' ' +
+         (& git rev-parse 'origin/main:estado/ml_busca.json' 2>$null) + ' ' +
          (& git rev-parse 'origin/main:estado/produtos_publicados.jsonl' 2>$null) + ' ' +
          (& git rev-parse 'origin/main:paginas/todos.html' 2>$null) + ' ' +
          (& git rev-parse 'origin/main:paginas/publicar_bio.py' 2>$null) + ' ' +
@@ -72,6 +73,7 @@ $ErrorActionPreference = 'Stop'
 $publicado = (& git rev-parse 'HEAD:estado/precos_agora.json' 2>$null) + ' ' +
              (& git rev-parse 'HEAD:estado/awin_catalogo.json' 2>$null) + ' ' +
              (& git rev-parse 'HEAD:estado/ml_vitrine.json' 2>$null) + ' ' +
+             (& git rev-parse 'HEAD:estado/ml_busca.json' 2>$null) + ' ' +
              (& git rev-parse 'HEAD:estado/produtos_publicados.jsonl' 2>$null) + ' ' +
              (& git rev-parse 'HEAD:paginas/todos.html' 2>$null) + ' ' +
              (& git rev-parse 'HEAD:paginas/publicar_bio.py' 2>$null) + ' ' +

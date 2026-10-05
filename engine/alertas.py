@@ -190,9 +190,15 @@ def colher(updates: list[dict] | None = None) -> int:
             n += 1
             if token():
                 try:
-                    _chamar("sendMessage", chat_id=chat,
-                            text="Combinado! Eu aviso aqui quando o preço cair. "
-                                 "Eu confiro o preço toda hora.")
+                    if pid.startswith(PREFIXO_CUPONS):
+                        loja = pid[len(PREFIXO_CUPONS):].replace("-", " ").title()
+                        txt = ("Combinado! 🎟 Quando sair cupom novo "
+                               + ("de qualquer loja" if loja.lower() == "todas" else f"da {loja}")
+                               + ", eu te mando aqui antes de todo mundo. Eu confiro os cupons de hora em hora.")
+                    else:
+                        txt = ("Combinado! Eu aviso aqui quando o preço cair. "
+                               "Eu confiro o preço toda hora.")
+                    _chamar("sendMessage", chat_id=chat, text=txt)
                 except Exception as e:                # noqa: BLE001
                     print(f"alertas: confirmacao falhou pra {chat}: {e}")
     if maior and updates:
@@ -336,6 +342,62 @@ def sinais_de_hoje() -> dict[str, tuple[str, dict]]:
     return saida
 
 
+# ⭐ 05/10/2026 (dono: "receba os cupons da loja antes de todo mundo").
+#   Mesmo bot e mesmo /start: `alerta_cupons-<slug da loja>` (ou `cupons-todas`).
+#   A cada rodada da nuvem, o que esta' em `estado/cupons.json` e ainda nao foi
+#   avisado (chave = loja + codigo/titulo) vai por DM para quem assinou a loja.
+#   Primeira rodada so' MARCA o que ja' existe (ninguem recebe 100 cupons velhos).
+PREFIXO_CUPONS = "cupons-"
+CUPONS = RAIZ / "estado" / "cupons.json"
+CUPONS_AVISADOS = RAIZ / "estado" / "cupons_avisados.json"
+
+
+def slug_loja(loja: str) -> str:
+    import re
+    import unicodedata
+    g = "AliExpress" if str(loja).lower().startswith("aliexpress") else str(loja)
+    g = unicodedata.normalize("NFKD", g)
+    g = "".join(c for c in g if not unicodedata.combining(c)).lower()
+    return re.sub(r"[^a-z0-9]+", "-", g).strip("-")[:40] or "loja"
+
+
+def avisar_cupons() -> int:
+    try:
+        lista = json.loads(CUPONS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return 0
+    agora = datetime.now(timezone.utc).isoformat()
+    vivos = [c for c in lista if c.get("link") and (not c.get("fim") or c["fim"] > agora)]
+    chave = lambda c: f"{slug_loja(c['loja'])}|{c.get('codigo') or c.get('titulo','')[:80]}"
+    primeira = not CUPONS_AVISADOS.exists()
+    ja = set() if primeira else set(json.loads(CUPONS_AVISADOS.read_text(encoding="utf-8")))
+    novos = [c for c in vivos if chave(c) not in ja]
+    insc = inscricoes()
+    enviados = 0
+    if not primeira and token():
+        for c in novos:
+            sl = slug_loja(c["loja"])
+            quem = insc.get(PREFIXO_CUPONS + sl, set()) | insc.get(PREFIXO_CUPONS + "todas", set())
+            if not quem:
+                continue
+            txt = chr(10).join([
+                f"🎟 Cupom novo — {c['loja']}",
+                c.get("titulo", ""),
+                f"Código: {c['codigo']}" if c.get("codigo") else "Desconto já vem no link",
+                f"👉 {c['link']}",
+                f"Todos os cupons: https://achadinhototal.com.br/cupons/{sl}/"])
+            for chat in quem:
+                try:
+                    _chamar("sendMessage", chat_id=chat, text=txt, disable_web_page_preview=True)
+                    enviados += 1
+                except Exception as e:                    # noqa: BLE001
+                    print(f"cupons: falhou pra {chat}: {e}")
+    ja |= {chave(c) for c in vivos}
+    CUPONS_AVISADOS.write_text(json.dumps(sorted(ja), ensure_ascii=False), encoding="utf-8")
+    print(f"cupons: {len(novos)} novo(s){' (1a rodada: so marcados)' if primeira else ''}; {enviados} aviso(s) enviado(s)")
+    return enviados
+
+
 def main() -> None:
     import argparse
     a = argparse.ArgumentParser(description="avise-me quando cair")
@@ -347,6 +409,7 @@ def main() -> None:
     if o.avisar:
         avisar(sinais_de_hoje())
         lembrar_reposicao()
+        avisar_cupons()
     if not (o.colher or o.avisar):
         insc = inscricoes()
         print(f"{sum(len(v) for v in insc.values())} inscricao(oes) em {len(insc)} produto(s)")

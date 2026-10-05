@@ -47,10 +47,10 @@
 |---|---|---|---|
 | 1a | **Sitemap completo** | `/`, `/cupons/`, `/top10/` + 8 nichos, `/parceiros`, `/privacidade` (11 endereços) | ✅ código 05/10 (`publicar_bio.py`, `TOP10_NICHOS_MAPA`); vai no ar na próxima publicação |
 | 1b | **Google Search Console** | verificar domínio, enviar sitemap, pedir indexação | ⏳ precisa do DONO (login Google) — passo a passo na seção 3 |
-| 1c | **Páginas de cupom por loja** `/cupons/<loja>/` | 17 lojas | ⏳ a construir |
+| 1c | **Páginas de cupom por loja** `/cupons/<loja>/` | 1 por loja COM cupom ativo (hoje 14); título "Cupom <Loja> hoje: N cupons conferidos (mês)", canonical, BreadcrumbList, links internos "Cupons por loja" | ✅ código 05/10 (`engine/cupons.py` `pagina_html(slug)`, `lojas()`); no sitemap |
 | 1d | **Página por produto rastreado** `/p/<slug>/` | histórico de preço, menor em 60 dias, cupom da loja, alerta | ⏳ a construir (começar pelos ~500 com mais série) |
 | 1e | **"Melhores X até R$ Y"** | listas por nicho/faixa a partir do Top 10 + série de preço | ⏳ a construir |
-| 2 | **"Receba os cupons da [loja] antes de todo mundo"** | captura premium (Telegram + e-mail) | ⏳ a construir — lindo, organizado, premium |
+| 2 | **"Receba os cupons da [loja] antes de todo mundo"** | bloco VIP preto/ouro em /cupons/ e em cada /cupons/<loja>/: botão Telegram (`/start alerta_cupons-<loja>`) + e-mail (Supabase `contato`, origem `cupons`) | ✅ código 05/10; aviso automático de cupom novo no Telegram (`engine/alertas.avisar_cupons`, de hora em hora no precos.yml) |
 | 3 | **Mercado Livre na vitrine** | 8 mais vendidos do ML intercalados (1 a cada 2 cartões, máx. 2 por área, sem remédio) + 4 ofertas "muito boas" no topo | ✅ código 05/10 (`misturar_ml_na_vitrine`); testado localmente |
 | 4 | **Prova e confiança** | números reais (preços acompanhados, economia da semana), selo "menor em 60 dias" na 1ª dobra | ⏳ |
 | 5 | **Vídeo → página-ponte** | cada vídeo de oferta leva à `/p/<produto>/` (gráfico + cupom + alerta) | ⏳ depende do 1d |
@@ -100,4 +100,9 @@
 ## 4. Diário de execução
 - 05/10 19 h — diagnóstico (seção 0), consulta ao acervo (seção 1), plano aprovado.
 - 05/10 — sitemap completo (11 endereços) e ML intercalado na vitrine (8 itens, máx. 2 por área): código pronto e testado.
-- (próximo) captura premium "cupons da loja antes de todo mundo" + `/cupons/<loja>/`.
+- 05/10 — lista VIP de cupons + /cupons/<loja>/ (14 lojas) + aviso de cupom novo no Telegram. Conferido na prévia (1400 px e 375 px).
+- 05/10 — ACHADO: `cupons.yml` (cron :17) NUNCA rodou por agendamento (GitHub descarta cron disputado); o JSON do site estava parado
+  desde 10:43. Cupons passaram para dentro do `precos.yml` (roda de hora em hora de fato).
+- 05/10 — ACHADO: a Awin agora devolve promoções de PRODUTO da Kabum (160) além dos cupons → Kabum com 181 itens. Mantido
+  (são ofertas reais, com link), mas avaliar separar "cupom" de "promoção de produto" na página.
+- (próximo) página por produto `/p/<slug>/` (piloto com ~500) e "melhores X até R$ Y"; Search Console (depende do dono).

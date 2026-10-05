@@ -2,8 +2,14 @@
 <html lang="pt-BR">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cupons de desconto — Achadinho Total</title>
-<meta name="description" content="Cupons e promoções ativas das lojas parceiras, conferidos de hora em hora.">
+<title>__TITULO__</title>
+<meta name="description" content="__DESC__">
+<link rel="canonical" href="__CANON__">
+<meta property="og:title" content="__TITULO__">
+<meta property="og:description" content="__DESC__">
+<meta property="og:url" content="__CANON__">
+<meta property="og:type" content="website">
+<script type="application/ld+json">__LDJSON__</script>
 <meta name="theme-color" content="#0f0e13">
 <link rel="icon" href="/icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,30 +88,90 @@ article a.ir:hover{background:#26232f}
 .info .btn-ouro{align-self:stretch}
 @media(max-width:560px){.btn-ouro{padding:12px 12px;font-size:12.5px;letter-spacing:.2px;white-space:normal;text-align:center}}
 footer{color:var(--suave);font-size:12px;margin-top:30px;text-align:center}footer a{color:inherit}
+
+/* ⭐ 05/10/2026 — lista VIP de cupons (premium preto/ouro) */
+.vip{position:relative;overflow:hidden;display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:center;margin:0 0 22px;padding:28px 30px;border-radius:24px;color:#fff;
+ background:radial-gradient(140% 160% at 0% 0%,#3a3220 0%,#14121a 46%,#0b0a0e 100%);border:1px solid rgba(243,215,122,.35);box-shadow:0 24px 60px rgba(20,16,30,.28),inset 0 1px 0 rgba(255,255,255,.06)}
+.vip-brilho{position:absolute;inset:-40% -10% auto auto;width:420px;height:420px;background:radial-gradient(closest-side,rgba(243,215,122,.22),transparent);pointer-events:none;animation:vipluz 6s ease-in-out infinite alternate}
+@keyframes vipluz{from{transform:translate(0,0)}to{transform:translate(-60px,40px)}}
+.vip-esq,.vip-dir{position:relative}
+.vip-selo{display:inline-block;padding:4px 12px;border-radius:999px;border:1px solid rgba(243,215,122,.5);color:var(--ouro2);font:600 11.5px/1.6 ui-monospace,monospace;letter-spacing:1.5px;text-transform:uppercase}
+.vip h2{font:800 clamp(22px,3.2vw,32px)/1.12 Poppins,sans-serif;margin:12px 0 8px;letter-spacing:-.5px;-webkit-line-clamp:unset;display:block}
+.vip h2 em{font-style:normal;background:linear-gradient(90deg,var(--ouro2),var(--ouro) 60%,#fff2c2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vip-sub{color:#cfc8b3;margin:0 0 12px;max-width:520px}.vip-sub b{color:#fff}
+.vip-lista{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px;color:#e9e2cc;font-size:13.5px}
+.vip-lista li::before{content:"✓";color:var(--ouro2);font-weight:800;margin-right:7px}
+.vip-tg{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 18px;border-radius:999px;text-decoration:none;
+ font:800 15px/1 Poppins,sans-serif;letter-spacing:.3px;text-transform:uppercase;color:#14121a;background:linear-gradient(180deg,#ffe9a6 0%,#f3d77a 35%,#d4a937 100%);
+ box-shadow:0 10px 24px rgba(212,169,55,.35),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .15s ease,box-shadow .15s ease}
+.vip-tg[hidden]{display:none}
+.vip-tg svg{width:20px;height:20px}.vip-tg:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(212,169,55,.45),inset 0 1px 0 rgba(255,255,255,.6)}
+.vip-tg:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.vip-ou{display:flex;align-items:center;gap:10px;margin:14px 0 10px;color:#8f887a;font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
+.vip-ou::before,.vip-ou::after{content:"";flex:1;height:1px;background:rgba(243,215,122,.22)}
+.vip-form{display:grid;grid-template-columns:1fr auto;gap:8px}
+.vip-form input[type=email]{min-width:0;padding:13px 14px;border-radius:12px;border:1px solid rgba(243,215,122,.35);background:rgba(255,255,255,.06);color:#fff;font:500 14.5px Poppins,sans-serif}
+.vip-form input[type=email]::placeholder{color:#8f887a}.vip-form input[type=email]:focus{outline:2px solid var(--ouro2);outline-offset:1px}
+.vip-form button{padding:0 18px;border-radius:12px;border:1px solid var(--ouro);background:#000;color:var(--ouro2);font:700 14px Poppins,sans-serif;cursor:pointer}
+.vip-form button:hover{background:#1c1a12}
+.vip-ok{grid-column:1/-1;display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:#a9a28d;line-height:1.4}.vip-ok a{color:inherit}
+.vip-msg{grid-column:1/-1;margin:0;font-size:13px;color:var(--ouro2);min-height:1em}
+.vip-feito{grid-column:1/-1;margin:0;padding:12px 14px;border-radius:12px;background:rgba(243,215,122,.12);color:#fff}
+.isca{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+@media(max-width:760px){.vip{grid-template-columns:1fr;padding:22px 18px;gap:16px}.vip-form{grid-template-columns:1fr}.vip-form button{padding:13px}}
+@media(prefers-reduced-motion:reduce){.vip-brilho{animation:none}.vip-tg{transition:none}}
+.lojas-links{margin-top:36px;padding:20px;border-radius:18px;background:#fff;border:1px solid var(--linha)}
+.lojas-links h2{font-size:16px;margin:0 0 10px;display:block}
+.lojas-links a{display:inline-block;margin:4px 6px 4px 0;padding:6px 12px;border-radius:999px;border:1px solid var(--linha);color:var(--tinta);text-decoration:none;font-size:13px}
+.lojas-links a:hover,.lojas-links a[aria-current=page]{background:var(--preto);color:var(--ouro2);border-color:var(--preto)}
 </style>
 <header class="heroi">
  <div class="varal-bf" aria-hidden="true"><img src="/baloes/bf_porcento_p.webp" alt=""><img src="/baloes/bf_etiqueta_p.webp" alt=""><img src="/baloes/bf_raio_p.webp" alt=""></div>
  <div class="in">
   <a class="volta" href="/">← Achadinho Total</a><br>
   <span class="selo">conferido de hora em hora</span>
-  <h1>Cupons de <em>desconto</em></h1>
-  <p class="sub">Os cupons ativos das lojas parceiras, num lugar só. Copie o código e vá direto para a loja.</p>
+  <h1>__H1__</h1>
+  <p class="sub">__SUB__</p>
   <div class="numeros"><div><b id="n-cup">—</b><span>cupons ativos</span></div><div><b id="n-loj">—</b><span>lojas</span></div><div><b id="n-hj">—</b><span>vencem hoje</span></div></div>
  </div>
 </header>
 <main>
+<section class="vip" id="vip" aria-labelledby="vip-t">
+ <div class="vip-brilho" aria-hidden="true"></div>
+ <div class="vip-esq">
+  <span class="vip-selo">🎟 lista VIP · grátis</span>
+  <h2 id="vip-t">Receba os cupons <span id="vip-loja">__VIP_LOJA__</span> <em>antes de todo mundo</em></h2>
+  <p class="vip-sub">Cupom bom acaba em horas. Eu confiro <b>de hora em hora</b> e te mando o novo assim que ele aparece — só cupom de verdade, nada de spam.</p>
+  <ul class="vip-lista"><li>Aviso na hora, direto no Telegram</li><li>Só das lojas que você escolher</li><li>Sai quando quiser, com 1 toque</li></ul>
+ </div>
+ <div class="vip-dir">
+  <a class="vip-tg" id="vip-tg" href="#" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.5 2.9 11.6c-1 .4-1 1.9.1 2.2l4.6 1.4 1.8 5.6c.3.9 1.4 1.1 2 .4l2.6-2.6 4.7 3.4c.8.6 1.9.1 2.1-.8l3-15.1c.2-1.1-.9-2-2-1.6zM9.6 15l-.5 3.6-1.2-3.9 9.7-7.3L9.6 15z" fill="currentColor"/></svg><span>Quero no Telegram</span></a>
+  <div class="vip-ou"><span>ou por e-mail</span></div>
+  <form class="vip-form" id="vip-form" novalidate>
+   <input type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="seu@email.com" aria-label="Seu e-mail" required>
+   <input class="isca" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+   <button type="submit">Quero receber</button>
+   <label class="vip-ok"><input type="checkbox" required><span>Aceito receber cupons por e-mail, no máximo 1 por dia. Saio quando quiser. <a href="/privacidade">Privacidade</a></span></label>
+   <p class="vip-msg" role="status" aria-live="polite"></p>
+  </form>
+ </div>
+</section>
 <div class="filtros" id="filtros"></div>
 <div class="grade" id="grade"></div>
+<nav class="lojas-links" aria-label="Cupons por loja"><h2>Cupons por loja</h2>__LINKS__</nav>
 <footer>Os links são de afiliado: a loja nos paga uma comissão e você não paga nada a mais. Cupons podem acabar antes do prazo. <a href="/privacidade">Privacidade</a></footer>
 </main>
 <script>
 (function(){
-var DADOS=__DADOS__, filtro="", BAL=["bf_porcento","bf_sacola","bf_raio","bf_etiqueta","bf_presente","bf_lupa"], fixos=[];
+var DADOS=__DADOS__, filtro="__FILTRO__", BOT="__BOT__", SB={url:"https://lwtqfwkfcknzyyzmuymg.supabase.co",anon:"sb_publishable_0jl-vQuNumE-unzla0XMeQ__cz46cqy"}, BAL=["bf_porcento","bf_sacola","bf_raio","bf_etiqueta","bf_presente","bf_lupa"], fixos=[];
 function ev(n,p){try{if(localStorage.getItem("nao_contar")==="1"){window.posthog&&posthog.opt_out_capturing();return}window.posthog&&posthog.capture(n,p||{})}catch(e){}}
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function dias(fim){if(!fim)return 99;var f=new Date(fim),h=new Date();return Math.round((new Date(f.toDateString())-new Date(h.toDateString()))/864e5)}
 function validade(fim){if(!fim)return"sem prazo";var d=dias(fim);return d<=0?"vence hoje":d===1?"vence amanhã":"até "+new Date(fim).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})}
-function grupo(l){return l.indexOf("AliExpress")===0?"AliExpress":l}
+function grupo(l){return l.toLowerCase().indexOf("aliexpress")===0?"AliExpress":l}
+function slug(l){return grupo(l).normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||"loja"}
+function vip(){var t=document.getElementById("vip-tg"),l=document.getElementById("vip-loja");if(!t)return;var s=filtro?slug(filtro):"todas";l.textContent=filtro?"da "+filtro:"das lojas";
+ if(BOT){t.href="https://t.me/"+BOT+"?start=alerta_cupons-"+s;t.hidden=false}else{t.hidden=true}t.dataset.loja=s}
 function sigla(l){var p=grupo(l).replace(/[^A-Za-zÀ-ú ]/g,"").trim().split(/\s+/);return ((p[0]||"?")[0]+(p[1]?p[1][0]:(p[0]||"?")[1]||"")).toUpperCase()}
 function acende(){var g=document.getElementById("grade");if(!g||!fixos.length)return;var r=g.getBoundingClientRect(),p=(innerHeight*.5-r.top)/Math.max(1,r.height);
  var at=(r.top<innerHeight*.6&&r.bottom>innerHeight*.7&&p>=0&&p<1)?Math.min(fixos.length-1,Math.floor(p*fixos.length)):-1;
@@ -121,12 +187,14 @@ function desenhar(lista){
  lista=lista.filter(function(c){return c.link&&(!c.fim||c.fim>agora)})
   .sort(function(a,b){return (!a.codigo)-(!b.codigo)||String(a.fim||"9").localeCompare(String(b.fim||"9"))});
  var lojas={};lista.forEach(function(c){lojas[grupo(c.loja)]=(lojas[grupo(c.loja)]||0)+1});
- document.getElementById("n-cup").textContent=lista.length;document.getElementById("n-loj").textContent=Object.keys(lojas).length;
- document.getElementById("n-hj").textContent=lista.filter(function(c){return c.fim&&dias(c.fim)<=0}).length;
+ var vis=lista.filter(function(c){return !filtro||grupo(c.loja)===filtro});
+ document.getElementById("n-cup").textContent=vis.length;document.getElementById("n-loj").textContent=Object.keys(lojas).length;
+ document.getElementById("n-hj").textContent=vis.filter(function(c){return c.fim&&dias(c.fim)<=0}).length;
  var fs=document.getElementById("filtros");fs.innerHTML="";
  [""].concat(Object.keys(lojas).sort(function(a,b){return lojas[b]-lojas[a]})).forEach(function(l){
   var b=el("button","f",l||"Todas");b.appendChild(el("small",null,l?lojas[l]:lista.length));b.setAttribute("aria-pressed",l===filtro);
   b.onclick=function(){filtro=l;desenhar(lista);ev("cupom_filtro",{loja:l})};fs.appendChild(b)});
+ vip();
  var g=document.getElementById("grade");g.innerHTML="";
  lista.filter(function(c){return !filtro||grupo(c.loja)===filtro}).forEach(function(c){
   var a=el("article"),t=el("div","topo-c"),lj=el("div","loja"),v=validade(c.fim),info=el("div");
@@ -145,6 +213,16 @@ function desenhar(lista){
  setTimeout(baloes,50);
 }
 desenhar(DADOS);
+(function(){var t=document.getElementById("vip-tg"),f=document.getElementById("vip-form");if(!f)return;
+ t.addEventListener("click",function(){ev("vip_cupons_telegram",{loja:t.dataset.loja})});
+ f.addEventListener("submit",function(e){e.preventDefault();var em=f.querySelector("input[type=email]"),ok=f.querySelector("input[type=checkbox]"),m=f.querySelector(".vip-msg"),b=f.querySelector("button"),v=em.value.trim().toLowerCase();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){m.textContent="Confira o e-mail.";em.focus();return}
+  if(!ok.checked){m.textContent="Marque a caixa para eu poder te mandar.";return}
+  if(f.querySelector(".isca").value)return;b.disabled=true;m.textContent="Enviando…";
+  fetch(SB.url+"/rest/v1/contato",{method:"POST",headers:{"apikey":SB.anon,"Authorization":"Bearer "+SB.anon,"Content-Type":"application/json","Prefer":"return=minimal"},
+   body:JSON.stringify({email:v,origem:"cupons",produto:"cupons:"+(t.dataset.loja||"todas")})})
+  .then(function(r){if(!r.ok)throw 0;f.innerHTML='<p class="vip-feito">✓ Pronto! Os próximos cupons vão para <b></b>.</p>';f.querySelector("b").textContent=v;ev("vip_cupons_email",{loja:t.dataset.loja})})
+  .catch(function(){b.disabled=false;m.textContent="Não deu agora. Tente de novo ou use o Telegram."})})})();
 addEventListener("scroll",acende,{passive:true});
 var rz;addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(baloes,300)},{passive:true});
 fetch("__FONTE__?t="+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.length)desenhar(d)}).catch(function(){});

@@ -206,3 +206,15 @@
 - **Sitemap completo:** `publicar_bio.py` agora lista /, /cupons/, /top10/ + 8 nichos, /parceiros, /privacidade (11). `TOP10_NICHOS_MAPA`.
 - **ML na vitrine:** `misturar_ml_na_vitrine()` — 8 mais vendidos do ML intercalados (topo 2.5, 4.5, …), máx. 2 por área
   (1ª versão trouxe 5 tênis de 8), sem remédio, sem nome repetido. Testado: tênis, whey, kit Wella, Galaxy A17, modeladora, microfone.
+
+## 32. Lista VIP de cupons + /cupons/<loja>/ + aviso de cupom novo
+- `engine/cupons_pagina.html`: título/descrição/canonical/og/BreadcrumbList por página; bloco VIP preto/ouro ("Receba os cupons da
+  <loja> antes de todo mundo"): Telegram (`t.me/AchadinhoTotalBot?start=alerta_cupons-<slug>`, troca com o filtro) + e-mail
+  (Supabase `contato`, origem `cupons`, produto `cupons:<slug>`), honeypot, consentimento; números do herói passam a ser da loja filtrada;
+  rodapé "Cupons por loja" com links reais (rastreáveis pelo Google). `grupo()` junta "Aliexpress" (Awin) e "AliExpress" (Ali).
+- `engine/cupons.py`: `lojas()`, `slug()`, `pagina_html(slug, bot)`. Página só para loja com cupom ATIVO (sem página vazia).
+- `paginas/publicar_bio.py`: gera /cupons/<slug>/ e põe no sitemap (`_slugs_cupons()`).
+- `engine/alertas.py`: `/start alerta_cupons-<slug>` com confirmação própria; `avisar_cupons()` manda DM do cupom novo para quem assinou
+  a loja (ou "todas"); 1ª rodada só marca o que já existe (`estado/cupons_avisados.json`).
+- **Achado:** `cupons.yml` (cron :17) nunca rodou por agendamento → JSON parado desde 10:43. Cupons agora no `precos.yml` (hora em hora).
+- Conferido na prévia: Kabum/Arno em 1400 px e 375 px; link do Telegram correto; 35 cupons da Arno; 14 links internos.

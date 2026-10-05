@@ -3352,6 +3352,18 @@ TOP10_NICHOS_MAPA = ("academia", "eletronicos", "beleza", "saude",
                      "casa", "cozinha", "infantil", "pet")
 
 
+def _slugs_cupons() -> list[str]:
+    """Lojas com cupom ativo (as que ganham /cupons/<slug>/). [] se falhar."""
+    try:
+        if str(RAIZ) not in sys.path:
+            sys.path.insert(0, str(RAIZ))
+        from engine import cupons as _cup
+        return list(_cup.lojas())
+    except Exception as e:                                # noqa: BLE001
+        print(f"  [!] sitemap sem /cupons/<loja>: {str(e)[:60]}")
+        return []
+
+
 def sitemap_xml(caminhos: list[str]) -> str:
     from datetime import date
     hoje = date.today().isoformat()
@@ -3601,9 +3613,18 @@ def _por_privacidade(pasta: Path, privacidade: str) -> None:
     # ⭐ 05/10/2026: /cupons (Awin, conferido a cada publicacao). Ver engine/cupons.py.
     try:
         from engine import cupons as _cup
+        try:
+            bot = _bot_alerta()
+        except Exception:                                 # noqa: BLE001
+            bot = ""
         (pasta / "cupons").mkdir(exist_ok=True)
         (pasta / "cupons" / "index.html").write_text(
-            _com_posthog(_cup.pagina_html()), encoding="utf-8")
+            _com_posthog(_cup.pagina_html(bot=bot)), encoding="utf-8")
+        # ⭐ 05/10/2026: /cupons/<loja>/ (SEO "cupom <loja>" + lista VIP por loja)
+        for sl in _cup.lojas():
+            (pasta / "cupons" / sl).mkdir(exist_ok=True)
+            (pasta / "cupons" / sl / "index.html").write_text(
+                _com_posthog(_cup.pagina_html(sl, bot=bot)), encoding="utf-8")
     except Exception as e:
         print(f"  [!] /cupons nao saiu: {str(e)[:80]}")
     if privacidade:
@@ -3721,6 +3742,7 @@ def publicar_no_ar(html: str, parceiros: str = "",
                     # e o Google nao sabia — o mapa tinha so' 2 enderecos.
                     sitemap_xml(["/", "/cupons/", "/top10/"]
                                 + [f"/top10/{n}/" for n in TOP10_NICHOS_MAPA]
+                                + [f"/cupons/{s}/" for s in _slugs_cupons()]
                                 + (["/parceiros"] if parceiros else [])
                                 + ["/privacidade"]),
                     encoding="utf-8")

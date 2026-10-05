@@ -82,6 +82,19 @@ jobs:
       # ⭐ SELO 2 "avise-me quando cair" (17/09/2026): colhe os /start do bot
       # de alertas e avisa quem pediu, na mesma hora em que o preco e'
       # reconferido. `|| true`: sem o secret, o passo so' avisa e segue.
+      # ⭐ 05/10/2026: CUPONS aqui tambem. O cupons.yml (cron :17) NUNCA
+      # disparou por agendamento — o GitHub descarta cron em hora disputada.
+      # Este workflow roda de hora em hora de fato; o aviso "cupom novo" do
+      # passo seguinte le' o JSON recem-gravado.
+      - name: Cupons (Awin + AliExpress)
+        if: always()
+        env:
+          AWIN_TOKEN: ${{ secrets.AWIN_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID }}
+          ALIEXPRESS_APP_KEY: ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+          ALIEXPRESS_TRACKING_ID: ${{ secrets.ALIEXPRESS_TRACKING_ID }}
+        run: python -X utf8 -m engine.cupons --gravar || true
       - name: Alertas (avise-me quando cair)
         # ⭐ 29/09/2026: roda MESMO se a reconferencia falhar (ApiCallLimit do
         # Ali derrubava o passo anterior e ninguem recebia aviso naquela hora).
@@ -100,7 +113,7 @@ jobs:
           # ⚠️ a serie do ML e' escrita por este passo (nao ha' garimpo do ML)
           [ -f estado/precos_vistos.jsonl ] && git add -f estado/precos_vistos.jsonl || true
           # ⭐ as inscricoes e os avisos do "avise-me" (um por um, so' se existir)
-          for f in estado/alertas.jsonl estado/alertas_enviados.json estado/alertas_offset.json; do
+          for f in estado/alertas.jsonl estado/alertas_enviados.json estado/alertas_offset.json estado/cupons_avisados.json estado/cupons.json; do
             [ -f "$f" ] && git add -f "$f" || true
           done
           git diff --cached --quiet && { echo "nenhum preco mudou"; exit 0; }

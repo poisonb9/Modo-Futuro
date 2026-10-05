@@ -130,9 +130,79 @@ def cupons() -> list[dict]:
     return sorted(vivos, key=lambda c: (not c["codigo"], c["fim"] or "9"))
 
 
-def pagina_html() -> str:
-    dados = json.dumps(cupons(), ensure_ascii=False).replace("</", "<\\/")
-    return PAGINA.replace("__DADOS__", dados).replace("__FONTE__", FONTE_VIVA)
+DOMINIO = "https://achadinhototal.com.br"
+MESES = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
+         "agosto", "setembro", "outubro", "novembro", "dezembro")
+
+
+def grupo(loja: str) -> str:
+    return "AliExpress" if loja.lower().startswith("aliexpress") else loja
+
+
+def slug(loja: str) -> str:
+    from engine.alertas import slug_loja
+    return slug_loja(loja)
+
+
+def lojas() -> dict[str, tuple[str, int]]:
+    """{slug: (nome da loja, quantos cupons ativos)} — mais cupons primeiro."""
+    cont: dict[str, list] = {}
+    for c in cupons():
+        g = grupo(c["loja"])
+        cont.setdefault(slug(g), [g, 0])[1] += 1
+    return {k: (v[0], v[1]) for k, v in sorted(cont.items(), key=lambda kv: -kv[1][1])}
+
+
+def pagina_html(loja_slug: str | None = None, bot: str = "") -> str:
+    """/cupons/ (todas) ou /cupons/<slug>/ (uma loja, ja' filtrada).
+
+    ⭐ 05/10/2026 (plano do site que vende, frente 1c + 2): cada loja ganha
+    pagina propria para o Google ("cupom kabum" e' busca de quem esta' pronto
+    para comprar) e a lista VIP "receba antes de todo mundo" (Telegram/e-mail).
+    ⛔ Pagina so' existe para loja com cupom ATIVO — sem cupom, sem pagina
+    (nada de pagina vazia para o Google punir como conteudo fino)."""
+    lista = cupons()
+    todas = lojas()
+    hoje = dt.date.today()
+    mes = f"{MESES[hoje.month - 1]} de {hoje.year}"
+    if loja_slug:
+        nome, n = todas[loja_slug]
+        com_cod = sum(1 for c in lista if slug(grupo(c["loja"])) == loja_slug and c["codigo"])
+        titulo = f"Cupom {nome} hoje: {n} {'cupom' if n == 1 else 'cupons'} conferidos ({mes})"
+        desc = (f"{n} cupons e promoções da {nome} ativos agora"
+                + (f", {com_cod} com código" if com_cod else "")
+                + ". Conferidos de hora em hora — copie o código e vá direto para a loja.")
+        h1 = f"Cupons da <em>{html.escape(nome)}</em>"
+        sub = (f"Os cupons ativos da {html.escape(nome)} agora, conferidos de hora em hora. "
+               "Copie o código e vá direto para a loja.")
+        canon = f"{DOMINIO}/cupons/{loja_slug}/"
+        filtro, vip_loja = nome, f"da {html.escape(nome)}"
+    else:
+        n = len(lista)
+        titulo = f"Cupons de desconto hoje: {n} cupons de {len(todas)} lojas ({mes})"
+        desc = (f"{n} cupons e promoções ativas de {len(todas)} lojas, conferidos de hora em hora. "
+                "Kabum, Arno, AliExpress, Nike e mais.")
+        h1 = "Cupons de <em>desconto</em>"
+        sub = "Os cupons ativos das lojas parceiras, num lugar só. Copie o código e vá direto para a loja."
+        canon = f"{DOMINIO}/cupons/"
+        filtro, vip_loja = "", "das lojas"
+    links = "".join(
+        f'<a href="/cupons/{s}/"{" aria-current=page" if s == loja_slug else ""}>'
+        f'Cupom {html.escape(nm)} <small>({q})</small></a>' for s, (nm, q) in todas.items())
+    trilha = [{"@type": "ListItem", "position": 1, "name": "Achadinho Total", "item": DOMINIO + "/"},
+              {"@type": "ListItem", "position": 2, "name": "Cupons", "item": DOMINIO + "/cupons/"}]
+    if loja_slug:
+        trilha.append({"@type": "ListItem", "position": 3, "name": f"Cupom {todas[loja_slug][0]}", "item": canon})
+    ld = json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList",
+                     "itemListElement": trilha}, ensure_ascii=False).replace("</", "<\\/")
+    dados = json.dumps(lista, ensure_ascii=False).replace("</", "<\\/")
+    esc = lambda t: html.escape(t, quote=True)
+    return (PAGINA.replace("__TITULO__", esc(titulo)).replace("__DESC__", esc(desc))
+            .replace("__CANON__", canon).replace("__LDJSON__", ld)
+            .replace("__H1__", h1).replace("__SUB__", sub).replace("__VIP_LOJA__", vip_loja)
+            .replace("__LINKS__", links).replace("__FILTRO__", filtro.replace('"', ""))
+            .replace("__BOT__", re.sub(r"[^A-Za-z0-9_]", "", bot or ""))
+            .replace("__DADOS__", dados).replace("__FONTE__", FONTE_VIVA))
 
 
 PAGINA = (RAIZ / "engine" / "cupons_pagina.html").read_text(encoding="utf-8")

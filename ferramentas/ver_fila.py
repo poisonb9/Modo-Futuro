@@ -24,6 +24,10 @@ org = ab.consultar(tok, "query { account { organizations { id } } }")["account"]
 chs = ab.consultar(tok, """query($i: ChannelsInput!) { channels(input: $i) { id service name isDisconnected isLocked } }""",
                    {"i": {"organizationId": org}})["channels"]
 print("canais na conta:", chs)
+# 05/10/2026: que campos o Buffer devolve por post? (procurando o link do
+# video no TikTok, para ler as views pela pagina publica)
+_campos = ab.consultar(tok, 'query { __type(name: "Post") { fields { name type { name kind ofType { name } } } } }')
+print("campos de Post:", [f["name"] for f in (_campos.get("__type") or {}).get("fields", [])])
 tk = [x for x in chs if x["service"] == "tiktok"]
 for st in (["error"], ["scheduled"], ["sent"], ["draft"]):
     try:

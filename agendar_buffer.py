@@ -375,7 +375,11 @@ def _chave_texto(t: str) -> str:
     #
     # O titulo e' o que identifica o clipe. A descricao e' editorial e muda —
     # amarrar a identidade a ela e' amarrar no que nao e' estavel.
-    t = (t or "").split("\n")[0].split("#")[0]
+    # So' HASHTAG sai (`#palavra`), nao o numero de serie. Ate' 05/10/2026
+    # era `.split("#")[0]`: "Protocolo #47: A regra..." virava "protocolo",
+    # igual a todos os outros Protocolo #N ja' no ar — e o Sem Anestesia
+    # parou de postar com 6 clipes novos barrados como "ja' publicado".
+    t = re.sub(r"#[^\s\d#]\S*", "", (t or "").split("\n")[0])
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode("ascii")
     return re.sub(r"[^a-z0-9]+", "", t.lower())[:70]
 

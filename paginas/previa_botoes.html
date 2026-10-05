@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prévia — família de botões</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--tinta:#14131a;--suave:#6b6878;--fundo:#f7f4ec;--linha:#ece6d6}
+*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--tinta);font:15px/1.5 Poppins,sans-serif;padding:24px 16px 60px}
+h1{font-size:24px;margin:0 0 4px}p.sub{color:var(--suave);margin:0 0 20px;max-width:720px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;max-width:1100px}
+.caixa{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.caixa h2{margin:0;font-size:15px}.caixa p{margin:0;color:var(--suave);font-size:13px}
+.escuro{background:#0f0e13;border-color:#0f0e13}.escuro h2{color:#fff}.escuro p{color:#a9a28d}
+
+/* ===== BASE: pilula com brilho (comum a todos) ===== */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ padding:12px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;cursor:pointer;
+ font:800 14px/1 Poppins,sans-serif;letter-spacing:.4px;text-transform:uppercase;border:2px solid transparent;
+ transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;overflow:hidden}
+.btn::before{content:"";position:absolute;left:8%;right:8%;top:2px;height:42%;border-radius:999px;
+ background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0));pointer-events:none}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid #f3d77a;outline-offset:3px}
+.btn.cheio{display:flex;width:100%}
+.btn .ic{font-size:16px;line-height:1}
+@media(max-width:560px){.btn{padding:12px;font-size:12.5px;white-space:normal;text-align:center}}
+@media(prefers-reduced-motion:reduce){.btn{transition:none}}
+
+/* 1. OURO — comprar (o principal; um por cartao) */
+.btn-ouro{color:#f6d977;background:linear-gradient(180deg,#2a2a2e 0%,#0b0b0d 55%,#000 100%);border-color:#d4a937;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(0,0,0,.6),0 8px 18px rgba(20,16,30,.18)}
+.btn-ouro::before{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0))}
+/* 2. DOURADO CHEIO — destaque maximo (Black Friday, "mais vendido", oferta do dia) */
+.btn-dourado{color:#14131a;background:linear-gradient(180deg,#fff1b8 0%,#f3d77a 35%,#d4a937 70%,#b8891c 100%);border-color:#a8790f;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 18px rgba(168,121,15,.35)}
+/* 3. MERCADO LIVRE — amarelo da marca, para o botao de compra do ML */
+.btn-ml{color:#2d3277;background:linear-gradient(180deg,#fff59a 0%,#ffe600 55%,#f2d600 100%);border-color:#2d3277;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 18px rgba(45,50,119,.22)}
+/* 4. COPIAR CUPOM — tracejado dourado (vira verde ao copiar) */
+.btn-cupom{color:#7a5b00;background:linear-gradient(180deg,#fffaf0,#fff0c9);border:2px dashed #d4a937;text-transform:none;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;letter-spacing:1px}
+.btn-cupom.ok{color:#1e8449;border-color:#2ecc71;background:linear-gradient(180deg,#f0fff4,#dcf7e6)}
+/* 5. TELEGRAM — azul da marca com borda dourada (entrar no canal) */
+.btn-telegram{color:#fff;background:linear-gradient(180deg,#45b4ef 0%,#229ed9 55%,#1786bd 100%);border-color:#d4a937;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 18px rgba(34,158,217,.3)}
+/* 6. ALERTA DE PRECO — sino, contorno preto (secundario) */
+.btn-alerta{color:#14131a;background:#fff;border-color:#14131a;box-shadow:3px 3px 0 #14131a;text-transform:none;font-weight:700}
+.btn-alerta::before{display:none}
+.btn-alerta:hover{box-shadow:4px 4px 0 #14131a}
+/* 7. PRATA — secundario elegante (ver mais, outras lojas) */
+.btn-prata{color:#14131a;background:linear-gradient(180deg,#ffffff 0%,#e6e9ee 55%,#cfd4db 100%);border-color:#9aa1ab;
+ box-shadow:inset 0 1px 0 #fff,0 6px 14px rgba(20,16,30,.12)}
+/* 8. FANTASMA DOURADO — sobre fundo escuro (heroi, Black Friday) */
+.btn-fantasma{color:#f3d77a;background:transparent;border-color:#d4a937}
+.btn-fantasma::before{display:none}
+.btn-fantasma:hover{background:rgba(243,215,122,.08)}
+</style>
+<h1>Família de botões</h1>
+<p class="sub">Mesma base (pílula com brilho, Poppins forte), cada cor com UMA função. A regra: em cada cartão, só um botão "forte" (ouro, dourado ou Mercado Livre). Os outros são de apoio.</p>
+<div class="grade">
+ <div class="caixa"><h2>1. Ouro — comprar</h2><p>O botão principal de compra. Um por cartão.</p><a class="btn btn-ouro cheio" href="#">Ver na loja <span class="ic">→</span></a></div>
+ <div class="caixa"><h2>2. Dourado cheio — destaque máximo</h2><p>Só para o especial: Black Friday, 1º lugar, oferta do dia.</p><a class="btn btn-dourado cheio" href="#"><span class="ic">👑</span> Pegar a oferta</a></div>
+ <div class="caixa"><h2>3. Mercado Livre</h2><p>Compra no ML, com as cores da marca — reconhecimento instantâneo.</p><a class="btn btn-ml cheio" href="#">Ver no Mercado Livre <span class="ic">→</span></a></div>
+ <div class="caixa"><h2>4. Copiar cupom</h2><p>Toque e fica verde: "copiado ✓".</p><button class="btn btn-cupom cheio" onclick="this.classList.add('ok');this.textContent='copiado ✓'">STREAMER10 · copiar</button></div>
+ <div class="caixa"><h2>5. Telegram</h2><p>Entrar no canal de ofertas.</p><a class="btn btn-telegram cheio" href="#"><span class="ic">✈️</span> Entrar no Telegram</a></div>
+ <div class="caixa"><h2>6. Alerta de preço</h2><p>Secundário: "me avise quando baixar".</p><a class="btn btn-alerta cheio" href="#"><span class="ic">🔔</span> Me avise quando baixar</a></div>
+ <div class="caixa"><h2>7. Prata — secundário</h2><p>Ver mais, outras lojas, comparar.</p><a class="btn btn-prata cheio" href="#">Ver mais ofertas</a></div>
+ <div class="caixa escuro"><h2>8. Fantasma dourado</h2><p>Sobre fundo escuro (topo, Black Friday).</p><a class="btn btn-fantasma cheio" href="#">Ver os cupons</a></div>
+ <div class="caixa"><h2>Exemplo: cartão completo</h2><p>Um forte + apoio.</p><a class="btn btn-ml cheio" href="#">Ver no Mercado Livre →</a><a class="btn btn-alerta cheio" href="#">🔔 Me avise quando baixar</a></div>
+</div>
+</html>

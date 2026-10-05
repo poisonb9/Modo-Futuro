@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prévia — botão dourado</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--tinta:#14131a;--suave:#6b6878;--fundo:#f7f4ec;--linha:#ece6d6}
+*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--tinta);font:15px/1.5 Poppins,sans-serif;padding:24px 16px 60px}
+h1{font-size:24px;margin:0 0 4px}p.sub{color:var(--suave);margin:0 0 24px}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:1px;color:var(--suave);margin:28px 0 10px}
+.linha{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.col{flex:1 1 300px;max-width:420px}
+.rot{font-size:12px;font-weight:600;color:var(--suave);margin-bottom:6px}
+.cartao{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.cartao .ft{height:120px;border-radius:12px;background:#eee url('/baloes/bf_sacola_p.webp') center/contain no-repeat}
+.cartao b.p{font:800 22px Poppins}
+.velho{background:#0f0e13;color:#fff;text-align:center;text-decoration:none;border-radius:12px;padding:11px;font-weight:600;display:block}
+.bio{max-width:440px;background:#fff;border:2px solid #14131a;box-shadow:6px 6px 0 #14131a;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.bio .velho-bio{display:flex;gap:10px;align-items:center;border:2px solid #14131a;border-radius:12px;padding:12px;text-decoration:none;color:#14131a;font-weight:600;background:#fff;box-shadow:3px 3px 0 #14131a}
+.cel{width:340px;border:10px solid #111;border-radius:34px;padding:14px;background:var(--fundo)}
+/* ===== o botao novo ===== */
+.btn-ouro{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ padding:12px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;
+ font:800 14.5px/1 Poppins,sans-serif;letter-spacing:.4px;text-transform:uppercase;
+ color:#f6d977;background:linear-gradient(180deg,#2a2a2e 0%,#0b0b0d 55%,#000 100%);
+ border:2px solid #d4a937;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(0,0,0,.6),0 8px 18px rgba(20,16,30,.18);
+ transition:transform .15s ease,box-shadow .15s ease;overflow:hidden}
+.btn-ouro::before{content:"";position:absolute;left:8%;right:8%;top:2px;height:42%;border-radius:999px;
+ background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0));pointer-events:none}
+.btn-ouro:hover{transform:translateY(-1px)}
+.btn-ouro.cheio{display:flex;width:100%}
+.cel .btn-ouro{padding:12px;font-size:12.5px;white-space:normal;text-align:center}
+</style>
+<h1>Botão dourado — prévia</h1>
+<p class="sub">À esquerda, como é hoje. À direita, com o botão novo. Passe o mouse (ou toque) para ver o efeito.</p>
+
+<h2>1. Cartão de produto da loja principal</h2>
+<div class="linha">
+ <div class="col"><div class="rot">HOJE</div><div class="cartao"><div class="ft"></div><span>Fone Bluetooth com cancelamento de ruído</span><b class="p">R$ 89,90</b><a class="velho" href="#">Ver na loja →</a></div></div>
+ <div class="col"><div class="rot">NOVO</div><div class="cartao"><div class="ft"></div><span>Fone Bluetooth com cancelamento de ruído</span><b class="p">R$ 89,90</b><a class="btn-ouro cheio" href="#">Ver na loja →</a></div></div>
+</div>
+
+<h2>2. Cupom</h2>
+<div class="linha">
+ <div class="col"><div class="rot">HOJE</div><div class="cartao"><b>Kabum · 10% OFF</b><a class="velho" href="#">Ir para a loja →</a></div></div>
+ <div class="col"><div class="rot">NOVO</div><div class="cartao"><b>Kabum · 10% OFF</b><a class="btn-ouro cheio" href="#">Ir para a loja →</a></div></div>
+</div>
+
+<h2>3. Bio do canal (contra-capa)</h2>
+<div class="linha">
+ <div class="col"><div class="rot">HOJE</div><div class="bio"><a class="velho-bio" href="#">🏆 Top 10 Beleza — os mais vendidos do Mercado Livre hoje</a><a class="velho-bio" href="#">🏷️ Achadinho Total — todos os produtos</a></div></div>
+ <div class="col"><div class="rot">NOVO (só no botão de compra; os outros ficam como estão)</div><div class="bio"><a class="btn-ouro cheio" href="#">🏆 Top 10 Beleza</a><a class="velho-bio" href="#">🏷️ Achadinho Total — todos os produtos</a></div></div>
+</div>
+
+<h2>4. No celular</h2>
+<div class="cel"><div class="cartao"><div class="ft"></div><span>Creatina Monohidratada 300 g</span><b class="p">R$ 49,90</b><a class="btn-ouro cheio" href="#">Ver no Mercado Livre →</a></div></div>
+</html>

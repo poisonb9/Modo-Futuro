@@ -96,7 +96,7 @@ def _cartoes(lista: list[dict], quando: str) -> str:
     <ul class="motivos">{"".join(f"<li>{e(m)}</li>" for m in motivos)}</ul>
     <div class="preco">{f'<s>{_brl(de)}</s>' if 0 < desc <= 60 else ''}<b>{_brl(preco)}</b>{f'<em>-{desc}%</em>' if 0 < desc <= 60 else ''}</div>
     <small>preço visto em {quando} · pode mudar na loja</small>
-    <a class="btn-ouro" href="{e(p["link"])}" target="_blank" rel="sponsored noopener" data-i="{i}">Ver no Mercado Livre <span class="seta" aria-hidden="true">→</span></a>
+    <a class="btn-ouro ml" href="{e(p["link"])}" target="_blank" rel="sponsored noopener" data-i="{i}">Ver no Mercado Livre <span class="seta" aria-hidden="true">→</span></a>
   </div>
 </li>''')
     return "\n".join(out)

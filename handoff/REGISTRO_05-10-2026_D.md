@@ -278,3 +278,8 @@
 - Menu de lojas no PC transparente: o espelho de vidro (WebGL, só desenha em PC com GPU) ligava no `.opcoes`. Não liga mais ≥700 px
   e fundo branco com prioridade. Cartões do ML sem foto no print = ainda carregando (conferido: fotos ok).
 - Pendências anotadas (PENDENCIAS_ABERTAS, lembrete toda segunda): guia novo por tema, hospedar fotos, regra vídeo → loja direto.
+- 05/10 ~23h45: a publicação de 22:59 saiu SEM /p/ (sitemap 27, /melhores/ 404) — rodou com código anterior. Teste: `montar_catalogo` gera
+  161 páginas (139 /p/ + 3 fora + 11 listas + 6 guias + 2 índices). Nova publicação em curso (log: estado/_ultima_publicacao.log).
+- De novo o publicador automático deixou trabalho no stash (pop falhou em estado/cupons.json): 5 radares recuperados de stash@{0}.
+  Pendência do item 28 (avisar no Telegram quando o pop falhar) continua aberta e é URGENTE.
+- 05/10 ~23h50: CONSERTADO publicar_ao_mudar_agendado.ps1 — pop com conflito: arquivo em conflito = versão da nuvem, resto volta do stash (rastreados + novos via stash^3), aviso no Telegram, stash mantido. Parser do PowerShell: 0 erros.

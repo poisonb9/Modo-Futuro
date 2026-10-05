@@ -58,7 +58,26 @@ $pilhaAntes = @(& git stash list 2>$null).Count
 $saida += (& git stash -q -u 2>&1 | Out-String)
 $guardou = @(& git stash list 2>$null).Count -gt $pilhaAntes
 $saida += (& git pull --rebase -q 2>&1 | Out-String)
-if ($guardou) { $saida += (& git stash pop -q 2>&1 | Out-String) }
+if ($guardou) {
+    $saida += (& git stash pop -q 2>&1 | Out-String)
+    # ⛔ 05/10/2026 (2 vezes no mesmo dia): o pop falhava por conflito em
+    # estado/cupons.json (a nuvem grava de hora em hora) e TODO o trabalho
+    # local ficava preso no stash, em silencio. Agora: arquivo em conflito
+    # = versao da NUVEM; o resto volta do stash; e o dono e' avisado.
+    $conf = @(& git diff --name-only --diff-filter=U 2>$null)
+    if ($conf.Count -gt 0) {
+        foreach ($f in $conf) { & git checkout HEAD -- $f 2>$null }
+        & git reset -q 2>$null
+        $rastreados = @(& git stash show --name-only 'stash@{0}' 2>$null)
+        foreach ($f in $rastreados) { if ($conf -notcontains $f) { & git checkout 'stash@{0}' -- $f 2>$null } }
+        $novos = @(& git show --name-only --format= 'stash@{0}^3' 2>$null)
+        foreach ($f in $novos) { if ($f -and -not (Test-Path $f)) { & git checkout 'stash@{0}^3' -- $f 2>$null } }
+        & git reset -q 2>$null
+        $msg = "publicador: stash pop deu conflito em " + ($conf -join ', ') + " -> ficou a versao da nuvem nesses; o resto do trabalho local voltou. Stash mantido por seguranca."
+        $saida += $msg + "`n"
+        & $python -X utf8 -c "import sys; sys.path.insert(0, '.'); from engine import telegram; telegram.enviar(sys.argv[1])" $msg 2>$null | Out-Null
+    }
+}
 $saida += (& $python -X utf8 -m engine.foto_limpa --medir --timeout 20 2>&1 | Out-String)
 $saida += (& $python -X utf8 paginas/publicar_bio.py --subir 2>&1 | Out-String)
 $rc = $LASTEXITCODE

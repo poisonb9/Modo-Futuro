@@ -33,5 +33,5 @@
 - 05/10 Avisos do Telegram mudos (token 401) → secrets apontam pro AchadinhoTotalBot.
 - [ ] **Aferição do acervo de marketing**: o banco de `aferir_busca.py` só tem livros/mentores. Criar perguntas-alvo de marketing antes da parte 2. (05/10)
 - [ ] **Acervo parte 2**: quando a destilação inteira terminar → skill → Voyage → rerank → aferir. (05/10)
-- [ ] **Publicador (stash pop falho)**: publicar_ao_mudar_agendado.ps1 deixa o trabalho local preso no stash quando o pop dá conflito — avisar no Telegram / não engolir. (05/10)
+- [x] (RESOLVIDA 05/10 ~23h50) **Publicador (stash pop falho)**: publicar_ao_mudar_agendado.ps1 deixa o trabalho local preso no stash quando o pop dá conflito — avisar no Telegram / não engolir. (05/10)
 - [ ] **Search Console**: dono entra com a conta Google, adiciona o domínio e passa o TXT para Claude pôr no DNS da Cloudflare; depois enviar sitemap. (05/10)

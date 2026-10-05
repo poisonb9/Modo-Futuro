@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 from pathlib import Path
 
 import agendar_buffer as ab
@@ -202,7 +203,8 @@ def main() -> None:
             print(f"  [!] {nome}: sem {env} no ambiente — NAO conferido")
             continue
         try:
-            posts = puxar(token, org=org, canal=canal)
+            posts = puxar(token, org=org, canal=canal,
+                          teto_paginas=int(os.environ.get("HIST_PAGINAS") or 8))
         except Exception as e:
             print(f"  [!] {nome}: falhou ({str(e)[:60]}) — NAO conferido")
             continue

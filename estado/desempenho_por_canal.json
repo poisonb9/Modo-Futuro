@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-05T09:42:35",
+  "medido_em": "2026-10-05T18:19:58",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 56,
+      "posts": 66,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 457,
+      "reacoes": 559,
       "comentarios": 22,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 30,
+      "posts_recentes": 36,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -40,20 +40,16 @@
       ]
     },
     "truque.importado": {
-      "posts": 134,
+      "posts": 136,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 16802,
+      "reacoes": 17288,
       "comentarios": 114,
-      "shares": 92,
+      "shares": 94,
       "engajamento_pct": 0.0,
       "posts_recentes": 31,
       "views_recentes": 0,
       "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "Wonhee do ILLIT viu este fantasma assustador no quarto 👻 A W"
-        },
         {
           "views": 0,
           "titulo": "Wonhee do ILLIT tenta pular o elástico gigante nesta brincad"
@@ -61,18 +57,22 @@
         {
           "views": 0,
           "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado! Um"
+        },
+        {
+          "views": 0,
+          "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado!\n\nU"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 71,
+      "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 853,
-      "comentarios": 8,
-      "shares": 17,
+      "reacoes": 975,
+      "comentarios": 9,
+      "shares": 19,
       "engajamento_pct": 0.0,
-      "posts_recentes": 16,
+      "posts_recentes": 29,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 64,
+      "posts": 68,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 645,
+      "reacoes": 679,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 26,
+      "posts_recentes": 30,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,27 +115,27 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 45,
+      "posts": 55,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 268,
+      "reacoes": 324,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 24,
+      "posts_recentes": 32,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Wrap verde de espinafre com cominho e nigella no pilão Wrap "
+        },
         {
           "views": 0,
           "titulo": "Wrap verde de espinafre com cominho e nigella no pilão\n\nWrap"
         },
         {
           "views": 0,
-          "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína\n\nWrap saudá"
-        },
-        {
-          "views": 0,
-          "titulo": "Tiramisù artesanal cremoso de café e rum Aprenda a preparar "
+          "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína Wrap saudáv"
         }
       ]
     },

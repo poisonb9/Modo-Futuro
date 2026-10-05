@@ -43,7 +43,7 @@ def linhas() -> list[tuple]:
     for p in awin.catalogo(teto=0):
         if p["loja"] in fora or not p.get("link") or not p.get("nome"):
             continue
-        img = (p.get("imagem") or "").replace("http://", "https://", 1)
+        img = (p.get("imagem_aw") or p.get("imagem") or "").replace("http://", "https://", 1)
         if "noimage" in img:
             img = ""
         out["awin:" + str(p["id"])] = (p["nome"][:300], p["loja"].removesuffix(" BR"),

@@ -5271,7 +5271,11 @@
     var f = FILTROS.filter(function (x) { return x.id === atual; })[0];
     var termo = normal(busca.value.trim());
     var lista = PRODUTOS.filter(function (p) {
-      if (!f.cabe(p)) { return false; }
+      // ⛔ 05/10/2026 (dono, print: "Whey ainda nao funciona" — 0 achadinhos
+      // com 411 Soldiers na loja): o chip padrao "Maiores quedas" escondia
+      // tudo que nao caiu. Quem DIGITA quer o produto, caindo ou nao: com
+      // termo, o chip so' ordena, nao filtra.
+      if (!termo && !f.cabe(p)) { return false; }
       if (canal && p.canal !== canal) { return false; }
       if (loja && p.loja !== loja) { return false; }
       // ⭐ A BUSCA CASA COM A CATEGORIA, e nao so' com o nome. Sem isto,

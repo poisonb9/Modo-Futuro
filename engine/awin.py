@@ -430,6 +430,9 @@ def catalogo(teto: float = 0.0, piso: float = 0.0) -> list[dict]:
             # comissao, porque para o leitor os dois sao identicos.
             "link": com_clickref((p.get("aw_deep_link") or "").strip(),
                                  p.get("aw_product_id")),
+            # 05/10/2026: copia hospedada pela Awin — o merchant_image_url da
+            # Drogal falha muito no navegador (busca do acervo sem foto)
+            "imagem_aw": (p.get("aw_image_url") or "").strip(),
             "loja": (p.get("merchant_name") or "").strip(),
             "categoria": (p.get("merchant_category")
                           or p.get("category_name") or "").strip(),

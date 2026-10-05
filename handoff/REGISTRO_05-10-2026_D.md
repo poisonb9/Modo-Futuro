@@ -81,3 +81,15 @@
 ## 14. Black Friday
 - Plano mestre: handoff/CAMPANHA_BLACK_FRIDAY_2026.md ("Detector de Black Fraude": 🟢 real / 🟡 igual / 🔴 maquiada).
 - 6 balões preto+ouro gerados (`paginas/baloes/bf_*.webp`, Cloudflare flux grátis); prévia em handoff/baloes_bf_prototipo.jpg.
+
+## 15. Preço do Mercado Livre diferente no site e na loja (print do dono: JBL 174,90 × 188,53)
+- **Causa:** `mais_vendidos` (vitrine) e a busca pegavam o preço de um vendedor e linkavam a FICHA `/p/{id}`, que abre na buy box
+  (loja oficial, mais cara). O conserto `link_do_anuncio` de 18/09 só valia para livros.
+- **Correção:** `vencedor_confiavel()` = menor preço novo, ignorando anúncio isolado (>40% abaixo do 2º — régua do dono; testado 20%,
+  e mediana cortava demais) + link do ANÚNCIO (`produto.mercadolivre.com.br/MLB-<item>`). Vitrine refeita: 423 itens, 0 com `/p/`.
+- **Resta:** vitrine do ML é 1x/dia — preço pode mudar no meio do dia. Avaliar 2–3x/dia.
+
+## 16. /cupons premium
+- HTML separado em `engine/cupons_pagina.html` (o gerador só injeta os dados). Herói preto/ouro, cupom-ticket com picote,
+  título longo recolhido ("ver regras completas"), código quebra linha (bug do "copiar" vazando), filtros fixos no topo,
+  balões BF no herói + balões que aparecem/somem na rolagem em telas ≥1300 px (mesma mecânica da loja).

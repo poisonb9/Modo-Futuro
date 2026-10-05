@@ -119,3 +119,11 @@
 - Prompts dos selos: pílula preta (ou dourada) com borda dourada, texto exato, fundo transparente, 3:1.
 - **Remédio fora da loja** (`engine/ml_vitrine.py`, `REMEDIO`): Bravecto/Simparic/NexGard/Defenza estavam na vitrine Pet. Suplemento continua.
 - Top 10 sem cesta básica (papel higiênico abria "Beleza"; lava-roupas, papel toalha, lenço umedecido...).
+
+## 20. Remédio sem competir + botão/pódio/moldura
+- Dono revisou: remédio PODE ficar, mas não compete. `ml_vitrine` marca `remedio: True`; publicador põe no FIM do bloco ML;
+  fora do Top 10, das ofertas no topo; na página (todos.html) sempre no fim, inclusive na busca.
+- Botão de compra `.btn-ouro` em CÓDIGO (visual dos selos) no Top 10 e cupons — imagem como botão foi descartada
+  (ilegível em tela pequena, sem texto para leitor de tela/Google, troca de texto exige arte nova).
+  Celular: largura do cartão, quebra em 2 linhas (medido: 0 botões cortados em 375 px).
+- Pódio 1/2/3 ouro/prata/bronze e moldura EM VOLTA da foto (nunca por cima — a foto é a do vendedor).

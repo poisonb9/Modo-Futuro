@@ -94,8 +94,10 @@ CANAIS = {
     "atefalhar": {  # = Geracao 2000 (nostalgia) desde 28/09
         "pasta": "GERACAO 2000", "radar": "canais/atefalhar/radar_nostalgia.py",
         "json": "radar_nostalgia.json", "min_views": 300_000,
-        "tema": "nostalgia de desenhos animados e cultura pop dos anos 90/2000 "
-                "(teorias, curiosidades, bastidores) — NADA de academia/treino"},
+        "tema": "CURIOSIDADES leves e divertidas de desenhos animados e cultura pop "
+                "dos anos 90/2000 (fatos que ninguem sabia, bastidores, dubladores, "
+                "easter eggs, como foi feito). NADA dark/teoria sombria/terror "
+                "(dono, 05/10/2026) e NADA de academia/treino"},
 }
 
 PEDIDO = """Voce e' curador de videos-fonte para cortes de TikTok do canal com tema: {tema}.

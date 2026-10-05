@@ -42,7 +42,6 @@ CHAVES = _chaves()
 # Buscas: documentario/ensaio FALADO sobre cada desenho da lista do dono.
 BUSCAS = [
     "courage the cowardly dog behind the scenes history",
-    "courage the cowardly dog dark truth explained",
     "ed edd n eddy history explained documentary",
     "rocket power what happened to the show",
     "rocket power history nickelodeon",
@@ -51,9 +50,7 @@ BUSCAS = [
     "powerpuff girls history behind the scenes",
     "dexter's laboratory history creator",
     "hey arnold history what happened",
-    "rugrats dark theories explained",
     "fairly oddparents history explained",
-    "invader zim cancelled why",
     "codename kids next door history",
     "cow and chicken history cartoon",
     "johnny bravo history cartoon network",
@@ -62,32 +59,42 @@ BUSCAS = [
     # ⭐ 05/10/2026 (dono: radar seco — 0 ineditos; precisa de algo extremamente viral)
     "things only 2000s kids remember",
     "2000s kids nostalgia you forgot",
-    "lost media cartoons 2000s",
-    "banned cartoon episodes explained",
-    "dark secrets of kids shows",
-    "what happened to the cast of disney channel shows",
     "pokemon anime history behind the scenes",
-    "pokemon dark theories explained",
     "digimon history what happened",
     "dragon ball z history behind the scenes",
     "yu-gi-oh anime history censorship",
     "ben 10 history what happened",
-    "teen titans cancelled why",
     "jimmy neutron history",
     "kim possible history behind the scenes",
     "avatar the last airbender behind the scenes",
     "scooby doo history explained",
-    "power rangers dark history",
     "disney channel 2000s history",
     "jetix fox kids history",
     "cartoons that were cancelled too soon",
-    "childhood cartoon creepy facts",
     "tamagotchi history 2000s",
-    "2000s toys that were banned",
+    # ⭐ 05/10/2026 (dono: "menos dark e mais curiosidades")
+    "cartoon fun facts you didn't know",
+    "spongebob fun facts behind the scenes",
+    "pokemon fun facts you didn't know",
+    "disney channel fun facts 2000s",
+    "cartoon network easter eggs you missed",
+    "nickelodeon secrets fun facts",
+    "how cartoons were made 2000s behind the scenes",
+    "voice actors behind famous cartoons",
+    "2000s kids toys fun facts",
+    "dragon ball fun facts",
+    "ben 10 fun facts",
+    "scooby doo fun facts",
+    "tom and jerry fun facts behind the scenes",
+    "looney tunes fun facts",
+    "the simpsons fun facts you didn't know",
+    "shrek fun facts behind the scenes",
 ]
 
 # sem fala ou sem historia: nao da' pra dublar nem narrar
 VETO = [
+    # 05/10/2026 (dono): menos dark — curiosidade, nao terror
+    "dark", "creepy", "disturbing", "scary", "horror", "theory", "theories", "banned",
     "full episode", "episodio completo", "compilation", "compilado", "best moments",
     "funniest moments", "all intros", "intro", "theme song", "opening", "song",
     "music", "asmr", "no commentary", "shorts", "reaction", "react", "tier list",
@@ -96,6 +103,7 @@ VETO = [
 ]
 
 TEMA = [
+    "fun facts", "easter egg", "did you know", "voice actor", "how it was made",
     "courage", "ed edd", "rocket power", "cartoon network", "nickelodeon", "nick",
     "powerpuff", "dexter", "hey arnold", "rugrats", "fairly odd", "invader zim",
     "kids next door", "cow and chicken", "johnny bravo", "spongebob", "cartoon",

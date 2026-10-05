@@ -1,0 +1,31 @@
+name: Agendar (so' simula)
+
+# Roda o agendador em --simular com o token de um canal: mostra quantos
+# clipes ha' e por que cada um foi recusado. Nao agenda nada.
+
+on:
+  workflow_dispatch:
+    inputs:
+      canal:
+        description: "nome canonico (ex.: semanestesia.pod)"
+        required: true
+      token:
+        description: "nome do secret do Buffer (ex.: BUFFER_TOKEN_SEMANESTESIA)"
+        required: true
+
+jobs:
+  simular:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Simular
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUFFER_TOKEN: ${{ secrets[inputs.token] }}
+          CANAL_ESPERADO: ${{ inputs.canal }}
+        run: python -X utf8 agendar_buffer.py --simular

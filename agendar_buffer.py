@@ -724,11 +724,17 @@ def main() -> None:
             return False
         return (f, round(float(i), 1)) in trechos_vistos
 
+    motivos: dict = {}
+
+    def _nao(m: str) -> bool:
+        motivos[m] = motivos.get(m, 0) + 1
+        return False
+
     def cabe(v):
         # A origem vem PRIMEIRO: nem adianta olhar dedup de um clipe que nem
         # e' deste canal.
         if not e_deste_canal(v):
-            return False
+            return _nao("outro_canal")
         # ⚠️ APOSENTADO — nunca mais vai ao ar, por decisao do dono.
         #
         # Decisao do Bryan em 02/09/2026 sobre os 6 clipes da "republicacao
@@ -742,7 +748,7 @@ def main() -> None:
         # repostar algo na mao. Os 6 estao marcados assim — ou seja, hoje eles
         # sao os MAIS livres pra sair de novo, exatamente o oposto do pedido.
         if v.get("nao_publicar"):
-            return False
+            return _nao("nao_publicar")
         # ⚠️ QUARENTENA — clipe traduzido pela RESERVA nao se posta sozinho.
         #
         # Decisao do Bryan em 02/09/2026. A reserva (Nemotron) so' entra
@@ -755,7 +761,7 @@ def main() -> None:
         # proposito: se a quarentena fosse checada mais tarde, um clipe podia
         # passar por engano em algum caminho que nao chame esta funcao.
         if v.get("quarentena") or (v.get("traduzido_por") or "").startswith("nemotron"):
-            return False
+            return _nao("quarentena")
         # ⚠️ RECUSA POR CONTEUDO, ANTES DE QUALQUER COMPARACAO DE TEXTO.
         #
         # Todas as guardas abaixo comparam TEXTO, e texto foi o que falhou em
@@ -776,12 +782,12 @@ def main() -> None:
         # assim que `SERIE_LIBERADA` disser o contrario — jogar fora material
         # bom por causa de ordem seria trocar um problema por outro.
         if v.get("depende_de_anterior") and not _serie_liberada():
-            return False
+            return _nao("serie")
         if trecho_ja_usado(v):
-            return False
+            return _nao("trecho_usado")
         sha = v.get("sha")
         if sha and registro_clipes.ja_postado(sha):
-            return False
+            return _nao("sha_postado")
         # ⚠️ E TAMBEM PELO TITULO, contra o REGISTRO — nao contra o Buffer.
         #
         # Esta e' a guarda que faltava em 01/09/2026. Ao abrir a fila dos
@@ -796,7 +802,7 @@ def main() -> None:
         chave_reg = registro_clipes.sha_por_titulo(
             str(v.get("titulo") or "") or _primeira_linha(v.get("legenda")))
         if chave_reg and registro_clipes.ja_postado(chave_reg):
-            return False
+            return _nao("titulo_postado")
         k = _chave_texto(v.get("legenda") or v.get("titulo") or "")
         # Comparacao por PREFIXO, nao por igualdade: 88 dos 101 posts reais
         # deste canal tem titulo e descricao na mesma linha, e a chave deles
@@ -804,7 +810,7 @@ def main() -> None:
         # e' so' o titulo. Foi assim que o #185 reagendou dois publicados.
         # Ver engine/dedup.py.
         if dedup.ja_visto(k, ja_na_fila):
-            return False
+            return _nao("ja_na_fila")
         # Apagado da fila pelo Bryan = decisão editorial, nunca reagendar.
         # Apagar post agendado não deixa rastro no Buffer, então sem esta lista
         # o clipe volta a parecer disponível — empurrei o mesmo três vezes em
@@ -815,11 +821,13 @@ def main() -> None:
         # pega 11, e os +2 sao rejeicoes de verdade ("666 MILHOES" e "chips
         # 3D"). Os outros 90 nao casam: zero falso positivo.
         if dedup.ja_visto(k, rejeitados_):
-            return False
-        return (v.get("republicacao")
-                or not dedup.ja_visto(k, ja_publicado))
+            return _nao("rejeitado")
+        if v.get("republicacao") or not dedup.ja_visto(k, ja_publicado):
+            return True
+        return _nao("texto_publicado")
 
     fila = [(k, v) for k, v in ordenar(todos) if cabe(v)]
+    print("recusados por motivo:", {k: n for k, n in motivos.items() if k != "outro_canal"})
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")
 
     horarios = proximos_horarios(agendados, max(0, vagas), conhecidos)

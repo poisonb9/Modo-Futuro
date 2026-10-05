@@ -73,6 +73,10 @@ QTD_CLIPES = "8"
 # chaves esgotadas. Um por passada (10 min) da' 6 por hora no pior caso, e
 # na pratica bem menos, porque cada corte leva ~83 min com qtd=5.
 MAX_POR_PASSADA = 1
+# ⭐ 05/10/2026 (dono: "2 ou 3 cortes ao mesmo tempo"): com 1 por vez e
+# ~2,5 h por corte, 23 brutos esperavam e Make/Chef secaram. Hoje sao 29
+# chaves do Gemini. Ate' 3 rodando juntos; 1 novo por passada (10 min).
+MAX_SIMULTANEOS = 3
 # Idioma da FALA do video fonte, nao o da legenda de saida. Era "pt" e
 # isso quebrava calado: `main.processar` tem
 #   precisa_traduzir = (traduzir or dublar) and idioma != "pt"
@@ -323,7 +327,7 @@ def disparar(file_id: str, nome: str, conta: str = "principal",
         raise RuntimeError(f"disparo falhou: {r.status_code} {r.text[:300]}")
 
 
-def corte_em_andamento() -> bool:
+def corte_em_andamento() -> int:
     """Ja' existe um corte rodando na nuvem?
 
     Por que existe: `MAX_POR_PASSADA` limita quantos saem POR PASSADA, mas a
@@ -336,7 +340,7 @@ def corte_em_andamento() -> bool:
     corte 10 minutos do que torrar a cota do dia inteiro.
     """
     if not GITHUB_TOKEN:
-        return False
+        return 0
     try:
         r = requests.get(
             f"https://api.github.com/repos/{REPO}/actions/workflows/{WORKFLOW}/runs",
@@ -344,12 +348,12 @@ def corte_em_andamento() -> bool:
                      "Accept": "application/vnd.github+json"},
             params={"per_page": 10}, timeout=30)
         r.raise_for_status()
-        return any(x["status"] in ("queued", "in_progress", "waiting", "requested", "pending")
+        return sum(x["status"] in ("queued", "in_progress", "waiting", "requested", "pending")
                    for x in r.json().get("workflow_runs", []))
     except Exception as e:
         print(f"[!] nao consegui checar runs em andamento ({str(e)[:70]}); "
               "seguro o disparo por esta passada")
-        return True
+        return MAX_SIMULTANEOS
 
 
 # ------------------------------------------------------------------ ciclo
@@ -392,12 +396,13 @@ def uma_passada(drive) -> int:
              if v["id"] not in reg and v["id"] not in na_fila]
     if not novos:
         return 0
-    if corte_em_andamento():
+    rodando = corte_em_andamento()
+    if rodando >= MAX_SIMULTANEOS:
         # O marcador [espera] existe pro wrapper agendado distinguir "fila
         # parada de proposito" de "nao ha' nada novo". Sem ele a mensagem some:
         # main() ainda imprime "Nada novo." depois deste return, e o wrapper
         # casava so' essa string. Mesmo defeito que o [!] ja' tinha tido.
-        print(f"[espera] {len(novos)} na fila, mas ja' ha' corte rodando "
+        print(f"[espera] {len(novos)} na fila, mas ja' ha' {rodando} corte(s) rodando "
               "— espero a proxima passada.")
         return 0
     # ⚠️ SEM CANAL, NAO DISPARA — e diz o que fazer.

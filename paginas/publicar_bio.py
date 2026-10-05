@@ -2494,6 +2494,16 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
             nicho["modofuturo"] = tech
     except Exception as e:  # noqa: BLE001
         print(f"nicho: tecnologia indisponivel ({e})")
+    # ⭐ 05/10/2026 (plano dos canais, item 2, aprovado): o Make tem 83% de
+    # todas as views — a vitrine dele vira BELEZA de loja brasileira (os mais
+    # vendidos do ML em Beleza + Oceane), "o produto da tecnica que voce viu".
+    try:
+        beleza = produtos_de_beleza()
+        print(f"nicho: {len(beleza)} item(ns) de beleza para o Make")
+        if len(beleza) >= 4:
+            nicho["truque.importado"] = beleza
+    except Exception as e:  # noqa: BLE001
+        print(f"nicho: beleza indisponivel ({e})")
     # ⭐ 27/09/2026 (dono aprovou o reposicionamento do Sem Anestesia:
     # disciplina + cerebro). A vitrine do canal vira ESTANTE: os livros dos
     # mesmos autores dos cortes, no Mercado Livre (8% de comissao em livro).
@@ -2636,6 +2646,54 @@ def _nome_curto_tech(nome: str) -> str:
     if len(n.split()) < 3:              # "Monitor Gamer" sozinho nao diz nada
         n = (nome or "").split(",")[0].strip()
     return n[:60].rstrip() if len(n) > 60 else n
+
+
+_MAQUIAGEM = ("batom", "base", "blush", "rimel", "mascara de cilios", "delineador", "sombra",
+              "paleta", "corretivo", "po ", "iluminador", "primer", "gloss", "lip", "pincel",
+              "esponja", "contorno", "bronzer", "fixador", "cilios", "sobrancelha", "tint",
+              "maquiagem", "make", "protetor solar", "serum", "hidratante")
+
+
+_NAO_MAKE = ("depilador", "cabelo", "penteado", "unha", "expositor", "leave-in", "shampoo", "corporal")
+
+
+_NAO_MAKE = ("depilador", "cabelo", "penteado", "unha", "expositor", "leave-in", "shampoo", "corporal")
+
+
+def produtos_de_beleza(quantos: int = 12) -> list[dict]:
+    """Beleza de loja brasileira para o topo da bio do Make (05/10/2026):
+    os mais vendidos do ML em Beleza (engine/ml_vitrine) e a Oceane (Awin).
+    Maquiagem e skincare na frente; variedade de 1 por tipo."""
+    import unicodedata as _u
+
+    def _s(t):
+        return "".join(c for c in _u.normalize("NFD", (t or "").lower())
+                       if _u.category(c) != "Mn")
+    ext = produtos_externos()
+    cartoes = []
+    for cat, v in ext.items():
+        if cat not in ("Mercado Livre", "Oceane"):
+            continue
+        for p in v.get("produtos", []):
+            if cat == "Mercado Livre" and p.get("canal") != "Beleza":
+                continue
+            if not (p.get("link") and p.get("preco") and p.get("imagem")):
+                continue
+            n = _s(p.get("nome"))
+            if any(x in n for x in _MAQUIAGEM) and not any(x in n for x in _NAO_MAKE):
+                cartoes.append(p)
+    # intercala as duas lojas (ML entrega em 2 dias; Oceane e' marca de make)
+    ml_ = sorted([p for p in cartoes if p.get("loja") == "Mercado Livre"], key=lambda p: -(p.get("vitrine_nota") or 0))
+    oc_ = sorted([p for p in cartoes if p.get("loja") != "Mercado Livre"], key=lambda p: -(p.get("vitrine_nota") or 0))
+    cartoes = [x for par in zip(ml_, oc_) for x in par] + ml_[len(oc_):] + oc_[len(ml_):]
+    out, por_tipo = [], {}
+    for p in cartoes:
+        tipo = _s(p.get("nome")).split()[0] if p.get("nome") else ""
+        if por_tipo.get(tipo, 0) >= 2 or _parecido(p, out):
+            continue
+        por_tipo[tipo] = por_tipo.get(tipo, 0) + 1
+        out.append(dict(p, nome=_nome_curto_tech(p.get("nome")), nome_loja=p.get("nome")))
+    return out[:quantos]
 
 
 def produtos_de_tecnologia(quantos: int = 12) -> list[dict]:

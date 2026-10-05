@@ -283,3 +283,4 @@
 - De novo o publicador automático deixou trabalho no stash (pop falhou em estado/cupons.json): 5 radares recuperados de stash@{0}.
   Pendência do item 28 (avisar no Telegram quando o pop falhar) continua aberta e é URGENTE.
 - 05/10 ~23h50: CONSERTADO publicar_ao_mudar_agendado.ps1 — pop com conflito: arquivo em conflito = versão da nuvem, resto volta do stash (rastreados + novos via stash^3), aviso no Telegram, stash mantido. Parser do PowerShell: 0 erros.
+- 05/10 ~00h: NO AR — sitemap 185, /melhores/ /guias/ 200, IndexNow 176 URLs HTTP 202. Yandex: o .html dá 308 (Pages tira a extensão) → meta tag yandex-verification na home (dono escolhe a aba 'Meta tag').

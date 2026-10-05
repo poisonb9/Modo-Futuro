@@ -96,6 +96,22 @@ BUSCAS = [
     "kpop stage makeup artist eng sub",
     "idol get ready with me makeup eng sub",
     "PONY syndrome idol makeup",
+    # ⭐ 05/10/2026 (dono: radar do Make seco — 13 no radar, 1 inedito)
+    "aespa makeup artist eng sub",
+    "IVE makeup artist reveals eng sub",
+    "newjeans makeup artist eng sub",
+    "blackpink makeup artist secrets eng sub",
+    "twice makeup artist eng sub",
+    "le sserafim makeup eng sub",
+    "babymonster makeup eng sub",
+    "nmixx makeup eng sub",
+    "stray kids makeup artist eng sub",
+    "idol makeup transformation eng sub",
+    "makeup artist reacts to idol makeup",
+    "kpop idol bare face makeup routine",
+    "아이돌 메이크업 비법",
+    "아이돌 메이크업 아티스트",
+    "이사배 메이크업 아이돌",
 ]
 
 # ⚠️ Termos que denunciam material que o motor NAO consegue usar. Nao e'
@@ -196,13 +212,13 @@ def com_rodizio(monta_url):
     raise RuntimeError(f"todas as {len(CHAVES)} chaves falharam: {ultimo}")
 
 
-def buscar(termo, n=8):
+def buscar(termo, n=25):   # 05/10/2026: era 8 — radar seco (13 no radar)
     def url(k):
         q = urllib.parse.urlencode({
             "part": "snippet", "q": termo, "type": "video",
             "maxResults": n, "order": "viewCount",
             "videoDuration": "medium",   # 4 a 20 min: o que CABE no teto de 6h
-            "publishedAfter": "2025-01-01T00:00:00Z",
+            "publishedAfter": "2023-01-01T00:00:00Z",   # 05/10/2026: era 2025 — tecnica de idol nao envelhece em 1 ano
             "key": k})
         return "https://www.googleapis.com/youtube/v3/search?" + q
     return com_rodizio(url).get("items", [])

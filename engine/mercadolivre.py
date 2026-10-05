@@ -386,12 +386,21 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
                          .get("results") or [])
                 if not itens:
                     continue
-                # o primeiro e' o vencedor da buy box na ordem que o ML manda
-                preco = itens[0].get("price")
+                # ⛔ 05/10/2026 (print do dono: JBL R$ 174,90 no site, R$ 188,53
+                # na pagina): o 1o da lista NAO e' a buy box, e a pagina /p/ abre
+                # na loja oficial. Pega o MENOR e linka o ANUNCIO dele
+                # (mesma regra de `link_do_anuncio`, 18/09).
+                validos = [i for i in itens if float(i.get("price") or 0) > 0]
+                if not validos:
+                    continue
+                venc = min(validos, key=lambda i: float(i["price"]))
+                preco = venc.get("price")
                 # ⚠️ E O PERMALINK DO PRODUTO VEM VAZIO. O link que funciona
                 # e' o /p/{id} — foi com ele que o Bryan viu a barra de
                 # afiliado com GANHOS 16%.
-                url = f"https://www.mercadolivre.com.br/p/{iid}"
+                _d = re.sub(r"\D", "", str(venc.get("item_id") or venc.get("id") or ""))
+                url = (f"https://produto.mercadolivre.com.br/MLB-{_d}" if _d
+                       else f"https://www.mercadolivre.com.br/p/{iid}")
             else:
                 p = _get(f"/items/{iid}")
                 nome, preco = p.get("title"), p.get("price")
@@ -575,7 +584,9 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
         vencedor = next((i for i in itens
                          if float(i.get("price") or 0) == menor), itens[0])
         nome = r.get("name")
-        link = com_afiliado(f"https://www.mercadolivre.com.br/p/{pid}", canal)
+        # ⛔ 05/10/2026: link do ANUNCIO do menor preco, nao da ficha /p/
+        link = (link_do_anuncio(vencedor.get("item_id") or vencedor.get("id"), canal)
+                or com_afiliado(f"https://www.mercadolivre.com.br/p/{pid}", canal))
         if not (nome and link):
             continue
         com = comissao_valida(pid)

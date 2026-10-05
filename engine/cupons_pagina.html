@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cupons de desconto — Achadinho Total</title>
+<meta name="description" content="Cupons e promoções ativas das lojas parceiras, conferidos de hora em hora.">
+<meta name="theme-color" content="#0f0e13">
+<link rel="icon" href="/icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--tinta:#14131a;--suave:#6b6878;--fundo:#f7f4ec;--caixa:#fff;--ouro:#d4a937;--ouro2:#f3d77a;--linha:#ece6d6;--preto:#0f0e13}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--fundo);color:var(--tinta);font:15px/1.45 Poppins,sans-serif;overflow-x:hidden}
+.heroi{position:relative;background:radial-gradient(120% 140% at 50% -20%,#2a2618 0%,var(--preto) 60%);color:#fff;padding:22px 16px 64px;overflow:hidden}
+.heroi .in{max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.heroi a.volta{color:#cfc8b3;text-decoration:none;font-size:14px}
+.selo{display:inline-block;margin-top:18px;padding:4px 12px;border:1px solid rgba(243,215,122,.5);border-radius:999px;color:var(--ouro2);font:600 11.5px/1.6 ui-monospace,monospace;letter-spacing:2px;text-transform:uppercase}
+h1{font:800 clamp(34px,7vw,58px)/1.02 Poppins,sans-serif;margin:12px 0 8px;letter-spacing:-1px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--ouro2),var(--ouro) 60%,#fff2c2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#cfc8b3;margin:0;max-width:560px}
+.numeros{display:flex;gap:22px;margin-top:18px;flex-wrap:wrap}
+.numeros b{display:block;font:700 24px Poppins,sans-serif;color:#fff}.numeros span{font-size:12px;color:#a9a28d;text-transform:uppercase;letter-spacing:1px}
+.varal-bf{position:absolute;right:max(16px,calc(50% - 540px));top:18px;display:flex;align-items:flex-start;gap:6px;z-index:1;pointer-events:none}
+.varal-bf img{height:96px;width:auto;animation:balanca 4.2s ease-in-out infinite alternate;transform-origin:50% 95%;filter:drop-shadow(0 12px 16px rgba(0,0,0,.45))}
+.varal-bf img:nth-child(2){height:120px;animation-duration:5.1s;animation-delay:-1.4s}
+.varal-bf img:nth-child(3){height:88px;animation-duration:4.6s;animation-delay:-2.6s}
+@media(max-width:700px){.varal-bf{opacity:.35;right:-10px;top:40px}.varal-bf img{height:64px}.varal-bf img:nth-child(2){height:80px}.varal-bf img:nth-child(3){display:none}}
+@keyframes balanca{from{rotate:-4deg;translate:0 0}to{rotate:4deg;translate:0 -8px}}
+main{max-width:1100px;margin:-40px auto 0;padding:0 16px 80px;position:relative;z-index:3}
+.filtros{position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:12px;margin:0 -4px 16px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--linha);border-radius:18px;box-shadow:0 10px 30px rgba(20,16,30,.08);scrollbar-width:none}
+.filtros::-webkit-scrollbar{display:none}
+.f{flex:0 0 auto;border:1px solid var(--linha);background:#fff;border-radius:999px;padding:7px 14px;font:500 13.5px Poppins,sans-serif;cursor:pointer;color:var(--tinta);white-space:nowrap}
+.f small{color:var(--suave);font-weight:600;margin-left:6px}
+.f[aria-pressed=true]{background:var(--preto);color:#fff;border-color:var(--preto)}.f[aria-pressed=true] small{color:var(--ouro2)}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));gap:16px}
+article{position:relative;overflow:hidden;background:var(--caixa);border:1px solid var(--linha);border-radius:20px;display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease}
+article:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(20,16,30,.10)}
+.topo-c{padding:16px 16px 12px;display:flex;flex-direction:column;gap:8px}
+.loja{display:flex;align-items:center;gap:10px}
+.sigla{flex:0 0 34px;height:34px;border-radius:10px;background:var(--preto);color:var(--ouro2);display:grid;place-items:center;font:700 12px Poppins,sans-serif}
+.loja b{font-size:14px;line-height:1.2}.loja i{display:block;font-style:normal;font-size:12px;color:var(--suave)}.loja i.urg{color:#c0392b;font-weight:600}
+h2{font-size:16px;margin:0;line-height:1.32;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+article.aberto h2{-webkit-line-clamp:unset;display:block}
+.mais{align-self:flex-start;border:0;background:none;padding:0;color:var(--suave);font:500 12.5px Poppins,sans-serif;cursor:pointer;text-decoration:underline}
+.picote{position:relative;height:0;border-top:2px dashed var(--linha);margin:4px 0}
+.picote::before,.picote::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--fundo)}
+.picote::before{left:-11px}.picote::after{right:-11px}
+.baixo{padding:12px 16px 16px;display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.cod{display:flex;align-items:center;gap:10px;width:100%;border:1.5px dashed var(--ouro);background:linear-gradient(180deg,#fffaf0,#fff3d6);border-radius:12px;padding:10px 12px;cursor:pointer;color:var(--tinta);text-align:left;font:inherit}
+.cod code{flex:1 1 auto;min-width:0;font:700 15px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.5px;overflow-wrap:anywhere;word-break:break-all}
+.cod span{flex:0 0 auto;font:600 12px Poppins,sans-serif;color:#7a5b00;background:#fff;border:1px solid #f0dca0;border-radius:999px;padding:3px 10px}
+.cod.ok span{color:#1e8449;border-color:#b7e1c4}
+.sem{font-size:13px;color:var(--suave);background:#f6f3ea;border-radius:12px;padding:10px 12px}
+.t{font-size:12px;color:var(--suave);margin:0}
+article a.ir{text-align:center;background:var(--preto);color:#fff;text-decoration:none;border-radius:12px;padding:11px;font-weight:600}
+article a.ir:hover{background:#26232f}
+.balao-bloco{display:none}
+@media(min-width:1300px){
+ .balao-bloco{display:block;position:fixed;width:96px;pointer-events:none;z-index:1;opacity:0;transform:translateY(70px) scale(.9);transition:opacity .6s ease,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+ .balao-bloco.on{opacity:1;transform:none}
+ .balao-bloco img{width:100%;height:auto;display:block;transform-origin:50% 90%;filter:drop-shadow(0 14px 18px rgba(20,16,30,.16));animation:balanca 4.9s ease-in-out infinite alternate}
+ .balao-bloco.dir img{animation-duration:5.6s;animation-delay:-2.1s}}
+@media(prefers-reduced-motion:reduce){.varal-bf img,.balao-bloco img{animation:none}.balao-bloco{transition:opacity .4s}}
+footer{color:var(--suave);font-size:12px;margin-top:30px;text-align:center}footer a{color:inherit}
+</style>
+<header class="heroi">
+ <div class="varal-bf" aria-hidden="true"><img src="/baloes/bf_porcento_p.webp" alt=""><img src="/baloes/bf_etiqueta_p.webp" alt=""><img src="/baloes/bf_raio_p.webp" alt=""></div>
+ <div class="in">
+  <a class="volta" href="/">← Achadinho Total</a><br>
+  <span class="selo">conferido de hora em hora</span>
+  <h1>Cupons de <em>desconto</em></h1>
+  <p class="sub">Os cupons ativos das lojas parceiras, num lugar só. Copie o código e vá direto para a loja.</p>
+  <div class="numeros"><div><b id="n-cup">—</b><span>cupons ativos</span></div><div><b id="n-loj">—</b><span>lojas</span></div><div><b id="n-hj">—</b><span>vencem hoje</span></div></div>
+ </div>
+</header>
+<main>
+<div class="filtros" id="filtros"></div>
+<div class="grade" id="grade"></div>
+<footer>Os links são de afiliado: a loja nos paga uma comissão e você não paga nada a mais. Cupons podem acabar antes do prazo. <a href="/privacidade">Privacidade</a></footer>
+</main>
+<script>
+(function(){
+var DADOS=__DADOS__, filtro="", BAL=["bf_porcento","bf_sacola","bf_raio","bf_etiqueta","bf_presente","bf_lupa"], fixos=[];
+function ev(n,p){try{if(localStorage.getItem("nao_contar")==="1"){window.posthog&&posthog.opt_out_capturing();return}window.posthog&&posthog.capture(n,p||{})}catch(e){}}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function dias(fim){if(!fim)return 99;var f=new Date(fim),h=new Date();return Math.round((new Date(f.toDateString())-new Date(h.toDateString()))/864e5)}
+function validade(fim){if(!fim)return"sem prazo";var d=dias(fim);return d<=0?"vence hoje":d===1?"vence amanhã":"até "+new Date(fim).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})}
+function grupo(l){return l.indexOf("AliExpress")===0?"AliExpress":l}
+function sigla(l){var p=grupo(l).replace(/[^A-Za-zÀ-ú ]/g,"").trim().split(/\s+/);return ((p[0]||"?")[0]+(p[1]?p[1][0]:(p[0]||"?")[1]||"")).toUpperCase()}
+function acende(){var g=document.getElementById("grade");if(!g||!fixos.length)return;var r=g.getBoundingClientRect(),p=(innerHeight*.5-r.top)/Math.max(1,r.height);
+ var at=(r.top<innerHeight*.6&&r.bottom>innerHeight*.7&&p>=0&&p<1)?Math.min(fixos.length-1,Math.floor(p*fixos.length)):-1;
+ fixos.forEach(function(b,i){b.classList.toggle("on",i===at)})}
+function baloes(){fixos.forEach(function(b){b.remove()});fixos=[];if(!matchMedia("(min-width:1300px)").matches)return;
+ var g=document.getElementById("grade"),n=Math.max(3,Math.round(g.offsetHeight/innerHeight)),rg=g.getBoundingClientRect(),mE=rg.left,mD=document.documentElement.clientWidth-rg.right;
+ for(var i=0;i<n;i++){var lado=i%2?"dir":"esq",s=el("span","balao-bloco "+lado);s.setAttribute("aria-hidden","true");
+  s.style.top=Math.round(innerHeight*(.22+Math.random()*.24))+"px";if(lado==="esq")s.style.left=Math.round(mE/2-48)+"px";else s.style.right=Math.round(mD/2-48)+"px";
+  var im=el("img");im.src="/baloes/"+BAL[i%BAL.length]+".webp";im.alt="";im.decoding="async";s.appendChild(im);document.body.appendChild(s);fixos.push(s)}
+ acende()}
+function desenhar(lista){
+ var agora=new Date().toISOString();
+ lista=lista.filter(function(c){return c.link&&(!c.fim||c.fim>agora)})
+  .sort(function(a,b){return (!a.codigo)-(!b.codigo)||String(a.fim||"9").localeCompare(String(b.fim||"9"))});
+ var lojas={};lista.forEach(function(c){lojas[grupo(c.loja)]=(lojas[grupo(c.loja)]||0)+1});
+ document.getElementById("n-cup").textContent=lista.length;document.getElementById("n-loj").textContent=Object.keys(lojas).length;
+ document.getElementById("n-hj").textContent=lista.filter(function(c){return c.fim&&dias(c.fim)<=0}).length;
+ var fs=document.getElementById("filtros");fs.innerHTML="";
+ [""].concat(Object.keys(lojas).sort(function(a,b){return lojas[b]-lojas[a]})).forEach(function(l){
+  var b=el("button","f",l||"Todas");b.appendChild(el("small",null,l?lojas[l]:lista.length));b.setAttribute("aria-pressed",l===filtro);
+  b.onclick=function(){filtro=l;desenhar(lista);ev("cupom_filtro",{loja:l})};fs.appendChild(b)});
+ var g=document.getElementById("grade");g.innerHTML="";
+ lista.filter(function(c){return !filtro||grupo(c.loja)===filtro}).forEach(function(c){
+  var a=el("article"),t=el("div","topo-c"),lj=el("div","loja"),v=validade(c.fim),info=el("div");
+  lj.appendChild(el("span","sigla",sigla(c.loja)));info.appendChild(el("b",null,c.loja));info.appendChild(el("i",v.indexOf("vence")===0?"urg":"",v));lj.appendChild(info);t.appendChild(lj);
+  t.appendChild(el("h2",null,c.titulo));
+  if(c.titulo.length>110){var m=el("button","mais","ver regras completas");m.type="button";m.onclick=function(){a.classList.toggle("aberto");m.textContent=a.classList.contains("aberto")?"recolher":"ver regras completas"};t.appendChild(m)}
+  a.appendChild(t);a.appendChild(el("div","picote"));
+  var bx=el("div","baixo");
+  if(c.codigo){var b=el("button","cod");b.type="button";b.setAttribute("aria-label","Copiar o cupom "+c.codigo);b.appendChild(el("code",null,c.codigo));var s=el("span",null,"copiar");b.appendChild(s);
+   b.onclick=function(){try{navigator.clipboard.writeText(c.codigo)}catch(e){}b.classList.add("ok");s.textContent="copiado ✓";ev("cupom_copiado",{codigo:c.codigo,loja:c.loja})};bx.appendChild(b)}
+  else bx.appendChild(el("span","sem","Sem código: o desconto já vem no link"));
+  if(c.termos&&c.termos.length>3&&c.termos!==c.titulo)bx.appendChild(el("p","t",c.termos.slice(0,160)));
+  var k=el("a","ir","Ir para a loja →");k.href=c.link;k.target="_blank";k.rel="sponsored noopener";
+  k.onclick=function(){ev("cupom_clique",{loja:c.loja})};bx.appendChild(k);a.appendChild(bx);g.appendChild(a)});
+ if(!g.children.length)g.appendChild(el("p",null,"Nenhum cupom ativo agora — volte daqui a pouco."));
+ setTimeout(baloes,50);
+}
+desenhar(DADOS);
+addEventListener("scroll",acende,{passive:true});
+var rz;addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(baloes,300)},{passive:true});
+fetch("__FONTE__?t="+Date.now()).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.length)desenhar(d)}).catch(function(){});
+})();
+</script>
+</html>

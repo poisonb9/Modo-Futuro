@@ -3542,6 +3542,15 @@ def _carimbar(html: str) -> tuple[str, str]:
 
 def _por_privacidade(pasta: Path, privacidade: str) -> None:
     """A rota `/privacidade`, em toda pasta que vai pro ar."""
+    # ⭐ 05/10/2026: /top10/<nicho>/ (Mercado Livre por nicho). Ver engine/top10.py.
+    try:
+        from engine import top10 as _t10
+        for rel, corpo in _t10.paginas().items():
+            alvo = pasta / rel
+            alvo.parent.mkdir(parents=True, exist_ok=True)
+            alvo.write_text(_com_posthog(corpo), encoding="utf-8")
+    except Exception as e:
+        print(f"  [!] /top10 nao saiu: {str(e)[:80]}")
     # ⭐ 05/10/2026: /cupons (Awin, conferido a cada publicacao). Ver engine/cupons.py.
     try:
         from engine import cupons as _cup

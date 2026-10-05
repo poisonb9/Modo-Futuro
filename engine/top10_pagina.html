@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITULO__ — Achadinho Total</title>
+<meta name="description" content="__SUB__">
+<link rel="canonical" href="__CANON__">
+<meta property="og:title" content="__TITULO__">
+<meta property="og:description" content="__SUB__">
+<meta name="theme-color" content="#0f0e13">
+<link rel="icon" href="/icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">__LD__</script>
+<style>
+:root{--tinta:#14131a;--suave:#6b6878;--fundo:#f7f4ec;--caixa:#fff;--ouro:#d4a937;--ouro2:#f3d77a;--linha:#ece6d6;--preto:#0f0e13;--ml:#ffe600}
+*{box-sizing:border-box}body{margin:0;background:var(--fundo);color:var(--tinta);font:15px/1.5 Poppins,sans-serif;overflow-x:hidden}
+.heroi{background:radial-gradient(120% 140% at 50% -20%,#2a2618 0%,var(--preto) 60%);color:#fff;padding:22px 16px 70px}
+.heroi .in{max-width:880px;margin:0 auto}
+.heroi a.volta{color:#cfc8b3;text-decoration:none;font-size:14px}
+.selo{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:4px 12px;border:1px solid rgba(243,215,122,.5);border-radius:999px;color:var(--ouro2);font:600 11.5px/1.6 ui-monospace,monospace;letter-spacing:2px;text-transform:uppercase}
+.selo i{width:8px;height:8px;border-radius:50%;background:var(--ml);display:inline-block}
+.emoji{font-size:44px;line-height:1;margin-top:14px}
+h1{font:800 clamp(32px,6.5vw,54px)/1.04 Poppins,sans-serif;margin:8px 0 10px;letter-spacing:-1px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--ouro2),var(--ouro) 60%,#fff2c2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#cfc8b3;margin:0;max-width:640px}
+main{max-width:880px;margin:-46px auto 0;padding:0 16px 80px;position:relative}
+nav.nichos{display:flex;gap:8px;overflow-x:auto;padding:12px;background:rgba(255,255,255,.95);border:1px solid var(--linha);border-radius:18px;box-shadow:0 10px 30px rgba(20,16,30,.08);margin-bottom:18px;scrollbar-width:none;position:sticky;top:0;z-index:5}
+nav.nichos::-webkit-scrollbar{display:none}
+nav.nichos a{flex:0 0 auto;border:1px solid var(--linha);border-radius:999px;padding:7px 14px;color:var(--tinta);text-decoration:none;font-weight:500;font-size:13.5px;white-space:nowrap;background:#fff}
+nav.nichos a.on{background:var(--preto);color:#fff;border-color:var(--preto)}
+.aviso{display:flex;gap:10px;align-items:flex-start;background:#fffbea;border:1px solid #f3e3a6;border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:18px}
+ol.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.item{position:relative;display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--caixa);border:1px solid var(--linha);border-radius:20px;padding:16px;transition:transform .2s,box-shadow .2s}
+.item:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(20,16,30,.10)}
+.pos{position:absolute;top:-10px;left:-10px;width:40px;height:40px;border-radius:12px;background:var(--preto);color:var(--ouro2);display:grid;place-items:center;font:800 18px Poppins,sans-serif;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.item:nth-child(1) .pos{background:linear-gradient(135deg,#f3d77a,#c99a23);color:var(--preto)}
+.foto{display:block;aspect-ratio:1;border-radius:14px;background:#fff;overflow:hidden;border:1px solid var(--linha)}
+.foto img{width:100%;height:100%;object-fit:contain}
+.info{display:flex;flex-direction:column;gap:6px;min-width:0}
+.selo-hoje{align-self:flex-start;display:inline-flex;align-items:center;gap:4px;background:var(--preto);color:var(--ouro2);border-radius:999px;padding:3px 10px;font:700 11px/1.6 Poppins,sans-serif;letter-spacing:.3px;text-transform:uppercase}
+h3{margin:0;font-size:16px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.motivos{margin:0;padding:0 0 0 18px;color:var(--suave);font-size:13px}
+.preco{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.preco s{color:var(--suave);font-size:13px}.preco b{font:800 24px Poppins,sans-serif}.preco em{font-style:normal;background:#e6f6ec;color:#1e8449;border-radius:8px;padding:1px 7px;font-weight:700;font-size:13px}
+small{color:var(--suave);font-size:12px}
+a.ir{align-self:flex-start;margin-top:4px;background:var(--preto);color:#fff;text-decoration:none;border-radius:12px;padding:10px 16px;font-weight:600}
+a.ir:hover{background:#26232f}
+.item.nicho{display:block;padding:0;border:0;background:none}.item.nicho a.ir{display:block;width:100%;font-size:17px;padding:18px;text-align:left}
+@media(max-width:560px){.item{grid-template-columns:96px 1fr;gap:12px;padding:12px}.preco b{font-size:20px}}
+footer{color:var(--suave);font-size:12px;margin-top:30px;text-align:center}footer a{color:inherit}
+</style>
+<header class="heroi"><div class="in">
+ <a class="volta" href="/">← Achadinho Total</a> · <a class="volta" href="/top10/">todos os Top 10</a><br>
+ <span class="selo"><i></i>Mercado Livre · atualizado de hora em hora</span>
+ <div class="emoji" aria-hidden="true">__EMOJI__</div>
+ <h1>__H1__</h1>
+ <p class="sub">__SUB__</p>
+</div></header>
+<main>
+<nav class="nichos" aria-label="Outros nichos">__NAV__</nav>
+<div class="aviso"><span aria-hidden="true">⏰</span><span><b>Compre hoje:</b> a oferta e o preço podem mudar a qualquer momento na loja. O link já leva direto para o anúncio deste preço.</span></div>
+<ol class="lista">__ITENS__</ol>
+<footer>A ordem é a dos mais vendidos do próprio Mercado Livre na categoria. Os links são de afiliado: a loja nos paga uma comissão e você não paga nada a mais. <a href="/cupons/">Cupons de desconto</a> · <a href="/privacidade">Privacidade</a></footer>
+</main>
+<script>
+(function(){
+ try{document.querySelectorAll("nav.nichos a").forEach(function(a){if(location.pathname.indexOf(a.getAttribute("href"))===0)a.classList.add("on")})}catch(e){}
+ function ev(n,p){try{if(localStorage.getItem("nao_contar")==="1"){window.posthog&&posthog.opt_out_capturing();return}window.posthog&&posthog.capture(n,p||{})}catch(e){}}
+ document.querySelectorAll("a[data-i]").forEach(function(a){a.addEventListener("click",function(){ev("top10_clique",{nicho:"__NICHO__",posicao:+a.dataset.i})})});
+})();
+</script>
+</html>

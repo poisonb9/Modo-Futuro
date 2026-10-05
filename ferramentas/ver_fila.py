@@ -32,11 +32,11 @@ tk = [x for x in chs if x["service"] == "tiktok"]
 for st in (["error"], ["scheduled"], ["sent"], ["draft"]):
     try:
         d = ab.consultar(tok, """query($i: PostsInput!) { posts(input: $i, first: 30) {
-            edges { node { id status dueAt sentAt error { message } text } } } }""",
+            edges { node { id status dueAt sentAt externalLink error { message } text } } } }""",
             {"i": {"organizationId": org, "filter": {"status": st, "channelIds": [tk[0]["id"]]}}})
     except Exception as e:  # noqa: BLE001
         print(st, "falhou:", str(e)[:300]); continue
     nos = [e["node"] for e in d["posts"]["edges"]]
     print(f"\n== {st[0]}: {len(nos)}")
     for n in sorted(nos, key=lambda n: n.get("dueAt") or "")[-15:]:
-        print(f"  {n.get('dueAt')} sent={n.get('sentAt')} err={(n.get('error') or {}).get('message')} | {(n.get('text') or '')[:60]!r}")
+        print(f"  {n.get('dueAt')} link={n.get('externalLink')} sent={n.get('sentAt')} err={(n.get('error') or {}).get('message')} | {(n.get('text') or '')[:60]!r}")

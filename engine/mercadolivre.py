@@ -318,6 +318,25 @@ def etiqueta_de(canal: str) -> str:
     return ETIQUETAS.get(canal) or (os.getenv("MELI_MATT_WORD") or "")
 
 
+
+def vencedor_confiavel(itens: list[dict]) -> dict | None:
+    """O anuncio de MENOR preco que nao e' ponto fora da curva.
+
+    ⛔ 05/10/2026: o JBL Quantum tinha um anuncio a R$ 120 (novo, vendedor
+    comum) com o 2o mais barato a R$ 164. Isca ou golpe — o site nao manda
+    cliente pra isso. Preco isolado (>20% abaixo do seguinte) sai.
+    """
+    v = [i for i in itens if float(i.get("price") or 0) > 0
+         and i.get("condition", "new") == "new"] or         [i for i in itens if float(i.get("price") or 0) > 0]
+    if not v:
+        return None
+    v = sorted(v, key=lambda i: float(i["price"]))
+    # isolado: mais de 20% abaixo do SEGUNDO mais barato. (A mediana foi
+    # testada e cortava demais: vendedores caros a puxam pra cima.)
+    while len(v) >= 3 and float(v[0]["price"]) < 0.8 * float(v[1]["price"]):
+        v = v[1:]
+    return v[0]
+
 def link_do_anuncio(item_id: str, canal: str = "") -> str:
     """O link do ANUNCIO (produto.mercadolivre.com.br/MLB-<n>), com a etiqueta.
 
@@ -390,10 +409,9 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
                 # na pagina): o 1o da lista NAO e' a buy box, e a pagina /p/ abre
                 # na loja oficial. Pega o MENOR e linka o ANUNCIO dele
                 # (mesma regra de `link_do_anuncio`, 18/09).
-                validos = [i for i in itens if float(i.get("price") or 0) > 0]
-                if not validos:
+                venc = vencedor_confiavel(itens)
+                if not venc:
                     continue
-                venc = min(validos, key=lambda i: float(i["price"]))
                 preco = venc.get("price")
                 # ⚠️ E O PERMALINK DO PRODUTO VEM VAZIO. O link que funciona
                 # e' o /p/{id} — foi com ele que o Bryan viu a barra de
@@ -580,9 +598,8 @@ def buscar(termo: str, quantos: int = 8, canal: str = "",
                   if i.get("price") and float(i["price"]) > 0]
         if not precos:
             continue
-        menor = min(precos)
-        vencedor = next((i for i in itens
-                         if float(i.get("price") or 0) == menor), itens[0])
+        vencedor = vencedor_confiavel(itens) or itens[0]
+        menor = float(vencedor.get("price") or min(precos))
         nome = r.get("name")
         # ⛔ 05/10/2026: link do ANUNCIO do menor preco, nao da ficha /p/
         link = (link_do_anuncio(vencedor.get("item_id") or vencedor.get("id"), canal)

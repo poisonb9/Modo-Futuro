@@ -391,6 +391,7 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
     saida = []
     for it in (d.get("content") or [])[:quantos]:
         iid, tipo = it.get("id"), it.get("type")
+        de = 0.0  # preco riscado do anuncio (original_price), 05/10/2026
         try:
             if tipo == "PRODUCT":
                 p = _get(f"/products/{iid}")
@@ -413,6 +414,7 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
                 if not venc:
                     continue
                 preco = venc.get("price")
+                de = float(venc.get("original_price") or 0)
                 # ⚠️ E O PERMALINK DO PRODUTO VEM VAZIO. O link que funciona
                 # e' o /p/{id} — foi com ele que o Bryan viu a barra de
                 # afiliado com GANHOS 16%.
@@ -422,6 +424,7 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
             else:
                 p = _get(f"/items/{iid}")
                 nome, preco = p.get("title"), p.get("price")
+                de = float(p.get("original_price") or 0)
                 url = p.get("permalink", "")
                 foto = p.get("thumbnail", "")
         except requests.HTTPError:
@@ -435,6 +438,7 @@ def mais_vendidos(categoria: str, quantos: int = 12, canal: str = "") -> list[di
         saida.append({
             "nome": nome, "link": link, "imagem": foto,
             "preco": f"R$ {float(preco):.2f}".replace(".", ","),
+            "de": de if de > float(preco) else 0.0,
             "loja": "Mercado Livre", "_id": iid, "_tipo": tipo,
             "comissao": (com or {}).get("pct"),
             "comissao_vista_em": (com or {}).get("visto", ""),

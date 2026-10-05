@@ -104,7 +104,7 @@ def colher() -> list[dict]:
                     "link": p.get("link") or "", "loja": LOJA,
                     "categoria": area, "categoria_ml": alvo,
                     "comissao": float(p.get("comissao") or ml.comissao_base(alvo) or 0),
-                    "marca": "", "de_loja": 0.0, "origem": "mercadolivre",
+                    "marca": "", "de_loja": _num(p.get("de")), "origem": "mercadolivre",
                 }
             print(f"  {alvo} ({area}): +{len(prods)}  total {len(vistos)}")
             time.sleep(0.5)   # o ML limita por aplicacao (429 medido em 16/09)

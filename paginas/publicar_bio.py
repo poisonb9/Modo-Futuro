@@ -602,6 +602,9 @@ def produtos_externos() -> dict[str, dict]:
             # quando a loja anuncia um "de" acima do MAIOR preco que NOS ja'
             # vimos em >= 3 dias. Vazio senao.
             "de_inflado": _de_inflado(por_dia, d, float(p.get("de_loja") or 0)),
+            # ⭐ 05/10/2026: desconto que a PROPRIA loja mostra (preco riscado)
+            "desconto_loja": (round((1 - preco / float(p["de_loja"])) * 100)
+                              if float(p.get("de_loja") or 0) > preco else 0),
             "em_alta": _tm.em_alta(p["nome"], _termos_alta),
         })
     for loja, n in sem_mapa.items():
@@ -797,6 +800,54 @@ def montar_galerias(dados: list[dict]) -> dict[str, list[str]]:
     return fim
 
 
+
+# ⭐ 05/10/2026 (dono): "os produtos do Mercado Livre tem PRIORIDADE se forem
+# ofertas muito boas — os primeiros a aparecer na vitrine, na primeira pagina".
+# Os 423 do ML moram na categoria externa (so' carregam ao escolher a loja);
+# os MELHORES sobem para a lista principal, nas primeiras posicoes do topo.
+# "Muito boa" = queda REAL na nossa serie >= 15% (com 3+ dias), OU desconto
+# da propria loja >= 25% que NAO seja "de" inflado (selo 3). Sem nota de piso.
+ML_PRIORIDADE_N = 4
+ML_QUEDA_MIN = 15
+ML_DESCONTO_MIN = 25
+
+
+def promover_ofertas_ml(dados: list[dict], externos: dict) -> list[dict]:
+    ml = (externos.get("Mercado Livre") or {}).get("produtos") or []
+    ja = {str(p.get("id")) for p in dados}
+
+    def forca(x):
+        real = (x.get("queda") or 0) if (x.get("dias") or 0) >= 3 else 0
+        loja = 0 if x.get("de_inflado") else (x.get("desconto_loja") or 0)
+        return max(real * 1.5, loja)   # queda medida por nos vale mais
+    boas = [x for x in ml if str(x.get("id")) not in ja and not x.get("vitrine_fora")
+            and (((x.get("dias") or 0) >= 3 and (x.get("queda") or 0) >= ML_QUEDA_MIN)
+                 or (not x.get("de_inflado") and (x.get("desconto_loja") or 0) >= ML_DESCONTO_MIN))]
+    boas.sort(key=lambda x: (-forca(x), -float(x.get("vitrine_nota") or 0)))
+    escolhidas = []
+    raizes = set()
+    for x in boas:
+        r = " ".join(str(x.get("nome") or "").lower().split()[:4])
+        if r in raizes:
+            continue
+        raizes.add(r)
+        escolhidas.append(dict(x, oferta_ml=True))
+        if len(escolhidas) >= ML_PRIORIDADE_N:
+            break
+    if not escolhidas:
+        print("ofertas ML: nenhuma 'muito boa' agora (queda real >= 15% ou desconto >= 25%)")
+        return []
+    k = len(escolhidas)
+    for p in dados:
+        if p.get("topo"):
+            p["topo"] = int(p["topo"]) + k
+    for i, x in enumerate(escolhidas, 1):
+        x["topo"] = i
+    dados[:0] = escolhidas
+    print(f"ofertas ML: {k} no topo — " + "; ".join(
+        f"{x['nome'][:30]} {x['preco']} (-{x.get('desconto_loja') or x.get('queda')}%)" for x in escolhidas))
+    return escolhidas
+
 def montar_catalogo() -> tuple[str, dict[str, str]]:
     """O HTML do catalogo com os produtos e o brasao dentro, e os arquivos
     das categorias externas ({nome do arquivo: JSON}) que sobem ao lado."""
@@ -810,6 +861,7 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     html = mascarar(tirar_comentarios(CATALOGO.read_text(encoding="utf-8")))
     dados = produtos_todos()
     externos = produtos_externos()
+    promover_ofertas_ml(dados, externos)
     # ⚠️ O HTML LEVA SO' O INDICE das externas: nome, arquivo, quantos e o
     # passo. Os cartoes ficam no arquivo ao lado.
     # ⭐ 18/09: alem da contagem por area (`cats`), os CLIQUES de 30 dias por

@@ -4829,14 +4829,21 @@
   // ⚠️ E CONFERE QUE VEIO JSON: o Pages devolve a PAGINA RAIZ com 200 pra
   // caminho inexistente (medido em 14/09/2026 no /todos). `r.json()` estoura
   // em HTML, e isso cai no mesmo aviso — que e' o comportamento certo.
-  function carregarExterno(nome, depois) {
+  var _redesenho = null;
+  function redesenharLogo() {
+    clearTimeout(_redesenho);
+    _redesenho = setTimeout(function () { desenhar(); }, 120);
+  }
+  function carregarExterno(nome, depois, silencioso) {
     if (EXTERNO_CARREGADO[nome]) { depois(); return; }
     if (EXTERNO_CARREGADO[nome] === false) { return; } // ja' em voo
     EXTERNO_CARREGADO[nome] = false;
-    grade.innerHTML = "";
-    var esp = el("div", "vazio");
-    esp.appendChild(el("strong", null, "Buscando " + nome + "…"));
-    grade.appendChild(esp);
+    if (!silencioso) {
+      grade.innerHTML = "";
+      var esp = el("div", "vazio");
+      esp.appendChild(el("strong", null, "Buscando " + nome + "…"));
+      grade.appendChild(esp);
+    }
     fetch(EXTERNOS[nome].arquivo, { cache: "no-cache" }).then(function (r) {
       if (!r.ok) { throw new Error("http " + r.status); }
       return r.json();
@@ -4849,6 +4856,7 @@
       depois();
     }).catch(function (e) {
       delete EXTERNO_CARREGADO[nome];
+      if (silencioso) { return; }
       grade.innerHTML = "";
       var v = el("div", "vazio");
       v.appendChild(el("strong", null, "Não consegui carregar " + nome + "."));
@@ -5268,7 +5276,16 @@
         if (!EXTERNO_CARREGADO[n] && pendentes.indexOf(n) < 0) { pendentes.push(n); }
       });
     }
-    if (pendentes.length) {
+    // ⭐ 05/10/2026 (dono: "delay consideravel na pesquisa"; "o primeiro a
+    // buscar e' o Mercado Livre e ja' mostra"): COM TERMO, todas as lojas
+    // baixam AO MESMO TEMPO, o Mercado Livre na frente, e a grade redesenha a
+    // cada uma que chega — antes era uma por vez, com a tela de espera no meio.
+    var buscandoAinda = 0;
+    if (pendentes.length && busca.value.trim().length >= 2) {
+      pendentes.sort(function (a, b) { return (b === "Mercado Livre") - (a === "Mercado Livre"); });
+      pendentes.forEach(function (n) { carregarExterno(n, redesenharLogo, true); });
+      buscandoAinda = pendentes.length;
+    } else if (pendentes.length) {
       carregarExterno(pendentes[0], desenhar);
       return;
     }
@@ -5285,7 +5302,7 @@
       // ⛔ 05/10/2026 (dono, print no PC: "Loja Mercado Livre 438" e 0
       // achadinhos): com LOJA escolhida o chip tambem so' ordena — quem abre
       // a loja quer ver a loja, caindo ou nao.
-      if (!termo && !loja && !f.cabe(p)) { return false; }
+      if (!termo && !loja && !p.oferta_ml && !f.cabe(p)) { return false; }
       if (canal && p.canal !== canal) { return false; }
       if (loja && p.loja !== loja) { return false; }
       // ⭐ A BUSCA CASA COM A CATEGORIA, e nao so' com o nome. Sem isto,
@@ -5298,6 +5315,11 @@
       return true;
     });
     if (f.ordem) { lista = lista.slice().sort(f.ordem); }
+    // ⭐ 05/10/2026 (dono): na BUSCA, o Mercado Livre vem primeiro.
+    if (termo) {
+      lista = lista.filter(function (p) { return p.loja === "Mercado Livre"; })
+        .concat(lista.filter(function (p) { return p.loja !== "Mercado Livre"; }));
+    }
     // ⭐ A EXTERNA ABRE PELOS MAIS BARATOS — decisao do Bryan em 16/09/2026
     // ("mais baratos primeiro comunica melhor com nosso publico"). O feed
     // nao tem `vendas`, entao `ganho x vendas` e' zero pra todos e a ordem
@@ -5378,6 +5400,8 @@
                        todos: "nenhuma queda de 5% ou mais agora — confira de novo mais tarde." };
       if (semFiltroTermo && vaziaMsg[atual]) {
         v.appendChild(document.createTextNode(vaziaMsg[atual]));
+      } else if (buscandoAinda) {
+        v.appendChild(el("strong", null, "Procurando nas lojas parceiras…"));
       } else {
         v.appendChild(el("strong", null, "Nada aqui com esse filtro."));
         v.appendChild(document.createElement("br"));

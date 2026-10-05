@@ -6,8 +6,8 @@ name: Vitrine Mercado Livre
 
 on:
   schedule:
-    - cron: '41 9 * * *'     # 06:41 BRT
-    - cron: '17 19 * * *'    # 16:17 BRT
+    # 05/10/2026 (dono): de hora em hora (rodada ~4 min, sem 429 em 3 seguidas)
+    - cron: '41 * * * *'
   workflow_dispatch:
 
 jobs:

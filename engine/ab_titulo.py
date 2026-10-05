@@ -52,6 +52,15 @@ MAX_CHARS = 40
 # 94%, exclamacao 80%, NUMERO 74%, pergunta 45%, bastidor 24%, EXCLUSIVO so' 14%.
 # Todo canal agora sorteia A x C x K; o Camarim segue A x K.
 GRUPOS_POR_CANAL = {"camarim.kpop": ("A", "K")}
+# ⭐ 05/10/2026 (dono aprovou o plano, itens 1 e 3): 1a leitura de views
+# (ferramentas/views_tiktok.py, 169 videos). Os 2 maiores do Make sao
+# IDENTIFICACAO (92.300, "Quando voce quer... mas tem medo") e IDOL+SEGREDO
+# (46.200, "O segredo por tras dos labios de JIWOO"); idol no titulo = mediana
+# +42%. O A (afirmacao seca) sai do Make; o Camarim fica so' com a capa.
+# Modo Futuro: os 2 melhores tem NUMERO/escala no titulo ("1.000 vezes", "do
+# tamanho de um predio"); a capa (K) traz numero em 74% — teste de 7 dias.
+GRUPOS_POR_CANAL.update({"truque.importado": ("C", "K"), "camarim.kpop": ("K",),
+                         "modofuturo": ("K",)})
 
 # O "idolo" de cada canal: quem a capa poe em destaque pelo NOME.
 ASSUNTO_CAPA = {

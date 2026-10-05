@@ -18,6 +18,10 @@
 - [ ] **Black Friday 2026** — plano em handoff/CAMPANHA_BLACK_FRIDAY_2026.md; marcos no calendário (27/10, 01/11, 21/11).
 - [ ] **CNPJ** — destrava TikTok empresarial (ManyChat) e possivelmente Shopee/WhatsApp Business API.
 
+- [ ] **Search Console no relatório semanal** — dono cria conta de serviço e passa o JSON (segredo GSC_CREDENCIAIS). Passo a passo: PLANO_SITE_VENDAS_2026.md §5-A. (05/10)
+- [ ] **Bing Webmaster** — dono importa do Search Console (§5-B). **Pinterest** — conta empresa (§5-C). (05/10)
+- [ ] **Palavras-chave** — lista de 30–50 termos (Keyword Planner + autocompletar) para escolher as próximas listas /melhores/. (05/10)
+
 ## Resolvidas
 - 05/10 Sem Anestesia barrado por '#N' no título (agendador) — ver REGISTRO_05-10-2026_D.
 - 05/10 Corte 1 por vez → até 3 simultâneos.

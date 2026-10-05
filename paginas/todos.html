@@ -7,7 +7,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <!-- TRAVADO-SEMPRE-CLARO 23-09: o media abaixo virou impossivel de proposito (pagina inteira esta' travada no tema claro agora, a barra do Safari tem de seguir). Reverter: tirar " and (prefers-color-scheme: light)". -->
 <meta name="theme-color" media="(prefers-color-scheme: dark) and (prefers-color-scheme: light)" content="#0f0e13">
-<title>Achadinho Total</title>
+<title>Achadinho Total — ofertas com histórico de preço e cupons de desconto conferidos hoje</title>
 <!-- ⚠️ O NOME QUE O IPHONE SALVA NA TELA DE INICIO NAO E' O <title>.
      Sem `apple-mobile-web-app-title` o iOS pega o <title> inteiro, corta
      pelo COMECO e mostra "Total — tudo o que estou acompanha...". Foi o que
@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="/icone_app.png?v=branco">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/icone.png">
-<meta name="description" content="O catálogo do Achadinho Total: produto, preço acompanhado de hora em hora e link direto pra loja. O desconto é medido contra o preço que eu vi.">
+<meta name="description" content="Ofertas com histórico de preço real e cupons de desconto conferidos de hora em hora: AliExpress, Mercado Livre, Kabum, Nike e mais. Veja o menor preço e receba aviso quando cair.">
 <meta name="awin" content="publisher">
 <!-- ⭐ INDEXACAO (17/09/2026): o dominio proprio e' o endereco canonico.
      A mesma pagina responde em achadinhototal.pages.dev; sem canonical o
@@ -2712,6 +2712,8 @@
     .baloes .canais { left: calc(100% + max(12px, (100vw - 944px) / 4 - 60px)); }
     .baloes .lado .flutua { --t: 112px; }
   }
+  .hist-link { display: inline-block; margin-top: 4px; font-size: 12px; color: #8a6d12; text-decoration: underline; text-underline-offset: 2px; }
+  .links-seo { font-size: 13px; text-align: center; } .links-seo a { color: inherit; }
   .balao-bloco { display: none; }
   @media (min-width: 1440px) {
     .balao-bloco { display: block; position: fixed; width: 92px; pointer-events: none; z-index: 0;
@@ -3140,6 +3142,8 @@
   <section id="indice-estatico" aria-hidden="true"></section>
 
   <footer>
+    <!-- 05/10/2026 SEO: links internos rastreaveis para as paginas que respondem buscas -->
+    <p class="links-seo"><a href="/melhores/">Melhores produtos por preço</a> · <a href="/cupons/">Cupons de desconto hoje</a> · <a href="/top10/">Top 10 do Mercado Livre</a></p>
     <p class="marca-rodape">© 2026 Achadinho Total — todos os direitos reservados</p>
     <p class="aviso-rodape">Preços conferidos na data indicada em cada item · Contém links de afiliado · <a href="/privacidade" class="link-rodape">Privacidade</a></p>
   </footer>
@@ -4555,6 +4559,12 @@
     // ⭐ SELO 2 "AVISE-ME QUANDO CAIR" (17/09/2026): abre o bot no Telegram
     // com /start alerta_<id>; a nuvem colhe de hora em hora e avisa quando
     // a série disparar. É o Keepa brasileiro. Sem BOT_ALERTA, sem botão.
+    // ⭐ 05/10/2026 SEO: link para a pagina do produto (/p/<slug>/, gerada pelo publicador)
+    if (p.pg) {
+      var hp = el("a", "hist-link", "ver histórico de preço →");
+      hp.href = "/p/" + p.pg + "/";
+      corpo.appendChild(hp);
+    }
     if (BOT_ALERTA && p.id) {
       var av = document.createElement("a");
       av.className = "avise-me";

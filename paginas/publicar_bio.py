@@ -922,6 +922,18 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
     externos = produtos_externos()
     promover_ofertas_ml(dados, externos)
     misturar_ml_na_vitrine(dados, externos)
+    # ⭐ 05/10/2026 SEO (PLANO_SITE_VENDAS 1d/1e): /p/<slug>/ e /melhores/. Cada
+    # cartao com pagina ganha `pg` (link "ver historico" + indice estatico).
+    global PAGINAS_P, MAPA_P
+    try:
+        from engine import paginas_produto as _pp
+        _cartoes = dados + [x for b in externos.values() for x in b["produtos"]]
+        PAGINAS_P, MAPA_P, _slugs = _pp.gerar(_cartoes, _precos_por_dia(), _bot_alerta())
+        for x in _cartoes:
+            if str(x.get("id")) in _slugs:
+                x["pg"] = _slugs[str(x["id"])]
+    except Exception as e:                                # noqa: BLE001
+        print(f"  [!] /p/ e /melhores/ nao sairam: {str(e)[:120]}")
     # ⚠️ O HTML LEVA SO' O INDICE das externas: nome, arquivo, quantos e o
     # passo. Os cartoes ficam no arquivo ao lado.
     # ⭐ 18/09: alem da contagem por area (`cats`), os CLIQUES de 30 dias por
@@ -3335,7 +3347,8 @@ def indice_estatico(dados: list[dict]) -> str:
         if not (nome and pid not in (None, "")):
             continue
         loja = p.get("loja") or ""
-        itens.append(f'<li><a href="?p={_h.escape(str(pid), quote=True)}">'
+        alvo = f"/p/{p['pg']}/" if p.get("pg") else f"?p={_h.escape(str(pid), quote=True)}"
+        itens.append(f'<li><a href="{alvo}">'
                      f'{_h.escape(nome)}</a> — {_h.escape(preco)}'
                      + (f' · {_h.escape(loja)}' if loja else '') + '</li>')
     return ("<h2>Todos os achadinhos</h2>" + chr(10) + "<ul>" + chr(10)
@@ -3364,11 +3377,32 @@ def _slugs_cupons() -> list[str]:
         return []
 
 
-def sitemap_xml(caminhos: list[str]) -> str:
+#: paginas /p/ e /melhores/ desta publicacao (montar_catalogo preenche)
+PAGINAS_P: dict = {}
+MAPA_P: list = []
+# ⭐ 05/10/2026 IndexNow (Bing, Yandex, Seznam...): a chave mora num .txt na raiz
+# e cada publicacao avisa os enderecos na hora. Chave publica por desenho.
+INDEXNOW_CHAVE = "91ee5d3529b1d9efecfd406d47ade8c3"
+
+
+def avisar_indexnow(caminhos: list[str]) -> None:
+    import requests
+    urls = [DOMINIO + c for c in caminhos][:10000]
+    try:
+        r = requests.post("https://api.indexnow.org/indexnow", timeout=30, json={
+            "host": DOMINIO.split("//")[1], "key": INDEXNOW_CHAVE,
+            "keyLocation": f"{DOMINIO}/{INDEXNOW_CHAVE}.txt", "urlList": urls})
+        print(f"  indexnow: {len(urls)} endereco(s) -> HTTP {r.status_code}")
+    except Exception as e:                                # noqa: BLE001
+        print(f"  [!] indexnow falhou: {str(e)[:80]}")
+
+
+def sitemap_xml(caminhos: list) -> str:
+    """`caminhos`: "/x/" (lastmod = hoje) ou ("/x/", "AAAA-MM-DD") com a data REAL."""
     from datetime import date
     hoje = date.today().isoformat()
-    urls = "".join(f"  <url><loc>{DOMINIO}{c}</loc><lastmod>{hoje}</lastmod>"
-                   f"<changefreq>daily</changefreq></url>" + chr(10) for c in caminhos)
+    urls = "".join(f"  <url><loc>{DOMINIO}{c}</loc><lastmod>{m}</lastmod></url>" + chr(10)
+                   for c, m in ((x, hoje) if isinstance(x, str) else x for x in caminhos))
     return ('<?xml version="1.0" encoding="UTF-8"?>' + chr(10)
             + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + chr(10)
             + urls + '</urlset>' + chr(10))
@@ -3746,8 +3780,14 @@ def publicar_no_ar(html: str, parceiros: str = "",
                                 + [f"/top10/{n}/" for n in TOP10_NICHOS_MAPA]
                                 + [f"/cupons/{s}/" for s in _slugs_cupons()]
                                 + (["/parceiros"] if parceiros else [])
-                                + ["/privacidade"]),
+                                + ["/privacidade"]
+                                + list(MAPA_P)),
                     encoding="utf-8")
+                (casa / f"{INDEXNOW_CHAVE}.txt").write_text(INDEXNOW_CHAVE, encoding="utf-8")
+                for rel, corpo in PAGINAS_P.items():
+                    alvo = casa / rel
+                    alvo.parent.mkdir(parents=True, exist_ok=True)
+                    alvo.write_text(_com_posthog(corpo), encoding="utf-8")
                 (casa / "_redirects").write_text(REDIRECTS, encoding="utf-8")
                 (casa / "_headers").write_text(CABECALHOS, encoding="utf-8")
                 # ⛔ O SITE MAE E' QUEM TEM A TAG `apple-touch-icon`. Sem esta
@@ -3777,6 +3817,9 @@ def publicar_no_ar(html: str, parceiros: str = "",
                     env=amb, check=True, capture_output=True,
                     shell=(os.name == "nt"))
                 print(f"  publicado: {PROJETO_MAE} (site mae)")
+                avisar_indexnow(["/", "/cupons/", "/top10/", "/melhores/"]
+                                + [f"/cupons/{s}/" for s in _slugs_cupons()]
+                                + [c for c, _ in MAPA_P])
             finally:
                 shutil.rmtree(casa, ignore_errors=True)
     finally:

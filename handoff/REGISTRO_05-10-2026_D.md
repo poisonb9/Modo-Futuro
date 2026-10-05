@@ -236,3 +236,15 @@
 - Backup: %TEMP%/claude/todos_antes_baloes_premium.html. Conferido na prévia em 1912, 1100 e 375 px.
 - Dono: "ficou vazio" → 3 por lado no PC (≥1400 px), em xadrez ouro/vermelho: presente/laço/sacola dourada | boca/lupa/coração
   (linhas de 235 px, a partir de top 30 px). Tela média segue com 1 por lado; celular inalterado.
+
+## 35. SEO: as 6 frentes do "+acervo o que não estamos fazendo" (dono aprovou as 6)
+- Acervo: site novo ranqueia com páginas de UMA busca de baixa concorrência e alta intenção, resposta direta 2–3 frases + tabela,
+  palavra-chave no título/H1, sitemap + Search Console, links internos e de fora.
+- **Código:** `engine/paginas_produto.py` (novo), `paginas/publicar_bio.py` (gera /p/ e /melhores/ em `montar_catalogo`,
+  `pg` nos cartões, índice estático → /p/, sitemap com lastmod real, IndexNow pós-deploy, chave .txt), `paginas/todos.html`
+  (título/descrição com palavras-chave, link "ver histórico de preço →" no cartão, rodapé com links), `ferramentas/relatorio_seo.py`
+  + workflow `relatorio_seo.yml` (segunda 08:30).
+- **Bug pego na prévia:** preço de hoje fora da série → "menor R$ 30,99" com hoje R$ 30,49. Corrigido: hoje entra na série.
+- **Bug pego no teste:** ids do Ali são `int` na série e `str` no cartão → só 3 páginas. Normalizado para str → 141.
+- 1ª geração: 141 /p/ + 11 listas /melhores/ (Eletrônicos, Academia, Casa, Cozinha, Beleza, Carro, Achadinhos). Teste do relatório: 27 URLs, 25/25 = 200.
+- Pendente do dono: segredo GSC_CREDENCIAIS, Bing (importar do GSC), Pinterest. Passo a passo no PLANO seção 5.

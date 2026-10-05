@@ -106,3 +106,27 @@
 - 05/10 — ACHADO: a Awin agora devolve promoções de PRODUTO da Kabum (160) além dos cupons → Kabum com 181 itens. Mantido
   (são ofertas reais, com link), mas avaliar separar "cupom" de "promoção de produto" na página.
 - (próximo) página por produto `/p/<slug>/` (piloto com ~500) e "melhores X até R$ Y"; Search Console (depende do dono).
+
+---
+
+## 5. Google: o que faltava (consulta +acervo 05/10 ~22:40) — e o que foi feito
+
+| # | o que faltava | feito em 05/10 | estado |
+|---|---|---|---|
+| 1 | Páginas que respondem a UMA busca | `engine/paginas_produto.py`: `/p/<slug>/` (≥7 dias de série, foto, link, sem remédio; teto 500) com gráfico SVG, menor/maior/média 30 d, "É uma boa hora para comprar?" (resposta direta), cupons da loja, aviso Telegram, parecidos, FAQ; JSON-LD Product/Offer + BreadcrumbList + FAQPage. Produto que sai do catálogo continua com aviso (registro `estado/paginas_produto.json`), sem 404. `/melhores/<area>-ate-<Y>-reais/` (tabela comparativa, ≥5 itens) + índice `/melhores/`. 1ª rodada: **141 /p/ + 11 listas** (só AliExpress/Kabum têm ≥7 dias; cresce sozinho). | código pronto, publicação em seguida |
+| 2 | Palavras-chave | Título da home: "Achadinho Total — ofertas com histórico de preço e cupons de desconto conferidos hoje"; descrição com lojas e "menor preço". Títulos das /p/ e /melhores/ seguem a busca ("<produto>: histórico de preço e menor preço", "Melhores X até R$ Y"). PRÓXIMO: lista de 30–50 termos (Keyword Planner + autocompletar) para escolher novas listas. | ✅ código |
+| 3 | Links internos | Cartão da vitrine ganha "ver histórico de preço →" (`p.pg`); índice estático da home aponta para `/p/` em vez de `?p=`; rodapé da home com /melhores/, /cupons/, /top10/; cada /p/ liga 6 parecidos, a lista da área e os cupons da loja. | ✅ código |
+| 4 | Autoridade / descoberta | **IndexNow** automático a cada publicação (`avisar_indexnow`, chave em `/<chave>.txt`) → Bing/Yandex na hora. Bing Webmaster e Pinterest dependem do dono (passo a passo abaixo). | IndexNow ✅ · Bing/Pinterest ⏳ dono |
+| 5 | Conteúdo único | Cada /p/ tem texto próprio com números medidos por nós + FAQ. Lastmod do sitemap = último dia com preço real (não "hoje" em tudo). | ✅ código |
+| 6 | Medir toda semana | `ferramentas/relatorio_seo.py` + `.github/workflows/relatorio_seo.yml` (segunda 08:30 BRT, nuvem): mapa no ar, saúde (25 URLs 200), cliques para as lojas; com Search Console: cliques/impressões/CTR/posição vs semana anterior, top buscas, top páginas, "muita impressão e pouco clique", indexados do sitemap. | ✅ (Google ⏳ segredo) |
+
+### Passo a passo do DONO
+**A. Conectar o Search Console ao relatório (5 min):**
+1. console.cloud.google.com → projeto existente → "APIs e serviços" → ativar **Google Search Console API**.
+2. "IAM e administrador" → "Contas de serviço" → Criar (nome `relatorio-seo`) → Chaves → Adicionar chave → JSON (baixa um arquivo).
+3. Search Console → Configurações → Usuários e permissões → Adicionar usuário → e-mail da conta de serviço (…@…iam.gserviceaccount.com) → permissão **Restrita**.
+4. Mandar o JSON para Claude (ou colar no GitHub: Settings → Secrets → Actions → `GSC_CREDENCIAIS`).
+
+**B. Bing Webmaster Tools (2 min):** bing.com/webmasters → entrar com a conta Google → "Importar do Google Search Console" → escolher achadinhototal.com.br. Pronto (o IndexNow já avisa o Bing a cada publicação).
+
+**C. Pinterest (depois):** criar conta Empresa "Achadinho Total", reivindicar o site (Claude põe a meta tag), e Claude gera os pins de /p/ e /melhores/ automaticamente.

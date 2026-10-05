@@ -1,0 +1,24 @@
+name: Relatorio semanal do Google (SEO)
+
+on:
+  schedule:
+    - cron: "30 11 * * 1"   # segunda 08:30 Sao Paulo
+  workflow_dispatch:
+
+jobs:
+  relatorio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests python-dotenv google-api-python-client google-auth
+      - env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GSC_CREDENCIAIS: ${{ secrets.GSC_CREDENCIAIS }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python -X utf8 ferramentas/relatorio_seo.py

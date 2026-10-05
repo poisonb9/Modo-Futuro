@@ -23,3 +23,6 @@
 - 05/10 Corte 1 por vez → até 3 simultâneos.
 - 05/10 Chef sem reposição (estoque contava bruto já cortado).
 - 05/10 Avisos do Telegram mudos (token 401) → secrets apontam pro AchadinhoTotalBot.
+- [ ] **Aferição do acervo de marketing**: o banco de `aferir_busca.py` só tem livros/mentores. Criar perguntas-alvo de marketing antes da parte 2. (05/10)
+- [ ] **Acervo parte 2**: quando a destilação inteira terminar → skill → Voyage → rerank → aferir. (05/10)
+- [ ] **Publicador (stash pop falho)**: publicar_ao_mudar_agendado.ps1 deixa o trabalho local preso no stash quando o pop dá conflito — avisar no Telegram / não engolir. (05/10)

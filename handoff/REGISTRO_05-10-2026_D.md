@@ -134,3 +134,62 @@
   ML amarelo, Ali vermelho, Nike preto, Kabum laranja/azul, Drogal azul, Clovis vermelho-escuro, Oceane rosa,
   Soldiers verde/ouro, Lauri azul, Guess preto/vermelho, Stanley verde, Arno vermelho; fora do mapa = ouro da casa.
   Prévia comparando hoje × A × B: paginas/previa_botoes_lojas.html. Loja nova aprovada: acrescentar em `CTA_LOJA`.
+
+## 22. Acervo — pipeline PARTE 1 (OK do dono 05/10 tarde; parte 2 quando a destilação inteira acabar)
+- Destilação no momento: Russell 98/158; faltam Natanael 331, Hormozi 132, Ladeira 54, Jordan 54, Income 25, Ben Heath 14
+  (~670 vídeos a ~34/h ≈ 20 h — o "~8 h" do handoff E estava errado). Russell rende pouco (vlog Funnel Hacker TV → 0 fichas).
+- Etapa 6 feita: `maestros_da_ia/gerar_skill.py` (comando do SKILL.md) → 24.283 fichas (+2.672), 3.465 vídeos.
+  Backup da skill anterior em %TEMP%/claude/skill_mkt_antes_20261005. A skill em ~/.claude/skills é link para skills_de_trabalho.
+- Etapa 7 em andamento: `embutir_acervo.py --fonte marketing --modelo voyage-3.5 --aplicar --esperar-cota` (incremental: só as ~2.672 novas),
+  log `ia mind/_embutir_voyage_marketing_20261005.log`. Depois: rerank-2.5 e aferir_busca.
+
+## 23. Botões das lojas recebidos (ChatGPT)
+- Guess, Nike, Stanley, Drogal, Lauri, Soldiers → `midia/botoes_originais/botao_ver_na_<loja>.png`, recorte alpha>60 em `midia/botoes_web/` (.png + .webp 600 px), LEIA.md atualizado.
+  Faltam: Clovis, Oceane, Arno (prompt do Arno reenviado ao dono).
+- Etapa 7 FEITA: 2.672 vetores novos em 16 s, conferência 24.283 × 24.283 OK.
+- Etapa 8 (`medir_reranker.py --modelo rerank-2.5 --topn 250`): top-5 16 → 31 com rerank (+15); 1 pergunta não medida (fatia perdida por RemoteDisconnected).
+- Etapa 9 (`aferir_busca.py --rotulo parte1_20261005`): 18/58 (31%).
+  ⚠️ O banco de aferição só tem perguntas de LIVROS e MENTORES — nenhuma de marketing. A busca de marketing segue SEM aferição própria → pendência.
+
+## 24. Cartão com queda e sem procedência (massageador do Ali, "caiu 30%")
+- **Sintoma:** selo "caiu 30%" sem gráfico e sem "rastreando há N dias".
+- **Causa:** 2 leituras (178,99 → 125,99). `grafico()` exige 3 pontos e a linha de idade só existe dentro do gráfico.
+- **Correção:** `todos.html`: sem gráfico + queda ≥5% + 2 leituras → linha "rastreando há N dias · N leituras". Varredura: era o único caso.
+- **Conferir:** prévia local mostrou "rastreando há 4 dias · 2 leituras". Vai ao ar na próxima publicação.
+
+## 25. Destilação: Gemini flash + Nemotron, 3 vídeos juntos
+- Dono pediu Nemotron junto com Gemini em paralelo. `destilar_canais_em_ordem_20260924.py`: `--gemini-em-dez 5 --videos-juntos 3`
+  (backup `.antes_do_paralelo_20261005`). Escada Gemini = só flash 3.8→3.5. Reiniciado 17:12. Não há pipeline de destilação na nuvem (só PC).
+
+## 26. +acervo unificado e aferição no assunto certo (não-trade)
+- **Sintoma:** `+acervo` injetava as 4 SKILL.md (~18 KB); o Claude Code corta contexto de hook grande para uma prévia de 2 KB →
+  só o maestros-da-ia era visto; marketing/CSS/Liquid Glass sumiam em silêncio.
+- **Correção:** `~/.claude/hooks/trio_do_acervo.py` (backup `.antes_unificado_20261005`): `+acervo` agora entrega um bloco de 1,3 KB com a
+  busca semântica UNIFICADA (`buscar_semantico.py --acervo marketing --acervo maestros --acervo css --acervo liquid_glass`, 190.431 fichas,
+  Voyage 3.5 + rerank-2.5, ~35 s). `+livros` (trade) inalterado.
+- **Aferição:** o banco só tinha trade. Novo par `acervo_geral` (4 índices) em `aferir_busca.py`; 30 perguntas M01–M30 parafraseadas,
+  alvo literal de ficha real (marketing/maestros/css). `medir_reranker.py` ganhou `--par` (saída `rerank_rerank-2.5_n250_acervo_geral.json`).
+- **Bug achado no aferidor:** `normalizar()` deixava espaço duplo onde havia pontuação → alvo que atravessasse vírgula/parêntese NUNCA casava
+  (5 dos 30 deram 0). Corrigido (split/join). ⚠️ Notas antigas de trade podem ter sido SUBESTIMADAS por isso — remedir antes de comparar.
+
+## 27. Balões de cupom na loja (pedido do dono) + botão Arno
+- Imagens do ChatGPT: originais em `midia/baloes_cupom_originais/`; web em `paginas/baloes/cupom_{a,b,clique_aqui,ver_cupons}.webp` (recorte alpha>60).
+- `todos.html`: PC (≥1100 px) = 2 conjuntos ao lado da linha viva (cupom grande + "clique aqui" pendurado na fita), flutuando,
+  brilho dourado pulsando, selo vermelho "112 hoje" lido ao vivo do `estado/cupons.json` (raw GitHub). Celular/tablet = pílula
+  "VER CUPONS" fixa acima da barra de abas, entra após 3 s, some ao rolar para baixo. PostHog `cupom_balao_clique` (origem).
+  `prefers-reduced-motion` desliga animação. Backup: %TEMP%/claude/todos_antes_baloes_cupom.html.
+- Conferido na prévia local: 1700 px (posição dos quadrados vermelhos do print) e 375 px (pílula sem cobrir a barra). Vai ao ar na próxima publicação.
+- Botão Arno recebido → `botao_ver_na_arno` (originais + web). Faltam Clovis e Oceane.
+- Dono: o da esquerda ficou melhor → os DOIS lados usam `cupom_a.webp`.
+
+## 28. ⛔ Publicador automático "engoliu" o trabalho local (05/10 ~18:25)
+- **Sintoma:** `todos.html` voltou à versão do commit (sumiram balões de cupom e o conserto do massageador); REGISTRO, radares, mídia nova também.
+- **Causa:** `publicar_ao_mudar_agendado.ps1` faz `git stash -u` → `git pull --rebase` → `git stash pop`. O pop falhou (conflito com arquivo
+  atualizado na nuvem, ex. `estado/cupons.json`) e TUDO ficou preso em `stash@{0}` em silêncio.
+- **Correção:** `git stash apply stash@{0}` (sem apagar o stash) + `git checkout stash@{0} --` dos 3 arquivos que eu tinha mexido depois.
+  Conferido: balões, linha "leituras" e itens 22–27 de volta. Stash mantido como segurança. Cópia em %TEMP%/claude/todos_com_baloes_cupom.html.
+- **Pendente:** o publicador precisa AVISAR (Telegram) quando o pop falha, em vez de deixar o trabalho no stash.
+
+## 29. Reranker medido no acervo NÃO-trade (30 perguntas M01–M30)
+- Só embedding (Voyage 3.5): 17/30 no top-5 (57%). Com rerank-2.5 (top-250): **21/30 (70%)**, ganho +4. 1 URLError na rodada (M28/M29).
+- Comparar só com esta mesma lista. Arquivo: `ia mind/_afericao/rerank_rerank-2.5_n250_acervo_geral.json`.

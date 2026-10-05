@@ -2915,6 +2915,42 @@
   .item .cta.l-stanley { color: #fff; background: linear-gradient(180deg,#2f7a52,#1b5e3b 55%,#124a2d); border-color: #0b3520; }
   .item .cta.l-arno { color: #fff; background: linear-gradient(180deg,#f04a4a,#d71920 55%,#b5121a); border-color: #8a0c12; }
   .item .cta.l-ouro { color: #f6d977; background: linear-gradient(180deg,#2a2a2e,#0b0b0d 55%,#000); border-color: #d4a937; }
+
+  /* ⭐ 05/10/2026 — balões de cupom (ver comentário no <header>). */
+  .cupom-balao { display: none; }
+  @media (min-width: 1100px) {
+    .cupom-balao { display: block; position: absolute; top: 300px; width: 118px;
+      z-index: 3; text-decoration: none; animation: cb-flutua 4.5s ease-in-out infinite; }
+    .cupom-balao.esq { left: calc(50% - 370px); }
+    .cupom-balao.dir { right: calc(50% - 370px); animation-delay: -2.2s; }
+    .cb-cupom { width: 118px; display: block; animation: cb-brilho 2.6s ease-in-out infinite; }
+    /* o "clique aqui" pendura na ponta da fita do cupom */
+    .cb-clique { width: 58px; display: block; margin: -46px auto 0;
+      position: relative; left: 4px; transform-origin: 50% 0;
+      animation: cb-balanca 2.2s ease-in-out infinite; }
+    .cupom-balao.dir .cb-clique { left: -6px; }
+    .cupom-balao:hover .cb-cupom { animation: none; filter: drop-shadow(0 0 22px rgba(255,200,40,.95)) brightness(1.08); }
+    .cupom-balao:hover { animation-play-state: paused; }
+    .cupom-balao .cb-qtd { position: absolute; top: -10px; right: -12px; }
+  }
+  .cb-qtd { background: #c8102e; color: #fff; font: 800 12px/1 system-ui, sans-serif;
+    padding: 5px 8px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,.25); white-space: nowrap; }
+  .cb-qtd:empty { display: none; }
+  @keyframes cb-flutua { 0%,100% { translate: 0 0; rotate: -2deg; } 50% { translate: 0 -10px; rotate: 2deg; } }
+  @keyframes cb-balanca { 0%,100% { rotate: -7deg; } 50% { rotate: 7deg; } }
+  @keyframes cb-brilho {
+    0%,100% { filter: drop-shadow(0 0 4px rgba(255,200,40,.35)); }
+    50%     { filter: drop-shadow(0 0 18px rgba(255,200,40,.9)); } }
+  /* celular/tablet: pílula fixa acima da barra de abas */
+  #cupom-pilula { position: fixed; right: 10px; bottom: 84px; z-index: 40; width: 150px;
+    opacity: 0; transform: translateY(16px); pointer-events: none;
+    transition: opacity .35s, transform .35s; }
+  #cupom-pilula.mostra { opacity: 1; transform: none; pointer-events: auto; }
+  #cupom-pilula img { width: 100%; display: block; animation: cb-brilho 2.6s ease-in-out infinite; }
+  #cupom-pilula .cb-qtd { position: absolute; top: -9px; left: -6px; font-size: 11px; padding: 4px 7px; }
+  @media (min-width: 1100px) { #cupom-pilula { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .cupom-balao, .cb-cupom, .cb-clique, #cupom-pilula img { animation: none; } }
 </style>
 
 <div class="luz" aria-hidden="true"></div>
@@ -2976,6 +3012,20 @@
       <span class="vivo-preco" id="vivo_preco"></span>
       <span class="vivo-dica" id="vivo_dica"></span>
       <span class="vivo-cta" id="vivo_cta"></span>
+    </a>
+    <!-- ⭐ 05/10/2026 (Bryan): balões de CUPOM nos dois cantinhos ao lado da
+         linha viva (PC) -> /cupons/. Cupom grande + "clique aqui" pendurado na
+         fita dele. Brilho pulsando = chamariz. No celular não cabe: vira a
+         pílula fixa "VER CUPONS" (#cupom-pilula, fim da página). -->
+    <a class="cupom-balao esq" href="/cupons/" data-origem="balao_esq" aria-label="Ver cupons de desconto">
+      <img class="cb-cupom" src="/baloes/cupom_a.webp" alt="" decoding="async" fetchpriority="low">
+      <img class="cb-clique" src="/baloes/cupom_clique_aqui.webp" alt="" decoding="async" fetchpriority="low">
+      <span class="cb-qtd" data-cupons-qtd></span>
+    </a>
+    <a class="cupom-balao dir" href="/cupons/" data-origem="balao_dir" aria-label="Ver cupons de desconto">
+      <img class="cb-cupom" src="/baloes/cupom_a.webp" alt="" decoding="async" fetchpriority="low">
+      <img class="cb-clique" src="/baloes/cupom_clique_aqui.webp" alt="" decoding="async" fetchpriority="low">
+      <span class="cb-qtd" data-cupons-qtd></span>
     </a>
   </header>
   <!-- ⭐ O CONSOLE (18/09/2026, aprovado pelo Bryan no mock v5): prova +
@@ -4541,6 +4591,19 @@
     // continua em `grafico()`.
     var gr = grafico(p, true);
     if (gr) { corpo.insertBefore(gr, corpo.querySelector(".avise-me")); }
+    // ⭐ 05/10/2026 (Bryan, print do massageador do Ali: "caiu 30%" sem dias
+    // nem grafico): com 2 leituras a queda e' real (178,99 -> 125,99) mas a
+    // guarda de 3 pontos tira o grafico -- e a linha "rastreando" ia junto.
+    // Sem grafico, a procedencia vira texto: ha' quanto tempo e quantas leituras.
+    else if ((p.queda || 0) >= 5 && (p.pontos || 0) >= 2) {
+      var semG = el("div", "meta-linha nq");
+      semG.appendChild(vistoSVG());
+      semG.appendChild(document.createTextNode(
+        ((p.dias || 0) <= 0 ? "rastreando desde hoje"
+          : p.dias === 1 ? "rastreando há 1 dia" : "rastreando há " + p.dias + " dias")
+        + " · " + p.pontos + " leituras"));
+      corpo.insertBefore(semG, corpo.querySelector(".avise-me"));
+    }
     // ⭐ 22/09/2026 (Bryan: "o ALI tem ir pra baixo agora que ficou ruim"
     // -> "leva pra legenda"). O selo sozinho num rodape proprio ficou como um
     // chip solto. Ele vira a TERCEIRA linha da legenda, do mesmo jeito que a
@@ -7252,6 +7315,36 @@
     addEventListener("scroll", function () { if (!pedido) { pedido = true; requestAnimationFrame(pinta); } }, { passive: true });
     pinta();
   } catch (e) {}
+})();
+</script>
+<a id="cupom-pilula" href="/cupons/" data-origem="pilula" aria-label="Ver cupons de desconto">
+  <img src="/baloes/cupom_ver_cupons.webp" alt="" decoding="async" fetchpriority="low">
+  <span class="cb-qtd" data-cupons-qtd></span>
+</a>
+<script>
+/* ⭐ 05/10/2026: balões/pílula de cupom. Número ao vivo do cupons.json
+   (o mesmo que /cupons/ lê, atualizado de hora em hora). Sem número = só o balão. */
+(function () {
+  try {
+    fetch("https://raw.githubusercontent.com/poisonb9/Modo-Futuro/main/estado/cupons.json", {cache: "no-store"})
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var n = Array.isArray(d) ? d.length : 0;
+        if (!n) { return; }
+        document.querySelectorAll("[data-cupons-qtd]").forEach(function (e) { e.textContent = n + " hoje"; });
+      }).catch(function () {});
+  } catch (e) {}
+  var p = document.getElementById("cupom-pilula"), ultimo = 0;
+  setTimeout(function () { p.classList.add("mostra"); }, 3000);
+  addEventListener("scroll", function () {
+    var y = scrollY; if (Math.abs(y - ultimo) < 12) { return; }
+    p.classList.toggle("mostra", y < ultimo || y < 200); ultimo = y;
+  }, {passive: true});
+  document.querySelectorAll(".cupom-balao, #cupom-pilula").forEach(function (a) {
+    a.addEventListener("click", function () {
+      try { window.posthog && posthog.capture("cupom_balao_clique", {origem: a.getAttribute("data-origem")}); } catch (e) {}
+    });
+  });
 })();
 </script>
 </html>

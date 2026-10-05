@@ -5,17 +5,18 @@
 da loja como produtos visíveis dentro do site" + "o primeiro a buscar é o
 Mercado Livre".
 
-Ciclo (de hora em hora, tarefa do Windows — o SUPABASE_PAT só existe aqui):
-  1. lê os termos buscados nos últimos 7 dias (tabela `busca`, todos, com ou sem
-     resultado), mais buscados primeiro;
-  2. para cada termo novo ou com mais de 24 h, `mercadolivre.buscar` (link do
-     anúncio, régua anti-isca);
+Duas metades (a API do ML não responde da VPS; o SUPABASE_PAT só existe aqui):
+  --termos  (VPS, de hora em hora): lê os termos buscados nos últimos 7 dias
+            (tabela `busca`) e grava `estado/termos_buscados.json` (só termo e
+            contagem — nada pessoal) no repo.
+  --ml      (nuvem, no ml_vitrine.yml): para cada termo novo ou com mais de 24 h,
+            `mercadolivre.buscar` (link do anúncio, régua anti-isca, SEM IA);
   3. grava `estado/ml_busca.json` no formato da vitrine; o publicador junta com
      `ml_vitrine.json` (categoria "Mercado Livre"), e o publicador automático
      sobe o site quando o arquivo muda.
 
-    python -X utf8 ferramentas/buscas_para_loja.py          # roda
-    python -X utf8 ferramentas/buscas_para_loja.py --ver    # só mostra os termos
+    python -X utf8 ferramentas/buscas_para_loja.py --termos   # VPS
+    python -X utf8 ferramentas/buscas_para_loja.py --ml       # nuvem
 """
 from __future__ import annotations
 
@@ -31,9 +32,10 @@ sys.path.insert(0, str(RAIZ))
 from dotenv import load_dotenv  # noqa: E402
 
 load_dotenv(RAIZ / ".env")
-from engine import buscas_site, mercadolivre  # noqa: E402
+from engine import mercadolivre  # noqa: E402
 
 SAIDA = RAIZ / "estado" / "ml_busca.json"
+TERMOS = RAIZ / "estado" / "termos_buscados.json"
 MAX_TERMOS = 40          # por rodada
 POR_TERMO = 6
 REBUSCA_H = 24
@@ -41,6 +43,12 @@ GUARDA_DIAS = 14         # produto de busca fica na loja 14 dias
 
 
 def termos(dias: int = 7) -> list[dict]:
+    if "--ml" in sys.argv:
+        try:
+            return json.loads(TERMOS.read_text(encoding="utf-8")).get("termos", [])
+        except (OSError, ValueError):
+            return []
+    from engine import buscas_site
     return buscas_site._sql(
         "select lower(trim(termo)) as termo, count(*) as vezes, max(quando) as ultima "
         "from busca where quando > now() - make_interval(days => " + str(int(dias)) + ") "
@@ -66,6 +74,20 @@ def main() -> None:
         atual = {"quando": "", "termos": {}, "produtos": []}
     feitos = atual.get("termos", {})
     lista = termos()
+    if "--termos" in sys.argv:
+        novo = {"termos": [{"termo": t["termo"], "vezes": int(t["vezes"])} for t in lista[:200]]}
+        try:
+            if json.loads(TERMOS.read_text(encoding="utf-8")).get("termos") == novo["termos"]:
+                print("termos: nada novo")
+                return
+        except (OSError, ValueError):
+            pass
+        TERMOS.write_text(json.dumps(novo, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"termos: {len(novo['termos'])} gravados")
+        for c in (["git", "add", "-f", str(TERMOS)], ["git", "commit", "-q", "-m", "busca: termos buscados no site"],
+                  ["git", "pull", "-q", "--rebase", "--autostash"], ["git", "push", "-q"]):
+            subprocess.run(c, cwd=RAIZ)
+        return
     if "--ver" in sys.argv:
         for t in lista[:MAX_TERMOS]:
             print(t["vezes"], t["termo"], "(ja' buscado em " + feitos.get(t["termo"], "-") + ")")
@@ -81,7 +103,7 @@ def main() -> None:
             break
         n_termos += 1
         try:
-            achados = mercadolivre.buscar(termo, quantos=POR_TERMO)
+            achados = mercadolivre.buscar(termo, quantos=POR_TERMO, expandir_termo=False)
         except Exception as e:  # noqa: BLE001 — um termo nao derruba os outros
             print(f"  [!] {termo}: {str(e)[:70]}")
             continue
@@ -106,11 +128,7 @@ def main() -> None:
         return
     SAIDA.write_text(json.dumps(novo, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(prods)} produto(s) de busca na loja ({n_termos} termo(s) consultados)")
-    # sobe pro repo: o publicador automatico olha o origin/main
-    subprocess.run(["git", "add", "-f", str(SAIDA)], cwd=RAIZ)
-    subprocess.run(["git", "commit", "-q", "-m", "busca -> loja: produtos do ML pelos termos buscados"], cwd=RAIZ)
-    subprocess.run(["git", "pull", "-q", "--rebase", "--autostash"], cwd=RAIZ)
-    subprocess.run(["git", "push", "-q"], cwd=RAIZ)
+    # o commit fica com o workflow (ml_vitrine.yml), junto da vitrine
 
 
 if __name__ == "__main__":

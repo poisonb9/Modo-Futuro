@@ -31,11 +31,19 @@ jobs:
           MELI_MATT_WORD:     ${{ secrets.MELI_MATT_WORD }}
           MELI_MATT_TOOL:     ${{ secrets.MELI_MATT_TOOL }}
         run: python -X utf8 -m engine.ml_vitrine --guardar
+      - name: Buscas do site -> loja (05/10/2026)
+        env:
+          MELI_CLIENT_ID:     ${{ secrets.MELI_CLIENT_ID }}
+          MELI_CLIENT_SECRET: ${{ secrets.MELI_CLIENT_SECRET }}
+          MELI_MATT_WORD:     ${{ secrets.MELI_MATT_WORD }}
+          MELI_MATT_TOOL:     ${{ secrets.MELI_MATT_TOOL }}
+        run: python -X utf8 ferramentas/buscas_para_loja.py --ml || echo "[!] buscas -> loja falhou"
       - name: Guardar
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f estado/ml_vitrine.json estado/precos_vistos.jsonl estado/ml_raizes.json || true
+          git add -f estado/ml_busca.json 2>/dev/null || true
           git diff --cached --quiet && exit 0
           git commit -m "ml_vitrine: mais vendidos do Mercado Livre"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

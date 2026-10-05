@@ -70,3 +70,14 @@
 - Acervo: F62331 — **evitar bots de mensagem no TikTok** (limite de contatos, risco de bloqueio). Caminho oficial: **ManyChat × TikTok**
   (o painel do dono já mostra o banner "TikTok × Manychat"): comentário com palavra-chave → DM automática, pela API oficial.
 - Acervo F27194: responder comentário com VÍDEO (função "Responder com vídeo") converte — pode virar formato semi-automático.
+
+## 13. Cupons de hora em hora + AliExpress (no ar, conferido)
+- `cupons.yml` (GitHub, minuto 17 de toda hora) grava `estado/cupons.json`; /cupons lê o JSON do repo público ao abrir
+  (raw.githubusercontent, CORS `*` conferido). Dados embutidos = fallback. Custo zero (APIs grátis, sem IA).
+- AliExpress: `hotproduct.query` → `promo_code_info` (cupom de loja). Os cupons gerais do Ali (BRCD3..8) vêm pelo Awin.
+- Armadilha: API do Ali estoura o timeout de 20 s às vezes → `engine/cupons.py` sobe para 90 s.
+- Conferido no ar: 111 cupons embutidos, PostHog presente. Navegador interno não abre o domínio (recusado) — conferido por curl.
+
+## 14. Black Friday
+- Plano mestre: handoff/CAMPANHA_BLACK_FRIDAY_2026.md ("Detector de Black Fraude": 🟢 real / 🟡 igual / 🔴 maquiada).
+- 6 balões preto+ouro gerados (`paginas/baloes/bf_*.webp`, Cloudflare flux grátis); prévia em handoff/baloes_bf_prototipo.jpg.

@@ -112,3 +112,10 @@
 - Bios: grupo "Os mais vendidos do Mercado Livre, com o preço de hoje" (3º grupo) em 8 canais, cada um no seu nicho.
   Armadilha: inserir por texto quebrou (grupo sem vírgula, canal com 1 grupo) → inserção por contagem de colchetes.
 - **Cookie de 24 h:** conta a partir do CLIQUE; link não expira, nada a renovar. Por isso o selo "oferta de hoje" + aviso "compre hoje".
+
+## 19. Selos (ChatGPT) e regra do remédio
+- 4 selos do dono: originais em `midia/selos_originais/` (com LEIA.md), web em `paginas/baloes/selo_{oferta_de_hoje,compre_hoje,mais_vendido,bf_de_verdade}{,_p}.webp`.
+  No Top 10: 1º lugar = "Mais vendido", demais = "Oferta de hoje", aviso = "Compre hoje". BF guardado para a campanha.
+- Prompts dos selos: pílula preta (ou dourada) com borda dourada, texto exato, fundo transparente, 3:1.
+- **Remédio fora da loja** (`engine/ml_vitrine.py`, `REMEDIO`): Bravecto/Simparic/NexGard/Defenza estavam na vitrine Pet. Suplemento continua.
+- Top 10 sem cesta básica (papel higiênico abria "Beleza"; lava-roupas, papel toalha, lenço umedecido...).

@@ -324,16 +324,16 @@ def vencedor_confiavel(itens: list[dict]) -> dict | None:
 
     ⛔ 05/10/2026: o JBL Quantum tinha um anuncio a R$ 120 (novo, vendedor
     comum) com o 2o mais barato a R$ 164. Isca ou golpe — o site nao manda
-    cliente pra isso. Preco isolado (>20% abaixo do seguinte) sai.
+    cliente pra isso. Preco isolado (>40% abaixo do seguinte) sai.
     """
     v = [i for i in itens if float(i.get("price") or 0) > 0
          and i.get("condition", "new") == "new"] or         [i for i in itens if float(i.get("price") or 0) > 0]
     if not v:
         return None
     v = sorted(v, key=lambda i: float(i["price"]))
-    # isolado: mais de 20% abaixo do SEGUNDO mais barato. (A mediana foi
+    # isolado: mais de 40% abaixo do SEGUNDO mais barato (regua do dono, 05/10; era 20%). (A mediana foi
     # testada e cortava demais: vendedores caros a puxam pra cima.)
-    while len(v) >= 3 and float(v[0]["price"]) < 0.8 * float(v[1]["price"]):
+    while len(v) >= 3 and float(v[0]["price"]) < 0.6 * float(v[1]["price"]):
         v = v[1:]
     return v[0]
 

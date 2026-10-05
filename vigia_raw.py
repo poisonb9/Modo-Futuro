@@ -549,6 +549,22 @@ def uma_passada(drive) -> int:
     if not novos:
         return 0
 
+    # ⭐ 05/10/2026 (dono: canais parados esperando corte): a fila seguia a
+    # ordem da listagem do Drive, e um canal com 6 brutos (Sem Anestesia,
+    # Geracao 2000) passava na frente do Make, que tinha 1 e estava com a fila
+    # do Buffer ZERADA. Agora reveza: 1 de cada canal por rodada, e entre os
+    # canais vai primeiro quem tem MENOS bruto esperando (quem tem pouco e'
+    # quem esta' secando).
+    por_canal: dict[str, list] = {}
+    for v in novos:
+        por_canal.setdefault(canal_da_pasta(v.get("caminho", "")), []).append(v)
+    ordem = sorted(por_canal, key=lambda c: len(por_canal[c]))
+    revezado = []
+    while any(por_canal.values()):
+        for c in ordem:
+            if por_canal[c]:
+                revezado.append(por_canal[c].pop(0))
+    novos = revezado
     espera = max(0, len(novos) - MAX_POR_PASSADA)
     novos = novos[:MAX_POR_PASSADA]
     print(f"{len(novos)} vídeo(s) novo(s) em RAW"

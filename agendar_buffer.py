@@ -460,6 +460,29 @@ def proximos_horarios(agendados: list[dict], quantos: int,
     agora = (datetime.datetime.now(datetime.timezone.utc)
              - datetime.timedelta(hours=FUSO_SP_H)).replace(tzinfo=None)
     saida, dia = [], agora.date()
+    # ⭐ 05/10/2026 (dono): "sempre que um canal parar de postar e voltar no
+    # automatico, ele pode postar IMEDIATAMENTE assim que o corte sair... dentro
+    # de 10 minutos, bem que seja de madrugada; so' nao posta se entrar dentro
+    # das 3 horas de intervalo". LACUNA = nada agendado no futuro E o ultimo
+    # post (enviado ou agendado) foi ha' mais de INTERVALO_MIN_H. Ai' o 1o slot
+    # sai em 5-10 min, fora da grade; os seguintes voltam pra grade normal.
+    futuros = [x for x in instantes if x > agora]
+    passados = []
+    for p in (conhecidos or []):
+        q = p.get("sentAt") or p.get("dueAt")
+        if q:
+            t = (datetime.datetime.fromisoformat(q.replace("Z", "+00:00"))
+                 - datetime.timedelta(hours=FUSO_SP_H)).replace(tzinfo=None)
+            if t <= agora:
+                passados.append(t)
+    ultimo = max(passados) if passados else None
+    if quantos and not futuros and (ultimo is None or agora - ultimo >= datetime.timedelta(hours=INTERVALO_MIN_H)):
+        ja = agora + datetime.timedelta(minutes=random.randint(5, 10), seconds=random.randint(1, 58))
+        print(f"  ⚡ lacuna: ultimo post {ultimo:%d/%m %H:%M} — 1o sai ja' ({ja:%H:%M} SP)"
+              if ultimo else f"  ⚡ lacuna: canal sem post — 1o sai ja' ({ja:%H:%M} SP)")
+        saida.append(ja)
+        ocupados.add((ja.date(), ja.hour))
+        por_dia[ja.date()] = por_dia.get(ja.date(), 0) + 1
     while len(saida) < quantos:
         for h, m in SLOTS_SP:
             if len(saida) >= quantos:

@@ -207,7 +207,7 @@ def casca(titulo: str, desc: str, canon: str, h1: str, sub: str, migalha: str, c
 {lds}<style>{CSS}</style>
 <header class="topo"><div class="in"><nav class="migalha">{migalha}</nav><h1>{h1}</h1><p class="sub">{sub}</p></div></header>
 <main>{corpo}</main>
-<footer><a href="/">Ofertas de hoje</a><a href="/melhores/">Melhores por preço</a><a href="/cupons/">Cupons</a><a href="/top10/">Top 10 ML</a><a href="/privacidade">Privacidade</a>
+<footer><a href="/">Ofertas de hoje</a><a href="/melhores/">Melhores por preço</a><a href="/guias/">Guias</a><a href="/cupons/">Cupons</a><a href="/top10/">Top 10 ML</a><a href="/privacidade">Privacidade</a>
 <p>Preços acompanhados pelo Achadinho Total. Links de afiliado: podemos ganhar comissão, sem custo extra para você. O preço pode mudar na loja.</p></footer>
 <script>document.addEventListener("click",function(v){{var a=v.target.closest("a[data-ev]");if(a&&window.posthog)posthog.capture(a.dataset.ev,{{pagina:location.pathname}})}});</script>
 </html>"""
@@ -338,6 +338,122 @@ def indice_melhores(ls: list[dict], mes: str) -> str:
                  "Cada lista compara o preço de hoje com o histórico que nós medimos", mig, blocos, [ld_mig])
 
 
+# ---------------------------------------------------------------- /guias/
+# ⭐ 05/10/2026 (+acervo: autoridade por tema + "answer targets"). Cada guia é um
+# CLUSTER: resposta direta no topo, critérios, tabela com os NOSSOS produtos do
+# tema (preço de hoje x menor visto, link para /p/), listas /melhores/ e FAQ.
+# As /p/ do tema linkam de volta para o guia. Novo nicho = novo item em GUIAS.
+GUIAS = [{
+    "slug": "como-escolher-fone-bluetooth",
+    "termos": ("fone", "earbud", "headphone", "headset", "tws"),
+    "fora": ("suporte", "capa ", "case ", "adaptador", "cabo ", "almofada", "espuma"),
+    "curto": "fone Bluetooth",
+    "titulo": "Como escolher fone Bluetooth bom e barato em {ano}: guia com preços acompanhados",
+    "h1": "Como escolher um <em>fone Bluetooth</em>",
+    "desc": "Bluetooth 5.3, bateria, ANC x ENC, IPX4, codec e modo jogo explicados em linguagem simples — e os fones que acompanhamos, com o menor preço já visto.",
+    "resposta": ("Para a maioria das pessoas, o melhor custo-benefício é um fone sem fio (TWS) com Bluetooth 5.3, "
+                 "pelo menos 5 horas de bateria por carga (20 h ou mais com o estojo) e resistência IPX4 a suor. "
+                 "Cancelamento de ruído (ANC) só vale se você usa em ônibus, metrô ou avião — e em fone muito barato o \"ANC\" do anúncio costuma ser fraco."),
+    "secoes": [
+        ("1. Qual tipo de fone?", [
+            "<b>Sem fio (TWS, os \"de estojo\"):</b> os mais vendidos; leves, cabem no bolso. Bom para o dia a dia e academia.",
+            "<b>Headphone (de arco):</b> bateria bem maior (30–60 h) e som mais encorpado; bom para trabalho e viagem, ruim para treino.",
+            "<b>Esportivo / gancho / condução óssea:</b> não cai na corrida; o de condução óssea deixa o ouvido livre (bom para rua), com menos grave."]),
+        ("2. Versão do Bluetooth", [
+            "5.0 ou mais já conecta estável. 5.2/5.3 gastam menos bateria e reconectam mais rápido. Abaixo de 5.0, evite.",
+            "A versão do celular também conta: o fone usa o recurso que os DOIS têm."]),
+        ("3. Bateria: leia os dois números", [
+            "O anúncio costuma somar fone + estojo (\"30 horas\"). O que importa no dia é a carga POR USO: procure 5 h ou mais.",
+            "Carga rápida (10 min = 1 h de uso) ajuda quem esquece de carregar."]),
+        ("4. ANC x ENC — a confusão mais comum", [
+            "<b>ANC</b> (cancelamento ativo de ruído) reduz o barulho que VOCÊ ouve.",
+            "<b>ENC</b> (cancelamento de ruído ambiental) só limpa o seu MICROFONE nas ligações — não deixa o fone mais silencioso.",
+            "Muitos anúncios baratos escrevem \"cancelamento de ruído\" falando de ENC. Confira qual dos dois está escrito."]),
+        ("5. Suor e chuva (IPX)", [
+            "IPX4: aguenta suor e respingo — o mínimo para academia. IPX5/IPX6: jato de água. IPX7: imersão rápida. Nenhum é para nadar, salvo se disser natação."]),
+        ("6. Codec e modo jogo", [
+            "iPhone: o codec AAC é o que importa. Android: aptX ou LDAC soam melhor, mas só se o celular suportar.",
+            "Jogos e vídeos: \"modo jogo\" / baixa latência evita som atrasado em relação à imagem."]),
+        ("7. Como não pagar caro", [
+            "Fone é um dos produtos que mais oscilam de preço. Antes de comprar, veja o histórico: muitas vezes o mesmo modelo já esteve bem mais barato semanas antes.",
+            "Na tabela abaixo, cada fone mostra o preço de hoje e o menor que já vimos. Se não estiver no menor, ative o aviso de queda na página do produto."]),
+    ],
+    "faq": [
+        ("Qual a diferença entre ANC e ENC?", "ANC reduz o barulho que você ouve; ENC só limpa o seu microfone nas ligações."),
+        ("Fone Bluetooth barato presta?", "Para ouvir música e vídeo no dia a dia, sim: com Bluetooth 5.3, bateria de 5 h+ e IPX4 já é bom. Não espere ANC forte em fone muito barato."),
+        ("Bluetooth 5.3 faz diferença?", "Faz pouca no som; ajuda na bateria e na reconexão. Bluetooth 5.0 ou mais já é suficiente."),
+        ("Qual fone é melhor para academia?", "Um TWS ou esportivo com IPX4 ou mais e bom encaixe (ponteiras de tamanhos diferentes ou gancho)."),
+    ],
+}]
+
+
+def _do_guia(g: dict, p: dict) -> bool:
+    n = _ascii(p.get("nome", ""))
+    return any(t in n for t in g["termos"]) and not any(f in n for f in g["fora"])
+
+
+def pagina_guia(g: dict, itens: list[dict], listas: list[dict], ano: int, quando: str) -> str:
+    url = f"{DOMINIO}/guias/{g['slug']}/"
+    titulo = g["titulo"].format(ano=ano)
+    mig, ld_mig = _migalha(("Início", "/"), ("Guias", "/guias/"), (g["curto"].capitalize(), None))
+    sec = "".join(f'<section class="cx"><h2>{h}</h2>' + "".join(f"<p>{t}</p>" for t in ps) + "</section>"
+                  for h, ps in g["secoes"])
+    linhas = []
+    for x in sorted(itens, key=lambda x: _num(x["preco"]))[:20]:
+        st = estatisticas(x["_dias"], _num(x["preco"]))
+        selo, _ = veredito(st, _num(x["preco"]))
+        linhas.append(f'<tr><td><img src="{e(x["imagem"].replace("http://", "https://", 1))}" alt="" loading="lazy"></td>'
+                      f'<td><a href="/p/{x["pg"]}/"><b>{e(x["nome"][:80])}</b></a><br><small>{e(x.get("loja") or "")} · {e(selo)}</small></td>'
+                      f'<td><b>{e(x["preco"])}</b></td><td class="esc">{_brl(st["menor"])}</td></tr>')
+    tab = (f'<section class="cx"><h2>Os modelos que acompanhamos (preços de {e(quando)})</h2><table><tr><th></th><th>Produto</th>'
+           f'<th>Hoje</th><th class="esc">Menor visto</th></tr>{"".join(linhas)}</table>'
+           f'<p class="cinza">Toque no produto para ver o gráfico de preço e ativar o aviso de queda.</p></section>') if linhas else ""
+    ls = "".join(f'<a class="btn cl" href="/melhores/{l["slug"]}/">Melhores {e(l["area"].lower())} até R$ {l["ate"]} →</a>' for l in listas)
+    faq = "".join(f"<details{' open' if i == 0 else ''}><summary>{e(q)}</summary><p>{e(r)}</p></details>" for i, (q, r) in enumerate(g["faq"]))
+    corpo = (f'<section class="cx"><p class="resp"><strong>Resposta rápida:</strong> {e(g["resposta"])}</p></section>{sec}{tab}'
+             + (f'<section class="cx"><h2>Listas por preço</h2>{ls}</section>' if ls else "")
+             + f'<section class="cx"><h2>Perguntas frequentes</h2>{faq}</section>')
+    ld = [{"@context": "https://schema.org", "@type": "Article", "headline": titulo, "url": url,
+           "author": {"@type": "Organization", "name": "Achadinho Total"},
+           "publisher": {"@type": "Organization", "name": "Achadinho Total"},
+           "dateModified": dt.date.today().isoformat()}, ld_mig,
+          {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+              {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}} for q, r in g["faq"]]}]
+    return casca(titulo, g["desc"], url, g["h1"], f"Guia prático · atualizado em {quando}", mig, corpo, ld)
+
+
+def indice_guias(gs: list[dict]) -> str:
+    mig, ld_mig = _migalha(("Início", "/"), ("Guias", None))
+    corpo = "".join(f'<section class="cx"><h2><a href="/guias/{g["slug"]}/">{e(g["titulo"].format(ano=dt.date.today().year))}</a></h2>'
+                    f'<p>{e(g["desc"])}</p></section>' for g in gs)
+    return casca("Guias de compra — Achadinho Total", "Guias simples para escolher bem e pagar menos, com preços acompanhados.",
+                 f"{DOMINIO}/guias/", "Guias de <em>compra</em>", "Escolher bem e pagar menos", mig, corpo, [ld_mig])
+
+
+def aplicar_guias(saida: dict, mapa: list, esc: list[dict], ls: list[dict], agora) -> int:
+    quando = agora.strftime("%d/%m às %Hh")
+    feitos = []
+    for g in GUIAS:
+        itens = [p for p in esc if _do_guia(g, p)]
+        if len(itens) < 3:
+            continue
+        areas = {p.get("canal") for p in itens}
+        saida[f"guias/{g['slug']}/index.html"] = pagina_guia(g, itens, [l for l in ls if l["area"] in areas], agora.year, quando)
+        mapa.append((f"/guias/{g['slug']}/", agora.date().isoformat()))
+        feitos.append(g)
+        caixa = (f'<section class="cx cupom"><h2>📘 Guia: como escolher {e(g["curto"])}</h2><p>Os pontos que importam na compra, '
+                 f'explicados — e os outros modelos com o menor preço já visto.</p><a class="btn" href="/guias/{g["slug"]}/">Ler o guia →</a></section>')
+        alvo = '<section class="cx"><h2>Perguntas frequentes</h2>'
+        for p in itens:
+            k = f"p/{p['pg']}/index.html"
+            if k in saida:
+                saida[k] = saida[k].replace(alvo, caixa + alvo, 1)
+    if feitos:
+        saida["guias/index.html"] = indice_guias(feitos)
+        mapa.append(("/guias/", agora.date().isoformat()))
+    return len(feitos)
+
+
 # ---------------------------------------------------------------- orquestra
 def gerar(cartoes: list[dict], por_dia: dict, bot: str = "") -> tuple[dict[str, str], list[tuple[str, str]], dict[str, str]]:
     """({caminho: html}, [(url, lastmod)], {id: slug}) — chamado pelo publicador."""
@@ -375,9 +491,10 @@ def gerar(cartoes: list[dict], por_dia: dict, bot: str = "") -> tuple[dict[str, 
     for l in ls:
         saida[f"melhores/{l['slug']}/index.html"] = pagina_lista(l, quando, mes)
         mapa.append((f"/melhores/{l['slug']}/", agora.date().isoformat()))
+    ng = aplicar_guias(saida, mapa, esc, ls, agora)
     if ls:
         saida["melhores/index.html"] = indice_melhores(ls, mes)
         mapa.append(("/melhores/", agora.date().isoformat()))
     REGISTRO.write_text(json.dumps(reg, ensure_ascii=False), encoding="utf-8")
-    print(f"paginas_produto: {len(esc)} /p/ no catalogo + {len(reg) - len(esc)} fora · {len(ls)} listas /melhores/")
+    print(f"paginas_produto: {len(esc)} /p/ no catalogo + {len(reg) - len(esc)} fora · {len(ls)} listas /melhores/ · {ng} guia(s)")
     return saida, mapa, slugs

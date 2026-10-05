@@ -248,3 +248,12 @@
 - **Bug pego no teste:** ids do Ali são `int` na série e `str` no cartão → só 3 páginas. Normalizado para str → 141.
 - 1ª geração: 141 /p/ + 11 listas /melhores/ (Eletrônicos, Academia, Casa, Cozinha, Beleza, Carro, Achadinhos). Teste do relatório: 27 URLs, 25/25 = 200.
 - Pendente do dono: segredo GSC_CREDENCIAIS, Bing (importar do GSC), Pinterest. Passo a passo no PLANO seção 5.
+- 05/10 ~23h: balões premium (3 por lado) NO AR, conferido em 1912 px. Publicação SEO (/p/, /melhores/, IndexNow, Yandex) rodando em seguida.
+
+## 36. Guias (autoridade por tema) — 1º: fone Bluetooth
+- `engine/paginas_produto.py`: `GUIAS` (molde: slug, termos, resposta rápida, seções, FAQ) + `pagina_guia`, `indice_guias`, `aplicar_guias`.
+  /guias/como-escolher-fone-bluetooth/ = resposta rápida (alvo do trecho em destaque), 7 critérios (tipo, Bluetooth, bateria, ANC x ENC,
+  IPX, codec/modo jogo, como não pagar caro), tabela dos fones com /p/ (hoje x menor visto), listas /melhores/ da área, FAQ;
+  JSON-LD Article + FAQPage + Breadcrumb. As /p/ do tema ganham a caixa "📘 Guia" (link de volta = cluster). Rodapé das páginas: link /guias/.
+- Teste: 1 guia, 7 fones na tabela, 7 /p/ com caixa. Conferido na prévia em 375 px (sem rolagem lateral).
+- Próximo nicho = novo item em GUIAS (sugestão: whey/creatina, air fryer).

@@ -4850,7 +4850,10 @@
     }).then(function (j) {
       var lista = (j && j.produtos) || [];
       if (!lista.length) { throw new Error("arquivo sem produtos"); }
-      lista.forEach(function (p) { PRODUTOS.push(p); });
+      // sem repetir: as ofertas do ML ja' vem na lista principal (oferta_ml)
+      var jaTem = {};
+      PRODUTOS.forEach(function (p) { jaTem[p.id] = 1; });
+      lista.forEach(function (p) { if (!jaTem[p.id]) { PRODUTOS.push(p); } });
       EXTERNO_CARREGADO[nome] = true;
       montarChips();
       depois();
@@ -6809,6 +6812,21 @@
   // ⚠️ BUSCAR REINICIA A CONTAGEM. Sem isto, quem ja' tinha clicado em "ver
   // mais" e depois digita fica com um limite alto colado numa lista curta —
   // e o oposto tambem: acha 80 resultados e ve' 30 sem entender por que.
+  // ⭐ 05/10/2026 (dono: "tem como nao ter esse delay?"): as lojas comecam a
+  // baixar quando a pessoa TOCA na busca (antes de digitar), o Mercado Livre
+  // na frente; e o ML ja' vem pre-carregado quando a pagina fica ociosa.
+  var _preBusca = false;
+  function preCarregarLojas() {
+    if (_preBusca) { return; }
+    _preBusca = true;
+    var ns = Object.keys(EXTERNOS).sort(function (a, b) { return (b === "Mercado Livre") - (a === "Mercado Livre"); });
+    ns.forEach(function (n) { carregarExterno(n, function () {}, true); });
+  }
+  busca.addEventListener("focus", preCarregarLojas, { once: true });
+  busca.addEventListener("pointerdown", preCarregarLojas, { once: true });
+  (window.requestIdleCallback || function (f) { setTimeout(f, 2500); })(function () {
+    if (EXTERNOS["Mercado Livre"]) { carregarExterno("Mercado Livre", function () {}, true); }
+  });
   busca.addEventListener("input", function () {
     mostrando = passoLista();
     desenhar();

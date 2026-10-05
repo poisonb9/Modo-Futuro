@@ -810,6 +810,9 @@ def montar_galerias(dados: list[dict]) -> dict[str, list[str]]:
 ML_PRIORIDADE_N = 4
 ML_QUEDA_MIN = 15
 ML_DESCONTO_MIN = 25
+# acima disto o 'de' costuma ser inflado (Smart Band R$ 80 'de' R$ 359): so' com
+# a NOSSA serie confirmando (queda real) — ate' la', nao vira oferta.
+ML_DESCONTO_MAX = 60
 
 
 def promover_ofertas_ml(dados: list[dict], externos: dict) -> list[dict]:
@@ -819,10 +822,13 @@ def promover_ofertas_ml(dados: list[dict], externos: dict) -> list[dict]:
     def forca(x):
         real = (x.get("queda") or 0) if (x.get("dias") or 0) >= 3 else 0
         loja = 0 if x.get("de_inflado") else (x.get("desconto_loja") or 0)
+        if loja > ML_DESCONTO_MAX:
+            loja = 0
         return max(real * 1.5, loja)   # queda medida por nos vale mais
     boas = [x for x in ml if str(x.get("id")) not in ja and not x.get("vitrine_fora")
             and (((x.get("dias") or 0) >= 3 and (x.get("queda") or 0) >= ML_QUEDA_MIN)
-                 or (not x.get("de_inflado") and (x.get("desconto_loja") or 0) >= ML_DESCONTO_MIN))]
+                 or (not x.get("de_inflado")
+                     and ML_DESCONTO_MIN <= (x.get("desconto_loja") or 0) <= ML_DESCONTO_MAX))]
     boas.sort(key=lambda x: (-forca(x), -float(x.get("vitrine_nota") or 0)))
     escolhidas = []
     raizes = set()

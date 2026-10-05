@@ -78,7 +78,10 @@ DUR_MAX = 110
 # ⭐ 27/09/2026 (dono): o Sem Anestesia entra na faixa curta ate' ~10 mil
 # seguidores (44 hoje; o publico sai aos 1-2 s). Volta a' longa (>60 s, a
 # regra do Creator Rewards) quando chegar perto dos 10 mil.
-CANAIS_DURACAO_LONGA = {"cozinha.importada"}
+# ⭐ 05/10/2026 (plano dos canais, item 3, aprovado): teste de 7 dias do Chef
+# na faixa curta (30-45 s). Ele era o unico longo (~70 s) e esta em plato
+# (mediana 358 views). Comparar com a semana anterior em views_tiktok.jsonl.
+CANAIS_DURACAO_LONGA: set[str] = set()
 DUR_CURTA_MIN, DUR_CURTA_MAX = 30, 45
 
 

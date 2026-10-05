@@ -3402,7 +3402,9 @@ def sitemap_xml(caminhos: list[str]) -> str:
 # raiz: no site mae a raiz JA' E' o catalogo.
 REDIRECTS = ("https://www.achadinhototal.com.br/* " + DOMINIO + "/:splat 301"
              + chr(10) + "/todos/* / 301" + chr(10)
-             + "/todos / 301" + chr(10))
+             + "/todos / 301" + chr(10)
+             # 05/10/2026: sem a barra final dava 404 (Search Console testou)
+             + "/cupons /cupons/ 301" + chr(10) + "/top10 /top10/ 301" + chr(10))
 
 # ⭐ O MOTOR FICA NO CACHE DO TELEFONE (20/09/2026). Sem isto, tirar o
 # script pra fora do HTML nao ganharia nada no RECARREGAR — que e' o gesto

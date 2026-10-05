@@ -218,3 +218,4 @@
   a loja (ou "todas"); 1ª rodada só marca o que já existe (`estado/cupons_avisados.json`).
 - **Achado:** `cupons.yml` (cron :17) nunca rodou por agendamento → JSON parado desde 10:43. Cupons agora no `precos.yml` (hora em hora).
 - Conferido na prévia: Kabum/Arno em 1400 px e 375 px; link do Telegram correto; 35 cupons da Arno; 14 links internos.
+- Balões de cupom subidos (top 300→180 px) para o "clique aqui" não cobrir o anúncio; /cupons e /top10 sem barra → 301 (Search Console).

@@ -2501,7 +2501,8 @@ def produtos_reais(por_canal: int = 4) -> dict[str, list[dict]]:
         beleza = produtos_de_beleza()
         print(f"nicho: {len(beleza)} item(ns) de beleza para o Make")
         if len(beleza) >= 4:
-            nicho["truque.importado"] = beleza
+            # chave da PAGINA, nunca o nome interno do canal (o detector barra)
+            nicho[_chave_da_pagina("truque.importado")] = beleza
     except Exception as e:  # noqa: BLE001
         print(f"nicho: beleza indisponivel ({e})")
     # ⭐ 27/09/2026 (dono aprovou o reposicionamento do Sem Anestesia:

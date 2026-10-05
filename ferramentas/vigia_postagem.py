@@ -63,7 +63,10 @@ def medir(canal: str) -> dict | None:
         for e in d["posts"]["edges"]:
             x = e["node"]
             if st == "error":
-                n["erros"] += 1
+                # so' erro recente: o @atefalhar tem um de 04/09 parado no Buffer
+                qe = _quando(x.get("dueAt"))
+                if qe and qe >= agora - timedelta(days=2):
+                    n["erros"] += 1
                 continue
             q = _quando(x.get("sentAt") if st == "sent" else x.get("dueAt"))
             if not q:

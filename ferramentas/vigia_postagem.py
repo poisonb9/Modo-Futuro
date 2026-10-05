@@ -107,7 +107,7 @@ def main() -> None:
     a = argparse.ArgumentParser()
     a.add_argument("--so-ler", action="store_true")
     o = a.parse_args()
-    linhas = []
+    linhas, em_dia = [], []
     for canal in cr.CANAIS:
         try:
             m = medir(canal)
@@ -118,11 +118,14 @@ def main() -> None:
             continue
         p = problemas(m)
         print(f"{canal:26} {'OK' if not p else ' | '.join(p)}  {m}")
+        if not p:
+            em_dia.append(m.get("arroba") or canal)
         if p:
             linhas.append(f"• {m.get('arroba') or canal}: " + "; ".join(p))
     if linhas and not o.so_ler:
         hora = datetime.now(SP).strftime("%d/%m %H:%M")
-        avisar(f"⚠️ Vigia de postagem ({hora})\n" + "\n".join(linhas))
+        ok = ("\n✅ em dia: " + ", ".join(em_dia)) if em_dia else ""
+        avisar(f"⚠️ Vigia de postagem ({hora})\n" + "\n".join(linhas) + ok)
     if not linhas:
         print("todos os canais com a meta do dia")
 

@@ -4,7 +4,7 @@
 > no Telegram do dono toda segunda-feira. Resolver = mover para "Resolvidas" com data e como.
 
 ## Abertas
-- [ ] **⭐ Reiniciar a destilação** para valer a reserva de chaves Gemini da produção (REGISTRO_05-10_D item 43). Precisa de OK do dono. (06/10)
+- [x] (FEITO 06/10 ~18h BRT, OK do dono) **Reiniciar a destilação** para valer a reserva de chaves Gemini da produção (REGISTRO_05-10_D item 43). Precisa de OK do dono. (06/10)
 - [ ] **Conferir 07/10 de manhã** se o repor das 09:00 encheu os 7 canais (cota renovada) e se o alarme de falha disparou certo. (06/10)
 - [ ] **WhatsApp (grupo/canal de ofertas)** — bloqueado pela API do WhatsApp. Aguardando. (desde 05/10/2026)
 - [ ] **Shopee afiliados** — cadastro ainda não aprovado; sem API da Shopee. Se demorar: e-mail cordial ao time de afiliados (só com OK do dono). (05/10)

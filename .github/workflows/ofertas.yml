@@ -41,7 +41,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: sudo apt-get install -y -qq ffmpeg && pip install -q pillow edge-tts requests python-dotenv
+      - run: bash ferramentas/instalar_ffmpeg.sh && pip install -q pillow edge-tts requests python-dotenv
       # ⭐ 30/09/2026 (dono: "a dublagem esta' horrivel... como nos nossos
       # canais"): a MESMA voz dos cortes — edge-tts -> ChatterboxVC com o timbre
       # da amostra (engine/voz_clonada, motor D). Passos copiados do

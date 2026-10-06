@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: sudo apt-get install -y -qq ffmpeg && pip install -q pillow edge-tts requests python-dotenv yt-dlp
+      - run: bash ferramentas/instalar_ffmpeg.sh && pip install -q pillow edge-tts requests python-dotenv yt-dlp
       - name: Trecho do YouTube + video
         env:
           GH_TOKEN: ${{ github.token }}

@@ -42,14 +42,14 @@ permissions:
 jobs:
   repor:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - run: sudo apt-get install -y -qq ffmpeg && pip install -r requirements.txt
+      - run: bash ferramentas/instalar_ffmpeg.sh && pip install -r requirements.txt
 
       - name: Conferir e repor
         env:

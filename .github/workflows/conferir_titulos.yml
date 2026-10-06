@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: sudo apt-get install -y -qq ffmpeg && pip install -q requests python-dotenv
+      - run: bash ferramentas/instalar_ffmpeg.sh && pip install -q requests python-dotenv
       - name: Conferir
         env:
           BUFFER_TOKEN: ${{ secrets.BUFFER_TOKEN }}

@@ -284,3 +284,16 @@
   Pendência do item 28 (avisar no Telegram quando o pop falhar) continua aberta e é URGENTE.
 - 05/10 ~23h50: CONSERTADO publicar_ao_mudar_agendado.ps1 — pop com conflito: arquivo em conflito = versão da nuvem, resto volta do stash (rastreados + novos via stash^3), aviso no Telegram, stash mantido. Parser do PowerShell: 0 erros.
 - 05/10 ~00h: NO AR — sitemap 185, /melhores/ /guias/ 200, IndexNow 176 URLs HTTP 202. Yandex: o .html dá 308 (Pages tira a extensão) → meta tag yandex-verification na home (dono escolhe a aba 'Meta tag').
+
+## 39. (06/10 madrugada) Listas novas + listas em destaque na home + ajustes do dono
+- Gráfico das /p/: "menor R$ X" ficava em cima da data → rótulo ACIMA do ponto e preso às bordas.
+- +acervo (rankings específicos, mais vendidos; nosso dado único = histórico): 3 listas especiais em /melhores/:
+  `menor-preco-ja-visto-hoje`, `maiores-quedas-de-preco` (≥8% abaixo da média 30 d), `achadinhos-ate-20-reais` (≥5 itens ou não sai).
+- Home: faixa "As listas de hoje" ANTES da vitrine (dono: "atrai mais que os anúncios") — 3 especiais + Guias + Todas as listas,
+  cartões preto/ouro; celular = rolagem lateral. Marcador `<section id="listas-destaque">` preenchido por `_listas_home()`.
+- Decisão (+acervo, isca de e-mail): listas ABERTAS agora (página trancada não indexa no Google); captura sem bloquear
+  ("Receber as ofertas e as listas no Telegram" → canal @achadinhototal). Futuro possível: versão VIP que sai ANTES para cadastrados.
+- Avise-me: sublinhado vinha do <a> (propaga para o texto) → text-decoration none no botão. Linha "rastreando · N leituras" sem estilo
+  (ícone gigante no massageador) → `.item .meta-linha` com ícone 12 px.
+- Botão do AliExpress COM ícone: não está em nenhum envio salvo (só existe o sem ícone) → pedir ao dono para reenviar.
+- Publicação de ~00h falhou (wrangler "fetch failed" no projeto atefalhar = rede) → republicar.

@@ -1000,6 +1000,8 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                          '  var ULTIMA_CONFERENCIA = "' + _ultima_conferencia() + '";'),
                         # ⚠️ elemento, nao comentario: os comentarios saem
                         # ANTES desta troca (tirar_comentarios)
+                        ('  <section id="listas-destaque"></section>',
+                         '  ' + _listas_home()),
                         ('  <section id="indice-estatico" aria-hidden="true"></section>',
                          '  <section id="indice-estatico" aria-hidden="true">'
                          + indice_estatico(dados) + '</section>')):
@@ -3333,6 +3335,15 @@ def ssr_primeira_tela(html: str) -> str:
     if aviso:
         print(aviso)
     return r.stdout.decode("utf-8")
+
+
+def _listas_home() -> str:
+    try:
+        from engine import paginas_produto as _pp
+        return _pp.vitrine_listas_home(_bot_alerta()) or '<section id="listas-destaque"></section>'
+    except Exception as e:                                # noqa: BLE001
+        print(f"  [!] listas da home: {str(e)[:80]}")
+        return '<section id="listas-destaque"></section>'
 
 
 def indice_estatico(dados: list[dict]) -> str:

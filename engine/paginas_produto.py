@@ -297,11 +297,49 @@ def listas_melhores(escolhidos: list[dict]) -> list[dict]:
     return out
 
 
+def listas_especiais(esc: list[dict]) -> list[dict]:
+    """⭐ 06/10/2026 (+acervo: rankings específicos + "mais vendidos"; nosso diferencial = histórico real).
+    Só sai a lista com ≥ MIN_LISTA itens — nada de página magra."""
+    com = []
+    for p in esc:
+        pr = _num(p["preco"]); st = estatisticas(p["_dias"], pr)
+        com.append((p, pr, st))
+    out = []
+    rec = sorted([(p, pr, st) for p, pr, st in com if pr <= st["menor"] * 1.005 and st["vs_media"] <= -3],
+                 key=lambda t: t[2]["vs_media"])
+    if len(rec) >= MIN_LISTA:
+        out.append({"area": "Especiais", "ate": 0, "slug": "menor-preco-ja-visto-hoje", "itens": [t[0] for t in rec[:20]],
+                    "curto": "Menor preço já visto",
+                    "titulo": "Menor preço já visto: produtos no mínimo histórico hoje ({mes})",
+                    "h1": "No <em>menor preço</em> que já vimos",
+                    "sub": "Atualizado de hora em hora · cada um está hoje no preço mais baixo do nosso histórico",
+                    "desc": "Produtos que hoje estão no menor preço que já registramos, com gráfico do histórico e aviso de queda.",
+                    "resposta": f"Hoje {len(rec)} produtos estão no menor preço que já registramos. Estão ordenados pelo tamanho da queda em relação à média de 30 dias."})
+    qd = sorted([(p, pr, st) for p, pr, st in com if st["vs_media"] <= -8], key=lambda t: t[2]["vs_media"])
+    if len(qd) >= MIN_LISTA:
+        out.append({"area": "Especiais", "ate": 0, "slug": "maiores-quedas-de-preco", "itens": [t[0] for t in qd[:20]],
+                    "curto": "Maiores quedas",
+                    "titulo": "Maiores quedas de preço da semana ({mes}): comparadas com a média de 30 dias",
+                    "h1": "As <em>maiores quedas</em> de preço",
+                    "sub": "Queda medida contra a média de 30 dias do próprio produto — não contra preço riscado",
+                    "desc": "Os produtos que mais caíram de preço em relação à própria média de 30 dias, com histórico real.",
+                    "resposta": f"{len(qd)} produtos estão pelo menos 8% abaixo da própria média de 30 dias. O primeiro da lista é o que mais caiu."})
+    ate20 = sorted([(p, pr, st) for p, pr, st in com if pr <= 20], key=lambda t: (t[2]["vs_media"], t[1]))
+    if len(ate20) >= MIN_LISTA:
+        out.append({"area": "Especiais", "ate": 20, "slug": "achadinhos-ate-20-reais", "itens": [t[0] for t in ate20[:20]],
+                    "curto": "Achadinhos até R$ 20",
+                    "titulo": "Achadinhos até R$ 20 ({mes}): AliExpress, Mercado Livre e mais, com preço acompanhado",
+                    "h1": "Achadinhos <em>até R$ 20</em>",
+                    "sub": "Baratinhos com histórico de preço real · os mais abaixo da média primeiro",
+                    "desc": "Achadinhos até R$ 20 com histórico de preço: veja o menor preço já visto antes de comprar."})
+    return out
+
+
 def pagina_lista(l: dict, quando: str, mes: str) -> str:
     area, y = l["area"], l["ate"]
     url = f"{DOMINIO}/melhores/{l['slug']}/"
-    titulo = f"Melhores {area.lower()} até R$ {y} ({mes}): preço acompanhado"
-    mig, ld_mig = _migalha(("Início", "/"), ("Melhores por preço", "/melhores/"), (f"{area} até R$ {y}", None))
+    titulo = l.get("titulo", "").format(mes=mes) or f"Melhores {area.lower()} até R$ {y} ({mes}): preço acompanhado"
+    mig, ld_mig = _migalha(("Início", "/"), ("Melhores por preço", "/melhores/"), (l.get("curto") or f"{area} até R$ {y}", None))
     linhas = []
     for i, p in enumerate(l["itens"], 1):
         s = estatisticas(p["_dias"], _num(p["preco"]))
@@ -310,7 +348,7 @@ def pagina_lista(l: dict, quando: str, mes: str) -> str:
                       f'<td><a href="/p/{p["pg"]}/"><b>{e(p["nome"][:80])}</b></a><br><small>{e(p.get("loja") or "")} · {e(selo)}</small></td>'
                       f'<td><b>{e(p["preco"])}</b></td><td class="esc">{_brl(s["menor"])}</td><td class="esc">{s["n"]} dias</td></tr>')
     top = l["itens"][0]
-    resp = (f"Pelo preço de hoje comparado com o histórico, o destaque é {top['nome'][:70]} por {top['preco']}. "
+    resp = l.get("resposta") or (f"Pelo preço de hoje comparado com o histórico, o destaque é {top['nome'][:70]} por {top['preco']}. "
             f"A lista tem {len(l['itens'])} produtos de {area.lower()} até R$ {y}, ordenados por quanto estão abaixo da própria média de 30 dias.")
     corpo = (f'<section class="cx"><p class="resp"><strong>Qual comprar?</strong> {e(resp)}</p></section>'
              f'<section class="cx"><h2>Comparativo (preços conferidos em {e(quando)})</h2><table><tr><th>#</th><th></th><th>Produto</th>'
@@ -319,9 +357,9 @@ def pagina_lista(l: dict, quando: str, mes: str) -> str:
     ld = [{"@context": "https://schema.org", "@type": "ItemList", "name": titulo, "url": url,
            "itemListElement": [{"@type": "ListItem", "position": i, "url": f"{DOMINIO}/p/{p['pg']}/", "name": p["nome"]}
                                for i, p in enumerate(l["itens"], 1)]}, ld_mig]
-    return casca(titulo, f"{len(l['itens'])} {area.lower()} até R$ {y} comparados pelo histórico de preço: menor preço visto, média e preço de hoje.",
-                 url, f"Melhores <em>{e(area.lower())}</em> até R$ {y}",
-                 f"Comparados pelo histórico de preço real · {mes}", mig, corpo, ld)
+    return casca(titulo, l.get("desc") or f"{len(l['itens'])} {area.lower()} até R$ {y} comparados pelo histórico de preço: menor preço visto, média e preço de hoje.",
+                 url, l.get("h1") or f"Melhores <em>{e(area.lower())}</em> até R$ {y}",
+                 l.get("sub") or f"Comparados pelo histórico de preço real · {mes}", mig, corpo, ld)
 
 
 def indice_melhores(ls: list[dict], mes: str) -> str:
@@ -329,8 +367,8 @@ def indice_melhores(ls: list[dict], mes: str) -> str:
     for l in ls:
         por.setdefault(l["area"], []).append(l)
     blocos = "".join(f'<section class="cx" id="{_slug_area(a)}"><h2>{e(a)}</h2>'
-                     + "".join(f'<a class="btn cl" href="/melhores/{l["slug"]}/">Até R$ {l["ate"]} →</a>' for l in v)
-                     + "</section>" for a, v in sorted(por.items()))
+                     + "".join(f'<a class="btn cl" href="/melhores/{l["slug"]}/">{e(l.get("curto") or f"Até R$ {l[chr(97)+chr(116)+chr(101)]}")} →</a>' for l in v)
+                     + "</section>" for a, v in sorted(por.items(), key=lambda kv: (kv[0] != "Especiais", kv[0])))
     mig, ld_mig = _migalha(("Início", "/"), ("Melhores por preço", None))
     return casca(f"Melhores produtos por faixa de preço ({mes}) — Achadinho Total",
                  "Listas dos melhores produtos até R$ 50, R$ 100, R$ 200 e mais, comparados pelo histórico de preço real.",
@@ -630,6 +668,29 @@ def aplicar_guias(saida: dict, mapa: list, esc: list[dict], ls: list[dict], agor
     return len(feitos)
 
 
+ULTIMAS_LISTAS: list[dict] = []
+ICONES = {"menor-preco-ja-visto-hoje": "🏆", "maiores-quedas-de-preco": "📉", "achadinhos-ate-20-reais": "💰"}
+
+
+def vitrine_listas_home(bot: str = "") -> str:
+    """⭐ 06/10/2026 (dono: "listas antes dos anúncios, lugar de destaque"). Faixa no topo da home.
+    Listas ABERTAS (Google indexa) + captura sem bloquear: "receba toda semana" (Telegram)."""
+    esp = [l for l in ULTIMAS_LISTAS if l["area"] == "Especiais"]
+    if not esp:
+        return ""
+    cards = "".join(
+        f'<a class="lst-card" href="/melhores/{l["slug"]}/" data-ev="home_lista">'
+        f'<span class="lst-ic">{ICONES.get(l["slug"], "⭐")}</span><b>{e(l["curto"])}</b>'
+        f'<small>{len(l["itens"])} produtos · hoje</small></a>' for l in esp)
+    cards += ('<a class="lst-card" href="/guias/" data-ev="home_lista"><span class="lst-ic">📘</span><b>Guias de compra</b>'
+              '<small>escolher bem e pagar menos</small></a>'
+              '<a class="lst-card" href="/melhores/" data-ev="home_lista"><span class="lst-ic">🗂️</span><b>Todas as listas</b>'
+              '<small>por categoria e preço</small></a>')
+    vip = ('<a class="lst-vip" href="https://t.me/achadinhototal" target="_blank" rel="noopener" data-ev="home_lista_vip">'
+           '🔔 Receber as ofertas e as listas no Telegram →</a>')
+    return f'<section class="lst" aria-label="Listas de hoje"><h2>As listas de hoje</h2><div class="lst-fila">{cards}</div>{vip}</section>'
+
+
 # ---------------------------------------------------------------- orquestra
 def gerar(cartoes: list[dict], por_dia: dict, bot: str = "") -> tuple[dict[str, str], list[tuple[str, str]], dict[str, str]]:
     """({caminho: html}, [(url, lastmod)], {id: slug}) — chamado pelo publicador."""
@@ -663,7 +724,9 @@ def gerar(cartoes: list[dict], por_dia: dict, bot: str = "") -> tuple[dict[str, 
         viz = (por_area.get(r.get("canal") or "Ofertas") or esc)[:6]
         saida[f"p/{r['pg']}/index.html"] = pagina_produto(dict(r, link=""), s, viz, None, bot, quando, fora=True)
         mapa.append((f"/p/{r['pg']}/", r.get("visto") or s["pontos"][-1][0]))
-    ls = listas_melhores(esc)
+    ls = listas_especiais(esc) + listas_melhores(esc)
+    global ULTIMAS_LISTAS
+    ULTIMAS_LISTAS = ls
     for l in ls:
         saida[f"melhores/{l['slug']}/index.html"] = pagina_lista(l, quando, mes)
         mapa.append((f"/melhores/{l['slug']}/", agora.date().isoformat()))

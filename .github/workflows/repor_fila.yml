@@ -95,7 +95,7 @@ jobs:
           GEMINI_API_KEY_29: ${{ secrets.GEMINI_API_KEY_29 }}
           GEMINI_API_KEY_30: ${{ secrets.GEMINI_API_KEY_30 }}
           GEMINI_API_KEY_31: ${{ secrets.GEMINI_API_KEY_31 }}
-        run: python -X utf8 repor_fila.py
+        run: python -X utf8 -u repor_fila.py
 
       - name: Conferir o que ja' foi ao ar (registro de clipes)
         if: always()

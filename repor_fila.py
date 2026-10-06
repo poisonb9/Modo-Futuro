@@ -35,6 +35,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import threading
 import sys
 import urllib.request
 from pathlib import Path
@@ -42,6 +43,7 @@ from pathlib import Path
 from engine import canais_registro as _cr
 
 RAIZ = Path(__file__).resolve().parent
+TETO_CANAL_S = int(os.environ.get("TETO_CANAL_S") or 420)
 API = "https://api.buffer.com/"
 
 # ⚠️ So' entra aqui canal que o Bryan JA' LIBEROU pro automatico. Acrescentar
@@ -143,11 +145,28 @@ def main() -> None:
         # abrir um canal diferente deste nome.
         print(f"    abaixo do piso — repondo {nome}")
         env = dict(os.environ, CANAL_ESPERADO=nome, BUFFER_TOKEN=token)
-        r = subprocess.run([sys.executable, "-X", "utf8", "agendar_buffer.py"],
-                           cwd=RAIZ, env=env, capture_output=True, text=True,
-                           encoding="utf-8", errors="replace", timeout=900)
-        saida = (r.stdout or "") + (r.stderr or "")
-        print(saida[-1200:])
+        # 06/10/2026: saida AO VIVO (antes ficava presa no buffer e o job
+        # morria calado) e teto por canal, para um canal lento nao matar os outros.
+        env["PYTHONUNBUFFERED"] = "1"
+        linhas_ag = []
+        try:
+            r = subprocess.Popen([sys.executable, "-X", "utf8", "-u", "agendar_buffer.py"],
+                                 cwd=RAIZ, env=env, stdout=subprocess.PIPE,
+                                 stderr=subprocess.STDOUT, text=True,
+                                 encoding="utf-8", errors="replace")
+            # o vigia mata mesmo se o agendador travar CALADO (sem linha nova)
+            vigia = threading.Timer(TETO_CANAL_S, r.kill)
+            vigia.start()
+            for l in r.stdout:
+                print("      " + l.rstrip(), flush=True)
+                linhas_ag.append(l)
+            r.wait(timeout=60)
+            if not vigia.is_alive():
+                linhas_ag.append(f"TETO de {TETO_CANAL_S // 60} min estourado — canal pulado")
+            vigia.cancel()
+        except Exception as e:  # noqa: BLE001
+            linhas_ag.append(f"agendador quebrou: {e}")
+        saida = "".join(linhas_ag)
         ult = [l for l in saida.splitlines() if "enfileirado" in l]
         linhas.append(f"    -> {ult[-1].strip() if ult else 'sem clipe elegivel'}")
         repostos.append(nome)

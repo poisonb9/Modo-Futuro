@@ -297,3 +297,4 @@
   (ícone gigante no massageador) → `.item .meta-linha` com ícone 12 px.
 - Botão do AliExpress COM ícone: não está em nenhum envio salvo (só existe o sem ícone) → pedir ao dono para reenviar.
 - Publicação de ~00h falhou (wrangler "fetch failed" no projeto atefalhar = rede) → republicar.
+- 06/10: publicação OK (faixa de listas na home, /melhores/menor-preco-ja-visto-hoje 200, sitemap 188). IndexNow: 1ª vez 202, agora 403 'UserForbiddedToAccessSite' (Bing ainda validando a chave; arquivo /91ee…c8.txt responde 200 text/plain, inclusive para bingbot). Reavaliar na próxima publicação; se persistir, conferir a seção IndexNow no Bing Webmaster.

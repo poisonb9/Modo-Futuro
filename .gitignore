@@ -185,3 +185,6 @@ _privado/
 !estado/lista_mestre.json
 !estado/LISTA_MESTRE.csv
 midia/cupons_do_dia/
+estado/cache_buscas_yt.json
+estado/cota_youtube.json
+estado/alertas_busca.log

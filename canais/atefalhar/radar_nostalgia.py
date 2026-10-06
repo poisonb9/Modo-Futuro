@@ -55,7 +55,8 @@ BUSCAS = [
     "cow and chicken history cartoon",
     "johnny bravo history cartoon network",
     "spongebob early seasons behind the scenes",
-    "cartoon facts you didn't know 2000s",
+    "cartoon facts you didn't know 2000s",
+
     # ⭐ 05/10/2026 (dono: radar seco — 0 ineditos; precisa de algo extremamente viral)
     "things only 2000s kids remember",
     "2000s kids nostalgia you forgot",
@@ -108,7 +109,8 @@ TEMA = [
     "powerpuff", "dexter", "hey arnold", "rugrats", "fairly odd", "invader zim",
     "kids next door", "cow and chicken", "johnny bravo", "spongebob", "cartoon",
     "history", "behind the scenes", "explained", "what happened", "documentary",
-    "creator", "cancelled", "facts", "theory", "2000s",
+    "creator", "cancelled", "facts", "theory", "2000s",
+
     # ⭐ 05/10/2026 (temas novos das buscas novas)
     "pokemon",
     "digimon",
@@ -160,6 +162,14 @@ def http(url):
 
 
 def com_rodizio(monta_url):
+    # 06/10/2026: busca passa pelo engine/busca_yt (cache 24 h, trava de cota,
+    # reserva yt-dlp). Antes a cota esgotada virava "0 candidatos" calado.
+    if "/search?" in monta_url("X"):
+        import importlib.util as _iu
+        _p = __import__("pathlib").Path(__file__).resolve().parents[2] / "engine" / "busca_yt.py"
+        _sp = _iu.spec_from_file_location("busca_yt", _p)
+        _m = _iu.module_from_spec(_sp); _sp.loader.exec_module(_m)
+        return _m.buscar(monta_url, CHAVES)
     """Tenta cada chave: a cota de busca estoura rapido (429 medido em 30/08)."""
     ultimo = None
     for k in CHAVES:

@@ -201,6 +201,14 @@ def http(url):
 
 
 def com_rodizio(monta_url):
+    # 06/10/2026: busca passa pelo engine/busca_yt (cache 24 h, trava de cota,
+    # reserva yt-dlp). Antes a cota esgotada virava "0 candidatos" calado.
+    if "/search?" in monta_url("X"):
+        import importlib.util as _iu
+        _p = __import__("pathlib").Path(__file__).resolve().parents[2] / "engine" / "busca_yt.py"
+        _sp = _iu.spec_from_file_location("busca_yt", _p)
+        _m = _iu.module_from_spec(_sp); _sp.loader.exec_module(_m)
+        return _m.buscar(monta_url, CHAVES)
     """Tenta cada chave: a cota de busca estoura rapido (429 medido em 30/08)."""
     ultimo = None
     for k in CHAVES:

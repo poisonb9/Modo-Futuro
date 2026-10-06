@@ -343,3 +343,6 @@
   (ex.: arquivo novo do stash que o pull também trouxe → "already exists, no checkout") abortava inteiro e o trabalho ficava
   preso calado. Agora `publicar_ao_mudar_agendado.ps1` decide pela PILHA (stash ainda lá depois do pop = falhou), recupera
   arquivo a arquivo e avisa no Telegram, listando novos que já existiam. stash@{0..2} de hoje conferidos: nada perdido.
+- 06/10 ~11h–12h30 (sessão I): bio modo lista NO AR nos 6 (conferir() liberou `atefalhar`, @ público). Ajustes do dono: título
+  inteiro, legenda do número + faixa auto-fit, data = reconferência mais recente, pílula "achado novo" compacta (827e642, b12e16c).
+  12 lojas e Drogal com foto conferidas no ar. Handoff: HANDOFF_06-10-2026_I.md.

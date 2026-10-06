@@ -307,3 +307,9 @@
 - Estilo do botão avise-me (branco, borda preta, sombra dura; ativo = preto com texto ouro); vidro não liga mais nos chips.
 - Números tirados dos chips e dos botões Categoria/Loja ("poluindo"); continuam só dentro do menu aberto.
 - A faixa "As listas de hoje" saiu da home (os chips viraram as listas); `vitrine_listas_home` mantida no código.
+
+## 41. Notas do dia (balão do perfil) no Telegram
+- Dono: mandar todo dia o texto do balão "No que você está pensando?" de CADA canal (não as legendas).
+- `ferramentas/notas_do_dia.py` + `.github/workflows/notas_do_dia.yml` (08:07 BRT): lê o próximo post AGENDADO de cada canal no
+  Buffer (só leitura), escreve a nota com Gemini flash (regra `nota-do-avatar`: ≤40 caracteres, concreto, sem hype, ≤1 emoji;
+  sem modelo → "Hoje: <título>"), manda uma mensagem só com os 9 canais. Canal sem post agendado = "manter a nota atual".

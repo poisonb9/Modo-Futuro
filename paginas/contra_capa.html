@@ -2006,7 +2006,10 @@
     }
     if (p.imagem) {
       var img = document.createElement("img");
-      img.src = p.imagem;
+      // 06/10: foto do AliExpress vinha em 2200 px para um quadro de 76 px
+      // (o 1o cartao aparecia em branco enquanto carregava). Miniatura de 350 px.
+      img.src = /aliexpress-media\.com|alicdn\.com/.test(p.imagem || "") &&
+                !/_\d+x\d+/.test(p.imagem) ? p.imagem + "_350x350.jpg" : p.imagem;
       img.alt = p.nome;
       img.loading = "lazy";
       img.addEventListener("error", function () {
@@ -2560,9 +2563,10 @@
       });
       if (chave === 9999) quando = "hoje";
       else if (chave >= 0) quando = "em " + quando.slice(0, 5);
-      prova.textContent = naTela + " achadinhos" +
-        (quando ? " · preços conferidos " + quando : "") +
-        " · link direto pra loja";
+      // 06/10: a contagem saiu daqui — dizia "27 achadinhos" e a faixa logo
+      // abaixo "12 garimpados hoje" (universos diferentes) e um desmentia o outro.
+      prova.textContent = (quando ? "preços conferidos " + quando + " · " : "") +
+        "link direto pra loja";
     } else {
       rolar.hidden = true;
       prova.textContent = "";

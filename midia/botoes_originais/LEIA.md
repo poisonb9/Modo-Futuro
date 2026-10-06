@@ -18,3 +18,5 @@ No SITE o botão é em CÓDIGO (mesmo visual, ajusta a qualquer tela): ver pagin
 Recortados (sem sobra transparente): midia/botoes_web/*.png e *.webp (600 px).
 Prompts: handoff/REGISTRO_05-10-2026_D.md e conversa de 05/10.
 - 05/10 23:30: botao_ver_no_mercado_livre trocado pela versão COM o logo (aperto de mãos), enviada pelo dono no chat.
+- 06/10/2026: versões novas COM ÍCONE da loja enviadas pelo dono: aliexpress, mercado_livre, nike, guess, stanley, drogal, soldiers, oceane (nova).
+  Originais aqui; web em ../botoes_web (600 px .png+.webp); site em paginas/baloes (420 px .webp). Faltam: Clovis (Lauri, Kabum, Arno = versão de 05/10).

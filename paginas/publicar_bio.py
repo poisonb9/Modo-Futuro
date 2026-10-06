@@ -3156,7 +3156,7 @@ def conferir(html: str) -> list[str]:
     # justamente os que revelam historia da operacao — o canal de maquiagem se
     # chama `truque.importado` por dentro, e a cozinha `cozinha.importada`.
     so_internos = [n for n in CODIGOS
-                   if f"@{n}" not in html and n not in ("modofuturo", "achadinhototal")]  # 30/09: achadinhototal e' o @ publico E o dominio
+                   if f"@{n}" not in html and n not in ("modofuturo", "achadinhototal", "atefalhar")]  # 30/09: achadinhototal e' o @ publico E o dominio; 06/10: atefalhar e' o @ publico do Geracao 2000 (o catalogo/motor leva a vitrine dele sem o @ e barrava a publicacao)
     for nome in so_internos:
         # se o nome aparece SEM ser precedido de @, vazou
         if re.search(rf"(?<!@){re.escape(nome)}", html):

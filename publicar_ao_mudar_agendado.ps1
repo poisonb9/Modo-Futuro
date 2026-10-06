@@ -64,16 +64,28 @@ if ($guardou) {
     # estado/cupons.json (a nuvem grava de hora em hora) e TODO o trabalho
     # local ficava preso no stash, em silencio. Agora: arquivo em conflito
     # = versao da NUVEM; o resto volta do stash; e o dono e' avisado.
+    # ⛔ 06/10/2026 (3a vez): o pop tambem falha SEM conflito marcado -- ex.:
+    # arquivo novo do stash que o pull trouxe ("already exists, no checkout")
+    # aborta o pop inteiro, nada fica em U e o trabalho sumia calado. Agora
+    # quem decide e' a PILHA: stash ainda la' depois do pop = pop falhou.
     $conf = @(& git diff --name-only --diff-filter=U 2>$null)
-    if ($conf.Count -gt 0) {
+    $popFalhou = @(& git stash list 2>$null).Count -gt $pilhaAntes
+    if ($popFalhou -or $conf.Count -gt 0) {
         foreach ($f in $conf) { & git checkout HEAD -- $f 2>$null }
         & git reset -q 2>$null
         $rastreados = @(& git stash show --name-only 'stash@{0}' 2>$null)
         foreach ($f in $rastreados) { if ($conf -notcontains $f) { & git checkout 'stash@{0}' -- $f 2>$null } }
         $novos = @(& git show --name-only --format= 'stash@{0}^3' 2>$null)
-        foreach ($f in $novos) { if ($f -and -not (Test-Path $f)) { & git checkout 'stash@{0}^3' -- $f 2>$null } }
+        $pulados = @()
+        foreach ($f in $novos) {
+            if (-not $f) { continue }
+            if (-not (Test-Path $f)) { & git checkout 'stash@{0}^3' -- $f 2>$null }
+            else { $pulados += $f }
+        }
         & git reset -q 2>$null
-        $msg = "publicador: stash pop deu conflito em " + ($conf -join ', ') + " -> ficou a versao da nuvem nesses; o resto do trabalho local voltou. Stash mantido por seguranca."
+        $motivo = if ($conf.Count -gt 0) { "conflito em " + ($conf -join ', ') } else { "falha sem conflito" }
+        $extra = if ($pulados.Count -gt 0) { " Novos que ja' existiam (ficou a versao da nuvem): " + ($pulados -join ', ') + "." } else { "" }
+        $msg = "publicador: stash pop: $motivo -> nesses ficou a versao da nuvem; o resto do trabalho local voltou.$extra Stash mantido por seguranca."
         $saida += $msg + "`n"
         & $python -X utf8 -c "import sys; sys.path.insert(0, '.'); from engine import telegram; telegram.enviar(sys.argv[1])" $msg 2>$null | Out-Null
     }

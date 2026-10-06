@@ -336,3 +336,10 @@
 - 06/10 ~10h: Drogal com foto REAL — o feed Awin (io.convertiez) dá 404 + placeholder em 580/615. `_fotos_drogal()` busca na API
   pública VTEX da loja pelo NOME (sem clique de afiliado) e só troca com ≥75% das palavras iguais (cache estado/fotos_trocadas.json).
   Resultado: 388 com foto real, 224 fora. Todas as 12 lojas de volta. Bio em modo lista vale para os 5 projetos de bio (mesmo modelo).
+- 06/10 ~10h20 (sessão I): **publicação de 09:57 não tinha subido a bio nova** — o repo bio (982a700, 09:53) e os 6 projetos estavam sem
+  listas-bio; o commit da bio (ed9c008) é de 09:58. A publicação pid 16268 (iniciada 09:57) ficou >20 min rodando (viva, CPU+rede);
+  as automáticas foram para a fila. Conferência refeita ao fim dela.
+- 06/10 ~10h20: **stash do publicador — causa achada:** o tratamento só rodava com arquivo em conflito (U). Pop que falha SEM U
+  (ex.: arquivo novo do stash que o pull também trouxe → "already exists, no checkout") abortava inteiro e o trabalho ficava
+  preso calado. Agora `publicar_ao_mudar_agendado.ps1` decide pela PILHA (stash ainda lá depois do pop = falhou), recupera
+  arquivo a arquivo e avisa no Telegram, listando novos que já existiam. stash@{0..2} de hoje conferidos: nada perdido.

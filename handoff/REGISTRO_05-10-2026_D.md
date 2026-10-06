@@ -299,3 +299,11 @@
 - Publicação de ~00h falhou (wrangler "fetch failed" no projeto atefalhar = rede) → republicar.
 - 06/10: publicação OK (faixa de listas na home, /melhores/menor-preco-ja-visto-hoje 200, sitemap 188). IndexNow: 1ª vez 202, agora 403 'UserForbiddedToAccessSite' (Bing ainda validando a chave; arquivo /91ee…c8.txt responde 200 text/plain, inclusive para bingbot). Reavaliar na próxima publicação; se persistir, conferir a seção IndexNow no Bing Webmaster.
 - 06/10: botões novos COM ícone (Ali, ML, Nike, Guess, Stanley, Drogal, Soldiers, Oceane) salvos em originais/web/site; Oceane entrou no BOTAO_LOJA. Falta Clovis.
+
+## 40. (06/10) Filtros viram as LISTAS do site
+- Dono: os chips de filtro ficaram feios e "vão ser nossas listas". Trocas pedidas: Mais vendidos → **Até R$ 20**; Instantâneos →
+  **Menor preço já visto** (mesmo filtro `recorde`); Achados novos → **Guias de compra** (abre /guias/); Subiram de preço → **Todas as listas** (/melhores/).
+- Ordem (+acervo: oportunidade → oferta → urgência; navegação por último): 📉 Maiores quedas · 🏆 Menor preço já visto · 💰 Até R$ 20 · 📘 Guias · 🗂️ Todas as listas.
+- Estilo do botão avise-me (branco, borda preta, sombra dura; ativo = preto com texto ouro); vidro não liga mais nos chips.
+- Números tirados dos chips e dos botões Categoria/Loja ("poluindo"); continuam só dentro do menu aberto.
+- A faixa "As listas de hoje" saiu da home (os chips viraram as listas); `vitrine_listas_home` mantida no código.

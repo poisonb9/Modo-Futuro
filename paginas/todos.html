@@ -2748,6 +2748,18 @@
   .lst-vip { display: inline-block; margin-top: 10px; font: 600 .8rem Poppins, sans-serif; color: #8a6d12; text-decoration: none; }
   @media (max-width: 760px) { .lst-fila { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
     .lst-fila::-webkit-scrollbar { display: none; } .lst-card { flex: 0 0 62%; scroll-snap-align: start; } }
+  /* ⭐ 06/10/2026 (dono): os filtros viram as LISTAS, no desenho do botão "avise-me" (branco, borda preta,
+     sombra dura). Ativo = preto. O vidro (espelho) não liga mais neles. */
+  #chips .chip-ordem, #chips .chip-ordem.vidro { background: #fff !important; color: #111 !important; border: 1.5px solid #111 !important;
+    border-radius: 999px !important; box-shadow: 2px 2px 0 #111 !important; font-weight: 700; backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important; transition: transform .12s ease, box-shadow .12s ease; }
+  #chips .chip-ordem > canvas.espelho { display: none !important; }
+  #chips .chip-ordem:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 #111 !important; }
+  #chips .chip-ordem:active { transform: translate(2px,2px); box-shadow: 0 0 0 #111 !important; }
+  #chips .chip-ordem[aria-pressed="true"] { background: #111 !important; color: #f3d77a !important; }
+  #chips .chip-ordem .ic { margin-right: 5px; }
+  #chips .chip-ordem .n { color: #6b6878 !important; }
+  #chips .chip-ordem[aria-pressed="true"] .n { color: #f3d77a !important; opacity: .8; }
   .hist-link { display: inline-block; white-space: nowrap; margin-top: 4px; font-size: 11.5px; color: #8a6d12; text-decoration: underline; text-underline-offset: 2px; }
   .links-seo { font-size: 13px; text-align: center; } .links-seo a { color: inherit; }
   .balao-bloco { display: none; }
@@ -3464,7 +3476,7 @@
     // Trocar o id quebraria os tres em silencio. So' o FILTRO (agora exige
     // queda) e o ROTULO mudam -- a antiga aba separada "Maiores quedas"
     // (id "caiu") deixou de existir, fundida aqui.
-    { id: "todos",  rotulo: "Maiores quedas",   cabe: function (p) { return (p.queda || 0) >= 5; },
+    { id: "todos",  rotulo: "Maiores quedas", ic: "📉", cabe: function (p) { return (p.queda || 0) >= 5; },
       // ⭐ A ORDEM DE ABERTURA E' A DECISAO MAIS CARA DA PAGINA.
       // Antes era por DATA: o melhor produto podia estar em 40o lugar, e
       // com centenas de pecas isso vira desperdicio puro. Agora abre
@@ -3499,8 +3511,6 @@
     // dizer POR QUE aquele preco era bom).
     // ⭐ prova social do acervo (Movers and Shakers, meticsmedia): a
     // ordenacao que toda loja grande tem.
-    { id: "vendido", rotulo: "Mais vendidos",   cabe: function (p) { return (p.vendas || 0) > 0; },
-      ordem: function (a, b) { return (b.vendas || 0) - (a.vendas || 0); } },
     // ⭐ 23/09/2026 (Bryan queria "Super Oferta · apenas 10 restantes" do
     // AliExpress -- a API de afiliados que usamos NAO devolve estoque, so'
     // a pagina renderizada tem, e capturar isso seria scraping instavel
@@ -3508,7 +3518,7 @@
     // escassez que nem sempre e' real. Confirmado com o Bryan: "Record" --
     // o selo "Recorde" (hoje e' o MENOR preco que JA' vimos em N dias de
     // acompanhamento NOSSO) e' urgencia genuina, medida, sem esse risco.
-    { id: "recorde", rotulo: "Instantâneos",    cabe: function (p) { return !!(p.recorde && p.recorde.dias); },
+    { id: "recorde", rotulo: "Menor preço já visto", ic: "🏆", cabe: function (p) { return !!(p.recorde && p.recorde.dias); },
       ordem: function (a, b) { return (b.recorde && b.recorde.dias || 0) - (a.recorde && a.recorde.dias || 0); } },
     // ⭐ 18/09 (Bryan, pela outra sessao): "Achados novos" so' do catalogo
     // proprio (a externa inteira chega com pontos=0 e virava "nova").
@@ -3518,8 +3528,15 @@
     // (`_dias()` no backend, calendario real desde o 1o dia na serie),
     // que e' exatamente a medida que o Bryan descreveu: cabe ate' 3 dias
     // de vida, ordenado do mais novo (0 dia) pro mais velho (3 dias).
-    { id: "novo",   rotulo: "Achados novos",    cabe: function (p) { return (p.dias || 0) <= 3 && !externo(p); },
-      ordem: function (a, b) { return (a.dias || 0) - (b.dias || 0); } },
+    // ⭐ 06/10/2026 ORDEM (+acervo: oportunidade -> oferta -> urgência; navegação no fim):
+    // Maiores quedas -> Menor preço já visto -> Até R$ 20 -> Guias -> Todas as listas.
+    // ⭐ 06/10/2026 (dono: "esses botões vão ser nossas listas"; "Mais vendidos" -> "Até R$ 20").
+    // Lista de impulso (+acervo): baratinhos, os que mais caíram primeiro.
+    { id: "ate20",  rotulo: "Até R$ 20", ic: "💰", cabe: function (p) { var v = num(p.preco); return v > 0 && v <= 20; },
+      ordem: function (a, b) { return ((b.queda || 0) - (a.queda || 0)) || (num(a.preco) - num(b.preco)); } },
+    // ⭐ 06/10/2026 (dono): "Achados novos" -> "Guias de compra" (abre /guias/, não filtra).
+    { id: "guias",  rotulo: "Guias de compra", ic: "📘", link: "/guias/", cabe: function () { return false; },
+      ordem: function () { return 0; } },
     // ⭐ 23/09/2026 (Bryan: "como transparencia, pra nao ficarmos mostrando
     // esses produtos na vitrine... ter um lugar pra eles"). `subiu` e' o
     // campo do backend (espelho de `antes`) -- so' existe quando hoje E'
@@ -3529,10 +3546,9 @@
     // ordenava pelo preco ATUAL, sem relacao com o QUANTO subiu. Agora
     // ordena pela DIFERENCA (preco de hoje menos o menor que ja vimos,
     // o mesmo numero que aparece em "voce perde R$ X" no cartao).
-    { id: "subiu",  rotulo: "Subiram de preço", cabe: function (p) { return !!p.subiu; },
-      ordem: function (a, b) {
-        return (num(a.preco) - num(a.subiu)) - (num(b.preco) - num(b.subiu));
-      } }
+    // ⭐ 06/10/2026 (dono): "Subiram de preço" -> "Todas as listas" (abre /melhores/).
+    { id: "listas", rotulo: "Todas as listas", ic: "🗂️", link: "/melhores/", cabe: function () { return false; },
+      ordem: function () { return 0; } }
   ];
   // ⭐ QUANTOS APARECEM DE PRIMEIRA. O catalogo vai ter centenas de pecas e
   // ninguem rola centenas — quem explora usa o filtro e a busca. O papel da
@@ -6005,7 +6021,7 @@
       var val = el("span", "valor-escolhido", sel.rotulo);
       b.appendChild(fixo);
       b.appendChild(val);
-      if (sel.n != null) { b.appendChild(el("span", "n", String(sel.n))); }
+      // 06/10/2026 (dono): sem contagem no botão Categoria/Loja (fica só dentro do menu)
       b.type = "button";
       b.setAttribute("aria-expanded", "false");
       b.setAttribute("aria-haspopup", "listbox");
@@ -6086,7 +6102,7 @@
 
     var deEstado = FILTROS.map(function (f) {
       return {
-        id: f.id, rotulo: f.rotulo,
+        id: f.id, rotulo: f.rotulo, ic: f.ic, link: f.link,
         // ⚠️ MESMO RECORTE DA GRADE. Contagem que conta o que a grade
         // nao desenha e' a mentira mais facil de cometer aqui — a pessoa
         // le' "tudo 63" e conta 57 cartoes.
@@ -6101,10 +6117,12 @@
     var fila = el("div", "fila-chips");
     deEstado.forEach(function (o) {
       var c = el("button", "chip-ordem", o.rotulo);
+      if (o.ic) { c.insertBefore(el("span", "ic", o.ic), c.firstChild); }
       c.type = "button";
       c.setAttribute("aria-pressed", String(o.id === atual));
-      if (o.n != null && o.id !== "todos") { c.appendChild(el("span", "n", String(o.n))); }
+      // 06/10/2026 (dono: "tirar esses números, estão poluindo") -- sem contagem no chip
       c.addEventListener("click", function () {
+        if (o.link) { location.href = o.link; return; }
         atual = o.id;
         mostrando = passoLista();
         montarChips();
@@ -6677,6 +6695,7 @@
         // ⛔ 05/10/2026 (print do dono no PC): o espelho de vidro (WebGL) pintava
         // o menu de lojas transparente por cima do fundo branco. No PC o menu
         // e' painel opaco -- sem vidro.
+        if (n.classList.contains("chip-ordem")) { return; }
         if (n.classList.contains("opcoes") && window.matchMedia && matchMedia("(min-width: 700px)").matches) { return; }
         n.classList.add("vidro");
         ligar(n, n.classList.contains("busca-caixa") ? 16 : (n.classList.contains("opcoes") ? 24 : 12));

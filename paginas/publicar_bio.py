@@ -3340,7 +3340,8 @@ def ssr_primeira_tela(html: str) -> str:
 def _listas_home() -> str:
     try:
         from engine import paginas_produto as _pp
-        return _pp.vitrine_listas_home(_bot_alerta()) or '<section id="listas-destaque"></section>'
+        # 06/10/2026 (dono): a faixa saiu -- os chips de filtro viraram as listas. Função mantida.
+        return '<section id="listas-destaque"></section>' if True else _pp.vitrine_listas_home(_bot_alerta())
     except Exception as e:                                # noqa: BLE001
         print(f"  [!] listas da home: {str(e)[:80]}")
         return '<section id="listas-destaque"></section>'

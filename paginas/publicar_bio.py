@@ -514,6 +514,43 @@ def _ml_vitrine() -> list[dict]:
     return prods
 
 
+# ⭐ 06/10/2026 (dono: "temos vários itens sem foto"): a Drogal manda um endereço
+# DIFERENTE por produto, mas 193 de 200 eram o MESMO arquivo "No image available"
+# (27.150 bytes, md5 0822277b...). Produto sem foto real não vai à vitrine.
+# Cache em estado/fotos_sem_imagem.json ({url: true/false}); só mede o que é novo.
+FOTO_PLACEHOLDER_MD5 = {"0822277b80f7c5cead2cc20ac41d25f6"}
+FOTO_PLACEHOLDER_BYTES = {27150}
+
+
+def _fotos_sem_imagem(urls: list[str]) -> set[str]:
+    import json, hashlib
+    import concurrent.futures as cf
+    import requests
+    arq = RAIZ / "estado" / "fotos_sem_imagem.json"
+    try:
+        cache = json.loads(arq.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        cache = {}
+    novos = [u for u in set(urls) if u and u not in cache]
+
+    def medir(u):
+        try:
+            r = requests.get(u, timeout=15)
+            if r.status_code != 200 or not r.content:
+                return u, True
+            return u, (len(r.content) in FOTO_PLACEHOLDER_BYTES
+                       and hashlib.md5(r.content).hexdigest() in FOTO_PLACEHOLDER_MD5)
+        except Exception:                                 # noqa: BLE001
+            return u, None                                # rede: decide na próxima
+    if novos:
+        with cf.ThreadPoolExecutor(16) as ex:
+            for u, ruim in ex.map(medir, novos[:3000]):
+                if ruim is not None:
+                    cache[u] = ruim
+        arq.write_text(json.dumps(cache), encoding="utf-8")
+    return {u for u, ruim in cache.items() if ruim}
+
+
 def produtos_externos() -> dict[str, dict]:
     """{categoria: {"arquivo", "passo", "produtos": [cartoes]}} — o que vai
     em arquivo separado. {} quando nao ha' instantaneo valido.
@@ -559,6 +596,10 @@ def produtos_externos() -> dict[str, dict]:
     _termos_alta = _tm.termos()
     sem_mapa: dict[str, int] = {}
     fora: dict[str, int] = {}
+    sem_foto: dict[str, int] = {}
+    # só lojas cujo feed já mostrou foto-placeholder (medir 4 mil fotos a cada publicação seria caro)
+    _ruins = _fotos_sem_imagem([(q.get("imagem") or "").replace("http://", "https://", 1)
+                                for q in (inst.get("produtos") or []) if "convertiez" in (q.get("imagem") or "")])
     # ⭐ 04/10/2026 (dono: "loja bem abastecida com o portfolio do Mercado Livre"):
     # os mais vendidos do ML (engine/ml_vitrine.py) entram como mais uma loja externa.
     for p in (inst.get("produtos") or []) + _ml_vitrine():
@@ -572,6 +613,9 @@ def produtos_externos() -> dict[str, dict]:
             sem_mapa[p.get("loja") or "?"] = sem_mapa.get(p.get("loja") or "?", 0) + 1
             continue
         if not p.get("link") or not p.get("nome"):
+            continue
+        if (p.get("imagem", "") or "").replace("http://", "https://", 1) in _ruins:
+            sem_foto[p.get("loja") or "?"] = sem_foto.get(p.get("loja") or "?", 0) + 1
             continue
         cat, arquivo, passo = cfg
         try:
@@ -623,6 +667,8 @@ def produtos_externos() -> dict[str, dict]:
     for loja, n in sem_mapa.items():
         print(f"externos: ⚠️ loja SEM MAPA em EXTERNAS: {loja!r} ({n} produtos) "
               "— aprovada no Awin mas fora do site ate' ganhar categoria")
+    for loja, n in sem_foto.items():
+        print(f"externos: {loja!r} — {n} produto(s) SEM FOTO real (placeholder da loja) ficaram fora")
     for loja, n in fora.items():
         print(f"externos: {loja!r} fica FORA do site por decisao ({n} produtos; "
               "FORA_DO_SITE)")

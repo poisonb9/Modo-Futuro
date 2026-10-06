@@ -694,6 +694,49 @@
   .isca-mel { position: absolute; left: -9999px; width: 1px; height: 1px; }
   .isca-msg { margin: 0; font-size: 13px; min-height: 1em; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  /* ⭐ 06/10/2026 — MODO LISTA (dono: "como no Windows: sair do modo ícones grandes e ir para
+     listagem/detalhes"; referência: link na bio da Milly Mazaretto, mas premium).
+     +acervo (bio que vende): 1º o produto principal, 2º a promoção do momento, 3º o catálogo
+     por categorias, depois os canais. Espaço = dinheiro: cabeçalho compacto, produto em LINHA. */
+
+  /* cabeçalho compacto */
+  .topo { padding-top: 10px !important; gap: 4px !important; }
+  .avatar { width: 64px !important; height: 64px !important; font-size: 26px !important; }
+  .marca { margin: 2px 0 0 !important; }
+  .promessa-canal { font-size: 13px !important; margin: 0 auto 2px !important; max-width: 34ch !important; }
+  .chamada br { display: none; }
+  .chamada { font-size: clamp(18px, 5.2vw, 22px) !important; margin: 2px 0 6px !important; line-height: 1.1 !important; }
+  .vivo { height: 84px !important; margin: 0 auto 6px !important; }
+  .rolar { display: none !important; }
+  .prova { font-size: 11.5px !important; margin: 2px 0 0 !important; }
+  .esteira { display: none !important; }
+  .prova_forte { transform: scale(.86); transform-origin: top center; margin-bottom: -10px !important; }
+
+  /* as LISTAS do site, no desenho do botão "avise-me" (branco, borda preta, sombra dura) */
+  .listas-bio { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 10px 0 14px; }
+  .listas-bio a { display: inline-flex; align-items: center; gap: 5px; padding: 7px 12px; border-radius: 999px;
+    background: #fff; color: #111; border: 1.5px solid #111; box-shadow: 2px 2px 0 #111; font: 700 12.5px/1 Poppins, system-ui, sans-serif;
+    text-decoration: none; transition: transform .12s, box-shadow .12s; }
+  .listas-bio a:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #111; }
+
+  /* produtos em LINHA: foto pequena | nome + loja | preço */
+  .vitrine, #outros .vitrine, #outros [class*="grade"] { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .produto { flex-direction: row !important; align-items: stretch; box-shadow: 2px 2px 0 var(--sombra) !important; }
+  a.produto:hover { box-shadow: 3px 3px 0 var(--sombra) !important; }
+  .produto .foto { width: 76px !important; min-width: 76px; aspect-ratio: 1 / 1 !important; flex: none;
+    border-bottom: none !important; border-right: 1.5px solid var(--tinta); font-size: 26px; position: relative; }
+  .produto .corpo { padding: 8px 10px !important; gap: 2px !important; justify-content: center; min-width: 0; }
+  .produto .nome { font-size: 13px !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .produto .preco { font-size: 15px !important; }
+  .produto .caiu, .produto .novo { font-size: 9.5px !important; padding: 1px 5px !important; top: 4px !important; left: 4px !important; }
+  /* o que pesa no cartão grande sai da linha (o produto continua com preço e queda) */
+  .produto svg, .produto .grafico, .produto .avise-me, .produto .loja-boa, .produto .serie { display: none !important; }
+  .vitrine.solo .produto .foto { aspect-ratio: 1 / 1 !important; width: 76px !important; }
+
+  /* botões de grupo/canal mais baixos (eram ~74 px) */
+  #grupos a, #grupos .botao, #grupos [class*="botao"] { padding-top: 9px !important; padding-bottom: 9px !important; min-height: 0 !important; }
+  #grupos h2, #grupos .frase, #grupos p { margin-top: 14px !important; margin-bottom: 8px !important; font-size: 13px !important; }
+
 </style>
 
 <div class="envelope">
@@ -746,10 +789,16 @@
          ORDEM das secoes la' embaixo, e aparece como contexto discreto. -->
   </header>
 
+  <!-- ⭐ 06/10/2026 MODO LISTA (dono + acervo "bio que vende": produto primeiro, promoção, catálogo,
+       depois os canais). As LISTAS do site no desenho do botão avise-me. -->
+  <nav class="listas-bio" aria-label="Listas">
+    <a href="https://achadinhototal.com.br/melhores/maiores-quedas-de-preco/">📉 Maiores quedas</a>
+    <a href="https://achadinhototal.com.br/melhores/achadinhos-ate-20-reais/">💰 Até R$ 20</a>
+    <a href="https://achadinhototal.com.br/guias/">📘 Guias</a>
+    <a href="https://achadinhototal.com.br/cupons/">🎟️ Cupons</a>
+  </nav>
   <div class="prova_forte" id="prova_forte"></div>
   <div class="esteira" id="esteira"><div class="trilho" id="trilho"></div></div>
-
-  <main id="grupos"></main>
 
   <section class="produtos">
     <div class="cabeca">
@@ -759,6 +808,8 @@
     <div id="vitrine"></div>
     <button class="interruptor" id="interruptor" type="button"></button>
   </section>
+
+  <main id="grupos"></main>
 
   <!-- ⚠️ OS OUTROS CANTOS DA CASA, com produto de verdade.
        Ordem pedida pelo Bryan em 14/09/2026: Achadinho Total primeiro,
@@ -891,7 +942,7 @@
       arroba: "@achadinho.make",
       inicial: "AM",
       acento: "#E0157F",
-      promessa: "Maquiagem e beleza importada que chega por bem menos do que você imagina.",
+      promessa: "Maquiagem importada por menos. Preço conferido hoje, link direto pra loja.",
       vantagens: [
         ["🔎", "Eu procuro, olho a avaliação e só mostro o que presta"],
         ["💸", "Preço de importado sem a cara de importado"],
@@ -1092,7 +1143,7 @@
       arroba: "@fatura.chora",
       inicial: "PM",
       acento: "#C1841A",
-      promessa: "Onde o seu dinheiro escapa sem você ver — e o que dá pra fazer hoje.",
+      promessa: "Onde seu dinheiro escapa — e como pagar menos hoje.",
       vantagens: [
         ["🧾", "A conta que você paga sem perceber"],
         ["💡", "Troca simples que sobra no fim do mês"],
@@ -1124,7 +1175,7 @@
       arroba: "@achadinhos.instantaneos",
       inicial: "AT",
       acento: "#7A3FF2",
-      promessa: "O achadinho que resolve um problema que você nem sabia que tinha.",
+      promessa: "O achadinho que resolve um problema seu. Preço de hoje, link direto.",
       vantagens: [
         ["🔎", "Garimpo diário, só o que passou no teste"],
         ["⚡", "De R$ 10 a R$ 50, sem enrolação"],
@@ -1157,7 +1208,7 @@
       arroba: "@achadinhototal",
       inicial: "AP",
       acento: "#E4572E",
-      promessa: "Os achados do dia com a maior queda de preço — conferida, não prometida.",
+      promessa: "As maiores quedas de preço do dia. Conferidas, não prometidas.",
       vantagens: [
         ["📉", "Só entra o que caiu de verdade na nossa série de preços"],
         ["🔎", "Preço conferido no dia do vídeo"],
@@ -1191,7 +1242,7 @@
       acento: "#1F8A5F",
       // ⭐ 28/09/2026 (dono): angulo MARMITA, BARATO E PROTEICO. Saiu o
       // botao do Telegram (Telegram so' com tracao, decisao do dono).
-      promessa: "Receita gringa, medida brasileira: marmita boa, barata e com proteína.",
+      promessa: "Marmita boa, barata e com proteína — a receita e onde comprar.",
       vantagens: [
         ["🍱", "Rende a semana: marmita que congela e não enjoa"],
         ["💪", "Proteína de verdade, com o que tem no mercado"],

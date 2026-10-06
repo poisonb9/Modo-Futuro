@@ -316,3 +316,19 @@
 - 06/10: chip 'Menor preço já visto' saiu da fila (dono: redundante com Maiores quedas). Filtro 'recorde' segue para a aba Instantâneos (oculto: só aparece quando ativo). Fila: Maiores quedas · Até R$ 20 · Guias · Todas as listas.
 - 06/10: chip Maiores quedas agora ABRE a lista /melhores/maiores-quedas-de-preco/ (dono). A vitrine continua abrindo na ordem 'todos'; chip com link nunca fica apertado.
 - 06/10: listas e guias mostram 'era' (média 30 d, riscado) + '-X%' em verde ao lado do preço de hoje (dono). Base = mesma da queda; nunca o 'de' da loja. Só com queda ≥3%.
+
+## 42. (06/10 manhã) Lojas sumidas, fotos "No image", bio em modo lista
+- **Lojas sumidas (só Ali e ML no menu):** o garimpo de 05/10 19:27 coletou 4.703 produtos Awin mas o push FALHOU por conflito em
+  `estado/precos_vistos.jsonl` (outro robô gravando) e o job saiu verde → `awin_catalogo.json` ficou com 34 h e o publicador
+  (trava de 24 h) tirou as lojas do ar. Conserto: `.gitattributes` com `merge=union` no precos_vistos/pedidos (append-only) e
+  `garimpo.yml` falha alto se o rebase parar. Garimpo redisparado (run 37444965604).
+- **Fotos "No image available":** 193 de 200 fotos da Drogal são o MESMO arquivo placeholder (27.150 bytes, md5 0822277b…) com
+  endereço diferente. `publicar_bio._fotos_sem_imagem()` mede (cache `estado/fotos_sem_imagem.json`) e o produto sem foto real
+  NÃO entra. Por ora só mede o domínio convertiez (Drogal).
+- **Bio dos canais (contra_capa.html) em MODO LISTA** (dono: "como no Windows, de ícones grandes para detalhes"; ref. bio da Milly
+  Mazaretto, premium; +acervo bio que vende = produto 1º, promoção, catálogo, canais): cabeçalho compacto (avatar 64 px, "Eu procuro.
+  Você paga menos." numa linha), botões de LISTAS no desenho do avise-me (Maiores quedas, Até R$ 20, Guias, Cupons), PRODUTOS ANTES
+  dos grupos, produto em LINHA (foto 76 px | nome 2 linhas | preço), esteira escondida, botões de grupo mais baixos.
+  Descrições objetivas nos canais de venda (Make, Instantâneos, Chef, achadinho, Pago Menos). Backup: %TEMP%/contra_capa_antes_modo_lista.html.
+- De novo o publicador automático guardou trabalho no stash (contra_capa + publicar_bio) — recuperado de stash@{0}. O conserto do
+  item 41/28 só vale quando o .ps1 novo estiver no PC (está) e o pop der conflito; desta vez o pop nem rodou? investigar.

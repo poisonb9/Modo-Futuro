@@ -2,3 +2,7 @@
 # neste arquivo (so' recebe linha no fim). union junta as duas pontas sem conflito.
 estado/produtos_publicados.jsonl merge=union
 estado/ofertas_feitas.jsonl merge=union
+
+# 06/10/2026: garimpo de 05/10 19:27 perdeu a coleta inteira (Awin 4.703 produtos) num conflito neste arquivo.
+estado/precos_vistos.jsonl merge=union
+estado/pedidos.jsonl merge=union

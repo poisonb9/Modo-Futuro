@@ -199,5 +199,7 @@ jobs:
           # e o dia inteiro de pontos da serie morreu com o runner. Rebase
           # antes, como o precos.yml ja' fazia. Tres tentativas.
           for i in 1 2 3; do git pull --rebase && git push && break || sleep 20; done
+          # 06/10/2026: rebase parado no meio = coleta NAO subiu (o "ahead" abaixo nao via isso)
+          if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then echo "::error::rebase com conflito, coleta nao subiu"; git rebase --abort || true; exit 1; fi
           git status -sb | head -1 | grep -q ahead && { echo "::error::push nao subiu"; exit 1; } || true
           echo "estado commitado: $(git rev-parse --short HEAD)"

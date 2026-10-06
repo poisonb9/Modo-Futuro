@@ -529,6 +529,14 @@ def enfileirar(token: str, canal: str, clipe: dict, simular: bool,
     titulo = (clipe.get("titulo") or legenda.split("#")[0]).strip()[:90]
     if simular:
         return "SIMULADO"
+    # 06/10/2026: o horario "sai ja'" era calculado no inicio e o ofertas.yml
+    # gastava 34 min gerando video antes de enviar -> "Scheduled time must be
+    # in the future" e o job inteiro falhava. Horario vencido vai para daqui a 10 min.
+    if quando_sp:
+        agora_sp = (datetime.datetime.now(datetime.timezone.utc)
+                    - datetime.timedelta(hours=FUSO_SP_H)).replace(tzinfo=None)
+        if quando_sp.tzinfo is None and quando_sp < agora_sp + datetime.timedelta(minutes=5):
+            quando_sp = agora_sp + datetime.timedelta(minutes=10)
     m = """mutation($input: CreatePostInput!) {
       createPost(input: $input) { __typename
         ... on PostActionSuccess { post { id status dueAt } }

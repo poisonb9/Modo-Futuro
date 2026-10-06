@@ -551,6 +551,51 @@ def _fotos_sem_imagem(urls: list[str]) -> set[str]:
     return {u for u, ruim in cache.items() if ruim}
 
 
+def _fotos_drogal(nomes_por_url: dict[str, str]) -> dict[str, str]:
+    """⭐ 06/10/2026: a foto do feed Awin da Drogal (io.convertiez) dá 404 com placeholder em 580/615.
+    A API pública VTEX da loja (busca por nome, SEM passar pelo link de afiliado = sem clique falso)
+    devolve a foto real. Só troca se o NOME bate (>= 75% das palavras); senão fica sem foto (fora).
+    Cache em estado/fotos_trocadas.json ({url_ruim: url_boa ou ""})."""
+    import json, re, unicodedata
+    import concurrent.futures as cf
+    import urllib.parse as up
+    import requests
+    arq = RAIZ / "estado" / "fotos_trocadas.json"
+    try:
+        cache = json.loads(arq.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        cache = {}
+
+    def pal(t):
+        t = unicodedata.normalize("NFKD", t or "").encode("ascii", "ignore").decode().lower()
+        return set(w for w in re.findall(r"[a-z0-9]+", t) if len(w) > 1)
+
+    def buscar(item):
+        url, nome = item
+        try:
+            r = requests.get("https://www.drogal.com.br/api/catalog_system/pub/products/search?ft="
+                             + up.quote(nome[:60]) + "&_from=0&_to=4", timeout=20,
+                             headers={"User-Agent": "Mozilla/5.0"})
+            if r.status_code not in (200, 206):
+                return url, ""
+            a = pal(nome)
+            for prod in r.json():
+                b = pal(prod.get("productName", ""))
+                if a and len(a & b) / max(len(a), len(b)) >= 0.75:
+                    return url, prod["items"][0]["images"][0]["imageUrl"].split("?")[0]
+            return url, ""
+        except Exception:                                 # noqa: BLE001
+            return url, None
+    novos = [(u, n) for u, n in nomes_por_url.items() if u not in cache]
+    if novos:
+        with cf.ThreadPoolExecutor(8) as ex:
+            for u, boa in ex.map(buscar, novos[:1500]):
+                if boa is not None:
+                    cache[u] = boa
+        arq.write_text(json.dumps(cache), encoding="utf-8")
+    return {u: b for u, b in cache.items() if b}
+
+
 def produtos_externos() -> dict[str, dict]:
     """{categoria: {"arquivo", "passo", "produtos": [cartoes]}} — o que vai
     em arquivo separado. {} quando nao ha' instantaneo valido.
@@ -600,6 +645,9 @@ def produtos_externos() -> dict[str, dict]:
     # só lojas cujo feed já mostrou foto-placeholder (medir 4 mil fotos a cada publicação seria caro)
     _ruins = _fotos_sem_imagem([(q.get("imagem") or "").replace("http://", "https://", 1)
                                 for q in (inst.get("produtos") or []) if "convertiez" in (q.get("imagem") or "")])
+    _trocas = _fotos_drogal({(q.get("imagem") or "").replace("http://", "https://", 1): q.get("nome") or ""
+                             for q in (inst.get("produtos") or [])
+                             if (q.get("imagem") or "").replace("http://", "https://", 1) in _ruins})
     # ⭐ 04/10/2026 (dono: "loja bem abastecida com o portfolio do Mercado Livre"):
     # os mais vendidos do ML (engine/ml_vitrine.py) entram como mais uma loja externa.
     for p in (inst.get("produtos") or []) + _ml_vitrine():
@@ -614,7 +662,10 @@ def produtos_externos() -> dict[str, dict]:
             continue
         if not p.get("link") or not p.get("nome"):
             continue
-        if (p.get("imagem", "") or "").replace("http://", "https://", 1) in _ruins:
+        _img = (p.get("imagem", "") or "").replace("http://", "https://", 1)
+        if _img in _trocas:
+            p = dict(p, imagem=_trocas[_img])
+        elif _img in _ruins:
             sem_foto[p.get("loja") or "?"] = sem_foto.get(p.get("loja") or "?", 0) + 1
             continue
         cat, arquivo, passo = cfg

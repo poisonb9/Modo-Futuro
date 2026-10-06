@@ -315,3 +315,4 @@
   sem modelo → "Hoje: <título>"), manda uma mensagem só com os 9 canais. Canal sem post agendado = "manter a nota atual".
 - 06/10: chip 'Menor preço já visto' saiu da fila (dono: redundante com Maiores quedas). Filtro 'recorde' segue para a aba Instantâneos (oculto: só aparece quando ativo). Fila: Maiores quedas · Até R$ 20 · Guias · Todas as listas.
 - 06/10: chip Maiores quedas agora ABRE a lista /melhores/maiores-quedas-de-preco/ (dono). A vitrine continua abrindo na ordem 'todos'; chip com link nunca fica apertado.
+- 06/10: listas e guias mostram 'era' (média 30 d, riscado) + '-X%' em verde ao lado do preço de hoje (dono). Base = mesma da queda; nunca o 'de' da loja. Só com queda ≥3%.

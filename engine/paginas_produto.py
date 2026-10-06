@@ -186,6 +186,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 th{font-size:12px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px}td img{width:54px;height:54px;object-fit:contain;border-radius:8px;border:1px solid var(--linha);background:#fff}
 .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.grade a{display:block;text-decoration:none;background:#fff;border:1px solid var(--linha);border-radius:14px;padding:10px;font-size:13px}
 .grade img{width:100%;aspect-ratio:1;object-fit:contain}.grade b{display:block;margin-top:4px}
+td b,.era,.caiu{white-space:nowrap}.era{color:var(--suave);font-size:12.5px}.caiu{font-style:normal;background:#e6f6ec;color:var(--verde);border-radius:8px;padding:1px 6px;font-weight:700;font-size:12px}
 .cupom{background:#fffbea;border-color:#f3e3a6}.fora{background:#fff1f0;border-color:#f5c6c2}
 details{border-top:1px solid var(--linha);padding:10px 0}summary{font-weight:600;cursor:pointer}
 footer{max-width:880px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--suave)}footer a{margin-right:12px}
@@ -335,6 +336,15 @@ def listas_especiais(esc: list[dict]) -> list[dict]:
     return out
 
 
+def _era(s: dict) -> str:
+    """⭐ 06/10/2026 (dono: "mostrar o preço que era e a % que caiu"). "Era" = média de 30 dias
+    (a MESMA base da queda; nunca o "de" inflado da loja). Só aparece com queda ≥ 3%."""
+    if s["vs_media"] > -3:
+        return ""
+    return (f'<br><s class="era">{_brl(s["media30"])}</s> '
+            f'<em class="caiu">-{abs(s["vs_media"]):.0f}%</em>')
+
+
 def pagina_lista(l: dict, quando: str, mes: str) -> str:
     area, y = l["area"], l["ate"]
     url = f"{DOMINIO}/melhores/{l['slug']}/"
@@ -346,13 +356,13 @@ def pagina_lista(l: dict, quando: str, mes: str) -> str:
         selo, _ = veredito(s, _num(p["preco"]))
         linhas.append(f'<tr><td>{i}</td><td><img src="{e(p["imagem"].replace("http://", "https://", 1))}" alt="{e(p["nome"][:100])}" loading="lazy"></td>'
                       f'<td><a href="/p/{p["pg"]}/"><b>{e(p["nome"][:80])}</b></a><br><small>{e(p.get("loja") or "")} · {e(selo)}</small></td>'
-                      f'<td><b>{e(p["preco"])}</b></td><td class="esc">{_brl(s["menor"])}</td><td class="esc">{s["n"]} dias</td></tr>')
+                      f'<td><b>{e(p["preco"])}</b>{_era(s)}</td><td class="esc">{_brl(s["menor"])}</td><td class="esc">{s["n"]} dias</td></tr>')
     top = l["itens"][0]
     resp = l.get("resposta") or (f"Pelo preço de hoje comparado com o histórico, o destaque é {top['nome'][:70]} por {top['preco']}. "
             f"A lista tem {len(l['itens'])} produtos de {area.lower()} até R$ {y}, ordenados por quanto estão abaixo da própria média de 30 dias.")
     corpo = (f'<section class="cx"><p class="resp"><strong>Qual comprar?</strong> {e(resp)}</p></section>'
              f'<section class="cx"><h2>Comparativo (preços conferidos em {e(quando)})</h2><table><tr><th>#</th><th></th><th>Produto</th>'
-             f'<th>Hoje</th><th class="esc">Menor visto</th><th class="esc">Histórico</th></tr>{"".join(linhas)}</table>'
+             f'<th>Hoje <small>(era)</small></th><th class="esc">Menor visto</th><th class="esc">Histórico</th></tr>{"".join(linhas)}</table>'
              f'<p class="cinza">Toque no produto para ver o gráfico de preço e o aviso de queda.</p></section>')
     ld = [{"@context": "https://schema.org", "@type": "ItemList", "name": titulo, "url": url,
            "itemListElement": [{"@type": "ListItem", "position": i, "url": f"{DOMINIO}/p/{p['pg']}/", "name": p["nome"]}
@@ -618,7 +628,7 @@ def pagina_guia(g: dict, itens: list[dict], listas: list[dict], ano: int, quando
         selo, _ = veredito(st, _num(x["preco"]))
         linhas.append(f'<tr><td><img src="{e(x["imagem"].replace("http://", "https://", 1))}" alt="{e(x["nome"][:100])}" loading="lazy"></td>'
                       f'<td><a href="/p/{x["pg"]}/"><b>{e(x["nome"][:80])}</b></a><br><small>{e(x.get("loja") or "")} · {e(selo)}</small></td>'
-                      f'<td><b>{e(x["preco"])}</b></td><td class="esc">{_brl(st["menor"])}</td></tr>')
+                      f'<td><b>{e(x["preco"])}</b>{_era(st)}</td><td class="esc">{_brl(st["menor"])}</td></tr>')
     tab = (f'<section class="cx"><h2>Os modelos que acompanhamos (preços de {e(quando)})</h2><table><tr><th></th><th>Produto</th>'
            f'<th>Hoje</th><th class="esc">Menor visto</th></tr>{"".join(linhas)}</table>'
            f'<p class="cinza">Toque no produto para ver o gráfico de preço e ativar o aviso de queda.</p></section>') if linhas else ""

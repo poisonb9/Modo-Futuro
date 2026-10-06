@@ -3476,7 +3476,7 @@
     // Trocar o id quebraria os tres em silencio. So' o FILTRO (agora exige
     // queda) e o ROTULO mudam -- a antiga aba separada "Maiores quedas"
     // (id "caiu") deixou de existir, fundida aqui.
-    { id: "todos",  rotulo: "Maiores quedas", ic: "📉", cabe: function (p) { return (p.queda || 0) >= 5; },
+    { id: "todos",  rotulo: "Maiores quedas", ic: "📉", link: "/melhores/maiores-quedas-de-preco/", cabe: function (p) { return (p.queda || 0) >= 5; },
       // ⭐ A ORDEM DE ABERTURA E' A DECISAO MAIS CARA DA PAGINA.
       // Antes era por DATA: o melhor produto podia estar em 40o lugar, e
       // com centenas de pecas isso vira desperdicio puro. Agora abre
@@ -6121,7 +6121,8 @@
       var c = el("button", "chip-ordem", o.rotulo);
       if (o.ic) { c.insertBefore(el("span", "ic", o.ic), c.firstChild); }
       c.type = "button";
-      c.setAttribute("aria-pressed", String(o.id === atual));
+      // 06/10/2026 (dono: "Maiores quedas abra como lista"): chip com link abre a página da lista e nunca fica "apertado"
+      c.setAttribute("aria-pressed", String(o.id === atual && !o.link));
       // 06/10/2026 (dono: "tirar esses números, estão poluindo") -- sem contagem no chip
       c.addEventListener("click", function () {
         if (o.link) { location.href = o.link; return; }

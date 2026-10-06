@@ -43,28 +43,46 @@ PERGUNTA = (
 )
 
 
+# 06/10/2026: o juiz tentava so' 4 chaves e desistia em qualquer erro que nao
+# fosse cota (503 = Gemini sobrecarregado) -> "sem veredito" -> clipe pulado ->
+# fila vazia em 4 canais. Agora percorre TODAS as chaves, espera no 5xx e cai
+# para o modelo reserva. ⛔ Flash-LITE proibido (regra do dono).
+MODELOS_JUIZ = [_np.MODELO_GEMINI, "gemini-3.5-flash"]
+
+
 def julgar(audio: bytes, titulo: str) -> dict | None:
+    import time as _t
     rot = keys.gemini()
-    for _ in range(min(4, len(rot))):
-        chave = rot.proxima()
-        try:
-            r = requests.post(
-                "https://generativelanguage.googleapis.com/v1beta/models/"
-                f"{_np.MODELO_GEMINI}:generateContent?key={chave.strip()}",
-                json={"contents": [{"parts": [
-                    {"text": PERGUNTA.format(titulo=titulo)},
-                    {"inline_data": {"mime_type": "audio/mp3",
-                                     "data": base64.b64encode(audio).decode()}}]}],
-                      "generationConfig": {"temperature": 0}}, timeout=120)
-            if r.status_code in (403, 429):
-                rot.queimar(chave)
-                continue
-            r.raise_for_status()
-            t = r.json()["candidates"][0]["content"]["parts"][0]["text"]
-            m = re.search(r"\{.*\}", t, re.S)
-            return json.loads(m.group(0)) if m else None
-        except Exception as e:  # noqa: BLE001
-            print(f"    [!] gemini: {type(e).__name__}")
+    for modelo in MODELOS_JUIZ:
+        for _ in range(max(1, len(rot))):
+            chave = rot.proxima()
+            if not chave:
+                break
+            try:
+                r = requests.post(
+                    "https://generativelanguage.googleapis.com/v1beta/models/"
+                    f"{modelo}:generateContent?key={chave.strip()}",
+                    json={"contents": [{"parts": [
+                        {"text": PERGUNTA.format(titulo=titulo)},
+                        {"inline_data": {"mime_type": "audio/mp3",
+                                         "data": base64.b64encode(audio).decode()}}]}],
+                          "generationConfig": {"temperature": 0}}, timeout=120)
+                if r.status_code in (403, 429):
+                    rot.queimar(chave)
+                    continue
+                if r.status_code >= 500:
+                    print(f"    [!] gemini {modelo}: {r.status_code} (sobrecarga) — espero e tento outra")
+                    _t.sleep(4)
+                    continue
+                if r.status_code != 200:
+                    print(f"    [!] gemini {modelo}: {r.status_code} {r.text[:160]}")
+                    break
+                t = r.json()["candidates"][0]["content"]["parts"][0]["text"]
+                m = re.search(r"\{.*\}", t, re.S)
+                return json.loads(m.group(0)) if m else None
+            except Exception as e:  # noqa: BLE001
+                print(f"    [!] gemini {modelo}: {type(e).__name__} {str(e)[:120]}")
+        rot._queimadas.clear()   # cota e' por modelo: chaves de volta para o reserva
     return None
 
 

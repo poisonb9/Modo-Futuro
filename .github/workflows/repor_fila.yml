@@ -117,7 +117,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet registro_clipes.json 2>/dev/null; then
-            git add registro_clipes.json && git commit -m "registro: postagens conferidas" && git push
+            git add registro_clipes.json && git commit -m "registro: postagens conferidas" && (for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 5; done)
           else
             echo "registro inalterado"
           fi

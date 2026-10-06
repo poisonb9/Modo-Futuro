@@ -346,3 +346,29 @@
 - 06/10 ~11h–12h30 (sessão I): bio modo lista NO AR nos 6 (conferir() liberou `atefalhar`, @ público). Ajustes do dono: título
   inteiro, legenda do número + faixa auto-fit, data = reconferência mais recente, pílula "achado novo" compacta (827e642, b12e16c).
   12 lojas e Drogal com foto conferidas no ar. Handoff: HANDOFF_06-10-2026_I.md.
+
+## 43. (06/10 tarde) 7 canais sem fila — causas e blindagem
+- **Sintoma:** só semanestesia e atefalhar com posts agendados; modofuturo, achadinho.make, camarim, chef, instantâneos, fatura.chora e achadinhototal com 0.
+- **Causa 1 — radares zerados:** a cota diária de BUSCA do YouTube ("Search Queries per day") acabou nas 5 chaves (HTTP 429). O radar engolia o erro,
+  gravava 0 candidatos, o estoque ficava em 0 e o loop rodava o radar de novo a cada 30 min, queimando a cota de novo. Conserto: `engine/busca_yt.py`
+  (cache 24 h por busca, chave esgotada travada até o reset ~07:05 UTC, reserva **yt-dlp sem cota**, alerta em `estado/alertas_busca.log`), ligado nos
+  7 radares via `com_rodizio`. Testado: modofuturo voltou a achar 7–16 vídeos por busca com a cota zerada.
+- **Causa 2 — repor_fila morria calado:** o `apt-get install ffmpeg` travava 17+ min (espelho lento) e o job de 30 min estourava antes do agendador
+  (01, 02, 06/10 cancelados). Conserto: `ferramentas/instalar_ffmpeg.sh` (binário estático com teto, apt com teto de 5 min) em 7 workflows; job 50 min;
+  saída ao vivo (`-u`) e teto de 7 min por canal com vigia (`TETO_CANAL_S`) — um canal lento não derruba os outros.
+- **Causa 3 — ofertas falhava:** o horário "1º sai já" era calculado antes de 34 min de geração → "Scheduled time must be in the future".
+  Conserto em `agendar_buffer.enfileirar`: horário vencido vira agora+10 min. "Guardar o registro" do ofertas agora roda mesmo com falha.
+- **Blindagem (+acervo maestros: error workflow / retry / validar saída):** `.github/workflows/alarme_de_falha.yml` avisa o dono no Telegram quando
+  repor_fila, ofertas, vigia, cortar, garimpo ou notas falham/cancelam. repor_fila agora roda 2x/dia (09:00 e 15:07 BRT).
+- O vigia de postagem JÁ tinha avisado às 14h11 (Telegram 200) — faltava o conserto automático por trás.
+- JDownloader: API :3128 não respondia; reiniciado (1ª tentativa ok).
+- Abastecer: já roda um canal por vez (laço sequencial + abastecer.lock) — regra do dono: nunca todos juntos.
+- **Teste do repor (run 37523556588):** não trava mais (terminou em ~25 min); modofuturo ganhou 1 post. Achados novos:
+  (a) "Guardar o registro" falhava por push rejeitado (outro robô publicou antes) → pull --rebase + 3 tentativas;
+  (b) **as 36 chaves Gemini estão em 429 em todos os flash (3.5/3.6/3.7/3.8)** → o juiz de títulos (`conferir_titulos.julgar`) fica sem veredito
+  e pula todo clipe ("na dúvida, não posta") → camarim (8 prontos) e achadinho.make (6 prontos) sem fila. Juiz agora percorre TODAS as chaves,
+  espera no 5xx e tem modelo reserva (3.5-flash; Flash-LITE proibido).
+  (c) **Quem come a cota:** a destilação do acervo (6 fluxos Gemini o dia todo no PC) usa as MESMAS chaves. `destilar_acervo.Anel._colher`
+  agora usa só metade (ks[::2], 18 de 36); a outra metade é da produção (`BFV_GEMINI_RESERVA=0` desliga). Backup
+  `destilar_acervo.py.antes_reserva_producao_20261006`. ⚠️ Só vale depois de REINICIAR a destilação (precisa de OK do dono).
+- Cota Gemini e YouTube renovam ~04:00 BRT (07:00 UTC). O repor das 09:00 e o de 15:07 pegam a cota nova.

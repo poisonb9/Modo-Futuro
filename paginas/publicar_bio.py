@@ -3500,13 +3500,18 @@ YANDEX_VERIFICACAO = ('<html>'+chr(10)+'    <head>'+chr(10)
 def avisar_indexnow(caminhos: list[str]) -> None:
     import requests
     urls = [DOMINIO + c for c in caminhos][:10000]
-    try:
-        r = requests.post("https://api.indexnow.org/indexnow", timeout=30, json={
-            "host": DOMINIO.split("//")[1], "key": INDEXNOW_CHAVE,
-            "keyLocation": f"{DOMINIO}/{INDEXNOW_CHAVE}.txt", "urlList": urls})
-        print(f"  indexnow: {len(urls)} endereco(s) -> HTTP {r.status_code}")
-    except Exception as e:                                # noqa: BLE001
-        print(f"  [!] indexnow falhou: {str(e)[:80]}")
+    # 06/10/2026: api.indexnow.org e o Bing devolvem 403 "UserForbiddedToAccessSite"
+    # (Bing ainda nao aceitou a chave), mas o Yandex aceita a MESMA chave (202).
+    # Cada buscador e' avisado separado: um 403 nao pode calar os outros.
+    corpo = {"host": DOMINIO.split("//")[1], "key": INDEXNOW_CHAVE,
+             "keyLocation": f"{DOMINIO}/{INDEXNOW_CHAVE}.txt", "urlList": urls}
+    for nome, ep in (("bing", "https://www.bing.com/indexnow"),
+                     ("yandex", "https://yandex.com/indexnow")):
+        try:
+            r = requests.post(ep, timeout=30, json=corpo)
+            print(f"  indexnow {nome}: {len(urls)} endereco(s) -> HTTP {r.status_code}")
+        except Exception as e:                            # noqa: BLE001
+            print(f"  [!] indexnow {nome} falhou: {str(e)[:80]}")
 
 
 def sitemap_xml(caminhos: list) -> str:

@@ -710,6 +710,11 @@
   .rolar { display: none !important; }
   .prova { font-size: 11.5px !important; margin: 2px 0 0 !important; }
   .esteira { display: none !important; }
+  /* 06/10: titulo do destaque cortava no meio da 2a linha (altura fixa 36px x fonte maior) */
+  .vivo .oque { height: auto !important; max-height: 2.5em; flex-shrink: 0; }
+  .vivo { height: auto !important; min-height: 84px; }
+  /* 06/10: com 2 numeros sobrava uma coluna vazia e o par ficava torto */
+  .prova_forte { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)) !important; }
   .prova_forte { transform: scale(.86); transform-origin: top center; margin-bottom: -10px !important; }
 
   /* as LISTAS do site, no desenho do botão "avise-me" (branco, borda preta, sombra dura) */
@@ -2197,8 +2202,8 @@
       // ⚠️ CADA NUMERO SO' APARECE SE EXISTIR. Um bloco de prova com
       // "0 vendas" ou "R$ 0,00" prova o contrario do que pretende.
       var provas = [];
-      provas.push([String(todos.length), usaNicho ? (c.nicho || [""])[0]
-                                                  : "achadinhos garimpados hoje"]);
+      provas.push([String(todos.length), (usaNicho && (c.nicho || [])[0]) ||
+                                    "achadinhos garimpados hoje"]);
       if (precos.length) {
         provas.push([real(Math.min.apply(null, precos)), "o mais barato de hoje"]);
       }
@@ -2544,9 +2549,19 @@
       document.getElementById("rolar_texto").textContent =
         "ver os " + naTela + " de hoje ";
       rolar.hidden = false;
-      var quando = (lista_do_canal[0] || doTotal[0] || {}).visto || "";
+      // 06/10: era o "visto" do 1o item (quando APARECEU, ex. 26/09) — data
+      // velha numa pagina reconferida hoje. Agora: a reconferencia mais recente.
+      var quando = "", chave = -1;
+      lista_do_canal.concat(doTotal).forEach(function (p) {
+        var t = p.conferido || p.visto || "";
+        var k = /^hoje/.test(t) ? 9999 : (function (m) {
+          return m ? (+m[2]) * 100 + (+m[1]) : -1; })(/^(\d\d)\/(\d\d)/.exec(t));
+        if (k > chave) { chave = k; quando = t; }
+      });
+      if (chave === 9999) quando = "hoje";
+      else if (chave >= 0) quando = "em " + quando.slice(0, 5);
       prova.textContent = naTela + " achadinhos" +
-        (quando ? " · preços conferidos em " + quando : "") +
+        (quando ? " · preços conferidos " + quando : "") +
         " · link direto pra loja";
     } else {
       rolar.hidden = true;

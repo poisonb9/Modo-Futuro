@@ -333,3 +333,6 @@
 - De novo o publicador automático guardou trabalho no stash (contra_capa + publicar_bio) — recuperado de stash@{0}. O conserto do
   item 41/28 só vale quando o .ps1 novo estiver no PC (está) e o pop der conflito; desta vez o pop nem rodou? investigar.
 - 06/10 ~10h: Drogal com foto REAL — feed Awin (io.convertiez) dá 404+placeholder em 580/615;  busca na API pública VTEX da loja por NOME (sem clique de afiliado), troca só com ≥75% das palavras iguais (cache estado/fotos_trocadas.json). Resultado: 388 com foto real, 224 fora. Todas as 12 lojas de volta. Bio em modo lista vale para os 5 projetos de bio (mesmo modelo).
+- 06/10 ~10h: Drogal com foto REAL — o feed Awin (io.convertiez) dá 404 + placeholder em 580/615. `_fotos_drogal()` busca na API
+  pública VTEX da loja pelo NOME (sem clique de afiliado) e só troca com ≥75% das palavras iguais (cache estado/fotos_trocadas.json).
+  Resultado: 388 com foto real, 224 fora. Todas as 12 lojas de volta. Bio em modo lista vale para os 5 projetos de bio (mesmo modelo).

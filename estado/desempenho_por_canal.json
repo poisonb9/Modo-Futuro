@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-06T07:29:01",
+  "medido_em": "2026-10-06T15:02:16",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 66,
+      "posts": 70,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 559,
+      "reacoes": 579,
       "comentarios": 22,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 34,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -40,16 +40,20 @@
       ]
     },
     "truque.importado": {
-      "posts": 136,
+      "posts": 141,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 17288,
-      "comentarios": 114,
-      "shares": 94,
+      "reacoes": 18199,
+      "comentarios": 116,
+      "shares": 101,
       "engajamento_pct": 0.0,
-      "posts_recentes": 28,
+      "posts_recentes": 31,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "WONHEE do ILLIT acendeu incenso pela 1ª vez e levou um susto"
+        },
         {
           "views": 0,
           "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado! Um"
@@ -57,22 +61,18 @@
         {
           "views": 0,
           "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado!\n\nU"
-        },
-        {
-          "views": 0,
-          "titulo": "O segredo de JIWOO para a make não DERRETER A idol Jiwoo rev"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 84,
+      "posts": 87,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 975,
+      "reacoes": 1014,
       "comentarios": 9,
-      "shares": 19,
+      "shares": 21,
       "engajamento_pct": 0.0,
-      "posts_recentes": 29,
+      "posts_recentes": 32,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 68,
+      "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 679,
+      "reacoes": 908,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 28,
+      "posts_recentes": 42,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -106,11 +106,11 @@
         },
         {
           "views": 0,
-          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME\n\n🪄 O SEG"
+          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME 🪄 O SEGR"
         },
         {
           "views": 0,
-          "titulo": "PERDIDAS NO MAR E ENCARANDO UMA ONDA GIGANTE Ami e Yumi fica"
+          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME\n\n🪄 O SEG"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 29,
+      "posts_recentes": 27,
       "views_recentes": 0,
       "melhores_recentes": [
         {

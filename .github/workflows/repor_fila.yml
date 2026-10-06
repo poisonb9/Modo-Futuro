@@ -21,6 +21,9 @@ on:
   schedule:
     # 12:00 UTC = 09:00 em Sao Paulo (UTC-3)
     - cron: "0 12 * * *"
+    # 06/10/2026: 2a passada de seguranca (acervo: tentar de novo com intervalo).
+    # Se a das 09:00 falhar, a das 15:00 repoe antes da noite.
+    - cron: "7 18 * * *"
   workflow_dispatch:
     inputs:
       piso:

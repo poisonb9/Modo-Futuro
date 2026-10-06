@@ -2,6 +2,34 @@
  "termos": [
   {
    "termo": "whey",
+   "vezes": 2
+  },
+  {
+   "termo": "meia",
+   "vezes": 1
+  },
+  {
+   "termo": "chapéu",
+   "vezes": 1
+  },
+  {
+   "termo": "rádio",
+   "vezes": 1
+  },
+  {
+   "termo": "pneu",
+   "vezes": 1
+  },
+  {
+   "termo": "bateria",
+   "vezes": 1
+  },
+  {
+   "termo": "bateria 60v",
+   "vezes": 1
+  },
+  {
+   "termo": "bateria 60a",
    "vezes": 1
   }
  ]

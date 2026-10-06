@@ -1,5 +1,41 @@
 [
  {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "Produtos Husky Promoção com Cupom HUSKYZADA10 10% de Desconto",
+  "codigo": "HUSKYZADA10",
+  "fim": "2026-10-07T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1HUSKYZADA10",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "Memória RAM Promoção com Cupom DRAMOFF15 15% de Desconto",
+  "codigo": "DRAMOFF15",
+  "fim": "2026-10-07T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1DRAMOFF15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "Cadeira Gamer Promoção com Cupom CADEIRA20 20% de Desconto",
+  "codigo": "CADEIRA20",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1CADEIRA20",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "SSD Husky Promoção com Cupom SSDHUSKYPROMO 10% de Desconto",
+  "codigo": "SSDHUSKYPROMO",
+  "fim": "2026-10-07T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1SSDHUSKYPROMO",
+  "termos": ""
+ },
+ {
   "loja": "Farmácias Indiana",
   "tipo": "promotion",
   "titulo": "Semana das Crianças - Brinquedos",
@@ -815,8 +851,8 @@
   "titulo": "R$ 5,36 OFF acima de R$ 80,40",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHclSnznb7g96z27aPZbkF0NZuNyTyM5zXkorWs5txfwOusgYOmng5ZTUiZw5b3gIiR52fEkXHi60MsajZ87HM8UVTPJ3T7nSsNVUANkksgUHI4FrLpZCJz5ZqoEmaYeZPI34w3gWLXquT9mT5Phgc6nw7qvsbeWy2nJXrQ79nqt1ic6DC5YPiGgJorC1jj9o2WBAzWiMcSyoVNE5Cx4NnPo4R077DjRAcAanv7RhcBo7ep5T8i2agPNn385XgEkBJp8KtBlHvtaCR8G7D9joP9yrNBxhM90dwZWZRAXoulCG8na921nf7W87lWByBPZvprxYuHDfJ4oEWnPRwWKRJUIlOXixVIFPDGv5Fr0i8wIt93JB6DNlOkV8R1CGBYp5XiqFDskfBk0Qn0fN7NkW9cEHDAyVssuZ4B6eQcRqYYSg6HsDoR5kaBnB9KVbGY52F9EHWvHlTBVMA69QmPhL5Hu0wkUwyaJbEzvEtZemWmXbXMKF3uIHalJmkYQgYOjwPhDFb3r4KKsi5sHVllGdbifXwZMoiqnWuy8VBudcdqKmAP8nWLbD9QjjZzaWpQxRejIgcjJpiIjjp5iIPuwDaguksXx72d61huZ2ryAetVkm08KrbYiJir9nDcZvq6YSiaSrojfp5ABtAObzjabqOtl",
-  "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Pegas de Borracha Antiderrapantes Crazy Fox Sem Giz para Ginástica, Tr"
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4rMQHpBCshnvL8KRkeT6SV78SrwAAso2FCSEi6I8naLS2PQLD6bbFo30PkS1s7l5yo0WrhhvYMazIW65Kz42yHsL8ZstoJi6TrmdppVOct44MikZpY3a7sZjA9rC5MgUYlSER0MdmmUf5A8aHQ33XqUVDqn41KVcMlD4kMP18sSm8Nbg9UfkXhKdXLsdaoVRF8myfBZrkAKKWSsvYaZGU37GwvQIsLY5FZW1JX8UzG82dC4OkcdSMuFF3H6HGyJoLLvNflnBLEC3MRuk8aLKaxV7DWVZEGDultAPMksJG3nhYnls3jhuQK71KeXk1aCDwEe00G7caqLm79unm15WMVAa10oEvMZHmNjnGJsnSkw0iUR3rpIdbYpJuJ2GVp0gzleRiLvkw5wzzEFVRgNASCUU4qrfPU15x8AnxFuLkOHKirMVNnX77dU5Xod2dPjeiFOvXyOq9EKJZe3",
+  "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
   "loja": "AliExpress · Shop1103784103 Store",
@@ -824,7 +860,7 @@
   "titulo": "R$ 10,40 OFF acima de R$ 10,40",
   "codigo": "8B2K6SIUCMSX",
   "fim": "2026-10-27T16:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57tnUYxn4cKji07u7QTj07dwcqpDBsaIE490deUMF2nft0ATLOKbxYFfJAwMLcyAFr0VCSWRWYxAhzM7HAjBYCQWreoNZBi2NydoM3qXropapVPzliyVxy1ACQCbvuU5fv7d5lQQD0BBYFi5LpFkY87Rcn0vksLs0BKyf1aZubBnxuwk6IMvh5PM4GZHsSRfGlzqDyBShLFAWz718FyuuAE244n01k3NdzIUDoZzRC7KhZGhHrhW8SlUcfARmgqug5UyvEnsnvWQnCJw4DBMnYRGqDwe5FwC65mmhyTpR4vn0LzXtni2vWE9zwMcSOy7IMxJOJ03YLEm1NFei0jDBHgh6VCNuXeRmAsToMI41Q8o2AhZxd940wCPZwrwAMNc6Bga7yJiRcPWWto4qCksTMQLZQo268wTSWx8HmMV7do5ODVD5OU8eaUcsTpBh3GeUtlV8KJIdvNhYkHM3h",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57tnJXEPgYb3SF2sgMxDBX3SI0dk9cdTJUgywRviKGjLGuOogyHG6KmMMfZIikuZNsfYOh6qHKoibQSiTLvfjg9Wle3YvAkfuwj7Gi1DejSGNrWmO0H24sRwClO6Fki8qCDCOQw3V1uP40O6wVOEGGl1xH9nVpn45P0sucf8a9p3Z48b1KLZA9lIKCeGiM6ZEcVPtTBTKlo5SZaSPjNcVvFBQRuBgk3VWo5hE0tHZotsKSmsdiduJZSm4Lq4RbToofR1Jn3ym3ynAIiSolHbgxFzRtIDgjXdlCx6Iu7Ad5uoIR35LIKngh2Q8Ey67Uiastx7vRGbZVTXph7vzvfT39FbLL5NrMUyIx8e2Ky9SGvVLHIcFWncd8XsjiNfepcdcl7h3BQljd7CSB3dTn92HfcMZaoU1z7igzzMF0RXLkT9Ba2bfLurOyT7THuz1T8DKjIsH5rL4JASosh4IJ",
   "termos": "Vale na loja Shop1103784103 Store do AliExpress. Ex.: Sapatos Femininos de Verão, Nova Moda, Sapatos Casuais Respiráveis e C"
  },
  {
@@ -833,7 +869,7 @@
   "titulo": "R$ 4,80 OFF acima de R$ 4,80",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFlDwmVsIJUr5aQS6QvHHYv6rfAfLEw4SdgW4tAwq1KeZ8a6Wguws5YSd9nfKBMKiYBKi7jo2sbTMBd4Ha99CPW1DqR0Vu1ymQCF4Nv37dCggqgiuIiZYEyHf8ATuHz10kSU9gGDArTao0BNbPxDRN2q60dFoRKfGmZw0xENJXFb52ozc8QBO4QZ3u0Z0vg2J5CJbH8Llk7qfnbgOgudqNfV4bztVysXoazfo3YfMYXeVqc2CbSx46Rz7cPC6o05JTAqMqKgKLcMdzpAxo2ZUJKq9SPxUZEc4fWnYUHpK85HSV1DJYBWFXLs8fwNNHfkBHhrDxSSO4Id9aI0nC3UW3Q7POnRGAGkwMgJICq1NxMbi9yTYSzh4m5UrR4eDE97lWWvkzk1p3NVre7l6mR2vnNqRy7EJ6KLY3PAaCytt7GhAWC5XWlJir57xQPzspyTKEWbGv7AbTtTshh4P",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFlnrorAaMch3fJ6Nc68PnEg2rbfRLWiMU3uxp61kaP8DFsrwG9WXIQ4WNuUVPX7N6tJC0CSd61Hd1pRqzBEPmem2biXJeL8EDh1Winpiwmxw8nTp9r49j7XIFe2HyhqjvnGU9eTkQh7Kr4h4194TTAP93ocXI1mR5Xn9tVGluDSARE4VisFkcQrp62FKLXkGf13nka8m6TGOBi2x8dXbSeK8h8TE2AypupYFdMkgKVK09qrDbqLiWG8VYCbhg0LjFn9X1gTSH1LWT92IhaykjixkIv9GzQ1lvASBdA7enn7jmitWWZUPI85bqEt8YB5caNyCf50WRiNeXfuTpVGV0r1wcYL7j3JOH4J0C2G2gvEpgJ0XH5StxmQ16iK1h8jYEDAIKHfceQa197sFvKW2mjcpP8MoGrErW8H1v8TifAkAZ4cnNjV6P24GZjqJD5BRmLbhosyt5LKwiit9",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

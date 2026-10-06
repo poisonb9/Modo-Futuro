@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-05T18:19:58",
+  "medido_em": "2026-10-06T00:45:19",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 22,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 36,
+      "posts_recentes": 32,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -47,13 +47,9 @@
       "comentarios": 114,
       "shares": 94,
       "engajamento_pct": 0.0,
-      "posts_recentes": 31,
+      "posts_recentes": 28,
       "views_recentes": 0,
       "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "Wonhee do ILLIT tenta pular o elástico gigante nesta brincad"
-        },
         {
           "views": 0,
           "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado! Um"
@@ -61,6 +57,10 @@
         {
           "views": 0,
           "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado!\n\nU"
+        },
+        {
+          "views": 0,
+          "titulo": "O segredo de JIWOO para a make não DERRETER A idol Jiwoo rev"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 29,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -140,14 +140,14 @@
       ]
     },
     "camarim.kpop": {
-      "posts": 9,
+      "posts": 15,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 297,
-      "comentarios": 3,
-      "shares": 6,
+      "reacoes": 895,
+      "comentarios": 8,
+      "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 9,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -156,11 +156,11 @@
         },
         {
           "views": 0,
-          "titulo": "O segredo de beleza bizarro do CHANGBIN do Stray Kids de 20 "
+          "titulo": "SEUNGMIN do Stray Kids treinava choro no espelho Seungmin do"
         },
         {
           "views": 0,
-          "titulo": "MOKA DO ILLIT IMPRESSIONA EQUIPE COM SEU TALENTO EXPRESSIVO\n"
+          "titulo": "O segredo de beleza bizarro do CHANGBIN do Stray Kids de 20 "
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "quando": "2026-10-06T17:03:45+00:00",
+  "quando": "2026-10-07T17:44:59+00:00",
   "programas": {
     "Nike BR": "joined",
     "Kabum BR": "joined",
@@ -31,13 +31,11 @@
     "Jo Malone BR": "pending",
     "Estée Lauder BR": "pending",
     "Fossil BR": "pending",
-    "Tok & Stok BR": "pending",
     "Outlet de Passagens BR": "pending",
     "Granado BR": "pending",
     "Phebo BR": "pending",
     "IBBL BR": "pending",
     "Nutriage BR": "pending",
-    "CVC BR": "pending",
     "Drogaria Catarinense BR": "pending",
     "Farmácia Preço Popular BR": "pending",
     "Foxton BR": "pending",
@@ -59,6 +57,7 @@
     "Authentic Feet BR": "rejected",
     "BELEZA NA WEB BR": "rejected",
     "GOL Linhas Aereas (Global)": "rejected",
+    "Tok & Stok BR": "rejected",
     "Elements BR": "rejected",
     "Extrafarma BR": "rejected",
     "Pague Menos BR": "rejected",

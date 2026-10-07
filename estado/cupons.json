@@ -1,6 +1,24 @@
 [
  {
   "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "8% OFF em produtos participantes da campanha JBL",
+  "codigo": "JBL8OFF",
+  "fim": "2026-11-02T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP3JBL8OFF",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Notebook Lenovo Ideapad Slim 3 Amd Ryzen 5 7535hs, 8gb, Amd Radeon Graphics, Ssd 512gb, 15.3\" Wuxga 1920x1200, Linux - 83mms00300",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F1037468",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
   "tipo": "promotion",
   "titulo": "Notebook Gamer Lenovo Loq 15irx9, 15.6\" Full Hd 144hz, Intel Core I5-13450hx, 16gb, 512gb Ssd, Nvidia Rtx 4050, Linux - 83khs00300",
   "codigo": "",
@@ -1355,7 +1373,7 @@
   "titulo": "R$ 5,40 OFF acima de R$ 80,90",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4pQTamcMTPh53Ub8zhtGH9rD18jy8T7UfmlbJ8SbfQlV7Qtp00RQA4iNvbwARAITn8GmLB6jJpuPz6mF8Etex41Wf1DJIy7ySk3cmEeUaIJbuXXyK01709kJTqfO2K11rSrfNqJw8JlGfdV4uc3Kscml828sLWdQ1bATLRAwNdfFHIMp6SQa9ZycpPi29GSVcXkBYYyTrk9N9liqSAi4yeLReVAzhr5nj7RkMQykLDH1VEcxO2xLGxCCS04xJCkPla2Psbk5mN7J2Gq03pXrccDSy6G1JuWD8HkAh1V2lEKn2RgfH0Pqt1sDvxSgCPN3kXxDE2awGWB58W5aFaDHW3oSjqCgEgjYYXga8cnWpioi5TM12Uu4NNB3fBoV4JFHWa1tsELQ2GwWlSiQOW0OErHNFQCelrK0gTFZkmOyOY3mf7xD12SuLut2LTDcUg1Xq4IR3fkPk18pHT9",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4ajMkr24PCXgcIQx7LqkCOTBss2eHhdSUgckMrNkdtKhHKStJqzYO9A4d36OGNjfkkL3CCXdenHj0jcsQNDOlKQzCQUunwsYQ3gNBaPqO5bBiR0xUgMPnn6aTICN6ZWDFpnHObreaZeQJ0lMRen3co649IUloxJK99V0RCGDF4xH69tLZfSJb003q6y7SSUk3uMezSygt6E2glnxnrGBzECDRdfqJrGlCbf5w7C9cpLSffgtF9gTlnVrbOUYiTkKuazmbnODCRCJ8USGTQXLv1SUzAEzTUvKHpeUOMGwJIvszAfk2bIpOfRkLI2WYIcOLXTEYZqkIkYg3MVDcbg4znpCVffpt2ydqGM6DH2EgOV74gtzeK74P6FaT4ygRqEVRJIKIpFB01D7Z3hQFKaLT1wf0jB5y4yQS3xMFhHGI5yHG5pQzN0drNaWgSlE0afIZuomC0mlG7n0LLl",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -1364,7 +1382,16 @@
   "titulo": "R$ 16,19 OFF acima de R$ 269,80",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2HpeUAaTsA2A0cpBvxvfIr6gi8Xb3REMsOqAJp5GSlKK6eTc9j5hKqciWsUAHrrT3jtnhsgmGuhmmErEBtf4jWYQWp99Pj2ZiRkO88v4byZBVOCLHayQ0mFy4xsmG7Guct047QoKOG0cdm6mRaK9BLTA4XM2sJbXolFz9ioDJp8QW5PbRwH4D0jGDPpBcp23b0FOJgaOEcTECnR4SSqRQuNsV1E8hMZBJzNJzID4RnBMrWCabNEXSojIVlcultkmmLoFa6noUO3KJz9KKA5tHF52l15nPESBttCBhVUxHnU3cuiOU3RrZLD4jnknq4sCehZkqaW6U4rub6rvvkiGM11LnXTsLua4kA8ZsmcYf9B6YLmX4GUVLvp7XpN27dDj2KdfSESBzkQWYKQUThfVqfJqwe8UanPOwsVmUtpfRAPeT7MNpM0KBsG89nqn9GJw8AG2rgAzAs4hymB",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2yq9JyGHaV2c84AMRcpB2zJ3mS3YSKc0QEAVVOtyeNVcDr3aO7hvjEzIl0WDCarexes4kVPl7CB0ipelQK7cECye8Him0vjnqrFzIcJgJnv0skd5PQye2NfW0qGdOnaGx3jmBdGFfAxo0qVmAMcz7lB4TgxjwKwZI5LiPOrMYYY4AMgeIOZ1qrlnmAwyjNngVdNAch7XJ73B6XZcWb9FcBXE4XOhEZQ1UFTk0PvygqbZs90s53HB8roVC15HhoVZIHRW6LGjDZZXTCSzseje6WwxgqMRm1dPvv4Yb50BNwpJoYDGFM0nxG9Bgk3pShp81cAVk779EQ8svJJgSaFwpUOXBNjIZSs1xW0diJE5DXGJ7kHyfBIudET0DCKh7DUKjpAfPdA0Vy3K97OLwru9otoS1dlLSMWzIAE0LxiCljhl0WK1egtqMTGABaqiJEcjjcoTbgxDGKsSrkP",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · rouny Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,40 OFF acima de R$ 53,90",
+  "codigo": "3HEHP30PPVM2",
+  "fim": "2026-10-26T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHMMvUDzuc5h5KrRIYatukwLMO9EQ9cJfqY8NmiuekdsmFN3hmsWxBf2BCbdePGi7NfQ7LUjNp0Bh9WYlOjTVuMeKcGr7BChWDnxbU6DgTAYh6uB7L3p4EMJlcFxuPhSncZ4CI51LOD07Ke57a03ps4PrJQywCq3SbM3XJ76uHEYktbl4KgYaS6x0Hj2gFNbCFe2EQQm3GocU5kvueJu5LAVYfULkOe84vnZN0ZbmwIfIXe5cbORkXqwwkoNktskPEtIfvyojtz4AZyIhKEuZFVaI61rKDbYsLGvVZeiLPJPpKGiqbQz1QUVmtTjCftu9zuKqvNND63Ww2oMSYKbnq3BrY2D2DWLAH7JxVujTrKF4KF5wuaFZUzgTtMKfQui4mcX18DfMIG2eF6lrTJZiMzUDBXyn8uJHE22LjhWZTdPsheFvgxATJVWAWgugIFnkl6QEnvnBEAu0cXhhDedgJkd9P1VRkpIYNBZOifYx8WZ2dxIQWl97FGtE7KLUoHUaKnOPxIfDNHZQVqReg1MLWiMPh3oKqPU19IM2zDkEdiyHB5BG8h9LEsZnfOGhW4vZLXlvpiya9BERvRTRtenlcTgyP9HVwZ5XuajBZd5v0ODwLuANrUhM9XqRZ1suWt9eZh3Nx1saS6LYlevVZX56eQr",
+  "termos": "Vale na loja rouny Official Store do AliExpress. Ex.: Mini aspirador de pó portátil sem fio ROUNY, sucção e soprador sem esc"
  }
 ]

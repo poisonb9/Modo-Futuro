@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-07T07:44:35.619534+00:00",
+ "quando": "2026-10-07T21:35:54.754878+00:00",
  "termos": {
-  "whey": "2026-10-06T16:19:56.963350+00:00",
+  "whey": "2026-10-07T21:35:54.754878+00:00",
   "meia": "2026-10-07T07:44:35.619534+00:00",
   "chapéu": "2026-10-07T07:44:35.619534+00:00",
   "rádio": "2026-10-07T07:44:35.619534+00:00",
@@ -14,18 +14,18 @@
   {
    "id": "MLB18488790",
    "nome": "Whey Protein 900g 100% Whey Refil Max Titanium Baunilha Whey Concentrado",
-   "preco": 134.9,
+   "preco": 165.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_990597-MLA113036973677_062026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5961963538?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-7666120446?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
-   "categoria_ml": "MLB122102",
-   "comissao": 16.0,
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
    "marca": "",
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-06T16:19:56.963350+00:00"
+   "visto": "2026-10-07T21:35:54.754878+00:00"
   },
   {
    "id": "MLB19533412",
@@ -41,7 +41,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-06T16:19:56.963350+00:00"
+   "visto": "2026-10-07T21:35:54.754878+00:00"
   },
   {
    "id": "MLB79123204",
@@ -57,7 +57,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-06T16:19:56.963350+00:00"
+   "visto": "2026-10-07T21:35:54.754878+00:00"
   },
   {
    "id": "MLB20609444",
@@ -73,12 +73,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-06T16:19:56.963350+00:00"
+   "visto": "2026-10-07T21:35:54.754878+00:00"
   },
   {
    "id": "MLB30948212",
    "nome": "Whey Isolado Probiótica Iso Pro Whey 900g Sabor Baunilha Whey Protein",
-   "preco": 309.89,
+   "preco": 328.99,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_863298-MLA117665151619_092026-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-5202702293?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -89,7 +89,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-06T16:19:56.963350+00:00"
+   "visto": "2026-10-07T21:35:54.754878+00:00"
   },
   {
    "id": "MLB23877340",
@@ -105,7 +105,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-06T16:19:56.963350+00:00"
+   "visto": "2026-10-07T21:35:54.754878+00:00"
   },
   {
    "id": "MLB28176888",

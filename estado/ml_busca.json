@@ -1,14 +1,14 @@
 {
- "quando": "2026-10-06T16:19:56.963350+00:00",
+ "quando": "2026-10-07T07:44:35.619534+00:00",
  "termos": {
   "whey": "2026-10-06T16:19:56.963350+00:00",
-  "meia": "2026-10-06T01:55:19.467392+00:00",
-  "chapéu": "2026-10-06T01:55:19.467392+00:00",
-  "rádio": "2026-10-06T01:55:19.467392+00:00",
-  "pneu": "2026-10-06T01:55:19.467392+00:00",
-  "bateria": "2026-10-06T01:55:19.467392+00:00",
-  "bateria 60v": "2026-10-06T01:55:19.467392+00:00",
-  "bateria 60a": "2026-10-06T01:55:19.467392+00:00"
+  "meia": "2026-10-07T07:44:35.619534+00:00",
+  "chapéu": "2026-10-07T07:44:35.619534+00:00",
+  "rádio": "2026-10-07T07:44:35.619534+00:00",
+  "pneu": "2026-10-07T07:44:35.619534+00:00",
+  "bateria": "2026-10-07T07:44:35.619534+00:00",
+  "bateria 60v": "2026-10-07T07:44:35.619534+00:00",
+  "bateria 60a": "2026-10-07T07:44:35.619534+00:00"
  },
  "produtos": [
   {
@@ -121,7 +121,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB26444945",
@@ -137,7 +137,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB44684359",
@@ -153,7 +153,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB25675555",
@@ -169,7 +169,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB24692711",
@@ -185,7 +185,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB24692716",
@@ -201,7 +201,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB61784268",
@@ -217,7 +217,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB59481595",
@@ -233,7 +233,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB35161880",
@@ -249,7 +249,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB70104297",
@@ -265,7 +265,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB54433666",
@@ -281,7 +281,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB25588931",
@@ -297,7 +297,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB35743965",
@@ -313,7 +313,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB78396583",
@@ -329,7 +329,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB32008732",
@@ -345,7 +345,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB72882606",
@@ -361,7 +361,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB44019921",
@@ -377,7 +377,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB72679745",
@@ -393,7 +393,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB72681733",
@@ -409,7 +409,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB27057277",
@@ -441,7 +441,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB76828668",
@@ -457,7 +457,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB46001471",
@@ -473,7 +473,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB46001231",
@@ -489,14 +489,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB52260545",
    "nome": "Carregador Usina Charger 12v 60a Bivolt",
-   "preco": 589.86,
+   "preco": 530.95,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_724104-MLA99440114308_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4497917295?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-7757455064?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB63455",
@@ -505,7 +505,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB46016136",
@@ -521,7 +521,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB51647079",
@@ -537,7 +537,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   },
   {
    "id": "MLB74914144",
@@ -553,7 +553,23 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-07T07:44:35.619534+00:00"
+  },
+  {
+   "id": "MLB11904050",
+   "nome": "Suporte de bateria Gibraltar SC4425MB",
+   "preco": 463.94,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_654442-MLU75178329528_032024-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4668283634?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB9678",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "bateria",
+   "visto": "2026-10-07T07:44:35.619534+00:00"
   }
  ]
 }

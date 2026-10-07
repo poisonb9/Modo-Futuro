@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-07T07:08:54",
+  "medido_em": "2026-10-07T15:29:58",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,11 +15,11 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 70,
+      "posts": 72,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 579,
-      "comentarios": 22,
+      "reacoes": 589,
+      "comentarios": 23,
       "shares": 5,
       "engajamento_pct": 0.0,
       "posts_recentes": 28,
@@ -35,21 +35,25 @@
         },
         {
           "views": 0,
-          "titulo": "POR QUE A MICROSOFT JOGOU SEUS SERVIDORES NO MAR? Mais da me"
+          "titulo": "POR DENTRO DA REATIVAÇÃO DE THREE MILE ISLAND Entramos na us"
         }
       ]
     },
     "truque.importado": {
-      "posts": 141,
+      "posts": 142,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 18199,
-      "comentarios": 116,
-      "shares": 101,
+      "reacoes": 18875,
+      "comentarios": 124,
+      "shares": 106,
       "engajamento_pct": 0.0,
-      "posts_recentes": 25,
+      "posts_recentes": 24,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Yunjin do LE SSERAFIM ensina o truque bizarro de usar o curv"
+        },
         {
           "views": 0,
           "titulo": "WONHEE do ILLIT acendeu incenso pela 1ª vez e levou um susto"
@@ -57,22 +61,18 @@
         {
           "views": 0,
           "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado! Um"
-        },
-        {
-          "views": 0,
-          "titulo": "O segredo por trás dos lábios de JIWOO do NMIXX revelado!\n\nU"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 87,
+      "posts": 91,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1014,
+      "reacoes": 1054,
       "comentarios": 9,
       "shares": 21,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 36,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 84,
+      "posts": 87,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 908,
+      "reacoes": 987,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 38,
+      "posts_recentes": 41,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -118,7 +118,7 @@
       "posts": 55,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 324,
+      "reacoes": 325,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,

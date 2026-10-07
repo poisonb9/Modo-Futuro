@@ -2,6 +2,60 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
+  "titulo": "7% OFF em produtos participantes da campanha Energia",
+  "codigo": "ENERGIA7",
+  "fim": "2026-10-12T01:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1ENERGIA7",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Ssd Rise Mode Gamer Line, 240gb, 2.5\", Sata Iii, Leitura: 530 Mb/S, Gravação: 520 Mb/S, Preto - Rm-Ssd-240",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F105105",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "15% OFF em produtos participantes da campanha HyperX",
+  "codigo": "HYPERX15",
+  "fim": "2026-10-16T13:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1HYPERX15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Fonte Xpg Core Reactor Ii Ve, 850w, 80 Plus Gold, Modular, Pfc Ativo, Preto - 75261436",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F514896",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Monitor Gamer Curvo Asus Tuf 34\", Wqhd, 250hz, 0.5ms, Fast Va, Freesync Premium, Altura Ajustável, Som Integrado, Preto - Vg34wqml5a",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F952751",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Placa De Vídeo Rx 7600 Challenger Asrock Amd Radeon, 8gb Gddr6 - 90-Ga41zz-00uanf",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F459144",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
   "titulo": "R$ 100 OFF no Console Nintendo Switch OLED Super Mario Bros Wonder",
   "codigo": "QUEMARIO",
   "fim": "2026-10-12T13:00:00+00:00",
@@ -1391,8 +1445,8 @@
   "titulo": "R$ 5,40 OFF acima de R$ 80,90",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4ZKEu4zcV39BxTwQVaA8ViBjkpAA7tI6YNbVF0rm0FuQ1qsfdeJKwlb0ISsYs0BEedskY31qck4iwjRHrQCP4Blcf7Ljq4FjD6Zk2fRTxp5GUQ3XXrY45F4kiouUO4zyBcy4o7HTeGHwJPhqJiaJv1zW2cX0YdwH9wRIMF87w5kqVNHN19pw1pAMoXtISueMHJ107kdY7E4mjjwTqYr1cgRBFscPLCIvU0gYCqRrdsXIm2PekTlcs1nifKMR0TCzvMWqxZ9tNcjjSdBHc657fAm1YbIvS8RiDgekRh2NOY35ayUjWdHWYv8elgknIs80AxJP1XLV0vRA29Ae1qZidtSyYX25bSqUUqCAfWV3cyqE5rTDPUPd8gSGtdMYifd5TsOa1dMFarT65qoU9H9SwIvVFWIwpXGujT2DQWHKl0yLahk1KEUgbtLXHlKI1tzWqo8GhI21Np15viF",
-  "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxfw6oxklMh7pgMJEzoSokhRliX0VOIp4Wk6741K0Y4b0B3yi2AUGDCBtXSwwuES9O0IsF0qOjG1xyy0Cxh1LLHcnL6XehAyK51tUUwy15rJoil9YOHhsXrNNNzXiPh0H8P8lV2TlftkoSYJEOkkb0QbhUfjgyjliRee7Wv5JCmodGuwNwdnOOnrpBkb8zh1zPJcGzVqABiUEREAo06VkkDcw8FzAepeLOpI0mznqYuB2PE4fB9q8a3NCvBvFs43PEnaBDMptYUVcjVJPCHhr8UghltG592N72ESGBvYR6Gky7mxNgxYlRfmSM9N4wRMgOEc7d23WIFtimOKfpoKYH8xYOlZ924br831vYJbGka599as2KF8gnxHM6p5cZz7RGT4Mn435O8yfAUQdlGgAW05EjsFkioSV8kIzRXjy0UwcBOCVjrO9n1G6AENGVQYAG3nMjOcqIFVLCh7Hv6Kax1xpEkv98dva9mRVbIYVpx29Nc0p6BZ1I1JcfeFoylBbJjSUrem5jFnHFkBj20tSEfj7dp7n1QMYcVXWIBpDEnhiRHCGOCohzN3UOM91yEglNEJy1wfSPaQMUVs2VYSyjjygU1loFC9QfmF2hh7eclr9EchA8jpDxXodz2uUFcDCYJElcRTi9tdBKldo8x3dhM2P",
+  "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Luvas de Treino Crazy Fox Sem Magnésio para Cross Training, Levantamen"
  },
  {
   "loja": "AliExpress · Shop1103784103 Store",
@@ -1400,8 +1454,17 @@
   "titulo": "R$ 10,46 OFF acima de R$ 10,40",
   "codigo": "8B2K6SIUCMSX",
   "fim": "2026-10-27T16:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57toc00kW3ap2VQfUxBrLfkpNbjWk1MIEEhLFVTt5scbqH3Afdoojr5wPQpYHuE1ybEeFZoH5zx4histUWgpQ9H7NgzCkQNYpypedugx03q1uOvHMeZCCQJOf8FaEascFhr4GAWl0FrEy9GVvIdjocmaZ6KP6mUuQmPKLHi5q08HYIARtQ7ttPr1fc3dRJYWkfGhZE5DK4hR1HOCg3lqAs54ODcl7lV2cjMCsQOwL1WgjJNFTCu5Kki3QKaGjFiD1ufhCi4oQabFwT6SAJjw9zAFSn3RhVi3bTz4oaqqL4vCOUc6ncvzyaaHJVC6st04AFD2BT6M39Spem5enK0aENbzIoCxQbQO7BzkaYql3SEKlSGPgxTi03vO1E3Pu3nfCvYzCwEfsgDrHSqGixi2nLmogubd4WzLHm86DZ6oHg65na11IrEU8dgqR7cioZCEzZG9sjgq6dVuu7ES8b",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57tnIDFumZ298IDLBeK3VQG7Ypm1c8ZbNoDtEUGYuGNMxTkO3yGvK69bsDu5bWzb1bQ4V5L7ndEExK5dQANs0Als7yH0AFesOsCmc1aQbUbheVw9OgB1pDepnAIscsLQeWhHpjksfmIine3qOJ9O1s63gFri6qz54Xb582YAzQtCPYlYox9BBCYccCXFRHEyDVjd4TErrWCET96ueLEf7t7CbqJcyXxgeinCtaI27ChLj0Cng2cwMQlJPGld5Df65omB9QSoKjV3JLUlal5Lc8dx7hIRUAYN1KYJOtr6NrnDlswisrIvsILW5dSgpOZTGx88825intdqtK5DJyac3I9aTg4AaTxQpbRNMy0s7mqRPwOw4uXwjfcnKzMJBfCgdClhJZ4CRu52KWp5VtkCDFklb0DE7CVOJiLtBgF4QK26r6Hox0etTNlSSBTXJo4PUIvKJtUdfHIj3MQAin",
   "termos": "Vale na loja Shop1103784103 Store do AliExpress. Ex.: Sapatos Femininos de Verão, Nova Moda, Sapatos Casuais Respiráveis e C"
+ },
+ {
+  "loja": "AliExpress · MIAOGUAN Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,40 OFF acima de R$ 5,40",
+  "codigo": "HJ2ABT6EFNBT",
+  "fim": "2026-11-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxvz5EIGS6NxSUFL6abcY1s847Q0NDenpCOhrUDFzP3luMCdc1jwQaAwOtv4TmtjgF3oK8iAGBfg7nCFAO3nkbqVkRJDQeSIRAoagJ7u2kjuypcUw0W6gCV0zYoo5OXx2ZyWrYpd8i6XJcPbiJFZCxpsanrXpdCrr8nznUfXNIuaxkdQoYsMKacDVeY8pddIUPF5EmOm7jcBMybe3poMEdRbFYRrikEP0wuelHCk8rqU5YNQjhHit1taR7umz707ZrjqHXD0JgS0f6zRoXi1gLX3xMEf4mnRsWLE8TbuIA9r6RVs9ht55yfNB8deRm1WlhX32jghyJcv3et5DxPfRhaAP0qOmOOEWSYTrGMvRQFN1EB7wM4Uowq2WV2LagwYSaQRjsuS9V5c84RFgroIChjrpsMPh7GKid0tBoBm4B7uNPubivUntnWJUXhdjZuwNhtfQhuZWDp545iNUbk77JCMb1g7866XXFTAZOg7JfS7Mv85mQ11PQ1YcIL5LIVetCxf5JoHKQA3gSWHA1HaNUmOoUt6EN9A0qcnhVuW1RDU5yacck6PBm7wWwiNnZWlbKnZUgml268nRRYegOJi4qlZLvcbf8iVVcHR2iKebOxqEELWiCoKoAWMAo2faddApxpQwbsMnkjwQB6UFB9Ii6Zfz",
+  "termos": "Vale na loja MIAOGUAN Store do AliExpress. Ex.: Bombas de salto moderno feminino redondo salto alto couro quadrado spl"
  },
  {
   "loja": "AliExpress · maono Official Store",
@@ -1409,16 +1472,7 @@
   "titulo": "R$ 16,19 OFF acima de R$ 269,80",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW28VhBv1hVTf0ZhtYV3Col4eTO5p5LHZphku7oc0eXnhAsuxra5nCauAfYfVWWNEgTcAUiJErXRhBojbhkOx3h9aEgvVSp4zRU7dP8JNwxHbHImK36V4bQfJKKXz4YzmexY5cPMbqDTZwqMfYwbXBAhu3p5JSC3FCADJh0HzKffe6S6i0agUDRoroVsuE7u2EUy9roS1nbRiA3X9lgbQNbuIYXQhTZI6lmpogNp9yjRaaUSJ2q9fAc5bxJwfcSPFjxvCtRjxZZJL772MVusVm3kcY3MwwJV7XXUSKdo2UstFdXq38cJyk7Rybxk8jumehMQciqsVz0lEd7k8Hh8TbZeNnWMqomBEvNPgluP2eezY9T3PSq3xLTPx4drJoYAx9dWLYQ77o3ERnvGJvkAv5GrRm4ut70ib4BSiGPXgIz8nG3LKZaJsRGMgyK2y2Fj4kO1acZT5eYIaevZp",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2xpTSQ4Xgy77JHtAtSRFuoIDTP4wWG1b57WEEviaY8ITo8A3lCJtPMuu7gF9Xt2wtjapT9f8MgNULVi4i9h0F3Y961IoHTKUmTp2GwiPqbDeR1bLGdEKL82lomY3ivZbgbbQ82LxuLAJLx002xcs9Rl5HFTwalKdDLJwstPYRdfduMeKG8dwf8aPvuSnrV1zg8ejgtCgX9LKEV9ygP0sBXbv59ukzW363DWewNe4RLMWeYsFjctCM4C4soOpYCi6sSZOgpFzeRlVbcA5Ta80hd0nnwRhzWuJONs29xEg2mcrYx5V53khYxysAvay79oEC6ynu4yv4yN9kTV2MKz6BNnKEcpZbtQSGUd2MVF4bPn8KDpHNpsdzXE0dsJaZzijMSfB18DosE9PLqGd2lkDN3QetnZoXJi9GOWPjX7JxjhLAZy1lETqb61ZB6MI7k24w6DNzGEiRC582cT",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
- },
- {
-  "loja": "AliExpress · rouny Official Store",
-  "tipo": "voucher",
-  "titulo": "R$ 5,40 OFF acima de R$ 53,90",
-  "codigo": "3HEHP30PPVM2",
-  "fim": "2026-10-26T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHMMvUDzuc5h5KrRIYatukwLMO9EQ9cJfqY8NmiuekdsmFN3hmsWxBf2BCbdePGi7NfQ7LUjNp0Bh9WYlOjTVuMeKcGr7BChWDnxbU6DgTAYh6uB7L3p4EMJlcFxuPhSncZ4CI51LOD07Ke57a03ps4PrJQywCq3SbM3XJ76uHEYktbl4KgYaS6x0Hj2gFNbCFe2EQQm3G2oAh2ImiFngdbv0KK6fJk6HKru5PQ1EUIe3q4iekAaFUAmlUQJUHeO540hXkIhfhK4EhqGr7BidoETysBwa8OFc3qbhTcG6hX0EGNToYtxcDQkwRtkzBoRO5eJM4AIKDRpqAgaD1Lhhsy4bF9aTOqz1FjMsnWnK1l0Tu21gkJfnyQnRyflkCZ7DBeTG5SOzKoqTa6ZPuq8t7OunmyYBxvXi01wsb4qaeSLvDRmQGTAOuMmjk5uUyhL8yAEFLLfMlXl4isK92rEyNvySCvLFlfkDOzNAyG8nUrxlRkPJmlWVhADIzkEHXbGtWDx6TJZSKRumbXcFQVIHFOfh9zJGz2ZCNFL7I5UOSdCJ0g3YMbABXO0KWdSQH70C1J0md3L51ZClBtEudBgDEkqnd2JkIpMW1ET5MU9F6gqObA5eLdF0zSBATMwTsJWfKpY7txLyfWnd1HTFzEgn72b",
-  "termos": "Vale na loja rouny Official Store do AliExpress. Ex.: Mini aspirador de pó portátil sem fio ROUNY, sucção e soprador sem esc"
  }
 ]

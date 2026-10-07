@@ -1,8 +1,17 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-10;08:08;atefalhar;agendado;O MODO DE AUTODESTRUIÇÃO DO OMNITRIX CAPAZ DE DESTRUIR O UNIVERSO;6ac6ab4ce385dfed923327dd
+2026-10-09;19:51;atefalhar;agendado;TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL;6ac6904885762210c9f26fd8
+2026-10-09;16:22;atefalhar;agendado;O SALTO INSANO DE MOTO DE TIMMY TURNER SEM SENTIR NENHUM MEDO;6ac6901e887a55884cd59603
+2026-10-09;13:14;atefalhar;agendado;TIMMY TURNER FAZ O DESEJO DE DELETAR TODAS AS SUAS EMOÇÕES;6ac68fda85762210c9f260d0
+2026-10-09;13:03;semanestesia.pod;agendado;Protocolo;6ac68ea5a00d29ab6e31ab41
 2026-10-09;08:17;modofuturo;agendado;A tecnologia de 14 camadas empilhadas nos chips de IA;6ac651b2cf6aaa083c75ccea
+2026-10-09;08:17;semanestesia.pod;agendado;Protocolo;6ac68e3e68023cb72ec5ab81
+2026-10-09;08:13;atefalhar;agendado;O NOVO PADRINHO MÁGICO PODE SER UM VILÃO;6ac68f10a00d29ab6e31b922
 2026-10-08;19:46;atefalhar;agendado;VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANITÁRIO;6ac536436cefee8493203f47
 2026-10-08;19:43;modofuturo;agendado;O calor de 1.000°C na criação de transistores 3D;6ac64f66002d92909c82f3be
+2026-10-08;19:37;semanestesia.pod;agendado;Protocolo;6ac68d8668023cb72ec58e18
 2026-10-08;16:32;modofuturo;agendado;Linus Tech Tips: A Máquina que Troca o Processador de uma GPU;6ac64df6d75d415cada59228
+2026-10-08;16:23;semanestesia.pod;agendado;Protocolo;6ac68d4017cec261e6a60fd1
 2026-10-08;16:21;atefalhar;agendado;TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER;6ac53634d2a44aef5fd886e6
 2026-10-08;13:18;semanestesia.pod;agendado;Protocolo;6ac4679959057dd2e0d0b78c
 2026-10-08;13:10;atefalhar;agendado;A REAÇÃO DE TIMMY TURNER AO SER ZOADO NO ÔNIBUS DA ESCOLA;6ac5362a6cefee8493203ce5
@@ -13,12 +22,12 @@
 2026-10-07;19:53;semanestesia.pod;agendado;Protocolo;6ac4678859057dd2e0d0b60a
 2026-10-07;19:49;modofuturo;agendado;Linus Tech Tips Mostra o Scanner 3D que Acha Erros Microscópicos em GPUs;6ac64cb0002d92909c826017
 2026-10-07;19:37;atefalhar;agendado;ESTE NOME FOI BANIDO DE OS PADRINHOS MÁGICOS;6ac5348161c22f8369bf1004
-2026-10-07;16:35;modofuturo;agendado;Linus Tech Tips: O Robô que Instala 77.000 Peças por Hora em GPUs;6ac64c27686a926ce2aeda71
-2026-10-07;16:29;atefalhar;agendado;O DIA EM QUE DEV DIMMADOME PERDEU TUDO;6ac53472d2a44aef5fd84ddc
-2026-10-07;16:22;semanestesia.pod;agendado;Protocolo;6ac3861e4dee7e0d71632c8d
-2026-10-07;13:18;modofuturo;agendado;Linus Tech Tips e a Aplicação Perfeita de Pasta de Solda em Placas;6ac64a00d75d415cada4c45f
-2026-10-07;13:14;atefalhar;agendado;PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROMETEDOR;6ac3b298c5a0c40187543560
-2026-10-07;13:05;semanestesia.pod;agendado;Protocolo;6ac3721e93d0ed5fea5b2450
+2026-10-07;16:36;modofuturo;postado;Linus Tech Tips: O Robô que Instala 77.000 Peças por Hora em GPUs;6ac64c27686a926ce2aeda71
+2026-10-07;16:30;atefalhar;postado;O DIA EM QUE DEV DIMMADOME PERDEU TUDO;6ac53472d2a44aef5fd84ddc
+2026-10-07;16:23;semanestesia.pod;postado;Protocolo;6ac3861e4dee7e0d71632c8d
+2026-10-07;13:19;modofuturo;postado;Linus Tech Tips e a Aplicação Perfeita de Pasta de Solda em Placas;6ac64a00d75d415cada4c45f
+2026-10-07;13:15;atefalhar;postado;PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROMETEDOR;6ac3b298c5a0c40187543560
+2026-10-07;13:09;semanestesia.pod;postado;Protocolo;6ac3721e93d0ed5fea5b2450
 2026-10-07;08:24;atefalhar;postado;O RETORNO DO FILHO DO DOUG DIMMADOME;6ac2b03c8f73649f461909bd
 2026-10-07;08:20;semanestesia.pod;postado;Protocolo;6ac371f99a161041f7659aea
 2026-10-06;20:15;modofuturo;postado;FICANDO INVISÍVEL AO OLHO NU NA ESCALA DE UMA BACTÉRIA;6ac55543e0e7ba24e07b3c06

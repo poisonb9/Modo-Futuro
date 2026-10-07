@@ -1,5 +1,41 @@
 [
  {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF em produtos participantes da campanha 10 na Rede",
+  "codigo": "10NAREDE",
+  "fim": "2026-10-15T15:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP110NAREDE",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "R$ 200 OFF na Mesa Digitalizadora Huion Kamvas 13 USB Cosmo Black Preto GS1331-K",
+  "codigo": "200OFFMESA",
+  "fim": "2026-10-09T12:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F111155%2Fmesa-digitalizadora-huion-kamvas-13-usb-cosmo-black-preto-gs1331-k",
+  "termos": ""
+ },
+ {
+  "loja": "Aliexpress",
+  "tipo": "voucher",
+  "titulo": "Por apenas R$ 3.949 PlayStation 5 Edição Digital 825GB 1 Controle Branco Sony com 2 jogos",
+  "codigo": "BRCD10",
+  "fim": "2026-10-13T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005010115972190.html",
+  "termos": ""
+ },
+ {
+  "loja": "Aliexpress",
+  "tipo": "voucher",
+  "titulo": "Por apenas R$ 3.379 Smart TV 55'' TCL 4K UHD MiniLED 55C6K 120Hz Google TV AiPQ Google Assistente 4 HDMI 2 USB",
+  "codigo": "BRCD9",
+  "fim": "2026-10-13T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005009459962683.html",
+  "termos": ""
+ },
+ {
   "loja": "Soldiers Nutrition",
   "tipo": "promotion",
   "titulo": "24% OFF Pré-Treino Striker 300g Suplemento Alimentar em Pó 400mg Cafeína 20 Doses - Soldiers Nutrition",
@@ -882,15 +918,6 @@
   "termos": ""
  },
  {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "30% OFF em produtos participantes da campanha.https://www.kabum.com.br/promocao/CP2PRAVOCE30",
-  "codigo": "PRAVOCE30",
-  "fim": "2026-10-07T15:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP2PRAVOCE30",
-  "termos": ""
- },
- {
   "loja": "Farmácias Indiana",
   "tipo": "promotion",
   "titulo": "FEIRAO BABY Alimentacao",
@@ -1274,7 +1301,7 @@
   "titulo": "R$ 5,40 OFF acima de R$ 80,90",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4bscfNnxLXL4IOroWtKguOsxD5NwfD2WKOlbwzli6SsQgSMDOj7Sg8v8IcNibQekhvc675LJoUeenNpkurJgGSWxHevVfaJpmT4OVLMeXs8gZIpM4GzUsBRHQx27mddfjTs1XV7gxALaJqq7VcRADhn820rqUjLuM5g6CpI9eE11kzazRMmae6VtKndcUBJFyicFo6jlg8OmWFIm34YKgqXO35SaYzUrwxzoT0bXb0MisNSVLZbyw8efNoFOzK4PjrFUO7aKfG6LmlbjcWoD9ZXnCYgyAWSxyKyhkNZ7hlGPJMdjdXO6zP6VQFNo2smeKsmDHUUdEF2hH9GdtUnNF54lxYiz2yBvvX1CU0v36zFWK4AgUwWzJdyuh2J3M1z5sqT5d6awoxXwLSuyf6dbSMxC1rQGCfx3xZMsLb3W49TvQNzbXGSCMVcDHgWEbuhq7F5yyVJpAFtYJ6L",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4ca4qlr4lbc1QwKxkeVZu0QOhDJ7t69ckyzTFwFS13FjTrcx5bgRUreZCuIK5VsakVK0O6ImgHpi8E3XBaIFWf9QvHGxCTnfXcv9QhijS5HMgg0vB2s9dhcPXcMqa0Roh62hRn00NpYdIT6o7Wguvo8Xd6tdM5QGGdNXJrKmjFYQMzzvnARw4X16saf2ra4946NZ8lXR5IaPOQDIDQ6wbOsIj6SSDC5zr23eS5aFQp1YUHw8AkHaxKCqOU2wb0wQchgd6zKryv6CIuF9Usi9PTKZpMVBWKDUHKloLLvKoYvqcONyNgmwy8ZMFk0HKhtyp7YuKpT1ovv0MsrmI0rIJdWz0PmXWoArupz3eItdV0ZBP0F1dCSmbavZEtdkaDv4gzpn7VSYkJRTZngxCiMeHvzfyaTJrCh5NFukJ4cowqcMCcdatGtJV5EKRzOeyVvajHA0a9pcc1Oo52T",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -1283,7 +1310,16 @@
   "titulo": "R$ 16,19 OFF acima de R$ 269,80",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW3pmZXrkLQWj0qJnm0nYsBKFJ8RUHpLSG8XEqgKXEq9jAvE8gpqHaHdie0LImn7REvgLi3Jdzn1NC2g2MKLdLAQpphHeSrXrpFrF84381rk7MXCkLr4Som4A55yCGBz5KWRxmT0ZxxhFsMizuJJ3AG57VLRpXm1cz374fw3gtooLQO6ad0etRof0C3PNUMgG4k5m7IWgZzpgO2jkXH0YZiQHgLs1x40wg4gRMjnmxPsjDwLehWSQssr5oMsdfU0B6bteolHwndXcvw9AbLtkzICYUr5dtrHE912leSP47wyyzLdFKbTGzBnvaGy1NAuWOINZaeFvEfQUoMoZ8qIC8quLn1NDnrZvqLSEWovFm6oWf0vDO7GFdBX5NHAO56J2NglBeFArTqr4qtBfRVGl91N3zkT4H76Ip9d3rLstXEKnwLqerOctDGZ9a5uDlX8kfiCKJFhjElvx2B3N",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2wXtZ4ff0IAQ17gyaP6CUIQsM5S9jBRCXAng1YsmPIzsnVxL6jDEWhkP6bvTDLPSGIn3E3aJYCTF1XHRw75iY2mxuP9hd2YEgAKbzKD7N1g52OtB55mrN9SAINFh7qUwrdYaINdIoeB72us2Wz6YWNB5FMgtDYaDcWmD7YZrd5YKZ35wkIaCFBNeEMzV2P4hs7UOTzoVaAhu39xNxOkTgfXeVbgI4wRxpUdOw7h7Yms9cI6w9teaqpCvYXTl8G39N36tW0rqLGDkXFsW2UWN92CP0j33tsAL3VDYjlmQxc3GxC9VwWHKXih9JIPNJsBAxDzuAKIBWklq1ADka44eRg231FLdpsVEO5PQxJPA1X15YENMAUJwSG2MDrN1XI6kp0VPe70F3uypvbafEe5CNv8t9AQXizjuqSggauInf9RZ8OncHcOppL4Zztqz0Zj2cgQ67HD8gnH2JWT",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · Star Custom Store",
+  "tipo": "voucher",
+  "titulo": "R$ 4,83 OFF acima de R$ 4,80",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-10-27T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkyTu00nlT1YNRR7mEuNddbcZY7A74feeJQQwOtrPoje44XI9sGmV3ChgfT3toDqZ5AdcSzdMLQijr0ZK2p8ekfpiwxoZ1i0k0duuCaLu9F3Ius5vaT1jVW5hGUCyiGo5syerpDUvWlAJiebMRbChk8rI7ofx2OosMMz7mqU9HqE1vnGL1rlz4ldhIN9ElnzNKe237Y5zVNHxdVBqt6MLNTxLy7Ghsn3a1FGEKPKrfDdJI6Hcac2ZyqKvKwEvEAvvxV3YT3ZSDYxR4ZNC7vwBDr4cGcPVjLN1rXFrdOTGS5hYVysOHycmClEJJ91oeScCxg8HpFl5E4uk1qAsxGkRypgupezlM3QTOT39DMlnBHfDl1FkRGDMFvFVsqbtfnidKwT1WmW4CgoDLEocgcscTBM3CHLHEHB7vGA5ZM7GmS7DeTEN4BcU3izPsUiT8Dzkp8B03SUgbwgncv9",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

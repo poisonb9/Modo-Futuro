@@ -224,7 +224,8 @@ def estoque_drive() -> tuple[dict, set]:
 def gemini_nota(url: str, tema: str) -> dict:
     from engine import keys
     rot = keys.gemini()
-    for _ in range(min(5, len(rot))):
+    sobrecarga = 0
+    for _ in range(min(5, len(rot)) + 3):
         k = rot.proxima().strip()
         try:
             r = requests.post(
@@ -236,6 +237,14 @@ def gemini_nota(url: str, tema: str) -> dict:
                 timeout=300)
         except Exception as e:
             return {"erro": str(e)[:80]}
+        # ⭐ 07/10/2026: 503 ("model is currently experiencing high demand") é
+        # do MODELO, não da chave — queimar a chave tirava do rodízio chave com
+        # cota e o vídeo saía "chaves esgotadas". Teste do dia: 11 de 28 chaves
+        # deram 503 ao mesmo tempo. Agora espera e tenta de novo (até 3x).
+        if r.status_code == 503 and sobrecarga < 3:
+            sobrecarga += 1
+            time.sleep(15 * sobrecarga)
+            continue
         if r.status_code in (403, 429, 503):
             rot.queimar(k)
             continue

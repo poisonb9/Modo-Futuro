@@ -22,7 +22,8 @@ intermediario de corte local, pasta de teste.
 |-------------------------------------|---------------|
 | download interrompido (*.part/.ytdl) | sempre        |
 | trabalho/ intermediarios (fora brutos) | 1 dia       |
-| trabalho/brutos/                    | 3 dias (o corte roda da copia no Drive) |
+| trabalho/brutos/                    | 3 dias E so' se o Drive tiver igual |
+| ~/Downloads/abastecer/*.mp4 (orfao) | 1 dia E so' se o Drive tiver igual |
 | saida/teste_*                        | 7 dias        |
 
 ⛔ NUNCA toca em `_privado/`, `estado/`, codigo, nem fora do motor.
@@ -37,6 +38,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 DIA = 86400
+BAIXADOS = Path.home() / "Downloads" / "abastecer"   # o mesmo do abastecer_loop
 
 
 def _tam(p: Path) -> int:
@@ -69,6 +71,13 @@ def candidatos(raiz: Path = RAIZ, dias_brutos: float = 3, dias_trabalho: float =
                 if f.is_file() and f.suffix not in (".part", ".ytdl") \
                         and _idade_dias(f) >= dias_brutos:
                     out.append(("bruto antigo", f, _tam(f)))
+    # ⭐ 07/10/2026: o JDownloader do abastecer_loop deixa .mp4 ORFAO quando o
+    # vídeo não está nos `pendentes` (JD caiu na hora do addLinks, ou baixou de
+    # novo um link já enviado). O loop nunca sobe nem apaga esses: achados
+    # 2 parados (565 MB) com o disco em 1,8 GB livres.
+    for f in (BAIXADOS.rglob("*.mp4") if raiz == RAIZ and BAIXADOS.exists() else []):
+        if _idade_dias(f) >= 1:
+            out.append(("mp4 orfao do JDownloader", f, _tam(f)))
     saida = raiz / "saida"
     if saida.exists():
         for d in saida.glob("teste_*"):
@@ -78,9 +87,31 @@ def candidatos(raiz: Path = RAIZ, dias_brutos: float = 3, dias_trabalho: float =
     # lados resolvidos: no Windows o mesmo caminho aparece curto (ADMINI~1) e
     # longo (Administrator), e comparar um de cada recusava tudo.
     r = raiz.resolve()
+    b = BAIXADOS.resolve()
     return [(c, p, t) for c, p, t in out
-            if r in p.resolve().parents
-            and not {"_privado", "estado"} & set(p.resolve().relative_to(r).parts)]
+            if b in p.resolve().parents or (r in p.resolve().parents
+            and not {"_privado", "estado"} & set(p.resolve().relative_to(r).parts))]
+
+
+def no_drive(f: Path, contas: list | None = None) -> str | None:
+    """Conta onde existe um arquivo com o MESMO nome e o MESMO tamanho em
+    bytes, ou None. Regra do dono: só apaga do PC o que está no Drive."""
+    sys.path.insert(0, str(RAIZ))
+    import contas_drive as cd
+    nome = f.name.replace("\\", "\\\\").replace("'", "\\'")
+    try:
+        tam = f.stat().st_size
+    except FileNotFoundError:      # outro processo já subiu e apagou
+        return None
+    for c in contas or cd.CONTAS:
+        try:
+            r = cd.servico(c).files().list(
+                q=f"name='{nome}' and trashed=false", fields="files(size)").execute()
+        except Exception:
+            continue
+        if any(int(x.get("size", -1)) == tam for x in r.get("files", [])):
+            return c["nome"]
+    return None
 
 
 def main() -> None:
@@ -88,20 +119,32 @@ def main() -> None:
     ap.add_argument("--apagar", action="store_true")
     ap.add_argument("--dias-brutos", type=float, default=3)
     a = ap.parse_args()
-    lista = candidatos(dias_brutos=a.dias_brutos)
+    lista = []
+    for cat, p, t in candidatos(dias_brutos=a.dias_brutos):
+        # ⭐ 07/10/2026: bruto/orfao só sai se o Drive tiver a cópia inteira.
+        # Antes saía pela idade: 16 brutos de trabalho/brutos (3,4 GB) NUNCA
+        # tinham subido (baixar_em_intervalos não sobe, de propósito).
+        if cat in ("bruto antigo", "mp4 orfao do JDownloader"):
+            if not no_drive(p):
+                print(f"  [mantido: NAO esta' no Drive] {p.name[:70]}")
+                continue
+        lista.append((cat, p, t))
     if not lista:
         print("Nada a limpar.")
         return
     total = 0
     for cat, p, t in sorted(lista, key=lambda x: -x[2]):
         total += t
-        print(f"  {t / 1e6:9.1f} MB  {cat:24}  {p.resolve().relative_to(RAIZ.resolve())}")
+        print(f"  {t / 1e6:9.1f} MB  {cat:24}  {p.name if BAIXADOS.resolve() in p.resolve().parents else p.resolve().relative_to(RAIZ.resolve())}")
     print(f"  {total / 1e6:9.1f} MB  TOTAL")
     if not a.apagar:
         print("\n(so' mostrei. Para apagar: --apagar)")
         return
     for _, p, _ in lista:
-        (shutil.rmtree if p.is_dir() else Path.unlink)(p)
+        if p.is_dir():
+            shutil.rmtree(p, ignore_errors=True)
+        else:
+            p.unlink(missing_ok=True)
     print(f"\nApagado: {total / 1e6:.1f} MB")
 
 

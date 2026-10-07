@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-06T20:11:42",
+  "medido_em": "2026-10-07T00:36:50",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 22,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 30,
+      "posts_recentes": 28,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -47,7 +47,7 @@
       "comentarios": 116,
       "shares": 101,
       "engajamento_pct": 0.0,
-      "posts_recentes": 27,
+      "posts_recentes": 25,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 40,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -143,7 +143,7 @@
       "posts": 15,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 895,
+      "reacoes": 923,
       "comentarios": 8,
       "shares": 14,
       "engajamento_pct": 0.0,

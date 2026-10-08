@@ -136,6 +136,20 @@ TERMOS: dict[str, dict[str, int]] = {
         "glam": 3, "contour": 3, "blush": 3, "primer": 3, "corretivo": 3,
         "concealer": 3, "beauty": 2, "skin": 1, "pele": 1,
     },
+    "camarim.kpop": {
+        # ⭐ 08/10/2026 (dono): maquiagem de IDOL k-pop. Sem entrada aqui o
+        # canal pontuava 0 e todo bruto da RISABAE com idol (ex.: NMIXX JIWOO)
+        # era barrado como "pasta errada" do truque. Os termos de beleza
+        # repetem os do truque (empate passa); os de k-pop desempatam.
+        **{t: p for t, p in (
+            ("makeup", 3), ("maquiagem", 3), ("risabae", 3), ("k-beauty", 3),
+            ("glam", 3), ("beauty", 2))},
+        "kpop": 3, "k pop": 3, "idol": 3, "idols": 3, "nmixx": 3,
+        "aespa": 3, "ive": 3, "newjeans": 3, "blackpink": 3, "twice": 3,
+        "le sserafim": 3, "lesserafim": 3, "itzy": 3, "bts": 3,
+        "illit": 3, "babymonster": 3, "kiss of life": 3, "red velvet": 3,
+        "stray kids": 3, "seventeen": 3, "jiwoo": 3, "giselle": 3,
+    },
     "cozinha.importada": {
         # README: receitas do mundo, com medida convertida. Este motor NAO
         # serve a cozinha (ver engine/escopo.py) — os termos existem aqui pra

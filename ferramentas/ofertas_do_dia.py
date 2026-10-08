@@ -98,7 +98,11 @@ def agendar(por_canal: dict[str, list[dict]], ja: bool = False) -> None:
         try:
             _, canal_id, conhecidos = ab.contexto_buffer(token, fresco=True)
             agendados = [x for x in conhecidos if x.get("status") != "sent"]
-            horas = ab.proximos_horarios(agendados, len(posts), conhecidos)
+            from engine import ofertas as _of
+            # 5/dia com a grade de 5 (>= 3 h, regra dura do agendar_buffer). O make
+            # tem 4 cortes/dia: teto 5 = a oferta entra como 5o post, sem roubar corte.
+            horas = ab.proximos_horarios(agendados, len(posts), conhecidos,
+                                         max_por_dia=5, slots=ab.SLOTS_SP_5)
             # ⭐ 30/09/2026 (dono): "minutos aleatorios, sem bater nenhum canal
             # postando junto no mesmo minuto e segundo" — pra nao parecer bot.
             horas = [_espalhar(h, usados) for h in horas]

@@ -31,10 +31,14 @@ DIAS_MIN = 7
 NOTA_MIN = 4.7
 VENDAS_MIN = 1000
 JANELA_DIAS = 10   # 04/10/2026 (dono): era 21
-POR_DIA = 4
+POR_DIA = 5   # 08/10/2026 (dono): era 4 — 5 por dia, >= 3 h entre posts
+# ⭐ 08/10/2026: o @achadinho.make (truque.importado) e' canal de CORTE de K-pop
+# (4/dia) e recebe so' 1 oferta de beleza por dia, como 5o post.
+POR_DIA_CANAL = {"truque.importado": 1}
+SO_NICHO = {"truque.importado"}   # nunca recebe sobra de outro nicho
 # ⭐ 30/09/2026: @achadinhototal entra na divisao (plano, 3º canal). Um produto
 # nunca sai em dois canais — a alternancia abaixo garante.
-CANAIS = ("fatura.chora", "achadinhos.instantaneos", "achadinhototal")
+CANAIS = ("fatura.chora", "achadinhos.instantaneos", "achadinhototal", "truque.importado")
 
 # minusculo, palavra inteira. Lista curta de proposito: e' o que mais aparece
 # falsificado no Ali; cresce quando aparecer um caso.
@@ -246,6 +250,7 @@ NICHO = {
     "achadinhos.instantaneos": ("achadinhos.instantaneos", "cozinha.importada",
                                 "varredura.jardim", "varredura.ferramentas"),
     "achadinhototal": None,   # None = qualquer origem
+    "truque.importado": ("truque.importado",),   # beleza (Awin pela categoria) + garimpo de make
 }
 
 
@@ -274,7 +279,7 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
     for canal in sorted(CANAIS, key=lambda c: NICHO.get(c) is None):
         aceita = NICHO.get(canal)
         for o in boas:
-            if len(saida[canal]) >= POR_DIA:
+            if len(saida[canal]) >= POR_DIA_CANAL.get(canal, POR_DIA):
                 break
             if o["id"] in usados:
                 continue
@@ -297,7 +302,10 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
     for o in boas:
         if o["id"] in usados:
             continue
-        curtos = [c for c in CANAIS if len(saida[c]) < POR_DIA]
+        # o @achadinho.make so' recebe beleza (1a passada) -- sobra de eletronico
+        # nao entra num canal de maquiagem
+        curtos = [c for c in CANAIS if c not in SO_NICHO
+                  and len(saida[c]) < POR_DIA_CANAL.get(c, POR_DIA)]
         if not curtos:
             break
         saida[min(curtos, key=lambda c: len(saida[c]))].append(o)

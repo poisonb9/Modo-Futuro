@@ -138,6 +138,11 @@ SLOTS_SP = [(8, 15), (13, 10), (16, 27), (19, 45)]
 # desta mudanca, desconfie de coincidencia antes de creditar a cadencia.
 MAX_POR_DIA = 4
 
+# ⭐ 08/10/2026 (dono: "subir para 5 posts por dia com intervalo minimo de 3 horas"):
+# grade de 5 para os canais de OFERTA (ferramentas/ofertas_do_dia.py passa
+# max_por_dia/slots). Os canais de corte seguem na SLOTS_SP/MAX_POR_DIA acima.
+SLOTS_SP_5 = [(8, 10), (11, 20), (14, 30), (17, 40), (20, 50)]
+
 # Titulos que NUNCA voltam a ser agendados (vale no runner; ver uso abaixo).
 TITULOS_BLOQUEADOS = (
     "O TESTE EXTREMO DE QUEDA DOS CELULARES DA SAMSUNG",
@@ -423,7 +428,9 @@ def ordenar(clipes: dict) -> list[tuple[str, dict]]:
 
 
 def proximos_horarios(agendados: list[dict], quantos: int,
-                      conhecidos: list[dict] | None = None
+                      conhecidos: list[dict] | None = None,
+                      max_por_dia: int | None = None,
+                      slots: list[tuple[int, int]] | None = None
                       ) -> list[datetime.datetime]:
     """Próximos slots livres da grade, em horário de São Paulo.
 
@@ -435,6 +442,8 @@ def proximos_horarios(agendados: list[dict], quantos: int,
     do que já foi ao ar, senão um post que disparou de manhã deixa de contar e
     o dia estoura o teto. Sem isso, 26/08/2026 fechou com 11 posts.
     """
+    teto = max_por_dia or MAX_POR_DIA
+    grade = slots or SLOTS_SP
     def _dia_hora(p):
         if not p.get("dueAt"):
             return None
@@ -488,7 +497,7 @@ def proximos_horarios(agendados: list[dict], quantos: int,
         ocupados.add((ja.date(), ja.hour))
         por_dia[ja.date()] = por_dia.get(ja.date(), 0) + 1
     while len(saida) < quantos:
-        for h, m in SLOTS_SP:
+        for h, m in grade:
             if len(saida) >= quantos:
                 break
             minuto = min(57, max(3, m + random.randint(-VARIACAO_MIN, VARIACAO_MIN)))
@@ -497,7 +506,7 @@ def proximos_horarios(agendados: list[dict], quantos: int,
                 continue
             if (dia, h) in ocupados:
                 continue
-            if por_dia.get(dia, 0) >= MAX_POR_DIA:
+            if por_dia.get(dia, 0) >= teto:
                 break
             # INTERVALO MINIMO, verificado DEPOIS da variacao. Compara com o
             # que ja' esta' no Buffer e com o que esta' sendo montado agora —

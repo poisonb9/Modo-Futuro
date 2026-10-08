@@ -42,6 +42,9 @@ CATEGORIAS = {
 CANAL_DA_CATEGORIA = {
     "eletronicos": "fatura.chora",
     "casa_cozinha": "achadinhos.instantaneos",
+    # ⭐ 08/10/2026 (dono: "muda oceane para make"): beleza vai para o
+    # @achadinho.make (truque.importado), canal de maquiagem com 15% de eng.
+    "beleza": "truque.importado",
 }
 CANAL_PADRAO = "achadinhototal"
 

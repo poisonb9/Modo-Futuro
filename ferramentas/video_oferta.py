@@ -81,7 +81,8 @@ def dados(pid: str, exigir_queda: bool = True) -> dict:
 # e a serie "ACHADO DO DIA #N" — numero por canal, contado no registro das
 # ofertas feitas (nunca chutado: mesma regra do selo PARTE N).
 MARCAS = {"fatura.chora": "PAGO MENOS", "achadinhos.instantaneos": "ACHADINHO TOTAL",
-          "achadinhototal": "ACHEI PRA VOCÊ"}  # 30/09: = nome de exibicao do perfil (print do dono)
+          "achadinhototal": "ACHEI PRA VOCÊ",
+          "truque.importado": "ACHADINHO MAKE"}  # 08/10: beleza (Oceane) no @achadinho.make  # 30/09: = nome de exibicao do perfil (print do dono)
 
 
 def proximo_numero(canal: str) -> int:

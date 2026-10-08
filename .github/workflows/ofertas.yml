@@ -73,6 +73,7 @@ jobs:
           PAGOMENOS: ${{ secrets.PAGOMENOS }}
           ACHADINHOSINSTANTANEOS: ${{ secrets.ACHADINHOSINSTANTANEOS }}
           ACHADINHOTOTAL: ${{ secrets.ACHADINHOTOTAL }}
+          BUFFER_TOKEN_TRUQUEIMPORTADO: ${{ secrets.BUFFER_TOKEN_TRUQUEIMPORTADO }}   # 08/10: beleza no @achadinho.make
         run: |
           E=""; [ "${{ inputs.ensaio }}" = "true" ] && E="--ensaio"
           [ "${{ inputs.registrar }}" = "true" ] && E="$E --registrar"

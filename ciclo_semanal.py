@@ -125,65 +125,71 @@ def termos_do_sucesso(canal: str, top: list[dict], radar) -> tuple[list, str]:
     return achados, ""
 
 
-def rodar(canal: str, simular: bool) -> dict:
-    est = estoque(canal)
-    linha = {"quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-             "canal": canal, "estoque": est["total"], "piso": PISO_FONTES}
-    print(f"\n=== {canal}")
-    print(f"  estoque de fonte: {est['total']} "
-          f"({est['pendente']} pendente + {est['pronto']} pronto) | piso {PISO_FONTES}")
+def rodar(canal: str, simular: bool, est_drive: dict | None = None,
+          usados: set | None = None) -> dict:
+    """⭐ 08/10/2026 (dono: "faz o ciclo semanal subir sozinho"): o ciclo agora
+    entra no MESMO trilho do abastecer_loop, em vez de baixar por conta propria
+    para trabalho/brutos (onde 17 brutos ficaram esquecidos sem nunca virar
+    estoque, e o radar usado no atefalhar era o de ACADEMIA):
 
-    if est["total"] >= PISO_FONTES:
+      campeoes do canal -> buscas extras (engine/buscas_do_sucesso)
+        -> radar CERTO do canal (abastecer_loop.CANAIS) com as extras
+        -> Gemini assiste ANTES de baixar (mesmo criterio, reprovados lembrados)
+        -> JDownloader -> abastecer_loop.subir_prontos sobe para RAW/<PASTA do
+           canal> com conferencia de bytes e apaga do PC.
+
+    A trava antiga ("a pasta do Drive decide o canal") segue respeitada: so'
+    sobe o que o Gemini aprovou PARA AQUELE TEMA, na pasta daquele canal.
+    """
+    import abastecer_loop as al
+    from engine import buscas_do_sucesso as bs
+    linha = {"quando": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+             "canal": canal, "piso": al.PISO}
+    print(f"\n=== {canal}")
+    estado = al.ler_estado()
+    na_fila = sum(1 for p in estado["pendentes"].values() if p["canal"] == canal)
+    n = (est_drive or {}).get(canal, 0)
+    linha["estoque"] = n
+    print(f"  estoque no Drive: {n} + {na_fila} baixando | piso {al.PISO}")
+    if n + na_fila >= al.PISO:
         print("  acima do piso — nada a fazer")
         linha["acao"] = "nada"
         return linha
 
-    top, fonte, aviso = melhores.melhores(canal, 2)
-    linha["fonte_da_metrica"] = fonte
-    if aviso:
-        print(f"  {aviso}")
-    if not top:
-        print("  [!] sem como saber o que deu certo — NAO baixo no escuro.")
-        linha["acao"] = "abortado: sem metrica"
-        return linha
-    print(f"  melhores da semana (por {fonte}):")
-    for p in top:
-        n = p.get("views", p.get("curtidas", 0))
-        print(f"     {n:>5}  {p.get('titulo','')[:56]}")
-
-    radar = _radar_do_canal(canal)
-    termos, por_que = termos_do_sucesso(canal, top, radar)
-    linha["termos"] = termos
-    if por_que:
-        print(f"  ⚠️ {por_que}")
+    r = bs.gerar(canal, gravar=not simular)
+    linha["buscas_extras"] = r.get("buscas", [])
+    if r.get("erro"):
+        print(f"  ⚠️ buscas extras: {r['erro']} — uso so' as buscas fixas do radar")
     else:
-        print(f"  termos do sucesso, dentro do tema: {', '.join(termos)}")
-
+        print("  campeoes do mes: " + " | ".join(t[:40] for t in r["campeoes"][:3]))
+        print("  buscas extras: " + "; ".join(r["buscas"]))
     if simular:
-        print(f"  SIMULADO: rodaria o radar e baixaria {QUANTAS_BAIXAR} fontes")
+        print("  SIMULADO: rodaria radar + Gemini e mandaria os aprovados ao JD")
         linha["acao"] = "simulado"
         return linha
 
-    if radar:
-        print("  rodando o radar do canal...")
-        subprocess.run([sys.executable, "-X", "utf8",
-                        str(RAIZ / "canais" / canal / "radar.py")],
-                       cwd=RAIZ, timeout=1800)
-    arq = RAIZ / f"radar_{canal.replace('.', '_')}.json"
-    if not arq.exists():
-        arq = RAIZ / f"radar_{canal.split('.')[0]}.json"
-    if not arq.exists():
-        print(f"  [!] radar nao deixou arquivo — nao baixo sem lista")
-        linha["acao"] = "abortado: sem radar"
+    itens = al.escolher(canal, al.CANAIS[canal], usados if usados is not None else set())
+    if not itens:
+        print("  nenhum candidato passou no criterio — nao baixo nada fraco")
+        linha["acao"] = "radar + gemini: nada aprovado"
         return linha
-    print(f"  baixando {QUANTAS_BAIXAR} fonte(s), espacadas...")
-    subprocess.run([sys.executable, "-X", "utf8", "baixar_em_intervalos.py",
-                    "--radar", str(arq), "--max", str(QUANTAS_BAIXAR)],
-                   cwd=RAIZ, timeout=7200)
-    linha["acao"] = "radar + download"
-    # ⚠️ NAO sobe pro Drive e NAO dispara corte. A pasta do Drive decide o
-    # canal, e foi ali que nasceram os 8 clipes de IA no @semanestesia.
-    print("  ⚠️ baixado, NAO subido. Subir e' passo separado e deliberado.")
+    if not al.mandar_jd(canal, itens):
+        print("  [!] JDownloader nao respondeu — o vigia_saude reinicia e reenvia")
+        linha["acao"] = "abortado: JD mudo"
+        return linha
+    # ⚠️ relê o estado JA' na hora de gravar: o abastecer_loop pode ter escrito
+    # no meio (janela curta; pendente perdido o vigia_saude detecta e reenvia).
+    estado = al.ler_estado()
+    for i in itens:
+        estado["pendentes"][i["id"]] = {"canal": canal, "titulo": i["titulo"], "url": i["url"],
+                                        "nota": i["gemini"].get("nota"), "origem": "ciclo_semanal",
+                                        "quando": datetime.now().isoformat(timespec="minutes")}
+        if usados is not None:
+            usados.add(i["id"])
+    al.gravar_estado(estado)
+    al.log(f"⬇️ {canal}: {len(itens)} no JDownloader (ciclo_semanal, buscas do sucesso)")
+    linha["acao"] = f"{len(itens)} aprovados no JD — sobem sozinhos ao RAW"
+    linha["aprovados"] = [i["titulo"][:80] for i in itens]
     return linha
 
 
@@ -193,11 +199,13 @@ def main() -> None:
     p.add_argument("--todos", action="store_true")
     p.add_argument("--simular", action="store_true")
     a = p.parse_args()
-    from engine import canais_registro as cr
-    canais = list(cr.do_motor()) if a.todos else [a.canal]
+    import abastecer_loop as al
+    canais = list(al.CANAIS) if a.todos else [a.canal]
     if not canais or not canais[0]:
         sys.exit("use --canal <nome> ou --todos")
-    linhas = [rodar(c, a.simular) for c in canais]
+    est_drive, ids_drive = al.estoque_drive()
+    usados = al.ids_usados(al.ler_estado()) | ids_drive
+    linhas = [rodar(c, a.simular, est_drive, usados) for c in canais]
     if not a.simular:
         # O diario e' o que torna "testar por 1 mes" uma medicao, e nao uma
         # impressao. Uma linha por rodada, com o estoque que a disparou.

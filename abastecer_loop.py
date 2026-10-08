@@ -89,11 +89,16 @@ CANAIS = {
     "modofuturo": {
         "pasta": "MODO FUTURO", "radar": "canais/modofuturo/radar.py",
         "json": "radar_modofuturo.json", "min_views": 150_000,
+        "min_eng": 1.2,   # ⭐ 08/10/2026: documentario de chip engaja ~1,4% (mediana); 2,5% dava 0 candidato
         "tema": "chips, semicondutores, fabricas e engenharia de ponta com "
                 "imagem que se mexe (NAO slideshow, NAO analise/geopolitica)"},
     "atefalhar": {  # = Geracao 2000 (nostalgia) desde 28/09
         "pasta": "GERACAO 2000", "radar": "canais/atefalhar/radar_nostalgia.py",
         "json": "radar_nostalgia.json", "min_views": 300_000,
+        # ⭐ 08/10/2026: video de desenho/curiosidade engaja menos que podcast
+        # (mediana 0,74% nos >= 300 mil views); com o piso geral de 2,5%, 155
+        # ineditos do radar davam ZERO candidato. O Gemini segue como filtro.
+        "min_eng": 1.5,
         "tema": "CURIOSIDADES leves e divertidas de desenhos animados e cultura pop "
                 "dos anos 90/2000 (fatos que ninguem sabia, bastidores, dubladores, "
                 "easter eggs, como foi feito). NADA dark/teoria sombria/terror "
@@ -257,6 +262,24 @@ def gemini_nota(url: str, tema: str) -> dict:
     return {"erro": "chaves esgotadas"}
 
 
+REPROVADOS = RAIZ / "estado" / "gemini_reprovados.json"
+DIAS_REPROVADO = 14
+
+
+def _ler_reprovados() -> dict:
+    try:
+        d = json.loads(REPROVADOS.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    limite = datetime.now().timestamp() - DIAS_REPROVADO * 86400
+    return {k: v for k, v in d.items()
+            if datetime.fromisoformat(v["quando"]).timestamp() > limite}
+
+
+def _gravar_reprovados(d: dict) -> None:
+    REPROVADOS.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
 def escolher(canal: str, cfg: dict, usados: set) -> list:
     log(f"**{canal}** — rodando radar `{cfg['radar']}`")
     subprocess.run([sys.executable, "-X", "utf8", cfg["radar"]], cwd=RAIZ,
@@ -267,9 +290,26 @@ def escolher(canal: str, cfg: dict, usados: set) -> list:
         log(f"[!] {canal}: radar sem arquivo ({e}) — nao baixo no escuro")
         return []
     usados_t = titulos_usados()
+    # ⭐ 08/10/2026: criterio de emergencia ANTES do filtro (decide quais
+    # reprovados podem voltar). Ligado/desligado pelo ferramentas/vigia_saude.py
+    # quando o canal fica com estoque 0 ha' >= 12 h: aceita nota >= 8. Imagem e
+    # tema seguem iguais. Na triagem de 08/10, varios videos bons tiraram 8
+    # (imagem 9-10, tema 9-10) e o canal ficou vazio por 2 dias.
+    try:
+        emerg = canal in json.loads((RAIZ / "estado" / "criterio_emergencia.json")
+                                    .read_text(encoding="utf-8"))
+    except Exception:
+        emerg = False
+    nota_min = 8 if emerg else 9
+    # ⛔ 08/10/2026: o loop reavaliava no Gemini os MESMOS reprovados a cada
+    # passada ("America's Semiconductor Boom" 32 vezes) e queimava a cota que
+    # faltava para os ineditos. Reprovado fica fora 14 dias; com o criterio
+    # de emergencia ligado, o que tirou 8 pode voltar.
+    reprov = _ler_reprovados()
     novos = [i for i in radar if i.get("id") not in usados
+             and reprov.get(i.get("id"), {}).get("nota", 99) >= nota_min
              and not ja_usado_pelo_titulo(i.get("titulo", ""), usados_t)
-             and i.get("views", 0) >= cfg["min_views"] and i.get("eng", 0) >= 2.5]
+             and i.get("views", 0) >= cfg["min_views"] and i.get("eng", 0) >= cfg.get("min_eng", 2.5)]
     novos.sort(key=lambda i: -i.get("nota", 0))
     por, cand = {}, []
     for i in novos:
@@ -282,15 +322,22 @@ def escolher(canal: str, cfg: dict, usados: set) -> list:
             break
     log(f"{canal}: {len(radar)} no radar, {len(novos)} ineditos e com alcance, "
         f"{len(cand)} vao ao Gemini")
+    if emerg:
+        log(f"{canal}: criterio de EMERGENCIA (nota >= 8) — estoque zerado")
     aprovados = []
     for i in cand:
         g = gemini_nota(i["url"], cfg["tema"])
         i["gemini"] = g
-        ok = (isinstance(g.get("nota"), (int, float)) and g["nota"] >= 9
+        ok = (isinstance(g.get("nota"), (int, float)) and g["nota"] >= nota_min
               and g.get("imagem", 0) >= 8 and g.get("tema", 0) >= 9)
         log(f"  {'✅' if ok else '·'} {g.get('nota', g.get('erro'))} — {i['titulo'][:60]} — {g.get('motivo', '')[:90]}")
         if ok:
             aprovados.append(i)
+        elif isinstance(g.get("nota"), (int, float)):   # erro de chave/rede NAO conta
+            reprov[i["id"]] = {"nota": g["nota"] if g.get("imagem", 0) >= 8 and g.get("tema", 0) >= 9 else 0,
+                               "quando": datetime.now().isoformat(timespec="minutes"),
+                               "titulo": i.get("titulo", "")[:80]}
+    _gravar_reprovados(reprov)
     aprovados.sort(key=lambda i: (-i["gemini"]["nota"], -i["gemini"].get("imagem", 0), -i.get("views", 0)))
     return aprovados[:POR_REPOSICAO]
 

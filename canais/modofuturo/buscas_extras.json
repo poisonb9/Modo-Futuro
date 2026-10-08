@@ -1,0 +1,33 @@
+{
+ "canal": "modofuturo",
+ "gerado_em": "2026-10-08T13:06",
+ "nota": "alcance + 20 x curtida, 30 dias",
+ "resumo": {
+  "posts": 65,
+  "alcance_mediano": 161,
+  "curtidas_medianas": 5
+ },
+ "campeoes": [
+  "A Verdade Sobre o Chip de 0.7nm da IBM Descubra por que os nomes de nanômetros v",
+  "O MOTIVO DE TODA A SEDE DA NVIDIA SER FEITA DE TRIÂNGULOS Os dois predios princi",
+  "A Precisão Incrível por Trás da Criação dos Microchips Descubra a tecnologia Ext",
+  "O PRIMEIRO TRANSISTOR DE 1948 ERA DO TAMANHO DE UM PRÉDIO Comparando o tamanho d",
+  "O lingote de silicio de 200 kg onde 1 atomo errado destroi tudo Cristal de silic",
+  "O material com 99,9999999% de pureza que e 1 bilhao de vezes mais puro que ouro ",
+  "MICROSOFT COLOCOU SEUS SERVIDORES NO FUNDO DO MAR Esqueça a nuvem tradicional. A",
+  "COMO OS CHIPS DE US$ 2 TRILHÕES PROJETARAM O PRÓPRIO PRÉDIO A sede futurista da "
+ ],
+ "buscas": [
+  "silicon wafer polishing process inside fab",
+  "300mm semiconductor fab tour 2024",
+  "ASML EUV lithography machine operation explained",
+  "TSMC 3nm chip production line walkthrough",
+  "Intel 4 process node factory tour",
+  "Samsung GAA transistor fabrication documentary",
+  "Micron 3D NAND memory factory inside view",
+  "GlobalFoundries 12LP fab cleanroom walkthrough"
+ ],
+ "descartadas_fora_do_tema": [
+  "imec advanced packaging technology demonstration"
+ ]
+}

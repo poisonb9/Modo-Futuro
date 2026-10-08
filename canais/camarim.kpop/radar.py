@@ -217,9 +217,23 @@ def avaliar(v):
     }
 
 
+def _buscas_extras():
+    """⭐ 08/10/2026: buscas tiradas dos posts campeoes do canal
+    (engine/buscas_do_sucesso.py, renovadas pelo ciclo_semanal). Soma a BUSCAS;
+    os filtros de TEMA/NUCLEO/VETO deste radar continuam valendo."""
+    import json as _json
+    import os as _os
+    p = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "buscas_extras.json")
+    try:
+        extras = _json.load(open(p, encoding="utf-8")).get("buscas", [])
+    except Exception:
+        return []
+    return [b for b in extras if b not in BUSCAS]
+
+
 def main():
     vistos, brutos = set(), []
-    for termo in BUSCAS:
+    for termo in BUSCAS + _buscas_extras():
         try:
             itens = buscar(termo)
         except Exception as e:

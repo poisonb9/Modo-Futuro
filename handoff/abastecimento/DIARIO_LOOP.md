@@ -384,3 +384,2539 @@
 - 05/10 10:33   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
 - 05/10 10:33   · chaves esgotadas — CPU vs GPU | Simply Explained — 
 - 05/10 10:33 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 09:00   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 06/10 09:00 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 09:00 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 09:00 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 09:00 atefalhar: 158 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 06/10 09:01   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 06/10 09:01   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 06/10 09:01 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 09:27 semanestesia.pod: 93 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 09:27   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 09:27   · chaves esgotadas — how to actually quit any addiction in 9 minutes (explained b — 
+- 06/10 09:28   · chaves esgotadas — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — 
+- 06/10 09:28   · chaves esgotadas — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — 
+- 06/10 09:28   · chaves esgotadas — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — 
+- 06/10 09:28   · chaves esgotadas — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — 
+- 06/10 09:33   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Neuroscience based Tricks to leave phone addiction | Dr Raks — 
+- 06/10 09:33   · chaves esgotadas — The Science of Procrastination (and how to stop) — 
+- 06/10 09:33   · chaves esgotadas — How to Trick Monkey Brain To Like Doing Hard Things (Dopamin — 
+- 06/10 09:33   · chaves esgotadas — How to Successfully Delete Social Media | Dr. Cal Newport &  — 
+- 06/10 09:33 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 09:33 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 09:33 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 09:35 cozinha.importada: 47 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 09:35   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 06/10 09:40   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 06/10 09:41   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 06/10 09:46   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 06/10 09:46   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 06/10 09:47   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 06/10 09:47   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 06/10 09:47   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 06/10 09:47   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 06/10 09:47   · chaves esgotadas — Which Country Has The Best Sandwich? — 
+- 06/10 09:47 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 09:47 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 09:47 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 09:49 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 06/10 09:49   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 09:50   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 06/10 09:51   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 06/10 09:51   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 06/10 09:51 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 09:51 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 09:51 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 09:51 modofuturo: 76 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 06/10 09:52   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How Huawei Just Built an Impossible Chip — 
+- 06/10 09:52   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — HOW TRANSISTORS RUN CODE? — 
+- 06/10 10:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 10:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 10:26 semanestesia.pod: 93 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 10:26   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 10:26   · chaves esgotadas — how to actually quit any addiction in 9 minutes (explained b — 
+- 06/10 10:26   · chaves esgotadas — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — 
+- 06/10 10:26   · chaves esgotadas — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — 
+- 06/10 10:27   · chaves esgotadas — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — 
+- 06/10 10:27   · chaves esgotadas — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — 
+- 06/10 10:27   · chaves esgotadas — Neuroscience based Tricks to leave phone addiction | Dr Raks — 
+- 06/10 10:27   · chaves esgotadas — The Science of Procrastination (and how to stop) — 
+- 06/10 10:28   · chaves esgotadas — How to Trick Monkey Brain To Like Doing Hard Things (Dopamin — 
+- 06/10 10:28   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How to Successfully Delete Social Media | Dr. Cal Newport &  — 
+- 06/10 10:28 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:28 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 10:28 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 10:28 cozinha.importada: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 10:29   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 06/10 10:29   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 06/10 10:29   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 06/10 10:30   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 06/10 10:30   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 06/10 10:31   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 06/10 10:31   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 06/10 10:31   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 06/10 10:32   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Which Country Has The Best Sandwich? — 
+- 06/10 10:32 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:32 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 10:32 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 10:32 truque.importado: 32 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 06/10 10:32   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 06/10 10:33   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 06/10 10:33 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:33 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 10:33 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 10:33 modofuturo: 4 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 10:33 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:33 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 10:33 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 10:36 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 10:36 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:55 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 10:55 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 10:56 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 10:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 10:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 10:57 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 10:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 10:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 10:58 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 10:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 10:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 10:58 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 10:58 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 10:58 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 10:58 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 11:03 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:03 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:25 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 11:25 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 11:26 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:26 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 11:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 11:26 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 11:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 11:26 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:26 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 11:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 11:26 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:26 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:26 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 11:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 11:27 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:27 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:55 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 11:55 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 11:56 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 11:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 11:56 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 11:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 11:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:56 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 11:56 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 11:57 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 11:57 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 11:57 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 11:57 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 12:01 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:01 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 12:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 12:28 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:28 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:28 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 12:28 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 12:29 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:29 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:29 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 12:29 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 12:29 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:29 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:29 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 12:29 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 12:32 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:32 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 12:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 12:56 semanestesia.pod: 15 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 12:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 12:56 cozinha.importada: 5 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 12:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 12:57 truque.importado: 2 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:57 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 12:57 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 12:57 modofuturo: 6 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 06/10 12:57   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 06/10 12:57 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 12:57 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 12:57 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 12:58 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 12:58 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 13:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 13:26 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:26 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 13:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 13:26 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 13:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 13:26 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:26 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 13:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 13:26 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:26 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:26 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 13:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 13:26 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:26 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 13:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 13:56 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 13:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 13:56 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 13:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 13:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:56 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 13:56 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 13:56 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:56 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 13:56 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 13:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 13:57 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 13:57 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 14:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 14:26 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:26 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 14:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 14:26 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 14:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 14:26 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:26 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 14:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 14:27 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:27 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:27 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 14:27 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 14:27 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:27 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 14:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 14:56 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 14:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 14:56 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 14:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 14:56 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:56 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 14:56 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 14:56 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:56 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 14:56 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 14:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 14:57 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 14:57 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 15:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 15:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 15:27 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 15:27 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 15:27 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 15:27 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 15:28 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 15:28 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 15:28 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 15:28 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 15:29 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 15:29 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 15:29 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 15:29 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 15:31 modofuturo: 2 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 15:31 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 15:31 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 15:31 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 15:34 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 15:34 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 16:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 16:26 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:26 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 16:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 16:26 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 16:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 16:26 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:26 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 16:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 16:27 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:27 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:27 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 16:27 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 16:27 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:27 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 16:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 16:56 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:56 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 16:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 16:57 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 16:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 16:59 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 16:59 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 16:59 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 16:59 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 17:00 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:00 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:00 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 17:00 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 17:03 atefalhar: 17 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:03 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 17:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 17:27 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:27 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:27 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 17:27 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 17:27 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 17:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 17:28 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 17:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 17:28 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:28 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:28 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 17:28 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 17:29 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:29 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:57 [!] Drive labzirkonart: The read operation timed out
+- 06/10 17:57 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 17:57 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 17:58 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:58 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:58 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 17:58 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 17:58 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 17:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 17:59 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 17:59 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 17:59 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 17:59 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 18:01 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 18:01 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 18:01 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 18:01 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 18:02 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 18:02 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 18:57 [!] Drive principal: _ssl.c:1063: The handshake operation timed out
+- 06/10 18:57 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 18:57 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 18:58 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 18:58 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 18:58 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 18:58 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 19:00 cozinha.importada: 3 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 06/10 19:00   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 06/10 19:00   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 06/10 19:00   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 06/10 19:00 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:00 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 19:00 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 19:01 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:01 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:01 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 19:01 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 19:02 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:02 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:02 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 19:02 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 19:06 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:06 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 19:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 19:26 semanestesia.pod: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:26 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 19:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 19:26 cozinha.importada: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 19:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 19:27 truque.importado: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:27 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:27 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 19:27 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 19:27 modofuturo: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:27 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:27 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 19:27 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 19:28 atefalhar: 0 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 06/10 19:28 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 19:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 19:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 19:59 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 19:59   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 20:00   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 20:00   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 20:01   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 20:01   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 20:01   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 20:01   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 20:01   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 20:02   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 20:02   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 20:02 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 20:02 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 20:02 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 20:05 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 20:06   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 20:06   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 20:07   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 20:07   · chaves esgotadas — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 06/10 20:08   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 06/10 20:08   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 06/10 20:08   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 06/10 20:08   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 06/10 20:08   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 06/10 20:08   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 06/10 20:08 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 20:08 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 20:08 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 20:16 truque.importado: 237 no radar, 42 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 20:16   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 06/10 20:16   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 06/10 20:17   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 06/10 20:17   · chaves esgotadas — [Eng] 아이즈원 장원영 요정님🧚🏻‍♀️을 요정으로 만들어드리는 제일 쉬운 메이크업✨ l 이사배(RISAB — 
+- 06/10 20:17   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 06/10 20:18   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 06/10 20:18   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 20:18   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 06/10 20:19   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 06/10 20:19   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 06/10 20:19 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 20:19 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 20:19 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 20:19 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 20:19   · chaves esgotadas — The 1-Nanometer Barrier Just Fell — 
+- 06/10 20:19   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 06/10 20:20   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 06/10 20:20   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 06/10 20:20   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 06/10 20:20   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 06/10 20:20   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 06/10 20:20   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 06/10 20:20   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 06/10 20:21   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 06/10 20:21 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 20:21 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 20:21 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 20:32 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 20:33   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 06/10 20:33   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 06/10 20:33   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 06/10 20:33   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 06/10 20:34   · chaves esgotadas — What RUINED Ben 10? — 
+- 06/10 20:34   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 06/10 20:34   · chaves esgotadas — Everything That The Omnitrix Can Do | Ben 10 — 
+- 06/10 20:34   · chaves esgotadas — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 06/10 20:34   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 06/10 20:35   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 06/10 20:35 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 20:57 [!] Drive reserva: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url
+- 06/10 20:57 [!] Drive labzirkonart: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url
+- 06/10 20:58 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 20:58 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 20:58 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 20:58   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 20:58   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 20:59   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 20:59   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 20:59   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 21:00   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 21:00   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 21:00   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 21:00   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 21:01   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 21:01 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:01 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 21:01 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 21:01 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 21:02   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 21:03   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 21:03   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 21:03   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 06/10 21:04   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 06/10 21:04   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 06/10 21:04   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 06/10 21:05   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 06/10 21:05   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — The 15 Minute Cashew Chicken At Home — 
+- 06/10 21:06   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 06/10 21:06 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:06 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 21:06 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 21:06 truque.importado: 237 no radar, 42 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 21:07   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 06/10 21:07   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 06/10 21:07   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 06/10 21:07   · chaves esgotadas — [Eng] 아이즈원 장원영 요정님🧚🏻‍♀️을 요정으로 만들어드리는 제일 쉬운 메이크업✨ l 이사배(RISAB — 
+- 06/10 21:07   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 06/10 21:08   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 06/10 21:08   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 21:08   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 06/10 21:08   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 06/10 21:09   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 06/10 21:09 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:09 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 21:09 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 06/10 21:10 camarim.kpop: 101 no radar, 44 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 21:11   · chaves esgotadas — ‘Chappell Roan - Good Luck, Babe!’ Covered by NMIXX LILY | 릴 — 
+- 06/10 21:16   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Life of a Kpop Idol: explained by a kpop idol… — 
+- 06/10 21:16   · chaves esgotadas — [SKZ VLOG] Felix : Sunshine Vlog 10 in Paris — 
+- 06/10 21:17   · chaves esgotadas — Stray Kids Bang Chan & Felix: Why We Miss Australia — 
+- 06/10 21:17   · chaves esgotadas — [ENG SUB] 리사가 직접 하는 리사 커버 메이크업 [겟잇뷰티2017] — 
+- 06/10 21:17   · chaves esgotadas — (ENG)[MusicBank Interview Cam] 코르티스 & 아일릿  (CORTIS ILLIT Int — 
+- 06/10 21:17   · chaves esgotadas — the FUNNIEST moments of kpop idols #3 — 
+- 06/10 21:18   · chaves esgotadas — just EUNCHAE making kpop idols feel old (mostly 3rd gen idol — 
+- 06/10 21:18   · chaves esgotadas — KPOP Try Not To Laugh Challenge (IMPOSSIBLE) — 
+- 06/10 21:18   · chaves esgotadas — ILLIT and ENGLISH — 
+- 06/10 21:18 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:18 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 21:18 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 21:18 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 21:24   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The 1-Nanometer Barrier Just Fell — 
+- 06/10 21:24   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 06/10 21:24   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 06/10 21:24   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 06/10 21:25   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — "Z2" - Upgraded Homemade Silicon Chips — 
+- 06/10 21:25   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 06/10 21:25   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 06/10 21:25   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 06/10 21:26   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 06/10 21:26   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 06/10 21:26 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:26 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 21:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 21:27 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 21:27   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 06/10 21:28   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 06/10 21:29   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 06/10 21:29   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 06/10 21:29   · chaves esgotadas — What RUINED Ben 10? — 
+- 06/10 21:29   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 06/10 21:29   · chaves esgotadas — Everything That The Omnitrix Can Do | Ben 10 — 
+- 06/10 21:30   · chaves esgotadas — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 06/10 21:30   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 06/10 21:30   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 06/10 21:30 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 21:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 21:57 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 21:57   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 21:57   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 21:57   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 21:57   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 21:58   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 21:58   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 21:58   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 21:58   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 21:58   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 21:58   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 21:58 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 21:58 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 21:58 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 21:59 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:00   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 22:00   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 22:01   · chaves esgotadas — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 22:02   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 06/10 22:02   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 06/10 22:02   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 06/10 22:02   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 06/10 22:02   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 06/10 22:02   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 06/10 22:03   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 06/10 22:03 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:03 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 22:03 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 22:04 truque.importado: 237 no radar, 42 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:04   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 06/10 22:04   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 06/10 22:04   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 06/10 22:05   ✅ 10 — [Eng] 아이즈원 장원영 요정님🧚🏻‍♀️을 요정으로 만들어드리는 제일 쉬운 메이크업✨ l 이사배(RISAB — O vídeo é perfeito para o tema, trazendo a maquiadora Risabae fazendo a maquiagem de fada 
+- 06/10 22:05   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 06/10 22:06   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 06/10 22:06   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 22:06   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 06/10 22:06   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 06/10 22:07   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 06/10 22:07 ⬇️ truque.importado: 1 no JDownloader
+- 06/10 22:07 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 22:07 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 22:07 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:07   · chaves esgotadas — The 1-Nanometer Barrier Just Fell — 
+- 06/10 22:07   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 06/10 22:08   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 06/10 22:08   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 06/10 22:08   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 06/10 22:08   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 06/10 22:08   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 06/10 22:08   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 06/10 22:08   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 06/10 22:09   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 06/10 22:09 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:09 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 22:09 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 22:09 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:09   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 06/10 22:09   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 06/10 22:09   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 06/10 22:09   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 06/10 22:09   · chaves esgotadas — What RUINED Ben 10? — 
+- 06/10 22:10   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 06/10 22:10   · chaves esgotadas — Everything That The Omnitrix Can Do | Ben 10 — 
+- 06/10 22:10   · chaves esgotadas — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 06/10 22:11   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 06/10 22:11   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 06/10 22:11 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:27 ⬆️ truque.importado → reserva/RAW/TRUQUE IMPORTADO: [Eng] 아이즈원 장원영 요정님🧚🏻‍♀️을 요정으로 만들어드리는 제일 쉬운 메이크업✨ l 이사배(RISAB
+- 06/10 22:27 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 22:27 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 22:27 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:28   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 22:28   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 22:28   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 22:28   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 22:28   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 22:28   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 22:28   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 22:29   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 22:29   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 22:29   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 22:29 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:29 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 22:29 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 22:29 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:29   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 22:29   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 22:29   · chaves esgotadas — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 22:29   · chaves esgotadas — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 06/10 22:29   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 06/10 22:30   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 06/10 22:30   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 06/10 22:35   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The 15 Minute Cashew Chicken At Home — 
+- 06/10 22:36   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 06/10 22:36 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:36 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 22:36 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 22:36 truque.importado: 237 no radar, 41 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:36   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 06/10 22:36   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 06/10 22:36   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 06/10 22:36   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 06/10 22:36   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 06/10 22:37   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 22:37   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 06/10 22:37   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 06/10 22:37   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 06/10 22:37   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 06/10 22:37 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:37 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 22:37 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 22:38 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:38   · chaves esgotadas — The 1-Nanometer Barrier Just Fell — 
+- 06/10 22:38   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 06/10 22:38   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 06/10 22:38   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 06/10 22:38   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 06/10 22:38   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 06/10 22:38   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 06/10 22:38   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 06/10 22:39   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 06/10 22:39   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 06/10 22:39 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:39 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 22:39 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 22:40 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:40   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 06/10 22:40   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 06/10 22:40   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 06/10 22:41   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 06/10 22:41   · chaves esgotadas — What RUINED Ben 10? — 
+- 06/10 22:41   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 06/10 22:41   · chaves esgotadas — Everything That The Omnitrix Can Do | Ben 10 — 
+- 06/10 22:42   · chaves esgotadas — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 06/10 22:42   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 06/10 22:42   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 06/10 22:42 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:55 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 22:55 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 22:55 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:56   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 22:56   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 22:56   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 22:58   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 22:58   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 22:58   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 22:58   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 22:59   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 22:59   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 22:59   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 22:59 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 22:59 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 22:59 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 22:59 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 22:59   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 22:59   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 22:59   · chaves esgotadas — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 22:59   · chaves esgotadas — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 06/10 22:59   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 06/10 22:59   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 06/10 23:00   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 06/10 23:00   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 06/10 23:00   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 06/10 23:00   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 06/10 23:00 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:00 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 23:00 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 23:00 truque.importado: 237 no radar, 41 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:00   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 06/10 23:00   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 06/10 23:00   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 06/10 23:00   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 06/10 23:01   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 06/10 23:02   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 23:02   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 06/10 23:02   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 06/10 23:02   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 06/10 23:02   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 06/10 23:02 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:02 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 23:02 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 23:03 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:03   · chaves esgotadas — The 1-Nanometer Barrier Just Fell — 
+- 06/10 23:03   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 06/10 23:03   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 06/10 23:03   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 06/10 23:04   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 06/10 23:04   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 06/10 23:04   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 06/10 23:05   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 06/10 23:05   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 06/10 23:05   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — The Amazing, Humble Silicon Wafer — 
+- 06/10 23:05 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:05 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 23:05 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 23:06 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:07   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 06/10 23:07   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 06/10 23:07   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 06/10 23:07   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 06/10 23:07   · chaves esgotadas — What RUINED Ben 10? — 
+- 06/10 23:07   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 06/10 23:08   · chaves esgotadas — Everything That The Omnitrix Can Do | Ben 10 — 
+- 06/10 23:08   · chaves esgotadas — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 06/10 23:08   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 06/10 23:08   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 06/10 23:08 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 23:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 23:26 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:26   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 23:26   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 23:26   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 23:27   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 23:28   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 23:28   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 23:28   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 23:28   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 23:29   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 23:29   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 23:29 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:29 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 23:29 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 23:29 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:29   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 23:29   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 23:29   · chaves esgotadas — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 23:29   · chaves esgotadas — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 06/10 23:29   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 06/10 23:29   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 06/10 23:30   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 06/10 23:30   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 06/10 23:30   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 06/10 23:30   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 06/10 23:30 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:30 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 23:30 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 06/10 23:31 truque.importado: 237 no radar, 41 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:31   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 06/10 23:31   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 06/10 23:31   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 06/10 23:32   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 06/10 23:32   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 06/10 23:32   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 06/10 23:32   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 06/10 23:32   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 06/10 23:32   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 06/10 23:32   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 06/10 23:32 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:32 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 06/10 23:32 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 06/10 23:32 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:32   · chaves esgotadas — The 1-Nanometer Barrier Just Fell — 
+- 06/10 23:33   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 06/10 23:33   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 06/10 23:33   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 06/10 23:33   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 06/10 23:33   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 06/10 23:33   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 06/10 23:33   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 06/10 23:34   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 06/10 23:34   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 06/10 23:34 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:34 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 23:34 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 06/10 23:34 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:35   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 06/10 23:35   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 06/10 23:40   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The GREATEST Pokemon Series Nobody Watched... — 
+- 06/10 23:40   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 06/10 23:40   · chaves esgotadas — What RUINED Ben 10? — 
+- 06/10 23:40   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 06/10 23:47   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Everything That The Omnitrix Can Do | Ben 10 — 
+- 06/10 23:53   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 06/10 23:53   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 06/10 23:53   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 06/10 23:53 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 06/10 23:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 06/10 23:56 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:57   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 06/10 23:57   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 06/10 23:57   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 06/10 23:57   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 06/10 23:57   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 06/10 23:57   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 06/10 23:58   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 06/10 23:58   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 06/10 23:58   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 06/10 23:58   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 06/10 23:58 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 06/10 23:58 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 06/10 23:58 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 06/10 23:58 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 06/10 23:58   · chaves esgotadas — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 06/10 23:58   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 06/10 23:58   · chaves esgotadas — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 06/10 23:59   · chaves esgotadas — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 07/10 00:00   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 00:00   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 00:00   · chaves esgotadas — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 07/10 00:00   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 00:00   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 00:00   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 00:00 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 00:00 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 00:00 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 00:01 truque.importado: 237 no radar, 41 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 00:01   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 00:01   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 00:02   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 00:02   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 07/10 00:02   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 00:02   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 00:02   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 07/10 00:02   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 00:03   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 00:03   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 00:03 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 00:03 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 00:03 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 00:03 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 00:03   · chaves esgotadas — The 1-Nanometer Barrier Just Fell — 
+- 07/10 00:03   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 07/10 00:03   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 07/10 00:03   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 07/10 00:04   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 00:04   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 00:04   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 00:04   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 00:04   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 00:04   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 07/10 00:04 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 00:04 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 00:04 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 00:04 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 00:04   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 07/10 00:05   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 07/10 00:05   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 07/10 00:05   · chaves esgotadas — 12 Overlooked Details in Dragon Ball Sparking Zero! — 
+- 07/10 00:05   · chaves esgotadas — What RUINED Ben 10? — 
+- 07/10 00:05   · chaves esgotadas — The Shockingly WEIRD Way Codename: Kids Next Door Ended — 
+- 07/10 00:05   · chaves esgotadas — Everything That The Omnitrix Can Do | Ben 10 — 
+- 07/10 00:06   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — Pixel Chix: The 2000's Girlboss Tamagotchi — 
+- 07/10 00:06   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 07/10 00:06   · chaves esgotadas — Nickelodeon's Early Years Were...Interesting. — 
+- 07/10 00:06 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 01:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 01:26 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 07/10 01:27 semanestesia.pod: 248 no radar, 29 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 01:27   · chaves esgotadas — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 07/10 01:27   · chaves esgotadas — How to Stop Wasting your Life │ Full Dopamine Detox Protocol — 
+- 07/10 01:27   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 07/10 01:27   · chaves esgotadas — How I FIXED My Terrible Sleep - 10 Habits — 
+- 07/10 01:28   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 07/10 01:28   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 07/10 01:28   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 07/10 01:28   · chaves esgotadas — How I Learned to Fight My Own Brain | David Goggin — 
+- 07/10 01:28   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 07/10 01:28   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 07/10 01:28 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 01:28 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 01:28 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 01:28 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 01:29   · 6 — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — O vídeo apresenta receitas práticas de meal prep com medidas e macros em tela, permitindo 
+- 07/10 01:29   · chaves esgotadas — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — 
+- 07/10 01:29   · chaves esgotadas — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 07/10 01:31   · chaves esgotadas — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 07/10 01:31   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 01:31   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 01:32   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Sheet Pan Chicken Mediterranean Style - Quick & Easy — 
+- 07/10 01:32   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 01:32   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 01:32   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 01:32 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 01:32 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 01:32 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 01:33 truque.importado: 237 no radar, 41 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 01:34   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 01:34   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 01:34   · 0 — Stray Kids Take a Friendship Test | Glamour — O vídeo apresenta o grupo Stray Kids em um jogo de perguntas e brincadeiras, sem qualquer 
+- 07/10 01:35   · chaves esgotadas — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — 
+- 07/10 01:35   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 01:35   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 01:35   · chaves esgotadas — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — 
+- 07/10 01:35   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 01:35   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 01:36   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 01:36 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 01:36 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 01:36 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 01:36 modofuturo: 225 no radar, 21 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 01:37   ✅ 9 — The 1-Nanometer Barrier Just Fell — Excelente conteúdo sobre fabricação de semicondutores, com ótimos B-rolls de fábricas, Ani
+- 07/10 01:37   · chaves esgotadas — HOW TRANSISTORS RUN CODE? — 
+- 07/10 01:42   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Transistors - The Invention That Changed The World — 
+- 07/10 01:42   · chaves esgotadas — I Ripped Up My Sponsor’s Check - Intel Fab Tour — 
+- 07/10 01:42   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 01:43   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 01:43   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 01:43   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 01:43   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 01:43   · 3 — The Amazing, Humble Silicon Wafer — O vídeo é quase inteiramente composto por imagens estáticas, diagramas e slides com narraç
+- 07/10 01:44 [!] JDownloader nao respondeu em http://127.0.0.1:3128 — confira Deprecated API ligada
+- 07/10 02:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 07/10 02:03   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How I Learned to Fight My Own Brain | David Goggin — 
+- 07/10 02:03   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 07/10 02:04   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 07/10 02:04 ⬇️ semanestesia.pod: 1 no JDownloader
+- 07/10 02:04 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 02:04 [!] disco com 1.8 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 02:29 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: How to Stop Wasting your Life │ Full Dopamine Detox Protocol
+- 07/10 02:29 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 02:29 [!] disco com 1.9 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 02:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 02:56 [!] disco com 1.8 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 03:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 03:26 [!] disco com 1.9 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 03:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 03:56 [!] disco com 1.8 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 04:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 04:26 [!] disco com 1.8 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 04:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 04:56 [!] disco com 1.8 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 05:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 05:26 [!] disco com 2.6 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 05:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 05:56 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 06:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 06:26 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 06:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 06:56 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 07:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 07:26 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 07:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 07:56 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 08:27 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 08:27 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 08:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 08:56 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 09:26 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 09:26 [!] disco com 2.5 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 07/10 09:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 09:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 07/10 09:56 semanestesia.pod: 248 no radar, 28 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 10:01   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 07/10 10:06   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Optimal Morning Routine - Andrew Huberman — 
+
+## 07/10 ~10h — FAXINA DE DISCO E DRIVE (pedido do dono, sessão Claude)
+- Drive (lixeira, dono esvazia): principal 470 clipes (9,4 GB) com cópia na release clipes-09/10; reserva 5 brutos já cortados (0,95 GB).
+- PC trabalho/brutos: 9 já no Drive (mesmo tamanho) apagados; 16 nunca subidos (baixar_em_intervalos não sobe) → labzirkonart/ESTOQUE SEM TRIAGEM (PC 07-10)/2026-10-07 (fora do RAW, vigia não corta), cópia local apagada após conferir bytes.
+- Downloads/abastecer: 2 .mp4 ÓRFÃOS. Risabae = baixado DE NOVO pelo JD (já subido 06/10 22:27) → apagado. 1-Nanometer = aprovado 01:37, JD não respondeu 01:44, baixou depois sem estar em `pendentes` → subir_prontos ignora → subido à mão p/ reserva/RAW/MODO FUTURO.
+- faxina.py: bruto e órfão do JD só saem se no_drive() achar nome+bytes iguais. Tarefa nova ModoFuturo_Faxina (diária 05:00, faxina_agendada.ps1, log estado/faxina.log).
+- Disco C: 4,9 → 11 GB livres. O loop estava SEM baixar desde 07/10 02:04 por disco < 3,5 GB.
+- 07/10 10:11   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How I FIXED My Terrible Sleep - 10 Habits — 
+- 07/10 10:16   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 07/10 10:19   · 6 — What Happens To Your Brain When You Mindlessly Scroll? — O conteudo aborda saude e foco com boa dinamica visual, mas tem formato didatico em vez de
+- 07/10 10:20   · 7 — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — Palestra direta e impactante sobre responsabilidade extrema, perfeitamente alinhada ao nic
+- 07/10 10:25   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How I Learned to Fight My Own Brain | David Goggin — 
+- 07/10 10:30   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 07/10 10:35   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 07/10 10:40   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How Your Phone Affects the Brain & Motivation | Dr. Andrew H — 
+- 07/10 10:40 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 10:40 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 10:40 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 10:40 cozinha.importada: 159 no radar, 59 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 10:45   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How to Meal Prep For Bodybuilding as a Student (Or Broke Adu — 
+- 07/10 10:46   ✅ 9 — Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3 — O vídeo apresenta uma receita prática de marmitas com passo a passo detalhado, ingrediente
+- 07/10 10:51   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Breakfast Burrito that CHANGED My Life | Meal Prep — 
+- 07/10 10:56   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Meal Prep For The Week In Under An Hour | Sweet and Sour Chi — 
+- 07/10 11:01   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 11:02   · 7 — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — O vídeo possui excelente dinamismo visual e instruções claras de receita com medidas na te
+- 07/10 11:05   ✅ 9.5 — Sheet Pan Chicken Mediterranean Style - Quick & Easy — O vídeo é extremamente dinâmico, com excelente qualidade de imagem, focado no passo a pass
+- 07/10 11:10   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 11:15   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The 15 Minute Cashew Chicken At Home — 
+- 07/10 11:21   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 11:21 ⬇️ cozinha.importada: 2 no JDownloader
+- 07/10 11:21 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 11:21 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 11:21 truque.importado: 237 no radar, 41 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 11:29   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 11:34   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 11:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 11:42   ✅ 9.5 — K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S — Tutorial completo da Tiffany Young (Girls' Generation) demonstrando passo a passo suas téc
+- 07/10 11:47   · 0 — Brazilian friend does Korean Idol Makeup on me — O video e apenas um vlog casual entre amigos e nao traz uma idol de K-pop ou maquiador pro
+- 07/10 11:52   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 11:52   · 7 — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — Conteudo ideal com Risabae maquiando Ahyeon do BABYMONSTER, repleto de closes tecnicos e d
+- 07/10 11:57   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 11:57   · 7 — *SUB* What happens when K-pop idols try Latina makeup for th — Apresenta integrantes do APRIL recebendo transformacao com passo a passo e closes, embora 
+- 07/10 12:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 12:02 ⬇️ truque.importado: 1 no JDownloader
+- 07/10 12:02 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 12:02 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 12:03 modofuturo: 225 no radar, 20 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 12:08   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — HOW TRANSISTORS RUN CODE? — 
+- 07/10 12:13   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Transistors - The Invention That Changed The World — 
+- 07/10 12:14   ✅ 10 — I Ripped Up My Sponsor’s Check - Intel Fab Tour — O vídeo oferece acesso exclusivo e altamente dinâmico aos laboratórios secretos de validaç
+- 07/10 12:19   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 12:24   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 12:29   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 12:34   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 12:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The 300mm Silicon Wafer Transition — 
+- 07/10 12:44   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Amazing, Humble Silicon Wafer — 
+- 07/10 12:46   ✅ 9 — I Can Die Now. - Intel Fab Tour! — O vídeo é excelente, com imagens dinâmicas e raras de dentro de uma fábrica de chips real,
+- 07/10 12:46 ⬇️ modofuturo: 2 no JDownloader
+- 07/10 12:46 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 12:46 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 12:46 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 12:51   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — the entire story of Dragon Ball, i guess — 
+- 07/10 13:25 ⬆️ cozinha.importada → principal/RAW/COZINHA: Meal Prep Buffalo Chicken Rice Bowls | Under 500 Calories, 3
+- 07/10 13:26 ⬆️ cozinha.importada → principal/RAW/COZINHA: Sheet Pan Chicken Mediterranean Style - Quick & Easy
+- 07/10 13:27 ⬆️ modofuturo → principal/RAW/MODO FUTURO: I Can Die Now. - Intel Fab Tour!
+- 07/10 13:28 ⬆️ modofuturo → principal/RAW/MODO FUTURO: I Ripped Up My Sponsor’s Check - Intel Fab Tour
+- 07/10 13:29 ⬆️ truque.importado → principal/RAW/TRUQUE IMPORTADO: K-Pop Star Tiffany Young's 18-Step Beauty Routine | Beauty S
+- 07/10 13:29 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 13:29 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 07/10 13:29 semanestesia.pod: 247 no radar, 28 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 13:36   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — 
+- 07/10 13:41   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 07/10 13:46   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How I FIXED My Terrible Sleep - 10 Habits — 
+- 07/10 13:51   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 07/10 13:57   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 07/10 14:03   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 07/10 14:05   · 6 — How I Learned to Fight My Own Brain | David Goggin — Discurso forte e no tema com bons ganchos, mas visual estático com pouca variação de cena.
+- 07/10 14:10   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 07/10 14:15   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 07/10 14:20   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How Your Phone Affects the Brain & Motivation | Dr. Andrew H — 
+- 07/10 14:20 semanestesia.pod: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 14:20 truque.importado: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 14:20 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 14:20 truque.importado: 237 no radar, 40 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 14:26   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 14:26   · 6 — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — O vídeo traz a idol Somi em rotina noturna de skincare e massagem facial, embora foque mai
+- 07/10 14:35   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 14:36   · 2 — Brazilian friend does Korean Idol Makeup on me — O video e apenas um vlog casual entre amigos e nao um tutorial tecnico com maquiador profi
+- 07/10 14:42   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 14:43   ✅ 9.5 — [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak — O vídeo traz a idol Ahyeon do BABYMONSTER com a maquiadora Risabae, repleto de momentos en
+- 07/10 14:48   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 14:53   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 14:59   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 15:04   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 15:04 ⬇️ truque.importado: 1 no JDownloader
+- 07/10 15:04 modofuturo: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 15:04 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 15:04 modofuturo: 225 no radar, 18 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 15:05   · 7 — HOW TRANSISTORS RUN CODE? — O video aborda logica digital e transistores com boas animacoes didaticas e cortes indepen
+- 07/10 15:11   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Transistors - The Invention That Changed The World — 
+- 07/10 15:16   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 15:17   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 15:22   · 5 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O tema aborda engenharia de hardware e FPGAs, mas o visual consiste predominantemente em r
+- 07/10 15:27   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 15:33   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The 300mm Silicon Wafer Transition — 
+- 07/10 15:38   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Amazing, Humble Silicon Wafer — 
+- 07/10 15:39   ✅ 10 — How do Graphics Cards Work?  Exploring GPU Architecture — O vídeo possui animações 3D extremamente dinâmicas e detalhadas sobre a arquitetura intern
+- 07/10 15:40   ✅ 9.5 — The ASML Replacement Nobody Saw Coming — FEL — O vídeo possui visuais extremamente dinâmicos e explicações detalhadas e autossuficientes 
+- 07/10 15:40 ⬇️ modofuturo: 2 no JDownloader
+- 07/10 15:40 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 15:40 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 15:41 atefalhar: 530 no radar, 62 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 15:43   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 07/10 15:50   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 07/10 15:51   · 4.5 — The GREATEST Pokemon Series Nobody Watched... — O vídeo é um ensaio opinativo/review sobre Pokémon Sun & Moon (2016), fugindo do formato d
+- 07/10 15:52   ✅ 9.5 — 12 Overlooked Details in Dragon Ball Sparking Zero! — Vídeo perfeito com múltiplos segmentos dinâmicos de curiosidades e easter eggs de Dragon B
+- 07/10 15:53   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — What RUINED Ben 10? — 
+- 07/10 15:53   ✅ 9.0 — The Shockingly WEIRD Way Codename: Kids Next Door Ended — Aborda com dinamismo os bastidores, segredos do final e a historia do spin-off cancelado d
+- 07/10 15:55   ✅ 9 — Everything That The Omnitrix Can Do | Ben 10 — Excelente compilado de curiosidades e mecânicas do Omnitrix de Ben 10, perfeitamente modul
+- 07/10 15:55   ✅ 9.2 — Pixel Chix: The 2000's Girlboss Tamagotchi — Excelente conteúdo nostálgico dos anos 2000 sobre o brinquedo Pixel Chix e Tamagotchi, rep
+- 07/10 15:56   · 5.8 — 5 Biggest Ben 10 mysteries explained | Fan 10k — O vídeo foca em teorias e furos de roteiro de Ben 10 em híndi, distanciando-se do formato 
+- 07/10 15:57   ✅ 9.5 — Nickelodeon's Early Years Were...Interesting. — Excelente documentário dinâmico e nostálgico sobre os bastidores da criação da logo e iden
+- 07/10 15:57 ⬇️ atefalhar: 5 no JDownloader
+- 07/10 16:27 ⬆️ atefalhar → principal/RAW/GERACAO 2000: 12 Overlooked Details in Dragon Ball Sparking Zero!
+- 07/10 16:28 ⬆️ atefalhar → principal/RAW/GERACAO 2000: Nickelodeon's Early Years Were...Interesting.
+- 07/10 16:29 ⬆️ atefalhar → principal/RAW/GERACAO 2000: Pixel Chix: The 2000's Girlboss Tamagotchi
+- 07/10 16:30 ⬆️ atefalhar → principal/RAW/GERACAO 2000: The Shockingly WEIRD Way Codename: Kids Next Door Ended
+- 07/10 16:34 ⬆️ modofuturo → principal/RAW/MODO FUTURO: How do Graphics Cards Work?  Exploring GPU Architecture
+- 07/10 16:35 ⬆️ modofuturo → principal/RAW/MODO FUTURO: The ASML Replacement Nobody Saw Coming — FEL
+- 07/10 16:35 ⬆️ truque.importado → principal/RAW/TRUQUE IMPORTADO: [ENG] 귀여움 공격으로 녹화 중단하게 만든..🫠 베이비몬스터 아현❤️‍🔥 | 이사배(RISABAE Mak
+- 07/10 16:36 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 07/10 16:36 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 07/10 16:36 semanestesia.pod: 247 no radar, 28 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 16:37   · 6 — I DREAM BIG BUT DO NOTHING. the neuroscience behind why & ho — O vídeo aborda disciplina e neurociência com boa clareza didática, embora em formato de vl
+- 07/10 16:37   · chaves esgotadas — The Optimal Morning Routine - Andrew Huberman — 
+- 07/10 16:38   · 7 — How I FIXED My Terrible Sleep - 10 Habits — Apresenta dicas práticas sobre sono e disciplina com boa dinâmica visual e estrutura modul
+- 07/10 16:39   · chaves esgotadas — The Most Eye Opening 10 Minutes Of Your Life | David Goggins — 
+- 07/10 16:39   · chaves esgotadas — What Happens To Your Brain When You Mindlessly Scroll? — 
+- 07/10 16:39   · chaves esgotadas — Extreme Ownership | Jocko Willink | TEDxUniversityofNevada — 
+- 07/10 16:40   ✅ 9.8 — How I Learned to Fight My Own Brain | David Goggin — Conteúdo impecável de David Goggins com ganchos fortíssimos, narrativas completas e legend
+- 07/10 16:40   · chaves esgotadas — How to Maximize Dopamine & Motivation - Andrew Huberman — 
+- 07/10 16:43   · chaves esgotadas — Rewiring the Anxious Brain: Neuroplasticity and the Anxiety  — 
+- 07/10 16:45   · chaves esgotadas — How Your Phone Affects the Brain & Motivation | Dr. Andrew H — 
+- 07/10 16:45 ⬇️ semanestesia.pod: 1 no JDownloader
+- 07/10 16:45 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 16:45 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 16:46 cozinha.importada: 159 no radar, 54 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 16:46   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 16:46   · chaves esgotadas — This HIGH PROTEIN Breakfast Burrito Will Change Your Morning — 
+- 07/10 16:47   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 16:50   · chaves esgotadas — High Protein Meal prep for the week in under 40 mins — 
+- 07/10 16:50   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 16:50   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 16:50   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 16:51   · chaves esgotadas — Protein Overnight Oats To End All Other Overnight Oats — 
+- 07/10 16:52   · chaves esgotadas — SHEET PAN CHICKEN DINNER | loaded with Greek & Mediterranean — 
+- 07/10 16:54   · chaves esgotadas — EASY TUNA SALAD RECIPE | healthy + quick — 
+- 07/10 16:54 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 16:54 truque.importado: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 16:54 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 16:56 truque.importado: 237 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+
+## 07/10 ~16h30 — CHAVES GEMINI (sessão Claude, OK do dono)
+- "7 chaves com formato inválido" era FALSO alarme: KEY_20..26 tinham `# conta` na mesma linha; python-dotenv já ignora. Comentários movidos p/ linha própria (backup do .env fora do repo).
+- Teste real (gemini-3.6-flash): 14× 429 cota do dia, 11× 503 demanda do modelo, 4× rede, KEY_7 = 403 "project denied" → REMOVIDA do .env (comentada).
+- abastecer_loop.gemini_nota: 503 não queima mais a chave; espera 15/30/45 s e tenta de novo (até 3x). teste_loop_final verde.
+- ⚠️ PENDENTE: cadastrar secret GEMINI_API_KEY_21 e apagar GEMINI_API_KEY_7 na nuvem — API de secrets do GitHub dando HTTP 500 neste repo (resto da API ok, githubstatus verde). Repetir: `python -c "from dotenv import dotenv_values;import sys;sys.stdout.write(dotenv_values('.env')['GEMINI_API_KEY_21'])" | gh secret set GEMINI_API_KEY_21` e `gh secret delete GEMINI_API_KEY_7`.
+- 07/10 16:56   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 16:56   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 16:57   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 16:57   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 16:57   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 16:57   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 17:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 17:03   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 17:03   · chaves esgotadas — [ENG] 로판물 찢고 등장한💖 봄의 여신 지수🧚🏻🌷 | 이사배(RISABAE Makeup) — 
+- 07/10 17:04   · chaves esgotadas — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 17:04 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 17:04 modofuturo: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 17:04 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 17:04 modofuturo: 225 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 17:05   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 07/10 17:05   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 17:05   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 17:05   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 17:05   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 17:05   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 17:06   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 07/10 17:06   · chaves esgotadas — How do Transistors Build into a CPU?  🖥️🤔  How do Transistor — 
+- 07/10 17:06   · chaves esgotadas — This New Technology Could Kill TSMC and ASML — 
+- 07/10 17:06   · chaves esgotadas — Computational lithography: Driving nanometer precision in mi — 
+- 07/10 17:06 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 17:27 ⬆️ atefalhar → principal/RAW/GERACAO 2000: Everything That The Omnitrix Can Do | Ben 10
+- 07/10 17:28 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 17:28 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 17:28 cozinha.importada: 159 no radar, 54 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 17:28   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 17:29   · chaves esgotadas — This HIGH PROTEIN Breakfast Burrito Will Change Your Morning — 
+- 07/10 17:29   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 17:29   · chaves esgotadas — High Protein Meal prep for the week in under 40 mins — 
+- 07/10 17:30   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 17:30   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 17:30   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 17:31   · chaves esgotadas — Protein Overnight Oats To End All Other Overnight Oats — 
+- 07/10 17:31   · chaves esgotadas — SHEET PAN CHICKEN DINNER | loaded with Greek & Mediterranean — 
+- 07/10 17:31   · chaves esgotadas — EASY TUNA SALAD RECIPE | healthy + quick — 
+- 07/10 17:31 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 17:31 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 17:31 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 17:32 truque.importado: 237 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 17:32   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 17:32   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 17:33   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 17:33   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 17:33   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 17:34   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 17:34   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 17:34   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 17:34   · chaves esgotadas — [ENG] 로판물 찢고 등장한💖 봄의 여신 지수🧚🏻🌷 | 이사배(RISABAE Makeup) — 
+- 07/10 17:35   · chaves esgotadas — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 17:35 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 17:35 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 17:35 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 17:35 modofuturo: 225 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 17:35   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 07/10 17:35   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 17:35   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 17:36   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 17:36   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 17:36   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 17:36   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 07/10 17:37   · chaves esgotadas — How do Transistors Build into a CPU?  🖥️🤔  How do Transistor — 
+- 07/10 17:37   · chaves esgotadas — This New Technology Could Kill TSMC and ASML — 
+- 07/10 17:37   · chaves esgotadas — Computational lithography: Driving nanometer precision in mi — 
+- 07/10 17:37 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 17:55 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 17:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 17:56 cozinha.importada: 159 no radar, 54 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 17:56   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 17:56   · chaves esgotadas — This HIGH PROTEIN Breakfast Burrito Will Change Your Morning — 
+- 07/10 17:56   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 17:56   · chaves esgotadas — High Protein Meal prep for the week in under 40 mins — 
+- 07/10 17:59   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 18:04   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The 15 Minute Cashew Chicken At Home — 
+- 07/10 18:04   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 18:09   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Protein Overnight Oats To End All Other Overnight Oats — 
+- 07/10 18:09   · chaves esgotadas — SHEET PAN CHICKEN DINNER | loaded with Greek & Mediterranean — 
+- 07/10 18:10   · chaves esgotadas — EASY TUNA SALAD RECIPE | healthy + quick — 
+- 07/10 18:10 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:10 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 18:10 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 18:10 truque.importado: 237 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:10   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 18:10   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 18:11   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 18:11   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 18:11   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 18:11   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 18:12   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 18:12   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 18:12   · chaves esgotadas — [ENG] 로판물 찢고 등장한💖 봄의 여신 지수🧚🏻🌷 | 이사배(RISABAE Makeup) — 
+- 07/10 18:12   · chaves esgotadas — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 18:12 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:12 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 18:12 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 18:13 modofuturo: 225 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:13   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 07/10 18:13   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 18:13   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 18:14   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 18:14   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 18:14   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 18:14   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 07/10 18:14   · chaves esgotadas — How do Transistors Build into a CPU?  🖥️🤔  How do Transistor — 
+- 07/10 18:15   · chaves esgotadas — This New Technology Could Kill TSMC and ASML — 
+- 07/10 18:15   · chaves esgotadas — Computational lithography: Driving nanometer precision in mi — 
+- 07/10 18:15 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:15 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 18:15 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 18:16 atefalhar: 530 no radar, 57 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:16   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 07/10 18:16   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 07/10 18:17   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 07/10 18:17   · chaves esgotadas — What RUINED Ben 10? — 
+- 07/10 18:17   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 07/10 18:17   · chaves esgotadas — Why Ben 10 Stop Being AWESOME | Ben 10 Explained In Hindi — 
+- 07/10 18:17   · chaves esgotadas — Courage The Cowardly Dog Was A Strange Masterpiece — 
+- 07/10 18:18   · chaves esgotadas — What RUINED the Fairly Oddparents? — 
+- 07/10 18:18   · chaves esgotadas — Fun Facts on Ben 10’s Bizarre Family Tree — 
+- 07/10 18:18   · chaves esgotadas — The Best Era Of Cartoon Network — 
+- 07/10 18:18 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:26 [!] Drive reserva: _ssl.c:1063: The handshake operation timed out
+- 07/10 18:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 18:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 18:27 cozinha.importada: 159 no radar, 54 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:27   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 18:27   · chaves esgotadas — This HIGH PROTEIN Breakfast Burrito Will Change Your Morning — 
+- 07/10 18:28   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 18:28   · chaves esgotadas — High Protein Meal prep for the week in under 40 mins — 
+- 07/10 18:28   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 18:28   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 18:29   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 18:30   · chaves esgotadas — Protein Overnight Oats To End All Other Overnight Oats — 
+- 07/10 18:30   · chaves esgotadas — SHEET PAN CHICKEN DINNER | loaded with Greek & Mediterranean — 
+- 07/10 18:31   · chaves esgotadas — EASY TUNA SALAD RECIPE | healthy + quick — 
+- 07/10 18:31 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:31 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 18:31 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 18:31 truque.importado: 237 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:31   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 18:31   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 18:38   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 18:38   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 18:44   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 18:44   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 18:45   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 18:45   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 18:45   · chaves esgotadas — [ENG] 로판물 찢고 등장한💖 봄의 여신 지수🧚🏻🌷 | 이사배(RISABAE Makeup) — 
+- 07/10 18:45   · chaves esgotadas — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 18:45 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:45 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 18:45 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 07/10 18:45 camarim.kpop: 101 no radar, 43 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:46   · chaves esgotadas — ‘Chappell Roan - Good Luck, Babe!’ Covered by NMIXX LILY | 릴 — 
+- 07/10 18:46   · chaves esgotadas — Life of a Kpop Idol: explained by a kpop idol… — 
+- 07/10 18:46   · chaves esgotadas — [SKZ VLOG] Felix : Sunshine Vlog 10 in Paris — 
+- 07/10 18:46   · chaves esgotadas — Stray Kids Bang Chan & Felix: Why We Miss Australia — 
+- 07/10 18:51   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — [ENG SUB] 리사가 직접 하는 리사 커버 메이크업 [겟잇뷰티2017] — 
+- 07/10 18:57   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — (ENG)[MusicBank Interview Cam] 코르티스 & 아일릿  (CORTIS ILLIT Int — 
+- 07/10 18:57   · chaves esgotadas — the FUNNIEST moments of kpop idols #3 — 
+- 07/10 18:57   · chaves esgotadas — just EUNCHAE making kpop idols feel old (mostly 3rd gen idol — 
+- 07/10 18:58   · chaves esgotadas — KPOP Try Not To Laugh Challenge (IMPOSSIBLE) — 
+- 07/10 18:58   · chaves esgotadas — ILLIT and ENGLISH — 
+- 07/10 18:58 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 18:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 18:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 18:58 modofuturo: 225 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 18:59   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 07/10 18:59   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 18:59   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 18:59   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 18:59   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 19:00   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 19:00   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 07/10 19:00   · chaves esgotadas — How do Transistors Build into a CPU?  🖥️🤔  How do Transistor — 
+- 07/10 19:00   · chaves esgotadas — This New Technology Could Kill TSMC and ASML — 
+- 07/10 19:01   · chaves esgotadas — Computational lithography: Driving nanometer precision in mi — 
+- 07/10 19:01 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 19:01 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 19:01 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 19:01 atefalhar: 530 no radar, 57 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 19:01   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 07/10 19:06   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 07/10 19:06   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 07/10 19:07   · chaves esgotadas — What RUINED Ben 10? — 
+- 07/10 19:07   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 07/10 19:07   · chaves esgotadas — Why Ben 10 Stop Being AWESOME | Ben 10 Explained In Hindi — 
+- 07/10 19:08   · chaves esgotadas — Courage The Cowardly Dog Was A Strange Masterpiece — 
+- 07/10 19:08   · chaves esgotadas — What RUINED the Fairly Oddparents? — 
+- 07/10 19:08   · chaves esgotadas — Fun Facts on Ben 10’s Bizarre Family Tree — 
+- 07/10 19:08   · chaves esgotadas — The Best Era Of Cartoon Network — 
+- 07/10 19:08 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 19:25 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 19:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 19:26 cozinha.importada: 159 no radar, 54 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 19:27   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 19:27   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — This HIGH PROTEIN Breakfast Burrito Will Change Your Morning — 
+- 07/10 19:27   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 19:28   · chaves esgotadas — High Protein Meal prep for the week in under 40 mins — 
+- 07/10 19:28   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 19:28   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 19:29   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 19:29   · chaves esgotadas — Protein Overnight Oats To End All Other Overnight Oats — 
+- 07/10 19:29   · chaves esgotadas — SHEET PAN CHICKEN DINNER | loaded with Greek & Mediterranean — 
+- 07/10 19:29   · chaves esgotadas — EASY TUNA SALAD RECIPE | healthy + quick — 
+- 07/10 19:29 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 19:29 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 19:29 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 19:31 truque.importado: 237 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 19:31   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 19:32   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 19:32   · chaves esgotadas — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 19:32   · chaves esgotadas — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 19:32   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 19:33   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 19:33   · chaves esgotadas — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 19:33   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 19:33   · chaves esgotadas — [ENG] 로판물 찢고 등장한💖 봄의 여신 지수🧚🏻🌷 | 이사배(RISABAE Makeup) — 
+- 07/10 19:34   · chaves esgotadas — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 19:34 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 19:34 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 19:34 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 19:34 modofuturo: 225 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 19:34   · chaves esgotadas — Transistors - The Invention That Changed The World — 
+- 07/10 19:34   · chaves esgotadas — "Z2" - Upgraded Homemade Silicon Chips — 
+- 07/10 19:34   · chaves esgotadas — Processors - What Happens After 1nm Process? Quantum Compute — 
+- 07/10 19:35   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 19:35   · chaves esgotadas — The Transistor: a 1953 documentary, anticipating its coming  — 
+- 07/10 19:35   · chaves esgotadas — The 300mm Silicon Wafer Transition — 
+- 07/10 19:35   · chaves esgotadas — The Amazing, Humble Silicon Wafer — 
+- 07/10 19:35   · chaves esgotadas — How do Transistors Build into a CPU?  🖥️🤔  How do Transistor — 
+- 07/10 19:36   · chaves esgotadas — This New Technology Could Kill TSMC and ASML — 
+- 07/10 19:36   · chaves esgotadas — Computational lithography: Driving nanometer precision in mi — 
+- 07/10 19:36 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 19:36 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 19:36 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 19:36 atefalhar: 530 no radar, 57 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 19:36   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 07/10 19:36   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 07/10 19:37   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 07/10 19:37   · chaves esgotadas — What RUINED Ben 10? — 
+- 07/10 19:37   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 07/10 19:37   · chaves esgotadas — Why Ben 10 Stop Being AWESOME | Ben 10 Explained In Hindi — 
+- 07/10 19:38   · chaves esgotadas — Courage The Cowardly Dog Was A Strange Masterpiece — 
+- 07/10 19:38   · chaves esgotadas — What RUINED the Fairly Oddparents? — 
+- 07/10 19:38   · chaves esgotadas — Fun Facts on Ben 10’s Bizarre Family Tree — 
+- 07/10 19:38   · chaves esgotadas — The Best Era Of Cartoon Network — 
+- 07/10 19:38 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 19:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 19:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 19:56 cozinha.importada: 159 no radar, 54 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 19:56   · chaves esgotadas — 64g Protein Pasta Meal Prep For The Week — 
+- 07/10 19:56   · chaves esgotadas — This HIGH PROTEIN Breakfast Burrito Will Change Your Morning — 
+- 07/10 19:56   · chaves esgotadas — The BEST High Protein Meal Prep Chicken Alfredo You Will Eve — 
+- 07/10 19:57   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — High Protein Meal prep for the week in under 40 mins — 
+- 07/10 19:57   · chaves esgotadas — Healthy Scrambled Eggs with Cottage Cheese | Cheap & Easy — 
+- 07/10 20:00   · chaves esgotadas — The 15 Minute Cashew Chicken At Home — 
+- 07/10 20:01   · chaves esgotadas — The Quiche That Saved My Breakfasts | High Protein Meal Prep — 
+- 07/10 20:01   · chaves esgotadas — Protein Overnight Oats To End All Other Overnight Oats — 
+- 07/10 20:01   · chaves esgotadas — SHEET PAN CHICKEN DINNER | loaded with Greek & Mediterranean — 
+- 07/10 20:01   · chaves esgotadas — EASY TUNA SALAD RECIPE | healthy + quick — 
+- 07/10 20:01 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 20:01 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 20:01 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 20:02 truque.importado: 237 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 20:02   · chaves esgotadas — ENHYPEN Reveal What's On Their Phones | Glamour — 
+- 07/10 20:02   · chaves esgotadas — K-pop Star SOMI’s Nighttime Skincare Routine | 소미의 매일ᄇ — 
+- 07/10 20:03   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Stray Kids Take a Friendship Test | Glamour — 
+- 07/10 20:03   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Brazilian friend does Korean Idol Makeup on me — 
+- 07/10 20:03   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 20:04   · chaves esgotadas — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — 
+- 07/10 20:09   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — *SUB* What happens when K-pop idols try Latina makeup for th — 
+- 07/10 20:09   · chaves esgotadas — (CC) 💄Can a K-pop boy group Transform Latin Twins into K-pop — 
+- 07/10 20:09   · chaves esgotadas — [ENG] 로판물 찢고 등장한💖 봄의 여신 지수🧚🏻🌷 | 이사배(RISABAE Makeup) — 
+- 07/10 20:09   · chaves esgotadas — How : Kpop Natural Makeup ? | Men’s Makeup Tutorial For Begi — 
+- 07/10 20:09 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 20:09 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 20:09 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 20:10 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 07/10 20:15   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Terrifying Truth About TSMC's New Chips — 
+- 07/10 20:15   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 07/10 20:15   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 07/10 20:16   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 07/10 20:16   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 20:16   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 07/10 20:16 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 20:16 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 20:16 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 20:16 atefalhar: 530 no radar, 57 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 20:17   · chaves esgotadas — the entire story of Dragon Ball, i guess — 
+- 07/10 20:17   · chaves esgotadas — If you were born 2000-2007 here’s some nostalgia!  || kids t — 
+- 07/10 20:17   · chaves esgotadas — The GREATEST Pokemon Series Nobody Watched... — 
+- 07/10 20:18   · chaves esgotadas — What RUINED Ben 10? — 
+- 07/10 20:18   · chaves esgotadas — 5 Biggest Ben 10 mysteries explained | Fan 10k — 
+- 07/10 20:18   · chaves esgotadas — Why Ben 10 Stop Being AWESOME | Ben 10 Explained In Hindi — 
+- 07/10 20:18   · chaves esgotadas — Courage The Cowardly Dog Was A Strange Masterpiece — 
+- 07/10 20:19   · chaves esgotadas — What RUINED the Fairly Oddparents? — 
+- 07/10 20:19   · chaves esgotadas — Fun Facts on Ben 10’s Bizarre Family Tree — 
+- 07/10 20:19   · chaves esgotadas — The Best Era Of Cartoon Network — 
+- 07/10 20:19 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 20:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 20:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 20:56 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 20:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 20:56   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 20:56   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 20:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 20:57   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 20:57   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 21:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 21:02   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 07/10 21:02   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 21:02   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 21:02 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:02 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 21:02 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 21:04 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 07/10 21:04   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 21:07   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 07/10 21:07   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 07/10 21:07   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 07/10 21:07 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:07 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 21:07 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 21:08 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 07/10 21:08   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 07/10 21:08   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 07/10 21:08   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 07/10 21:09   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — America’s Semiconductor Boom is Real — 
+- 07/10 21:09   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 21:10   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 07/10 21:10 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:10 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 21:10 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 21:11 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 07/10 21:11   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 07/10 21:11   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 07/10 21:11 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 21:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 21:26 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 21:31   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 21:31   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 21:31   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 21:32   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 21:32   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 21:32   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 21:32   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 21:33   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 07/10 21:33   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 21:33   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 21:33 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:33 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 21:33 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 21:33 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 07/10 21:33   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 21:34   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 07/10 21:34   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 07/10 21:34   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 07/10 21:34 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:34 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 21:34 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 21:34 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 07/10 21:34   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 07/10 21:35   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 07/10 21:35   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 07/10 21:36   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 07/10 21:37   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 21:37   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 07/10 21:37 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:37 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 21:37 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 21:37 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 07/10 21:38   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 07/10 21:38   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 07/10 21:38 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:55 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 21:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 21:55 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 21:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 21:56   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 21:56   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 21:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 21:56   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 21:56   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 21:57   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 21:57   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 07/10 21:57   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 21:57   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 21:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 21:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 21:57 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 07/10 21:58   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 21:58   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 07/10 21:58   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 07/10 21:58   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 07/10 21:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 21:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 21:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 22:08   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 07/10 22:09   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 07/10 22:09 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 22:27 [!] Drive principal: The read operation timed out
+- 07/10 22:27 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 22:27 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 22:27 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 22:28   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 22:28   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 22:29   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 22:29   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 22:29   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 22:29   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 22:29   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 22:30   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 07/10 22:30   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 22:30   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 22:30 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 22:30 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 22:30 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 22:30 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 07/10 22:31   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 22:31   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 07/10 22:31   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 07/10 22:31   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 07/10 22:31 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 22:31 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 22:31 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 22:32 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 07/10 22:32   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 07/10 22:32   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 07/10 22:32   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 07/10 22:32   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 07/10 22:33   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 22:33   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 07/10 22:33 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 22:33 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 22:33 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 22:33 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 07/10 22:33   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 07/10 22:34   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 07/10 22:34 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 22:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 22:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 22:56 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 22:57   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 22:57   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 22:57   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 22:58   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 22:58   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 22:59   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 22:59   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 22:59   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 07/10 23:00   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 23:00   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 23:00 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:00 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 23:00 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 23:00 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 07/10 23:05   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 23:05   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 07/10 23:06   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 07/10 23:06   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 07/10 23:06 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:06 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 23:06 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 23:06 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 07/10 23:06   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 07/10 23:06   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 07/10 23:06   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 07/10 23:07   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 07/10 23:12   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 23:12   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 07/10 23:12 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:12 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 23:12 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 23:12 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 07/10 23:14   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 07/10 23:14   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 07/10 23:14 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:25 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 23:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 23:25 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 23:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 23:26   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 23:26   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 23:26   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 23:26   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 23:31   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 23:31   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 23:32   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 07/10 23:32   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 23:32   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 23:32 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:32 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 23:32 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 07/10 23:33 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 07/10 23:33   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 07/10 23:33   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 07/10 23:33   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 07/10 23:33   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 07/10 23:33 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:33 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 23:33 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 07/10 23:33 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 07/10 23:34   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — The Terrifying Truth About TSMC's New Chips — 
+- 07/10 23:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How Huawei Just Built an Impossible Chip — 
+- 07/10 23:39   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 07/10 23:39   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 07/10 23:40   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 07/10 23:41   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 07/10 23:41 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:41 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 23:41 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 07/10 23:42 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 07/10 23:42   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 07/10 23:43   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 07/10 23:43 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:55 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 07/10 23:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 07/10 23:57 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 07/10 23:57   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 07/10 23:58   · chaves esgotadas — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — 
+- 07/10 23:58   · chaves esgotadas — Easy & Affordable Burrito Bowl Meal Prep — 
+- 07/10 23:58   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 07/10 23:58   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 07/10 23:58   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 07/10 23:59   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 07/10 23:59   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Rice & Beans are elite, especially in times of need — 
+- 07/10 23:59   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 07/10 23:59   · chaves esgotadas — Week of Nourishing Breakfasts — 
+- 07/10 23:59 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 07/10 23:59 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 07/10 23:59 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 00:00 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 00:00   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 00:00   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 00:01   · chaves esgotadas — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — 
+- 08/10 00:01   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 00:01 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 00:01 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 00:01 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 00:01 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 00:01   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 00:01   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 00:01   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 00:02   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 00:02   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 00:02   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 00:02 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 00:02 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 00:02 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 00:03 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 00:04   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 00:04   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 00:04 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 00:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 00:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 00:26 cozinha.importada: 45 no radar, 13 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 00:27   · 6 — The ONLY way to cook lentils with Marco Pierre White | Meet  — O vídeo apresenta excelente qualidade visual e receitas práticas, porém possui introdução 
+- 08/10 00:27   ✅ 9.2 — Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel — O vídeo é excelente para o canal pois mostra o passo a passo detalhado da receita com ingr
+- 08/10 00:28   · 7 — Easy & Affordable Burrito Bowl Meal Prep — O vídeo apresenta excelente dinamismo e estrutura prática de receita passo a passo, facili
+- 08/10 00:29   · 6 — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — O conteudo divide espaco com relato fitness e conversa, embora contenha tres receitas prat
+- 08/10 00:29   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 00:34   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 00:35   · 7 — 5 Breakfasts under 5 Minutes | high protein meals — O vídeo apresenta refeições práticas com medidas e preparo na tela, mas possui excesso de 
+- 08/10 00:36   · 7 — Rice & Beans are elite, especially in times of need — O vídeo apresenta preparo prático e detalhado com bom apelo visual, permitindo cortes inde
+- 08/10 00:37   · 5 — Cooking For The World’s Strongest Man (10,000 Calories) — O conteudo prioriza desafio calorico e entrevista em vez de receitas praticas com passo a 
+- 08/10 00:37   ✅ 9 — Week of Nourishing Breakfasts — O vídeo é excelente para cortes, pois é dividido claramente por dias da semana, apresentan
+- 08/10 00:37 ⬇️ cozinha.importada: 2 no JDownloader
+- 08/10 00:37 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 00:37 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 00:37 truque.importado: 48 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 00:38   · 0 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog da influenciadora Michelle Choi e não conta com a presença de uma idol d
+- 08/10 00:38   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 00:38   ✅ 9 — K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄 — O vídeo traz um passo a passo completo de maquiagem em um salão famoso de idols de K-pop, 
+- 08/10 00:41   · 3 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — Trata-se de um tutorial geral da Pony sem mencao a idols ou grupos de K-pop especificos.
+- 08/10 00:41 ⬇️ truque.importado: 1 no JDownloader
+- 08/10 00:41 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 00:41 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 00:41 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 00:41   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 00:42   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 00:42   · 8 — HOW TRANSISTORS REMEMBER DATA — Excelente animação didática de circuitos e memória RAM com trechos visuais dinâmicos e bem
+- 08/10 00:42   · 5.5 — America’s Semiconductor Boom is Real — O conteúdo é excelente no tema, porém o formato é de ensaio longo composto majoritariament
+- 08/10 00:43   · 5 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O conteudo foca em GPUs e projeto caseiro com FPGA, mas predomina o formato de talking hea
+- 08/10 00:43   · 4 — CPU vs GPU | Simply Explained — O conteudo e' teorico e baseado em slides estaticos com texto, sem imagens reais de engenh
+- 08/10 00:43 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 00:43 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 00:43 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 00:43 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 00:44   · 6 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio de análise narrativa profunda sobre Avatar, o que dificulta cortes ráp
+- 08/10 00:45   · 4 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de gameplay para um jogo de videogame de 2024, fugindo do tema 
+- 08/10 00:45 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 00:55 ⬆️ cozinha.importada → principal/RAW/COZINHA: Cooking REAL FOOD at Affordable Prices | Chef Andrew Gruel
+- 08/10 00:56 ⬆️ cozinha.importada → principal/RAW/COZINHA: Week of Nourishing Breakfasts
+- 08/10 00:57 ⬆️ truque.importado → principal/RAW/TRUQUE IMPORTADO: K-POP IDOL MAKEUP♡aespa,TWICE担当のメイクさん直伝最新アイドルメイク💄
+- 08/10 00:57 truque.importado: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 00:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 00:57 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 00:57   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 00:57   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo é um tutorial de maquiagem da YouTuber Pony e não apresenta nenhuma idol de K-pop 
+- 08/10 01:00   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 01:00 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:00 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 01:00 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 01:00 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 01:01   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 01:01   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 01:02   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 01:02   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise de negócios e geopolítica com formato de vlog e muitos slides 
+- 08/10 01:02   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 01:02   · 4 — CPU vs GPU | Simply Explained — O formato consiste em slides didáticos estáticos sem filmagens dinâmicas de engenharia ou 
+- 08/10 01:02 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:02 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 01:02 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 01:03 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 01:04   · 6 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio de análise narrativa profunda sobre Avatar, o que dificulta cortes ráp
+- 08/10 01:04   · 3 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O conteúdo é um guia de dicas e mecânicas do jogo Dragon Ball Sparking Zero, fugindo do te
+- 08/10 01:04 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:25 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 01:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 01:26 cozinha.importada: 45 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 01:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 01:27   ✅ 9 — Easy & Affordable Burrito Bowl Meal Prep — O vídeo é extremamente dinâmico, focado no passo a passo e ideal para cortes, embora o iní
+- 08/10 01:27   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 01:27   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 01:28   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 01:28   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 01:28   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 01:29   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 01:30   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 01:30   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 01:30 ⬇️ cozinha.importada: 1 no JDownloader
+- 08/10 01:30 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 01:30 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 01:30 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 01:30   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 01:30 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:30 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 01:30 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 01:31 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 01:31   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 01:31   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 01:36   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 01:37   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — America’s Semiconductor Boom is Real — 
+- 08/10 01:37   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 01:39   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 01:39 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:39 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 01:39 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 01:39 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 01:39   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 01:39   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 01:39 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:56 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 01:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 01:56 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 01:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 01:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 01:57   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 01:57   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 01:57   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 01:57   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 01:58   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 01:58   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 01:58   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 01:58   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 01:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 01:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 01:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 01:58   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 01:59   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 01:59   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 01:59 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 01:59 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 01:59 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 01:59 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 01:59   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 02:00   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 02:00   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 02:01   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 02:01   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 02:01   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 02:01 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:01 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 02:01 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 02:02 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 02:02   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 02:03   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 02:03 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:26 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 02:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 02:26 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 02:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 02:26   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 02:26   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 02:26   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 02:26   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 02:27   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 02:27   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 02:27   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 02:27   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 02:27   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 02:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 02:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 02:27 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 02:27   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 02:28   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 02:28   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 02:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 02:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 02:28 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 02:28   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 02:28   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 02:28   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 02:29   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 02:29   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 02:29   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 02:29 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:29 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 02:29 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 02:29 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 02:29   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 02:30   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 02:30 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:56 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 02:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 02:56 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 02:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 02:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 02:56   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 02:56   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 02:57   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 02:57   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 02:57   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 02:57   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 02:57   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 02:57   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 02:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 02:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 02:57 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 02:58   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 02:58   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 02:58   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 02:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 02:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 02:58 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 02:58   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 02:59   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 02:59   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 02:59   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 02:59   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 02:59   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 02:59 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 02:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 02:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 02:59 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 02:59   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 03:00   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 03:00 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:25 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 03:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 03:26 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 03:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 03:26   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 03:26   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 03:26   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 03:26   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 03:27   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 03:27   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 03:27   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 03:27   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 03:27   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 03:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 03:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 03:27 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 03:27   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 03:28   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 03:28   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 03:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 03:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 03:28 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 03:28   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 03:28   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 03:28   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 03:28   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 03:29   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 03:29   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 03:29 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:29 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 03:29 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 03:29 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 03:29   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 03:29   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 03:29 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:55 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 03:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 03:56 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 03:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 03:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 03:56   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 03:56   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 03:56   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 03:57   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 03:57   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 03:57   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 03:57   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 03:58   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 03:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 03:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 03:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 03:58   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 03:58   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 03:58   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 03:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 03:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 03:58 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 03:58   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 03:59   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 03:59   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 03:59   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 03:59   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 03:59   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 03:59 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 03:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 03:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 03:59 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 04:00   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 04:00   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 04:00 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:25 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 04:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 04:25 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 04:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 04:26   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 04:26   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 04:26   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 04:26   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 04:26   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 04:27   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 04:27   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 04:27   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 04:27   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 04:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 04:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 04:27 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 04:27   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 04:27   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 04:27   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 04:27 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:27 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 04:27 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 04:28 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 04:28   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 04:28   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 04:28   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 04:28   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 04:28   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 04:28   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 04:28 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:28 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 04:28 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 04:29 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 04:29   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 04:29   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 04:29 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:55 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 04:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 04:55 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 04:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 04:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 04:56   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 04:56   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 04:56   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 04:56   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 04:57   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 04:57   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 04:57   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 04:57   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 04:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 04:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 04:57 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 04:57   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 04:57   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 04:57   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 04:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:57 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 04:57 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 04:58 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 04:58   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 04:58   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 04:58   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 04:58   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 04:58   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 04:59   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 04:59 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 04:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 04:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 04:59 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 04:59   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 04:59   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 04:59 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:25 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 05:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 05:25 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 05:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 05:26   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 05:26   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 05:26   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 05:26   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 05:26   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 05:27   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 05:27   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 05:27   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 05:27   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 05:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 05:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 05:27 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 05:27   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 05:28   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 05:28   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 05:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 05:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 05:28 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 05:28   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 05:28   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 05:28   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 05:28   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 05:29   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 05:29   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 05:29 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:29 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 05:29 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 05:29 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 05:29   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 05:29   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 05:29 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:55 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 05:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 05:55 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 05:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 05:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 05:56   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 05:57   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 05:57   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 05:57   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 05:57   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 05:57   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 05:57   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 05:58   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 05:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 05:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 05:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 05:58   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 05:58   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 05:58   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 05:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 05:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 05:58 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 05:58   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 05:58   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 05:59   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 05:59   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 05:59   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 05:59   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 05:59 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 05:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 05:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 05:59 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 05:59   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 06:00   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 06:00 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:26 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 06:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 06:26 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 06:26   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 06:26   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 06:26   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 06:26   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 06:27   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 06:27   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 06:27   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 06:27   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 06:27   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 06:27   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 06:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 06:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 06:28 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 06:28   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 06:28   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 06:28   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 06:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 06:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 06:28 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 06:28   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 06:28   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 06:29   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 06:29   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 06:29   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 06:30   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 06:30 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:30 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 06:30 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 06:30 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 06:30   · chaves esgotadas — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 06:30   · chaves esgotadas — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 06:30 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:55 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 06:55 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 06:56 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 06:56   · chaves esgotadas — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 06:56   · chaves esgotadas — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 06:56   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 06:57   · chaves esgotadas — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — 
+- 08/10 06:57   · chaves esgotadas — 5 Breakfasts under 5 Minutes | high protein meals — 
+- 08/10 06:57   · chaves esgotadas — Rice & Beans are elite, especially in times of need — 
+- 08/10 06:57   · chaves esgotadas — Cooking For The World’s Strongest Man (10,000 Calories) — 
+- 08/10 06:57   · chaves esgotadas — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — 
+- 08/10 06:57   · chaves esgotadas — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — 
+- 08/10 06:58   · chaves esgotadas — Cheap and Healthy Dinners in 30 Mins or Less! — 
+- 08/10 06:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 06:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 06:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 06:58   · chaves esgotadas — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — 
+- 08/10 06:58   · chaves esgotadas — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — 
+- 08/10 06:58   · chaves esgotadas — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — 
+- 08/10 06:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 06:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 06:58 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 06:59   · chaves esgotadas — The Terrifying Truth About TSMC's New Chips — 
+- 08/10 06:59   · chaves esgotadas — How Huawei Just Built an Impossible Chip — 
+- 08/10 06:59   · chaves esgotadas — HOW TRANSISTORS REMEMBER DATA — 
+- 08/10 06:59   · chaves esgotadas — America’s Semiconductor Boom is Real — 
+- 08/10 06:59   · chaves esgotadas — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 06:59   · chaves esgotadas — CPU vs GPU | Simply Explained — 
+- 08/10 06:59 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 06:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 06:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 06:59 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 07:03   · 5 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é uma análise narrativa profunda e dramática sobre trauma e culpa em Avatar, dista
+- 08/10 07:05   · 2 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de gameplay de um jogo de videogame recente (Dragon Ball: Spark
+- 08/10 07:05 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 07:25 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 07:25 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 07:25 cozinha.importada: 45 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 07:30   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The ONLY way to cook lentils with Marco Pierre White | Meet  — 
+- 08/10 07:36   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — 
+- 08/10 07:41   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 07:44   · 4.5 — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — O vídeo é focado em fitness e comparação de orçamento, não sendo um canal de receitas pass
+- 08/10 07:46   ✅ 9 — 5 Breakfasts under 5 Minutes | high protein meals — O vídeo é excelente para cortes pois apresenta 5 receitas completas, práticas e com mediçõ
+- 08/10 07:50   · 6 — Rice & Beans are elite, especially in times of need — O vídeo é totalmente focado em culinária prática, apresentando etapas visuais e dinâmicas 
+- 08/10 07:53   · 5 — Cooking For The World’s Strongest Man (10,000 Calories) — O formato é focado em desafio de comilança e conversa, sem receitas práticas detalhadas co
+- 08/10 07:54   · 7 — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — O vídeo apresenta várias receitas econômicas passo a passo com bom dinamismo visual e exce
+- 08/10 07:56   · 7 — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — O vídeo apresenta excelente dinâmica culinária prática com processos visuais envolventes q
+- 08/10 07:58   · 7 — Cheap and Healthy Dinners in 30 Mins or Less! — O conteúdo apresenta receitas dinâmicas com medidas claras na tela e bom potencial para co
+- 08/10 07:58 ⬇️ cozinha.importada: 1 no JDownloader
+- 08/10 07:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 07:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 07:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 08:01   · 5 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo foca em um vlog de transformação geral e dedica apenas uma fração às técnicas de m
+- 08/10 08:03   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo traz um tutorial de maquiagem geek-chic da PONY sem apresentar ou mencionar nenhum
+- 08/10 08:04   · 0 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial de maquiagem da Pony, sem nenhuma menção a idols ou grupos de K-pop.
+- 08/10 08:04 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 08:04 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 08:04 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 08:04 modofuturo: 79 no radar, 6 ineditos e com alcance, 6 vao ao Gemini
+- 08/10 08:05   · 7 — The Terrifying Truth About TSMC's New Chips — Contém excelentes animações 3D e cenas industriais dinâmicas sobre semicondutores, apesar 
+- 08/10 08:06   ✅ 9 — How Huawei Just Built an Impossible Chip — Excelente fonte de cortes com animações 3D didáticas e dinâmicas sobre física de transisto
+- 08/10 08:09   ✅ 9 — HOW TRANSISTORS REMEMBER DATA — O vídeo possui excelentes animações dinâmicas explicando o funcionamento interno de chips 
+- 08/10 08:10   · 4 — America’s Semiconductor Boom is Real — O vídeo foca em análise geopolítica e de mercado com maioria de imagens estáticas e slides
+- 08/10 08:11   · 6 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O vídeo é predominantemente uma análise com o apresentador na câmera e navegação em sites,
+- 08/10 08:14   · 4 — CPU vs GPU | Simply Explained — O formato consiste em infográficos estáticos e slides educativos, sem imagens dinâmicas de
+- 08/10 08:14 ⬇️ modofuturo: 2 no JDownloader
+- 08/10 08:14 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 08:14 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 08:14 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 08:16   · 5 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio de análise crítica e dramática sobre a narrativa de Avatar, fugindo do
+- 08/10 08:17   · 2 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de gameplay de um jogo recente, fugindo do tema de curiosidades
+- 08/10 08:17 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 08:27 ⬆️ cozinha.importada → principal/RAW/COZINHA: 5 Breakfasts under 5 Minutes | high protein meals
+- 08/10 08:28 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: How Huawei Just Built an Impossible Chip
+- 08/10 08:29 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: HOW TRANSISTORS REMEMBER DATA
+- 08/10 08:29 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 08:29 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 08:30 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 08:30   · 4 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não de uma idol de K-pop, além de o gancho inici
+- 08/10 08:31   · 3 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O video e um tutorial de maquiagem geek-chic comum da Pony, sem mencao ou foco em tecnicas
+- 08/10 08:32   · 3 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O conteudo apresenta tutorial de beleza geral sem mencao direta a idol ou grupo de K-pop.
+- 08/10 08:32 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 08:32 modofuturo: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 08:32 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 08:33 modofuturo: 79 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 08:33   ✅ 9.5 — The Terrifying Truth About TSMC's New Chips — Excepcional qualidade de producao, recheado de animacoes 3D dinamicas e explicações tecnic
+- 08/10 08:34   · 4 — America’s Semiconductor Boom is Real — O conteudo aborda semicondutores, mas predomina formato analitico com imagens estaticas e 
+- 08/10 08:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 08:40   · 5 — CPU vs GPU | Simply Explained — O vídeo é uma animação educativa muito estática, parecendo um slide show com transições, s
+- 08/10 08:40 ⬇️ modofuturo: 1 no JDownloader
+- 08/10 08:40 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 08:40 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 08:40 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 08:42   · 4 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio crítico e dramático analisando o trauma e desenvolvimento dos personag
+- 08/10 08:45   · 4 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de gameplay para um jogo de videogame de 2024, fugindo do tema 
+- 08/10 08:45 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 08:56 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: The Terrifying Truth About TSMC's New Chips
+- 08/10 08:56 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 08:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 08:56 cozinha.importada: 45 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 08/10 08:56   · 6.5 — The ONLY way to cook lentils with Marco Pierre White | Meet  — O preparo e' visual e dinamico, porem foca mais em tecnicas conceituais do que em medidas 
+- 08/10 08:59   ✅ 9 — Can You Trust A Skinny Chef (How I Lost 60 Lbs) — O vídeo possui excelentes segmentos de receitas passo a passo (hambúrguer e tacos) com vis
+- 08/10 09:04   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 09:07   · 4.5 — How To Get Jacked For $10/Day (Healthy Meals On A Budget) — O vídeo é focado em fitness e comparação de orçamento, não sendo um canal de receitas pass
+- 08/10 09:11   · 6 — Rice & Beans are elite, especially in times of need — O vídeo traz um passo a passo visual e bem narrado no tema de culinária prática, ideal par
+- 08/10 09:12   · 5 — Cooking For The World’s Strongest Man (10,000 Calories) — O conteudo foca em desafio gastronomico e entrevista, trazendo preparos rapidos sem medida
+- 08/10 09:13   · 7 — Dirt Cheap EASY Healthy Family Dinners | Emergency Grocery B — Vídeo dinâmico com receitas práticas passo a passo, ótimo apelo visual e trechos bem delim
+- 08/10 09:18   · 7 — 3 Michelin Star Mashed Potatoes | Chef Jean-Pierre — Apresenta excelente dinamismo prático e visual na cozinha, facilitando a extração de corte
+- 08/10 09:20   ✅ 9.5 — Cheap and Healthy Dinners in 30 Mins or Less! — O vídeo é excelente para cortes, pois apresenta três receitas completas, dinâmicas, com in
+- 08/10 09:20 ⬇️ cozinha.importada: 2 no JDownloader
+- 08/10 09:20 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 09:20 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 09:20 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 09:21   · 1 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não apresenta uma idol de K-pop real, o que viol
+- 08/10 09:22   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de maquiagem da influenciadora Pony, sem focar em uma técnic
+- 08/10 09:22   · 0 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial de maquiagem comum da Pony e não envolve nem menciona nenhuma idol o
+- 08/10 09:22 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 09:22 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 09:22 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 09:22 modofuturo: 79 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 09:23   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise geopolítica e de negócios com muitos slides estáticos, o que v
+- 08/10 09:25   · 7.0 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O vídeo é excelente no tema de chips e engenharia (GPU customizada com FPGA), mas o format
+- 08/10 09:26   · 4 — CPU vs GPU | Simply Explained — O vídeo é uma apresentação gráfica animada em estilo slides sobre arquitetura de CPU/GPU, 
+- 08/10 09:26 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 09:26 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 09:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 09:28 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 09:28   · 4.8 — The Moment Avatar: The Last Airbender Became A Masterpiece — O video e um ensaio critico e dramático focado em trauma e narrativa de Avatar, fugindo do
+- 08/10 09:28   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 09:28 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 09:56 ⬆️ cozinha.importada → reserva/RAW/COZINHA: Can You Trust A Skinny Chef (How I Lost 60 Lbs)
+- 08/10 09:57 ⬆️ cozinha.importada → reserva/RAW/COZINHA: Cheap and Healthy Dinners in 30 Mins or Less!
+- 08/10 09:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 09:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 09:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 09:59   · 4 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não de uma idol de K-pop, além de o gancho inici
+- 08/10 09:59   · 3 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo foca no conceito geek-chic da Pony e não aborda maquiagem de idols de K-pop especí
+- 08/10 10:00   · 0 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial de maquiagem da influenciadora Pony e não cita nem inclui nenhuma id
+- 08/10 10:00 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 10:00 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 10:00 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 10:00 modofuturo: 79 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 10:04   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise geopolítica e de negócios com muitos slides estáticos, o que v
+- 08/10 10:05   · 5 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — Aborda o desenvolvimento de GPUs em FPGA, mas o formato visual consiste principalmente em 
+- 08/10 10:05   ✅ 9 — CPU vs GPU | Simply Explained — Excelente animação didática em motion graphics comparando a arquitetura interna de CPUs e 
+- 08/10 10:05 ⬇️ modofuturo: 1 no JDownloader
+- 08/10 10:05 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 10:05 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 10:06 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 10:08   · 5 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é uma análise narrativa profunda e dramática sobre trauma e culpa em Avatar, dista
+- 08/10 10:12   · 3 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas e mecânicas do jogo Dragon Ball Sparking Zero, fugindo do tema 
+- 08/10 10:12 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 10:25 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: CPU vs GPU | Simply Explained
+- 08/10 10:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 10:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 10:26 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 10:27   · 8 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O video e' um vlog de transformacao na Coreia que inclui uma sessao completa com a maquiad
+- 08/10 10:28   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de maquiagem da influenciadora Pony, sem focar em uma técnic
+- 08/10 10:29   · 0 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial de maquiagem geral da influenciadora Pony, sem menção ou relação dir
+- 08/10 10:29 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 10:29 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 10:29 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 10:29 modofuturo: 79 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 10:29   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise geopolítica e de negócios com muitos slides estáticos, o que v
+- 08/10 10:32   · 5 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O vídeo é um comentário em formato de gravação de tela e apresentador, sem imagens dinâmic
+- 08/10 10:32 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 10:32 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 10:32 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 10:32 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 10:33   · 4 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio analítico e dramático sobre trauma e narrativa em Avatar, e não um con
+- 08/10 10:36   · 2 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de gameplay e mecânicas do jogo recente Dragon Ball: Sparking! 
+- 08/10 10:36 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 10:57 [!] Drive labzirkonart: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Read timed out. (read timeout
+- 08/10 10:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 10:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 10:58 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 11:01   · 4 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não de uma idol de K-pop, além de o gancho inici
+- 08/10 11:02   · 3 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo ensina maquiagem geek-chic geral da criadora Pony, sem citar ou recriar visual de 
+- 08/10 11:02   · 0 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial de maquiagem da criadora Pony, sem relação direta ou menção a nenhum
+- 08/10 11:02 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:02 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 11:02 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 11:02 modofuturo: 79 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 11:03   · 4 — America’s Semiconductor Boom is Real — O conteudo foca excessivamente em analise de negocios e noticias com imagens estaticas e s
+- 08/10 11:04   · 4 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O vídeo é no formato de comentário/análise com apresentador e gravação de tela, sem imagen
+- 08/10 11:04 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:04 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 11:04 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 11:05 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 11:06   · 6 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio de análise narrativa profunda sobre Avatar, o que dificulta cortes ráp
+- 08/10 11:06   · 1.5 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O conteúdo é um guia prático de mecânicas e gameplay de videogame recente, sem nenhuma rel
+- 08/10 11:06 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 11:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 11:26 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 11:26   · 5 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — Apresenta técnicas da maquiadora de idols com bons closes, mas o conteúdo é disperso em fo
+- 08/10 11:27   · 3 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O tutorial apresenta estilo geek-chic da Pony e não aborda técnicas de maquiagem vinculada
+- 08/10 11:27   · 3 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo apresenta excelente qualidade técnica da maquiadora Pony, mas não faz menção a nen
+- 08/10 11:27 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:27 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 11:27 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 11:27 modofuturo: 79 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 11:28   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise de negócios e geopolítica com formato de vlog e muitos slides 
+- 08/10 11:28   · 5 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O formato foca excessivamente em 'talking head' e navegacao em paginas web, carecendo do d
+- 08/10 11:28 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:28 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 11:28 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 11:29 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 11:29   · 6 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é um ensaio de análise narrativa profunda sobre Avatar, o que dificulta cortes ráp
+- 08/10 11:29   · 3 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de dicas de gameplay e mecânicas do videogame Dragon Ball: Sparking! ZER
+- 08/10 11:29 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 11:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 11:56 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 11:56   · 1 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não apresenta uma idol de K-pop real, o que viol
+- 08/10 11:56   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de maquiagem da influenciadora Pony, sem focar em uma técnic
+- 08/10 11:57   · 3 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O tutorial e' de beleza geral da Pony sem citar idols ou grupos de K-pop.
+- 08/10 11:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:57 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 11:57 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 11:57 modofuturo: 79 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 11:58   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise de negócios e geopolítica com formato de vlog e muitos slides 
+- 08/10 11:58   · 6 — New GPUs are Bad??... "F**k it, I'll Do it Myself." — O vídeo é predominantemente um comentário estilo 'talking head' com navegação em sites e t
+- 08/10 11:58 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 11:58 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 11:58 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 11:58 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 11:58   · 5 — The Moment Avatar: The Last Airbender Became A Masterpiece — O vídeo é uma análise narrativa profunda e dramática sobre trauma e culpa em Avatar, dista
+- 08/10 11:59   · 2 — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — O vídeo é um guia de mecânicas e dicas de gameplay do jogo recente Dragon Ball: Sparking! 
+- 08/10 11:59 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 12:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 12:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 12:28 truque.importado: 48 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 12:30   · 4 — Extreme Glow Up Transformation in Korea (k-pop idol makeup a — O vídeo é um vlog de uma influenciadora e não de uma idol de K-pop, além de o gancho inici
+- 08/10 12:31   · 0 — 👓 청순&시크 2가지 긱시크 메이크업 Geek Chic Make Up — O vídeo apresenta um tutorial de maquiagem da influenciadora Pony, sem focar em uma técnic
+- 08/10 12:31   · 3 — 🐬청량하고 퓨어하게! 가벼운 블루 글리터 메이크업💙Pure & Refreshing Sky Blue Glitt — O vídeo é um tutorial geral da Pony sem referência a técnicas ou nomes específicos de idol
+- 08/10 12:31 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 12:31 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 12:31 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 12:31 modofuturo: 79 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 12:33   · 3 — America’s Semiconductor Boom is Real — O vídeo é focado em análise de negócios e geopolítica com formato de vlog e muitos slides 
+- 08/10 12:34   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — New GPUs are Bad??... "F**k it, I'll Do it Myself." — 
+- 08/10 12:34 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 12:34 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 12:34 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+
+### 08/10/2026 ~12:40 — saúde dos canais (Claude)
+- CAUSA da seca: o JDownloader estava TRAVADO desde 06/10 22:25 (processo vivo com 22 MB, API 3128 muda). Reiniciado às ~12:10. 5 pendentes que nunca entraram no JD foram reenviados (Meal Prepping, Pokemon Facts, Active Recall, Goggins Fight Brain, Burrito Bowl).
+- Primeira faxina (05:00): apagou 104 MB (teste_camada, .part, intermediários). Disco às 12:26: 5,9 GB livres.
+- Triagem dos 17 de labzirkonart/ESTOQUE SEM TRIAGEM (PC 07-10), com o critério do loop:
+  - RAW (5): MODO FUTURO ×3 (Chipmakers Worker Shortage 9.5; PowerColor GPU Factory 9.5; Same Chip $300/$3000 9), COZINHA (Mediterranean Chicken 9.5), SEM ANESTESIA (Goggins Inner Strength 10).
+  - Reserva nota 8 (3), na subpasta `RESERVA NOTA 8 - <canal>` da mesma pasta: Micron Boise, Amazon AI Data Center, 4-Ingredient Bread.
+  - Reprovados (9): ficaram onde estavam. Aguardam o dono decidir se vão para a lixeira.
+- NOVO `ferramentas/vigia_saude.py` + `vigia_saude_agendado.ps1`, tarefa `ModoFuturo_Vigia_Saude` a cada 30 min, log em `estado/vigia_saude.log`. Faz:
+  - reinicia o JD quando ele para de responder e reenvia pendentes perdidos (no máximo 2× cada);
+  - roda a faxina se o disco ficar < 5 GB;
+  - avisa se passar 24 h sem upload;
+  - liga o critério de EMERGÊNCIA (nota ≥ 8) no canal que estiver com estoque 0 há ≥ 12 h (`estado/criterio_emergencia.json`, lido pelo `abastecer_loop.escolher`) e desliga quando o estoque volta ao piso;
+  - manda Telegram só quando a situação muda (ou a cada 6 h se o problema persistir).
+- 08/10 12:35 atefalhar: 160 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 08/10 12:36   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — The Moment Avatar: The Last Airbender Became A Masterpiece — 
+- 08/10 12:36   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — Dragon Ball Sparking Zero: 10 Things The Game DOESN'T TELL Y — 
+- 08/10 12:36 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+
+### 08/10/2026 ~12:50 — sistema de TRAVAS (Claude, pedido do dono)
+- `ferramentas/vigia_saude.py` reescrito como checagem por etapa (tarefa `ModoFuturo_Vigia_Saude`, 30 min). Cada trava é gravada em `estado/travas.json` e vai ao Telegram quando muda. Etapas checadas:
+  - loop: diário parado há > 90 min;
+  - radar: esgotado, ≤ 2 inéditos em 3 passadas;
+  - Gemini: > 70% de falhas em 6 h;
+  - JD: mudo → reinicia sozinho; pendente perdido → reenvia; pendente > 12 h sem subir → alerta;
+  - upload: nada em 24 h; Drive sem espaço;
+  - corte no GitHub: ≥ 3 falhas em 12 h, run preso > 6 h, fila parada;
+  - brutos esquecidos em trabalho/brutos;
+  - disco < 5 GB → faxina;
+  - estoque: 0 há 12 h → emergência;
+  - critério: nada aprovado em 48 h;
+  - tarefas agendadas: código de erro ou desativada.
+- CORRIGIDO no `abastecer_loop.escolher`: reprovado pelo Gemini fica 14 dias fora (`estado/gemini_reprovados.json`). Antes, "America's Semiconductor Boom" foi reavaliado 32 vezes e queimou a cota. Memória semeada com 37 notas tiradas deste diário.
+- Travas abertas às 12:44:
+  - radar esgotado em atefalhar e modofuturo;
+  - "Motivate Myself" é DUPLICADO (o JD já tinha baixado em 30/09 e marcou Finished): fica pendente para sempre;
+  - Ciclo_Semanal 267014 (encerrado por tempo);
+  - trabalho/brutos tem 9 novos de 07/10 13:00–16:00. O ciclo_semanal baixa e NÃO sobe: mesma origem dos 17 de ontem.
+- 08/10 12:56 ⬆️ cozinha.importada → reserva/RAW/COZINHA: Easy & Affordable Burrito Bowl Meal Prep
+- 08/10 12:58 ⬆️ semanestesia.pod → reserva/RAW/SEM ANESTESIA: How I Learned to Fight My Own Brain | David Goggin
+- 08/10 12:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 12:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 12:59 truque.importado: 48 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 12:59 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 12:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 12:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 12:59 atefalhar: 180 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 08/10 12:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 12:59 atefalhar: 168 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 13:00 ⬆️ cozinha.importada → reserva/RAW/COZINHA: Meal Prep For The Week In Under An Hour ｜ Sweet and Sour  (bruto do ciclo antigo, triado 08/10)
+- 08/10 13:00 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 13:00   · chaves esgotadas — "SpongeBob" Cast Takes a SpongeBob Trivia Quiz — 
+- 08/10 13:00 truque.importado: 48 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 13:00 ⬆️ cozinha.importada → reserva/RAW/COZINHA: Meal Prep Buffalo Chicken Rice Bowls ｜ Under 500 Calories (bruto do ciclo antigo, triado 08/10)
+- 08/10 13:01   ✅ 9.5 — SpongeBob's UNCENSORED Sailor Mouth Audio Was LEAKED! — O vídeo aborda perfeitamente os bastidores e curiosidades de Bob Esponja com excelente din
+- 08/10 13:01 ⬇️ atefalhar: 2 no JDownloader
+- 08/10 13:03 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: Why The World Relies On ASML For Machines That Print Chip (bruto do ciclo antigo, triado 08/10)
+- 08/10 13:03 ⬆️ cozinha.importada → reserva/RAW/COZINHA: The Breakfast Burrito that CHANGED My Life ｜ Meal Prep.mp (bruto do ciclo antigo, triado 08/10)
+
+### 08/10/2026 ~13:20 — ciclo_semanal sobe sozinho + radar ampliado pelos dados (Claude, +acervo)
+- Dados (último retrato do `desempenho.jsonl`, 30 dias; o token do Buffer local está inválido, então usei o retrato do GitHub de 08:50). Nota = alcance + 20 × curtida.
+
+  | canal | posts | alcance mediano | eng | campeões |
+  |---|---|---|---|---|
+  | camarim.kpop | 12 | **621** | 6,0% | Stray Kids/ILLIT até 3.776 |
+  | truque.importado | 95 | 213 | **15,1%** | Wonhee 14.778 / 4.892 curtidas; BABYMONSTER; NMIXX |
+  | cozinha.importada | 20 | 310 | 2,4% | |
+  | semanestesia.pod | 54 | 169 | 5,8% | Huberman, Goggins |
+  | modofuturo | 65 | 161 | 3,6% | nanômetro, sede da Nvidia, transistor de 1948, pureza do silício |
+  | atefalhar | 50 | **70** | 7,6% | Bob Esponja, Padrinhos Mágicos |
+
+- Acervo: dobrar a aposta no tema/formato outlier, buscando NOVAS fontes (outros criadores e programas) do mesmo assunto.
+- NOVO `engine/buscas_do_sucesso.py`: transforma os 8 campeões de cada canal em 8 buscas novas do YouTube (Nemotron). As buscas pedem OUTROS criadores, porque as fontes atuais esgotaram (Risabae: tudo "0 novos"). Trava de tema nas buscas; campeões fora do tema não contam (Goggins/academia no atefalhar). Grava `canais/<canal>/buscas_extras.json`. Os 6 radares agora somam `BUSCAS + _buscas_extras()`.
+- `ciclo_semanal.rodar` REESCRITO: campeões → buscas extras → radar CERTO (abastecer_loop.CANAIS; antes usava o radar de academia no atefalhar) → Gemini ANTES de baixar → JD → `subir_prontos` sobe ao RAW sozinho. Não baixa mais para trabalho/brutos.
+- TRAVA ESCONDIDA corrigida: o filtro eng ≥ 2,5% barrava TUDO no atefalhar (155 inéditos, mediana 0,74%) e no modofuturo (36 inéditos, mediana 1,36%). Agora há `min_eng` por canal: atefalhar 1,5, modofuturo 1,2. Candidatos: 0 → 10 em cada. Nova checagem `chk_filtro` no vigia.
+- Brutos do ciclo antigo em trabalho/brutos:
+  - triados e SUBIDOS (5): Sweet&Sour Meal Prep, Buffalo Chicken Bowls, Breakfast Burrito → COZINHA; How Are Microchips Made, ASML → MODO FUTURO;
+  - ficaram: 3 já estão no Drive (a faxina apaga) e 1 de 34 s (não serve como fonte).
+- 08/10 13:17 🔓 freio: camarim.kpop LIBERADO (pedido do dono; commit 9535ef7 no origin). O vigia RAW despacha os 5 brutos dele nas próximas passadas.

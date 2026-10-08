@@ -1,13 +1,27 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-11;13:13;cozinha.importada;agendado;O Ponto Perfeito do Frango Assado Super Suculento;6ac800bf2a80dca54c7dd20f
+2026-10-11;08:10;cozinha.importada;agendado;COMO FAZER OVOS MEXIDOS ULTRA CREMOSOS;6ac800ae62435c1f1fe1b899
+2026-10-10;19:52;cozinha.importada;agendado;Cebola, alho e batata: a base aromática perfeita;6ac800a662435c1f1fe1b80e
+2026-10-10;19:46;semanestesia.pod;agendado;Protocolo;6ac7de19357f26ef519b1483
+2026-10-10;16:33;cozinha.importada;agendado;Como Fazer Chocolate Quente Mexicano Cremoso e Especiado;6ac7dd75d3b0be2fc413b77e
+2026-10-10;16:30;semanestesia.pod;agendado;Protocolo;6ac7ddf5777d0616a6fccdeb
 2026-10-10;16:21;modofuturo;agendado;A LEI DE MOORE QUEBROU: TSMC LUTA POR APENAS 6% DE MELHORIA;6ac7a68d08d405a9e704c84f
+2026-10-10;13:08;semanestesia.pod;agendado;Protocolo;6ac7ddd496e7c60048648441
 2026-10-10;13:03;modofuturo;agendado;O NOVO CHIP CHINÊS KIRIN 2026 ALCANÇA 238 MILHÕES DE TRANSISTORES;6ac76dd22b303c75a3d77542
+2026-10-10;11:41;cozinha.importada;agendado;Lamen de Carne Moída com Legumes em Uma Panela Só;6ac7dd74d3b0be2fc413b749
+2026-10-10;08:21;cozinha.importada;agendado;Hambúrguer Crocante de Frango com Queijo e Molho Ranch;6ac7dd73f4c7c231298039be
+2026-10-10;08:17;semanestesia.pod;agendado;Seu cérebro desiste antes;6ac7dd97f4c7c23129803e60
 2026-10-10;08:15;modofuturo;agendado;POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ;6ac76dc58037a896c55b2308
 2026-10-10;08:08;atefalhar;agendado;O MODO DE AUTODESTRUIÇÃO DO OMNITRIX CAPAZ DE DESTRUIR O UNIVERSO;6ac6ab4ce385dfed923327dd
 2026-10-09;19:52;modofuturo;agendado;O CHIP EM 3D DA HUAWEI QUE DRIBLOU AS SANÇÕES DOS EUA;6ac76d86d9e8f417cbc63bf1
 2026-10-09;19:51;atefalhar;agendado;TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL;6ac6904885762210c9f26fd8
+2026-10-09;19:37;semanestesia.pod;agendado;Protocolo;6ac7dd605b76911adddbb0d9
+2026-10-09;19:12;cozinha.importada;agendado;Batata Recheada com Carne de Taco e Queijo Cremoso;6ac7dd725b76911adddbb82c
+2026-10-09;16:34;semanestesia.pod;agendado;Goggins sem filtro;6ac7dd48357f26ef519af3ea
 2026-10-09;16:31;modofuturo;agendado;Linus Tech Tips na Câmara de Teste Extremo a 45°C Para Placas de Vídeo;6ac76d196a3120c31095383e
 2026-10-09;16:23;truque.importado;agendado;BOCA DEGRADÊ COREANA COM LÁPIS E BALM DE UVA;6ac718cd95b0fb1c5ccae3ca
 2026-10-09;16:22;atefalhar;agendado;O SALTO INSANO DE MOTO DE TIMMY TURNER SEM SENTIR NENHUM MEDO;6ac6901e887a55884cd59603
+2026-10-09;16:12;cozinha.importada;agendado;Hamburguer de Frango Crocante com Queijo;6ac7dd71357f26ef519af92f
 2026-10-09;13:14;atefalhar;agendado;TIMMY TURNER FAZ O DESEJO DE DELETAR TODAS AS SUAS EMOÇÕES;6ac68fda85762210c9f260d0
 2026-10-09;13:12;cozinha.importada;agendado;TORRADA DE FEIJAO MANTEIGA COM COTTAGE E PESTO VERMELHO;6ac7226d365feab0d73ead14
 2026-10-09;13:11;truque.importado;agendado;CONTORNO DE NARIZ EM BASTÃO APLICADO COM PINCEL DE PRECISÃO;6ac718c557f9bd074d27caef
@@ -17,14 +31,15 @@
 2026-10-09;08:13;atefalhar;agendado;O NOVO PADRINHO MÁGICO PODE SER UM VILÃO;6ac68f10a00d29ab6e31b922
 2026-10-09;08:13;cozinha.importada;agendado;TOMATE CEREJA CONFITADO COM ALHO NO AZEITE;6ac7226195b0fb1c5ccc4884
 2026-10-09;08:09;truque.importado;agendado;2 TIPOS DE MÁSCARA DE CÍLIOS E PALITO AQUECIDO NO SALÃO;6ac718c095b0fb1c5ccadf11
+2026-10-08;19:49;truque.importado;agendado;Achado do dia;6ac7ece85b76911addde7750
 2026-10-08;19:46;atefalhar;agendado;VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANITÁRIO;6ac536436cefee8493203f47
 2026-10-08;19:43;modofuturo;agendado;O calor de 1.000°C na criação de transistores 3D;6ac64f66002d92909c82f3be
 2026-10-08;19:37;semanestesia.pod;agendado;Protocolo;6ac68d8668023cb72ec58e18
-2026-10-08;16:32;modofuturo;agendado;Linus Tech Tips: A Máquina que Troca o Processador de uma GPU;6ac64df6d75d415cada59228
-2026-10-08;16:32;truque.importado;agendado;CÍLIOS POSTIÇOS INDIVIDUAIS COLADOS FIO A FIO NO CAMARIM;6ac718b357f9bd074d27c697
-2026-10-08;16:27;cozinha.importada;agendado;MINGAU DE AVEIA CREMOSO COM FRUTAS E SEMENTES;6ac7225757f9bd074d294d8b
-2026-10-08;16:23;semanestesia.pod;agendado;Protocolo;6ac68d4017cec261e6a60fd1
-2026-10-08;16:21;atefalhar;agendado;TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER;6ac53634d2a44aef5fd886e6
+2026-10-08;16:33;modofuturo;postado;Linus Tech Tips: A Máquina que Troca o Processador de uma GPU;6ac64df6d75d415cada59228
+2026-10-08;16:33;truque.importado;postado;CÍLIOS POSTIÇOS INDIVIDUAIS COLADOS FIO A FIO NO CAMARIM;6ac718b357f9bd074d27c697
+2026-10-08;16:28;cozinha.importada;postado;MINGAU DE AVEIA CREMOSO COM FRUTAS E SEMENTES;6ac7225757f9bd074d294d8b
+2026-10-08;16:24;semanestesia.pod;postado;Protocolo;6ac68d4017cec261e6a60fd1
+2026-10-08;16:22;atefalhar;postado;TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER;6ac53634d2a44aef5fd886e6
 2026-10-08;13:19;semanestesia.pod;postado;Protocolo;6ac4679959057dd2e0d0b78c
 2026-10-08;13:11;atefalhar;postado;A REAÇÃO DE TIMMY TURNER AO SER ZOADO NO ÔNIBUS DA ESCOLA;6ac5362a6cefee8493203ce5
 2026-10-08;13:09;modofuturo;postado;Linus Tech Tips e o Alinhamento de Milhares de Esferas de Solda numa GPU;6ac64dee6a5e2d6ed6c228b8

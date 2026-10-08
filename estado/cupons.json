@@ -2,6 +2,33 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
+  "titulo": "15% OFF em produtos da campanha DRAMOFF",
+  "codigo": "DRAMOFF15",
+  "fim": "2026-10-09T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1DRAMOFF15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "15% OFF em produtos da campanha Kaspersky",
+  "codigo": "KASPERSKY15",
+  "fim": "2026-10-31T12:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1PKASPERSKY15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "15% OFF em produtos da campanha Classics",
+  "codigo": "CLASSICS15",
+  "fim": "2026-10-16T13:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1CLASSICS15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
   "titulo": "10% OFF em produtos selecionados da campanha TAB10",
   "codigo": "TAB10",
   "fim": "2026-10-09T12:00:00+00:00",
@@ -1346,17 +1373,8 @@
   "titulo": "R$ 5,43 OFF acima de R$ 81,40",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt41pmpeM1OP518wqnrYXXicHXSBlOD1TiGY97dtfmNMqWuWO9MX3Bm2HWFzTYaMv3V1aeQVgxrB1As0fnB7jG9HcjCRHcvKUgeiB41jsxT2APi0KS5k7OC9PF40byhq4XibjAcMobUCmckJtoaPTbZR8wFGwMVGmBUfcb8g6cNxAqmJj2hgoZnINYNt262hRHwhkCmZx2mC2UxN7OxVTaEVqSOMfFMa3wb3HvBvjzGYJ3N0XBQ6DJqsfM5WwTusHWSOPZSzzzen2eWJO9NxLyKidPXFqorSzt3I3z1Z6l1Rfb1PR24MLZi1QhVOjJxeZvdMgKL754rz7GL2j0nxL9qufmVFQZGJ7ac9oHRZwCzFj7EgwyeMKXOkm5euiCYhgyvnkfQbaTxFdulMH45tMQduKrYLSV5DwH4AddozOs1OaNmYTse99nk7OR9z2c5luobNmI1cRLT4IBs8T",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4PaZxymInGfp1HrFQzhgy08sTyK2NMgzM2pBV0hbDkCIhx5GVGdQH7aS2oVgrixUksML0YZsV9eItAVuMbybJCwu5Py2FqgtjZypb4sYQwC1SX2HM6M7McnIXfcrZvqAHo2SbYJbqZPqGRvpQgSw3hiWcKn19E1aa9O37whJuUuUf7RnDui2UVqfr98m5WpOUCWwAfYGkx5bIEXHxfHivTropen4JDhQ71pRTmPRJwCjZgYY9JxaF92n6B1iIABcBsF6H3jw8unlA6eYzJlkesApKplxm5S9xxEC47rd83oxSj18uq47HVyOLxtL5ySQ8kB6ry3WjwFh9EiMieQdOUCVIUcIJBvEZhbmSurBO4mcv1F5pKKEAp8LXdkDihNEnwQRADmGHuYuRhgJtap5z7CccVoQYb0rSINjFW67KwkKdDIX1OIwpUL0jHBwuy2kavOKMTkRbN0wLnH",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
- },
- {
-  "loja": "AliExpress · Shop1103784103 Store",
-  "tipo": "voucher",
-  "titulo": "R$ 10,53 OFF acima de R$ 10,50",
-  "codigo": "8B2K6SIUCMSX",
-  "fim": "2026-10-27T16:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57tnfdFbWMp90gHrXEuaAD59ixOyg7DLSyErOwAuzZjXV2elP19kvMUOhrfWlctlLsKTAF5feqfuRl65CZTAsu4wV8bsDIkUrLHBTaMD3UEKsI7DRQU76gCv88iRX2MzNhj3Pq05fTTGgMct2mkML5IthamDZEbiTWHJWE5az8bXSAZfj6sdC1tx8DnX77UScyR01sDZd71AWT6Dhz205B7V0I5lO13gZ1SlWZMYDlDvnrXpmT62JjWum4VsjtOCiPDa0PaUW9B34mS3yLzzqjmEdxxVNY9GOW9wlBk40yk9hwHB6Fe9DmuZgrQWZkTqiJ6AhzemmQY5HgzdHjCcBTFIYAT1Zu99NkA82VT6XQV36LjnsR9q87VsdwBmq4GZgNOsrIKDdz5ChMLJfUdPkqBpmVcg2kwSO0kpmrkFrn3bSoXl4e8bCcuygS3ysZqoqJn1DmDGrQ14myd3j5",
-  "termos": "Vale na loja Shop1103784103 Store do AliExpress. Ex.: Sapatos Femininos de Verão, Nova Moda, Sapatos Casuais Respiráveis e C"
  },
  {
   "loja": "AliExpress · maono Official Store",
@@ -1364,7 +1382,16 @@
   "titulo": "R$ 16,30 OFF acima de R$ 271,60",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW3p4FroJvovHwZXNvNgnF6Wt7IhFh8mbA5dE48RmBNS7Z9FrqW8NBmCFcvyxRULSDNrfdqXzA5LB0zH1WkoyFYpSBe0yxgF8Hf2O7EgQGbQBEnudYSzM3mHEweGJJd8NccITL5XrnPTpcivKyq9O95fU5fbmIeC2QgaZ4OYOe0ioraFVtB0o2x8VUE5BQpfek3e0uuC3Io4lNlk1uQI0uN8zEzgzakMCjbRhMGRC1jbis0mJbRqgsyrw9gsaE6r9acEZ4YDmSfZUsFjsWQXb9lxBSQUOCv7H3AodNTiLxd9Ir9kWVCuj1m6vmYmuMBMmM4OorVpUaO27CidpH33zJZHOoJB7ACvhxcmS474jFwziWMzNrdxMt0jAy91qxjXf05AtUvc7vMT9ckxxRkuaGK2gaqnibA3igL5ZLPBtpXDwOP1eXbR1XVbxVwiLcxS5TMHJypOhWOJ9uhfz",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2zseAbuEZf6l1mg3ewQrYzrJS8r5eygAiZeQejzSbopYgHTZJ7W5Y0uMVlxr0e0K5u4dS0huG08F8yPVaS1uQDrpymzz4Rc7G18PcIlOFPvFRlAm4S3ZtgfrPpddZ2JtxcDMVnDJdybdN7fCp0KtStqTA0Wf56UN7JTfGbzvzFWLSW0L8LnRh4kQ5R0VlrnKN23pqQz3gopICoWptQIECsbByFWG7qRdTgCh2VblAwfg2XqDgkZ3CxAKrh1aY6cCqJLr6vyofh5RlrG6Pi6NFAl6yvoNdWcc32Ljq7yPgY0QtUZpgYoUozmi9lr5D9xCz4qmrHwgl6SXktuvgSGE3MrtzNQk9erHfyMEOoIegu1ki5v1rfDsJMsEXMLYRi11K47w9uKUBmEw3ErminDgvfxlHiCKHIWuy3i3DmmOioLwJ2ZMCQolz2n6p67B1uwvBBHhBqQiMj659bl",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · Star Custom Store",
+  "tipo": "voucher",
+  "titulo": "R$ 4,86 OFF acima de R$ 4,80",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-10-27T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkxs2Y071p7tDK05FJ8ASgq04j4B1fcjBc7rqbX4gXcBq3aAzZEE3QFO3TBk9xkmxCR2qVMQIp20C32E9io1VTo0BhYghTe1FfFKTXFPGAlMHDWra7iNjeix2BcchLxhETcJ4UwFSiDQsNcyVpy38XUpoZ86hgjbXDE2KptFr1iZ0yzJpzrp7Pv5MSfeoh8nL5AyB0MbLu3a8RiZCaDSXJtiOgEYEWrKElMqCCrXAXmOwoUPvXQGHKbeYnVrQ5USNJ7pfSnq2EboG338pU3eCZ5Rv3DiDgxQLDUVB6ArYI7a80oCavefeWJy21nKxeRZdCmlcUmbTZpeYq0uOZhdu4IIu2UDMNADdCbZ2CJF6eY9My0CURRVsUshXUEtCtepLqlGYHd8Qh4bUjDEBqjMckCyKhOSE7245c269ZWwVZM8411JLlVsusmsB3Eku8DSaKVwlDI4Cf783mRp",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

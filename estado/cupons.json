@@ -1,6 +1,42 @@
 [
  {
   "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Water Cooler Rise Mode Gamer Black, Rgb, 240mm, Amd/Intel, Preto - Rm-Wcb-02-Rgb",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F130043",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Mouse Gamer Redragon Cobra, Chroma Rgb, 12400 Dpi, 8 Botões, Preto - M711",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F94555",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Gabinete Gamer Rise Mode Galaxy Glass M Mini, M-Atx, Lateral E Frontal Em Vidro Temperado, Sem Fans, Preto - Rm-Ga-Ggmn-Fb",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F485726",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Fonte Gamer Rise Mode Elektra, 650w, Bronze, Full Modular, Pfc Ativo, Preto - Rm-Psu-Elkm-650-B",
+  "codigo": "",
+  "fim": "2026-10-08T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F725571",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "10% OFF em itens selecionados da campanha Corujão",
   "codigo": "KORUJAO",
@@ -1530,39 +1566,21 @@
   "termos": "+5%OFF no PIX ou BOLETO | Frete Grátis para pedidos a partir de R$ 199 para Sul e Sudeste | Parcelamento em até 12x sem juros"
  },
  {
+  "loja": "AliExpress · PhotoVlog Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,40 OFF acima de R$ 5,40",
+  "codigo": "XRYS10",
+  "fim": "2026-10-27T16:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHJbuRznhCtKvXSTQe0Xmec7kClgRJQyMB8DArqoleZVderYWe2snPc0SJmUz5sOB1dmHHXUAKsjH1khcwKvclch3or5eDWwdL6pNTpzBp7KUt0s8cyBL1C8YOFyqFaxA51OENH2r4QCCSShvkdCD4i95eOK3vVLlHF6SyrQ9u92kkzWojfEL0u8vLh3nHjG4shirWstp7rbKxd4TaWkkbuqwMRtneN3fJl34rrbdCSLDH4jmLb0lyzXmgnzoc5ukY76xZuM4QkFnQXH45Itn5Q1qKKmRomFVGijcY07r3Yyibf8Z5VfyGyGDqkU5XQioe9YpjWVjtTDtfqOP8W7WqvmlQtfihskIDkHTnYPJBp6sPnyN31wW2VUe0BVRBa700IGolHyX3o7qpbIKhHqrY0hqWfVyX8LazIviBPs0FQR3tG9UR538hoXEPusDOsb4rsgJT279iJKduBc7YzXsABMew8cWXdvH31nQ8BlHrG08Y9BN0KqhA11QRx2LcAMqtE3lY0BaAtDoaFYVkeQkeySCTteYqm2M0Cg6U59dbK8d4tZTZg3TEjZ5XhGEV21gHJVI70NKiDZa79e56KzUk8K8zMlasFMvfSkFmQHJZVMkAkOMIkjJVXclfBs9gaaS859sIdCwYOjVM6iEeCaCGU7",
+  "termos": "Vale na loja PhotoVlog Store do AliExpress. Ex.: Ulanzi cu01 refrigerador termostático semicondutor para câmera, ventil"
+ },
+ {
   "loja": "AliExpress · Metal Beast Store",
   "tipo": "voucher",
   "titulo": "R$ 5,40 OFF acima de R$ 80,90",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4O1G1Me1HK83Ueco9S7MTBk4r0I7Tebw6WvzlTz81ROkRMMzFgbWphWJ8mEB2G44Io3tyoSyavi6PL2GRACVwcFly10xoRSYnQwJh0fzVVvLf1pELNccw1c62ZszAqZP8QsEfsPGUkkKXeaiPJdba8mO0SRmQNO0qsCMx4KPssyhGzWeqBiLg78j6RXUhpdtHBCSl6JpNR4UgoabJyXTs6y2JsN4eZ4rYTTXQxMVrIOxlNiz0ns1ADw2MEV0y4mCqYR2XMr3Tc9HGhbewxQhrUaHBkM5rbjtkedea38ZMxBnqxQifkQkTfo60R5mwAE492PzQusdMzzMbod1DOYnML2aInXEnJ4s6MpYGQTkP2sOEXRBJjvddy6ifJyWBUkiE5M80uIilYhgHUw3G6qENxGzq6DOFEiP4ietSfoQ95YLxWgZNT5dPyfKQWSlfKoFm3JGPfwDzyY0VLH",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4XF5psQZMa9bX1Ev7aV5fTdJLnhaIZsVGFYieVQ1EP7vPXvIsocvQFjlCYPremcw2ssi07rLyAGCh1AYaRryTUWYuXbjdWvozBx1njWgSeV4vuvWBkRHjgiO7rXZDUcQGkEyWBmIUmsY3RkDgtxNzAd0uQOXkM9vUzfKeVE2tGNnM1uMejYmG53qe9ChX6tLOyCFKVVuvka9WV2RIGULpJtZfUTOqzSXFtEnufxWu57lMc2MJrFxWAF5GPRcm7KKwOjSU8HqSUR5QDkFmQcuuQ4ke9F2cKuNBMxsVNrwDblkCBjMtjZqBIAgKKmUenAj944YYV8CSGWuwll8beKXyGTpue1V2mkILnT8FI23XSSZlE0T6HPZOXNRraQSychXgvy1YI0LTBvEbbjmmDdZAhasXeP2o0GnP25rZoP9QkGTZgCXPAIIx6LjUQY9DZHCPrX5tbWLILZIRuB",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
- },
- {
-  "loja": "AliExpress · maono Official Store",
-  "tipo": "voucher",
-  "titulo": "R$ 16,19 OFF acima de R$ 269,80",
-  "codigo": "GUJE5NMB40A1",
-  "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2ua5BjJFPXgwsL6nuZhw2SytNIeXOFD03WLS1PCKQv3rHGmtJ30XoEGv8W9mE7V5ovQJj8mYUQBldk4Nd1khCZsAL4i8y9n3Siv5NXOkYjpNRDBm81rnsz45GcFRezzxiqWsWkdrtvFu5EtIWX9hqGwNREqBRugnhRlQevUAjnw4HJTUDIpeqKUQq9T4klJv12RCNjH7h0nfB4ZhWOgY6ZTrWLGUA5f3TgnDwm009KNlL4kdlwOtkqlWBlIHWmt0usVudl9hQRiTTsm5cvPwwX2tGAxuR8FqlG1Yc6ZBq802IBFH5DtBKP6yLl37rGGEBg60txkd9WD2e8LO5kOY59561a7pra9mFnrbV4w8XHfbZ5kAE6jGaqLbisBiPx1p1vFW5HQLPhq7ZbYvYlSOBeNaz2fi5L3rwsbuu8okzHlShwLumMSWORDvEyV2iFtlwoiPT4bT6fSGvjH",
-  "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
- },
- {
-  "loja": "AliExpress · Star Custom Store",
-  "tipo": "voucher",
-  "titulo": "R$ 4,83 OFF acima de R$ 4,80",
-  "codigo": "XBW1ZDAFHNEC",
-  "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFlotv97LMBa4XH9S3koFTgVwGwIohSgBQxcK0N48xSodmepaFfQLOTV6kpFBb8zClZpqRy3fq2A3wzqtbdQDUvd86HA2gMuGHE9aXKriEZFsrQ2fu2dScSgoAQdQpBn2EgRHGCjCDQc3RFuKgh60msQ5pYTneCQScU2E0w1eZSKL67lQ3PlFg5dE0Z5mVv6uhXwMFhf4aeZvo4zHmyu4jrQEt4c0DPeCHr3zw7GXpY6r4kKQ7hBXfvHtRQ3nkCSfloMmLCBo4hjwXmtBHP1wyYmypj34Pi9vd22aEymJkeNXRosq7F6rjmCm1vP9IOvsDCZhqMf6SxAq9qoYecl7ak5DrWNBDuGvcJ2d69m3yQuwL6sIdK5gv1qWhzQwxipMpSdJveyGbueLGv4AXUYFiqXCClhs4S8Bn5zfCDm8qvsY8ailBDyANc87r6w3ggob0VdA3GZHfxrsSpvh",
-  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
- },
- {
-  "loja": "AliExpress · Shop1105344618 Store",
-  "tipo": "voucher",
-  "titulo": "R$ 8,05 OFF acima de R$ 8,00",
-  "codigo": "QEUDKUYVO626",
-  "fim": "2026-10-30T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHxwHq3j0FEJxYrgulHLdI7E8JMpZy4A2Mcqg8eRydAVd3f29ian2dMLWrZsdsXOV5C1pycEYqqnIWu5gVJHLaKLLMC9EwXV1783Im9Ip3L707v0ICxTOQMfiYpzn36pSDWqUM7sluO2itfZ45YSr9zzSWIeNsUiMNqYSfvjOgYjchsQc5tDqqm0UtIzCO7MTadC2IzlK1SNUgZ2jcUe1W8xK4qdAxz8svAzXZDRzFl8XuWitb7m0QcDrbhLuFsKvPUYcy0mBn657GgreP0rQUHFB61uJw0GTT4W0tlFlt58dHXJfY7qomBWf5NVzCs0czj4nyGPqjgFp3JmLEDIZaPhLqn4mcCfBWKTyygFAcxwinbzRVSo6JJSuCOyxry2hlTGNrKqKnmOyZgVacMxep9CJGRwxmCpHbnAapCm7yBMY0Uq2x0d8szDARy0gArjLCZiFg6EvJSFoYE0KFQf0IEviwzIqzeWvekWNcZkrMC4FP3QKZkIjb0zLILg9xcTcdo3FkkeiyHJV3TFJyXSumBsq7OgWxbrCRqaIFb5bxcdooc2A26wKrBuIxFX1apeTPgos25D5GECkDix6OpvrDuLZrCCMlE0AruSCvmGUJ67PEdv2Qqw9TpMSTDKcdYnRf6QzLVcH0qXFlnvUbpQEWAX",
-  "termos": "Vale na loja Shop1105344618 Store do AliExpress. Ex.: Pulseira Chocker Rudo Guita Zanka Nijiku para Mulheres e Homens, Acess"
  }
 ]

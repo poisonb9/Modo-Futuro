@@ -107,6 +107,19 @@ def legenda_post(d: dict) -> str:
     """
     queda = round(float(d["queda"]) * 100)
     num = f" #{d['numero']}" if d.get("numero") else ""
+    if not d.get("provada"):
+        # ⛔ 08/10/2026: ACHADO sem queda provada (ML, saude/suplemento/cabelo
+        # com serie curta). No teste saiu "caiu 0%" e "loja oficial Mercado
+        # Livre" -- aqui so' o preco de hoje e a loja; nunca queda, nunca
+        # "oficial" para vendedor do ML.
+        ml = (d.get("loja") or "") == "Mercado Livre"
+        onde = ("No Mercado Livre, vendedor bem avaliado.\n" if ml else
+                f"Direto da loja oficial {d['loja'].removesuffix(' BR')}.\n" if d.get("loja") else "")
+        return (f"Achado do dia{num}: {d['nome']} 🔎\n"
+                f"Hoje por {reais(d['agora'])}.\n" + onde
+                + "💬 Comenta QUERO aqui embaixo que eu te respondo!\n"
+                f"🔗 Link na bio → Achado do dia{num}\n"
+                + ("#achadinhos #mercadolivre #achados" if ml else "#achadinhos #achados #lojaoficial"))
     return (f"Achado do dia{num}: {d['nome']} caiu {queda}% 📉\n"
             f"Hoje {reais(d['agora'])} — o normal dele, nos nossos {d['dias']} dias "
             f"de acompanhamento, é {reais(d['ref'])}.\n"

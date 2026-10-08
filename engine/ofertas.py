@@ -94,9 +94,36 @@ def _nome_curto(nome: str, limite: int = 48) -> str:
     return nome[:limite].rsplit(" ", 1)[0].rstrip(" ,;-–")
 
 
+def _agora_ml(agora: dict) -> dict[str, dict]:
+    """08/10/2026 (dono: "inclui os produtos do mercado livre, de uma atencao
+    especial para eles, as pessoas gostam muito"). O preco vem do precos_agora;
+    nome, foto e link de afiliado (matt_tool) vem do garimpo-ml."""
+    from engine import categorias
+    out = {}
+    arq = RAIZ / "estado" / "produtos_publicados.jsonl"
+    for l in arq.read_text(encoding="utf-8").splitlines():
+        try:
+            x = json.loads(l)
+        except ValueError:
+            continue
+        pid = str(x.get("id", ""))
+        if not pid.startswith("MLB") or x.get("onde") == "video_oferta" or pid not in agora:
+            continue
+        if not x.get("imagem") or "mercadolivre" not in str(x.get("link", "")):
+            continue
+        a = agora[pid]
+        out[pid] = {**a, "imagens": [x["imagem"]], "nome": _nome_curto(x["nome"]),
+                    "link": x["link"], "origem": "ml", "loja": "Mercado Livre",
+                    "vendas": x.get("vendas"), "nota": None,
+                    "reputacao_nivel": (a.get("reputacao") or {}).get("nivel") or 0,
+                    "categoria": categorias.categoria_de("", "", x["nome"])}
+    return out
+
+
 def agora_todos() -> dict[str, dict]:
     """precos_agora (AliExpress/ML) + lojas oficiais da Awin."""
     agora = json.load(open(RAIZ / "estado" / "precos_agora.json", encoding="utf-8"))
+    agora.update(_agora_ml(agora))
     agora.update(_agora_awin())
     return agora
 
@@ -159,6 +186,11 @@ def avaliar(pid: str, agora: dict, serie: list, nome: str) -> tuple[dict | None,
     queda = 1 - agora["preco"] / ref
     if queda < QUEDA_MIN:
         return None, f"queda {queda:.0%}"
+    if agora.get("origem") == "ml":
+        return {"id": pid, "nome": nome, "agora": agora["preco"], "ref": round(ref, 2),
+                "dias": len(antes), "queda": round(queda, 3), "nota": None,
+                "vendas": agora.get("vendas"), "loja": "Mercado Livre",
+                "categoria": agora.get("categoria"), "origem": "ml"}, "ok"
     if agora.get("origem") == "awin":
         # ⭐ 04/10/2026 (dono: "liberar"): loja OFICIAL, sem nota/vendas no
         # feed e sem risco de replica — a regra de marca nao se aplica.
@@ -195,6 +227,40 @@ def _com_video() -> set[str]:
     return ids
 
 
+# 08/10/2026 (dono): saude, suplementos, multivitaminicos e cabelo "vendem
+# muito" e podem ir para QUALQUER achadinho; ML tem "atencao especial".
+DESTAQUE_CATS = {"saude_farmacia", "suplementos", "cabelo"}
+ACHADINHOS = ("fatura.chora", "achadinhos.instantaneos", "achadinhototal")
+DESTAQUE_POR_CANAL = 2      # de 5 vagas/dia, 2 sao de ML ou saude
+REPUTACAO_ML_MIN = 4
+
+
+_GENERICAS = {"de", "da", "do", "com", "para", "e", "em", "sem", "kit", "suplemento", "alimentar",
+              "mineral", "sabor", "gotas", "suspensao", "oral", "ml", "g", "unidades", "capsulas",
+              "masculina", "masculino", "feminina", "feminino", "unissex", "uso", "branco", "preto"}
+
+
+def _palavras(nome: str) -> set[str]:
+    import unicodedata
+    t = "".join(c for c in unicodedata.normalize("NFD", nome.lower()) if unicodedata.category(c) != "Mn")
+    return {w for w in re.findall(r"[a-z0-9]+", t) if len(w) > 2 and w not in _GENERICAS}
+
+
+def parecido(a: str, b: str) -> bool:
+    """08/10/2026: "Folifer Gotas" e "Folifer Suspensao" sao o mesmo produto pro
+    publico. Mesma MARCA/nucleo (>= 60% das palavras significativas do menor)."""
+    pa, pb = _palavras(a), _palavras(b)
+    if not pa or not pb:
+        return False
+    return len(pa & pb) / min(len(pa), len(pb)) >= 0.6 or (len(pa & pb) >= 1 and min(len(pa), len(pb)) == 1)
+
+
+def _destaque(pid: str, a: dict) -> bool:
+    if a.get("origem") == "ml":
+        return (a.get("reputacao_nivel") or 0) >= REPUTACAO_ML_MIN
+    return a.get("categoria") in DESTAQUE_CATS
+
+
 def candidatas(dia: date | None = None) -> list[dict]:
     """TODAS as ofertas que passam nas guardas hoje, na ordem de preferencia.
 
@@ -216,13 +282,21 @@ def candidatas(dia: date | None = None) -> list[dict]:
     ja_nomes = {_chave(nomes.get(i, "")) for i in ja if nomes.get(i)}
     boas = []
     for pid, a in agora.items():
-        if pid in ja or pid not in nomes or not (pid.isdigit() or pid.startswith("awin:")):
+        if pid in ja or pid not in nomes or not (pid.isdigit() or pid.startswith(("awin:", "MLB"))):
             continue
         if _chave(nomes[pid]) in ja_nomes:
             continue
-        o, _ = avaliar(pid, a, serie.get(pid, []), nomes[pid])
+        o, m = avaliar(pid, a, serie.get(pid, []), nomes[pid])
         if o:
             boas.append(o)
+        elif _destaque(pid, a) and (m.startswith("serie curta") or m.startswith("queda")):
+            # 08/10/2026: ML e saude/suplemento/cabelo sem queda PROVADA entram
+            # como ACHADO: o video mostra so' o preco de hoje (provada=False no
+            # video_oferta) -- nunca uma queda inventada.
+            boas.append({"id": pid, "nome": nomes[pid], "agora": a["preco"], "ref": a["preco"],
+                         "dias": 0, "queda": 0.0, "nota": a.get("nota"), "vendas": a.get("vendas"),
+                         "loja": a.get("loja"), "categoria": a.get("categoria"),
+                         "origem": a.get("origem"), "sem_queda": True})
     video = _com_video()
     for o in boas:
         o["tem_video"] = o["id"] in video
@@ -274,7 +348,59 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
     boas = candidatas(dia)          # ja' vem da maior queda para a menor
     origem = _origem()
     saida: dict[str, list[dict]] = {c: [] for c in CANAIS}
-    usados: set[str] = set()
+
+    class _Usados(set):
+        """ids escolhidos hoje + nomes, para barrar PARECIDO em outro canal."""
+        nomes: list[str] = []
+        def add(self, pid):            # noqa: D401
+            super().add(pid)
+            o = por_id.get(pid)
+            if o:
+                self.nomes.append(o["nome"])
+        def __contains__(self, pid):
+            if set.__contains__(self, pid):
+                return True
+            o = por_id.get(pid)
+            return bool(o) and any(parecido(o["nome"], n) for n in self.nomes)
+    por_id = {o["id"]: o for o in boas}
+    usados = _Usados()
+    usados.nomes = []
+    # 0a passada (08/10/2026): DESTAQUE, nunca o mesmo produto em dois canais.
+    # Cada achadinho: 1 vaga de MERCADO LIVRE (no nicho do canal quando houver)
+    # + 1 de SAUDE/SUPLEMENTO/CABELO. Queda provada sempre na frente do achado.
+    # O @achadinho.make pode pegar ML de BELEZA (e so' beleza).
+    from engine import categorias as _cat
+    def _ordem(o):
+        return (not o.get("sem_queda") and o["queda"] > 0, o["queda"], o.get("vendas") or 0)
+    ml = sorted((o for o in boas if o.get("origem") == "ml"), key=_ordem, reverse=True)
+    # dono: "suplementos, multivitaminicos, cabelo" na frente da farmacia generica
+    saude = sorted((o for o in boas if o.get("origem") != "ml"
+                    and o.get("categoria") in DESTAQUE_CATS),
+                   key=lambda o: (o.get("categoria") in ("suplementos", "cabelo")
+                                  or bool(re.search(r"vitamin|suplement|cabelo|capilar|shampoo|whey|creatina|col[aá]geno",
+                                                    o["nome"].lower())),) + _ordem(o), reverse=True)
+
+    def _pegar(lista, canal, so_nicho=False):
+        livres = [o for o in lista if o["id"] not in usados]
+        no_nicho = [o for o in livres if _cat.canal_de(o.get("categoria") or "outros") == canal]
+        if so_nicho:
+            return no_nicho[0] if no_nicho else None
+        fora_make = [o for o in livres if o.get("categoria") != "beleza"]
+        return (no_nicho or fora_make or [None])[0]
+
+    if "truque.importado" in CANAIS:
+        o = _pegar(ml, "truque.importado", so_nicho=True)
+        if o:
+            saida["truque.importado"].append(o)
+            usados.add(o["id"])
+    for _ in range(max(1, DESTAQUE_POR_CANAL // 2)):
+        for canal in ACHADINHOS:
+            for lista in (ml, saude):
+                o = _pegar(lista, canal) or _pegar(saude if lista is ml else ml, canal)
+                if o:
+                    saida[canal].append(o)
+                    usados.add(o["id"])
+    boas = [o for o in boas if not o.get("sem_queda")]   # achado sem queda so' no destaque
     # 1a passada: cada canal pega o melhor DO SEU nicho (os de nicho fechado primeiro)
     for canal in sorted(CANAIS, key=lambda c: NICHO.get(c) is None):
         aceita = NICHO.get(canal)
@@ -287,7 +413,8 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
                 # ⭐ 04/10/2026: produto Awin vai pelo canal da CATEGORIA
                 # (engine/categorias.py), nao pela origem do garimpo.
                 from engine import categorias
-                if categorias.canal_de(o["categoria"]) != canal:
+                livre = o["categoria"] in DESTAQUE_CATS and canal in ACHADINHOS
+                if categorias.canal_de(o["categoria"]) != canal and not livre:
                     continue
                 saida[canal].append(o)
                 usados.add(o["id"])

@@ -364,9 +364,9 @@ def chk_achadinhos(t: Travas) -> None:
         if not m:
             continue
         estado, prox = m.group(1).strip(), int(m.group(2))
-        if estado != "OK" or prox < 4:
+        if estado != "OK" or prox < 5:
             t.alerta("ofertas", f"{canal}: {estado if estado != 'OK' else 'ontem OK'}; "
-                     f"{prox} agendado(s) nas proximas 24 h (meta 4)",
+                     f"{prox} agendado(s) nas proximas 24 h (meta 5)",
                      "ver o ultimo ofertas.yml (agendamento) e o Buffer do canal")
 
 

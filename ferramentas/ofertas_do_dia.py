@@ -173,6 +173,8 @@ def main() -> None:
     agora = ofertas.agora_todos()
     # ⭐ 04/10/2026: produto Awin ja' traz o aw_deep_link (o que paga) no feed
     links.update({pid: a["link"] for pid, a in agora.items() if a.get("origem") == "awin" and a.get("link")})
+    # 08/10/2026: ML com o link de afiliado (matt_tool) do garimpo-ml
+    links.update({pid: a["link"] for pid, a in agora.items() if a.get("origem") == "ml" and a.get("link")})
     total = sum(len(v) for v in escolha.values())
     print(f"{hoje}: {total} oferta(s) passaram em todas as guardas")
     if a.ensaio or not total:
@@ -200,7 +202,8 @@ def main() -> None:
                                          + str(o["id"]).split(":", 1)[1], links[o["id"]])
             arq = a.pasta / f"{hoje}_{canal.replace('.', '-')}_{str(o['id']).replace(':', '-')}.mp4"
             try:
-                d = video_oferta.gerar(o["id"], arq, canal, n)
+                d = video_oferta.gerar(o["id"], arq, canal, n,
+                                       exigir_queda=not o.get("sem_queda"))  # achado: so' o preco de hoje
             except Exception as e:  # noqa: BLE001 — um produto nao derruba o dia
                 print(f"  [!] {o['id']}: {type(e).__name__}: {str(e)[:120]}")
                 continue

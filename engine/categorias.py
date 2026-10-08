@@ -28,6 +28,7 @@ CATEGORIAS = {
     "eletronicos": "Eletrônicos e tecnologia",
     "casa_cozinha": "Casa e cozinha",
     "beleza": "Beleza e maquiagem",
+    "cabelo": "Cabelo",
     "saude_farmacia": "Saúde e farmácia",
     "suplementos": "Suplementos",
     "calcados": "Calçados",
@@ -75,7 +76,12 @@ PALAVRAS = [
     (r"comput|hardware|perif|gamer|games|[aá]udio|fone|headset|conectividade|energia|"
      r"celular|smartphone|phones|consumer electronics|c[aâ]mera|drone|seguran|telefonia|"
      r"monitor|notebook|teclado|mouse|office|escrit", "eletronicos"),
-    (r"maquiagem|skincare|cabelo|beauty|perfum|batom", "beleza"),
+    # 08/10/2026 (dono: "saude como suplementos porque isso vende muito,
+    # multivitaminicos, produtos para cabelo"): vem ANTES de beleza.
+    (r"suplement|vitamin|multivit|whey|creatina|col[aá]geno|[oô]mega ?3|prote[ií]na|"
+     r"magn[eé]sio|termog[eê]nic|pr[eé]-?treino|melatonina|probi[oó]tic", "suplementos"),
+    (r"cabelo|shampoo|xampu|condicionador|capilar|biotina|queda de cabelo|t[oô]nico", "cabelo"),
+    (r"maquiagem|skincare|beauty|perfum|batom", "beleza"),
     (r"bag|bolsa|satchel|shoulder|tote|hobo|transversal|acess[oó]rio|jewelry|rel[oó]gio",
      "bolsas_acessorios"),
     (r"t[eê]nis|sapato|sand[aá]lia|chinelo|bota|cal[cç]ado", "calcados"),

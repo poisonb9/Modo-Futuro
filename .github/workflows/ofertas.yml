@@ -90,5 +90,7 @@ jobs:
           done
           git diff --cached --quiet && exit 0
           git commit -m "ofertas: videos do dia"
-          git pull --rebase
-          git push
+          # ⛔ 08/10/2026: falhava desde 05/10 com "cannot pull with rebase: You have
+          # unstaged changes" (o gerador deixa outros arquivos mexidos) e o registro
+          # de ofertas feitas NAO era salvo -> risco de repetir oferta no dia seguinte.
+          for i in 1 2 3; do git pull --rebase --autostash && git push && break; sleep 5; done

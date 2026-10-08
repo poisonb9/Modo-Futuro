@@ -63,9 +63,16 @@ def _espalhar(h, usados: set) -> "datetime":
     """Desloca o horario do slot em -20..+20 min e segundo aleatorio, sem
     repetir o MINUTO de outro post ja' marcado nesta rodada (qualquer canal)."""
     import random
-    from datetime import timedelta
+    from datetime import datetime, timedelta
+    import agendar_buffer as ab
+    # ⛔ 08/10/2026: o -20 min jogava o 1o horario NO PASSADO quando o cron rodava
+    # atrasado (GitHub: 09:19 -> 15:28) e o Buffer recusava o canal INTEIRO
+    # ("Scheduled time must be in the future"): o @achadinhototal perdeu 06/10.
+    minimo = datetime.utcnow() - timedelta(hours=ab.FUSO_SP_H) + timedelta(minutes=10)
     for _ in range(200):
         q = h + timedelta(minutes=random.randint(-20, 20), seconds=random.randint(1, 58))
+        if q < minimo:
+            q = minimo + timedelta(minutes=random.randint(0, 20), seconds=random.randint(1, 58))
         if not any(abs((q - u).total_seconds()) < 180 for u in usados):
             usados.add(q)
             return q

@@ -327,6 +327,49 @@ def chk_brutos_no_pc(t: Travas) -> None:
                  "baixados e nunca subidos", "triar com o Gemini e subir para RAW/<canal>")
 
 
+def chk_achadinhos(t: Travas) -> None:
+    """Canais de OFERTA (@fatura.chora, @achadinhos.instantaneos, @achadinhototal):
+    nao passam pelo loop de cortes. 08/10/2026: o ofertas.yml falhava desde 05/10
+    no passo de salvar o registro (ofertas repetidas) e um horario no passado
+    derrubou o dia inteiro do @achadinhototal -- ninguem viu."""
+    for wf, nome in (("ofertas.yml", "videos de oferta"), ("garimpo.yml", "garimpo de produtos")):
+        try:
+            r = subprocess.run(["gh", "run", "list", "-R", REPO, "-w", wf, "-L", "3",
+                                "--json", "conclusion,createdAt,databaseId"],
+                               capture_output=True, text=True, timeout=60)
+            runs = [x for x in json.loads(r.stdout or "[]") if x.get("conclusion")]
+        except Exception:
+            continue
+        if not runs:
+            continue
+        idade = (datetime.now(timezone.utc)
+                 - datetime.fromisoformat(runs[0]["createdAt"].replace("Z", "+00:00"))).total_seconds() / 3600
+        if runs[0]["conclusion"] != "success":
+            seguidas = next((i for i, x in enumerate(runs) if x["conclusion"] == "success"), len(runs))
+            t.alerta("ofertas", f"{wf} ({nome}) FALHOU nas ultimas {seguidas} execucao(oes)",
+                     f"gh run view {runs[0]['databaseId']} -R {REPO} --log-failed")
+        elif idade > 30:
+            t.alerta("ofertas", f"{wf} ({nome}) sem rodar ha' {idade:.0f} h", "conferir o cron no GitHub")
+    # postagem: ultima leitura da vigia_postagem do GitHub (le o Buffer com os secrets)
+    try:
+        r = subprocess.run(["gh", "run", "list", "-R", REPO, "-w", "vigia_postagem.yml", "-L", "1",
+                            "--json", "databaseId"], capture_output=True, text=True, timeout=60)
+        rid = json.loads(r.stdout)[0]["databaseId"]
+        log = subprocess.run(["gh", "run", "view", str(rid), "-R", REPO, "--log"], capture_output=True,
+                             text=True, timeout=120, encoding="utf-8", errors="replace").stdout
+    except Exception:
+        return
+    for canal in ("fatura.chora", "achadinhos.instantaneos", "achadinhototal"):
+        m = re.search(re.escape(canal) + r"\s+(.+?)\s+\{.*?'proximas_24h': (\d+)", log)
+        if not m:
+            continue
+        estado, prox = m.group(1).strip(), int(m.group(2))
+        if estado != "OK" or prox < 4:
+            t.alerta("ofertas", f"{canal}: {estado if estado != 'OK' else 'ontem OK'}; "
+                     f"{prox} agendado(s) nas proximas 24 h (meta 4)",
+                     "ver o ultimo ofertas.yml (agendamento) e o Buffer do canal")
+
+
 def chk_disco(t: Travas) -> float:
     livre = shutil.disk_usage("C:\\").free / 2**30
     if livre < DISCO_MIN_GB and not t.so_ler:
@@ -411,6 +454,7 @@ def main() -> int:
         t.alerta("drive", f"nao consegui ler o estoque no Drive ({str(e)[:80]})", "rede/credencial do Drive")
     chk_aprovacao(t, estoque)
     chk_tarefas(t)
+    chk_achadinhos(t)
 
     resumo = (f"{agora:%d/%m %H:%M} disco {livre:.1f} GB | estoque "
               + ", ".join(f"{k.split('.')[0]} {v}" for k, v in estoque.items()))

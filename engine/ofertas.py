@@ -204,9 +204,17 @@ def candidatas(dia: date | None = None) -> list[dict]:
     serie = _serie()
     corte = (dia - timedelta(days=JANELA_DIAS)).isoformat()
     ja = {f["id"] for f in _feitas() if f.get("dia", "") >= corte}
+    # ⛔ 08/10/2026: o MESMO produto volta com outro id (variante de tamanho/cor na
+    # Awin): "Regata Nike Dri-FIT Miler" saiu 2x no mesmo dia no @achadinhototal.
+    # Nome igual ao de uma oferta da janela, ou ja' escolhido hoje, fica de fora.
+    def _chave(n: str) -> str:
+        return re.sub(r"[^a-z0-9]", "", (n or "").lower())[:40]
+    ja_nomes = {_chave(nomes.get(i, "")) for i in ja if nomes.get(i)}
     boas = []
     for pid, a in agora.items():
         if pid in ja or pid not in nomes or not (pid.isdigit() or pid.startswith("awin:")):
+            continue
+        if _chave(nomes[pid]) in ja_nomes:
             continue
         o, _ = avaliar(pid, a, serie.get(pid, []), nomes[pid])
         if o:
@@ -218,7 +226,13 @@ def candidatas(dia: date | None = None) -> list[dict]:
     # provada). Ter video NAO passa ninguem na frente — o trabalho e' conseguir
     # o video pra oferta escolhida, nao escolher a oferta pelo video.
     boas.sort(key=lambda o: o["queda"], reverse=True)
-    return boas
+    unicas, vistos = [], set()
+    for o in boas:              # entre variantes de mesmo nome, fica a de maior queda
+        k = _chave(o["nome"])
+        if k not in vistos:
+            vistos.add(k)
+            unicas.append(o)
+    return unicas
 
 
 # ⭐ 30/09/2026 (pendente 4 do handoff): DIVISAO POR NICHO. O nicho do produto

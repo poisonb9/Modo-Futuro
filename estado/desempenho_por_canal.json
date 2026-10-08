@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-08T08:50:15",
+  "medido_em": "2026-10-08T16:23:36",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 72,
+      "posts": 76,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 589,
+      "reacoes": 599,
       "comentarios": 23,
       "shares": 5,
       "engajamento_pct": 0.0,
-      "posts_recentes": 24,
+      "posts_recentes": 26,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -40,14 +40,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 142,
+      "posts": 143,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 18875,
+      "reacoes": 19021,
       "comentarios": 124,
       "shares": 106,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -60,19 +60,19 @@
         },
         {
           "views": 0,
-          "titulo": "JIWOO do NMIXX choca maquiadora ao falar sobre protetor sola"
+          "titulo": "O PINCEL ESPATULA DE CORRETIVO PARA ILUMINAR O ROSTO\n\nEntend"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 91,
+      "posts": 94,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1054,
+      "reacoes": 1092,
       "comentarios": 9,
       "shares": 21,
       "engajamento_pct": 0.0,
-      "posts_recentes": 33,
+      "posts_recentes": 34,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 41,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,10 +115,10 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 55,
+      "posts": 57,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 325,
+      "reacoes": 329,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,

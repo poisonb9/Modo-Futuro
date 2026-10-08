@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-08T01:49:23",
+  "medido_em": "2026-10-08T08:50:15",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 87,
+      "posts": 91,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 987,
+      "reacoes": 1055,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 37,
+      "posts_recentes": 41,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -106,11 +106,11 @@
         },
         {
           "views": 0,
-          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME 🪄 O SEGR"
+          "titulo": "PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROME"
         },
         {
           "views": 0,
-          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME\n\n🪄 O SEG"
+          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME 🪄 O SEGR"
         }
       ]
     },

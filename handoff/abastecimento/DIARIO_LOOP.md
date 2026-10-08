@@ -2920,3 +2920,57 @@
   - triados e SUBIDOS (5): Sweet&Sour Meal Prep, Buffalo Chicken Bowls, Breakfast Burrito → COZINHA; How Are Microchips Made, ASML → MODO FUTURO;
   - ficaram: 3 já estão no Drive (a faxina apaga) e 1 de 34 s (não serve como fonte).
 - 08/10 13:17 🔓 freio: camarim.kpop LIBERADO (pedido do dono; commit 9535ef7 no origin). O vigia RAW despacha os 5 brutos dele nas próximas passadas.
+- 08/10 13:25 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: SpongeBob's UNCENSORED Sailor Mouth Audio Was LEAKED!
+- 08/10 13:26 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: The Voices Of SpongeBob And Patrick Take The Co-Star Test
+- 08/10 13:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 13:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 13:27 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 13:27 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+
+### 08/10/2026 ~13:45 — canais de oferta (achadinhos) (Claude)
+- Causas do @achadinhototal com 2/4:
+  1. `ofertas.yml` falhava desde 05/10 no `git pull --rebase` (unstaged), então o registro `ofertas_feitas.jsonl` não era salvo e repetia ofertas (#12 Regata Nike e #13 Kindle saíram em 06 e 07/10);
+  2. em 06/10 um horário caiu no passado (cron atrasou de 09:19 para 15:28; `_espalhar` desloca −20 min) e o Buffer recusou o canal inteiro;
+  3. com o cron atrasado, só cabem 2 posts no mesmo dia.
+- Correções (commits 6f72994, d7b607c):
+  - `--autostash` com 3 tentativas no ofertas.yml;
+  - horário mínimo = agora + 10 min;
+  - dedupe por nome de produto;
+  - 20 ofertas de 06–07/10 reconstruídas dos logs;
+  - `vigia_saude.chk_achadinhos`.
+- Catálogo: 73 ofertas válidas hoje (61 sem variantes repetidas) para 12 vagas. As lojas novas Drogal (615), Oceane (521) e Guess (304) têm 4–6 dias de série (o mínimo é 7) e entram até ~11/10, todas no @achadinhototal. Os 68 produtos do Mercado Livre (MLB) nunca viram oferta (`candidatas` só aceita id do Ali ou da Awin).
+- O ciclo_semanal das 13:00 deu exit 1 porque rodou enquanto os arquivos estavam sendo editados (13:01–13:05). Rodando de novo, funciona.
+- 08/10 13:56 semanestesia.pod: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 08/10 13:56 **semanestesia.pod** — rodando radar `canais/semanestesia.pod/radar.py`
+- 08/10 13:56 semanestesia.pod: 117 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 13:56   · chaves esgotadas — how to actually quit any addiction in 9 minutes (explained b — 
+- 08/10 13:56   · chaves esgotadas — MIT PhD taught me to unlock my brain’s “Sage Mode” - Deep Wo — 
+- 08/10 13:57   · 7 — HOW TO BECOME ADDICTED TO DOING HARD THINGS (with neuroscien — O vídeo aborda ciência cognitiva e produtividade de forma excelente, mas o tom é mais suav
+- 08/10 14:00   · 5 — Neuroscience Confirms: This Biblical Habit Rewires Your Brai — O formato de monólogo com foco religioso difere do estilo podcast dinâmico e direto exigid
+- 08/10 14:02   · 4 — 21 Days to change YOUR LIFE | Challenge - Dopamine Detox BOO — Trata-se de uma animação didática em hindi, distanciando-se do formato de podcast ou entre
+- 08/10 14:02   · 5 — Neuroscience based Tricks to leave phone addiction | Dr Raks — O formato de aula com quadro digital em hindi destoa do padrao de podcast/entrevista com i
+- 08/10 14:04   · 6 — The science behind the 10-minute brain reset walk | Wendy Su — Conteúdo científico relevante sobre saúde cerebral, porém o formato estático de estúdio e 
+- 08/10 14:11   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — How Feedback Affects Performance - Andrew Huberman - Growth  — 
+- 08/10 14:13   ✅ 9.5 — How To Build Unbreakable Discipline in 2026 (5 Steps) — O vídeo é excelente, com estrutura clara em tópicos perfeitos para cortes, ganchos fortes 
+- 08/10 14:14   · 8 — How To Be Disciplined Like A Military Leader | Discipline Is — O tema é perfeito e o roteiro é muito forte, mas o uso excessivo de vídeos de banco de ima
+- 08/10 14:14 ⬇️ semanestesia.pod: 1 no JDownloader
+- 08/10 14:14 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 14:14 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 14:14 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 14:14 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 14:14 atefalhar: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 14:14 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 14:15 atefalhar: 165 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 08/10 14:16   · 1 — Animal Facts YOU Didn’t Know! — O vídeo apresenta curiosidades gerais sobre animais e não tem nenhuma relação com desenhos
+
+### 08/10/2026 ~14:40 — ofertas: 5/dia, Oceane no make, ML e saúde em destaque (Claude, pedido do dono)
+- 52c737a:
+  - 5 posts/dia nos canais de oferta, grade SLOTS_SP_5 (08–20 h, ≥ 3 h, regra dura); os cortes seguem com 4/dia;
+  - beleza (Oceane, Camilovers) → @achadinho.make, 1 oferta/dia como 5º post, só beleza.
+- 883ab56:
+  - Mercado Livre entra: vendedor com reputação ≥ 4, link matt_tool do garimpo-ml;
+  - por achadinho/dia: 1 ML + 1 saúde/suplemento/cabelo (suplemento, multivitamínico e cabelo antes da farmácia genérica);
+  - sem queda provada = ACHADO (vídeo "ACHADO DO DIA", legenda só com o preço de hoje);
+  - trava de produto parecido entre canais.
+- O ofertas.yml foi disparado à mão às 13:52 UTC (run 37787776133) com o código do 52c737a, antes do ML. A partir de 09/10 (09:19) roda com ML e saúde.
+- 08/10 14:18   · 1 — Completely Wrong History "Facts" That You May Still Believe — O vídeo é sobre mitos históricos gerais e não sobre curiosidades de desenhos animados ou c

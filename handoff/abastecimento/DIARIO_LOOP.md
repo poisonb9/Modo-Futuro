@@ -2974,3 +2974,1833 @@
   - trava de produto parecido entre canais.
 - O ofertas.yml foi disparado à mão às 13:52 UTC (run 37787776133) com o código do 52c737a, antes do ML. A partir de 09/10 (09:19) roda com ML e saúde.
 - 08/10 14:18   · 1 — Completely Wrong History "Facts" That You May Still Believe — O vídeo é sobre mitos históricos gerais e não sobre curiosidades de desenhos animados ou c
+- 08/10 14:36   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 14:39   · 2 — Testing FACTS You Wish You NEVER Knew.. — O vídeo é uma compilação de curiosidades gerais e virais no estilo Zack D Films em Roblox,
+- 08/10 14:42   · 7 — 25 Dragon Ball Facts That Will Keep You Up At Night — O vídeo traz curiosidades de Dragon Ball, mas o tom de 'fatos que vão te deixar sem dormir
+- 08/10 14:44   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 14:44   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 14:49   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 14:52   ✅ 9.5 — Avatar: The Last Airbender | Bringing The World To Life | Ne — O vídeo é excelente para o canal, trazendo bastidores dinâmicos e curiosidades de produção
+- 08/10 14:52 ⬇️ atefalhar: 1 no JDownloader
+- 08/10 15:26 ⬆️ atefalhar → labzirkonart/RAW/GERACAO 2000: Avatar: The Last Airbender | Bringing The World To Life | Ne
+- 08/10 15:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 15:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 15:28 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 15:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 15:28 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 15:28 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 15:29 camarim.kpop: 48 no radar, 16 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 15:29   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 15:31   ✅ 9.2 — [kNOw맘대로(The kNOw Way)] Ep.00 — O vídeo traz um idol do Stray Kids em momentos extremamente divertidos e fofos com seus ga
+- 08/10 15:32   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 15:32   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 15:32   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 15:33   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 15:33   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 15:34   · 500 — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 15:34   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 15:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 15:39 ⬇️ camarim.kpop: 1 no JDownloader
+- 08/10 15:39 atefalhar: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 15:39 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 15:42 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 15:42   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 15:43   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 15:43   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 15:43   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 15:43 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 15:56 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: [kNOw맘대로(The kNOw Way)] Ep.00
+- 08/10 15:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 15:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 15:57 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 15:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 15:57 camarim.kpop: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 15:57 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 15:58 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 16:03   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 16:04   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 16:04   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 16:09   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 16:09   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 16:09   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 16:10   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 16:10   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 16:10   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 16:10 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:10 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 16:10 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 16:12 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 16:12   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 16:12   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 16:12   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 16:12   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 16:13   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 16:13   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 16:14   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 16:14   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 16:14 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:14 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 16:14 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 16:16 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 16:16   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 16:16   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 16:16   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 16:16   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 16:16 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 16:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 16:26 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 16:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:26 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 16:26 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 16:26 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 16:26   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 16:26   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 16:27   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 16:27   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 16:27   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 16:27   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 16:28   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 16:28   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 16:28   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 16:28   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 16:28 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 16:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 16:28 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 16:29   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 16:29   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 16:29   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 16:29   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 16:29   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 16:30   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 16:30   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 16:30   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 16:30 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:30 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 16:30 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 16:31 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 16:31   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 16:31   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 16:31   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 16:32   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 16:32 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 16:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 16:57 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 16:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 16:57 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 16:57 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 16:58 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 16:58   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 16:58   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 16:58   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 16:59   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 16:59   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 16:59   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 16:59   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 16:59   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 17:00   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 17:00   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 17:00 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:00 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 17:00 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 17:01 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 17:01   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 17:01   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 17:01   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 17:02   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 17:02   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 17:03   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 17:03   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 17:03   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 17:03 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:03 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 17:03 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 17:04 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 17:04   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 17:07   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 17:08   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 17:08   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 17:08 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 17:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 17:26 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 17:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:26 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 17:26 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 17:27 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 17:27   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 17:27   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 17:33   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 17:33   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 17:33   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 17:33   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 17:33   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 17:35   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 17:35   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 17:40   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 17:40 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:40 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 17:40 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 17:41 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 17:41   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 17:41   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 17:41   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 17:41   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 17:42   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 17:42   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 17:42   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 17:42   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 17:42 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:42 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 17:42 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 17:43 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 17:43   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 17:43   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 17:44   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 17:44   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 17:44 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:57 [!] Drive principal: The read operation timed out
+- 08/10 17:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 17:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 17:58 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 17:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 17:58 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 17:58 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 17:58 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 17:59   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 17:59   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 17:59   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 18:00   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 18:00   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 18:01   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 18:01   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 18:01   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 18:01   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 18:10   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 18:10 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:10 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 18:10 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 18:11 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 18:16   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 18:16   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 18:16   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 18:16   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 18:16   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 18:17   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 18:17   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 18:17   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 18:17 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:17 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 18:17 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 18:17 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 18:18   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 18:18   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 18:18   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 18:18   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 18:18 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:26 cozinha.importada: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 18:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 18:26 cozinha.importada: 74 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 18:27   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 18:27   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 18:27   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 18:27   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 18:29   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 18:29   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 18:29   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 18:30   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 18:30   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 18:31   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 08/10 18:31 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:31 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 18:31 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 18:32 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 18:32 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:32 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 18:32 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 18:32 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 18:33   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 18:33   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 18:33   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 18:33   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 18:33   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 18:34   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 18:34   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 18:34   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 18:34   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 18:34   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 18:34 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:34 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 18:34 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 18:36 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 18:38   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 18:39   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 18:39   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 18:40   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 18:40   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 18:40   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 18:40   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 18:41   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 18:41 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:41 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 18:41 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 18:42 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 18:42   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 18:42   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 18:43   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 18:48   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 18:48 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 18:56 cozinha.importada: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 18:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 18:56 cozinha.importada: 74 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 19:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 19:02   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 19:07   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 19:07   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 19:07   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 19:07   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 19:08   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 19:15   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 19:15   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 19:15   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 08/10 19:15 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 19:15 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 19:15 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 19:16 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 19:16 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 19:16 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 19:16 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 19:16 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 19:17   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 19:17   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 19:17   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 19:17   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 19:17   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 19:22   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 19:22   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 19:22   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 19:22   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 19:29   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 19:29 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 19:29 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 19:29 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 19:29 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 19:34   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 19:35   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 19:35   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 19:35   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 19:35   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 19:36   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 19:36   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 19:36   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 19:36 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 19:36 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 19:36 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 19:36 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 19:36   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 19:37   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 19:37   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 19:37   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 19:37 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 19:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 19:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 19:56 cozinha.importada: 74 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 19:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 19:56   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 19:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 19:57   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 19:57   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 19:57   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 19:57   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 20:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 20:03   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 20:03   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 08/10 20:03 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:03 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:03 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 20:03 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 20:03 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:03 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:03 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 20:03 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 20:03   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 20:04   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 20:04   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 20:04   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 20:04   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 20:04   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 20:04   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 20:05   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 20:05   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 20:08   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 20:08 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:08 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:08 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 20:08 modofuturo: 86 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 20:08   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 20:09   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 20:09   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 20:09   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 20:09   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 20:14   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 20:15   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 20:15   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 20:15 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:15 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 20:15 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 20:16 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 20:16   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 20:16   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 20:16   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 20:17   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 20:17 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 20:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 20:26 cozinha.importada: 74 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 20:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 20:26   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 20:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 20:26   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 20:27   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 20:27   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 20:27   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 20:27   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 20:27   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 20:28   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 08/10 20:28 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:28 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:28 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 20:28 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 20:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:28 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:28 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 20:28 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 20:28   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 20:28   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 20:28   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 20:29   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 20:29   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 20:29   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 20:30   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 20:30   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 20:31   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 20:31   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 20:31 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:31 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:31 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 20:31 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 20:31   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 20:32   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 20:32   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 20:32   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 20:32   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 20:33   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 20:33   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 20:33   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 20:33 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:33 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 20:33 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 20:34 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 20:34   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 20:34   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 20:34   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 20:34   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 20:34 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 20:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 20:56 cozinha.importada: 75 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 20:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 20:57   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 20:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 20:57   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 20:58   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 20:58   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 20:58   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 20:58   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 08/10 20:59   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 20:59   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 20:59 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:59 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:59 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 20:59 truque.importado: 51 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 20:59 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 20:59 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 20:59 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 20:59 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 20:59   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 21:00   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 21:00   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 21:00   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 21:01   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 21:01   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 21:01   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 21:01   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 21:01   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 21:02   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 21:02 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:02 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 21:02 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 21:02 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 21:02   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 21:02   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 21:02   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 21:03   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 21:03   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 21:03   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 21:03   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 21:03   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 21:03 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:03 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 21:03 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 21:03 atefalhar: 165 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 21:04   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 21:04   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 21:04   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 21:04   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 21:04 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 21:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 21:26 cozinha.importada: 75 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 21:31   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 21:31   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 21:31   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 21:32   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 21:32   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 21:32   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 21:32   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 21:32   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 08/10 21:32   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 21:33   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 21:33 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:33 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 21:33 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 21:33 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 21:33 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:33 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 21:33 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 21:34 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 21:34   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 21:34   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 21:34   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 21:34   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 21:36   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 21:37   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 21:42   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 21:42   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 21:42   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 21:43   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 21:43 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:43 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 21:43 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 21:44 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 21:44   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 21:44   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 21:44   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 21:47   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 21:47   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 21:47   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 21:47   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 21:47   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 21:47 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:47 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 21:47 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 21:49 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 21:49   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 21:50   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 21:50   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 21:50   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 21:50 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 21:56 [!] Drive labzirkonart: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly c
+- 08/10 21:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 21:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 21:56 cozinha.importada: 75 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 21:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 21:57   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 21:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 21:57   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 21:57   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 22:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 22:03   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 22:03   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 08/10 22:03   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 22:03   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 22:03 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:03 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 22:03 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 22:04 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 22:04 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:04 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 22:04 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 22:04 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 22:04   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 22:05   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 22:05   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 22:05   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 22:05   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 22:06   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 22:06   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 22:06   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 22:06   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 22:07   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 22:07 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:07 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 22:07 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 22:07 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 22:08   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 22:08   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 22:08   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 22:09   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 22:09   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 22:09   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 22:09   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 22:09   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 22:09 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:09 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 22:09 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 22:10 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 22:15   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 22:15   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 22:15   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 22:16   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 22:16 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 22:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 22:26 cozinha.importada: 75 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 22:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 22:26   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 22:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 22:27   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 22:27   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 22:27   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 22:27   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 22:27   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 08/10 22:27   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 22:28   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 22:28 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:28 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 22:28 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 22:28 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 22:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:28 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 22:28 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 22:28 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 22:28   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 22:28   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 22:29   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 22:29   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 22:29   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 22:30   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 22:30   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 22:30   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 22:30   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 22:30   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 22:30 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:30 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 22:30 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 22:30 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 22:31   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 22:31   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 22:32   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 22:32   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 22:32   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 22:32   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 22:32   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 22:32   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 22:32 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:32 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 22:32 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 22:33 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 22:33   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 22:33   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 22:33   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 22:33   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 22:33 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 22:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 22:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 22:56 cozinha.importada: 75 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 22:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 22:57   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 22:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 22:57   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 23:02   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 23:03   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 23:03   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 23:03   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 08/10 23:03   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 23:04   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 08/10 23:04 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:04 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 23:04 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 23:04 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 23:04 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:04 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 23:04 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 23:04 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 23:04   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 23:05   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 23:05   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 23:05   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 23:05   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 23:05   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 23:06   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 23:11   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 23:16   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 23:16   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 23:16 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:16 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 23:16 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 23:16 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 23:16   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 23:17   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 23:17   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 23:17   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 23:17   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 23:18   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 23:18   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 23:18   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 23:18 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:18 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 23:18 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 23:19 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 23:19   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 23:20   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 23:20   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 23:20   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 23:20 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:26 [!] Drive reserva: The read operation timed out
+- 08/10 23:27 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 23:27 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 23:27 cozinha.importada: 75 no radar, 12 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 23:27   · chaves esgotadas — I Made High Protein Egg Mcmuffins To Store In The Freezer — 
+- 08/10 23:27   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 23:28   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 23:28   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 23:28   · chaves esgotadas — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — 
+- 08/10 23:28   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 23:29   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 08/10 23:29   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 08/10 23:29   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 08/10 23:29   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 08/10 23:29 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:29 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 23:29 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 08/10 23:30 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 08/10 23:30 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:30 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 23:30 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 08/10 23:30 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 23:31   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 08/10 23:32   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 08/10 23:32   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 08/10 23:37   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 08/10 23:37   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 08/10 23:37   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 08/10 23:38   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 08/10 23:38 [!] Drive labzirkonart: [WinError 10054] An existing connection was forcibly closed by the remote host
+- 08/10 23:38   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 08/10 23:38   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 08/10 23:38   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 08/10 23:38 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:38 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 08/10 23:38 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 08/10 23:40 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 08/10 23:40   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 08/10 23:40   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 08/10 23:40   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 08/10 23:40   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 08/10 23:46   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 08/10 23:46   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 08/10 23:46   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 08/10 23:46   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 08/10 23:46 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:46 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 23:46 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 08/10 23:47 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 08/10 23:47   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 08/10 23:47   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 08/10 23:47   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 08/10 23:48   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 08/10 23:48 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 08/10 23:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 08/10 23:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 08/10 23:56 cozinha.importada: 75 no radar, 11 ineditos e com alcance, 10 vao ao Gemini
+- 08/10 23:57   · ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was  — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 08/10 23:57   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 08/10 23:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 08/10 23:57   · 7.1 — HOW TO MAKE THE VIRAL CHILI'S NASHVILLE HOT MOZZARELLA STICK — Excelente receita passo a passo com gancho visual atraente de queijo puxando e instrucoes 
+- 08/10 23:59   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 08/10 23:59   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 09/10 00:04   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 00:04   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 00:06   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 00:06   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 00:06 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:06 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:06 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 00:06 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 00:06 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:06 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:06 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 00:07 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 00:07   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 00:07   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 00:07   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 00:07   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 00:07   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 00:08   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 00:08   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 00:08   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 00:08   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 00:08   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 00:08 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:08 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:08 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 00:08 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 00:09   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 00:09   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 00:14   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 00:14   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 00:19   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 00:20   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 00:20   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 00:21   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 00:21 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:21 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 00:21 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 00:22 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 00:22   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 00:23   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 00:23   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 00:23   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 00:23 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 00:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 00:27 cozinha.importada: 75 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 00:27   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 00:27   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 00:27   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 00:32   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 00:33   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 09/10 00:38   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 00:38 🩺 truque.importado: criterio de emergencia LIGADO (nota >= 8)
+- 09/10 00:40   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 00:40   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 00:40   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 00:40   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 00:40 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:40 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:40 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 00:40 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 00:40 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 00:40 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:40 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:40 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 00:40 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 00:40   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 00:41   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 00:41   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 00:41   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 00:41   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 00:41   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 00:42   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 00:42   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 00:42   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 00:42   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 00:42 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:42 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:42 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 00:42 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 00:42   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 00:43   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 00:43   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 00:43   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 00:43   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 00:43   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 00:43   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 00:44   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 00:44 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:44 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 00:44 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 00:44 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 00:44   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 00:44   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 00:44   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 00:45   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 00:45 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 00:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 00:56 cozinha.importada: 75 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 00:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 00:57   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 00:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 00:57   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 00:57   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 09/10 00:58   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 00:58   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 00:58   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 00:58   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 00:58   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 00:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 00:58 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 00:58 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 00:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 00:58 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 00:58 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 00:58 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 00:59   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 00:59   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 00:59   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 00:59   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 00:59   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 01:00   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 01:00   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 01:00   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 01:00 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:00 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 01:00 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 01:01 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 01:01   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 01:01   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 01:01   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 01:03   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 01:03   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 01:04   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 01:04   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 01:04   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 01:04 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:04 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 01:04 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 01:05 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 01:05   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 01:05   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 01:06   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 01:06   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 01:06 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 01:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 01:26 cozinha.importada: 75 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 01:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 01:28   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 01:28   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 01:31   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 01:31   · chaves esgotadas — The Greatest French Toast Recipe of All Time (The GOAT) — 
+- 09/10 01:31   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 01:31   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 01:32   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 01:32   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 01:32   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 01:32 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:32 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 01:32 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 01:34 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 01:34 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 01:34 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:34 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 01:34 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 01:34 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 01:39   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 01:39   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 01:39   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 01:40   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 01:40   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 01:40   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 01:41   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 01:46   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 01:46 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:46 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 01:46 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 01:46 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 01:46   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 01:46   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 01:46   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 01:47   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 01:52   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 01:52   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 01:54   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 01:54   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 01:54 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 01:54 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 01:54 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 01:55 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 01:55   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 01:56   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 01:56   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 01:56   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 01:56 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 02:09 🩺 semanestesia.pod: criterio de emergencia LIGADO (nota >= 8)
+- 09/10 02:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 02:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 02:26 cozinha.importada: 75 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 02:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 02:26   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 02:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 02:26   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 02:27   ✅ 9.5 — The Greatest French Toast Recipe of All Time (The GOAT) — O vídeo é extremamente dinâmico, com receitas passo a passo bem estruturadas, medidas na t
+- 09/10 02:27   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 02:27   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 02:27   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 02:28   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 02:28   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 02:28 ⬇️ cozinha.importada: 1 no JDownloader
+- 09/10 02:28 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 02:28 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 02:28 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 02:28 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 02:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 02:28 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 02:28 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 02:28 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 02:28   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 02:28   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 02:28   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 02:29   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 02:29   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 02:29   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 02:29   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 02:29   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 02:30   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 02:30   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 02:30 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 02:30 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 02:30 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 02:30 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 02:30   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 02:30   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 02:30   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 02:31   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 02:31   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 02:31   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 02:31   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 02:31   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 02:31 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 02:31 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 02:31 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 02:31 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 02:32   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 02:32   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 02:32   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 02:32   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 02:32 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 02:58 ⬆️ cozinha.importada → reserva/RAW/COZINHA: The Greatest French Toast Recipe of All Time (The GOAT)
+- 09/10 02:58 cozinha.importada: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 02:58 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 02:58 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 02:59   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 02:59   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 02:59   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 02:59   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 02:59   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 03:00   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 03:00   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 03:00   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 03:00   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 03:00 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:00 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:00 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 03:00 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 03:00 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 03:00 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:00 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:00 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 03:00 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 03:00   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 03:01   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 03:01   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 03:01   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 03:01   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 03:01   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 03:01   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 03:02   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 03:02   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 03:02   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 03:02 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:02 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:02 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 03:02 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 03:02   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 03:02   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 03:03   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 03:03   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 03:03   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 03:03   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 03:03   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 03:03   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 03:03 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:03 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 03:03 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 03:04 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 03:04   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 03:04   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 03:04   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 03:04   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 03:04 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:08 🩺 camarim.kpop: criterio de emergencia LIGADO (nota >= 8)
+- 09/10 03:08 🩺 atefalhar: criterio de emergencia LIGADO (nota >= 8)
+- 09/10 03:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 03:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 03:26 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 03:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 03:26   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 03:27   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 03:27   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 03:27   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 03:27   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 03:27   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 03:28   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 03:28   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 03:28 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:28 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:28 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 03:28 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 03:28 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 03:28 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:28 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:28 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 03:28 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 03:28 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 03:28   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 03:28   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 03:28   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 03:29   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 03:29   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 03:29   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 03:29   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 03:30   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 03:30   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 03:30   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 03:30 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:30 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:30 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 03:30 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 03:30   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 03:30   · chaves esgotadas — This New Technology Could Disrupt ASML and Intel — 
+- 09/10 03:31   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 03:31   · chaves esgotadas — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — 
+- 09/10 03:31   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 03:31   · chaves esgotadas — Why Samsung Is Falling Behind in the AI Chips Race — 
+- 09/10 03:31   · chaves esgotadas — Inside Intel’s Futuristic Factory in the US — 
+- 09/10 03:31   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 03:31 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:31 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 03:31 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 03:32 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 03:32 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 03:32   · chaves esgotadas — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — 
+- 09/10 03:32   · chaves esgotadas — 100 Facts About The Wii That YOU Didn't Know! — 
+- 09/10 03:32   · chaves esgotadas — Avatar: The Last Airbender | The Art of Bending | Netflix — 
+- 09/10 03:32   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 03:32 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 03:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 03:56 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 03:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 03:57   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 03:57   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 03:57   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 03:57   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 03:57   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 03:58   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 03:58   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 03:58   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 03:58 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 03:58 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 03:58 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 03:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 03:58 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 03:58 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 03:58 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 03:58 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 03:58   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 03:58   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 03:59   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 03:59   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 03:59   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 03:59   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 03:59   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 03:59   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 03:59   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 04:00   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 04:00 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:00 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:00 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 04:00 modofuturo: 85 no radar, 8 ineditos e com alcance, 8 vao ao Gemini
+- 09/10 04:00   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 04:01   ✅ 9.4 — This New Technology Could Disrupt ASML and Intel — Excelente acervo com animações 3D dinâmicas de litografia EUV, ganchos narrativos perfeito
+- 09/10 04:01   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 04:02   ✅ 9 — Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo — Excelente B-roll de fábricas e animações 3D didáticas sobre transistores que rendem ótimos
+- 09/10 04:02   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 04:02   · 5 — Why Samsung Is Falling Behind in the AI Chips Race — O vídeo foca excessivamente em análise de mercado, geopolítica e entrevistas, distanciando
+- 09/10 04:06   ✅ 9.8 — Inside Intel’s Futuristic Factory in the US — Material cinematográfico e dinâmico gravado diretamente dentro das fabs da Intel, repleto 
+- 09/10 04:06   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 04:06 ⬇️ modofuturo: 3 no JDownloader
+- 09/10 04:06 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 04:06 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 04:07 atefalhar: 164 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 04:07 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 04:07   · 6 — 'Avatar: The Last Airbender' Cast Answer Avatar's Most Searc — O tema de curiosidades de Avatar se encaixa perfeitamente, mas o formato de 'talking heads
+- 09/10 04:07   ✅ 9 — 100 Facts About The Wii That YOU Didn't Know! — Excelente acervo de curiosidades e easter eggs sobre o Nintendo Wii, com ritmo rápido, gan
+- 09/10 04:08   ✅ 9.5 — Avatar: The Last Airbender | The Art of Bending | Netflix — Bastidores perfeitos divididos por elementos, mostrando na pratica as artes marciais reais
+- 09/10 04:08   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 04:08 ⬇️ atefalhar: 2 no JDownloader
+- 09/10 04:25 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: 100 Facts About The Wii That YOU Didn't Know!
+- 09/10 04:26 ⬆️ atefalhar → reserva/RAW/GERACAO 2000: Avatar: The Last Airbender | The Art of Bending | Netflix
+- 09/10 04:26 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: Inside Intel’s Futuristic Factory in the US
+- 09/10 04:31 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: Intel’s New 18A Chip Just Made TSMC’s Most Advanced Node Loo
+- 09/10 04:32 ⬆️ modofuturo → labzirkonart/RAW/MODO FUTURO: This New Technology Could Disrupt ASML and Intel
+- 09/10 04:33 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 04:33 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 04:33 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 04:33   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 04:33   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 04:33   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 04:33   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 04:33   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 04:34   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 04:34   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 04:34   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 04:34   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 04:34 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:34 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:34 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 04:34 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 04:34 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 04:34 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:34 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:34 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 04:34 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 04:34 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 04:35   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 04:35   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 04:35   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 04:35   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 04:35   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 04:35   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 04:36   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 04:36   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 04:36   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 04:36   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 04:36 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:36 modofuturo: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:36 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 04:36 modofuturo: 85 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 04:36   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 04:37   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 04:37   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 04:37   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 04:37 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 04:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 04:56 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 04:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 04:56   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 04:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 04:56   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 04:57   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 04:57   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 04:57   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 04:57   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 04:57   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 04:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 04:57 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 04:57 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 04:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:57 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:57 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 04:57 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 04:57 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 04:58   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 04:58   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 04:58   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 04:58   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 04:58   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 04:58   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 04:59   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 04:59   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 04:59   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 04:59   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 04:59 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 04:59 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 04:59 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 04:59 modofuturo: 85 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 04:59   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 05:00   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 05:00   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 05:00   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 05:00 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 05:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 05:26 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 05:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 05:26   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 05:26   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 05:26   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 05:27   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 05:27   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 05:27   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 05:27   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 05:27   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 05:27 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:27 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 05:27 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 05:27 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 05:27 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 05:27 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:27 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 05:27 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 05:27 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 05:27 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 05:28   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 05:28   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 05:28   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 05:28   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 05:28   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 05:28   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 05:29   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 05:29   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 05:29   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 05:29   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 05:29 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:29 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 05:29 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 05:29 modofuturo: 85 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 05:30   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 05:30   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 05:30   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 05:30   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 05:30 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 05:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 05:56 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 05:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 05:56   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 05:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 05:57   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 05:57   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 05:57   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 05:57   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 05:57   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 05:57   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 05:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 05:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 05:58 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 05:58 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 05:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:58 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 05:58 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 05:58 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 05:58 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 05:58   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 05:58   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 05:58   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 05:58   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 05:58   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 05:59   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 05:59   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 05:59   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 05:59   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 05:59   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 05:59 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 05:59 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 05:59 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 05:59 modofuturo: 85 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 06:00   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 06:00   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 06:00   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 06:00 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:00 atefalhar: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 06:00 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 06:01 atefalhar: 164 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 09/10 06:01 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 06:01   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 06:01 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 06:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 06:28 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 06:28   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 06:28   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 06:28   · chaves esgotadas — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 06:28   · chaves esgotadas — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — 
+- 09/10 06:29   · chaves esgotadas — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — 
+- 09/10 06:29   · chaves esgotadas — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — 
+- 09/10 06:29   · chaves esgotadas — 3 high-protein breakfasts you can prep ahead and eat on the  — 
+- 09/10 06:29   · chaves esgotadas — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — 
+- 09/10 06:29   · chaves esgotadas — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — 
+- 09/10 06:29 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:29 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 06:29 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 06:29 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 06:29 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 06:29 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:29 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 06:29 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 06:29 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 06:29 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 06:30   · chaves esgotadas — [2 Kids Room 2025] Ep.02 Changbin X Felix — 
+- 09/10 06:30   · chaves esgotadas — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — 
+- 09/10 06:30   · chaves esgotadas — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — 
+- 09/10 06:30   · chaves esgotadas — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — 
+- 09/10 06:30   · chaves esgotadas — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — 
+- 09/10 06:31   · chaves esgotadas — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — 
+- 09/10 06:31   · chaves esgotadas — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — 
+- 09/10 06:31   · chaves esgotadas — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — 
+- 09/10 06:31   · chaves esgotadas — just stray kıds being lowkey terrified of felix [skz funny m — 
+- 09/10 06:31   · chaves esgotadas — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — 
+- 09/10 06:31 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:31 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 06:31 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 06:32 modofuturo: 85 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 06:32   · chaves esgotadas — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — 
+- 09/10 06:32   · chaves esgotadas — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — 
+- 09/10 06:32   · chaves esgotadas — TSMC Arizona: A Journey of Innovation and Collaboration — 
+- 09/10 06:33   · chaves esgotadas — Machine at Intel's Hillsboro campus can produce chips so adv — 
+- 09/10 06:33 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:33 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 06:33 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 06:34 atefalhar: 164 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 09/10 06:34 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 06:34   · chaves esgotadas — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — 
+- 09/10 06:34 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 06:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 06:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 06:56 cozinha.importada: 75 no radar, 9 ineditos e com alcance, 9 vao ao Gemini
+- 09/10 06:56   · chaves esgotadas — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 06:56   · chaves esgotadas — The French Onion Pasta You’ve Been Missing! — 
+- 09/10 07:01   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — NYC Style Chocolate Chip Cookies ♡ Bake With Me — 
+- 09/10 07:02   · 7 — GREEK YOGURT BREAD! No Flour, High Protein — 5 Min — Apresenta passo a passo prático com medidas claras na tela e bom dinamismo visual para cor
+- 09/10 07:03   · 6 — 5-Minute Lentil Bread for Lowering Blood Sugar 🩸 — Apresenta bom preparo visual com medidas na tela, embora a narração priorize discurso sobr
+- 09/10 07:05   · 6.3 — How to Lean Bulk on a Budget (3000 Calories, 185g Protein) — O vídeo apresenta receitas práticas passo a passo com medidas e macros claras na tela, per
+- 09/10 07:05   · 6 — 3 high-protein breakfasts you can prep ahead and eat on the  — O vídeo apresenta receitas práticas e dinâmicas com bom apelo visual, mas foca muito na ex
+- 09/10 07:06   · 6 — 2 INGREDIENT TORTILLAS! Super Clean and High Protein — Apresenta bom preparo visual da massa, mas tem longos trechos de conversa antes da receita
+- 09/10 07:06   · 7 — Caramelized Onyo (Onion) Fast & Delicious | Chef Jean-Pierre — O vídeo apresenta excelente dinâmica prática e técnica culinária clara, permitindo bons re
+- 09/10 07:06 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:06 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 07:06 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 07:06 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 07:06 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 07:06 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:06 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 07:06 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 07:07 camarim.kpop: 48 no radar, 15 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 07:07 camarim.kpop: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 07:07   ✅ 9.0 — [2 Kids Room 2025] Ep.02 Changbin X Felix — Conteúdo excelente com Felix e Changbin do Stray Kids, repleto de momentos fofos, história
+- 09/10 07:08   ✅ 9.5 — [2 Kids Room 2025] Ep.05 Bang Chan X HAN — Excelente conteudo de talk de idols famosos com diversas historias engracadas, momentos fi
+- 09/10 07:09   ✅ 9.5 — 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of  — O vídeo é excelente para cortes de TikTok, trazendo bastidores autênticos da gravação do I
+- 09/10 07:09   ✅ 9.6 — Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van — O formato de perguntas rápidas com câmera dinâmica do Stray Kids entrega múltiplos blocos 
+- 09/10 07:12   ✅ 9.5 — BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND — Bastidores perfeitos do BABYMONSTER gravando em estúdio, repleto de momentos engraçados, f
+- 09/10 07:12   ✅ 9 — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — Excelente compilação dinâmica e divertida de idols de K-pop, perfeita para cortes de engaj
+- 09/10 07:16   ✅ 9.5 — ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹 — O vídeo é um compilado perfeito de momentos cômicos e marcantes de variedades da Wonhee (I
+- 09/10 07:16   · 6.8 — TAEHYUNG TikTok Edits because HE'S IDOLS OF IDOLS — O vídeo é um react a compilações curtas de TikTok do V (BTS) e trechos de outros clipes/pe
+- 09/10 07:17   ✅ 8 — just stray kıds being lowkey terrified of felix [skz funny m — O video possui otimos momentos caoticos e engraçados dos membros do Stray Kids perfeitos p
+- 09/10 07:17   · 6.8 — STRAY KIDS EMERGENCY LIVE AFTER DC CONCERT CHAOS! — Embora traga conversas descontraídas e anedotas divertidas do Stray Kids que rendem bons c
+- 09/10 07:17 ⬇️ camarim.kpop: 5 no JDownloader
+- 09/10 07:17 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 07:17 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 07:18 modofuturo: 85 no radar, 4 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 07:19   · 3 — 'Can't Replace China': NVIDIA CEO Warns Of China’s Quick Pro — O vídeo consiste em uma entrevista estática ('talking heads') focada em geopolítica e anál
+- 09/10 07:19   · 1 — China’s Hidden Semiconductor War: EUV Lithography, Huawei &  — O video e uma analise geopolitica/noticiosa em formato de aula com apresentador e slides e
+- 09/10 07:20   ✅ 9.5 — TSMC Arizona: A Journey of Innovation and Collaboration — Excelente produção cinematográfica com cenas dinâmicas de fábricas de semicondutores, robó
+- 09/10 07:22   ✅ 9 — Machine at Intel's Hillsboro campus can produce chips so adv — O vídeo possui imagens dinâmicas incríveis da máquina High NA EUV, animações 3D de litogra
+- 09/10 07:22 ⬇️ modofuturo: 2 no JDownloader
+- 09/10 07:22 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 07:22 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 07:22 atefalhar: 164 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 09/10 07:22 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 07:22   · 4.5 — Spongebob vs Deadpool Hidden Jokes - Cartoon Beatbox Battles — O conteudo aborda curiosidades e bastidores de uma websie independente de beatbox do YouTu
+- 09/10 07:22 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:26 [!] upload falhou (BABYMONSTER - ‘WE GO UP’ RECORDING BEHIN): [WinError 10054] An existing connection was forcibly closed by the remote host
+- 09/10 07:26 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: Stray Kids Reveal Uncomfortable Truths in the Hot Seat | Van
+- 09/10 07:27 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 07:27 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 07:28 cozinha.importada: 75 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 09/10 07:29   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — 
+- 09/10 07:29   · 7 — The French Onion Pasta You’ve Been Missing! — O vídeo apresenta excelente apelo visual, dinamismo no preparo da receita e etapas bem est
+- 09/10 07:30   · 7 — NYC Style Chocolate Chip Cookies ♡ Bake With Me — Excelente tutorial de receita passo a passo, dinâmico e visualmente atraente, perfeito par
+- 09/10 07:30 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:30 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 07:30 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 07:30 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 07:30 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 07:30 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:30 modofuturo: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 09/10 07:30 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 07:30 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 07:30 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:30 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 07:30 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 07:32 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 07:32 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 07:32 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 07:38 🩺 faxina rodada: disco 4.6 -> 4.6 GB
+- 09/10 07:38 🩺 cozinha.importada: criterio de emergencia LIGADO (nota >= 8)
+- 09/10 07:56 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: BABYMONSTER - ‘WE GO UP’ RECORDING BEHIND
+- 09/10 07:56 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: ILLIT WONHEE moments that make her ✨ ICONIC ✨ 🐿️🐹
+- 09/10 07:57 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: [2 Kids Room 2025] Ep.05 Bang Chan X HAN
+- 09/10 07:57 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: 저 됐어요, 록커 됐어요!!! l ‘I Got Your Back (Feat. JISOO, MOMOKA of 
+- 09/10 08:00 [!] upload falhou (Machine at Intel's Hillsboro campus can ): [WinError 10054] An existing connection was forcibly closed by the remote host
+- 09/10 08:00 ⬆️ modofuturo → reserva/RAW/MODO FUTURO: TSMC Arizona: A Journey of Innovation and Collaboration
+- 09/10 08:01 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:01 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 08:01 cozinha.importada: 75 no radar, 1 ineditos e com alcance, 1 vao ao Gemini
+- 09/10 08:01 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:02   · 6 — NYC Style Chocolate Chip Cookies From One Dough ♡ Bake With  — O vídeo apresenta preparo prático e dinâmico com medições claras, perfeito para cortes cur
+- 09/10 08:02 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:02 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 08:02 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 08:03 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:03 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:03 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:03 modofuturo: estoque 1 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:03 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 08:03 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:03 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:03 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:03 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 08:03 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:03 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:03 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:09 🩺 camarim.kpop: estoque 4 — criterio normal de volta
+- 09/10 08:26 ⬆️ modofuturo → labzirkonart/RAW/MODO FUTURO: Machine at Intel's Hillsboro campus can produce chips so adv
+- 09/10 08:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 08:26 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:26 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 08:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 08:26 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:26 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:26 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 08:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 08:27 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:27 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:27 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:27 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 08:27 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:27 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:27 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 08:56 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:56 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 08:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 08:56 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:56 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:56 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 08:56 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 08:56 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:56 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 08:56 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 08:56 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 08:57 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 08:57 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 08:57 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 09:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 09:26 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:26 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 09:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 09:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 09:26 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:26 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 09:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:26 modofuturo: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 09:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 09:26 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:26 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:26 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 09:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 09:26 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:26 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 09:26 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 09:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 09:56 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:56 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 09:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 09:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 09:56 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:56 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 09:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:56 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 09:56 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 09:57 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:57 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 09:57 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 09:57 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 09:59 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 09:59 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 09:59 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 10:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 10:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 10:26 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 10:26 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 10:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 10:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 10:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 10:26 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 10:26 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 10:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 10:26 camarim.kpop: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 10:26 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 10:26 camarim.kpop: 48 no radar, 8 ineditos e com alcance, 4 vao ao Gemini
+- 09/10 10:27   ✅ 9.5 — [2 Kids Room 2025] Ep.02 Changbin X Felix — Excelente conteúdo oficial de bastidores do Stray Kids, com conversas engraçadas, momentos
+- 09/10 10:27   ✅ 9.5 — [2 Kids Room 2025] Ep.18 Bang Chan X Felix — Interação espontânea e cativante entre Bang Chan e Felix (Stray Kids), repleta de momentos
+- 09/10 10:27   ✅ 9.5 — kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI — O vídeo é excelente, com cortes dinâmicos de vários idols populares reagindo e dançando, p
+- 09/10 10:28   ✅ 9 — just stray kıds being lowkey terrified of felix [skz funny m — Compilação dinâmica e divertida de bastidores do Felix (Stray Kids) repleta de momentos cô
+- 09/10 10:28 ⬇️ camarim.kpop: 4 no JDownloader
+- 09/10 10:28 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 10:28 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 10:28 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 10:28 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 10:28 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 10:28 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 10:28 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 10:28 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 10:28 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 10:55 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: just stray kıds being lowkey terrified of felix [skz funny m
+- 09/10 10:57 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: kpop idols reaction to katseye gnarly pt. 2 (JHOPE, STRAY KI
+- 09/10 10:58 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: [2 Kids Room 2025] Ep.02 Changbin X Felix
+- 09/10 10:58 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: [2 Kids Room 2025] Ep.18 Bang Chan X Felix
+- 09/10 10:59 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 10:59 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 10:59 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 10:59 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 10:59 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 10:59 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 10:59 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 11:00 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:00 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:00 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:00 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 11:00 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 11:01 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:01 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:01 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 11:01 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 11:01 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:01 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:01 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:08 [!] Drive reserva: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly c
+- 09/10 11:26 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 11:26 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 11:26 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:26 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:26 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:26 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 11:26 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 11:26 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:26 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:26 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:26 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 11:26 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 11:26 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:26 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:26 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 11:26 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 11:26 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:26 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:26 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:56 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 11:56 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 11:56 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:56 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:56 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 11:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 11:56 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:56 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:56 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:56 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 11:56 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 11:56 camarim.kpop: 48 no radar, 4 ineditos e com alcance, 2 vao ao Gemini
+- 09/10 11:57   ✅ 9.2 — [2 Kids Room 2025] Ep.01 Bang Chan X Seungmin — Episódio excelente de '2 Kids Room' com Stray Kids, reunindo momentos cômicos, nostalgia e
+- 09/10 11:57   ✅ 9.2 — [SKZ VLOG] Felix : Sunshine Vlog 10 in Paris — Bastidores excelentes do Felix (Stray Kids) repletos de carisma, conversas fofas e diverti
+- 09/10 11:57 ⬇️ camarim.kpop: 2 no JDownloader
+- 09/10 11:57 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 11:57 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 11:57 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:57 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 11:57 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 11:57 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 11:57 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 11:57 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 11:57 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 12:56 ⬆️ camarim.kpop → reserva/RAW/CAMARIM KPOP: [2 Kids Room 2025] Ep.01 Bang Chan X Seungmin
+- 09/10 12:56 ⬆️ camarim.kpop → labzirkonart/RAW/CAMARIM KPOP: [SKZ VLOG] Felix : Sunshine Vlog 10 in Paris
+- 09/10 12:57 cozinha.importada: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 12:57 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 12:57 cozinha.importada: 75 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 12:57 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 12:57 cozinha.importada: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 12:57 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 12:57 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 12:57 truque.importado: 52 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 12:57 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 12:57 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 12:57 camarim.kpop: estoque 2 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 12:57 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 12:57 camarim.kpop: 48 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 09/10 12:58   · 3.5 — Stray Kids "0801" Video (Street Ver.) — O vídeo é um clipe musical montado com música contínua, carecendo de conversas, diálogos n
+- 09/10 12:59   · 2 — Stray Kids "CINEMA (Lee Know & Seungmin)" Video — O vídeo é um videoclipe musical/cinematográfico e não conteúdo de bastidores, variedades, 
+- 09/10 12:59 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 12:59 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 12:59 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 12:59 modofuturo: 85 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 12:59 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 12:59 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 12:59 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 12:59 atefalhar: 164 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 12:59 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 12:59 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:01 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 13:01 cozinha.importada: 78 no radar, 10 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 13:01 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:02   ✅ 9.5 — Perfect Mexican Rice — O vídeo é extremamente dinâmico, com excelente qualidade de imagem, passos claros e cortes
+- 09/10 13:02   · 7 — I Don't Buy Yogurt Anymore! 2 ingredients, THICC Greek Yogur — O video apresenta passo a passo pratico e visual, com boas acoes em cena para cortes indep
+- 09/10 13:03   · 7 — Never Buy Bread Again: The Easiest 4-Ingredient Daily Bread  — O preparo visual e prático atende perfeitamente ao nicho, facilitando a extração de cortes
+- 09/10 13:04   · 6 — I don't buy bread anymore! The new perfect recipe for quick  — O vídeo demonstra passo a passo o preparo de pães artesanais com boa movimentação de câmer
+- 09/10 13:04   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How to Make: Authentic Hawaiian Mac Salad — 
+- 09/10 13:06   · 7 — I don't buy bread anymore! The new perfect recipe for quick  — Passo a passo visual e prático com ótimo apelo estético para cortes curtos.
+- 09/10 13:07   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max ret — How to Make PICADILLO con PAPAS (Mexican Ground Beef Recipe  — 
+- 09/10 13:07   · 7 — I don’t buy Sandwich Bread anymore! Quick 2 Ingredient Recip — A receita é prática, possui medidas claras e demonstra o preparo completo com boa dinâmica
+- 09/10 13:13   · 7 — How To Make Real New York Deli Tuna Salad + The Best Tuna Me — Apresenta a receita prática passo a passo com bom dinamismo visual e medidas claras, geran
+- 09/10 13:13   · 6.8 — Ultimate Chicken Ramen – Must Try! — O preparo prático e dinâmico na bancada oferece bons momentos de mão na massa e cortes fec
+- 09/10 13:14 ⬇️ cozinha.importada: 1 no JDownloader (ciclo_semanal, buscas do sucesso)
+- 09/10 13:14 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 13:15 truque.importado: 49 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:15 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:15 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 13:15 camarim.kpop: 36 no radar, 3 ineditos e com alcance, 3 vao ao Gemini
+- 09/10 13:16   ✅ 9.3 — [Stray Kids : SKZ-TALKER] Ep.81 — Bastidores perfeitos do Stray Kids repletos de dinâmicas cômicas e fofas entre os membros,
+- 09/10 13:16   ✅ 9.5 — [Sub] Stray Kids’ Felix – Aussie K-pop Star’s Journey & Hidd — Episódio de talk show perfeito com Felix do Stray Kids repleto de momentos virais e fofos 
+- 09/10 13:18   ✅ 9.5 — Stray Kids Love Cooking BUT No Ingredients? 🤣🤣🤣 What's in St — Excelente conteúdo de programa de variedades com idols de K-pop (Stray Kids e NCT), replet
+- 09/10 13:18 ⬇️ camarim.kpop: 3 no JDownloader (ciclo_semanal, buscas do sucesso)
+- 09/10 13:19 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 13:19 modofuturo: 82 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:20 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 13:20 atefalhar: 161 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:20 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:26 ⬆️ camarim.kpop → labzirkonart/RAW/CAMARIM KPOP: Stray Kids Love Cooking BUT No Ingredients? 🤣🤣🤣 What's in St
+- 09/10 13:26 ⬆️ camarim.kpop → labzirkonart/RAW/CAMARIM KPOP: [Stray Kids : SKZ-TALKER] Ep.81
+- 09/10 13:27 ⬆️ camarim.kpop → labzirkonart/RAW/CAMARIM KPOP: [Sub] Stray Kids’ Felix – Aussie K-pop Star’s Journey & Hidd
+- 09/10 13:28 cozinha.importada: estoque 0 no Drive + 2 baixando < piso 3 — reposicao
+- 09/10 13:28 **cozinha.importada** — rodando radar `canais/cozinha.importada/radar.py`
+- 09/10 13:29 cozinha.importada: 78 no radar, 2 ineditos e com alcance, 2 vao ao Gemini
+- 09/10 13:29 cozinha.importada: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:30   ✅ 9 — How to Make: Authentic Hawaiian Mac Salad — O vídeo é excelente, com ótima qualidade de imagem, passo a passo dinâmico e visualmente a
+- 09/10 13:31   · ('Connection aborted.', RemoteDisconnected('Remote end closed connection without — How to Make PICADILLO con PAPAS (Mexican Ground Beef Recipe  — 
+- 09/10 13:31 ⬇️ cozinha.importada: 1 no JDownloader
+- 09/10 13:31 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 13:31 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 13:31 truque.importado: 49 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:31 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:31 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:31 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 13:31 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 13:31 modofuturo: 82 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:31 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:31 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 13:31 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 13:31 atefalhar: 161 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:31 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:31 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:57 ⬆️ cozinha.importada → labzirkonart/RAW/COZINHA: How to Make: Authentic Hawaiian Mac Salad
+- 09/10 13:58 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 13:58 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 13:58 truque.importado: 49 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:58 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:58 truque.importado: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:58 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 13:58 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 13:58 camarim.kpop: 36 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:58 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 13:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 13:58 modofuturo: 82 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:58 modofuturo: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 13:58 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 13:58 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 13:59 atefalhar: 161 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 13:59 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 13:59 atefalhar: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 14:09 🩺 faxina rodada: disco 3.7 -> 3.7 GB
+- 09/10 14:42 🩺 JDownloader estava mudo — reiniciado
+- 09/10 14:42 🩺 faxina rodada: disco 3.5 -> 3.4 GB
+- 09/10 14:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 14:56 **truque.importado** — rodando radar `canais/truque.importado/radar.py`
+- 09/10 14:56 truque.importado: 64 no radar, 4 ineditos e com alcance, 3 vao ao Gemini
+- 09/10 14:56 truque.importado: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 14:57   · chaves esgotadas — [ENG] 에이티즈 우영 현실판 닉 만들기🦊 l 이사배(RISABAE Makeup) — 
+- 09/10 14:58   ✅ 9.5 — [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup) — O vídeo é excelente pois traz o Jaemin do NCT no canal da Risabae, mostrando técnicas deta
+- 09/10 14:58   · 0 — Instagram Live stream Make up 인스타 라방 메이크업 — O vídeo é um tutorial de maquiagem genérico da criadora Pony e não menciona nem apresenta 
+- 09/10 14:58 ⬇️ truque.importado: 1 no JDownloader
+- 09/10 14:58 camarim.kpop: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 14:58 **camarim.kpop** — rodando radar `canais/camarim.kpop/radar.py`
+- 09/10 14:58 camarim.kpop: 36 no radar, 0 ineditos e com alcance, 0 vao ao Gemini
+- 09/10 14:58 camarim.kpop: nenhum candidato passou no criterio — nao baixo nada fraco
+- 09/10 14:58 modofuturo: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 14:58 **modofuturo** — rodando radar `canais/modofuturo/radar.py`
+- 09/10 14:58 modofuturo: 163 no radar, 39 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 14:59   · chaves esgotadas — Microscopic view of an Intel i486 — 
+- 09/10 15:00   · 5.5 — How to achieve nanometer precision in space? — Embora aborde engenharia de precisão nanométrica no JWST, o vídeo é focado em talking head
+- 09/10 15:00   · 5 — Detained by a Government & Probably Blacklisted by NVIDIA fo — O vídeo foca muito em geopolítica, contrabando e financiamento coletivo, com excesso de ap
+- 09/10 15:01   · 3 — Why Are Threads Needed On Single Core Processors — O vídeo aborda conceitos teóricos de programação e sistemas operacionais (threads e proces
+- 09/10 15:02   ✅ 9.2 — Inside the Lab Shrinking Chips Beyond 1nm — Excelente material com imagens reais de cleanroom da Imec, microscopia eletrônica de escal
+- 09/10 15:04   · 8 — This New Technology Could Kill TSMC and ASML — O vídeo possui excelente material visual dinâmico sobre fabricação de chips, mas perde pon
+- 09/10 15:05   · 3 — RIP Windows: Linux GPU Gaming Benchmarks on Bazzite — O vídeo foca em benchmarks de GPUs de consumo e sistemas operacionais, fugindo do tema de 
+- 09/10 15:06   · 6 — Thyristors Did to Power What Transistors Did to Logic — Embora o tema seja perfeito, o vídeo é muito focado em história e explicações teóricas com
+- 09/10 15:06   · 4 — TSMC's Incredible 2nm Curvy Masks — O vídeo é extremamente focado no tema, mas possui um ritmo muito lento e é composto majori
+- 09/10 15:06   · 4 — How computer processors run conditions and loops — O vídeo é focado em arquitetura de computadores teórica e diagramas estáticos, carecendo d
+- 09/10 15:06 ⬇️ modofuturo: 1 no JDownloader
+- 09/10 15:06 atefalhar: estoque 0 no Drive + 1 baixando < piso 3 — reposicao
+- 09/10 15:06 **atefalhar** — rodando radar `canais/atefalhar/radar_nostalgia.py`
+- 09/10 15:07 atefalhar: 210 no radar, 31 ineditos e com alcance, 10 vao ao Gemini
+- 09/10 15:07 atefalhar: criterio de EMERGENCIA (nota >= 8) — estoque zerado
+- 09/10 15:07   ✅ 9.5 — 12 Brilliant Details in Dragon Ball Z Games! (Tenkaichi 3, I — O vídeo é excelente para cortes pois é dividido em curiosidades rápidas, dinâmicas e nostá
+- 09/10 15:08   ✅ 9.5 — 15 Obscure Pokemon Facts You Actually DONT know - 3 — O vídeo é perfeito para cortes, pois é dividido em curiosidades rápidas, dinâmicas e super
+- 09/10 15:09   ✅ 9.5 — 7 More Amazing Details in Dragon Ball Z Games! (Budokai 3,Te — O vídeo é uma mina de ouro para cortes, com vários segmentos dinâmicos de 30-60 segundos p
+- 09/10 15:09 🩺 faxina rodada: disco 3.1 -> 3.0 GB
+- 09/10 15:10   ✅ 9.5 — Dragon Ball Has an Official Technique System — O vídeo é excelente para cortes, pois destrincha curiosidades oficiais e pouco conhecidas 
+- 09/10 15:10   · 5 — The Best Era Of Cartoon Network — O vídeo é um ensaio opinativo sobre as décadas do Cartoon Network, usando muitas imagens e
+- 09/10 15:10   · chaves esgotadas — 14 MORE Obscure Pokemon Facts You DON'T know! - 7 — 
+- 09/10 15:11   · chaves esgotadas — What *ALMOST RUINED* The Powerpuff Girls? — 
+- 09/10 15:11   · 5.5 — The TRAGEDY of Nickelodeon's Glitch Techs... — O desenho analisado é de 2020, fugindo do foco de anos 90/2000 do canal, e a narrativa foc
+- 09/10 15:11   · chaves esgotadas — The WEIRD Mega Man Cartoon That Time Forgot… — 
+- 09/10 15:17   · HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read ti — Lost and Cancelled Dolls — 
+- 09/10 15:17 ⬇️ atefalhar: 4 no JDownloader
+- 09/10 15:28 ⬆️ atefalhar → labzirkonart/RAW/GERACAO 2000: 12 Brilliant Details in Dragon Ball Z Games! (Tenkaichi 3, I
+- 09/10 15:29 ⬆️ atefalhar → labzirkonart/RAW/GERACAO 2000: 15 Obscure Pokemon Facts You Actually DONT know - 3
+- 09/10 15:30 ⬆️ atefalhar → labzirkonart/RAW/GERACAO 2000: 7 More Amazing Details in Dragon Ball Z Games! (Budokai 3,Te
+- 09/10 15:33 ⬆️ truque.importado → labzirkonart/RAW/TRUQUE IMPORTADO: [ENG] 요원으로 위장한😎 뷰티 교수님 재민의 등장🐈‍⬛💎 l 이사배(RISABAE Makeup)
+- 09/10 15:34 truque.importado: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 15:34 [!] disco com 2.4 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 09/10 15:40 🩺 JDownloader estava mudo — reiniciado
+- 09/10 15:40 🩺 faxina rodada: disco 2.6 -> 2.6 GB
+- 09/10 15:40 🩺 atefalhar: estoque 3 — criterio normal de volta
+- 09/10 15:55 [!] TODAS as contas do Drive sem folga — esvazie a lixeira. Parei de subir.
+- 09/10 15:56 truque.importado: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 15:56 [!] disco com 2.8 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 09/10 16:17 🩺 faxina rodada: disco 2.5 -> 2.5 GB
+- 09/10 16:25 [!] TODAS as contas do Drive sem folga — esvazie a lixeira. Parei de subir.
+- 09/10 16:26 truque.importado: estoque 1 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 16:26 [!] disco com 2.7 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 09/10 16:39 🩺 faxina rodada: disco 2.5 -> 2.5 GB
+- 09/10 16:55 [!] TODAS as contas do Drive sem folga — esvazie a lixeira. Parei de subir.
+- 09/10 16:56 truque.importado: estoque 0 no Drive + 0 baixando < piso 3 — reposicao
+- 09/10 16:56 [!] disco com 2.7 GB livres (< 3,5; < 3 e' critico) — sem download nesta passada
+- 09/10 17:09 🩺 faxina rodada: disco 2.5 -> 2.5 GB

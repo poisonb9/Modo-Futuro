@@ -1,33 +1,34 @@
 {
  "canal": "cozinha.importada",
- "gerado_em": "2026-10-08T13:06",
+ "gerado_em": "2026-10-09T13:01",
  "nota": "alcance + 20 x curtida, 30 dias",
  "resumo": {
-  "posts": 20,
-  "alcance_mediano": 309.5,
-  "curtidas_medianas": 6.0
+  "posts": 19,
+  "alcance_mediano": 293,
+  "curtidas_medianas": 6
  },
  "campeoes": [
   "O jeito certo de caramelizar cebolas para sopa Caramelização de cebolas em fogo ",
-  "Hambúrguer Crocante de Frango com Queijo e Molho Ranch Aprenda a fazer delicioso",
   "Carne moída dourada com repolho de 1 panela Aprenda a dourar a carne moída com r",
   "Rabanada perfeita com pão brioche de verdade Aprenda a fazer a rabanada perfeita",
   "Wrap verde de espinafre com cominho e nigella no pilão Wrap de espinafre rico em",
   "Wrap caseiro com 3 ingredientes e 4g de proteína Wrap saudável de aveia com apen",
   "Provando o Famoso Cookie da Levain Bakery em Nova York Fomos até a famosa Levain",
-  "Sopa de repolho finalizada com limão e salsa O segredo para finalizar sopas e en"
+  "Sopa de repolho finalizada com limão e salsa O segredo para finalizar sopas e en",
+  "Massa de Croissant Francês: Ingredientes e Sovagem Correta Veja a proporção exat"
  ],
  "buscas": [
-  "easy step by step caramelized onion soup recipe",
-  "crispy chicken burger with cheese and ranch sauce tutorial",
-  "one pot ground beef and cabbage skillet meal",
-  "brioche French toast rabanada recipe homemade",
-  "3 ingredient oatmeal wrap high protein",
-  "Levain bakery style chocolate chip cookie copycat",
-  "cabbage soup with lemon and parsley finishing tip",
-  "quick weeknight dinner recipes under 30 minutes step by step"
+  "easy homemade pasta recipe step by step",
+  "quick 30 minute one pot dinner tutorial",
+  "how to make fluffy pancakes from scratch",
+  "simple bread baking tutorial for beginners",
+  "authentic Mexican salsa recipe step by step",
+  "homemade pizza dough tutorial easy",
+  "easy vegetable stir fry recipe with sauce",
+  "how to make homemade yogurt at home"
  ],
  "descartadas_fora_do_tema": [
-  "spinach wrap with cumin and nigella seeds tutorial"
+  "traditional Korean kimchi making tutorial",
+  "creamy mushroom risotto step by step"
  ]
 }

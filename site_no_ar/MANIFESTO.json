@@ -1,241 +1,1549 @@
 {
-  "baixado_em": "2026-09-20T10:58:09+00:00",
-  "commit": "5fb5828ca4841cbe2265a938794a7a199a1f46e8",
+  "baixado_em": "2026-10-09T15:48:47+00:00",
+  "commit": "ef5fe6defd725d1f22530fdfa0f8627d4adb1f26",
   "origem": "baixado DO AR, nao da pasta de build",
-  "total_bytes": 3662457,
-  "falhas": 0,
+  "total_bytes": 16591668,
+  "falhas": 4,
   "arquivos": [
     {
       "url": "https://achadinhototal.com.br/",
       "arquivo": "index.html",
-      "bytes": 103520,
+      "bytes": 326792,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+      "sha256": "9db2814f38cb5839420f9b7de4b5c623fa1d6beb7ba4615d51cad1ea69377b7d"
     },
     {
       "url": "https://achadinhototal.com.br/motor.js",
       "arquivo": "motor.js",
-      "bytes": 225979,
+      "bytes": 1546586,
       "tipo": "application/javascript",
       "cache": "public, max-age=31536000, immutable",
-      "sha256": "e3842752fbc2c161b5c18b500f9523139f76775f0d4daef9b56b1e20bbced877"
+      "sha256": "6f767c42bd13acd3b3c46eda6db3b802bbcfd51a3f586908feb2cca8ad70e598"
     },
     {
       "url": "https://achadinhototal.com.br/links.json",
       "arquivo": "links.json",
-      "bytes": 145099,
+      "bytes": 176549,
       "tipo": "application/json",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "f98a6563bcbb48ba20e6282c7cdce112796ffbd6272c3984b2e2249ecb191548"
+      "sha256": "c41904d064717043102f256ff092b7f9ef04509eee27401412633253aa9720be"
     },
     {
       "url": "https://achadinhototal.com.br/robots.txt",
       "arquivo": "robots.txt",
       "bytes": 79,
       "tipo": "text/plain; charset=utf-8",
-      "cache": "public, max-age=14400, must-revalidate",
+      "cache": "public, max-age=0, must-revalidate",
       "sha256": "d5706dafc562a77d6a50e5106aee7658d2709f095a22722053709b5fb1b32f72"
     },
     {
       "url": "https://achadinhototal.com.br/sitemap.xml",
       "arquivo": "sitemap.xml",
-      "bytes": 352,
+      "bytes": 58892,
       "tipo": "application/xml",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "9760c1997e6444b1e2513f04fce298aec08aad7d5f27530dc8cf56eb93b4e768"
+      "sha256": "fb930cf58c9b61782c26fc8d351ed7ce374fccfe6a2ffe6d9cb5c641b8581c1b"
     },
     {
       "url": "https://achadinhototal.com.br/icone.png",
       "arquivo": "icone.png",
       "bytes": 404258,
       "tipo": "image/png",
-      "cache": "public, max-age=14400, must-revalidate",
+      "cache": "public, max-age=0, must-revalidate",
       "sha256": "27da0ecd7a4f9d17bf580dae9b3aee6a9d272276c83483caf8683c027fe19e14"
     },
     {
       "url": "https://achadinhototal.com.br/parceiros/",
       "arquivo": "parceiros/index.html",
-      "bytes": 8015,
+      "bytes": 9421,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+      "sha256": "91411ad4c19ed56187c09b494122fdc2174b0adfe5f00cd20cb4866fc6a8cf8a"
     },
     {
       "url": "https://achadinhototal.com.br/privacidade/",
       "arquivo": "privacidade/index.html",
-      "bytes": 4424,
+      "bytes": 5961,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "6ea7ddf50c863d1de2b6f491f311bcef63396f6d6e0173576a9a51ecfd4e251f"
+      "sha256": "fcbad2fe5e0a8bc7814c57e534116eb47e2f41217c1e88af3f1c278bdfd37075"
     },
     {
       "url": "https://achadinhototal.com.br/kabum.json",
       "arquivo": "kabum.json",
-      "bytes": 416301,
-      "tipo": "application/json",
-      "cache": "public, max-age=0, must-revalidate",
-      "sha256": "e4116e14db2f38586ada29f0dbcadf7bdc8d3bef760c467173cf2fa82cab54b4"
+      "ERRO": "The read operation timed out"
     },
     {
       "url": "https://achadinhototal.com.br/nike.json",
       "arquivo": "nike.json",
-      "bytes": 273677,
+      "bytes": 251244,
       "tipo": "application/json",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "d8fa6837812209dbebde12e49470afe837899f1e894f0ca703efd5f1ea66f9a1"
+      "sha256": "e7bed5421947c297777541811619084c2ac0aff0352eca4215024d2830e8c83e"
     },
     {
       "url": "https://achadinhototal.com.br/lauri.json",
       "arquivo": "lauri.json",
-      "bytes": 198524,
+      "bytes": 214540,
       "tipo": "application/json",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "b95bf185094cba2c2e078bf92f06ad8a57d042245c5f9b13e7d5d8bc0dca55f2"
+      "sha256": "615625532a4eedf73b1f0595125894e4a8e347580f974fa95abef32ffb48a068"
     },
     {
       "url": "https://achadinhototal.com.br/arno.json",
       "arquivo": "arno.json",
-      "bytes": 66881,
+      "bytes": 72913,
       "tipo": "application/json",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "c24b4c822081b3a5b4d54e2c2f6e8568251a828d642df214416c84f93134ed79"
+      "sha256": "208655cca51c12bdf133b8f868e64f6f01aeac09d365c9116985980e87d66f72"
     },
     {
       "url": "https://achadinhototal.com.br/sharkninja.json",
       "arquivo": "sharkninja.json",
-      "bytes": 5646,
+      "bytes": 6166,
       "tipo": "application/json",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "cd5974b3338bde697e28681723d26462ae2b615af1c5c21045a87ce3453255c0"
+      "sha256": "c3db45feebb4adc21b75337e8c84295a7417c056eb5fd5dc816a4c28deeb99f5"
     },
     {
       "url": "https://achadinhototal.com.br/exypna.json",
       "arquivo": "exypna.json",
-      "bytes": 3092,
+      "bytes": 3357,
       "tipo": "application/json",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "1060dbc9bd24fd75ecb105083c34ef0799f7176bdbd7045026a6e9747e980d78"
+      "sha256": "fb4833e91dd8fe4700d114dfc81b233b0fae4bf0ad56030b17193e9865f7b937"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_etiqueta.webp",
+      "arquivo": "baloes/bf_etiqueta.webp",
+      "bytes": 93858,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "885659c5790d0c1a1fb237577659389463c4f2e0125c020afe3efe0084e62b4d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_etiqueta_p.webp",
+      "arquivo": "baloes/bf_etiqueta_p.webp",
+      "ERRO": "<urlopen error _ssl.c:1063: The handshake operation timed out>"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_lupa.webp",
+      "arquivo": "baloes/bf_lupa.webp",
+      "bytes": 97402,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "020207c0d40bcc39d5ffcd4f344ad20fd60ef228e5178b0559267c9ec7c0d330"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_lupa_p.webp",
+      "arquivo": "baloes/bf_lupa_p.webp",
+      "bytes": 37624,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "49a7922b47cc55829422b485ed225e36708237e03965ba66f945e970a96350e9"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_porcento.webp",
+      "arquivo": "baloes/bf_porcento.webp",
+      "bytes": 101514,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2b2b235bbac4d0c897259e29947d7c4b1bc470e58e8538cd72c150971904320f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_porcento_p.webp",
+      "arquivo": "baloes/bf_porcento_p.webp",
+      "bytes": 40160,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e4a0c9c9fa0c211f6b496f75d66a971840b520a8a272f4a792756bebb0020eae"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_presente.webp",
+      "arquivo": "baloes/bf_presente.webp",
+      "bytes": 71904,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "beea6c4f9140d65d14b1a93f8eb1ce4c36a7e3f1065a2592e03710ff75cdb693"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_presente_p.webp",
+      "arquivo": "baloes/bf_presente_p.webp",
+      "bytes": 29124,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2a195ca4f57ee41571a40aba61b8e5b5fa462b346fe101392b6efb37965282b2"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_raio.webp",
+      "arquivo": "baloes/bf_raio.webp",
+      "bytes": 84942,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "993471c7a4356db6c872ab55bd37831f772b048b0fcf6c587fa8bff991a456cb"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_raio_p.webp",
+      "arquivo": "baloes/bf_raio_p.webp",
+      "bytes": 35382,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f0a2efc5500f67e68882fa50c3bbc1641eb459fcc9fc9b97ece344ffdd74b4c8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_sacola.webp",
+      "arquivo": "baloes/bf_sacola.webp",
+      "bytes": 82254,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b6f60f69122af1d9eeeb6714a12420aacce579ae82ecd46e9b7b7358babcbb1f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/bf_sacola_p.webp",
+      "arquivo": "baloes/bf_sacola_p.webp",
+      "bytes": 34460,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "80944cabf41b9c38ac55a345e37b579887d02b860c058bfc5a4280621fe8caa7"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_me_avise_quando_baixar.webp",
+      "arquivo": "baloes/botao_me_avise_quando_baixar.webp",
+      "bytes": 6138,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "297c33496015f362220f498e6cd504ba3b2f34638cbc01e4efa7bd201a713861"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_arno.webp",
+      "arquivo": "baloes/botao_ver_na_arno.webp",
+      "bytes": 8354,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f978d1d851ea721c4cf00353b2f038a3138b0b10e0b37ab28f68fe9e8f2d474b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_drogal.webp",
+      "arquivo": "baloes/botao_ver_na_drogal.webp",
+      "bytes": 9088,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "493bba2adb4e5b512ed22ca0451f7be181a4cc68b4d506769ef1aad73f96df11"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_guess.webp",
+      "arquivo": "baloes/botao_ver_na_guess.webp",
+      "bytes": 10830,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "566757617a0ec5339f0873400cf0fe86d868f4edb560ad8c1393940250e3ffcb"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_kabum.webp",
+      "arquivo": "baloes/botao_ver_na_kabum.webp",
+      "bytes": 9552,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "932ff58acd08783fb4cb03fa31159b0ea6b1ea9dea2946ea84af19923b5c269a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_lauri.webp",
+      "arquivo": "baloes/botao_ver_na_lauri.webp",
+      "bytes": 9506,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5180bbf170f2b5a234fa3de0a012b4e1066d23131a30c805e8289f95919900fd"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_loja.webp",
+      "arquivo": "baloes/botao_ver_na_loja.webp",
+      "bytes": 9442,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "af0e167c9598646539c93f768cd1fc7443516894ab73db43133bd7486baccc0d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_nike.webp",
+      "arquivo": "baloes/botao_ver_na_nike.webp",
+      "bytes": 6730,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2e2b834345256f15a4b1337f05f33f3d017296ce508204c7f3cbc41310e946a7"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_oceane.webp",
+      "arquivo": "baloes/botao_ver_na_oceane.webp",
+      "bytes": 9514,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "7f83655637ef2c9f3dbfdbfeeff8d1e308d62102ae09482cf9e7b998f8e3b808"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_soldiers.webp",
+      "arquivo": "baloes/botao_ver_na_soldiers.webp",
+      "bytes": 11548,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5fc8c006f79dea78af358503dcbabee322d2173e59c2c7ba92975f256fc5b8c6"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_na_stanley.webp",
+      "arquivo": "baloes/botao_ver_na_stanley.webp",
+      "bytes": 9476,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ec0ea52bb68b95958df55a26230b6ea9dedd0e87d5dbc5e95105115fd3484fb3"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_no_aliexpress.webp",
+      "arquivo": "baloes/botao_ver_no_aliexpress.webp",
+      "bytes": 9524,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9f777b7d68dc4d0fa86a501e03a7a8ddaa3990c27eb8962d5397b62c4ba11175"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/botao_ver_no_mercado_livre.webp",
+      "arquivo": "baloes/botao_ver_no_mercado_livre.webp",
+      "bytes": 10708,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "85c8e78731a09aa9e902efc4f5b0ec6598852ab165fe79296da25fcdd00af2fd"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_coracao.webp",
+      "arquivo": "baloes/camarim_coracao.webp",
+      "bytes": 88404,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6c645e0392b03b1b873300e03f13651cffa7e08977be756c8ec81279c8428d81"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_coracao_p.webp",
+      "arquivo": "baloes/camarim_coracao_p.webp",
+      "bytes": 33492,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "23f01613143b6a60ede5e601f8188e1e427d2b4482b599604066b1568f5511f4"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_lightstick.webp",
+      "arquivo": "baloes/camarim_lightstick.webp",
+      "bytes": 101680,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "acb9ad138433307b4aced14a29f0465ce71cdc27bb8a898396ff85adcc0d1395"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_lightstick_p.webp",
+      "arquivo": "baloes/camarim_lightstick_p.webp",
+      "bytes": 41980,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dfd994ee58e9b1be3a8bb7091895d4d51939cc2a58f6aa2a4a29eba708589532"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_microfone.webp",
+      "arquivo": "baloes/camarim_microfone.webp",
+      "bytes": 102372,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f96fbdf377a95359da55ca2eb0c45d948a4f470f1ae9a0239c3cb89e9ef72b8a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_microfone_p.webp",
+      "arquivo": "baloes/camarim_microfone_p.webp",
+      "bytes": 34536,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b32e5e15c6063faaeb5fc6fa0b9faf607d42a33f9116eca94e939be6273310b1"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_photocard.webp",
+      "arquivo": "baloes/camarim_photocard.webp",
+      "bytes": 94414,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "0495e3ebf8203fbd7d1366c936fd22abaf23874958fc1f4cce8519a2375f89fd"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/camarim_photocard_p.webp",
+      "arquivo": "baloes/camarim_photocard_p.webp",
+      "bytes": 38942,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a97f6fc5ddfb6947498a347bcbf14b682c4f3f1d3d159dfe75f179fc6c5f48b7"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_achadinho_chef.webp",
+      "arquivo": "baloes/canal_achadinho_chef.webp",
+      "bytes": 22130,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "4b9baf674eaa736bede209f2e0c3d1479120e82b2e543ebd5ce5b80ba3afb385"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_achadinho_chef_p.webp",
+      "arquivo": "baloes/canal_achadinho_chef_p.webp",
+      "bytes": 5394,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b74cbea1c6afe14275ceb9c73a12b1c6e9315714543912a336037b810552c13b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_achadinho_make.webp",
+      "arquivo": "baloes/canal_achadinho_make.webp",
+      "bytes": 26472,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "fff2745bc0be299f7ea317c2888cf26961f1738750f5f853e56347d8c49bd8e8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_achadinho_make_p.webp",
+      "arquivo": "baloes/canal_achadinho_make_p.webp",
+      "bytes": 4824,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a84a13516b2df8ec06cbec8990bb11291b7e3925d657bacd3fb2884c5ab8e536"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_achadinhos_instantaneos.webp",
+      "arquivo": "baloes/canal_achadinhos_instantaneos.webp",
+      "bytes": 45326,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "07b50c40bd9a8bf08e64eab573c3481c47a2844fab200168d3083ac713c5880a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_achadinhos_instantaneos_p.webp",
+      "arquivo": "baloes/canal_achadinhos_instantaneos_p.webp",
+      "bytes": 7324,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b0716372827f50d7ec8cb5978e29710c475ff1ee28e958c84dbb8461aafddb28"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_modo_futuro.webp",
+      "arquivo": "baloes/canal_modo_futuro.webp",
+      "bytes": 32590,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "83349c9aa9f45fa444fab6e80f51c0f0b758069f4c19a6c3ceacd751c0885cf2"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_modo_futuro_p.webp",
+      "arquivo": "baloes/canal_modo_futuro_p.webp",
+      "bytes": 6002,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a6dab4d0a70a493f2ac9abc5633b1aa2e22395cb8ff9299b8ae7bb7e6c1f4b90"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_pago_menos.webp",
+      "arquivo": "baloes/canal_pago_menos.webp",
+      "bytes": 29046,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6a1a504b8c7f3ce62249e0caaeff0b90db7aed84756f7b23042cf8c3a470fe9a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_pago_menos_p.webp",
+      "arquivo": "baloes/canal_pago_menos_p.webp",
+      "bytes": 5364,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "1ce86bfa030f1e2f9817f6e2032f7ddf15564c3cd566a2c6dc462cd3c20206a6"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_sem_anestesia.webp",
+      "arquivo": "baloes/canal_sem_anestesia.webp",
+      "bytes": 40886,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ff3d686c894874ebbd257aa4a942ed219fd6658e125db74b9b1d094fc7706c3f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/canal_sem_anestesia_p.webp",
+      "arquivo": "baloes/canal_sem_anestesia_p.webp",
+      "ERRO": "The read operation timed out"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/categoria_eletronico_celular.webp",
+      "arquivo": "baloes/categoria_eletronico_celular.webp",
+      "bytes": 105140,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "fbe3b06cd9372f151cf566c2d307bde1a1a9f72a2d41fc277bef00c49ba4df97"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/categoria_eletronico_controle.webp",
+      "arquivo": "baloes/categoria_eletronico_controle.webp",
+      "bytes": 228066,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "15d9c5e4fe683047183b847f55a8224102883a05a9e0fbd2678208b4da1aa083"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/categoria_eletronico_fone.webp",
+      "arquivo": "baloes/categoria_eletronico_fone.webp",
+      "bytes": 226710,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "31a558d4c3239e19954c882243b12ceb6bfd362746f8d735fe75bf5114d6afcc"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_colher.webp",
+      "arquivo": "baloes/chef_colher.webp",
+      "bytes": 117452,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "575a3b2cc47b08e5194ca5417b3abc66b95142fbff719f3af19285cb742e58e4"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_colher_p.webp",
+      "arquivo": "baloes/chef_colher_p.webp",
+      "bytes": 47398,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9c52eea1c369db68f02097cb8aa5aa328f68848ddaec918c23f4d14ef682df75"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_correio.webp",
+      "arquivo": "baloes/chef_correio.webp",
+      "bytes": 208100,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "35cb353570c790c75130b668810fca59511f6d5a284482add3461364153c8579"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_correio_p.webp",
+      "arquivo": "baloes/chef_correio_p.webp",
+      "bytes": 16318,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e77dc3b02ceac622d9434dfb29b8c0100b7aaf5440d72e16869888050c889a3f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_envelope_coracao.webp",
+      "arquivo": "baloes/chef_envelope_coracao.webp",
+      "bytes": 280262,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a16065e144425bd0057bb2cfb885f4cf964880fc40d2cfc1b1d7f2fd6d467353"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_envelope_coracao_p.webp",
+      "arquivo": "baloes/chef_envelope_coracao_p.webp",
+      "bytes": 23176,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ef863275a115c4b89a72bd2464d7e949b754ee0f1fa734187b61114c4f1b67ae"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_envelope_receita.webp",
+      "arquivo": "baloes/chef_envelope_receita.webp",
+      "bytes": 220958,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "0199db1ee258aa6da8617817cd8268574116db2108e0dc286c3897922ee41797"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_envelope_receita_p.webp",
+      "arquivo": "baloes/chef_envelope_receita_p.webp",
+      "bytes": 18160,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "7e5527e89f9912d682abdfde20f99271358d044a51b609ee054cb9621ff59aa7"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_marmita.webp",
+      "arquivo": "baloes/chef_marmita.webp",
+      "bytes": 338246,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5f16e59a6a0b4867cb00caa2e66e832c5a2dae5d2f66ce4da40fc68824b932af"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_marmita_p.webp",
+      "arquivo": "baloes/chef_marmita_p.webp",
+      "bytes": 24434,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "70f167c018a49dda4c3807599c9e4d2a8b16c4864817e44a2d8ceff70cfd9595"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_medidas.webp",
+      "arquivo": "baloes/chef_medidas.webp",
+      "bytes": 273912,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "87edf665861696fb43cf8580e838aa567807b394ec61388ac8f22ab58334e205"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_medidas_p.webp",
+      "arquivo": "baloes/chef_medidas_p.webp",
+      "bytes": 21584,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "45d87d34bd6188ad752c4d3b682e585698d2afc1fd258a2a5e64cbd86c2e58a6"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_panela.webp",
+      "arquivo": "baloes/chef_panela.webp",
+      "bytes": 62490,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b1ab37125619d4ae1f8d6fe7a2056df1e59b68658f2b033159b17539458eca22"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/chef_panela_p.webp",
+      "arquivo": "baloes/chef_panela_p.webp",
+      "bytes": 19336,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "230599994473bf117b8091de92d9c720d416c77125a476cb924bb950da03c278"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/cupom_a.webp",
+      "arquivo": "baloes/cupom_a.webp",
+      "bytes": 50402,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "dd80cc83bfd6e0f47fa5d52eeab278476d9536f20128f5e1b376d0b7965e9cb8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/cupom_b.webp",
+      "arquivo": "baloes/cupom_b.webp",
+      "bytes": 61860,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "fa74e88eb95b8a831c1ef717aa7794c0aca810a530d9911d0cc29e5e57a13684"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/cupom_clique_aqui.webp",
+      "arquivo": "baloes/cupom_clique_aqui.webp",
+      "bytes": 27192,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "1da50d4102f58841f7cf1d33ecaf1a30e377bc71ab42e61be554fad51558c847"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/cupom_ver_cupons.webp",
+      "arquivo": "baloes/cupom_ver_cupons.webp",
+      "bytes": 23434,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e2b2d8032b8161fc716d64f1e1c5315d4ed6ec8e5b89021cdeaab36034c1dc6a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_apaixonado.webp",
+      "arquivo": "baloes/inaug_apaixonado.webp",
+      "bytes": 41842,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "4560cccfe6716e663fece46775d335f3e7325709c9eb31578092c7c6b4a18f97"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_coracao.webp",
+      "arquivo": "baloes/inaug_coracao.webp",
+      "bytes": 36946,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "28572020717eeaad7280e72bbc0f1acca933c3acc16caf04e5757cb37291957d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_coracao_p.webp",
+      "arquivo": "baloes/inaug_coracao_p.webp",
+      "bytes": 6104,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e094691aaa5bd7fee0bc00724caa4e6c4a2fd1175fe93532729a9dba26c1f9ad"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_estrela.webp",
+      "arquivo": "baloes/inaug_estrela.webp",
+      "bytes": 31706,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9e1d82cd24314a886f01140dd181200fc8579e8dcd61b97136c240cab36d0d4c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_estrela_p.webp",
+      "arquivo": "baloes/inaug_estrela_p.webp",
+      "bytes": 6386,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "1d5732d472fff4edbfd609ff34602d6f0bc830642cd4136bbac8d6cb8cb1170c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_etiqueta.webp",
+      "arquivo": "baloes/inaug_etiqueta.webp",
+      "bytes": 23604,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "49aaadc358977190bb74c2cbd6d8b642b004ce46e4e72438960e7ebda56d4898"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_etiqueta_p.webp",
+      "arquivo": "baloes/inaug_etiqueta_p.webp",
+      "bytes": 4844,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "8a0df0d482f7a2b07062ecb5490ce789f0bf823fb06914864093049516288a63"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_laco.webp",
+      "arquivo": "baloes/inaug_laco.webp",
+      "bytes": 39224,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "0e30ad405dbfdb54638326c097717a7d9ca98826e9427afb20992e4de7cd00a5"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_laco_p.webp",
+      "arquivo": "baloes/inaug_laco_p.webp",
+      "bytes": 7502,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ad589cb5e8c39f47888c1bab5fcd95884792fa75a5850a323231f7943bf0265f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_laranja.webp",
+      "arquivo": "baloes/inaug_laranja.webp",
+      "bytes": 24780,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ef7fb992c9c4778116412f89a0613deb044acea6652def88e12bca572d1ad27d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_laranja_p.webp",
+      "arquivo": "baloes/inaug_laranja_p.webp",
+      "bytes": 5396,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "54c9e7af850da71d4b5853e56fc96d7408f8e6b0c49522dcdd25de2a961258b9"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_lupa.webp",
+      "arquivo": "baloes/inaug_lupa.webp",
+      "bytes": 33216,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "d54fd57293646dbf4452d0bde5774b5d8d31c4a6a219d4d823001ceb04a6f71a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_lupa_cromada.webp",
+      "arquivo": "baloes/inaug_lupa_cromada.webp",
+      "bytes": 30118,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a4a6867947f09713e140667e69d7bc6e60ea6c6494daa2c1850c4d7d70c8997d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_lupa_cromada_p.webp",
+      "arquivo": "baloes/inaug_lupa_cromada_p.webp",
+      "bytes": 2576,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "134cbf472b09c1bd828134c786fb8b9a52bd618a63637e67fb3da9854c3ec04a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_lupa_p.webp",
+      "arquivo": "baloes/inaug_lupa_p.webp",
+      "bytes": 7230,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "8f58d4635feb8d338e0c41cea76d7520e30f5bcc6e5e7b63cded15d1693557d5"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_porcento.webp",
+      "arquivo": "baloes/inaug_porcento.webp",
+      "bytes": 58056,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a1f48615a6c42ad914acb3316d0e63b7c09642d56cd1b92aafa0acefe94fddd3"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_porcento_p.webp",
+      "arquivo": "baloes/inaug_porcento_p.webp",
+      "bytes": 9322,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "16cede0d7fa28e6d303aedf988c71eae15a15261fbfb8512554d8747e3306195"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_presente.webp",
+      "arquivo": "baloes/inaug_presente.webp",
+      "bytes": 49800,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f99e3fb07ed4fa076b711267b42c93ba8a3aa679e651e0091da02bf3bb4fffa8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_presente_p.webp",
+      "arquivo": "baloes/inaug_presente_p.webp",
+      "bytes": 6832,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a27da392d940259efd813be050d8c01a9247a48522cbdee8eccb78360fdc9881"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_sacola.webp",
+      "arquivo": "baloes/inaug_sacola.webp",
+      "bytes": 31758,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5d021fb5199f6ce66f1748dbf7e5986538b895600a922dc8b556a9310cc28743"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_sacola_dourada.webp",
+      "arquivo": "baloes/inaug_sacola_dourada.webp",
+      "bytes": 44100,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "4689dd37df5577d8859764fe18059e1923df8ba9d566fd8ecdeb7035ef263645"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_sacola_p.webp",
+      "arquivo": "baloes/inaug_sacola_p.webp",
+      "bytes": 6332,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ba0ffac77651dcb8a6da15ffed2f1e43a04c44d318e1c19d5b56c75fd2ef518c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_seta_baixo.webp",
+      "arquivo": "baloes/inaug_seta_baixo.webp",
+      "bytes": 73822,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9e58a2af63a68038388285df539ebd5f498d6fd3697f953163f3749fc5d96531"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/inaug_seta_lado.webp",
+      "arquivo": "baloes/inaug_seta_lado.webp",
+      "bytes": 71058,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e347fe5181e0ce4d445d805efd3507e9f9b1cdcce8b1b71b2ba20caa8dea0c66"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_01.webp",
+      "arquivo": "baloes/letra_01.webp",
+      "bytes": 4386,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "db3e313de1d532ab16b44b61c3b4d2132edc61f84a438bff303c5bf8c6602280"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_01_p.webp",
+      "arquivo": "baloes/letra_01_p.webp",
+      "bytes": 1754,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "c45377b18769bd017e6bae26c0eda6e14a1c1be7976bc30f69d36af799112a52"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_02.webp",
+      "arquivo": "baloes/letra_02.webp",
+      "bytes": 7482,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "286d05a25e97a1075d069fe10f6a64b214701c5fe4f6e896503585355365abb8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_02_p.webp",
+      "arquivo": "baloes/letra_02_p.webp",
+      "bytes": 2774,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f2157b7e297a91d41263e21ddcb3107baafc21b8ff63cc96bf75bd24ca0d2204"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_03.webp",
+      "arquivo": "baloes/letra_03.webp",
+      "ERRO": "The read operation timed out"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_03_p.webp",
+      "arquivo": "baloes/letra_03_p.webp",
+      "bytes": 2358,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f0ef6b0b2580e139d08f8b2c89b6307fac445201582923090808b81a32367c5b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_04.webp",
+      "arquivo": "baloes/letra_04.webp",
+      "bytes": 7340,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "fe00b8ecffd93593496d6b8f26c91b07cbf305ee2464785fdc51c7e58ec3b75a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_04_p.webp",
+      "arquivo": "baloes/letra_04_p.webp",
+      "bytes": 2576,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6cd4c2ff9b7d088f5b7426becdec4c9c66d5f34578e125e450ac525a8763878c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_05.webp",
+      "arquivo": "baloes/letra_05.webp",
+      "bytes": 7372,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2a22f6223e3a33aef455f5ba1db51c0db7143492b91fc89cc23e9d5a095f26f5"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_05_p.webp",
+      "arquivo": "baloes/letra_05_p.webp",
+      "bytes": 2548,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "98e0dff18bf5325c7ea4b1896ccdfe7ded77b2d0f46ab092baa5d8b6466e34a2"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_06.webp",
+      "arquivo": "baloes/letra_06.webp",
+      "bytes": 6262,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "645d3128a59e627a827a94104e9484f27ff3324bfa8ca48f73fac06b5c34f536"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_06_p.webp",
+      "arquivo": "baloes/letra_06_p.webp",
+      "bytes": 2190,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6e27661a8540ced6799141a4d350b44eede9cf62b64f734f8b11c77b0cba932d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_07.webp",
+      "arquivo": "baloes/letra_07.webp",
+      "bytes": 7698,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6c7239893ce468344eebc44af7561490f1f91a7434a36645d0f4676b0ed0fcd4"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_07_p.webp",
+      "arquivo": "baloes/letra_07_p.webp",
+      "bytes": 2692,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "0348c6c0675e6729c50619a33d32f9f11fe5318f536619cdcb21110b5e4274f5"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_08.webp",
+      "arquivo": "baloes/letra_08.webp",
+      "bytes": 6928,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "16b155afee18c2aa23690e6f6c0485a5c024a28bb8d1b0e62a92393bc404970a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_08_p.webp",
+      "arquivo": "baloes/letra_08_p.webp",
+      "bytes": 2506,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a0f3cf8d02815be7d18f77c0803cc1c77b0b43fdcb25a51f58a922e021d76fa9"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_09.webp",
+      "arquivo": "baloes/letra_09.webp",
+      "bytes": 7750,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e096c83661d7c9bda68dbccf7b325de6e5823660ee693d7d279fc052fdd74ab2"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_09_p.webp",
+      "arquivo": "baloes/letra_09_p.webp",
+      "bytes": 2826,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b26861d5d10617cd0d84c8f6e41c7e1d23e8c94772af3401e79fcd30fe933e39"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_10.webp",
+      "arquivo": "baloes/letra_10.webp",
+      "bytes": 8716,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "24b8aeb391ab08b1125deadb267615d5d18f8445a3ef1eccb77e909240f65e59"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_10_p.webp",
+      "arquivo": "baloes/letra_10_p.webp",
+      "bytes": 3060,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a13084f750171905c459a72eff4ce07a96a937a9c72ca13cc07d00a6cf256e2e"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_11.webp",
+      "arquivo": "baloes/letra_11.webp",
+      "bytes": 7240,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "7433fd9d9abd5905f77e1c834eba20bb6e27b828f660f880c1000bbbe013dc30"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/letra_11_p.webp",
+      "arquivo": "baloes/letra_11_p.webp",
+      "bytes": 2516,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ba4ad58793077c70fec2223a42c4432808a366dae2718cf46f50baafae214fe8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/loja_explosao.webp",
+      "arquivo": "baloes/loja_explosao.webp",
+      "bytes": 87924,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "14c4e757e2e93bb413d1853e1bb6bece9a0d7fa8b4f1b61851c5aa85384d6fa5"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/loja_faixa_azul.webp",
+      "arquivo": "baloes/loja_faixa_azul.webp",
+      "bytes": 60532,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "7dbcae1f55a8c8b057466cd927c18eb2e443cb9a7f7fb17a71ca1546a5aa6d1c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/loja_lupa.webp",
+      "arquivo": "baloes/loja_lupa.webp",
+      "bytes": 89004,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5608ea3f87d02c0966cabb20e7289e6505f30cf3bbffaca654a0630a47aac042"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/loja_mao.webp",
+      "arquivo": "baloes/loja_mao.webp",
+      "bytes": 88636,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2ec0404d4393a02e21f8275c1f6fe37b38a28ccbc2e147cbf9c05771d3fa7b10"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/loja_sacola.webp",
+      "arquivo": "baloes/loja_sacola.webp",
+      "bytes": 95994,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "7146446c8eb3a45fc273caf850ae4b2dc16e4fdefc8d03a97a9175ff56ec1499"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/make_batom.webp",
+      "arquivo": "baloes/make_batom.webp",
+      "bytes": 105398,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "3a6df3101db23da69c83d8e29c6476c1e9f829f7256559522ea08de692ebc05f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/make_batom_p.webp",
+      "arquivo": "baloes/make_batom_p.webp",
+      "bytes": 8736,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "d237918ebac62c2967c6a94274fff835c6653a3ea9fe189e2ecf7eac421c2f9f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/make_compacto.webp",
+      "arquivo": "baloes/make_compacto.webp",
+      "bytes": 116556,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "1464ede1dc64751571d05086642b1fd7132010955ff09083a42331362f34d1b4"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/make_compacto_p.webp",
+      "arquivo": "baloes/make_compacto_p.webp",
+      "bytes": 36978,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "b45bade88189ffddd2d4fc95f56126881336fd25040da07e562ff3352383f4e2"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/make_pincel.webp",
+      "arquivo": "baloes/make_pincel.webp",
+      "bytes": 89802,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "61ed5f4aadfb856802ebbd24012c59133c81d43a296062a242ff7feb6559010b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/make_pincel_p.webp",
+      "arquivo": "baloes/make_pincel_p.webp",
+      "bytes": 36418,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2d901b1e0ad2b16d9bdad743039686b1951e0b9f35852b7c094a0e87ceb4560b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_chip.webp",
+      "arquivo": "baloes/modofuturo_chip.webp",
+      "bytes": 104702,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9ad10687f62e2dcd16fa6a03296af41d8dbb2b94e822e50d892c860906104c70"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_chip_p.webp",
+      "arquivo": "baloes/modofuturo_chip_p.webp",
+      "bytes": 41348,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "c7a7010adb3fbff99730f331d8fa00fbd4a1f244abc9523cf74bdf16fee3a49c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_foguete.webp",
+      "arquivo": "baloes/modofuturo_foguete.webp",
+      "bytes": 161930,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "bf8e2bc6e32e75496e93ccbc624e39dc3007c2daa376b5a018db587c2f15e733"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_foguete2.webp",
+      "arquivo": "baloes/modofuturo_foguete2.webp",
+      "bytes": 116162,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e1c703ab4c6e1a2cfc006d1572798e35875d9e74489e084a9087cad878b304e8"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_foguete2_p.webp",
+      "arquivo": "baloes/modofuturo_foguete2_p.webp",
+      "bytes": 40556,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "ebaf08c9c8584140980849dcbd6f345f14af9dea85e024ba79df1956df35fd30"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_foguete_p.webp",
+      "arquivo": "baloes/modofuturo_foguete_p.webp",
+      "bytes": 13712,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "c1367410dec13e5f909725839b2250ea3d5e0e86df024d00b8c4ec9453cd28bf"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_robo.webp",
+      "arquivo": "baloes/modofuturo_robo.webp",
+      "bytes": 221896,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "97d9b3cbf6d5dd949f43ad1ffafe496cf06672c41265e14f3fb082f13489141c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/modofuturo_robo_p.webp",
+      "arquivo": "baloes/modofuturo_robo_p.webp",
+      "bytes": 17688,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "587d306a787853f4c17e8fe32b29703b58e727a80667cf87e66b40ac70553d36"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/nostalgia_controle.webp",
+      "arquivo": "baloes/nostalgia_controle.webp",
+      "bytes": 166906,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "60cdd057958be0fb556171e1a9e57169299061d53b09ca22fc760afa9cb9a2c6"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/nostalgia_controle2.webp",
+      "arquivo": "baloes/nostalgia_controle2.webp",
+      "bytes": 96986,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "046354b06a8556d1663eba6f84864859ce73035a110c6852a332e9df9d70d2bb"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/nostalgia_controle2_p.webp",
+      "arquivo": "baloes/nostalgia_controle2_p.webp",
+      "bytes": 38044,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f7ddc495cc445edfa304fc569c5c41bb99cf6475b8b1351d02dd51112f9ef9bc"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/nostalgia_controle_p.webp",
+      "arquivo": "baloes/nostalgia_controle_p.webp",
+      "bytes": 13060,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "99fa6afe17d0fdde067732fee7b09d8120b8ac8bddc24faf339859743a30bc1e"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/nostalgia_tv.webp",
+      "arquivo": "baloes/nostalgia_tv.webp",
+      "bytes": 102788,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f48a3fbaae881cce1605fd96bfb7b2d85449e26d4974e8791ced907aa277ff89"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/nostalgia_tv_p.webp",
+      "arquivo": "baloes/nostalgia_tv_p.webp",
+      "bytes": 31450,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5349f9fab6cc000685609502cad991d2ecc34534548b0675270cc0d4d652f0c4"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/pilula_desconto.webp",
+      "arquivo": "baloes/pilula_desconto.webp",
+      "bytes": 127780,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "daad3c07f81bfb23248338cd971d12dcc40fb633d949c5c4b8ff4fbd41678449"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/placa_nome_produto.webp",
+      "arquivo": "baloes/placa_nome_produto.webp",
+      "bytes": 31230,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "53bae2f6a8fc98feefb55b98b41a741705a70d13323b84ed51acb82e9c5bf71f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_achadinhos_instantaneos.webp",
+      "arquivo": "baloes/selo_achadinhos_instantaneos.webp",
+      "bytes": 220976,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9766c20e73b77bff7a236dea60801f47fabcd720647e2b154525f87d726d2311"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_achado_do_dia.webp",
+      "arquivo": "baloes/selo_achado_do_dia.webp",
+      "bytes": 105284,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "6972b53066a5667205a755d3cda2a85b7070d4fdfdaf80b0d0675b605bb602ec"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_achei_pra_voce.webp",
+      "arquivo": "baloes/selo_achei_pra_voce.webp",
+      "bytes": 307108,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9bd28745e416774080b496af5ee1998aff385f4d4fd40febd089eb4e55c9795d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_bf_de_verdade.webp",
+      "arquivo": "baloes/selo_bf_de_verdade.webp",
+      "bytes": 14032,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "aa737e14ad0201f79fcc86b5e8f738cdac97b813f0bf15c4b3991f2584aabb86"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_bf_de_verdade_p.webp",
+      "arquivo": "baloes/selo_bf_de_verdade_p.webp",
+      "bytes": 6064,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "9d7dff9fbf88c98da7f27e8c7a546ab6c04dd3eee39db50eb47ccc0787acc026"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_caiu_de_verdade.webp",
+      "arquivo": "baloes/selo_caiu_de_verdade.webp",
+      "bytes": 255314,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "37013d13e596a53d4016eaed0bad20f2777cfef523fc93e2d9f8909ca1dc38a6"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_comente_quero.webp",
+      "arquivo": "baloes/selo_comente_quero.webp",
+      "bytes": 250838,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2b528d1d4d7de118c0553950bb9133a363051d91f806be0c686a69082dfa61dd"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_compre_hoje.webp",
+      "arquivo": "baloes/selo_compre_hoje.webp",
+      "bytes": 15638,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "8845339a8d06fd0b1a05b918fa110eaa7a9c61ad74affeec67644c2f9126507b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_compre_hoje_p.webp",
+      "arquivo": "baloes/selo_compre_hoje_p.webp",
+      "bytes": 6942,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "5b608db7874abf6a98d72525125b0356540a2bf9170f802c94074c7171be830f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_link_na_bio.webp",
+      "arquivo": "baloes/selo_link_na_bio.webp",
+      "bytes": 251554,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "d2a38dff36a7f795e8ff238b9b5c8fcf956b14a86bd7df4e53cb9f8e273da90a"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_mais_vendido.webp",
+      "arquivo": "baloes/selo_mais_vendido.webp",
+      "bytes": 15380,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "cbda417f89819f4ea2bfa9f8d4299836b71413646a09398756af027e32670d4f"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_mais_vendido_p.webp",
+      "arquivo": "baloes/selo_mais_vendido_p.webp",
+      "bytes": 6754,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "f1ea04cc8a6dabeca7e8bed5d50799033c5a577f937ecd7ec9bd86a805e9587e"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_novo_achado.webp",
+      "arquivo": "baloes/selo_novo_achado.webp",
+      "bytes": 263252,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "325ce42596a38d3c852cd585d529f25cea38d9ca88abcab4b2dc3d0aaa2681b5"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_oferta_de_hoje.webp",
+      "arquivo": "baloes/selo_oferta_de_hoje.webp",
+      "bytes": 14446,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e6e2e3b6c61c8e95d630f75b6a2a77585a8a995ec2dc2f51c3166faa3d974318"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_oferta_de_hoje_p.webp",
+      "arquivo": "baloes/selo_oferta_de_hoje_p.webp",
+      "bytes": 6662,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "46781b64be65577f7c9f070f00d0fef1c1cfae6bd33353bd0be1bfa21be174f6"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_pago_menos.webp",
+      "arquivo": "baloes/selo_pago_menos.webp",
+      "bytes": 270052,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "0aff50c4b7e0c32b35f4d86dbd1cfa4d03e94789abd686e92a96cfdbf2e527ad"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_preco_conferido.webp",
+      "arquivo": "baloes/selo_preco_conferido.webp",
+      "bytes": 174692,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "7e288c17e2fe10df1150e1ee4dcaadef07b00868d4ebf3d0fe0fa6e8600ed61d"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/selo_semana_de_inauguracao.webp",
+      "arquivo": "baloes/selo_semana_de_inauguracao.webp",
+      "bytes": 244312,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "e8325d6c6121a6fc2442a5a3982c08ac6473b3af8ebdb43bfe22423b7006b4e3"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/semanestesia_ampulheta.webp",
+      "arquivo": "baloes/semanestesia_ampulheta.webp",
+      "bytes": 176364,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a5fd134c2f18eeb6ce18f617704e62e9811e4705fad62f2063c265029051aacd"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/semanestesia_ampulheta_p.webp",
+      "arquivo": "baloes/semanestesia_ampulheta_p.webp",
+      "bytes": 57908,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a305a678bce86e5792810742f651f1f6d8d5aa14ed39568fceabbf82c7eae451"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/semanestesia_cerebro.webp",
+      "arquivo": "baloes/semanestesia_cerebro.webp",
+      "bytes": 333136,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "d7c33dc51eb773e767dcb8ed4ce2be1d7e6418ec96a9af84a45286bb9e5b4736"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/semanestesia_cerebro_p.webp",
+      "arquivo": "baloes/semanestesia_cerebro_p.webp",
+      "bytes": 23922,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "91ede4db9f569e02037f7567befdf2fc6cab3177ea09f247d44d52543399a12c"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/semanestesia_halter.webp",
+      "arquivo": "baloes/semanestesia_halter.webp",
+      "bytes": 65950,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "3f0923c9cb7efa28881c91e6607722bbeb51bb8344acb5d334e0222338995beb"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/semanestesia_halter_p.webp",
+      "arquivo": "baloes/semanestesia_halter_p.webp",
+      "bytes": 22100,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "2eae9a5d51082c1e73edf459a429ed4ac531e98eaedeb730ef278db29b41f184"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/teste_balao_fala.webp",
+      "arquivo": "baloes/teste_balao_fala.webp",
+      "bytes": 76386,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "3aa8bc94216540a5cf40cef54792394da695952ced9bc7ab930058b76719050b"
+    },
+    {
+      "url": "https://achadinhototal.com.br/baloes/teste_balao_fala_p.webp",
+      "arquivo": "baloes/teste_balao_fala_p.webp",
+      "bytes": 24418,
+      "tipo": "image/webp",
+      "cache": "public, max-age=0, must-revalidate",
+      "sha256": "a26b648e9df2b2703a7f17b8c5b141ce395ddf63302f413dddf319e27e522b60"
     },
     {
       "url": "https://oachadinho.pages.dev/",
       "arquivo": "bios/oachadinho/index.html",
-      "bytes": 249787,
+      "bytes": 349155,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+      "sha256": "41f685fd1ca2535196d3f2a9a6419deaa2bf6f98b7102d2d2c82770b7dc856bb"
     },
     {
       "url": "https://oachadinho.pages.dev/todos",
       "arquivo": "bios/oachadinho/todos.html",
-      "bytes": 103520,
+      "bytes": 326792,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+      "sha256": "9db2814f38cb5839420f9b7de4b5c623fa1d6beb7ba4615d51cad1ea69377b7d"
     },
     {
       "url": "https://oachadinho.pages.dev/parceiros",
       "arquivo": "bios/oachadinho/parceiros.html",
-      "bytes": 8015,
+      "bytes": 9421,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+      "sha256": "91411ad4c19ed56187c09b494122fdc2174b0adfe5f00cd20cb4866fc6a8cf8a"
     },
     {
       "url": "https://achadinhochef.pages.dev/",
       "arquivo": "bios/achadinhochef/index.html",
-      "bytes": 249787,
+      "bytes": 349155,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+      "sha256": "41f685fd1ca2535196d3f2a9a6419deaa2bf6f98b7102d2d2c82770b7dc856bb"
     },
     {
       "url": "https://achadinhochef.pages.dev/todos",
       "arquivo": "bios/achadinhochef/todos.html",
-      "bytes": 103520,
+      "bytes": 326792,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+      "sha256": "9db2814f38cb5839420f9b7de4b5c623fa1d6beb7ba4615d51cad1ea69377b7d"
     },
     {
       "url": "https://achadinhochef.pages.dev/parceiros",
       "arquivo": "bios/achadinhochef/parceiros.html",
-      "bytes": 8015,
+      "bytes": 9421,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+      "sha256": "91411ad4c19ed56187c09b494122fdc2174b0adfe5f00cd20cb4866fc6a8cf8a"
     },
     {
       "url": "https://pagomenos.pages.dev/",
       "arquivo": "bios/pagomenos/index.html",
-      "bytes": 249787,
+      "bytes": 349155,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+      "sha256": "41f685fd1ca2535196d3f2a9a6419deaa2bf6f98b7102d2d2c82770b7dc856bb"
     },
     {
       "url": "https://pagomenos.pages.dev/todos",
       "arquivo": "bios/pagomenos/todos.html",
-      "bytes": 103520,
+      "bytes": 326792,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+      "sha256": "9db2814f38cb5839420f9b7de4b5c623fa1d6beb7ba4615d51cad1ea69377b7d"
     },
     {
       "url": "https://pagomenos.pages.dev/parceiros",
       "arquivo": "bios/pagomenos/parceiros.html",
-      "bytes": 8015,
+      "bytes": 9421,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+      "sha256": "91411ad4c19ed56187c09b494122fdc2174b0adfe5f00cd20cb4866fc6a8cf8a"
     },
     {
       "url": "https://achadinhodehoje.pages.dev/",
       "arquivo": "bios/achadinhodehoje/index.html",
-      "bytes": 249787,
+      "bytes": 349155,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+      "sha256": "41f685fd1ca2535196d3f2a9a6419deaa2bf6f98b7102d2d2c82770b7dc856bb"
     },
     {
       "url": "https://achadinhodehoje.pages.dev/todos",
       "arquivo": "bios/achadinhodehoje/todos.html",
-      "bytes": 103520,
+      "bytes": 326792,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+      "sha256": "9db2814f38cb5839420f9b7de4b5c623fa1d6beb7ba4615d51cad1ea69377b7d"
     },
     {
       "url": "https://achadinhodehoje.pages.dev/parceiros",
       "arquivo": "bios/achadinhodehoje/parceiros.html",
-      "bytes": 8015,
+      "bytes": 9421,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+      "sha256": "91411ad4c19ed56187c09b494122fdc2174b0adfe5f00cd20cb4866fc6a8cf8a"
     },
     {
       "url": "https://meulivro.pages.dev/",
       "arquivo": "bios/meulivro/index.html",
-      "bytes": 249787,
+      "bytes": 349155,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "67d71801f6899feabb04e3db9cb658d7c4df38cdaf67fa32c5bfb645d74a5434"
+      "sha256": "41f685fd1ca2535196d3f2a9a6419deaa2bf6f98b7102d2d2c82770b7dc856bb"
     },
     {
       "url": "https://meulivro.pages.dev/todos",
       "arquivo": "bios/meulivro/todos.html",
-      "bytes": 103520,
+      "bytes": 326792,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "82bf3dc1d3d75ef0835fe428a423ece690b4bddfb3082d965d881bba75be42ee"
+      "sha256": "9db2814f38cb5839420f9b7de4b5c623fa1d6beb7ba4615d51cad1ea69377b7d"
     },
     {
       "url": "https://meulivro.pages.dev/parceiros",
       "arquivo": "bios/meulivro/parceiros.html",
-      "bytes": 8015,
+      "bytes": 9421,
       "tipo": "text/html; charset=utf-8",
       "cache": "public, max-age=0, must-revalidate",
-      "sha256": "dca767c84ab872596970e71c0a796e9d11d79a34208ba9d69c3a13a095df9a88"
+      "sha256": "91411ad4c19ed56187c09b494122fdc2174b0adfe5f00cd20cb4866fc6a8cf8a"
     }
   ]
 }

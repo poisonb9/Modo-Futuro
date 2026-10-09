@@ -6,6 +6,506 @@ corpo = o porquê). Mais novo primeiro.
 
 ---
 
+## 09/10/2026 15:41 — `ef5fe6d`
+
+**O quê:** radar: mineracao de canais tambem no camarim, semanestesia e cozinha
+
+**Por quê:** - sementes so' de canais oficiais no camarim (canal de fa' fica de fora) - excluir_no_titulo por semente: palco/MV/cover sem fala nao entra no camarim - criterios do Gemini e pisos de views inalterados
+
+Carimbo no ar: `a408f25477ce` · 39 endereço(s) conferidos · HTML 312 KB
+
+---
+
+## 09/10/2026 14:56 — `c74585b`
+
+**O quê:** radar: mineracao de canais campeoes (outliers), sementes que crescem sozinhas e reexecucao de corte abortado por cota
+
+**Por quê:** - engine/minerar_canais.py: le o catalogo dos canais-fonte campeoes (1 unidade/50 videos) e pontua outlier = views / mediana do canal; nome de semente conferido - radares do truque, modofuturo e atefalhar somam a mineracao; filtros de tema intactos - promocao automatica de sementes (fonte aprovada pelo Gemini; >=3 itens >=200k no radar) - truque: K-pop no titulo para canais que nao sao so' de idol; nomes em hangul - vigia_raw: reexecuta corte que abortou na sonda de cota quando a cota volta (nao toca runs da fila)
+
+Carimbo no ar: `a2d9505a191e` · 39 endereço(s) conferidos · HTML 313 KB
+
+---
+
+## 09/10/2026 12:29 — `6ed5caa`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `4d1b3d038776` · 39 endereço(s) conferidos · HTML 313 KB
+
+---
+
+## 09/10/2026 09:30 — `aa7236c`
+
+**O quê:** desempenho: foto das views + registro de publicados
+
+Carimbo no ar: `e77164f178b8` · 39 endereço(s) conferidos · HTML 311 KB
+
+---
+
+## 09/10/2026 08:52 — `803d3ff`
+
+**O quê:** views: leitura do TikTok
+
+Carimbo no ar: `7c708043283f` · 39 endereço(s) conferidos · HTML 312 KB
+
+---
+
+## 09/10/2026 08:12 — `ed698cb`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `38cb75e376f4` · 39 endereço(s) conferidos · HTML 312 KB
+
+---
+
+## 09/10/2026 06:32 — `e600e90`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `5ea2b5439e16` · 39 endereço(s) conferidos · HTML 327 KB
+
+---
+
+## 09/10/2026 03:48 — `e602d20`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `eaf87456e0c3` · 39 endereço(s) conferidos · HTML 326 KB
+
+---
+
+## 09/10/2026 03:16 — `032b885`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `095ce67a1a07` · 39 endereço(s) conferidos · HTML 325 KB
+
+---
+
+## 09/10/2026 02:14 — `b03fff5`
+
+**O quê:** ml_vitrine: mais vendidos do Mercado Livre
+
+Carimbo no ar: `ddee1d743edd` · 39 endereço(s) conferidos · HTML 326 KB
+
+---
+
+## 09/10/2026 00:52 — `f090683`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `eaa81a66730f` · 39 endereço(s) conferidos · HTML 326 KB
+
+---
+
+## 08/10/2026 23:59 — `9f9ae64`
+
+**O quê:** registro: postagens conferidas
+
+Carimbo no ar: `7c3fcf27e330` · 39 endereço(s) conferidos · HTML 325 KB
+
+---
+
+## 08/10/2026 22:05 — `287be4b`
+
+**O quê:** views: leitura do TikTok
+
+Carimbo no ar: `917fa2a8a575` · 39 endereço(s) conferidos · HTML 325 KB
+
+---
+
+## 08/10/2026 20:46 — `9789da4`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `5653003e941c` · 39 endereço(s) conferidos · HTML 326 KB
+
+---
+
+## 08/10/2026 19:12 — `c2e2e2d`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e25c7b0a601d` · 39 endereço(s) conferidos · HTML 326 KB
+
+---
+
+## 08/10/2026 18:23 — `8edeb67`
+
+**O quê:** garimpo: precos vistos
+
+Carimbo no ar: `cd5516753ba5` · 39 endereço(s) conferidos · HTML 327 KB
+
+---
+
+## 08/10/2026 17:26 — `32ae66b`
+
+**O quê:** cupons: atualizacao de 3 em 3 h
+
+Carimbo no ar: `8bcdd610a0c4` · 39 endereço(s) conferidos · HTML 312 KB
+
+---
+
+## 08/10/2026 13:10 — `1260447`
+
+**O quê:** guardas: trecho enfileirado e registro de clipe
+
+Carimbo no ar: `c82424ff8312` · 39 endereço(s) conferidos · HTML 310 KB
+
+---
+
+## 08/10/2026 11:58 — `c798b35`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `884541d25e24` · 39 endereço(s) conferidos · HTML 138 KB
+
+---
+
+## 08/10/2026 10:25 — `ce8549e`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `116fa53ea15f` · 39 endereço(s) conferidos · HTML 310 KB
+
+---
+
+## 08/10/2026 09:06 — `092d10d`
+
+**O quê:** views: leitura do TikTok
+
+Carimbo no ar: `43a7fa35e507` · 39 endereço(s) conferidos · HTML 310 KB
+
+---
+
+## 08/10/2026 08:26 — `348977d`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `cc96978dd57d` · 39 endereço(s) conferidos · HTML 310 KB
+
+---
+
+## 08/10/2026 06:25 — `bcf3946`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `4ac68b2adef3` · 39 endereço(s) conferidos · HTML 310 KB
+
+---
+
+## 08/10/2026 03:40 — `50e8664`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `6b41ac4cb79b` · 39 endereço(s) conferidos · HTML 323 KB
+
+---
+
+## 08/10/2026 03:13 — `50e8664`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `a76fa19d2ea3` · 39 endereço(s) conferidos · HTML 323 KB
+
+---
+
+## 08/10/2026 02:04 — `83b6399`
+
+**O quê:** ml_vitrine: mais vendidos do Mercado Livre
+
+Carimbo no ar: `53d3d3c7266a` · 39 endereço(s) conferidos · HTML 323 KB
+
+---
+
+## 08/10/2026 00:41 — `c1c4267`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `75e361048df5` · 39 endereço(s) conferidos · HTML 322 KB
+
+---
+
+## 07/10/2026 23:21 — `f3b378d`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `4d88a7c25a2e` · 39 endereço(s) conferidos · HTML 323 KB
+
+---
+
+## 07/10/2026 22:42 — `d1f9563`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `d648fbd131f5` · 39 endereço(s) conferidos · HTML 323 KB
+
+---
+
+## 07/10/2026 20:58 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `932c918dcf49` · 27 endereço(s) conferidos · HTML 315 KB
+
+---
+
+## 07/10/2026 20:36 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `d117f9359637` · 27 endereço(s) conferidos · HTML 315 KB
+
+---
+
+## 07/10/2026 20:13 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `0a1980bffb7e` · 27 endereço(s) conferidos · HTML 315 KB
+
+---
+
+## 07/10/2026 17:55 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e2f41c57f417` · 27 endereço(s) conferidos · HTML 313 KB
+
+---
+
+## 07/10/2026 17:20 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e5cb8b981aae` · 27 endereço(s) conferidos · HTML 313 KB
+
+---
+
+## 07/10/2026 16:44 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `672f4fd41ebb` · 39 endereço(s) conferidos · HTML 319 KB
+
+---
+
+## 07/10/2026 13:37 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `bf7023e2d9d4` · 39 endereço(s) conferidos · HTML 321 KB
+
+---
+
+## 07/10/2026 12:26 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `53bf99359d17` · 39 endereço(s) conferidos · HTML 322 KB
+
+---
+
+## 07/10/2026 11:54 — `4ae99be`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `752a2c75e432` · 39 endereço(s) conferidos · HTML 322 KB
+
+---
+
+## 07/10/2026 11:28 — `4a78d72`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `93dcebf746f9` · 39 endereço(s) conferidos · HTML 322 KB
+
+---
+
+## 07/10/2026 10:02 — `9690c90`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `072f2e8a5831` · 39 endereço(s) conferidos · HTML 321 KB
+
+---
+
+## 07/10/2026 08:39 — `27863e2`
+
+**O quê:** views: leitura do TikTok
+
+Carimbo no ar: `04d080189755` · 39 endereço(s) conferidos · HTML 320 KB
+
+---
+
+## 07/10/2026 07:57 — `e026b16`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `fadc1bd6cff0` · 39 endereço(s) conferidos · HTML 320 KB
+
+---
+
+## 07/10/2026 07:14 — `3baa577`
+
+**O quê:** medidas: cenas/min e pausa dos clipes
+
+Carimbo no ar: `45dab036c641` · 39 endereço(s) conferidos · HTML 320 KB
+
+---
+
+## 07/10/2026 06:15 — `7a64a41`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `e4c4246deb9b` · 39 endereço(s) conferidos · HTML 320 KB
+
+---
+
+## 07/10/2026 03:56 — `53e08c5`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `145bc8bb5288` · 39 endereço(s) conferidos · HTML 320 KB
+
+---
+
+## 07/10/2026 03:23 — `53e08c5`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `f55966b6026f` · 39 endereço(s) conferidos · HTML 319 KB
+
+---
+
+## 07/10/2026 03:15 — `53e08c5`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `325530dcb360` · 39 endereço(s) conferidos · HTML 318 KB
+
+---
+
+## 07/10/2026 01:11 — `6b42486`
+
+**O quê:** ml_vitrine: mais vendidos do Mercado Livre
+
+Carimbo no ar: `66afe99207bd` · 39 endereço(s) conferidos · HTML 318 KB
+
+---
+
+## 07/10/2026 00:09 — `50675c7`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `bf6139c81b10` · 39 endereço(s) conferidos · HTML 317 KB
+
+---
+
+## 06/10/2026 23:29 — `50675c7`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `ea00527a8d34` · 39 endereço(s) conferidos · HTML 307 KB
+
+---
+
+## 06/10/2026 22:36 — `b84d8f8`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `349a232e0fca` · 39 endereço(s) conferidos · HTML 307 KB
+
+---
+
+## 06/10/2026 21:38 — `27662d7`
+
+**O quê:** pendencias: destilacao reiniciada com reserva de chaves
+
+Carimbo no ar: `a70c5f46d729` · 39 endereço(s) conferidos · HTML 137 KB
+
+---
+
+## 06/10/2026 20:15 — `3e31b19`
+
+**O quê:** alarme de falha (Telegram) para as automacoes de postagem; repor_fila 2x/dia
+
+Carimbo no ar: `199166c23449` · 39 endereço(s) conferidos · HTML 137 KB
+
+---
+
+## 06/10/2026 19:07 — `3a9ae84`
+
+**O quê:** vitrine: o que ja' foi ao canal
+
+Carimbo no ar: `6f0a74b131d9` · 39 endereço(s) conferidos · HTML 306 KB
+
+---
+
+## 06/10/2026 17:29 — `e133644`
+
+**O quê:** ml_vitrine: mais vendidos do Mercado Livre
+
+Carimbo no ar: `38691f984131` · 39 endereço(s) conferidos · HTML 305 KB
+
+---
+
+## 06/10/2026 15:07 — `cab43f2`
+
+**O quê:** handoff 06/10 (I): retomada para /clear
+
+Carimbo no ar: `02ec3bbff9c8` · 39 endereço(s) conferidos · HTML 305 KB
+
+---
+
+## 06/10/2026 13:56 — `b2396d5`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `1bdbc7ce81cd` · 39 endereço(s) conferidos · HTML 304 KB
+
+---
+
+## 06/10/2026 13:12 — `b12e16c`
+
+**O quê:** bio: pilula 'achado novo' do tamanho do texto (esticava de ponta a ponta e quebrava em 2 linhas)
+
+Carimbo no ar: `42dc41431dc8` · 39 endereço(s) conferidos · HTML 305 KB
+
+---
+
+## 06/10/2026 12:49 — `b12e16c`
+
+**O quê:** bio: pilula 'achado novo' do tamanho do texto (esticava de ponta a ponta e quebrava em 2 linhas)
+
+Carimbo no ar: `89bc28ec529c` · 39 endereço(s) conferidos · HTML 305 KB
+
+---
+
+## 06/10/2026 12:02 — `acc7e5b`
+
+**O quê:** nomes: cache do dia (publicacao diaria)
+
+Carimbo no ar: `ab8af84a323b` · 39 endereço(s) conferidos · HTML 305 KB
+
+---
+
+## 06/10/2026 11:41 — `ae34380`
+
+**O quê:** precos: instantaneo do catalogo
+
+Carimbo no ar: `b2360ba56335` · 39 endereço(s) conferidos · HTML 305 KB
+
+---
+
+## 06/10/2026 09:33 — `c40b92c`
+
+**O quê:** loja: tira 'Menor preco ja visto' da fila de listas (redundante); aba Instantaneos continua
+
+Carimbo no ar: `7ad359279736` · 27 endereço(s) conferidos · HTML 296 KB
+
+---
+
 ## 30/09/2026 18:50 — `1712733`
 
 **O quê:** vitrine: o que ja' foi ao canal

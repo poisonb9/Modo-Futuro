@@ -1,5 +1,5 @@
 {
-  "baixado_em": "2026-09-20T10:58:09+00:00",
+  "baixado_em": "2026-10-09T08:13:01+00:00",
   "conta_id": "(omitido de proposito — esta no .env)",
   "projetos": {
     "achadinhototal": {
@@ -35,23 +35,129 @@
         }
       },
       "latest_deployment": {
-        "created_on": "2026-09-20T10:23:07.680761Z",
-        "modified_on": "2026-09-20T10:23:09.058663Z",
+        "created_on": "2026-10-09T08:11:28.814471Z",
+        "modified_on": "2026-10-09T08:11:30.062189Z",
         "environment": "production",
-        "url": "https://c99977f0.achadinhototal.pages.dev",
-        "short_id": "c99977f0"
+        "url": "https://131864c3.achadinhototal.pages.dev",
+        "short_id": "131864c3"
       },
       "canonical_deployment": {
-        "created_on": "2026-09-20T10:23:07.680761Z",
-        "modified_on": "2026-09-20T10:23:09.058663Z",
+        "created_on": "2026-10-09T08:11:28.814471Z",
+        "modified_on": "2026-10-09T08:11:30.062189Z",
         "environment": "production",
-        "url": "https://c99977f0.achadinhototal.pages.dev",
-        "short_id": "c99977f0"
+        "url": "https://131864c3.achadinhototal.pages.dev",
+        "short_id": "131864c3"
       },
       "created_on": "2026-09-14T15:15:23.924197Z",
       "production_branch": "main",
       "production_script_name": "pages-worker--19404860-production",
       "preview_script_name": "pages-worker--19404860-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "atefalhar": {
+      "name": "atefalhar",
+      "subdomain": "atefalhar.pages.dev",
+      "domains": [
+        "atefalhar.pages.dev",
+        "2000.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-12",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-10-09T08:11:00.717146Z",
+        "modified_on": "2026-10-09T08:11:01.944061Z",
+        "environment": "production",
+        "url": "https://94ef4f8f.atefalhar.pages.dev",
+        "short_id": "94ef4f8f"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-10-09T08:11:00.717146Z",
+        "modified_on": "2026-10-09T08:11:01.944061Z",
+        "environment": "production",
+        "url": "https://94ef4f8f.atefalhar.pages.dev",
+        "short_id": "94ef4f8f"
+      },
+      "created_on": "2026-09-12T21:39:21.75495Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--19327501-production",
+      "preview_script_name": "pages-worker--19327501-preview",
+      "uses_functions": false,
+      "framework": "",
+      "framework_version": ""
+    },
+    "modofuturo": {
+      "name": "modofuturo",
+      "subdomain": "modofuturo.pages.dev",
+      "domains": [
+        "modofuturo.pages.dev",
+        "futuro.achadinhototal.com.br"
+      ],
+      "build_config": {
+        "web_analytics_tag": null,
+        "web_analytics_token": null
+      },
+      "deployment_configs": {
+        "preview": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-27",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        },
+        "production": {
+          "env_vars": null,
+          "fail_open": true,
+          "always_use_latest_compatibility_date": false,
+          "compatibility_date": "2026-09-27",
+          "compatibility_flags": [],
+          "build_image_major_version": 3,
+          "usage_model": "standard"
+        }
+      },
+      "latest_deployment": {
+        "created_on": "2026-10-09T08:10:38.485861Z",
+        "modified_on": "2026-10-09T08:10:40.334392Z",
+        "environment": "production",
+        "url": "https://de381817.modofuturo.pages.dev",
+        "short_id": "de381817"
+      },
+      "canonical_deployment": {
+        "created_on": "2026-10-09T08:10:38.485861Z",
+        "modified_on": "2026-10-09T08:10:40.334392Z",
+        "environment": "production",
+        "url": "https://de381817.modofuturo.pages.dev",
+        "short_id": "de381817"
+      },
+      "created_on": "2026-09-27T12:20:30.228681Z",
+      "production_branch": "main",
+      "production_script_name": "pages-worker--20058790-production",
+      "preview_script_name": "pages-worker--20058790-preview",
       "uses_functions": false,
       "framework": "",
       "framework_version": ""
@@ -88,18 +194,18 @@
         }
       },
       "latest_deployment": {
-        "created_on": "2026-09-20T10:22:50.594634Z",
-        "modified_on": "2026-09-20T10:22:51.576272Z",
+        "created_on": "2026-10-09T08:10:17.052928Z",
+        "modified_on": "2026-10-09T08:10:18.229462Z",
         "environment": "production",
-        "url": "https://38f69f95.meulivro.pages.dev",
-        "short_id": "38f69f95"
+        "url": "https://1bdbae77.meulivro.pages.dev",
+        "short_id": "1bdbae77"
       },
       "canonical_deployment": {
-        "created_on": "2026-09-20T10:22:50.594634Z",
-        "modified_on": "2026-09-20T10:22:51.576272Z",
+        "created_on": "2026-10-09T08:10:17.052928Z",
+        "modified_on": "2026-10-09T08:10:18.229462Z",
         "environment": "production",
-        "url": "https://38f69f95.meulivro.pages.dev",
-        "short_id": "38f69f95"
+        "url": "https://1bdbae77.meulivro.pages.dev",
+        "short_id": "1bdbae77"
       },
       "created_on": "2026-09-12T21:13:19.364556Z",
       "production_branch": "main",
@@ -141,18 +247,18 @@
         }
       },
       "latest_deployment": {
-        "created_on": "2026-09-20T10:22:35.403188Z",
-        "modified_on": "2026-09-20T10:22:36.495292Z",
+        "created_on": "2026-10-09T08:09:53.893378Z",
+        "modified_on": "2026-10-09T08:09:55.083984Z",
         "environment": "production",
-        "url": "https://f04c1602.achadinhodehoje.pages.dev",
-        "short_id": "f04c1602"
+        "url": "https://5d7614ca.achadinhodehoje.pages.dev",
+        "short_id": "5d7614ca"
       },
       "canonical_deployment": {
-        "created_on": "2026-09-20T10:22:35.403188Z",
-        "modified_on": "2026-09-20T10:22:36.495292Z",
+        "created_on": "2026-10-09T08:09:53.893378Z",
+        "modified_on": "2026-10-09T08:09:55.083984Z",
         "environment": "production",
-        "url": "https://f04c1602.achadinhodehoje.pages.dev",
-        "short_id": "f04c1602"
+        "url": "https://5d7614ca.achadinhodehoje.pages.dev",
+        "short_id": "5d7614ca"
       },
       "created_on": "2026-09-12T21:09:39.460008Z",
       "production_branch": "main",
@@ -194,18 +300,18 @@
         }
       },
       "latest_deployment": {
-        "created_on": "2026-09-20T10:22:20.452688Z",
-        "modified_on": "2026-09-20T10:22:21.57799Z",
+        "created_on": "2026-10-09T08:09:32.689385Z",
+        "modified_on": "2026-10-09T08:09:34.004243Z",
         "environment": "production",
-        "url": "https://35d29b5e.pagomenos.pages.dev",
-        "short_id": "35d29b5e"
+        "url": "https://a2e28be8.pagomenos.pages.dev",
+        "short_id": "a2e28be8"
       },
       "canonical_deployment": {
-        "created_on": "2026-09-20T10:22:20.452688Z",
-        "modified_on": "2026-09-20T10:22:21.57799Z",
+        "created_on": "2026-10-09T08:09:32.689385Z",
+        "modified_on": "2026-10-09T08:09:34.004243Z",
         "environment": "production",
-        "url": "https://35d29b5e.pagomenos.pages.dev",
-        "short_id": "35d29b5e"
+        "url": "https://a2e28be8.pagomenos.pages.dev",
+        "short_id": "a2e28be8"
       },
       "created_on": "2026-09-12T21:12:54.478488Z",
       "production_branch": "main",
@@ -247,18 +353,18 @@
         }
       },
       "latest_deployment": {
-        "created_on": "2026-09-20T10:22:04.867468Z",
-        "modified_on": "2026-09-20T10:22:06.231134Z",
+        "created_on": "2026-10-09T08:09:12.031869Z",
+        "modified_on": "2026-10-09T08:09:13.795782Z",
         "environment": "production",
-        "url": "https://00a72680.achadinhochef.pages.dev",
-        "short_id": "00a72680"
+        "url": "https://07874301.achadinhochef.pages.dev",
+        "short_id": "07874301"
       },
       "canonical_deployment": {
-        "created_on": "2026-09-20T10:22:04.867468Z",
-        "modified_on": "2026-09-20T10:22:06.231134Z",
+        "created_on": "2026-10-09T08:09:12.031869Z",
+        "modified_on": "2026-10-09T08:09:13.795782Z",
         "environment": "production",
-        "url": "https://00a72680.achadinhochef.pages.dev",
-        "short_id": "00a72680"
+        "url": "https://07874301.achadinhochef.pages.dev",
+        "short_id": "07874301"
       },
       "created_on": "2026-09-12T21:09:37.012252Z",
       "production_branch": "main",
@@ -300,18 +406,18 @@
         }
       },
       "latest_deployment": {
-        "created_on": "2026-09-20T10:21:47.349321Z",
-        "modified_on": "2026-09-20T10:21:48.532539Z",
+        "created_on": "2026-10-09T08:08:49.991726Z",
+        "modified_on": "2026-10-09T08:08:51.058349Z",
         "environment": "production",
-        "url": "https://468b0161.oachadinho.pages.dev",
-        "short_id": "468b0161"
+        "url": "https://09692399.oachadinho.pages.dev",
+        "short_id": "09692399"
       },
       "canonical_deployment": {
-        "created_on": "2026-09-20T10:21:47.349321Z",
-        "modified_on": "2026-09-20T10:21:48.532539Z",
+        "created_on": "2026-10-09T08:08:49.991726Z",
+        "modified_on": "2026-10-09T08:08:51.058349Z",
         "environment": "production",
-        "url": "https://468b0161.oachadinho.pages.dev",
-        "short_id": "468b0161"
+        "url": "https://09692399.oachadinho.pages.dev",
+        "short_id": "09692399"
       },
       "created_on": "2026-09-12T21:13:13.471598Z",
       "production_branch": "main",
@@ -397,86 +503,6 @@
       "production_branch": "main",
       "production_script_name": "pages-worker--19327504-production",
       "preview_script_name": "pages-worker--19327504-preview",
-      "uses_functions": null,
-      "framework": "",
-      "framework_version": ""
-    },
-    "atefalhar": {
-      "name": "atefalhar",
-      "subdomain": "atefalhar.pages.dev",
-      "domains": [
-        "atefalhar.pages.dev"
-      ],
-      "build_config": {
-        "web_analytics_tag": null,
-        "web_analytics_token": null
-      },
-      "deployment_configs": {
-        "preview": {
-          "env_vars": null,
-          "fail_open": true,
-          "always_use_latest_compatibility_date": false,
-          "compatibility_date": "2026-09-12",
-          "compatibility_flags": [],
-          "build_image_major_version": 3,
-          "usage_model": "standard"
-        },
-        "production": {
-          "env_vars": null,
-          "fail_open": true,
-          "always_use_latest_compatibility_date": false,
-          "compatibility_date": "2026-09-12",
-          "compatibility_flags": [],
-          "build_image_major_version": 3,
-          "usage_model": "standard"
-        }
-      },
-      "latest_deployment": null,
-      "canonical_deployment": null,
-      "created_on": "2026-09-12T21:39:21.75495Z",
-      "production_branch": "main",
-      "production_script_name": "pages-worker--19327501-production",
-      "preview_script_name": "pages-worker--19327501-preview",
-      "uses_functions": null,
-      "framework": "",
-      "framework_version": ""
-    },
-    "otreinodehoje": {
-      "name": "otreinodehoje",
-      "subdomain": "otreinodehoje.pages.dev",
-      "domains": [
-        "otreinodehoje.pages.dev"
-      ],
-      "build_config": {
-        "web_analytics_tag": null,
-        "web_analytics_token": null
-      },
-      "deployment_configs": {
-        "preview": {
-          "env_vars": null,
-          "fail_open": true,
-          "always_use_latest_compatibility_date": false,
-          "compatibility_date": "2026-09-12",
-          "compatibility_flags": [],
-          "build_image_major_version": 3,
-          "usage_model": "standard"
-        },
-        "production": {
-          "env_vars": null,
-          "fail_open": true,
-          "always_use_latest_compatibility_date": false,
-          "compatibility_date": "2026-09-12",
-          "compatibility_flags": [],
-          "build_image_major_version": 3,
-          "usage_model": "standard"
-        }
-      },
-      "latest_deployment": null,
-      "canonical_deployment": null,
-      "created_on": "2026-09-12T21:39:16.361434Z",
-      "production_branch": "main",
-      "production_script_name": "pages-worker--19327497-production",
-      "preview_script_name": "pages-worker--19327497-preview",
       "uses_functions": null,
       "framework": "",
       "framework_version": ""

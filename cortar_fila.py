@@ -55,6 +55,16 @@ def em_voo() -> int:
     return n
 
 
+def _a_postar_da(conta: str, reserva: str) -> str:
+    """Pasta '2 - CLIPES PRONTOS' da conta (contas_drive). Sem a conta
+    cadastrada, fica a pasta antiga do item."""
+    try:
+        import contas_drive
+        return contas_drive.conta_por_nome(conta)["a_postar"]
+    except Exception:
+        return reserva
+
+
 def tem_cota() -> tuple[bool, str]:
     """Alguma chave do Gemini responde 200? So' o 200 libera o disparo.
 
@@ -630,7 +640,11 @@ def main() -> None:
             "drive_file_id": item["drive_file_id"],
             # 01/10/2026: item pode dizer onde o BRUTO esta' (os brutos do Sem
             # Anestesia moram na FATOS/principal e nunca entravam na fila).
-            "pasta_drive": item.get("pasta_drive") or PASTA_DRIVE,
+            # ⭐ 09/10/2026 (dono): o clipe sobe na pasta de clipes da MESMA
+            # conta do bruto. A principal lotou (16,09/16,11 GB) e todo corte
+            # da fila morria no upload, com o clipe pronto.
+            "pasta_drive": _a_postar_da(item.get("conta") or "reserva",
+                                        item.get("pasta_drive") or PASTA_DRIVE),
             "canal": item["canal"],
             "qtd": item["qtd"],
             "idioma": "en",
@@ -641,7 +655,8 @@ def main() -> None:
             # devolve 404 nela, entao subir com credencial da reserva nunca
             # podia dar certo — e o passo de subir vem DEPOIS do corte, ja'
             # com 40 a 100 min de runner pagos.
-            "conta_saida": "principal",
+            # ⭐ 09/10/2026: era "principal" fixo. Agora a dona da pasta acima.
+            "conta_saida": item.get("conta") or "reserva",
             "dublar": "true",
             "fala_literal": "true",
             "voice_over": "true",

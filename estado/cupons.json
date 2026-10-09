@@ -1,5 +1,41 @@
 [
  {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF na Placa Mãe MSI B550M Gaming Plus WiFi6E AMD AM4",
+  "codigo": "CHEGOUMSI",
+  "fim": "2026-10-30T12:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F1047423%2Fplaca-mae-msi-b550m-gaming-plus-wifi6e-amd-am4-micro-atx-ddr4-wi-fi-6e-bluetooth-52-preto-e-prata-b550m-gaming-plus-wifi6e",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "11% OFF em produtos participantes da campanha CPUPROMO",
+  "codigo": "CPUPROMO",
+  "fim": "2026-10-13T13:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1CPUPROMO",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF no produto AMD participante da oferta",
+  "codigo": "AMD10",
+  "fim": "2026-10-13T15:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F356695",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF em produtos participantes da campanha 10DO10",
+  "codigo": "10DO10",
+  "fim": "2026-10-13T12:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2F10DO10",
+  "termos": ""
+ },
+ {
   "loja": "Arno",
   "tipo": "promotion",
   "titulo": "Vaporizador de Roupas Arno Steam Home, Pendura suas roupas, Higieniza e Desodoriza, 1830W, Branco e Cinza, US32",
@@ -2129,7 +2165,7 @@
   "titulo": "R$ 5,41 OFF acima de R$ 81,10",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt3QkfxuxP2YlqbyzvPb1tKjDV5Y69ZQWmSCkQyEb8iCz1cySWR6ghZ7upddpTBxKsnzx0cRqCmlSunYniMUNmxfq4tYbVIXrHWyH47R1O7Bs9gNsmOi0EWFE5yHVoB6sbk65dirn4dAya3mDaaTmKMKiOznUqrJIav17IAA3rHmkx7BKhrHI0UVgrZC4iTGtaehyJ3cjTXb4Cl5TpbaWSzWJCg0NJ26teSwZ4RCknMUo5FaQv8K5qo5g14d32Vvha6JVpQvYZUaisy2jhXDpG3FNVt3dyptBNg8nbPvS2NSpWIEIhThhyESox2O8vAnxUfvFbOIUWTQPsQ5gQrX0TizAJxMR1FkBcwQj9tnTk7LJVMhl1jcgnft6tBanNYpvsJ5ubuSFUGBZ4kdpQsSQi8TgXnpuWh7ydz2V0YRtvyx4DKFRjHjlGCa6M8Vh5aLRsWi9lVHrFb2BzU95",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt42cXUf7L0tHL0wtIsWSRC4qyeLaOXriGgV0Iz7CmrozbreAQmc8rVpwcbmQkTfynDCpmAFN1GDqlacXZTWg9lMlKQPU2cQ994a1DgMkcBMMaVG2jnJuvBPsXbxc9QhLKdAlRam8wQzHVIsVflBQbEYUcb5CVTypqlpUnZcI3FyBvDherwEkIy52ylQ5tB6za7owacxgSdoMKlIw8dRkKrGhjoubTFP1vcjJq50LH1gVR1ZsUZJlUzwt3ILlGEAEDWrneTIOKVqaFPG0jRoa7sqfA8WZKVNIQNdKfxn26syP7UJyfZ990q9c2lUSJ7TZxXuuTHBqKJ3n7RCtFbijElaVyq7uTVi9gj2gHEiJ7rZIKWEuIfOccLuChBgqwKBnU6nCYbdKhxuP9FXnX1HihkvdJKS5aLlYZs5bBERQs77MRl7tnRym85hRXE5OnO6it612TZuJjsQjcAqJ",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -2138,16 +2174,25 @@
   "titulo": "R$ 16,23 OFF acima de R$ 270,50",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2f5tmW91avjetxQlbUgGqblT45NXeLwb0V9Gc2fFuat87smVCqWt2fjAR6Kj7RHm8yWhbX5Ii9vD3jTM9TvyeFjgKggrnwNsbw9U6W3lZ2OH2D2ABbr7UNWuRXUgBTbkV7N8YHKZngvXJ1vLdFtry96XAlMrNdarMtQpEClGbsRM70pIRfeW49xMOihkJ8Aa3M9qdMwfMscu9LCfzaNn9ejJCGRWT2avD6mFeC66Svl7PEUF6N3RTB7Fup0UWvNvTK0aNFrVTdZaO4qFVCZS6ZUCSNuYgUMZxQxgWesVSEt8dxotZ0FmhUiBz7qkWiqogoAgcD81m8eI2IYzwdfJCjHntEJlkuNTH7TXaawaeBGlkaXWmMmNmhjV1BgONZYDvMOWVraRYhccvE4sBFUgsTFDHibA0Mo8LvXJ2sETIIFeyMGvmzN1bdCy6MGtGVIMM5WXt8a5ZyBreZ5",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW3pfxhot1hc0soVqARQNLJgydTgVWyEIsGqBD7g09qjH6hkyXSzJRCGEnBXGBqmehGSDejAqNIkqhLgPhiIrXRLr5MLc466cyiuJW7yedVo1AIzFKWJqyAHcxLK7RQJR9BkbYpR0Ns64uGM8n6oHaYD6E3PgdsQjWe9VRWO4eqIR6IM4tzmkmZWMFZSr3fPmPtlU175cTL2ncSqVsfVzQ7PB0zA2AlA75EZ4UmNBTmn8TkpzVFfLkNGJbMsi5dHYlJdeXMBdxi9xlCeQshyPpYNgFtUsBv9vgzU6SBj7hOX4DWBVFzuvdyJ02nqE346TffP5QRrgLi0uNbB3cZdVuwZVIWtjvhAzLJ9JSzzr9jj9PVqHLM0JZ3kY6XjIULJq8ITHhAaDioo9Wwf5113MeHwB9Rx1OtvQxoe0eXL7q3qA5JMareNfoAAfzJTbIAFbNLjO9CJcKa23LOhV",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · Onwear Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,41 OFF acima de R$ 16,20",
+  "codigo": "GPGQOKB4WIUZ",
+  "fim": "2026-10-26T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxQQ84h13JG0zgLenfWitO3NY0HKlSk7MmBPTPbhhQIkpgpszer9elDuwhuhUqsXrqM7u0oNBbElkERrYHQAJDzHq2KFY2etC5twiEtt4joXKlCloiYRBwlqYYI2dh0bBziTNWVAmiiUFDmR649dvt5dBUoAytnPTtoBPOiWO3a2vcT8QLaDeDWc4CNUDQ8ZvK4hIm2b46F9stWh3tBiEZ4xXNNbr9PWOhiA1IK8NDZtqbceye5Tqp4ULz4S0iLioEiQsDMU9uUzSWrakxF1Mfox2nMZOaruBx2kod11jSQEqZyMEAeLMYs7cFoa1XLLCn8I2TirxsGTECbJKpcli1H2V9zI5kHhpNuwn19j9qjYH2POzMfhj5LulGCeUqd9k12IAz4kCXMrmI0rKhxg7rscr4ORXkhFzDqXBKMTkXOss9Tb9LyzSu9GoDEiAsHLIPBLd8RvMrn31ItqIc3JfRc1kXFs4S0a74SLUkt6HOQ0h6kDcoz12CxcwLrxmrswtANjhxIrZwilVkiVgQoTX4aED9HxDp0GQUzGPhupmsHmlfyOT35QnVN5M5dCjlMN9HuGUXOxYjwCmcyQ85YqgfAUxBeDdBDfIUTXhGoEZML9pywtfEwo7hEYmTRF08xOciuYGeOhLubkTqHKP1k1f4zmF",
+  "termos": "Vale na loja Onwear Store do AliExpress. Ex.: 10 pçs de aço inoxidável banhado a ouro 12mm redondo aberto moldura en"
  },
  {
   "loja": "AliExpress · Star Custom Store",
   "tipo": "voucher",
-  "titulo": "R$ 4,86 OFF acima de R$ 4,80",
+  "titulo": "R$ 4,85 OFF acima de R$ 4,80",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFleCW7C2CP8dXs0lKIKyD6VLq8Z3jIldYLmpjWx9DoOI7m8gZ3mQxHzAGswemDuYmn9CQphzN1K35HLgg2uoExQpyJ3ZIdOhtRyFc2hWP22cw2lXV4mFzRhejT7tOw0K9d5GpxaFBsxUS3WIO6MC8B6fgkmI2q2jL9I1vBq0xKMSy5aQVtSTdMjxvEE1E5kx4SWYneKbr6JVsf1jT8JWxWOxalYQDa4dE21I1eSu87RKwBp7SgI1U4PMCKQh6TCwJizi6tYfIJmXGXYwJBGKyOidycY5GbZxFIw39EEZogM0bnHu7pRgt7ESAh7SXF0EahUdJPFwRPiiX6R7o8iHCrDzNqHSYj7TxoyixEGYgzYp0dUWzrta2rj1kLhdLnU9puWrqrJGh5JBfyDl1M94y9tLBM1u33I9EfMA4U7WRhEcejI4DHAdkwXctaao5rw7mDVB7rU42dFqINND",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFlCpvCbZf9jTbKwPS7AdJMTu6WiHDomPQAvVhdgUwQyLVEgfdvnOMuPYmX8MlRuOvChk0MJGLOutAuRaHp5OLtnUQobGCOP01BQrjXgu9ZvHfO2wlGx7KgfJ8XDi9Zm4akzgoGNy14BOmGibdIGqgFsjei8rcmdA1KBoKvIYamJmIuVwv3Crcd9ClEzRVwg7NQ9iRr3aqTAxREAcMQLKiwwBSTIWxex5SweuHmKe0BY8Y6Bx0jb9AafkoPVh8S5mwMtRi6U5gj0JJ2M8QTmdjsG8w8uBU7qoJevJlNxc8XRSJwsl0vu3wkqv2aKtL9SWv3PszPbfU1I6GokV1AjnNRg6J9YGzUybhLI0jM3aoT76zRtvVoNBuSTi6OESV6ovNkks9FsSDhktGMfhjTSaRL8dnxqebboqgzgwg0Y3hEfbprKPlrqWzmos59jzR9t8Y7j3RJKQtM4JVCPZ",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

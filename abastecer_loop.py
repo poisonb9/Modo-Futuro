@@ -421,7 +421,28 @@ def limpar_orfaos(estado: dict) -> None:
             log(f"[!] limpeza de orfao falhou ({v.name[:40]}): {str(e)[:80]}")
 
 
+def _jd_tirar_duplicados(ids: list[str]) -> None:
+    """⛔ 09/10/2026: o JD guardava uma tentativa velha do MESMO video como
+    'Finished' (as vezes so' legenda/capa, de KB) e, ao receber o link de novo,
+    deixava parado no linkgrabber como duplicado -> pendente eterno (Motivate,
+    Meal Prepping, Active Recall). Antes de mandar, tira da LISTA do JD (nao
+    apaga arquivo) os links antigos com o id do video."""
+    for area in ("downloadsV2", "linkgrabberv2"):
+        try:
+            links = requests.get(f"{JD}/{area}/queryLinks",
+                                 params={"queryParams": json.dumps({"url": True})},
+                                 timeout=30).json().get("data", [])
+            alvo = [l["uuid"] for l in links if any(i in (l.get("url") or "") for i in ids)]
+            if alvo:
+                requests.get(f"{JD}/{area}/removeLinks",
+                             params={"linkIds": json.dumps(alvo), "packageIds": "[]"}, timeout=30)
+                log(f"🧹 JD: {len(alvo)} link(s) velho(s) do mesmo video tirado(s) de {area}")
+        except Exception as e:
+            log(f"[!] JD: limpeza de duplicados em {area} falhou: {str(e)[:80]}")
+
+
 def mandar_jd(canal: str, itens: list) -> bool:
+    _jd_tirar_duplicados([i["id"] for i in itens])
     q = {"links": "\n".join(i["url"] for i in itens), "autostart": True,
          "destinationFolder": str(BAIXADOS / canal), "overwritePackagizerRules": True}
     try:

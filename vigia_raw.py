@@ -312,6 +312,12 @@ def disparar(file_id: str, nome: str, conta: str = "principal",
             "qtd": QTD_CLIPES, "idioma": IDIOMA,
             "estilo_legenda": estilo_legenda,
             "pasta_drive": _a_postar(conta), "conta": conta,
+            # ⛔ 09/10/2026: SEM ESTA LINHA o upload usa a credencial da
+            # `principal` (default do workflow) na pasta da conta do bruto, e a
+            # principal nao enxerga a pasta da labzirkonart: 404 DEPOIS do
+            # corte pronto (runs 37938688001 e 37937496247, ~1h40 cada,
+            # clipes perdidos). A pasta e' da mesma conta do bruto.
+            "conta_saida": conta,
             # ⚠️ SEM ESTA LINHA o workflow cai no default e o clipe nasce
             # rotulado como modofuturo, seja ele biscoito ou maquiagem.
             **({"canal": canal} if canal else {}),

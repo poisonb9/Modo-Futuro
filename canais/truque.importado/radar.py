@@ -153,6 +153,8 @@ KPOP = [
     "jennie", "blackpink lisa", "rosé", "jisoo", "itzy", "yeji", "kiss of life",
     "seventeen", "treasure", "enhypen", "txt", "bts", "allday project",
     "noze", "스우파",
+    # ⭐ 09/10/2026: revistas coreanas (W/ELLE/Dazed Korea) escrevem a idol em HANGUL
+    "에스파", "아이브", "뉴진스", "르세라핌", "스트레이키즈", "스키즈", "엔믹스", "아일릿", "베이비몬스터", "블랙핑크", "트와이스", "있지", "세븐틴", "에이티즈", "엔하이픈", "투바투", "방탄", "레드벨벳", "아이들", "키스오브라이프", "미야오", "라이즈", "제로베이스원", "케플러", "원영", "카리나", "윈터", "해원", "지우", "원희", "아현", "하니",
 ]
 
 # ⭐ Capas de revista teen (03/10/2026, 155 capas lidas pelo Gemini): nome do
@@ -329,6 +331,19 @@ def main():
         for j in range(0, len(novos), 50):
             brutos += detalhes(novos[j:j + 50])
 
+    # ⭐ 09/10/2026: catalogo dos canais-fonte campeoes, atras de OUTLIERS
+    # (engine/minerar_canais.py). A busca por termo saturou (0 ineditos).
+    import importlib.util as _iu
+    _p = __import__("pathlib").Path(__file__).resolve().parents[2] / "engine" / "minerar_canais.py"
+    _sp = _iu.spec_from_file_location("minerar_canais", _p)
+    _mc = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mc)
+    try:
+        for v in _mc.minerar('truque.importado', CHAVES):
+            if v["id"] not in vistos:
+                vistos.add(v["id"]); brutos.append(v)
+    except Exception as e:
+        print(f"  [!] mineracao de canais falhou: {str(e)[:80]}")
+
     aval, vetados = [], 0
     fora_tema = sem_kpop = 0
     for v in brutos:
@@ -343,8 +358,12 @@ def main():
         if not tem_termo(t, KPOP):
             sem_kpop += 1
             continue
-        aval.append(avaliar(v))
+        aval.append(_mc.bonus(avaliar(v), v))
     aval.sort(key=lambda x: -x["nota"])
+    try:
+        _mc.promover_do_radar('truque.importado', aval)   # ⭐ 09/10: sementes crescem sozinhas
+    except Exception as e:
+        print(f"  [!] promocao de sementes falhou: {str(e)[:80]}")
 
     # Salva ANTES de imprimir. Em 30/08 um emoji no titulo derrubou a saida no
     # console do Windows (cp1252) e levou junto o resultado de uma rodada que

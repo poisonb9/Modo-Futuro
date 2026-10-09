@@ -1,0 +1,67 @@
+{
+ "nota": "Campeoes no TikTok (09/10): nome do Poof banido 790, episodio tenso de Bob Esponja 715, Dee Dee/FusionFall 626, debate Bob Esponja 614 -- Padrinhos Magicos e Bob Esponja dominam. Nada dark (dono 05/10).",
+ "atualizado": "2026-10-09",
+ "canais": [
+  {
+   "nome": "KaDazee",
+   "id": "UCkNd-wA7uVFzY07hMWMmO7g",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "SmugStick",
+   "id": "UC8udQVPipZYeG4GFPrFEPzg",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Mung",
+   "id": "UCV7EURbCjdMshT_VXd2B4_A",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Switch Stop",
+   "id": "UCBHQQLFpwRuZzLtAqbvoH2A",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "BlueBoyPhin",
+   "id": "UC_CHBV_8Q2lkIl37UWGES2g",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Jordan Fringe",
+   "id": "UCJKE87wqkVvbP2hUJcAKJNw",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Izzzyzzz",
+   "id": "UCWyRlMktpKbfefqBQk8U6Nw",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Saberspark",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCeGGpOehPGG7vQMUVc7tG8Q",
+   "achado_como": "Saberspark"
+  },
+  {
+   "nome": "Jambareeqi",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UC0-GNzm-kJFWdT_UPHRg0Ug",
+   "achado_como": "Jambareeqi"
+  },
+  {
+   "nome": "The Cartoon Cruise",
+   "origem": "vizinho dos campeoes (09/10)",
+   "recusado_id": "UCcfuEgaPqIBnbtpL-y2jFwQ",
+   "recusado": "The Cartoonz Crew"
+  }
+ ],
+ "nao_promover": [
+  "Ben 10",
+  "Cartoon Network",
+  "Nickelodeon",
+  "Dr. Panda",
+  "Cartoonito",
+  "Boomerang Official"
+ ]
+}

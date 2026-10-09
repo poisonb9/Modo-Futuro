@@ -389,7 +389,90 @@ def ids_na_fila_de_cortes() -> set:
             if i.get("estado") in VIVOS and i.get("drive_file_id")}
 
 
+# ⭐ 09/10/2026 -- REENCADEAR O QUE ABORTOU POR COTA.
+#
+# ⛔ O ELO QUE QUEBRAVA A CORRENTE: este vigia marca o bruto no DISPARO. Se o
+# corte aborta na guarda de cota (`guarda_cota.py`, antes de baixar), o bruto
+# fica marcado e nunca mais e' disparado -- so' voltava com
+# `--auditar --devolver` na mao. Em 08-09/10 assim ficaram parados a Giselle
+# (camarim) e mais 8 cortes, com o estoque dos 6 canais indo a zero.
+#
+# Agora: run do cortador que falhou NO PASSO DA SONDA (a unica falha que esse
+# passo tem e' falta de cota) e' reexecutado com as MESMAS entradas -- mesmo
+# canal, mesma voz, mesma pasta -- assim que a cota volta e ha' vaga. A
+# qualidade nao muda: e' o mesmo corte, so' que no horario em que ele pode
+# rodar. Ate' 3 reexecucoes por run; depois disso o vigia_saude acusa.
+REEXEC = RAIZ / "estado" / "reexecucoes_cota.json"
+MAX_REEXEC = 3
+
+
+def reexecutar_abortados_por_cota() -> int:
+    if not GITHUB_TOKEN:
+        return 0
+    h = {"Authorization": f"Bearer {GITHUB_TOKEN}", "Accept": "application/vnd.github+json"}
+    api = f"https://api.github.com/repos/{REPO}/actions"
+    try:
+        runs = requests.get(f"{api}/workflows/{WORKFLOW}/runs", headers=h,
+                            params={"per_page": 30, "status": "failure"}, timeout=30).json()
+    except Exception as e:
+        print(f"[!] reexecucao: nao li os runs ({str(e)[:60]})")
+        return 0
+    try:
+        feito = json.loads(REEXEC.read_text(encoding="utf-8"))
+    except Exception:
+        feito = {}
+    limite = time.time() - 24 * 3600
+    # ⚠️ Run disparado pela FILA nao e' nosso: o `cortar_fila` ja' refaz os
+    # dele (falhou_por_cota). Reexecutar aqui tambem = o mesmo video cortado
+    # duas vezes.
+    try:
+        _f = json.loads((RAIZ / "fila_cortes.json").read_text(encoding="utf-8"))
+        _it = _f if isinstance(_f, list) else (_f.get("fila") or _f.get("itens") or [])
+        da_fila = {str(i.get("run_id")) for i in _it if i.get("run_id")}
+    except Exception:
+        print("[!] reexecucao: sem fila_cortes.json legivel — nao reexecuto nada (evita duplicar)")
+        return 0
+    alvos = []
+    for r in runs.get("workflow_runs", []):
+        rid = str(r["id"])
+        quando = time.mktime(time.strptime(r["updated_at"], "%Y-%m-%dT%H:%M:%SZ"))
+        if quando < limite or rid in da_fila or feito.get(rid, {}).get("n", 0) >= MAX_REEXEC:
+            continue
+        # tentativa mais recente ja' passou da sonda? entao nao foi cota
+        try:
+            jobs = requests.get(f"{api}/runs/{rid}/jobs", headers=h, timeout=30).json()
+            passos = [st for j in jobs.get("jobs", []) for st in j.get("steps", [])]
+        except Exception:
+            continue
+        if any("Sondar cota" in st["name"] and st.get("conclusion") == "failure" for st in passos):
+            alvos.append(rid)
+    if not alvos:
+        return 0
+    import cortar_fila
+    ok, motivo = cortar_fila.tem_cota()
+    if not ok:
+        print(f"[reexec] {len(alvos)} corte(s) abortado(s) por cota esperando — cota ainda seca ({motivo})")
+        return 0
+    vagas = MAX_SIMULTANEOS - corte_em_andamento()
+    n = 0
+    for rid in alvos[:max(0, vagas)]:
+        rr = requests.post(f"{api}/runs/{rid}/rerun", headers=h, timeout=30)
+        if rr.status_code in (201, 204):
+            feito[rid] = {"n": feito.get(rid, {}).get("n", 0) + 1,
+                          "quando": time.strftime("%Y-%m-%d %H:%M:%S")}
+            n += 1
+            print(f"[reexec] corte {rid} reexecutado (abortou por cota; cota voltou: {motivo})")
+        else:
+            print(f"[!] reexec {rid} falhou: {rr.status_code} {rr.text[:100]}")
+    REEXEC.write_text(json.dumps(feito, ensure_ascii=False, indent=1), encoding="utf-8")
+    return n
+
+
 def uma_passada(drive) -> int:
+    try:
+        reexecutar_abortados_por_cota()   # ⭐ 09/10: antes dos novos -- quem ja' esperou vai primeiro
+    except Exception as e:
+        print(f"[!] reexecucao por cota falhou: {str(e)[:80]}")
     reg = ler_registro()
     na_fila = ids_na_fila_de_cortes()
     novos = [v for v in videos_todas_contas()

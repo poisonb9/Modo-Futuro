@@ -1,0 +1,101 @@
+{
+ "nota": "Campeoes no TikTok (09/10): Lei de Moore/computadores lacrados 1.244, Linus e esferas de solda 836, agua do mar resfria 762, silicio 99,9999999% 608. Fabrica, materia e engenharia que SE MEXE.",
+ "atualizado": "2026-10-09",
+ "canais": [
+  {
+   "nome": "Linus Tech Tips",
+   "id": "UCXuqSBlHAE6Xw-yeJA0Tunw",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Branch Education",
+   "id": "UCdp4_l1vPmpN-gDbUwhaRUQ",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Anastasi In Tech",
+   "id": "UCORX3Cl7ByidjEgzSCgv9Yw",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Dr Ben Miles",
+   "id": "UCUeZBocfxALSUdOgNJB5ySA",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Core Dumped",
+   "id": "UCGKEMK3s-ZPbjVOIuAV8clQ",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "TSMC",
+   "id": "UC02yNxGj2MxhynehcWSxcLg",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Asianometry",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UC1LpsuAUaKoMzzJSEt5WImw",
+   "achado_como": "Asianometry"
+  },
+  {
+   "nome": "Real Engineering",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCR1IuLEqb6UEA_zQ81kwXfg",
+   "achado_como": "Real Engineering"
+  },
+  {
+   "nome": "Gamers Nexus",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UChIs72whgZI9w6d6FhwGGHA",
+   "achado_como": "Gamers Nexus"
+  },
+  {
+   "nome": "TechTechPotato",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UC1r0DG-KEPyqOeW6o79PByw",
+   "achado_como": "TechTechPotato"
+  },
+  {
+   "nome": "Breaking Taps",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UC06HVrkOL33D5lLnCPjr6NQ",
+   "achado_como": "Breaking Taps"
+  },
+  {
+   "nome": "Applied Science",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCivA7_KLKWo43tFcCkFvydw",
+   "achado_como": "Applied Science"
+  },
+  {
+   "nome": "ASML",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCIT9d3JjHEnsVi_w9guSXvA",
+   "achado_como": "ASML"
+  },
+  {
+   "nome": "Intel",
+   "origem": "vizinho dos campeoes (09/10)",
+   "recusado_id": "UC5FjTUk7YkP6d7jaQicHrUg",
+   "recusado": "Intel Edits"
+  },
+  {
+   "nome": "Veritasium",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCHnyfMqiRRG1u-2MsSQLbXA",
+   "achado_como": "Veritasium"
+  }
+ ],
+ "nao_promover": [
+  "The Wall Street Journal",
+  "CNBC",
+  "Bloomberg Television",
+  "Bloomberg Originals",
+  "Reuters",
+  "Financial Times",
+  "CNBC International",
+  "Al Jazeera English",
+  "DW News"
+ ]
+}

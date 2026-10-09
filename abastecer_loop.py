@@ -333,6 +333,16 @@ def escolher(canal: str, cfg: dict, usados: set) -> list:
         log(f"  {'✅' if ok else '·'} {g.get('nota', g.get('erro'))} — {i['titulo'][:60]} — {g.get('motivo', '')[:90]}")
         if ok:
             aprovados.append(i)
+            # ⭐ 09/10/2026: o canal da fonte aprovada vira semente do radar
+            # (engine/minerar_canais.py) -- as fontes crescem sozinhas.
+            try:
+                import importlib.util as _iu
+                _sp = _iu.spec_from_file_location("minerar_canais", RAIZ / "engine" / "minerar_canais.py")
+                _mc = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mc)
+                if add := _mc.promover_aprovado(canal, i):
+                    log(f"  [+] semente nova do radar: {add[0]}")
+            except Exception as e:
+                log(f"  [!] promocao de semente falhou: {str(e)[:80]}")
         elif isinstance(g.get("nota"), (int, float)):   # erro de chave/rede NAO conta
             reprov[i["id"]] = {"nota": g["nota"] if g.get("imagem", 0) >= 8 and g.get("tema", 0) >= 9 else 0,
                                "quando": datetime.now().isoformat(timespec="minutes"),

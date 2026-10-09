@@ -312,6 +312,19 @@ def main():
         for j in range(0, len(novos), 50):
             brutos += detalhes(novos[j:j + 50])
 
+    # ⭐ 09/10/2026: catalogo dos canais-fonte campeoes, atras de OUTLIERS
+    # (engine/minerar_canais.py). A busca por termo saturou (0 ineditos).
+    import importlib.util as _iu
+    _p = __import__("pathlib").Path(__file__).resolve().parents[2] / "engine" / "minerar_canais.py"
+    _sp = _iu.spec_from_file_location("minerar_canais", _p)
+    _mc = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mc)
+    try:
+        for v in _mc.minerar('modofuturo', CHAVES):
+            if v["id"] not in vistos:
+                vistos.add(v["id"]); brutos.append(v)
+    except Exception as e:
+        print(f"  [!] mineracao de canais falhou: {str(e)[:80]}")
+
     aval = []
     corte = {"veto": 0, "tema": 0, "escrita": 0, "sem_nucleo": 0}
     for v in brutos:
@@ -330,8 +343,12 @@ def main():
         if not any(x in t for x in NUCLEO):
             corte["sem_nucleo"] += 1
             continue
-        aval.append(avaliar(v))
+        aval.append(_mc.bonus(avaliar(v), v))
     aval.sort(key=lambda x: -x["nota"])
+    try:
+        _mc.promover_do_radar('modofuturo', aval)   # ⭐ 09/10: sementes crescem sozinhas
+    except Exception as e:
+        print(f"  [!] promocao de sementes falhou: {str(e)[:80]}")
 
     # Salva ANTES de imprimir: em 30/08 um emoji derrubou a saida no console
     # do Windows e levou junto o resultado de uma rodada ja' paga.

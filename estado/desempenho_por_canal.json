@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-09T08:54:52",
+  "medido_em": "2026-10-09T16:06:45",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 76,
+      "posts": 89,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 599,
-      "comentarios": 23,
-      "shares": 5,
+      "reacoes": 658,
+      "comentarios": 24,
+      "shares": 6,
       "engajamento_pct": 0.0,
-      "posts_recentes": 24,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -35,19 +35,19 @@
         },
         {
           "views": 0,
-          "titulo": "O esquema que comprava placas Nvidia nos EUA e desviava para"
+          "titulo": "O disparo de feixes de boro e fosforo para criar bilhões de "
         }
       ]
     },
     "truque.importado": {
-      "posts": 143,
+      "posts": 147,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 19021,
-      "comentarios": 124,
-      "shares": 106,
+      "reacoes": 19112,
+      "comentarios": 122,
+      "shares": 107,
       "engajamento_pct": 0.0,
-      "posts_recentes": 13,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -60,24 +60,24 @@
         },
         {
           "views": 0,
-          "titulo": "O PINCEL ESPATULA DE CORRETIVO PARA ILUMINAR O ROSTO\n\nEntend"
+          "titulo": "PALETA DE CORRETIVOS MISTURADOS COM PINCEL DE PRECISÃO\n\nComo"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 94,
+      "posts": 108,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1092,
+      "reacoes": 1232,
       "comentarios": 9,
-      "shares": 21,
+      "shares": 23,
       "engajamento_pct": 0.0,
-      "posts_recentes": 30,
+      "posts_recentes": 42,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Protocolo"
+          "titulo": "Seu cérebro desiste antes"
         },
         {
           "views": 0,
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 40,
+      "posts_recentes": 39,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 57,
+      "posts": 62,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 329,
+      "reacoes": 356,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 21,
       "views_recentes": 0,
       "melhores_recentes": [
         {

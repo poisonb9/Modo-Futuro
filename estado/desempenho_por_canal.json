@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-09T02:01:42",
+  "medido_em": "2026-10-09T08:54:52",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -90,27 +90,27 @@
       ]
     },
     "atefalhar": {
-      "posts": 91,
+      "posts": 95,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1055,
+      "reacoes": 1114,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 36,
+      "posts_recentes": 40,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANIT"
+        },
+        {
+          "views": 0,
+          "titulo": "TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER\n\n"
+        },
+        {
+          "views": 0,
           "titulo": "PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROME"
-        },
-        {
-          "views": 0,
-          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME 🪄 O SEGR"
-        },
-        {
-          "views": 0,
-          "titulo": "PERI PODE SER A PIOR COISA NA VIDA DE DEV DIMMADOME\n\n🪄 O SEG"
         }
       ]
     },

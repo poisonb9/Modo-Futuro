@@ -269,6 +269,34 @@ D) SÉRIE. Em TODO clipe, informe no JSON o campo extra
 """
 
 
+# ⭐ 09/10/2026 (dono: "corrige o titulo do truque na origem").
+#
+# ⛔ O DEFEITO, MEDIDO no run 37960074844 (truque): 7 de 8 clipes barrados
+# pelo juiz do Buffer, que OUVE a dublagem. A selecao VE o video e escrevia o
+# titulo com o que aparecia na IMAGEM ("primer com FPS e CC cream", "cabeca
+# perfeitamente redonda"); a dublagem literal so' traduz o que e' DITO, e a
+# fala era "estilos e preferencias de maquiagem da Yunjin". Titulo e audio
+# contavam coisas diferentes -> fora do ar.
+#
+# Vale para os canais de DUBLAGEM LITERAL (o espectador ouve a fala traduzida,
+# nao uma narracao que descreve a cena).
+CANAIS_TITULO_PELA_FALA = {"truque.importado", "camarim.kpop"}
+
+BLOCO_TITULO_PELA_FALA = """
+
+⛔ TITULO PELA FALA (este canal e' dublado LITERALMENTE: quem assiste OUVE so'
+o que as pessoas DIZEM no trecho, traduzido):
+- O "titulo" so' pode afirmar o que e' DITO em voz alta no trecho. Produto,
+  numero, quantidade, parte do rosto, reacao: so' se alguem FALA.
+- O que so' aparece na IMAGEM (rotulo de produto, pote na mao, legenda queimada
+  na tela, a cena muda) NAO entra no titulo. Pode entrar na escolha do trecho,
+  nunca na promessa.
+- Continue concreto: NOME da idol + o que ela DIZ ou o que acontece na fala
+  (ex.: "Yunjin do LE SSERAFIM conta qual maquiagem ela nunca usa no palco").
+- Teste antes de responder: se alguem so' OUVISSE o trecho, sem ver, o titulo
+  continuaria verdadeiro? Se nao, reescreva com o que e' dito."""
+
+
 def _bloco_canal() -> str:
     """Regras de selecao que valem SO' para o canal do corte.
 
@@ -276,11 +304,12 @@ def _bloco_canal() -> str:
     visual obrigatoria e titulo por especificidade no modofuturo. Fica FORA
     do PROMPT de proposito: os outros canais recebem o prompt de sempre.
     """
+    extra = BLOCO_TITULO_PELA_FALA if _canal_atual() in CANAIS_TITULO_PELA_FALA else ""
     if _canal_atual() in config.CANAIS_ABERTURA_VISUAL:
-        return BLOCO_ABERTURA_VISUAL
+        return BLOCO_ABERTURA_VISUAL + extra
     if _canal_atual() == "semanestesia.pod":
-        return BLOCO_SEMANESTESIA
-    return ""
+        return BLOCO_SEMANESTESIA + extra
+    return extra
 
 
 def _canal_atual() -> str | None:
@@ -960,7 +989,8 @@ def metadados(caminho: Path, usar_video: bool = True) -> dict:
     def corpo(uri):
         return {"contents": [{"parts": [
             {"file_data": {"mime_type": mime, "file_uri": uri}},
-            {"text": PROMPT_METADADOS + _regra_nomes(caminho)},
+            {"text": PROMPT_METADADOS + _regra_nomes(caminho)
+                     + (BLOCO_TITULO_PELA_FALA if _canal_atual() in CANAIS_TITULO_PELA_FALA else "")},
         ]}], "generationConfig": {"temperature": 0.7,
                                   "response_mime_type": "application/json"}}
 

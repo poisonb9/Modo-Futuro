@@ -355,6 +355,36 @@ def escolher(canal: str, cfg: dict, usados: set) -> list:
 MAX_NO_PC = 6   # 09/10/2026: downloads esperando subir; acima disto, nao baixa mais
 
 
+PENDENTE_MAX_H = 24   # 09/10/2026: pendente sem arquivo no PC depois disto expira
+
+
+def expirar_pendentes(estado: dict) -> None:
+    """⛔ 09/10/2026: 6 pendentes velhos (Motivate desde 06/10, 'Content
+    offline' ou parados no linkgrabber do JD) ocupavam o teto MAX_NO_PC e
+    zeraram o abastecimento de semanestesia, cozinha e truque. Pendente com
+    mais de PENDENTE_MAX_H sem .mp4 nem .part no PC sai da fila e vai para
+    'feitos' (nao volta a ser escolhido)."""
+    agora = datetime.now()
+    arquivos = [norm(f.name) for f in BAIXADOS.rglob("*")
+                if f.is_file() and f.suffix.lower() in (".mp4", ".part")] if BAIXADOS.exists() else []
+    mudou = False
+    for vid, p in list(estado["pendentes"].items()):
+        try:
+            idade_h = (agora - datetime.fromisoformat(p.get("quando", ""))).total_seconds() / 3600
+        except ValueError:
+            idade_h = PENDENTE_MAX_H + 1      # sem data: velho
+        chave = norm(p["titulo"])[:25]
+        if idade_h < PENDENTE_MAX_H or (chave and any(chave in a for a in arquivos)):
+            continue
+        estado["pendentes"].pop(vid)
+        if vid not in estado["feitos"]:
+            estado["feitos"].append(vid)
+        mudou = True
+        log(f"⌛ pendente expirado ({idade_h:.0f} h, nada no PC): {p['canal']} {p['titulo'][:50]}")
+    if mudou:
+        gravar_estado(estado)
+
+
 def limpar_orfaos(estado: dict) -> None:
     """⛔ 09/10/2026: .mp4 em BAIXADOS sem pendente correspondente nunca subia
     e nunca era apagado (Ben 10 Omnitrix, 1,5 GB, parado desde 08/10).
@@ -461,6 +491,7 @@ def limpar_temp() -> None:
 def passada() -> None:
     estado = ler_estado()
     subir_prontos(estado)
+    expirar_pendentes(estado)
     limpar_orfaos(estado)
     limpar_temp()
     est, ids_drive = estoque_drive()

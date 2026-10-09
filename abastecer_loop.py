@@ -352,6 +352,45 @@ def escolher(canal: str, cfg: dict, usados: set) -> list:
     return aprovados[:POR_REPOSICAO]
 
 
+MAX_NO_PC = 6   # 09/10/2026: downloads esperando subir; acima disto, nao baixa mais
+
+
+def limpar_orfaos(estado: dict) -> None:
+    """⛔ 09/10/2026: .mp4 em BAIXADOS sem pendente correspondente nunca subia
+    e nunca era apagado (Ben 10 Omnitrix, 1,5 GB, parado desde 08/10).
+    Com mais de 24 h: se o Drive tem o MESMO nome e o MESMO tamanho, apaga
+    daqui (regra do dono); se nao tem, so' avisa no log."""
+    import re as _re
+    agora = time.time()
+    for v in list(BAIXADOS.rglob("*.mp4")):
+        try:
+            if agora - v.stat().st_mtime < 24 * 3600:
+                continue
+            base = norm(v.name)
+            if any(norm(p["titulo"])[:25] and norm(p["titulo"])[:25] in base
+                   for p in estado["pendentes"].values()):
+                continue
+            tam = v.stat().st_size
+            termos = [w for w in _re.findall(r"[A-Za-z0-9]{4,}", v.stem)
+                      if w.lower() not in ("1080p", "2160p", "1440p", "30fps", "60fps",
+                                           "h264", "128kbit", "english")][:3]
+            no_drive = False
+            if termos:
+                q = " and ".join(f"name contains '{w}'" for w in termos) + " and trashed=false"
+                for c in cd.CONTAS:
+                    fs = cd.servico(c).files().list(q=q, fields="files(name,size)").execute()["files"]
+                    if any(int(f.get("size", 0)) == tam for f in fs):
+                        no_drive = True
+                        break
+            if no_drive:
+                v.unlink()
+                log(f"🧹 orfao ja' no Drive (mesmo tamanho), apagado do PC: {v.name[:60]}")
+            else:
+                log(f"[!] orfao sem copia no Drive, fica no PC: {v.name[:60]} ({tam / 1e9:.1f} GB)")
+        except Exception as e:
+            log(f"[!] limpeza de orfao falhou ({v.name[:40]}): {str(e)[:80]}")
+
+
 def mandar_jd(canal: str, itens: list) -> bool:
     q = {"links": "\n".join(i["url"] for i in itens), "autostart": True,
          "destinationFolder": str(BAIXADOS / canal), "overwritePackagizerRules": True}
@@ -422,6 +461,7 @@ def limpar_temp() -> None:
 def passada() -> None:
     estado = ler_estado()
     subir_prontos(estado)
+    limpar_orfaos(estado)
     limpar_temp()
     est, ids_drive = estoque_drive()
     usados = ids_usados(estado) | ids_drive
@@ -435,6 +475,19 @@ def passada() -> None:
         livre = shutil.disk_usage(RAIZ.anchor).free / 1e9
         if livre < 3.5:          # 02/10 dono: trava em 3,5 GB (era 5)
             log(f"[!] disco com {livre:.1f} GB livres (< 3,5; < 3 e' critico) — sem download nesta passada")
+            return
+        # ⛔ 09/10/2026 (dono: "esse pc e' fraco ... tudo que baixa aqui deve
+        # ser excluido depois de ter ido para o drive"). O disco foi de ~9 GB
+        # livres a 0,3 GB porque o loop seguia mandando video ao JD com os 3
+        # Drives abaixo da reserva: o upload parava ("Parei de subir") e os
+        # downloads (4K, 1,5 GB cada) ficavam presos aqui. Duas travas novas:
+        #   1. sem conta do Drive para receber, nao baixa nada;
+        #   2. com >= MAX_NO_PC pendentes ainda nao subidos, nao baixa mais.
+        if not cd.escolher():
+            log("[!] nenhum Drive com folga para receber — sem download (o PC nao e' deposito)")
+            return
+        if len(estado["pendentes"]) >= MAX_NO_PC:
+            log(f"[!] {len(estado['pendentes'])} downloads ainda nao subiram ao Drive (teto {MAX_NO_PC}) — sem download novo")
             return
         itens = escolher(canal, cfg, usados)
         if not itens:

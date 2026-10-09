@@ -452,7 +452,7 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                     print(f"      A/B da abertura: grupo {c['ab_abertura']}")
                 # ⭐ 09/10: quem aparece (nome + genero, da selecao) vai
                 # em todo prompt de traducao -- ver traducao.ELENCO.
-                traducao.definir_elenco(c.get("falantes"), c.get("genero_falante"))
+                traducao.definir_elenco(c.get("falantes") or c.get("elenco"), c.get("genero_falante"))
                 segmentos = traducao.traduzir_segmentos(
                     ps, narrar=dublar and not fala_literal,
                     genero_falante=c.get("genero_falante"))

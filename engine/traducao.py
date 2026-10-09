@@ -275,7 +275,9 @@ def definir_elenco(falantes: list | None, genero_falante: str | None = None) -> 
     for f in falantes or []:
         if not isinstance(f, dict):
             continue
-        q = str(f.get("quem") or "").strip()
+        # `elenco` do modo recorte (selecao.metadados) nao tem `quem`: o nome
+        # (ou a posicao) serve de chave.
+        q = str(f.get("quem") or f.get("nome") or len(vistos)).strip()
         if not q or q in vistos:
             continue
         vistos.add(q)

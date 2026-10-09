@@ -944,7 +944,12 @@ Responda SOMENTE com JSON válido, sem markdown:
  "compartilhabilidade": <0-10>,
  "independencia": <0-10>,
  "intensidade_emocional": <0-10>,
- "valor_social": <0-10>}"""
+ "valor_social": <0-10>,
+ "genero_falante": "<masculino | feminino | varios | indefinido — pela IMAGEM e pela voz>",
+ "elenco": [{"nome": "<nome curto SO' se a tela, a fala ou o TITULO DE ORIGEM identificam com certeza; vazio se nao souber, NUNCA chute>",
+             "genero": "<masculino|feminino>"}]}
+// ⭐ 09/10/2026: `elenco` = quem aparece falando. Vai para a TRADUCAO (nomes e
+// genero na dublagem). Sem tempos: aqui nao mexe na troca de voz."""
 
 
 def metadados(caminho: Path, usar_video: bool = True) -> dict:

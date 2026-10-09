@@ -450,6 +450,9 @@ def processar(fonte: Path, qtd: int, usar_video: bool, idioma: str,
                 from engine import ab_abertura
                 if ab_abertura.aplicar(c, nome_fonte, os.environ.get("CANAL_ESPERADO")):
                     print(f"      A/B da abertura: grupo {c['ab_abertura']}")
+                # ⭐ 09/10: quem aparece (nome + genero, da selecao) vai
+                # em todo prompt de traducao -- ver traducao.ELENCO.
+                traducao.definir_elenco(c.get("falantes"), c.get("genero_falante"))
                 segmentos = traducao.traduzir_segmentos(
                     ps, narrar=dublar and not fala_literal,
                     genero_falante=c.get("genero_falante"))

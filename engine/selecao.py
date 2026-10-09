@@ -487,7 +487,10 @@ Responda SOMENTE com JSON válido, sem markdown, neste formato:
      realmente nao der pra saber>",
   "falantes": [
      {{"inicio_s": <float>, "fim_s": <float>, "quem": "<A|B|C>",
-      "genero": "<masculino|feminino>"}}
+      "genero": "<masculino|feminino>",
+      "nome": "<nome curto da pessoa SO' se a tela, a fala ou o TITULO DE
+               ORIGEM a identificam com certeza (ex.: 'Felix', 'Seungmin');
+               vazio se nao souber — NUNCA chute>"}}
   ],
      // QUEM FALA EM CADA TRECHO deste corte, em ordem, cobrindo o corte
      // inteiro. Serve pra dar UMA VOZ A CADA PESSOA na dublagem — entrevistador

@@ -41,14 +41,23 @@ def teste_positivo_manda_conta_saida():
     assert '"conta_saida"' in BLOCO, "o dispatch nao manda conta_saida"
 
 
-def teste_conta_saida_e_diferente_da_conta_do_bruto():
-    """⚠️ O DEFEITO EM UMA LINHA. Se as duas apontarem pro mesmo valor, o
-    conserto nao consertou nada."""
-    m_in = re.search(r'"conta":\s*"(\w+)"', BLOCO)
-    m_out = re.search(r'"conta_saida":\s*"(\w+)"', BLOCO)
-    assert m_in and m_out, BLOCO[:200]
-    assert m_in.group(1) != m_out.group(1), \
-        f"conta e conta_saida com o mesmo valor ({m_in.group(1)})"
+def teste_conta_saida_e_dona_da_pasta_de_destino():
+    """⚠️ A INVARIANTE DE VERDADE: quem sobe (`conta_saida`) tem de ser DONO
+    da pasta de destino (`pasta_drive`).
+
+    Ate' 09/10/2026 isto era "conta_saida = principal, sempre" porque a pasta
+    era o 'A POSTAR' da principal. A principal lotou (16,09/16,11 GB) e todo
+    corte da fila morria no upload. Agora a pasta e' o 'CLIPES PRONTOS' da
+    conta do BRUTO, entao a dona da pasta e' essa conta -- e as duas entradas
+    tem de vir da MESMA conta, nunca de contas diferentes.
+    """
+    m_pasta = re.search(r'"pasta_drive":\s*_a_postar_da\(item\.get\("conta"\) or "(\w+)"', BLOCO)
+    m_out = re.search(r'"conta_saida":\s*item\.get\("conta"\) or "(\w+)"', BLOCO)
+    assert m_pasta and m_out, "pasta_drive e conta_saida tem de sair da conta do item"
+    assert m_pasta.group(1) == m_out.group(1), "padroes diferentes: pasta de uma conta, upload de outra"
+    import cortar_fila, contas_drive
+    for c in ("principal", "reserva", "labzirkonart"):
+        assert cortar_fila._a_postar_da(c, "X") == contas_drive.conta_por_nome(c)["a_postar"]
 
 
 def teste_workflow_declara_conta_saida():

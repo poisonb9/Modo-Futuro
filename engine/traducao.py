@@ -257,6 +257,41 @@ def orcamento_de_palavras(duracao_s: float | None) -> str:
             f"texto CURTO deixa o fim do video sem voz). ")
 
 
+# ⭐ 09/10/2026 -- QUEM APARECE NO CORTE, vindo da SELECAO (que ve o video).
+#
+# ⛔ No modo `fala_literal` (camarim, truque) cada janela de ~4 s era traduzida
+# SOZINHA, sem dica nenhuma: frase solta de coreano virava "a convidada" e "o
+# apresentador" com o Felix e o Seungmin na tela. O juiz do Buffer ouvia isso
+# e reprovava o titulo ("a fala e' sobre uma convidada provando bolo") -- 8
+# clipes do camarim parados desde 02/10. O elenco agora vai em TODO prompt.
+ELENCO = ""
+
+
+def definir_elenco(falantes: list | None, genero_falante: str | None = None) -> str:
+    """Monta (e guarda em ELENCO) o bloco 'quem aparece' do corte atual.
+    Chamar por clipe, ANTES de traduzir; sem falantes, limpa."""
+    global ELENCO
+    vistos, linhas = set(), []
+    for f in falantes or []:
+        if not isinstance(f, dict):
+            continue
+        q = str(f.get("quem") or "").strip()
+        if not q or q in vistos:
+            continue
+        vistos.add(q)
+        g = {"masculino": "homem", "feminino": "mulher"}.get(str(f.get("genero", "")).lower(), "")
+        nome = str(f.get("nome") or "").strip()
+        linhas.append(f"- {nome or 'pessoa ' + q}" + (f" ({g})" if g else ""))
+    if not linhas and genero_falante in ("masculino", "feminino"):
+        linhas.append(f"- quem fala e' {'homem' if genero_falante == 'masculino' else 'mulher'}")
+    ELENCO = ("⚠️ QUEM APARECE NESTE CORTE (confirmado pela IMAGEM do video):" + chr(10)
+              + chr(10).join(linhas) + chr(10) +
+              "Use esses NOMES quando a fala se referir a essas pessoas (nada de "
+              "'a convidada', 'o apresentador' genericos) e a concordancia de GENERO "
+              "de cada uma. Nao invente nome que nao esta' na lista." + chr(10) * 2) if linhas else ""
+    return ELENCO
+
+
 def _montar(prompt: str, texto: str, genero: str | None = None,
             duracao_s: float | None = None) -> str:
     """Preenche SO' os campos que o prompt tem. UM lugar so' — antes a mesma
@@ -274,7 +309,7 @@ def _montar(prompt: str, texto: str, genero: str | None = None,
         campos["orcamento"] = orcamento_de_palavras(duracao_s)
     if "{guia}" in prompt:
         campos["guia"] = guia_voz.bloco_prompt(os.environ.get("CANAL_ESPERADO"))
-    return prompt.format(**campos)
+    return ELENCO + prompt.format(**campos)
 
 
 def _traduzir_texto(texto: str, prompt: str = PROMPT, genero: str | None = None,

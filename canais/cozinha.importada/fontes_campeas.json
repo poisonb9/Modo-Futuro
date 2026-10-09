@@ -1,0 +1,78 @@
+{
+ "nota": "Campeoes no TikTok (09/10): caramelizar cebola 572, carne moida com repolho 553, rabanada brioche 461, massa de croissant 413 -- tecnica pratica com mao na massa.",
+ "atualizado": "2026-10-09",
+ "nao_promover": [],
+ "canais": [
+  {
+   "nome": "Joshua Weissman",
+   "id": "UChBEbMKI1eCcejTtmI32UEw",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Brian Lagerstrom",
+   "id": "UCn5fhcGRrCvrmFibPbT6q1A",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Recipe30",
+   "id": "UCy_iF2lqOucgmK1BLCl-6vQ",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Ian Fujimoto",
+   "id": "UCqdO39YlloDBxG5P28qATuA",
+   "origem": "feito aprovado"
+  },
+  {
+   "nome": "Ethan Chlebowski",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCDq5v10l4wkV5-ZBIJJFbzQ",
+   "achado_como": "Ethan Chlebowski"
+  },
+  {
+   "nome": "J. Kenji López-Alt",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCqqJQ_cXSat0KIAVfIfKkVA",
+   "achado_como": "J. Kenji López-Alt"
+  },
+  {
+   "nome": "Binging with Babish",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCJHA_jMfCvEnv-3kRjTCQXw",
+   "achado_como": "Binging with Babish"
+  },
+  {
+   "nome": "Adam Ragusea",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UC9_p50tH3WmMslWRWKnM7dQ",
+   "achado_como": "Adam Ragusea"
+  },
+  {
+   "nome": "Chef Jean-Pierre",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCLGNeElk4sNgzUrZr0c9krA",
+   "achado_como": "Chef Jean-Pierre"
+  },
+  {
+   "nome": "Sorted Food",
+   "origem": "vizinho dos campeoes (09/10)",
+   "id": "UCfyehHM_eo4g5JUyWmms2LA",
+   "achado_como": "Sorted Food"
+  },
+  {
+   "nome": "Nick's Kitchen",
+   "id": "UC2HNqPgeKtVr2gZmLeeIk3g",
+   "origem": "auto: 5 itens no radar 09/10"
+  },
+  {
+   "nome": "Food Language",
+   "id": "UCLxplAwE9ijOwkKyEGeoZTQ",
+   "origem": "auto: 3 itens no radar 09/10"
+  },
+  {
+   "nome": "Cook! Stacey Cook",
+   "id": "UCAcqHuCJQn2Pefv1iXMLgow",
+   "origem": "auto: 3 itens no radar 09/10"
+  }
+ ]
+}

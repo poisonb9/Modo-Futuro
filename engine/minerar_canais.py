@@ -166,12 +166,16 @@ def minerar(canal: str, chaves: list[str], paginas: int = 4,
             continue
         med = max(statistics.median(views), 1)
         exigir = [t.casefold() for t in s.get("exigir_no_titulo", [])]
+        # Formato que o motor NAO usa (palco = so' musica, sem fala p/ dublar)
+        excluir = [t.casefold() for t in s.get("excluir_no_titulo", [])]
         n = 0
         for v, vw in zip(vids, views):
             # Canal que NAO e' so' do nicho (Vogue, PONY): o termo do nicho tem
             # de estar no TITULO -- no radar o nome do canal ("PONY Syndrome")
             # casava sozinho com o filtro KPOP.
             if exigir and not any(t in v["snippet"]["title"].casefold() for t in exigir):
+                continue
+            if excluir and any(t in v["snippet"]["title"].casefold() for t in excluir):
                 continue
             o = vw / med
             if o >= outlier_min:

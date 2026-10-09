@@ -286,6 +286,19 @@ def main():
         for j in range(0, len(novos), 50):
             brutos += detalhes(novos[j:j + 50])
 
+    # ⭐ 09/10/2026: catalogo dos canais-fonte campeoes, atras de OUTLIERS
+    # (engine/minerar_canais.py). A busca por termo satura sozinha.
+    import importlib.util as _iu
+    _p = __import__("pathlib").Path(__file__).resolve().parents[2] / "engine" / "minerar_canais.py"
+    _sp = _iu.spec_from_file_location("minerar_canais", _p)
+    _mc = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mc)
+    try:
+        for v in _mc.minerar('cozinha.importada', CHAVES):
+            if v["id"] not in vistos:
+                vistos.add(v["id"]); brutos.append(v)
+    except Exception as e:
+        print(f"  [!] mineracao de canais falhou: {str(e)[:80]}")
+
     aval = []
     # Contar POR MOTIVO, nao um total. Filtro que come demais so' aparece se
     # cada corte tiver o seu numero.
@@ -302,12 +315,16 @@ def main():
         if not any(x in t for x in TEMA) or any(x in t for x in FORA_DO_TEMA):
             corte["tema"] += 1
             continue
-        item = avaliar(v)
+        item = _mc.bonus(avaliar(v), v)
         if item["pt"]:
             corte["portugues"] += 1
             continue
         aval.append(item)
     aval.sort(key=lambda x: -x["nota"])
+    try:
+        _mc.promover_do_radar('cozinha.importada', aval)   # ⭐ 09/10: sementes crescem sozinhas
+    except Exception as e:
+        print(f"  [!] promocao de sementes falhou: {str(e)[:80]}")
 
     # ⚠️ SALVA ANTES DE IMPRIMIR. Em 30/08 um emoji no titulo derrubou a
     # saida no console do Windows (cp1252) e levou junto o resultado de uma

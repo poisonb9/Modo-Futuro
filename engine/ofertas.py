@@ -343,9 +343,40 @@ def _origem() -> dict[str, str]:
     return out
 
 
+def _foto_viva(url: str) -> bool:
+    import urllib.request
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Range": "bytes=0-2047"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return r.status in (200, 206)
+    except Exception:
+        return False
+
+
+def _com_foto_viva(boas: list[dict]) -> list[dict]:
+    """⛔ 09/10/2026: 3 produtos da Drogal (Awin) passaram em todas as guardas
+    com a foto do feed MORTA (404/403); o video falhava no gerar e a vaga do
+    canal ficava vazia (truque.importado saiu com 1 de 4). Produto Awin com a
+    foto principal fora do ar nao entra na escolha: a vaga vai para o proximo."""
+    from concurrent.futures import ThreadPoolExecutor
+    agora = agora_todos()
+    foto = {o["id"]: (o.get("imagens") or agora.get(o["id"], {}).get("imagens") or [None])[0]
+            for o in boas if str(o["id"]).startswith("awin:")}
+    awin = [o for o in boas if foto.get(o["id"])]
+    with ThreadPoolExecutor(16) as ex:
+        vivas = dict(zip((o["id"] for o in awin), ex.map(lambda o: _foto_viva(foto[o["id"]]), awin)))
+    mortas = [o for o in awin if not vivas[o["id"]]]
+    for o in mortas[:10]:
+        print(f"  [-] foto fora do ar, fora da escolha: {o['id']} {o['nome'][:50]}")
+    if len(mortas) > 10:
+        print(f"  [-] ... e mais {len(mortas) - 10} com foto fora do ar")
+    return [o for o in boas if vivas.get(o["id"], True)]
+
+
 def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
     """{canal: [ofertas]} — POR_DIA por canal, por nicho, maiores quedas primeiro."""
     boas = candidatas(dia)          # ja' vem da maior queda para a menor
+    boas = _com_foto_viva(boas)
     origem = _origem()
     saida: dict[str, list[dict]] = {c: [] for c in CANAIS}
 

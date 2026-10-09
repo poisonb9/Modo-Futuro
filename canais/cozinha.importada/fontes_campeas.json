@@ -1,7 +1,9 @@
 {
  "nota": "Campeoes no TikTok (09/10): caramelizar cebola 572, carne moida com repolho 553, rabanada brioche 461, massa de croissant 413 -- tecnica pratica com mao na massa.",
  "atualizado": "2026-10-09",
- "nao_promover": [],
+ "nao_promover": [
+  "Food Language"
+ ],
  "canais": [
   {
    "nome": "Joshua Weissman",
@@ -65,14 +67,14 @@
    "origem": "auto: 5 itens no radar 09/10"
   },
   {
-   "nome": "Food Language",
-   "id": "UCLxplAwE9ijOwkKyEGeoZTQ",
-   "origem": "auto: 3 itens no radar 09/10"
-  },
-  {
    "nome": "Cook! Stacey Cook",
    "id": "UCAcqHuCJQn2Pefv1iXMLgow",
    "origem": "auto: 3 itens no radar 09/10"
+  },
+  {
+   "nome": "The Doctor's Kitchen",
+   "id": "UCDHTLhQbYlFnPBv-iLgFsQQ",
+   "origem": "auto: 4 itens no radar 09/10"
   }
  ]
 }

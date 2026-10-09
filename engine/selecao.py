@@ -293,8 +293,18 @@ o que as pessoas DIZEM no trecho, traduzido):
   nunca na promessa.
 - Continue concreto: NOME da idol + o que ela DIZ ou o que acontece na fala
   (ex.: "Yunjin do LE SSERAFIM conta qual maquiagem ela nunca usa no palco").
+- NAO SUBA O TOM ALEM DA FALA (09/10/2026, run 37973955903: 2 de 8 barrados).
+  Verbo forte que a fala nao sustenta derruba o titulo: "desmascarado",
+  "expoe", "flagrado", "humilha", "revela o segredo" -- se na fala eles so'
+  CONVERSAM sobre a voz, o titulo diz que falam/contam sobre a voz.
+- NAO ACRESCENTE quem a fala nao diz: destinatario ("para o Felix"), dono
+  ("de quem e' o aniversario"), causa ou consequencia. Se a fala diz "no seu
+  aniversario" sem deixar claro de quem, nao escolha por ela.
+- Numero, quantidade e superlativo ("perfeito", "o mais", "dezenas") so' se
+  forem DITOS.
 - Teste antes de responder: se alguem so' OUVISSE o trecho, sem ver, o titulo
-  continuaria verdadeiro? Se nao, reescreva com o que e' dito."""
+  continuaria verdadeiro PALAVRA POR PALAVRA? Se uma palavra nao se sustenta,
+  troque por uma mais fiel -- ainda concreta, com o NOME."""
 
 
 def _bloco_canal() -> str:

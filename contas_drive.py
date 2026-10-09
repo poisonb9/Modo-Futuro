@@ -86,14 +86,22 @@ def servico(conta: dict):
 def livre_gb(conta: dict) -> float:
     """Espaço livre, em GB. Devolve 0 se a conta estiver inacessível — assim
     uma conta com token quebrado é simplesmente pulada, em vez de derrubar
-    a escolha inteira."""
-    try:
-        q = servico(conta).about().get(fields="storageQuota").execute()["storageQuota"]
-        if "limit" not in q:
-            return float("inf")          # conta sem limite
-        return (int(q["limit"]) - int(q["usage"])) / 2 ** 30
-    except Exception:
-        return 0.0
+    a escolha inteira.
+
+    ⛔ 09/10/2026: um timeout de rede passageiro (handshake SSL) virava 0 GB
+    e o abastecer parava com "TODAS as contas sem folga". Agora tenta 3
+    vezes antes de dar a conta por inacessível."""
+    import time
+    for tentativa in range(3):
+        try:
+            q = servico(conta).about().get(fields="storageQuota").execute()["storageQuota"]
+            if "limit" not in q:
+                return float("inf")          # conta sem limite
+            return (int(q["limit"]) - int(q["usage"])) / 2 ** 30
+        except Exception:
+            if tentativa < 2:
+                time.sleep(5 * (tentativa + 1))
+    return 0.0
 
 
 def conta_por_nome(nome: str) -> dict:

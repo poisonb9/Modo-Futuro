@@ -304,7 +304,15 @@ o que as pessoas DIZEM no trecho, traduzido):
   forem DITOS.
 - Teste antes de responder: se alguem so' OUVISSE o trecho, sem ver, o titulo
   continuaria verdadeiro PALAVRA POR PALAVRA? Se uma palavra nao se sustenta,
-  troque por uma mais fiel -- ainda concreta, com o NOME."""
+  troque por uma mais fiel -- ainda concreta, com o NOME.
+- ⛔ ESCOLHA DO TRECHO (10/10/2026, CORTIS run 38012965212: 4 de 8 em
+  quarentena com "faz 10 flexoes", "carrega no colo", "imita coruja"): so'
+  escolha trecho em que o momento e' FALADO -- alguem conta, pergunta, responde,
+  provoca ou reage EM PALAVRAS. Trecho cujo momento e' so' ACAO na tela
+  (coreografia, gesto, pose, exercicio, carregar alguem, imitacao muda, risada
+  sem frase) fica de fora, por melhor que seja a imagem: a dublagem nao tem o
+  que dizer e o titulo vira promessa de imagem. Em video com pouca fala (dance
+  practice, behind de clipe), devolva MENOS trechos em vez de completar com acao."""
 
 
 def _bloco_canal() -> str:

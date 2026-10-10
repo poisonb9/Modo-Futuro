@@ -1989,14 +1989,18 @@
     // cliente achar o produto do video sem procurar.
     if (p.achado) {
       var sa = el("span", "achado-num", "Achado do dia #" + p.achado);
-      sa.style.cssText = "position:absolute;top:8px;left:8px;z-index:2;background:#f5c542;color:#1a1a1a;font-weight:800;font-size:12px;padding:3px 8px;border-radius:999px";
+      // ⭐ 10/10/2026 (dono: "ajusta o selo"): no celular a foto tem ~75 px e
+      // o selo de cima virava um circulo de 3 linhas por cima do "achado
+      // novo". Agora e' uma faixa embaixo da foto, e o "achado novo" sai
+      // quando ha' numero (o achado do dia ja' diz que e' novo).
+      sa.style.cssText = "position:absolute;left:4px;right:4px;bottom:4px;z-index:2;background:#f5c542;color:#1a1a1a;font-weight:800;font-size:9.5px;line-height:1.2;padding:2px 4px;border-radius:6px;text-align:center";
       foto.style.position = "relative";
       foto.appendChild(sa);
     }
     // ⚠️ NOVO E' QUEM NAO TEM SERIE: entrou hoje, nao ha' o que acompanhar
     // ainda. E' a mesma condicao que deixava o rodape do cartao vazio.
     var eNovo = !(p.pontos >= 2);
-    if (eNovo) {
+    if (eNovo && !p.achado) {
       e.classList.add("caiu-sim");   // o degrade ajuda a ler o selo
       foto.appendChild(el("span", "novo", "achado novo"));
     }

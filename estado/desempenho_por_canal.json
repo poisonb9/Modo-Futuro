@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-09T16:06:45",
+  "medido_em": "2026-10-10T01:41:19",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 24,
       "shares": 6,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 29,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -47,7 +47,7 @@
       "comentarios": 122,
       "shares": 107,
       "engajamento_pct": 0.0,
-      "posts_recentes": 16,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -72,7 +72,7 @@
       "comentarios": 9,
       "shares": 23,
       "engajamento_pct": 0.0,
-      "posts_recentes": 42,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 39,
+      "posts_recentes": 33,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -122,32 +122,32 @@
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 21,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Wrap verde de espinafre com cominho e nigella no pilão Wrap "
-        },
-        {
-          "views": 0,
-          "titulo": "Wrap verde de espinafre com cominho e nigella no pilão\n\nWrap"
-        },
-        {
-          "views": 0,
           "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína Wrap saudáv"
+        },
+        {
+          "views": 0,
+          "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína\n\nWrap saudá"
+        },
+        {
+          "views": 0,
+          "titulo": "TOMATE CEREJA CONFITADO COM ALHO NO AZEITE Tomates cereja co"
         }
       ]
     },
     "camarim.kpop": {
-      "posts": 15,
+      "posts": 19,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 948,
-      "comentarios": 8,
-      "shares": 14,
+      "reacoes": 1135,
+      "comentarios": 11,
+      "shares": 15,
       "engajamento_pct": 0.0,
-      "posts_recentes": 15,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -156,11 +156,11 @@
         },
         {
           "views": 0,
-          "titulo": "SEUNGMIN do Stray Kids treinava choro no espelho Seungmin do"
+          "titulo": "SEUNGMIN do Stray Kids é exposto por treinar choro de discur"
         },
         {
           "views": 0,
-          "titulo": "O segredo de beleza bizarro do CHANGBIN do Stray Kids de 20 "
+          "titulo": "SEUNGMIN do Stray Kids treinava choro no espelho Seungmin do"
         }
       ]
     }

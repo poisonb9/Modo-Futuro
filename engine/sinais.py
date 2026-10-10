@@ -206,8 +206,14 @@ def postar_sinais(quantos: int = 2, ensaio: bool = False) -> int:
             foto = None
         entregue = telegram.enviar_foto(foto, texto, destino,
                                         botao=(vitrine.ROTULO_BOTAO, p["link"])) if foto else False
+        # ⛔ 10/10/2026 (dono, print do canal: "por que está saindo assim,
+        # esses links grandes, estranhos, azuis?"): o reserva de TEXTO COM O
+        # LINK POR EXTENSO (1.065 caracteres) foi proibido na vitrine em 25/09,
+        # mas sobrevivia aqui. Sem cartaz o sinal NAO sai e nao e' marcado:
+        # volta na proxima rodada. Post so' com foto + botao "Ver na loja".
         if not entregue:
-            entregue = telegram.enviar(vitrine.postar_texto(p, reg.get("canal")), destino)
+            print(f"     [adiado] sem cartaz entregue: {p['nome'][:44]}")
+            continue
         if entregue:
             _marcar_postado(chave)
             n += 1

@@ -1,7 +1,9 @@
 {
  "nota": "Campeoes no TikTok (09/10): serie Goggins sem filtro (678/653/602), Joe Rogan 3h da manha, Protocolo Huberman, DJ Shipley. Podcast longo com fala forte.",
  "atualizado": "2026-10-09",
- "nao_promover": [],
+ "nao_promover": [
+  "After Skool"
+ ],
  "canais": [
   {
    "nome": "Huberman Lab Clips",
@@ -58,6 +60,11 @@
    "origem": "vizinho dos campeoes (09/10)",
    "id": "UCkoujZQZatbqy4KGcgjpVxQ",
    "achado_como": "Shawn Ryan Show"
+  },
+  {
+   "nome": "Rian Doris",
+   "id": "UCftSbpEaMtTWcaFnvjwCvXw",
+   "origem": "auto: fonte aprovada 10/10"
   }
  ]
 }

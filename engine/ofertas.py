@@ -388,6 +388,30 @@ def _com_foto_viva(boas: list[dict]) -> list[dict]:
     return [o for o in boas if vivas.get(o["id"], True)]
 
 
+_RE_PECA = re.compile(r"(?:\bpara|compat[ií]vel com|reposi[cç][aã]o (?:para|do|da)?)\s+(?:o |a )?"
+                      r"(extratora|rob[oô](?: aspirador)?|aspirador|cafeteira|liquidificador|fritadeira|air ?fryer)",
+                      re.IGNORECASE)
+
+
+def _nomes_cheios() -> dict[str, str]:
+    """{"awin:<id>": nome COMPLETO do feed} -- o nome do agora vem cortado em
+    48 letras e perde o "... para Extratora KABUM!" que diz que e' peca."""
+    try:
+        inst = json.load(open(RAIZ / "estado" / "awin_catalogo.json", encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return {"awin:" + str(p["id"]): p.get("nome", "") for p in inst.get("produtos", [])}
+
+
+def _familia_peca(nome: str) -> str | None:
+    """'Bocal ... para Extratora KABUM!' -> 'extratora'. None se nao e' peca."""
+    m = _RE_PECA.search(nome or "")
+    if not m:
+        return None
+    f = m.group(1).lower().replace("ô", "o")
+    return "robo" if f.startswith("robo") or f == "aspirador" else f
+
+
 def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
     """{canal: [ofertas]} — POR_DIA por canal, por nicho, maiores quedas primeiro."""
     boas = candidatas(dia)          # ja' vem da maior queda para a menor
@@ -403,14 +427,31 @@ def do_dia(dia: date | None = None) -> dict[str, list[dict]]:
             o = por_id.get(pid)
             if o:
                 self.nomes.append(o["nome"])
+                fam = _familia_peca(_cheio.get(pid, o["nome"]))
+                if fam:
+                    self.familias.add(fam)
         def __contains__(self, pid):
             if set.__contains__(self, pid):
                 return True
             o = por_id.get(pid)
-            return bool(o) and any(parecido(o["nome"], n) for n in self.nomes)
+            if not o:
+                return False
+            # ⛔ 10/10/2026: peca de reposicao da mesma familia (extratora,
+            # robo aspirador...) saia 3 por dia e todo dia no instantaneos.
+            # 1 por dia no total, e nenhuma se a familia saiu nos ultimos 3 dias.
+            fam = _familia_peca(_cheio.get(pid, o["nome"]))
+            if fam and (fam in fam_recentes or fam in self.familias):
+                return True
+            return any(parecido(o["nome"], n) for n in self.nomes)
     por_id = {o["id"]: o for o in boas}
     usados = _Usados()
     usados.nomes = []
+    usados.familias = set()
+    _cheio = _nomes_cheios()
+    _ag = agora_todos()
+    _corte3 = ((dia or date.today()) - timedelta(days=3)).isoformat()
+    fam_recentes = {_familia_peca(_cheio.get(f["id"]) or (_ag.get(f["id"]) or {}).get("nome", ""))
+                    for f in _feitas() if f.get("dia", "") >= _corte3} - {None}
     # 0a passada (08/10/2026): DESTAQUE, nunca o mesmo produto em dois canais.
     # Cada achadinho: 1 vaga de MERCADO LIVRE (no nicho do canal quando houver)
     # + 1 de SAUDE/SUPLEMENTO/CABELO. Queda provada sempre na frente do achado.

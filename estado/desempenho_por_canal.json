@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-10T01:41:19",
+  "medido_em": "2026-10-10T08:24:28",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 95,
+      "posts": 99,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1114,
+      "reacoes": 1154,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 33,
+      "posts_recentes": 37,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -110,7 +110,7 @@
         },
         {
           "views": 0,
-          "titulo": "PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROME"
+          "titulo": "TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL\n"
         }
       ]
     },

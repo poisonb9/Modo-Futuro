@@ -489,13 +489,21 @@ def subir_prontos(estado: dict) -> None:
             log(f"⬆️ {p['canal']} → {conta['nome']}/RAW/{CANAIS[p['canal']]['pasta']}: {p['titulo'][:60]}")
 
 
-def limpar_temp() -> None:
+def limpar_temp(estado: dict | None = None) -> None:
     """Apaga o que o JDownloader deixa junto (audio, legenda, capa, descricao)
-    depois de 1 h parado — o .mp4 ja' subiu e foi apagado."""
+    depois de 1 h parado — o .mp4 ja' subiu e foi apagado.
+
+    ⛔ 10/10/2026: o .part de um video AINDA PENDENTE nao sai (o JD parou por
+    disco/travamento e retoma dele; apagar jogava fora 137 MB do ADHD e o
+    download nunca terminava). Quando o pendente expira, o .part sai aqui."""
     if not BAIXADOS.exists():
         return
+    vivos = [norm(p["titulo"])[:25] for p in (estado or {}).get("pendentes", {}).values()
+             if norm(p["titulo"])[:25]]
     agora = time.time()
     for f in BAIXADOS.rglob("*"):
+        if f.suffix.lower() == ".part" and any(v in norm(f.name) for v in vivos):
+            continue
         if f.is_file() and f.suffix.lower() in (".m4a", ".opus", ".srt", ".jpg", ".txt", ".webm", ".part") \
                 and agora - f.stat().st_mtime > (3600 if f.suffix.lower() == ".part" else 120):  # 02/10 dono: sem residuo; so' o .part espera 1 h
             try:
@@ -514,7 +522,7 @@ def passada() -> None:
     subir_prontos(estado)
     expirar_pendentes(estado)
     limpar_orfaos(estado)
-    limpar_temp()
+    limpar_temp(estado)
     est, ids_drive = estoque_drive()
     usados = ids_usados(estado) | ids_drive
     for canal, cfg in CANAIS.items():

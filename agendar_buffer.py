@@ -143,6 +143,19 @@ MAX_POR_DIA = 4
 # max_por_dia/slots). Os canais de corte seguem na SLOTS_SP/MAX_POR_DIA acima.
 SLOTS_SP_5 = [(8, 10), (11, 20), (14, 30), (17, 40), (20, 50)]
 
+# ⭐ 10/10/2026 (dono: "vamos comecar pelos que estao crescendo e pelos 3 que
+# postam ofertas; os de ofertas podem postar de madrugada tambem, de 4 em 4
+# horas, e durante o dia de 3 em 3 horas -- vamos testar assim"). TESTE:
+# medir views/post por 7 dias e voltar se a media cair.
+# Ofertas: 02:35 (madrugada, 4 h depois das 22:30) + de dia a cada ~3h05
+# (os 5 min de folga absorvem a variacao de +-8 min sem furar as 3 h).
+SLOTS_OFERTA_7 = [(2, 35), (7, 5), (10, 10), (13, 15), (16, 20), (19, 25), (22, 30)]
+# Cortes que estao crescendo: 4 -> 5 por dia (mesma grade das ofertas antigas).
+GRADE_POR_CANAL = {
+    "camarim.kpop": (SLOTS_SP_5, 5),
+    "truque.importado": (SLOTS_SP_5, 5),
+}
+
 # Titulos que NUNCA voltam a ser agendados (vale no runner; ver uso abaixo).
 TITULOS_BLOQUEADOS = (
     "O TESTE EXTREMO DE QUEDA DOS CELULARES DA SAMSUNG",
@@ -851,7 +864,10 @@ def main() -> None:
     print("recusados por motivo:", {k: n for k, n in motivos.items() if k != "outro_canal"})
     print(f"{len(todos)} clipe(s) no manifesto, {len(fila)} ainda não agendado(s)\n")
 
-    horarios = proximos_horarios(agendados, max(0, vagas), conhecidos)
+    from engine import canais_registro as _cr0
+    _grade, _teto = GRADE_POR_CANAL.get(_cr0.canonico(canal_deste_run) if canal_deste_run else "", (None, None))
+    horarios = proximos_horarios(agendados, max(0, vagas), conhecidos,
+                                 max_por_dia=_teto, slots=_grade)
     # ⭐ COZINHA: RECEITA NA HORA DA REFEICAO (trazido do `pipeline`, 26/09,
     # quando a cozinha veio para este motor). "Cafe da Manha" nao vai as
     # 16:27. So' reordena o que a refeicao exigir; clipe que nao casa com

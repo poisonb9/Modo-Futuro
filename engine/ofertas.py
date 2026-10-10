@@ -31,7 +31,7 @@ DIAS_MIN = 7
 NOTA_MIN = 4.7
 VENDAS_MIN = 1000
 JANELA_DIAS = 10   # 04/10/2026 (dono): era 21
-POR_DIA = 5   # 08/10/2026 (dono): era 4 — 5 por dia, >= 3 h entre posts
+POR_DIA = 7   # 10/10/2026 (dono): teste de 7/dia (madrugada 4 em 4 h, dia 3 em 3 h); era 5
 # ⭐ 08/10/2026: o @achadinho.make (truque.importado) e' canal de CORTE de K-pop
 # (4/dia) e recebe so' 1 oferta de beleza por dia, como 5o post.
 POR_DIA_CANAL = {"truque.importado": 1}

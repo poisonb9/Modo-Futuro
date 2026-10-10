@@ -102,7 +102,7 @@ def agendar(por_canal: dict[str, list[dict]], ja: bool = False) -> None:
             # 5/dia com a grade de 5 (>= 3 h, regra dura do agendar_buffer). O make
             # tem 4 cortes/dia: teto 5 = a oferta entra como 5o post, sem roubar corte.
             horas = ab.proximos_horarios(agendados, len(posts), conhecidos,
-                                         max_por_dia=5, slots=ab.SLOTS_SP_5)
+                                         max_por_dia=7, slots=ab.SLOTS_OFERTA_7)  # 10/10: teste do dono
             # ⭐ 30/09/2026 (dono): "minutos aleatorios, sem bater nenhum canal
             # postando junto no mesmo minuto e segundo" — pra nao parecer bot.
             horas = [_espalhar(h, usados) for h in horas]

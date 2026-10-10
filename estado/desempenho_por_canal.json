@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-10T08:24:28",
+  "medido_em": "2026-10-10T15:15:10",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 89,
+      "posts": 92,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 658,
-      "comentarios": 24,
+      "reacoes": 664,
+      "comentarios": 25,
       "shares": 6,
       "engajamento_pct": 0.0,
-      "posts_recentes": 29,
+      "posts_recentes": 30,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -40,14 +40,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 147,
+      "posts": 156,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 19112,
-      "comentarios": 122,
-      "shares": 107,
+      "reacoes": 20039,
+      "comentarios": 126,
+      "shares": 112,
       "engajamento_pct": 0.0,
-      "posts_recentes": 15,
+      "posts_recentes": 22,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -56,23 +56,23 @@
         },
         {
           "views": 0,
-          "titulo": "WONHEE do ILLIT acendeu incenso pela 1ª vez e levou um susto"
+          "titulo": "Yunjin do LE SSERAFIM ensina o truque bizarro de usar o curv"
         },
         {
           "views": 0,
-          "titulo": "PALETA DE CORRETIVOS MISTURADOS COM PINCEL DE PRECISÃO\n\nComo"
+          "titulo": "WONHEE do ILLIT acendeu incenso pela 1ª vez e levou um susto"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 108,
+      "posts": 112,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1232,
+      "reacoes": 1258,
       "comentarios": 9,
       "shares": 23,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 39,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 99,
+      "posts": 114,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1154,
+      "reacoes": 1389,
       "comentarios": 6,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 37,
+      "posts_recentes": 50,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -106,36 +106,36 @@
         },
         {
           "views": 0,
-          "titulo": "TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER\n\n"
+          "titulo": "VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANIT"
         },
         {
           "views": 0,
-          "titulo": "TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL\n"
+          "titulo": "TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER T"
         }
       ]
     },
     "cozinha.importada": {
-      "posts": 62,
+      "posts": 65,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 356,
+      "reacoes": 374,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 15,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína Wrap saudáv"
-        },
-        {
-          "views": 0,
-          "titulo": "Wrap caseiro com 3 ingredientes e 4g de proteína\n\nWrap saudá"
+          "titulo": "TORRADA DE FEIJAO MANTEIGA COM COTTAGE E PESTO VERMELHO\n\nUma"
         },
         {
           "views": 0,
           "titulo": "TOMATE CEREJA CONFITADO COM ALHO NO AZEITE Tomates cereja co"
+        },
+        {
+          "views": 0,
+          "titulo": "Sopa de repolho finalizada com limão e salsa O segredo para "
         }
       ]
     },
@@ -147,13 +147,9 @@
       "comentarios": 11,
       "shares": 15,
       "engajamento_pct": 0.0,
-      "posts_recentes": 16,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "WONHEE do ILLIT foi descoberta por olheiro em terminal de ôn"
-        },
         {
           "views": 0,
           "titulo": "SEUNGMIN do Stray Kids é exposto por treinar choro de discur"
@@ -161,6 +157,10 @@
         {
           "views": 0,
           "titulo": "SEUNGMIN do Stray Kids treinava choro no espelho Seungmin do"
+        },
+        {
+          "views": 0,
+          "titulo": "MOKA DO ILLIT IMPRESSIONA EQUIPE COM SEU TALENTO EXPRESSIVO "
         }
       ]
     }

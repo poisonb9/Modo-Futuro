@@ -1,24 +1,34 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-12;16:34;semanestesia.pod;agendado;Protocolo;6aca2485d9cab260a7c19f03
+2026-10-12;16:32;cozinha.importada;agendado;Petisco natural de carne de cordeiro desidratada para cachorro;6aca2a95d9cab260a7c2b965
+2026-10-12;16:29;camarim.kpop;agendado;MARTIN DO CORTIS AFIRMA QUE SE VESTE MELHOR QUE OS OUTROS MEMBROS;6aca2161ed92ed8fa5c87188
+2026-10-12;16:23;atefalhar;agendado;O glitch da loja de bicicletas que mudou os speedruns de Pokémon;6aca2244ed92ed8fa5c8a870
 2026-10-12;13:18;cozinha.importada;agendado;Marmita Saudável de 448 Calorias e 37g de Proteína;6ac981bebba9419ccbe564c0
 2026-10-12;13:16;modofuturo;agendado;250 caixas e 20 caminhões para mover 1 máquina da Intel;6ac97573d9cab260a7a73cae
 2026-10-12;13:10;camarim.kpop;agendado;A geladeira do STRAY KIDS foi aberta e estava quase toda VAZIA;6ac95f2eb07d37ac97512462
+2026-10-12;13:10;semanestesia.pod;agendado;Protocolo;6aca247ded92ed8fa5c90782
 2026-10-12;13:07;atefalhar;agendado;A CATEGORIA SECRETA DO KIKOHO DE TENSHINHAN EM DRAGON BALL;6ac9ae74c4de2d2b1213bb7f
 2026-10-12;08:20;modofuturo;agendado;POWERVIA: ENERGIA POR TRÁS E SINAL PELA FRENTE NO CHIP DA INTEL;6ac96037bba9419ccbe064a7
 2026-10-12;08:20;atefalhar;agendado;AS 5 TÉCNICAS DE PERFURAÇÃO MAIS FOCADAS DE DRAGON BALL;6ac9ae5ec4de2d2b1213b877
 2026-10-12;08:18;cozinha.importada;agendado;A RECEITA DE RABANADA DEFINITIVA COM 3 SEGREDOS REVELADOS;6ac94a53c4de2d2b1205534c
+2026-10-12;08:18;semanestesia.pod;agendado;Protocolo;6aca2476d9cab260a7c19d7d
 2026-10-12;08:16;camarim.kpop;agendado;MARK do NCT ficou indignado por CHENLE não ter fotos de suas comidas;6ac95f27bba9419ccbe04fe7
 2026-10-11;19:52;camarim.kpop;agendado;FELIX do Stray Kids revela por que sua mãe chorou 6 meses pelo seu nome;6ac95f14d9cab260a7a40082
+2026-10-11;19:51;semanestesia.pod;agendado;Protocolo;6aca2451d9cab260a7c199c9
 2026-10-11;19:46;modofuturo;agendado;AUTO-MONTAGEM DIRECIONADA: A QUÍMICA SUBSTITUINDO A LUZ NOS CHIPS;6ac96030d9cab260a7a42521
 2026-10-11;19:38;atefalhar;agendado;O detalhe do cabelo de Gohan do filme Bojack em Tenkaichi 3;6ac9ab88c4de2d2b121342f8
 2026-10-11;19:13;cozinha.importada;agendado;O Segredo do Chocolate Quente Italiano Super Denso;6ac928b1c4de2d2b12ffa614
 2026-10-11;16:33;camarim.kpop;agendado;STRAY KIDS fez show no estádio do TOTTENHAM e usou o chuveiro de Son Heung-min;6ac95efabba9419ccbe04bb6
 2026-10-11;16:30;modofuturo;agendado;EUA injetam US$ 19,5 bilhões para resgatar a Intel;6ac97561ed92ed8fa5ae8475
 2026-10-11;16:30;atefalhar;agendado;A Genki Dama do Goku GT encolheu em Tenkaichi 3;6ac9ab7af91f772d457d25db
+2026-10-11;16:30;semanestesia.pod;agendado;Protocolo;6aca2449f91f772d45904e58
 2026-10-11;16:13;cozinha.importada;agendado;DO CHANTILLY A MANTEIGA: O PONTO EXATO NA BATEDEIRA;6ac928b0c4de2d2b12ffa5e0
 2026-10-11;13:17;camarim.kpop;agendado;Como BANG CHAN e FELIX do Stray Kids fizeram as pazes no palco;6ac94a43f91f772d456f6793
 2026-10-11;13:13;cozinha.importada;agendado;O Ponto Perfeito do Frango Assado Super Suculento;6ac800bf2a80dca54c7dd20f
 2026-10-11;13:07;modofuturo;agendado;POR QUE A TSMC REJEITOU A MÁQUINA HIGH-NA EUV DE US$ 400 MILHÕES;6ac8773593f9e5101fea5024
 2026-10-11;13:05;atefalhar;agendado;O misterioso Wii de ouro de 24 quilates feito para a Rainha;6ac89b6304f06b2e8f821ab2
+2026-10-11;13:05;semanestesia.pod;agendado;Protocolo;6aca2443bba9419ccbfe6ea1
+2026-10-11;08:20;semanestesia.pod;agendado;Protocolo;6aca240dc4de2d2b1226467c
 2026-10-11;08:18;atefalhar;agendado;O brinquedo eletrônico que funcionava como cofre de dinheiro real;6ac89a30f07e682de6aa243c
 2026-10-11;08:14;modofuturo;agendado;O LIMITE DA RETÍCULA: O ESTÊNCIL DE 26x33MM QUE TRAVA OS CHIPS;6ac877307d9f9f330126a804
 2026-10-11;08:12;camarim.kpop;agendado;BANG CHAN do Stray Kids tenta mudar sotaque para não parecer agressivo;6ac94a2cb07d37ac974dfdb4
@@ -37,77 +47,77 @@
 2026-10-10;13:08;semanestesia.pod;agendado;Protocolo;6ac7ddd496e7c60048648441
 2026-10-10;13:04;camarim.kpop;agendado;BANG CHAN expõe a traição de FELIX do Stray Kids com Genshin Impact;6ac94981c4de2d2b12053982
 2026-10-10;13:03;modofuturo;agendado;O NOVO CHIP CHINÊS KIRIN 2026 ALCANÇA 238 MILHÕES DE TRANSISTORES;6ac76dd22b303c75a3d77542
-2026-10-10;11:41;cozinha.importada;agendado;Lamen de Carne Moída com Legumes em Uma Panela Só;6ac7dd74d3b0be2fc413b749
-2026-10-10;08:21;cozinha.importada;agendado;Hambúrguer Crocante de Frango com Queijo e Molho Ranch;6ac7dd73f4c7c231298039be
-2026-10-10;08:17;semanestesia.pod;agendado;Seu cérebro desiste antes;6ac7dd97f4c7c23129803e60
-2026-10-10;08:15;modofuturo;agendado;POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ;6ac76dc58037a896c55b2308
-2026-10-10;08:08;atefalhar;agendado;O MODO DE AUTODESTRUIÇÃO DO OMNITRIX CAPAZ DE DESTRUIR O UNIVERSO;6ac6ab4ce385dfed923327dd
-2026-10-10;08:07;camarim.kpop;agendado;HAN e CHANGBIN do Stray Kids ignoram mensagens importantes por pura preguiça;6ac8bee79fc66ba0d710bbc7
+2026-10-10;11:50;cozinha.importada;postado;Lamen de Carne Moída com Legumes em Uma Panela Só;6ac7dd74d3b0be2fc413b749
+2026-10-10;08:24;cozinha.importada;postado;Hambúrguer Crocante de Frango com Queijo e Molho Ranch;6ac7dd73f4c7c231298039be
+2026-10-10;08:18;semanestesia.pod;postado;Seu cérebro desiste antes;6ac7dd97f4c7c23129803e60
+2026-10-10;08:16;modofuturo;postado;POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ;6ac76dc58037a896c55b2308
+2026-10-10;08:09;atefalhar;postado;O MODO DE AUTODESTRUIÇÃO DO OMNITRIX CAPAZ DE DESTRUIR O UNIVERSO;6ac6ab4ce385dfed923327dd
+2026-10-10;08:08;camarim.kpop;postado;HAN e CHANGBIN do Stray Kids ignoram mensagens importantes por pura preguiça;6ac8bee79fc66ba0d710bbc7
 2026-10-09;22:57;truque.importado;postado;Achado do dia;6ac938cdbba9419ccbda1a79
 2026-10-09;19:53;modofuturo;postado;O CHIP EM 3D DA HUAWEI QUE DRIBLOU AS SANÇÕES DOS EUA;6ac76d86d9e8f417cbc63bf1
-2026-10-09;19:52;atefalhar;postado;TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL;6ac6904885762210c9f26fd8
+2026-10-09;19:52;atefalhar;postado;TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL Timmy Turner precisa salvar seus amigos, mas o medo retorna ;6ac6904885762210c9f26fd8
 2026-10-09;19:38;semanestesia.pod;postado;Protocolo;6ac7dd605b76911adddbb0d9
-2026-10-09;19:38;truque.importado;postado;JAEMIN DO NCT REAGE AO PIERCING FALSO NA SOBRANCELHA;6ac932a1c4de2d2b12015fb1
+2026-10-09;19:38;truque.importado;postado;JAEMIN DO NCT REAGE AO PIERCING FALSO NA SOBRANCELHA Risabae aplica adesivos de piercing na sobrancelha de Jaemin do NCT;6ac932a1c4de2d2b12015fb1
 2026-10-09;19:13;cozinha.importada;postado;Batata Recheada com Carne de Taco e Queijo Cremoso;6ac7dd725b76911adddbb82c
 2026-10-09;16:35;semanestesia.pod;postado;Goggins sem filtro;6ac7dd48357f26ef519af3ea
 2026-10-09;16:33;camarim.kpop;postado;HYUNJIN do Stray Kids expõe LEE KNOW como o coelho mais perigoso do SKZOO Hyunjin do Stray Kids apontou Leebit como o ma;6ac8bede3cdd14dcd268bc1a
 2026-10-09;16:32;modofuturo;postado;Linus Tech Tips na Câmara de Teste Extremo a 45°C Para Placas de Vídeo;6ac76d196a3120c31095383e
-2026-10-09;16:24;truque.importado;postado;BOCA DEGRADÊ COREANA COM LÁPIS E BALM DE UVA;6ac718cd95b0fb1c5ccae3ca
-2026-10-09;16:23;atefalhar;postado;O SALTO INSANO DE MOTO DE TIMMY TURNER SEM SENTIR NENHUM MEDO;6ac6901e887a55884cd59603
+2026-10-09;16:24;truque.importado;postado;BOCA DEGRADÊ COREANA COM LÁPIS E BALM DE UVA Aprenda a fazer o degradê labial favorito dos idols coreanos usando lápis d;6ac718cd95b0fb1c5ccae3ca
+2026-10-09;16:23;atefalhar;postado;O SALTO INSANO DE MOTO DE TIMMY TURNER SEM SENTIR NENHUM MEDO Sem emoções ou senso de perigo, Timmy realiza um salto per;6ac6901e887a55884cd59603
 2026-10-09;16:13;cozinha.importada;postado;Hamburguer de Frango Crocante com Queijo;6ac7dd71357f26ef519af92f
 2026-10-09;13:24;camarim.kpop;postado;CHANGBIN do Stray Kids é confrontado sobre suas roupas de academia Changbin do Stray Kids foi eleito o membro com as opi;6ac8bed73cdd14dcd268bacf
-2026-10-09;13:15;atefalhar;postado;TIMMY TURNER FAZ O DESEJO DE DELETAR TODAS AS SUAS EMOÇÕES;6ac68fda85762210c9f260d0
+2026-10-09;13:15;atefalhar;postado;TIMMY TURNER FAZ O DESEJO DE DELETAR TODAS AS SUAS EMOÇÕES Humilhado na piscina, Timmy recorre a Cosmo e Wanda para nunc;6ac68fda85762210c9f260d0
 2026-10-09;13:13;cozinha.importada;postado;TORRADA DE FEIJAO MANTEIGA COM COTTAGE E PESTO VERMELHO;6ac7226d365feab0d73ead14
-2026-10-09;13:12;truque.importado;postado;CONTORNO DE NARIZ EM BASTÃO APLICADO COM PINCEL DE PRECISÃO;6ac718c557f9bd074d27caef
+2026-10-09;13:12;truque.importado;postado;CONTORNO DE NARIZ EM BASTÃO APLICADO COM PINCEL DE PRECISÃO O passo a passo para fazer contorno de nariz sutil e afinar ;6ac718c557f9bd074d27caef
 2026-10-09;13:07;semanestesia.pod;postado;Protocolo;6ac68ea5a00d29ab6e31ab41
 2026-10-09;10:24;camarim.kpop;postado;CHANGBIN expõe a mania secreta de I.N do Stray Kids quando fica com vergonha Changbin do Stray Kids revelou um tique cur;6ac8bed04cc914d06209f648
 2026-10-09;08:18;modofuturo;postado;A tecnologia de 14 camadas empilhadas nos chips de IA;6ac651b2cf6aaa083c75ccea
 2026-10-09;08:18;semanestesia.pod;postado;Protocolo;6ac68e3e68023cb72ec5ab81
-2026-10-09;08:14;atefalhar;postado;O NOVO PADRINHO MÁGICO PODE SER UM VILÃO;6ac68f10a00d29ab6e31b922
+2026-10-09;08:14;atefalhar;postado;O NOVO PADRINHO MÁGICO PODE SER UM VILÃO O novo padrinho mágico de Dev Dimmadome pode não ser tão bonzinho assim. Analis;6ac68f10a00d29ab6e31b922
 2026-10-09;08:14;cozinha.importada;postado;TOMATE CEREJA CONFITADO COM ALHO NO AZEITE Tomates cereja cozidos lentamente no azeite de oliva com muito alho picado e ;6ac7226195b0fb1c5ccc4884
-2026-10-09;08:10;truque.importado;postado;2 TIPOS DE MÁSCARA DE CÍLIOS E PALITO AQUECIDO NO SALÃO;6ac718c095b0fb1c5ccadf11
+2026-10-09;08:10;truque.importado;postado;2 TIPOS DE MÁSCARA DE CÍLIOS E PALITO AQUECIDO NO SALÃO Veja como as profissionais de Seul combinam máscaras e usam o ca;6ac718c095b0fb1c5ccadf11
 2026-10-09;07:24;camarim.kpop;postado;SEUNGMIN do Stray Kids é exposto por treinar choro de discurso no banheiro Seungmin do Stray Kids foi desmascarado pelos;6ac8bec984976ed3ee1925c4
 2026-10-08;20:02;modofuturo;postado;O calor de 1.000°C na criação de transistores 3D Construir um transistor em cima do outro exige aquecer o wafer de silíc;6ac64f66002d92909c82f3be
-2026-10-08;19:55;atefalhar;postado;VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANITÁRIO;6ac536436cefee8493203f47
+2026-10-08;19:55;atefalhar;postado;VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANITÁRIO O valentão Francis tenta intimidar Timmy, mas a falta d;6ac536436cefee8493203f47
 2026-10-08;19:51;truque.importado;postado;Achado do dia;6ac7ece85b76911addde7750
 2026-10-08;19:38;semanestesia.pod;postado;Protocolo;6ac68d8668023cb72ec58e18
 2026-10-08;16:33;modofuturo;postado;Linus Tech Tips: A Máquina que Troca o Processador de uma GPU Linus Tech Tips acompanha a soldagem de um chip gráfico co;6ac64df6d75d415cada59228
-2026-10-08;16:33;truque.importado;postado;CÍLIOS POSTIÇOS INDIVIDUAIS COLADOS FIO A FIO NO CAMARIM;6ac718b357f9bd074d27c697
+2026-10-08;16:33;truque.importado;postado;CÍLIOS POSTIÇOS INDIVIDUAIS COLADOS FIO A FIO NO CAMARIM Descubra como os cílios dos idols são colocados um a um para ga;6ac718b357f9bd074d27c697
 2026-10-08;16:28;cozinha.importada;postado;MINGAU DE AVEIA CREMOSO COM FRUTAS E SEMENTES Mingau de aveia ultra cremoso finalizado com iogurte grego, frutas vermelh;6ac7225757f9bd074d294d8b
 2026-10-08;16:24;semanestesia.pod;postado;Protocolo;6ac68d4017cec261e6a60fd1
-2026-10-08;16:22;atefalhar;postado;TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER;6ac53634d2a44aef5fd886e6
+2026-10-08;16:22;atefalhar;postado;TRIXIE PERDE A PACIÊNCIA COM A INDIFERENÇA DE TIMMY TURNER Timmy Turner sem emoções ignora Trixie Tang no ônibus escolar;6ac53634d2a44aef5fd886e6
 2026-10-08;13:19;semanestesia.pod;postado;Protocolo;6ac4679959057dd2e0d0b78c
-2026-10-08;13:11;atefalhar;postado;A REAÇÃO DE TIMMY TURNER AO SER ZOADO NO ÔNIBUS DA ESCOLA;6ac5362a6cefee8493203ce5
+2026-10-08;13:11;atefalhar;postado;A REAÇÃO DE TIMMY TURNER AO SER ZOADO NO ÔNIBUS DA ESCOLA Timmy Turner se torna imune a qualquer tipo de bullying após d;6ac5362a6cefee8493203ce5
 2026-10-08;13:09;modofuturo;postado;Linus Tech Tips e o Alinhamento de Milhares de Esferas de Solda numa GPU Linus Tech Tips mostra a precisão absurda do pr;6ac64dee6a5e2d6ed6c228b8
-2026-10-08;13:08;truque.importado;postado;LÁPIS CORRETIVO DE 2 PONTAS PARA DESTACAR O AEGYO-SAL;6ac718a301166a3e1c1482c4
+2026-10-08;13:08;truque.importado;postado;LÁPIS CORRETIVO DE 2 PONTAS PARA DESTACAR O AEGYO-SAL Confira a técnica das maquiadoras de K-Pop para criar a famosa bol;6ac718a301166a3e1c1482c4
 2026-10-08;13:08;cozinha.importada;postado;OVOS ESTALADOS COM PIMENTAO VERMELHO E GEMA MOLE Ovos estalados perfeitamente com pimentão vermelho defumado e gema supe;6ac7224457f9bd074d2948d8
 2026-10-08;08:21;cozinha.importada;postado;IOGURTE GREGO TEMPERADO COM ALHO E ENDRO Aprenda a fazer uma base cremosa e refrescante de iogurte grego com alho ralado;6ac72141365feab0d73e975a
 2026-10-08;08:18;modofuturo;postado;Linus Tech Tips Revela o Raio-X que Enxerga Dentro das Placas de Vídeo Linus Tech Tips entra na sala de raio-X da fábric;6ac64cc8686a926ce2af0581
 2026-10-08;08:14;semanestesia.pod;postado;Seu cérebro desiste antes;6ac4678e032d05299878bf21
-2026-10-08;08:10;truque.importado;postado;PALETA DE CORRETIVOS MISTURADOS COM PINCEL DE PRECISÃO;6ac718992977c961bdc5538c
-2026-10-08;08:09;atefalhar;postado;O PERI PODE SER A PIOR INFLUÊNCIA PARA O DEV;6ac535ed0231af6af7bc85d9
+2026-10-08;08:10;truque.importado;postado;PALETA DE CORRETIVOS MISTURADOS COM PINCEL DE PRECISÃO Como as maquiadoras de K-Pop misturam cores de marcas diferentes ;6ac718992977c961bdc5538c
+2026-10-08;08:09;atefalhar;postado;O PERI PODE SER A PIOR INFLUÊNCIA PARA O DEV Mesmo querendo ajudar, o Peri pode acabar incentivando os piores hábitos de;6ac535ed0231af6af7bc85d9
 2026-10-08;01:57;cozinha.importada;postado;FRITADA DE ATUM DE FORNO COM CEBOLA ROXA Uma fritada fofinha de atum com cebola roxa caramelizada e temperos frescos fei;6ac720b795b0fb1c5ccc1765
-2026-10-08;01:27;truque.importado;postado;O PINCEL ESPATULA DE CORRETIVO PARA ILUMINAR O ROSTO;6ac7180d2977c961bdc5422f
+2026-10-08;01:27;truque.importado;postado;O PINCEL ESPATULA DE CORRETIVO PARA ILUMINAR O ROSTO Entenda como iluminar as áreas centrais do rosto sem criar textura ;6ac7180d2977c961bdc5422f
 2026-10-07;19:54;semanestesia.pod;postado;Protocolo;6ac4678859057dd2e0d0b60a
 2026-10-07;19:50;modofuturo;postado;Linus Tech Tips Mostra o Scanner 3D que Acha Erros Microscópicos em GPUs Linus Tech Tips analisa a inspeção óptica 3D qu;6ac64cb0002d92909c826017
-2026-10-07;19:38;atefalhar;postado;ESTE NOME FOI BANIDO DE OS PADRINHOS MÁGICOS;6ac5348161c22f8369bf1004
+2026-10-07;19:38;atefalhar;postado;ESTE NOME FOI BANIDO DE OS PADRINHOS MÁGICOS Você sabia que o nome Poof é considerado um insulto em vários países? Descu;6ac5348161c22f8369bf1004
 2026-10-07;16:36;modofuturo;postado;Linus Tech Tips: O Robô que Instala 77.000 Peças por Hora em GPUs Linus Tech Tips revela o maquinário de altíssima veloc;6ac64c27686a926ce2aeda71
-2026-10-07;16:30;atefalhar;postado;O DIA EM QUE DEV DIMMADOME PERDEU TUDO;6ac53472d2a44aef5fd84ddc
+2026-10-07;16:30;atefalhar;postado;O DIA EM QUE DEV DIMMADOME PERDEU TUDO Veja como Dev Dimmadome atingiu o fundo do poço após ser rejeitado pelo pai e aca;6ac53472d2a44aef5fd84ddc
 2026-10-07;16:23;semanestesia.pod;postado;Protocolo;6ac3861e4dee7e0d71632c8d
 2026-10-07;13:19;modofuturo;postado;Linus Tech Tips e a Aplicação Perfeita de Pasta de Solda em Placas Linus Tech Tips mostra como o estêncil metálico espal;6ac64a00d75d415cada4c45f
-2026-10-07;13:15;atefalhar;postado;PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROMETEDOR;6ac3b298c5a0c40187543560
+2026-10-07;13:15;atefalhar;postado;PROFESSOR CROCKER TENTA HUMILHAR TIMMY COM UM VÍDEO COMPROMETEDOR Crocker exibe o pior momento de Timmy na piscina, mas ;6ac3b298c5a0c40187543560
 2026-10-07;13:09;semanestesia.pod;postado;Protocolo;6ac3721e93d0ed5fea5b2450
-2026-10-07;08:24;atefalhar;postado;O RETORNO DO FILHO DO DOUG DIMMADOME;6ac2b03c8f73649f461909bd
+2026-10-07;08:24;atefalhar;postado;O RETORNO DO FILHO DO DOUG DIMMADOME Uma retrospectiva rápida sobre Dale Dimmadome, desde sua infância sombria como escr;6ac2b03c8f73649f461909bd
 2026-10-07;08:20;semanestesia.pod;postado;Protocolo;6ac371f99a161041f7659aea
 2026-10-06;20:15;modofuturo;postado;FICANDO INVISÍVEL AO OLHO NU NA ESCALA DE UMA BACTÉRIA Encolhendo até a escala de 2 micrômetros de altura, onde a física;6ac55543e0e7ba24e07b3c06
 2026-10-06;19:45;semanestesia.pod;postado;Protocolo;6ac371f043f47817ae208767
-2026-10-06;19:42;atefalhar;postado;O MAIOR FURO DE ROTEIRO DA HISTÓRIA DE KAMP KORAL REVELADO;6ac28ce6ca1380ada8300cea
+2026-10-06;19:42;atefalhar;postado;O MAIOR FURO DE ROTEIRO DA HISTÓRIA DE KAMP KORAL REVELADO A tentativa de explicar o passado de Sandy e Bob Esponja gero;6ac28ce6ca1380ada8300cea
 2026-10-06;16:22;semanestesia.pod;postado;Protocolo;6ac371e893d0ed5fea5b1a96
-2026-10-06;16:21;atefalhar;postado;A VOLTA DO EPISÓDIO MAIS TENSO DE BOB ESPONJA;6ac2507f11a7340ba028945a
-2026-10-06;14:44;truque.importado;postado;Yunjin do LE SSERAFIM ensina o truque bizarro de usar o curvex ao contrário!;6ac5325a8815e4f75706361c
+2026-10-06;16:21;atefalhar;postado;A VOLTA DO EPISÓDIO MAIS TENSO DE BOB ESPONJA A Sandy reviveu o clássico e assustador episódio dos ganchos de pescar. Ve;6ac2507f11a7340ba028945a
+2026-10-06;14:44;truque.importado;postado;Yunjin do LE SSERAFIM ensina o truque bizarro de usar o curvex ao contrário! A idol Huh Yunjin do grupo de K-Pop LE SSER;6ac5325a8815e4f75706361c
 2026-10-06;13:15;modofuturo;postado;500 MIL CHIPS DE IA RODANDO EM UM SÓ LUGAR O CEO da AWS revela a escala monumental do novo supercomputador construído pa;6ac20d9b814d657011ea0af6
 2026-10-06;13:10;semanestesia.pod;postado;Goggins sem filtro;6ac371dcfedacae4e360ad18
-2026-10-06;13:07;atefalhar;postado;O NOVO EPISÓDIO DE BOB ESPONJA QUE RESGATOU A NOSTALGIA DE 1999;6ac2507cfb26f2c2fb6061ba
+2026-10-06;13:07;atefalhar;postado;O NOVO EPISÓDIO DE BOB ESPONJA QUE RESGATOU A NOSTALGIA DE 1999 Com cores quentes e efeitos clássicos de água, este novo;6ac2507cfb26f2c2fb6061ba
 2026-10-06;08:21;semanestesia.pod;postado;Protocolo;6ac371cee62f83697f14d6e4
 2026-10-06;08:20;modofuturo;postado;DE CAMPO DE TERRA A MEGACENTRO DE IA EM TEMPO RECORDE O líder de engenharia da AWS explica a velocidade insana exigida p;6ac1e770aa79e514b90d9630
 2026-10-06;08:08;atefalhar;postado;AS REFERÊNCIAS CLÁSSICAS QUE VOCÊ PERDEU NO NOVO BOB ESPONJA Um episódio recente de Bob Esponja resgatou piadas e elemen;6ac250756f5f5d018da30496

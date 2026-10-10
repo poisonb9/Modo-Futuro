@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-10T18:01:53.144011+00:00",
+ "quando": "2026-10-10T22:02:09.900632+00:00",
  "termos": {
   "whey": "2026-10-10T06:24:14.454761+00:00",
   "meia": "2026-10-10T18:01:53.144011+00:00",
-  "chapéu": "2026-10-09T15:35:29.010188+00:00",
+  "chapéu": "2026-10-10T22:02:09.900632+00:00",
   "rádio": "2026-10-10T18:01:53.144011+00:00",
   "pneu": "2026-10-10T18:01:53.144011+00:00",
   "bateria": "2026-10-10T18:01:53.144011+00:00",
   "bateria 60v": "2026-10-10T18:01:53.144011+00:00",
   "bateria 60a": "2026-10-10T18:01:53.144011+00:00",
-  "ex2": "2026-10-09T20:22:36.014291+00:00",
-  "grade proteção ex2": "2026-10-09T20:22:36.014291+00:00",
-  "grade proteção": "2026-10-09T20:22:36.014291+00:00",
-  "grafe protecao": "2026-10-09T20:22:36.014291+00:00"
+  "ex2": "2026-10-10T22:02:09.900632+00:00",
+  "grade proteção ex2": "2026-10-10T22:02:09.900632+00:00",
+  "grade proteção": "2026-10-10T22:02:09.900632+00:00",
+  "grafe protecao": "2026-10-10T22:02:09.900632+00:00"
  },
  "produtos": [
   {
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-09T15:35:29.010188+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB59481595",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-09T15:35:29.010188+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB35161880",
@@ -813,7 +813,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB62867807",
@@ -829,7 +829,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB62535666",
@@ -845,12 +845,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB50732570",
    "nome": "Cama Infantil De Chão Montessoriana Solteiro Grade Proteção Cor Branco MKTPAFT008",
-   "preco": 609.0,
+   "preco": 579.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_980324-MLA99995730983_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-4297772041?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -861,7 +861,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB23351954",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB25455420",
@@ -893,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB24771463",
@@ -909,7 +909,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB26197012",
@@ -925,7 +925,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB42432212",
@@ -941,7 +941,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB25722405",
@@ -957,7 +957,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB41306211",
@@ -973,7 +973,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   },
   {
    "id": "MLB47135031",
@@ -989,7 +989,39 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-09T20:22:36.014291+00:00"
+   "visto": "2026-10-10T22:02:09.900632+00:00"
+  },
+  {
+   "id": "MLB19464808",
+   "nome": "interno Western Digital WD5000LPZX 500GB",
+   "preco": 148.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_780147-MLA99521535240_122025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4062330693?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB1672",
+   "comissao": 4.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "ex2",
+   "visto": "2026-10-10T22:02:09.900632+00:00"
+  },
+  {
+   "id": "MLB28362359",
+   "nome": "Western Digital WD3000FYYZ 3TB amarelo",
+   "preco": 2293.9,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_886205-MLA112320893578_062026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-5396962660?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB1672",
+   "comissao": 4.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "ex2",
+   "visto": "2026-10-10T22:02:09.900632+00:00"
   }
  ]
 }

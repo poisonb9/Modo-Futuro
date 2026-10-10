@@ -734,6 +734,98 @@ def _leitor_demo(url: str, tmp: Path):
         yield ultimo
 
 
+# ⭐ 10/10/2026 (dono: "design estilo Apple, premium, de loja cara, mas
+# minimalista"; previa aprovada: "ficou muito bom!"). Fundo branco, o produto
+# grande e sozinho, UM numero grande (o preco), o resto em cinza pequeno.
+# Sem ouro, moeda, selo, balao ou confete. ESTILO_OFERTA=antigo volta ao velho.
+ESTILO = os.environ.get("ESTILO_OFERTA", "minimal")
+_M_FUNDO, _M_TINTA, _M_CINZA, _M_LINHA = (255, 255, 255), (29, 29, 31), (134, 134, 139), (210, 210, 215)
+
+
+def _sem_borda(im: Image.Image) -> Image.Image:
+    """Tira a borda branca da foto da loja para o produto 'flutuar' no branco."""
+    caixa = im.convert("L").point(lambda v: 255 if v < 245 else 0).getbbox()
+    return im.crop(caixa) if caixa else im
+
+
+def _foto_minimal(im: Image.Image) -> Image.Image:
+    p = _sem_borda(im)
+    esc = min(820 / p.width, 760 / p.height)
+    return p.resize((max(1, int(p.width * esc)), max(1, int(p.height * esc))), Image.LANCZOS)
+
+
+def _linhas(dr, txt: str, f, larg: int, maximo: int = 2) -> list[str]:
+    out, atual = [], ""
+    for w_ in txt.split():
+        t = (atual + " " + w_).strip()
+        if dr.textlength(t, font=f) > larg and atual:
+            out.append(atual)
+            atual = w_
+        else:
+            atual = t
+    out.append(atual)
+    out = [l.rstrip(" ,;-") for l in out]
+    if len(out) > maximo:
+        out = out[:maximo]
+        out[-1] = out[-1].rstrip(" ,;-") + "…"
+    return out
+
+
+def quadro_minimal(t: float, d: dict, fotos: list[Image.Image]) -> Image.Image:
+    tela = Image.new("RGB", (W, H), _M_FUNDO)
+    dr = ImageDraw.Draw(tela)
+
+    def texto(y, txt, f, cor, alfa=1.0):
+        if alfa <= 0:
+            return
+        c = tuple(int(255 + (k - 255) * alfa) for k in cor)
+        centro(dr, y, txt, f, c)
+
+    marca = (d.get("marca") or "").title()
+    topo = f"{marca}  ·  Achado do dia N.º {d['numero']}" if d.get("numero") else marca
+    texto(150, topo, fonte("Inter-Regular.ttf", 32), _M_CINZA, min(1, t / 0.5))
+
+    # produto: entra suave (sobe 24 px e aparece em 0,7 s); com mais de uma
+    # foto, troca devagar a cada 5 s por fundido (sem efeito chamativo)
+    if fotos:
+        i = int(t // 5) % len(fotos)
+        mix = min(1, max(0, (t % 5 - 4.4) / 0.6)) if len(fotos) > 1 else 0
+        a = min(1, t / 0.7)
+        sobe = int(24 * (1 - ease(a)))
+        for k, peso in ((i, 1 - mix), ((i + 1) % len(fotos), mix)):
+            if peso <= 0:
+                continue
+            p = fotos[k]
+            px, py = (W - p.width) // 2, 300 + (760 - p.height) // 2 + sobe
+            base = tela.crop((px, py, px + p.width, py + p.height))
+            tela.paste(Image.blend(base, p, a * peso), (px, py))
+
+    a2 = min(1, max(0, (t - 0.4) / 0.6))
+    if d.get("loja"):
+        texto(1150, d["loja"].replace(" BR", ""), fonte("Inter-Regular.ttf", 38), _M_CINZA, a2)
+    f_nome = fonte("Inter-SemiBold.ttf", 62)
+    y = 1212
+    for l in _linhas(dr, d["nome"], f_nome, 920):
+        texto(y, l, f_nome, _M_TINTA, a2)
+        y += 80
+
+    a3 = min(1, max(0, (t - 0.9) / 0.6))
+    texto(y + 60, reais(d["agora"]), _caber(dr, reais(d["agora"]), "Inter-Bold.ttf", 120, 960, 60),
+          _M_TINTA, a3)
+    if d.get("provada"):
+        # so' afirma o "antes" com a serie que prova (mesma regra do video velho)
+        texto(y + 215, f"Antes {reais(d['ref'])}  ·  medido em {d['dias']} dias",
+              fonte("Inter-Regular.ttf", 36), _M_CINZA, a3)
+
+    a4 = min(1, max(0, (t - 1.4) / 0.6))
+    if a4 > 0:
+        c = tuple(int(255 + (k - 255) * a4) for k in _M_LINHA)
+        dr.line((W / 2 - 40, 1700, W / 2 + 40, 1700), fill=c, width=2)
+    texto(1730, f"Preço conferido em {d['hora']}", fonte("Inter-Regular.ttf", 30), _M_CINZA, a4)
+    texto(1775, "Link na bio", fonte("Inter-Medium.ttf", 30), _M_CINZA, a4)
+    return tela
+
+
 def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = None,
           exigir_queda: bool = True, gancho: str = "", demo_arquivo: Path | None = None) -> dict:
     d = dados(pid, exigir_queda)
@@ -778,8 +870,18 @@ def gerar(pid: str, saida: Path, canal: str | None = None, numero: int | None = 
         except Exception as e:  # noqa: BLE001 — sem demo, volta pra foto
             print(f"  [!] video do vendedor indisponivel ({type(e).__name__}); uso as fotos")
             demo = None
+    fotos_m = []
+    if ESTILO == "minimal":
+        for u in ordenar_fotos(d["imagens"])[:3]:
+            try:
+                fotos_m.append(_foto_minimal(baixar(u)))
+            except Exception:  # noqa: BLE001 — foto que nao baixa fica de fora
+                pass
     for i in range(int(DUR * FPS)):
         t = i / FPS
+        if ESTILO == "minimal":
+            p.stdin.write(quadro_minimal(t, d, fotos_m).tobytes())
+            continue
         dq = next(demo) if (demo is not None and t < DEMO_S) else None
         p.stdin.write(quadro(t, d, fundo, cartoes, dq).tobytes())
     p.stdin.close()

@@ -1,4 +1,4 @@
-# Abastecimento de TODOS os canais como TAREFA DO WINDOWS (04/10/2026).
+﻿# Abastecimento de TODOS os canais como TAREFA DO WINDOWS (04/10/2026).
 #
 # Por que aqui e nao no GitHub: o YouTube bloqueia download de IP de nuvem
 # ("Sign in to confirm you're not a bot", medido em 29/09/2026). Esta VPS
@@ -53,12 +53,22 @@ try {
         # so' reinicia na 3a falha seguida (~1h30); antes so' anota e espera.
         $nf = 1 + [int]("0" + (Get-Content $falhas -ErrorAction SilentlyContinue))
         "$nf" | Out-File $falhas -Encoding ascii
-        if ((Get-Process JDownloader2 -ErrorAction SilentlyContinue) -and $nf -lt 3) {
-            Anota "JDownloader sem responder ($nf/3) - espero a proxima passada"
-            exit 0
+        # 10/10/2026: JD "aberto" com < 150 MB ha' mais de 5 min nao esta'
+        # ocupado baixando: travou na abertura (visto 01:38, 40 MB, API muda).
+        # Esse nao espera 3 passadas: reinicia ja'.
+        $travadoNaAbertura = Get-Process JDownloader2 -ErrorAction SilentlyContinue |
+            Where-Object { $_.WorkingSet64 -lt 150MB -and $_.StartTime -lt (Get-Date).AddMinutes(-5) }
+        $pularJd = $false
+        if ((Get-Process JDownloader2 -ErrorAction SilentlyContinue) -and $nf -lt 3 -and -not $travadoNaAbertura) {
+            # 10/10/2026: antes era `exit 0` e a passada INTEIRA parava (subir
+            # ao Drive, expirar pendente, radar) por ate' 1h30. So' o JD espera;
+            # o resto roda (o abastecer_loop ja' trata JD sem resposta).
+            Anota "JDownloader sem responder ($nf/3) - espero a proxima passada para reiniciar; o resto da passada segue"
+            $pularJd = $true
         }
+        if (-not $pularJd) {
         if (Get-Process JDownloader2 -ErrorAction SilentlyContinue) {
-            Anota "JDownloader sem responder 3x seguidas - reiniciando"
+            Anota "JDownloader sem responder ou travado na abertura - reiniciando"
             Get-Process JDownloader2 | Stop-Process -Force
             Start-Sleep -Seconds 10
         } else { Anota "JDownloader fechado - abrindo" }
@@ -73,6 +83,7 @@ try {
                 AvisaTelegram "⚠️ JDownloader travado na VPS: reabri e ele nao voltou em 3 min. Sem ele nenhum canal recebe video novo. Confira a janela dele (atualizacao/aviso) ou a opcao 'Deprecated API'."
                 Get-Date | Out-File $marca
             }
+        }
         }
     }
     Set-Location $raiz

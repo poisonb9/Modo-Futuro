@@ -6,10 +6,14 @@ name: Vigia de postagem
 
 on:
   schedule:
-    - cron: '13 11 * * *'    # 08:13 BRT
-    - cron: '47 16 * * *'    # 13:47 BRT
-    - cron: '21 22 * * *'    # 19:21 BRT
+    # ⛔ 10/10/2026 (dono): 3x/dia deixou o @achadinho.make secar entre 01:48
+    # e a manha. Agora a cada 2 h, e a vigia AGE (passo abaixo).
+    - cron: '13 */2 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
 
 jobs:
   vigiar:
@@ -33,3 +37,34 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_ALERTA }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_DONO }}   # privado do dono com @AchadinhoTotalBot (04/10)
         run: python -X utf8 ferramentas/vigia_postagem.py
+
+      # ⛔ 10/10/2026: a vigia so' avisava (e o Telegram pode estar mudo).
+      # Canal com menos de 1 dia de posts agendados: repoe a fila AGORA e poe
+      # o canal na FRENTE do corte (estado/fila_prioridade.json, lido pelo
+      # vigia_raw do PC a cada passada).
+      - name: Agir na fila curta
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curtos="$(cat estado/fila_curta.txt 2>/dev/null || true)"
+          if [ -z "$curtos" ]; then echo "nenhum canal com fila curta"; exit 0; fi
+          echo "fila curta: $curtos"
+          gh workflow run repor_fila.yml -f canais="$(echo $curtos | tr ' ' ',')" -f piso=8 || echo "[!] repor_fila nao disparou"
+          python - "$curtos" <<'EOF'
+          import json, sys, pathlib
+          arq = pathlib.Path("estado/fila_prioridade.json")
+          try:
+              d = json.loads(arq.read_text(encoding="utf-8"))
+          except Exception:
+              d = {"frente": []}
+          frente = sys.argv[1].split()
+          d["frente"] = frente + [c for c in d.get("frente", []) if c not in frente]
+          d["porque"] = "vigia_postagem: fila curta (< 1 dia agendado) -> " + " ".join(frente)
+          arq.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f estado/fila_prioridade.json
+          git commit -m "vigia_postagem: fila curta na frente do corte ($curtos)" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done

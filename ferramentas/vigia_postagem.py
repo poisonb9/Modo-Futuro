@@ -28,6 +28,13 @@ import agendar_buffer as ab  # noqa: E402
 from engine import canais_registro as cr  # noqa: E402
 
 META = 4
+# ⛔ 10/10/2026 (dono: "precisamos de uma guarda que evite que os canais fiquem
+# sem videos. Isso nao pode acontecer."): a regua era `proximas_24h == 0` e o
+# @achadinho.make passou como OK com 1 post agendado as 01:48 -- e secou em
+# seguida. Agora FILA CURTA = menos de um dia de posts (META) nas proximas 24 h,
+# e a vigia AGE: grava os canais curtos em estado/fila_curta.txt, que o
+# workflow usa para repor a fila e por o canal na frente do corte.
+FILA_MIN_24H = META
 SP = timezone(timedelta(hours=-3))
 CONSULTA = """query($i: PostsInput!) { posts(input: $i, first: 60) {
     edges { node { status dueAt sentAt } } } }"""
@@ -90,6 +97,8 @@ def problemas(m: dict) -> list[str]:
         out.append(f"hoje {hoje}/{META} ({m['enviados_hoje']} saiu, {m['agendados_hoje']} na fila)")
     if m["proximas_24h"] == 0:
         out.append("fila VAZIA nas proximas 24 h")
+    elif m["proximas_24h"] < FILA_MIN_24H:
+        out.append(f"fila CURTA: so' {m['proximas_24h']} post(s) nas proximas 24 h")
     if m["erros"]:
         out.append(f"{m['erros']} post(s) com ERRO no Buffer")
     return out
@@ -110,7 +119,7 @@ def main() -> None:
     a = argparse.ArgumentParser()
     a.add_argument("--so-ler", action="store_true")
     o = a.parse_args()
-    linhas, em_dia = [], []
+    linhas, em_dia, curtos = [], [], []
     for canal in cr.CANAIS:
         try:
             m = medir(canal)
@@ -123,6 +132,8 @@ def main() -> None:
         print(f"{canal:26} {'OK' if not p else ' | '.join(p)}  {m}")
         if not p:
             em_dia.append(m.get("arroba") or canal)
+        if not m.get("falha") and m.get("proximas_24h", FILA_MIN_24H) < FILA_MIN_24H:
+            curtos.append(canal)
         if p:
             linhas.append(f"• {m.get('arroba') or canal}: " + "; ".join(p))
     if linhas and not o.so_ler:
@@ -131,6 +142,9 @@ def main() -> None:
         avisar(f"⚠️ Vigia de postagem ({hora})\n" + "\n".join(linhas) + ok)
     if not linhas:
         print("todos os canais com a meta do dia")
+    # o workflow le' este arquivo para AGIR (repor fila + prioridade de corte)
+    (RAIZ / "estado" / "fila_curta.txt").write_text(" ".join(curtos), encoding="utf-8")
+    print(f"fila curta: {' '.join(curtos) or '(nenhum)'}")
 
 
 if __name__ == "__main__":

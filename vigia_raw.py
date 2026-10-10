@@ -652,8 +652,17 @@ def uma_passada(drive) -> int:
     por_canal: dict[str, list] = {}
     for v in novos:
         por_canal.setdefault(canal_da_pasta(v.get("caminho", "")), []).append(v)
+    # ⭐ 10/10/2026 (dono: "poe o camarim na frente da fila"): canal listado
+    # em estado/fila_prioridade.json passa INTEIRO na frente (todos os brutos
+    # dele antes do revezamento). Tirar o canal do arquivo volta ao normal.
+    try:
+        frente = json.loads((RAIZ / "estado" / "fila_prioridade.json")
+                            .read_text(encoding="utf-8")).get("frente", [])
+    except (OSError, ValueError):
+        frente = []
+    primeiro = [v for c in frente for v in por_canal.pop(c, [])]
     ordem = sorted(por_canal, key=lambda c: len(por_canal[c]))
-    revezado = []
+    revezado = primeiro
     while any(por_canal.values()):
         for c in ordem:
             if por_canal[c]:

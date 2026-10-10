@@ -247,10 +247,14 @@ def main():
                    help="ID da pasta pai do Drive (onde nasce a pasta do dia)")
     p.add_argument("--conta", default="principal",
                    help="conta do Drive a usar (ver contas_drive.py)")
-    p.add_argument("--sem-telegram", action="store_true",
-                   help="não manda as legendas pro Telegram")
+    # ⛔ 10/10/2026 (dono: "está chegando as legendas dos vídeos no meu
+    # Telegram ... não quero, está poluindo"): as legendas NÃO vão mais por
+    # padrão. O que vai todo dia é a NOTA do balão (ferramentas/notas_do_dia.py).
+    p.add_argument("--com-telegram", action="store_true",
+                   help="manda as legendas pro Telegram (desligado por padrão)")
+    p.add_argument("--sem-telegram", action="store_true", help=argparse.SUPPRESS)
     a = p.parse_args()
-    subir(a.pasta_id, avisar_telegram=not a.sem_telegram, conta=a.conta)
+    subir(a.pasta_id, avisar_telegram=a.com_telegram, conta=a.conta)
 
 
 if __name__ == "__main__":

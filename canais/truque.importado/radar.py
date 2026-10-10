@@ -140,6 +140,11 @@ TEMA = [
     "beauty", "k-beauty", "cosmetic", "glam", "grwm", "bridal",
     "foundation", "concealer", "primer", "highlighter", "contour",
     "eyeliner", "eyeshadow", "lipstick", "blush", "skin",
+    # ⭐ 10/10/2026: os titulos em COREANO caiam todos como "sem tema" (21 de
+    # 37 ineditos minerados, ex. "제 메이크업 점수", "왓츠 인 마이 파우치") e o
+    # @achadinho.make secou sem estoque. Termos de maquiagem/beleza em coreano:
+    "메이크업", "화장", "뷰티", "파우치", "스킨케어", "립", "아이라이너", "섀도우",
+    "쿠션", "파운데이션", "컨실러", "블러셔", "속눈썹", "겟레디", "grwm",
 ]
 
 # ⭐ 03/10/2026: TEM de ser do universo K-pop. Fonte com maquiagem mas sem

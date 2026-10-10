@@ -38,7 +38,12 @@ POR_DIA_CANAL = {"truque.importado": 1}
 SO_NICHO = {"truque.importado"}   # nunca recebe sobra de outro nicho
 # ⭐ 30/09/2026: @achadinhototal entra na divisao (plano, 3º canal). Um produto
 # nunca sai em dois canais — a alternancia abaixo garante.
-CANAIS = ("fatura.chora", "achadinhos.instantaneos", "achadinhototal", "truque.importado")
+# ⛔ 10/10/2026 (dono: "eventualmente ta sendo postado achadinhos entre os
+# videos, quero parar isso por enquanto"): o @achadinho.make (truque.importado)
+# SAIU das ofertas. Medido: os "Achado do dia" dele fizeram 95 e 67 views,
+# enquanto os cortes com idol no titulo voltaram a 5,9 mil (Jaemin) e 11 mil.
+# Para religar: devolver "truque.importado" a esta tupla.
+CANAIS = ("fatura.chora", "achadinhos.instantaneos", "achadinhototal")
 
 # minusculo, palavra inteira. Lista curta de proposito: e' o que mais aparece
 # falsificado no Ali; cresce quando aparecer um caso.

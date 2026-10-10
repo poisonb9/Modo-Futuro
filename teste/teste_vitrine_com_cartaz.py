@@ -226,20 +226,23 @@ requests.get = _com_rede(FOTO)
 try:
     from engine import cartaz as _c
 
+    # ⭐ 10/10/2026: o cartaz virou MINIMALISTA (sem selo verde). A queda agora
+    # aparece como a linha cinza "Antes R$ X" embaixo do preco; o teste mede
+    # os pixels cinza dessa faixa (y 900-1240, acima do rodape), que so' existem com queda.
     def verde(b):
         import numpy as np
-        a = np.asarray(Image.open(io.BytesIO(b)).convert("RGB"), dtype=np.int16)
-        return int((np.abs(a - np.array(_c.VERDE, dtype=np.int16)).max(axis=2)
+        a = np.asarray(Image.open(io.BytesIO(b)).convert("RGB"), dtype=np.int16)[900:1240]
+        return int((np.abs(a - np.array((134, 134, 139), dtype=np.int16)).max(axis=2)
                     <= 28).sum())
 
     com = vitrine.cartaz_de(P)
     sem = vitrine.cartaz_de(dict(P, preco_antes=""))
     # ⭐ o caso POSITIVO primeiro: sem ele, um cartaz que nunca desenha selo
     # passaria na linha de baixo.
-    checar(verde(com) > 2000, "com par de precos, o selo aparece")
-    checar(verde(sem) < 200, "sem `preco_antes`, o selo NAO aparece")
+    base = verde(sem)   # sem "Antes": so' o serrilhado do texto preto
+    checar(verde(com) > base + 1500, "com par de precos, o \"Antes\" aparece")
     mentira = vitrine.cartaz_de(dict(P, preco_antes="R$ 10,00"))
-    checar(verde(mentira) < 200,
+    checar(verde(mentira) < base + 300,
            "`preco_antes` MENOR que o preco de hoje nao vira desconto")
 finally:
     requests.get = guardado

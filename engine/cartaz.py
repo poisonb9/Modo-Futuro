@@ -252,81 +252,52 @@ BORDA = (0xEC, 0xE9, 0xF1)
 LOGO = RAIZ / "paginas" / "logo_achadinho_mestre.png"
 
 
+def _inter(peso: str, tam: int) -> ImageFont.FreeTypeFont:
+    arq = Path(__file__).resolve().parent / "fontes" / f"Inter-{peso}.ttf"
+    return ImageFont.truetype(str(arq), tam) if arq.exists() else _fonte(tam)
+
+
 def montar_claro(foto: Image.Image, nome: str, preco: float,
                  antes: float | None = None, *, rodape: str = "") -> Image.Image:
-    """O cartaz do canal no padrao da marca: branco, 4x5, logo no topo."""
+    """O cartaz do canal no estilo MINIMALISTA (10/10/2026, dono: "estilo
+    Apple, premium, de loja cara, mas minimalista" -- previa aprovada).
+    Branco, o produto grande e sozinho (sem moldura nem selo), UM numero grande
+    (o preco, em preto), o resto pequeno em cinza. 4x5."""
     largura, altura = TAMANHO_CLARO
+    tinta, cinza = (29, 29, 31), (134, 134, 139)
     tela = Image.new("RGB", TAMANHO_CLARO, BRANCO)
     d = ImageDraw.Draw(tela)
 
-    # topo: logo + nome da marca, discretos
-    fm = _fonte(40)
-    marca = "Achadinho Total"
-    lado_logo = 72
-    wm = d.textlength(marca, font=fm)
-    x0 = (largura - (lado_logo + 18 + wm)) / 2
-    if LOGO.exists():
-        lg = Image.open(LOGO).convert("RGBA").resize((lado_logo, lado_logo), Image.LANCZOS)
-        tela.paste(lg, (int(x0), 44), lg)
-    d.text((x0 + lado_logo + 18, 44 + (lado_logo - 48) / 2), marca, font=fm, fill=TINTA)
+    def centro(y, txt, f, cor):
+        d.text(((largura - d.textlength(txt, font=f)) / 2, y), txt, font=f, fill=cor)
 
-    # a foto: quadrada, borda fina e sombra leve — a foto de loja quase sempre
-    # tem fundo branco, e sem borda ela se dissolve na pagina
-    lado = 800
+    centro(56, "Achadinho Total", _inter("Regular", 30), cinza)
+
+    # produto: sem a borda branca da loja, grande, sem moldura
     p = foto.convert("RGB")
-    c = min(p.size)
-    p = p.crop(((p.width - c) // 2, (p.height - c) // 2,
-                (p.width + c) // 2, (p.height + c) // 2))
-    p = p.resize((lado, lado), Image.LANCZOS)
-    p = ImageEnhance.Sharpness(p).enhance(1.25)
-    x, y = (largura - lado) // 2, 150
-    sombra = Image.new("RGBA", TAMANHO_CLARO, (0, 0, 0, 0))
-    ImageDraw.Draw(sombra).rounded_rectangle(
-        [x, y + 14, x + lado, y + lado + 14], 40, fill=(40, 30, 60, 46))
-    tela = Image.alpha_composite(tela.convert("RGBA"),
-                                 sombra.filter(ImageFilter.GaussianBlur(24))).convert("RGB")
-    tela.paste(_cantos(p, 40), (x, y), _cantos(p, 40))
-    d = ImageDraw.Draw(tela)
-    d.rounded_rectangle([x, y, x + lado, y + lado], 40, outline=BORDA, width=3)
+    caixa = p.convert("L").point(lambda v: 255 if v < 245 else 0).getbbox()
+    if caixa:
+        p = p.crop(caixa)
+    esc = min(760 / p.width, 640 / p.height)
+    p = p.resize((max(1, int(p.width * esc)), max(1, int(p.height * esc))), Image.LANCZOS)
+    p = ImageEnhance.Sharpness(p).enhance(1.15)
+    tela.paste(p, ((largura - p.width) // 2, 130 + (640 - p.height) // 2))
+
+    fn = _inter("SemiBold", 46)
+    yy = 820
+    for linha in _quebrar(d, nome, fn, largura * 0.84, 2):
+        centro(yy, linha.rstrip(" ,;-"), fn, tinta)
+        yy += 60
 
     queda = queda_do_par(preco, antes)
-    mostra_queda = queda >= QUEDA_MINIMA
-    if mostra_queda:
-        f = _fonte(44)
-        t = f"-{queda:.0f}%"
-        tw = d.textlength(t, font=f)
-        d.rounded_rectangle([x + 24, y + 24, x + 24 + tw + 52, y + 24 + 74],
-                            24, fill=VERDE)
-        d.text((x + 24 + 26, y + 24 + 12), t, font=f, fill=(255, 255, 255))
-
-    fn = _fonte(50)
-    yy = y + lado + 34
-    for linha in _quebrar(d, nome, fn, largura * 0.86, 2):
-        d.text(((largura - d.textlength(linha, font=fn)) / 2, yy), linha,
-               font=fn, fill=TINTA)
-        yy += 64
-
-    # preco (e o "de", riscado, AO LADO — em cima dele roubava altura do 4x5)
-    fp = _fonte(104)
-    tp = _reais(preco)
-    wp = d.textlength(tp, font=fp)
-    yy += 4
-    if mostra_queda:
-        fa = _fonte(44)
-        ta = _reais(antes)
-        wa = d.textlength(ta, font=fa)
-        xt = (largura - (wa + 28 + wp)) / 2
-        ya = yy + 50
-        d.text((xt, ya), ta, font=fa, fill=CINZA_CLARO)
-        d.line([xt - 6, ya + 30, xt + wa + 6, ya + 30], fill=CINZA_CLARO, width=4)
-        d.text((xt + wa + 28, yy), tp, font=fp, fill=OURO_ESCURO)
-    else:
-        d.text(((largura - wp) / 2, yy), tp, font=fp, fill=OURO_ESCURO)
+    centro(yy + 34, _reais(preco), _inter("Bold", 104), tinta)
+    if queda >= QUEDA_MINIMA:
+        centro(yy + 170, f"Antes {_reais(antes)}", _inter("Regular", 34), cinza)
 
     if rodape:
-        fr = _fonte(30)
-        d.text(((largura - d.textlength(rodape, font=fr)) / 2, altura - 62),
-               rodape, font=fr, fill=CINZA_CLARO)
+        d.line([largura / 2 - 36, altura - 92, largura / 2 + 36, altura - 92],
+               fill=(210, 210, 215), width=2)
+        centro(altura - 70, rodape, _inter("Regular", 28), cinza)
     return tela
 
 

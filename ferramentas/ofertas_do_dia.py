@@ -79,6 +79,28 @@ def _espalhar(h, usados: set) -> "datetime":
     return h
 
 
+BUFFER_TETO = 10   # plano do Buffer: 10 posts agendados por canal (LimitReachedError)
+
+
+def vagas_buffer(canal: str) -> int | None:
+    """Quantos posts ainda cabem na fila do Buffer do canal. None = nao li.
+    ⛔ 10/10/2026: a 1a rodada de 7/dia gerou e REGISTROU 21 videos, mas 4 nao
+    couberam (10/10 no Buffer) -- ficavam registrados sem ir ao ar e a
+    numeracao "Achado do dia" pulava. Agora so' gera o que cabe."""
+    import os
+    import agendar_buffer as ab
+    from engine import canais_registro as cr
+    token = (os.environ.get(cr.CANAIS[canal].env) or "").strip()
+    if not token:
+        return None
+    os.environ["CANAL_ESPERADO"] = canal
+    try:
+        _, _, conhecidos = ab.contexto_buffer(token, fresco=True)
+    except Exception:  # noqa: BLE001
+        return None
+    return max(0, BUFFER_TETO - sum(1 for x in conhecidos if x.get("status") == "scheduled"))
+
+
 def agendar(por_canal: dict[str, list[dict]], ja: bool = False) -> None:
     """Cada video na fila do Buffer do SEU canal. Um canal que falha nao
     derruba os outros — mas a falha aparece (exit 1 no fim)."""
@@ -189,6 +211,11 @@ def main() -> None:
                         "videos de oferta (Pago Menos / instantaneos)"], check=True)
     comentarios = []
     for canal, os_ in escolha.items():
+        if a.agendar:
+            vagas = vagas_buffer(canal)
+            if vagas is not None and vagas < len(os_):
+                print(f"  {canal}: {vagas} vaga(s) no Buffer (teto {BUFFER_TETO}) -- gero so' {vagas} de {len(os_)}")
+                os_ = os_[:vagas]
         n = video_oferta.proximo_numero(canal)
         for o in os_:
             if o["id"] not in links:

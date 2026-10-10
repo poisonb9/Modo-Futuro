@@ -1,4 +1,7 @@
 {
- "frente": ["truque.importado", "semanestesia.pod"],
- "porque": "10/10/2026 10:05: achadinho.make com a fila do Buffer VAZIA (7 prontos barrados pelo juiz) e semanestesia com 6 brutos novos. Camarim saiu."
+ "frente": [
+  "truque.importado",
+  "semanestesia.pod"
+ ],
+ "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> truque.importado semanestesia.pod"
 }

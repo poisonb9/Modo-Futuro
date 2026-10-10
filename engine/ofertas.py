@@ -75,8 +75,18 @@ def _agora_awin() -> dict[str, dict]:
         inst = json.load(open(RAIZ / "estado" / "awin_catalogo.json", encoding="utf-8"))
     except (OSError, ValueError):
         return {}
+    # ⭐ 10/10/2026: a foto do feed da Drogal (io.convertiez) morreu em ~580 de
+    # 615. A bio ja' achava a foto REAL na loja (publicar_bio._fotos_drogal,
+    # cache estado/fotos_trocadas.json); as ofertas nao usavam e o video
+    # falhava. Agora usam o mesmo cache: url ruim -> url boa.
+    try:
+        trocas = json.load(open(RAIZ / "estado" / "fotos_trocadas.json", encoding="utf-8"))
+    except (OSError, ValueError):
+        trocas = {}
     out = {}
     for p in inst.get("produtos", []):
+        if p.get("imagem") and trocas.get(p["imagem"]):
+            p = {**p, "imagem": trocas[p["imagem"]]}
         if p["loja"] in AWIN_FORA or not p.get("imagem") or SEM_FOTO in p["imagem"]:
             continue
         cat = categorias.categoria_de(p["loja"], p.get("categoria", ""), p.get("nome", ""))

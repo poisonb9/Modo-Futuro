@@ -1095,6 +1095,10 @@ def montar_catalogo() -> tuple[str, dict[str, str]]:
                         # ⭐ a hora da ultima reconferencia (painel do garimpo, 18/09)
                         ('  var ULTIMA_CONFERENCIA = "";',
                          '  var ULTIMA_CONFERENCIA = "' + _ultima_conferencia() + '";'),
+                        # ⭐ 10/10: quem veio do video de um produto que a loja tirou
+                        ("  var ESGOTADOS = {};",
+                         "  var ESGOTADOS = " + json.dumps(esgotados(), ensure_ascii=False)
+                         .replace("</", "<\\/") + ";"),
                         # ⚠️ elemento, nao comentario: os comentarios saem
                         # ANTES desta troca (tirar_comentarios)
                         ('  <section id="listas-destaque"></section>',
@@ -3442,6 +3446,51 @@ def _listas_home() -> str:
     except Exception as e:                                # noqa: BLE001
         print(f"  [!] listas da home: {str(e)[:80]}")
         return '<section id="listas-destaque"></section>'
+
+
+def esgotados(dias: int = 14) -> dict[str, str]:
+    """{id: nome} dos produtos que foram a VIDEO de oferta nos ultimos `dias`
+    e SUMIRAM do catalogo da loja (saiu do feed = esgotado/fora de linha).
+
+    ⭐ 10/10/2026 (dono: "marca como esgotado na bio os que sumiram"): o
+    investigador achou 14 no ar que a loja tirou; a pagina so' os deixava de
+    mostrar, e quem vinha do video com `?p=<id>` caia sem explicacao. Agora a
+    pagina mostra o aviso de esgotado em cima dos parecidos. Falha = {}."""
+    import json as _json
+    from datetime import date, timedelta
+    try:
+        if str(RAIZ) not in sys.path:
+            sys.path.insert(0, str(RAIZ))
+        from engine import ofertas as _of
+        agora = _of.agora_todos()
+        if not agora:                       # catalogo nao lido: nao acusa ninguem
+            return {}
+        limite = (date.today() - timedelta(days=dias)).isoformat()
+        ids = set()
+        for l in (RAIZ / "estado" / "ofertas_feitas.jsonl").read_text(encoding="utf-8").splitlines():
+            try:
+                x = _json.loads(l)
+            except ValueError:
+                continue
+            if x.get("dia", "") >= limite and str(x.get("id")) not in agora:
+                ids.add(str(x["id"]))
+        if not ids:
+            return {}
+        nomes: dict[str, str] = {}
+        with open(RAIZ / "estado" / "precos_vistos.jsonl", encoding="utf-8") as f:
+            for l in f:
+                if '"id"' not in l or not any(i in l for i in ids):
+                    continue
+                try:
+                    x = _json.loads(l)
+                except ValueError:
+                    continue
+                if str(x.get("id")) in ids and x.get("nome"):
+                    nomes[str(x["id"])] = _nome_externo(str(x["nome"]))[:90]
+        return {i: nomes[i] for i in ids if i in nomes}
+    except Exception as e:                                # noqa: BLE001
+        print(f"  [!] esgotados: {str(e)[:80]}")
+        return {}
 
 
 def indice_estatico(dados: list[dict]) -> str:

@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-11T05:35:56",
+  "medido_em": "2026-10-11T12:39:01",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,16 +15,20 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 92,
+      "posts": 96,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 664,
-      "comentarios": 25,
-      "shares": 6,
+      "reacoes": 758,
+      "comentarios": 26,
+      "shares": 8,
       "engajamento_pct": 0.0,
-      "posts_recentes": 30,
+      "posts_recentes": 34,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ\n\nPara"
+        },
         {
           "views": 0,
           "titulo": "O material com 99,9999999% de pureza que e 1 bilhao de vezes"
@@ -32,10 +36,6 @@
         {
           "views": 0,
           "titulo": "O lingote de silicio de 200 kg onde 1 atomo errado destroi t"
-        },
-        {
-          "views": 0,
-          "titulo": "O disparo de feixes de boro e fosforo para criar bilhões de "
         }
       ]
     },
@@ -43,7 +43,7 @@
       "posts": 156,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20039,
+      "reacoes": 20110,
       "comentarios": 126,
       "shares": 112,
       "engajamento_pct": 0.0,
@@ -65,14 +65,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 112,
+      "posts": 116,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1258,
+      "reacoes": 1280,
       "comentarios": 9,
       "shares": 23,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 37,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -81,7 +81,7 @@
         },
         {
           "views": 0,
-          "titulo": "Protocolo"
+          "titulo": "Seu cérebro desiste antes"
         },
         {
           "views": 0,
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 114,
+      "posts": 118,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1389,
+      "reacoes": 1504,
       "comentarios": 6,
-      "shares": 2,
+      "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 44,
+      "posts_recentes": 46,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 65,
+      "posts": 69,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 374,
+      "reacoes": 391,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 10,
+      "posts_recentes": 14,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -147,7 +147,7 @@
       "comentarios": 23,
       "shares": 53,
       "engajamento_pct": 0.0,
-      "posts_recentes": 15,
+      "posts_recentes": 13,
       "views_recentes": 0,
       "melhores_recentes": [
         {

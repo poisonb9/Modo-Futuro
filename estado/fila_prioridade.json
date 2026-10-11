@@ -1,7 +1,8 @@
 {
  "frente": [
+  "modofuturo",
   "truque.importado",
   "semanestesia.pod"
  ],
- "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> truque.importado"
+ "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> modofuturo truque.importado"
 }

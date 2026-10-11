@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-11T12:39:01",
+  "medido_em": "2026-10-11T18:00:35",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 26,
       "shares": 8,
       "engajamento_pct": 0.0,
-      "posts_recentes": 34,
+      "posts_recentes": 33,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -72,7 +72,7 @@
       "comentarios": 9,
       "shares": 23,
       "engajamento_pct": 0.0,
-      "posts_recentes": 37,
+      "posts_recentes": 36,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 46,
+      "posts_recentes": 44,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -140,14 +140,14 @@
       ]
     },
     "camarim.kpop": {
-      "posts": 21,
+      "posts": 25,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 2563,
-      "comentarios": 23,
-      "shares": 53,
+      "reacoes": 3347,
+      "comentarios": 28,
+      "shares": 63,
       "engajamento_pct": 0.0,
-      "posts_recentes": 13,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {

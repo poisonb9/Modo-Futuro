@@ -1,5 +1,13 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-13;19:40;modofuturo;agendado;A criação de microchips explicada como um arranha-céu;6acbc075a9411fbcc5519b9b
+2026-10-13;19:35;cozinha.importada;agendado;Como Cortar, Enrolar e Assar Croissants Perfeitos;6acbc22e8e8dd50ffc4cf016
+2026-10-13;16:35;modofuturo;agendado;CORTANDO SILÍCIO 1000 VEZES MAIS FINO QUE UM CABELO;6acbc06bea568e911a34d211
+2026-10-13;16:27;cozinha.importada;agendado;Ramen de Carne com Legumes em Uma So Panela;6acbc22d7db619a2913f81b8
+2026-10-13;13:04;modofuturo;agendado;O MICROSCOPIO QUE DERRETE CHIPS DE MILHÕES DE DÓLARES;6acbc064a9411fbcc5519a4c
+2026-10-13;11:39;cozinha.importada;agendado;Como fazer a massa perfeita de croissant caseiro;6acbc22c7db619a2913f818d
 2026-10-13;08:23;cozinha.importada;agendado;Carne moída com especiarias e leite de coco cremoso;6aca9a2bd9cab260a7d72b50
+2026-10-13;08:09;modofuturo;agendado;O LIMITE FÍSICO QUE QUASE PAROU A INDÚSTRIA DE CHIPS;6acbc05fea568e911a34d070
+2026-10-12;19:52;modofuturo;agendado;O LABORATÓRIO SECRETO NA BÉLGICA QUE CRIA O SEU CELULAR DE 2040;6acbc0498e8dd50ffc4c5f66
 2026-10-12;19:48;atefalhar;agendado;O único jogo onde Pokémon Shiny tem 200 de status de barriga;6aca6fffbba9419ccb0c4d2d
 2026-10-12;19:42;semanestesia.pod;agendado;Seu cérebro desiste antes;6aca6470ed92ed8fa5d4c9ee
 2026-10-12;19:37;cozinha.importada;agendado;Como Assar o Cookie Gigante Estilo Levain Perfeito;6aca6a9ab07d37ac977c65ea
@@ -27,11 +35,11 @@
 2026-10-11;16:30;atefalhar;agendado;A Genki Dama do Goku GT encolheu em Tenkaichi 3;6ac9ab7af91f772d457d25db
 2026-10-11;16:30;semanestesia.pod;agendado;Protocolo;6aca2449f91f772d45904e58
 2026-10-11;16:13;cozinha.importada;agendado;DO CHANTILLY A MANTEIGA: O PONTO EXATO NA BATEDEIRA;6ac928b0c4de2d2b12ffa5e0
-2026-10-11;13:17;camarim.kpop;agendado;Como BANG CHAN e FELIX do Stray Kids fizeram as pazes no palco;6ac94a43f91f772d456f6793
-2026-10-11;13:13;cozinha.importada;agendado;O Ponto Perfeito do Frango Assado Super Suculento;6ac800bf2a80dca54c7dd20f
-2026-10-11;13:07;modofuturo;agendado;POR QUE A TSMC REJEITOU A MÁQUINA HIGH-NA EUV DE US$ 400 MILHÕES;6ac8773593f9e5101fea5024
-2026-10-11;13:05;atefalhar;agendado;O misterioso Wii de ouro de 24 quilates feito para a Rainha;6ac89b6304f06b2e8f821ab2
-2026-10-11;13:05;semanestesia.pod;agendado;Protocolo;6aca2443bba9419ccbfe6ea1
+2026-10-11;13:18;camarim.kpop;postado;Como BANG CHAN e FELIX do Stray Kids fizeram as pazes no palco;6ac94a43f91f772d456f6793
+2026-10-11;13:14;cozinha.importada;postado;O Ponto Perfeito do Frango Assado Super Suculento;6ac800bf2a80dca54c7dd20f
+2026-10-11;13:08;modofuturo;postado;POR QUE A TSMC REJEITOU A MÁQUINA HIGH-NA EUV DE US$ 400 MILHÕES;6ac8773593f9e5101fea5024
+2026-10-11;13:06;atefalhar;postado;O misterioso Wii de ouro de 24 quilates feito para a Rainha;6ac89b6304f06b2e8f821ab2
+2026-10-11;13:06;semanestesia.pod;postado;Protocolo;6aca2443bba9419ccbfe6ea1
 2026-10-11;08:21;semanestesia.pod;postado;Protocolo;6aca240dc4de2d2b1226467c
 2026-10-11;08:19;atefalhar;postado;O brinquedo eletrônico que funcionava como cofre de dinheiro real;6ac89a30f07e682de6aa243c
 2026-10-11;08:15;modofuturo;postado;O LIMITE DA RETÍCULA: O ESTÊNCIL DE 26x33MM QUE TRAVA OS CHIPS;6ac877307d9f9f330126a804

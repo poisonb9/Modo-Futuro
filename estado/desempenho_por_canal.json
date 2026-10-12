@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-12T01:13:03",
+  "medido_em": "2026-10-12T09:04:16",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 96,
+      "posts": 100,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 758,
-      "comentarios": 26,
-      "shares": 8,
+      "reacoes": 840,
+      "comentarios": 29,
+      "shares": 9,
       "engajamento_pct": 0.0,
-      "posts_recentes": 31,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -31,7 +31,7 @@
         },
         {
           "views": 0,
-          "titulo": "O disparo de feixes de boro e fosforo para criar bilhões de "
+          "titulo": "POR QUE A TSMC REJEITOU A MÁQUINA HIGH-NA EUV DE US$ 400 MIL"
         },
         {
           "views": 0,
@@ -40,14 +40,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 156,
+      "posts": 157,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20110,
-      "comentarios": 126,
+      "reacoes": 20255,
+      "comentarios": 129,
       "shares": 112,
       "engajamento_pct": 0.0,
-      "posts_recentes": 19,
+      "posts_recentes": 20,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -65,14 +65,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 116,
+      "posts": 120,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1280,
+      "reacoes": 1328,
       "comentarios": 9,
-      "shares": 23,
+      "shares": 24,
       "engajamento_pct": 0.0,
-      "posts_recentes": 34,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 118,
+      "posts": 122,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1504,
+      "reacoes": 1569,
       "comentarios": 6,
       "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 40,
+      "posts_recentes": 44,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 69,
+      "posts": 73,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 391,
+      "reacoes": 434,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 14,
+      "posts_recentes": 18,
       "views_recentes": 0,
       "melhores_recentes": [
         {

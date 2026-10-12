@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-12T09:04:16",
+  "medido_em": "2026-10-12T18:57:56",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 29,
       "shares": 9,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 32,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -35,7 +35,7 @@
         },
         {
           "views": 0,
-          "titulo": "O disparo de feixes de boro e fosforo para criar bilhões de "
+          "titulo": "O calor de 1.000°C na criação de transistores 3D Construir u"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "comentarios": 129,
       "shares": 112,
       "engajamento_pct": 0.0,
-      "posts_recentes": 20,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -72,7 +72,7 @@
       "comentarios": 9,
       "shares": 24,
       "engajamento_pct": 0.0,
-      "posts_recentes": 38,
+      "posts_recentes": 33,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 44,
+      "posts_recentes": 41,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -140,27 +140,27 @@
       ]
     },
     "camarim.kpop": {
-      "posts": 25,
+      "posts": 30,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 3347,
-      "comentarios": 28,
-      "shares": 63,
+      "reacoes": 4173,
+      "comentarios": 35,
+      "shares": 70,
       "engajamento_pct": 0.0,
-      "posts_recentes": 11,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "STRAY KIDS fez show no estádio do TOTTENHAM e usou o chuveir"
+        },
         {
           "views": 0,
           "titulo": "SEUNGMIN do Stray Kids é exposto por treinar choro de discur"
         },
         {
           "views": 0,
-          "titulo": "SEUNGMIN do Stray Kids treinava choro no espelho Seungmin do"
-        },
-        {
-          "views": 0,
-          "titulo": "HYUNJIN do Stray Kids expõe LEE KNOW como o coelho mais peri"
+          "titulo": "MARK do NCT ficou indignado por CHENLE não ter fotos de suas"
         }
       ]
     }

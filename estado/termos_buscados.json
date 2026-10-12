@@ -1,10 +1,6 @@
 {
  "termos": [
   {
-   "termo": "whey",
-   "vezes": 2
-  },
-  {
    "termo": "ex2",
    "vezes": 1
   },
@@ -46,6 +42,10 @@
   },
   {
    "termo": "bateria 60a",
+   "vezes": 1
+  },
+  {
+   "termo": "whey",
    "vezes": 1
   }
  ]

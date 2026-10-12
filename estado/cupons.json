@@ -18,6 +18,51 @@
   "termos": ""
  },
  {
+  "loja": "Farmácias Indiana",
+  "tipo": "promotion",
+  "titulo": "FESTIVAL DE BELEZA - Cabelos",
+  "codigo": "",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fbeleza%2Fcabelos%3Forder%3DOrderByTopSaleDESC",
+  "termos": ""
+ },
+ {
+  "loja": "Farmácias Indiana",
+  "tipo": "promotion",
+  "titulo": "FESTIVAL DE BELEZA - Dermocosméticos",
+  "codigo": "",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fdermocosmeticos%3Forder%3DOrderByTopSaleDESC",
+  "termos": ""
+ },
+ {
+  "loja": "Farmácias Indiana",
+  "tipo": "promotion",
+  "titulo": "SEMANA DO SUPLEMENTO - Vitaminas e Minerais",
+  "codigo": "",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmedicamentos%2Fvitaminas-e-minerais%3Forder%3DOrderByTopSaleDESC",
+  "termos": ""
+ },
+ {
+  "loja": "Farmácias Indiana",
+  "tipo": "promotion",
+  "titulo": "SEMANA DO SUPLEMENTO - Nutrição Esportiva",
+  "codigo": "",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fsaude%2Fnutricao-esportiva%3Forder%3DOrderByTopSaleDESC",
+  "termos": ""
+ },
+ {
+  "loja": "Farmácias Indiana",
+  "tipo": "promotion",
+  "titulo": "SEMANA DO SUPLEMENTO - Barra de Cereal",
+  "codigo": "",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fsaude%2Fnutricao-esportiva%2Fbarra-de-cereal%3Forder%3DOrderByTopSaleDESC",
+  "termos": ""
+ },
+ {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "10% OFF na Placa Mãe MSI B550M Gaming Plus WiFi6E AMD AM4",
@@ -56,820 +101,361 @@
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Steam Home, Pendura suas roupas, Higieniza e Desodoriza, 1830W, Branco e Cinza, US32",
+  "titulo": "SANDUICHEIRA E GRILL ARNO ANTIADERENTE PRETA SACB 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-steam-home-higieniza-branco-e-cinza-us32-7211005263%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-sanduicheira-arno-sacb-preta-8000035844-pai-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Steam Home, Pendura suas roupas, Higieniza e Desodoriza, 1830W, Branco e Cinza, US32",
+  "titulo": "SANDUICHEIRA E GRILL ARNO ANTIADERENTE PRETA SACB 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-steam-home-higieniza-branco-e-cinza-us32-7211005263%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-sanduicheira-arno-sacb-preta-8000035844-pai-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Steam Minute, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, Azul, HS61 220V",
+  "titulo": "Vaporizador de Roupas Arno Steam Travel, Higieniza, Compacto, Dobrável e Portátil, 1100W, Cinza, HS11",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-de-roupas-arno-steam-minute-hs61-1830007753-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-steam-travel-dobravel-e-portatil-hs11-1830009304%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Steam Minute, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, Azul, HS61 127V",
+  "titulo": "Vaporizador de Roupas Arno Steam Travel, Higieniza, Compacto, Dobrável e Portátil, 1100W, Cinza, HS11",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-de-roupas-arno-steam-minute-hs61-1830007753-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-steam-travel-dobravel-e-portatil-hs11-1830009304%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Mixer de Mão Arno Daily Chef 2 Velocidades 400W MX51 220v",
+  "titulo": "SANDUICHEIRA E GRILL ARNO ANTIADERENTE INOX SACS 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmixer-de-mao-arno-saily-chef-2-velocidades-400w-mx51-7211420195%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fsanduicheira-arno-inox-sacs-110v-8000035846-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Mixer de Mão Arno Daily Chef 2 Velocidades 400W MX51 127v",
+  "titulo": "SANDUICHEIRA E GRILL ARNO ANTIADERENTE INOX SACS 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmixer-de-mao-arno-saily-chef-2-velocidades-400w-mx51-7211420195%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fsanduicheira-arno-inox-sacs-110v-8000035846-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Balança Bioimpedância Rowenta GoodVibes Life+ Azul Marinho, BSGV",
+  "titulo": "Ferro a Vapor Arno Steamgliss com Base Ceramic Glide FSGC 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbalanca-bioimpedancia-rowenta-goodvibes-life--azul-marinho--bsgv_2720019464%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-eletrico-arno-steamgliss-fsgc-rosa-1830007714-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Kit de Facas Antiaderente Tefal Fresh Kitchen com 5 Peças e Bloco de Madeira",
+  "titulo": "Ferro a Vapor Arno Steamgliss com Base Ceramic Glide FSGC 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fkit-de-facas-antiaderente-tefal-fresh-kitchen-com-5-pecas-e-bloco-de-madeira-9295307108%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-eletrico-arno-steamgliss-fsgc-rosa-1830007714-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Kit de Facas Antiaderente Tefal Fresh Kitchen com 3 peças e Capas Protetoras",
+  "titulo": "Liquidificador Arno Power Mix 550W Preto LQ10 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fkit-de-facas-antiaderente-tefal-fresh-kitchen-com-3-pecas-e-capas-protetoras-9295307107%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-preto-2720013771-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Batedeira Arno Mini Chef Preta HM11 220V",
+  "titulo": "Liquidificador Arno Power Mix 550W Preto LQ10 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbat-mini-chef-400w-pt-2720015875-pai-1%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-preto-2720013771-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Batedeira Arno Mini Chef Preta HM11 127V",
+  "titulo": "Liquidificador Arno Powermix 700W Limpa Fácil Vermelho LQ36 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbat-mini-chef-400w-pt-2720015875-pai-1%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-mix-limpa-facil-700w-vm-127v-comfort-2720017618_pai-1%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Balança de Cozinha Tefal Optiss Prata com Precisão de 0,5g, KSO1",
+  "titulo": "Liquidificador Arno Powermix 700W Limpa Fácil Vermelho LQ36 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbalanca-de-cozinha-tefal-optiss-prata-com-precisao-de-0-5g--kso1-1-1830009242%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-mix-limpa-facil-700w-vm-127v-comfort-2720017618_pai-1%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Balança de Cozinha Tefal Essential Branca com Precisão de 1g, KSE1",
+  "titulo": "Jogo de Panelas Tefal Opti'space com 4 Peças em Inox e Fundo Triplo",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbalanca-de-cozinha-fefal-essential-branca-com-precisao-de-1g--kse1-1830009528%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftefal-jogo-de-panelas-4-pecas-tefal-opti-space-em-inox-com-fundo-triplo-2100123467_pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Mixer Arno Quickchef 20 Velocidades 500W MX42 220v",
+  "titulo": "Ferro a Vapor Arno Essentialgliss com Base Antiaderente FMQ 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmixer-arno-quickchef-20-velocidades-500w-mx42-7211420197%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffer-vap-essentialgliss-1830009066_pai-1%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Mixer Arno Quickchef 20 Velocidades 500W MX42 127v",
+  "titulo": "Ferro a Vapor Arno Essentialgliss com Base Antiaderente FMQ 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmixer-arno-quickchef-20-velocidades-500w-mx42-7211420197%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffer-vap-essentialgliss-1830009066_pai-1%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Batedeira Arno Mini Chef Branca HM10 220V",
+  "titulo": "Vaporizador de Roupas Arno Pure Pop Amarelo, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, HS26",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbatedeira-arno-mini-chef-branca-hm10-2720019162%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Batedeira Arno Mini Chef Branca HM10 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fbatedeira-arno-mini-chef-branca-hm10-2720019162%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Torradeira Arno Soleil com 7 níveis de tostagem Marfim STOA 220v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftorradeira-arno-soleil-marfim-7211004049-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Torradeira Arno Soleil com 7 níveis de tostagem Marfim STOA 127v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftorradeira-arno-soleil-marfim-7211004049-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Torradeira Arno Soleil com 7 níveis de tostagem Preta SPTO 220v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftorradeira-arno-soleil-com-7-niveis-de-tostagem-preta-spto-127v_7211419303%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Torradeira Arno Soleil com 7 níveis de tostagem Preta SPTO 127v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftorradeira-arno-soleil-com-7-niveis-de-tostagem-preta-spto-127v_7211419303%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "CHALEIRA ELÉTRICA ARNO SOLEIL 1,7L PRETA SPKE 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fchaleira-eletrica-arno-soleil-17l-preta-spke_7211419301_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "CHALEIRA ELÉTRICA ARNO SOLEIL 1,7L PRETA SPKE 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fchaleira-eletrica-arno-soleil-17l-preta-spke_7211419301_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Elétrica Arno Soleil Preta 1,25L SPFC 220v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-eletrica-arno-soleil-preta-125l-spfc-127v_cafeteira-eletrica-arno-soleil-preta-125l-spfc_7211419321_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Elétrica Arno Soleil Preta 1,25L SPFC 127v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-eletrica-arno-soleil-preta-125l-spfc-127v_cafeteira-eletrica-arno-soleil-preta-125l-spfc_7211419321_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Soleil Marfim 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafefeteia-arno-soleil-marfim-7211004076-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Soleil Marfim 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafefeteia-arno-soleil-marfim-7211004076-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "CHALEIRA ELÉTRICA ARNO SOLEIL 1,7L MARFIM SKET 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fchaleira-arno-soleil-marfim-7211004045-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "CHALEIRA ELÉTRICA ARNO SOLEIL 1,7L MARFIM SKET 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fchaleira-arno-soleil-marfim-7211004045-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "CAFETEIRA ESP PUMP OPIO MARFIM 127V BR",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Faspirador-de-po-sem-fio-arno-x-pert-7-60-rh6a-7211005254%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Papa Bolinhas e Fiapos Arno Vermelho e Preto PBVM",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpapa-bolinhas-azul-pbaz--1830009521%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Papa Bolinhas e Fiapos Arno Azul e Branco PBAZ",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
+  "fim": "2026-10-19T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-amarelo-higieniza-hs26-1830009301%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermix 700W Limpa Fácil Preto LQ35 220V",
+  "titulo": "Vaporizador de Roupas Arno Pure Pop Amarelo, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, HS26",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-mix-limpa-facil-700w-pt-127v-comfort-2720017598_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermix 700W Limpa Fácil Preto LQ35 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-mix-limpa-facil-700w-pt-127v-comfort-2720017598_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix Limpa Fácil LQ31 - 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-limpa-facil-lq31-cinza-2720013793-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix Limpa Fácil Off White com Lâminas Removíveis LQ31 127v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-limpa-facil-lq31-cinza-2720013793-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix 550W Vermelho LQ11 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-lq11-vermelho-2720013773-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix 550W Vermelho LQ11 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-lq11-vermelho-2720013773-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Blendforce Preto 700W Limpa Fácil com Lâminas Removíveis e Jarra de Vidro LN91 127v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-blendforce-jarra-de-vidro-700w-preto-ln91-7211004288-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Blendforce Preto 700W Limpa Fácil com Lâminas Removíveis e Jarra de Vidro LN91 220v",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-blendforce-jarra-de-vidro-700w-preto-ln91-7211004288-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Autolock 1400W Comfort Control Cinza Chumbo LN82 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-powermax-autolock-1400w-cz-127v-comfort-2720017612_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Autolock 1400W Comfort Control Cinza Chumbo LN82 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-powermax-autolock-1400w-cz-127v-comfort-2720017612_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Comfort Control 1200W Limpa Fácil Preto LN79 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpotencia-maxima-1200w-lf-pt-plus-2720017610_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Comfort Control 1200W Limpa Fácil Preto LN79 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpotencia-maxima-1200w-lf-pt-plus-2720017610_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1200W Limpa Fácil Preto LN78 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-max-1200w-limpa-facil-pt-127v-2720017400_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1200W Limpa Fácil Preto LN78 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-max-1200w-limpa-facil-pt-127v-2720017400_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1400W Preto LN65 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-powermax-preto-1400w-comfort-control-127v-2720017943_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1400W Preto LN65 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-powermax-preto-1400w-comfort-control-127v-2720017943_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1400W Vermelho LN63 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-powermax-vermelho-1400w-ln63-127v_2720018191_pai-1-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1400W Vermelho LN63 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-powermax-vermelho-1400w-ln63-127v_2720018191_pai-1-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Max 700 Limpa Fácil L... - 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-max-700-limpa-facil-ln61-vm-2720013601-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Max 700 Limpa Fácil L... - 110V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-max-700-limpa-facil-ln61-vm-2720013601-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Vaporizador Arno Steam Power, Higieniza, Azul, HS81 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-de-roupas-arno-steam-power-hs81-1830007841-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Vaporizador Arno Steam Power, Higieniza, Azul, HS81 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-de-roupas-arno-steam-power-hs81-1830007841-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Pure Pop Verde, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, HS24",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
+  "fim": "2026-10-19T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-verde-higieniza-hs24-1830009299%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Pure Pop Azul, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, HS20",
+  "titulo": "Espremedor de Frutas Arno Suco Express 40W e 750ml de Capacidade Preto CP31 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-azul-higieniza-hs20-1830009296%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fespremedor-de-frutas-suco-express-075l-preto-cp01-8010000883-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Pure Pop Azul, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, HS20",
+  "titulo": "Espremedor de Frutas Arno Suco Express 40W e 750ml de Capacidade Preto CP31 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-azul-higieniza-hs20-1830009296%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fespremedor-de-frutas-suco-express-075l-preto-cp01-8010000883-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Ferro a Vapor de Viagem Arno Travelgliss Bivolt FVTB",
+  "titulo": "Ventilador de Teto Ultimate 6 PÁS, 58W VX26",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-de-viagem-arno-travelgliss-bivolt-fvtb-1830009819%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fventilador-de-teto-ultimate-bivolt-6-pas-58w-vx26-2720018677%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Ferro a Vapor Arno Steamgliss com Base Antiaderente FSGP 127V",
+  "titulo": "Ventilador de Teto Ultimate 5 PÁS, 58W VX25",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-arno-steamgliss-fsgp-verde-1830007713-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fventilador-de-teto-ultimate-bivolt-5-pas-58w-vx25-2720018676%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Ferro a Vapor Arno Steamgliss com Base Antiaderente FSGP 220V",
+  "titulo": "LIQ POWERMAX EXTRA 1400W LN87 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-arno-steamgliss-fsgp-verde-1830007713-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-power-max-1400w-ln87-2720017891_pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Ferro a Vapor Ultragliss Plus com Base Durilium Airglide, deslizamento mais rápido, maior resistência e Modo Economia de Energia, 2350W, Azul e Preto, FMY 220V",
+  "titulo": "LIQ POWERMAX EXTRA 1400W LN87 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-ultraglide-plus-deslizamento-com-base-durilium-airglide-tecnologia-exclusiva-fmy-1830008401-1%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-power-max-1400w-ln87-2720017891_pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Ferro a Vapor Ultragliss Plus com Base Durilium Airglide, deslizamento mais rápido, maior resistência e Modo Economia de Energia, 1520W, Azul e Preto, FMY 127V",
+  "titulo": "Cafeteira Preferita Inox 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-ultraglide-plus-deslizamento-com-base-durilium-airglide-tecnologia-exclusiva-fmy-1830008401-1%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-preferita-cfpf-inox-750ml-8010000620-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Espremedor de Frutas Arno Suco Express 40W e 750ml de Capacidade Vermelho CP32 220V",
+  "titulo": "Cafeteira Preferita Inox 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fespremedor-de-frutas-suco-express-075l-vermelho-cp02-8010000885-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-preferita-cfpf-inox-750ml-8010000620-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Espremedor de Frutas Arno Suco Express 40W e 750ml de Capacidade Vermelho CP32 127V",
+  "titulo": "Multichef 700W 24 Funções 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fespremedor-de-frutas-suco-express-075l-vermelho-cp02-8010000885-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmultiprocessador-arno-700w-24-funcoes-preto-mp72-2720018173%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Cafeteira Perfectta Inox 220v",
+  "titulo": "Multichef 700W 24 Funções 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-perfectta-cfpi-inox-8010000817-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmultiprocessador-arno-700w-24-funcoes-preto-mp72-2720018173%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Cafeteira Perfectta Inox 127v",
+  "titulo": "Multichef 700W 16 Funções 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-perfectta-cfpi-inox-8010000817-pai%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmultiprocessador-arno-700w-16-funcoes-marfim-mp62-2720018171%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Fritadeira sem Óleo Air Fryer Arno Easy Fry Extra Superfície AFP4 220V",
+  "titulo": "Multichef 700W 16 Funções 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-fritadeira-sem-oleo-air-fryer-arno-easy-fry-extra-superficie-afp4-1510002872-1-p%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fmultiprocessador-arno-700w-16-funcoes-marfim-mp62-2720018171%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Fritadeira sem Óleo Air Fryer Arno Easy Fry Extra Superfície AFP4 127V",
+  "titulo": "Jogo de Panelas Tefal So Chef 4 Peças Com Fundo triplo de Indução",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-fritadeira-sem-oleo-air-fryer-arno-easy-fry-extra-superficie-afp4-1510002872-1-p%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-so-chef-4-pecas-com-fundo-de-inducao-9295306722_pai-1%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Jogo de Panelas 4 Peças Tefal Day By Day Bronze",
+  "titulo": "Jogo de Panelas Tefal Refresh Ceramic Cinza 6 Peças + 3 Acessórios",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-4-pecas-tefal-day-by-day-bronze-9295307028%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-refresh-ceramic-cinza-6-pecas-3-acessorios-9295307020%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Refresh Ceramic Azul Ártico 6 Peças + 3 Acessórios",
+  "titulo": "Jogo de Panelas Tefal Recycled Ceramic Cinza 10 Peças",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-refresh-ceramic-azul-artico-6-pecas-3-acessorios-9295307021%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-recycled-ceramic-cinza-10-pecas-2100127090_pai-1%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Kit de Facas Tefal 2 Peças Jamie Oliver",
+  "titulo": "Liquidificador Arno Power Max 2200 Marfim LN64 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fkit-de-facas-tefal-2-pecas-jamie-oliver%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-liquidificador-arno-powermax-marfim-2200w-127v-2720018833_pai-1-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Kit de Facas 4 Peças + Bloco Ice Force",
+  "titulo": "Liquidificador Arno Power Max 2200 Marfim LN64 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fkit-de-facas-4-pecas-bloco-ice-force%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-liquidificador-arno-powermax-marfim-2200w-127v-2720018833_pai-1-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Kit de Facas 3 Peças + Tesoura + Cepo Ice Force",
+  "titulo": "Vaporizador de Roupas Arno Pure Pop Coral, Higieniza e Desodoriza, 1100W, Aquece em 15s, Portátil, HS22",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fkit-de-facas-3-pecas-tesoura-cepo-ice-force%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-coral-higieniza-hs22-1830009300%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Recycled Ceramic Verde 9 Peças",
+  "titulo": "Aspirador de Pó Versatil Sem Fio Arno X-FORCE FLEX 9.60 com Tubo Flexível e Ajuste Automático de Sucção e 7 Acessórios, RH20 Bivolt",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-recycled-ceramic-verde-9-pecas-2100124547_pai-1%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-papa-bolinhas-vermelho-pbvm-1830009520-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Facilita Cinza 7 Peças",
+  "titulo": "Processador de Alimentos Arno Choppeo CH01 220v",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-facilita-cinza-7-pecas-9295306910%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-processador-de-alimentos-arno-choppeo-ch01-7211419903_pai-1-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Panela de Pressão de Alta Capacidade Rochedo Pro 20L",
+  "titulo": "Processador de Alimentos Arno Choppeo CH01 127v",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-de-alta-capacidade-rochedo-pro-20l-7114900104%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-processador-de-alimentos-arno-choppeo-ch01-7211419903_pai-1-p%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Panela de Pressão de Alta Capacidade Rochedo Pro 15L",
+  "titulo": "Ferro a Vapor Powergliss com Base Cerâmica Xglide, 1750W, Roxo, FPO1 220V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-de-alta-capacidade-rochedo-pro-15l-7114900103%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-arno-powergliss-base-xglide-fpo1-roxo-110v-1830007981-pai%2Fp",
   "termos": ""
  },
  {
   "loja": "Arno",
   "tipo": "promotion",
-  "titulo": "Panela de Pressão Tefal Opti'Space 7 Litros em Inox com Fundo Triplo e Cesto de Vapor",
+  "titulo": "Ferro a Vapor Powergliss com Base Cerâmica Xglide, 1520W, Roxo, FPO1 127V",
   "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftefal-panela-de-pressao-7l-tefal-opti-space-em-inox-com-fundo-triplo-e-cesto-de-vapor-7114000613_pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Panela de Pressão Rochedo Clipso Fechamento Externo 4,5 litros Vermelha",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-rochedo-clipso-fechamento-externo-4-5-litros-vermelha-5861035625%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Memória Desktop de Alto Desempenho JUHOR DDR4 8GB 3200MHz CL16",
-  "codigo": "BDBR06",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005013153905416.html",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Natural Stone 5 peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-natural-stone-5-pecas-5861035169%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Placa-Mãe SOYO X99 com CPU Xeon E5 2630 V4 LGA2011-3, 8GB (1*8GB) de RAM DDR4 2133MHz, Acessórios para Computador NVME M.2 SATA",
-  "codigo": "BDBR04",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005012055111206.html",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Stone Pro 5 peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-stone-pro-5-pecas-5861035034%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Placa de Vídeo Veineda RX5500 8GB GDDR6, Cartões de Vídeo PCI Express 4.0 X para Desktop RX5500 8GB 128BiT",
-  "codigo": "BDBR15",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005008159442918.html",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Robusta Grafite 5 Peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-robusta-grafite-5-pecas-5861034960%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Placas gráficas Veineda RX 580 8GB 2048SP Placa De Video Gaming GDDR5 256Bit PCI Express 3.0 × 16 GPU rx580 8g",
-  "codigo": "BDBR10",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005012202458550.html",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Expert Chocolate 5 peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-expert-chocolate-5-pecas-5861034768_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Garrafa Térmica Tefal Bludrop Verde 700ml",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgarrafa-termica-tefal-bludrop-verde-700ml-3110600830%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "ANYCUBIC Kobra X Combo 2x Economia de Tempo e Materiais, Impressão em até 19 Cores, Detecção por IA, Velocidade Máxima de Impressão de 600mm/s, Impressora 3D",
-  "codigo": "BDBR30",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005004803929676.html",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Garrafa Térmica Tefal Bludrop Preta 700ml",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgarrafa-termica-tefal-bludrop-preta-700ml-3110600829%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Garrafa Térmica Tefal Bludrop Verde 500ml",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgarrafa-termica-tefal-bludrop-verde-500ml-3110600827%2Fp",
+  "fim": "2026-10-19T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-arno-powergliss-base-xglide-fpo1-roxo-110v-1830007981-pai%2Fp",
   "termos": ""
  },
  {
@@ -889,33 +475,6 @@
   "fim": "2026-10-16T13:00:00+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1CLASSICS15",
   "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Garrafa Térmica Tefal Bludrop Preta 500ml",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgarrafa-termica-tefal-bludrop-preta-500ml-3110600825%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Ceramic Vitality 4 peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-ceramic-vitality-4-pecas-2100137882%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Brinox Shop",
-  "tipo": "voucher",
-  "titulo": "Data dupla 10/10 - Cupom de R$140",
-  "codigo": "DUPLA10",
-  "fim": "2026-10-12T02:59:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fdata-dupla-outubro",
-  "termos": "Promoção com cupom de desconto, na compra do jogo e da panela de pressão da mesma cor"
  },
  {
   "loja": "Kabum",
@@ -1023,6 +582,51 @@
   "codigo": "BRCD9",
   "fim": "2026-10-13T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005009459962683.html",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "24% OFF Pré-Treino Striker 300g Suplemento Alimentar em Pó 400mg Cafeína 20 Doses - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fpre-treino-striker-suplemento-alimentar-em-po-cafeina-300g-20-doses-soldiers-nutrition%3F_pos%3D1%26_sid%3De925c0f9a%26_ss%3Dr",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "73% OFF Vitamina D Íntera Daily  Imunidade e Saúde Óssea - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fvitamina-d-intera-daily%3F_pos%3D1%26_sid%3Df6a42c0cd%26_ss%3Dr",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "50% OFF Femme Burn 90g - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Ffemme-burn-soldiers-nutrition-tamanho-90g%3F_pos%3D1%26_sid%3De73e1a57a%26_ss%3Dr",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "21% OFF Whey Core Protein Suplemento Alimentar de Proteínas em Pó - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fwhey-core-protein-proteinas-po-900g-soldiers-nutrition",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "54% OFF Kit: Creatina 250g + Multivitamínico Completo - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fkit-creatina-250g-multivitaminico-completo-soldiers-nutrition%3F_pos%3D1%26_sid%3Dc5496845c%26_ss%3Dr",
   "termos": ""
  },
  {
@@ -1458,15 +1062,6 @@
   "termos": ""
  },
  {
-  "loja": "Brinox Shop",
-  "tipo": "promotion",
-  "titulo": "10.10 Brinox",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2F",
-  "termos": "Válido para compras acima de R$99 para as regiões sul, sudeste e centro-oeste"
- },
- {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "Cadeira Gamer Promoção com Cupom CADEIRA20 20% de Desconto",
@@ -1521,399 +1116,12 @@
   "termos": ""
  },
  {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas 5 Peças Tefal Daisy Vanilla",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-5-pecas-tefal-daisy-vanilla-9295307071%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas 4 Peças Tefal Day By Day Bronze",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-4-pecas-tefal-day-by-day-bronze-9295307028%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Refresh Ceramic Azul Ártico 6 Peças + 3 Acessórios",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-refresh-ceramic-azul-artico-6-pecas-3-acessorios-9295307021%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Refresh Ceramic Cinza 6 Peças + 3 Acessórios",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-refresh-ceramic-cinza-6-pecas-3-acessorios-9295307020%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Facilita Cinza 7 Peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-facilita-cinza-7-pecas-9295306910%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Rochedo Facilita Vermelho 5 Peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-rochedo-facilita-vermelho-5-pecas-5861035170%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Ceramic Vitality 4 Peças",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fjogo-de-panelas-tefal-ceramic-vitality-4-pecas-2100137882%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Jogo de Panelas Tefal Opti'space com 4 Peças em Inox e Fundo Triplo",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftefal-jogo-de-panelas-4-pecas-tefal-opti-space-em-inox-com-fundo-triplo-2100123467_pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Autolock 1400W Comfort Control Cinza Chumbo LN82 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-powermax-autolock-1400w-cz-127v-comfort-2720017612_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Autolock 1400W Comfort Control Cinza Chumbo LN82 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-powermax-autolock-1400w-cz-127v-comfort-2720017612_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Pure Pop Verde Higieniza e Desodoriza 1100W HS24",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-verde-higieniza-hs24-1830009299%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Vaporizador de Roupas Arno Pure Pop Coral Higieniza e Desodoriza 1100W HS22",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fvaporizador-arno-pure-pop-coral-higieniza-hs22-1830009300%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Ferro a Vapor Powergliss com Base Cerâmica Xglide 1750W Roxo FPO1 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-arno-powergliss-base-xglide-fpo1-roxo-110v-1830007981-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Ferro a Vapor Powergliss com Base Cerâmica Xglide 1520W Roxo FPO1 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-arno-powergliss-base-xglide-fpo1-roxo-110v-1830007981-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Ferro a Vapor Ultragliss Plus com Base Durilium Airglide 2350W Azul e Preto FMY 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-ultraglide-plus-deslizamento-com-base-durilium-airglide-tecnologia-exclusiva-fmy-1830008401-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Ferro a Vapor Ultragliss Plus com Base Durilium Airglide 1520W Azul e Preto FMY 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fferro-a-vapor-ultraglide-plus-deslizamento-com-base-durilium-airglide-tecnologia-exclusiva-fmy-1830008401-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Ferro a Vapor Arno Essentialgliss com Base Antiaderente FMQ 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffer-vap-essentialgliss-1830009066_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Ferro a Vapor Arno Essentialgliss com Base Antiaderente FMQ 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffer-vap-essentialgliss-1830009066_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Perfectta Inox 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-perfectta-cfpi-inox-8010000817-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Perfectta Inox 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-perfectta-cfpi-inox-8010000817-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Preferita Inox 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-preferita-cfpf-inox-750ml-8010000620-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Cafeteira Preferita Inox 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcafeteira-filtro-arno-preferita-cfpf-inox-750ml-8010000620-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix 550W Vermelho LQ11 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-lq11-vermelho-2720013773-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix 550W Vermelho LQ11 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-lq11-vermelho-2720013773-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix 550W Preto LQ10 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-preto-2720013771-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Power Mix 550W Preto LQ10 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-mix-preto-2720013771-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "LIQ POWERMAX EXTRA 1200W LN86 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-power-max-1200w-ln86-2720017894_pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax Copo XXL 1200W Carmim LN86 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-power-max-1200w-ln86-2720017894_pai%2Fp",
-  "termos": ""
- },
- {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "25% OFF em produtos participantes da marca JBL",
   "codigo": "JBL25OFF",
   "fim": "2026-11-02T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP3JBL25OFF",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1400W Vermelho LN63 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-powermax-vermelho-1400w-ln63-127v_2720018191_pai-1-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1400W Vermelho LN63 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-powermax-vermelho-1400w-ln63-127v_2720018191_pai-1-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 700W Preto LN50 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-max-700-ln50-preto-2720012726-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 700W Preto LN50 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliquidificador-arno-power-max-700-ln50-preto-2720012726-pai%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1200W Limpa Fácil Preto LN78 220V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-max-1200w-limpa-facil-pt-127v-2720017400_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Arno",
-  "tipo": "promotion",
-  "titulo": "Liquidificador Arno Powermax 1200W Limpa Fácil Preto LN78 127V",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fliq-arno-power-max-1200w-limpa-facil-pt-127v-2720017400_pai-1%2Fp",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "FEIRAO BABY Alimentacao",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmamae-e-bebe%2Falimentacao%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "FEIRAO BABY Troca de Fraldas",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmamae-e-bebe%2Ftroca-de-fraldas%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "FEIRAO BABY Mamae e Bebe",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmamae-e-bebe%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "FEIRAO BABY Banho e Higiene",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmamae-e-bebe%2Fbanho-e-higiene%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "FEIRAO BABY Fraldas",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmamae-e-bebe%2Ftroca-de-fraldas%2Ffraldas%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "SEMANA DO PAGAMENTO Mamae e Bebe",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmamae-e-bebe%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "SEMANA DO PAGAMENTO Higiene Pessoal",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fhigiene-pessoal%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "SEMANA DO PAGAMENTO Beleza",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fbeleza%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "SEMANA DO PAGAMENTO Dermocosmeticos",
-  "codigo": "",
-  "fim": "2026-10-12T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fdermocosmeticos%3Forder%3DOrderByTopSaleDESC",
   "termos": ""
  },
  {
@@ -2147,17 +1355,35 @@
   "titulo": "R$ 5,41 OFF acima de R$ 81,10",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4nGAfGGPzBc5L4idS2uF9oPCBR2qM71pC299GHIOImisXgFd6Xtbvo5u9fEFjspnHWYlwRbEx6bUtBzCSg5nCQCCmujmCvLqWm0z7s8TQD0UYGdqPXV5GOjOzMj4AfjbQNWISVb3I94h5vxMKSITIQZCZmZdWU0TpfldPSNTKgit2xFwKTdzCl89vboC5tFXuxgZ9L3OhpVVMB8HVa8GAQ6z0a8YToyAT87Iyva9Vt7yW8h8F5nY1NisaMSyn43jRA6YqUF2L3o1xjCjkUW6FT0YqGOweFGEDfZqhVMIjiOhfLlySo4wc2r6ko0QvyDew6yLGRDYHOAAXldGxHcTZiRPa29dHXnSIfwwbJw0QA05JCLP7aRDIhUneg6a2D8krhgFmC77a1clmKJnVjdAKze5Dd6CZpKBD2FhXQeDLO2aoPaut4d6ZfqwfFuvojOPXqrggfpkkRHemfv",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4mJAkQPMuj2wkZw9yJyOmwDxMRMmtOxYVA8NuoGODxHNryZdQTR4BW5WmAsP6bnwCpz8ttgR3WUq3PRRKZyAYoqoGI8rkbIFJMYanRnLxt4ZyDkpRAvMNampJPh1MCF6OtwOqeA9CDHI5iu7Q89MIZQ0qcxFytiO9wsb2UUCRbetH0wav1TG54DNkrXJvACIISfRRoGYeTKKgw1hNvsVIe2w6zQmIIegg1ugvYtNqEy1xaJ79iNPzUdLosLoyLwaJg4sDBawUut1eO8bnjspu6fv4gF6n7GUba9vQWXz3zVdlZtL06raf5kwbemYf0j0HEmmf37gNUhq5WnHYqsf2a45PdLcIf0MQsoe72UMat8yPqMrdphoOqh09Y6KVPVhphlwaJlMl3k4AxhSPNbYaHQgtqz39MAAzc2S2ZvxzZI023XrgoQfl31DmpRDRh0qteCD7dZL44juaPt",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
-  "loja": "AliExpress · maono Official Store",
+  "loja": "AliExpress · MIAOGUAN Store",
   "tipo": "voucher",
-  "titulo": "R$ 16,23 OFF acima de R$ 270,50",
-  "codigo": "GUJE5NMB40A1",
-  "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW28ZbVA0q8YfwStHxgWwPDIx8oJ9u68HhAebJK2KCteJgs7DXwuAF3dIIZU6EwSvEaZDcBguvk2FsldthVtIhMx2jifrkNIr5jWp12gX0jlYlAM6AWxAgdQOCpw2LwDx2I1MaXCgcunVmv8s9GRxwSoloM5JSUsIphGJYYzLBS8EvqRxBTqTvIUGGVT8mEEY0Ls0xrT1H6x44k7uSKdvv0OOxoQSh1VsdPEP7WfR1kUQ9iMZ3X5bIeCkgBUpLBoVmh809ZS3PIFgNAHQJrvcTBPBi0q67HqRbLQ9qu8Tq2fXA9bjDTFfuFRZfjS78bafPKghgcaJnW5auWZgX084P3XAnX1OqAA4lWdCgJOl9nOzrLrwD4eqgaUv6rQS4WdVkXIL6Q3IrRbWgdtEGp74aZZaAY1kRr47yydjbBFpsHWacER3X3YQMnmgzYb5PoHjApkcJzP936rUbabD",
-  "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+  "titulo": "R$ 5,41 OFF acima de R$ 5,40",
+  "codigo": "HJ2ABT6EFNBT",
+  "fim": "2026-11-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxwL4UOHZNv9ejwIDRftfKcp7ChhwHEwjs1hkgpvcNvkJyzicTeLfTi7b7wRk6GY4pQBD0XQNybTqQdyILSlipiwbtEFBIOqurzpNoyOu29VwDGtxFeJBPe7Le3PNi6oHFfv17S9TEiM8Nn61fCtPWH6DSJFiTNroUISlDTPT8TjESam9NRyjyI9c2XXQQg53wVK5MlsXMqKaXXs3yxMs1ZuixyFPSBuKMCbpKkX8L8ysagBNTEjBmdVqG8PSNQzTV6mdgIxiyPTkvzSySvUBsTxf4VQy0Ium8LKVupjzWSiMN4dhO4XuKAbXCfBl60p42HaY497SLxk257kaiNhCko724D69sv98tQzW0Yxd37uV2OpjqL9HWlXxFR6aze56KJl2zhELNAN2V0IIjvjTkamZhlVtRdrKJlHhMgCIeRYUbNoMg03Q41aqOmFM79AS1buzaosiIdQ3u5DLbtGal99O9Pf9wDmyLHGGTY5yCJ6b8X9iyOQV2sEpuQ0YAa881Q8tou1cPLEOCOqVpjyXdfi0jOBkfScRsDFlGLTatWABVS43sGowwlY1cJNg4jwdPA0SStSNItEfgtGQFiQRGUQg12GB37fjoEvzVnJEgxXxFTuq1anKb4JKElAcMxg9TxP6ZGeX8zyLC1vIuRH4NAhd",
+  "termos": "Vale na loja MIAOGUAN Store do AliExpress. Ex.: Tamanhos Grandes 35-43, Sapatos Femininos Pretos de Plataforma com Des"
+ },
+ {
+  "loja": "AliExpress · KONNWEI Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 6,47 OFF acima de R$ 80,80",
+  "codigo": "SBRBR4SOP05D",
+  "fim": "2026-11-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxvzEqBKt7EsQWEWMd5Kh8lmDANmlUuTJ4mPZeCw1BBBhnIoC2N3cFH6LOsOVluycu3VT0k4dCZ2FD3vnRXn3cUj9V9DnfS0jqoK0N7ylKGCfkhMbSJ49FTqxaxA2liDlLYE1iHtjsCC9Z7noLYAKkcCFlDL0Dj2CQj3uwt3raS9IImPTXF2oTsibfkJHnePyoULG0ETgyYYcNHI8cYwN8SEmGwpJgfJKXFvroiJbxU5du4SltXRBWo9wo1qcuVUdDQGj9R3ZT6Re641pMeJGiI0upCQ4MLtKAJ458CohjSK5mP8TgtgS3YIUUpZfj5clwn4WVwZfcyg9fcz97kgeY3DLVDzySyYoFQbei6ZieZSKfCvWjhlsOTYlNKYOTcDadv1hHk8UVZ19MAMC4vBkaDNMKB8oSSmHZKOIbmbck7rl43A3Wo3Kg2ANwULlfZYgdVk5BxaKkOLLV1WRThbpjKsj20KNCgBa1vnAgFdJPWw4mfYco7jYFXdgBNgoF4DXyplzBnyEVhHYd1kPt6OtcM3rIgAs2C37C72vUwRW4ObYGAc06CkV8MLeBE5aw4BXlItCN2XW2th6dcm48lYsVrqDDnKK5Oa4zr430eJTxIVPBTP2pn6hL0W2fiMCL8D7yEAvnFEPMs0f1wglB39uWHD1",
+  "termos": "Vale na loja KONNWEI Official Store do AliExpress. Ex.: 2026 KONNWEI KW902 Elm327 V1.5 OBD2 Bluetooth Scanner de Diagnóstico A"
+ },
+ {
+  "loja": "AliExpress · HoldPeak SuPerb Store",
+  "tipo": "voucher",
+  "titulo": "R$ 16,23 OFF acima de R$ 16,20",
+  "codigo": "X61ZDO861JJC",
+  "fim": "2026-10-29T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxhBV8tImj2eqpal8iZh6DOeqc3OlJ9I6PyESQlACOEVKfmequtA270yK0gFFz1YntN47hrfXaiFxMEsmLY2ap9ImLPVKnTmGjFZ20X1KLkzcKEi5MI7DaYanNzwYSzfWSWU3v5fZYL3y2P9JmbvP2WEWv1Etm0u3GMlvI8dG9JAmEOfZYS63nmap7ExArom99Q74JR3lRRPiBWK6MS7VPikSs0gBR7FY63KFG6DzavztOtSnQJ5hxOPdrhtVyowIMgSOftOhe2mZXh2j5E1VDp2dvLIAzrB7DYnB7mMuf82Ead2svjXwKCzcSuFEDvRIRwHnCJNrN3sqRDHf1ccIG4VXe8oiYZsKbO3F6nYOPSWOHNH2B3hbCL9xzpwSkzh8NqpgE4PcnGAFF5C1FtYqgHunFqEXbuUg5TpTxQKHQzDSMg4z1LxMokEHKOYxgVTABv94EcB7NoYe7MQhzCQvBtXIAMuQu078ekmutv84XBfjtaWZNZ62ndwZUcTsctXW0YWDg5Ub48FARhv1tSH5DmpaT62mekJpZSaRnU45yJXwTg1ZSFQw52koLGzsJYEmjdRxZW5xnxxPBU9zKPw4WMpZYuhAfChEBKJIL1cgbUNQGmcgIEXHjuTgZzbvC30JwUghveZMZuzq7OX3BmgzoVVv",
+  "termos": "Vale na loja HoldPeak SuPerb Store do AliExpress. Ex.: Estação meteorológica digital multifuncional, previsão do tempo, despe"
  },
  {
   "loja": "AliExpress · Star Custom Store",
@@ -2165,7 +1391,7 @@
   "titulo": "R$ 4,85 OFF acima de R$ 4,80",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkGyDyYgi4zRDwxnyvdPZTbnXYqXeTox8wjT9ErEaKDrCOflmzAujHpR2gR3Tm15DElByp2JKTbJPQaVkwUpA3REAtxqI5rwXyG1O9VbBfyZwLMotJKBDAsvgcrZNeNxVvAIDH9La16ZfZmJdWumc0PiQo4JlYGdtFb8mLhtKOaKkRbXGZAGwFs0nb3VZNEqPf1XlOuWyo3M14RdsfjXCtrLyXPvs6IjQMlysSyDh6HnMG3zrXHIwop9gScgyD0xrDPCvhgfkAfBfxr8KhZpDn6eNYj53QXrDo6Beb9hXngykozYRzDxFJibjlLPA4DcF04JieMDl5UCnhcWhnqZCQQTvGZx1JBl1l2vHEO4UYWalJwSyHum4GzlevtBuBhSez8SmWP8fZSMSqfTSmjQDFntl8rD1HIHVCWVpQH4qEQhsrGKw2JwEOFTeEHXPMCzdQI47Yk40qfhGksb",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFll7Q3JGnrNHMZzSX8cb7ZE9XitX1IsbD9NRhoPjJNowdFgj9X4yiLwJlmtXi5ogfSZlmCTWS9qYT7PfjP9uqqgcp7VbwAqhGPN6mZLQ2ZKy16Ga53rJSFNGCz8688F7uW3Yu7Kq5KEipqsZ96WybUrWWBo4AUjdWpYdTeIIqCwTywhxklOmxSyrCMYzNapaw98mo30cjBAa0EdTTOgGSsMfpAeou4zNo6HxnZQeM5bylYoQ6nuD9BhzarQ71bM082AGkGZfYfqJuAsuiIT4U06HaigDIaWKDDbWlXg6xyGE0SHkH8mDEZExuBBO5INzbea07uFyJhB4NQ4nwiMR8GDiIYbN3apKtpvPSufVvvZR7AGbzUzpdf2eFR4Xrk7ZfhDuWsufUqommE8CBLOl7yfvTSefhDUl3OBHZpclZHWocibkISMF2O2DNZ8XFC5qumaikcCT9SaeqFf5",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

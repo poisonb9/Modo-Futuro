@@ -1,25 +1,56 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-15;13:17;cozinha.importada;agendado;Almôndegas de linguiça italiana sem esforço;6acd7b785462be2e902d3fe7
+2026-10-15;08:21;semanestesia.pod;agendado;Seu cérebro desiste antes;6acd3c557501053a10048d66
+2026-10-15;08:17;atefalhar;agendado;A DIFERENÇA REGISTRADA ENTRE MAGIA E KI EM DRAGON BALL;6acd3d925628116e8a4a7f6d
+2026-10-15;08:13;cozinha.importada;agendado;Macarrão de arroz tailandês com vegetais crocantes;6acd7b72c210c8c6dd40f129
+2026-10-14;19:50;atefalhar;agendado;A CATEGORIA BIZARRA DAS TÉCNICAS DE SEPARAÇÃO DE MAJIN BOO;6acd3d585628116e8a4a73b0
+2026-10-14;19:49;cozinha.importada;agendado;Omelete chinesa Egg Foo Young com 150g de camarão;6acd7b6a5462be2e902d3f2f
+2026-10-14;19:39;semanestesia.pod;agendado;Protocolo;6acd3c485628116e8a4a2dcf
+2026-10-14;16:24;cozinha.importada;agendado;Molho oriental aveludado com molho de soja e gergelim;6acd7b5fc210c8c6dd40ef70
+2026-10-14;16:23;semanestesia.pod;agendado;Protocolo;6acd3c3cae14ce433eb56990
+2026-10-14;16:21;atefalhar;agendado;O ATAQUE LOUCO DE GOKU QUE IMITOU UM CÃO RAIVOSO NO MANGÁ;6acd3d50c5e6eb637a1b94fa
+2026-10-14;14:28;camarim.kpop;agendado;CHANGBIN e SEUNGMIN do Stray Kids revelam o sentido da letra;6acd3ec12c1b16d2e1212522
+2026-10-14;13:13;cozinha.importada;agendado;Molho agridoce perfeito para macarrão de arroz;6acd7b533d6121df4036a089
+2026-10-14;13:12;atefalhar;agendado;O SEGREDO DOS COMBOS FÍSICOS DE COMBINAÇÃO EM DRAGON BALL;6acd3d4bc5e6eb637a1b9466
 2026-10-14;13:09;modofuturo;agendado;O ritual de vestimentas para entrar na sala limpa de microchips;6acc35dc7db619a291536f93
+2026-10-14;13:09;semanestesia.pod;agendado;Protocolo;6acd3c355628116e8a4a2436
+2026-10-14;11:13;camarim.kpop;agendado;HAN do Stray Kids diz que o pão na França é arte;6acd3eb1a36dd851812d17a8
+2026-10-14;08:16;cozinha.importada;agendado;Curry de carne moída com espinafre e ervilhas;6acd7b4caec88be081ebfa7b
+2026-10-14;08:15;semanestesia.pod;agendado;Protocolo;6acd3c195628116e8a4a2182
+2026-10-14;08:14;atefalhar;agendado;OS 4 MAIORES SELAMENTOS QUE PRENDERAM VILÕES EM DRAGON BALL;6acd3d3c5628116e8a4a6ba8
+2026-10-14;08:13;camarim.kpop;agendado;HAN do Stray Kids compara BANG CHAN a 1 bicho bizarro;6acd3ead0fd81940c1c56b80
 2026-10-14;08:07;modofuturo;agendado;Uma fábrica da Intel do tamanho de 16 campos de futebol;6acc35d8a9411fbcc565d34b
+2026-10-13;20:55;camarim.kpop;agendado;O segredo de 0 óleo do LEE KNOW do Stray Kids para frango supercrocante;6acd3e712c1b16d2e1211b32
+2026-10-13;19:41;semanestesia.pod;agendado;Seu cérebro desiste antes;6acd3c127501053a10046f21
+2026-10-13;19:41;atefalhar;agendado;A reação secreta dos soldados com rastreador no Taiyoken de Tenkaichi 3;6acd3d06c5e6eb637a1b88cb
 2026-10-13;19:40;modofuturo;agendado;A criação de microchips explicada como um arranha-céu;6acbc075a9411fbcc5519b9b
 2026-10-13;19:35;cozinha.importada;agendado;Como Cortar, Enrolar e Assar Croissants Perfeitos;6acbc22e8e8dd50ffc4cf016
+2026-10-13;17:47;camarim.kpop;agendado;LEE KNOW do Stray Kids fez 1 Bife Wellington perfeito de aniversário para FELIX;6acd3e532c1b16d2e12117c8
 2026-10-13;16:35;modofuturo;agendado;CORTANDO SILÍCIO 1000 VEZES MAIS FINO QUE UM CABELO;6acbc06bea568e911a34d211
 2026-10-13;16:27;cozinha.importada;agendado;Ramen de Carne com Legumes em Uma So Panela;6acbc22d7db619a2913f81b8
+2026-10-13;16:22;semanestesia.pod;agendado;Protocolo;6acd3beaae14ce433eb56215
+2026-10-13;16:22;atefalhar;agendado;O item Shiny Charm tem taxa inútil de 1 em 4.096 contra os Regis;6acd3cf9ae14ce433eb5a2f7
+2026-10-13;14:32;camarim.kpop;agendado;FELIX do Stray Kids é desmascarado sobre sua verdadeira voz no dormitório;6acd3e4c8465d3f29e8c0766
+2026-10-13;13:14;atefalhar;agendado;A primeira aparição oficial de Munchlax em um jogo não foi na 4ª geração;6acd3cf25628116e8a4a5fd4
+2026-10-13;13:09;semanestesia.pod;agendado;Seu cérebro desiste antes;6acd3b9b7501053a10046115
 2026-10-13;13:04;modofuturo;agendado;O MICROSCOPIO QUE DERRETE CHIPS DE MILHÕES DE DÓLARES;6acbc064a9411fbcc5519a4c
 2026-10-13;11:39;cozinha.importada;agendado;Como fazer a massa perfeita de croissant caseiro;6acbc22c7db619a2913f818d
+2026-10-13;11:21;camarim.kpop;agendado;A empresária do ILLIT já foi atriz mirim em 1992;6acd3dcdc5e6eb637a1bb268
 2026-10-13;08:23;cozinha.importada;agendado;Carne moída com especiarias e leite de coco cremoso;6aca9a2bd9cab260a7d72b50
+2026-10-13;08:23;atefalhar;agendado;A treinadora secreta que batalha contra você usando seu próprio Pokémon;6acd3ce8f5c35b68cbfc9923
 2026-10-13;08:18;camarim.kpop;agendado;LEE KNOW do Stray Kids escolhe WOOYOUNG do 2PM no desafio de dança;6acc0377a9411fbcc55d849f
 2026-10-13;08:09;modofuturo;agendado;O LIMITE FÍSICO QUE QUASE PAROU A INDÚSTRIA DE CHIPS;6acbc05fea568e911a34d070
+2026-10-13;08:08;semanestesia.pod;agendado;Protocolo;6acd3b95ebe016d7f5fe06df
 2026-10-12;22:29;camarim.kpop;agendado;HAN sugere TROT para o Stray Kids e HYUNJIN abandona a mesa na hora;6acc03688e8dd50ffc588b57
-2026-10-12;19:52;modofuturo;agendado;O LABORATÓRIO SECRETO NA BÉLGICA QUE CRIA O SEU CELULAR DE 2040;6acbc0498e8dd50ffc4c5f66
-2026-10-12;19:48;atefalhar;agendado;O único jogo onde Pokémon Shiny tem 200 de status de barriga;6aca6fffbba9419ccb0c4d2d
-2026-10-12;19:42;semanestesia.pod;agendado;Seu cérebro desiste antes;6aca6470ed92ed8fa5d4c9ee
-2026-10-12;19:37;cozinha.importada;agendado;Como Assar o Cookie Gigante Estilo Levain Perfeito;6aca6a9ab07d37ac977c65ea
-2026-10-12;19:29;camarim.kpop;agendado;JUHOON DO CORTIS REVELA A POSE ESTRANHA DE MARTIN AO DORMIR;6acc03447db619a2914b42aa
-2026-10-12;16:34;semanestesia.pod;agendado;Protocolo;6aca2485d9cab260a7c19f03
-2026-10-12;16:32;cozinha.importada;agendado;Petisco natural de carne de cordeiro desidratada para cachorro;6aca2a95d9cab260a7c2b965
-2026-10-12;16:29;camarim.kpop;agendado;MARTIN DO CORTIS AFIRMA QUE SE VESTE MELHOR QUE OS OUTROS MEMBROS;6aca2161ed92ed8fa5c87188
-2026-10-12;16:23;atefalhar;agendado;O glitch da loja de bicicletas que mudou os speedruns de Pokémon;6aca2244ed92ed8fa5c8a870
+2026-10-12;20:46;semanestesia.pod;postado;Seu cérebro desiste antes;6aca6470ed92ed8fa5d4c9ee
+2026-10-12;20:42;modofuturo;postado;O LABORATÓRIO SECRETO NA BÉLGICA QUE CRIA O SEU CELULAR DE 2040;6acbc0498e8dd50ffc4c5f66
+2026-10-12;20:37;atefalhar;postado;O único jogo onde Pokémon Shiny tem 200 de status de barriga;6aca6fffbba9419ccb0c4d2d
+2026-10-12;20:11;cozinha.importada;postado;Como Assar o Cookie Gigante Estilo Levain Perfeito;6aca6a9ab07d37ac977c65ea
+2026-10-12;19:30;camarim.kpop;postado;JUHOON DO CORTIS REVELA A POSE ESTRANHA DE MARTIN AO DORMIR;6acc03447db619a2914b42aa
+2026-10-12;16:53;semanestesia.pod;postado;Protocolo;6aca2485d9cab260a7c19f03
+2026-10-12;16:33;cozinha.importada;postado;Petisco natural de carne de cordeiro desidratada para cachorro;6aca2a95d9cab260a7c2b965
+2026-10-12;16:30;camarim.kpop;postado;MARTIN DO CORTIS AFIRMA QUE SE VESTE MELHOR QUE OS OUTROS MEMBROS;6aca2161ed92ed8fa5c87188
+2026-10-12;16:24;atefalhar;postado;O glitch da loja de bicicletas que mudou os speedruns de Pokémon;6aca2244ed92ed8fa5c8a870
 2026-10-12;13:19;cozinha.importada;postado;Marmita Saudável de 448 Calorias e 37g de Proteína;6ac981bebba9419ccbe564c0
 2026-10-12;13:17;modofuturo;postado;250 caixas e 20 caminhões para mover 1 máquina da Intel;6ac97573d9cab260a7a73cae
 2026-10-12;13:11;camarim.kpop;postado;A geladeira do STRAY KIDS foi aberta e estava quase toda VAZIA;6ac95f2eb07d37ac97512462

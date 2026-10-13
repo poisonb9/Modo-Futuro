@@ -1,6 +1,222 @@
 [
  {
   "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Teclado Mecânico Gamer Machenike K500b-B87, Switch Brown, Abnt, Azul - Ref Jj02g200a",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F531158",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Mouse Gamer Sem Fio Attack Shark X6 Ultraleve Com Base De Carregamento Magnético Rgb, Tri-Mode, 26.000 Dpi, Sensor Óptico Paw3395, 7 Botões Programáveis - Branco",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F904355",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Mouse Gamer Sem Fio Redragon Invader Pro, Rgb, 10000 Dpi, 8 Botões, Wireless, Branco - M719w-Rgb-Pro",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F611255",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Mouse Gamer Sem Fio Attack Shark R1 Ultraleve E Design Ergonômico, Tri-Mode, 18.000 Dpi, Sensor Óptico Paw3311, 6 Botões - Preto",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F904351",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Gabinete Gamer Kalkan Asgard Evo, Atx, Mid Tower, Lateral Em Vidro Temperado, Sem Fans, Preto - Klk00084",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F989024",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Elgato Stream Deck +, Tela Lcd, 8 Teclas, 4 Dials, 1 Tela Touch, Usb, Preto - 10gbd9901",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F483762",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Gabinete Gamer Lian Li Vector V100, Mid-Tower, Atx, Vidro Temperado, Argb, Sem Fans, Preto - V100x",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F910418",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Headset Gamer Sem Fio Corsair Void Elite Wireless, Rgb, Surround 7.1, Drivers 50mm, Carbono - Ca-9011201-Na",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F112850",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF em produtos participantes da campanha HUSKY10",
+  "codigo": "HUSKY10",
+  "fim": "2026-10-19T13:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1HUSKY10",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Mouse Gamer Sem Fio Redragon Invader Pro, Rgb, 10000 Dpi, 8 Botões, Wireless, Preto - M719rgb-Pro",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F610298",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "15% OFF em coolers participantes da campanha COOLERS15",
+  "codigo": "COOLERS15",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1PCOOLERS15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Fonte Mach1 Steady, 750w, 80 Plus Bronze, Pfc Ativo, Preto - 750steady",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F912176",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF no Processador AMD Ryzen 7 7800X3D 4.2GHz 5.0GHz Max Turbo Cache 104MB 8 Núcleos 16 Threads AM5 com vídeo integrado",
+  "codigo": "MYHERO",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F426262%2Fprocessador-amd-ryzen-7-7800x3d-4-2ghz-5-0ghz-max-turbo-cache-104mb-8-nucleos-16-threads-am5-com-video-integrado-100-100000910wof",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "15% OFF em memórias RAM participantes da campanha DRAMOFF15",
+  "codigo": "DRAMOFF15",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1DRAMOFF15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Placa Mãe Msi Mag X870e Tomahawk Wifi, Amd, Socket Am5, Atx, Ddr5 Udimm, Wi-Fi 7, Preto - X870etomahawkwifi",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F701357",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "18% OFF em produtos participantes da campanha ROBONOPRECINHO",
+  "codigo": "ROBONOPRECINHO",
+  "fim": "2026-10-19T15:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1ROBONOPRECINHO",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Carregador Usb-C De 20w Apple Branco Original - Muvu3bz/A",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F208371",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Fonte Xpg Core Reactor Ii Ve, 850w, 80 Plus Gold, Modular, Pfc Ativo, Preto - 75261436",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F514896",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Notebook Gamer Lenovo Loq 15irx9, 15.6\" Full Hd 144hz, Intel Core I5-13450hx, 16gb, 512gb Ssd, Nvidia Rtx 4050, Linux - 83khs00300",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F1003399",
+  "termos": ""
+ },
+ {
+  "loja": "Aliexpress",
+  "tipo": "voucher",
+  "titulo": "Desconto de R$ 65 no Smartphone Motorola Moto g06 128GB 4GB RAM Laranja Câmera 50MP + Selfie 8MP",
+  "codigo": "WOBR13",
+  "fim": "2026-10-17T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005010181394894.html",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "promotion",
+  "titulo": "Placa De Vídeo Rx 7600 Challenger Asrock Amd Radeon, 8gb Gddr6 - 90-Ga41zz-00uanf",
+  "codigo": "",
+  "fim": "2026-10-14T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F459144",
+  "termos": ""
+ },
+ {
+  "loja": "Aliexpress",
+  "tipo": "voucher",
+  "titulo": "Desconto de R$ 35 na AIR FRYER ELGIN FACILITA FRY 3.5L SEM ÓLEO PRETA. Oferta por R$ 314",
+  "codigo": "WOBR07",
+  "fim": "2026-10-17T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005013006241141.html",
+  "termos": ""
+ },
+ {
+  "loja": "Aliexpress",
+  "tipo": "voucher",
+  "titulo": "Desconto de R$ 220 no AR CONDICIONADO SPLIT HI WALL ECO INVERTER III 12000 BTU FRIO WI-FI HJFC12C2WGCG BRANCO 220V. Oferta por R$ 1.722",
+  "codigo": "WOBR43",
+  "fim": "2026-10-17T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005012883038603.html",
+  "termos": ""
+ },
+ {
+  "loja": "Aliexpress",
+  "tipo": "voucher",
+  "titulo": "Desconto de R$ 125 na SMART TV PHILCO 43\" FULL HD ROKU TV P43CRA. Oferta por R$ 1.255",
+  "codigo": "WOBR24",
+  "fim": "2026-10-17T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005013197546762.html",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "R$ 500 OFF no Bundle Nintendo Switch 2 ABC",
   "codigo": "NINTENDAUM",
@@ -1238,7 +1454,7 @@
   "titulo": "R$ 5,44 OFF acima de R$ 81,50",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4nr0oxf8BVJkPcG4PI7P2KvsP3MGd38cET9bKQDc6tXzrjWyj0xeHZSUBkLUphJjOKJSehG0EmwYpZ5IxySddZ85BnSulYSNOpv5B1nWH7dU4pL480RultGDOpwXE0NdgxJhxOQP0WYB2ZuLmof8g5YLA2xJrevyXjbSbejq0lnn57ZCTZLRcE4xfwcNWrnkVJ5MfKN46an6KAZvhxqZzn1wvGWAN5RDfqnOfmvQaacOWkwtqa4RpPfSGTSQvWDk5rAcNxuZUIExSpnjoyt8laxFpzmLRoZigM26sVmRx02vt5LQznSR8j7pp8E1qXtb7lyCd4YU1kJ4yb7cRsbR4CQqe5SlzHUQdD1zFO33dkzCXrWy3GCBldYtMM970Sop0gvGqfuwZBK9WoGmGRYVHjEEyRX5DtygvzmuZLAGX35i5pvBqkuu6NKW6ngxIpfHOeKpVmLVWFHWNFH",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4Z56wC3KIEfxY2UMrNJWjca2jvVdNn1SnABxlYEVva8knPE0RzexcyNZpTL5ArA6RcHYdcOsB55snbAoJ0TXtFdtOfYtp7lmzOXc8hzhKm8iH6fyfYm6yxoh7LTYeCByHENeORIiatMWNpK6V1ydCXGiRFLC5xKilrnwG7BOsp5gqzSbx1StTYSaRfcaERLiz3Kr4sOauGx1OzVLrDpgKTTT3DIOxK1l72glCgqgMKGmx2OiKr2GOGmV7PUl4VXQMzOvpEYaIxekrjut8IzznbV3BUFwY8TMEbb43qs8fDyFX2Vci4ukViRCUGxY041w3Y5TTHldeozLfUeM32epd5wFeuMCz1KLRom3GodEBRksDJFCd7z9nHX745rGY5iVcdQHePMX0xT8kSMd0U8bUKM53P6WFWm2lNek5CAfmRDo7EGUF8F2LhZPJf0TSwTE0jihUVrSO9I3GGb",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -1247,8 +1463,17 @@
   "titulo": "R$ 16,31 OFF acima de R$ 271,80",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW28bt6lI3EN3EzS2CK5qg2rr9bwFtmSJTpx1PBIS4AoYT29pvaPKpSsan3bUaFXYb4eRZXCu2rLEK1nZQ1uqKEnSqSZmhAxa16InoBhCy9tY4khEbzp0NM3FuyCiJrsepMAAKH3T0bat5oFKIpOezaulGy3sfSxzyzblYCvR6XFduM4pcAsm5tUaJ2OfEnnuoUsMjFfDWvhy5aOrt2TGKoD0lHJz436z8r3dzQ44tRzVjQ67l6R1G35yXEbTDuf81zsjWidZZ6ubmWMy3T502pfo43kchPD0kU7QpKaRzK5Qxe7zNnHPwGXkjHi9i2bLVfsQDkEe9oy2MlXQf62P9Yx1E8aF0q782dbE7m0iKNVjd7UD5a1KJblKWzg2Lf0C5prVDFLQolu5rNvaTnUu4VHDT1XSfo4Dkt43fLRxeyxGEMg8I856vzYUtGeJVsmOeU5szzLyTA2lqVPN",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW3meAAWAtQ73LDY3ZqAa9EL3LMDAUSXKQVTg7c4lcJru2MklMneaDQXaSmutTpsICdeYvemAaqTPy10Kv4mlWg7yj5exHveExykDABFRPImeTvELyIp0xNABOm4yPdNca477ZppZBZpcJj1o8Z0eERg3iell9RXTFMbLcPRj4WiHUEbsIpanT7JX8dxakWVLe14v045MYrk33hV2joX1oCg3iFuNwpauvyYtaFk73flLt4Xlatx7AV2ZSwYUXveoQIMmITnMxBjVCsIlzqDqFqoUXmZwOFWRozpuAM0sqT7gjbyxysqS4GaYmxm1X8Toa5SjDS9CnxuCk95CRoxlnaEHBmmiPGXpOmfKkMMuEWT2u82x3ytnxECz3UmIZIQQOO6aqaXv7D9F0XLbGMptvZdgaYvGorBUyX86VfEfRmBLuv2CI3h80O5y5LV8IgNqL2kzW8HNNPjFOJeT",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · EMEET Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 17,06 OFF acima de R$ 17,00",
+  "codigo": "BRKZ79",
+  "fim": "2026-12-31T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGupI0xroRTBTpt79ZwzNqiYkDVYbs8QDghkW0XvoPCRhG8ps9z7IxS8vfz792v0fH26891n84hj5YvzY1jXdX01XqcgGhjYbNvHlrq0pyPBVcNRdG0TVuPBURDCYljWc4pKxnBw3sIevsAYVsogrCwEcX3HPt6lg5YzRKU1Bq6cPXCz51Y7muc7e1YCOtCqrZbOXE7z0HCIz09GflINRxvUGnyU549mFvx0rABvoG9x976SoZLrlt0oiPmRCdVOZ4wP6yWPBMlIGO95WiYe007gvNfB58cKxKohDWCcxzSvl8rIaeXokcjIZGZHAaaQdcKudD9MS6POySnLRaugfP3i6BK6Vzs6dMAhn0Vdg5k9t5oM7FLwgbHretnpnBjVzbz46iPDuN6uWT0QmE31GabV1KtIJ8Cs2WxlI9IsuDNqnKa92EygX3tDFqYffSNBSArUIjuQqxOcpMgy79IXnrclj7ixHidPYczNznGEm2MulCG8XDg9HIMNv0qKtMUHU0AbqTclKnM43cWJh3ZcoJAWSiOskOgKlmk5E23E1ntWgGDJtBPdm3uRoVvFNHB2PNQV15buSoWamJHtXRTiP6P8nuLf5O9Hzv08ugAbGEPRDbdIrTEyxXLaIfrwu1HTmmsnajZ2wSNZUJV7bEoJ675h",
+  "termos": "Vale na loja EMEET Official Store do AliExpress. Ex.: Caixa de Som Sem Fio para Conferências EMEET 360 °   Microfone para Re"
  },
  {
   "loja": "AliExpress · Star Custom Store",
@@ -1256,7 +1481,7 @@
   "titulo": "R$ 4,88 OFF acima de R$ 4,80",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFlEN3F8dq9tO3cNRfiSYbTIOgbzfrprZxdjNgaudOdgx1ir8PqSMqDq1svCe6hMJZn4oVjZ2NIvNbU5rPCTqE1jRNecMj8C4sifHhecYgQcD477FuMfvhIackNvT5F1V768rNm9a0L2pQyHrQvK6Q44xQy0H6hSrFBGtRplsLXrXzrOxRhavX7FvxYEuoQmD4OaPQzFr4mIZ6hDqP2gFBEXI15yqEGeS1TmdbC3uspmQX4Flai0uWRd4Zo5OKlP0QQk1ZLsd0ybynhz3v7x1V0BlnZCcMUvup8mRQiJY7cidr1wvGH1SADrIJk4WFpk2sH4GJikumxSfAeDOHx8NRw2ksNRcyP4GDt8ysFHonH3IaVCW3sU6KhRo6ofXK9MwiaaTv7ZXgKi52gKnhkXMhlFCL3aD4nyDCLemd1oLoUoAs5X3iZjVObE1yoBeBNhNwLROhjMGvcQYf6rp",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkYyMdey9xmNTr7ijOHyvXeqEup5pJTFuM3LjMxSmVDK0QuLfSkEkJLziB1wWRSrvFkoxkGZHIfz97D3TRjyYfTeLyjh0MtuCRjc6JFIIUAIrBodXinwapRRLhEoy65xkurWRPHj83yogGQ5st1mQEAYjtUiQCkjx6xbC0ULbfxnlq7nwabnzjd30Wm569mCOZKMPCztvR0HsEyoe4Ools557HMUUW8sK2l7aESgQpnj1jNB0oO9PQlq7OCfm4lAPKYOWPuVGIyzCYDt7e3CaNmsLqZRUXofQGTZdLS5scC9EKvS7Za71P5uG1c7dhFQnGvs6eJeiBDjTbJSAd8wh45MEXAj7TW1ipv8u7taM2XHJ4TFG3d8L3p33O4qoPWwCbtLjMZd44O5tNaz7BpH1xZVUqaTriQ2MTuly5gf3NhMUuhQE4RCaRdpjqafpB5FwCsGETEDT0CNFE0j",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

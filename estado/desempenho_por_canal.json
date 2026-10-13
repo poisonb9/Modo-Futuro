@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-13T17:32:47",
+  "medido_em": "2026-10-13T22:37:50",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -47,20 +47,20 @@
       "comentarios": 130,
       "shares": 112,
       "engajamento_pct": 0.0,
-      "posts_recentes": 16,
+      "posts_recentes": 14,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Yunjin do LE SSERAFIM ensina o truque bizarro de usar o curv"
-        },
-        {
-          "views": 0,
-          "titulo": "Yunjin do LE SSERAFIM ensina o truque bizarro de usar o curv"
-        },
-        {
-          "views": 0,
           "titulo": "PALETA DE CORRETIVOS MISTURADOS COM PINCEL DE PRECISÃO Como "
+        },
+        {
+          "views": 0,
+          "titulo": "PALETA DE CORRETIVOS MISTURADOS COM PINCEL DE PRECISÃO\n\nComo"
+        },
+        {
+          "views": 0,
+          "titulo": "O PINCEL ESPATULA DE CORRETIVO PARA ILUMINAR O ROSTO Entenda"
         }
       ]
     },
@@ -72,7 +72,7 @@
       "comentarios": 9,
       "shares": 25,
       "engajamento_pct": 0.0,
-      "posts_recentes": 42,
+      "posts_recentes": 40,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 6,
       "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 40,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -140,14 +140,14 @@
       ]
     },
     "camarim.kpop": {
-      "posts": 35,
+      "posts": 52,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 4609,
-      "comentarios": 38,
-      "shares": 78,
+      "reacoes": 6120,
+      "comentarios": 53,
+      "shares": 87,
       "engajamento_pct": 0.0,
-      "posts_recentes": 20,
+      "posts_recentes": 37,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -156,11 +156,11 @@
         },
         {
           "views": 0,
-          "titulo": "SEUNGMIN do Stray Kids é exposto por treinar choro de discur"
+          "titulo": "STRAY KIDS fez show no estádio do TOTTENHAM e usou o chuveir"
         },
         {
           "views": 0,
-          "titulo": "MARTIN DO CORTIS AFIRMA QUE SE VESTE MELHOR QUE OS OUTROS ME"
+          "titulo": "SEUNGMIN do Stray Kids é exposto por treinar choro de discur"
         }
       ]
     }

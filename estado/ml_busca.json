@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-12T23:15:14.626996+00:00",
+ "quando": "2026-10-13T03:52:47.066408+00:00",
  "termos": {
   "whey": "2026-10-12T16:06:02.133442+00:00",
   "meia": "2026-10-12T23:15:14.626996+00:00",
-  "chapéu": "2026-10-12T00:00:10.160698+00:00",
+  "chapéu": "2026-10-13T03:52:47.066408+00:00",
   "rádio": "2026-10-12T23:15:14.626996+00:00",
   "pneu": "2026-10-12T23:15:14.626996+00:00",
   "bateria": "2026-10-12T23:15:14.626996+00:00",
   "bateria 60v": "2026-10-12T23:15:14.626996+00:00",
   "bateria 60a": "2026-10-12T23:15:14.626996+00:00",
-  "ex2": "2026-10-12T00:00:10.160698+00:00",
-  "grade proteção ex2": "2026-10-12T00:00:10.160698+00:00",
-  "grade proteção": "2026-10-12T00:00:10.160698+00:00",
-  "grafe protecao": "2026-10-12T00:00:10.160698+00:00"
+  "ex2": "2026-10-13T03:52:47.066408+00:00",
+  "grade proteção ex2": "2026-10-13T03:52:47.066408+00:00",
+  "grade proteção": "2026-10-13T03:52:47.066408+00:00",
+  "grafe protecao": "2026-10-13T03:52:47.066408+00:00"
  },
  "produtos": [
   {
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB59481595",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB35161880",
@@ -813,7 +813,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB62867807",
@@ -829,7 +829,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB62535666",
@@ -845,7 +845,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB50732570",
@@ -861,7 +861,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB23351954",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB25455420",
@@ -893,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB24771463",
@@ -909,7 +909,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB26197012",
@@ -925,7 +925,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB42432212",
@@ -941,7 +941,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB25722405",
@@ -957,7 +957,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB41306211",
@@ -973,7 +973,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-12T00:00:10.160698+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB47135031",
@@ -1005,7 +1005,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-10T22:02:09.900632+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB28362359",
@@ -1021,7 +1021,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-10T22:02:09.900632+00:00"
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   },
   {
    "id": "MLB58104738",
@@ -1054,6 +1054,22 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-10-11T07:50:17.191559+00:00"
+  },
+  {
+   "id": "MLB59557080",
+   "nome": "Óculos de Proteção Worker MK2-I Lente Cinza com Proteção UV",
+   "preco": 15.9,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_727712-MLA94250389110_102025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-5829935494?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB269706",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "grafe protecao",
+   "visto": "2026-10-13T03:52:47.066408+00:00"
   }
  ]
 }

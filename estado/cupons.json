@@ -9,15 +9,6 @@
   "termos": ""
  },
  {
-  "loja": "Nike",
-  "tipo": "voucher",
-  "titulo": "15% OFF em produtos da lista promocional. Cupom prorrogado para todo o feriado até 12/10 às 23h59",
-  "codigo": "MAIS15OFF",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17652&awinaffid=3089205&ued=https%3A%2F%2Fwww.nike.com.br%2Fhotsite%2Fmais15off",
-  "termos": ""
- },
- {
   "loja": "Farmácias Indiana",
   "tipo": "promotion",
   "titulo": "FESTIVAL DE BELEZA - Cabelos",
@@ -558,24 +549,6 @@
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Por apenas R$ 3.949 PlayStation 5 Edição Digital 825GB 1 Controle Branco Sony com 2 jogos",
-  "codigo": "BRCD10",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005010115972190.html",
-  "termos": ""
- },
- {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Por apenas R$ 3.379 Smart TV 55'' TCL 4K UHD MiniLED 55C6K 120Hz Google TV AiPQ Google Assistente 4 HDMI 2 USB",
-  "codigo": "BRCD9",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fpt.aliexpress.com%2Fitem%2F1005009459962683.html",
-  "termos": ""
- },
- {
   "loja": "Soldiers Nutrition",
   "tipo": "promotion",
   "titulo": "24% OFF Pré-Treino Striker 300g Suplemento Alimentar em Pó 400mg Cafeína 20 Doses - Soldiers Nutrition",
@@ -618,51 +591,6 @@
   "codigo": "",
   "fim": "2026-10-20T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fkit-creatina-250g-multivitaminico-completo-soldiers-nutrition%3F_pos%3D1%26_sid%3Dc5496845c%26_ss%3Dr",
-  "termos": ""
- },
- {
-  "loja": "Soldiers Nutrition",
-  "tipo": "promotion",
-  "titulo": "24% OFF Pré-Treino Striker 300g Suplemento Alimentar em Pó 400mg Cafeína 20 Doses - Soldiers Nutrition",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fpre-treino-striker-suplemento-alimentar-em-po-cafeina-300g-20-doses-soldiers-nutrition%3F_pos%3D12%26_sid%3D098f3035e%26_ss%3Dr",
-  "termos": ""
- },
- {
-  "loja": "Soldiers Nutrition",
-  "tipo": "promotion",
-  "titulo": "57% OFF Melatonina Íntera Calm  Suplemento para Sono Natural - Soldiers Nutrition",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fmelatonina-intera-night%3F_pos%3D1%26_sid%3D28b4e6201%26_ss%3Dr",
-  "termos": ""
- },
- {
-  "loja": "Soldiers Nutrition",
-  "tipo": "promotion",
-  "titulo": "15% OFF Beef Protein Suplemento Alimentar de Proteínas em Pó Soldiers Nutrition Sabor",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fbeef-protein-suplemento-alimentar-de-proteinas-em-po-soldiers-nutrition%3F_pos%3D1%26_sid%3D3c760e2a8%26_ss%3Dr",
-  "termos": ""
- },
- {
-  "loja": "Soldiers Nutrition",
-  "tipo": "promotion",
-  "titulo": "50% OFF NAC N-ACETIL L-CISTEÍNA - 60 Caps",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fnac-pro-500mg-60-caps",
-  "termos": ""
- },
- {
-  "loja": "Soldiers Nutrition",
-  "tipo": "promotion",
-  "titulo": "71% OFF Creatina Monohidratada 600g - 100% Pura Importada - Soldiers Nutrition",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fcreatina-monohidratada-100-pura-importada-soldiers-nutrition-tamanho-600g%3Fvariant%3D47173658738937",
   "termos": ""
  },
  {
@@ -1064,33 +992,6 @@
  {
   "loja": "Farmácias Indiana",
   "tipo": "promotion",
-  "titulo": "Semana das Crianças - Brinquedos",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmercado%2Fbrinquedos%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "Semana das Crianças",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2F4018%3FPS%3D24%26map%3DproductClusterIds%26order%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "Semana das Crianças - Chocolates e Balas",
-  "codigo": "",
-  "fim": "2026-10-13T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fmercado%2Falimentos%2Fchocolates-e-balas%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
   "titulo": "Ofertas da Semana",
   "codigo": "",
   "fim": "2026-10-15T02:59:59+00:00",
@@ -1114,15 +1015,6 @@
   "fim": "2026-11-02T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP3JBL25OFF",
   "termos": ""
- },
- {
-  "loja": "Brinox Shop",
-  "tipo": "voucher",
-  "titulo": "Dia da sobremesa",
-  "codigo": "SOBREMESA15",
-  "fim": "2026-10-13T02:59:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fcozinha",
-  "termos": "Brinox 9 a 12/10\n15% off em cozinha"
  },
  {
   "loja": "Farmácias Indiana",
@@ -1346,7 +1238,7 @@
   "titulo": "R$ 5,40 OFF acima de R$ 80,90",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt44j2tUl0gbDQUSDjqis2TCjQn268NA5m6RboRDK7XFeDGq5LqvQKBMPFjVURYVZT7Jt2LkTLaZHoljUAHAEOcprEZ3K3b81jIMg0SyAHsMyFVmDSgcbUH3CJLEtJlWk24hjpSaLapmYBcTgHuy3UvFYgfZUqMVQBnTwUY5YTXkuAzSD9TmByrsrnwRm9QLjuecJiRmbIM91IFzx3L0MeJiLaI8Gwhtl37PqzyuzRZmypTs4oNgTjtSFucYXYmkt5Irz1oOqdL6MqzraGENtyS117zGDN8goinMwKW0kzhu0E5lubprjPai7QcxDVPrKd7Xd9xh8qPrTb1YgXcCMvbWRqn85ckuBNUwLEX6xgVAXAr2wp91GRxMJV1L4DuDxLi2lqv8PETDnKjYhwwhkhThhLNZAKf0pTBqttpkgKrIsSzps0tgQEAtnG3yIpwY78nD1NapaPMelrEHz",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4OMzU7TIK8vjtT6uwUXqqZT29obtIuaAii8WKOvJE83I7lfOLTUyKlUyVGOWipvshMvn2rtp8Xd1GKTIw98NJXnQ8Xmau0XDX4vXaOOOjVm9903PZdI7uLpueitXDRPovxuFA0NpZOjo9YyvWVcxHeqO0VgDVIE6kDT5s5v2OJtMi0iYLpat85HyeqP8IUQx09TkZ2gVRX3tkFeEevEwiUxe27JMiB4bEVnrXIDsxzwbR3WtE1SgXwHHSGSOHEHCDm88URl4Yy9knqhaI8qnjX2SbkV6JWs2x1w6IqvyxXtIUIwpUELsp4buoUp1rVXUcBeeDNNOXHNEOFpul1pnHBKXVjGXmoyiPZrjIUEXKrtFpFhOTjA98j9WMSOhe1NeMVZMX1L3ed7xdfWPQAqjWxMiETBgo41lHl6GHiztIR3RzAbBa1as1NXg9IZdjKsTckvq0VokJkMow8b",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -1355,7 +1247,7 @@
   "titulo": "R$ 16,19 OFF acima de R$ 269,90",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW341jTktCZCC7aKRL2Nx2NbLQf9pCmDxIvdzdFSFdAMytsKTAVE8UPEemX1x6HZIn3Ub8l5rSLCU7aSvYbCIApK0W3ouKEa22Qk6VxAGss4K8WetwsqlWXVNLIlhYiz77zldtFebmrd9IHr3c66BCdYCGykOT1D1cf3msLeMTo0Urqy0QDeLkcGRVjGLeG1ir5uXZcCX3GVN1y1GjHjMUx5LfOZNU8ZrivLYEZXTIWS9SnBbC0arvXXCJelp6a7yjD3BPy2IJxQsKHrnncqV1EOPAcFZgwc0ZF6QsbRKTGme6RX1Y5D2cUPQN3hzBkXNIas3RqtlnzOvtMG9UCFrMi48LB3cdE9DUyGTirDLHBy3SIbebZQu5jTjpH7xhtyapVoXklAsPhYgolFZdYDAbac9qzECiM5NMljmR4AHA9y13UwgadkyMLGep4EEmglFFm8b2b8pD8IVv8Z9",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW3k5AMj8SaUHBJxE66zVcz0DWNTWi2WG2yEpQ7GhI6H8SHkB6Yarv7Q5lVM1FWOpvaDIrwxsPJ1LX4IPJAsWONflgVn1DLKlEqqQzg1I56NSw4YeMXdwFe6WKMemBoLdJtt3cmo3FhGUkcuspbNKtQEg1OZbbdULchlrInto9EEvRO2ige829EmiLAihcviRWMNB527tqsKxBCVKzc2sYZYgtNWdIqvdDUYErKDQr08oY5PtRZBNb74tjzrOAhVTK6HTBdMUPBJtIWZKG6ixTZueQfOf5KY37bg4pXcPiBzoBDehwO1eyGQsfWbVcVrkpXMiQsM3CFwlNqcbITvmR5XRTuCVmsKI0oHiGOWDQ8pBSqjk5R1ucwSXmlQnGtZfPoTkIY7H3D1pdWyOW1mMRg0wzhXoLlUgmENtzrYRx2OmtnPMaS9E1LQyac5aYEZUKUzY4VuLoreRsLEF",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
  },
  {
@@ -1364,7 +1256,7 @@
   "titulo": "R$ 4,84 OFF acima de R$ 4,80",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkhDIx0mnntlbOfTDEGYc1XIAaPHfHN6BhwmQTkF2QdDuM9N7frmBgsGYzDRSNHEZMe7CGiWsbuIXR6IOvCAsFVtD5JEwN2MDXIbhyuO8Ah01xcDgPuBXw2maE93aRmtTPkU3LQNHYyIVoFna0KNa77k6EQTpt9bIU8Jyin4jS1GSIFMkxzj6MZGWOYekaPP3XyOkYbVkQgYBrxFYMJWIx8TnIIF7G5Oi4xiERcxkkWTFKheBU130gltavx5I1gETjMqudM6VAPuFukvUrb0jJw4vWyfDyydsi7EhHIibSJwaE8j9VrNorGOTUxnTnbhSAfx3vBiTi2EI1BxxTZqR6ImMPJsgqCCj7U0fvstOEq2fHmFQFEpFWj3oQ2FF61TZ8LkOtGzZjir8atFP0YnI8t94rlNhQFLMMSmHgScMjbeuw7PUtXndhLgzErAt11TlAIYz21M6orSyEEP",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkvGtPM6uyVNMZlVDAyGVpUzMuUsIOFAGn0G6xJg6Rvh1ouRT5W4Fv4zAR8MqPc4uelGQyVGsFPRUNnbfuhPTgm3VVhUvrZVRZI4VCvlnAsUDCTHVUYQvDTlzmeXJmdVLcVMFZ55BB2BfKSZShg0JYP24bnPlIxUOlYMbS98tXiT9s7I4A2uxmZlIKAz60Fns5ZrKb3WHEJENMOnWw5tHURdc3gniFfyNtWAwJtLZFcGrgxPiR53aOFneSHSJNMBg5SLf0Xv9ZDAalNymNH7peboMygLspHPsBzE8dDMXhnqYotN62x0zSe7KkzFDfT2Xgx2RejGeBByOHLPB1mktZ1PjnOnNgtkVUt6LADQoOIoZ9BqAf3rpNeR4tuyPOd50rkeWXPQVjfS16Zj6XzBz0KWYX8SGAcUqW0E246sRdAcbgVrM9w33rAiWdF2kL17H5Ku36R07nez6PuB",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

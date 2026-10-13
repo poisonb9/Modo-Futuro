@@ -1,14 +1,5 @@
 [
  {
-  "loja": "Kabum",
-  "tipo": "promotion",
-  "titulo": "Campanha 10DO10 - Ofertas Especiais 10 do 10",
-  "codigo": "",
-  "fim": "2026-10-13T12:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fofertas%2F10do10",
-  "termos": ""
- },
- {
   "loja": "Farmácias Indiana",
   "tipo": "promotion",
   "titulo": "FESTIVAL DE BELEZA - Cabelos",
@@ -78,15 +69,6 @@
   "codigo": "AMD10",
   "fim": "2026-10-13T15:00:00+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F356695",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "10% OFF em produtos participantes da campanha 10DO10",
-  "codigo": "10DO10",
-  "fim": "2026-10-13T12:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2F10DO10",
   "termos": ""
  },
  {
@@ -1238,7 +1220,7 @@
   "titulo": "R$ 5,40 OFF acima de R$ 80,90",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4emmhN5IVwzjjPuvRUoWiyPuWPbxCloxdAqvM6JG5u504exhsh2PR3LFhe46lxAJJu9CtMQ9sbvf8aLcXJcWYyxMjfSQoXJmKNhWM02tE0V5s6bZlgmkhPTad5eG6JNrlrVlEfxYKoYIx4r8LZyVTzbvKler9yyYHCyiW8UyZjJMYy1fP3BKYzWHe0oMrDwZkI6hIwf0iqGEG879ff359xBl97l8zctD0LjrvQIRNv5FK2ePHM9ASNYQJobzI10r5FxUs1mLWTRiWBWbnTSXJ3uU7aQULEAfx77wwZASBVA7SEYTJE5jBNUGz1fyEADgRPK4bZXPkxVET5MGwUhwChmeI5K6SrXBt5BEgmYfEnOz1F2rSucPbI7GsrrCzY0tQwUgeIDfg8VGAGU1kvYF219JGN6gm3901Szj50XinLHoEyjiUU9QkZdWazVi1ac2LEps5w44QrPSFS7",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4SozyCJ2yQys710bysnXyTiP24KyyGT2snc1XiA5XfPf9OJJ7rmpqDEp3GU1s3vKJkF0ThBlSoAuedm7JCFYz23LP1YRtC59hpU8i6zk6GrjoBKluK83Rj2jd6sUOL2JhDKODvotHFpo0BROURbaC3BNXDqsk5lLackgpA9hWtVHJlskqxwbjLu19krOKPiJ5SkaKJfNrmQMNNEbg1aTJVXRW9Ovx2mlv9mX4VgbL0b1CAiCEe6ukms1l9TGW28fwJ6g310WhoD557WwG8BwsR3rJCHWFXDnMpjfs0cMwOuh7z7Rj8ZoTZXxe4mAtkUnlRO00ajX0cZdQIvZQcdxwnLeaCHdxpCC1oiNWMN4saVby7tiAEiD0WJLPFTXbCYMRinIt19OJ2dLIpcsWEsbpsTeFOCb43o96iKJix2jBjR1Q7cqFaAS9Wj6XL6rE3vcX8Zw1uPiSh0gTa7",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -1247,7 +1229,25 @@
   "titulo": "R$ 16,19 OFF acima de R$ 269,90",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2IxwHM7fYDhxSRLbYWP0lnlYTo65Z2LL5JdYMWN4eu8Omm9wjZ4SP4uDWfMtRWo2rzdNn0tLcrwsKPKXCfh04ZJmbRE8ih3WOXE204h7FwAl2WRjRLlvs5Elvsa0ToDG4OfPIImnJLqi4slU0X0vQMhbo6bLwJLhzdYmknLvoM8phcd8RArA8ULlutDZzEjQtWSuews0ucTMNvqFAQirzs7fC50LaMVkAuqEjgKPDPfo2mZruL2ljSTkJGLWsRUdOWFSJUeMl9z2ZTqcBw7dlkhAWLimvzW0QywEm8SbiIJKX8bsNvDYIGUD75aJ87dJtJcB6By3lVVsw17I0tpSxgKNCYRPchICXQ3bXbEoO9ZnE4mZM0T9NIMb0m90NXudh1xqYKVM9psSTi62DWtRkleQgkaEk8hIVnn6l6APQYjOg77YpZSqOV6HCeXKdU86FstshNEQm3J5zQj",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2HnwTtcuL0MeL802u2OROGlyuEnP4WPGKXrgRScdGz09pFz4pSmWK6YG9Tevy1cTcAqSMIgtIP4VtmpHCZbdF2y4iFi8PimaC3g1awl8ZdapOgoYq4TBne3ZgtjBtRbtjkedIMNh0dzNeNCLh04CACgvTGznG1fVv1iO1zR4RxlkoNs4zI16s7pvHzSmse30MhxxUluVhmkurKAhGm6kzUQa282ZIJ0yjmbnuuP4En0ITOgROpTYL9Rh2mmqWj1nF7Nc6wmyLxJHb8tKIFQfy420IrSSZKo4GcfcVcMSt0KOFBsBX8Z5fprPlMv7ml3OdzpXgNiTw24Rl6halObNF9Xrl5s0zxLrXtcwjwJM0hzTOhtfl4wKvpBv1DnhVUjcMGZRjH9jNRFF0IhxOEuatyIB30PglR2utvqGa6MRzEKkySnr4Bl134hpI8SD3OXGW75MrLOtTpGjoCL",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · Star Custom Store",
+  "tipo": "voucher",
+  "titulo": "R$ 4,84 OFF acima de R$ 4,80",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-10-27T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkw5W3j3oaBwjg753To7OXd9D1iZmwp441z6YuQqyWoZa61jWTBqGkWZZpEYRfp7Qms5LbvtKRXAqeic8KAZVSnvbPxWocgcJa0RVzoVXyQrtjeIdHR5QR8siOwtYfamYPeOKSezcdqbNL4MgAA7Y5KmZQj6oO8H9SqD7wvDTaBGBEqExfVuZyy0koakWqjjB9WUcftmj3JmPxUTTnH1g17LQCPrbaOq4wFQhKp9h41bwqxQiy4JuMmvlWBhJsU6Tr5DYjfAjakuZmGqRs14hDgFKJ3M1Rz8SyyjOv4IXaSpdQTkWtu44X6l51x5qjGGDcCfp3qBWBf1Tn7lSphbe4U3GiBZJQsfhmow3L1JEcprB1Y6LeTL657lS0HZRxacmpIvJkMgg1vVIu6Ab3wOLHz3tcoIUIvXuiPBViQsRp0Qxl3VnBd6pGxo93vHe3aKDbT9vQN1MUonXZ8n",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
+ },
+ {
+  "loja": "AliExpress · U.Elegant Store Store",
+  "tipo": "voucher",
+  "titulo": "R$ 4,84 OFF acima de R$ 4,80",
+  "codigo": "8AKNDHLUOB8Z",
+  "fim": "2026-12-31T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGzqJePGqTMxmGDNiDa2UM9GmPpHEfRefqW2kUMZLGD627XQk4KI8XRfC5V3jbqENNfOQrdvvAyCvslLXbvXo74EGg7rO7m4SSAf9UadVFZLnuQtaNAB32WV4093gWB6pJ18FWOggilzta5jKUPnuTqHCvId9LKQleMVi472Im0v3SUzHXTDchODkQQdPLSDbSiKmszGzHTZVWJa55lVvKEoguIvSzWFE24xhTgG1TH5m6zscsB6sejyWX1cbyUCHoHlK6KrUlyKjB9lNiEntveJiLpQUQ5m4w9ikEmLbWCDEt57ezErBrLSSTJaHcbfc1ltYfdhV5bnPcIEMYgA2kOUubdROTRmr0BEwE0Nrx7uI5p4rUZJ4tn3h29dlZoL338WOOonrKAU3rUe4kL4a1cyX2nf53pEFgebNPmHFiBqc6ZMhZNIPWw8zKDUje200sQNVJ1Sx1o1Uia2NIEjkuRYNNel1f4KTptY1xWy5mXRl5oRo9sE9aW66VIinjpa58FC7TiWsQqGDZWmHalcZijcT60JWtYNzf3diZU1CDfbsHN9gLmolfAdsvENeXEWmtfPfww6rKLSyNgGe8iTIijTPJH1I0gyKPnxL6cJX77J6DP6mqHlUgdIGw20oPMdng2jbKsDxFOW6pAjA4bkwl6T",
+  "termos": "Vale na loja U.Elegant Store Store do AliExpress. Ex.: Blusa Feminina Chique com Decote V, Manga Longa Bufante, Estilo Corpet"
  }
 ]

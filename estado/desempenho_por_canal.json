@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-13T01:15:56",
+  "medido_em": "2026-10-13T09:18:44",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,27 +15,27 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 100,
+      "posts": 114,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 840,
-      "comentarios": 29,
-      "shares": 9,
+      "reacoes": 1062,
+      "comentarios": 33,
+      "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 28,
+      "posts_recentes": 42,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "POWERVIA: ENERGIA POR TRÁS E SINAL PELA FRENTE NO CHIP DA IN"
+        },
+        {
+          "views": 0,
+          "titulo": "POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ Para "
+        },
+        {
+          "views": 0,
           "titulo": "POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ\n\nPara"
-        },
-        {
-          "views": 0,
-          "titulo": "POR QUE A TSMC REJEITOU A MÁQUINA HIGH-NA EUV DE US$ 400 MIL"
-        },
-        {
-          "views": 0,
-          "titulo": "O calor de 1.000°C na criação de transistores 3D Construir u"
         }
       ]
     },
@@ -43,8 +43,8 @@
       "posts": 157,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20255,
-      "comentarios": 129,
+      "reacoes": 20423,
+      "comentarios": 130,
       "shares": 112,
       "engajamento_pct": 0.0,
       "posts_recentes": 16,
@@ -65,14 +65,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 120,
+      "posts": 134,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1328,
+      "reacoes": 1422,
       "comentarios": 9,
-      "shares": 24,
+      "shares": 25,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 46,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -85,19 +85,19 @@
         },
         {
           "views": 0,
-          "titulo": "Protocolo"
+          "titulo": "Seu cérebro desiste antes"
         }
       ]
     },
     "atefalhar": {
-      "posts": 122,
+      "posts": 126,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1569,
+      "reacoes": 1617,
       "comentarios": 6,
       "shares": 3,
       "engajamento_pct": 0.0,
-      "posts_recentes": 39,
+      "posts_recentes": 43,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 73,
+      "posts": 77,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 434,
+      "reacoes": 440,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 22,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -135,7 +135,7 @@
         },
         {
           "views": 0,
-          "titulo": "OVOS ESTALADOS COM PIMENTAO VERMELHO E GEMA MOLE Ovos estala"
+          "titulo": "Petisco natural de carne de cordeiro desidratada para cachor"
         }
       ]
     },

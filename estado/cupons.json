@@ -2,6 +2,51 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
+  "titulo": "10% OFF na promoção COMP10 em produtos selecionados",
+  "codigo": "COMP10",
+  "fim": "2026-10-19T11:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1COMP10",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF no produto participante da oferta Caixa Doney",
+  "codigo": "CAIXADONEY",
+  "fim": "2026-10-15T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F580135",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF no Kit Internet via Satélite Starlink Mini Wi‑Fi 5 cor cinza",
+  "codigo": "STARMINI",
+  "fim": "2026-10-21T15:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F1074997%2Fkit-internet-via-satelite-starlink-mini-wi-fi-5-cinza-02535308-501",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "30% OFF em produtos C3Tech participantes da campanha",
+  "codigo": "C3TECH30OFF",
+  "fim": "2026-10-16T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1C3TECH30OFF",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "10% OFF na promoção Energia em produtos selecionados",
+  "codigo": "ENERGIA10",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1ENERGIA10",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
   "titulo": "10% OFF em produtos participantes da campanha HUSKY10",
   "codigo": "HUSKY10",
   "fim": "2026-10-19T13:00:00+00:00",
@@ -1292,8 +1337,17 @@
   "titulo": "R$ 5,46 OFF acima de R$ 81,80",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4ZMC5LLeOnzSAWcKOBredX7HYf8a99lmUBaaMiduCZfJyI9thBwsZDb7MmCcuxfvn7vqtE3avVBiny7QynbOGIcqdvRtPocq4xSBc4bt4gWyKvdEJRWs2Ysda5Gz5DO4YCe34JKdxokQmzudkouce10PgMPAgX9tPoYWImTckfTKklwrLikLJZOaazECSdj20VVM2w2iY2bguhEYYrX5wkM7i2KdSG9Y3Kqz52FTenxqwF2M8Z2iXIPXJEpzjb7MbuVxzejXS7NEybDEJGgTlffu6Zhl1m2OCZs0VM0dKHVyLis0CeE7kb3RIt3D4VOEDBRA0ye5DtzoGaNbkZWtvgMT24XYM5i6du45psdGMO5KU1nDQuTXIP0Gk1rXwYmtgc9AOMSSixadpBOUzTuQlvCSAnIyygKoYWE3Ysl8mDY1GIpu5ntqxr8Nnqh2qXp7uxZQ79QHKWwDr11",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV0SvPmTvTZC6CEI8DBBWWJmlWdyqt4YflvEXH4BNvl7MwgHZViZHZT6yPPb0xi8D2cY9fx8Sy7V1k39hQfWFtjEuouD6AULia0jPTEMWMcUzjtntXmyjOseCUIYzQltkrVcUK9C8NlJFPAXqp8ba8BbwdlXHIfbyHfC4gZFpu0SUR6h45PPcDqK4XuEoqautRZk1AhBUSyErslqUdXp1ywcZMjlnarrHSCswQaapAyuSjsv1lZepC1u8i3LRrkDK8wyJKAw0z6kSyCNsyxCRJvMnqATsJsOpzATflpWI9nwZCOQXebisAazaidP4qdIRxcEtn8L535pUDyrEwxCBkxMXyVrZwMEgZhcwvnoSJKJ14hMQ9RD9QamHwZg4kCxbNx5ysQTHCiZTA9We7UVB1tfO1E5kg4V1zWcbqvzBUPS4yq4GDDQXpVq0ChPL7yqQQsBj4RgVQKpJpTDACVHa9WjbekcaSZ5GqF3GMSupDizz",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
+ },
+ {
+  "loja": "AliExpress · maono Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 16,37 OFF acima de R$ 272,80",
+  "codigo": "GUJE5NMB40A1",
+  "fim": "2026-10-28T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xaYc1hFEVYK9lLOsYfsrTUlyKS6NW2xFrVFUwKXBY8DfSM926G5G6PUpro3DytJrtElAolvN0fHQMw8ivJuKZQnUN27wUSbPa7FJv1AT3bcF6RzsGmV6TVHKNSDtVJBf0g8Wg83AlCw2W6ce6cHnL7f0nQK157QlYGQluXM6de3cwdAAHW7l7RIy02R0SknVYfZY6AtODJM0btc6c2SsSXnyFdIGW5ZdGU5g89Ch5cMH82Jp5xWxjElhPJjZDD88GrxlzbvvcxKfFG5caqqMnbPLpnXfWe6OMCvCmeCmtdRTQ8OGPe2xEWXCZIykqeCKIAsU1dW0EeA0ZD6nUn5qEmA9Tw5TJsyZQxIup4GtQNo9pkoGIY9LRu63OQZhr1k7cwhBCPo3ifcv1NdhRcWM2lLvn0Hzsf1BIiR31Mbq9MnDTIdYy1DtT7LJdYvJ86SzZRgJJARSZDkjIUwNnVFgOgP3MFOTmdJKQSz5xUpSlGVH",
+  "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
  },
  {
   "loja": "AliExpress · Star Custom Store",
@@ -1301,7 +1355,7 @@
   "titulo": "R$ 4,89 OFF acima de R$ 4,90",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkg8kz75qBvt8ST8ds5WGdeaNtN8MbUZYuNRm8872IIGOeSbF4TIjUbgLpNko9TVrZGngvhKbfbXUR6tjojONRwoHF0BQbTGthOPy5VAzoadjte0bK1cxXJ6HsVAf2ZPsOdkq7WvtMZ3asMPLxOuWxWzHrtPWlbXKMA1rUJePencrCE8fV6SWt2NinJfkKH4ZCNGbD3uCl273BiGxDXDO3wnVFujXPhKgB7DuIQMP46Te3GjmzkuVTUY126e6fmRtzMJwdNOyA1RF3mOQoOfKEOOdadQnYuQ8Ek6vCTn957ZnSzJL4EUYUndpM16R89UZqfUio06oE9qO3PfoZyWepAu0Kkph1ulFd3POdoGKiFOxHZEnDaXrJDzkP6se2uGwGuRLCnXgmql51V1FVpSBZFFKLD1CvXvaQoFdXafgQMuB8RyOo6pXdRBSujaWCfyqw6v6gyAGmICxKSB",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFllfaheCUr2FmC4Ytyek0Fjko1pTpAFsZJMXvUSOvrN863CLawEruN2fZXSSrpUaMocAnJZrKbknUV0scwmH0KFS3PTW84LN2PyVfcc0KLBOjhsvcXrFPNZ2IhdUu5oM28n6OFgedP3uS91MabkxqAQuvhOUje6MKxVbo8eZDii5zqOVfkdLcq5ljz1fsjXu6G384x1BVpHZ9sEjUXgXQQ7pyL639OV9hXet0cN1UNDJ8Qkv07TlkPvd2PmNJYk3Um9DADWxBdqYq8v7xpGRba1bS4L2dnP0z5OzjpmTnPdref6dmQYD2nV88p9xIeDDsBVWQYzDNneQze9ShOJFgpMXp3r4NBr5Ph4pAUQbomleJ7AZjnRr14rgv7AAn46v3OMmY2RuGrtwpxq6WZUcooN5DetePn3v1eSaS2P5J597o49iO6sypFvwVikUyChQd8MIF245i92PTVGn",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

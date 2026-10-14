@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-14T07:29:06",
+  "medido_em": "2026-10-14T13:37:14",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -40,14 +40,14 @@
       ]
     },
     "truque.importado": {
-      "posts": 157,
+      "posts": 158,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20599,
+      "reacoes": 20643,
       "comentarios": 131,
       "shares": 113,
       "engajamento_pct": 0.0,
-      "posts_recentes": 14,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -72,7 +72,7 @@
       "comentarios": 11,
       "shares": 28,
       "engajamento_pct": 0.0,
-      "posts_recentes": 42,
+      "posts_recentes": 40,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -97,7 +97,7 @@
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 52,
+      "posts_recentes": 50,
       "views_recentes": 0,
       "melhores_recentes": [
         {

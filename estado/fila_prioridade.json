@@ -3,12 +3,12 @@
   "modofuturo",
   "truque.importado",
   "camarim.kpop",
-  "cozinha.importada",
   "achadinhos.instantaneos",
   "fatura.chora",
   "achadinhototal",
+  "cozinha.importada",
   "semanestesia.pod",
   "atefalhar"
  ],
- "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> modofuturo truque.importado camarim.kpop"
+ "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> modofuturo truque.importado camarim.kpop achadinhos.instantaneos fatura.chora achadinhototal"
 }

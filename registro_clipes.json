@@ -7239,7 +7239,15 @@
       "canal": "camarim.kpop",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_04_nota87_CHANGBIN_e_SEUNGMIN_do_Stray_Kids_revelam_o_sentido_da_letra_short_9x16.mp4",
       "criado_em": "2026-10-10T07:47:21+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-14T17:28:00.000Z",
+          "canal": "camarim.kpop",
+          "detalhe": "CHANGBIN e SEUNGMIN do Stray Kids revelam o sentido da letra",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "b9f6fc77206a59dc728e64a9b052d84c7ee8edd4817c1cc4e19e7fd49c172f30": {
       "arquivo": "2026-10-10_05_nota85_I.N_do_Stray_Kids_analisa_fotos_e_fala_sobre_visual_de_ensai_short_9x16.mp4",

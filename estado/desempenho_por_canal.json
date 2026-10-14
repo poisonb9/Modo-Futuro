@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-14T01:48:44",
+  "medido_em": "2026-10-14T07:29:06",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 114,
+      "posts": 118,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1062,
-      "comentarios": 33,
+      "reacoes": 1101,
+      "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 36,
+      "posts_recentes": 40,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -43,9 +43,9 @@
       "posts": 157,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20423,
-      "comentarios": 130,
-      "shares": 112,
+      "reacoes": 20599,
+      "comentarios": 131,
+      "shares": 113,
       "engajamento_pct": 0.0,
       "posts_recentes": 14,
       "views_recentes": 0,
@@ -65,14 +65,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 134,
+      "posts": 138,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1422,
-      "comentarios": 9,
-      "shares": 25,
+      "reacoes": 1476,
+      "comentarios": 11,
+      "shares": 28,
       "engajamento_pct": 0.0,
-      "posts_recentes": 38,
+      "posts_recentes": 42,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 126,
+      "posts": 142,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1617,
-      "comentarios": 6,
-      "shares": 3,
+      "reacoes": 1892,
+      "comentarios": 7,
+      "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 36,
+      "posts_recentes": 52,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 84,
+      "posts": 88,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 486,
+      "reacoes": 507,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 29,
+      "posts_recentes": 33,
       "views_recentes": 0,
       "melhores_recentes": [
         {

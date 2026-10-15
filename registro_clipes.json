@@ -4863,7 +4863,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-05_02_nota91_O_segredo_de_Steve_Jobs_caminhar_sem_celular_short_9x16.mp4",
       "criado_em": "2026-10-05T11:12:15+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-15T16:04:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #53: O segredo de Steve Jobs: caminhar sem celular",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "53cbc288a6b62334d090d97ad6183e0df41f740431cb543fecacb2489c3eea6d": {
       "arquivo": "2026-10-05_03_nota89_A_licao_do_monge_que_varria_escadas_em_silencio_short_9x16.mp4",
@@ -6031,7 +6039,15 @@
       "canal": "modofuturo",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-09_03_nota80_NVIDIA_Apple_e_AMD_dependem_de_1_unica_empresa_de_chips_short_9x16.mp4",
       "criado_em": "2026-10-09T09:33:06+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-15T16:03:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "NVIDIA, Apple e AMD dependem de 1 única empresa de chips",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "b32d0d9fbf6482c86788954a686b7933e7c48126432d39534f53d8c0f2cbf365": {
       "arquivo": "2026-10-09_04_nota76_O_ritual_de_vestimentas_para_entrar_na_sala_limpa_de_microch_short_9x16.mp4",
@@ -7319,7 +7335,15 @@
       "canal": "camarim.kpop",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_03_nota89_HYUNJIN_do_Stray_Kids_gasta_3_meses_de_conversa_em_1_dia_short_9x16.mp4",
       "criado_em": "2026-10-10T07:47:19+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-15T14:13:00.000Z",
+          "canal": "camarim.kpop",
+          "detalhe": "HYUNJIN do Stray Kids gasta 3 meses de conversa em 1 dia",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "74ee9a5f86a346e634a112f4e01e868153d5b227af054988e73370de88610495": {
       "arquivo": "2026-10-10_04_nota87_CHANGBIN_e_SEUNGMIN_do_Stray_Kids_revelam_o_sentido_da_letra_short_9x16.mp4",

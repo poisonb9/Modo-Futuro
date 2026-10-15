@@ -5791,7 +5791,15 @@
       "canal": "cozinha.importada",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-08_02_nota92_Almondegas_de_linguica_italiana_sem_esforco_short_9x16.mp4",
       "criado_em": "2026-10-08T20:42:45+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-15T16:17:00.000Z",
+          "canal": "cozinha.importada",
+          "detalhe": "Almôndegas de linguiça italiana sem esforço",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "d99fad8af87c1b67f055036dd047ef074bf6758e79c694268f6e6eda87918714": {
       "arquivo": "2026-10-08_03_nota90_Sopa_italiana_finalizada_com_feijao_branco_e_parmesao_short_9x16.mp4",
@@ -7559,7 +7567,15 @@
       "canal": "camarim.kpop",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_08_nota80_GEHLEE_DO_UNIS_REVELA_BASTIDORES_DE_SHOW_DO_KATSEYE_short_9x16.mp4",
       "criado_em": "2026-10-10T11:27:22+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-15T17:37:00.000Z",
+          "canal": "camarim.kpop",
+          "detalhe": "GEHLEE DO UNIS REVELA BASTIDORES DE SHOW DO KATSEYE",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "25bc986cf01954f917e51d0fde0be0316cea6a020e4be975219ae5ac227c07d1": {
       "arquivo": "2026-10-10_01_nota91_A_treinadora_secreta_que_batalha_contra_voce_usando_seu_prop_short_9x16.mp4",

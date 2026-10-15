@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-15T01:24:25",
+  "medido_em": "2026-10-15T07:19:42",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,16 +15,20 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 118,
+      "posts": 120,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1101,
+      "reacoes": 1127,
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 34,
+      "posts_recentes": 36,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Uma fábrica da Intel do tamanho de 16 campos de futebol\n\nA f"
+        },
         {
           "views": 0,
           "titulo": "POWERVIA: ENERGIA POR TRÁS E SINAL PELA FRENTE NO CHIP DA IN"
@@ -32,10 +36,6 @@
         {
           "views": 0,
           "titulo": "POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ Para "
-        },
-        {
-          "views": 0,
-          "titulo": "POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ\n\nPara"
         }
       ]
     },
@@ -43,11 +43,11 @@
       "posts": 158,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20643,
+      "reacoes": 20788,
       "comentarios": 131,
       "shares": 113,
       "engajamento_pct": 0.0,
-      "posts_recentes": 15,
+      "posts_recentes": 13,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -60,19 +60,19 @@
         },
         {
           "views": 0,
-          "titulo": "O PINCEL ESPATULA DE CORRETIVO PARA ILUMINAR O ROSTO Entenda"
+          "titulo": "LÁPIS CORRETIVO DE 2 PONTAS PARA DESTACAR O AEGYO-SAL Confir"
         }
       ]
     },
     "semanestesia.pod": {
-      "posts": 138,
+      "posts": 142,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1476,
+      "reacoes": 1486,
       "comentarios": 11,
       "shares": 28,
       "engajamento_pct": 0.0,
-      "posts_recentes": 34,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,14 +90,14 @@
       ]
     },
     "atefalhar": {
-      "posts": 142,
+      "posts": 146,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1892,
+      "reacoes": 1978,
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 44,
+      "posts_recentes": 48,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 88,
+      "posts": 92,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 507,
+      "reacoes": 531,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 33,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {

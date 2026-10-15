@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-15T12:04:33.910362+00:00",
+ "quando": "2026-10-15T23:18:11.766655+00:00",
  "termos": {
-  "whey": "2026-10-14T22:39:22.088981+00:00",
+  "whey": "2026-10-15T23:18:11.766655+00:00",
   "meia": "2026-10-15T00:52:28.284967+00:00",
   "chapéu": "2026-10-15T12:04:33.910362+00:00",
   "rádio": "2026-10-15T00:52:28.284967+00:00",
@@ -605,14 +605,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-09T01:27:52.583766+00:00"
+   "visto": "2026-10-15T23:18:11.766655+00:00"
   },
   {
    "id": "MLB25857309",
    "nome": "Whey Protein Morango Muscle Whey 900g - XPro Nutrition",
-   "preco": 39.99,
+   "preco": 39.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_945526-MLA100123402253_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-6807819220?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-7753741460?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -621,14 +621,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-09T01:27:52.583766+00:00"
+   "visto": "2026-10-15T23:18:11.766655+00:00"
   },
   {
    "id": "MLB79111845",
    "nome": "Whey Protein 3w 900g Whey Nutra Growth",
-   "preco": 85.57,
+   "preco": 89.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_888488-MLA117427814935_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7618278046?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5347621781?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -637,14 +637,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-09T01:27:52.583766+00:00"
+   "visto": "2026-10-15T23:18:11.766655+00:00"
   },
   {
    "id": "MLB79943061",
    "nome": "Whey Protein 3w 900g Whey Nutra Growth cookies",
-   "preco": 97.0,
+   "preco": 85.85,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_711357-MLA116740095522_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5309408721?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5351647671?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -653,14 +653,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-09T01:27:52.583766+00:00"
+   "visto": "2026-10-15T23:18:11.766655+00:00"
   },
   {
    "id": "MLB79943062",
    "nome": "Whey Protein 3w 900g Whey Nutra Growth Baunilha",
-   "preco": 97.0,
+   "preco": 85.85,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_658226-MLA118290892491_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5309434009?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5351647669?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-09T01:27:52.583766+00:00"
+   "visto": "2026-10-15T23:18:11.766655+00:00"
   },
   {
    "id": "MLB79943063",
@@ -1086,6 +1086,22 @@
    "origem": "mercadolivre",
    "busca": "grade proteção",
    "visto": "2026-10-15T12:04:33.910362+00:00"
+  },
+  {
+   "id": "MLB23183294",
+   "nome": "Whey Protein Concentrado Whey Rt Fullife 907g",
+   "preco": 68.5,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_831635-MLA99937498893_112025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4721091977?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB122102",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-15T23:18:11.766655+00:00"
   }
  ]
 }

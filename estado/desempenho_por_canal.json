@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-16T01:12:29",
+  "medido_em": "2026-10-16T07:03:14",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 120,
+      "posts": 124,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1127,
+      "reacoes": 1155,
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 31,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -43,7 +43,7 @@
       "posts": 158,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20788,
+      "reacoes": 20847,
       "comentarios": 131,
       "shares": 113,
       "engajamento_pct": 0.0,
@@ -65,14 +65,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 142,
+      "posts": 146,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1486,
+      "reacoes": 1507,
       "comentarios": 11,
-      "shares": 28,
+      "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 34,
+      "posts_recentes": 38,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -115,14 +115,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 92,
+      "posts": 95,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 531,
+      "reacoes": 561,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 31,
+      "posts_recentes": 35,
       "views_recentes": 0,
       "melhores_recentes": [
         {

@@ -1,17 +1,25 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-19;08:14;semanestesia.pod;agendado;Protocolo;6ad25417dcd88593548b7d3e
+2026-10-18;19:40;semanestesia.pod;agendado;Seu cérebro desiste antes;6ad2540c7e909c1a3d44975a
+2026-10-18;16:27;semanestesia.pod;agendado;Protocolo;6ad254067e909c1a3d449590
+2026-10-18;13:12;modofuturo;agendado;As duas empresas que constroem as máquinas do futuro dos chips;6ad248787521b87606188822
 2026-10-18;13:08;semanestesia.pod;agendado;Protocolo;6ad15c9c9597cd166258059e
 2026-10-18;08:22;semanestesia.pod;agendado;Protocolo;6ad15c8eee2c696029ac583d
+2026-10-18;08:10;modofuturo;agendado;O gargalo de transporte que consome a energia das GPUs de IA;6ad24871709e3eab3f95e934
+2026-10-17;19:39;modofuturo;agendado;O salto de 50% de velocidade e 70% menos energia em chips 3D;6ad24867709e3eab3f95e7c0
 2026-10-17;19:37;semanestesia.pod;agendado;Protocolo;6ad15c854ed7d375a435c555
 2026-10-17;16:30;semanestesia.pod;agendado;Protocolo;6ad15c739597cd166257faa8
+2026-10-17;16:28;modofuturo;agendado;O alinhamento cego de bilhões de transistores sem segunda chance;6ad2485ecb7df3516148c20e
+2026-10-17;13:14;modofuturo;agendado;A força de Van der Waals que funde placas de silício sem cola;6ad248567521b876061881d9
 2026-10-17;13:11;semanestesia.pod;agendado;Protocolo;6ad15c6ee991a49db3b99a61
 2026-10-17;08:11;semanestesia.pod;agendado;Protocolo;6ad15c67ee2c696029ac5271
 2026-10-16;19:39;modofuturo;agendado;A linha microscópica que une 2 wafers após 30 dias de fabricação;6ad02076ba6d896f9b5140dd
 2026-10-16;16:35;semanestesia.pod;agendado;Protocolo;6ad15c62a82f34dbe136eddb
 2026-10-16;16:32;modofuturo;agendado;A SALA LIMPA DE US$ 200 MILHÕES MONTADA DENTRO DA UNIVERSIDADE;6ad020545f62d3c5af12a485
 2026-10-16;14:28;camarim.kpop;agendado;BANG CHAN admite ter medo do rank de FELIX no League of Legends;6ad14284c26e1a0717596c4a
-2026-10-16;13:13;semanestesia.pod;agendado;Protocolo;6acff669102b7fd4a490d230
-2026-10-16;13:05;modofuturo;agendado;O SALTO DE 47% NAS VAGAS DE CHIPS NA COREIA DO SUL;6ad0204a29c470dd80b79389
-2026-10-16;11:15;camarim.kpop;agendado;YUNAH do ILLIT impressiona produtor ao liberar vocal de puro rock;6acff62f68efdf6f76c5fb50
+2026-10-16;13:22;semanestesia.pod;postado;Protocolo;6acff669102b7fd4a490d230
+2026-10-16;13:07;modofuturo;postado;O SALTO DE 47% NAS VAGAS DE CHIPS NA COREIA DO SUL;6ad0204a29c470dd80b79389
+2026-10-16;11:17;camarim.kpop;postado;YUNAH do ILLIT impressiona produtor ao liberar vocal de puro rock;6acff62f68efdf6f76c5fb50
 2026-10-16;08:24;semanestesia.pod;postado;Protocolo;6acff66661e981448aa7b199
 2026-10-16;08:22;modofuturo;postado;A MEGAFÁBRICA DE US$ 35 BILHÕES DA SAMSUNG NO TEXAS;6ad020415f62d3c5af129f81
 2026-10-16;08:17;semanestesia.pod;postado;Protocolo;6acff65c68efdf6f76c6001e

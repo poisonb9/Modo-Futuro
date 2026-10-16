@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-15T22:09:17",
+  "medido_em": "2026-10-16T01:12:29",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 31,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -47,7 +47,7 @@
       "comentarios": 131,
       "shares": 113,
       "engajamento_pct": 0.0,
-      "posts_recentes": 7,
+      "posts_recentes": 6,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -72,7 +72,7 @@
       "comentarios": 11,
       "shares": 28,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 34,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -90,27 +90,27 @@
       ]
     },
     "atefalhar": {
-      "posts": 146,
+      "posts": 147,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1978,
+      "reacoes": 2024,
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 42,
+      "posts_recentes": 41,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANIT"
-        },
-        {
-          "views": 0,
-          "titulo": "VALENTÃO FRANCIS ENCARA TIMMY SEM MEDO E ACABA NO VASO SANIT"
-        },
-        {
-          "views": 0,
           "titulo": "TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL "
+        },
+        {
+          "views": 0,
+          "titulo": "TIMMY TURNER RECUPERA SUAS EMOÇÕES ANTES DE UM SALTO MORTAL\n"
+        },
+        {
+          "views": 0,
+          "titulo": "TIMMY TURNER FAZ O DESEJO DE DELETAR TODAS AS SUAS EMOÇÕES H"
         }
       ]
     },

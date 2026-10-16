@@ -1,14 +1,14 @@
 {
- "quando": "2026-10-15T23:18:11.766655+00:00",
+ "quando": "2026-10-16T01:41:51.671368+00:00",
  "termos": {
   "whey": "2026-10-15T23:18:11.766655+00:00",
-  "meia": "2026-10-15T00:52:28.284967+00:00",
+  "meia": "2026-10-16T01:41:51.671368+00:00",
   "chapéu": "2026-10-15T12:04:33.910362+00:00",
-  "rádio": "2026-10-15T00:52:28.284967+00:00",
-  "pneu": "2026-10-15T00:52:28.284967+00:00",
-  "bateria": "2026-10-15T00:52:28.284967+00:00",
-  "bateria 60v": "2026-10-15T00:52:28.284967+00:00",
-  "bateria 60a": "2026-10-15T00:52:28.284967+00:00",
+  "rádio": "2026-10-16T01:41:51.671368+00:00",
+  "pneu": "2026-10-16T01:41:51.671368+00:00",
+  "bateria": "2026-10-16T01:41:51.671368+00:00",
+  "bateria 60v": "2026-10-16T01:41:51.671368+00:00",
+  "bateria 60a": "2026-10-16T01:41:51.671368+00:00",
   "ex2": "2026-10-15T12:04:33.910362+00:00",
   "grade proteção ex2": "2026-10-15T12:04:33.910362+00:00",
   "grade proteção": "2026-10-15T12:04:33.910362+00:00",
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB26444945",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB44684359",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB25675555",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB24692711",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB24692716",
@@ -205,7 +205,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB61784268",
@@ -242,9 +242,9 @@
   {
    "id": "MLB35161880",
    "nome": "Microfone Ptt Radio Px 4 Pinos Voyager",
-   "preco": 76.36,
+   "preco": 95.7,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_668679-MLA99983118049_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4071088989?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4019798347?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB418301",
@@ -253,7 +253,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB70104297",
@@ -269,14 +269,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB54433666",
    "nome": "Botão Potenciômetro Duplo 50k Px Radio Voyager Ligar",
-   "preco": 175.2,
+   "preco": 168.07,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_717377-MLA91442999835_092025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4748794619?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-6402802652?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB38166",
@@ -285,7 +285,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB25588931",
@@ -301,14 +301,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB35743965",
    "nome": "Rádio Px Voyager Ares II 480 Canais 24.715-30.105mhz AM/FM/SSB",
-   "preco": 1559.0,
+   "preco": 1399.9,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_687167-MLA100010523487_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7609291416?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4918836591?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB2906",
@@ -317,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB78396583",
@@ -349,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB72882606",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB44019921",
@@ -397,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB72681733",
@@ -413,12 +413,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB27057277",
    "nome": "Estante Caixa Bateria Power -powerss",
-   "preco": 322.0,
+   "preco": 351.82,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_904125-MLA95979961392_102025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-3994966455?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -429,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-06T01:55:19.467392+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB66398853",
@@ -445,7 +445,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB76828668",
@@ -461,7 +461,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB46001471",
@@ -477,7 +477,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB46001231",
@@ -493,7 +493,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB52260545",
@@ -509,7 +509,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB46016136",
@@ -525,7 +525,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB51647079",
@@ -541,7 +541,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB74914144",
@@ -557,7 +557,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB11904050",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   },
   {
    "id": "MLB24669290",
@@ -1102,6 +1102,22 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-10-15T23:18:11.766655+00:00"
+  },
+  {
+   "id": "MLB57356861",
+   "nome": "Pneu 700x45 Speed Pirelli Touring Pneu Bike Hibrida + Câmara Branco",
+   "preco": 79.99,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_717365-MLA96424467360_102025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7737087150?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB9203",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "pneu",
+   "visto": "2026-10-16T01:41:51.671368+00:00"
   }
  ]
 }

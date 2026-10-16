@@ -1,5 +1,50 @@
 [
  {
+  "loja": "Oceane",
+  "tipo": "promotion",
+  "titulo": "Ação Ingresso Filme",
+  "codigo": "",
+  "fim": "2026-11-04T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Fganhe-brinde-oceane",
+  "termos": ""
+ },
+ {
+  "loja": "Oceane",
+  "tipo": "promotion",
+  "titulo": "Esquenta Black | Base Cushion por R$59.90 + ganhe esponja",
+  "codigo": "",
+  "fim": "2026-10-27T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Fesquenta-black-oceane",
+  "termos": ""
+ },
+ {
+  "loja": "Oceane",
+  "tipo": "promotion",
+  "titulo": "Esquenta Black | Just Glow por R$49.90",
+  "codigo": "",
+  "fim": "2026-11-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Filuminador-rosa-just-glow-bouquet-oecane-ap2001256c0306f%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Oceane",
+  "tipo": "promotion",
+  "titulo": "Semana do Maquiador | progressiva de brindes a partir de R$99",
+  "codigo": "",
+  "fim": "2026-10-21T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Fpromocao-progressiva",
+  "termos": ""
+ },
+ {
+  "loja": "Oceane",
+  "tipo": "promotion",
+  "titulo": "Progressiva Máscara Facial: 2=10%; 3=15% + desconto no APP",
+  "codigo": "",
+  "fim": "2026-10-20T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Fdesconto-progressivo",
+  "termos": ""
+ },
+ {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "10% OFF na promoção COMP10 em produtos selecionados",
@@ -560,37 +605,10 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
-  "titulo": "15% OFF em produtos da campanha Classics",
-  "codigo": "CLASSICS15",
-  "fim": "2026-10-16T13:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1CLASSICS15",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
   "titulo": "15% OFF em produtos selecionados da campanha ATTACK15",
   "codigo": "ATTACK15",
   "fim": "2026-10-31T13:00:00+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1ATTACK15",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "30% OFF em produtos selecionados da campanha ATTACK30",
-  "codigo": "ATTACK30",
-  "fim": "2026-10-16T13:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1ATTACK30",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "15% OFF em produtos participantes da campanha HyperX",
-  "codigo": "HYPERX15",
-  "fim": "2026-10-16T13:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1HYPERX15",
   "termos": ""
  },
  {
@@ -947,28 +965,37 @@
  {
   "loja": "AliExpress · Metal Beast Store",
   "tipo": "voucher",
-  "titulo": "R$ 5,47 OFF acima de R$ 82,10",
+  "titulo": "R$ 5,49 OFF acima de R$ 82,30",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV6Vd3nyfDuyjnn9r6LFmQQUyLpAomvCGkGKO0NIXfbJbE8wjVLRT3vuBQdHbk4ENhRdUG1GZb9h5CujuPMPopzfMDcCVkY16oUhDLE7aKL2CaVBO9CDuOHFDUnHreTsGuLkOLu1MsqZk6cPP2XHpJaG99b5xhNE3UKfagLgwGXdefwVM5z5TVya8Kvt3HI9dTRrHLlP7c4RfTpki5TRnJdjZ67DIzBtFTdGDYoJEfuacF2PQheMa3eWH1NIXeZfgFXF5QGfpX3DwRuiOANgT671eF3yqI8yiICjZ7a3PZyFzVoCAzmghpJI1IflUZVDa6AYr37mOdfvnHpK1Dvgc92Mncd7pejESKvqNIdzrfAuBBvU4Oe4jeoOOs9tLHvUhWrpLKRc2xvyrTX7MQ6ha0NxNPeYzS4qtw98AzDcGkUcByHwk1eiXxU0kAuaBgMgjPqVsQJ9WCwQlwuwilqfx7dq72Ufr6e1C9w9Gf8LUOJnV",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV6Vd3nyfDuyjnn9r6LFmQQUyLpAomvddWRWqHixxG7c7O0mHm5VCPxnGAOauf81KQ6g3N1TluGubQchDCmhxvBZaGC4XzbTwPEJAloRdk10gfIK9q3yp5uGiluCfbgfj6NjxtgUpRiajwR6mbpYSTjWsWjwPOCtSdSj7IinYY8cf6IlzVSKnvm6opDwh5kwP1YlcOXLrZd7ga9tGcjaaPK0H6RjAAX8OnJQs3dXnFFYKHCaw3GjYFowUUnrrsr8YsgewNiCp9BHJLqGomzRrO0YxZUstqauDf3oNsQhD1qaD6jj05B2H6lh5ppm69vkmZ20hYg6tbYwmvzuF1qdxQfIoIJKdUqAak8uCi9hUa8X6AXlvRwaviXVloCtO6kNely2cgWcZN0NtuVaSpBPmVTKPTJhgWqmIEguuUxkMDxDLC0kOqHSK0zdfYW2Z4elEJOwIcl493MO2FqvBkGNvu2idvIDjONxHiZyT31BDWpJz",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
+ },
+ {
+  "loja": "AliExpress · ABIR Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 164,64 OFF acima de R$ 1097,60",
+  "codigo": "MEGA30",
+  "fim": "2026-10-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxfik69tdSArBkA90QTI1wkRzxgdNx4ntYkSkoNqRDCbGaIJ6C4p4fEAhvapHd8vaOb1JzDLxTu8DBq7a9ux0RmGlQGJ0n7YX4mXtXbTXcLhioWHRDKruZeYqITDIfFKKdS9tfTkcglPRb7ZNHyxyZKVrO9HfR3xIaaFXd6uqe8RxQL5m6aCD8S7kyikpXFnJpx9iI9qsvfIhKF83dYLJJGaGZRiZCsDkwijeTejkeLXDYifAWw0XvBbo0nYpQlSowgGeDSmqcowUVs0eKq5dGEezh2UKVvoEzwOASISkVAstzSq4YWLPDfz6iRBUzQCJlWjDMpS36LIXGGXV9eo38tIdoUPIYHWZVZTslPnQcwDSDl5GyUt9W01BtACCpWiVkmlzBjpX11jWJm6Z1xRrWbMFI1LpsuLkIKkV76hESSmu9NgHFFqBZphy8F4LdKrQw4C7YFpGRRyYYaWQmi64Rp6OMWYIpcrr5Z5Z6XjB6bNABRKaKmW8p0VhdDiPggMpcgiFlD0C14dNlMXtt4MZLRgjR7nAbNn4Bfiubh9fY3KMs7uWhCRWA9NXJSoRXOIHqebOjPZsKeUsZzhj30okztzpRSvIVviqLky1AJXTLPJmbOjgQbQni8Qt5n247mjMqXoDKtYp1jlUEKsAF7DRxybh",
+  "termos": "Vale na loja ABIR Official Store do AliExpress. Ex.: Aspirador Robô ABIR X9, Lidar Duplo, Sucção de 6500pa, Limpeza UV, Map"
  },
  {
   "loja": "AliExpress · maono Official Store",
   "tipo": "voucher",
-  "titulo": "R$ 16,42 OFF acima de R$ 273,60",
+  "titulo": "R$ 16,46 OFF acima de R$ 274,40",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xk6m5iTQFuoI405ckdLzx7U9nAMrLJ80z2QrFrDdsnIHc7YlKeUR6SndxDAtdRr5TEj7RiE3BSwB9P8UjgS4IZDeudsS95BbmQOrH99MTdKzgq3Uz7Q3lnRq9lxFMS0sMwiSVIE6RJnV0w0rtJcuqktSFqNlKReLQsi17qomHi6LzEhvszjb0nufVsT0PIwTWn8UeZyIONN4S9expmna0MC34kIpzTdt50MjNQuwqSiJjzVnX29BAD7HKVSfSue7XCuF1wNTd9Nw1ZWUu0GCEzwVfYLqwW9iMS9mxbiolItezrrPKYwKTbFzUdQIbXZ3uffXBWGmxDcVbZuVBs57Aso22whguCXNsLS2wX5DgxkvBRaPfu2ErPyGsStAO7p580042LCdbyzjYOdJz8BbTSePtggFqDqNd9slkrLHj0wfg29g0UsJd9Yato71cnwK79Y6A1KWi1rfme8zIGjDj0cSosqSwcpRCGMRIKFq2vlt",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xk6m5iTQFuoI405ckdLzx7U9nAMrLJKBDPa2OE17NPGBDl1G9SfMJXAwQKuJxi4EX8Rf8NOoqFbqTtbUHG19in2Fs0Xvrj77Txvbbe0K9B6SGGNdhHYFpjwbmj316ih1R5FCB1P5NO3fnDCpS08jX0sqqiM4idyN2iJkghIMK7rltraALPKNS5bJJXhWeViOpFiB2b3wmenOy2I0OHUNGz0R2yavBJ0oZ36d3ua2Zw3STITkDHBaBtWda2atQQjLZRtGqz0rCWLvZylPPUx87r0vT9H9EeiRCVN1a90M5pLhWnbhaEXk7thafpjkKHqplTe8X7IO9qtpEFnS1qRchjiomEvNgXWQFnTQSO9AWFx0xGso4N69aYgSlH4EPX2wuzvBfr0PAgO6Y0Dyxlbi81Pgc1dj3yjiWafdFlPC1EumY4YCgxYeVRNnYBZjSbk4IfCktU6evBwbckQ0nrJ0dbfIz8ZqmdRNt6FuEz2ZIUrp",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
  },
  {
-  "loja": "AliExpress · EMEET Official Store",
+  "loja": "AliExpress · Star Custom Store",
   "tipo": "voucher",
-  "titulo": "R$ 17,18 OFF acima de R$ 17,10",
-  "codigo": "BRKZ79",
-  "fim": "2026-12-31T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGupI0xroRTBTpt79ZwzNqiYkDVYbs8QDghkW0XvoPCRhG8ps9z7IxS8vfz792v0fH26891n84hj5YvzY1jXdX01XqcgGhjYbNvHlrq0pyPBVcNRdG0TVuPBURDCYljWc4pKxnBw3sIevsAYVsogrCwEcX3HPt6lg5YzRKU1Bq6cPXCz51Y7muc7e1YCOtCqrZbOXE7z0HCMekB1Ps42F7AnX46auOolMMB278CdYr9rtnROb4lcbj0397z6QgUBkMAc2LleaxUUxS5JJ6FNeE3Sjo2y8W3kfmtdVM8O3rnF3DHOPPmxJwodHdJzccHog7SKRTk1RWYue45AHyIASoJEaYxP2PzuQJVJoRMq1Oq5bfFzak3eHUFmdlApwbwnuwWfE1Ek8cJEzqFdJ6qPEUC8AEjRxw1K6APY3jmRuIHnoxjoNfGsBKuO3Kw3DPOjSOW5Rvoc4osOQK3nqdz1mHOeOuuAmUkoEFEZMDtMbN6i8CnE6bF0ra0UGIb8unkB9Wp0Ohv2OLKzE4I5fh0bavALQlUGVctaaWAGVr0vVfcxnM0fRvCdlFZXgvjaUyWK1mdEVa7meou6cnvZ65RvWU3elTOzNx0b826mO4VqXNTqKixENeTub10K5ZxdQ43zq90RJHQCc7x16bHdWT5K7fv1",
-  "termos": "Vale na loja EMEET Official Store do AliExpress. Ex.: Caixa de Som Sem Fio para Conferências EMEET 360 °   Microfone para Re"
+  "titulo": "R$ 4,93 OFF acima de R$ 4,90",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-10-27T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFlm3nGvHC2vpaEPdLJtmcvjWkRQa629CHlzmDMKn26pXSMtObPlYF03EGO9k7QFw1Z0LrH62zlFW8A0gH4aLB8D9QRnPqXP6Tb92pYyMiIFNAeiYlPf3KoOwzaVIbvxvqF4Equn0u3XMBNH4OePizniAXAglTByXGREB50jghYIXoeKpFDvIbB1sxfIUAxfVkqIJr8u515JiCkS3yJhH35PcanpzziYQc2F6mKMib6fkrZmEaTQSRg9bQCQB8fpCCkdZTLrbtKcY9gxYwAkRHAVCFNeVw9MFspjVcrEjHAm8k4GAQ0ilSrQ5iLxdEWi6ZOr6PjZs3tLXHsWIA6NzsjJMgefwICu0gmJWGHNa4njRtxiRpEjvPJ05rcazDVcprSO7SZe3DCCOoeA2ZK40tasInu2UGkT8FjXifQqryi7fa3TtobhbqA5g3WaUG1hYIrCsmJciHEMt9ZuJ",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

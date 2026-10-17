@@ -1,5 +1,5 @@
 {
-  "quando": "2026-10-16T16:34:04+00:00",
+  "quando": "2026-10-17T14:52:30+00:00",
   "programas": {
     "Nike BR": "joined",
     "Kabum BR": "joined",
@@ -14,7 +14,6 @@
     "Drogal BR": "joined",
     "Camilovers BR": "joined",
     "Carraro BR": "joined",
-    "Leveros BR": "joined",
     "Shark-Ninja BR": "joined",
     "Clovis Calçados BR": "joined",
     "Arno BR": "joined",
@@ -71,6 +70,7 @@
     "Truss BR": "rejected",
     "Dark Lab BR": "rejected",
     "Farmácia Preço Popular BR": "rejected",
-    "Zee Now BR": "rejected"
+    "Zee Now BR": "rejected",
+    "Leveros BR": "suspended"
   }
 }

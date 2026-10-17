@@ -4687,7 +4687,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-05_06_nota84_NAO_E_PREGUICA_NEM_FRAQUEZA_E_APENAS_UMA_QUEDA_NEUROQUIMICA_short_9x16.mp4",
       "criado_em": "2026-10-05T04:23:58+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-17T16:11:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #44: NÃO É PREGUIÇA NEM FRAQUEZA: É APENAS UMA QUEDA NEUROQU",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "346baff24ef50a4ba9cd9d7a771314083ff12d1644f2730a9275c7c95fe952e9": {
       "arquivo": "2026-10-05_07_nota82_1_PEQUENA_VITORIA_O_JEITO_CERTO_DE_ACENDER_O_MOMENTUM_short_9x16.mp4",
@@ -5876,7 +5884,15 @@
       "canal": "cozinha.importada",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-08_03_nota90_Sopa_italiana_finalizada_com_feijao_branco_e_parmesao_short_9x16.mp4",
       "criado_em": "2026-10-08T20:42:47+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-17T16:10:00.000Z",
+          "canal": "cozinha.importada",
+          "detalhe": "Sopa italiana finalizada com feijão branco e parmesão",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "cc9169caa2a3f579b7ca73decc7c6e82f7db40b96b2b538805cc8e024ee4570e": {
       "arquivo": "2026-10-08_04_nota88_Curry_de_carne_moida_com_espinafre_e_ervilhas_short_9x16.mp4",
@@ -6988,7 +7004,15 @@
       "canal": "modofuturo",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_01_nota93_A_forca_de_Van_der_Waals_que_funde_placas_de_silicio_sem_col_short_9x16.mp4",
       "criado_em": "2026-10-10T01:13:19+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-17T16:14:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A força de Van der Waals que funde placas de silício sem cola",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "f2c8a77651ec388dda77d6a7836977cc4dbdf4baddee0df558bea7b2a13a8be5": {
       "arquivo": "2026-10-10_02_nota91_O_gargalo_de_transporte_que_consome_a_energia_das_GPUs_de_IA_short_9x16.mp4",

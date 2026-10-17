@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-17T04:13:07",
+  "medido_em": "2026-10-17T09:12:53",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,16 +15,20 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 128,
+      "posts": 142,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1177,
+      "reacoes": 1252,
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 33,
+      "posts_recentes": 47,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Uma fábrica da Intel do tamanho de 16 campos de futebol A fá"
+        },
         {
           "views": 0,
           "titulo": "Uma fábrica da Intel do tamanho de 16 campos de futebol\n\nA f"
@@ -32,10 +36,6 @@
         {
           "views": 0,
           "titulo": "POWERVIA: ENERGIA POR TRÁS E SINAL PELA FRENTE NO CHIP DA IN"
-        },
-        {
-          "views": 0,
-          "titulo": "POR QUE A VELOCIDADE DOS PROCESSADORES TRAVOU EM 4 GHZ Para "
         }
       ]
     },
@@ -61,14 +61,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 149,
+      "posts": 162,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1518,
+      "reacoes": 1552,
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 34,
+      "posts_recentes": 47,
       "views_recentes": 0,
       "melhores_recentes": [
         {

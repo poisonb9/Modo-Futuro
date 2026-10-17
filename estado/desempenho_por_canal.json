@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-17T17:02:14",
+  "medido_em": "2026-10-17T19:17:07",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -136,14 +136,14 @@
       ]
     },
     "camarim.kpop": {
-      "posts": 67,
+      "posts": 82,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 7318,
-      "comentarios": 62,
-      "shares": 100,
+      "reacoes": 8051,
+      "comentarios": 68,
+      "shares": 103,
       "engajamento_pct": 0.0,
-      "posts_recentes": 44,
+      "posts_recentes": 59,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -152,11 +152,11 @@
         },
         {
           "views": 0,
-          "titulo": "WONHEE do ILLIT supera nota aguda difícil após 3 tentativas "
+          "titulo": "YUNAH do ILLIT impressiona produtor ao liberar vocal de puro"
         },
         {
           "views": 0,
-          "titulo": "STRAY KIDS fez show no estádio do TOTTENHAM e usou o chuveir"
+          "titulo": "WONHEE do ILLIT supera nota aguda difícil após 3 tentativas "
         }
       ]
     }

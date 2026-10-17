@@ -6924,7 +6924,15 @@
       "canal": "cozinha.importada",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_01_nota95_FRANGO_COM_BATATA_DOCE_POR_APENAS_1_37_COM_NOEL_DEYZEL_short_9x16.mp4",
       "criado_em": "2026-10-10T00:07:05+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-16T22:51:00.000Z",
+          "canal": "cozinha.importada",
+          "detalhe": "FRANGO COM BATATA DOCE POR APENAS $1,37 COM NOEL DEYZEL",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "9cf6f3f8639499fd0b716a8cf05092c27f24b523f0bd7ed1356560fd8b3b7901": {
       "arquivo": "2026-10-10_02_nota94_O_SHAKE_DE_PROTEINA_DE_1_38_PARA_O_CAFE_DA_MANHA_COM_NOEL_D_short_9x16.mp4",
@@ -6980,7 +6988,15 @@
       "canal": "modofuturo",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_03_nota88_A_linha_microscopica_que_une_2_wafers_apos_30_dias_de_fabric_short_9x16.mp4",
       "criado_em": "2026-10-10T01:13:23+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-16T22:39:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A linha microscópica que une 2 wafers após 30 dias de fabricação",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "80dff09e42fa1b9cedb6550eddcc7d66afad3a426bf0b38ff2de8b01c7ec9ca2": {
       "arquivo": "2026-10-10_04_nota87_O_alinhamento_cego_de_bilhoes_de_transistores_sem_segunda_ch_short_9x16.mp4",

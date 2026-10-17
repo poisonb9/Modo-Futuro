@@ -4663,7 +4663,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-05_04_nota87_VOCE_NAO_ESTA_QUEBRADO_O_EXCESSO_DE_ESTIMULO_TRAVOU_SUA_MENT_short_9x16.mp4",
       "criado_em": "2026-10-05T04:23:54+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-17T11:11:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #42: VOCÊ NÃO ESTÁ QUEBRADO: O EXCESSO DE ESTÍMULO TRAVOU SU",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "dcdc02a98bf18ebd527bc654095be8f02c363b8a1dc08d563191fc51594a5cde": {
       "arquivo": "2026-10-05_05_nota86_A_REGRA_DOS_15_MINUTOS_DOR_PRIMEIRO_PRAZER_ESTAVEL_DEPOIS_short_9x16.mp4",
@@ -5908,7 +5916,15 @@
       "canal": "cozinha.importada",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-08_06_nota85_Sopa_italiana_rica_com_macarrao_e_couve_kale_short_9x16.mp4",
       "criado_em": "2026-10-08T20:42:57+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-17T11:14:00.000Z",
+          "canal": "cozinha.importada",
+          "detalhe": "Sopa italiana rica com macarrão e couve kale",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "7f34d70d91377a3e660af7426b1da5efdce69fc50ffe600caf7376131ed7b7fc": {
       "arquivo": "2026-10-08_07_nota84_Molho_agridoce_perfeito_para_macarrao_de_arroz_short_9x16.mp4",

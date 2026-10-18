@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-18T00:53:30",
+  "medido_em": "2026-10-18T05:45:44",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 142,
+      "posts": 145,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1252,
+      "reacoes": 1265,
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 39,
+      "posts_recentes": 42,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -43,7 +43,7 @@
       "posts": 158,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 20880,
+      "reacoes": 20925,
       "comentarios": 131,
       "shares": 113,
       "engajamento_pct": 0.0,
@@ -61,14 +61,14 @@
       ]
     },
     "semanestesia.pod": {
-      "posts": 162,
+      "posts": 166,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1552,
+      "reacoes": 1575,
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 39,
+      "posts_recentes": 43,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -111,27 +111,27 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 106,
+      "posts": 110,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 642,
+      "reacoes": 658,
       "comentarios": 2,
       "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 37,
+      "posts_recentes": 41,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
+          "titulo": "Sopa italiana rica com macarrão e couve kale\n\nComo construir"
+        },
+        {
+          "views": 0,
+          "titulo": "Sopa italiana finalizada com feijão branco e parmesão\n\nO toq"
+        },
+        {
+          "views": 0,
           "titulo": "Ramen de Carne com Legumes em Uma So Panela\n\nTransforme o mi"
-        },
-        {
-          "views": 0,
-          "titulo": "Provando o Famoso Cookie da Levain Bakery em Nova York\n\nFomo"
-        },
-        {
-          "views": 0,
-          "titulo": "Petisco natural de carne de cordeiro desidratada para cachor"
         }
       ]
     },

@@ -4695,7 +4695,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-05_05_nota86_A_REGRA_DOS_15_MINUTOS_DOR_PRIMEIRO_PRAZER_ESTAVEL_DEPOIS_short_9x16.mp4",
       "criado_em": "2026-10-05T04:23:56+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-18T16:08:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #43: A REGRA DOS 15 MINUTOS: DOR PRIMEIRO, PRAZER ESTÁVEL DE",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "5e47e5375abec4631d87c3a00b42c522659296fe1897c8f6af940c20310130d9": {
       "arquivo": "2026-10-05_06_nota84_NAO_E_PREGUICA_NEM_FRAQUEZA_E_APENAS_UMA_QUEDA_NEUROQUIMICA_short_9x16.mp4",
@@ -6556,7 +6564,15 @@
       "canal": "cozinha.importada",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-09_02_nota88_Macarrao_cozido_com_1_colher_de_caldo_de_galinha_para_absorv_short_9x16.mp4",
       "criado_em": "2026-10-09T20:08:59+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-18T16:09:00.000Z",
+          "canal": "cozinha.importada",
+          "detalhe": "Macarrão cozido com 1 colher de caldo de galinha para absorver molho",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "5c2765dfe13fd6eabaf66253183fdfdc0b994d730b298712221ce5cc7ca71c4c": {
       "arquivo": "2026-10-09_03_nota83_Cebola_doce_ralada_com_todo_o_caldo_para_temperar_salada_short_9x16.mp4",
@@ -7132,7 +7148,15 @@
       "canal": "modofuturo",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_07_nota83_As_duas_empresas_que_constroem_as_maquinas_do_futuro_dos_chi_short_9x16.mp4",
       "criado_em": "2026-10-10T01:13:31+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-18T16:12:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "As duas empresas que constroem as máquinas do futuro dos chips",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "2c74f0bbd595c278aa9217cb698fb610b2ad0751a10fe61c91aafc0adf5bf57a": {
       "arquivo": "2026-10-10_01_nota90_O_destino_de_Yamcha_na_sala_de_gravidade_de_Infinite_World_short_9x16.mp4",

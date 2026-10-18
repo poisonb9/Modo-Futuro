@@ -1,14 +1,14 @@
 {
- "quando": "2026-10-18T05:08:58.306168+00:00",
+ "quando": "2026-10-18T09:54:56.848391+00:00",
  "termos": {
   "whey": "2026-10-18T05:08:58.306168+00:00",
-  "meia": "2026-10-17T06:10:36.607059+00:00",
+  "meia": "2026-10-18T09:54:56.848391+00:00",
   "chapéu": "2026-10-17T17:34:42.363212+00:00",
-  "rádio": "2026-10-17T06:10:36.607059+00:00",
-  "pneu": "2026-10-17T06:10:36.607059+00:00",
-  "bateria": "2026-10-17T06:10:36.607059+00:00",
-  "bateria 60v": "2026-10-17T06:10:36.607059+00:00",
-  "bateria 60a": "2026-10-17T06:10:36.607059+00:00",
+  "rádio": "2026-10-18T09:54:56.848391+00:00",
+  "pneu": "2026-10-18T09:54:56.848391+00:00",
+  "bateria": "2026-10-18T09:54:56.848391+00:00",
+  "bateria 60v": "2026-10-18T09:54:56.848391+00:00",
+  "bateria 60a": "2026-10-18T09:54:56.848391+00:00",
   "ex2": "2026-10-17T17:34:42.363212+00:00",
   "grade proteção ex2": "2026-10-17T17:34:42.363212+00:00",
   "grade proteção": "2026-10-17T17:34:42.363212+00:00",
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB26444945",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB44684359",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB25675555",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB24692711",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB24692716",
@@ -205,7 +205,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB61784268",
@@ -253,7 +253,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB70104297",
@@ -269,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB54433666",
@@ -285,14 +285,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB25588931",
    "nome": "Radio Px Voyager Vr- Cb2660",
-   "preco": 450.0,
+   "preco": 369.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_767040-MLU74102870634_012024-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4643971492?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-6444144432?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB2906",
@@ -301,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB35743965",
@@ -317,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB78396583",
@@ -349,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB72882606",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB44019921",
@@ -397,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB72681733",
@@ -413,7 +413,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB27057277",
@@ -429,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB66398853",
@@ -445,12 +445,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB76828668",
    "nome": "Scooter Bicicleta Bike Elétrica X15 1000w Bateria 60v Zurbe Cor Preto",
-   "preco": 8990.0,
+   "preco": 8177.66,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_973530-MLA114603285610_082026-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-5317791989?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -461,7 +461,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB46001471",
@@ -477,7 +477,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB46001231",
@@ -493,7 +493,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB52260545",
@@ -509,7 +509,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB46016136",
@@ -525,7 +525,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB51647079",
@@ -541,7 +541,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB74914144",
@@ -557,7 +557,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB11904050",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB24669290",
@@ -1117,7 +1117,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-17T06:10:36.607059+00:00"
+   "visto": "2026-10-18T09:54:56.848391+00:00"
   },
   {
    "id": "MLB27306461",

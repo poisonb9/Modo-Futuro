@@ -4719,7 +4719,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-05_07_nota82_1_PEQUENA_VITORIA_O_JEITO_CERTO_DE_ACENDER_O_MOMENTUM_short_9x16.mp4",
       "criado_em": "2026-10-05T04:24:01+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-18T11:22:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #45: 1 PEQUENA VITÓRIA: O JEITO CERTO DE ACENDER O MOMENTUM",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "4dcc1157aacd2fd1020564fbc49ed098e869d1bd9405ae8f7c98353073ad39fa": {
       "arquivo": "2026-10-05_08_nota80_1_UNICO_OBJETIVO_A_PERGUNTA_QUE_RESGATA_SEU_DIA_short_9x16.mp4",
@@ -6572,7 +6580,15 @@
       "canal": "cozinha.importada",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-09_05_nota80_A_classica_salada_de_macarrao_havaiana_servida_na_tigela_short_9x16.mp4",
       "criado_em": "2026-10-09T20:09:08+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-18T11:21:00.000Z",
+          "canal": "cozinha.importada",
+          "detalhe": "A clássica salada de macarrão havaiana servida na tigela",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "3ac9922545c0c828392f5dbf9159c191821f678b5dbee087ffd6162632375b11": {
       "arquivo": "2026-10-09_01_nota96_FELIX_do_Stray_Kids_revela_por_que_sua_mae_chorou_6_meses_pe_short_9x16.mp4",

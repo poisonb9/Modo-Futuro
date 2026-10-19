@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-18T17:35:49.746032+00:00",
+ "quando": "2026-10-19T05:18:25.440175+00:00",
  "termos": {
-  "whey": "2026-10-18T05:08:58.306168+00:00",
+  "whey": "2026-10-19T05:18:25.440175+00:00",
   "meia": "2026-10-18T09:54:56.848391+00:00",
   "chapéu": "2026-10-18T17:35:49.746032+00:00",
   "rádio": "2026-10-18T09:54:56.848391+00:00",
@@ -621,14 +621,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-18T05:08:58.306168+00:00"
+   "visto": "2026-10-19T05:18:25.440175+00:00"
   },
   {
    "id": "MLB79111845",
    "nome": "Whey Protein 3w 900g Whey Nutra Growth",
-   "preco": 109.9,
+   "preco": 89.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_888488-MLA117427814935_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5214206979?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5347621781?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -637,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-18T05:08:58.306168+00:00"
+   "visto": "2026-10-19T05:18:25.440175+00:00"
   },
   {
    "id": "MLB79943061",
@@ -660,7 +660,7 @@
    "nome": "Whey Protein 3w 900g Whey Nutra Growth Baunilha",
    "preco": 109.9,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_658226-MLA118290892491_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7706117928?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5351647669?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-18T05:08:58.306168+00:00"
+   "visto": "2026-10-19T05:18:25.440175+00:00"
   },
   {
    "id": "MLB79943063",
@@ -1101,7 +1101,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-18T05:08:58.306168+00:00"
+   "visto": "2026-10-19T05:18:25.440175+00:00"
   },
   {
    "id": "MLB57356861",
@@ -1133,7 +1133,23 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-18T05:08:58.306168+00:00"
+   "visto": "2026-10-19T05:18:25.440175+00:00"
+  },
+  {
+   "id": "MLB18488791",
+   "nome": "Whey 100% Max Titanium Whey Concentrado 900g Chocolate",
+   "preco": 125.77,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_809217-MLA113731936580_072026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-5412873817?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-19T05:18:25.440175+00:00"
   }
  ]
 }

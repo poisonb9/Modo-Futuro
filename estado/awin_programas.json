@@ -1,5 +1,5 @@
 {
-  "quando": "2026-10-18T14:45:32+00:00",
+  "quando": "2026-10-19T17:41:44+00:00",
   "programas": {
     "Nike BR": "joined",
     "Kabum BR": "joined",
@@ -34,7 +34,6 @@
     "Phebo BR": "pending",
     "IBBL BR": "pending",
     "Nutriage BR": "pending",
-    "Drogaria Catarinense BR": "pending",
     "Foxton BR": "pending",
     "Hering BR": "pending",
     "Cassol BR": "pending",
@@ -69,6 +68,7 @@
     "Loja do Mecanico BR": "rejected",
     "Truss BR": "rejected",
     "Dark Lab BR": "rejected",
+    "Drogaria Catarinense BR": "rejected",
     "Farmácia Preço Popular BR": "rejected",
     "Zee Now BR": "rejected",
     "Leveros BR": "suspended"

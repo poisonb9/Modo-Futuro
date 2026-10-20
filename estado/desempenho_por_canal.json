@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-20T00:14:49",
+  "medido_em": "2026-10-20T05:55:28",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -102,14 +102,14 @@
       ]
     },
     "cozinha.importada": {
-      "posts": 114,
+      "posts": 116,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 660,
+      "reacoes": 671,
       "comentarios": 0,
       "shares": 0,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 34,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -134,7 +134,7 @@
       "comentarios": 69,
       "shares": 105,
       "engajamento_pct": 0.0,
-      "posts_recentes": 38,
+      "posts_recentes": 36,
       "views_recentes": 0,
       "melhores_recentes": [
         {

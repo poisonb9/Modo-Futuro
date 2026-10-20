@@ -8244,7 +8244,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_05_nota85_O_TDAH_altera_a_percepcao_do_tempo_mas_prazos_rigidos_ativam_short_9x16.mp4",
       "criado_em": "2026-10-10T13:59:27+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-20T11:17:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #63: O TDAH altera a percepção do tempo mas prazos rígidos a",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "e52f1b297c716a819d98d79486b634f27ec78b34ac787b818f0be195d1c7e04b": {
       "arquivo": "2026-10-10_06_nota84_A_hipotese_da_dopamina_baixa_explica_a_perda_de_foco_constan_short_9x16.mp4",

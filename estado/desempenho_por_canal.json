@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-20T20:28:43",
+  "medido_em": "2026-10-20T23:47:59",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 147,
+      "posts": 148,
       "views": 0,
       "mediana_views": 0,
       "reacoes": 1281,
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 27,
+      "posts_recentes": 26,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -35,7 +35,7 @@
         },
         {
           "views": 0,
-          "titulo": "O salto de 50% de velocidade e 70% menos energia em chips 3D"
+          "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER\n\nEntrando "
         }
       ]
     },
@@ -43,8 +43,8 @@
       "posts": 158,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 21093,
-      "comentarios": 131,
+      "reacoes": 21124,
+      "comentarios": 132,
       "shares": 114,
       "engajamento_pct": 0.0,
       "posts_recentes": 0,
@@ -52,14 +52,14 @@
       "melhores_recentes": []
     },
     "semanestesia.pod": {
-      "posts": 174,
+      "posts": 177,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1613,
+      "reacoes": 1646,
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 37,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -84,7 +84,7 @@
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 11,
+      "posts_recentes": 10,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -105,11 +105,11 @@
       "posts": 116,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 671,
+      "reacoes": 677,
       "comentarios": 0,
-      "shares": 0,
+      "shares": 1,
       "engajamento_pct": 0.0,
-      "posts_recentes": 30,
+      "posts_recentes": 29,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -134,7 +134,7 @@
       "comentarios": 69,
       "shares": 105,
       "engajamento_pct": 0.0,
-      "posts_recentes": 31,
+      "posts_recentes": 29,
       "views_recentes": 0,
       "melhores_recentes": [
         {

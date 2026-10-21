@@ -6188,7 +6188,15 @@
       "canal": "atefalhar",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-09_06_nota78_O_canal_oficial_do_Wii_japones_para_pedir_comida_em_2009_short_9x16.mp4",
       "criado_em": "2026-10-09T07:25:02+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-21T16:26:24.000Z",
+          "canal": "atefalhar",
+          "detalhe": "O canal oficial do Wii japonês para pedir comida em 2009",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "d7eb6f12c5351a4fa04f948804b33b3697f3e9608087ac2aedc767dab2825fda": {
       "arquivo": "2026-10-09_01_nota87_1_transistor_e_20.000_vezes_menor_que_1_fio_de_cabelo_humano_short_9x16.mp4",
@@ -8300,7 +8308,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_07_nota82_2_modos_visuais_do_cerebro_alteram_a_velocidade_do_seu_proce_short_9x16.mp4",
       "criado_em": "2026-10-10T13:59:30+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-21T16:18:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #65: 2 modos visuais do cérebro alteram a velocidade do seu ",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "6c24c4310dc48ab3f1dc8707de6d9b361763a0085ccab28b29f325ab32b6b5fb": {
       "arquivo": "2026-10-10_08_nota80_A_rede_neural_do_cerebro_que_funciona_apenas_durante_o_desca_short_9x16.mp4",

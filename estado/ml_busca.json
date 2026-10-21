@@ -1,14 +1,14 @@
 {
- "quando": "2026-10-21T10:37:16.422836+00:00",
+ "quando": "2026-10-21T15:38:15.694570+00:00",
  "termos": {
   "whey": "2026-10-21T10:37:16.422836+00:00",
-  "meia": "2026-10-20T12:08:33.658013+00:00",
+  "meia": "2026-10-21T15:38:15.694570+00:00",
   "chapéu": "2026-10-20T20:54:32.915818+00:00",
-  "rádio": "2026-10-20T12:08:33.658013+00:00",
-  "pneu": "2026-10-20T12:08:33.658013+00:00",
-  "bateria": "2026-10-20T12:08:33.658013+00:00",
-  "bateria 60v": "2026-10-20T12:08:33.658013+00:00",
-  "bateria 60a": "2026-10-20T12:08:33.658013+00:00",
+  "rádio": "2026-10-21T15:38:15.694570+00:00",
+  "pneu": "2026-10-21T15:38:15.694570+00:00",
+  "bateria": "2026-10-21T15:38:15.694570+00:00",
+  "bateria 60v": "2026-10-21T15:38:15.694570+00:00",
+  "bateria 60a": "2026-10-21T15:38:15.694570+00:00",
   "ex2": "2026-10-20T20:54:32.915818+00:00",
   "grade proteção ex2": "2026-10-20T20:54:32.915818+00:00",
   "grade proteção": "2026-10-20T20:54:32.915818+00:00",
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB26444945",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB44684359",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB25675555",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB24692711",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB24692716",
@@ -205,7 +205,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB61784268",
@@ -253,7 +253,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB70104297",
@@ -269,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB54433666",
@@ -285,14 +285,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB25588931",
    "nome": "Radio Px Voyager Vr- Cb2660",
-   "preco": 369.0,
+   "preco": 450.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_767040-MLU74102870634_012024-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-6444144432?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4643971492?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB2906",
@@ -301,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB35743965",
@@ -349,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB72882606",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB44019921",
@@ -397,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB72681733",
@@ -413,7 +413,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB27057277",
@@ -445,7 +445,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB76828668",
@@ -461,7 +461,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB46001471",
@@ -477,7 +477,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB46001231",
@@ -493,12 +493,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB52260545",
    "nome": "Carregador Usina Charger 12v 60a Bivolt",
-   "preco": 589.86,
+   "preco": 589.79,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_724104-MLA99440114308_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-4497917295?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -509,14 +509,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB46016136",
    "nome": "Carregador de Bateria Automotivo AGAB Ferramentas (HB) 60A Auxiliar de Partida 12V Bivolt",
-   "preco": 769.0,
+   "preco": 889.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_691375-MLA99909145467_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5285100560?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4718980169?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB63455",
@@ -525,7 +525,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB51647079",
@@ -541,7 +541,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB74914144",
@@ -557,7 +557,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB11904050",
@@ -573,7 +573,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   },
   {
    "id": "MLB24692683",
@@ -1198,6 +1198,38 @@
    "origem": "mercadolivre",
    "busca": "grade proteção",
    "visto": "2026-10-20T20:54:32.915818+00:00"
+  },
+  {
+   "id": "MLB72960652",
+   "nome": "Aparelho base de rádio Motorola T210BR Rádio T210BR",
+   "preco": 200.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_625016-MLA112955665285_062026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7651550568?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB2906",
+   "comissao": 4.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "rádio",
+   "visto": "2026-10-21T15:38:15.694570+00:00"
+  },
+  {
+   "id": "MLB37894526",
+   "nome": "Radio Icom Marine Ic-m200",
+   "preco": 1162.52,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_874534-MLU77038703852_062024-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-5055438604?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB2906",
+   "comissao": 4.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "rádio",
+   "visto": "2026-10-21T15:38:15.694570+00:00"
   }
  ]
 }

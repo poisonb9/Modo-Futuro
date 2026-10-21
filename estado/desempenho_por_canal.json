@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-21T10:01:54",
+  "medido_em": "2026-10-21T15:07:34",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,20 +22,20 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 32,
+      "posts_recentes": 30,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Uma fábrica da Intel do tamanho de 16 campos de futebol A fá"
-        },
-        {
-          "views": 0,
-          "titulo": "Uma fábrica da Intel do tamanho de 16 campos de futebol\n\nA f"
-        },
-        {
-          "views": 0,
           "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER Entrando n"
+        },
+        {
+          "views": 0,
+          "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER\n\nEntrando "
+        },
+        {
+          "views": 0,
+          "titulo": "O salto de 50% de velocidade e 70% menos energia em chips 3D"
         }
       ]
     },
@@ -59,7 +59,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 50,
+      "posts_recentes": 48,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -84,45 +84,45 @@
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 10,
+      "posts_recentes": 8,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "OS 4 MAIORES SELAMENTOS QUE PRENDERAM VILÕES EM DRAGON BALL "
-        },
-        {
-          "views": 0,
-          "titulo": "OS 4 MAIORES SELAMENTOS QUE PRENDERAM VILÕES EM DRAGON BALL\n"
-        },
-        {
-          "views": 0,
           "titulo": "O SEGREDO DOS COMBOS FÍSICOS DE COMBINAÇÃO EM DRAGON BALL As"
+        },
+        {
+          "views": 0,
+          "titulo": "O SEGREDO DOS COMBOS FÍSICOS DE COMBINAÇÃO EM DRAGON BALL\n\nA"
+        },
+        {
+          "views": 0,
+          "titulo": "O ATAQUE LOUCO DE GOKU QUE IMITOU UM CÃO RAIVOSO NO MANGÁ As"
         }
       ]
     },
     "cozinha.importada": {
-      "posts": 116,
+      "posts": 126,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 677,
+      "reacoes": 730,
       "comentarios": 0,
-      "shares": 1,
+      "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 29,
+      "posts_recentes": 37,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Sopa italiana rica com macarrão e couve kale Como construir "
+        },
         {
           "views": 0,
           "titulo": "Sopa italiana rica com macarrão e couve kale\n\nComo construir"
         },
         {
           "views": 0,
-          "titulo": "Sopa italiana finalizada com feijão branco e parmesão\n\nO toq"
-        },
-        {
-          "views": 0,
-          "titulo": "Recheio de camarão e legumes para o Egg Foo Young tradiciona"
+          "titulo": "Sopa italiana finalizada com feijão branco e parmesão O toqu"
         }
       ]
     },
@@ -134,7 +134,7 @@
       "comentarios": 69,
       "shares": 105,
       "engajamento_pct": 0.0,
-      "posts_recentes": 27,
+      "posts_recentes": 23,
       "views_recentes": 0,
       "melhores_recentes": [
         {

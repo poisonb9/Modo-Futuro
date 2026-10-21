@@ -1,8 +1,14 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-23;13:18;semanestesia.pod;agendado;Protocolo;6ad8e81b98b0339f03982837
+2026-10-23;08:22;semanestesia.pod;agendado;Protocolo;6ad8e7da24638e8a5cc02506
+2026-10-22;19:41;semanestesia.pod;agendado;Protocolo;6ad8e76c24638e8a5cbffd0a
+2026-10-22;16:32;semanestesia.pod;agendado;Protocolo;6ad8e7140fd9d0bd395d478f
+2026-10-22;13:16;semanestesia.pod;agendado;Protocolo;6ad8e6b04f000a3fb97f4e0b
 2026-10-22;08:23;semanestesia.pod;agendado;Protocolo;6ad6992ffb737fdba8f2d325
 2026-10-21;19:41;semanestesia.pod;agendado;Protocolo;6ad6992929a6896a47ca8130
-2026-10-21;16:19;semanestesia.pod;agendado;Protocolo;6ad6991b41ade07ddcb6a862
-2026-10-21;13:18;semanestesia.pod;agendado;Protocolo;6ad699116c850f9ae36900da
+2026-10-21;16:20;semanestesia.pod;postado;Protocolo;6ad6991b41ade07ddcb6a862
+2026-10-21;13:28;atefalhar;postado;O canal oficial do Wii japonês para pedir comida em 2009;6ad8e62bee069bfcd2386f24
+2026-10-21;13:27;semanestesia.pod;postado;Protocolo;6ad699116c850f9ae36900da
 2026-10-21;08:21;semanestesia.pod;postado;Protocolo;6ad6990941ade07ddcb6a51c
 2026-10-20;19:51;semanestesia.pod;postado;Protocolo;6ad6990041ade07ddcb6a39f
 2026-10-20;17:06;modofuturo;postado;UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER Entrando na escala dos micrômetros para ver a espessura de um fio de c;6ad79eae9563e3562ba80fbd
@@ -25,7 +31,7 @@
 2026-10-18;08:23;semanestesia.pod;postado;Protocolo;6ad15c8eee2c696029ac583d
 2026-10-18;08:22;cozinha.importada;postado;A clássica salada de macarrão havaiana servida na tigela Salada de macarrão clássica havaiana servida com bastante cremo;6ad1439c962e0c38615b0f62
 2026-10-18;08:11;modofuturo;postado;O gargalo de transporte que consome a energia das GPUs de IA Processadores de inteligência artificial gastam a maior par;6ad24871709e3eab3f95e934
-2026-10-18;01:42;camarim.kpop;postado;BANG CHAN e HAN do Stray Kids revelam fuga cômica de brigas no grupo;6ad44c420a208cb3234dbdc3
+2026-10-18;01:42;camarim.kpop;postado;BANG CHAN e HAN do Stray Kids revelam fuga cômica de brigas no grupo BANG CHAN e HAN do Stray Kids contam como lidam com;6ad44c420a208cb3234dbdc3
 2026-10-17;19:42;cozinha.importada;postado;Egg Foo Young crocante finalizado com molho gravy quente A apresentação final irresistível da omelete chinesa de camarão;6ad143917998c185a61b8661
 2026-10-17;19:40;modofuturo;postado;O salto de 50% de velocidade e 70% menos energia em chips 3D Empilhamento de transistores permite dobrar a densidade de ;6ad24867709e3eab3f95e7c0
 2026-10-17;19:38;semanestesia.pod;postado;Protocolo;6ad15c854ed7d375a435c555

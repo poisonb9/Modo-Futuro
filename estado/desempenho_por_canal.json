@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-21T04:31:58",
+  "medido_em": "2026-10-21T10:01:54",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,14 +15,14 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 148,
+      "posts": 154,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1281,
+      "reacoes": 1305,
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 26,
+      "posts_recentes": 32,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -35,7 +35,7 @@
         },
         {
           "views": 0,
-          "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER\n\nEntrando "
+          "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER Entrando n"
         }
       ]
     },
@@ -52,14 +52,14 @@
       "melhores_recentes": []
     },
     "semanestesia.pod": {
-      "posts": 177,
+      "posts": 190,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1646,
+      "reacoes": 1714,
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 37,
+      "posts_recentes": 50,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -130,7 +130,7 @@
       "posts": 83,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 8271,
+      "reacoes": 8303,
       "comentarios": 69,
       "shares": 105,
       "engajamento_pct": 0.0,

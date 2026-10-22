@@ -1,14 +1,14 @@
 {
  "frente": [
   "camarim.kpop",
-  "atefalhar",
   "cozinha.importada",
   "achadinhos.instantaneos",
   "fatura.chora",
   "achadinhototal",
+  "atefalhar",
   "modofuturo",
   "truque.importado",
   "semanestesia.pod"
  ],
- "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> camarim.kpop atefalhar cozinha.importada achadinhos.instantaneos fatura.chora achadinhototal"
+ "porque": "vigia_postagem: fila curta (< 1 dia agendado) -> camarim.kpop cozinha.importada achadinhos.instantaneos fatura.chora achadinhototal"
 }

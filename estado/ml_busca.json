@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-21T22:46:37.552498+00:00",
+ "quando": "2026-10-22T14:07:01.632926+00:00",
  "termos": {
-  "whey": "2026-10-21T10:37:16.422836+00:00",
+  "whey": "2026-10-22T14:07:01.632926+00:00",
   "meia": "2026-10-21T15:38:15.694570+00:00",
   "chapéu": "2026-10-21T22:46:37.552498+00:00",
   "rádio": "2026-10-21T15:38:15.694570+00:00",
@@ -318,22 +318,6 @@
    "origem": "mercadolivre",
    "busca": "rádio",
    "visto": "2026-10-20T12:08:33.658013+00:00"
-  },
-  {
-   "id": "MLB78396583",
-   "nome": "Radio Px Voyager VR-6666 PRO",
-   "preco": 2145.0,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_990164-MLA116759711219_082026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7717716124?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB2906",
-   "comissao": 4.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "rádio",
-   "visto": "2026-10-08T08:01:19.041644+00:00"
   },
   {
    "id": "MLB32008732",
@@ -653,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-21T10:37:16.422836+00:00"
+   "visto": "2026-10-22T14:07:01.632926+00:00"
   },
   {
    "id": "MLB79943062",
@@ -685,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-21T10:37:16.422836+00:00"
+   "visto": "2026-10-22T14:07:01.632926+00:00"
   },
   {
    "id": "MLB79126451",
@@ -1101,7 +1085,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-21T10:37:16.422836+00:00"
+   "visto": "2026-10-22T14:07:01.632926+00:00"
   },
   {
    "id": "MLB57356861",
@@ -1133,7 +1117,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-20T06:36:05.286258+00:00"
+   "visto": "2026-10-22T14:07:01.632926+00:00"
   },
   {
    "id": "MLB18488791",
@@ -1149,7 +1133,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-20T06:36:05.286258+00:00"
+   "visto": "2026-10-22T14:07:01.632926+00:00"
   },
   {
    "id": "MLB79613773",
@@ -1230,6 +1214,22 @@
    "origem": "mercadolivre",
    "busca": "rádio",
    "visto": "2026-10-21T15:38:15.694570+00:00"
+  },
+  {
+   "id": "MLB36562306",
+   "nome": "Whey 100% Pure Baunilha 907g Integralmédica Whey Protein",
+   "preco": 129.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_857941-MLA99466485514_112025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-6538886936?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-22T14:07:01.632926+00:00"
   }
  ]
 }

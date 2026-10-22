@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-22T04:31:03",
+  "medido_em": "2026-10-22T10:02:37",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -77,16 +77,20 @@
       ]
     },
     "atefalhar": {
-      "posts": 153,
+      "posts": 154,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 2143,
+      "reacoes": 2148,
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 3,
+      "posts_recentes": 4,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "O canal oficial do Wii japonês para pedir comida em 2009 Mui"
+        },
         {
           "views": 0,
           "titulo": "O canal oficial do Wii japonês para pedir comida em 2009\n\nMu"
@@ -94,10 +98,6 @@
         {
           "views": 0,
           "titulo": "A DIFERENÇA REGISTRADA ENTRE MAGIA E KI EM DRAGON BALL Difer"
-        },
-        {
-          "views": 0,
-          "titulo": "A DIFERENÇA REGISTRADA ENTRE MAGIA E KI EM DRAGON BALL\n\nDife"
         }
       ]
     },
@@ -130,7 +130,7 @@
       "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 8419,
+      "reacoes": 8443,
       "comentarios": 70,
       "shares": 105,
       "engajamento_pct": 0.0,

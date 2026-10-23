@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-23T14:56:22",
+  "medido_em": "2026-10-23T19:05:55",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -59,7 +59,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 35,
+      "posts_recentes": 33,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -130,7 +130,7 @@
       "comentarios": 70,
       "shares": 105,
       "engajamento_pct": 0.0,
-      "posts_recentes": 4,
+      "posts_recentes": 2,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -140,10 +140,6 @@
         {
           "views": 0,
           "titulo": "BANG CHAN e HAN do Stray Kids revelam fuga cômica de brigas "
-        },
-        {
-          "views": 0,
-          "titulo": "BANG CHAN admite ter medo do rank de FELIX no League of Lege"
         }
       ]
     }

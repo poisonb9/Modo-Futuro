@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-22T22:47:28.327315+00:00",
+ "quando": "2026-10-23T18:44:55.689814+00:00",
  "termos": {
-  "whey": "2026-10-22T14:07:01.632926+00:00",
+  "whey": "2026-10-23T18:44:55.689814+00:00",
   "meia": "2026-10-22T18:50:11.708258+00:00",
   "chapéu": "2026-10-22T22:47:28.327315+00:00",
   "rádio": "2026-10-22T18:50:11.708258+00:00",
@@ -560,22 +560,6 @@
    "visto": "2026-10-22T18:50:11.708258+00:00"
   },
   {
-   "id": "MLB24692683",
-   "nome": "Caixa Meia Esquadria Gabarito Corta Em Ângulos Com Serra",
-   "preco": 22.0,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_628530-MLA99599747322_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4540310185?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB418080",
-   "comissao": 8.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "meia",
-   "visto": "2026-10-09T15:35:29.010188+00:00"
-  },
-  {
    "id": "MLB65978950",
    "nome": "Whey Protein FTW Delicious Whey Chocolate Sachê 30g",
    "preco": 14.99,
@@ -626,9 +610,9 @@
   {
    "id": "MLB79943061",
    "nome": "Whey Protein 3w 900g Whey Nutra Growth cookies",
-   "preco": 94.0,
+   "preco": 109.9,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_711357-MLA116740095522_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7712088802?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5351647671?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -637,7 +621,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-22T14:07:01.632926+00:00"
+   "visto": "2026-10-23T18:44:55.689814+00:00"
   },
   {
    "id": "MLB79943062",
@@ -658,9 +642,9 @@
   {
    "id": "MLB79943063",
    "nome": "Whey Protein 3w 900g Whey Nutra Growth leitinho",
-   "preco": 106.6,
+   "preco": 98.91,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_631932-MLA118290862763_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7711927058?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5295257493?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -669,7 +653,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-22T14:07:01.632926+00:00"
+   "visto": "2026-10-23T18:44:55.689814+00:00"
   },
   {
    "id": "MLB79126451",
@@ -1085,7 +1069,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-22T14:07:01.632926+00:00"
+   "visto": "2026-10-23T18:44:55.689814+00:00"
   },
   {
    "id": "MLB57356861",
@@ -1117,7 +1101,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-22T14:07:01.632926+00:00"
+   "visto": "2026-10-23T18:44:55.689814+00:00"
   },
   {
    "id": "MLB18488791",
@@ -1229,7 +1213,23 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-22T14:07:01.632926+00:00"
+   "visto": "2026-10-23T18:44:55.689814+00:00"
+  },
+  {
+   "id": "MLB50087760",
+   "nome": "Whey Protein Midway Whey 100% Concentrada Baunilha 907g",
+   "preco": 115.87,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_882592-MLA99404417076_112025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-5552429224?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-23T18:44:55.689814+00:00"
   }
  ]
 }

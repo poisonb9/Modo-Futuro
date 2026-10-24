@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-24T00:04:00.108540+00:00",
+ "quando": "2026-10-24T19:46:54.456292+00:00",
  "termos": {
-  "whey": "2026-10-23T18:44:55.689814+00:00",
+  "whey": "2026-10-24T19:46:54.456292+00:00",
   "meia": "2026-10-23T21:43:26.261871+00:00",
   "chapéu": "2026-10-24T00:04:00.108540+00:00",
   "rádio": "2026-10-23T21:43:26.261871+00:00",
@@ -653,7 +653,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-23T18:44:55.689814+00:00"
+   "visto": "2026-10-24T19:46:54.456292+00:00"
   },
   {
    "id": "MLB79126451",
@@ -1069,7 +1069,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-23T18:44:55.689814+00:00"
+   "visto": "2026-10-24T19:46:54.456292+00:00"
   },
   {
    "id": "MLB57356861",
@@ -1101,7 +1101,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-23T18:44:55.689814+00:00"
+   "visto": "2026-10-24T19:46:54.456292+00:00"
   },
   {
    "id": "MLB18488791",
@@ -1213,7 +1213,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-23T18:44:55.689814+00:00"
+   "visto": "2026-10-24T19:46:54.456292+00:00"
   },
   {
    "id": "MLB50087760",
@@ -1229,7 +1229,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-23T18:44:55.689814+00:00"
+   "visto": "2026-10-24T19:46:54.456292+00:00"
   },
   {
    "id": "MLB24721824",
@@ -1246,6 +1246,22 @@
    "origem": "mercadolivre",
    "busca": "grafe protecao",
    "visto": "2026-10-24T00:04:00.108540+00:00"
+  },
+  {
+   "id": "MLB18418075",
+   "nome": "Whey Concentrado 100% Whey Protein Concentrado 900g Chocolate",
+   "preco": 133.17,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_931246-MLA113034716737_062026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-5454291963?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-24T19:46:54.456292+00:00"
   }
  ]
 }

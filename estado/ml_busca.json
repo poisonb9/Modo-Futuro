@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-23T21:43:26.261871+00:00",
+ "quando": "2026-10-24T00:04:00.108540+00:00",
  "termos": {
   "whey": "2026-10-23T18:44:55.689814+00:00",
   "meia": "2026-10-23T21:43:26.261871+00:00",
-  "chapéu": "2026-10-22T22:47:28.327315+00:00",
+  "chapéu": "2026-10-24T00:04:00.108540+00:00",
   "rádio": "2026-10-23T21:43:26.261871+00:00",
   "pneu": "2026-10-23T21:43:26.261871+00:00",
   "bateria": "2026-10-23T21:43:26.261871+00:00",
   "bateria 60v": "2026-10-23T21:43:26.261871+00:00",
   "bateria 60a": "2026-10-23T21:43:26.261871+00:00",
-  "ex2": "2026-10-22T22:47:28.327315+00:00",
-  "grade proteção ex2": "2026-10-22T22:47:28.327315+00:00",
-  "grade proteção": "2026-10-22T22:47:28.327315+00:00",
-  "grafe protecao": "2026-10-22T22:47:28.327315+00:00"
+  "ex2": "2026-10-24T00:04:00.108540+00:00",
+  "grade proteção ex2": "2026-10-24T00:04:00.108540+00:00",
+  "grade proteção": "2026-10-24T00:04:00.108540+00:00",
+  "grafe protecao": "2026-10-24T00:04:00.108540+00:00"
  },
  "produtos": [
   {
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB59481595",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB35161880",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-16T16:58:49.987883+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB26710873",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB22546702",
@@ -717,7 +717,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB69436250",
@@ -749,7 +749,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB54197430",
@@ -765,7 +765,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB47670469",
@@ -781,12 +781,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB62867807",
    "nome": "Cama Infantil Grade Proteção Montessoriana + Colchão Incluso Carro vermelho",
-   "preco": 389.0,
+   "preco": 373.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_688873-MLA100458894377_122025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7813187308?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -797,7 +797,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB62535666",
@@ -813,7 +813,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB50732570",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB26197012",
@@ -893,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB42432212",
@@ -909,7 +909,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB25722405",
@@ -925,7 +925,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB41306211",
@@ -1037,7 +1037,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB73973661",
@@ -1133,7 +1133,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB79613775",
@@ -1149,7 +1149,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB79613774",
@@ -1165,7 +1165,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   },
   {
    "id": "MLB72960652",
@@ -1230,6 +1230,22 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-10-23T18:44:55.689814+00:00"
+  },
+  {
+   "id": "MLB24721824",
+   "nome": "Óculos de Proteção Etilux com Armação Integral e Proteção UV",
+   "preco": 16.34,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_649069-MLA94006643517_102025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-3860823452?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB269706",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "grafe protecao",
+   "visto": "2026-10-24T00:04:00.108540+00:00"
   }
  ]
 }

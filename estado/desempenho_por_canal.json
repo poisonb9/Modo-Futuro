@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-24T07:11:50",
+  "medido_em": "2026-10-24T12:37:18",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -59,7 +59,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 31,
+      "posts_recentes": 29,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -105,20 +105,20 @@
       "comentarios": 0,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 20,
+      "posts_recentes": 18,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Sopa italiana rica com macarrão e couve kale Como construir "
-        },
-        {
-          "views": 0,
-          "titulo": "Sopa italiana rica com macarrão e couve kale\n\nComo construir"
-        },
-        {
-          "views": 0,
           "titulo": "Sopa italiana finalizada com feijão branco e parmesão O toqu"
+        },
+        {
+          "views": 0,
+          "titulo": "Sopa italiana finalizada com feijão branco e parmesão\n\nO toq"
+        },
+        {
+          "views": 0,
+          "titulo": "Recheio de camarão e legumes para o Egg Foo Young tradiciona"
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-24T12:37:18",
+  "medido_em": "2026-10-24T16:32:28",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 12,
+      "posts_recentes": 10,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -59,7 +59,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 29,
+      "posts_recentes": 27,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -105,20 +105,20 @@
       "comentarios": 0,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 18,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Sopa italiana finalizada com feijão branco e parmesão O toqu"
-        },
-        {
-          "views": 0,
-          "titulo": "Sopa italiana finalizada com feijão branco e parmesão\n\nO toq"
+          "titulo": "Recheio de camarão e legumes para o Egg Foo Young tradiciona"
         },
         {
           "views": 0,
           "titulo": "Recheio de camarão e legumes para o Egg Foo Young tradiciona"
+        },
+        {
+          "views": 0,
+          "titulo": "O SHAKE DE PROTEÍNA DE $1,38 PARA O CAFÉ DA MANHÃ COM NOEL D"
         }
       ]
     },

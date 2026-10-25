@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-24T22:45:32.849419+00:00",
+ "quando": "2026-10-25T01:36:12.984870+00:00",
  "termos": {
   "whey": "2026-10-24T19:46:54.456292+00:00",
   "meia": "2026-10-24T22:45:32.849419+00:00",
-  "chapéu": "2026-10-24T00:04:00.108540+00:00",
+  "chapéu": "2026-10-25T01:36:12.984870+00:00",
   "rádio": "2026-10-24T22:45:32.849419+00:00",
   "pneu": "2026-10-24T22:45:32.849419+00:00",
   "bateria": "2026-10-24T22:45:32.849419+00:00",
   "bateria 60v": "2026-10-24T22:45:32.849419+00:00",
   "bateria 60a": "2026-10-24T22:45:32.849419+00:00",
-  "ex2": "2026-10-24T00:04:00.108540+00:00",
-  "grade proteção ex2": "2026-10-24T00:04:00.108540+00:00",
-  "grade proteção": "2026-10-24T00:04:00.108540+00:00",
-  "grafe protecao": "2026-10-24T00:04:00.108540+00:00"
+  "ex2": "2026-10-25T01:36:12.984870+00:00",
+  "grade proteção ex2": "2026-10-25T01:36:12.984870+00:00",
+  "grade proteção": "2026-10-25T01:36:12.984870+00:00",
+  "grafe protecao": "2026-10-25T01:36:12.984870+00:00"
  },
  "produtos": [
   {
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB59481595",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB35161880",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB26710873",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB22546702",
@@ -717,7 +717,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB69436250",
@@ -749,7 +749,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB54197430",
@@ -765,7 +765,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB47670469",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB62867807",
@@ -797,7 +797,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB62535666",
@@ -813,14 +813,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB50732570",
    "nome": "Cama Infantil De Chão Montessoriana Solteiro Grade Proteção Cor Branco MKTPAFT008",
-   "preco": 609.0,
+   "preco": 477.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_980324-MLA99995730983_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4297772041?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4719348109?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -829,7 +829,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-13T03:52:47.066408+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB23351954",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB26197012",
@@ -893,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB42432212",
@@ -909,7 +909,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB25722405",
@@ -925,7 +925,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB41306211",
@@ -941,7 +941,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-22T22:47:28.327315+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB47135031",
@@ -1037,7 +1037,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB73973661",
@@ -1122,9 +1122,9 @@
   {
    "id": "MLB79613773",
    "nome": "Cama Infantil Encanto Azul Com Grade Proteção Quarto Menina 158x73cm",
-   "preco": 274.5,
+   "preco": 299.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_938834-MLA116426631172_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7730510664?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5392413609?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -1133,14 +1133,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB79613775",
    "nome": "Cama Infantil Encanto Rosa Com Grade Proteção Quarto Menina 158x73cm",
-   "preco": 274.5,
+   "preco": 299.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_828193-MLA117927323021_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7730474816?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5392485823?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -1149,7 +1149,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
+   "visto": "2026-10-25T01:36:12.984870+00:00"
   },
   {
    "id": "MLB79613774",

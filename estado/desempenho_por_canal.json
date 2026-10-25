@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-25T05:59:00",
+  "medido_em": "2026-10-25T11:14:22",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 6,
+      "posts_recentes": 4,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -35,7 +35,7 @@
         },
         {
           "views": 0,
-          "titulo": "O gargalo de transporte que consome a energia das GPUs de IA"
+          "titulo": "As duas empresas que constroem as máquinas do futuro dos chi"
         }
       ]
     },

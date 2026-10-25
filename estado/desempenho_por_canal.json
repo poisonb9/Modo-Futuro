@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-25T16:01:47",
+  "medido_em": "2026-10-25T18:57:20",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,7 +22,7 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 4,
+      "posts_recentes": 2,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -32,10 +32,6 @@
         {
           "views": 0,
           "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER\n\nEntrando "
-        },
-        {
-          "views": 0,
-          "titulo": "As duas empresas que constroem as máquinas do futuro dos chi"
         }
       ]
     },
@@ -59,7 +55,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 21,
+      "posts_recentes": 19,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -105,7 +101,7 @@
       "comentarios": 0,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 10,
+      "posts_recentes": 8,
       "views_recentes": 0,
       "melhores_recentes": [
         {

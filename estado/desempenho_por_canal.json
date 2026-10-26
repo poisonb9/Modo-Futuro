@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-26T06:00:38",
+  "medido_em": "2026-10-26T12:48:21",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -55,7 +55,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 16,
+      "posts_recentes": 15,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -101,20 +101,16 @@
       "comentarios": 0,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 4,
+      "posts_recentes": 2,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "O SEGREDO DOS RESULTADOS NA ACADEMIA COM NOEL DEYZEL Noel De"
-        },
-        {
-          "views": 0,
-          "titulo": "O SEGREDO DOS RESULTADOS NA ACADEMIA COM NOEL DEYZEL\n\nNoel D"
-        },
-        {
-          "views": 0,
           "titulo": "LENTILHA OU FRANGO PARA GANHAR MASSA COM NOEL DEYZEL Noel De"
+        },
+        {
+          "views": 0,
+          "titulo": "LENTILHA OU FRANGO PARA GANHAR MASSA COM NOEL DEYZEL\n\nNoel D"
         }
       ]
     },

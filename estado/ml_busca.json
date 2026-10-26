@@ -1,7 +1,7 @@
 {
- "quando": "2026-10-26T01:41:28.963144+00:00",
+ "quando": "2026-10-26T20:10:48.499021+00:00",
  "termos": {
-  "whey": "2026-10-25T19:58:54.479553+00:00",
+  "whey": "2026-10-26T20:10:48.499021+00:00",
   "meia": "2026-10-25T22:51:23.792492+00:00",
   "chapéu": "2026-10-26T01:41:28.963144+00:00",
   "rádio": "2026-10-25T22:51:23.792492+00:00",
@@ -15,22 +15,6 @@
   "grafe protecao": "2026-10-26T01:41:28.963144+00:00"
  },
  "produtos": [
-  {
-   "id": "MLB18488790",
-   "nome": "Whey Protein 900g 100% Whey Refil Max Titanium Baunilha Whey Concentrado",
-   "preco": 174.0,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_990597-MLA113036973677_062026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5284608228?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB264201",
-   "comissao": 0.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "whey",
-   "visto": "2026-10-12T16:06:02.133442+00:00"
-  },
   {
    "id": "MLB19533412",
    "nome": "Whey Protein 900g 100% Pure Whey Zero Lactose Probiótica Whey Concentrado Baunilha Sem Lactose",
@@ -653,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-25T19:58:54.479553+00:00"
+   "visto": "2026-10-26T20:10:48.499021+00:00"
   },
   {
    "id": "MLB79126451",
@@ -1085,7 +1069,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-25T19:58:54.479553+00:00"
+   "visto": "2026-10-26T20:10:48.499021+00:00"
   },
   {
    "id": "MLB18488791",
@@ -1202,7 +1186,7 @@
   {
    "id": "MLB50087760",
    "nome": "Whey Protein Midway Whey 100% Concentrada Baunilha 907g",
-   "preco": 115.87,
+   "preco": 123.43,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_882592-MLA99404417076_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-5552429224?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -1213,7 +1197,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-25T19:58:54.479553+00:00"
+   "visto": "2026-10-26T20:10:48.499021+00:00"
   },
   {
    "id": "MLB24721824",
@@ -1245,7 +1229,39 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-10-25T19:58:54.479553+00:00"
+   "visto": "2026-10-26T20:10:48.499021+00:00"
+  },
+  {
+   "id": "MLB46663089",
+   "nome": "Whey Protein Baunilha 100% Whey Concentrado 900g Vitafor",
+   "preco": 136.2,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_668611-MLA100016244243_122025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7743770192?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-26T20:10:48.499021+00:00"
+  },
+  {
+   "id": "MLB19506703",
+   "nome": "Whey 3w 900g Max Titanium Top Whey 3w Mais Sabor Iogurte Grego Whey Concentrado",
+   "preco": 194.99,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_917657-MLA116720537509_082026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7470235394?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB122102",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-10-26T20:10:48.499021+00:00"
   }
  ]
 }

@@ -20,6 +20,15 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
+  "titulo": "10% OFF em produtos selecionados utilizando o cupom LIQUIDA10",
+  "codigo": "LIQUIDA10",
+  "fim": "2026-11-02T12:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FLIQUIDA10",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
   "titulo": "9% OFF no Processador AMD Ryzen 7 7800X3D 4.2GHz 5.0GHz Max Turbo Cache 104MB 8 Núcleos 16 Threads AM5 com vídeo integrado utilizando o cupom AURAGAMER",
   "codigo": "AURAGAMER",
   "fim": "2026-10-27T02:59:59+00:00",
@@ -380,6 +389,51 @@
  {
   "loja": "Soldiers Nutrition",
   "tipo": "promotion",
+  "titulo": "11% OFF Kit: Whey Core Chocolate + Pré-Treino Evolution Blueberry + Creatina 150g",
+  "codigo": "",
+  "fim": "2026-11-03T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fkit-whey-core-900g-pre-treino-evoluition-300g-creatina-150g%3F_pos%3D1%26_sid%3D9a4332464%26_ss%3Dr%26variant%3D48722180735225",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "15% OFF Beef Protein Suplemento Alimentar de Proteínas em Pó Soldiers Nutrition Sabor",
+  "codigo": "",
+  "fim": "2026-11-03T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fbeef-protein-suplemento-alimentar-de-proteinas-em-po-soldiers-nutrition%3F_pos%3D1%26_sid%3D2d9d7f586%26_ss%3Dr",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "50% OFF NAC N-ACETIL L-CISTEÍNA - 60 Caps",
+  "codigo": "",
+  "fim": "2026-11-03T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fnac-pro-500mg-60-caps%3F_pos%3D1%26_sid%3D5c46bbb05%26_ss%3Dr",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "50% OFF Femme Burn 90g - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-11-03T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Ffemme-burn-soldiers-nutrition-tamanho-90g",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
+  "titulo": "71% OFF Creatina Monohidratada 600g - 100% Pura Importada - Soldiers Nutrition",
+  "codigo": "",
+  "fim": "2026-11-03T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=65354&awinaffid=3089205&ued=https%3A%2F%2Fsoldiersnutrition.com.br%2Fproducts%2Fcreatina-monohidratada-100-pura-importada-soldiers-nutrition-tamanho-600g%3Fvariant%3D47173658738937",
+  "termos": ""
+ },
+ {
+  "loja": "Soldiers Nutrition",
+  "tipo": "promotion",
   "titulo": "15% OFF Kit: Whey Core + Creatina 150g",
   "codigo": "",
   "fim": "2026-10-27T02:59:59+00:00",
@@ -457,15 +511,6 @@
   "fim": "2026-11-01T02:59:00+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fdia-do-macarrao-2026",
   "termos": "Brinox 25 a 31/10\n15% off em lista selecionada"
- },
- {
-  "loja": "Brinox Shop",
-  "tipo": "voucher",
-  "titulo": "Dia internacional do chefe de cozinha - 20/10",
-  "codigo": "BRINOXCHEFE",
-  "fim": "2026-10-26T02:59:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2F",
-  "termos": "Brinox 20 a 25/10 Dia internacional do chefe de cozinha\n10% off em todo o site"
  },
  {
   "loja": "Farmácias Indiana",
@@ -684,39 +729,30 @@
   "termos": "+5%OFF no PIX ou BOLETO | Frete Grátis para pedidos a partir de R$ 199 para Sul e Sudeste | Parcelamento em até 12x sem juros"
  },
  {
-  "loja": "AliExpress · HANNUO Digital Store",
-  "tipo": "voucher",
-  "titulo": "R$ 4,90 OFF acima de R$ 80,10",
-  "codigo": "RB4E11GCEWUP",
-  "fim": "2026-10-31T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVKk6YRWDpWXYvcaBLnTNfpUSl8NROH6lAfY5Wqarv7y4b6RuHMMLh5JF75cGOkOUomcA5lIGxbGwt2QdZn40gOjMofwG86ULMm4bmWkrtP42mAfLqYo8YKyk1KkgvlHTtVljca6JcS1dOHxuR5E5McPpkYf9TD54PmSIIJUfMdp0nC7n6apbPbRh7pG63zUzOqKdPxjH6ztS6UNyFHgsIbrOOOoLvp7QFbZE7eHux7ZSylV9bmorKivBFtR0Gx6t0ZDwJLRQRaSi9APnnuuOlKaha9oZnjHIAn04Y20n2h5O0O2rXwpDWIOm8OJDrAckN2mGaQcwm4nW4UgM4bde4VPWlF6dfCkaAoRl5kX5dieIgDEJNYZI3JxiCGp4yXQujYKZtrJ6rdo8D5OGxnGsB4U0q5HjKtfNyh5x9IByoEcEANMk859vXguLudVeEP6TuasArUjvpLNpXBN",
-  "termos": "Vale na loja HANNUO Digital Store do AliExpress. Ex.: Capa protetora magnética HANNUO para OPPO Find X9 Ultra, capa magnétic"
- },
- {
   "loja": "AliExpress · Metal Beast Store",
   "tipo": "voucher",
   "titulo": "R$ 5,45 OFF acima de R$ 81,70",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiV6Vd3nyfDuyjnn9r6LFmQQUyLpAomuRG0DssOl9H1Z1UHpy2BVOSHNnQcGMYY6I1FBJmorPLayqB4CLocA2sJD4qVmELfYT9fgVYLNGpkLNqvqIRzDaDCWcmLWyeWvv8Blr6Y0Ejc62cBqFizAFX2IeN3DNWnO67Cp9LwGSWTXYIYgP7tPrezUdeIgbuUQ66dKhOtcqCzRLf8ocFaXHNXGNNUDliyRK4XI7vkf4x6cwXL3PNyqq8iAhZKep15dIOTtN2UOpYa8M1X5E21B06p4mhUusYMXnqcqSiRrblETBSuddADn0XUxCQzdPErNkAyNgLM0pt5B7oxhtsbdXory6Ksx8oBVLeILyCujCAVogKK8k5WA5Ej6FKZtCxq8Z46CKuDFLNVQ7GUP6CHlkEtm5NTYZfFMTHNkCjuU1Fbs6Lxa5ENi6oA2BrZXAJHPOWwjXh2qAwcC8mPDE4MqTFhhTLhEQcNzTXRe4uJMtza66P",
-  "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxfw6oxklMh7pgMJEzoSokhRliX0VOIp4Wk6741K0Y4b0B3yi2AUGDCBtXSwwuES9O0IsF0qOjG1xyy0Cxh1LLHcnL6XehAyK51tUUwy15rJoil9YOHhsXrNNNzXiPh0H8P8lV2TlftkoSYJEOkkb0QbhUfjgyjliRee7Wv5JCmodHcyXAeY4cPlKmous1BVVJQLVihCXxt5KSJ1u8COAhz61hH7OTkVJvuB0H0JG0gYIDf5hZ72QTp35PVMdNFVb8UuOEBBHyzLDkLq25dLvAA1OmhKoHC8eVwtHoND9tQpx8ks6EzVOOnpP9nUi0tBNiEyyNZL1MaTahLvZk3yeQXRHlMCZo5WC3kHkCVaJicBCYH9AoMtRrHvKvKnrrLpp1VoPi4KCKQQZDVAjrE3f1e3tjlPgSWLiS6SyVRfaMUC5WD03KUycVKBBbUJaBOf8POTtD2UzgtY0QmbUy7q1Vy17VZORNrlalaGc2hl1IdkLov0hntMkp5SgAm7GwsFdJR43HJ0fszCptbqZ3EdXHvd5UjOulIqdEMBpRxIJO8yG4izFH8DJRhjF7pAPBQi9aYItoLWlJevSULFnIX10JkXLUv1j7tRJj4W9X4bvb6fTSAK65cWrWm62vdKReDkAUmknKCYT0cEF0vWppYSid5mT",
+  "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Luvas de Treino Crazy Fox Sem Magnésio para Cross Training, Levantamen"
  },
  {
-  "loja": "AliExpress · maono Official Store",
+  "loja": "AliExpress · Shop1105344618 Store",
   "tipo": "voucher",
-  "titulo": "R$ 16,35 OFF acima de R$ 272,50",
-  "codigo": "GUJE5NMB40A1",
-  "fim": "2026-10-28T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xk6m5iTQFuoI405ckdLzx7U9nAMrLJT5sAuw5DKnLmoZVaKN4V9zqEtzmD1yFoZr1eOKBTv2ACY1aBErSLaJM7EUzp7dV4Wv6LeUzXDhcPcR2KlOo0NqPuRN1yJprMjk1LlrAyIlrFgbwLiHqAPtOuUqzdRgdJj0lGakQyzuZHepAJNaEZtYMFfXXEeyKxN2aNtfnLlDWSjJTX5vW4xtGaQ7EtDlwIlLHUmsDojNUkpRUln3rQBXSPEU6PrjXkUmEUm9O42wCjyz99oN64YztHd3krvTAXzHrxJNw1PMKUXi8wGt4AydBxF6n7yylK2gpm2QLp8ihX798uzm70jbdO63wJwLS2lrp1oSUI6jfbW1l0hwMRGbnetanS6xC4tJk7tSW7CQmz6xBTSBZqfeQgArW9KMjKiakZCLo9Uh7rsOkWZexrrXhatzbIhiyaryfE5NBru9glvIbCA8SUq16vPWk7LhYeDxCmuKHhd5h1ur",
-  "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+  "titulo": "R$ 8,17 OFF acima de R$ 8,10",
+  "codigo": "QEUDKUYVO626",
+  "fim": "2026-10-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHxwHq3j0FEJxYrgulHLdI7E8JMpZy4A2Mcqg8eRydAVd3f29ian2dMLWrZsdsXOV5C1pycEYqqnIWu5gVJHLaKLLMC9EwXV1783Im9Ip3L707v0ICxTOQMfiYpzn36pSDWqUM7sluO2itfZ45YSr9zzSWIeNsUiMNqYSfvjOgYjchsQc5tDqqm0UtIzCO7MTadC2IzlK1pfncytu6eGBYiqrXqVhpQ6tX0FV95nqPY7bydcMOq5HUDZAAgqrRQB8knsswrtf6KJIzkliwjRT4X7clFhpfQMAmVeJ6hAxdd6tVp2FnmZosOeFBWiL99XtjRtMoRxOroLEFRVfmny3raxYaddjzX7l8tIjz3z2IeCwVpQoWs2sT3KUeDoNcE6ll5CVjWXIJ8ljYz5FG3SVfE8VzAZU8BvgNdReFoUPeiedI2IDWRr5xEwHISyS55uM096ZaohOt7BqZvbcRjRrA8i5RDVVaIOjQxgOwRrS21baMYoZlJ0d8Xg8VtCUfCI23uJitZM3IoIXqPs408DUvfDkCjv2TwXfE8QqPRPM1e1WfRSl9vN6hbRZc8KCrLza2BHGlQwRYmGgK8bRZBqjstV0yxj5i0mm2t6DhqUdeoffNTRIwaVK4ZRaBORtJOOQQk7i3sb4eGubWIc1X22AAgF",
+  "termos": "Vale na loja Shop1105344618 Store do AliExpress. Ex.: Pulseira Chocker Rudo Guita Zanka Nijiku para Mulheres e Homens, Acess"
  },
  {
-  "loja": "AliExpress · Star Custom Store",
+  "loja": "AliExpress · DAREVIE Official Store",
   "tipo": "voucher",
-  "titulo": "R$ 4,90 OFF acima de R$ 4,90",
-  "codigo": "XBW1ZDAFHNEC",
-  "fim": "2026-10-27T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkvqfPeaRBOV96WSELSeUGdAF7cIfjh92gXtGHEaDc9QJxKIbWyRIr4EFgDYqGtPMzziU3985nvMRuEkhugdzSOLZKBcIeJetmyp4ciFZCd0AB4fWTa4dEAp5nWXABBsZ9lKIrJDFEzicRyxBRCBWI29rtQKKBiBRFY4LiEv2GBUiiK6stjHCSFWUlVvkn8QWvbOk03izCtOU4JOSExik1jTXJ0Adx1HbdeP6h0rxx9Mx0X0zsUAPN9i671xONnthb1y6DhHkBNxN2EkQic1RnkIk4ja4EjVERps73Yr3iAbobE1lOPJ9B9BQqf77pNuyRIdCdHrMq9PleDcU97hKRgVHVTSZPEzO0YbnaPNgDdKxDNvoYdvoxa7nKoROVrffQe1nSHFNjdqYsQlCg9Mj70qcOA5zpRIcKDnKBDTTtEkDVjWtfSrmzYXFkr8iXjhGfrnDlJ19mES0l0R",
-  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
+  "titulo": "R$ 5,72 OFF acima de R$ 57,20",
+  "codigo": "FALILLOJP9",
+  "fim": "2026-10-31T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxH4wvQa6UZ1WK0hc0rP9DuQLEP01WDmmfrEOdPnpGYYmmDpGdgzSIf2ycQwh9WcQvuq5w5acRnGpLDfWyOO2NDabChQcMq0URYEemtesL9ZQjprxyY6pq3HhyfNiq5ETY4CSH8s8UoIcvbWIozUXATpZC2WyssJiuV90sWkpAPUKbJbw6D6aexywqr6n90XLqZ1DdsLHKPEOAMVbpqjX7WN7Hr8oRnRgwngYZeITHmSOJbSa08ODa9YGDeRacXhKSblOJWvLx9IlICBZVKLwBJTHOc18T9R0huEOKPqat9RCqRS29j8b7JTPeffiJIwjR62Cm52juVe7ORlWCtcEZVQCkwriKWLc6ApFWV2WGBNHL1WbTcFnKkZJGIceYXsnczOQtFoPG6Mya5taTV5pj6TVQJopUu7PYZw3ZXpYeh7iwTsaDfXQBx18IGsJoPB1j9NDY2v9AdZ9x3Qa1QA9l4OOS4L5Qn5hNXXcrXHd4vP2MFstVdr2CdfFsUZTpq8Kfct8Obvs1gG7PsC9uJIG5p0FMIfwL2ZeFFQGoCKzIQASQb2W4q7bp16WtZk8snPsXoi42ZfaNOlzYq7rEjmxblH5EPRSU01GcNZD7rZ3NGKjKdbJ5kJQml3C61levX5S1mN3kJBeqQSaQ0S1v6qbD0fD",
+  "termos": "Vale na loja DAREVIE Official Store do AliExpress. Ex.: DAREVE Aquecedores de pernas para ciclismo, inverno, manter térmico, a"
  }
 ]

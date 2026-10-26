@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-25T21:40:35",
+  "medido_em": "2026-10-26T00:08:57",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -55,12 +55,12 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 17,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Seu cérebro desiste antes"
+          "titulo": "Protocolo"
         },
         {
           "views": 0,
@@ -101,20 +101,20 @@
       "comentarios": 0,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 6,
+      "posts_recentes": 4,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Recheio de camarão e legumes para o Egg Foo Young tradiciona"
-        },
-        {
-          "views": 0,
-          "titulo": "Recheio de camarão e legumes para o Egg Foo Young tradiciona"
-        },
-        {
-          "views": 0,
           "titulo": "O SEGREDO DOS RESULTADOS NA ACADEMIA COM NOEL DEYZEL Noel De"
+        },
+        {
+          "views": 0,
+          "titulo": "O SEGREDO DOS RESULTADOS NA ACADEMIA COM NOEL DEYZEL\n\nNoel D"
+        },
+        {
+          "views": 0,
+          "titulo": "LENTILHA OU FRANGO PARA GANHAR MASSA COM NOEL DEYZEL Noel De"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 8563,
+      "reacoes": 8603,
       "comentarios": 70,
       "shares": 106,
       "engajamento_pct": 0.0,

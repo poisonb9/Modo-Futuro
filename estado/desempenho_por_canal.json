@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-26T12:48:21",
+  "medido_em": "2026-10-26T19:10:55",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -55,7 +55,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 15,
+      "posts_recentes": 13,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -101,18 +101,9 @@
       "comentarios": 0,
       "shares": 2,
       "engajamento_pct": 0.0,
-      "posts_recentes": 2,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "LENTILHA OU FRANGO PARA GANHAR MASSA COM NOEL DEYZEL Noel De"
-        },
-        {
-          "views": 0,
-          "titulo": "LENTILHA OU FRANGO PARA GANHAR MASSA COM NOEL DEYZEL\n\nNoel D"
-        }
-      ]
+      "melhores_recentes": []
     },
     "camarim.kpop": {
       "posts": 84,

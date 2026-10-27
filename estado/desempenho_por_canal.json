@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-27T16:26:53",
+  "medido_em": "2026-10-27T21:13:43",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,18 +22,9 @@
       "comentarios": 34,
       "shares": 14,
       "engajamento_pct": 0.0,
-      "posts_recentes": 2,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER Entrando n"
-        },
-        {
-          "views": 0,
-          "titulo": "UM GRÃO DE ARROZ FICA DO TAMANHO DO MONTE RAINIER\n\nEntrando "
-        }
-      ]
+      "melhores_recentes": []
     },
     "truque.importado": {
       "posts": 158,
@@ -55,7 +46,7 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 6,
+      "posts_recentes": 4,
       "views_recentes": 0,
       "melhores_recentes": [
         {

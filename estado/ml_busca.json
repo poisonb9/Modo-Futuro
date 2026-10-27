@@ -1,14 +1,14 @@
 {
- "quando": "2026-10-26T20:10:48.499021+00:00",
+ "quando": "2026-10-27T00:05:59.619953+00:00",
  "termos": {
   "whey": "2026-10-26T20:10:48.499021+00:00",
-  "meia": "2026-10-25T22:51:23.792492+00:00",
+  "meia": "2026-10-27T00:05:59.619953+00:00",
   "chapéu": "2026-10-26T01:41:28.963144+00:00",
-  "rádio": "2026-10-25T22:51:23.792492+00:00",
-  "pneu": "2026-10-25T22:51:23.792492+00:00",
-  "bateria": "2026-10-25T22:51:23.792492+00:00",
-  "bateria 60v": "2026-10-25T22:51:23.792492+00:00",
-  "bateria 60a": "2026-10-25T22:51:23.792492+00:00",
+  "rádio": "2026-10-27T00:05:59.619953+00:00",
+  "pneu": "2026-10-27T00:05:59.619953+00:00",
+  "bateria": "2026-10-27T00:05:59.619953+00:00",
+  "bateria 60v": "2026-10-27T00:05:59.619953+00:00",
+  "bateria 60a": "2026-10-27T00:05:59.619953+00:00",
   "ex2": "2026-10-26T01:41:28.963144+00:00",
   "grade proteção ex2": "2026-10-26T01:41:28.963144+00:00",
   "grade proteção": "2026-10-26T01:41:28.963144+00:00",
@@ -109,12 +109,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB26444945",
    "nome": "Caixa Plástica Meia Esquadria Com Serra 300mm Sparta",
-   "preco": 21.6,
+   "preco": 20.95,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_988434-MLU71232109810_082023-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-6550619902?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB44684359",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB25675555",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB24692711",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB24692716",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB70104297",
@@ -253,7 +253,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB54433666",
@@ -269,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB25588931",
@@ -285,7 +285,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB35743965",
@@ -301,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-20T12:08:33.658013+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB32008732",
@@ -317,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB72882606",
@@ -333,7 +333,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB44019921",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB72681733",
@@ -381,7 +381,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB27057277",
@@ -397,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-19T11:16:00.108046+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB66398853",
@@ -413,12 +413,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB76828668",
    "nome": "Scooter Bicicleta Bike Elétrica X15 1000w Bateria 60v Zurbe Cor Preto",
-   "preco": 9979.6,
+   "preco": 9670.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_973530-MLA114603285610_082026-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7643153550?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -429,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB46001471",
@@ -445,7 +445,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB46001231",
@@ -461,12 +461,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB52260545",
    "nome": "Carregador Usina Charger 12v 60a Bivolt",
-   "preco": 589.79,
+   "preco": 558.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_724104-MLA99440114308_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-4497917295?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -477,7 +477,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB46016136",
@@ -493,7 +493,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB51647079",
@@ -509,7 +509,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB74914144",
@@ -525,7 +525,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB11904050",
@@ -541,7 +541,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB65978950",
@@ -1042,7 +1042,7 @@
   {
    "id": "MLB57356861",
    "nome": "Pneu 700x45 Speed Pirelli Touring Pneu Bike Hibrida + Câmara Branco",
-   "preco": 79.99,
+   "preco": 78.99,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_717365-MLA96424467360_102025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7737087150?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -1053,7 +1053,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB27306461",
@@ -1149,7 +1149,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   },
   {
    "id": "MLB37894526",
@@ -1262,6 +1262,22 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-10-26T20:10:48.499021+00:00"
+  },
+  {
+   "id": "MLB24692683",
+   "nome": "Caixa Meia Esquadria Gabarito Corta Em Ângulos Com Serra",
+   "preco": 18.7,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_628530-MLA99599747322_122025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4870981830?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB418080",
+   "comissao": 8.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "meia",
+   "visto": "2026-10-27T00:05:59.619953+00:00"
   }
  ]
 }

@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-27T00:05:59.619953+00:00",
+ "quando": "2026-10-27T05:35:17.666387+00:00",
  "termos": {
   "whey": "2026-10-26T20:10:48.499021+00:00",
   "meia": "2026-10-27T00:05:59.619953+00:00",
-  "chapéu": "2026-10-26T01:41:28.963144+00:00",
+  "chapéu": "2026-10-27T05:35:17.666387+00:00",
   "rádio": "2026-10-27T00:05:59.619953+00:00",
   "pneu": "2026-10-27T00:05:59.619953+00:00",
   "bateria": "2026-10-27T00:05:59.619953+00:00",
   "bateria 60v": "2026-10-27T00:05:59.619953+00:00",
   "bateria 60a": "2026-10-27T00:05:59.619953+00:00",
-  "ex2": "2026-10-26T01:41:28.963144+00:00",
-  "grade proteção ex2": "2026-10-26T01:41:28.963144+00:00",
-  "grade proteção": "2026-10-26T01:41:28.963144+00:00",
-  "grafe protecao": "2026-10-26T01:41:28.963144+00:00"
+  "ex2": "2026-10-27T05:35:17.666387+00:00",
+  "grade proteção ex2": "2026-10-27T05:35:17.666387+00:00",
+  "grade proteção": "2026-10-27T05:35:17.666387+00:00",
+  "grafe protecao": "2026-10-27T05:35:17.666387+00:00"
  },
  "produtos": [
   {
@@ -205,7 +205,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB59481595",
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB35161880",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB62535666",
@@ -797,7 +797,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB50732570",
@@ -813,7 +813,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB23351954",
@@ -832,22 +832,6 @@
    "visto": "2026-10-19T17:48:11.638404+00:00"
   },
   {
-   "id": "MLB25455420",
-   "nome": "Beliche+cama Auxiliar Reforçada Escada E Grade Proteção Star Cor Amêndoa",
-   "preco": 924.0,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_645723-MLA99932312043_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-3542332081?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB3231",
-   "comissao": 8.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "grade proteção",
-   "visto": "2026-10-13T03:52:47.066408+00:00"
-  },
-  {
    "id": "MLB24771463",
    "nome": "Óculos de Proteção Solar Delta Plus Sky Policarbonato Proteção UV",
    "preco": 9.31,
@@ -861,7 +845,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB26197012",
@@ -877,7 +861,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB42432212",
@@ -893,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB25722405",
@@ -909,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB41306211",
@@ -941,7 +925,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-21T22:46:37.552498+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB19464808",
@@ -962,7 +946,7 @@
   {
    "id": "MLB28362359",
    "nome": "Western Digital WD3000FYYZ 3TB amarelo",
-   "preco": 2183.0,
+   "preco": 2152.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_886205-MLA112320893578_062026-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-4367462983?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -973,7 +957,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-21T22:46:37.552498+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB58104738",
@@ -1005,14 +989,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB73973661",
    "nome": "Cama Solteiro Reforçada P/160 Kg 100% Ferro C/grade Proteção Cor Preto FERRO GRADE PROTEÇÃO",
-   "preco": 575.46,
+   "preco": 834.96,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_819223-MLA113416427413_062026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-6994819926?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-7818366828?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -1021,7 +1005,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-19T17:48:11.638404+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB23183294",
@@ -1101,7 +1085,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB79613775",
@@ -1117,7 +1101,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-26T01:41:28.963144+00:00"
+   "visto": "2026-10-27T05:35:17.666387+00:00"
   },
   {
    "id": "MLB79613774",

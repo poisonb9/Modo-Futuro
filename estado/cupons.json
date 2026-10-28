@@ -2099,15 +2099,6 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
-  "titulo": "10% OFF em produtos participantes da campanha Segura",
-  "codigo": "SEGURA10",
-  "fim": "2026-10-28T01:00:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1SEGURA10",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
   "titulo": "R$ 30 OFF em produtos participantes da campanha All In One",
   "codigo": "AIO30",
   "fim": "2026-10-30T13:00:00+00:00",
@@ -2597,7 +2588,25 @@
   "titulo": "R$ 5,20 OFF acima de R$ 84,90",
   "codigo": "RB4E11GCEWUP",
   "fim": "2026-10-31T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVY9C4iKBnzMkzsdKJAdgSmwDfWcMJjYGpYoOGbJmF0XrmNCGqBY43iBpW8vLaCu6d0h3B691mtWz8f6i1mdSlAwwdWyzaZzCexRGWEnHUTsCexB9GthSCNK4hOzHkH6rF5zsC77ZOw7a0DbipeyDAQ58EZuKViuCRHip7xfUyOXLxtGZwVoezWtowcqnnDrHZX11caygy48qsNZ5Hvl4oK0nl7UYdTQeMQBiHm7wRckauBkzjMHMzpFLefvFOlBQnJ5VmwJY9Z87M6AM2OIXdHFrvGatzKLQWy50pZTMhQJm9M5vMxMKkrhZpTGHzUv38GdCRSqqYsaS3ahUWh7Ias7HuOjwciXywDJ8LDJ1tGVQl3FMh0e7TdRu60MsshlY9GXD8MpJ3Y5M1phE0wYrjhpwl04axVJZzhuzdMs2LLycPSgCdeePkypowPgYeu2zvD0Jji5bzV0wBr5",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVmkMLLzdmmrEyG4jwbxPbElS6JblgNeFRA6eKDfSLYp1JOKU14JYEQQQsvkJIoUVueXUBkrJXQhml39ThD752f1x5rRWGJ5r9dLRG3JLQFbsn8BqOV25aXu8k3inYbqTzXB8Oc3Jp0ajHEt8Sb5JqA9XybXNYMQntdeM2rcnqQut1BRhWlYtGQz0lGciW6qb8F8YwiOUnxQYujNsUj3iFsyNathjRyOyI62tJD7xvBNrXZS2zrQ4OizJXAOYg930x2zj2XD8hoRFgArBuA0Yi1C2oBRlyeckDkFbK0Wg8Hw6KS3ik0gBtthxYNvydYjB4B1i2m5fHsdoyDUxPhbf0rvHyBQku63syxylEmP93kWzCpoWONP3iZ2vZfudzmW7AYo19jWdMK4FHbctTVUB3cHe0wlvyj3WiSRm57YuVoNUacH8YkH2LQOTxIcFmvyRuQieOmpQ6auqPTl",
   "termos": "Vale na loja HANNUO Digital Store do AliExpress. Ex.: Capa protetora magnética HANNUO para OPPO Find X9 Ultra, capa magnétic"
+ },
+ {
+  "loja": "AliExpress · Laser Machine Store",
+  "tipo": "voucher",
+  "titulo": "R$ 6,93 OFF acima de R$ 6,90",
+  "codigo": "3F2WPACV2ZG9",
+  "fim": "2026-11-01T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JyaEeNxSrX2bpzXo3cwE1Bv7vc320RmZZAGMhE6WOI962FGcIsfMXTehDIrfn2ORRFedWt4RDYzlqS9dijIEvfmGl3Vh7Wsl0lTIoKDWziTthuFjtVrzKX5aj3rtsqeCLC0zCes2kBJGuxLBjvcSxHoljzybMYHDrp86LUC3RSU95CIbnNGs44xwIuY4YyYMnt9Yb2eJOvBfB4c1GeP1tiB78p2H57fHzedieRBnmElpHGHRkXJZzwBK76ZkH8lNIl8y15Ssl5iDml2fhQjvhpF8mLYlxLwGZ48TqKxHWBB1QZatotMDx83HokYKvHl6YsdoPD9DkN66NguNLWsJDXhITTGN3QmYoEjqOAZMavFHMjO309Iwk872M3dCVG8kLj5OqmAZcKlqsHDHY4kGfZzr5Uhsd4iDXwr2Ne5f4VN8RDun30BJX9qHuu08y1jCtnr4NPaV93aalpsDibVVuJuUsDG5Ar8pWtjo0ES4C2ia9HWIHoHnpG9iNZGRNh6WSRx0xwEHA8hG0Nhi8BOTVQIBrA6tUcwK7bi91ayj4P3kPJa65c1Vjl9TCZJLyGCjrq2ae7DAMPtzz3Gpxaw4BjXvQMdULVdPVWP0psaUAmmVY3iNTDJTN3OJlxhjHDZLXNH9AqWFiQ5u5Wrz62627mh0n",
+  "termos": "Vale na loja Laser Machine Store do AliExpress. Ex.: Mesa de Trabalho a Laser ACMER Honeycomb para Máquina de Gravação e Co"
+ },
+ {
+  "loja": "AliExpress · Star Custom Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,20 OFF acima de R$ 5,20",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-11-26T14:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFk79sTXvyjfLCo2ASTUFplmEWuGLVklEpiD6ESnkYIJjRqxO3oONs7dmHfvhlD1eJZjcoTixk6jwpM5phj2RAIOHIdpbSh4OtL26xsZ0QqN1yc92QAJeyRIPRIy5TKcsdmEPJgxhj9EIaYmNLu1tbt6hgZOjcpHQ9srIv3oqPHR8kHaMdQRdjVdndSKxI5QD1afT9L5vRYu0uFjjE3H5s9qzGu0dcMyM4yqZIVoSsrI3WHwMYHgYW422pWJgGJYz7JMgjAL8bMdKOxculRGjpuNIEGxFzPTqCM35TIsda7MfiAjgxDcGY2fq8XJ8e0vIX5ROuTpssMbzsH8WO3zMDDDJ1dYZZZFWhwkTMpgdmZzWj1eCbWRpVXkfRKC7GdrZ4p0yDAVq0zIv2YcokvI3mdnKnhsNFv77kmBGdRoNWfxsfHSEgbcHGBmPrZxCmePAxpLzdQX3eSjoxJ4r",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

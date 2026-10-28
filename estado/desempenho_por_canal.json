@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-28T15:55:49",
+  "medido_em": "2026-10-28T20:58:23",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -51,18 +51,9 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 2,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "Protocolo"
-        },
-        {
-          "views": 0,
-          "titulo": "Protocolo"
-        }
-      ]
+      "melhores_recentes": []
     },
     "atefalhar": {
       "posts": 154,
@@ -72,18 +63,9 @@
       "comentarios": 7,
       "shares": 4,
       "engajamento_pct": 0.0,
-      "posts_recentes": 2,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "O canal oficial do Wii japonês para pedir comida em 2009 Mui"
-        },
-        {
-          "views": 0,
-          "titulo": "O canal oficial do Wii japonês para pedir comida em 2009\n\nMu"
-        }
-      ]
+      "melhores_recentes": []
     },
     "cozinha.importada": {
       "posts": 126,

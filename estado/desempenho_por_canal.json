@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-28T08:18:39",
+  "medido_em": "2026-10-28T15:55:49",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,16 +15,21 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 154,
+      "posts": 155,
       "views": 0,
       "mediana_views": 0,
       "reacoes": 1307,
       "comentarios": 34,
-      "shares": 14,
+      "shares": 15,
       "engajamento_pct": 0.0,
-      "posts_recentes": 0,
+      "posts_recentes": 1,
       "views_recentes": 0,
-      "melhores_recentes": []
+      "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "A nova máquina de US$ 380 milhões da ASML\n\nA ASML desenvolve"
+        }
+      ]
     },
     "truque.importado": {
       "posts": 158,
@@ -46,13 +51,9 @@
       "comentarios": 11,
       "shares": 29,
       "engajamento_pct": 0.0,
-      "posts_recentes": 3,
+      "posts_recentes": 2,
       "views_recentes": 0,
       "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "Protocolo"
-        },
         {
           "views": 0,
           "titulo": "Protocolo"

@@ -6820,7 +6820,15 @@
       "canal": "modofuturo",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-09_04_nota90_A_nova_maquina_de_US_380_milhoes_da_ASML_short_9x16.mp4",
       "criado_em": "2026-10-09T21:41:00+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-28T11:18:00.000Z",
+          "canal": "modofuturo",
+          "detalhe": "A nova máquina de US$ 380 milhões da ASML",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "aac5db62d98cf8c1d38131060e9bb182749a3503b0cbeef13e49699e8cc737c1": {
       "arquivo": "2026-10-09_05_nota88_Espelhos_atomicos_de_alta_precisao_substituem_lentes_de_vidr_short_9x16.mp4",

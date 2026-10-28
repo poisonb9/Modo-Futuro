@@ -1,6 +1,33 @@
 [
  {
   "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "20% OFF em produtos participantes da promoção CHURRASSOM",
+  "codigo": "CHURRASSOM",
+  "fim": "2026-10-29T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCHURRASSOM",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "12% OFF em produtos participantes da promoção SOMPREMIUM",
+  "codigo": "SOMPREMIUM",
+  "fim": "2026-10-29T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FSOMPREMIUMKABUM",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
+  "titulo": "15% OFF em produtos participantes da promoção STREAMER15",
+  "codigo": "STREAMER15",
+  "fim": "2026-11-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FSTREAMER15",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
   "tipo": "promotion",
   "titulo": "Liquida Tech - Ofertas especiais em tecnologia durante a campanha Liquida Tech",
   "codigo": "",
@@ -644,17 +671,8 @@
   "titulo": "R$ 5,19 OFF acima de R$ 84,70",
   "codigo": "RB4E11GCEWUP",
   "fim": "2026-10-31T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVcycvo70qrNRjUa9APztr955sK9Kd99IfjvD6GGzInaiYIxyZi3swm0JKwWD0JSsRRBQ8ewwQtB14AxfTIlAPHEe6IOM05UK2yHtRiXWIJxYBERFHubEqgOkS2KWGHncegUBiSzFSZAzaAViS170mg4awpsfIQuytBMw8AigW4ICbgRmxYniVRtyQ46ByS45wTrbFyJV3YRXsDgPdl1k17vNrMwYnFbYxCIuSEqx5pVJFMTIAKTKWBTE88J4jv5pZHB37Z6Jf4OIv6draF3HKYIt7Qqi4bkJJdPYqMXYjeecIEH41K90nAeMLccu7sgY2JDRdR6yO2Ldumsrnr1DCDS1aCk0iaEe7RUGhVuqSMB6NKFM5gNxmo3YF9431lEpq7aBQUQC2ZsgQ8bjyPQVFwSwrj2NilAI3P9mgNtfn7rU6vE1f3J9AHYXBWbKQAs38PGbwpW8lJWsozl",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVVNg7FF5dc5V6XTpKZ1KOE2BnldseDspe3RW7HhUF9x9WbH1IGBhFcmTFNxw2cTghFQP5EtvFRwlKMrFcbzSrfB7ZMwdcMENfQxSO6WzaYxRWT5Z2N8qKjOCIBlQHNfKqqR0hHl9cdAUMlAqdbboY5ThA70UmdjsjUsRVs2X6h3Zv1tIgGDB9eR2vLROsLMBGyrUEdeIIu4ULwatHSr4cuUr4OYkY4JaV10tMOuSaiG4wGULlm4W3D9UqBhrkAxEoKeqaGpq9Lo4Y5m7m2AMpMtKFBVSt95rRqcZaxYkJZ3tsAAF1JGZZMTK4wOHc1cH67Lg07jNetaZykrfVQXxgOZN17Jd6ExdQRUZeNiBEcTcEtKY6YHuzBPGVPO7Nqx3yKnYJF5okxzjVUtY9znuwnrT7YlDzIQtfFNTX81nKoyqaWCJLiDkYbxW4qaTRg7CW8vYOGD3trr6ks3",
   "termos": "Vale na loja HANNUO Digital Store do AliExpress. Ex.: Capa protetora magnética HANNUO para OPPO Find X9 Ultra, capa magnétic"
- },
- {
-  "loja": "AliExpress · Laser Machine Store",
-  "tipo": "voucher",
-  "titulo": "R$ 6,91 OFF acima de R$ 6,90",
-  "codigo": "3F2WPACV2ZG9",
-  "fim": "2026-11-01T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JyaEeNxSrX2bpzXo3cwE1Bv7vc320RmZZAGMhE6WOI962FGcIsfMXTehDIrfn2ORRFedWt4RDYzlqS9dijIEvfmGl3Vh7Wsl0lTIoKDWziTthuFjtVrzKX5aj3rtsqeCLC0zCes2kBJGuxLBjvcSxHoljzybMYHDrp86LUC3RSU95CIbnNGs44xwIuY4YyYMnt9Yb2eJOvBifANr4YUcG4YqRoDuopafWRUISSQLQpELQMTN9BeafWRMiRPIjW0DG8dl3KSoGpAPgCj6QPpUU68wMevWbm55D4iDnO7aDdD4aBEE5bBImRj9Sbut8G8z2xf9CKTX5koZKaZ7ZKAKLZqoTAI3eI0H5zJdF9u6Q3ZHllTguXge2QmEwBn3J2i4ZHrys02hMPpJnyyNkqxiBi99VgfqWghH7G6dXyc8JMlSon6pwspXjZcYpAQtfeSx9RMR2ktGft9Q3RRjSRglrWWF8R3ylBCJ3Bs9gX0ZrPyNDmCS5Ss7ifpIzMTNh7sRE9UGXEWQnaCTdJv8HZqrxlQc9C303dID1zzSj4GxpcNgI0JVEuyreSsPT5I8rCuXI4hnxldMxDIKkGQZXpRLYoy80sWOJBAu1FgZxVTMabcr8k6NjVUL2KD0DvP2Vr8kO2sSnpAFpWDKoCY3Ig0a5kuen",
-  "termos": "Vale na loja Laser Machine Store do AliExpress. Ex.: Mesa de Trabalho a Laser ACMER Honeycomb para Máquina de Gravação e Co"
  },
  {
   "loja": "AliExpress · Star Custom Store",
@@ -662,7 +680,7 @@
   "titulo": "R$ 5,19 OFF acima de R$ 5,10",
   "codigo": "XBW1ZDAFHNEC",
   "fim": "2026-11-26T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkUkJ5n8OO1EM6Go8UhdvMyzcnVaJm4yoqkoxmw5qhLGKlUQDP8aJFbg2ehd38hqzbRAHRf2rOeesYsxitZuJXnv2e8Uhnzx08pnlcDylOeljr7SzpldhpQKaQ7u7KYDsRslUTVmzBr45G7IZttJp8m98mfaVkXippyD0vncfiYbHk8wLHsbz8JuLADjAn5EYVVvR9KMBwzDTi2nl9SYsUZ3HmUTxFDjBWKY4BcinFfmCle8eURK4ZKk0qTl3N3onGUPA8CYRgAv6X5kdEMZAk3NDPZawbCfXbbFpLc7Jbx1llhUh03inL2FTQBCsvaTqtgE3nN3cEW0d3flwus92hLVLTp5XxXZyUd4KhyRzGNQXInDrCGmBbJUnlo31ExNgafD3bW4fkBuhInOkKzH81rcrMm5tPlmxW1ad1qLMNF2zcdzi9SS9C3iBIFDzoi3r2BCl9lomcS1x0rD",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkGxneU8aQ8yZDzYfQ2oKVwLYgPssSMY4MxjdVp4tLRfZq5RywRj4WIeepwvjZ8v5LFlkVCxQ5aAKV6bDPk6L7vhDsNFVXN2GGY739ywaUCNa1UsOzvBTVVlGsHsrkYwNEBX0MV5UgZeYQHI3TDjWWcLjvrpfTvmSq3OBsoJjyoo6srKBu8vGy9bRy8z68pBuiNWGE4JOxZ3Om4ctohv3OuLFzJ9oXLJOIFhfsTyLiVzhBqgE3m6WQ1CVRFSPSR9fCVSOoQG2qwLqKXVDtME66hsc3UhQebhrXtLVWoJ1IwMl0D5cFm2jk5LBjawjXvBkc2kgmOjaC5oIZkfCuG4Da4YT8LoAnTLdB9vWUAH9KRJVEcMbJkJXGWkgBCQXL6DhEM3d6vGcOsmVYb0XaODlgzTyNkYJM4gCmWEPYNYUVPIyJr1H3f8LXzESNBude1qE9UHuYADBVWS0ykL",
   "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

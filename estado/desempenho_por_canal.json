@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-29T00:48:13",
+  "medido_em": "2026-10-29T06:57:29",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -44,16 +44,29 @@
       "melhores_recentes": []
     },
     "semanestesia.pod": {
-      "posts": 193,
+      "posts": 201,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1734,
+      "reacoes": 1795,
       "comentarios": 11,
-      "shares": 29,
+      "shares": 30,
       "engajamento_pct": 0.0,
-      "posts_recentes": 0,
+      "posts_recentes": 4,
       "views_recentes": 0,
-      "melhores_recentes": []
+      "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "Protocolo"
+        },
+        {
+          "views": 0,
+          "titulo": "Protocolo"
+        },
+        {
+          "views": 0,
+          "titulo": "Protocolo"
+        }
+      ]
     },
     "atefalhar": {
       "posts": 154,

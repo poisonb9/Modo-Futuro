@@ -1,10 +1,16 @@
 ﻿data;hora (SP);canal;status;titulo;id_buffer
+2026-10-30;08:20;semanestesia.pod;agendado;CAL NEWPORT: 250 BATIMENTOS POR MINUTO E O FIM DO REMO;6ae2dddb2cd0d70893900af8
+2026-10-29;16:24;semanestesia.pod;agendado;Seu cérebro desiste antes;6ae2dd6e446afb54e8df461b
+2026-10-29;13:17;semanestesia.pod;agendado;Protocolo;6ae2dd21446afb54e8df304e
+2026-10-29;08:08;semanestesia.pod;agendado;Protocolo;6ae2dcd8446afb54e8df187a
+2026-10-29;02:52;semanestesia.pod;postado;Protocolo;6ae2dccc6ffb9bb0dcd0a18e
 2026-10-28;08:37;modofuturo;postado;A nova máquina de US$ 380 milhões da ASML;6ae14e14f6d6782c59a11708
-2026-10-23;13:18;semanestesia.pod;agendado;Protocolo;6ad8e81b98b0339f03982837
-2026-10-23;08:22;semanestesia.pod;agendado;Protocolo;6ad8e7da24638e8a5cc02506
-2026-10-22;19:41;semanestesia.pod;agendado;Protocolo;6ad8e76c24638e8a5cbffd0a
-2026-10-22;16:32;semanestesia.pod;agendado;Protocolo;6ad8e7140fd9d0bd395d478f
-2026-10-22;13:16;semanestesia.pod;agendado;Protocolo;6ad8e6b04f000a3fb97f4e0b
+2026-10-23;13:19;semanestesia.pod;postado;Protocolo;6ad8e81b98b0339f03982837
+2026-10-23;08:23;semanestesia.pod;postado;Protocolo;6ad8e7da24638e8a5cc02506
+2026-10-22;19:41;semanestesia.pod;removido;Protocolo;6ad8e76c24638e8a5cbffd0a
+2026-10-22;19:41;semanestesia.pod;postado;Protocolo;6addd5fb39dd6e0e672ce183
+2026-10-22;16:33;semanestesia.pod;postado;Protocolo;6ad8e7140fd9d0bd395d478f
+2026-10-22;13:17;semanestesia.pod;postado;Protocolo;6ad8e6b04f000a3fb97f4e0b
 2026-10-22;08:23;semanestesia.pod;removido;Protocolo;6ad6992ffb737fdba8f2d325
 2026-10-21;19:42;semanestesia.pod;postado;Protocolo;6ad6992929a6896a47ca8130
 2026-10-21;16:20;semanestesia.pod;postado;Protocolo;6ad6991b41ade07ddcb6a862

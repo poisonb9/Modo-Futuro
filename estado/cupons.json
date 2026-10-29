@@ -1,5 +1,50 @@
 [
  {
+  "loja": "Brinox Shop",
+  "tipo": "promotion",
+  "titulo": "Produtos até R$149,99",
+  "codigo": "",
+  "fim": "2026-12-21T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fprodutos-ate-149",
+  "termos": "Até durarem os estoques"
+ },
+ {
+  "loja": "Brinox Shop",
+  "tipo": "voucher",
+  "titulo": "Cupom de R$50 - Exclusivo Panela de pressão 6,8L",
+  "codigo": "BF50EXTRA",
+  "fim": "2026-12-21T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fpanela-de-pressao-inducao-brinox-antiaderente-ceramic-life-pressure-6-8-litros-%25C3%25B824-cm-vanilla-4952103%2Fp",
+  "termos": "Aplicável apenas no produto Panela de Pressão Indução Brinox Antiaderente Ceramic Life Pressure 6,8 Litros Ø24cm Vanilla"
+ },
+ {
+  "loja": "Brinox Shop",
+  "tipo": "voucher",
+  "titulo": "Cupom de R$30 em produtos selecionados",
+  "codigo": "BF30",
+  "fim": "2026-12-21T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fdesconto-30-off",
+  "termos": "Apenas em produtos selecionados"
+ },
+ {
+  "loja": "Brinox Shop",
+  "tipo": "voucher",
+  "titulo": "Cupom de R$25 off em produtos selecionados",
+  "codigo": "BF25",
+  "fim": "2026-12-20T18:14:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fdesconto-25-off",
+  "termos": "Apenas em produtos selecionados"
+ },
+ {
+  "loja": "Brinox Shop",
+  "tipo": "voucher",
+  "titulo": "Cupom de desconto de R$15 off",
+  "codigo": "BF15",
+  "fim": "2026-12-20T18:12:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fdescontos-15-off",
+  "termos": "Aplicável em produtos selecionados"
+ },
+ {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "10% OFF em produtos participantes da promoção Husky",
@@ -752,7 +797,7 @@
   "titulo": "R$ 5,21 OFF acima de R$ 85,10",
   "codigo": "RB4E11GCEWUP",
   "fim": "2026-10-31T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVX9zPTneT6h3hYDaqJsIRAepq9EcBe9q0OBych5Q8Qy6TLnCPcWjEGlgkyJMwxtcnpjZdXyUclMilo6jmDbYuEnYoI5Tc6ooUA1kHPxWJwv3iU7mgajo1wFcK3uL7DQfaLEgICuufqIDwfXm1fgNzvyZYUUTv15kDhRJw6yqaLoyX8TP8bZn4GwPzUiaUYB8v8yj2au8Y3B3VJhYigyhtIT6h7dZT6YYH3A0BpuFIdlGOlbb5TdKL2Waued1ZLkT74J0tzuSZ4gUx4KznYzGDmXA8PCwXppCkbQXK7l3K0pp3DSzytNdti5k3yDDncwkh3PYgOPmoQypweFNUAjZ1GIEdTqDVga8TGXQmKaihORJw2e8FIJgzELdNfkAAP4Wjp3sRTbhTWFlr4l22IW7cePAf2Ybf7imLmwSusW0O5aVgzMCtmBqcnuayTbqkXihHGYZi97O1fkvJ8J",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVcPApJTwbRVuSFnuesQrSTdRIU6XPTm0BUPiHlx4tzDaUNrAbzUupYBLQmWbIe7aumCx7b7HBIZjs2xbRCSgy1W5vzcl9bMAwLx8zHN3ZojPKyyySIrdxEECLCpKvqVuCohQYPAWg2y1IFCo0Td7b0lmBsOwyp6PKcuOSB1f5KiwiPrxrlxw0RjuRvdwhCpeHQouh14qmVYcbhM0xqUE9IMf39KXkEPFidLY85N7SxYiyfaJYIOQ3iMrYDi3D7RcAiCxvGoRATmfoXTtI0KlbVGDZRPEutFiH6sHgI9gVB0uUR7YPXAMTHll1TLzRZlCECRkZYEvRP5JBOtEyKoySX6ulMxKinQpO3z9XfAHkX2BbqhGByYruTcOe4tN1CmQ2nqPAxFvDME6fOpUtdlzRjlxi5OMfQWUJ7BEN3GclsRBeQ0PGj3DSYzlQdoc8eTDq79H5ueNoQJsPkR",
   "termos": "Vale na loja HANNUO Digital Store do AliExpress. Ex.: Capa protetora magnética HANNUO para OPPO Find X9 Ultra, capa magnétic"
  },
  {
@@ -761,7 +806,7 @@
   "titulo": "R$ 5,78 OFF acima de R$ 86,70",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-11-27T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiVVpM92Ze1JpGDViIjsX5H3m2KbJ7LzwksUe8wU8apaXejtZYRtJaa1vA86eIsPMrUuzMtDiGeBAWPfJBLnKH1tp763qbQFN9cC6mEkytMIlwwCd4lDD32ie1iTirqfrEjkmk1H8jJm48xbCjvebwgGPJUh9z38MpT2SG8ZKWzhUPxGVnWcNX4PhkNYTeIf3BAnvPv13IO24m9vzzGRNzmOTPBCSZXaIPON4WkngesQV7ShFlEvHjNCxKsrhuTNZpHHbl2gpuzdQvIk4eAStYyeRF05XJzEcmZWD2kmWX3RWBbWL4IGAlW4qQV1BDejEND7Qy62WcezdLRiEhMepy4Sbi8xJ644pHGTvIM99CLRiSfkvyo6jNfac50B0Q0bbg2pZH0SEQWCrCHHZdqf1tp3vKRJJvu1OXUFh4YLkwi6c3dTPiKzXJ4Q3MhB47VRw7YUbmSjRKgrRUFemdvMyYf5S1TH37Lgj1ZkJn7D1Z3QmP",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiVVpM92Ze1JpGDViIjsX5H3m2KbJ7LzZxBeo3iUp8uDO1NlyQzRn4sjuqIxkg0cUrght6pBK2FfBu9F5tw5j9S6RCXqqOTY0qDZe4thXa5gqvQTa2eAcfpyXNA1g2uIH4LKT0mdMO6A5QDPE5xFdY5A6DWquQurVTUpgK6Va6AzY79MnzQr4ElGJnyy2TXzOooshW9239xsYc4lJON877cpQvBhClPGvu4zeuvjwVMloQFNwijdTTxReHiq032CDOpbPgSbL5AcgEfnMYMt57IA98996AQbewcrdRB2GjLkUGjpRX4DMwsnk6OcEvIcWIHW1rYgWXO19Jt6nJN9BMAYCK5fj3aCEFiAdXyDusDmlr7IcYZA4SpT12iSzszNVAI5bZA4epdaUWu0dSp4xhq2d9BVQEdDRhYuatho80MRwHVNiKDQFoaY7tRjV2ueQQysZwa4zfd4ivvAy013dMBR2xkNlQ4ghUToyzP3UCCsaJ",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
@@ -770,16 +815,16 @@
   "titulo": "R$ 11,29 OFF acima de R$ 11,30",
   "codigo": "8B2K6SIUCMSX",
   "fim": "2026-11-26T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57tnv5wYYqfcq6bpkpkPh0tpPvJHO4BkruF7kGYVy8I1T8s4DbE8zdbLnniO9EwHBQ9V7Ebnb0RCJcoHZuSctSrvj7nOOoTn0LS1L9AGjJ2N4tAgyONBmKJHdjYyVqYCYbArWsjIPMAxeYpQ7zsg5QREpfBv14WXUWwC16AdvDxYNeCk0x0BZPD8PWTsuqTP1rFX7fL4cJbQqr2bcClWtqlehPgCcWjQRJG1AuwDMVtuOFptMxCyvcKMzGMYNBRiiHtN8q2NNeGcsg5LEAoK41p9ADdxNZLBUlXcm2mM6GdpULqy3tLmFRAPIAsIEsIFEKVTM8Q8jzdHc9MjIIBnb09Zo4YUwl4MxFyUE5GmStUfGG5vCoIOY8fpjWBl216lJFdNGJtL2R9iDKog0Lx0YjiytwiCVCWxXb0DJdLMwxxDSBhnDb8cq4UoAoQkBbULwIyPpctY7tgopwSA9d",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRnEaMz2r27BfEy3gqELJqv2O4WtlrjQ6drEr6sFEOo0RbOCFUeE7f4tFEs7xkXDt8PtIXjNB5V1i2GYA2R2d2ROKGRQAVOZ8mM1RNCUPlVFvI5IEqG3u3nsiOCJycTIr05qhNXPNuPNXzSZaPhZHdwVaPJNbXw7RycvjIzoOKTJWABdWL1iC6Mfn8CRUDGldTA4DN57tniAXh84KXgtInbliPlEbdY2GBeJZewpTs3jWbvVUFLzWdwDHbePl79nmZ4a6ZnGuqhRvU9KlTzCgNILozqy0LeXMORuiQMKSCiOKxWPQpjrKeDLTTruI1HgytGEnhpkg4TBJ23chBiiLQ1CsNfUD1ULFLGJkNUrahGQuAMtvz3ESLCGQOpXQXST2j0jJorDffu8arecTUsIqZ9dy3vXsQIoe6LFGX63okHkww1JAcy4QWeJ9vdmEuYq0mVCDChKexeokOCnwc8dLgMlBT1ZYrem71lx9lS0z9nqC5JDftK7E5o1jLSiipR459sA6xGJIRlpv86NUGaaQbXdz3yLjLR2TcjdowNkm7pLERtzqNwhYOZ1ea4PI8qhohrX0bnT3mnqguDxN7ZGS6rv6MHvHIMYtIrDSoGwfz8ZX3R6B0su1VJ9Lfd7It5Ux0nk4PC7HWRDkb29LCVEk9wj",
   "termos": "Vale na loja Shop1103784103 Store do AliExpress. Ex.: Sapatos Femininos de Verão, Nova Moda, Sapatos Casuais Respiráveis e C"
  },
  {
-  "loja": "AliExpress · Anlan Official Store",
+  "loja": "AliExpress · Star Custom Store",
   "tipo": "voucher",
-  "titulo": "R$ 11,56 OFF acima de R$ 173,40",
-  "codigo": "ANLAN02",
-  "fim": "2026-11-29T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxgsYmXaAYUE7M5TCpKLwcHItf3wnpLYtcqvbOxntkJOaAfuY6RxaPgTHsf45kNrZzCkEkFrupEynRRAfOfdsqvo8hCWrMToJwK05apzKNi43uA7kQP3Jau5gpNEnwh7YNC8BqA2EXCs0FqleMDapCd3U34pqcnT1qWbUcIKmjdWFzvDmLcPRzUUv1OzW6yen1wcwN2a79s9qAc5xr9kziXR7FOSJv8sg4z1CblMnK3j6VE4luv6Zd7RN1aoq2hvLwk4KdCO4jztzhEKztNRcTD7lB7dK6OUNRTYWp8KaRPwuATcxuiTDrheM5iXM4E9K3lP9L9E2aBwYAMXTbpRxBdc33FRupyUaKXyPwVvdg8RccRa9ikFPyIksNamasavU2R2XN7FfjF8hfSvvPZOx4iCOE8FXaKyGybA0dUP4dt4ulubQQJrYUN65669agV1DPaUkPtxu0U1Xm43Xrau0Pt9FzUQOqce0vttCrjZFfOguDCz2XJTNxGBPhIa1wKSEdrbt749x8TuQ1a80lao2vWxPSkeSd9wfVXz9VfXoRaHNFGZv8eLYZCnRdpBG3OsCP4mPy37rQHMfrF8u9UgUQdHoUZDh6Io2PIcXpVPgtJFYU25c9TXzI2eZvKpceKkX0Baarr8H55P0Hi3IHIPXpR4J",
-  "termos": "Vale na loja Anlan Official Store do AliExpress. Ex.: ANLAN Dispositivo de Beleza para Pescoço Dual Polar com Ouro 24K Antie"
+  "titulo": "R$ 5,21 OFF acima de R$ 5,20",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-11-26T14:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFk7AiCpvbrZWLPhav7SR6AZl2GJWjqBaqaNEM0h1y8yThcI08H0n91yomYVLoBhbss6vGxEoX3e0096l91vS6liWZumChpE4zpJfSMOFYHT9H3pIRmZHXONiWQWroMsmQyxKFpfyiM4PsA8nZnFGopGn6wWFJbkR07sr8DHab3LtzBN1z9T9s3MrrTXo4qGaNwG5uCcPMtPpR6iu8rFTXoGCaNKEolDxBRkVK7BXTvpvWnB446oXncYheSmWXMrvNimWRoTKdtpmedPrAtlyI6X9VFfFDChH6ochB3IGvG81ljDjsLBR8oC7B9sl882OgQxOl8k5n8N0RLxedUmbQP0k0BPBF7Cvnn2iXjmFOC58ECySKjEzl6qY4EdwPLEkg1QRGmg1zYmFBG6AxNDt4zyGLuL2V22I7dMT8Y4sAfqvSI1c751MwC9CcVNZG3XKLWcBVluU1ODRQmzH",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

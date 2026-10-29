@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-29T06:57:29",
+  "medido_em": "2026-10-29T14:08:35",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -18,7 +18,7 @@
       "posts": 155,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1307,
+      "reacoes": 1318,
       "comentarios": 34,
       "shares": 15,
       "engajamento_pct": 0.0,
@@ -44,14 +44,14 @@
       "melhores_recentes": []
     },
     "semanestesia.pod": {
-      "posts": 201,
+      "posts": 203,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1795,
+      "reacoes": 1800,
       "comentarios": 11,
       "shares": 30,
       "engajamento_pct": 0.0,
-      "posts_recentes": 4,
+      "posts_recentes": 6,
       "views_recentes": 0,
       "melhores_recentes": [
         {

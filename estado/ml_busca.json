@@ -1,14 +1,14 @@
 {
- "quando": "2026-10-29T00:25:02.882027+00:00",
+ "quando": "2026-10-29T06:27:56.065366+00:00",
  "termos": {
   "whey": "2026-10-29T00:25:02.882027+00:00",
-  "meia": "2026-10-28T00:45:19.181055+00:00",
+  "meia": "2026-10-29T06:27:56.065366+00:00",
   "chapéu": "2026-10-28T07:24:03.501925+00:00",
-  "rádio": "2026-10-28T00:45:19.181055+00:00",
-  "pneu": "2026-10-28T00:45:19.181055+00:00",
-  "bateria": "2026-10-28T00:45:19.181055+00:00",
-  "bateria 60v": "2026-10-28T00:45:19.181055+00:00",
-  "bateria 60a": "2026-10-28T00:45:19.181055+00:00",
+  "rádio": "2026-10-29T06:27:56.065366+00:00",
+  "pneu": "2026-10-29T06:27:56.065366+00:00",
+  "bateria": "2026-10-29T06:27:56.065366+00:00",
+  "bateria 60v": "2026-10-29T06:27:56.065366+00:00",
+  "bateria 60a": "2026-10-29T06:27:56.065366+00:00",
   "ex2": "2026-10-28T07:24:03.501925+00:00",
   "grade proteção ex2": "2026-10-28T07:24:03.501925+00:00",
   "grade proteção": "2026-10-28T07:24:03.501925+00:00",
@@ -29,7 +29,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB26444945",
@@ -45,7 +45,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB44684359",
@@ -61,7 +61,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB25675555",
@@ -77,7 +77,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB24692711",
@@ -93,7 +93,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB24692716",
@@ -109,7 +109,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB61784268",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB70104297",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB54433666",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB25588931",
@@ -205,14 +205,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB35743965",
    "nome": "Rádio Px Voyager Ares II 480 Canais 24.715-30.105mhz AM/FM/SSB",
-   "preco": 1385.0,
+   "preco": 1384.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_687167-MLA100010523487_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4949343465?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4505583497?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB2906",
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB32008732",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB72882606",
@@ -253,28 +253,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
-  },
-  {
-   "id": "MLB44019921",
-   "nome": "Pneu Bicicleta 700x35 Deestone D206 Pneu Hibrido Cyclocross",
-   "preco": 55.54,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_654959-MLA95502417857_102025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5286843729?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB9203",
-   "comissao": 16.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "pneu",
-   "visto": "2026-10-15T00:52:28.284967+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB72679745",
    "nome": "Pneu 26x1 1/2 Pneu Aro 26 Pneu Caloi Vereda Levorin 1 Pneu",
-   "preco": 63.01,
+   "preco": 62.02,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_949057-MLA111727714402_062026-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7508921894?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -285,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB72681733",
@@ -301,7 +285,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB27057277",
@@ -317,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB66398853",
@@ -333,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB76828668",
@@ -349,7 +333,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB46001471",
@@ -365,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB46001231",
@@ -381,12 +365,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB52260545",
    "nome": "Carregador Usina Charger 12v 60a Bivolt",
-   "preco": 589.79,
+   "preco": 589.89,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_724104-MLA99440114308_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-4497917295?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -397,7 +381,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB46016136",
@@ -413,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB51647079",
@@ -429,7 +413,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB74914144",
@@ -445,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB11904050",
@@ -1021,7 +1005,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-28T00:45:19.181055+00:00"
+   "visto": "2026-10-29T06:27:56.065366+00:00"
   },
   {
    "id": "MLB37894526",

@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-10-29T14:08:35",
+  "medido_em": "2026-10-29T20:12:49",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -15,16 +15,20 @@
       "melhores_recentes": []
     },
     "modofuturo": {
-      "posts": 155,
+      "posts": 156,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1318,
+      "reacoes": 1329,
       "comentarios": 34,
-      "shares": 15,
+      "shares": 16,
       "engajamento_pct": 0.0,
-      "posts_recentes": 1,
+      "posts_recentes": 2,
       "views_recentes": 0,
       "melhores_recentes": [
+        {
+          "views": 0,
+          "titulo": "A nova máquina de US$ 380 milhões da ASML A ASML desenvolveu"
+        },
         {
           "views": 0,
           "titulo": "A nova máquina de US$ 380 milhões da ASML\n\nA ASML desenvolve"
@@ -44,14 +48,14 @@
       "melhores_recentes": []
     },
     "semanestesia.pod": {
-      "posts": 203,
+      "posts": 205,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1800,
+      "reacoes": 1805,
       "comentarios": 11,
       "shares": 30,
       "engajamento_pct": 0.0,
-      "posts_recentes": 6,
+      "posts_recentes": 7,
       "views_recentes": 0,
       "melhores_recentes": [
         {

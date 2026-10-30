@@ -8467,7 +8467,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_06_nota83_CAL_NEWPORT_250_BATIMENTOS_POR_MINUTO_E_O_FIM_DO_REMO_short_9x16.mp4",
       "criado_em": "2026-10-10T16:12:07+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-30T11:20:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "CAL NEWPORT: 250 BATIMENTOS POR MINUTO E O FIM DO REMO",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "9ef87e41e03ca6154129f62d55f6ca6757e98bccc426d38cb308a4247ab3605d": {
       "arquivo": "2026-10-10_01_nota93_O_truque_de_3_barras_de_ki_do_Trunks_nos_torneios_de_Tenkaic_short_9x16.mp4",

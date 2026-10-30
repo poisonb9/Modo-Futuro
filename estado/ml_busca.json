@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-30T10:29:31.269072+00:00",
+ "quando": "2026-10-30T16:52:29.780443+00:00",
  "termos": {
   "whey": "2026-10-30T02:58:15.699647+00:00",
   "meia": "2026-10-30T10:29:31.269072+00:00",
-  "chapéu": "2026-10-29T13:43:18.259986+00:00",
+  "chapéu": "2026-10-30T16:52:29.780443+00:00",
   "rádio": "2026-10-30T10:29:31.269072+00:00",
   "pneu": "2026-10-30T10:29:31.269072+00:00",
   "bateria": "2026-10-30T10:29:31.269072+00:00",
   "bateria 60v": "2026-10-30T10:29:31.269072+00:00",
   "bateria 60a": "2026-10-30T10:29:31.269072+00:00",
-  "ex2": "2026-10-29T13:43:18.259986+00:00",
-  "grade proteção ex2": "2026-10-29T13:43:18.259986+00:00",
-  "grade proteção": "2026-10-29T13:43:18.259986+00:00",
-  "grafe protecao": "2026-10-29T13:43:18.259986+00:00"
+  "ex2": "2026-10-30T16:52:29.780443+00:00",
+  "grade proteção ex2": "2026-10-30T16:52:29.780443+00:00",
+  "grade proteção": "2026-10-30T16:52:29.780443+00:00",
+  "grafe protecao": "2026-10-30T16:52:29.780443+00:00"
  },
  "produtos": [
   {
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB59481595",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB35161880",
@@ -573,7 +573,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-28T07:24:03.501925+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB26710873",
@@ -589,14 +589,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB22546702",
    "nome": "Multimetro Digital Western 978md",
-   "preco": 32.09,
+   "preco": 28.68,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_855961-MLA99970191349_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5738786672?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5438182309?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB30214",
@@ -605,7 +605,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB28670236",
@@ -621,7 +621,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB54197430",
@@ -637,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB47670469",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB62535666",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB50732570",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB23351954",
@@ -733,7 +733,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB26197012",
@@ -749,7 +749,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB42432212",
@@ -765,7 +765,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB25722405",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB41306211",
@@ -797,7 +797,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB47135031",
@@ -866,9 +866,9 @@
   {
    "id": "MLB73973661",
    "nome": "Cama Solteiro Reforçada P/160 Kg 100% Ferro C/grade Proteção Cor Preto FERRO GRADE PROTEÇÃO",
-   "preco": 834.96,
+   "preco": 575.46,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_819223-MLA113416427413_062026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7818366828?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-6994819926?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB23183294",
@@ -957,7 +957,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB79613775",
@@ -973,7 +973,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   },
   {
    "id": "MLB79613774",
@@ -1149,7 +1149,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-29T13:43:18.259986+00:00"
+   "visto": "2026-10-30T16:52:29.780443+00:00"
   }
  ]
 }

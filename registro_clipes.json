@@ -8411,7 +8411,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_01_nota95_4_HORAS_DE_ESTUDO_SEM_VIRAR_A_NOITE_NA_FACULDADE_short_9x16.mp4",
       "criado_em": "2026-10-10T16:11:58+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-30T16:11:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #67: 4 HORAS DE ESTUDO SEM VIRAR A NOITE NA FACULDADE",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "e441eb0787f584f322d9421e76016e8b69ce5d775d5f092f0b04e1a8d402788b": {
       "arquivo": "2026-10-10_02_nota93_A_DOR_MENTAL_QUE_GERA_MEMORIA_FOTOGRAFICA_short_9x16.mp4",

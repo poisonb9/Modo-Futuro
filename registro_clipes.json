@@ -8547,7 +8547,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_02_nota94_JEJUM_ATE_O_MEIO-DIA_O_PICO_DE_ADRENALINA_QUE_ACELERA_O_APRE_short_9x16.mp4",
       "criado_em": "2026-10-10T17:09:22+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-30T19:25:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #68: JEJUM ATÉ O MEIO-DIA: O PICO DE ADRENALINA QUE ACELERA ",
+          "plataforma": "tiktok"
+        }
+      ]
     },
     "663164b4080c1670d16130e0b90120c96914414a2cda56594a64458e60c152d1": {
       "arquivo": "2026-10-10_03_nota93_1.000_MG_DESTE_NUTRIENTE_IGUALAM_O_EFEITO_DE_ANTIDEPRESSIVOS_short_9x16.mp4",

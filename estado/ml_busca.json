@@ -1,18 +1,18 @@
 {
- "quando": "2026-10-31T13:53:13.537382+00:00",
+ "quando": "2026-10-31T18:47:53.747828+00:00",
  "termos": {
   "whey": "2026-10-31T07:31:37.879793+00:00",
   "meia": "2026-10-31T13:53:13.537382+00:00",
-  "chapéu": "2026-10-30T16:52:29.780443+00:00",
+  "chapéu": "2026-10-31T18:47:53.747828+00:00",
   "rádio": "2026-10-31T13:53:13.537382+00:00",
   "pneu": "2026-10-31T13:53:13.537382+00:00",
   "bateria": "2026-10-31T13:53:13.537382+00:00",
   "bateria 60v": "2026-10-31T13:53:13.537382+00:00",
   "bateria 60a": "2026-10-31T13:53:13.537382+00:00",
-  "ex2": "2026-10-30T16:52:29.780443+00:00",
-  "grade proteção ex2": "2026-10-30T16:52:29.780443+00:00",
-  "grade proteção": "2026-10-30T16:52:29.780443+00:00",
-  "grafe protecao": "2026-10-30T16:52:29.780443+00:00"
+  "ex2": "2026-10-31T18:47:53.747828+00:00",
+  "grade proteção ex2": "2026-10-31T18:47:53.747828+00:00",
+  "grade proteção": "2026-10-31T18:47:53.747828+00:00",
+  "grafe protecao": "2026-10-31T18:47:53.747828+00:00"
  },
  "produtos": [
   {
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB59481595",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB35161880",
@@ -573,7 +573,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB26710873",
@@ -589,7 +589,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB22546702",
@@ -605,7 +605,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB28670236",
@@ -621,7 +621,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB54197430",
@@ -637,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB47670469",
@@ -658,9 +658,9 @@
   {
    "id": "MLB62867807",
    "nome": "Cama Infantil Grade Proteção Montessoriana + Colchão Incluso Carro vermelho",
-   "preco": 373.0,
+   "preco": 329.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_688873-MLA100458894377_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7813187308?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-7912782378?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -669,14 +669,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB62535666",
    "nome": "Cama Infantil Grade Proteção Montessoriana + Colchão Incluso",
-   "preco": 389.0,
+   "preco": 329.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_926218-MLA99513275025_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7813033612?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-5487621501?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB50732570",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB23351954",
@@ -733,7 +733,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB26197012",
@@ -749,7 +749,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB42432212",
@@ -765,7 +765,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB25722405",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB41306211",
@@ -797,7 +797,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB47135031",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB23183294",
@@ -957,7 +957,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB79613775",
@@ -973,7 +973,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   },
   {
    "id": "MLB79613774",
@@ -1149,7 +1149,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-10-30T16:52:29.780443+00:00"
+   "visto": "2026-10-31T18:47:53.747828+00:00"
   }
  ]
 }

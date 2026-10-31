@@ -8595,7 +8595,15 @@
       "canal": "semanestesia.pod",
       "url": "https://github.com/poisonb9/Modo-Futuro/releases/download/clipes-10-2026/2026-10-10_07_nota88_OLHAR_PARA_CIMA_DISPARA_O_ALERTA_O_AJUSTE_DE_MONITOR_CONTRA_short_9x16.mp4",
       "criado_em": "2026-10-10T17:09:36+00:00",
-      "postagens": []
+      "postagens": [
+        {
+          "origem": "buffer",
+          "quando": "2026-10-30T22:39:00.000Z",
+          "canal": "semanestesia.pod",
+          "detalhe": "Protocolo #73: OLHAR PARA CIMA DISPARA O ALERTA: O AJUSTE DE MONITOR C",
+          "plataforma": "tiktok"
+        }
+      ]
     }
   }
 }

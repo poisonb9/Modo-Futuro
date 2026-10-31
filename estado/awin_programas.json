@@ -1,5 +1,5 @@
 {
-  "quando": "2026-10-30T17:12:30+00:00",
+  "quando": "2026-10-31T16:21:29+00:00",
   "programas": {
     "Nike BR": "joined",
     "Kabum BR": "joined",
@@ -30,8 +30,6 @@
     "Jo Malone BR": "pending",
     "Estée Lauder BR": "pending",
     "Outlet de Passagens BR": "pending",
-    "Granado BR": "pending",
-    "Phebo BR": "pending",
     "IBBL BR": "pending",
     "Foxton BR": "pending",
     "Hering BR": "pending",
@@ -57,6 +55,8 @@
     "Extrafarma BR": "rejected",
     "Pague Menos BR": "rejected",
     "Azul BR": "rejected",
+    "Granado BR": "rejected",
+    "Phebo BR": "rejected",
     "adidas BR": "rejected",
     "Calvin Klein BR": "rejected",
     "FastShop B2B (BR)": "rejected",

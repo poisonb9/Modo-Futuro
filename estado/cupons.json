@@ -2,6 +2,15 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
+  "titulo": "10% OFF em produtos participantes da campanha de placas-mãe",
+  "codigo": "PLACAMAE10",
+  "fim": "2026-11-03T12:00:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1PLACAMAE10",
+  "termos": ""
+ },
+ {
+  "loja": "Kabum",
+  "tipo": "voucher",
   "titulo": "R$ 400 OFF na compra do Console Sony PlayStation 5 SSD 825GB Edição Digital com 2 Jogos Digitais",
   "codigo": "ESQUENTAPLAY",
   "fim": "2026-11-02T15:00:00+00:00",
@@ -54,12 +63,129 @@
   "termos": "Aplicável em produtos selecionados"
  },
  {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "10% OFF em produtos participantes da promoção Husky",
-  "codigo": "HUSKY10",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FHUSKY10",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Tefal So Matcha 18cm Verde",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-tefal-so-matcha-18cm-verde-9295306820_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Tefal So Matcha 24cm Verde",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-tefal-so-matcha-24cm-verde-9295306821_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Tefal So Matcha 24cm Verde",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-tefal-so-matcha-24cm-verde-9295306823_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Tefal So Matcha 20cm Verde",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-tefal-so-matcha-20cm-verde-9295306822_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Com Indução Tefal So Chef 22cm Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-com-inducao-tefal-so-chef-22cm-vermelha-9295306721_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Com Indução Tefal So Chef 18cm Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-com-inducao-tefal-so-chef-18cm-vermelha-9295306720_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Com Indução Tefal So Chef 28cm Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-com-inducao-tefal-so-chef-28cm-vermelha-9295306717_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Com Indução Tefal So Chef 24cm Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-com-inducao-tefal-so-chef-24cm-vermelha-9295306716_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Com Indução Tefal So Chef 24cm Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-com-inducao-tefal-so-chef-24cm-vermelha-9295306719_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Com Indução Tefal So Chef 21cm Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-com-inducao-tefal-so-chef-20cm-vermelha-9295306718_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 28cm Tefal Sensations Champagne",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-28cm-tefal-sensation-champagne-9295307024%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 26cm Tefal Sensations Champagne",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-26cm-tefal-sensation-champagne-9295307026%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 24cm Tefal Sensations Champagne",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-24cm-tefal-sensation-champagne-9295307025%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 28cm Tefal Sensations Champagne",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-28cm-tefal-sensation-champagne-9295307027%2Fp",
   "termos": ""
  },
  {
@@ -72,93 +198,849 @@
   "termos": "Válido até 07/11/2026 às 23:59 (horário de Brasília), nos produtos da coleção Novas Combinações de Cores. Preços e condições de pagamento exibidos na página do produto e confirmados no checkout. Não cumulativo. Sujeito à disponibilidade de estoque"
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Aspirador de pó robô ABIR K30, estação vazia automática, lidar a laser, sucção 6500PA, mapa multipiso, aparelho seco e molhado para casa inteligente,Voltagem 220V",
-  "codigo": "AFFNOV05",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005004803929676.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda 30cm Tefal Refresh Ceramic Azul Ártico",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-30cm-tefal-refresh-ceramic-azul-artico-9295307023%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Impressora 3D ELEGOO SATURN 4 ULTRA 12K com Nivelamento Automático, Monitoramento de Impressão por IA, Impressão de Alta Velocidade Tamanho 218x122x220mm",
-  "codigo": "AESUPER1",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007369756529.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda 30cm Tefal Refresh Ceramic Cinza",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-30cm-tefal-refresh-ceramic-cinza-9295307022%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Impressora 3D ELEGOO MARS 5 ULTRA 9K MSLA com Nivelamento Automático e Câmera Inteligente AI, Impressão de Alta Velocidade Tamanho 153.36×77.76×165mm",
-  "codigo": "AFFNOV06",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007383923208.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 22cm Tefal One Pick Pot Pan Preto",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-22cm-tefal-one-pick-pot-pan-preto%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Impressora 3D ANYCUBIC Kobra S1 Max, 350 ℃ Hotend, extrusora de aço endurecido, até 600 mm/s Velocidade de impressão Volume de construção 350 × 350 × 350 mm",
-  "codigo": "AESUPER2",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005999556044.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 22cm Tefal One Pick Pot Pan Verde",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-22cm-tefal-one-pick-pot-pan-verde%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Impressora 3D ELEGOO SATURN 3 ULTRA 12K Mono MSLA com tela LCD de 10'' e resolução 12K, velocidade de impressão de até 150mm/h, tamanho de impressão 219*123*260mm.",
-  "codigo": "AFFNOV07",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005005969661507.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 22cm Tefal One Pick Pot Pan Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-22cm-tefal-one-pick-pot-pan-vanilla%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Aspirador Robô ABIR X9, Lidar Duplo, Sucção de 6500pa, Limpeza UV, Mapeamento Multi-Piso, Área Restrita via APP, Mop Inteligente para Limpeza a Seco e Úmido",
-  "codigo": "AFFNOV04",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005010473793061.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Aço Inox Com Indução Tefal Jamie Oliver 28cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-aco-inox-com-inducao-tefal-jamie-oliver-28cm-9295306726_pai-1%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Akko monsGeek fun60 pro he teclado mecânico interruptor magnético 60% teclado para jogos gatilho rápido 0.01mm 8k teclado personalizado com fio",
-  "codigo": "AFFNOV02",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005009305869033.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Aço inox Com Indução Tefal Jamie Oliver 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-aco-inox-com-inducao-tefal-jamie-oliver-24cm-9295306724_pai-1%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "UGREEN Uno USB C HUB 6-em-1 4K60Hz PD100W 10Gbps USB3.2 Adaptador Divisor para Laptop Macbook Pro Air Estação de acoplamento expansor USB",
-  "codigo": "AFFNOV01",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005007398525395.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Aço inox Com Indução Tefal Jamie Oliver 28cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-aco-inox-com-inducao-tefal-jamie-oliver-28cm-9295306725_pai-1%2Fp",
   "termos": ""
  },
  {
-  "loja": "Aliexpress",
-  "tipo": "voucher",
-  "titulo": "Amplificador de Fone de Ouvido para Jogos Fosi Audio C3 FPS com DAC USB de Mesa CS43131 e Entrada para Microfone, Placa de Som para Jogos para PS5/PC/Switch",
-  "codigo": "AFFNOV03",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=18879&awinaffid=3089205&ued=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F1005012543585478.html",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Aço inox Com Indução Tefal Jamie Oliver 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-aco-inox-com-inducao-tefal-jamie-oliver-20cm-9295306723_pai-1%2Fp",
   "termos": ""
  },
  {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "15% OFF em produtos participantes da promoção STREAMER15",
-  "codigo": "STREAMER15",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FSTREAMER15",
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela 18cm Tefal Day By Day Bronze",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-18cm-tefal-day-by-day-bronze-9295307033%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 24cm Tefal Day By Day Bronze",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-24cm-tefal-day-by-day-bronze-9295307030%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola 22cm Tefal Day By Day Bronze",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-22cm-tefal-day-by-day-bronze-9295307034%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 28cm Tefal Day By Day Bronze",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-28cm-tefal-day-by-day-bronze-9295307029%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 28cm Tefal Day By Day Bronze",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-28cm-tefal-day-by-day-bronze-9295307032%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 24cm Tefal Day By Day Bronze",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-24cm-tefal-day-by-day-bronze-9295307031%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola 20cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-20cm-tefal-daisy-vanilla-9295307037%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela 18cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-18cm-tefal-daisy-vanilla-9295307035%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola 24cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-24cm-tefal-daisy-vanilla-9295307038%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda 24cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-24cm-tefal-daisy-vanilla-9295307036%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 28cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-28cm-tefal-daisy-vanilla-9295307040%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 24cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-24cm-tefal-daisy-vanilla-9295307039%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 20cm Tefal Daisy Vanilla",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-20cm-tefal-daisy-vanilla-9295307041%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Oval Tefal Air Alumínio Fundido 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-oval-tefal-air-aluminio-fundido-30cm-2100127039%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Tefal Air Alumínio Fundido 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-tefal-air-aluminio-fundido-20cm-2100127040%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Stone Pro 18cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-stone-pro-18cm-5861037585%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Stone Pro 16cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-stone-pro-16cm-5861037586%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Grill Redondo Rochedo Stone Pro 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgrill-redondo-rochedo-stone-pro-30cm-5861035939%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda Rochedo Stone Pro 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-rochedo-stone-pro-24cm-5861035027%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Rochedo Stone Pro 25cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-rochedo-stone-pro-25cm-5861035028%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panquequeira Rochedo Stone Pro 21cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanquequeira-rochedo-stone-pro-21cm%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Stone Pro 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-stone-pro-20cm-5861035021%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Stone Pro 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-stone-pro-24cm-5861035024%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Stone Pro 26cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-stone-pro-26cm-5861035025%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda Com Tampa Rochedo Stone Pro 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-rochedo-stone-pro-24cm%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Stone Pro 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-stone-pro-30cm-5861035026%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 24cm Rochedo Ceramic Rose Gold",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-24cm-rochedo-ceramic-rose-gold-2100141177%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 24cm Rochedo Ceramic Rose Gold",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-24cm-rochedo-ceramic-rose-gold-2100141191%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 28cm Rochedo Ceramic Rose Gold",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-28cm-rochedo-ceramic-rose-gold-2100141192%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Wok 28cm Rochedo com Tampa Ceramic Rose Gold",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fwok-28cm-rochedo-com-tampa-ceramic-rose-gold-2100141189%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira 20cm Rochedo Ceramic Rose Gold",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-20cm-rochedo-ceramic-rose-gold-2100141210%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Robusta Grafite 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-robusta-grafite-24cm-5861034281%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rasa Rochedo Robusta Grafite 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rasa-rochedo-robusta-grafite-30cm-5861034278%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda Rochedo Robusta Grafite 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-rochedo-robusta-grafite-24cm-5861034284%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Rochedo Robusta Grafite 25cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-rochedo-robusta-grafite-25cm-5861034610%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Robusta Grafite 18cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-robusta-grafite-18cm-5861034873%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Fervedor Rochedo Robusta Grafite 15cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffervedor-rochedo-robusta-grafite-15cm-5861034275%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Robusta Grafite 26cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-robusta-grafite-26cm-5861034282%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Rochedo Robusta Grafite 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-rochedo-robusta-grafite-20cm-5861034874%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Robusta Grafite 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-robusta-grafite-30cm-5861034283%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Robusta Grafite 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-robusta-grafite-20cm-5861034875%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Robusta Grafite 16cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-robusta-grafite-16cm-5861034961%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Robusta Grafite 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-robusta-grafite-20cm-5861034280%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Chapa Dupla Rochedo Robusta Grafite",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fchapa-dupla-rochedo-robusta-grafite%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panquequeira Rochedo Robusta Grafite 21cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanquequeira-rochedo-robusta-grafite-21cm%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Fervedor Rochedo Robusta Grafite 12cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffervedor-rochedo-robusta-grafite-12cm-5861034272%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Rochedo Robusta Grafite 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-rochedo-robusta-grafite-24cm-5861034277%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Robusta Grafite 18cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-robusta-grafite-18cm-5861034279%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Funda Rochedo Robusta Grafite 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-funda-rochedo-robusta-grafite-24cm%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Grill Redondo Rochedo Natural Stone 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgrill-redondo-rochedo-natural-stone-30cm-5861034779%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Natural Stone 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-natural-stone-24cm-5861034783%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Rochedo Natural Stone 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-rochedo-natural-stone-24cm-5861034790%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Rochedo Natural Stone 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-rochedo-natural-stone-20cm-5861034777%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Natural Stone 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-natural-stone-20cm-5861034780%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Natural Stone 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-natural-stone-30cm-5861034785%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Rochedo Facilita Vermelho 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-rochedo-facilita-vermelho-24cm-5861035172%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Facilita Vermelho 18cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-facilita-vermelho-18cm-5861034138%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Fervedor Rochedo Facilita Vermelho 15cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffervedor-rochedo-facilita-vermelho-15cm-5861034134%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Facilita Vermelho 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-facilita-vermelho-24cm-5861034140%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Fervedor Rochedo Facilita Vermelho 12cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffervedor-rochedo-facilita-vermelho-12cm-5861034133%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Rochedo Facilita Vermelho 28cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-rochedo-facilita-vermelho-28cm-5861035173%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Facilita Vermelho 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-facilita-vermelho-30cm-5861034141%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Facilita Vermelho 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-facilita-vermelho-20cm-5861034139%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Caçarola Rochedo Facilita Vermelho 20cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fcacarola-rochedo-facilita-vermelho-20cm-5861034135%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela Rochedo Facilita Vermelho 16cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-rochedo-facilita-vermelho-16cm-5861034137%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Ovo 16cm Rochedo Facilita Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-frigideira-ovo-16cm-rochedo-facilita-vermelha-5861036729-p%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Ovo 16cm com Tampa Rochedo Facilita Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-frigideira-ovo-16cm-com-tampa-rochedo-facilita-vermelha-5861036334-p%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Grill Redondo Rochedo Expert Chocolate 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fgrill-redondo-rochedo-expert-chocolate-30cm-5861034145_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Expert Chocolate 20CM",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-expert-chocolate-20cm-5861034767_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Expert Chocolate 24CM",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-expert-chocolate-24cm-5861034148_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Rochedo Expert Chocolate 30CM",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-rochedo-expert-chocolate-30cm-5861034149_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Frigideira Wok Rochedo Expert Chocolate 24cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ffrigideira-wok-rochedo-expert-chocolate-24cm-5861034150_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela De Pressão Rochedo Inox Trendy 6 litros Fechamento Externo",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-rochedo-inox-trendy-6-litros-fechamento-externo-7114000733%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Assadeira de Pizza Rochedo Dura+ com Revestimento Antiaderente 35cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fassadeira-de-pizza-rochedo-dura-com-revestimento-antiaderente-35-cm-5861035900%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Forma Redonda Rochedo Bolo Perfeito com Revestimento Antiaderente 30cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2F-forma-redonda-rochedo-bolo-perfeito-com-revestimento-antiaderente-30-cm--5861035902-p%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Assadeira Funda Retangular com Revestimento Antiaderente Rochedo Dura+  37cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fassadeira-funda-retangular-com-revestimento-antiaderente-rochedo-dura-37-cm-5861035904%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Assadeira Funda Retangular com Revestimento Antiaderente Rochedo Dura+ 32cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fassadeira-funda-retangular-com-revestimento-antiaderente-rochedo-dura-32cm-5861035903%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Assadeira Rasa Retangular com Revestimento Antiaderente Rochedo Dura+  37cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fassadeira-rasa-retangular-com-revestimento-antiaderente-rochedo-dura-37cm-5861035906%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Assadeira Funda Retangular com Revestimento Antiaderente Rochedo Dura+ 44cm",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fassadeira-funda-retangular-com-revestimento-antiaderente-rochedo-dura-44-cm-5861035905%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela de Pressão de Alta Capacidade Rochedo Pro 20L",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-de-alta-capacidade-rochedo-pro-20l-7114900104%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela de Pressão de Alta Capacidade Rochedo Pro 15L",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-de-alta-capacidade-rochedo-pro-15l-7114900103%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela de Pressão Tefal Unique 6L Inox Fechamento Externo Versátil 2 em 1",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-tefal-unique-6l-inox-fechamento-externo-versatil-2-em-1-7114000728%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela de Pressão Tefal Opti'Space 7 Litros em Inox com Fundo Triplo e Cesto de Vapor",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Ftefal-panela-de-pressao-7l-tefal-opti-space-em-inox-com-fundo-triplo-e-cesto-de-vapor-7114000613_pai%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela De Pressão Rochedo Inox Trendy 6 litros Fechamento Externo Com Cesta De Vapor",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-rochedo-inox-trendy-6-litros-fechamento-externo-com-cesta-de-vapor-7114000655_pai-1%2Fp",
+  "termos": ""
+ },
+ {
+  "loja": "Arno",
+  "tipo": "promotion",
+  "titulo": "Panela de Pressão Rochedo Clipso Fechamento Externo 4,5 litros Vermelha",
+  "codigo": "",
+  "fim": "2026-12-01T02:59:59+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=108626&awinaffid=3089205&ued=https%3A%2F%2Fwww.arno.com.br%2Fpanela-de-pressao-rochedo-clipso-fechamento-externo-4-5-litros-vermelha-5861035625%2Fp",
   "termos": ""
  },
  {
@@ -173,46 +1055,10 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
-  "titulo": "15% OFF em produtos participantes da promoção CP2HUSKY15",
-  "codigo": "HUSKY15",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP2HUSKY15",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "10% OFF em fontes XPG selecionadas utilizando o cupom FONTEXPG",
-  "codigo": "FONTEXPG",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1FONTEXPG",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "10% OFF em produtos MSI selecionados utilizando o cupom MSINOKABUM",
-  "codigo": "MSINOKABUM",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1MSINOKABUM",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
   "titulo": "10% OFF em produtos selecionados utilizando o cupom LIQUIDA10",
   "codigo": "LIQUIDA10",
   "fim": "2026-11-02T12:00:00+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FLIQUIDA10",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "20% OFF em produtos selecionados para casa conectada utilizando o cupom CASACONECTADA",
-  "codigo": "CASACONECTADA",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1CASACONECTADA",
   "termos": ""
  },
  {
@@ -227,100 +1073,10 @@
  {
   "loja": "Kabum",
   "tipo": "voucher",
-  "titulo": "10% OFF em produtos participantes da campanha SETUPFULL10",
-  "codigo": "SETUPFULL10",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1SETUPFULL10",
-  "termos": ""
- },
- {
-  "loja": "Kabum",
-  "tipo": "voucher",
   "titulo": "15% OFF em produtos selecionados da campanha HYPERX15",
   "codigo": "HYPERX15",
   "fim": "2026-11-06T13:00:00+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP1HYPERX15",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "Copo Prismático Alto Black Eclipse Stanley 1913 381ml | 50% OFF. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fproducts%2Fcopo-highball-black-eclipse",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "Mug Térmica Café To Go Coffee Stanley 1913 354ml | 30% OFF. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fproducts%2Fcafe-go-travel-0-23l-coffee",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "KITS LEGIONÁRIOS | Até 50% OFF. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fcollections%2Fkits-legionarios",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "QUENCHER LEGIONÁRIOS | Até 50% OFF. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fcollections%2Fquencher-legionarios",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "Taça Térmica Cocktail Glass Stanley 1913 Cream Gloss 414ml | 20% OFF. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fproducts%2Ftaca-termica-stanley-lift-cream-414ml",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "Garrafa Térmica Quick Flip Black 2.0 Stanley 1913 710ml | 50% OFF. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fproducts%2Fgarrafa-termica-quick-flip-2-0-black-710ml",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "Melhores Ofertas Até 50% OFF | PRÉ BLACK LEGIONÁRIOS. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fcollections%2Fmelhores-ofertas-legionarios",
-  "termos": ""
- },
- {
-  "loja": "Stanley",
-  "tipo": "promotion",
-  "titulo": "COPO TÉRMICO 3 EM 1 | PRÉ BLACK LEGIONÁRIOS. Disponível para membros Legionários. Cadastro gratuito.",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=30599&awinaffid=3089205&ued=https%3A%2F%2Fwww.stanley1913.com.br%2Fcollections%2Fcan-cooler-legionarios",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "voucher",
-  "titulo": "Polivitamínico Neosil Attack 100mg 90 comprimidos com cupom NEOSIL",
-  "codigo": "NEOSIL",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fpolivitaminico-neosil-attack-100mg-90-comprimidos%2Fp",
   "termos": ""
  },
  {
@@ -333,30 +1089,12 @@
   "termos": ""
  },
  {
-  "loja": "Kabum",
-  "tipo": "voucher",
-  "titulo": "10% OFF na Cadeira de Escritório Husky Sinergy com braço 3D. Até 140kg. Mesh cinza. Reclinação 120°. Butterfly e ajuste de altura",
-  "codigo": "CADEIRA10",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fproduto%2F955862%2Fcadeira-de-escritorio-husky-sinergy-braco-3d-ate-140kg-mesh-cinza-reclinio-120-butterfly-ajuste-de-altura-preto-hco800pt",
-  "termos": ""
- },
- {
   "loja": "Oceane",
   "tipo": "promotion",
   "titulo": "Ação Ingresso Filme",
   "codigo": "",
   "fim": "2026-11-04T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Fganhe-brinde-oceane",
-  "termos": ""
- },
- {
-  "loja": "Oceane",
-  "tipo": "promotion",
-  "titulo": "Esquenta Black | Just Glow por R$49.90",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=127159&awinaffid=3089205&ued=https%3A%2F%2Fwww.oceane.com.br%2Filuminador-rosa-just-glow-bouquet-oecane-ap2001256c0306f%2Fp",
   "termos": ""
  },
  {
@@ -384,33 +1122,6 @@
   "codigo": "JBL8OFF",
   "fim": "2026-11-02T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP3JBL8OFF",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "OUTUBRO ROSA - Beleza",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fbeleza%3Forder%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "OUTUBRO ROSA - Seleção Especial",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2F3940%3FPS%3D24%26map%3DproductClusterIds%26order%3DOrderByTopSaleDESC%26page%3D1",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "OUTUBRO ROSA - Dermocosméticos",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2Fdermocosmeticos%3Forder%3DOrderByTopSaleDESC",
   "termos": ""
  },
  {
@@ -459,66 +1170,12 @@
   "termos": ""
  },
  {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "Estação Primavera",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2F4022%3FPS%3D24%26map%3DproductClusterIds%26order%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "Estação Primavera",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2F4022%3FPS%3D24%26map%3DproductClusterIds%26order%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "Estação Primavera",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2F4022%3FPS%3D24%26map%3DproductClusterIds%26order%3DOrderByTopSaleDESC",
-  "termos": ""
- },
- {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "25% OFF em produtos participantes da marca JBL",
   "codigo": "JBL25OFF",
   "fim": "2026-11-02T02:59:59+00:00",
   "link": "https://www.awin1.com/cread.php?awinmid=17729&awinaffid=3089205&ued=https%3A%2F%2Fwww.kabum.com.br%2Fpromocao%2FCP3JBL25OFF",
-  "termos": ""
- },
- {
-  "loja": "Brinox Shop",
-  "tipo": "voucher",
-  "titulo": "Dia das bruxas",
-  "codigo": "TRAVESSURA",
-  "fim": "2026-11-01T02:59:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2F",
-  "termos": "Brinox 31/10\nDia das bruxas\n15% off em todo site"
- },
- {
-  "loja": "Brinox Shop",
-  "tipo": "voucher",
-  "titulo": "Dia mundial do macarrão",
-  "codigo": "HOJETEMASSA",
-  "fim": "2026-11-01T02:59:00+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=25279&awinaffid=3089205&ued=https%3A%2F%2Fwww.brinox.com.br%2Fdia-do-macarrao-2026",
-  "termos": "Brinox 25 a 31/10\n15% off em lista selecionada"
- },
- {
-  "loja": "Farmácias Indiana",
-  "tipo": "promotion",
-  "titulo": "Skin Care Coreano",
-  "codigo": "",
-  "fim": "2026-11-01T02:59:59+00:00",
-  "link": "https://www.awin1.com/cread.php?awinmid=122836&awinaffid=3089205&ued=https%3A%2F%2Fwww.farmaciaindiana.com.br%2F3990%3FPS%3D24%26map%3DproductClusterIds%26order%3DOrderByTopSaleDESC%26page%3D1",
   "termos": ""
  },
  {
@@ -734,7 +1391,7 @@
   "titulo": "R$ 5,30 OFF acima de R$ 86,50",
   "codigo": "RB4E11GCEWUP",
   "fim": "2026-11-30T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeV31w2l7Nw2EVvlO0QNeWSpMbJuv757Z8ytWCYijtgxbfgBsNdFZRnw6i0p3qCMoPqpsfLtjBpbEnvLlKGrOIrIYy4RP8QXSpY4aWfGZ09mrkarGK8nWjyDapHGrbqsAZVOIGID44u5XNUCfQeNT6FN9NRGGca3jbk5EtMPLvc1i1jSzPfo3sMn3S1Nd3yWBQyi4kvsQ1U0IRmYB1vqhEPvR0D7ORvdM0cZhUuXJlmqPYqwnX3bCtpeQO2nfgnHIaQim0BXcHRvjvF5dosmG5MOVIXvwcftoDUluiQgGwIuhBxwJ23SPcEPMKpfi7cQJXDMBItFX4QPluANlzZBj82mJZR690lVrLKmUO3cRsqvUyF07yhdJH1gkFCNG60ouZX9oElqBZpm29UHOy7Nij98F2fX2XP8j5NJT5CdbAl7VOrf3IGKdUAFO9PwEKVj20MYl0ZKo2UKsa7IT",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVCjPraAfZzyz9BaNYlq3kZVMxOErsawKrjcwFpGBu6Fzg75fo2UzaxDUs4HTfRaHaaZEaLgG8tCxBcRIDBvHO55xpQ7u27CuKii5qgfQeVDHjX7e0m8Y3E5s0JSK17mAvXuVZjB2haOuGoZOfssH34H444n1VhWBFETPiQWKN7BdcJbqDnbL1o2CVmzeRDekQayWpUt6p7IzmHrnkaYDiZRN3mZfZxyDydPFGnoJBOxYdMBvJIZm1sFe7vI9U0sztq0o0ev4H3hRxbRJ7wSRrLLrsmqeUSaFxx1egWR4c1n8Mt7fbffsTmTCc8z5xsj6dsIHZxvmfbdoR5qwrql53aXeyy5DcQ5lVbQ6kuDVPZ0Ts4YbOmlST2th2ILGUtNobbFWuW0376wofgfgLuQ3pBxbtDvVuLDbnuvPffibPqVqMbQ1DzPWQWPA8HTYl2yFKx3vxRa6UaeNmEJ",
   "termos": "Vale na loja HANNUO Digital Store do AliExpress. Ex.: Capa protetora magnética HANNUO para OPPO Find X9 Ultra, capa magnétic"
  },
  {
@@ -743,8 +1400,35 @@
   "titulo": "R$ 5,88 OFF acima de R$ 88,10",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-11-27T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiVVpM92Ze1JpGDViIjsX5H3m2KbJ7LzGvVjBfB9pVB22eMWfJTECHSA7aDAiKr95t7PZsM3Jq6rc01Tf86qigzI0WSpAchkw9Ryy2PQ9emZ3xShQK8XRPtQOb74CjuDmhTh4t3ZWlG9nmnwZcRUyPy3sK35czgILhiPxbAja2v93bCYbbyVKV1oSTmUvXuA0yliOvcamlzg1WRuhIoTlM01F8hGj0XnippGbqr3opojjpVZfJiz0Ew6bTdPOznzaw2W4FhL0wTHqR1MLv6EuZ4qwXkJVJmfsAoyipJgj3ItP1munRTrZYPXHcxtu3QoHLCVez5b5nMcMI2owjJmXLRzbsEamnQtemzbZgVSXyOKvKy8I9929Qjqt3X4BWEZwLeMJ4CXcAD1FGNue3HRbKGEd50wE5qsJwD7lmUvnSWtVRsVWuepxX4C00epQP9Mjr4HHZ9GEgkMuzpAoXymA8nyvzv8nhjqw2xLGtXO2oP0F1",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiVVpM92Ze1JpGDViIjsX5H3m2KbJ7LQBTfsJHEhHIyOyXlo1sKyhEfcIykDd3U1RAXBH3RclhcSjfefMio9y9cAaLbE7UK9ypBeRDJj8uDkB1aztOQsIwZ2L8Zn04yw73dALZ2OKoLfSHYGGr1Srb0PX6YSjwH2KL7uULDNZ1u3gLz78iBJMjBf0UDVRp66gj8jEZ71ivD96VFZoBKGy5JmE3nCc6n5evQWBW6UKmdmFXl4K9Z1etQ4qcOZdVKIVS6IyIGbmN3TKBMoMXWTLP4ENN482cgUM79d7YEDUTn6QEwkHBPACBHcz4ibovs4ad5FcchXRla5VTny8kQ6nqeDE5meZJa8DGt45NDFvsePpx98Pw5ehdBilYf3GaDVIE98ZS21aECUk6h58VSUdS85VoNqbJnMKqCnoruckDd7EEzhmegHLuuzM5xHpGWN9etq3MO0M99rCYzRQitQnptII4znWbNnPj4JRCD6ZTFWyx",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
+ },
+ {
+  "loja": "AliExpress · MIAOGUAN Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,88 OFF acima de R$ 5,90",
+  "codigo": "HJ2ABT6EFNBT",
+  "fim": "2026-11-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxwL4UOHZNv9ejwIDRftfKcp7ChhwHEwjs1hkgpvcNvkJyzicTeLfTi7b7wRk6GY4pQBD0XQNybTqQdyILSlipiwbtEFBIOqurzpNoyOu29VwDGtxFeJBPe7Le3PNi6oHFfv17S9TEiM8Nn61fCtPWH6DSJFiTNroUISlDTPT8TjESam9NRyjyI9c2XXQQg53wVK5MlsXMqdvGcwKAFLBCawOBeQ0HNBz76oynJODyegVmwjMwfOOF7UJhSTRdV1TevzFAb3vJ2YDK7t01jAN6NYaSMVJEIvTbvjwO6GwkZPJTPQLe0i88D0qpymKVsTCQOreR69fEsDX72703xtyTPruJYzUibyER2oOzGjehg3g7x20aB3FpU5cVBWtqMaqjmbhJFbP6jQWb03fbiEvCttD0otXZIcwla8BAFUogGloraLoXBgk8Hx80Qpnw6AUFAw6pGP42GjAF7IUPZOCoiaXZIpGOJ0xh2mDLWuCZSTpsx6iVYfce5Lg54xTLQf86jvcVgJcOr8HFbspVxxY5z0spTxqUlwQJAZIEupxoRmuRWen5hrypRosY7FhBEpfLj7Yg3MNiu7YrWFG207E8xXuKth5jMNGmskxJirRC6JfOZQhlA6rWluYqu182DkId3u2Y4U9srOHggkOmwq5JzgX",
+  "termos": "Vale na loja MIAOGUAN Store do AliExpress. Ex.: Tamanhos Grandes 35-43, Sapatos Femininos Pretos de Plataforma com Des"
+ },
+ {
+  "loja": "AliExpress · TRUELOVE PET Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 17,63 OFF acima de R$ 17,60",
+  "codigo": "ERKVOP89WVBC",
+  "fim": "2026-11-30T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x4smELgOJHTq5O0Jp3xy6k87okdOawHVXkk8ER58jbJywlkx6rI07redJlzt67dFFkOVkRAtQMgvqL7YfgC5h3i5MkRfKtWjLWLB7pfphihRv7ky9yU6hQ7tHVg9S7jwzhCg1CkiN5QyuYBhHdQsEeqauSoHvkBmKt818xXex3ov7kvthxTWzDJUiCU71zki8cteUPYrNZu33BxCwtnsuTvOQJ56VjaBUjQr5zbExiCUT6lRMiByApXdiI6EmbWgyvJYAgIUsU6LMdOsn1xD1YmE0tQtW3neBXUGkwCUUhphGauL6GhQnGE8XvTIo5qOV1S5ACvXMirflwJhVY5CD77ixMiFMGXyEEh8U1Y9Q6xgqBZG0uA3aWrnbtOsbOjOc6kFZ6Sty5Tc86fOYwIkL3ryz71l5LNpwz9pnTHpy3Q6aWhj2etN0Ik9H4IlYJiVHJOTgrmZTRFDTSrVkyB5f4caVF6XePu6pkuDR3iJmuLaluSiLWEdBExICJGOamz6wuDUCYftMFfGqG1oJ7TFJWMTjRErUYgtxTUwT3tWnsv7f4kC6BzVv2csTgXnmFfUPD7rPnUeEOTMZm0H1HfxTf03YqZPMa6f8KKBHE1EdWun9KfNPKjqKKtgXVP280RDoluvI2TfSq3RDT7QCIufPyF6DgMfBF6iFTirQkAiIOtli573Soh0n",
+  "termos": "Vale na loja TRUELOVE PET Official Store do AliExpress. Ex.: Truelove 7 em 1 multi-função ajustável cão chumbo mão livre coleira de"
+ },
+ {
+  "loja": "AliExpress · DESKAR Self Operated Store",
+  "tipo": "voucher",
+  "titulo": "R$ 8,84 OFF acima de R$ 132,50",
+  "codigo": "Q0Y6OOMERHOA",
+  "fim": "2026-11-27T14:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRWlHoN4kiTkuv8wu4Zpf3GDqMMFRfO9paLnHf7E7IgZk71OpYuJDRaQ962IxfwMW8jbYcQ6gS4dTt8KAypUMI4tBlDpYBh9kJl1qDt61L6aXoDhz3ljjNBCDsY4p1iOCvywl5OvLLriOfUOllwKpFjAIeYpJmJx5fwyupEEgguCw9b5as7sYIJwDsrv7ePQnL02icAD6sRuGZRrWqyfC9n0lYM1C97eimne2OHuFwWALsOqAebDSfaUj5mvRHbvRJPSgblIyxZ18Ro0g7ZWOZG2KV1X5AiVJ7FRoNOlhXdxpOYZKkqGACLTS72NzDZJDF5KA0dI3yCVmfPDxyWU6cOTHaWm3X7iy4JrpZbC0slQObpoyAE3jGYyTajQrC1f4NFl1NQdHpTWbMOnFn7K1EFCZGZcARcio9OdMheKFO3pKa2MrM01yZ5EA6f86KGhLXPKvCnTQb2ar0AB30SuOcGuYIGxJicXPADRirON11b5DFV6uESiEjClxGyW35qoY9ZtQu0Hv0XofLhShVEELNBNdPdHQBvQ37GiUAlEZCjxHgSbM2lW37azUWsJ5qoCVcAF5FvGmRVAm18PioDlRT6DoLFD7DtmVCSXQLA8UX6hwJ6hCKkKBtmQGF4qLcFM5Ih7s90nMNhSaY9lLQiro5of",
+  "termos": "Vale na loja DESKAR Self Operated Store do AliExpress. Ex.: CCMT060204 CCMT09T304 CCMT120404 LF6118/LF6018 DESKAR Original 10 peça"
  },
  {
   "loja": "AliExpress · maono Official Store",
@@ -752,16 +1436,25 @@
   "titulo": "R$ 17,63 OFF acima de R$ 293,90",
   "codigo": "GUJE5NMB40A1",
   "fim": "2026-11-27T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xBqVfHo5TITJmIKT5auehQmbm0ViYyMjcVO82sDpzyOcmurWeQlsYN64dzOBO0ZT1aSt8GvoYqtdploFN3t4IYlqEfBiEtL746zGMCbGg9v39v2X6EVPXo3qqUGOuNnBDpl9GvDcBpW5jD0nwk36vyWRi3KhBjJxJnzcDw8pwXnCXvLh6Nl6hJvR0ZsetgrV1N7Rfqe2depR0vZ75NOgv6FHIJGKu5PLVe1aLJxamxbZlRdpUo2OtuOCzu3ZFUD6qCtHnh7q6JnselsnZn9RbWa6annuZJPdTeMSB1O6bHnmLHODzz31S2NliQSFw5wOUqWyHKiiCs04b0OV9aGNBb0kMbdnHk7efFK0h4kqNlE5QQXmEmNObJU307iYKQNjmErVknnCcCIUAEsCXeP0YeZ8kw8HHNE3VnAhf88Uuw4J3oYx9bY27uCQPwpi1rCAbmnIhC6Co2Ws5IQwpwv4nAs7tAr2Kis2uTej1HgrSuwB",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xBqVfHo5TITJmIKT5auehQmbm0ViYySiUZCbDcibAJwtvsyCvuNs8cb33VHZBwJgICOiAda0NG7Tn7P8dZqn9Jr6ZXA9otEJny4CrKbLRx4WPpqZKZp6l7iJKQ6e1N4OtXWDdcKDV3GhskEL2x5w861kXRYvFuEB670u2M9Yo9jGJofjq5Id5Ppnbl9d25o6cQ8Vn2DVXUbXRzoYtp5I3VUbtl05vh2gRp6eI19DRY0ciNvmo7y1TtqmFR2tLthXdb373Foy6mxDpKPYxpRhispP84hiNYv3e3HFdKnOjua76xiXNdMCSForZTS8DY2yr7UBrQzMIVzBxFPWfyIjlfr98zSWmhy9aNhUkrWjxnpmztVjBKj65fBd2aOl9WE8nBVlv0YgUIvLws0D1Yyr2WbWYSRJagp38HJjtRbAeuLSAa0sEDEa98T5kosmdw5H2k1CcTyyoXBRIDivcdt6xTKiBuzhoRmq9psZNUn2nfsR",
   "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
  },
  {
-  "loja": "AliExpress · Star Custom Store",
+  "loja": "AliExpress · NORTH EDGE Official Store",
   "tipo": "voucher",
-  "titulo": "R$ 5,30 OFF acima de R$ 5,30",
-  "codigo": "XBW1ZDAFHNEC",
-  "fim": "2026-11-26T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFk7nATqHbLpN0EUSFOM5hxcghcIetGDRpKydHdF0yuKMSZbBprXEdBTS7ea9pftoo1si8k8x2LJJstRRBYAnQr7DKyFDW3L8qGFehTw9Bt6DzirImhvftM3Zyg9CSylIcGVS6Ze2MFJALGIfblnlrqggN6hmTDKvRyaPFWb9BUdz7BiCvwrJYRyxMjwNfWlwU0wTlxn9yAAIGS8ayXfmUAok9sfz5NzKvAEeZMmhlYB1fIhBRHS6CH9zr6cQQdLVBNSq5lmM6p2OwIeWLR7XXNBDaQai37U0MkkjXUaBJAZq3UtJibTvW8GJK7szhttpQ3qA8nfT2E2cUAFqVWQKEb8AWJYdLE4cjgefDGl0x8Djb2Jqh5bWTNJKK2Ala2XfvAGXI08XCLGCysimrtLym3WsgOdV5FzKPuWdo51SQinxWbE6xya0Cv9mDNVo3ACTFIypdQCILhBDrt9p",
-  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
+  "titulo": "R$ 23,51 OFF acima de R$ 293,90",
+  "codigo": "LBRZOB3L2Z8A",
+  "fim": "2026-11-27T14:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFmMOBhBOjbqMz63f4WsvLaRDU91LqvLyUn6uHj4lLlt69fz5vB4j22J1unuZtYnACm4e9kUkhBDQRXr4jFyepk2Nbn5xRGVwDbZxuXpNdBwPCIR8ApGe8kIEFMaeaRpsQRJ9cW6zLgEWt2DNOVVEEDxELet7mSpcV7VSzhUHhcH74G3q9PXWtAk3eh0HuPawrcmz8E29YNYZKoeLcBKoMeDtK1F0rzM5dtbIlAbCiiSOnPqBS7mKSRrekloPdAwpMYgGTny50Rmj87Jilg9d7Kdktfpb5dxPlwDLqiQHzuETCznzb2x8Rjo19tjsONI07EE4gotFYVELbzKar9KnqkT4etsxmoYZJLR5FAbk3ujOL5xXfUqzH6J8kWyfRA2OE6F6r6KYRItesvU0msIilhM5ewrjVOIcB12cZBpcOcfymU1S32bDa99bqCezTSAnr2OPCCEPcUWlsKSxNIL2Um9FBxxBqTI5cC3cehVE6zKAFmdOoIPZOVphtHT5P2rGyQj8zqkKLLuEq6jaSxf1M1ggkv6hnXVqqpUjuBl1TIPr7J6aILiIKXRNYbDJhXW0zwIZ5jqLMMHXH3a4kL0XxM8qrOS7VtYbJqbRe2NhplD1gMsw6zAWX8HvZ3NjWEJmVvsl0ogTDHBEVDkZbFQkAP",
+  "termos": "Vale na loja NORTH EDGE Official Store do AliExpress. Ex.: North edge ancor 42mm relógio de pulso mecânico masculino luxo vidro s"
+ },
+ {
+  "loja": "AliExpress · EMEET Official Store",
+  "tipo": "voucher",
+  "titulo": "R$ 18,56 OFF acima de R$ 18,50",
+  "codigo": "BRKZ79",
+  "fim": "2026-12-31T15:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGupI0xroRTBTpt79ZwzNqiYkDVYbs8QDghkW0XvoPCRhG8ps9z7IxS8vfz792v0fH26891n84hj5YvzY1jXdX01XqcgGhjYbNvHlrq0pyPBVcNRdG0TVuPBURDCYljWc4pKxnBw3sIevsAYVsogrCwEcX3HPt6lg5YzRKU1Bq6cPXCz51Y7muc7e1YCOtCqrZbOXE7z0HFdpduDSZfBYHH7512OyvhPOlF71TC6HDT3ZNzSrd9U1ruPzCQkn0dMPEYZ7FTg9DTEcv9nOgz0e9sIccnxettFrpB58JKQgozXkwvCgL9oROMCtcrvHZlEdvU7MvRHUu5mtvJVpFu9WelOKgnnYdlOe6Cuprp53U0l9BKNMJ48B0IPPduWHzeX8mbIyUtmPVvVRnuDsGdkEPhtJ6hXriOKyaUKEZPqTacv0WrT21ssRwuSqaM18HdijdcDibiqa845jxbTjxleag5l7MYvDKbcMfreZyRB1qggUMgyunjRcuzS74gznqNWfAp8HcicAQELWjSfybAEYYJv1XJFZWJQQwqVAhVClmOjEvxflYHUvIIb4KL5F1GxmKnriWMgxKXf4o5q1qo1C05aaehusG5H2AHns4hCeexkII6x3d0dJnt9hqkHtD6ynFBd6XjQMcySJ0Ze6yvtchMJ",
+  "termos": "Vale na loja EMEET Official Store do AliExpress. Ex.: Caixa de Som Sem Fio para Conferências EMEET 360 °   Microfone para Re"
  }
 ]

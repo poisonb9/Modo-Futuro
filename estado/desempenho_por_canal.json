@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-11-02T15:36:14",
+  "medido_em": "2026-11-02T23:26:20",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -48,14 +48,14 @@
       "melhores_recentes": []
     },
     "semanestesia.pod": {
-      "posts": 215,
+      "posts": 225,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 1884,
+      "reacoes": 1934,
       "comentarios": 11,
-      "shares": 31,
+      "shares": 32,
       "engajamento_pct": 0.0,
-      "posts_recentes": 14,
+      "posts_recentes": 24,
       "views_recentes": 0,
       "melhores_recentes": [
         {
@@ -64,7 +64,7 @@
         },
         {
           "views": 0,
-          "titulo": "Protocolo"
+          "titulo": "Seu cérebro desiste antes"
         },
         {
           "views": 0,
@@ -100,7 +100,7 @@
       "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 8864,
+      "reacoes": 8890,
       "comentarios": 70,
       "shares": 109,
       "engajamento_pct": 0.0,

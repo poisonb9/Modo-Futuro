@@ -1,5 +1,59 @@
 [
  {
+  "loja": "Carraro",
+  "tipo": "promotion",
+  "titulo": "Outlet Carraro",
+  "codigo": "",
+  "fim": "2026-12-11T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=81383&awinaffid=3089205&ued=https%3A%2F%2Floja.carraro.com.br%2Fcollections%2Foutlet",
+  "termos": "Válido até 10/12/2026 às 23:59 (horário de Brasília), nos produtos disponíveis na coleção Outlet. Preços e disponibilidade podem variar; enquanto durarem os estoques. Não cumulativo"
+ },
+ {
+  "loja": "Carraro",
+  "tipo": "promotion",
+  "titulo": "Frete reduzido",
+  "codigo": "",
+  "fim": "2026-12-11T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=81383&awinaffid=3089205&ued=https%3A%2F%2Floja.carraro.com.br%2Fcollections%2Ffrete-reduzido",
+  "termos": "Válido até 10/12/2026 às 23:59 (horário de Brasília), apenas nos produtos selecionados e para CEPs elegíveis. O valor do frete é confirmado no carrinho após informar o CEP. Sujeito a estoque"
+ },
+ {
+  "loja": "Carraro",
+  "tipo": "promotion",
+  "titulo": "Frete grátis Sul e SP",
+  "codigo": "",
+  "fim": "2026-12-11T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=81383&awinaffid=3089205&ued=https%3A%2F%2Floja.carraro.com.br%2Fcollections%2Ffrete-gratis",
+  "termos": "Válido até 10/12/2026 às 23:59 (horário de Brasília), apenas nos produtos selecionados e para CEPs elegíveis da Região Sul e do estado de São Paulo. Elegibilidade confirmada no carrinho após informar o CEP. Sujeito a estoque"
+ },
+ {
+  "loja": "Carraro",
+  "tipo": "promotion",
+  "titulo": "7% à vista no Pix",
+  "codigo": "",
+  "fim": "2026-12-11T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=81383&awinaffid=3089205&ued=https%3A%2F%2Floja.carraro.com.br%2F",
+  "termos": "Válido até 10/12/2026 às 23:59 (horário de Brasília), nos produtos elegíveis. Pagamento à vista via Pix. Condição exibida na página do produto e confirmada no checkout. Não cumulativo. Sujeito a estoque"
+ },
+ {
+  "loja": "Carraro",
+  "tipo": "voucher",
+  "titulo": "8% OFF em módulos de cozinha",
+  "codigo": "MODULAR8",
+  "fim": "2026-12-11T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=81383&awinaffid=3089205&ued=https%3A%2F%2Floja.carraro.com.br%2Fcollections%2Fmodulos-de-cozinha",
+  "termos": "Válido até 10/12/2026 às 23:59 (horário de Brasília), apenas nos módulos de cozinha. Não cumulativo. Desconto e elegibilidade confirmados no carrinho. Sujeito à disponibilidade de estoque"
+ },
+ {
+  "loja": "Carraro",
+  "tipo": "voucher",
+  "titulo": "10% OFF em lançamentos",
+  "codigo": "LANCAMENTOS10",
+  "fim": "2026-12-11T02:59:00+00:00",
+  "link": "https://www.awin1.com/cread.php?awinmid=81383&awinaffid=3089205&ued=https%3A%2F%2Floja.carraro.com.br%2Fcollections%2Flancamentos10",
+  "termos": "Válido até 10/12/2026 às 23:59 (horário de Brasília), apenas nos produtos sinalizados com o respectivo código. Não cumulativo. Desconto e elegibilidade confirmados no carrinho. Sujeito à disponibilidade de estoque"
+ },
+ {
   "loja": "Kabum",
   "tipo": "voucher",
   "titulo": "10% OFF em produtos participantes da campanha de placas-mãe",
@@ -1382,7 +1436,7 @@
   "titulo": "R$ 5,31 OFF acima de R$ 86,80",
   "codigo": "RB4E11GCEWUP",
   "fim": "2026-11-30T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeURptdd1kGqgKZUtDMMzTWej0ukguZdaeeVhwv3gTsIjve89G741Dn6xHFs66ItkVux4kIlmmwkJFRxznMtRAlAe0RoJB0ashUKni59QAduhKVvOYLDKFsH7BI37xoNX3Ikb61RFaTmC69jYfaF03YwMLytAW9GVm17FgrL2NKXM3OgLTZMkOAvQpEoXnHDh0YcC2dLCk9ApdRu8poBJIc8OGCFYSU4ROgWazQ9aXSfJI092rxpyfFFsLeodS5ZKmxPYXWvutZpUj0dxlFJK2VglOjPJ2p24U2aEKEQ9QFkUZZhAGWuM29fdOQy6aftJ2q5IyDBWtNOE4wfLRNdu7GQOqFTMiXQutSTBZAzcPWG3oGryMip8rVw8c6r7pZTKIOZTPUX8ev36nlm6wgCANZ7PW0w7v5NbQ6DYjVM5BYpUXDgQPHcdt3Daz6S6hMQ4FYBE9kJ72a9HAZTH",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRmuM5ijYkSkhEoMHE2pP6ZZj3okaisAh5JdvnwJ9m0fQW7yY2FFPTFLMNGQMfKvlv9hGQDfwpT0yQPrEQdCUOJ6z70E45F3faB4HEjkpmBALGlzqgA4zCmETv3WOZkxTvRgKr2dGCvz8gl6jrfgdl4lnHqtXNOG18XzLltXakhswh6d5DOj6EsRcm5iJCniXie12HYQeVT2gddzwQrcsLf33SB0An1RPoUweUyQyb2PN8ovwNiMKaypaNv2hcaDJMnvDPuJWp0EDaifWXFX6XXwzmJDm7MxS3jzLPKQ6bCiBLQD9gQhmm6udVxFsBgXa0EGL7rqHc4GGCCv6JscgZmsJtQ64lkV9z5VigOYJYuhpkj7cclnBYrZB8d80tDKIKu4XLMTRzxNHKw5XymvUqg17MBFm3fEZrG6f4D6MSq1zIokFTOxKmpNtFuDo81FZWlQj3rYVGNM2PL3lwgYunvJnNIOxV4fLZ5AhvUDmKRyWdv9YxQrwc4KGCA17aofFaLV0WPzjhDp3UNIDmymXjr10j5t0I1NyLplPJjVROvEMgpZK4bzpXEsVh7Izrgx9J9f3PWOzOCr6vtT9g5OcjWUYLzdXnIl2SW9ZEGwvxbvsLg4xv7sw92u5gcIgSVW3X0ZPCwcKUMbL2ZvQI33mySB",
   "termos": "Vale na loja HANNUO Digital Store do AliExpress. Ex.: Capa protetora magnética HANNUO para OPPO Find X9 Ultra, capa magnétic"
  },
  {
@@ -1391,16 +1445,25 @@
   "titulo": "R$ 5,89 OFF acima de R$ 88,20",
   "codigo": "V3IFIJ2LEWVJ",
   "fim": "2026-11-27T14:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiVVpM92Ze1JpGDViIjsX5H3m2KbJ7LQc4YHB9G90VE0dBXf541Iv81yP9fb3pzfycSmjVZsMx8FdUEZTcfIvQzlWhteRt7cxJ5BLk3UeSFGLo13TKxtgTaoE0cht9zFeWbGownrOKjTflqtibYqD1jthgQCTtU30q6s5cmfnGPUyFDaLv61KuFPk5Mrq0BFoixGmOca6Allcx99ioJbmOfQgK8Shfab1ZmECDb4UKnkcuEwN07l6nGgRHmySvVNTprNUvlEDwB1bfeRCZRUbz02MH8QfKxTbo0gaXNvNHtb3eEwudzhZdWH1lGGUrTlsQwdRagES0rMaBkvLdf849rq63gdYwJtzzNe2VhkuSgcQXjTthV9n3ZZUxCxhrJ5qo3Ar0GqI261b8ozHCqQ43NhTDk50x7PcWHip272tKq5IDVDVE3d5vcGP2KeFGFu0LUjMwKavvkLmqzVOTi5bzL2KGmDtLFkGk94ufayslbGyb",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxIFp6hZGdlK8h9vpKVpT1uZP0c4yNmGdUIOm4YQXHDx4Ch29S4DOxlcV6zn5fN4bkBSNLMfJ2hzraVlzNfruyMzx7DeXVZTDt6QkYz8Nc4nMW6WD6RPITMY9X5cQvsGmxyyUeGOCAwGOdJAE2l9SpDh4ooUgMXxPnPCghxouQkxiVVpM92Ze1JpGDViIjsX5H3m2KbJ7LQdSRuhm0VLrzq1ts9UjGCUTobj0An0bFLdaCGptegEdyxcjYyqbRfnQJLHeBly1cSp8ZhNIXPtlGcDneXuoqtUgl3t3vYleKBcOeDmYCEaj0kjppRYtUVSb0LTz2JCCoX9LTM04lxV6Olmv9Z9kxPxrOXoysjixTedV2iW8pBaHWwYf3cdtBjfSas6Oxp7nRo30jJzDat3ZTBWAtKMultY3d8APTFIhjMEmDqkY9QjqukeK0m0rs9ZRncH0zc25tBUqIVagQ9pOs4BMcXKAQ6UOuEfP5A9Qx1AZ7KHSi1IT9UtS09wLnPecYFhtLrU5QBFZajAmKmaNPnNnM0YQzLjEL4JGFiPLj5IfHZzeOZGlUKe7BQqltytxK7sQHJvoacqKicLt97fTHy13SYt2tkQcs2ywCAI6GhLYQPh2ZgAankZyCd2aGrRVXdQQHJgIKOLGpLU9krvRcsWn",
   "termos": "Vale na loja Metal Beast Store do AliExpress. Ex.: Crazy Fox - Grips de Mão Coloridos de Magnésio Livre, Duráveis e Antid"
  },
  {
-  "loja": "AliExpress · RETEVIS Official Store",
+  "loja": "AliExpress · maono Official Store",
   "tipo": "voucher",
-  "titulo": "R$ 23,54 OFF acima de R$ 294,20",
-  "codigo": "1111SAVE04",
-  "fim": "2026-11-18T15:59:59+00:00",
-  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRN9dJlzaVsiouVxxKUYwB0mwsrR2GcdwNvRjmFsg69QzI9ZDhih0QUGbwdYxOo3sI99O1WytTOXnpdch7VhIA5QtmtvvsTuykfSLRtJKOXYoQfUmhVFMhpPbeXNIdVk601D6l0FD2aoVHmiOgWrFlYTR6sQOL4nQTq8yRml5Yyqyy0hE7yPYqcNw4uSRHvhKoGsOxsBWuYlOtAdNAKIafO6flvoJoXqkiX8Nd5PNMzgnZJl9b9hqyIZeRCa9Lu0G00xeVS4LuY7DPJeiYHl1Lno7XlfG0vye2ihAllEWRaGJA6x8LD0pt4iUh9L9zFOjtvEW6lF2RXhm93Yq7UczdYuWNYZrkqxZLSPhreDmssvtSf1mHRklBNsJXrhYls4zAfi97Yzq8cRcPdn45qRYvFFFEfGvVAeAT48Ul99zEJVwHgW0eD7RKkbegAHWeAEEBBDfArjcCxbrnmCwtUVJ6kVTyS0GJcCtMsO7AKqz2ryfn5Sl2q30mqSFT2wPvemQt819SbQLKGzwV91JWqCPlRmylW6JJLxnqHCzhk6tbMGzfH6084sG5kZmIGDW8NqVHnkqGU2K4mzwlB0K7do6eJ4L1BiQJG4tG3yuImIDg1J6awBzn7fgosWGd5tKNNuUUsHq5mjnoBUHv926glpfR9v",
-  "termos": "Vale na loja RETEVIS Official Store do AliExpress. Ex.: Retevis RT86 Walkie Talkie Profissional, Rádio de Comunicação de Longo"
+  "titulo": "R$ 17,66 OFF acima de R$ 294,20",
+  "codigo": "GUJE5NMB40A1",
+  "fim": "2026-11-27T14:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw1rEuYFU5OlnccCNaiA69XDDVTPXZ5ciJuJzAI2GPOgrZsovjNyOZACWHppv8pgw2u2PQU5O61gcMj5man8ZWJbR5oKSYByTK0gmdIfd9ZolLcpMbA1yZGpNfpgWIkMiLCdzNqthBu5w18gSlrGJtGlqB9mwAZEMSEA811zoDk2xBqVfHo5TITJmIKT5auehQmbm0ViYy4XPQUNV4tdrRIQlGOPfO3L31KH4LveXtKMHutqRsPghC25hOhQkuJoIz8JlCkZW1DMjWnQalZNb4TJbph8gjwfwcLfq2L449uIv4pjDJp9PHpEPiccjxVZQRvFBPC06bcrnjke672mRKfVBJb5FFUatyN4VW09Rhd48dB8lIb1XrwI4lOPEigk8iMLSaL7GU3f8TGfsHxVbXutdTGdeRKjNLwYQ2zGCViGpd4imgd1ntn3vonyJMUcqy0PsizWzWp9P13YKUqN3QgSNwyAFLlnyb6Wd1YPNA38IBQ8jF09K4Hyd8YvZHeKdZwsWHy7t6UZtrOruQGJ0XdBjupabopjgngVOJpDnBzOFGrfXQMjIihYX298cEWTSiOJkFcvA7Ec336tHgai2Rkn7d2GrSBV8gKLzxvTqb23Id6x8fMnUM3QWRosVsPSKVowPhKs4hB6tINjBS4zGO9d",
+  "termos": "Vale na loja maono Official Store do AliExpress. Ex.: Microfone Lavalier Sem Fio Maono Wave T5 com Cancelamento de Ruído par"
+ },
+ {
+  "loja": "AliExpress · Star Custom Store",
+  "tipo": "voucher",
+  "titulo": "R$ 5,31 OFF acima de R$ 5,30",
+  "codigo": "XBW1ZDAFHNEC",
+  "fim": "2026-11-26T14:59:59+00:00",
+  "link": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHIvzyHGp1qWdSxHJKBSuyE1GVps5hoChPw4Cd4F99CeGnO9eBifcGXR9nVfZ3poF9zvuvL5mkj4pmD5B3SzWdF4vahtYoXUvnr8XuhH8WIHJnkRB3VJHUrFuj10Ug8PPETiB4i6Q5fKIhCfVbWs4RmlWAJU34GQcyvWAXXUXnrxzDR1xpQH5qUFmkuxYNzt92xLAHbuFkuD9mzfp81m7A2YbEAZNLjC1PmMXOqlKCGx1eharpJ4S7IMX16EggiTunwbRsTKy1d4nmKTee1IK3zpRmS5h5T23yppQXnfJCgFCrSEKpYXwRbWlTGCyDDxnau4M48TZfysln9OvdwAcqnZKCY3fUDiGN99q2ES5vkVs8OjgVW0aKWGYB2xdEpYNWCWd6YTWoAAk9XtGg3uHo7rwU9xxUQDwiusVutXgX0cyQExsesx9FUZoEZmhYQw6awJhLIvLwNC4qLHprXS4aoQ5ZNqw5n7nJMPYYI5G8kGKd31xRmEn3b2s8ew58K8VdCZRFQ3ieneSgXf5iU6jXSnnQG2Uj4t2w0LisODZsTNNdQx1j02KZPZQ5ZEX2oqG5YELToNwqFv1MU5YzitcLUXUiyKhMOIoWgfAKwOeyaBQgJIBwCwYcxofvMDEDzcdsQszpDYc8yTHymtzno4nQtd",
+  "termos": "Vale na loja Star Custom Store do AliExpress. Ex.: Banners de poliéster personalizados, banner de poliéster personalizáve"
  }
 ]

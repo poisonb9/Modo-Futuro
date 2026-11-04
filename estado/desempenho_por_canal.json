@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-11-04T08:59:48",
+  "medido_em": "2026-11-04T17:06:34",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -22,18 +22,9 @@
       "comentarios": 34,
       "shares": 16,
       "engajamento_pct": 0.0,
-      "posts_recentes": 2,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "A nova máquina de US$ 380 milhões da ASML A ASML desenvolveu"
-        },
-        {
-          "views": 0,
-          "titulo": "A nova máquina de US$ 380 milhões da ASML\n\nA ASML desenvolve"
-        }
-      ]
+      "melhores_recentes": []
     },
     "truque.importado": {
       "posts": 158,
@@ -100,7 +91,7 @@
       "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 8923,
+      "reacoes": 8939,
       "comentarios": 71,
       "shares": 110,
       "engajamento_pct": 0.0,

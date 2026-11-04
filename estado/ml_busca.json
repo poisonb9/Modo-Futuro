@@ -1,18 +1,18 @@
 {
- "quando": "2026-11-03T23:42:41.923971+00:00",
+ "quando": "2026-11-04T03:17:16.227383+00:00",
  "termos": {
   "whey": "2026-11-03T23:42:41.923971+00:00",
   "meia": "2026-11-03T23:42:41.923971+00:00",
-  "chapéu": "2026-11-03T01:49:59.905238+00:00",
+  "chapéu": "2026-11-04T03:17:16.227383+00:00",
   "rádio": "2026-11-03T23:42:41.923971+00:00",
   "pneu": "2026-11-03T23:42:41.923971+00:00",
   "bateria": "2026-11-03T23:42:41.923971+00:00",
   "bateria 60v": "2026-11-03T23:42:41.923971+00:00",
   "bateria 60a": "2026-11-03T23:42:41.923971+00:00",
-  "ex2": "2026-11-03T01:49:59.905238+00:00",
-  "grade proteção ex2": "2026-11-03T01:49:59.905238+00:00",
-  "grade proteção": "2026-11-03T01:49:59.905238+00:00",
-  "grafe protecao": "2026-11-03T01:49:59.905238+00:00"
+  "ex2": "2026-11-04T03:17:16.227383+00:00",
+  "grade proteção ex2": "2026-11-04T03:17:16.227383+00:00",
+  "grade proteção": "2026-11-04T03:17:16.227383+00:00",
+  "grafe protecao": "2026-11-04T03:17:16.227383+00:00"
  },
  "produtos": [
   {
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB59481595",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB35161880",
@@ -541,7 +541,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB26710873",
@@ -557,12 +557,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB22546702",
    "nome": "Multimetro Digital Western 978md",
-   "preco": 28.68,
+   "preco": 27.82,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_855961-MLA99970191349_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-5438182309?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -573,7 +573,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB28670236",
@@ -589,7 +589,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB54197430",
@@ -605,7 +605,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB47670469",
@@ -637,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB62535666",
@@ -653,7 +653,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB50732570",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB24771463",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB26197012",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB42432212",
@@ -717,7 +717,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB25722405",
@@ -733,7 +733,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB41306211",
@@ -749,7 +749,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB47135031",
@@ -829,7 +829,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB23183294",
@@ -909,7 +909,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB79613775",
@@ -925,7 +925,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB79613774",
@@ -1101,7 +1101,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-03T01:49:59.905238+00:00"
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
    "id": "MLB78784003",
@@ -1118,6 +1118,22 @@
    "origem": "mercadolivre",
    "busca": "bateria 60v",
    "visto": "2026-11-03T23:42:41.923971+00:00"
+  },
+  {
+   "id": "MLB24206069",
+   "nome": "Whey Protein Isolado X-pro Nutrition ISO-X Sabor Banana 900g",
+   "preco": 69.48,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_742261-MLA99590572272_122025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-6595783822?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "ex2",
+   "visto": "2026-11-04T03:17:16.227383+00:00"
   }
  ]
 }

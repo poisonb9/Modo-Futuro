@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-11-05T15:22:29",
+  "medido_em": "2026-11-05T21:55:27",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -46,16 +46,16 @@
       "comentarios": 11,
       "shares": 32,
       "engajamento_pct": 0.0,
-      "posts_recentes": 20,
+      "posts_recentes": 16,
       "views_recentes": 0,
       "melhores_recentes": [
         {
           "views": 0,
-          "titulo": "Seu cérebro desiste antes"
+          "titulo": "Protocolo"
         },
         {
           "views": 0,
-          "titulo": "Seu cérebro desiste antes"
+          "titulo": "Protocolo"
         },
         {
           "views": 0,
@@ -91,9 +91,9 @@
       "posts": 84,
       "views": 0,
       "mediana_views": 0,
-      "reacoes": 8939,
+      "reacoes": 8983,
       "comentarios": 71,
-      "shares": 110,
+      "shares": 111,
       "engajamento_pct": 0.0,
       "posts_recentes": 0,
       "views_recentes": 0,

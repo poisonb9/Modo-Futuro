@@ -1,14 +1,14 @@
 {
- "quando": "2026-11-06T23:32:51.435593+00:00",
+ "quando": "2026-11-07T03:14:23.160792+00:00",
  "termos": {
-  "whey": "2026-11-06T02:50:36.563775+00:00",
-  "meia": "2026-11-06T02:50:36.563775+00:00",
+  "whey": "2026-11-07T03:14:23.160792+00:00",
+  "meia": "2026-11-07T03:14:23.160792+00:00",
   "chapéu": "2026-11-06T11:28:24.378621+00:00",
-  "rádio": "2026-11-06T02:50:36.563775+00:00",
-  "pneu": "2026-11-06T02:50:36.563775+00:00",
-  "bateria": "2026-11-06T02:50:36.563775+00:00",
-  "bateria 60v": "2026-11-06T02:50:36.563775+00:00",
-  "bateria 60a": "2026-11-06T02:50:36.563775+00:00",
+  "rádio": "2026-11-07T03:14:23.160792+00:00",
+  "pneu": "2026-11-07T03:14:23.160792+00:00",
+  "bateria": "2026-11-07T03:14:23.160792+00:00",
+  "bateria 60v": "2026-11-07T03:14:23.160792+00:00",
+  "bateria 60a": "2026-11-07T03:14:23.160792+00:00",
   "ex2": "2026-11-06T11:28:24.378621+00:00",
   "grade proteção ex2": "2026-11-06T11:28:24.378621+00:00",
   "grade proteção": "2026-11-06T11:28:24.378621+00:00",
@@ -45,7 +45,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB44684359",
@@ -61,7 +61,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB25675555",
@@ -77,7 +77,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB24692711",
@@ -93,7 +93,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB24692716",
@@ -109,7 +109,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB61784268",
@@ -157,14 +157,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB70104297",
    "nome": "Alto Falante Para Rádio Px Voyager Vhf/uhf Melhore A Qualidade O Audio",
-   "preco": 105.0,
+   "preco": 105.9,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_890881-MLA112053598133_052026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7304679364?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4789165891?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB2906",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB54433666",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB25588931",
@@ -205,7 +205,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB35743965",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB72882606",
@@ -253,12 +253,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB72679745",
    "nome": "Pneu 26x1 1/2 Pneu Aro 26 Pneu Caloi Vereda Levorin 1 Pneu",
-   "preco": 54.12,
+   "preco": 58.9,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_949057-MLA111727714402_062026-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7508921894?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -269,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB72681733",
@@ -285,7 +285,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB27057277",
@@ -301,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-10-29T06:27:56.065366+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB66398853",
@@ -317,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB76828668",
@@ -333,7 +333,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB46001471",
@@ -349,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB46001231",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB52260545",
@@ -381,7 +381,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB46016136",
@@ -397,14 +397,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB51647079",
    "nome": "Fonte Usina Smart Connect 60a 24v Bivolt",
-   "preco": 794.0,
+   "preco": 400.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_999465-MLA99889097489_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5457496724?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-7939944684?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB63455",
@@ -413,7 +413,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB74914144",
@@ -429,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB11904050",
@@ -445,7 +445,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB25857309",
@@ -461,7 +461,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB79111845",
@@ -477,7 +477,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB79943062",
@@ -493,7 +493,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB79943063",
@@ -813,7 +813,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB57356861",
@@ -896,22 +896,6 @@
    "visto": "2026-11-06T11:28:24.378621+00:00"
   },
   {
-   "id": "MLB79613774",
-   "nome": "Cama Infantil Encanto Branca Com Grade Proteção Quarto Menina 158x73cm",
-   "preco": 274.5,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_717153-MLA116426462440_092026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7730510666?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB3231",
-   "comissao": 8.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "grade proteção",
-   "visto": "2026-10-24T00:04:00.108540+00:00"
-  },
-  {
    "id": "MLB72960652",
    "nome": "Aparelho base de rádio Motorola T210BR Rádio T210BR",
    "preco": 200.0,
@@ -925,12 +909,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB37894526",
    "nome": "Radio Icom Marine Ic-m200",
-   "preco": 1162.52,
+   "preco": 1177.1,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_874534-MLU77038703852_062024-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-5055438604?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -941,14 +925,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-10-25T22:51:23.792492+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB36562306",
    "nome": "Whey 100% Pure Baunilha 907g Integralmédica Whey Protein",
-   "preco": 140.0,
+   "preco": 159.99,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_857941-MLA99466485514_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-6456115478?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4308559365?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB264201",
@@ -957,7 +941,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-05T00:33:54.713279+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB50087760",
@@ -1053,7 +1037,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB64273530",
@@ -1085,7 +1069,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   },
   {
    "id": "MLB24206069",
@@ -1134,6 +1118,22 @@
    "origem": "mercadolivre",
    "busca": "grade proteção",
    "visto": "2026-11-06T11:28:24.378621+00:00"
+  },
+  {
+   "id": "MLB78175859",
+   "nome": "Whey Protein Hyper Whey 900g Chocolate - Profit Laboratórios",
+   "preco": 59.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_804482-MLA116626280023_082026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7952941752?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB122102",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-11-07T03:14:23.160792+00:00"
   }
  ]
 }

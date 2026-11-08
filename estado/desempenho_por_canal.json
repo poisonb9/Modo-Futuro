@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-11-07T20:48:37",
+  "medido_em": "2026-11-08T00:26:30",
   "janela_dias": 7,
   "canais": {
     "(sem canal)": {
@@ -46,18 +46,9 @@
       "comentarios": 11,
       "shares": 32,
       "engajamento_pct": 0.0,
-      "posts_recentes": 2,
+      "posts_recentes": 0,
       "views_recentes": 0,
-      "melhores_recentes": [
-        {
-          "views": 0,
-          "titulo": "Protocolo"
-        },
-        {
-          "views": 0,
-          "titulo": "Protocolo"
-        }
-      ]
+      "melhores_recentes": []
     },
     "atefalhar": {
       "posts": 154,

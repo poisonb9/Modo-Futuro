@@ -1,18 +1,18 @@
 {
- "quando": "2026-11-08T06:41:44.382600+00:00",
+ "quando": "2026-11-08T19:08:39.064320+00:00",
  "termos": {
   "whey": "2026-11-08T06:41:44.382600+00:00",
   "meia": "2026-11-08T06:41:44.382600+00:00",
-  "chapéu": "2026-11-07T16:42:02.448149+00:00",
+  "chapéu": "2026-11-08T19:08:39.064320+00:00",
   "rádio": "2026-11-08T06:41:44.382600+00:00",
   "pneu": "2026-11-08T06:41:44.382600+00:00",
   "bateria": "2026-11-08T06:41:44.382600+00:00",
   "bateria 60v": "2026-11-08T06:41:44.382600+00:00",
   "bateria 60a": "2026-11-08T06:41:44.382600+00:00",
-  "ex2": "2026-11-07T16:42:02.448149+00:00",
-  "grade proteção ex2": "2026-11-07T16:42:02.448149+00:00",
-  "grade proteção": "2026-11-07T16:42:02.448149+00:00",
-  "grafe protecao": "2026-11-07T16:42:02.448149+00:00"
+  "ex2": "2026-11-08T19:08:39.064320+00:00",
+  "grade proteção ex2": "2026-11-08T19:08:39.064320+00:00",
+  "grade proteção": "2026-11-08T19:08:39.064320+00:00",
+  "grafe protecao": "2026-11-08T19:08:39.064320+00:00"
  },
  "produtos": [
   {
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB59481595",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB35161880",
@@ -525,7 +525,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB26710873",
@@ -541,7 +541,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB22546702",
@@ -557,7 +557,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB28670236",
@@ -573,7 +573,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB54197430",
@@ -589,7 +589,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB47670469",
@@ -621,7 +621,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB62535666",
@@ -637,7 +637,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB50732570",
@@ -653,7 +653,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB24771463",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB26197012",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB42432212",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB25722405",
@@ -717,7 +717,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB41306211",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB73973661",
@@ -877,7 +877,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB79613775",
@@ -893,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB72960652",
@@ -973,7 +973,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   },
   {
    "id": "MLB18418075",
@@ -1134,6 +1134,22 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-11-08T06:41:44.382600+00:00"
+  },
+  {
+   "id": "MLB76201495",
+   "nome": "Beliche Solteiro Ferro Reforçado Tubular Com Grade Proteção Quarto Camping Apartamento",
+   "preco": 608.45,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_839173-MLA114113040548_082026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7393877654?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB3231",
+   "comissao": 8.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "grade proteção",
+   "visto": "2026-11-08T19:08:39.064320+00:00"
   }
  ]
 }

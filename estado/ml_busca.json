@@ -1,18 +1,18 @@
 {
- "quando": "2026-11-09T12:06:49.147095+00:00",
+ "quando": "2026-11-09T22:42:49.181968+00:00",
  "termos": {
   "whey": "2026-11-09T12:06:49.147095+00:00",
   "meia": "2026-11-09T12:06:49.147095+00:00",
-  "chapéu": "2026-11-08T19:08:39.064320+00:00",
+  "chapéu": "2026-11-09T22:42:49.181968+00:00",
   "rádio": "2026-11-09T12:06:49.147095+00:00",
   "pneu": "2026-11-09T12:06:49.147095+00:00",
   "bateria": "2026-11-09T12:06:49.147095+00:00",
   "bateria 60v": "2026-11-09T12:06:49.147095+00:00",
   "bateria 60a": "2026-11-09T12:06:49.147095+00:00",
-  "ex2": "2026-11-08T19:08:39.064320+00:00",
-  "grade proteção ex2": "2026-11-08T19:08:39.064320+00:00",
-  "grade proteção": "2026-11-08T19:08:39.064320+00:00",
-  "grafe protecao": "2026-11-08T19:08:39.064320+00:00"
+  "ex2": "2026-11-09T22:42:49.181968+00:00",
+  "grade proteção ex2": "2026-11-09T22:42:49.181968+00:00",
+  "grade proteção": "2026-11-09T22:42:49.181968+00:00",
+  "grafe protecao": "2026-11-09T22:42:49.181968+00:00"
  },
  "produtos": [
   {
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB59481595",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB35161880",
@@ -525,7 +525,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB26710873",
@@ -541,14 +541,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB22546702",
    "nome": "Multimetro Digital Western 978md",
-   "preco": 26.5,
+   "preco": 26.56,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_855961-MLA99970191349_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4126754832?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4993221465?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB30214",
@@ -557,7 +557,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB28670236",
@@ -573,7 +573,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB54197430",
@@ -589,12 +589,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "ex2",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB62867807",
    "nome": "Cama Infantil Grade Proteção Montessoriana + Colchão Incluso Carro vermelho",
-   "preco": 373.0,
+   "preco": 367.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_688873-MLA100458894377_122025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7813187308?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -605,12 +605,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB62535666",
    "nome": "Cama Infantil Grade Proteção Montessoriana + Colchão Incluso",
-   "preco": 389.0,
+   "preco": 383.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_926218-MLA99513275025_112025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-7813033612?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -621,7 +621,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB50732570",
@@ -653,7 +653,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB26197012",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB42432212",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB25722405",
@@ -701,7 +701,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB41306211",
@@ -765,14 +765,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB73973661",
    "nome": "Cama Solteiro Reforçada P/160 Kg 100% Ferro C/grade Proteção Cor Preto FERRO GRADE PROTEÇÃO",
-   "preco": 834.96,
+   "preco": 669.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_819223-MLA113416427413_062026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7818366828?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-6994819926?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB3231",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-07T16:42:02.448149+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB23183294",
@@ -957,7 +957,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-08T19:08:39.064320+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB18418075",
@@ -990,22 +990,6 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-11-08T06:41:44.382600+00:00"
-  },
-  {
-   "id": "MLB19506703",
-   "nome": "Whey 3w 900g Max Titanium Top Whey 3w Mais Sabor Iogurte Grego Whey Concentrado",
-   "preco": 194.99,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_917657-MLA116720537509_082026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-7470235394?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB122102",
-   "comissao": 16.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "whey",
-   "visto": "2026-10-26T20:10:48.499021+00:00"
   },
   {
    "id": "MLB24692683",
@@ -1101,7 +1085,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-06T11:28:24.378621+00:00"
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   },
   {
    "id": "MLB78175859",
@@ -1150,6 +1134,22 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-11-09T12:06:49.147095+00:00"
+  },
+  {
+   "id": "MLB23004468",
+   "nome": "Multímetro Digital Western com Bip e Bateria",
+   "preco": 78.9,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_826447-MLA99544788118_122025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4271446629?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB30214",
+   "comissao": 8.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "ex2",
+   "visto": "2026-11-09T22:42:49.181968+00:00"
   }
  ]
 }

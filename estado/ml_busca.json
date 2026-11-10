@@ -1,14 +1,14 @@
 {
- "quando": "2026-11-10T04:22:53.417728+00:00",
+ "quando": "2026-11-10T13:00:28.397397+00:00",
  "termos": {
-  "whey": "2026-11-09T12:06:49.147095+00:00",
-  "meia": "2026-11-09T12:06:49.147095+00:00",
+  "whey": "2026-11-10T13:00:28.397397+00:00",
+  "meia": "2026-11-10T13:00:28.397397+00:00",
   "chapéu": "2026-11-09T22:42:49.181968+00:00",
-  "rádio": "2026-11-09T12:06:49.147095+00:00",
-  "pneu": "2026-11-09T12:06:49.147095+00:00",
-  "bateria": "2026-11-09T12:06:49.147095+00:00",
-  "bateria 60v": "2026-11-09T12:06:49.147095+00:00",
-  "bateria 60a": "2026-11-09T12:06:49.147095+00:00",
+  "rádio": "2026-11-10T13:00:28.397397+00:00",
+  "pneu": "2026-11-10T13:00:28.397397+00:00",
+  "bateria": "2026-11-10T13:00:28.397397+00:00",
+  "bateria 60v": "2026-11-10T13:00:28.397397+00:00",
+  "bateria 60a": "2026-11-10T13:00:28.397397+00:00",
   "ex2": "2026-11-09T22:42:49.181968+00:00",
   "grade proteção ex2": "2026-11-09T22:42:49.181968+00:00",
   "grade proteção": "2026-11-09T22:42:49.181968+00:00",
@@ -18,9 +18,9 @@
   {
    "id": "MLB28176888",
    "nome": "Caixa Meia Esquadria Sparta Plástico Reforçado 300x65mm com Serra",
-   "preco": 23.09,
+   "preco": 32.57,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_988563-MLA100089045061_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5056553131?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-3539450297?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB418080",
@@ -29,7 +29,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB26444945",
@@ -45,7 +45,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB44684359",
@@ -61,7 +61,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB25675555",
@@ -77,7 +77,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB24692711",
@@ -93,7 +93,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB24692716",
@@ -109,7 +109,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-08T06:41:44.382600+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB61784268",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB70104297",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB54433666",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB25588931",
@@ -205,7 +205,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB35743965",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB72882606",
@@ -253,7 +253,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB72679745",
@@ -269,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB72681733",
@@ -285,12 +285,12 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB27057277",
    "nome": "Estante Caixa Bateria Power -powerss",
-   "preco": 277.15,
+   "preco": 269.21,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_904125-MLA95979961392_102025-F.jpg",
    "link": "https://produto.mercadolivre.com.br/MLB-3994966455?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
@@ -301,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB66398853",
@@ -317,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB76828668",
@@ -333,7 +333,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB46001471",
@@ -349,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB46001231",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB52260545",
@@ -381,7 +381,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB46016136",
@@ -397,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB51647079",
@@ -413,7 +413,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB74914144",
@@ -429,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB11904050",
@@ -720,38 +720,6 @@
    "visto": "2026-11-04T03:17:16.227383+00:00"
   },
   {
-   "id": "MLB47135031",
-   "nome": "Óculos de Proteção Kalipso Panda Verde com Proteção UV Policarbonato",
-   "preco": 15.59,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_758858-MLA96199065612_102025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4006105883?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB269706",
-   "comissao": 0.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "grafe protecao",
-   "visto": "2026-10-27T05:35:17.666387+00:00"
-  },
-  {
-   "id": "MLB28362359",
-   "nome": "Western Digital WD3000FYYZ 3TB amarelo",
-   "preco": 2152.0,
-   "imagem": "https://http2.mlstatic.com/D_NQ_NP_886205-MLA112320893578_062026-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4367462983?matt_word=bryanexpand&matt_tool=87181766",
-   "loja": "Mercado Livre",
-   "categoria": "",
-   "categoria_ml": "MLB1672",
-   "comissao": 4.0,
-   "marca": "",
-   "de_loja": 0.0,
-   "origem": "mercadolivre",
-   "busca": "ex2",
-   "visto": "2026-10-27T05:35:17.666387+00:00"
-  },
-  {
    "id": "MLB59557080",
    "nome": "Óculos de Proteção Worker MK2-I Lente Cinza com Proteção UV",
    "preco": 15.9,
@@ -813,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB18488791",
@@ -877,7 +845,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB37894526",
@@ -893,7 +861,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB36562306",
@@ -925,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-08T06:41:44.382600+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB24721824",
@@ -973,7 +941,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-08T06:41:44.382600+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB24692683",
@@ -1021,7 +989,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-09T12:06:49.147095+00:00"
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   },
   {
    "id": "MLB24206069",
@@ -1134,6 +1102,54 @@
    "origem": "mercadolivre",
    "busca": "ex2",
    "visto": "2026-11-09T22:42:49.181968+00:00"
+  },
+  {
+   "id": "MLB19506703",
+   "nome": "Whey 3w 900g Max Titanium Top Whey 3w Mais Sabor Iogurte Grego Whey Concentrado",
+   "preco": 188.1,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_917657-MLA116720537509_082026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7731586514?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-11-10T13:00:28.397397+00:00"
+  },
+  {
+   "id": "MLB20609444",
+   "nome": "Whey Isolado Max Titanium Iso Whey 900g Sabor Chocolate Whey Protein",
+   "preco": 290.03,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_763156-MLU74610384441_022024-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4090803333?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB122102",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-11-10T13:00:28.397397+00:00"
+  },
+  {
+   "id": "MLB37925867",
+   "nome": "Whey Protein 3w Morango Whey Concentrado 900g Probiótica",
+   "preco": 324.86,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_638612-MLA115912506664_092026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7686387870?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-11-10T13:00:28.397397+00:00"
   }
  ]
 }

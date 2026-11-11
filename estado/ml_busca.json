@@ -1,14 +1,14 @@
 {
- "quando": "2026-11-11T00:57:09.328731+00:00",
+ "quando": "2026-11-11T16:36:00.200879+00:00",
  "termos": {
-  "whey": "2026-11-10T13:00:28.397397+00:00",
-  "meia": "2026-11-10T13:00:28.397397+00:00",
+  "whey": "2026-11-11T16:36:00.200879+00:00",
+  "meia": "2026-11-11T16:36:00.200879+00:00",
   "chapéu": "2026-11-11T00:57:09.328731+00:00",
-  "rádio": "2026-11-10T13:00:28.397397+00:00",
-  "pneu": "2026-11-10T13:00:28.397397+00:00",
-  "bateria": "2026-11-10T13:00:28.397397+00:00",
-  "bateria 60v": "2026-11-10T13:00:28.397397+00:00",
-  "bateria 60a": "2026-11-10T13:00:28.397397+00:00",
+  "rádio": "2026-11-11T16:36:00.200879+00:00",
+  "pneu": "2026-11-11T16:36:00.200879+00:00",
+  "bateria": "2026-11-11T16:36:00.200879+00:00",
+  "bateria 60v": "2026-11-11T16:36:00.200879+00:00",
+  "bateria 60a": "2026-11-11T16:36:00.200879+00:00",
   "ex2": "2026-11-11T00:57:09.328731+00:00",
   "grade proteção ex2": "2026-11-11T00:57:09.328731+00:00",
   "grade proteção": "2026-11-11T00:57:09.328731+00:00",
@@ -29,7 +29,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB26444945",
@@ -45,7 +45,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB44684359",
@@ -61,7 +61,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB25675555",
@@ -77,7 +77,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB24692711",
@@ -93,7 +93,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB24692716",
@@ -109,7 +109,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "meia",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB61784268",
@@ -157,7 +157,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB70104297",
@@ -173,7 +173,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB54433666",
@@ -189,7 +189,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB25588931",
@@ -205,14 +205,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB35743965",
    "nome": "Rádio Px Voyager Ares II 480 Canais 24.715-30.105mhz AM/FM/SSB",
-   "preco": 1399.9,
+   "preco": 1385.0,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_687167-MLA100010523487_122025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-4918836591?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-4784902087?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB2906",
@@ -221,7 +221,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-06T02:50:36.563775+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB32008732",
@@ -237,7 +237,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB72882606",
@@ -253,7 +253,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB72679745",
@@ -269,7 +269,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB72681733",
@@ -285,7 +285,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "pneu",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB27057277",
@@ -301,7 +301,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB66398853",
@@ -317,7 +317,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB76828668",
@@ -333,14 +333,14 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB46001471",
    "nome": "Fonte Automotiva Usina SUDY1260BV 60A 750W Bivolt para Caixa de Som",
-   "preco": 359.9,
+   "preco": 334.9,
    "imagem": "https://http2.mlstatic.com/D_NQ_NP_727742-MLA99422328728_112025-F.jpg",
-   "link": "https://produto.mercadolivre.com.br/MLB-5125196413?matt_word=bryanexpand&matt_tool=87181766",
+   "link": "https://produto.mercadolivre.com.br/MLB-3973247165?matt_word=bryanexpand&matt_tool=87181766",
    "loja": "Mercado Livre",
    "categoria": "",
    "categoria_ml": "MLB63455",
@@ -349,7 +349,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB46001231",
@@ -365,7 +365,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB52260545",
@@ -381,7 +381,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB46016136",
@@ -397,7 +397,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB51647079",
@@ -413,7 +413,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB74914144",
@@ -429,7 +429,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60a",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB11904050",
@@ -445,7 +445,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria",
-   "visto": "2026-11-07T03:14:23.160792+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB25857309",
@@ -781,7 +781,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB18488791",
@@ -845,7 +845,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "rádio",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB37894526",
@@ -893,7 +893,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB24721824",
@@ -989,7 +989,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "bateria 60v",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB24206069",
@@ -1117,7 +1117,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB20609444",
@@ -1133,7 +1133,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB37925867",
@@ -1149,7 +1149,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "whey",
-   "visto": "2026-11-10T13:00:28.397397+00:00"
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   },
   {
    "id": "MLB28362359",
@@ -1214,6 +1214,54 @@
    "origem": "mercadolivre",
    "busca": "grafe protecao",
    "visto": "2026-11-11T00:57:09.328731+00:00"
+  },
+  {
+   "id": "MLB44019921",
+   "nome": "Pneu Bicicleta 700x35 Deestone D206 Pneu Hibrido Cyclocross",
+   "preco": 55.54,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_654959-MLA95502417857_102025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7972304532?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB9203",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "pneu",
+   "visto": "2026-11-11T16:36:00.200879+00:00"
+  },
+  {
+   "id": "MLB45105574",
+   "nome": "Bicicleta Elétrica Wehawk Super 1000W, Com Bateria 60V e Autonomia de 60 km",
+   "preco": 9481.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_604286-MLA99508290896_112025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7460848208?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB122855",
+   "comissao": 16.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "bateria 60v",
+   "visto": "2026-11-11T16:36:00.200879+00:00"
+  },
+  {
+   "id": "MLB30948212",
+   "nome": "Whey Isolado Probiótica Iso Pro Whey 900g Sabor Baunilha Whey Protein",
+   "preco": 379.8,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_863298-MLA117665151619_092026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7493449736?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB264201",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "whey",
+   "visto": "2026-11-11T16:36:00.200879+00:00"
   }
  ]
 }

@@ -1,18 +1,18 @@
 {
- "quando": "2026-11-10T13:00:28.397397+00:00",
+ "quando": "2026-11-11T00:57:09.328731+00:00",
  "termos": {
   "whey": "2026-11-10T13:00:28.397397+00:00",
   "meia": "2026-11-10T13:00:28.397397+00:00",
-  "chapéu": "2026-11-09T22:42:49.181968+00:00",
+  "chapéu": "2026-11-11T00:57:09.328731+00:00",
   "rádio": "2026-11-10T13:00:28.397397+00:00",
   "pneu": "2026-11-10T13:00:28.397397+00:00",
   "bateria": "2026-11-10T13:00:28.397397+00:00",
   "bateria 60v": "2026-11-10T13:00:28.397397+00:00",
   "bateria 60a": "2026-11-10T13:00:28.397397+00:00",
-  "ex2": "2026-11-09T22:42:49.181968+00:00",
-  "grade proteção ex2": "2026-11-09T22:42:49.181968+00:00",
-  "grade proteção": "2026-11-09T22:42:49.181968+00:00",
-  "grafe protecao": "2026-11-09T22:42:49.181968+00:00"
+  "ex2": "2026-11-11T00:57:09.328731+00:00",
+  "grade proteção ex2": "2026-11-11T00:57:09.328731+00:00",
+  "grade proteção": "2026-11-11T00:57:09.328731+00:00",
+  "grafe protecao": "2026-11-11T00:57:09.328731+00:00"
  },
  "produtos": [
   {
@@ -125,7 +125,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB59481595",
@@ -141,7 +141,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "chapéu",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB35161880",
@@ -605,7 +605,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB62535666",
@@ -621,7 +621,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB50732570",
@@ -653,7 +653,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB26197012",
@@ -669,7 +669,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB42432212",
@@ -685,7 +685,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB25722405",
@@ -733,7 +733,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB73973661",
@@ -749,7 +749,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB23183294",
@@ -909,7 +909,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grafe protecao",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB18418075",
@@ -1037,7 +1037,7 @@
    "de_loja": 0.0,
    "origem": "mercadolivre",
    "busca": "grade proteção",
-   "visto": "2026-11-09T22:42:49.181968+00:00"
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   },
   {
    "id": "MLB78175859",
@@ -1150,6 +1150,70 @@
    "origem": "mercadolivre",
    "busca": "whey",
    "visto": "2026-11-10T13:00:28.397397+00:00"
+  },
+  {
+   "id": "MLB28362359",
+   "nome": "Western Digital WD3000FYYZ 3TB amarelo",
+   "preco": 2143.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_886205-MLA112320893578_062026-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4367462983?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB1672",
+   "comissao": 4.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "ex2",
+   "visto": "2026-11-11T00:57:09.328731+00:00"
+  },
+  {
+   "id": "MLB47670469",
+   "nome": "Cama Solteiro Montessoriana Encanto Grade Proteção MDF Branco",
+   "preco": 299.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_721304-MLA92326399764_092025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7971277906?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB74351",
+   "comissao": 8.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "grade proteção",
+   "visto": "2026-11-11T00:57:09.328731+00:00"
+  },
+  {
+   "id": "MLB50301816",
+   "nome": "Cama Infantil Carro Com Grade Proteção Cor Azul",
+   "preco": 299.0,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_929041-MLA100032749017_122025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-7971214976?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB74351",
+   "comissao": 8.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "grade proteção",
+   "visto": "2026-11-11T00:57:09.328731+00:00"
+  },
+  {
+   "id": "MLB47135031",
+   "nome": "Óculos de Proteção Kalipso Panda Verde com Proteção UV Policarbonato",
+   "preco": 20.89,
+   "imagem": "https://http2.mlstatic.com/D_NQ_NP_758858-MLA96199065612_102025-F.jpg",
+   "link": "https://produto.mercadolivre.com.br/MLB-4006105883?matt_word=bryanexpand&matt_tool=87181766",
+   "loja": "Mercado Livre",
+   "categoria": "",
+   "categoria_ml": "MLB269706",
+   "comissao": 0.0,
+   "marca": "",
+   "de_loja": 0.0,
+   "origem": "mercadolivre",
+   "busca": "grafe protecao",
+   "visto": "2026-11-11T00:57:09.328731+00:00"
   }
  ]
 }
